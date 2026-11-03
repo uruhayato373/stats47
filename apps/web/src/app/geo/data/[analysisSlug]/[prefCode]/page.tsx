@@ -1,14 +1,6 @@
 import { notFound } from 'next/navigation';
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   geoAnalysisManifestKey,
@@ -20,7 +12,7 @@ import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection } from '@/components/surface';
+import { SurfaceSection, ValueTable } from '@/components/surface';
 
 import {
   GEO_CROSS_ANALYSIS_CONFIGS,
@@ -214,33 +206,25 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
           hideRule
         />
         <div className="mt-4 overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>種類</TableHead>
-                <TableHead>値</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {previews.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={3} className="text-muted-foreground">
-                    {detail.slug === 'population-flood-risk'
-                      ? '今回の入力・中心点判定では、浸水想定区域内の人口メッシュはありません。洪水の安全性を示すものではありません。'
-                      : 'プレビュー対象の地点はありません。集計値と全件JSONを確認してください。'}
-                  </TableCell>
-                </TableRow>
-              )}
-              {previews.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell className="font-mono text-xs">{row.id}</TableCell>
-                  <TableCell>{row.kind}</TableCell>
-                  <TableCell className="tabular-nums">{row.value}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          {previews.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              {detail.slug === 'population-flood-risk'
+                ? '今回の入力・中心点判定では、浸水想定区域内の人口メッシュはありません。洪水の安全性を示すものではありません。'
+                : 'プレビュー対象の地点はありません。集計値と全件JSONを確認してください。'}
+            </p>
+          ) : (
+            <ValueTable
+              columns={[
+                { key: 'id', header: 'ID', rowHeader: true },
+                { key: 'kind', header: '種類', align: 'left' },
+                { key: 'value', header: '値', align: 'left' },
+              ]}
+              rows={previews.map((row) => ({
+                key: row.id,
+                cells: [<span key="id" className="font-mono">{row.id}</span>, row.kind, row.value],
+              }))}
+            />
+          )}
         </div>
       </SurfaceSection>
 

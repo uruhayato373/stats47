@@ -39,10 +39,14 @@ import type { RankingPageModel } from "../services/load-ranking-page-model";
 const display = vi.hoisted(() => ({ adsense: false }));
 vi.mock("@/lib/google-adsense", () => ({
   get ADSENSE_DISPLAY_ENABLED() { return display.adsense; },
+  RANKING_INCONTENT_MOBILE: { slotId: "mid", format: "article" },
+  HUB_INCONTENT: { slotId: "hub", format: "article" },
+  RANKING_PAGE_FOOTER: { slotId: "footer", format: "rectangle" },
 }));
 vi.mock("@/features/ads", async () => ({
   ...await import("@/features/ads/utils"),
-  BannerAd: () => null,
+  ...await import("@/features/ads/lib/ad-row"),
+  AdRow: () => null,
 }));
 vi.mock("../funnel/RankingFunnelCta", () => ({ RankingFunnelCta: () => null }));
 vi.mock("../components/RankingKeyPage/RankingKeyPageClient", () => ({ RankingKeyPageClient: () => null }));
@@ -113,18 +117,33 @@ describe("ranking native アフィリエイトの解決契約", () => {
     expect(chain.steps).toEqual([]);
   });
 
-  it("AdSense停止中は先頭の横長バナー1件を本文中段へ配線し、末尾で重複させない", () => {
+  it("解説の後と出典の後に広告の段を置き、中段の PR を出さない指標を守る (2026-11-03)", () => {
     expect(SHELL_SRC).toContain("model.nativeBanners.filter(isLandscapeBanner)");
     expect(SHELL_SRC).toMatch(/shouldShowRankingInContentAffiliate\(\s*rankingKey\s*\)/);
-    expect(SHELL_SRC).toContain('position="ranking-incontent"');
-    expect(CONTENT_SRC).toContain("!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate");
+    expect(SHELL_SRC).toContain('position="ranking-row-1"');
+    expect(SHELL_SRC).toContain('position="ranking-row-2"');
+    expect(CONTENT_SRC).toContain("{sections.adRowMid}");
+    expect(CONTENT_SRC).toContain("{sections.adRowFooter}");
   });
 
+  type Cell = { kind: string; slot?: { slotId: string }; banner?: { id: string } };
+  const cellIds = (row: ReactElement<{ cells: Cell[] }> | null) =>
+    row ? row.props.cells.map((cell) => (cell.kind === "adsense" ? `adsense:${cell.slot?.slotId}` : cell.banner?.id)) : [];
+
   it.each([
-    { adsense: false, rankingKey: "library-count", middle: "ad1", end: ["ad2", "ad3", "ad4"] },
-    { adsense: false, rankingKey: "psychiatric-bed-count", middle: null, end: ["ad1", "ad2", "ad3"] },
-    { adsense: true, rankingKey: "library-count", middle: null, end: ["ad1", "ad2", "ad3"] },
-  ])("実際に中段へ置いた広告だけを読了・レールから除く: $rankingKey / AdSense=$adsense", ({ adsense, rankingKey, middle, end }) => {
+    {
+      adsense: true, rankingKey: "library-count",
+      mid: ["adsense:mid", "ad1", "adsense:hub"], footer: ["ad2", "adsense:footer", "ad3"], end: ["ad4", "ad5"],
+    },
+    {
+      adsense: true, rankingKey: "psychiatric-bed-count",
+      mid: ["adsense:mid", "adsense:hub"], footer: ["ad1", "adsense:footer", "ad2"], end: ["ad3", "ad4", "ad5"],
+    },
+    {
+      adsense: false, rankingKey: "library-count",
+      mid: ["ad1"], footer: ["ad2", "ad3"], end: ["ad4", "ad5"],
+    },
+  ])("段で使った広告を読了・レールから除く: $rankingKey / AdSense=$adsense", ({ adsense, rankingKey, mid, footer, end }) => {
     display.adsense = adsense;
     const nativeBanners: ResolvedAffiliateBanner[] = ["vertical", "ad1", "ad2", "ad3", "ad4", "ad5"].map((id) => ({
       id, title: id, href: `https://example.com/${id}`, imageUrl: `https://example.com/${id}.png`,
@@ -134,15 +153,16 @@ describe("ranking native アフィリエイトの解決契約", () => {
     // 子コンポーネントの描画ではなく、shell が各配置へ渡す実データを検証する。
     const rendered = RankingPageClientShell({ rankingKey, model });
     const sections = rendered.props.sections as {
-      inContentAffiliate: ReactElement<{ children: ReactElement<{ adId: string }> }> | null;
+      adRowMid: ReactElement<{ cells: Cell[] }> | null;
+      adRowFooter: ReactElement<{ cells: Cell[] }> | null;
       nativeAffiliate: ReactElement<{ banners: ResolvedAffiliateBanner[] }>;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
-    expect(sections.inContentAffiliate?.props.children.props.adId ?? null).toBe(middle);
+    expect(cellIds(sections.adRowMid)).toEqual(mid);
+    expect(cellIds(sections.adRowFooter)).toEqual(footer);
     expect(sections.nativeAffiliate.props.banners.map((banner) => banner.id)).toEqual(end);
-    expect(sections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(
-      middle ? [middle, ...end] : end,
-    );
+    const usedInRows = [...mid, ...footer].filter((id) => !id.startsWith("adsense:"));
+    expect(sections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual([...usedInRows, ...end]);
   });
 
   it("読了位置は3列の単一ブロックにし、独立した5件目を置かない", () => {
@@ -153,7 +173,7 @@ describe("ranking native アフィリエイトの解決契約", () => {
   });
 
   it("家計調査 (kakei-chousa) の本文中段 native は楽天カードへ置換する (2026-09-16)", () => {
-    display.adsense = false;
+    display.adsense = true;
     const nativeBanners: ResolvedAffiliateBanner[] = ["b1"].map((id) => ({
       id, title: id, href: `https://example.com/${id}`, imageUrl: `https://example.com/${id}.png`,
       width: 300, height: 250, trackingPixelUrl: null, vertical: null,
@@ -180,21 +200,21 @@ describe("ranking native アフィリエイトの解決契約", () => {
     const kakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: kakeiModel });
     const kakeiSections = kakeiRendered.props.sections as {
       nativeAffiliate: ReactElement<{ top1: { areaCode: string } | null; hasProductKeyword: boolean }>;
-      inContentAffiliate: ReactElement | null;
+      adRowMid: ReactElement<{ cells: Cell[] }> | null;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
     expect(kakeiSections.nativeAffiliate.type).toBe(RankingPageRakutenNativeSection);
     expect(kakeiSections.nativeAffiliate.props.top1?.areaCode).toBe("07000");
     expect(kakeiSections.nativeAffiliate.props.hasProductKeyword).toBe(true);
-    // 上段 in-content の A8 も家計調査系では描画しない (2026-09-16 オーナー判断)。
-    expect(kakeiSections.inContentAffiliate).toBeNull();
+    // 広告の段の A8 も家計調査系では描画しない (2026-09-16 オーナー判断)。AdSense の枠だけが残る
+    expect(cellIds(kakeiSections.adRowMid)).toEqual(["adsense:mid", "adsense:hub"]);
 
     const nonKakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: nonKakeiModel });
     const nonKakeiSections = nonKakeiRendered.props.sections as {
-      inContentAffiliate: ReactElement | null;
+      adRowMid: ReactElement<{ cells: Cell[] }> | null;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
-    expect(nonKakeiSections.inContentAffiliate).not.toBeNull();
+    expect(cellIds(nonKakeiSections.adRowMid)).toEqual(["adsense:mid", "b1", "adsense:hub"]);
     // 描画しなかった A8 も右レール除外 (usedAffiliateAds) には残す = レールへ流れ込ませない。
     expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(["b1"]);
     expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(

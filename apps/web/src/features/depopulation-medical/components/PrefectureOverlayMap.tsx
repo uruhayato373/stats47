@@ -1,23 +1,12 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
+import { useMemo } from "react";
 
-import { useEffect, useMemo } from "react";
+import { CircleMarker, GeoJSON } from "react-leaflet";
 
-import {
-  CircleMarker,
-  GeoJSON,
-  MapContainer,
-  TileLayer,
-  useMap,
-} from "react-leaflet";
+import { LeafletMapFrame } from "@/components/charts/LeafletMapFrame";
 
-import {
-  LEAFLET_MAP_COLORS,
-  useThemedLeafletTile,
-} from "@/features/map-visualization/client";
-
-import { useTheme } from "@/hooks/useTheme";
+import { LEAFLET_MAP_COLORS } from "@/features/map-visualization/client";
 
 import type { DepopulationMedicalPrefDetail } from "../lib/types";
 import type { GeoJsonObject } from "geojson";
@@ -27,27 +16,22 @@ interface Props {
   detail: DepopulationMedicalPrefDetail;
 }
 
-/** マウント時に県の範囲へ fitBounds する */
-function FitBounds({ bounds }: { bounds: LatLngBoundsExpression | null }) {
-  const map = useMap();
-  useEffect(() => {
-    if (bounds) map.fitBounds(bounds, { padding: [20, 20] });
-  }, [map, bounds]);
-  return null;
-}
+/** 医療機関が 1 件も無い県で表示する範囲 (日本全体) */
+const JAPAN_BOUNDS: LatLngBoundsExpression = [
+  [24, 123],
+  [46, 146],
+];
 
 /**
  * 県別の過疎地域(面) × 医療機関(点) 重ね合わせマップ。
  * 医療機関は過疎地域内=赤 / 外=灰 で色分け。25,000 点規模に備え preferCanvas。
  */
 export function PrefectureOverlayMap({ detail }: Props) {
-  const { theme } = useTheme();
-  const { currentTile } = useThemedLeafletTile(theme);
   const colors = LEAFLET_MAP_COLORS.depopulationMedical;
 
-  // facilities の lat/lon から fitBounds 用の範囲を算出
-  const bounds: LatLngBoundsExpression | null = useMemo(() => {
-    if (detail.facilities.length === 0) return null;
+  // facilities の lat/lon から表示範囲を算出
+  const bounds: LatLngBoundsExpression = useMemo(() => {
+    if (detail.facilities.length === 0) return JAPAN_BOUNDS;
     let minLat = Infinity,
       minLon = Infinity,
       maxLat = -Infinity,
@@ -65,16 +49,7 @@ export function PrefectureOverlayMap({ detail }: Props) {
   }, [detail.facilities]);
 
   return (
-    <MapContainer
-      preferCanvas
-      center={[36.5, 137.5]}
-      zoom={6}
-      minZoom={4}
-      maxZoom={14}
-      scrollWheelZoom
-      className="h-[420px] lg:h-[520px] rounded-md overflow-hidden"
-    >
-      <TileLayer url={currentTile.url} attribution={currentTile.attribution} />
+    <LeafletMapFrame ariaLabel={`${detail.prefName}の過疎地域と医療機関の地図`} bounds={bounds}>
 
       {/* 過疎地域ポリゴン */}
       <GeoJSON
@@ -101,8 +76,6 @@ export function PrefectureOverlayMap({ detail }: Props) {
           }}
         />
       ))}
-
-      <FitBounds bounds={bounds} />
-    </MapContainer>
+    </LeafletMapFrame>
   );
 }

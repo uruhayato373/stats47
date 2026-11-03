@@ -16,6 +16,7 @@ import { buildEpub, type EpubChapterDoc, type EpubImage } from "../../generators
 import sharp from "sharp";
 import { authoredBookSha256, chapterEvidence, revisionEditorIds } from "./revision-evidence";
 import { SITE } from "@stats47/data-configs";
+import { kindleInboundUrl } from "../../../../../config/inbound-utm.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 /** product-factory ルート (freshFile のパス解決基点)。 */
@@ -128,12 +129,20 @@ ${sub}
 }
 
 /** 出典・免責ページの XHTML。 */
-function sourcesPage(sources: readonly { slug: string; title: string; published: boolean }[]): string {
+/**
+ * 出典ページのサイトへのリンク。表示は UTM の無い URL のまま、リンク先にだけ Kindle の UTM を付ける
+ * (`config/inbound-utm.mjs`)。本文の章にはリンクを置かない (md-to-xhtml が外す) ので、本からサイトへ戻る導線はここだけ。
+ */
+function siteLink(url: string, bookId: string, content: "sources" | "latest"): string {
+  return `<a href="${escapeAttr(kindleInboundUrl(url, bookId, content))}">${escapeText(url)}</a>`;
+}
+
+function sourcesPage(bookId: string, sources: readonly { slug: string; title: string; published: boolean }[]): string {
   // 未公開の元記事は URL を出さない (410 を返す。2026-09-19 K-S1-11 N30)。
   const items = sources
     .map((s) =>
       s.published
-        ? `<p>「${escapeText(s.title)}」— ${R2_SITE}/blog/${escapeText(s.slug)}（${SITE.name}）</p>`
+        ? `<p>「${escapeText(s.title)}」— ${siteLink(`${R2_SITE}/blog/${s.slug}`, bookId, "sources")}（${SITE.name}）</p>`
         : `<p>「${escapeText(s.title)}」— ${SITE.name}（元記事は現在非公開。本書の章として収録）</p>`,
     )
     .join("\n");
@@ -150,12 +159,17 @@ function sourcesPage(sources: readonly { slug: string; title: string; published:
 ${items}
 <h2>免責</h2>
 <p>本書は公的統計の概況を整理したものであり、意思決定の結果を保証するものではありません。国・府省・自治体および e-Stat の公認・推奨を示すものではありません。統計の定義・調査年・集計方法により数値の解釈が変わる場合があります。</p>
-<p>本書のデータは基準年固定です（自動更新はありません）。最新の数値は ${R2_SITE} でご確認ください。</p>
+<p>本書のデータは基準年固定です（自動更新はありません）。最新の数値は ${siteLink(R2_SITE, bookId, "latest")} でご確認ください。</p>
 </section>`;
 }
 
 function escapeText(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** 属性値 ("...") に入れる文字列。escapeText に加えて二重引用符も実体参照にする */
+function escapeAttr(s: string): string {
+  return escapeText(s).replace(/"/g, "&quot;");
 }
 
 /** fresh 章の freshText から先頭見出し行 (# ...) を除く (章タイトルと重複するため)。 */
@@ -246,6 +260,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   // 本編 (blog 章) は「第1章 …」と番号を振る。書き下ろしは「はじめに」「第0章 …」「終章」を catalog の題のまま使う
   // (2026-09-19 K-S1-04 m04 / K-S1-10 FB03 / K-S1-12 F03: 第0章と終章だけ番号があり本編に無い体系を統一)。
   let bodyChapterNo = 0;
+  const seenTables = new Set<string>();
   for (const ch of book.chapters) {
     idx += 1;
     const id = `chap${String(idx).padStart(3, "0")}`;
@@ -286,7 +301,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
         continue;
       }
       try {
-        const art = await fetchBlogArticle(slug);
+        const art = await fetchBlogArticle(slug, { fullTables: book.fullTables === true, seenTables });
         for (const img of art.images) {
           if (!imageSeen.has(img.fileName)) {
             imageSeen.add(img.fileName);
@@ -296,7 +311,8 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
             });
           }
         }
-        blogChars += countChars(art.body);
+        // 全県表はデータの表で、書き下ろしでもブログの転載でもないので字数に入れない (比率を表で薄めない)
+        blogChars += countChars(art.body) - countChars(art.fullTablesMarkdown);
         // 出典一覧には書籍の章題を出す (ブログの題は撤回済みの旧主張を含みうる: 2026-09-19 K-S1-04 m08)
         // 出典一覧の題は目次と同じ「第N章 …」で出す (2026-09-19 K-S1-01/02/04 G01)
         sources.push({ slug, title: displayTitle, published: publishedSlugs.has(slug) });
@@ -404,7 +420,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     id: "sources",
     fileName: "chap-999.xhtml",
     title: "出典と免責",
-    bodyXhtml: sourcesPage(sources),
+    bodyXhtml: sourcesPage(book.id, sources),
   });
 
   let coverPng: Buffer | undefined;
@@ -412,7 +428,10 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     try {
       // 承認済みの文字なし背景はR2をSSOTとし、SHA検証済みローカルcacheを再利用する。
       const backgroundJpeg = await loadCoverBackground(book);
-      coverPng = await buildCoverPng({
+      // 書名ごと描いた表紙は文字を重ねない (cover-design.ts の textBaked)
+      coverPng = book.coverDesign?.backgroundAsset?.textBaked && backgroundJpeg
+        ? await sharp(backgroundJpeg).resize(1600, 2560, { fit: "fill" }).png().toBuffer()
+        : await buildCoverPng({
         title: book.title,
         subtitle: book.subtitle,
         series: book.series,

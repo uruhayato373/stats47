@@ -12,13 +12,14 @@ import { ChartNoAxesColumnIncreasing } from 'lucide-react';
 import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 import { PageHeader, PageShell } from '@/components/layout';
 
-import { NativeAffiliateRow } from '@/features/ads';
+import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { TrackedMunicipalityThemeLink } from '@/features/municipalities';
 import { ThemeRegionNav } from '@/features/theme-dashboard';
 import { ALL_THEMES, isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
@@ -76,6 +77,8 @@ export default async function MunicipalityThemePage({
   ]);
   const items = itemsOrNull.filter((item) => item !== null);
 
+  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
   return (
     <PageShell>
       {/* パンくずの各段と右端のアイコンから地域・テーマを Sheet で選ぶ (テーマのページと同じ部品・2026-10-31) */}
@@ -137,14 +140,9 @@ export default async function MunicipalityThemePage({
       )}
 
       {/* ネイティブアフィリエイト枠 (テーマ slug → vertical。写像が無ければ描画しない) */}
-      {nativeBanners.length > 0 && (
+      {rowCells.length > 0 && (
         <div className="mt-8">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="municipality-theme-native"
-            trackingCategory={`municipality-theme-${theme.themeKey}`}
-            variant="three-up"
-          />
+          <AdRow cells={rowCells} position="municipality-theme-row-1" trackingCategory={`municipality-theme-${theme.themeKey}`} />
         </div>
       )}
 

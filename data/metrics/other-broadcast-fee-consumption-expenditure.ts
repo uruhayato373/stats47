@@ -5,6 +5,7 @@ export const otherBroadcastFeeConsumptionExpenditure: MetricConfig = {
   "key": "other-broadcast-fee-consumption-expenditure",
   "title": "他の放送受信料消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間他の放送受信料消費支出額",
+  "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に他の放送受信料に支出した1世帯当たりの金額。県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

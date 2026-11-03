@@ -141,6 +141,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <TrackedProductOutboundLink
           href={product.externalUrl}
           productId={product.id}
+          productSlug={product.slug}
           productTitle={product.title}
           channel={product.channel}
           className="mt-8 inline-flex min-h-11 items-center gap-2 border border-primary bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
@@ -185,6 +186,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
             href={hrefFor("product", { slug: fiscalCompanion.slug })}
             label={`${fiscalCompanion.id}:${fiscalCompanion.title}`}
             surface="product_catalog"
+            product={fiscalCompanion}
+            placement="product_companion"
             className="mt-2 inline-flex min-h-10 items-center text-sm text-primary underline"
           >
             {fiscalCompanion.title}の内容と価格を見る

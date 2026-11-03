@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-10-28T03:30:54.750Z",
+  "updated_at": "2026-11-03T05:00:00.000Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -869,6 +869,99 @@
       "cards": [
         "MUNI-PEER-DATASET-01"
       ]
+    },
+    {
+      "id": "EXP-013",
+      "title": "K-S1-02 と職場から読まれるブログ10記事の商品案内を、表示→販売先クリック→注文の6週で測る",
+      "hypothesis": "売れない原因は商品の数ではなく見せ方と導線にある (収益化戦略 §3.6)。案内が読者に見えていて、置き場所ごとのクリック率が分かれば、どの置き場所を残し・直し・外すかを決められる。新しい商品は作らない。",
+      "target_metric": "product_impression / product_click (link_position × product_id) と、販売台帳の注文・KENP・note の売上",
+      "target_delta": "判定の数値は先に固定: ① 6週の表示が群ごとに300未満なら判定不能 (標本不足。0 にしない) ② クリック率 (product_click ÷ product_impression) が1%以上なら案内は機能、0.3%未満なら見せ方を変える、その間は続ける ③ 注文は K-S1-02 の販売・KENP (販売台帳の月次。窓をはみ出す月の販売は判定不能と書く) と note データ集5本の売上 (note ダッシュボードの記録)",
+      "rubric": {
+        "impact": 2,
+        "effort": 1,
+        "learning": 3,
+        "certainty": 2,
+        "weighted": 2.0,
+        "verdict": "proposed",
+        "reason": "計測の実装は済み (PRODUCT-REFERRAL-MEASURE-01)。GA4 の dimension 登録と本番デプロイを待つ"
+      },
+      "baseline": {
+        "date": "2026-11-03",
+        "source": "収益化戦略 §3.5・§3.6 (2026-W41 の GA4)、data/products/sales-ledger.json",
+        "note": "Kindle 案内は64記事の閲覧3,901にクリック1。ブログ経由の商品クリックは28日で1件、cta_click 3件。表示 (impression) は計測していなかったので基準値なし。K-S1-02 の販売は2026-08に1冊 ¥254、9月は0、KENP は8・9月とも0。note データ集5本の売上は通算0 (判定前に note ダッシュボードで確かめる)"
+      },
+      "arms": [
+        {
+          "key": "kindle-k-s1-02",
+          "product": "K-S1-02 (ASIN B0HKF4NLDV・¥800)",
+          "placements": [
+            "blog_product",
+            "ranking_product",
+            "product_catalog"
+          ],
+          "source_blogs": [
+            "noodle-consumption-prefecture-character",
+            "miso-consumption-quantity-prefecture-gap",
+            "sugar-consumption-prefecture-gap",
+            "crab-expenditure-ranking",
+            "mackerel-expenditure-ranking"
+          ]
+        },
+        {
+          "key": "workplace-blog-10",
+          "product": "note データ集 P-04/P-05/P-09/P-10/P-14",
+          "placements": [
+            "blog_product"
+          ],
+          "source_blogs": [
+            "local-government-debt-burden",
+            "local-tax-revenue-gap",
+            "aging-solo-living-crisis",
+            "health-life-expectancy-structure",
+            "rice-harvest-volume-prefecture-gap",
+            "farmland-crisis-abandoned-land",
+            "automotive-industry-transformation-map",
+            "water-sewage-crisis",
+            "household-solo-vs-dualincome",
+            "noodle-consumption-prefecture-character"
+          ]
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-11-03T05:00:00.000Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [
+        "GA4 に custom dimension product_destination・product_id とキーイベント product_click を作る (承認付き API か管理画面)",
+        "KDP の再ログイン (refresh-session.mjs kdp --wait-human)",
+        "develop → main のマージと本番デプロイ。デプロイ日を started_at にし、6週後を next_check_date にする"
+      ],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-11-03T05:00:00.000Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "PRODUCT-REFERRAL-MEASURE-01",
+      "source": "vault のマーケティング蔵書 (STP・4P、GA の「取る→見る→使う」) と stats47 の実測をもとにした提案 (2026-11-03)",
+      "harm": {
+        "reader": "職場で資料を作る自治体・企業の担当者 (データ集) / 家計の地域差に興味のある読者 (K-S1-02)",
+        "pain": "県別の比較表を揃える手間 / 複数ページの突き合わせと読み違い",
+        "harm": "M (運営者の判断材料) — 読者側は A (業務の達成)",
+        "payWhy": "資料づくりの時間を経費で買う / 一冊で通して読める",
+        "evidence": "KDP 2冊・note ノウハウ ¥900 だけ。案内の表示とクリックは未計測",
+        "payer": "事業者・個人"
+      },
+      "cards": [
+        "PRODUCT-REFERRAL-MEASURE-01",
+        "KDP-LEDGER-AUTO-01",
+        "PRODUCT-FUNNEL-DEPLOY-01"
+      ],
+      "kgi": "月の確定収益 (AdSense＋KDP の販売と KENP＋note)。PV は目標にしない。アトリビューション分析はしない"
     }
   ]
 }

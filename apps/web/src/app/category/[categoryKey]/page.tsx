@@ -11,6 +11,7 @@ import { fetchPrefectures } from '@stats47/area';
 import { getCategoryDescription } from '@stats47/data-configs/categories';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
+import { metricDisplayName } from '@stats47/ranking';
 import {
   readCategorySourceSurveysFromR2,
   readCategoryTopicsFromR2,
@@ -27,9 +28,9 @@ import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
-  FooterAdSlot,
-  InContentAdSlot,
-  NativeAffiliateRow,
+  AdRow,
+  composeAdRows,
+  isLandscapeBanner,
   RailAdSlot,
 } from '@/features/ads';
 import { CATEGORY_PAGE_AFFILIATE_POLICY } from '@/features/ads/constants/affiliate-category';
@@ -41,21 +42,22 @@ import { PortalBlogCard } from '@/features/home-portal';
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
-  CategoryTopicGroups,
   SurveyCard,
   isCaveatNote,
   type CategoryRankingListItem,
-  type CategoryTopicListItem,
 } from '@/features/ranking';
 import {
   buildFeaturedRankingCardModel,
+  rankingTop1Label,
   readRankingItemsByCategory,
 } from '@/features/ranking/server';
 
 import {
   ADSENSE_DISPLAY_ENABLED,
+  CONTENT_FOOTER,
   HUB_INCONTENT,
   RAIL_RECT,
+  THEMES_CONTENT,
 } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -173,38 +175,43 @@ export default async function CategoryPage({ params }: PageProps) {
     resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  // 広告の段 (2026-11-03 オーナー決定): 新着ブログの後・全ランキングの後・ページの最後。本文 (右レールの横で約 810px) では
+  // 2 枠、モバイルは先頭の 1 枠で上から AdSense → PR → AdSense。旧: 本文の AdSense とページ末の AdSense はデスクトップだけだった
+  const [categoryRow1, categoryRow2, categoryRow3] = composeAdRows(
+    [['adsense', 'affiliate'], ['affiliate', 'adsense'], ['adsense', 'affiliate']],
+    [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER],
+    nativeBanners.filter(isLandscapeBanner),
+  );
 
+  const topicLabelByKey = new Map(categoryTopics.map((topic) => [topic.key, topic.label]));
   // テーブル用データ
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
-    // 一覧表のタイトル: 定義的 subtitle は同名指標の区別に有用なので括弧付きで残すが、
-    // データ注釈 (※系) はタイトルに連結しない (名称が肥大化し読みにくくなるため)。
-    const showSubtitle = item.subtitle && !isCaveatNote(item.subtitle);
     return {
       rankingKey: item.rankingKey,
       areaType: 'prefecture',
-      title: showSubtitle ? `${item.title}（${item.subtitle}）` : item.title,
+      // 名前の組み立ては調査ハブと同じ共通関数に寄せる (小見出しを括弧で全部つなぐと長すぎて読めない。2026-11-03)
+      title: metricDisplayName(item),
       subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
       description: item.description,
       demographicAttr: item.demographicAttr,
       normalizationBasis: item.normalizationBasis,
+      top1: rankingTop1Label(item),
+      // 話題は R2 items.json に焼き込まれた topicKey をそのまま使う (分類の SSOT は packages/data-configs/src/topics/)
+      ...(categoryTopics.length > 0
+        ? { topicLabel: topicLabelByKey.get(item.topicKey ?? '') ?? null }
+        : {}),
     };
   });
-
-  // グループ表示用データ。topicKey は R2 items.json に焼き込まれた値をそのまま使う
-  // (分類の SSOT は packages/data-configs/src/topics/)。
-  const topicItems: CategoryTopicListItem[] = rankingItems.map((item) => ({
-    rankingKey: item.rankingKey,
-    title: item.title,
-    readerLabel: item.readerLabel,
-    subtitle:
-      item.subtitle && !isCaveatNote(item.subtitle) ? item.subtitle : null,
-    unit: item.unit,
-    topicKey: item.topicKey ?? null,
-    top1: item.top1 ?? null,
-  }));
+  // 話題で絞り込める一覧にする (調査ハブと同じ部品。旧: 話題ごとの箱を 2 列に並べていた。2026-11-03)
+  const topicOptions =
+    categoryTopics.length > 0
+      ? categoryTopics
+          .filter((topic) => allItems.some((item) => item.topicLabel === topic.label))
+          .map((topic) => ({ value: topic.label, label: topic.label }))
+      : undefined;
 
   // 注目ランキング。選定は索引 (/ranking) と同じ掲載価値スコアの生成物を唯一の根拠にする。
   // 旧実装は metric config の `isFeatured` を見ていたが、2,295 件中 8 件しか設定されておらず、
@@ -358,36 +365,24 @@ export default async function CategoryPage({ params }: PageProps) {
           新着ブログの後・全ランキングの前に置き、後ろの PR の列と隣り合わせにしない (2026-10-30)。
           無効のときは何も描かないので、格子の帯が余らない */}
       {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
+      {categoryRow1.length > 0 && <AdRow cells={categoryRow1} position="category-row-1" trackingCategory={`category-${categoryKey}`} />}
 
       <PageSections className="mt-4">
         {/* 全件テーブル */}
-        {categoryTopics.length > 0 ? (
-          <CategoryTopicGroups
-            title={`全${rankingItems.length}件のランキング`}
-            icon={<ListOrdered />}
-            topics={categoryTopics}
-            items={topicItems}
-          />
-        ) : (
-          <SectionCard
-            title={`全${rankingItems.length}件のランキング`}
-            icon={<ListOrdered />}
-            headingAs="h2"
-          >
-            <CategoryRankingTable items={allItems} />
-          </SectionCard>
-        )}
+        {/* 話題があるカテゴリは話題で絞り込める (調査ハブと同じ部品。2026-11-03) */}
+        <SectionCard
+          title={`全${rankingItems.length}件のランキング`}
+          icon={<ListOrdered />}
+          headingAs="h2"
+        >
+          <CategoryRankingTable items={allItems} topicOptions={topicOptions} />
+        </SectionCard>
       </PageSections>
 
-      {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
-      {nativeBanners.length > 0 && (
+      {/* 広告の段 (PR が先頭。モバイルは PR) */}
+      {categoryRow2.length > 0 && (
         <section className="mt-4">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="category-native"
-            trackingCategory={`category-${categoryKey}`}
-          />
+          <AdRow cells={categoryRow2} position="category-row-2" trackingCategory={`category-${categoryKey}`} />
         </section>
       )}
 
@@ -410,8 +405,12 @@ export default async function CategoryPage({ params }: PageProps) {
         </SectionCard>
       </PageSections>
 
-      {/* コンテンツ末尾の全幅フッター広告 */}
-      <FooterAdSlot className="mt-4" />
+      {/* ページ末の広告の段 */}
+      {categoryRow3.length > 0 && (
+        <div className="mt-4">
+          <AdRow cells={categoryRow3} position="category-row-3" trackingCategory={`category-${categoryKey}`} />
+        </div>
+      )}
     </PageShell>
   );
 }

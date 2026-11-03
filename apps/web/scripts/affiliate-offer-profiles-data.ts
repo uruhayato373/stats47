@@ -3052,11 +3052,31 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
       "blog",
       "area"
     ]
-  }
+  },
+  {
+    "programRef": "rakuten:card",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F3",
+    "conversionCondition": "楽天カードの申し込み完了で成果発生、カードの発行完了で承認 (1 件 1,500 円の楽天ペイ残高)。楽天カードのリンク経由の楽天カードだけが対象。紹介者 ID を入れる紹介キャンペーン・楽天カードのキャンペーンページ経由の申し込みは対象外",
+    "personalDataLevel": "sensitive",
+    "humanContact": "none",
+    "conditionSource": "https://affiliate.rakuten.co.jp/group/card/",
+    "verifiedAt": "2026-11-03",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "theme"
+    ]
+  },
 ];
 
 /** creative → program の安定参照。A8 は mid / a8mat の突合、例外は実機 catalog で確認済み。 */
 export const AFFILIATE_PROGRAM_REF_BY_AD_ID: Readonly<Record<string, string>> = {
+  "af_rakuten_card_banner_001": "rakuten:card",
   "af_aeon_kyushu_001": "a8:s00000025671001",
   "af_aeon_kyushu_area_001": "a8:s00000025671001",
   "af_ahamo_001": "a8:s00000022488001",

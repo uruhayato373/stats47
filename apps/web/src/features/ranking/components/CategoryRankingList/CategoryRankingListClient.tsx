@@ -22,6 +22,8 @@ export interface CategoryRankingListItem {
   demographicAttr: string | null;
   normalizationBasis: string | null;
   topicLabel?: string | null;
+  /** 1 位の地域と値 (「鳥取県 71.5%」。家計調査は県庁所在市の名前)。サーバーで rankingTop1Label から作る */
+  top1?: string | null;
 }
 
 /** モバイルではタイトル+年のみ、md以上で属性・基準・単位を表示 */
@@ -43,9 +45,18 @@ function columnsForSurface(
       ),
       meta: {
         minWidth: "200px",
+        // 題名は長いものがあるので折り返す (1 行のままだと隣の 1 位の列に重なる。2026-11-03)
+        wrap: true,
         filterable: true,
         filterPlaceholder: "ランキング名で探す",
       },
+    },
+    {
+      // カテゴリのページの話題の箱 (2026-11-03 に撤去) が出していた 1 位を、一覧の列として残す
+      accessorKey: "top1",
+      header: "1位",
+      cell: ({ getValue }) => getValue<string | null>() ?? "—",
+      meta: { width: "160px" },
     },
     {
       accessorKey: "latestYear",
@@ -98,7 +109,7 @@ export function CategoryRankingTable({ items, topicOptions, trackingSurface = "c
       showIndex={false}
       getRowId={(row) => `${row.rankingKey}-${row.areaType}`}
       ariaLabel="すべてのランキング"
-      caption="ランキングのタイトル・年・単位の一覧"
+      caption="ランキングのタイトル・1位・年・単位の一覧"
     />
   );
 }

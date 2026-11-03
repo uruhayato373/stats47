@@ -61,7 +61,6 @@ Feature-scoped（明示的に例外認定）
 | `RadarChart` | `D3RadarChart` | レーダーチャート |
 | `StackedAreaChart` | `D3StackedAreaChart` | 積み上げエリアチャート |
 | `SunburstChart` | `D3SunburstChart` | サンバーストチャート（階層内訳） |
-| `TileGridMapChart` | `D3TileGridMapChart` | タイルグリッドマップ（47都道府県） |
 | `TreemapChart` | `D3TreemapChart` | ツリーマップ |
 | `DivergingChoroplethMap` | `DivergingChoroplethMap` | 符号付き増減率コロプレス（RdBu・カスタムtooltip・凡例付き） |
 
@@ -84,6 +83,8 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `DivergingBarChartClient` | `@/components/stat-charts/components/charts/DivergingBarChart` | `diverging-bar-chart` | 正負分岐棒グラフ |
 | `D3BarChartRaceClient` | `@/components/stat-charts/components/charts/D3BarChartRace` | `custom` (chart_type: bar-chart-race) | バーチャートレース |
 | `MixedChartClient` | `@/components/stat-charts/components/charts/MixedChart` | `multi-trend-chart` | 複合チャート |
+| `HorizontalDivergingBarChartClient` | `@/components/stat-charts/components/charts/HorizontalDivergingBarChart` | — (テーマの `cpi-profile`) | 基準値 (全国平均=100) からの上下の横棒。D3 部品の薄い包み |
+| `CategoryHeatmapClient` | `@/components/stat-charts/components/charts/CategoryHeatmap` | — (テーマの `cpi-heatmap`) | 項目 × 年のヒートマップ (基準値で色分け)。D3 部品の薄い包み |
 | `PyramidChartClient` | `@/components/stat-charts/components/charts/PyramidChart` | `pyramid-chart` | 人口ピラミッド |
 | `RadarChartDashboardClient` | `@/components/stat-charts/components/charts/RadarChartDashboard` | `radar-chart` | レーダーチャート |
 | `StackedAreaDashboardClient` | `@/components/stat-charts/components/charts/StackedAreaDashboard` | `stacked-area-chart` | 積み上げエリア |
@@ -134,12 +135,17 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `StatTile` | `@/components/surface` | 数値タイル (名前 / 値・単位・バッジ / 補足 + 子にミニチャート)。旧 `ChartCard` は 2026-10-28 に統合して削除 |
 | `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
-| `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
+| `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。`scale` (色の段 + ラベル) を渡すと連続色の帯の凡例になる (2026-11-03。地図・コロプレスのグラデーションを手書きしない)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
 | `BreakdownDonut` / `BreakdownList` | `@/components/charts/BreakdownDonut` | 内訳の図 (共通の D3 のドーナツ + `ChartLegend` の一覧で名前・値・割合)。テーマの構成比 (`composition-chart`) とドーナツ (`donut-chart`) はこれ 1 つで描く。一覧だけの所は `BreakdownList`。部品の中で D3 の円や色の点を手書きしない (`design-system:check` の `no-inline-d3-pie`・`legend-swatch-uses-chart-legend`。2026-11-01) |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
 | `HubSankey` | `@/components/charts/HubSankey` | 焦点 hub 型 Sankey（左ノード群 → 中央 → 右ノード群）。財政フロー / 人口移動フロー / 通勤フローで共有。`chrome`（`card`=自前カード枠 + SVG 内に title/subtitle/footer を描く / `bare`=枠と SVG 内テキストを持たず `ChartPanel` に委ねる）と `usableHeight`（ノード列の高さ = 縦横比。既定 616 は 1 カラム用、2 カラムは 340）で見た目を切り替える |
+| `HubSankeyFlow` | `@/components/charts/HubSankeyFlow` | 焦点県の県間フロー (通勤 / 人口移動) の `HubSankey` の包み。データ取得・読み込み/エラー表示・上位 8 件 + その他・集計キャプションを持ち、feature は文言 (`labels`) と endpoint だけを渡す (財政フローは形が違うため対象外) |
+| `LeafletMapFrame` | `@/components/charts/LeafletMapFrame` | Leaflet の地図の共通の枠。背景タイル (地理院の淡色地図・`leaflet-basemap.ts`)・描画の後始末をする canvas・高さ 480px / lg 620px・ホイールで拡大しない・表示範囲の合わせ方 (`bounds`)・「周辺 / 全体」の切り替え (`focus`、外から決めるときは `whole`) を持ち、各地図は層と `toolbar` だけを渡す (2026-11-03。Geo のメッシュ・点・層の地図、日照、過疎医療)。`MapContainer` を直接組まない (`design-system:check` の `leaflet-maps-use-shared-frame`。例外は出典の地図 `GeoSourceMap`) |
+| `YearPlayer` / `useYearPlayback` | `@/components/charts/YearPlayer` | 年の再生ボタンとスライダー (1 年 280ms で進め、最後の年で止まる。スライダーを動かすと再生を止める)。年で描き替える図・地図はこれを使い、再生の仕組みを自前で書かない (2026-11-03。交通網の変遷・主題の地図) |
+| `fetchTopology` / `topologyFeatures` / `fitGeoSvgMercator` / `GEO_SVG_MAP` | `@/components/charts/geo-topology` | d3-geo で描く SVG の地図の共通の補助。TopoJSON の取得・地物の取り出し・640×640 (余白 16) へのメルカトル図法の合わせ方。§2-D の d3-geo の地図 (交通網の変遷・主題の地図・問いの地図) が使う |
+| `ReelPlayer` | `@/components/charts/ReelPlayer` | Remotion の composition (1920×1080) をページの中でループ再生する共通のプレイヤー。県の選択・県ごとの読み込み・30fps 相当のフレーム送り・コンテナ幅への縮小・読み込み中/失敗の表示を持ち、feature は読み込み (`load`) と描画 (`renderFrame`) だけを渡す (2026-11-03。人口移動フロー・駅別乗降客数) |
 | `DistributionHistogram` | `@/components/charts/DistributionHistogram` | 全国分布ヒストグラム（市区町村ランキング 1,718 自治体用）。**サーバー側でビン化済みの集計配列**（`binMunicipalityValues`、右裾は overflow ビンへ畳む）だけを受け取り、生の観測行は受け取らない。選択都道府県は基線上のラグ（縦ティック）で重ねる（全国と地域は件数スケールが 2 桁違うため棒の重ね描きは不可視になる）。中央値の破線・`useD3Tooltip`（ビン範囲 + 全国/県の件数）付き |
 | `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描くだけの装飾チャート。カード全体がリンクのため**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
 
@@ -168,18 +174,15 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | 場所 | 理由 |
 |---|---|---|
-| `RankingAllPrefecturesChart` | `@/features/ranking/components/RankingBarChart` | ランキングページ専用 |
-| `RankingBoxplotChart` | `@/features/ranking/components/RankingBoxplotChart` | 同上 |
-| `TrendSparklineCard` | `@/features/ranking/components/RankingSidebar` | サイドバー専用 |
-| `AgeCompositionChart` | `@/features/theme-dashboard/components/AgeCompositionChart` | テーマ専用積み上げ棒 |
-| `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
+| `RankingMapChartClient` | `@/features/ranking/components/RankingMapChart` | ランキング (都道府県・市区町村) の Leaflet のコロプレス。市区町村のランキングの節からも使う。Leaflet の地図の共通化 (2026-11-03 の棚卸しの A) までここに置く |
+| `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 (描画の土台を直接読むので `d3-only-in-registered-components` の例外に載せている) |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
 | `GeoSubjectMap` | `@/features/geo-map/components/GeoSubjectMap` | 主題の重ね合わせ (`/geo/map`)。塗り分け 1 つに線・点の主題を重ね、年のスライダーで描く (d3-geo の SVG)。共通のコロプレスは線・点を重ねられない (2026-11-01 登録) |
 | `QuestionMap` | `@/features/geo-questions/components/QuestionMap` | 問いのページの「どこの話か」を示す補助の地図。問いの組で塗り分け、離島を外して縮尺を決める (d3-geo の SVG。2026-11-01 登録) |
 
-> D3 を直接 import してよいのは、共通の部品 (`components/charts`・`components/stat-charts`) と上の表の feature だけ。
-> `design-system:check` の `d3-only-in-registered-components` が止める (2026-11-01)。
+> D3 と描画の土台の部品 (`@stats47/visualization/d3/<部品>`。遅延読み込みを含む) を直接 import してよいのは、共通の部品 (`components/charts`・`components/stat-charts`) と上の表の feature だけ。
+> `design-system:check` の `d3-only-in-registered-components` が止める (2026-11-01、描画の土台の部品は 2026-11-03 から)。型・定数 (`d3/constants/*`) の import は対象外。
 
 > **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
 > feature 内に独自のコロプレス実装を追加してはならない (時系列再生付きの `TimelineChoroplethMap` は使い手が無く 2026-10-30 に削除した)。

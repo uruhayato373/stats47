@@ -1,5 +1,5 @@
 import { isoWeekOf, jstDateOf } from "../../../../../.claude/scripts/metrics/lib/periods.mjs";
-import type { SalesObservation } from "../../sales/types";
+import type { SalesCoverage, SalesObservation } from "../../sales/types";
 import { KDP_PUBLICATION_PLAN } from "./kdp-publishing-policy";
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
@@ -33,6 +33,8 @@ export interface KdpCohortMeasurement {
   readonly missingBookIds: readonly string[];
   readonly windowStillOpenBookIds: readonly string[];
   readonly positiveEvidenceBookIds: readonly string[];
+  /** 販売のある明細の期間が 4 週窓をはみ出し、窓の中の販売かを判定できない書籍 (月次レポートは日付を持たない) */
+  readonly ambiguousEvidenceBookIds: readonly string[];
   readonly complete: boolean;
   readonly hasDemandSignal: boolean;
 }
@@ -92,10 +94,8 @@ function observationCoversDate(row: SalesObservation, date: string): boolean {
   return row.channel === "kdp" && row.periodStart <= date && row.periodEnd >= date;
 }
 
-function hasPositiveEvidence(rows: readonly SalesObservation[]): boolean {
-  return rows.some(
-    (row) => row.channel === "kdp" && (row.orders > 0 || row.units > 0 || row.netRevenueYen > 0 || (row.kenpRead ?? 0) > 0),
-  );
+function isPositive(row: SalesObservation): boolean {
+  return row.channel === "kdp" && (row.orders > 0 || row.units > 0 || row.netRevenueYen > 0 || (row.kenpRead ?? 0) > 0);
 }
 
 function analyzeCohort(
@@ -103,12 +103,14 @@ function analyzeCohort(
   bookIds: readonly string[],
   starts: Readonly<Record<string, string>>,
   observations: readonly SalesObservation[],
+  coverage: readonly SalesCoverage[],
   asOfDate: string,
 ): KdpCohortMeasurement {
   const measuredBookIds: string[] = [];
   const missingBookIds: string[] = [];
   const windowStillOpenBookIds: string[] = [];
   const positiveEvidenceBookIds: string[] = [];
+  const ambiguousEvidenceBookIds: string[] = [];
   const requiredPeriodByBook: Record<string, { start: string; end: string }> = {};
 
   for (const id of bookIds) {
@@ -124,10 +126,19 @@ function analyzeCohort(
       continue;
     }
     const rows = observations.filter((row) => row.channel === "kdp" && row.productId === id);
-    const covered = dateRange(start, end).every((date) => rows.some((row) => observationCoversDate(row, date)));
+    // 完全な月次レポートの範囲に入っていれば、行が無くても「計測済み・0 件」(行の無い月を 0 で埋めた扱いにはしない)
+    const ranges = coverage.filter((range) => range.channel === "kdp" && range.productIds.includes(id));
+    const covered = dateRange(start, end).every(
+      (date) =>
+        rows.some((row) => observationCoversDate(row, date)) ||
+        ranges.some((range) => range.periodStart <= date && date <= range.periodEnd),
+    );
     if (covered) {
       measuredBookIds.push(id);
-      if (hasPositiveEvidence(rows)) positiveEvidenceBookIds.push(id);
+      // 月次の明細は日付を持たないので、窓をはみ出す行の販売は窓の中のものと言えない (需要ありにも 0 にもしない)
+      const positive = rows.filter((row) => isPositive(row) && row.periodEnd >= start && row.periodStart <= end);
+      if (positive.some((row) => row.periodStart >= start && row.periodEnd <= end)) positiveEvidenceBookIds.push(id);
+      else if (positive.length > 0) ambiguousEvidenceBookIds.push(id);
     } else {
       missingBookIds.push(id);
     }
@@ -141,6 +152,7 @@ function analyzeCohort(
     missingBookIds,
     windowStillOpenBookIds,
     positiveEvidenceBookIds,
+    ambiguousEvidenceBookIds,
     complete: measuredBookIds.length === bookIds.length && bookIds.length > 0,
     hasDemandSignal: positiveEvidenceBookIds.length > 0,
   };
@@ -189,6 +201,7 @@ export function buildKdpWeeklyDecision(input: {
   readonly generatedAt: string;
   readonly listings: Readonly<Record<string, KdpWeeklyListing>>;
   readonly observations: readonly SalesObservation[];
+  readonly coverage?: readonly SalesCoverage[];
 }): KdpWeeklyDecision {
   weekNumber(input.week);
   const asOfDate = dateOnly(input.generatedAt);
@@ -254,10 +267,10 @@ export function buildKdpWeeklyDecision(input: {
   let measurement: KdpCohortMeasurement;
   if (pilotLive.length === 0) {
     const starts = Object.fromEntries(KDP_PUBLICATION_PLAN.baselineCohort.bookIds.map((id) => [id, KDP_PUBLICATION_PLAN.baselineCohort.measurementStartsAt]));
-    measurement = analyzeCohort("s1-baseline", KDP_PUBLICATION_PLAN.baselineCohort.bookIds, starts, input.observations, asOfDate);
+    measurement = analyzeCohort("s1-baseline", KDP_PUBLICATION_PLAN.baselineCohort.bookIds, starts, input.observations, input.coverage ?? [], asOfDate);
   } else {
     const latest = pilotLive[pilotLive.length - 1];
-    measurement = analyzeCohort("latest-pilot", [latest.id], { [latest.id]: latest.salesStartedAt as string }, input.observations, asOfDate);
+    measurement = analyzeCohort("latest-pilot", [latest.id], { [latest.id]: latest.salesStartedAt as string }, input.observations, input.coverage ?? [], asOfDate);
   }
   const withMeasurement = { ...common, cohortMeasurement: measurement };
 
@@ -266,6 +279,14 @@ export function buildKdpWeeklyDecision(input: {
   }
   if (!measurement.complete) {
     return result(withMeasurement, "measure", [`販売数/KENP未計測: ${measurement.missingBookIds.join(", ")}`], "KDPレポートをproducts:salesへ証拠付きで記録する");
+  }
+  if (!measurement.hasDemandSignal && measurement.ambiguousEvidenceBookIds.length > 0) {
+    return result(
+      withMeasurement,
+      "measure",
+      [`4週窓をはみ出す月次の販売があり、窓の中の需要か判定不能: ${measurement.ambiguousEvidenceBookIds.join(", ")}`],
+      "需要あり・需要なしのどちらとも判定しない。日次の販売記録で窓の中を確かめるか、判定の扱いをオーナーが決める",
+    );
   }
   if (!measurement.hasDemandSignal) {
     return result(withMeasurement, "stop-no-demand", ["4週実測は完了したが、販売・売上・KENPの需要シグナルが0"], "新規出版を止め、既刊の価値・価格・導線を見直す");

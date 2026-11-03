@@ -23,5 +23,6 @@ export {
   STAT_VALUE_CLASS,
 } from '@stats47/components';
 export { RailNavRow, SurfaceLinkCard } from './SurfaceCard';
-export { ArticleTeaserCard, ArticleTeaserGrid, articleTeaserGridColumns, articleTeaserGridFillers } from './ArticleTeaser';
+export { ArticleTeaserCard, CardGrid, cardGridColumns, cardGridFillers } from './ArticleTeaser';
 export { HorizontalCardCarousel } from './HorizontalCardCarousel';
+export { ValueTable, type ValueTableCell, type ValueTableColumn, type ValueTableRow } from './ValueTable';

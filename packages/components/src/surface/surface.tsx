@@ -210,8 +210,12 @@ const HEADING_TEXT_CLASS = "font-medium text-foreground";
  */
 const HEADING_WRAP_CLASS = "text-balance [word-break:auto-phrase]";
 
-/** 操作は見出しの 1 行だけにまたがらせ、縦の中央を見出しと揃える (CardAction 既定の row-span-2 を外す) */
-const ACTION_CLASS = "row-span-1 flex items-center gap-2 self-center";
+/**
+ * 操作は見出しの 1 行だけにまたがらせ、縦の中央を見出しと揃える (CardAction 既定の row-span-2 を外す)。
+ * 小さいボタン (32px) は題の行 (22px) より高く、そのままだと操作のある見出し行だけ 6px 高くなり、
+ * 隣のカードと題の位置がずれる (2026-11-03 調査ハブ)。上下 5px を負の余白で打ち消して行の高さを題に揃える。
+ */
+const ACTION_CLASS = "row-span-1 -my-[5px] flex items-center gap-2 self-center";
 
 function HeaderedSurfaceCard({
   variant,

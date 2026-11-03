@@ -5,6 +5,7 @@ export const domesticPackageTourConsumptionExpenditure: MetricConfig = {
   "key": "domestic-package-tour-consumption-expenditure",
   "title": "国内パック旅行費消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間国内パック旅行費消費支出額",
+  "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に国内パック旅行費に支出した1世帯当たりの金額。県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

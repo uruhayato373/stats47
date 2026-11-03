@@ -29,9 +29,11 @@ import { SectionIndexLink } from '@/components/section';
 import { RailCard, RailNavRow, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
-import { FooterAdSlot } from '@/features/ads';
+import { AdRow, composeAdRows } from '@/features/ads';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
@@ -68,7 +70,7 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function RankingIndexPage() {
+export default async function RankingIndexPage() {
   const rightRail = (
     <RailStack>
       <RailCard title="他の探し方" icon={<Compass />}>
@@ -104,6 +106,8 @@ export default function RankingIndexPage() {
     </>
   );
 
+  // 広告の段 (2026-11-03 オーナー決定): ページの最後に AdSense と PR を並べる (旧: デスクトップだけのページ末の AdSense。モバイルは 0 枠だった)
+  const [indexRow] = composeAdRows([['adsense', 'affiliate', 'adsense']], [CONTENT_FOOTER, HUB_INCONTENT], await resolveGenericAffiliateBanners(1).catch(() => []));
   return (
     <PageShell rightRail={rightRail} header={header}>
       {/* 節はカード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード。home / category と同じ) */}
@@ -115,8 +119,6 @@ export default function RankingIndexPage() {
         >
           <FeaturedRankings
             limit={4}
-            showHeader={false}
-            embedded
             trackHomeEvents={false}
           />
         </HorizontalCardCarouselFrame>
@@ -149,7 +151,7 @@ export default function RankingIndexPage() {
           左レール分だけ記事内広告と左端がずれる。カードの格子の外 (下) に置く
           (広告が無効のときは何も描かないので、格子の帯が余らないようにするため)。
         */}
-      <FooterAdSlot className="mt-4" />
+      {indexRow.length > 0 && <AdRow cells={indexRow} position="ranking-index-row" trackingCategory="ranking-index" />}
     </PageShell>
   );
 }

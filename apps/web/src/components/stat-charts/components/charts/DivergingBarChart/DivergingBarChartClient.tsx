@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartLegend } from "@/components/charts/ChartLegend";
+import { DIVERGING_CHART_COLORS } from "@/components/charts/ChartPalette";
 import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 const DivergingBarChart = dynamic(
@@ -48,8 +49,8 @@ export const DivergingBarChartClient: React.FC<DivergingBarChartClientProps> = (
   negativeKey,
   positiveName,
   negativeName,
-  positiveColor = "#3b82f6",
-  negativeColor = "#ef4444",
+  positiveColor = DIVERGING_CHART_COLORS.positive,
+  negativeColor = DIVERGING_CHART_COLORS.negative,
   unit,
   yDomain,
   latestValues,

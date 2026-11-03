@@ -5,6 +5,8 @@ import {
   type AdSlotConfig,
 } from "@/lib/google-adsense";
 
+import { RAIL_AD_BESIDE_BODY_ONLY_CLASS } from "../../constants/manual-ad-policy";
+
 import { AdCell } from "./AdCell";
 
 interface RailAdSlotProps {
@@ -23,7 +25,7 @@ interface RailAdSlotProps {
 export function RailAdSlot({ slot }: RailAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
-    <AdCell label="広告" className="overflow-hidden p-0">
+    <AdCell label="広告" className={`overflow-hidden p-0 ${RAIL_AD_BESIDE_BODY_ONLY_CLASS}`}>
       <AdSenseAd
         format={slot.format}
         slotId={slot.slotId}

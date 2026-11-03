@@ -106,13 +106,16 @@ export function mdToXhtml(mdRaw: string, imgResolver?: (src: string) => string):
       flush();
       const cells = (row: string): string[] => row.trim().replace(/^\||\|$/g, "").split("|").map(c => c.trim());
       const head = cells(trimmed);
+      // 区切り行の `---:` は右寄せ (数値の列。桁がそろって大小を比べやすい。2026-11-03 全県表の 390px 評価)
+      const numeric = cells(lines[i + 1]).map((c) => /^:?-+:$/.test(c));
+      const cls = (index: number) => (numeric[index] ? ' class="num"' : "");
       const body: string[][] = [];
       i += 2;
       while (i < lines.length && lines[i].trim().startsWith("|") && cells(lines[i]).length === head.length) {
         body.push(cells(lines[i]));
         i += 1;
       }
-      out.push(`<table><thead><tr>${head.map(c => `<th scope="col">${inline(c)}</th>`).join("")}</tr></thead><tbody>${body.map(row => `<tr>${row.map(c => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`);
+      out.push(`<table><thead><tr>${head.map((c, n) => `<th scope="col"${cls(n)}>${inline(c)}</th>`).join("")}</tr></thead><tbody>${body.map(row => `<tr>${row.map((c, n) => `<td${cls(n)}>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`);
       continue;
     }
 

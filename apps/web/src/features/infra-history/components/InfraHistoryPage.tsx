@@ -15,40 +15,21 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { SectionCard, SurfaceCard } from '@/components/surface';
 
+import { buildInfraHistoryExplorerProps } from '../lib/infra-history-explorer-props';
 import {
-  PREFECTURE_BOUNDARY_PATH,
   infraHistoryPath,
   infraNetworkNoun,
   infraScopeNavItems,
-  municipalityBoundaryPath,
   prefName,
   type ResolvedInfraScope,
 } from '../lib/infra-history-scope';
 import { buildInfraHistoryStructuredData, seriesForScope } from '../lib/infra-history-structured-data';
 
 import { InfraHistoryDetailsSheet } from './InfraHistoryDetailsSheet';
-import { InfraHistoryExplorer, type InfraHistoryRow } from './InfraHistoryExplorer';
+import { InfraHistoryExplorer } from './InfraHistoryExplorer';
 
 
 import type { InfraHistoryEvidence } from '../lib/load-infra-history';
-
-function scopeRows(
-  network: InfraNetworkDefinition,
-  scope: ResolvedInfraScope,
-  summary: InfraHistorySummary,
-): { rows: InfraHistoryRow[]; label: string } {
-  if (scope.kind === 'prefecture') return { rows: [], label: '' };
-  return {
-    label: scope.kind === 'national' ? '都道府県別' : `${scope.name}の県別`,
-    rows: scope.prefCodes.map((code) => ({
-      code,
-      name: prefName(code),
-      href: infraHistoryPath(network.key, code),
-      total: summary.prefectures[code]?.total ?? [],
-      byCategory: summary.prefectures[code]?.byCategory ?? {},
-    })),
-  };
-}
 
 interface InfraHistoryPageProps {
   readonly network: InfraNetworkDefinition;
@@ -65,9 +46,7 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
     series,
     generatedAt: evidence?.generatedAt ?? null,
   });
-  const { rows, label } = summary
-    ? scopeRows(network, scope, summary)
-    : { rows: [], label: '' };
+  const explorerProps = summary ? buildInfraHistoryExplorerProps(network, scope, summary) : null;
   const terms = infraNetworkTerms(network);
   const isAdFree = isInfraNetworkAdFree(network);
   const region = scope.regionCode ? INFRA_SCOPE_REGIONS.find((item) => item.code === scope.regionCode) : null;
@@ -122,21 +101,9 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
           )}
         </div>
 
-        {summary && series ? (
+        {explorerProps ? (
           <InfraHistoryExplorer
-            networkLabel={network.label}
-            scopeName={scope.name}
-            years={summary.years}
-            categories={network.categories}
-            series={series}
-            rows={rows}
-            rowsLabel={label}
-            topologyUrl={scope.topologyPath}
-            boundaryUrl={PREFECTURE_BOUNDARY_PATH}
-            municipalityUrl={scope.kind === 'prefecture' && scope.slug ? municipalityBoundaryPath(scope.slug) : null}
-            prefCodes={scope.prefCodes}
-            geometry={network.geometry}
-            measure={network.measure}
+            {...explorerProps}
             footer={
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
                 <p>

@@ -34,29 +34,26 @@ type CompositionResult = Extract<
   { type: 'composition' }
 >;
 
-const D3MixedChart = dynamic(
+const MixedChartClient = dynamic(
   () =>
-    import('@stats47/visualization/d3/MixedChart').then(
-      (mod) => mod.MixedChart
+    import('@/components/stat-charts/components/charts/MixedChart/MixedChartClient').then(
+      (mod) => mod.MixedChartClient
     ),
-  {
-    ssr: false,
-    loading: () => <ChartLoading height={200} />,
-  }
+  { ssr: false, loading: () => <ChartLoading height={200} /> }
 );
 
-const HorizontalDivergingBarChart = dynamic(
+const HorizontalDivergingBarChartClient = dynamic(
   () =>
-    import('@stats47/visualization/d3/HorizontalDivergingBarChart').then(
-      (mod) => mod.HorizontalDivergingBarChart
+    import('@/components/stat-charts/components/charts/HorizontalDivergingBarChart').then(
+      (mod) => mod.HorizontalDivergingBarChartClient
     ),
   { ssr: false, loading: () => <ChartLoading height={250} /> }
 );
 
-const CategoryHeatmap = dynamic(
+const CategoryHeatmapClient = dynamic(
   () =>
-    import('@stats47/visualization/d3/CategoryHeatmap').then(
-      (mod) => mod.CategoryHeatmap
+    import('@/components/stat-charts/components/charts/CategoryHeatmap').then(
+      (mod) => mod.CategoryHeatmapClient
     ),
   { ssr: false, loading: () => <ChartLoading height={280} /> }
 );
@@ -171,15 +168,17 @@ function MixedResultChart({ result }: { result: MixedResult }) {
   return (
     <>
       {history.length > 0 && (
-        <D3MixedChart
-          data={data.data as Array<Record<string, string | number | undefined>>}
-          categoryKey={data.xAxisKey}
+        <MixedChartClient
+          chartData={{
+            xAxisKey: data.xAxisKey,
+            data: data.data,
+            columns: history.filter((item) => item.kind === 'column'),
+            lines: history.filter((item) => item.kind === 'line'),
+            leftUnit: data.leftUnit ?? '',
+            rightUnit: data.rightUnit ?? '',
+          }}
           leftYDomain={metricSeriesDomain(data.data, history.filter(item=>item.kind==='column').map(item=>item.dataKey), result.axisPolicies.left, true)}
           rightYDomain={metricSeriesDomain(data.data, history.filter(item=>item.kind==='line').map(item=>item.dataKey), result.axisPolicies.right)}
-          columns={history.filter((item) => item.kind === 'column')}
-          lines={history.filter((item) => item.kind === 'line')}
-          leftUnit={data.leftUnit ?? ''}
-          rightUnit={data.rightUnit ?? ''}
           height={300}
         />
       )}
@@ -225,7 +224,7 @@ function CpiProfileResultChart({ result }: { result: CpiProfileResult }) {
 
   return (
     <>
-      <HorizontalDivergingBarChart
+      <HorizontalDivergingBarChartClient
         data={data.map((d: { label: string; value: number }) => ({
           label: d.label,
           value: d.value,
@@ -246,7 +245,7 @@ function CpiHeatmapResultChart({ result }: { result: CpiHeatmapResult }) {
 
   return (
     <>
-      <CategoryHeatmap data={data} baseline={100} height={300} />
+      <CategoryHeatmapClient data={data} baseline={100} height={300} />
       <p className="mt-1 text-[10px] text-muted-foreground">
         青=全国平均より高い / オレンジ=低い（全国平均=100）
       </p>

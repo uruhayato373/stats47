@@ -9,6 +9,25 @@ import {
 } from '../HorizontalCardCarousel';
 
 describe('HorizontalCardCarousel', () => {
+  it('1 画面の枚数を本文の幅 (コンテナ) で決め、カードの格子と同じく上限 3 枚にする', () => {
+    render(
+      <HorizontalCardCarousel ariaLabel="幅の検査">
+        <a href="/1">1</a>
+      </HorizontalCardCarousel>
+    );
+    const region = screen.getByRole('region', { name: /幅の検査/ });
+    // 枚数は包みの幅を見る (スクロールする要素は自分の幅を問い合わせられない)
+    expect(region.parentElement).toHaveClass('@container');
+    const classes = region.className.split(/\s+/);
+    // 画面の幅で決める書き方 (sm:/lg:/xl:) に戻さない。サイドバーの有無で本文の幅が変わっても枚数が変わらず、
+    // 同じ画面で格子は 3 列・カルーセルは 4 枚とずれた (2026-11-03)
+    expect(classes.filter((c) => /^(sm|md|lg|xl|2xl):auto-cols-/.test(c))).toEqual([]);
+    expect(classes.filter((c) => c.startsWith('@sm:auto-cols-'))).toHaveLength(1);
+    expect(classes.filter((c) => c.startsWith('@md:auto-cols-'))).toHaveLength(1);
+    // 4 枚目の段 (@lg 以上) は作らない
+    expect(classes.filter((c) => /^@(lg|xl|2xl):auto-cols-/.test(c))).toEqual([]);
+  });
+
   it('overflow時だけ見出し行に左右矢印を表示し、表示カード単位で移動する', () => {
     window.matchMedia = vi.fn().mockReturnValue({ matches: true });
 

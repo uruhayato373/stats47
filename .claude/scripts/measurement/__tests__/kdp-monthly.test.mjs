@@ -204,20 +204,25 @@ test('record job adds monthly KDP rows once, keeps manual rows, and flags confli
       execFileSync(process.execPath, [script, input], { cwd: temp, env });
       return { ledger: JSON.parse(readFileSync(ledgerPath, 'utf8')), state: JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'), 'utf8')) };
     };
-    const { vaultKey, observations, excluded } = augustLedger();
-    writeArtifact({ month: '2026-08', vaultKey, observations, excluded });
+    const { vaultKey, observations, excluded, coverage } = augustLedger();
+    // 数えた書籍の範囲も一緒に書く (行の無い書籍を 0 で埋めずに「計測済み」と読むため)
+    assert.deepEqual(coverage.productIds, ['K-S1-02']);
+    writeArtifact({ month: '2026-08', vaultKey, observations, excluded, coverage });
 
     writeFileSync(ledgerPath, JSON.stringify({ schemaVersion: 1, observations: [] }));
     const first = run();
     assert.equal(first.ledger.observations.length, 1);
     assert.equal(first.ledger.observations[0].evidencePath, `vault:${vaultKey}`);
     assert.deepEqual({ ...first.state.salesLedger, conflicts: first.state.salesLedger.conflicts.length },
-      { status: 'pass', month: '2026-08', added: 1, skipped: 0, conflicts: 0, excluded: [] });
+      { status: 'pass', month: '2026-08', added: 1, skipped: 0, conflicts: 0, excluded: [], coverageAdded: true });
+    assert.deepEqual(first.ledger.coverage.map(range => [range.periodStart, range.periodEnd, range.productIds, range.evidencePath]),
+      [['2026-08-01', '2026-08-31', ['K-S1-02'], `vault:${vaultKey}`]]);
     const bytes = readFileSync(ledgerPath, 'utf8');
     const second = run();
     assert.equal(readFileSync(ledgerPath, 'utf8'), bytes);
     assert.equal(second.state.salesLedger.added, 0);
     assert.equal(second.state.salesLedger.skipped, 1);
+    assert.equal(second.state.salesLedger.coverageAdded, false);
 
     // 手入力済みの 8 月行は残し、自動の行を足さない
     writeFileSync(ledgerPath, JSON.stringify({ schemaVersion: 1, observations: [manualAugust] }));

@@ -3,8 +3,6 @@ import { describe, expect, it } from "vitest";
 
 import { toLineChartData } from "@/components/stat-charts/adapters/toLineChartData";
 
-import { convertToBarData } from "@/features/blog/utils/convert-chart-data";
-
 import type { SnapshotReadResult } from "@stats47/r2-storage/server";
 import type { RankingValue } from "@stats47/ranking";
 import type { StatsValuesPayload } from "@stats47/stats-r2";
@@ -57,7 +55,7 @@ function fixture(): SnapshotReadResult<StatsValuesPayload> {
 }
 
 interface SurfaceObservation {
-  surface: "ranking" | "theme" | "blog";
+  surface: "ranking" | "theme";
   metricKey: string;
   yearCode: string;
   areaCode: string;
@@ -93,7 +91,6 @@ function adaptAllSurfaces(result: SnapshotReadResult<StatsValuesPayload>): Surfa
     rank: row.rank ?? 0,
   } as RankingValue);
   const theme = toLineChartData([[statsRow]], [EXPECTED.label]);
-  const blog = convertToBarData([statsRow])[0];
   const common = {
     metricKey: payload.metricKey,
     yearCode: row.yearCode,
@@ -110,7 +107,6 @@ function adaptAllSurfaces(result: SnapshotReadResult<StatsValuesPayload>): Surfa
       ...common,
       value: Number(theme.data[0]?.[EXPECTED.label]),
     },
-    { surface: "blog", ...common, value: blog?.value ?? Number.NaN },
   ];
 }
 
@@ -120,7 +116,7 @@ function expectedSurface(surface: SurfaceObservation["surface"]): SurfaceObserva
 
 function assertAllSurfacesContract(result: SnapshotReadResult<StatsValuesPayload>): SurfaceObservation[] {
   const observations = adaptAllSurfaces(result);
-  const expected = [expectedSurface("ranking"), expectedSurface("theme"), expectedSurface("blog")];
+  const expected = [expectedSurface("ranking"), expectedSurface("theme")];
   const mismatched = observations.some((observation, index) => {
     const target = expected[index];
     return (
@@ -147,10 +143,10 @@ function mutate(apply: (payload: StatsValuesPayload) => StatsValuesPayload): Sna
   return { ...base, data: apply(base.data) };
 }
 
-describe("ranking/theme/blog public observation contract", () => {
-  it("同じreader結果からvalue/unit/label/provenanceが3 surfaceで一致する", () => {
+describe("ranking/theme public observation contract", () => {
+  it("同じreader結果からvalue/unit/label/provenanceが2 surfaceで一致する", () => {
     const observations = assertAllSurfacesContract(fixture());
-    expect(observations).toEqual([expectedSurface("ranking"), expectedSurface("theme"), expectedSurface("blog")]);
+    expect(observations).toEqual([expectedSurface("ranking"), expectedSurface("theme")]);
   });
 
   it.each([

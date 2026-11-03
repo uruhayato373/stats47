@@ -28,8 +28,11 @@ import {
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
 
+import { AdRow, composeAdRows } from '@/features/ads';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
+import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 
@@ -74,7 +77,7 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function MunicipalitiesHubPage() {
+export default async function MunicipalitiesHubPage() {
   const policy = buildMunicipalityEntityPolicy();
   const entityCount = listPublishableMunicipalities(policy).length;
   const themes = Object.values(MUNICIPALITY_THEME_CATALOGS);
@@ -87,6 +90,13 @@ export default function MunicipalitiesHubPage() {
   });
   const draftThemes = themes.filter((theme) => theme.status === 'draft');
   const prefectures = fetchPrefectures();
+  // 広告の段 (2026-11-03 オーナー決定): 公開中のテーマの後。旧: 広告は右レールの AdSense だけで、モバイルでは 0 枠だった。
+  // 本文 (右レールの横で約 810px) では 2 枠、モバイルは AdSense。読者の意図が決まらないので PR は共通の案件
+  const [hubRow] = composeAdRows(
+    [['adsense', 'affiliate']],
+    [HUB_INCONTENT],
+    await resolveGenericAffiliateBanners(1).catch(() => []),
+  );
   const activeThemeBySlug = new Map(
     activeThemes.map((theme) => [theme.slug, theme])
   );
@@ -226,6 +236,12 @@ export default function MunicipalitiesHubPage() {
           })}
         </PanelGrid>
       </section>
+
+      {hubRow.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={hubRow} position="municipalities-row-1" trackingCategory="municipalities" />
+        </div>
+      )}
 
       <SurfaceSection
         className="mt-8"

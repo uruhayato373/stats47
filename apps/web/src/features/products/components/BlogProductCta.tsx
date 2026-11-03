@@ -28,6 +28,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
         href={hrefFor("product", { slug: dataProduct.slug })}
         label={`${dataProduct.id}:${dataProduct.title}`}
         surface="blog_product"
+        product={dataProduct}
         className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
       >
         データ集の内容と条件を確認する →
@@ -76,6 +77,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
             href={href}
             label={`${product.id}:${product.title}`}
             surface="blog_product"
+            product={product}
             className="mt-4 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           >
             内容と価格を確認する →

@@ -3,16 +3,16 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import { PanelGrid, SectionCard } from '@stats47/components';
-import { Button } from '@stats47/components/atoms/ui/button';
-import { Slider } from '@stats47/components/atoms/ui/slider';
-import { geoMercator, geoPath } from 'd3-geo';
-import { ListOrdered, Pause, Play } from 'lucide-react';
+import { geoPath } from 'd3-geo';
+import { ListOrdered } from 'lucide-react';
 import { feature as topoFeature } from 'topojson-client';
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartLegend } from '@/components/charts/ChartLegend';
+import { fetchTopology, fitGeoSvgMercator, GEO_SVG_MAP, topologyFeatures, withoutFarIslands } from '@/components/charts/geo-topology';
 import { NumericTrendChart } from '@/components/charts/NumericTrendChart';
-import { STAT_VALUE_CLASS, StatTile } from '@/components/surface';
+import { useYearPlayback, YearPlayer } from '@/components/charts/YearPlayer';
+import { STAT_VALUE_CLASS, StatTile, ValueTable } from '@/components/surface';
 
 import type {
   InfraCategory,
@@ -23,7 +23,7 @@ import type {
   InfraPieceProperties,
 } from '@stats47/gis/infra-history';
 import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
-import type { GeometryCollection, Topology } from 'topojson-specification';
+import type { GeometryCollection } from 'topojson-specification';
 
 /** 表の 1 行 (地方・県)。total と byCategory は years と同じ並び */
 export interface InfraHistoryRow {
@@ -57,11 +57,6 @@ interface InfraHistoryExplorerProps {
   readonly footer?: ReactNode;
 }
 
-const MAP_WIDTH = 640;
-const MAP_HEIGHT = 640;
-const MAP_PADDING = 16;
-/** 再生時の 1 年あたりの間隔 (ms) */
-const PLAY_INTERVAL_MS = 280;
 const PREF_CODE_PROPERTY = 'N03_007';
 
 type LineFeature = Feature<Geometry, InfraPieceProperties>;
@@ -82,15 +77,6 @@ interface LoadedMap {
   readonly boundaries: readonly { readonly d: string; readonly code: string }[];
   /** 市区町村境界 (県の範囲だけ) */
   readonly municipalities: readonly string[];
-}
-
-function fetchTopology(url: string): Promise<Topology> {
-  return fetch(url).then((res) => (res.ok ? (res.json() as Promise<Topology>) : Promise.reject(res.status)));
-}
-
-function firstObjectFeatures<P>(topology: Topology): Feature<Geometry, P>[] {
-  const object = topology.objects[Object.keys(topology.objects)[0]];
-  return (topoFeature(topology, object as GeometryCollection) as FeatureCollection<Geometry, P>).features;
 }
 
 function useInfraMap(
@@ -128,7 +114,7 @@ function useInfraMap(
               ) as FeatureCollection<Geometry, InfraEventProperties>
             ).features
           : [];
-        const allBoundaries = firstObjectFeatures<Record<string, string>>(boundaryTopo);
+        const allBoundaries = topologyFeatures<Record<string, string>>(boundaryTopo);
         const wanted = new Set(prefKey.split(','));
         const scopeBoundaries = allBoundaries.filter((f) => wanted.has(String(f.properties[PREF_CODE_PROPERTY])));
         // 線は全年の路線の広がりで縮尺を決める (県境で決めると東京都の小笠原諸島などで本土が小さくなる)。
@@ -136,15 +122,9 @@ function useInfraMap(
         const fitByLines = geometry === 'line' && lineCollection.features.length > 0;
         const fitTarget: FeatureCollection = {
           type: 'FeatureCollection',
-          features: fitByLines ? lineCollection.features : isNational ? allBoundaries : scopeBoundaries,
+          features: fitByLines ? lineCollection.features : isNational ? allBoundaries : withoutFarIslands(scopeBoundaries),
         };
-        const projection = geoMercator().fitExtent(
-          [
-            [MAP_PADDING, MAP_PADDING],
-            [MAP_WIDTH - MAP_PADDING, MAP_HEIGHT - MAP_PADDING],
-          ],
-          fitTarget,
-        );
+        const projection = fitGeoSvgMercator(fitTarget.features);
         const path = geoPath(projection);
         const draw = <P extends GeoJsonProperties>(f: Feature<Geometry, P>): DrawnShape<P> => {
           if (f.geometry?.type === 'Point') {
@@ -165,7 +145,7 @@ function useInfraMap(
               .map((f) => ({ d: path(f) ?? '', code: String(f.properties[PREF_CODE_PROPERTY]) }))
               .filter((b) => b.d !== ''),
             municipalities: municipalityTopo
-              ? firstObjectFeatures<Record<string, string>>(municipalityTopo)
+              ? topologyFeatures<Record<string, string>>(municipalityTopo)
                   .map((f) => path(f) ?? '')
                   .filter((d) => d !== '')
               : [],
@@ -219,23 +199,10 @@ export function InfraHistoryExplorer({
 }: InfraHistoryExplorerProps) {
   const first = years[0];
   const last = years[years.length - 1];
-  const [year, setYear] = useState(last);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const playback = useYearPlayback(first, last);
+  const { year } = playback;
   const { map, failed } = useInfraMap(topologyUrl, boundaryUrl, municipalityUrl, prefCodes, prefCodes.length === 47, geometry);
 
-  useEffect(() => {
-    if (!isPlaying) return;
-    const timer = window.setInterval(() => {
-      setYear((current) => {
-        if (current >= last) {
-          setIsPlaying(false);
-          return current;
-        }
-        return current + 1;
-      });
-    }, PLAY_INTERVAL_MS);
-    return () => window.clearInterval(timer);
-  }, [isPlaying, last]);
 
   const colorOf = useMemo(
     () => new Map(categories.map((category) => [category.code, category.color])),
@@ -295,15 +262,6 @@ export function InfraHistoryExplorer({
   );
   const maxRowValue = Math.max(...rankedRows.map((row) => row.value), 1);
 
-  const handlePlay = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      return;
-    }
-    if (year >= last) setYear(first);
-    setIsPlaying(true);
-  };
-
   // 線は「高速道路網」、点は「空港」
   const networkNoun = geometry === 'line' ? `${networkLabel}網` : networkLabel;
   const scopeTitle = `${year}年の${scopeName}の${networkNoun}`;
@@ -321,7 +279,7 @@ export function InfraHistoryExplorer({
             {year}年
           </p>
           <svg
-            viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+            viewBox={`0 0 ${GEO_SVG_MAP.width} ${GEO_SVG_MAP.height}`}
             className="h-auto w-full"
             role="img"
             aria-label={scopeTitle}
@@ -417,39 +375,13 @@ export function InfraHistoryExplorer({
           )}
         </div>
 
-        <div className="flex items-center gap-3">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={handlePlay}
-            aria-label={isPlaying ? '再生を止める' : `${first}年から再生する`}
-          >
-            {isPlaying ? <Pause /> : <Play />}
-          </Button>
-          <Slider
-            min={first}
-            max={last}
-            step={1}
-            value={year}
-            onValueChange={(value) => {
-              setIsPlaying(false);
-              setYear(Array.isArray(value) ? value[0] : value);
-            }}
-            aria-label="表示する年"
-            className="flex-1"
-          />
-        </div>
-        <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-          <li className="flex items-center gap-1.5">
-            <span className="inline-block h-1 w-5 rounded-none bg-destructive" aria-hidden />
-            {legend.opened}
-          </li>
-          <li className="flex items-center gap-1.5">
-            <span className="inline-block w-5 border-t-2 border-dashed border-foreground" aria-hidden />
-            {legend.closed}
-          </li>
-        </ul>
+        <YearPlayer playback={playback} />
+        <ChartLegend
+          items={[
+            { key: 'opened', label: legend.opened, color: 'var(--color-destructive)', marker: 'line' },
+            { key: 'closed', label: legend.closed, color: 'var(--color-foreground)', marker: 'dashed-line' },
+          ]}
+        />
         {footer}
       </SectionCard>
 
@@ -490,29 +422,33 @@ export function InfraHistoryExplorer({
           headingAs="h2"
           className="@lg:col-span-3"
         >
-          <p className="mb-2 text-xs text-muted-foreground">
-            右端は前年からの増減です。{isFiltered && '表示中の種別だけで集計しています。'}
-          </p>
-          {/* 幅に応じて 1〜3 段に分け、順位は段ごとに上から下へ読む */}
-          <ol className="gap-x-6 @md:columns-2 @lg:columns-3">
-            {rankedRows.map((row, i) => (
-              <li key={row.code} className="break-inside-avoid border-b border-border py-1.5">
-                <div className="flex items-baseline gap-2">
-                  <span className="w-6 shrink-0 text-right tabular-nums text-muted-foreground">{i + 1}</span>
-                  <Link href={row.href} className="min-w-0 flex-1 truncate hover:underline">
-                    {row.name}
-                  </Link>
-                  <span className="tabular-nums">{formatValue(row.value, measure.unit)}</span>
-                  <span className="w-20 shrink-0 text-right text-xs tabular-nums text-muted-foreground">
-                    {index > 0 ? formatDiff(row.value - row.previous, measure.unit) : '—'}
-                  </span>
-                </div>
-                <div className="mt-1 ml-8 h-1 bg-muted" aria-hidden>
-                  <div className="h-full bg-primary/60" style={{ width: `${(row.value / maxRowValue) * 100}%` }} />
-                </div>
-              </li>
-            ))}
-          </ol>
+          {/* 順位・県・値・前年からの増減を行ごとに読む表なので、共通の静的な表 (ValueTable) で描く (2026-11-03。旧: 段組みの番号付きリスト) */}
+          <ValueTable
+            ariaLabel={`${rowsLabel}の${measure.label}（${year}年）`}
+            caption={isFiltered ? '表示中の種別だけで集計しています。' : undefined}
+            columns={[
+              { key: 'rank', header: '順位' },
+              { key: 'name', header: '県', rowHeader: true },
+              { key: 'value', header: measure.label },
+              { key: 'diff', header: '前年からの増減' },
+            ]}
+            rows={rankedRows.map((row, i) => ({
+              key: row.code,
+              cells: [
+                i + 1,
+                <Link key="link" href={row.href}>
+                  {row.name}
+                </Link>,
+                <>
+                  {formatValue(row.value, measure.unit)}
+                  <div className="mt-1 ml-auto h-1 w-24 bg-muted" aria-hidden>
+                    <div className="h-full bg-primary/60" style={{ width: `${(row.value / maxRowValue) * 100}%` }} />
+                  </div>
+                </>,
+                <small key="diff">{index > 0 ? formatDiff(row.value - row.previous, measure.unit) : '—'}</small>,
+              ],
+            }))}
+          />
         </SectionCard>
       )}
     </PanelGrid>

@@ -116,7 +116,8 @@ describe('home page structure (portal)', () => {
     expect(PAGE).toContain('<PageShell rightRail={rightRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
     expect(PAGE).not.toContain('<PortalCategoryGrid');
-    expect(PAGE).toContain('showHeader={false} embedded');
+    // 注目ランキングは見出しを持たず、カルーセルの枠 (見出し付き) の中に埋め込む
+    expect(PAGE).toMatch(/<HorizontalCardCarouselFrame[\s\S]*?<FeaturedRankings limit=\{6\} \/>\s*<\/HorizontalCardCarouselFrame>/);
     expect(PAGE).not.toContain('overflow-y-auto');
     expect(PAGE).not.toContain('lg:max-h-');
     expect(PAGE).not.toContain('lg:sticky');
@@ -149,9 +150,10 @@ describe('home page structure (portal)', () => {
     );
     expect(CARD_CAROUSEL).toContain('grid-flow-col');
     expect(CARD_CAROUSEL).toContain('snap-x snap-mandatory');
-    expect(CARD_CAROUSEL).toContain('sm:auto-cols-[calc((100%_-_0.75rem)/2)]');
-    expect(CARD_CAROUSEL).toContain('lg:auto-cols-[calc((100%_-_1.5rem)/3)]');
-    expect(CARD_CAROUSEL).toContain('xl:auto-cols-[calc((100%_-_2.25rem)/4)]');
+    // 1 画面の枚数は本文の幅で 1 → 2 → 3 枚 (カードの格子 CardGrid と同じ段・上限 3。2026-11-03)
+    expect(CARD_CAROUSEL).toContain('@sm:auto-cols-[calc((100%_-_0.75rem)/2)]');
+    expect(CARD_CAROUSEL).toContain('@md:auto-cols-[calc((100%_-_1.5rem)/3)]');
+    expect(CARD_CAROUSEL).not.toContain('xl:auto-cols-');
     expect(CARD_CAROUSEL).toContain('<ChevronLeft');
     expect(CARD_CAROUSEL).toContain('<ChevronRight');
   });

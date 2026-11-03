@@ -30,6 +30,7 @@ const decision = buildKdpWeeklyDecision({
   generatedAt: now.toISOString(),
   listings: listingsDocument.listings ?? {},
   observations: ledger.observations,
+  coverage: ledger.coverage ?? [],
 });
 
 if (process.argv.includes("--write")) {

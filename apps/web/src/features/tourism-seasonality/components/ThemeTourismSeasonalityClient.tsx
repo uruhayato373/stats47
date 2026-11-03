@@ -3,21 +3,13 @@
 import dynamic from 'next/dynamic';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartLoadingCard } from '@/components/charts/ChartState';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -107,34 +99,28 @@ export function ThemeTourismSeasonalityClient({ snapshot, notes }: Props) {
           </p>
         )}
         {rows && (
-          <Table aria-label={`${areaLabel}の月別延べ宿泊者数`}>
-            <TableCaption>
-              {snapshot.year}年の確定値。0は観測された0人泊、欠測は「欠測」と表示します。
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col" className="whitespace-nowrap">年月</TableHead>
-                <TableHead scope="col" className="text-right!">延べ宿泊者数（人泊）</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.period}>
-                  <TableHead scope="row" className="whitespace-nowrap">{row.period}</TableHead>
-                  <TableCell className="text-right tabular-nums">
-                    {row.value === null ? (
-                      <>
-                        <span>欠測</span>
-                        <span className="mt-1 block text-xs text-muted-foreground">
-                          {row.missingReason}
-                        </span>
-                      </>
-                    ) : row.value.toLocaleString('ja-JP')}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <ValueTable
+            ariaLabel={`${areaLabel}の月別延べ宿泊者数`}
+            caption={`${snapshot.year}年の確定値。0は観測された0人泊、欠測は「欠測」と表示します。`}
+            columns={[
+              { key: 'period', header: '年月', rowHeader: true, className: 'whitespace-nowrap!' },
+              { key: 'value', header: '延べ宿泊者数（人泊）' },
+            ]}
+            rows={rows.map((row) => ({
+              key: row.period,
+              cells: [
+                row.period,
+                row.value === null ? (
+                  <>
+                    <span>欠測</span>
+                    <small className="block">{row.missingReason}</small>
+                  </>
+                ) : (
+                  row.value.toLocaleString('ja-JP')
+                ),
+              ],
+            }))}
+          />
         )}
         <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
           {notes.map((note) => <li key={note}>{note}</li>)}

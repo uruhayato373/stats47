@@ -5,7 +5,6 @@ import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
 
-import { SectionHeader, SectionIndexLink } from "@/components/section";
 
 import { logger } from "@/lib/logger";
 
@@ -30,10 +29,6 @@ import {
 interface FeaturedRankingsProps {
   /** 取得件数（デフォルト: 6） */
   limit?: number;
-  /** ヘッダー（見出し+もっと見るリンク）を表示するか（デフォルト: true） */
-  showHeader?: boolean;
-  /** home 2ペイン内へ外枠なしで埋め込む。 */
-  embedded?: boolean;
   /** home 専用の impression / click 計測を有効にする。home 以外では false。 */
   trackHomeEvents?: boolean;
 }
@@ -49,8 +44,6 @@ interface FeaturedRankingsProps {
  */
 export async function FeaturedRankings({
   limit = 6,
-  showHeader = true,
-  embedded = false,
   trackHomeEvents = true,
 }: FeaturedRankingsProps) {
   let gridItems: FeaturedRankingGridItem[] = [];
@@ -167,26 +160,11 @@ export async function FeaturedRankings({
     return null;
   }
 
-  const content = (
-    <>
-      {showHeader && (
-        <SectionHeader
-          title="注目のランキング"
-          action={<SectionIndexLink href="/ranking">もっと見る</SectionIndexLink>}
-        />
-      )}
-      <FeaturedRankingGrid
-        items={gridItems}
-        compact={embedded}
-        trackHomeEvents={trackHomeEvents}
-      />
-    </>
+  // 見出しと横スクロールの枠は呼び出し側 (HorizontalCardCarouselFrame) が持つ。
+  // 見出し付きの格子で並べる表示は使い手が無く 2026-11-03 に外した。
+  return (
+    <div>
+      <FeaturedRankingGrid items={gridItems} trackHomeEvents={trackHomeEvents} />
+    </div>
   );
-
-  // 横幅と余白は呼び出し側の PageShell (main の p-4) が決める。ここで px-4 や背景帯を足さない。
-  if (embedded) {
-    return <div>{content}</div>;
-  }
-
-  return <section>{content}</section>;
 }

@@ -154,8 +154,13 @@
         },
         {
           "prop": "thumbnail",
-          "required": true,
-          "what": "記事のサムネイル (ライト・ダーク)"
+          "required": false,
+          "what": "記事のサムネイル (ライト・ダーク)。media を渡すときは省く"
+        },
+        {
+          "prop": "media",
+          "required": false,
+          "what": "画像の代わりに枠いっぱいに描く中身 (Geo の一覧の見本の地図 SVG)"
         },
         {
           "prop": "description",
@@ -190,7 +195,8 @@
         "adoptionPart": "記事カード"
       },
       "useWhen": [
-        "記事への入口を並べる (テーマの「このテーマを読み解く記事」・ランキングの「このランキングを読み解く記事」・ブログ一覧)"
+        "記事への入口を並べる (テーマの「このテーマを読み解く記事」・ランキングの「このランキングを読み解く記事」・ブログ一覧)",
+        "Geo の一覧の地図カード (分析・GIS の表示)。見本の地図の SVG を media に渡す (2026-11-03)"
       ],
       "avoidWhen": [
         {
@@ -203,32 +209,34 @@
       ]
     },
     {
-      "id": "article-teaser-grid",
-      "name": "記事カードの格子",
-      "role": "記事カードを線の格子に並べる。列の数は本文の幅だけで決め、ページの側では指定しない",
+      "id": "card-grid",
+      "name": "カードの格子",
+      "role": "記事カードとランキングカードを線の格子に並べる。列の数は本文の幅だけで決め、ページの側では指定しない。記事とランキングで列をそろえるため、同じ格子を使う (2026-11-03)",
       "implementation": {
         "package": "@/components/surface",
-        "export": "ArticleTeaserGrid",
+        "export": "CardGrid",
         "source": "apps/web/src/components/surface/ArticleTeaser.tsx",
-        "propsType": "ArticleTeaserGridProps"
+        "propsType": "CardGridProps"
       },
       "slots": [
         {
           "prop": "children",
           "required": true,
-          "what": "記事カード (ArticleTeaserCard)"
+          "what": "記事カード (ArticleTeaserCard) またはランキングカード (FeaturedRankingCard)"
         }
       ],
       "spec": {
         "columns": "本文の幅 480px 未満 = 1 列 / 480px 以上 = 2 列 / 768px 以上 = 3 列。上限は枚数 (1 枚 = 1、2 枚 = 2、3 枚以上 = 3)",
-        "filler": "最終行の空きマスは白いセルで埋める"
+        "filler": "最終行の空きマスは白いセルで埋める",
+        "carousel": "横スクロールのカルーセル (HorizontalCardCarousel) も 1 画面の枚数を同じ段で決める (本文 480px 未満 = 1 枚 + 次の端 / 480px 以上 = 2 / 768px 以上 = 3)。格子とカルーセルで同じ本文幅なら同じ枚数にする (2026-11-03)"
       },
       "reference": {
         "referenceId": "shadcndashboard",
         "adoptionPart": "記事カード"
       },
       "useWhen": [
-        "記事カードを 1 枚以上並べる所すべて"
+        "記事カードを 1 枚以上並べる所すべて",
+        "ランキングカードを本文に並べる所 (横スクロールのカルーセルを除く)"
       ],
       "avoidWhen": [
         {
@@ -310,6 +318,72 @@
       "checks": [
         "panel-no-text-size-override",
         "panel-parts-only-in-panel-components",
+        "no-nested-card-surfaces"
+      ]
+    },
+    {
+      "id": "value-table",
+      "name": "静的な表",
+      "role": "並べ替え・絞り込みの要らない表をすべてこれで描く (要る表は DataTable)。見出しの行は表の部品の既定のまま、1 列目以外は右寄せ・桁そろえ、行の見出しは th scope=\"row\"。枠は持たず、置く場所 (章の格子・ChartPanel など) が決める",
+      "implementation": {
+        "package": "@/components/surface",
+        "export": "ValueTable",
+        "source": "apps/web/src/components/surface/ValueTable.tsx",
+        "propsType": "ValueTableProps"
+      },
+      "slots": [
+        {
+          "prop": "columns",
+          "required": true,
+          "what": "列 (見出し・行の見出しの列か・文字の列は align: left)"
+        },
+        {
+          "prop": "rows",
+          "required": true,
+          "what": "行 (列と同じ数・同じ順のセル。補足は <small>。合計の行は total)"
+        },
+        {
+          "prop": "ariaLabel",
+          "required": false,
+          "what": "表の名前 (読み上げ・横スクロールの領域名)"
+        },
+        {
+          "prop": "caption",
+          "required": false,
+          "what": "表の下の注記"
+        },
+        {
+          "prop": "scrollRegion",
+          "required": false,
+          "what": "幅を絞って横スクロールさせる表"
+        },
+        {
+          "prop": "hideHeader",
+          "required": false,
+          "what": "項目と値の対だけの表で、見出しの行を画面に出さない (読み上げには残す)"
+        },
+        {
+          "prop": "containerClassName",
+          "required": false,
+          "what": "スクロールを担う外側の箱の class (長い一覧の高さを抑える max-h-96 など)"
+        }
+      ],
+      "spec": {
+        "classOnce": "右寄せ・補足・リンクの書式は表に 1 回だけ書く (行の多いページの重さの予算)",
+        "header": "見出しの行の背景・文字の大きさをページで上書きしない",
+        "rank": "順位は文字のまま書く (RankBadge にしない)",
+        "inChapter": "テーマの章の中に置く表は枠の見出しの帯を持たず、1 列目の見出しで何の表かを示す"
+      },
+      "useWhen": [
+        "並べ替え・絞り込みの要らない表すべて (地域の指標の一覧・年ごとの値・区分ごとの値・市区町村などの一覧)"
+      ],
+      "avoidWhen": [
+        {
+          "when": "指標が 4 件以下で 1 つずつ値と推移を見せる",
+          "use": "stat-tile-grid"
+        }
+      ],
+      "checks": [
         "no-nested-card-surfaces"
       ]
     }

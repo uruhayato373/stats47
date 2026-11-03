@@ -7,8 +7,7 @@ import {
   trackHomeFeaturedImpression,
   type HomeFeaturedEventParams,
 } from "@/lib/analytics/events";
-
-import { createImpressionWatcher } from "../../utils/impression-watcher";
+import { createImpressionWatcher } from "@/lib/analytics/impression-watcher";
 
 interface TrackedFeaturedRankingCardProps {
   rankingKey: string;

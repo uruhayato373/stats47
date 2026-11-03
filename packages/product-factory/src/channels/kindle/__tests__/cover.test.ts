@@ -137,3 +137,18 @@ describe("buildCoverPng — 明るい文字面と画像面を分離する", () =
     expect(bottom[2]).toBeLessThan(30);
   });
 });
+
+describe("書名ごと描いた表紙 (textBaked)", () => {
+  it("照合済みの文字に今の書名 (主題・副題) が入っている。書名を変えたら描き直す", async () => {
+    const { KINDLE_BOOKS } = await import("../book-catalog");
+    const { KINDLE_COVER_BACKGROUND_BY_ID } = await import("../cover-design");
+    const { splitTitle } = await import("../cover");
+    for (const book of KINDLE_BOOKS) {
+      const baked = KINDLE_COVER_BACKGROUND_BY_ID[book.id]?.textBaked;
+      if (!baked) continue;
+      const { main, rest } = splitTitle(book.title);
+      expect(baked.checkedText, book.id).toContain(main);
+      if (rest) expect(baked.checkedText, book.id).toContain(rest);
+    }
+  });
+});

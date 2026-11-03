@@ -4,6 +4,7 @@ import { summarizeSalesLedger, validateSalesLedger } from "../src/sales";
 import {
   kdpMonthlyObservations,
   kdpMonthlyRecordsSha256,
+  mergeSalesCoverage,
   mergeSalesObservations,
   salesObservationId,
   type KdpMonthlyRecord,
@@ -249,5 +250,55 @@ describe("KDP 月次レポートから販売台帳への変換", () => {
     expect(() => kdpMonthlyObservations(augustReport([AUGUST_EBOOK]), { ...VAULT, vaultKey: "kdp/session" })).toThrow(
       /vault_invalid_key/,
     );
+  });
+});
+
+describe("計測の範囲 (coverage)", () => {
+  const RANGE = {
+    channel: "kdp" as const,
+    periodStart: "2026-08-01",
+    periodEnd: "2026-08-31",
+    productIds: ["K-S1-01", "K-S1-02"],
+    evidencePath: "vault:kdp/monthly/month-19",
+    evidenceSha256: SHA,
+    recordedAt: "2026-10-08T00:00:00.000Z",
+  };
+
+  it("数えた書籍の一覧を持つ月次レポートからは範囲を 1 件作り、持たない古い保管物からは作らない", () => {
+    const report = augustReport([AUGUST_EBOOK]);
+    expect(kdpMonthlyObservations(report, VAULT).coverage).toBeNull();
+    const withIds = { ...report, coverage: { complete: true, mappedBookIds: ["K-S1-02", "K-S1-01"] } };
+    expect(kdpMonthlyObservations(withIds, VAULT).coverage).toMatchObject({
+      channel: "kdp",
+      periodStart: "2026-08-01",
+      periodEnd: "2026-08-31",
+      productIds: ["K-S1-01", "K-S1-02"],
+      evidencePath: "vault:kdp/monthly/month-19",
+    });
+  });
+
+  it("同じ期間の範囲は二重に足さず、書籍の集合が違えば上書きせず conflict にする", () => {
+    const first = mergeSalesCoverage({ schemaVersion: 1, observations: [] }, RANGE);
+    expect(first.added).toBe(true);
+    expect(mergeSalesCoverage(first.ledger, { ...RANGE, recordedAt: "2026-10-09T00:00:00.000Z" })).toMatchObject({
+      added: false,
+      conflict: false,
+    });
+    const other = mergeSalesCoverage(first.ledger, { ...RANGE, productIds: ["K-S1-01"] });
+    expect(other).toMatchObject({ added: false, conflict: true });
+    expect(other.ledger.coverage).toEqual([RANGE]);
+  });
+
+  it("観測を足しても範囲は消えない", () => {
+    const covered = mergeSalesCoverage({ schemaVersion: 1, observations: [] }, RANGE).ledger;
+    const { observations } = kdpMonthlyObservations(augustReport([AUGUST_EBOOK]), VAULT);
+    expect(mergeSalesObservations(covered, observations).ledger.coverage).toEqual([RANGE]);
+  });
+
+  it("書籍の無い範囲・重複・証拠の置き場違いを拒否する", () => {
+    const ledger = (coverage: unknown[]) => ({ schemaVersion: 1, observations: [], coverage });
+    expect(() => validateSalesLedger(ledger([{ ...RANGE, productIds: [] }]))).toThrow(/productIds/);
+    expect(() => validateSalesLedger(ledger([RANGE, RANGE]))).toThrow(/duplicate coverage/);
+    expect(() => validateSalesLedger(ledger([{ ...RANGE, evidencePath: "data/report.json" }]))).toThrow(/evidencePath/);
   });
 });

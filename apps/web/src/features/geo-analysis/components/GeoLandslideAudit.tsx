@@ -1,13 +1,8 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
+
+import { ValueTable } from '@/components/surface';
 
 import type { GeoLandslidePrefDetail, GeoLandslideCounts } from '@stats47/gis';
+
 const n = (v: number, scale = 1) =>
   (v / scale).toLocaleString('ja-JP', { maximumFractionDigits: 4 });
 export function GeoLandslideAudit({
@@ -29,54 +24,42 @@ export function GeoLandslideAudit({
         各行は「入力面外＋警戒のみ＋特別」の排他的な3区分で、同じ分母へ戻ります。特別警戒面を優先表示しますが、警戒面への包含は仮定しません。
       </p>
       <div className="min-w-0 overflow-x-auto">
-        <Table scrollRegion aria-label="土砂災害曝露の合計の検算">
-          <TableHeader>
-            <TableRow>
-              <TableHead>対象</TableHead>
-              <TableHead>入力面外</TableHead>
-              <TableHead>警戒のみ</TableHead>
-              <TableHead>特別警戒</TableHead>
-              <TableHead>元の分母</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {groups.map(([label, g, scale]) => (
-              <TableRow key={label}>
-                <TableHead scope="row">{label}</TableHead>
-                {g.exclusiveScaled.map((v, i) => (
-                  <TableCell key={i} className="text-right tabular-nums">
-                    {n(v, scale)}
-                  </TableCell>
-                ))}
-                <TableCell className="text-right tabular-nums">
-                  {n(g.totalScaled, scale)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          scrollRegion
+          ariaLabel="土砂災害曝露の合計の検算"
+          columns={[
+            { key: 'label', header: '対象', rowHeader: true },
+            { key: 'outside', header: '入力面外' },
+            { key: 'warningOnly', header: '警戒のみ' },
+            { key: 'special', header: '特別警戒' },
+            { key: 'total', header: '元の分母' },
+          ]}
+          rows={groups.map(([label, g, scale]) => ({
+            key: label,
+            cells: [label, ...g.exclusiveScaled.map((v) => n(v, scale)), n(g.totalScaled, scale)],
+          }))}
+        />
       </div>
       <div className="min-w-0 overflow-x-auto">
-        <Table scrollRegion aria-label="現象別人口、重複あり">
-          <TableHeader>
-            <TableRow>
-              <TableHead>現象</TableHead>
-              <TableHead>警戒面人口</TableHead>
-              <TableHead>特別警戒面人口</TableHead>
-              <TableHead>和集合人口</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {['急傾斜地の崩壊', '土石流', '地すべり'].map((name, i) => (
-              <TableRow key={name}>
-                <TableHead scope="row">{name}</TableHead>
-                <TableCell>{n(s.warningPhenomenonScaled[i]!, 10000)}</TableCell>
-                <TableCell>{n(s.specialPhenomenonScaled[i]!, 10000)}</TableCell>
-                <TableCell>{n(s.phenomenonScaled[i]!, 10000)}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          scrollRegion
+          ariaLabel="現象別人口、重複あり"
+          columns={[
+            { key: 'name', header: '現象', rowHeader: true },
+            { key: 'warning', header: '警戒面人口' },
+            { key: 'special', header: '特別警戒面人口' },
+            { key: 'union', header: '和集合人口' },
+          ]}
+          rows={['急傾斜地の崩壊', '土石流', '地すべり'].map((name, i) => ({
+            key: name,
+            cells: [
+              name,
+              n(s.warningPhenomenonScaled[i]!, 10000),
+              n(s.specialPhenomenonScaled[i]!, 10000),
+              n(s.phenomenonScaled[i]!, 10000),
+            ],
+          }))}
+        />
       </div>
       <p className="text-xs text-muted-foreground">
         現象間には重複があります。合算しないでください。特別警戒面内・警戒面外のメッシュ人口：

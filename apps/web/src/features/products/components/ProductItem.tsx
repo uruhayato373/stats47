@@ -16,6 +16,7 @@ export function ProductItem({ product }: { readonly product: StorefrontProduct }
       href={href}
       label={`${product.id}:${product.title}`}
       surface="product_catalog"
+      product={product}
       className={getSurfaceCardClassName({
         interactive: true,
         className: "group flex h-full flex-col p-5",

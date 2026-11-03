@@ -74,14 +74,20 @@ describe('Geo map zoom/unmount safety', () => {
   });
 
   it.each(['GeoSpatialLeafletMap', 'GeoStationAccessLeafletMap'])(
-    '%sで両地図に同じ公開optionを適用する',
+    '%sは共通の枠を通して同じ公開optionを適用する',
     (component) => {
       const webRoot = existsSync('apps/web/src') ? 'apps/web/' : '';
       const source = readFileSync(
         `${webRoot}src/features/geo-analysis/components/${component}.tsx`,
         'utf8'
       );
-      expect(source).toContain('zoomAnimation={false}');
+      const frame = readFileSync(
+        `${webRoot}src/components/charts/LeafletMapFrame.tsx`,
+        'utf8'
+      );
+      expect(source).toContain('<LeafletMapFrame');
+      expect(source).not.toContain('<MapContainer');
+      expect(frame).toContain('zoomAnimation={false}');
       expect(source).not.toContain('GeoLeafletLifecycle');
     }
   );

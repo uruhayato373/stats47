@@ -96,7 +96,7 @@ export function parseKdpMonthlyReport(workbook, listings, month) {
   });
   return { schemaVersion: 1, status: 'collected', scope: 'stats47-exact-asin', finality: 'finalized-monthly-royalty',
     period: { month, start: `${month}-01`, end: new Date(Date.UTC(year, number, 0)).toISOString().slice(0, 10), basis: 'provider-report-month' },
-    records, totals, coverage: { complete: true, mappedAsins: asins.size, includedRows: records.length, excludedRows, zeroFilled: false },
+    records, totals, coverage: { complete: true, mappedAsins: asins.size, mappedBookIds: [...new Set(asins.values())].sort(), includedRows: records.length, excludedRows, zeroFilled: false },
     limitations: ['月次ロイヤリティであり入金・税引後利益・週次純収益ではない', '通貨を換算・合算せず、KU端数も元明細の精度を保持する', 'Prime Readingボーナスはこのレポートに含まれない', '明細の無い書籍を0件で補完しない'] };
 }
 

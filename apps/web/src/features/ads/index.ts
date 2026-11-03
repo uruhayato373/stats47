@@ -19,7 +19,10 @@ export {
   FooterAdSlot,
   RailAdSlot,
   AdCell,
+  AdRow,
+  type AdRowCell,
 } from "./components/slots";
+export { composeAdRows, type AdRowPattern } from "./lib/ad-row";
 
 // Constants & Types
 export { selectPromoBannerIndexForRanking } from "./constants/sidebar-banners";

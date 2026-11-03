@@ -250,6 +250,75 @@ export function trackCtaClick(params: {
   });
 }
 
+// ─── 商品への送客 (表示 → 販売先クリック → 販売台帳の注文) ─────────────
+
+/**
+ * 販売先。商品の外部 URL のホストから決める (`productReferralOf`)。
+ * ココナラは 2026-10-19 に撤退済みだが、残っている案内を数えられるよう語彙に残す。
+ */
+export type ProductDestination = 'amazon' | 'note' | 'coconala';
+
+export interface ProductReferralParams {
+  destination: ProductDestination;
+  /** 販売先での商品 ID。Amazon は ASIN、note は記事・マガジンのキー、ココナラはサービス番号 */
+  productId: string;
+  /** 案内の置き場所。登録済み `link_position` に入れる (例 `blog_product` / `ranking_product` / `ranking-footer`) */
+  placement: string;
+}
+
+/**
+ * 販売先の URL から、販売先と販売先での商品 ID を取り出す。
+ * 販売台帳 (KDP は ASIN を書籍 ID に引き当てる) と GA4 のクリックを同じ ID で突き合わせるため、
+ * サイト内の商品 ID ではなく販売先の ID を送る。形が合わない URL は null (推測した ID を送らない)。
+ */
+export function productReferralOf(externalUrl: string): Omit<ProductReferralParams, 'placement'> | null {
+  let url: URL;
+  try {
+    url = new URL(externalUrl);
+  } catch {
+    return null;
+  }
+  const host = url.hostname.replace(/^www\./, '');
+  if (host === 'amazon.co.jp') {
+    const asin = url.pathname.match(/\/dp\/([A-Z0-9]{10})(?:\/|$)/)?.[1];
+    return asin ? { destination: 'amazon', productId: asin } : null;
+  }
+  if (host === 'note.com') {
+    const key = url.pathname.match(/^\/[^/]+\/[nm]\/([a-z0-9]+)\/?$/i)?.[1];
+    return key ? { destination: 'note', productId: key } : null;
+  }
+  if (host === 'coconala.com') {
+    const id = url.pathname.match(/^\/services\/(\d+)\/?$/)?.[1];
+    return id ? { destination: 'coconala', productId: id } : null;
+  }
+  return null;
+}
+
+function productReferralPayload(params: ProductReferralParams): Record<string, unknown> {
+  return {
+    product_destination: params.destination,
+    product_id: params.productId,
+    link_position: params.placement,
+  };
+}
+
+/**
+ * 商品案内の表示 (50% 以上 × 1 秒連続、部品のマウントにつき 1 回。条件は createImpressionWatcher)。
+ * 置き場所ごとの「表示 → 販売先クリック」の分母。
+ */
+export function trackProductImpression(params: ProductReferralParams): void {
+  sendEvent('product_impression', productReferralPayload(params));
+}
+
+/**
+ * 販売先 (Amazon / note / ココナラ) へ出ていくクリック。GA4 のキーイベントにする。
+ * サイト内の商品詳細への移動は数えない (それは `nav_click`)。商品詳細から出ていくときは、
+ * 詳細へ来る前の案内の置き場所を `link_position` に入れる (`TrackedProductOutboundLink`)。
+ */
+export function trackProductClick(params: ProductReferralParams): void {
+  sendEvent('product_click', productReferralPayload(params));
+}
+
 // ─── ホーム注目ランキング ──────────────────────────────────────
 
 /**

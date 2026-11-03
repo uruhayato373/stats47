@@ -5,6 +5,7 @@ export const mandarinConsumptionQuantity: MetricConfig = {
   "key": "mandarin-consumption-quantity",
   "title": "みかん消費量",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間みかん消費量",
+  "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に購入したみかんの1世帯当たりの数量（g）。県全体の値ではない。",
   "unit": "g",
   "category": "economy",
   "source": {

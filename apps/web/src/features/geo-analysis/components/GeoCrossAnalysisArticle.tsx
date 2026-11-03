@@ -3,14 +3,6 @@ import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 
 import { to2DigitPrefCode } from '@stats47/area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -19,7 +11,7 @@ import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection } from '@/components/surface';
+import { SurfaceSection, ValueTable } from '@/components/surface';
 
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 
@@ -190,42 +182,30 @@ export async function GeoCrossAnalysisArticle({
             <div className="mt-4 overflow-x-auto">
               {/* 折り返させると表が枠の幅まで縮み、390〜768px で県名が 1 文字ずつ縦に並んだ (2026-09-25)。
                   折り返さずに横へスクロールさせる */}
-              <Table className="whitespace-nowrap" scrollRegion aria-label="47都道府県の全データ">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>表示順</TableHead>
-                    <TableHead>都道府県</TableHead>
-                    {snapshot.metrics.map((metric) => (
-                      <TableHead key={metric.key} className="text-right!">
-                        {metric.label}
-                      </TableHead>
-                    ))}
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {snapshot.rows.map((row) => (
-                    <TableRow key={row.areaCode}>
-                      <TableCell className="tabular-nums">{row.rank}</TableCell>
-                      <TableCell className="font-medium">
-                        <Link
-                          className="text-primary underline"
-                          href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
-                        >
-                          {row.areaName}の地図
-                        </Link>
-                      </TableCell>
-                      {snapshot.metrics.map((metric) => (
-                        <TableCell
-                          key={metric.key}
-                          className="text-right tabular-nums"
-                        >
-                          {formatGeoValue(metric, row.values[metric.key])}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <ValueTable
+                className="whitespace-nowrap"
+                scrollRegion
+                ariaLabel="47都道府県の全データ"
+                columns={[
+                  { key: 'rank', header: '表示順' },
+                  { key: 'area', header: '都道府県', rowHeader: true, align: 'left', className: 'whitespace-nowrap!' },
+                  ...snapshot.metrics.map((metric) => ({ key: metric.key, header: metric.label })),
+                ]}
+                rows={snapshot.rows.map((row) => ({
+                  key: row.areaCode,
+                  cells: [
+                    row.rank,
+                    <Link
+                      key="area"
+                      className="text-primary underline"
+                      href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
+                    >
+                      {row.areaName}の地図
+                    </Link>,
+                    ...snapshot.metrics.map((metric) => formatGeoValue(metric, row.values[metric.key])),
+                  ],
+                }))}
+              />
             </div>
           </SurfaceSection>
         </>

@@ -6,19 +6,11 @@ import { useState } from 'react';
 import { lookupArea } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { CULTURAL_HERITAGE_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -37,85 +29,76 @@ function LocationsTable({
   label: string;
 }) {
   return (
-    <Table
-      aria-label={label}
+    <ValueTable
+      ariaLabel={label}
       scrollRegion
-      containerClassName="min-w-0 max-w-full"
       className="min-w-96"
-    >
-      <TableCaption>
-        文化庁の収録名称・種類・所在地を表示しています。所在地は訪問先の入口・公開可否を示すものではありません。
-      </TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead scope="col">名称・公式詳細</TableHead>
-          <TableHead scope="col">種類</TableHead>
-          <TableHead scope="col">所在地</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.id} data-heritage-id={row.id}>
-            <TableHead scope="row" className="min-w-40 whitespace-normal!">
-              <a
-                href={row.officialUrl}
-                className="text-primary underline underline-offset-4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {row.name}
-              </a>
-            </TableHead>
-            <TableCell className="whitespace-normal!">
-              {source.categories
-                .filter((category) => row.kinds.includes(category.key))
-                .map((category) => category.label)
-                .join('・')}
-            </TableCell>
-            <TableCell className="min-w-48 whitespace-normal!">
-              <p>
-                {row.geography === 'unspecified'
-                  ? '地域を定めない'
-                  : row.prefectureCodes
-                      .map((code) => lookupArea(code)?.areaName)
-                      .join('・')}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {row.location ?? '原典に所在地の記載なし'}
-              </p>
-              {row.geography === 'multi-prefecture' && (
-                <details className="mt-2 text-xs text-muted-foreground">
-                  <summary>県帰属の確認資料</summary>
-                  {row.evidence.map((evidence) => (
-                    <p key={evidence.url} className="mt-2">
-                      <a
-                        href={evidence.url}
-                        className="underline underline-offset-4"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        一次資料
-                        {evidence.pdfPage
-                          ? `（PDF ${evidence.pdfPage}ページ）`
-                          : ''}
-                      </a>{' '}
-                      ·{' '}
-                      {new Date(evidence.retrievedAt).toLocaleDateString(
-                        'ja-JP',
-                        { timeZone: 'Asia/Tokyo' }
-                      )}
-                      取得
-                      <br />
-                      {evidence.basis}
-                    </p>
-                  ))}
-                </details>
-              )}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+      caption="文化庁の収録名称・種類・所在地を表示しています。所在地は訪問先の入口・公開可否を示すものではありません。"
+      columns={[
+        { key: 'name', header: '名称・公式詳細', rowHeader: true, className: 'min-w-40' },
+        { key: 'kinds', header: '種類', align: 'left', className: 'whitespace-normal!' },
+        { key: 'location', header: '所在地', align: 'left', className: 'min-w-48 whitespace-normal!' },
+      ]}
+      rows={rows.map((row) => ({
+        key: row.id,
+        attrs: { 'data-heritage-id': row.id },
+        cells: [
+          <a
+            key="name"
+            href={row.officialUrl}
+            className="text-primary underline underline-offset-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {row.name}
+          </a>,
+          source.categories
+            .filter((category) => row.kinds.includes(category.key))
+            .map((category) => category.label)
+            .join('・'),
+          <>
+            <p>
+              {row.geography === 'unspecified'
+                ? '地域を定めない'
+                : row.prefectureCodes
+                    .map((code) => lookupArea(code)?.areaName)
+                    .join('・')}
+            </p>
+            <p>
+              <small>{row.location ?? '原典に所在地の記載なし'}</small>
+            </p>
+            {row.geography === 'multi-prefecture' && (
+              <details className="mt-2 text-xs text-muted-foreground">
+                <summary>県帰属の確認資料</summary>
+                {row.evidence.map((evidence) => (
+                  <p key={evidence.url} className="mt-2">
+                    <a
+                      href={evidence.url}
+                      className="underline underline-offset-4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      一次資料
+                      {evidence.pdfPage
+                        ? `（PDF ${evidence.pdfPage}ページ）`
+                        : ''}
+                    </a>{' '}
+                    ·{' '}
+                    {new Date(evidence.retrievedAt).toLocaleDateString(
+                      'ja-JP',
+                      { timeZone: 'Asia/Tokyo' }
+                    )}
+                    取得
+                    <br />
+                    {evidence.basis}
+                  </p>
+                ))}
+              </details>
+            )}
+          </>,
+        ],
+      }))}
+    />
   );
 }
 

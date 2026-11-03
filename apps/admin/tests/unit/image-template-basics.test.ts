@@ -86,15 +86,16 @@ describe('representative statistics for image template basics', () => {
     expect(html).not.toContain('地域A');
   });
   it('keeps missing images explicit without filling them with fictional data', () => {
+    // A topic-based household sample: its images come from the article, never drawn here.
     const definition = STATISTICAL_SAMPLES.find(
-      (s) => s.templateId === 'radar'
+      (s) => s.id === 'household-nagoya'
     )!;
     const html = renderToStaticMarkup(
       createElement(TemplateStatisticalPreview, {
         samples: [{ ...definition, media: {} }],
       })
     );
-    expect(html).toContain('東京都と京都府の複数指標');
+    expect(html).toContain(definition.statistic);
     expect(html.match(/サンプル画像を準備中/g)).toHaveLength(4);
     expect(html).not.toContain('<svg');
     expect(html).not.toContain('<img');

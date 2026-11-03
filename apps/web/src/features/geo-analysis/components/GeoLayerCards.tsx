@@ -1,6 +1,6 @@
 import { GEO_LAYERS } from '@stats47/data-configs/business-plan';
 
-import { SurfaceLinkCard } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid } from '@/components/surface';
 
 import { getPrefectureCardGeography } from '../lib/geo-card-geography';
 import { buildGeoCardPreview } from '../lib/geo-card-preview';
@@ -8,8 +8,9 @@ import {
   GEO_DEFAULT_PREF_CODE,
   GEO_DEFAULT_PREF_LABEL,
 } from '../lib/geo-default-prefecture';
-import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
+
+import { GeoCardPreviewFallback, GeoCardPreviewSvg } from './GeoCardPreviewSvg';
 
 
 export async function GeoLayerCards() {
@@ -24,81 +25,32 @@ export async function GeoLayerCards() {
     }))
   );
   return (
-    <div className="grid gap-5 sm:grid-cols-2">
+    <CardGrid>
       {cards.map(({ layer, bundle }) => {
         const preview = bundle
           ? buildGeoCardPreview(bundle.detail, geography, [], layer.kind)
           : null;
         return (
-          <SurfaceLinkCard
+          <ArticleTeaserCard
             key={layer.slug}
             href={`/geo/layers/${layer.slug}`}
-            className="min-w-0 overflow-hidden p-0"
-          >
-            <div className="relative aspect-video overflow-hidden bg-muted">
-              {preview ? (
-                <svg
-                  viewBox="0 0 640 360"
-                  role="img"
-                  aria-label={`${layer.name}・${GEO_DEFAULT_PREF_LABEL}の表示例`}
-                  className="absolute inset-0 h-full w-full bg-muted"
-                >
-                  <path
-                    d={preview.boundary}
-                    fill={GEO_MAP_COLORS.cardPreview.prefectureFill}
-                    fillRule="evenodd"
-                  />
-                  {preview.paths.map((p) => (
-                    <path
-                      key={p.color}
-                      d={p.d}
-                      fill={p.color}
-                      stroke={GEO_MAP_COLORS.cardPreview.halo}
-                      strokeWidth="0.5"
-                    />
-                  ))}
-                  {preview.points.map((p, i) => (
-                    <circle
-                      key={i}
-                      cx={p.x}
-                      cy={p.y}
-                      r="3"
-                      fill={p.color}
-                      stroke={GEO_MAP_COLORS.cardPreview.prefectureStroke}
-                      strokeWidth="0.8"
-                    />
-                  ))}
-                  <path
-                    d={preview.boundary}
-                    fill="none"
-                    stroke={GEO_MAP_COLORS.cardPreview.prefectureStroke}
-                    strokeWidth="2"
-                  />
-                </svg>
+            media={
+              preview ? (
+                <GeoCardPreviewSvg
+                  preview={preview}
+                  bounds={geography.bounds}
+                  ariaLabel={`${layer.name}・${GEO_DEFAULT_PREF_LABEL}の表示例`}
+                />
               ) : (
-                <p className="p-5 text-sm">プレビューを取得できませんでした</p>
-              )}
-            </div>
-            <div className="space-y-3 p-4 sm:p-5">
-              <h3 className="text-lg font-bold">{layer.name}</h3>
-              <p className="text-sm">{layer.description}</p>
-              <p className="text-xs text-muted-foreground">
-                {layer.representation}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {layer.kind === 'population'
-                  ? '2050年推計人口：青が濃いほど多い'
-                  : layer.kind === 'land-price'
-                    ? '紫の点：住宅地の標準地点'
-                    : '白い点：駅代表点'}
-              </p>
-              <p className="pt-2 text-sm font-semibold text-primary">
-                単体の地図を見る →
-              </p>
-            </div>
-          </SurfaceLinkCard>
+                <GeoCardPreviewFallback />
+              )
+            }
+            meta={`${GEO_DEFAULT_PREF_LABEL} · ${layer.representation}`}
+            title={layer.name}
+            description={layer.description}
+          />
         );
       })}
-    </div>
+    </CardGrid>
   );
 }

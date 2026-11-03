@@ -7,32 +7,32 @@ export const DISTRIBUTION_SAMPLE_ASSETS = {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/9fbdbf96231a725365f4bb06badd39d916516195227543e0ba8789b1507d454d.png",
-      "sha256": "9fbdbf96231a725365f4bb06badd39d916516195227543e0ba8789b1507d454d",
-      "bytes": 174394
+      "key": "media-workspace/images/11fe507da0b63d3e5c4095cdab076247f908f8d69d996e874258bdeda1991026.png",
+      "sha256": "11fe507da0b63d3e5c4095cdab076247f908f8d69d996e874258bdeda1991026",
+      "bytes": 174063
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/1e9177f59e0ecd130843e8a37c05629bb66d00bd4e5f083f44fa6ceef53b63e0.json",
-      "sha256": "1e9177f59e0ecd130843e8a37c05629bb66d00bd4e5f083f44fa6ceef53b63e0",
-      "bytes": 1224895
+      "key": "media-workspace/inputs/0420bd53862510a39edc2d910f442d3582339dbf68ced1a5ece2f42f81817107.json",
+      "sha256": "0420bd53862510a39edc2d910f442d3582339dbf68ced1a5ece2f42f81817107",
+      "bytes": 1234252
     }
   },
   "maximum-temperature-distribution": {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/206fe231383995e22ade34107c1ce8e77b9af0a1bc10a4f183e54ab05b442495.png",
-      "sha256": "206fe231383995e22ade34107c1ce8e77b9af0a1bc10a4f183e54ab05b442495",
-      "bytes": 101160
+      "key": "media-workspace/images/bda9bd63a6364a8188cf124433f43c65d76313adff37b44858cafc52f24495c1.png",
+      "sha256": "bda9bd63a6364a8188cf124433f43c65d76313adff37b44858cafc52f24495c1",
+      "bytes": 101218
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/c90f10c63f767ef11dbb1d4cb3cc88285b9b407710dc6ae6b0b67e6b060a90a5.json",
-      "sha256": "c90f10c63f767ef11dbb1d4cb3cc88285b9b407710dc6ae6b0b67e6b060a90a5",
-      "bytes": 1224901
+      "key": "media-workspace/inputs/830d1bcc2a8cc258454a49aad21763f8df612dbc2b3b1f166cf1f04aaa8d3318.json",
+      "sha256": "830d1bcc2a8cc258454a49aad21763f8df612dbc2b3b1f166cf1f04aaa8d3318",
+      "bytes": 1234258
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;

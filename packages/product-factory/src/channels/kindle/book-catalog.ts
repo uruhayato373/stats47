@@ -35,6 +35,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-01",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "年収が高い県は、暮らしも豊かなのか",
     subtitle: "家賃と物価を引いて読み直す47都道府県の家計",
     concept:
@@ -102,6 +104,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
     //   kakei-income-class / budget-structure / savings-debt は K-S1-01 側。
     id: "K-S1-02",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01 の改訂。機械の検査と NotebookLM の通読で一致した改訂案)
+    fullTables: true,
     title: "食卓の支出と購入数量 — 家計調査の地域差を読む",
     concept: "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読みます。生産地や県民全体の消費を直接測る統計ではないことも整理します。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -134,6 +138,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-03",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "人口減少と世帯の地図 — 未婚・単身・東京集中",
     concept: "未婚率・単身高齢・世帯構造の変化・東京一極集中を束ね、人口減少が暮らしの単位をどう変えたかを読みます。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -166,6 +172,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-04",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "健康と医療の地図 — 寿命・自殺・介護2040",
     concept: "寿命、自殺に関する指標、介護職員の必要数と病院の利用指標を比較し、医療資源の数と個人の健康状態を区別して読みます。掲載した化学工業の集計は医薬品・医療機器だけの生産額ではないことも整理します。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -197,6 +205,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-05",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "教育と子育ての地図 — 教育費・進学率・子育て指標",
     concept: "公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較します。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読みます。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -230,6 +240,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-06",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "自治体財政の地図 — 財政力・借金・将来負担",
     concept: "財政力指数、時系列、地方税、地方債務と将来負担比率を比較し、指標ごとの分母・控除・平均期間を確認します。家計の収支とは異なる地方財政の集計として読み、単一指標から健全性を断定しません。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -261,6 +273,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-07",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01 の改訂。機械の検査と NotebookLM の通読で一致した改訂案)
+    fullTables: true,
     title: "観光とインバウンドの地図 — 宿泊・国籍・回復",
     concept: "延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読みます。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別します。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -292,6 +306,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-08",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "エネルギーとインフラの地図 — 電力・再エネ・ガス",
     concept: "エネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読みます。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱いません。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -323,6 +339,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-09",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "産業と地域経済の地図 — 製造・中小・地価",
     concept: "製造業の集計、事業所規模、工業用水、商業地地価を比較します。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読みます。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -354,6 +372,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-10",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "安全と環境の地図 — 犯罪・労災・公害・防災",
     concept: "犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読みます。集計値から個人の被害確率や地域の安全性全般を断定しません。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -385,6 +405,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-11",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "文化・スポーツ・余暇の地図",
     concept: "図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較します。施設数と利用、参加と頻度、市の家計と県全体を区別して読みます。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -416,6 +438,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-12",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)
+    fullTables: true,
     title: "デジタル生活の地図 — 通信・PC・テレワーク",
     concept: "テレビ・ラジオ・新聞・雑誌の利用時間、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較します。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読みます。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。

@@ -6,6 +6,7 @@
 import sharp from "sharp";
 import { correctBookArticle } from "./editorial-corrections";
 import { correctBookFigure } from "./figure-corrections";
+import { fullTablesForArticle, insertBeforeSources } from "./full-tables";
 import { SITE } from "@stats47/data-configs";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
@@ -26,6 +27,8 @@ export interface FetchedArticle {
   /** frontmatter を除いた本文 markdown (画像参照は EPUB 用ファイル名に書き換え済)。 */
   readonly body: string;
   readonly images: readonly FetchedImage[];
+  /** body に入れた全県表 (full-tables.ts)。データの表なので書き下ろし比率の分母 (ブログの字数) から外す */
+  readonly fullTablesMarkdown: string;
 }
 
 interface Frontmatter {
@@ -151,13 +154,21 @@ export function fetchPublishedSlugSet(): Promise<ReadonlySet<string>> {
  * blog 記事を R2 から取得し、frontmatter 除去 + SVG→PNG 変換して返す。
  * 画像参照 `![alt](data/foo.svg)` は `![alt](images/<slug>__foo.png)` に書き換える。
  */
-export async function fetchBlogArticle(slug: string): Promise<FetchedArticle> {
+export async function fetchBlogArticle(
+  slug: string,
+  options: { readonly fullTables?: boolean; readonly seenTables?: Set<string> } = {},
+): Promise<FetchedArticle> {
   const res = await fetch(`${R2_BASE}/app/blog/${slug}/article.md`);
   if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/${slug}/article.md`);
   const md = await res.text();
   const { fm, body: originalBody } = parseFrontmatter(md);
   // 回遊行の除去は「本記事の…」を書き換える前に行う (書き換え後は行頭の語が変わり検出できない)。
-  const body = appendDataSourceSection(rewriteWebSelfReference(stripWebNavigation(correctBookArticle(slug, originalBody))));
+  const base = rewriteWebSelfReference(stripWebNavigation(correctBookArticle(slug, originalBody)));
+  // 全県表 (full-tables.ts) は図と同じデータから作り、出典の見出しの前に入れる。本ごとに catalog の fullTables で有効にする
+  const tables = options.fullTables
+    ? await fullTablesForArticle(slug, [...base.matchAll(/!\[[^\]]*\]\(data\/([a-z0-9-]+)\.svg\)/gi)].map((m) => m[1]), options.seenTables, base)
+    : "";
+  const body = appendDataSourceSection(insertBeforeSources(base, tables));
   if (!body.trim()) throw new Error(`Empty blog body: ${slug}`);
 
   const images: FetchedImage[] = [];
@@ -195,5 +206,6 @@ export async function fetchBlogArticle(slug: string): Promise<FetchedArticle> {
     tags: fm.tags ?? [],
     body: rewritten,
     images,
+    fullTablesMarkdown: tables,
   };
 }

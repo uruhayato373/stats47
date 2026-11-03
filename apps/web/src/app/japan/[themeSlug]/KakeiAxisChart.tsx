@@ -1,19 +1,21 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { CHART_COLORS } from "@/components/charts/ChartPalette";
+import { BarChartClient } from "@/components/stat-charts/components/charts/BarChart/BarChartClient";
 
 import type { KakeiAxisChart as KakeiAxisChartData } from "@stats47/stats-r2/types";
 
-const BarChart = dynamic(() => import("@stats47/visualization/d3/BarChart").then(mod => mod.BarChart), { ssr: false });
-
+/** 家計調査の分類軸 (年間収入・世帯人数など) ごとの値を共通の横棒で描く。見出しは呼び出し側の ChartPanel が持つ */
 export function KakeiAxisChart({ chart }: { chart: KakeiAxisChartData }) {
-  return <BarChart
-    title={chart.title}
-    data={chart.rows.map(row => ({ name: row.label, value: row.value, code: row.code }))}
-    unit={chart.unit}
-    width={800}
+  return <BarChartClient
+    chartType="bar"
+    chartData={{
+      categoryKey: "name",
+      data: chart.rows.map(row => ({ name: row.label, value: row.value, code: row.code })),
+      series: [{ dataKey: "value", name: chart.title, color: CHART_COLORS[0] }],
+      unit: chart.unit,
+    }}
     height={chart.rows.length > 10 ? 720 : 400}
     xDomain={[0, Math.max(...chart.rows.map(row => row.value)) * 1.1]}
-    valueFormat={value => `${value.toLocaleString("ja-JP")}${chart.unit}`}
   />;
 }

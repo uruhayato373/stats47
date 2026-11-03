@@ -190,7 +190,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
       </Context>,
     );
     // 全国は全国の計だけを出し、47 県の行を並べない (2026-10-31。県の比較はランキングのページ)
-    expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
+    expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
       0,
     );
     expect(container.querySelector("[data-total-inbound]")?.textContent).toBe(
@@ -202,7 +202,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
         .querySelector("[data-area-code]")
         ?.getAttribute("data-area-code"),
     ).toBe("13000");
-    expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
+    expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
       46,
     );
     expect(
@@ -213,7 +213,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
       "沖縄県",
     );
     fireEvent.click(screen.getByRole("button", { name: "全国へ切替" }));
-    expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
+    expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
       0,
     );
   });
@@ -227,7 +227,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
     await choose("年齢", "20～24歳");
     await choose("相手の都道府県", "北海道");
     const v = selectMigrationView(migration, "13000", "1", "205", "01000")!;
-    expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
+    expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
       1,
     );
     expect(
@@ -253,7 +253,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
     );
     await choose("相手の都道府県", "東京都");
     fireEvent.click(screen.getByRole("button", { name: "東京へ切替" }));
-    expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
+    expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
       46,
     );
     expect(
@@ -287,7 +287,7 @@ describe("単独世帯と5年前居住地の母集団", () => {
         </Context>,
       );
       expect(
-        screen.getByRole("table").querySelectorAll("tbody tr"),
+        screen.getByRole("table").querySelectorAll("tbody tr[data-category-code]"),
       ).toHaveLength(n);
       fireEvent.click(screen.getByRole("button", { name: "東京へ切替" }));
       await choose("男女", "女性");
@@ -396,7 +396,7 @@ describe("不詳と分母の表示", () => {
       </Context>,
     );
     expect(
-      screen.getByRole("table").querySelector("tfoot tr")?.lastChild
+      screen.getByRole("table").querySelector("tbody tr:last-child")?.lastChild
         ?.textContent,
     ).toBe("—");
   });

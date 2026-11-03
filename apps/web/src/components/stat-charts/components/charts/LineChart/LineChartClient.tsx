@@ -26,6 +26,8 @@ interface LineChartClientProps {
   showLatestValues?: boolean;
   /** 凡例を出さない (系列の名前と色を呼び出し側が別に示しているとき。テーマの数値タイルの色の印など) */
   hideLegend?: boolean;
+  /** SVG の高さ (既定 250) */
+  height?: number;
 }
 
 export const LineChartClient: React.FC<LineChartClientProps> = ({
@@ -35,6 +37,7 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
   rightYDomain,
   showLatestValues,
   hideLegend = false,
+  height = 250,
 }) => {
   const { xAxisKey, data, lines, unit, rightUnit } = chartData;
   const categoryKey = xAxisKey;
@@ -66,7 +69,7 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
         valueKey={valueKey}
         series={series}
         showLegend={showLegend}
-        height={250}
+        height={height}
         colors={lines.length === 1 ? lines[0]?.color ? [lines[0].color] : undefined : undefined}
         yDomain={primaryDomain}
         rightYDomain={rightYDomain}

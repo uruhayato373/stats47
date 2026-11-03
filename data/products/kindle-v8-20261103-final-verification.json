@@ -1,0 +1,822 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T09:25:12.251Z",
+  "version": "v8-20261103-final",
+  "epubcheckExecuted": true,
+  "books": 32,
+  "totalErrors": 26,
+  "crossBook": [
+    {
+      "level": "warn",
+      "code": "cross-book-paragraph",
+      "msg": "60 字以上の同一段落が 2 冊以上に 15 件"
+    }
+  ],
+  "report": [
+    {
+      "id": "K-S1-01",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-01/v8-20261103-final/book.epub",
+      "epubSha256": "d7af079bd684640ceff1f42dd2558e089ca065cbaa0005f47e8ae386219964e5",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "41d0292a22cd3e0ec37be20b2ea76e550e6739cb29c9523c967a33cfe3bd7174"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "e11a5adc2e75657e197d8cec96a0b3bc4b9c7b7a4312510ae83ace8fbeaa25d6"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "874ebb797430724a1ea5bd31e3fba2ef4f1779562f0cd1d6d71062a4de42c5d9"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "90ed23ab0370763e3067608fae35c2a17fb9ae0190c909a0ab18b44d746419d4"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "11ec0ae1d36075cb16fcdabe3b5967f251ccd0c4e9b2b50e4f210ddc4393b5a7"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "656664187701e20d3556574cdbc109f21cecee1254617e57a777c7b11cfd4b5e"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "87e0a8b377e440ca0ef135050c763973841884225c5de8734e603edcdb73937f"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "7c8cc057d07c24c20213434bff513cb1ecdacbcfe1fffbde51b607defa0bdac6"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "f9d3f850767bee6cf13cb9829dca2fc50df405b5a6145a563a6ebf4f7a3dd1ec"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "da25d9951adbc7264a1b51457341741408e24d77c88130674679e60776e0dc3e"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "d9b96fbc0c0ca1bd602e7c4c681cab58fd8932fb504717452607546a9c8ecd4e"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "7e211725828e67cf24ac3b1e418d34aa246adde0777f46855aeb5bf2229717c4"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "dd65527b5de331b9b2bddb85532b4f9f186a5c47263f546895437a249a7df9c0"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "ce92194d04a03e2b71424f496ab6447ea9690c903ab033ce141a297f410accd4"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "a2ce3d0d7858376dee8964c9c40171a85a682edc10e905972f82a2547eb58ad2"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-02",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-02/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-02/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-03",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-03/v8-20261103-final/book.epub",
+      "epubSha256": "84728e24ce6353c984a294387606540133f0081986219277274e33e56de2131a",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "85bd8ac69faa3dbf6e785352824205058dc90975897e8fccf4d3131107b0efd4"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "90626341ab57d97c238c7d0713c78b89439a0b8e4b251429d9b25007abc9a951"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "63adc6ac4dc81417ff86176ac8d5321777c2342d425c6dfee6b3809554eefcb2"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "0e40c5ec6c7b22af38c2f13f9a787cc94f030d2d02b1a2b6419d4717631c32bb"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "5950472f6a6482383ccd6fc1afcd7e602fabc4767466e5a2d8a0f7f04e50fee4"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "d5daa4afc46e21d13fde5675d2e63073c9d86f7833f6ea3455a0206c6e264adf"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "fb2fd568087d17f67b07e614d167ce5e5f837daddddee38e386f5cf53af7a1f5"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "bdf9f4ada4f30f1a05ba38517b6f49dc45ea9f2f85b72191bfed407bea5b8490"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "013cd298c72f965ced7c1d266de5e62e7cd8b23f1ff741dff90ef516a03dbe8a"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "1933f177ce002131a58c00162aa4b43c05f01fe294bf1b4f958d135a0747cbc6"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-04",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-04/v8-20261103-final/book.epub",
+      "epubSha256": "0e20787352f3636d0ac60917c37222690973085dbc57b84de8d14945821777b3",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "ecd010d11590375d3ebea5e78af99255eaadcfefc9506117532063bce425b212"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "5750c9e889e5880aaa8c30f95e1b955f9dfa1a06b133d95eb19e692013881ba5"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "70be9fc023ef72eaf4e27c427ff3b08548e0102a078edd505bbc91ff2170e551"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "171fe04e1cad4aabad4ece3db68657f9dbf3d38faa7074fe2d7b777ce7a760c5"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "341c5711457f91a0c880742c096a5137b66707a70e2f96cd1b7ef8a6f8685487"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "ad0bf8702b707e83176b928fc44be2d24da62c727224592d1d75b75cee25dc7a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "ee23566d3a8fc5a9392489146f21a688b630952910e386a41a61df6a98632cf9"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "7c234459a62a38ece37db73208d8fd8d6827ecd7812041f303033cbac88a95ea"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "d5ca977eeb2cb62602f12083975eec654a2768f29500e41667ffbff7cb6cae54"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "b2593ebb7b75c58fef80b63e48ae38e8a66df54650883ce90cb32c718d0f767f"
+        }
+      ],
+      "errors": 0,
+      "warns": 2,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap005.xhtml: 2040 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap008.xhtml: 2019,2022,2040 が「年」と「年度」の両方で書かれている"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-05",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-05/v8-20261103-final/book.epub",
+      "epubSha256": "8eb3e2b9153272e4a9cbce972ba9f14973f4154d0f0dc386490197e91a155615",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "2e2e8b0016a619e17c26eabd055eb74e2a2116d2d8d63c60e9333c2c7c8f2d12"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "ac823a6866d9850bf89fa7e73526934719f5eefa31fc27887f6486b5ad661279"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "aac96872b72c6110825398a9009ad60ace170cae8fb2c1aa9f12ca5d370ff39d"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "bb219a50e34db0830e6ca0e223e2a9285ceedc9a58e77b534b9a63832bc4aef2"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "d30be18783f19f3496beccad2c8d1e43cad5766a934008c440008c334fd75ded"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "075cddabcebcebac06689f94e7884fdfcd891e60e7a36372501b585e4a15b44b"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "4e8a3a14dc9a9ac91df340ca33a2522b0c4dc462cee15d36b3c5f427fcfd7d18"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "12e35fb3dd3998f8e3a779b3354ae8992f7998ab0926140fa7f9485f65bffc07"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "67541dfd853306e401139049f7fc7d898d10386b13540e7c172548f351aa48ba"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "3fa58284137bbbb53e4cffa0776ae152a450665f9273b36358ccc627177e452a"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-06",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-06/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-06/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-07",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-07/v8-20261103-final/book.epub",
+      "epubSha256": "7eea5d4093c5454aa68976c54b140519a7caa8964fd5941919c601197339d601",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "4d331baf1a3af8a43c06e208c244cc324a28ed88938cccf2445aa07780bab57e"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "262080a42ef8aa570619431c0c038114beab8d0649c1f8c8357f1d1d4efbf9a7"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "68799fad5a622384ac8cd4d01bfb7224b2d068bc283435d7bc0880271057ca40"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "445eae92f6498af7efa1e8c51cbd6149a7d03a4644ea8fb3e7203d59b7b59f43"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "32a7f83eb49b14ffe09cb5b333b21a173ae8e8f86a86164570100c6b8367d69f"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "14f4a8fa027f74d8d5d73000fe3230e2c709d5195c471a48df0ecec712ca80d0"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "6d3d5de3bb3b350b120bb2336714e549d1920a56c72a559508ce2840cace3b90"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "e6f4fcb21fcaff381f1361a36626cb3b0f9d6c75072ee3805b552a0f6e924ac6"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "bdddee6dc8ec98ee2febc9777516642381758ece6139a35b987f944585e6c853"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "932835d7fb0688b448aabc1651cb19e22229b02f1ca88b5d651b229e377869f1"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "39d2d92c7d06d80f04976db27454b93c2b1d59db834664ea36f1c213e5a0adfd"
+        }
+      ],
+      "errors": 0,
+      "warns": 1,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024 が「年」と「年度」の両方で書かれている"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-08",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-08/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-08/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-09",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-09/v8-20261103-final/book.epub",
+      "epubSha256": "7cb840ed1ef6e189343270bb0bbafa8c4ef21f810f875fa0d6ae19ad2f31a0e7",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "9c53ea03b8724a03539e2d5585e3d2b02109dc188fc1db792a9e3d4d67dc7a78"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "283d716d15b013a4352e1e8b3b1ebeedd09b5255f5d5de2707e9ea9b7c45a44c"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "19884d712c356a299be189f421b209a70498557ef07c376faaa597c969017e97"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "4571c839c54702d4484887f48c5edef7e2217b179ada5761e01105c45e543e7c"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "d4e9064950c0e503620e9a7abf0fe899f1ea1d26d8289d043df151bd6d6189f8"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "4d02a78238c6f861f11ee937fee36720d161047fe3c6cb69d60810be19276e44"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "7587e3ed44ce58641664ca07976f42fc9f12dc9ea90553f7d28fc4008b0627e2"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "21168b3ce326639debb7cdab7588485c716aa481d1b45c3cd725543e776ffa07"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "cace6336d6a86a893395522a9028b10ff6ad666e784529136f176fc9453256f9"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "e1a1e6b4d52f6ecc8b21cc1748b3230559071aeb8f42f8117480c6f28df6f97a"
+        }
+      ],
+      "errors": 0,
+      "warns": 1,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2021 が「年」と「年度」の両方で書かれている"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-10",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-10/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-10/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-11",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-11/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-11/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-12",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-12/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-12/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-01",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-01/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-01/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-02",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-02/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-02/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-03",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-03/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-03/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-04",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-04/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-04/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-05",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-05/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-05/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-06",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-06/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-06/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-07",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-07/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-07/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-08",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-08/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-08/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-09",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-09/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-09/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-10",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-10/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-10/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-11",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-11/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-11/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-01",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-01/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-01/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-02",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-02/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-02/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-03",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-03/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-03/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-04",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-04/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-04/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-05",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-05/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-05/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-06",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-06/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-06/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-07",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-07/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-07/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-08",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-08/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-08/v8-20261103-final/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S4-01",
+      "version": "v8-20261103-final",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S4-01/v8-20261103-final/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S4-01/v8-20261103-final/book.epub"
+        }
+      ]
+    }
+  ]
+}

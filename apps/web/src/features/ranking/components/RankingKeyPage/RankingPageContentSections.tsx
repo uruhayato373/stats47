@@ -2,16 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { AdCell } from "@/features/ads";
 import type { AreaType } from "@/features/area";
-
-import { adSlotBox } from "@/lib/ad-placements";
-import {
-    ADSENSE_DISPLAY_ENABLED,
-    AdSenseAd,
-    RANKING_PAGE_FOOTER,
-    RANKING_INCONTENT_MOBILE,
-} from "@/lib/google-adsense";
 
 import { DataUsageCard } from "../DataUsageCard";
 import { RankingDefinitionCard } from "../RankingDefinitionCard";
@@ -29,8 +20,10 @@ export interface RankingPageSections {
     dataSources?: ReactNode;
     /** 統計→公務員AI ファネル CTA — 出典カードの直後・footer 広告の前に表示 */
     funnelCta?: ReactNode;
-    /** AdSense停止中に本文中段へ出す文脈一致バナー（画像のみ） */
-    inContentAffiliate?: ReactNode;
+    /** 解説の後の広告の段 (AdRow。AdSense と PR) */
+    adRowMid?: ReactNode;
+    /** 出典の後の広告の段 (AdRow。AdSense と PR) */
+    adRowFooter?: ReactNode;
     /** ネイティブアフィリエイト枠 (D Phase 2) — AI考察カードの直前に表示 */
     nativeAffiliate?: ReactNode;
     /** 同カテゴリ関連ランキング grid (内部リンク密度↑、GSC indexation 改善) */
@@ -90,18 +83,7 @@ export function RankingPageContentSections({
 
             {sections.insights}
 
-            {!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate}
-
-            {ADSENSE_DISPLAY_ENABLED && (
-                <AdCell label="広告" className="lg:hidden">
-                    <AdSenseAd
-                        format={RANKING_INCONTENT_MOBILE.format}
-                        slotId={RANKING_INCONTENT_MOBILE.slotId}
-                        showLabel={false}
-                        slotBox={adSlotBox("adsense-body-mobile")}
-                    />
-                </AdCell>
-            )}
+            {sections.adRowMid}
 
             {sections.faq}
             {sections.regionalAnalysis}
@@ -118,18 +100,9 @@ export function RankingPageContentSections({
 
             {sections.funnelCta}
 
-            {ADSENSE_DISPLAY_ENABLED && (
-                <AdCell label="広告">
-                    <AdSenseAd
-                        format={RANKING_PAGE_FOOTER.format}
-                        slotId={RANKING_PAGE_FOOTER.slotId}
-                        showLabel={false}
-                        slotBox={adSlotBox("adsense-footer")}
-                    />
-                </AdCell>
-            )}
+            {sections.adRowFooter}
 
-            {/* 関連ランキングと記事を関連コンテンツ型 (AdSense) と PR の列の間に置き、広告の枠を隣り合わせにしない。
+            {/* 関連ランキングと記事を出典の後の広告の段と PR の列の間に置き、広告の枠を隣り合わせにしない。
                 記事は記事カードの格子で、PR の列はページの最後 (テーマのページと同じ。広告の枠の台帳 config/ads/placements.json) */}
             {sections.relatedRankings}
             {sections.relatedArticles}

@@ -23,6 +23,7 @@
     "coconala-edit": "node .claude/scripts/coconala/coconala-edit.mjs",
     "coconala-delete-draft": "node .claude/scripts/coconala/coconala-delete-draft.mjs",
     "kdp:weekly": "npm run products:kindle:weekly --workspace=@stats47/product-factory --",
+    "kindle:quality": "npm run products:kindle:quality --workspace=@stats47/product-factory --",
     "kdp:weekly-publish": "node .claude/scripts/kdp/kdp-weekly-publish.mjs",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",

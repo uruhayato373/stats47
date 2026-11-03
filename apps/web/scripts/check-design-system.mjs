@@ -24,11 +24,27 @@ const extensions = new Set(['.ts', '.tsx']);
 
 const rules = [
   {
-    // D3 を直接 import してよいのは共通の部品と、例外として登録した地図だけ (chart-component-standards.md §2-D。2026-11-01)
+    // 表は 2 種類だけ: 静的な表 ValueTable (@/components/surface) と、並べ替え・絞り込みのある DataTable (@stats47/components)。
+    // ページや feature で表の部品を直接組み立てると、見出しの行の書式・右寄せ・枠がページごとにずれる (2026-11-03 に 27 か所を寄せた)
+    id: 'tables-use-value-table',
+    message:
+      'Render static tables with ValueTable (@/components/surface) and interactive ones with DataTable (@stats47/components). Do not assemble Table/TableRow/TableCell directly.',
+    pattern: /from ['"]@stats47\/components\/atoms\/ui\/table['"]/,
+    allow: (relativePath) =>
+      [
+        'src/components/surface/ValueTable.tsx',
+        // ブログ本文の Markdown の表 (記事の部品。本文の書式で描く)
+        'src/features/blog/components/md-content.tsx',
+      ].includes(relativePath),
+  },
+  {
+    // D3 を直接 import してよいのは共通の部品と、例外として登録した地図だけ (chart-component-standards.md §2-D。2026-11-01)。
+    // 描画の土台の部品 (`@stats47/visualization/d3/BarChart` など大文字で始まるパス。遅延読み込みの import() を含む) も
+    // 同じ扱いにする (2026-11-03)。型・定数・凡例の文脈 (`d3/constants/*`・`d3/chart-legend-lead`) は描画ではないので対象外
     id: 'd3-only-in-registered-components',
     message:
-      'Import d3 only in shared chart components (src/components/charts, src/components/stat-charts) or the feature-scoped exceptions listed in chart-component-standards.md §2-D.',
-    pattern: /from ['"]d3(?:-[a-z]+)?['"]|import\(['"]d3(?:-[a-z]+)?['"]\)/,
+      'Import d3 and the D3 chart primitives (@stats47/visualization/d3/<Component>) only in shared chart components (src/components/charts, src/components/stat-charts) or the feature-scoped exceptions listed in chart-component-standards.md §2-D.',
+    pattern: /from ['"]d3(?:-[a-z]+)?['"]|import\(['"]d3(?:-[a-z]+)?['"]\)|['"]@stats47\/visualization\/d3\/[A-Z]/,
     allow: (relativePath) =>
       relativePath.startsWith('src/components/charts/') ||
       relativePath.startsWith('src/components/stat-charts/') ||
@@ -37,6 +53,22 @@ const rules = [
         'src/features/infra-history/components/InfraHistoryExplorer.tsx',
         'src/features/geo-map/components/GeoSubjectMap.tsx',
         'src/features/geo-questions/components/QuestionMap.tsx',
+        // 2 県の市区町村の並列表示。描画は共通の DivergingChoroplethMap に任せる (§2-D)
+        'src/features/region-comparison/components/MunicipalityChoroplethSection.tsx',
+      ].includes(relativePath),
+  },
+  {
+    // Leaflet の地図は共通の枠 LeafletMapFrame (背景タイル・canvas・高さ・表示範囲の合わせ方) で描く (2026-11-03)。
+    // 各地図が MapContainer を直接組むと、高さ・ホイールでの拡大・背景タイルが地図ごとにずれる
+    id: 'leaflet-maps-use-shared-frame',
+    message:
+      'Draw Leaflet maps with LeafletMapFrame (@/components/charts/LeafletMapFrame) and pass only the layers. Do not assemble MapContainer/TileLayer directly.',
+    pattern: /\bMapContainer\b/,
+    allow: (relativePath) =>
+      [
+        'src/components/charts/LeafletMapFrame.tsx',
+        // 出典の地図: 全世界の範囲を狭い画面に収める独自の合わせ方 (fitGeoSourceBounds) と、指で押せる 44px の拡大ボタンを持つ
+        'src/features/geo-analysis/components/GeoSourceMap.tsx',
       ].includes(relativePath),
   },
   {
@@ -49,11 +81,13 @@ const rules = [
   },
   {
     // 凡例の色見本は ChartLegend (inline / list) が持つ。部品の中で色の点を手書きしない (2026-11-01)。
-    // 2026-11-01 に折れ線・正負の棒・GIS の層の手書きも ChartLegend へ寄せた (CHART-LEGEND-UNIFY-01)
+    // 2026-11-01 に折れ線・正負の棒・GIS の層の手書きも ChartLegend へ寄せた (CHART-LEGEND-UNIFY-01)。
+    // 連続色の帯 (テンプレート文字列の linear-gradient) も ChartLegend の scale で描く (2026-11-03)
     id: 'legend-swatch-uses-chart-legend',
     message:
-      'Legend swatches belong to ChartLegend (@/components/charts/ChartLegend). Do not hand-write colored dots with inline backgroundColor.',
-    pattern: /style=\{\{\s*backgroundColor:/,
+      'Legend swatches and color scales belong to ChartLegend (@/components/charts/ChartLegend, `scale` for gradients). Do not hand-write colored dots with inline backgroundColor or gradient bars.',
+    // 2026-11-03: 色の class で描いた小さな色見本 (size-2 / h-1 w-5 などに bg-*・border-dashed) も止める
+    pattern: /style=\{\{\s*backgroundColor:|`linear-gradient\(|className="[^"]*\b(?:size-[23](?![.\d])|h-1 w-[45]|w-[45] border-t-2)\b[^"]*\b(?:bg-[a-z]|border-dashed)/,
     allow: (relativePath) =>
       [
         'src/components/charts/ChartLegend.tsx',
@@ -378,6 +412,19 @@ function checkFile(relativePath) {
     }
   });
 
+  // 表の部品を入口 (@stats47/components) から複数行の import で読む書き方は、1 行ずつの規則では捕まらないのでファイル全体で見る
+  const tableRule = rules.find((rule) => rule.id === 'tables-use-value-table');
+  const barrelTableImport = /import\s*\{[^}]*\bTable(?:Body|Row|Cell|Head|Header|Caption|Footer)?\b[^}]*\}\s*from\s*['"]@stats47\/components['"]/;
+  if (tableRule && !tableRule.allow(relativePath) && barrelTableImport.test(text)) {
+    violations.push({
+      ruleId: tableRule.id,
+      message: tableRule.message,
+      file: relativePath,
+      lineNumber: text.slice(0, text.search(barrelTableImport)).split(/\r?\n/).length,
+      line: 'import { Table… } from "@stats47/components"',
+    });
+  }
+
   return violations;
 }
 
@@ -528,28 +575,6 @@ for (const root of scanRoots) {
       line: '<PageShell leftRail=…>',
     });
   }
-}
-
-const surveyNavPath = 'src/features/survey/components/SurveySideNav.tsx';
-const surveyNavSource = readFileSync(path.join(cwd, surveyNavPath), 'utf8');
-// 2026-10-28 (テンプレート寄せ): 調査のページ内ナビは左レールを使わず本文上部に置く。広い幅の
-// カード 2 枚 (SurveySideNav) と狭い幅の折りたたみ (SurveyMobileNav) が同じ shell コンテナ境界で
-// 入れ替わること (二重表示・欠落なし) を、2 つのクラス定数が同じ境界値を持つことで検査する。
-const surveyWide = surveyNavSource.match(
-  /WIDE_ONLY_CLASS = 'hidden @min-\[(\d+)px\]\/shell:grid'/,
-);
-const surveyNarrow = surveyNavSource.match(
-  /NARROW_ONLY_CLASS = '@min-\[(\d+)px\]\/shell:hidden'/,
-);
-if (!surveyWide || !surveyNarrow || surveyWide[1] !== surveyNarrow[1]) {
-  violations.push({
-    ruleId: 'survey-mobile-nav-must-share-left-rail-breakpoint',
-    message:
-      'SurveySideNav (WIDE_ONLY_CLASS) and SurveyMobileNav (NARROW_ONLY_CLASS) must switch at the same @container/shell width.',
-    file: surveyNavPath,
-    lineNumber: 1,
-    line: 'SurveyMobileNav',
-  });
 }
 
 // 操作部品の --radius はテンプレートの値 (@stats47/ui-theme の tokens-hsl.css・2026-10-27 オーナー決定

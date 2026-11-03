@@ -1,21 +1,11 @@
 'use client';
 
-import 'leaflet/dist/leaflet.css';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  CircleMarker,
-  GeoJSON,
-  MapContainer,
-  Popup,
-  TileLayer,
-  Tooltip,
-  useMap,
-} from 'react-leaflet';
+import { CircleMarker, GeoJSON, Popup, Tooltip } from 'react-leaflet';
 
-import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
-import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { LeafletMapFrame } from '@/components/charts/LeafletMapFrame';
+
 import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import {
   buildSpatialMeshMap,
@@ -27,23 +17,6 @@ import {
 import type { GeoAnalysisPrefDetail } from '@stats47/gis';
 import type { LatLngBoundsExpression } from 'leaflet';
 
-function Fit({
-  bounds,
-  center,
-  extent,
-}: {
-  bounds: LatLngBoundsExpression;
-  center: [number, number];
-  extent: boolean;
-}) {
-  const map = useMap();
-  useEffect(() => {
-    if (extent) map.fitBounds(bounds, { padding: [16, 16], maxZoom: 11 });
-    else map.setView(center, 10);
-  }, [map, bounds, center, extent]);
-  return null;
-}
-
 export function GeoSpatialLeafletMap({
   detail,
   view,
@@ -54,8 +27,6 @@ export function GeoSpatialLeafletMap({
   >;
   view: Exclude<SpatialView, 'audit'>;
 }) {
-  const renderer = useState(() => createGeoCanvasRenderer())[0];
-  const [extent, setExtent] = useState(false);
   const features = useMemo(() => buildSpatialMeshMap(detail), [detail]);
   const byId = useMemo(
     () => new Map(detail.meshes.map((mesh) => [mesh[0], mesh])),
@@ -80,128 +51,101 @@ export function GeoSpatialLeafletMap({
     ],
     [detail]
   );
+  const focus = useMemo(
+    () => ({ center, zoom: 10, label: '人口最多メッシュ周辺' }),
+    [center]
+  );
   const isLand = detail.slug === 'population-land-price';
   return (
-    <div>
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        <Button
-          size="sm"
-          variant={extent ? 'outline' : 'default'}
-          aria-pressed={!extent}
-          onClick={() => setExtent(false)}
-        >
-          人口最多メッシュ周辺
-        </Button>
-        <Button
-          size="sm"
-          variant={extent ? 'default' : 'outline'}
-          aria-pressed={extent}
-          onClick={() => setExtent(true)}
-        >
-          離島を含む全県
-        </Button>
+    <LeafletMapFrame
+      ariaLabel={`${detail.areaName}の地点・1kmメッシュ地図`}
+      bounds={bounds}
+      focus={focus}
+      toolbar={
         <span className="text-xs text-muted-foreground">
           表示範囲のみ変更。集計対象は県内全メッシュです。
         </span>
-      </div>
-      <MapContainer
-        renderer={renderer}
-        preferCanvas
-        center={[36, 138]}
-        zoom={6}
-        // Tabs can unmount the map immediately after zoom; do not leave a zoom-end timer.
-        zoomAnimation={false}
-        minZoom={GEO_BASEMAP.minZoom}
-        maxZoom={GEO_BASEMAP.maxZoom}
-        scrollWheelZoom={false}
-        className="isolate h-[480px] rounded-card lg:h-[620px]"
-        aria-label={`${detail.areaName}の地点・1kmメッシュ地図`}
-      >
-        <TileLayer
-          url={GEO_BASEMAP.url}
-          attribution={GEO_BASEMAP.attribution}
-        />
-        <GeoJSON
-          key={`${detail.slug}-${detail.areaCode}-${view}`}
-          data={features}
-          style={(feature) => {
-            const change = feature?.properties?.change;
-            const fillColor =
-              view === 'overlap' && !isLand
-                ? feature?.properties?.included
-                  ? GEO_MAP_COLORS.spatialInclusion.included
-                  : GEO_MAP_COLORS.spatialInclusion.excluded
-                : typeof change !== 'number'
-                  ? GEO_MAP_COLORS.populationChange.missing
-                  : change >= 0
-                    ? GEO_MAP_COLORS.populationChange.growing
-                    : change >= -15
-                      ? GEO_MAP_COLORS.populationChange.mildDecline
-                      : change >= -30
-                        ? GEO_MAP_COLORS.populationChange.moderateDecline
-                        : GEO_MAP_COLORS.populationChange.severeDecline;
-            return {
-              color: GEO_MAP_COLORS.outline,
-              weight: 0.3,
-              fillColor,
-              fillOpacity: isLand && view === 'overlap' ? 0.25 : 0.7,
-            };
-          }}
-          onEachFeature={(feature, layer) => {
-            const p = feature.properties;
-            const node = document.createElement('span');
-            node.textContent = `メッシュ ${String(p?.id)}｜2020年 ${Number(p?.p2020).toLocaleString('ja-JP')}人 → 2050年 ${Number(p?.p2050).toLocaleString('ja-JP')}人｜人口変化 ${typeof p?.change === 'number' ? p.change.toFixed(1) + '%' : '算出不可'}${!isLand ? (p?.included ? '｜今回の浸水包含判定：内' : '｜今回の浸水包含判定：外（安全を意味しません）') : ''}`;
-            layer.bindTooltip(node, { sticky: true });
-            layer.bindPopup(node.cloneNode(true) as HTMLElement);
-          }}
-        />
-        {detail.slug === 'population-land-price' && view === 'overlap'
-          ? detail.landPricePoints.map((point, index) => {
-              const category = landPointCategory(detail, index, byId);
-              const id = detail.pointMeshIds[index];
-              const mesh = id ? byId.get(id) : undefined;
-              return (
-                <CircleMarker
-                  key={point[0]}
-                  center={[point[2] / 1e6, point[1] / 1e6]}
-                  radius={5}
-                  pathOptions={{
-                    color: GEO_MAP_COLORS.outline,
-                    weight: 1,
-                    fillColor: category.color,
-                    fillOpacity: 1,
-                  }}
-                >
-                  <Tooltip>
-                    <span>
-                      {point[0]}：{category.label}
-                      <br />
-                      {point[3].toLocaleString('ja-JP')}円/㎡・前年比
-                      {point[4] ?? '不明'}%<br />
-                      メッシュ {id ?? '未接続'}
-                      {mesh
-                        ? `：${Math.round(mesh[5])}人 → ${Math.round(mesh[6])}人`
-                        : ''}
-                    </span>
-                  </Tooltip>
-                  <Popup>
-                    <span>
-                      {point[0]}：{category.label}
-                      <br />
-                      {point[3].toLocaleString('ja-JP')}円/㎡・前年比
-                      {point[4] ?? '不明'}%<br />
-                      メッシュ {id ?? '未接続'}
-                      {mesh
-                        ? `：2020年 ${Math.round(mesh[5])}人 → 2050年 ${Math.round(mesh[6])}人`
-                        : ''}
-                    </span>
-                  </Popup>
-                </CircleMarker>
-              );
-            })
-          : null}
-        <Fit bounds={bounds} center={center} extent={extent} />
-      </MapContainer>
-    </div>
+      }
+    >
+      <GeoJSON
+        key={`${detail.slug}-${detail.areaCode}-${view}`}
+        data={features}
+        style={(feature) => {
+          const change = feature?.properties?.change;
+          const fillColor =
+            view === 'overlap' && !isLand
+              ? feature?.properties?.included
+                ? GEO_MAP_COLORS.spatialInclusion.included
+                : GEO_MAP_COLORS.spatialInclusion.excluded
+              : typeof change !== 'number'
+                ? GEO_MAP_COLORS.populationChange.missing
+                : change >= 0
+                  ? GEO_MAP_COLORS.populationChange.growing
+                  : change >= -15
+                    ? GEO_MAP_COLORS.populationChange.mildDecline
+                    : change >= -30
+                      ? GEO_MAP_COLORS.populationChange.moderateDecline
+                      : GEO_MAP_COLORS.populationChange.severeDecline;
+          return {
+            color: GEO_MAP_COLORS.outline,
+            weight: 0.3,
+            fillColor,
+            fillOpacity: isLand && view === 'overlap' ? 0.25 : 0.7,
+          };
+        }}
+        onEachFeature={(feature, layer) => {
+          const p = feature.properties;
+          const node = document.createElement('span');
+          node.textContent = `メッシュ ${String(p?.id)}｜2020年 ${Number(p?.p2020).toLocaleString('ja-JP')}人 → 2050年 ${Number(p?.p2050).toLocaleString('ja-JP')}人｜人口変化 ${typeof p?.change === 'number' ? p.change.toFixed(1) + '%' : '算出不可'}${!isLand ? (p?.included ? '｜今回の浸水包含判定：内' : '｜今回の浸水包含判定：外（安全を意味しません）') : ''}`;
+          layer.bindTooltip(node, { sticky: true });
+          layer.bindPopup(node.cloneNode(true) as HTMLElement);
+        }}
+      />
+      {detail.slug === 'population-land-price' && view === 'overlap'
+        ? detail.landPricePoints.map((point, index) => {
+            const category = landPointCategory(detail, index, byId);
+            const id = detail.pointMeshIds[index];
+            const mesh = id ? byId.get(id) : undefined;
+            return (
+              <CircleMarker
+                key={point[0]}
+                center={[point[2] / 1e6, point[1] / 1e6]}
+                radius={5}
+                pathOptions={{
+                  color: GEO_MAP_COLORS.outline,
+                  weight: 1,
+                  fillColor: category.color,
+                  fillOpacity: 1,
+                }}
+              >
+                <Tooltip>
+                  <span>
+                    {point[0]}：{category.label}
+                    <br />
+                    {point[3].toLocaleString('ja-JP')}円/㎡・前年比
+                    {point[4] ?? '不明'}%<br />
+                    メッシュ {id ?? '未接続'}
+                    {mesh
+                      ? `：${Math.round(mesh[5])}人 → ${Math.round(mesh[6])}人`
+                      : ''}
+                  </span>
+                </Tooltip>
+                <Popup>
+                  <span>
+                    {point[0]}：{category.label}
+                    <br />
+                    {point[3].toLocaleString('ja-JP')}円/㎡・前年比
+                    {point[4] ?? '不明'}%<br />
+                    メッシュ {id ?? '未接続'}
+                    {mesh
+                      ? `：2020年 ${Math.round(mesh[5])}人 → 2050年 ${Math.round(mesh[6])}人`
+                      : ''}
+                  </span>
+                </Popup>
+              </CircleMarker>
+            );
+          })
+        : null}
+    </LeafletMapFrame>
   );
 }

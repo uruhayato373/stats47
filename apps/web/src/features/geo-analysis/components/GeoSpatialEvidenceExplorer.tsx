@@ -23,6 +23,8 @@ import {
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
+import { ChartLegend } from '@/components/charts/ChartLegend';
+import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
@@ -34,7 +36,6 @@ import {
 
 
 import { fetchGeoDetailAction } from '../actions';
-import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '../lib/geo-basemap';
 import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
@@ -339,23 +340,14 @@ function GeoSpatialEvidenceExplorerState({
                   : config.overlapLegend}
             </p>
             {publicFacility && stage === 'overlap' ? (
-              <ul
-                aria-label="距離帯の凡例"
-                className="mt-2 flex flex-wrap gap-3 text-xs"
-              >
-                {PUBLIC_FACILITY_BAND_LABELS.map((label, band) => (
-                  <li key={label} className="flex items-center gap-1">
-                    <span
-                      aria-hidden="true"
-                      className="inline-block h-3 w-3"
-                      style={{
-                        backgroundColor: PUBLIC_FACILITY_BAND_COLORS[band],
-                      }}
-                    />
-                    {label}
-                  </li>
-                ))}
-              </ul>
+              <ChartLegend
+                label="距離帯の凡例"
+                className="mt-2 gap-x-3 text-xs"
+                items={PUBLIC_FACILITY_BAND_LABELS.map((label, band) => ({
+                  label,
+                  color: PUBLIC_FACILITY_BAND_COLORS[band],
+                }))}
+              />
             ) : null}
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
               {config.mapLimit}{' '}

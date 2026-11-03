@@ -44,6 +44,7 @@ import {
   lintScatterParity,
   lintScatterQuality,
   lintTileGridQuality,
+  lintDarkPair,
 } from '../lib/svg-lint.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -173,13 +174,17 @@ function auditArticle(slug) {
         ],
       });
     }
-    for (const f of svgFiles.filter((name) => !/-(?:mobile|ig)\.svg$/i.test(name))) {
+    for (const f of svgFiles.filter((name) => !/-(?:mobile|ig|dark)\.svg$/i.test(name))) {
       const desktopSvg = fs.readFileSync(path.join(dataDir, f), 'utf8');
       const mobileName = f.replace(/\.svg$/i, '-mobile.svg');
       const mobileSvg = svgFiles.includes(mobileName)
         ? fs.readFileSync(path.join(dataDir, mobileName), 'utf8')
         : null;
-      const pair = lintResponsiveBarPair(f, desktopSvg, mobileSvg);
+      const darkName = f.replace(/\.svg$/i, '-dark.svg');
+      const darkSvg = svgFiles.includes(darkName) ? fs.readFileSync(path.join(dataDir, darkName), 'utf8') : null;
+      const responsive = lintResponsiveBarPair(f, desktopSvg, mobileSvg);
+      const dark = lintDarkPair(f, desktopSvg, darkSvg);
+      const pair = { errors: [...responsive.errors, ...dark.errors], warnings: responsive.warnings };
       errors += pair.errors.length;
       warnings += pair.warnings.length;
       if (pair.errors.length || pair.warnings.length) {

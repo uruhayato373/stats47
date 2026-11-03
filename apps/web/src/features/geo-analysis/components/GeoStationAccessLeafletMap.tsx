@@ -1,40 +1,22 @@
 'use client';
 
-import 'leaflet/dist/leaflet.css';
+import { useMemo } from 'react';
 
-import { useEffect, useMemo, useState } from 'react';
+import { CircleMarker, GeoJSON, Popup, Tooltip } from 'react-leaflet';
 
-import {
-  CircleMarker,
-  GeoJSON,
-  MapContainer,
-  Popup,
-  TileLayer,
-  Tooltip,
-  useMap,
-} from 'react-leaflet';
+import { LeafletMapFrame } from '@/components/charts/LeafletMapFrame';
 
 import { buildGeoStationAccessMapModel } from '../lib/build-geo-station-access-map-model';
-import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
-import { GEO_BASEMAP } from '../lib/geo-basemap';
 import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 import type { GeoStationAccessPrefDetail } from '@stats47/gis';
 import type { Feature, Geometry } from 'geojson';
-import type { LatLngBoundsExpression, PathOptions } from 'leaflet';
+import type { PathOptions } from 'leaflet';
 
 interface Props {
   detail: GeoStationAccessPrefDetail;
   view: Exclude<GeoStationAccessView, 'audit'>;
-}
-
-function FitBounds({ bounds }: { bounds: LatLngBoundsExpression }) {
-  const map = useMap();
-  useEffect(() => {
-    map.fitBounds(bounds, { padding: [16, 16], maxZoom: 11 });
-  }, [bounds, map]);
-  return null;
 }
 
 function populationColor(changeRate: number | null): string {
@@ -61,7 +43,6 @@ function escapeHtml(value: string): string {
 
 /** 県内1kmメッシュを人口変化または駅800m圏で切り替えて表示する。 */
 export function GeoStationAccessLeafletMap({ detail, view }: Props) {
-  const renderer = useState(() => createGeoCanvasRenderer())[0];
   const model = useMemo(
     () =>
       buildGeoStationAccessMapModel(
@@ -94,21 +75,11 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
   };
 
   return (
-    <MapContainer
+    <LeafletMapFrame
       key={detail.areaCode}
-      renderer={renderer}
-      preferCanvas
-      center={[36.5, 137.5]}
-      zoom={6}
-      // Tabs can unmount the map immediately after zoom; do not leave a zoom-end timer.
-      zoomAnimation={false}
-      minZoom={GEO_BASEMAP.minZoom}
-      maxZoom={14}
-      scrollWheelZoom={false}
-      className="isolate h-[480px] overflow-hidden rounded-card lg:h-[620px]"
-      aria-label={`${detail.areaName}の1kmメッシュ分析地図`}
+      ariaLabel={`${detail.areaName}の1kmメッシュ分析地図`}
+      bounds={model.bounds}
     >
-      <TileLayer url={GEO_BASEMAP.url} attribution={GEO_BASEMAP.attribution} />
       <GeoJSON
         key={`${detail.areaCode}-${view}`}
         data={model.featureCollection}
@@ -142,7 +113,6 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
             </CircleMarker>
           ))
         : null}
-      <FitBounds bounds={model.bounds} />
-    </MapContainer>
+    </LeafletMapFrame>
   );
 }

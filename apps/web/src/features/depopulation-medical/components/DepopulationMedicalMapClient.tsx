@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 import { to2DigitPrefCode } from "@stats47/area";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
+import { ChartLegend } from "@/components/charts/ChartLegend";
+
 import { LEAFLET_MAP_COLORS } from "@/features/map-visualization/client";
 import { useThemePrefecture } from "@/features/theme-dashboard";
 
@@ -118,14 +120,14 @@ export function DepopulationMedicalMapClient({ summary }: Props) {
         ) : (
           <>
             <PrefectureOverlayMap detail={prefDetail} />
-            <p className="text-xs text-muted-foreground">
-              <span style={{ color: OVERLAY_COLORS.insideArea }}>●</span>{" "}
-              過疎地域内の医療機関 /{" "}
-              <span style={{ color: OVERLAY_COLORS.outsideArea }}>●</span>{" "}
-              過疎地域外 /{" "}
-              <span style={{ color: OVERLAY_COLORS.areaPolygon }}>■</span>{" "}
-              過疎地域
-            </p>
+            <ChartLegend
+              className="text-xs"
+              items={[
+                { label: "過疎地域内の医療機関", color: OVERLAY_COLORS.insideArea },
+                { label: "過疎地域外", color: OVERLAY_COLORS.outsideArea },
+                { label: "過疎地域", color: OVERLAY_COLORS.areaPolygon },
+              ]}
+            />
           </>
         )
       ) : null}

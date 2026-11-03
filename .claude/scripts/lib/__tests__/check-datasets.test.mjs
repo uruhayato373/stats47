@@ -525,7 +525,6 @@ test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わ�
   const blocked = Object.values(listings).find((l) => l.status === "blocked-design");
   const cases = [
     [live, "publicationStage", undefined], // 販売中なのに工程が無い
-    [live, "publicationStage", "verified"], // 販売中なのに公開前の工程
     [live, "asin", null], // 販売中なのに ASIN が無い
     [live, "status", "draft"], // 販売中なのに売らない判断
     [withdrawn, "kdpStatus", "live"], // 出版停止を受理したのに販売中
@@ -546,6 +545,19 @@ test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わ�
     assert.match(run().join("\n"), /kdp\.listings: .* が schema に合わない/, `${target.id} ${field}=${String(value)}`);
     if (before === undefined) delete target[field];
     else target[field] = before;
+  }
+  // 販売中なのに公開前の工程は、販売中の本の修正 (kdp-promote --mode update) の証拠があるときだけ許す (2026-11-03 20fb26cf0)
+  {
+    const beforeStage = live.publicationStage;
+    const beforeEvidence = live.publicationStageEvidence;
+    live.publicationStage = "verified";
+    live.publicationStageEvidence = { ...(beforeEvidence ?? {}), prepared: { ...(beforeEvidence?.prepared ?? {}), mode: "create" } };
+    assert.match(run().join("\n"), /kdp\.listings: .* が schema に合わない/, `${live.id} publicationStage=verified (修正の証拠なし)`);
+    live.publicationStageEvidence = { ...(beforeEvidence ?? {}), prepared: { ...(beforeEvidence?.prepared ?? {}), mode: "update" } };
+    assert.deepEqual(run(), [], `${live.id} publicationStage=verified + 修正の証拠は通る`);
+    live.publicationStage = beforeStage;
+    if (beforeEvidence === undefined) delete live.publicationStageEvidence;
+    else live.publicationStageEvidence = beforeEvidence;
   }
   assert.deepEqual(run(), [], "戻すと通る (赤は書き換えた値が理由)");
 });

@@ -17,18 +17,11 @@ import {
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { RailCard, RailNavRow } from '@/components/surface';
 
-import {
-  InContentAdSlot,
-  isLandscapeBanner,
-  NativeAffiliateRow,
-} from '@/features/ads';
-import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
-import {
-  resolveAffiliateBanners,
-  resolveAffiliateBannersByVertical,
-} from '@/features/ads/server';
+import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 
-import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER, HUB_INCONTENT, RAIL_RECT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
@@ -152,27 +145,27 @@ export async function ThemePageLayout({
     })
   );
 
-  // D Phase 3: ネイティブアフィリエイト枠 (テーマの関連サービス)
-  // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
-  // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
-  // ★ 2026-08-06: 縦長 (スカイスクレイパー) は本文枠に出さない (isLandscapeBanner で除外。
-  //   受け皿は sidebar-sticky スロット)。除外後も3件が埋まる余裕を持たせるためlimitは8を維持する。
-  let nativeBanners =
-    theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
-      ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 8).catch(
-          () => []
-        )
-      : [];
-  if (nativeBanners.length === 0) {
-    const vertical = THEME_AFFILIATE_MAP[theme.themeKey];
-    if (vertical) {
-      nativeBanners = await resolveAffiliateBannersByVertical(
-        vertical,
-        8
-      ).catch(() => []);
-    }
-  }
-  nativeBanners = nativeBanners.filter(isLandscapeBanner);
+  // 本文の広告の段 (PR の列)。2026-11-03 (オーナー決定・収益化戦略 §3.2) からテーマごとの文脈の案件をやめ、
+  // 共通の案件 (対象者が広く気軽に始められる商品) を横 3 枠で出す。
+  // 非商用データの節を埋め込むテーマは広告・アフィリエイトを出さない (ad-free-paths.ts。AdSense の script も止まる)
+  const isAdFree = AD_FREE_THEME_KEYS.includes(theme.themeKey);
+  const nativeBanners = isAdFree
+    ? []
+    : (await resolveGenericAffiliateBanners(5).catch(() => [])).filter(isLandscapeBanner);
+  // 広告の段 (2026-11-03 オーナー決定): 1 章目の後・3 章目の後・ページの最後の 3 段。幅に入る数だけ左から出す
+  // (モバイル 1 枠・本文 608px 以上 2 枠・916px 以上 3 枠)。モバイルで上から AdSense → PR → AdSense になるよう先頭の種類を変える。
+  // AdSense は段ごとに別のユニット (同じユニットを 1 ページで重ねない)。テーマには右レールが無いので RAIL_RECT も使う
+  const [chapterRow1, chapterRow2, endRow] = isAdFree
+    ? [[], [], []]
+    : composeAdRows(
+        [
+          ['adsense', 'affiliate', 'adsense'],
+          ['affiliate', 'adsense', 'affiliate'],
+          ['adsense', 'affiliate', 'affiliate'],
+        ],
+        [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER, RAIL_RECT],
+        nativeBanners,
+      );
   const providerPrefecture = areaContext ?? initialPrefecture;
 
   return (
@@ -246,6 +239,7 @@ export async function ThemePageLayout({
             indicatorDataMap={data.indicatorDataMap}
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}
+            chapterAdRows={[chapterRow1, chapterRow2]}
           />
 
           {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
@@ -301,9 +295,6 @@ export async function ThemePageLayout({
           )}
 
 
-          {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-          <InContentAdSlot slot={HUB_INCONTENT} />
-
           <Suspense fallback={null}>
             <ThemeGeoInsightsSection
               themeKey={theme.themeKey}
@@ -320,12 +311,6 @@ export async function ThemePageLayout({
             <ThemeCorrelatedMetrics themeKey={theme.themeKey} />
           </Suspense>
 
-          {/*
-        広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
-        全テーマページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
-      */}
-          <InContentAdSlot slot={THEMES_CONTENT} />
-
           {/* このテーマを読み解く記事はページの最後 (ダッシュボードを読み終えた位置) に置く (2026-10-29) */}
           {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
             <div className="mt-8">
@@ -339,17 +324,9 @@ export async function ThemePageLayout({
             </div>
           )}
 
-          {/* ネイティブアフィリエイト枠。読了位置では広告を二段に分けず、
-          desktop 3件 / mobile 最優先1件の単一ブロックにする。 */}
-          {nativeBanners.length > 0 && (
-            <div className="mt-8">
-              <NativeAffiliateRow
-                banners={nativeBanners}
-                position="theme-native"
-                trackingCategory={`theme-${theme.themeKey}`}
-                variant="three-up"
-              />
-            </div>
+          {/* ページの最後の広告の段 (このテーマを読み解く記事の後) */}
+          {endRow.length > 0 && (
+            <AdRow cells={endRow} position="theme-row-end" trackingCategory={`theme-${theme.themeKey}`} />
           )}
 
         </PanelGrid>

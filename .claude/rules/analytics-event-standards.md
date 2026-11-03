@@ -112,6 +112,7 @@ npm run google-admin:audit-api
 | `ui_interaction` | `trackUiInteraction` | `ui_action` / `ui_target`（値は `UI_ACTIONS`・`UI_TARGETS` の固定語彙） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 全ページ |
 | `read_progress` | `trackReadProgress` | `progress`（25・50・75・100） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 全ページ |
 | `search_result_click` | `trackSearchResultClick` | `result_type` / `result_position` | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 検索 |
+| `product_impression` / `product_click` | `trackProductImpression` / `trackProductClick` | `product_destination` / `product_id`（`link_position` は登録済み） | ✅登録済 (2026-11-03 GA4 管理画面で作成し、カスタム定義の一覧で 2 件を読み戻して確認。`audit-api` の突合も confirmed-registered)。キーイベント `product_click` も 2026-11-03 に Admin API (`applyCreateKeyEvent`、ローカルの鍵・オーナーの指示) で作成し、読み戻しで確認 (`keyEvents/16259309748`) | 商品送客 (`PRODUCT-REFERRAL-MEASURE-01`) |
 | `contact_click` | `trackContactClick` | `link_position` は登録済み（key event 候補） | 要否× | 行政資料 |
 | ユーザー単位 `declared_purpose` | `setDeclaredPurpose` | `declared_purpose`（USER scope。値は CSV 後アンケートの固定語彙） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 行政資料 |
 | `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_slug` / `geography`（`analysis_id` は slug と重複、`data_version` は分析価値が低いので登録しない） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
@@ -165,6 +166,23 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > (`product_kindle` / `product_coconala`) と当該ページ path の組み合わせで商品別に集計する。
 > 2026-10-07 にランキング右レール「関連記事」→その記事を収録したKindle詳細を `ranking_product` として追加した
 > (値追加のみ)。同日から Kindle の販売先リンクには Amazon アソシエイトのタグが付く。
+
+> **商品送客 (2026-11-03・未デプロイ)**: 商品案内の表示を `product_impression`、販売先 (Amazon / note / ココナラ) へ
+> 出ていくクリックを `product_click` で送る。パラメータは `product_destination` (販売先)・`product_id` (販売先での ID。
+> Amazon は ASIN、note は記事・マガジンのキー。外部 URL から `productReferralOf` が取り出し、形が合わなければ送らない)・
+> `link_position` (置き場所: `blog_product` / `ranking_product` / `ranking_csv_product` / `product_catalog` /
+> `product_companion` / `ranking-footer`。商品詳細から出たクリックは、詳細へ来る前の案内の置き場所を同じタブの
+> sessionStorage から引き継ぎ、無ければ `product_detail`)。`product_click` だけをキーイベントにする
+> (`AUTHORED_KEY_EVENTS`。サイト内の商品詳細への移動は `nav_click` のまま数えない)。`cta_click` の
+> `product_kindle` / `product_coconala` は 2026-10-07 からの時系列を切らないため並行して送る (同じクリックが 2 イベントに
+> 出るので足し合わせない)。商品詳細の販売先ボタン自体の表示は送らない (置き場所ごとの「表示 → クリック」の分母を
+> 案内の表示に揃えるため)。注文は GA4 では取らず、KDP は販売台帳 (`products:sales`)、Amazon アソシエイト経由の注文は
+> アソシエイトのレポートで読む (アトリビューション分析はしない)。
+
+> **カスタムチャネルグループ (2026-11-03)**: 「stats47 (自社商品を分ける)」(`channelGroups/16259405349`) を Admin API v1alpha で作った。
+> 既定のチャネルの前に `Own products` (流入元が kindle か note、かつメディアが ebook か referral) を置き、残りは既定のチャネルグループの写し。
+> Kindle の UTM (`utm_medium=ebook`) は既定では Unassigned になるので、自社商品からの戻りを読むときはこのグループを使う。
+> note.com の自然な参照 (source=note.com) は入らない。既定のチャネルグループ (primary) は変えていない。
 
 > **Amazon 関連書籍 (2026-10-07)**: ブログ記事末の一般書籍推薦は `affiliate_click` の
 > `link_position=related-books`、`ad_id=amazon-<ASIN>` で送る。Kindle 自社本がある記事には出さない。
@@ -342,7 +360,7 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > `unlabeled` だったので、部品側の送信も導線名も持たない上位の部品に導線名を付けた。ランキングの順位表の県名 (`RankingDataTable`) =
 > `ranking_table`、「相関が高い指標」(`CorrelationSectionClient`) = `ranking_correlation`、「同カテゴリの関連ランキング」(`RelatedRankingsGrid`) =
 > `ranking_related`、県データブックの指標 (`RankedKpiGrid` / `GenderPairedKpiGrid`) = `area_databook`、カテゴリ・調査の全件一覧
-> (`CategoryRankingTable` / `CategoryTopicGroups`) = `category_ranking_list`、Geo の出典データ一覧 (`GeoSourceNavigationList`) = `geo_source_list`。
+> (`CategoryRankingTable`) = `category_ranking_list`、Geo の出典データ一覧 (`GeoSourceNavigationList`) = `geo_source_list`。
 > 送信は共通のクリック監視だけが行い (部品側の `trackNavClick` は足していない)、属性は `navSurfaceProps()` (`NavSurface` で型を縛る) で付ける。
 > 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。**デプロイ日を境に `unlabeled` の件数が減り、上の値が増える**
 > (クリックの総数は変わらない)。デプロイ前後の `unlabeled` を単純比較しない。

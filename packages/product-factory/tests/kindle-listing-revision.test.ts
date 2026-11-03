@@ -73,4 +73,18 @@ describe("KDP revision promotion", () => {
       expect.objectContaining({ asin: "B000000001", draftId: "A000000001", publicationStage: "prepared" }),
     );
   });
+
+  it("in-place update of a new edition keeps the predecessor disclaimer at the top of the description", () => {
+    const edition = {
+      ...live,
+      title: "新題",
+      subtitle: "新副題",
+      replacesAsin: "B000000009",
+      previousEditions: [{ asin: "B000000009", title: "旧版の題", author: "stats47" }],
+    };
+    const out = prepareUpdate(edition, { ...candidate, title: "新題", subtitle: "新副題", description: "本文の説明" });
+    expect(out.description).toBe("Previously published as 旧版の題 by stats47.\n\n本文の説明");
+    const again = prepareUpdate(edition, { ...candidate, title: "新題", subtitle: "新副題", description: out.description });
+    expect(again.description).toBe(out.description);
+  });
 });

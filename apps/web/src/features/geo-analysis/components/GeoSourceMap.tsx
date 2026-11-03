@@ -19,12 +19,12 @@ import {
 } from 'react-leaflet';
 
 import { ChartLegend } from '@/components/charts/ChartLegend';
-
-import { fitGeoSourceBounds } from '../lib/fit-geo-source-bounds';
 import {
   GEO_BASEMAP,
   GEO_BASEMAP_SHORELINE_ATTRIBUTION,
-} from '../lib/geo-basemap';
+} from '@/components/charts/leaflet-basemap';
+
+import { fitGeoSourceBounds } from '../lib/fit-geo-source-bounds';
 import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import {
   formatGeoSourceProperty,

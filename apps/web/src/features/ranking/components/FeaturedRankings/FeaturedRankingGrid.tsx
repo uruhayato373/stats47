@@ -16,12 +16,11 @@ export interface FeaturedRankingGridItem {
 
 interface FeaturedRankingGridProps {
   items: FeaturedRankingGridItem[];
-  compact?: boolean;
   trackHomeEvents?: boolean;
 }
 
 /**
- * home 注目ランキング grid。
+ * home・ランキング一覧の注目ランキング (横スクロールのカルーセル)。
  *
  * home-featured-v1のA/Bは終了済み。現在は全カードを地理地図＋1位情報の
  * `FeaturedRankingCard` 1形式でSSR描画する。
@@ -32,7 +31,6 @@ interface FeaturedRankingGridProps {
  */
 export function FeaturedRankingGrid({
   items,
-  compact = false,
   trackHomeEvents = true,
 }: FeaturedRankingGridProps) {
   const cards = items.map((item, idx) => {
@@ -61,17 +59,9 @@ export function FeaturedRankingGrid({
     );
   });
 
-  if (compact) {
-    return (
-      <HorizontalCardCarousel ariaLabel="注目ランキング">
-        {cards}
-      </HorizontalCardCarousel>
-    );
-  }
-
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <HorizontalCardCarousel ariaLabel="注目ランキング">
       {cards}
-    </div>
+    </HorizontalCardCarousel>
   );
 }

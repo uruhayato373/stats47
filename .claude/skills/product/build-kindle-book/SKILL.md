@@ -89,6 +89,25 @@ npm run test:run --workspace=@stats47/product-factory              # kindle 構�
 npm run products:kindle:validate --workspace=@stats47/product-factory
 ```
 
+## 既刊の中身の点検 (KINDLE-QUALITY-LOOP-01)
+
+トークンを使う段ほど対象を絞る。1 段目の印が付いた本・章だけを 2・3 段目へ回す。
+
+```
+npm run kindle:quality -- --write                                    # 1 段目: 機械の検査 → data/products/kindle-quality.json
+npm run admin                                                        # 2 段目の前に管理画面を起動 (/content/kindle/<id> を撮る)
+node .claude/scripts/kdp/capture-figures.mjs K-S1-07 K-S1-02         # 2 段目: 図を 600px 幅で 1 枚ずつ撮る → .local/kindle-quality/<id>/manifest.json
+npx tsx .claude/scripts/kdp/notebooklm-review.ts K-S1-07 K-S1-02     # 3 段目: NotebookLM に本文を入れ、決めた問いを 1 冊 1 回で聞く
+node .claude/scripts/kdp/capture-pages.mjs K-S1-02 --version <版>    # 改訂の確認: 本の CSS のまま 1 段 = 1 ページに分け (600×800 / 390×700)、全県表の見出しから注記までの全ページを撮り、見出し・つづきの小見出しの取り残しを数える
+```
+
+Amazon の変換そのものを見るには、Send to Kindle (Web) で EPUB を自分のライブラリへ送る (パーソナル・ドキュメント)。
+ただし Kindle for Web はパーソナル・ドキュメントを表示しないので、ブラウザでは撮れない (2026-11-03 確認)。
+見るのは Kindle アプリか端末 (人)。
+
+2 段目の評価は manifest の `reviewed: false` の図だけを小さいモデル (Haiku) に渡し、結果を
+`data/products/kindle-figure-reviews.json` に sha256 で記録する (同じ図を二度評価しない)。
+
 ## 関連
 
 - 規約: `.claude/rules/coconala-product-standards.md §8`

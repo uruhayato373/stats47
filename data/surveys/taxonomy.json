@@ -271,10 +271,10 @@
       "coveragePct": 100,
       "unresolved": []
     },
-    "charts": 85,
-    "applicableCharts": 61,
+    "charts": 103,
+    "applicableCharts": 79,
     "byStatus": {
-      "resolved": 61,
+      "resolved": 79,
       "unresolved": 0,
       "not-applicable": 24,
       "missing-lineage": 0

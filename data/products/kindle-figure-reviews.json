@@ -1,0 +1,569 @@
+{
+  "schemaVersion": 1,
+  "_comment": "既刊 Kindle の図の評価 (KINDLE-QUALITY-LOOP-01 の 2 段目)。sha256 は 600px 幅で撮った図の PNG。同じ sha256 の図は二度評価しない。エージェントの指摘は候補で、直す前に人が図と本文を見て確かめる。",
+  "reviews": [
+    {
+      "sha256": "b24dff4a2f3c53a783c27f8cdcb2294dfa1d4738cab940f7f3c9576a7a39b6d6",
+      "bookId": "K-S1-07",
+      "figure": "chap003-01.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "mismatch",
+      "mismatchDetail": "『濃く塗られた6県』のうち北海道・福岡・沖縄は図で淡く、千葉(4,347,580人泊)と濃淡がほぼ同じ",
+      "issues": [
+        "タイル内の数値が小さく桁が長い",
+        "濃淡は線形で中位以下が同じ色に見える",
+        "凡例の中間値の桁が長く読みにくい"
+      ],
+      "fix": "タイルの数値を万人泊に丸めて文字を大きくする"
+    },
+    {
+      "sha256": "a3debc3ea3498858e5f5048e5f7ad2f655deed133925873ff2c556c8decf0adc",
+      "bookId": "K-S1-07",
+      "figure": "chap004-02.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "unit"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "図に『台湾』『シェア』の表示がなく題も一般的",
+        "年（2024年）が図に書かれていない",
+        "0.1%の淡色タイルが背景に溶ける"
+      ],
+      "fix": "題を『台湾人宿泊者の都道府県別シェア（2024年）』に"
+    },
+    {
+      "sha256": "36d8c1e44f9d9f936dd506fc0a9ebac6f016a9ba7f8f80ac981da494830193f6",
+      "bookId": "K-S1-07",
+      "figure": "chap004-03.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "単位（人泊か%か）と年が図に無い",
+        "バーの長さが総数か不明で比較の基準がない",
+        "凡例の国名が小さく色の区別が難しい"
+      ],
+      "fix": "題に『2024年・延べ宿泊者数（人泊）』を入れる"
+    },
+    {
+      "sha256": "d5aa0cd34641df9a42999721570277a25f8ead31db07320f938af50ff4bd072c",
+      "bookId": "K-S1-07",
+      "figure": "chap004-04.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "年（いつの値か）が図に無い",
+        "717万人泊と2,760人泊で単位が混在",
+        "下位のバーが点になり比べられない"
+      ],
+      "fix": "単位を人泊に統一し、題に2024年を入れる"
+    },
+    {
+      "sha256": "72cc2a511fd09e397ffd784d731f00281528116fc3df01a64007d32438a1ed6b",
+      "bookId": "K-S1-07",
+      "figure": "chap005-05.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "『R2 G7102』など表の番号が読者に不要",
+        "『2024年度表示』と本文の『2024年』が揃わない",
+        "上下各5県だけで全国の中の位置が分からない"
+      ],
+      "fix": "『2024年度表示・R2 G7102』を『2024年』に直す"
+    },
+    {
+      "sha256": "39ce8641683036761eed38dd36631bf783cd288f0530c52f8bb13842dec7f03a",
+      "bookId": "K-S1-07",
+      "figure": "chap005-06.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "タイル内の%が小さい",
+        "左下に黒い丸の記号が画面に重なる",
+        "『R2 G7102』など番号が読者に不要"
+      ],
+      "fix": "タイル内の構成比（%）を大きくする"
+    },
+    {
+      "sha256": "bc9f6d58eaac201de2b4f901d1440f54824f67fa1e7352de82912345b1515791",
+      "bookId": "K-S1-07",
+      "figure": "chap005-07.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "y軸タイトルが目盛りの数字に重なる",
+        "目盛りが9桁で読みにくい",
+        "右端に点が切れて残る"
+      ],
+      "fix": "y軸を百万人泊単位にして目盛りを短くする"
+    },
+    {
+      "sha256": "751f456627071816197fb22d57c4afe58262180c0cda6e45621905a737b5fed1",
+      "bookId": "K-S1-07",
+      "figure": "chap006-08.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "mismatch",
+      "mismatchDetail": "本文は『3つの断層』とするが、図で見える断層は2011年と2020年の2か所",
+      "issues": [
+        "震災・コロナ禍の注記が小さい",
+        "全国の数字で、前の外国人の図と取り違えやすい",
+        "3つ目の断層が図の注記に無い"
+      ],
+      "fix": "3つ目の断層を注記で示すか、本文を2か所に直す"
+    },
+    {
+      "sha256": "caf24e18a5ce48bc9bd452042d2f65cb52b8211dc0ce3d8c5fa0aa242aa9726e",
+      "bookId": "K-S1-07",
+      "figure": "chap006-09.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "47県の合計値が図に無く38%を検算できない",
+        "数字の桁が長く、下位の差が読み取りにくい",
+        "題の『延べ宿泊者数』が外国人の図と区別しにくい"
+      ],
+      "fix": "47県の合計値を図の下に入れ、38%の根拠を示す"
+    },
+    {
+      "sha256": "a93683784e53f3af4cd5c51f0f2dbd02f03629a4be06d59de7d169c3a288c162",
+      "bookId": "K-S1-07",
+      "figure": "chap006-10.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "タイル内の数値が小さく桁が長い",
+        "左下に黒い丸の記号が画面に重なる",
+        "中位以下の県の濃淡差が小さい"
+      ],
+      "fix": "タイル内の人泊数を万人泊に丸めて大きくする"
+    },
+    {
+      "sha256": "c933cdb23c77d294b5aeaa29e3ad12278f3faa261a4f9e9caa3c07e8b55af422",
+      "bookId": "K-S1-07",
+      "figure": "chap006-11.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "『344万泊（△97%）』がx軸の数字に重なる",
+        "『震災』『過去最多』の注記が小さい",
+        "y軸は万人泊、前の図は人泊で単位が違う"
+      ],
+      "fix": "『344万泊』の注記をx軸と重ならない位置に移す"
+    },
+    {
+      "sha256": "c71444d6b82475e0b2047ea9d694231d87e76aeca876a1b7b50a2c44d8756901",
+      "bookId": "K-S1-07",
+      "figure": "chap007-12.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "年（2001年）が題の小さい文字にしかない",
+        "本文に年が書かれず現在の値と取り違えやすい"
+      ],
+      "fix": "本文と図の両方に『2001年』を明記する"
+    },
+    {
+      "sha256": "9ad2588e595182026db50de158b0f10a485a08bbd559e58bbb822f4c981fc059",
+      "bookId": "K-S1-07",
+      "figure": "chap007-13.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "タイル内の数値が小さい",
+        "本文に2001年が書かれず現在の値と取り違えやすい",
+        "同心円状の見え方は図の印象にとどまる"
+      ],
+      "fix": "タイル内の%を大きくし、本文にも2001年と書く"
+    },
+    {
+      "sha256": "81063119e971d4622085bbc3ee565a5aabf95c05620738ec4dd0a57f9084172a",
+      "bookId": "K-S1-07",
+      "figure": "chap007-14.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit"
+      ],
+      "textMatch": "no-mention",
+      "mismatchDetail": "本文の『この2県』が図に県名がなく特定できない",
+      "issues": [
+        "年（2001年・2024年度）が図に無い",
+        "点に県名がなく本文の2県を指せない",
+        "軸目盛りが小さく読みにくい"
+      ],
+      "fix": "2県に県名ラベルを付け、題に年を入れる"
+    },
+    {
+      "sha256": "7f66fb46ad4513bc6f8bc9c60ce546490dcd3caa994d4e3db2aa697d7a06e845",
+      "bookId": "K-S1-02",
+      "figure": "chap003-01.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "タイル内の数値が小さく桁が長い",
+        "沖縄の淡色タイルが白背景に溶ける",
+        "沖縄そばが含まれるかは図で分からない（本文のみ）"
+      ],
+      "fix": "タイル内の数値を大きくする"
+    },
+    {
+      "sha256": "dd3a2b0ca4b6368039d0324f266a35150f6522eea513cbacfa5cfec6b367c388",
+      "bookId": "K-S1-02",
+      "figure": "chap003-02.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "mismatch",
+      "mismatchDetail": "長崎（4,868円）はうどん・そばも下位（6,894g）で、『鏡のように逆転』と合わない",
+      "issues": [
+        "代替文『ラーメン外食』と図題『中華そば消費支出額』が不一致",
+        "愛媛の淡色タイルが白背景に溶ける",
+        "タイル内の数値が小さい"
+      ],
+      "fix": "図題と代替文の品目名を揃える"
+    },
+    {
+      "sha256": "531fe353169c93714437b5a12c81f9d5105a5b71711f84511262aab38e70e90a",
+      "bookId": "K-S1-02",
+      "figure": "chap003-03.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "r=0.07が図に無く本文の数字だけ",
+        "香川の外れ値で横軸が伸び、点が左に寄る",
+        "本文の『4象限に分けると：』で文が途切れる"
+      ],
+      "fix": "主要な点（香川など）に県名を付ける"
+    },
+    {
+      "sha256": "991395b388e967b2afe5b67fda35dbf3a5af31df04a840657054d81f97b88c1f",
+      "bookId": "K-S1-02",
+      "figure": "chap004-04.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "1世帯あたりか等の基準が図に無い",
+        "本文の『全国平均』が図に無く比べられない",
+        "図題は消費量、章題は購入数量"
+      ],
+      "fix": "全国平均の行を足し、本文の平均比較と揃える"
+    },
+    {
+      "sha256": "bcc8940faa6910e3e4a03fa365ac355ae509f0db7e9a3105f7656b5721655475",
+      "bookId": "K-S1-02",
+      "figure": "chap004-05.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "順位が図に無く24位以内は数えるしかない",
+        "タイル内の数値が小さい",
+        "淡色の東北と北陸の差が見分けにくい"
+      ],
+      "fix": "タイルに順位（1〜47）を併記する"
+    },
+    {
+      "sha256": "725471c8acf9d5a504bbcf1930a2e62fef913c26cb07d40aa8ef171e73349dbf",
+      "bookId": "K-S1-02",
+      "figure": "chap005-06.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "1世帯あたりか等の基準が図に無い",
+        "図題は消費量、章題は購入数量",
+        "6〜10位が図になく地図を見比べる必要がある"
+      ],
+      "fix": "6〜10位を表に足し、地図と行き来させない"
+    },
+    {
+      "sha256": "5fbaf0e3291a7bb030666224a320acee53900e7e66fff0f7a905f6dd554797ee",
+      "bookId": "K-S1-02",
+      "figure": "chap005-07.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "上位10県の順位番号が図に無い",
+        "タイル内の数値が小さい",
+        "淡色の首都圏と近郊の区別が付きにくい"
+      ],
+      "fix": "上位10県に順位番号を付ける"
+    },
+    {
+      "sha256": "9dbddaa6a1e7a293e319af2a19729131c0cbb84a8ca3db6e8f63e2faf6f11ea1",
+      "bookId": "K-S1-02",
+      "figure": "chap006-08.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "mismatch",
+      "mismatchDetail": "図は『鳥取県5,610円』『福井県5,502円』、本文は鳥取市の世帯の年間支出額と説明している",
+      "issues": [
+        "県名表記と本文の『市』の基準が食い違う",
+        "世帯・年間の基準が図に書かれていない",
+        "福井は本文で県のまま扱われ基準が揃わない"
+      ],
+      "fix": "図の県名を都市名に直し、基準を題に書く"
+    },
+    {
+      "sha256": "408daa7e59d841f57ea55af918b8a04a04d10840482ebcbbb99a03d9ef241dda",
+      "bookId": "K-S1-02",
+      "figure": "chap006-09.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "mismatch",
+      "mismatchDetail": "本文『鳥取・福井に続いて新潟（5位）』は図の3位奈良（2,865円）・4位三重（2,819円）と合わず、『日本海側に濃く』も奈良・三重が濃色で反する",
+      "issues": [
+        "47市平均（1,868円）が図に無く検算できない",
+        "タイル内の数値が小さい",
+        "沖縄の白に近いタイルが背景に溶ける"
+      ],
+      "fix": "凡例に47市平均を入れ、上位県に順位を付ける"
+    },
+    {
+      "sha256": "83f7bfac06e0750fd1f04274b125cb1effb6ef6e296a0e92d4227fe0527c6138",
+      "bookId": "K-S1-02",
+      "figure": "chap007-10.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "yes",
+      "selfContained": [],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "題が『都道府県別ランキング』で指標が分からない",
+        "数値に単位（円）も年（2024年）も無い"
+      ],
+      "fix": "題を『さば消費支出額 2024年（円）』に直す"
+    },
+    {
+      "sha256": "65c3f40d8132a35a2b7629d4b3d8d8ccfef8e495bb010196e474415b58596efb",
+      "bookId": "K-S1-02",
+      "figure": "chap007-11.png",
+      "width": 600,
+      "model": "haiku",
+      "questionSet": "v1",
+      "reviewedAt": "2026-11-03",
+      "readable": "partly",
+      "selfContained": [
+        "indicator",
+        "unit",
+        "year"
+      ],
+      "textMatch": "match",
+      "mismatchDetail": null,
+      "issues": [
+        "全国平均（876円）が図に無く検算できない",
+        "タイル内の数値が小さい",
+        "福井・富山など淡色の差が読みにくい"
+      ],
+      "fix": "凡例に全国平均（876円）を入れる"
+    }
+  ]
+}

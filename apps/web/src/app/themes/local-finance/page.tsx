@@ -8,7 +8,8 @@ import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
 
-import { InContentAdSlot } from '@/features/ads';
+import { AdRow, composeAdRows } from '@/features/ads';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import type { FinanceFlowData } from '@/features/finance-flow';
 import { loadFinanceCards, splitLocalFinanceSections } from '@/features/local-finance-dashboard';
 import { ThemePrefectureProvider } from '@/features/theme-dashboard';
@@ -109,6 +110,12 @@ export default async function LocalFinanceThemePage({
     label: section.title,
   }));
 
+  // 広告の段 (2026-11-03 オーナー決定): 旧: デスクトップだけの本文の AdSense 2 枠。PR は共通の案件
+  const [financeRow1, financeRow2] = composeAdRows(
+    [['adsense', 'affiliate'], ['affiliate', 'adsense']],
+    [HUB_INCONTENT, THEMES_CONTENT],
+    await resolveGenericAffiliateBanners(2).catch(() => []),
+  );
   return (
     <ThemePrefectureProvider
       initialAreaCode={initialPrefecture?.areaCode ?? null}
@@ -152,9 +159,9 @@ export default async function LocalFinanceThemePage({
         丸ごと抜けていた (2026-07-29 是正)。位置・スロットとも ThemePageLayout に合わせ、
         全指標セクションを挟んで 2 枠が隣接しないようにする。
       */}
-        <InContentAdSlot slot={HUB_INCONTENT} />
+        {financeRow1.length > 0 && <AdRow cells={financeRow1} position="local-finance-row-1" trackingCategory="theme-local-finance" />}
         <ThemeIndicatorCatalogSection themeKey="local-finance" />
-        <InContentAdSlot slot={THEMES_CONTENT} />
+        {financeRow2.length > 0 && <AdRow cells={financeRow2} position="local-finance-row-2" trackingCategory="theme-local-finance" />}
       </PageShell>
     </ThemePrefectureProvider>
   );

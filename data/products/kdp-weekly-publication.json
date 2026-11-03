@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T00:12:48.933Z",
+  "generatedAt": "2026-11-03T04:12:45.883Z",
   "week": "2026-W45",
   "scheduledAction": "4週実測で需要が確認できた場合だけ第2パイロットを最大1冊出版",
   "portfolio": {
@@ -87,8 +87,7 @@
         "end": "2026-09-26"
       }
     },
-    "measuredBookIds": [],
-    "missingBookIds": [
+    "measuredBookIds": [
       "K-S1-01",
       "K-S1-02",
       "K-S1-03",
@@ -102,17 +101,21 @@
       "K-S1-11",
       "K-S1-12"
     ],
+    "missingBookIds": [],
     "windowStillOpenBookIds": [],
     "positiveEvidenceBookIds": [],
-    "complete": false,
+    "ambiguousEvidenceBookIds": [
+      "K-S1-02"
+    ],
+    "complete": true,
     "hasDemandSignal": false
   },
   "approvalRequired": true,
   "status": "measure",
   "blockers": [
-    "販売数/KENP未計測: K-S1-01, K-S1-02, K-S1-03, K-S1-04, K-S1-05, K-S1-06, K-S1-07, K-S1-08, K-S1-09, K-S1-10, K-S1-11, K-S1-12"
+    "4週窓をはみ出す月次の販売があり、窓の中の需要か判定不能: K-S1-02"
   ],
-  "nextAction": "KDPレポートをproducts:salesへ証拠付きで記録する",
+  "nextAction": "需要あり・需要なしのどちらとも判定しない。日次の販売記録で窓の中を確かめるか、判定の扱いをオーナーが決める",
   "candidate": null,
   "publishCommand": null
 }

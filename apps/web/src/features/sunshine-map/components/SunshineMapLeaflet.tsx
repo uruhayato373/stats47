@@ -1,12 +1,8 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
+import { ImageOverlay } from "react-leaflet";
 
-import { ImageOverlay, MapContainer, TileLayer } from "react-leaflet";
-
-import { useThemedLeafletTile } from "@/features/map-visualization/client";
-
-import { useTheme } from "@/hooks/useTheme";
+import { LeafletMapFrame } from "@/components/charts/LeafletMapFrame";
 
 import { R2_PUBLIC_BASE_URL } from "@/config/site";
 
@@ -21,21 +17,11 @@ interface Props {
 
 /** 1km メッシュ年日照時間のラスターを ImageOverlay で表示する地図本体。 */
 export function SunshineMapLeaflet({ meta }: Props) {
-  const { theme } = useTheme();
-  const { currentTile } = useThemedLeafletTile(theme);
   const rasterUrl = `${R2_PUBLIC_URL}/${SUNSHINE_MAP_RASTER_PATH}`;
 
   return (
-    <MapContainer
-      center={[37.5, 137.5]}
-      zoom={5}
-      minZoom={4}
-      maxZoom={11}
-      scrollWheelZoom
-      className="h-[460px] lg:h-[600px] rounded-md overflow-hidden"
-    >
-      <TileLayer url={currentTile.url} attribution={currentTile.attribution} />
+    <LeafletMapFrame ariaLabel="1kmメッシュの年間日照時間の地図" bounds={meta.bounds}>
       <ImageOverlay url={rasterUrl} bounds={meta.bounds} opacity={1} />
-    </MapContainer>
+    </LeafletMapFrame>
   );
 }

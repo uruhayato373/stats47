@@ -5,14 +5,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import { INFRA_SCOPE_REGIONS } from '@stats47/gis/infra-history';
-import { geoCentroid, geoDistance, geoMercator, geoPath } from 'd3-geo';
+import { geoPath } from 'd3-geo';
 import { Map as MapIcon } from 'lucide-react';
-import { feature as topoFeature } from 'topojson-client';
 
 import { ChartLegend } from '@/components/charts/ChartLegend';
+import { fetchTopology, fitGeoSvgMercator, GEO_SVG_MAP, topologyFeatures, withoutFarIslands } from '@/components/charts/geo-topology';
 
-import type { Feature, FeatureCollection, Geometry } from 'geojson';
-import type { GeometryCollection, Topology } from 'topojson-specification';
+import type { Feature, Geometry } from 'geojson';
 
 interface QuestionMapProps {
   readonly title: string;
@@ -23,36 +22,11 @@ interface QuestionMapProps {
   readonly points: readonly { name: string; lon: number; lat: number; year: number }[];
 }
 
-const MAP_WIDTH = 640;
-const MAP_HEIGHT = 600;
-const MAP_PADDING = 12;
 const CODE_PROPERTY = 'N03_007';
-/** 縮尺を決めるときに外す離島の目安 (範囲の中心からの距離)。小笠原諸島などで本土が小さくならないように */
-const FIT_MAX_DISTANCE_KM = 450;
-const EARTH_RADIUS_KM = 6371;
 /** 市区町村の地図の既定の範囲 */
 const DEFAULT_REGION = 'kanto';
 
 type Shape = { readonly d: string; readonly code: string };
-
-function fetchTopology(url: string): Promise<Topology> {
-  return fetch(url).then((res) => (res.ok ? (res.json() as Promise<Topology>) : Promise.reject(res.status)));
-}
-
-function featuresOf(topology: Topology): Feature<Geometry, Record<string, string>>[] {
-  const object = topology.objects[Object.keys(topology.objects)[0]] as GeometryCollection;
-  return (topoFeature(topology, object) as FeatureCollection<Geometry, Record<string, string>>).features;
-}
-
-/** 範囲の中心から遠い形 (離島) を外して縮尺を決める */
-function fitTargets<T extends Feature<Geometry>>(features: readonly T[]): T[] {
-  if (features.length < 3) return [...features];
-  const centers = features.map((f) => geoCentroid(f));
-  const median = (values: number[]) => values.sort((a, b) => a - b)[Math.floor(values.length / 2)];
-  const center: [number, number] = [median(centers.map((c) => c[0])), median(centers.map((c) => c[1]))];
-  const near = features.filter((_, i) => geoDistance(center, centers[i]) * EARTH_RADIUS_KM <= FIT_MAX_DISTANCE_KM);
-  return near.length > 0 ? near : [...features];
-}
 
 /**
  * 問いの組で塗り分けた地図。地図は「どこの話か」を示す補助で、答えの主役は推移のグラフ。
@@ -70,16 +44,12 @@ export function QuestionMap({ title, unitOfArea, groups, areas, names, points }:
     Promise.all([fetchTopology('/api/mf-topo/prefecture'), Promise.all(prefCodes.map((code) => fetchTopology(`/api/mf-topo/${code}`)))])
       .then(([prefTopo, muniTopos]) => {
         if (cancelled) return;
-        const prefFeatures = featuresOf(prefTopo);
+        const prefFeatures = topologyFeatures<Record<string, string>>(prefTopo);
         const scopePrefs = prefCodes.length === 0 ? prefFeatures : prefFeatures.filter((f) => prefCodes.includes(String(f.properties[CODE_PROPERTY])));
-        const areaFeatures = prefCodes.length === 0 ? prefFeatures : muniTopos.flatMap(featuresOf);
-        const projection = geoMercator().fitExtent(
-          [
-            [MAP_PADDING, MAP_PADDING],
-            [MAP_WIDTH - MAP_PADDING, MAP_HEIGHT - MAP_PADDING],
-          ],
+        const areaFeatures = prefCodes.length === 0 ? prefFeatures : muniTopos.flatMap((topology) => topologyFeatures<Record<string, string>>(topology));
+        const projection = fitGeoSvgMercator(
           // 全国の県の地図は全県で縮尺を決める (離島を外す条件は地方の市区町村の地図だけ)
-          { type: 'FeatureCollection', features: prefCodes.length === 0 ? areaFeatures : fitTargets(areaFeatures) } as FeatureCollection,
+          prefCodes.length === 0 ? areaFeatures : withoutFarIslands(areaFeatures),
         );
         const path = geoPath(projection);
         const toShape = (f: Feature<Geometry, Record<string, string>>) => {
@@ -133,7 +103,7 @@ export function QuestionMap({ title, unitOfArea, groups, areas, names, points }:
           </div>
         )}
         <div className="relative">
-          <svg viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} className="h-auto w-full" role="img" aria-label={title}>
+          <svg viewBox={`0 0 ${GEO_SVG_MAP.width} ${GEO_SVG_MAP.height}`} className="h-auto w-full" role="img" aria-label={title}>
             {current?.shapes.map((shape) => {
               const group = areas[shape.code];
               return (
@@ -156,7 +126,7 @@ export function QuestionMap({ title, unitOfArea, groups, areas, names, points }:
             {current?.project &&
               points.map((point) => {
                 const xy = current.project?.(point.lon, point.lat);
-                if (!xy || xy[0] < 0 || xy[0] > MAP_WIDTH || xy[1] < 0 || xy[1] > MAP_HEIGHT) return null;
+                if (!xy || xy[0] < 0 || xy[0] > GEO_SVG_MAP.width || xy[1] < 0 || xy[1] > GEO_SVG_MAP.height) return null;
                 return (
                   <circle key={`${point.name}-${point.year}`} cx={xy[0]} cy={xy[1]} r={3} fill="var(--color-foreground)" stroke="var(--color-background)" strokeWidth={1}>
                     <title>{`${point.name} (${point.year}年開業)`}</title>

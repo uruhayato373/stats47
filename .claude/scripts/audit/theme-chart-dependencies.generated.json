@@ -1,8 +1,16 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalMetricRefs": 218,
-  "distinctMetricRefs": 203,
+  "totalMetricRefs": 266,
+  "distinctMetricRefs": 250,
   "metrics": [
+    {
+      "metricKey": "accommodation-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-travel",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "fbd88803d10997ec"
+    },
     {
       "metricKey": "actual-income-worker-households-per-month",
       "themeKey": "real-income",
@@ -52,12 +60,28 @@
       "expectedConfigHash": "b85f5e1f22c9a056"
     },
     {
+      "metricKey": "amusement-park-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-leisure",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "2f86e03a29e67fed"
+    },
+    {
       "metricKey": "annual-emergency-dispatches-per-1000",
       "themeKey": "safety",
       "componentKey": "fire-emergency-trend",
       "componentType": "line-chart",
       "expectedUnit": "件",
       "expectedConfigHash": "65631d0c40520e37"
+    },
+    {
+      "metricKey": "apple-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fruit",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "e4c323a2e9ed181d"
     },
     {
       "metricKey": "barber-beautician-annual-income",
@@ -148,12 +172,28 @@
       "expectedConfigHash": "8b1003e58d4e53be"
     },
     {
+      "metricKey": "black-tea-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-tea-coffee",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "7512c7d579e52f66"
+    },
+    {
       "metricKey": "building-fire-count-per-100-thousand-people",
       "themeKey": "safety",
       "componentKey": "fire-emergency-trend-fire",
       "componentType": "line-chart",
       "expectedUnit": "件",
       "expectedConfigHash": "629e4dc4be80a657"
+    },
+    {
+      "metricKey": "carbonated-drink-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-soft-drinks",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "43fc1efbbf4194a0"
     },
     {
       "metricKey": "care-worker-annual-income",
@@ -170,6 +210,30 @@
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "a9acb4835081e684"
+    },
+    {
+      "metricKey": "clam-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-shellfish-crustacean",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "26f15771d50f876e"
+    },
+    {
+      "metricKey": "coffee-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-tea-coffee",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "8260f09f368958dc"
+    },
+    {
+      "metricKey": "confectionery-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-sweets-processed",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "a0976befbdd0ca18"
     },
     {
       "metricKey": "construction-employed-age30to54",
@@ -308,6 +372,22 @@
       "expectedConfigHash": "3620097ff1719348"
     },
     {
+      "metricKey": "cultural-facility-admission-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-leisure",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "9c88316bfa86f164"
+    },
+    {
+      "metricKey": "daikon-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-root-vegetables",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "2776129edabe2039"
+    },
+    {
       "metricKey": "death-count",
       "themeKey": "population-dynamics",
       "componentKey": "birth-death-count-trend",
@@ -388,6 +468,14 @@
       "expectedConfigHash": "32ba461e0bd6e029"
     },
     {
+      "metricKey": "domestic-package-tour-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-travel",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "20e3d5b4a934b18f"
+    },
+    {
       "metricKey": "employment-mobility-rate",
       "themeKey": "labor-mobility",
       "componentKey": "theme-lm-employment-mobility-trend",
@@ -444,6 +532,14 @@
       "expectedConfigHash": "29857bfbff177858"
     },
     {
+      "metricKey": "flounder-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-white",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "2390ec9b5adf48b0"
+    },
+    {
       "metricKey": "foreign-resident-count-china-per-100k",
       "themeKey": "foreign-residents",
       "componentKey": "theme-foreign-nationality-trend",
@@ -468,6 +564,22 @@
       "expectedConfigHash": "ec0e45ad9938975e"
     },
     {
+      "metricKey": "fresh-seafood-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-seafood-total",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "d429864bc6b852ce"
+    },
+    {
+      "metricKey": "frozen-food-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-sweets-processed",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d0dcfd377be5e20c"
+    },
+    {
       "metricKey": "gender-wage-gap",
       "themeKey": "labor-wages",
       "componentKey": "labor-wages-gender-gap",
@@ -484,12 +596,44 @@
       "expectedConfigHash": "d7f892596eeb8a82"
     },
     {
+      "metricKey": "golf-equipment-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-leisure",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "18405c4e63a0ae19"
+    },
+    {
+      "metricKey": "green-tea-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-tea-coffee",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "edee466e9ed54529"
+    },
+    {
+      "metricKey": "hamburger-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-dining-cuisines",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "a29ba1992f55b1f2"
+    },
+    {
       "metricKey": "happoshu-consumption-expenditure",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
       "expectedConfigHash": "58edd09baeae556c"
+    },
+    {
+      "metricKey": "horse-mackerel-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-everyday-2",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "1486a89939209426"
     },
     {
       "metricKey": "household-survey-clothing-footwear-expenditure",
@@ -588,6 +732,14 @@
       "expectedConfigHash": "434c56d9679fd2fa"
     },
     {
+      "metricKey": "internet-fee-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-communication",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "cddb160890ee11a3"
+    },
+    {
       "metricKey": "job-change-rate",
       "themeKey": "labor-mobility",
       "componentKey": "labor-mobility-turnover-vs-jobchange",
@@ -610,6 +762,30 @@
       "componentType": "line-chart",
       "expectedUnit": "千人",
       "expectedConfigHash": "f5db56c7cae2e704"
+    },
+    {
+      "metricKey": "katsuobushi-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-dashi-seaweed",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "2f822251a08d4a72"
+    },
+    {
+      "metricKey": "konbu-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-dashi-seaweed",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "46b0491450ab2557"
+    },
+    {
+      "metricKey": "landline-bill-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-communication",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "7b20aa709ef1620b"
     },
     {
       "metricKey": "landslip-special-warning-zone-count",
@@ -642,6 +818,22 @@
       "componentType": "line-chart",
       "expectedUnit": "℃",
       "expectedConfigHash": "1b623cbdde770f3e"
+    },
+    {
+      "metricKey": "mackerel-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-everyday",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "867da3053710e5c2"
+    },
+    {
+      "metricKey": "mandarin-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fruit",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "7cdf7e85bd428b5a"
     },
     {
       "metricKey": "manufacturing-employees",
@@ -732,6 +924,22 @@
       "expectedConfigHash": "79071138a38a3ff3"
     },
     {
+      "metricKey": "mineral-water-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-soft-drinks",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "41ba088cb8505167"
+    },
+    {
+      "metricKey": "miso-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-seasonings",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "1a75940808ceef9b"
+    },
+    {
       "metricKey": "movers-in",
       "themeKey": "population-dynamics",
       "componentKey": "theme-pop-migration-trend",
@@ -762,6 +970,14 @@
       "componentType": "line-chart",
       "expectedUnit": "千円",
       "expectedConfigHash": "87c34ae4c4af8dbf"
+    },
+    {
+      "metricKey": "natto-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-sweets-processed",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "65972a6078255363"
     },
     {
       "metricKey": "natural-disaster-deaths",
@@ -884,6 +1100,38 @@
       "expectedConfigHash": "f1c9b2ce77434e19"
     },
     {
+      "metricKey": "other-broadcast-fee-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-communication",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "97cde9b549343a36"
+    },
+    {
+      "metricKey": "other-citrus-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fruit",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "01e6b4d68f0c9ab9"
+    },
+    {
+      "metricKey": "other-meat-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-meat",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "57224a2212316aa1"
+    },
+    {
+      "metricKey": "overseas-package-tour-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-travel",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "5a19dc9fe656d2c4"
+    },
+    {
       "metricKey": "owner-occupied-housing-ratio",
       "themeKey": "living-housing",
       "componentKey": "vacancy-ownership-rate-trend",
@@ -908,6 +1156,14 @@
       "expectedConfigHash": "7d739ec8527b8d03"
     },
     {
+      "metricKey": "pork-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-meat",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "e10f84c52e3e7ee2"
+    },
+    {
       "metricKey": "port-cargo-export",
       "themeKey": "ports",
       "componentKey": "ports-cargo-trend",
@@ -924,12 +1180,28 @@
       "expectedConfigHash": "3095f0c5fff81d16"
     },
     {
+      "metricKey": "potato-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-root-vegetables",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "3adbe02c80958a27"
+    },
+    {
       "metricKey": "private-railway-passenger-transport",
       "themeKey": "railway",
       "componentKey": "railway-passenger-trend",
       "componentType": "line-chart",
       "expectedUnit": "千人",
       "expectedConfigHash": "17c063fa3045cce5"
+    },
+    {
+      "metricKey": "ramen-dining-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-dining-cuisines",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "460a7bfa7c3a8b55"
     },
     {
       "metricKey": "regional-business-co2-emissions-estimate",
@@ -1076,12 +1348,52 @@
       "expectedConfigHash": "ea31aa2c6a07bfdf"
     },
     {
+      "metricKey": "salmon-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-everyday",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "5924ace45ed02aef"
+    },
+    {
+      "metricKey": "sardine-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-everyday-2",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "b1f4bef839440323"
+    },
+    {
+      "metricKey": "saury-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-everyday",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "c35a3a0e966676f9"
+    },
+    {
+      "metricKey": "scallop-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-shellfish-crustacean",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "465ae5fc63fd247f"
+    },
+    {
       "metricKey": "school-teacher-annual-income",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "031c0244cf12f5f7"
+    },
+    {
+      "metricKey": "sea-bream-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fish-white",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "47bbd2c7eab85c14"
     },
     {
       "metricKey": "security-guard-annual-income",
@@ -1098,6 +1410,14 @@
       "componentType": "donut-chart",
       "expectedUnit": "件",
       "expectedConfigHash": "92902c64386c13f7"
+    },
+    {
+      "metricKey": "shellfish-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-seafood-total",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "c9835d40e81f574b"
     },
     {
       "metricKey": "shochu-consumption-expenditure",
@@ -1164,12 +1484,36 @@
       "expectedConfigHash": "77e44f7cb409af9f"
     },
     {
+      "metricKey": "soba-udon-dining-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-dining-cuisines",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "5e48c5b130b79c9a"
+    },
+    {
       "metricKey": "software-engineer-annual-income",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "f00643aba840e510"
+    },
+    {
+      "metricKey": "sports-spectating-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-leisure",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "8608668717c44f60"
+    },
+    {
+      "metricKey": "squid-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-shellfish-crustacean",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "5d9869a92573ff3a"
     },
     {
       "metricKey": "steep-slope-special-warning-zone-count",
@@ -1188,12 +1532,28 @@
       "expectedConfigHash": "c70ba9d36e19c3e6"
     },
     {
+      "metricKey": "sugar-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-seasonings",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "312f2f9b74fb1b44"
+    },
+    {
       "metricKey": "system-consultant-annual-income",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "a96fb1fc940918e7"
+    },
+    {
+      "metricKey": "table-salt-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-seasonings",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "19231c5608511535"
     },
     {
       "metricKey": "taxi-driver-annual-income",
@@ -1610,6 +1970,22 @@
       "componentType": "donut-chart",
       "expectedUnit": "件",
       "expectedConfigHash": "cc2edd2f61d737f4"
+    },
+    {
+      "metricKey": "watermelon-consumption-quantity",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-fruit",
+      "componentType": "line-chart",
+      "expectedUnit": "g",
+      "expectedConfigHash": "b4192cf8a0de68cb"
+    },
+    {
+      "metricKey": "whisky-consumption-expenditure",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-trend-alcohol-spending",
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "645c2821102c2fb6"
     },
     {
       "metricKey": "white-bread-consumption-expenditure",

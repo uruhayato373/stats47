@@ -20,7 +20,11 @@ import { adSlotType } from '../ad-placements';
 const ROOT = path.resolve(__dirname, '../../../../..');
 const read = (rel: string) => readFileSync(path.join(ROOT, rel), 'utf8');
 
-type Placement = (typeof placements.pages)[keyof typeof placements.pages][number] & { knownAdjacentReason?: string };
+type Placement = (typeof placements.pages)[keyof typeof placements.pages][number] & {
+  knownAdjacentReason?: string;
+  adsenseSlot?: string;
+  cells?: { kind: string; adsenseSlot?: string }[];
+};
 const PAGES = placements.pages as Record<string, Placement[]>;
 const SLOT_COMPONENTS = new Set(placements.slotTypes.map((slot) => slot.component));
 /** 広告を描く部品 (隣り合わせの判定で「内容」に数えない) */
@@ -89,9 +93,11 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
           ? cur.source.slice(prev.index + prev.placement.marker.length, cur.index)
           : prev.source.slice(prev.index + prev.placement.marker.length);
       // 内容 = 広告ではない部品のタグか、広告ではない節の差し込み ({sections.relatedRankings} など。名前に affiliate を含む節は広告)
+      // 描画関数の呼び出し (renderChapter など) も内容に数える (テーマの章の間に広告の段を入れる。2026-11-03)
       const content = [
         ...[...between.matchAll(/<([A-Z][A-Za-z0-9]*)\b/g)].filter((m) => !AD_COMPONENTS.has(m[1]) && !RARELY_RENDERED.has(m[1])),
-        ...[...between.matchAll(/\{sections\.([A-Za-z0-9]+)\}/g)].filter((m) => !/affiliate/i.test(m[1])),
+        ...between.matchAll(/\brender[A-Z][A-Za-z0-9]*\(/g),
+        ...[...between.matchAll(/\{sections\.([A-Za-z0-9]+)\}/g)].filter((m) => !/affiliate|adRow/i.test(m[1])),
       ];
       const adjacent = content.length === 0;
       const label = `${page}: ${prev.placement.marker} → ${cur.placement.marker}`;
@@ -101,8 +107,10 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     }
   });
 
-  it.each(Object.keys(PAGES))('%s: 本文の AdSense は上限まで', (page) => {
-    const bodyAdsense = PAGES[page].filter((p) => p.slot === 'adsense-body').length;
+  it.each(Object.keys(PAGES))('%s: 本文の AdSense は上限まで (広告の段の AdSense の枠も数える)', (page) => {
+    const bodyAdsense =
+      PAGES[page].filter((p) => p.slot === 'adsense-body').length +
+      PAGES[page].flatMap((p) => p.cells ?? []).filter((cell) => cell.kind === 'adsense').length;
     expect(bodyAdsense).toBeLessThanOrEqual(placements.rules.maxAdsenseBodyPerPage);
   });
 
@@ -150,5 +158,36 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     const adsense = placements.slotTypes.filter((slot) => slot.provider === 'adsense');
     expect(adsense.length).toBeGreaterThan(0);
     for (const slot of adsense) expect(adSlotType(slot.id).box, slot.id).toEqual({ width: 300, height: 250 });
+  });
+
+  // 2026-11-03 オーナー決定: 全ページのモバイルの本文に AdSense を 1 枠以上出す (自動広告なしで再開したので、手置きが無いと 0 枠になる)。
+  // 広告の段はモバイルで先頭の 1 枠だけが出るので、先頭が AdSense の段か、モバイルにも出す AdSense の枠を数える
+  it.each(Object.keys(PAGES))('%s: モバイルの本文に AdSense が 1 枠以上出る', (page) => {
+    const mobileAdsense = PAGES[page].filter((p) => {
+      if (p.region !== 'body') return false;
+      const type = adSlotType(p.slot);
+      const devices = (p as { devices?: readonly string[] }).devices ?? type.devices;
+      if (!devices.includes('mobile')) return false;
+      return p.slot === 'ad-row' ? p.cells?.[0]?.kind === 'adsense' : type.provider === 'adsense';
+    });
+    expect(mobileAdsense.length, `${page} はモバイルの本文に AdSense が無い (段の先頭を AdSense にする)`).toBeGreaterThan(0);
+  });
+
+  // 2026-11-03 オーナー決定: 右レールの AdSense は右レールが本文の横にあるときだけ出す。本文の下に回るとページの最後に積まれて見られず、
+  // 本文の最後の広告とも隣り合う (トップで実際に起きた)。右レールの AdSense を描く 2 つの部品が同じクラスで隠すことを固定する
+  it('右レールの AdSense は本文の横にあるときだけ出す', () => {
+    expect(adSlotType('adsense-rail-rect')).toMatchObject({ devices: ['desktop'] });
+    for (const rel of ['apps/web/src/features/ads/components/slots/RailAdSlot.tsx', 'apps/web/src/features/ads/components/AffiliateAdSlot.tsx']) {
+      expect(read(rel), rel).toContain('RAIL_AD_BESIDE_BODY_ONLY_CLASS');
+    }
+    expect(read('apps/web/src/features/ads/constants/manual-ad-policy.ts')).toContain(
+      'export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden @min-[988px]/shell:block"',
+    );
+  });
+
+  // 2026-11-03: 広告の段は枠ごとに別の AdSense ユニットを使う (同じユニットを 1 ページで重ねない。ADSENSE-SLOT-DEDUPE-01)
+  it.each(Object.keys(PAGES))('%s: 同じ AdSense のユニットを 1 ページで重ねない', (page) => {
+    const units = PAGES[page].flatMap((p) => [p.adsenseSlot, ...(p.cells ?? []).map((cell) => cell.adsenseSlot)]).filter(Boolean);
+    expect(new Set(units).size, units.join(', ')).toBe(units.length);
   });
 });

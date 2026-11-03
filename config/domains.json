@@ -51,6 +51,7 @@
       "manages": "掲載先・成果・提携と案件",
       "nav": [
         { "label": "掲載先", "href": "/affiliate/placements", "kind": "inventory" },
+        { "label": "広告の配置", "href": "/affiliate/layout", "kind": "inventory" },
         { "label": "成果", "href": "/affiliate", "kind": "results" },
         { "label": "提携・案件", "href": "/affiliate/programs", "kind": "actions" }
       ]

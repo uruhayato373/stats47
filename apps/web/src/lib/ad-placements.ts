@@ -21,10 +21,13 @@ export interface AdSlotBox {
 export interface AdSlotType {
   id: string;
   name: string;
-  provider: 'adsense' | 'affiliate';
+  /** mixed = AdSense と PR を 1 行に並べる広告の段 */
+  provider: 'adsense' | 'affiliate' | 'mixed';
   box: AdSlotBox;
   /** この枠を描く部品の名前 */
   component: string;
+  /** 表示する画面幅 */
+  devices: ReadonlyArray<'desktop' | 'mobile'>;
 }
 
 export interface AdPagePlacement {

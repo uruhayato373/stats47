@@ -22,18 +22,18 @@ function assertNonNegativeInteger(value, field) {
   }
 }
 
-function assertEvidence(row, index) {
+function assertEvidence(row, label) {
   if (typeof row.evidencePath !== "string" || !row.evidencePath) {
-    throw new Error(`observations[${index}].evidencePath is required`);
+    throw new Error(`${label}.evidencePath is required`);
   }
   const isLocal = row.evidencePath.startsWith(LOCAL_EVIDENCE_PREFIX);
   const isVault = VAULT_EVIDENCE_PATTERN.test(row.evidencePath);
   if (isVault && row.channel !== "kdp") {
-    throw new Error(`observations[${index}].evidencePath vault:kdp/monthly is only for channel kdp`);
+    throw new Error(`${label}.evidencePath vault:kdp/monthly is only for channel kdp`);
   }
   if (!isLocal && !isVault) {
     throw new Error(
-      `observations[${index}].evidencePath must be inside .local/product-sales-evidence or vault:kdp/monthly/month-<0-23>`,
+      `${label}.evidencePath must be inside .local/product-sales-evidence or vault:kdp/monthly/month-<0-23>`,
     );
   }
 }
@@ -71,7 +71,7 @@ export function validateSalesLedger(value) {
     if (row.kenpRead !== undefined) {
       assertNonNegativeInteger(row.kenpRead, `observations[${index}].kenpRead`);
     }
-    assertEvidence(row, index);
+    assertEvidence(row, `observations[${index}]`);
     if (typeof row.evidenceSha256 !== "string" || !SHA256_PATTERN.test(row.evidenceSha256)) {
       throw new Error(`observations[${index}].evidenceSha256 must be lowercase sha256`);
     }
@@ -81,7 +81,46 @@ export function validateSalesLedger(value) {
     return row;
   });
 
-  return { schemaVersion: 1, observations };
+  const coverage = value.coverage === undefined ? undefined : validateCoverage(value.coverage);
+  return coverage === undefined ? { schemaVersion: 1, observations } : { schemaVersion: 1, observations, coverage };
+}
+
+/**
+ * 計測の範囲 (coverage)。「この期間の完全な月次レポートを読み、ここに挙げた商品を数えた」という記録。
+ * 行の無い商品を 0 件で埋めないかわりに、範囲に入っていて行の無い商品を「計測済み・0 件」と読めるようにする。
+ * 範囲の無い期間は従来どおり未計測 (欠測を 0 にしない)。
+ */
+function validateCoverage(value) {
+  if (!Array.isArray(value)) throw new Error("coverage must be an array");
+  const seen = new Set();
+  return value.map((row, index) => {
+    if (!isRecord(row)) throw new Error(`coverage[${index}] must be an object`);
+    if (!CHANNELS.includes(row.channel)) throw new Error(`coverage[${index}].channel is invalid`);
+    for (const field of ["periodStart", "periodEnd"]) {
+      if (typeof row[field] !== "string" || !DATE_PATTERN.test(row[field])) {
+        throw new Error(`coverage[${index}].${field} must be YYYY-MM-DD`);
+      }
+    }
+    if (row.periodStart > row.periodEnd) throw new Error(`coverage[${index}] periodStart is after periodEnd`);
+    if (
+      !Array.isArray(row.productIds) || row.productIds.length === 0 ||
+      row.productIds.some((id) => typeof id !== "string" || !id) ||
+      new Set(row.productIds).size !== row.productIds.length
+    ) {
+      throw new Error(`coverage[${index}].productIds must be unique non-empty strings`);
+    }
+    assertEvidence(row, `coverage[${index}]`);
+    if (typeof row.evidenceSha256 !== "string" || !SHA256_PATTERN.test(row.evidenceSha256)) {
+      throw new Error(`coverage[${index}].evidenceSha256 must be lowercase sha256`);
+    }
+    if (typeof row.recordedAt !== "string" || Number.isNaN(Date.parse(row.recordedAt))) {
+      throw new Error(`coverage[${index}].recordedAt must be ISO datetime`);
+    }
+    const key = `${row.channel}:${row.periodStart}:${row.periodEnd}`;
+    if (seen.has(key)) throw new Error(`duplicate coverage: ${key}`);
+    seen.add(key);
+    return row;
+  });
 }
 
 /** 手入力 (cli.ts record) と自動記録で同じ id の作り方を使う */
@@ -172,7 +211,31 @@ export function kdpMonthlyObservations(report, { vaultKey, recordedAt }) {
       recordedAt,
     });
   }
-  return { observations, excluded };
+  // 完全な月次レポートが数えた書籍 (parseKdpMonthlyReport の mappedBookIds)。古い保管物には無いので、そのときは範囲を作らない
+  const mapped = report.coverage.mappedBookIds;
+  const coverage = Array.isArray(mapped) && mapped.length > 0
+    ? { channel: "kdp", periodStart, periodEnd, productIds: [...mapped].sort(), evidencePath, evidenceSha256, recordedAt }
+    : null;
+  return { observations, excluded, coverage };
+}
+
+/**
+ * 計測の範囲を台帳へ足す。同じチャネル・期間の範囲が既にあれば足さない (再実行・手入力済み)。
+ * 書籍の集合が食い違う場合は上書きせず conflict を返す。
+ */
+export function mergeSalesCoverage(ledger, entry) {
+  const current = validateSalesLedger(ledger);
+  const coverage = [...(current.coverage ?? [])];
+  const existing = coverage.find(
+    (row) => row.channel === entry.channel && row.periodStart === entry.periodStart && row.periodEnd === entry.periodEnd,
+  );
+  if (existing) {
+    const same = JSON.stringify([...existing.productIds].sort()) === JSON.stringify([...entry.productIds].sort());
+    return { ledger: current, added: false, conflict: !same };
+  }
+  coverage.push(entry);
+  coverage.sort((a, b) => a.periodStart.localeCompare(b.periodStart) || a.channel.localeCompare(b.channel));
+  return { ledger: validateSalesLedger({ ...current, coverage }), added: true, conflict: false };
 }
 
 /**
@@ -208,5 +271,5 @@ export function mergeSalesObservations(ledger, candidates) {
       skipped.push({ productId: candidate.productId, periodStart: candidate.periodStart, existingId: existing.id });
     }
   }
-  return { ledger: validateSalesLedger({ schemaVersion: 1, observations: next }), added, skipped, conflicts };
+  return { ledger: validateSalesLedger({ ...current, observations: next }), added, skipped, conflicts };
 }

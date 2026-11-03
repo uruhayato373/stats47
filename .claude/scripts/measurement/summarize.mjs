@@ -2,7 +2,7 @@
 import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { SOURCES } from './sources.mjs';
-import { mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
+import { mergeSalesCoverage, mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 
@@ -67,12 +67,16 @@ if (kdpLedger) {
     const ledgerPath = datasetPath("sales.ledger");
     const ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : { schemaVersion: 1, observations: [] };
     const merged = mergeSalesObservations(ledger, candidates);
-    if (merged.added.length) {
+    // 完全な月次レポートが数えた書籍の範囲。行の無い書籍を 0 で埋めず「計測済み」と読めるようにする
+    const range = kdpLedger.coverage ?? null;
+    if (range && (range.channel !== 'kdp' || range.evidencePath !== `vault:${kdpLedger.vaultKey}`)) throw new Error('invalid_sales_ledger_coverage');
+    const covered = range ? mergeSalesCoverage(merged.ledger, range) : { ledger: merged.ledger, added: false, conflict: false };
+    if (merged.added.length || covered.added) {
       mkdirSync(dirname(ledgerPath), { recursive: true });
-      writeFileSync(ledgerPath, JSON.stringify(merged.ledger, null, 2) + '\n');
+      writeFileSync(ledgerPath, JSON.stringify(covered.ledger, null, 2) + '\n');
     }
-    salesLedger = { status: merged.conflicts.length ? 'conflict' : 'pass', month: kdpLedger.month, added: merged.added.length,
-      skipped: merged.skipped.length, conflicts: merged.conflicts, excluded: kdpLedger.excluded ?? [] };
+    salesLedger = { status: merged.conflicts.length || covered.conflict ? 'conflict' : 'pass', month: kdpLedger.month, added: merged.added.length,
+      skipped: merged.skipped.length, conflicts: merged.conflicts, excluded: kdpLedger.excluded ?? [], coverageAdded: covered.added };
   } catch (error) {
     salesLedger = { status: 'failed', month: kdpLedger.month ?? null, code: String(error.message).slice(0, 200) };
   }

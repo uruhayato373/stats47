@@ -1,18 +1,10 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { PROPERTY_PRICE_DISTRIBUTION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -74,62 +66,51 @@ export function ThemePropertyPriceDistributionClient({
           />
         }
       >
-        <Table aria-label={`${area}の住宅地価格分布`}>
-          <TableCaption>
-            価格は円/㎡。対象条件に合う公表標本の分布で、県内すべての住宅地の価格ではありません。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">資料</TableHead>
-              <TableHead scope="col" className="text-right!">
-                第1
-                <br />
-                四分位
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                中央値
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                第3
-                <br />
-                四分位
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                標本数
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map(({ key, label, distribution: d }) => (
-              <TableRow key={key} data-distribution-key={key}>
-                <TableHead scope="row">
-                  {label}
-                  {d.status === 'small-sample' && (
-                    <span className="block text-xs font-normal">少数標本</span>
-                  )}
-                </TableHead>
-                <TableCell className="text-right tabular-nums" data-q1={d.q1}>
-                  {format(d.q1)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-median={d.median}
-                >
-                  {format(d.median)}
-                </TableCell>
-                <TableCell className="text-right tabular-nums" data-q3={d.q3}>
-                  {format(d.q3)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-sample-size={d.count}
-                >
-                  {d.count.toLocaleString('ja-JP')}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          ariaLabel={`${area}の住宅地価格分布`}
+          caption="価格は円/㎡。対象条件に合う公表標本の分布で、県内すべての住宅地の価格ではありません。"
+          columns={[
+            { key: 'source', header: '資料', rowHeader: true },
+            {
+              key: 'q1',
+              header: (
+                <>
+                  第1
+                  <br />
+                  四分位
+                </>
+              ),
+            },
+            { key: 'median', header: '中央値' },
+            {
+              key: 'q3',
+              header: (
+                <>
+                  第3
+                  <br />
+                  四分位
+                </>
+              ),
+            },
+            { key: 'sampleSize', header: '標本数' },
+          ]}
+          rows={rows.map(({ key, label, distribution: d }) => ({
+            key,
+            attrs: { 'data-distribution-key': key },
+            cells: [
+              <>
+                {label}
+                {d.status === 'small-sample' && (
+                  <small className="block font-normal">少数標本</small>
+                )}
+              </>,
+              { content: format(d.q1), attrs: { 'data-q1': d.q1 } },
+              { content: format(d.median), attrs: { 'data-median': d.median } },
+              { content: format(d.q3), attrs: { 'data-q3': d.q3 } },
+              { content: d.count.toLocaleString('ja-JP'), attrs: { 'data-sample-size': d.count } },
+            ],
+          }))}
+        />
         <details className="text-xs leading-relaxed text-muted-foreground">
           <summary className="cursor-pointer">集計対象と除外数</summary>
           {rows.map(({ key, label, distribution: d }) => (

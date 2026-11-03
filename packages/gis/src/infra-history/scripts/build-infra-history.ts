@@ -104,15 +104,31 @@ function sha256(buffer: Buffer | string): string {
   return createHash("sha256").update(buffer).digest("hex");
 }
 
+/** 取得の試行回数。前の網の長い集計の間に配布元が接続を切り、次の取得が `fetch failed` になることがある (2026-11-03 に CI と手元で空港の取得が落ちた) */
+const FETCH_ATTEMPTS = 3;
+
+async function fetchArchive(url: string): Promise<Buffer> {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`原典の取得に失敗: HTTP ${response.status}`);
+      return Buffer.from(await response.arrayBuffer());
+    } catch (error) {
+      if (attempt >= FETCH_ATTEMPTS) throw error;
+      const { cause } = error as { cause?: unknown };
+      const reason = cause instanceof Error ? cause.message : error instanceof Error ? error.message : String(error);
+      console.log(`  取得を再試行 (${attempt}/${FETCH_ATTEMPTS - 1}): ${reason}`);
+    }
+  }
+}
+
 async function readVerifiedArchive(network: InfraNetworkDefinition): Promise<Buffer> {
   const { source } = network;
   const file = path.join(SOURCE_DIR, `${source.dataId}-${source.version}.zip`);
   if (!fs.existsSync(file)) {
     fs.mkdirSync(SOURCE_DIR, { recursive: true });
     console.log(`  取得: ${source.archiveUrl}`);
-    const response = await fetch(source.archiveUrl);
-    if (!response.ok) throw new Error(`原典の取得に失敗: HTTP ${response.status}`);
-    fs.writeFileSync(file, Buffer.from(await response.arrayBuffer()));
+    fs.writeFileSync(file, await fetchArchive(source.archiveUrl));
   }
   const buffer = fs.readFileSync(file);
   const actual = sha256(buffer);

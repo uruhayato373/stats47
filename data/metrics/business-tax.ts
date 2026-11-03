@@ -28,7 +28,7 @@ export const businessTax: MetricConfig = {
     domain: { mode: "zero" },
   },
   "display": {
-    "conversionFactor": 0.000001,
+    "conversionFactor": 0.00001,
     "decimalPlaces": 0,
     "displayUnit": "億円",
   },

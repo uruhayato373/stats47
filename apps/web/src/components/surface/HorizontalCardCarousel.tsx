@@ -172,7 +172,10 @@ interface HorizontalCardCarouselProps {
 /**
  * ポータルカード共通の1行カルーセル。
  *
- * mobileは1枚+peek、smは2枚、lgは3枚、xlは4枚を表示する。
+ * 1 画面の枚数は本文の幅 (コンテナ) で決め、カードの格子 (CardGrid) と同じ段にそろえる:
+ * 本文 480px 未満 = 1 枚 + 次のカードの端 (85%) / 480px 以上 = 2 枚 / 768px 以上 = 3 枚 (上限 3)。
+ * 画面の幅 (sm/lg/xl) で決めると、サイドバーの有無で本文の幅が変わるのに枚数が変わらず、
+ * 同じ画面で調査ハブの格子は 3 列・ランキング一覧のカルーセルは 4 枚とずれた (2026-11-03)。
  * keyboard・scroll snap をここへ集約し、矢印は HorizontalCardCarouselSection の中の
  * HorizontalCardCarouselControls (見出し行の右端) が描く。
  */
@@ -223,31 +226,34 @@ export function HorizontalCardCarousel({
   }, [setControlState]);
 
   return (
-    <div
-      ref={scrollRef}
-      role="region"
-      aria-label={`${ariaLabel}（左右の矢印で移動できます）`}
-      tabIndex={0}
-      data-carousel={framed ? 'cells' : 'cards'}
-      onScroll={updateScrollState}
-      onKeyDown={(event) => {
-        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-        event.preventDefault();
-        scroll(event.key === 'ArrowLeft' ? 'left' : 'right');
-      }}
-      className={cn(
-        'grid snap-x snap-mandatory grid-flow-col overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-        framed
-          ? // カードの見出しの下: 隙間なしで区切り線 (テンプレートの KPI 行)。区切り線は divide-x が
-            // 最後のセル以外の右に引く。本文の横余白を外してあるので、線はカードの上下の線まで届く。
-            // -mr-px で列を 1px だけカードの線の下へ伸ばし、右端に見えているセルの区切り線を外枠の線に重ねる
-            // (外枠の内側に線が 2 本並ばない。カードの overflow-hidden がはみ出した 1px を切る)
-            '-mr-px auto-cols-[85%] divide-x divide-border sm:auto-cols-[50%] lg:auto-cols-[calc(100%/3)] xl:auto-cols-[25%]'
-          : 'auto-cols-[85%] gap-3 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)]',
-        className
-      )}
-    >
-      {children}
+    // 枚数はこの包みの幅 (本文の幅) を見る。スクロールする要素自身は自分の幅を問い合わせられない
+    <div className="@container">
+      <div
+        ref={scrollRef}
+        role="region"
+        aria-label={`${ariaLabel}（左右の矢印で移動できます）`}
+        tabIndex={0}
+        data-carousel={framed ? 'cells' : 'cards'}
+        onScroll={updateScrollState}
+        onKeyDown={(event) => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          scroll(event.key === 'ArrowLeft' ? 'left' : 'right');
+        }}
+        className={cn(
+          'grid snap-x snap-mandatory grid-flow-col overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+          framed
+            ? // カードの見出しの下: 隙間なしで区切り線 (テンプレートの KPI 行)。区切り線は divide-x が
+              // 最後のセル以外の右に引く。本文の横余白を外してあるので、線はカードの上下の線まで届く。
+              // -mr-px で列を 1px だけカードの線の下へ伸ばし、右端に見えているセルの区切り線を外枠の線に重ねる
+              // (外枠の内側に線が 2 本並ばない。カードの overflow-hidden がはみ出した 1px を切る)
+              '-mr-px auto-cols-[85%] divide-x divide-border @sm:auto-cols-[50%] @md:auto-cols-[calc(100%/3)]'
+            : 'auto-cols-[85%] gap-3 @sm:auto-cols-[calc((100%_-_0.75rem)/2)] @md:auto-cols-[calc((100%_-_1.5rem)/3)]',
+          className
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }

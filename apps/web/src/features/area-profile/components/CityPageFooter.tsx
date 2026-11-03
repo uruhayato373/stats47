@@ -23,13 +23,7 @@ export function CityPageFooter({
 }: CityPageFooterProps) {
   return (
     <>
-      <CitiesNavCard
-        areaCode={areaCode}
-        areaName={prefName}
-        activeCityCode={activeCityCode}
-      />
-      <AreaBannerAd />
-      <FurusatoNozeiCard areaCode={areaCode} position="city-furusato-content" layout="content" />
+      {/* AdSense は市区町村の一覧の前に置き、後ろの PR (県のバナー・返礼品) と隣り合わせにしない (2026-11-03) */}
       {ADSENSE_DISPLAY_ENABLED && (
         // 本文の広告のセル。箱は広告の枠の台帳の「ページ末の関連コンテンツ型」(デスクトップ 780×466 を上限に中央・モバイル 242px)
         <AdCell label="広告">
@@ -41,6 +35,13 @@ export function CityPageFooter({
           />
         </AdCell>
       )}
+      <CitiesNavCard
+        areaCode={areaCode}
+        areaName={prefName}
+        activeCityCode={activeCityCode}
+      />
+      <AreaBannerAd />
+      <FurusatoNozeiCard areaCode={areaCode} position="city-furusato-content" layout="content" />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BookCheckIcon, BookOpenIcon, CircleAlertIcon, PackageCheckIcon } from "lucide-react";
 
 import { ContentAuditPanel, FilterLink, StageBadge } from "@/components/content/content-ui";
@@ -191,7 +192,7 @@ export default async function KindleContentPage({
             cells: [
               <div key="book">
                 <div className="font-mono text-xs text-muted-foreground">{book.id} · {book.seriesLabel}</div>
-                <div className="font-medium">{book.title}</div>
+                <Link href={`/content/kindle/${book.id}`} className="font-medium text-primary underline">{book.title}</Link>
                 {book.subtitle ? <div className="text-xs text-muted-foreground">{book.subtitle}</div> : null}
               </div>,
               <StageBadge key="stage" stage={book.stage} />,

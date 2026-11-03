@@ -73,7 +73,8 @@ env:
 jobs:
   regenerate:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # R2 からの取り込みに約 30 分、全 777 記事の描き直しに 30 分超かかる (2026-11-03 実測で 45 分に収まらなかった)
+    timeout-minutes: 120
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -114,9 +115,11 @@ jobs:
           echo "対象 slug 数: $(echo "$SLUGS" | wc -w)"
 
       - name: 🎨 Regenerate SVGs via svg-builder
+        id: regen
         if: ${{ github.event.inputs.mode == 'all' }}
         run: |
           : > .local/generated-blog-svg-keys.txt
+          : > .local/regen-failed-slugs.txt
           OK=0; SKIP=0; FAIL=0
           for SLUG in ${{ steps.targets.outputs.list }}; do
             DIR=".local/r2/app/blog/$SLUG/data"
@@ -131,6 +134,7 @@ jobs:
                 | sed 's#^\.local/r2/##' >> .local/generated-blog-svg-keys.txt
             else
               FAIL=$((FAIL+1)); echo "  ⚠️ regen failed: $SLUG"
+              echo "$SLUG" >> .local/regen-failed-slugs.txt
               tail -n 30 ".local/regen-$SLUG.log"
               ls -la "$DIR"
             fi
@@ -138,9 +142,11 @@ jobs:
           sort -u -o .local/generated-blog-svg-keys.txt .local/generated-blog-svg-keys.txt
           echo "再生成: ok=$OK skip=$SKIP(no json) fail=$FAIL"
           echo "exact publish候補: $(wc -l < .local/generated-blog-svg-keys.txt)"
+          # 失敗した記事は R2 の今の図のまま残し、ほかの記事のギャラリーと反映は続ける。
+          # 最後の step で失敗として止める (2026-11-03: 出典の無い散布図を持つ 3 記事で 763 記事の確認まで止まっていた)
+          echo "failed=$FAIL" >> "$GITHUB_OUTPUT"
           if [ "$FAIL" -gt 0 ]; then
-            echo "::error::SVG再生成に${FAIL}件失敗しました"
-            exit 1
+            echo "::warning::SVG再生成に${FAIL}件失敗しました (その記事の図は今の公開版のまま)"
           fi
 
       - name: ⬜ Regenerate canonical scatter catalog
@@ -270,20 +276,18 @@ jobs:
             echo "::error::R2 exact publish keyが0件です"
             exit 1
           fi
-          ARGS=()
-          COUNT=0
-          while IFS= read -r KEY; do
-            ARGS+=(--key "$KEY")
-            COUNT=$((COUNT + 1))
-            if [ "$COUNT" -eq 100 ]; then
-              npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${ARGS[@]}"
-              ARGS=()
-              COUNT=0
-            fi
-          done < "$KEY_FILE"
-          if [ "${#ARGS[@]}" -gt 0 ]; then
-            npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${ARGS[@]}"
-          fi
+          # 1 件ずつ HEAD→PUT→HEAD で約 1.3 秒かかる。全記事 (約 7,000 件) を直列で送ると
+          # 120 分の制限を超えるので (2026-11-03 に 3,200 件で打ち切られた)、100 件の束を 8 本並列で送る。
+          # 束どうしは別の key なので順序は要らない。1 束でも失敗すれば xargs が非 0 で step を落とす。
+          rm -f .local/push-chunk-*
+          split -l 100 "$KEY_FILE" .local/push-chunk-
+          # 単引用符の中の $1 は xargs が起こす bash の引数 (外側で展開しない)
+          # shellcheck disable=SC2016
+          find .local -maxdepth 1 -name 'push-chunk-*' -print0 | xargs -0 -P 8 -I{} bash -c '
+            A=()
+            while IFS= read -r KEY; do A+=(--key "$KEY"); done < "$1"
+            npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${A[@]}"
+          ' _ {}
 
       - name: 🧮 Regenerate and publish blog survey index after source repair
         if: ${{ github.event.inputs.mode == 'source-repair' && github.event.inputs.dry_run == 'false' }}
@@ -310,3 +314,12 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" != "false" ]; then
             echo "- ⚠️ dry-run のため R2 へは push していません" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -s .local/regen-failed-slugs.txt ]; then
+            echo "- ❌ 描き直せなかった記事 (今の図のまま): $(paste -sd' ' .local/regen-failed-slugs.txt)" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: ❌ Fail if any article could not be regenerated
+        if: ${{ steps.regen.outputs.failed != '' && steps.regen.outputs.failed != '0' }}
+        run: |
+          echo "::error::SVG再生成に${{ steps.regen.outputs.failed }}件失敗しました: $(paste -sd' ' .local/regen-failed-slugs.txt)"
+          exit 1

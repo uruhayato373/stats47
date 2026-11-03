@@ -24,12 +24,15 @@ interface BarChartClientProps {
   chartData: BarChartData;
   chartType?: "bar" | "stacked-bar" | "grouped";
   xDomain?: [number, number];
+  /** SVG の高さ (既定 300)。項目数の多い横棒で縦に伸ばすときに渡す */
+  height?: number;
 }
 
 export const BarChartClient: React.FC<BarChartClientProps> = ({
   chartData,
   chartType = "stacked-bar",
   xDomain,
+  height = 300,
 }) => {
   const { categoryKey, data, series, unit } = chartData;
   const indexBy = categoryKey;
@@ -43,7 +46,7 @@ export const BarChartClient: React.FC<BarChartClientProps> = ({
         data={data as ChartDataNode[]}
         keys={keys}
         indexBy={indexBy}
-        height={300}
+        height={height}
         showLegend
         colors={colors}
         valueFormat={compactAxisFormat}
@@ -60,7 +63,7 @@ export const BarChartClient: React.FC<BarChartClientProps> = ({
       data={data as ChartDataNode[]}
       valueKey={valueKey}
       indexBy={indexBy}
-      height={300}
+      height={height}
       colors={
         series[0]?.color ? [series[0].color] : CHART_COLORS
       }

@@ -4,10 +4,14 @@ import { resolveRankingItemDataSources } from "@stats47/ranking/survey";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 
-import { BannerAd, isLandscapeBanner } from "@/features/ads";
+import { AdRow, composeAdRows, isLandscapeBanner } from "@/features/ads";
 import { detectProductKeyword } from "@/features/ads/constants/product-keywords";
 
-import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
+import {
+  HUB_INCONTENT,
+  RANKING_INCONTENT_MOBILE,
+  RANKING_PAGE_FOOTER,
+} from "@/lib/google-adsense";
 
 import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
@@ -47,13 +51,26 @@ export function RankingPageClientShell({
   model,
 }: RankingPageClientShellProps) {
   const affiliateBanners = model.nativeBanners.filter(isLandscapeBanner);
-  const inContentAffiliateBanner = !ADSENSE_DISPLAY_ENABLED && shouldShowRankingInContentAffiliate(rankingKey)
-    ? (affiliateBanners[0] ?? null)
-    : null;
-  // 中段を抑止したページでは先頭を落とさず、読了枠へ戻す。
-  const nativeAffiliateBanners = (inContentAffiliateBanner ? affiliateBanners.slice(1) : affiliateBanners).slice(0, 3);
-  const usedAffiliateAds = [inContentAffiliateBanner, ...nativeAffiliateBanners]
-    .filter((banner) => banner !== null);
+  // 広告の段 (2026-11-03 オーナー決定): 解説の後と出典の後の 2 段。本文の幅に入る数だけ左から出す
+  // (右レールのある本文 810px では 2 枠、モバイルは先頭の 1 枠 = 上から AdSense → PR)。
+  // 解説の後に PR を出さない指標 (ranking-incontent-affiliate-policy) は、その段を AdSense だけにする。
+  // AdSense を止めているときは AdSense の枠が落ち、PR だけの段になる
+  const [midRow, footerRow] = composeAdRows(
+    [
+      shouldShowRankingInContentAffiliate(rankingKey)
+        ? ["adsense", "affiliate", "adsense"]
+        : ["adsense", "adsense"],
+      ["affiliate", "adsense", "affiliate"],
+    ],
+    [RANKING_INCONTENT_MOBILE, HUB_INCONTENT, RANKING_PAGE_FOOTER],
+    affiliateBanners,
+  );
+  const rowBanners = [...midRow, ...footerRow].flatMap((cell) => (cell.kind === "affiliate" ? [cell.banner] : []));
+  // 段で使ったバナーは読了位置の PR の列と右レールに出さない (同じ案件を 1 ページで重ねない)
+  const nativeAffiliateBanners = affiliateBanners
+    .filter((banner) => !rowBanners.includes(banner))
+    .slice(0, 3);
+  const usedAffiliateAds = [...rowBanners, ...nativeAffiliateBanners];
 
   // 家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) は本文の A8 を出さず楽天カードにする
   // (2026-09-16)。中段 native はモバイル=商品軸・デスクトップ=1位県の返礼品、上段 in-content は
@@ -64,7 +81,10 @@ export function RankingPageClientShell({
   const useRakutenNative = (model.affiliateVertical ?? null) !== null
     && isKakeiChousa
     && (top1Entry !== null || hasProductKeyword);
-  const renderedInContentBanner = useRakutenNative ? null : inContentAffiliateBanner;
+  // 家計調査の品目は段の A8 も出さず AdSense の枠だけにする (読了位置と同じ判断)
+  const bodyCells = (cells: typeof midRow) =>
+    useRakutenNative ? cells.filter((cell) => cell.kind === "adsense") : cells;
+  const trackingCategory = `ranking-${model.rankingItem.categoryKey ?? "general"}`;
 
   return (
     <RankingKeyPageClient
@@ -131,21 +151,11 @@ export function RankingPageClientShell({
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
           <RankingFunnelCta key="funnel-cta" rankingKey={rankingKey} />
         ) : null,
-        inContentAffiliate: renderedInContentBanner ? (
-          <div key="in-content-affiliate" className="flex justify-center">
-            <BannerAd
-              href={renderedInContentBanner.href}
-              imageUrl={renderedInContentBanner.imageUrl}
-              trackingPixelUrl={renderedInContentBanner.trackingPixelUrl}
-              width={renderedInContentBanner.width}
-              height={renderedInContentBanner.height}
-              label={renderedInContentBanner.title}
-              category={renderedInContentBanner.vertical ?? "other"}
-              position="ranking-incontent"
-              adId={renderedInContentBanner.id}
-              creativeSize={`${renderedInContentBanner.width}x${renderedInContentBanner.height}`}
-            />
-          </div>
+        adRowMid: bodyCells(midRow).length > 0 ? (
+          <AdRow key="ad-row-mid" cells={bodyCells(midRow)} position="ranking-row-1" trackingCategory={trackingCategory} />
+        ) : null,
+        adRowFooter: bodyCells(footerRow).length > 0 ? (
+          <AdRow key="ad-row-footer" cells={bodyCells(footerRow)} position="ranking-row-2" trackingCategory={trackingCategory} />
         ) : null,
         nativeAffiliate: useRakutenNative ? (
           <RankingPageRakutenNativeSection

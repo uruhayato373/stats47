@@ -18,10 +18,10 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartLegend } from '@/components/charts/ChartLegend';
-import { SurfaceCard } from '@/components/surface';
+import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
+import { SurfaceCard, ValueTable, type ValueTableColumn, type ValueTableRow } from '@/components/surface';
 
 import { fetchGeoLayerAction } from '../actions';
-import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '../lib/geo-basemap';
 import { GEO_CROSS_ANALYSIS_CONFIGS } from '../lib/geo-cross-analysis';
 import { populationLayerColor, type GeoLayerData } from '../lib/geo-layer-data';
 
@@ -107,28 +107,43 @@ export function GeoLayerExplorer({
       : data.kind === 'land-price'
         ? data.points.length
         : data.stations.length;
-  const rows = !data
-    ? []
+  const attributeTable: { columns: ValueTableColumn[]; rows: ValueTableRow[] } = !data
+    ? { columns: [], rows: [] }
     : data.kind === 'population'
-      ? data.meshes
-          .slice(0, 20)
-          .map(
-            (m) =>
-              `${m[0]}：2020年 ${m[5].toLocaleString('ja-JP')}人／2050年 ${m[6].toLocaleString('ja-JP')}人`
-          )
+      ? {
+          columns: [
+            { key: 'mesh', header: 'メッシュ', rowHeader: true },
+            { key: 'pop2020', header: '2020年人口（人）' },
+            { key: 'pop2050', header: '2050年人口（人）' },
+          ],
+          rows: data.meshes.slice(0, 20).map((m, i) => ({
+            key: String(i),
+            cells: [m[0], m[5].toLocaleString('ja-JP'), m[6].toLocaleString('ja-JP')],
+          })),
+        }
       : data.kind === 'land-price'
-        ? data.points
-            .slice(0, 20)
-            .map(
-              (p) =>
-                `${p[0]}：${p[3].toLocaleString('ja-JP')}円/㎡・前年比 ${p[4] === null ? '不明' : `${p[4]}%`}`
-            )
-        : data.stations
-            .slice(0, 20)
-            .map(
-              (p) =>
-                `${p[1]}（経度 ${(p[2] / 1e6).toFixed(5)}、緯度 ${(p[3] / 1e6).toFixed(5)}）`
-            );
+        ? {
+            columns: [
+              { key: 'point', header: '地点', rowHeader: true },
+              { key: 'price', header: '価格（円/㎡）' },
+              { key: 'change', header: '前年比' },
+            ],
+            rows: data.points.slice(0, 20).map((p, i) => ({
+              key: String(i),
+              cells: [p[0], p[3].toLocaleString('ja-JP'), p[4] === null ? '不明' : `${p[4]}%`],
+            })),
+          }
+        : {
+            columns: [
+              { key: 'station', header: '駅', rowHeader: true },
+              { key: 'lng', header: '経度' },
+              { key: 'lat', header: '緯度' },
+            ],
+            rows: data.stations.slice(0, 20).map((p, i) => ({
+              key: String(i),
+              cells: [p[1], (p[2] / 1e6).toFixed(5), (p[3] / 1e6).toFixed(5)],
+            })),
+          };
   return (
     <SurfaceCard className="p-3 sm:p-5">
       <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -266,11 +281,14 @@ export function GeoLayerExplorer({
             属性を文字で確認（先頭20件）
           </Button>
           {showRows && (
-            <ul className="mt-3 space-y-2 wrap-break-word text-sm">
-              {rows.map((row, i) => (
-                <li key={i}>{row}</li>
-              ))}
-            </ul>
+            <div className="mt-3">
+              <ValueTable
+                ariaLabel={`${data.areaName}の属性（先頭20件）`}
+                columns={attributeTable.columns}
+                rows={attributeTable.rows}
+                scrollRegion
+              />
+            </div>
           )}
         </>
       )}

@@ -3,7 +3,7 @@ import { PanelGrid } from '@stats47/components';
 import { contentTagIds } from '@stats47/data-configs/content';
 import { Newspaper } from 'lucide-react';
 
-import { ArticleTeaserCard, ArticleTeaserGrid } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid } from '@/components/surface';
 
 import { readContentRecommendations } from '@/features/content-navigation/server';
 
@@ -24,7 +24,7 @@ export async function ThemeRelatedArticles({ themeKey, tagKeys, rankingKeys = []
         <Newspaper aria-hidden="true" className="size-4 text-muted-foreground" />
         このテーマを読み解く記事
       </h2>
-      <ArticleTeaserGrid>
+      <CardGrid>
         {items.map((item) => (
           <ArticleTeaserCard
             key={item.id}
@@ -37,7 +37,7 @@ export async function ThemeRelatedArticles({ themeKey, tagKeys, rankingKeys = []
             navSurface="theme_blog"
           />
         ))}
-      </ArticleTeaserGrid>
+      </CardGrid>
     </PanelGrid>
   );
 }

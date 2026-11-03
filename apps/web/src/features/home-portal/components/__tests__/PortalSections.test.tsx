@@ -26,7 +26,7 @@ describe('PortalUseCaseGrid', () => {
     expect(migrationLink.className).not.toMatch(/aspect-/);
     expect(migrationLink.parentElement).toHaveClass(
       'grid-flow-col',
-      'xl:auto-cols-[calc((100%_-_2.25rem)/4)]'
+      '@md:auto-cols-[calc((100%_-_1.5rem)/3)]'
     );
     expect(migrationLink.parentElement).toHaveAttribute('role', 'region');
     const images = [...container.querySelectorAll('img')];

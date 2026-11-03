@@ -38,6 +38,12 @@ vi.mock('../SingleMetricCard', () => ({
     <div data-testid="single-card" data-keys={metric.metricKey} />
   ),
 }));
+vi.mock('@/components/surface', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/components/surface')>()),
+  ValueTable: ({ rows }: { rows: { key: string }[] }) => (
+    <div data-testid="table-card" data-keys={rows.map((r) => r.key).join(',')} />
+  ),
+}));
 vi.mock('../ThemeDbChartRenderer', () => ({
   ThemeDbChartRenderer: () => <div />,
 }));
@@ -77,12 +83,14 @@ function expectedGroups(catalog: ThemeCatalog, themeConfig: ThemeConfig) {
   if (catalog.metricGroups && catalog.metricGroups.length > 0) {
     return catalog.metricGroups.map((g) => ({
       key: g.key,
+      view: g.view,
       rankingKeys: g.rankingKeys,
     }));
   }
   return [
     {
       key: 'default',
+      view: undefined,
       rankingKeys: themeConfig.tabIndicators.map((t) => t.rankingKey),
     },
   ];
@@ -113,13 +121,20 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
         />
       );
 
-      const groups = expectedGroups(catalog, themeConfig);
+      // view "tiles" のグループは指標ごとに 1 枚の数値タイル (SingleMetricCard) に分かれる (2026-11-03)
+      const groups = expectedGroups(catalog, themeConfig).flatMap((group) =>
+        group.view === 'tiles'
+          ? group.rankingKeys.map((key) => ({ ...group, rankingKeys: [key] }))
+          : [group]
+      );
       const rendered = [...container.querySelectorAll('[data-testid]')];
 
       expect(rendered).toHaveLength(groups.length);
       rendered.forEach((el, i) => {
         const group = groups[i];
-        const expectedKind = group.rankingKeys.length === 1 ? 'single-card' : 'switcher-panel';
+        // view "table" のグループは 1 枚の表 (共通の ValueTable)。件数によらない (2026-11-03)
+        const expectedKind =
+          group.view === 'table' ? 'table-card' : group.rankingKeys.length === 1 ? 'single-card' : 'switcher-panel';
         expect(el.getAttribute('data-testid')).toBe(expectedKind);
         expect(el.getAttribute('data-keys')).toBe(group.rankingKeys.join(','));
       });

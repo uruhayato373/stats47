@@ -6,10 +6,10 @@
       "job": "estat-catalog",
       "month": "2026-11",
       "status": "ok",
-      "ranAt": "2026-11-02T00:30:26.315Z",
-      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/41363684093",
+      "ranAt": "2026-11-03T00:59:41.378Z",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/41555208436",
       "fields": {
-        "trigger": "push"
+        "trigger": "schedule"
       },
       "summary": null
     },

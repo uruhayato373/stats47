@@ -39,8 +39,8 @@ describe("FeaturedRankingCard", () => {
     expect(getByText("2024年")).toBeInTheDocument();
     const map = container.querySelector("svg");
     expect(map).toHaveAttribute("data-map-rotation", "clockwise-32");
-    // 地図はセルの下に読める高さ (96px) の全幅の枠で置く
-    expect(map?.parentElement).toHaveClass("h-24", "w-full");
+    // 地図はセルの下に全幅で、SVG と同じ縦横比 (320:190) の枠で置く
+    expect(map?.parentElement).toHaveClass("aspect-[320/190]", "w-full");
     // 値と単位は折り返さない 1 塊で、省略しない
     const value = getByText(/2,309/);
     expect(value).toHaveClass("whitespace-nowrap", "tabular-nums");

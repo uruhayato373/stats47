@@ -43,8 +43,9 @@ describe('貨物ODの県・機関・方向表示', () => {
     const table = screen.getByRole('table');
     expect(table.textContent).toContain('26,922,653');
     fireEvent.click(screen.getByRole('button', { name: '到着元を見る' }));
-    expect(table.querySelector('tfoot')?.textContent).toContain('0');
-    expect(table.querySelectorAll('tbody tr')).toHaveLength(47);
+    // 合計は本文の最後の締めの行 (共通の静的な表 ValueTable。2026-11-03)
+    expect(table.querySelector('tbody tr:last-child')?.textContent).toContain('0');
+    expect(table.querySelectorAll('tbody tr[data-partner-area-code]')).toHaveLength(47);
   });
   it('海運に切り替えると暦年・フレートトンを表示する', () => {
     selection.code = '01000';

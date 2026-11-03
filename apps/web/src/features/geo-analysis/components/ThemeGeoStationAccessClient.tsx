@@ -3,20 +3,12 @@
 
 import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { PanelGrid } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection } from '@/components/surface';
+import { SurfaceSection, ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -80,60 +72,43 @@ export function ThemeGeoStationAccessClient({
         />
         {/* 県の行だけを出す。全国のページに 47 県の表は置かない (2026-10-31。表は Geo の分析ページ) */}
         {selectedRow ? (
-        <Table className="whitespace-nowrap" scrollRegion aria-label="駅800m圏人口の都道府県別集計">
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col" className="whitespace-nowrap">
-                都道府県
-              </TableHead>
-              {metrics.map((metric) => (
-                <TableHead key={metric.key} scope="col" className="text-right!">
-                  {metric.label}
-                </TableHead>
-              ))}
-              <TableHead scope="col" className="whitespace-nowrap">
-                検算
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.areaCode}>
-                <TableHead scope="row" className="whitespace-nowrap">
-                  {selectedRow ? (
-                    row.areaName
-                  ) : (
-                    <Button
-                      variant="link"
-                      className="p-0"
-                      onClick={() => setSelected(row.areaCode, row.areaName)}
-                      aria-label={`${row.areaName}の地図を表示`}
-                    >
-                      {row.areaName}
-                    </Button>
-                  )}
-                </TableHead>
-                {metrics.map((metric) => (
-                  <TableCell
-                    key={metric.key}
-                    className="whitespace-nowrap text-right tabular-nums"
-                  >
-                    {formatGeoValue(metric, row.values[metric.key])}
-                  </TableCell>
-                ))}
-                <TableCell className="whitespace-nowrap">
-                  <Link
-                    className="inline-flex min-h-11 items-center text-primary underline"
-                    href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
-                    aria-label={`${row.areaName}の地点・検算データ`}
-                  >
-                    地点・検算データ
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          className="whitespace-nowrap"
+          scrollRegion
+          ariaLabel="駅800m圏人口の都道府県別集計"
+          columns={[
+            { key: 'area', header: '都道府県', rowHeader: true, className: 'whitespace-nowrap!' },
+            ...metrics.map((metric) => ({ key: metric.key, header: metric.label })),
+            { key: 'audit', header: '検算', align: 'left' as const, className: 'whitespace-nowrap' },
+          ]}
+          rows={rows.map((row) => ({
+            key: row.areaCode,
+            cells: [
+              selectedRow ? (
+                row.areaName
+              ) : (
+                <Button
+                  key="area"
+                  variant="link"
+                  className="p-0"
+                  onClick={() => setSelected(row.areaCode, row.areaName)}
+                  aria-label={`${row.areaName}の地図を表示`}
+                >
+                  {row.areaName}
+                </Button>
+              ),
+              ...metrics.map((metric) => formatGeoValue(metric, row.values[metric.key])),
+              <Link
+                key="audit"
+                className="inline-flex min-h-11 items-center text-primary underline"
+                href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
+                aria-label={`${row.areaName}の地点・検算データ`}
+              >
+                地点・検算データ
+              </Link>,
+            ],
+          }))}
+        />
         ) : null}
         <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
           道路網・高低差・運行本数は含みません。バス圏、医療施設への距離、国が定義する交通空白を示す値ではありません。

@@ -1,18 +1,11 @@
 import { to2DigitPrefCode } from '@stats47/area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 import { fetchMunicipalityTopologyForWardMode } from '@stats47/gis/server';
 import { municipalityLeafName } from '@stats47/ranking';
 import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
 
 import { SectionHeader } from '@/components/section';
+import { ValueTable } from '@/components/surface';
 
 import { RankingMapChartClient } from '@/features/ranking/widgets';
 
@@ -108,42 +101,38 @@ export async function MunicipalityWardBreakdownSection({
         </div>
       )}
       <div className="overflow-x-auto border border-border">
-        <Table>
-          <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
-            <TableRow>
-              <TableHead>行政区</TableHead>
-              {metricKeys.map((key) => (
-                <TableHead key={key} className="text-right!">
+        <ValueTable
+          columns={[
+            { key: 'ward', header: '行政区', rowHeader: true },
+            ...metricKeys.map((key) => ({
+              key,
+              header: (
+                <>
                   {breakdown.metrics[key]!.label}
-                  <span className="block font-normal">{breakdown.metrics[key]!.yearName}</span>
-                </TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {breakdown.wards.map((ward) => (
-              <TableRow key={ward.areaCode}>
-                <TableCell className="font-medium">{nameOf.get(ward.areaCode)}</TableCell>
-                {metricKeys.map((key) => {
-                  const cell = cellOf(key, ward.areaCode);
-                  const metric = breakdown.metrics[key]!;
-                  return (
-                    <TableCell key={key} className="text-right tabular-nums">
-                      {cell ? (
-                        <>
-                          {formatValueWithPrecision(cell.value, precisionOf[key] ?? 0)} {formatUnitForDisplay(metric.unit)}
-                          <span className="block text-xs text-muted-foreground">市内{cell.cityRank}位</span>
-                        </>
-                      ) : (
-                        '—'
-                      )}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                  <small className="block font-normal">{breakdown.metrics[key]!.yearName}</small>
+                </>
+              ),
+            })),
+          ]}
+          rows={breakdown.wards.map((ward) => ({
+            key: ward.areaCode,
+            cells: [
+              nameOf.get(ward.areaCode),
+              ...metricKeys.map((key) => {
+                const cell = cellOf(key, ward.areaCode);
+                const metric = breakdown.metrics[key]!;
+                return cell ? (
+                  <>
+                    {formatValueWithPrecision(cell.value, precisionOf[key] ?? 0)} {formatUnitForDisplay(metric.unit)}
+                    <small className="block">市内{cell.cityRank}位</small>
+                  </>
+                ) : (
+                  '—'
+                );
+              }),
+            ],
+          }))}
+        />
       </div>
       <p className="text-xs text-muted-foreground">
         行政区は基礎自治体ではないため、市区町村ランキングの順位には含めず、市の中の順位だけを示しています。値は e-Stat の社会・人口統計体系の行政区の値で、年は{cityShortName}全体の値と同じです。

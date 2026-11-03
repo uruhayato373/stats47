@@ -1,12 +1,11 @@
 import React from "react";
 
-import { Table, TableBody, TableCell, TableRow } from "@stats47/components";
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Icon } from "@stats47/components/atoms/ui/icon";
 import { InfoIcon } from "lucide-react";
 
 import { ContentDisclosure } from "@/components/content";
-import { SurfaceCard } from "@/components/surface";
+import { SurfaceCard, ValueTable } from "@/components/surface";
 
 import { getDefinitionSet } from "../../data/definitions";
 
@@ -94,20 +93,22 @@ const GroupCard: React.FC<{ group: DefinitionGroup }> = ({ group }) => {
 
       {/* アイテムテーブル */}
       <div className="pt-2">
-        <Table>
-          <TableBody>
-            {group.items.map((item) => (
-              <TableRow key={item.name} className="border-b border-border/40">
-                <TableCell className="text-foreground">{item.name}</TableCell>
-                {item.cat01 && (
-                  <TableCell className="text-right font-mono text-muted-foreground">
-                    {item.cat01}
-                  </TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        {/* 名前とコードの対だけの表。見出しの行は画面に出さない (共通の静的な表 ValueTable。2026-11-03)。
+            コードのある項目が 1 つも無いグループは名前の列だけにする */}
+        <ValueTable
+          hideHeader
+          ariaLabel={group.name}
+          columns={[
+            { key: "name", header: "項目", rowHeader: true },
+            ...(group.items.some((item) => item.cat01)
+              ? [{ key: "code", header: "コード", className: "font-mono text-muted-foreground" }]
+              : []),
+          ]}
+          rows={group.items.map((item) => ({
+            key: item.name,
+            cells: group.items.some((entry) => entry.cat01) ? [item.name, item.cat01 ?? ""] : [item.name],
+          }))}
+        />
       </div>
     </SurfaceCard>
   );

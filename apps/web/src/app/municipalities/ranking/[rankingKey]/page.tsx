@@ -5,14 +5,6 @@ import { notFound } from 'next/navigation';
 import { fetchPrefectures } from '@stats47/area';
 import { cn } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
@@ -37,9 +29,9 @@ import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
-import { STAT_VALUE_CLASS } from '@/components/surface';
+import { STAT_VALUE_CLASS, ValueTable } from '@/components/surface';
 
-import { NativeAffiliateRow } from '@/features/ads';
+import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
 import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
@@ -59,6 +51,7 @@ import {
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
@@ -192,6 +185,8 @@ export default async function MunicipalityRankingPage({
     snapshot,
   });
 
+  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
   return (
     <PageShell>
       <MunicipalityRankingViewTracker
@@ -357,36 +352,24 @@ export default async function MunicipalityRankingPage({
       </div>
 
       <div className="mt-2 overflow-x-auto border border-border">
-        <Table>
-          <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
-            <TableRow>
-              <TableHead className="w-20">順位</TableHead>
-              <TableHead>市区町村</TableHead>
-              <TableHead className="text-right!">値</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filtered.rows.map((row) => (
-              <TableRow key={row.areaCode}>
-                <TableCell className="tabular-nums text-muted-foreground">
-                  {row.rank}位
-                </TableCell>
-                <TableCell className="font-medium">
-                  {/* 配信値の市区町村は市区町村ページの公開対象と同じ集合なので、全行をリンクにする */}
-                  <Link
-                    href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}
-                    className="text-primary hover:underline"
-                  >
-                    {listName(row.areaName)}
-                  </Link>
-                </TableCell>
-                <TableCell className="text-right tabular-nums">
-                  {formatValue(row.value)} {formatUnitForDisplay(snapshot.unit)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          columns={[
+            { key: 'rank', header: '順位', className: 'w-20' },
+            { key: 'area', header: '市区町村', rowHeader: true, align: 'left' },
+            { key: 'value', header: '値' },
+          ]}
+          rows={filtered.rows.map((row) => ({
+            key: row.areaCode,
+            cells: [
+              `${row.rank}位`,
+              // 配信値の市区町村は市区町村ページの公開対象と同じ集合なので、全行をリンクにする
+              <Link key="area" href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}>
+                {listName(row.areaName)}
+              </Link>,
+              `${formatValue(row.value)} ${formatUnitForDisplay(snapshot.unit)}`,
+            ],
+          }))}
+        />
         {filtered.rows.length === 0 && (
           <p className="p-6 text-center text-sm text-muted-foreground">
             該当する自治体はありません。
@@ -440,14 +423,9 @@ export default async function MunicipalityRankingPage({
       {commentary && <MunicipalityRankingCommentary content={commentary} />}
 
       {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
-      {nativeBanners.length > 0 && (
+      {rowCells.length > 0 && (
         <div className="mt-8">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="municipality-native"
-            trackingCategory={`municipality-${item.rankingKey}`}
-            variant="three-up"
-          />
+          <AdRow cells={rowCells} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} />
         </div>
       )}
 

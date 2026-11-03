@@ -4,7 +4,9 @@ import { readThemeCorrelatedMetricsFromR2 } from "@stats47/correlation/server";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { isOk } from "@stats47/types";
 
-import { SectionCard } from "@/components/surface";
+import { PanelGrid } from "@/components/layout";
+import { SectionHeader } from "@/components/section";
+import { ValueTable } from "@/components/surface";
 
 import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";
 
@@ -22,34 +24,40 @@ export async function ThemeCorrelatedMetrics({ themeKey }: ThemeCorrelatedMetric
   const result = await readThemeCorrelatedMetricsFromR2(themeKey);
   if (!isOk(result) || result.data.length === 0) return null;
 
+  // 指標・相関の相手・順位相関の 3 つを行ごとに比べて読む表なので、共通の静的な表 (ValueTable) で描く (2026-11-03。旧: リンクの一覧)。
+  // 枠は隣の節 (白書・統計から見る論点) と同じ線の格子の節
   return (
-    <SectionCard className="mt-8" title="このテーマと関連の深い指標">
-      <p className="mb-2 text-xs text-muted-foreground">
-        テーマ内の指標と、人口規模の影響を除いた順位相関が高いテーマ外の指標
-      </p>
-      <nav aria-label="このテーマと関連の深い指標" className="flex flex-col">
-        {result.data.map((item) => (
-          <TrackedThemeLink
-            key={item.rankingKey}
-            href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-            trackingLabel={`theme-correlated-metrics:${item.rankingKey}`}
-            surface="theme_ranking"
-            className="flex items-center justify-between gap-3 py-1.5 transition-colors hover:text-primary"
-          >
-            <span className="min-w-0">
-              <span className="block truncate text-sm">{item.title}</span>
-              <span className="block truncate text-xs text-muted-foreground">
-                {item.via.title}との相関
-              </span>
-            </span>
-            <span
-              className={`shrink-0 font-mono text-xs tabular-nums ${correlationColorClass(item.populationAdjustedR)}`}
+    <PanelGrid as="section" id="theme-correlated-metrics" aria-label="このテーマと関連の深い指標">
+      <SectionHeader
+        title="このテーマと関連の深い指標"
+        description="テーマ内の指標と、人口規模の影響を除いた順位相関が高いテーマ外の指標"
+        hideRule
+      />
+      <ValueTable
+        ariaLabel="このテーマと関連の深い指標"
+        columns={[
+          { key: "metric", header: "指標", rowHeader: true },
+          { key: "via", header: "相関の相手 (テーマ内の指標)", align: "left" },
+          { key: "r", header: "順位相関" },
+        ]}
+        rows={result.data.map((item) => ({
+          key: item.rankingKey,
+          cells: [
+            <TrackedThemeLink
+              key="link"
+              href={hrefFor("ranking", { rankingKey: item.rankingKey })}
+              trackingLabel={`theme-correlated-metrics:${item.rankingKey}`}
+              surface="theme_ranking"
             >
+              {item.title}
+            </TrackedThemeLink>,
+            item.via.title,
+            <span key="r" className={correlationColorClass(item.populationAdjustedR)}>
               {formatCorrelation(item.populationAdjustedR)}
-            </span>
-          </TrackedThemeLink>
-        ))}
-      </nav>
-    </SectionCard>
+            </span>,
+          ],
+        }))}
+      />
+    </PanelGrid>
   );
 }

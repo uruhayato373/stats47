@@ -16,8 +16,13 @@ import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
-import { StatTileGrid } from '@/components/surface';
+import { StatTileGrid, ValueTable } from '@/components/surface';
 
+import { AdRow, type AdRowCell } from '@/features/ads';
+
+import { metricSourceGroups } from '../lib/metric-source-groups';
+import { buildMetricTableRows } from '../lib/metric-table-rows';
+import { buildSectionAnswer } from '../lib/section-answer';
 import {
   NATIONAL_REGION_LABEL,
   type ThemeConfig,
@@ -59,6 +64,12 @@ interface Props {
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
    */
   cardsOnly?: boolean;
+  /**
+   * 章の間に入れる広告の段 (2026-11-03 オーナー決定)。[0] = 2 章目の後 (3 章以上あるとき)、
+   * [1] = 4 章目の後 (4 章以上あるとき)。段の後ろと段の間には必ず章を挟む。1 章目の後に置くと、
+   * 短い章のテーマでモバイルの最初の画面に入る (labor-wages で 567px に出た)
+   */
+  chapterAdRows?: AdRowCell[][];
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -137,6 +148,7 @@ export function ThemeMetricsDashboard({
   chartSourceLinks,
   selectedPrefectureCode,
   cardsOnly,
+  chapterAdRows,
 }: Props) {
   const areaName = selectedPrefectureCode
     ? (lookupArea(selectedPrefectureCode)?.areaName ?? '選択地域')
@@ -233,6 +245,8 @@ export function ThemeMetricsDashboard({
   const panels = useMemo(() => {
     type Panel = {
       key: string;
+      /** 章 (sections[].metricGroupKeys) が引くグループの key。tiles で分けたパネルも元のグループの key を持つ */
+      groupKey: string;
       view: CatalogMetricGroup['view'];
       title: string | undefined;
       metrics: SingleMetricGroup | MultiMetricGroup;
@@ -248,6 +262,7 @@ export function ThemeMetricsDashboard({
         ? [
             {
               key: 'default',
+              groupKey: 'default',
               view: undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
@@ -268,9 +283,22 @@ export function ThemeMetricsDashboard({
       // 全滅したグループはカードごと出さない (空のカードは「壊れている」と読める)
       if (!metrics) return [];
       const alive = new Set(metrics.map((m) => m.metricKey));
+      // view "tiles": 指標ごとに数値タイル + 小さな推移のカード (SingleMetricCard) に分け、数値タイルの格子に並べる。
+      // 数値タイルを切り替えボタンにしたチャート (MetricSwitcherPanel) は使わない (空きマス・凡例のずれ。2026-11-03)
+      if (group.view === 'tiles') {
+        return metrics.map((metric) => ({
+          key: `${group.key}--${metric.metricKey}`,
+          groupKey: group.key,
+          view: group.view,
+          title: undefined,
+          metrics: [metric] as SingleMetricGroup,
+          defaultCheckedKeys: [metric.metricKey],
+        }));
+      }
       return [
         {
           key: group.key,
+          groupKey: group.key,
           view: group.view,
           title: group.title as string | undefined,
           metrics,
@@ -312,12 +340,41 @@ export function ThemeMetricsDashboard({
   type Panel = (typeof panels)[number];
   /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
   const isCompact = (panel: Panel) =>
-    isSingleMetricGroup(panel.metrics);
+    panel.view !== 'table' && isSingleMetricGroup(panel.metrics);
   /**
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
-  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => isSingleMetricGroup(panel.metrics) ? (
+  const renderTablePanel = (panel: Panel, sectionTitle?: string) => {
+    const inChapter = sectionTitle !== undefined;
+    const { columns, rows } = buildMetricTableRows(
+      panel.metrics,
+      tabLabels,
+      selectedPrefectureCode !== null,
+      inChapter ? (panel.title ?? '指標') : '指標'
+    );
+    if (rows.length === 0) return null;
+    // 章の中の表は枠の見出しの帯を置かない (章の見出し・答えの文と見出しが 3 段に重なるため。2026-11-03)。
+    // グループ名は表の 1 列目の見出し、年は行ごと、出典は章の見出しの帯のシートにまとめる
+    if (inChapter) {
+      return <ValueTable key={panel.key} ariaLabel={panel.title ?? sectionTitle} columns={columns} rows={rows} />;
+    }
+    return (
+      <ChartPanel
+        key={panel.key}
+        id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
+        title={panel.title}
+        action={<SourcesSheet trigger="icon" groups={metricSourceGroups(panel.metrics, tabLabels)} />}
+        contentClassName="p-0!"
+      >
+        <ValueTable columns={columns} rows={rows} />
+      </ChartPanel>
+    );
+  };
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.view === 'table' ? (
+    // 項目の多いグループは、この地域の 1 行ずつの表 (view "table"。2026-11-03)。表は共通の静的な表 ValueTable (章の外だけ ChartPanel に入れる)
+    renderTablePanel(panel, sectionTitle)
+  ) : isSingleMetricGroup(panel.metrics) ? (
     <SingleMetricCard
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -421,7 +478,7 @@ export function ThemeMetricsDashboard({
   const chapters = (sections ?? []).map((section) => {
     const chapterPanels = panels.filter(
       (panel) =>
-        section.metricGroupKeys.includes(panel.key) &&
+        section.metricGroupKeys.includes(panel.groupKey) &&
         !usedPanels.has(panel.key)
     );
     const chapterCharts = chartComponents.filter(
@@ -518,6 +575,21 @@ export function ThemeMetricsDashboard({
           (keys) => panel.metrics.length > 0 && panel.metrics.every((metric) => keys.has(metric.metricKey))
         )
     );
+    // 章の問いへの答えの文 (データから決まった手順で作る)。まずは数値タイル・表の見せ方 (view "tiles" / "table") の章だけに出す (2026-11-03 試行)
+    const answer = panels.some((panel) => panel.view === 'tiles' || panel.view === 'table')
+      ? buildSectionAnswer({
+          metrics: panels.flatMap((panel) => panel.metrics),
+          labels: tabLabels,
+          areaName,
+          isPrefecture: selectedPrefectureCode !== null,
+        })
+      : null;
+    // 章の中の表は枠の帯を持たないので、その出典は章の見出しの帯のシートにまとめる (2026-11-03)
+    const tableMetrics = panels.filter((panel) => panel.view === 'table').flatMap((panel) => panel.metrics);
+    const chapterSheetGroups = [
+      ...(chapter.description ? [{ notes: [chapter.description], sources: [], rankings: [] }] : []),
+      ...metricSourceGroups(tableMetrics, tabLabels),
+    ];
     return (
     <PanelGrid
       as="section"
@@ -527,17 +599,26 @@ export function ThemeMetricsDashboard({
       className="scroll-mt-24"
     >
       {/* 章の説明は見出しの下に文章で置かず、右端のアイコンから開く Sheet に入れる (2026-11-01 オーナー決定) */}
+      {/* 問いの見出しと答えの文を 1 つのセルにまとめる (答えは本文の色。2026-11-03) */}
       <SectionHeader
         title={chapter.title}
+        description={
+          answer ? (
+            <span className="mt-1 block leading-6 text-foreground" data-section-answer>
+              {answer}
+            </span>
+          ) : undefined
+        }
         action={
-          action || chapter.description ? (
+          action || chapterSheetGroups.length > 0 ? (
             <span className="flex items-center gap-1">
               {action}
-              {chapter.description ? (
+              {chapterSheetGroups.length > 0 ? (
                 <SourcesSheet
                   trigger="icon"
-                  label="読むときの注意"
-                  groups={[{ notes: [chapter.description], sources: [], rankings: [] }]}
+                  // 表の出典が入るときは既定の題 (出典・指標の定義・読むときの注意)、章の説明だけなら「読むときの注意」
+                  label={tableMetrics.length > 0 ? undefined : '読むときの注意'}
+                  groups={chapterSheetGroups}
                 />
               ) : null}
             </span>
@@ -605,9 +686,17 @@ export function ThemeMetricsDashboard({
       {profileLink && leadingChapters.length === 0 && (
         <div className="flex justify-end">{profileLink}</div>
       )}
-      {leadingChapters.map((chapter, index) =>
+      {leadingChapters.slice(0, 2).map((chapter, index) =>
         renderChapter(chapter, index === 0 ? profileLink : undefined)
       )}
+      {leadingChapters.length >= 3 && chapterAdRows?.[0] && (
+        <AdRow cells={chapterAdRows[0]} position="theme-row-1" trackingCategory={`theme-${themeConfig.themeKey}`} />
+      )}
+      {leadingChapters.slice(2, 4).map((chapter) => renderChapter(chapter))}
+      {leadingChapters.length >= 4 && chapterAdRows?.[1] && (
+        <AdRow cells={chapterAdRows[1]} position="theme-row-2" trackingCategory={`theme-${themeConfig.themeKey}`} />
+      )}
+      {leadingChapters.slice(4).map((chapter) => renderChapter(chapter))}
       {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
         <PanelGrid

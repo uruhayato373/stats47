@@ -31,4 +31,17 @@ describe('ChartLegend', () => {
     rerender(<ChartLegend items={items} layout="list" />);
     expect(screen.getByText('19 か所').className).toContain('whitespace-nowrap');
   });
+
+  it('scale を渡すと色の段を左から右へ並べた帯と、ラベルを左から順に描く', () => {
+    const { container } = render(
+      <ChartLegend
+        scale={{ colors: ['rgb(70,90,130)', 'rgb(250,210,90)', 'rgb(220,90,40)'], labels: ['少ない', '多い'] }}
+        label="日照時間の凡例"
+      />,
+    );
+    const bar = container.querySelector('[aria-hidden="true"]') as HTMLElement;
+    expect(bar.style.background).toContain('linear-gradient(to right, rgb(70, 90, 130), rgb(250, 210, 90), rgb(220, 90, 40))');
+    expect(screen.getByLabelText('日照時間の凡例').textContent).toBe('少ない多い');
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+  });
 });

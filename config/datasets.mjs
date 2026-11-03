@@ -188,6 +188,7 @@ const SM = ".claude/state/metrics";
 export const DATASETS = [
   // ── config/ : 事業の台帳と設定 ──
   d("config.paths", "config/paths.{name}", "config", "ops", "config", "config/ の置き場の定数 (コードが import する)"),
+  d("config.inbound-utm", "config/inbound-utm.{name}", "config", "product", "config", "商品 (Kindle・note) からサイトへ戻るリンクの UTM 規約 (コードが import する)"),
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
   d("coconala.listings", P.COCONALA_LISTINGS, "config", "product", "config", "ココナラの出品内容と公開状態", {
     schema: "config/schema/coconala.listings.schema.json",
@@ -234,6 +235,8 @@ export const DATASETS = [
   d("metrics.sources", `${P.METRIC_SOURCES_DIR}/{name}.ts`, "config", "data", "data", "指標の公表資料・抽出レシピの正本"),
   d("metrics.schema", `${P.METRIC_DEFINITIONS_DIR}/schema/{name}.schema.json`, "state", "data", "data", "MetricConfig型から生成する形状契約"),
   d("metrics.index", `${P.METRIC_DEFINITIONS_DIR}/index/{name}.json`, "state", "data", "data", "指標の出典座標と利用先の逆引き索引"),
+  d("metrics.display-units", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.json`, "state", "data", "data", "公開中の都道府県ランキングごとの図の表示単位・倍率・小数桁と最新年の最大・最小 (build-chart-display-units.ts が R2 の値と規則から生成。手で編集しない)", { schema: `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json` }),
+  d("metrics.display-units-schema", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json`, "config", "data", "data", "上の台帳の JSON Schema"),
   d("themes.catalogs", "data/themes/catalogs/{name}.json", "config", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", { schema: "data/themes/schema/theme-catalog.schema.json" }),
   d("content.tags", "data/content/tags.json", "config", "data", "data", "タグの不変ID・表示名・既存URLキー・別名", { schema: "data/content/schema/tags.schema.json" }),
   d("content.routes", "data/content/routes.json", "config", "data", "data", "全公開ページ種別のIDとURLパラメータ契約", { schema: "data/content/schema/routes.schema.json" }),
@@ -338,6 +341,8 @@ export const DATASETS = [
   d("kindle.archives", "data/products/kindle-archives.json", "ledger", "product", "data", "KDP へ送った版の暗号化保全の台帳", { schema: "config/schema/kindle.archives.schema.json" }),
   d("products.publication-receipts", "data/products/{name}-{date}.json", "evidence", "product", "data", "商品の公開・準備の受領記録"),
   d("kdp.weekly-publication", "data/products/kdp-weekly-publication.json", "state", "product", "data", "KDP 週次公開の判定"),
+  d("kindle.figure-reviews", "data/products/kindle-figure-reviews.json", "state", "product", "data", "既刊 Kindle の図の評価 (図の sha256 ごと。同じ図を二度評価しない。KINDLE-QUALITY-LOOP-01)"),
+  d("kindle.quality", "data/products/kindle-quality.json", "state", "product", "data", "既刊 Kindle の中身の機械の検査 (章ごとの図・全県表・リンクと印。KINDLE-QUALITY-LOOP-01)"),
   d("products.status", "data/products/{name}-status.json", "state", "product", "data", "商品・書籍・note の生成と販売準備の状態"),
   d("kindle.verification", "data/products/kindle-{name}-verification.json", "evidence", "product", "data", "Kindle 版ごとの検証記録"),
   d("sns.posts", "data/sns/posts.json", "ledger", "sns", "data", "SNS 投稿台帳 (投稿履歴の正本)", {

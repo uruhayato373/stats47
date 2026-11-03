@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@stats47/components";
 import { compactAxisFormat, useD3Tooltip } from "@stats47/visualization/d3";
 
 import { BreakdownDonut, BreakdownList, type BreakdownItem } from "@/components/charts/BreakdownDonut";
+import { CHART_FALLBACK_COLOR } from "@/components/charts/ChartPalette";
 
 import type { CompositionChartData } from "../../../adapters/toCompositionChartData";
 
@@ -136,7 +137,7 @@ function VerticalStacked({
         .selectAll("g")
         .data(stackedData)
         .join("g")
-        .attr("fill", (d) => colorMap.get(d.key) ?? "#888")
+        .attr("fill", (d) => colorMap.get(d.key) ?? CHART_FALLBACK_COLOR)
         .selectAll("rect")
         .data((layer) => layer.map((point) => ({ point, key: layer.key })))
         .join("rect")

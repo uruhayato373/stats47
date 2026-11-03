@@ -1,14 +1,7 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
+import { ValueTable } from '@/components/surface';
 
 export interface ObservedSeries {
   dataKey: string;
@@ -54,38 +47,33 @@ export function SingleYearSeriesTable({
 }) {
   if (series.length === 0) return null;
   return (
-    <Table aria-label={ariaLabel}>
-      <TableHeader>
-        <TableRow>
-          <TableHead>{nameColumnLabel}</TableHead>
-          <TableHead>年次</TableHead>
-          <TableHead className="text-right!">値</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {series.map((item) => {
-          const row = rows.find(
-            (candidate) =>
-              typeof candidate[item.dataKey] === 'number' &&
-              Number.isFinite(candidate[item.dataKey])
-          );
-          if (!row) return null;
-          return (
-            <TableRow key={item.dataKey}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell className="whitespace-nowrap">
-                {String(row[yearKey])}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {(row[item.dataKey] as number).toLocaleString('ja-JP', {
-                  maximumFractionDigits: 2,
-                })}
-                {item.unit && ` ${formatUnitForDisplay(item.unit)}`}
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+    <ValueTable
+      ariaLabel={ariaLabel}
+      columns={[
+        { key: 'name', header: nameColumnLabel, rowHeader: true },
+        { key: 'year', header: '年次', align: 'left', className: 'whitespace-nowrap' },
+        { key: 'value', header: '値' },
+      ]}
+      rows={series.flatMap((item) => {
+        const row = rows.find(
+          (candidate) =>
+            typeof candidate[item.dataKey] === 'number' &&
+            Number.isFinite(candidate[item.dataKey])
+        );
+        if (!row) return [];
+        return [
+          {
+            key: item.dataKey,
+            cells: [
+              item.name,
+              String(row[yearKey]),
+              `${(row[item.dataKey] as number).toLocaleString('ja-JP', {
+                maximumFractionDigits: 2,
+              })}${item.unit ? ` ${formatUnitForDisplay(item.unit)}` : ''}`,
+            ],
+          },
+        ];
+      })}
+    />
   );
 }

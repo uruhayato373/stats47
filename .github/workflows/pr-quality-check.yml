@@ -802,6 +802,9 @@ jobs:
           # 規約: .claude/rules/metric-config-standards.md
           npm run validate:config --workspace=@stats47/data-configs
           npm run build:registry --workspace=@stats47/data-configs -- --check
+          # 図の表示単位の台帳 (data/metrics/display-units/) が規則と一致し、読めない単位の大きい指標が増えていないこと。
+          # 規約: .claude/rules/unit-semantics-standards.md §2.6
+          npm run check:display-units --workspace=@stats47/data-configs
         continue-on-error: false
 
       - name: 🧺 Kakei Item Classification Gate

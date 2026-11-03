@@ -137,14 +137,13 @@
         "height": 250
       },
       "devices": [
-        "desktop",
-        "mobile"
+        "desktop"
       ],
       "accepts": [
         "adsense:rectangle"
       ],
       "component": "RailAdSlot",
-      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった"
+      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった / 2026-11-03 オーナー決定: 右レールが本文の横にあるとき (Shell のコンテナ 988px 以上) だけ出す。本文の下に回るとページの最後に積まれて見られないため (2026-W43 に右レールの 5 ユニットで表示の約 40%・収益の約 16%、1,000 表示あたり ¥6〜10)"
     },
     {
       "id": "adsense-footer",
@@ -188,6 +187,31 @@
       "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: 300x250 の素材がデスクトップ 254x212 (4 列)、モバイル 293x244"
     },
     {
+      "id": "ad-row",
+      "name": "本文の広告の段 (AdSense と PR)",
+      "provider": "mixed",
+      "box": {
+        "width": "full",
+        "height": 250,
+        "columns": {
+          "desktop": 3,
+          "mobile": 1
+        }
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "300x250",
+        "250x250",
+        "adsense:rectangle",
+        "adsense:article"
+      ],
+      "component": "AdRow",
+      "measured": "2026-11-03 オーナー決定: AdSense と PR を 1 行に並べ、本文の幅に原寸 300px のまま入る数だけ左から出す (608px 未満 1 枠・608px 以上 2 枠・916px 以上 3 枠)。AdSense の箱は 300×250"
+    },
+    {
       "id": "affiliate-rect",
       "name": "PR のバナー 1 枚",
       "provider": "affiliate",
@@ -226,59 +250,110 @@
   "pages": {
     "theme": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "ダッシュボードの後",
-        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />",
-        "adsenseSlot": "HUB_INCONTENT"
+        "position": "2 章目の後 (3 章以上あるとき。1 章目の後はモバイルの最初の画面に入る)",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
+        "marker": "position=\"theme-row-1\"",
+        "trackingPosition": "theme-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       },
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "関連の深い指標の後・このテーマを読み解く記事の前",
-        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
-        "marker": "<InContentAdSlot slot={THEMES_CONTENT} />",
-        "adsenseSlot": "THEMES_CONTENT"
+        "position": "4 章目の後 (4 章以上あるとき)",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
+        "marker": "position=\"theme-row-2\"",
+        "trackingPosition": "theme-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
         "position": "このテーマを読み解く記事の後 (ページの最後)",
         "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
-        "marker": "position=\"theme-native\"",
-        "trackingPosition": "theme-native"
+        "marker": "position=\"theme-row-end\"",
+        "trackingPosition": "theme-row-end",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "RAIL_RECT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       }
     ],
     "ranking": [
       {
-        "slot": "affiliate-rect",
+        "slot": "ad-row",
         "region": "body",
         "position": "解説 (AI の考察) の後",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
-        "marker": "{!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate}",
-        "condition": "AdSense を止めているときだけ出る (再開中は下のモバイルの AdSense が同じ位置に出る)"
-      },
-      {
-        "slot": "adsense-body-mobile",
-        "region": "body",
-        "position": "解説 (AI の考察) の後",
-        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
-        "marker": "slotId={RANKING_INCONTENT_MOBILE.slotId}",
-        "adsenseSlot": "RANKING_INCONTENT_MOBILE",
-        "devices": [
-          "mobile"
+        "marker": "{sections.adRowMid}",
+        "trackingPosition": "ranking-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "RANKING_INCONTENT_MOBILE"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
         ],
-        "condition": "AdSense を止めているときは同じ位置に PR のバナー 1 枚 (ranking-incontent) を出す",
-        "knownAdjacentReason": "AdSense の停止中と再開中で入れ替わる枠で、同時には出ない枠がファイルの中で並んでいるだけ"
+        "condition": "解説の後に PR を出さない指標 (ranking-incontent-affiliate-policy) は AdSense だけ。家計調査の品目は A8 を出さず AdSense だけ。右レールのある本文 (810px) では先頭 2 枠"
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "出典・導線の後",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
-        "marker": "slotId={RANKING_PAGE_FOOTER.slotId}",
-        "adsenseSlot": "RANKING_PAGE_FOOTER"
+        "marker": "{sections.adRowFooter}",
+        "trackingPosition": "ranking-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "RANKING_PAGE_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "家計調査の品目は A8 を出さず AdSense だけ"
       },
       {
         "slot": "affiliate-row",
@@ -303,7 +378,7 @@
         "position": "調査のカードの後 (PR の枠。固定のバナーと文脈のバナーを合わせて最大 2 枚)",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
         "marker": "<SidebarPromoBanner",
-        "condition": "固定のバナーは労働系 (labor) のランキングだけ。文脈のバナーの在庫が無いときは AdSense (SIDEBAR_AFFILIATE_FALLBACK) で埋まる。品目のランキングは楽天の商品カードも同じ枠に入る。AdSense を止めているときは文脈のバナーを右レールの上段へ移す"
+        "condition": "固定のバナーは労働系 (labor) のランキングだけ。文脈のバナーの在庫が無いときは何も出さない (2026-11-03 から AdSense で埋めない。右レールの AdSense は上段と表の横の 2 枠まで)。品目のランキングは楽天の商品カードも同じ枠に入る。AdSense を止めているときは文脈のバナーを右レールの上段へ移す"
       },
       {
         "slot": "adsense-rail-rect",
@@ -319,11 +394,31 @@
     ],
     "blog": [
       {
+        "slot": "ad-row",
+        "region": "body",
+        "position": "本文の h2 の 2・4・6 番目の直前 (injectAdRows が <ad-row> を差し込む。見出しが足りなければ減らす)",
+        "source": "apps/web/src/features/blog/components/md-content.tsx",
+        "marker": "position={`blog-row-${Number(index) + 1}`}",
+        "trackingPosition": "blog-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "BLOG_ARTICLE_INLINE"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "3 段の中身は左から [AdSense, PR] / [PR, AdSense(HUB_INCONTENT)] / [AdSense(CONTENT_FOOTER), PR]。手で広告を置いた記事には差し込まない"
+      },
+      {
         "slot": "adsense-body",
         "region": "body",
-        "position": "本文の h2 の 2 番目と中盤 (injectAdSlots が <ad-slot> を差し込む位置)",
+        "position": "記事に手で置いた <ad-slot> (自動の差し込みは 2026-11-03 に広告の段へ移した)",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "slotBox={adSlotBox(\"adsense-body\")}"
+        "marker": "slotBox={adSlotBox(\"adsense-body\")}",
+        "condition": "手で <ad-slot> を置いた記事だけ",
+        "knownAdjacentReason": "自動の広告の段と手で置いた <ad-slot> は同じ記事に同時には出ない (手で広告を置いた記事には段を差し込まない) 描き分けが、ファイルの中で並んでいるだけ"
       },
       {
         "slot": "affiliate-text",
@@ -331,14 +426,6 @@
         "position": "本文の h2 の 2/4/6 番目の直前 (テキスト版の記事)",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "<AffiliateTextAdList"
-      },
-      {
-        "slot": "affiliate-rect",
-        "region": "body",
-        "position": "本文の自動挿入のバナー (バナー版の記事) と記事末尾",
-        "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "<BannerAd\n                            href={b.href}\n                            imageUrl={b.imageUrl}\n                            trackingPixelUrl={b.trackingPixelUrl}\n                            width={b.width}",
-        "knownAdjacentReason": "テキスト版とバナー版は記事ごとの A/B (blog-inbody-format) で、同時には出ない枠がファイルの中で並んでいるだけ"
       },
       {
         "slot": "affiliate-rect",
@@ -359,11 +446,21 @@
         "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
       },
       {
-        "slot": "adsense-body-all",
+        "slot": "ad-row",
         "region": "body",
-        "position": "記事の末尾 (手置きの <ad-slot> が無い記事)",
+        "position": "記事の末尾",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "slotBox={adSlotBox(\"adsense-body-all\")}"
+        "marker": "position=\"blog-row-end\"",
+        "trackingPosition": "blog-row-end",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       },
       {
         "slot": "affiliate-rect",
@@ -382,11 +479,38 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "カードの格子の後",
+        "position": "「知りたいことから探す」と「都道府県から探す」の間",
         "source": "apps/web/src/app/page.tsx",
-        "marker": "position=\"home-native\""
+        "marker": "position=\"home-row-1\"",
+        "trackingPosition": "home-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
+      },
+      {
+        "slot": "ad-row",
+        "region": "body",
+        "position": "「都道府県から探す」の後 (ページの最後)",
+        "source": "apps/web/src/app/page.tsx",
+        "marker": "position=\"home-row-2\"",
+        "trackingPosition": "home-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "category": [
@@ -398,153 +522,357 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
         "position": "新着ブログの後・全ランキングの前",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"category-row-1\"",
+        "trackingPosition": "category-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
         "position": "全ランキングの後・47都道府県から探すの前",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
-        "marker": "position=\"category-native\""
+        "marker": "position=\"category-row-2\"",
+        "trackingPosition": "category-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
-        "marker": "<FooterAdSlot className=\"mt-4\" />"
+        "marker": "position=\"category-row-3\"",
+        "trackingPosition": "category-row-3",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       }
     ],
     "category-compare": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "比較の表の後 (ページの最後)",
+        "position": "比較の後 (ページの最後)",
         "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
-        "marker": "position=\"compare-native\""
+        "marker": "position=\"compare-row-1\"",
+        "trackingPosition": "compare-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "survey": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "代表ランキングの後・全ランキングの表の前",
+        "position": "全ランキングの前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"survey-row-1\"",
+        "trackingPosition": "survey-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "全ランキングの表の後・数字を読むときの注意の前",
+        "position": "全ランキングの後・注意の前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
-        "marker": "position=\"survey-native\""
+        "marker": "position=\"survey-row-2\"",
+        "trackingPosition": "survey-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
-        "position": "数字を読むときの注意の後 (ページの最後)",
+        "position": "この調査についての後 (ページの最後)",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
-        "marker": "<FooterAdSlot />",
-        "condition": "注意 (編集した内容) がある調査だけ。無い調査では PR の列と隣り合わせになるので出さない"
+        "marker": "position=\"survey-row-3\"",
+        "trackingPosition": "survey-row-3",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "「この調査について」がある調査だけ (PR の段と隣り合わせにしない)"
       }
     ],
     "tag": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
         "position": "記事の一覧の後 (ページの最後)",
         "source": "apps/web/src/app/tag/[tagKey]/page.tsx",
-        "marker": "position=\"tag-native\""
+        "marker": "position=\"tag-row-1\"",
+        "trackingPosition": "tag-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "area": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "県データブックの後・市区町村の一覧の前",
+        "position": "県のデータブックの後・市区町村の一覧の前",
         "source": "apps/web/src/app/areas/[areaCode]/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"area-row-1\"",
+        "trackingPosition": "area-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "PR は共通の案件。県の返礼品のカードは別に出る"
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/areas/[areaCode]/page.tsx",
-        "marker": "<FooterAdSlot />"
+        "marker": "position=\"area-row-2\"",
+        "trackingPosition": "area-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "city": [
       {
         "slot": "adsense-footer",
         "region": "body",
-        "position": "ページの最後 (市区町村の一覧・返礼品の後)",
+        "position": "市区町村の一覧の前 (後ろの県のバナー・返礼品のカードと隣り合わせにしない。2026-11-03)",
         "source": "apps/web/src/features/area-profile/components/CityPageFooter.tsx",
         "marker": "slotBox={adSlotBox(\"adsense-footer\")}"
       }
     ],
     "theme-local-finance": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "ダッシュボードの後",
+        "position": "ダッシュボードの後・全指標の前",
         "source": "apps/web/src/app/themes/local-finance/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"local-finance-row-1\"",
+        "trackingPosition": "local-finance-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "全指標の節の後 (ページの最後)",
+        "position": "全指標の後 (ページの最後)",
         "source": "apps/web/src/app/themes/local-finance/page.tsx",
-        "marker": "<InContentAdSlot slot={THEMES_CONTENT} />"
+        "marker": "position=\"local-finance-row-2\"",
+        "trackingPosition": "local-finance-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       }
     ],
     "ranking-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/ranking/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"ranking-index-row\"",
+        "trackingPosition": "ranking-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "themes-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/themes/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"themes-index-row\"",
+        "trackingPosition": "themes-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "areas-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/areas/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"areas-index-row\"",
+        "trackingPosition": "areas-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "survey-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/survey/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"survey-index-row\"",
+        "trackingPosition": "survey-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "blog-tags": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/blog/tags/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"blog-tags-row\"",
+        "trackingPosition": "blog-tags-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "search": [
@@ -558,32 +886,92 @@
     ],
     "japan-theme": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "全国の時系列の後",
+        "position": "ページの最後",
         "source": "apps/web/src/app/japan/[themeSlug]/page.tsx",
-        "marker": "position=\"japan-native\""
+        "marker": "position=\"japan-row-1\"",
+        "trackingPosition": "japan-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "municipality-ranking": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "市区町村の順位の後",
+        "position": "ページの最後",
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
-        "marker": "position=\"municipality-native\""
+        "marker": "position=\"municipality-row-1\"",
+        "trackingPosition": "municipality-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "municipality-theme": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "テーマの指標の後",
+        "position": "ページの最後",
         "source": "apps/web/src/app/municipalities/themes/[themeSlug]/page.tsx",
-        "marker": "position=\"municipality-theme-native\""
+        "marker": "position=\"municipality-theme-row-1\"",
+        "trackingPosition": "municipality-theme-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "municipalities-index": [
+      {
+        "slot": "ad-row",
+        "region": "body",
+        "position": "公開中のテーマの後・データ品質への取り組みの前",
+        "source": "apps/web/src/app/municipalities/page.tsx",
+        "marker": "position=\"municipalities-row-1\"",
+        "trackingPosition": "municipalities-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "PR は共通の案件"
+      },
       {
         "slot": "adsense-rail-rect",
         "region": "rail",
@@ -597,6 +985,6 @@
   "rules": {
     "noAdjacentSlots": true,
     "noFirstView": true,
-    "maxAdsenseBodyPerPage": 2
+    "maxAdsenseBodyPerPage": 4
   }
 }

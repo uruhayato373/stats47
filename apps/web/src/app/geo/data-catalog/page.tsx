@@ -5,7 +5,7 @@ import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection } from '@/components/surface';
+import { SurfaceSection, ValueTable, type ValueTableColumn } from '@/components/surface';
 
 import { isGeoCrossAnalysisSlug, loadGeoAnalysisSnapshot } from '@/features/geo-analysis';
 
@@ -19,6 +19,19 @@ export const metadata: Metadata = {
   alternates: { canonical: '/geo/data-catalog' },
 };
 
+const GEOMETRY_LABELS: Record<string, string> = { mesh: '1kmメッシュ', point: '地点', line: '線', polygon: '区域' };
+const LAYER_COLUMNS: ValueTableColumn[] = [
+  { key: 'label', header: 'レイヤー名', rowHeader: true },
+  { key: 'role', header: '役割', align: 'left' },
+  { key: 'geometry', header: '形状', align: 'left' },
+];
+const SOURCE_COLUMNS: ValueTableColumn[] = [
+  { key: 'name', header: '資料名', rowHeader: true },
+  { key: 'datasetId', header: 'データセットID', align: 'left' },
+  { key: 'version', header: '版', align: 'left' },
+  { key: 'license', header: '利用条件', align: 'left' },
+];
+
 export default async function GeoDataCatalogPage() {
   const analyses = await Promise.all(GEO_ANALYSES.map(async spec => ({
     spec, snapshot: isGeoCrossAnalysisSlug(spec.slug) ? await loadGeoAnalysisSnapshot(spec.slug) : null,
@@ -29,16 +42,28 @@ export default async function GeoDataCatalogPage() {
     <Link href="/geo/layers" className="mb-5 inline-flex min-h-11 items-center text-sm text-primary underline">GISを探す・単体の地図で確認する →</Link>
     <div className="space-y-6">{analyses.map(({ spec, snapshot }) => <SurfaceSection key={spec.slug}>
       <SectionHeader title={spec.title} description={spec.question} hideRule />
-      <dl className="mt-4 grid gap-4 sm:grid-cols-2">{spec.sourceLayers.map(layer => <div key={layer.id}>
-        <dt className="font-semibold">{layer.label}</dt>
-        <dd className="mt-1 text-sm text-muted-foreground">{layer.role === 'context-only' ? '背景説明用。空間判定の計算には使いません。' : '計算に使う入力データ。'} {({ mesh: '1kmメッシュ', point: '地点', line: '線', polygon: '区域' } as Record<string, string>)[layer.geometry]}</dd>
-      </div>)}</dl>
+      <div className="mt-4"><ValueTable
+        ariaLabel={`${spec.title}で使うレイヤー`}
+        columns={LAYER_COLUMNS}
+        rows={spec.sourceLayers.map(layer => ({ key: layer.id, cells: [
+          layer.label,
+          layer.role === 'context-only' ? '背景説明用。空間判定の計算には使いません。' : '計算に使う入力データ。',
+          GEOMETRY_LABELS[layer.geometry],
+        ] }))}
+      /></div>
       {snapshot ? <>
         <h3 className="mt-5 text-sm font-bold">対象年度・一次資料</h3>
-        <ul className="mt-2 space-y-2 text-sm">{snapshot.sources.map(source => <li key={source.datasetId + '-' + source.version}>
-          <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{source.name}</a>
-          <span className="ml-2 text-muted-foreground">{source.datasetId} / 版 {source.version} / {source.license}</span>
-        </li>)}</ul>
+        <div className="mt-2"><ValueTable
+          ariaLabel={`${spec.title}の一次資料`}
+          columns={SOURCE_COLUMNS}
+          scrollRegion
+          rows={snapshot.sources.map(source => ({ key: source.datasetId + '-' + source.version, cells: [
+            <a key="name" href={source.url} target="_blank" rel="noopener noreferrer">{source.name}</a>,
+            source.datasetId,
+            source.version,
+            source.license,
+          ] }))}
+        /></div>
         <p className="mt-3 text-xs text-muted-foreground">上記資料をもとにstats47が空間判定・集計・表示加工。結果生成日 {snapshot.generatedAt.slice(0, 10)}。</p>
       </> : <p role="status" className="mt-4 text-sm text-muted-foreground">配信データの版を確認できません。原典と計算手法は分析の方法ページを参照してください。</p>}
       <div className="mt-4 flex flex-wrap gap-4 text-sm"><Link href={'/geo/' + spec.slug} className="text-primary underline">地図と判定結果</Link><Link href="/geo/method" className="text-primary underline">計算方法と限界</Link></div>

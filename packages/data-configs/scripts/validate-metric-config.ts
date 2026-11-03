@@ -40,7 +40,7 @@ import {
   validateThemeMetricContentCoverage,
 } from '../src/theme-catalog';
 import { findDigitDashPlaceholders } from '../src/seo-meta-facts';
-import { parseUnit } from '../src/unit/unit-semantics';
+import { conversionFactor, parseUnit, scalePrefixMultiplier } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const METRICS_DIR = resolve(__dirname, '../../..', METRIC_DEFINITIONS_DIR);
@@ -75,6 +75,8 @@ interface Row {
   isActive: boolean | null;
   colorScheme: string | null;
   valueScale: number | null;
+  /** display の換算 (表示単位・係数) */
+  display: { conversionFactor?: number; displayUnit?: string } | null;
   seoTitle: string | null;
   seoDescription: string | null;
   /** 換算単位 (normalizationOptions[].unit) が「‐/10万人」のように「‐」で始まる件数 */
@@ -147,6 +149,7 @@ function main() {
       isActive: metric.isActive ?? false,
       colorScheme: metric.visualization.colorScheme,
       valueScale: source.kind === 'estat' ? (source.valueScale ?? null) : null,
+      display: metric.display ?? null,
       seoTitle: metric.seoTitle ?? null,
       seoDescription: metric.seoDescription ?? null,
       normalizationUnitDash: (
@@ -343,6 +346,31 @@ function main() {
       errors.push(
         `[value-scale] ${r.file}: valueScale は 10^k のみ (${r.valueScale})`
       );
+    }
+  }
+
+  // error: 表示の換算 (display) の係数が単位と合わない
+  //
+  // 手で書いた係数がずれると、ランキングの地図の凡例が 10〜100 倍ずれて出る。2026-11-03 に
+  // 「千円→万円」を 0.001 (正しくは 0.1)、「千円→億円」を 0.000001 (正しくは 0.00001) と書いた 8 件が
+  // 本番の凡例で誤った値を出していた。係数は単位の正典 (conversionFactor) で検算する。
+  // 単位の正典が換算できない組 (「学級･講座→学級」のような呼び方の言い換え) は係数 1 だけを許す。
+  for (const r of rows) {
+    const display = r.display;
+    if (!display) continue;
+    const factor = display.conversionFactor ?? 1;
+    if (!display.displayUnit) {
+      if (factor !== 1) errors.push(`[display-factor] ${r.file}: display.conversionFactor ${factor} に displayUnit が無い。何の単位に直すのかを書く`);
+      continue;
+    }
+    // 解釈できない単位でも、表示単位が「万」「億」を前に付けただけ (TEU→万TEU) なら接頭辞の倍率で検算できる
+    const unit = (r.unit ?? '').normalize('NFKC').trim(), shown = display.displayUnit.normalize('NFKC').trim();
+    const prefixOnly = [1, 2].map((n) => ({ prefix: shown.slice(0, n), rest: shown.slice(n) })).find((c) => c.rest === unit && scalePrefixMultiplier(c.prefix) !== null);
+    const expected = conversionFactor(r.unit, display.displayUnit) ?? (prefixOnly ? 1 / scalePrefixMultiplier(prefixOnly.prefix)! : null);
+    if (expected === null) {
+      if (factor !== 1) errors.push(`[display-factor] ${r.file}: 「${r.unit}→${display.displayUnit}」は単位の正典で換算できないのに係数 ${factor}。言い換えなら係数 1、換算なら単位の語彙を確かめる`);
+    } else if (Math.abs(factor / expected - 1) > 1e-9) {
+      errors.push(`[display-factor] ${r.file}: 「${r.unit}→${display.displayUnit}」の係数は ${expected} (書かれているのは ${factor})`);
     }
   }
 

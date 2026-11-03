@@ -41,6 +41,8 @@ export interface DataTableColumnMeta {
   filterOptions?: Array<{ value: string; label: string }>;
   width?: string;
   minWidth?: string;
+  /** 長い文字の列を折り返す (既定は 1 行。題名の長い列が隣の列に重ならないようにする) */
+  wrap?: boolean;
 }
 
 declare module "@tanstack/react-table" {

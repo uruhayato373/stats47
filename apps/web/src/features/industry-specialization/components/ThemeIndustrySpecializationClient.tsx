@@ -1,18 +1,10 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { INDUSTRY_SPECIALIZATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -52,72 +44,70 @@ export function ThemeIndustrySpecializationClient({
           人。このうち、大分類内訳に分かれない
           {format(area.unclassifiedEmployees)}人も構成割合の分母に含めています。
         </p>
-        <Table aria-label={`${area.areaName}の18業種の雇用構成と特化係数`}>
-          <TableCaption>
-            特化係数1は全国と同じ構成割合です。1を超える業種は全国より割合が高く、生産性や成長性の評価を表すものではありません。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">産業</TableHead>
-              <TableHead scope="col" className="text-right!">
-                従業者
-                <br />
-                （人）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                構成割合
-                <br />
-                （%）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                全国割合
-                <br />
-                （%）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                特化
-                <br />
-                係数
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {area.industries.map((row) => (
-              <TableRow
-                key={row.industryCode}
-                data-industry-code={row.industryCode}
-              >
-                <TableHead scope="row" className="min-w-32 whitespace-normal!">
-                  {row.industryName}
-                </TableHead>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-employees={row.employees}
-                >
-                  {format(row.employees)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-share={row.sharePercent}
-                >
-                  {format(row.sharePercent, 2)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-national-share={row.nationalSharePercent}
-                >
-                  {format(row.nationalSharePercent, 2)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-location-quotient={row.locationQuotient}
-                >
-                  {format(row.locationQuotient, 2)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          ariaLabel={`${area.areaName}の18業種の雇用構成と特化係数`}
+          caption="特化係数1は全国と同じ構成割合です。1を超える業種は全国より割合が高く、生産性や成長性の評価を表すものではありません。"
+          columns={[
+            { key: 'industry', header: '産業', rowHeader: true, className: 'min-w-32' },
+            {
+              key: 'employees',
+              header: (
+                <>
+                  従業者
+                  <br />
+                  （人）
+                </>
+              ),
+            },
+            {
+              key: 'share',
+              header: (
+                <>
+                  構成割合
+                  <br />
+                  （%）
+                </>
+              ),
+            },
+            {
+              key: 'nationalShare',
+              header: (
+                <>
+                  全国割合
+                  <br />
+                  （%）
+                </>
+              ),
+            },
+            {
+              key: 'locationQuotient',
+              header: (
+                <>
+                  特化
+                  <br />
+                  係数
+                </>
+              ),
+            },
+          ]}
+          rows={area.industries.map((row) => ({
+            key: row.industryCode,
+            attrs: { 'data-industry-code': row.industryCode },
+            cells: [
+              row.industryName,
+              { content: format(row.employees), attrs: { 'data-employees': row.employees } },
+              { content: format(row.sharePercent, 2), attrs: { 'data-share': row.sharePercent } },
+              {
+                content: format(row.nationalSharePercent, 2),
+                attrs: { 'data-national-share': row.nationalSharePercent },
+              },
+              {
+                content: format(row.locationQuotient, 2),
+                attrs: { 'data-location-quotient': row.locationQuotient },
+              },
+            ],
+          }))}
+        />
         <p className="text-xs leading-relaxed text-muted-foreground">
           公務、農林漁業の個人経営、外国会社・法人でない団体等は対象に含みません。事業所の所在地で集計しています。
         </p>

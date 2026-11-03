@@ -59,7 +59,7 @@ h1{font-size:1.5em;margin:1.4em 0 0.8em;line-height:1.4;border-bottom:2px solid 
 h2{font-size:1.25em;margin:1.6em 0 0.6em;line-height:1.5;}
 h3{font-size:1.1em;margin:1.2em 0 0.5em;}
 /* 見出しがページ末尾に孤立するのを防ぐ (直後の本文と必ず同じページに置く)。 */
-h1,h2,h3{page-break-after:avoid;-webkit-column-break-after:avoid;}
+h1,h2,h3,h4,h5{page-break-after:avoid;-webkit-column-break-after:avoid;}
 p{margin:0.8em 0;text-align:justify;orphans:2;widows:2;}
 figure{margin:1.2em 0;text-align:center;page-break-inside:avoid;}
 /* 図はページ高を超えないよう高さも制限する。max-width だけだと縦長の図
@@ -79,7 +79,10 @@ aside.callout .callout-label{font-weight:bold;margin:0 0 0.3em;font-size:0.9em;c
 aside.callout p{margin:0.3em 0;font-size:0.95em;}
 table{width:100%;border-collapse:collapse;margin:1em 0;font-size:0.9em;}
 th,td{padding:0.3em;border-bottom:1px solid currentColor;text-align:left;}
+th.num,td.num{text-align:right;}
 tr{page-break-inside:avoid;break-inside:avoid;}
+/* 1 ページに収まる表 (全県表は 12 行ずつ) は途中で分けない。見出しの直後で改ページしない指定と合わせて、見出しと 1 行だけがページ末に残らない */
+table{page-break-inside:avoid;break-inside:avoid;}
 .sources h2{font-size:1.1em;}
 .sources p{font-size:0.85em;margin:0.4em 0;}`;
 

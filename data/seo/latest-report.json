@@ -1,66 +1,66 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-02",
+  "date": "2026-11-03",
   "period": {
-    "periodStart": "2026-10-24",
-    "periodEnd": "2026-10-30",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-31",
     "windowDays": 7
   },
-  "inputHash": "3a8ddf32e15ec23a50bc92ca2aed8fe59ed91dd12f49f6b88ee70910fa4cc33f",
+  "inputHash": "ddeabbb395b592a3f9c42721366f865f34c62b862d03f669af160f97571f4d7f",
   "movements": [
     {
       "keyword": "苫小牧市 人口",
       "targetPath": "/areas/01000/cities/01213",
       "before": 74,
-      "after": 10.2,
+      "after": 10.023809523809524,
       "beforeImpressions": 1,
-      "impressions": 30,
-      "change": 63.8
+      "impressions": 42,
+      "change": 63.976190476190474
+    },
+    {
+      "keyword": "保健師 年収",
+      "targetPath": "/ranking/public-health-nurse-annual-income",
+      "before": 3,
+      "after": 65,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -62
     },
     {
       "keyword": "警察 官 年収 ランキング",
       "targetPath": "/ranking/avg-salary-police-prefecture",
       "before": 68,
-      "after": 6.555555555555555,
+      "after": 7.1,
       "beforeImpressions": 1,
-      "impressions": 9,
-      "change": 61.44444444444444
-    },
-    {
-      "keyword": "高校 教師 年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 67,
-      "after": 10,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": 57
+      "impressions": 10,
+      "change": 60.9
     },
     {
       "keyword": "尾鷲市 人口",
       "targetPath": "/areas/24000/cities/24209",
       "before": 64,
-      "after": 8.333333333333332,
+      "after": 8.233333333333334,
       "beforeImpressions": 1,
-      "impressions": 24,
-      "change": 55.66666666666667
+      "impressions": 30,
+      "change": 55.766666666666666
     },
     {
-      "keyword": "高校教師年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 63,
-      "after": 10,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 53
-    },
-    {
-      "keyword": "サンマ 漁獲量",
-      "targetPath": "/ranking/fishery-species-catch-pacific-saury",
+      "keyword": "人口動態統計",
+      "targetPath": "/japan/population-dynamics",
       "before": 54,
-      "after": 9,
+      "after": 7,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 45
+      "change": 47
+    },
+    {
+      "keyword": "高卒 初任 給 平均",
+      "targetPath": "/ranking/starting-salary-highschool",
+      "before": 22,
+      "after": 65.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": -43.5
     },
     {
       "keyword": "岡山市 人工",
@@ -72,31 +72,31 @@
       "change": 42
     },
     {
-      "keyword": "甲府 人流",
-      "targetPath": "/areas/19000/cities/19201",
-      "before": 53,
-      "after": 15,
-      "beforeImpressions": 1,
+      "keyword": "愛西市人口",
+      "targetPath": "/areas/23000/cities/23232",
+      "before": 49.166666666666664,
+      "after": 9,
+      "beforeImpressions": 6,
       "impressions": 2,
-      "change": 38
+      "change": 40.166666666666664
+    },
+    {
+      "keyword": "漁獲量",
+      "targetPath": "/japan/fishery-marine",
+      "before": 14,
+      "after": 52,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -38
     },
     {
       "keyword": "能代市 人口",
       "targetPath": "/areas/05000/cities/05202",
       "before": 48,
-      "after": 10.666666666666666,
+      "after": 10.833333333333334,
       "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 37.333333333333336
-    },
-    {
-      "keyword": "私立高校教師 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 43,
-      "after": 80,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -37
+      "impressions": 6,
+      "change": 37.166666666666664
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "酷暑日の都道府県数",
     "targetPath": "/blog/extreme-heat-days-prefecture",
-    "rank": 9.076109936575053,
-    "impressions": 946,
+    "rank": 9.074973600844773,
+    "impressions": 947,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,

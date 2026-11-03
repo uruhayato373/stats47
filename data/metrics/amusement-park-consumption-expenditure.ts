@@ -5,6 +5,7 @@ export const amusementParkConsumptionExpenditure: MetricConfig = {
   "key": "amusement-park-consumption-expenditure",
   "title": "遊園地入場・乗物代消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間遊園地入場・乗物代消費支出額",
+  "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に遊園地入場・乗物代に支出した1世帯当たりの金額。県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

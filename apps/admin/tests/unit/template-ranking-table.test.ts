@@ -15,7 +15,7 @@ describe('ranking table basic form', () => {
     expect(svg.indexOf('>県1</text>')).toBeLessThan(svg.indexOf('>県10</text>'));
     expect(svg).not.toContain('>県11</text>');
     expect(svg).toContain('>35.1</text>');
-    for (const text of ['順位', '都道府県', '最高気温（℃）', '日最高気温の月平均の最高値', '上位10県']) expect(svg).toContain(text);
+    for (const text of ['順位', '都道府県', '最高気温（°C）', '日最高気温の月平均の最高値', '上位10県']) expect(svg).toContain(text);
     expect(svg).not.toContain('を抜粋');
     expect(svg).not.toContain('data-category');
     expect(svg).not.toContain('<rect x="352"');

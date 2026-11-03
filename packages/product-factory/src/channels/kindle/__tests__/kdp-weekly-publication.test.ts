@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildKdpWeeklyDecision, type KdpWeeklyListing } from "../kdp-weekly-publication";
-import type { SalesObservation } from "../../../sales/types";
+import type { SalesCoverage, SalesObservation } from "../../../sales/types";
 
 const S1_IDS = Array.from({ length: 12 }, (_, index) => `K-S1-${String(index + 1).padStart(2, "0")}`);
 
@@ -16,7 +16,7 @@ function observation(productId: string, positive = true): SalesObservation {
     channel: "kdp",
     productId,
     periodStart: "2026-08-30",
-    periodEnd: "2026-09-27",
+    periodEnd: "2026-09-26",
     orders: positive ? 1 : 0,
     units: positive ? 1 : 0,
     netRevenueYen: positive ? 500 : 0,
@@ -37,6 +37,18 @@ function decide(
   return buildKdpWeeklyDecision({ week, generatedAt, listings: rows, observations });
 }
 
+function monthCoverage(periodStart: string, periodEnd: string, productIds: readonly string[] = S1_IDS): SalesCoverage {
+  return {
+    channel: "kdp",
+    periodStart,
+    periodEnd,
+    productIds,
+    evidencePath: ".local/product-sales-evidence/kdp/report.json",
+    evidenceSha256: "b".repeat(64),
+    recordedAt: "2026-10-16T00:00:00.000Z",
+  };
+}
+
 describe("KDP weekly publication gate", () => {
   it("holds while any S1 title is not live", () => {
     const rows = listings({ "K-S1-12": { kdpStatus: "in_review" } });
@@ -49,6 +61,46 @@ describe("KDP weekly publication gate", () => {
     const result = decide(listings(), []);
     expect(result.status).toBe("measure");
     expect(result.cohortMeasurement?.missingBookIds).toHaveLength(12);
+  });
+
+  it("完全な月次レポートの範囲に入った書籍は、明細が無くても計測済み (0 件) として数える", () => {
+    const result = buildKdpWeeklyDecision({
+      week: "2026-W40",
+      generatedAt: "2026-09-28T00:00:00.000Z",
+      listings: listings(),
+      observations: [{ ...observation("K-S1-02"), periodStart: "2026-08-01", periodEnd: "2026-08-31" }],
+      coverage: [monthCoverage("2026-08-01", "2026-08-31"), monthCoverage("2026-09-01", "2026-09-30")],
+    });
+    expect(result.cohortMeasurement?.missingBookIds).toEqual([]);
+    // 8 月の 1 冊は月次の明細で、窓 (08-30〜09-26) の中の販売か分からない。需要ありにも 0 にもしない
+    expect(result.cohortMeasurement?.positiveEvidenceBookIds).toEqual([]);
+    expect(result.cohortMeasurement?.ambiguousEvidenceBookIds).toEqual(["K-S1-02"]);
+    expect(result.status).toBe("measure");
+    expect(result.blockers[0]).toMatch(/判定不能: K-S1-02/);
+  });
+
+  it("範囲だけで販売の無い 4 週は、計測済みの需要 0 として止める", () => {
+    const result = buildKdpWeeklyDecision({
+      week: "2026-W40",
+      generatedAt: "2026-09-28T00:00:00.000Z",
+      listings: listings(),
+      observations: [],
+      coverage: [monthCoverage("2026-08-01", "2026-08-31"), monthCoverage("2026-09-01", "2026-09-30")],
+    });
+    expect(result.status).toBe("stop-no-demand");
+  });
+
+  it("範囲が 4 週の一部しか無い、または書籍を含まない月は未計測のまま (欠測を 0 にしない)", () => {
+    const result = buildKdpWeeklyDecision({
+      week: "2026-W40",
+      generatedAt: "2026-09-28T00:00:00.000Z",
+      listings: listings(),
+      observations: [],
+      coverage: [monthCoverage("2026-08-01", "2026-08-31"), monthCoverage("2026-09-01", "2026-09-30", ["K-S1-01"])],
+    });
+    expect(result.status).toBe("measure");
+    expect(result.cohortMeasurement?.measuredBookIds).toEqual(["K-S1-01"]);
+    expect(result.cohortMeasurement?.missingBookIds).toHaveLength(11);
   });
 
   it("waits for the full four-week window before asking for sales data", () => {

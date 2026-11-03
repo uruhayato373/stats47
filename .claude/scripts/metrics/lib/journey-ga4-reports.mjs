@@ -119,7 +119,7 @@ const eventIs = (name) => exact('eventName', name);
 const eventIn = (names) => ({ filter: { fieldName: 'eventName', inListFilter: { values: names } } });
 
 /** 成果として定義した key event (google-admin AUTHORED_KEY_EVENTS と同じ集合)。 */
-export const KEY_EVENT_NAMES = ['affiliate_click', 'contact_click', 'cta_click', 'file_download'];
+export const KEY_EVENT_NAMES = ['affiliate_click', 'contact_click', 'cta_click', 'file_download', 'product_click'];
 
 export const MEASUREMENT_REPORTS = Object.freeze({
   'content-group': {
@@ -204,6 +204,32 @@ export const MEASUREMENT_REPORTS = Object.freeze({
     }),
     dims: ['sessionSource', 'sessionMedium', 'sessionDefaultChannelGroup'],
     metrics: ['sessions', 'engagedSessions', 'screenPageViews'],
+  },
+  // PRODUCT-REFERRAL-MEASURE-01 (2026-11-03): 商品案内の表示と販売先クリックを、販売先・販売先の商品 ID・置き場所別に。
+  // product_destination / product_id は登録待ちの custom dimension。登録前の週はこのレポートが error になり、判定不能として扱う。
+  'product-referrals': {
+    columns: ['eventName', 'product_destination', 'product_id', 'link_position', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['eventName', 'customEvent:product_destination', 'customEvent:product_id', 'customEvent:link_position'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(eventIn(['product_impression', 'product_click'])),
+    }),
+    dims: ['eventName', 'customEvent:product_destination', 'customEvent:product_id', 'customEvent:link_position'],
+    metrics: ['eventCount'],
+  },
+  // 逆向き: 自分の商品 (Kindle の本・note の記事本文) からサイトへ戻ったセッション。UTM の規約は config/inbound-utm.mjs。
+  // Kindle (utm_medium=ebook) は既定のチャネルでは Unassigned になり referral-sources に出ないので、流入元で直接絞る。
+  'product-inbound': {
+    columns: ['sessionSource', 'sessionMedium', 'sessionCampaignName', 'sessionManualAdContent', 'sessions', 'engagedSessions'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['sessionSource', 'sessionMedium', 'sessionCampaignName', 'sessionManualAdContent'].map((name) => ({ name })),
+      metrics: ['sessions', 'engagedSessions'].map((name) => ({ name })),
+      dimensionFilter: japanAnd({ filter: { fieldName: 'sessionSource', inListFilter: { values: ['kindle', 'note'] } } }),
+    }),
+    dims: ['sessionSource', 'sessionMedium', 'sessionCampaignName', 'sessionManualAdContent'],
+    metrics: ['sessions', 'engagedSessions'],
   },
 });
 

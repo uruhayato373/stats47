@@ -67,6 +67,12 @@ export interface KindleCoverBackgroundAsset {
   readonly bytes: number;
   readonly width: 1600;
   readonly height: 2560;
+  /**
+   * 書名ごと画像に描いた表紙 (オーナー判断 2026-11-03: ポップで目立つ表紙にするため、S1 は Codex に文字ごと描かせる)。
+   * あると satori で文字を重ねず、画像をそのまま表紙にする。画像生成は日本語を崩すので、描かれた文字を 1 字ずつ
+   * 照合した結果をここに書く。`checkedText` に書名 (主題・副題) が入っていないと検査で落ちる (書名を変えたら描き直し)。
+   */
+  readonly textBaked?: { readonly checkedText: readonly string[]; readonly checkedAt: string };
 }
 
 export interface KindleCoverDesign {
@@ -184,6 +190,8 @@ export interface KindleBook {
   readonly author: string;
   /** 章立て (先頭は通例 fresh の「はじめに」、末尾は fresh の「おわりに/横断分析」)。 */
   readonly chapters: readonly BookChapter[];
+  /** ブログ章の末尾に全 47 都道府県の値の表を付けるか (図と同じデータから作る。full-tables.ts。KINDLE-QUALITY-LOOP-01) */
+  readonly fullTables?: boolean;
   /** 販売価格 (円)。KDP 電子は ¥250-1,250 が印税 70% 帯。 */
   readonly priceYen: 0 | 500 | 800 | 1000;
   /** 書き下ろし部分の宣言 (30% ルールの根拠・validator が非空を要求)。 */
