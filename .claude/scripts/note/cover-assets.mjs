@@ -6,8 +6,9 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { COVER_ROOT, readCoverLedger, validateCoverLedger, emptyCoverArticle, updateCoverLedger,
-  recordCoverObservation, addCoverRevision, reviewCoverRevision, coverSha } from './lib/cover-assets.mjs';
+  recordCoverObservation, addCoverRevision, reviewCoverRevision, coverSha, adoptedCoverRevision } from './lib/cover-assets.mjs';
 import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover, readStoredCoverInput } from './lib/cover-storage.mjs';
+import { comparePublicCover, publishedRevisionAfterArchive } from './lib/cover-update.mjs';
 import { registerCoverCandidate } from './lib/cover-ingest.mjs';
 import { enumerateNoteBodies } from '../lib/gallery-collectors.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
@@ -17,7 +18,7 @@ const command = process.argv[2];
 const options = {};
 for (let i = 3; i < process.argv.length; i += 2) {
   const flag = process.argv[i];
-  if (!['--keys', '--manifest', '--output', '--revision', '--status', '--reason', '--missing-version', '--source'].includes(flag) || !process.argv[i + 1])
+  if (!['--keys', '--manifest', '--output', '--revision', '--status', '--reason', '--missing-version', '--source', '--reviewed-match'].includes(flag) || !process.argv[i + 1])
     throw Error(`invalid argument: ${flag}`);
   options[flag.slice(2)] = process.argv[i + 1];
 }
@@ -82,6 +83,9 @@ if (command === 'seed') {
   const ledger = validateCoverLedger(readCoverLedger(), catalog);
   console.log(JSON.stringify({ articles: ledger.articles.length, revisions: ledger.articles.reduce((s, a) => s + a.revisions.length, 0) }));
 } else if (command === 'archive') {
+  // Palette-reduced deliveries can miss the pixel gate; only keys named here were compared by eye with their adopted revision.
+  const reviewed = new Set(options['reviewed-match']?.split(',') ?? []);
+  if ([...reviewed].some((k) => !keys.has(k))) throw Error('--reviewed-match keys must also be listed in --keys');
   const store = createCoverStore();
   // Network requests run concurrently, ledger mutations are queued in this process (cross-process lock remains exclusive).
   let writes = Promise.resolve();
@@ -89,7 +93,8 @@ if (command === 'seed') {
   await boundedMap(selected, async (article) => {
     const detail = await fetchNoteDetail(article.noteUrl.split('/').at(-1));
     const observedAt = now();
-    let revision = null;
+    let revision = null, comparison = null;
+    const adopted = adoptedCoverRevision(readCoverLedger().articles.find((a) => a.articleKey === article.key) ?? { revisions: [] });
     if (detail.eyecatch) {
       const original = await fetchCoverSource(detail.eyecatch);
       const metadata = await sharp(original).metadata();
@@ -98,12 +103,19 @@ if (command === 'seed') {
       revision = { ...asset, id: asset.sha256, kind: 'published-original', version: 'public-cover-archive', createdAt: observedAt,
         width: metadata.width, height: metadata.height, review: { status: 'not-required', reason: 'Existing public image preserved', reviewedAt: null },
         provenance: { renderer: null, sourceUrl: detail.eyecatch, sourceSha256: coverSha(original) } };
+      if (adopted) {
+        comparison = await comparePublicCover(original, await readStoredCover(adopted, store));
+        if (!comparison.matched && !reviewed.has(article.key)) console.log(`Public cover not linked to adopted revision: ${article.key} (${comparison.reason})`);
+      }
     }
     await mutate((ledger) => {
       const row = ledger.articles.find((a) => a.articleKey === article.key);
       recordCoverObservation(ledger, { key: article.key, noteUrl: article.noteUrl, observedAt,
         status: detail.eyecatch ? 'configured' : 'missing', url: detail.eyecatch ?? null });
-      if (revision) { addCoverRevision(row, revision); row.published.revisionId = revision.id; }
+      if (revision) {
+        addCoverRevision(row, revision);
+        row.published.revisionId = publishedRevisionAfterArchive(revision.id, adopted?.id, comparison, reviewed.has(article.key));
+      }
     });
   });
 } else if (command === 'archive-r2') {
