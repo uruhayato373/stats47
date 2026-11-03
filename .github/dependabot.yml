@@ -3,10 +3,14 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: monday
+      interval: monthly
       time: "04:00"
       timezone: Asia/Tokyo
-    open-pull-requests-limit: 5
+    # 月 1 本の PR にまとめて develop へ入れる (main 宛ての案件ごとの PR が溜まっていた。2026-11-04)
+    target-branch: develop
+    groups:
+      github-actions:
+        patterns: ["*"]
+    open-pull-requests-limit: 1
     commit-message:
       prefix: "ci(deps)"

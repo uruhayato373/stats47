@@ -155,6 +155,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # サイトを変えない提案 (data/seo だけ) は確かめる差分が無いので develop へ直接記録する (2026-11-04)。
+          # 読むのは週次レビュー。サイトを変える提案だけ下書き PR で人が確かめる。
+          if ! grep -qv '^data/seo/' .local/seo-rank-watch/proposal-paths.txt; then
+            while IFS= read -r file; do git add -- "$file"; done < .local/seo-rank-watch/proposal-paths.txt
+            git commit -m 'chore(seo): record keyword proposal without a site change [skip ci]'
+            git pull --rebase origin develop
+            git push origin develop
+            exit 0
+          fi
           branch="codex/seo-keyword-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           git switch -c "$branch"
           while IFS= read -r file; do git add -- "$file"; done < .local/seo-rank-watch/proposal-paths.txt
