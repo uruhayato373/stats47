@@ -1,4 +1,4 @@
-import type { SalesChannel, SalesLedger, SalesObservation } from "./types";
+import type { SalesChannel, SalesCoverage, SalesLedger, SalesObservation } from "./types";
 
 export interface KdpMonthlyRecord {
   readonly id: string;
@@ -19,7 +19,7 @@ export interface KdpMonthlyReport {
   readonly finality: string;
   readonly period: { readonly month: string; readonly start: string; readonly end: string };
   readonly records: readonly KdpMonthlyRecord[];
-  readonly coverage: { readonly complete: boolean };
+  readonly coverage: { readonly complete: boolean; readonly mappedBookIds?: readonly string[] };
 }
 
 export interface KdpMonthlyExclusion {
@@ -49,7 +49,11 @@ export declare function kdpMonthlyRecordsSha256(report: KdpMonthlyReport): strin
 export declare function kdpMonthlyObservations(
   report: KdpMonthlyReport,
   options: { readonly vaultKey: string; readonly recordedAt: string },
-): { observations: SalesObservation[]; excluded: KdpMonthlyExclusion[] };
+): { observations: SalesObservation[]; excluded: KdpMonthlyExclusion[]; coverage: SalesCoverage | null };
+export declare function mergeSalesCoverage(
+  ledger: unknown,
+  entry: SalesCoverage,
+): { ledger: SalesLedger; added: boolean; conflict: boolean };
 export declare function mergeSalesObservations(
   ledger: unknown,
   candidates: readonly SalesObservation[],

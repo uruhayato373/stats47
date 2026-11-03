@@ -3,6 +3,7 @@ export { ProductItem } from "./components/ProductItem";
 export {
   TrackedProductLink,
   TrackedProductOutboundLink,
+  useProductImpression,
 } from "./components/TrackedProductLink";
 export {
   STOREFRONT_PRODUCTS,

@@ -188,6 +188,7 @@ const SM = ".claude/state/metrics";
 export const DATASETS = [
   // ── config/ : 事業の台帳と設定 ──
   d("config.paths", "config/paths.{name}", "config", "ops", "config", "config/ の置き場の定数 (コードが import する)"),
+  d("config.inbound-utm", "config/inbound-utm.{name}", "config", "product", "config", "商品 (Kindle・note) からサイトへ戻るリンクの UTM 規約 (コードが import する)"),
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
   d("coconala.listings", P.COCONALA_LISTINGS, "config", "product", "config", "ココナラの出品内容と公開状態", {
     schema: "config/schema/coconala.listings.schema.json",

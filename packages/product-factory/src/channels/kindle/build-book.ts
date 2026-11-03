@@ -16,6 +16,7 @@ import { buildEpub, type EpubChapterDoc, type EpubImage } from "../../generators
 import sharp from "sharp";
 import { authoredBookSha256, chapterEvidence, revisionEditorIds } from "./revision-evidence";
 import { SITE } from "@stats47/data-configs";
+import { kindleInboundUrl } from "../../../../../config/inbound-utm.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 /** product-factory ルート (freshFile のパス解決基点)。 */
@@ -128,12 +129,20 @@ ${sub}
 }
 
 /** 出典・免責ページの XHTML。 */
-function sourcesPage(sources: readonly { slug: string; title: string; published: boolean }[]): string {
+/**
+ * 出典ページのサイトへのリンク。表示は UTM の無い URL のまま、リンク先にだけ Kindle の UTM を付ける
+ * (`config/inbound-utm.mjs`)。本文の章にはリンクを置かない (md-to-xhtml が外す) ので、本からサイトへ戻る導線はここだけ。
+ */
+function siteLink(url: string, bookId: string, content: "sources" | "latest"): string {
+  return `<a href="${escapeText(kindleInboundUrl(url, bookId, content))}">${escapeText(url)}</a>`;
+}
+
+function sourcesPage(bookId: string, sources: readonly { slug: string; title: string; published: boolean }[]): string {
   // 未公開の元記事は URL を出さない (410 を返す。2026-09-19 K-S1-11 N30)。
   const items = sources
     .map((s) =>
       s.published
-        ? `<p>「${escapeText(s.title)}」— ${R2_SITE}/blog/${escapeText(s.slug)}（${SITE.name}）</p>`
+        ? `<p>「${escapeText(s.title)}」— ${siteLink(`${R2_SITE}/blog/${s.slug}`, bookId, "sources")}（${SITE.name}）</p>`
         : `<p>「${escapeText(s.title)}」— ${SITE.name}（元記事は現在非公開。本書の章として収録）</p>`,
     )
     .join("\n");
@@ -150,7 +159,7 @@ function sourcesPage(sources: readonly { slug: string; title: string; published:
 ${items}
 <h2>免責</h2>
 <p>本書は公的統計の概況を整理したものであり、意思決定の結果を保証するものではありません。国・府省・自治体および e-Stat の公認・推奨を示すものではありません。統計の定義・調査年・集計方法により数値の解釈が変わる場合があります。</p>
-<p>本書のデータは基準年固定です（自動更新はありません）。最新の数値は ${R2_SITE} でご確認ください。</p>
+<p>本書のデータは基準年固定です（自動更新はありません）。最新の数値は ${siteLink(R2_SITE, bookId, "latest")} でご確認ください。</p>
 </section>`;
 }
 
@@ -404,7 +413,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     id: "sources",
     fileName: "chap-999.xhtml",
     title: "出典と免責",
-    bodyXhtml: sourcesPage(sources),
+    bodyXhtml: sourcesPage(book.id, sources),
   });
 
   let coverPng: Buffer | undefined;

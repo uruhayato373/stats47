@@ -4,10 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { summarizeSalesLedger, validateSalesLedger } from "./ledger";
-import { mergeSalesObservations, salesObservationId } from "./ledger-core.mjs";
+import { mergeSalesCoverage, mergeSalesObservations, salesObservationId } from "./ledger-core.mjs";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
-import type { SalesChannel, SalesLedger, SalesObservation } from "./types";
+import type { SalesChannel, SalesCoverage, SalesLedger, SalesObservation } from "./types";
 import { datasetPath } from "../../../../config/datasets.mjs";
 
 const ROOT = path.resolve(__dirname, "../../../..");
@@ -111,6 +111,64 @@ function record(): void {
   console.log(`sales ledger: recorded ${observation.id}`);
 }
 
+/**
+ * 保管庫から復元した KDP 月次レポート (`restore.mjs kdp --month <YYYY-MM>` の出力を
+ * .local/product-sales-evidence/ へ置いたもの) から、その月の計測の範囲を台帳へ足す。
+ * 自動記録 (summarize.mjs) が範囲を書くようになる前の月を埋める経路。
+ * 古いレポートは数えた書籍の一覧を持たないので、出品台帳の ASIN から作り、ASIN の数が
+ * レポートの mappedAsins と一致するときだけ認める (出品台帳が当時と変わっていたら書かない)。
+ */
+function recordKdpCoverage(): void {
+  const evidence = resolveEvidence(required("--report"));
+  const report = JSON.parse(fs.readFileSync(path.join(ROOT, evidence.path), "utf8")) as {
+    scope?: string;
+    finality?: string;
+    period?: { start: string; end: string };
+    coverage?: { complete?: boolean; mappedAsins?: number; mappedBookIds?: string[] };
+  };
+  if (
+    report.scope !== "stats47-exact-asin" ||
+    report.finality !== "finalized-monthly-royalty" ||
+    report.coverage?.complete !== true ||
+    !report.period
+  ) {
+    throw new Error("--report must be a complete finalized KDP monthly report");
+  }
+  let productIds = report.coverage.mappedBookIds;
+  if (!productIds) {
+    const file = JSON.parse(fs.readFileSync(path.join(ROOT, KDP_LISTINGS), "utf8")) as {
+      listings: Record<string, { asin?: string | null; previousEditions?: { asin?: string | null }[] }>;
+    };
+    const asins = new Map<string, string>();
+    for (const [id, listing] of Object.entries(file.listings)) {
+      for (const edition of [listing, ...(listing.previousEditions ?? [])]) {
+        if (edition.asin) asins.set(edition.asin, id);
+      }
+    }
+    if (asins.size !== report.coverage.mappedAsins) {
+      throw new Error(
+        `kdp listings have ${asins.size} ASINs but the report mapped ${report.coverage.mappedAsins}; refusing to guess which books were counted`,
+      );
+    }
+    productIds = [...new Set(asins.values())];
+  }
+  const entry: SalesCoverage = {
+    channel: "kdp",
+    periodStart: report.period.start,
+    periodEnd: report.period.end,
+    productIds: [...productIds].sort(),
+    evidencePath: evidence.path,
+    evidenceSha256: evidence.sha256,
+    recordedAt: new Date().toISOString(),
+  };
+  const merged = mergeSalesCoverage(readLedger(), entry);
+  if (merged.conflict) throw new Error(`coverage for ${entry.periodStart}..${entry.periodEnd} already recorded with other products`);
+  if (merged.added) writeLedger(merged.ledger);
+  console.log(
+    `sales ledger: coverage ${entry.periodStart}..${entry.periodEnd} ${merged.added ? "recorded" : "already recorded"} (${entry.productIds.length} products)`,
+  );
+}
+
 const command = process.argv[2] ?? "summary";
 
 if (command === "init") {
@@ -118,11 +176,13 @@ if (command === "init") {
   console.log(`sales ledger: ${LEDGER_PATH}`);
 } else if (command === "validate") {
   const ledger = readLedger();
-  console.log(`sales ledger: PASS (${ledger.observations.length} observations)`);
+  console.log(`sales ledger: PASS (${ledger.observations.length} observations, ${ledger.coverage?.length ?? 0} coverage)`);
 } else if (command === "summary") {
   console.log(JSON.stringify(summarizeSalesLedger(readLedger()), null, 2));
 } else if (command === "record") {
   record();
+} else if (command === "record-kdp-coverage") {
+  recordKdpCoverage();
 } else {
   throw new Error(`unknown command: ${command}`);
 }

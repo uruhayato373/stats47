@@ -43,7 +43,7 @@ export async function RelatedArticlesCard({ rankingKey, areaType }: Props) {
         ))}
       </CardGrid>
       {product && (
-        <TrackedProductLink href={hrefFor('product', { slug: product.slug })} label={`${product.id}:${product.title}`} surface="ranking_product" className="text-sm text-foreground underline-offset-4 hover:underline">
+        <TrackedProductLink href={hrefFor('product', { slug: product.slug })} label={`${product.id}:${product.title}`} surface="ranking_product" product={product} className="text-sm text-foreground underline-offset-4 hover:underline">
           この記事を収録した本：{product.title}（Kindle）
         </TrackedProductLink>
       )}

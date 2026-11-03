@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
@@ -7,12 +7,16 @@ import {
   TrackedProductOutboundLink,
 } from "../TrackedProductLink";
 
+const FISCAL_NOTE = { slug: "data-p-04", externalUrl: "https://note.com/stats47/n/n1234abcd" };
+const FISCAL_KINDLE = { slug: "kindle-k-s1-06", externalUrl: "https://www.amazon.co.jp/dp/B0HF1XFXBY" };
+
 describe("product links", () => {
   const mockGtag = vi.fn();
 
   beforeEach(() => {
     vi.stubGlobal("window", { gtag: mockGtag });
     mockGtag.mockClear();
+    sessionStorage.clear();
   });
 
   afterEach(() => vi.unstubAllGlobals());
@@ -23,6 +27,7 @@ describe("product links", () => {
         href="/products/data-p-04"
         label="P-04:自治体財政"
         surface="product_catalog"
+        product={FISCAL_NOTE}
       >
         詳細
       </TrackedProductLink>,
@@ -43,6 +48,7 @@ describe("product links", () => {
       <TrackedProductOutboundLink
         href="https://www.amazon.co.jp/dp/B0HF1XFXBY"
         productId="K-S1-06"
+        productSlug="kindle-k-s1-06"
         productTitle="自治体財政の地図"
         channel="kindle"
       >
@@ -66,6 +72,7 @@ describe("product links", () => {
         <TrackedProductOutboundLink
           href="https://www.amazon.co.jp/dp/B0HF1XFXBY"
           productId="K-S1-06"
+          productSlug="kindle-k-s1-06"
           productTitle="自治体財政の地図"
           channel="kindle"
         >
@@ -74,6 +81,7 @@ describe("product links", () => {
         <TrackedProductOutboundLink
           href="https://coconala.com/services/4323722"
           productId="P-01"
+          productSlug="data-p-01"
           productTitle="人口・世帯データ集"
           channel="coconala"
         >
@@ -89,5 +97,84 @@ describe("product links", () => {
     const coconala = screen.getByRole("link", { name: "ココナラ" });
     expect(coconala.getAttribute("href")).toBe("https://coconala.com/services/4323722");
     expect(coconala.getAttribute("rel")).not.toContain("sponsored");
+  });
+  it("販売先クリックを product_click (キーイベント) で送り、詳細へ来る前の案内の置き場所を link_position に入れる", () => {
+    render(
+      <>
+        <TrackedProductLink href="/products/kindle-k-s1-06" label="K-S1-06" surface="blog_product" product={FISCAL_KINDLE}>
+          詳細へ
+        </TrackedProductLink>
+        <TrackedProductOutboundLink
+          href={FISCAL_KINDLE.externalUrl}
+          productId="K-S1-06"
+          productSlug="kindle-k-s1-06"
+          productTitle="自治体財政の地図"
+          channel="kindle"
+        >
+          Amazonへ
+        </TrackedProductOutboundLink>
+      </>,
+    );
+
+    fireEvent.click(screen.getByRole("link", { name: "詳細へ" }));
+    fireEvent.click(screen.getByRole("link", { name: "Amazonへ" }));
+    expect(mockGtag).toHaveBeenCalledWith("event", "product_click", {
+      product_destination: "amazon",
+      product_id: "B0HF1XFXBY",
+      link_position: "blog_product",
+    });
+  });
+
+  it("案内を通らずに詳細から出た販売先クリックは product_detail として数える", () => {
+    render(
+      <TrackedProductOutboundLink
+        href="https://note.com/stats47/n/n1234abcd"
+        productId="P-04"
+        productSlug="data-p-04"
+        productTitle="自治体財政"
+        channel="note"
+      >
+        noteへ
+      </TrackedProductOutboundLink>,
+    );
+
+    fireEvent.click(screen.getByRole("link", { name: "noteへ" }));
+    expect(mockGtag).toHaveBeenCalledWith("event", "product_click", {
+      product_destination: "note",
+      product_id: "n1234abcd",
+      link_position: "product_detail",
+    });
+  });
+
+  it("商品案内が半分以上・1 秒見えたら product_impression を 1 回だけ送る", () => {
+    vi.useFakeTimers();
+    let notify: (entries: { isIntersecting: boolean }[]) => void = () => {};
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        constructor(callback: typeof notify) {
+          notify = callback;
+        }
+        observe() {}
+        disconnect() {}
+      },
+    );
+    render(
+      <TrackedProductLink href="/products/data-p-04" label="P-04" surface="ranking_product" placement="ranking_csv_product" product={FISCAL_NOTE}>
+        案内
+      </TrackedProductLink>,
+    );
+
+    act(() => notify([{ isIntersecting: true }]));
+    act(() => vi.advanceTimersByTime(1000));
+    act(() => notify([{ isIntersecting: false }]));
+    act(() => notify([{ isIntersecting: true }]));
+    act(() => vi.advanceTimersByTime(1000));
+    vi.useRealTimers();
+
+    const impressions = mockGtag.mock.calls.filter(([, name]) => name === "product_impression");
+    expect(impressions).toEqual([
+      ["event", "product_impression", { product_destination: "note", product_id: "n1234abcd", link_position: "ranking_csv_product" }],
+    ]);
   });
 });

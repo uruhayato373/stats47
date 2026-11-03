@@ -4,7 +4,9 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 import { SurfaceCard } from "@/components/surface";
 
-import { trackCtaClick } from "@/lib/analytics/events";
+import { useProductImpression } from "@/features/products";
+
+import { productReferralOf, trackCtaClick, trackProductClick } from "@/lib/analytics/events";
 
 import { buildKomuinAiGuideUrl } from "./funnel-cta-config";
 
@@ -23,9 +25,13 @@ interface RankingFunnelCtaProps {
  * - クリックは GA4 `cta_click` + URL の UTM の二重で計測する。
  * - 遷移先 URL / 表示対象カテゴリは `funnel-cta-config.ts` で 1 箇所管理。
  * - 画像なし・固定高の静的カードなので CLS を発生させない。
+ * - 商品への送客として product_impression / product_click も送る (link_position は cta_click と同じ ranking-footer)。
  */
+const PLACEMENT = "ranking-footer";
+
 export function RankingFunnelCta({ rankingKey }: RankingFunnelCtaProps) {
   const href = buildKomuinAiGuideUrl(rankingKey);
+  const ref = useProductImpression<HTMLAnchorElement>(href, PLACEMENT);
 
   return (
     <SurfaceCard className="border-primary/20 bg-primary/5">
@@ -45,14 +51,17 @@ export function RankingFunnelCta({ rankingKey }: RankingFunnelCtaProps) {
         target="_blank"
         rel="noopener noreferrer"
         data-click-owner="cta"
-        onClick={() =>
+        ref={ref}
+        onClick={() => {
           trackCtaClick({
             ctaId: "ranking_to_komuin_ai_guide",
             label: "公務員AI 完全ガイド",
-            position: "ranking-footer",
+            position: PLACEMENT,
             rankingKey,
-          })
-        }
+          });
+          const referral = productReferralOf(href);
+          if (referral) trackProductClick({ ...referral, placement: PLACEMENT });
+        }}
         className="mt-3 inline-flex items-center gap-1 rounded-md border border-primary/30 bg-card px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/10"
       >
         e-Stat × Claude Code 完全ガイドを見る

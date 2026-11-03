@@ -346,6 +346,7 @@ export function buildPlans(source, views, options) {
         paidProduct,
         footer: includeFooter || productTarget || paidProduct
           ? {
+              sourceNoteKey: article.noteUrl ? noteKeyFromUrl(article.noteUrl) : null,
               nextNoteUrl: next?.noteUrl || null,
               nextNoteKey: next?.noteUrl ? noteKeyFromUrl(next.noteUrl) : null,
               nextNoteLead: next ? `「${next.title}」も同じテーマで読まれています。` : null,

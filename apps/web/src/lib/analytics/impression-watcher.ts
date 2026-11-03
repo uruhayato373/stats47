@@ -1,5 +1,5 @@
 /**
- * impression 発火条件の純ロジック (ホーム注目ランキング home-featured-v1)。
+ * impression 発火条件の純ロジック (ホーム注目ランキング home-featured-v1・商品案内 product_impression)。
  *
  * 条件は既存 AdImpressionTracker と同じ機械条件:
  * - 50% 以上表示 (IntersectionObserver threshold 0.5 — 呼び元が observer に設定する)

@@ -404,3 +404,27 @@ test("forceRegenerateCards also replaces a card that note is currently returning
   assert.match(result.body, /実質手取りの地図/);
   assert.doesNotMatch(result.body, /embedded-content-key="emb1"/);
 });
+
+// PRODUCT-REFERRAL-MEASURE-01: note → サイトの逆向きの送客を記事キーで数える (config/inbound-utm.mjs)
+test("addNoteTextLinkUtm: 本文のテキストリンクだけに記事キーの UTM を付け、カードと他サイトは触らない", async () => {
+  const { addNoteTextLinkUtm } = await import("../lib/navigation-footer.mjs");
+  const card = '<figure name="c" id="c" data-src="https://stats47.jp/ranking/total-population" embedded-service="external-article"><a href="https://stats47.jp/ranking/total-population">card</a></figure>';
+  const body = `<p>詳しくは<a href="https://stats47.jp/ranking/total-population" target="_blank">総人口</a>と<a href="https://www.e-stat.go.jp/">e-Stat</a></p>${card}`;
+  const out = addNoteTextLinkUtm(body, "n03e45e40d3a7");
+  assert.match(out, /href="https:\/\/stats47\.jp\/ranking\/total-population\?utm_source=note&amp;utm_medium=referral&amp;utm_campaign=note_article&amp;utm_content=n03e45e40d3a7"/);
+  assert.ok(out.includes(card), "カードは clean URL のまま");
+  assert.ok(out.includes('href="https://www.e-stat.go.jp/"'));
+  assert.equal(addNoteTextLinkUtm(out, "n03e45e40d3a7"), out, "何度流しても変わらない");
+  assert.throws(() => addNoteTextLinkUtm(body, "recovered-n03e45e40d3a7"), /記事キー/);
+});
+
+test("applyNavigationFooter: UTM を付けた本文リンクがあっても、同じ着地のカードを二重に足さない判定は変わらない", async () => {
+  const { applyNavigationFooter } = await import("../lib/navigation-footer.mjs");
+  let n = 0;
+  const idFactory = () => `00000000-0000-4000-8000-${String(++n).padStart(12, "0")}`;
+  const body = '<p><a href="https://stats47.jp/ranking/total-population">総人口</a></p>';
+  const out = applyNavigationFooter(body, { sourceNoteKey: "n03e45e40d3a7", siteUrl: "https://stats47.jp/ranking/total-population",
+    siteTitle: "t", siteDescription: "d" }, { idFactory });
+  assert.equal(out.addedSite, false);
+  assert.match(out.body, /utm_content=n03e45e40d3a7/);
+});

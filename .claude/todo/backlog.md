@@ -194,6 +194,26 @@ updated: 2026-11-01
 - **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
 - **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
 
+### [PRODUCT-REFERRAL-MEASURE-01] 商品 (KDP・note) への送客から販売までを、GA4 と販売台帳で同じ商品 ID でつないで測る
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run products:sales --workspace=@stats47/product-factory -- validate] [起票:2026-11-03] [領域:商品]
+
+- **読者の課題／HARM**: 本カードは運営者の判断材料 (M: Money)。新しい商品は作らない (収益化戦略 §3.6)。KGI は月の確定収益 (AdSense＋KDP の販売と KENP＋note) で、PV は目標にしない。
+- **提供価値・支払う理由**: 測るのは既存の受け皿。職場から読まれる記事の読者には「資料づくりの手間を買う」データ集 (note P-04/05/09/10/14)、家計の雑学の読者には「複数ページの突き合わせを一冊で」の K-S1-02 (¥800)。
+- **需要の証拠 (2026-11-03 時点)**: KDP の販売は台帳に 2 冊 (K-S1-02 が 2026-08 に 1 冊 ¥254、K-S2-03 が 2026-09 に 1 冊 ¥159)。KENP は 8・9 月とも明細なし (計測済み・0)。note の通算売上 ¥900 はノウハウ記事 3 本だけ。サイトの Kindle 案内は 64 記事の閲覧 3,901 にクリック 1 (2026-W41)。**計測が販売先の手前で切れていたので、置き場所ごとの「表示 → クリック → 注文」を誰も読めていない**。
+- **2026-11-03 実装 (develop・未デプロイ)**:
+  ① KDP: 販売台帳に計測の範囲 `coverage` を足した (`ledger-core.mjs` の `mergeSalesCoverage`、schema、`kdp-weekly-publication.ts`)。完全な月次レポートが数えた書籍は、明細が無くても「計測済み・0 件」と読む。範囲の外は未計測のまま (欠測を 0 にしない)。今後の月次は `collect.mjs`→`summarize.mjs` が範囲も書く。過去の月は `products:sales -- record-kdp-coverage --report <復元したレポート>` で足す (出品台帳の ASIN 数がレポートの数と一致するときだけ)。8・9 月を保管庫から復元して記録済み (22 冊)。これで S1 12 冊の「販売数/KENP 未計測」は解けた。代わりに、8 月の K-S1-02 の 1 冊が 4 週窓 (08-30〜09-26) の中の販売か月次では分からないので、週次判定は「判定不能」で止まる (`ambiguousEvidenceBookIds`。需要ありとして新しいパイロットへ進ませない)。
+  ② GA4: `product_impression` (案内が 50% 以上・1 秒見えた) と `product_click` (販売先へ出たクリック・キーイベント) を足した。パラメータは `product_destination` (amazon / note / coconala)・`product_id` (販売先の ID。Amazon は ASIN)・`link_position` (置き場所)。商品詳細から出たクリックは、詳細へ来る前の案内の置き場所を持ち越す。`cta_click` は時系列を切らないため並行して送る。台帳は `analytics-event-standards.md` §2、登録の定義は `apply-allowlisted-settings.mjs` (`AUTHORED_DIMENSIONS`・`AUTHORED_KEY_EVENTS`)。週次の GA4 取得に `product-referrals.csv` と `product-inbound.csv` を足した (`journey-ga4-reports.mjs`)。
+  ③ 逆向き: `config/inbound-utm.mjs` に規約を置いた。Kindle は `utm_source=kindle&utm_medium=ebook&utm_campaign=<書籍 ID の小文字>&utm_content=sources|latest` (ASIN は EPUB を作る時点で無いので書籍 ID)。出典ページの URL にだけリンクを張る (表示は UTM なし。本文の章にはリンクを置かない方針のまま)。note は本文のテキストリンクだけに `utm_source=note&utm_medium=referral&utm_campaign=note_article&utm_content=<記事キー>` を付ける (`addNoteTextLinkUtm`。カードは note が作れなくなるので clean のまま)。
+- **Amazon の注文まで追えるか (2026-11-03 確認・公式ヘルプ)**: 自著の Kindle 本をアソシエイトリンクで紹介するのは禁止されていない。禁止は自分や知人の購入・購入の依頼・見返りで、不特定の読者への紹介は対象外 (紹介料率表でデジタル商品 8%)。追加のトラッキング ID を置き場所ごとに作って使い分けるのは公式ヘルプが例示している (日本の上限の明記なし、米国は 100)。ただし ID 別のレポートに ASIN ごとの件数まで出るかは公式文書で確かめられなかった。KENP はアソシエイトの紹介料の対象外 (購入でないため。名指しの記述はなし)。出典: affiliate.amazon.co.jp/help/operating/policies、/help/operating/agreement、/help/node/topic/GJDYPQZK6E37RLPU、/help/node/topic/GRXPHT8U84RAYDXZ。**結論**: 置き場所ごとの ID は使ってよいが、今は作らない。口座 `stats47-22` が有効かが未確認で、`AMAZON-ASSOCIATE-PILOT-01` の判定 (11-04) が続けるかを決めるため。続けると決まったら、ID を 2 つ (ブログ・ランキング) 作り、注文レポートに ASIN が出るかを管理画面で 1 回確かめてから配線する。代わりの手段は、GA4 の `product_click` (置き場所 × ASIN) と販売台帳の月次 (書籍別) を同じ ASIN・書籍 ID で並べること (どのクリックがどの注文かの紐付けはしない)。
+- **次 (人の作業・実行順)**:
+  1. GA4 に custom dimension `product_destination`・`product_id` とキーイベント `product_click` を作る。承認付き API: `npm run google-admin:audit-api` で計画を確かめ、`.claude/scripts/google-admin/README.md` の Phase 2 apply の手順 (plan token と承認) で作る。手で作るなら GA4 → 管理 → カスタム定義 (範囲＝イベント、パラメータ名は完全一致) と、管理 → イベント → `product_click` をキーイベントにする。作ったら `npm run google-admin:audit-api` の結果で台帳 §2 を ✅ にする。
+  2. KDP の再ログイン (10-31 の取得が `auth_required`): `node .claude/scripts/measurement/refresh-session.mjs kdp --wait-human`。2 段階認証は本人が入力する。10 月の確定レポートは 11 月中旬に出るので、それ以降の土曜の取得で台帳に範囲と明細が入る。
+  3. develop → main のマージと本番デプロイ (オーナー承認)。CI の月次自動記録 (`KDP-LEDGER-AUTO-01`) も main の workflow で動く。デプロイ日を EXP-013 の `started_at` にする。
+  4. note の本文リンクの UTM は、EXP-013 の対象記事だけ `update-published-navigation.mjs --slug <key>` で反映する (ログインは人手。全記事を一括で変えない)。Kindle の出典ページのリンクは、次の再アップロード (`KDP-K-S1-08-REUPLOAD-01`) で入る。
+- **検証**: `products:sales -- validate` PASS (2 observations・2 coverage)。テスト: product-factory の販売台帳・週次判定・UTM、`measurement:test` 68、google-admin 44、metrics の GA4 レポート、note のフッター、web 2,934 件 (2026-11-03)。web の型検査 PASS。
+- **停止条件・禁止**: アトリビューション分析はしない (広告費を使っていない)。欠測を 0 にしない (GA4 の dimension 登録前の週・KDP の取得失敗の月は判定不能)。本番デプロイ・R2 push・note の編集はオーナー承認の後。
+- **完了条件**: GA4 で `product_click` がキーイベントになり、`product-referrals.csv` に置き場所 × 商品 ID の行が出て、KDP の月次が範囲付きで台帳に自動で入り、EXP-013 の 6 週の数字 (表示・クリック・注文、または判定不能とその理由) が実験台帳に記録された。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [RANKING-PAGE-DISPLAY-UNIT-01] ランキングページの値も、図と同じ表示単位 (億円・万人など) で出す
@@ -2617,6 +2637,7 @@ updated: 2026-11-01
 - **2026-10-19 ① 実装**: 週次の GA4 取得 (`fetch-ga4-snapshot.mjs`) のレポート一覧 `MEASUREMENT_REPORTS` (`.claude/scripts/metrics/lib/journey-ga4-reports.mjs`) に `referral-sources` を足した。日本の Organic Social と Referral に絞り、流入元 (`sessionSource`)・メディア・チャネル別にセッション・エンゲージドセッション・PV を取る。保存先は `data/ga4/snapshots/<週>/referral-sources.csv` (rolling28d)。テスト `journey-ga4-reports.test.mjs` に 1 件追加。最初の実データは 10-23 (金) の週次 CI。② 以降 (月次レビューで媒体ごとに並べる) はデータが 2 か月分そろってから。
 - **統合 (2026-10-26 オーナー判断): `SNS-SITE-FUNNEL-01`** X・Instagram からサイトへの導線を整える
   - 投稿からサイトへの流入の経路（プロフィールのリンク・投稿の誘導・UTM）を見直す。既存の計測（GA4 の参照元・`nav_click`）で前後を比べられる形にする。（出典: obsidian の TODO マスタ ^t-0005 から移管・2026-10-19）
+- **2026-11-03 追記**: 自分の商品 (Kindle・note 本文) からの流入は `PRODUCT-REFERRAL-MEASURE-01` が `product-inbound.csv` で別に取る (Kindle の `utm_medium=ebook` は既定チャネルで Unassigned になり、`referral-sources.csv` に出ないため)。
 
 ### [NOTE-FREE-DEFAULT-01] note の雑学・ランキングの有料記事を無料に戻し、送客の変化を前後で測る
 タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:商品]
@@ -2640,6 +2661,7 @@ updated: 2026-11-01
 - **2026-10-08 実装 (`fb6c2b288`・develop のみ・未 push)**: 台帳の証拠に保管庫キー `vault:kdp/monthly/month-<n>` と復号したレポートの stats47 行の内容ハッシュを認めた。`collect.mjs` が書籍別の集計だけを結果に載せ、書き込み権限のある record job の `summarize.mjs` が同じ書籍・月の行が無いときだけ足す (値の食い違いは上書きせず action_required、円以外・負の行は理由付きで除外、明細の無い本を 0 で埋めない)。8 月分は手入力で 1 行 (K-S1-02・¥254、`1f4a56bc4`) を記録済み。テスト: product-factory 298 件・measurement 73 件 pass。**定期実行は main の workflow 定義で `git add` するので、develop→main のマージ (オーナー承認) まで CI は台帳を書かない。**
 - **既読ページ (2026-10-27 オーナー決定)**: 販売台帳に既読ページ (KENP) の列を足す。`KDP-EXPANSION-01` の pilot 判定 (判定日 2026-09-27 を過ぎている) が KENP の列が無いため判定不能になっている (`/strategy/pilots`)。2026-08〜10 の分は KDP の月次レポートから一度だけ埋め、以降は自動記録に乗せる。列を足したら `data/business/pilot-board.json` の KDP の「既読ページ」指標を台帳から読む形に変える。
 - **完了条件**: マージ後の CI の KDP 月次取得のあとに、明細のある本の行が台帳へ自動で増え (明細の無い本は行を作らない)、`products:sales -- validate` が PASS し、週次の KPI ツリーで `paid-purchases` の KDP 分が判定不能でなくなる。
+- **2026-11-03 追記 (`PRODUCT-REFERRAL-MEASURE-01`)**: 明細の無い本が永久に「未計測」になる穴を、台帳の計測の範囲 `coverage` で塞いだ (行は作らず、完全な月次レポートが数えた書籍の一覧を持つ)。8・9 月は保管庫から復元して範囲を記録済み (22 冊・KENP の明細なし)。自動記録も範囲を書く。残りは main へのマージと KDP の再ログイン (10-31 は `auth_required`)。KENP の列 (`kenpRead`) は台帳にある。
 
 ### [KNOWHOW-PRODUCT-PILOT-01] AI×公的統計の実務ノウハウ商品を1つ選び、note の販売面で4週の実売を確かめる
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:商品]
@@ -2738,6 +2760,7 @@ updated: 2026-11-01
 - **反映日 (2026-10-27 記録)**: 2026-10-07 (PR #1099 の main マージと Post-Deploy Smoke Test 成功)。開始日・28 日の判定日・現在値は `data/business/pilot-board.json` と管理画面 `/strategy/pilots` が持つ。
 - **Amazon の売上の取り方 (2026-10-27 オーナー決定)**: 自動収集は作らない (28 日の pilot 1 回のため)。判定日 2026-11-04 に、オーナーが Amazon アソシエイトのレポートの値を販売台帳 (`data/products/sales-ledger.json`) へ証拠付きで 1 回だけ記録する。記録したら `data/business/pilot-board.json` の「Amazon の売上」指標を台帳から読む形に変える。
 - **完了条件**: 28 日分のクリック数と、Amazon / KDP の売上 (取れなければ取れない理由) を記録し、継続・拡大・撤退のどれかをオーナーが決めた。
+- **2026-11-03 追記 (`PRODUCT-REFERRAL-MEASURE-01`)**: 置き場所ごとにトラッキング ID を分けて自著の注文を追う案は、規約上は可 (自著の紹介は禁止されておらず、追加 ID の使い分けは公式ヘルプの例)。ID 別レポートに ASIN が出るかは未確認。この pilot を続けると決めたときだけ、ID を 2 つ作り注文レポートを 1 回確かめてから配線する。
 
 ### [BLOG-BG-PIPELINE-CONSOLIDATE-01] ブログ背景の経路を Codex の記事固有背景 1 本にまとめ、背景の不足を push 前に止める
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
@@ -5055,6 +5078,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **追記 (2026-10-07 オーナー整理)**: コンテンツ販売の主チャネルは KDP とする (収益化戦略 §3.5・§6)。雑学の情報は note の有料記事では売れなかった (ランキング型の有料記事 47 本で通算 ¥0) ので、雑学の本はこのカードで扱う。集客は Amazon の検索と読み放題の推薦に置き、stats47 からの送客を前提にしない (ブログ 64 記事・28 日 3,901 PV に対し、Kindle 案内のクリックは 1 回)。パイロット (b)「意外な1位ストーリー集」は、自社既刊の 4 週の売上と既読ページ (KENP) が取れてから着手する。日本の 1 ページあたりの単価は公開情報で確かめられなかったので、KDP レポートの実額から読む。
 - **KDP 実績 (2026-10-07 調査・公開記録から分かる範囲)**: 販売中は S1 の 12 冊 (2026-08-13 から)。認証付き計測の KDP 収集は 2026-09-21・09-27・09-30 に成功し、8 月の月次レポートで stats47 の ASIN に当たる行は **1 行** (`data/authenticated/latest.json` の履歴・`quality.monthlyRows`)。09-29 の日次は推定ロイヤリティ ¥0・有料注文 0 件 (`data/authenticated/revenue-history.json`)。金額と既読ページ (KENP) の内訳は暗号化保管庫 (`kdp/monthly/…`) にあり、復号鍵の無いクラウドセッションからは読めない。9 月の月次 (10 月中旬に公開) と 09-30 以降の日次は、09-30 からの `auth_required` で未取得。販売台帳 `data/products/sales-ledger.json` は 0 件のまま。台帳への自動記録は `KDP-LEDGER-AUTO-01`。
 - **完了条件**: 自社22冊の4週売上が台帳にあり、S1 12冊がv3で差し替え済み、パイロット3冊が公開され各冊の初回4週KENP/販売数が記録されている。未計測のものを「需要あり」と書かない。
+- **2026-11-03 追記 (`PRODUCT-REFERRAL-MEASURE-01`)**: S1 12 冊の 4 週窓 (08-30〜09-26) は 8・9 月の月次レポートの範囲で計測済みになった (KENP の明細はどの本にも無い)。販売は K-S1-02 の 8 月の 1 冊だけで、月次なので窓の中か外か分からない。週次判定 (`data/products/kdp-weekly-publication.json`) は需要あり・なしのどちらにもせず「判定不能」で止まる。**オーナー判断が要る**: この 1 冊を需要の証拠として扱うか (扱えば第 1 パイロットの準備へ進むが、収益化戦略 §3.6 の「新商品は作らない」とぶつかる)、扱わず S1 の見せ方・導線の改善 (EXP-013) を先に見るか。
 
 ### [ADMIN-STAT-PILOT-01] 行政資料1業務の統計整理商品を検証し、有料pilotの採否を決める
 

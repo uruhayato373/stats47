@@ -95,3 +95,13 @@ test("referral-sources: 日本の Organic Social と Referral だけを媒体別
   assert.deepEqual(channel.filter.inListFilter.values, ["Organic Social", "Referral"]);
   assert.deepEqual(req.dimensions.map((d) => d.name), ["sessionSource", "sessionMedium", "sessionDefaultChannelGroup"]);
 });
+
+test("product-referrals / product-inbound: 商品の送客を両向きで取る (PRODUCT-REFERRAL-MEASURE-01)", async () => {
+  const { MEASUREMENT_REPORTS } = await import("../lib/journey-ga4-reports.mjs");
+  const out = MEASUREMENT_REPORTS["product-referrals"].request(period);
+  assert.deepEqual(out.dimensionFilter.andGroup.expressions[1].filter.inListFilter.values, ["product_impression", "product_click"]);
+  assert.deepEqual(out.dimensions.map((d) => d.name).slice(1), ["customEvent:product_destination", "customEvent:product_id", "customEvent:link_position"]);
+  const back = MEASUREMENT_REPORTS["product-inbound"].request(period);
+  // config/inbound-utm.mjs の utm_source と同じ語彙
+  assert.deepEqual(back.dimensionFilter.andGroup.expressions[1].filter.inListFilter.values, ["kindle", "note"]);
+});

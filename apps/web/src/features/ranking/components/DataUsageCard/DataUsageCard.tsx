@@ -150,6 +150,8 @@ export function DataUsageCard({
                 href={hrefFor("product", { slug: workProduct.slug })}
                 label={`${workProduct.id}:${workProduct.title}`}
                 surface="ranking_product"
+                product={workProduct}
+                placement="ranking_csv_product"
                 className="text-primary underline underline-offset-2"
               >
                 内容と条件を確認する

@@ -29,5 +29,71 @@
       "evidenceSha256": "fd7a5879f54fea7baa4ecf0ff8fef481d1605acb6016645e8cdb4b3206be7ded",
       "recordedAt": "2026-10-16T23:47:16.408Z"
     }
+  ],
+  "coverage": [
+    {
+      "channel": "kdp",
+      "periodStart": "2026-08-01",
+      "periodEnd": "2026-08-31",
+      "productIds": [
+        "K-S1-01",
+        "K-S1-02",
+        "K-S1-03",
+        "K-S1-04",
+        "K-S1-05",
+        "K-S1-06",
+        "K-S1-07",
+        "K-S1-08",
+        "K-S1-09",
+        "K-S1-10",
+        "K-S1-11",
+        "K-S1-12",
+        "K-S2-01",
+        "K-S2-02",
+        "K-S2-03",
+        "K-S2-05",
+        "K-S2-06",
+        "K-S2-11",
+        "K-S3-01",
+        "K-S3-03",
+        "K-S3-08",
+        "K-S4-01"
+      ],
+      "evidencePath": ".local/product-sales-evidence/kdp/kdp-monthly-2026-08.json",
+      "evidenceSha256": "819ad765457036c000a496b60f1daf1a6419ee2cdb637dfde36ff703cf99a275",
+      "recordedAt": "2026-11-03T04:10:15.559Z"
+    },
+    {
+      "channel": "kdp",
+      "periodStart": "2026-09-01",
+      "periodEnd": "2026-09-30",
+      "productIds": [
+        "K-S1-01",
+        "K-S1-02",
+        "K-S1-03",
+        "K-S1-04",
+        "K-S1-05",
+        "K-S1-06",
+        "K-S1-07",
+        "K-S1-08",
+        "K-S1-09",
+        "K-S1-10",
+        "K-S1-11",
+        "K-S1-12",
+        "K-S2-01",
+        "K-S2-02",
+        "K-S2-03",
+        "K-S2-05",
+        "K-S2-06",
+        "K-S2-11",
+        "K-S3-01",
+        "K-S3-03",
+        "K-S3-08",
+        "K-S4-01"
+      ],
+      "evidencePath": ".local/product-sales-evidence/kdp/kdp-monthly-2026-09.json",
+      "evidenceSha256": "ec4fdcfc1d3de7a3ad19574fa1f008f2983bbc472fc25056cc16f3146447922c",
+      "recordedAt": "2026-11-03T04:10:45.050Z"
+    }
   ]
 }

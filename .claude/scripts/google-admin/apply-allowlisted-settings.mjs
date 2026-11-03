@@ -55,6 +55,8 @@ export const AUTHORED_DIMENSIONS = Object.freeze([
   { parameterName: "analysis_slug", displayName: "Geo analysis slug", scope: "EVENT", description: "stats47: 地域分析のキー (geo_*)" },
   { parameterName: "geography", displayName: "Geo geography", scope: "EVENT", description: "stats47: 地域分析の地理単位 prefecture / municipality / mesh (geo_*)" },
   { parameterName: "interaction_type", displayName: "Geo interaction type", scope: "EVENT", description: "stats47: 地域分析の地図操作の種類 (geo_map_interaction)" },
+  { parameterName: "product_destination", displayName: "Product destination", scope: "EVENT", description: "stats47: 商品の販売先 amazon / note / coconala (product_impression / product_click)" },
+  { parameterName: "product_id", displayName: "Product ID", scope: "EVENT", description: "stats47: 販売先での商品 ID。Amazon は ASIN、note は記事・マガジンのキー (product_impression / product_click)" },
   { parameterName: "declared_purpose", displayName: "Declared purpose", scope: "USER", description: "stats47: CSV 後アンケートで申告した用途 (user property)" },
 ]);
 
@@ -75,6 +77,8 @@ export const AUTHORED_KEY_EVENTS = Object.freeze([
   { eventName: "cta_click", countingMethod: "ONCE_PER_EVENT" },
   { eventName: "file_download", countingMethod: "ONCE_PER_EVENT" },
   { eventName: "contact_click", countingMethod: "ONCE_PER_EVENT" },
+  // 販売先 (Amazon / note / ココナラ) へ出ていくクリック。商品送客の成果 (PRODUCT-REFERRAL-MEASURE-01)
+  { eventName: "product_click", countingMethod: "ONCE_PER_EVENT" },
 ]);
 
 const AUTHORED_BY_PARAM = new Map(AUTHORED_DIMENSIONS.map((d) => [d.parameterName, d]));

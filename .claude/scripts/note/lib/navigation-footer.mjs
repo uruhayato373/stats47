@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { SITE_ORIGIN } from "../../lib/site-config.cjs";
+import { noteInboundUrl } from "../../../../config/inbound-utm.mjs";
 
 const LIB_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(LIB_DIR, "../../../..");
@@ -118,6 +119,8 @@ function hasUrl(body, url) {
     try {
       const candidate = new URL(match[1].replaceAll('&amp;', '&'));
       candidate.searchParams.delete('s47_ogp');
+      // 本文リンクに付けた記事キーの UTM (addNoteTextLinkUtm) は同じリンクとみなす
+      for (const key of [...candidate.searchParams.keys()]) if (key.startsWith('utm_')) candidate.searchParams.delete(key);
       return candidate.href === target;
     } catch { return false; }
   });
@@ -232,9 +235,26 @@ export function collapseDuplicateFooterHeadings(body) {
   return String(body).replace(pattern, (match) => (seen++ === 0 ? match : ""));
 }
 
+/**
+ * 本文のテキストリンク (`<a href="https://stats47.jp/...">`) に note の記事キーの UTM を付ける
+ * (`config/inbound-utm.mjs`)。リンクカード (`<figure>` の中) は note がカードを作れなくなるので触らない。
+ * 既に同じ UTM が付いたリンクはそのまま (何度流しても本文が変わらない)。
+ */
+export function addNoteTextLinkUtm(body, noteKey) {
+  return String(body)
+    .split(/(<figure\b[\s\S]*?<\/figure>)/i)
+    .map((part) => (/^<figure\b/i.test(part)
+      ? part
+      : part.replace(/(<a\b[^>]*?\bhref=")(https:\/\/(?:www\.)?stats47\.jp(?:\/[^"]*)?)(")/gi, (_, open, href, close) =>
+        `${open}${escapeHtml(noteInboundUrl(href.replaceAll("&amp;", "&"), noteKey))}${close}`)))
+    .join("");
+}
+
 export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {}) {
   const original = String(body);
   let output = collapseDuplicateFooterHeadings(normalizeLegacyStats47Links(original));
+  // 本文のテキストリンクだけに記事キーの UTM を付ける (カードは下で clean URL のまま足す)
+  if (plan.sourceNoteKey) output = addNoteTextLinkUtm(output, plan.sourceNoteKey);
   const dedupedFooterHeading = output !== normalizeLegacyStats47Links(original);
   const nextUrl = plan.nextNoteUrl ? assertCleanCardUrl(plan.nextNoteUrl, "note.com") : null;
   const magazineUrl = plan.magazineUrl ? assertCleanCardUrl(plan.magazineUrl, "note.com") : null;
