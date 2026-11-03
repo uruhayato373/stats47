@@ -281,7 +281,9 @@ jobs:
           # 束どうしは別の key なので順序は要らない。1 束でも失敗すれば xargs が非 0 で step を落とす。
           rm -f .local/push-chunk-*
           split -l 100 "$KEY_FILE" .local/push-chunk-
-          ls .local/push-chunk-* | xargs -P 8 -I{} bash -c '
+          # 単引用符の中の $1 は xargs が起こす bash の引数 (外側で展開しない)
+          # shellcheck disable=SC2016
+          find .local -maxdepth 1 -name 'push-chunk-*' -print0 | xargs -0 -P 8 -I{} bash -c '
             A=()
             while IFS= read -r KEY; do A+=(--key "$KEY"); done < "$1"
             npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${A[@]}"

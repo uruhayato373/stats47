@@ -112,8 +112,8 @@ export default async function HomePage() {
   const prefectures = fetchPrefectures();
   // トップは読者の意図が決まらないので、共通の案件 (楽天カード・TOSSY) を出す (2026-11-03。旧: economy 軸で FP 相談等が出ていた)
   const homeNativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
-  // 広告の段 (2026-11-03 オーナー決定): 「知りたいことから探す」の後と「都道府県から探す」の後。本文 (右レールの横で約 810px)
-  // では 2 枠、モバイルは先頭の 1 枠で上から AdSense → PR。右レールの AdSense (RAIL_RECT) とは別のユニット
+  // 広告の段 (2026-11-03 オーナー決定): 用途から探す節の後とページの最後。本文 (右レールの横で約 810px) では 2 枠、
+  // モバイルは先頭の 1 枠で上から AdSense、PR の順。右レールの AdSense (RAIL_RECT) とは別のユニット
   const [homeRow1, homeRow2] = composeAdRows(
     [['adsense', 'affiliate'], ['affiliate', 'adsense']],
     [HUB_INCONTENT, CONTENT_FOOTER],

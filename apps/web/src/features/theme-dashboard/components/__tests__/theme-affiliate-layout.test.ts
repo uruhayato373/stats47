@@ -14,8 +14,9 @@ const LAYOUT_SRC = readFileSync(
 );
 
 describe("theme affiliate layout", () => {
-  it("読了位置は3列の単一ブロックにし、独立した5件目を置かない", () => {
-    expect(LAYOUT_SRC).toContain('variant="three-up"');
+  // 2026-11-03: 読了位置は AdSense と PR を 1 行に並べる広告の段 (AdRow) の 1 ブロック
+  it("読了位置は広告の段の単一ブロックにし、独立した5件目を置かない", () => {
+    expect(LAYOUT_SRC).toContain('<AdRow cells={endRow} position="theme-row-end"');
     expect(LAYOUT_SRC).not.toContain('position="theme-end"');
     expect(LAYOUT_SRC).not.toContain("themeEndBanner");
     expect(LAYOUT_SRC).not.toContain("nativeBanners[4]");
