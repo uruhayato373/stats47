@@ -1,11 +1,8 @@
 {
-  "hash": "5529e95744b69e65d80f9eee0dc3826bf8884d4627e1d6a32ebffea270cdd0fa",
-  "audited_at": "2026-11-03T07:02:34",
+  "hash": "41cd644b75100e8cfee952d237423fe179c64b3b0d4cc381c14769487abdd589",
+  "audited_at": "2026-11-03T21:47:57",
   "files": [
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/agents/kindle-publisher.md",
-    ".claude/rules/coconala-product-standards.md",
     ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/scripts/ads/lib/ad-layout-ledger.ts"
   ]
 }

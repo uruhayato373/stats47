@@ -9,6 +9,8 @@
  * (min=max を指定しないと `44.0` は number の `44` に戻って小数が消える)。
  *
  * @param values 同じ図・同じ表に並ぶ値の全体
- * @param maxDecimals 上限。桁が多すぎるとラベルが読めなくなるため既定 2
+ * @param maxDecimals 上限。桁が多すぎるとラベルが読めなくなるため既定 2。
+ *   既定のままで全値の絶対値が 1 未満なら 3 まで許す (家計調査の耐久財の購入数量 0.086 台を
+ *   0.09 に丸めると、上位 3 都市が同じ値に並び「1位と2位の差 0.00台」になった。2026-11-02)
  */
 export declare function resolveValuePrecision(values: readonly number[], maxDecimals?: number): number;

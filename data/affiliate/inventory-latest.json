@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-31T00:04:04.420Z",
-  "date": "2026-10-31",
+  "generatedAt": "2026-11-03T06:39:58.372Z",
+  "date": "2026-11-03",
   "totals": {
-    "entries": 327,
-    "active": 306,
-    "uniqueAdvertisers": 187,
-    "uniqueTitles": 187,
-    "uniquePrograms": 156,
+    "entries": 328,
+    "active": 307,
+    "uniqueAdvertisers": 188,
+    "uniqueTitles": 188,
+    "uniquePrograms": 157,
     "programRefMissing": 0
   },
   "byCategory": {
     "energy": 2,
     "tourism": 5,
-    "economy": 8,
+    "economy": 9,
     "construction": 2,
     "(null)": 282,
     "laborwage": 3,
@@ -22,7 +22,7 @@
   "byVertical": {
     "energy": 32,
     "travel": 48,
-    "economy": 39,
+    "economy": 40,
     "housing": 34,
     "education": 47,
     "labor": 53,
@@ -32,13 +32,13 @@
     "furusato": 10
   },
   "byLocation": {
-    "blog-bottom": 159,
+    "blog-bottom": 160,
     "sidebar-sticky": 2,
     "sidebar-inline": 1,
     "sidebar-bottom": 144
   },
   "byAdType": {
-    "banner": 162,
+    "banner": 163,
     "text": 144
   },
   "coverage": {
@@ -81,7 +81,7 @@
     "byVerticalBanner": {
       "energy": 17,
       "travel": 26,
-      "economy": 24,
+      "economy": 25,
       "housing": 17,
       "education": 25,
       "labor": 25,
