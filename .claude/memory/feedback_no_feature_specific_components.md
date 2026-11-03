@@ -19,3 +19,7 @@ metadata:
 満たせるか探す。共通化したら旧部品はその場で消し、`npx knip --workspace apps/web --include files` で未使用ファイルが 0 になるまで繰り返す
 (OGP の画像生成スクリプトから使う `features/ogp/*` は knip の入口外なので誤検知。名前で全リポジトリを検索してから消す)。
 関連: [[feedback_page_semantic_dedup_contract]]
+
+2026-11-03 の再発: テーマの品目の表を `MetricTableCard` として専用に作り、card-census に止められて名前を `MetricTable` に変えただけで通そうとした。
+同じ役割の表 (1 つの地域の指標を値と順位で並べる) が市区町村データブックに直書きであった。名前で検査を避けず、作る前に
+「同じ役割の表・タイル・枠がどこかにないか」を grep (`<Table`・`StatTile`・`*Card`) で探し、あれば共通の層へ上げて両方を寄せる (`MetricRowTable`)。

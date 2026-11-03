@@ -196,6 +196,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-R2-FETCH-FANOUT-01] 指標の多いテーマの読み込みで R2 の取得がときどき落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:サイト]
+
+2026-11-03 にローカルの開発サーバーで `/areas/28000/household-food-spending` (133 指標) を開くと、`loadThemeData` が
+`readRankingItemFromR2` と `readAllYearsRankingValuesFromR2` を指標ごとに同時に投げ (Promise.all の 129・130 番目など)、
+数件が `fetch failed` で落ちて、その指標がページから黙って消えた (緑茶の 2 行。1 回はページ全体が 404)。本番 (Workers の R2 バインディング) で同じことが起きるかは未確認。
+次: 本番のテーマページのログで同じ失敗が出ているかを確かめ、取得を数本ずつに絞る (同時数の上限) か、失敗した指標だけ 1 回取り直す。
+完了条件: ローカルで同じページを 5 回続けて開き、133 指標が毎回そろう。本番の結果を記録した。
+
 ### [ADMIN-DISTMAP-TEST-STACK-01] 管理画面の地図の見本のテストが Mac の手元でだけスタックあふれで落ちる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/admin && npx vitest run tests/unit/template-distribution-map.test.ts] [起票:2026-11-03]
 
