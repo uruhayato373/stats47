@@ -276,20 +276,16 @@ jobs:
             echo "::error::R2 exact publish keyが0件です"
             exit 1
           fi
-          ARGS=()
-          COUNT=0
-          while IFS= read -r KEY; do
-            ARGS+=(--key "$KEY")
-            COUNT=$((COUNT + 1))
-            if [ "$COUNT" -eq 100 ]; then
-              npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${ARGS[@]}"
-              ARGS=()
-              COUNT=0
-            fi
-          done < "$KEY_FILE"
-          if [ "${#ARGS[@]}" -gt 0 ]; then
-            npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${ARGS[@]}"
-          fi
+          # 1 件ずつ HEAD→PUT→HEAD で約 1.3 秒かかる。全記事 (約 7,000 件) を直列で送ると
+          # 120 分の制限を超えるので (2026-11-03 に 3,200 件で打ち切られた)、100 件の束を 8 本並列で送る。
+          # 束どうしは別の key なので順序は要らない。1 束でも失敗すれば xargs が非 0 で step を落とす。
+          rm -f .local/push-chunk-*
+          split -l 100 "$KEY_FILE" .local/push-chunk-
+          ls .local/push-chunk-* | xargs -P 8 -I{} bash -c '
+            A=()
+            while IFS= read -r KEY; do A+=(--key "$KEY"); done < "$1"
+            npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${A[@]}"
+          ' _ {}
 
       - name: 🧮 Regenerate and publish blog survey index after source repair
         if: ${{ github.event.inputs.mode == 'source-repair' && github.event.inputs.dry_run == 'false' }}
