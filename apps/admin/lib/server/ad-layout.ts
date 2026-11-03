@@ -3,7 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
-import { unitOfEntry } from "../../../../.claude/scripts/ads/lib/ad-layout-ledger";
+import { adsenseUnitNames, unitOfEntry } from "../../../../.claude/scripts/ads/lib/ad-layout-ledger";
 
 import { projectRoot } from "./project-root";
 
@@ -19,6 +19,8 @@ export type AdLayoutAd = {
   slotType: string | null;
   unit: string | null;
   label: string;
+  /** PR の中身の名前 (案件のバナーの題)。2026-11-04 より前の撮影には無い */
+  titles?: string[];
   region: "body" | "rail";
   x: number;
   y: number;
@@ -59,10 +61,20 @@ export type PlacementDefinition = {
   region: string;
   position: string;
   unit: string | null;
+  /** 広告の段の枠 (左から順)。段でない行は null */
+  cells: { kind: "adsense" | "affiliate"; unit: string | null }[] | null;
   condition: string | null;
 };
 
-type RawPlacement = { slot: string; region: string; position: string; marker: string; adsenseSlot?: string; condition?: string };
+type RawPlacement = {
+  slot: string;
+  region: string;
+  position: string;
+  marker: string;
+  adsenseSlot?: string;
+  condition?: string;
+  cells?: { kind: "adsense" | "affiliate"; adsenseSlot?: string }[];
+};
 type RawLedger = {
   slotTypes: { id: string; name: string; provider: string; devices: string[] }[];
   pages: Record<string, RawPlacement[]>;
@@ -78,7 +90,18 @@ export function latestAdLayoutManifest(): AdLayoutManifest | null {
     .sort();
   const latest = dates.at(-1);
   if (!latest) return null;
-  return JSON.parse(fs.readFileSync(path.join(root, latest, "manifest.json"), "utf8")) as AdLayoutManifest;
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, latest, "manifest.json"), "utf8")) as AdLayoutManifest;
+  // 2026-11-04 より前の撮影は広告の段の AdSense を番号で記録している。台帳と同じ定数名に直して読む
+  const names = adsenseUnitNames(projectRoot());
+  for (const shot of manifest.shots) {
+    for (const ad of shot.ads) {
+      const name = ad.unit ? names.get(ad.unit) : undefined;
+      if (!name || !ad.unit) continue;
+      ad.label = ad.label.replace(ad.unit, name);
+      ad.unit = name;
+    }
+  }
+  return manifest;
 }
 
 /** ページの種類ごとの台帳の定義 (枠の種類の名前・表示する画面幅・ユニットを付けて返す) */
@@ -98,6 +121,7 @@ export function placementDefinitions(): Record<string, PlacementDefinition[]> {
           region: e.region,
           position: e.position,
           unit: type?.provider === "adsense" ? unitOfEntry(e) : null,
+          cells: e.cells?.map((c) => ({ kind: c.kind, unit: c.adsenseSlot ?? null })) ?? null,
           condition: e.condition ?? null,
         };
       }),

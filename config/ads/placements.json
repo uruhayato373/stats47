@@ -402,14 +402,13 @@
         "trackingPosition": "blog-row-1",
         "cells": [
           {
-            "kind": "adsense",
-            "adsenseSlot": "BLOG_ARTICLE_INLINE"
+            "kind": "adsense"
           },
           {
             "kind": "affiliate"
           }
         ],
-        "condition": "3 段の中身は左から [AdSense, PR] / [PR, AdSense(HUB_INCONTENT)] / [AdSense(CONTENT_FOOTER), PR]。手で広告を置いた記事には差し込まない"
+        "condition": "3 段の並びは左から [AdSense, PR] / [PR, AdSense] / [AdSense, PR]。AdSense のユニットは記事の段に上から順に BLOG_ARTICLE_INLINE → HUB_INCONTENT → CONTENT_FOOTER → THEMES_CONTENT を配る (apps/web/src/app/blog/[slug]/page.tsx の composeAdRows)。手で広告を置いた記事には差し込まない"
       },
       {
         "slot": "adsense-body",
@@ -448,7 +447,7 @@
       {
         "slot": "ad-row",
         "region": "body",
-        "position": "記事の末尾",
+        "position": "記事の末尾 (AdSense のユニットは本文の段で配った次のもの。本文の段 3 つなら THEMES_CONTENT)",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "position=\"blog-row-end\"",
         "trackingPosition": "blog-row-end",
@@ -457,8 +456,7 @@
             "kind": "affiliate"
           },
           {
-            "kind": "adsense",
-            "adsenseSlot": "THEMES_CONTENT"
+            "kind": "adsense"
           }
         ]
       },
