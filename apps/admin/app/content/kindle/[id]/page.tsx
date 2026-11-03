@@ -60,9 +60,10 @@ export default async function KindleBookPage({
         </p>
         <p className="flex flex-wrap gap-x-3 text-xs">
           <Link href={`/content/kindle/${book.id}`} className={version ? "text-primary underline" : "font-semibold"}>入稿版</Link>
-          {versions.slice(0, 6).map((name) => (
+          {/* 版の名前は手元のフォルダ名 (保存された値)。key に使わず、URL にはエンコードした値だけを入れる (CodeQL #49) */}
+          {versions.slice(0, 6).map((name, index) => (
             <Link
-              key={name}
+              key={`version-${index}`}
               href={`/content/kindle/${book.id}?version=${encodeURIComponent(name)}`}
               className={version === name ? "font-semibold" : "text-primary underline"}
             >
