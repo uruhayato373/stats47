@@ -14,17 +14,19 @@ export const DISTRIBUTION_MAP_SAMPLE_ID = 'maximum-temperature-map';
 const PREFECTURE_TOPOLOGY = path.resolve(__dirname, '../../remotion/public/prefecture.topojson');
 // Top three in the upper Sea of Japan corner (as on the tile map); Okinawa below it, fitted to the islands.
 const TOP_THREE = { top: 286, width: 420, rowGap: 76 } as const;
-const OKINAWA_BOX = { x: SAMPLE_FRAME.left, y: 548, width: 560, height: 240 } as const;
+const OKINAWA_BOX = { x: SAMPLE_FRAME.left, y: 530, width: 560, height: 190 } as const;
 // The island arc runs south-west to north-east, so a rectangle leaves two empty corners: one slanted
 // line along the arc's mainland side separates it instead, and the name sits in the empty upper-left.
-const OKINAWA_RULE_GAP = 20;
+// The box keeps a wide strip of sea between the arc and the mainland so the rule stands clear of both.
+const OKINAWA_RULE_GAP = 40;
+const OKINAWA_LABEL_GAP = 20;
 
 const pointsOf = (paths: { d: string }[]) =>
   paths.flatMap((p) => [...p.d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map((m) => ({ x: Number(m[1]), y: Number(m[2]) })));
 
 /**
  * Slanted rule between the island arc and the mainland: parallel to the arc's west-east chord and
- * halfway across the strip of sea that separates them along the chord's span.
+ * a fixed gap off the arc, never past the middle of the sea between them along the chord's span.
  */
 function okinawaRule(okinawa: { d: string }[], mainland: { d: string }[]) {
   const points = pointsOf(okinawa);
@@ -36,8 +38,8 @@ function okinawaRule(okinawa: { d: string }[], mainland: { d: string }[]) {
   const span = (p: { x: number; y: number }) => { const t = (p.x - west.x) * along.x + (p.y - west.y) * along.y; return t >= 0 && t <= length; };
   const islands = Math.max(...points.map(side));
   const nearest = Math.min(...pointsOf(mainland).filter(span).map(side).filter((d) => d > islands));
-  const by = Number.isFinite(nearest) ? (islands + nearest) / 2 : islands + OKINAWA_RULE_GAP;
-  const above = Math.min(...points.map(side)) - OKINAWA_RULE_GAP;
+  const by = islands + Math.min(OKINAWA_RULE_GAP, Number.isFinite(nearest) ? (nearest - islands) / 2 : Infinity);
+  const above = Math.min(...points.map(side)) - OKINAWA_LABEL_GAP;
   const at = (p: { x: number; y: number }, d: number) => ({ x: Math.round(p.x + normal.x * d), y: Math.round(p.y + normal.y * d) });
   return { from: at(west, by), to: at(east, by), label: at({ x: (west.x + east.x) / 2, y: (west.y + east.y) / 2 }, above) };
 }

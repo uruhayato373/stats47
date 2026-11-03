@@ -36,7 +36,7 @@ describe('geographic distribution map basic form', () => {
     const okinawa = points(svg.split('data-map="okinawa"')[1].split('</g>')[0]);
     expect(okinawa.every((p) => side(p) < 0)).toBe(true);
     expect(points(svg.split('data-map="mainland"')[1].split('</g>')[0]).filter(within).every((p) => side(p) > 0)).toBe(true);
-    expect(Math.max(...okinawa.map((p) => p[1])) - Math.min(...okinawa.map((p) => p[1]))).toBeGreaterThan(200);
+    expect(Math.max(...okinawa.map((p) => p[1])) - Math.min(...okinawa.map((p) => p[1]))).toBeGreaterThan(150);
     // Legend card counts every prefecture once.
     const counts = [...svg.matchAll(/>(\d+)県<\/text>/g)].map((m) => Number(m[1]));
     expect(counts.reduce((a, b) => a + b, 0)).toBe(47);

@@ -7,16 +7,16 @@ export const DISTRIBUTION_SAMPLE_ASSETS = {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/95024dd537d9eae69dcd5cbbd684dafdd2fd68c8361efb209c4024e432e4cc83.png",
-      "sha256": "95024dd537d9eae69dcd5cbbd684dafdd2fd68c8361efb209c4024e432e4cc83",
-      "bytes": 175518
+      "key": "media-workspace/images/eb05690bdf908ae9745e039cc9ea41893b8ba0a45c38bf5b109fa089f1d7a933.png",
+      "sha256": "eb05690bdf908ae9745e039cc9ea41893b8ba0a45c38bf5b109fa089f1d7a933",
+      "bytes": 174096
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/f4cb6f33c089aa1cf75f10b6deb146d899aa0ec3fbf6016e07049dddd7d603d3.json",
-      "sha256": "f4cb6f33c089aa1cf75f10b6deb146d899aa0ec3fbf6016e07049dddd7d603d3",
-      "bytes": 1226879
+      "key": "media-workspace/inputs/6c40b7ad7d0a08e9e5c44547e20d5cfd16a6b1334132e759921362fafa9a0d39.json",
+      "sha256": "6c40b7ad7d0a08e9e5c44547e20d5cfd16a6b1334132e759921362fafa9a0d39",
+      "bytes": 1227219
     }
   },
   "maximum-temperature-distribution": {
@@ -30,9 +30,9 @@ export const DISTRIBUTION_SAMPLE_ASSETS = {
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/3f732af8930bfd89dd6a2ea9eabf4f968312466900d9c1898aec96c5b04ff26d.json",
-      "sha256": "3f732af8930bfd89dd6a2ea9eabf4f968312466900d9c1898aec96c5b04ff26d",
-      "bytes": 1226885
+      "key": "media-workspace/inputs/19b8f65cc47c8dbce1d2ea524efcdfced68f56a11436aeee82c5ec604b2cc773.json",
+      "sha256": "19b8f65cc47c8dbce1d2ea524efcdfced68f56a11436aeee82c5ec604b2cc773",
+      "bytes": 1227225
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;
