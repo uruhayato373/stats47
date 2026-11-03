@@ -103,8 +103,18 @@ export function prepareUpdate(current: JsonRecord, candidate: JsonRecord, now = 
   if (current.title !== candidate.title || current.subtitle !== candidate.subtitle) {
     throw new Error("published title/subtitle is locked; use new-edition");
   }
+  // 新版として出した本は、説明の冒頭に旧版の刊行情報が要る (KDP の規約。kdp-preflight が検査する)。
+  // 改訂提案は本の定義から説明を作り直すので免責文が落ちる (2026-11-03 S1 v7 で 5 冊が preflight で止まった)
+  let description = candidate.description;
+  const history = Array.isArray(current.previousEditions) ? current.previousEditions.map((item) => record(item, "previous edition")) : [];
+  const predecessor = history.find((item) => item.asin === current.replacesAsin);
+  if (predecessor && typeof description === "string") {
+    const disclaimer = `Previously published as ${string(predecessor.title)} by ${string(predecessor.author)}.`;
+    if (!description.startsWith(disclaimer)) description = `${disclaimer}\n\n${description}`;
+  }
   return {
     ...candidate,
+    description,
     publicationStage: "prepared",
     publicationStageUpdatedAt: now,
     publicationStageEvidence: { prepared: { at: now, mode: "update" } },

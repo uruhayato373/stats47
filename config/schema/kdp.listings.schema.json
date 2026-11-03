@@ -133,16 +133,22 @@
       "allOf": [
         { "$ref": "#/definitions/edition" },
         {
-          "description": "販売中の観測には ASIN・販売開始日・live 以降の工程が要り、判断は listed か withdrawn (出版停止の処理待ち)",
+          "description": "販売中の観測には ASIN・販売開始日・live 以降の工程が要り、判断は listed か withdrawn (出版停止の処理待ち)。ただし販売中の本の修正 (kdp-promote --mode update。publicationStageEvidence.prepared.mode = update) は、販売を続けたまま工程が prepared から進むので工程を縛らない (2026-11-03 S1 12 冊の改訂)",
           "if": { "required": ["kdpStatus"], "properties": { "kdpStatus": { "const": "live" } } },
           "then": {
             "required": ["asin", "salesStartedAt", "publicationStage"],
             "properties": {
               "asin": { "type": "string" },
               "salesStartedAt": { "type": "string" },
-              "publicationStage": { "enum": ["live", "previous_unpublished"] },
               "status": { "enum": ["listed", "withdrawn"] }
-            }
+            },
+            "anyOf": [
+              { "properties": { "publicationStage": { "enum": ["live", "previous_unpublished"] } } },
+              {
+                "required": ["publicationStageEvidence"],
+                "properties": { "publicationStageEvidence": { "required": ["prepared"], "properties": { "prepared": { "required": ["mode"], "properties": { "mode": { "const": "update" } } } } } }
+              }
+            ]
           }
         },
         {

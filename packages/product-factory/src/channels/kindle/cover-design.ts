@@ -89,12 +89,12 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
   },
   "K-S1-04": {
     status: "published",
-    r2Key: "media/kindle-cover-assets/K-S1-04/145b768c4fd5/background.jpg",
-    sha256: "145b768c4fd588b5740fce2a308cc9b6a788b6fcaa3d219c7a211789bc1b01db",
-    bytes: 879575,
+    r2Key: "media/kindle-cover-assets/K-S1-04/dba6daa99877/background.jpg",
+    sha256: "dba6daa998775b01ff94c0917fa7d9bb43058ba390f325c4c9a4bbf075abc5e0",
+    bytes: 888607,
     width: 1600,
     height: 2560,
-    textBaked: { checkedText: ["健康と医療の地図", "寿命・自殺・介護2040", "47都道府県 × 5つの医療・介護データ", "stats47"], checkedAt: "2026-11-03" },
+    textBaked: { checkedText: ["健康と医療の地図", "寿命・自殺・介護2040", "47都道府県 × 5つのデータ", "stats47"], checkedAt: "2026-11-03" },
   },
   "K-S1-05": {
     status: "published",

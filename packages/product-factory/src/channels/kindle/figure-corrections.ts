@@ -20,13 +20,30 @@ const NENDO = (y: string, before: string) => ({ before, after: before.replace(`$
 
 /** key は `<slug>/<figure name>` (article.md の `![..](data/<name>.svg)`)。 */
 export const KINDLE_FIGURE_CORRECTIONS: Readonly<Record<string, readonly EditorialCorrection[]>> = {
+  // ── 2026-11-03 v8 確認レビュー: R2 で描き直された図の年・分母・題・出典の行 ──
+  "commercial-land-price-trend/commercial-rate-ranking": [{ ...NENDO("2024", ">2024年 · 単位：%<"), reason: "[K-S1-09 v8 G01] 地価の変動率は年度" }],
+  "commercial-land-price-trend/commercial-rate-map": [{ ...NENDO("2024", ">2024年 · 単位：%<"), reason: "[K-S1-09 v8 G01] 地価の変動率は年度" }],
+  "industrial-water-manufacturing-nexus/water-usage-map": [{ ...NENDO("2015", ">2015年 · 単位：m³/日<"), reason: "[K-S1-09 v8 G02] 表は 2015年度" }],
+  "nursing-care-shortage-2040/nursing-home-capacity-ranking": [
+    { before: ">2023年 · 単位：人 · 範囲：24.4–60.4<", after: ">2023年 · 65歳以上人口千人当たり · 単位：人<", reason: "[K-S1-04 v8 M04] 分母が無く県全体の人数に読める" },
+  ],
+  "heating-cost-vs-disposable-income/heating-cost-combined-ranking": [
+    { before: ">出典：計算値（家計調査 灯油消費支出額＋電気代消費支出額＋都市ガス消費支出額の合算）<", after: ">出典：家計調査（灯油・電気代・都市ガスの支出額の合計）<", reason: "[K-S1-01 v8 C03] 出典の行が右端で切れる" },
+  ],
+  "household-spending-prefecture-gap/clothing-footwear-expenditure-ratio-multi-person-households-prefecture-rankings": [
+    { before: ">被服及び履物費割合 都道府県ランキング（2024年）ランキング<", after: ">被服及び履物費割合<", reason: "[K-S1-01 v8 C04] 題が「ランキング」と年を二重に含む (年・単位は副題にある)" },
+  ],
   // ── K-S1-06 自治体財政 (F-003-16: 地方財政状況調査系はすべて年度。F-004-07: 「全国推移」は 47 県単純平均) ──
   // 2026-11-03: 経常収支比率・実質公債費比率・地方債・財政力の推移の図は描き直しで年度・単純平均になったので校訂を外した (KINDLE-S1-BLOG-REWRITE-RECONCILE-01)
   // ── 2026-11-03 v6 差分レビュー: ブログの図の一括の描き直しで出た年・題の不具合 ──
   "fiscal-health-50years-trend/fiscal-map": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-06 v6 B01] 財政力指数は年度" }],
-  "per-capita-income-gap/income-map": [{ ...NENDO("2021", ">2021年<"), reason: "[K-S1-01 v6 B01] 県民所得は年度" }],
-  "per-capita-income-gap/income-ranking": [{ ...NENDO("2021", ">2021年<"), reason: "[K-S1-01 v6 B01] 県民所得は年度" }],
+  "per-capita-income-gap/income-map": [{ ...NENDO("2021", ">2021年 · 単位：万円<"), reason: "[K-S1-01 v6 B01] 県民所得は年度 (図の描き直しで副題の形が変わったので合わせた)" }],
+  "per-capita-income-gap/income-ranking": [{ ...NENDO("2021", ">2021年 · 単位：万円 · 範囲：225.8–576.1<"), reason: "[K-S1-01 v6 B01] 県民所得は年度 (図の描き直しで副題の形が変わったので合わせた)" }],
+  "manufacturing-aichi-dominance/manufacturing-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-09 v7 F01] 本文・表の「年度」にそろえる" }],
+  "manufacturing-aichi-dominance/manufacturing-heatmap": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-09 v7 F01] 本文・表の「年度」にそろえる" }],
+  "manufacturing-aichi-dominance/industrial-zone-ranking": [{ ...NENDO("2023", ">2023年・構成都府県の合計<"), reason: "[K-S1-09 v7 F01] 本文・表の「年度」にそろえる" }],
   "manufacturing-aichi-dominance/shipment-per-employee-ranking": [
+    { ...NENDO("2023", ">　2023年<"), reason: "[K-S1-09 v7 F01] 本文・表の「年度」にそろえる" },
     { before: 'class="svg-title">製造品出荷額等<', after: 'class="svg-title">従業者1人当たり製造品出荷額等<', reason: "[K-S1-09 v6 A02] 総額の図と同じ題になっていた" },
   ],
   "household-spending-prefecture-gap/culture-recreation-expenditure-ratio-multi-person-households-prefecture-rankings": [
@@ -79,6 +96,24 @@ export const KINDLE_FIGURE_CORRECTIONS: Readonly<Record<string, readonly Editori
     { before: ">地震保険料 × 災害被害額<", after: ">火災・地震保険料支出 × 災害被害額<", reason: "[K-S1-10 N20] 指標は火災・地震保険料の消費支出額" },
     { ...NENDO("2023", ">災害被害額（1人当たり・円・2023年）<"), reason: "[K-S1-10 N20] 災害被害額 (社会・人口統計体系) は年度。横軸の家計調査 2024年 は暦年のまま" },
   ],
+  // ── 2026-11-03 v7 差分レビュー: 年度の値を「年」と書いた図・Web 記事の名残の題 ──
+  "real-disposable-income-reversal/per-capita-prefectural-income-h27-prefecture-rankings": [{ ...NENDO("2021", ">2021年 · 単位：万円 · 範囲：225.8–576.1<"), reason: "[K-S1-01 v7 B01] 県民所得は年度 (本文・alt・全県表は 2021年度)" }],
+  "expenditure-structure-comparison/welfare-ratio-ranking": [{ ...NENDO("2022", ">2022年 · 単位：% · 範囲：10.81–21.77<"), reason: "[K-S1-01 v7 B04] 民生費割合 (都道府県財政) は年度" }],
+  "expenditure-structure-comparison/welfare-ratio-map": [{ ...NENDO("2022", ">2022年 · 単位：%<"), reason: "[K-S1-01 v7 B04] 民生費割合 (都道府県財政) は年度" }],
+  "communication-cost-burden/comm-cost-summary-findings": [
+    { before: ">この記事でわかったこと<", after: ">この章でわかったこと<", reason: "[K-S1-01 v7 M03] Web 記事の名残" },
+    { before: ">携帯電話契約数が多い都市部ほど割合は低い（弱い負の相関）。真因はスマホ料金ではなく自動車<", after: ">携帯電話契約数が多い都市部ほど割合は低い（弱い負の相関）。通信費だけでは割合の差を説明できない<", reason: "[K-S1-01 v8 C01] 本文は自動車関連費を主因と断定していない" },
+    { before: ">関連費<", after: ">（自動車関連費の実額は本章では未確認）<", reason: "[K-S1-01 v8 C01] 同上 (2 行目)" },
+  ],
+  "education-cost-per-child/elementary-cost-ranking": [{ ...NENDO("2022", ">2022年 · 単位：万円 · 範囲：64.4–109.5<"), reason: "[K-S1-05 v7 B01] 地方教育費調査は会計年度" }],
+  "education-cost-per-child/elementary-cost-map": [{ ...NENDO("2022", ">2022年 · 単位：万円<"), reason: "[K-S1-05 v7 B01] 地方教育費調査は会計年度" }],
+  "education-expenses-gap/education-per-student-ranking": [{ ...NENDO("2022", ">2022年 · 単位：万円 · 範囲：82.0–147.2<"), reason: "[K-S1-05 v7 B02] 本文・全県表は 2022年度" }],
+  "education-expenses-gap/education-per-student-map": [{ ...NENDO("2022", ">2022年 · 単位：万円<"), reason: "[K-S1-05 v7 B02] 本文・全県表は 2022年度" }],
+  "education-expenses-gap/education-summary-findings": [
+    { before: ">この記事でわかったこと<", after: ">この章でわかったこと<", reason: "[K-S1-05 v7 M01] Web 記事の名残" },
+    { before: ">人口が少ない県ほど1人当たり教育費が高い──小規模校の維持コストが影響<", after: ">人口が少ない県ほど1人当たり教育費が高い──小規模校の維持費が一因の可能性<", reason: "[K-S1-05 v7 M01] 因果の断定 (本章に学校規模のデータは無い)" },
+  ],
+  "university-advancement-capacity/capacity-index-map": [{ ...NENDO("2024", ">2024年<"), reason: "[K-S1-05 v7 B03] 学校基本調査の年度値 (title と表示の 2 か所)" }],
 };
 
 /** 横幅 1080 の型の図の題 (72px)。左右の余白 64px を除いた幅に収まらない題は字を小さくする */
@@ -100,6 +135,15 @@ export function fixFigureTemplate(svg: string): string {
     });
 }
 
+/**
+ * 文字列の置換では直せない図の書籍版の直し。
+ * - manufacturing-ranking: 「58,021,789 百万円」が長く、先頭の桁が県名に重なる (愛知県8,021,789 と読める。K-S1-09 v7 F02)。兆円にして短くする
+ */
+const FIGURE_TRANSFORMS: Readonly<Record<string, (svg: string) => string>> = {
+  "manufacturing-aichi-dominance/manufacturing-ranking": (svg) =>
+    svg.replace(/>([\d,]+) 百万円</g, (_all, n: string) => `>${(Number(n.replace(/,/g, "")) / 1_000_000).toFixed(1)}兆円<`),
+};
+
 /** SVG 文字列に図の校訂を当てる。before が 1 回も無ければ R2 の図が変わったので止める。 */
 export function correctBookFigure(slug: string, name: string, svg: string): string {
   for (const c of KINDLE_FIGURE_CORRECTIONS[`${slug}/${name}`] ?? []) {
@@ -108,5 +152,6 @@ export function correctBookFigure(slug: string, name: string, svg: string): stri
     }
     svg = svg.split(c.before).join(c.after);
   }
-  return fixFigureTemplate(svg);
+  const transform = FIGURE_TRANSFORMS[`${slug}/${name}`];
+  return fixFigureTemplate(transform ? transform(svg) : svg);
 }

@@ -14,6 +14,8 @@
       "titleRomaji": "Nenshu ga Takai Ken wa Kurashi mo Yutaka nano ka",
       "subtitleKana": "ヤチントブッカヲヒイテヨミナオス ヨンジュウナナトドウフケンノカケイ",
       "subtitleRomaji": "Yachin to Bukka wo Hiite Yominaosu 47 Todofuken no Kakei",
+      "readingSourceTitle": "年収が高い県は、暮らしも豊かなのか",
+      "readingSourceSubtitle": "家賃と物価を引いて読み直す47都道府県の家計",
       "language": "ja",
       "description": "Previously published as 実質手取りの地図 — 住む県で変わる、暮らしのお金 by stats47.\n\n県民所得、家計調査の所得・支出、貯蓄と地域財政を別の対象として読み、対象世帯・年次・分母の一致を確認します。地域の平均を個人の手取りや県民性へ置き換えず、比較の限界と確認手順を整理します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -59,9 +61,25 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-01/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-01/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-01/v10-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-01/v10-20261103-final/cover.jpg",
+      "draftId": "A2F38IFN8TM1T8",
       "status": "listed",
+      "asin": "B0HKFB434W",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:20:45.930Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:37:36.793Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:37:36.793Z",
+          "mode": "update"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HF17SQ9N",
       "previousEditions": [
@@ -136,24 +154,7 @@
           "supersededAt": "2026-09-19T23:46:52.457Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKFB434W",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:20:45.930Z",
-      "draftId": "A2F38IFN8TM1T8",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:20:45.930Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:20:45.930Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKFB434W"
-        }
-      }
+      ]
     },
     "K-S1-02": {
       "id": "K-S1-02",
@@ -168,6 +169,8 @@
       "titleRomaji": "Shokutaku no Shishutsu to Konyu Suryo - Kakei Chosa no Chiikisa wo Yomu",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as 消費量日本一の食卓 — 家計調査で読む47都道府県の食 by stats47.\n\n家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読みます。生産地や県民全体の消費を直接測る統計ではないことも整理します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -212,9 +215,39 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-02/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-02/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-02/v7-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-02/v7-20261103-final/cover.jpg",
+      "draftId": "A1EF8ZRCLEYWBG",
       "status": "listed",
+      "asin": "B0HKF4NLDV",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:21:07.325Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T09:18:27.339Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:11:14.446Z",
+          "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T09:13:16.776Z",
+          "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T09:17:35.677Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T09:18:27.339Z",
+          "draftId": "A1EF8ZRCLEYWBG"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HF1N51T8",
       "previousEditions": [
@@ -288,24 +321,7 @@
           "supersededAt": "2026-09-20T00:09:18.116Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKF4NLDV",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:21:07.325Z",
-      "draftId": "A1EF8ZRCLEYWBG",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:21:07.325Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:21:07.325Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKF4NLDV"
-        }
-      }
+      ]
     },
     "K-S1-03": {
       "id": "K-S1-03",
@@ -320,8 +336,10 @@
       "titleRomaji": "Jinko Gensho to Setai no Chizu - Mikon Tanshin Tokyo Shuchu",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "人口減少と世帯の地図 — 未婚・単身・東京集中",
+      "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "未婚率・単身高齢・世帯構造の変化・東京一極集中を束ね、人口減少が暮らしの単位をどう変えたかを読む。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
+      "description": "未婚率・単身高齢・世帯構造の変化・東京一極集中を束ね、人口減少が暮らしの単位をどう変えたかを読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
         "都道府県",
         "人口減少",
@@ -364,25 +382,23 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-03/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-03/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-03/v8-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-03/v8-20261103-final/cover.jpg",
       "draftId": "A25RYVT5IC2UMM",
       "status": "listed",
       "asin": "B0HDYKVX6F",
       "publishedAt": "2026-08-13",
+      "lastSubmittedAt": "2026-09-19",
       "salesStartedAt": "2026-08-30",
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:27:40.490Z",
-      "lastSubmittedAt": "2026-09-19",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-19T23:27:40.490Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:25:26.060Z",
       "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-19T23:27:40.490Z",
-          "statusLabel": "販売中",
-          "asin": "B0HDYKVX6F",
-          "derivedFrom": "kdpStatus (2026-10-27 に kdpStatusCheckedAt の本棚 read-back から補完)"
+        "prepared": {
+          "at": "2026-11-03T09:25:26.060Z",
+          "mode": "update"
         }
       }
     },
@@ -399,8 +415,10 @@
       "titleRomaji": "Kenko to Iryo no Chizu - Jumyo Jisatsu Kaigo 2040",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "健康と医療の地図 — 寿命・自殺・介護2040",
+      "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "健康寿命・自殺率・2040年の介護不足・病床利用を束ね、医療アクセスの地域差を読む。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
+      "description": "寿命、自殺に関する指標、介護職員の必要数と病院の利用指標を比較し、医療資源の数と個人の健康状態を区別して読みます。掲載した化学工業の集計は医薬品・医療機器だけの生産額ではないことも整理します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
         "都道府県",
         "健康寿命",
@@ -443,25 +461,23 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-04/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-04/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-04/v9-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-04/v9-20261103-final/cover.jpg",
       "draftId": "A3NKJO61F4PFTI",
       "status": "listed",
       "asin": "B0HF1C5QZ6",
       "publishedAt": "2026-08-13",
+      "lastSubmittedAt": "2026-09-19",
       "salesStartedAt": "2026-08-30",
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:36:09.618Z",
-      "lastSubmittedAt": "2026-09-19",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-19T23:36:09.618Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:36:01.513Z",
       "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-19T23:36:09.618Z",
-          "statusLabel": "販売中",
-          "asin": "B0HF1C5QZ6",
-          "derivedFrom": "kdpStatus (2026-10-27 に kdpStatusCheckedAt の本棚 read-back から補完)"
+        "prepared": {
+          "at": "2026-11-03T09:36:01.513Z",
+          "mode": "update"
         }
       }
     },
@@ -478,6 +494,8 @@
       "titleRomaji": "Kyoiku to Kosodate no Chizu - Kyoikuhi Shingakuritsu Kosodate Shihyo",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as 教育と子育ての地図 — 教育費・進学率・待機児童 by stats47.\n\n公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較します。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -522,9 +540,25 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-05/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-05/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-05/v8-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-05/v8-20261103-final/cover.jpg",
+      "draftId": "ABTY3P3T9JVF8",
       "status": "listed",
+      "asin": "B0HKF5MMF9",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:21:28.328Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:25:38.935Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:25:38.935Z",
+          "mode": "update"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HF356WR9",
       "previousEditions": [
@@ -598,24 +632,7 @@
           "supersededAt": "2026-09-20T00:27:23.137Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKF5MMF9",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:21:28.328Z",
-      "draftId": "ABTY3P3T9JVF8",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:21:28.328Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:21:28.328Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKF5MMF9"
-        }
-      }
+      ]
     },
     "K-S1-06": {
       "id": "K-S1-06",
@@ -630,8 +647,10 @@
       "titleRomaji": "Jichitai Zaisei no Chizu - Zaiseiryoku Shakkin Shorai Futan",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "自治体財政の地図 — 財政力・借金・将来負担",
+      "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "財政力指数・50年の推移・地方税収・債務・将来負担比率を束ね、自治体の家計の健全性を読む。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
+      "description": "財政力指数、時系列、地方税、地方債務と将来負担比率を比較し、指標ごとの分母・控除・平均期間を確認します。家計の収支とは異なる地方財政の集計として読み、単一指標から健全性を断定しません。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
         "都道府県",
         "自治体財政",
@@ -674,25 +693,37 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-06/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-06/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-06/v7-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-06/v7-20261103-final/cover.jpg",
       "draftId": "A3NI2STP0CJ20O",
       "status": "listed",
       "asin": "B0HF1XFXBY",
       "publishedAt": "2026-08-13",
+      "lastSubmittedAt": "2026-09-19",
       "salesStartedAt": "2026-08-30",
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:44:33.977Z",
-      "lastSubmittedAt": "2026-09-19",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-19T23:44:33.977Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T09:26:35.805Z",
       "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-19T23:44:33.977Z",
-          "statusLabel": "販売中",
-          "asin": "B0HF1XFXBY",
-          "derivedFrom": "kdpStatus (2026-10-27 に kdpStatusCheckedAt の本棚 read-back から補完)"
+        "prepared": {
+          "at": "2026-11-03T09:10:19.137Z",
+          "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T09:21:04.715Z",
+          "title": "自治体財政の地図 — 財政力・借金・将来負担",
+          "editionNumber": 1
+        },
+        "files_processed": {
+          "at": "2026-11-03T09:25:51.524Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T09:26:35.805Z",
+          "draftId": "A3NI2STP0CJ20O"
         }
       }
     },
@@ -709,6 +740,8 @@
       "titleRomaji": "Kanko to Inbound no Chizu - Shukuhaku Kokuseki Kaifuku",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "観光とインバウンドの地図 — 宿泊・国籍・回復",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as 観光とインバウンドの地図 — 宿泊・国籍・回復 by stats47.\n\n延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読みます。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -753,9 +786,25 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-07/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-07/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-07/v8-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-07/v8-20261103-final/cover.jpg",
+      "draftId": "A3HT6UMNDH08OC",
       "status": "listed",
+      "asin": "B0HKFB2359",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:21:49.139Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:25:51.557Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:25:51.557Z",
+          "mode": "update"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HDYG6DLX",
       "previousEditions": [
@@ -829,24 +878,7 @@
           "supersededAt": "2026-09-20T00:36:27.704Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKFB2359",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:21:49.139Z",
-      "draftId": "A3HT6UMNDH08OC",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:21:49.139Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:21:49.139Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKFB2359"
-        }
-      }
+      ]
     },
     "K-S1-08": {
       "id": "K-S1-08",
@@ -861,6 +893,8 @@
       "titleRomaji": "Energy to Infra no Chizu - Denryoku Saiene Gas",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as エネルギーとインフラの地図 — 電力・再エネ・水道 by stats47.\n\nエネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読みます。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱いません。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -905,9 +939,39 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-08/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-08/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-08/v7-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-08/v7-20261103-final/cover.jpg",
+      "draftId": "AYBKBS2W0CEIH",
       "status": "listed",
+      "asin": "B0HKDVYP8M",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:22:09.834Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T09:34:29.756Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:11:14.759Z",
+          "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T09:28:34.408Z",
+          "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T09:33:44.865Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T09:34:29.756Z",
+          "draftId": "AYBKBS2W0CEIH"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HDYLY7WM",
       "previousEditions": [
@@ -981,24 +1045,7 @@
           "supersededAt": "2026-09-20T00:54:04.570Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKDVYP8M",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:22:09.834Z",
-      "draftId": "AYBKBS2W0CEIH",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:22:09.834Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:22:09.834Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKDVYP8M"
-        }
-      }
+      ]
     },
     "K-S1-09": {
       "id": "K-S1-09",
@@ -1013,6 +1060,8 @@
       "titleRomaji": "Sangyo to Chiiki Keizai no Chizu - Seizo Chusho Chika",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "産業と地域経済の地図 — 製造・中小・地価",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as 産業と地域経済の地図 — 製造・中小・農林 by stats47.\n\n製造業の集計、事業所規模、工業用水、商業地地価を比較します。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -1057,9 +1106,25 @@
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-09/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-09/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-09/v9-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-09/v9-20261103-final/cover.jpg",
+      "draftId": "A1CY4CGC4RA9EJ",
       "status": "listed",
+      "asin": "B0HKDXP4NM",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:22:30.277Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:36:12.760Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:36:12.760Z",
+          "mode": "update"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HDYB4CBV",
       "previousEditions": [
@@ -1133,24 +1198,7 @@
           "supersededAt": "2026-09-20T01:03:00.637Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKDXP4NM",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:22:30.277Z",
-      "draftId": "A1CY4CGC4RA9EJ",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:22:30.277Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:22:30.277Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKDXP4NM"
-        }
-      }
+      ]
     },
     "K-S1-10": {
       "id": "K-S1-10",
@@ -1165,6 +1213,8 @@
       "titleRomaji": "Anzen to Kankyo no Chizu - Hanzai Rosai Kogai Bosai",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "安全と環境の地図 — 犯罪・労災・公害・防災",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as 安全と環境の地図 — 犯罪・労災・公害・防災 by stats47.\n\n犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読みます。集計値から個人の被害確率や地域の安全性全般を断定しません。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -1209,9 +1259,30 @@
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-10/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-10/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-10/v7-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-10/v7-20261103-final/cover.jpg",
+      "draftId": "A1GNQCILOBWHIY",
       "status": "listed",
+      "asin": "B0HKDV78TG",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:22:51.852Z",
+      "publicationStage": "details_filled",
+      "publicationStageUpdatedAt": "2026-11-03T09:36:27.213Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:11:15.059Z",
+          "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T09:36:27.213Z",
+          "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
+          "editionNumber": 2
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HDZ45H6C",
       "previousEditions": [
@@ -1285,24 +1356,7 @@
           "supersededAt": "2026-09-20T01:12:26.793Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKDV78TG",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:22:51.852Z",
-      "draftId": "A1GNQCILOBWHIY",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:22:51.852Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:22:51.852Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKDV78TG"
-        }
-      }
+      ]
     },
     "K-S1-11": {
       "id": "K-S1-11",
@@ -1317,6 +1371,8 @@
       "titleRomaji": "Bunka Sports Yoka no Chizu",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "文化・スポーツ・余暇の地図",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as 文化・スポーツ・余暇の地図 by stats47.\n\n図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較します。施設数と利用、参加と頻度、市の家計と県全体を区別して読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -1361,9 +1417,25 @@
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-11/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-11/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-11/v7-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-11/v7-20261103-final/cover.jpg",
+      "draftId": "AZ47QB1EPQ5SA",
       "status": "listed",
+      "asin": "B0HKFGQB8Q",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:23:12.790Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:11:15.359Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:11:15.359Z",
+          "mode": "update"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HH88J9YH",
       "previousEditions": [
@@ -1437,24 +1509,7 @@
           "supersededAt": "2026-09-20T01:23:36.923Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKFGQB8Q",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:23:12.790Z",
-      "draftId": "AZ47QB1EPQ5SA",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:23:12.790Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:23:12.790Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKFGQB8Q"
-        }
-      }
+      ]
     },
     "K-S1-12": {
       "id": "K-S1-12",
@@ -1469,6 +1524,8 @@
       "titleRomaji": "Digital Seikatsu no Chizu - Tsushin PC Telework",
       "subtitleKana": null,
       "subtitleRomaji": null,
+      "readingSourceTitle": "デジタル生活の地図 — 通信・PC・テレワーク",
+      "readingSourceSubtitle": null,
       "language": "ja",
       "description": "Previously published as デジタル生活の地図 — 通信・PC・テレワーク by stats47.\n\nテレビ・ラジオ・新聞・雑誌の利用時間、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較します。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
       "keywords": [
@@ -1513,9 +1570,25 @@
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S1-12/v4-20260920-imagegen/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-12/v4-20260920-imagegen/cover.jpg",
+      "epubPath": ".local/kindle-books/K-S1-12/v7-20261103-final/book.epub",
+      "coverPath": ".local/kindle-books/K-S1-12/v7-20261103-final/cover.jpg",
+      "draftId": "A23MSYRRHKWKGB",
       "status": "listed",
+      "asin": "B0HKF7C6JQ",
+      "publishedAt": "2026-09-20",
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:23:33.405Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-03T09:11:15.664Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-03T09:11:15.664Z",
+          "mode": "update"
+        }
+      },
       "editionNumber": 2,
       "replacesAsin": "B0HG55D649",
       "previousEditions": [
@@ -1589,24 +1662,7 @@
           "supersededAt": "2026-09-20T01:32:41.230Z",
           "unpublishAfterReplacementLive": true
         }
-      ],
-      "asin": "B0HKF7C6JQ",
-      "publishedAt": "2026-09-20",
-      "kdpStatus": "live",
-      "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-09-27T10:23:33.405Z",
-      "draftId": "A23MSYRRHKWKGB",
-      "lastSubmittedAt": "2026-09-20",
-      "salesStartedAt": "2026-09-27",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-09-27T10:23:33.405Z",
-      "publicationStageEvidence": {
-        "live": {
-          "at": "2026-09-27T10:23:33.405Z",
-          "statusLabel": "販売中",
-          "asin": "B0HKF7C6JQ"
-        }
-      }
+      ]
     },
     "K-S2-01": {
       "id": "K-S2-01",
