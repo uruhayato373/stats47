@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "notebook": {
+    "name": "stats47 商品戦略",
+    "id": "529f3b09-6a3f-4514-bc21-59bb65df6942",
+    "marketingNotebookId": "e4eab8bd-fadc-41f1-8207-ded51edd7465",
+    "use": "戦略文書と台帳への質問は notebooklm ask -n <id> で行い、Claude に全文を読ませない。文書を大きく変えたらソースを入れ直す"
+  },
+  "fees": {
+    "note": {
+      "cardProcessingRate": 0.05,
+      "platformRate": 0.1,
+      "source": "https://www.help-note.com/hc/ja/articles/360011358873",
+      "checkedOn": "2026-11-04"
+    }
+  },
+  "lines": [
+    {
+      "id": "data-pack-theme",
+      "name": "テーマ別データ集",
+      "stance": "price-test",
+      "audience": "仕事で県別の比較資料を作る職員・企画担当 (個人で支払う想定。支払者は未確認)",
+      "harm": "M・A (資料づくりの時間を減らす)",
+      "payReason": "無料データの整形・照合の手間を買う。編集できる Excel と図と出典が同じ版に揃っている",
+      "priceRule": "¥1,980 に統一 (PRICE-DATA-PACK-2026-11)。データでみる県勢 2026 の ¥3,300 より下に置く",
+      "demandEvidence": "未確認。2026-10 の売上 ¥0。公開から約 1 週間で計 93 PV",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "note",
+        "status": [
+          "published"
+        ],
+        "vertical": "product-sales",
+        "minYen": 1,
+        "maxYen": 3000
+      }
+    },
+    {
+      "id": "data-pack-all",
+      "name": "総合集",
+      "stance": "price-test",
+      "audience": "複数の分野の県別データをまとめて使う人",
+      "harm": "M・A",
+      "payReason": "2,073 指標を 1 回で揃える。テーマ別を 3 本買うより安い",
+      "priceRule": "¥4,980 (PRICE-DATA-PACK-2026-11)。都市データパック 2025 の ¥19,800 より下で、テーマ別 3 本分より安い位置",
+      "demandEvidence": "未確認。2026-10 の売上 ¥0・14 PV",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "note",
+        "status": [
+          "published"
+        ],
+        "vertical": "product-sales",
+        "minYen": 3001
+      }
+    },
+    {
+      "id": "note-howto",
+      "name": "手順・Geo の有料記事",
+      "stance": "keep",
+      "audience": "GIS や統計処理を自分で再現したい実務者",
+      "harm": "A (技能の習得)",
+      "payReason": "再現できる手順・コード・検算を買う。結論は無料で読める",
+      "priceRule": "¥980〜2,980 のまま",
+      "demandEvidence": "未確認。2026-10 の売上 ¥0",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "note",
+        "status": [
+          "published"
+        ],
+        "minYen": 980
+      }
+    },
+    {
+      "id": "note-short",
+      "name": "短い有料記事",
+      "stance": "keep",
+      "audience": "特定の指標を詳しく読みたい読者",
+      "harm": "M・H など記事ごとに違う",
+      "payReason": "1 テーマの読み解きを安く読む",
+      "priceRule": "¥200〜500 のまま。増やさない",
+      "demandEvidence": "2026-05〜07 に月 ¥300 の売上。2026-10 は ¥0",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "note",
+        "status": [
+          "published"
+        ],
+        "maxYen": 979
+      }
+    },
+    {
+      "id": "note-draft-hold",
+      "name": "有料の下書き",
+      "stance": "hold",
+      "audience": "未確認",
+      "harm": "未分類",
+      "payReason": "未確認",
+      "priceRule": "公開しない。データ集の価格実験の判定後に、公開するかを 1 本ずつ決める",
+      "demandEvidence": "なし",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "note",
+        "status": [
+          "draft"
+        ]
+      }
+    },
+    {
+      "id": "kdp-live",
+      "name": "Kindle 販売中",
+      "stance": "keep",
+      "audience": "地域差を読み物で知りたい読者",
+      "harm": "M・H・A",
+      "payReason": "統計の読み解きを 1 冊で読む",
+      "priceRule": "¥500・¥800 のまま。KDP セレクトに未登録で日本の印税は 35% (KDP-ROYALTY-RATE-CHECK-01)",
+      "demandEvidence": "2026-08・09 に各 1 冊、計 ¥413",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "kdp",
+        "status": [
+          "live"
+        ]
+      }
+    },
+    {
+      "id": "kdp-stopped",
+      "name": "Kindle 取り下げ・保留",
+      "stance": "hold",
+      "audience": "未確認",
+      "harm": "未分類",
+      "payReason": "未確認",
+      "priceRule": "販売していない",
+      "demandEvidence": "なし",
+      "nextReviewOn": "2026-12-30",
+      "match": {
+        "channel": "kdp",
+        "status": [
+          "withdrawn",
+          "blocked-design"
+        ]
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-04",
+      "topic": "データ集の価格",
+      "decision": "テーマ別 12 本を ¥1,980、総合集を ¥4,980 に下げ、有料の下書き 54 本は公開しない",
+      "reason": "ココナラの価格を移しただけで note の買い手に合わせた根拠が無く、総合集がテーマ別 2 本分だった",
+      "by": "owner"
+    },
+    {
+      "date": "2026-11-04",
+      "topic": "新しい商品の扱い",
+      "decision": "既存の資産から少ない工数で作れる商品は作ってよい。それ以外の新作は作らない",
+      "reason": "商品の数より見せ方と導線が課題だという 2026-10-17 の判断は残すが、作れる物まで止めない",
+      "by": "owner"
+    }
+  ],
+  "agenda": [
+    {
+      "topic": "買う人の確認",
+      "question": "データ集の支払者は職員個人か組織か。聞き取りを増やす (ADMIN-STAT-PILOT-01 は 0/3 件)",
+      "evidenceNeeded": "聞き取りの記録"
+    },
+    {
+      "topic": "導線",
+      "question": "有料データ集の閲覧を増やす入口はどこか。ランキングと記事からの案内のクリックを見る",
+      "evidenceNeeded": "GA4 の商品導線のクリック"
+    },
+    {
+      "topic": "KDP の印税",
+      "question": "KDP セレクトに登録する本を選ぶか。独占の条件と売上を比べて 1 冊ずつ決める",
+      "evidenceNeeded": "冊別の販売数と KU の既読"
+    },
+    {
+      "topic": "市区町村データ",
+      "question": "製造品出荷額のデータ商品を ¥980〜2,980 のどこで出すか",
+      "evidenceNeeded": "MUNI-DATA-PRODUCT-PILOT-01 の完成物"
+    }
+  ]
+}

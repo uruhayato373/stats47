@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "experiments": [
+    {
+      "id": "PRICE-DATA-PACK-2026-11",
+      "startedOn": "2026-11-04",
+      "reviewOn": "2026-12-30",
+      "status": "running",
+      "hypothesis": "note のデータ集はココナラの出品価格 (¥4,000〜9,800) をそのまま移したもので、個人が自分で払うには高い。テーマ別 ¥1,980・総合集 ¥4,980 にすれば買われる",
+      "evidence": "2026-10 の note で ¥980 以上の 24 本は計 172 PV・売上 ¥0。比べる相手は データでみる県勢 2026 ¥3,300 と 都市データパック 2025 ¥19,800 (どちらも店頭表示)。データ集の公開は 10 月 24〜25 日で観測は約 1 週間",
+      "decisionRule": "導線を入れてから 8 週で 3 件以上売れたら続ける。1〜2 件なら価格か見せ方を 1 回だけ変える。0 件ならデータの単体販売を止める",
+      "metric": "data/note/dashboard/latest.json の salesJpy と pageViews"
+    }
+  ],
+  "changes": [
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-population-household-pack",
+      "fromYen": 4000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:52:45.277Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-income-wage-hiring-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:52:53.762Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-tourism-lodging-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:02.088Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-municipal-finance-pack",
+      "fromYen": 6000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:10.622Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-healthcare-nursing-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:18.945Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-education-childcare-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:27.397Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-migration-living-pack",
+      "fromYen": 4500,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:35.806Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-retail-trade-area-pack",
+      "fromYen": 6000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:44.215Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-industry-economy-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:53:53.173Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-disaster-infrastructure-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:54:02.136Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-map-chart-assets-pack",
+      "fromYen": 4000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:52:23.929Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-all-in-one-pack",
+      "fromYen": 9800,
+      "toYen": 4980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:54:10.555Z"
+    },
+    {
+      "experimentId": "PRICE-DATA-PACK-2026-11",
+      "channel": "note",
+      "productKey": "prefecture-household-consumption-pack",
+      "fromYen": 5000,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-03T22:54:19.128Z"
+    }
+  ]
+}

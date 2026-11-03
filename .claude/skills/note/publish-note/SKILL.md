@@ -378,6 +378,11 @@ node .claude/scripts/note/probe-create-form.mjs        # 「投稿」ドロッ�
 - note 記事編集: `/edit-note-draft` スキル
 - 自動化パターン: `.claude/agents/browser-publisher.md` の note.com セクション
 
+
+## 公開済みの記事の価格を変える
+
+価格は `data/products/price-history.json` に実験と変更を書いてから `node .claude/scripts/note/update-note-price.mjs --experiment <ID> [--key <記事キー>]` で確かめ、`--commit` で適用する。本文・有料の境界・添付・タグは公開版のまま送り、読み戻しで価格だけが変わったことを確かめる。適用後に `cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-product-storefront.ts` で商品ページの価格を作り直す。
+
 ## 公開済み有料記事の無料部分を後から補強する (2026-09-20)
 
 出典・対象読者・わかること・サンプル画像・サイト導線を、editor を使わず PUT パッチで足す。契約は

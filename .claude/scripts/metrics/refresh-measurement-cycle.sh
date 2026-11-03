@@ -25,4 +25,5 @@ if [ -f .claude/state/metrics/google-admin/api-latest.json ]; then
   ARGS+=(--admin-audit "data/google-admin/audits/$WEEK.json")
 fi
 rm -rf .claude/state/metrics/google-admin
+node .claude/scripts/products/build-product-ledger.mjs || echo "::warning::商品の台帳を作り直せなかった (未分類の商品がある。data/products/product-strategy.json の商品群を直す)"
 node .claude/scripts/metrics/build-measurement-cycle.mjs "${ARGS[@]}"
