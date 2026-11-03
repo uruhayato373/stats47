@@ -20,8 +20,10 @@ interface ArticleTeaserCardProps {
   href: string;
   /** 記事の題名 (2 行まで。はみ出しは省略) */
   title: string;
-  /** サムネイル (ライト・ダーク) */
-  thumbnail: { lightSrc: string; darkSrc: string };
+  /** サムネイル (ライト・ダーク)。media を渡すときは省く */
+  thumbnail?: { lightSrc: string; darkSrc: string };
+  /** 画像の代わりに枠いっぱいに描く中身 (Geo の一覧の見本の地図 SVG など。2026-11-03) */
+  media?: ReactNode;
   /** 題名の下の説明 (2 行まで)。一覧で記事を選ぶ材料が要るときだけ */
   description?: ReactNode;
   /** 下端の補足 1 行 (更新日など) */
@@ -36,6 +38,7 @@ export function ArticleTeaserCard({
   href,
   title,
   thumbnail,
+  media,
   description,
   meta,
   navSurface,
@@ -52,15 +55,18 @@ export function ArticleTeaserCard({
     >
       {/* 縦横比の枠を縮ませない (shrink-0)。縮むと object-cover が上下を切り、絵の端が欠ける */}
       <div className={cn('relative w-full shrink-0 overflow-hidden border-b border-border bg-muted', BLOG_THUMBNAIL_ASPECT_CLASS)}>
-        <ThemeAwareImage
-          lightSrc={thumbnail.lightSrc}
-          darkSrc={thumbnail.darkSrc}
-          alt=""
-          fill
-          loading={eager ? 'eager' : 'lazy'}
-          sizes="(min-width: 1280px) 400px, (min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
-          className="object-cover"
-        />
+        {media ??
+          (thumbnail && (
+            <ThemeAwareImage
+              lightSrc={thumbnail.lightSrc}
+              darkSrc={thumbnail.darkSrc}
+              alt=""
+              fill
+              loading={eager ? 'eager' : 'lazy'}
+              sizes="(min-width: 1280px) 400px, (min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
+              className="object-cover"
+            />
+          ))}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="line-clamp-2 text-base leading-snug font-semibold text-foreground group-hover:text-primary">

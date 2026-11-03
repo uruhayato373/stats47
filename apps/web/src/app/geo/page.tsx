@@ -83,7 +83,8 @@ export default function GeoPage() {
       <div className="mb-5">
         <CompareLink />
       </div>
-      <section aria-labelledby="geo-analyses-heading">
+      {/* 地図カードの格子を含むセルは余白を持たないので、見出し・カード・注記・ほかの分析を別のセルにした格子の節にする */}
+      <PanelGrid as="section" aria-labelledby="geo-analyses-heading">
         <SectionHeader
           title={<span id="geo-analyses-heading">調べたい問いから選ぶ</span>}
           description={`${GEO_ANALYSES.length}つの分析・対象範囲は各分析で確認`}
@@ -92,7 +93,7 @@ export default function GeoPage() {
         <GeoAnalysisCards
           previewFootnote={
             <>
-              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              <p className="text-xs leading-relaxed text-muted-foreground">
                 地図は兵庫県（淡路島を含む）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です（重なる駅名は一部を省いています）。空白は人口・危険性・利便性の判定を示しません。
               </p>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
@@ -113,7 +114,7 @@ export default function GeoPage() {
             </>
           }
         />
-      </section>
+      </PanelGrid>
       <ContentDisclosure
         title="はじめての地域分析：地図の読み進め方"
         className="mt-8"
