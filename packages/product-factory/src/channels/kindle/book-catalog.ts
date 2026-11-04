@@ -504,6 +504,7 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
       { title: "第8章 自分で点数を付ける手順", source: "fresh", freshFile: KDP_ONLY("80-scoring") },
       { title: "終わりに — 県の数字は、問いの出発点", source: "fresh", freshFile: KDP_ONLY("90-ending") },
       { title: "出典と方法", source: "fresh", freshFile: KDP_ONLY("95-sources-method") },
+      { title: "付録 47都道府県の値 — 第8章を自分で再計算するために", source: "fresh", freshFile: KDP_ONLY("96-appendix-tables") },
     ],
     priceYen: 500,
     newContentNote: "全章を書き下ろした KDP 専用の本。サイト・note に同じ文章はない。",
