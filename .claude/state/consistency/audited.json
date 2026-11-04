@@ -1,12 +1,9 @@
 {
-  "hash": "60ff0200c4f2e49dcea951e6543261fce2d9b06c38c3ad344dc03467e9835891",
-  "audited_at": "2026-11-04T07:02:27",
+  "hash": "dfcccbc9f3f6548a331fca3175f2fd5b688532412393c162b51001be5bdaa17f",
+  "audited_at": "2026-11-04T08:06:15",
   "files": [
-    ".claude/rules/unit-semantics-standards.md",
     ".claude/scripts/blog/audit-chart-axes.ts",
-    ".claude/scripts/blog/build-remediation-queue.mjs",
-    ".claude/scripts/management/weekly-audits/blog-remediation.sh",
-    ".claude/scripts/management/weekly-audits/ranking-integrity.sh",
-    ".claude/scripts/metrics/audit-metric-denominator.ts"
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/scripts/blog/rebuild-scatter-data.mjs"
   ]
 }

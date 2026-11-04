@@ -8,6 +8,8 @@
  *
  * spec: [{ slug, base, x: [key, year], y: [key, year] }, ...]
  *       x の代わりに calc: { num: [key, year], den: [key, year], digits, unit } で割り算の軸を作れる
+ *       xLabel / yLabel で軸の名前を書く (指標で確かめられない軸に要る)
+ *       { slug, base, patch: {...} } は点データを変えず source.json にだけ足す (sourceName など)
  *
  * Usage: node .claude/scripts/blog/rebuild-scatter-data.mjs --spec <spec.json> --out <dir>
  *        → <dir>/repair.b64 を gh workflow run regenerate-blog-svgs.yml -f mode=source-repair -f source_repair_payload=... へ渡す
@@ -51,7 +53,8 @@ export function buildRepair(spec, oldSource, x, y) {
         inputs: [{ rankingKey: spec.calc.num[0], year: spec.calc.num[1], role: 'numerator' }, { rankingKey: spec.calc.den[0], year: spec.calc.den[1], role: 'denominator' }, { rankingKey: spec.y[0], year: spec.y[1], role: 'y' }],
         formula: `x = ${spec.calc.num[0]} / ${spec.calc.den[0]} (小数${spec.calc.digits}桁) / y = ${spec.y[0]}` }
     : { ...kept, kind: 'scatter', xKey: spec.x[0], yKey: spec.y[0], year: `x:${spec.x[1]}/y:${spec.y[1]}`, generatedBy: TOOL };
-  return { manifest, data: { chartType: 'scatter', title: spec.base, xUnit: x.unit, yUnit: y.unit, points } };
+  const labels = { ...(spec.xLabel ? { xLabel: spec.xLabel } : {}), ...(spec.yLabel ? { yLabel: spec.yLabel } : {}) };
+  return { manifest, data: { chartType: 'scatter', title: spec.base, ...labels, xUnit: x.unit, yUnit: y.unit, points } };
 }
 
 async function main(argv) {
@@ -69,6 +72,10 @@ async function main(argv) {
     const dir = `${R2}/app/blog/${spec.slug}/data/${spec.base}`;
     const [sourceText, dataText] = await Promise.all([getText(`${dir}.source.json`), getText(`${dir}.json`)]);
     if (!sourceText) throw new Error(`${spec.slug}/${spec.base}: source.json が無い`);
+    if (spec.patch) {
+      payload.push({ slug: spec.slug, base: spec.base, manifest: { ...JSON.parse(sourceText), ...spec.patch }, expectedSourceSha256: sha256(sourceText) });
+      continue;
+    }
     let x;
     if (spec.calc) {
       const num = await load(spec.calc.num), den = await load(spec.calc.den);

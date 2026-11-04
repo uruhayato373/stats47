@@ -67,7 +67,7 @@ const shortToCode = new Map<string, string>();
 (PREF_NAMES as string[]).forEach((name, i) => {
   const code = String(i + 1).padStart(2, '0');
   shortToCode.set(name, code);
-  shortToCode.set(name === '北海道' ? name : name.replace(/[都府県]$/, ''), code);
+  shortToCode.set(name.replace(/[都道府県]$/, ''), code); // 古いデータは 北海 と書く
 });
 
 /** 記事が表示する散布図の basename */
@@ -154,7 +154,8 @@ async function main() {
     while (i < slugs.length) {
       const slug = slugs[i++];
       const md = await blogFile(slug, 'article.md');
-      if (!md) continue;
+      // 非公開の記事 (サイトでは 410) の図は読者に出ない
+      if (!md || !/^published:\s*true/m.test(md)) continue;
       for (const base of scatterChartsOf(md)) targets.push({ slug, base });
       for (const base of rankedChartsOf(md)) ranked.push({ slug, base });
     }
