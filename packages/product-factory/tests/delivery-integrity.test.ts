@@ -196,8 +196,8 @@ describe("不具合4: 47 県すべて同値の列は 1 つにまとめる", () =
     expect(kept.mergedRankingKeys).toEqual(["retail-store-count-alt"]);
   });
 
-  it("統合後の指標数: 同値グループ 15 組・権利要確認 11 件の除外ぶん P-12 は 2099 → 2073", () => {
-    expect(p12.length).toBe(2073);
+  it("同値の統合と権利要確認の除外を経た P-12 の指標数は 2491", () => {
+    expect(p12.length).toBe(2491);
   });
 
   it("実際に書き出した data.csv の指標列・SOURCES 行・PowerPoint 指標数が同じ数で揃い、重複列が無い", async () => {

@@ -314,7 +314,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-14",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "県庁所在市別 家計調査データ 685指標｜品目別 CSV・Excel",
+    "title": "県庁所在市別 家計調査データ 832指標｜品目別 CSV・Excel",
     "description": "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n554a047cf5be",
