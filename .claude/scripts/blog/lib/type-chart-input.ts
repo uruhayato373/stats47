@@ -91,7 +91,7 @@ export function rankingChartFromArticleData(
   };
 }
 
-type ScatterMetric = { title?: string; subtitle?: string; unit?: string; source?: { displayName?: string } };
+type ScatterMetric = ArticleMetric & { source?: { displayName?: string } };
 type ValuesRow = { areaCode: string; yearCode: string; yearName?: string; value: number | null };
 
 const decimalsOf = (v: number) => (String(v).split('.')[1] ?? '').length;
@@ -119,12 +119,30 @@ export function matchScatterYear(values: number[], codes: string[], rows: Values
   return hits.length === 1 ? names.get(hits[0][0])! : null;
 }
 
+/**
+ * Prefectures the text around a chart names, in reading order: the H2 section holding `data/<chartBase>.svg`.
+ * Longest name first and consumed left to right, so 東京都 never also reads as 京都.
+ */
+export function prefecturesNamedNear(markdown: string, chartBase: string, names: string[]) {
+  const sections = markdown.split(/^(?=## )/m);
+  const section = sections.find((s) => s.includes(`data/${chartBase}.svg`));
+  if (!section) return [];
+  const short = (name: string) => (name === '北海道' ? name : name.replace(/[都府県]$/, ''));
+  const byShort = new Map(names.map((name) => [short(name), name]));
+  const pattern = new RegExp([...byShort.keys()].sort((a, b) => b.length - a.length).join('|'), 'g');
+  // Links and cards point at other pages; their names are not what the text is saying about this chart.
+  const prose = section.replace(/!?\[[^\]]*\]\([^)]*\)/g, '').replace(/<source-link[^>]*>.*?<\/source-link>/g, '');
+  return [...new Set([...prose.matchAll(pattern)].map((m) => byShort.get(m[0])!))];
+}
+
 /** Article scatter data + its source manifest → the shared scatter type's input, or why not. */
 export function scatterChartFromArticleData(
   parsed: unknown,
   opts: {
     x: { metric?: ScatterMetric; year: string | null }; y: { metric?: ScatterMetric; year: string | null };
     prefCodeOf: (name: string) => string; unitLabel: (unit: string) => string;
+    /** Prefectures named in the chart's section; labelled after the data's own `labelPoints`. */
+    bodyNames?: string[];
   }
 ): ScatterChart | { skip: string } {
   const data = (parsed ?? {}) as Record<string, unknown>;
@@ -137,30 +155,41 @@ export function scatterChartFromArticleData(
     return { skip: `47都道府県がそろっていない (有効点 ${points.length} 件)` };
   if (!opts.x.year || !opts.y.year) return { skip: '観測値と一致する年が決まらない' };
   const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
-  const xName = text(data.xLabel) || text(opts.x.metric?.title), yName = text(data.yLabel) || text(opts.y.metric?.title);
+  // The metric's title is the name; article labels may carry units, years or arrows that the axis already shows.
+  const nameOf = (m: ScatterMetric | undefined, label: string) => (text(m?.title) || label).replace(/[（(][^）)]*[）)]|→/g, '').trim();
+  const xRaw = text(data.xLabel), yRaw = text(data.yLabel);
+  // One metric against itself (two years): only the article's labels tell the axes apart.
+  const sameMetric = nameOf(opts.x.metric, xRaw) === nameOf(opts.y.metric, yRaw);
+  const xName = sameMetric ? nameOf(undefined, xRaw) : nameOf(opts.x.metric, xRaw);
+  const yName = sameMetric ? nameOf(undefined, yRaw) : nameOf(opts.y.metric, yRaw);
   if (!xName || !yName) return { skip: '軸の指標名が無い' };
+  // Only what changes the reading of the number: the denominator, the capital-city scope, a school grade or sex.
+  const basis = (m: ScatterMetric | undefined, label: string) => {
+    const subtitle = text(m?.subtitle);
+    if (subtitle.includes('県庁所在市')) return '県庁所在市';
+    const per = /[^（(・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label}`)?.[0];
+    if (per) return per;
+    return /(?:小学|中学|高校)\d年|男子|女子/.test(subtitle) && subtitle.length <= 10 ? subtitle : '';
+  };
   // Large quantities read in 万・億 on the axis too (one display unit per axis, from the unit canon).
-  const axis = (name: string, unit: string, values: number[]) => {
+  const axis = (name: string, unit: string, values: number[], scope: string) => {
     const scaled = chartValueLabels(unit, values);
+    const detail = [scaled.unit && opts.unitLabel(scaled.unit), scope].filter(Boolean).join('・');
     return {
-      label: scaled.unit ? `${name}（${opts.unitLabel(scaled.unit)}）` : name,
+      label: detail ? `${name}（${detail}）` : name,
       format: scaled.display?.conversionFactor ? (v: number) => scaled.formatValue(v).replace(/\.0+$/, '') : undefined,
     };
   };
-  const xAxis = axis(xName, text(data.xUnit) || text(opts.x.metric?.unit), points.map((p) => p.x));
-  const yAxis = axis(yName, text(data.yUnit) || text(opts.y.metric?.unit), points.map((p) => p.y));
-  // A per-capita or capital-city basis changes the reading; a subtitle that only states a year does not.
-  const basis = (m?: ScatterMetric) => (/^\d{4}年/.test(text(m?.subtitle)) ? '' : text(m?.subtitle));
-  const note = [basis(opts.x.metric) && `横軸：${basis(opts.x.metric)}`, basis(opts.y.metric) && `縦軸：${basis(opts.y.metric)}`]
-    .filter(Boolean).join('・');
+  const xAxis = axis(xName, text(data.xUnit) || text(opts.x.metric?.unit), points.map((p) => p.x), basis(opts.x.metric, xRaw));
+  const yAxis = axis(yName, text(data.yUnit) || text(opts.y.metric?.unit), points.map((p) => p.y), basis(opts.y.metric, yRaw));
   const sources = [...new Set([opts.x.metric?.source?.displayName, opts.y.metric?.source?.displayName].map(text).filter(Boolean))];
   return {
-    title: `${xName}と${yName}`,
+    title: sameMetric && text(data.title) ? text(data.title).replace(/\s*[×x]\s*/, 'と') : `${xName}と${yName}`,
     meta: opts.x.year === opts.y.year ? opts.x.year : `横軸 ${opts.x.year}・縦軸 ${opts.y.year}`,
-    note: note || undefined,
     source: sources.join('・'),
+    presentation: presentationOf(data, opts.y.metric),
     xLabel: xAxis.label, yLabel: yAxis.label, formatX: xAxis.format, formatY: yAxis.format,
     points,
-    labelNames: Array.isArray(data.labelPoints) ? (data.labelPoints as unknown[]).map(String) : undefined,
+    labelNames: [...(Array.isArray(data.labelPoints) ? (data.labelPoints as unknown[]).map(String) : []), ...(opts.bodyNames ?? [])],
   };
 }
