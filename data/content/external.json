@@ -3262,7 +3262,7 @@
       "id": "note:prefecture-all-in-one-pack",
       "kind": "note",
       "key": "prefecture-all-in-one-pack",
-      "title": "47都道府県 2,073指標の統計データ総合集",
+      "title": "47都道府県 統計データ総合集 2,073指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/nfa7d235eba85",
       "published": true,
       "rankingKeys": []
@@ -3271,7 +3271,7 @@
       "id": "note:prefecture-disaster-infrastructure-pack",
       "kind": "note",
       "key": "prefecture-disaster-infrastructure-pack",
-      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "title": "都道府県別 防災・交通・インフラデータ 230指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/nf25cd9ae21e6",
       "published": true,
       "rankingKeys": []
@@ -3280,7 +3280,7 @@
       "id": "note:prefecture-education-childcare-pack",
       "kind": "note",
       "key": "prefecture-education-childcare-pack",
-      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "title": "都道府県別 学校・保育・社会教育データ 244指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n9f0be14ecc0c",
       "published": true,
       "rankingKeys": []
@@ -3298,7 +3298,7 @@
       "id": "note:prefecture-healthcare-nursing-pack",
       "kind": "note",
       "key": "prefecture-healthcare-nursing-pack",
-      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "title": "都道府県別 医療・介護データ 237指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/nbdad7c99d4b5",
       "published": true,
       "rankingKeys": []
@@ -3307,7 +3307,7 @@
       "id": "note:prefecture-household-consumption-pack",
       "kind": "note",
       "key": "prefecture-household-consumption-pack",
-      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "title": "県庁所在市別 家計調査データ 832指標｜品目別 CSV・Excel",
       "href": "https://note.com/stats47/n/n554a047cf5be",
       "published": true,
       "rankingKeys": []
@@ -3316,7 +3316,7 @@
       "id": "note:prefecture-income-wage-hiring-pack",
       "kind": "note",
       "key": "prefecture-income-wage-hiring-pack",
-      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "title": "都道府県別 賃金・求人・働き方データ 107指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n46d68c153502",
       "published": true,
       "rankingKeys": []
@@ -3325,7 +3325,7 @@
       "id": "note:prefecture-industry-economy-pack",
       "kind": "note",
       "key": "prefecture-industry-economy-pack",
-      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "title": "都道府県別 産業・農業・家計データ 132指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n2ced199ed715",
       "published": true,
       "rankingKeys": []
@@ -3334,7 +3334,7 @@
       "id": "note:prefecture-map-chart-assets-pack",
       "kind": "note",
       "key": "prefecture-map-chart-assets-pack",
-      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "title": "都道府県の地図・ランキング素材 28指標｜PNG・SVG・PowerPoint",
       "href": "https://note.com/stats47/n/n0f5dafef7fa8",
       "published": true,
       "rankingKeys": []
@@ -3343,7 +3343,7 @@
       "id": "note:prefecture-migration-living-pack",
       "kind": "note",
       "key": "prefecture-migration-living-pack",
-      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "title": "都道府県別 住居費・物価・気候データ 76指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n323af74c09cc",
       "published": true,
       "rankingKeys": []
@@ -3352,7 +3352,7 @@
       "id": "note:prefecture-municipal-finance-pack",
       "kind": "note",
       "key": "prefecture-municipal-finance-pack",
-      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "title": "都道府県別 自治体財政・職員給与データ 119指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n5da8a99b3506",
       "published": true,
       "rankingKeys": []
@@ -3361,7 +3361,7 @@
       "id": "note:prefecture-population-household-pack",
       "kind": "note",
       "key": "prefecture-population-household-pack",
-      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "title": "都道府県別 人口・世帯データ 134指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/ne47eb45f8a15",
       "published": true,
       "rankingKeys": []
@@ -3370,7 +3370,7 @@
       "id": "note:prefecture-retail-trade-area-pack",
       "kind": "note",
       "key": "prefecture-retail-trade-area-pack",
-      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "title": "都道府県別 商業・小売データ 69指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n973c3f8478f5",
       "published": true,
       "rankingKeys": []
@@ -3379,7 +3379,7 @@
       "id": "note:prefecture-tourism-lodging-pack",
       "kind": "note",
       "key": "prefecture-tourism-lodging-pack",
-      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "title": "都道府県別 宿泊・交通・旅行データ 44指標｜CSV・Excel",
       "href": "https://note.com/stats47/n/n7a5f6df6f5ac",
       "published": true,
       "rankingKeys": []

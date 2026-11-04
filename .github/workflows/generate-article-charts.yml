@@ -29,8 +29,9 @@ jobs:
         with:
           node-version: "22"
 
-      - name: 📦 Install dependencies (for tsx + svg-builder)
-        run: npm ci --workspace=packages/svg-builder --include-workspace-root --ignore-scripts
+      # 図の生成は apps/admin 経由で @stats47/* の複数の workspace を読むので全体を入れる
+      - name: 📦 Install dependencies
+        run: npm ci --ignore-scripts
 
       - name: 🔍 Detect changed slugs
         id: slugs

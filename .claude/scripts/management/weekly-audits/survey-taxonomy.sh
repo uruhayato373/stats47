@@ -10,6 +10,7 @@ npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check 
 bash .claude/scripts/surveys/run-survey-portfolio-audit.sh || failed+=("portfolio")
 # 調査の台帳と切り口台帳 (2026-11-02)。予定のまま作られていない表・未判断の数は warn で出るので、レビュー本文の課題へ書く
 npm run --silent surveys:lenses:check || failed+=("survey-lenses")
+npx tsx .claude/scripts/surveys/report-kakei-coverage.ts || failed+=("kakei-coverage")
 npm run --silent surveys:lenses:status || failed+=("survey-lenses-status")
 npm run --silent estat:kakei-ledger:check || failed+=("kakei-ledger")
 if [ "${#failed[@]}" -gt 0 ]; then echo "落ちた検査: ${failed[*]}"; exit 1; fi

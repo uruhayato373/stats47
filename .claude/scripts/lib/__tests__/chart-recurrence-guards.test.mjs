@@ -12,7 +12,7 @@ import { buildRepair, yearValues } from '../../blog/rebuild-scatter-data.mjs';
 import { isOutdatedChart } from '../../blog/drop-outdated-outbox-charts.mjs';
 
 const svg = ({ theme = 'light', name = '東京都', title = '年間収入と支出', fill = '#0f579f', paper = '#F8FAFC' } = {}) =>
-  `<svg width="1080" height="1350" viewBox="0 0 1080 1350" data-theme="${theme}" data-image-template="scatter"><rect width="1080" height="1350" fill="${paper}"/><text y="120" font-size="64">${title}</text><circle data-pref="13000" r="10" fill="${fill}"/><text font-size="32" font-weight="700">${name}</text></svg>`;
+  `<svg width="1080" height="1350" viewBox="0 0 1080 1350" data-theme="${theme}" data-image-template="scatter"><rect width="1080" height="1350" fill="${paper}"/><text y="120" font-size="64">${title}</text><circle data-pref="13000" r="10" fill="${fill}"/><text text-anchor="start" font-size="32" font-weight="700">${name}</text></svg>`;
 const errors = (s) => lintImageTypeSvg('a-scatter.svg', s).errors;
 
 test('source.json の kind の語彙はスキーマとコードで同じ', () => {
@@ -37,6 +37,11 @@ test('型の画像の文字化け・矢印・短い県名を止める', () => {
   assert.match(errors(svg({ title: '佐賀��' })).join(), /文字化け/);
   assert.match(errors(svg({ title: '年間降水量 (mm) →' })).join(), /矢印/);
   assert.match(errors(svg({ name: '東京' })).join(), /正式名/);
+});
+
+test('長い題名を県名と読み違えない', () => {
+  const long = svg().replace('<text y="120" font-size="64">', '<text y="120" font-size="32" font-weight="700">');
+  assert.deepEqual(errors(long), []);
 });
 
 test('暗い版の点が地に沈む色を止め、明るくした色は通す', () => {

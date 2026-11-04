@@ -81,6 +81,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "storage.stats47.jp",
       },
+      {
+        protocol: "https",
+        hostname: "assets.st-note.com",
+      },
     ],
   },
   async headers() {

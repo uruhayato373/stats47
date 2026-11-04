@@ -27,6 +27,7 @@ import { isAreaTheme } from '../config/area-theme-slugs';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { KAKEI_RANKING_DIRECTORY } from '../lib/kakei-ranking-directory.generated';
 import { prefectureCityOptions } from '../lib/prefecture-city-options';
 import {
   generateThemeBreadcrumbStructuredData,
@@ -74,6 +75,9 @@ interface Props {
  * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell の
  * 入れ子をここで固定する。呼び出し側の page.tsx は PageShell を重ねない。
  */
+/** 家計調査の全品目の一覧を出すテーマ。値は読まず、ランキングへのリンクだけを置く */
+const KAKEI_DIRECTORY_THEME_KEY = 'household-food-spending';
+
 export async function ThemePageLayout({
   theme,
   data,
@@ -291,6 +295,27 @@ export async function ThemePageLayout({
                   </div>
                 </div>
               </RailCard>
+              {theme.themeKey === KAKEI_DIRECTORY_THEME_KEY &&
+                KAKEI_RANKING_DIRECTORY.map((group) => (
+                  <RailCard
+                    key={group.title}
+                    title={`${group.title}のランキング（${group.links.length}）`}
+                    collapsible
+                    bodyClassName="p-0"
+                  >
+                    <nav aria-label={`${group.title}のランキング`} className="grid gap-x-5 px-4 pb-3 sm:grid-cols-2">
+                      {group.links.map((link) => (
+                        <RailNavRow
+                          key={link.rankingKey}
+                          href={hrefFor("ranking", { rankingKey: link.rankingKey })}
+                          chevron={false}
+                        >
+                          {link.label}
+                        </RailNavRow>
+                      ))}
+                    </nav>
+                  </RailCard>
+                ))}
             </div>
           )}
 

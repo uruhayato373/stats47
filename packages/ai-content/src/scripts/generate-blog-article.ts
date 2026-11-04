@@ -51,6 +51,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { buildArticleMaterials } from "../services/blog-article-materials";
+import { slugForTopic, type TopicEntry } from "../services/blog-batch";
 import { gateTopicData, type GroundedRow } from "../services/blog-topic-gate";
 import { decideOutcome } from "../services/generation-outcome";
 import {
@@ -94,38 +96,8 @@ const INGEST_SLUG = getArg("--ingest");
  */
 const SUPPORTED_ARCHETYPES = new Set(["A", "B", "C", "D", "D2", "F", "G"]);
 
-interface TopicEntry {
-  topicKey: string;
-  archetype: string;
-  metricKeys: string[];
-  label: string;
-  suggestedTitle: string;
-  status: string;
-  lane: string;
-  /** 47 県に満たない散布図で、対象外の県がなぜ対象外かを宣言する (§blog-svg-chart-standards §6-3) */
-  exclusionReason?: string;
-}
-
 function log(msg: string) {
   process.stdout.write(`${msg}\n`);
-}
-
-/**
- * topicKey → slug。**決定的**にする (毎回同じ slug になる)。
- * 既存記事と同じ命名 (`<metric>-prefecture-gap`) に寄せ、URL が長くなりすぎないよう切る。
- */
-export function slugForTopic(topic: Pick<TopicEntry, "topicKey" | "metricKeys" | "archetype">): string {
-  const primary = topic.metricKeys[0] ?? topic.topicKey;
-  // 型B は 2 指標の関係が主題なので slug も両方を含める。切り詰めで衝突しても
-  // 「既に存在」でスキップされるだけなので安全側に倒れる。
-  const base =
-    topic.archetype === "B" && topic.metricKeys.length >= 2
-      ? `${topic.metricKeys[0]}-vs-${topic.metricKeys[1]}`
-      : `${primary}-prefecture-gap`;
-  if (base.length <= 60) return base;
-  const cut = base.slice(0, 60);
-  const boundary = cut.lastIndexOf("-");
-  return boundary > 20 ? cut.slice(0, boundary) : cut;
 }
 
 function run(cmd: string, cmdArgs: string[]): { ok: boolean; stdout: string; stderr: string } {
@@ -370,7 +342,7 @@ async function main() {
     };
     // 図の alt と本文の呼び方は読者向け、SVG 内の見出しと出典照合は正準名のまま。
     const readerLabel = payload.readerLabel ?? payload.title;
-    const verdict = gateTopicData(payload.rankingKey, payload.data, new Date());
+    const verdict = gateTopicData(payload.rankingKey, payload.data, new Date(), undefined, payload.source);
     if (!verdict.ok) {
       log(`[reject] データ健全性ゲート: ${verdict.reasons.join(" / ")}`);
       fs.rmSync(dir, { recursive: true, force: true });
@@ -393,7 +365,7 @@ async function main() {
         continue;
       }
       const second = JSON.parse(fs.readFileSync(secondJson, "utf8")) as typeof payload;
-      const secondVerdict = gateTopicData(second.rankingKey, second.data, new Date());
+      const secondVerdict = gateTopicData(second.rankingKey, second.data, new Date(), undefined, second.source);
       if (!secondVerdict.ok) {
         log(`[reject] 第2指標のデータ健全性ゲート: ${secondVerdict.reasons.join(" / ")}`);
         fs.rmSync(dir, { recursive: true, force: true });
@@ -476,11 +448,13 @@ async function main() {
         label: `${secondMetric.readerLabel ?? secondMetric.label}ランキング`,
       });
     }
+    const metrics = secondMetric ? [metric, secondMetric] : [metric];
     const promptInput = {
       slug,
       archetype: (topic.archetype as BlogArchetype) ?? "A",
       suggestedTitle: topic.suggestedTitle,
-      metrics: secondMetric ? [metric, secondMetric] : [metric],
+      metrics,
+      materials: buildArticleMaterials(metrics),
       figures: scatterBase
         ? [
             {

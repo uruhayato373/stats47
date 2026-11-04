@@ -4958,6 +4958,1400 @@
       "in_progress_at": "2026-08-29",
       "done_at": "2026-08-29",
       "published_slug": "sex-ratio-total-prefecture-gap"
+    },
+    {
+      "topicKey": "kakei-milk-consumption-quantity",
+      "archetype": "D2",
+      "metricKeys": [
+        "milk-consumption-quantity"
+      ],
+      "label": "牛乳消費量",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/milk-consumption-quantity"
+      },
+      "suggestedTitle": "牛乳消費量",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 100
+    },
+    {
+      "topicKey": "kakei-drinking-out-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "drinking-out-consumption-expenditure"
+      ],
+      "label": "飲酒代消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/drinking-out-consumption-expenditure"
+      },
+      "suggestedTitle": "飲酒代消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 99
+    },
+    {
+      "topicKey": "kakei-microwave-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "microwave-consumption-expenditure"
+      ],
+      "label": "電子レンジ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/microwave-consumption-expenditure"
+      },
+      "suggestedTitle": "電子レンジ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 98
+    },
+    {
+      "topicKey": "kakei-kiwi-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "kiwi-consumption-expenditure"
+      ],
+      "label": "キウイフルーツ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/kiwi-consumption-expenditure"
+      },
+      "suggestedTitle": "キウイフルーツ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 97
+    },
+    {
+      "topicKey": "kakei-other-mushroom-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "other-mushroom-consumption-expenditure"
+      ],
+      "label": "他のきのこ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/other-mushroom-consumption-expenditure"
+      },
+      "suggestedTitle": "他のきのこ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 96
+    },
+    {
+      "topicKey": "kakei-pumpkin-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "pumpkin-consumption-expenditure"
+      ],
+      "label": "かぼちゃ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/pumpkin-consumption-expenditure"
+      },
+      "suggestedTitle": "かぼちゃ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 95
+    },
+    {
+      "topicKey": "kakei-insecticide-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "insecticide-consumption-expenditure"
+      ],
+      "label": "殺虫・防虫剤消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/insecticide-consumption-expenditure"
+      },
+      "suggestedTitle": "殺虫・防虫剤消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 94
+    },
+    {
+      "topicKey": "kakei-transport-communication-expenditure-total",
+      "archetype": "D",
+      "metricKeys": [
+        "transport-communication-expenditure-total"
+      ],
+      "label": "交通・通信費",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/transport-communication-expenditure-total"
+      },
+      "suggestedTitle": "交通・通信費",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 93
+    },
+    {
+      "topicKey": "kakei-bento-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "bento-consumption-expenditure"
+      ],
+      "label": "弁当消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/bento-consumption-expenditure"
+      },
+      "suggestedTitle": "弁当消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 92
+    },
+    {
+      "topicKey": "kakei-camera-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "camera-consumption-expenditure"
+      ],
+      "label": "カメラ・ビデオカメラ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/camera-consumption-expenditure"
+      },
+      "suggestedTitle": "カメラ・ビデオカメラ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 91
+    },
+    {
+      "topicKey": "kakei-education-expenditure-total",
+      "archetype": "D",
+      "metricKeys": [
+        "education-expenditure-total"
+      ],
+      "label": "教育費",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/education-expenditure-total"
+      },
+      "suggestedTitle": "教育費",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 90
+    },
+    {
+      "topicKey": "kakei-other-mens-shirt-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "other-mens-shirt-consumption-expenditure"
+      ],
+      "label": "他の男子用シャツ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/other-mens-shirt-consumption-expenditure"
+      },
+      "suggestedTitle": "他の男子用シャツ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 89
+    },
+    {
+      "topicKey": "kakei-shampoo-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "shampoo-consumption-expenditure"
+      ],
+      "label": "シャンプー消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/shampoo-consumption-expenditure"
+      },
+      "suggestedTitle": "シャンプー消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 88
+    },
+    {
+      "topicKey": "kakei-books-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "books-consumption-expenditure"
+      ],
+      "label": "書籍消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/books-consumption-expenditure"
+      },
+      "suggestedTitle": "書籍消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 87
+    },
+    {
+      "topicKey": "kakei-cosmetic-cream-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "cosmetic-cream-consumption-expenditure"
+      ],
+      "label": "化粧クリーム消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/cosmetic-cream-consumption-expenditure"
+      },
+      "suggestedTitle": "化粧クリーム消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 86
+    },
+    {
+      "topicKey": "kakei-pickled-chinese-cabbage-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "pickled-chinese-cabbage-consumption-expenditure"
+      ],
+      "label": "はくさい漬消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/pickled-chinese-cabbage-consumption-expenditure"
+      },
+      "suggestedTitle": "はくさい漬消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 85
+    },
+    {
+      "topicKey": "kakei-utilities-expenditure-total",
+      "archetype": "D",
+      "metricKeys": [
+        "utilities-expenditure-total"
+      ],
+      "label": "光熱・水道費",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/utilities-expenditure-total"
+      },
+      "suggestedTitle": "光熱・水道費",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 84
+    },
+    {
+      "topicKey": "kakei-dried-mackerel-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "dried-mackerel-consumption-expenditure"
+      ],
+      "label": "干しあじ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/dried-mackerel-consumption-expenditure"
+      },
+      "suggestedTitle": "干しあじ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 83
+    },
+    {
+      "topicKey": "kakei-adult-sneakers-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "adult-sneakers-consumption-expenditure"
+      ],
+      "label": "大人用運動靴消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/adult-sneakers-consumption-expenditure"
+      },
+      "suggestedTitle": "大人用運動靴消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 82
+    },
+    {
+      "topicKey": "kakei-sports-drink-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "sports-drink-consumption-expenditure"
+      ],
+      "label": "スポーツドリンク消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/sports-drink-consumption-expenditure"
+      },
+      "suggestedTitle": "スポーツドリンク消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 81
+    },
+    {
+      "topicKey": "kakei-dress-shirt-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "dress-shirt-consumption-expenditure"
+      ],
+      "label": "ワイシャツ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/dress-shirt-consumption-expenditure"
+      },
+      "suggestedTitle": "ワイシャツ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 80
+    },
+    {
+      "topicKey": "kakei-jam-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "jam-consumption-expenditure"
+      ],
+      "label": "ジャム消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/jam-consumption-expenditure"
+      },
+      "suggestedTitle": "ジャム消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 79
+    },
+    {
+      "topicKey": "kakei-adult-sandals-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "adult-sandals-consumption-expenditure"
+      ],
+      "label": "大人用サンダル消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/adult-sandals-consumption-expenditure"
+      },
+      "suggestedTitle": "大人用サンダル消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 78
+    },
+    {
+      "topicKey": "kakei-fruit-vegetable-juice-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "fruit-vegetable-juice-consumption-expenditure"
+      ],
+      "label": "果実・野菜ジュース消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/fruit-vegetable-juice-consumption-expenditure"
+      },
+      "suggestedTitle": "果実・野菜ジュース消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 77
+    },
+    {
+      "topicKey": "kakei-other-noodle-dining-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "other-noodle-dining-consumption-expenditure"
+      ],
+      "label": "他の麺類外食消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/other-noodle-dining-consumption-expenditure"
+      },
+      "suggestedTitle": "他の麺類外食消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 76
+    },
+    {
+      "topicKey": "kakei-furniture-household-expenditure-total",
+      "archetype": "D",
+      "metricKeys": [
+        "furniture-household-expenditure-total"
+      ],
+      "label": "家具・家事用品費",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/furniture-household-expenditure-total"
+      },
+      "suggestedTitle": "家具・家事用品費",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 75
+    },
+    {
+      "topicKey": "kakei-childrens-socks-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "childrens-socks-consumption-expenditure"
+      ],
+      "label": "子供用靴下消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/childrens-socks-consumption-expenditure"
+      },
+      "suggestedTitle": "子供用靴下消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 74
+    },
+    {
+      "topicKey": "kakei-bed-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "bed-consumption-expenditure"
+      ],
+      "label": "ベッド消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/bed-consumption-expenditure"
+      },
+      "suggestedTitle": "ベッド消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 73
+    },
+    {
+      "topicKey": "kakei-company-housing-rent-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "company-housing-rent-consumption-expenditure"
+      ],
+      "label": "給与住宅家賃消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/company-housing-rent-consumption-expenditure"
+      },
+      "suggestedTitle": "給与住宅家賃消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 72
+    },
+    {
+      "topicKey": "kakei-cutlet-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "cutlet-consumption-expenditure"
+      ],
+      "label": "カツレツ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/cutlet-consumption-expenditure"
+      },
+      "suggestedTitle": "カツレツ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 71
+    },
+    {
+      "topicKey": "kakei-laundry-detergent-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "laundry-detergent-consumption-expenditure"
+      ],
+      "label": "洗濯用洗剤消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/laundry-detergent-consumption-expenditure"
+      },
+      "suggestedTitle": "洗濯用洗剤消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 70
+    },
+    {
+      "topicKey": "kakei-pet-supplies-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "pet-supplies-consumption-expenditure"
+      ],
+      "label": "ペット・他のペット用品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/pet-supplies-consumption-expenditure"
+      },
+      "suggestedTitle": "ペット・他のペット用品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 69
+    },
+    {
+      "topicKey": "kakei-pots-kettles-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "pots-kettles-consumption-expenditure"
+      ],
+      "label": "鍋・やかん消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/pots-kettles-consumption-expenditure"
+      },
+      "suggestedTitle": "鍋・やかん消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 68
+    },
+    {
+      "topicKey": "kakei-tea-drink-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "tea-drink-consumption-expenditure"
+      ],
+      "label": "茶飲料消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/tea-drink-consumption-expenditure"
+      },
+      "suggestedTitle": "茶飲料消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 67
+    },
+    {
+      "topicKey": "kakei-craft-materials-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "craft-materials-consumption-expenditure"
+      ],
+      "label": "手芸・工芸材料消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/craft-materials-consumption-expenditure"
+      },
+      "suggestedTitle": "手芸・工芸材料消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 66
+    },
+    {
+      "topicKey": "kakei-gloves-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "gloves-consumption-expenditure"
+      ],
+      "label": "手袋消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/gloves-consumption-expenditure"
+      },
+      "suggestedTitle": "手袋消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 65
+    },
+    {
+      "topicKey": "kakei-other-toys-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "other-toys-consumption-expenditure"
+      ],
+      "label": "他の玩具消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/other-toys-consumption-expenditure"
+      },
+      "suggestedTitle": "他の玩具消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 64
+    },
+    {
+      "topicKey": "kakei-tatami-replacement-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "tatami-replacement-consumption-expenditure"
+      ],
+      "label": "畳替え消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/tatami-replacement-consumption-expenditure"
+      },
+      "suggestedTitle": "畳替え消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 63
+    },
+    {
+      "topicKey": "kakei-beans-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "beans-consumption-expenditure"
+      ],
+      "label": "豆類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/beans-consumption-expenditure"
+      },
+      "suggestedTitle": "豆類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 62
+    },
+    {
+      "topicKey": "kakei-paper-diapers-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "paper-diapers-consumption-expenditure"
+      ],
+      "label": "紙おむつ消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/paper-diapers-consumption-expenditure"
+      },
+      "suggestedTitle": "紙おむつ消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 61
+    },
+    {
+      "topicKey": "kakei-cereals-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "cereals-group-consumption-expenditure"
+      ],
+      "label": "穀類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/cereals-group-consumption-expenditure"
+      },
+      "suggestedTitle": "穀類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-meat-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "meat-group-consumption-expenditure"
+      ],
+      "label": "肉類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/meat-group-consumption-expenditure"
+      },
+      "suggestedTitle": "肉類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-dairy-eggs-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "dairy-eggs-group-consumption-expenditure"
+      ],
+      "label": "乳卵類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/dairy-eggs-group-consumption-expenditure"
+      },
+      "suggestedTitle": "乳卵類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-vegetables-seaweed-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "vegetables-seaweed-group-consumption-expenditure"
+      ],
+      "label": "野菜・海藻消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/vegetables-seaweed-group-consumption-expenditure"
+      },
+      "suggestedTitle": "野菜・海藻消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-fruits-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "fruits-group-consumption-expenditure"
+      ],
+      "label": "果物消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/fruits-group-consumption-expenditure"
+      },
+      "suggestedTitle": "果物消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-oils-seasonings-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "oils-seasonings-group-consumption-expenditure"
+      ],
+      "label": "油脂・調味料消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/oils-seasonings-group-consumption-expenditure"
+      },
+      "suggestedTitle": "油脂・調味料消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-prepared-foods-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "prepared-foods-group-consumption-expenditure"
+      ],
+      "label": "調理食品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/prepared-foods-group-consumption-expenditure"
+      },
+      "suggestedTitle": "調理食品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-beverages-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "beverages-group-consumption-expenditure"
+      ],
+      "label": "飲料消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/beverages-group-consumption-expenditure"
+      },
+      "suggestedTitle": "飲料消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-alcoholic-beverages-group-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "alcoholic-beverages-group-consumption-expenditure"
+      ],
+      "label": "酒類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/alcoholic-beverages-group-consumption-expenditure"
+      },
+      "suggestedTitle": "酒類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-rent-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "rent-group-consumption-expenditure"
+      ],
+      "label": "家賃地代消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/rent-group-consumption-expenditure"
+      },
+      "suggestedTitle": "家賃地代消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-housing-repairs-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "housing-repairs-group-consumption-expenditure"
+      ],
+      "label": "設備修繕・維持消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/housing-repairs-group-consumption-expenditure"
+      },
+      "suggestedTitle": "設備修繕・維持消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-other-fuel-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "other-fuel-group-consumption-expenditure"
+      ],
+      "label": "他の光熱消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/other-fuel-group-consumption-expenditure"
+      },
+      "suggestedTitle": "他の光熱消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-household-durables-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "household-durables-group-consumption-expenditure"
+      ],
+      "label": "家庭用耐久財消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/household-durables-group-consumption-expenditure"
+      },
+      "suggestedTitle": "家庭用耐久財消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-interior-furnishings-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "interior-furnishings-group-consumption-expenditure"
+      ],
+      "label": "室内装備・装飾品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/interior-furnishings-group-consumption-expenditure"
+      },
+      "suggestedTitle": "室内装備・装飾品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-bedding-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "bedding-group-consumption-expenditure"
+      ],
+      "label": "寝具類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/bedding-group-consumption-expenditure"
+      },
+      "suggestedTitle": "寝具類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-household-utensils-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "household-utensils-group-consumption-expenditure"
+      ],
+      "label": "家事雑貨消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/household-utensils-group-consumption-expenditure"
+      },
+      "suggestedTitle": "家事雑貨消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-household-consumables-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "household-consumables-group-consumption-expenditure"
+      ],
+      "label": "家事用消耗品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/household-consumables-group-consumption-expenditure"
+      },
+      "suggestedTitle": "家事用消耗品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-domestic-services-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "domestic-services-group-consumption-expenditure"
+      ],
+      "label": "家事サービス消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/domestic-services-group-consumption-expenditure"
+      },
+      "suggestedTitle": "家事サービス消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-japanese-clothing-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "japanese-clothing-group-consumption-expenditure"
+      ],
+      "label": "和服消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/japanese-clothing-group-consumption-expenditure"
+      },
+      "suggestedTitle": "和服消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-western-clothing-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "western-clothing-group-consumption-expenditure"
+      ],
+      "label": "洋服消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/western-clothing-group-consumption-expenditure"
+      },
+      "suggestedTitle": "洋服消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-shirts-sweaters-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "shirts-sweaters-group-consumption-expenditure"
+      ],
+      "label": "シャツ・セーター類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/shirts-sweaters-group-consumption-expenditure"
+      },
+      "suggestedTitle": "シャツ・セーター類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-underwear-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "underwear-group-consumption-expenditure"
+      ],
+      "label": "下着類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/underwear-group-consumption-expenditure"
+      },
+      "suggestedTitle": "下着類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-fabrics-yarn-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "fabrics-yarn-group-consumption-expenditure"
+      ],
+      "label": "生地・糸類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/fabrics-yarn-group-consumption-expenditure"
+      },
+      "suggestedTitle": "生地・糸類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-other-clothing-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "other-clothing-group-consumption-expenditure"
+      ],
+      "label": "他の被服消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/other-clothing-group-consumption-expenditure"
+      },
+      "suggestedTitle": "他の被服消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-footwear-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "footwear-group-consumption-expenditure"
+      ],
+      "label": "履物類消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/footwear-group-consumption-expenditure"
+      },
+      "suggestedTitle": "履物類消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-clothing-services-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "clothing-services-group-consumption-expenditure"
+      ],
+      "label": "被服関連サービス消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/clothing-services-group-consumption-expenditure"
+      },
+      "suggestedTitle": "被服関連サービス消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-medicines-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "medicines-group-consumption-expenditure"
+      ],
+      "label": "医薬品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/medicines-group-consumption-expenditure"
+      },
+      "suggestedTitle": "医薬品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-health-supplements-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "health-supplements-group-consumption-expenditure"
+      ],
+      "label": "健康保持用摂取品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/health-supplements-group-consumption-expenditure"
+      },
+      "suggestedTitle": "健康保持用摂取品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-medical-supplies-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "medical-supplies-group-consumption-expenditure"
+      ],
+      "label": "保健医療用品・器具消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/medical-supplies-group-consumption-expenditure"
+      },
+      "suggestedTitle": "保健医療用品・器具消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-medical-services-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "medical-services-group-consumption-expenditure"
+      ],
+      "label": "保健医療サービス消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/medical-services-group-consumption-expenditure"
+      },
+      "suggestedTitle": "保健医療サービス消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-transportation-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "transportation-group-consumption-expenditure"
+      ],
+      "label": "交通消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/transportation-group-consumption-expenditure"
+      },
+      "suggestedTitle": "交通消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-automobile-related-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "automobile-related-group-consumption-expenditure"
+      ],
+      "label": "自動車等関係費消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/automobile-related-group-consumption-expenditure"
+      },
+      "suggestedTitle": "自動車等関係費消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-communication-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "communication-group-consumption-expenditure"
+      ],
+      "label": "通信消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/communication-group-consumption-expenditure"
+      },
+      "suggestedTitle": "通信消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-supplementary-education-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "supplementary-education-group-consumption-expenditure"
+      ],
+      "label": "補習教育消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/supplementary-education-group-consumption-expenditure"
+      },
+      "suggestedTitle": "補習教育消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-recreational-durables-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "recreational-durables-group-consumption-expenditure"
+      ],
+      "label": "教養娯楽用耐久財消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/recreational-durables-group-consumption-expenditure"
+      },
+      "suggestedTitle": "教養娯楽用耐久財消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-recreational-goods-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "recreational-goods-group-consumption-expenditure"
+      ],
+      "label": "教養娯楽用品消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/recreational-goods-group-consumption-expenditure"
+      },
+      "suggestedTitle": "教養娯楽用品消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-books-printed-matter-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "books-printed-matter-group-consumption-expenditure"
+      ],
+      "label": "書籍・他の印刷物消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/books-printed-matter-group-consumption-expenditure"
+      },
+      "suggestedTitle": "書籍・他の印刷物消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-recreational-services-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "recreational-services-group-consumption-expenditure"
+      ],
+      "label": "教養娯楽サービス消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/recreational-services-group-consumption-expenditure"
+      },
+      "suggestedTitle": "教養娯楽サービス消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-miscellaneous-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "miscellaneous-group-consumption-expenditure"
+      ],
+      "label": "諸雑費消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/miscellaneous-group-consumption-expenditure"
+      },
+      "suggestedTitle": "諸雑費消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-pocket-money-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "pocket-money-group-consumption-expenditure"
+      ],
+      "label": "こづかい(使途不明)消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/pocket-money-group-consumption-expenditure"
+      },
+      "suggestedTitle": "こづかい(使途不明)消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-social-expenses-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "social-expenses-group-consumption-expenditure"
+      ],
+      "label": "交際費消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/social-expenses-group-consumption-expenditure"
+      },
+      "suggestedTitle": "交際費消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
+    },
+    {
+      "topicKey": "kakei-remittances-group-consumption-expenditure",
+      "archetype": "D",
+      "metricKeys": [
+        "remittances-group-consumption-expenditure"
+      ],
+      "label": "仕送り金消費支出額",
+      "source": "kakei-rollout",
+      "evidence": {
+        "rankingUrl": "/ranking/remittances-group-consumption-expenditure"
+      },
+      "suggestedTitle": "仕送り金消費支出額",
+      "combinedScore": 0,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 40
     }
   ]
 }

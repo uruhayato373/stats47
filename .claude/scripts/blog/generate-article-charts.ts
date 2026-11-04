@@ -173,6 +173,9 @@ function detectChartType(filename, parsed) {
   ) {
     return explicit;
   }
+  // 散布図の名前が規約の外でも (scatter-small-vs-big)、x と y を持つ点の配列なら散布図
+  const points = parsed && typeof parsed === 'object' ? parsed.points : null;
+  if (Array.isArray(points) && points.length > 0 && typeof points[0]?.x === 'number' && typeof points[0]?.y === 'number') return 'scatter';
   return null;
 }
 

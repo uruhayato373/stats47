@@ -71,6 +71,11 @@ export interface BlogArticlePromptInput {
    * (BLOG-TOPIC-PAIR-PER-CAPITA-01)。本文の値は factual gate が同じファイルと照合する。
    */
   correlation?: CorrelationFact;
+  /**
+   * 機械で計算した材料 (blog-article-materials.ts)。倍率・差・地方別の順位など、モデルに
+   * 数えさせると誤る値を渡す。無ければ節を出さない。
+   */
+  materials?: string;
 }
 
 export interface CorrelationFact {
@@ -97,7 +102,7 @@ function correlationSection(correlation: CorrelationFact | undefined): string {
 
 /** 型ごとの必須分析視点 (blog-quality-standards.md §各型の章構成テンプレ) */
 const ARCHETYPE_GUIDE: Record<BlogArchetype, string> = {
-  A: "上位と下位が「なぜ」その順になるのかを、地理・産業構造・歴史から説明します。各図の直後に解釈の段落を置きます。",
+  A: "上位と下位がその順になる背景を、書ける範囲で仮説として説明します。各図の直後に解釈の段落を置きます。",
   B: "2 つの指標の関係を扱います。見かけの相関と真因を分けて論じ、相関は因果ではないことを明示します。",
   C: "時系列の変化と、その変化が地理的に均一でないことを示します。",
   D: "読者の生活への含意に翻訳します。内訳を別の切り口で分解して真因に迫ります。",
@@ -106,6 +111,20 @@ const ARCHETYPE_GUIDE: Record<BlogArchetype, string> = {
   F: "同じ県の中の市町村差に踏み込み、財政・人口構造から真因を説明します。",
   G: "どこから来てどこへ去るかの方向性と、年齢構造・都市圏と地方の非対称性を説明します。",
 };
+
+/** materials の節の見出し。headless の書き手が地方の表を重ねて渡さない判定にも使う */
+export const MATERIALS_HEADING = "# 機械が計算した材料";
+
+function materialsSection(materials: string | undefined): string {
+  if (!materials) return "";
+  return `
+
+${MATERIALS_HEADING} (ここにある値は本文に書けます。自分で数え直しません)
+
+順位は上の「全◯件」の行からそのまま写します。地方でくくる前に、地方の内訳と地方別の順位で所属と順番を確かめます。
+
+${materials}`;
+}
 
 /** 読者向けの呼び方。未指定なら正準名にフォールバックする。 */
 function readerLabelOf(m: GroundTruthMetric): string {
@@ -137,6 +156,7 @@ export function buildBlogArticlePrompt(input: BlogArticlePromptInput): string {
     allowedLinks,
     previousBlockers,
     correlation,
+    materials,
   } = input;
 
   const retry =
@@ -160,7 +180,7 @@ ${retry}# 絶対ルール (これを破ると機械チェックで弾かれ、�
    年・単位・出典を示す括弧は使ってかまいません。
 3. **表 (markdown table) を一切使いません。** 縦棒と区切り行による表を書きません。
    データは図で見せ、列挙は箇条書きにします。
-4. **数値は下の「実データ」に載っている値だけを使います。** 載っていない数値・順位・年を書きません。
+4. **数値は下の「実データ」と「機械が計算した材料」に載っている値だけを使います。** 載っていない数値・順位・年を書きません。
    概算や丸めもしません。書いた数値は機械が実データと突合します。
 5. **図は下で指定した画像行をそのまま貼ります。** 別のパスや別の画像を作りません。
 6. **本文に「関連記事」「関連ランキング」の見出しを作りません。** サイト側が自動で出します。
@@ -182,7 +202,7 @@ ${metrics
 - 全${m.rows.length}件:
 ${formatRows(m)}`,
   )
-  .join("\n\n")}${correlationSection(correlation)}
+  .join("\n\n")}${correlationSection(correlation)}${materialsSection(materials)}
 
 本文では見出しの平易な呼び方を使ってください。正式な統計名は、定義や出典に触れる箇所
 (callout・「データについて」の節) でだけ使います。両方を毎回併記する必要はありません。
@@ -232,6 +252,12 @@ tags: []
 
 title は読者向けの平易な呼び方で書きます。正式な統計名は seoTitle が担うので、
 title に硬い調査用語を入れる必要はありません。
+
+title と description は、本文が実際に答えることだけを約束します。
+- 理由を問う題にするのは、本文の見出しの 1 つで答えを仮説として示せるときだけです。示せないなら、どこが多いか・どれだけ違うかを題にします。
+- 題に倍率を書くときは材料の倍率を使い、本文の前半にも同じ倍率を書きます。
+- 題に挙げた県は、本文で値と順位を書いて説明します。
+- description に、本文で扱わない視点を並べて約束しません。
 ${titleSeedSection(metrics, suggestedTitle)}`;
 }
 

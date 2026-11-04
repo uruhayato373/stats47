@@ -138,6 +138,14 @@
       "published": true
     },
     {
+      "id": "ranking:admission-game-fees-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "admission-game-fees-group-consumption-expenditure",
+      "title": "入場・観覧・ゲーム代消費支出額",
+      "href": "/ranking/admission-game-fees-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:adult-class-lecture-count-per-million",
       "kind": "ranking",
       "key": "adult-class-lecture-count-per-million",
@@ -463,6 +471,14 @@
       "key": "alcohol-sales-per-adult-wine",
       "title": "成人1人あたり酒類販売(消費)数量",
       "href": "/ranking/alcohol-sales-per-adult-wine",
+      "published": true
+    },
+    {
+      "id": "ranking:alcoholic-beverages-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "alcoholic-beverages-group-consumption-expenditure",
+      "title": "酒類消費支出額",
+      "href": "/ranking/alcoholic-beverages-group-consumption-expenditure",
       "published": true
     },
     {
@@ -938,6 +954,30 @@
       "published": false
     },
     {
+      "id": "ranking:automobile-maintenance-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "automobile-maintenance-group-consumption-expenditure",
+      "title": "自動車等維持消費支出額",
+      "href": "/ranking/automobile-maintenance-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:automobile-purchases-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "automobile-purchases-group-consumption-expenditure",
+      "title": "自動車等購入消費支出額",
+      "href": "/ranking/automobile-purchases-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:automobile-related-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "automobile-related-group-consumption-expenditure",
+      "title": "自動車等関係費消費支出額",
+      "href": "/ranking/automobile-related-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:average-age-of-first-marriage-husband",
       "kind": "ranking",
       "key": "average-age-of-first-marriage-husband",
@@ -1250,6 +1290,14 @@
       "published": true
     },
     {
+      "id": "ranking:bags-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "bags-group-consumption-expenditure",
+      "title": "かばん類消費支出額",
+      "href": "/ranking/bags-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:bamboo-production",
       "kind": "ranking",
       "key": "bamboo-production",
@@ -1434,11 +1482,27 @@
       "published": true
     },
     {
+      "id": "ranking:beauty-products-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "beauty-products-group-consumption-expenditure",
+      "title": "理美容用品消費支出額",
+      "href": "/ranking/beauty-products-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:beauty-salon-count",
       "kind": "ranking",
       "key": "beauty-salon-count",
       "title": "美容所数",
       "href": "/ranking/beauty-salon-count",
+      "published": true
+    },
+    {
+      "id": "ranking:beauty-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "beauty-services-group-consumption-expenditure",
+      "title": "理美容サービス消費支出額",
+      "href": "/ranking/beauty-services-group-consumption-expenditure",
       "published": true
     },
     {
@@ -1463,6 +1527,14 @@
       "key": "bed-utilization-rate",
       "title": "病床利用率",
       "href": "/ranking/bed-utilization-rate",
+      "published": true
+    },
+    {
+      "id": "ranking:bedding-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "bedding-group-consumption-expenditure",
+      "title": "寝具類消費支出額",
+      "href": "/ranking/bedding-group-consumption-expenditure",
       "published": true
     },
     {
@@ -1511,6 +1583,22 @@
       "key": "bento-consumption-expenditure",
       "title": "弁当消費支出額",
       "href": "/ranking/bento-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:beverages-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "beverages-group-consumption-expenditure",
+      "title": "飲料消費支出額",
+      "href": "/ranking/beverages-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:bicycle-purchases-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "bicycle-purchases-group-consumption-expenditure",
+      "title": "自転車購入消費支出額",
+      "href": "/ranking/bicycle-purchases-group-consumption-expenditure",
       "published": true
     },
     {
@@ -1738,6 +1826,14 @@
       "published": true
     },
     {
+      "id": "ranking:books-printed-matter-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "books-printed-matter-group-consumption-expenditure",
+      "title": "書籍・他の印刷物消費支出額",
+      "href": "/ranking/books-printed-matter-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:botanical-garden-count",
       "kind": "ranking",
       "key": "botanical-garden-count",
@@ -1786,6 +1882,14 @@
       "published": true
     },
     {
+      "id": "ranking:bread-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "bread-group-consumption-quantity",
+      "title": "パン消費量",
+      "href": "/ranking/bread-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:breast-cancer-asr75-mortality-female",
       "kind": "ranking",
       "key": "breast-cancer-asr75-mortality-female",
@@ -1824,6 +1928,14 @@
       "title": "テレビ放送受信契約数",
       "href": "/ranking/broadcast-reception-contracts",
       "published": false
+    },
+    {
+      "id": "ranking:broadcasting-fees-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "broadcasting-fees-group-consumption-expenditure",
+      "title": "放送受信料消費支出額",
+      "href": "/ranking/broadcasting-fees-group-consumption-expenditure",
+      "published": true
     },
     {
       "id": "ranking:broccoli-consumption-expenditure",
@@ -2258,6 +2370,14 @@
       "published": true
     },
     {
+      "id": "ranking:cereals-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "cereals-group-consumption-expenditure",
+      "title": "穀類消費支出額",
+      "href": "/ranking/cereals-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:certified-childcare-center-count-per-100k-0-5",
       "kind": "ranking",
       "key": "certified-childcare-center-count-per-100k-0-5",
@@ -2466,6 +2586,22 @@
       "published": true
     },
     {
+      "id": "ranking:childrens-shirts-sweaters-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "childrens-shirts-sweaters-group-consumption-expenditure",
+      "title": "子供用シャツ・セーター類消費支出額",
+      "href": "/ranking/childrens-shirts-sweaters-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:childrens-shirts-sweaters-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "childrens-shirts-sweaters-group-consumption-quantity",
+      "title": "子供用シャツ・セーター類消費量",
+      "href": "/ranking/childrens-shirts-sweaters-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:childrens-shoes-consumption-expenditure",
       "kind": "ranking",
       "key": "childrens-shoes-consumption-expenditure",
@@ -2511,6 +2647,14 @@
       "key": "childrens-underwear-consumption-expenditure",
       "title": "子供用下着消費支出額",
       "href": "/ranking/childrens-underwear-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:childrens-underwear-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "childrens-underwear-group-consumption-expenditure",
+      "title": "子供用下着類消費支出額",
+      "href": "/ranking/childrens-underwear-group-consumption-expenditure",
       "published": true
     },
     {
@@ -2754,6 +2898,14 @@
       "published": true
     },
     {
+      "id": "ranking:clothing-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "clothing-services-group-consumption-expenditure",
+      "title": "被服関連サービス消費支出額",
+      "href": "/ranking/clothing-services-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:cocoa-consumption-expenditure",
       "kind": "ranking",
       "key": "cocoa-consumption-expenditure",
@@ -2783,6 +2935,14 @@
       "key": "cod-roe-consumption-quantity",
       "title": "たらこ消費量",
       "href": "/ranking/cod-roe-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:coffee-cocoa-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "coffee-cocoa-group-consumption-expenditure",
+      "title": "コーヒー・ココア消費支出額",
+      "href": "/ranking/coffee-cocoa-group-consumption-expenditure",
       "published": true
     },
     {
@@ -2903,6 +3063,14 @@
       "key": "commission-fees-prefecture",
       "title": "手数料",
       "href": "/ranking/commission-fees-prefecture",
+      "published": true
+    },
+    {
+      "id": "ranking:communication-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "communication-group-consumption-expenditure",
+      "title": "通信消費支出額",
+      "href": "/ranking/communication-group-consumption-expenditure",
       "published": true
     },
     {
@@ -4106,6 +4274,22 @@
       "published": true
     },
     {
+      "id": "ranking:dairy-eggs-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "dairy-eggs-group-consumption-expenditure",
+      "title": "乳卵類消費支出額",
+      "href": "/ranking/dairy-eggs-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:dairy-products-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "dairy-products-group-consumption-expenditure",
+      "title": "乳製品消費支出額",
+      "href": "/ranking/dairy-products-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:dam-count",
       "kind": "ranking",
       "key": "dam-count",
@@ -4658,6 +4842,14 @@
       "published": false
     },
     {
+      "id": "ranking:detergents-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "detergents-group-consumption-expenditure",
+      "title": "洗剤消費支出額",
+      "href": "/ranking/detergents-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:dietitian-annual-income",
       "kind": "ranking",
       "key": "dietitian-annual-income",
@@ -4850,6 +5042,14 @@
       "published": true
     },
     {
+      "id": "ranking:domestic-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "domestic-services-group-consumption-expenditure",
+      "title": "家事サービス消費支出額",
+      "href": "/ranking/domestic-services-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:domestic-student-remittance-consumption-expenditure",
       "kind": "ranking",
       "key": "domestic-student-remittance-consumption-expenditure",
@@ -4927,6 +5127,14 @@
       "key": "dressing-consumption-quantity",
       "title": "ドレッシング消費量",
       "href": "/ranking/dressing-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:dried-foods-seaweed-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "dried-foods-seaweed-group-consumption-expenditure",
+      "title": "乾物・海藻消費支出額",
+      "href": "/ranking/dried-foods-seaweed-group-consumption-expenditure",
       "published": true
     },
     {
@@ -5367,6 +5575,22 @@
       "key": "eggplant-consumption-quantity",
       "title": "なす消費量",
       "href": "/ranking/eggplant-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:eggs-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "eggs-group-consumption-expenditure",
+      "title": "卵消費支出額",
+      "href": "/ranking/eggs-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:eggs-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "eggs-group-consumption-quantity",
+      "title": "卵消費量",
+      "href": "/ranking/eggs-group-consumption-quantity",
       "published": true
     },
     {
@@ -6274,6 +6498,22 @@
       "published": true
     },
     {
+      "id": "ranking:fabrics-yarn-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fabrics-yarn-group-consumption-expenditure",
+      "title": "生地・糸類消費支出額",
+      "href": "/ranking/fabrics-yarn-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:face-mask-item-consumption-expenditure",
+      "kind": "ranking",
+      "key": "face-mask-item-consumption-expenditure",
+      "title": "マスク消費支出額",
+      "href": "/ranking/face-mask-item-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:facility-equipment-consumption-expenditure",
       "kind": "ranking",
       "key": "facility-equipment-consumption-expenditure",
@@ -6743,6 +6983,14 @@
       "key": "fish-paste-consumption-expenditure",
       "title": "かまぼこ消費支出額",
       "href": "/ranking/fish-paste-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:fish-paste-products-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fish-paste-products-group-consumption-expenditure",
+      "title": "魚肉練製品消費支出額",
+      "href": "/ranking/fish-paste-products-group-consumption-expenditure",
       "published": true
     },
     {
@@ -7258,6 +7506,14 @@
       "published": false
     },
     {
+      "id": "ranking:footwear-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "footwear-group-consumption-expenditure",
+      "title": "履物類消費支出額",
+      "href": "/ranking/footwear-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:for-sale-housing-floor-area-starts",
       "kind": "ranking",
       "key": "for-sale-housing-floor-area-starts",
@@ -7458,6 +7714,22 @@
       "published": true
     },
     {
+      "id": "ranking:fresh-fish-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fresh-fish-group-consumption-expenditure",
+      "title": "鮮魚消費支出額",
+      "href": "/ranking/fresh-fish-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:fresh-fish-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "fresh-fish-group-consumption-quantity",
+      "title": "鮮魚消費量",
+      "href": "/ranking/fresh-fish-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:fresh-fruit-consumption-quantity",
       "kind": "ranking",
       "key": "fresh-fruit-consumption-quantity",
@@ -7466,11 +7738,59 @@
       "published": true
     },
     {
+      "id": "ranking:fresh-fruits-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fresh-fruits-group-consumption-expenditure",
+      "title": "生鮮果物消費支出額",
+      "href": "/ranking/fresh-fruits-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:fresh-fruits-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "fresh-fruits-group-consumption-quantity",
+      "title": "生鮮果物消費量",
+      "href": "/ranking/fresh-fruits-group-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:fresh-meat-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fresh-meat-group-consumption-expenditure",
+      "title": "生鮮肉消費支出額",
+      "href": "/ranking/fresh-meat-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:fresh-meat-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "fresh-meat-group-consumption-quantity",
+      "title": "生鮮肉消費量",
+      "href": "/ranking/fresh-meat-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:fresh-seafood-consumption-quantity",
       "kind": "ranking",
       "key": "fresh-seafood-consumption-quantity",
       "title": "生鮮魚介消費量",
       "href": "/ranking/fresh-seafood-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:fresh-seafood-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fresh-seafood-group-consumption-expenditure",
+      "title": "生鮮魚介消費支出額",
+      "href": "/ranking/fresh-seafood-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:fresh-seafood-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "fresh-seafood-group-consumption-quantity",
+      "title": "生鮮魚介消費量",
+      "href": "/ranking/fresh-seafood-group-consumption-quantity",
       "published": true
     },
     {
@@ -7522,6 +7842,14 @@
       "published": true
     },
     {
+      "id": "ranking:fresh-vegetables-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "fresh-vegetables-group-consumption-quantity",
+      "title": "生鮮野菜消費量",
+      "href": "/ranking/fresh-vegetables-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:freshwater-clam-consumption-expenditure",
       "kind": "ranking",
       "key": "freshwater-clam-consumption-expenditure",
@@ -7559,6 +7887,14 @@
       "key": "fruit-vegetable-juice-consumption-expenditure",
       "title": "果実・野菜ジュース消費支出額",
       "href": "/ranking/fruit-vegetable-juice-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:fruits-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "fruits-group-consumption-expenditure",
+      "title": "果物消費支出額",
+      "href": "/ranking/fruits-group-consumption-expenditure",
       "published": true
     },
     {
@@ -7922,6 +8258,14 @@
       "published": true
     },
     {
+      "id": "ranking:general-dining-out-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "general-dining-out-group-consumption-expenditure",
+      "title": "一般外食消費支出額",
+      "href": "/ranking/general-dining-out-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:general-dust-emission-facility-count",
       "kind": "ranking",
       "key": "general-dust-emission-facility-count",
@@ -7935,6 +8279,14 @@
       "key": "general-funds-prefecture",
       "title": "一般財源",
       "href": "/ranking/general-funds-prefecture",
+      "published": true
+    },
+    {
+      "id": "ranking:general-furniture-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "general-furniture-group-consumption-expenditure",
+      "title": "一般家具消費支出額",
+      "href": "/ranking/general-furniture-group-consumption-expenditure",
       "published": true
     },
     {
@@ -8184,6 +8536,14 @@
       "title": "介護老人保健施設数",
       "href": "/ranking/geriatric-health-facility-count",
       "published": false
+    },
+    {
+      "id": "ranking:gift-money-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "gift-money-group-consumption-expenditure",
+      "title": "贈与金消費支出額",
+      "href": "/ranking/gift-money-group-consumption-expenditure",
+      "published": true
     },
     {
       "id": "ranking:gini-coefficient-disposable-income",
@@ -8938,6 +9298,14 @@
       "published": true
     },
     {
+      "id": "ranking:health-supplements-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "health-supplements-group-consumption-expenditure",
+      "title": "健康保持用摂取品消費支出額",
+      "href": "/ranking/health-supplements-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:healthcare-cost-all-households",
       "kind": "ranking",
       "key": "healthcare-cost-all-households",
@@ -8983,6 +9351,14 @@
       "key": "heater-consumption-quantity",
       "title": "ストーブ・温風ヒーター購入数量",
       "href": "/ranking/heater-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:heating-cooling-appliances-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "heating-cooling-appliances-group-consumption-expenditure",
+      "title": "冷暖房用器具消費支出額",
+      "href": "/ranking/heating-cooling-appliances-group-consumption-expenditure",
       "published": true
     },
     {
@@ -9578,11 +9954,27 @@
       "published": false
     },
     {
+      "id": "ranking:household-consumables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "household-consumables-group-consumption-expenditure",
+      "title": "家事用消耗品消費支出額",
+      "href": "/ranking/household-consumables-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:household-debt-balance",
       "kind": "ranking",
       "key": "household-debt-balance",
       "title": "負債現在高",
       "href": "/ranking/household-debt-balance",
+      "published": true
+    },
+    {
+      "id": "ranking:household-durables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "household-durables-group-consumption-expenditure",
+      "title": "家庭用耐久財消費支出額",
+      "href": "/ranking/household-durables-group-consumption-expenditure",
       "published": true
     },
     {
@@ -9770,6 +10162,14 @@
       "published": true
     },
     {
+      "id": "ranking:household-utensils-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "household-utensils-group-consumption-expenditure",
+      "title": "家事雑貨消費支出額",
+      "href": "/ranking/household-utensils-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:households",
       "kind": "ranking",
       "key": "households",
@@ -9831,6 +10231,14 @@
       "key": "housework-avg-time-male",
       "title": "家事の平均時間",
       "href": "/ranking/housework-avg-time-male",
+      "published": true
+    },
+    {
+      "id": "ranking:housework-durables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "housework-durables-group-consumption-expenditure",
+      "title": "家事用耐久財消費支出額",
+      "href": "/ranking/housework-durables-group-consumption-expenditure",
       "published": true
     },
     {
@@ -9903,6 +10311,30 @@
       "key": "housing-land-liabilities-ratio-multi-person-households",
       "title": "住宅・土地のための負債割合",
       "href": "/ranking/housing-land-liabilities-ratio-multi-person-households",
+      "published": true
+    },
+    {
+      "id": "ranking:housing-materials-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "housing-materials-group-consumption-expenditure",
+      "title": "設備材料消費支出額",
+      "href": "/ranking/housing-materials-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:housing-repair-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "housing-repair-services-group-consumption-expenditure",
+      "title": "工事その他のサービス消費支出額",
+      "href": "/ranking/housing-repair-services-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:housing-repairs-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "housing-repairs-group-consumption-expenditure",
+      "title": "設備修繕・維持消費支出額",
+      "href": "/ranking/housing-repairs-group-consumption-expenditure",
       "published": true
     },
     {
@@ -10378,6 +10810,14 @@
       "published": true
     },
     {
+      "id": "ranking:interior-furnishings-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "interior-furnishings-group-consumption-expenditure",
+      "title": "室内装備・装飾品消費支出額",
+      "href": "/ranking/interior-furnishings-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:internet-fee-consumption-expenditure",
       "kind": "ranking",
       "key": "internet-fee-consumption-expenditure",
@@ -10511,6 +10951,14 @@
       "key": "japan-health-insurance-society-visit-rate-insured-per-1000",
       "title": "全国保険協会管掌健康保険受診率",
       "href": "/ranking/japan-health-insurance-society-visit-rate-insured-per-1000",
+      "published": true
+    },
+    {
+      "id": "ranking:japanese-clothing-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "japanese-clothing-group-consumption-expenditure",
+      "title": "和服消費支出額",
+      "href": "/ranking/japanese-clothing-group-consumption-expenditure",
       "published": true
     },
     {
@@ -11386,6 +11834,22 @@
       "published": true
     },
     {
+      "id": "ranking:leafy-vegetables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "leafy-vegetables-group-consumption-expenditure",
+      "title": "葉茎菜消費支出額",
+      "href": "/ranking/leafy-vegetables-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:leafy-vegetables-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "leafy-vegetables-group-consumption-quantity",
+      "title": "葉茎菜消費量",
+      "href": "/ranking/leafy-vegetables-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:leek-consumption-expenditure",
       "kind": "ranking",
       "key": "leek-consumption-expenditure",
@@ -11399,6 +11863,14 @@
       "key": "leek-consumption-quantity",
       "title": "ねぎ消費量",
       "href": "/ranking/leek-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:lesson-fees-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "lesson-fees-group-consumption-expenditure",
+      "title": "月謝類消費支出額",
+      "href": "/ranking/lesson-fees-group-consumption-expenditure",
       "published": true
     },
     {
@@ -12282,11 +12754,27 @@
       "published": true
     },
     {
+      "id": "ranking:meal-charges-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "meal-charges-group-consumption-expenditure",
+      "title": "食事代消費支出額",
+      "href": "/ranking/meal-charges-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:meal-kit-consumption-expenditure",
       "kind": "ranking",
       "key": "meal-kit-consumption-expenditure",
       "title": "そうざい材料セット消費支出額",
       "href": "/ranking/meal-kit-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:meat-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "meat-group-consumption-expenditure",
+      "title": "肉類消費支出額",
+      "href": "/ranking/meat-group-consumption-expenditure",
       "published": true
     },
     {
@@ -12410,6 +12898,22 @@
       "published": true
     },
     {
+      "id": "ranking:medical-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "medical-services-group-consumption-expenditure",
+      "title": "保健医療サービス消費支出額",
+      "href": "/ranking/medical-services-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:medical-supplies-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "medical-supplies-group-consumption-expenditure",
+      "title": "保健医療用品・器具消費支出額",
+      "href": "/ranking/medical-supplies-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:medical-welfare-industry-annual-income",
       "kind": "ranking",
       "key": "medical-welfare-industry-annual-income",
@@ -12448,6 +12952,14 @@
       "title": "売上金額",
       "href": "/ranking/medical-welfare-private-sales",
       "published": false
+    },
+    {
+      "id": "ranking:medicines-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "medicines-group-consumption-expenditure",
+      "title": "医薬品消費支出額",
+      "href": "/ranking/medicines-group-consumption-expenditure",
+      "published": true
     },
     {
       "id": "ranking:melon-consumption-expenditure",
@@ -12530,6 +13042,14 @@
       "published": true
     },
     {
+      "id": "ranking:mens-shirts-sweaters-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "mens-shirts-sweaters-group-consumption-expenditure",
+      "title": "男性用シャツ・セーター類消費支出額",
+      "href": "/ranking/mens-shirts-sweaters-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:mens-shoes-consumption-expenditure",
       "kind": "ranking",
       "key": "mens-shoes-consumption-expenditure",
@@ -12607,6 +13127,14 @@
       "key": "mens-underwear-consumption-expenditure",
       "title": "男子用下着消費支出額",
       "href": "/ranking/mens-underwear-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:mens-underwear-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "mens-underwear-group-consumption-expenditure",
+      "title": "男性用下着類消費支出額",
+      "href": "/ranking/mens-underwear-group-consumption-expenditure",
       "published": true
     },
     {
@@ -12738,6 +13266,14 @@
       "published": true
     },
     {
+      "id": "ranking:milk-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "milk-group-consumption-expenditure",
+      "title": "牛乳消費支出額",
+      "href": "/ranking/milk-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:mineral-water-consumption-expenditure",
       "kind": "ranking",
       "key": "mineral-water-consumption-expenditure",
@@ -12800,6 +13336,14 @@
       "title": "売上金額",
       "href": "/ranking/mining-private-sales",
       "published": false
+    },
+    {
+      "id": "ranking:miscellaneous-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "miscellaneous-group-consumption-expenditure",
+      "title": "諸雑費消費支出額",
+      "href": "/ranking/miscellaneous-group-consumption-expenditure",
+      "published": true
     },
     {
       "id": "ranking:miscellaneous-income-prefecture",
@@ -13986,6 +14530,22 @@
       "published": true
     },
     {
+      "id": "ranking:noodles-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "noodles-group-consumption-expenditure",
+      "title": "麺類消費支出額",
+      "href": "/ranking/noodles-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:noodles-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "noodles-group-consumption-quantity",
+      "title": "麺類消費量",
+      "href": "/ranking/noodles-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:notebooks-paper-consumption-expenditure",
       "kind": "ranking",
       "key": "notebooks-paper-consumption-expenditure",
@@ -14594,6 +15154,30 @@
       "published": true
     },
     {
+      "id": "ranking:oils-fats-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "oils-fats-group-consumption-expenditure",
+      "title": "油脂消費支出額",
+      "href": "/ranking/oils-fats-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:oils-fats-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "oils-fats-group-consumption-quantity",
+      "title": "油脂消費量",
+      "href": "/ranking/oils-fats-group-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:oils-seasonings-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "oils-seasonings-group-consumption-expenditure",
+      "title": "油脂・調味料消費支出額",
+      "href": "/ranking/oils-seasonings-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:old-population-index",
       "kind": "ranking",
       "key": "old-population-index",
@@ -14754,6 +15338,14 @@
       "published": true
     },
     {
+      "id": "ranking:other-beverages-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-beverages-group-consumption-expenditure",
+      "title": "他の飲料消費支出額",
+      "href": "/ranking/other-beverages-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:other-bread-consumption-expenditure",
       "kind": "ranking",
       "key": "other-bread-consumption-expenditure",
@@ -14794,6 +15386,22 @@
       "published": true
     },
     {
+      "id": "ranking:other-cereals-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-cereals-group-consumption-expenditure",
+      "title": "他の穀類消費支出額",
+      "href": "/ranking/other-cereals-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-cereals-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "other-cereals-group-consumption-quantity",
+      "title": "他の穀類消費量",
+      "href": "/ranking/other-cereals-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:other-ceremony-expense-consumption-expenditure",
       "kind": "ranking",
       "key": "other-ceremony-expense-consumption-expenditure",
@@ -14823,6 +15431,22 @@
       "key": "other-citrus-consumption-quantity",
       "title": "他の柑きつ類消費量",
       "href": "/ranking/other-citrus-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:other-clothing-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-clothing-group-consumption-expenditure",
+      "title": "他の被服消費支出額",
+      "href": "/ranking/other-clothing-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-clothing-misc-2025-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-clothing-misc-2025-group-consumption-expenditure",
+      "title": "他の被服のその他消費支出額",
+      "href": "/ranking/other-clothing-misc-2025-group-consumption-expenditure",
       "published": true
     },
     {
@@ -14994,6 +15618,14 @@
       "published": true
     },
     {
+      "id": "ranking:other-fuel-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-fuel-group-consumption-expenditure",
+      "title": "他の光熱消費支出額",
+      "href": "/ranking/other-fuel-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:other-furniture-consumption-expenditure",
       "kind": "ranking",
       "key": "other-furniture-consumption-expenditure",
@@ -15055,6 +15687,14 @@
       "key": "other-household-consumables-consumption-expenditure",
       "title": "他の家事用消耗品のその他消費支出額",
       "href": "/ranking/other-household-consumables-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-household-consumables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-household-consumables-group-consumption-expenditure",
+      "title": "他の家事用消耗品消費支出額",
+      "href": "/ranking/other-household-consumables-group-consumption-expenditure",
       "published": true
     },
     {
@@ -15194,6 +15834,14 @@
       "published": true
     },
     {
+      "id": "ranking:other-miscellaneous-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-miscellaneous-group-consumption-expenditure",
+      "title": "他の諸雑費消費支出額",
+      "href": "/ranking/other-miscellaneous-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:other-mushroom-consumption-expenditure",
       "kind": "ranking",
       "key": "other-mushroom-consumption-expenditure",
@@ -15274,6 +15922,14 @@
       "published": true
     },
     {
+      "id": "ranking:other-prepared-foods-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-prepared-foods-group-consumption-expenditure",
+      "title": "他の調理食品消費支出額",
+      "href": "/ranking/other-prepared-foods-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:other-processed-fish-ext-consumption-expenditure",
       "kind": "ranking",
       "key": "other-processed-fish-ext-consumption-expenditure",
@@ -15290,11 +15946,43 @@
       "published": true
     },
     {
+      "id": "ranking:other-processed-seafood-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-processed-seafood-group-consumption-expenditure",
+      "title": "他の魚介加工品消費支出額",
+      "href": "/ranking/other-processed-seafood-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-processed-vegetables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-processed-vegetables-group-consumption-expenditure",
+      "title": "他の野菜・海藻加工品消費支出額",
+      "href": "/ranking/other-processed-vegetables-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:other-publications-consumption-expenditure",
       "kind": "ranking",
       "key": "other-publications-consumption-expenditure",
       "title": "他の印刷物消費支出額",
       "href": "/ranking/other-publications-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-recreational-goods-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-recreational-goods-group-consumption-expenditure",
+      "title": "他の教養娯楽用品消費支出額",
+      "href": "/ranking/other-recreational-goods-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-recreational-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-recreational-services-group-consumption-expenditure",
+      "title": "他の教養娯楽サービス消費支出額",
+      "href": "/ranking/other-recreational-services-group-consumption-expenditure",
       "published": true
     },
     {
@@ -15423,6 +16111,14 @@
       "key": "other-shellfish-consumption-quantity",
       "title": "他の貝消費量",
       "href": "/ranking/other-shellfish-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:other-social-expenses-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-social-expenses-group-consumption-expenditure",
+      "title": "他の交際費消費支出額",
+      "href": "/ranking/other-social-expenses-group-consumption-expenditure",
       "published": true
     },
     {
@@ -15583,6 +16279,22 @@
       "key": "other-vegetables-consumption-quantity",
       "title": "他の野菜のその他消費量",
       "href": "/ranking/other-vegetables-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:other-vegetables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "other-vegetables-group-consumption-expenditure",
+      "title": "他の野菜消費支出額",
+      "href": "/ranking/other-vegetables-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:other-vegetables-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "other-vegetables-group-consumption-quantity",
+      "title": "他の野菜消費量",
+      "href": "/ranking/other-vegetables-group-consumption-quantity",
       "published": true
     },
     {
@@ -15775,6 +16487,14 @@
       "key": "pachinko-shop-density-per-10k",
       "title": "パチンコ店舗数",
       "href": "/ranking/pachinko-shop-density-per-10k",
+      "published": true
+    },
+    {
+      "id": "ranking:package-tours-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "package-tours-group-consumption-expenditure",
+      "title": "パック旅行費消費支出額",
+      "href": "/ranking/package-tours-group-consumption-expenditure",
       "published": true
     },
     {
@@ -16274,6 +16994,14 @@
       "published": true
     },
     {
+      "id": "ranking:personal-effects-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "personal-effects-group-consumption-expenditure",
+      "title": "身の回り用品消費支出額",
+      "href": "/ranking/personal-effects-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:personal-items-service-consumption-expenditure",
       "kind": "ranking",
       "key": "personal-items-service-consumption-expenditure",
@@ -16735,6 +17463,14 @@
       "key": "pneumonia-death-rate",
       "title": "肺炎による死亡者数",
       "href": "/ranking/pneumonia-death-rate",
+      "published": true
+    },
+    {
+      "id": "ranking:pocket-money-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "pocket-money-group-consumption-expenditure",
+      "title": "こづかい(使途不明)消費支出額",
+      "href": "/ranking/pocket-money-group-consumption-expenditure",
       "published": true
     },
     {
@@ -17850,6 +18586,14 @@
       "published": true
     },
     {
+      "id": "ranking:prepared-foods-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "prepared-foods-group-consumption-expenditure",
+      "title": "調理食品消費支出額",
+      "href": "/ranking/prepared-foods-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:preschool-fee-consumption-expenditure",
       "kind": "ranking",
       "key": "preschool-fee-consumption-expenditure",
@@ -18247,6 +18991,22 @@
       "key": "probiotic-drink-consumption-expenditure",
       "title": "乳酸菌飲料消費支出額",
       "href": "/ranking/probiotic-drink-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:processed-fruits-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "processed-fruits-group-consumption-expenditure",
+      "title": "果物加工品消費支出額",
+      "href": "/ranking/processed-fruits-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:processed-meat-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "processed-meat-group-consumption-expenditure",
+      "title": "加工肉消費支出額",
+      "href": "/ranking/processed-meat-group-consumption-expenditure",
       "published": true
     },
     {
@@ -19258,11 +20018,35 @@
       "published": true
     },
     {
+      "id": "ranking:recreational-durables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "recreational-durables-group-consumption-expenditure",
+      "title": "教養娯楽用耐久財消費支出額",
+      "href": "/ranking/recreational-durables-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:recreational-fishing-count",
       "kind": "ranking",
       "key": "recreational-fishing-count",
       "title": "遊漁数（主とする遊漁場種類計）",
       "href": "/ranking/recreational-fishing-count",
+      "published": true
+    },
+    {
+      "id": "ranking:recreational-goods-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "recreational-goods-group-consumption-expenditure",
+      "title": "教養娯楽用品消費支出額",
+      "href": "/ranking/recreational-goods-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:recreational-services-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "recreational-services-group-consumption-expenditure",
+      "title": "教養娯楽サービス消費支出額",
+      "href": "/ranking/recreational-services-group-consumption-expenditure",
       "published": true
     },
     {
@@ -19466,11 +20250,27 @@
       "published": true
     },
     {
+      "id": "ranking:remittances-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "remittances-group-consumption-expenditure",
+      "title": "仕送り金消費支出額",
+      "href": "/ranking/remittances-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:renovation-rate",
       "kind": "ranking",
       "key": "renovation-rate",
       "title": "リフォーム工事実施率",
       "href": "/ranking/renovation-rate",
+      "published": true
+    },
+    {
+      "id": "ranking:rent-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "rent-group-consumption-expenditure",
+      "title": "家賃地代消費支出額",
+      "href": "/ranking/rent-group-consumption-expenditure",
       "published": true
     },
     {
@@ -20162,6 +20962,22 @@
       "published": false
     },
     {
+      "id": "ranking:root-vegetables-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "root-vegetables-group-consumption-expenditure",
+      "title": "根菜消費支出額",
+      "href": "/ranking/root-vegetables-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:root-vegetables-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "root-vegetables-group-consumption-quantity",
+      "title": "根菜消費量",
+      "href": "/ranking/root-vegetables-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:roundwood-hinoki-production-volume",
       "kind": "ranking",
       "key": "roundwood-hinoki-production-volume",
@@ -20287,6 +21103,22 @@
       "key": "salt-intake-male-age-adjusted",
       "title": "男性の食塩摂取量（年齢調整値）",
       "href": "/ranking/salt-intake-male-age-adjusted",
+      "published": true
+    },
+    {
+      "id": "ranking:salted-dried-seafood-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "salted-dried-seafood-group-consumption-expenditure",
+      "title": "塩干魚介消費支出額",
+      "href": "/ranking/salted-dried-seafood-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:salted-dried-seafood-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "salted-dried-seafood-group-consumption-quantity",
+      "title": "塩干魚介消費量",
+      "href": "/ranking/salted-dried-seafood-group-consumption-quantity",
       "published": true
     },
     {
@@ -20551,6 +21383,14 @@
       "key": "seafood-consumption-expenditure",
       "title": "魚介類消費支出額",
       "href": "/ranking/seafood-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:seasonings-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "seasonings-group-consumption-expenditure",
+      "title": "調味料消費支出額",
+      "href": "/ranking/seasonings-group-consumption-expenditure",
       "published": true
     },
     {
@@ -20914,6 +21754,22 @@
       "published": true
     },
     {
+      "id": "ranking:shellfish-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "shellfish-group-consumption-expenditure",
+      "title": "貝類消費支出額",
+      "href": "/ranking/shellfish-group-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:shellfish-group-consumption-quantity",
+      "kind": "ranking",
+      "key": "shellfish-group-consumption-quantity",
+      "title": "貝類消費量",
+      "href": "/ranking/shellfish-group-consumption-quantity",
+      "published": true
+    },
+    {
       "id": "ranking:shimeji-consumption-expenditure",
       "kind": "ranking",
       "key": "shimeji-consumption-expenditure",
@@ -20927,6 +21783,14 @@
       "key": "shimeji-consumption-quantity",
       "title": "しめじ消費量",
       "href": "/ranking/shimeji-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:shirts-sweaters-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "shirts-sweaters-group-consumption-expenditure",
+      "title": "シャツ・セーター類消費支出額",
+      "href": "/ranking/shirts-sweaters-group-consumption-expenditure",
       "published": true
     },
     {
@@ -21330,6 +22194,14 @@
       "published": true
     },
     {
+      "id": "ranking:soap-cosmetics-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "soap-cosmetics-group-consumption-expenditure",
+      "title": "石けん類・化粧品消費支出額",
+      "href": "/ranking/soap-cosmetics-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:soba-udon-dining-consumption-expenditure",
       "kind": "ranking",
       "key": "soba-udon-dining-consumption-expenditure",
@@ -21359,6 +22231,14 @@
       "key": "social-expense-consumption-expenditure",
       "title": "つきあい費消費支出額",
       "href": "/ranking/social-expense-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:social-expenses-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "social-expenses-group-consumption-expenditure",
+      "title": "交際費消費支出額",
+      "href": "/ranking/social-expenses-group-consumption-expenditure",
       "published": true
     },
     {
@@ -21463,6 +22343,14 @@
       "key": "sole-proprietor-sales-per-worker",
       "title": "個人企業の従業者1人当たり売上高",
       "href": "/ranking/sole-proprietor-sales-per-worker",
+      "published": true
+    },
+    {
+      "id": "ranking:soy-products-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "soy-products-group-consumption-expenditure",
+      "title": "大豆加工品消費支出額",
+      "href": "/ranking/soy-products-group-consumption-expenditure",
       "published": true
     },
     {
@@ -21623,6 +22511,14 @@
       "key": "sports-facility-count",
       "title": "社会体育施設数",
       "href": "/ranking/sports-facility-count",
+      "published": true
+    },
+    {
+      "id": "ranking:sports-goods-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "sports-goods-group-consumption-expenditure",
+      "title": "運動用具類消費支出額",
+      "href": "/ranking/sports-goods-group-consumption-expenditure",
       "published": true
     },
     {
@@ -21954,6 +22850,14 @@
       "published": true
     },
     {
+      "id": "ranking:staple-prepared-foods-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "staple-prepared-foods-group-consumption-expenditure",
+      "title": "主食的調理食品消費支出額",
+      "href": "/ranking/staple-prepared-foods-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:starting-salary-highschool",
       "kind": "ranking",
       "key": "starting-salary-highschool",
@@ -21984,6 +22888,14 @@
       "title": "駅まで1km未満の世帯の割合",
       "href": "/ranking/station-within-1km-household-ratio",
       "published": false
+    },
+    {
+      "id": "ranking:stationery-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "stationery-group-consumption-expenditure",
+      "title": "文房具消費支出額",
+      "href": "/ranking/stationery-group-consumption-expenditure",
+      "published": true
     },
     {
       "id": "ranking:statistical-discrepancy-nominal-h27",
@@ -22266,6 +23178,14 @@
       "published": true
     },
     {
+      "id": "ranking:supplementary-education-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "supplementary-education-group-consumption-expenditure",
+      "title": "補習教育消費支出額",
+      "href": "/ranking/supplementary-education-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:sushi-dining-consumption-expenditure",
       "kind": "ranking",
       "key": "sushi-dining-consumption-expenditure",
@@ -22519,6 +23439,14 @@
       "key": "tea-drink-consumption-expenditure",
       "title": "茶飲料消費支出額",
       "href": "/ranking/tea-drink-consumption-expenditure",
+      "published": true
+    },
+    {
+      "id": "ranking:tea-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "tea-group-consumption-expenditure",
+      "title": "茶類消費支出額",
+      "href": "/ranking/tea-group-consumption-expenditure",
       "published": true
     },
     {
@@ -23050,6 +23978,14 @@
       "published": true
     },
     {
+      "id": "ranking:tissue-toilet-paper-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "tissue-toilet-paper-group-consumption-expenditure",
+      "title": "ティッシュペーパー・トイレットペーパー消費支出額",
+      "href": "/ranking/tissue-toilet-paper-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:tobacco-consumption-expenditure",
       "kind": "ranking",
       "key": "tobacco-consumption-expenditure",
@@ -23386,6 +24322,14 @@
       "published": true
     },
     {
+      "id": "ranking:toys-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "toys-group-consumption-expenditure",
+      "title": "玩具消費支出額",
+      "href": "/ranking/toys-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:trademark-application-count",
       "kind": "ranking",
       "key": "trademark-application-count",
@@ -23600,6 +24544,14 @@
       "title": "売上金額",
       "href": "/ranking/transport-postal-private-sales",
       "published": false
+    },
+    {
+      "id": "ranking:transportation-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "transportation-group-consumption-expenditure",
+      "title": "交通消費支出額",
+      "href": "/ranking/transportation-group-consumption-expenditure",
+      "published": true
     },
     {
       "id": "ranking:travel-bag-consumption-expenditure",
@@ -23983,6 +24935,14 @@
       "key": "umbrella-consumption-quantity",
       "title": "傘購入数量",
       "href": "/ranking/umbrella-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:underwear-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "underwear-group-consumption-expenditure",
+      "title": "下着類消費支出額",
+      "href": "/ranking/underwear-group-consumption-expenditure",
       "published": true
     },
     {
@@ -24458,6 +25418,14 @@
       "published": true
     },
     {
+      "id": "ranking:vegetables-seaweed-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "vegetables-seaweed-group-consumption-expenditure",
+      "title": "野菜・海藻消費支出額",
+      "href": "/ranking/vegetables-seaweed-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:vehicle-kilometers-traveled",
       "kind": "ranking",
       "key": "vehicle-kilometers-traveled",
@@ -24922,6 +25890,14 @@
       "published": true
     },
     {
+      "id": "ranking:western-clothing-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "western-clothing-group-consumption-expenditure",
+      "title": "洋服消費支出額",
+      "href": "/ranking/western-clothing-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:western-food-dining-consumption-expenditure",
       "kind": "ranking",
       "key": "western-food-dining-consumption-expenditure",
@@ -25194,6 +26170,14 @@
       "published": true
     },
     {
+      "id": "ranking:womens-shirts-sweaters-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "womens-shirts-sweaters-group-consumption-expenditure",
+      "title": "女性用シャツ・セーター類消費支出額",
+      "href": "/ranking/womens-shirts-sweaters-group-consumption-expenditure",
+      "published": true
+    },
+    {
       "id": "ranking:womens-shoes-consumption-expenditure",
       "kind": "ranking",
       "key": "womens-shoes-consumption-expenditure",
@@ -25263,6 +26247,14 @@
       "key": "womens-sweater-consumption-quantity",
       "title": "婦人用セーター購入数量",
       "href": "/ranking/womens-sweater-consumption-quantity",
+      "published": true
+    },
+    {
+      "id": "ranking:womens-underwear-group-consumption-expenditure",
+      "kind": "ranking",
+      "key": "womens-underwear-group-consumption-expenditure",
+      "title": "女性用下着類消費支出額",
+      "href": "/ranking/womens-underwear-group-consumption-expenditure",
       "published": true
     },
     {

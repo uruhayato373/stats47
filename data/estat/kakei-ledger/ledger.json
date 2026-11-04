@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-02T05:25:55.250Z",
+ "generatedAt": "2026-11-04T08:27:20.833Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
@@ -26,26 +26,17 @@
    "amount": {
     "total": 689,
     "byStatus": {
-     "excluded": 60,
-     "undecided": 114,
-     "adopted": 514,
-     "planned": 1
+     "excluded": 67,
+     "adopted": 622
     },
-    "undecidedByKind": {
-     "other": 7,
-     "group": 106,
-     "item": 1
-    }
+    "undecidedByKind": {}
    },
    "quantity": {
     "total": 204,
     "byStatus": {
-     "adopted": 188,
-     "undecided": 16
+     "adopted": 204
     },
-    "undecidedByKind": {
-     "group": 16
-    }
+    "undecidedByKind": {}
    }
   }
  },
@@ -5929,14 +5920,20 @@
    "metrics": [
     "accessories-consumption-expenditure",
     "accommodation-consumption-expenditure",
+    "admission-game-fees-group-consumption-expenditure",
     "adult-sandals-consumption-expenditure",
     "adult-sneakers-consumption-expenditure",
     "air-conditioner-consumption-expenditure",
     "air-fare-consumption-expenditure",
     "air-freshener-consumption-expenditure",
+    "alcoholic-beverages-group-consumption-expenditure",
     "amusement-park-consumption-expenditure",
     "apple-consumption-expenditure",
+    "automobile-maintenance-group-consumption-expenditure",
+    "automobile-purchases-group-consumption-expenditure",
+    "automobile-related-group-consumption-expenditure",
     "bacon-consumption-expenditure",
+    "bags-group-consumption-expenditure",
     "bamboo-shoot-consumption-expenditure",
     "banana-consumption-expenditure",
     "barbershop-consumption-expenditure",
@@ -5945,10 +5942,15 @@
     "bean-sprouts-consumption-expenditure",
     "beans-consumption-expenditure",
     "beauty-appliance-consumption-expenditure",
+    "beauty-products-group-consumption-expenditure",
+    "beauty-services-group-consumption-expenditure",
     "bed-consumption-expenditure",
+    "bedding-group-consumption-expenditure",
     "beef-consumption-expenditure",
     "beer-consumption-expenditure",
     "bento-consumption-expenditure",
+    "beverages-group-consumption-expenditure",
+    "bicycle-purchases-group-consumption-expenditure",
     "biscuit-consumption-expenditure",
     "black-tea-consumption-expenditure",
     "blank-media-consumption-expenditure",
@@ -5956,8 +5958,10 @@
     "blouse-consumption-expenditure",
     "bonito-consumption-expenditure",
     "books-consumption-expenditure",
+    "books-printed-matter-group-consumption-expenditure",
     "boys-school-uniform-consumption-expenditure",
     "bread-consumption-expenditure",
+    "broadcasting-fees-group-consumption-expenditure",
     "broccoli-consumption-expenditure",
     "burdock-consumption-expenditure",
     "bus-commuter-pass-consumption-expenditure",
@@ -5978,6 +5982,7 @@
     "carbonated-drink-consumption-expenditure",
     "carrot-consumption-expenditure",
     "castella-consumption-expenditure",
+    "cereals-group-consumption-expenditure",
     "cheese-consumption-expenditure",
     "chest-consumption-expenditure",
     "chicken-consumption-expenditure",
@@ -5985,10 +5990,12 @@
     "childcare-fee-consumption-expenditure",
     "childrens-clothes-consumption-expenditure",
     "childrens-clothing-consumption-expenditure",
+    "childrens-shirts-sweaters-group-consumption-expenditure",
     "childrens-shoes-consumption-expenditure",
     "childrens-sleepwear-consumption-expenditure",
     "childrens-socks-consumption-expenditure",
     "childrens-underwear-consumption-expenditure",
+    "childrens-underwear-group-consumption-expenditure",
     "chinese-cabbage-consumption-expenditure",
     "chinese-food-dining-consumption-expenditure",
     "chinese-noodles-consumption-expenditure",
@@ -6001,12 +6008,15 @@
     "cleaning-service-consumption-expenditure",
     "clothing-footwear-expenditure-total",
     "clothing-rental-consumption-expenditure",
+    "clothing-services-group-consumption-expenditure",
     "cocoa-consumption-expenditure",
     "cod-roe-consumption-expenditure",
+    "coffee-cocoa-group-consumption-expenditure",
     "coffee-consumption-expenditure",
     "coffee-drink-consumption-expenditure",
     "coffee-shop-consumption-expenditure",
     "cold-medicine-consumption-expenditure",
+    "communication-group-consumption-expenditure",
     "company-housing-rent-consumption-expenditure",
     "confectionery-consumption-expenditure",
     "consumption-expenditure-total",
@@ -6027,15 +6037,20 @@
     "cut-flowers-consumption-expenditure",
     "cutlet-consumption-expenditure",
     "daikon-consumption-expenditure",
+    "dairy-eggs-group-consumption-expenditure",
+    "dairy-products-group-consumption-expenditure",
     "deep-fried-fish-cake-consumption-expenditure",
     "delivery-fee-consumption-expenditure",
     "dental-fee-consumption-expenditure",
+    "detergents-group-consumption-expenditure",
     "dining-out-consumption-expenditure",
     "domestic-package-tour-consumption-expenditure",
+    "domestic-services-group-consumption-expenditure",
     "domestic-student-remittance-consumption-expenditure",
     "donations-consumption-expenditure",
     "dress-shirt-consumption-expenditure",
     "dressing-consumption-expenditure",
+    "dried-foods-seaweed-group-consumption-expenditure",
     "dried-mackerel-consumption-expenditure",
     "dried-nori-consumption-expenditure",
     "dried-shiitake-consumption-expenditure",
@@ -6045,6 +6060,7 @@
     "driving-school-consumption-expenditure",
     "education-expenditure-total",
     "eggplant-consumption-expenditure",
+    "eggs-group-consumption-expenditure",
     "electricity-consumption-expenditure",
     "elementary-tutoring-consumption-expenditure",
     "enoki-consumption-expenditure",
@@ -6055,17 +6071,25 @@
     "eyeglasses-consumption-expenditure",
     "fabric-consumption-expenditure",
     "fabric-softener-consumption-expenditure",
+    "fabrics-yarn-group-consumption-expenditure",
+    "face-mask-item-consumption-expenditure",
     "facility-equipment-consumption-expenditure",
     "fire-earthquake-insurance-consumption-expenditure",
     "fish-canned-consumption-expenditure",
     "fish-paste-consumption-expenditure",
+    "fish-paste-products-group-consumption-expenditure",
     "fish-pickled-consumption-expenditure",
     "fish-tsukudani-type2-consumption-expenditure",
     "flavor-seasoning-consumption-expenditure",
     "floor-covering-consumption-expenditure",
     "flounder-consumption-expenditure",
     "food-expenditure-total",
+    "footwear-group-consumption-expenditure",
     "foundation-consumption-expenditure",
+    "fresh-fish-group-consumption-expenditure",
+    "fresh-fruits-group-consumption-expenditure",
+    "fresh-meat-group-consumption-expenditure",
+    "fresh-seafood-group-consumption-expenditure",
     "fresh-shiitake-consumption-expenditure",
     "fresh-udon-soba-consumption-expenditure",
     "fresh-vegetables-consumption-expenditure",
@@ -6073,6 +6097,7 @@
     "fried-tofu-consumption-expenditure",
     "frozen-food-consumption-expenditure",
     "fruit-vegetable-juice-consumption-expenditure",
+    "fruits-group-consumption-expenditure",
     "funeral-expense-consumption-expenditure",
     "furikake-consumption-expenditure",
     "furniture-household-expenditure-total",
@@ -6086,6 +6111,9 @@
     "gas-consumption-expenditure",
     "gas-cooking-appliance-consumption-expenditure",
     "gasoline-consumption-expenditure",
+    "general-dining-out-group-consumption-expenditure",
+    "general-furniture-group-consumption-expenditure",
+    "gift-money-group-consumption-expenditure",
     "girls-school-uniform-consumption-expenditure",
     "gloves-consumption-expenditure",
     "golf-equipment-consumption-expenditure",
@@ -6111,23 +6139,34 @@
     "health-consumables-consumption-expenditure",
     "health-insurance-premium-consumption-expenditure",
     "health-medical-expenditure-total",
+    "health-supplements-group-consumption-expenditure",
     "heater-consumption-expenditure",
+    "heating-cooling-appliances-group-consumption-expenditure",
     "high-school-tutoring-consumption-expenditure",
     "home-ownership-rate-kakei",
     "homemaking-lesson-consumption-expenditure",
     "horse-mackerel-consumption-expenditure",
+    "household-consumables-group-consumption-expenditure",
+    "household-durables-group-consumption-expenditure",
     "household-head-allowance-consumption-expenditure",
+    "household-utensils-group-consumption-expenditure",
     "housekeeping-service-consumption-expenditure",
+    "housework-durables-group-consumption-expenditure",
     "housing-charges-consumption-expenditure",
     "housing-expenditure-total",
+    "housing-materials-group-consumption-expenditure",
+    "housing-repair-services-group-consumption-expenditure",
+    "housing-repairs-group-consumption-expenditure",
     "icecream-consumption-expenditure",
     "infant-clothes-consumption-expenditure",
     "information-communication-expenditure",
     "insecticide-consumption-expenditure",
     "instant-noodles-consumption-expenditure",
     "interior-decoration-consumption-expenditure",
+    "interior-furnishings-group-consumption-expenditure",
     "internet-fee-consumption-expenditure",
     "jam-consumption-expenditure",
+    "japanese-clothing-group-consumption-expenditure",
     "japanese-food-dining-consumption-expenditure",
     "jelly-consumption-expenditure",
     "junior-high-tutoring-consumption-expenditure",
@@ -6144,7 +6183,9 @@
     "language-lesson-consumption-expenditure",
     "laundry-detergent-consumption-expenditure",
     "laundry-service-consumption-expenditure",
+    "leafy-vegetables-group-consumption-expenditure",
     "leek-consumption-expenditure",
+    "lesson-fees-group-consumption-expenditure",
     "lettuce-consumption-expenditure",
     "light-bulbs-consumption-expenditure",
     "lighting-consumption-expenditure",
@@ -6158,23 +6199,32 @@
     "massage-fee-consumption-expenditure",
     "maternity-hospital-consumption-expenditure",
     "mayonnaise-consumption-expenditure",
+    "meal-charges-group-consumption-expenditure",
     "meal-kit-consumption-expenditure",
+    "meat-group-consumption-expenditure",
     "medical-fee-consumption-expenditure",
+    "medical-services-group-consumption-expenditure",
+    "medical-supplies-group-consumption-expenditure",
+    "medicines-group-consumption-expenditure",
     "melon-consumption-expenditure",
     "membership-fees-consumption-expenditure",
     "mens-clothing-consumption-expenditure",
     "mens-coat-consumption-expenditure",
     "mens-jacket-consumption-expenditure",
     "mens-pants-consumption-expenditure",
+    "mens-shirts-sweaters-group-consumption-expenditure",
     "mens-shoes-consumption-expenditure",
     "mens-sleepwear-consumption-expenditure",
     "mens-socks-consumption-expenditure",
     "mens-suit-consumption-expenditure",
     "mens-sweater-consumption-expenditure",
     "mens-underwear-consumption-expenditure",
+    "mens-underwear-group-consumption-expenditure",
     "microwave-consumption-expenditure",
     "milk-drink-consumption-expenditure",
+    "milk-group-consumption-expenditure",
     "mineral-water-consumption-expenditure",
+    "miscellaneous-group-consumption-expenditure",
     "miso-consumption-expenditure",
     "mobile-phone-bill-consumption-expenditure",
     "mobile-phone-consumption-expenditure",
@@ -6189,9 +6239,12 @@
     "non-car-vehicle-insurance-consumption-expenditure",
     "non-car-vehicle-maintenance-consumption-expenditure",
     "non-car-vehicle-purchase-consumption-expenditure",
+    "noodles-group-consumption-expenditure",
     "notebooks-paper-consumption-expenditure",
     "nursing-care-consumption-expenditure",
     "octopus-consumption-expenditure",
+    "oils-fats-group-consumption-expenditure",
+    "oils-seasonings-group-consumption-expenditure",
     "onigiri-consumption-expenditure",
     "onion-consumption-expenditure",
     "orange-consumption-expenditure",
@@ -6201,12 +6254,16 @@
     "other-beauty-products-consumption-expenditure",
     "other-beauty-service-consumption-expenditure",
     "other-bedding-consumption-expenditure",
+    "other-beverages-group-consumption-expenditure",
     "other-bread-consumption-expenditure",
     "other-broadcast-fee-consumption-expenditure",
     "other-car-service-consumption-expenditure",
+    "other-cereals-group-consumption-expenditure",
     "other-ceremony-expense-consumption-expenditure",
     "other-charges-consumption-expenditure",
     "other-citrus-consumption-expenditure",
+    "other-clothing-group-consumption-expenditure",
+    "other-clothing-misc-2025-group-consumption-expenditure",
     "other-clothing-service-consumption-expenditure",
     "other-communication-device-consumption-expenditure",
     "other-construction-consumption-expenditure",
@@ -6224,6 +6281,7 @@
     "other-footwear-consumption-expenditure",
     "other-fresh-fish-consumption-expenditure",
     "other-fresh-fruit-consumption-expenditure",
+    "other-fuel-group-consumption-expenditure",
     "other-furniture-consumption-expenditure",
     "other-grains-consumption-expenditure",
     "other-health-service-consumption-expenditure",
@@ -6231,6 +6289,7 @@
     "other-heating-cooling-consumption-expenditure",
     "other-hospital-fee-consumption-expenditure",
     "other-household-consumables-consumption-expenditure",
+    "other-household-consumables-group-consumption-expenditure",
     "other-household-durables-consumption-expenditure",
     "other-household-goods-consumption-expenditure",
     "other-indoor-furnishing-consumption-expenditure",
@@ -6245,6 +6304,7 @@
     "other-mens-clothing-consumption-expenditure",
     "other-mens-shirt-consumption-expenditure",
     "other-misc-expense-consumption-expenditure",
+    "other-miscellaneous-group-consumption-expenditure",
     "other-mushroom-consumption-expenditure",
     "other-non-savings-insurance-consumption-expenditure",
     "other-noodle-dining-consumption-expenditure",
@@ -6253,9 +6313,14 @@
     "other-personal-items-consumption-expenditure",
     "other-pet-service-consumption-expenditure",
     "other-prepared-food-consumption-expenditure",
+    "other-prepared-foods-group-consumption-expenditure",
     "other-processed-fish-ext-consumption-expenditure",
     "other-processed-meat-consumption-expenditure",
+    "other-processed-seafood-group-consumption-expenditure",
+    "other-processed-vegetables-group-consumption-expenditure",
     "other-publications-consumption-expenditure",
+    "other-recreational-goods-group-consumption-expenditure",
+    "other-recreational-services-group-consumption-expenditure",
     "other-remittance-consumption-expenditure",
     "other-rent-land-consumption-expenditure",
     "other-root-vegetables-consumption-expenditure",
@@ -6264,6 +6329,7 @@
     "other-school-supplies-consumption-expenditure",
     "other-seasoning-consumption-expenditure",
     "other-shellfish-consumption-expenditure",
+    "other-social-expenses-group-consumption-expenditure",
     "other-soy-products-consumption-expenditure",
     "other-sports-equipment-consumption-expenditure",
     "other-sports-facility-consumption-expenditure",
@@ -6280,12 +6346,14 @@
     "other-vegetable-pickles-consumption-expenditure",
     "other-vegetable-seaweed-processed-consumption-expenditure",
     "other-vegetables-consumption-expenditure",
+    "other-vegetables-group-consumption-expenditure",
     "other-western-sweets-consumption-expenditure",
     "other-womens-clothing-consumption-expenditure",
     "other-womens-shirt-consumption-expenditure",
     "other-womens-underwear-consumption-expenditure",
     "overseas-package-tour-consumption-expenditure",
     "oyster-consumption-expenditure",
+    "package-tours-group-consumption-expenditure",
     "paper-diapers-consumption-expenditure",
     "pasta-consumption-expenditure",
     "peach-consumption-expenditure",
@@ -6293,6 +6361,7 @@
     "perm-consumption-expenditure",
     "persimmon-consumption-expenditure",
     "personal-computer-consumption-expenditure",
+    "personal-effects-group-consumption-expenditure",
     "personal-items-service-consumption-expenditure",
     "pet-food-consumption-expenditure",
     "pet-supplies-consumption-expenditure",
@@ -6302,11 +6371,13 @@
     "pickled-plum-consumption-expenditure",
     "plastic-bags-wrap-consumption-expenditure",
     "plumbing-construction-consumption-expenditure",
+    "pocket-money-group-consumption-expenditure",
     "pork-consumption-expenditure",
     "postage-consumption-expenditure",
     "potato-consumption-expenditure",
     "pots-kettles-consumption-expenditure",
     "powdered-milk-consumption-expenditure",
+    "prepared-foods-group-consumption-expenditure",
     "preschool-fee-consumption-expenditure",
     "private-elementary-school-consumption-expenditure",
     "private-high-school-consumption-expenditure",
@@ -6314,6 +6385,8 @@
     "private-rent-consumption-expenditure",
     "private-university-consumption-expenditure",
     "probiotic-drink-consumption-expenditure",
+    "processed-fruits-group-consumption-expenditure",
+    "processed-meat-group-consumption-expenditure",
     "propane-gas-consumption-expenditure",
     "public-bath-consumption-expenditure",
     "public-elementary-school-consumption-expenditure",
@@ -6325,16 +6398,23 @@
     "pumpkin-consumption-expenditure",
     "ramen-dining-consumption-expenditure",
     "recorded-media-consumption-expenditure",
+    "recreational-durables-group-consumption-expenditure",
+    "recreational-goods-group-consumption-expenditure",
+    "recreational-services-group-consumption-expenditure",
     "refrigerator-consumption-expenditure",
     "religious-expense-consumption-expenditure",
+    "remittances-group-consumption-expenditure",
+    "rent-group-consumption-expenditure",
     "rental-car-consumption-expenditure",
     "repair-materials-consumption-expenditure",
     "rice-consumption-expenditure",
     "rice-cracker-consumption-expenditure",
     "ritual-goods-tombstone-consumption-expenditure",
+    "root-vegetables-group-consumption-expenditure",
     "sake-consumption-expenditure",
     "salad-consumption-expenditure",
     "salmon-consumption-expenditure",
+    "salted-dried-seafood-group-consumption-expenditure",
     "salted-salmon-consumption-expenditure",
     "sardine-consumption-expenditure",
     "sashimi-platter-consumption-expenditure",
@@ -6348,9 +6428,12 @@
     "school-lunch-consumption-expenditure",
     "sea-bream-consumption-expenditure",
     "seafood-consumption-expenditure",
+    "seasonings-group-consumption-expenditure",
     "shampoo-consumption-expenditure",
     "sheets-consumption-expenditure",
+    "shellfish-group-consumption-expenditure",
     "shimeji-consumption-expenditure",
+    "shirts-sweaters-group-consumption-expenditure",
     "shochu-consumption-expenditure",
     "shrimp-consumption-expenditure",
     "shumai-consumption-expenditure",
@@ -6359,22 +6442,29 @@
     "skin-milk-consumption-expenditure",
     "skirt-consumption-expenditure",
     "snack-consumption-expenditure",
+    "soap-cosmetics-group-consumption-expenditure",
     "soba-udon-dining-consumption-expenditure",
     "social-expense-consumption-expenditure",
+    "social-expenses-group-consumption-expenditure",
+    "soy-products-group-consumption-expenditure",
     "soy-sauce-consumption-expenditure",
     "spinach-consumption-expenditure",
     "sports-club-fee-consumption-expenditure",
     "sports-drink-consumption-expenditure",
+    "sports-goods-group-consumption-expenditure",
     "sports-lesson-consumption-expenditure",
     "sports-spectating-consumption-expenditure",
     "sportswear-consumption-expenditure",
     "squid-consumption-expenditure",
+    "staple-prepared-foods-group-consumption-expenditure",
+    "stationery-group-consumption-expenditure",
     "stomach-medicine-consumption-expenditure",
     "strawberry-consumption-expenditure",
     "study-desk-chair-consumption-expenditure",
     "study-materials-consumption-expenditure",
     "sugar-consumption-expenditure",
     "supplement-consumption-expenditure",
+    "supplementary-education-group-consumption-expenditure",
     "sushi-dining-consumption-expenditure",
     "sushi-takeout-consumption-expenditure",
     "sweet-potato-consumption-expenditure",
@@ -6385,11 +6475,13 @@
     "tatami-replacement-consumption-expenditure",
     "taxi-fare-consumption-expenditure",
     "tea-drink-consumption-expenditure",
+    "tea-group-consumption-expenditure",
     "television-consumption-expenditure",
     "tempura-fry-consumption-expenditure",
     "textbook-consumption-expenditure",
     "textbooks-consumption-expenditure",
     "tissue-paper-consumption-expenditure",
+    "tissue-toilet-paper-group-consumption-expenditure",
     "tobacco-consumption-expenditure",
     "tofu-consumption-expenditure",
     "toilet-paper-consumption-expenditure",
@@ -6398,18 +6490,22 @@
     "toothbrush-consumption-expenditure",
     "toothpaste-consumption-expenditure",
     "towel-consumption-expenditure",
+    "toys-group-consumption-expenditure",
     "train-commuter-pass-consumption-expenditure",
     "train-fare-consumption-expenditure",
     "train-student-pass-consumption-expenditure",
     "transport-communication-expenditure-total",
+    "transportation-group-consumption-expenditure",
     "travel-bag-consumption-expenditure",
     "tsuyu-tare-consumption-expenditure",
     "tuition-consumption-expenditure",
     "tuna-consumption-expenditure",
     "umbrella-consumption-expenditure",
+    "underwear-group-consumption-expenditure",
     "utilities-expenditure-total",
     "vacuum-cleaner-consumption-expenditure",
     "vegetable-seaweed-tsukudani-consumption-expenditure",
+    "vegetables-seaweed-group-consumption-expenditure",
     "vet-fee-consumption-expenditure",
     "video-recorder-consumption-expenditure",
     "vinegar-consumption-expenditure",
@@ -6419,6 +6515,7 @@
     "water-sewer-consumption-expenditure",
     "watermelon-consumption-expenditure",
     "wedding-expense-consumption-expenditure",
+    "western-clothing-group-consumption-expenditure",
     "western-food-dining-consumption-expenditure",
     "wheat-flour-consumption-expenditure",
     "whisky-consumption-expenditure",
@@ -6431,10 +6528,12 @@
     "womens-foundation-garment-consumption-expenditure",
     "womens-jacket-consumption-expenditure",
     "womens-pants-consumption-expenditure",
+    "womens-shirts-sweaters-group-consumption-expenditure",
     "womens-shoes-consumption-expenditure",
     "womens-sleepwear-consumption-expenditure",
     "womens-socks-consumption-expenditure",
     "womens-sweater-consumption-expenditure",
+    "womens-underwear-group-consumption-expenditure",
     "wristwatch-consumption-expenditure",
     "writing-drawing-tools-consumption-expenditure",
     "yakiniku-consumption-expenditure",
@@ -6511,6 +6610,7 @@
     "bonito-consumption-quantity",
     "boys-school-uniform-consumption-quantity",
     "bread-consumption-quantity",
+    "bread-group-consumption-quantity",
     "broccoli-consumption-quantity",
     "burdock-consumption-quantity",
     "butter-consumption-quantity",
@@ -6521,6 +6621,7 @@
     "chest-consumption-quantity",
     "chicken-consumption-quantity",
     "childrens-clothes-consumption-quantity",
+    "childrens-shirts-sweaters-group-consumption-quantity",
     "childrens-shoes-consumption-quantity",
     "childrens-socks-consumption-quantity",
     "chinese-cabbage-consumption-quantity",
@@ -6544,14 +6645,20 @@
     "dried-shiitake-consumption-quantity",
     "dried-udon-soba-consumption-quantity",
     "eggplant-consumption-quantity",
+    "eggs-group-consumption-quantity",
     "electricity-consumption-quantity",
     "enoki-consumption-quantity",
     "flounder-consumption-quantity",
+    "fresh-fish-group-consumption-quantity",
     "fresh-fruit-consumption-quantity",
+    "fresh-fruits-group-consumption-quantity",
+    "fresh-meat-group-consumption-quantity",
     "fresh-seafood-consumption-quantity",
+    "fresh-seafood-group-consumption-quantity",
     "fresh-shiitake-consumption-quantity",
     "fresh-udon-soba-consumption-quantity",
     "fresh-vegetables-consumption-quantity",
+    "fresh-vegetables-group-consumption-quantity",
     "freshwater-clam-consumption-quantity",
     "futon-consumption-quantity",
     "game-console-consumption-quantity",
@@ -6579,6 +6686,7 @@
     "kiwi-consumption-quantity",
     "konbu-consumption-quantity",
     "konbu-tsukudani-consumption-quantity",
+    "leafy-vegetables-group-consumption-quantity",
     "leek-consumption-quantity",
     "lettuce-consumption-quantity",
     "lotus-root-consumption-quantity",
@@ -6598,10 +6706,13 @@
     "milk-consumption-quantity",
     "miso-consumption-quantity",
     "mochi-consumption-quantity",
+    "noodles-group-consumption-quantity",
     "octopus-consumption-quantity",
+    "oils-fats-group-consumption-quantity",
     "onion-consumption-quantity",
     "orange-consumption-quantity",
     "other-bread-consumption-quantity",
+    "other-cereals-group-consumption-quantity",
     "other-citrus-consumption-quantity",
     "other-fresh-fish-consumption-quantity",
     "other-fresh-fruit-consumption-quantity",
@@ -6616,6 +6727,7 @@
     "other-shellfish-consumption-quantity",
     "other-tea-leaves-consumption-quantity",
     "other-vegetables-consumption-quantity",
+    "other-vegetables-group-consumption-quantity",
     "other-womens-shirt-consumption-quantity",
     "oyster-consumption-quantity",
     "pasta-consumption-quantity",
@@ -6635,8 +6747,10 @@
     "pumpkin-consumption-quantity",
     "refrigerator-consumption-quantity",
     "rice-consumption-quantity",
+    "root-vegetables-group-consumption-quantity",
     "sake-consumption-quantity",
     "salmon-consumption-quantity",
+    "salted-dried-seafood-group-consumption-quantity",
     "salted-salmon-consumption-quantity",
     "sardine-consumption-quantity",
     "sashimi-platter-consumption-quantity",
@@ -6648,6 +6762,7 @@
     "sea-bream-consumption-quantity",
     "sheets-consumption-quantity",
     "shellfish-consumption-quantity",
+    "shellfish-group-consumption-quantity",
     "shimeji-consumption-quantity",
     "shochu-consumption-quantity",
     "shrimp-consumption-quantity",
@@ -7141,8 +7256,8 @@
    "parentCode": null,
    "unit": "人",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "000400000",
@@ -7154,8 +7269,8 @@
    "parentCode": "000300000",
    "unit": "人",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "000500000",
@@ -7167,8 +7282,8 @@
    "parentCode": "000300000",
    "unit": "人",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "000600000",
@@ -7180,8 +7295,8 @@
    "parentCode": "000500000",
    "unit": "人",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "000700000",
@@ -7193,8 +7308,8 @@
    "parentCode": null,
    "unit": "人",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "000800000",
@@ -7206,8 +7321,8 @@
    "parentCode": null,
    "unit": "歳",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "000900000",
@@ -7237,8 +7352,8 @@
    "parentCode": null,
    "unit": "％",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない"
   },
   {
    "code": "001100000",
@@ -7285,8 +7400,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "cereals-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -7370,8 +7490,13 @@
    "level": "3",
    "parentCode": "010100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "noodles-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -7509,8 +7634,13 @@
    "level": "3",
    "parentCode": "010100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-cereals-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -7594,8 +7724,13 @@
    "level": "3",
    "parentCode": "010200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-seafood-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -7607,8 +7742,13 @@
    "level": "4",
    "parentCode": "010210000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-fish-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -7908,8 +8048,13 @@
    "level": "4",
    "parentCode": "010210000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "shellfish-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8011,8 +8156,13 @@
    "level": "3",
    "parentCode": "010200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "salted-dried-seafood-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8114,8 +8264,13 @@
    "level": "3",
    "parentCode": "010200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fish-paste-products-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8199,8 +8354,13 @@
    "level": "3",
    "parentCode": "010200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-processed-seafood-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8302,8 +8462,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "meat-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8315,8 +8480,13 @@
    "level": "3",
    "parentCode": "010300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-meat-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8418,8 +8588,13 @@
    "level": "3",
    "parentCode": "010300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "processed-meat-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8503,8 +8678,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "dairy-eggs-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8516,8 +8696,13 @@
    "level": "3",
    "parentCode": "010400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "milk-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8529,8 +8714,13 @@
    "level": "3",
    "parentCode": "010400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "dairy-products-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8632,8 +8822,13 @@
    "level": "3",
    "parentCode": "010400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "eggs-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8645,8 +8840,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "vegetables-seaweed-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8676,8 +8876,13 @@
    "level": "4",
    "parentCode": "010510000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "leafy-vegetables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -8833,8 +9038,13 @@
    "level": "4",
    "parentCode": "010510000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "root-vegetables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9026,8 +9236,13 @@
    "level": "4",
    "parentCode": "010510000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-vegetables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9237,8 +9452,13 @@
    "level": "3",
    "parentCode": "010500000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "dried-foods-seaweed-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9358,8 +9578,13 @@
    "level": "3",
    "parentCode": "010500000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "soy-products-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9443,8 +9668,13 @@
    "level": "3",
    "parentCode": "010500000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-processed-vegetables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9600,8 +9830,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fruits-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9613,8 +9848,13 @@
    "level": "3",
    "parentCode": "010600000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-fruits-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9878,8 +10118,13 @@
    "level": "3",
    "parentCode": "010600000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "processed-fruits-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9891,8 +10136,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "oils-seasonings-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9904,8 +10154,13 @@
    "level": "3",
    "parentCode": "010700000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "oils-fats-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -9953,8 +10208,13 @@
    "level": "3",
    "parentCode": "010700000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "seasonings-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -10560,8 +10820,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "prepared-foods-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -10573,8 +10838,13 @@
    "level": "3",
    "parentCode": "010900000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "staple-prepared-foods-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -10676,8 +10946,13 @@
    "level": "3",
    "parentCode": "010900000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-prepared-foods-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -10905,8 +11180,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "beverages-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -10918,8 +11198,13 @@
    "level": "3",
    "parentCode": "011000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "tea-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11003,8 +11288,13 @@
    "level": "3",
    "parentCode": "011000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "coffee-cocoa-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11070,8 +11360,13 @@
    "level": "3",
    "parentCode": "011000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-beverages-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11209,8 +11504,13 @@
    "level": "2",
    "parentCode": "010000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "alcoholic-beverages-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11384,8 +11684,13 @@
    "level": "3",
    "parentCode": "011200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "general-dining-out-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11397,8 +11702,13 @@
    "level": "4",
    "parentCode": "011210000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "meal-charges-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11662,8 +11972,13 @@
    "level": "2",
    "parentCode": "020000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "rent-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11765,8 +12080,13 @@
    "level": "2",
    "parentCode": "020000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "housing-repairs-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11778,8 +12098,13 @@
    "level": "3",
    "parentCode": "020200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "housing-materials-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -11827,8 +12152,13 @@
    "level": "3",
    "parentCode": "020200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "housing-repair-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12038,8 +12368,13 @@
    "level": "2",
    "parentCode": "030000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-fuel-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12123,8 +12458,13 @@
    "level": "2",
    "parentCode": "040000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "household-durables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12136,8 +12476,13 @@
    "level": "3",
    "parentCode": "040100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "housework-durables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12275,8 +12620,13 @@
    "level": "3",
    "parentCode": "040100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "heating-cooling-appliances-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12342,8 +12692,13 @@
    "level": "3",
    "parentCode": "040100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "general-furniture-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12427,8 +12782,13 @@
    "level": "2",
    "parentCode": "040000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "interior-furnishings-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12530,8 +12890,13 @@
    "level": "2",
    "parentCode": "040000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "bedding-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12633,8 +12998,13 @@
    "level": "2",
    "parentCode": "040000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "household-utensils-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12772,8 +13142,13 @@
    "level": "2",
    "parentCode": "040000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "household-consumables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12785,8 +13160,13 @@
    "level": "4",
    "parentCode": "040500000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "tissue-toilet-paper-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12834,8 +13214,13 @@
    "level": "4",
    "parentCode": "040500000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "detergents-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12883,8 +13268,13 @@
    "level": "4",
    "parentCode": "040500000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-household-consumables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -12986,8 +13376,13 @@
    "level": "2",
    "parentCode": "040000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "domestic-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13071,8 +13466,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "japanese-clothing-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13084,8 +13484,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "western-clothing-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13421,8 +13826,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "shirts-sweaters-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13434,8 +13844,13 @@
    "level": "3",
    "parentCode": "050300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "mens-shirts-sweaters-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13501,8 +13916,13 @@
    "level": "3",
    "parentCode": "050300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "womens-shirts-sweaters-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13568,8 +13988,13 @@
    "level": "3",
    "parentCode": "050300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "childrens-shirts-sweaters-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13581,8 +14006,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "underwear-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13594,8 +14024,13 @@
    "level": "3",
    "parentCode": "050400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "mens-underwear-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13643,8 +14078,13 @@
    "level": "3",
    "parentCode": "050400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "womens-underwear-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13710,8 +14150,13 @@
    "level": "3",
    "parentCode": "050400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "childrens-underwear-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13759,8 +14204,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fabrics-yarn-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13808,8 +14258,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-clothing-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -13929,9 +14384,14 @@
    "level": "5",
    "parentCode": "050600000",
    "unit": "円",
-   "metrics": [],
-   "status": "planned",
-   "reason": "2025年改定でネクタイ・ストッキングなどを含む範囲に広がった「659 他の被服のその他」。旧範囲の指標 other-clothing-misc-consumption-expenditure は2024年までで接続しないので、新しい範囲の2025年以降を別指標にする候補"
+   "metrics": [
+    {
+     "key": "other-clothing-misc-2025-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
+   "reason": null
   },
   {
    "code": "050700000",
@@ -13942,8 +14402,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "footwear-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14063,8 +14528,13 @@
    "level": "2",
    "parentCode": "050000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "clothing-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14148,8 +14618,13 @@
    "level": "2",
    "parentCode": "060000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "medicines-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14269,8 +14744,13 @@
    "level": "2",
    "parentCode": "060000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "health-supplements-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14282,8 +14762,13 @@
    "level": "2",
    "parentCode": "060000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "medical-supplies-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14313,8 +14798,13 @@
    "level": "5",
    "parentCode": "060300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "face-mask-item-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14398,8 +14888,13 @@
    "level": "2",
    "parentCode": "060000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "medical-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14573,8 +15068,13 @@
    "level": "2",
    "parentCode": "070000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "transportation-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14766,8 +15266,13 @@
    "level": "2",
    "parentCode": "070000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "automobile-related-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14779,8 +15284,13 @@
    "level": "3",
    "parentCode": "070200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "automobile-purchases-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14828,8 +15338,13 @@
    "level": "3",
    "parentCode": "070200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "bicycle-purchases-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -14841,8 +15356,13 @@
    "level": "3",
    "parentCode": "070200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "automobile-maintenance-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15070,8 +15590,13 @@
    "level": "2",
    "parentCode": "070000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "communication-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15469,8 +15994,13 @@
    "level": "2",
    "parentCode": "080000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "supplementary-education-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15554,8 +16084,13 @@
    "level": "2",
    "parentCode": "090000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "recreational-durables-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15711,8 +16246,13 @@
    "level": "2",
    "parentCode": "090000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "recreational-goods-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15724,8 +16264,13 @@
    "level": "4",
    "parentCode": "090200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "stationery-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15827,8 +16372,13 @@
    "level": "4",
    "parentCode": "090200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "sports-goods-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15894,8 +16444,13 @@
    "level": "4",
    "parentCode": "090200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "toys-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -15979,8 +16534,13 @@
    "level": "4",
    "parentCode": "090200000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-recreational-goods-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16208,8 +16768,13 @@
    "level": "2",
    "parentCode": "090000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "books-printed-matter-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16293,8 +16858,13 @@
    "level": "2",
    "parentCode": "090000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "recreational-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16324,8 +16894,13 @@
    "level": "3",
    "parentCode": "090400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "package-tours-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16373,8 +16948,13 @@
    "level": "3",
    "parentCode": "090400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "lesson-fees-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16530,8 +17110,13 @@
    "level": "3",
    "parentCode": "090400000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-recreational-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16543,8 +17128,13 @@
    "level": "4",
    "parentCode": "090440000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "broadcasting-fees-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16622,8 +17212,13 @@
    "level": "4",
    "parentCode": "090440000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "admission-game-fees-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16887,8 +17482,13 @@
    "level": "2",
    "parentCode": "100000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "miscellaneous-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -16900,8 +17500,13 @@
    "level": "3",
    "parentCode": "100100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "beauty-services-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17003,8 +17608,13 @@
    "level": "3",
    "parentCode": "100100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "beauty-products-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17070,8 +17680,13 @@
    "level": "4",
    "parentCode": "100120000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "soap-cosmetics-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17299,8 +17914,13 @@
    "level": "3",
    "parentCode": "100100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "personal-effects-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17330,8 +17950,13 @@
    "level": "4",
    "parentCode": "100130000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "bags-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17505,8 +18130,13 @@
    "level": "3",
    "parentCode": "100100000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-miscellaneous-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17716,8 +18346,13 @@
    "level": "2",
    "parentCode": "100000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "pocket-money-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17765,8 +18400,13 @@
    "level": "2",
    "parentCode": "100000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "social-expenses-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17778,8 +18418,13 @@
    "level": "3",
    "parentCode": "100300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "gift-money-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17791,8 +18436,13 @@
    "level": "3",
    "parentCode": "100300000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-social-expenses-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -17858,8 +18508,13 @@
    "level": "2",
    "parentCode": "100000000",
    "unit": "円",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "remittances-group-consumption-expenditure",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -18679,8 +19334,13 @@
    "level": "3",
    "parentCode": "010100000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "bread-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -18736,8 +19396,13 @@
    "level": "3",
    "parentCode": "010100000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "noodles-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -18875,8 +19540,13 @@
    "level": "3",
    "parentCode": "010100000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-cereals-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -18942,8 +19612,13 @@
    "level": "3",
    "parentCode": "010200000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-seafood-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -18955,8 +19630,13 @@
    "level": "4",
    "parentCode": "010210000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-fish-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -19320,8 +20000,13 @@
    "level": "4",
    "parentCode": "010210000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "shellfish-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -19463,8 +20148,13 @@
    "level": "3",
    "parentCode": "010200000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "salted-dried-seafood-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -19584,8 +20274,13 @@
    "level": "3",
    "parentCode": "010300000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-meat-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -19795,8 +20490,13 @@
    "level": "3",
    "parentCode": "010400000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "eggs-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -19808,8 +20508,13 @@
    "level": "3",
    "parentCode": "010500000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-vegetables-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -19821,8 +20526,13 @@
    "level": "4",
    "parentCode": "010510000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "leafy-vegetables-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -20010,8 +20720,13 @@
    "level": "4",
    "parentCode": "010510000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "root-vegetables-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -20243,8 +20958,13 @@
    "level": "4",
    "parentCode": "010510000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "other-vegetables-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -20642,8 +21362,13 @@
    "level": "3",
    "parentCode": "010600000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "fresh-fruits-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -20963,8 +21688,13 @@
    "level": "3",
    "parentCode": "010700000",
    "unit": "1g",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "oils-fats-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -22128,8 +22858,13 @@
    "level": "3",
    "parentCode": "050300000",
    "unit": "1枚",
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    {
+     "key": "childrens-shirts-sweaters-group-consumption-quantity",
+     "via": "single"
+    }
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
