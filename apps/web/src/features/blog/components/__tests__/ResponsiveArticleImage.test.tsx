@@ -55,9 +55,9 @@ describe('ResponsiveArticleImage', () => {
   });
 
   it('対象外の図は切り替えない', () => {
-    const { container } = render(<ResponsiveArticleImage src="data/golf-scatter.svg" alt="散布図" />);
+    const { container } = render(<ResponsiveArticleImage src="data/golf-flow.svg" alt="流れ図" />);
 
     expect(mobileSource(container)).toBeNull();
-    expect(screen.getAllByAltText('散布図')).toHaveLength(1);
+    expect(screen.getAllByAltText('流れ図')).toHaveLength(1);
   });
 });

@@ -1,8 +1,9 @@
 {
-  "hash": "41cd644b75100e8cfee952d237423fe179c64b3b0d4cc381c14769487abdd589",
-  "audited_at": "2026-11-03T21:47:57",
+  "hash": "893d8271f96b0ddeee2dc40a9eb309104ee242e4721f7f48ffdff37feb81a0c0",
+  "audited_at": "2026-11-04T02:37:49",
   "files": [
-    ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/scripts/ads/lib/ad-layout-ledger.ts"
+    ".claude/rules/blog-svg-chart-standards.md",
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/scripts/blog/lib/type-chart-input.ts"
   ]
 }

@@ -3,6 +3,8 @@ import { test } from 'node:test';
 import {
   imageTemplateOf,
   lintDarkPair,
+  lintScatterParity,
+  lintScatterQuality,
   lintSvgContent,
   lintSvgSize,
   lintTileGridQuality,
@@ -39,4 +41,16 @@ test('a light type image needs its dark pair of the same type', () => {
   // Old charts and the dark file itself are not asked for a pair.
   assert.deepEqual(lintDarkPair('sales-map.svg', '<svg viewBox="0 0 720 720"></svg>', null).errors, []);
   assert.deepEqual(lintDarkPair('sales-map-dark.svg', typeSvg('tile-map', 'dark'), null).errors, []);
+});
+
+test('a scatter type image is held to 1080×1350 and its points are counted by data-pref', () => {
+  const json = { points: Array.from({ length: 47 }, (_, i) => ({ label: `県${i + 1}`, x: i, y: i })) };
+  const dots = (n) => Array.from({ length: n }, (_, i) => `<circle data-pref="${String(i + 1).padStart(2, '0')}000" r="10"/>`).join('');
+  const svg = typeSvg('scatter', 'light').replace('</svg>', `${dots(47)}</svg>`);
+  assert.deepEqual(lintSvgSize('a--b-scatter.svg', svg).errors, []);
+  // The 720×720 svg-builder invariants do not apply to the type image.
+  assert.deepEqual(lintScatterQuality('a--b-scatter.svg', svg, json).errors, []);
+  assert.deepEqual(lintScatterParity('a--b-scatter.svg', svg, json).errors, []);
+  const missing = typeSvg('scatter', 'light').replace('</svg>', `${dots(46)}</svg>`);
+  assert.match(lintScatterParity('a--b-scatter.svg', missing, json).errors[0], /JSON=47 件 \/ SVG=46 件/);
 });

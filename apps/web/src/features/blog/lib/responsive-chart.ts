@@ -7,6 +7,9 @@ const RESPONSIVE_STACKED_SUFFIX = /(?:-stacked|-breakdown|-composition)\.svg$/i;
 /** Maps drawn as the shared tile-map type (svg-builder alias names of a 47-prefecture map). */
 const TYPE_MAP_SUFFIX = /(?:-map|-tile-grid|-tilemap)\.svg$/i;
 
+/** 47-prefecture scatters drawn as the shared scatter type (from 2026-11-04). */
+const TYPE_SCATTER_SUFFIX = /-scatter\.svg$/i;
+
 const SPECIALIZED_VARIANT = /-(?:mobile|ig|dark)\.svg$/i;
 
 function splitPath(src: string): { path: string; suffix: string } {
@@ -34,13 +37,13 @@ export function resolveMobileChartSource(src: string): string | null {
 }
 
 /**
- * ランキングと地図は共通の型の画像で、暗い表示用の `-dark.svg` を併せて出す (generate-article-charts.ts)。
+ * ランキング・地図・散布図は共通の型の画像で、暗い表示用の `-dark.svg` を併せて出す (generate-article-charts.ts)。
  * サイトの暗い表示は class 方式で `<img>` の中の SVG からは見えないので、2 枚を置いて CSS で切り替える。
  * `-dark.svg` が無い図 (型にできなかった図・未再生成の記事) は呼び元が読み込み失敗で明るい版に戻す。
  */
 export function resolveDarkChartSource(src: string): string | null {
   const { path, suffix } = splitPath(src);
   if (SPECIALIZED_VARIANT.test(path)) return null;
-  if (!RESPONSIVE_RANKING_SUFFIX.test(path) && !TYPE_MAP_SUFFIX.test(path)) return null;
+  if (!RESPONSIVE_RANKING_SUFFIX.test(path) && !TYPE_MAP_SUFFIX.test(path) && !TYPE_SCATTER_SUFFIX.test(path)) return null;
   return `${path.replace(/\.svg$/i, "-dark.svg")}${suffix}`;
 }

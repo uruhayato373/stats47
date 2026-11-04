@@ -64,6 +64,7 @@ const THIRD: Readonly<Record<string, KdpCategoryPath>> = {
   "K-S1-10": { top: "科学・テクノロジー", sub: "地球科学・エコロジー", place: "環境問題" },
   "K-S1-11": { top: "ビジネス・経済", sub: "産業研究", place: "公園・レクリエーション管理" },
   "K-S1-12": { top: "コンピュータ・IT", sub: "一般・入門書", place: "白書・用語辞典・参考書" },
+  "K-S1-13": { top: "ビジネス・経済", sub: "経済学", place: "都市・地域" },
 
   // ── S2 テーマ別データブック ──
   "K-S2-01": { top: "ビジネス・経済", sub: "経済学", place: "都市・地域" },

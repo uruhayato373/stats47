@@ -8359,7 +8359,7 @@
       "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-population-household-pack",
       "body": {
@@ -8382,7 +8382,7 @@
       "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-income-wage-hiring-pack",
       "body": {
@@ -8405,7 +8405,7 @@
       "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-tourism-lodging-pack",
       "body": {
@@ -8428,7 +8428,7 @@
       "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-municipal-finance-pack",
       "body": {
@@ -8451,7 +8451,7 @@
       "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-healthcare-nursing-pack",
       "body": {
@@ -8474,7 +8474,7 @@
       "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-education-childcare-pack",
       "body": {
@@ -8497,7 +8497,7 @@
       "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-migration-living-pack",
       "body": {
@@ -8520,7 +8520,7 @@
       "title": "出店候補の県を比べる 商業・小売69指標データ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-retail-trade-area-pack",
       "body": {
@@ -8543,7 +8543,7 @@
       "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-industry-economy-pack",
       "body": {
@@ -8566,7 +8566,7 @@
       "title": "防災・交通・インフラを県別に比べる 230指標データ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-disaster-infrastructure-pack",
       "body": {
@@ -8589,7 +8589,7 @@
       "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-map-chart-assets-pack",
       "body": {
@@ -8612,7 +8612,7 @@
       "title": "47都道府県 2,073指標の統計データ総合集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 4980,
+      "priceJpy": 2980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-all-in-one-pack",
       "body": {
@@ -8656,7 +8656,7 @@
       "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
       "magazine": null,
       "isPaid": true,
-      "priceJpy": 1980,
+      "priceJpy": 980,
       "status": "published",
       "r2Path": "note/product-sales/prefecture-household-consumption-pack",
       "body": {
@@ -11391,6 +11391,28 @@
       ],
       "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
       "publishedAt": "2026-10-24"
+    },
+    {
+      "key": "muni-manufacturing-shipment-data",
+      "vertical": "product-sales",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "magazine": null,
+      "isPaid": true,
+      "priceJpy": 980,
+      "status": "published",
+      "r2Path": "note/product-sales/muni-manufacturing-shipment-data",
+      "body": {
+        "store": "r2-private",
+        "manifest": {
+          "sha256": "9f5cb82b56e4427914f53b420f064c506d1d7869b58079cd7f795a743c21084c",
+          "files": 8,
+          "bytes": 478063,
+          "savedAt": "2026-11-04T02:59:01.323Z"
+        },
+        "verifiedAt": "2026-11-04T02:59:01.323Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n5d86476e9c73",
+      "publishedAt": "2026-11-04"
     }
   ]
 }

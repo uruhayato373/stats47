@@ -103,6 +103,15 @@ export type ChapterSource =
   | "fresh"; // 書き下ろし (freshText 必須・30% ルールの実体)
 
 /** 1 章の定義。 */
+/** KDP セレクト専用の本の設定。本文はサイト・note・repo に出さない (KDP-ROYALTY-RATE-CHECK-01) */
+export interface KdpExclusive {
+  /** Amazon の商品ページの内容紹介 (読者向けの文章) */
+  readonly description: string;
+  /** 生成 AI の申告 (共通の申告と違う本だけ。事実を書く) */
+  readonly aiText: string;
+  readonly aiTextTools: readonly string[];
+}
+
 export interface BookChapter {
   /** 章タイトル (目次に出る)。 */
   readonly title: string;
@@ -192,6 +201,7 @@ export interface KindleBook {
   readonly chapters: readonly BookChapter[];
   /** ブログ章の末尾に全 47 都道府県の値の表を付けるか (図と同じデータから作る。full-tables.ts。KINDLE-QUALITY-LOOP-01) */
   readonly fullTables?: boolean;
+  readonly kdpExclusive?: KdpExclusive;
   /** 販売価格 (円)。KDP 電子は ¥250-1,250 が印税 70% 帯。 */
   readonly priceYen: 0 | 500 | 800 | 1000;
   /** 書き下ろし部分の宣言 (30% ルールの根拠・validator が非空を要求)。 */

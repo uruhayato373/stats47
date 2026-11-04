@@ -34,6 +34,13 @@ describe("AreaTileMap", () => {
     ).toHaveAttribute("href", "/areas/13000");
   });
 
+  it("1 マスの県の 3 文字名はスマホの幅で 2 文字に縮める (マスから切れない)", () => {
+    renderMap();
+    const link = screen.getByRole("link", { name: "神奈川県の統計を見る" });
+    expect(link.querySelector(".\\@sm\\:hidden")).toHaveTextContent("神奈");
+    expect(link).toHaveTextContent("神奈川");
+  });
+
   it("凡例に地方名を表示する (色のみに依存しない)", () => {
     renderMap();
     expect(screen.getByLabelText("地方区分の凡例")).toBeInTheDocument();

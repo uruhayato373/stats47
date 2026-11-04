@@ -10,9 +10,9 @@
       "id": "data-pack-theme",
       "name": "テーマ別データ集",
       "stance": "price-test",
-      "products": 12,
-      "priceMinYen": 1980,
-      "priceMaxYen": 1980,
+      "products": 13,
+      "priceMinYen": 980,
+      "priceMaxYen": 980,
       "pageViews": 93,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
@@ -23,8 +23,8 @@
       "name": "総合集",
       "stance": "price-test",
       "products": 1,
-      "priceMinYen": 4980,
-      "priceMaxYen": 4980,
+      "priceMinYen": 2980,
+      "priceMaxYen": 2980,
       "pageViews": 14,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
@@ -70,7 +70,7 @@
       "id": "kdp-live",
       "name": "Kindle 販売中",
       "stance": "keep",
-      "products": 12,
+      "products": 13,
       "priceMinYen": 500,
       "priceMaxYen": 800,
       "pageViews": null,
@@ -1901,15 +1901,15 @@
       "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 4000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:52:45.277Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:18:37.514Z"
       }
     },
     {
@@ -1918,15 +1918,15 @@
       "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:52:53.762Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:18:45.800Z"
       }
     },
     {
@@ -1935,15 +1935,15 @@
       "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 6,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:02.088Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:18:54.590Z"
       }
     },
     {
@@ -1952,15 +1952,15 @@
       "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 13,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 6000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:10.622Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:03.517Z"
       }
     },
     {
@@ -1969,15 +1969,15 @@
       "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 10,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:18.945Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:11.763Z"
       }
     },
     {
@@ -1986,15 +1986,15 @@
       "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:27.397Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:20.159Z"
       }
     },
     {
@@ -2003,15 +2003,15 @@
       "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 18,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 4500,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:35.806Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:28.958Z"
       }
     },
     {
@@ -2020,15 +2020,15 @@
       "title": "出店候補の県を比べる 商業・小売69指標データ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 6000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:44.215Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:37.323Z"
       }
     },
     {
@@ -2037,15 +2037,15 @@
       "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 10,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:53:53.173Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:45.606Z"
       }
     },
     {
@@ -2054,15 +2054,15 @@
       "title": "防災・交通・インフラを県別に比べる 230指標データ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 6,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:54:02.136Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:19:53.924Z"
       }
     },
     {
@@ -2071,15 +2071,15 @@
       "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 4000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:52:23.929Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:20:02.206Z"
       }
     },
     {
@@ -2088,15 +2088,15 @@
       "title": "47都道府県 2,073指標の統計データ総合集",
       "line": "data-pack-all",
       "status": "published",
-      "priceYen": 4980,
-      "netPerSaleYen": 4257,
+      "priceYen": 2980,
+      "netPerSaleYen": 2547,
       "pageViews": 14,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 9800,
-        "toYen": 4980,
-        "appliedAt": "2026-11-03T22:54:10.555Z"
+        "fromYen": 4980,
+        "toYen": 2980,
+        "appliedAt": "2026-11-04T02:20:10.423Z"
       }
     },
     {
@@ -2105,16 +2105,29 @@
       "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
       "line": "data-pack-theme",
       "status": "published",
-      "priceYen": 1980,
-      "netPerSaleYen": 1692,
+      "priceYen": 980,
+      "netPerSaleYen": 837,
       "pageViews": 9,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
-        "fromYen": 5000,
-        "toYen": 1980,
-        "appliedAt": "2026-11-03T22:54:19.128Z"
+        "fromYen": 1980,
+        "toYen": 980,
+        "appliedAt": "2026-11-04T02:20:18.702Z"
       }
+    },
+    {
+      "channel": "note",
+      "key": "muni-manufacturing-shipment-data",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "line": "data-pack-theme",
+      "status": "published",
+      "priceYen": 980,
+      "netPerSaleYen": 837,
+      "pageViews": null,
+      "salesYen": null,
+      "unitsSold": null,
+      "lastPriceChange": null
     },
     {
       "channel": "kdp",
@@ -2265,6 +2278,19 @@
       "title": "デジタル生活の地図 — 通信・PC・テレワーク",
       "line": "kdp-live",
       "status": "live",
+      "priceYen": 500,
+      "netPerSaleYen": null,
+      "pageViews": null,
+      "salesYen": 0,
+      "unitsSold": 0,
+      "lastPriceChange": null
+    },
+    {
+      "channel": "kdp",
+      "key": "K-S1-13",
+      "title": "住む県の選び方 — 統計で比べる5つの条件",
+      "line": "kdp-live",
+      "status": "submitted",
       "priceYen": 500,
       "netPerSaleYen": null,
       "pageViews": null,

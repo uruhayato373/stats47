@@ -137,7 +137,11 @@ function siteLink(url: string, bookId: string, content: "sources" | "latest"): s
   return `<a href="${escapeAttr(kindleInboundUrl(url, bookId, content))}">${escapeText(url)}</a>`;
 }
 
-function sourcesPage(bookId: string, sources: readonly { slug: string; title: string; published: boolean }[]): string {
+function sourcesPage(
+  bookId: string,
+  sources: readonly { slug: string; title: string; published: boolean }[],
+  sourcesLead = "ランキング章の原典メタデータと観測値の参照先は「指標別の出典・対象年」に収録しています。",
+): string {
   // 未公開の元記事は URL を出さない (410 を返す。2026-09-19 K-S1-11 N30)。
   const items = sources
     .map((s) =>
@@ -148,7 +152,7 @@ function sourcesPage(bookId: string, sources: readonly { slug: string; title: st
     .join("\n");
   const publishedCount = sources.filter((s) => s.published).length;
   const lead = !items
-    ? "ランキング章の原典メタデータと観測値の参照先は「指標別の出典・対象年」に収録しています。"
+    ? sourcesLead
     : publishedCount === sources.length
       ? "各章の元記事は下記のページで公開しています。"
       : `各章の元記事のうち${publishedCount}本は下記のページで公開しています。`;
@@ -254,7 +258,8 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   });
 
   // 図表の見方 (fresh・K-S1-01 は intro 内に同等の記述があるため除く)。本文を集めた後に、全県表・相関の有無で内容を決める。
-  const wantsFigureGuide = book.id !== "K-S1-01";
+  // KDP 専用の本は図を載せないので、図の見方の定型文を入れると事実と合わない
+  const wantsFigureGuide = book.id !== "K-S1-01" && !book.kdpExclusive;
 
   let idx = 0;
   // 本編 (blog 章) は「第1章 …」と番号を振る。書き下ろしは「はじめに」「第0章 …」「終章」を catalog の題のまま使う
@@ -420,7 +425,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     id: "sources",
     fileName: "chap-999.xhtml",
     title: "出典と免責",
-    bodyXhtml: sourcesPage(book.id, sources),
+    bodyXhtml: sourcesPage(book.id, sources, book.kdpExclusive ? "指標と年の一覧は、巻末の「出典と方法」に載せています。" : undefined),
   });
 
   let coverPng: Buffer | undefined;

@@ -91,7 +91,7 @@ export const KDP_PORTFOLIO_POLICY = {
  * 4週実測後に1冊ずつ試す3パイロットの計15冊。S2/S3/S4の旧設計20冊は未承認。
  */
 export const KDP_PUBLICATION_PLAN = {
-  registeredCatalogCount: 32,
+  registeredCatalogCount: 33,
   approvedS1Count: 12,
   evidenceGatedPilotCount: 3,
   activePublicationTargetCount: 15,

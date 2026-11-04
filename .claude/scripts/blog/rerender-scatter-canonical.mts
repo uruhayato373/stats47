@@ -28,6 +28,7 @@ import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { stripProvenance, withProvenance } from '../lib/svg-provenance.mjs';
 import {
+  imageTemplateOf,
   lintScatterData,
   lintScatterParity,
   lintScatterQuality,
@@ -895,6 +896,14 @@ async function main() {
         oldSvg = await ft(`${R2}/app/blog/${t.slug}/data/${t.base}.svg`);
       } catch {}
       rec.oldSize = oldSvg ? viewBoxOf(oldSvg) : 'none';
+      // 型の画像 (4:5) で公開済みの散布図は generate-article-charts の担当。svg-builder の図に戻さず、
+      // 公開版の点の数が JSON と合うかだけを見る
+      if (imageTemplateOf(oldSvg)) {
+        const parity = lintScatterParity(`${t.base}.svg`, oldSvg, json);
+        rec.result = parity.errors.length ? 'lint-fail' : 'image-type';
+        if (parity.errors.length) rec.err = parity.errors.join(' | ');
+        return rec;
+      }
       const newSvg = renderScatter(json);
       if (!newSvg) {
         rec.result = 'empty';

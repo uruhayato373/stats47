@@ -4,9 +4,11 @@
  * The types need all 47 prefectures with finite values. Data that cannot give that (ports, partial
  * surveys, duplicates) returns a reason instead, and the caller keeps the svg-builder chart.
  */
+import { prefectureShortName } from '../../../../packages/area/src/utils/prefecture-short-name';
 import { DEFAULT_SEQUENTIAL_SCHEME, colorSchemeTypeOf, normalizeColorScheme } from '../../../../packages/types/src/color-scheme';
 import { assertMetricPresentation, type MetricPresentation } from '../../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
+import type { ScatterChart } from '../../../../apps/admin/lib/template-relationship-scatter';
 
 export interface ArticleMetric {
   title?: string;
@@ -87,5 +89,107 @@ export function rankingChartFromArticleData(
     // metric's decimal places apply when the article's unit is the metric's own unit.
     ...chartValueLabels(text(data.unit), rows.map((r) => r.value),
       text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined),
+  };
+}
+
+type ScatterMetric = ArticleMetric & { source?: { displayName?: string } };
+type ValuesRow = { areaCode: string; yearCode: string; yearName?: string; value: number | null };
+
+const decimalsOf = (v: number) => (String(v).split('.')[1] ?? '').length;
+const roundTo = (v: number, d: number) => Number(v.toFixed(d));
+
+/**
+ * The year whose 47 observed values give exactly the article's points (each rounded as the point is
+ * written). The article data carries no year, so this both finds it and proves the points came from
+ * the metric. Null when no year matches (converted or hand-edited values keep the earlier chart).
+ */
+export function matchScatterYear(values: number[], codes: string[], rows: ValuesRow[]): string | null {
+  const byYear = new Map<string, Map<string, number>>();
+  const names = new Map<string, string>();
+  for (const r of rows) {
+    if (r.value === null || !Number.isFinite(r.value)) continue;
+    if (!byYear.has(r.yearCode)) byYear.set(r.yearCode, new Map());
+    byYear.get(r.yearCode)!.set(r.areaCode, r.value);
+    names.set(r.yearCode, r.yearName || `${r.yearCode}年`);
+  }
+  const hits = [...byYear].filter(([, area]) => codes.every((code, i) => {
+    const v = area.get(code);
+    return v !== undefined && roundTo(v, decimalsOf(values[i])) === values[i];
+  }));
+  // Two years with identical values cannot tell which one the article used.
+  return hits.length === 1 ? names.get(hits[0][0])! : null;
+}
+
+/**
+ * Prefectures the text around a chart names, in reading order: the H2 section holding `data/<chartBase>.svg`.
+ * Longest name first and consumed left to right, so 東京都 never also reads as 京都.
+ */
+export function prefecturesNamedNear(markdown: string, chartBase: string, names: string[]) {
+  const sections = markdown.split(/^(?=## )/m);
+  const section = sections.find((s) => s.includes(`data/${chartBase}.svg`));
+  if (!section) return [];
+  const byShort = new Map(names.map((name) => [prefectureShortName(name), name]));
+  const pattern = new RegExp([...byShort.keys()].sort((a, b) => b.length - a.length).join('|'), 'g');
+  // Links and cards point at other pages; their names are not what the text is saying about this chart.
+  const prose = section.replace(/!?\[[^\]]*\]\([^)]*\)/g, '').replace(/<source-link[^>]*>.*?<\/source-link>/g, '');
+  return [...new Set([...prose.matchAll(pattern)].map((m) => byShort.get(m[0])!))];
+}
+
+/** Article scatter data + its source manifest → the shared scatter type's input, or why not. */
+export function scatterChartFromArticleData(
+  parsed: unknown,
+  opts: {
+    x: { metric?: ScatterMetric; year: string | null }; y: { metric?: ScatterMetric; year: string | null };
+    prefCodeOf: (name: string) => string; unitLabel: (unit: string) => string;
+    /** Prefectures named in the chart's section; labelled after the data's own `labelPoints`. */
+    bodyNames?: string[];
+  }
+): ScatterChart | { skip: string } {
+  const data = (parsed ?? {}) as Record<string, unknown>;
+  const raw = (Array.isArray(data.points) ? data.points : []) as { x?: unknown; y?: unknown; label?: unknown; code?: unknown }[];
+  const points = raw.filter((p) => typeof p.x === 'number' && typeof p.y === 'number').map((p) => {
+    const name = String(p.label ?? '');
+    return { code: `${String(p.code ?? opts.prefCodeOf(name)).slice(0, 2)}000`, name, x: p.x as number, y: p.y as number };
+  });
+  if (points.length !== 47 || new Set(points.map((p) => p.code)).size !== 47 || points.some((p) => !/^(0[1-9]|[1-3]\d|4[0-7])000$/.test(p.code)))
+    return { skip: `47都道府県がそろっていない (有効点 ${points.length} 件)` };
+  if (!opts.x.year || !opts.y.year) return { skip: '観測値と一致する年が決まらない' };
+  const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+  // The metric's title is the name; article labels may carry units, years or arrows that the axis already shows.
+  const nameOf = (m: ScatterMetric | undefined, label: string) => (text(m?.title) || label).replace(/[（(][^）)]*[）)]|→/g, '').trim();
+  const xRaw = text(data.xLabel), yRaw = text(data.yLabel);
+  // One metric against itself (two years): only the article's labels tell the axes apart.
+  const sameMetric = nameOf(opts.x.metric, xRaw) === nameOf(opts.y.metric, yRaw);
+  const xName = sameMetric ? nameOf(undefined, xRaw) : nameOf(opts.x.metric, xRaw);
+  const yName = sameMetric ? nameOf(undefined, yRaw) : nameOf(opts.y.metric, yRaw);
+  if (!xName || !yName) return { skip: '軸の指標名が無い' };
+  // Only what changes the reading of the number: the denominator, the capital-city scope, a school grade or sex.
+  const basis = (m: ScatterMetric | undefined, label: string) => {
+    const subtitle = text(m?.subtitle);
+    if (subtitle.includes('県庁所在市')) return '県庁所在市';
+    const per = /[^（(・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label}`)?.[0];
+    if (per) return per;
+    return /(?:小学|中学|高校)\d年|男子|女子/.test(subtitle) && subtitle.length <= 10 ? subtitle : '';
+  };
+  // Large quantities read in 万・億 on the axis too (one display unit per axis, from the unit canon).
+  const axis = (name: string, unit: string, values: number[], scope: string) => {
+    const scaled = chartValueLabels(unit, values);
+    const detail = [scaled.unit && opts.unitLabel(scaled.unit), scope].filter(Boolean).join('・');
+    return {
+      label: detail ? `${name}（${detail}）` : name,
+      format: scaled.display?.conversionFactor ? (v: number) => scaled.formatValue(v).replace(/\.0+$/, '') : undefined,
+    };
+  };
+  const xAxis = axis(xName, text(data.xUnit) || text(opts.x.metric?.unit), points.map((p) => p.x), basis(opts.x.metric, xRaw));
+  const yAxis = axis(yName, text(data.yUnit) || text(opts.y.metric?.unit), points.map((p) => p.y), basis(opts.y.metric, yRaw));
+  const sources = [...new Set([opts.x.metric?.source?.displayName, opts.y.metric?.source?.displayName].map(text).filter(Boolean))];
+  return {
+    title: sameMetric && text(data.title) ? text(data.title).replace(/\s*[×x]\s*/, 'と') : `${xName}と${yName}`,
+    meta: opts.x.year === opts.y.year ? opts.x.year : `横軸 ${opts.x.year}・縦軸 ${opts.y.year}`,
+    source: sources.join('・'),
+    presentation: presentationOf(data, opts.y.metric),
+    xLabel: xAxis.label, yLabel: yAxis.label, formatX: xAxis.format, formatY: yAxis.format,
+    points,
+    labelNames: [...(Array.isArray(data.labelPoints) ? (data.labelPoints as unknown[]).map(String) : []), ...(opts.bodyNames ?? [])],
   };
 }

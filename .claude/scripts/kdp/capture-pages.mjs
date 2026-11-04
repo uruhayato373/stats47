@@ -3,6 +3,7 @@
  * capture-pages.mjs — Kindle 本の章を、端末のようにページに分けて表示し、全県表の前後のページを撮る (KINDLE-QUALITY-LOOP-01)。
  *
  *   node .claude/scripts/kdp/capture-pages.mjs K-S1-02 K-S1-07 --version v5-20261103-tables
+ *   node .claude/scripts/kdp/capture-pages.mjs K-S1-13 --version <版> --all   # 全章の全ページを pages/all/ に撮り、幅からはみ出す表を数える
  *
  * 本の XHTML と CSS をそのまま Chromium で開き、CSS の段組み (column-fill: auto) で 1 段 = 1 ページにして撮る。
  * EPUB の改ページ指定 (page-break-after:avoid など) は段の区切りにも効くので、見出しがページ末に取り残されるか、
@@ -24,6 +25,7 @@ const args = process.argv.slice(2);
 const versionIndex = args.indexOf('--version');
 const version = versionIndex >= 0 ? args[versionIndex + 1] : null;
 const ids = args.filter((arg) => /^K-S[1-4]-\d{2}$/.test(arg));
+const captureAll = args.includes('--all');
 if (!ids.length || !version || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/.test(version)) {
   throw new Error('usage: capture-pages.mjs <K-S1-NN>... --version <version>');
 }
@@ -54,6 +56,23 @@ try {
     for (const screen of SCREENS) {
       const page = await browser.newPage({ viewport: { width: screen.width, height: screen.height }, deviceScaleFactor: 2 });
       for (const chapter of chapters) {
+        if (captureAll) {
+          await page.goto(pathToFileURL(join(epubDir, 'OEBPS', chapter)).href);
+          await page.addStyleTag({ content: PAGED_CSS });
+          await page.evaluate(() => document.fonts.ready);
+          const { pageCount, wideTables } = await page.evaluate((width) => ({
+            pageCount: Math.ceil(document.body.scrollWidth / width),
+            wideTables: [...document.querySelectorAll('table')].filter((t) => t.scrollWidth > width - 2).length,
+          }), screen.width);
+          mkdirSync(join(pageDir, 'all'), { recursive: true });
+          for (let p = 0; p < pageCount; p++) {
+            await page.evaluate((offset) => { document.body.style.transform = `translateX(${-offset}px)`; }, p * screen.width);
+            await page.screenshot({ path: join(pageDir, 'all', `${chapter.replace('.xhtml', '')}-${screen.name}-p${String(p).padStart(3, '0')}.png`) });
+          }
+          await page.evaluate(() => { document.body.style.transform = ''; });
+          manifest.push({ bookId: id, version, chapter, screen: screen.name, pageCount, wideTables });
+          continue;
+        }
         if (!/全47都道府県の値/.test(readFileSync(join(epubDir, 'OEBPS', chapter), 'utf8'))) continue;
         await page.goto(pathToFileURL(join(epubDir, 'OEBPS', chapter)).href);
         await page.addStyleTag({ content: PAGED_CSS });
@@ -119,6 +138,10 @@ try {
       await page.close();
     }
     writeFileSync(join(pageDir, 'manifest.json'), `${JSON.stringify({ bookId: id, version, tables: manifest }, null, 2)}\n`);
+    if (captureAll) {
+      console.log(`${id} ${version}: ${manifest.map((m) => `${m.chapter}/${m.screen} ${m.pageCount}p wide=${m.wideTables}`).join(' | ')}`);
+      continue;
+    }
     const orphans = manifest.filter((table) => table.orphanHeading).length;
     const continuation = manifest.reduce((sum, table) => sum + table.continuationOrphans, 0);
     console.log(`${id} ${version}: ${manifest.length} tables × screens, orphan headings ${orphans}, orphan continuation labels ${continuation} → ${pageDir}`);

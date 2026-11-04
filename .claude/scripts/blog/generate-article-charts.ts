@@ -32,6 +32,8 @@
  */
 
 import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -62,8 +64,9 @@ import { metricHueOf, toShortColorScheme } from '../../../packages/types/src/col
 // The shared 4:5 image types (bars / tile map), light and dark, same as note・X・Instagram.
 import { renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking-bars';
 import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
+import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { rankingChartFromArticleData } from './lib/type-chart-input';
+import { matchScatterYear, prefecturesNamedNear, rankingChartFromArticleData, scatterChartFromArticleData } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -632,6 +635,7 @@ interface JsonChartMeta {
   file: string;
   type: string | undefined;
   parsed: Record<string, unknown>;
+  scatterSource?: Record<string, unknown>;
 }
 
 const jsonMeta: JsonChartMeta[] = [];
@@ -661,6 +665,8 @@ for (const f of jsonFiles) {
       if (dataLint.errors.length > 0) {
         throw new Error(dataLint.errors.join(' | '));
       }
+      jsonMeta.push({ file: f, type, parsed, scatterSource: sourceData });
+      continue;
     }
     jsonMeta.push({ file: f, type, parsed });
     jsonOkCount++;
@@ -819,18 +825,22 @@ function metricVisualizationOf(baseName: string, parsed: unknown) {
  * Returns null when the data cannot give the types (not all 47), and the svg-builder chart is used.
  */
 function writeTypeChart(baseName: string, type: string, parsed: unknown, provenance: string): string | null {
-  if (type !== 'bar' && type !== 'tile-grid') return null;
-  const chart = rankingChartFromArticleData(parsed, {
-    metric: metricConfigOf(baseName, parsed),
-    prefCodeOf,
-    prefNameOf: (code) => prefNameOf(code),
-  });
+  if (type !== 'bar' && type !== 'tile-grid' && type !== 'scatter') return null;
+  const chart = type === 'scatter'
+    ? scatterCharts.get(baseName) ?? { skip: '散布図の入力が無い' }
+    : rankingChartFromArticleData(parsed, {
+      metric: metricConfigOf(baseName, parsed),
+      prefCodeOf,
+      prefNameOf: (code) => prefNameOf(code),
+    });
   if ('skip' in chart) {
     warn(`${baseName}: 型の画像にしない (${chart.skip})。svg-builder の図を使う`);
     return null;
   }
-  const render = type === 'bar' ? renderRankingBarsChart : renderTileMapChart;
-  const light = render(chart, CHART_THEMES.light), dark = render(chart, CHART_THEMES.dark);
+  const render = (theme: (typeof CHART_THEMES)['light']) => type === 'scatter'
+    ? renderRelationshipScatterChart(chart as ScatterChart, theme)
+    : (type === 'bar' ? renderRankingBarsChart : renderTileMapChart)(chart as Parameters<typeof renderRankingBarsChart>[0], theme);
+  const light = render(CHART_THEMES.light), dark = render(CHART_THEMES.dark);
   const write = (suffix: string, svg: string) => fs.writeFileSync(path.join(DATA_DIR, `${baseName}${suffix}.svg`), provenance + svg, 'utf8');
   write('-dark', dark);
   if (type === 'bar') {
@@ -863,6 +873,43 @@ const isSignedBar = (parsed: unknown) => {
   const rows = Array.isArray(parsed) ? parsed : ((parsed as { data?: unknown[] } | null)?.data ?? []);
   return observedOnly(rows as { value?: unknown }[]).some((row) => typeof row.value === 'number' && row.value < 0);
 };
+// Scatter type images need the year, which the article data does not carry: find the year whose
+// observed values give exactly the 47 points (R2 app/stats/<key>/values.json, read once per metric).
+const R2_FETCH = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
+// The script runs as CJS (no top-level await), so each file is fetched in a child process.
+const valuesCache = new Map<string, { areaCode: string; yearCode: string; yearName?: string; value: number | null }[] | null>();
+const valuesOf = (key: string) => {
+  if (!valuesCache.has(key)) {
+    const out = spawnSync(process.execPath, ['-e', 'fetch(process.argv[1]).then(async(r)=>{if(!r.ok)process.exit(1);process.stdout.write(await r.text())}).catch(()=>process.exit(1))',
+      `${R2_FETCH}/app/stats/${key}/values.json`], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    let rows = null;
+    try { rows = out.status === 0 ? JSON.parse(out.stdout)?.rows ?? null : null; } catch { rows = null; }
+    valuesCache.set(key, Array.isArray(rows) ? rows : null);
+  }
+  return valuesCache.get(key)!;
+};
+const scatterCharts = new Map<string, ScatterChart | { skip: string }>();
+for (const { file, type, parsed, scatterSource } of jsonMeta) {
+  if (type !== 'scatter' || !scatterSource) continue;
+  const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+  const xKey = text(scatterSource.xKey) || text(scatterSource.base), yKey = text(scatterSource.yKey) || text(scatterSource.pair);
+  const points = (Array.isArray(parsed.points) ? parsed.points : []) as { x?: unknown; y?: unknown; label?: unknown }[];
+  const codes = points.map((p) => `${prefCodeOf(String(p.label ?? ''))}000`);
+  const yearOf = (key: string, axis: 'x' | 'y') => {
+    const rows = key ? valuesOf(key) : null;
+    return rows ? matchScatterYear(points.map((p) => p[axis] as number), codes, rows) : null;
+  };
+  const xYear = yearOf(xKey, 'x'), yYear = yearOf(yKey, 'y');
+  const metric = (key: string) => (key ? getMetricConfig(key) ?? undefined : undefined);
+  scatterCharts.set(file.replace(/\.json$/, ''), scatterChartFromArticleData(parsed, {
+    x: { metric: metric(xKey) as never, year: xYear }, y: { metric: metric(yKey) as never, year: yYear },
+    prefCodeOf, unitLabel,
+    bodyNames: fs.existsSync(ARTICLE_MD)
+      ? prefecturesNamedNear(fs.readFileSync(ARTICLE_MD, 'utf8'), file.replace(/\.json$/, ''), points.map((p) => String(p.label ?? '')))
+      : [],
+  }));
+}
+
 for (const { file, type, parsed } of jsonMeta) {
  // 1 つの図が描けなくても記事の残りの図は作り直す。描けない図は今の SVG を残して警告する
  try {

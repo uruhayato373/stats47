@@ -70,7 +70,8 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    manifestを同revisionへstageし、`push-exact-r2-assets.ts`で明示キーだけをR2へ反映する。Gitには
    `cover-design.ts`のR2 key/SHA/byte/寸法だけを残す (プロンプトの型は Drive の `stats47/Kindle表紙/_imagegen-tooling/`の `build-prompts.mjs`)。
 5. **版保全**: `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <VERSION>` → `--audit --id <id> --version <VERSION> --deep --record`。EPUB・表紙2種・metadata・READINESS（review.md/review.jsonがあれば同梱）をR2へ暗号化保全し、Git台帳とSHAを一致させる。pushだけでは検証済みにしない。
-6. **オーナーへ受け渡し**: `READINESS.md` に沿って人間が Kindle Previewer で表示確認 → `/kdp-publish`。別PCは`--restore --id <id>`で復元する。
+6. **表示の確認はエージェントが行う**: `node .claude/scripts/kdp/capture-pages.mjs <id> --version <VERSION> --all` で全章を 600×800 と 390×700 のページに撮り、はみ出す表の数を読み、画像を目で確かめる。オーナーに確認を頼む前に必ず回す (2026-11-04 に手順を飛ばして頼み、指摘された)。
+7. **オーナーへ受け渡し**: 公開の承認をもらい `/kdp-publish`。別PCは`--restore --id <id>`で復元する。
 
 ## スコープ
 

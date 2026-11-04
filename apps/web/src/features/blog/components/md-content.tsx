@@ -149,7 +149,7 @@ function makeMdComponents(
             const isSvg = resolvedSrc.endsWith(".svg");
             return (
                 <span
-                    className={`block mt-2 overflow-x-hidden not-prose ${isSvg ? "-mx-5 sm:-mx-8 md:mx-auto md:max-w-2xl" : "-mx-5 sm:-mx-8"}`}
+                    className={`block mt-2 overflow-x-hidden not-prose ${isSvg ? "-mx-4 md:mx-auto md:max-w-2xl" : "-mx-4"}`}
                 >
                     <ResponsiveArticleImage src={resolvedSrc} alt={altText} />
                 </span>

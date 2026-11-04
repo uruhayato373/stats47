@@ -46,6 +46,17 @@ interface CoconalaListingsFile {
   readonly listings: Readonly<Record<string, CoconalaListing>>;
 }
 
+/** 商品カタログ (product-factory) を通さず、note の台帳だけで公開状態が決まるデータ商品。 */
+const STANDALONE_NOTE_PRODUCTS = [
+  {
+    articleKey: "muni-manufacturing-shipment-data",
+    id: "MUNI-MANUFACTURING",
+    description: "市区町村別の製造品出荷額等を 1980〜2023 年の時系列でそろえ、最新の境界の地図データと結合して使う",
+    included: ["CSV", "GEOJSON", "PNG"],
+    audience: ["自治体の企画・産業振興担当", "立地調査・地域分析の担当", "研究者"],
+  },
+] as const;
+
 function readJson<T>(filePath: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
 }
@@ -132,7 +143,24 @@ function buildStorefrontProducts(): StorefrontProduct[] {
       title: article.title, description: product.jobToBeDone, priceYen: article.priceJpy, externalUrl: article.noteUrl,
       included: product.formats.map((format) => format.toUpperCase()), audience: [...product.audience], sourceBlogSlugs: [] }];
   });
-  return [...kindleProducts, ...dataProducts, ...noteProducts].sort((a, b) =>
+  const standaloneProducts: StorefrontProduct[] = STANDALONE_NOTE_PRODUCTS.flatMap((item): StorefrontProduct[] => {
+    const article = noteArticles.find((candidate) => candidate.key === item.articleKey);
+    if (!article || article.status !== "published" || !article.isPaid || !article.noteUrl || !article.priceJpy) return [];
+    return [{
+      id: item.id,
+      slug: `data-${item.id.toLowerCase()}`,
+      channel: "note",
+      channelLabel: "note有料データ集",
+      title: article.title,
+      description: item.description,
+      priceYen: article.priceJpy,
+      externalUrl: article.noteUrl,
+      included: [...item.included],
+      audience: [...item.audience],
+      sourceBlogSlugs: [],
+    }];
+  });
+  return [...kindleProducts, ...dataProducts, ...noteProducts, ...standaloneProducts].sort((a, b) =>
     a.slug.localeCompare(b.slug),
   );
 }

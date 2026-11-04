@@ -114,6 +114,23 @@ export function DataUsageCard({
         ))}
         。Google マイマップ・Google Earth・QGIS で開けます。
       </p>
+      {/* 常に出す (2026-11-04)。以前は CSV を落として「業務」と答えた人にしか出ず、ランキングからの商品クリックが 0 件だった */}
+      {workProduct && (
+        <p className="mt-2 text-xs text-muted-foreground">
+          同じ分野の指標をまとめて資料に使うなら、{workProduct.title.replace(/をお渡しします$/, "")}
+          （{formatValueWithPrecision(workProduct.priceYen, 0)}円）があります。{" "}
+          <TrackedProductLink
+            href={hrefFor("product", { slug: workProduct.slug })}
+            label={`${workProduct.id}:${workProduct.title}`}
+            surface="ranking_product"
+            product={workProduct}
+            placement="ranking_data_card"
+            className="text-primary underline underline-offset-2"
+          >
+            内容を見る
+          </TrackedProductLink>
+        </p>
+      )}
 
       {survey === "asking" && (
         <div className="mt-3 border-t border-primary/20 pt-3">
@@ -141,23 +158,6 @@ export function DataUsageCard({
       {survey === "answered" && answer && (
         <div className="mt-3 border-t border-primary/20 pt-3 text-sm text-muted-foreground">
           ご回答ありがとうございます。
-          {answer === "work" && workProduct && (
-            <span className="mt-2 block">
-              同じ分野の指標をまとめて資料に使う場合は、
-              {workProduct.title.replace(/をお渡しします$/, "")}
-              （{formatValueWithPrecision(workProduct.priceYen, 0)}円・Excel / CSV / PowerPoint）があります。{" "}
-              <TrackedProductLink
-                href={hrefFor("product", { slug: workProduct.slug })}
-                label={`${workProduct.id}:${workProduct.title}`}
-                surface="ranking_product"
-                product={workProduct}
-                placement="ranking_csv_product"
-                className="text-primary underline underline-offset-2"
-              >
-                内容と条件を確認する
-              </TrackedProductLink>
-            </span>
-          )}
           {answer === "study" && (
             <>
               {" "}レポートや論文で使うときは、このページの出典欄にある調査名と、加工した場合は「stats47 にて加工」を出典に書いてください。

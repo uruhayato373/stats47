@@ -80,6 +80,7 @@ aside.callout p{margin:0.3em 0;font-size:0.95em;}
 table{width:100%;border-collapse:collapse;margin:1em 0;font-size:0.9em;}
 th,td{padding:0.3em;border-bottom:1px solid currentColor;text-align:left;}
 th.num,td.num{text-align:right;}
+th:first-child,td:first-child{min-width:5em;}
 tr{page-break-inside:avoid;break-inside:avoid;}
 /* 1 ページに収まる表 (全県表は 12 行ずつ) は途中で分けない。見出しの直後で改ページしない指定と合わせて、見出しと 1 行だけがページ末に残らない */
 table{page-break-inside:avoid;break-inside:avoid;}

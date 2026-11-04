@@ -19,7 +19,7 @@ import {
   goToNextKdpStep,
   fillKdpDetails,
   uploadKdpContent,
-  setKdpPricing,
+  setKdpPricing, kdpSelectChecked,
   saveDraft,
 } from "./kdp-form.mjs";
 import { ROOT, writeBackDraftId, writeBackListing, writeBackPublicationStage, shotPath, sleep } from "./kdp-session.mjs";
@@ -146,8 +146,10 @@ export async function verifyDraft(page, lst, { tag = "[verify]" } = {}) {
   if (!r.price) r.problems.push(`価格不一致 (画面 "${p.price}" / 期待 ${lst.priceYen})`);
   r.royalty = p.roy === (lst.royaltyPlan === 70 ? "70_PERCENT" : "35_PERCENT");
   if (!r.royalty) r.problems.push(`ロイヤリティ不一致 (画面 ${p.roy ?? "未選択"})`);
+  r.select = !lst.kuEnrolled || (await kdpSelectChecked(page)) === true;
+  if (!r.select) r.problems.push("KDP セレクトが未登録 (台帳は登録あり)");
 
-  r.ok = r.title && r.edition && r.categories && r.manuscript && r.cover && r.drm && r.ai && r.price && r.royalty;
+  r.ok = r.title && r.edition && r.categories && r.manuscript && r.cover && r.drm && r.ai && r.price && r.royalty && r.select;
   return r;
 }
 

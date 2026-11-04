@@ -36,21 +36,10 @@ updated: 2026-11-01
 - **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
 - **完了条件**: 土曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
 
-### [MUNI-DATA-PRODUCT-BUILD-01] 製造品出荷額 (manufacturing-shipment-amount) を最新境域に組み替えた時系列 CSV と、結合用の GeoJSON を作る
-タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
-
-- **親**: `MUNI-DATA-PRODUCT-PILOT-01` (EXP-007)。
-- **下調べの結果 (2026-11-01・①②済み)**: `manufacturing-shipment-amount` (表 0000010103) と `manufacturing-shipment` (表 0000020203) は R2 の `cities.json` が全年・全地域で一致 (1980〜2023 の 44 年・1,913 地域。1975〜79 は無い)。自治体コードは全年で `packages/area/src/data/cities.json` (自治体 1,719・行政区 194、2024-01-01 以後の境域) に収まり、SSDS の時点で合併後の境域へ組み替え済みとみられるので**組替表は作らない**。e-Stat の注意書き (https://www.e-stat.go.jp/notice-use-of-statical-data の「４．廃置分合処理済データについて」) の例外 3 件 (旧上九一色村・市制施行前の旧町村・区域変更前の町) を注記する。合併の記録の出典は e-Stat「廃置分合等情報を探す」(https://www.e-stat.go.jp/municipalities/cities/absorption-separation-of-municipalities) と「市区町村を探す」(https://www.e-stat.go.jp/municipalities/cities/areacode)。空の値は自治体で 1980 年 81 件・2023 年 57 件 (秘匿 X か取れない － かは R2 では区別できない)。行政区は区ができる前の年が空。照合の目安: 2023 年の自治体合計 373,168,258 百万円。
-- **次 (③ 以降、W46)**: ③ 元データは `manufacturing-shipment-amount` の cities.json 1 本、対象は自治体 1,719 件 (行政区は外すか別表)。列は自治体コード・名称・都道府県・年・値・単位・注記。文字コードは UTF-8 (BOM 付きも用意)。年の表記は SSDS の項目定義 C3401 (https://www.stat.go.jp/data/ssds/9.html) で何年の実績かを決めてから列に書く。空の値は e-Stat API で取り直して記号を注記の列に残す。2021 年経済センサスでの事業所の捉え方の変化を注記する ④ GeoJSON は e-Stat「令和2年国勢調査 町丁・字等境界データ」を市区町村コードで結合して作る (N03・Geoshape の市区町村境界は使わない。理由と出典の文面は `MUNI-DATA-LICENSE-CHECK-01`)。2020-10-01 以後に変わった自治体はコード突合で洗い出す ⑤ 検算: 各年の全国合計を元の統計 (県別 0000010103) の合計と照合し、差があれば理由を書く ⑥ README (出典・基準日・組替の方法・注記の読み方) を付ける。
-- **進捗 (2026-11-04)**: ③〜⑥ を実装した。`node --import tsx .claude/scripts/products/build-muni-data-product.mjs --metric manufacturing-shipment-amount` で `.local/muni-data-products/manufacturing-shipment-amount/` に CSV (1,719 自治体 × 44 年 = 75,636 行。UTF-8 と BOM 付き)・区の別表 (8,536 行)・全国の検算表・README・結合用 GeoJSON (22.6 MB・1,719 地物) を作る。2023 年は県別 373,238,832・自治体 373,168,258・差 70,574 百万円 (0.02%)。2 テーマ目は specs に 1 件足すだけで回る。
-- **残り (ここが済むまで販売しない)**: ① e-Stat API が要る: 空欄 2,994 行の記号 (X と −) が「記号未確認」、値 0 の 400 行が元データでも 0 か未確認。`ESTAT_APP_ID` か `NEXT_PUBLIC_ESTAT_APP_ID` を渡して同じコマンドを回す (この経路は実 API で未検証) ② README の統計表番号 0000020203 を API で確かめる (手元の控えの統計名は 0000010103 と同じ「社会・人口統計体系」で判別できない) ③ 川崎市の不一致は `MUNI-MANUFACTURING-VALUE-CHECK-01` ④ 頂点の 5% 間引きは見た目で決めた暫定値で、県境の隙間の量は測っていない。
-- **置き場**: 作業と成果物は repo に入れず、販売用の置き場 (`MUNI-DATA-PRODUCT-SALE-01` で決める) に置く。生成手順はスクリプトにして 2 テーマ目 (財政指標) で再利用できるようにする。
-- **完了条件**: CSV・GeoJSON・README がそろい、全国合計の照合結果が親カードに記録されている。
-
 ### [MUNI-DATA-PRODUCT-SALE-01] 製造品出荷額のデータ商品を stats47 の note で売り、ランキングページに 1 行の案内を置いて 6 週計測する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
 
-- **親**: `MUNI-DATA-PRODUCT-PILOT-01` (EXP-007)。前提は `MUNI-DATA-LICENSE-CHECK-01` と `MUNI-DATA-PRODUCT-BUILD-01` の完了。
+- **親**: `MUNI-DATA-PRODUCT-PILOT-01` (EXP-007)。データは 2026-11-04 に完成。残る前提は `MUNI-MANUFACTURING-VALUE-CHECK-01` の川崎市の注記の確認。
 - **次**: ① 価格を ¥980〜2,980 の中で決める (比べる相手は都市データパック 冊子 ¥24,200) ② stats47 の note に有料記事を作る (無料部分に中身の見本 = 上位 10 自治体の表と列の説明、有料部分にダウンロード) ③ `/municipalities/ranking/manufacturing-shipment-amount` の出典欄の近くに「このデータを CSV＋地図データで」の 1 行を置き、`nav_click` の surface を新しく付けて計測する ④ オーナー承認と人手ログインで公開し、公開日を打ち手台帳 EXP-007 の started_at にして running にする ⑤ 毎週、CTA クリックを GA4 から、販売を販売台帳 (`npm run products:sales --workspace=@stats47/product-factory`) に記録する。
 - **判定**: 親カードの基準 (6 週で CTA クリック率 2% 以上かつ販売 3 件以上 → 2 テーマ目へ。1〜2 件は 1 回だけ変えて再判定。0 件は無料配布へ)。
 - **完了条件**: 6 週の記録があり、親カードで続ける・変える・止めるが決まった。
@@ -121,14 +110,32 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-04] [領域:商品]
+
+- **起点**: 2026-11-04 の3面方針で、stats47 の役割はデータ商品になった（vault `memos/20261104_decision_kazu-noteは軸を1つにして商品を広げる.md`）。データの解説はAIに置き換えられやすく、公的データの突合・GIS の可視化・継続更新は真似されにくい
+- **次**: ① 🔴 高のカードをデータ商品に効くものとそれ以外に分ける ② 記事の量産のカードを止めるか下げるかを本人が決める ③ `MUNI-DATA-PRODUCT-SALE-01` の次に出すデータ商品の候補を挙げる
+- **完了条件**: 配分の判断を backlog の並びに反映した。
+- **禁止**: 判断の前にカードを消さない。
+
+### [METRIC-DEFINITION-GAPS-BOOK-01] 書籍の執筆で見つかった指標の定義の欠けと公開データの抜けを埋める
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:データ]
+
+- **起点 (2026-11-04)**: K-S1-13 の執筆と審査で、次が見つかった。
+- **定義が無い**: `dual-income-household-ratio` (分母が分からず書籍で使えなかった)・`nursing-home-capacity-per-1000-65plus` (施設の種別が無い)・`unemployment-rate` ほか。年平均気温と雪日数の観測地点が config に無い。雪日数は 20 都道府県しか値が無い。
+- **県庁所在市の値**: `private-rental-housing-rent-per-3-3m2` と可処分所得は県庁所在市の値なのに県名で出ている。東京が区部かは未確認。
+- **公開データの抜け**: `population-aged-0-5` は `isActive:true` なのに R2 が 404。公開 R2 は Python 標準の urllib だと 403 (User-Agent が要る)。
+- **次**: 指標ごとに e-Stat の定義を読んで metric に書き、ページの表記を直す。
+- **完了条件**: 上の指標の定義がページで読め、`population-aged-0-5` が 200 を返すか非公開になっている。
+
 ### [MUNI-MANUFACTURING-VALUE-CHECK-01] 製造品出荷額の市区町村データの疑わしい値と年の表記を確かめる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:データ]
 
-- **起点 (2026-11-04)**: `MUNI-DATA-PRODUCT-BUILD-01` の検算で見つかった。検算は 44 年 × 47 県 = 2,068 件で未説明の差が 0 件だが、次は確かめが要る。
-- **川崎市**: 1986 年の川崎区 5,840,455 が突出し神奈川県計を 2,773,565 百万円上回る。1983 年は市の値が区の合計より 58,429 小さい。本番のランキングでも配信されている値で、SSDS 側の誤りか取り込みの誤りかは未確定。商品では値を変えず注記を付けた。
+- **起点 (2026-11-04)**: データ商品 (`MUNI-DATA-PRODUCT-PILOT-01`) の検算で見つかった。検算は 44 年 × 47 県 = 2,068 件で未説明の差が 0 件だが、次は確かめが要る。
+- **川崎市**: 1986 年の川崎区 5,840,455 が突出し神奈川県計を 2,773,565 百万円上回る。1983 年は市の値が区の合計より 58,429 小さい。本番のランキングでも配信されている値。2026-11-04 に e-Stat の API と全行を照合して差は 0 件だったので、取り込みの誤りではなく元の統計表にある値。商品では値を変えず注記を付けた。
 - **大きい空欄**: 1987 年の札幌市・特別区部・那覇市、1994 年の芦屋市は行そのものが無く、1998〜99 年は豊田市が空。古い年の全国比較に影響する。
 - **年の表記**: R2 の `cities.json` は全行の yearName が「YYYY年度」だが項目定義は暦年計。サイトの表示に出ていないか確かめる。metric の note「2021年経済センサス」は 2020 年の行のことなので、2021 年の値と取り違えない書き方に直す。
-- **次**: e-Stat API で該当の値と記号を取り、原因を分ける。誤りなら取り込みを直して R2 へ反映する (R2 の書き込みは CI)。
+- **次**: 川崎区 1986 年を工業統計の公表値と比べ、元の統計表の誤りなら注記の文面を決め、サイトのランキングでの扱いを決める。
 - **補足**: この Mac の gdal は `libjxl.0.11.dylib` が無く ogrinfo が起動しない (brew の再リンクが要る)。
 - **停止条件・禁止**: 原因が分かるまで値を手で直さない。
 - **完了条件**: 川崎市と空欄の原因が記録され、年の表記と注記がサイトと商品で一致している。
@@ -136,10 +143,10 @@ updated: 2026-11-01
 ### [PRICE-DATA-PACK-REVIEW-01] データ集の価格実験を 2026-12-30 に判定し、導線を増やす
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-04] [期日:2026-12-30] [領域:商品]
 
-- **起点 (2026-11-04 オーナー決定)**: note のデータ集 13 本を値下げした (テーマ別 12 本 ¥1,980・総合集 ¥4,980)。実験の定義と変更の履歴は `data/products/price-history.json` の `PRICE-DATA-PACK-2026-11`、判断の記録は `data/products/product-strategy.json`、集計は `data/products/PRODUCT-LEDGER.md` と管理画面の「商品の台帳」。
+- **起点 (2026-11-04 オーナー決定)**: note のデータ集 13 本を値下げした (テーマ別 12 本 ¥980・総合集 ¥2,980。同日に ¥1,980・¥4,980 から再変更)。実験の定義と変更の履歴は `data/products/price-history.json` の `PRICE-DATA-PACK-2026-11`、判断の記録は `data/products/product-strategy.json`、集計は `data/products/PRODUCT-LEDGER.md` と管理画面の「商品の台帳」。
 - **分かっていること**: 値下げ前の 2026-10 はテーマ別 12 本で計 93 PV、総合集 14 PV、売上 ¥0。データ集の公開は 10 月 24〜25 日で、観測は約 1 週間。10 月 31 日以降の売上は未確認で、次の土曜の記録で読む。買った人がいた場合の対応は未決。
 - **次**: ① 導線: 有料データ集の閲覧を増やす (`PRODUCT-REFERRAL-MEASURE-01` と合わせ、ランキングと記事の案内のクリックを週次で読む) ② 判定日に基準どおり続ける・変える・止めるを決め、`price-history.json` の `status`・`result` と `product-strategy.json` の `decisions` に書く ③ 実験の判定後に、有料の下書き 54 本を公開するかを 1 本ずつ決める。
-- **判定**: 導線を入れてから 8 週で 3 件以上売れたら続ける。1〜2 件なら価格か見せ方を 1 回だけ変える。0 件ならデータの単体販売を止める。基準の 3 件は仮の値で、月 1,000 PV 弱の閲覧を前提にしている。
+- **判定**: 導線を入れてから 8 週で 5 件以上売れたら続ける。1〜4 件なら価格か見せ方を 1 回だけ変える。0 件ならデータの単体販売を止める。基準の 5 件は仮の値で、月 1,000 PV 弱の閲覧を前提にしている。期日の 2026-12-30 は導線が今日入った場合の日付なので、導線が遅れたら後ろへずらす。旧価格の購入者の有無は未確認。
 - **停止条件・禁止**: 判定まで価格を重ねて変えない (前後を比べられなくなる)。価格を変えるときは `update-note-price.mjs` を使い、先に履歴へ書く。不安を煽る訴求で閲覧を増やさない。
 - **完了条件**: 判定の結果と次の価格が履歴と決定の記録にあり、商品の台帳に反映されている。
 
@@ -560,19 +567,6 @@ updated: 2026-11-01
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
-### [UI-FIX-BLOG-20261031] UI 是正: blog の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-BLOG-20261031.txt] [起票:2026-10-31] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-BLOG-20261031.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
-- **対象**:
-  - `machine|https://stats47.jp/blog|a11y_violations` — a11y_violations = 3 (閾値 <= 0)
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-BLOG-20261031.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
 ### [INCOME-SOURCES-LEDGER-01] stats47 の AdSense と KDP の月次受取を vault の収入台帳に載せ、給与以外の収入源の比率に入れる
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-30] [領域:管理]
 
@@ -857,6 +851,16 @@ updated: 2026-11-01
 - **残り**: ② 公開済みの積み上げ棒 (約 4 枚) を作り直して前後を比べ、R2 へ上げる (承認が要る)。実機・localhost での見た目は未確認。
 - **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
 
+### [BLOG-SCATTER-TYPE-COVERAGE-01] 型にならなかったブログの散布図を減らし、県名の表記をそろえる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-04] [領域:サイト]
+
+- **起点**: 2026-11-04 に散布図を共通の型へ移し、公開 133 組 (266 枚) を反映した (run 41766638544・公開 URL で全件確認)。残りは今の形のまま。
+- **残る図 (同日のギャラリー実測・送り箱の写しを除く約 106 枚)**: data JSON が無い図 56 枚は図だけが残っている負債。source.json に 2 指標のキーが無い図 (kind=derived・calculated・ranking・ranking-join など) と、観測値と年が一致しない図は `matchScatterYear` まで届かない。
+- **県名**: 図の県名は記事のラベルをそのまま使うので「富山」「東京」のような短い名前と「富山県」が混ざる。
+- **配色**: 133 枚中 108 枚が青。指標の配色が既定の青のままなのが原因で、散布図の側では直さない。
+- **次**: キーの持ち方を kind ごとに見て、機械的に足せる分だけ足す。計算した軸の図は型の対象外のままでよいかを決める。
+- **完了条件**: 型にならない図の理由が kind ごとに説明でき、機械的に足せる図が型になっている。
+
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
 
@@ -924,8 +928,9 @@ updated: 2026-11-01
 - **提供価値・支払う理由**: ランキングと地図は無料のまま。有料は「組替済み時系列 CSV＋GeoJSON＋出典・注記」の1テーマ1ファイル (¥980〜2,980)。比べる相手は東洋経済『都市データパック』(¥24,200〜) で、必要な1テーマだけを安く買える。境界データと合併履歴は無料で出回るので、売り物は組替済みの時系列の値に絞る。買い手の主役は計画策定を受けたコンサルの担当者。
 - **需要の証拠**: GSC「製造品出荷額 ランキング 市町村」CTR 46%・平均1.3位、該当ページは28日で390クリック。note の売上2件は e-Stat × Claude Code × 自治体の統計業務。**データ単品が売れるかは未検証**。
 - **販売条件 (`MUNI-DATA-LICENSE-CHECK-01`)**: 値の CSV と結合キーは出典・加工の記載で売ってよい。境界は N03・Geoshape (販売は測量法第29条の申請が要ると判定) を使わず、e-Stat「令和2年国勢調査 町丁・字等境界データ」を市区町村に結合して同梱する。
-- **子カード (実行順)**: 🔴 `MUNI-DATA-LICENSE-CHECK-01` (販売条件) → 🟡 `MUNI-DATA-PRODUCT-BUILD-01` (データを作る) → 🟡 `MUNI-DATA-PRODUCT-SALE-01` (売って計測)。次の候補 🟢 `MUNI-PEER-DATASET-01` (EXP-012) は本カードの判定後。
+- **子カード (実行順)**: 🔴 `MUNI-DATA-LICENSE-CHECK-01` (販売条件) → 🟡 `MUNI-DATA-PRODUCT-SALE-01` (売って計測)。次の候補 🟢 `MUNI-PEER-DATASET-01` (EXP-012) は本カードの判定後。
 - **次 (実行順)**: ① 製造品出荷額の市区町村データを最新境域へ組み替えた時系列と、結合済み GeoJSON を作る (既存の cities 指標と ETL を使う。出典・年次・組替の注記を付ける) ② 価格と販売面 (stats47 の note) を決める ③ 該当ページに「このデータを CSV＋地図データで」の1行 CTA を置き、`nav_click` で計測する ④ オーナー承認と人手ログインで公開し、6週の CTA クリックと販売を販売台帳 (`npm run products:sales --workspace=@stats47/product-factory`) に記録する。
+- **データ完成 (2026-11-04)**: `node --import tsx .claude/scripts/products/build-muni-data-product.mjs --metric manufacturing-shipment-amount --skip-geo` で `.local/muni-data-products/manufacturing-shipment-amount/` に CSV (1,719 自治体 × 44 年 = 75,636 行)・区の別表 (8,536 行)・検算表・README・境界 GeoJSON (1,719 地物) がある。全国合計は 2,068 件の照合で未説明の差 0 件、2023 年の差は 0.02%。e-Stat の記号は CI (`muni-data-symbols.yml`) で取り込み済みで、X 1,801・− 2,473、R2 との値の差 0 件、統計表は 0000020203。頂点の 5% 間引きは見た目で決めた暫定値で、県境の隙間の量は測っていない。公開リポジトリなので販売物を CI の artifact に載せない。2 テーマ目は specs に 1 件足す。
 - **判定 (6週)**: CTA クリック率2%以上 (28日でおよそ8クリック) かつ販売3件以上なら、2テーマ目 (財政指標) へ進む。1〜2件なら価格かテーマを1回だけ変えて再判定する。0件ならデータ販売は止め、同じデータを無料配布 (被リンク・権威) に回す。
 - **台帳**: `data/business/experiments.json` の EXP-007。
 - **関係**: `KNOWHOW-PRODUCT-PILOT-01` と並行して出してよい (収益化戦略 §7)。行政の業務向けデータ商品は `ADMIN-STAT-PILOT-01`、市区町村ページの拡大は `MUNI-RANKING-EXPANSION-01`。
@@ -1140,7 +1145,11 @@ updated: 2026-11-01
 - **①②の結果 (2026-10-28)**: KDP ヘルプ (https://kdp.amazon.com/ja_JP/help/topic/G200634500、2026-10-28 確認) では、Amazon.co.jp での販売で70%になるのは KDP セレクト登録の本だけ (70%の価格帯の条件もある)。`config/kdp-listings.json` は全冊 `royaltyPlan:70`・`kuEnrolled:false` なので、日本の販売はすべて35%になる (実売 ¥800→¥254・¥500→¥159 で税抜価格のちょうど35%)。セレクトに登録すると Kindle 版は90日単位で Amazon 以外に出せなくなる。打ち手の台帳は `data/business/experiments.json` の EXP-011。
 - **決定と実測 (2026-11-04)**: オーナーは「セレクトはやる」と判断したが、登録の前に重複を測ると止める理由が出たので登録していない。KDP Select の案内 (https://kdp.amazon.com/en_US/select、2026-11-04 確認) は、期間中はウェブサイトやブログを含む他の場所で電子配布できないとしている。販売中の S1 12 冊の本文のうち、stats47.jp の無料記事と一字一句同じ文の割合は 9.5〜33.3% (K-S1-12 9.5%・K-S1-10 10.8%・K-S1-03 12.7%・K-S1-11 15.7%・K-S1-07 17.0%・K-S1-08 18.1%・K-S1-02 18.7%・K-S1-05 20.7%・K-S1-09 21.6%・K-S1-01 27.6%・K-S1-04 27.6%・K-S1-06 33.3%)。言い換えを含めた重複はこれより多い (台帳の blogChars は本文の約 7 割)。
 - **未確認**: 抜粋の許容の割合・違反時の扱い・自動更新の既定・改訂審査中の登録は、公開の案内ページに書かれていない (規約本文は取得できなかった)。解除は開始から 3 日以内ならできる。
-- **次**: 規約本文を読み、オーナーが選ぶ: 見送る / 重複の少ない本だけ試す / 重複箇所を書き直してから登録する。`kdp-form.mjs` の登録は「人手確認推奨」のままで、自動の登録は実装を確かめていない。
+- **オーナーの選択と新しい事実 (2026-11-04)**: オーナーは「重複箇所を書き直してから全冊登録」を選んだが、着手の前に、書き下ろし原稿 `packages/product-factory/src/channels/kindle/manuscripts/` の 178 ファイル (1.5 MB) が公開リポジトリに入っていて git の履歴にも残っていると分かった。書き直しても本の本文が別の場所で読める状態が続くので、書き直しに着手していない。規約本文は 2026-11-04 に 3 つの URL が 404 で読めず、案内ページしか確認できていない。
+- **決定 (2026-11-04 オーナー)**: 既刊は登録せず、KDP セレクト専用の新作 1 冊 (K-S1-13。原稿は `.local/kindle-private/K-S1-13/` で repo に入れない) で 70% の効果を確かめる。本の組み立ては `freshFile` に repo の外の相対パスを渡せば読める。
+- **進捗 (2026-11-04)**: K-S1-13『住む県の選び方 — 統計で比べる5つの条件』を ¥500・70%・KDP セレクト登録ありで KDP の審査へ提出した (draftId A1AX2129DSG4I6、本棚はレビュー中)。原稿は `packages/product-factory/.local/kindle-private/K-S1-13/`、本は R2 の暗号化保全 (revision d60ed0e8069a929a)。
+- **紹介文の更新が要る (2026-11-04)**: 審査へ出した紹介文に「国・自治体や e-Stat の公認・推奨を示すものではありません」が無かった (data-provenance-standards の要求)。台帳とカタログは直したので、販売開始後に KDP の紹介文を更新する。カタログの変更で authoredSha が r8 と変わるので、組み立て直し (受領証・保全も) が要る。
+- **次**: ① 本棚の「販売中」と ASIN を確かめる ② 売上と KENP を土曜の記録で読み、35% の既刊と比べる。90 日の自動更新の既定は未確認なので、期限前に KDP の本棚で確かめる 原稿の控えは Drive の `stats47/Kindle原稿/K-S1-13/` にある。KDP の管理画面の規約を確かめる。`kdp-form.mjs` の登録は「人手確認推奨」のままで、自動の登録は実装を確かめていない。
 - **完了条件**: 35% の原因が公式の条件と台帳の設定で説明され、変えるかどうかをオーナーが決めた。
 
 ### [AREA-TOC-MOBILE-01] 県ページの目次をスマホでも本文上部に出すか、16 項目をどう見せるかを決める
@@ -1838,23 +1847,6 @@ updated: 2026-11-01
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
-### [UI-FIX-CATEGORY-20261011] UI 是正: category の週次 UI 検査の指摘 4 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261011.txt] [起票:2026-10-11] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
-- **対象**:
-  - `machine|https://stats47.jp/category/landweather|clipped_text` — clipped_text = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/category/landweather|responsive_layout_issues` — responsive_layout_issues = 2 (閾値 <= 0)
-  - `machine|https://stats47.jp/category/population|clipped_text` — clipped_text = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/category/population|responsive_layout_issues` — responsive_layout_issues = 2 (閾値 <= 0)
-    - 経緯: 再発 (2026-10-11 の週次で再検出)
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
 ### [UI-FIX-BLOG-ARTICLE-20261011] UI 是正: blog-article の週次 UI 検査の指摘 10 件を直す
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt] [起票:2026-10-11] [領域:サイト]
@@ -1895,6 +1887,7 @@ updated: 2026-11-01
 - **担当・順序**: image-prompt-curator / note-manager。① この6件の元画像・公開配信画像で減色の再現条件を確認 ② 文字欠落・別画像・色反転・切り抜きの負例を揃える ③ 自動判定と配信SHA単位の目視確認を共通手順にする。
 - **停止条件**: 差の原因を説明できない画像や負例が通る判定は採用しない。応答済みPOSTを再送しない。一律の閾値引き上げだけで解決しない。
 - **完了条件**: 正常な減色は判別でき、負例は止まり、目視確認は採用元SHA・配信SHA・公開URLに束縛される。関連テストと既存の本文保全・アカウント照合テストが通る。
+- **2026-11-04 追加の実例**: 旧形式126本の差し替えで `18-pr-magazine-rewrite` が MAE 5.11 (大差 0.23%) で停止した。公開画像と採用版を並べて同じ画像と確認し、POST は再送せず journal を手で `verified` に閉じた (`note-cover-refresh-ledger-34fc2c90884b49dc.json` の `inspection`)。99本の総当たり (9,702通り) では、同型カバーの `b-ref-prc-a48`/`a50` の取り違えが判定を通った。負例に同型の別記事を入れる。
 
 ### [THEME-CPI-503-01] テーマ品質監査で consumer-prices ページが 503・タイムアウトになる
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト]
@@ -3841,6 +3834,16 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 
+### [KDP-MANUSCRIPT-PUBLIC-REPO-01] 販売中の本の原稿が公開リポジトリで無料で読める状態を決める
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-04] [領域:商品]
+
+- **実測 (2026-11-04)**: リポジトリは public (`gh api repos/uruhayato373/stats47`)。Kindle の書き下ろし原稿 178 ファイルが追跡されていて、販売中の本の本文の一部を誰でも GitHub で読める。git の履歴にも残る。
+- **影響**: 有料の本の中身が無料で読める。KDP Select の独占の条件にも関わる (`KDP-ROYALTY-RATE-CHECK-01`)。
+- **決めること**: ① 原稿を repo の外 (R2 の非公開領域) へ移すか ② リポジトリを非公開にするか。履歴まで消すには非公開化か履歴の書き換えが要る。非公開化は GitHub Actions の無料枠が変わる可能性があり、今の実行量で足りるかは未確認。履歴の書き換えは全ブランチと別 PC・別セッションに影響する。
+- **同じ確認**: `packages/product-factory/src/data/pack-snapshots/` など、有料商品の中身が repo にないかを棚卸しする。
+- **禁止**: オーナーの判断なしに履歴を書き換えない・リポジトリの公開設定を変えない。
+- **完了条件**: 方針が決まり、販売中の商品の本文が方針どおりの場所にある。
+
 ### [AFF-MOBILE-PR-GAP-01] モバイルで PR が 1 つも出ない 12 種類のページと、案件の出方を決める
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-04] [領域:アフィリエイト]
 
@@ -3872,7 +3875,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **オーナー方針 (2026-10-28)**: 複製承認は申請しない。国土地理院の地図に由来しない境界を使えばよい。
 - **代わりの境界**: e-Stat「令和2年国勢調査 町丁・字等境界データ」 (説明 https://www.e-stat.go.jp/help/data-definition-information/download 、作成方法は「地方公共団体が設定した調査区の境界を基に作成」、利用条件は e-Stat 利用規約で商用可)。Geoshape も同じデータを加工した「国勢調査町丁・字等別境界データセット」 https://geoshape.ex.nii.ac.jp/ka/ (CC BY 4.0) を出している。どちらにも国土地理院の承認番号の記載は見つからなかった。商品 (`MUNI-DATA-PRODUCT-BUILD-01`) はこちらで作ると決めた。
 - **論点**: ランキングの地図は「サイトへの地図の挿入」に当たりうるので急ぐ根拠は弱い。一方、市区町村の地図ページや Geo 分析ページは「地図コンテンツを主とするサイト」に当たりうる。移すと、①境域が 2020-10-01 時点に固定される (以後の変更は自分で直す) ②町丁を結合する前処理と、政令市の区・23 区の統合/分割 (`fetchMunicipalityTopologyForWardMode`) の作り直しが要る ③都道府県の境界は県境の接合処理がされていない (同じ説明ページ) ので、都道府県地図は別に考える。
-- **次**: ① 商品で作る結合済み GeoJSON (`MUNI-DATA-PRODUCT-BUILD-01` ④) の生成スクリプトを、サイトの TopoJSON 生成にも使える形にする ② その出来 (形の数・飛び地・県境のずれ・ファイルの大きさ) を見て、サイトの市区町村地図を移すかをオーナーが決める ③ 移すなら `.claude/rules/gis-data.md` と `r2-storage-design.md`「市区町村の境界」に元データと出典表示を書き換える。
+- **次**: ① 商品で作る結合済み GeoJSON (`MUNI-DATA-PRODUCT-PILOT-01` のデータ完成の記録 ④) の生成スクリプトを、サイトの TopoJSON 生成にも使える形にする ② その出来 (形の数・飛び地・県境のずれ・ファイルの大きさ) を見て、サイトの市区町村地図を移すかをオーナーが決める ③ 移すなら `.claude/rules/gis-data.md` と `r2-storage-design.md`「市区町村の境界」に元データと出典表示を書き換える。
 - **禁止**: 結論が出るまで今の地図を消さない (止める根拠はまだ無い)。R2 の境界の差し替えは承認制。
 - **完了条件**: サイトの地図の境界を移すか据え置くかが決まり、据え置くなら理由 (地図の挿入に当たる等) が、移すなら移行のカードがある。
 

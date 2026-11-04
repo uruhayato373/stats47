@@ -11,7 +11,7 @@ import { expect, test } from "@playwright/test";
  *   ソース側の再発を止めるが、「実際に描画したら重なる」形の崩れ (凡例の折り返し増加・
  *   フォント差など) はブラウザで測らないと分からない。ここは本番の実測を担う。
  *
- * 検査: チャートカード (footer 付きパネル) ごとに (SVG の下端は overflow で切り取られる祖先の下端を上限にした「見える下端」)
+ * 検査: チャートカード (data-slot=card) ごとに (SVG の下端は overflow で切り取られる祖先の下端を上限にした「見える下端」)
  *   1. SVG の下端が footer の上端を越えない (重なりゼロ)
  *   2. SVG の下端がカード下端を越えない (カード外へはみ出さない)
  *   3. SVG に描画要素がある (空チャートでないこと = 検査が素通りしていないことの担保)
@@ -39,16 +39,10 @@ test.describe("テーマチャートがカード枠を守る", () => {
       const countRenderedCards = () =>
         page.evaluate(
           () =>
-            [...document.querySelectorAll('div[class*="border-t"]')].filter((footer) => {
-              if (/fixed|sticky/.test(footer.className)) return false;
-              const card = footer.parentElement;
-              return (
-                !!card &&
-                card !== document.body &&
-                !!card.querySelector("h3") &&
-                !!card.querySelector("svg:not(.lucide) path, svg:not(.lucide) rect")
-              );
-            }).length,
+            // 2026-10 にチャートの枠は共通の Card (data-slot=card) になり、footer は無くても描ける
+            [...document.querySelectorAll('main [data-slot="card"]')].filter((card) =>
+              !!card.querySelector("svg:not(.lucide) path, svg:not(.lucide) rect"),
+            ).length,
         );
 
       await expect
@@ -62,19 +56,16 @@ test.describe("テーマチャートがカード枠を守る", () => {
 
       const cards: CardMetric[] = await page.evaluate(() => {
         const out: CardMetric[] = [];
-        for (const footer of document.querySelectorAll('div[class*="border-t"]')) {
-          // ChartPanel の footer だけを対象にする (固定バー・記事内の区切り線を除外)
-          if (/fixed|sticky/.test(footer.className)) continue;
-          const card = footer.parentElement;
-          if (!card || card === document.body) continue;
-          const heading = card.querySelector("h3");
-          if (!heading) continue;
+        for (const card of document.querySelectorAll('main [data-slot="card"]')) {
+          const heading = card.querySelector('h2, h3, h4, [data-slot="card-title"], [data-slot="card-header"]');
+          // 出典などの footer があれば重なりも見る (無い枠はカード外へのはみ出しだけを見る)
+          const footer = card.querySelector('[data-slot="card-footer"]');
           // ★footer の中にある SVG は「チャートのはみ出し」ではないので必ず除く。
-          //   本番では AdSense 等が出典テキストのキーワードを href="#" のリンク + アイコン SVG に
+          //   本番では AdSense 等が出典テキストのキーワードを href="#" のリンク + アイコンに
           //   置換することがあり (2026-08-04 実測: 出典「人口動態統計」の "統計" が置換)、
           //   これを数えると常に footer 内 = 正の overlap になり誤検知する。
           const svgs = [...card.querySelectorAll("svg:not(.lucide)")].filter(
-            (svg) => !footer.contains(svg),
+            (svg) => !footer?.contains(svg),
           );
           if (svgs.length === 0) continue;
 
@@ -93,12 +84,12 @@ test.describe("テーマチャートがカード枠を守る", () => {
             }
             return bottom;
           };
-          const footerTop = footer.getBoundingClientRect().top;
+          const footerTop = footer?.getBoundingClientRect().top ?? null;
           const cardBottom = card.getBoundingClientRect().bottom;
           const maxSvgBottom = Math.max(...svgs.map(visibleBottom));
           out.push({
-            title: heading.textContent?.trim().slice(0, 40) ?? "",
-            overlapFooterPx: Math.round(maxSvgBottom - footerTop),
+            title: heading?.textContent?.trim().slice(0, 40) || "(題の無いカード)",
+            overlapFooterPx: footerTop === null ? 0 : Math.round(maxSvgBottom - footerTop),
             spillCardPx: Math.round(maxSvgBottom - cardBottom),
             shapeCount: svgs.reduce(
               (n, svg) => n + svg.querySelectorAll("path, rect, circle").length,
