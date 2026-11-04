@@ -102,6 +102,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | GA4の設定 | `data/measurement-cycle/LATEST.md` の「GA4 の設定の変化」(週次の記録は `data/google-admin/audits/<週>.json`)。追加・削除・問題があれば意図した変更か確かめ、意図しないものはバックログへ起票して改善につなげる |
 | SEOの提案 | `data/seo/latest-review.json` と `data/seo/proposals/`。サイトを変えない提案は PR を作らず develop へ記録されるので、ここで読み、担当へ渡すものを起票する |
 | データ品質キュー | `data/data-quality/checks/{LATEST.md,queue.json}`（Phase 0b の `npm run weekly:audits` (ranking-integrity) が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |
+| 出典ページの変化 | `data/provenance/source-watch.md`（`npm run weekly:audits` の provenance が毎週生成）。新しい年の表記が増えた出典は、指標ごとに `provenance.restore` の手順で取り込むカードを起票する |
 | 計画差分 | `.claude/todo/weekly.md` |
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (`docs31Tracked` = docs/31 に紛れ込んだ追跡ファイル数。0 以外は違反)。週次CIの `note-circulation-audit` artifact の `note-image-assets.json` は `--verify-r2` 付きで、公開 R2 の本文・生成 AI 背景の欠落 (`NOTE_R2_BODY_MISSING` / `NOTE_BACKGROUND_MISSING`) を示す。正典 `.claude/rules/note-image-assets.md` |
 | 教材の展開 | `npm run reference:expansion -- status --json` の `totals` (展開先ごとの済み・企画中・見送り・未着手)。未着手が前週より増えた展開先は、担当 (正典 `.claude/rules/reference-source-standards.md` §5) を来週の計画で指名する |
