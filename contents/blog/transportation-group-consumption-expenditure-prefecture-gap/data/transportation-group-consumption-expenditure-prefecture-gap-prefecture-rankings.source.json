@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "transportation-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "交通消費支出額",
+  "readerLabel": "交通への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/transportation-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug transportation-group-consumption-expenditure-prefecture-gap --keys transportation-group-consumption-expenditure --data-name transportation-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:35:34.237Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

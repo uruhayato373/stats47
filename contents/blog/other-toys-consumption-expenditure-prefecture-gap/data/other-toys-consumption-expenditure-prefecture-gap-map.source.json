@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "other-toys-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "他の玩具消費支出額",
+  "readerLabel": "他の玩具への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/other-toys-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug other-toys-consumption-expenditure-prefecture-gap --keys other-toys-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T11:23:17.167Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

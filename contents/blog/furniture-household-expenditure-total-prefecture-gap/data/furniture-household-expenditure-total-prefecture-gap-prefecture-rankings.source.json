@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "furniture-household-expenditure-total",
+  "year": "2025",
+  "unit": "円",
+  "label": "家具・家事用品費",
+  "readerLabel": "家具・家事用品費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/furniture-household-expenditure-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug furniture-household-expenditure-total-prefecture-gap --keys furniture-household-expenditure-total --data-name furniture-household-expenditure-total-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T11:22:36.682Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "paper-diapers-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "紙おむつ消費支出額",
+  "readerLabel": "紙おむつへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/paper-diapers-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug paper-diapers-consumption-expenditure-prefecture-gap --keys paper-diapers-consumption-expenditure --data-name paper-diapers-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T11:23:26.433Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

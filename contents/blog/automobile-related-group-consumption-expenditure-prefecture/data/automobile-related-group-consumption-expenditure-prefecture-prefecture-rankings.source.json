@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "automobile-related-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "自動車等関係費消費支出額",
+  "readerLabel": "自動車等関係費への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/automobile-related-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug automobile-related-group-consumption-expenditure-prefecture --keys automobile-related-group-consumption-expenditure --data-name automobile-related-group-consumption-expenditure-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:35:43.686Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

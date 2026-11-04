@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "vegetables-seaweed-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "野菜・海藻消費支出額",
+  "readerLabel": "野菜・海藻への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/vegetables-seaweed-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug vegetables-seaweed-group-consumption-expenditure-prefecture --keys vegetables-seaweed-group-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T11:23:39.345Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

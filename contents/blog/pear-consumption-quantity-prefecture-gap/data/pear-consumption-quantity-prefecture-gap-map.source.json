@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pear-consumption-quantity",
+  "year": "2025",
+  "unit": "g",
+  "label": "梨消費量",
+  "readerLabel": "梨消費量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/pear-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pear-consumption-quantity-prefecture-gap --keys pear-consumption-quantity --with-map",
+  "fetchedAt": "2026-11-04T22:13:10.196Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

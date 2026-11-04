@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "recreational-services-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "教養娯楽サービス消費支出額",
+  "readerLabel": "教養娯楽サービスへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/recreational-services-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug recreational-services-group-consumption-expenditure --keys recreational-services-group-consumption-expenditure --data-name recreational-services-group-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:36:21.636Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

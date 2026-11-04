@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "milk-consumption-quantity",
+  "year": "2025",
+  "unit": "l",
+  "label": "牛乳消費量",
+  "readerLabel": "牛乳消費量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/milk-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug milk-consumption-quantity-prefecture-gap --keys milk-consumption-quantity --with-map",
+  "fetchedAt": "2026-11-04T10:52:10.739Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "social-expenses-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "交際費消費支出額",
+  "readerLabel": "交際費への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/social-expenses-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug social-expenses-group-consumption-expenditure-prefecture-gap --keys social-expenses-group-consumption-expenditure --data-name social-expenses-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:36:42.384Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

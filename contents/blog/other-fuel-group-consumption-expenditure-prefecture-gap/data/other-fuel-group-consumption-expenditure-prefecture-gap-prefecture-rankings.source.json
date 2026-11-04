@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "other-fuel-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "他の光熱消費支出額",
+  "readerLabel": "他の光熱への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/other-fuel-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug other-fuel-group-consumption-expenditure-prefecture-gap --keys other-fuel-group-consumption-expenditure --data-name other-fuel-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:32:47.520Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

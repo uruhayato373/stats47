@@ -396,3 +396,16 @@ kakei-b3,2026-11-04,supplementary-education-group-consumption-expenditure,claude
 kakei-b3,2026-11-04,transportation-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,5,3,41772,21208,0.3791,pass,REVISE,178
 kakei-b3,2026-11-04,underwear-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,1,1,9032,6376,0.0999,pass,PASS,57
 kakei-b3,2026-11-04,western-clothing-group-consumption-expenditure-prefecture,claude-sonnet,claude-sonnet,low,5,2,35150,21008,0.3507,pass,PASS,175
+kb-1,2026-11-04,pear-consumption-quantity-prefecture-gap,claude-sonnet,claude-sonnet,low,1,1,9172,6117,0.0978,pass,PASS,54
+kb-1,2026-11-04,gasoline-consumption-quantity-vs-single-mother-employment,claude-sonnet,claude-sonnet,low,2,1,18044,10454,0.1767,pass,PASS,88
+kb-1,2026-11-04,pumpkin-consumption-quantity-prefecture-gap,claude-sonnet,claude-sonnet,low,1,1,9078,5430,0.0906,pass,PASS,58
+kb-1,2026-11-04,other-mushroom-consumption-quantity-prefecture-gap,claude-sonnet,claude-sonnet,low,5,3,49520,23815,0.4362,pass,REVISE,213
+kb-retry,2026-11-04,bed-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,2,2,21438,10801,0.1937,pass,PASS,100
+kb-retry,2026-11-04,domestic-services-group-consumption-expenditure-prefecture,claude-sonnet,claude-sonnet,low,4,2,31415,18001,0.3056,pass,PASS,149
+kb-retry,2026-11-04,health-supplements-group-consumption-expenditure-prefecture,claude-sonnet,claude-sonnet,low,4,2,34074,18061,0.3169,pass,PASS,155
+kb-retry,2026-11-04,pots-kettles-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,4,3,40391,19260,0.3541,pass,PASS,152
+kb-retry,2026-11-04,other-clothing-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,4,3,45848,21707,0.4004,pass,PASS,180
+kb-retry,2026-11-04,laundry-detergent-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,6,3,59807,30537,0.5446,pass,REVISE,241
+kb-retry,2026-11-04,transportation-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,2,2,20745,9667,0.1796,pass,PASS,86
+kb-retry,2026-11-04,rent-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,3,3,33463,14880,0.2826,pass,REVISE,134
+kb-retry,2026-11-04,transport-communication-expenditure-total-prefecture-gap,claude-sonnet,claude-sonnet,low,3,2,24296,13714,0.2343,pass,PASS,127
