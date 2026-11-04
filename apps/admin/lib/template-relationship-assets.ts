@@ -7,16 +7,16 @@ export const RELATIONSHIP_SAMPLE_ASSETS = {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/13ca3afffc18b95f4e1378ead1e6c751064fea34e6aee73192b3c5bcab788ae2.png",
-      "sha256": "13ca3afffc18b95f4e1378ead1e6c751064fea34e6aee73192b3c5bcab788ae2",
-      "bytes": 111028
+      "key": "media-workspace/images/676b47082c03722c341aa524b82b8f1b58309154a22104c71b96c399d159ab42.png",
+      "sha256": "676b47082c03722c341aa524b82b8f1b58309154a22104c71b96c399d159ab42",
+      "bytes": 104166
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/38ce6e295b57ef84370033fbf75f5bd757d7f00938c14fda37c7565369c33a4b.json",
-      "sha256": "38ce6e295b57ef84370033fbf75f5bd757d7f00938c14fda37c7565369c33a4b",
-      "bytes": 178762
+      "key": "media-workspace/inputs/281d4dc9eeecb312d4eb5cb00a9868b25cffac2b8a9033bb2922a6758c1fb90f.json",
+      "sha256": "281d4dc9eeecb312d4eb5cb00a9868b25cffac2b8a9033bb2922a6758c1fb90f",
+      "bytes": 186433
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;

@@ -168,6 +168,8 @@ jobs:
             fi
             # --- ステージ (publishedAt 補完) ---
             mkdir -p ".local/r2/app/blog/$SLUG"
+            # 送り箱の図は書かれた時点の形のまま。公開中の新しい型の図を古い版で上書きしない
+            node .claude/scripts/blog/drop-outdated-outbox-charts.mjs --slug "$SLUG"
             cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
             # 公開しない作業ファイル (NotebookLM の調査材料・審査結果・prompt) を公開 R2 へ上げない。
             # 審査の指摘は下の record-critic-findings で台帳に残る

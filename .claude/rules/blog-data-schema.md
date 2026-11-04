@@ -125,6 +125,22 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 { "kind": "manual", "sourceName": "過去の気象データ", "source": "気象庁の公式URL" }
 ```
 
+### 散布図の軸 `axes` (2026-11-04)
+
+散布図の軸の書き方は kind ごとに 8 通り以上あり (`xKey`・`base`・`xRankingKey`・`xMetric`・`rankingKeys`・`derivedFrom`…)、年も 4 通りあった。
+記事リンクから推定した `rankingKeys` が軸の指標と違う図もあった。生成器が全点の照合で決めた軸を `axes` に書き戻すので、読む側は `axes` だけを見る。
+
+```jsonc
+{ "axes": {
+    "x": { "metricKey": "foreign-resident-count-per-100k", "year": "2020年", "proof": "values" },  // 全点が観測値と一致
+    "y": { "year": "2022年度", "proof": "manifest" } } }  // 計算した軸。年はラベルと source.json から読んだ
+```
+
+形の正典は `config/schema/blog.chart-source.schema.json`、値の検査は `audit-chart-axes.ts`。
+台帳を直すスクリプトはリポジトリに置く (`generatedBy` に `/tmp` を書いた図は週次の検査が `bad-shape` と数える)。点データが失われた図は
+`rebuild-scatter-data.mjs` が指標と年の指定から R2 の観測値で作り直し、公開中の図と照らす。
+本文と図の点データ・出典の版は private R2 `blog-archive/<slug>/` に残る (`archive-blog-articles.mjs`)。
+
 ### 表示用の出典 `displaySources` (2026-09-25)
 
 記事末尾の「データ出典」(`DataSourceList`) は source.json から自動で作る。`rankingKey` / `statsDataId` /

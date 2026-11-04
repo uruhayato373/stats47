@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { renderRelationshipScatter, renderRelationshipScatterChart, relationshipPoints, unitLabel } from '@/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
-import { matchScatterYear, prefecturesNamedNear, scatterChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { matchScatterAxis, matchScatterYear, metricKeysInSource, prefecturesNamedNear, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from '../../../../.claude/scripts/blog/lib/type-chart-input';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 
 // Synthetic values check the join and frame; live data stays in the SHA-verified R2 snapshots.
@@ -88,14 +88,14 @@ describe('blog scatter as the shared type', () => {
     const chart = scatterChartFromArticleData({ ...articleData(), xLabel: '年間降水量 (mm) →', xUnit: 'mm', yLabel: '単独世帯割合（65歳以上人口に占める・％）' }, {
       x: { metric: { title: '年間降水量', subtitle: '総数', unit: 'mm' }, year: '2024年' },
       y: { metric: { subtitle: '都道府県庁所在市の二人以上世帯の年間消費量' }, year: '2024年' },
-      prefCodeOf, unitLabel,
+      prefCodeOf, unitLabel, sourceNames: ['調査'],
     });
     if ('skip' in chart) throw Error(chart.skip);
     expect(chart).toMatchObject({ title: '年間降水量と単独世帯割合', xLabel: '年間降水量（mm）', yLabel: '単独世帯割合（施設・県庁所在市）' });
   });
   it('keeps the article labels when both axes are one metric in two years', () => {
     const chart = scatterChartFromArticleData({ ...articleData(), title: '健康寿命 2019年 × 2022年', xLabel: '2019年の健康寿命', yLabel: '2022年の健康寿命' }, {
-      x: { metric: { title: '健康寿命' }, year: '2019年' }, y: { metric: { title: '健康寿命' }, year: '2022年' }, prefCodeOf, unitLabel,
+      x: { metric: { title: '健康寿命' }, year: '2019年' }, y: { metric: { title: '健康寿命' }, year: '2022年' }, prefCodeOf, unitLabel, sourceNames: ['調査'],
     });
     if ('skip' in chart) throw Error(chart.skip);
     expect(chart.title).toBe('健康寿命 2019年と2022年');
@@ -110,10 +110,61 @@ describe('blog scatter as the shared type', () => {
   });
   it('labels the data\'s own points, then the prefectures in the text, then the extremes', () => {
     const chart = scatterChartFromArticleData({ ...articleData(), labelPoints: ['県1'] }, {
-      x: { year: '2024年' }, y: { year: '2024年' }, prefCodeOf, unitLabel, bodyNames: ['県9'],
+      x: { year: '2024年' }, y: { year: '2024年' }, prefCodeOf, unitLabel, sourceNames: ['調査'], bodyNames: ['県9'],
     });
     if ('skip' in chart) throw Error(chart.skip);
     expect(chart.labelNames).toEqual(['県1', '県9']);
+  });
+  it('finds the scale when the article wrote the values in a larger unit', () => {
+    const ys = articleData().points.map((p) => p.y);
+    expect(matchScatterAxis(ys, codes, observed((i) => (900 - i * 15.5) * 1e4, { 2021: 0 }))).toEqual({ year: '2021年', scale: 1e4 });
+    expect(matchScatterAxis(ys, codes, observed((i) => 900 - i * 15.5, { 2021: 0 }))).toEqual({ year: '2021年', scale: 1 });
+    expect(matchScatterAxis(ys, codes, observed((i) => i * 3 + 1, { 2021: 0 }))).toBeNull();
+  });
+  it('reads metric keys from any manifest shape, keeping only real metrics', () => {
+    const keys = metricKeysInSource({ kind: 'derived', source: ['r2:app/ranking/a-key/values.json'], derivedFrom: [{ axis: 'x', rankingKey: 'b-key' }], note: 'plain words' }, (k) => ['a-key', 'b-key'].includes(k));
+    expect(keys).toEqual(['a-key', 'b-key']);
+  });
+  it('reads an axis year from the label, then each manifest shape', () => {
+    expect(sourceAxisYear({ year: '2020' }, 'x', '財政力指数（2022年度）')).toBe('2022年度');
+    expect(sourceAxisYear({ xYear: '2023', yYear: '2024' }, 'y', '')).toBe('2024年');
+    expect(sourceAxisYear({ year: 'x:2024/y:2023' }, 'x', '')).toBe('2024年');
+    expect(sourceAxisYear({ year: '2020/2024' }, 'y', '')).toBe('2024年');
+    expect(sourceAxisYear({ inputs: [{ year: '2020' }, { year: '2019' }] }, 'y', '')).toBe('2019年');
+    expect(sourceAxisYear({ formula: '2021年の値', fetchedAt: '2026-07-16' }, 'x', '')).toBe('2021年');
+    expect(sourceAxisYear({ inputs: [{ params: { cdTime: '2021000000' } }] }, 'x', '')).toBe('2021年');
+    expect(sourceAxisYear({ formula: '2021年と2020年' }, 'x', '')).toBeNull();
+  });
+  it('takes survey names from the manifest, not its r2 paths', () => {
+    expect(sourceNamesOf({ displaySources: [{ label: '電子国土基本図' }], source: 'r2:gis/points.json' })).toEqual(['電子国土基本図']);
+    expect(sourceNamesOf({ source: 'e-Stat 工業統計調査 https://www.e-stat.go.jp/x' })).toEqual(['e-Stat 工業統計調査']);
+  });
+  it('keeps the written numbers and unit on an axis no metric proves, and draws full prefecture names', () => {
+    const chart = scatterChartFromArticleData({ ...articleData(), xLabel: '財政力指数（2022年度）', xUnit: undefined, yLabel: '一人当たり地方交付税（万円／人・2022年度）', yUnit: undefined, labelPoints: ['県1'] }, {
+      x: { year: '2022年度', asWritten: true }, y: { year: '2022年度', asWritten: true }, prefCodeOf, unitLabel, sourceNames: ['地方財政状況調査'],
+      prefNameOf: (code) => '正式' + Number(code.slice(0, 2)),
+    });
+    if ('skip' in chart) throw Error(chart.skip);
+    expect(chart).toMatchObject({ title: '財政力指数と一人当たり地方交付税', yLabel: '一人当たり地方交付税（万円／人）', source: '地方財政状況調査', labelNames: ['正式1'] });
+    expect(chart.points[0].name).toBe('正式1');
+    expect(chart.formatX).toBeUndefined();
+  });
+  it('draws a declared partial set, states its count and refuses an undeclared gap', () => {
+    const partial = { ...articleData(), points: articleData().points.slice(0, 41) };
+    const opts = { x: { year: '2024年' }, y: { year: '2024年' }, prefCodeOf, unitLabel, sourceNames: ['調査'] };
+    expect(scatterChartFromArticleData(partial, opts)).toHaveProperty('skip');
+    const chart = scatterChartFromArticleData(partial, { ...opts, excludedCount: 6 });
+    if ('skip' in chart) throw Error(chart.skip);
+    const svg = renderRelationshipScatterChart(chart);
+    expect(svg.match(/<circle data-pref=/g)).toHaveLength(41);
+    expect(svg).toContain('41都道府県');
+  });
+  it('gives a default-blue metric its subject colour, but keeps a chosen one', () => {
+    const base = { x: { year: '2024年' }, prefCodeOf, unitLabel, sourceNames: ['調査'] };
+    const blue = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' };
+    const of = (metric: object) => { const c = scatterChartFromArticleData(articleData(), { ...base, y: { metric, year: '2024年' } }); if ('skip' in c) throw Error(c.skip); return c.presentation?.colorScheme; };
+    expect(of({ category: 'economy' })).toBe('interpolatePurples');
+    expect(of({ category: 'population' })).toBe('interpolateBlues');
   });
   it('colours the dots by the vertical metric and marks the named prefectures in its strong colour', () => {
     const blue = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' } as const;

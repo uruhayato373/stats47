@@ -82,9 +82,10 @@ async function fetchText(url) {
 
 // ─── ソース: local ───────────────────────────────────
 function collectLocal() {
+  // --no-outbox: 公開待ちの写しを混ぜず、R2 の図だけを見る (描き直しの確認で古い写しが重複して見えた)
   const roots = [
     path.join(PROJECT_ROOT, ".local/r2/app/blog"),
-    path.join(PROJECT_ROOT, "contents/blog"),
+    ...(args.includes("--no-outbox") ? [] : [path.join(PROJECT_ROOT, "contents/blog")]),
   ];
   const bySlug = new Map();
   for (const root of roots) {
