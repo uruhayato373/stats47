@@ -39,6 +39,16 @@ export interface PolarityEntry {
 
 /** 明示的に極性が確定した metric のみ。未収載 = 未割当 (推測しない)。 */
 export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
+  // 2026-11-05 家計調査の十大費目の構成比。
+  "clothing-footwear-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "culture-recreation-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "education-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "furniture-household-goods-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "healthcare-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "housing-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "other-consumption-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "transport-communication-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
+  "utilities-budget-share-kakei": { polarity: "neutral", evidence: "費目の割合で、多いことの良し悪しは決まらない" },
   // 2026-11-04 家計調査の中分類と品目の支出額・購入量。
   "admission-game-fees-group-consumption-expenditure": { polarity: "neutral", evidence: "家計調査の支出額・購入量で、多いことの良し悪しは決まらない" },
   "alcoholic-beverages-group-consumption-expenditure": { polarity: "neutral", evidence: "家計調査の支出額・購入量で、多いことの良し悪しは決まらない" },
