@@ -55,6 +55,8 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 
 ---
 
+家計調査の全品目の一覧 (`kakei-ranking-directory.generated.ts`) は例外で、カタログに載せない。テーマは載せた指標の値をすべて読むので、700 件超は載せず、値を読まないリンクの一覧として `household-food-spending` に出す。指標が増えたら `npx tsx .claude/scripts/themes/generate-kakei-ranking-directory.ts` で作り直す。
+
 ## 2. 編集フロー (カタログ駆動テーマ)
 
 ```
