@@ -21,7 +21,7 @@ export const sexRatioAge2039: MetricConfig = {
       },
       provenance: {
         url: 'https://www.stat.go.jp/data/kokusei/2020/kekka/pdf/outline_01.pdf',
-        publicationIndexUrl: 'https://www.stat.go.jp/data/kokusei/2020/kekka/index.html',
+        publicationIndexUrl: 'https://www.stat.go.jp/data/kokusei/2020/kekka.html',
         table:
           '令和2年国勢調査 人口等基本集計 結果の概要「補完前の集計結果（原数値）年齢（5歳階級）別人口」（全国値の照合）／社会・人口統計体系（e-Stat 0000010101）A120501・A120502・A120601・A120602・A120701・A120702・A120801・A120802（県別値）',
         valueColumn: '20〜39歳の男性人口（4階級合計）÷女性人口（4階級合計）×100、小数第1位',

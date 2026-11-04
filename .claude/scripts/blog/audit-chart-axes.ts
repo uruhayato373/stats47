@@ -22,6 +22,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { datasetDir } from '../../../config/datasets.mjs';
+import { prefectureShortName } from '../../../packages/area/src/utils/prefecture-short-name';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { chartSourceShapeErrors } from '../lib/chart-source-schema.mjs';
 import { PREF_NAMES } from '../lib/prefectures.cjs';
@@ -67,7 +68,8 @@ const shortToCode = new Map<string, string>();
 (PREF_NAMES as string[]).forEach((name, i) => {
   const code = String(i + 1).padStart(2, '0');
   shortToCode.set(name, code);
-  shortToCode.set(name.replace(/[都道府県]$/, ''), code); // 古いデータは 北海 と書く
+  shortToCode.set(prefectureShortName(name), code);
+  if (name === '北海道') shortToCode.set('北海', code); // 古いデータは 北海 と書く
 });
 
 /** 記事が表示する散布図の basename */

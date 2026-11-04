@@ -1,9 +1,17 @@
 {
-  "hash": "dfcccbc9f3f6548a331fca3175f2fd5b688532412393c162b51001be5bdaa17f",
-  "audited_at": "2026-11-04T08:06:15",
+  "hash": "8dbb7cfdab40c079fa9f422053d68e038fca0dda9f49eb1f2c604c3c5d210599",
+  "audited_at": "2026-11-04T08:11:57",
   "files": [
+    ".agents/skills/db/audit-provenance/SKILL.md",
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/rules/data-provenance-standards.md",
     ".claude/scripts/blog/audit-chart-axes.ts",
-    ".claude/scripts/blog/generate-article-charts.ts",
-    ".claude/scripts/blog/rebuild-scatter-data.mjs"
+    ".claude/scripts/management/run-weekly-audits.mjs",
+    ".claude/scripts/management/weekly-audits/provenance.sh",
+    ".claude/scripts/provenance/__tests__/source-watch.test.mjs",
+    ".claude/scripts/provenance/lib/source-watch.mjs",
+    ".claude/scripts/provenance/watch-external-sources.ts",
+    ".claude/skills/db/audit-provenance/SKILL.md",
+    ".claude/skills/management/weekly-review/SKILL.md"
   ]
 }

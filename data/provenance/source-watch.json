@@ -1,0 +1,1005 @@
+{
+  "checkedAt": "2026-11-04T07:26:01.234Z",
+  "noUrl": [
+    "disposable-income-after-rent",
+    "engel-coefficient",
+    "information-communication-coefficient",
+    "real-disposable-income"
+  ],
+  "sources": {
+    "https://ganjoho.jp/reg_stat/statistics/data/dl/index.html": {
+      "hash": "3ef4f2c7d94e627b",
+      "latestYear": 2054,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "breast-cancer-asr75-mortality-female"
+      ]
+    },
+    "https://kennet.mhlw.go.jp/information/information/hale/h-01-002.html": {
+      "hash": "6c76a4b916d07035",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "healthy-life-expectancy-female",
+        "healthy-life-expectancy-male"
+      ]
+    },
+    "https://nippon-chutairen.or.jp/data/result/": {
+      "hash": "47d4036653405a9f",
+      "latestYear": 2019,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "junior-high-club-per100-badminton",
+        "junior-high-club-per100-baseball-soft",
+        "junior-high-club-per100-basketball",
+        "junior-high-club-per100-kendo",
+        "junior-high-club-per100-soccer",
+        "junior-high-club-per100-soft-tennis",
+        "junior-high-club-per100-swimming",
+        "junior-high-club-per100-table-tennis",
+        "junior-high-club-per100-track-and-field",
+        "junior-high-club-per100-volleyball"
+      ]
+    },
+    "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2025.html": {
+      "hash": "749ddf8ddab4729b",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "residential-official-land-median-price",
+        "residential-official-land-point-count"
+      ]
+    },
+    "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2023.html": {
+      "hash": "3023a5f0c990ec76",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "railway-passengers"
+      ]
+    },
+    "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html": {
+      "hash": "5694d088e15e5a13",
+      "latestYear": 2070,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "low-elevation-population-ratio-5m"
+      ]
+    },
+    "https://nlftp.mlit.go.jp/ksj/index.html": {
+      "hash": "4511dbe41369b17b",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "airport-count",
+        "lake-count",
+        "railway-station-count"
+      ]
+    },
+    "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html": {
+      "hash": "2954faa73f47c04c",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "regional-business-co2-emissions-estimate",
+        "regional-co2-emissions-estimate",
+        "regional-household-co2-emissions-estimate",
+        "regional-industry-co2-emissions-estimate",
+        "regional-transport-co2-emissions-estimate",
+        "regional-waste-co2-emissions-estimate"
+      ]
+    },
+    "https://www.bousai.go.jp/jishin/tsunami/hinan/tsunami_top.html": {
+      "hash": "e4966abe14124290",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "tsunami-evacuation-building-count",
+        "tsunami-evacuation-tower-count"
+      ]
+    },
+    "https://www.bousai.go.jp/taisaku/hisaisyagyousei/r8chosa.html": {
+      "hash": "5cc7dd5ea34d2b5b",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "individual-evacuation-plan-coverage-rate",
+        "individual-evacuation-plan-covered-persons",
+        "individual-evacuation-plan-listed-persons"
+      ]
+    },
+    "https://www.bunka.go.jp/seisaku/bunkazai/shokai/chiho_shitei/todofuken.html": {
+      "hash": "8e1b9460b29d630c",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "prefecture-designated-cultural-property-count"
+      ]
+    },
+    "https://www.bunka.go.jp/seisaku/bunkazai/shokai/maizo.html": {
+      "hash": "b9d339d0914d3022",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "buried-cultural-property-specialist-count"
+      ]
+    },
+    "https://www.bunka.go.jp/tokei_hakusho_shuppan/tokeichosa/chiho_bunkagyosei/": {
+      "hash": "e135bbd65fdff2af",
+      "latestYear": 2024,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "prefectural-cultural-property-protection-expenditure"
+      ]
+    },
+    "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/status_investigation/2025": {
+      "hash": "0c8fee5ee481b30e",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "consumer-consultation-accepted-cases"
+      ]
+    },
+    "https://www.cfa.go.jp/policies/hoiku/torimatome/r7/": {
+      "hash": "3ad44b9c92aa1c65",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "childcare-applicants",
+        "nursery-waiting-children-rate"
+      ]
+    },
+    "https://www.digital.go.jp/resources/data_local_governments": {
+      "hash": "f0eea46b6b79ac27",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "opendata-adoption-rate-municipalities"
+      ]
+    },
+    "https://www.digital.go.jp/resources/govdashboard/watersupply": {
+      "hash": "d4ee9af5760e9b5d",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "public-water-aged-pipe-length",
+        "public-water-pipe-aging-rate",
+        "public-water-pipe-length",
+        "public-water-pipe-renewal-rate",
+        "public-water-renewed-pipe-length"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0000010103": {
+      "hash": "ac43bcf66fcc4221",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "private-establishment-net-value-added"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0003130745": {
+      "hash": "a6291d21c2f90d10",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "port-container-tonnage"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0003130801": {
+      "hash": "960bec2e0a02a623",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "port-passengers-boarding",
+        "port-passengers-landing"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0003130803": {
+      "hash": "4e22104ef156fa59",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "port-cargo-coastal-in",
+        "port-cargo-coastal-out"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0003130814": {
+      "hash": "7b28321ad70db1cd",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "port-ships-total"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0003131104": {
+      "hash": "9790d650c8447753",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "port-vehicle-ferry-car",
+        "port-vehicle-ferry-total",
+        "port-vehicle-ferry-truck"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0004005665": {
+      "hash": "054311a36e028fdd",
+      "latestYear": 2021,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "employment-location-quotient-health-welfare",
+        "employment-location-quotient-information-communication",
+        "employment-location-quotient-manufacturing"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0004006330": {
+      "hash": "1767a895df348f4d",
+      "latestYear": 2021,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "amusement-industry-net-value-added",
+        "amusement-industry-revenue",
+        "enterprise-net-value-added-all-industries",
+        "laundry-beauty-bath-industry-net-value-added",
+        "laundry-beauty-bath-industry-revenue",
+        "media-production-net-value-added",
+        "media-production-revenue"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0004024872": {
+      "hash": "ef740332410463c4",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "delivery-hospital-count"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0004024910": {
+      "hash": "a00f946d956aafaf",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "delivery-clinic-count"
+      ]
+    },
+    "https://www.e-stat.go.jp/dbview?sid=0004049367": {
+      "hash": "07e06787660deff8",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "forestry-mushroom-output-value",
+        "forestry-output-value",
+        "forestry-timber-output-value"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040431166": {
+      "hash": "feb52d5d60991482",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "roundwood-hinoki-production-volume",
+        "roundwood-production-volume",
+        "roundwood-sugi-production-volume"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040431170": {
+      "hash": "6c9e36f0765eea47",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "sawmill-count"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040431178": {
+      "hash": "06741629db890774",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "sawnwood-shipment-volume"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040483801": {
+      "hash": "ab06a99a88d5b0ac",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "forestry-management-entities"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040483807": {
+      "hash": "0a2c8713b7a1077c",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "forestry-hired-workers"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040483808": {
+      "hash": "6b9e32348b4af097",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "forestry-internal-workers"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040383757&fileKind=1": {
+      "hash": "dd4b2c47bbf6c0b1",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "medical-physicians-age-40-59",
+        "medical-physicians-age-60-plus",
+        "medical-physicians-under-40"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040383773&fileKind=1": {
+      "hash": "01686b273eb73729",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "medical-physicians-emergency-medicine",
+        "medical-physicians-obstetrics-gynecology",
+        "medical-physicians-pediatrics"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040477606&fileKind=0": {
+      "hash": "a385a247bd2bcba1",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "raw-milk-production"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/files?cycle=8&layout=datalist&page=1&result_page=1&tclass1=000001234683&tclass2val=0&toukei=00551006&toukei_kind=9&tstat=000001234682": {
+      "hash": "8501af85095acd4c",
+      "latestYear": 2024,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "regional-business-final-energy-consumption",
+        "regional-household-car-final-energy-consumption",
+        "regional-household-final-energy-consumption",
+        "regional-industry-final-energy-consumption"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/files?layout=datalist&lid=000001478969&page=1": {
+      "hash": "255a70dfbd1a2077",
+      "latestYear": 2024,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "agricultural-output"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/files?layout=datalist&toukei=00200252&tstat=000001151626&tclass1=000001151629&tclass2=000001151630&cycle=7&year=20250&month=0": {
+      "hash": "8059f312d7fe02e5",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "prefectural-public-building-floor-area"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/files?toukei=00200555&tstat=000001231885": {
+      "hash": "1c0d61b6255e421a",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "food-manufacturing-employees",
+        "food-manufacturing-establishments",
+        "food-manufacturing-shipment-amount"
+      ]
+    },
+    "https://www.e-stat.go.jp/stat-search/files?toukei=00450223": {
+      "hash": "630e38e25b600de2",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "business-closure-establishments",
+        "business-closure-rate",
+        "business-opening-base-establishments",
+        "business-opening-establishments",
+        "business-opening-rate"
+      ]
+    },
+    "https://www.env.go.jp/air/osen/index.html": {
+      "hash": "a988f016a7d86051",
+      "latestYear": 2019,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "pm25-compliant-general-station-count",
+        "pm25-general-station-compliance-rate",
+        "pm25-general-station-count",
+        "pm25-valid-general-station-count"
+      ]
+    },
+    "https://www.env.go.jp/park/doc/data.html": {
+      "hash": "eaf0700851b7be22",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "national-quasi-national-park-visits"
+      ]
+    },
+    "https://www.fdma.go.jp/disaster/heatstroke/post1.html": {
+      "hash": "bf02596453a51ef4",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "heatstroke-emergency-transports"
+      ]
+    },
+    "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html": {
+      "hash": "d1ed24d1eca08617",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "natural-disaster-deaths",
+        "natural-disaster-destroyed-houses",
+        "natural-disaster-half-destroyed-houses",
+        "natural-disaster-injured-persons",
+        "natural-disaster-missing-persons",
+        "natural-disaster-partially-damaged-houses"
+      ]
+    },
+    "https://www.fdma.go.jp/publication/rescue/post-7.html": {
+      "hash": "011de7c18ab94081",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "ambulance-hospital-arrival-time",
+        "ambulance-transported-deaths",
+        "ambulance-transported-mild",
+        "ambulance-transported-moderate",
+        "ambulance-transported-other",
+        "ambulance-transported-persons",
+        "ambulance-transported-severe"
+      ]
+    },
+    "https://www.fit-portal.go.jp/publicinfosummary": {
+      "hash": "a6ad2fe01b1c4208",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "fit-fip-installed-capacity",
+        "fit-fip-new-approved-installed-capacity",
+        "fit-transition-installed-capacity"
+      ]
+    },
+    "https://www.gender.go.jp/research/kenkyu/suishinjokyo/2025/report.html": {
+      "hash": "336c180dd50f50d9",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "prefectural-assembly-female-share",
+        "prefectural-manager-female-share"
+      ]
+    },
+    "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/t-page.asp": {
+      "hash": "f11936df8545eb3c",
+      "latestYear": 2070,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "future-population-change-rate-2050",
+        "future-population"
+      ]
+    },
+    "https://www.jfa.maff.go.jp/j/gyoko_gyozyo/g_zyoho_bako/gyoko_itiran/sub81.html": {
+      "hash": "c645502d806884ee",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "fishing-port-count-ksj"
+      ]
+    },
+    "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/": {
+      "hash": "b6c64d877816461b",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "beef-cattle-count",
+        "dairy-cattle-holdings",
+        "layer-hen-count",
+        "pig-count"
+      ]
+    },
+    "https://www.mext.go.jp/a_menu/shotou/zyosei/yoyuu_00002.htm": {
+      "hash": "fc588aeb569e2b0b",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "public-school-closures-cumulative"
+      ]
+    },
+    "https://www.mext.go.jp/b_menu/toukei/chousa02/shakai/kekka/k_detail/2024.htm": {
+      "hash": "f5f2e846a1ed9c72",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "designated-museum-visitors",
+        "museum-like-facility-visitors",
+        "registered-museum-visitors"
+      ]
+    },
+    "https://www.mext.go.jp/sports/b_menu/toukei/chousa04/shisetsu/kekka/1368165.htm": {
+      "hash": "dd6e9ce2c1289c9e",
+      "latestYear": 2024,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "athletics-stadium-count-public",
+        "elementary-school-gymnasium-count",
+        "junior-high-school-gymnasium-count"
+      ]
+    },
+    "https://www.mext.go.jp/sports/b_menu/toukei/kodomo/zencyo/1411922_00014.html": {
+      "hash": "2c45e40d4d2bff32",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "elementary5-fitness-score-female",
+        "elementary5-fitness-score-male",
+        "elementary5-weekly-exercise-420min-rate-female",
+        "elementary5-weekly-exercise-420min-rate-male"
+      ]
+    },
+    "https://www.mhlw.go.jp/content/001675215.pdf": {
+      "hash": "ff87172adb1246c4",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "salt-intake-female-age-adjusted",
+        "salt-intake-male-age-adjusted",
+        "vegetable-intake-female-age-adjusted",
+        "vegetable-intake-male-age-adjusted"
+      ]
+    },
+    "https://www.mhlw.go.jp/content/12400000/001711941.zip": {
+      "hash": "95efcf4dc8500954",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "health-checkup-breakfast-skipping-rate",
+        "health-checkup-late-dinner-rate"
+      ]
+    },
+    "https://www.mhlw.go.jp/stf/newpage_03092.html": {
+      "hash": "b7e0a26d3a0e2659",
+      "latestYear": 2019,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "metabolic-syndrome-prevalence-among-checkup-recipients",
+        "specific-health-checkup-participation-rate",
+        "specific-health-guidance-completion-rate"
+      ]
+    },
+    "https://www.mhlw.go.jp/stf/newpage_68794.html": {
+      "hash": "2680752ae6220936",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "foreign-employing-establishment-count",
+        "foreign-worker-count"
+      ]
+    },
+    "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000092189.html": {
+      "hash": "127e125821e0447e",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "poverty-support-new-consultation-cases"
+      ]
+    },
+    "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000186912.html": {
+      "hash": "e20f73d52564ed83",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "general-perinatal-center-count",
+        "regional-perinatal-center-count"
+      ]
+    },
+    "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/eiyou/r6-houkoku_00001.html": {
+      "hash": "d53d970e17e5b69a",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "bmi-female-40to69-age-adjusted",
+        "bmi-male-20to69-age-adjusted",
+        "daily-steps-female-20to64-age-adjusted",
+        "daily-steps-male-20to64-age-adjusted",
+        "smoking-rate-male-age-adjusted"
+      ]
+    },
+    "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/gan/gan_toroku.html": {
+      "hash": "6b20112ee127caef",
+      "latestYear": 2023,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "new-cancer-incidence-count"
+      ]
+    },
+    "https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/24/index.html": {
+      "hash": "a3eff683b5a31b5d",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "long-term-care-certified-persons"
+      ]
+    },
+    "https://www.mhlw.go.jp/toukei/list/79-1.html": {
+      "hash": "efcef2f36399b503",
+      "latestYear": 2011,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "home-medical-visit-cases",
+        "home-nursing-visit-cases"
+      ]
+    },
+    "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/index.html": {
+      "hash": "7e1c05cdfc40f256",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "municipal-mental-health-consultation-extended-persons"
+      ]
+    },
+    "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/tokusyu/necchusho24/index.html": {
+      "hash": "762425f2d8054eb8",
+      "latestYear": 2013,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "heatstroke-deaths"
+      ]
+    },
+    "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa25/index.html": {
+      "hash": "0cf87862f229d209",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "k6-known-score-estimated-persons-12plus",
+        "k6-score10plus-estimated-persons-12plus",
+        "k6-score10plus-rate-12plus"
+      ]
+    },
+    "https://www.mlit.go.jp/k-toukei/kouwan_01.html": {
+      "hash": "c38b2f9fd2335684",
+      "latestYear": 2018,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "port-count"
+      ]
+    },
+    "https://www.mlit.go.jp/kankocho/tokei_hakusyo/gaikokujinshohidoko.html": {
+      "hash": "fd3b0b9cae5b34a7",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "inbound-travel-consumption-by-destination",
+        "inbound-visit-sample-by-destination",
+        "inbound-visitors-by-destination"
+      ]
+    },
+    "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shohidoko.html": {
+      "hash": "1be6bd339469bb7a",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "domestic-travel-consumption-by-destination"
+      ]
+    },
+    "https://www.mlit.go.jp/mizukokudo/sabo/linksinpou.html": {
+      "hash": "e0679b3a45b108b1",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "debris-flow-special-warning-zone-count",
+        "debris-flow-warning-zone-count",
+        "landslide-special-warning-zone-count",
+        "landslide-warning-zone-count",
+        "landslip-special-warning-zone-count",
+        "landslip-warning-zone-count",
+        "steep-slope-special-warning-zone-count",
+        "steep-slope-warning-zone-count"
+      ]
+    },
+    "https://www.mlit.go.jp/road/Michi-no-Eki/list.html": {
+      "hash": "ad6a97bb61d6f395",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "roadside-station-count"
+      ]
+    },
+    "https://www.mlit.go.jp/road/sisaku/yobohozen/yobohozen_maint_r07.html": {
+      "hash": "6e6790acf2b6c1d7",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "road-bridge-condition-iii-count",
+        "road-bridge-condition-iv-count",
+        "road-bridge-diagnosed-count",
+        "road-tunnel-condition-iii-count",
+        "road-tunnel-condition-iv-count",
+        "road-tunnel-diagnosed-count"
+      ]
+    },
+    "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html": {
+      "hash": "7816655134927201",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "academic-achievement-test-average-rate",
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-reading-like-rate",
+        "national-assessment-elementary-study-1h-plus-rate",
+        "national-assessment-elementary-tutoring-rate"
+      ]
+    },
+    "https://www.nta.go.jp/taxes/sake/shiori-gaikyo/shiori/2025/index.htm": {
+      "hash": "e168c2191a09c45d",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "alcohol-sales-per-adult-beer",
+        "alcohol-sales-per-adult-sake",
+        "alcohol-sales-per-adult-shochu",
+        "alcohol-sales-per-adult-total",
+        "alcohol-sales-per-adult-whisky",
+        "alcohol-sales-per-adult-wine"
+      ]
+    },
+    "https://www.reinfolib.mlit.go.jp/": {
+      "hash": "8298734b2ea9e446",
+      "latestYear": null,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "residential-land-transaction-median-price",
+        "residential-land-transaction-sample-count"
+      ]
+    },
+    "https://www.shiruporuto.jp/public/document/container/literacy_chosa/2022/": {
+      "hash": "3fed719190554a1e",
+      "latestYear": 2022,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "financial-literacy-correct-rate"
+      ]
+    },
+    "https://www.soumu.go.jp/denshijiti/060213_02.html": {
+      "hash": "6a55fc06620abd02",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "prefectural-auto-environment-tax-application-count",
+        "prefectural-auto-environment-tax-online-application-count",
+        "prefectural-auto-environment-tax-online-application-rate",
+        "prefectural-dx-applicable-procedure-count",
+        "prefectural-dx-online-procedure-count",
+        "prefectural-dx-online-procedure-rate",
+        "prefectural-eltax-online-application-rate",
+        "prefectural-recruitment-online-application-rate"
+      ]
+    },
+    "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/teiin-kyuuyo02.html": {
+      "hash": "4f13298353c2b846",
+      "latestYear": 2025,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "avg-age-admin-prefecture",
+        "avg-salary-admin-prefecture",
+        "avg-salary-all-prefecture",
+        "avg-salary-education-prefecture",
+        "avg-salary-police-prefecture",
+        "bonus-admin-prefecture",
+        "governor-salary-prefecture",
+        "laspeyres-index-prefecture",
+        "overtime-pay-admin-prefecture",
+        "retirement-allowance-admin-prefecture"
+      ]
+    },
+    "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/archive/": {
+      "hash": "bb080a0975d72c4c",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "furusato-donation-amount-prefecture",
+        "furusato-donation-count-prefecture",
+        "furusato-fundraising-cost-prefecture",
+        "furusato-return-gift-procurement-cost-prefecture",
+        "furusato-return-gift-shipping-cost-prefecture",
+        "furusato-tax-deduction-municipal-prefecture",
+        "furusato-tax-deduction-prefectural-prefecture"
+      ]
+    },
+    "https://www.stat.go.jp/data/kokusei/2020/kekka.html": {
+      "hash": "0cac82144092e0e5",
+      "latestYear": 2022,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "sex-ratio-age-20-39"
+      ]
+    },
+    "https://www.zen-koutairen.com/statistics/": {
+      "hash": "f44a346d9cc3bbfa",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "high-school-club-per100-rugby-male"
+      ]
+    },
+    "https://www.zennichiyuren.or.jp/material/report/": {
+      "hash": "6a665c809be7c13c",
+      "latestYear": 2026,
+      "status": 200,
+      "checkedAt": "2026-11-04T07:26:01.234Z",
+      "changedAt": null,
+      "metrics": [
+        "pachinko-shop-density-per-10k"
+      ]
+    }
+  }
+}

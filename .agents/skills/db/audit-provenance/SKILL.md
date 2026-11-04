@@ -65,5 +65,6 @@ npx tsx .claude/scripts/provenance/audit-provenance-queue.ts # 是正対象が�
 - 正典: `.claude/rules/data-provenance-standards.md`
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
 - queue: `.claude/scripts/provenance/audit-provenance-queue.ts` → `data/provenance/`
+- 出典ページの変化: `.claude/scripts/provenance/watch-external-sources.ts` → `data/provenance/source-watch.md` (テスト `node --test .claude/scripts/provenance/__tests__/source-watch.test.mjs`)
 - 定期実行: `.claude/scripts/management/weekly-audits/provenance.sh` (週次レビューの `npm run weekly:audits`)
 - 手本 (blog): `.claude/scripts/blog/build-lineage-queue.mjs`

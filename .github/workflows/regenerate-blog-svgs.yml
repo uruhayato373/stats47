@@ -100,7 +100,8 @@ jobs:
           if [ -z "$SLUGS" ]; then
             npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix app/blog
           else
-            printf '%s\n' $SLUGS | xargs -P 6 -I{} npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix "app/blog/{}/"
+            read -r -a SLUG_LIST <<< "$SLUGS"
+            printf '%s\n' "${SLUG_LIST[@]}" | xargs -P 6 -I{} npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix "app/blog/{}/"
           fi
 
       - name: 🔎 Resolve target slugs
