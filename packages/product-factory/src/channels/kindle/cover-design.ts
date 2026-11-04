@@ -169,7 +169,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     textBaked: { checkedText: ["デジタル生活の地図", "通信・PC・テレワーク", "47都道府県 × 5つのデジタル生活データ", "stats47"], checkedAt: "2026-11-03" },
   },
   "K-S1-13": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S1-13/dee87e897cb1/background.jpg",
     sha256: "dee87e897cb1799e40ff2bb513650914b3dc9ed098e7d00aec82013c7c4bac20",
     bytes: 495578,
