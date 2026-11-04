@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-04T01:14:53.292Z",
+  "checkedAt": "2026-11-04T02:05:19.920Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
@@ -1421,7 +1421,7 @@
       "title": "住む県の選び方 — 統計で比べる5つの条件",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "総合の住みやすさランキングに頼らず、自分の条件に合う指標を選んで 47 都道府県を比べる手順の本。",
+      "scope": "総合の住みやすさランキングに頼らず、自分の条件に合う指標を選んで 47 都道府県を比べる手順の本。題名の 5 つの条件は、家賃・仕事・子育て・医療・災害の 5 つの切り口のことです。第8章では、そこから自分の譲れない条件を 3 つに絞ります。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -1452,11 +1452,11 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "unknown",
+          "publicationStatus": "draft",
           "checkedAt": null,
           "url": null,
           "priceYen": 500,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
@@ -3206,7 +3206,7 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-11-04T01:14:53.292Z",
+  "generatedAt": "2026-11-04T02:05:19.920Z",
   "total": 63,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",
