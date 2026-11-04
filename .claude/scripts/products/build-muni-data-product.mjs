@@ -239,7 +239,7 @@ for (const [name, list] of [[base, rows], [`${args.metric}_wards`, wardRows]]) {
   writeFileSync(join(outDir, `${name}_utf8.csv`), toCsv(CSV_HEADER, cells));
   writeFileSync(join(outDir, `${name}_utf8bom.csv`), toCsv(CSV_HEADER, cells, { bom: true }));
 }
-const reconHeader = ['年', '県別の合計', '自治体の合計', '差', '差の率(%)', '空欄の自治体数', '空欄で説明した県', '丸めの県', '県またぎ合併の県', '元データ要確認の県', '未説明の県'];
+const reconHeader = ['年', '県別の合計', '自治体の合計', '差', '差の率(%)', '空欄の自治体数', '空欄で説明した県', '丸めの県', '県またぎ合併の県', '公表値へ置換した県', '未説明の県'];
 writeFileSync(
   join(outDir, `${args.metric}_national_check.csv`),
   toCsv(reconHeader, recon.byYear.map((y) => [y.year, y.prefTotal, y.muniTotal, y.diff, y.diffPct, y.blanks, y.prefsBlank, y.prefsRounding, y.prefsCrossPref, y.prefsSourceIssue, y.prefsUnexplained]), { bom: true }),

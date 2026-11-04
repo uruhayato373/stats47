@@ -23,6 +23,8 @@ export const MUNI_PRODUCT_SPECS = {
       { years: '2020', survey: '令和 3 年経済センサス-活動調査 (2020 年の実績)' },
       { years: '2021〜2023', survey: '経済構造実態調査' },
     ],
+    correctionSource:
+      '置き換えた値: 川崎市「工業統計調査結果」 https://www.city.kawasaki.jp/170/page/0000025684.html ・ https://www.city.kawasaki.jp/170/cmsfiles/contents/0000053/53475/kogyo.xls',
     yearNotes: { 2020: '令和3年経済センサスへの切替で前年と単純比較不可' },
     rowNotes: [
       { codes: ['19201', '19430'], toYear: 2005, note: '旧上九一色村を含まない' },
