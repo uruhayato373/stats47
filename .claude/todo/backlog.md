@@ -2019,16 +2019,6 @@ updated: 2026-11-01
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `definition` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
-### [NOTE-INDEX-DRIFT-01] note 記事台帳の題名が公開中の題名と食い違う記事を揃える
-タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run note:catalog:check] [起票:2026-10-08] [領域:商品]
-
-- **解決済み (2026-10-13)**: 公開済みインデックスと下書き索引は、記事台帳 `data/note/articles.json` から `generate-note-catalog.ts` が作る派生物になり、
-  `npm run note:catalog:check` (PR・pre-commit) が手編集と再生成漏れを止める。65 件の r2_body のずれは、台帳の `body.manifest` (R2 に保存して読み戻せた版の SHA) で置き換えた。
-- **残り**: 台帳の `title` が公開中の題名と食い違う記事がある。`d-geo-flood-population-mesh` は台帳が「8,235メッシュ」、note の API
-  (`/api/v3/notes/nfe50fb61efc0` の `name`) と非公開 R2 の原稿は「29,737メッシュ」。`d-geo-land-price-future-population` は台帳「人口減少×住宅地価格を再現できるデータにする」、
-  公開中は「地価上昇地点と周囲の人口減少を照合する」。全件の照合は、台帳の `title` と note API の `name` を記事ごとに比べれば取れる (公開 API の取得は間隔を空ける。`feedback_note_editor_autosave_drafts`)。
-- **完了条件**: 公開済み全記事で台帳の `title` と note API の `name` が一致し、`note:catalog:check` が通る。
-
 ### [KEYS-SYNC-PROMINENCE-REGEN-01] ランキングの既知キーを足しても、そこから作るランキング索引の生成物が再生成されない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check] [起票:2026-10-08] [領域:データ] [進行中]
 
