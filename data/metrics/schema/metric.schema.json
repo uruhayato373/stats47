@@ -642,6 +642,41 @@
         "additionalProperties": false
       }
     },
+    "cityValueCorrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "areaCode": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "sourceValue": {
+            "type": "number"
+          },
+          "value": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "sourceUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "areaCode",
+          "year",
+          "sourceValue",
+          "value",
+          "reason",
+          "sourceUrl"
+        ],
+        "additionalProperties": false
+      }
+    },
     "entities": {
       "type": "array",
       "items": {

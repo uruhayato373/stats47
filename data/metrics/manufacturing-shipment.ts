@@ -1,10 +1,12 @@
 import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import { KAWASAKI_MANUFACTURING_CORRECTIONS } from "./defaults/kawasaki-manufacturing-corrections";
 import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const manufacturingShipment: MetricConfig = {
   "key": "manufacturing-shipment",
   "title": "製造品出荷額等",
   "subtitle": "総額（旧統計）",
+  "note": "川崎市・川崎区の1983年と1986年は、統計表の値に誤りがあるため川崎市公表の工業統計の値に置き換えている。",
   "unit": "百万円",
   "category": "miningindustry",
   "source": {
@@ -14,6 +16,7 @@ export const manufacturingShipment: MetricConfig = {
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm",
   },
+  "cityValueCorrections": KAWASAKI_MANUFACTURING_CORRECTIONS,
   "entities": [
     "city",
   ],
@@ -21,7 +24,7 @@ export const manufacturingShipment: MetricConfig = {
     "from": 1980,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

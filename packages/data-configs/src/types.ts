@@ -269,6 +269,24 @@ export interface SupplementalSource {
   reason: string;
 }
 
+/**
+ * `MetricConfig.cityValueCorrections` の 1 件。元の統計表の誤りを公表値へ置き換える。
+ * `sourceValue` と食い違う値を取り込んだら止まるので、元の表の訂正に気づける。
+ */
+export interface ValueCorrection {
+  areaCode: string;
+  /** 補正する年 (4 桁) */
+  year: number;
+  /** 元の統計表の値 */
+  sourceValue: number;
+  /** 置き換える公表値 */
+  value: number;
+  /** 誤りと判断した根拠 (監査で読む説明) */
+  reason: string;
+  /** 公表値の出典 */
+  sourceUrl: string;
+}
+
 export type YearSpec =
   'all' | { from: number; to: number } | { years: number[] };
 
@@ -423,6 +441,8 @@ export interface MetricConfig {
    * 補う年は `years` (取得年範囲) にも含めること (含めないと取り込みが止まる)。
    */
   supplementalSources?: readonly SupplementalSource[];
+  /** 市区町村の値のうち、元の統計表の誤りを公表値へ置き換えるもの。順位の計算より前に当てる */
+  cityValueCorrections?: readonly ValueCorrection[];
   /** 保持するエンティティ種別 (どの stats_* に相当するか) */
   entities: EntityKind[];
   /**
