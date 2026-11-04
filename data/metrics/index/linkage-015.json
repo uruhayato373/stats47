@@ -11158,7 +11158,7 @@
     },
     {
       "metricKey": "meal-charges-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:meal-charges-group-consumption-expenditure",
       "title": "食事代消費支出額",
       "sources": [
         {
@@ -11232,7 +11232,7 @@
     },
     {
       "metricKey": "meat-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:meat-group-consumption-expenditure",
       "title": "肉類消費支出額",
       "sources": [
         {

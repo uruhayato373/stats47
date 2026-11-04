@@ -2185,7 +2185,7 @@
     },
     {
       "metricKey": "personal-effects-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:personal-effects-group-consumption-expenditure",
       "title": "身の回り用品消費支出額",
       "sources": [
         {
@@ -7634,7 +7634,7 @@
     },
     {
       "metricKey": "pocket-money-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:pocket-money-group-consumption-expenditure",
       "title": "こづかい(使途不明)消費支出額",
       "sources": [
         {

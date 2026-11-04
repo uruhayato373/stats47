@@ -477,7 +477,7 @@
     },
     {
       "metricKey": "fabrics-yarn-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fabrics-yarn-group-consumption-expenditure",
       "title": "生地・糸類消費支出額",
       "sources": [
         {
@@ -514,7 +514,7 @@
     },
     {
       "metricKey": "face-mask-item-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:face-mask-item-consumption-expenditure",
       "title": "マスク消費支出額",
       "sources": [
         {
@@ -7001,7 +7001,7 @@
     },
     {
       "metricKey": "fish-paste-products-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fish-paste-products-group-consumption-expenditure",
       "title": "魚肉練製品消費支出額",
       "sources": [
         {

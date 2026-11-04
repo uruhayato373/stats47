@@ -1259,7 +1259,7 @@
     },
     {
       "metricKey": "root-vegetables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:root-vegetables-group-consumption-expenditure",
       "title": "根菜消費支出額",
       "sources": [
         {
@@ -1296,7 +1296,7 @@
     },
     {
       "metricKey": "root-vegetables-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:root-vegetables-group-consumption-quantity",
       "title": "根菜消費量",
       "sources": [
         {
@@ -4273,7 +4273,7 @@
     },
     {
       "metricKey": "salted-dried-seafood-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:salted-dried-seafood-group-consumption-expenditure",
       "title": "塩干魚介消費支出額",
       "sources": [
         {
@@ -4310,7 +4310,7 @@
     },
     {
       "metricKey": "salted-dried-seafood-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:salted-dried-seafood-group-consumption-quantity",
       "title": "塩干魚介消費量",
       "sources": [
         {
@@ -7956,7 +7956,7 @@
     },
     {
       "metricKey": "seasonings-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:seasonings-group-consumption-expenditure",
       "title": "調味料消費支出額",
       "sources": [
         {

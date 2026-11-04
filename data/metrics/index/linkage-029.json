@@ -2571,7 +2571,7 @@
     },
     {
       "metricKey": "tea-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:tea-group-consumption-expenditure",
       "title": "茶類消費支出額",
       "sources": [
         {
@@ -6099,7 +6099,7 @@
     },
     {
       "metricKey": "tissue-toilet-paper-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:tissue-toilet-paper-group-consumption-expenditure",
       "title": "ティッシュペーパー・トイレットペーパー消費支出額",
       "sources": [
         {

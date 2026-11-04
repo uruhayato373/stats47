@@ -540,7 +540,7 @@
     },
     {
       "metricKey": "other-social-expenses-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-social-expenses-group-consumption-expenditure",
       "title": "他の交際費消費支出額",
       "sources": [
         {
@@ -1347,7 +1347,7 @@
     },
     {
       "metricKey": "other-vegetables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-vegetables-group-consumption-expenditure",
       "title": "他の野菜消費支出額",
       "sources": [
         {
@@ -1384,7 +1384,7 @@
     },
     {
       "metricKey": "other-vegetables-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:other-vegetables-group-consumption-quantity",
       "title": "他の野菜消費量",
       "sources": [
         {
@@ -3400,7 +3400,7 @@
     },
     {
       "metricKey": "package-tours-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:package-tours-group-consumption-expenditure",
       "title": "パック旅行費消費支出額",
       "sources": [
         {

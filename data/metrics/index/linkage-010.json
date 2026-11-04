@@ -3613,7 +3613,7 @@
     },
     {
       "metricKey": "general-dining-out-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:general-dining-out-group-consumption-expenditure",
       "title": "一般外食消費支出額",
       "sources": [
         {
@@ -3724,7 +3724,7 @@
     },
     {
       "metricKey": "general-furniture-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:general-furniture-group-consumption-expenditure",
       "title": "一般家具消費支出額",
       "sources": [
         {
@@ -6261,7 +6261,7 @@
     },
     {
       "metricKey": "gift-money-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:gift-money-group-consumption-expenditure",
       "title": "贈与金消費支出額",
       "sources": [
         {

@@ -403,7 +403,7 @@
     },
     {
       "metricKey": "detergents-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:detergents-group-consumption-expenditure",
       "title": "洗剤消費支出額",
       "sources": [
         {
@@ -3928,7 +3928,7 @@
     },
     {
       "metricKey": "domestic-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:domestic-services-group-consumption-expenditure",
       "title": "家事サービス消費支出額",
       "sources": [
         {
@@ -4742,7 +4742,7 @@
     },
     {
       "metricKey": "dried-foods-seaweed-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:dried-foods-seaweed-group-consumption-expenditure",
       "title": "乾物・海藻消費支出額",
       "sources": [
         {
@@ -8569,7 +8569,7 @@
     },
     {
       "metricKey": "eggs-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:eggs-group-consumption-expenditure",
       "title": "卵消費支出額",
       "sources": [
         {
@@ -8606,7 +8606,7 @@
     },
     {
       "metricKey": "eggs-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:eggs-group-consumption-quantity",
       "title": "卵消費量",
       "sources": [
         {

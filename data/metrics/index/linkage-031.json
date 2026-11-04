@@ -2561,7 +2561,7 @@
     },
     {
       "metricKey": "underwear-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:underwear-group-consumption-expenditure",
       "title": "下着類消費支出額",
       "sources": [
         {
@@ -8764,7 +8764,7 @@
     },
     {
       "metricKey": "vegetables-seaweed-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:vegetables-seaweed-group-consumption-expenditure",
       "title": "野菜・海藻消費支出額",
       "sources": [
         {

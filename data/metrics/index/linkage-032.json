@@ -2919,7 +2919,7 @@
     },
     {
       "metricKey": "western-clothing-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:western-clothing-group-consumption-expenditure",
       "title": "洋服消費支出額",
       "sources": [
         {
@@ -5591,7 +5591,7 @@
     },
     {
       "metricKey": "womens-shirts-sweaters-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:womens-shirts-sweaters-group-consumption-expenditure",
       "title": "女性用シャツ・セーター類消費支出額",
       "sources": [
         {
@@ -5973,7 +5973,7 @@
     },
     {
       "metricKey": "womens-underwear-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:womens-underwear-group-consumption-expenditure",
       "title": "女性用下着類消費支出額",
       "sources": [
         {

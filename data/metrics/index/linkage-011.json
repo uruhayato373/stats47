@@ -4393,7 +4393,7 @@
     },
     {
       "metricKey": "health-supplements-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:health-supplements-group-consumption-expenditure",
       "title": "健康保持用摂取品消費支出額",
       "sources": [
         {
@@ -5414,7 +5414,7 @@
     },
     {
       "metricKey": "heating-cooling-appliances-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:heating-cooling-appliances-group-consumption-expenditure",
       "title": "冷暖房用器具消費支出額",
       "sources": [
         {

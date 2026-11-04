@@ -6243,7 +6243,7 @@
     },
     {
       "metricKey": "household-consumables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:household-consumables-group-consumption-expenditure",
       "title": "家事用消耗品消費支出額",
       "sources": [
         {
@@ -6511,7 +6511,7 @@
     },
     {
       "metricKey": "household-durables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:household-durables-group-consumption-expenditure",
       "title": "家庭用耐久財消費支出額",
       "sources": [
         {
@@ -11036,7 +11036,7 @@
     },
     {
       "metricKey": "household-utensils-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:household-utensils-group-consumption-expenditure",
       "title": "家事雑貨消費支出額",
       "sources": [
         {
@@ -13130,7 +13130,7 @@
     },
     {
       "metricKey": "housework-durables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:housework-durables-group-consumption-expenditure",
       "title": "家事用耐久財消費支出額",
       "sources": [
         {
@@ -13890,7 +13890,7 @@
     },
     {
       "metricKey": "housing-materials-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:housing-materials-group-consumption-expenditure",
       "title": "設備材料消費支出額",
       "sources": [
         {
@@ -13927,7 +13927,7 @@
     },
     {
       "metricKey": "housing-repair-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:housing-repair-services-group-consumption-expenditure",
       "title": "工事その他のサービス消費支出額",
       "sources": [
         {
@@ -13964,7 +13964,7 @@
     },
     {
       "metricKey": "housing-repairs-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:housing-repairs-group-consumption-expenditure",
       "title": "設備修繕・維持消費支出額",
       "sources": [
         {

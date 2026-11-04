@@ -2052,7 +2052,7 @@
     },
     {
       "metricKey": "shellfish-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:shellfish-group-consumption-expenditure",
       "title": "貝類消費支出額",
       "sources": [
         {
@@ -2089,7 +2089,7 @@
     },
     {
       "metricKey": "shellfish-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:shellfish-group-consumption-quantity",
       "title": "貝類消費量",
       "sources": [
         {
@@ -2228,7 +2228,7 @@
     },
     {
       "metricKey": "shirts-sweaters-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:shirts-sweaters-group-consumption-expenditure",
       "title": "シャツ・セーター類消費支出額",
       "sources": [
         {
@@ -9398,7 +9398,7 @@
     },
     {
       "metricKey": "soap-cosmetics-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:soap-cosmetics-group-consumption-expenditure",
       "title": "石けん類・化粧品消費支出額",
       "sources": [
         {
@@ -9795,7 +9795,7 @@
     },
     {
       "metricKey": "social-expenses-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:social-expenses-group-consumption-expenditure",
       "title": "交際費消費支出額",
       "sources": [
         {
@@ -11181,7 +11181,7 @@
     },
     {
       "metricKey": "soy-products-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:soy-products-group-consumption-expenditure",
       "title": "大豆加工品消費支出額",
       "sources": [
         {

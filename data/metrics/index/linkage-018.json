@@ -2265,7 +2265,7 @@
     },
     {
       "metricKey": "noodles-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:noodles-group-consumption-expenditure",
       "title": "麺類消費支出額",
       "sources": [
         {
@@ -2302,7 +2302,7 @@
     },
     {
       "metricKey": "noodles-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:noodles-group-consumption-quantity",
       "title": "麺類消費量",
       "sources": [
         {
@@ -10008,7 +10008,7 @@
     },
     {
       "metricKey": "oils-fats-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:oils-fats-group-consumption-expenditure",
       "title": "油脂消費支出額",
       "sources": [
         {
@@ -10045,7 +10045,7 @@
     },
     {
       "metricKey": "oils-fats-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:oils-fats-group-consumption-quantity",
       "title": "油脂消費量",
       "sources": [
         {
@@ -10082,7 +10082,7 @@
     },
     {
       "metricKey": "oils-seasonings-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:oils-seasonings-group-consumption-expenditure",
       "title": "油脂・調味料消費支出額",
       "sources": [
         {

@@ -3576,7 +3576,7 @@
     },
     {
       "metricKey": "prepared-foods-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:prepared-foods-group-consumption-expenditure",
       "title": "調理食品消費支出額",
       "sources": [
         {
@@ -6708,7 +6708,7 @@
     },
     {
       "metricKey": "processed-fruits-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:processed-fruits-group-consumption-expenditure",
       "title": "果物加工品消費支出額",
       "sources": [
         {
@@ -6745,7 +6745,7 @@
     },
     {
       "metricKey": "processed-meat-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:processed-meat-group-consumption-expenditure",
       "title": "加工肉消費支出額",
       "sources": [
         {

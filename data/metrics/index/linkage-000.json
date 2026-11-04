@@ -2433,7 +2433,7 @@
     },
     {
       "metricKey": "admission-game-fees-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:admission-game-fees-group-consumption-expenditure",
       "title": "入場・観覧・ゲーム代消費支出額",
       "sources": [
         {
@@ -7072,7 +7072,7 @@
     },
     {
       "metricKey": "alcoholic-beverages-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:alcoholic-beverages-group-consumption-expenditure",
       "title": "酒類消費支出額",
       "sources": [
         {

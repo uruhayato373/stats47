@@ -6002,7 +6002,7 @@
     },
     {
       "metricKey": "dairy-eggs-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:dairy-eggs-group-consumption-expenditure",
       "title": "乳卵類消費支出額",
       "sources": [
         {
@@ -6039,7 +6039,7 @@
     },
     {
       "metricKey": "dairy-products-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:dairy-products-group-consumption-expenditure",
       "title": "乳製品消費支出額",
       "sources": [
         {

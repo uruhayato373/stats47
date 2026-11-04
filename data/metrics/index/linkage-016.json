@@ -2124,7 +2124,7 @@
     },
     {
       "metricKey": "medical-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:medical-services-group-consumption-expenditure",
       "title": "保健医療サービス消費支出額",
       "sources": [
         {
@@ -2161,7 +2161,7 @@
     },
     {
       "metricKey": "medical-supplies-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:medical-supplies-group-consumption-expenditure",
       "title": "保健医療用品・器具消費支出額",
       "sources": [
         {
@@ -2413,7 +2413,7 @@
     },
     {
       "metricKey": "medicines-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:medicines-group-consumption-expenditure",
       "title": "医薬品消費支出額",
       "sources": [
         {
@@ -2904,7 +2904,7 @@
     },
     {
       "metricKey": "mens-shirts-sweaters-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:mens-shirts-sweaters-group-consumption-expenditure",
       "title": "男性用シャツ・セーター類消費支出額",
       "sources": [
         {
@@ -3319,7 +3319,7 @@
     },
     {
       "metricKey": "mens-underwear-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:mens-underwear-group-consumption-expenditure",
       "title": "男性用下着類消費支出額",
       "sources": [
         {
@@ -4506,7 +4506,7 @@
     },
     {
       "metricKey": "milk-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:milk-group-consumption-expenditure",
       "title": "牛乳消費支出額",
       "sources": [
         {
@@ -5468,7 +5468,7 @@
     },
     {
       "metricKey": "miscellaneous-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:miscellaneous-group-consumption-expenditure",
       "title": "諸雑費消費支出額",
       "sources": [
         {

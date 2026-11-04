@@ -1692,7 +1692,7 @@
     },
     {
       "metricKey": "sports-goods-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:sports-goods-group-consumption-expenditure",
       "title": "運動用具類消費支出額",
       "sources": [
         {
@@ -4863,7 +4863,7 @@
     },
     {
       "metricKey": "staple-prepared-foods-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:staple-prepared-foods-group-consumption-expenditure",
       "title": "主食的調理食品消費支出額",
       "sources": [
         {
@@ -5466,7 +5466,7 @@
     },
     {
       "metricKey": "stationery-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:stationery-group-consumption-expenditure",
       "title": "文房具消費支出額",
       "sources": [
         {
@@ -8961,7 +8961,7 @@
     },
     {
       "metricKey": "supplementary-education-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:supplementary-education-group-consumption-expenditure",
       "title": "補習教育消費支出額",
       "sources": [
         {

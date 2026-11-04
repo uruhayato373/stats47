@@ -2096,7 +2096,7 @@
     },
     {
       "metricKey": "automobile-maintenance-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:automobile-maintenance-group-consumption-expenditure",
       "title": "自動車等維持消費支出額",
       "sources": [
         {
@@ -2133,7 +2133,7 @@
     },
     {
       "metricKey": "automobile-purchases-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:automobile-purchases-group-consumption-expenditure",
       "title": "自動車等購入消費支出額",
       "sources": [
         {
@@ -2170,7 +2170,7 @@
     },
     {
       "metricKey": "automobile-related-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:automobile-related-group-consumption-expenditure",
       "title": "自動車等関係費消費支出額",
       "sources": [
         {
@@ -7345,7 +7345,7 @@
     },
     {
       "metricKey": "bags-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:bags-group-consumption-expenditure",
       "title": "かばん類消費支出額",
       "sources": [
         {
@@ -9579,7 +9579,7 @@
     },
     {
       "metricKey": "beauty-products-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:beauty-products-group-consumption-expenditure",
       "title": "理美容用品消費支出額",
       "sources": [
         {
@@ -9851,7 +9851,7 @@
     },
     {
       "metricKey": "beauty-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:beauty-services-group-consumption-expenditure",
       "title": "理美容サービス消費支出額",
       "sources": [
         {
@@ -10002,7 +10002,7 @@
     },
     {
       "metricKey": "bedding-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:bedding-group-consumption-expenditure",
       "title": "寝具類消費支出額",
       "sources": [
         {
@@ -11730,7 +11730,7 @@
     },
     {
       "metricKey": "beverages-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:beverages-group-consumption-expenditure",
       "title": "飲料消費支出額",
       "sources": [
         {
@@ -11767,7 +11767,7 @@
     },
     {
       "metricKey": "bicycle-purchases-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:bicycle-purchases-group-consumption-expenditure",
       "title": "自転車購入消費支出額",
       "sources": [
         {

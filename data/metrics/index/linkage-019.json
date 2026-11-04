@@ -1109,7 +1109,7 @@
     },
     {
       "metricKey": "other-beverages-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-beverages-group-consumption-expenditure",
       "title": "他の飲料消費支出額",
       "sources": [
         {
@@ -1928,7 +1928,7 @@
     },
     {
       "metricKey": "other-cereals-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-cereals-group-consumption-expenditure",
       "title": "他の穀類消費支出額",
       "sources": [
         {
@@ -1965,7 +1965,7 @@
     },
     {
       "metricKey": "other-cereals-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:other-cereals-group-consumption-quantity",
       "title": "他の穀類消費量",
       "sources": [
         {
@@ -2546,7 +2546,7 @@
     },
     {
       "metricKey": "other-clothing-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-clothing-group-consumption-expenditure",
       "title": "他の被服消費支出額",
       "sources": [
         {
@@ -2583,7 +2583,7 @@
     },
     {
       "metricKey": "other-clothing-misc-2025-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-clothing-misc-2025-group-consumption-expenditure",
       "title": "他の被服のその他消費支出額",
       "sources": [
         {
@@ -3412,7 +3412,7 @@
     },
     {
       "metricKey": "other-fuel-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-fuel-group-consumption-expenditure",
       "title": "他の光熱消費支出額",
       "sources": [
         {
@@ -3745,7 +3745,7 @@
     },
     {
       "metricKey": "other-household-consumables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-household-consumables-group-consumption-expenditure",
       "title": "他の家事用消耗品消費支出額",
       "sources": [
         {
@@ -4811,7 +4811,7 @@
     },
     {
       "metricKey": "other-miscellaneous-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-miscellaneous-group-consumption-expenditure",
       "title": "他の諸雑費消費支出額",
       "sources": [
         {
@@ -5222,7 +5222,7 @@
     },
     {
       "metricKey": "other-prepared-foods-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-prepared-foods-group-consumption-expenditure",
       "title": "他の調理食品消費支出額",
       "sources": [
         {
@@ -5341,7 +5341,7 @@
     },
     {
       "metricKey": "other-processed-seafood-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-processed-seafood-group-consumption-expenditure",
       "title": "他の魚介加工品消費支出額",
       "sources": [
         {
@@ -5378,7 +5378,7 @@
     },
     {
       "metricKey": "other-processed-vegetables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-processed-vegetables-group-consumption-expenditure",
       "title": "他の野菜・海藻加工品消費支出額",
       "sources": [
         {
@@ -5452,7 +5452,7 @@
     },
     {
       "metricKey": "other-recreational-goods-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-recreational-goods-group-consumption-expenditure",
       "title": "他の教養娯楽用品消費支出額",
       "sources": [
         {
@@ -5489,7 +5489,7 @@
     },
     {
       "metricKey": "other-recreational-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:other-recreational-services-group-consumption-expenditure",
       "title": "他の教養娯楽サービス消費支出額",
       "sources": [
         {

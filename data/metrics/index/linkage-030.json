@@ -5012,7 +5012,7 @@
     },
     {
       "metricKey": "toys-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:toys-group-consumption-expenditure",
       "title": "玩具消費支出額",
       "sources": [
         {
@@ -8233,7 +8233,7 @@
     },
     {
       "metricKey": "transportation-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:transportation-group-consumption-expenditure",
       "title": "交通消費支出額",
       "sources": [
         {

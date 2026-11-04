@@ -4110,7 +4110,7 @@
     },
     {
       "metricKey": "books-printed-matter-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:books-printed-matter-group-consumption-expenditure",
       "title": "書籍・他の印刷物消費支出額",
       "sources": [
         {
@@ -4606,7 +4606,7 @@
     },
     {
       "metricKey": "bread-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:bread-group-consumption-quantity",
       "title": "パン消費量",
       "sources": [
         {
@@ -5603,7 +5603,7 @@
     },
     {
       "metricKey": "broadcasting-fees-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:broadcasting-fees-group-consumption-expenditure",
       "title": "放送受信料消費支出額",
       "sources": [
         {
@@ -11580,7 +11580,7 @@
     },
     {
       "metricKey": "cereals-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:cereals-group-consumption-expenditure",
       "title": "穀類消費支出額",
       "sources": [
         {

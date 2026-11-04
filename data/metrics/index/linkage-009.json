@@ -4954,7 +4954,7 @@
     },
     {
       "metricKey": "footwear-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:footwear-group-consumption-expenditure",
       "title": "履物類消費支出額",
       "sources": [
         {
@@ -9973,7 +9973,7 @@
     },
     {
       "metricKey": "fresh-fish-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fresh-fish-group-consumption-expenditure",
       "title": "鮮魚消費支出額",
       "sources": [
         {
@@ -10010,7 +10010,7 @@
     },
     {
       "metricKey": "fresh-fish-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:fresh-fish-group-consumption-quantity",
       "title": "鮮魚消費量",
       "sources": [
         {
@@ -10299,7 +10299,7 @@
     },
     {
       "metricKey": "fresh-fruits-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fresh-fruits-group-consumption-expenditure",
       "title": "生鮮果物消費支出額",
       "sources": [
         {
@@ -10336,7 +10336,7 @@
     },
     {
       "metricKey": "fresh-fruits-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:fresh-fruits-group-consumption-quantity",
       "title": "生鮮果物消費量",
       "sources": [
         {
@@ -10373,7 +10373,7 @@
     },
     {
       "metricKey": "fresh-meat-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fresh-meat-group-consumption-expenditure",
       "title": "生鮮肉消費支出額",
       "sources": [
         {
@@ -10410,7 +10410,7 @@
     },
     {
       "metricKey": "fresh-meat-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:fresh-meat-group-consumption-quantity",
       "title": "生鮮肉消費量",
       "sources": [
         {
@@ -10706,7 +10706,7 @@
     },
     {
       "metricKey": "fresh-seafood-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fresh-seafood-group-consumption-expenditure",
       "title": "生鮮魚介消費支出額",
       "sources": [
         {
@@ -10743,7 +10743,7 @@
     },
     {
       "metricKey": "fresh-seafood-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:fresh-seafood-group-consumption-quantity",
       "title": "生鮮魚介消費量",
       "sources": [
         {
@@ -11682,7 +11682,7 @@
     },
     {
       "metricKey": "fresh-vegetables-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:fresh-vegetables-group-consumption-quantity",
       "title": "生鮮野菜消費量",
       "sources": [
         {
@@ -12368,7 +12368,7 @@
     },
     {
       "metricKey": "fruits-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:fruits-group-consumption-expenditure",
       "title": "果物消費支出額",
       "sources": [
         {

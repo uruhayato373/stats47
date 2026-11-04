@@ -5881,7 +5881,7 @@
     },
     {
       "metricKey": "interior-furnishings-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:interior-furnishings-group-consumption-expenditure",
       "title": "室内装備・装飾品消費支出額",
       "sources": [
         {
@@ -7766,7 +7766,7 @@
     },
     {
       "metricKey": "japanese-clothing-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:japanese-clothing-group-consumption-expenditure",
       "title": "和服消費支出額",
       "sources": [
         {

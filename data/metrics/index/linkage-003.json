@@ -2067,7 +2067,7 @@
     },
     {
       "metricKey": "childrens-shirts-sweaters-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:childrens-shirts-sweaters-group-consumption-expenditure",
       "title": "子供用シャツ・セーター類消費支出額",
       "sources": [
         {
@@ -2104,7 +2104,7 @@
     },
     {
       "metricKey": "childrens-shirts-sweaters-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:childrens-shirts-sweaters-group-consumption-quantity",
       "title": "子供用シャツ・セーター類消費量",
       "sources": [
         {
@@ -2363,7 +2363,7 @@
     },
     {
       "metricKey": "childrens-underwear-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:childrens-underwear-group-consumption-expenditure",
       "title": "子供用下着類消費支出額",
       "sources": [
         {
@@ -5044,7 +5044,7 @@
     },
     {
       "metricKey": "clothing-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:clothing-services-group-consumption-expenditure",
       "title": "被服関連サービス消費支出額",
       "sources": [
         {
@@ -5467,7 +5467,7 @@
     },
     {
       "metricKey": "coffee-cocoa-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:coffee-cocoa-group-consumption-expenditure",
       "title": "コーヒー・ココア消費支出額",
       "sources": [
         {
@@ -6697,7 +6697,7 @@
     },
     {
       "metricKey": "communication-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:communication-group-consumption-expenditure",
       "title": "通信消費支出額",
       "sources": [
         {

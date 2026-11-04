@@ -8884,7 +8884,7 @@
     },
     {
       "metricKey": "leafy-vegetables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:leafy-vegetables-group-consumption-expenditure",
       "title": "葉茎菜消費支出額",
       "sources": [
         {
@@ -8921,7 +8921,7 @@
     },
     {
       "metricKey": "leafy-vegetables-group-consumption-quantity",
-      "pageId": null,
+      "pageId": "ranking:leafy-vegetables-group-consumption-quantity",
       "title": "葉茎菜消費量",
       "sources": [
         {
@@ -9076,7 +9076,7 @@
     },
     {
       "metricKey": "lesson-fees-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:lesson-fees-group-consumption-expenditure",
       "title": "月謝類消費支出額",
       "sources": [
         {

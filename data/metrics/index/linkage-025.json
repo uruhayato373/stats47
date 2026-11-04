@@ -84,7 +84,7 @@
     },
     {
       "metricKey": "recreational-durables-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:recreational-durables-group-consumption-expenditure",
       "title": "教養娯楽用耐久財消費支出額",
       "sources": [
         {
@@ -153,7 +153,7 @@
     },
     {
       "metricKey": "recreational-goods-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:recreational-goods-group-consumption-expenditure",
       "title": "教養娯楽用品消費支出額",
       "sources": [
         {
@@ -190,7 +190,7 @@
     },
     {
       "metricKey": "recreational-services-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:recreational-services-group-consumption-expenditure",
       "title": "教養娯楽サービス消費支出額",
       "sources": [
         {
@@ -4121,7 +4121,7 @@
     },
     {
       "metricKey": "remittances-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:remittances-group-consumption-expenditure",
       "title": "仕送り金消費支出額",
       "sources": [
         {
@@ -4399,7 +4399,7 @@
     },
     {
       "metricKey": "rent-group-consumption-expenditure",
-      "pageId": null,
+      "pageId": "ranking:rent-group-consumption-expenditure",
       "title": "家賃地代消費支出額",
       "sources": [
         {
