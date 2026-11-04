@@ -4929,6 +4929,50 @@
       "themes": []
     },
     {
+      "metricKey": "clothing-footwear-budget-share-kakei",
+      "pageId": null,
+      "title": "消費支出に占める被服及び履物の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002070003",
+          "filters": {
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002070003",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city",
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "122"
+            ],
+            "denominatorCodes": [
+              "059"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "be6eda404e94a06b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:clothing-footwear-budget-share-kakei",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "clothing-footwear-expenditure-ratio-multi-person-households",
       "pageId": "ranking:clothing-footwear-expenditure-ratio-multi-person-households",
       "title": "被服及び履物費割合",
@@ -8785,50 +8829,6 @@
         },
         {
           "pageId": "ranking:commuters-to-other-municipalities",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-to-other-municipalities-female",
-      "pageId": null,
-      "title": "他市区町村への通勤者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270502"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270502"
-        },
-        "derived": false,
-        "configHash": "395be25db60ef12a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-to-other-municipalities-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-to-other-municipalities-female",
           "kind": "ranking"
         }
       ],

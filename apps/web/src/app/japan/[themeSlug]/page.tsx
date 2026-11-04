@@ -30,6 +30,7 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 import { JapanMetricChart } from './JapanMetricChart';
 import { KakeiAxisChart } from './KakeiAxisChart';
 
+import type { KakeiAxisChart as KakeiAxisChartData } from '@stats47/stats-r2/types';
 import type { NumericDomainPolicy } from '@stats47/types';
 import type { Metadata } from 'next';
 
@@ -116,6 +117,13 @@ async function loadMetricSeries(
   }
   return views;
 }
+
+const KAKEI_PERIOD_LABELS: Record<KakeiAxisChartData['period'], string> = {
+  'monthly-average': '1か月平均',
+  'annual-total': '年間合計',
+  balance: '残高',
+  'month-total': '月ごとの合計',
+};
 
 export default async function JapanThemePage({ params }: { params: Promise<Params> }) {
   const {themeSlug} = await params;
@@ -205,7 +213,7 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
         <section className="mt-10" aria-label="家計調査の分類軸別比較">
           <SectionHeader title="2025年の世帯別比較" />
           <p className="mb-5 text-sm text-muted-foreground">
-            全国の年間収入・世帯人数・世帯類型などの分類別の値を示します。各図に記載した世帯区分を確認してください。県庁所在市の順位や全国時系列とは集計軸が異なります。
+            全国の年間収入・世帯人数・世帯類型・住居の所有関係・月などの分類別の値を示します。各図に記載した世帯区分を確認してください。県庁所在市の順位や全国時系列とは集計軸が異なります。
           </p>
           <PanelGrid className="grid-cols-1 @md:grid-cols-2">
             {axisCharts.map(chart => <ChartPanel
@@ -216,7 +224,7 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
                 source={`e-Stat 家計調査 ${(chart.sourceIds ?? [chart.sourceId]).join('・')}（2025年）`}
                 sourceLink={buildEstatTableUrl(chart.sourceId)}
                 sourceLinks={chart.sourceIds?.map(sourceId => ({ label: `e-Stat 統計表 ${sourceId}`, url: buildEstatTableUrl(sourceId) }))}
-                annotation={`${chart.household}・${chart.axis}・${chart.period === 'monthly-average' ? '1か月平均' : chart.period === 'annual-total' ? '年間合計' : '残高'}・${chart.unit}`}
+                annotation={`${chart.household}・${chart.axis}・${KAKEI_PERIOD_LABELS[chart.period]}・${chart.unit}`}
               />}
             >
               <KakeiAxisChart chart={chart} />

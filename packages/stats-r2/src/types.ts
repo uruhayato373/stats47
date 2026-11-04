@@ -115,7 +115,7 @@ export interface KakeiAxisChart {
   sourceIds?: string[];
   household: string;
   axis: string;
-  period: "monthly-average" | "annual-total" | "balance";
+  period: "monthly-average" | "annual-total" | "balance" | "month-total";
   unit: string;
   filters: Record<string, string>;
   rows: { code: string; label: string; value: number }[];

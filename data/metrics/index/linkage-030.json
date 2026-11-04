@@ -2,6 +2,478 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "thermal-power-plant-count",
+      "pageId": null,
+      "title": "火力発電所数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "ksjDataId": "P03",
+          "ksjVersion": "13"
+        },
+        "fetcherKey": "mlit_ksj",
+        "configHash": "4ea62d6c9c854fc7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:thermal-power-plant-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "three-generation-household-members",
+      "pageId": "ranking:three-generation-household-members",
+      "title": "3世代世帯人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445285",
+          "filters": {
+            "cdCat01": "R1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445285",
+          "cdCat01": "R1"
+        },
+        "derived": false,
+        "configHash": "4d5f77b1c42c34b0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:three-generation-household-members",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:living-housing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "living-housing"
+      ]
+    },
+    {
+      "metricKey": "three-wheeled-light-vehicle-count",
+      "pageId": null,
+      "title": "軽自動車台数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H721002"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H721002"
+        },
+        "derived": false,
+        "configHash": "2b60aa9d90dae6ee"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:three-wheeled-light-vehicle-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:three-wheeled-light-vehicle-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tissue-paper-consumption-expenditure",
+      "pageId": "ranking:tissue-paper-consumption-expenditure",
+      "title": "ティッシュペーパー消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040501010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040501010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "db7e36b7c7be6fb0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:tissue-paper-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tissue-paper-consumption-expenditure-vs-average-weight",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tissue-paper-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tissue-toilet-paper-group-consumption-expenditure",
+      "pageId": "ranking:tissue-toilet-paper-group-consumption-expenditure",
+      "title": "ティッシュペーパー・トイレットペーパー消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040501000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040501000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2e4b2ca66ccdba21"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tissue-toilet-paper-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tobacco-consumption-expenditure",
+      "pageId": "ranking:tobacco-consumption-expenditure",
+      "title": "たばこ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100140001",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100140001",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "cc74e4a7437608e8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:tobacco-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:household-other-purchases",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:tobacco-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tofu-consumption-expenditure",
+      "pageId": "ranking:tofu-consumption-expenditure",
+      "title": "豆腐消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010530010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010530010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f3c7348a9b284801"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tofu-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "tofu-consumption-quantity",
       "pageId": "ranking:tofu-consumption-quantity",
       "title": "豆腐消費量",
@@ -7799,6 +8271,50 @@
       "themes": []
     },
     {
+      "metricKey": "transport-communication-budget-share-kakei",
+      "pageId": null,
+      "title": "消費支出に占める交通・通信の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002070003",
+          "filters": {
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002070003",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city",
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "145"
+            ],
+            "denominatorCodes": [
+              "059"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "60b48b9908292f90"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:transport-communication-budget-share-kakei",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "transport-communication-expenditure-ratio-multi-person-households",
       "pageId": "ranking:transport-communication-expenditure-ratio-multi-person-households",
       "title": "交通・通信費割合",
@@ -10186,553 +10702,6 @@
       "consumers": [
         {
           "pageId": "ranking:treatment-rate-hypertension-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-hypertension-outpatient",
-      "pageId": "ranking:treatment-rate-hypertension-outpatient",
-      "title": "高血圧性疾患の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "25",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "25",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "05cdc9547fd48067"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:treatment-rate-hypertension-outpatient-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:treatment-rate-hypertension-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-mental-disorder-inpatient",
-      "pageId": "ranking:treatment-rate-mental-disorder-inpatient",
-      "title": "精神及び行動の障害の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "16",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "16",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "4531f35b7c6fd814"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:treatment-rate-mental-disorder-inpatient-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:treatment-rate-mental-disorder-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-mental-disorder-outpatient",
-      "pageId": "ranking:treatment-rate-mental-disorder-outpatient",
-      "title": "精神及び行動の障害の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "16",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "16",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "bfecf81630880511"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-mental-disorder-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-mood-disorder-inpatient",
-      "pageId": "ranking:treatment-rate-mood-disorder-inpatient",
-      "title": "気分障害（うつ病を含む）の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "18",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "18",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "2a885c3188ad765a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-mood-disorder-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-mood-disorder-outpatient",
-      "pageId": "ranking:treatment-rate-mood-disorder-outpatient",
-      "title": "気分障害（うつ病を含む）の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "18",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "18",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "370d77f4e81d5e4f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:treatment-rate-mood-disorder-outpatient-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:treatment-rate-mood-disorder-outpatient",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:healthcare",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "healthcare"
-      ]
-    },
-    {
-      "metricKey": "treatment-rate-musculoskeletal-inpatient",
-      "pageId": "ranking:treatment-rate-musculoskeletal-inpatient",
-      "title": "筋骨格系及び結合組織の疾患の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "42",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "42",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "91cbbbaccd1a683f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-musculoskeletal-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-musculoskeletal-outpatient",
-      "pageId": "ranking:treatment-rate-musculoskeletal-outpatient",
-      "title": "筋骨格系及び結合組織の疾患の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "42",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "42",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "6c37622946e1eb06"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-musculoskeletal-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-neurosis-inpatient",
-      "pageId": "ranking:treatment-rate-neurosis-inpatient",
-      "title": "神経症性障害・ストレス関連障害の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "19",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "19",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "d680f76ced920627"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-neurosis-inpatient",
           "kind": "ranking"
         }
       ],

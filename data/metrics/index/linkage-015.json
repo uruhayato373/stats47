@@ -2,6 +2,627 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "life-expectancy-0-male",
+      "pageId": "ranking:life-expectancy-0-male",
+      "title": "平均余命",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I0520101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0520101"
+        },
+        "derived": false,
+        "configHash": "0752501418d1b38f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:healthy-life-expectancy-male-female-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:unhealthy-period-gender-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:life-expectancy-0-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "healthcare"
+      ]
+    },
+    {
+      "metricKey": "life-expectancy-65-male",
+      "pageId": "ranking:life-expectancy-65-male",
+      "title": "平均余命",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I0520501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0520501"
+        },
+        "derived": false,
+        "configHash": "fc0fecc84d224ea3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:life-expectancy-65-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "life-expectancy-at-birth-female",
+      "pageId": null,
+      "title": "平均余命",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020209",
+          "filters": {
+            "cdCat01": "I1102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020209",
+          "cdCat01": "I1102"
+        },
+        "derived": false,
+        "configHash": "11b35901a197ccd6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:life-expectancy-at-birth-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:life-expectancy-at-birth-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "life-expectancy-at-birth-male",
+      "pageId": null,
+      "title": "平均余命",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020209",
+          "filters": {
+            "cdCat01": "I1101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020209",
+          "cdCat01": "I1101"
+        },
+        "derived": false,
+        "configHash": "03a6a842629c82ed"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:life-expectancy-at-birth-male",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:life-expectancy-at-birth-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "light-and-small-special-vehicle-count",
+      "pageId": null,
+      "title": "軽自動車及び小型特殊自動車台数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H7210"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H7210"
+        },
+        "derived": false,
+        "configHash": "bc33ee5b86c98604"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:light-and-small-special-vehicle-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:light-and-small-special-vehicle-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "light-bulbs-consumption-expenditure",
+      "pageId": "ranking:light-bulbs-consumption-expenditure",
+      "title": "電球・ランプ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040400050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040400050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8b8eae83dfbb96bc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:light-bulbs-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "lighting-consumption-expenditure",
       "pageId": "ranking:lighting-consumption-expenditure",
       "title": "照明器具消費支出額",
@@ -11154,415 +11775,6 @@
       ],
       "themes": [
         "daily-time-use"
-      ]
-    },
-    {
-      "metricKey": "meal-charges-group-consumption-expenditure",
-      "pageId": "ranking:meal-charges-group-consumption-expenditure",
-      "title": "食事代消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "011211000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "011211000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "2dafe7d0cec9bfb3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:meal-charges-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "meal-kit-consumption-expenditure",
-      "pageId": "ranking:meal-kit-consumption-expenditure",
-      "title": "そうざい材料セット消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010920110",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010920110",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "23a9f3264038a125"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:meal-kit-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "meat-group-consumption-expenditure",
-      "pageId": "ranking:meat-group-consumption-expenditure",
-      "title": "肉類消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010300000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010300000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "7869758cd89bb887"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:meat-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "media-avg-time-unemployed-female",
-      "pageId": "ranking:media-avg-time-unemployed-female",
-      "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0330202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0330202"
-        },
-        "derived": false,
-        "configHash": "b25e0dc44a8d897f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:media-avg-time-unemployed-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "media-avg-time-unemployed-male",
-      "pageId": "ranking:media-avg-time-unemployed-male",
-      "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0330102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0330102"
-        },
-        "derived": false,
-        "configHash": "172cca5fab90a810"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:media-avg-time-unemployed-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "media-production-employees",
-      "pageId": "ranking:media-production-employees",
-      "title": "映像・音声・文字情報制作業の従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004005665",
-          "filters": {
-            "cdTab": "113-2021",
-            "cdCat01": "41",
-            "cdCat02": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004005665",
-          "cdCat01": "41",
-          "cdCat02": "0",
-          "cdTab": "113-2021"
-        },
-        "derived": false,
-        "configHash": "8a3c418859079313"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:media-production-employees",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-services",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-services"
       ]
     }
   ]

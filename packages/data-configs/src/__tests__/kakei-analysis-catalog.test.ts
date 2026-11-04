@@ -25,6 +25,13 @@ const metrics = new Map(
 );
 
 describe('家計調査の分析単位の台帳', () => {
+  it('実値を確かめていない候補は表を採用済みにしない proposed のまま置く', () => {
+    const unverified = KAKEI_ANALYSES.filter(
+      (row) => row.evidence === 'metadata-checked'
+    );
+    expect(unverified.length).toBeGreaterThan(0);
+    for (const row of unverified) expect(row.placement.state).toBe('proposed');
+  });
   it('出典の分類条件と公開先の参照が一意である', () => {
     expect(validateKakeiAnalyses(KAKEI_ANALYSES, { pages, metrics })).toEqual(
       []
@@ -67,12 +74,12 @@ describe('家計調査の分析単位の台帳', () => {
       `${row.id}: destination page is not published: ${row.placement.pageId}`
     );
   });
-  it('ローカル生成済みの図には実値確認が必要で、未公開のmetricを名乗れない', () => {
+  it('公開済みの図には実値確認が必要で、metricを名乗れない', () => {
     const row = KAKEI_ANALYSES.find((item) => item.id === 'food-income-quintile')!;
-    expect(row.placement.state).toBe('staged');
+    expect(row.placement.state).toBe('published');
     const bad = { ...row, evidence: 'metadata-checked' as const, placement: { ...row.placement, metricKey: 'fake-key' } };
     const errors = validateKakeiAnalyses([bad], { pages, metrics });
-    expect(errors).toContain(`${row.id}: staged output needs checked values and a chart`);
-    expect(errors).toContain(`${row.id}: unpublished output cannot claim a metric`);
+    expect(errors).toContain(`${row.id}: published output needs checked values and a chart`);
+    expect(errors).toContain(`${row.id}: non-ranking output cannot claim a metric`);
   });
 });

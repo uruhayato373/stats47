@@ -2,6 +2,263 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "road-bridge-condition-iii-count",
+      "pageId": "ranking:road-bridge-condition-iii-count",
+      "title": "道路橋の判定区分Ⅲの施設数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/road/sisaku/yobohozen/pdf/r07/z1-2.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "695c945d74c9f96e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:road-bridge-condition-iii-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-bridge-condition-iv-count",
+      "pageId": "ranking:road-bridge-condition-iv-count",
+      "title": "道路橋の判定区分Ⅳの施設数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/road/sisaku/yobohozen/pdf/r07/z1-2.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "695c945d74c9f96e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:road-bridge-condition-iv-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-bridge-diagnosed-count",
+      "pageId": "ranking:road-bridge-diagnosed-count",
+      "title": "道路橋の診断済総数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/road/sisaku/yobohozen/pdf/r07/z1-2.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "695c945d74c9f96e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:road-bridge-diagnosed-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:road-bridge-diagnosed-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-bridge-expense-municipal",
+      "pageId": null,
+      "title": "道路橋りょう費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D3203082"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D3203082"
+        },
+        "derived": false,
+        "configHash": "cae5539151b0e270"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:road-bridge-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:road-bridge-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "road-bridge-expenses-prefecture",
+      "pageId": "ranking:road-bridge-expenses-prefecture",
+      "title": "道路橋りょう費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103082"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103082"
+        },
+        "derived": false,
+        "configHash": "2b85a7ccb7b81b77"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:road-bridge-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "road-expressway-length",
+      "pageId": "ranking:road-expressway-length",
+      "title": "道路実延長（高速道路）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7113"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7113"
+        },
+        "derived": false,
+        "configHash": "f5688f1b3a990074"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:campsite-public-vs-road-expressway-length",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:highway-japan-58years",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:roads",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:road-expressway-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-general-prefectural-length",
+      "pageId": "ranking:road-general-prefectural-length",
+      "title": "道路実延長（一般都道府県道）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H711103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H711103"
+        },
+        "derived": false,
+        "configHash": "fc82b3466ddae121"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:road-general-prefectural-length",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "road-length-per-km2",
       "pageId": "ranking:road-length-per-km2",
       "title": "道路実延長",
@@ -9473,268 +9730,6 @@
       "consumers": [
         {
           "pageId": "ranking:self-service-store-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "self-service-store-count-per-100k",
-      "pageId": "ranking:self-service-store-count-per-100k",
-      "title": "セルフサービス事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H06113"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H06113"
-        },
-        "derived": false,
-        "configHash": "7ada335ab90fad65"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:self-service-store-count-per-100k",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "senility-death-count",
-      "pageId": "ranking:senility-death-count",
-      "title": "老衰による死亡者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003412078",
-          "filters": {
-            "cdCat01": "00100",
-            "cdCat02": "00100",
-            "cdCat03": "18100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003412078",
-          "cdCat01": "00100",
-          "cdCat02": "00100",
-          "cdCat03": "18100"
-        },
-        "derived": false,
-        "configHash": "bfd4f95548fa2f1e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:senility-death-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "senility-death-rate",
-      "pageId": "ranking:senility-death-rate",
-      "title": "老衰による死亡者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411663",
-          "filters": {
-            "cdCat01": "18100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411663",
-          "cdCat01": "18100"
-        },
-        "derived": false,
-        "configHash": "a41cdb81d9e502e6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:senility-death-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "senior-recreation-home-count-per-100k-65plus",
-      "pageId": "ranking:senior-recreation-home-count-per-100k-65plus",
-      "title": "老人憩の家数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J02203"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J02203"
-        },
-        "derived": false,
-        "configHash": "cb49963d82e33bca"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:senior-recreation-home-count-per-100k-65plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "senior-recreation-home-staff-per-100k-65plus",
-      "pageId": "ranking:senior-recreation-home-staff-per-100k-65plus",
-      "title": "老人憩の家従事者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J03203"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J03203"
-        },
-        "derived": false,
-        "configHash": "3882297ae0ad66d5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:senior-recreation-home-staff-per-100k-65plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "senior-welfare-center-count",
-      "pageId": null,
-      "title": "老人福祉センター数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020210",
-          "filters": {
-            "cdCat01": "J230141"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020210",
-          "cdCat01": "J230141"
-        },
-        "derived": false,
-        "configHash": "99eaf6dd3156b96e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:senior-welfare-center-count",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:childcare-services",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:disability-support",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:long-term-care",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:senior-welfare-center-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "senior-welfare-center-count-per-100k-65plus",
-      "pageId": "ranking:senior-welfare-center-count-per-100k-65plus",
-      "title": "老人福祉センター数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J02202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J02202"
-        },
-        "derived": false,
-        "configHash": "8c2d16701a8bedf3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:senior-welfare-center-count-per-100k-65plus",
           "kind": "ranking"
         }
       ],

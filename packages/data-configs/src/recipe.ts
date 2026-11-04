@@ -314,6 +314,15 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
       const codes = parseCodeList(axisSum.codes);
       if (axis && codes.length > 0) ops.axisSum = { axis, codes: [...codes].sort() };
     }
+    const axisRatio = (s.filter as { axisRatio?: unknown } | undefined)?.axisRatio;
+    if (isRecord(axisRatio)) {
+      const axis = parseAxis(axisRatio.axis);
+      const numeratorCodes = parseCodeList(axisRatio.numeratorCodes);
+      const denominatorCodes = parseCodeList(axisRatio.denominatorCodes);
+      if (axis && numeratorCodes.length > 0 && denominatorCodes.length > 0) {
+        ops.axisRatio = { axis, numeratorCodes: [...numeratorCodes].sort(), denominatorCodes: [...denominatorCodes].sort() };
+      }
+    }
   }
 
   const supplements = (config.supplementalSources ?? [])

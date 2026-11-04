@@ -364,6 +364,7 @@ import { cleaningShopCountPer100k } from "../../../data/metrics/cleaning-shop-co
 import { cleaningWorkerAnnualIncome } from "../../../data/metrics/cleaning-worker-annual-income";
 import { clinicBedCount } from "../../../data/metrics/clinic-bed-count";
 import { clinicsWithBeds } from "../../../data/metrics/clinics-with-beds";
+import { clothingFootwearBudgetShareKakei } from "../../../data/metrics/clothing-footwear-budget-share-kakei";
 import { clothingFootwearExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/clothing-footwear-expenditure-ratio-multi-person-households";
 import { clothingFootwearExpenditureTotal } from "../../../data/metrics/clothing-footwear-expenditure-total";
 import { clothingRentalConsumptionExpenditure } from "../../../data/metrics/clothing-rental-consumption-expenditure";
@@ -514,6 +515,7 @@ import { cultivatedArea } from "../../../data/metrics/cultivated-area";
 import { cultivatedLandAreaPerHousehold } from "../../../data/metrics/cultivated-land-area-per-household";
 import { cultivatedLandAreaRatio } from "../../../data/metrics/cultivated-land-area-ratio";
 import { culturalFacilityAdmissionConsumptionExpenditure } from "../../../data/metrics/cultural-facility-admission-consumption-expenditure";
+import { cultureRecreationBudgetShareKakei } from "../../../data/metrics/culture-recreation-budget-share-kakei";
 import { cultureRecreationCostAllHouseholds } from "../../../data/metrics/culture-recreation-cost-all-households";
 import { cultureRecreationExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/culture-recreation-expenditure-ratio-multi-person-households";
 import { cultureRecreationExpenditureTotal } from "../../../data/metrics/culture-recreation-expenditure-total";
@@ -689,6 +691,7 @@ import { educationAttainmentGraduatesTotal } from "../../../data/metrics/educati
 import { educationAttainmentHighSchool } from "../../../data/metrics/education-attainment-high-school";
 import { educationAttainmentJuniorCollege } from "../../../data/metrics/education-attainment-junior-college";
 import { educationAttainmentUniversity } from "../../../data/metrics/education-attainment-university";
+import { educationBudgetShareKakei } from "../../../data/metrics/education-budget-share-kakei";
 import { educationCostAllHouseholds } from "../../../data/metrics/education-cost-all-households";
 import { educationDepartmentStaff } from "../../../data/metrics/education-department-staff";
 import { educationExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/education-expenditure-ratio-multi-person-households";
@@ -997,6 +1000,7 @@ import { fulltimePhysiciansGeneralHospitalPer100beds } from "../../../data/metri
 import { funeralExpenseConsumptionExpenditure } from "../../../data/metrics/funeral-expense-consumption-expenditure";
 import { furikakeConsumptionExpenditure } from "../../../data/metrics/furikake-consumption-expenditure";
 import { furnitureHouseholdExpenditureTotal } from "../../../data/metrics/furniture-household-expenditure-total";
+import { furnitureHouseholdGoodsBudgetShareKakei } from "../../../data/metrics/furniture-household-goods-budget-share-kakei";
 import { furnitureHouseholdGoodsExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/furniture-household-goods-expenditure-ratio-multi-person-households";
 import { furnitureHouseholdServiceConsumptionExpenditure } from "../../../data/metrics/furniture-household-service-consumption-expenditure";
 import { furusatoDonationAmountPrefecture } from "../../../data/metrics/furusato-donation-amount-prefecture";
@@ -1168,6 +1172,7 @@ import { healthMedicalExpenditureTotal } from "../../../data/metrics/health-medi
 import { healthPhysicalEducationExpenseMunicipal } from "../../../data/metrics/health-physical-education-expense-municipal";
 import { healthPhysicalEducationExpensesPrefecture } from "../../../data/metrics/health-physical-education-expenses-prefecture";
 import { healthSupplementsGroupConsumptionExpenditure } from "../../../data/metrics/health-supplements-group-consumption-expenditure";
+import { healthcareBudgetShareKakei } from "../../../data/metrics/healthcare-budget-share-kakei";
 import { healthcareCostAllHouseholds } from "../../../data/metrics/healthcare-cost-all-households";
 import { healthcareExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/healthcare-expenditure-ratio-multi-person-households";
 import { healthyLifeExpectancyFemale } from "../../../data/metrics/healthy-life-expectancy-female";
@@ -1285,6 +1290,7 @@ import { housekeepingServiceConsumptionExpenditure } from "../../../data/metrics
 import { houseworkAvgTimeFemale } from "../../../data/metrics/housework-avg-time-female";
 import { houseworkAvgTimeMale } from "../../../data/metrics/housework-avg-time-male";
 import { houseworkDurablesGroupConsumptionExpenditure } from "../../../data/metrics/housework-durables-group-consumption-expenditure";
+import { housingBudgetShareKakei } from "../../../data/metrics/housing-budget-share-kakei";
 import { housingChargesConsumptionExpenditure } from "../../../data/metrics/housing-charges-consumption-expenditure";
 import { housingCostAllHouseholds } from "../../../data/metrics/housing-cost-all-households";
 import { housingExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/housing-expenditure-ratio-multi-person-households";
@@ -1940,6 +1946,7 @@ import { otherClothingMiscConsumptionExpenditure } from "../../../data/metrics/o
 import { otherClothingServiceConsumptionExpenditure } from "../../../data/metrics/other-clothing-service-consumption-expenditure";
 import { otherCommunicationDeviceConsumptionExpenditure } from "../../../data/metrics/other-communication-device-consumption-expenditure";
 import { otherConstructionConsumptionExpenditure } from "../../../data/metrics/other-construction-consumption-expenditure";
+import { otherConsumptionBudgetShareKakei } from "../../../data/metrics/other-consumption-budget-share-kakei";
 import { otherConsumptionExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/other-consumption-expenditure-ratio-multi-person-households";
 import { otherCosmeticsConsumptionExpenditure } from "../../../data/metrics/other-cosmetics-consumption-expenditure";
 import { otherCultureLessonConsumptionExpenditure } from "../../../data/metrics/other-culture-lesson-consumption-expenditure";
@@ -3067,6 +3074,7 @@ import { trainFareConsumptionExpenditure } from "../../../data/metrics/train-far
 import { trainStudentPassConsumptionExpenditure } from "../../../data/metrics/train-student-pass-consumption-expenditure";
 import { trainingGymPublic } from "../../../data/metrics/training-gym-public";
 import { transfersInMunicipal } from "../../../data/metrics/transfers-in-municipal";
+import { transportCommunicationBudgetShareKakei } from "../../../data/metrics/transport-communication-budget-share-kakei";
 import { transportCommunicationExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/transport-communication-expenditure-ratio-multi-person-households";
 import { transportCommunicationExpenditureTotal } from "../../../data/metrics/transport-communication-expenditure-total";
 import { transportPostalPrivateEmployees } from "../../../data/metrics/transport-postal-private-employees";
@@ -3161,6 +3169,7 @@ import { urbanizationControlAreaRatio } from "../../../data/metrics/urbanization
 import { usageFeesMunicipal } from "../../../data/metrics/usage-fees-municipal";
 import { usageFeesPrefecture } from "../../../data/metrics/usage-fees-prefecture";
 import { useDistrictArea } from "../../../data/metrics/use-district-area";
+import { utilitiesBudgetShareKakei } from "../../../data/metrics/utilities-budget-share-kakei";
 import { utilitiesExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/utilities-expenditure-ratio-multi-person-households";
 import { utilitiesExpenditureTotal } from "../../../data/metrics/utilities-expenditure-total";
 import { utilitiesPrivateEmployees } from "../../../data/metrics/utilities-private-employees";
@@ -3683,6 +3692,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "cleaning-worker-annual-income": cleaningWorkerAnnualIncome,
   "clinic-bed-count": clinicBedCount,
   "clinics-with-beds": clinicsWithBeds,
+  "clothing-footwear-budget-share-kakei": clothingFootwearBudgetShareKakei,
   "clothing-footwear-expenditure-ratio-multi-person-households": clothingFootwearExpenditureRatioMultiPersonHouseholds,
   "clothing-footwear-expenditure-total": clothingFootwearExpenditureTotal,
   "clothing-rental-consumption-expenditure": clothingRentalConsumptionExpenditure,
@@ -3833,6 +3843,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "cultivated-land-area-per-household": cultivatedLandAreaPerHousehold,
   "cultivated-land-area-ratio": cultivatedLandAreaRatio,
   "cultural-facility-admission-consumption-expenditure": culturalFacilityAdmissionConsumptionExpenditure,
+  "culture-recreation-budget-share-kakei": cultureRecreationBudgetShareKakei,
   "culture-recreation-cost-all-households": cultureRecreationCostAllHouseholds,
   "culture-recreation-expenditure-ratio-multi-person-households": cultureRecreationExpenditureRatioMultiPersonHouseholds,
   "culture-recreation-expenditure-total": cultureRecreationExpenditureTotal,
@@ -4008,6 +4019,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "education-attainment-high-school": educationAttainmentHighSchool,
   "education-attainment-junior-college": educationAttainmentJuniorCollege,
   "education-attainment-university": educationAttainmentUniversity,
+  "education-budget-share-kakei": educationBudgetShareKakei,
   "education-cost-all-households": educationCostAllHouseholds,
   "education-department-staff": educationDepartmentStaff,
   "education-expenditure-ratio-multi-person-households": educationExpenditureRatioMultiPersonHouseholds,
@@ -4316,6 +4328,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "funeral-expense-consumption-expenditure": funeralExpenseConsumptionExpenditure,
   "furikake-consumption-expenditure": furikakeConsumptionExpenditure,
   "furniture-household-expenditure-total": furnitureHouseholdExpenditureTotal,
+  "furniture-household-goods-budget-share-kakei": furnitureHouseholdGoodsBudgetShareKakei,
   "furniture-household-goods-expenditure-ratio-multi-person-households": furnitureHouseholdGoodsExpenditureRatioMultiPersonHouseholds,
   "furniture-household-service-consumption-expenditure": furnitureHouseholdServiceConsumptionExpenditure,
   "furusato-donation-amount-prefecture": furusatoDonationAmountPrefecture,
@@ -4487,6 +4500,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "health-physical-education-expense-municipal": healthPhysicalEducationExpenseMunicipal,
   "health-physical-education-expenses-prefecture": healthPhysicalEducationExpensesPrefecture,
   "health-supplements-group-consumption-expenditure": healthSupplementsGroupConsumptionExpenditure,
+  "healthcare-budget-share-kakei": healthcareBudgetShareKakei,
   "healthcare-cost-all-households": healthcareCostAllHouseholds,
   "healthcare-expenditure-ratio-multi-person-households": healthcareExpenditureRatioMultiPersonHouseholds,
   "healthy-life-expectancy-female": healthyLifeExpectancyFemale,
@@ -4604,6 +4618,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "housework-avg-time-female": houseworkAvgTimeFemale,
   "housework-avg-time-male": houseworkAvgTimeMale,
   "housework-durables-group-consumption-expenditure": houseworkDurablesGroupConsumptionExpenditure,
+  "housing-budget-share-kakei": housingBudgetShareKakei,
   "housing-charges-consumption-expenditure": housingChargesConsumptionExpenditure,
   "housing-cost-all-households": housingCostAllHouseholds,
   "housing-expenditure-ratio-multi-person-households": housingExpenditureRatioMultiPersonHouseholds,
@@ -5259,6 +5274,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-clothing-service-consumption-expenditure": otherClothingServiceConsumptionExpenditure,
   "other-communication-device-consumption-expenditure": otherCommunicationDeviceConsumptionExpenditure,
   "other-construction-consumption-expenditure": otherConstructionConsumptionExpenditure,
+  "other-consumption-budget-share-kakei": otherConsumptionBudgetShareKakei,
   "other-consumption-expenditure-ratio-multi-person-households": otherConsumptionExpenditureRatioMultiPersonHouseholds,
   "other-cosmetics-consumption-expenditure": otherCosmeticsConsumptionExpenditure,
   "other-culture-lesson-consumption-expenditure": otherCultureLessonConsumptionExpenditure,
@@ -6386,6 +6402,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "train-student-pass-consumption-expenditure": trainStudentPassConsumptionExpenditure,
   "training-gym-public": trainingGymPublic,
   "transfers-in-municipal": transfersInMunicipal,
+  "transport-communication-budget-share-kakei": transportCommunicationBudgetShareKakei,
   "transport-communication-expenditure-ratio-multi-person-households": transportCommunicationExpenditureRatioMultiPersonHouseholds,
   "transport-communication-expenditure-total": transportCommunicationExpenditureTotal,
   "transport-postal-private-employees": transportPostalPrivateEmployees,
@@ -6480,6 +6497,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "usage-fees-municipal": usageFeesMunicipal,
   "usage-fees-prefecture": usageFeesPrefecture,
   "use-district-area": useDistrictArea,
+  "utilities-budget-share-kakei": utilitiesBudgetShareKakei,
   "utilities-expenditure-ratio-multi-person-households": utilitiesExpenditureRatioMultiPersonHouseholds,
   "utilities-expenditure-total": utilitiesExpenditureTotal,
   "utilities-private-employees": utilitiesPrivateEmployees,
