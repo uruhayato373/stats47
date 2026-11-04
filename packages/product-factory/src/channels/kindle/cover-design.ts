@@ -168,6 +168,14 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
     textBaked: { checkedText: ["デジタル生活の地図", "通信・PC・テレワーク", "47都道府県 × 5つのデジタル生活データ", "stats47"], checkedAt: "2026-11-03" },
   },
+  "K-S1-13": {
+    status: "published",
+    r2Key: "media/kindle-cover-assets/K-S1-13/dee87e897cb1/background.jpg",
+    sha256: "dee87e897cb1799e40ff2bb513650914b3dc9ed098e7d00aec82013c7c4bac20",
+    bytes: 495578,
+    width: 1600,
+    height: 2560,
+  },
 };
 
 const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCoverReviewStatus>>> = {
@@ -183,6 +191,7 @@ const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCo
   "K-S1-10": "approved",
   "K-S1-11": "approved",
   "K-S1-12": "approved",
+  "K-S1-13": "approved",
 };
 
 /**
@@ -202,7 +211,7 @@ export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesig
   "K-S1-10": d("issue-pop", "safety-environment", "orange-navy", ["犯罪", "労災", "公害", "災害", "防災"], "防災バッグ、盾、工事用ヘルメット、雨雲、避難所を日本地図上に整理して描く"),
   "K-S1-11": d("issue-pop", "culture-leisure", "purple-gold", ["文化施設", "スポーツ", "余暇時間", "読書", "旅行"], "本、ボール、音楽、博物館、旅行のモチーフを日本地図の周囲に明るく配置する"),
   "K-S1-12": d("issue-pop", "digital-life", "blue-orange", ["通信契約", "PC支出", "テレワーク", "メディア", "コンビニ"], "スマートフォン、ノートPC、電波塔、在宅勤務机、デジタルグラフを日本地図と結ぶ"),
-  "K-S1-13": d("issue-pop", "household-money", "blue-orange", ["家賃", "賃金", "子育て", "医療", "災害"], "引っ越しの段ボール、家の鍵、日本地図、書き込みのある比較表を机の上に置いた構図"),
+  "K-S1-13": d("issue-pop", "migration-living", "blue-orange", ["家賃", "賃金", "子育て", "医療", "災害"], "引っ越しの段ボール、家の鍵、日本地図、書き込みのある比較表を机の上に置いた構図"),
 
   "K-S2-01": d("theme-databook-pop", "population-households", "blue-orange", ["総人口", "世帯", "出生", "死亡", "年齢構成"], "47都道府県の人口ピクトと世帯住宅、人口ピラミッドを日本地図の周囲に配置する"),
   "K-S2-02": d("theme-databook-pop", "household-money", "navy-yellow", ["所得", "賃金", "求人", "雇用", "採用"], "給与明細、硬貨、求人票、働く人、棒グラフを日本地図上に配置する"),

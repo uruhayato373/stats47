@@ -62,13 +62,15 @@ test.describe("breakpoint 別レイアウト", () => {
       await page.goto(target.path, { waitUntil: "domcontentloaded" });
       // ページで唯一の <main> はルートレイアウトが持ち、Shell の本文列は
       // div[data-slot=shell-main] で描く。本文列と、それを囲む shell コンテナの幅を比べる。
-      const shellMain = page.locator('[data-slot="shell-main"]').first();
+      // 開発中の配信は main の外に隠れた写しを持つので、main の中の本文列を見る
+      const shellMain = page.locator('main [data-slot="shell-main"]').first();
       await expect(shellMain).toBeVisible({ timeout: 15_000 });
       await expect(page.locator("main")).toHaveCount(1);
+      // shell-main は display: contents で箱を持たないので、本文列の幅は親の格子で測る
       const widths = await shellMain.evaluate((el) => {
         const shell = el.closest('[class*="@container/shell"]');
         return {
-          main: el.getBoundingClientRect().width,
+          main: el.parentElement?.getBoundingClientRect().width ?? 0,
           shell: shell?.getBoundingClientRect().width ?? 0,
         };
       });

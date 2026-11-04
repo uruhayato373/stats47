@@ -19,7 +19,7 @@ describe("product storefront", () => {
     ).toMatchObject({
       id: "P-04",
       channel: "note",
-      priceYen: 1980,
+      priceYen: 980,
       externalUrl: "https://note.com/stats47/n/n5da8a99b3506",
     });
     expect(findDataProductForBlog("other")).toBeNull();

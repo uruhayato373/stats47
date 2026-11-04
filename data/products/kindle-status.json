@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T00:37:02.942Z",
+  "generatedAt": "2026-11-04T02:05:19.254Z",
   "total": 33,
   "bySeries": {
     "S1-issues": 13,
@@ -8,8 +8,7 @@
     "S4-ranking-compendium": 1
   },
   "byStatus": {
-    "generated": 32,
-    "manuscript": 1
+    "generated": 33
   },
   "books": [
     {
@@ -112,7 +111,7 @@
       "id": "K-S1-13",
       "series": "S1-issues",
       "title": "住む県の選び方 — 統計で比べる5つの条件",
-      "status": "manuscript",
+      "status": "generated",
       "priceYen": 500,
       "chapters": 12
     },

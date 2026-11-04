@@ -611,13 +611,32 @@ export async function uploadKdpContent(
   return { log, warnings, uploaded: { manuscript: epubOk, cover: coverUploaded } };
 }
 
+/** 価格の画面の「KDP セレクトに本を登録する」の状態。見つからなければ null */
+export async function kdpSelectChecked(page) {
+  return page.evaluate(() => {
+    const box = [...document.querySelectorAll('input[type="checkbox"]')].find((input) =>
+      (input.closest("label")?.innerText ?? input.parentElement?.innerText ?? "").includes("KDP セレクトに本を登録する"));
+    return box ? box.checked : null;
+  });
+}
+
 /** Pricing ステップ: KU・地域・ロイヤリティ・価格。 */
 export async function setKdpPricing(page, lst, { tag = "[kdp]" } = {}) {
   const log = [];
   const warnings = [];
   await sleep(2500);
-  // KU (KDP Select) — kuEnrolled=false のときは登録しない (既定で未チェックが多い)。
-  log.push(`${tag} KU 登録: ${lst.kuEnrolled ? "有効化 (人手確認推奨)" : "登録しない (既定)"}`);
+  // KU (KDP Select) — kuEnrolled=false のときは登録しない。true の本だけ画面で確実にチェックし、読み戻す。
+  if (lst.kuEnrolled) {
+    const enrolled = await kdpSelectChecked(page);
+    if (enrolled === false) {
+      await page.locator("label", { hasText: "KDP セレクトに本を登録する" }).first().click({ timeout: 15000 }).catch(() => {});
+      await sleep(2500);
+    }
+    if ((await kdpSelectChecked(page)) === true) log.push(`${tag} ✓ KDP セレクトに登録`);
+    else warnings.push("KDP セレクトのチェックを確認できず");
+  } else {
+    log.push(`${tag} KU 登録: 登録しない (既定)`);
+  }
   // ロイヤリティプラン (70% / 35%)
   const royOk = await clickByText(page, lst.royaltyPlan === 70 ? /70\s*%/ : /35\s*%/);
   if (royOk) log.push(`${tag} ✓ ロイヤリティ ${lst.royaltyPlan}%`); else warnings.push("ロイヤリティ選択を特定できず");

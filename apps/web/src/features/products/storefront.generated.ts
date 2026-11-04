@@ -12,7 +12,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
     "description": "人口・面積・世帯・所得を一冊で把握する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/ne47eb45f8a15",
     "included": [
       "PPTX",
@@ -35,7 +35,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
     "description": "賃金・求人・採用市場の指標をまとめて把握・比較する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n46d68c153502",
     "included": [
       "PPTX",
@@ -57,7 +57,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
     "description": "宿泊・訪日・観光関連指標の地域差を把握・比較する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
     "included": [
       "PPTX",
@@ -79,7 +79,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
     "description": "歳入歳出・財政指標の都道府県差を把握する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n5da8a99b3506",
     "included": [
       "PPTX",
@@ -101,7 +101,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
     "description": "病床・医師・介護・高齢化をまとめて把握・比較する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
     "included": [
       "PPTX",
@@ -123,7 +123,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
     "description": "学校・保育・進学・子育て環境の指標を把握する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
     "included": [
       "PPTX",
@@ -146,7 +146,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
     "description": "住宅・物価など移住候補地の生活データを比較する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n323af74c09cc",
     "included": [
       "PPTX",
@@ -169,7 +169,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "出店候補の県を比べる 商業・小売69指標データ集",
     "description": "出店候補地の商業・人口・購買に関する指標を比較する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n973c3f8478f5",
     "included": [
       "PPTX",
@@ -191,7 +191,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
     "description": "産業構成・事業所・就業者・経済規模をまとめて把握する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n2ced199ed715",
     "included": [
       "PPTX",
@@ -214,7 +214,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "防災・交通・インフラを県別に比べる 230指標データ集",
     "description": "災害・交通・エネルギー・インフラをまとめて把握する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
     "included": [
       "PPTX",
@@ -236,7 +236,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
     "description": "資料・記事・SNS にそのまま貼れる地図・ランキング図版を入手する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
     "included": [
       "PPTX",
@@ -258,7 +258,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "47都道府県 2,073指標の統計データ総合集",
     "description": "テーマ横断で都道府県データと図表を一括で入手する",
-    "priceYen": 4980,
+    "priceYen": 2980,
     "externalUrl": "https://note.com/stats47/n/nfa7d235eba85",
     "included": [
       "PPTX",
@@ -282,7 +282,7 @@ export const STOREFRONT_PRODUCTS = [
     "channelLabel": "note有料データ集",
     "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
     "description": "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
-    "priceYen": 1980,
+    "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n554a047cf5be",
     "included": [
       "PPTX",

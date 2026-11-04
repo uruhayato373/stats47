@@ -39,3 +39,5 @@ WindowsのSVG復元は `path.basename()` を使う。`split('/')` はWindows区�
 **2026-09-30 追記:** 生成AI画像は「作り直せない入力」なので二層保管(Drive 候補 / R2 承認版 / git は SHA・モデル・指示文)。note は `ingest-note-background.mjs`、Kindle は `stash-cover-candidate.mts`。画像の生成口は1つ: note 4枚は `render-ranking-images.mjs` だけ(pipeline:sns の note 出力は廃止)。公開入口は `ensure-note-images.mjs` が PNG を揃え、カバー無し公開を止める。SVG は git に置く(正本・約1.5MB・koumuin 268枚は手作り)。Kindle 元画像12冊は Drive `Kindle表紙/<id>/candidates/` に移設済み。レンダーは bit 単位で決定的(同一 SHA を実測)。
 
 **2026-11-04 管理画面の「未公開」99本は誤表示だった**: 新規公開は `update-note-covers` を通らず公開ポインタが採用版へ結ばれないため、公開済みでも未公開と出た。公開画像の実物は全件採用版と一致していた。`note:assets archive` が画素照合のうえ採用版へ結ぶよう直し、減色で落ちた4本は目視のうえ `--reviewed-match` で結んだ。既存の画素判定は同型カバー (`b-ref-prc-a48`/`a50`) の取り違えを通すので、これだけを別画像の否定に使わない ([[project_note_update_mode_learnings]])。
+
+**2026-11-04 旧形式126本を現行のimagegen方式へ差し替え完了**: 公開428本すべて `note-imagegen-cover-v1`。制作内容は管理画面の PATCH で保存すると採用が解除される (公開画像は変わらない)。ディスク枯渇で admin の保存が500になった実例あり。wrangler の OAuth は1時間で切れ、更新の境目で import が `session expired` になる (失敗した記事の候補は旧版のまま残るので、登録の成否を台帳で確かめてから採用する)。

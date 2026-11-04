@@ -199,19 +199,20 @@ function main(): void {
       readingSourceTitle: KDP_READING_SOURCES[b.id]?.title ?? "",
       readingSourceSubtitle: KDP_READING_SOURCES[b.id]?.subtitle ?? null,
       language: "ja",
-      description: buildDescription(b.concept),
+      description: b.kdpExclusive?.description ?? buildDescription(b.concept),
       keywords: [...b.keywords].slice(0, 7),
       categoryPaths: kdpCategoriesFor(b.id).map((c) => ({ ...c })), // SSOT から生成 (実在検査つき)
       applyDrm: KDP_APPLY_DRM,
       aiDisclosure: {
         ...KDP_AI_DISCLOSURE,
-        textTools: [...KDP_AI_DISCLOSURE.textTools],
+        text: b.kdpExclusive?.aiText ?? KDP_AI_DISCLOSURE.text,
+        textTools: [...(b.kdpExclusive?.aiTextTools ?? KDP_AI_DISCLOSURE.textTools)],
         imageTools: [...KDP_AI_DISCLOSURE.imageTools],
       },
       ...(prev?.blockReason ? { blockReason: prev.blockReason } : {}), // 停止理由を保持
       priceYen: b.priceYen,
       royaltyPlan: b.priceYen >= 250 && b.priceYen <= 1250 ? 70 : 35,
-      kuEnrolled: prev?.kuEnrolled ?? false,
+      kuEnrolled: prev?.kuEnrolled ?? Boolean(b.kdpExclusive),
       epubPath: `.local/kindle-books/${b.id}/${version}/book.epub`,
       coverPath: `.local/kindle-books/${b.id}/${version}/cover.jpg`,
       ...(prev?.draftId ? { draftId: prev.draftId } : {}), // 下書き ID を保持
