@@ -22,6 +22,7 @@ import { actualIncomeWorkerHouseholdsPerMonth } from "../../../data/metrics/actu
 import { actualOvernightGuests } from "../../../data/metrics/actual-overnight-guests";
 import { acupunctureMoxibustionCount } from "../../../data/metrics/acupuncture-moxibustion-count";
 import { acupuncturistRate } from "../../../data/metrics/acupuncturist-rate";
+import { admissionGameFeesGroupConsumptionExpenditure } from "../../../data/metrics/admission-game-fees-group-consumption-expenditure";
 import { adultClassLectureCountPerMillion } from "../../../data/metrics/adult-class-lecture-count-per-million";
 import { adultSandalsConsumptionExpenditure } from "../../../data/metrics/adult-sandals-consumption-expenditure";
 import { adultSandalsConsumptionQuantity } from "../../../data/metrics/adult-sandals-consumption-quantity";
@@ -63,6 +64,7 @@ import { alcoholSalesPerAdultShochu } from "../../../data/metrics/alcohol-sales-
 import { alcoholSalesPerAdultTotal } from "../../../data/metrics/alcohol-sales-per-adult-total";
 import { alcoholSalesPerAdultWhisky } from "../../../data/metrics/alcohol-sales-per-adult-whisky";
 import { alcoholSalesPerAdultWine } from "../../../data/metrics/alcohol-sales-per-adult-wine";
+import { alcoholicBeveragesGroupConsumptionExpenditure } from "../../../data/metrics/alcoholic-beverages-group-consumption-expenditure";
 import { ambulanceHospitalArrivalTime } from "../../../data/metrics/ambulance-hospital-arrival-time";
 import { ambulanceTransportedDeaths } from "../../../data/metrics/ambulance-transported-deaths";
 import { ambulanceTransportedMild } from "../../../data/metrics/ambulance-transported-mild";
@@ -122,6 +124,9 @@ import { autolockApartmentOrdinaryHouseholds } from "../../../data/metrics/autol
 import { autolockApartmentRate } from "../../../data/metrics/autolock-apartment-rate";
 import { automobileAcquisitionTaxGrantMunicipal } from "../../../data/metrics/automobile-acquisition-tax-grant-municipal";
 import { automobileEnvironmentalTaxGrantMunicipal } from "../../../data/metrics/automobile-environmental-tax-grant-municipal";
+import { automobileMaintenanceGroupConsumptionExpenditure } from "../../../data/metrics/automobile-maintenance-group-consumption-expenditure";
+import { automobilePurchasesGroupConsumptionExpenditure } from "../../../data/metrics/automobile-purchases-group-consumption-expenditure";
+import { automobileRelatedGroupConsumptionExpenditure } from "../../../data/metrics/automobile-related-group-consumption-expenditure";
 import { averageAgeOfFirstMarriageHusband } from "../../../data/metrics/average-age-of-first-marriage-husband";
 import { averageAgeOfFirstMarriageWife } from "../../../data/metrics/average-age-of-first-marriage-wife";
 import { averageBroadcastMediaConsumptionTimeEmployedMan } from "../../../data/metrics/average-broadcast-media-consumption-time-employed-man";
@@ -161,6 +166,7 @@ import { avgSalaryPolicePrefecture } from "../../../data/metrics/avg-salary-poli
 import { avgSavingsRateWorkerHouseholds } from "../../../data/metrics/avg-savings-rate-worker-households";
 import { baconConsumptionExpenditure } from "../../../data/metrics/bacon-consumption-expenditure";
 import { baconConsumptionQuantity } from "../../../data/metrics/bacon-consumption-quantity";
+import { bagsGroupConsumptionExpenditure } from "../../../data/metrics/bags-group-consumption-expenditure";
 import { bambooProduction } from "../../../data/metrics/bamboo-production";
 import { bambooShootConsumptionExpenditure } from "../../../data/metrics/bamboo-shoot-consumption-expenditure";
 import { bambooShootConsumptionQuantity } from "../../../data/metrics/bamboo-shoot-consumption-quantity";
@@ -184,16 +190,21 @@ import { beanSproutsConsumptionExpenditure } from "../../../data/metrics/bean-sp
 import { beanSproutsConsumptionQuantity } from "../../../data/metrics/bean-sprouts-consumption-quantity";
 import { beansConsumptionExpenditure } from "../../../data/metrics/beans-consumption-expenditure";
 import { beautyApplianceConsumptionExpenditure } from "../../../data/metrics/beauty-appliance-consumption-expenditure";
+import { beautyProductsGroupConsumptionExpenditure } from "../../../data/metrics/beauty-products-group-consumption-expenditure";
 import { beautySalonCount } from "../../../data/metrics/beauty-salon-count";
+import { beautyServicesGroupConsumptionExpenditure } from "../../../data/metrics/beauty-services-group-consumption-expenditure";
 import { bedConsumptionExpenditure } from "../../../data/metrics/bed-consumption-expenditure";
 import { bedConsumptionQuantity } from "../../../data/metrics/bed-consumption-quantity";
 import { bedUtilizationRate } from "../../../data/metrics/bed-utilization-rate";
+import { beddingGroupConsumptionExpenditure } from "../../../data/metrics/bedding-group-consumption-expenditure";
 import { beefCattleCount } from "../../../data/metrics/beef-cattle-count";
 import { beefConsumptionExpenditure } from "../../../data/metrics/beef-consumption-expenditure";
 import { beefConsumptionQuantity } from "../../../data/metrics/beef-consumption-quantity";
 import { beerConsumptionExpenditure } from "../../../data/metrics/beer-consumption-expenditure";
 import { beerConsumptionQuantity } from "../../../data/metrics/beer-consumption-quantity";
 import { bentoConsumptionExpenditure } from "../../../data/metrics/bento-consumption-expenditure";
+import { beveragesGroupConsumptionExpenditure } from "../../../data/metrics/beverages-group-consumption-expenditure";
+import { bicyclePurchasesGroupConsumptionExpenditure } from "../../../data/metrics/bicycle-purchases-group-consumption-expenditure";
 import { biomassPowerStationCount } from "../../../data/metrics/biomass-power-station-count";
 import { birthsFirstChild } from "../../../data/metrics/births-first-child";
 import { birthsMotherAge25to29 } from "../../../data/metrics/births-mother-age25to29";
@@ -222,17 +233,20 @@ import { bonusAdminPrefecture } from "../../../data/metrics/bonus-admin-prefectu
 import { bookMagazineRetailAnnualSalesPerCapita } from "../../../data/metrics/book-magazine-retail-annual-sales-per-capita";
 import { bookMagazineRetailAnnualSales } from "../../../data/metrics/book-magazine-retail-annual-sales";
 import { booksConsumptionExpenditure } from "../../../data/metrics/books-consumption-expenditure";
+import { booksPrintedMatterGroupConsumptionExpenditure } from "../../../data/metrics/books-printed-matter-group-consumption-expenditure";
 import { botanicalGardenCount } from "../../../data/metrics/botanical-garden-count";
 import { bowlingAlleyPublic } from "../../../data/metrics/bowling-alley-public";
 import { boysSchoolUniformConsumptionExpenditure } from "../../../data/metrics/boys-school-uniform-consumption-expenditure";
 import { boysSchoolUniformConsumptionQuantity } from "../../../data/metrics/boys-school-uniform-consumption-quantity";
 import { breadConsumptionExpenditure } from "../../../data/metrics/bread-consumption-expenditure";
 import { breadConsumptionQuantity } from "../../../data/metrics/bread-consumption-quantity";
+import { breadGroupConsumptionQuantity } from "../../../data/metrics/bread-group-consumption-quantity";
 import { breastCancerAsr75MortalityFemale } from "../../../data/metrics/breast-cancer-asr75-mortality-female";
 import { broadbandContractCountExcluding394g } from "../../../data/metrics/broadband-contract-count-excluding-39-4g";
 import { broadbandServiceContractCount } from "../../../data/metrics/broadband-service-contract-count";
 import { broadcastMediaTimeAll } from "../../../data/metrics/broadcast-media-time-all";
 import { broadcastReceptionContracts } from "../../../data/metrics/broadcast-reception-contracts";
+import { broadcastingFeesGroupConsumptionExpenditure } from "../../../data/metrics/broadcasting-fees-group-consumption-expenditure";
 import { broccoliConsumptionExpenditure } from "../../../data/metrics/broccoli-consumption-expenditure";
 import { broccoliConsumptionQuantity } from "../../../data/metrics/broccoli-consumption-quantity";
 import { buildingFireCountPer100ThousandPeople } from "../../../data/metrics/building-fire-count-per-100-thousand-people";
@@ -287,6 +301,7 @@ import { castellaConsumptionExpenditure } from "../../../data/metrics/castella-c
 import { censusHouseholdChangeRate5y } from "../../../data/metrics/census-household-change-rate-5y";
 import { censusPopulationChange5y } from "../../../data/metrics/census-population-change-5y";
 import { censusPopulationChangeRate5y } from "../../../data/metrics/census-population-change-rate-5y";
+import { cerealsGroupConsumptionExpenditure } from "../../../data/metrics/cereals-group-consumption-expenditure";
 import { certifiedChildcareCenterCountPer100k05 } from "../../../data/metrics/certified-childcare-center-count-per-100k-0-5";
 import { certifiedChildcareCenterEducationCostPerStudent } from "../../../data/metrics/certified-childcare-center-education-cost-per-student";
 import { charcoalProduction } from "../../../data/metrics/charcoal-production";
@@ -313,12 +328,15 @@ import { childcareFeeConsumptionExpenditure } from "../../../data/metrics/childc
 import { childrensClothesConsumptionExpenditure } from "../../../data/metrics/childrens-clothes-consumption-expenditure";
 import { childrensClothesConsumptionQuantity } from "../../../data/metrics/childrens-clothes-consumption-quantity";
 import { childrensClothingConsumptionExpenditure } from "../../../data/metrics/childrens-clothing-consumption-expenditure";
+import { childrensShirtsSweatersGroupConsumptionExpenditure } from "../../../data/metrics/childrens-shirts-sweaters-group-consumption-expenditure";
+import { childrensShirtsSweatersGroupConsumptionQuantity } from "../../../data/metrics/childrens-shirts-sweaters-group-consumption-quantity";
 import { childrensShoesConsumptionExpenditure } from "../../../data/metrics/childrens-shoes-consumption-expenditure";
 import { childrensShoesConsumptionQuantity } from "../../../data/metrics/childrens-shoes-consumption-quantity";
 import { childrensSleepwearConsumptionExpenditure } from "../../../data/metrics/childrens-sleepwear-consumption-expenditure";
 import { childrensSocksConsumptionExpenditure } from "../../../data/metrics/childrens-socks-consumption-expenditure";
 import { childrensSocksConsumptionQuantity } from "../../../data/metrics/childrens-socks-consumption-quantity";
 import { childrensUnderwearConsumptionExpenditure } from "../../../data/metrics/childrens-underwear-consumption-expenditure";
+import { childrensUnderwearGroupConsumptionExpenditure } from "../../../data/metrics/childrens-underwear-group-consumption-expenditure";
 import { chineseCabbageConsumptionExpenditure } from "../../../data/metrics/chinese-cabbage-consumption-expenditure";
 import { chineseCabbageConsumptionQuantity } from "../../../data/metrics/chinese-cabbage-consumption-quantity";
 import { chineseFoodDiningConsumptionExpenditure } from "../../../data/metrics/chinese-food-dining-consumption-expenditure";
@@ -349,10 +367,12 @@ import { clinicsWithBeds } from "../../../data/metrics/clinics-with-beds";
 import { clothingFootwearExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/clothing-footwear-expenditure-ratio-multi-person-households";
 import { clothingFootwearExpenditureTotal } from "../../../data/metrics/clothing-footwear-expenditure-total";
 import { clothingRentalConsumptionExpenditure } from "../../../data/metrics/clothing-rental-consumption-expenditure";
+import { clothingServicesGroupConsumptionExpenditure } from "../../../data/metrics/clothing-services-group-consumption-expenditure";
 import { cocoaConsumptionExpenditure } from "../../../data/metrics/cocoa-consumption-expenditure";
 import { codPollutionLoad } from "../../../data/metrics/cod-pollution-load";
 import { codRoeConsumptionExpenditure } from "../../../data/metrics/cod-roe-consumption-expenditure";
 import { codRoeConsumptionQuantity } from "../../../data/metrics/cod-roe-consumption-quantity";
+import { coffeeCocoaGroupConsumptionExpenditure } from "../../../data/metrics/coffee-cocoa-group-consumption-expenditure";
 import { coffeeConsumptionExpenditure } from "../../../data/metrics/coffee-consumption-expenditure";
 import { coffeeConsumptionQuantity } from "../../../data/metrics/coffee-consumption-quantity";
 import { coffeeDrinkConsumptionExpenditure } from "../../../data/metrics/coffee-drink-consumption-expenditure";
@@ -368,6 +388,7 @@ import { commercialDistrictArea } from "../../../data/metrics/commercial-distric
 import { commercialEstablishments } from "../../../data/metrics/commercial-establishments";
 import { commercialFarmHouseholds } from "../../../data/metrics/commercial-farm-households";
 import { commissionFeesPrefecture } from "../../../data/metrics/commission-fees-prefecture";
+import { communicationGroupConsumptionExpenditure } from "../../../data/metrics/communication-group-consumption-expenditure";
 import { communityBuildingVolunteerParticipationRate10plus } from "../../../data/metrics/community-building-volunteer-participation-rate-10plus";
 import { communitySportsFacilityCountPerMillion } from "../../../data/metrics/community-sports-facility-count-per-million";
 import { commuteByBicycle } from "../../../data/metrics/commute-by-bicycle";
@@ -518,6 +539,8 @@ import { dailyStepsFemale20to64AgeAdjusted } from "../../../data/metrics/daily-s
 import { dailyStepsMale20to64AgeAdjusted } from "../../../data/metrics/daily-steps-male-20to64-age-adjusted";
 import { dairyCattleCount } from "../../../data/metrics/dairy-cattle-count";
 import { dairyCattleHoldings } from "../../../data/metrics/dairy-cattle-holdings";
+import { dairyEggsGroupConsumptionExpenditure } from "../../../data/metrics/dairy-eggs-group-consumption-expenditure";
+import { dairyProductsGroupConsumptionExpenditure } from "../../../data/metrics/dairy-products-group-consumption-expenditure";
 import { damCount } from "../../../data/metrics/dam-count";
 import { damagedVacantHousingRatio } from "../../../data/metrics/damaged-vacant-housing-ratio";
 import { dayTimePopulationRatio } from "../../../data/metrics/day-time-population-ratio";
@@ -587,6 +610,7 @@ import { detachedHouseRatio } from "../../../data/metrics/detached-house-ratio";
 import { detachedHousesNonWooden } from "../../../data/metrics/detached-houses-non-wooden";
 import { detachedHousesWooden } from "../../../data/metrics/detached-houses-wooden";
 import { detachedHouses } from "../../../data/metrics/detached-houses";
+import { detergentsGroupConsumptionExpenditure } from "../../../data/metrics/detergents-group-consumption-expenditure";
 import { dietitianAnnualIncome } from "../../../data/metrics/dietitian-annual-income";
 import { diningOutConsumptionExpenditure } from "../../../data/metrics/dining-out-consumption-expenditure";
 import { disabilitySupportFacilityCount } from "../../../data/metrics/disability-support-facility-count";
@@ -611,6 +635,7 @@ import { doctorAnnualIncome } from "../../../data/metrics/doctor-annual-income";
 import { dogRegistrationCount } from "../../../data/metrics/dog-registration-count";
 import { domesticBankDepositBalance } from "../../../data/metrics/domestic-bank-deposit-balance";
 import { domesticPackageTourConsumptionExpenditure } from "../../../data/metrics/domestic-package-tour-consumption-expenditure";
+import { domesticServicesGroupConsumptionExpenditure } from "../../../data/metrics/domestic-services-group-consumption-expenditure";
 import { domesticStudentRemittanceConsumptionExpenditure } from "../../../data/metrics/domestic-student-remittance-consumption-expenditure";
 import { domesticTravelConsumptionByDestination } from "../../../data/metrics/domestic-travel-consumption-by-destination";
 import { donationsConsumptionExpenditure } from "../../../data/metrics/donations-consumption-expenditure";
@@ -621,6 +646,7 @@ import { dressShirtConsumptionExpenditure } from "../../../data/metrics/dress-sh
 import { dressShirtConsumptionQuantity } from "../../../data/metrics/dress-shirt-consumption-quantity";
 import { dressingConsumptionExpenditure } from "../../../data/metrics/dressing-consumption-expenditure";
 import { dressingConsumptionQuantity } from "../../../data/metrics/dressing-consumption-quantity";
+import { driedFoodsSeaweedGroupConsumptionExpenditure } from "../../../data/metrics/dried-foods-seaweed-group-consumption-expenditure";
 import { driedMackerelConsumptionExpenditure } from "../../../data/metrics/dried-mackerel-consumption-expenditure";
 import { driedMackerelConsumptionQuantity } from "../../../data/metrics/dried-mackerel-consumption-quantity";
 import { driedNoriConsumptionExpenditure } from "../../../data/metrics/dried-nori-consumption-expenditure";
@@ -676,6 +702,8 @@ import { educationLearningSupportPrivateNetValueAdded } from "../../../data/metr
 import { educationLearningSupportPrivateSales } from "../../../data/metrics/education-learning-support-private-sales";
 import { eggplantConsumptionExpenditure } from "../../../data/metrics/eggplant-consumption-expenditure";
 import { eggplantConsumptionQuantity } from "../../../data/metrics/eggplant-consumption-quantity";
+import { eggsGroupConsumptionExpenditure } from "../../../data/metrics/eggs-group-consumption-expenditure";
+import { eggsGroupConsumptionQuantity } from "../../../data/metrics/eggs-group-consumption-quantity";
 import { elderlyCareEmploymentRate } from "../../../data/metrics/elderly-care-employment-rate";
 import { elderlyClassLectureCountPerMillion } from "../../../data/metrics/elderly-class-lecture-count-per-million";
 import { elderlyCoupleHouseholds } from "../../../data/metrics/elderly-couple-households";
@@ -789,6 +817,8 @@ import { exteriorConstructionConsumptionExpenditure } from "../../../data/metric
 import { eyeglassesConsumptionExpenditure } from "../../../data/metrics/eyeglasses-consumption-expenditure";
 import { fabricConsumptionExpenditure } from "../../../data/metrics/fabric-consumption-expenditure";
 import { fabricSoftenerConsumptionExpenditure } from "../../../data/metrics/fabric-softener-consumption-expenditure";
+import { fabricsYarnGroupConsumptionExpenditure } from "../../../data/metrics/fabrics-yarn-group-consumption-expenditure";
+import { faceMaskItemConsumptionExpenditure } from "../../../data/metrics/face-mask-item-consumption-expenditure";
 import { facilityEquipmentConsumptionExpenditure } from "../../../data/metrics/facility-equipment-consumption-expenditure";
 import { factorIncomeFromOutsidePrefectureNominalH27 } from "../../../data/metrics/factor-income-from-outside-prefecture-nominal-h27";
 import { factoryEstablishmentCount } from "../../../data/metrics/factory-establishment-count";
@@ -848,6 +878,7 @@ import { fiscalStrengthIndex } from "../../../data/metrics/fiscal-strength-index
 import { fishCannedConsumptionExpenditure } from "../../../data/metrics/fish-canned-consumption-expenditure";
 import { fishCatch } from "../../../data/metrics/fish-catch";
 import { fishPasteConsumptionExpenditure } from "../../../data/metrics/fish-paste-consumption-expenditure";
+import { fishPasteProductsGroupConsumptionExpenditure } from "../../../data/metrics/fish-paste-products-group-consumption-expenditure";
 import { fishPickledConsumptionExpenditure } from "../../../data/metrics/fish-pickled-consumption-expenditure";
 import { fishTsukudaniType2ConsumptionExpenditure } from "../../../data/metrics/fish-tsukudani-type2-consumption-expenditure";
 import { fisheriesPrivateEmployees } from "../../../data/metrics/fisheries-private-employees";
@@ -912,6 +943,7 @@ import { foodRetailStoreCountPer1000 } from "../../../data/metrics/food-retail-s
 import { foodSanitationInspection } from "../../../data/metrics/food-sanitation-inspection";
 import { foodSelfSufficiencyRateCalorie } from "../../../data/metrics/food-self-sufficiency-rate-calorie";
 import { foodStoreCount } from "../../../data/metrics/food-store-count";
+import { footwearGroupConsumptionExpenditure } from "../../../data/metrics/footwear-group-consumption-expenditure";
 import { forSaleHousingFloorAreaStarts } from "../../../data/metrics/for-sale-housing-floor-area-starts";
 import { foreignEmployingEstablishmentCount } from "../../../data/metrics/foreign-employing-establishment-count";
 import { foreignPopulationPer100k } from "../../../data/metrics/foreign-population-per-100k";
@@ -937,19 +969,29 @@ import { forestryTimberOutputValue } from "../../../data/metrics/forestry-timber
 import { foundationConsumptionExpenditure } from "../../../data/metrics/foundation-consumption-expenditure";
 import { freelanceCount } from "../../../data/metrics/freelance-count";
 import { frequencyOfOccupationalAccidents } from "../../../data/metrics/frequency-of-occupational-accidents";
+import { freshFishGroupConsumptionExpenditure } from "../../../data/metrics/fresh-fish-group-consumption-expenditure";
+import { freshFishGroupConsumptionQuantity } from "../../../data/metrics/fresh-fish-group-consumption-quantity";
 import { freshFruitConsumptionQuantity } from "../../../data/metrics/fresh-fruit-consumption-quantity";
+import { freshFruitsGroupConsumptionExpenditure } from "../../../data/metrics/fresh-fruits-group-consumption-expenditure";
+import { freshFruitsGroupConsumptionQuantity } from "../../../data/metrics/fresh-fruits-group-consumption-quantity";
+import { freshMeatGroupConsumptionExpenditure } from "../../../data/metrics/fresh-meat-group-consumption-expenditure";
+import { freshMeatGroupConsumptionQuantity } from "../../../data/metrics/fresh-meat-group-consumption-quantity";
 import { freshSeafoodConsumptionQuantity } from "../../../data/metrics/fresh-seafood-consumption-quantity";
+import { freshSeafoodGroupConsumptionExpenditure } from "../../../data/metrics/fresh-seafood-group-consumption-expenditure";
+import { freshSeafoodGroupConsumptionQuantity } from "../../../data/metrics/fresh-seafood-group-consumption-quantity";
 import { freshShiitakeConsumptionExpenditure } from "../../../data/metrics/fresh-shiitake-consumption-expenditure";
 import { freshShiitakeConsumptionQuantity } from "../../../data/metrics/fresh-shiitake-consumption-quantity";
 import { freshUdonSobaConsumptionExpenditure } from "../../../data/metrics/fresh-udon-soba-consumption-expenditure";
 import { freshUdonSobaConsumptionQuantity } from "../../../data/metrics/fresh-udon-soba-consumption-quantity";
 import { freshVegetablesConsumptionExpenditure } from "../../../data/metrics/fresh-vegetables-consumption-expenditure";
 import { freshVegetablesConsumptionQuantity } from "../../../data/metrics/fresh-vegetables-consumption-quantity";
+import { freshVegetablesGroupConsumptionQuantity } from "../../../data/metrics/fresh-vegetables-group-consumption-quantity";
 import { freshwaterClamConsumptionExpenditure } from "../../../data/metrics/freshwater-clam-consumption-expenditure";
 import { freshwaterClamConsumptionQuantity } from "../../../data/metrics/freshwater-clam-consumption-quantity";
 import { friedTofuConsumptionExpenditure } from "../../../data/metrics/fried-tofu-consumption-expenditure";
 import { frozenFoodConsumptionExpenditure } from "../../../data/metrics/frozen-food-consumption-expenditure";
 import { fruitVegetableJuiceConsumptionExpenditure } from "../../../data/metrics/fruit-vegetable-juice-consumption-expenditure";
+import { fruitsGroupConsumptionExpenditure } from "../../../data/metrics/fruits-group-consumption-expenditure";
 import { fulfillmentRate } from "../../../data/metrics/fulfillment-rate";
 import { fulltimePhysiciansGeneralHospitalPer100beds } from "../../../data/metrics/fulltime-physicians-general-hospital-per-100beds";
 import { funeralExpenseConsumptionExpenditure } from "../../../data/metrics/funeral-expense-consumption-expenditure";
@@ -995,8 +1037,10 @@ import { generalAffairsExpensesPrefecture } from "../../../data/metrics/general-
 import { generalClinicCountPer100k } from "../../../data/metrics/general-clinic-count-per-100k";
 import { generalClinicCountPer100km2 } from "../../../data/metrics/general-clinic-count-per-100km2";
 import { generalClinicCount } from "../../../data/metrics/general-clinic-count";
+import { generalDiningOutGroupConsumptionExpenditure } from "../../../data/metrics/general-dining-out-group-consumption-expenditure";
 import { generalDustEmissionFacilityCount } from "../../../data/metrics/general-dust-emission-facility-count";
 import { generalFundsPrefecture } from "../../../data/metrics/general-funds-prefecture";
+import { generalFurnitureGroupConsumptionExpenditure } from "../../../data/metrics/general-furniture-group-consumption-expenditure";
 import { generalHospitalAvgLengthOfStay } from "../../../data/metrics/general-hospital-avg-length-of-stay";
 import { generalHospitalBedCountPer100k } from "../../../data/metrics/general-hospital-bed-count-per-100k";
 import { generalHospitalBedCount } from "../../../data/metrics/general-hospital-bed-count";
@@ -1028,6 +1072,7 @@ import { generalRevenueRatioPrefFinance } from "../../../data/metrics/general-re
 import { geothermalPowerPlantCount } from "../../../data/metrics/geothermal-power-plant-count";
 import { geriatricHealthFacilityCapacity } from "../../../data/metrics/geriatric-health-facility-capacity";
 import { geriatricHealthFacilityCount } from "../../../data/metrics/geriatric-health-facility-count";
+import { giftMoneyGroupConsumptionExpenditure } from "../../../data/metrics/gift-money-group-consumption-expenditure";
 import { giniCoefficientDisposableIncome } from "../../../data/metrics/gini-coefficient-disposable-income";
 import { giniCoefficientFinancialAssets } from "../../../data/metrics/gini-coefficient-financial-assets";
 import { girlsSchoolUniformConsumptionExpenditure } from "../../../data/metrics/girls-school-uniform-consumption-expenditure";
@@ -1122,12 +1167,14 @@ import { healthInsurancePremiumConsumptionExpenditure } from "../../../data/metr
 import { healthMedicalExpenditureTotal } from "../../../data/metrics/health-medical-expenditure-total";
 import { healthPhysicalEducationExpenseMunicipal } from "../../../data/metrics/health-physical-education-expense-municipal";
 import { healthPhysicalEducationExpensesPrefecture } from "../../../data/metrics/health-physical-education-expenses-prefecture";
+import { healthSupplementsGroupConsumptionExpenditure } from "../../../data/metrics/health-supplements-group-consumption-expenditure";
 import { healthcareCostAllHouseholds } from "../../../data/metrics/healthcare-cost-all-households";
 import { healthcareExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/healthcare-expenditure-ratio-multi-person-households";
 import { healthyLifeExpectancyFemale } from "../../../data/metrics/healthy-life-expectancy-female";
 import { healthyLifeExpectancyMale } from "../../../data/metrics/healthy-life-expectancy-male";
 import { heaterConsumptionExpenditure } from "../../../data/metrics/heater-consumption-expenditure";
 import { heaterConsumptionQuantity } from "../../../data/metrics/heater-consumption-quantity";
+import { heatingCoolingAppliancesGroupConsumptionExpenditure } from "../../../data/metrics/heating-cooling-appliances-group-consumption-expenditure";
 import { heatstrokeDeaths } from "../../../data/metrics/heatstroke-deaths";
 import { heatstrokeEmergencyTransports } from "../../../data/metrics/heatstroke-emergency-transports";
 import { highSchoolAdvancementRate } from "../../../data/metrics/high-school-advancement-rate";
@@ -1202,7 +1249,9 @@ import { hospitalBedCount } from "../../../data/metrics/hospital-bed-count";
 import { hospitalCountCity } from "../../../data/metrics/hospital-count-city";
 import { hospitalStaffByOccupation } from "../../../data/metrics/hospital-staff-by-occupation";
 import { hospitalsWithLongTermCareBeds } from "../../../data/metrics/hospitals-with-long-term-care-beds";
+import { householdConsumablesGroupConsumptionExpenditure } from "../../../data/metrics/household-consumables-group-consumption-expenditure";
 import { householdDebtBalance } from "../../../data/metrics/household-debt-balance";
+import { householdDurablesGroupConsumptionExpenditure } from "../../../data/metrics/household-durables-group-consumption-expenditure";
 import { householdHeadAllowanceConsumptionExpenditure } from "../../../data/metrics/household-head-allowance-consumption-expenditure";
 import { householdHeadAnnualIncomePerHousehold } from "../../../data/metrics/household-head-annual-income-per-household";
 import { householdHeadIncomeWorkerHouseholdsPerMonth } from "../../../data/metrics/household-head-income-worker-households-per-month";
@@ -1226,6 +1275,7 @@ import { householdSurveyOtherExpenditure } from "../../../data/metrics/household
 import { householdSurveyTransportCommunicationExpenditure } from "../../../data/metrics/household-survey-transport-communication-expenditure";
 import { householdSurveyUtilitiesExpenditure } from "../../../data/metrics/household-survey-utilities-expenditure";
 import { householdTypesByArea } from "../../../data/metrics/household-types-by-area";
+import { householdUtensilsGroupConsumptionExpenditure } from "../../../data/metrics/household-utensils-group-consumption-expenditure";
 import { householdsOnPublicAssistancePer1000 } from "../../../data/metrics/households-on-public-assistance-per-1000";
 import { householdsOnPublicAssistance } from "../../../data/metrics/households-on-public-assistance";
 import { householdsWithElderlyMembers } from "../../../data/metrics/households-with-elderly-members";
@@ -1234,6 +1284,7 @@ import { households } from "../../../data/metrics/households";
 import { housekeepingServiceConsumptionExpenditure } from "../../../data/metrics/housekeeping-service-consumption-expenditure";
 import { houseworkAvgTimeFemale } from "../../../data/metrics/housework-avg-time-female";
 import { houseworkAvgTimeMale } from "../../../data/metrics/housework-avg-time-male";
+import { houseworkDurablesGroupConsumptionExpenditure } from "../../../data/metrics/housework-durables-group-consumption-expenditure";
 import { housingChargesConsumptionExpenditure } from "../../../data/metrics/housing-charges-consumption-expenditure";
 import { housingCostAllHouseholds } from "../../../data/metrics/housing-cost-all-households";
 import { housingExpenditureRatioMultiPersonHouseholds } from "../../../data/metrics/housing-expenditure-ratio-multi-person-households";
@@ -1243,6 +1294,9 @@ import { housingExpensesPrefecture } from "../../../data/metrics/housing-expense
 import { housingFloorArea } from "../../../data/metrics/housing-floor-area";
 import { housingLandDebtPerHousehold } from "../../../data/metrics/housing-land-debt-per-household";
 import { housingLandLiabilitiesRatioMultiPersonHouseholds } from "../../../data/metrics/housing-land-liabilities-ratio-multi-person-households";
+import { housingMaterialsGroupConsumptionExpenditure } from "../../../data/metrics/housing-materials-group-consumption-expenditure";
+import { housingRepairServicesGroupConsumptionExpenditure } from "../../../data/metrics/housing-repair-services-group-consumption-expenditure";
+import { housingRepairsGroupConsumptionExpenditure } from "../../../data/metrics/housing-repairs-group-consumption-expenditure";
 import { housingSiteValuePer33m2 } from "../../../data/metrics/housing-site-value-per-3-3m2";
 import { husbandChildcareRate } from "../../../data/metrics/husband-childcare-rate";
 import { hydroelectricPowerPlantCount } from "../../../data/metrics/hydroelectric-power-plant-count";
@@ -1302,6 +1356,7 @@ import { intellectualDisabilitySupportFacilityResidents } from "../../../data/me
 import { intellectualDisabilitySupportFacilityStaffPer100k } from "../../../data/metrics/intellectual-disability-support-facility-staff-per-100k";
 import { interestTaxGrantMunicipal } from "../../../data/metrics/interest-tax-grant-municipal";
 import { interiorDecorationConsumptionExpenditure } from "../../../data/metrics/interior-decoration-consumption-expenditure";
+import { interiorFurnishingsGroupConsumptionExpenditure } from "../../../data/metrics/interior-furnishings-group-consumption-expenditure";
 import { internetFeeConsumptionExpenditure } from "../../../data/metrics/internet-fee-consumption-expenditure";
 import { internetUsageRate10plus } from "../../../data/metrics/internet-usage-rate-10plus";
 import { interprefectureNetMigrationAge15to24 } from "../../../data/metrics/interprefecture-net-migration-age15to24";
@@ -1319,6 +1374,7 @@ import { japanHealthInsuranceSocietyMedicalExpenseDependentsPerPerson } from "..
 import { japanHealthInsuranceSocietyMedicalExpenseInsuredPerPerson } from "../../../data/metrics/japan-health-insurance-society-medical-expense-insured-per-person";
 import { japanHealthInsuranceSocietyVisitRateDependentsPer1000 } from "../../../data/metrics/japan-health-insurance-society-visit-rate-dependents-per-1000";
 import { japanHealthInsuranceSocietyVisitRateInsuredPer1000 } from "../../../data/metrics/japan-health-insurance-society-visit-rate-insured-per-1000";
+import { japaneseClothingGroupConsumptionExpenditure } from "../../../data/metrics/japanese-clothing-group-consumption-expenditure";
 import { japaneseEntries } from "../../../data/metrics/japanese-entries";
 import { japaneseFoodDiningConsumptionExpenditure } from "../../../data/metrics/japanese-food-dining-consumption-expenditure";
 import { japaneseMoversIn } from "../../../data/metrics/japanese-movers-in";
@@ -1428,8 +1484,11 @@ import { laundryBeautyBathIndustryRevenue } from "../../../data/metrics/laundry-
 import { laundryDetergentConsumptionExpenditure } from "../../../data/metrics/laundry-detergent-consumption-expenditure";
 import { laundryServiceConsumptionExpenditure } from "../../../data/metrics/laundry-service-consumption-expenditure";
 import { layerHenCount } from "../../../data/metrics/layer-hen-count";
+import { leafyVegetablesGroupConsumptionExpenditure } from "../../../data/metrics/leafy-vegetables-group-consumption-expenditure";
+import { leafyVegetablesGroupConsumptionQuantity } from "../../../data/metrics/leafy-vegetables-group-consumption-quantity";
 import { leekConsumptionExpenditure } from "../../../data/metrics/leek-consumption-expenditure";
 import { leekConsumptionQuantity } from "../../../data/metrics/leek-consumption-quantity";
+import { lessonFeesGroupConsumptionExpenditure } from "../../../data/metrics/lesson-fees-group-consumption-expenditure";
 import { lettuceConsumptionExpenditure } from "../../../data/metrics/lettuce-consumption-expenditure";
 import { lettuceConsumptionQuantity } from "../../../data/metrics/lettuce-consumption-quantity";
 import { libraryBooks } from "../../../data/metrics/library-books";
@@ -1540,7 +1599,9 @@ import { mayonnaiseConsumptionExpenditure } from "../../../data/metrics/mayonnai
 import { mayonnaiseConsumptionQuantity } from "../../../data/metrics/mayonnaise-consumption-quantity";
 import { mealAvgTimeFemale } from "../../../data/metrics/meal-avg-time-female";
 import { mealAvgTimeMale } from "../../../data/metrics/meal-avg-time-male";
+import { mealChargesGroupConsumptionExpenditure } from "../../../data/metrics/meal-charges-group-consumption-expenditure";
 import { mealKitConsumptionExpenditure } from "../../../data/metrics/meal-kit-consumption-expenditure";
+import { meatGroupConsumptionExpenditure } from "../../../data/metrics/meat-group-consumption-expenditure";
 import { mediaAvgTimeUnemployedFemale } from "../../../data/metrics/media-avg-time-unemployed-female";
 import { mediaAvgTimeUnemployedMale } from "../../../data/metrics/media-avg-time-unemployed-male";
 import { mediaProductionEmployees } from "../../../data/metrics/media-production-employees";
@@ -1556,11 +1617,14 @@ import { medicalPhysiciansEmergencyMedicine } from "../../../data/metrics/medica
 import { medicalPhysiciansObstetricsGynecology } from "../../../data/metrics/medical-physicians-obstetrics-gynecology";
 import { medicalPhysiciansPediatrics } from "../../../data/metrics/medical-physicians-pediatrics";
 import { medicalPhysiciansUnder40 } from "../../../data/metrics/medical-physicians-under-40";
+import { medicalServicesGroupConsumptionExpenditure } from "../../../data/metrics/medical-services-group-consumption-expenditure";
+import { medicalSuppliesGroupConsumptionExpenditure } from "../../../data/metrics/medical-supplies-group-consumption-expenditure";
 import { medicalWelfareIndustryAnnualIncome } from "../../../data/metrics/medical-welfare-industry-annual-income";
 import { medicalWelfarePrivateEmployees } from "../../../data/metrics/medical-welfare-private-employees";
 import { medicalWelfarePrivateEstablishments } from "../../../data/metrics/medical-welfare-private-establishments";
 import { medicalWelfarePrivateNetValueAdded } from "../../../data/metrics/medical-welfare-private-net-value-added";
 import { medicalWelfarePrivateSales } from "../../../data/metrics/medical-welfare-private-sales";
+import { medicinesGroupConsumptionExpenditure } from "../../../data/metrics/medicines-group-consumption-expenditure";
 import { melonConsumptionExpenditure } from "../../../data/metrics/melon-consumption-expenditure";
 import { melonConsumptionQuantity } from "../../../data/metrics/melon-consumption-quantity";
 import { membershipFeesConsumptionExpenditure } from "../../../data/metrics/membership-fees-consumption-expenditure";
@@ -1571,6 +1635,7 @@ import { mensJacketConsumptionExpenditure } from "../../../data/metrics/mens-jac
 import { mensJacketConsumptionQuantity } from "../../../data/metrics/mens-jacket-consumption-quantity";
 import { mensPantsConsumptionExpenditure } from "../../../data/metrics/mens-pants-consumption-expenditure";
 import { mensPantsConsumptionQuantity } from "../../../data/metrics/mens-pants-consumption-quantity";
+import { mensShirtsSweatersGroupConsumptionExpenditure } from "../../../data/metrics/mens-shirts-sweaters-group-consumption-expenditure";
 import { mensShoesConsumptionExpenditure } from "../../../data/metrics/mens-shoes-consumption-expenditure";
 import { mensShoesConsumptionQuantity } from "../../../data/metrics/mens-shoes-consumption-quantity";
 import { mensSleepwearConsumptionExpenditure } from "../../../data/metrics/mens-sleepwear-consumption-expenditure";
@@ -1581,6 +1646,7 @@ import { mensSuitConsumptionQuantity } from "../../../data/metrics/mens-suit-con
 import { mensSweaterConsumptionExpenditure } from "../../../data/metrics/mens-sweater-consumption-expenditure";
 import { mensSweaterConsumptionQuantity } from "../../../data/metrics/mens-sweater-consumption-quantity";
 import { mensUnderwearConsumptionExpenditure } from "../../../data/metrics/mens-underwear-consumption-expenditure";
+import { mensUnderwearGroupConsumptionExpenditure } from "../../../data/metrics/mens-underwear-group-consumption-expenditure";
 import { mentalHealthApplication } from "../../../data/metrics/mental-health-application";
 import { mentalHealthExpensesPrefecture } from "../../../data/metrics/mental-health-expenses-prefecture";
 import { metabolicSyndromePrevalenceAmongCheckupRecipients } from "../../../data/metrics/metabolic-syndrome-prevalence-among-checkup-recipients";
@@ -1597,6 +1663,7 @@ import { midwifeCount } from "../../../data/metrics/midwife-count";
 import { migrantWorkerRatioSalesFarm } from "../../../data/metrics/migrant-worker-ratio-sales-farm";
 import { milkConsumptionQuantity } from "../../../data/metrics/milk-consumption-quantity";
 import { milkDrinkConsumptionExpenditure } from "../../../data/metrics/milk-drink-consumption-expenditure";
+import { milkGroupConsumptionExpenditure } from "../../../data/metrics/milk-group-consumption-expenditure";
 import { mineralWaterConsumptionExpenditure } from "../../../data/metrics/mineral-water-consumption-expenditure";
 import { minicarCount } from "../../../data/metrics/minicar-count";
 import { minimumHousingStandardHouseholds } from "../../../data/metrics/minimum-housing-standard-households";
@@ -1605,6 +1672,7 @@ import { miningPrivateEmployees } from "../../../data/metrics/mining-private-emp
 import { miningPrivateEstablishments } from "../../../data/metrics/mining-private-establishments";
 import { miningPrivateNetValueAdded } from "../../../data/metrics/mining-private-net-value-added";
 import { miningPrivateSales } from "../../../data/metrics/mining-private-sales";
+import { miscellaneousGroupConsumptionExpenditure } from "../../../data/metrics/miscellaneous-group-consumption-expenditure";
 import { miscellaneousIncomePrefecture } from "../../../data/metrics/miscellaneous-income-prefecture";
 import { miscellaneousRevenueMunicipal } from "../../../data/metrics/miscellaneous-revenue-municipal";
 import { miscellaneousSchoolCountPer100k } from "../../../data/metrics/miscellaneous-school-count-per-100k";
@@ -1753,6 +1821,8 @@ import { nonprimaryEnterprisesUnder5Employees } from "../../../data/metrics/nonp
 import { nonregularContinuationWishRate } from "../../../data/metrics/nonregular-continuation-wish-rate";
 import { nonregularEmployeesCount } from "../../../data/metrics/nonregular-employees-count";
 import { nonregularJobChangeWishRate } from "../../../data/metrics/nonregular-job-change-wish-rate";
+import { noodlesGroupConsumptionExpenditure } from "../../../data/metrics/noodles-group-consumption-expenditure";
+import { noodlesGroupConsumptionQuantity } from "../../../data/metrics/noodles-group-consumption-quantity";
 import { notebooksPaperConsumptionExpenditure } from "../../../data/metrics/notebooks-paper-consumption-expenditure";
 import { nuclearFamilyHouseholdCount } from "../../../data/metrics/nuclear-family-household-count";
 import { nuclearFamilyHouseholdsRatio } from "../../../data/metrics/nuclear-family-households-ratio";
@@ -1829,6 +1899,9 @@ import { occupationalAccidentFrequencyRate } from "../../../data/metrics/occupat
 import { occupiedDwellings } from "../../../data/metrics/occupied-dwellings";
 import { octopusConsumptionExpenditure } from "../../../data/metrics/octopus-consumption-expenditure";
 import { octopusConsumptionQuantity } from "../../../data/metrics/octopus-consumption-quantity";
+import { oilsFatsGroupConsumptionExpenditure } from "../../../data/metrics/oils-fats-group-consumption-expenditure";
+import { oilsFatsGroupConsumptionQuantity } from "../../../data/metrics/oils-fats-group-consumption-quantity";
+import { oilsSeasoningsGroupConsumptionExpenditure } from "../../../data/metrics/oils-seasonings-group-consumption-expenditure";
 import { oldPopulationIndex } from "../../../data/metrics/old-population-index";
 import { onigiriConsumptionExpenditure } from "../../../data/metrics/onigiri-consumption-expenditure";
 import { onionConsumptionExpenditure } from "../../../data/metrics/onion-consumption-expenditure";
@@ -1849,15 +1922,20 @@ import { otherBagsConsumptionExpenditure } from "../../../data/metrics/other-bag
 import { otherBeautyProductsConsumptionExpenditure } from "../../../data/metrics/other-beauty-products-consumption-expenditure";
 import { otherBeautyServiceConsumptionExpenditure } from "../../../data/metrics/other-beauty-service-consumption-expenditure";
 import { otherBeddingConsumptionExpenditure } from "../../../data/metrics/other-bedding-consumption-expenditure";
+import { otherBeveragesGroupConsumptionExpenditure } from "../../../data/metrics/other-beverages-group-consumption-expenditure";
 import { otherBreadConsumptionExpenditure } from "../../../data/metrics/other-bread-consumption-expenditure";
 import { otherBreadConsumptionQuantity } from "../../../data/metrics/other-bread-consumption-quantity";
 import { otherBroadcastFeeConsumptionExpenditure } from "../../../data/metrics/other-broadcast-fee-consumption-expenditure";
 import { otherBuildingTypeDwellings } from "../../../data/metrics/other-building-type-dwellings";
 import { otherCarServiceConsumptionExpenditure } from "../../../data/metrics/other-car-service-consumption-expenditure";
+import { otherCerealsGroupConsumptionExpenditure } from "../../../data/metrics/other-cereals-group-consumption-expenditure";
+import { otherCerealsGroupConsumptionQuantity } from "../../../data/metrics/other-cereals-group-consumption-quantity";
 import { otherCeremonyExpenseConsumptionExpenditure } from "../../../data/metrics/other-ceremony-expense-consumption-expenditure";
 import { otherChargesConsumptionExpenditure } from "../../../data/metrics/other-charges-consumption-expenditure";
 import { otherCitrusConsumptionExpenditure } from "../../../data/metrics/other-citrus-consumption-expenditure";
 import { otherCitrusConsumptionQuantity } from "../../../data/metrics/other-citrus-consumption-quantity";
+import { otherClothingGroupConsumptionExpenditure } from "../../../data/metrics/other-clothing-group-consumption-expenditure";
+import { otherClothingMisc2025GroupConsumptionExpenditure } from "../../../data/metrics/other-clothing-misc-2025-group-consumption-expenditure";
 import { otherClothingMiscConsumptionExpenditure } from "../../../data/metrics/other-clothing-misc-consumption-expenditure";
 import { otherClothingServiceConsumptionExpenditure } from "../../../data/metrics/other-clothing-service-consumption-expenditure";
 import { otherCommunicationDeviceConsumptionExpenditure } from "../../../data/metrics/other-communication-device-consumption-expenditure";
@@ -1879,6 +1957,7 @@ import { otherFreshFishConsumptionExpenditure } from "../../../data/metrics/othe
 import { otherFreshFishConsumptionQuantity } from "../../../data/metrics/other-fresh-fish-consumption-quantity";
 import { otherFreshFruitConsumptionExpenditure } from "../../../data/metrics/other-fresh-fruit-consumption-expenditure";
 import { otherFreshFruitConsumptionQuantity } from "../../../data/metrics/other-fresh-fruit-consumption-quantity";
+import { otherFuelGroupConsumptionExpenditure } from "../../../data/metrics/other-fuel-group-consumption-expenditure";
 import { otherFurnitureConsumptionExpenditure } from "../../../data/metrics/other-furniture-consumption-expenditure";
 import { otherGrainsConsumptionExpenditure } from "../../../data/metrics/other-grains-consumption-expenditure";
 import { otherGrainsConsumptionQuantity } from "../../../data/metrics/other-grains-consumption-quantity";
@@ -1887,6 +1966,7 @@ import { otherHealthSuppliesConsumptionExpenditure } from "../../../data/metrics
 import { otherHeatingCoolingConsumptionExpenditure } from "../../../data/metrics/other-heating-cooling-consumption-expenditure";
 import { otherHospitalFeeConsumptionExpenditure } from "../../../data/metrics/other-hospital-fee-consumption-expenditure";
 import { otherHouseholdConsumablesConsumptionExpenditure } from "../../../data/metrics/other-household-consumables-consumption-expenditure";
+import { otherHouseholdConsumablesGroupConsumptionExpenditure } from "../../../data/metrics/other-household-consumables-group-consumption-expenditure";
 import { otherHouseholdDurablesConsumptionExpenditure } from "../../../data/metrics/other-household-durables-consumption-expenditure";
 import { otherHouseholdGoodsConsumptionExpenditure } from "../../../data/metrics/other-household-goods-consumption-expenditure";
 import { otherIndoorFurnishingConsumptionExpenditure } from "../../../data/metrics/other-indoor-furnishing-consumption-expenditure";
@@ -1904,6 +1984,7 @@ import { otherMensClothingConsumptionExpenditure } from "../../../data/metrics/o
 import { otherMensShirtConsumptionExpenditure } from "../../../data/metrics/other-mens-shirt-consumption-expenditure";
 import { otherMensShirtConsumptionQuantity } from "../../../data/metrics/other-mens-shirt-consumption-quantity";
 import { otherMiscExpenseConsumptionExpenditure } from "../../../data/metrics/other-misc-expense-consumption-expenditure";
+import { otherMiscellaneousGroupConsumptionExpenditure } from "../../../data/metrics/other-miscellaneous-group-consumption-expenditure";
 import { otherMushroomConsumptionExpenditure } from "../../../data/metrics/other-mushroom-consumption-expenditure";
 import { otherMushroomConsumptionQuantity } from "../../../data/metrics/other-mushroom-consumption-quantity";
 import { otherNonSavingsInsuranceConsumptionExpenditure } from "../../../data/metrics/other-non-savings-insurance-consumption-expenditure";
@@ -1914,9 +1995,14 @@ import { otherParkingFeeConsumptionExpenditure } from "../../../data/metrics/oth
 import { otherPersonalItemsConsumptionExpenditure } from "../../../data/metrics/other-personal-items-consumption-expenditure";
 import { otherPetServiceConsumptionExpenditure } from "../../../data/metrics/other-pet-service-consumption-expenditure";
 import { otherPreparedFoodConsumptionExpenditure } from "../../../data/metrics/other-prepared-food-consumption-expenditure";
+import { otherPreparedFoodsGroupConsumptionExpenditure } from "../../../data/metrics/other-prepared-foods-group-consumption-expenditure";
 import { otherProcessedFishExtConsumptionExpenditure } from "../../../data/metrics/other-processed-fish-ext-consumption-expenditure";
 import { otherProcessedMeatConsumptionExpenditure } from "../../../data/metrics/other-processed-meat-consumption-expenditure";
+import { otherProcessedSeafoodGroupConsumptionExpenditure } from "../../../data/metrics/other-processed-seafood-group-consumption-expenditure";
+import { otherProcessedVegetablesGroupConsumptionExpenditure } from "../../../data/metrics/other-processed-vegetables-group-consumption-expenditure";
 import { otherPublicationsConsumptionExpenditure } from "../../../data/metrics/other-publications-consumption-expenditure";
+import { otherRecreationalGoodsGroupConsumptionExpenditure } from "../../../data/metrics/other-recreational-goods-group-consumption-expenditure";
+import { otherRecreationalServicesGroupConsumptionExpenditure } from "../../../data/metrics/other-recreational-services-group-consumption-expenditure";
 import { otherRemittanceConsumptionExpenditure } from "../../../data/metrics/other-remittance-consumption-expenditure";
 import { otherRentLandConsumptionExpenditure } from "../../../data/metrics/other-rent-land-consumption-expenditure";
 import { otherRetailStoreCount } from "../../../data/metrics/other-retail-store-count";
@@ -1933,6 +2019,7 @@ import { otherServicesPrivateNetValueAdded } from "../../../data/metrics/other-s
 import { otherServicesPrivateSales } from "../../../data/metrics/other-services-private-sales";
 import { otherShellfishConsumptionExpenditure } from "../../../data/metrics/other-shellfish-consumption-expenditure";
 import { otherShellfishConsumptionQuantity } from "../../../data/metrics/other-shellfish-consumption-quantity";
+import { otherSocialExpensesGroupConsumptionExpenditure } from "../../../data/metrics/other-social-expenses-group-consumption-expenditure";
 import { otherSocialWelfareFacilityCount } from "../../../data/metrics/other-social-welfare-facility-count";
 import { otherSoyProductsConsumptionExpenditure } from "../../../data/metrics/other-soy-products-consumption-expenditure";
 import { otherSportsEquipmentConsumptionExpenditure } from "../../../data/metrics/other-sports-equipment-consumption-expenditure";
@@ -1953,6 +2040,8 @@ import { otherVegetablePicklesConsumptionExpenditure } from "../../../data/metri
 import { otherVegetableSeaweedProcessedConsumptionExpenditure } from "../../../data/metrics/other-vegetable-seaweed-processed-consumption-expenditure";
 import { otherVegetablesConsumptionExpenditure } from "../../../data/metrics/other-vegetables-consumption-expenditure";
 import { otherVegetablesConsumptionQuantity } from "../../../data/metrics/other-vegetables-consumption-quantity";
+import { otherVegetablesGroupConsumptionExpenditure } from "../../../data/metrics/other-vegetables-group-consumption-expenditure";
+import { otherVegetablesGroupConsumptionQuantity } from "../../../data/metrics/other-vegetables-group-consumption-quantity";
 import { otherWesternSweetsConsumptionExpenditure } from "../../../data/metrics/other-western-sweets-consumption-expenditure";
 import { otherWomensClothingConsumptionExpenditure } from "../../../data/metrics/other-womens-clothing-consumption-expenditure";
 import { otherWomensShirtConsumptionExpenditure } from "../../../data/metrics/other-womens-shirt-consumption-expenditure";
@@ -1977,6 +2066,7 @@ import { ownerOccupiedHousingRatio } from "../../../data/metrics/owner-occupied-
 import { oysterConsumptionExpenditure } from "../../../data/metrics/oyster-consumption-expenditure";
 import { oysterConsumptionQuantity } from "../../../data/metrics/oyster-consumption-quantity";
 import { pachinkoShopDensityPer10k } from "../../../data/metrics/pachinko-shop-density-per-10k";
+import { packageToursGroupConsumptionExpenditure } from "../../../data/metrics/package-tours-group-consumption-expenditure";
 import { paidNursingHomeCapacityPer100065plus } from "../../../data/metrics/paid-nursing-home-capacity-per-1000-65plus";
 import { paidNursingHomeCapacity } from "../../../data/metrics/paid-nursing-home-capacity";
 import { paidNursingHomeCountPer100k65plus } from "../../../data/metrics/paid-nursing-home-count-per-100k-65plus";
@@ -2039,6 +2129,7 @@ import { permConsumptionQuantity } from "../../../data/metrics/perm-consumption-
 import { persimmonConsumptionExpenditure } from "../../../data/metrics/persimmon-consumption-expenditure";
 import { persimmonConsumptionQuantity } from "../../../data/metrics/persimmon-consumption-quantity";
 import { personalComputerConsumptionExpenditure } from "../../../data/metrics/personal-computer-consumption-expenditure";
+import { personalEffectsGroupConsumptionExpenditure } from "../../../data/metrics/personal-effects-group-consumption-expenditure";
 import { personalItemsServiceConsumptionExpenditure } from "../../../data/metrics/personal-items-service-consumption-expenditure";
 import { personalServicesEntertainmentPrivateEmployees } from "../../../data/metrics/personal-services-entertainment-private-employees";
 import { personalServicesEntertainmentPrivateEstablishments } from "../../../data/metrics/personal-services-entertainment-private-establishments";
@@ -2097,6 +2188,7 @@ import { pm25GeneralStationCount } from "../../../data/metrics/pm25-general-stat
 import { pm25ValidGeneralStationCount } from "../../../data/metrics/pm25-valid-general-station-count";
 import { pneumoniaDeathCount } from "../../../data/metrics/pneumonia-death-count";
 import { pneumoniaDeathRate } from "../../../data/metrics/pneumonia-death-rate";
+import { pocketMoneyGroupConsumptionExpenditure } from "../../../data/metrics/pocket-money-group-consumption-expenditure";
 import { policeDepartmentStaff } from "../../../data/metrics/police-department-staff";
 import { policeExpenditureRatioPrefFinance } from "../../../data/metrics/police-expenditure-ratio-pref-finance";
 import { policeExpensesPrefecture } from "../../../data/metrics/police-expenses-prefecture";
@@ -2236,6 +2328,7 @@ import { prefecturalNatureParkArea } from "../../../data/metrics/prefectural-nat
 import { prefecturalPublicBuildingFloorArea } from "../../../data/metrics/prefectural-public-building-floor-area";
 import { prefecturalRecruitmentOnlineApplicationRate } from "../../../data/metrics/prefectural-recruitment-online-application-rate";
 import { prefectureDesignatedCulturalPropertyCount } from "../../../data/metrics/prefecture-designated-cultural-property-count";
+import { preparedFoodsGroupConsumptionExpenditure } from "../../../data/metrics/prepared-foods-group-consumption-expenditure";
 import { preschoolFeeConsumptionExpenditure } from "../../../data/metrics/preschool-fee-consumption-expenditure";
 import { primaryActivityAvgTimeFemale } from "../../../data/metrics/primary-activity-avg-time-female";
 import { primaryActivityAvgTimeMale } from "../../../data/metrics/primary-activity-avg-time-male";
@@ -2286,6 +2379,8 @@ import { privateSportsFacility } from "../../../data/metrics/private-sports-faci
 import { privateUniversityConsumptionExpenditure } from "../../../data/metrics/private-university-consumption-expenditure";
 import { privateUniversityStudentRatio } from "../../../data/metrics/private-university-student-ratio";
 import { probioticDrinkConsumptionExpenditure } from "../../../data/metrics/probiotic-drink-consumption-expenditure";
+import { processedFruitsGroupConsumptionExpenditure } from "../../../data/metrics/processed-fruits-group-consumption-expenditure";
+import { processedMeatGroupConsumptionExpenditure } from "../../../data/metrics/processed-meat-group-consumption-expenditure";
 import { productionAgePopulationRatio } from "../../../data/metrics/production-age-population-ratio";
 import { professionalServicesPrivateEmployees } from "../../../data/metrics/professional-services-private-employees";
 import { professionalServicesPrivateEstablishments } from "../../../data/metrics/professional-services-private-establishments";
@@ -2412,7 +2507,10 @@ import { realEstateLeasingPrivateSales } from "../../../data/metrics/real-estate
 import { realPublicDebtServiceRatioCity } from "../../../data/metrics/real-public-debt-service-ratio-city";
 import { realPublicDebtServiceRatio } from "../../../data/metrics/real-public-debt-service-ratio";
 import { recordedMediaConsumptionExpenditure } from "../../../data/metrics/recorded-media-consumption-expenditure";
+import { recreationalDurablesGroupConsumptionExpenditure } from "../../../data/metrics/recreational-durables-group-consumption-expenditure";
 import { recreationalFishingCount } from "../../../data/metrics/recreational-fishing-count";
+import { recreationalGoodsGroupConsumptionExpenditure } from "../../../data/metrics/recreational-goods-group-consumption-expenditure";
+import { recreationalServicesGroupConsumptionExpenditure } from "../../../data/metrics/recreational-services-group-consumption-expenditure";
 import { refrigeratorConsumptionExpenditure } from "../../../data/metrics/refrigerator-consumption-expenditure";
 import { refrigeratorConsumptionQuantity } from "../../../data/metrics/refrigerator-consumption-quantity";
 import { regionalBusinessCo2EmissionsEstimate } from "../../../data/metrics/regional-business-co2-emissions-estimate";
@@ -2438,7 +2536,9 @@ import { relativesOnlyHouseholds } from "../../../data/metrics/relatives-only-ho
 import { relaxationAvgTimeFemale } from "../../../data/metrics/relaxation-avg-time-female";
 import { relaxationAvgTimeMale } from "../../../data/metrics/relaxation-avg-time-male";
 import { religiousExpenseConsumptionExpenditure } from "../../../data/metrics/religious-expense-consumption-expenditure";
+import { remittancesGroupConsumptionExpenditure } from "../../../data/metrics/remittances-group-consumption-expenditure";
 import { renovationRate } from "../../../data/metrics/renovation-rate";
+import { rentGroupConsumptionExpenditure } from "../../../data/metrics/rent-group-consumption-expenditure";
 import { rentPerTatamiExclusiveDwellings } from "../../../data/metrics/rent-per-tatami-exclusive-dwellings";
 import { rentalCarConsumptionExpenditure } from "../../../data/metrics/rental-car-consumption-expenditure";
 import { rentalHousingFloorAreaStarts } from "../../../data/metrics/rental-housing-floor-area-starts";
@@ -2525,6 +2625,8 @@ import { roomsPerMainHouseholdOwner } from "../../../data/metrics/rooms-per-main
 import { roomsPerMainHouseholdRented } from "../../../data/metrics/rooms-per-main-household-rented";
 import { roomsPerMainHousehold } from "../../../data/metrics/rooms-per-main-household";
 import { roomsPerOrdinaryHousehold } from "../../../data/metrics/rooms-per-ordinary-household";
+import { rootVegetablesGroupConsumptionExpenditure } from "../../../data/metrics/root-vegetables-group-consumption-expenditure";
+import { rootVegetablesGroupConsumptionQuantity } from "../../../data/metrics/root-vegetables-group-consumption-quantity";
 import { roundwoodHinokiProductionVolume } from "../../../data/metrics/roundwood-hinoki-production-volume";
 import { roundwoodProductionVolume } from "../../../data/metrics/roundwood-production-volume";
 import { roundwoodSugiProductionVolume } from "../../../data/metrics/roundwood-sugi-production-volume";
@@ -2541,6 +2643,8 @@ import { salmonConsumptionExpenditure } from "../../../data/metrics/salmon-consu
 import { salmonConsumptionQuantity } from "../../../data/metrics/salmon-consumption-quantity";
 import { saltIntakeFemaleAgeAdjusted } from "../../../data/metrics/salt-intake-female-age-adjusted";
 import { saltIntakeMaleAgeAdjusted } from "../../../data/metrics/salt-intake-male-age-adjusted";
+import { saltedDriedSeafoodGroupConsumptionExpenditure } from "../../../data/metrics/salted-dried-seafood-group-consumption-expenditure";
+import { saltedDriedSeafoodGroupConsumptionQuantity } from "../../../data/metrics/salted-dried-seafood-group-consumption-quantity";
 import { saltedSalmonConsumptionExpenditure } from "../../../data/metrics/salted-salmon-consumption-expenditure";
 import { saltedSalmonConsumptionQuantity } from "../../../data/metrics/salted-salmon-consumption-quantity";
 import { sanitationExpenditureRatioPrefFinance } from "../../../data/metrics/sanitation-expenditure-ratio-pref-finance";
@@ -2574,6 +2678,7 @@ import { scienceMuseumCount } from "../../../data/metrics/science-museum-count";
 import { seaBreamConsumptionExpenditure } from "../../../data/metrics/sea-bream-consumption-expenditure";
 import { seaBreamConsumptionQuantity } from "../../../data/metrics/sea-bream-consumption-quantity";
 import { seafoodConsumptionExpenditure } from "../../../data/metrics/seafood-consumption-expenditure";
+import { seasoningsGroupConsumptionExpenditure } from "../../../data/metrics/seasonings-group-consumption-expenditure";
 import { secondaryActivityAvgTimeEmployedFemale } from "../../../data/metrics/secondary-activity-avg-time-employed-female";
 import { secondaryActivityAvgTimeEmployedMale } from "../../../data/metrics/secondary-activity-avg-time-employed-male";
 import { secondaryActivityAvgTimeUnemployedFemale } from "../../../data/metrics/secondary-activity-avg-time-unemployed-female";
@@ -2619,8 +2724,11 @@ import { sharedBurdenFeesPrefecture } from "../../../data/metrics/shared-burden-
 import { sheetsConsumptionExpenditure } from "../../../data/metrics/sheets-consumption-expenditure";
 import { sheetsConsumptionQuantity } from "../../../data/metrics/sheets-consumption-quantity";
 import { shellfishConsumptionQuantity } from "../../../data/metrics/shellfish-consumption-quantity";
+import { shellfishGroupConsumptionExpenditure } from "../../../data/metrics/shellfish-group-consumption-expenditure";
+import { shellfishGroupConsumptionQuantity } from "../../../data/metrics/shellfish-group-consumption-quantity";
 import { shimejiConsumptionExpenditure } from "../../../data/metrics/shimeji-consumption-expenditure";
 import { shimejiConsumptionQuantity } from "../../../data/metrics/shimeji-consumption-quantity";
+import { shirtsSweatersGroupConsumptionExpenditure } from "../../../data/metrics/shirts-sweaters-group-consumption-expenditure";
 import { shochuConsumptionExpenditure } from "../../../data/metrics/shochu-consumption-expenditure";
 import { shochuConsumptionQuantity } from "../../../data/metrics/shochu-consumption-quantity";
 import { shopCombinedDwellings } from "../../../data/metrics/shop-combined-dwellings";
@@ -2671,10 +2779,12 @@ import { smartphoneUsageTimeByAge } from "../../../data/metrics/smartphone-usage
 import { smokeEmissionFacilityCount } from "../../../data/metrics/smoke-emission-facility-count";
 import { smokingRateMaleAgeAdjusted } from "../../../data/metrics/smoking-rate-male-age-adjusted";
 import { snackConsumptionExpenditure } from "../../../data/metrics/snack-consumption-expenditure";
+import { soapCosmeticsGroupConsumptionExpenditure } from "../../../data/metrics/soap-cosmetics-group-consumption-expenditure";
 import { sobaUdonDiningConsumptionExpenditure } from "../../../data/metrics/soba-udon-dining-consumption-expenditure";
 import { socialEducationExpenseMunicipal } from "../../../data/metrics/social-education-expense-municipal";
 import { socialEducationExpensesPrefecture } from "../../../data/metrics/social-education-expenses-prefecture";
 import { socialExpenseConsumptionExpenditure } from "../../../data/metrics/social-expense-consumption-expenditure";
+import { socialExpensesGroupConsumptionExpenditure } from "../../../data/metrics/social-expenses-group-consumption-expenditure";
 import { socialIncreaseRate } from "../../../data/metrics/social-increase-rate";
 import { socialIncrease } from "../../../data/metrics/social-increase";
 import { socialSportsFacility } from "../../../data/metrics/social-sports-facility";
@@ -2688,6 +2798,7 @@ import { solarWaterHeaterDwellings } from "../../../data/metrics/solar-water-hea
 import { soleProprietorOperatingProfit } from "../../../data/metrics/sole-proprietor-operating-profit";
 import { soleProprietorSalesPerWorker } from "../../../data/metrics/sole-proprietor-sales-per-worker";
 import { soleProprietorSales } from "../../../data/metrics/sole-proprietor-sales";
+import { soyProductsGroupConsumptionExpenditure } from "../../../data/metrics/soy-products-group-consumption-expenditure";
 import { soySauceConsumptionExpenditure } from "../../../data/metrics/soy-sauce-consumption-expenditure";
 import { soySauceConsumptionQuantity } from "../../../data/metrics/soy-sauce-consumption-quantity";
 import { specialLawCriminalArrestCountPerPopulation } from "../../../data/metrics/special-law-criminal-arrest-count-per-population";
@@ -2708,6 +2819,7 @@ import { sportsAnnualParticipationRate10plus } from "../../../data/metrics/sport
 import { sportsClubFeeConsumptionExpenditure } from "../../../data/metrics/sports-club-fee-consumption-expenditure";
 import { sportsDrinkConsumptionExpenditure } from "../../../data/metrics/sports-drink-consumption-expenditure";
 import { sportsFacilityCount } from "../../../data/metrics/sports-facility-count";
+import { sportsGoodsGroupConsumptionExpenditure } from "../../../data/metrics/sports-goods-group-consumption-expenditure";
 import { sportsLessonConsumptionExpenditure } from "../../../data/metrics/sports-lesson-consumption-expenditure";
 import { sportsParkCountPer100km2 } from "../../../data/metrics/sports-park-count-per-100km2";
 import { sportsParkCount } from "../../../data/metrics/sports-park-count";
@@ -2749,10 +2861,12 @@ import { standardPriceChangeRateIndustrial } from "../../../data/metrics/standar
 import { standardPriceChangeRateResidential } from "../../../data/metrics/standard-price-change-rate-residential";
 import { standardizedMortalityJapanese } from "../../../data/metrics/standardized-mortality-japanese";
 import { standardizedMortalityRatePer1000 } from "../../../data/metrics/standardized-mortality-rate-per-1000";
+import { staplePreparedFoodsGroupConsumptionExpenditure } from "../../../data/metrics/staple-prepared-foods-group-consumption-expenditure";
 import { startingSalaryHighschool } from "../../../data/metrics/starting-salary-highschool";
 import { startingSalaryUniversity } from "../../../data/metrics/starting-salary-university";
 import { stationPassengersAnnualTotal } from "../../../data/metrics/station-passengers-annual-total";
 import { stationWithin1kmHouseholdRatio } from "../../../data/metrics/station-within-1km-household-ratio";
+import { stationeryGroupConsumptionExpenditure } from "../../../data/metrics/stationery-group-consumption-expenditure";
 import { statisticalDiscrepancyNominalH27 } from "../../../data/metrics/statistical-discrepancy-nominal-h27";
 import { steelFrameDwellings } from "../../../data/metrics/steel-frame-dwellings";
 import { steepSlopeSpecialWarningZoneCount } from "../../../data/metrics/steep-slope-special-warning-zone-count";
@@ -2788,6 +2902,7 @@ import { suicideCount } from "../../../data/metrics/suicide-count";
 import { suicideRatePer100k } from "../../../data/metrics/suicide-rate-per-100k";
 import { suicidesPer100k } from "../../../data/metrics/suicides-per-100k";
 import { supplementConsumptionExpenditure } from "../../../data/metrics/supplement-consumption-expenditure";
+import { supplementaryEducationGroupConsumptionExpenditure } from "../../../data/metrics/supplementary-education-group-consumption-expenditure";
 import { sushiDiningConsumptionExpenditure } from "../../../data/metrics/sushi-dining-consumption-expenditure";
 import { sushiTakeoutConsumptionExpenditure } from "../../../data/metrics/sushi-takeout-consumption-expenditure";
 import { sweetPotatoConsumptionExpenditure } from "../../../data/metrics/sweet-potato-consumption-expenditure";
@@ -2820,6 +2935,7 @@ import { taxpayerCountEqual } from "../../../data/metrics/taxpayer-count-equal";
 import { taxpayerCountIncome } from "../../../data/metrics/taxpayer-count-income";
 import { taxpayerRatioPerPrefResident } from "../../../data/metrics/taxpayer-ratio-per-pref-resident";
 import { teaDrinkConsumptionExpenditure } from "../../../data/metrics/tea-drink-consumption-expenditure";
+import { teaGroupConsumptionExpenditure } from "../../../data/metrics/tea-group-consumption-expenditure";
 import { telephoneSubscriptionCountPer1000 } from "../../../data/metrics/telephone-subscription-count-per-1000";
 import { telephoneSubscriptionCount } from "../../../data/metrics/telephone-subscription-count";
 import { televisionConsumptionExpenditure } from "../../../data/metrics/television-consumption-expenditure";
@@ -2886,6 +3002,7 @@ import { thermalPowerPlantCount } from "../../../data/metrics/thermal-power-plan
 import { threeGenerationHouseholdMembers } from "../../../data/metrics/three-generation-household-members";
 import { threeWheeledLightVehicleCount } from "../../../data/metrics/three-wheeled-light-vehicle-count";
 import { tissuePaperConsumptionExpenditure } from "../../../data/metrics/tissue-paper-consumption-expenditure";
+import { tissueToiletPaperGroupConsumptionExpenditure } from "../../../data/metrics/tissue-toilet-paper-group-consumption-expenditure";
 import { tobaccoConsumptionExpenditure } from "../../../data/metrics/tobacco-consumption-expenditure";
 import { tofuConsumptionExpenditure } from "../../../data/metrics/tofu-consumption-expenditure";
 import { tofuConsumptionQuantity } from "../../../data/metrics/tofu-consumption-quantity";
@@ -2928,6 +3045,7 @@ import { totalRevenueMunicipal } from "../../../data/metrics/total-revenue-munic
 import { totalRevenuePrefecture } from "../../../data/metrics/total-revenue-prefecture";
 import { tourismResourceCount } from "../../../data/metrics/tourism-resource-count";
 import { towelConsumptionExpenditure } from "../../../data/metrics/towel-consumption-expenditure";
+import { toysGroupConsumptionExpenditure } from "../../../data/metrics/toys-group-consumption-expenditure";
 import { trademarkApplicationCount } from "../../../data/metrics/trademark-application-count";
 import { trademarkRegistrationCount } from "../../../data/metrics/trademark-registration-count";
 import { trafficAccidentCasualtiesElderly65plus } from "../../../data/metrics/traffic-accident-casualties-elderly-65plus";
@@ -2955,6 +3073,7 @@ import { transportPostalPrivateEmployees } from "../../../data/metrics/transport
 import { transportPostalPrivateEstablishments } from "../../../data/metrics/transport-postal-private-establishments";
 import { transportPostalPrivateNetValueAdded } from "../../../data/metrics/transport-postal-private-net-value-added";
 import { transportPostalPrivateSales } from "../../../data/metrics/transport-postal-private-sales";
+import { transportationGroupConsumptionExpenditure } from "../../../data/metrics/transportation-group-consumption-expenditure";
 import { travelBagConsumptionExpenditure } from "../../../data/metrics/travel-bag-consumption-expenditure";
 import { travelBagConsumptionQuantity } from "../../../data/metrics/travel-bag-consumption-quantity";
 import { travelLeisureAnnualParticipationRate10plus } from "../../../data/metrics/travel-leisure-annual-participation-rate-10plus";
@@ -3003,6 +3122,7 @@ import { turnoverRate } from "../../../data/metrics/turnover-rate";
 import { twoWheeledLightVehicleCount } from "../../../data/metrics/two-wheeled-light-vehicle-count";
 import { umbrellaConsumptionExpenditure } from "../../../data/metrics/umbrella-consumption-expenditure";
 import { umbrellaConsumptionQuantity } from "../../../data/metrics/umbrella-consumption-quantity";
+import { underwearGroupConsumptionExpenditure } from "../../../data/metrics/underwear-group-consumption-expenditure";
 import { unemployedPersonsFemale } from "../../../data/metrics/unemployed-persons-female";
 import { unemployedPersonsMale } from "../../../data/metrics/unemployed-persons-male";
 import { unemployedPersons } from "../../../data/metrics/unemployed-persons";
@@ -3062,6 +3182,7 @@ import { vegetableCultivationArea } from "../../../data/metrics/vegetable-cultiv
 import { vegetableIntakeFemaleAgeAdjusted } from "../../../data/metrics/vegetable-intake-female-age-adjusted";
 import { vegetableIntakeMaleAgeAdjusted } from "../../../data/metrics/vegetable-intake-male-age-adjusted";
 import { vegetableSeaweedTsukudaniConsumptionExpenditure } from "../../../data/metrics/vegetable-seaweed-tsukudani-consumption-expenditure";
+import { vegetablesSeaweedGroupConsumptionExpenditure } from "../../../data/metrics/vegetables-seaweed-group-consumption-expenditure";
 import { vehicleKilometersTraveled } from "../../../data/metrics/vehicle-kilometers-traveled";
 import { vetFeeConsumptionExpenditure } from "../../../data/metrics/vet-fee-consumption-expenditure";
 import { videoRecorderConsumptionExpenditure } from "../../../data/metrics/video-recorder-consumption-expenditure";
@@ -3120,6 +3241,7 @@ import { welfareFacilityStaffPer1000OnAssistance } from "../../../data/metrics/w
 import { welfareOfficeIntellectualDisabilityConsultationsPer100k } from "../../../data/metrics/welfare-office-intellectual-disability-consultations-per-100k";
 import { welfareOfficeIntellectualDisabilityConsultations } from "../../../data/metrics/welfare-office-intellectual-disability-consultations";
 import { welfareOfficePublicAssistanceApplicationsPer1000Households } from "../../../data/metrics/welfare-office-public-assistance-applications-per-1000-households";
+import { westernClothingGroupConsumptionExpenditure } from "../../../data/metrics/western-clothing-group-consumption-expenditure";
 import { westernFoodDiningConsumptionExpenditure } from "../../../data/metrics/western-food-dining-consumption-expenditure";
 import { wheatFlourConsumptionExpenditure } from "../../../data/metrics/wheat-flour-consumption-expenditure";
 import { wheatFlourConsumptionQuantity } from "../../../data/metrics/wheat-flour-consumption-quantity";
@@ -3154,6 +3276,7 @@ import { womensJacketConsumptionExpenditure } from "../../../data/metrics/womens
 import { womensJacketConsumptionQuantity } from "../../../data/metrics/womens-jacket-consumption-quantity";
 import { womensPantsConsumptionExpenditure } from "../../../data/metrics/womens-pants-consumption-expenditure";
 import { womensPantsConsumptionQuantity } from "../../../data/metrics/womens-pants-consumption-quantity";
+import { womensShirtsSweatersGroupConsumptionExpenditure } from "../../../data/metrics/womens-shirts-sweaters-group-consumption-expenditure";
 import { womensShoesConsumptionExpenditure } from "../../../data/metrics/womens-shoes-consumption-expenditure";
 import { womensShoesConsumptionQuantity } from "../../../data/metrics/womens-shoes-consumption-quantity";
 import { womensSleepwearConsumptionExpenditure } from "../../../data/metrics/womens-sleepwear-consumption-expenditure";
@@ -3163,6 +3286,7 @@ import { womensStockingsConsumptionExpenditure } from "../../../data/metrics/wom
 import { womensStockingsConsumptionQuantity } from "../../../data/metrics/womens-stockings-consumption-quantity";
 import { womensSweaterConsumptionExpenditure } from "../../../data/metrics/womens-sweater-consumption-expenditure";
 import { womensSweaterConsumptionQuantity } from "../../../data/metrics/womens-sweater-consumption-quantity";
+import { womensUnderwearGroupConsumptionExpenditure } from "../../../data/metrics/womens-underwear-group-consumption-expenditure";
 import { woodenDwellingsNonFireproof } from "../../../data/metrics/wooden-dwellings-non-fireproof";
 import { woodenDwellings } from "../../../data/metrics/wooden-dwellings";
 import { woodenHousingRatio } from "../../../data/metrics/wooden-housing-ratio";
@@ -3217,6 +3341,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "actual-overnight-guests": actualOvernightGuests,
   "acupuncture-moxibustion-count": acupunctureMoxibustionCount,
   "acupuncturist-rate": acupuncturistRate,
+  "admission-game-fees-group-consumption-expenditure": admissionGameFeesGroupConsumptionExpenditure,
   "adult-class-lecture-count-per-million": adultClassLectureCountPerMillion,
   "adult-sandals-consumption-expenditure": adultSandalsConsumptionExpenditure,
   "adult-sandals-consumption-quantity": adultSandalsConsumptionQuantity,
@@ -3258,6 +3383,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "alcohol-sales-per-adult-total": alcoholSalesPerAdultTotal,
   "alcohol-sales-per-adult-whisky": alcoholSalesPerAdultWhisky,
   "alcohol-sales-per-adult-wine": alcoholSalesPerAdultWine,
+  "alcoholic-beverages-group-consumption-expenditure": alcoholicBeveragesGroupConsumptionExpenditure,
   "ambulance-hospital-arrival-time": ambulanceHospitalArrivalTime,
   "ambulance-transported-deaths": ambulanceTransportedDeaths,
   "ambulance-transported-mild": ambulanceTransportedMild,
@@ -3317,6 +3443,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "autolock-apartment-rate": autolockApartmentRate,
   "automobile-acquisition-tax-grant-municipal": automobileAcquisitionTaxGrantMunicipal,
   "automobile-environmental-tax-grant-municipal": automobileEnvironmentalTaxGrantMunicipal,
+  "automobile-maintenance-group-consumption-expenditure": automobileMaintenanceGroupConsumptionExpenditure,
+  "automobile-purchases-group-consumption-expenditure": automobilePurchasesGroupConsumptionExpenditure,
+  "automobile-related-group-consumption-expenditure": automobileRelatedGroupConsumptionExpenditure,
   "average-age-of-first-marriage-husband": averageAgeOfFirstMarriageHusband,
   "average-age-of-first-marriage-wife": averageAgeOfFirstMarriageWife,
   "average-broadcast-media-consumption-time-employed-man": averageBroadcastMediaConsumptionTimeEmployedMan,
@@ -3356,6 +3485,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "avg-savings-rate-worker-households": avgSavingsRateWorkerHouseholds,
   "bacon-consumption-expenditure": baconConsumptionExpenditure,
   "bacon-consumption-quantity": baconConsumptionQuantity,
+  "bags-group-consumption-expenditure": bagsGroupConsumptionExpenditure,
   "bamboo-production": bambooProduction,
   "bamboo-shoot-consumption-expenditure": bambooShootConsumptionExpenditure,
   "bamboo-shoot-consumption-quantity": bambooShootConsumptionQuantity,
@@ -3379,16 +3509,21 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "bean-sprouts-consumption-quantity": beanSproutsConsumptionQuantity,
   "beans-consumption-expenditure": beansConsumptionExpenditure,
   "beauty-appliance-consumption-expenditure": beautyApplianceConsumptionExpenditure,
+  "beauty-products-group-consumption-expenditure": beautyProductsGroupConsumptionExpenditure,
   "beauty-salon-count": beautySalonCount,
+  "beauty-services-group-consumption-expenditure": beautyServicesGroupConsumptionExpenditure,
   "bed-consumption-expenditure": bedConsumptionExpenditure,
   "bed-consumption-quantity": bedConsumptionQuantity,
   "bed-utilization-rate": bedUtilizationRate,
+  "bedding-group-consumption-expenditure": beddingGroupConsumptionExpenditure,
   "beef-cattle-count": beefCattleCount,
   "beef-consumption-expenditure": beefConsumptionExpenditure,
   "beef-consumption-quantity": beefConsumptionQuantity,
   "beer-consumption-expenditure": beerConsumptionExpenditure,
   "beer-consumption-quantity": beerConsumptionQuantity,
   "bento-consumption-expenditure": bentoConsumptionExpenditure,
+  "beverages-group-consumption-expenditure": beveragesGroupConsumptionExpenditure,
+  "bicycle-purchases-group-consumption-expenditure": bicyclePurchasesGroupConsumptionExpenditure,
   "biomass-power-station-count": biomassPowerStationCount,
   "births-first-child": birthsFirstChild,
   "births-mother-age25to29": birthsMotherAge25to29,
@@ -3417,17 +3552,20 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "book-magazine-retail-annual-sales-per-capita": bookMagazineRetailAnnualSalesPerCapita,
   "book-magazine-retail-annual-sales": bookMagazineRetailAnnualSales,
   "books-consumption-expenditure": booksConsumptionExpenditure,
+  "books-printed-matter-group-consumption-expenditure": booksPrintedMatterGroupConsumptionExpenditure,
   "botanical-garden-count": botanicalGardenCount,
   "bowling-alley-public": bowlingAlleyPublic,
   "boys-school-uniform-consumption-expenditure": boysSchoolUniformConsumptionExpenditure,
   "boys-school-uniform-consumption-quantity": boysSchoolUniformConsumptionQuantity,
   "bread-consumption-expenditure": breadConsumptionExpenditure,
   "bread-consumption-quantity": breadConsumptionQuantity,
+  "bread-group-consumption-quantity": breadGroupConsumptionQuantity,
   "breast-cancer-asr75-mortality-female": breastCancerAsr75MortalityFemale,
   "broadband-contract-count-excluding-39-4g": broadbandContractCountExcluding394g,
   "broadband-service-contract-count": broadbandServiceContractCount,
   "broadcast-media-time-all": broadcastMediaTimeAll,
   "broadcast-reception-contracts": broadcastReceptionContracts,
+  "broadcasting-fees-group-consumption-expenditure": broadcastingFeesGroupConsumptionExpenditure,
   "broccoli-consumption-expenditure": broccoliConsumptionExpenditure,
   "broccoli-consumption-quantity": broccoliConsumptionQuantity,
   "building-fire-count-per-100-thousand-people": buildingFireCountPer100ThousandPeople,
@@ -3482,6 +3620,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "census-household-change-rate-5y": censusHouseholdChangeRate5y,
   "census-population-change-5y": censusPopulationChange5y,
   "census-population-change-rate-5y": censusPopulationChangeRate5y,
+  "cereals-group-consumption-expenditure": cerealsGroupConsumptionExpenditure,
   "certified-childcare-center-count-per-100k-0-5": certifiedChildcareCenterCountPer100k05,
   "certified-childcare-center-education-cost-per-student": certifiedChildcareCenterEducationCostPerStudent,
   "charcoal-production": charcoalProduction,
@@ -3508,12 +3647,15 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "childrens-clothes-consumption-expenditure": childrensClothesConsumptionExpenditure,
   "childrens-clothes-consumption-quantity": childrensClothesConsumptionQuantity,
   "childrens-clothing-consumption-expenditure": childrensClothingConsumptionExpenditure,
+  "childrens-shirts-sweaters-group-consumption-expenditure": childrensShirtsSweatersGroupConsumptionExpenditure,
+  "childrens-shirts-sweaters-group-consumption-quantity": childrensShirtsSweatersGroupConsumptionQuantity,
   "childrens-shoes-consumption-expenditure": childrensShoesConsumptionExpenditure,
   "childrens-shoes-consumption-quantity": childrensShoesConsumptionQuantity,
   "childrens-sleepwear-consumption-expenditure": childrensSleepwearConsumptionExpenditure,
   "childrens-socks-consumption-expenditure": childrensSocksConsumptionExpenditure,
   "childrens-socks-consumption-quantity": childrensSocksConsumptionQuantity,
   "childrens-underwear-consumption-expenditure": childrensUnderwearConsumptionExpenditure,
+  "childrens-underwear-group-consumption-expenditure": childrensUnderwearGroupConsumptionExpenditure,
   "chinese-cabbage-consumption-expenditure": chineseCabbageConsumptionExpenditure,
   "chinese-cabbage-consumption-quantity": chineseCabbageConsumptionQuantity,
   "chinese-food-dining-consumption-expenditure": chineseFoodDiningConsumptionExpenditure,
@@ -3544,10 +3686,12 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "clothing-footwear-expenditure-ratio-multi-person-households": clothingFootwearExpenditureRatioMultiPersonHouseholds,
   "clothing-footwear-expenditure-total": clothingFootwearExpenditureTotal,
   "clothing-rental-consumption-expenditure": clothingRentalConsumptionExpenditure,
+  "clothing-services-group-consumption-expenditure": clothingServicesGroupConsumptionExpenditure,
   "cocoa-consumption-expenditure": cocoaConsumptionExpenditure,
   "cod-pollution-load": codPollutionLoad,
   "cod-roe-consumption-expenditure": codRoeConsumptionExpenditure,
   "cod-roe-consumption-quantity": codRoeConsumptionQuantity,
+  "coffee-cocoa-group-consumption-expenditure": coffeeCocoaGroupConsumptionExpenditure,
   "coffee-consumption-expenditure": coffeeConsumptionExpenditure,
   "coffee-consumption-quantity": coffeeConsumptionQuantity,
   "coffee-drink-consumption-expenditure": coffeeDrinkConsumptionExpenditure,
@@ -3563,6 +3707,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "commercial-establishments": commercialEstablishments,
   "commercial-farm-households": commercialFarmHouseholds,
   "commission-fees-prefecture": commissionFeesPrefecture,
+  "communication-group-consumption-expenditure": communicationGroupConsumptionExpenditure,
   "community-building-volunteer-participation-rate-10plus": communityBuildingVolunteerParticipationRate10plus,
   "community-sports-facility-count-per-million": communitySportsFacilityCountPerMillion,
   "commute-by-bicycle": commuteByBicycle,
@@ -3713,6 +3858,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "daily-steps-male-20to64-age-adjusted": dailyStepsMale20to64AgeAdjusted,
   "dairy-cattle-count": dairyCattleCount,
   "dairy-cattle-holdings": dairyCattleHoldings,
+  "dairy-eggs-group-consumption-expenditure": dairyEggsGroupConsumptionExpenditure,
+  "dairy-products-group-consumption-expenditure": dairyProductsGroupConsumptionExpenditure,
   "dam-count": damCount,
   "damaged-vacant-housing-ratio": damagedVacantHousingRatio,
   "day-time-population-ratio": dayTimePopulationRatio,
@@ -3782,6 +3929,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "detached-houses-non-wooden": detachedHousesNonWooden,
   "detached-houses-wooden": detachedHousesWooden,
   "detached-houses": detachedHouses,
+  "detergents-group-consumption-expenditure": detergentsGroupConsumptionExpenditure,
   "dietitian-annual-income": dietitianAnnualIncome,
   "dining-out-consumption-expenditure": diningOutConsumptionExpenditure,
   "disability-support-facility-count": disabilitySupportFacilityCount,
@@ -3806,6 +3954,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "dog-registration-count": dogRegistrationCount,
   "domestic-bank-deposit-balance": domesticBankDepositBalance,
   "domestic-package-tour-consumption-expenditure": domesticPackageTourConsumptionExpenditure,
+  "domestic-services-group-consumption-expenditure": domesticServicesGroupConsumptionExpenditure,
   "domestic-student-remittance-consumption-expenditure": domesticStudentRemittanceConsumptionExpenditure,
   "domestic-travel-consumption-by-destination": domesticTravelConsumptionByDestination,
   "donations-consumption-expenditure": donationsConsumptionExpenditure,
@@ -3816,6 +3965,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "dress-shirt-consumption-quantity": dressShirtConsumptionQuantity,
   "dressing-consumption-expenditure": dressingConsumptionExpenditure,
   "dressing-consumption-quantity": dressingConsumptionQuantity,
+  "dried-foods-seaweed-group-consumption-expenditure": driedFoodsSeaweedGroupConsumptionExpenditure,
   "dried-mackerel-consumption-expenditure": driedMackerelConsumptionExpenditure,
   "dried-mackerel-consumption-quantity": driedMackerelConsumptionQuantity,
   "dried-nori-consumption-expenditure": driedNoriConsumptionExpenditure,
@@ -3871,6 +4021,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "education-learning-support-private-sales": educationLearningSupportPrivateSales,
   "eggplant-consumption-expenditure": eggplantConsumptionExpenditure,
   "eggplant-consumption-quantity": eggplantConsumptionQuantity,
+  "eggs-group-consumption-expenditure": eggsGroupConsumptionExpenditure,
+  "eggs-group-consumption-quantity": eggsGroupConsumptionQuantity,
   "elderly-care-employment-rate": elderlyCareEmploymentRate,
   "elderly-class-lecture-count-per-million": elderlyClassLectureCountPerMillion,
   "elderly-couple-households": elderlyCoupleHouseholds,
@@ -3984,6 +4136,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "eyeglasses-consumption-expenditure": eyeglassesConsumptionExpenditure,
   "fabric-consumption-expenditure": fabricConsumptionExpenditure,
   "fabric-softener-consumption-expenditure": fabricSoftenerConsumptionExpenditure,
+  "fabrics-yarn-group-consumption-expenditure": fabricsYarnGroupConsumptionExpenditure,
+  "face-mask-item-consumption-expenditure": faceMaskItemConsumptionExpenditure,
   "facility-equipment-consumption-expenditure": facilityEquipmentConsumptionExpenditure,
   "factor-income-from-outside-prefecture-nominal-h27": factorIncomeFromOutsidePrefectureNominalH27,
   "factory-establishment-count": factoryEstablishmentCount,
@@ -4043,6 +4197,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "fish-canned-consumption-expenditure": fishCannedConsumptionExpenditure,
   "fish-catch": fishCatch,
   "fish-paste-consumption-expenditure": fishPasteConsumptionExpenditure,
+  "fish-paste-products-group-consumption-expenditure": fishPasteProductsGroupConsumptionExpenditure,
   "fish-pickled-consumption-expenditure": fishPickledConsumptionExpenditure,
   "fish-tsukudani-type2-consumption-expenditure": fishTsukudaniType2ConsumptionExpenditure,
   "fisheries-private-employees": fisheriesPrivateEmployees,
@@ -4107,6 +4262,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "food-sanitation-inspection": foodSanitationInspection,
   "food-self-sufficiency-rate-calorie": foodSelfSufficiencyRateCalorie,
   "food-store-count": foodStoreCount,
+  "footwear-group-consumption-expenditure": footwearGroupConsumptionExpenditure,
   "for-sale-housing-floor-area-starts": forSaleHousingFloorAreaStarts,
   "foreign-employing-establishment-count": foreignEmployingEstablishmentCount,
   "foreign-population-per-100k": foreignPopulationPer100k,
@@ -4132,19 +4288,29 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "foundation-consumption-expenditure": foundationConsumptionExpenditure,
   "freelance-count": freelanceCount,
   "frequency-of-occupational-accidents": frequencyOfOccupationalAccidents,
+  "fresh-fish-group-consumption-expenditure": freshFishGroupConsumptionExpenditure,
+  "fresh-fish-group-consumption-quantity": freshFishGroupConsumptionQuantity,
   "fresh-fruit-consumption-quantity": freshFruitConsumptionQuantity,
+  "fresh-fruits-group-consumption-expenditure": freshFruitsGroupConsumptionExpenditure,
+  "fresh-fruits-group-consumption-quantity": freshFruitsGroupConsumptionQuantity,
+  "fresh-meat-group-consumption-expenditure": freshMeatGroupConsumptionExpenditure,
+  "fresh-meat-group-consumption-quantity": freshMeatGroupConsumptionQuantity,
   "fresh-seafood-consumption-quantity": freshSeafoodConsumptionQuantity,
+  "fresh-seafood-group-consumption-expenditure": freshSeafoodGroupConsumptionExpenditure,
+  "fresh-seafood-group-consumption-quantity": freshSeafoodGroupConsumptionQuantity,
   "fresh-shiitake-consumption-expenditure": freshShiitakeConsumptionExpenditure,
   "fresh-shiitake-consumption-quantity": freshShiitakeConsumptionQuantity,
   "fresh-udon-soba-consumption-expenditure": freshUdonSobaConsumptionExpenditure,
   "fresh-udon-soba-consumption-quantity": freshUdonSobaConsumptionQuantity,
   "fresh-vegetables-consumption-expenditure": freshVegetablesConsumptionExpenditure,
   "fresh-vegetables-consumption-quantity": freshVegetablesConsumptionQuantity,
+  "fresh-vegetables-group-consumption-quantity": freshVegetablesGroupConsumptionQuantity,
   "freshwater-clam-consumption-expenditure": freshwaterClamConsumptionExpenditure,
   "freshwater-clam-consumption-quantity": freshwaterClamConsumptionQuantity,
   "fried-tofu-consumption-expenditure": friedTofuConsumptionExpenditure,
   "frozen-food-consumption-expenditure": frozenFoodConsumptionExpenditure,
   "fruit-vegetable-juice-consumption-expenditure": fruitVegetableJuiceConsumptionExpenditure,
+  "fruits-group-consumption-expenditure": fruitsGroupConsumptionExpenditure,
   "fulfillment-rate": fulfillmentRate,
   "fulltime-physicians-general-hospital-per-100beds": fulltimePhysiciansGeneralHospitalPer100beds,
   "funeral-expense-consumption-expenditure": funeralExpenseConsumptionExpenditure,
@@ -4190,8 +4356,10 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "general-clinic-count-per-100k": generalClinicCountPer100k,
   "general-clinic-count-per-100km2": generalClinicCountPer100km2,
   "general-clinic-count": generalClinicCount,
+  "general-dining-out-group-consumption-expenditure": generalDiningOutGroupConsumptionExpenditure,
   "general-dust-emission-facility-count": generalDustEmissionFacilityCount,
   "general-funds-prefecture": generalFundsPrefecture,
+  "general-furniture-group-consumption-expenditure": generalFurnitureGroupConsumptionExpenditure,
   "general-hospital-avg-length-of-stay": generalHospitalAvgLengthOfStay,
   "general-hospital-bed-count-per-100k": generalHospitalBedCountPer100k,
   "general-hospital-bed-count": generalHospitalBedCount,
@@ -4223,6 +4391,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "geothermal-power-plant-count": geothermalPowerPlantCount,
   "geriatric-health-facility-capacity": geriatricHealthFacilityCapacity,
   "geriatric-health-facility-count": geriatricHealthFacilityCount,
+  "gift-money-group-consumption-expenditure": giftMoneyGroupConsumptionExpenditure,
   "gini-coefficient-disposable-income": giniCoefficientDisposableIncome,
   "gini-coefficient-financial-assets": giniCoefficientFinancialAssets,
   "girls-school-uniform-consumption-expenditure": girlsSchoolUniformConsumptionExpenditure,
@@ -4317,12 +4486,14 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "health-medical-expenditure-total": healthMedicalExpenditureTotal,
   "health-physical-education-expense-municipal": healthPhysicalEducationExpenseMunicipal,
   "health-physical-education-expenses-prefecture": healthPhysicalEducationExpensesPrefecture,
+  "health-supplements-group-consumption-expenditure": healthSupplementsGroupConsumptionExpenditure,
   "healthcare-cost-all-households": healthcareCostAllHouseholds,
   "healthcare-expenditure-ratio-multi-person-households": healthcareExpenditureRatioMultiPersonHouseholds,
   "healthy-life-expectancy-female": healthyLifeExpectancyFemale,
   "healthy-life-expectancy-male": healthyLifeExpectancyMale,
   "heater-consumption-expenditure": heaterConsumptionExpenditure,
   "heater-consumption-quantity": heaterConsumptionQuantity,
+  "heating-cooling-appliances-group-consumption-expenditure": heatingCoolingAppliancesGroupConsumptionExpenditure,
   "heatstroke-deaths": heatstrokeDeaths,
   "heatstroke-emergency-transports": heatstrokeEmergencyTransports,
   "high-school-advancement-rate": highSchoolAdvancementRate,
@@ -4397,7 +4568,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "hospital-count-city": hospitalCountCity,
   "hospital-staff-by-occupation": hospitalStaffByOccupation,
   "hospitals-with-long-term-care-beds": hospitalsWithLongTermCareBeds,
+  "household-consumables-group-consumption-expenditure": householdConsumablesGroupConsumptionExpenditure,
   "household-debt-balance": householdDebtBalance,
+  "household-durables-group-consumption-expenditure": householdDurablesGroupConsumptionExpenditure,
   "household-head-allowance-consumption-expenditure": householdHeadAllowanceConsumptionExpenditure,
   "household-head-annual-income-per-household": householdHeadAnnualIncomePerHousehold,
   "household-head-income-worker-households-per-month": householdHeadIncomeWorkerHouseholdsPerMonth,
@@ -4421,6 +4594,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "household-survey-transport-communication-expenditure": householdSurveyTransportCommunicationExpenditure,
   "household-survey-utilities-expenditure": householdSurveyUtilitiesExpenditure,
   "household-types-by-area": householdTypesByArea,
+  "household-utensils-group-consumption-expenditure": householdUtensilsGroupConsumptionExpenditure,
   "households-on-public-assistance-per-1000": householdsOnPublicAssistancePer1000,
   "households-on-public-assistance": householdsOnPublicAssistance,
   "households-with-elderly-members": householdsWithElderlyMembers,
@@ -4429,6 +4603,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "housekeeping-service-consumption-expenditure": housekeepingServiceConsumptionExpenditure,
   "housework-avg-time-female": houseworkAvgTimeFemale,
   "housework-avg-time-male": houseworkAvgTimeMale,
+  "housework-durables-group-consumption-expenditure": houseworkDurablesGroupConsumptionExpenditure,
   "housing-charges-consumption-expenditure": housingChargesConsumptionExpenditure,
   "housing-cost-all-households": housingCostAllHouseholds,
   "housing-expenditure-ratio-multi-person-households": housingExpenditureRatioMultiPersonHouseholds,
@@ -4438,6 +4613,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "housing-floor-area": housingFloorArea,
   "housing-land-debt-per-household": housingLandDebtPerHousehold,
   "housing-land-liabilities-ratio-multi-person-households": housingLandLiabilitiesRatioMultiPersonHouseholds,
+  "housing-materials-group-consumption-expenditure": housingMaterialsGroupConsumptionExpenditure,
+  "housing-repair-services-group-consumption-expenditure": housingRepairServicesGroupConsumptionExpenditure,
+  "housing-repairs-group-consumption-expenditure": housingRepairsGroupConsumptionExpenditure,
   "housing-site-value-per-3-3m2": housingSiteValuePer33m2,
   "husband-childcare-rate": husbandChildcareRate,
   "hydroelectric-power-plant-count": hydroelectricPowerPlantCount,
@@ -4497,6 +4675,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "intellectual-disability-support-facility-staff-per-100k": intellectualDisabilitySupportFacilityStaffPer100k,
   "interest-tax-grant-municipal": interestTaxGrantMunicipal,
   "interior-decoration-consumption-expenditure": interiorDecorationConsumptionExpenditure,
+  "interior-furnishings-group-consumption-expenditure": interiorFurnishingsGroupConsumptionExpenditure,
   "internet-fee-consumption-expenditure": internetFeeConsumptionExpenditure,
   "internet-usage-rate-10plus": internetUsageRate10plus,
   "interprefecture-net-migration-age15to24": interprefectureNetMigrationAge15to24,
@@ -4514,6 +4693,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "japan-health-insurance-society-medical-expense-insured-per-person": japanHealthInsuranceSocietyMedicalExpenseInsuredPerPerson,
   "japan-health-insurance-society-visit-rate-dependents-per-1000": japanHealthInsuranceSocietyVisitRateDependentsPer1000,
   "japan-health-insurance-society-visit-rate-insured-per-1000": japanHealthInsuranceSocietyVisitRateInsuredPer1000,
+  "japanese-clothing-group-consumption-expenditure": japaneseClothingGroupConsumptionExpenditure,
   "japanese-entries": japaneseEntries,
   "japanese-food-dining-consumption-expenditure": japaneseFoodDiningConsumptionExpenditure,
   "japanese-movers-in": japaneseMoversIn,
@@ -4623,8 +4803,11 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "laundry-detergent-consumption-expenditure": laundryDetergentConsumptionExpenditure,
   "laundry-service-consumption-expenditure": laundryServiceConsumptionExpenditure,
   "layer-hen-count": layerHenCount,
+  "leafy-vegetables-group-consumption-expenditure": leafyVegetablesGroupConsumptionExpenditure,
+  "leafy-vegetables-group-consumption-quantity": leafyVegetablesGroupConsumptionQuantity,
   "leek-consumption-expenditure": leekConsumptionExpenditure,
   "leek-consumption-quantity": leekConsumptionQuantity,
+  "lesson-fees-group-consumption-expenditure": lessonFeesGroupConsumptionExpenditure,
   "lettuce-consumption-expenditure": lettuceConsumptionExpenditure,
   "lettuce-consumption-quantity": lettuceConsumptionQuantity,
   "library-books": libraryBooks,
@@ -4735,7 +4918,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "mayonnaise-consumption-quantity": mayonnaiseConsumptionQuantity,
   "meal-avg-time-female": mealAvgTimeFemale,
   "meal-avg-time-male": mealAvgTimeMale,
+  "meal-charges-group-consumption-expenditure": mealChargesGroupConsumptionExpenditure,
   "meal-kit-consumption-expenditure": mealKitConsumptionExpenditure,
+  "meat-group-consumption-expenditure": meatGroupConsumptionExpenditure,
   "media-avg-time-unemployed-female": mediaAvgTimeUnemployedFemale,
   "media-avg-time-unemployed-male": mediaAvgTimeUnemployedMale,
   "media-production-employees": mediaProductionEmployees,
@@ -4751,11 +4936,14 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "medical-physicians-obstetrics-gynecology": medicalPhysiciansObstetricsGynecology,
   "medical-physicians-pediatrics": medicalPhysiciansPediatrics,
   "medical-physicians-under-40": medicalPhysiciansUnder40,
+  "medical-services-group-consumption-expenditure": medicalServicesGroupConsumptionExpenditure,
+  "medical-supplies-group-consumption-expenditure": medicalSuppliesGroupConsumptionExpenditure,
   "medical-welfare-industry-annual-income": medicalWelfareIndustryAnnualIncome,
   "medical-welfare-private-employees": medicalWelfarePrivateEmployees,
   "medical-welfare-private-establishments": medicalWelfarePrivateEstablishments,
   "medical-welfare-private-net-value-added": medicalWelfarePrivateNetValueAdded,
   "medical-welfare-private-sales": medicalWelfarePrivateSales,
+  "medicines-group-consumption-expenditure": medicinesGroupConsumptionExpenditure,
   "melon-consumption-expenditure": melonConsumptionExpenditure,
   "melon-consumption-quantity": melonConsumptionQuantity,
   "membership-fees-consumption-expenditure": membershipFeesConsumptionExpenditure,
@@ -4766,6 +4954,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "mens-jacket-consumption-quantity": mensJacketConsumptionQuantity,
   "mens-pants-consumption-expenditure": mensPantsConsumptionExpenditure,
   "mens-pants-consumption-quantity": mensPantsConsumptionQuantity,
+  "mens-shirts-sweaters-group-consumption-expenditure": mensShirtsSweatersGroupConsumptionExpenditure,
   "mens-shoes-consumption-expenditure": mensShoesConsumptionExpenditure,
   "mens-shoes-consumption-quantity": mensShoesConsumptionQuantity,
   "mens-sleepwear-consumption-expenditure": mensSleepwearConsumptionExpenditure,
@@ -4776,6 +4965,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "mens-sweater-consumption-expenditure": mensSweaterConsumptionExpenditure,
   "mens-sweater-consumption-quantity": mensSweaterConsumptionQuantity,
   "mens-underwear-consumption-expenditure": mensUnderwearConsumptionExpenditure,
+  "mens-underwear-group-consumption-expenditure": mensUnderwearGroupConsumptionExpenditure,
   "mental-health-application": mentalHealthApplication,
   "mental-health-expenses-prefecture": mentalHealthExpensesPrefecture,
   "metabolic-syndrome-prevalence-among-checkup-recipients": metabolicSyndromePrevalenceAmongCheckupRecipients,
@@ -4792,6 +4982,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "migrant-worker-ratio-sales-farm": migrantWorkerRatioSalesFarm,
   "milk-consumption-quantity": milkConsumptionQuantity,
   "milk-drink-consumption-expenditure": milkDrinkConsumptionExpenditure,
+  "milk-group-consumption-expenditure": milkGroupConsumptionExpenditure,
   "mineral-water-consumption-expenditure": mineralWaterConsumptionExpenditure,
   "minicar-count": minicarCount,
   "minimum-housing-standard-households": minimumHousingStandardHouseholds,
@@ -4800,6 +4991,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "mining-private-establishments": miningPrivateEstablishments,
   "mining-private-net-value-added": miningPrivateNetValueAdded,
   "mining-private-sales": miningPrivateSales,
+  "miscellaneous-group-consumption-expenditure": miscellaneousGroupConsumptionExpenditure,
   "miscellaneous-income-prefecture": miscellaneousIncomePrefecture,
   "miscellaneous-revenue-municipal": miscellaneousRevenueMunicipal,
   "miscellaneous-school-count-per-100k": miscellaneousSchoolCountPer100k,
@@ -4948,6 +5140,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "nonregular-continuation-wish-rate": nonregularContinuationWishRate,
   "nonregular-employees-count": nonregularEmployeesCount,
   "nonregular-job-change-wish-rate": nonregularJobChangeWishRate,
+  "noodles-group-consumption-expenditure": noodlesGroupConsumptionExpenditure,
+  "noodles-group-consumption-quantity": noodlesGroupConsumptionQuantity,
   "notebooks-paper-consumption-expenditure": notebooksPaperConsumptionExpenditure,
   "nuclear-family-household-count": nuclearFamilyHouseholdCount,
   "nuclear-family-households-ratio": nuclearFamilyHouseholdsRatio,
@@ -5024,6 +5218,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "occupied-dwellings": occupiedDwellings,
   "octopus-consumption-expenditure": octopusConsumptionExpenditure,
   "octopus-consumption-quantity": octopusConsumptionQuantity,
+  "oils-fats-group-consumption-expenditure": oilsFatsGroupConsumptionExpenditure,
+  "oils-fats-group-consumption-quantity": oilsFatsGroupConsumptionQuantity,
+  "oils-seasonings-group-consumption-expenditure": oilsSeasoningsGroupConsumptionExpenditure,
   "old-population-index": oldPopulationIndex,
   "onigiri-consumption-expenditure": onigiriConsumptionExpenditure,
   "onion-consumption-expenditure": onionConsumptionExpenditure,
@@ -5044,15 +5241,20 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-beauty-products-consumption-expenditure": otherBeautyProductsConsumptionExpenditure,
   "other-beauty-service-consumption-expenditure": otherBeautyServiceConsumptionExpenditure,
   "other-bedding-consumption-expenditure": otherBeddingConsumptionExpenditure,
+  "other-beverages-group-consumption-expenditure": otherBeveragesGroupConsumptionExpenditure,
   "other-bread-consumption-expenditure": otherBreadConsumptionExpenditure,
   "other-bread-consumption-quantity": otherBreadConsumptionQuantity,
   "other-broadcast-fee-consumption-expenditure": otherBroadcastFeeConsumptionExpenditure,
   "other-building-type-dwellings": otherBuildingTypeDwellings,
   "other-car-service-consumption-expenditure": otherCarServiceConsumptionExpenditure,
+  "other-cereals-group-consumption-expenditure": otherCerealsGroupConsumptionExpenditure,
+  "other-cereals-group-consumption-quantity": otherCerealsGroupConsumptionQuantity,
   "other-ceremony-expense-consumption-expenditure": otherCeremonyExpenseConsumptionExpenditure,
   "other-charges-consumption-expenditure": otherChargesConsumptionExpenditure,
   "other-citrus-consumption-expenditure": otherCitrusConsumptionExpenditure,
   "other-citrus-consumption-quantity": otherCitrusConsumptionQuantity,
+  "other-clothing-group-consumption-expenditure": otherClothingGroupConsumptionExpenditure,
+  "other-clothing-misc-2025-group-consumption-expenditure": otherClothingMisc2025GroupConsumptionExpenditure,
   "other-clothing-misc-consumption-expenditure": otherClothingMiscConsumptionExpenditure,
   "other-clothing-service-consumption-expenditure": otherClothingServiceConsumptionExpenditure,
   "other-communication-device-consumption-expenditure": otherCommunicationDeviceConsumptionExpenditure,
@@ -5074,6 +5276,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-fresh-fish-consumption-quantity": otherFreshFishConsumptionQuantity,
   "other-fresh-fruit-consumption-expenditure": otherFreshFruitConsumptionExpenditure,
   "other-fresh-fruit-consumption-quantity": otherFreshFruitConsumptionQuantity,
+  "other-fuel-group-consumption-expenditure": otherFuelGroupConsumptionExpenditure,
   "other-furniture-consumption-expenditure": otherFurnitureConsumptionExpenditure,
   "other-grains-consumption-expenditure": otherGrainsConsumptionExpenditure,
   "other-grains-consumption-quantity": otherGrainsConsumptionQuantity,
@@ -5082,6 +5285,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-heating-cooling-consumption-expenditure": otherHeatingCoolingConsumptionExpenditure,
   "other-hospital-fee-consumption-expenditure": otherHospitalFeeConsumptionExpenditure,
   "other-household-consumables-consumption-expenditure": otherHouseholdConsumablesConsumptionExpenditure,
+  "other-household-consumables-group-consumption-expenditure": otherHouseholdConsumablesGroupConsumptionExpenditure,
   "other-household-durables-consumption-expenditure": otherHouseholdDurablesConsumptionExpenditure,
   "other-household-goods-consumption-expenditure": otherHouseholdGoodsConsumptionExpenditure,
   "other-indoor-furnishing-consumption-expenditure": otherIndoorFurnishingConsumptionExpenditure,
@@ -5099,6 +5303,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-mens-shirt-consumption-expenditure": otherMensShirtConsumptionExpenditure,
   "other-mens-shirt-consumption-quantity": otherMensShirtConsumptionQuantity,
   "other-misc-expense-consumption-expenditure": otherMiscExpenseConsumptionExpenditure,
+  "other-miscellaneous-group-consumption-expenditure": otherMiscellaneousGroupConsumptionExpenditure,
   "other-mushroom-consumption-expenditure": otherMushroomConsumptionExpenditure,
   "other-mushroom-consumption-quantity": otherMushroomConsumptionQuantity,
   "other-non-savings-insurance-consumption-expenditure": otherNonSavingsInsuranceConsumptionExpenditure,
@@ -5109,9 +5314,14 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-personal-items-consumption-expenditure": otherPersonalItemsConsumptionExpenditure,
   "other-pet-service-consumption-expenditure": otherPetServiceConsumptionExpenditure,
   "other-prepared-food-consumption-expenditure": otherPreparedFoodConsumptionExpenditure,
+  "other-prepared-foods-group-consumption-expenditure": otherPreparedFoodsGroupConsumptionExpenditure,
   "other-processed-fish-ext-consumption-expenditure": otherProcessedFishExtConsumptionExpenditure,
   "other-processed-meat-consumption-expenditure": otherProcessedMeatConsumptionExpenditure,
+  "other-processed-seafood-group-consumption-expenditure": otherProcessedSeafoodGroupConsumptionExpenditure,
+  "other-processed-vegetables-group-consumption-expenditure": otherProcessedVegetablesGroupConsumptionExpenditure,
   "other-publications-consumption-expenditure": otherPublicationsConsumptionExpenditure,
+  "other-recreational-goods-group-consumption-expenditure": otherRecreationalGoodsGroupConsumptionExpenditure,
+  "other-recreational-services-group-consumption-expenditure": otherRecreationalServicesGroupConsumptionExpenditure,
   "other-remittance-consumption-expenditure": otherRemittanceConsumptionExpenditure,
   "other-rent-land-consumption-expenditure": otherRentLandConsumptionExpenditure,
   "other-retail-store-count": otherRetailStoreCount,
@@ -5128,6 +5338,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-services-private-sales": otherServicesPrivateSales,
   "other-shellfish-consumption-expenditure": otherShellfishConsumptionExpenditure,
   "other-shellfish-consumption-quantity": otherShellfishConsumptionQuantity,
+  "other-social-expenses-group-consumption-expenditure": otherSocialExpensesGroupConsumptionExpenditure,
   "other-social-welfare-facility-count": otherSocialWelfareFacilityCount,
   "other-soy-products-consumption-expenditure": otherSoyProductsConsumptionExpenditure,
   "other-sports-equipment-consumption-expenditure": otherSportsEquipmentConsumptionExpenditure,
@@ -5148,6 +5359,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-vegetable-seaweed-processed-consumption-expenditure": otherVegetableSeaweedProcessedConsumptionExpenditure,
   "other-vegetables-consumption-expenditure": otherVegetablesConsumptionExpenditure,
   "other-vegetables-consumption-quantity": otherVegetablesConsumptionQuantity,
+  "other-vegetables-group-consumption-expenditure": otherVegetablesGroupConsumptionExpenditure,
+  "other-vegetables-group-consumption-quantity": otherVegetablesGroupConsumptionQuantity,
   "other-western-sweets-consumption-expenditure": otherWesternSweetsConsumptionExpenditure,
   "other-womens-clothing-consumption-expenditure": otherWomensClothingConsumptionExpenditure,
   "other-womens-shirt-consumption-expenditure": otherWomensShirtConsumptionExpenditure,
@@ -5172,6 +5385,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "oyster-consumption-expenditure": oysterConsumptionExpenditure,
   "oyster-consumption-quantity": oysterConsumptionQuantity,
   "pachinko-shop-density-per-10k": pachinkoShopDensityPer10k,
+  "package-tours-group-consumption-expenditure": packageToursGroupConsumptionExpenditure,
   "paid-nursing-home-capacity-per-1000-65plus": paidNursingHomeCapacityPer100065plus,
   "paid-nursing-home-capacity": paidNursingHomeCapacity,
   "paid-nursing-home-count-per-100k-65plus": paidNursingHomeCountPer100k65plus,
@@ -5234,6 +5448,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "persimmon-consumption-expenditure": persimmonConsumptionExpenditure,
   "persimmon-consumption-quantity": persimmonConsumptionQuantity,
   "personal-computer-consumption-expenditure": personalComputerConsumptionExpenditure,
+  "personal-effects-group-consumption-expenditure": personalEffectsGroupConsumptionExpenditure,
   "personal-items-service-consumption-expenditure": personalItemsServiceConsumptionExpenditure,
   "personal-services-entertainment-private-employees": personalServicesEntertainmentPrivateEmployees,
   "personal-services-entertainment-private-establishments": personalServicesEntertainmentPrivateEstablishments,
@@ -5292,6 +5507,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "pm25-valid-general-station-count": pm25ValidGeneralStationCount,
   "pneumonia-death-count": pneumoniaDeathCount,
   "pneumonia-death-rate": pneumoniaDeathRate,
+  "pocket-money-group-consumption-expenditure": pocketMoneyGroupConsumptionExpenditure,
   "police-department-staff": policeDepartmentStaff,
   "police-expenditure-ratio-pref-finance": policeExpenditureRatioPrefFinance,
   "police-expenses-prefecture": policeExpensesPrefecture,
@@ -5431,6 +5647,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "prefectural-public-building-floor-area": prefecturalPublicBuildingFloorArea,
   "prefectural-recruitment-online-application-rate": prefecturalRecruitmentOnlineApplicationRate,
   "prefecture-designated-cultural-property-count": prefectureDesignatedCulturalPropertyCount,
+  "prepared-foods-group-consumption-expenditure": preparedFoodsGroupConsumptionExpenditure,
   "preschool-fee-consumption-expenditure": preschoolFeeConsumptionExpenditure,
   "primary-activity-avg-time-female": primaryActivityAvgTimeFemale,
   "primary-activity-avg-time-male": primaryActivityAvgTimeMale,
@@ -5481,6 +5698,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "private-university-consumption-expenditure": privateUniversityConsumptionExpenditure,
   "private-university-student-ratio": privateUniversityStudentRatio,
   "probiotic-drink-consumption-expenditure": probioticDrinkConsumptionExpenditure,
+  "processed-fruits-group-consumption-expenditure": processedFruitsGroupConsumptionExpenditure,
+  "processed-meat-group-consumption-expenditure": processedMeatGroupConsumptionExpenditure,
   "production-age-population-ratio": productionAgePopulationRatio,
   "professional-services-private-employees": professionalServicesPrivateEmployees,
   "professional-services-private-establishments": professionalServicesPrivateEstablishments,
@@ -5607,7 +5826,10 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "real-public-debt-service-ratio-city": realPublicDebtServiceRatioCity,
   "real-public-debt-service-ratio": realPublicDebtServiceRatio,
   "recorded-media-consumption-expenditure": recordedMediaConsumptionExpenditure,
+  "recreational-durables-group-consumption-expenditure": recreationalDurablesGroupConsumptionExpenditure,
   "recreational-fishing-count": recreationalFishingCount,
+  "recreational-goods-group-consumption-expenditure": recreationalGoodsGroupConsumptionExpenditure,
+  "recreational-services-group-consumption-expenditure": recreationalServicesGroupConsumptionExpenditure,
   "refrigerator-consumption-expenditure": refrigeratorConsumptionExpenditure,
   "refrigerator-consumption-quantity": refrigeratorConsumptionQuantity,
   "regional-business-co2-emissions-estimate": regionalBusinessCo2EmissionsEstimate,
@@ -5633,7 +5855,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "relaxation-avg-time-female": relaxationAvgTimeFemale,
   "relaxation-avg-time-male": relaxationAvgTimeMale,
   "religious-expense-consumption-expenditure": religiousExpenseConsumptionExpenditure,
+  "remittances-group-consumption-expenditure": remittancesGroupConsumptionExpenditure,
   "renovation-rate": renovationRate,
+  "rent-group-consumption-expenditure": rentGroupConsumptionExpenditure,
   "rent-per-tatami-exclusive-dwellings": rentPerTatamiExclusiveDwellings,
   "rental-car-consumption-expenditure": rentalCarConsumptionExpenditure,
   "rental-housing-floor-area-starts": rentalHousingFloorAreaStarts,
@@ -5720,6 +5944,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "rooms-per-main-household-rented": roomsPerMainHouseholdRented,
   "rooms-per-main-household": roomsPerMainHousehold,
   "rooms-per-ordinary-household": roomsPerOrdinaryHousehold,
+  "root-vegetables-group-consumption-expenditure": rootVegetablesGroupConsumptionExpenditure,
+  "root-vegetables-group-consumption-quantity": rootVegetablesGroupConsumptionQuantity,
   "roundwood-hinoki-production-volume": roundwoodHinokiProductionVolume,
   "roundwood-production-volume": roundwoodProductionVolume,
   "roundwood-sugi-production-volume": roundwoodSugiProductionVolume,
@@ -5736,6 +5962,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "salmon-consumption-quantity": salmonConsumptionQuantity,
   "salt-intake-female-age-adjusted": saltIntakeFemaleAgeAdjusted,
   "salt-intake-male-age-adjusted": saltIntakeMaleAgeAdjusted,
+  "salted-dried-seafood-group-consumption-expenditure": saltedDriedSeafoodGroupConsumptionExpenditure,
+  "salted-dried-seafood-group-consumption-quantity": saltedDriedSeafoodGroupConsumptionQuantity,
   "salted-salmon-consumption-expenditure": saltedSalmonConsumptionExpenditure,
   "salted-salmon-consumption-quantity": saltedSalmonConsumptionQuantity,
   "sanitation-expenditure-ratio-pref-finance": sanitationExpenditureRatioPrefFinance,
@@ -5769,6 +5997,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "sea-bream-consumption-expenditure": seaBreamConsumptionExpenditure,
   "sea-bream-consumption-quantity": seaBreamConsumptionQuantity,
   "seafood-consumption-expenditure": seafoodConsumptionExpenditure,
+  "seasonings-group-consumption-expenditure": seasoningsGroupConsumptionExpenditure,
   "secondary-activity-avg-time-employed-female": secondaryActivityAvgTimeEmployedFemale,
   "secondary-activity-avg-time-employed-male": secondaryActivityAvgTimeEmployedMale,
   "secondary-activity-avg-time-unemployed-female": secondaryActivityAvgTimeUnemployedFemale,
@@ -5814,8 +6043,11 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "sheets-consumption-expenditure": sheetsConsumptionExpenditure,
   "sheets-consumption-quantity": sheetsConsumptionQuantity,
   "shellfish-consumption-quantity": shellfishConsumptionQuantity,
+  "shellfish-group-consumption-expenditure": shellfishGroupConsumptionExpenditure,
+  "shellfish-group-consumption-quantity": shellfishGroupConsumptionQuantity,
   "shimeji-consumption-expenditure": shimejiConsumptionExpenditure,
   "shimeji-consumption-quantity": shimejiConsumptionQuantity,
+  "shirts-sweaters-group-consumption-expenditure": shirtsSweatersGroupConsumptionExpenditure,
   "shochu-consumption-expenditure": shochuConsumptionExpenditure,
   "shochu-consumption-quantity": shochuConsumptionQuantity,
   "shop-combined-dwellings": shopCombinedDwellings,
@@ -5866,10 +6098,12 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "smoke-emission-facility-count": smokeEmissionFacilityCount,
   "smoking-rate-male-age-adjusted": smokingRateMaleAgeAdjusted,
   "snack-consumption-expenditure": snackConsumptionExpenditure,
+  "soap-cosmetics-group-consumption-expenditure": soapCosmeticsGroupConsumptionExpenditure,
   "soba-udon-dining-consumption-expenditure": sobaUdonDiningConsumptionExpenditure,
   "social-education-expense-municipal": socialEducationExpenseMunicipal,
   "social-education-expenses-prefecture": socialEducationExpensesPrefecture,
   "social-expense-consumption-expenditure": socialExpenseConsumptionExpenditure,
+  "social-expenses-group-consumption-expenditure": socialExpensesGroupConsumptionExpenditure,
   "social-increase-rate": socialIncreaseRate,
   "social-increase": socialIncrease,
   "social-sports-facility": socialSportsFacility,
@@ -5883,6 +6117,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "sole-proprietor-operating-profit": soleProprietorOperatingProfit,
   "sole-proprietor-sales-per-worker": soleProprietorSalesPerWorker,
   "sole-proprietor-sales": soleProprietorSales,
+  "soy-products-group-consumption-expenditure": soyProductsGroupConsumptionExpenditure,
   "soy-sauce-consumption-expenditure": soySauceConsumptionExpenditure,
   "soy-sauce-consumption-quantity": soySauceConsumptionQuantity,
   "special-law-criminal-arrest-count-per-population": specialLawCriminalArrestCountPerPopulation,
@@ -5903,6 +6138,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "sports-club-fee-consumption-expenditure": sportsClubFeeConsumptionExpenditure,
   "sports-drink-consumption-expenditure": sportsDrinkConsumptionExpenditure,
   "sports-facility-count": sportsFacilityCount,
+  "sports-goods-group-consumption-expenditure": sportsGoodsGroupConsumptionExpenditure,
   "sports-lesson-consumption-expenditure": sportsLessonConsumptionExpenditure,
   "sports-park-count-per-100km2": sportsParkCountPer100km2,
   "sports-park-count": sportsParkCount,
@@ -5944,10 +6180,12 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "standard-price-change-rate-residential": standardPriceChangeRateResidential,
   "standardized-mortality-japanese": standardizedMortalityJapanese,
   "standardized-mortality-rate-per-1000": standardizedMortalityRatePer1000,
+  "staple-prepared-foods-group-consumption-expenditure": staplePreparedFoodsGroupConsumptionExpenditure,
   "starting-salary-highschool": startingSalaryHighschool,
   "starting-salary-university": startingSalaryUniversity,
   "station-passengers-annual-total": stationPassengersAnnualTotal,
   "station-within-1km-household-ratio": stationWithin1kmHouseholdRatio,
+  "stationery-group-consumption-expenditure": stationeryGroupConsumptionExpenditure,
   "statistical-discrepancy-nominal-h27": statisticalDiscrepancyNominalH27,
   "steel-frame-dwellings": steelFrameDwellings,
   "steep-slope-special-warning-zone-count": steepSlopeSpecialWarningZoneCount,
@@ -5983,6 +6221,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "suicide-rate-per-100k": suicideRatePer100k,
   "suicides-per-100k": suicidesPer100k,
   "supplement-consumption-expenditure": supplementConsumptionExpenditure,
+  "supplementary-education-group-consumption-expenditure": supplementaryEducationGroupConsumptionExpenditure,
   "sushi-dining-consumption-expenditure": sushiDiningConsumptionExpenditure,
   "sushi-takeout-consumption-expenditure": sushiTakeoutConsumptionExpenditure,
   "sweet-potato-consumption-expenditure": sweetPotatoConsumptionExpenditure,
@@ -6015,6 +6254,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "taxpayer-count-income": taxpayerCountIncome,
   "taxpayer-ratio-per-pref-resident": taxpayerRatioPerPrefResident,
   "tea-drink-consumption-expenditure": teaDrinkConsumptionExpenditure,
+  "tea-group-consumption-expenditure": teaGroupConsumptionExpenditure,
   "telephone-subscription-count-per-1000": telephoneSubscriptionCountPer1000,
   "telephone-subscription-count": telephoneSubscriptionCount,
   "television-consumption-expenditure": televisionConsumptionExpenditure,
@@ -6081,6 +6321,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "three-generation-household-members": threeGenerationHouseholdMembers,
   "three-wheeled-light-vehicle-count": threeWheeledLightVehicleCount,
   "tissue-paper-consumption-expenditure": tissuePaperConsumptionExpenditure,
+  "tissue-toilet-paper-group-consumption-expenditure": tissueToiletPaperGroupConsumptionExpenditure,
   "tobacco-consumption-expenditure": tobaccoConsumptionExpenditure,
   "tofu-consumption-expenditure": tofuConsumptionExpenditure,
   "tofu-consumption-quantity": tofuConsumptionQuantity,
@@ -6123,6 +6364,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "total-revenue-prefecture": totalRevenuePrefecture,
   "tourism-resource-count": tourismResourceCount,
   "towel-consumption-expenditure": towelConsumptionExpenditure,
+  "toys-group-consumption-expenditure": toysGroupConsumptionExpenditure,
   "trademark-application-count": trademarkApplicationCount,
   "trademark-registration-count": trademarkRegistrationCount,
   "traffic-accident-casualties-elderly-65plus": trafficAccidentCasualtiesElderly65plus,
@@ -6150,6 +6392,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "transport-postal-private-establishments": transportPostalPrivateEstablishments,
   "transport-postal-private-net-value-added": transportPostalPrivateNetValueAdded,
   "transport-postal-private-sales": transportPostalPrivateSales,
+  "transportation-group-consumption-expenditure": transportationGroupConsumptionExpenditure,
   "travel-bag-consumption-expenditure": travelBagConsumptionExpenditure,
   "travel-bag-consumption-quantity": travelBagConsumptionQuantity,
   "travel-leisure-annual-participation-rate-10plus": travelLeisureAnnualParticipationRate10plus,
@@ -6198,6 +6441,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "two-wheeled-light-vehicle-count": twoWheeledLightVehicleCount,
   "umbrella-consumption-expenditure": umbrellaConsumptionExpenditure,
   "umbrella-consumption-quantity": umbrellaConsumptionQuantity,
+  "underwear-group-consumption-expenditure": underwearGroupConsumptionExpenditure,
   "unemployed-persons-female": unemployedPersonsFemale,
   "unemployed-persons-male": unemployedPersonsMale,
   "unemployed-persons": unemployedPersons,
@@ -6257,6 +6501,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "vegetable-intake-female-age-adjusted": vegetableIntakeFemaleAgeAdjusted,
   "vegetable-intake-male-age-adjusted": vegetableIntakeMaleAgeAdjusted,
   "vegetable-seaweed-tsukudani-consumption-expenditure": vegetableSeaweedTsukudaniConsumptionExpenditure,
+  "vegetables-seaweed-group-consumption-expenditure": vegetablesSeaweedGroupConsumptionExpenditure,
   "vehicle-kilometers-traveled": vehicleKilometersTraveled,
   "vet-fee-consumption-expenditure": vetFeeConsumptionExpenditure,
   "video-recorder-consumption-expenditure": videoRecorderConsumptionExpenditure,
@@ -6315,6 +6560,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "welfare-office-intellectual-disability-consultations-per-100k": welfareOfficeIntellectualDisabilityConsultationsPer100k,
   "welfare-office-intellectual-disability-consultations": welfareOfficeIntellectualDisabilityConsultations,
   "welfare-office-public-assistance-applications-per-1000-households": welfareOfficePublicAssistanceApplicationsPer1000Households,
+  "western-clothing-group-consumption-expenditure": westernClothingGroupConsumptionExpenditure,
   "western-food-dining-consumption-expenditure": westernFoodDiningConsumptionExpenditure,
   "wheat-flour-consumption-expenditure": wheatFlourConsumptionExpenditure,
   "wheat-flour-consumption-quantity": wheatFlourConsumptionQuantity,
@@ -6349,6 +6595,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "womens-jacket-consumption-quantity": womensJacketConsumptionQuantity,
   "womens-pants-consumption-expenditure": womensPantsConsumptionExpenditure,
   "womens-pants-consumption-quantity": womensPantsConsumptionQuantity,
+  "womens-shirts-sweaters-group-consumption-expenditure": womensShirtsSweatersGroupConsumptionExpenditure,
   "womens-shoes-consumption-expenditure": womensShoesConsumptionExpenditure,
   "womens-shoes-consumption-quantity": womensShoesConsumptionQuantity,
   "womens-sleepwear-consumption-expenditure": womensSleepwearConsumptionExpenditure,
@@ -6358,6 +6605,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "womens-stockings-consumption-quantity": womensStockingsConsumptionQuantity,
   "womens-sweater-consumption-expenditure": womensSweaterConsumptionExpenditure,
   "womens-sweater-consumption-quantity": womensSweaterConsumptionQuantity,
+  "womens-underwear-group-consumption-expenditure": womensUnderwearGroupConsumptionExpenditure,
   "wooden-dwellings-non-fireproof": woodenDwellingsNonFireproof,
   "wooden-dwellings": woodenDwellings,
   "wooden-housing-ratio": woodenHousingRatio,

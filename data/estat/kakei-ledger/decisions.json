@@ -1273,12 +1273,60 @@
       "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
     },
     {
-      "code": "050600090",
+      "code": "000300000",
       "measure": "amount",
-      "status": "planned",
-      "reason": "2025年改定でネクタイ・ストッキングなどを含む範囲に広がった「659 他の被服のその他」。旧範囲の指標 other-clothing-misc-consumption-expenditure は2024年までで接続しないので、新しい範囲の2025年以降を別指標にする候補",
-      "decidedAt": "2026-11-02",
-      "decidedBy": "data-ingester (2026-11-02 新旧表の照合で範囲の変更を確認)"
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
+    },
+    {
+      "code": "000400000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
+    },
+    {
+      "code": "000500000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
+    },
+    {
+      "code": "000600000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
+    },
+    {
+      "code": "000700000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
+    },
+    {
+      "code": "000800000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
+    },
+    {
+      "code": "001000000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査世帯の属性や集計上の値で、地域差を比べる指標ではない",
+      "decidedAt": "2026-11-04",
+      "decidedBy": "owner-session (2026-11-04 オーナー判断: 家計調査をすべて展開する)"
     }
   ]
 }
