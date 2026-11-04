@@ -235,6 +235,11 @@
       "r2_path": "note/product-sales/media-video-social-visuals",
       "status": "draft"
     },
+    "muni-manufacturing-shipment-data": {
+      "vertical": "product-sales",
+      "r2_path": "note/product-sales/muni-manufacturing-shipment-data",
+      "status": "draft"
+    },
     "ppt-data-explainer-deck": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/ppt-data-explainer-deck",

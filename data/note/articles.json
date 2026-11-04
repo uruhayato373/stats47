@@ -11391,6 +11391,26 @@
       ],
       "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
       "publishedAt": "2026-10-24"
+    },
+    {
+      "key": "muni-manufacturing-shipment-data",
+      "vertical": "product-sales",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "magazine": null,
+      "isPaid": true,
+      "priceJpy": 980,
+      "status": "draft",
+      "r2Path": "note/product-sales/muni-manufacturing-shipment-data",
+      "body": {
+        "store": "r2-private",
+        "manifest": {
+          "sha256": "77520b35526c4df7dd65c5566f422ff45176ad088453ef13e8cc52f7e78c9ae4",
+          "files": 8,
+          "bytes": 477983,
+          "savedAt": "2026-11-04T02:46:13.409Z"
+        },
+        "verifiedAt": "2026-11-04T02:46:13.409Z"
+      }
     }
   ]
 }
