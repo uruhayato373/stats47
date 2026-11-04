@@ -8356,7 +8356,7 @@
     {
       "key": "prefecture-population-household-pack",
       "vertical": "product-sales",
-      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "title": "都道府県別 人口・世帯データ 134指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8379,7 +8379,7 @@
     {
       "key": "prefecture-income-wage-hiring-pack",
       "vertical": "product-sales",
-      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "title": "都道府県別 賃金・求人・働き方データ 107指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8402,7 +8402,7 @@
     {
       "key": "prefecture-tourism-lodging-pack",
       "vertical": "product-sales",
-      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "title": "都道府県別 宿泊・交通・旅行データ 44指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8425,7 +8425,7 @@
     {
       "key": "prefecture-municipal-finance-pack",
       "vertical": "product-sales",
-      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "title": "都道府県別 自治体財政・職員給与データ 119指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8448,7 +8448,7 @@
     {
       "key": "prefecture-healthcare-nursing-pack",
       "vertical": "product-sales",
-      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "title": "都道府県別 医療・介護データ 237指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8471,7 +8471,7 @@
     {
       "key": "prefecture-education-childcare-pack",
       "vertical": "product-sales",
-      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "title": "都道府県別 学校・保育・社会教育データ 244指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8494,7 +8494,7 @@
     {
       "key": "prefecture-migration-living-pack",
       "vertical": "product-sales",
-      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "title": "都道府県別 住居費・物価・気候データ 76指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8517,7 +8517,7 @@
     {
       "key": "prefecture-retail-trade-area-pack",
       "vertical": "product-sales",
-      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "title": "都道府県別 商業・小売データ 69指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8540,7 +8540,7 @@
     {
       "key": "prefecture-industry-economy-pack",
       "vertical": "product-sales",
-      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "title": "都道府県別 産業・農業・家計データ 132指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8563,7 +8563,7 @@
     {
       "key": "prefecture-disaster-infrastructure-pack",
       "vertical": "product-sales",
-      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "title": "都道府県別 防災・交通・インフラデータ 230指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8586,7 +8586,7 @@
     {
       "key": "prefecture-map-chart-assets-pack",
       "vertical": "product-sales",
-      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "title": "都道府県の地図・ランキング素材 28指標｜PNG・SVG・PowerPoint",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8609,7 +8609,7 @@
     {
       "key": "prefecture-all-in-one-pack",
       "vertical": "product-sales",
-      "title": "47都道府県 2,073指標の統計データ総合集",
+      "title": "47都道府県 統計データ総合集 2,073指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 2980,
@@ -8653,7 +8653,7 @@
     {
       "key": "prefecture-household-consumption-pack",
       "vertical": "product-sales",
-      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "title": "県庁所在市別 家計調査データ 685指標｜品目別 CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
