@@ -1,0 +1,36 @@
+{
+  "kind": "calculated",
+  "yKey": "nurses-per-100k-population",
+  "year": "x:2021/y:2020",
+  "inputs": [
+    {
+      "rankingKey": "retail-store-count",
+      "year": "2021",
+      "role": "numerator"
+    },
+    {
+      "rankingKey": "total-population",
+      "year": "2021",
+      "role": "denominator"
+    },
+    {
+      "rankingKey": "nurses-per-100k-population",
+      "year": "2020",
+      "role": "y"
+    }
+  ],
+  "formula": "x = retail-store-count / total-population * 100000 (小数1桁) / y = nurses-per-100k-population",
+  "generatedBy": ".claude/scripts/blog/rebuild-scatter-data.mjs",
+  "axes": {
+    "x": {
+      "year": "2021年",
+      "proof": "manifest"
+    },
+    "y": {
+      "metricKey": "nurses-per-100k-population",
+      "year": "2020年",
+      "proof": "values"
+    }
+  },
+  "pearsonR": 0.7563
+}
