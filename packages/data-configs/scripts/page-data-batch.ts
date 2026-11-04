@@ -688,6 +688,8 @@ export function kakeiEstatSource(source: KakeiChousaSource): Extract<SourceConfi
     // 品目を合算して 1 指標にする (例: 情報通信関係費 = 固定電話+移動電話+NHK+ケーブルTV+他の受信料)。
     // 家計調査は品目ごとに cdCat01 が分かれており総数コードが無いので estat と同じ axisSum を使う
     axisSum?: Extract<SourceConfig, { kind: "estat" }>["axisSum"];
+    // 同じ表の費目の割合 (例: 住居 ÷ 消費支出)。分子・分母は estat と同じ axisRatio で取る
+    axisRatio?: Extract<SourceConfig, { kind: "estat" }>["axisRatio"];
   };
   if (!filter.statsDataId) return null;
   return {
@@ -696,6 +698,7 @@ export function kakeiEstatSource(source: KakeiChousaSource): Extract<SourceConfi
     cdCat01: filter.cdCat01,
     cdCat02: filter.cdCat02,
     axisSum: filter.axisSum,
+    axisRatio: filter.axisRatio,
   };
 }
 

@@ -2,6 +2,781 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "hydroelectric-power-plant-count",
+      "pageId": null,
+      "title": "水力発電所数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "ksjDataId": "P03",
+          "ksjVersion": "13"
+        },
+        "fetcherKey": "mlit_ksj",
+        "configHash": "4ea62d6c9c854fc7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:hydroelectric-power-plant-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "icecream-consumption-expenditure",
+      "pageId": "ranking:icecream-consumption-expenditure",
+      "title": "アイスクリーム・シャーベット消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010800150",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010800150",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6659dba91867b5de"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:banana-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:food-consumption-prefecture-battle",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:icecream-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:icecream-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "in-pref-university-entrance-ratio-by-highschool-origin",
+      "pageId": "ranking:in-pref-university-entrance-ratio-by-highschool-origin",
+      "title": "県内大学入学者割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E0940302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0940302"
+        },
+        "derived": false,
+        "configHash": "ac7bdadbb9ae9a84"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:university-advancement-capacity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:in-pref-university-entrance-ratio-by-highschool-origin",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "in-prefecture-employed-people-ratio",
+      "pageId": "ranking:in-prefecture-employed-people-ratio",
+      "title": "県内就業者比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F02501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F02501"
+        },
+        "derived": false,
+        "configHash": "40dc66838179e108"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:in-prefecture-employed-people-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "inbound-travel-consumption-by-destination",
+      "pageId": "ranking:inbound-travel-consumption-by-destination",
+      "title": "訪日外国人旅行者の県内消費額",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001992606.xlsx"
+        },
+        "fetcherKey": "manual",
+        "configHash": "1e2e8613037ce3a2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:inbound-travel-consumption-by-destination",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:tourism",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "tourism"
+      ]
+    },
+    {
+      "metricKey": "inbound-visit-sample-by-destination",
+      "pageId": "ranking:inbound-visit-sample-by-destination",
+      "title": "訪日外国人の県別訪問回答数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001992606.xlsx"
+        },
+        "fetcherKey": "manual",
+        "configHash": "1e2e8613037ce3a2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:inbound-visit-sample-by-destination",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:tourism",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "tourism"
+      ]
+    },
+    {
       "metricKey": "inbound-visitors-by-destination",
       "pageId": "ranking:inbound-visitors-by-destination",
       "title": "訪日外国人の都道府県別訪問者数",
@@ -10792,968 +11567,6 @@
       ],
       "themes": [
         "sports-participation"
-      ]
-    },
-    {
-      "metricKey": "junior-high-club-per100-table-tennis",
-      "pageId": "ranking:junior-high-club-per100-table-tennis",
-      "title": "中学部活動 100人あたり部員数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://nippon-chutairen.or.jp/cms/wp-content/themes/nippon-chutairen/file/kameikou/%E4%BB%A4%E5%92%8C%EF%BC%97%E5%B9%B4%E5%BA%A6%E5%8A%A0%E7%9B%9F%E6%A0%A1%E8%AA%BF%E6%9F%BB%E9%9B%86%E8%A8%88%EF%BC%88%E7%A2%BA%E5%AE%9A%E5%80%A4%EF%BC%89.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "6b66c2e6d7863911"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:junior-high-club-per100-table-tennis",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:sports-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "sports-participation"
-      ]
-    },
-    {
-      "metricKey": "junior-high-club-per100-track-and-field",
-      "pageId": "ranking:junior-high-club-per100-track-and-field",
-      "title": "中学部活動 100人あたり部員数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://nippon-chutairen.or.jp/cms/wp-content/themes/nippon-chutairen/file/kameikou/%E4%BB%A4%E5%92%8C%EF%BC%97%E5%B9%B4%E5%BA%A6%E5%8A%A0%E7%9B%9F%E6%A0%A1%E8%AA%BF%E6%9F%BB%E9%9B%86%E8%A8%88%EF%BC%88%E7%A2%BA%E5%AE%9A%E5%80%A4%EF%BC%89.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "6b66c2e6d7863911"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:junior-high-club-per100-track-and-field-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:junior-high-club-per100-track-and-field",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:sports-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "sports-participation"
-      ]
-    },
-    {
-      "metricKey": "junior-high-club-per100-volleyball",
-      "pageId": "ranking:junior-high-club-per100-volleyball",
-      "title": "中学部活動 100人あたり部員数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://nippon-chutairen.or.jp/cms/wp-content/themes/nippon-chutairen/file/kameikou/%E4%BB%A4%E5%92%8C%EF%BC%97%E5%B9%B4%E5%BA%A6%E5%8A%A0%E7%9B%9F%E6%A0%A1%E8%AA%BF%E6%9F%BB%E9%9B%86%E8%A8%88%EF%BC%88%E7%A2%BA%E5%AE%9A%E5%80%A4%EF%BC%89.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "6b66c2e6d7863911"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:sports-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:junior-high-club-per100-volleyball",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:sports-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "sports-participation"
-      ]
-    },
-    {
-      "metricKey": "junior-high-school-advancement-rate",
-      "pageId": "ranking:junior-high-school-advancement-rate",
-      "title": "中学校卒業者の進学率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E09401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E09401"
-        },
-        "derived": false,
-        "configHash": "5e5255dbeb9fd2ec"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:junior-high-school-advancement-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "junior-high-school-classes",
-      "pageId": "ranking:junior-high-school-classes",
-      "title": "中学校学級数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010105",
-          "filters": {
-            "cdCat01": "E3301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010105",
-          "cdCat01": "E3301"
-        },
-        "derived": false,
-        "configHash": "b7a66be69b0b1d51"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:junior-high-school-classes",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "junior-high-school-count",
-      "pageId": "ranking:junior-high-school-count",
-      "title": "中学校数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010105",
-          "filters": {
-            "cdCat01": "E3101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010105",
-          "cdCat01": "E3101"
-        },
-        "derived": false,
-        "configHash": "bd2fec9c6cab8e47"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "municipality-ranking:junior-high-school-count",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:education-culture",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:junior-high-school-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:education-culture",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "education-culture"
       ]
     }
   ]

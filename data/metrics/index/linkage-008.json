@@ -2,6 +2,114 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "entertainment-rental-consumption-expenditure",
+      "pageId": "ranking:entertainment-rental-consumption-expenditure",
+      "title": "教養娯楽賃借料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "090442110",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "090442110",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "10941fe31dbc77c4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:entertainment-rental-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "environmental-sanitation-expenses-prefecture",
+      "pageId": "ranking:environmental-sanitation-expenses-prefecture",
+      "title": "環境衛生費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103044"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103044"
+        },
+        "derived": false,
+        "configHash": "a0597dd28c6afed1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:environmental-sanitation-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "establishment-ratio-1-4-employees-private",
+      "pageId": "ranking:establishment-ratio-1-4-employees-private",
+      "title": "従業者1～4人の事業所割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C02206"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C02206"
+        },
+        "derived": false,
+        "configHash": "11588a7b9a019630"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:small-business-dominance-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:establishment-ratio-1-4-employees-private",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "establishment-ratio-10-29-employees-private",
       "pageId": "ranking:establishment-ratio-10-29-employees-private",
       "title": "従業者10～29人の事業所割合",
@@ -11713,297 +11821,6 @@
       "consumers": [
         {
           "pageId": "ranking:fishing-port-count-by-type",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "fishing-port-count-ksj",
-      "pageId": "ranking:fishing-port-count-ksj",
-      "title": "漁港数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.jfa.maff.go.jp/j/gyoko_gyozyo/g_zyoho_bako/gyoko_itiran/attach/pdf/sub81-257.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "3685f1eb74dba622"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:fishery-marine",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:fishing-port-count-ksj",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:fishery-marine",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "fishery-marine"
-      ]
-    },
-    {
-      "metricKey": "fishing-vessel-crew",
-      "pageId": "ranking:fishing-vessel-crew",
-      "title": "漁船乗組員数（性別計・年齢計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003262282",
-          "filters": {
-            "cdCat01": "11",
-            "cdCat02": "11"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003262282",
-          "cdCat01": "11",
-          "cdCat02": "11"
-        },
-        "derived": false,
-        "configHash": "8503f6d1954abff2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:fishing-vessel-crew",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "fishing-vessel-tonnage-class",
-      "pageId": "ranking:fishing-vessel-tonnage-class",
-      "title": "漁船・動力漁船隻数（トン数規模計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003262281",
-          "filters": {
-            "cdCat01": "11"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003262281",
-          "cdCat01": "11"
-        },
-        "derived": false,
-        "configHash": "5e0cbf33f1835a96"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:fishing-vessel-tonnage-class",
           "kind": "ranking"
         }
       ],

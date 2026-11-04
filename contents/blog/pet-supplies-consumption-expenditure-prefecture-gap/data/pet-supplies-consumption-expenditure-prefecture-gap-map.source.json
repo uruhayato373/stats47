@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pet-supplies-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "ペット・他のペット用品消費支出額",
+  "readerLabel": "ペット・他のペット用品への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/pet-supplies-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pet-supplies-consumption-expenditure-prefecture-gap --keys pet-supplies-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T11:23:01.119Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

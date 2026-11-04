@@ -67,6 +67,9 @@ updated: 2026-11-01
 ### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
 
+- **記事の公開 (2026-11-05)**: 合格 81 本を背景画像つきで送り箱へ入れた (PR 1221 のマージ後・リンク先 82 指標が本番で 200 を確認)。残り: `blog:batch` の候補は kakei-chousa で尽きた。other-mushroom・laundry-detergent・rent-group は critic REVISE のまま非公開。`blog:batch` は既存の `contents/blog` の slug を対象外にするので、不合格の再挑戦は `write-blog-headless.ts --slugs` で行う。
+- **調査資料の注意 (2026-11-05)**: `docs/31_note記事原稿/kakei-research/` の背景の URL は検索結果の確認までで、原典の数値は未確認。家計調査の民営家賃が全世帯平均か借家世帯平均かは未確認。教育 5 品目は順位の変動が大きく、複数年の確認が要る。ledger の `kind` は item と group が混在し階層が二重に数えられうる。
+- **予定の 6 表 (2026-11-05)**: 分析単位 7 件 (proposed) と構成比の 9 指標 (`*-budget-share-kakei`・isActive:false) と図の生成定義を実装済み。全国の 11 件は本番の /japan の図で確認し published へ。残り: e-Stat の実値確認 (data-refresh は dispatch だと main を checkout するので main マージ後)、確認後に指標を isActive:true・分析単位を published/value-checked へ変え、`npm run estat:kakei-ledger:build` と axis-charts の再生成・テーマの章追加を行う。全国の 5 表は data-refresh で確かめられないので generate-kakei-axis-charts.ts を appId のある環境で回す。
 - **データ商品の導線 (2026-11-04 オーナー判断)**: サイトの案内は商品ページを経由して note へ出す。詳細ページは短い中継のまま残す。note の販売記事 13 本の題を見直した。家計のデータ集は新しく作らず P-14 (`prefecture-household-consumption`) を 841 指標へ更新する。
 - **全面展開の進み具合 (2026-11-04)**: 計画は `/Users/minamidaisuke/.claude/plans/smooth-stargazing-kay.md`、到達の実測は `data/surveys/kakei-coverage.json`。済み: 到達の報告 (`report-kakei-coverage.ts`)、全品目のリンク一覧 (`household-food-spending`)、未判定 131 件 (指標 124・除外 7)。県の上位品目は 11-02 に実装済み。次: 124 指標の取り込み (`data/data-refresh-requests.json` は dryRun のまま 41800174049 が取り消された。r2-write が空いてから出し直す)、予定の 6 表、調査材料、記事、note。
 - **方針の更新 (2026-11-04 オーナー判断)**: 既存の是正だけで止めず、品目も量産し、NotebookLM と Deep Research を使ってできることをすべて展開する。下の 11-01 の「新規品目の量産より」はこの判断で上書きする。

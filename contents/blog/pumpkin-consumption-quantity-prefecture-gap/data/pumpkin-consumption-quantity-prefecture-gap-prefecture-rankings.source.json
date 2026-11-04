@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pumpkin-consumption-quantity",
+  "year": "2025",
+  "unit": "g",
+  "label": "かぼちゃ消費量",
+  "readerLabel": "かぼちゃ消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/pumpkin-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pumpkin-consumption-quantity-prefecture-gap --keys pumpkin-consumption-quantity --data-name pumpkin-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T22:13:15.624Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

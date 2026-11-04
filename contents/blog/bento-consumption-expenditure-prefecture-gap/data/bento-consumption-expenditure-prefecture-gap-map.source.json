@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "bento-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "弁当消費支出額",
+  "readerLabel": "弁当への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/bento-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug bento-consumption-expenditure-prefecture-gap --keys bento-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T10:52:34.917Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

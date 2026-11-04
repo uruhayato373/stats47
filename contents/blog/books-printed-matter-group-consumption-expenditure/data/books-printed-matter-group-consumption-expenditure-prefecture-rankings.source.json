@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "books-printed-matter-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "書籍・他の印刷物消費支出額",
+  "readerLabel": "書籍・他の印刷物への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/books-printed-matter-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug books-printed-matter-group-consumption-expenditure --keys books-printed-matter-group-consumption-expenditure --data-name books-printed-matter-group-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:36:16.204Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

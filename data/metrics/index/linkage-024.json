@@ -2,6 +2,266 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "projected-population-2050-city",
+      "pageId": null,
+      "title": "将来推計人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A191007"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A191007"
+        },
+        "derived": false,
+        "configHash": "8f6f8707ac98307c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:projected-population-2050-city",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:projected-population-2050-city",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "propane-gas-consumption-expenditure",
+      "pageId": "ranking:propane-gas-consumption-expenditure",
+      "title": "プロパンガス消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "030200020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "030200020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9609402d923182ee"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:gas-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:propane-gas-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "propane-gas-consumption-quantity",
+      "pageId": "ranking:propane-gas-consumption-quantity",
+      "title": "プロパンガス消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "030200020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "030200020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6d01660cc5e66b6f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:propane-gas-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-expenses-prefecture",
+      "pageId": "ranking:property-expenses-prefecture",
+      "title": "物件費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310402"
+        },
+        "derived": false,
+        "configHash": "edf67035fae698a2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:property-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-income-h27",
+      "pageId": null,
+      "title": "財産所得",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C1223"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C1223"
+        },
+        "derived": false,
+        "configHash": "d86271f54d8967ba"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:property-income-h27",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-income-municipal",
+      "pageId": null,
+      "title": "財産収入",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320116"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320116"
+        },
+        "derived": false,
+        "configHash": "eeb0dee43caf1faf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:property-income-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:property-income-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-income-prefecture",
+      "pageId": "ranking:property-income-prefecture",
+      "title": "財産収入",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310110"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310110"
+        },
+        "derived": false,
+        "configHash": "341e4ba55dda99ce"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:property-income-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "protective-facility-count",
       "pageId": null,
       "title": "保護施設数",
@@ -8234,695 +8494,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "real-deficit-ratio-municipal",
-      "pageId": null,
-      "title": "実質赤字比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020304",
-          "filters": {
-            "cdCat01": "#D02214"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020304",
-          "cdCat01": "#D02214"
-        },
-        "derived": false,
-        "configHash": "474b07f848e1027b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-deficit-ratio-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:real-deficit-ratio-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-disposable-income",
-      "pageId": "ranking:real-disposable-income",
-      "title": "実質可処分所得（物価補正後）",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "ops": {
-          "calc": {
-            "type": "ratio",
-            "numeratorKey": "disposable-income-worker-households",
-            "denominatorKey": "consumer-price-difference-index-overall",
-            "scaleFactor": 100,
-            "decimalPlaces": 0
-          }
-        },
-        "derived": true,
-        "fetcherKey": "calculated",
-        "configHash": "2bacc57456f394af"
-      },
-      "dependencies": [
-        "consumer-price-difference-index-overall",
-        "disposable-income-worker-households"
-      ],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:real-income",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:heating-cost-vs-disposable-income",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:low-cost-low-income-prefectures",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:real-disposable-income-reversal",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:real-disposable-income-vs-per-capita-social-welfare",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:real-income-taxpayer",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:real-disposable-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:real-income",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "real-income"
-      ]
-    },
-    {
-      "metricKey": "real-estate-leasing-private-employees",
-      "pageId": null,
-      "title": "従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C220845"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C220845"
-        },
-        "derived": false,
-        "configHash": "c79330549276c9d7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-employees",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-employees",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-estate-leasing-private-establishments",
-      "pageId": null,
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C210845"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C210845"
-        },
-        "derived": false,
-        "configHash": "553fce3b7e966280"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-establishments",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:business-demography",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-establishments",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-estate-leasing-private-net-value-added",
-      "pageId": null,
-      "title": "業種別の純付加価値額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C620115"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C620115"
-        },
-        "derived": false,
-        "configHash": "2c888dda07efce35"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-net-value-added",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-net-value-added",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-estate-leasing-private-sales",
-      "pageId": null,
-      "title": "売上金額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C610115"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C610115"
-        },
-        "derived": false,
-        "configHash": "08c62abd7bee376a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-sales",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-public-debt-service-ratio",
-      "pageId": "ranking:real-public-debt-service-ratio",
-      "title": "実質公債費比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D2111"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D2111"
-        },
-        "derived": false,
-        "configHash": "7c823776a326f6a5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:fiscal-self-reliance-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:local-government-debt-burden",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:real-public-debt-service-ratio",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-finance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-finance"
-      ]
     }
   ]
 }

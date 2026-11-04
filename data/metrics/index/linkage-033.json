@@ -2,6 +2,394 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "workers-compensation-insurance-benefits-rate",
+      "pageId": "ranking:workers-compensation-insurance-benefits-rate",
+      "title": "労働者災害補償保険給付率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F08101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F08101"
+        },
+        "derived": false,
+        "configHash": "178d53152e035402"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:workplace-accident-regional-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:workers-compensation-insurance-benefits-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-other-municipality-same-prefecture",
+      "pageId": null,
+      "title": "県内他市区町村で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2702"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2702"
+        },
+        "derived": false,
+        "configHash": "71d1de380fa0232b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-other-municipality-same-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-other-municipality-same-prefecture-female",
+      "pageId": null,
+      "title": "県内他市区町村で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F270202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F270202"
+        },
+        "derived": false,
+        "configHash": "3538d2fe1036c111"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-other-municipality-same-prefecture-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-other-municipality-same-prefecture-male",
+      "pageId": null,
+      "title": "県内他市区町村で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F270201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F270201"
+        },
+        "derived": false,
+        "configHash": "42eea149cc3b518e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture-male",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-other-municipality-same-prefecture-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-other-prefecture",
+      "pageId": null,
+      "title": "他県で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2703"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2703"
+        },
+        "derived": false,
+        "configHash": "3e38f1415a9efb0e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-other-prefecture",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-other-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-other-prefecture-female",
+      "pageId": null,
+      "title": "他県で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F270302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F270302"
+        },
+        "derived": false,
+        "configHash": "c024ca2f235f9bcc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-other-prefecture-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-other-prefecture-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-other-prefecture-male",
+      "pageId": null,
+      "title": "他県で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F270301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F270301"
+        },
+        "derived": false,
+        "configHash": "77c89e78813c79ab"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-other-prefecture-male",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-other-prefecture-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-own-municipality",
+      "pageId": null,
+      "title": "自市区町村で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2701"
+        },
+        "derived": false,
+        "configHash": "ebcec9ef272a6824"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-own-municipality",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-own-municipality",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "workers-in-own-municipality-female",
+      "pageId": null,
+      "title": "自市区町村で従業している就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F270102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F270102"
+        },
+        "derived": false,
+        "configHash": "56f5a77165948b36"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:workers-in-own-municipality-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:workers-in-own-municipality-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "workers-in-own-municipality-male",
       "pageId": null,
       "title": "自市区町村で従業している就業者数",

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "clothing-services-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "被服関連サービス消費支出額",
+  "readerLabel": "被服関連サービスへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/clothing-services-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug clothing-services-group-consumption-expenditure-prefecture --keys clothing-services-group-consumption-expenditure --data-name clothing-services-group-consumption-expenditure-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:34:59.306Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

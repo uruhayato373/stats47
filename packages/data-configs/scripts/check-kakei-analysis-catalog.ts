@@ -59,8 +59,11 @@ if (errors.length) {
   const staged = KAKEI_ANALYSES.filter(
     (row) => row.placement.state === 'staged'
   ).length;
+  const published = KAKEI_ANALYSES.filter(
+    (row) => row.placement.state === 'published'
+  ).length;
   console.log(
-    `家計調査の分析単位の台帳: ${KAKEI_ANALYSES.length}件、既存指標に配線済み${configured}、ローカル生成済み${staged}、制作候補${KAKEI_ANALYSES.length - configured - staged}。参照・粒度・重複検査 PASS`
+    `家計調査の分析単位の台帳: ${KAKEI_ANALYSES.length}件、既存指標に配線済み${configured}、全国の図で公開済み${published}、ローカル生成済み${staged}、制作候補${KAKEI_ANALYSES.length - configured - published - staged}。参照・粒度・重複検査 PASS`
   );
   if (process.argv.includes('--list'))
     for (const row of KAKEI_ANALYSES)

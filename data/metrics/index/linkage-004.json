@@ -2,6 +2,50 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "commuters-to-other-municipalities-female",
+      "pageId": null,
+      "title": "他市区町村への通勤者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F270502"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F270502"
+        },
+        "derived": false,
+        "configHash": "395be25db60ef12a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:commuters-to-other-municipalities-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:commuters-to-other-municipalities-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "commuters-to-other-municipalities-male",
       "pageId": null,
       "title": "他市区町村への通勤者数",
@@ -11417,38 +11461,6 @@
       "consumers": [
         {
           "pageId": "ranking:criminal-recognition-count-of-theft-crime-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "criminal-recognition-count-of-violent-crime-rate",
-      "pageId": "ranking:criminal-recognition-count-of-violent-crime-rate",
-      "title": "刑法犯認知件数に占める粗暴犯の割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010211",
-          "filters": {
-            "cdCat01": "#K06402"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010211",
-          "cdCat01": "#K06402"
-        },
-        "derived": false,
-        "configHash": "37e26e82f14416e1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:criminal-recognition-count-of-violent-crime-rate",
           "kind": "ranking"
         }
       ],

@@ -2,6 +2,286 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "population-aged-0-17",
+      "pageId": null,
+      "title": "0～17歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A1407"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A1407"
+        },
+        "derived": false,
+        "configHash": "d8ed5c192b53172e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-17",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-17",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "population-aged-0-17-female",
+      "pageId": null,
+      "title": "0～17歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A140702"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A140702"
+        },
+        "derived": false,
+        "configHash": "2cc5bbcb756794a8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-17-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-17-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "population-aged-0-17-male",
+      "pageId": null,
+      "title": "0～17歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A140701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A140701"
+        },
+        "derived": false,
+        "configHash": "b9432b9852d43793"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-17-male",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-17-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "population-aged-0-3",
+      "pageId": null,
+      "title": "0～3歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A1404"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A1404"
+        },
+        "derived": false,
+        "configHash": "3d7c9e6a38068e55"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-3",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-3",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "population-aged-0-3-female",
+      "pageId": null,
+      "title": "0～3歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A140402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A140402"
+        },
+        "derived": false,
+        "configHash": "24ad93e03c3e200b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-3-female",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-3-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "population-aged-0-3-male",
+      "pageId": null,
+      "title": "0～3歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A140401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A140401"
+        },
+        "derived": false,
+        "configHash": "24866d33ea8c46f0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-3-male",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-3-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "population-aged-0-5",
+      "pageId": null,
+      "title": "0～5歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A1405"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A1405"
+        },
+        "derived": false,
+        "configHash": "d0d1ed6332e518d8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-5",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-5",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "population-aged-0-5-female",
       "pageId": null,
       "title": "0～5歳人口",
@@ -5312,658 +5592,6 @@
       "consumers": [
         {
           "pageId": "ranking:postal-savings-balance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "postal-savings-balance-per-capita",
-      "pageId": "ranking:postal-savings-balance-per-capita",
-      "title": "郵便貯金残高",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010203",
-          "filters": {
-            "cdCat01": "#C0460101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010203",
-          "cdCat01": "#C0460101"
-        },
-        "derived": false,
-        "configHash": "7864d0cb995976dc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:postal-savings-balance-per-capita",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "potato-consumption-expenditure",
-      "pageId": "ranking:potato-consumption-expenditure",
-      "title": "じゃがいも消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010512020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010512020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "493285cd697c8272"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:potato-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "potato-consumption-quantity",
-      "pageId": "ranking:potato-consumption-quantity",
-      "title": "じゃがいも消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010512020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010512020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "3adbe02c80958a27"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:banana-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:potato-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:potato-consumption-quantity",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "pots-kettles-consumption-expenditure",
-      "pageId": "ranking:pots-kettles-consumption-expenditure",
-      "title": "鍋・やかん消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "040400030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "040400030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b0d767158d85bd46"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:pots-kettles-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "pots-kettles-consumption-quantity",
-      "pageId": "ranking:pots-kettles-consumption-quantity",
-      "title": "鍋・やかん購入数量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "040400030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "040400030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "4b751fd405cc2437"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:pots-kettles-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "poverty-support-new-consultation-cases",
-      "pageId": "ranking:poverty-support-new-consultation-cases",
-      "title": "生活困窮者自立支援の新規相談受付件数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mhlw.go.jp/content/001681642.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "398c77309aee44db"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:public-assistance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:poverty-support-new-consultation-cases",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:public-assistance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "public-assistance"
-      ]
-    },
-    {
-      "metricKey": "powdered-milk-consumption-expenditure",
-      "pageId": "ranking:powdered-milk-consumption-expenditure",
-      "title": "粉ミルク消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010420010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010420010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "8497b06c91199017"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:powdered-milk-consumption-expenditure",
           "kind": "ranking"
         }
       ],

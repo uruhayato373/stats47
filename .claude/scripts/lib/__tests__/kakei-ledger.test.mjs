@@ -68,6 +68,14 @@ test("kakeiMetricInput: 単品と合算 (axisSum) の取得条件を取り出し
   assert.equal(kakeiMetricInput({ key: "c", source: { kind: "estat" } }), null);
 });
 
+test("kakeiMetricInput: 割合 (axisRatio) は分子と分母のコードを表の使い手として数える", () => {
+  const input = kakeiMetricInput({
+    key: "housing-budget-share-kakei",
+    source: { kind: "kakei-chousa", filter: { statsDataId: "0002070003", cdCat02: "03", axisRatio: { axis: "cat01", numeratorCodes: ["102"], denominatorCodes: ["059"] } } },
+  });
+  assert.deepEqual(input, { key: "housing-budget-share-kakei", statsDataId: "0002070003", cdCat02: "03", codes: ["102", "059"], via: "sum" });
+});
+
 test("buildKakeiLedger: 指標のある品目は adopted、判断のある品目は判断どおり、残りは undecided", () => {
   const ledger = build();
   const byKey = new Map(ledger.items.map((i) => [`${i.measure}:${i.code}`, i]));

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "miscellaneous-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "諸雑費消費支出額",
+  "readerLabel": "諸雑費への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/miscellaneous-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug miscellaneous-group-consumption-expenditure-prefecture-gap --keys miscellaneous-group-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T12:36:33.970Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
