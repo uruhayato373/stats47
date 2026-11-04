@@ -2,6 +2,268 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "self-service-store-count-per-100k",
+      "pageId": "ranking:self-service-store-count-per-100k",
+      "title": "セルフサービス事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06113"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06113"
+        },
+        "derived": false,
+        "configHash": "7ada335ab90fad65"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:self-service-store-count-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "senility-death-count",
+      "pageId": "ranking:senility-death-count",
+      "title": "老衰による死亡者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003412078",
+          "filters": {
+            "cdCat01": "00100",
+            "cdCat02": "00100",
+            "cdCat03": "18100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003412078",
+          "cdCat01": "00100",
+          "cdCat02": "00100",
+          "cdCat03": "18100"
+        },
+        "derived": false,
+        "configHash": "bfd4f95548fa2f1e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:senility-death-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "senility-death-rate",
+      "pageId": "ranking:senility-death-rate",
+      "title": "老衰による死亡者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003411663",
+          "filters": {
+            "cdCat01": "18100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003411663",
+          "cdCat01": "18100"
+        },
+        "derived": false,
+        "configHash": "a41cdb81d9e502e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:senility-death-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "senior-recreation-home-count-per-100k-65plus",
+      "pageId": "ranking:senior-recreation-home-count-per-100k-65plus",
+      "title": "老人憩の家数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J02203"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J02203"
+        },
+        "derived": false,
+        "configHash": "cb49963d82e33bca"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:senior-recreation-home-count-per-100k-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "senior-recreation-home-staff-per-100k-65plus",
+      "pageId": "ranking:senior-recreation-home-staff-per-100k-65plus",
+      "title": "老人憩の家従事者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J03203"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J03203"
+        },
+        "derived": false,
+        "configHash": "3882297ae0ad66d5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:senior-recreation-home-staff-per-100k-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "senior-welfare-center-count",
+      "pageId": null,
+      "title": "老人福祉センター数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020210",
+          "filters": {
+            "cdCat01": "J230141"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020210",
+          "cdCat01": "J230141"
+        },
+        "derived": false,
+        "configHash": "99eaf6dd3156b96e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:senior-welfare-center-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:senior-welfare-center-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "senior-welfare-center-count-per-100k-65plus",
+      "pageId": "ranking:senior-welfare-center-count-per-100k-65plus",
+      "title": "老人福祉センター数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J02202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J02202"
+        },
+        "derived": false,
+        "configHash": "8c2d16701a8bedf3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:senior-welfare-center-count-per-100k-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "senior-welfare-center-staff-per-100k-65plus",
       "pageId": "ranking:senior-welfare-center-staff-per-100k-65plus",
       "title": "老人福祉センター従事者数",
@@ -11174,513 +11436,6 @@
       "consumers": [
         {
           "pageId": "ranking:sole-proprietor-sales-per-worker",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "soy-products-group-consumption-expenditure",
-      "pageId": "ranking:soy-products-group-consumption-expenditure",
-      "title": "大豆加工品消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010530000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010530000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "e609c63b9c3fa438"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:soy-products-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "soy-sauce-consumption-expenditure",
-      "pageId": "ranking:soy-sauce-consumption-expenditure",
-      "title": "しょう油消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010720020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010720020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "bf9301f827918d33"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:furikake-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:soy-sauce-consumption-expenditure-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:soy-sauce-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "soy-sauce-consumption-quantity",
-      "pageId": "ranking:soy-sauce-consumption-quantity",
-      "title": "しょう油消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010720020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010720020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "a4c5be891c9aa7be"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miso-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:soy-sauce-consumption-quantity",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "special-law-criminal-arrest-count",
-      "pageId": "ranking:special-law-criminal-arrest-count",
-      "title": "特別法犯検挙件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K4301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K4301"
-        },
-        "derived": false,
-        "configHash": "37b21a1cdba9958f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:special-law-criminal-arrest-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "special-law-criminal-arrest-count-per-population",
-      "pageId": "ranking:special-law-criminal-arrest-count-per-population",
-      "title": "特別法犯検挙件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010211",
-          "filters": {
-            "cdCat01": "#K06501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010211",
-          "cdCat01": "#K06501"
-        },
-        "derived": false,
-        "configHash": "77b14b5c5496935f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:special-law-criminal-arrest-count-per-population",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "special-nursing-home-capacity",
-      "pageId": null,
-      "title": "介護老人福祉施設定員数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020210",
-          "filters": {
-            "cdCat01": "J230128"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020210",
-          "cdCat01": "J230128"
-        },
-        "derived": false,
-        "configHash": "cf5169ae5f845151"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:special-nursing-home-capacity",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:childcare-services",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:disability-support",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:long-term-care",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:special-nursing-home-capacity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "special-nursing-home-count",
-      "pageId": null,
-      "title": "介護老人福祉施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020210",
-          "filters": {
-            "cdCat01": "J230127"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020210",
-          "cdCat01": "J230127"
-        },
-        "derived": false,
-        "configHash": "80e2efc171dccdce"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:special-nursing-home-count",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:childcare-services",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:disability-support",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:long-term-care",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:special-nursing-home-count",
           "kind": "ranking"
         }
       ],

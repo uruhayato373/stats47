@@ -2,6 +2,421 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "oils-fats-group-consumption-expenditure",
+      "pageId": "ranking:oils-fats-group-consumption-expenditure",
+      "title": "油脂消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010710000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010710000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "e3c816f3e75286a4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:oils-fats-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "oils-fats-group-consumption-quantity",
+      "pageId": "ranking:oils-fats-group-consumption-quantity",
+      "title": "油脂消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010710000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010710000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "dc681df621c786f1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:oils-fats-group-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "oils-seasonings-group-consumption-expenditure",
+      "pageId": "ranking:oils-seasonings-group-consumption-expenditure",
+      "title": "油脂・調味料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010700000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010700000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b9c6bf40fdaa5b5b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:oils-seasonings-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "old-population-index",
+      "pageId": "ranking:old-population-index",
+      "title": "老年人口指数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010201",
+          "filters": {
+            "cdCat01": "#A03402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010201",
+          "cdCat01": "#A03402"
+        },
+        "derived": false,
+        "configHash": "e987909a336a1945"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:vacant-housing-aging-correlation",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:old-population-index",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "onigiri-consumption-expenditure",
+      "pageId": "ranking:onigiri-consumption-expenditure",
+      "title": "おにぎり・その他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010910030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010910030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "880fa36a396d9839"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:onigiri-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "onion-consumption-expenditure",
+      "pageId": "ranking:onion-consumption-expenditure",
+      "title": "たまねぎ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010512070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010512070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2b493fa018d45ccb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:onion-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "onion-consumption-quantity",
       "pageId": "ranking:onion-consumption-quantity",
       "title": "たまねぎ消費量",
@@ -2767,6 +3182,50 @@
       "themes": []
     },
     {
+      "metricKey": "other-consumption-budget-share-kakei",
+      "pageId": null,
+      "title": "消費支出に占めるその他の消費支出の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002070003",
+          "filters": {
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002070003",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city",
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "165"
+            ],
+            "denominatorCodes": [
+              "059"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "69899ecf7d18ce82"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:other-consumption-budget-share-kakei",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "other-consumption-expenditure-ratio-multi-person-households",
       "pageId": "ranking:other-consumption-expenditure-ratio-multi-person-households",
       "title": "その他の消費支出割合",
@@ -5334,265 +5793,6 @@
         },
         {
           "pageId": "ranking:other-processed-meat-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-processed-seafood-group-consumption-expenditure",
-      "pageId": "ranking:other-processed-seafood-group-consumption-expenditure",
-      "title": "他の魚介加工品消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010240000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010240000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "4584b4a136857c4a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-processed-seafood-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-processed-vegetables-group-consumption-expenditure",
-      "pageId": "ranking:other-processed-vegetables-group-consumption-expenditure",
-      "title": "他の野菜・海藻加工品消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010540000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010540000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "bec9566e7dbfc8b9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-processed-vegetables-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-publications-consumption-expenditure",
-      "pageId": "ranking:other-publications-consumption-expenditure",
-      "title": "他の印刷物消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "090300040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "090300040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b874a78874857d13"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-publications-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-recreational-goods-group-consumption-expenditure",
-      "pageId": "ranking:other-recreational-goods-group-consumption-expenditure",
-      "title": "他の教養娯楽用品消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "090204000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "090204000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b45214f961242a1a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-recreational-goods-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-recreational-services-group-consumption-expenditure",
-      "pageId": "ranking:other-recreational-services-group-consumption-expenditure",
-      "title": "他の教養娯楽サービス消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "090440000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "090440000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "da71dbd7bfb8cad0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-recreational-services-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-remittance-consumption-expenditure",
-      "pageId": "ranking:other-remittance-consumption-expenditure",
-      "title": "他の仕送り金消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "100400020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "100400020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "a2ff5e07b868bc10"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-remittance-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-rent-land-consumption-expenditure",
-      "pageId": "ranking:other-rent-land-consumption-expenditure",
-      "title": "他の家賃地代消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "020100050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "020100050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "20679108319c11e3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-rent-land-consumption-expenditure",
           "kind": "ranking"
         }
       ],

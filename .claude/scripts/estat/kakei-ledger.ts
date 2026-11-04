@@ -46,7 +46,7 @@ function loadMetrics(): KakeiMetricInput[] {
 }
 
 /** 分析単位 (全国ページの図など)。指標と同じく表の使い手として数える */
-function loadAnalyses(): { id: string; statsDataId: string; state: "configured" | "staged" | "proposed" }[] {
+function loadAnalyses(): { id: string; statsDataId: string; state: "configured" | "published" | "staged" | "proposed" }[] {
   return KAKEI_ANALYSES.map((a) => ({ id: a.id, statsDataId: a.source.statsDataId, state: a.placement.state }));
 }
 

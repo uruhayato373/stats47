@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-04T08:27:20.833Z",
+ "generatedAt": "2026-11-04T22:23:21.647Z",
  "source": {
   "statCode": "00200561",
-  "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
+  "catalogGeneratedAt": "2026-11-03T00:59:30.102Z",
   "itemTables": {
    "amount": "0004023605",
    "quantity": "0004023606"
@@ -178,9 +178,11 @@
     }
    ],
    "metrics": [],
-   "analyses": [],
+   "analyses": [
+    "budget-share-city"
+   ],
    "status": "planned",
-   "reason": "都市ごとの十大費目の構成比 (家計の配分の切り口)。県庁所在市の年次・用途分類で、品目分類の合計では作れない費目の割合を出す"
+   "reason": null
   },
   {
    "statsDataId": "0002070004",
@@ -910,9 +912,12 @@
     }
    ],
    "metrics": [],
-   "analyses": [],
+   "analyses": [
+    "consumption-housing-tenure",
+    "housing-cost-housing-tenure"
+   ],
    "status": "planned",
-   "reason": "持家と借家で家計の支出がどう違うか (世帯の属性の切り口)。全国の集計なのでランキングにはしない"
+   "reason": null
   },
   {
    "statsDataId": "0002070018",
@@ -1353,9 +1358,11 @@
     }
    ],
    "metrics": [],
-   "analyses": [],
+   "analyses": [
+    "food-single-age-sex"
+   ],
    "status": "planned",
-   "reason": "総世帯・単身世帯の年齢・性別の支出 (世帯の属性の切り口)。二人以上世帯の表と対象が違うので混ぜずに別の図にする"
+   "reason": null
   },
   {
    "statsDataId": "0002190005",
@@ -5730,9 +5737,11 @@
     }
    ],
    "metrics": [],
-   "analyses": [],
+   "analyses": [
+    "beer-monthly-spending"
+   ],
    "status": "planned",
-   "reason": "品目の月次の支出額 (季節の切り口)。ブログの接地器 fetch-kakei-monthly.mjs が使う。年の途中の月を年計として扱わない"
+   "reason": null
   },
   {
    "statsDataId": "0004023602",
@@ -5777,9 +5786,11 @@
     }
    ],
    "metrics": [],
-   "analyses": [],
+   "analyses": [
+    "beer-monthly-quantity"
+   ],
    "status": "planned",
-   "reason": "品目の月次の購入数量 (季節の切り口)。数量の月次は全国のみ"
+   "reason": null
   },
   {
    "statsDataId": "0004023603",
@@ -7022,9 +7033,11 @@
     }
    ],
    "metrics": [],
-   "analyses": [],
+   "analyses": [
+    "item-quantity-age"
+   ],
    "status": "planned",
-   "reason": "世帯主の年齢と購入数量 (世帯の属性の切り口)。金額の分析単位 (0004023609) と対で、量の年齢差を出す"
+   "reason": null
   },
   {
    "statsDataId": "0004023611",

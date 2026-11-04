@@ -3,7 +3,8 @@
  * ここには「どの表のどの軸 (都市・年・年収階級など) を、どのページで答えるか」だけを置く。
  * 切り口 (数量と単価に分ける・年収階級で比べる など) そのものは調査の切り口台帳
  * data/surveys/lenses/kakei-chousa.json が正本で、各行は lensId でそこを参照する。
- * staged は値と図をローカル生成済み、proposed は候補。どちらも公開済みを意味しない。
+ * published は全国のページの図として公開済み、staged は値と図をローカル生成済み (未公開)、proposed は候補。
+ * proposed の行を published へ進めるのは、e-Stat の実値 (表・分類コード・単位・年・行数) を確かめた後に限る。
  */
 export interface KakeiAnalysis {
   id: string;
@@ -12,7 +13,7 @@ export interface KakeiAnalysis {
   question: string;
   source: {
     statsDataId: string;
-    frequency: 'annual';
+    frequency: 'annual' | 'monthly';
     household: 'two-plus' | 'all' | 'single';
     geography: 'capital-cities' | 'national';
     axis:
@@ -24,7 +25,8 @@ export interface KakeiAnalysis {
       | 'age'
       | 'household-size'
       | 'household-type'
-      | 'housing-tenure';
+      | 'housing-tenure'
+      | 'month';
     year: 2025;
     /** 実際の metric config と対応する場合だけ固定する。 */
     filters?: Readonly<Record<string, string>>;
@@ -33,7 +35,7 @@ export interface KakeiAnalysis {
   placement: {
     pageId: string;
     form: 'ranking' | 'line-chart' | 'bar-chart' | 'article';
-    state: 'configured' | 'staged' | 'proposed';
+    state: 'configured' | 'published' | 'staged' | 'proposed';
     metricKey?: string;
   };
 }
@@ -161,7 +163,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'line-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -181,7 +183,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'line-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -200,7 +202,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -219,7 +221,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -238,7 +240,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -257,7 +259,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -276,7 +278,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -296,7 +298,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -316,7 +318,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -354,7 +356,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-assets-debt',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
     },
   },
   {
@@ -373,7 +375,147 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     placement: {
       pageId: 'japan-theme:household-assets-debt',
       form: 'bar-chart',
-      state: 'staged',
+      state: 'published',
+    },
+  },
+  {
+    id: 'budget-share-city',
+    lensId: 'kakei-budget-structure',
+    question: '消費支出に占める費目の割合は都市でどう違うか',
+    source: {
+      statsDataId: '0002070003',
+      frequency: 'annual',
+      household: 'two-plus',
+      geography: 'capital-cities',
+      axis: 'city',
+      year: 2025,
+      filters: { cdCat02: '03' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
+    },
+  },
+  {
+    id: 'consumption-housing-tenure',
+    lensId: 'kakei-household-attributes',
+    question: '消費支出は持家と借家でどう違うか',
+    source: {
+      statsDataId: '0002070017',
+      frequency: 'annual',
+      household: 'two-plus',
+      geography: 'national',
+      axis: 'housing-tenure',
+      year: 2025,
+      filters: { cdCat01: '059', cdCat02: '03' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
+    },
+  },
+  {
+    id: 'housing-cost-housing-tenure',
+    lensId: 'kakei-household-attributes',
+    question: '住居への支出は持家と借家でどう違うか',
+    source: {
+      statsDataId: '0002070017',
+      frequency: 'annual',
+      household: 'two-plus',
+      geography: 'national',
+      axis: 'housing-tenure',
+      year: 2025,
+      filters: { cdCat01: '102', cdCat02: '03' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
+    },
+  },
+  {
+    id: 'food-single-age-sex',
+    lensId: 'kakei-household-attributes',
+    question: '単身世帯の食費は年齢と性別でどう違うか',
+    source: {
+      statsDataId: '0002190004',
+      frequency: 'annual',
+      household: 'single',
+      geography: 'national',
+      axis: 'age',
+      year: 2025,
+      filters: { cdCat01: '060', cdCat02: '21' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
+    },
+  },
+  {
+    id: 'item-quantity-age',
+    lensId: 'kakei-household-attributes',
+    question: '同じ品目の購入量は世帯主年齢でどう違うか',
+    source: {
+      statsDataId: '0004023610',
+      frequency: 'annual',
+      household: 'two-plus',
+      geography: 'national',
+      axis: 'age',
+      year: 2025,
+      filters: { cdCat01: '010110001', cdCat02: '03' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
+    },
+  },
+  {
+    id: 'beer-monthly-spending',
+    lensId: 'kakei-seasonality',
+    question: 'ビールへの支出は月でどう変わるか',
+    source: {
+      statsDataId: '0004023601',
+      frequency: 'monthly',
+      household: 'two-plus',
+      geography: 'national',
+      axis: 'month',
+      year: 2025,
+      filters: { cdCat01: '011100030', cdCat02: '03' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
+    },
+  },
+  {
+    id: 'beer-monthly-quantity',
+    lensId: 'kakei-seasonality',
+    question: 'ビールの購入量は月でどう変わるか',
+    source: {
+      statsDataId: '0004023602',
+      frequency: 'monthly',
+      household: 'two-plus',
+      geography: 'national',
+      axis: 'month',
+      year: 2025,
+      filters: { cdCat01: '011100030', cdCat02: '03' },
+    },
+    evidence: 'metadata-checked',
+    placement: {
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'proposed',
     },
   },
 ] as const;
@@ -428,11 +570,11 @@ export function validateKakeiAnalyses(
       errors.push(
         `${analysis.id}: destination page is not published: ${placement.pageId}`
       );
-    if (placement.state === 'proposed' || placement.state === 'staged') {
+    if (placement.state !== 'configured') {
       if (placement.metricKey)
-        errors.push(`${analysis.id}: unpublished output cannot claim a metric`);
-      if (placement.state === 'staged' && (analysis.evidence !== 'value-checked' || placement.form === 'article'))
-        errors.push(`${analysis.id}: staged output needs checked values and a chart`);
+        errors.push(`${analysis.id}: non-ranking output cannot claim a metric`);
+      if (placement.state !== 'proposed' && (analysis.evidence !== 'value-checked' || placement.form === 'article'))
+        errors.push(`${analysis.id}: ${placement.state} output needs checked values and a chart`);
       continue;
     }
     if (analysis.evidence !== 'value-checked')

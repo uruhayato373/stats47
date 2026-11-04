@@ -2,6 +2,507 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "volunteer-activity-annual-participation-rate-15plus",
+      "pageId": "ranking:volunteer-activity-annual-participation-rate-15plus",
+      "title": "ボランティア活動の年間行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G04101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G04101"
+        },
+        "derived": false,
+        "configHash": "e1fa28d14a59d6ae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:volunteer-activity-annual-participation-rate-15plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "volunteer-activity-international-cooperation-15plus",
+      "pageId": null,
+      "title": "国際協力に関係したボランティア活動行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6450"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6450"
+        },
+        "derived": false,
+        "configHash": "6679686403e1b3bf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:international-cooperation-volunteer-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:volunteer-activity-international-cooperation-15plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "voter-list-registrants",
+      "pageId": "ranking:voter-list-registrants",
+      "title": "選挙人名簿登録者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D1212"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D1212"
+        },
+        "derived": false,
+        "configHash": "0b72850b389ff2e0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:voter-list-registrants",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "voter-turnout-city-assembly",
+      "pageId": "ranking:voter-turnout-city-assembly",
+      "title": "市区町村議会議員選挙投票率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6307"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6307"
+        },
+        "derived": false,
+        "configHash": "fc79606391979fc8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:voter-turnout-city-assembly",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "voter-turnout-council-district",
+      "pageId": "ranking:voter-turnout-council-district",
+      "title": "参議院議員選挙投票率（選挙区）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6304"
+        },
+        "derived": false,
+        "configHash": "4d14cd14a4d4bd87"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:voter-turnout-council-district",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "voter-turnout-council-proportional",
+      "pageId": "ranking:voter-turnout-council-proportional",
+      "title": "参議院議員選挙投票率（比例代表）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6303"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6303"
+        },
+        "derived": false,
+        "configHash": "9c9c02efa0befe9c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:voter-turnout-council-proportional",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "voter-turnout-governor",
+      "pageId": "ranking:voter-turnout-governor",
+      "title": "都道府県知事選挙投票率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6306"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6306"
+        },
+        "derived": false,
+        "configHash": "8e3173fe5aa6975d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:community-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:governor-election-turnout-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:community-participation",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:voter-turnout-governor",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:community-participation",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "community-participation"
+      ]
+    },
+    {
+      "metricKey": "voter-turnout-house-proportional",
+      "pageId": "ranking:voter-turnout-house-proportional",
+      "title": "衆議院議員選挙投票率（比例代表）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6302"
+        },
+        "derived": false,
+        "configHash": "bbdfb59a43854dd1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:voter-turnout-house-proportional",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "voter-turnout-house-single",
+      "pageId": "ranking:voter-turnout-house-single",
+      "title": "衆議院議員選挙投票率（小選挙区）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G6301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G6301"
+        },
+        "derived": false,
+        "configHash": "05a898b54cfe58f6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:voter-turnout-house-single-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:voter-turnout-house-single",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "voter-turnout-mayor",
       "pageId": "ranking:voter-turnout-mayor",
       "title": "市区町村長選挙投票率",
@@ -7161,394 +7662,6 @@
         },
         {
           "pageId": "ranking:workers-by-place-of-work",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-compensation-insurance-benefits-rate",
-      "pageId": "ranking:workers-compensation-insurance-benefits-rate",
-      "title": "労働者災害補償保険給付率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F08101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F08101"
-        },
-        "derived": false,
-        "configHash": "178d53152e035402"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:workplace-accident-regional-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:workers-compensation-insurance-benefits-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-other-municipality-same-prefecture",
-      "pageId": null,
-      "title": "県内他市区町村で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F2702"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F2702"
-        },
-        "derived": false,
-        "configHash": "71d1de380fa0232b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-other-municipality-same-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-other-municipality-same-prefecture-female",
-      "pageId": null,
-      "title": "県内他市区町村で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270202"
-        },
-        "derived": false,
-        "configHash": "3538d2fe1036c111"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-other-municipality-same-prefecture-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-other-municipality-same-prefecture-male",
-      "pageId": null,
-      "title": "県内他市区町村で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270201"
-        },
-        "derived": false,
-        "configHash": "42eea149cc3b518e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-other-municipality-same-prefecture-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-other-municipality-same-prefecture-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-other-prefecture",
-      "pageId": null,
-      "title": "他県で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F2703"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F2703"
-        },
-        "derived": false,
-        "configHash": "3e38f1415a9efb0e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-other-prefecture",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-other-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-other-prefecture-female",
-      "pageId": null,
-      "title": "他県で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270302"
-        },
-        "derived": false,
-        "configHash": "c024ca2f235f9bcc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-other-prefecture-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-other-prefecture-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-other-prefecture-male",
-      "pageId": null,
-      "title": "他県で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270301"
-        },
-        "derived": false,
-        "configHash": "77c89e78813c79ab"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-other-prefecture-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-other-prefecture-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-own-municipality",
-      "pageId": null,
-      "title": "自市区町村で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F2701"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F2701"
-        },
-        "derived": false,
-        "configHash": "ebcec9ef272a6824"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-own-municipality",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-own-municipality",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "workers-in-own-municipality-female",
-      "pageId": null,
-      "title": "自市区町村で従業している就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270102"
-        },
-        "derived": false,
-        "configHash": "56f5a77165948b36"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:workers-in-own-municipality-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:workers-in-own-municipality-female",
           "kind": "ranking"
         }
       ],

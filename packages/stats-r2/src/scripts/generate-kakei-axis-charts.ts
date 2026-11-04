@@ -14,6 +14,15 @@ const QUINTILES = ["01", "02", "03", "04", "05"];
 const HOUSEHOLD_SIZES = ["01", "02", "03", "04", "05"];
 const AGE_GROUPS = ["430", "303", "304", "305", "306", "570"];
 const INCOME_CLASSES = Array.from({ length: 18 }, (_, i) => String(i + 1).padStart(3, "0"));
+/** 持家・民営借家・公営借家・給与住宅。住宅ローン返済世帯 (02) は持家の内数なので並べない */
+const HOUSING_TENURES = ["01", "03", "04", "05"];
+/** 34歳以下・35〜59歳・60歳以上。65歳以上 (565) は 60歳以上の内数なので並べない */
+const SINGLE_AGE_GROUPS = ["435", "615", "560"];
+/** 2025年の12か月。e-Stat の月次の時間コードは年4桁 + "00" + 月2桁 + 月2桁 */
+const MONTHS_2025 = Array.from({ length: 12 }, (_, i) => {
+  const month = String(i + 1).padStart(2, "0");
+  return `202500${month}${month}`;
+});
 
 interface ChartSpec {
   id: string;
@@ -25,6 +34,12 @@ interface ChartSpec {
   filters: Record<string, string>;
   expectedUnit: string;
   period: KakeiAxisChart["period"];
+  /** 分析単位の id。図の id と違うときだけ書く */
+  analysisId?: string;
+  /** 比べる軸。既定は cat03。time は月次の表で使う */
+  axisDim?: "cat03" | "time";
+  /** 世帯の表記。既定は二人以上世帯 */
+  household?: string;
 }
 
 const SPECS: ChartSpec[] = [
@@ -37,6 +52,13 @@ const SPECS: ChartSpec[] = [
   { id: "debt-income-quintile", themeSlug: "household-assets-debt", title: "負債と年収五分位", description: "二人以上世帯・全国・全世帯。負債を持たない世帯を含む1世帯当たり負債残高です。", axis: "年間収入五分位", axisCodes: QUINTILES, filters: { cdCat01: "028", cdCat02: "03", cdCat04: "01" }, expectedUnit: "万円", period: "balance" },
   { id: "savings-income-18-class", themeSlug: "household-assets-debt", title: "貯蓄と年間収入18階級", description: "二人以上世帯・全国。年間収入階級ごとの1世帯当たり貯蓄残高です。", axis: "年間収入階級", axisCodes: INCOME_CLASSES, filters: { cdCat01: "012", cdCat02: "03" }, expectedUnit: "万円", period: "balance" },
   { id: "debt-income-18-class", themeSlug: "household-assets-debt", title: "負債と年間収入18階級", description: "二人以上世帯・全国。年間収入階級ごとの1世帯当たり負債残高です。", axis: "年間収入階級", axisCodes: INCOME_CLASSES, filters: { cdCat01: "028", cdCat02: "03" }, expectedUnit: "万円", period: "balance" },
+  { id: "consumption-housing-tenure", themeSlug: "household-food-spending", title: "消費支出と住居の所有関係（1か月平均）", description: "二人以上世帯・全国。世帯全体の1か月平均の消費支出です。世帯主の年齢や世帯人数の差を調整した値ではありません。", axis: "住居の所有関係", axisCodes: HOUSING_TENURES, filters: { cdCat01: "059", cdCat02: "03" }, expectedUnit: "円", period: "monthly-average" },
+  { id: "housing-cost-housing-tenure", themeSlug: "household-food-spending", title: "住居への支出と住居の所有関係（1か月平均）", description: "二人以上世帯・全国。家賃・地代と設備修繕・維持の1か月平均です。持家の住宅ローンの返済は消費支出に入りません。", axis: "住居の所有関係", axisCodes: HOUSING_TENURES, filters: { cdCat01: "102", cdCat02: "03" }, expectedUnit: "円", period: "monthly-average" },
+  { id: "food-single-age-male", analysisId: "food-single-age-sex", themeSlug: "household-food-spending", title: "単身世帯の食費と年齢（男性・1か月平均）", description: "単身世帯・全国・男性。1か月平均の食費です。二人以上世帯の図とは対象が違うので並べて比べません。", axis: "年齢階級", axisCodes: SINGLE_AGE_GROUPS, filters: { cdCat01: "060", cdCat02: "21", cdCat04: "1" }, expectedUnit: "円", period: "monthly-average", household: "単身世帯" },
+  { id: "food-single-age-female", analysisId: "food-single-age-sex", themeSlug: "household-food-spending", title: "単身世帯の食費と年齢（女性・1か月平均）", description: "単身世帯・全国・女性。1か月平均の食費です。二人以上世帯の図とは対象が違うので並べて比べません。", axis: "年齢階級", axisCodes: SINGLE_AGE_GROUPS, filters: { cdCat01: "060", cdCat02: "21", cdCat04: "2" }, expectedUnit: "円", period: "monthly-average", household: "単身世帯" },
+  { id: "item-quantity-age", themeSlug: "household-food-spending", title: "米の購入量と世帯主年齢", description: "二人以上世帯・全国。重複しない年齢階級のみを比較します。世帯主の年齢であり、購入者の年齢ではありません。", axis: "世帯主の年齢階級", axisCodes: AGE_GROUPS, filters: { cdCat01: "010110001", cdCat02: "03" }, expectedUnit: "kg", period: "annual-total" },
+  { id: "beer-monthly-spending", themeSlug: "household-food-spending", title: "ビールへの支出と月（2025年）", description: "二人以上世帯・全国。1世帯当たりの月ごとの支出額です。月は1年分がそろった2025年だけを示します。", axis: "月", axisCodes: MONTHS_2025, axisDim: "time", filters: { cdCat01: "011100030", cdCat02: "03" }, expectedUnit: "円", period: "month-total" },
+  { id: "beer-monthly-quantity", themeSlug: "household-food-spending", title: "ビールの購入量と月（2025年）", description: "二人以上世帯・全国。1世帯当たりの月ごとの購入量です。支出額とは単位が異なります。", axis: "月", axisCodes: MONTHS_2025, axisDim: "time", filters: { cdCat01: "011100030", cdCat02: "03" }, expectedUnit: "l", period: "month-total" },
 ];
 
 export function selectKakeiAxisRows(
@@ -48,12 +70,14 @@ export function selectKakeiAxisRows(
   const values = data?.DATA_INF?.VALUE;
   const classes = data?.CLASS_INF?.CLASS_OBJ;
   if (!Array.isArray(values) || !Array.isArray(classes)) throw new Error(`${spec.id}: e-Stat response is incomplete`);
-  const cat03 = classes.find((entry: { "@id"?: string }) => entry["@id"] === "cat03") as { CLASS?: unknown } | undefined;
-  const classRows = Array.isArray(cat03?.CLASS) ? cat03.CLASS : [];
+  const axisDim = spec.axisDim ?? "cat03";
+  const axisClass = classes.find((entry: { "@id"?: string }) => entry["@id"] === axisDim) as { CLASS?: unknown } | undefined;
+  const classRows = Array.isArray(axisClass?.CLASS) ? axisClass.CLASS : [];
   const labels = new Map(classRows.map((row: { "@code": string; "@name": string }) => [row["@code"], row["@name"]]));
   return spec.axisCodes.map(code => {
     const matches = values.filter((row: Record<string, string>) =>
-      row["@area"] === "00000" && row["@time"] === "2025000000" && row["@cat03"] === code &&
+      row["@area"] === "00000" && row[`@${axisDim}`] === code &&
+      (axisDim === "time" || row["@time"] === "2025000000") &&
       Object.entries(spec.filters).every(([key, val]) => row[`@${key.slice(2).toLowerCase()}`] === val));
     if (matches.length !== 1) throw new Error(`${spec.id}: ${code} has ${matches.length} matching 2025 rows`);
     const row = matches[0] as Record<string, string>;
@@ -101,7 +125,7 @@ async function householdComparison(): Promise<KakeiAxisChart> {
 export async function generateKakeiAxisCharts(write = false) {
   const charts: KakeiAxisChart[] = [];
   for (const spec of SPECS) {
-    const analysis = KAKEI_ANALYSES.find(item => item.id === spec.id ||
+    const analysis = KAKEI_ANALYSES.find(item => item.id === (spec.analysisId ?? spec.id) ||
       (spec.id === "debt-income-quintile" && item.id === "savings-income-quintile") ||
       (spec.id === "debt-income-18-class" && item.id === "savings-income-18-class"));
     if (!analysis || analysis.source.geography !== "national") throw new Error(`${spec.id}: analysis catalog mismatch`);
@@ -109,8 +133,8 @@ export async function generateKakeiAxisCharts(write = false) {
     const raw = await fetchEstatRaw(sourceId, spec.filters);
     const rows = selectKakeiAxisRows(raw, spec);
     charts.push({ id: spec.id, themeSlug: spec.themeSlug, title: spec.title, description: spec.description,
-      sourceId, household: "二人以上世帯", axis: spec.axis, period: spec.period, unit: spec.expectedUnit,
-      filters: { ...spec.filters, cdTime: "2025000000", cdArea: "00000" }, rows });
+      sourceId, household: spec.household ?? "二人以上世帯", axis: spec.axis, period: spec.period, unit: spec.expectedUnit,
+      filters: { ...spec.filters, ...(spec.axisDim === "time" ? {} : { cdTime: "2025000000" }), cdArea: "00000" }, rows });
     console.log(`${spec.id}: ${rows.length} rows, ${sourceId}`);
   }
   charts.push(await householdComparison());

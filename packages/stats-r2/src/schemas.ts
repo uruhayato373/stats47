@@ -36,7 +36,7 @@ export function parseKakeiAxisArtifact(value: unknown): KakeiAxisArtifact {
       return { code: assertString(row.code, "code"), label: assertString(row.label, "label"), value: row.value };
     });
     if (rows.length === 0) throw new Error(`empty kakei chart: ${id}`);
-    if (chart.period !== "monthly-average" && chart.period !== "annual-total" && chart.period !== "balance") throw new Error(`invalid kakei period: ${id}`);
+    if (chart.period !== "monthly-average" && chart.period !== "annual-total" && chart.period !== "balance" && chart.period !== "month-total") throw new Error(`invalid kakei period: ${id}`);
     const filters = Object.fromEntries(Object.entries(chart.filters).map(([key, filter]) => [key, assertString(filter, `filter.${key}`)]));
     const sourceIds = chart.sourceIds === undefined ? undefined :
       Array.isArray(chart.sourceIds) && chart.sourceIds.length > 0

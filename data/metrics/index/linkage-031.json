@@ -2,6 +2,553 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "treatment-rate-hypertension-outpatient",
+      "pageId": "ranking:treatment-rate-hypertension-outpatient",
+      "title": "高血圧性疾患の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "25",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "25",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "05cdc9547fd48067"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:treatment-rate-hypertension-outpatient-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:treatment-rate-hypertension-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-mental-disorder-inpatient",
+      "pageId": "ranking:treatment-rate-mental-disorder-inpatient",
+      "title": "精神及び行動の障害の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "16",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "16",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "4531f35b7c6fd814"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:treatment-rate-mental-disorder-inpatient-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:treatment-rate-mental-disorder-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-mental-disorder-outpatient",
+      "pageId": "ranking:treatment-rate-mental-disorder-outpatient",
+      "title": "精神及び行動の障害の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "16",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "16",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "bfecf81630880511"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-mental-disorder-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-mood-disorder-inpatient",
+      "pageId": "ranking:treatment-rate-mood-disorder-inpatient",
+      "title": "気分障害（うつ病を含む）の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "18",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "18",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "2a885c3188ad765a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-mood-disorder-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-mood-disorder-outpatient",
+      "pageId": "ranking:treatment-rate-mood-disorder-outpatient",
+      "title": "気分障害（うつ病を含む）の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "18",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "18",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "370d77f4e81d5e4f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:treatment-rate-mood-disorder-outpatient-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:treatment-rate-mood-disorder-outpatient",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "healthcare"
+      ]
+    },
+    {
+      "metricKey": "treatment-rate-musculoskeletal-inpatient",
+      "pageId": "ranking:treatment-rate-musculoskeletal-inpatient",
+      "title": "筋骨格系及び結合組織の疾患の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "42",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "42",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "91cbbbaccd1a683f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-musculoskeletal-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-musculoskeletal-outpatient",
+      "pageId": "ranking:treatment-rate-musculoskeletal-outpatient",
+      "title": "筋骨格系及び結合組織の疾患の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "42",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "42",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "6c37622946e1eb06"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-musculoskeletal-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-neurosis-inpatient",
+      "pageId": "ranking:treatment-rate-neurosis-inpatient",
+      "title": "神経症性障害・ストレス関連障害の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "19",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "19",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "d680f76ced920627"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-neurosis-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "treatment-rate-neurosis-outpatient",
       "pageId": "ranking:treatment-rate-neurosis-outpatient",
       "title": "神経症性障害・ストレス関連障害の受療率（外来）",
@@ -5953,6 +6500,50 @@
       "themes": []
     },
     {
+      "metricKey": "utilities-budget-share-kakei",
+      "pageId": null,
+      "title": "消費支出に占める光熱・水道の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002070003",
+          "filters": {
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002070003",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city",
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "107"
+            ],
+            "denominatorCodes": [
+              "059"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "02a36547178f473e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:utilities-budget-share-kakei",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "utilities-expenditure-ratio-multi-person-households",
       "pageId": "ranking:utilities-expenditure-ratio-multi-person-households",
       "title": "光熱・水道費割合",
@@ -9701,507 +10292,6 @@
       "themes": [
         "community-participation"
       ]
-    },
-    {
-      "metricKey": "volunteer-activity-annual-participation-rate-15plus",
-      "pageId": "ranking:volunteer-activity-annual-participation-rate-15plus",
-      "title": "ボランティア活動の年間行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010207",
-          "filters": {
-            "cdCat01": "#G04101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010207",
-          "cdCat01": "#G04101"
-        },
-        "derived": false,
-        "configHash": "e1fa28d14a59d6ae"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:volunteer-activity-annual-participation-rate-15plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "volunteer-activity-international-cooperation-15plus",
-      "pageId": null,
-      "title": "国際協力に関係したボランティア活動行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6450"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6450"
-        },
-        "derived": false,
-        "configHash": "6679686403e1b3bf"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:international-cooperation-volunteer-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:volunteer-activity-international-cooperation-15plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voter-list-registrants",
-      "pageId": "ranking:voter-list-registrants",
-      "title": "選挙人名簿登録者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D1212"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D1212"
-        },
-        "derived": false,
-        "configHash": "0b72850b389ff2e0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:voter-list-registrants",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voter-turnout-city-assembly",
-      "pageId": "ranking:voter-turnout-city-assembly",
-      "title": "市区町村議会議員選挙投票率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6307"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6307"
-        },
-        "derived": false,
-        "configHash": "fc79606391979fc8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:voter-turnout-city-assembly",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voter-turnout-council-district",
-      "pageId": "ranking:voter-turnout-council-district",
-      "title": "参議院議員選挙投票率（選挙区）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6304"
-        },
-        "derived": false,
-        "configHash": "4d14cd14a4d4bd87"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:voter-turnout-council-district",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voter-turnout-council-proportional",
-      "pageId": "ranking:voter-turnout-council-proportional",
-      "title": "参議院議員選挙投票率（比例代表）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6303"
-        },
-        "derived": false,
-        "configHash": "9c9c02efa0befe9c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:voter-turnout-council-proportional",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voter-turnout-governor",
-      "pageId": "ranking:voter-turnout-governor",
-      "title": "都道府県知事選挙投票率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6306"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6306"
-        },
-        "derived": false,
-        "configHash": "8e3173fe5aa6975d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:governor-election-turnout-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:community-participation",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:voter-turnout-governor",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:community-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "community-participation"
-      ]
-    },
-    {
-      "metricKey": "voter-turnout-house-proportional",
-      "pageId": "ranking:voter-turnout-house-proportional",
-      "title": "衆議院議員選挙投票率（比例代表）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6302"
-        },
-        "derived": false,
-        "configHash": "bbdfb59a43854dd1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:voter-turnout-house-proportional",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voter-turnout-house-single",
-      "pageId": "ranking:voter-turnout-house-single",
-      "title": "衆議院議員選挙投票率（小選挙区）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G6301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G6301"
-        },
-        "derived": false,
-        "configHash": "05a898b54cfe58f6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:voter-turnout-house-single-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:voter-turnout-house-single",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

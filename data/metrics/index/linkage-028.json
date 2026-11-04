@@ -2,6 +2,513 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "soy-products-group-consumption-expenditure",
+      "pageId": "ranking:soy-products-group-consumption-expenditure",
+      "title": "大豆加工品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010530000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010530000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "e609c63b9c3fa438"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:soy-products-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "soy-sauce-consumption-expenditure",
+      "pageId": "ranking:soy-sauce-consumption-expenditure",
+      "title": "しょう油消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010720020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010720020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "bf9301f827918d33"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:furikake-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:soy-sauce-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:soy-sauce-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "soy-sauce-consumption-quantity",
+      "pageId": "ranking:soy-sauce-consumption-quantity",
+      "title": "しょう油消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010720020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010720020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a4c5be891c9aa7be"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miso-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:soy-sauce-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "special-law-criminal-arrest-count",
+      "pageId": "ranking:special-law-criminal-arrest-count",
+      "title": "特別法犯検挙件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K4301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K4301"
+        },
+        "derived": false,
+        "configHash": "37b21a1cdba9958f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:special-law-criminal-arrest-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "special-law-criminal-arrest-count-per-population",
+      "pageId": "ranking:special-law-criminal-arrest-count-per-population",
+      "title": "特別法犯検挙件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K06501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06501"
+        },
+        "derived": false,
+        "configHash": "77b14b5c5496935f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:special-law-criminal-arrest-count-per-population",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "special-nursing-home-capacity",
+      "pageId": null,
+      "title": "介護老人福祉施設定員数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020210",
+          "filters": {
+            "cdCat01": "J230128"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020210",
+          "cdCat01": "J230128"
+        },
+        "derived": false,
+        "configHash": "cf5169ae5f845151"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:special-nursing-home-capacity",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:special-nursing-home-capacity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "special-nursing-home-count",
+      "pageId": null,
+      "title": "介護老人福祉施設数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020210",
+          "filters": {
+            "cdCat01": "J230127"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020210",
+          "cdCat01": "J230127"
+        },
+        "derived": false,
+        "configHash": "80e2efc171dccdce"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:special-nursing-home-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:special-nursing-home-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "special-support-school-expenses-prefecture",
       "pageId": "ranking:special-support-school-expenses-prefecture",
       "title": "特別支援学校費",
@@ -8230,1055 +8737,6 @@
       "themes": [
         "healthcare"
       ]
-    },
-    {
-      "metricKey": "suicide-count-65plus",
-      "pageId": "ranking:suicide-count-65plus",
-      "title": "65歳以上の自殺者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010109",
-          "filters": {
-            "cdCat01": "I9109"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010109",
-          "cdCat01": "I9109"
-        },
-        "derived": false,
-        "configHash": "1fec024a95aba775"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:suicide-rate-aging-nexus",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:suicide-count-65plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "suicide-rate-per-100k",
-      "pageId": "ranking:suicide-rate-per-100k",
-      "title": "自殺率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010109",
-          "filters": {
-            "cdCat01": "I910803"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010109",
-          "cdCat01": "I910803"
-        },
-        "derived": false,
-        "configHash": "db0284685cc42b53"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "ranking:suicide-rate-per-100k",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:safety",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "safety"
-      ]
-    },
-    {
-      "metricKey": "suicides-per-100k",
-      "pageId": "ranking:suicides-per-100k",
-      "title": "自殺者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I06201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I06201"
-        },
-        "derived": false,
-        "configHash": "321ab6e07456a2db"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:suicide-rate-aging-nexus",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:suicides-per-100k",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:safety",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "safety"
-      ]
-    },
-    {
-      "metricKey": "supplement-consumption-expenditure",
-      "pageId": "ranking:supplement-consumption-expenditure",
-      "title": "栄養剤消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "060100030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "060100030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "2a9b1d925537d66d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "japan-theme:household-health-spending",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:supplement-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "supplementary-education-group-consumption-expenditure",
-      "pageId": "ranking:supplementary-education-group-consumption-expenditure",
-      "title": "補習教育消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "080300000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "080300000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "f5c24eed04882c0e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:supplementary-education-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sushi-dining-consumption-expenditure",
-      "pageId": "ranking:sushi-dining-consumption-expenditure",
-      "title": "すし(外食)消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "011211040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "011211040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "c8c0043cc5ff78b7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:food-consumption-prefecture-battle",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sushi-dining-consumption-expenditure",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sushi-dining-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "sushi-takeout-consumption-expenditure",
-      "pageId": "ranking:sushi-takeout-consumption-expenditure",
-      "title": "すし(弁当)消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010910020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010910020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "57b36e1ba40fc6fc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sushi-takeout-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }
