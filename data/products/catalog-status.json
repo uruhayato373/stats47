@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-04T00:37:03.469Z",
+  "checkedAt": "2026-11-04T01:14:53.292Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
@@ -1420,7 +1420,7 @@
       "id": "K-S1-13",
       "title": "住む県の選び方 — 統計で比べる5つの条件",
       "kind": "book",
-      "catalogStatus": "manuscript",
+      "catalogStatus": "generated",
       "scope": "総合の住みやすさランキングに頼らず、自分の条件に合う指標を選んで 47 都道府県を比べる手順の本。",
       "free": false,
       "candidate": false,
@@ -3206,7 +3206,7 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-11-04T00:37:03.469Z",
+  "generatedAt": "2026-11-04T01:14:53.292Z",
   "total": 63,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",

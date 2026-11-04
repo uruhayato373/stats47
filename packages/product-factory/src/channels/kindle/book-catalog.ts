@@ -509,7 +509,7 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
     priceYen: 500,
     newContentNote: "全章を書き下ろした KDP 専用の本。サイト・note に同じ文章はない。",
     keywords: ["都道府県", "移住", "住みやすさ", "家賃", "子育て", "統計"],
-    status: "manuscript",
+    status: "generated",
   },
 ];
 
