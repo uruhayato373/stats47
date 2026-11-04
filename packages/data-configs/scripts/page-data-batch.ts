@@ -46,6 +46,7 @@ import { classifyEmptyOutcome } from "../src/expected-empty.js";
 import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import { mergeSupplementalValues } from "../src/supplemental-values.js";
+import { applyValueCorrections } from "../src/value-corrections";
 import {
   combineLinear,
   ratioPercent,
@@ -945,7 +946,7 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
 function shapeForCity(config: MetricConfig, values: EstatValue[]) {
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
-  const rows: ShapedRow[] = values
+  const rawRows: ShapedRow[] = values
     .filter((v) => isIngestableCityCode(v["@area"], masters.city) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
       const yearCode = v["@time"].slice(0, 4);
@@ -965,6 +966,7 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
+  const rows = applyValueCorrections(config.key, rawRows, config.cityValueCorrections ?? []);
   assignRanks(rows);
   return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(config, rows) };
 }
