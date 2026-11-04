@@ -9,9 +9,17 @@ import type { MetricConfig, MetricDenominator } from './types';
 const POPULATION_KEY = /(^|-)per-(100k|10k|1000|1k|capita|million|person|resident|taxpayer)(-|$)/;
 const AREA_KEY = /(^|-)per-(km2|100km2|ha|1000-km|km)(-|$)/;
 const HOUSEHOLD_KEY = /(^|-)per-household(-|$)/;
-const POPULATION_TEXT = /人口.*(当たり|あたり|万対|千対)|(万|千)人(当たり|あたり)|(1|１)人(当たり|あたり)|人口(10|100)?万対/;
-const AREA_TEXT = /(km|ｋｍ|面積).*(当たり|あたり)/;
-const HOUSEHOLD_TEXT = /世帯.*(当たり|あたり)/;
+const PER_PERSON_TEXT = /(万|千|1|１)人(当たり|あたり)/;
+const PER_WORDS = ['当たり', 'あたり'];
+const POPULATION_PER_WORDS = [...PER_WORDS, '万対', '千対'];
+
+/** subjects のどれかより後ろに perWords のどれかがあるか。`.*` の正規表現は長い入力で遅くなるので文字列で探す */
+const hasPerWordAfter = (text: string, subjects: readonly string[], perWords: readonly string[]): boolean => {
+  const starts = subjects.map((subject) => text.indexOf(subject)).filter((index) => index >= 0);
+  if (starts.length === 0) return false;
+  const from = Math.min(...starts);
+  return perWords.some((word) => text.indexOf(word, from) >= 0);
+};
 
 type MetricLabels = Pick<MetricConfig, 'key' | 'title' | 'subtitle' | 'denominator'>;
 
@@ -22,7 +30,9 @@ const denominatorInKey = (key: string): MetricDenominator | null =>
 /** 題名と補足が名乗る分母 */
 const denominatorInText = ({ title, subtitle }: MetricLabels): MetricDenominator | null => {
   const text = `${title} ${subtitle ?? ''}`;
-  return POPULATION_TEXT.test(text) ? 'population' : AREA_TEXT.test(text) ? 'area' : HOUSEHOLD_TEXT.test(text) ? 'household' : null;
+  if (hasPerWordAfter(text, ['人口'], POPULATION_PER_WORDS) || PER_PERSON_TEXT.test(text)) return 'population';
+  if (hasPerWordAfter(text, ['km', 'ｋｍ', '面積'], PER_WORDS)) return 'area';
+  return hasPerWordAfter(text, ['世帯'], PER_WORDS) ? 'household' : null;
 };
 
 /** 指標の分母。分からなければ null */
