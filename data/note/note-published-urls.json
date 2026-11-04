@@ -3377,7 +3377,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 4980
+      "price_jpy": 2980
     },
     "prefecture-disaster-infrastructure-pack": {
       "vertical": "product-sales",
@@ -3389,7 +3389,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-education-childcare-pack": {
       "vertical": "product-sales",
@@ -3401,7 +3401,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-free-trial-pack": {
       "vertical": "product-sales",
@@ -3424,7 +3424,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-household-consumption-pack": {
       "vertical": "product-sales",
@@ -3436,7 +3436,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-income-wage-hiring-pack": {
       "vertical": "product-sales",
@@ -3448,7 +3448,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-industry-economy-pack": {
       "vertical": "product-sales",
@@ -3460,7 +3460,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-map-chart-assets-pack": {
       "vertical": "product-sales",
@@ -3472,7 +3472,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-migration-living-pack": {
       "vertical": "product-sales",
@@ -3484,7 +3484,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-municipal-finance-pack": {
       "vertical": "product-sales",
@@ -3496,7 +3496,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-population-household-pack": {
       "vertical": "product-sales",
@@ -3508,7 +3508,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-retail-trade-area-pack": {
       "vertical": "product-sales",
@@ -3520,7 +3520,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "prefecture-tourism-lodging-pack": {
       "vertical": "product-sales",
@@ -3532,7 +3532,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 1980
+      "price_jpy": 980
     },
     "recovered-n023501038bd5": {
       "vertical": "stats47-note",
