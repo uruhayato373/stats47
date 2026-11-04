@@ -110,6 +110,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DATA-REFRESH-CITY-ONLY-SCOPE-01] 県と市の値を持つ指標の市区町村の値だけを直すときに、全範囲の再生成を回さない
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-04] [領域:データ]
+
+- **起点 (2026-11-04)**: 川崎市の補正で run 41778175350 が 75 分以上かかった。必要な R2 の更新は開始から 2 分で終わっていた。`manufacturing-shipment-amount` は県と市の値を持つので `resolveAutoRefreshScope` が all に倒し、`municipality` は `data-refresh.yml` の検証が県の値を持つ指標を拒むので選べない。`ranking` は `--kind prefecture` で cities.json を上げないので使えない。
+- **次**: 明示の `snapshot_scope=municipality` に限り県の値を持つ指標も通し、`--kind city` だけを上げる。auto は今のまま all に倒す。依頼の手順に、変えたのが市区町村の値だけなら municipality を指定すると書く。
+- **停止条件・禁止**: auto を狭めない (県の値が変わる取り込みで派生の作り直しが漏れる)。
+- **完了条件**: 県と市の値を持つ指標を municipality で取り込み、数分で終わり、市区町村ランキングが更新されることを run で確かめた。
+
+
 ### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-04] [領域:商品]
 
