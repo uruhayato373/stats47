@@ -103,7 +103,7 @@ e-Stat の注意書きが挙げる例外は次の 3 つです。出典: https://
 | 元データ記号 X など | e-Stat の統計表の記号です |
 | 元データに行なし | 元データにその地域・年の行がありません |
 | ${Object.values(spec.yearNotes ?? {}).join(' / ')} | 調査が切り替わった年です |
-| 元データ要確認 | 県計や区の合計と一致しない値です。元データの値をそのまま載せています |
+| 公表値へ置換 | 統計表の誤りを公表値へ置き換えた値です。注記に元の値を書きました。公表の基準が少し違うので、県計や区の合計とは小さな差が残ります |
 ${symbolsChecked ? '' : '\n空の値の記号は e-Stat API で取り直しておらず、すべて「記号未確認」です。\n'}
 ${blankSection(rows, recon, spec)}
 
@@ -116,9 +116,9 @@ ${blankSection(rows, recon, spec)}
 | 値の空く自治体があり、差がその分と見なせる | ${(counts.blank ?? 0).toLocaleString()} |
 | 空欄がなく、差が ±${spec.roundingTolerance} 以内 (丸め) | ${(counts.rounding ?? 0).toLocaleString()} |
 | ${spec.crossPrefMergers?.[0]?.label ?? '県またぎ'} | ${(counts['cross-pref'] ?? 0).toLocaleString()} |
-| 元データ要確認 | ${(counts['source-inconsistency'] ?? 0).toLocaleString()} |
+| 公表値へ置換 | ${(counts['source-inconsistency'] ?? 0).toLocaleString()} |
 
-元データ要確認の ${issues.length} 件は次のとおりです。
+公表値へ置き換えた ${issues.length} 件は次のとおりです。
 
 ${issues.map((n) => `- ${n.year} 年 ${rows.find((r) => r.code === n.code)?.name}: ${n.note} (県別 − 自治体 = ${yen(n.expectPrefDiff)} ${spec.unit})`).join('\n')}
 
@@ -126,7 +126,7 @@ ${geoSection({ geo, boundaryFile })}
 ## 出典と作成日
 
 - 値: 政府統計の総合窓口 (e-Stat) 「${spec.sourceLabel}」(統計表 ${spec.estat.statsDataId}) を加工して作成
-- 項目の定義: ${spec.definitionUrl}
+${spec.correctionSource ? `- ${spec.correctionSource}\n` : ''}- 項目の定義: ${spec.definitionUrl}
 ${geo ? '- 境界: 政府統計の総合窓口 (e-Stat) 「令和 2 年国勢調査 町丁・字等別境界データ」を加工して作成\n' : ''}- 値の取得: ${generatedAt?.slice(0, 10) ?? '不明'} / このファイルの作成: ${today}
 
 このデータを使った成果物には、上記の元の出典を記載してください。
