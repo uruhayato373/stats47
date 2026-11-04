@@ -27,6 +27,9 @@ test('題の倍率は本文に近い倍率があれば通す', () => {
   assert.deepEqual(rules('2.4倍の差', '差は 2.45 倍です。'), []);
   assert.deepEqual(rules('1,300倍の差', '差は 1,298 倍です。'), []);
   assert.deepEqual(rules('2.4倍の差', '差は大きいです。'), ['ratio-unbacked']);
+  // 「約」は丸めた題なので 5% まで許す
+  assert.deepEqual(rules('約1,300倍の差', '差は約 1,285 倍です。'), []);
+  assert.deepEqual(rules('1,300倍の差', '差は約 1,285 倍です。'), ['ratio-unbacked']);
 });
 
 test('題の倍率が図の比と合わなければ warning の規則で検出する', () => {

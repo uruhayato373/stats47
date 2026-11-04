@@ -61,9 +61,9 @@ function valueTables(gt) {
   return [...tables.values()];
 }
 
-/** 題の倍率は丸めや「超」「約」を含むので、小数の桁に応じた幅で比べる */
-function ratioMatches(claimed, actual) {
-  const width = Math.max(Number.isInteger(claimed) ? 1 : 0.1, claimed * 0.01);
+/** 題の倍率は丸めや「超」を含むので小数の桁に応じた幅で比べ、「約」は ai-content の数値照合と同じ 5% まで許す */
+function ratioMatches(claimed, actual, approximate = false) {
+  const width = Math.max(Number.isInteger(claimed) ? 1 : 0.1, claimed * (approximate ? 0.05 : 0.01));
   return actual >= claimed - width && actual <= claimed + width;
 }
 
@@ -71,12 +71,13 @@ function lintRatio(title, prose, gt, findings) {
   if (/何倍/.test(title) && !/\d(?:\.\d+)?\s*倍/.test(prose)) {
     findings.push({ rule: 'ratio-unanswered', text: `題が倍率を問うのに本文に倍率がありません:「${title}」` });
   }
-  const claimed = title.match(/(\d[\d,]*(?:\.\d+)?)\s*倍/);
+  const claimed = title.match(/(約)?(\d[\d,]*(?:\.\d+)?)\s*倍/);
   if (!claimed) return;
-  const n = Number(claimed[1].replaceAll(',', ''));
+  const approximate = claimed[1] !== undefined;
+  const n = Number(claimed[2].replaceAll(',', ''));
   const bodyRatios = [...prose.matchAll(/(\d[\d,]*(?:\.\d+)?)\s*倍/g)].map((m) => Number(m[1].replaceAll(',', '')));
-  if (!bodyRatios.some((b) => ratioMatches(n, b))) {
-    findings.push({ rule: 'ratio-unbacked', text: `題の ${claimed[1]} 倍に当たる倍率が本文にありません:「${title}」` });
+  if (!bodyRatios.some((b) => ratioMatches(n, b, approximate))) {
+    findings.push({ rule: 'ratio-unbacked', text: `題の ${claimed[2]} 倍に当たる倍率が本文にありません:「${title}」` });
   }
   const tables = valueTables(gt);
   const prefs = prefsIn(title);
@@ -91,7 +92,7 @@ function lintRatio(title, prose, gt, findings) {
       if (min > 0) candidates.push(Math.max(...values) / min);
     }
   }
-  if (candidates.length > 0 && !candidates.some((c) => ratioMatches(n, c))) {
+  if (candidates.length > 0 && !candidates.some((c) => ratioMatches(n, c, approximate))) {
     findings.push({
       rule: 'ratio-wrong',
       text: `題の ${n} 倍が図のデータの比 (${candidates.map((c) => c.toFixed(2)).join(' / ')} 倍) と合いません:「${title}」`,
@@ -125,7 +126,7 @@ function lintViewpoints(description, prose, findings) {
   if (!list) return;
   // 導入の段落は同じ約束の言い換えなので、最初の見出しより後ろを本文として数える
   const body = prose.slice(Math.max(prose.indexOf('\n## '), 0));
-  const missing = list.split(/[・、]/).filter((v) => !body.includes(v.replace(/構造$/, '')));
+  const missing = list.split(/[・、]/).filter((v) => !body.includes(v.replace(/構造$/, '').replace(/^食/, '')));
   if (missing.length > 0) {
     findings.push({ rule: 'viewpoint-absent', text: `description の「${missing.join('・')}」が本文にありません:「${description.slice(0, 50)}」` });
   }

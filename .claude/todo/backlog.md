@@ -821,11 +821,11 @@ updated: 2026-11-01
 - **案**: 目的ごとに指標と重みを明示した 4 本 (子育て・老後・単身・移住)。重みと指標は記事内に書き、読者が組み替えられることを示す。市区町村の子育て (`MUNI-KOSODATE-RANKING-01`) と指標を揃える。
 - **決めること**: 総合の 1 本の 4 週の実績を見てから作るか、今作るか。合成指標は恣意的に見えるので、重みの根拠を書けない目的は作らない。
 
-### [BLOG-REGION-PUBLISHED-FIX-01] 公開済み 21 本の地方のくくりと題の約束の誤りを直す
+### [BLOG-REGION-PUBLISHED-FIX-01] 公開済み 10 本の地方のくくりと題の約束の誤りを直す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-11-04] [領域:サイト]
 
-- **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 21 本で見つかった (地方 17・題 4)。検出は全件読み、「新潟など東北」「内陸県の山形」のような本物の誤りだった。gate が止めるのは再公開の時だけなので、公開中の記事は直るまで残る。
-- **対象**: `assembly-answer-chatgpt-5steps` `chinese-noodles-expenditure-ranking` `chocolate-snack-consumption-expenditure-prefecture-gap` `croquette-consumption-expenditure-prefecture-gap` `delivery-hospital-count-prefecture-gap` `fire-department-pump-car-count-per-100-thousand-people` `foreign-overnight-guests-prefecture-gap` `furusato-fundraising-cost-prefecture-prefecture-gap` `hospital-bed-utilization-map` `manufacturing-industry-added-value-prefecture-gap` `mayonnaise-consumption-expenditure` `nagano-food-culture` `pork-consumption-quantity` `school-nonattendance-pattern` `sugar-consumption-prefecture-gap` `tochigi-food-culture` `tokyo-food-culture` `treatment-rate-cerebrovascular-outpatient-prefecture-gap` `treatment-rate-schizophrenia-inpatient-prefecture-gap` `tuna-consumption-quantity-vs-annual-new-inpatients-general` `yamagata-food-culture`
+- **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 10 本で見つかった。検出は前後の文ごと全件読み、「新潟など東北」「内陸県の山形」のような本物の誤りだった。gate が止めるのは再公開の時だけなので、公開中の記事は直るまで残る。
+- **対象**: `assembly-answer-chatgpt-5steps` `croquette-consumption-expenditure-prefecture-gap` `hospital-bed-utilization-map` `nagano-food-culture` `pork-consumption-quantity` `school-nonattendance-pattern` `sugar-consumption-prefecture-gap` `tochigi-food-culture` `tuna-consumption-quantity-vs-annual-new-inpatients-general` `yamagata-food-culture`
 - **完了条件**: 各記事の quality-gate で `地方のくくり` と `題の約束` の blocker が 0。`/brushup-blog --target article` で本文を直す。
 
 ### [BLOG-HEADLESS-AUTHOR-01] ブログ執筆を headless `claude -p` のバッチに移し、本数を増やしながら 1 本あたりの費用と通過率を記録する

@@ -37,6 +37,12 @@ test('正しいくくりと、別の地方へ続く並びは検出しない', ()
   assert.deepEqual(rules('九州の沖縄県は別の傾向です。'), []);
   assert.deepEqual(rules('鹿児島県、徳島県など九州・四国が並びます。'), []);
   assert.deepEqual(rules('中国の輸入品が多いです。'), []);
+  // 2026-11-04 に公開記事で誤検知した形
+  assert.deepEqual(rules('島根県、山梨県といった東北以外の県も並びます。'), []);
+  assert.deepEqual(rules('関東・中部の東京都と愛知県は下位です。'), []);
+  assert.deepEqual(rules('静岡県、大阪府といった東海地方から近畿地方にかけての県です。'), []);
+  assert.deepEqual(rules('福島・鳥取といった東北や地方が上位です。'), []);
+  assert.deepEqual(rules('鹿児島県、徳島県など九州・中国四国の県です。'), []);
 });
 
 test('地方の端の主張を図の順位に照らす', () => {

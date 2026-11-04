@@ -746,8 +746,8 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
 | 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
 | タイトル: 年の違う図を並べた記事で title/seoTitle に年が 1 つだけ (図の年と一致) | 機械 | warn | `lintMixedYearTitle` (`title-year-lint.mjs`)。2026-10-26 実測 公開済み 11・送り箱 2 件。正当な並べ方も含むため blocker 化はオーナー判断 |
-| 地方: 県の所属・地方の端・上位 N 県の地方・地方の県の数・日本海側と内陸県 | 機械 | blocker | `lintRegionClaims` (`region-claim-lint.mjs`)。公開済み 767 本で 17 本、検出を全件読んだ。隣接県の誤りは見ない |
-| 題: 問うた倍率が本文に無い・題の倍率が本文に無い・題の県が本文に 1 回以下・description の視点が本文に無い | 機械 | blocker | `lintTitlePromises` (`title-promise-lint.mjs`)。公開済み 767 本で 4 本 |
+| 地方: 県の所属・地方の端・上位 N 県の地方・地方の県の数・日本海側と内陸県 | 機械 | blocker | `lintRegionClaims` (`region-claim-lint.mjs`)。公開済み 767 本で 9 本、検出は前後の文ごと全件読んだ。隣接県の誤りは見ない |
+| 題: 問うた倍率が本文に無い・題の倍率が本文に無い・題の県が本文に 1 回以下・description の視点が本文に無い | 機械 | blocker | `lintTitlePromises` (`title-promise-lint.mjs`)。公開済み 767 本で 2 本 |
 | 題: 倍率が図の最大最小の比と合わない / 理由を約束し本文が「断定できない」を繰り返す | 機械 | warn | 同上。公開済み 11 / 37 本。「平均の 5 倍」は誤りと言い切れず、後者は critic PASS の 18 本にも出る。根拠の無い断定を弱めた結果でもあるので blocker にしない |
 | 題: 本文が約束に答えているか | **critic** | — | 機械が見るのは上の形だけ |
 | 数値: 図の値を上位概念の名前 (「スルメイカ」→「イカ類」) で呼ばない | 機械 | warn | `lintHypernymMetricNames` (`metric-name-lint.mjs`)。同文に図の値があるときだけ。実測 0 件 |

@@ -19,9 +19,10 @@
  * 図のデータとの照合は、どれか 1 枚の図で主張が成り立てば通す (2 指標の記事や複数年の図で、
  * 別の図の話を誤りと呼ばない)。
  *
- * 実測 (2026-11-04・公開済み 767 本): membership 15 / coast 2 本、all-in・listed・superlative・count は
- * 0 本。検出を全件読み、否定文・「除く上位4県」・並列の続きを読み違えた形を除いた後は誤りだけが残ったので、
- * 全規則を blocker にした。送り箱 221 本 (critic PASS 済みを含む) では membership 2 本。
+ * 実測 (2026-11-04・公開済み 767 本): membership 7 / coast 2 本、all-in・listed・superlative・count は 0 本。
+ * 検出は前後の文ごと全件読んだ。「東北以外の県」「関東・中部の東京都」「東海地方から近畿地方にかけて」
+ * 「九州・中国四国」のように、地方名の続きを読まずに切ると正しい文を誤検知するので、続きがある形は判定しない。
+ * 送り箱 232 本では 0 本。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -123,8 +124,8 @@ function excerpt(text, index, length) {
 
 function lintMembership(prose, findings) {
   const patterns = [
-    new RegExp(`(?<![一-龥])(${regionAlt})${REGION_SUFFIX}(?:の|では|でも|にある)(${PREF_LIST})`, 'g'),
-    new RegExp(`(${PREF_COMMA_LIST})(?:など|を含む|といった|のような)の?(${REGION_LIST})${REGION_SUFFIX}`, 'g'),
+    new RegExp(`(?<![一-龥])(${REGION_LIST})${REGION_SUFFIX}(?:の|では|でも|にある)(${PREF_LIST})`, 'g'),
+    new RegExp(`(${PREF_COMMA_LIST})(?:など|を含む|といった|のような)の?(${REGION_LIST})(?!(?:地方|地域|エリア)?(?:以外|から|にかけて|や|と|か|・|、|${regionAlt}))`, 'g'),
   ];
   for (const [i, re] of patterns.entries()) {
     for (const m of prose.matchAll(re)) {
