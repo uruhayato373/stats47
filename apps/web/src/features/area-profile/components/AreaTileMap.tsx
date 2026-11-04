@@ -50,11 +50,11 @@ export function AreaTileMap({
   className,
 }: AreaTileMapProps) {
   return (
-    <div className={cn("flex flex-col gap-3", className)}>
+    <div className={cn("@container flex flex-col gap-3", className)}>
       <div
         role="group"
         aria-label="地図から都道府県を選ぶ"
-        className="grid w-full gap-1"
+        className="grid w-full gap-px @sm:gap-1"
         style={{
           gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${gridRows}, minmax(0, 1fr))`,
@@ -72,12 +72,18 @@ export function AreaTileMap({
               gridRow: `${tile.y + 1} / span ${tile.h}`,
             }}
             className={cn(
-              "flex items-center justify-center overflow-hidden whitespace-nowrap rounded-none px-0.5 text-center text-[11px] font-medium leading-none transition-colors",
+              "flex items-center justify-center overflow-hidden whitespace-nowrap rounded-none text-center text-[9px] @sm:px-0.5 @sm:text-[11px] font-medium leading-none transition-colors",
               regionStyle(tile.regionCode).tile,
               FOCUS_RING,
             )}
           >
-            <span aria-hidden="true">{tile.shortName}</span>
+            {/* 1 マスに 3 文字は入らない (神奈川)。スマホの幅では 2 文字にし、正式名は aria-label が持つ */}
+            <span aria-hidden="true" className="@sm:hidden">
+              {tile.w === 1 ? tile.shortName.slice(0, 2) : tile.shortName}
+            </span>
+            <span aria-hidden="true" className="hidden @sm:inline">
+              {tile.shortName}
+            </span>
           </Link>
         ))}
       </div>

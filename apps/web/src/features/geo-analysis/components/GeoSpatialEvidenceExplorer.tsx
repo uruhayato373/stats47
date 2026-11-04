@@ -292,7 +292,7 @@ function GeoSpatialEvidenceExplorerState({
       ) : null}
       <Tabs value={view} onValueChange={changeView} className="mt-4">
         <TabsList
-          className={`grid h-auto w-full grid-cols-1 ${hasFacilities ? 'sm:grid-cols-3' : 'sm:grid-cols-2'}`}
+          className={`grid h-auto! w-full grid-cols-1 ${hasFacilities ? 'sm:grid-cols-3' : 'sm:grid-cols-2'}`}
         >
           <TabsTrigger value="population" className="min-h-11">
             {slug === 'population-low-elevation' ? '2020年人口の分布' : slug === 'population-snow-designation' || landslide ? '2020年基準人口の分布' : '人口の分布と変化'}

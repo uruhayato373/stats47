@@ -1,12 +1,7 @@
 'use client';
 
 import { cn } from '@stats47/components';
-import {
-  SidebarGroup,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuSubButton,
-} from '@stats47/components/atoms/ui/sidebar';
+import { Button } from '@stats47/components/atoms/ui/button';
 
 import { RailCard } from '@/components/surface';
 
@@ -24,8 +19,7 @@ interface Props {
 }
 
 /**
- * `/areas` の左レール。本文内にあった地方フィルタを、カテゴリ・テーマと同じ
- * ページ内ナビの文法へ揃える。レール未表示幅では本文の全県一覧を使う。
+ * `/areas` のページ内ナビ。本文の都道府県の一覧を地方で絞り込む。
  */
 export function AreaDirectoryRegionNav({ regions }: Props) {
   const { activeRegionCode, setActiveRegionCode } = useAreaDirectoryRegion();
@@ -34,42 +28,38 @@ export function AreaDirectoryRegionNav({ regions }: Props) {
     ...regions,
   ];
 
-  // 行はテンプレートの SidebarMenu で描く。リンクではなく絞り込みなので button (aria-pressed) で描く。
-  // SidebarMenuButton は SidebarProvider の context を必須にするため、context を読まない Sub 版を使う。
+  // リンクではなく絞り込みなので button (aria-pressed) で描く。ページの目的は都道府県を選ぶことなので、
+  // 縦に並べて検索欄を押し下げず、折り返すボタンにする (2026-11-04)。
   return (
     <nav aria-label="地方で絞り込む">
-      <RailCard title="地方" bodyClassName="p-0">
-        <SidebarGroup className="p-2">
-          <SidebarMenu>
-            {options.map((option) => {
-              const active = activeRegionCode === option.regionCode;
-              const swatch =
-                option.regionCode === 'all'
-                  ? null
-                  : regionStyle(option.regionCode).swatch;
+      <RailCard title="地方" bodyClassName="flex flex-wrap gap-2 p-4">
+        {options.map((option) => {
+          const active = activeRegionCode === option.regionCode;
+          const swatch =
+            option.regionCode === 'all'
+              ? null
+              : regionStyle(option.regionCode).swatch;
 
-              return (
-                <SidebarMenuItem key={option.regionCode}>
-                  <SidebarMenuSubButton
-                    isActive={active}
-                    aria-pressed={active}
-                    className="h-auto min-h-11 w-full translate-x-0 py-1.5 sm:min-h-8"
-                    onClick={() => setActiveRegionCode(option.regionCode)}
-                    render={<button type="button" />}
-                  >
-                    {swatch && (
-                      <span
-                        aria-hidden="true"
-                        className={cn('size-2.5 shrink-0', swatch)}
-                      />
-                    )}
-                    <span>{option.regionName}</span>
-                  </SidebarMenuSubButton>
-                </SidebarMenuItem>
-              );
-            })}
-          </SidebarMenu>
-        </SidebarGroup>
+          return (
+            <Button
+              key={option.regionCode}
+              type="button"
+              size="sm"
+              variant={active ? 'default' : 'outline'}
+              aria-pressed={active}
+              className="min-h-11 sm:min-h-8"
+              onClick={() => setActiveRegionCode(option.regionCode)}
+            >
+              {swatch && (
+                <span
+                  aria-hidden="true"
+                  className={cn('size-2.5 shrink-0', swatch)}
+                />
+              )}
+              {option.regionName}
+            </Button>
+          );
+        })}
       </RailCard>
     </nav>
   );
