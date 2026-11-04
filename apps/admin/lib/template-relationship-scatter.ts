@@ -67,6 +67,8 @@ export interface ScatterChart {
   presentation?: Pick<MetricPresentation, 'colorScheme' | 'colorSchemeType'>;
   /** Tick labels in the axis label's unit (e.g. 万円); thousands separators when omitted. */
   formatX?: (value: number) => string; formatY?: (value: number) => string;
+  /** Prefectures left out on purpose (the source states which and why); the rest must all be there. */
+  excludedCount?: number;
   /** Prefectures the article names; labelled before the extremes when they clear the other dots. */
   labelNames?: string[];
 }
@@ -85,9 +87,10 @@ export function renderRelationshipScatter(raw: unknown, theme: ChartTheme = LIGH
 /** A 4:5 scatter sized for 320px display: 47 points in the metric's tint, up to four named in its strong colour, regression line. */
 export function renderRelationshipScatterChart(chart: ScatterChart, theme: ChartTheme = LIGHT_THEME) {
   const { points } = chart;
-  if (points.length !== 47 || new Set(points.map((p) => p.code)).size !== 47 ||
+  const expected = 47 - (chart.excludedCount ?? 0);
+  if (points.length !== expected || new Set(points.map((p) => p.code)).size !== expected ||
     points.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)))
-    throw Error('散布図は全47都道府県の値が必要です。');
+    throw Error(`散布図は${expected}都道府県の値が必要です。`);
   const xDomain = resolveChartDomain(points.map((p) => p.x), { mode: 'extent', padding: 0.05 });
   const yDomain = resolveChartDomain(points.map((p) => p.y), { mode: 'extent', padding: 0.08 });
   if (!xDomain || !yDomain) throw Error('散布図の値がありません。');
@@ -139,8 +142,8 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
   const axisFont = (label: string, length: number) => Math.min(AXIS_FONT, Math.floor(length / label.length));
   return sampleFrame({
     // Two metric names can run long; shrink the title to the frame width instead of letting it overflow.
-    title: chart.title, titleSize: Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length)), meta: chart.meta, note: chart.note, source: chart.source, theme,
-    ariaLabel: `${chart.title}・全47都道府県`, attributes: `data-image-template="scatter" data-points="${points.length}"`,
+    title: chart.title, titleSize: Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length)), meta: expected === 47 ? chart.meta : `${chart.meta}・${expected}都道府県`, note: chart.note, source: chart.source, theme,
+    ariaLabel: `${chart.title}・${expected === 47 ? '全47' : expected}都道府県`, attributes: `data-image-template="scatter" data-points="${points.length}"`,
     body: `<defs><clipPath id="scatter-plot"><rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}"/></clipPath></defs>
       <rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}" fill="${ink.plot}" stroke="${ink.edge}"/>
       ${xTicks.join('')}${yTicks.join('')}

@@ -66,7 +66,7 @@ import { renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking
 import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
 import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { matchScatterYear, prefecturesNamedNear, rankingChartFromArticleData, scatterChartFromArticleData } from './lib/type-chart-input';
+import { matchScatterAxis, metricKeysInSource, prefecturesNamedNear, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -889,24 +889,43 @@ const valuesOf = (key: string) => {
   return valuesCache.get(key)!;
 };
 const scatterCharts = new Map<string, ScatterChart | { skip: string }>();
+const articleText = fs.existsSync(ARTICLE_MD) ? fs.readFileSync(ARTICLE_MD, 'utf8') : '';
+const isMetric = (key: string) => Boolean(getMetricConfig(key));
+const articleKeys = [...new Set([...articleText.matchAll(/\/ranking\/([a-z0-9-]+)/g)].map((m) => m[1]))].filter(isMetric);
 for (const { file, type, parsed, scatterSource } of jsonMeta) {
   if (type !== 'scatter' || !scatterSource) continue;
   const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
   const xKey = text(scatterSource.xKey) || text(scatterSource.base), yKey = text(scatterSource.yKey) || text(scatterSource.pair);
-  const points = (Array.isArray(parsed.points) ? parsed.points : []) as { x?: unknown; y?: unknown; label?: unknown }[];
-  const codes = points.map((p) => `${prefCodeOf(String(p.label ?? ''))}000`);
-  const yearOf = (key: string, axis: 'x' | 'y') => {
-    const rows = key ? valuesOf(key) : null;
-    return rows ? matchScatterYear(points.map((p) => p[axis] as number), codes, rows) : null;
-  };
-  const xYear = yearOf(xKey, 'x'), yYear = yearOf(yKey, 'y');
+  // Older articles keep { areaName, areaCode, x, y } rows under `data`.
+  const points = ((Array.isArray(parsed.points) ? parsed.points : Array.isArray(parsed.data) ? parsed.data : []) as { x?: unknown; y?: unknown; label?: unknown; areaName?: unknown; areaCode?: unknown }[])
+    .filter((p) => typeof p.x === 'number' && typeof p.y === 'number')
+    .map((p) => {
+      // Older data writes 沖縄 for 沖縄県, and a few labels lost a character to bad encoding (佐賀��).
+      const name = String(p.label ?? p.areaName ?? '').replace(/�/g, '');
+      const code = p.areaCode ? String(p.areaCode).slice(0, 2) : ['', '県', '府', '都'].map((suffix) => prefCodeOf(name + suffix)).find(Boolean) ?? '';
+      return { ...p, label: name, code };
+    });
+  const codes = points.map((p) => `${p.code}000`);
+  const sourceKeys = metricKeysInSource(scatterSource, isMetric);
   const metric = (key: string) => (key ? getMetricConfig(key) ?? undefined : undefined);
-  scatterCharts.set(file.replace(/\.json$/, ''), scatterChartFromArticleData(parsed, {
-    x: { metric: metric(xKey) as never, year: xYear }, y: { metric: metric(yKey) as never, year: yYear },
-    prefCodeOf, unitLabel,
-    bodyNames: fs.existsSync(ARTICLE_MD)
-      ? prefecturesNamedNear(fs.readFileSync(ARTICLE_MD, 'utf8'), file.replace(/\.json$/, ''), points.map((p) => String(p.label ?? '')))
-      : [],
+  // The stored values that reproduce every point prove the axis: the manifest's key first, then any metric it or the article names.
+  const resolveAxis = (preferred: string, axis: 'x' | 'y', label: unknown) => {
+    const values = points.map((p) => p[axis] as number);
+    for (const key of new Set([preferred, ...sourceKeys, ...articleKeys])) {
+      const rows = key ? valuesOf(key) : null;
+      const hit = rows && matchScatterAxis(values, codes, rows);
+      if (hit) return { metric: metric(key) as never, year: hit.year, asWritten: hit.scale !== 1 };
+    }
+    return { year: sourceAxisYear(scatterSource, axis, `${String(label ?? '')} ${text(parsed[`${axis}Unit`])}`), asWritten: true };
+  };
+  const excluded = scatterSource.excludedAreas;
+  scatterCharts.set(file.replace(/\.json$/, ''), scatterChartFromArticleData({ ...parsed, points }, {
+    x: resolveAxis(xKey, 'x', parsed.xLabel), y: resolveAxis(yKey, 'y', parsed.yLabel),
+    prefCodeOf, unitLabel, prefNameOf: (code) => prefNameOf(code),
+    excludedCount: Array.isArray(excluded) && text(scatterSource.exclusionReason) ? excluded.length : 0,
+    sourceNames: [...sourceKeys.map((key) => text((metric(key) as { source?: { displayName?: unknown } } | undefined)?.source?.displayName)).filter(Boolean), ...sourceNamesOf(scatterSource)],
+    colorMetric: metric(sourceKeys[0]) as never,
+    bodyNames: prefecturesNamedNear(articleText, file.replace(/\.json$/, ''), points.map((p) => prefNameOf(p.code))),
   }));
 }
 
