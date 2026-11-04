@@ -1,17 +1,8 @@
 {
-  "hash": "8dbb7cfdab40c079fa9f422053d68e038fca0dda9f49eb1f2c604c3c5d210599",
-  "audited_at": "2026-11-04T08:11:57",
+  "hash": "8e2822c05d56ca215d31c1d9fa025a6650a0b189da061258a9dec3e315f9ee6a",
+  "audited_at": "2026-11-04T08:24:13",
   "files": [
-    ".agents/skills/db/audit-provenance/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/rules/data-provenance-standards.md",
-    ".claude/scripts/blog/audit-chart-axes.ts",
-    ".claude/scripts/management/run-weekly-audits.mjs",
-    ".claude/scripts/management/weekly-audits/provenance.sh",
-    ".claude/scripts/provenance/__tests__/source-watch.test.mjs",
-    ".claude/scripts/provenance/lib/source-watch.mjs",
-    ".claude/scripts/provenance/watch-external-sources.ts",
-    ".claude/skills/db/audit-provenance/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/scripts/lib/__tests__/chart-recurrence-guards.test.mjs",
+    ".claude/scripts/lib/svg-lint.mjs"
   ]
 }
