@@ -131,10 +131,10 @@ async function buildForKey(key, outBaseName, fullName) {
     ? parts.find((p) => String(p.yearCode) === String(YEAR)) || parts[parts.length - 1]
     : parts[parts.length - 1];
 
-  // value 降順で rank を再計算 (R2 の rank が 0/未設定のケースに対応)
+  // value 降順で rank を再計算 (R2 の rank が 0/未設定のケースに対応)。同値は同順位で、ランキングページと揃える
   const sorted = partition.values.slice().sort((a, b) => b.value - a.value);
   const data = sorted.map((v, i) => ({
-    rank: i + 1,
+    rank: sorted.findIndex((other) => other.value === v.value) + 1,
     areaName: v.areaName,
     pref: v.areaName, // bar chart ラベル用
     value: v.value,
