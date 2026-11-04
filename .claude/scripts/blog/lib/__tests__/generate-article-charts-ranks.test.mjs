@@ -10,7 +10,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.
 const script = path.join(root, '.claude/scripts/blog/generate-article-charts.ts');
 const tsx = path.join(root, 'node_modules/tsx/dist/cli.mjs');
 
-function render(t, rows, options = {}) {
+function render(t, rows, options = {}, suffixes = ['', '-ig']) {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-chart-ranks-'));
   t.after(() => fs.rmSync(base, { recursive: true, force: true }));
   const dir = path.join(base, 'fixture');
@@ -21,7 +21,7 @@ function render(t, rows, options = {}) {
     title: '順位検証', unit: '件', showBars: false, data: rows, ...options,
   }));
   execFileSync(process.execPath, [tsx, script, '--slug', 'fixture', '--base', path.relative(root, base)], { cwd: root });
-  return ['', '-ig'].map((suffix) => fs.readFileSync(path.join(data, `fixture-prefecture-rankings${suffix}.svg`), 'utf8'));
+  return suffixes.map((suffix) => fs.readFileSync(path.join(data, `fixture-prefecture-rankings${suffix}.svg`), 'utf8'));
 }
 
 const rankBadges = (svg) => [...svg.matchAll(/<text[^>]*text-anchor="middle"[^>]*>(\d+)<\/text>/g)].map((match) => Number(match[1]));
@@ -35,10 +35,12 @@ test('上位側と下位側の抽出前に同順位を導出し、旧入力の�
 
 test('入力が昇順でも値の降順を維持し、reverse配色で順位を反転しない', (t) => {
   const rows = Array.from({ length: 12 }, (_, i) => ({ pref: `県${i}`, value: i - 6 }));
-  for (const svg of render(t, rows, { reverse: true })) {
-    assert.deepEqual(rankBadges(svg), [1, 2, 3, 4, 5, 8, 9, 10, 11, 12]);
-    assert.ok(svg.indexOf('>県11</text>') < svg.indexOf('>県10</text>'));
-    assert.ok(svg.indexOf('>県1</text>') < svg.indexOf('>県0</text>'));
+  // 負の値を含む棒は 1 列の図だけを出し、Instagram 用の縦長は作らない (generate-article-charts の isSignedBar)
+  for (const svg of render(t, rows, { reverse: true }, [''])) {
+    // 1 列の図は順位を「1位 県11」の形で書く
+    const rankLabels = [...svg.matchAll(/>(\d+)位 県\d+<\/text>/g)].map((match) => Number(match[1]));
+    assert.deepEqual(rankLabels, [1, 2, 3, 4, 5, 8, 9, 10, 11, 12]);
+    assert.ok(svg.includes('>1位 県11</text>') && svg.includes('>12位 県0</text>'));
   }
 });
 

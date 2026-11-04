@@ -36,15 +36,16 @@ describe("resolveMobileChartSource", () => {
 });
 
 describe("resolveDarkChartSource", () => {
-  it("maps ranking and map SVGs to their dark variant", () => {
+  it("maps ranking, map and scatter SVGs to their dark variant", () => {
     expect(resolveDarkChartSource("data/golf-ranking.svg")).toBe("data/golf-ranking-dark.svg");
     expect(resolveDarkChartSource("data/sales-prefecture-rankings.svg?v=2")).toBe("data/sales-prefecture-rankings-dark.svg?v=2");
     expect(resolveDarkChartSource("data/sales-map.svg")).toBe("data/sales-map-dark.svg");
     expect(resolveDarkChartSource("data/sales-tile-grid.svg")).toBe("data/sales-tile-grid-dark.svg");
+    expect(resolveDarkChartSource("data/x--y-scatter.svg")).toBe("data/x--y-scatter-dark.svg");
   });
 
   it("leaves other charts and variants alone", () => {
-    expect(resolveDarkChartSource("data/x-scatter.svg")).toBeNull();
+    expect(resolveDarkChartSource("data/x-scatter-dark.svg")).toBeNull();
     expect(resolveDarkChartSource("data/tax-breakdown.svg")).toBeNull();
     expect(resolveDarkChartSource("data/golf-ranking-dark.svg")).toBeNull();
     expect(resolveDarkChartSource("data/golf-ranking-mobile.svg")).toBeNull();

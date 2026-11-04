@@ -1,8 +1,13 @@
 {
-  "hash": "41cd644b75100e8cfee952d237423fe179c64b3b0d4cc381c14769487abdd589",
-  "audited_at": "2026-11-03T21:47:57",
+  "hash": "ca437c4c371ecf605e7923159b1336fa14e07b808fac4ecd18382df5b308a3e4",
+  "audited_at": "2026-11-03T22:27:36",
   "files": [
-    ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/scripts/ads/lib/ad-layout-ledger.ts"
+    ".claude/rules/blog-svg-chart-standards.md",
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/scripts/blog/lib/__tests__/generate-article-charts-ranks.test.mjs",
+    ".claude/scripts/blog/lib/type-chart-input.ts",
+    ".claude/scripts/blog/rerender-scatter-canonical.mts",
+    ".claude/scripts/lib/__tests__/svg-lint.image-type.test.mjs",
+    ".claude/scripts/lib/svg-lint.mjs"
   ]
 }
