@@ -101,8 +101,8 @@ export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
     titleRomaji: "Digital Seikatsu no Chizu - Tsushin PC Telework",
   },
   "K-S1-13": {
-    titleKana: "スムケンノエラビカタ トウケイデクラベルヤチン シゴト コソダテ イリョウ サイガイ",
-    titleRomaji: "Sumu Ken no Erabikata - Tokei de Kuraberu Yachin Shigoto Kosodate Iryo Saigai",
+    titleKana: "スムケンノエラビカタ トウケイデクラベルイツツノジョウケン",
+    titleRomaji: "Sumu Ken no Erabikata - Tokei de Kuraberu Itsutsu no Joken",
   },
 
   // ── S2 テーマ別データブック (共通: データデミルヨンジュウナナトドウフケン) ─────
@@ -212,7 +212,7 @@ export const KDP_READING_SOURCES: Readonly<Record<string, { readonly title: stri
   "K-S1-10": { title: "安全と環境の地図 — 犯罪・労災・公害・防災" },
   "K-S1-11": { title: "文化・スポーツ・余暇の地図" },
   "K-S1-12": { title: "デジタル生活の地図 — 通信・PC・テレワーク" },
-  "K-S1-13": { title: "住む県の選び方 — 統計で比べる家賃・仕事・子育て・医療・災害" },
+  "K-S1-13": { title: "住む県の選び方 — 統計で比べる5つの条件" },
   "K-S2-01": { title: "データで見る47都道府県 人口・世帯" },
   "K-S2-02": { title: "データで見る47都道府県 所得・賃金・採用" },
   "K-S2-03": { title: "データで見る47都道府県 観光・宿泊" },
