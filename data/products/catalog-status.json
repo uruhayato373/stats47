@@ -1,17 +1,17 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-27T00:56:22.256Z",
+  "checkedAt": "2026-11-04T00:18:30.306Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
   },
   "scope": "既存14パック・32冊・Geo役務1・Geo note15企画。販売先違いは同一商品内のvariant。その他の未定義商品は含まない。",
   "summary": {
-    "total": 62,
-    "existing": 57,
+    "total": 63,
+    "existing": 58,
     "candidates": 5,
     "free": 1,
-    "hashVerified": 0
+    "hashVerified": 5
   },
   "warnings": [],
   "offers": [
@@ -27,7 +27,7 @@
       "artifactDirectory": ".local/coconala-products/P-01/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-01\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-01/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -52,7 +52,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/ne47eb45f8a15",
-          "priceYen": 4000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -72,7 +72,7 @@
       "artifactDirectory": ".local/coconala-products/P-02/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-02\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-02/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -97,7 +97,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n46d68c153502",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -117,7 +117,7 @@
       "artifactDirectory": ".local/coconala-products/P-03/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-03\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-03/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -142,7 +142,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n7a5f6df6f5ac",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -162,7 +162,7 @@
       "artifactDirectory": ".local/coconala-products/P-04/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-04\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-04/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -187,7 +187,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n5da8a99b3506",
-          "priceYen": 6000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -207,7 +207,7 @@
       "artifactDirectory": ".local/coconala-products/P-05/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-05\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-05/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -232,7 +232,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/nbdad7c99d4b5",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -252,7 +252,7 @@
       "artifactDirectory": ".local/coconala-products/P-06/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-06\\v2-20260906-r1\\manifest.json'",
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-06/v2-20260906-r1/manifest.json'",
         "歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない"
       ],
       "ownerGates": [
@@ -278,7 +278,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n9f0be14ecc0c",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -298,7 +298,7 @@
       "artifactDirectory": ".local/coconala-products/P-07/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-07\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-07/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -323,7 +323,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n323af74c09cc",
-          "priceYen": 4500,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -343,7 +343,7 @@
       "artifactDirectory": ".local/coconala-products/P-08/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-08\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-08/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -368,7 +368,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n973c3f8478f5",
-          "priceYen": 6000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -388,7 +388,7 @@
       "artifactDirectory": ".local/coconala-products/P-09/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-09\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-09/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -413,7 +413,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n2ced199ed715",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -433,7 +433,7 @@
       "artifactDirectory": ".local/coconala-products/P-10/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-10\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-10/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -458,7 +458,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/nf25cd9ae21e6",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -478,7 +478,7 @@
       "artifactDirectory": ".local/coconala-products/P-11/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-11\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-11/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -503,7 +503,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n0f5dafef7fa8",
-          "priceYen": 4000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -523,7 +523,7 @@
       "artifactDirectory": ".local/coconala-products/P-12/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-12\\v2-20260906-r1\\manifest.json'",
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-12/v2-20260906-r1/manifest.json'",
         "歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない"
       ],
       "ownerGates": [
@@ -549,7 +549,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/nfa7d235eba85",
-          "priceYen": 9800,
+          "priceYen": 4980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -565,12 +565,10 @@
       "scope": "有料版を買う前に地図・データの品質と使い勝手を無料で試す",
       "free": true,
       "candidate": false,
-      "buildStatus": "invalid",
+      "buildStatus": "hash-verified",
       "artifactDirectory": ".local/coconala-products/P-13/v3-20261012-mac-r4",
-      "artifactSha256": null,
-      "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-13\\v3-20261012-mac-r4\\manifest.json'"
-      ],
+      "artifactSha256": "bd23c056c97a21ed15dccc875b147e27581a91b9a97c7840845f83c2b309b30b",
+      "blockers": [],
       "ownerGates": [
         "無料サンプルの配布承認"
       ],
@@ -601,7 +599,24 @@
         }
       ],
       "nextAction": "無料見本の内容・配布方法をレビューし、承認後に公開する。Office編集機能の見本ではない",
-      "artifactLinks": []
+      "artifactLinks": [
+        {
+          "label": "READINESS.md",
+          "href": "../coconala-products/P-13/v3-20261012-mac-r4/READINESS.md"
+        },
+        {
+          "label": "databook.pdf",
+          "href": "../coconala-products/P-13/v3-20261012-mac-r4/databook.pdf"
+        },
+        {
+          "label": "assets/choropleth-map.png",
+          "href": "../coconala-products/P-13/v3-20261012-mac-r4/assets/choropleth-map.png"
+        },
+        {
+          "label": "data.csv",
+          "href": "../coconala-products/P-13/v3-20261012-mac-r4/data.csv"
+        }
+      ]
     },
     {
       "id": "P-14",
@@ -615,7 +630,7 @@
       "artifactDirectory": ".local/coconala-products/P-14/v2-20260906-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-14\\v2-20260906-r1\\manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/coconala-products/P-14/v2-20260906-r1/manifest.json'"
       ],
       "ownerGates": [
         "配布前にOffice実機の表示・編集を確認する"
@@ -640,7 +655,7 @@
           "publicationStatus": "published-recorded",
           "checkedAt": "2026-10-26T02:20:20.443Z",
           "url": "https://note.com/stats47/n/n554a047cf5be",
-          "priceYen": 5000,
+          "priceYen": 1980,
           "priceStatus": "recorded",
           "blockers": []
         }
@@ -718,7 +733,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:20:45.930Z",
+          "checkedAt": "2026-11-03T11:25:10.271Z",
           "url": "https://www.amazon.co.jp/dp/B0HKFB434W",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -778,7 +793,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:21:07.325Z",
+          "checkedAt": "2026-11-03T11:15:02.777Z",
           "url": "https://www.amazon.co.jp/dp/B0HKF4NLDV",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -838,7 +853,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-19T23:27:40.490Z",
+          "checkedAt": "2026-11-03T11:33:31.548Z",
           "url": "https://www.amazon.co.jp/dp/B0HDYKVX6F",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -898,7 +913,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-19T23:36:09.618Z",
+          "checkedAt": "2026-11-03T11:43:32.193Z",
           "url": "https://www.amazon.co.jp/dp/B0HF1C5QZ6",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -958,7 +973,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:21:28.328Z",
+          "checkedAt": "2026-11-03T11:52:17.756Z",
           "url": "https://www.amazon.co.jp/dp/B0HKF5MMF9",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1018,7 +1033,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-19T23:44:33.977Z",
+          "checkedAt": "2026-11-03T12:00:12.007Z",
           "url": "https://www.amazon.co.jp/dp/B0HF1XFXBY",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1078,7 +1093,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:21:49.139Z",
+          "checkedAt": "2026-11-03T12:09:25.171Z",
           "url": "https://www.amazon.co.jp/dp/B0HKFB2359",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1138,7 +1153,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:22:09.834Z",
+          "checkedAt": "2026-11-03T12:18:59.274Z",
           "url": "https://www.amazon.co.jp/dp/B0HKDVYP8M",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1198,7 +1213,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:22:30.277Z",
+          "checkedAt": "2026-11-03T12:28:48.392Z",
           "url": "https://www.amazon.co.jp/dp/B0HKDXP4NM",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1258,7 +1273,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:22:51.852Z",
+          "checkedAt": "2026-11-03T12:37:25.475Z",
           "url": "https://www.amazon.co.jp/dp/B0HKDV78TG",
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -1318,7 +1333,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:23:12.790Z",
+          "checkedAt": "2026-11-03T12:45:16.796Z",
           "url": "https://www.amazon.co.jp/dp/B0HKFGQB8Q",
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -1378,13 +1393,71 @@
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-09-27T10:23:33.405Z",
+          "checkedAt": "2026-11-03T12:53:59.728Z",
           "url": "https://www.amazon.co.jp/dp/B0HKF7C6JQ",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
             "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
           ]
+        }
+      ],
+      "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
+    },
+    {
+      "id": "K-S1-13",
+      "title": "住む県の選び方 — 統計で比べる家賃・仕事・子育て・医療・災害",
+      "kind": "book",
+      "catalogStatus": "manuscript",
+      "scope": "総合の住みやすさランキングに頼らず、自分の条件に合う指標を選んで 47 都道府県を比べる手順の本。",
+      "free": false,
+      "candidate": false,
+      "buildStatus": "missing",
+      "artifactDirectory": ".local/kindle-books/K-S1-13/v3-20260906-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
+        "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
+      ],
+      "ownerGates": [
+        "対象EPUBのSHAに紐付くKindle Previewer確認",
+        "権利・AI生成申告・価格/印税条件・最終公開承認"
+      ],
+      "evidencePaths": [
+        "config/kdp-listings.json",
+        "data/products/kindle-archives.json",
+        ".local/kindle-books/K-S1-13/v3-20260906-r4/metadata.json",
+        ".local/kindle-books/K-S1-13/v3-20260906-r4/READINESS.md"
+      ],
+      "channels": [
+        {
+          "channel": "kindle",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
+          "priceYen": 500,
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -2609,11 +2682,10 @@
       "scope": "IPSSの将来人口を47都道府県コード付きで比較し、地図用データとして再利用できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "missing",
-      "artifactDirectory": null,
-      "artifactSha256": null,
+      "buildStatus": "hash-verified",
+      "artifactDirectory": ".local/geo-products/d-geo-ipss-prefecture-map",
+      "artifactSha256": "2259f144abc46a32104c87acf69a9fd026208f2c0361e26994853730475543e3",
       "blockers": [
-        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
@@ -2632,7 +2704,17 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
+      "artifactLinks": [
+        {
+          "label": "analysis.csv",
+          "href": "../geo-products/d-geo-ipss-prefecture-map/analysis.csv"
+        },
+        {
+          "label": "README.md",
+          "href": "../geo-products/d-geo-ipss-prefecture-map/README.md"
+        }
+      ]
     },
     {
       "id": "note-product-02",
@@ -2675,11 +2757,10 @@
       "scope": "洪水ポリゴンと人口メッシュの重なりを再現可能な手順で集計できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "missing",
-      "artifactDirectory": null,
-      "artifactSha256": null,
+      "buildStatus": "hash-verified",
+      "artifactDirectory": ".local/geo-products/d-geo-flood-population-mesh",
+      "artifactSha256": "795cba8a5ca3b08ea450bf83929da8e726f4cfe60a26e95cc365de4e62e179ae",
       "blockers": [
-        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
@@ -2698,7 +2779,17 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
+      "artifactLinks": [
+        {
+          "label": "analysis.csv",
+          "href": "../geo-products/d-geo-flood-population-mesh/analysis.csv"
+        },
+        {
+          "label": "README.md",
+          "href": "../geo-products/d-geo-flood-population-mesh/README.md"
+        }
+      ]
     },
     {
       "id": "note-product-04",
@@ -2741,11 +2832,10 @@
       "scope": "地価地点と将来人口を混同せず都道府県単位で比較できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "missing",
-      "artifactDirectory": null,
-      "artifactSha256": null,
+      "buildStatus": "hash-verified",
+      "artifactDirectory": ".local/geo-products/d-geo-land-price-future-population",
+      "artifactSha256": "3110dbaa46ce59d24978ff0c4ea8f9e857e36faddfe0bac39242ae37078a2c94",
       "blockers": [
-        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
@@ -2764,7 +2854,17 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
+      "artifactLinks": [
+        {
+          "label": "analysis.csv",
+          "href": "../geo-products/d-geo-land-price-future-population/analysis.csv"
+        },
+        {
+          "label": "README.md",
+          "href": "../geo-products/d-geo-land-price-future-population/README.md"
+        }
+      ]
     },
     {
       "id": "note-product-06",
@@ -2906,11 +3006,10 @@
       "scope": "駅代表点と1km人口メッシュ中心の直線800m判定による47都道府県集計を検算・再利用できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "missing",
-      "artifactDirectory": null,
-      "artifactSha256": null,
+      "buildStatus": "hash-verified",
+      "artifactDirectory": ".local/geo-products/d-geo-station-access-analysis",
+      "artifactSha256": "499e546d897ae06edb132d821ffb2bf5e426c4c386d484df4d4535cdeeac4173",
       "blockers": [
-        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
@@ -2929,7 +3028,17 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
+      "artifactLinks": [
+        {
+          "label": "analysis.csv",
+          "href": "../geo-products/d-geo-station-access-analysis/analysis.csv"
+        },
+        {
+          "label": "README.md",
+          "href": "../geo-products/d-geo-station-access-analysis/README.md"
+        }
+      ]
     },
     {
       "id": "note-product-11",
@@ -3097,8 +3206,8 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-10-27T00:56:22.256Z",
-  "total": 62,
+  "generatedAt": "2026-11-04T00:18:30.306Z",
+  "total": 63,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",
   "products": [
@@ -3191,7 +3300,7 @@
       "theme": "free-trial",
       "name": "都道府県データ 無料お試しサンプル",
       "catalogStatus": "cataloged",
-      "buildStatus": "invalid"
+      "buildStatus": "hash-verified"
     },
     {
       "id": "P-14",

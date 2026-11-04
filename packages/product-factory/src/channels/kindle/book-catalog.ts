@@ -27,6 +27,9 @@ const S4_M = "src/channels/kindle/manuscripts/K-S4-01";
 
 const AUTHOR = "stats47";
 
+/** KDP セレクト専用の本の原稿の置き場 (git の対象外)。 */
+const KDP_ONLY = (file: string): string => `.local/kindle-private/K-S1-13/manuscript/${file}.md`;
+
 /** パイロット K-S1-01 の書き下ろし章 (manuscripts/K-S1-01/*.md・article-writer 起草 → blog-critic レビュー)。 */
 const M = "src/channels/kindle/manuscripts/K-S1-01";
 
@@ -469,6 +472,44 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
     keywords: ["都道府県", "デジタル", "テレワーク", "通信", "ICT", "統計"],
     status: "idea",
   },
+  // KDP セレクト専用の新作 (2026-11-04 オーナー決定)。本文は repo に入れない: リポジトリが公開で、
+  // サイトや GitHub で読める本は KDP セレクトの独占に反するため (KDP-ROYALTY-RATE-CHECK-01)。
+  {
+    id: "K-S1-13",
+    series: "S1-issues",
+    title: "住む県の選び方 — 統計で比べる家賃・仕事・子育て・医療・災害",
+    concept: "総合の住みやすさランキングに頼らず、自分の条件に合う指標を選んで 47 都道府県を比べる手順の本。",
+    design: {
+      readerProblem: "転職・結婚・子育て・老後で住む県を比べたいが、総合ランキングは自分の条件に合わず、どの数字をどう組み合わせれば決められるか分からない。",
+      harm: ["M", "H", "R"],
+      harmReason: "住居費と家計 (M)、医療と介護 (H)、家族の暮らしの判断 (R) に関わる。",
+      valueAndPayReason: "無料のサイトは指標ごとの比較まで。本書は目的別に指標を組み合わせ、読者が自分の点数で答えを出す手順を提供する。",
+      demandEvidence: "2026-W43 の GSC で「住みやすい県ランキング」2,044 表示・「子育てしやすい県ランキング」74 クリック。本が売れるかは未検証。",
+      titleCandidates: [
+        { type: "資料・手順", title: "住む県の選び方 — 統計で比べる家賃・仕事・子育て・医療・災害" },
+        { type: "問い・気づき", title: "ランキングに頼らない住む県の決め方" },
+      ],
+      bodyPatterns: ["悩み直撃型", "比較型", "ケーススタディ型"],
+    },
+    author: AUTHOR,
+    chapters: [
+      { title: "はじめに — 「住みやすさ1位」を探す前に", source: "fresh", freshFile: KDP_ONLY("00-intro") },
+      { title: "第1章 総合の「住みやすさ」ランキングをそのまま使えない理由", source: "fresh", freshFile: KDP_ONLY("10-composite-ranking") },
+      { title: "第2章 家賃・物価と賃金", source: "fresh", freshFile: KDP_ONLY("20-rent-prices-wages") },
+      { title: "第3章 仕事と通勤", source: "fresh", freshFile: KDP_ONLY("30-work-commute") },
+      { title: "第4章 子育てと教育", source: "fresh", freshFile: KDP_ONLY("40-childcare-education") },
+      { title: "第5章 医療と介護", source: "fresh", freshFile: KDP_ONLY("50-medical-care") },
+      { title: "第6章 気候と災害", source: "fresh", freshFile: KDP_ONLY("60-climate-disaster") },
+      { title: "第7章 読者別の選び方の手順", source: "fresh", freshFile: KDP_ONLY("70-reader-guides") },
+      { title: "第8章 自分で点数を付ける手順", source: "fresh", freshFile: KDP_ONLY("80-scoring") },
+      { title: "終わりに — 県の数字は、問いの出発点", source: "fresh", freshFile: KDP_ONLY("90-ending") },
+      { title: "出典と方法", source: "fresh", freshFile: KDP_ONLY("95-sources-method") },
+    ],
+    priceYen: 500,
+    newContentNote: "全章を書き下ろした KDP 専用の本。サイト・note に同じ文章はない。",
+    keywords: ["都道府県", "移住", "住みやすさ", "家賃", "子育て", "統計"],
+    status: "manuscript",
+  },
 ];
 
 /** S2 (テーマ別データブック) — コナラ P-01〜P-14 の書籍版ダイジェスト。idea 止まり (需要実測後に章立て)。 */
@@ -666,7 +707,8 @@ const S4_BOOKS: readonly KindleBookDraft[] = [
  * ブログ章はそのまま挟み込む。出典補章は build-book が自動付与する。
  */
 function withS1Fresh(b: KindleBookDraft): KindleBookDraft {
-  if (b.id === "K-S1-01") return b;
+  // K-S1-01 は章を明示している。K-S1-13 は全章を repo の外に置く KDP 専用の本
+  if (b.id === "K-S1-01" || b.id === "K-S1-13") return b;
   const m = `src/channels/kindle/manuscripts/${b.id}`;
   const chapters: BookChapter[] = [
     { title: "はじめに", source: "fresh", freshFile: `${m}/00-intro.md` },

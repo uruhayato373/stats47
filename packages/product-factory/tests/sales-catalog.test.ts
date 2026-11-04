@@ -30,10 +30,10 @@ describe("sales readiness does not conflate generation and publication", () => {
   });
   it("keeps the entire authored population when all evidence is missing", () => {
     const c = buildSalesCatalog(fixture(), "2026-09-06");
-    expect(c.offers).toHaveLength(62);
-    expect(new Set(c.offers.map(o => o.id)).size).toBe(62);
+    expect(c.offers).toHaveLength(63);
+    expect(new Set(c.offers.map(o => o.id)).size).toBe(63);
     expect(c.summary.free).toBe(1);
-    expect(c.offers.filter(o => o.kind === "book")).toHaveLength(32);
+    expect(c.offers.filter(o => o.kind === "book")).toHaveLength(33);
     expect(c.offers.every(o => o.buildStatus === "missing")).toBe(true);
     expect(c.warnings.length).toBeGreaterThan(0);
     expect(c.selectedRevisions).toEqual(CURRENT_SALES_REVISIONS);
@@ -81,6 +81,6 @@ describe("sales readiness does not conflate generation and publication", () => {
     const c = buildSalesCatalog(fixture(), "today");
     c.offers[0].title = "<img src=x onerror=alert(1)>";
     expect(renderSalesHtml(c)).not.toContain("<img src=x");
-    expect(renderSalesCsv(c).split("\r\n")).toHaveLength(78); // 62 offers + 14 note variants + header + terminator
+    expect(renderSalesCsv(c).split("\r\n")).toHaveLength(79); // 62 offers + 14 note variants + header + terminator
   });
 });
