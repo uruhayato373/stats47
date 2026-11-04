@@ -1,7 +1,0 @@
-{
-  "metric": "manufacturing-shipment-amount",
-  "since": "",
-  "dryRun": false,
-  "migrateLegacyRecipes": false,
-  "snapshotScope": "municipality"
-}
