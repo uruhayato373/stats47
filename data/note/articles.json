@@ -8653,7 +8653,7 @@
     {
       "key": "prefecture-household-consumption-pack",
       "vertical": "product-sales",
-      "title": "県庁所在市別 家計調査データ 685指標｜品目別 CSV・Excel",
+      "title": "県庁所在市別 家計調査データ 832指標｜品目別 CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8662,12 +8662,12 @@
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
+          "sha256": "11d6852faca17511192e7a1cf0b6d7459bf56072d812dbf5e115c5f5bf7bf8f4",
           "files": 4,
-          "bytes": 241703,
-          "savedAt": "2026-10-24T16:25:50.138Z"
+          "bytes": 241882,
+          "savedAt": "2026-11-04T10:55:17.953Z"
         },
-        "verifiedAt": "2026-10-24T16:25:50.138Z"
+        "verifiedAt": "2026-11-04T10:55:17.953Z"
       },
       "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
       "publishedAt": "2026-10-25",
