@@ -45,6 +45,8 @@ paths:
   採用は現在の候補の正確なSHAに対してだけ行う。新しい候補に古い承認を引き継がない。
 - `update-note-covers.mjs [--keys ...] [--commit]` は台帳の採用済みremote版だけを読み、
   画像専用更新と本文/価格/境界の保全・配信検証後に公開ポインタを更新する。
+  新規公開はこの更新を通らないので、公開後の `note:assets archive --keys <key>` が公開画像を保全し、採用版との画素照合に通れば公開ポインタを採用版へ結ぶ。
+  減色で照合に落ちた記事は原寸で目視し、同じ画像なら `--reviewed-match <key>` を足す (`--keys` にも同じキーが要る)。
   `verify-cover-refresh.mjs [--keys ...]` も台帳起点で検査する。管理画面からの保存は以下の制作内容・目視確認だけ。
 - `/content/note/covers` と `/ops/image-library` は同じ台帳を読む。非公開画像はlocalhostのGET proxyでSHAを照合して表示し、
   ローカル画像キャッシュを永続化しない。取得失敗・旧版未回収・未判定・未反映・観測の鮮度を表示する。

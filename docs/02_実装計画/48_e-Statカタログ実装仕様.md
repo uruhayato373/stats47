@@ -101,7 +101,7 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 
 - trigger: 月次cron (`0 18 2 * *` UTC = 3日03:00 JST。data-refresh 5日03:00 UTCと非重複) +
   `workflow_dispatch` (inputs: `meta_scope`既定`2,3` / `time_budget_min`既定120。job の timeout 180 分から全表の一覧取得と R2 反映の時間を残す) +
-  `push: branches: [estat-catalog-run]` (cloud環境代替、既存estat系と同じ)
+  (起動用の専用ブランチ `estat-catalog-run` は2026-11-04に廃止)
 - 1 job: checkout develop → `npm ci` → `catalog.mjs run` →
   `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix estat-catalog`。timeout 180分
 - **concurrency は `estat-catalog` (専用group)**。`r2-write`を使わない: このprefixは本workflow
@@ -110,7 +110,7 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
   `CLOUDFLARE_R2_SECRET_ACCESS_KEY`、`vars.CLOUDFLARE_ACCOUNT_ID` (`data-refresh.yml`と同じ変換)
 - git commit-backはしない (状態はR2のmanifest.jsonのみ)
 - 初回バックフィル: 県8,825+市区町村~3,400≈12,000 call、大表は1call 1〜5秒。時間予算150分で
-  1run 3,000〜5,000件 → `estat-catalog-run`へのpushを3〜4回でpending=0。以後は月次cronで
+  1run 3,000〜5,000件 → `workflow_dispatch`を3〜4回でpending=0。以後は月次cronで
   updatedDate差分のみ
 
 ## 5. 消費側の配線 (最小)

@@ -486,6 +486,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:general-perinatal-center-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:general-perinatal-center-count",
           "kind": "ranking"
         },
@@ -1650,6 +1654,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:golf-course-public-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:golf-green-fee-consumption-ranking",
           "kind": "blog"

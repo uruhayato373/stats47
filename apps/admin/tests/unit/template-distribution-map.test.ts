@@ -26,7 +26,8 @@ describe('geographic distribution map basic form', () => {
     const svg = await renderDistributionMap(fixture());
     const ys = (part: string) => [...part.matchAll(/ d="([^"]+)"/g)].flatMap((m) => [...m[1].matchAll(/[\d.]+,([\d.]+)/g)].map((p) => Number(p[1])));
     const mainland = ys(svg.split('data-map="mainland"')[1].split('</g>')[0]);
-    expect(Math.max(...mainland)).toBeLessThan(1262);
+    // 点が多く Math.max(...mainland) は環境によって引数の上限を超えるので畳み込む
+    expect(mainland.reduce((max, y) => Math.max(max, y), -Infinity)).toBeLessThan(1262);
     // Okinawa is set off by one slanted rule, not a box: within the rule's span every island lies on
     // the sea side and every mainland point on the other, and the arc is drawn large (not a dot in a corner).
     expect(svg).not.toMatch(/<rect[^>]*rx="10"/);

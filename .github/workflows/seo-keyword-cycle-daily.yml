@@ -96,7 +96,7 @@ jobs:
         id: review
         if: steps.plan.outputs.review == 'true'
         timeout-minutes: 15
-        uses: anthropics/claude-code-base-action@19324d6ae01311cf3112de059679b41348bdc770 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@a020ffdbe9f330845a556ed9f53d247394ef7fe4 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
@@ -155,6 +155,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # サイトを変えない提案 (data/seo だけ) は確かめる差分が無いので develop へ直接記録する (2026-11-04)。
+          # 読むのは週次レビュー。サイトを変える提案だけ下書き PR で人が確かめる。
+          if ! grep -qv '^data/seo/' .local/seo-rank-watch/proposal-paths.txt; then
+            while IFS= read -r file; do git add -- "$file"; done < .local/seo-rank-watch/proposal-paths.txt
+            git commit -m 'chore(seo): record keyword proposal without a site change [skip ci]'
+            git pull --rebase origin develop
+            git push origin develop
+            exit 0
+          fi
           branch="codex/seo-keyword-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           git switch -c "$branch"
           while IFS= read -r file; do git add -- "$file"; done < .local/seo-rank-watch/proposal-paths.txt

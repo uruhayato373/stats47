@@ -28,6 +28,8 @@ primary_agent: strategy-advisor
 
 以下を **Read / grep で直接読む**だけ。API 呼び出し・全文スキャンはしない。
 
+- **商品の台帳**: `data/products/PRODUCT-LEDGER.md` の商品群の実績・次の論点・期日の来た価格実験を読み、今月議論する論点を 1 つ選ぶ。新しい論点と決定は `data/products/product-strategy.json` に書く (価格と実績は書かない)。書籍の知識が要る問いは NotebookLM の「stats47 商品戦略」へ `notebooklm ask` で聞き、Claude に全文を読ませない
+
 0. **前月の月次レビュー（必須の入力）**
    ```bash
    node .claude/scripts/management/check-review-cadence.mjs

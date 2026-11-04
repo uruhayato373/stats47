@@ -2555,6 +2555,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fire-deaths-per-100k-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:safety",
           "kind": "japan-theme"
         },
@@ -3392,6 +3396,10 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fire-department-pump-car-count-per-100-thousand-people",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:fire-department-pump-car-count-per-100-thousand-people",
@@ -4620,6 +4628,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:fish-canned-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fish-canned-consumption-expenditure",
           "kind": "ranking"
@@ -11673,6 +11685,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:flood-damage-public-infrastructure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:flood-damage-public-infrastructure",
           "kind": "ranking"
         }
@@ -11742,6 +11758,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:flood-damage-total-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:flood-damage-total",
           "kind": "ranking"
@@ -12272,6 +12292,10 @@
         },
         {
           "pageId": "blog:dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:floor-area-per-dwelling-owner-prefecture-gap",
           "kind": "blog"
         },
         {

@@ -3,7 +3,8 @@
 # 呼び出し元: fetch-metrics-weekly.yml (土曜 02:00 JST。GA4/GSC snapshot の直後) と、土曜の /weekly-review Phase 0b (Mac)。
 # レビューでも作り直すのは、Mac が土曜 07:00 に取る認証付き計測 (A8・note・KDP・楽天) が 02:00 の state に入らないため
 # (2026-10-26 に CI の improvement-cycle-weekly.yml から移した)。
-# GA4 Admin 監査 state は google-admin README の規約で commit しないので /tmp へ退避し、派生値だけ builder に渡す。
+# GA4 Admin の監査は週ごとに data/google-admin/audits/<週>.json へ残し (前の週との差分を計測の記録に出すため)、
+# 作業用の .claude/state/metrics/google-admin は消す (2026-11-04 オーナー判断。それまでは差分を追えなかった)。
 #
 # 使い方: bash .claude/scripts/metrics/refresh-measurement-cycle.sh YYYY-Www
 set -uo pipefail
@@ -19,8 +20,10 @@ if ! node .claude/scripts/google-admin/cli.mjs audit-api > /tmp/google-admin-aud
   echo "::warning::google-admin audit-api が非0終了 (AdSense 認証など identity 未達でも起きる。custom dimension は builder が status を見る)"
 fi
 if [ -f .claude/state/metrics/google-admin/api-latest.json ]; then
-  cp .claude/state/metrics/google-admin/api-latest.json /tmp/google-admin-api-latest.json
-  ARGS+=(--admin-audit /tmp/google-admin-api-latest.json)
+  mkdir -p data/google-admin/audits
+  cp .claude/state/metrics/google-admin/api-latest.json "data/google-admin/audits/$WEEK.json"
+  ARGS+=(--admin-audit "data/google-admin/audits/$WEEK.json")
 fi
 rm -rf .claude/state/metrics/google-admin
+node .claude/scripts/products/build-product-ledger.mjs || echo "::warning::商品の台帳を作り直せなかった (未分類の商品がある。data/products/product-strategy.json の商品群を直す)"
 node .claude/scripts/metrics/build-measurement-cycle.mjs "${ARGS[@]}"

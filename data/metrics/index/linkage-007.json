@@ -1660,6 +1660,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:elementary-school-teachers-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:school-teacher-annual-income",
           "kind": "blog"
         },
@@ -2905,6 +2909,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:emergency-hospital-general-clinic-count-per-100k-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:emergency-hospital-general-clinic-count-per-100k",
           "kind": "ranking"
         },
@@ -3431,6 +3439,10 @@
         {
           "pageId": "area-theme:47000:local-economy",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:employed-people-ratio-primary-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "municipality-ranking:employed-people-ratio-primary",
@@ -8340,6 +8352,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:eyeglasses-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:household-health-spending",
           "kind": "japan-theme"
         },
@@ -8767,6 +8783,10 @@
         {
           "pageId": "area-theme:47000:manufacturing",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:factory-location-area-annual-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:factory-location-area-annual",
@@ -9831,6 +9851,10 @@
           "kind": "area"
         },
         {
+          "pageId": "blog:female-scheduled-earnings-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:female-scheduled-earnings",
           "kind": "ranking"
         },
@@ -9871,6 +9895,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:final-disposal-site-remaining-capacity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:recycling-rate-gap",
           "kind": "blog"

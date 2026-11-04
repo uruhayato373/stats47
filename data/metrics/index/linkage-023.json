@@ -339,6 +339,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:psychiatric-hospital-avg-length-of-stay-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:psychiatric-hospital-avg-length-of-stay",
           "kind": "ranking"
         }
@@ -370,6 +374,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:psychiatric-hospital-bed-occupancy-rate-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:psychiatric-hospital-bed-occupancy-rate",
           "kind": "ranking"
@@ -405,6 +413,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:psychiatric-hospital-count-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "municipality-ranking:psychiatric-hospital-count",
           "kind": "municipality-ranking"
@@ -783,6 +795,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:gasoline-consumption-quantity-vs-public-assistance",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:public-assistance-education-beneficiaries-per-1000",
           "kind": "ranking"
@@ -1430,6 +1446,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:dual-income-household-ratio-vs-public-assistance-medical",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:public-assistance-medical-beneficiaries-per-1000",
           "kind": "ranking"
         }
@@ -1542,6 +1562,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:public-bath-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:public-bath-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1613,6 +1637,10 @@
       "consumers": [
         {
           "pageId": "blog:barber-beauty-salon-regional-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:public-bath-count-per-100k-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -2131,6 +2159,10 @@
         {
           "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:public-construction-contract-count-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "japan-theme:construction-industry",
@@ -3210,6 +3242,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:public-health-nurse-annual-income-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:public-health-nurse-annual-income",
           "kind": "ranking"
         },
@@ -3822,6 +3858,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:public-phone-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:public-phone-prefecture-vanishing",
           "kind": "blog"
         },
@@ -3860,6 +3900,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:public-phone-count-per-1000-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:public-phone-count-per-1000",
           "kind": "ranking"

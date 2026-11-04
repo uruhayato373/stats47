@@ -199,3 +199,6 @@ docs/books/
 /books/
 # 同上。参考PDFをagent設定配下へ常設しない。
 /.claude/pdfs/
+
+# GA4 Admin 監査の state は commit しない (.claude/scripts/google-admin/README.md)
+.claude/state/metrics/google-admin/

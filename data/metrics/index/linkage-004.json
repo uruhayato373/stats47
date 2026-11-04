@@ -1184,6 +1184,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:construction-employed-residents-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:construction-industry",
           "kind": "japan-theme"
         },
@@ -7768,6 +7772,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:cooking-oil-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:cooking-oil-consumption-quantity",
           "kind": "ranking"
         }
@@ -7991,6 +7999,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:road-total-length-vs-core-agricultural-workers",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:agriculture-production",
           "kind": "japan-theme"
         },
@@ -8133,6 +8145,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:cpi-change-rate-culture-recreation-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:cpi-change-rate-culture-recreation",
           "kind": "ranking"
@@ -8325,6 +8341,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:cpi-change-rate-food-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:cpi-change-regional-pattern",
           "kind": "blog"
@@ -12793,6 +12813,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:culture-recreation-expenditure-total-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:culture-recreation-expenditure-total",
           "kind": "ranking"

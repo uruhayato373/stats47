@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import sharp from 'sharp';
 
 export const sha256 = (value) =>
   createHash('sha256').update(value).digest('hex');
@@ -20,6 +21,20 @@ export function assertPublicCoverPixels(actual, expected) {
     throw Error(`public image differs: MAE=${meanPixelError}, largeDelta=${largeDeltaFraction}`);
   return { meanPixelError, largeDeltaFraction };
 }
+
+/** Compare a note delivery with the adopted original. A mismatch is a result, not a crash: archive keeps the observed copy. */
+export async function comparePublicCover(publicBytes, approvedBytes) {
+  const pixels = (bytes) => sharp(bytes).resize(1280, 670).removeAlpha().raw().toBuffer();
+  try { return { matched: true, ...assertPublicCoverPixels(await pixels(publicBytes), await pixels(approvedBytes)) }; }
+  catch (error) {
+    if (!error.message.startsWith('public image differs')) throw error;
+    return { matched: false, reason: error.message };
+  }
+}
+
+/** The public copy is an archive of the adopted revision only when the pixels agree or an exact key was reviewed by eye. */
+export const publishedRevisionAfterArchive = (archivedId, approvedId, comparison, reviewedMatch = false) =>
+  approvedId && (comparison?.matched || reviewedMatch) ? approvedId : archivedId;
 
 /** Include already delivered revisions so a partial batch keeps the same journal. */
 export const coverOperationVersion = (articles) =>

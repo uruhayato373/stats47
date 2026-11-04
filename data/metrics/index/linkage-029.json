@@ -6562,6 +6562,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:train-fare-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:train-fare-consumption-expenditure",
           "kind": "ranking"
         }
@@ -7793,6 +7797,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:travel-participation-rate-homecoming-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:travel-participation-rate-homecoming",
           "kind": "ranking"
         }
@@ -8609,6 +8617,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:treatment-rate-cerebrovascular-outpatient-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:treatment-rate-cerebrovascular-outpatient",
           "kind": "ranking"
         }
@@ -8967,6 +8979,10 @@
         {
           "pageId": "area-theme:47000:healthcare",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:treatment-rate-diabetes-outpatient-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:treatment-rate-diabetes-outpatient",
@@ -11077,6 +11093,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:tsunami-evacuation-tower-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:tsunami-evacuation-tower-count",
           "kind": "ranking"
         },
@@ -12110,6 +12130,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:umbrella-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "japan-theme:household-other-purchases",
           "kind": "japan-theme"

@@ -14,12 +14,8 @@ name: 📚 e-Stat Catalog (monthly)
 # 直列化しない — このプレフィックスは本 workflow が専有し app 配信に触れないため、
 # 30〜150 分の crawl 中に他の R2 反映を塞ぐ必要がない。
 #
-# 初回バックフィルは県 8,825 + 市区町村 ~3,400 ≈ 12,000 表。時間予算 150 分/run では
-# 1 回で終わらないため、estat-catalog-run ブランチへの push を 3〜4 回繰り返して
-# manifest の metaPending が 0 になるまで回す。
-#
-# workflow_dispatch は default ブランチ (main) 限定のため、main デプロイ無しで回せるよう
-# 専用ブランチ estat-catalog-run への push でも発火させる (既存 estat 系と同じ方式)。
+# 1 回で終わらないとき (初回は約 12,000 表) は workflow_dispatch を繰り返して manifest の
+# metaPending が 0 になるまで回す。起動用の専用ブランチは 2026-11-04 に廃止した。
 #
 # 設計: docs/02_実装計画/48_e-Statカタログ実装仕様.md
 
@@ -48,8 +44,6 @@ on:
         description: "true: L1 (getStatsList) のみ実行し getMetaInfo も R2 push もしない"
         required: false
         default: "false"
-  push:
-    branches: [estat-catalog-run]
   schedule:
     # 3日 03:00 JST = 2日 18:00 UTC。data-refresh (5日03:00 UTC) と非重複。
     - cron: "0 18 2 * *"

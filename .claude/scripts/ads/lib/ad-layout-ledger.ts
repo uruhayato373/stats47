@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 /**
  * 広告の枠の台帳 (config/ads/placements.json) の行から AdSense のユニット名を決める規則。
  * 撮影 (capture-ad-layout.ts) と管理画面 (/affiliate/layout) が同じ関数を使い、画面の「台帳にあり写っていない」が
@@ -10,4 +13,18 @@ export function unitOfEntry(entry: { marker: string; adsenseSlot?: string }): st
   // FooterAdSlot は中で CONTENT_FOOTER を使う (apps/web/src/features/ads/components/slots/FooterAdSlot.tsx)
   if (entry.marker.includes("FooterAdSlot")) return "CONTENT_FOOTER";
   return null;
+}
+
+/** AdSense のユニットの定義 (定数名と slotId の正本) */
+const ADSENSE_CONSTANTS = "apps/web/src/lib/google-adsense/constants.ts";
+
+/**
+ * slotId (番号) → ユニットの定数名。広告の段は番号でしか枠を記録できないので、台帳の名前と照らすために使う。
+ * 定数の書き方 `export const NAME: AdSlotConfig = { slotId: "123", ... }` を読む。
+ */
+export function adsenseUnitNames(projectRoot: string): Map<string, string> {
+  const text = readFileSync(join(projectRoot, ADSENSE_CONSTANTS), "utf8");
+  const names = new Map<string, string>();
+  for (const m of text.matchAll(/export const ([A-Z_]+): AdSlotConfig = \{\s*slotId: "(\d+)"/g)) names.set(m[2], m[1]);
+  return names;
 }

@@ -412,6 +412,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:childrens-clothes-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:childrens-clothes-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1417,10 +1421,6 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:frozen-gyoza-spending-prefecture-gap",
-          "kind": "blog"
         },
         {
           "pageId": "blog:kyoto-food-culture",
@@ -2563,6 +2563,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:clam-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
@@ -3315,6 +3319,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:clothing-footwear-expenditure-total-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:clothing-footwear-expenditure-total",
           "kind": "ranking"
         }
@@ -3388,6 +3396,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:cocoa-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:cocoa-consumption-expenditure",
           "kind": "ranking"
@@ -4260,6 +4272,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:coffee-drink-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:coffee-drink-consumption-expenditure",
           "kind": "ranking"
@@ -5382,6 +5398,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:avg-salary-police-prefecture-vs-community-sports-facility",
+          "kind": "blog"
         },
         {
           "pageId": "blog:sports-facility-regional-divide",
@@ -7676,6 +7696,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:complainant-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:complainant-count",
           "kind": "ranking"
         }
@@ -8165,6 +8189,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:confectionery-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:confectionery-consumption-expenditure",
