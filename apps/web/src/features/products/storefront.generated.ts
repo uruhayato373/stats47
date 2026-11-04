@@ -6,6 +6,27 @@ import type { StorefrontProduct } from "./types";
 
 export const STOREFRONT_PRODUCTS = [
   {
+    "id": "MUNI-MANUFACTURING",
+    "slug": "data-muni-manufacturing",
+    "channel": "note",
+    "channelLabel": "note有料データ集",
+    "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+    "description": "市区町村別の製造品出荷額等を 1980〜2023 年の時系列でそろえ、最新の境界の地図データと結合して使う",
+    "priceYen": 980,
+    "externalUrl": "https://note.com/stats47/n/n5d86476e9c73",
+    "included": [
+      "CSV",
+      "GEOJSON",
+      "PNG"
+    ],
+    "audience": [
+      "自治体の企画・産業振興担当",
+      "立地調査・地域分析の担当",
+      "研究者"
+    ],
+    "sourceBlogSlugs": []
+  },
+  {
     "id": "P-01",
     "slug": "data-p-01",
     "channel": "note",

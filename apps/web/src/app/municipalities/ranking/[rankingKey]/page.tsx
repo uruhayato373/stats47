@@ -50,6 +50,7 @@ import {
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
+import { findDataProductForMunicipalityRanking, TrackedProductLink } from '@/features/products';
 
 import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -186,6 +187,7 @@ export default async function MunicipalityRankingPage({
   });
 
   // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
   const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
   return (
     <PageShell>
@@ -284,6 +286,23 @@ export default async function MunicipalityRankingPage({
             values={snapshot.values}
           />
         </Suspense>
+      )}
+
+      {dataProduct && (
+        <p className="mt-5 text-sm text-muted-foreground">
+          この指標の長期の時系列と地図に結合できる境界データは、{dataProduct.channelLabel}（
+          {formatValueWithPrecision(dataProduct.priceYen, 0)}円）で配布しています。{' '}
+          <TrackedProductLink
+            href={hrefFor('product', { slug: dataProduct.slug })}
+            label={`${dataProduct.id}:${dataProduct.title}`}
+            surface="ranking_product"
+            product={dataProduct}
+            placement="municipality_ranking_product"
+            className="text-primary underline underline-offset-2"
+          >
+            内容を見る
+          </TrackedProductLink>
+        </p>
       )}
 
       <form

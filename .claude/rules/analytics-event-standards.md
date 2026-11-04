@@ -170,7 +170,7 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > **商品送客 (2026-11-03・未デプロイ)**: 商品案内の表示を `product_impression`、販売先 (Amazon / note / ココナラ) へ
 > 出ていくクリックを `product_click` で送る。パラメータは `product_destination` (販売先)・`product_id` (販売先での ID。
 > Amazon は ASIN、note は記事・マガジンのキー。外部 URL から `productReferralOf` が取り出し、形が合わなければ送らない)・
-> `link_position` (置き場所: `blog_product` / `ranking_product` / `ranking_csv_product` / `product_catalog` /
+> `link_position` (置き場所: `blog_product` / `ranking_product` / `municipality_ranking_product` / `ranking_csv_product` / `product_catalog` /
 > `product_companion` / `ranking-footer`。商品詳細から出たクリックは、詳細へ来る前の案内の置き場所を同じタブの
 > sessionStorage から引き継ぎ、無ければ `product_detail`)。`product_click` だけをキーイベントにする
 > (`AUTHORED_KEY_EVENTS`。サイト内の商品詳細への移動は `nav_click` のまま数えない)。`cta_click` の

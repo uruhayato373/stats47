@@ -8,6 +8,7 @@ import {
   findStorefrontProduct,
   findDataProductForBlog,
   findDataProductForRanking,
+  findDataProductForMunicipalityRanking,
   findDataProductUseCase,
   findFiscalCompanionProduct,
 } from "../storefront";
@@ -24,6 +25,15 @@ describe("product storefront", () => {
     });
     expect(findDataProductForBlog("other")).toBeNull();
     expect(findDataProductUseCase("other")).toBeNull();
+  });
+  it("市区町村ランキングには同じ指標のデータ商品だけを案内する", () => {
+    expect(findDataProductForMunicipalityRanking("manufacturing-shipment-amount")).toMatchObject({
+      id: "MUNI-MANUFACTURING",
+      channel: "note",
+      priceYen: 980,
+      externalUrl: "https://note.com/stats47/n/n5d86476e9c73",
+    });
+    expect(findDataProductForMunicipalityRanking("total-population")).toBeNull();
   });
   it("CSV を業務に使う人へ、ランキングの分野に合うデータ集を返す", () => {
     expect(findDataProductForRanking("financial-strength-index", "administrativefinancial")?.id).toBe("P-04");

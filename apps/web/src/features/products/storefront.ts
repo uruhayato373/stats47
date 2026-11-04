@@ -97,6 +97,17 @@ export function findDataProductForRanking(
   return slug ? findStorefrontProduct(slug) : null;
 }
 
+/** 市区町村ランキングの key → 同じ指標の時系列を売るデータ商品。 */
+const MUNICIPALITY_DATA_PRODUCTS: Readonly<Record<string, string>> = {
+  "manufacturing-shipment-amount": "data-muni-manufacturing",
+};
+
+/** 市区町村ランキングの読者へ案内する、同じ指標のデータ商品。無ければ null。 */
+export function findDataProductForMunicipalityRanking(rankingKey: string): StorefrontProduct | null {
+  const slug = MUNICIPALITY_DATA_PRODUCTS[rankingKey];
+  return slug ? findStorefrontProduct(slug) : null;
+}
+
 /** findDataProductForBlog が返すデータ集を、その記事の読者にどう使うかの導入文。 */
 export function findDataProductUseCase(blogSlug: string): string | null {
   return BLOG_DATA_PRODUCTS[blogSlug]?.useCase ?? null;
