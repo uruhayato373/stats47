@@ -2759,6 +2759,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "muni-manufacturing-shipment-data": {
+      "vertical": "product-sales",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "url": "https://note.com/stats47/n/n5d86476e9c73",
+      "is_paid": true,
+      "published_at": "2026-11-04",
+      "r2_path": "note/product-sales/muni-manufacturing-shipment-data",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 980
+    },
     "paid-n0135c75ca76c": {
       "vertical": "stats47-note",
       "title": "高校2年の体重格差、最大5.6kg！男女とも青森がトップ、岐阜が最下位",

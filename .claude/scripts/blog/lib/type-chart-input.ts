@@ -4,6 +4,7 @@
  * The types need all 47 prefectures with finite values. Data that cannot give that (ports, partial
  * surveys, duplicates) returns a reason instead, and the caller keeps the svg-builder chart.
  */
+import { prefectureShortName } from '../../../../packages/area/src/utils/prefecture-short-name';
 import { DEFAULT_SEQUENTIAL_SCHEME, colorSchemeTypeOf, normalizeColorScheme } from '../../../../packages/types/src/color-scheme';
 import { assertMetricPresentation, type MetricPresentation } from '../../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
@@ -127,8 +128,7 @@ export function prefecturesNamedNear(markdown: string, chartBase: string, names:
   const sections = markdown.split(/^(?=## )/m);
   const section = sections.find((s) => s.includes(`data/${chartBase}.svg`));
   if (!section) return [];
-  const short = (name: string) => (name === '北海道' ? name : name.replace(/[都府県]$/, ''));
-  const byShort = new Map(names.map((name) => [short(name), name]));
+  const byShort = new Map(names.map((name) => [prefectureShortName(name), name]));
   const pattern = new RegExp([...byShort.keys()].sort((a, b) => b.length - a.length).join('|'), 'g');
   // Links and cards point at other pages; their names are not what the text is saying about this chart.
   const prose = section.replace(/!?\[[^\]]*\]\([^)]*\)/g, '').replace(/<source-link[^>]*>.*?<\/source-link>/g, '');

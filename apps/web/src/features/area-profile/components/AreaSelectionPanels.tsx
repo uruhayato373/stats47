@@ -111,7 +111,7 @@ export function AreaSelectionPanels({
 
   return (
     <Tabs defaultValue="list" className={className}>
-      <TabsList className="grid h-auto w-full grid-cols-2">
+      <TabsList className="grid h-auto! w-full grid-cols-2">
         <TabsTrigger value="list" className="min-h-11">
           一覧から探す
         </TabsTrigger>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T21:58:44.366Z",
+  "generatedAt": "2026-11-04T03:17:11.813Z",
   "auditAt": "2026-10-30T20:35:34.756Z",
   "findings": [
     {
@@ -214,14 +214,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目、「地方」の7行の縦リストと、その下の「都道府県を選ぶ」: 地方の絞り込みが縦に7行並んで最初の画面の大半を占め、都道府県名の検索欄は画面の一番下に押し出される。このページの目的である都道府県の選択に届くまでスクロールが要る。 → 地方の絞り込みを横スクロールのチップか折りたたみにし、都道府県の検索と一覧を最初の画面に出す。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.807Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "地方の絞り込みを折り返すボタンにし、検索欄を先頭の画面へ上げた"
     },
     {
       "key": "agent|ranking",
@@ -469,14 +469,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/|clipped_text",
@@ -486,14 +486,14 @@
       "metric_key": "clipped_text",
       "severity": "warning",
       "detail": "clipped_text = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-11",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/|overlapping_tap_targets",
@@ -520,14 +520,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/01000/cities/01100|a11y_violations",
@@ -537,14 +537,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 4 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/01000/cities/01100|mobile_page_height",
@@ -571,14 +571,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/01000|mobile_page_height",
@@ -622,14 +622,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/02000/landslide-exposure|overlapping_tap_targets",
@@ -639,14 +639,14 @@
       "metric_key": "overlapping_tap_targets",
       "severity": "warning",
       "detail": "overlapping_tap_targets = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/07000|degraded_images",
@@ -724,14 +724,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/13000|a11y_violations",
@@ -741,14 +741,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/13000|small_text_count",
@@ -945,14 +945,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/47000|small_text_count",
@@ -979,14 +979,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/areas|mobile_page_height",
@@ -1064,14 +1064,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/blog/beer-peak-month-july-to-december|blog_svg_text_issues",
@@ -1098,14 +1098,14 @@
       "metric_key": "clipped_text",
       "severity": "warning",
       "detail": "clipped_text = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/blog/beer-peak-month-july-to-december|responsive_layout_issues",
@@ -1115,14 +1115,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/blog/birth-death-gap-decline|blog_svg_text_issues",
@@ -2135,14 +2135,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/blog/local-government-debt-burden|clipped_text",
@@ -2152,14 +2152,14 @@
       "metric_key": "clipped_text",
       "severity": "warning",
       "detail": "clipped_text = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/blog/local-government-debt-burden|responsive_layout_issues",
@@ -2169,14 +2169,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/blog/local-tax-prefecture-vs-railway-passengers|blog_svg_text_issues",
@@ -3053,14 +3053,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/category/landweather|a11y_violations",
@@ -3070,14 +3070,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/category/landweather|clipped_text",
@@ -3087,14 +3087,14 @@
       "metric_key": "clipped_text",
       "severity": "warning",
       "detail": "clipped_text = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-11",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/category/landweather|responsive_layout_issues",
@@ -3104,14 +3104,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-11",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/category/population|a11y_violations",
@@ -3121,14 +3121,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 4 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/category/population|clipped_text",
@@ -3138,14 +3138,14 @@
       "metric_key": "clipped_text",
       "severity": "warning",
       "detail": "clipped_text = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-11",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/category/population|overlapping_tap_targets",
@@ -3172,14 +3172,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/geo/population-flood-risk/15/overlap|a11y_violations",
@@ -3189,14 +3189,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/geo/population-flood-risk/15/overlap|overlapping_tap_targets",
@@ -3206,14 +3206,14 @@
       "metric_key": "overlapping_tap_targets",
       "severity": "warning",
       "detail": "overlapping_tap_targets = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/geo/population-land-price|overlapping_tap_targets",
@@ -3223,14 +3223,14 @@
       "metric_key": "overlapping_tap_targets",
       "severity": "warning",
       "detail": "overlapping_tap_targets = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:11.398Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/geo|a11y_violations",
@@ -3240,14 +3240,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/japan|a11y_violations",
@@ -3257,14 +3257,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/junior-high-school-count|a11y_violations",
@@ -3274,14 +3274,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/manufacturing-shipment-amount/23000|a11y_violations",
@@ -3291,14 +3291,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/per-taxpayer-income/13000|a11y_violations",
@@ -3308,14 +3308,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/themes/aging-society|a11y_violations",
@@ -3325,14 +3325,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/municipalities|a11y_violations",
@@ -3342,14 +3342,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/products/data-p-01|a11y_violations",
@@ -3359,14 +3359,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/products|a11y_violations",
@@ -3376,14 +3376,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/junior-high-club-per100-swimming|a11y_violations",
@@ -3393,14 +3393,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/junior-high-club-per100-swimming|mobile_page_height",
@@ -3427,14 +3427,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/national-pension-full-exemption-rate|mobile_page_height",
@@ -3478,14 +3478,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-18",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/natto-consumption-expenditure|mobile_page_height",
@@ -3512,14 +3512,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/population-growth-rate|mobile_page_height",
@@ -3546,14 +3546,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/smartphone-usage-rate-by-sex|mobile_page_height",
@@ -3580,14 +3580,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/total-population|mobile_page_height",
@@ -3614,14 +3614,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/survey/census|a11y_violations",
@@ -3631,14 +3631,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/survey/police-statistics|a11y_violations",
@@ -3648,14 +3648,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/tag/population|a11y_violations",
@@ -3665,14 +3665,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|https://stats47.jp/themes/population-dynamics|responsive_layout_issues",
@@ -3699,14 +3699,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-04T03:17:10.957Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "本文の補足文字 (muted-foreground) の地 #f5f5f5 への比が 4.34 だったのをトークンで 4.5 以上へ。手元の代表 7 ページ・2 幅で axe の重大違反 0"
     },
     {
       "key": "machine|municipality|title_changed",

@@ -1,4 +1,5 @@
 # Memory Index
+- [note profile launch](feedback_note_profile_launch.md) — note の専用プロファイルは素の Chrome で開かず Playwright 経由で起動する。401 なら保存済みセッションを確認してオーナーへ
 
 - [next eslint unpatched braces](feedback_next_eslint_unpatched_braces.md) — Next ESLint経由の未修正bracesは限定overrideで除去。実際のページ検出・lint・auditとクリーンinstallで検証する
 

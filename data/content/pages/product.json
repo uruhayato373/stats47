@@ -2,6 +2,14 @@
   "version": 1,
   "pages": [
     {
+      "id": "product:data-muni-manufacturing",
+      "kind": "product",
+      "key": "data-muni-manufacturing",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "href": "/products/data-muni-manufacturing",
+      "published": true
+    },
+    {
       "id": "product:data-p-01",
       "kind": "product",
       "key": "data-p-01",

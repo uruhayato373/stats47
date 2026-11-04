@@ -10,6 +10,7 @@ export {
   findKindleProductForBlog,
   findDataProductForBlog,
   findDataProductForRanking,
+  findDataProductForMunicipalityRanking,
   findFiscalCompanionProduct,
   findStorefrontProduct,
 } from "./storefront";
