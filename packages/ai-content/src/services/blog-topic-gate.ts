@@ -27,6 +27,11 @@
  * **判定を変えるときは shape-gate と合わせる。** 40 行未満の扱いだけ意図的に違う
  * (ここは reject・ai-content 側は warn。理由は .claude/scripts/ai-content/lib/value-health.mjs)。
  *
+ * ## 書く価値の判定 (2026-11-04)
+ *
+ * データが壊れていなくても、順位の記事にならない指標がある。`checkTopicWorth` が量産の前に止める。
+ * 閾値は active 2,484 指標の最新年と公開済み 767 本で決めた (blog-quality-standards.md「書く価値の事前判定」)。
+ *
  * 正典: .claude/rules/metric-config-standards.md §分類軸は必ず 1 系列に絞る
  */
 
@@ -138,17 +143,70 @@ export function checkGroundedRows(rows: readonly GroundedRow[]): TopicGateVerdic
   return { ok: reasons.length === 0, reasons };
 }
 
+/** 上位・下位の平均を比べる県の数 */
+const WORTH_EDGE_COUNT = 5;
+/**
+ * 上位と下位の差が中央値のこの割合に満たなければ、差を論じる記事にならない。
+ * 身長 (1.4%・ブログの表示 2.3 万) を止めない値で、該当は active 2,484 指標のうち 1 件・公開済み 0 件。
+ */
+const MIN_EDGE_SPREAD_RATIO = 0.01;
+/** 値の種類がこれ未満なら、大半の県が同じ順位に並ぶ。該当 25 指標の公開記事はブログの表示 0 */
+const MIN_DISTINCT_VALUES = 10;
+/** 値のある県の下限。行数の下限 (checkGroundedRows) と同じ 40 */
+const MIN_OBSERVED_PREFECTURES = 40;
+/** 家計調査の 0 は「標本に購入世帯が無かった」で、統計上の 0 ではない */
+const ZERO_MEANS_MISSING_SOURCE = "家計調査";
+
+function averageOf(values: readonly number[]): number {
+  return values.reduce((sum, v) => sum + v, 0) / values.length;
+}
+
+/**
+ * 順位の記事として成り立つか。壊れた行は checkGroundedRows が見るので、有限の値だけで判定する。
+ * @param source 接地データの出典名 (0 の読み方を決める)
+ */
+export function checkTopicWorth(rows: readonly GroundedRow[], source = ""): TopicGateVerdict {
+  const values = rows
+    .map((r) => r.value)
+    .filter((v): v is number => typeof v === "number" && Number.isFinite(v))
+    .sort((a, b) => b - a);
+  if (values.length < WORTH_EDGE_COUNT * 2) return { ok: true, reasons: [] };
+  const reasons: string[] = [];
+
+  const top = averageOf(values.slice(0, WORTH_EDGE_COUNT));
+  const bottom = averageOf(values.slice(-WORTH_EDGE_COUNT));
+  const median = values[Math.floor(values.length / 2)];
+  if (median !== 0 && (top - bottom) / Math.abs(median) < MIN_EDGE_SPREAD_RATIO) {
+    reasons.push(`上位と下位に差が無い (上位${WORTH_EDGE_COUNT}県平均 ${top} と下位${WORTH_EDGE_COUNT}県平均 ${bottom})`);
+  }
+
+  const distinct = new Set(values).size;
+  if (distinct < MIN_DISTINCT_VALUES) {
+    reasons.push(`値が ${distinct} 種類しかなく、大半の県が同じ順位に並ぶ`);
+  }
+
+  if (source.includes(ZERO_MEANS_MISSING_SOURCE)) {
+    const observed = values.filter((v) => v !== 0).length;
+    if (observed < MIN_OBSERVED_PREFECTURES) {
+      reasons.push(`購入世帯のある県が ${observed} 県しかない (0 は標本に購入が無かった県)`);
+    }
+  }
+  return { ok: reasons.length === 0, reasons };
+}
+
 /** allowlist と接地データの両方を見た最終判定 */
 export function gateTopicData(
   rankingKey: string,
   rows: readonly GroundedRow[],
   now: Date,
   anomalies: readonly ExpectedShapeAnomalyEntry[] = EXPECTED_SHAPE_ANOMALY,
+  source = "",
 ): TopicGateVerdict {
   const known = findKnownBrokenChecks(rankingKey, now, anomalies).map(
     (c) => `既知の壊れ (allowlist known-broken): ${c}`,
   );
   const grounded = checkGroundedRows(rows);
-  const reasons = [...known, ...grounded.reasons];
+  const worth = checkTopicWorth(rows, source);
+  const reasons = [...known, ...grounded.reasons, ...worth.reasons];
   return { ok: reasons.length === 0, reasons };
 }

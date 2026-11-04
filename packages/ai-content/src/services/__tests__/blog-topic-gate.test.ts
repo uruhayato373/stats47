@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { checkGroundedRows, findKnownBrokenChecks, gateTopicData } from "../blog-topic-gate";
+import { checkGroundedRows, checkTopicWorth, findKnownBrokenChecks, gateTopicData } from "../blog-topic-gate";
 
 const NOW = new Date("2026-07-31T00:00:00Z");
 const KNOWN_BROKEN_FIXTURE = [
@@ -114,5 +114,46 @@ describe("gateTopicData", () => {
   it("allowlist に無くても接地データが壊れていれば弾く", () => {
     const rows = [...healthyRows(), { areaName: "県1", value: 1, rank: 48 }];
     expect(gateTopicData("no-such-metric-key-xyz", rows, NOW).ok).toBe(false);
+  });
+});
+
+describe("checkTopicWorth", () => {
+  const rowsOf = (values: number[]) => values.map((value, i) => ({ areaName: `県${i}`, value, rank: i + 1 }));
+  const spread = (from: number, step: number) => Array.from({ length: 47 }, (_, i) => from - i * step);
+
+  it("健全な広がりなら通す", () => {
+    expect(checkTopicWorth(rowsOf(spread(1000, 10))).ok).toBe(true);
+  });
+
+  it("身長のように差が小さくても 1% を超えれば通す", () => {
+    expect(checkTopicWorth(rowsOf(spread(170, 0.1))).ok).toBe(true);
+  });
+
+  it("上位と下位の差が中央値の 1% に満たなければ止める", () => {
+    const verdict = checkTopicWorth(rowsOf(spread(1000, 0.1)));
+    expect(verdict.ok).toBe(false);
+    expect(verdict.reasons.join()).toMatch(/差が無い/);
+  });
+
+  it("値の種類が少なく同順位だらけなら止める", () => {
+    const verdict = checkTopicWorth(rowsOf(Array.from({ length: 47 }, (_, i) => (i % 5) * 10)));
+    expect(verdict.reasons.join()).toMatch(/種類/);
+  });
+
+  it("家計調査の 0 は欠けとして数え、値のある県が 40 未満なら止める", () => {
+    const values = [...spread(1000, 10).slice(0, 39), ...Array.from({ length: 8 }, () => 0)];
+    const verdict = checkTopicWorth(rowsOf(values), "家計調査");
+    expect(verdict.ok).toBe(false);
+    expect(verdict.reasons.join()).toMatch(/購入世帯/);
+  });
+
+  it("家計調査以外の 0 は統計上の 0 なので止めない (内陸県の水産業など)", () => {
+    const values = [...spread(1000, 10).slice(0, 39), ...Array.from({ length: 8 }, () => 0)];
+    expect(checkTopicWorth(rowsOf(values), "漁業センサス").ok).toBe(true);
+  });
+
+  it("gateTopicData に判定がつながっている", () => {
+    const verdict = gateTopicData("no-such-metric-key-xyz", rowsOf(spread(1000, 0.1)), NOW);
+    expect(verdict.ok).toBe(false);
   });
 });

@@ -821,11 +821,19 @@ updated: 2026-11-01
 - **案**: 目的ごとに指標と重みを明示した 4 本 (子育て・老後・単身・移住)。重みと指標は記事内に書き、読者が組み替えられることを示す。市区町村の子育て (`MUNI-KOSODATE-RANKING-01`) と指標を揃える。
 - **決めること**: 総合の 1 本の 4 週の実績を見てから作るか、今作るか。合成指標は恣意的に見えるので、重みの根拠を書けない目的は作らない。
 
+### [BLOG-REGION-PUBLISHED-FIX-01] 公開済み 21 本の地方のくくりと題の約束の誤りを直す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-11-04] [領域:サイト]
+
+- **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 21 本で見つかった (地方 17・題 4)。検出は全件読み、「新潟など東北」「内陸県の山形」のような本物の誤りだった。gate が止めるのは再公開の時だけなので、公開中の記事は直るまで残る。
+- **対象**: `assembly-answer-chatgpt-5steps` `chinese-noodles-expenditure-ranking` `chocolate-snack-consumption-expenditure-prefecture-gap` `croquette-consumption-expenditure-prefecture-gap` `delivery-hospital-count-prefecture-gap` `fire-department-pump-car-count-per-100-thousand-people` `foreign-overnight-guests-prefecture-gap` `furusato-fundraising-cost-prefecture-prefecture-gap` `hospital-bed-utilization-map` `manufacturing-industry-added-value-prefecture-gap` `mayonnaise-consumption-expenditure` `nagano-food-culture` `pork-consumption-quantity` `school-nonattendance-pattern` `sugar-consumption-prefecture-gap` `tochigi-food-culture` `tokyo-food-culture` `treatment-rate-cerebrovascular-outpatient-prefecture-gap` `treatment-rate-schizophrenia-inpatient-prefecture-gap` `tuna-consumption-quantity-vs-annual-new-inpatients-general` `yamagata-food-culture`
+- **完了条件**: 各記事の quality-gate で `地方のくくり` と `題の約束` の blocker が 0。`/brushup-blog --target article` で本文を直す。
+
 ### [BLOG-HEADLESS-AUTHOR-01] ブログ執筆を headless `claude -p` のバッチに移し、本数を増やしながら 1 本あたりの費用と通過率を記録する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run] [起票:2026-10-28] [領域:サイト] [進行中]
 
 - **背景 (2026-10-28 オーナー指示)**: 「Claude のトークン消費を節約してブログをもっと展開したい」。Agent tool (article-writer / blog-critic) は subagent が CLAUDE.md と rules を毎ターン読み、是正で約 10 万トークン/本・旧 CI で $8.2/本だった。ランキング解説の headless 経路は $0.51/件 (`ranking-content-standards.md`)。
 - **実装 (branch `claude/determined-newton-2d077c`)**: `packages/ai-content/src/scripts/write-blog-headless.ts` + `src/services/claude-cli-runner.ts`。準備 (`generate-blog-article.ts`) が作った prompt を sonnet・effort low の `claude -p` で書き、`quality-gate.mjs` + `ci-factual-gate.mjs` → 別プロセスの critic (`buildBlogCriticPrompt`・本文だけ) → REVISE なら指摘と原稿を author に返して 1 回書き直す。記録は `data/blog/headless-runs.csv`。公開はしない (`published:false` のまま)。手順は `/write-prepared-article` の「headless 経路」。
+- **量産の入口 (2026-11-04)**: `npm run blog:batch` に一本化した (対象選定〜`--ingest`・一覧。`blog-quality-standards.md`「量産バッチ」)。書く前の材料・書く価値の判定・地方と題の検査も入れた。
 - **実測 (2026-10-28 の要約、明細は `data/blog/headless-runs.csv`)**: 5 本・15 run で、1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27。審査 prompt に書き手の制約と重大度の基準を書き verdict を blocker の有無からコードで決めるよう直した後は 2/4 PASS・PASS 1 本 $0.32 (Agent tool 経路の約 1/25)。残る blocker は記事の事実誤り (山口と岡山を隣接と書く・北海道を東北に含める・題が「なぜ」を約束して答えない) と、審査が順位の整合を疑う誤判定。費用は CLI の `total_cost_usd` (API 換算・Pro/Max の OAuth では実請求ではない)。
 - **次 (実行順)**: ⓪ author prompt (`blog-article-prompt.ts`) に「題で『なぜ』を約束したら本文で答える。答えられないなら題を変える」と、地方区分・隣接の言及は prompt に渡した区分だけを使う指示を足す (残る blocker の多数) ① 型B 以外 (A / D2 / F) で 3〜5 本ずつ回し、型ごとの通過率と費用を CSV に貯める ② 通過率が低い型は critic の指摘を読んで author prompt (`blog-article-prompt.ts`) 側を直す (critic は緩めない) ③ PASS 分を `--ingest` で確定して develop へ push する (公開は週次計画の本数で人が決める)。
 - **完了条件**: 型ごとに 5 本以上の実測が CSV にあり、既定の運転設定 (型・本数・rounds) を skill に書いている。

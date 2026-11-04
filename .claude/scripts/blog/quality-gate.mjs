@@ -31,7 +31,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { checkArticleFactual } from '../lib/article-factual-check.mjs';
+import { buildGroundTruth, checkArticleFactual } from '../lib/article-factual-check.mjs';
 import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
 import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
 import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
@@ -40,6 +40,8 @@ import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import { chartSourceShapeErrors } from '../lib/chart-source-schema.mjs';
 import { lintMixedYearTitle } from '../lib/title-year-lint.mjs';
+import { lintRegionClaims } from '../lib/region-claim-lint.mjs';
+import { TITLE_PROMISE_WARNING_RULES, lintTitlePromises } from '../lib/title-promise-lint.mjs';
 import { lintHypernymMetricNames, lintExtremeBaseYear } from '../lib/metric-name-lint.mjs';
 import {
   lintSvgContent,
@@ -443,6 +445,18 @@ checks.groundTruthPrefCount = factual.groundTruthPrefCount;
 checks.isPerCapitaArticle = factual.isPerCapitaArticle;
 blockers.push(...factual.blockers);
 warnings.push(...factual.warnings);
+
+// 地方のくくりと題の約束 (2026-11-04 追加)。critic の指摘の型 region・title-promise のうち機械で判定できる形。
+// 規則ごとの実測は各 lint の冒頭に書いた。
+const claimTruth = buildGroundTruth(dataDir);
+const regionClaims = lintRegionClaims(content, claimTruth);
+checks.regionClaims = regionClaims.length;
+blockers.push(...regionClaims.map((f) => `地方のくくり (${f.rule}): ${f.text}`));
+const titlePromises = lintTitlePromises(content, claimTruth);
+checks.titlePromises = titlePromises.length;
+for (const f of titlePromises) {
+  (TITLE_PROMISE_WARNING_RULES.has(f.rule) ? warnings : blockers).push(`題の約束 (${f.rule}): ${f.text}`);
+}
 
 // fail-closed: rank 主張があるのに ground truth (data/*.json) が無い記事は「検証不能」= blocker。
 // (2026-06-08 追加) cron 自動生成ドラフトが data 無しで rank を捏造 → factual-check は gt 空だと

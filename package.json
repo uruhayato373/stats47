@@ -79,6 +79,7 @@
     "surveys:lenses:test": "node --test .claude/scripts/lib/__tests__/survey-lenses.test.mjs",
     "check:image-pipeline-policy": "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
     "blog-images:codex": "tsx apps/web/scripts/manage-blog-codex-backgrounds.ts",
+    "blog:batch": "tsx packages/ai-content/src/scripts/write-blog-batch.ts",
     "check:blog-images": "npm run blog-images:codex -- check",
     "check:file-url-guard": "node .claude/scripts/lib/check-file-url-guard.cjs",
     "check:import-meta-dirname": "node .claude/scripts/lib/check-import-meta-dirname-guard.cjs",

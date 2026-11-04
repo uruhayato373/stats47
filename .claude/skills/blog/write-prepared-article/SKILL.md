@@ -17,6 +17,24 @@ primary_agent: article-writer
 > 2026-08-21 に削除した — 対話セッションと同じ Pro/Max 利用枠を食うため。
 > 正典: `.claude/rules/blog-quality-standards.md` / `.claude/rules/blog-data-schema.md` §0
 
+## 量産は 1 コマンド (既定)
+
+本数がまとまるときは `blog:batch` を使う。対象選定から `--ingest` まで順に実行し、結果の一覧を出す。
+公開と R2 への書き込みはしない (仕様は `.claude/rules/blog-quality-standards.md`「量産バッチ」)。
+
+```bash
+# 対象の確認 (何も書かない)
+npm run blog:batch -- --source kakei-chousa --count 6 --dry-run
+# 実行。調査材料は --notebook "stats47 家計調査 2025" か --research-dir <dir> で取り込む
+npm run blog:batch -- --source kakei-chousa --count 6
+```
+
+一覧で「公開待ち」は下の 6 の push へ進める。「背景待ち」は一覧のコマンドで Codex の背景を作り
+(`/generate-blog-images` の Mode A)、`--ingest` をやり直す。「ゲート落ち」「critic 差し戻し」は送り箱に原稿が残るので、
+review.md と一覧の理由を読んで直す。
+
+以下は 1 本ずつ手で回すときの手順。
+
 ## 準備（この skill の中で先に回す）
 
 ```bash
@@ -55,6 +73,8 @@ npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --limit 3
 # 明示指定・確認だけ
 npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --slugs <a>,<b>
 npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run
+# 3 本まで並列 (blog:batch の既定)
+npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --limit 3 --concurrency 3 --retries 2 --revise-rounds 2
 ```
 
 - 流れ: author (sonnet・effort low) → `quality-gate.mjs` + `ci-factual-gate.mjs` (落ちたら blocker を添えて
@@ -142,6 +162,7 @@ R2 に公開する。公開後は CI が `contents/blog` の当該ドラフト�
 
 ## 関連
 
+- 量産の入口: `packages/ai-content/src/scripts/write-blog-batch.ts` (`npm run blog:batch`)
 - 準備側: `packages/ai-content/src/scripts/generate-blog-article.ts` / `.claude/scripts/blog/build-topic-queue.mjs`
 - 公開: `contents/blog/<slug>/article.md` を `published: true` で develop へ push すると
   `blog-auto-publish.yml` が push トリガーで発火する
