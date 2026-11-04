@@ -24,20 +24,17 @@ describe("DataUsageCard", () => {
     expect(screen.getByRole("link", { name: "ダウンロード" }).getAttribute("href")).toContain("basis=all-bases");
   });
 
-  it("「業務の資料」と答えた人に、その分野のデータ集を案内する", () => {
+  it("CSV を落とす前から、その分野のデータ集を案内する", () => {
     render(<DataUsageCard {...baseProps} />);
-    fireEvent.click(screen.getByRole("link", { name: "ダウンロード" }));
-    fireEvent.click(screen.getByRole("button", { name: "業務の資料" }));
-    const product = screen.getByRole("link", { name: "内容と条件を確認する" });
+    const product = screen.getByRole("link", { name: "内容を見る" });
     expect(product.getAttribute("href")).toBe("/products/data-p-04");
     expect(screen.getByText(findStorefrontProduct('data-p-04')!.title, { exact: false })).toBeTruthy();
   });
 
-  it("「学習・研究」と答えた人には出典の書き方を示し、商品は出さない", () => {
+  it("「学習・研究」と答えた人には出典の書き方を示す", () => {
     render(<DataUsageCard {...baseProps} />);
     fireEvent.click(screen.getByRole("link", { name: "ダウンロード" }));
     fireEvent.click(screen.getByRole("button", { name: "学習・研究" }));
     expect(screen.getByText(/stats47 にて加工/)).toBeTruthy();
-    expect(screen.queryByRole("link", { name: "内容と条件を確認する" })).toBeNull();
   });
 });
