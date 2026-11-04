@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-11-04T02:48:51.165Z",
+  "updatedAt": "2026-11-04T02:59:08.504Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -39994,7 +39994,7 @@
     },
     {
       "articleKey": "muni-manufacturing-shipment-data",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n5d86476e9c73",
       "revisions": [
         {
           "sha256": "0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54",
@@ -40040,11 +40040,41 @@
               "planSha256": "1201c3a1d2de4db7c22df7439f81e0a22daff1ac3c4329275d8ec2ea403fb02f"
             }
           }
+        },
+        {
+          "sha256": "0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/muni-manufacturing-shipment-data/revisions/0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b.png"
+          },
+          "bytes": 414056,
+          "id": "0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-04T02:59:04.684Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332041499/rectangle_large_type_2_ed3faeff21eb6e6a34de3f45686521e9.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b"
+          }
         }
       ],
       "candidateRevisionId": "0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54",
       "approvedRevisionId": "0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332041499/rectangle_large_type_2_ed3faeff21eb6e6a34de3f45686521e9.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-04T02:59:04.684Z",
+        "revisionId": "0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00507",

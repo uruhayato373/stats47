@@ -10,7 +10,7 @@
       "id": "data-pack-theme",
       "name": "テーマ別データ集",
       "stance": "price-test",
-      "products": 12,
+      "products": 13,
       "priceMinYen": 980,
       "priceMaxYen": 980,
       "pageViews": 93,
@@ -2115,6 +2115,19 @@
         "toYen": 980,
         "appliedAt": "2026-11-04T02:20:18.702Z"
       }
+    },
+    {
+      "channel": "note",
+      "key": "muni-manufacturing-shipment-data",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "line": "data-pack-theme",
+      "status": "published",
+      "priceYen": 980,
+      "netPerSaleYen": 837,
+      "pageViews": null,
+      "salesYen": null,
+      "unitsSold": null,
+      "lastPriceChange": null
     },
     {
       "channel": "kdp",
