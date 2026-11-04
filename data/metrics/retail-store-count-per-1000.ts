@@ -6,6 +6,7 @@ export const retailStoreCountPer1000: MetricConfig = {
   "title": "小売店数",
   "subtitle": "1000人当たり（旧統計）",
   "unit": "店",
+  "denominator": "population",
   "category": "commercial",
   "source": {
     "kind": "estat",

@@ -6,6 +6,7 @@ export const japanHealthInsuranceSocietyVisitRateDependentsPer1000: MetricConfig
   "title": "全国保険協会管掌健康保険受診率",
   "subtitle": "被扶養者1000人当たり",
   "unit": "被扶養者千対",
+  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

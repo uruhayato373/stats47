@@ -1,4 +1,5 @@
 # Memory Index
+- [r2-write pending replaced](feedback_r2_write_pending_replaced.md) — r2-write の待機は 1 本だけ。後の run が待機中を cancelled にする。完了を待って次を起動する
 - [chart ledger read first](feedback_chart_ledger_read_first.md) — 図のデータ欠けを語る前に台帳を読む。形の合格は値の正しさを保証しない。型の見た目は見本を見せてから全件へ
 - [note profile launch](feedback_note_profile_launch.md) — note の専用プロファイルは素の Chrome で開かず Playwright 経由で起動する。401 なら保存済みセッションを確認してオーナーへ
 

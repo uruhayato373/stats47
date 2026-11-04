@@ -6,6 +6,7 @@ export const japanHealthInsuranceSocietyVisitRateInsuredPer1000: MetricConfig = 
   "title": "全国保険協会管掌健康保険受診率",
   "subtitle": "被保険者1000人当たり",
   "unit": "被保険者千対",
+  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

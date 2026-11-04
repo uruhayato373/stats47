@@ -6,6 +6,7 @@ export const perCapitaSocialEducationExpenditurePrefMunicipal: MetricConfig = {
   "title": "社会教育費",
   "subtitle": "都道府県・市町村財政合計",
   "unit": "千円",
+  "denominator": "population",
   "category": "educationsports",
   "source": {
     "kind": "estat",

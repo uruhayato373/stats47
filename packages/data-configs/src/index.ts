@@ -1,4 +1,5 @@
 export * from "./types";
+export * from "./metric-denominator";
 // サイト識別子 SSOT の再 export (@stats47/types を直接依存に持たない product-factory 等向け)
 export { SITE } from "@stats47/types";
 export { resolveMetricSource } from "./source-for-entity";

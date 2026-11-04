@@ -6,6 +6,7 @@ export const fireDeathsPer100k: MetricConfig = {
   "title": "火災死亡者数",
   "description": "火災年報による火災死亡者の年間総人数。",
   "unit": "人",
+  "denominator": "none",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

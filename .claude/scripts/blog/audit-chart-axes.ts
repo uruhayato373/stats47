@@ -8,6 +8,8 @@
  *   - source.json の形 (config/schema/blog.chart-source.schema.json)
  *   - axes があり、proof=values の軸は全点が観測値で再現できる (matchScatterAxis)
  *   - 図が共通の型の画像になっている / 暗い版がある
+ *   - ランキングと地図の図は、記事の点データが指標の今の値と同じか (stale-value)。指標を直しても記事の図は
+ *     公開時の写しのままなので、ここで見つけて是正キューの data-refresh へ入れる
  *
  * Usage:
  *   npx tsx .claude/scripts/blog/audit-chart-axes.ts                       # 公開 R2 全件 → data/blog/chart-axes-*
@@ -34,6 +36,8 @@ const NO_WRITE = args.includes('--no-write');
 const CONCURRENCY = 6;
 
 export type ChartAxesIssue = 'no-data' | 'no-source' | 'bad-shape' | 'no-axes' | 'axis-mismatch' | 'not-type' | 'no-dark' | 'broken-label';
+/** 記事の図の値が指標の今の値と違う */
+export type StaleChart = { slug: string; base: string; rankingKey: string; year: string };
 
 const fetchText = async (url: string) => {
   for (let i = 0; i < 4; i++) {
@@ -71,6 +75,44 @@ export function scatterChartsOf(markdown: string) {
   return [...new Set([...markdown.matchAll(/data\/([\w-]*scatter[\w-]*)\.svg/g)].map((m) => m[1]))].filter((b) => !b.endsWith('-dark'));
 }
 
+// 丸めの違いは誤りではない (半端の丸め方で最終桁が 1 つ動く)
+const LAST_DIGIT_TOLERANCE = 1.5;
+const SCALES = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e8, 0.1, 0.01, 0.001];
+
+/** 点の値が観測値を最終桁の違いまでで再現するか。桁の違う書き方 (万人など) も見る */
+export function reproducesValues(points: { code: string; value: number }[], observed: Map<string, number>) {
+  return SCALES.some((scale) => points.every((p) => {
+    const v = observed.get(p.code);
+    if (v === undefined) return false;
+    const digits = (String(p.value).split('.')[1] ?? '').length;
+    return Math.abs(v / scale - p.value) <= LAST_DIGIT_TOLERANCE * 10 ** -digits;
+  }));
+}
+
+/** 本文の図のうち、指標と年で値を照らせる図 */
+export function rankedChartsOf(markdown: string) {
+  return [...new Set([...markdown.matchAll(/data\/([\w-]+)\.svg/g)].map((m) => m[1]))].filter((b) => !/scatter|-dark$|-ig$|-mobile$/.test(b));
+}
+
+/** ランキング・地図の点データが、書かれた年の指標の値を今も再現するか。照らせない図は null */
+async function staleChart(slug: string, base: string): Promise<StaleChart | null> {
+  const sourceText = await blogFile(slug, `data/${base}.source.json`);
+  const dataText = await blogFile(slug, `data/${base}.json`);
+  if (!sourceText || !dataText) return null;
+  const source = JSON.parse(sourceText), data = JSON.parse(dataText);
+  const rankingKey = source.rankingKey ?? source.metricKey;
+  const year = String(source.year ?? '');
+  if (!['ranking', 'metric'].includes(source.kind) || typeof rankingKey !== 'string' || /[+|]/.test(rankingKey) || !/^\d{4}$/.test(year)) return null;
+  const raw = (Array.isArray(data) ? data : Array.isArray(data?.data) ? data.data : Array.isArray(data?.rows) ? data.rows : []) as Record<string, unknown>[];
+  const points = raw.filter((p) => typeof p.value === 'number').map((p) => ({ value: p.value as number, code: p.areaCode ? String(p.areaCode).slice(0, 2) : shortToCode.get(String(p.areaName ?? p.label ?? p.pref ?? p.name ?? '').replace(/\uFFFD/g, '')) }));
+  // 県の 1 年分の図だけを照らす。市区町村の図 (47 県より多い) や時系列の図は別の形
+  if (points.length < 5 || points.length > 47 || points.some((p) => !p.code) || new Set(points.map((p) => p.code)).size !== points.length) return null;
+  const rows = (await valuesOf(rankingKey)) as { yearCode: string; areaCode: string; value: number | null }[] | null;
+  const observed = new Map(rows?.filter((r) => r.yearCode === year && r.value !== null).map((r) => [r.areaCode.slice(0, 2), r.value!]));
+  if (!observed.size) return null;
+  return reproducesValues(points as { code: string; value: number }[], observed) ? null : { slug, base, rankingKey, year };
+}
+
 async function inspectChart(slug: string, base: string) {
   const issues: ChartAxesIssue[] = [];
   const [svg, dark, dataText, sourceText] = await Promise.all([
@@ -106,12 +148,15 @@ async function main() {
   const slugs = slugArg ? slugArg.split(/[,\s]+/).filter(Boolean)
     : (BASE ? fs.readdirSync(BASE) : ((JSON.parse((await fetchText(`${R2}/app/blog/all.json`)) ?? '{}').articles ?? []) as { slug: string }[]).map((a) => a.slug));
   const targets: { slug: string; base: string }[] = [];
+  const ranked: { slug: string; base: string }[] = [];
   let i = 0;
   await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
     while (i < slugs.length) {
       const slug = slugs[i++];
       const md = await blogFile(slug, 'article.md');
-      if (md) for (const base of scatterChartsOf(md)) targets.push({ slug, base });
+      if (!md) continue;
+      for (const base of scatterChartsOf(md)) targets.push({ slug, base });
+      for (const base of rankedChartsOf(md)) ranked.push({ slug, base });
     }
   }));
   const results: Awaited<ReturnType<typeof inspectChart>>[] = [];
@@ -123,6 +168,16 @@ async function main() {
     }
   }));
   results.sort((a, b) => `${a.slug}/${a.base}`.localeCompare(`${b.slug}/${b.base}`));
+  const stale: StaleChart[] = [];
+  let k = 0;
+  await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
+    while (k < ranked.length) {
+      const t = ranked[k++];
+      const found = await staleChart(t.slug, t.base);
+      if (found) stale.push(found);
+    }
+  }));
+  stale.sort((a, b) => `${a.slug}/${a.base}`.localeCompare(`${b.slug}/${b.base}`));
   const byIssue: Record<string, number> = {};
   for (const r of results) for (const issue of r.issues) byIssue[issue] = (byIssue[issue] ?? 0) + 1;
   const summary = {
@@ -132,18 +187,22 @@ async function main() {
     // 値で確かめられない図の数。週次のラチェットが増加を止める
     unproved: results.filter((r) => r.issues.some((x) => x !== 'not-type' && x !== 'no-dark')).length,
     byIssue,
+    rankedCharts: ranked.length,
+    staleValues: stale.length,
   };
   console.log(JSON.stringify(summary));
   if (NO_WRITE) {
     for (const r of results.filter((x) => x.issues.length)) console.log(`${r.slug}/${r.base}: ${r.issues.join(' ')}`);
+    for (const s of stale) console.log(`${s.slug}/${s.base}: stale-value ${s.rankingKey} ${s.year}`);
     return;
   }
   const dir = path.join(PROJECT_ROOT, datasetDir('blog.operations'));
   const items = results.filter((r) => r.issues.length);
-  fs.writeFileSync(path.join(dir, 'chart-axes-queue.json'), `${JSON.stringify({ summary, items }, null, 2)}\n`);
+  fs.writeFileSync(path.join(dir, 'chart-axes-queue.json'), `${JSON.stringify({ summary, items, stale }, null, 2)}\n`);
   fs.writeFileSync(path.join(dir, 'chart-axes-LATEST.md'), [
     '# 公開中の散布図の検査', '', `表示中 ${summary.charts} 枚 / 型の画像 ${summary.typed} 枚 / 型でない ${summary.notTyped} 枚 / 値で確かめられない ${summary.unproved} 枚`, '',
-    ...Object.entries(byIssue).map(([k, v]) => `- ${k}: ${v}`), '', ...items.map((r) => `- ${r.slug}/${r.base}: ${r.issues.join(' ')}`), '',
+    ...Object.entries(byIssue).map(([name, n]) => `- ${name}: ${n}`), '', ...items.map((r) => `- ${r.slug}/${r.base}: ${r.issues.join(' ')}`), '',
+    `## 指標の今の値と違う図 (${stale.length} / ${ranked.length} 枚)`, '', ...stale.map((s) => `- ${s.slug}/${s.base}: ${s.rankingKey} ${s.year}`), '',
   ].join('\n'));
 }
 

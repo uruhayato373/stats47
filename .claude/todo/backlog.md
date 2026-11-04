@@ -854,13 +854,13 @@ updated: 2026-11-01
 - **残り**: ② 公開済みの積み上げ棒 (約 4 枚) を作り直して前後を比べ、R2 へ上げる (承認が要る)。実機・localhost での見た目は未確認。
 - **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
 
-### [BLOG-NURSE-RETAIL-STALE-METRIC-01] 小売店数と看護師の記事が、修正前の看護師の値を前提にしている
+### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]
 
-- **起点**: `retail-store-count-vs-nurses-per-100k-population` の散布図と本文は、看護師の値が実数 (北海道 66,733) のころに書かれた。今の R2 `nurses-per-100k-population` は 10 万人当たり (北海道 1,277.3) で、本文の「小売店が多い県は看護師も多い」(r=0.987) の前提が変わる。
-- **今の扱い**: 図だけ差し替えると本文と食い違うので、svg-builder の図のまま残した (`audit-chart-axes` の not-type に数える)。
-- **次**: R2 の今の値で図と本文を作り直すか、記事を畳むかを決める。同じ指標を使う記事が他にないかも見る。
-- **完了条件**: 図と本文の値が R2 の観測値と一致し、`data/blog/chart-axes-LATEST.md` からこの図が消える。
+- **起点**: 2026-11-04 に `audit-chart-axes.ts` を初めて全件に掛け、棒と地図 1,780 枚のうち 5 枚が見つかった。一覧は `data/blog/chart-axes-LATEST.md`。
+- **対象**: `library-museum-cultural-capital` (library-lending-books・比が 1,500 万倍近く、別の指標の可能性) / `marriage-divorce-okinawa` (divorces-per-total-population) / `prefectural-income-gdp-ranking` (per-capita-kenmin-shotoku-h27) / `solar-panel-housing-prefecture-gap` (solar-panel-housing-rate) / `university-advancement-capacity` (university-capacity-index)。
+- **次**: 指標の値が直ったのか、図の指標の指定が誤りかを記事ごとに確かめ、本文の結論が変わるなら書き直して審査を通す (同じ年の値の変化は `refresh-article-data-years` では取り直せない)。
+- **完了条件**: `chart-axes-queue.json` の `summary.staleValues` が 0 になる。
 
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]

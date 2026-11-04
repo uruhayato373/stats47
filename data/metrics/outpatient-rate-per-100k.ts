@@ -5,6 +5,7 @@ export const outpatientRatePer100k: MetricConfig = {
   "key": "outpatient-rate-per-100k",
   "title": "外来受療率",
   "unit": "人",
+  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

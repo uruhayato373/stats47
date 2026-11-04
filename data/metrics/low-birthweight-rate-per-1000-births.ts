@@ -6,6 +6,7 @@ export const lowBirthweightRatePer1000Births: MetricConfig = {
   "title": "2,500g未満の出生率",
   "subtitle": "出生数千当たり",
   "unit": "出生千対",
+  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

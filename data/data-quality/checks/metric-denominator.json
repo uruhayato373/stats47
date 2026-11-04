@@ -1,0 +1,67 @@
+{
+  "checked": 243,
+  "threshold": 0.93,
+  "flagged": [],
+  "highest": [
+    {
+      "key": "population-density-per-km2-inhabitable-area",
+      "title": "可住地面積１km2当たり人口密度",
+      "year": "2024",
+      "r": 0.897
+    },
+    {
+      "key": "per-taxpayer-taxable-income",
+      "title": "課税対象所得",
+      "year": "2024",
+      "r": 0.879
+    },
+    {
+      "key": "densely-inhabited-district-population-density",
+      "title": "人口集中地区人口密度",
+      "year": "2020",
+      "r": 0.856
+    },
+    {
+      "key": "foreign-resident-count-china-per-100k",
+      "title": "外国人人口",
+      "year": "2020",
+      "r": 0.853
+    },
+    {
+      "key": "per-capita-inhabitant-tax-pref-municipal",
+      "title": "住民税",
+      "year": "2022",
+      "r": 0.84
+    },
+    {
+      "key": "elementary-school-children-1-per",
+      "title": "小学校児童数",
+      "year": "2024",
+      "r": 0.788
+    },
+    {
+      "key": "passport-issuance-count-per-thousand",
+      "title": "一般旅券発行件数",
+      "year": "2024",
+      "r": 0.771
+    },
+    {
+      "key": "marriages-per-total-population",
+      "title": "婚姻率",
+      "year": "2022",
+      "r": 0.764
+    },
+    {
+      "key": "elementary-school-students-per-teacher",
+      "title": "小学校児童数",
+      "year": "2024",
+      "r": 0.754
+    },
+    {
+      "key": "high-school-students-per-teacher",
+      "title": "高等学校生徒数",
+      "year": "2024",
+      "r": 0.754
+    }
+  ]
+}

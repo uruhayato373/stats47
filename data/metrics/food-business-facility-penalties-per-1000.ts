@@ -6,6 +6,7 @@ export const foodBusinessFacilityPenaltiesPer1000: MetricConfig = {
   "title": "食品営業施設処分件数",
   "subtitle": "施設1000件当たり",
   "unit": "件",
+  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",
