@@ -6,6 +6,7 @@ export const disabledJobRatioPer1000: MetricConfig = {
   "title": "就職者に占める身体障害者の比率",
   "subtitle": "就職件数千件当たり",
   "unit": "就職件数千対",
+  "denominator": "population",
   "category": "laborwage",
   "source": {
     "kind": "estat",

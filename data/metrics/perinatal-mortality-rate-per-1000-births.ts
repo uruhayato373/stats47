@@ -5,6 +5,7 @@ export const perinatalMortalityRatePer1000Births: MetricConfig = {
   "key": "perinatal-mortality-rate-per-1000-births",
   "title": "周産期死亡率",
   "unit": "出産千対",
+  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

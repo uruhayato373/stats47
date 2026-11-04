@@ -44,10 +44,19 @@
     "unit": {
       "type": "string"
     },
+    "denominator": {
+      "enum": [
+        "population",
+        "area",
+        "household",
+        "person",
+        "none"
+      ]
+    },
     "category": {
       "enum": [
-        "landweather",
         "population",
+        "landweather",
         "laborwage",
         "agriculture",
         "miningindustry",
@@ -1641,8 +1650,8 @@
       "type": "array",
       "items": {
         "enum": [
-          "landweather",
           "population",
+          "landweather",
           "laborwage",
           "agriculture",
           "miningindustry",

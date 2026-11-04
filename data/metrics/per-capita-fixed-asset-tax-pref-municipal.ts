@@ -6,6 +6,7 @@ export const perCapitaFixedAssetTaxPrefMunicipal: MetricConfig = {
   "title": "固定資産税",
   "subtitle": "都道府県・市町村財政合計",
   "unit": "千円",
+  "denominator": "population",
   "category": "economy",
   "source": {
     "kind": "estat",

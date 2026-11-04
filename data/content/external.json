@@ -592,7 +592,7 @@
       "id": "note:a-kakei-fukushima",
       "kind": "note",
       "key": "a-kakei-fukushima",
-      "title": "福島県の家計は何にお金が偏っているか ── 住居費が全国平均の6割に届かない福島市の暮らし",
+      "title": "福島県の家計は何にお金が偏っているか ── 住居費が47市平均の6割に届かない福島市の暮らし",
       "href": "https://note.com/stats47/n/n4c363c356b63",
       "published": true,
       "rankingKeys": [
@@ -774,7 +774,7 @@
       "id": "note:a-kakei-kyoto",
       "kind": "note",
       "key": "a-kakei-kyoto",
-      "title": "京都府の家計は何にお金が偏っているか ── 教育費が全国平均の1.4倍に達する京都市の暮らし",
+      "title": "京都府の家計は何にお金が偏っているか ── 教育費が47市平均の1.4倍に達する京都市の暮らし",
       "href": "https://note.com/stats47/n/n2a18f8e7098c",
       "published": true,
       "rankingKeys": [
@@ -891,7 +891,7 @@
       "id": "note:a-kakei-okayama",
       "kind": "note",
       "key": "a-kakei-okayama",
-      "title": "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は全国平均の4分の1",
+      "title": "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は47市平均の4分の1",
       "href": "https://note.com/stats47/n/ne788feae75bf",
       "published": true,
       "rankingKeys": [
@@ -917,7 +917,7 @@
       "id": "note:a-kakei-osaka",
       "kind": "note",
       "key": "a-kakei-osaka",
-      "title": "大阪府の家計は何にお金が偏っているか ── 交通・通信費が全国平均の0.66倍にとどまる大阪市の家計",
+      "title": "大阪府の家計は何にお金が偏っているか ── 交通・通信費が47市平均の0.66倍にとどまる大阪市の家計",
       "href": "https://note.com/stats47/n/n7ac1079b6f20",
       "published": true,
       "rankingKeys": [
@@ -2622,7 +2622,7 @@
       "id": "note:d-geo-flood-population-mesh",
       "kind": "note",
       "key": "d-geo-flood-population-mesh",
-      "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
+      "title": "洪水浸水想定区域×2050年人口｜47都道府県・29,737メッシュを再現",
       "href": "https://note.com/stats47/n/nfe50fb61efc0",
       "published": true,
       "rankingKeys": []
@@ -2649,7 +2649,7 @@
       "id": "note:d-geo-land-price-future-population",
       "kind": "note",
       "key": "d-geo-land-price-future-population",
-      "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
+      "title": "地価上昇地点と周囲の人口減少を照合する｜47都道府県CSV・包含結合・検算",
       "href": "https://note.com/stats47/n/n23a2071a016f",
       "published": true,
       "rankingKeys": []

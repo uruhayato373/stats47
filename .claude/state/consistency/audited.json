@@ -1,23 +1,12 @@
 {
-  "hash": "1098ed84d089f2f292bfb444939d7f9d943bfa521cf68f9a99984a7a3e84e1ad",
-  "audited_at": "2026-11-04T06:28:46",
+  "hash": "60ff0200c4f2e49dcea951e6543261fce2d9b06c38c3ad344dc03467e9835891",
+  "audited_at": "2026-11-04T07:02:27",
   "files": [
-    ".claude/agents/chart-author.md",
-    ".claude/rules/blog-data-schema.md",
-    ".claude/rules/blog-svg-chart-standards.md",
-    ".claude/scripts/blog/archive-blog-articles.mjs",
+    ".claude/rules/unit-semantics-standards.md",
     ".claude/scripts/blog/audit-chart-axes.ts",
-    ".claude/scripts/blog/build-svg-gallery.mjs",
-    ".claude/scripts/blog/drop-outdated-outbox-charts.mjs",
-    ".claude/scripts/blog/generate-article-charts.ts",
-    ".claude/scripts/blog/lib/type-chart-input.ts",
-    ".claude/scripts/blog/quality-gate.mjs",
-    ".claude/scripts/blog/rebuild-scatter-data.mjs",
-    ".claude/scripts/blog/restore-scatter-from-svg.mjs",
-    ".claude/scripts/blog/verify-published-assets.mjs",
-    ".claude/scripts/lib/__tests__/chart-recurrence-guards.test.mjs",
-    ".claude/scripts/lib/chart-source-schema.mjs",
-    ".claude/scripts/lib/svg-lint.mjs",
-    ".claude/scripts/management/weekly-audits/blog-remediation.sh"
+    ".claude/scripts/blog/build-remediation-queue.mjs",
+    ".claude/scripts/management/weekly-audits/blog-remediation.sh",
+    ".claude/scripts/management/weekly-audits/ranking-integrity.sh",
+    ".claude/scripts/metrics/audit-metric-denominator.ts"
   ]
 }

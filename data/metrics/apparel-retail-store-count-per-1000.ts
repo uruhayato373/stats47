@@ -6,6 +6,7 @@ export const apparelRetailStoreCountPer1000: MetricConfig = {
   "title": "織物・衣服・身の回り品小売店数",
   "subtitle": "1000人当たり",
   "unit": "店",
+  "denominator": "population",
   "category": "commercial",
   "source": {
     "kind": "estat",

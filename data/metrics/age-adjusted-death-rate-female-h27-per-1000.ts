@@ -6,6 +6,7 @@ export const ageAdjustedDeathRateFemaleH27Per1000: MetricConfig = {
   "title": "年齢調整死亡率",
   "subtitle": "女性（H27年基準）",
   "unit": "人口千対",
+  "denominator": "population",
   "category": "population",
   "source": {
     "kind": "estat",

@@ -389,6 +389,9 @@ export const CATEGORY_KEYS = [
 export type CategoryKey = (typeof CATEGORY_KEYS)[number];
 
 /** Metric 1 つ分の全データ要件 */
+/** 値を割っている分母。none は実数 (キー名が分母を名乗っていても実数の指標に書く) */
+export type MetricDenominator = 'population' | 'area' | 'household' | 'person' | 'none';
+
 export interface MetricConfig {
   /** kebab-case の一意キー。ファイル名と一致 */
   key: string;
@@ -423,6 +426,11 @@ export interface MetricConfig {
   description?: string;
   /** 単位 (例: "人", "万円")。空文字・"‐" は禁止。 */
   unit: string;
+  /**
+   * 分母。題名とキーから読めない指標に書く (読み方は metric-denominator.ts)。
+   * unit に分母を足さないのは、表示が「人口10万人当たり … 人（人口10万対）」と二重になるため。
+   */
+  denominator?: MetricDenominator;
   /** e-Stat 機械分類の category キー (17 軸のいずれか)。CategoryKey で型強制。 */
   category: CategoryKey;
   /** 観測値の取得元 */

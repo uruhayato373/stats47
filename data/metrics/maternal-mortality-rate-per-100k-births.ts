@@ -6,6 +6,7 @@ export const maternalMortalityRatePer100kBirths: MetricConfig = {
   "title": "妊娠等による死亡率",
   "subtitle": "出産数10万当たり",
   "unit": "出産10万対",
+  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

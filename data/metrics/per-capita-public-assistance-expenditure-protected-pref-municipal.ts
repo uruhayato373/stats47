@@ -6,6 +6,7 @@ export const perCapitaPublicAssistanceExpenditureProtectedPrefMunicipal: MetricC
   "title": "生活保護費",
   "subtitle": "都道府県・市町村財政合計",
   "unit": "千円",
+  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

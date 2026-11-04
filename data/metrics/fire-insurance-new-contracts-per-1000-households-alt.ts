@@ -5,6 +5,7 @@ export const fireInsuranceNewContractsPer1000HouseholdsAlt: MetricConfig = {
   "key": "fire-insurance-new-contracts-per-1000-households-alt",
   "title": "火災保険住宅物件・一般物件新契約件数",
   "unit": "件",
+  "denominator": "household",
   "category": "economy",
   "source": {
     "kind": "estat",

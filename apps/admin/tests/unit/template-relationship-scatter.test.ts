@@ -3,6 +3,7 @@ import sharp from 'sharp';
 import { renderRelationshipScatter, renderRelationshipScatterChart, relationshipPoints, unitLabel } from '@/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { matchScatterAxis, matchScatterYear, metricKeysInSource, prefecturesNamedNear, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { reproducesValues } from '../../../../.claude/scripts/blog/audit-chart-axes';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 
 // Synthetic values check the join and frame; live data stays in the SHA-verified R2 snapshots.
@@ -165,6 +166,12 @@ describe('blog scatter as the shared type', () => {
     const of = (metric: object) => { const c = scatterChartFromArticleData(articleData(), { ...base, y: { metric, year: '2024年' } }); if ('skip' in c) throw Error(c.skip); return c.presentation?.colorScheme; };
     expect(of({ category: 'economy' })).toBe('interpolatePurples');
     expect(of({ category: 'population' })).toBe('interpolateBlues');
+  });
+  it('tells a rounding difference from a changed value', () => {
+    const observed = new Map([['01', 543.25], ['02', 1277.3]]);
+    expect(reproducesValues([{ code: '01', value: 543.3 }, { code: '02', value: 1277.3 }], observed)).toBe(true);
+    expect(reproducesValues([{ code: '01', value: 543.3 }, { code: '02', value: 66733 }], observed)).toBe(false);
+    expect(reproducesValues([{ code: '01', value: 543.3 }, { code: '03', value: 1 }], observed)).toBe(false);
   });
   it('colours the dots by the vertical metric and marks the named prefectures in its strong colour', () => {
     const blue = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' } as const;

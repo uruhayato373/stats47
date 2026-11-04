@@ -161,6 +161,11 @@ Instagram の型の画像) は、**図ごとに 1 つ**の表示単位を選び�
 
 ## 4. 分母つき指標の扱い — **分母は `unit` ではなく label / subtitle が持つ**
 
+> **機械の判定 (2026-11-04)**: 分母は `metricDenominatorOf` (`packages/data-configs/src/metric-denominator.ts`) で読む。キー名が分母を名乗るのに
+> 題名・補足・`denominator` のどれにも無ければ `check-metric-contract` が止める。実数の指標は `denominator: "none"` と書く。
+> 人口当たりを名乗る指標が総人口とほぼ比例すれば、週次の `audit-metric-denominator.ts` が失敗にする。指標の値を直して記事の図が
+> 古くなると、`audit-chart-axes.ts` の `stale` が見つけて是正キューの data-refresh へ入れる。
+
 > **★訂正 (2026-08-12)**: この節は当初「分母つき指標なのに `unit` が素なのが欠陥。`unit` に
 > 分母を含める規約が次の一手」と書いていた。**実装を確認したところ誤りだったので書き直した。**
 

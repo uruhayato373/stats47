@@ -13,6 +13,8 @@ npx tsx packages/data-configs/scripts/audit-reingest-queue.ts --ratchet || faile
 NODE_OPTIONS=--conditions=react-server npx tsx packages/ranking/scripts/verify-calculated-rankings.ts || failed+=("calculated-rankings")
 npm run --silent audit:public-data-contract -- --json "${TMPDIR:-/tmp}/public-data-contract.json" || failed+=("public-data-contract")
 npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts || failed+=("data-quality-queue")
+# 人口当たりを名乗る指標が実数のままでないかを値で確かめる
+npx tsx .claude/scripts/metrics/audit-metric-denominator.ts || failed+=("metric-denominator")
 # 市区町村の地図: 47 県 × 政令指定都市の統合 / 分割で、地域と地図の形が 1 対 1 か (MUNI-DESIGNATED-CITY-WARDS-01。R2 の地図を読むだけ)
 npm run --silent audit:ward-mode-topology --workspace=@stats47/gis || failed+=("ward-mode-topology")
 if [ "${#failed[@]}" -gt 0 ]; then

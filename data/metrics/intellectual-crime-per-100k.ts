@@ -6,6 +6,7 @@ export const intellectualCrimePer100k: MetricConfig = {
   "title": "知能犯認知件数",
   "description": "犯罪統計で知能犯に分類される事件を警察が認知した年間総件数。",
   "unit": "件",
+  "denominator": "none",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",
