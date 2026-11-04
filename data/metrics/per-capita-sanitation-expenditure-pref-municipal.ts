@@ -6,6 +6,7 @@ export const perCapitaSanitationExpenditurePrefMunicipal: MetricConfig = {
   "title": "衛生費",
   "subtitle": "都道府県・市町村財政合計",
   "unit": "千円",
+  "denominator": "population",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

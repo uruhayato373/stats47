@@ -6,6 +6,7 @@ export const perCapitaPoliceExpenditurePrefMunicipal: MetricConfig = {
   "title": "警察費",
   "subtitle": "都道府県財政",
   "unit": "千円",
+  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

@@ -46,6 +46,8 @@ import { classifyEmptyOutcome } from "../src/expected-empty.js";
 import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import { mergeSupplementalValues } from "../src/supplemental-values.js";
+import { applyValueCorrections } from "../src/value-corrections";
+import { relabelYearNames, type YearNamedRow } from "../src/year-names";
 import {
   combineLinear,
   ratioPercent,
@@ -945,7 +947,7 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
 function shapeForCity(config: MetricConfig, values: EstatValue[]) {
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
-  const rows: ShapedRow[] = values
+  const rawRows: ShapedRow[] = values
     .filter((v) => isIngestableCityCode(v["@area"], masters.city) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
       const yearCode = v["@time"].slice(0, 4);
@@ -965,6 +967,7 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
+  const rows = applyValueCorrections(config.key, rawRows, config.cityValueCorrections ?? []);
   assignRanks(rows);
   return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(config, rows) };
 }
@@ -1018,6 +1021,24 @@ async function readPublishedRowCount(key: string, artifact: string): Promise<num
   } catch {
     return null;
   }
+}
+
+/**
+ * API で取り直さない指標は、定義の年の形式を変えても公開中の values.json の年名が古いまま残る。
+ * 値は変えず、年名だけを定義にそろえて R2 へ上げ直す (diff-push が差分だけを上げる)。戻り値は直した行数。
+ */
+async function relabelPublishedYearNames(config: MetricConfig): Promise<number> {
+  const base = process.env.R2_PUBLIC_FETCH_URL;
+  if (!base || !config.entities.includes("prefecture")) return 0;
+  const res = await fetch(`${base}/app/stats/${config.key}/values.json`);
+  if (!res.ok) return 0;
+  const payload = (await res.json()) as { rows: YearNamedRow[] };
+  const { rows, relabeled } = relabelYearNames(payload.rows, config.yearFormat);
+  if (relabeled === 0) return 0;
+  const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);
+  mkdirSync(dirname(outPath), { recursive: true });
+  writeFileSync(outPath, JSON.stringify({ ...payload, rows }));
+  return relabeled;
 }
 
 /**
@@ -1123,7 +1144,8 @@ export async function processOne(
     return { key: config.key, ok: false, status: "skip", message: "calculated metric skipped (deps required)" };
   }
   if (config.source.kind === "external" || config.source.kind === "mlit") {
-    return { key: config.key, ok: false, status: "skip", message: `${config.source.kind} source skipped (fetcher not implemented yet)` };
+    const relabeled = dryRun ? 0 : await relabelPublishedYearNames(config);
+    return { key: config.key, ok: false, status: "skip", message: `${config.source.kind} source skipped (fetcher not implemented yet)${relabeled ? ` yearName=${relabeled}` : ""}` };
   }
   let src: Extract<SourceConfig, { kind: "estat" }>;
   if (config.source.kind === "kakei-chousa") {

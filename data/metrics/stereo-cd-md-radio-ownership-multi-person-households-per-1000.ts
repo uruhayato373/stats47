@@ -5,6 +5,7 @@ export const stereoCdMdRadioOwnershipMultiPersonHouseholdsPer1000: MetricConfig 
   "key": "stereo-cd-md-radio-ownership-multi-person-households-per-1000",
   "title": "ステレオ・CDラジカセ所有数量",
   "unit": "台",
+  "denominator": "household",
   "category": "ict",
   "source": {
     "kind": "estat",

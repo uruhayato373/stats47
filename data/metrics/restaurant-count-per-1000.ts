@@ -6,6 +6,7 @@ export const restaurantCountPer1000: MetricConfig = {
   "title": "飲食店数",
   "subtitle": "1000人当たり",
   "unit": "店",
+  "denominator": "population",
   "category": "commercial",
   "source": {
     "kind": "estat",

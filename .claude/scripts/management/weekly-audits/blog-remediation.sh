@@ -13,6 +13,7 @@ if [ -z "${NEXT_PUBLIC_ESTAT_APP_ID:-}" ]; then
 fi
 failed=()
 node .claude/scripts/blog/build-stale-data-years.mjs || echo "warning: 図の年の古さの一覧の作り直しに失敗"
+npx tsx .claude/scripts/blog/audit-chart-axes.ts || echo "warning: 図の値の検査に失敗"
 node .claude/scripts/blog/build-remediation-queue.mjs || echo "warning: 是正キューの作り直しに失敗"
 node .claude/scripts/blog/build-lineage-queue.mjs || echo "warning: SVG の系譜キューの作り直しに失敗"
 node .claude/scripts/blog/audit-chart-provenance.mjs || echo "note: 再取得できない出典がある (ラチェットで判定する)"
@@ -42,6 +43,9 @@ ratchet() {
 ratchet lineage "q.byStatus && q.byStatus.neither" data/blog/svg-lineage-queue.json data/blog/svg-lineage-LATEST.md
 ratchet value "q.summary && q.summary.valueMismatchArticles" data/blog/remediation-queue.json
 ratchet provenance "q.defectCount" data/blog/chart-provenance-queue.json data/blog/chart-provenance-LATEST.md
+ratchet chart-type "q.summary && q.summary.notTyped" data/blog/chart-axes-queue.json data/blog/chart-axes-LATEST.md
+ratchet chart-axes "q.summary && q.summary.unproved" data/blog/chart-axes-queue.json data/blog/chart-axes-LATEST.md
+ratchet chart-values "q.summary && q.summary.staleValues" data/blog/chart-axes-queue.json data/blog/chart-axes-LATEST.md
 
 npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --probe-only --require-canonical --verify-sources || failed+=("scatter-integrity")
 echo "=== 今週のリライト候補 ==="

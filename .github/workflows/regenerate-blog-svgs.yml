@@ -93,7 +93,16 @@ jobs:
 
       - name: 📥 Download blog data from R2 (app/blog)
         if: ${{ github.event.inputs.mode == 'all' || github.event.inputs.mode == 'source-repair' }}
-        run: npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix app/blog
+        env:
+          SLUGS: ${{ github.event.inputs.slugs }}
+        run: |
+          # 記事を指定したらその記事だけ取る (全記事は約 30 分かかる)
+          if [ -z "$SLUGS" ]; then
+            npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix app/blog
+          else
+            read -r -a SLUG_LIST <<< "$SLUGS"
+            printf '%s\n' "${SLUG_LIST[@]}" | xargs -P 6 -I{} npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix "app/blog/{}/"
+          fi
 
       - name: 🔎 Resolve target slugs
         if: ${{ github.event.inputs.mode == 'all' }}
@@ -130,7 +139,8 @@ jobs:
             if npx tsx .claude/scripts/blog/generate-article-charts.ts \
                  --base .local/r2/app/blog --slug "$SLUG" > ".local/regen-$SLUG.log" 2>&1; then
               OK=$((OK+1))
-              find ".local/r2/app/blog/$SLUG" -type f -name '*.svg' -print \
+              # 軸を書き戻した source.json も一緒に上げる (exact publish は中身が同じなら書かない)
+              find ".local/r2/app/blog/$SLUG" -type f \( -name '*.svg' -o -name '*.source.json' \) -print \
                 | sed 's#^\.local/r2/##' >> .local/generated-blog-svg-keys.txt
             else
               FAIL=$((FAIL+1)); echo "  ⚠️ regen failed: $SLUG"
@@ -253,8 +263,16 @@ jobs:
 
       - name: 🖼️ Build review gallery (local)
         run: |
-          node .claude/scripts/blog/build-svg-gallery.mjs --source local \
+          node .claude/scripts/blog/build-svg-gallery.mjs --source local --no-outbox \
             --out /tmp/blog-svg-gallery.html
+
+      - name: 🔬 Check scatter charts against observed values
+        if: ${{ github.event.inputs.mode == 'all' }}
+        env:
+          SLUGS: ${{ steps.targets.outputs.list }}
+        run: |
+          npx tsx .claude/scripts/blog/audit-chart-axes.ts --base .local/r2/app/blog --slugs "$SLUGS" --no-write > .local/chart-axes.txt
+          { echo '### 散布図の検査'; echo '```'; head -60 .local/chart-axes.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
       - name: 📤 Upload gallery artifact
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -288,6 +306,16 @@ jobs:
             while IFS= read -r KEY; do A+=(--key "$KEY"); done < "$1"
             npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${A[@]}"
           ' _ {}
+
+      - name: 🗄️ Archive chart data to private R2 (本番時のみ)
+        if: ${{ github.event.inputs.mode == 'all' && github.event.inputs.dry_run == 'false' }}
+        env:
+          SLUGS: ${{ steps.targets.outputs.list }}
+        run: node .claude/scripts/blog/archive-blog-articles.mjs --slugs "${SLUGS// /,}"
+
+      - name: ✅ Verify published files on the public URL (本番時のみ)
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: node .claude/scripts/blog/verify-published-assets.mjs --keys-file .local/generated-blog-svg-keys.txt
 
       - name: 🧮 Regenerate and publish blog survey index after source repair
         if: ${{ github.event.inputs.mode == 'source-repair' && github.event.inputs.dry_run == 'false' }}

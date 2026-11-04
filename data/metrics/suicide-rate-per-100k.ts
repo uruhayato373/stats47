@@ -5,6 +5,7 @@ export const suicideRatePer100k: MetricConfig = {
   "key": "suicide-rate-per-100k",
   "title": "自殺率",
   "unit": "人口10万対",
+  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

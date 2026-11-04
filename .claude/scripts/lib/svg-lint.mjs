@@ -11,6 +11,7 @@
  * 設計方針 (CLAUDE.md 原則 5): SVG 品質判定は決定的なのでコードで一律検査する。
  * 関連: packages/svg-builder (描画) / .claude/scripts/blog/generate-article-charts.mjs
  */
+import { PREF_NAMES } from './prefectures.cjs';
 
 // theme 依存色 = ダークモードで追従させるべき背景・文字・グリッド色。
 // これらが inline fill/stroke で直書きされていると <img> 埋め込み時に dark mode で
@@ -206,7 +207,45 @@ export function lintImageTypeSvg(filename, svg) {
     errors.push(`型の画像のキャンバスが ${w}×${h} — 正規は ${IMAGE_TYPE_CANVAS.w}×${IMAGE_TYPE_CANVAS.h} (${path_base(filename)})`);
   if (!['light', 'dark'].includes(imageThemeOf(svg) ?? ''))
     errors.push(`型の画像に data-theme (light/dark) が無い (${path_base(filename)})`);
+  errors.push(...imageTextErrors(filename, svg));
+  if (imageTemplateOf(svg) === 'scatter') errors.push(...scatterTypeErrors(filename, svg));
   return { errors, warnings: [] };
+}
+
+const texts = (svg) => [...String(svg).matchAll(/<text\b[^>]*>([^<]*)<\/text>/g)].map((m) => m[1]);
+
+/** 図の中の文字: 文字化けと、記事のラベルから紛れ込む矢印 */
+function imageTextErrors(filename, svg) {
+  const errors = [];
+  if (String(svg).includes('\uFFFD')) errors.push(`型の画像に文字化けがある (${path_base(filename)})`);
+  if (texts(svg).some((t) => t.includes('→'))) errors.push(`型の画像の文字に矢印が残っている (${path_base(filename)})`);
+  return errors;
+}
+
+const luminance = (hex) => {
+  const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+const contrast = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((p, q) => q - p);
+  return (hi + 0.05) / (lo + 0.05);
+};
+// 暗い地 #262626 の上の点。これを下回ると点が地に沈む (2026-11-04 に青の点で 1.7 だった)
+const MIN_DOT_CONTRAST = 3;
+
+/** 散布図の型: 県名は正式名、暗い版の点は地から読み取れる */
+function scatterTypeErrors(filename, svg) {
+  const errors = [];
+  const names = [...String(svg).matchAll(/font-size="32" font-weight="700">([^<]+)</g)].map((m) => m[1]);
+  const short = names.filter((n) => !PREF_NAMES.includes(n));
+  if (short.length) errors.push(`散布図の県名が正式名でない: ${short.join(' ')} (${path_base(filename)})`);
+  if (imageThemeOf(svg) === 'dark') {
+    const paper = /<rect\b[^>]*fill="(#[0-9a-fA-F]{6})"/.exec(String(svg))?.[1];
+    const fills = new Set([...String(svg).matchAll(/<circle data-pref="[^"]+"[^>]*fill="(#[0-9a-fA-F]{6})"/g)].map((m) => m[1]));
+    const low = paper ? [...fills].filter((f) => contrast(f, paper) < MIN_DOT_CONTRAST) : [];
+    if (low.length) errors.push(`暗い版の点が地に沈む (コントラスト ${MIN_DOT_CONTRAST}:1 未満): ${low.join(' ')} (${path_base(filename)})`);
+  }
+  return errors;
 }
 
 /**

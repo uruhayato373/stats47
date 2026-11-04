@@ -54,6 +54,7 @@ const hasFlag = (flag) => args.includes(flag);
 const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/remediation-queue.json`);
 const HISTORY_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/auto-brushup-history.json`);
 const STALE_YEARS_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/stale-data-years.json`);
+const CHART_AXES_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/chart-axes-queue.json`);
 
 // CTR 改善余地スコア (select-brushup-candidates.mjs と同じ Backlinko 2023 業界平均 CTR)
 const INDUSTRY_AVG_CTR = {
@@ -249,6 +250,17 @@ if (fs.existsSync(STALE_YEARS_PATH)) {
     /* 壊れていても床ループは動かす */
   }
 }
+// 図の年は同じでも、指標を直して値が変わった図 (audit-chart-axes.ts の出力)。年の古い図と同じレーンで取り直す
+if (fs.existsSync(CHART_AXES_PATH)) {
+  try {
+    for (const s of JSON.parse(fs.readFileSync(CHART_AXES_PATH, "utf8")).stale || []) {
+      const entry = { rankingKey: s.rankingKey, articleYear: s.year, latestYear: s.year, valueChanged: true };
+      staleBySlug.set(s.slug, [...(staleBySlug.get(s.slug) || []), entry]);
+    }
+  } catch {
+    /* 壊れていても床ループは動かす */
+  }
+}
 
 // 4. 全 published 記事を走査して raw entry を作る
 const slugs = new Set([...auditBySlug.keys(), ...gscBySlug.keys()]);
@@ -262,7 +274,7 @@ for (const slug of slugs) {
   const staleData = staleBySlug.get(slug) || [];
   const flags = [
     ...(a.flags || []).map((f) => `${f[0]}: ${f[1]}`),
-    ...staleData.map((s) => `data-refresh: 図の年が古い (${s.rankingKey} ${s.articleYear} → ${s.latestYear})`),
+    ...staleData.map((s) => (s.valueChanged ? `data-refresh: 図の値が指標の今の値と違う (${s.rankingKey} ${s.articleYear})` : `data-refresh: 図の年が古い (${s.rankingKey} ${s.articleYear} → ${s.latestYear})`)),
   ];
   const severity = blockers * 3 + warnings; // 品質 severity (生)
   const lane =

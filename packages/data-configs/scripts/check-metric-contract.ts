@@ -10,6 +10,7 @@ import {
 import { resolve } from 'node:path';
 import { COLOR_SCHEME_CATALOG } from '@stats47/types';
 import { METRICS_REGISTRY } from '../src/registry';
+import { metricDenominatorProblem } from '../src/metric-denominator';
 import { listThemeCatalogs } from '../src/theme-catalog';
 import { validateChartProps } from '../src/theme-catalog/registered-series-ref';
 import {
@@ -69,6 +70,10 @@ const files = readdirSync(METRICS_DIR)
   .filter((file) => file.endsWith('.ts'))
   .sort();
 const keys = Object.keys(METRICS_REGISTRY).sort();
+for (const key of keys) {
+  const problem = metricDenominatorProblem(METRICS_REGISTRY[key]);
+  if (problem) errors.push(problem);
+}
 if (
   files.length === 0 ||
   JSON.stringify(files.map((file) => file.slice(0, -3)).sort()) !==

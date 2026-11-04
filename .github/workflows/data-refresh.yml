@@ -11,9 +11,11 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   全件ranking-items索引だけを更新。master/area-profile/correlation等は更新しない。
 #   snapshot_scope=auto (既定) は指標から範囲を選ぶ: 全指標が公開中の市区町村だけの指標なら municipality、
 #   それ以外 (指定なし・都道府県の値を持つ指標を含む等) は all。ranking は自動では選ばない (下記の派生を作らないため)。
-#   snapshot_scope=municipality は都道府県の値を持たない市区町村だけの指定1〜50件の
+#   snapshot_scope=municipality は市区町村の値を持つ指定1〜50件の
 #   観測値 (cities.json) と、その市区町村ランキング・全市区町村のデータブックだけを更新する
 #   (全範囲の作り直しは 90 分前後かかる。2026-10-28 に財政指標 8 件で実測)。
+#   都道府県の値も持つ指標は、変えたのが市区町村の値だけのときに明示で指定する。auto は選ばない
+#   (都道府県の値は読まず上げないので、都道府県の値が変わる取り込みには使わない)。
 #
 # ※ 旧 db:pull/db:push (ビルド DB round-trip) は廃止。観測値も exporter も DB を読まない
 #   (page-data-batch / export-master-snapshots / generate-ranking-items / area-profile は
@@ -36,6 +38,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false,
 #     "migrateLegacyRecipes": false, "snapshotScope": "auto" }
 #   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
+#   - snapshotScope: 変えたのが市区町村の値だけなら、都道府県の値も持つ指標でも municipality を指定する (auto は全範囲に倒す)
 #   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
 #   - allowEmpty: 0 件 fatal を警告に落とす key (カンマ区切り)。★下記の注意を読むこと
 #
@@ -61,7 +64,7 @@ on:
         required: false
         default: ""
       snapshot_scope:
-        description: "派生更新範囲。auto: 指標から自動で選ぶ (既定)。ranking: 指定1〜50件の都道府県rankingと全件索引のみ。municipality: 指定1〜50件の市区町村だけの指標の市区町村ランキングとデータブックのみ"
+        description: "派生更新範囲。auto: 指標から自動で選ぶ (既定)。ranking: 指定1〜50件の都道府県rankingと全件索引のみ。municipality: 指定1〜50件の市区町村の値の市区町村ランキングとデータブックのみ"
         required: false
         default: auto
         type: choice
@@ -235,8 +238,8 @@ jobs:
             exit 1
           fi
           if [ "$SNAPSHOT_SCOPE" = "municipality" ]; then
-            # 市区町村ランキングとして公開中で、都道府県の値を持たない指標に限る
-            # (都道府県の値も持つ指標は都道府県側の派生も古くなるので all で回す)。
+            # 市区町村ランキングとして公開中の指標に限る。都道府県の値も持つ指標は、市区町村の値だけを
+            # 変えたときに明示で指定できる (都道府県の値が変わるなら all で回す)。
             npx tsx -e '
               const { getMetricConfig } = require("@stats47/data-configs");
               const { KNOWN_MUNICIPALITY_RANKING_KEYS } = require("@stats47/data-configs/geo-scope");
@@ -245,7 +248,7 @@ jobs:
               for (const key of keys) {
                 if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error("Invalid metric key: " + key);
                 const config = getMetricConfig(key);
-                if (!config?.isActive || !config.entities.includes("city") || config.entities.includes("prefecture")) throw new Error("Not an active city-only metric: " + key);
+                if (!config?.isActive || !config.entities.includes("city")) throw new Error("Not an active city metric: " + key);
                 if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)) throw new Error("Not a published municipality ranking: " + key);
                 if (config.source.kind !== "estat") throw new Error("No e-Stat fetch path: " + key);
               }

@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # 出典・再現性の週次全量監査 (2026-10-26 に provenance-audit-weekly.yml から週次レビューへ移した)。
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。validator が 1 つでも error なら exit 1。
-# 出力: data/provenance/{queue.json,LATEST.md}。是正は /audit-provenance (正典 .claude/rules/data-provenance-standards.md)
+# 出力: data/provenance/{queue.json,LATEST.md,source-watch.json,source-watch.md}。是正は /audit-provenance (正典 .claude/rules/data-provenance-standards.md)
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
 npx tsx .claude/scripts/provenance/audit-provenance-queue.ts || exit 1
+echo "=== 出典ページの変化 ==="
+npx tsx .claude/scripts/provenance/watch-external-sources.ts || exit 1
 failed=()
 for check in validate:config validate:catalog validate:area-databook validate:prefecture-statistics \
   validate:open-data-catalog check:prefecture-statistics-links check:open-data-links; do

@@ -6,6 +6,7 @@ export const ageSpecificDeathRate04Per1000: MetricConfig = {
   "title": "年齢別死亡率",
   "subtitle": "0〜4歳（1000人当たり）",
   "unit": "人口千対",
+  "denominator": "population",
   "category": "population",
   "source": {
     "kind": "estat",

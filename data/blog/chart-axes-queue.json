@@ -1,0 +1,1424 @@
+{
+  "summary": {
+    "charts": 189,
+    "typed": 133,
+    "notTyped": 56,
+    "unproved": 187,
+    "byIssue": {
+      "no-axes": 181,
+      "not-type": 56,
+      "broken-label": 1,
+      "no-data": 6,
+      "no-source": 1,
+      "bad-shape": 5
+    },
+    "rankedCharts": 1780,
+    "staleValues": 5
+  },
+  "items": [
+    {
+      "slug": "advancement-plus-employment-rate-prefecture",
+      "base": "advancement-job-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "base": "aging-solo-vs-nursing-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "agriculture-output-employment-productivity-gap",
+      "base": "agricultural-output-employment-2014-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "airport-count-vs-general-project-investment-agriculture",
+      "base": "airport-count--general-project-investment-agriculture-forestry-fisheries-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "airport-count-vs-physical-disability-rehabilitation",
+      "base": "airport-count--physical-disability-rehabilitation-facility-residents-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "allocation-tax-area",
+      "base": "allocation-tax-area-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "annual-precipitation-rainy-season-gap",
+      "base": "chart-precipitation-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "base": "annual-sunshine-duration--auto-liability-insurance-amount-received-per-payment-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "average-height-primary-school-fifth-grade-male-vs-other",
+      "base": "average-height-primary-school-fifth-grade-male--other-processed-fish-ext-consumption-expenditure-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "base": "avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
+      "base": "avg-height-high-school-2nd-male--floor-area-new-owner-dwelling-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+      "base": "avg-height-high-school-2nd-male--rice-cracker-consumption-expenditure-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "avg-salary-police-prefecture-vs-community-sports-facility",
+      "base": "avg-salary-police-prefecture--community-sports-facility-count-per-million-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "beef-consumption-quantity-vs-municipal-road-paving-rate",
+      "base": "beef-consumption-quantity--municipal-road-paving-rate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
+      "base": "beef-consumption-quantity--unmarried-ratio-male-45-49-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "beef-unmarried-ratio",
+      "base": "beef-unmarried-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "black-tea-income-gap",
+      "base": "black-tea-income-gap-income-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "base": "bonito-catch-consumption-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "base": "bonito-tuna-catch-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-final-education-university",
+      "base": "bread-consumption-expenditure--final-education-university-graduate-school-ratio-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-high-school-advancement",
+      "base": "bread-consumption-expenditure--high-school-advancement-rate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
+      "base": "bread-consumption-expenditure--site-area-per-dwelling-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "campsite-public-vs-paved-road-main-length",
+      "base": "campsite-public--paved-road-main-length-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "campsite-public-vs-road-expressway-length",
+      "base": "campsite-public--road-expressway-length-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "care-worker-income-prefecture-gap",
+      "base": "worker-vs-manager-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "cc-estat-06-income-scatter",
+      "base": "income-education-scatter",
+      "issues": [
+        "not-type",
+        "broken-label",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "base": "scatter-employment-fertility",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "climate-lifestyle-connection",
+      "base": "snow-kerosene-scatter",
+      "issues": [
+        "no-data",
+        "no-source",
+        "not-type"
+      ]
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "base": "area-ratio-vs-rate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "communication-cost-burden",
+      "base": "comm-cost-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "consumption-expenditure-multi-person-households-per-month",
+      "base": "consumption-expenditure-multi-person-households-per-month--per-capita-social-welfare-expenditure-pref-municipal-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "convenience-store-count-commercial-vs-ratio-of-general",
+      "base": "convenience-store-count-commercial--ratio-of-general-households-to-national-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "base": "convenience-vs-retail-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "arrest-vs-theft-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "cup-noodles-consumption-expenditure-vs-fire-damage",
+      "base": "cup-noodles-consumption-expenditure--fire-damage-casualties-per-population-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "cup-noodles-consumption-expenditure-vs-secondary-activity",
+      "base": "cup-noodles-consumption-expenditure--secondary-activity-avg-time-unemployed-female-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "cup-noodles-consumption-expenditure-vs-sports-annual",
+      "base": "cup-noodles-consumption-expenditure--sports-annual-participation-rate-10plus-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "deposit-securities-prefecture-personality",
+      "base": "securities-income-scatter-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "distinctive-place-name-kanji-by-prefecture",
+      "base": "distinctive-place-name-kanji-by-prefecture-total-vs-score-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-house-size",
+      "base": "dual-income-floor-area-scatter-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-elderly-on-public-assistance",
+      "base": "dual-income-household-ratio--elderly-on-public-assistance-per-1000-65plus-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "base": "dual-income-household-ratio--floor-area-per-dwelling-owner-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-public-assistance-housing",
+      "base": "dual-income-household-ratio--public-assistance-housing-beneficiaries-per-1000-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-public-assistance-medical",
+      "base": "dual-income-household-ratio--public-assistance-medical-beneficiaries-per-1000-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
+      "base": "dual-income-household-ratio--rooms-per-dwelling-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
+      "base": "dual-income-household-ratio--tatami-per-dwelling-owner-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "head-vs-actual-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "earthquake-insurance-prefecture-gap",
+      "base": "insurance-damage-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "education-cost-per-child",
+      "base": "elem-vs-junior-cost-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "education-expenses-gap",
+      "base": "elem-vs-junior-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "base": "demand-vs-generation-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "energy-price-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "gas-vs-electricity-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "base": "engel-income-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "base": "information-communication-income-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "expenditure-structure-comparison",
+      "base": "welfare-vs-public-works-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart4-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fertility-fiscal-nexus",
+      "base": "fiscal-fertility-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fertility-rate-prefecture-gap",
+      "base": "marriage-fertility-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "fiscal-grants-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-vs-allocation-tax-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-vs-self-financing-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "tuna-catch-consumption-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "yellowtail-catch-consumption-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "food-manufacturing-establishments-vs-regional-transport-co2",
+      "base": "food-manufacturing-establishments--regional-transport-co2-emissions-estimate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "food-price-regional-2026",
+      "base": "food-quadrant-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "food-self-sufficiency-rate-calorie-vs-national-assessment",
+      "base": "food-self-sufficiency-rate-calorie--national-assessment-elementary-tutoring-rate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "food-self-sufficiency-rate-calorie-vs-passport-issuance",
+      "base": "food-self-sufficiency-rate-calorie--passport-issuance-count-per-thousand-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "rice-vs-bread-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "base": "manufacturing-vs-foreign-scatter",
+      "issues": [
+        "no-data",
+        "not-type",
+        "bad-shape"
+      ]
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart3-forest-vs-gdp-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "gasoline-car-society-map",
+      "base": "gasoline-vs-citygas-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "gasoline-consumption-quantity-vs-densely-inhabited-district",
+      "base": "gasoline-consumption-quantity--densely-inhabited-district-population-density-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "gasoline-consumption-quantity-vs-public-assistance",
+      "base": "gasoline-consumption-quantity--public-assistance-education-beneficiaries-per-1000-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-doctors-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-year-shift-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "base": "healthy-life-expectancy-male-female-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "high-school-teacher-annual-income-vs-new-graduate-starting",
+      "base": "high-school-teacher-annual-income--new-graduate-starting-salary-college-male-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "homeownership-vacancy-four-types",
+      "base": "homeownership-vacancy-four-types-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "household-growth-population-decline-census-2025",
+      "base": "population-household-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "household-income-tokyo-okinawa",
+      "base": "income-tax-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "single-vs-dual-income-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "base": "spending-vs-food-ratio-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "household-structure-daytime-population-gap",
+      "base": "nuclear-family-households-ratio--day-time-population-ratio-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "household-structure-transformation",
+      "base": "single-vs-dualincome-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "housing-cost-livability-trend",
+      "base": "rent-floorarea-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "base": "media-gender-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "resident-vs-guest-china-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "foreign-ratio-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "income-quintile-education",
+      "base": "tutoring-academic-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "water-vs-addedvalue-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "water-vs-shipment-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "international-cooperation-volunteer-map",
+      "base": "foreign-pop-vs-volunteer-scatter",
+      "issues": [
+        "no-data",
+        "not-type",
+        "bad-shape"
+      ]
+    },
+    {
+      "slug": "international-cooperation-volunteer-map",
+      "base": "travel-vs-volunteer-scatter",
+      "issues": [
+        "no-data",
+        "not-type",
+        "bad-shape"
+      ]
+    },
+    {
+      "slug": "local-allocation-tax-prefecture-vs-agriculture-forestry",
+      "base": "local-allocation-tax-prefecture--agriculture-forestry-fisheries-expenses-prefecture-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "local-allocation-tax-prefecture-vs-cultivated-area",
+      "base": "local-allocation-tax-prefecture--cultivated-area-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "local-allocation-tax-prefecture-vs-total-area-excluding",
+      "base": "local-allocation-tax-prefecture--total-area-excluding-northern-territories-and-takeshima-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "local-government-debt-burden",
+      "base": "debt-vs-future-burden-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "local-tax-prefecture-vs-railway-passengers",
+      "base": "local-tax-prefecture--railway-passengers-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "tax-vs-allocation-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "low-cost-low-income-prefectures",
+      "base": "low-cost-low-income-prefectures-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "main-road-paving-rate-vs-apple-consumption-quantity",
+      "base": "main-road-paving-rate--apple-consumption-quantity-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "manufacturing-labor-productivity-pref",
+      "base": "shipment-productivity-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart4-scatter-shipment-vs-value",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "manufacturing-shipment-amount-vs-manufacturing",
+      "base": "manufacturing-shipment-amount--manufacturing-establishment-site-area-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "manufacturing-shipment-amount-vs-regional-industry-co2",
+      "base": "manufacturing-shipment-amount--regional-industry-co2-emissions-estimate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "minimum-wage-1000yen-breakthrough",
+      "base": "jobratio-wage-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "natto-child-weight-correlation",
+      "base": "natto-consumption-expenditure--average-weight-primary-school-fifth-grade-male-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "base": "udon-ramen-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "base": "nurse-vs-govwage-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "aging-vs-nursing-facility-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "aging-vs-welfare-expenditure-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "foreign-concentration-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "overseas-travel-gap",
+      "base": "income-vs-travel-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "pachinko-education-cost",
+      "base": "pachinko-education-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "pachinko-shop-density-per-10k-vs-dependent-population-index",
+      "base": "pachinko-shop-density-per-10k--dependent-population-index-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "base": "pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "peach-consumption-quantity-vs-disaster-relief-expenses",
+      "base": "peach-consumption-quantity--disaster-relief-expenses-prefecture-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-vs-industry-scatter",
+      "issues": [
+        "no-data",
+        "not-type",
+        "bad-shape"
+      ]
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chemical-vs-transport-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "base": "facility-vs-complaints-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "population-migration-tokyo-concentration",
+      "base": "social-vs-natural-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "base": "aging-vs-debt-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "base": "psychiatric-bed-count--elementary-school-count-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-neighborhood-park-count",
+      "base": "psychiatric-bed-count--neighborhood-park-count-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+      "base": "psychiatric-bed-count--standard-fiscal-demand-municipality-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "base": "income-vs-price-scatter",
+      "issues": [
+        "no-data",
+        "not-type",
+        "bad-shape"
+      ]
+    },
+    {
+      "slug": "real-disposable-income-reversal",
+      "base": "income-vs-real-disposable-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "real-disposable-income-vs-per-capita-social-welfare",
+      "base": "real-disposable-income--per-capita-social-welfare-expenditure-pref-municipal-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+      "base": "real-disposable-income--taxpayer-ratio-per-pref-resident-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "real-income-taxpayer",
+      "base": "real-income-taxpayer-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "base": "solar-vs-wind-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "road-infrastructure-density",
+      "base": "density-vs-traffic-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "road-length-per-km2-vs-average-road-traffic-volume",
+      "base": "road-length-per-km2--average-road-traffic-volume-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "road-length-per-km2-vs-local-special-grant-prefecture",
+      "base": "road-length-per-km2--local-special-grant-prefecture-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "road-length-per-km2-vs-residential-building-starts",
+      "base": "road-length-per-km2--residential-building-starts-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "road-total-length-vs-core-agricultural-workers",
+      "base": "road-total-length--core-agricultural-workers-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "roadside-station-count-vs-forest-road-length",
+      "base": "roadside-station-count--forest-road-length-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "safe-driving-5-features",
+      "base": "aging-fatality-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "income-vs-savings-rate-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "savings-vs-consumption-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "school-nonattendance-pattern",
+      "base": "elem-vs-junior-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "school-teacher-annual-income",
+      "base": "school-teacher-annual-income-2022-2023-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "school-teacher-annual-income",
+      "base": "teacher-age-income-change-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "semiconductor-electronics-regional-map",
+      "base": "semiconductor-dependency-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+      "base": "sewage-treatment-coverage-rate--flush-toilet-population-ratio-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+      "base": "sewage-treatment-coverage-rate--sewerage-penetration-rate-2012on-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "sewerage-water-supply-gap",
+      "base": "sewerage-vs-water-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
+      "base": "shumai-consumption-expenditure--jr-freight-shipment-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "shumai-consumption-expenditure-vs-main-household-ratio-main",
+      "base": "shumai-consumption-expenditure--main-household-ratio-main-earner-employee-commute-90min-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "scatter-small-vs-big",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "solar-panel-housing-prefecture-gap",
+      "base": "detached-vs-solar-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "specific-health-checkup-participation-rate-vs-taxpayer",
+      "base": "specific-health-checkup-participation-rate--taxpayer-ratio-per-pref-resident-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "facility-vs-activity-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "base": "sports-vs-facility-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "base": "suicide-vs-aging-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "sunshine-solar-housing-correlation",
+      "base": "sunshine-solar-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "swimming-pool-public-vs-post-office-count",
+      "base": "swimming-pool-public--post-office-count-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "swimming-pool-public-vs-smoke-emission-facility-count",
+      "base": "swimming-pool-public--smoke-emission-facility-count-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "swimming-pool-public-vs-total-administrative-investment",
+      "base": "swimming-pool-public--total-administrative-investment-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "swimming-pool-public-vs-total-general-project-investment",
+      "base": "swimming-pool-public--total-general-project-investment-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "telework-rate-tokyo-gap",
+      "base": "telework-ict-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tissue-paper-consumption-expenditure-vs-average-weight",
+      "base": "tissue-paper-consumption-expenditure--average-weight-primary-school-fifth-grade-male-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "travel-gender-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tuna-consumption-medical-expense-correlation",
+      "base": "tuna-medexp-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
+      "base": "tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
+      "base": "tuna-consumption-quantity--national-medical-expense-per-person-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-sex-ratio-total",
+      "base": "tuna-consumption-quantity--sex-ratio-total-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tuna-medical-expense",
+      "base": "tuna-medical-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "tutoring-cost-university-advancement-gap",
+      "base": "hs-tutoring-vs-advancement-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "udon-soba-food-culture-prefecture-map",
+      "base": "fresh-udon-soba-dining-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "unemployment-tertiary-industry-link",
+      "base": "tertiary-unemployment-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "unhealthy-period-gender-prefecture-gap",
+      "base": "unhealthy-period-gender-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "advancement-vs-university-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "unmarried-tfr-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "base": "park-area-vs-count-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-house-crisis",
+      "base": "vacant-aging-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-housing-aging-correlation",
+      "base": "vacant-housing-rate--old-population-index-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-housing-rate-vs-dependent-population-index",
+      "base": "vacant-housing-rate--dependent-population-index-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-housing-rate-vs-standard-price-change-rate-commercial",
+      "base": "vacant-housing-rate--standard-price-change-rate-commercial-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-housing-vs-aging",
+      "base": "vacant-housing-rate--ratio-65-plus-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-housing-vs-land-price",
+      "base": "vacant-vs-land-price-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "vacant-housing-vs-welfare-commissioner",
+      "base": "vacant-welfare-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "base": "recycle-vs-landfill-scatter",
+      "issues": [
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "wheat-flour-expenditure-vs-quantity",
+      "base": "wheat-flour-qty-vs-expenditure-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "womens-clothing-expenditure-ranking",
+      "base": "mens-womens-clothing-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "freq-severity-scatter",
+      "issues": [
+        "not-type",
+        "no-axes"
+      ]
+    }
+  ],
+  "stale": [
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "library-lending-tilemap",
+      "rankingKey": "library-lending-books",
+      "year": "2020"
+    },
+    {
+      "slug": "marriage-divorce-okinawa",
+      "base": "divorce-rate",
+      "rankingKey": "divorces-per-total-population",
+      "year": "2022"
+    },
+    {
+      "slug": "prefectural-income-gdp-ranking",
+      "base": "income-ranking",
+      "rankingKey": "per-capita-kenmin-shotoku-h27",
+      "year": "2020"
+    },
+    {
+      "slug": "solar-panel-housing-prefecture-gap",
+      "base": "solar-panel-housing-rate-rankings",
+      "rankingKey": "solar-panel-housing-rate",
+      "year": "2023"
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "advancement-rate-ranking",
+      "rankingKey": "university-capacity-index",
+      "year": "2024"
+    }
+  ]
+}

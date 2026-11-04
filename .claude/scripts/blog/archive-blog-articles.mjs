@@ -6,6 +6,8 @@
  * (2026-10-28 に 7 月の本文の控えで改稿済みの記事を上書きしかけた)。note の記事と同じく、
  * 上書きの前後に版を `stats47-private:blog-archive/<slug>/<sha256>.md` へ不変保存し、読み戻して SHA を照合する。
  * 同じ SHA の版が既にあれば書かない (write-once)。消さない。
+ * 本文が参照する図の点データ (data/<name>.json) と出典 (<name>.source.json) も
+ * `blog-archive/<slug>/data/<ファイル名>/<sha256>` に同じ規則で残す (点データが失われた図が 2026-11-04 に 5 枚あった)。
  *
  * 使い方:
  *   node .claude/scripts/blog/archive-blog-articles.mjs --slugs a,b   # 今の公開版を退避
@@ -35,6 +37,13 @@ export const ARCHIVE_PREFIX = "blog-archive";
 const CONCURRENCY = 8;
 
 export const archiveKey = (slug, sha256) => `${ARCHIVE_PREFIX}/${slug}/${sha256}.md`;
+export const chartDataKey = (slug, name, sha256) => `${ARCHIVE_PREFIX}/${slug}/data/${name}/${sha256}`;
+
+/** 本文が参照する図の点データと出典のファイル名 */
+export function chartDataFilesOf(markdown) {
+  const bases = [...new Set([...String(markdown).matchAll(/data\/([\w-]+)\.svg/g)].map((m) => m[1]))];
+  return bases.flatMap((base) => [`${base}.json`, `${base}.source.json`]);
+}
 const sha256Of = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
 
 /**
@@ -44,10 +53,10 @@ const sha256Of = (bytes) => crypto.createHash("sha256").update(bytes).digest("he
  * @param {{get(key:string):Promise<Buffer|null>, put(key:string, bytes:Buffer):Promise<void>}} archive
  * @returns {Promise<{slug:string, status:"absent"|"exists"|"stored", sha256?:string}>}
  */
-export async function archiveVersion(slug, bytes, archive) {
+export async function archiveVersion(slug, bytes, archive, keyOf = (sha) => archiveKey(slug, sha)) {
   if (!bytes) return { slug, status: "absent" };
   const sha256 = sha256Of(bytes);
-  const key = archiveKey(slug, sha256);
+  const key = keyOf(sha256);
   const existing = await archive.get(key);
   if (existing) {
     if (sha256Of(existing) !== sha256) throw new Error(`${key}: 退避済みの版の SHA が名前と一致しない`);
@@ -58,6 +67,8 @@ export async function archiveVersion(slug, bytes, archive) {
   if (!back || sha256Of(back) !== sha256) throw new Error(`${key}: 読み戻した版の SHA が一致しない`);
   return { slug, status: "stored", sha256 };
 }
+
+const chartDataFiles = (markdown) => (markdown ? chartDataFilesOf(markdown.toString("utf8")) : []);
 
 async function listAllSlugs() {
   const res = await fetch(`${process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL}/app/blog/all.json`);
@@ -93,8 +104,12 @@ async function main(argv) {
       while (i < slugs.length) {
         const slug = slugs[i++];
         try {
-          const r = await archiveVersion(slug, await live.get(`app/blog/${slug}/article.md`), archive);
+          const markdown = await live.get(`app/blog/${slug}/article.md`);
+          const r = await archiveVersion(slug, markdown, archive);
           counts[r.status]++;
+          for (const name of chartDataFiles(markdown)) {
+            await archiveVersion(slug, await live.get(`app/blog/${slug}/data/${name}`), archive, (sha) => chartDataKey(slug, name, sha));
+          }
         } catch (e) {
           failed.push(`${slug}: ${e.message}`);
         }

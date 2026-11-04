@@ -269,6 +269,24 @@ export interface SupplementalSource {
   reason: string;
 }
 
+/**
+ * `MetricConfig.cityValueCorrections` の 1 件。元の統計表の誤りを公表値へ置き換える。
+ * `sourceValue` と食い違う値を取り込んだら止まるので、元の表の訂正に気づける。
+ */
+export interface ValueCorrection {
+  areaCode: string;
+  /** 補正する年 (4 桁) */
+  year: number;
+  /** 元の統計表の値 */
+  sourceValue: number;
+  /** 置き換える公表値 */
+  value: number;
+  /** 誤りと判断した根拠 (監査で読む説明) */
+  reason: string;
+  /** 公表値の出典 */
+  sourceUrl: string;
+}
+
 export type YearSpec =
   'all' | { from: number; to: number } | { years: number[] };
 
@@ -371,6 +389,9 @@ export const CATEGORY_KEYS = [
 export type CategoryKey = (typeof CATEGORY_KEYS)[number];
 
 /** Metric 1 つ分の全データ要件 */
+/** 値を割っている分母。none は実数 (キー名が分母を名乗っていても実数の指標に書く) */
+export type MetricDenominator = 'population' | 'area' | 'household' | 'person' | 'none';
+
 export interface MetricConfig {
   /** kebab-case の一意キー。ファイル名と一致 */
   key: string;
@@ -405,6 +426,11 @@ export interface MetricConfig {
   description?: string;
   /** 単位 (例: "人", "万円")。空文字・"‐" は禁止。 */
   unit: string;
+  /**
+   * 分母。題名とキーから読めない指標に書く (読み方は metric-denominator.ts)。
+   * unit に分母を足さないのは、表示が「人口10万人当たり … 人（人口10万対）」と二重になるため。
+   */
+  denominator?: MetricDenominator;
   /** e-Stat 機械分類の category キー (17 軸のいずれか)。CategoryKey で型強制。 */
   category: CategoryKey;
   /** 観測値の取得元 */
@@ -423,6 +449,8 @@ export interface MetricConfig {
    * 補う年は `years` (取得年範囲) にも含めること (含めないと取り込みが止まる)。
    */
   supplementalSources?: readonly SupplementalSource[];
+  /** 市区町村の値のうち、元の統計表の誤りを公表値へ置き換えるもの。順位の計算より前に当てる */
+  cityValueCorrections?: readonly ValueCorrection[];
   /** 保持するエンティティ種別 (どの stats_* に相当するか) */
   entities: EntityKind[];
   /**

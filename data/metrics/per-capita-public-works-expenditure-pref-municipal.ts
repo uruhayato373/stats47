@@ -6,6 +6,7 @@ export const perCapitaPublicWorksExpenditurePrefMunicipal: MetricConfig = {
   "title": "土木費",
   "subtitle": "都道府県・市町村財政合計",
   "unit": "千円",
+  "denominator": "population",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -44,10 +44,19 @@
     "unit": {
       "type": "string"
     },
+    "denominator": {
+      "enum": [
+        "population",
+        "area",
+        "household",
+        "person",
+        "none"
+      ]
+    },
     "category": {
       "enum": [
-        "landweather",
         "population",
+        "landweather",
         "laborwage",
         "agriculture",
         "miningindustry",
@@ -638,6 +647,41 @@
           "years",
           "source",
           "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "cityValueCorrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "areaCode": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "sourceValue": {
+            "type": "number"
+          },
+          "value": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "sourceUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "areaCode",
+          "year",
+          "sourceValue",
+          "value",
+          "reason",
+          "sourceUrl"
         ],
         "additionalProperties": false
       }
@@ -1606,8 +1650,8 @@
       "type": "array",
       "items": {
         "enum": [
-          "landweather",
           "population",
+          "landweather",
           "laborwage",
           "agriculture",
           "miningindustry",

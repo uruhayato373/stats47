@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ブログ図の出典 manifest (app/blog/<slug>/data/<name>.source.json)",
+  "description": "kind の語彙と再取得に必要なフィールドの正典は .claude/scripts/lib/chart-provenance.mjs の CHART_SOURCE_KIND_SPECS。ここは形だけを固定する。散布図の軸は generate-article-charts.ts が axes に書き戻す。",
+  "type": "object",
+  "required": ["kind"],
+  "properties": {
+    "kind": {
+      "enum": ["ranking", "metric", "estat", "scatter", "derived", "manual", "correlation", "calculated", "composite", "ranking-pair", "ranking-join", "derived-scatter", "authored", "bar", "line"]
+    },
+    "axes": {
+      "type": "object",
+      "description": "散布図の両軸。生成器が全点の照合で決めて書く (手で書かない)",
+      "required": ["x", "y"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "$ref": "#/definitions/axis" },
+        "y": { "$ref": "#/definitions/axis" }
+      }
+    },
+    "excludedAreas": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "exclusionReason": { "type": "string", "minLength": 1 },
+    "generatedBy": {
+      "type": "string",
+      "description": "作ったスクリプト。リポジトリにある物を書く (一時ファイルは作り直せない)",
+      "not": { "pattern": "^/tmp/" }
+    }
+  },
+  "definitions": {
+    "axis": {
+      "type": "object",
+      "required": ["year", "proof"],
+      "additionalProperties": false,
+      "properties": {
+        "metricKey": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "year": { "type": "string", "pattern": "\\d{4}" },
+        "scale": { "type": "number", "exclusiveMinimum": 0 },
+        "proof": {
+          "description": "values = 全点が metricKey の観測値と一致した / manifest = 計算した軸などで年を source.json とラベルから読んだ",
+          "enum": ["values", "manifest"]
+        }
+      },
+      "if": { "properties": { "proof": { "const": "values" } } },
+      "then": { "required": ["metricKey"] }
+    }
+  }
+}

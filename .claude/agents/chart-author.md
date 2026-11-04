@@ -66,6 +66,8 @@ model: sonnet
 | `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿。ephemeral outbox: 存在しない場合は `npm run note:article -- checkout <slug>` 先行必須。編集後は `save <slug>`） |
 | `.claude/scripts/blog/generate-article-charts.ts` | read / 軽微修正（CLI ディスパッチ追加時） |
 | `.claude/scripts/blog/build-svg-gallery.mjs` | run（目視レビュー用 HTML ギャラリー生成） |
+| `.claude/scripts/blog/audit-chart-axes.ts` | run（公開中の散布図の点データ・軸・型を値で検査） |
+| `.claude/scripts/blog/rebuild-scatter-data.mjs` | run（点データを失った散布図を R2 の観測値で作り直し、source-repair へ渡す） |
 
 ## File Boundary (並行衝突回避)
 

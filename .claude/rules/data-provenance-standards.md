@@ -101,6 +101,13 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 - **是正**: `/audit-provenance` skill が queue を提示 → fetcher コードから出典復元 → config backfill → lint 再実行。
   意味判断 (出典が本当に正しいか) だけ `open-data-curator` / 人間。
 
+## 出典の更新の検知 (2026-11-04)
+
+月次の取り込みは API で取れる指標だけを更新するので、`external` の指標は出典の新しい版が出ても自動では変わらない。
+週次の provenance 監査の `watch-external-sources.ts` が、出典ページの本文と年の表記を前回と比べ、結果を
+`data/provenance/source-watch.md` へ書く。週次レビューが読み、新しい版は指標ごとに `provenance.restore` の手順で取り込む。
+ページの変化だけで値を更新しない。年名は月次の取り込みが定義 (`yearFormat`) にそろえ、値は変えない。
+
 ---
 
 ## 関連

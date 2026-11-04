@@ -6,6 +6,7 @@ export const infantMortalityRatePer1000Births: MetricConfig = {
   "title": "乳児死亡率",
   "subtitle": "出生数千当たり",
   "unit": "出生千対",
+  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

@@ -41,3 +41,5 @@ WindowsのSVG復元は `path.basename()` を使う。`split('/')` はWindows区�
 **2026-11-04 管理画面の「未公開」99本は誤表示だった**: 新規公開は `update-note-covers` を通らず公開ポインタが採用版へ結ばれないため、公開済みでも未公開と出た。公開画像の実物は全件採用版と一致していた。`note:assets archive` が画素照合のうえ採用版へ結ぶよう直し、減色で落ちた4本は目視のうえ `--reviewed-match` で結んだ。既存の画素判定は同型カバー (`b-ref-prc-a48`/`a50`) の取り違えを通すので、これだけを別画像の否定に使わない ([[project_note_update_mode_learnings]])。
 
 **2026-11-04 旧形式126本を現行のimagegen方式へ差し替え完了**: 公開428本すべて `note-imagegen-cover-v1`。制作内容は管理画面の PATCH で保存すると採用が解除される (公開画像は変わらない)。ディスク枯渇で admin の保存が500になった実例あり。wrangler の OAuth は1時間で切れ、更新の境目で import が `session expired` になる (失敗した記事の候補は旧版のまま残るので、登録の成否を台帳で確かめてから採用する)。
+
+**台帳の題名を公開題名に揃えるとき**: `data/note/articles.json` だけ変えるとカバーの plan が stale になるので `production.titleCorrection` を同時に入れる。常駐中の admin dev サーバーは台帳を読み直さず、題名とのずれで全画面500になるので再起動する (2026-11-04 実測)。公開題名の確認は台帳でなく note API の `name` で行う。

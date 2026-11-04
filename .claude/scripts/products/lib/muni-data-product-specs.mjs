@@ -23,6 +23,8 @@ export const MUNI_PRODUCT_SPECS = {
       { years: '2020', survey: '令和 3 年経済センサス-活動調査 (2020 年の実績)' },
       { years: '2021〜2023', survey: '経済構造実態調査' },
     ],
+    correctionSource:
+      '置き換えた値: 川崎市「工業統計調査結果」 https://www.city.kawasaki.jp/170/page/0000025684.html ・ https://www.city.kawasaki.jp/170/cmsfiles/contents/0000053/53475/kogyo.xls',
     yearNotes: { 2020: '令和3年経済センサスへの切替で前年と単純比較不可' },
     rowNotes: [
       { codes: ['19201', '19430'], toYear: 2005, note: '旧上九一色村を含まない' },
@@ -31,19 +33,19 @@ export const MUNI_PRODUCT_SPECS = {
       {
         code: '14130',
         year: 1986,
-        expectPrefDiff: -2773565,
-        note: '県計より市の合計が2,773,565百万円大きく元データ要確認',
+        expectPrefDiff: -2484,
+        note: '統計表の誤りのため川崎市公表の工業統計の値 5,842,937 百万円へ置き換えた (元の値 8,614,018)',
       },
       {
         code: '14131',
         year: 1986,
-        note: '川崎市の県計超過と同時期の突出値で元データ要確認',
+        note: '統計表の誤りのため川崎市公表の工業統計の値 3,066,860 百万円へ置き換えた (元の値 5,840,455)',
       },
       {
         code: '14130',
         year: 1983,
-        expectPrefDiff: 58425,
-        note: '市の値が区の合計より58,429百万円小さく元データ要確認',
+        expectPrefDiff: 1605,
+        note: '統計表の誤りのため川崎市公表の工業統計の値 6,528,504 百万円へ置き換えた (元の値 6,471,684)',
       },
     ],
     crossPrefMergers: [

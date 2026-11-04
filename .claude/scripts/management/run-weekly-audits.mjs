@@ -28,7 +28,7 @@ const SCRIPTS = ".claude/scripts/management/weekly-audits";
 const AUDITS = [
   { id: "ci-health", label: "CI の健全性 (連続失敗の cron・配信データの鮮度)", timeout: 15 },
   { id: "internal-links", label: "サイト内リンク", timeout: 90 },
-  { id: "provenance", label: "出典・再現性", timeout: 30 },
+  { id: "provenance", label: "出典・再現性・出典ページの変化", timeout: 30 },
   { id: "ranking-integrity", label: "ランキングのデータ整合・データ品質キュー", timeout: 30 },
   { id: "estat-year-coverage", label: "e-Stat の年カバレッジ", timeout: 60 },
   { id: "estat-ssds", label: "SSDS 指標の列挙", timeout: 20 },

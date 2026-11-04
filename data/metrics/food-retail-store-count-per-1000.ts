@@ -6,6 +6,7 @@ export const foodRetailStoreCountPer1000: MetricConfig = {
   "title": "飲食料品小売店数",
   "subtitle": "1000人当たり",
   "unit": "店",
+  "denominator": "population",
   "category": "commercial",
   "source": {
     "kind": "estat",

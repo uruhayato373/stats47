@@ -6,6 +6,7 @@ export const perCapitaFirefightingExpenditureTokyoMunicipal: MetricConfig = {
   "title": "消防費",
   "subtitle": "東京都・市町村財政合計",
   "unit": "千円",
+  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

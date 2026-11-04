@@ -38,6 +38,7 @@ import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
 import { lintUnregisteredTags } from '../lib/blog-tag-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { chartSourceShapeErrors } from '../lib/chart-source-schema.mjs';
 import { lintMixedYearTitle } from '../lib/title-year-lint.mjs';
 import { lintHypernymMetricNames, lintExtremeBaseYear } from '../lib/metric-name-lint.mjs';
 import {
@@ -623,6 +624,10 @@ for (const base of svgRefs) {
         pairBlockers.push(
           `${base}.source.json は再取得不能: ${sourceInspection.detail}`
         );
+      }
+      // generatedBy の /tmp は過去の負債 (週次の audit-chart-axes が数える)。改稿の公開は止めない
+      for (const problem of chartSourceShapeErrors(sourceData).filter((p) => !p.includes('generatedBy'))) {
+        pairBlockers.push(`${base}.source.json の形が違う: ${problem}`);
       }
     } catch (error) {
       pairBlockers.push(
