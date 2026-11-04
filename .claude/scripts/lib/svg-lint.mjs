@@ -236,7 +236,8 @@ const MIN_DOT_CONTRAST = 3;
 /** 散布図の型: 県名は正式名、暗い版の点は地から読み取れる */
 function scatterTypeErrors(filename, svg) {
   const errors = [];
-  const names = [...String(svg).matchAll(/font-size="32" font-weight="700">([^<]+)</g)].map((m) => m[1]);
+  // 県名は点の横に text-anchor 付きで置かれる。長い題名は同じ大きさになるので大きさだけでは見分けない
+  const names = [...String(svg).matchAll(/text-anchor="(?:start|end)" font-size="32" font-weight="700">([^<]+)</g)].map((m) => m[1]);
   const short = names.filter((n) => !PREF_NAMES.includes(n));
   if (short.length) errors.push(`散布図の県名が正式名でない: ${short.join(' ')} (${path_base(filename)})`);
   if (imageThemeOf(svg) === 'dark') {
