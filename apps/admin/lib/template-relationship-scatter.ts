@@ -102,7 +102,7 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
   const plot = dark ? theme.paper : BRAND.white;
   const ink = dark
     ? { plot, edge: theme.outline ?? theme.line, grid: theme.wash, tick: theme.muted, reg: theme.muted,
-        named: mixColor(color, '#FFFFFF', 0.6), dot: mixColor(color, '#FFFFFF', 0.2), dotEdge: theme.outline ?? theme.line }
+        named: mixColor(color, '#FFFFFF', 0.65), dot: mixColor(color, '#FFFFFF', 0.3), dotEdge: theme.outline ?? theme.line }
     : { plot, edge: BRAND.line, grid: BRAND.wash, tick: BRAND.muted, reg: BRAND.mutedLight,
         named: color, dot: mixColor(color, '#FFFFFF', 0.55), dotEdge: plot };
   const sx = linearScale(xDomain[0], xDomain[1], PLOT.left, PLOT.right);

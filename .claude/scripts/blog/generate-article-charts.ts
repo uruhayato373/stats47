@@ -66,7 +66,7 @@ import { renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking
 import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
 import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { matchScatterAxis, metricKeysInSource, prefecturesNamedNear, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from './lib/type-chart-input';
+import { matchScatterAxis, metricKeysInSource, prefecturesNamedNear, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -914,19 +914,29 @@ for (const { file, type, parsed, scatterSource } of jsonMeta) {
     for (const key of new Set([preferred, ...sourceKeys, ...articleKeys])) {
       const rows = key ? valuesOf(key) : null;
       const hit = rows && matchScatterAxis(values, codes, rows);
-      if (hit) return { metric: metric(key) as never, year: hit.year, asWritten: hit.scale !== 1 };
+      if (hit) return { metric: metric(key) as never, year: hit.year, asWritten: hit.scale !== 1, record: { metricKey: key, year: hit.year, ...(hit.scale === 1 ? {} : { scale: hit.scale }), proof: 'values' } as ChartAxisRecord };
     }
-    return { year: sourceAxisYear(scatterSource, axis, `${String(label ?? '')} ${text(parsed[`${axis}Unit`])}`), asWritten: true };
+    const year = sourceAxisYear(scatterSource, axis, `${String(label ?? '')} ${text(parsed[`${axis}Unit`])}`);
+    return { year, asWritten: true, record: year ? ({ year, proof: 'manifest' } as ChartAxisRecord) : null };
   };
+  const known = scatterSource.axes as { x?: ChartAxisRecord; y?: ChartAxisRecord } | undefined;
+  const xAxis = resolveAxis(known?.x?.metricKey || xKey, 'x', parsed.xLabel), yAxis = resolveAxis(known?.y?.metricKey || yKey, 'y', parsed.yLabel);
   const excluded = scatterSource.excludedAreas;
   scatterCharts.set(file.replace(/\.json$/, ''), scatterChartFromArticleData({ ...parsed, points }, {
-    x: resolveAxis(xKey, 'x', parsed.xLabel), y: resolveAxis(yKey, 'y', parsed.yLabel),
+    x: xAxis, y: yAxis,
     prefCodeOf, unitLabel, prefNameOf: (code) => prefNameOf(code),
     excludedCount: Array.isArray(excluded) && text(scatterSource.exclusionReason) ? excluded.length : 0,
     sourceNames: [...sourceKeys.map((key) => text((metric(key) as { source?: { displayName?: unknown } } | undefined)?.source?.displayName)).filter(Boolean), ...sourceNamesOf(scatterSource)],
     colorMetric: metric(sourceKeys[0]) as never,
     bodyNames: prefecturesNamedNear(articleText, file.replace(/\.json$/, ''), points.map((p) => prefNameOf(p.code))),
   }));
+  // What was proved goes back into source.json, so the axes stay recorded in one shape however the manifest began.
+  if (xAxis.record && yAxis.record) {
+    const axes = { x: xAxis.record, y: yAxis.record };
+    if (JSON.stringify(known) !== JSON.stringify(axes)) {
+      fs.writeFileSync(path.join(DATA_DIR, file.replace(/\.json$/, '.source.json')), `${JSON.stringify({ ...scatterSource, axes }, null, 2)}\n`);
+    }
+  }
 }
 
 for (const { file, type, parsed } of jsonMeta) {

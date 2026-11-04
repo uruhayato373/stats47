@@ -121,6 +121,16 @@ export function matchScatterYear(values: number[], codes: string[], rows: Values
   return hits.length === 1 ? names.get(hits[0][0])! : null;
 }
 
+/** One scatter axis as source.json keeps it (config/schema/blog.chart-source.schema.json). */
+export interface ChartAxisRecord {
+  metricKey?: string;
+  year: string;
+  /** Stored value ÷ scale = the article's value; left out when 1. */
+  scale?: number;
+  /** values: every point matched the metric. manifest: a calculated axis, read from source.json and the label. */
+  proof: 'values' | 'manifest';
+}
+
 /** The scale between the stored values and the article's (万人 from 人, 億円 from 百万円), as a scatter axis may be written. */
 const AXIS_SCALES = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e8, 0.1, 0.01, 0.001];
 
@@ -155,7 +165,8 @@ export function sourceAxisYear(source: Record<string, unknown>, axis: 'x' | 'y',
   const input = list.find((i) => i.axis === axis) ?? list[axis === 'x' ? 0 : 1];
   if (/^\d{4}$/.test(String(input?.year))) return `${input!.year}年`;
   const { fetchedAt: _f, generatedAt: _g, ...rest } = source;
-  const years = new Set(JSON.stringify(rest).match(/(?<!\d)(?:19|20)\d{2}(?!\d)/g) ?? []);
+  // e-Stat time codes read 2021000000.
+  const years = new Set((JSON.stringify(rest).match(/(?<!\d)(?:19|20)\d{2}(?:000000)?(?!\d)/g) ?? []).map((y) => y.slice(0, 4)));
   if (years.size === 1) return `${[...years][0]}年`;
   // Non-statistical sources (place names) have no survey year, only when they were taken.
   const fetched = /^\d{4}/.exec(String(source.fetchedAt ?? ''))?.[0];

@@ -1,4 +1,5 @@
 # Memory Index
+- [chart ledger read first](feedback_chart_ledger_read_first.md) — 図のデータ欠けを語る前に台帳を読む。形の合格は値の正しさを保証しない。型の見た目は見本を見せてから全件へ
 - [note profile launch](feedback_note_profile_launch.md) — note の専用プロファイルは素の Chrome で開かず Playwright 経由で起動する。401 なら保存済みセッションを確認してオーナーへ
 
 - [next eslint unpatched braces](feedback_next_eslint_unpatched_braces.md) — Next ESLint経由の未修正bracesは限定overrideで除去。実際のページ検出・lint・auditとクリーンinstallで検証する

@@ -35,6 +35,7 @@
  */
 
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -47,7 +48,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const STAGE_REL = ".local/r2/app/blog";
 const STAGE_ABS = path.join(PROJECT_ROOT, STAGE_REL);
-const ALL_RANKING_PATH = "/tmp/all-ranking.json";
+const ALL_RANKING_PATH = path.join(os.tmpdir(), "all-ranking.json");
 // 軸レンジ照合の許容: SSOT 値域が SVG 目盛レンジを「おおむね包含」する相対許容 (20%)。
 // 値域の桁が合うことを見るだけ。極端スケールで無理に一致させない。
 const RANGE_TOL = 0.2;
@@ -209,9 +210,6 @@ let CATALOG = null;
 let NAME_TO_KEYS = null; // 正規化 rankingName → [key,…] (同名 key の多重度を測る)
 function loadCatalog() {
   if (CATALOG) return CATALOG;
-  if (!fs.existsSync(ALL_RANKING_PATH)) {
-    throw new Error(`${ALL_RANKING_PATH} が無い。curl -s ${R2}/app/ranking-items/all.json > ${ALL_RANKING_PATH} を先に実行`);
-  }
   const raw = JSON.parse(fs.readFileSync(ALL_RANKING_PATH, "utf8"));
   CATALOG = (raw.items || raw.rankings || raw.data || (Array.isArray(raw) ? raw : []))
     .filter((x) => x && x.rankingKey && (x.areaType === "prefecture" || !x.areaType));
@@ -457,6 +455,11 @@ async function buildScatterJson(slug, base, xRes, yRes, meta) {
 
 // ---------- main ----------
 const targets = loadTargets();
+if (!fs.existsSync(ALL_RANKING_PATH)) {
+  const res = await fetch(`${R2}/app/ranking-items/all.json`);
+  if (!res.ok) throw new Error(`app/ranking-items/all.json: HTTP ${res.status}`);
+  fs.writeFileSync(ALL_RANKING_PATH, await res.text());
+}
 console.error(`[restore-scatter] ${targets.length} neither scatter SVG を ${APPLY ? "生成(apply)" : "probe"}`);
 loadCatalog();
 

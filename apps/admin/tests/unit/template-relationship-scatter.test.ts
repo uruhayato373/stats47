@@ -132,6 +132,7 @@ describe('blog scatter as the shared type', () => {
     expect(sourceAxisYear({ year: '2020/2024' }, 'y', '')).toBe('2024年');
     expect(sourceAxisYear({ inputs: [{ year: '2020' }, { year: '2019' }] }, 'y', '')).toBe('2019年');
     expect(sourceAxisYear({ formula: '2021年の値', fetchedAt: '2026-07-16' }, 'x', '')).toBe('2021年');
+    expect(sourceAxisYear({ inputs: [{ params: { cdTime: '2021000000' } }] }, 'x', '')).toBe('2021年');
     expect(sourceAxisYear({ formula: '2021年と2020年' }, 'x', '')).toBeNull();
   });
   it('takes survey names from the manifest, not its r2 paths', () => {
