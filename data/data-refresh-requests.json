@@ -1,0 +1,7 @@
+{
+  "metric": "manufacturing-shipment-amount,manufacturing-shipment",
+  "since": "",
+  "dryRun": false,
+  "migrateLegacyRecipes": false,
+  "snapshotScope": "auto"
+}
