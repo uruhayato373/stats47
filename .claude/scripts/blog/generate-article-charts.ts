@@ -66,7 +66,7 @@ import { renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking
 import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
 import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { matchScatterYear, rankingChartFromArticleData, scatterChartFromArticleData } from './lib/type-chart-input';
+import { matchScatterYear, prefecturesNamedNear, rankingChartFromArticleData, scatterChartFromArticleData } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -904,6 +904,9 @@ for (const { file, type, parsed, scatterSource } of jsonMeta) {
   scatterCharts.set(file.replace(/\.json$/, ''), scatterChartFromArticleData(parsed, {
     x: { metric: metric(xKey) as never, year: xYear }, y: { metric: metric(yKey) as never, year: yYear },
     prefCodeOf, unitLabel,
+    bodyNames: fs.existsSync(ARTICLE_MD)
+      ? prefecturesNamedNear(fs.readFileSync(ARTICLE_MD, 'utf8'), file.replace(/\.json$/, ''), points.map((p) => String(p.label ?? '')))
+      : [],
   }));
 }
 
