@@ -12,6 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { readArticleLedger } from "../../../.claude/scripts/note/lib/article-ledger.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
 import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channels/geo/service-offer";
@@ -160,9 +161,10 @@ function buildStorefrontProducts(): StorefrontProduct[] {
       sourceBlogSlugs: [],
     }];
   });
-  return [...kindleProducts, ...dataProducts, ...noteProducts, ...standaloneProducts].sort((a, b) =>
-    a.slug.localeCompare(b.slug),
-  );
+  const coverUrls = readJson<Record<string, string>>(path.join(ROOT, datasetPath("products.note-cover-urls")));
+  return [...kindleProducts, ...dataProducts, ...noteProducts, ...standaloneProducts]
+    .map((product) => (coverUrls[product.externalUrl] ? { ...product, coverImageUrl: coverUrls[product.externalUrl] } : product))
+    .sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
 function render(products: readonly StorefrontProduct[]): string {

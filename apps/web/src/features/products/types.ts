@@ -10,6 +10,8 @@ export interface StorefrontProduct {
   readonly description: string;
   readonly priceYen: number;
   readonly externalUrl: string;
+  /** note の販売記事の表紙画像。無い商品は文字だけのカードにする */
+  readonly coverImageUrl?: string;
   readonly included: readonly string[];
   readonly audience: readonly string[];
   /** KDP 書籍へ実際に収録した公開ブログ。文脈一致 CTA の決定にだけ使う。 */

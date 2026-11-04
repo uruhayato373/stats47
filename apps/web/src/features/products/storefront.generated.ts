@@ -24,14 +24,15 @@ export const STOREFRONT_PRODUCTS = [
       "立地調査・地域分析の担当",
       "研究者"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/332041499/rectangle_large_type_2_ed3faeff21eb6e6a34de3f45686521e9.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-01",
     "slug": "data-p-01",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+    "title": "都道府県別 人口・世帯データ 134指標｜CSV・Excel",
     "description": "人口・面積・世帯・所得を一冊で把握する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/ne47eb45f8a15",
@@ -47,14 +48,15 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員",
       "研究者"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-02",
     "slug": "data-p-02",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+    "title": "都道府県別 賃金・求人・働き方データ 107指標｜CSV・Excel",
     "description": "賃金・求人・採用市場の指標をまとめて把握・比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n46d68c153502",
@@ -69,14 +71,15 @@ export const STOREFRONT_PRODUCTS = [
       "人事・採用支援",
       "事業企画"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327856740/rectangle_large_type_2_b5fb8a2a3e30547c5496bbd6799dfe53.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-03",
     "slug": "data-p-03",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+    "title": "都道府県別 宿泊・交通・旅行データ 44指標｜CSV・Excel",
     "description": "宿泊・訪日・観光関連指標の地域差を把握・比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
@@ -91,14 +94,15 @@ export const STOREFRONT_PRODUCTS = [
       "観光事業者",
       "自治体・公務員"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327860122/rectangle_large_type_2_12dc8af8294fe9865a47f0c34bcaefc9.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-04",
     "slug": "data-p-04",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+    "title": "都道府県別 自治体財政・職員給与データ 119指標｜CSV・Excel",
     "description": "歳入歳出・財政指標の都道府県差を把握する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n5da8a99b3506",
@@ -113,14 +117,15 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員",
       "研究者"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327863352/rectangle_large_type_2_47c65477c27dcdf3f4bb97c4ab5faa33.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-05",
     "slug": "data-p-05",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+    "title": "都道府県別 医療・介護データ 237指標｜CSV・Excel",
     "description": "病床・医師・介護・高齢化をまとめて把握・比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
@@ -135,14 +140,15 @@ export const STOREFRONT_PRODUCTS = [
       "医療・介護事業者",
       "自治体・公務員"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327866695/rectangle_large_type_2_f8824e0d379bc6d8b55f8d15a4559f7f.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-06",
     "slug": "data-p-06",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+    "title": "都道府県別 学校・保育・社会教育データ 244指標｜CSV・Excel",
     "description": "学校・保育・進学・子育て環境の指標を把握する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
@@ -158,14 +164,15 @@ export const STOREFRONT_PRODUCTS = [
       "移住支援",
       "自治体・公務員"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-07",
     "slug": "data-p-07",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+    "title": "都道府県別 住居費・物価・気候データ 76指標｜CSV・Excel",
     "description": "住宅・物価など移住候補地の生活データを比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n323af74c09cc",
@@ -181,14 +188,15 @@ export const STOREFRONT_PRODUCTS = [
       "個人",
       "自治体・公務員"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327888189/rectangle_large_type_2_bd106c7f2e77404a07abb96967e5f273.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-08",
     "slug": "data-p-08",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "出店候補の県を比べる 商業・小売69指標データ集",
+    "title": "都道府県別 商業・小売データ 69指標｜CSV・Excel",
     "description": "出店候補地の商業・人口・購買に関する指標を比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n973c3f8478f5",
@@ -203,14 +211,15 @@ export const STOREFRONT_PRODUCTS = [
       "小売・飲食事業者",
       "事業企画"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327892069/rectangle_large_type_2_8a0b3ef48c7ce4ae9be9ceed6aed7fe5.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-09",
     "slug": "data-p-09",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+    "title": "都道府県別 産業・農業・家計データ 132指標｜CSV・Excel",
     "description": "産業構成・事業所・就業者・経済規模をまとめて把握する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n2ced199ed715",
@@ -226,14 +235,15 @@ export const STOREFRONT_PRODUCTS = [
       "コンサル",
       "研究者"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327896437/rectangle_large_type_2_98a3986f90264806883eb5d2b6ade8b4.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-10",
     "slug": "data-p-10",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+    "title": "都道府県別 防災・交通・インフラデータ 230指標｜CSV・Excel",
     "description": "災害・交通・エネルギー・インフラをまとめて把握する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
@@ -248,14 +258,15 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員",
       "事業企画"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/327904763/rectangle_large_type_2_9fee30f49a8956331f44c2f3ccfcf7ff.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-11",
     "slug": "data-p-11",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+    "title": "都道府県の地図・ランキング素材 28指標｜PNG・SVG・PowerPoint",
     "description": "資料・記事・SNS にそのまま貼れる地図・ランキング図版を入手する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
@@ -270,14 +281,15 @@ export const STOREFRONT_PRODUCTS = [
       "企画・営業",
       "クリエイター"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/328096609/rectangle_large_type_2_d9ab6507430978c166503a1f2248f9ef.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-12",
     "slug": "data-p-12",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "47都道府県 2,073指標の統計データ総合集",
+    "title": "47都道府県 統計データ総合集 2,073指標｜CSV・Excel",
     "description": "テーマ横断で都道府県データと図表を一括で入手する",
     "priceYen": 2980,
     "externalUrl": "https://note.com/stats47/n/nfa7d235eba85",
@@ -294,14 +306,15 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員",
       "編集者・ライター"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/328108626/rectangle_large_type_2_a20b7efd70ea5453e06527827d8cc689.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "P-14",
     "slug": "data-p-14",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+    "title": "県庁所在市別 家計調査データ 685指標｜品目別 CSV・Excel",
     "description": "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n554a047cf5be",
@@ -317,7 +330,8 @@ export const STOREFRONT_PRODUCTS = [
       "編集者・ライター",
       "研究者"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [],
+    "coverImageUrl": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=480"
   },
   {
     "id": "K-S1-01",
