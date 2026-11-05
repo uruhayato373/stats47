@@ -886,24 +886,27 @@ updated: 2026-11-01
 - **残り**: ② 公開済みの積み上げ棒 (約 4 枚) を作り直して前後を比べ、R2 へ上げる (承認が要る)。実機・localhost での見た目は未確認。
 - **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
 
-### [CHART-TYPE-ROLLOUT-01] 読者が見る統計の図をサイトと note で共通の型にそろえ、今の R2 の値と一致させる
+### [CHART-TYPE-ROLLOUT-01] 統計の図を種類ごとに 1 つの型から作り、サイト・note・SNS で同じ型を使う
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-04] [領域:サイト]
 
-- **ゴール (2026-11-04 オーナー決定)**: 読者が見る統計の図は、サイトと note のどちらも、今の R2 の値と一致した共通の型になっている。今後は機械が崩れを止める。
-- **順番と完了の判定**:
-  1. サイトの残り: 公開中の散布図の型でない図が理由つきの例外だけ、`staleValues` が 0 (`BLOG-CHART-STALE-VALUES-01`)
-  2. note の配線: 公開 429 本の本文の図が台帳に載り、記事・図・指標・年がたどれる
-  3. note の検査: 週次で値を照らし、直すべき記事が自動で一覧になる
-  4. note の型: ランキング記事の 3 種 (地図・棒・箱ひげ) が共通の型から作られる
-  5. note の更新: 直すべき記事が検査で 0 件。更新後の公開ページを確認済み
-  6. 残りの図: 折れ線などを共通の型へ移す
-- **止まる場面**: 本文の結論が変わる記事の書き直し / note への最初の更新の見本 / 有料記事の更新方法 / main へのデプロイ。それ以外は確認なしで進める。
-- **制約**: 有料記事の添付は 1 日 10 回まで。`ins_img` は見出しの直前で画像がずれる既知の不具合がある。note の本文更新はエディタ操作で全文を差し替える。
-- **進み具合**: 2026-11-04 に散布図 183 枚を反映 (3,524 件を公開 URL で確認)。2026-11-05 に値の違う図の記事 5 本を結論から書き直して審査を通し、段階 1 を完了した (散布図 194 枚すべて型・未解決 0・`staleValues` 0)。段階 2・3 は台帳 `data/note/body-figures.json` と週次の `--check` を入れ、公開 429 本を照らした。候補はすべて本文を読み、誤検知は理由つきで `data/note/body-figure-reviews.json` へ分けた。
-- **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
-- **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
-- **段階 4 (2026-11-05)**: オーナーが見本を確認し、`render-ranking-images.mjs` を共通の型へ替えた (地図・棒・地方別の箱ひげ、1080×1350)。公開中の note の画像はまだ旧版のまま。残りは、管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う) ことと、使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消すこと。
-- **段階 5 (2026-11-05)**: 画像だけを差し替える `update-note-body-figures.mjs` を入れた。`a-maximum-temperature` の dry-run は通り、オーナーの更新の承認も得た。会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」) ので未更新。note には何も送っていない。
+- **ゴール (2026-11-05 オーナー決定)**: 統計の図は、種類ごとに 1 つの型から作られ、サイト・note・SNS で同じ型を使う。型から外れた図は機械が止める。11-04 のゴールは型の統一・値の正しさ・記事への反映を 1 つにしていて記事の修正へ広がったので、型の統一だけに絞った。
+- **完了の判定**: ① 図の種類ごとに型が 1 つあり、管理画面で見本を確かめられる ② 各媒体の生成処理がその型を使い、旧い描画処理が残っていない ③ 新しく作る図が型から外れると検査で止まる。
+- **完了に含めないもの**: 公開中の記事の差し替え (`NOTE-FIGURE-ROLLOUT-01`)、記事の修正 (`NOTE-FIGURE-FIX-01`)。値の検査 (`audit-chart-axes.ts`・`data/note/body-figures.json`) は週次で動くものをそのまま使い、作業を足さない。
+- **今の位置 (2026-11-05)**: サイトはランキング棒・地図・散布図が型になった (散布図 194 枚すべて型・値の違う図 0 枚)。note はランキング記事の 3 種 (地図・棒・地方別の箱ひげ) の生成を型へ切り替えた (`render-ranking-images.mjs`)。サイトの残りは 2026-11-04 の集計で折れ線 81・積み上げ 6・要点カード 123・判別できない図 117 枚。note のその他の図と SNS の各媒体は未確認。
+- **順番**:
+  1. 棚卸し: 図の種類 × 媒体 (サイト・note・X・Instagram・Threads) の表を実測で埋める。どの生成処理が型を使うかを、コードと公開物で確かめる。
+  2. 折れ線と積み上げを型へ移す。見た目は見本を見せてから全件へ流す。
+  3. 管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う)。使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消す。
+  4. 新しい図が型から外れたら止める検査を全媒体へ広げる。
+- **止まる場面**: 型の見本の確認 / main へのデプロイ。
+- **進み具合の記録**: 2026-11-04 に散布図 183 枚を反映。2026-11-05 に note のランキング図の型を入れた。見本はオーナーが確認した。
+
+### [NOTE-FIGURE-ROLLOUT-01] 公開中の note 記事の図を共通の型へ差し替える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **起点**: `CHART-TYPE-ROLLOUT-01` から切り離した反映の作業。型が新しくなっても公開中の note の画像は旧いままである。
+- **道具**: `update-note-body-figures.mjs` が公開版の本文の画像だけを替える (文章・カード・タグ・カバーは変えない)。有料記事は止める。
+- **制約**: 会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」)。ブラウザの経路へ付け替えるかは未決なので Mac で実行する。R2 の書き込みも Mac で行う。有料記事の添付は 1 日 10 回まで。実際の更新はまだ一度も動かしていない。
 - **次 (Mac で実行。更新はオーナー承認済み)**: `git pull` のあと、次の順に行う。
   1. `npm run note:session:check` で口座が stats47 と確かめる。
   2. `node .claude/scripts/note/update-note-body-figures.mjs --key a-maximum-temperature` で dry-run し、画像 3 枚だけが変わると確かめる。
@@ -912,14 +915,22 @@ updated: 2026-11-01
   5. 正本を入れ替える: `npm run note:article -- checkout a-maximum-temperature` → `node .claude/scripts/note/render-ranking-images.mjs a-maximum-temperature` → `npm run note:article -- save a-maximum-temperature`。
   6. 問題があれば旧画像へ戻す。旧 URL は本文の 3 枚 `1785758058-E56siOjDtpzWauISgHe3knN0.png`・`1785758073-0DMrteVW2nJZR4AIU3d87aBO.png`・`1785758089-gziOwk519uFJ7KEAvBspbjh0.png` (`https://assets.st-note.com/img/` の下)。
   7. 見え方が良ければ、残りのランキング記事へ広げる前にオーナーへ確認する。
+- **完了条件**: 型にできるランキング記事の公開版の図が新しい型になり、更新後のページを確かめた。対象と本数は最高気温の結果を見てオーナーと決める。
 
-### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]
+### [NOTE-FIGURE-FIX-01] 本文の照合で見つかった note 記事の誤りを直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:商品]
 
-- **起点**: 2026-11-04 に `audit-chart-axes.ts` を初めて全件に掛け、棒と地図 1,780 枚のうち 5 枚が見つかった。一覧は `data/blog/chart-axes-LATEST.md`。
-- **対象**: `library-museum-cultural-capital` (library-lending-books・比が 1,500 万倍近く、別の指標の可能性) / `marriage-divorce-okinawa` (divorces-per-total-population) / `prefectural-income-gdp-ranking` (per-capita-kenmin-shotoku-h27) / `solar-panel-housing-prefecture-gap` (solar-panel-housing-rate) / `university-advancement-capacity` (university-capacity-index)。
-- **次**: 指標の値が直ったのか、図の指標の指定が誤りかを記事ごとに確かめ、本文の結論が変わるなら書き直して審査を通す (同じ年の値の変化は `refresh-article-data-years` では取り直せない)。
-- **完了条件**: `chart-axes-queue.json` の `summary.staleValues` が 0 になる。
+- **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
+- **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
+- **次**: ① は 1 文の修正。note への最初の更新は `NOTE-FIGURE-ROLLOUT-01` の結果を見てから行う。② は e-Stat の表で確かめてから、記事か指標のどちらを直すかを決める。
+- **完了条件**: `node .claude/scripts/note/build-note-figure-ledger.mjs --check` の直すべき記事が 0 件で、`.claude/config/note-figure-baseline.json` の上限も 0 に下げた。
+
+### [BLOG-PUBLISH-AUDIT-KAKEI-01] 公開後の検査が家計調査の 9 指標で落ち、送り箱の掃除が止まる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **証拠 (2026-11-05)**: `blog-auto-publish.yml` の公開後の検査が、`*-budget-share-kakei` の 9 指標で `values.json` が 404 になり失敗する。記事の公開そのものは成功している。この失敗で「Remove published drafts」が skip され、公開済みの記事が `contents/blog` に残る。
+- **次**: 9 指標を有効にした `863c80cd6` の後に値が投入されたかを確かめ、投入するか有効化を外す。`contents/blog` の公開済みの原稿が消えることを確かめる。
+- **完了条件**: 公開の run が成功し、送り箱の掃除が動く。
 
 ### [BLOG-METRIC-DEFINITION-GAPS-01] 記事が使う指標の定義が config に無く、本文で断定できない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
