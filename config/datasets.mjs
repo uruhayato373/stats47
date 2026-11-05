@@ -249,6 +249,19 @@ export const DATASETS = [
   d("content.external", "data/content/external.json", "state", "data", "data", "stats47 の外の公開物 (note 記事・SNS の投稿) の ID と指標・記事への関係。note のカタログと data/sns/posts.json から再生成"),
   d("content.pages", "data/content/pages/{name}.json", "state", "data", "data", "ID索引の種別・県別分割。必要なページ種別だけアプリへ読み込む", { schema: "data/content/schema/pages.schema.json" }),
   d("content.schema", "data/content/schema/{name}.schema.json", "config", "data", "data", "ページ・タグ・回遊台帳の形状契約"),
+  // 問いは分類軸ではなく、ページを結ぶ参照関係の起点 (docs/01_技術設計/03_情報設計.md「問いの台帳」)。
+  // 意味の検査 (親子・役割・導出できる関係の写し) は npm run issues:check、棚卸しは npm run issues:coverage
+  d("content.issues", "data/content/issues.json", "config", "data", "data", "記事・ページを作る起点の問いの台帳。ID は不変、小さな問いの親は ID から導出する", {
+    schema: "data/content/schema/issues.schema.json",
+    refs: [{ field: "issues[].primaryTheme", to: "content.pages", key: "pages[].id" }],
+  }),
+  d("content.issue-links", "data/content/issue-links.json", "config", "data", "data", "問いとページの関係 (答え・根拠)。導出できる関係は書かない", {
+    schema: "data/content/schema/issue-links.schema.json",
+    refs: [
+      { field: "links[].issue", to: "content.issues", key: "issues[].id" },
+      { field: "links[].page", to: "content.pages", key: "pages[].id" },
+    ],
+  }),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),
   d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "config", "data", "config", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
   d("seo.keywords", "data/seo/keywords.json", "state", "site", "data", "キーワード改善サイクルの対象キーワード"),
