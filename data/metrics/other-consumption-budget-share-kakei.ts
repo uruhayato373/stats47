@@ -48,5 +48,5 @@ export const otherConsumptionBudgetShareKakei: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
 };

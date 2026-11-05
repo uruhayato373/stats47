@@ -1,6 +1,6 @@
 # 家計調査 — 取得範囲とサイト展開の参照表
 
-実装用の分析単位の台帳 (問い × 表の軸 × 載せるページ) は `packages/data-configs/src/kakei-analysis-catalog.ts`。`npm run metrics:check` で既存指標・ページ参照との整合を検査し、`npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts --list` で全行を表示する。`published` は全国のページの図として公開済み、`proposed` は図・記事の完成を示さない。予定だった 6 表の分析単位は `proposed`・`metadata-checked` で置いてあり、e-Stat の実値を確かめてから `published`・`value-checked` へ進める (指標は `isActive: true` へ)。表メタデータの126件確認は本資料の棚卸しであり、分析単位はその中の制作候補と既存入口である。
+実装用の分析単位の台帳 (問い × 表の軸 × 載せるページ) は `packages/data-configs/src/kakei-analysis-catalog.ts`。`npm run metrics:check` で既存指標・ページ参照との整合を検査し、`npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts --list` で全行を表示する。`published` は全国のページの図として公開済み、`proposed` は図・記事の完成を示さない。分析単位は e-Stat の実値を確かめてから `published`・`value-checked` へ進める (指標は `isActive: true` へ)。表メタデータの126件確認は本資料の棚卸しであり、分析単位はその中の制作候補と既存入口である。
 
 **分析の切り口 (都市比較・数量と単価・年収階級・長期推移・季節など) は調査の切り口台帳 `data/surveys/lenses/kakei-chousa.json` が正本** (担当 survey-curator、展開状況は `npm run surveys:lenses:status`)。**表と品目の採否は台帳 `data/estat/kakei-ledger/ledger.json` が正本** (全表の周期・年・地域数・分類軸と、年次品目表の品目ごとの指標の有無・採否)。e-Stat カタログ (`npm run estat:catalog:pull`) と metric config から `npm run estat:kakei-ledger:build` で作り、手で編集しない。指標を作らない・作る予定の判断は理由付きで `data/estat/kakei-ledger/decisions.json` に書く。`npm run estat:kakei-ledger:check` (PR CI) が台帳・config・判断の食い違いを止める。下の件数・表一覧は棚卸し時点の記録で、現在の件数は台帳の `summary` を読む。
 

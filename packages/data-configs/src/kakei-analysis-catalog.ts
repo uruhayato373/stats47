@@ -391,11 +391,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
   {
@@ -411,11 +411,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '059', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
   {
@@ -431,11 +431,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '102', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
   {
@@ -451,11 +451,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '060', cdCat02: '21' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
   {
@@ -471,11 +471,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '010110001', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
   {
@@ -491,11 +491,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '011100030', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
   {
@@ -511,11 +511,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '011100030', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
       pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'published',
     },
   },
 ] as const;

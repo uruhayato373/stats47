@@ -61,6 +61,11 @@ const SPECS: ChartSpec[] = [
   { id: "beer-monthly-quantity", themeSlug: "household-food-spending", title: "ビールの購入量と月（2025年）", description: "二人以上世帯・全国。1世帯当たりの月ごとの購入量です。支出額とは単位が異なります。", axis: "月", axisCodes: MONTHS_2025, axisDim: "time", filters: { cdCat01: "011100030", cdCat02: "03" }, expectedUnit: "l", period: "month-total" },
 ];
 
+/** 分類名の末尾の年の注記を除く。「民営借家（2017年以前は設備共用及び借間を除く）」→「民営借家」 */
+export function stripKakeiLabelNote(label: string): string {
+  return label.replace(/（[^（）]*\d{4}年[^（）]*）$/, "");
+}
+
 export function selectKakeiAxisRows(
   raw: unknown,
   spec: ChartSpec,
@@ -87,7 +92,7 @@ export function selectKakeiAxisRows(
     if (!Number.isFinite(value)) throw new Error(`${spec.id}: ${code} is not numeric`);
     const label = labels.get(code);
     if (typeof label !== "string") throw new Error(`${spec.id}: ${code} has no metadata label`);
-    return { code, label, value };
+    return { code, label: stripKakeiLabelNote(label), value };
   });
 }
 

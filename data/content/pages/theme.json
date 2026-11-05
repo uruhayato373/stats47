@@ -759,7 +759,16 @@
         "green-tea-consumption-expenditure",
         "green-tea-consumption-quantity",
         "frozen-food-consumption-expenditure",
-        "japanese-food-dining-consumption-expenditure"
+        "japanese-food-dining-consumption-expenditure",
+        "housing-budget-share-kakei",
+        "utilities-budget-share-kakei",
+        "furniture-household-goods-budget-share-kakei",
+        "clothing-footwear-budget-share-kakei",
+        "healthcare-budget-share-kakei",
+        "transport-communication-budget-share-kakei",
+        "education-budget-share-kakei",
+        "culture-recreation-budget-share-kakei",
+        "other-consumption-budget-share-kakei"
       ]
     },
     {

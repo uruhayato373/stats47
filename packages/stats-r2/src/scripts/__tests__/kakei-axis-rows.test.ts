@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { selectKakeiAxisRows } from "../generate-kakei-axis-charts";
+import { selectKakeiAxisRows, stripKakeiLabelNote } from "../generate-kakei-axis-charts";
 
 const CLASS_OBJ = [
   { "@id": "cat03", CLASS: [{ "@code": "01", "@name": "持家" }, { "@code": "03", "@name": "民営借家" }] },
@@ -17,6 +17,17 @@ const monthly = {
   axisCodes: ["2025000101", "2025000202"], axisDim: "time" as const,
   filters: { cdCat01: "011100030", cdCat02: "03" }, expectedUnit: "l", period: "month-total" as const,
 };
+
+describe("stripKakeiLabelNote", () => {
+  it("分類名の末尾の年の注記を除く", () => {
+    expect(stripKakeiLabelNote("民営借家（2017年以前は設備共用及び借間を除く）")).toBe("民営借家");
+  });
+  it("注記の無い分類名と月は変えない", () => {
+    for (const label of ["持家", "公営借家", "（持家）住宅ローン返済世帯", "200～250万円", "年収五分位1", "6人以上", "2025年1月"]) {
+      expect(stripKakeiLabelNote(label)).toBe(label);
+    }
+  });
+});
 
 describe("selectKakeiAxisRows", () => {
   it("月次の表は月を軸に 1 年分の行を選び、1l の単位を l にそろえる", () => {

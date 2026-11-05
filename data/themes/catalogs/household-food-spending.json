@@ -802,6 +802,159 @@
       "rankingKey": "japanese-food-dining-consumption-expenditure",
       "shortLabel": "和食の支出額",
       "role": "context"
+    },
+    {
+      "rankingKey": "housing-budget-share-kakei",
+      "shortLabel": "住居費の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める住居の割合。持家と借家の差が出やすい住居への配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "住居に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "utilities-budget-share-kakei",
+      "shortLabel": "光熱・水道費の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める光熱・水道の割合。気候の差が表れやすい光熱・水道への配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "光熱・水道に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "furniture-household-goods-budget-share-kakei",
+      "shortLabel": "家具・家事用品の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める家具・家事用品の割合。家具・家電・消耗品への配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "家具・家事用品に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "clothing-footwear-budget-share-kakei",
+      "shortLabel": "被服及び履物の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める被服及び履物の割合。衣類・履物への配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "被服に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "healthcare-budget-share-kakei",
+      "shortLabel": "保健医療費の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める保健医療の割合。医薬品・医療サービスへの配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "保健医療に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "transport-communication-budget-share-kakei",
+      "shortLabel": "交通・通信費の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める交通・通信の割合。車の保有や通信費の差が表れやすい配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "交通・通信に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "education-budget-share-kakei",
+      "shortLabel": "教育費の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める教育の割合。授業料や補習教育への配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "教育に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "culture-recreation-budget-share-kakei",
+      "shortLabel": "教養娯楽費の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占める教養娯楽の割合。趣味・旅行などへの配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "教養娯楽に使う割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "other-consumption-budget-share-kakei",
+      "shortLabel": "その他の消費支出の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（用途分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-05",
+        "rationale": "消費支出に占めるその他の消費支出の割合。諸雑費・交際費・仕送り金などへの配分を都市で比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "その他の消費支出の割合が高い都市はどこか",
+        "targetReaderOrDecision": "家計の配分を都市間で比べる読者"
+      }
     }
   ],
   "charts": [
@@ -1585,6 +1738,37 @@
     },
     {
       "view": "tiles",
+      "key": "budget-shares-living",
+      "title": "住居・光熱・交通などの割合",
+      "rankingKeys": [
+        "housing-budget-share-kakei",
+        "utilities-budget-share-kakei",
+        "transport-communication-budget-share-kakei",
+        "healthcare-budget-share-kakei",
+        "furniture-household-goods-budget-share-kakei"
+      ],
+      "defaultCheckedKeys": [
+        "housing-budget-share-kakei",
+        "transport-communication-budget-share-kakei"
+      ]
+    },
+    {
+      "view": "tiles",
+      "key": "budget-shares-other",
+      "title": "被服・教育・教養娯楽などの割合",
+      "rankingKeys": [
+        "clothing-footwear-budget-share-kakei",
+        "education-budget-share-kakei",
+        "culture-recreation-budget-share-kakei",
+        "other-consumption-budget-share-kakei"
+      ],
+      "defaultCheckedKeys": [
+        "culture-recreation-budget-share-kakei",
+        "education-budget-share-kakei"
+      ]
+    },
+    {
+      "view": "tiles",
       "key": "rice",
       "title": "米",
       "rankingKeys": [
@@ -2004,6 +2188,16 @@
         "household-engel"
       ],
       "concern": "物価高で食費が家計を圧迫していないか知りたい"
+    },
+    {
+      "key": "household-food-spending-budget-shares",
+      "title": "食費以外の支出をどう配分しているか",
+      "description": "消費支出に占める十大費目の割合を、県庁所在市の二人以上世帯で比べます。用途分類の1か月平均から求めた割合で、金額の多さそのものではありません。食料の割合はエンゲル係数のカードで見られます。",
+      "metricGroupKeys": [
+        "budget-shares-living",
+        "budget-shares-other"
+      ],
+      "concern": "住居や交通など、家計の配分に都市の違いがあるか知りたい"
     },
     {
       "key": "household-food-spending-grains",
