@@ -95,6 +95,8 @@ npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.j
 
 公開の自治体だけの表を作り、県の合計との検算・指標の年・抜けた町の偏り・変化の信頼性を報告する。合計が合わなければ止まる。問いの選択と、定義が循環していないかの判断は人が行う。市ごとの変化の信頼性が低いと出たら順位にしない。素の `fetch` が通らない環境では `--data-dir` に `<key>.cities.json` を置く。
 
+分析の結論は `data/content/analyses.json`、図は `data/content/figures.json` に残す。図は `data/content-operations/image-templates.json` の型を指し、配信先はページの ID か `data/sns/posts.json` の投稿 ID で指す。公開の状態の正本は配信先の台帳にある。実例は `.claude/scripts/analysis/m01-factory-size.ts`。
+
 ## 6. 見送る
 
 問いを消さず、`status: "dropped"` と `dropReason` を書く。見送った問いの `queries` は `issues:candidates` に再び出なくなる。

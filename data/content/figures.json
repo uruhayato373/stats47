@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "figures": [
+    {
+      "id": "figure:M01-factory-size-scatter",
+      "analysis": "analysis:M01-factory-size",
+      "template": "scatter",
+      "title": "工場の数と工場の大きさ",
+      "scope": "prefecture",
+      "metrics": [
+        {
+          "key": "manufacturing-shipment-amount",
+          "year": 2023
+        },
+        {
+          "key": "manufacturing-establishments",
+          "year": 2024
+        },
+        {
+          "key": "day-time-population",
+          "year": 2020
+        },
+        {
+          "key": "day-time-population-ratio",
+          "year": 2020
+        }
+      ],
+      "destinations": [
+        {
+          "channel": "site",
+          "page": "blog:manufacturing-productivity",
+          "status": "planned"
+        },
+        {
+          "channel": "site",
+          "page": "municipality-ranking:manufacturing-shipment-amount",
+          "status": "planned"
+        },
+        {
+          "channel": "x",
+          "postId": 1195,
+          "status": "draft"
+        }
+      ]
+    }
+  ]
+}

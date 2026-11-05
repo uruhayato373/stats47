@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "analyses": [
+    {
+      "id": "analysis:M01-factory-size",
+      "issue": "issue:M01",
+      "status": "draft",
+      "question": "製造業が強い市の差は、工場の数か 1 工場の大きさか",
+      "spec": ".claude/scripts/analysis/examples/m01-manufacturing.json",
+      "script": ".claude/scripts/analysis/m01-factory-size.ts",
+      "finding": "人口 3 万人以上の 764 市区町村で、人口あたり出荷額の差の 63.1% は 1 事業所あたり出荷額、36.9% は事業所の数で説明できる。県で見ると、事業所の数と 1 事業所あたり出荷額の相関は -0.01 で、ほぼ無関係である。",
+      "caveats": [
+        "恒等式の分解で、工場が大きい理由までは言えない",
+        "出荷額は原料費を含む。効率の比較には付加価値を使う",
+        "出荷額は 2023 年、事業所数は 2024 年、人口は 2020 年で年がずれている。事業所の集計範囲が出荷額と同じかは未確認",
+        "人口が小さく値の無い 57 自治体は表に含まれない"
+      ],
+      "observedAt": "2026-11-05"
+    }
+  ]
+}
