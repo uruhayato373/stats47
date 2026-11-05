@@ -33,6 +33,8 @@ export interface All47Options {
   panel?: All47Panel;
   /** Paper and text colours (light by default); tile colours do not change. */
   theme?: ChartTheme;
+  /** The area the others are measured against (e.g. Osaka in Osaka's moves): written 基準, not a value. */
+  baseAreaCode?: string;
 }
 const escape = (s: string) =>
   s
@@ -185,7 +187,7 @@ export function mapValueFormatter(values: number[]) {
 /** Top three (ties share a rank), shared by the tile map and the real-shape map. */
 export function renderTopThree(
   entries: All47Entry[],
-  opts: { x: number; top: number; width: number; rowGap: number; unit: string; format: (v: number) => string; capitalCities?: boolean; theme?: ChartTheme }
+  opts: { x: number; top: number; width: number; rowGap: number; unit: string; format: (v: number) => string; capitalCities?: boolean; theme?: ChartTheme; heading?: string }
 ) {
   const { ink, muted } = opts.theme ?? LIGHT_THEME;
   const sorted = [...entries].sort((a, b) => b.value - a.value);
@@ -193,7 +195,7 @@ export function renderTopThree(
   const top = ranked.filter(({ rank }) => rank <= TOP_PANEL.count).slice(0, TOP_PANEL.count + 1);
   const { x, unit } = opts;
   return [
-    text(opts.capitalCities ? '上位3市' : '上位3県', x, opts.top + 24, 26, opts.width, muted, 700),
+    text(opts.heading ?? (opts.capitalCities ? '上位3市' : '上位3県'), x, opts.top + 24, 26, opts.width, muted, 700),
     ...top.map(({ r, rank }, i) => {
       const y = opts.top + 84 + i * opts.rowGap;
       return `<g data-top="${rank}">${text(String(rank), x + 18, y, 34, 40, muted, 700, 'middle')}${text(nameOf(r, opts.capitalCities), x + 52, y, 40, 180, ink, 700)}${text(opts.format(r.value), x + TOP_VALUE_RIGHT - 4 - widthOf(unit) * 24, y, 44, 150, ink, 800, 'end')}${text(unit, x + TOP_VALUE_RIGHT, y, 24, widthOf(unit) * 24, muted, 700, 'end')}</g>`;
@@ -241,6 +243,9 @@ export function renderAll47TileSvg(
   const body = renderTileMapBody(entries, {
     width: MAP.width, height: MAP.bottom - MAP.top,
     scale: opts.scale, capitalCities: opts.capitalCities, formatValue: opts.formatValue, theme: opts.theme,
+    tileOverride: opts.baseAreaCode
+      ? (code) => (code === opts.baseAreaCode ? { fill: (opts.theme ?? LIGHT_THEME).wash, lines: [prefectureShortName(entries.find((e) => e.areaCode === code)!.areaName), '基準'] } : undefined)
+      : undefined,
   });
   const theme = opts.theme ?? LIGHT_THEME;
   const { scale, pitch } = body;
@@ -259,7 +264,7 @@ export function renderAll47TileSvg(
       opts.panel.caption ? text(opts.panel.caption, MAP.left, panelTop + 176, 30, panelWidth, theme.ink, 700) : '',
     ].join('')
     : renderTopThree(entries, { x: MAP.left, top: panelTop, width: panelWidth, rowGap, unit, format: fmt, capitalCities: opts.capitalCities, theme });
-  const legend = renderClassLegend(scale, entries.map((r) => r.value), { right: MAP.left + MAP.width, bottom: MAP.bottom - 12, format: fmtBoundary, countUnit: opts.capitalCities ? '市' : '県', theme });
+  const legend = renderClassLegend(scale, entries.filter((r) => r.areaCode !== opts.baseAreaCode).map((r) => r.value), { right: MAP.left + MAP.width, bottom: MAP.bottom - 12, format: fmtBoundary, countUnit: opts.capitalCities ? '市' : '県', theme });
 
   // Minimal copy (chart-image-copy.md): metric, year, unit, the city/prefecture scope, legend and source.
   // No publisher, slogans or how-to-read notes; those belong to the post text.

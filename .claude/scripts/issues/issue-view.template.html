@@ -1,0 +1,284 @@
+<title>stats47 問いの台帳</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* 一段組の台帳。上に要約と棚卸し、固定の絞り込み、その下に分野ごとの問いを罫線で区切って並べる (カードにしない) */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --ink: #1b2330;
+  --muted: #5b6676;
+  --line: #dce0e6;
+  --accent: #2c4c8c;
+  --accent-soft: #e6ecf7;
+  --ok: #2b7a57;
+  --warn: #9a6400;
+  --bad: #b03a3a;
+  --idle: #9aa3b0;
+  --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151b; --surface: #181e26; --ink: #e5e9ef; --muted: #9ba6b5; --line: #2a323d;
+    --accent: #93b2ee; --accent-soft: #1f2b40; --ok: #6cc59a; --warn: #e0b25a; --bad: #ec8b8b; --idle: #5f6977;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151b; --surface: #181e26; --ink: #e5e9ef; --muted: #9ba6b5; --line: #2a323d;
+  --accent: #93b2ee; --accent-soft: #1f2b40; --ok: #6cc59a; --warn: #e0b25a; --bad: #ec8b8b; --idle: #5f6977;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 28px; }
+h1 { font-size: 1.75rem; line-height: 1.3; margin: 0; letter-spacing: 0.02em; text-wrap: balance; }
+h2 { font-size: 1.1rem; margin: 0; text-wrap: balance; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lead { color: var(--muted); margin: 6px 0 0; max-width: 62ch; }
+.stamp { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* 要約 */
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.summary div { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; }
+.summary .v { font-family: var(--font-mono); font-size: 1.5rem; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.summary .k { color: var(--muted); font-size: 0.82rem; display: flex; align-items: center; gap: 6px; }
+
+/* 棚卸し */
+.coverage { background: var(--surface); border: 1px solid var(--line); }
+.coverage > summary { cursor: pointer; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
+.coverage > summary h2 { display: inline; }
+.coverage .inner { padding: 0 16px 16px; display: grid; gap: 16px; min-width: 0; }
+.bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; background: var(--line); }
+.bar span { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; color: var(--muted); }
+.legend i, .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.c-linked { background: var(--accent); } .c-weak { background: var(--accent-soft); outline: 1px solid var(--accent); outline-offset: -1px; }
+.c-read { background: var(--warn); } .c-idle { background: var(--idle); }
+.scroll { overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
+th, td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 500; font-size: 0.78rem; }
+td { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+td:first-child { font-family: var(--font-body); }
+.orphans { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 0.88rem; }
+.orphans li { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.orphans li > a { min-width: 0; overflow-wrap: anywhere; }
+
+/* 絞り込み */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.row label.lbl { font-size: 0.78rem; color: var(--muted); min-width: 5.5em; }
+input[type="search"], select { font: inherit; font-size: 0.9rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+input[type="search"] { flex: 1 1 240px; min-width: 0; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--surface); }
+.seg button { font: inherit; font-size: 0.82rem; color: var(--muted); background: transparent; border: 0; border-right: 1px solid var(--line); padding: 5px 10px; cursor: pointer; }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+.check { display: inline-flex; gap: 6px; align-items: center; font-size: 0.85rem; color: var(--muted); cursor: pointer; }
+.count { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+
+/* 一覧 */
+.domain { display: grid; gap: 0; }
+.domain > header { display: flex; align-items: baseline; gap: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+.domain > header .letter { font-family: var(--font-mono); color: var(--muted); }
+.issue { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 4px 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.issue .id { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); padding-top: 3px; }
+.issue .body { display: grid; gap: 6px; min-width: 0; }
+.q { font-size: 1.02rem; font-weight: 700; line-height: 1.55; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.76rem; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); background: var(--surface); white-space: nowrap; }
+.chip.relation { color: var(--ok); border-color: currentColor; }
+.chip.caveat { color: var(--warn); border-color: currentColor; }
+.chip.myth { color: var(--bad); border-color: currentColor; }
+.chip.heavy { color: var(--bad); }
+.st-answered { background: var(--ok); } .st-evidence { background: var(--warn); } .st-theme { background: var(--accent); } .st-none { background: var(--idle); }
+.rel { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); gap: 2px 10px; margin: 0; font-size: 0.88rem; }
+.rel dt { color: var(--muted); font-size: 0.78rem; padding-top: 2px; }
+.rel dd { margin: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; min-width: 0; }
+.rel dd a { overflow-wrap: anywhere; }
+.rel .kind { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-right: 4px; }
+details.more > summary { cursor: pointer; font-size: 0.8rem; color: var(--muted); width: fit-content; }
+details.more p { margin: 4px 0 0; font-size: 0.86rem; max-width: 70ch; }
+details.more b { font-weight: 500; color: var(--muted); font-size: 0.78rem; margin-right: 6px; }
+.minors { display: grid; gap: 0; margin-top: 4px; border-left: 2px solid var(--line); padding-left: 12px; }
+.minors .issue { grid-template-columns: 4.6em minmax(0, 1fr); padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.minors .issue:last-child { border-bottom: 0; }
+.minors .q { font-size: 0.95rem; font-weight: 500; }
+.query { font-family: var(--font-mono); font-size: 0.74rem; }
+.empty { color: var(--muted); padding: 24px 0; }
+@media (max-width: 560px) {
+  .summary div:first-child { grid-column: 1 / -1; }
+  .filters { position: static; }
+  .issue, .minors .issue { grid-template-columns: minmax(0, 1fr); }
+  .rel { grid-template-columns: minmax(0, 1fr); }
+  .rel dt { padding-top: 6px; }
+  .row label.lbl { min-width: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>stats47 問いの台帳</h1>
+    <p class="lead">記事とページを、答えるべき問いから作るための一覧です。問いごとに、答えている記事・根拠のデータ・主なテーマを並べています。答えの無い問いが、これから書く記事の候補です。</p>
+    <p class="stamp" id="stamp"></p>
+  </header>
+
+  <section class="summary" id="summary" aria-label="問いの数"></section>
+
+  <details class="coverage" id="coverage">
+    <summary><h2>ページの棚卸し</h2><span class="stamp" id="covStamp"></span></summary>
+    <div class="inner" id="covInner"></div>
+  </details>
+
+  <section class="filters" aria-label="絞り込み">
+    <div class="row">
+      <input type="search" id="q" placeholder="問い・記事名・検索語で探す" aria-label="キーワード">
+      <select id="domain" aria-label="分野"></select>
+    </div>
+    <div class="row"><label class="lbl">答えの深さ</label><div class="seg" id="segAns"></div></div>
+    <div class="row"><label class="lbl">答えの状態</label><div class="seg" id="segSt"></div></div>
+    <div class="row">
+      <label class="lbl">単位</label><div class="seg" id="segUnit"></div>
+      <label class="check"><input type="checkbox" id="heavy"> 重い問いだけ</label>
+      <span class="count" id="count"></span>
+    </div>
+  </section>
+
+  <main id="list"></main>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+const ANS = { relation: "○ 関係を示せる", caveat: "△ 言える・言えないを並べる", myth: "× 誤解を解く型" };
+const UNIT = { prefecture: "都道府県", municipality: "市区町村" };
+const ST = { answered: "答えあり", evidence: "根拠のみ", theme: "テーマのみ", none: "材料なし" };
+const KIND = { ranking: "ランキング", blog: "記事", "municipality-ranking": "市区町村ランキング", survey: "統計調査", theme: "テーマ", "japan-theme": "日本のテーマ", "municipality-theme": "市区町村のテーマ", geo: "地域分析" };
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (n) => n.toLocaleString("ja-JP");
+const statusOf = (i) => (i.answers.length ? "answered" : i.evidence.length ? "evidence" : i.theme ? "theme" : "none");
+
+const majors = DATA.issues.filter((i) => i.level === "major");
+const minorsOf = new Map();
+for (const i of DATA.issues) if (i.parent) (minorsOf.get(i.parent) ?? minorsOf.set(i.parent, []).get(i.parent)).push(i);
+
+document.getElementById("stamp").textContent = `台帳の生成 ${DATA.generated}`;
+
+// 要約
+const stCount = { answered: 0, evidence: 0, theme: 0, none: 0 };
+for (const i of DATA.issues) stCount[statusOf(i)]++;
+document.getElementById("summary").innerHTML =
+  `<div><span class="v">${fmt(DATA.issues.length)}</span><span class="k">問い (大 ${majors.length}・小 ${DATA.issues.length - majors.length})</span></div>` +
+  Object.entries(ST).map(([k, label]) => `<div><span class="v">${fmt(stCount[k])}</span><span class="k"><i class="dot st-${k}"></i>${label}</span></div>`).join("");
+
+// 棚卸し
+(() => {
+  const rows = Object.entries(DATA.coverage).sort((a, b) => b[1].total - a[1].total);
+  const t = rows.reduce((s, [, r]) => { for (const k in r) s[k] = (s[k] ?? 0) + r[k]; return s; }, {});
+  const seg = [["linked", "紐づく", "c-linked"], ["weak", "テーマ経由のみ", "c-weak"], ["orphanRead", "紐づかないが読まれている", "c-read"], ["orphanIdle", "紐づかず読まれていない", "c-idle"]];
+  const period = DATA.weeks.length ? `${DATA.weeks[0]}〜${DATA.weeks.at(-1)}` : "検索の記録なし";
+  document.getElementById("covStamp").textContent = `公開 ${fmt(t.total)} ページ・Search Console ${period}`;
+  document.getElementById("covInner").innerHTML = `
+    <div class="bar" role="img" aria-label="${seg.map(([k, l]) => `${l} ${t[k]}`).join("、")}">${seg.map(([k, , c]) => `<span class="${c}" style="width:${(t[k] / t.total) * 100}%"></span>`).join("")}</div>
+    <div class="legend">${seg.map(([k, l, c]) => `<span><i class="${c}"></i> ${l} <span class="num">${fmt(t[k])}</span></span>`).join("")}</div>
+    <div class="scroll"><table>
+      <thead><tr><th>種別</th><th>公開</th><th>紐づく</th><th>テーマ経由のみ</th><th>紐づかないが読まれている</th><th>紐づかず読まれていない</th></tr></thead>
+      <tbody>${rows.map(([k, r]) => `<tr><td>${esc(KIND[k] ?? k)}</td><td>${fmt(r.total)}</td><td>${fmt(r.linked)}</td><td>${fmt(r.weak)}</td><td>${fmt(r.orphanRead)}</td><td>${fmt(r.orphanIdle)}</td></tr>`).join("")}</tbody>
+    </table></div>
+    <div>
+      <h2 style="font-size:0.95rem">問いを足す候補 (読まれているのに紐づかない上位 ${DATA.orphanTop.length})</h2>
+      <p class="lead" style="font-size:0.84rem">読まれている = 4 週の合計でクリック ${DATA.threshold.clicks} 以上か表示 ${DATA.threshold.impressions} 以上。右の数はクリック / 表示。</p>
+      <ol class="orphans">${DATA.orphanTop.map((o) => `<li><a href="${esc(o.href)}" target="_blank" rel="noopener">${esc(o.title)}</a><span class="num">${fmt(o.clicks)} / ${fmt(o.impressions)}</span></li>`).join("")}</ol>
+    </div>`;
+})();
+
+// 絞り込み
+const state = { q: "", domain: "", ans: "", st: "", unit: "", heavy: false };
+const sel = document.getElementById("domain");
+sel.innerHTML = `<option value="">すべての分野</option>` + Object.entries(DATA.domains).map(([k, v]) => `<option value="${k}">${k} ${esc(v)}</option>`).join("");
+function seg(id, key, options) {
+  const el = document.getElementById(id);
+  el.innerHTML = [["", "すべて"], ...Object.entries(options)].map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${v === state[key]}">${esc(l)}</button>`).join("");
+  el.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    state[key] = b.dataset.v;
+    for (const x of el.querySelectorAll("button")) x.setAttribute("aria-pressed", String(x === b));
+    render();
+  });
+}
+seg("segAns", "ans", ANS);
+seg("segSt", "st", ST);
+seg("segUnit", "unit", UNIT);
+document.getElementById("q").addEventListener("input", (e) => { state.q = e.target.value.trim(); render(); });
+sel.addEventListener("change", (e) => { state.domain = e.target.value; render(); });
+document.getElementById("heavy").addEventListener("change", (e) => { state.heavy = e.target.checked; render(); });
+
+const text = (i) => [i.id, i.question, i.dataNote, i.pitfall, ...i.queries, ...i.answers.map((r) => r.title), ...i.evidence.map((r) => r.title), i.theme?.title].join(" ");
+function matches(i) {
+  if (state.domain && i.id[0] !== state.domain) return false;
+  if (state.ans && i.answerability !== state.ans) return false;
+  if (state.unit && i.unit !== state.unit) return false;
+  if (state.heavy && !i.sensitive) return false;
+  if (state.st && statusOf(i) !== state.st) return false;
+  if (state.q) {
+    const all = [i, ...(minorsOf.get(i.id) ?? [])].map(text).join(" ").toLowerCase();
+    if (!state.q.toLowerCase().split(/\s+/).every((w) => all.includes(w))) return false;
+  }
+  return true;
+}
+
+const linkList = (refs) => refs.map((r) => r.href
+  ? `<a href="${esc(r.href)}" target="_blank" rel="noopener"><span class="kind">${esc(KIND[r.kind] ?? r.kind)}</span>${esc(r.title)}</a>`
+  : `<span>${esc(r.title)}</span>`).join("");
+
+function issueHtml(i) {
+  const st = statusOf(i);
+  const rel = [
+    i.answers.length && `<dt>答え</dt><dd>${linkList(i.answers)}</dd>`,
+    i.evidence.length && `<dt>根拠</dt><dd>${linkList(i.evidence)}</dd>`,
+    i.theme && `<dt>テーマ</dt><dd>${linkList([i.theme])}</dd>`,
+    i.queries.length && `<dt>検索語</dt><dd>${i.queries.map((q) => `<span class="query">${esc(q)}</span>`).join("")}</dd>`,
+  ].filter(Boolean).join("");
+  const more = (i.dataNote || i.pitfall)
+    ? `<details class="more"><summary>データと落とし穴</summary>${i.dataNote ? `<p><b>データ</b>${esc(i.dataNote)}</p>` : ""}${i.pitfall ? `<p><b>落とし穴</b>${esc(i.pitfall)}</p>` : ""}</details>`
+    : "";
+  const minors = (minorsOf.get(i.id) ?? []).map(issueHtml).join("");
+  return `<article class="issue">
+    <div class="id">${esc(i.id)}</div>
+    <div class="body">
+      <h3 class="q">${esc(i.question)}</h3>
+      <div class="meta">
+        <span class="chip"><i class="dot st-${st}"></i>${ST[st]}</span>
+        <span class="chip ${i.answerability}">${ANS[i.answerability]}</span>
+        <span class="chip">${UNIT[i.unit]}</span>
+        ${i.sensitive ? `<span class="chip heavy">重い問い</span>` : ""}
+        ${i.revenue.map((r) => `<span class="chip">${esc(r)}</span>`).join("")}
+      </div>
+      ${rel ? `<dl class="rel">${rel}</dl>` : ""}
+      ${more}
+      ${minors ? `<div class="minors">${minors}</div>` : ""}
+    </div>
+  </article>`;
+}
+
+function render() {
+  const shown = majors.filter(matches);
+  document.getElementById("count").textContent = `${shown.length} / ${majors.length} 件の大きな問い`;
+  const groups = new Map();
+  for (const i of shown) (groups.get(i.id[0]) ?? groups.set(i.id[0], []).get(i.id[0])).push(i);
+  document.getElementById("list").innerHTML = shown.length
+    ? [...groups].map(([k, list]) => `<section class="domain"><header><span class="letter">${k}</span><h2>${esc(DATA.domains[k] ?? k)}</h2><span class="stamp">${list.length} 件</span></header>${list.map(issueHtml).join("")}</section>`).join("")
+    : `<p class="empty">条件に合う問いがありません。絞り込みを外してください。</p>`;
+}
+render();
+</script>

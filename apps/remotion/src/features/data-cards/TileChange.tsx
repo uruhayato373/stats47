@@ -3,6 +3,7 @@ import { AbsoluteFill } from 'remotion';
 import type { DataCard } from './model';
 
 import { renderAll47TileSvg, type All47Scale } from './all47-svg';
+import { mixColor, type ChartTheme } from './chart-theme';
 export { CHANGE_TILE_LAYOUT } from './tile-layout';
 export const CHANGE_BINS = [
   { label: '−30%未満', color: '#164F86', text: '#FFFFFF' },
@@ -45,7 +46,7 @@ function changeScale(changes: number[]): All47Scale {
 }
 
 /** Change between two years on the shared 4:5 tile map (all47-svg.ts), with the national total in the panel. */
-export function renderTileChangeSvg(card: TileCard): string {
+export function renderTileChangeSvg(card: TileCard, theme?: ChartTheme): string {
   const aggregate = (sum(card.rows, 'after') / sum(card.rows, 'before') - 1) * 100;
   return renderAll47TileSvg(
     card.rows.map((r) => ({ areaCode: r.code, areaName: r.name, value: r.change })),
@@ -57,11 +58,13 @@ export function renderTileChangeSvg(card: TileCard): string {
       source: [...new Set(card.sources.map((s) => s.name))].join('・'),
       scale: changeScale(card.rows.map((r) => r.change)),
       formatValue: signedPercent,
+      theme,
       panel: {
         heading: '47都道府県の合計',
         value: signedPercent(aggregate),
         caption: card.summary,
-        valueColor: aggregate < 0 ? CHANGE_BINS[0].color : CHANGE_BINS[4].color,
+        // The strong end of the scale is too dark to read as text on the dark paper.
+        valueColor: theme?.name === 'dark' ? mixColor(aggregate < 0 ? CHANGE_BINS[0].color : CHANGE_BINS[4].color, '#FFFFFF', 0.45) : aggregate < 0 ? CHANGE_BINS[0].color : CHANGE_BINS[4].color,
       },
     }
   );

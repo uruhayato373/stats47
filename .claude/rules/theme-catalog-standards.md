@@ -520,3 +520,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 週次 `npm run theme:portfolio:audit` と既存live auditで実データ/構造を確認する。
 月次は公式新年・定義・章の問いを見直し、採否根拠をselectionへ反映する。
 年・分母・単位・地理範囲が異なる系列は、同一尺度として合算や比較をしない。
+
+## 内訳の台帳
+
+`composition-chart` に書いた指標の組は「足すと全体になる」組として `data/themes/compositions/sets.json` に集まる (`npm run themes:compositions`・管理画面 `/data/compositions`)。カタログの積み上げを変えたら作り直す。`npm run themes:compositions:check` がずれを止める。

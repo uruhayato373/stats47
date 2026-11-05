@@ -2,7 +2,8 @@ import { z } from 'zod';
 import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import type { StatsSchema } from '../../../packages/types/src';
-import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
+import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
 export const COMPOSITION_SAMPLE_SOURCE = {
   bucket: 'stats47',
@@ -58,38 +59,84 @@ function labelColor(hex: string) {
   return 1.05 / (l + 0.05) > (l + 0.05) / 0.07 ? '#FFFFFF' : BRAND.ink;
 }
 
+/** One stacked bar per group; each category has one value per group, null when not observed. */
+export interface StackedChart {
+  title: string;
+  meta: string;
+  note?: string;
+  source: string;
+  /** The bars' names, top to bottom. */
+  groups: string[];
+  categories: { label: string; values: (number | null)[] }[];
+  /** True: each bar is 100% and segments show shares. False: bars keep their totals and segments show values. */
+  normalized: boolean;
+  unit: string;
+  decimals?: number;
+}
+
+const BAR_MAX_HEIGHT = 150;
+const BAR_GAP_RATIO = 0.4;
+const LEGEND_ROW = 58;
+
 /**
- * 100% bars drawn at frame size: one bar per fiscal year, each share inside its segment when it fits,
- * and one legend for the categories (no per-bar lists repeating the legend).
+ * Stacked bars drawn at frame size: each value inside its segment when it fits, and one legend for the
+ * categories (no per-bar lists repeating the legend).
  */
-export function renderCompositionStacked(raw: unknown) {
-  const rows = compositionSampleRows(raw);
-  const categories = [...new Set(rows.map((row) => row.areaName))];
-  const top = sampleBodyTop(false) + 40;
-  const bar = { left: 220, right: SAMPLE_FRAME.right, height: 150, gap: 70 };
-  const width = bar.right - bar.left;
-  const bars = YEARS.map((year, yi) => {
-    const values = categories.map((name) => rows.find((row) => row.areaName === name && row.yearCode === year)!.value ?? 0);
-    const total = values.reduce((a, b) => a + b, 0);
-    const y = top + yi * (bar.height + bar.gap);
-    let x = bar.left;
-    const segments = values.map((value, ci) => {
-      const w = width * value / total, share = (value / total * 100).toFixed(1) + '%';
-      const fill = SERIES_COLORS[ci % SERIES_COLORS.length];
-      const rect = `<rect x="${x.toFixed(1)}" y="${y}" width="${w.toFixed(1)}" height="${bar.height}" fill="${fill}"/>`;
-      const text = w >= MIN_LABEL_WIDTH ? `<text x="${(x + w / 2).toFixed(1)}" y="${y + bar.height / 2 + 12}" text-anchor="middle" font-size="${w >= 110 ? 32 : 26}" font-weight="700" fill="${labelColor(fill)}">${share}</text>` : '';
+export function renderStackedChart(chart: StackedChart, theme: ChartTheme = LIGHT_THEME) {
+  const { groups, categories, normalized } = chart;
+  const totals = groups.map((_, g) => categories.reduce((sum, c) => sum + Math.max(0, c.values[g] ?? 0), 0));
+  const largest = Math.max(...totals);
+  if (!(largest > 0)) throw Error('積み上げ棒の合計が0です。');
+  const decimals = chart.decimals ?? 1;
+  const top = sampleBodyTop(Boolean(chart.note)) + 40;
+  // Legend at the bottom, in two columns unless a name would not fit half the frame.
+  const frameWidth = SAMPLE_FRAME.right - SAMPLE_FRAME.left;
+  const columns = categories.some((c) => 50 + textWidth(c.label, 28) > frameWidth / 2 - 16) ? 1 : 2;
+  const legendRows = Math.ceil(categories.length / columns);
+  const legendTop = SAMPLE_FRAME.bodyBottom - legendRows * LEGEND_ROW + 20;
+  const available = legendTop - 40 - top;
+  const height = Math.min(BAR_MAX_HEIGHT, available / (groups.length + (groups.length - 1) * BAR_GAP_RATIO));
+  const gap = groups.length > 1 ? Math.min(70, (available - height * groups.length) / (groups.length - 1)) : 0;
+  const nameSize = height >= 60 ? 30 : 26;
+  const left = SAMPLE_FRAME.left + Math.min(320, Math.max(...groups.map((g) => textWidth(g, nameSize)))) + 24;
+  const width = SAMPLE_FRAME.right - left;
+  const bars = groups.map((group, g) => {
+    const y = top + g * (height + gap);
+    let x = left;
+    const segments = categories.map((category, c) => {
+      const value = Math.max(0, category.values[g] ?? 0);
+      const w = width * value / (normalized ? totals[g] || 1 : largest);
+      const label = normalized ? (value / (totals[g] || 1) * 100).toFixed(1) + '%' : value.toLocaleString('en-US', { maximumFractionDigits: decimals });
+      const fill = SERIES_COLORS[c % SERIES_COLORS.length];
+      const size = w >= 110 ? 32 : 26;
+      const rect = `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${height.toFixed(1)}" fill="${fill}"/>`;
+      const text = w >= Math.max(MIN_LABEL_WIDTH, textWidth(label, size) + 8) && height >= 40 ? `<text x="${(x + w / 2).toFixed(1)}" y="${(y + height / 2 + 11).toFixed(1)}" text-anchor="middle" font-size="${size}" font-weight="700" fill="${labelColor(fill)}">${label}</text>` : '';
       x += w;
       return rect + text;
     }).join('');
-    return `<g data-year="${year}"><text x="${SAMPLE_FRAME.left}" y="${y + bar.height / 2 + 12}" font-size="30" font-weight="700">${year}</text>${segments}</g>`;
+    return `<g data-group="${escapeXml(group)}" data-total="${totals[g]}"><text x="${SAMPLE_FRAME.left}" y="${(y + height / 2 + 11).toFixed(1)}" font-size="${nameSize}" font-weight="700">${escapeXml(group)}</text>${segments}</g>`;
   }).join('');
-  const legendTop = top + YEARS.length * (bar.height + bar.gap) + 10, column = (SAMPLE_FRAME.right - SAMPLE_FRAME.left) / 2;
-  const legend = categories.map((name, ci) => {
-    const x = SAMPLE_FRAME.left + (ci % 2) * column, y = legendTop + Math.floor(ci / 2) * 64;
-    return `<rect x="${x}" y="${y}" width="34" height="34" rx="4" fill="${SERIES_COLORS[ci % SERIES_COLORS.length]}"/><text x="${x + 50}" y="${y + 28}" font-size="28" fill="${BRAND.ink}">${escapeXml(name)}</text>`;
+  const column = frameWidth / columns;
+  const legend = categories.map((category, c) => {
+    const x = SAMPLE_FRAME.left + (c % columns) * column, y = legendTop + Math.floor(c / columns) * LEGEND_ROW;
+    return `<rect x="${x}" y="${y}" width="34" height="34" rx="4" fill="${SERIES_COLORS[c % SERIES_COLORS.length]}"/><text x="${x + 50}" y="${y + 28}" font-size="28" fill="${theme.ink}">${escapeXml(category.label)}</text>`;
   }).join('');
   return sampleFrame({
-    title: '酒類別の販売数量構成比', titleSize: 64, meta: '2008・2013・2018年度 · 全国 · 単位：%', source: '国税庁「酒のしおり」',
+    title: chart.title, titleSize: fitTitleSize(chart.title, 64), meta: chart.meta, note: chart.note, source: chart.source,
+    attributes: `data-image-template="stacked-bar" data-normalized="${normalized}"`,
     body: bars + legend,
+    theme,
+  });
+}
+
+/** The fixed liquor sample: 100% bars per fiscal year. */
+export function renderCompositionStacked(raw: unknown) {
+  const rows = compositionSampleRows(raw);
+  const labels = [...new Set(rows.map((row) => row.areaName))];
+  return renderStackedChart({
+    title: '酒類別の販売数量構成比', meta: '2008・2013・2018年度 · 全国 · 単位：%', source: '国税庁「酒のしおり」',
+    groups: [...YEARS],
+    categories: labels.map((label) => ({ label, values: YEARS.map((year) => rows.find((row) => row.areaName === label && row.yearCode === year)!.value) })),
+    normalized: true, unit: '%',
   });
 }

@@ -11,25 +11,19 @@
  * 成功すると images/*.png と render-spec.json を書く。PNG は git に載らない (gitignore)。
  */
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { NOTE_RANKING_IMAGES, buildRenderProps, buildRenderSpec, validateRenderSpec } from "./lib/note-render-spec.mjs";
+import { NOTE_RANKING_IMAGES, buildRenderSpec, validateRenderSpec } from "./lib/note-render-spec.mjs";
 import { isRankingArticleSlug } from "./lib/image-assets-audit.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const DOCS31 = join(ROOT, "docs", "31_note記事原稿");
-const REMOTION = join(ROOT, "apps", "remotion");
+const TSX = join(ROOT, "node_modules", "tsx", "dist", "cli.mjs");
+const BUILD = join(ROOT, ".claude", "scripts", "note", "build-ranking-type-images.ts");
 const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(name);
-
-const CHROME_CANDIDATES = [
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
-];
 
 function pngSize(file) {
   const data = readFileSync(file);
@@ -61,28 +55,6 @@ function specErrors(slug) {
   return validateRenderSpec(slug, JSON.parse(readFileSync(specPath, "utf8")), chartText);
 }
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-
-/**
- * 生成 AI の背景 (render-spec.json の background) を取得して SHA を検証し data URI にする。
- * 取得順: ローカル cache (.local/note-backgrounds/<sha>.jpg) → R2。SHA が合わなければ画像を作らずに止める
- * (別の背景で画像を焼いてしまうのを防ぐ)。生成 AI は再実行しない。
- */
-async function loadBackground(background) {
-  const cache = join(ROOT, ".local/note-backgrounds", `${background.sha256}.jpg`);
-  let data = existsSync(cache) ? readFileSync(cache) : null;
-  if (!data) {
-    const res = await fetch(`${R2_BASE}/${background.r2Key}`);
-    if (!res.ok) throw new Error(`背景を取得できない (HTTP ${res.status}): ${background.r2Key}。R2 へ未反映なら ingest-note-background.mjs の手順 3 を先に行う`);
-    data = Buffer.from(await res.arrayBuffer());
-    mkdirSync(dirname(cache), { recursive: true });
-    writeFileSync(cache, data);
-  }
-  const actual = createHash("sha256").update(data).digest("hex");
-  if (actual !== background.sha256) throw new Error(`背景の SHA が spec と不一致: ${actual} (spec ${background.sha256})`);
-  return `data:image/jpeg;base64,${data.toString("base64")}`;
-}
-
 async function render(slug) {
   const dir = join(DOCS31, slug);
   const chartText = readFileSync(join(dir, "chart-data.json"), "utf8");
@@ -92,15 +64,10 @@ async function render(slug) {
   if (typeof chartData.unit !== "string") throw new Error(`${slug}: chart-data.json に unit が無い`);
   const work = mkdtempSync(join(tmpdir(), `note-render-${slug}-`));
   try {
-    const propsPath = join(work, "props.json");
-    writeFileSync(propsPath, JSON.stringify(buildRenderProps(chartData)));
-    const chrome = CHROME_CANDIDATES.find((candidate) => existsSync(candidate));
+    execFileSync(process.execPath, [TSX, BUILD, "--chart-data", join(dir, "chart-data.json"), "--out", work], { cwd: ROOT, stdio: ["ignore", "inherit", "inherit"] });
     const outputs = [];
     for (const image of NOTE_RANKING_IMAGES) {
       const out = join(work, image.file.split("/").pop());
-      const args = ["remotion", "still", "src/index.ts", image.composition, out, `--props=${propsPath}`, "--log=error"];
-      if (chrome && process.platform === "win32") args.push(`--browser-executable=${chrome}`);
-      execFileSync("npx", args, { cwd: REMOTION, stdio: ["ignore", "inherit", "inherit"], env: { ...process.env, MSYS_NO_PATHCONV: "1" } });
       const [w, h] = pngSize(out);
       if (w !== image.width || h !== image.height) throw new Error(`${slug} ${image.file}: 寸法 ${w}x${h} (期待 ${image.width}x${image.height})`);
       outputs.push([out, image.file]);

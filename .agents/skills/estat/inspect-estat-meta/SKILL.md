@@ -111,3 +111,7 @@ JS
 
 - `/search-estat` — statsDataId を特定する検索（このスキルの前に使用）
 - `/fetch-estat-data` — メタデータ調査結果をもとにランキングデータを取得（このスキルの後に使用）
+
+## 月次の表を探すとき
+
+サイトの指標は年単位なので、月次の表は `data/estat/monthly/decisions.json` の台帳で採否を管理する (管理画面 `/data/monthly`)。カタログを取り直したら `node .claude/scripts/estat/build-monthly-ledger.mjs` で調査ごとの数を作り直し、新しい調査に判断を足す。

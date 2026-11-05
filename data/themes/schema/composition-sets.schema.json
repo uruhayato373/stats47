@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "内訳の台帳 (data/themes/compositions/sets.json・生成物)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "summary",
+    "sets"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "sets",
+        "parts",
+        "withIssues"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sets": {
+          "type": "integer"
+        },
+        "parts": {
+          "type": "integer"
+        },
+        "withIssues": {
+          "type": "integer"
+        }
+      }
+    },
+    "sets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "theme",
+          "title",
+          "parts",
+          "issues"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "theme": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "parts": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "metricKey",
+                "label",
+                "unit"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "metricKey": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "unknown-metric",
+                "mixed-units",
+                "too-many-parts"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

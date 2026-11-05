@@ -1,0 +1,22 @@
+{
+  "kind": "scatter",
+  "xKey": "annual-sunshine-duration",
+  "yKey": "solar-panel-housing-rate",
+  "year": "x:2024/y:2023",
+  "generatedBy": ".claude/scripts/blog/rebuild-scatter-data.mjs",
+  "pearsonR": 0.4648,
+  "xSource": "r2:app/stats/annual-sunshine-duration/values.json",
+  "ySource": "r2:app/stats/solar-panel-housing-rate/values.json",
+  "axes": {
+    "x": {
+      "metricKey": "annual-sunshine-duration",
+      "year": "2024年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "solar-panel-housing-rate",
+      "year": "2023年",
+      "proof": "values"
+    }
+  }
+}

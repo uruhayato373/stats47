@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { BRAND } from '../../web/src/features/ogp/brand';
-import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
+import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type RankingChart } from './template-ranking-data';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
+import { scopeAttributes, type AreaChart } from './template-area-scope';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 import { LIGHT_THEME, mixColor, outlineAttrs, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 
@@ -48,8 +49,19 @@ export function renderRankingBars(raw: unknown, presentation: MetricPresentation
 
 /** Upper and lower five of any complete ranking, in the metric's colour (lower five in its lighter tint). */
 export function renderRankingBarsChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
-  const allRows = assertRankingRows(chart.rows);
-  const rows = { top: allRows.slice(0, 5), bottom: allRows.slice(-5) };
+  return drawBars(chart, assertRankingRows(chart.rows), theme, { title: chart.title + 'ランキング', upper: '上位5県', lower: '下位5県' });
+}
+
+/** The same cards for a scope's areas (resolveAreaChart): one bar type, whatever the set. */
+export function renderAreaBarsChart(chart: AreaChart, theme: ChartTheme = LIGHT_THEME) {
+  if (chart.rows.length < 2) throw new Error('棒グラフには 2 つ以上の地域が要ります。');
+  return drawBars(chart, chart.rows, theme, { title: chart.title, upper: '上位', lower: '下位', attributes: scopeAttributes(chart.scope) });
+}
+
+function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: ChartTheme, labels: { title: string; upper: string; lower: string; attributes?: string }) {
+  // Five each, or half each when there are fewer than ten rows.
+  const each = Math.min(5, Math.floor(allRows.length / 2));
+  const rows = { top: allRows.slice(0, each), bottom: allRows.slice(-each) };
   const axis = rankingBarAxis(allRows.map((row) => row.value), chart.presentation);
   const dark = theme.name === 'dark';
   // The metric's own colour (strong end of its scheme), so its bars and its map share one hue.
@@ -60,12 +72,15 @@ export function renderRankingBarsChart(chart: RankingChart, theme: ChartTheme = 
   const rowWash = mixColor(color, card, dark ? 0.82 : 0.9);
   const track = mixColor(color, card, dark ? 0.7 : 0.8);
   // The strong colour is too dark to read as text on the dark paper.
-  const valueInk = dark ? mixColor(color, '#FFFFFF', 0.35) : color;
+  const valueInk = dark ? mixColor(color, '#FFFFFF', 0.65) : color;
+  // Dark ranks and bars on the dark rows sit too close in lightness: lift them as the paper lifts the maps.
+  const barOn = (fill: string) => (dark ? mixColor(fill, '#FFFFFF', 0.3) : fill);
   const left = SAMPLE_FRAME.left, width = SAMPLE_FRAME.right - left;
   const plotWidth = RANKING_BAR_PLOT.right - RANKING_BAR_PLOT.left;
   const top = sampleBodyTop(Boolean(chart.note)) + 8;
   const groupHeight = CARD.band + CARD.bandGap + CARD.rowHeight * 5;
   const groupGap = SAMPLE_FRAME.bodyBottom - top - groupHeight * 2;
+  const signed = axis.min < 0 && axis.max > 0;
   const xAt = (value: number) => RANKING_BAR_PLOT.left + plotWidth * (value - axis.min) / (axis.max - axis.min);
   const unit = escapeXml(chart.unit);
   const group = (data: typeof rows.top, title: string, y: number, fill: string) => `
@@ -76,15 +91,15 @@ export function renderRankingBarsChart(chart: RankingChart, theme: ChartTheme = 
       const rowFill = i % 2 === 0 ? rowWash : dark ? card : '';
       const barY = rowTop + 56, origin = xAt(axis.baseline), end = xAt(r.value);
       const marker = axis.truncated && Math.abs(end - origin) < 0.5 ? `<circle cx="${end}" cy="${barY + 5}" r="6" fill="${fill}"/>` : '';
-      return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${CARD.rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${fill}"/>${marker}</g>`;
+      return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${CARD.rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${barOn(fill)}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}${marker}</g>`;
     }).join('')}`;
   return sampleFrame({
-    title: chart.title + 'ランキング',
+    title: labels.title, titleSize: fitTitleSize(labels.title),
     meta: `${chart.yearLabel} · 単位：${chart.unit}${axis.truncated ? ` · 範囲：${chart.formatValue(axis.min)}–${chart.formatValue(axis.max)}` : ''}`,
     note: chart.note,
     source: chart.source,
-    attributes: `data-image-template="bar" data-domain-min="${axis.min}" data-domain-max="${axis.max}"`,
-    body: group(rows.top, '上位5県', top, color) + group(rows.bottom, '下位5県', top + groupHeight + groupGap, lower),
+    attributes: `data-image-template="bar" data-domain-min="${axis.min}" data-domain-max="${axis.max}"${labels.attributes ? ` ${labels.attributes}` : ''}`,
+    body: group(rows.top, labels.upper, top, color) + group(rows.bottom, labels.lower, top + groupHeight + groupGap, lower),
     theme,
   });
 }

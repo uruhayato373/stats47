@@ -86,6 +86,8 @@ export interface RankingChart {
   display?: TileValueDisplay;
   rows: RankingChartRow[];
   formatValue: (value: number) => string;
+  /** The area the others are measured against. Its row holds 0 so all 47 stay on the map; it is not an observation. */
+  baseAreaCode?: string;
 }
 
 /** 47 prefectures, each once, ranks consistent with values (ties share a rank); sorted by rank. */

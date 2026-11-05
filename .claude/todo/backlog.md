@@ -117,7 +117,51 @@ updated: 2026-11-01
 - **停止条件・禁止**: アトリビューション分析はしない (広告費を使っていない)。欠測を 0 にしない (GA4 の dimension 登録前の週・KDP の取得失敗の月は判定不能)。本番デプロイ・R2 push・note の編集はオーナー承認の後。
 - **完了条件**: GA4 で `product_click` がキーイベントになり、`product-referrals.csv` に置き場所 × 商品 ID の行が出て、KDP の月次が範囲付きで台帳に自動で入り、EXP-013 の 6 週の数字 (表示・クリック・注文、または判定不能とその理由) が実験台帳に記録された。
 
+### [DATA-PACK-BUNDLE-01] 都道府県のデータ集を「比較表＋時系列＋塗り分け地図」のパックに作り替え、note の 13 本を差し替える
+タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **起点**: 2026-11-05 のオーナー決定 (`02_収益化戦略.md` §3.4「商品展開」)。都道府県のデータ集単体には全販売面で関心がほぼ無く、関心が集まるのは地図だった (§2.2)。新しいテーマは増やさず、既存のテーマ別 12 本 (¥980) と総合集 (¥2,980) の中身を作り替える。地図だけの単品 `ppt-japan-map-assets` は出さない。
+- **読者の課題 / HARM**: 県別の比較を資料に入れたいが、年を揃える・地図を塗る・出典を書くのに手間がかかる (A・M)。
+- **支払う理由**: 1 つの分野の比較表・推移・地図が、出典とともに同じ版で揃っている。無料で配る基本の CSV・KML・GeoJSON とは、時系列と編集できる地図の有無で分ける (§3.4「公開データをまとめ直したことだけを支払う理由にしない」)。
+- **需要の証拠**: パックへの需要は未検証。地図への関心 (BOOTH 677・271) と、データ集単体への関心ほぼ 0 (§2.2) から立てた仮説。
+- **パックの中身 (1 テーマ)**: ① 比較表: 最新年の 47 都道府県 (Excel・CSV。既存) ② 時系列: 同じ指標の取れる全年 (縦持ち CSV と、指標ごとに年を列にした Excel のシート。年の定義が変わった指標は注記) ③ 塗り分け地図: 指標ごとに PowerPoint の図形 (県ごとに色を変えられる) と SVG ④ 出典・定義 (`SOURCES.csv`)・利用条件 (`LICENSE-ja.txt`)・README。総合集は全テーマの ①〜④。
+- **次 (実行順)**:
+  1. **境界の出どころを確かめる [S]** — product-factory の `maps/prefecture-geometry.ts` は `apps/remotion/public/prefecture.topojson` を読む。このファイルの出どころが N03・Geoshape なら、**公開中のデータ集の `product.pptx` も同じ問題を持つ**ので、オーナーに報告して扱いを決める。売る地図は e-Stat「令和 2 年国勢調査 町丁・字等境界データ」を都道府県に結合したもの (`MUNI-DATA-PRODUCT-PILOT-01` と同じ出どころ) に替える。
+  2. **時系列を作る [M]** — 各テーマの指標について R2 の観測値 (`app/stats/<metric>/values.json`) から全年を取り出す生成器を product-factory に足す。年の 4 桁化と単位は既存の規約 (`estat-api.md`・`unit-semantics-standards.md`) に従う。
+  3. **地図を全指標に広げる [M]** — 既存の PowerPoint 生成 (`generators/pptx.ts`・`svg-map.ts`) を、パックの全指標 (総合集は分野ごとのファイルに分ける) に適用する。note の添付の上限に収まるかを測る。
+  4. **確かめる [S]** — product-factory の validators、PowerPoint の実機で県の色を変えられること、note-critic。
+  5. **差し替える [人手・承認]** — note の 13 本の添付と無料部分の説明 (`data/note/paid-landing/`) を新しい中身に合わせ、カタログ `data/note/articles.json` を同じ差分で直す。中身を変えた日を `data/products/price-history.json` に記録する (価格実験の交絡)。
+- **判定**: 価格と判定基準は PRICE-DATA-PACK-2026-11 のまま (導線から 8 週で 5 件以上なら続ける、0 件ならデータの単体販売を止める。仮の期日 2026-12-30)。
+- **禁止**: 価格を変えない。新しいテーマを足さない。N03・Geoshape の境界を売る地図に使わない。note への差し替えは人手のログインとオーナー承認を経る。
+- **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。売る地図の境界の出どころが README と `LICENSE-ja.txt` に書かれている。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [ADMIN-COMPETITOR-VIEW-01] 競合調査の結果を管理画面で見られるようにする
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:商品]
+
+- **起点**: 2026-11-05 のオーナー指示。競合調査の結果は `docs/00_プロジェクト管理/02_収益化戦略.md` §2.2 (表と読み取り) と `data/products/competitor-scan.csv` (観測した出品 271 行: BOOTH 48・ココナラ 217・note 3・ランサーズ 3。台帳 id `products.competitor-scan`) にあるが、CSV を読む画面が無い。
+- **作るもの**: 管理画面の「戦略」の下に読み取り専用の競合の画面を足す (`/strategy/products` の「商品の台帳」から辿れるようにする)。
+  - 販売面 (platform) ごとの件数と、関心の目安 (欲しいもの・評価数・スキ) の上位の表。価格・出品者・URL を出す。
+  - 販売面・検索語での絞り込み。統計データ・地図・受注の区別がつくようにする (分類の列が要るなら CSV と台帳を同じ差分で直す)。
+  - 観測日 (`observed_at`) が 2 つ以上になったら、同じ URL の関心の目安の増減を出す。
+  - 画面の上に「関心の目安は販売数ではない」「ランサーズは人間確認で取れず Web 検索の範囲」の注記と、§2.2 へのリンクを置く。
+- **実装の決まり**: CSV のパスは直書きせず `config/datasets.mjs` の id で引く (`datasetPath("products.competitor-scan")`)。UI は `.claude/rules/admin-ui.md` に従う。
+- **関係**: 再調査の取得スクリプトはリポに無い (2026-11-05 の調査は一時領域で行い、残したのは結果の CSV だけ)。再調査を定期にするなら別カードで起票する。その場合も人間確認の突破や高頻度の取得はしない。
+- **禁止**: 画面から CSV を書き換えない。本番デプロイはしない (管理画面はローカル)。
+- **完了条件**: localhost の管理画面で競合の画面が開き、販売面ごとの表と注記が出る (スクリーンショットで確認)。`npm run check-datasets`・`npm run docs:check`・`npm run type-check` と管理画面のテストが通る。
+
+### [ISSUE-LEDGER-TOP10-01] 問いの台帳から、最初に記事にする10本を選ぶ
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:check] [起票:2026-11-05] [領域:商品]
+
+- **起点**: `data/content/issues.json`（大きな問い 169・小さな問い 9。県・市区町村のどこまで降りれば答えが出るか、答えの深さ relation / caveat / myth と収益の軸 `revenue` 付き）と `data/content/issue-links.json`。規約は `docs/01_技術設計/03_情報設計.md`「問いの台帳」
+- **次**: ① 需要・答えが出る・意外性・更新性の4基準で上位10本に絞る（候補: H05 H11 A01 A10 D01 D12 D13 D03 B01 B02 B03 A12 C02 F10 F08 I09-1 H13 H14 I14 I08 J04 J09 J10 H01 M10） ② 選んだ問いの `dataNote` の統計が実在し、市区町村まで取れるかを1本ずつ当てる（台帳作成時は未確認） ③ `STRATEGY-DATA-PRODUCT-FIRST-01` と整合させる（問い記事＝入口、作り方・加工データ＝出口）
+
+### [ISSUE-COVERAGE-GROW-01] 棚卸しで「紐づかないが読まれている」ページに問いを足し、「読まれていない」ページの扱いを決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:coverage] [起票:2026-11-05] [領域:商品]
+
+- **起点**: `npm run issues:coverage`（2026-W40〜W43 の GSC と突き合わせ）。公開 4,372 ページのうち、紐づかないが読まれている 1,550
+- **次**: ① 読まれているのに紐づかないページの上位から、GSC の検索語を `queries` に持つ小さな問いを足す（最大のまとまりは家計調査の品目で、大きな問い K01〜K03 の下に入る） ② 上からの大きな問いを NotebookLM で白書から拾う（クラウドの環境は gh の認証が無く呼べないので Mac で） ③ 読まれていない 1,808 ページ（ranking 890・municipality-ranking 643・blog 226 ほか）を、統合・転送・検索除外・そのままのどれにするか本人が決める。自動では消さない
 
 ### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-04] [領域:商品]
@@ -126,6 +170,51 @@ updated: 2026-11-01
 - **次**: ① 🔴 高のカードをデータ商品に効くものとそれ以外に分ける ② 記事の量産のカードを止めるか下げるかを本人が決める ③ `MUNI-DATA-PRODUCT-SALE-01` の次に出すデータ商品の候補を挙げる
 - **完了条件**: 配分の判断を backlog の並びに反映した。
 - **禁止**: 判断の前にカードを消さない。
+
+### [STRATEGY-ISSUE-MAP-01] 事業のイシューマップ（コンテンツの4型×3収益源）を管理画面で管理し、レビューのたびに更新する
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:戦略] [進行中]
+
+- **起点**: 2026-11-05 にオーナーと『イシューからはじめよ』の型（イシュー → 分解 → 絵コンテ → ストーリーライン）で事業戦略を分解した。図は Artifact `https://claude.ai/artifact/4v9AuVPHsSe2zYhJDSVqxu`（Version 5。オーナーだけが開ける。Claude は Artifact ツールの `action: "read"` で読める）。オーナー指示は「図はいったんこのままで、管理画面で管理し、プロジェクトを進める中で順次改善する」。
+- **図の中身（Artifact が読めないときはこれを正本にする）**:
+  - 主イシュー: stats47 のコンテンツは、どの型をどの収益源で回収すれば、運営費と改善の工数を賄えるか。
+  - 仮説: 参照型で集め、作り方型で売り、論文型で信頼を作る。売れた実績は作り方型だけで、統計の内容（教科書型・データ）で売れるかはこれから確かめる。
+  - 行（コンテンツの型）: 参照型（ランキング・雑学）／教科書型（家計調査でわかること、財政指標の定義と各地の状況、調査ハブ）／論文型（Geo 分析など問いへの答え）／作り方型（e-Stat × Claude Code の実務、再現手順・テンプレート）。
+  - 列（収益源）: 広告（AdSense・アフィリエイト・物販）／コンテンツ販売（note・KDP）／データ販売（CSV・Excel・GeoJSON）。
+  - 12 マスの評価: 参照×広告 ◎・参照×販売 ✕・参照×データ ○／教科書×広告 ○・教科書×販売 ○・教科書×データ ○（`ADMIN-STAT-PILOT-01` はここ）／論文×広告 ○・論文×販売 △・論文×データ ○／作り方×広告 △・作り方×販売 ◎・作り方×データ ○。
+  - 前提の帯: 売上を内訳つきで測れているか（判定不能）、「届いた」と言える線（工数の時間単価は未決）、工数がイシューに向いているか。
+  - 絵コンテ: 月 ¥1 万に要る PV（効率 ¥12〜22 / 1,000 PV で 45〜83 万 PV、今は約 5.2 万）と、マスごとの判定日の表。
+  - 起点の悩み（マップ全体の出発点。新しい行・列ではない）: 統計は探すのに半日・加工にもう半日かかり、資料に使う図を作るのにも手間がかかる（オーナーの県庁職員の経験。`01_プロジェクト定義.md` のキャッチフレーズ）。この悩みを回収するマスは三つに分かれる。手間を減らすやり方を売る＝作り方型×販売（売れた実績はここだけ）、加工済みのデータ・比較表を売る＝教科書型×データ（`ADMIN-STAT-PILOT-01`）、資料にそのまま使える図・CSV＝参照・教科書×データ。オーナーの経験は仮説を作る材料で、需要の証拠ではない（`04_ターゲットペルソナ.md` §5）。体験談そのものを物語の入口にするかは群 D の境界の決定に従う（`STRATEGY-SSOT-ALIGN-4X3-01`）。
+  - ストーリーライン（本の 4 段）: ① 問題意識（起点の悩みを入口にする。そのうえで、集客は伸びたが収益は小さく、測れてもいない）→ ② 主張「参照型で集めて広告で回収し、作り方型で売る。統計の内容で売れるかは 12 月末までに確かめる」とサブイシュー 3 本（1. 参照型は広告でしか回収できず量だけでは 1 桁足りない／2. 払う理由は時間が減ることで、今売れているのは作り方型だけ／3. 統計の内容で売れるかは 12 月末までの実験で白黒がつく）→ ③ サブイシューごとの仮説・根拠・絵コンテ・判定日（サブイシュー 2 の絵コンテは、資料作りを 1 業務に絞り（例: 類似団体と比べた人件費の 5 年推移）、従来の手順と stats47 + Claude Code を使った手順の作業時間を実測した表とする。時間の削減は実測値として示し、約束しない）→ ④ 意味合い（計器を戻す・参照型は広告の密度・作り方型の 1 商品・統計の内容は判定日で決める）と分岐。
+- **初期データに入れる注記（2026-11-05 の確認結果）**: ① 売れた note の件数と中身が文書ごとに食い違う（vault の販売実績台帳は 2 件 ¥600、`02_収益化戦略.md` §3.5 は 3 件 ¥900、`KNOWHOW-QA-BOARD-01` は Ollama オフライン 1 件を含む）。e-Stat × Claude Code の 2 件は確定。② `NOTE-FISCAL-PEER-SALES-01` の財政比較 2 本は「コードを書く層 / 書かない層」の比較で、作り方型に近く、教科書型の販売の検証にはならない。③ KDP の 7〜9 月 ¥17,780（vault `memos/家計/収入_2026.csv`）は doboku-note と共用のアカウントで、stats47 の本の分が分かっていない。分かるまで「参照×販売 ✕」は保留扱いにする。
+- **別物との区別**: `data/content/issues.json`（社会の問いの台帳＝記事の素材）とは別のものである。こちらは事業の問いを扱う。ID の体系と名前を分け（例: `biz:` の接頭辞、画面名は「事業イシューマップ」）、論文型の行から問いの台帳へリンクするだけにする。
+- **次（実行順）**:
+  ① データ: `data/business/issue-map.json` と `config/schema/business.issue-map.schema.json` を作り、`config/datasets.mjs` に 1 行足す（`business.pilot-board` と同じ形）。持つのは、起点の悩み・主イシュー・仮説・前提・行と列の定義・12 マス（評価・状態・根拠の一文・参照する台帳 ID）・ストーリーライン・注記。判定日と進み具合は improvements・pilot-board・experiments・backlog を ID で参照し、日付や状態を写さない。
+  ② 画面: 管理画面に `/strategy/issue-map` を読み取り専用で足す（`.claude/rules/admin-ui.md` に従う）。12 マスの表（スマホでは行ごとに縦に積む）、前提の帯、参照先から解決した判定日の表、ストーリーラインの 4 段（問題意識・イシューとサブイシュー・サブイシューごとの仮説と絵コンテ・意味合い）を出す。必要 PV のグラフは KPI `site-pageviews`・`ad-yield` から計算できる場合だけ載せる。
+  ③ 更新の仕組み: `/weekly-review` に「判定日を過ぎたマスの評価と状態を実測で更新する」段を、`/monthly-plan` に「主イシューと仮説を見直す」段を足す。評価の変更は `.claude/rules/evidence-based-judgment.md` に従い、変更の履歴は git に任せる。
+  ④ 文書との接続: `docs/00_プロジェクト管理/02_収益化戦略.md` §2 に「今の主イシューと仮説の正本は `data/business/issue-map.json`」と 1 行で参照を足す（中身は写さない）。`ISSUE-PAYING-NEED-01` は教科書×データのマスの問いとしてマップから参照し、重複する記述をまとめる。
+- **完了条件**: `npm run check-datasets`・`npm run docs:check`・`npm run type-check`・管理画面のテストが通る。localhost の管理画面で 12 マス・前提・判定日の表・ストーリーラインが表示される（スクリーンショットで確認）。週次レビューと月次計画のスキルに更新の段がある。収益化戦略から参照がある。
+- **禁止**: 図の構成（4 型 × 3 収益源）をオーナーの判断なしに変えない。マスの評価を実測なしに変えない。マップの中身を戦略文書・月次計画へ写さない。管理画面はローカルなので本番デプロイはしない。
+
+### [STRATEGY-SSOT-ALIGN-4X3-01] 事業イシューマップと食い違う stats47 の SSOT・agent・スキル・台帳を直す（85 件）
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-05] [領域:戦略]
+
+- **起点**: 2026-11-05 に `STRATEGY-ISSUE-MAP-01` の見方と stats47 の記述を読み取りだけで突き合わせ、85 件の食い違いを見つけた（vault 側の 56 件は vault のセッションで扱う）。下の行番号は 2026-11-05 時点のもの。
+- **依存**: 次の 2 点はオーナーが vault で決める（決定記録は未作成）。決まるまで群 D には触らない。(a) 境界の案「統計が無くても成り立つ記事は kazu-note。サイト運営・開発のノウハウは売らない」。(b) kazu-note を収益の面にするか、物語の入口に戻すか（公務員ノートの判定日 12-10）。
+- **群（原因ごとに直すと個別の行がまとめて片づく）**:
+  - A. 「本線は行政実務向け商品（用途別 Excel）」が現役: `02_収益化戦略.md` 26・77-90・112・117-121・214-216・439-454 行、`01_プロジェクト定義.md` 41-42・264-269 行、`03_マーケティング戦略.md` 25・53・184 行、`.claude/memory/MEMORY.md` 21 行、`.claude/memory/project_monetization_contract.md` 57 行、`packages/data-configs/src/business-plan/catalog.ts` 597 行、backlog の `ADMIN-STAT-PILOT-01`。
+  - B. 作り方型が副次・未選定の扱い: `02_収益化戦略.md` 334・424 行、`data/business/pilot-board.json` 29 行（「商品が未選定で未公開」だが販売中の記事がある）、`data/business/experiments.json`（作り方型の打ち手が無い）、`data/products/product-strategy.json` 76-83 行（¥300 の売上を「指標の読み解き」の群に計上）、`data/products/PRODUCT-LEDGER.md`、backlog の `KNOWHOW-PRODUCT-PILOT-01`。
+  - C. stats47 の役割が「データ商品」: backlog の `STRATEGY-DATA-PRODUCT-FIRST-01`（vault 11-04 の決定が起点。その決定自体が vault 11-02 の決定と食い違っている）。
+  - D. 公務員 AI と境界: `.claude/skills/note/koumuin-claude-code/MAGAZINE.md` 25 行・`INDEX.md` 24 行、`data/note/magazines.json` 5-8 行、`docs/30_note記事企画/note戦略.md` 241 行、`04_ターゲットペルソナ.md` 27 行、backlog の `KNOWHOW-PRODUCT-PILOT-01` のテーマ候補 (D)・導線案 (c)、`NOTE-PRODUCT-LADDER-01` の段 4。
+  - E. 参照型を売る前提（KDP の雑学本）: `02_収益化戦略.md` 314・463 行、backlog の `KDP-EXPANSION-01`、`.claude/agents/kindle-publisher.md` 10-12・28 行、`.claude/rules/coconala-product-standards.md` 124・276 行、`project_monetization_contract.md` 64 行。KDP の本ごとの売上が分かるまで保留する。
+  - F. 「note の有料はノウハウだけ」が教科書型・データの有料を締め出す: `02_収益化戦略.md` 203-206 行（同じ文書の §3.4 でデータ集の価格実験が進行中）、`note戦略.md` 13-14 行、backlog の `NOTE-FREE-DEFAULT-01`。
+  - G. 「売れない原因は導線、新商品は作らない」の判断: `02_収益化戦略.md` 344-345 行、`experiments.json` 876 行（EXP-013）、`product-strategy.json` 159 行、backlog の `PRODUCT-REFERRAL-MEASURE-01`。
+  - H. 分類軸が 4×3 と対応しない: `catalog.ts` 155・474・1068 行（5 収益レイヤー・paid-purchases の合算）、`pilot-board.json` 8・24・39 行（雑学の回収経路 3 つ）、`02_収益化戦略.md` §3.5・§3.6、`04_ターゲットペルソナ.md` 13・23 行、`.claude/skills/management/monetization-strategy/SKILL.md` 38-48 行、`.claude/agents/note-critic.md`・`.claude/skills/note/design-note-structure/SKILL.md`（作り方型の制作・レビューの担当が無い）、`apps/admin/app/strategy/pilots/page.tsx` 13 行、`.claude/shared-policy/application.json`。
+  - I. ココナラ撤退の残り: `.claude/agents/coconala-operator.md`・`coconala-product-manager.md`・`README.md` 93-94 行、`.claude/skills/product/coconala-publish/`・`build-coconala-product/`、`.claude/rules/coconala-product-standards.md` 11・94 行、`CLAUDE.md` 121 行、`apps/admin/lib/server/revenue.ts` 242 行、`catalog.ts` 242-243・854-855 行、`02_収益化戦略.md` 342・349-350・507 行、backlog の `NOTE-PRODUCT-LADDER-01` 段 5。
+  - J. 数字・状態・ID の食い違い: `.claude/memory/project_product_ledger.md` 12 行（価格は ¥980・¥2,980 に再変更済み）、`experiments.json` 593 行（EXP-007 が proposed のまま）、`01_プロジェクト定義.md` 252 行と `03_マーケティング戦略.md` 23 行（AdSense は 10-11 に再開済み）、`02_収益化戦略.md` 349 行（旧 ID `NOTE-FISCAL-PEER-PUBLISH-01`）、backlog の `MUNI-DATA-PRODUCT-PILOT-01`（「売上 2 件」）、`.claude/todo/improvements.md` 25 行（財政比較 2 本の比較の設計）。
+  - K. 計画に作り方型が無い: `.claude/todo/monthly.md` 8-13・79 行。
+- **次（実行順）**: ① 群 I と群 J は判断が要らないので先にまとめて直す（agent・スキルの削除や統合は `check-agent-skill-consistency.cjs` を通す）。② 群 A・B・C・F・G は `02_収益化戦略.md` の改訂案（§2.1・§2.3・§3.3〜§3.6・§5 の領域表・§6）をオーナーに出し、承認後に反映する。続けて `MEMORY.md`・`project_monetization_contract.md`・01・03・04 を合わせる。③ 群 H は `catalog.ts` の `revenueLayers` と `pilot-board.json` の `route` を 3 収益源に寄せるかをオーナーと決める（機械の正典なので schema・テスト・管理画面を同じ差分で直す）。④ 群 E は KDP の本ごとの売上を確かめてから。⑤ 群 D は境界の決定後。⑥ 群 K は次の `/monthly-plan` で扱う。
+- **完了条件**: 各群の記述がイシューマップの見方と矛盾しない。`npm run docs:check`・`npm run check-datasets`・`npm run type-check`・`npm run business-plan:check` が通る。収益化戦略の方針の段落の変更はオーナーの承認を得ている。
+- **禁止**: vault の決定記録（`memos/*decision*`）を書き換えない。オーナーの承認なしに収益化戦略の方針の段落を変えない。境界が決まる前に公務員 AI 関連の商品・マガジンを消さない。
 
 ### [METRIC-DEFINITION-GAPS-BOOK-01] 書籍の執筆で見つかった指標の定義の欠けと公開データの抜けを埋める
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:データ]
@@ -875,28 +964,89 @@ updated: 2026-11-01
 - **残り**: ② 公開済みの積み上げ棒 (約 4 枚) を作り直して前後を比べ、R2 へ上げる (承認が要る)。実機・localhost での見た目は未確認。
 - **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
 
-### [CHART-TYPE-ROLLOUT-01] 読者が見る統計の図をサイトと note で共通の型にそろえ、今の R2 の値と一致させる
+### [CHART-TYPE-ROLLOUT-01] 統計の図を種類ごとに 1 つの型から作り、サイト・note・SNS で同じ型を使う
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-04] [領域:サイト]
 
-- **ゴール (2026-11-04 オーナー決定)**: 読者が見る統計の図は、サイトと note のどちらも、今の R2 の値と一致した共通の型になっている。今後は機械が崩れを止める。
-- **順番と完了の判定**:
-  1. サイトの残り: 公開中の散布図の型でない図が理由つきの例外だけ、`staleValues` が 0 (`BLOG-CHART-STALE-VALUES-01`)
-  2. note の配線: 公開 429 本の本文の図が台帳に載り、記事・図・指標・年がたどれる
-  3. note の検査: 週次で値を照らし、直すべき記事が自動で一覧になる
-  4. note の型: ランキング記事の 3 種 (地図・棒・箱ひげ) が共通の型から作られる
-  5. note の更新: 直すべき記事が検査で 0 件。更新後の公開ページを確認済み
-  6. 残りの図: 折れ線などを共通の型へ移す
-- **止まる場面**: 本文の結論が変わる記事の書き直し / note への最初の更新の見本 / 有料記事の更新方法 / main へのデプロイ。それ以外は確認なしで進める。
-- **制約**: 有料記事の添付は 1 日 10 回まで。`ins_img` は見出しの直前で画像がずれる既知の不具合がある。note の本文更新はエディタ操作で全文を差し替える。
-- **進み具合**: 2026-11-04 に散布図 183 枚を反映 (3,524 件を公開 URL で確認)。段階 1 が進行中。
+- **ゴール (2026-11-05 オーナー決定)**: 統計の図は、種類ごとに 1 つの型から作られ、サイト・note・SNS で同じ型を使う。型から外れた図は機械が止める。11-04 のゴールは型の統一・値の正しさ・記事への反映を 1 つにしていて記事の修正へ広がったので、型の統一だけに絞った。
+- **完了の判定**: ① 図の種類ごとに型が 1 つあり、管理画面で見本を確かめられる ② 各媒体の生成処理がその型を使い、旧い描画処理が残っていない ③ 新しく作る図が型から外れると検査で止まる。
+- **完了に含めないもの**: 公開中の記事の差し替え (`NOTE-FIGURE-ROLLOUT-01`)、記事の修正 (`NOTE-FIGURE-FIX-01`)。値の検査 (`audit-chart-axes.ts`・`data/note/body-figures.json`) は週次で動くものをそのまま使い、作業を足さない。
+- **今の位置 (2026-11-05 棚卸し)**: 公開中のブログの図 2,127 枚を R2 から全件数えた。型の印があるのは 1,635 枚 (棒 1,017・タイル地図 424・散布図 194)、無いのは 492 枚で、内訳は旧い棒 175・五分位の棒 59・要点カードと工程図 124・折れ線 86・旧いタイル地図 31・積み上げ 6・旧い散布図 5・レーダー 3・ヒートマップ 2・ウォーターフォール 1 (型の印の無い図は図の中身から分類した)。「棒・地図・散布図は型」は正しくなかった。散布図の検査 `audit-chart-axes.ts` は名前に scatter を含む図しか見ていない。
+- **棚卸しの表 (媒体別)**:
+  | 図の種類 | サイト | note | X・Threads | Instagram |
+  |---|---|---|---|---|
+  | 棒 | 型 1,017・旧 234 | ランキング記事は型、ほかは記事の生成と同じ | 使わない (全 47 県タイルが既定)。`quick-still --layout` は別の描画 | 使わない |
+  | タイル地図 | 型 424・旧 31 | 記事の生成と同じ | 型 (`all47-svg.ts`) | 型 (地図カルーセル・表紙・ヒント) |
+  | 地図 (実際の形) | 図なし | ランキング記事は型 | バズ地図: 地図の計算だけ共通で描画は別 | 同左 |
+  | 散布図 | 型 194・旧 5 | 記事の生成は型。`generate-note-charts/scripts/scatter.js` が別の描画 | 投稿なし | 別の描画 (`CorrelationScatterSlide`) |
+  | 表 | 図なし | 確認できず | 図なし | 別の描画 (`RankingTableSlide`) |
+  | 折れ線 | 旧 86 | 旧 (svg-builder) | 図なし | 図なし |
+  | 積み上げ | 旧 6 | 旧 (svg-builder)。`generate-kakei-charts` が別の描画 | 図なし | 図なし |
+  | 箱ひげ | 図なし | ランキング記事は型 | 図なし | 図なし |
+  | 型の台帳に無い図 | 要点カード 124 | 家計 (`render-note-household`) | 比較・地域・レシート・図鑑・順位の乗り換え | 同左 |
+- **型の確認 (2026-11-05)**: 管理画面の `/ops/image-templates/review` に型だけを明暗で並べた (`apps/admin/scripts/build-template-review.ts` が公開 R2 から `.local/` へ見本を作る。ローカル専用)。折れ線・積み上げ・市区町村の棒・タイルの基準の県・地図の市区町村版 (政令指定都市の統合と分割)・コード図 (地方別と都道府県別) の見た目はオーナーの確認待ちで、記事の生成処理 (`generate-article-charts.ts`) にはまだつないでいない。使い分けはオーナー決定: 棒の型は上位と下位のカード 1 つ、タイル地図は都道府県だけ、地図は都道府県版と市区町村版、組み合わせの全体はコード図。市区町村の図は `AreaScope` (粒度・WardMode・比べる範囲) を必ず持ち、値は地域コードで結び、順位は集合ごとに計算する (`apps/admin/lib/template-area-scope.ts`・方針は `docs/01_技術設計/03_情報設計.md` の政令指定都市の表示)。レーダー・ウォーターフォール・要点カード・SNS 専用カードは型ではないので画面から外した。扱いは未決。周期のある軸 (月別) はグループ棒グラフの型を使う。月次データは `data/estat/monthly/` の台帳で採否・使い道・問いを管理する (管理画面 `/data/monthly`・`npm run estat:monthly:check`)。内訳の組は `data/themes/compositions/sets.json` (テーマのカタログから生成・`/data/compositions`)。
+- **棚卸しの注意**: note の公開図 1,313 枚のうち 1,129 枚は台帳の画像名からは種類が判らない (`data/note/body-figures.json` の diagram)。note の列は生成処理を読んだ結果で、公開物の枚数ではない。旧い棒のうち負の値を含む図は型が対応していない (`isSignedBar`)。行数が 47 未満の図と json の無い図は、指標の R2 の値を取り直さないと型にできない。
+- **順番**:
+  1. 棚卸し: 図の種類 × 媒体 (サイト・note・X・Instagram・Threads) の表を実測で埋める。どの生成処理が型を使うかを、コードと公開物で確かめる。
+  2. 折れ線と積み上げを型へ移す。見た目は見本を見せてから全件へ流す。旧い棒・タイル地図・散布図の残りを同じ段階で扱うかはオーナーの判断を待つ。
+  3. 管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う)。使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消す。
+  4. 新しい図が型から外れたら止める検査を全媒体へ広げる。
+- **止まる場面**: 型の見本の確認 / main へのデプロイ。
+- **進み具合の記録**: 2026-11-04 に散布図 183 枚を反映。2026-11-05 に note のランキング図の型を入れた。見本はオーナーが確認した。
 
-### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]
+### [NOTE-FIGURE-ROLLOUT-01] 公開中の note 記事の図を共通の型へ差し替える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:商品]
 
-- **起点**: 2026-11-04 に `audit-chart-axes.ts` を初めて全件に掛け、棒と地図 1,780 枚のうち 5 枚が見つかった。一覧は `data/blog/chart-axes-LATEST.md`。
-- **対象**: `library-museum-cultural-capital` (library-lending-books・比が 1,500 万倍近く、別の指標の可能性) / `marriage-divorce-okinawa` (divorces-per-total-population) / `prefectural-income-gdp-ranking` (per-capita-kenmin-shotoku-h27) / `solar-panel-housing-prefecture-gap` (solar-panel-housing-rate) / `university-advancement-capacity` (university-capacity-index)。
-- **次**: 指標の値が直ったのか、図の指標の指定が誤りかを記事ごとに確かめ、本文の結論が変わるなら書き直して審査を通す (同じ年の値の変化は `refresh-article-data-years` では取り直せない)。
-- **完了条件**: `chart-axes-queue.json` の `summary.staleValues` が 0 になる。
+- **起点**: `CHART-TYPE-ROLLOUT-01` から切り離した反映の作業。型が新しくなっても公開中の note の画像は旧いままである。
+- **道具**: `update-note-body-figures.mjs` が公開版の本文の画像だけを替える (文章・カード・タグ・カバーは変えない)。有料記事は止める。
+- **制約**: 会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」)。ブラウザの経路へ付け替えるかは未決なので Mac で実行する。R2 の書き込みも Mac で行う。有料記事の添付は 1 日 10 回まで。実際の更新はまだ一度も動かしていない。
+- **次 (Mac で実行。更新はオーナー承認済み)**: `git pull` のあと、次の順に行う。
+  1. `npm run note:session:check` で口座が stats47 と確かめる。
+  2. `node .claude/scripts/note/update-note-body-figures.mjs --key a-maximum-temperature` で dry-run し、画像 3 枚だけが変わると確かめる。
+  3. 同じコマンドに `--commit` を付けて更新する。`UPDATED` と 4 項目の検査の成功を確かめる。
+  4. https://note.com/stats47/n/n91e96edf3950 をスマホ幅で開き、3 枚の表示と文字の読みやすさを確かめる。
+  5. 正本を入れ替える: `npm run note:article -- checkout a-maximum-temperature` → `node .claude/scripts/note/render-ranking-images.mjs a-maximum-temperature` → `npm run note:article -- save a-maximum-temperature`。
+  6. 問題があれば旧画像へ戻す。旧 URL は本文の 3 枚 `1785758058-E56siOjDtpzWauISgHe3knN0.png`・`1785758073-0DMrteVW2nJZR4AIU3d87aBO.png`・`1785758089-gziOwk519uFJ7KEAvBspbjh0.png` (`https://assets.st-note.com/img/` の下)。
+  7. 見え方が良ければ、残りのランキング記事へ広げる前にオーナーへ確認する。
+- **完了条件**: 型にできるランキング記事の公開版の図が新しい型になり、更新後のページを確かめた。対象と本数は最高気温の結果を見てオーナーと決める。
+
+### [NOTE-FIGURE-FIX-01] 本文の照合で見つかった note 記事の誤りを直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
+- **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
+- **次**: ① は 1 文の修正。note への最初の更新は `NOTE-FIGURE-ROLLOUT-01` の結果を見てから行う。② は e-Stat の表で確かめてから、記事か指標のどちらを直すかを決める。
+- **完了条件**: `node .claude/scripts/note/build-note-figure-ledger.mjs --check` の直すべき記事が 0 件で、`.claude/config/note-figure-baseline.json` の上限も 0 に下げた。
+
+### [BLOG-CHART-FILES-MISSING-01] 公開中のブログ本文が指す図が R2 に無い
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **証拠 (2026-11-05)**: R2 の `app/blog/all.json` の全記事を数えた。`climate-lifestyle-connection` の 4 枚 (sunshine-pacific-vs-nihonkai・precipitation-gap・snow-kerosene-scatter・clear-days-map) と `medical-access-regional-gap` の 3 枚 (physicians-ranking・bed-occupancy-ranking・summary-findings) の `data/<名前>.svg` が 404 だった。別に 6 記事 (estimated-hourly-wage-ranking・gender-wage-gap-ranking・nurse-salary-ranking・telework-income-correlation・tokyo-real-income-after-rent・truck-driver-salary-trend) は一覧にあるのに `article.md` が 404 だった。
+- **未確認**: 公開ページの表示はまだ見ていない。
+- **次**: 2 記事と 6 記事を本番のページで開き、図の欠けと 404 を確かめる。原因を調べ、図の再生成か一覧からの除外を決める。
+- **完了条件**: 一覧の全記事に `article.md` があり、本文が指す図がすべて R2 にある。
+
+### [BLOG-PUBLISH-AUDIT-KAKEI-01] 公開後の検査が家計調査の 9 指標で落ち、送り箱の掃除が止まる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **証拠 (2026-11-05)**: `blog-auto-publish.yml` の公開後の検査が、`*-budget-share-kakei` の 9 指標で `values.json` が 404 になり失敗する。記事の公開そのものは成功している。この失敗で「Remove published drafts」が skip され、公開済みの記事が `contents/blog` に残る。
+- **次**: 9 指標を有効にした `863c80cd6` の後に値が投入されたかを確かめ、投入するか有効化を外す。`contents/blog` の公開済みの原稿が消えることを確かめる。
+- **完了条件**: 公開の run が成功し、送り箱の掃除が動く。
+
+### [BLOG-METRIC-DEFINITION-GAPS-01] 記事が使う指標の定義が config に無く、本文で断定できない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **起点**: 2026-11-05 の記事の書き直しの審査で、次の定義が指標定義シートから取れなかった。
+- **対象**: `university-capacity-index` の計算式 (e-Stat の項目定義と統計局のページでは確認できなかった) / `annual-sunshine-duration` の観測地点 / `dual-income-household-ratio` の分母 / `high-school-advancement-rate` の範囲 (短大などを含むか)。
+- **同じ起点の誤り**: `data/metrics/university-capacity-index.ts` の seoTitle・seoDescription が 238.4 / 47.4 で、R2 の 2024 年度は 238.3 / 46.7。手書きの値が更新に追従していない。
+- **次**: 統計局の指標計算式の資料で確かめて `description` に書く。確かめられたら該当記事の「確認していません」の注記を外す。seo 文の数字は手書きをやめる方法を検討する。
+- **完了条件**: 4 指標の定義シートが「対象の記述なし」を返さない。
+
+### [BLOG-SCATTER-LABEL-SIDE-01] 散布図の県名が、点と重なる側しか試さず消える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **起点**: `university-advancement-capacity/capacity-vs-advancement-scatter` で labelPoints に京都府・奈良県・香川県を指定しても、片側だけ試して重なるので名前が出ず、端の県が代わりに出た。
+- **次**: `apps/admin/lib/template-relationship-scatter.ts` で反対側と上下も試す。公開中の図の見た目が変わるので、見本を確かめてから全件へ流す。
+- **完了条件**: labelPoints の県が、物理的に置けない場合を除いて図に出る。
 
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
@@ -1680,7 +1830,9 @@ updated: 2026-11-01
 - **次**: 所有者 API (`/api/v3/notes/<id>` の body。有料は所有者のセッションが要る) から本文を取り、作業コピー (draft.md + 画像) を組み立てて
   `body.store` を `r2-public` (無料) か `r2-private` (有料) に変え、`npm run note:article -- save <key>` で保存する。既存の
   `catalog/restore-from-notecom.py` の出力形式を確かめて使う。公開 API は大量取得で 403 になるので、1 回 10 本程度に区切る (`feedback_note_editor_autosave_drafts`)。
-- **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。
+- **実測 (2026-11-05)**: 73 本はすべて無料の公開記事 (A 65 本・B 8 本) で、公開 API から読める。本文の図の台帳 (`data/note/body-figures.json`) は今は読むだけで、R2 へは保存していない。
+- **再発防止 (2026-11-05 オーナー指示)**: 回収で 0 にした後、`note-only` を増やせないようにする。`articles.schema.json` の語彙から `note-only` を外し、公開済みの記事に `body.manifest` が無いと `note:catalog:validate` が止める。新規公開は `note:article save` の後でないと公開済みにならないことを、公開の経路で確かめる。
+- **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。語彙から `note-only` が消え、公開済みで本文が R2 に無い記事を検査が止める。
 
 ### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:商品]
@@ -2248,7 +2400,7 @@ updated: 2026-11-01
   |---|---|---|---|---|
   | 0 集客 | `recovered-n03e45e40d3a7` (Google マップで KML を使う方法) と、stats47 のランキングの KML・GeoJSON の無料ダウンロード (PR #1143 で本番反映済み) | 無料 | 公開中 | 検索 |
   | 1 橋渡し | `h-howto-mymaps-kml` (マイマップで都道府県を色分けした地図を作る) | 無料 | 下書き (note-critic REVISE・実機確認待ち) | 段 0 の末尾 |
-  | 2 編集用素材 | `ppt-japan-map-assets` (PowerPoint で使える 47 都道府県の白地図・色分け地図素材) | ¥1,980 | 下書き | 段 1 の末尾 |
+  | 2 編集用素材 | 都道府県パック (比較表＋時系列＋塗り分け地図。`DATA-PACK-BUNDLE-01`)。地図だけの単品 `ppt-japan-map-assets` は出さない (2026-11-05 オーナー決定) | ¥980 / ¥2,980 | 作り替え中 | 段 1 の末尾 |
   | 3 上級 | マガジン `koumuin-gis` (QGIS・メッシュ分析 3 本。通算閲覧 34・売上なし) | ¥2,980 | 公開中 | 変えない |
 
   「47 都道府県・市区町村の KML / GeoJSON セット (¥500)」は 2026-10-19 の検討で外した。stats47 が同じ形式を無料で配っており、§3.4 の「公開データをまとめ直したことだけを支払う理由にしない」に当たるため。
@@ -2257,7 +2409,7 @@ updated: 2026-11-01
   2. **[済 2026-10-28] 階段 1 の段 0 → 段 1 の導線** — 7 本の「次に読む」の先頭枠を `13-fiscal-peer-no-code` のカードに差し替え、台帳の `nextBestArticle` も揃えた。4 週の判定の基準日は 2026-10-28。**残り**: データ集・元データのカードが残っており「末尾の案内を 1 つにする」は未了 (公開記事の編集は人手のログインとオーナー承認を経てから。カタログ `data/note/articles.json` も同じ差分で直す)。
   3. **段 1 を無料にする [S・人手・2026-11-09 以降]** — `NOTE-FISCAL-PEER-PUBLISH-01` が公開日 + 28 日 (11-09) の売上比較を記録するまで、価格を変えない。記録後、`13-fiscal-peer-no-code` を無料にし、末尾に段 2 (`12-fiscal-peer-comparison`) への案内 1 行を置く。**完了**: note 上で無料になり、カタログの `isPaid` が false。
   4. **階段 2 の段 0 → 段 1 の導線 [S・人手]** — `h-howto-mymaps-kml` が公開されたら (制作・公開は `NOTE-HOWTO-SERIES-01`)、KML 記事の末尾をそこへの案内 1 行にし、H-01 の末尾を段 2 への案内にする。**完了**: 2 本の末尾がつながっている。
-  5. **段 2 `ppt-japan-map-assets` を仕上げて公開する [M・承認]** — PowerPoint で開いて県ごとに色を変えられるか (図形として編集できるか) の実機確認と note-critic で確かめる。境界は国土数値情報の行政区域 (N03・`cc-by-4.0`) なので、出典表示を同梱する (product-factory の `LICENSE-ja.txt` 生成)。**完了**: 実機確認・critic PASS・オーナー承認を経て公開。**停止**: 図形として編集できない (画像の貼り付けだけ) なら ¥1,980 では出さない。
+  5. **段 2 は `DATA-PACK-BUNDLE-01` に移した (2026-11-05)** — 地図は単品で出さず、都道府県パックに入れる。境界は N03 を使わない (`MUNI-DATA-LICENSE-CHECK-01`)。このカードでは段 1 の末尾からパックへの案内 1 行だけを持つ。
   6. **段 3 の新規テンプレ [M・条件付き]** — 次のどちらかを満たすまで作らない。(a) 段 1 を無料にしてから 4 週で、段 1 の閲覧が 100 以上、かつ段 2 か段 4 の購入が 1 件以上。(b) `ADMIN-STAT-PILOT-01` の聞き取りで「類似団体との財政比較」が担当者 2 人以上に共通する繰り返しの業務だと確かめられた。中身の案は、自分の団体を選ぶと人口規模の近い団体が並ぶ Excel 1 枚と手順 (データは社会・人口統計体系 `0000020204` の市町村財政指標)。**着手前の確認**: ① 財政力指数が 2021 年度までなので、総務省の最新年度との差が 2 年以上なら年度を題名に明記するか作らない (`DATA-QUALITY-LOOP-01` の基準) ② 「類似団体」を総務省の類型で区分するか人口規模で代用するかを原典で決める。生成と検査は product-factory (`catalog-validator`・`LICENSE-ja.txt`・`SOURCES.csv`)。**完了**: 検査を通り、サンプルがあり、オーナーが承認した。**停止**: 着手の条件を満たさない、または年度が古いまま更新できない。
   7. **4 週後に判定する [S・1 回]** — 段ごとに「閲覧 → 次の段の閲覧 → 購入」を 1 表にし、下の数値と比べる。
 - **判定の数値 (先に固定)**: 階段ごとに、4 週で段 2 以上の購入が合計 3 件。落ちる段の見分け方は 2 つ。段 1 の閲覧が 4 週で 100 未満なら、入口 (段 0 の末尾の案内) の問題。段 1 の閲覧が 100 以上あって購入が 0 件なら、商品か価格の問題なので、`KNOWHOW-QA-BOARD-01` の質問の集計でテーマを見直す。段 0 の閲覧が、末尾を変える前の 28 日より 2 割以上減ったら (無料化した記事を除く)、末尾の変更を戻す。
@@ -3860,6 +4012,29 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [PRODUCT-LINEUP-2026-11] 残りの判断: 統計の地図・グラフを資料用に作る受注をココナラで始めるか
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **経緯**: 2026-11-05 に 5 つの販売面の競合調査 (`docs/00_プロジェクト管理/02_収益化戦略.md` §2.2) から商品展開の設計案を作り、オーナーが採った。採った内容は同 §3.4「商品展開」と `data/products/product-strategy.json` の決定にある。このカードには未決の 1 点だけを残す。
+- **問い**: ココナラで「統計の地図・グラフを資料用に作る」受注を始めるか。10-19 の撤退はデータ販売の撤退で、受注は別物。
+- **材料 (2026-11-05 観測)**: ココナラの地図作成 ¥3,000 は評価 3,663・1,259・1,139 件、Excel 作業の代行は 594 件。統計の値で塗り分けた地図の出品は「塗り分け 地図」7 件の中に無い。評価数は関心の目安で、販売数ではない。
+- **始めるなら先に決めること**: 時間単価と 1 件の工数上限 (§3.4「価格と採算」)、受ける範囲 (都道府県・市区町村のどこまで、手元のデータを使うか stats47 の指標だけか)、境界の出どころ (N03・Geoshape は使わない。`MUNI-DATA-LICENSE-CHECK-01`)。
+- **判定 (始めた場合)**: 出品から 4 週で受注 2 件以上、かつ 1 件の実工数が上限以内なら続ける。
+- **禁止**: 決まる前に出品しない。出品は人手のログインとオーナー承認を経る (`config/coconala-account.json` のアカウントだけ)。
+- **完了条件**: 始める・始めないの決定が `02_収益化戦略.md` §3.4 と `product-strategy.json` にあり、始める場合は出品のカードがある。
+
+### [ISSUE-PAYING-NEED-01] イシュー: 雑学の読者で広告を伸ばすのか、統計を仕事に使う人から売上を得るのか
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **問い**: stats47 が解く問題は、好奇心ではなく、むしろ仕事の問題なのか。統計を仕事に使う人は、お金を払うほど困っているのか。
+- **仮説**: 今解いているのは「地元や話題の数字が気になる」という好奇心。仕事で払う人はまだ確かめられていない。
+- **実測 (2026-11-05 観測)**: 検索 14,733 クリック/28日、食べ物の消費量が約 31%。note 売上は累計 600 円で、売れたのは「e-Stat×Claude Code×自治体」の 300 円記事 2 件。ランキング有料記事 47 本は閲覧 4,842 で売上 0。聞き取りは 0 件 (`data/products/admin-stat-interviews.json`)。
+- **位置づけ**: どの顧客を選ぶかの上位の問い。行政の検証そのものは `ADMIN-STAT-PILOT-01` が持ち、9-25 に一時停止、期日 10-02 を超過している。
+- **問いの台帳との配線**: `data/content/issues.json` の `revenue` が `実務`・`データ` の問いを、聞き取りで「仕事で使うか」を尋ねる材料にする。
+- **次**: `ADMIN-STAT-PILOT-01` の段階 1 を再開するか、別の仕事の読者を先に確かめるかをオーナーと決める。
+- **禁止**: 答えが出る前に、行政向け商品の制作を増やさない。
+- **完了条件**: 聞き取りの結果が `admin-stat-interviews.json` にあり、どちらへ進むかをオーナーが決めて `02_収益化戦略.md` へ反映している。
 
 ### [KDP-MANUSCRIPT-PUBLIC-REPO-01] 販売中の本の原稿が公開リポジトリで無料で読める状態を決める
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-04] [領域:商品]

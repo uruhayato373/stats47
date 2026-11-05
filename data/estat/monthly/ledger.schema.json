@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "調査ごとの月次の表 (data/estat/monthly/ledger.json・生成物)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "summary",
+    "surveys"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "catalogTables",
+        "monthlyTables",
+        "surveys"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "catalogTables": {
+          "type": "integer"
+        },
+        "monthlyTables": {
+          "type": "integer"
+        },
+        "surveys": {
+          "type": "integer"
+        }
+      }
+    },
+    "surveys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "statCode",
+          "statName",
+          "govOrg",
+          "tables",
+          "prefectureTables",
+          "latestUpdate",
+          "pinned"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "statCode": {
+            "type": "string"
+          },
+          "statName": {
+            "type": "string"
+          },
+          "govOrg": {
+            "type": "string"
+          },
+          "tables": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "prefectureTables": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "latestUpdate": {
+            "type": "string"
+          },
+          "pinned": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "statsDataId",
+                "title",
+                "updatedDate"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "statsDataId": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "updatedDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

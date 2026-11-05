@@ -4,6 +4,17 @@
   "runs": [
     {
       "job": "ctr-improvement",
+      "month": "2026-11",
+      "status": "ok",
+      "ranAt": "2026-11-05T03:55:07.972Z",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/41964496728",
+      "fields": {
+        "max": "10"
+      },
+      "summary": "## CTR 改善候補 (期間: 2026-W43, 抽出: 10 件 / 候補 246 件)\n\nsource: `data/gsc/snapshots/2026-W43/queries.csv`\n\n| Query | Position | Impr | CTR (%) | Industry Avg (%) | 期待 +Clicks/month |\n|---|---|---|---|---|---|\n| 病院数が最も少ない都道府県はどこ | 7 | 1873 | 1.55 | 3.9 | +44.0 |\n| 病院数が最も少ない都道府県はどこですか | 5 | 880 | 1.82 | 6.3 | +39.4 |\n| 漁港が多い県 | 6 | 636 | 0.31 | 4.9 | +29.2 |\n| 住みやすい県ランキング | 8 | 2044 | 2.15 | 3.3 | +23.5 |\n| 高校2年生 平均身長 | 8 | 696 | 0.00 | 3.3 | +23.0 |\n| 介護サービス施設・事業所調査 | 9 | 698 | 0.00 | 2.7 | +18.8 |\n| 病院が少ない県 | 9 | 544 | 0.18 | 2.7 | +13.7 |\n| 漁港 多い県 | 6 | 279 | 0.00 | 4.9 | +13.7 |\n| 2023年現在 銭湯の数が人口比で最も多い都道府県はどこ | 6 | 276 | 0.00 | 4.9 | +13.5 |\n| 中2男子 平均身長 | 9 | 501 | 0.20 | 2.7 | +12.5 |\n\n### 改善提案\n- 上位 3 クエリは `/brushup-blog --target article <slug>` で seoTitle/description 改訂を検討\n- position 5-10 帯は CTR 倍増効果が大きい (industry avg 比 3-7x の改善余地)\n- 業界平均値の出典: Backlinko 2023 (https://backlinko.com/google-ctr-stats)\n"
+    },
+    {
+      "job": "ctr-improvement",
       "month": "2026-10",
       "status": "ok",
       "ranAt": "2026-10-05T02:38:30.260Z",

@@ -5,6 +5,7 @@ import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-
 import { rankingRows } from './template-ranking-bars';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
 import { compositionSampleRows } from './template-composition-stacked';
+import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
 
 const LIQUOR = { title: '酒類別の販売数量構成比', source: '国税庁「酒のしおり」' } as const;
@@ -96,7 +97,7 @@ export function renderDistributionBoxplot(raw: unknown) {
 }
 
 /** One fiscal year's composition as a donut: the year in the centre, every share in the legend. */
-export function renderCompositionPie(raw: unknown) {
+export function renderCompositionPie(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
   const { categories, years, share } = liquorShares(raw);
   const year = years[years.length - 1];
   const top = sampleBodyTop(false) + 30;
@@ -111,7 +112,7 @@ export function renderCompositionPie(raw: unknown) {
     const mid = angle + sweep / 2, labelR = (radius.outer + radius.inner) / 2;
     const text = value >= 6 ? `<text x="${(center.x + labelR * Math.cos(mid)).toFixed(1)}" y="${(center.y + labelR * Math.sin(mid) + 11).toFixed(1)}" text-anchor="middle" font-size="30" font-weight="700" fill="${labelOn(fill)}">${value.toFixed(1)}%</text>` : '';
     angle = end;
-    return `<path data-category="${escapeXml(category)}" d="${d}" fill="${fill}" stroke="${BRAND.paper}" stroke-width="3"/>${text}`;
+    return `<path data-category="${escapeXml(category)}" d="${d}" fill="${fill}" stroke="${theme.paper}" stroke-width="3"/>${text}`;
   }).join('');
   const legendTop = center.y + radius.outer + 70, column = (SAMPLE_FRAME.right - SAMPLE_FRAME.left) / 2;
   const legend = categories.map((category, i) => {
@@ -120,12 +121,13 @@ export function renderCompositionPie(raw: unknown) {
   }).join('');
   return sampleFrame({
     title: LIQUOR.title, titleSize: 64, meta: `${year} · 全国 · 単位：%`, source: LIQUOR.source,
+    theme,
     body: `${slices}<text x="${center.x}" y="${center.y + 14}" text-anchor="middle" font-size="40" font-weight="700">${escapeXml(year)}</text>${legend}`,
   });
 }
 
 /** Categories × fiscal years, each cell shaded by its share with the value written in it. */
-export function renderCompositionHeatmap(raw: unknown) {
+export function renderCompositionHeatmap(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
   const { categories, years, share } = liquorShares(raw);
   const values = categories.flatMap((category) => years.map((year) => share(category, year)));
   const maxShare = Math.max(...values);
@@ -134,7 +136,7 @@ export function renderCompositionHeatmap(raw: unknown) {
   const grid = { left: 420, right: SAMPLE_FRAME.right, header: 64 };
   const cellW = (grid.right - grid.left) / years.length;
   const cellH = (SAMPLE_FRAME.bodyBottom - top - grid.header) / categories.length;
-  const header = years.map((year, j) => `<text x="${grid.left + cellW * (j + 0.5)}" y="${top + 42}" text-anchor="middle" font-size="30" font-weight="700" fill="${BRAND.muted}">${escapeXml(year)}</text>`).join('');
+  const header = years.map((year, j) => `<text x="${grid.left + cellW * (j + 0.5)}" y="${top + 42}" text-anchor="middle" font-size="30" font-weight="700" fill="${theme.muted}">${escapeXml(year)}</text>`).join('');
   const cells = categories.map((category, i) => {
     const y = top + grid.header + i * cellH;
     const row = years.map((year, j) => {
@@ -146,5 +148,6 @@ export function renderCompositionHeatmap(raw: unknown) {
   return sampleFrame({
     title: LIQUOR.title, titleSize: 64, meta: `${years[0]}・${years[1]}・${years[2]} · 全国 · 単位：%`, source: LIQUOR.source,
     body: header + cells,
+    theme,
   });
 }

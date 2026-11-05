@@ -56,6 +56,7 @@
 - [generatestaticparams r2 notfound stuck](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParamsを付けるとbuild時R2不可でnotFound固着。撤去しrevalidateのみ。正典nextjs-ssg-preservation.md
 - [ai content remediation queue](project_ai_content_remediation_queue.md) — ranking AIは9/8に2,166件done・残0を全量実測。追加12件R2 SHA一致、TS/KNOWN/R2/queue集合差分0。非阻害警告・意味レビュー範囲・課金条件は別記。canonical入力の回帰テストあり
 - [blog svg lineage enforcement](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
+- [commit in batches](feedback_commit_in_batches.md) — 確認で修正を重ねる間は毎回コミットしない。まとまりで 1 回
 - [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [cloudflare workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ/home featuredが空→wrangler.tomlのCLOUDFLARE_WORKERS="true"でR2読みskipを疑う。テーマはR2 values.json+force-dynamic
 - [dev server web only](feedback_dev_server_web_only.md) — dev は npm run dev:web。常駐は background + Ready の polling。R2 URL と S3 変数の継承を確かめてから画面監査。正典 local-environment.md
@@ -156,6 +157,7 @@
 - [workflow policy comment import](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
 - [help flag runs script](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
 - [blog background codex only](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする
+- [codex blocked on windows proxy](feedback_codex_blocked_on_windows_proxy.md) — 会社PCのCodexはプロキシで一時的に503になることがある。再試行で通る。題名を変える前に背景を確かめる
 - [file backlog as you go](feedback_file_backlog_as_you_go.md) — 長い作業では範囲外の課題を見つけた時点で backlog へ起票しながら進める。既存カード検索→追記優先、CI 待ち中の起票コミットはマージ後に push
 - [metric display state](feedback_metric_display_state.md) — 計算方法/年/地域は観測値・単位・系列・配色を一括確定。SSOT移行はCLI/索引/配信まで検査し、途中停止したmetadata反映は全件の完了を確認
 - [zsh word splitting](feedback_zsh_word_splitting.md) — Bash ツールは zsh。未クォート変数が単語に分かれず for/set -- が 1 要素で進む。${=var} か while read、反復後に件数を照合

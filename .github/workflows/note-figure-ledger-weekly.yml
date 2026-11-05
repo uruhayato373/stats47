@@ -1,0 +1,71 @@
+name: 🖼️ Note body figure ledger
+
+# 公開済み note 記事の本文の図を台帳 data/note/body-figures.json にし、今の R2 の値と照らす。
+# 有料記事の本文は非公開 R2 にあるので、S3 認証のある CI で作る。読むだけで、R2 にも note にも書かない。
+# 正典: .claude/rules/note-image-assets.md 「本文の図の台帳」
+
+on:
+  workflow_dispatch:
+  push:
+    # 新しい workflow は main に入るまで dispatch できないので、道具を変えた push でも作り直す
+    branches: [develop]
+    paths:
+      - ".claude/scripts/note/build-note-figure-ledger.mjs"
+      - ".github/workflows/note-figure-ledger-weekly.yml"
+  schedule:
+    # JST 土曜 04:00。計測 (02:00) の後、週次レビューの前
+    - cron: "0 19 * * 5"
+
+permissions:
+  contents: write # 台帳の commit-back
+
+concurrency:
+  group: note-figure-ledger
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: 🖼️ Build the ledger
+        run: |
+          npm run --silent note:figures | tee .local-note-figures.txt
+          {
+            echo '### note 本文の図'
+            echo '```'
+            head -40 .local-note-figures.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          rm -f .local-note-figures.txt
+
+      - name: 📮 Commit the ledger
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/note/body-figures.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "chore(note): refresh the body figure ledger [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop

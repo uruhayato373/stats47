@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-11-04
- * 件数: 2587
+ * 最終生成日: 2026-11-05
+ * 件数: 2596
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -336,6 +336,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "cleaning-service-consumption-expenditure",
   "cleaning-shop-count-per-100k",
   "cleaning-worker-annual-income",
+  "clothing-footwear-budget-share-kakei",
   "clothing-footwear-expenditure-ratio-multi-person-households",
   "clothing-footwear-expenditure-total",
   "clothing-rental-consumption-expenditure",
@@ -448,6 +449,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "cultivated-land-area-per-household",
   "cultivated-land-area-ratio",
   "cultural-facility-admission-consumption-expenditure",
+  "culture-recreation-budget-share-kakei",
   "culture-recreation-cost-all-households",
   "culture-recreation-expenditure-ratio-multi-person-households",
   "culture-recreation-expenditure-total",
@@ -580,6 +582,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "earmarked-tax-local",
   "earthquake-renovation-rate",
   "earthquake-retrofit-housing",
+  "education-budget-share-kakei",
   "education-cost-all-households",
   "education-department-staff",
   "education-expenditure-ratio-multi-person-households",
@@ -827,6 +830,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "funeral-expense-consumption-expenditure",
   "furikake-consumption-expenditure",
   "furniture-household-expenditure-total",
+  "furniture-household-goods-budget-share-kakei",
   "furniture-household-goods-expenditure-ratio-multi-person-households",
   "furniture-household-service-consumption-expenditure",
   "furusato-donation-amount-prefecture",
@@ -951,6 +955,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "health-medical-expenditure-total",
   "health-physical-education-expenses-prefecture",
   "health-supplements-group-consumption-expenditure",
+  "healthcare-budget-share-kakei",
   "healthcare-cost-all-households",
   "healthcare-expenditure-ratio-multi-person-households",
   "healthy-life-expectancy-female",
@@ -1061,6 +1066,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "housework-avg-time-female",
   "housework-avg-time-male",
   "housework-durables-group-consumption-expenditure",
+  "housing-budget-share-kakei",
   "housing-charges-consumption-expenditure",
   "housing-cost-all-households",
   "housing-expenditure-ratio-multi-person-households",
@@ -1583,6 +1589,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "other-clothing-service-consumption-expenditure",
   "other-communication-device-consumption-expenditure",
   "other-construction-consumption-expenditure",
+  "other-consumption-budget-share-kakei",
   "other-consumption-expenditure-ratio-multi-person-households",
   "other-cosmetics-consumption-expenditure",
   "other-culture-lesson-consumption-expenditure",
@@ -2406,6 +2413,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "train-fare-consumption-expenditure",
   "train-student-pass-consumption-expenditure",
   "training-gym-public",
+  "transport-communication-budget-share-kakei",
   "transport-communication-expenditure-ratio-multi-person-households",
   "transport-communication-expenditure-total",
   "transportation-group-consumption-expenditure",
@@ -2483,6 +2491,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "urban-planning-expenses-prefecture",
   "urbanization-control-area-ratio",
   "usage-fees-prefecture",
+  "utilities-budget-share-kakei",
   "utilities-expenditure-ratio-multi-person-households",
   "utilities-expenditure-total",
   "vacant-housing-excluding-rental-sale-secondary",
