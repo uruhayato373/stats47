@@ -1318,7 +1318,17 @@
       "queries": [
         "北陸 米作りが盛んな理由",
         "北陸で稲作が盛んな理由",
-        "なぜ北陸は米作りが盛んなのか"
+        "なぜ北陸は米作りが盛んなのか",
+        "なぜ東北地方は米作りが盛んなのか",
+        "東北地方で米作りが盛んな理由",
+        "北陸 稲作 盛んな 理由",
+        "東北 米 多い 理由",
+        "東北地方で稲作が盛んな理由",
+        "東北地方 米作りが盛んな理由",
+        "北陸で米が盛んな理由",
+        "北陸で米作りが盛んな理由",
+        "北陸地方で稲作が盛んな理由",
+        "北陸 米 なぜ"
       ],
       "sensitive": false,
       "status": "active"
@@ -1354,7 +1364,9 @@
       "unit": "prefecture",
       "answerability": "relation",
       "queries": [
-        "下水道普及率 低い 理由"
+        "下水道普及率 低い 理由",
+        "徳島県 下水道 普及率 低い 理由",
+        "徳島 下水道普及率 低い 理由"
       ],
       "sensitive": false,
       "status": "active"
@@ -1369,6 +1381,425 @@
         "沖縄 持ち家率 なぜ",
         "沖縄 持ち家 率 低い 理由"
       ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F13-2",
+      "level": "minor",
+      "question": "沖縄の人はなぜ身長が低いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "学校保健統計調査",
+      "pitfall": "学校保健統計は子どもの身長で、大人の身長ではない。遺伝・栄養・成長の時期を統計だけでは切り分けられない",
+      "queries": [
+        "沖縄 身長 低い 理由",
+        "沖縄 平均身長 低い なぜ",
+        "沖縄 身長低い なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M02-2",
+      "level": "minor",
+      "question": "日本の食料自給率はなぜ低いのか、県で見るとどこが支えているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "都道府県別食料自給率（農林水産省）",
+      "pitfall": "カロリーベースと生産額ベースで県の順位が変わる（食料・農業・農村白書 令和6年度）。ランキングはカロリーベースだけを見ている",
+      "queries": [
+        "日本の食料自給率が低い理由",
+        "日本 食料自給率 低い 理由",
+        "なぜ日本の食料自給率は低いのか",
+        "食料自給率が低い理由",
+        "なぜ日本は食料自給率が低いのか"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M02-3",
+      "level": "minor",
+      "question": "北海道で漁業が盛んなのはなぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "漁業センサス・海面漁業生産統計",
+      "pitfall": "漁獲量・就業者・経営体で順位が変わる。獲る漁業と育てる漁業を分ける",
+      "queries": [
+        "北海道 漁業 盛んな 理由"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J06-1",
+      "level": "minor",
+      "question": "青森・秋田に風力発電が多いのはなぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "都道府県別風力発電導入量",
+      "pitfall": "基数と設備容量で順位が変わる。風の強さのほか送電網と土地の条件も効くが、導入量の統計だけでは分けられない",
+      "queries": [
+        "青森 風力発電 なぜ",
+        "秋田 風力発電 多い なぜ",
+        "青森 風 強い なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K01-1",
+      "level": "minor",
+      "question": "青森でカップ麺の消費が多いのはなぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。外食の少なさ・気候など理由は集計から断定できない",
+      "queries": [
+        "青森 カップラーメン なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K01-2",
+      "level": "minor",
+      "question": "カツオの産地と、カツオをよく食べる県はなぜずれるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "海面漁業生産統計・家計調査",
+      "pitfall": "水揚げ地と消費地は別の統計で、漁獲は年ごとに入れ替わる。家計調査は県庁所在市の値",
+      "queries": [
+        "高知県はなぜカツオが有名なのか",
+        "沖縄 鰹節 なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K02-1",
+      "level": "minor",
+      "question": "チョコレートをよく買う県は、なぜ毎年入れ替わるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "県庁所在市の標本調査なので、順位の小さな入れ替わりは誤差の範囲でありうる",
+      "queries": [
+        "チョコレート消費量 日本一 なぜ",
+        "山口市 チョコレート 消費 なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E01-1",
+      "level": "minor",
+      "question": "北陸の学力が高いのはなぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "全国学力・学習状況調査",
+      "pitfall": "県の平均正答率の差は小さい年がある。学校・家庭・地域のどれが効くかは集計から分けられない",
+      "queries": [
+        "北陸 学力 高い理由"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M01-1",
+      "level": "minor",
+      "question": "三重と東北に半導体の工場が多いのはなぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "経済構造実態調査・工業統計",
+      "pitfall": "県別の統計で半導体だけを切り出せない場合があり、電子部品全体の値を読んでいることがある",
+      "queries": [
+        "三重県 半導体 なぜ",
+        "東北地方 半導体 なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D09-1",
+      "level": "minor",
+      "question": "生活保護を受ける人が多い地域で、受ける理由は何か",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "被保護者調査（県別の保護率）。受給の理由の県別値があるかは未確認",
+      "pitfall": "保護率の高さは困窮の多さだけでなく、高齢単身世帯の多さや申請のしやすさでも動く",
+      "queries": [
+        "生活保護 理由 ランキング",
+        "北海道 生活保護 多い理由"
+      ],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:D02-1",
+      "level": "minor",
+      "question": "最低賃金が低い県は、なぜ低いのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "地域別最低賃金",
+      "pitfall": "地域別の金額は審議で決まる制度の値で、県の賃金水準そのものではない",
+      "queries": [
+        "秋田県 最低賃金 なぜ 低い"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F01-1",
+      "level": "minor",
+      "question": "女性の方が長生きなのはなぜか、県で差はあるか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "完全生命表・都道府県別生命表",
+      "pitfall": "男女差の理由は医学の話で、県別の統計からは言えない。統計で言えるのは差の大きさと地域差まで",
+      "queries": [
+        "女性の方が長生きの理由",
+        "なぜ女性の方が長生きなのか"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:B09-1",
+      "level": "minor",
+      "question": "東京の昼間人口が多いのはなぜか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "国勢調査（昼夜間人口）",
+      "pitfall": "昼間人口の実数と昼夜間人口比率で順位が変わる",
+      "queries": [
+        "東京 昼間人口 多い 理由"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H06-2",
+      "level": "minor",
+      "question": "北海道の持ち家率はなぜ低いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "住宅・土地統計調査",
+      "pitfall": "持ち家率は世帯の年齢構成と単身世帯の多さに左右される。県の比較では年齢をそろえて読む",
+      "queries": [
+        "北海道 持ち家率 低い 理由"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F14",
+      "level": "major",
+      "question": "中絶率が高い県はどこで、何と関係するか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:healthcare",
+      "dataNote": "衛生行政報告例",
+      "pitfall": "率は届出ベースで、県の差の理由を集計から断定できない。個人の事情の話にしない",
+      "queries": [
+        "中絶 理由 ランキング"
+      ],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:F15",
+      "level": "major",
+      "question": "都会ほどスポーツをするのは本当か",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:sports-participation",
+      "dataNote": "社会生活基本調査",
+      "pitfall": "行動者率は「1 年に 1 回でも」を含む。施設の多さと種目の違いを分けて読む",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F16",
+      "level": "major",
+      "question": "精神病床が多い県はどこで、なぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:healthcare",
+      "dataNote": "医療施設調査・病院報告",
+      "pitfall": "病床の多さは病気の多さではなく、過去の整備の経緯と地域移行の遅れを映す。在院日数と併せて読む",
+      "queries": [
+        "沖縄 精神科 多い 理由"
+      ],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:H11",
+      "level": "major",
+      "question": "コンビニが多い県と少ない県は何が違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:retail-commerce",
+      "dataNote": "商業統計・経済構造実態調査",
+      "pitfall": "店舗数の実数は人口に比例する。人口あたりで見て、スーパーや大型店の多さと併せて読む",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H12",
+      "level": "major",
+      "question": "パチンコ店が多い県はどこで、何と関係するか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:cultural-participation",
+      "dataNote": "全日本遊技事業協同組合連合会の店舗数（警察庁資料）・社会生活基本調査",
+      "pitfall": "店舗の多さと、遊ぶ人の多さ（行動者率）は別の指標。相関があっても理由は言えない",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J09",
+      "level": "major",
+      "question": "日照時間が長い県はどこで、なぜか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:climate",
+      "dataNote": "気象庁の平年値",
+      "pitfall": "県庁所在地など観測地点の値で、県全体の値ではない",
+      "queries": [
+        "高知 日照時間 長い なぜ",
+        "瀬戸内 日照時間が長い理由",
+        "山梨 日照時間日本一 なぜ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J10",
+      "level": "major",
+      "question": "「雨が多い県」と「雨の日が多い県」はなぜ違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:climate",
+      "dataNote": "気象庁の平年値",
+      "pitfall": "降水量と降水日数は別の指標で、観測地点の値でもある",
+      "queries": [
+        "千葉 雨 多い なぜ",
+        "宮崎 降水量 多い理由"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:C11",
+      "level": "major",
+      "question": "労災が多い県はどこで、何が効いているか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:labor-wages",
+      "dataNote": "労働災害動向調査",
+      "pitfall": "件数は雇用者数と産業の構成に左右される。度数率と強度率を分けて読む（過労死等防止対策白書 令和6年度）",
+      "queries": [
+        "労災 原因 ランキング"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:C12",
+      "level": "major",
+      "question": "火事で亡くなる人が多い県はどこで、なぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:safety",
+      "dataNote": "消防白書・火災報告",
+      "pitfall": "人口あたりで見る。高齢化と住宅の条件が重なるので、集計だけでは理由を分けられない（消防白書 令和7年度）",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J11",
+      "level": "major",
+      "question": "土砂災害警戒区域が多い県は、危険な県か",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:safety",
+      "dataNote": "土砂災害防止法に基づく区域指定",
+      "pitfall": "区域の数は地形のほか指定の進み具合も映す。少ない県が安全とは限らない（防災白書 令和7年度）",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D11",
+      "level": "major",
+      "question": "貯蓄が多い県は、暮らしに余裕があるのか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:real-income",
+      "dataNote": "家計調査・全国家計構造調査",
+      "pitfall": "貯蓄の多さは高齢者の多さと将来の不安でも動く。所得の高さとは別に読む",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H13",
+      "level": "major",
+      "question": "地方は車の費用で、都市より移動の負担が重いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:geographic-access",
+      "dataNote": "家計調査・国勢調査",
+      "pitfall": "都市は運賃・駐車場・家賃がかかるので、交通費だけを比べると負担を見誤る",
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K01-3",
+      "level": "minor",
+      "question": "家計調査で 1 位の県は、その食べ物を一番食べている県か",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "家計調査",
+      "pitfall": "県庁所在市の世帯の購入の値で、自家消費やもらい物、外食は入らない。消費量の日本一ではない",
+      "queries": [],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F03-1",
+      "level": "minor",
+      "question": "平均在院日数が長い県はどこで、病床の多さで説明できるか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "病院報告",
+      "pitfall": "病床の種類で日数が大きく違う。全病床の平均は精神・療養の多さに引っ張られる",
+      "queries": [],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:B04-1",
+      "level": "minor",
+      "question": "外国人の働き手が多い地域で、日本人の賃金は下がったか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "外国人雇用状況・賃金構造基本統計調査",
+      "pitfall": "賃金の低い産業に外国人が集まるので、県の相関は因果を示さない。地域の比較と個人の話を分ける",
+      "queries": [],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:B10-1",
+      "level": "minor",
+      "question": "宿泊客が増えた地域で、若い人は残るようになったか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "宿泊旅行統計調査・住民基本台帳人口移動報告",
+      "pitfall": "効果が見えるのは一部の観光地に限られる可能性がある。県の平均で見ると薄まる",
+      "queries": [],
       "sensitive": false,
       "status": "active"
     }
