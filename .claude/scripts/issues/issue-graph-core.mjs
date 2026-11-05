@@ -228,6 +228,39 @@ export function classifyCoverage({ pages, reach, traffic }) {
   return { byKind, orphanRead };
 }
 
+/**
+ * 問いになりそうな検索語の型。読者が理由や関係を知りたがっている語を拾う。
+ * 配偶関係・位置関係は統計や地図の用語で、問いではない。
+ */
+export const WHY_QUERY = /なぜ|何故|理由|原因|(?<!配偶|位置)関係/;
+
+/** 型の語を除いて 2 文字未満なら、何についての問いか分からない (「何故」「原因は？」) */
+const hasSubject = (q) => q.replace(WHY_QUERY, "").replace(/[?？!！。、]/g, "").length >= 2;
+
+/**
+ * 下から問いを足す候補。queries.csv の行 ({query, clicks, impressions}) を週ごとに渡す。
+ * 空白違いは同じ語として合算し、見送りを含むどの問いの queries にも無い語だけを返す
+ * (見送った問いの語は、一度判断したものなので再び出さない)。
+ * @returns {{query: string, clicks: number, impressions: number}[]} 表示回数の多い順
+ */
+export function findQueryCandidates({ issues, weeks }) {
+  const known = new Set(issues.flatMap((i) => i.queries ?? []).map(norm));
+  const found = new Map();
+  for (const rows of weeks) {
+    for (const row of rows) {
+      const key = norm(row.query);
+      if (known.has(key) || !WHY_QUERY.test(key) || !hasSubject(key)) continue;
+      const c = found.get(key) ?? { query: row.query, clicks: 0, impressions: 0 };
+      c.clicks += Number(row.clicks) || 0;
+      c.impressions += Number(row.impressions) || 0;
+      found.set(key, c);
+    }
+  }
+  return [...found.values()].sort(
+    (a, b) => b.impressions - a.impressions || b.clicks - a.clicks || a.query.localeCompare(b.query, "ja"),
+  );
+}
+
 /** RFC 4180 の最小の CSV 読み (GSC の pages.csv は引用符付きの値を含みうる) */
 export function parseCsv(text) {
   const rows = [];
