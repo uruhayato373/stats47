@@ -674,6 +674,51 @@ export const HOUSEHOLD_FOOD_SPENDING_SET: IndicatorSet = {
       "rankingKey": "japanese-food-dining-consumption-expenditure",
       "shortLabel": "和食の支出額",
       "role": "context"
+    },
+    {
+      "rankingKey": "housing-budget-share-kakei",
+      "shortLabel": "住居費の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "utilities-budget-share-kakei",
+      "shortLabel": "光熱・水道費の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "furniture-household-goods-budget-share-kakei",
+      "shortLabel": "家具・家事用品の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "clothing-footwear-budget-share-kakei",
+      "shortLabel": "被服及び履物の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "healthcare-budget-share-kakei",
+      "shortLabel": "保健医療費の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "transport-communication-budget-share-kakei",
+      "shortLabel": "交通・通信費の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "education-budget-share-kakei",
+      "shortLabel": "教育費の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "culture-recreation-budget-share-kakei",
+      "shortLabel": "教養娯楽費の割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "other-consumption-budget-share-kakei",
+      "shortLabel": "その他の消費支出の割合",
+      "role": "secondary"
     }
   ],
   "keywords": [

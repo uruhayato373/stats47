@@ -1,14 +1,14 @@
 {
-  "complete": false,
+  "complete": true,
   "summary": {
-    "metrics": 841,
-    "ranking": 717,
-    "theme": 841,
+    "metrics": 850,
+    "ranking": 841,
+    "theme": 850,
     "area": 231,
-    "blog": 310,
+    "blog": 389,
     "unreached": 0,
     "undecidedItems": 0,
-    "plannedTables": 6
+    "plannedTables": 0
   },
   "unreachedSample": [],
   "rows": [
@@ -28,7 +28,7 @@
     },
     {
       "key": "admission-game-fees-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -52,7 +52,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "adult-sneakers-consumption-quantity",
@@ -91,10 +91,10 @@
     },
     {
       "key": "alcoholic-beverages-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "amusement-park-consumption-expenditure",
@@ -119,24 +119,24 @@
     },
     {
       "key": "automobile-maintenance-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "automobile-purchases-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "automobile-related-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "bacon-consumption-expenditure",
@@ -154,7 +154,7 @@
     },
     {
       "key": "bags-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -234,7 +234,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "beauty-appliance-consumption-expenditure",
@@ -245,14 +245,14 @@
     },
     {
       "key": "beauty-products-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "beauty-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -262,7 +262,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "bed-consumption-quantity",
@@ -273,7 +273,7 @@
     },
     {
       "key": "bedding-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -311,18 +311,18 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "beverages-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "bicycle-purchases-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -395,14 +395,14 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "books-printed-matter-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "boys-school-uniform-consumption-expenditure",
@@ -434,14 +434,14 @@
     },
     {
       "key": "bread-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "broadcasting-fees-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -542,7 +542,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "candy-consumption-expenditure",
@@ -630,10 +630,10 @@
     },
     {
       "key": "cereals-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "cheese-consumption-expenditure",
@@ -714,14 +714,14 @@
     },
     {
       "key": "childrens-shirts-sweaters-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "childrens-shirts-sweaters-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -752,7 +752,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "childrens-socks-consumption-quantity",
@@ -770,7 +770,7 @@
     },
     {
       "key": "childrens-underwear-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -874,6 +874,13 @@
       "blog": false
     },
     {
+      "key": "clothing-footwear-budget-share-kakei",
+      "ranking": false,
+      "theme": true,
+      "area": false,
+      "blog": false
+    },
+    {
       "key": "clothing-footwear-expenditure-total",
       "ranking": true,
       "theme": true,
@@ -889,10 +896,10 @@
     },
     {
       "key": "clothing-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "cocoa-consumption-expenditure",
@@ -917,7 +924,7 @@
     },
     {
       "key": "coffee-cocoa-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -959,17 +966,17 @@
     },
     {
       "key": "communication-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "company-housing-rent-consumption-expenditure",
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "company-housing-rent-consumption-quantity",
@@ -1032,7 +1039,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "crab-consumption-expenditure",
@@ -1053,7 +1060,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "croquette-consumption-expenditure",
@@ -1082,6 +1089,13 @@
       "theme": true,
       "area": true,
       "blog": true
+    },
+    {
+      "key": "culture-recreation-budget-share-kakei",
+      "ranking": false,
+      "theme": true,
+      "area": false,
+      "blog": false
     },
     {
       "key": "culture-recreation-expenditure-total",
@@ -1151,7 +1165,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "daikon-consumption-expenditure",
@@ -1169,14 +1183,14 @@
     },
     {
       "key": "dairy-eggs-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "dairy-products-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1204,7 +1218,7 @@
     },
     {
       "key": "detergents-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1225,10 +1239,10 @@
     },
     {
       "key": "domestic-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "domestic-student-remittance-consumption-expenditure",
@@ -1249,7 +1263,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "dress-shirt-consumption-quantity",
@@ -1274,7 +1288,7 @@
     },
     {
       "key": "dried-foods-seaweed-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1284,7 +1298,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "dried-mackerel-consumption-quantity",
@@ -1340,7 +1354,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "driving-school-consumption-expenditure",
@@ -1350,11 +1364,18 @@
       "blog": false
     },
     {
+      "key": "education-budget-share-kakei",
+      "ranking": false,
+      "theme": true,
+      "area": false,
+      "blog": false
+    },
+    {
       "key": "education-expenditure-total",
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "eggplant-consumption-expenditure",
@@ -1372,14 +1393,14 @@
     },
     {
       "key": "eggs-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "eggs-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1470,14 +1491,14 @@
     },
     {
       "key": "fabrics-yarn-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "face-mask-item-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1512,7 +1533,7 @@
     },
     {
       "key": "fish-paste-products-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1568,10 +1589,10 @@
     },
     {
       "key": "footwear-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "foundation-consumption-expenditure",
@@ -1582,14 +1603,14 @@
     },
     {
       "key": "fresh-fish-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "fresh-fish-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1603,28 +1624,28 @@
     },
     {
       "key": "fresh-fruits-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "fresh-fruits-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "fresh-meat-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "fresh-meat-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1638,14 +1659,14 @@
     },
     {
       "key": "fresh-seafood-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "fresh-seafood-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1694,7 +1715,7 @@
     },
     {
       "key": "fresh-vegetables-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1732,14 +1753,14 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "fruits-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "funeral-expense-consumption-expenditure",
@@ -1758,6 +1779,13 @@
     {
       "key": "furniture-household-expenditure-total",
       "ranking": true,
+      "theme": true,
+      "area": false,
+      "blog": true
+    },
+    {
+      "key": "furniture-household-goods-budget-share-kakei",
+      "ranking": false,
       "theme": true,
       "area": false,
       "blog": false
@@ -1855,21 +1883,21 @@
     },
     {
       "key": "general-dining-out-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "general-furniture-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "gift-money-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1893,7 +1921,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "gloves-consumption-quantity",
@@ -2135,6 +2163,13 @@
     },
     {
       "key": "health-supplements-group-consumption-expenditure",
+      "ranking": true,
+      "theme": true,
+      "area": false,
+      "blog": true
+    },
+    {
+      "key": "healthcare-budget-share-kakei",
       "ranking": false,
       "theme": true,
       "area": false,
@@ -2156,7 +2191,7 @@
     },
     {
       "key": "heating-cooling-appliances-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2198,10 +2233,10 @@
     },
     {
       "key": "household-consumables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "household-debt-balance",
@@ -2212,10 +2247,10 @@
     },
     {
       "key": "household-durables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "household-head-allowance-consumption-expenditure",
@@ -2247,10 +2282,10 @@
     },
     {
       "key": "household-utensils-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "housekeeping-service-consumption-expenditure",
@@ -2261,6 +2296,13 @@
     },
     {
       "key": "housework-durables-group-consumption-expenditure",
+      "ranking": true,
+      "theme": true,
+      "area": false,
+      "blog": false
+    },
+    {
+      "key": "housing-budget-share-kakei",
       "ranking": false,
       "theme": true,
       "area": false,
@@ -2282,24 +2324,24 @@
     },
     {
       "key": "housing-materials-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "housing-repair-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "housing-repairs-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "icecream-consumption-expenditure",
@@ -2334,7 +2376,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "instant-noodles-consumption-expenditure",
@@ -2359,10 +2401,10 @@
     },
     {
       "key": "interior-furnishings-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "internet-fee-consumption-expenditure",
@@ -2376,7 +2418,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "jam-consumption-quantity",
@@ -2387,10 +2429,10 @@
     },
     {
       "key": "japanese-clothing-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "japanese-food-dining-consumption-expenditure",
@@ -2474,7 +2516,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "konbu-consumption-expenditure",
@@ -2548,14 +2590,14 @@
     },
     {
       "key": "leafy-vegetables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "leafy-vegetables-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2576,7 +2618,7 @@
     },
     {
       "key": "lesson-fees-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2716,7 +2758,7 @@
     },
     {
       "key": "meal-charges-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2730,10 +2772,10 @@
     },
     {
       "key": "meat-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "medical-fee-consumption-expenditure",
@@ -2744,24 +2786,24 @@
     },
     {
       "key": "medical-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "medical-supplies-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "medicines-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "melon-consumption-expenditure",
@@ -2835,7 +2877,7 @@
     },
     {
       "key": "mens-shirts-sweaters-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2912,7 +2954,7 @@
     },
     {
       "key": "mens-underwear-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2922,7 +2964,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "microwave-consumption-quantity",
@@ -2936,7 +2978,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "milk-drink-consumption-expenditure",
@@ -2947,7 +2989,7 @@
     },
     {
       "key": "milk-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2961,10 +3003,10 @@
     },
     {
       "key": "miscellaneous-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "miso-consumption-expenditure",
@@ -3094,14 +3136,14 @@
     },
     {
       "key": "noodles-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "noodles-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3136,24 +3178,24 @@
     },
     {
       "key": "oils-fats-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "oils-fats-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "oils-seasonings-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "onigiri-consumption-expenditure",
@@ -3234,7 +3276,7 @@
     },
     {
       "key": "other-beverages-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3269,14 +3311,14 @@
     },
     {
       "key": "other-cereals-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "other-cereals-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3311,14 +3353,14 @@
     },
     {
       "key": "other-clothing-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-clothing-misc-2025-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3347,6 +3389,13 @@
     {
       "key": "other-construction-consumption-expenditure",
       "ranking": true,
+      "theme": true,
+      "area": false,
+      "blog": false
+    },
+    {
+      "key": "other-consumption-budget-share-kakei",
+      "ranking": false,
       "theme": true,
       "area": false,
       "blog": false
@@ -3465,10 +3514,10 @@
     },
     {
       "key": "other-fuel-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-furniture-consumption-expenditure",
@@ -3528,7 +3577,7 @@
     },
     {
       "key": "other-household-consumables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3636,7 +3685,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-mens-shirt-consumption-quantity",
@@ -3654,7 +3703,7 @@
     },
     {
       "key": "other-miscellaneous-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3664,7 +3713,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-mushroom-consumption-quantity",
@@ -3685,7 +3734,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-noodles-consumption-expenditure",
@@ -3731,7 +3780,7 @@
     },
     {
       "key": "other-prepared-foods-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3752,14 +3801,14 @@
     },
     {
       "key": "other-processed-seafood-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "other-processed-vegetables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3773,14 +3822,14 @@
     },
     {
       "key": "other-recreational-goods-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "other-recreational-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3864,7 +3913,7 @@
     },
     {
       "key": "other-social-expenses-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3951,7 +4000,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-transport-consumption-expenditure",
@@ -3997,14 +4046,14 @@
     },
     {
       "key": "other-vegetables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "other-vegetables-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4067,7 +4116,7 @@
     },
     {
       "key": "package-tours-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4077,7 +4126,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "pasta-consumption-expenditure",
@@ -4158,7 +4207,7 @@
     },
     {
       "key": "personal-effects-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4182,7 +4231,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "photo-printing-consumption-expenditure",
@@ -4196,7 +4245,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "pickled-chinese-cabbage-consumption-quantity",
@@ -4249,10 +4298,10 @@
     },
     {
       "key": "pocket-money-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "pork-consumption-expenditure",
@@ -4294,7 +4343,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "pots-kettles-consumption-quantity",
@@ -4312,10 +4361,10 @@
     },
     {
       "key": "prepared-foods-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "preschool-fee-consumption-expenditure",
@@ -4375,14 +4424,14 @@
     },
     {
       "key": "processed-fruits-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "processed-meat-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4462,14 +4511,14 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "pumpkin-consumption-quantity",
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "ramen-dining-consumption-expenditure",
@@ -4487,24 +4536,24 @@
     },
     {
       "key": "recreational-durables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "recreational-goods-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "recreational-services-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "refrigerator-consumption-expenditure",
@@ -4529,14 +4578,14 @@
     },
     {
       "key": "remittances-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "rent-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4585,14 +4634,14 @@
     },
     {
       "key": "root-vegetables-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "root-vegetables-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4634,14 +4683,14 @@
     },
     {
       "key": "salted-dried-seafood-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "salted-dried-seafood-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4802,7 +4851,7 @@
     },
     {
       "key": "seasonings-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4812,7 +4861,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "sheets-consumption-expenditure",
@@ -4837,14 +4886,14 @@
     },
     {
       "key": "shellfish-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "shellfish-group-consumption-quantity",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4865,10 +4914,10 @@
     },
     {
       "key": "shirts-sweaters-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "shochu-consumption-expenditure",
@@ -4949,7 +4998,7 @@
     },
     {
       "key": "soap-cosmetics-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4970,14 +5019,14 @@
     },
     {
       "key": "social-expenses-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "soy-products-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5022,11 +5071,11 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "sports-goods-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5068,14 +5117,14 @@
     },
     {
       "key": "staple-prepared-foods-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
       "key": "stationery-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5138,10 +5187,10 @@
     },
     {
       "key": "supplementary-education-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "sushi-dining-consumption-expenditure",
@@ -5225,7 +5274,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "tatami-replacement-consumption-quantity",
@@ -5246,11 +5295,11 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "tea-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5299,7 +5348,7 @@
     },
     {
       "key": "tissue-toilet-paper-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5376,7 +5425,7 @@
     },
     {
       "key": "toys-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5403,18 +5452,25 @@
       "blog": false
     },
     {
-      "key": "transport-communication-expenditure-total",
-      "ranking": true,
+      "key": "transport-communication-budget-share-kakei",
+      "ranking": false,
       "theme": true,
       "area": false,
       "blog": false
     },
     {
-      "key": "transportation-group-consumption-expenditure",
-      "ranking": false,
+      "key": "transport-communication-expenditure-total",
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
+    },
+    {
+      "key": "transportation-group-consumption-expenditure",
+      "ranking": true,
+      "theme": true,
+      "area": false,
+      "blog": true
     },
     {
       "key": "travel-bag-consumption-expenditure",
@@ -5474,6 +5530,13 @@
     },
     {
       "key": "underwear-group-consumption-expenditure",
+      "ranking": true,
+      "theme": true,
+      "area": false,
+      "blog": true
+    },
+    {
+      "key": "utilities-budget-share-kakei",
       "ranking": false,
       "theme": true,
       "area": false,
@@ -5484,7 +5547,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "vacuum-cleaner-consumption-expenditure",
@@ -5509,10 +5572,10 @@
     },
     {
       "key": "vegetables-seaweed-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "vet-fee-consumption-expenditure",
@@ -5614,10 +5677,10 @@
     },
     {
       "key": "western-clothing-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "western-food-dining-consumption-expenditure",
@@ -5768,7 +5831,7 @@
     },
     {
       "key": "womens-shirts-sweaters-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5838,7 +5901,7 @@
     },
     {
       "key": "womens-underwear-group-consumption-expenditure",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false

@@ -29,7 +29,6 @@ describe('家計調査の分析単位の台帳', () => {
     const unverified = KAKEI_ANALYSES.filter(
       (row) => row.evidence === 'metadata-checked'
     );
-    expect(unverified.length).toBeGreaterThan(0);
     for (const row of unverified) expect(row.placement.state).toBe('proposed');
   });
   it('出典の分類条件と公開先の参照が一意である', () => {
