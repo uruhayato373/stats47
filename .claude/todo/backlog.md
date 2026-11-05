@@ -898,7 +898,14 @@ updated: 2026-11-01
 - **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
 - **段階 4 (2026-11-05)**: オーナーが見本を確認し、`render-ranking-images.mjs` を共通の型へ替えた (地図・棒・地方別の箱ひげ、1080×1350)。公開中の note の画像はまだ旧版のまま。残りは、管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う) ことと、使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消すこと。
 - **段階 5 (2026-11-05)**: 画像だけを差し替える `update-note-body-figures.mjs` を入れた。`a-maximum-temperature` の dry-run は通り、オーナーの更新の承認も得た。会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」) ので未更新。note には何も送っていない。
-- **次**: `a-maximum-temperature` を note のログインのある環境で `--commit` し、公開ページをスマホ幅で確かめる。その後 `note:article save` で正本の画像も入れ替える。
+- **次 (Mac で実行。更新はオーナー承認済み)**: `git pull` のあと、次の順に行う。
+  1. `npm run note:session:check` で口座が stats47 と確かめる。
+  2. `node .claude/scripts/note/update-note-body-figures.mjs --key a-maximum-temperature` で dry-run し、画像 3 枚だけが変わると確かめる。
+  3. 同じコマンドに `--commit` を付けて更新する。`UPDATED` と 4 項目の検査の成功を確かめる。
+  4. https://note.com/stats47/n/n91e96edf3950 をスマホ幅で開き、3 枚の表示と文字の読みやすさを確かめる。
+  5. 正本を入れ替える: `npm run note:article -- checkout a-maximum-temperature` → `node .claude/scripts/note/render-ranking-images.mjs a-maximum-temperature` → `npm run note:article -- save a-maximum-temperature`。
+  6. 問題があれば旧画像へ戻す。旧 URL は本文の 3 枚 `1785758058-E56siOjDtpzWauISgHe3knN0.png`・`1785758073-0DMrteVW2nJZR4AIU3d87aBO.png`・`1785758089-gziOwk519uFJ7KEAvBspbjh0.png` (`https://assets.st-note.com/img/` の下)。
+  7. 見え方が良ければ、残りのランキング記事へ広げる前にオーナーへ確認する。
 
 ### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]
