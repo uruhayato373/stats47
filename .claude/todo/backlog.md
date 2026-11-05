@@ -118,6 +118,14 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [ISSUE-LEDGER-SKILL-01] 問いの台帳を stats47 のセッションで回すスキルを作る
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs] [起票:2026-11-05] [領域:商品]
+
+- **起点**: 問いの台帳 (`data/content/issues.json`・`issue-links.json`) と検査・棚卸し・一覧 (`npm run issues:check` / `issues:coverage` / `issues:view`) はあるが、問いを足す・配線する・記事に展開する手順がどのスキルにも無く、セッションごとに一から読み直している。規約は `docs/01_技術設計/03_情報設計.md`「問いの台帳」
+- **次**: ① スキル `.claude/skills/content/manage-issue-ledger/SKILL.md` を作る (frontmatter は name / domain / description / primary_agent。primary_agent は `blog-seo-strategist` を第一候補)。手順は「状況を見る (check・coverage・view) → 下から足す (読まれているのに紐づかないページと『なぜ』型の検索語から小さな問い、`queries` に検索語) → 上から足す (白書・`evidenceTopics`、NotebookLM は Mac で `theme-researcher`) → 配線 (answers / evidence。導出できる関係は書かない) → 記事に展開 (答えの無い問いを `article-writer` 等の既存の生産スキルへ渡し、公開後に `content:sync` を回してから answers を足す) → 見送り (`status: dropped` + `dropReason`)」。ID の採番 (分野の頭文字 + 次の空き番号、新しい頭文字は `render-issue-view.mjs` の `DOMAINS` にも足す) を書く ② `check-issue-graph.mjs` に `--candidates` を足し、GSC の直近 4 週の `queries.csv` から「なぜ・理由・関係」型でまだどの問いの `queries` にも無い検索語を表示回数順に出す (テストを `issue-graph.test.mjs` に足す) ③ `node .claude/scripts/lib/sync-codex-mirror.cjs` で Codex の写しを再生成する
+- **完了条件**: `check-agent-skill-consistency.cjs` が error 0 (E1・E6・E12)、`npm run test:issue-graph`・`npm run issues:check`・`node .claude/scripts/lib/check-datasets.mjs` が通る、`--candidates` が候補を出す
+- **禁止**: 問いを分類軸にしない (URL・ナビ・タグを作らない)。台帳の写しを別ファイルに作らない
+
 ### [ISSUE-LEDGER-TOP10-01] 問いの台帳から、最初に記事にする10本を選ぶ
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:check] [起票:2026-11-05] [領域:商品]
 
