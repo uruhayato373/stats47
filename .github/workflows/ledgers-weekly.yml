@@ -1,7 +1,8 @@
-name: 🎨 Color policy ledger
+name: 🎨 Data ledgers
 
-# 指標 × 粒度の配色 (連続か 5 段階か・一方向か発散か) を R2 の値から作り直し、data/ranking/color-policies へ書き戻す。
-# 読むだけで R2 には書かない。サイトと SNS へは generate-ranking-items と sync-snapshots の既存の経路で届く。
+# 外部の値から作る台帳を作り直し、develop へ書き戻す。読むだけで R2 には書かない。
+# - 配色 (data/ranking/color-policies): R2 の値から。サイトと SNS へはデプロイの指標の生成で届く
+# - 月次の表 (data/estat/monthly/ledger.json): e-Stat カタログから。判断の無い調査が増えると最後の手順で赤になる
 # 正典: .claude/rules/metric-config-standards.md「配色の台帳」
 
 on:
@@ -11,8 +12,9 @@ on:
     branches: [develop]
     paths:
       - ".claude/scripts/metrics/build-color-policies.ts"
+      - ".claude/scripts/estat/build-monthly-ledger.mjs"
       - "packages/types/src/color-policy.ts"
-      - ".github/workflows/color-policies-weekly.yml"
+      - ".github/workflows/ledgers-weekly.yml"
   schedule:
     # JST 土曜 05:00。計測 (02:00) と note の図の台帳 (04:00) の後、週次レビューの前
     - cron: "0 20 * * 5"
@@ -21,7 +23,7 @@ permissions:
   contents: write # 台帳の commit-back
 
 concurrency:
-  group: color-policies
+  group: data-ledgers
   cancel-in-progress: false
 
 env:
@@ -47,17 +49,30 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci --ignore-scripts
 
-      - name: 🎨 Build the ledger
+      - name: 🎨 Build the colour ledger
         run: |
           npm run --silent color-policies:build
-          npm run --silent color-policies:check
+          npm run --silent color-policies:check -- --strict
 
-      - name: 📮 Commit the ledger
+      - name: 📅 Build the monthly ledger
+        id: monthly
+        continue-on-error: true
+        run: |
+          npm run --silent estat:catalog:pull
+          npm run --silent estat:monthly
+
+      - name: 📮 Commit the ledgers
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- data/ranking/color-policies/policies.json
+          git add -- data/ranking/color-policies/policies.json data/estat/monthly/ledger.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "chore(metrics): refresh the color policy ledger [skip ci]"
+          git commit -m "chore(data): refresh the color and monthly ledgers [skip ci]"
           git pull --rebase origin develop
           git push origin develop
+
+      - name: 🚦 Report the monthly ledger
+        if: steps.monthly.outcome == 'failure'
+        run: |
+          echo "::error::月次の台帳の判断に漏れがある。data/estat/monthly/decisions.json を更新する"
+          exit 1

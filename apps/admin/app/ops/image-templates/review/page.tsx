@@ -4,25 +4,23 @@ import { PanelCard, StatusBadge, type Tone } from '@/components/admin-ui';
 import { Grid, Stack } from '@/components/layout-primitives';
 import { PageHeading } from '@/components/ops/primitives';
 import { projectRoot } from '@/lib/server/project-root';
+import type { ReviewRow, ReviewStatus } from '@/lib/template-review-rows';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: '型の最終確認 — stats47 admin' };
 
-type Status = 'done' | 'review' | 'unused';
-type Sample = { label: string; light?: string; dark?: string };
-type Row = { id: string; title: string; status: Status; summary: string; samples: Sample[] };
-
-const STATUS: Record<Status, { label: string; tone: Tone }> = {
+const STATUS: Record<ReviewStatus, { label: string; tone: Tone }> = {
   review: { label: '確認待ち', tone: 'warn' },
   done: { label: '決定済み', tone: 'good' },
   unused: { label: '未使用', tone: 'neutral' },
+  undecided: { label: '方針未定', tone: 'neutral' },
 };
 const SOURCE = 'apps/admin/scripts/build-template-review.ts';
 
 function readManifest() {
   const file = path.join(projectRoot(), '.local/template-review/manifest.json');
   if (!fs.existsSync(file)) return null;
-  return JSON.parse(fs.readFileSync(file, 'utf8')) as { generatedAt: string; rows: Row[] };
+  return JSON.parse(fs.readFileSync(file, 'utf8')) as { generatedAt: string; rows: ReviewRow[] };
 }
 
 function SampleImage({ name, label }: { name?: string; label: string }) {
@@ -32,11 +30,12 @@ function SampleImage({ name, label }: { name?: string; label: string }) {
   return <img src={`/api/template-review/${name}`} alt={label} loading="lazy" className="w-full rounded-md border" />;
 }
 
-function TemplateRow({ row }: { row: Row }) {
+function TemplateRow({ row }: { row: ReviewRow }) {
   const status = STATUS[row.status];
   return (
     <PanelCard id={row.id} title={row.title} description={row.summary} action={<StatusBadge tone={status.tone}>{status.label}</StatusBadge>}>
       <Stack>
+        {row.samples.length === 0 && <p className="text-sm text-muted-foreground">見本なし</p>}
         {row.samples.map((sample) => (
           <Stack key={sample.label} gap="sm">
             <p className="text-sm font-medium">{sample.label}</p>

@@ -573,5 +573,6 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 - 判定の規則の正本は `packages/types/src/color-policy.ts`。連続が既定で、テューキーの外れ値 (四分位範囲の 3 倍の外) があるときだけ 5 段階。正負の両方があれば発散の配色。
 - 図は結合した結果だけを読む (`metricPresentation(metric, grain)`)。サイトと SNS は `item.json` の `visualization` がその結合で、`generate-ranking-items` が焼き込む。
 - 指標定義に `classification` を書かない (`check-metric-contract` が止める)。手で区切りを決めた `threshold` だけは例外で、台帳より優先する。
-- 台帳は生成物なので手で直さない。週次の `color-policies-weekly.yml` が作り直し、`npm run color-policies:check` (PR CI) が整合を検査する。判定が変わった指標が画面へ届くのは `sync-snapshots` の後。
+- 台帳は生成物なので手で直さない。週次の `ledgers-weekly.yml` が作り直し、`npm run color-policies:check` (PR CI) が整合を検査する。判定が変わった指標が画面へ届くのは、次のデプロイで指標の生成が走った後。
+- 有効な指標は台帳の行か、`skipped` の理由 (`no-values` / `too-few-areas` / `fetch-failed`) のどちらかを持つ。追加直後の指標は次の週次まで行が無く、連続の配色で描かれる (PR は警告、週次の `--strict` は失敗)。
 - 記事だけの図 (指標に結び付かない図) は台帳に行が無いので、同じ規則をその場で計算する (`applyColorPolicy`)。

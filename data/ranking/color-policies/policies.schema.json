@@ -6,7 +6,8 @@
   "required": [
     "schemaVersion",
     "summary",
-    "policies"
+    "policies",
+    "skipped"
   ],
   "additionalProperties": false,
   "properties": {
@@ -19,7 +20,8 @@
         "rows",
         "continuous",
         "stepped",
-        "diverging"
+        "diverging",
+        "skipped"
       ],
       "additionalProperties": false,
       "properties": {
@@ -36,6 +38,10 @@
           "minimum": 0
         },
         "diverging": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
           "type": "integer",
           "minimum": 0
         }
@@ -140,6 +146,31 @@
           "areaCount": {
             "type": "integer",
             "minimum": 1
+          }
+        }
+      }
+    },
+    "skipped": {
+      "description": "行の無い有効な指標と、その理由。型は ColorPolicySkip",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "metricKey",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "metricKey": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "reason": {
+            "enum": [
+              "no-values",
+              "too-few-areas",
+              "fetch-failed"
+            ]
           }
         }
       }

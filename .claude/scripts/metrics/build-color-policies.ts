@@ -13,12 +13,12 @@ import path from 'node:path';
 import { datasetPath } from '../../../config/datasets.mjs';
 import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from '../../../packages/area/src/municipalities';
 import { listAllMetrics } from '../../../packages/data-configs/src/registry';
-import { COLOR_GRAINS, colorPolicyRow, type ColorGrain, type ColorPolicyRow } from '../../../packages/types/src/color-policy';
+import { COLOR_GRAINS, colorPolicyRow, type ColorGrain, type ColorPolicyRow, type ColorPolicySkip } from '../../../packages/types/src/color-policy';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { summaryOf, type Ledger } from './check-color-policies';
 
 const ROOT = path.resolve(__dirname, '../../..');
-const LEDGER = path.join(ROOT, datasetPath('metrics.color-policies'));
+const LEDGER = path.join(ROOT, datasetPath('ranking.color-policies'));
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const CONCURRENCY = 12;
 const FETCH_TIMEOUT_MS = 20000;
@@ -62,29 +62,36 @@ async function build() {
   const wards = new Set([...split].filter((code) => !merged.has(code)));
   const metrics = listAllMetrics().filter((metric) => metric.isActive !== false);
   const rows: ColorPolicyRow[] = [];
+  const skips: ColorPolicySkip[] = [];
   let failures = 0, next = 0;
   const keep = (key: string, grain: ColorGrain) => rows.push(...previous.filter((row) => row.metricKey === key && row.grain === grain));
   await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
     while (next < metrics.length) {
       const metric = metrics[next++];
       if (next % PROGRESS_EVERY === 0) console.log(`${next} / ${metrics.length} 指標`);
+      const before = rows.length;
+      let failed = false, hasValues = false;
       const add = (grain: ColorGrain, found: ReturnType<typeof latestValues>) => {
         if (found) rows.push(colorPolicyRow(metric.key, grain, metric.visualization, found.year, found.values));
       };
       const prefecture = await fetchRows(metric.key, 'values.json');
-      if (prefecture === 'failed') { failures++; keep(metric.key, 'prefecture'); } else if (prefecture !== 'missing') add('prefecture', latestValues(prefecture, (code) => PREFECTURE_CODE.test(code)));
+      if (prefecture === 'failed') { failed = true; failures++; keep(metric.key, 'prefecture'); } else if (prefecture !== 'missing') hasValues = true, add('prefecture', latestValues(prefecture, (code) => PREFECTURE_CODE.test(code)));
       const cities = await fetchRows(metric.key, 'cities.json');
-      if (cities === 'failed') { failures++; keep(metric.key, 'municipality-merged'); keep(metric.key, 'municipality-split'); continue; }
-      if (cities === 'missing') continue;
-      add('municipality-merged', latestValues(cities, (code) => merged.has(code)));
-      // A metric without ward values cannot be split: all-zero wards are unaggregated, not zero.
-      const hasWards = cities.some((row) => wards.has(row.areaCode) && typeof row.value === 'number' && row.value !== 0);
-      if (hasWards) add('municipality-split', latestValues(cities, (code) => split.has(code)));
+      if (cities === 'failed') { failed = true; failures++; keep(metric.key, 'municipality-merged'); keep(metric.key, 'municipality-split'); }
+      else if (cities !== 'missing') {
+        hasValues = true;
+        add('municipality-merged', latestValues(cities, (code) => merged.has(code)));
+        // A metric without ward values cannot be split: all-zero wards are unaggregated, not zero.
+        const hasWards = cities.some((row) => wards.has(row.areaCode) && typeof row.value === 'number' && row.value !== 0);
+        if (hasWards) add('municipality-split', latestValues(cities, (code) => split.has(code)));
+      }
+      if (rows.length === before) skips.push({ metricKey: metric.key, reason: failed ? 'fetch-failed' : hasValues ? 'too-few-areas' : 'no-values' });
     }
   }));
   if (failures > metrics.length * 2 * MAX_FAILURE_SHARE) throw new Error(`R2 の取得失敗が多すぎる (${failures} 件)。台帳を更新しない`);
   const policies = sortRows(rows);
-  const ledger: Ledger = { schemaVersion: 1, summary: summaryOf(policies), policies };
+  const skipped = [...skips].sort((a, b) => a.metricKey.localeCompare(b.metricKey));
+  const ledger: Ledger = { schemaVersion: 1, summary: summaryOf(policies, skipped), skipped, policies };
   fs.mkdirSync(path.dirname(LEDGER), { recursive: true });
   fs.writeFileSync(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
   console.log(`配色の台帳: ${policies.length} 行・取得失敗 ${failures}`, ledger.summary);

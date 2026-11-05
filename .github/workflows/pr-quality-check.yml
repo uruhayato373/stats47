@@ -815,6 +815,13 @@ jobs:
           npx tsx .claude/scripts/metrics/check-color-policies.ts
         continue-on-error: false
 
+      - name: 📚 Monthly and Composition Ledger Gate
+        run: |
+          # 月次の判断と台帳の食い違い、テーマの積み上げと内訳の台帳のずれを止める。どちらも通信なしで動く
+          npm run estat:monthly:check
+          npm run themes:compositions:check
+        continue-on-error: false
+
       - name: 🧺 Kakei Item Classification Gate
         run: |
           # 家計調査 metric の文言が総務省の収支項目分類の「× 含まれない」例示と矛盾しないことを担保。

@@ -27,6 +27,13 @@ export interface ColorPolicyRow extends ColorPolicy {
   areaCount: number;
 }
 
+/** An active metric with no row, and why: a ledger accounts for every metric, so a gap cannot be silent. */
+export const COLOR_SKIP_REASONS = ['no-values', 'too-few-areas', 'fetch-failed'] as const;
+export interface ColorPolicySkip {
+  metricKey: string;
+  reason: (typeof COLOR_SKIP_REASONS)[number];
+}
+
 /** What a colour decision reads from a metric's definition. */
 interface AuthoredColor {
   colorScheme?: string | null;

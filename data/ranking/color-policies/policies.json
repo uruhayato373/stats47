@@ -4,8 +4,59 @@
     "rows": 3951,
     "continuous": 1684,
     "stepped": 2267,
-    "diverging": 108
+    "diverging": 108,
+    "skipped": 12
   },
+  "skipped": [
+    {
+      "metricKey": "fishery-species-catch-kelp",
+      "reason": "too-few-areas"
+    },
+    {
+      "metricKey": "fishery-species-catch-scallop",
+      "reason": "too-few-areas"
+    },
+    {
+      "metricKey": "population-migration-inter-prefecture",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-cargo-coastal-in",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-cargo-coastal-out",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-container-tonnage",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-passengers-boarding",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-passengers-landing",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-ships-total",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-vehicle-ferry-car",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-vehicle-ferry-total",
+      "reason": "no-values"
+    },
+    {
+      "metricKey": "port-vehicle-ferry-truck",
+      "reason": "no-values"
+    }
+  ],
   "policies": [
     {
       "metricKey": "abandoned-cultivated-land-area",

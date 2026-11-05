@@ -1,16 +1,17 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { latestValues } from '../build-color-policies';
-import { colorPolicyErrors } from '../check-color-policies';
+import { colorPolicyErrors, schemaDriftErrors, unaccountedMetrics } from '../check-color-policies';
 
 const row = (over = {}) => ({ metricKey: 'a', grain: 'prefecture', colorSchemeType: 'sequential', classification: { method: 'continuous' }, year: '2024', areaCount: 47, ...over }) as never;
-const ledgerOf = (policies: never[]) => ({
-  schemaVersion: 1 as const, policies,
+const ledgerOf = (policies: never[], skipped: { metricKey: string; reason: 'no-values' }[] = []) => ({
+  schemaVersion: 1 as const, policies, skipped,
   summary: {
     rows: policies.length,
     continuous: (policies as { classification: { method: string } }[]).filter((p) => p.classification.method === 'continuous').length,
     stepped: (policies as { classification: { method: string } }[]).filter((p) => p.classification.method !== 'continuous').length,
     diverging: (policies as { colorSchemeType: string }[]).filter((p) => p.colorSchemeType === 'diverging').length,
+    skipped: skipped.length,
   },
 });
 const known = (key: string) => (key === 'a' ? {} : undefined);
@@ -43,4 +44,19 @@ test('集計が行と合わなければ止める', () => {
   const ledger = ledgerOf([row()]);
   ledger.summary.continuous = 9;
   assert.match(colorPolicyErrors(ledger, known).join(), /集計/);
+});
+
+test('有効な指標は行か理由のどちらかを持つ', () => {
+  assert.deepEqual(unaccountedMetrics(ledgerOf([row()]), ['a', 'b']), ['b']);
+  assert.deepEqual(unaccountedMetrics(ledgerOf([row()], [{ metricKey: 'b', reason: 'no-values' }]), ['a', 'b']), []);
+  assert.match(colorPolicyErrors(ledgerOf([row()], [{ metricKey: 'a', reason: 'no-values' }]), known).join(), /行と理由の両方/);
+});
+
+test('Schema の値が型とずれたら止める', () => {
+  const schema = (grains: string[]) => ({ properties: {
+    policies: { items: { properties: { grain: { enum: grains } } } },
+    skipped: { items: { properties: { reason: { enum: ['no-values', 'too-few-areas', 'fetch-failed'] } } } },
+  } });
+  assert.deepEqual(schemaDriftErrors(schema(['prefecture', 'municipality-merged', 'municipality-split'])), []);
+  assert.match(schemaDriftErrors(schema(['prefecture'])).join(), /粒度/);
 });
