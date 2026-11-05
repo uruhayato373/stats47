@@ -2,14 +2,13 @@
   "schemaVersion": 1,
   "summary": {
     "articles": 429,
-    "figures": 1007,
+    "figures": 1313,
     "byValueCheck": {
-      "no-data-figure": 223,
-      "match": 9,
-      "body-unread": 73,
-      "body-differs": 73,
-      "no-year": 34,
-      "body-match": 5,
+      "no-data-figure": 272,
+      "match": 11,
+      "body-match": 82,
+      "body-differs": 16,
+      "no-year": 36,
       "unmapped": 12
     }
   },
@@ -1088,16 +1087,46 @@
       "noteUrl": "https://note.com/stats47/n/n66a286b5211b",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "agricultural-employment-population",
+      "year": "2014",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787999020-rN5Z3Dx9khsPoeX7V82AwREH.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999034-qiwg2lTkL5U6jIcsFxBCehNK.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999049-s5vwBUVEZxNghoOaWf2mTMcj.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-agricultural-output",
       "noteUrl": "https://note.com/stats47/n/ne6c7d221803a",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "agricultural-output",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787998764-VyEt0dvD5kQcHRgX6jWlwnfY.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998779-2luKa9LnQR6YcdNkmX0gfBpx.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998793-i8IhZNwdLzxUGOgjkTRobJuM.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-annual-paid-leave-11-days-or-more-ratio",
@@ -1127,80 +1156,242 @@
       "noteUrl": "https://note.com/stats47/n/n97ddfadff36a",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "average-temperature",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787998504-Fsb0Iw2kgxycSMWip14365GU.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998519-OIUiuRMX9d36wTVYj2LBzZ47.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998533-JpEWz21tX4ybxFO9YmdZInV0.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-avg-propensity-to-consume-worker-households",
       "noteUrl": "https://note.com/stats47/n/n76446d252957",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "avg-propensity-to-consume-worker-households",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787999783-ijetKGPVCJDYAZFExbBRo9IU.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999797-142WBHrDRIAnxGlgTdJb8qav.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999812-svm6PG0dQrTx2ShuBV31ZNo7.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-consumption-expenditure-multi-person-households-per-month",
       "noteUrl": "https://note.com/stats47/n/n89f8035eb53d",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "consumption-expenditure-multi-person-households-per-month",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787997734-Y4eihBgradwk0TqFtELlfnRu.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787997748-UPhjJSwplBRkQIvubEgm93D4.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787997763-0kcdIbPB4Ml7LVi69n1Q5uKy.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-convenience-store-sales",
       "noteUrl": "https://note.com/stats47/n/n86ef06aa91dc",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "convenience-store-sales",
+      "year": "2025",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788678916-kn5ONyd3W8omgPYAVjp4rzM2.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788678932-JI9N6VjwoBWMKAPQfSL4vuXc.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788678948-lCfbDP2G4mMS9dgJI67q8RkQ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-current-liabilities-balance-multi-person-households-per-household",
       "noteUrl": "https://note.com/stats47/n/nbdbde1672cc0",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+      "year": "2019",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787999527-bsRSmJFNVhXGEvgMz4LpCnPi.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999542-RV7nDxIgc2J90jklbs5zFit4.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999557-ng56FUACSTNLpOJkHcXojKGD.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-day-time-population",
       "noteUrl": "https://note.com/stats47/n/n7a494830e01d",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "day-time-population",
+      "year": "2020",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787998249-f0ZXRhOeu7tyFNdjiDqImbrl.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998264-ZzR6UXGEyQJmVvTlkdbfnH3A.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998278-RCjESPMuUWpcJ40beNDvxqL1.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-electricity-demand",
       "noteUrl": "https://note.com/stats47/n/n71b4f712bea4",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "electricity-demand",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788681441-ecj5OiXGVvgqz97PWQCwN8ZU.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788681455-cybwULSX7kEq5gHmMf3DnIaz.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788681470-TRugYwzJ5WSEvLcrhbkQ8O61.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-electricity-generation-capacity",
       "noteUrl": "https://note.com/stats47/n/n5b3dbb6c7cef",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "electricity-generation-capacity",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787999275-X0ws1GaP3DmYAbS62E5Nny4O.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999290-4uwAxgJyphaGrRDlYk3VFj2z.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787999304-7gbRpPlz4vqGUh6DCMf9dXTu.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-final-energy-consumption-per-capita",
       "noteUrl": "https://note.com/stats47/n/n1374350f7172",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "final-energy-consumption-per-capita",
+      "year": "2022",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788681740-hUfmrktqGKy1RpPucCvOMiBz.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788681755-xwoi6S2L1PXTMWJnEdNp7BCD.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788681770-RqvuBD2rnpFH30WtzyAO1JSk.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-general-households",
       "noteUrl": "https://note.com/stats47/n/nd93084c0cb0c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "general-households",
+      "year": "2020",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787996504-Th18voxFur5em2Cfs3KzqZkL.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787996519-83qvmzArduiaZR1y2Se9sf0I.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787996534-XV3yh48BeauHKGkt0F7pUQgd.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787995853-In5CkesXFo7qJUlQ6chft4AS.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787995868-mI6ezOZAaN8FDXHPRofcVdp5.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787995883-3AGU4sfa0u9bCBXrQTqgxNcE.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-kakei-aichi",
@@ -1236,8 +1427,29 @@
       "noteUrl": "https://note.com/stats47/n/n5e9502c6507c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789466138-TtayNqMIHogrRZ4JKwpCYzQe.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466153-U93pigKWChOGTdX10v4Nu7fI.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466168-HRfq3zjduBiL9DMt6bgrZye7.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466183-490rZEbuC1OnVeTytiBpHfkW.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466198-CGf4KmogMdzPtjSy98XhIcFu.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-aomori",
@@ -1273,56 +1485,203 @@
       "noteUrl": "https://note.com/stats47/n/n1d5481680c03",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789473409-hJAMKGVx0jDc3ZT2Q6fWkHFU.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473424-J6OML1RTuEQKNbakzUvWgGPH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473439-ZQxjRkPqwoaJ3z9AMYegnBDi.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473454-6i5xmHGoASDOEQLR4y3CUbsh.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473469-rcgZIsB52NPTnb819dLhiYlw.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-ehime",
       "noteUrl": "https://note.com/stats47/n/nb627534c8b66",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789466539-yh8KFufv5iGlsZj0DrXgUNkV.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466553-WhiFzNt1fTqOnP6w2SDYUm4C.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466568-i1fGxcUesbAP8olM9E7IK6ND.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466583-4H5ZDFYPij7uQfJSlUwXreKz.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466598-X4wbVqysIkPpKYQgH8GNDCW9.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-fukui",
       "noteUrl": "https://note.com/stats47/n/n18bb5a58060c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789466696-TkzjQf7DYNCWJXU5mlruZVMg.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466711-37PwEaLojFC4NiBYDnyXZuQJ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466726-3vceEFPazjVAJug59ldnBxNU.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466740-vznwGk1sDeC6Sdc0bP7VZAgT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466755-fU2xeWOzvH4tkY6SC809iJ37.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-fukuoka",
       "noteUrl": "https://note.com/stats47/n/nb7cfd81af156",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789466833-jHYXyzStE5mUGNBqCWeFiaPK.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466848-1NtXvO3yI47BlV56zcjPEwYZ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466862-V8fgU4DayIzpjRqAOWECs6xn.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466877-Zs5K1W2uwS7cdVlUM8fxnTjB.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466892-5n1g9Vyqt2CXQS0hjaKlWu4i.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-fukushima",
       "noteUrl": "https://note.com/stats47/n/n4c363c356b63",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789466973-Is3VFlx76AjivpHqQogwkr4n.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789466988-otPqpUKEuDHY1MRQfXGrT3m0.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467003-pTmeXuPMCLZkcKaHyESAUzN2.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467018-fOMS5HLrZ4huBCx6NPYsFIyw.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467033-kTZuf8FyVClE46qQwrmbSJ5x.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-gifu",
       "noteUrl": "https://note.com/stats47/n/n6136c0f13156",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789467129-d5yNK0DRFqriGB9Zb6TV8hAt.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467144-mgEobNJD7qs8yAMBUcfQIH5k.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467159-v9shLctOUBJ8MNxW4Sowe0iK.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467174-cNeHWEOAwsVXCZ2oaz15LDIr.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467189-jkqfnM4aFKQLXvlZzDTiVbsW.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-gunma",
       "noteUrl": "https://note.com/stats47/n/n1b9bf465327d",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789467274-JDrvNG2to67KfZBRacxM4iXC.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467289-7UPGrLX1DnlSTJq9FOReHM3Z.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467304-hC3r54s1HVidLM26b79YyEOg.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467319-GkDNqUEAifMRHmjF1t5ucTes.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467334-eVQOtm1ZsUpvlTG9DHKIJgaA.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-hiroshima",
@@ -1387,288 +1746,1038 @@
       "noteUrl": "https://note.com/stats47/n/n6f5ab18ba6ff",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789467710-bkIYPvVyCWRQ1oTglSijJO3m.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467724-KmtovRq39H1G7axYBzSjQTIu.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467739-w05YZqfPtBFVN2l6hbvpRkCg.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467754-KIMZFuNABbaxLkUyGWzJveVt.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467769-P9yBrfuplg4FtdSRvqVc6xij.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-ibaraki",
       "noteUrl": "https://note.com/stats47/n/n65d95575f7a5",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789467864-49UPuRazyKvtMQOsEZCgXnH0.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467879-0wBpKTnrDgMEJaeC1Xo2QISl.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467894-i7jSVp3xITuZRa48qFstQXLr.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467908-Ce8nAh4FS3ioD6jBVpRuw57l.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789467923-xGiy9lS5MhXmwnNF4bDgOET3.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-ishikawa",
       "noteUrl": "https://note.com/stats47/n/ndf2afaef16c0",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468018-MGL2ydTcBRbz1u0aStKQIChf.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468033-EbR82SADpyirMets6O3lXhcY.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468048-xDhNguk6G9RX1ATm0QW83qse.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468063-zq0Sd6bvUXMIPDmaCf4riLZW.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468077-i8rUcsbm63ptqVxJ9j7leTKz.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-iwate",
       "noteUrl": "https://note.com/stats47/n/na3020a08cef7",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468162-ThIBbXKDopnWxidqULPJ35kw.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468178-qhegOrIspftDUQR5WG23aL0x.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468193-GVB2UZgqrAtW1JRodOT35jwh.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468209-SxOUQki67Ao0TpCDWBzhd2su.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468224-hKwGYrlqv3S2a9fiHDu5PFkB.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-kagawa",
       "noteUrl": "https://note.com/stats47/n/ne69b740f702e",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468306-xOqscnWY57jNzlStCMbgDAoQ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468321-dBLY7Ps4AvnKoeGWMEXCuDxZ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468336-yKvNaFfpDZqdPkl87imhC5OW.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468351-Bf2gCSaLruARskvJ1nG98PhV.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468366-UuhVOHnYJaWSQF5L14i2ZbTd.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-kagoshima",
       "noteUrl": "https://note.com/stats47/n/n555435ada7ed",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468443-TkHWAh76P05Gp8zL9qaOEVnB.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468458-u2YJnSgHyU1zeDqhBXcL96pW.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468473-hRYTS3aclkLwg1tjFQKbd2sM.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468488-FlvHiZdArI1WgBeOPtb8swVf.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468502-l2byo4gXkfAh8peK9NqTFH1M.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-kanagawa",
       "noteUrl": "https://note.com/stats47/n/nd0326279977a",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468578-wtK50v3eI8HWPAhdiXLRbg1j.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468593-i9cwzdYqTZ5JkxpOnhL0Q7v3.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468608-b47oV1aziCQjYg5mL2GRXdUH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468623-lKG8hXcw5VICYSbPgAy410zr.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468638-aW2ARgVvcwbGMkTKsd4x6hEO.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-kochi",
       "noteUrl": "https://note.com/stats47/n/n29417de32c83",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468716-LeHhujIw386GfpJnM5D9xBTQ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468731-7UepLvSP2gMEsYzJula6hOrb.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468745-kRiUzbOjqtXJ0sh7HfVAmTLc.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468760-LU2ucwabfATJm4CV7H5jyrQk.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468775-wIh5y8eTxfrQGP79NKv3sbYg.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-kumamoto",
       "noteUrl": "https://note.com/stats47/n/n7e98a46bf791",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789806927-nceIY6O1pvm3Gag0i4RlujPh.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789806943-r075XnIiRTEaNY8pfgkqCLxj.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789806959-EHsYcfiWuj460z5NFLkU9QvT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789806974-z5am0lXr6QL9DqWwKAZtyiEV.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789806989-BU5y2pW8OfoqegLrRG6ljzYv.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-kyoto",
       "noteUrl": "https://note.com/stats47/n/n2a18f8e7098c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789473558-boAQSVdhZGqriLOg5cep64um.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473573-NZSEgea8K2rJ7nUbTGhtz591.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473588-YwFcqVatC9BWMLQTv7kGo6lS.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473603-2SzgqCvHuGp7Q8PIiZcyE9rL.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473618-T3u8XGlOQLZB5qhwcUKRspDC.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-mie",
       "noteUrl": "https://note.com/stats47/n/n8113876eaeab",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789468960-9CyIvkaj1ATiNqsndYBzJGU2.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468975-Qagds5rVc293DuvIR47UjlpL.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789468990-YHbgxn2aRtOiEe5MczuBv307.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469004-dHguSyUPaJreM7D8vZ0fhNnL.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469019-6wZLXp7PQzOeqVrBRFo3vjb2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-miyagi",
       "noteUrl": "https://note.com/stats47/n/nb479aff3cf05",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469106-9insP1QBAlkOhKEmVgMuRSNY.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469121-zhIJUEBZDtpljP3d9Mm72aec.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469136-NgPwJHo0L1fOIZh3U2skrdac.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469151-02LqlFDbSJpmzTxvrgoeGIOu.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469166-HSwkT67Om9hVPaplWUsbZF2Q.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-miyazaki",
       "noteUrl": "https://note.com/stats47/n/n7f0be4fef37c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469243-HnVpkr785dRylTJt62buD9qB.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469258-XAbeodsF3KuWwhRm2i9rYTgB.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469273-Dnvh6JyRYPe1qZa4jQc79fT5.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469288-VfBWNdQ9bklMD1Ftmxza2ejh.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469303-VPkLedzAcEGhSUvTJF3bMnlm.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-nagano",
       "noteUrl": "https://note.com/stats47/n/nb6061a164201",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469384-3jvM8ds0I9q5m42HA1wlCGNT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469400-oWYzmZILufO6eEakX0Gig14v.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469415-9G1o6IQKd4zkliW0LnBhDgMT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469430-8qvfuQDb9oZ2E4rTCtg6IWsY.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469444-Zr41t7dCzlRVjhsH2nA6DLKI.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-nagasaki",
       "noteUrl": "https://note.com/stats47/n/nd547ff50cbe6",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469537-ZK5WzsVyOkH0TNhp6Lm8b9nA.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469552-zUaCIEfkG5y21sMpwJZ4xB3O.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469566-pK9Duqrf7ajQxTlAwFIingZv.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469581-0lbPkpCXVFmjZOHucgfxz2Yi.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469596-jgDv507wWazC2YdUmFEBhGeS.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-nara",
       "noteUrl": "https://note.com/stats47/n/n366d898d8107",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469673-0vPtbdWLMlrRgJfSmIFpsNoZ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469687-7hIfyHkcN4SR2lCOAnW5gxdv.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469702-rBAC2ITU7gzqK4N9tcyowLE5.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469717-dRm6yQZfCqOosA3MHp7GLzFc.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469732-2bJMWemrosXKpBIFPOwf0a4n.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-niigata",
       "noteUrl": "https://note.com/stats47/n/ndd0bb1c14aa4",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469823-U1hIScqp2y9PgKAn7i3CkN0l.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469838-tsRvu62pKahHWEekbCXVJn0g.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469853-WsplIKZVm6j2PLnR5UO0XcH7.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469868-Qazho19Jj8tuYOLIGV2qpDMT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469882-kXMiKIfRWA2PzHeJgTqxUGla.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-oita",
       "noteUrl": "https://note.com/stats47/n/n37ab621d01ad",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789469977-xl2eiyP5UTgfaWjwNLtZIv4B.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789469991-AzmBwINVeJORnT4sxFfydHq9.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470006-MDhcIvEYJuiNRUjk7COqmHag.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470021-DIOSRnC6sgxyVWN1KJvd3toH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470036-0WwxCQsPUAB2ZMvzocJIX5kn.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-okayama",
       "noteUrl": "https://note.com/stats47/n/ne788feae75bf",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789470119-Qz1IWcokjVuTN25gJtvfmAHe.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470134-Yb3Zzr9oPEGHQsWOp0vme5Nl.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470148-V5chk8WeO6nabHp3iSTQfMKu.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470163-PMDTYunZaL14siB5J0jGNdQg.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470178-hLv9cmDafuAjq85Ezny3xIwJ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-okinawa",
       "noteUrl": "https://note.com/stats47/n/n757284230786",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789470264-PpeR7KomyFLBEIxt28TafuGA.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470279-K06sTChJqbukmOp5XMc7QRUA.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470294-6a3gboLnjUpWz2ReKTOkuGPq.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470309-cHeLmyBt6KqbGQw8o9VUxkv2.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470323-f0xi4SvZqUR3bnDGodcNY78e.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-osaka",
       "noteUrl": "https://note.com/stats47/n/n7ac1079b6f20",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789470415-p0ldE5c16DSnL8ibHW2KrFxC.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470429-Qwl9qMcRYxT6Vd0L3uypjv4k.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470444-rkCsZS9qla5oDGHKY6iXyFh1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470459-Yt97qk51JaZldVc8nzvKTGEN.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470474-CIn1kOAiFR4xjzfLPteS7HEZ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-saga",
       "noteUrl": "https://note.com/stats47/n/n1972caf5203d",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789470563-DFmL4setar8O9HNykSiBhCwn.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470577-REP8dtLog6A25fswhNWM3THI.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470592-e15x7zRGMadlocbnOUVB3EAZ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470607-cJ5A4GnIVSFeXkUdKToithuW.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470622-PojS0JkazFtLZ8TcxsYIbNq5.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-saitama",
       "noteUrl": "https://note.com/stats47/n/ne760e2866251",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789473724-kfXNAgDviCyQYMVt0dsoU2hW.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473739-Ix6z9ASun1MhO8wkBQDe5NVf.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473754-xf6wbjA2T4HsYlvRmyoSZGrq.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473770-pPSXxJyMH2FOEbdcUYatRqDQ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473785-vL4f3yDWQSMwh1G9lkKHitbE.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-shiga",
       "noteUrl": "https://note.com/stats47/n/ne5569b417135",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789470818-bnup2Cal5eHTw0EFXDfkS6tZ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470834-fYlaHg1vBKEjzkRNXFr2LQTi.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470849-AiEF532zyJ4GtOV6oDnmfILH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470864-OxpLT2vi7FgomC0V65z8EkbJ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789470879-vbwQDX6oce2Af0HCgxq95MLk.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-shimane",
       "noteUrl": "https://note.com/stats47/n/n75d68c2bb7e9",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789473883-GOP6wqpgSRMJexv3rabVCFLQ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473898-nZzjLFBWf61342GTNPIdt5D0.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473913-uZrcUM7NEba61dXmn5qHDlxJ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473927-zZDuVoJNbrHp3MXvK0li1q9f.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789473942-Q4ShGYKLg2b1Vpxtel9NFc5y.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-shizuoka",
       "noteUrl": "https://note.com/stats47/n/n35ce2a1b9248",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789471063-2gH7hk1uBVPGXQKnDjiTyYWN.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471078-yXWJLV4TtgDdpSlmMrNB9sI6.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471093-fEyuTkJLzPe9m2sYv0Kw1cID.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471108-71cvSyC8tkLIGrzYmKXehp9V.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471123-UISBsZu4Klh78fEJiCr2TcFp.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-tochigi",
       "noteUrl": "https://note.com/stats47/n/n0fd0305a6b8c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789471209-YHwSL5DCsraXBO3IhNlegT4V.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471223-Iayg8pNAWdbw0JXD7n5TokrH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471239-ExwvpWaYDQhymc2F5otPV8Un.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471254-pO6n7jtu80lAba4drJHRhNgx.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471268-876nyfNM0WprVYL1ic5GPUdJ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-tokushima",
       "noteUrl": "https://note.com/stats47/n/ne2abc0fc7530",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789471351-xQ4akF0e5VULzHw2MmAdpqNt.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471366-Q2ctr3MUOpz91XbABT7Lmgsx.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471381-6TDZA8E0Ynt7gOkrx3BcUyjp.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471396-far9OJvN3qHcKR7k28pYjhyF.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471411-IAbUq7MxOr98DlGKt4nSvWaE.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-tokyo",
       "noteUrl": "https://note.com/stats47/n/n9d384a674462",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789474038-AvTKQuXpmE5ZRf9Nln63S2Ih.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474053-Y2BNICG41fMmiJz3WAwbkrdE.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474068-2snbAzmOLcVEpr9fYI1GwFZR.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474083-HaM6qSVkPvtnBOjCEfrhUlbz.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474098-ZdBMS0f8sAa1t2ri5TEPh6VJ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-tottori",
       "noteUrl": "https://note.com/stats47/n/n24d6b689079d",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789471625-HQEnCqOykrmYeN9L0gz38Ftb.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471641-K9mVeSklNaigGBJ65WwUMd2D.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471656-C9QpBcgR7i3uwmsHkWnvAXx4.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471671-vLNHY9VlUAk5GCmfIjgF4qwi.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471687-eAgTuRnlxV2HiIzoqfOCmDFa.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-toyama",
       "noteUrl": "https://note.com/stats47/n/n13bca568c98a",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789474195-zfeKJtEpD0SlRAvXu9Yrw2qT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474210-gyidkAQPfC06IS4nZ3FtJpUx.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474225-w8EjBFLghOuZv3XtUmAdbxsl.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474240-rgqWalEsIUGAHQXTNOSDVx7u.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789474255-Aacx63iy4glX8mrGuFIvL5Cw.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-wakayama",
       "noteUrl": "https://note.com/stats47/n/ncc56ff8990d0",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789471891-lp1ZBzhxePGJcRvrFEya4WHf.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471906-rlHEOpAmvsLTIfqc8zX0kGQo.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471921-OU2BiCjNaqED5zbwPG4HY0ZJ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471936-fJoSAIwxCvTmKGFti28hRubd.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789471951-w81cZW2IBCJTUby7rMRFv5dQ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-yamagata",
       "noteUrl": "https://note.com/stats47/n/na3d645a7d50c",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789472030-CvQoiayc2FLJb13mwZ0TuldA.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472045-UYzDdmS7OtaxTN60wnLKuPFe.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472060-ElPRwhsjzS6x4i8dYFnO3ICJ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472074-D1uUkyf82hnJRsqrwvz3NFPm.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472089-gxeDXpRqOf1GMncvdCIHE8y3.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-yamaguchi",
       "noteUrl": "https://note.com/stats47/n/n88dde65e0774",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789472182-ELBdVeYuAg0j1mZ73TnaUlJy.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472196-2VEatYQewDluTsKFBi6JNyXc.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472211-Yn65JKDhrjtRZlTHp9fGdcqi.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472226-SlvCB5EjiOMawQ08qzH7Fpdu.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472241-wxu6nUEgMQKsFWaeR3kcod7B.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-kakei-yamanashi",
       "noteUrl": "https://note.com/stats47/n/n3416a225e0c6",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789472323-nkVPiHmgthMTbdYa1JpEvLO6.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472338-JGARKz7qXjoUfylib2gQ0scv.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472353-MPWp0lxDSXdauhCUzZjcoyKt.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472368-f8LpyjIR16l7hinVe3WHxXaZ.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789472383-LskFY1Vr5Oygcw7DpQ63hKqC.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "a-late-elderly-medical-expense-per-insured",
       "noteUrl": "https://note.com/stats47/n/ncd0aea7cd435",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "late-elderly-medical-expense-per-insured",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787996963-UvP2OkrWbD9LSnioj4mI1Bwe.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787996977-O1VBXko9rEe8TWcul0KqjxiI.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787996992-BOfximSwTyNoLvWEPCDI1hkZ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-main-household-ratio-main-earner-employee-commute-90min",
@@ -1737,19 +2846,30 @@
           "kind": "ranking-boxplot"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「秋田...45位」 → data: maximum-temperature=43位"
-      ]
+      "valueCheck": "match"
     },
     {
       "key": "a-minimum-wage-by-region",
       "noteUrl": "https://note.com/stats47/n/n2a465fecbdec",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "minimum-wage-by-region",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787997990-SpYVQt1XOlFKUCLa4Gq9o7N3.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998004-7JOLMTmuYQ8yEk5A3FrHxP0C.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787998019-rc4wUXg9OdlhsibHmTzxpeM5.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-new-graduate-starting-salary-university-female",
@@ -1802,8 +2922,23 @@
       "noteUrl": "https://note.com/stats47/n/nf28da95897e0",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "number-of-establishments-manufacturing",
+      "year": "2014",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787997475-t84x73ugoH5KfZrGqpFaCmSI.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787997489-G0un3qPT76K2hcWEOVjBpv4N.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787997504-ZR9j8TXPaJoBActV364LvNig.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-overseas-travel-annual-participation-rate-15plus",
@@ -1827,10 +2962,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 2,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「秋田...45位」 → data: overseas-travel-annual-participation-rate-15plus=47位",
-        "INVERSE_RANK_MISMATCH: 本文「43位...鹿児島」 → data の43位は 不明"
+        "RANK_MISMATCH: 本文「秋田...45位」 → data: overseas-travel-annual-participation-rate-15plus=47位"
       ]
     },
     {
@@ -1838,56 +2972,161 @@
       "noteUrl": "https://note.com/stats47/n/n27d2efa9bcfb",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "private-rental-housing-rent-per-3-3m2",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788679594-0F5zfkunBXSex4qrImW9YaQt.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788679875-HGNqJWEK0mfz1bwYBhLkD5ud.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788679922-w93WX0V1OQuCvqxh5gBAiUZo.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-railway-station-count",
       "noteUrl": "https://note.com/stats47/n/nadfe03f70c45",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "railway-station-count",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788680826-ipubGLFQ4fmojV6tW9HsCAyw.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788680842-DU7WTYKmcapxG02lvhZIAF1r.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788680857-3D967XTbaxAYl8meBvctLNnH.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-road-total-length",
       "noteUrl": "https://note.com/stats47/n/n2e5601e5d4e2",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "road-total-length",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788681144-JiYkgA1uMBWVDrhcNyqUK6Fa.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788681159-yuPAq3GNoRT6X1dMz5s9ZfpV.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788681174-fHTpIUB32RXSF9jicMrOACsk.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-room-utilization-rate",
       "noteUrl": "https://note.com/stats47/n/na895280512fc",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "room-utilization-rate",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787996663-g6XnYuZ3FyaRPMlo9jepiQEO.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787996678-LAwzYeUX2cgZEq1mnWofkjbM.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787996692-lGkFfErCboezS6I1QtgxZnLq.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-total-fertility-rate",
       "noteUrl": "https://note.com/stats47/n/nf4b16d26f6e8",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "total-fertility-rate",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1787997215-IX4jiMuWPQnY8zcs5kyEaLKt.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787997229-QWpalPY7rSE3JBb4GghuAnFv.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1787997244-RXaSfBTVbA0hHmZpN6vFc9KL.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-total-overnight-guests",
       "noteUrl": "https://note.com/stats47/n/n4727114e4db6",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "total-overnight-guests",
+      "year": "2024",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788678609-A8rbXNxcaw4uk3VjiC7YTMK2.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788678626-DM90kCBZhaiTdWyXSRG5nJ7F.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788678642-bo7gEip8fBDdsTju2S5AXnlI.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-vacant-housing-rate",
       "noteUrl": "https://note.com/stats47/n/n002bee397931",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "vacant-housing-rate",
+      "year": "2023",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1788679276-R8t59YSkPJ6KZQ4rH1wWBciT.png",
+          "kind": "ranking-map"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788679290-xv8KWd16GnoETw2lkL73ybZA.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1788679305-4XFlsHAKvuwMrf8IySU1eZWa.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "body-match"
     },
     {
       "key": "a-volunteer-activity-annual-participation-rate-10plus",
@@ -1937,11 +3176,7 @@
           "kind": "ranking-boxplot"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「愛知...41位」 → data: volunteer-activity-annual-participation-rate-15plus=40位"
-      ]
+      "valueCheck": "match"
     },
     {
       "key": "b-expenditure-structure",
@@ -1972,64 +3207,162 @@
       "noteUrl": "https://note.com/stats47/n/n78ffa2c7da3b",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789517100-AXmZRH4tug30pc2kNwMBPLqC.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517115-r7fRabS3kLNE9GFVzqjdCtUg.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517129-4iUN63yX7H1JaoElGmPw2BcT.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-advancement-employment",
       "noteUrl": "https://note.com/stats47/n/n2d53f8a5fbb8",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789517194-hnsOvUJz02oRLwc4Q8qNmy1r.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517209-dWYuXex84TGZtcMrf1isj5kH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517224-NtECgxKMDrHeB7kjpFJ5LQU3.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-beer-peak-month",
       "noteUrl": "https://note.com/stats47/n/n5b11edb996f3",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789517304-0rf2G8YsV5MUgWJZl3HajPoT.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517318-wl2W7qXNrdaxoc6u4HDhMnSb.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517333-gfDxNdFnBqlIY0382Ce1zjs4.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-bread-giffen",
       "noteUrl": "https://note.com/stats47/n/nc3a7ebf40516",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789517415-cjuVByNdbUKnLwqrOixSWlht.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517400-AdhxL9jcltJImiMy60geZ3Xz.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517429-vRGYz2ox5wSCjZ1DThAdpXib.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-gyoza-counting",
       "noteUrl": "https://note.com/stats47/n/n2f50bb479647",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "gyoza-frozen-consumption-expenditure",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789517529-svZgh1ViAzKDp8XwIfxLB6bS.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517515-692vHLxX7WOlBIaqA5EReU4N.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-year"
     },
     {
       "key": "b-kakei-necktie-decline",
       "noteUrl": "https://note.com/stats47/n/ncbfe818867f4",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789518277-nOaPM08ubeEjgy6J1kG39LY2.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789518292-KIWosDO49ELmQAShvMGq5ZtF.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789518306-l3Dtd9Mx2XmAVFBOn4YWNsby.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-quantity-price",
       "noteUrl": "https://note.com/stats47/n/n7ba6c516c1e9",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "rankingKey": "scallop-consumption-quantity",
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789517719-TJOWIaoyqv9pF3fCguSczAtk.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789517704-PYCau1Op7jAUhbNTWgSeJv25.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-year"
     },
     {
       "key": "b-kakei-winter-bargain",
       "noteUrl": "https://note.com/stats47/n/neb44a932f9f2",
       "isPaid": false,
       "store": "note-only",
-      "figures": [],
-      "valueCheck": "body-unread"
+      "figures": [
+        {
+          "file": "https://assets.st-note.com/img/1789516870-0oiGe4MmXhKI6dAFs81ynECk.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789516885-grd1VMuRlizxwANn9CFpfvsH.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "https://assets.st-note.com/img/1789516899-8ZyI9Np4GU20shPTrEMRliKJ.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-local-tax-vs-allocation-tax",
@@ -4271,11 +5604,10 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 6,
+      "bodyIssues": 2,
       "bodyIssueSample": [
         "RANK_MISMATCH: 本文「山形...1位」 → data: food-expenditure-ratio-multi-person-households=20位",
-        "RANK_MISMATCH: 本文「東京...1位」 → data: food-expenditure-ratio-multi-person-households=15位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...山形」 → data の1位は 兵庫"
+        "RANK_MISMATCH: 本文「東京...1位」 → data: food-expenditure-ratio-multi-person-households=15位"
       ]
     },
     {
@@ -5087,13 +6419,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 7,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...45位」 → data: sports-participation-rate-volleyball=44位",
-        "RANK_MISMATCH: 本文「長崎...43位」 → data: sports-participation-rate-volleyball=39位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...秋田」 → data の1位は 宮崎"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n03844512d58a",
@@ -5174,11 +6500,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「福島...43位」 → data: sports-participation-rate-yoga=42位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n04d95ae14bc1",
@@ -5206,11 +6528,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 3,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「愛知...2位」 → data: real-public-debt-service-ratio=8位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 北海道",
-        "INVERSE_RANK_MISMATCH: 本文「1位...静岡」 → data の1位は 北海道"
+        "RANK_MISMATCH: 本文「愛知...2位」 → data: real-public-debt-service-ratio=8位"
       ]
     },
     {
@@ -5238,12 +6558,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「44位...岡山」 → data の44位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n08eb33492a93",
@@ -5270,12 +6585,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 神奈川",
-        "INVERSE_RANK_MISMATCH: 本文「1位...沖縄」 → data の1位は 神奈川"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n0b7373c9648a",
@@ -5302,13 +6612,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「静岡...7位」 → data: sports-participation-rate-soccer=6位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 愛知",
-        "INVERSE_RANK_MISMATCH: 本文「1位...秋田」 → data の1位は 愛知"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n0e8fd0068d4e",
@@ -5377,13 +6681,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「山口...45位」 → data: sports-participation-rate-swimming=44位",
-        "RANK_MISMATCH: 本文「福岡...43位」 → data: sports-participation-rate-swimming=42位",
-        "INVERSE_RANK_MISMATCH: 本文「46位...徳島」 → data の46位は 不明"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n15ee88b5169d",
@@ -5439,13 +6737,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「山口...20位」 → data: hobby-participation-rate-instrument=19位",
-        "INVERSE_RANK_MISMATCH: 本文「44位...長崎」 → data の44位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「2位...大分」 → data の2位は 神奈川"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n16950238dfd8",
@@ -5622,13 +6914,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「鹿児島...46位」 → data: sports-participation-rate-skiing=45位",
-        "RANK_MISMATCH: 本文「福岡...43位」 → data: sports-participation-rate-skiing=42位",
-        "RANK_MISMATCH: 本文「東京...9位」 → data: sports-participation-rate-skiing=8位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n279776fbbbb1",
@@ -5655,12 +6941,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「46位...宮崎」 → data の46位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n27cb4242cb67",
@@ -5687,13 +6968,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 6,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「大阪...5位」 → data: hobby-participation-rate-shogi=3位",
-        "RANK_MISMATCH: 本文「宮崎...43位」 → data: hobby-participation-rate-shogi=40位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...長崎」 → data の1位は 香川"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n285e0ba282d0",
@@ -5720,13 +6995,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「長崎...46位」 → data: hobby-participation-rate-music-listening=44位",
-        "RANK_MISMATCH: 本文「徳島...46位」 → data: hobby-participation-rate-music-listening=44位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...沖縄」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n28943c36410a",
@@ -5809,12 +7078,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 沖縄",
-        "INVERSE_RANK_MISMATCH: 本文「1位...富山」 → data の1位は 沖縄"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n36624f1c4134",
@@ -5841,11 +7105,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n3908e5981967",
@@ -5943,13 +7203,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「大阪...39位」 → data: sports-participation-rate-ground-golf=38位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 鹿児島",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 鹿児島"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n3e67c2f80ec1",
@@ -5976,13 +7230,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 群馬",
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 群馬",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 群馬"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n3e69a23bb946",
@@ -6009,13 +7257,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「大阪...34位」 → data: sports-participation-rate-basketball=32位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...宮崎」 → data の1位は 秋田",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 秋田"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n3f65c01be9a8",
@@ -6114,13 +7356,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「兵庫...4位」 → data: hobby-participation-rate-knitting=3位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 北海道",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 北海道"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n4dae901ea3e8",
@@ -6172,11 +7408,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n5158c5766a07",
@@ -6232,13 +7464,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「44位...徳島」 → data の44位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 愛知",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 愛知"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n523b6fbeabdf",
@@ -6266,11 +7492,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 7,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「神奈川...41位」 → data: sports-participation-rate-baseball=4位",
-        "RANK_MISMATCH: 本文「沖縄...3位」 → data: sports-participation-rate-baseball=2位",
-        "INVERSE_RANK_MISMATCH: 本文「3位...沖縄」 → data の3位は 不明"
+        "RANK_MISMATCH: 本文「神奈川...41位」 → data: sports-participation-rate-baseball=4位"
       ]
     },
     {
@@ -6298,13 +7522,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 6,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「45位...長野」 → data の45位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「43位...長崎」 → data の43位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...宮城」 → data の1位は 神奈川"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n567416b632f6",
@@ -6395,13 +7613,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 8,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...42位」 → data: hobby-participation-rate-flower-arrangement=40位",
-        "RANK_MISMATCH: 本文「神奈川...43位」 → data: hobby-participation-rate-flower-arrangement=40位",
-        "RANK_MISMATCH: 本文「千葉...46位」 → data: hobby-participation-rate-flower-arrangement=44位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n5867882dd7ab",
@@ -6428,12 +7640,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「大分...43位」 → data: hobby-participation-rate-writing=42位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...佐賀」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n598a096ecbff",
@@ -6460,13 +7667,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「44位...富山」 → data の44位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 神奈川",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 神奈川"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n5ced125edb74",
@@ -6489,13 +7690,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 6,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「宮崎...5位」 → data: sports-participation-rate-golf=4位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...鹿児島」 → data の1位は 愛知",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 愛知"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n5ddcfb6bf233",
@@ -6522,13 +7717,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 6,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...36位」 → data: hobby-participation-rate-calligraphy=34位",
-        "INVERSE_RANK_MISMATCH: 本文「43位...愛媛」 → data の43位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...島根」 → data の1位は 佐賀"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n5f183fcf5b97",
@@ -6580,13 +7769,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「44位...愛媛」 → data の44位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...沖縄」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...富山」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n67729e8be7c4",
@@ -6613,13 +7796,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「46位...徳島」 → data の46位は 不明",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 宮城",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 宮城"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n68f5e09c8d62",
@@ -6683,11 +7860,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「43位...愛媛」 → data の43位は 不明"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n73a4d300e045",
@@ -6722,11 +7895,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...佐賀」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n7ea3a816d39b",
@@ -6753,13 +7922,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「千葉...11位」 → data: travel-leisure-annual-participation-rate-15plus=10位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 埼玉",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 埼玉"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n7ff099157abd",
@@ -6786,11 +7949,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「徳島...43位」 → data: sports-participation-rate-jogging=42位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n80e58a01f660",
@@ -6840,11 +7999,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 7,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...1位」 → data: overseas-travel-annual-participation-rate-10plus=9位",
-        "RANK_MISMATCH: 本文「東京...12位」 → data: overseas-travel-annual-participation-rate-10plus=9位",
-        "RANK_MISMATCH: 本文「奈良...44位」 → data: overseas-travel-annual-participation-rate-10plus=34位"
+        "RANK_MISMATCH: 本文「東京...1位」 → data: overseas-travel-annual-participation-rate-10plus=9位"
       ]
     },
     {
@@ -6893,13 +8050,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 7,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「三重...46位」 → data: sports-participation-rate-judo=44位",
-        "RANK_MISMATCH: 本文「山梨...45位」 → data: sports-participation-rate-judo=44位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...山形」 → data の1位は 山口"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n8df3cf170cf4",
@@ -6927,11 +8078,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 6,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「青森...40位」 → data: sports-participation-rate-softball=47位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 山口",
-        "INVERSE_RANK_MISMATCH: 本文「1位...宮崎」 → data の1位は 山口"
+        "RANK_MISMATCH: 本文「青森...40位」 → data: sports-participation-rate-softball=47位"
       ]
     },
     {
@@ -7005,13 +8154,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 沖縄",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 沖縄",
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 沖縄"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n991a75be91ce",
@@ -7038,13 +8181,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「石川...12位」 → data: hobby-participation-rate-video-games=11位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 愛知",
-        "INVERSE_RANK_MISMATCH: 本文「1位...佐賀」 → data の1位は 愛知"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n99561600d4fe",
@@ -7125,13 +8262,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「滋賀...5位」 → data: hobby-participation-rate-painting=4位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...佐賀」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...島根」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-na21015ac366d",
@@ -7158,13 +8289,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 9,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「福岡...45位」 → data: sports-participation-rate-kendo=41位",
-        "RANK_MISMATCH: 本文「三重...43位」 → data: sports-participation-rate-kendo=41位",
-        "INVERSE_RANK_MISMATCH: 本文「45位...福岡」 → data の45位は 不明"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-na25ccb15a6cb",
@@ -7191,11 +8316,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...群馬」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-na2720854b1d9",
@@ -7222,13 +8343,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 北海道",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 北海道",
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 北海道"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-naa474d085c7b",
@@ -7255,13 +8370,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 広島",
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 広島",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 広島"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nabd65a1c893d",
@@ -7288,12 +8397,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「千葉...37位」 → data: hobby-participation-rate-art-appreciation=36位",
-        "RANK_MISMATCH: 本文「三重...43位」 → data: hobby-participation-rate-art-appreciation=42位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nafc693255794",
@@ -7320,13 +8424,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「福岡...3位」 → data: hobby-participation-rate-western-dance=2位",
-        "RANK_MISMATCH: 本文「鳥取...9位」 → data: hobby-participation-rate-western-dance=6位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nb16c0b751d01",
@@ -7388,11 +8486,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nbedecc99f3a3",
@@ -7419,13 +8513,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 6,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「佐賀...34位」 → data: hobby-participation-rate-pottery=31位",
-        "RANK_MISMATCH: 本文「京都...5位」 → data: hobby-participation-rate-pottery=4位",
-        "INVERSE_RANK_MISMATCH: 本文「45位...徳島」 → data の45位は 不明"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nbf1373427ca3",
@@ -7453,10 +8541,8 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 3,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「佐賀...13位」 → data: study-participation-rate-computer=12位",
-        "RANK_MISMATCH: 本文「沖縄...18位」 → data: study-participation-rate-computer=17位",
         "RANK_MISMATCH: 本文「宮城...38位」 → data: study-participation-rate-computer=10位"
       ]
     },
@@ -7485,12 +8571,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nc18fa33ec65e",
@@ -7538,12 +8619,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...京都」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ncaddeaf3e2ff",
@@ -7571,11 +8647,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 8,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「鹿児島...37位」 → data: sports-participation-rate-table-tennis=35位",
-        "RANK_MISMATCH: 本文「宮崎...1位」 → data: sports-participation-rate-table-tennis=46位",
-        "INVERSE_RANK_MISMATCH: 本文「47位...新潟」 → data の47位は 青森"
+        "RANK_MISMATCH: 本文「宮崎...1位」 → data: sports-participation-rate-table-tennis=46位"
       ]
     },
     {
@@ -7660,13 +8734,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...群馬」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...北海道」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nd5f8b5072cdb",
@@ -7701,12 +8769,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 愛知",
-        "INVERSE_RANK_MISMATCH: 本文「1位...京都」 → data の1位は 愛知"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ndc600ddb7c44",
@@ -7846,12 +8909,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...京都」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ne4a6ec30706a",
@@ -7878,11 +8936,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ne5b9d2b01255",
@@ -7909,13 +8963,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 10,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...3位」 → data: hobby-participation-rate-go=2位",
-        "RANK_MISMATCH: 本文「新潟...4位」 → data: hobby-participation-rate-go=2位",
-        "RANK_MISMATCH: 本文「長野...5位」 → data: hobby-participation-rate-go=2位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ne62fa955bcff",
@@ -7943,11 +8991,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 5,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「埼玉...1位」 → data: travel-leisure-annual-participation-rate-10plus=10位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...埼玉」 → data の1位は 愛知",
-        "INVERSE_RANK_MISMATCH: 本文「1位...京都」 → data の1位は 愛知"
+        "RANK_MISMATCH: 本文「埼玉...1位」 → data: travel-leisure-annual-participation-rate-10plus=10位"
       ]
     },
     {
@@ -8000,13 +9046,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 3,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 広島",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 広島",
-        "INVERSE_RANK_MISMATCH: 本文「1位...秋田」 → data の1位は 広島"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nead586305cdb",
@@ -8033,13 +9073,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 5,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 佐賀",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 佐賀",
-        "INVERSE_RANK_MISMATCH: 本文「1位...香川」 → data の1位は 佐賀"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ned30a382334d",
@@ -8074,13 +9108,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...広島」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京",
-        "INVERSE_RANK_MISMATCH: 本文「1位...秋田」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nf0c533293f5b",
@@ -8108,11 +9136,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 3,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「神奈川...3位」 → data: hobby-participation-rate-classical-music=2位",
-        "RANK_MISMATCH: 本文「富山...7位」 → data: hobby-participation-rate-classical-music=6位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...神奈川」 → data の1位は 東京"
+        "RANK_MISMATCH: 本文「神奈川...3位」 → data: hobby-participation-rate-classical-music=2位"
       ]
     },
     {
@@ -8141,11 +9167,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 3,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...1位」 → data: study-participation-rate-home-economics=2位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...大阪」 → data の1位は 京都",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 京都"
+        "RANK_MISMATCH: 本文「東京...1位」 → data: study-participation-rate-home-economics=2位"
       ]
     },
     {
@@ -8173,12 +9197,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「山口...43位」 → data: hobby-participation-rate-popular-music=41位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...沖縄」 → data の1位は 東京"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nf5b4ced7a736",
@@ -8202,11 +9221,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 4,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「滋賀...10位」 → data: volunteer-activity-annual-participation-rate-10plus=4位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...東京」 → data の1位は 島根",
-        "INVERSE_RANK_MISMATCH: 本文「1位...京都」 → data の1位は 島根"
+        "RANK_MISMATCH: 本文「滋賀...10位」 → data: volunteer-activity-annual-participation-rate-10plus=4位"
       ]
     },
     {
@@ -8230,13 +9247,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 4,
-      "bodyIssueSample": [
-        "INVERSE_RANK_MISMATCH: 本文「1位...高知」 → data の1位は 埼玉",
-        "INVERSE_RANK_MISMATCH: 本文「1位...鹿児島」 → data の1位は 埼玉",
-        "INVERSE_RANK_MISMATCH: 本文「1位...福井」 → data の1位は 埼玉"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nfa4057b9b8de",
@@ -8264,10 +9275,8 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 8,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「栃木...44位」 → data: hobby-participation-rate-tea-ceremony=42位",
-        "RANK_MISMATCH: 本文「京都...5位」 → data: hobby-participation-rate-tea-ceremony=4位",
         "RANK_MISMATCH: 本文「京都...1位」 → data: hobby-participation-rate-tea-ceremony=4位"
       ]
     },
@@ -8297,10 +9306,9 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 2,
+      "bodyIssues": 1,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「沖縄...41位」 → data: hobby-participation-rate-home-movie=24位",
-        "INVERSE_RANK_MISMATCH: 本文「1位...愛知」 → data の1位は 東京"
+        "RANK_MISMATCH: 本文「沖縄...41位」 → data: hobby-participation-rate-home-movie=24位"
       ]
     },
     {
