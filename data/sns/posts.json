@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 1010,
-    "nextId": 1196
+    "count": 1011,
+    "nextId": 1197
   },
   "posts": [
     {
