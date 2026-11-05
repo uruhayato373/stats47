@@ -26,7 +26,7 @@ import { checkArticleFactual } from '../lib/article-factual-check.mjs';
 import { R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { datasetPath } from '../../../config/datasets.mjs';
 import { readArticleLedger } from './lib/article-ledger.mjs';
-import { createR2Store } from './lib/cover-storage.mjs';
+import { createR2Store, fetchNoteDetail } from './lib/cover-storage.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const LEDGER = path.join(ROOT, datasetPath('note.body-figures'));
@@ -49,17 +49,27 @@ const HEADING_KINDS = [
 ];
 
 /** 本文の画像参照を、記事ディレクトリからの相対パスと直前の見出しで返す */
-export function bodyImagesOf(markdown) {
+export function bodyImagesOf(markdown, { remote = false } = {}) {
   const seen = new Map();
   let heading = '';
   for (const line of markdown.split('\n')) {
     if (/^#{2,4}\s/.test(line)) heading = line.replace(/^#+\s*/, '');
     for (const m of line.matchAll(/!\[[^\]]*\]\(([^)\s]+)\)/g)) {
       const file = m[1].replace(/^\.\//, '');
-      if (!/^https?:/.test(file) && !seen.has(file)) seen.set(file, heading);
+      if ((remote || !/^https?:/.test(file)) && !seen.has(file)) seen.set(file, heading);
     }
   }
   return [...seen].map(([file, section]) => ({ file, section }));
+}
+
+/** note.com の本文 HTML を、見出しと画像と段落の順だけ残した Markdown にする */
+export function noteHtmlToMarkdown(html) {
+  return html
+    .replace(/<figure[^>]*>\s*<img[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/figure>/g, (_, src) => `\n![](${src.split('?')[0]})\n`)
+    .replace(/<img[^>]*src="([^"]+)"[^>]*>/g, (_, src) => `\n![](${src.split('?')[0]})\n`)
+    .replace(/<h([2-4])[^>]*>([\s\S]*?)<\/h\1>/g, (_, level, text) => `\n${'#'.repeat(Number(level))} ${text}\n`)
+    .replace(/<\/(p|li|blockquote)>/g, '\n')
+    .replace(/<[^>]+>/g, '');
 }
 
 /** 台帳の stats47Targets から指標キーを 1 つ読む。複数を指す記事は指標を決められない */
@@ -111,6 +121,22 @@ const fetchWithRetry = async (url) => {
   throw Error(`取得できない: ${url}`);
 };
 
+/**
+ * 順位の不一致のうち、同値の県の並べ方の違いだけのものか。note の旧記事は同値にも通し番号を振っているので、
+ * 書かれた順位が同値の県の順位の範囲に入れば誤りではない。
+ */
+export function isTieNotation(issue, rows) {
+  const m = /本文「(?:(\S{2,3}?)\.\.\.(\d+)位|(\d+)位\.\.\.(\S{2,3}?))」/.exec(issue);
+  if (!m) return false;
+  const pref = m[1] ?? m[4];
+  const stated = Number(m[2] ?? m[3]);
+  const row = rows.find((r) => r.areaName.startsWith(pref));
+  if (!row) return false;
+  const above = rows.filter((r) => r.value > row.value).length;
+  const tied = rows.filter((r) => r.value === row.value).length;
+  return tied > 1 && stated > above && stated <= above + tied;
+}
+
 /** 指標の 1 年分を作業用の data/ に置いて本文の順位・値を照らし、合わない主張の数を返す */
 async function countBodyClaimIssues(draft, rankingKey, rows) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'note-figure-'));
@@ -120,8 +146,9 @@ async function countBodyClaimIssues(draft, rankingKey, rows) {
     const sorted = [...rows].sort((a, b) => b.value - a.value);
     const data = sorted.map((r) => ({ areaName: r.areaName, rank: sorted.findIndex((o) => o.value === r.value) + 1, value: r.value, label, unit: r.unit ?? '' }));
     fs.writeFileSync(path.join(dir, 'ranking.json'), JSON.stringify(data));
-    const { blockers } = checkArticleFactual(draft, dir);
-    return { count: blockers.length, sample: blockers.slice(0, 3) };
+    // 逆引き (「1位…秋田」) は同じ文の別の県を拾う。実物で確かめた 67 本はどれも題名の 1 位が今の値と一致していたので数えない
+    const issues = checkArticleFactual(draft, dir).blockers.filter((issue) => !issue.startsWith('INVERSE_RANK_MISMATCH') && !isTieNotation(issue, rows));
+    return { count: issues.length, sample: issues.slice(0, 3) };
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -133,19 +160,27 @@ const yearRows = (key, year) => {
   return valuesCache.get(key).then((rows) => (rows ?? []).filter((r) => String(r.yearCode) === String(year) && r.value !== null && /^\d{2}000$/.test(r.areaCode) && r.areaCode !== '00000'));
 };
 
+/** 本文が note.com にしか無い記事 (すべて無料) を公開 API から読む */
+async function readNoteBody(article) {
+  const id = /\/n\/(n[a-f0-9]+)/.exec(article.noteUrl ?? '')?.[1];
+  if (!id) return null;
+  const detail = await fetchNoteDetail(id).catch(() => null);
+  return detail?.body ? noteHtmlToMarkdown(detail.body) : null;
+}
+
 async function inspectArticle(article, readFile) {
   const entry = { key: article.key, noteUrl: article.noteUrl, isPaid: Boolean(article.isPaid), store: article.body.store };
-  if (article.body.store === 'note-only' || !article.body.manifest) return { ...entry, figures: [], valueCheck: 'body-not-in-r2' };
-  const draft = await readFile(article, 'draft.md');
-  if (draft === null) return { ...entry, figures: [], valueCheck: 'body-not-in-r2' };
-  const provenanceText = await readFile(article, 'data-provenance.json');
+  const noteOnly = article.body.store === 'note-only' || !article.body.manifest;
+  const draft = noteOnly ? await readNoteBody(article) : await readFile(article, 'draft.md');
+  if (draft === null) return { ...entry, figures: [], valueCheck: 'body-unread' };
+  const provenanceText = noteOnly ? null : await readFile(article, 'data-provenance.json');
   const provenance = provenanceText ? JSON.parse(provenanceText) : null;
-  const chartText = await readFile(article, 'chart-data.json');
+  const chartText = noteOnly ? null : await readFile(article, 'chart-data.json');
   const chart = chartText ? JSON.parse(chartText) : null;
   const rankingKey = provenance?.rankingKey ?? chart?._meta?.rankingKey ?? rankingKeyOfTargets(article.stats47Targets);
   const year = String(provenance?.year ?? chart?._meta?.year ?? '') || yearOfTitle(article.title);
   const charts = Array.isArray(provenance?.charts) ? provenance.charts : [];
-  const figures = bodyImagesOf(draft).map(({ file, section }) => ({ file, kind: figureKindOf(file, charts, section, Boolean(rankingKey)) }));
+  const figures = bodyImagesOf(draft, { remote: noteOnly }).map(({ file, section }) => ({ file, kind: figureKindOf(file, charts, section, Boolean(rankingKey)) }));
   const hasDataFigure = figures.some((f) => f.kind !== 'diagram');
   if (!rankingKey) return { ...entry, figures, valueCheck: hasDataFigure ? 'unmapped' : 'no-data-figure' };
   if (!year) return { ...entry, rankingKey, figures, valueCheck: 'no-year' };

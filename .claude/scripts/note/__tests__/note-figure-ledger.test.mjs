@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bodyImagesOf, countChangedValues, figureKindOf, rankingKeyOfTargets, yearOfTitle } from '../build-note-figure-ledger.mjs';
+import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfTargets, yearOfTitle } from '../build-note-figure-ledger.mjs';
 
 test('本文の画像を直前の見出しと結び、./ と外部 URL と重複を除く', () => {
   const md = '## 【コロプレス地図】分布\n![](./images/image-01.png)\n## 上位\n![a](images/image-02.png)\n![](https://x.test/a.png)\n![](images/image-01.png)';
@@ -37,4 +37,19 @@ test('固定コピーの丸めの差は許し、それを超える差は県の�
   assert.equal(countChangedValues([{ area_code: '01000', value: 36.2 }], observed), 0);
   assert.equal(countChangedValues([{ area_code: '02000', value: 36.2 }], observed), 1);
   assert.equal(countChangedValues([{ area_code: '99000', value: 1 }], observed), null);
+});
+
+test('同値の県の通し番号は誤りに数えず、同値の範囲を外れる順位は残す', () => {
+  const rows = [{ areaName: '東京都', value: 3 }, { areaName: '神奈川県', value: 2 }, { areaName: '大阪府', value: 2 }, { areaName: '福岡県', value: 1 }];
+  assert.equal(isTieNotation('RANK_MISMATCH: 本文「大阪...3位」 → data: x=2位', rows), true);
+  assert.equal(isTieNotation('INVERSE_RANK_MISMATCH: 本文「3位...大阪」 → data の3位は 不明', rows), true);
+  assert.equal(isTieNotation('RANK_MISMATCH: 本文「大阪...4位」 → data: x=2位', rows), false);
+  assert.equal(isTieNotation('RANK_MISMATCH: 本文「福岡...3位」 → data: x=4位', rows), false);
+});
+
+test('note.com の本文 HTML から見出しと画像を読み、画像の順と見出しを結ぶ', () => {
+  const html = '<h2 name="a">【コロプレス地図】分布</h2><figure name="b"><img src="https://assets.st-note.com/x.png?w=1"><figcaption></figcaption></figure><p>東京都は1位</p>';
+  const md = noteHtmlToMarkdown(html);
+  assert.deepEqual(bodyImagesOf(md, { remote: true }), [{ file: 'https://assets.st-note.com/x.png', section: '【コロプレス地図】分布' }]);
+  assert.match(md, /東京都は1位/);
 });

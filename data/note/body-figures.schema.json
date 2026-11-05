@@ -31,7 +31,7 @@
           "rankingKey": { "type": "string" },
           "year": { "type": "string" },
           "valueCheck": {
-            "enum": ["match", "body-match", "changed", "body-differs", "no-year", "year-gone", "unmapped", "no-data-figure", "body-not-in-r2"]
+            "enum": ["match", "body-match", "changed", "body-differs", "no-year", "year-gone", "unmapped", "no-data-figure", "body-unread"]
           },
           "changedPrefectures": { "type": "integer", "minimum": 1 },
           "bodyIssues": { "type": "integer", "minimum": 1 },

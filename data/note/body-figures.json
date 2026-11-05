@@ -6,7 +6,7 @@
     "byValueCheck": {
       "no-data-figure": 223,
       "match": 9,
-      "body-not-in-r2": 73,
+      "body-unread": 73,
       "body-differs": 73,
       "no-year": 34,
       "body-match": 5,
@@ -1089,7 +1089,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-agricultural-output",
@@ -1097,7 +1097,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-annual-paid-leave-11-days-or-more-ratio",
@@ -1128,7 +1128,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-avg-propensity-to-consume-worker-households",
@@ -1136,7 +1136,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-consumption-expenditure-multi-person-households-per-month",
@@ -1144,7 +1144,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-convenience-store-sales",
@@ -1152,7 +1152,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-current-liabilities-balance-multi-person-households-per-household",
@@ -1160,7 +1160,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-day-time-population",
@@ -1168,7 +1168,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-electricity-demand",
@@ -1176,7 +1176,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-electricity-generation-capacity",
@@ -1184,7 +1184,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-final-energy-consumption-per-capita",
@@ -1192,7 +1192,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-general-households",
@@ -1200,7 +1200,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-aichi",
@@ -1237,7 +1237,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-aomori",
@@ -1274,7 +1274,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-ehime",
@@ -1282,7 +1282,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-fukui",
@@ -1290,7 +1290,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-fukuoka",
@@ -1298,7 +1298,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-fukushima",
@@ -1306,7 +1306,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-gifu",
@@ -1314,7 +1314,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-gunma",
@@ -1322,7 +1322,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-hiroshima",
@@ -1388,7 +1388,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-ibaraki",
@@ -1396,7 +1396,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-ishikawa",
@@ -1404,7 +1404,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-iwate",
@@ -1412,7 +1412,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-kagawa",
@@ -1420,7 +1420,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-kagoshima",
@@ -1428,7 +1428,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-kanagawa",
@@ -1436,7 +1436,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-kochi",
@@ -1444,7 +1444,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-kumamoto",
@@ -1452,7 +1452,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-kyoto",
@@ -1460,7 +1460,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-mie",
@@ -1468,7 +1468,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-miyagi",
@@ -1476,7 +1476,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-miyazaki",
@@ -1484,7 +1484,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-nagano",
@@ -1492,7 +1492,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-nagasaki",
@@ -1500,7 +1500,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-nara",
@@ -1508,7 +1508,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-niigata",
@@ -1516,7 +1516,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-oita",
@@ -1524,7 +1524,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-okayama",
@@ -1532,7 +1532,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-okinawa",
@@ -1540,7 +1540,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-osaka",
@@ -1548,7 +1548,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-saga",
@@ -1556,7 +1556,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-saitama",
@@ -1564,7 +1564,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-shiga",
@@ -1572,7 +1572,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-shimane",
@@ -1580,7 +1580,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-shizuoka",
@@ -1588,7 +1588,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-tochigi",
@@ -1596,7 +1596,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-tokushima",
@@ -1604,7 +1604,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-tokyo",
@@ -1612,7 +1612,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-tottori",
@@ -1620,7 +1620,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-toyama",
@@ -1628,7 +1628,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-wakayama",
@@ -1636,7 +1636,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-yamagata",
@@ -1644,7 +1644,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-yamaguchi",
@@ -1652,7 +1652,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-kakei-yamanashi",
@@ -1660,7 +1660,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-late-elderly-medical-expense-per-insured",
@@ -1668,7 +1668,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-main-household-ratio-main-earner-employee-commute-90min",
@@ -1749,7 +1749,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-new-graduate-starting-salary-university-female",
@@ -1803,7 +1803,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-overseas-travel-annual-participation-rate-15plus",
@@ -1839,7 +1839,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-railway-station-count",
@@ -1847,7 +1847,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-road-total-length",
@@ -1855,7 +1855,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-room-utilization-rate",
@@ -1863,7 +1863,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-total-fertility-rate",
@@ -1871,7 +1871,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-total-overnight-guests",
@@ -1879,7 +1879,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-vacant-housing-rate",
@@ -1887,7 +1887,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "a-volunteer-activity-annual-participation-rate-10plus",
@@ -1973,7 +1973,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-advancement-employment",
@@ -1981,7 +1981,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-beer-peak-month",
@@ -1989,7 +1989,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-bread-giffen",
@@ -1997,7 +1997,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-gyoza-counting",
@@ -2005,7 +2005,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-necktie-decline",
@@ -2013,7 +2013,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-quantity-price",
@@ -2021,7 +2021,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-kakei-winter-bargain",
@@ -2029,7 +2029,7 @@
       "isPaid": false,
       "store": "note-only",
       "figures": [],
-      "valueCheck": "body-not-in-r2"
+      "valueCheck": "body-unread"
     },
     {
       "key": "b-local-tax-vs-allocation-tax",
