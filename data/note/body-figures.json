@@ -4,12 +4,12 @@
     "articles": 429,
     "figures": 1313,
     "byValueCheck": {
-      "no-data-figure": 272,
-      "match": 11,
-      "body-match": 82,
-      "body-differs": 16,
-      "no-year": 36,
-      "unmapped": 12
+      "no-data-figure": 275,
+      "match": 39,
+      "body-match": 96,
+      "body-differs": 2,
+      "no-year": 1,
+      "product-sample": 16
     }
   },
   "articles": [
@@ -2961,11 +2961,7 @@
           "kind": "ranking-boxplot"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「秋田...45位」 → data: overseas-travel-annual-participation-rate-15plus=47位"
-      ]
+      "valueCheck": "match"
     },
     {
       "key": "a-private-rental-housing-rent-per-3-3m2",
@@ -3302,7 +3298,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-necktie-decline",
@@ -3341,7 +3337,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "b-kakei-winter-bargain",
@@ -3445,13 +3441,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "annual-income-per-household",
+      "year": "2019",
       "figures": [
         {
           "file": "images/annual-income-per-household.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a06",
@@ -3529,13 +3526,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "domestic-student-remittance-consumption-expenditure",
+      "year": "2024",
       "figures": [
         {
           "file": "images/domestic-student-remittance-consumption-expenditure.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a13",
@@ -3560,13 +3558,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "current-savings-balance-multi-person-households",
+      "year": "2014",
       "figures": [
         {
           "file": "images/current-savings-balance-multi-person-households.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a17",
@@ -3574,13 +3573,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "owner-occupied-housing-ratio",
+      "year": "2023",
       "figures": [
         {
           "file": "images/owner-occupied-housing-ratio.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a19",
@@ -3609,13 +3609,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "sex-ratio-age-20-39",
+      "year": "2020",
       "figures": [
         {
           "file": "images/sex-ratio-age-20-39.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a26",
@@ -3623,13 +3624,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "heatstroke-deaths",
+      "year": "2024",
       "figures": [
         {
           "file": "images/heatstroke-deaths.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a31",
@@ -3637,13 +3639,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "nonprimary-enterprises-count",
+      "year": "2021",
       "figures": [
         {
           "file": "images/nonprimary-enterprises-count.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a32",
@@ -3651,6 +3654,7 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "unemployment-rate",
+      "year": "2020",
       "figures": [
         {
           "file": "images/per-capita-prefectural-income-h27.png",
@@ -3661,7 +3665,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a36",
@@ -3703,13 +3707,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "mothers-age-at-first-birth",
+      "year": "2024",
       "figures": [
         {
           "file": "images/mothers-age-at-first-birth.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a45",
@@ -3717,13 +3722,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "child-abuse-consultation-cases",
+      "year": "2023",
       "figures": [
         {
           "file": "images/child-abuse-consultation-cases.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a49",
@@ -3731,13 +3737,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "deaths-cerebral-infarction-per-100k",
+      "year": "2024",
       "figures": [
         {
           "file": "images/deaths-cerebral-infarction-per-100k.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-dev-a51",
@@ -3762,13 +3769,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "low-elevation-population-ratio-5m",
+      "year": "2020",
       "figures": [
         {
           "file": "images/low-elevation-population-ratio-5m.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-inc-a05",
@@ -4566,13 +4574,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "financial-literacy-correct-rate",
+      "year": "2022",
       "figures": [
         {
           "file": "images/financial-literacy-correct-rate.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-mh-a10",
@@ -4662,13 +4671,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "high-school-club-per100-rugby-male",
+      "year": "2025",
       "figures": [
         {
           "file": "images/high-school-club-per100-rugby-male.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a10",
@@ -4843,13 +4853,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "public-gymnasium-count-per-million",
+      "year": "2021",
       "figures": [
         {
           "file": "images/public-gymnasium-count-per-million.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a19",
@@ -4874,13 +4885,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "broadcast-media-time-all",
+      "year": "2021",
       "figures": [
         {
           "file": "images/broadcast-media-time-all.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a21",
@@ -4978,13 +4990,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "primary-school-commute-time-weekday",
+      "year": "2021",
       "figures": [
         {
           "file": "images/primary-school-commute-time-weekday.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a27",
@@ -5009,13 +5022,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "engel-coefficient",
+      "year": "2024",
       "figures": [
         {
           "file": "images/engel-coefficient.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a29",
@@ -5040,13 +5054,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "fresh-vegetables-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/fresh-vegetables-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a31",
@@ -5103,13 +5118,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "fresh-fruit-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/fresh-fruit-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a33",
@@ -5146,13 +5162,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "fresh-seafood-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/fresh-seafood-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a35",
@@ -5181,13 +5198,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "shellfish-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/shellfish-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a37",
@@ -5258,13 +5276,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "milk-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/milk-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a41",
@@ -5280,13 +5299,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "confectionery-consumption-expenditure",
+      "year": "2024",
       "figures": [
         {
           "file": "images/confectionery-consumption-expenditure.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a43",
@@ -5294,13 +5314,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "natto-consumption-expenditure",
+      "year": "2024",
       "figures": [
         {
           "file": "images/natto-consumption-expenditure.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a44",
@@ -5308,13 +5329,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "instant-noodles-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/instant-noodles-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a45",
@@ -5322,13 +5344,14 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "bread-consumption-quantity",
+      "year": "2024",
       "figures": [
         {
           "file": "images/bread-consumption-quantity.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "match"
     },
     {
       "key": "b-ref-prc-a47",
@@ -5584,7 +5607,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "d-kakei-spending-personality",
@@ -5603,12 +5626,7 @@
           "kind": "chart"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「山形...1位」 → data: food-expenditure-ratio-multi-person-households=20位",
-        "RANK_MISMATCH: 本文「東京...1位」 → data: food-expenditure-ratio-multi-person-households=15位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "h-howto-csv-mojibake",
@@ -5626,7 +5644,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "h-howto-excel-filled-map",
@@ -5676,7 +5694,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "h-howto-mymaps-kml",
@@ -5684,6 +5702,7 @@
       "isPaid": false,
       "store": "r2-public",
       "rankingKey": "total-population",
+      "year": "2025",
       "figures": [
         {
           "file": "images/01-ranking-map.png",
@@ -5710,7 +5729,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "body-match"
     },
     {
       "key": "h-howto-mymaps-share",
@@ -5768,7 +5787,7 @@
       "isPaid": false,
       "store": "r2-public",
       "figures": [],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "product-sample"
     },
     {
       "key": "muni-manufacturing-shipment-data",
@@ -5785,7 +5804,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "product-sample"
     },
     {
       "key": "paid-n0135c75ca76c",
@@ -6206,7 +6225,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-disaster-infrastructure-pack",
@@ -6219,7 +6238,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-education-childcare-pack",
@@ -6232,7 +6251,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-free-trial-pack",
@@ -6245,7 +6264,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-healthcare-nursing-pack",
@@ -6258,7 +6277,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-household-consumption-pack",
@@ -6271,7 +6290,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-income-wage-hiring-pack",
@@ -6284,7 +6303,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-industry-economy-pack",
@@ -6297,7 +6316,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-map-chart-assets-pack",
@@ -6310,7 +6329,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-migration-living-pack",
@@ -6323,7 +6342,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-municipal-finance-pack",
@@ -6336,7 +6355,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-population-household-pack",
@@ -6349,7 +6368,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-retail-trade-area-pack",
@@ -6362,7 +6381,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "prefecture-tourism-lodging-pack",
@@ -6375,7 +6394,7 @@
           "kind": "ranking-map"
         }
       ],
-      "valueCheck": "unmapped"
+      "valueCheck": "product-sample"
     },
     {
       "key": "recovered-n023501038bd5",
@@ -6527,11 +6546,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「愛知...2位」 → data: real-public-debt-service-ratio=8位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n0654ddf27920",
@@ -7329,7 +7344,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "recovered-n4d38db115f82",
@@ -7491,11 +7506,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「神奈川...41位」 → data: sports-participation-rate-baseball=4位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n55cd6de6a733",
@@ -7574,11 +7585,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「青森...44位」 → data: study-participation-rate-business=47位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n581a1409b2c9",
@@ -7975,7 +7982,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-year"
+      "valueCheck": "no-data-figure"
     },
     {
       "key": "recovered-n827191af8c1c",
@@ -7998,11 +8005,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...1位」 → data: overseas-travel-annual-participation-rate-10plus=9位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n863f429319ca",
@@ -8077,11 +8080,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「青森...40位」 → data: sports-participation-rate-softball=47位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n91e82ac3b13c",
@@ -8540,11 +8539,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「宮城...38位」 → data: study-participation-rate-computer=10位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nc0e7474b34e1",
@@ -8646,11 +8641,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「宮崎...1位」 → data: sports-participation-rate-table-tennis=46位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ncbed56eb7c3d",
@@ -8990,11 +8981,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「埼玉...1位」 → data: travel-leisure-annual-participation-rate-10plus=10位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ne82a6c83ed45",
@@ -9135,11 +9122,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「神奈川...3位」 → data: hobby-participation-rate-classical-music=2位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nf0fc2a7eb326",
@@ -9166,11 +9149,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「東京...1位」 → data: study-participation-rate-home-economics=2位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nf1a5abab3d5e",
@@ -9274,11 +9253,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「京都...1位」 → data: hobby-participation-rate-tea-ceremony=4位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nfbdfd99fee1b",
@@ -9305,11 +9280,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「沖縄...41位」 → data: hobby-participation-rate-home-movie=24位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nfe69996fb5c9",
