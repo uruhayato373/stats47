@@ -441,6 +441,13 @@ export const DATASETS = [
   d("estat.kakei-ledger-schema", "data/estat/kakei-ledger/ledger.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("estat.kakei-decisions", "data/estat/kakei-ledger/decisions.json", "config", "data", "data", "家計調査の表・品目の採否判断 (指標を作らない excluded / 作る予定の planned と理由。指標があるものは書かない)", { schema: "data/estat/kakei-ledger/decisions.schema.json" }),
   d("estat.kakei-decisions-schema", "data/estat/kakei-ledger/decisions.schema.json", "config", "data", "data", "上の判断の JSON Schema"),
+  d("estat.monthly-decisions", "data/estat/monthly/decisions.json", "config", "data", "data", "月次の統計の採否・使い道・問い。サイトの指標は年単位なので、月別の図と季節の話題の入口をここで管理する", {
+    schema: "data/estat/monthly/decisions.schema.json",
+    refs: [{ field: "decisions[].issues[]", to: "content.issues", key: "issues[].id" }],
+  }),
+  d("estat.monthly-decisions-schema", "data/estat/monthly/decisions.schema.json", "config", "data", "data", "上の判断の JSON Schema"),
+  d("estat.monthly-ledger", "data/estat/monthly/ledger.json", "state", "data", "data", "e-Stat カタログから作る調査ごとの月次の表の数 (build-monthly-ledger.mjs の生成物)", { schema: "data/estat/monthly/ledger.schema.json" }),
+  d("estat.monthly-ledger-schema", "data/estat/monthly/ledger.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("estat.year-coverage", "data/estat/year-coverage/{**}", "state", "data", "data", "指標ごとの e-Stat 実在年の確認記録 (正本) と、単年設定の年カバレッジ監査キュー"),
   d("estat.availability", "data/estat/availability/{**}", "state", "data", "data", "e-Stat の表・取り出し条件ごとの実在年 (年ごとの値のある県の数) と、metric config の years との差分"),
   d("geo.sources", "data/geo/{name}", "state", "data", "data", "Geo 分析の出典ページとサムネイルの監査・公開"),

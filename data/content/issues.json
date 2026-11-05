@@ -8,8 +8,13 @@
       "unit": "municipality",
       "answerability": "relation",
       "primaryTheme": "theme:aging-society",
-      "dataNote": "国勢調査（配偶関係）・市町村税課税状況等の調",
+      "dataNote": "国勢調査（配偶関係）・市町村税課税状況等の調。関連記事の候補: per-capita-prefectural-income-h27-prefecture-gap, average-age-of-first-marriage-wife-prefecture-gap",
       "pitfall": "男女で分ける。年齢構成をそろえる（25〜39歳に絞る）",
+      "revenue": [
+        "広告",
+        "データ",
+        "ノウハウ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -22,6 +27,9 @@
       "primaryTheme": "theme:aging-society",
       "dataNote": "人口動態保健所・市区町村別統計（合計特殊出生率）・課税状況",
       "pitfall": "県で並べると負、個人では正になりうる。地域の比較と個人の話を分けて書く",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -34,6 +42,9 @@
       "primaryTheme": "theme:aging-society",
       "dataNote": "人口動態統計・国勢調査・出生動向基本調査",
       "pitfall": "出生率を「結婚している割合」と「夫婦あたりの出生」に分けて見せる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -44,8 +55,12 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:gender-participation",
-      "dataNote": "国勢調査（就業率）・人口動態統計",
+      "dataNote": "国勢調査（就業率）・人口動態統計。関連記事の候補: dual-income-household-ratio-vs-elderly-on-public-assistance",
       "pitfall": "国際比較では正の関係もある。保育の整い方が交絡",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -58,6 +73,10 @@
       "primaryTheme": "theme:childcare-services",
       "dataNote": "待機児童数・保育所等定員（こども家庭庁）・合計特殊出生率",
       "pitfall": "子育て世帯が入りやすい市へ引っ越す逆の流れがある",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -70,6 +89,9 @@
       "primaryTheme": "theme:living-housing",
       "dataNote": "住宅・土地統計調査（1住宅あたり延べ面積）・地価公示・出生率",
       "pitfall": "都市化が両方に効く。都市化の度合いで層に分ける",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -82,6 +104,9 @@
       "primaryTheme": "theme:population-dynamics",
       "dataNote": "住民基本台帳人口移動報告・国勢調査（性・年齢別人口）",
       "pitfall": "出生率（率）と出生数（数）の違いを図で分ける",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -94,6 +119,9 @@
       "primaryTheme": "theme:living-housing",
       "dataNote": "国勢調査（世帯の家族類型）・出生率",
       "pitfall": "農村性が交絡。北陸・東北の特殊性",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -106,6 +134,9 @@
       "primaryTheme": "theme:living-housing",
       "dataNote": "人口動態統計（離婚件数）・国勢調査",
       "pitfall": "率の分母を何にするか（人口千人あたりか有配偶者あたりか）で順位が変わる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -118,6 +149,10 @@
       "primaryTheme": "theme:aging-society",
       "dataNote": "人口動態統計（平均初婚年齢・母の年齢別出生）",
       "pitfall": "遅く結婚しても産む数が保てている県があるかを見る",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -130,6 +165,9 @@
       "primaryTheme": "theme:population-dynamics",
       "dataNote": "国勢調査（25〜39歳の男女比・未婚率）",
       "pitfall": "若い男性が多い工業の町・女性が多い都市を対比",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -142,6 +180,10 @@
       "primaryTheme": "theme:living-housing",
       "dataNote": "国勢調査（65歳以上の単独世帯）",
       "pitfall": "都市の中心部と過疎地の両方で多い「二つの山」を見せる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -152,8 +194,12 @@
       "unit": "municipality",
       "answerability": "myth",
       "primaryTheme": "theme:foreign-residents",
-      "dataNote": "在留外国人統計・都道府県警の市区町村別刑法犯認知件数",
+      "dataNote": "在留外国人統計・都道府県警の市区町村別刑法犯認知件数・警察庁 犯罪統計・人口動態統計。関連記事の候補: foreign-resident-population-prefecture-gap",
       "pitfall": "都市化・若い男性の割合・昼間人口が交絡。重い問い（上の注意）",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": true,
       "status": "active"
     },
@@ -164,8 +210,13 @@
       "unit": "municipality",
       "answerability": "relation",
       "primaryTheme": "theme:foreign-residents",
-      "dataNote": "在留外国人統計（在留資格別）・経済センサス",
+      "dataNote": "在留外国人統計（在留資格別）・経済センサス・外国人雇用状況の届出状況",
       "pitfall": "在留資格で分けると町の産業が見える",
+      "revenue": [
+        "広告",
+        "データ",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -178,6 +229,11 @@
       "primaryTheme": "theme:foreign-residents",
       "dataNote": "在留外国人統計・住民基本台帳",
       "pitfall": "日本人の減少を外国人がどれだけ埋めたかを分けて示す",
+      "revenue": [
+        "広告",
+        "データ",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -190,6 +246,9 @@
       "primaryTheme": "theme:foreign-residents",
       "dataNote": "在留外国人統計・外国人雇用状況の届出・有効求人倍率",
       "pitfall": "産業別の雇用者数と並べる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -202,6 +261,9 @@
       "primaryTheme": "theme:foreign-residents",
       "dataNote": "学校基本調査・日本語指導が必要な児童生徒の受入状況調査",
       "pitfall": "調査の単位が県・市でそろわない",
+      "revenue": [
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -214,6 +276,24 @@
       "primaryTheme": "theme:population-dynamics",
       "dataNote": "住民基本台帳人口移動報告（年齢別）・大学収容力・求人",
       "pitfall": "進学時と就職時で分ける",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:B06-1",
+      "level": "minor",
+      "question": "若い女性が大都市へ出ていくのは地元に仕事が少ないからか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "dataNote": "住民基本台帳人口移動報告・国勢調査・経済センサス",
+      "pitfall": "仕事以外の進学・娯楽・結婚といった個人の選好は分けられない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -226,6 +306,24 @@
       "primaryTheme": "theme:population-dynamics",
       "dataNote": "住民基本台帳人口移動報告・移住相談件数（ふるさと回帰支援センター）",
       "pitfall": "移住相談は需要、転入は結果。統計の定義を並べる",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:B07-1",
+      "level": "minor",
+      "question": "テレワークが広がると地方へ移る人は増えるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "テレワーク人口実態調査・住民基本台帳人口移動報告",
+      "pitfall": "在宅勤務できる職種の人が元々移りやすく、選抜の偏りが残る。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -238,6 +336,9 @@
       "primaryTheme": "theme:population-dynamics",
       "dataNote": "人口移動報告・子ども医療費助成の対象年齢",
       "pitfall": "支援は転入が増えた後に手厚くなることもある（逆の流れ）",
+      "revenue": [
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -250,6 +351,9 @@
       "primaryTheme": "theme:labor-mobility",
       "dataNote": "国勢調査（昼夜間人口比率）",
       "pitfall": "犯罪・事故の「人口あたり」の分母に効くことを示す",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -260,9 +364,59 @@
       "unit": "municipality",
       "answerability": "caveat",
       "primaryTheme": "theme:tourism",
-      "dataNote": "宿泊旅行統計・地価公示・家賃（住宅・土地統計）",
+      "dataNote": "宿泊旅行統計・地価公示・家賃（住宅・土地統計）・宿泊旅行統計調査・国勢調査・インバウンド消費動向調査",
       "pitfall": "観光以外の地価上昇要因が大きい",
+      "revenue": [
+        "実務"
+      ],
       "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:B11",
+      "level": "major",
+      "question": "20代が地元に残る町は将来も人口が減りにくいのか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:population-dynamics",
+      "dataNote": "国勢調査 年齢別人口・住民基本台帳人口移動報告",
+      "pitfall": "進学時と就職時の転出が混ざり、景気の影響も大きい。",
+      "revenue": [
+        "データ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:B12",
+      "level": "major",
+      "question": "外国人が増えると日本人の賃金は下がるのか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:foreign-residents",
+      "dataNote": "在留外国人統計・賃金構造基本統計調査。関連記事の候補: foreign-worker-count-prefecture-gap",
+      "pitfall": "人手不足の産業に外国人が集まる逆の因果が混ざる。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:B13",
+      "level": "major",
+      "question": "外国人が多い町は空き家が少なくなるのか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:foreign-residents",
+      "dataNote": "在留外国人統計・住宅・土地統計調査",
+      "pitfall": "家賃の安い地域に集まる居住選択の偏りがある。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": true,
       "status": "active"
     },
     {
@@ -274,6 +428,9 @@
       "primaryTheme": "theme:safety",
       "dataNote": "犯罪統計（警察庁）・内閣府の治安に関する世論調査",
       "pitfall": "認知件数の長期の減少と体感の悪化を並べる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -284,8 +441,12 @@
       "unit": "municipality",
       "answerability": "relation",
       "primaryTheme": "theme:safety",
-      "dataNote": "都道府県警の市区町村別認知件数・国勢調査（昼間人口）",
+      "dataNote": "都道府県警の市区町村別認知件数・国勢調査（昼間人口）・警察庁 犯罪統計",
       "pitfall": "夜間人口と昼間人口で割った順位を並べる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -298,6 +459,9 @@
       "primaryTheme": "theme:safety",
       "dataNote": "認知件数・課税状況",
       "pitfall": "都市化が強い交絡。罪種で分ける",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": true,
       "status": "active"
     },
@@ -310,6 +474,9 @@
       "primaryTheme": "theme:safety",
       "dataNote": "住宅・土地統計調査・認知件数",
       "pitfall": "空き家は過疎地に多く、犯罪は都市に多い。単純相関は負に出うる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -320,8 +487,12 @@
       "unit": "prefecture",
       "answerability": "myth",
       "primaryTheme": "theme:safety",
-      "dataNote": "警察官の定員（条例）・認知件数",
+      "dataNote": "警察官の定員（条例）・認知件数・警察庁 警察統計・警察官定員",
       "pitfall": "犯罪が多いから警察官を増やす（逆の流れ）",
+      "revenue": [
+        "実務",
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -334,6 +505,9 @@
       "primaryTheme": "theme:safety",
       "dataNote": "交通事故統計（ITARDA・警察庁）・運転免許統計",
       "pitfall": "件数ではなく免許保有者あたりで年齢別に見る",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -346,6 +520,9 @@
       "primaryTheme": "theme:safety",
       "dataNote": "交通事故死者数・自動車保有台数・公共交通",
       "pitfall": "人口あたりと走行距離あたりで順位が変わる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -358,6 +535,9 @@
       "primaryTheme": "theme:regional-transport",
       "dataNote": "都道府県警の市区町村別事故・国勢調査（通勤手段）",
       "pitfall": "自転車通勤の割合で割る",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -370,6 +550,9 @@
       "primaryTheme": "theme:safety",
       "dataNote": "特殊詐欺認知・検挙状況（警察庁）・高齢化率",
       "pitfall": "実は都市部に多い。高齢者の数と一人暮らしの割合で分ける",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -382,7 +565,41 @@
       "primaryTheme": "theme:safety",
       "dataNote": "児童相談所での虐待相談対応件数（こども家庭庁）",
       "pitfall": "件数の増加は通告の仕組みの変化（面前DVの計上）が大きい",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:C11",
+      "level": "major",
+      "question": "防犯カメラが増えた町は犯罪が減るのか",
+      "unit": "municipality",
+      "answerability": "myth",
+      "primaryTheme": "theme:safety",
+      "dataNote": "自治体 防犯カメラ設置状況・警察庁 犯罪統計",
+      "pitfall": "再開発地域に優先設置されるなど環境の変化が混ざる。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:C12",
+      "level": "major",
+      "question": "火事で亡くなる人はどんな県で多いのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:safety",
+      "dataNote": "火災年報・国勢調査",
+      "pitfall": "建物構造や暖房方法など個別事情は分けられない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
       "status": "active"
     },
     {
@@ -394,6 +611,11 @@
       "primaryTheme": "theme:real-income",
       "dataNote": "県民経済計算・小売物価統計（消費者物価地域差指数）・家計調査",
       "pitfall": "可処分所得から基礎支出を引いた「手元に残るお金」で並べ直す",
+      "revenue": [
+        "広告",
+        "データ",
+        "ノウハウ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -406,6 +628,11 @@
       "primaryTheme": "theme:labor-wages",
       "dataNote": "地域別最低賃金・毎月勤労統計・有効求人倍率",
       "pitfall": "上げ幅は県の景気と連動。短期と長期を分ける",
+      "revenue": [
+        "広告",
+        "実務",
+        "ノウハウ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -418,6 +645,10 @@
       "primaryTheme": "theme:gender-participation",
       "dataNote": "賃金構造基本統計調査・国勢調査（職業）",
       "pitfall": "職種・勤続年数の違いで説明できる分と残る分を分ける",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -430,6 +661,10 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "学校基本調査・賃金構造基本統計調査",
       "pitfall": "卒業後に県外へ出る分（頭脳流出）を考える",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -442,6 +677,10 @@
       "primaryTheme": "theme:labor-wages",
       "dataNote": "就業構造基本調査・全国家計構造調査",
       "pitfall": "世帯単位と個人単位を分ける",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -454,6 +693,10 @@
       "primaryTheme": "theme:real-income",
       "dataNote": "課税状況（所得の段階別納税義務者数）",
       "pitfall": "平均ではなく分布で見せる。富裕層の多い町の平均は引っ張られる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -466,6 +709,26 @@
       "primaryTheme": "theme:local-finance",
       "dataNote": "地方公務員給与実態調査・賃金構造基本統計調査",
       "pitfall": "年齢・学歴の構成をそろえる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D07-1",
+      "level": "minor",
+      "question": "高校教員の年収はなぜ県で違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "queries": [
+        "高校教師 年収 高い なぜ"
+      ],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -478,6 +741,10 @@
       "primaryTheme": "theme:labor-mobility",
       "dataNote": "就業構造基本調査",
       "pitfall": "産業構成（観光・小売）と年齢構成で説明",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -490,6 +757,10 @@
       "primaryTheme": "theme:public-assistance",
       "dataNote": "被保護者調査・失業率・高齢単身世帯",
       "pitfall": "制度の運用（申請の通りやすさ）の差も効く。重い問い",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": true,
       "status": "active"
     },
@@ -502,6 +773,89 @@
       "primaryTheme": "theme:labor-mobility",
       "dataNote": "就業構造基本調査（副業者比率）",
       "pitfall": "農業の兼業が数字を押し上げる県がある",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D11",
+      "level": "major",
+      "question": "ひとり親家庭の母親が働きやすい県はどこか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:single-parent-households",
+      "dataNote": "国勢調査・社会・人口統計体系",
+      "pitfall": "母子世帯の中身（年齢、子の年齢）が県で違い、因果は言えない。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D12",
+      "level": "major",
+      "question": "物価の上がり方は県によってどれだけ違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:consumer-prices",
+      "dataNote": "消費者物価指数（地域差・変化率）",
+      "pitfall": "対象は県庁所在市中心で、県全体の暮らしとはずれる。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D13",
+      "level": "major",
+      "question": "貯金が多い県と借金が多い県は何が違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:household-assets-debt",
+      "dataNote": "家計調査・全国家計構造調査",
+      "pitfall": "年齢構成と持ち家の有無で大きく変わり、個人の家計は推し量れない。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D14",
+      "level": "major",
+      "question": "年収の壁があるとパートは働く時間を抑えるのか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:labor-wages",
+      "dataNote": "就業構造基本調査・パートタイム労働者総合実態調査",
+      "pitfall": "働きたい時間の希望と制度の影響を公開データだけでは分けられない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D15",
+      "level": "major",
+      "question": "大卒の初任給は県でどれだけ違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:labor-wages",
+      "dataNote": "賃金構造基本統計調査",
+      "pitfall": "企業規模や職種の構成で差が出る。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -514,6 +868,9 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "全国学力・学習状況調査・県民所得",
       "pitfall": "秋田・石川・福井など所得と並ばない県がある",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -526,6 +883,10 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "学力調査の質問紙（学習塾）・学力",
       "pitfall": "学力の低い子が塾に通う逆の流れもある",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -538,6 +899,9 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "地方教育費調査・学力調査",
       "pitfall": "過疎地の小規模校は一人あたり費用が高くなる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -550,6 +914,9 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "学校基本調査（学級規模）・学力調査",
       "pitfall": "地域比較では答えが出ない。研究の知見を並べる型",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -562,6 +929,9 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "児童生徒の問題行動・不登校等調査",
       "pitfall": "定義・計上の仕方が県で違いうる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -574,6 +944,9 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "学校基本調査（大学収容力・出身高校所在地県別入学者）",
       "pitfall": "進学で出た後に戻る割合も見る",
+      "revenue": [
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -586,6 +959,9 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "学校基本調査（学校数）・人口移動報告",
       "pitfall": "人口が減ったから統廃合した（逆の流れ）",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -598,6 +974,9 @@
       "primaryTheme": "theme:single-parent-households",
       "dataNote": "就学援助率（文科省）・ひとり親世帯（国勢調査）",
       "pitfall": "就学援助の基準が市町村で違う",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -610,6 +989,9 @@
       "primaryTheme": "theme:childcare-services",
       "dataNote": "子ども医療費助成の実施状況・国保の医療費",
       "pitfall": "研究の知見（受診は増えるが健康の改善は小さい）と並べる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -622,6 +1004,57 @@
       "primaryTheme": "theme:education-culture",
       "dataNote": "社会教育調査・学力調査の質問紙（読書時間）",
       "pitfall": "都市の書店・家庭の本の数が交絡",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E11",
+      "level": "major",
+      "question": "教員の給料が高い県は学力も高いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:education-culture",
+      "dataNote": "地方公務員給与実態調査・全国学力・学習状況調査。関連記事の候補: high-school-teacher-annual-income-vs-new-graduate-starting",
+      "pitfall": "給与は物価や年齢構成に左右され、学力には家庭環境が強く効く。",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E12",
+      "level": "major",
+      "question": "学校給食を無償にすると子どもの学力や定住は変わるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:education-culture",
+      "dataNote": "学校給食実施状況調査・市町村決算・全国学力・学習状況調査",
+      "pitfall": "財政に余裕があり教育熱心な自治体ほど導入しやすい。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E13",
+      "level": "major",
+      "question": "子どもが減っても学校の先生は減らないのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:education-culture",
+      "dataNote": "学校基本調査・地方教育費調査",
+      "pitfall": "学級編制の基準や少人数指導の方針で数が決まる。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -634,6 +1067,9 @@
       "primaryTheme": "theme:healthcare",
       "dataNote": "市区町村別生命表・課税状況",
       "pitfall": "健康な人が都市へ移る流れがある",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -646,6 +1082,9 @@
       "primaryTheme": "theme:healthcare",
       "dataNote": "医師・歯科医師・薬剤師統計・市区町村別生命表",
       "pitfall": "病院のある町に病人が集まる（逆の流れ）",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -658,6 +1097,9 @@
       "primaryTheme": "theme:healthcare",
       "dataNote": "医療費の地域差分析・医療施設調査",
       "pitfall": "「ベッドがあると使われる」話を示せる",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -670,6 +1112,9 @@
       "primaryTheme": "theme:health-checkups",
       "dataNote": "国民健康・栄養調査（地域ブロック）・人口動態統計",
       "pitfall": "食塩の調査は県で割るにはサンプルが小さい",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -682,6 +1127,9 @@
       "primaryTheme": "theme:sports-participation",
       "dataNote": "国民健康・栄養調査（歩数）・健康寿命",
       "pitfall": "都市は歩くが、ほかの要因も多い",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -694,6 +1142,9 @@
       "primaryTheme": "theme:healthcare",
       "dataNote": "地域における自殺の基礎資料（厚労省）",
       "pitfall": "重い問い。小さな町は数が少なく揺れる。相談窓口を必ず添える",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": true,
       "status": "active"
     },
@@ -706,6 +1157,9 @@
       "primaryTheme": "theme:health-checkups",
       "dataNote": "特定健診の実施率（市町村国保）・医療費の地域差分析",
       "pitfall": "健康に関心の高い住民の多さが交絡",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -716,8 +1170,12 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:health-checkups",
-      "dataNote": "NDBオープンデータ（特定健診）・自動車保有台数",
+      "dataNote": "NDBオープンデータ（特定健診）・自動車保有台数。関連記事の候補: metabolic-syndrome-prevalence-among-checkup-recipients, fresh-vegetables-consumption-quantity-prefecture-gap",
       "pitfall": "年齢構成をそろえる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -730,6 +1188,9 @@
       "primaryTheme": "theme:health-checkups",
       "dataNote": "酒類販売数量（国税庁）・人口動態統計",
       "pitfall": "販売量は観光客の分を含む",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -740,8 +1201,12 @@
       "unit": "prefecture",
       "answerability": "relation",
       "primaryTheme": "theme:healthcare",
-      "dataNote": "救急・救助の現況（消防庁）・ウツタイン統計",
+      "dataNote": "救急・救助の現況（消防庁）・ウツタイン統計・医療施設調査・消防庁 救急救助の現況",
       "pitfall": "心停止の1か月後の生存率で比べる",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -752,8 +1217,11 @@
       "unit": "municipality",
       "answerability": "caveat",
       "primaryTheme": "theme:healthcare",
-      "dataNote": "医療施設調査（分娩取扱施設）・人口動態統計",
+      "dataNote": "医療施設調査（分娩取扱施設）・人口動態統計。関連記事の候補: general-perinatal-center-count-prefecture-gap, early-neonatal-deaths-prefecture-gap",
       "pitfall": "出生が減ったから閉じた（逆の流れ）",
+      "revenue": [
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -766,438 +1234,9 @@
       "primaryTheme": "theme:health-checkups",
       "dataNote": "国民生活基礎調査（喫煙）・がん登録",
       "pitfall": "何十年もの時間差がある",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G01",
-      "level": "major",
-      "question": "高齢者が働く地域ほど、介護が必要な人は少ないか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:long-term-care",
-      "dataNote": "国勢調査（65歳以上就業率）・介護保険事業状況報告（認定率）",
-      "pitfall": "元気だから働ける（逆の流れ）",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G02",
-      "level": "major",
-      "question": "介護保険料が高い市はどこで、なぜか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:long-term-care",
-      "dataNote": "介護保険料基準額（厚労省）・認定率・施設数",
-      "pitfall": "施設が多い市は保険料が上がる仕組みを見せる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G03",
-      "level": "major",
-      "question": "通いの場・サロンが多い市ほど、要介護は少ないか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:long-term-care",
-      "dataNote": "介護予防・日常生活支援総合事業の実施状況・認定率",
-      "pitfall": "研究（JAGES 等）の知見と並べる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G04",
-      "level": "major",
-      "question": "認知症の人は、どの地域で増えていくか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:aging-society",
-      "dataNote": "将来推計人口（社人研）・有病率の推計",
-      "pitfall": "推計の前提を明記する",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G05",
-      "level": "major",
-      "question": "介護で仕事を辞める人が多い県はどこか",
-      "unit": "prefecture",
-      "answerability": "relation",
-      "primaryTheme": "theme:long-term-care",
-      "dataNote": "就業構造基本調査（介護離職）",
-      "pitfall": "サンプルが小さい県は幅で示す",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G06",
-      "level": "major",
-      "question": "老人ホームの空きと待機は、どこで食い違っているか",
-      "unit": "prefecture",
-      "answerability": "relation",
-      "primaryTheme": "theme:long-term-care",
-      "dataNote": "特別養護老人ホームの入所申込者・介護サービス施設・事業所調査",
-      "pitfall": "申込者は重複を含む",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G07",
-      "level": "major",
-      "question": "免許を返した高齢者は、買い物に困っていないか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:geographic-access",
-      "dataNote": "運転免許統計・国土数値情報（店舗・バス停）",
-      "pitfall": "食料品アクセス（農水省の推計）と重ねる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:G08",
-      "level": "major",
-      "question": "一人暮らしの高齢者が多い町で、孤立死は増えているか",
-      "unit": "prefecture",
-      "answerability": "myth",
-      "primaryTheme": "theme:aging-society",
-      "dataNote": "東京都監察医務院など一部地域のみ",
-      "pitfall": "全国でそろった統計がない。「データがない」こと自体を記事にする",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H01",
-      "level": "major",
-      "question": "空き家が増えているのは、人口が減った町だけか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:living-housing",
-      "dataNote": "住宅・土地統計調査・国勢調査",
-      "pitfall": "都市の賃貸用空き家と地方の放置空き家を分ける",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H02",
-      "level": "major",
-      "question": "家賃が高い町ほど、通勤時間は短いか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:living-housing",
-      "dataNote": "住宅・土地統計調査（家賃・通勤時間）",
-      "pitfall": "首都圏・関西圏で分けて見せる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H03",
-      "level": "major",
-      "question": "バスや鉄道が減った町で、人口の減り方は速まったか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:regional-transport",
-      "dataNote": "国土数値情報（バス路線・駅）・住民基本台帳",
-      "pitfall": "人口が減ったから減便した（逆の流れ）",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H04",
-      "level": "major",
-      "question": "コンパクトシティを進めた市で、中心部に人は戻ったか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:living-housing",
-      "dataNote": "立地適正化計画の策定状況・国勢調査（小地域）",
-      "pitfall": "計画の前からの流れと区別する",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H05",
-      "level": "major",
-      "question": "地価が上がった町は、どんな町か",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:land-property-market",
-      "dataNote": "地価公示・人口移動報告・宿泊旅行統計",
-      "pitfall": "再開発・観光・半導体工場など理由を分類",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H06",
-      "level": "major",
-      "question": "持ち家が多い県ほど、暮らしの満足度は高いか",
-      "unit": "prefecture",
-      "answerability": "caveat",
-      "primaryTheme": "theme:living-housing",
-      "dataNote": "住宅・土地統計調査・内閣府の満足度調査",
-      "pitfall": "満足度調査のサンプルの小ささ",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H07",
-      "level": "major",
-      "question": "雪の多い町ほど、人口は減っているか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:climate",
-      "dataNote": "気象庁（平年の最深積雪）・国勢調査",
-      "pitfall": "豪雪地帯は山間部とも重なる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H08",
-      "level": "major",
-      "question": "ふるさと納税で得をしている町・損をしている町はどこか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "ふるさと納税に関する現況調査（総務省）",
-      "pitfall": "受入額と住民の控除による流出を差し引きで見せる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H09",
-      "level": "major",
-      "question": "大型商業施設ができた町で、商店街はどうなったか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:retail-commerce",
-      "dataNote": "経済センサス（小売の事業所数）・大規模小売店舗の届出",
-      "pitfall": "時期の前後で比べる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H10",
-      "level": "major",
-      "question": "新しい住宅が建ち続けている町は、人口が増えている町か",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:living-housing",
-      "dataNote": "建築着工統計・住民基本台帳",
-      "pitfall": "世帯の細分化（単身化）で人口が減っても住宅は増える",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I01",
-      "level": "major",
-      "question": "財政が苦しい市は、どんな市か",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "市町村別決算状況調（財政力指数・将来負担比率）",
-      "pitfall": "指標ごとに順位が変わることを見せる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I02",
-      "level": "major",
-      "question": "職員が多い市ほど、住民サービスはよいのか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "地方公共団体定員管理調査・決算状況調",
-      "pitfall": "面積が広い・離島の町は職員が多くなる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I03",
-      "level": "major",
-      "question": "合併した町と合併しなかった町で、その後の人口はどう違うか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "市町村合併の記録・国勢調査（旧市町村の組み替え）",
-      "pitfall": "合併を選んだ町そもそもの違い",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I04",
-      "level": "major",
-      "question": "投票率が高い地域は、どんな地域か",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:community-participation",
-      "dataNote": "各選挙の投票率（総務省・各選管）・年齢構成",
-      "pitfall": "高齢化・持ち家率・地域の結びつき",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I05",
-      "level": "major",
-      "question": "若い世代の投票率が低いと、予算は高齢者向けに偏るのか",
-      "unit": "municipality",
-      "answerability": "myth",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "年代別投票率・目的別歳出（民生費の内訳）",
-      "pitfall": "シルバー民主主義の研究の知見と並べる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I06",
-      "level": "major",
-      "question": "女性議員が多い議会は、何が違うのか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:gender-participation",
-      "dataNote": "地方議会の女性議員割合（内閣府）・保育関連の歳出",
-      "pitfall": "都市部ほど女性議員が多い交絡",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I07",
-      "level": "major",
-      "question": "公共施設の老朽化が深刻な市はどこか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "公共施設等総合管理計画・有形固定資産減価償却率（財政状況資料集）",
-      "pitfall": "減価償却率で並べる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I08",
-      "level": "major",
-      "question": "水道料金が高い町はどこで、これから上がるのはどこか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:water-services",
-      "dataNote": "水道統計（日本水道協会）・人口推計",
-      "pitfall": "人口が減ると一人あたりの負担が上がる仕組み",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I09",
-      "level": "major",
-      "question": "国からの補助金に頼る県ほど、人口減少は止まっていないか",
-      "unit": "prefecture",
-      "answerability": "myth",
-      "primaryTheme": "theme:local-finance",
-      "dataNote": "地方交付税・国庫支出金・人口推移",
-      "pitfall": "人口が減るから交付税が多い（逆の流れ）",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:I10",
-      "level": "major",
-      "question": "公務員が多い県ほど、民間の働き口は少ないか",
-      "unit": "prefecture",
-      "answerability": "caveat",
-      "primaryTheme": "theme:local-economy",
-      "dataNote": "国勢調査（産業別就業者）・経済センサス",
-      "pitfall": "産業の少なさが公務員の多さの原因",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J01",
-      "level": "major",
-      "question": "猛暑日が増えた地域で、熱中症の救急搬送は増えたか",
-      "unit": "prefecture",
-      "answerability": "relation",
-      "primaryTheme": "theme:climate",
-      "dataNote": "気象庁（地点別の猛暑日）・熱中症救急搬送人員（消防庁）",
-      "pitfall": "高齢化率で分ける",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J02",
-      "level": "major",
-      "question": "桜は本当に早く咲くようになったか、どこが一番早まったか",
-      "unit": "prefecture",
-      "answerability": "relation",
-      "primaryTheme": "theme:climate",
-      "dataNote": "気象庁の生物季節観測",
-      "pitfall": "観測地点・観測対象の廃止の影響",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J03",
-      "level": "major",
-      "question": "災害が多い地域から、人は出ていくか",
-      "unit": "municipality",
-      "answerability": "caveat",
-      "primaryTheme": "theme:safety",
-      "dataNote": "災害の記録（消防庁・内閣府）・人口移動報告",
-      "pitfall": "被災前からの人口減少の流れと区別",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J04",
-      "level": "major",
-      "question": "浸水想定区域に住む人は、増えているのか減っているのか",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": null,
-      "dataNote": "国土数値情報（浸水想定区域）・国勢調査（小地域）",
-      "pitfall": "新しい住宅地が危ない場所に広がっていないか",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J05",
-      "level": "major",
-      "question": "ごみが少ない市は、何をしている市か",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:waste-recycling",
-      "dataNote": "一般廃棄物処理実態調査（1人1日あたり排出量）・有料化の有無",
-      "pitfall": "有料化の前後で比べる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J06",
-      "level": "major",
-      "question": "太陽光発電が多い県は、どんな県か",
-      "unit": "prefecture",
-      "answerability": "relation",
-      "primaryTheme": "theme:regional-energy",
-      "dataNote": "再生可能エネルギーの導入状況（資源エネルギー庁）・日照時間・地価",
-      "pitfall": "土地の安さと日照の両方",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J07",
-      "level": "major",
-      "question": "耕作放棄地が増えている町は、農家の高齢化が進んだ町か",
-      "unit": "municipality",
-      "answerability": "relation",
-      "primaryTheme": "theme:agriculture-production",
-      "dataNote": "農林業センサス",
-      "pitfall": "担い手の年齢と後継者の有無を並べる",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J08",
-      "level": "major",
-      "question": "クマの出没が増えた地域は、どこで、なぜか",
-      "unit": "prefecture",
-      "answerability": "caveat",
-      "primaryTheme": "theme:natural-environment",
-      "dataNote": "クマ類の出没件数・人身被害（環境省）・人口減少・ブナの実り",
-      "pitfall": "年ごとの実りの豊凶が大きく効く",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1210,6 +1249,1234 @@
       "primaryTheme": null,
       "dataNote": "学校保健統計調査（都道府県別の平均身長）",
       "pitfall": "食習慣・気候・遺伝の説を統計では確かめにくい。相関の記事は因果を書かない",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F13-1",
+      "level": "minor",
+      "question": "新潟の子どもはなぜ背が高いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "queries": [
+        "新潟県 身長 高い理由"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F14",
+      "level": "major",
+      "question": "所得の高い県ほど健康診断を受けるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:health-checkups",
+      "dataNote": "特定健診・特定保健指導実施状況・県民経済計・市町村税課税状況。関連記事の候補: specific-health-checkup-participation-rate-vs-taxpayer",
+      "pitfall": "県平均の相関であり、個人の所得と受診の関係は分からない。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F15",
+      "level": "major",
+      "question": "お医者さんが少ない地域は医師の地域枠で解消に向かっているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:healthcare",
+      "dataNote": "医師・歯科医師・薬剤師統計。関連記事の候補: dental-clinic-count-prefecture-gap",
+      "pitfall": "義務年限後の流出や診療科の偏りを追えない。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F16",
+      "level": "major",
+      "question": "通院している人が多い県は本当に病気が多いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:healthcare",
+      "dataNote": "国民生活基礎調査・患者調査。関連記事の候補: outpatient-rate-per-1000-prefecture-gap, complainant-count-prefecture-gap",
+      "pitfall": "医療機関の近さや受診しやすさの違いが受療に出る。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:F17",
+      "level": "major",
+      "question": "精神科の入院が長い県は何が違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:healthcare",
+      "dataNote": "病院報告・医療施設調査",
+      "pitfall": "診療報酬や地域の受け皿といった制度の違いが混ざる。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": true,
+      "status": "active",
+      "queries": [
+        "沖縄 精神科 多い 理由"
+      ]
+    },
+    {
+      "id": "issue:G01",
+      "level": "major",
+      "question": "高齢者が働く地域ほど、介護が必要な人は少ないか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "国勢調査（65歳以上就業率）・介護保険事業状況報告（認定率）",
+      "pitfall": "元気だから働ける（逆の流れ）",
+      "revenue": [
+        "実務",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G02",
+      "level": "major",
+      "question": "介護保険料が高い市はどこで、なぜか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "介護保険料基準額（厚労省）・認定率・施設数",
+      "pitfall": "施設が多い市は保険料が上がる仕組みを見せる",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G03",
+      "level": "major",
+      "question": "通いの場・サロンが多い市ほど、要介護は少ないか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "介護予防・日常生活支援総合事業の実施状況・認定率",
+      "pitfall": "研究（JAGES 等）の知見と並べる",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G04",
+      "level": "major",
+      "question": "認知症の人は、どの地域で増えていくか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:aging-society",
+      "dataNote": "将来推計人口（社人研）・有病率の推計",
+      "pitfall": "推計の前提を明記する",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G05",
+      "level": "major",
+      "question": "介護で仕事を辞める人が多い県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "就業構造基本調査（介護離職）",
+      "pitfall": "サンプルが小さい県は幅で示す",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G06",
+      "level": "major",
+      "question": "老人ホームの空きと待機は、どこで食い違っているか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "特別養護老人ホームの入所申込者・介護サービス施設・事業所調査",
+      "pitfall": "申込者は重複を含む",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G07",
+      "level": "major",
+      "question": "免許を返した高齢者は、買い物に困っていないか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:geographic-access",
+      "dataNote": "運転免許統計・国土数値情報（店舗・バス停）",
+      "pitfall": "食料品アクセス（農水省の推計）と重ねる",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G08",
+      "level": "major",
+      "question": "一人暮らしの高齢者が多い町で、孤立死は増えているか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:aging-society",
+      "dataNote": "東京都監察医務院など一部地域のみ",
+      "pitfall": "全国でそろった統計がない。「データがない」こと自体を記事にする",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G09",
+      "level": "major",
+      "question": "高齢化が進むと生活保護は増えるのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:public-assistance",
+      "dataNote": "被保護者調査・国勢調査",
+      "pitfall": "年金水準・持ち家・貯蓄の差が効き、県平均から個人は言えない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:G10",
+      "level": "major",
+      "question": "65歳以上が多い県と子どもが多い県は何が違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:aging-society",
+      "dataNote": "国勢調査・日本の地域別将来推計人口",
+      "pitfall": "移動と出生の両方の履歴が混ざり、原因は特定できない。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G11",
+      "level": "major",
+      "question": "介護施設を増やすと要介護の人も増えるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "介護保険事業状況報告・介護サービス施設・事業所調査",
+      "pitfall": "供給が需要を呼ぶ関係と、高齢者の増加が重なる。",
+      "revenue": [
+        "実務",
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G12",
+      "level": "major",
+      "question": "介護で働く人の給料を上げると辞める人は減るのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:long-term-care",
+      "dataNote": "賃金構造基本統計調査・雇用動向調査",
+      "pitfall": "他産業の賃金や需要の急増といった大きな要因が混ざる。",
+      "revenue": [
+        "実務",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:G13",
+      "level": "major",
+      "question": "障害のある人が暮らしやすい町はどこか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:disability-support",
+      "dataNote": "社会福祉施設等調査・障害者白書関連統計",
+      "pitfall": "施設の数は暮らしやすさそのものではない。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H01",
+      "level": "major",
+      "question": "空き家が増えているのは、人口が減った町だけか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "住宅・土地統計調査・国勢調査",
+      "pitfall": "都市の賃貸用空き家と地方の放置空き家を分ける",
+      "revenue": [
+        "広告",
+        "データ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H02",
+      "level": "major",
+      "question": "家賃が高い町ほど、通勤時間は短いか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "住宅・土地統計調査（家賃・通勤時間）",
+      "pitfall": "首都圏・関西圏で分けて見せる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H03",
+      "level": "major",
+      "question": "バスや鉄道が減った町で、人口の減り方は速まったか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:regional-transport",
+      "dataNote": "国土数値情報（バス路線・駅）・住民基本台帳",
+      "pitfall": "人口が減ったから減便した（逆の流れ）",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H04",
+      "level": "major",
+      "question": "コンパクトシティを進めた市で、中心部に人は戻ったか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "立地適正化計画の策定状況・国勢調査（小地域）",
+      "pitfall": "計画の前からの流れと区別する",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H05",
+      "level": "major",
+      "question": "地価が上がった町は、どんな町か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:land-property-market",
+      "dataNote": "地価公示・人口移動報告・宿泊旅行統計・国土数値情報 地価公示・国勢調査メッシュ",
+      "pitfall": "再開発・観光・半導体工場など理由を分類",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H06",
+      "level": "major",
+      "question": "持ち家が多い県ほど、暮らしの満足度は高いか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "住宅・土地統計調査・内閣府の満足度調査",
+      "pitfall": "満足度調査のサンプルの小ささ",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H06-1",
+      "level": "minor",
+      "question": "沖縄はなぜ持ち家率が低いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "queries": [
+        "沖縄 持ち家率 なぜ",
+        "沖縄 持ち家 率 低い 理由"
+      ],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H07",
+      "level": "major",
+      "question": "雪の多い町ほど、人口は減っているか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:climate",
+      "dataNote": "気象庁（平年の最深積雪）・国勢調査・国土数値情報 豪雪地帯・1kmメッシュ将来人口",
+      "pitfall": "豪雪地帯は山間部とも重なる",
+      "revenue": [
+        "広告",
+        "データ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H08",
+      "level": "major",
+      "question": "ふるさと納税で得をしている町・損をしている町はどこか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "ふるさと納税に関する現況調査（総務省）",
+      "pitfall": "受入額と住民の控除による流出を差し引きで見せる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H08-1",
+      "level": "minor",
+      "question": "ふるさと納税が多い町は住民の所得も増えるのか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "dataNote": "総務省 ふるさと納税現況調査・市町村税課税状況。関連記事の候補: furusato-fundraising-cost-prefecture-prefecture-gap",
+      "pitfall": "特産品など元々の地域資源の差が受入額と所得の両方に効く。",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H09",
+      "level": "major",
+      "question": "大型商業施設ができた町で、商店街はどうなったか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:retail-commerce",
+      "dataNote": "経済センサス（小売の事業所数）・大規模小売店舗の届出",
+      "pitfall": "時期の前後で比べる",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H10",
+      "level": "major",
+      "question": "新しい住宅が建ち続けている町は、人口が増えている町か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "建築着工統計・住民基本台帳",
+      "pitfall": "世帯の細分化（単身化）で人口が減っても住宅は増える",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H11",
+      "level": "major",
+      "question": "2050年に人口が保たれやすい県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:population-dynamics",
+      "dataNote": "国立社会保障・人口問題研究所 将来推計人口・国勢調査",
+      "pitfall": "推計は現在の傾向の延長であり、将来の政策や移動の変化は織り込まれない。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H12",
+      "level": "major",
+      "question": "人が住まなくなる集落は高齢化率でどこまで予測できるか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:aging-society",
+      "dataNote": "過疎地域等条件不利地域における集落の状況調査・国勢調査",
+      "pitfall": "地形や道路アクセスなど集落固有の事情を除けない。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H13",
+      "level": "major",
+      "question": "電車が少ない県の人はどのくらい車に頼っているのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:regional-transport",
+      "dataNote": "社会生活基本調査・自動車保有台数統計・国勢調査（通勤通学）",
+      "pitfall": "地形や都市の大きさで鉄道の有無が決まる面がある。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H14",
+      "level": "major",
+      "question": "2050年に駅の近くに住む人はどれくらい残るのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:railway",
+      "dataNote": "国土数値情報 駅・1kmメッシュ将来人口",
+      "pitfall": "推計は延長線であり、駅の廃止や新設は織り込まない。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H15",
+      "level": "major",
+      "question": "赤字ローカル線をバスに変えると地域は困るのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:railway",
+      "dataNote": "鉄道統計年報・乗合バス事業収支",
+      "pitfall": "需要が減った路線ほど転換対象になり、効果を測りにくい。",
+      "revenue": [
+        "実務",
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H16",
+      "level": "major",
+      "question": "公共交通が使いにくい地域に住む人はどれくらいいるのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:geographic-access",
+      "dataNote": "国土数値情報 バス停・駅・1kmメッシュ人口",
+      "pitfall": "運行本数・時間帯を除くと実際の使いやすさとはずれる。",
+      "revenue": [
+        "広告",
+        "データ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H17",
+      "level": "major",
+      "question": "自治体のコミュニティバスは高齢者の外出を増やすのか",
+      "unit": "municipality",
+      "answerability": "myth",
+      "primaryTheme": "theme:regional-transport",
+      "dataNote": "全国都市交通特性調査・自治体交通統計",
+      "pitfall": "健康状態や自家用車の有無という個人の差が強く効く。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H18",
+      "level": "major",
+      "question": "空き家バンクは空き家の流通を増やしたのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "国土交通省 空き家バンク実績・住宅・土地統計調査",
+      "pitfall": "条件の良い物件ばかりが成約する偏りがある。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H19",
+      "level": "major",
+      "question": "持ち家の広い県と狭い県は何が違うのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:living-housing",
+      "dataNote": "住宅・土地統計調査",
+      "pitfall": "地価や世帯人数が同時に効く。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H20",
+      "level": "major",
+      "question": "パソコンやタブレットを持つ世帯が多い県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:communication-access",
+      "dataNote": "全国家計構造調査・社会生活基本調査",
+      "pitfall": "年齢構成と世帯人数で数が変わる。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H21",
+      "level": "major",
+      "question": "通信にお金を使う県は仕事や学びも変わるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:communication-access",
+      "dataNote": "家計調査・通信利用動向調査",
+      "pitfall": "通信費は契約の仕方で決まり、利用の質は見えない。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:H22",
+      "level": "major",
+      "question": "公衆電話が多いのはどんな県か",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:communication-access",
+      "dataNote": "NTT東西 公衆電話設置状況・社会・人口統計体系",
+      "pitfall": "災害時の用途や設置基準の違いは統計に出ない。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I01",
+      "level": "major",
+      "question": "財政が苦しい市は、どんな市か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "市町村別決算状況調（財政力指数・将来負担比率）",
+      "pitfall": "指標ごとに順位が変わることを見せる",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I02",
+      "level": "major",
+      "question": "職員が多い市ほど、住民サービスはよいのか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "地方公共団体定員管理調査・決算状況調",
+      "pitfall": "面積が広い・離島の町は職員が多くなる",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I03",
+      "level": "major",
+      "question": "合併した町と合併しなかった町で、その後の人口はどう違うか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "市町村合併の記録・国勢調査（旧市町村の組み替え）",
+      "pitfall": "合併を選んだ町そもそもの違い",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I04",
+      "level": "major",
+      "question": "投票率が高い地域は、どんな地域か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:community-participation",
+      "dataNote": "各選挙の投票率（総務省・各選管）・年齢構成",
+      "pitfall": "高齢化・持ち家率・地域の結びつき",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I05",
+      "level": "major",
+      "question": "若い世代の投票率が低いと、予算は高齢者向けに偏るのか",
+      "unit": "municipality",
+      "answerability": "myth",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "年代別投票率・目的別歳出（民生費の内訳）",
+      "pitfall": "シルバー民主主義の研究の知見と並べる",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I06",
+      "level": "major",
+      "question": "女性議員が多い議会は、何が違うのか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:gender-participation",
+      "dataNote": "地方議会の女性議員割合（内閣府）・保育関連の歳出",
+      "pitfall": "都市部ほど女性議員が多い交絡",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I07",
+      "level": "major",
+      "question": "公共施設の老朽化が深刻な市はどこか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "公共施設等総合管理計画・有形固定資産減価償却率（財政状況資料集）",
+      "pitfall": "減価償却率で並べる",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I08",
+      "level": "major",
+      "question": "水道料金が高い町はどこで、これから上がるのはどこか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:water-services",
+      "dataNote": "水道統計（日本水道協会）・人口推計",
+      "pitfall": "人口が減ると一人あたりの負担が上がる仕組み",
+      "revenue": [
+        "実務",
+        "データ",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I08-1",
+      "level": "minor",
+      "question": "下水道の普及率が低い県は、なぜ低いのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "queries": [
+        "下水道普及率 低い 理由",
+        "徳島県 下水道 普及率 低い 理由",
+        "徳島 下水道普及率 低い 理由"
+      ],
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I09",
+      "level": "major",
+      "question": "国からの補助金に頼る県ほど、人口減少は止まっていないか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "地方交付税・国庫支出金・人口推移・内閣府 地方創生交付金採択実績・国勢調査",
+      "pitfall": "人口が減るから交付税が多い（逆の流れ）",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I09-1",
+      "level": "minor",
+      "question": "国からのお金（国庫支出金）が多い県は何で多いのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "地方財政状況調査・決算カード",
+      "pitfall": "災害や大型事業の年に偏る。",
+      "revenue": [
+        "実務",
+        "データ",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I10",
+      "level": "major",
+      "question": "公務員が多い県ほど、民間の働き口は少ないか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:local-economy",
+      "dataNote": "国勢調査（産業別就業者）・経済センサス",
+      "pitfall": "産業の少なさが公務員の多さの原因",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I11",
+      "level": "major",
+      "question": "借金の返済が軽くなった町は新しい投資を増やせるのか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "地方財政健全化判断比率・市町村決算",
+      "pitfall": "国の補正予算や起債制限などの制約が混ざる。",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I12",
+      "level": "major",
+      "question": "税収の多い町と交付税に頼る町の違いは何か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:local-finance",
+      "dataNote": "決算カード・地方交付税算定結果",
+      "pitfall": "都市規模と産業の集積が混ざる。",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I13",
+      "level": "major",
+      "question": "生活保護が多い市町村の財政はどうなっているか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:public-assistance",
+      "dataNote": "被保護者調査・市町村決算。関連記事の候補: gasoline-consumption-quantity-vs-public-assistance",
+      "pitfall": "地域の高齢化や雇用の違いが原因との区別がつかない。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": true,
+      "status": "active"
+    },
+    {
+      "id": "issue:I14",
+      "level": "major",
+      "question": "古い橋が多い県はどこで、点検は進んでいるのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:roads",
+      "dataNote": "道路メンテナンス年報・国土数値情報 橋梁",
+      "pitfall": "点検済みでも補修が済んだとは限らない。",
+      "revenue": [
+        "実務",
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I15",
+      "level": "major",
+      "question": "人口が減る町は道路や橋の維持費を払い続けられるのか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:roads",
+      "dataNote": "市町村決算・道路統計・日本の地域別将来推計人口",
+      "pitfall": "修繕単価の上昇や災害復旧費が比較を歪める。",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:I16",
+      "level": "major",
+      "question": "役所の手続きのオンライン化が進んでいる自治体はどこか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:local-government-digital",
+      "dataNote": "自治体DX・情報化推進状況調査・市町村決算",
+      "pitfall": "自治体の規模と人員の差が結果に出る。",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J01",
+      "level": "major",
+      "question": "猛暑日が増えた地域で、熱中症の救急搬送は増えたか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:climate",
+      "dataNote": "気象庁（地点別の猛暑日）・熱中症救急搬送人員（消防庁）",
+      "pitfall": "高齢化率で分ける",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J02",
+      "level": "major",
+      "question": "桜は本当に早く咲くようになったか、どこが一番早まったか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:climate",
+      "dataNote": "気象庁の生物季節観測",
+      "pitfall": "観測地点・観測対象の廃止の影響",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J03",
+      "level": "major",
+      "question": "災害が多い地域から、人は出ていくか",
+      "unit": "municipality",
+      "answerability": "caveat",
+      "primaryTheme": "theme:safety",
+      "dataNote": "災害の記録（消防庁・内閣府）・人口移動報告",
+      "pitfall": "被災前からの人口減少の流れと区別",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J04",
+      "level": "major",
+      "question": "浸水想定区域に住む人は、増えているのか減っているのか",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": null,
+      "dataNote": "国土数値情報（浸水想定区域）・国勢調査（小地域）・国土数値情報 浸水想定区域・1kmメッシュ将来人口",
+      "pitfall": "新しい住宅地が危ない場所に広がっていないか",
+      "revenue": [
+        "広告",
+        "データ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J05",
+      "level": "major",
+      "question": "ごみが少ない市は、何をしている市か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:waste-recycling",
+      "dataNote": "一般廃棄物処理実態調査（1人1日あたり排出量）・有料化の有無",
+      "pitfall": "有料化の前後で比べる",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J06",
+      "level": "major",
+      "question": "太陽光発電が多い県は、どんな県か",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:regional-energy",
+      "dataNote": "再生可能エネルギーの導入状況（資源エネルギー庁）・日照時間・地価・住宅・土地統計調査・再生可能エネルギー導入状況",
+      "pitfall": "土地の安さと日照の両方",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J07",
+      "level": "major",
+      "question": "耕作放棄地が増えている町は、農家の高齢化が進んだ町か",
+      "unit": "municipality",
+      "answerability": "relation",
+      "primaryTheme": "theme:agriculture-production",
+      "dataNote": "農林業センサス",
+      "pitfall": "担い手の年齢と後継者の有無を並べる",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J08",
+      "level": "major",
+      "question": "クマの出没が増えた地域は、どこで、なぜか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:natural-environment",
+      "dataNote": "クマ類の出没件数・人身被害（環境省）・人口減少・ブナの実り",
+      "pitfall": "年ごとの実りの豊凶が大きく効く",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J09",
+      "level": "major",
+      "question": "土砂災害の危険区域に住む人はどれくらいいるのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:landslide-exposure",
+      "dataNote": "国土数値情報 土砂災害警戒区域・1kmメッシュ人口",
+      "pitfall": "区域内の個々の建物の対策状況までは分からない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J10",
+      "level": "major",
+      "question": "海抜の低い場所に住む人は何人いるのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:tsunami-exposure",
+      "dataNote": "国土数値情報 標高・1kmメッシュ人口",
+      "pitfall": "標高は津波・高潮の被害そのものではない。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J11",
+      "level": "major",
+      "question": "津波の避難場所が多い県は安全なのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:tsunami-exposure",
+      "dataNote": "津波避難タワー等整備状況・国土数値情報。関連記事の候補: tsunami-evacuation-tower-count-prefecture-gap",
+      "pitfall": "施設の数が実際の避難のしやすさを保証するわけではない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J12",
+      "level": "major",
+      "question": "木の家が多い県は火事や地震に弱いのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:earthquake-exposure",
+      "dataNote": "住宅・土地統計調査・火災年報。関連記事の候補: wooden-housing-ratio-prefecture-gap",
+      "pitfall": "築年数・耐震改修の有無・世帯の資力が混ざる。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J13",
+      "level": "major",
+      "question": "電気をたくさん使う県は暮らしと産業のどちらが原因か",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:regional-energy",
+      "dataNote": "都道府県別エネルギー消費統計・家計調査。関連記事の候補: electricity-consumption-quantity-prefecture-gap",
+      "pitfall": "気候と産業構造の違いが重なる。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J14",
+      "level": "major",
+      "question": "大きな太陽光発電所は地元にお金を残しているのか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "primaryTheme": "theme:regional-energy",
+      "dataNote": "環境省 地域経済循環分析・経済センサス",
+      "pitfall": "売電収入の多くが地域外に出る構造は統計では見えない。",
+      "revenue": [
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J15",
+      "level": "major",
+      "question": "工場の多い県ほどCO2も多いのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:environmental-quality",
+      "dataNote": "温室効果ガス排出量推計・工業統計調査／経済構造実態調査",
+      "pitfall": "電力の作り方や業種の違いが排出量を左右する。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J16",
+      "level": "major",
+      "question": "ごみを埋め立てる量が多い県はどこで、処分場はあと何年持つのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:waste-recycling",
+      "dataNote": "一般廃棄物処理実態調査",
+      "pitfall": "広域処理や搬出入の影響で県の数字だけでは判断できない。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:J17",
+      "level": "major",
+      "question": "PM2.5が基準を満たせていない県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:environmental-quality",
+      "dataNote": "大気汚染状況（環境省）",
+      "pitfall": "測定局の配置が地域を代表するとは限らない。",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1222,6 +2489,10 @@
       "primaryTheme": "theme:household-food-spending",
       "dataNote": "家計調査（品目別・県庁所在市）・作物統計・漁業・養殖業生産統計",
       "pitfall": "家計調査は県庁所在市の値。産地の自家消費やもらい物は支出に出ない",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1234,6 +2505,9 @@
       "primaryTheme": "theme:household-food-spending",
       "dataNote": "家計調査（品目別・県庁所在市）",
       "pitfall": "県庁所在市の値で県を代表させている。歴史による説明は統計では確かめられない",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1246,6 +2520,25 @@
       "primaryTheme": "theme:household-food-spending",
       "dataNote": "家計調査（消費支出の内訳）・県民経済計算",
       "pitfall": "世帯人数・外食の多さで係数が動く。所得と並べて読む",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K04",
+      "level": "major",
+      "question": "お酒にお金を使う県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査",
+      "pitfall": "標本が小さく順位の差は誤差の範囲のこともある。",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1258,6 +2551,10 @@
       "primaryTheme": "theme:childcare-services",
       "dataNote": "保育・医療・住居・所得の各統計を合成",
       "pitfall": "合成指標は重みの選び方で順位が変わる。重みと指標を開示する",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1270,6 +2567,10 @@
       "primaryTheme": "theme:living-housing",
       "dataNote": "住居・物価・医療・治安の各統計を合成",
       "pitfall": "合成指標は重みの選び方で順位が変わる。重みと指標を開示する",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1282,6 +2583,10 @@
       "primaryTheme": "theme:geographic-access",
       "dataNote": "国土数値情報（施設・バス停・駅）・国勢調査（小地域）",
       "pitfall": "距離だけでは便数・坂・雪が見えない",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1294,6 +2599,10 @@
       "primaryTheme": "theme:manufacturing",
       "dataNote": "経済構造実態調査・工業統計（製造品出荷額・従業者数）",
       "pitfall": "出荷額は本社でなく工場の所在地で数える。1人あたりに直して比べる",
+      "revenue": [
+        "データ",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1306,6 +2615,10 @@
       "primaryTheme": "theme:agriculture-production",
       "dataNote": "作物統計・農林業センサス・漁業・養殖業生産統計",
       "pitfall": "産地の形成には歴史と政策も効く。統計で言えるのは今の分布まで",
+      "revenue": [
+        "データ",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1330,56 +2643,168 @@
         "北陸地方で稲作が盛んな理由",
         "北陸 米 なぜ"
       ],
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:F13-1",
-      "level": "minor",
-      "question": "新潟の子どもはなぜ背が高いのか",
-      "unit": "prefecture",
-      "answerability": "caveat",
-      "queries": [
-        "新潟県 身長 高い理由"
+      "revenue": [
+        "データ",
+        "実務"
       ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:D07-1",
-      "level": "minor",
-      "question": "高校教員の年収はなぜ県で違うのか",
+      "id": "issue:M03",
+      "level": "major",
+      "question": "建設業で働く人が多い県は公共工事も多いのか",
       "unit": "prefecture",
       "answerability": "relation",
-      "queries": [
-        "高校教師 年収 高い なぜ"
+      "primaryTheme": "theme:construction-industry",
+      "dataNote": "国勢調査・建設工事受注動態統計",
+      "pitfall": "民間工事の比率や高齢化で人数の意味が変わる。",
+      "revenue": [
+        "実務",
+        "データ"
       ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:I08-1",
-      "level": "minor",
-      "question": "下水道の普及率が低い県は、なぜ低いのか",
+      "id": "issue:M04",
+      "level": "major",
+      "question": "港が大きい県は製造業も強いのか",
       "unit": "prefecture",
       "answerability": "relation",
-      "queries": [
-        "下水道普及率 低い 理由",
-        "徳島県 下水道 普及率 低い 理由",
-        "徳島 下水道普及率 低い 理由"
+      "primaryTheme": "theme:ports",
+      "dataNote": "港湾統計・工業統計調査／経済構造実態調査",
+      "pitfall": "もともと工業地帯の近くに港ができた歴史が混ざる。",
+      "revenue": [
+        "広告",
+        "データ"
       ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:H06-1",
-      "level": "minor",
-      "question": "沖縄はなぜ持ち家率が低いのか",
+      "id": "issue:M05",
+      "level": "major",
+      "question": "観光客が増えると地元の収入も増えるのか",
       "unit": "prefecture",
       "answerability": "caveat",
-      "queries": [
-        "沖縄 持ち家率 なぜ",
-        "沖縄 持ち家 率 低い 理由"
+      "primaryTheme": "theme:tourism",
+      "dataNote": "宿泊旅行統計調査・市町村税課税状況。関連記事の候補: average-length-of-stay-prefecture-gap",
+      "pitfall": "もともと経済規模の大きい都市に観光客も集まる。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M06",
+      "level": "major",
+      "question": "長く泊まる観光客が多い県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:tourism",
+      "dataNote": "宿泊旅行統計調査",
+      "pitfall": "国内客と外国人客の構成で変わる。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M07",
+      "level": "major",
+      "question": "宿泊税を取ると観光客は減るのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:tourism",
+      "dataNote": "自治体税務統計・宿泊旅行統計調査",
+      "pitfall": "為替や感染症などの大きな変化が同じ時期に起きる。",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M08",
+      "level": "major",
+      "question": "国立公園が多い県は観光の稼ぎも多いのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:tourism",
+      "dataNote": "自然公園面積統計・観光入込客統計",
+      "pitfall": "知名度や交通の便が同時に効く。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M09",
+      "level": "major",
+      "question": "農家は減っても農地は担い手に集まっているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:agriculture-production",
+      "dataNote": "農林業センサス・農地中間管理機構実績。関連記事の候補: employed-people-ratio-primary-prefecture-gap",
+      "pitfall": "平地と山間部の条件の違いが大きい。",
+      "revenue": [
+        "実務",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M10",
+      "level": "major",
+      "question": "食料自給率の高い県は何を作っているのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:agriculture-production",
+      "dataNote": "都道府県別食料自給率・農林業センサス",
+      "pitfall": "カロリー換算では作物の種類で数字が大きく変わる。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M11",
+      "level": "major",
+      "question": "牛や鶏はなぜ特定の県に集中するのか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "primaryTheme": "theme:agriculture-production",
+      "dataNote": "畜産統計・農林業センサス",
+      "pitfall": "歴史や気候条件の影響は統計に出ない。",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:M12",
+      "level": "major",
+      "question": "森林が多い県は林業も盛んなのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:forestry-timber",
+      "dataNote": "農林業センサス・林業産出額",
+      "pitfall": "資源の量と実際に伐採・加工される量は別の話。",
+      "revenue": [
+        "データ",
+        "広告"
       ],
       "sensitive": false,
       "status": "active"
@@ -1396,6 +2821,9 @@
         "沖縄 身長 低い 理由",
         "沖縄 平均身長 低い なぜ",
         "沖縄 身長低い なぜ"
+      ],
+      "revenue": [
+        "広告"
       ],
       "sensitive": false,
       "status": "active"
@@ -1415,6 +2843,10 @@
         "食料自給率が低い理由",
         "なぜ日本は食料自給率が低いのか"
       ],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1428,6 +2860,9 @@
       "pitfall": "漁獲量・就業者・経営体で順位が変わる。獲る漁業と育てる漁業を分ける",
       "queries": [
         "北海道 漁業 盛んな 理由"
+      ],
+      "revenue": [
+        "広告"
       ],
       "sensitive": false,
       "status": "active"
@@ -1445,6 +2880,9 @@
         "秋田 風力発電 多い なぜ",
         "青森 風 強い なぜ"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1458,6 +2896,10 @@
       "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。外食の少なさ・気候など理由は集計から断定できない",
       "queries": [
         "青森 カップラーメン なぜ"
+      ],
+      "revenue": [
+        "広告",
+        "データ"
       ],
       "sensitive": false,
       "status": "active"
@@ -1474,6 +2916,9 @@
         "高知県はなぜカツオが有名なのか",
         "沖縄 鰹節 なぜ"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1489,6 +2934,9 @@
         "チョコレート消費量 日本一 なぜ",
         "山口市 チョコレート 消費 なぜ"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1502,6 +2950,9 @@
       "pitfall": "県の平均正答率の差は小さい年がある。学校・家庭・地域のどれが効くかは集計から分けられない",
       "queries": [
         "北陸 学力 高い理由"
+      ],
+      "revenue": [
+        "広告"
       ],
       "sensitive": false,
       "status": "active"
@@ -1518,6 +2969,10 @@
         "三重県 半導体 なぜ",
         "東北地方 半導体 なぜ"
       ],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1533,6 +2988,10 @@
         "生活保護 理由 ランキング",
         "北海道 生活保護 多い理由"
       ],
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": true,
       "status": "active"
     },
@@ -1546,6 +3005,10 @@
       "pitfall": "地域別の金額は審議で決まる制度の値で、県の賃金水準そのものではない",
       "queries": [
         "秋田県 最低賃金 なぜ 低い"
+      ],
+      "revenue": [
+        "広告",
+        "実務"
       ],
       "sensitive": false,
       "status": "active"
@@ -1562,6 +3025,9 @@
         "女性の方が長生きの理由",
         "なぜ女性の方が長生きなのか"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1575,6 +3041,9 @@
       "pitfall": "昼間人口の実数と昼夜間人口比率で順位が変わる",
       "queries": [
         "東京 昼間人口 多い 理由"
+      ],
+      "revenue": [
+        "広告"
       ],
       "sensitive": false,
       "status": "active"
@@ -1590,11 +3059,14 @@
       "queries": [
         "北海道 持ち家率 低い 理由"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:F14",
+      "id": "issue:F18",
       "level": "major",
       "question": "中絶率が高い県はどこで、何と関係するか",
       "unit": "prefecture",
@@ -1605,11 +3077,14 @@
       "queries": [
         "中絶 理由 ランキング"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": true,
       "status": "active"
     },
     {
-      "id": "issue:F15",
+      "id": "issue:F19",
       "level": "major",
       "question": "都会ほどスポーツをするのは本当か",
       "unit": "prefecture",
@@ -1617,26 +3092,14 @@
       "primaryTheme": "theme:sports-participation",
       "dataNote": "社会生活基本調査",
       "pitfall": "行動者率は「1 年に 1 回でも」を含む。施設の多さと種目の違いを分けて読む",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:F16",
-      "level": "major",
-      "question": "精神病床が多い県はどこで、なぜか",
-      "unit": "prefecture",
-      "answerability": "caveat",
-      "primaryTheme": "theme:healthcare",
-      "dataNote": "医療施設調査・病院報告",
-      "pitfall": "病床の多さは病気の多さではなく、過去の整備の経緯と地域移行の遅れを映す。在院日数と併せて読む",
-      "queries": [
-        "沖縄 精神科 多い 理由"
-      ],
-      "sensitive": true,
-      "status": "active"
-    },
-    {
-      "id": "issue:H11",
+      "id": "issue:H23",
       "level": "major",
       "question": "コンビニが多い県と少ない県は何が違うのか",
       "unit": "prefecture",
@@ -1644,11 +3107,15 @@
       "primaryTheme": "theme:retail-commerce",
       "dataNote": "商業統計・経済構造実態調査",
       "pitfall": "店舗数の実数は人口に比例する。人口あたりで見て、スーパーや大型店の多さと併せて読む",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:H12",
+      "id": "issue:H24",
       "level": "major",
       "question": "パチンコ店が多い県はどこで、何と関係するか",
       "unit": "prefecture",
@@ -1656,11 +3123,14 @@
       "primaryTheme": "theme:cultural-participation",
       "dataNote": "全日本遊技事業協同組合連合会の店舗数（警察庁資料）・社会生活基本調査",
       "pitfall": "店舗の多さと、遊ぶ人の多さ（行動者率）は別の指標。相関があっても理由は言えない",
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:J09",
+      "id": "issue:J18",
       "level": "major",
       "question": "日照時間が長い県はどこで、なぜか",
       "unit": "prefecture",
@@ -1673,11 +3143,14 @@
         "瀬戸内 日照時間が長い理由",
         "山梨 日照時間日本一 なぜ"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:J10",
+      "id": "issue:J19",
       "level": "major",
       "question": "「雨が多い県」と「雨の日が多い県」はなぜ違うのか",
       "unit": "prefecture",
@@ -1689,11 +3162,14 @@
         "千葉 雨 多い なぜ",
         "宮崎 降水量 多い理由"
       ],
+      "revenue": [
+        "広告"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:C11",
+      "id": "issue:C13",
       "level": "major",
       "question": "労災が多い県はどこで、何が効いているか",
       "unit": "prefecture",
@@ -1704,47 +3180,30 @@
       "queries": [
         "労災 原因 ランキング"
       ],
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:C12",
-      "level": "major",
-      "question": "火事で亡くなる人が多い県はどこで、なぜか",
-      "unit": "prefecture",
-      "answerability": "caveat",
-      "primaryTheme": "theme:safety",
-      "dataNote": "消防白書・火災報告",
-      "pitfall": "人口あたりで見る。高齢化と住宅の条件が重なるので、集計だけでは理由を分けられない（消防白書 令和7年度）",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:J11",
-      "level": "major",
+      "id": "issue:J09-1",
+      "level": "minor",
       "question": "土砂災害警戒区域が多い県は、危険な県か",
       "unit": "prefecture",
       "answerability": "myth",
-      "primaryTheme": "theme:safety",
       "dataNote": "土砂災害防止法に基づく区域指定",
       "pitfall": "区域の数は地形のほか指定の進み具合も映す。少ない県が安全とは限らない（防災白書 令和7年度）",
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
       "status": "active"
     },
     {
-      "id": "issue:D11",
-      "level": "major",
-      "question": "貯蓄が多い県は、暮らしに余裕があるのか",
-      "unit": "prefecture",
-      "answerability": "myth",
-      "primaryTheme": "theme:real-income",
-      "dataNote": "家計調査・全国家計構造調査",
-      "pitfall": "貯蓄の多さは高齢者の多さと将来の不安でも動く。所得の高さとは別に読む",
-      "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:H13",
+      "id": "issue:H25",
       "level": "major",
       "question": "地方は車の費用で、都市より移動の負担が重いのか",
       "unit": "prefecture",
@@ -1752,6 +3211,10 @@
       "primaryTheme": "theme:geographic-access",
       "dataNote": "家計調査・国勢調査",
       "pitfall": "都市は運賃・駐車場・家賃がかかるので、交通費だけを比べると負担を見誤る",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1764,6 +3227,10 @@
       "dataNote": "家計調査",
       "pitfall": "県庁所在市の世帯の購入の値で、自家消費やもらい物、外食は入らない。消費量の日本一ではない",
       "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -1776,19 +3243,11 @@
       "dataNote": "病院報告",
       "pitfall": "病床の種類で日数が大きく違う。全病床の平均は精神・療養の多さに引っ張られる",
       "queries": [],
+      "revenue": [
+        "広告",
+        "実務"
+      ],
       "sensitive": false,
-      "status": "active"
-    },
-    {
-      "id": "issue:B04-1",
-      "level": "minor",
-      "question": "外国人の働き手が多い地域で、日本人の賃金は下がったか",
-      "unit": "prefecture",
-      "answerability": "myth",
-      "dataNote": "外国人雇用状況・賃金構造基本統計調査",
-      "pitfall": "賃金の低い産業に外国人が集まるので、県の相関は因果を示さない。地域の比較と個人の話を分ける",
-      "queries": [],
-      "sensitive": true,
       "status": "active"
     },
     {
@@ -1800,6 +3259,10 @@
       "dataNote": "宿泊旅行統計調査・住民基本台帳人口移動報告",
       "pitfall": "効果が見えるのは一部の観光地に限られる可能性がある。県の平均で見ると薄まる",
       "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
       "sensitive": false,
       "status": "active"
     }

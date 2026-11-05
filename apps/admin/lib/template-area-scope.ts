@@ -34,7 +34,6 @@ export interface AreaChart extends RankingChart {
 }
 
 const PREFECTURE_COUNT = 47;
-const WARD_NOTE: Record<WardMode, string> = { merged: '政令指定都市は市全体', split: '政令指定都市は行政区ごと' };
 const policy = (() => {
   let built: ReturnType<typeof buildMunicipalityEntityPolicy> | undefined;
   return () => (built ??= buildMunicipalityEntityPolicy());
@@ -71,13 +70,6 @@ export function scopeAttributes(scope: AreaScope) {
   return `data-scope="municipality" data-ward-mode="${scope.wardMode}" data-within="${range}"`;
 }
 
-const hasDesignatedCity = (scope: AreaScope) => {
-  if (scope.level === 'prefecture') return false;
-  const { within } = scope;
-  const { designatedCityCodes } = resolveWardModeAreas(policy(), 'merged');
-  return [...designatedCityCodes].some((code) => within.kind === 'nation' || code.startsWith(within.prefCode));
-};
-
 /**
  * The chart a scope gives: the file holds every area, the scope picks the set, and ranks are counted inside
  * that set. A ward's rank never mixes with the cities', and a metric without ward values cannot be split.
@@ -105,10 +97,9 @@ export function resolveAreaChart(input: AreaChartInput): AreaChart {
     rank: sorted.findIndex((other) => other.value === row.value) + 1,
     area_code: row.areaCode, area_name: areas.get(row.areaCode)!, value: row.value,
   }));
-  const wardNote = input.scope.level === 'municipality' && hasDesignatedCity(input.scope) ? WARD_NOTE[input.scope.wardMode] : '';
   return {
     title: input.title, yearLabel: input.yearLabel, source: input.source, presentation: input.presentation, rows,
-    note: [input.note, wardNote].filter(Boolean).join(' · ') || undefined,
+    note: input.note,
     scope: input.scope,
     missing: [...areas.keys()].filter((code) => !seen.has(code)),
     ...chartValueLabels(input.unit, rows.map((row) => row.value), input.decimalPlaces),

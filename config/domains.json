@@ -89,6 +89,7 @@
       "nav": [
         { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
         { "label": "Geo 分析", "href": "/data/geo", "kind": "inventory" },
+        { "label": "月次データの台帳", "href": "/data/monthly", "kind": "inventory" },
         { "label": "参考文献管理", "href": "/content/references", "kind": "inventory" },
         { "label": "調査カタログ", "href": "/research", "kind": "inventory" },
         { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" },
