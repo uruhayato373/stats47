@@ -891,7 +891,8 @@ updated: 2026-11-01
 - **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
 - **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
 - **段階 4 (2026-11-05)**: オーナーが見本を確認し、`render-ranking-images.mjs` を共通の型へ替えた (地図・棒・地方別の箱ひげ、1080×1350)。公開中の note の画像はまだ旧版のまま。残りは、管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う) ことと、使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消すこと。
-- **次**: 段階 5 の最初の更新は見本を見せて止まる。
+- **段階 5 (2026-11-05)**: 画像だけを差し替える `update-note-body-figures.mjs` を入れた。`a-maximum-temperature` の dry-run は通り、オーナーの更新の承認も得た。会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」) ので未更新。note には何も送っていない。
+- **次**: `a-maximum-temperature` を note のログインのある環境で `--commit` し、公開ページをスマホ幅で確かめる。その後 `note:article save` で正本の画像も入れ替える。
 
 ### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]

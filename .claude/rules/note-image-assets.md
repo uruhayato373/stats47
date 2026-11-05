@@ -176,6 +176,7 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 - 47 県がそろわない指標は型にできず、生成が止まる。
 - PNG にする librsvg は「°C」の 2 文字を離して描くので、`rasterSafeSvg` が 1 文字の「℃」へ置き換える。
 - **見た目を変えたら** `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、`render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
+- 公開済みの無料記事の 3 枚は `update-note-body-figures.mjs --key <key>` が差し替える (既定は dry-run・`--commit` で更新)。エディタの画像挿入を使わず、公開版の本文 HTML の `<img>` だけを置き換えて公開 PUT に差し込むので、文章・カード・タグ・カバーは変わらない。有料記事は止める。更新後は `note:article save` で正本の画像も入れ替える。
 - カバーは Remotion の制作入力のままで、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは `NOTE-COVER-ROLLOUT-20260928` が持つ。
 
 ## 本文の図の台帳 (2026-11-05)
