@@ -18,9 +18,9 @@ describe('representative statistics for image template basics', () => {
     expect(new Set(catalog.map((t) => t.id)).size).toBe(catalog.length);
     expect(catalog.map((t) => t.id)).not.toContain('unclassified');
     expect(catalog.map((t) => t.id)).not.toContain('note-cover');
-    // Seven main statistical forms; maps are exactly the tile map and the real-shape map.
+    // Eight main statistical forms; maps are exactly the tile map and the real-shape map.
     expect(catalog.filter((t) => templateGroup(t) === 'chart').map((t) => t.id).sort()).toEqual(
-      ['bar', 'choropleth', 'line', 'scatter', 'stacked-bar', 'table', 'tile-map']
+      ['bar', 'choropleth', 'grouped-bar', 'line', 'scatter', 'stacked-bar', 'table', 'tile-map']
     );
     // A purpose filter narrows the list without duplicating forms.
     expect(templateCatalog(templates, 'ranking').map((t) => t.id)).toEqual(expect.arrayContaining(['bar', 'table', 'tile-map']));

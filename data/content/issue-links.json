@@ -452,11 +452,6 @@
       "role": "evidence"
     },
     {
-      "issue": "issue:H10",
-      "page": "ranking:new-housing-starts",
-      "role": "evidence"
-    },
-    {
       "issue": "issue:I01",
       "page": "blog:local-finance-theme-overview",
       "role": "answers"
@@ -724,6 +719,261 @@
     {
       "issue": "issue:I08-1",
       "page": "blog:sewerage-water-supply-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D12",
+      "page": "blog:cpi-change-rate-food-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D12",
+      "page": "blog:cpi-change-rate-culture-recreation-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D15",
+      "page": "blog:new-graduate-scheduled-salary-university-male-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M03",
+      "page": "blog:construction-employed-residents-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M03",
+      "page": "blog:public-construction-contract-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E13",
+      "page": "blog:elementary-school-teachers-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E13",
+      "page": "blog:junior-high-school-students-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:G09",
+      "page": "blog:dual-income-household-ratio-vs-elderly-on-public-assistance",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C12",
+      "page": "blog:fire-deaths-per-100k-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C12",
+      "page": "blog:fire-department-pump-car-count-per-100-thousand-people",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F17",
+      "page": "blog:psychiatric-hospital-avg-length-of-stay-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F17",
+      "page": "blog:psychiatric-hospital-bed-occupancy-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I09-1",
+      "page": "blog:national-treasury-disbursement-prefecture-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H13",
+      "page": "blog:train-fare-consumption-expenditure-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H13",
+      "page": "geo:population-station-access",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H14",
+      "page": "geo:population-station-access",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H16",
+      "page": "geo:population-station-access",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I14",
+      "page": "blog:road-bridge-diagnosed-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M04",
+      "page": "blog:manufacturing-shipment-amount-vs-manufacturing",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J09",
+      "page": "blog:landslide-warning-zone-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J09",
+      "page": "blog:landslide-special-warning-zone-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J09",
+      "page": "geo:population-landslide-exposure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J10",
+      "page": "geo:population-low-elevation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H19",
+      "page": "blog:floor-area-per-dwelling-owner-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M06",
+      "page": "blog:average-length-of-stay-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M08",
+      "page": "blog:national-park-area-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M10",
+      "page": "blog:food-self-sufficiency-rate-calorie-vs-passport-issuance",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M11",
+      "page": "blog:dairy-cattle-holdings-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M11",
+      "page": "blog:layer-hen-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J15",
+      "page": "blog:manufacturing-shipment-amount-vs-regional-industry-co2",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J15",
+      "page": "blog:regional-co2-emissions-estimate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J16",
+      "page": "blog:garbage-final-disposal-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J16",
+      "page": "blog:final-disposal-site-remaining-capacity-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J17",
+      "page": "blog:pm25-general-station-compliance-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H20",
+      "page": "blog:pc-ownership-multi-person-households-per-1000-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H20",
+      "page": "blog:tablet-ownership-multi-person-households-per-1000",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H22",
+      "page": "blog:public-phone-count-per-1000-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H22",
+      "page": "blog:public-phone-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H05",
+      "page": "blog:population-decline-land-price-divergence",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A10",
+      "page": "blog:average-age-of-first-marriage-wife-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A09",
+      "page": "blog:divorces-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D01",
+      "page": "blog:regular-cash-salary-male-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D03",
+      "page": "blog:female-scheduled-earnings-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B02",
+      "page": "blog:foreign-worker-count-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B02",
+      "page": "blog:foreign-resident-population-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B03",
+      "page": "blog:foreign-resident-population-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F10",
+      "page": "blog:emergency-hospital-general-clinic-count-per-100k-prefecture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H10",
+      "page": "blog:new-housing-starts-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H10",
+      "page": "blog:new-condo-starts-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J06",
+      "page": "blog:solar-power-housing-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02",
+      "page": "blog:fresh-seafood-consumption-quantity-prefecture-gap",
       "role": "answers"
     }
   ]

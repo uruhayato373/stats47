@@ -1,4 +1,5 @@
 import { REGIONS } from '../../../packages/area/src/constants/regions';
+import { prefectureShortName } from '../../../packages/area/src/utils/prefecture-short-name';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 import { LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
@@ -36,7 +37,7 @@ export function renderRegionalBoxplotChart(chart: RankingChart, theme: ChartThem
     const low = members.reduce((a, b) => (b.value < a.value ? b : a));
     const y = top + i * rowHeight, boxTop = y + 52, boxHeight = 40, mid = boxTop + boxHeight / 2, labelY = boxTop + boxHeight + 34;
     const wash = i % 2 === 0 ? `<rect x="${left}" y="${y}" width="${right - left}" height="${rowHeight}" fill="${mixColor(color, theme.paper, dark ? 0.86 : 0.94)}"/>` : '';
-    const name = (row: typeof high) => row.area_name.replace(/[都府県]$/, '');
+    const name = (row: typeof high) => prefectureShortName(row.area_name);
     const dots = members.map((row) => `<circle data-area="${row.area_code}" cx="${xAt(row.value).toFixed(1)}" cy="${mid}" r="8" fill="${dot}" stroke="${theme.paper}" stroke-width="2"/>`).join('');
     const ends = high === low ? '' : `<text x="${xAt(low.value)}" y="${labelY}" font-size="26" text-anchor="${xAt(low.value) < left + 90 ? 'start' : 'middle'}" fill="${theme.muted}">${escapeXml(name(low))}</text>
       <text x="${xAt(high.value)}" y="${labelY}" font-size="26" text-anchor="${xAt(high.value) > right - 90 ? 'end' : 'middle'}" fill="${theme.muted}">${escapeXml(name(high))}</text>`;

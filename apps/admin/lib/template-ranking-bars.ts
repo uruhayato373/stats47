@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { BRAND } from '../../web/src/features/ogp/brand';
-import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
+import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type RankingChart } from './template-ranking-data';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
+import { scopeAttributes, type AreaChart } from './template-area-scope';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 import { LIGHT_THEME, mixColor, outlineAttrs, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 
@@ -48,52 +49,19 @@ export function renderRankingBars(raw: unknown, presentation: MetricPresentation
 
 /** Upper and lower five of any complete ranking, in the metric's colour (lower five in its lighter tint). */
 export function renderRankingBarsChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
-  return drawBars(chart, assertRankingRows(chart.rows), theme);
+  return drawBars(chart, assertRankingRows(chart.rows), theme, { title: chart.title + 'ランキング', upper: '上位5県', lower: '下位5県' });
 }
 
-const COLUMN = { gap: 40, nameMax: 170, nameSize: 26, valueSize: 23, barInset: 7, maxRows: 30, maxRowHeight: 84 } as const;
-
-/**
- * Every row in two columns, for rows that cannot go on a map (cities, occupations). Negative values
- * grow left of a shared zero line and their value sits on the other side of it.
- */
-export function renderColumnBarsChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
-  const rows = [...chart.rows].sort((a, b) => a.rank - b.rank || b.value - a.value);
-  const half = Math.ceil(rows.length / 2);
-  if (!rows.length || half > COLUMN.maxRows || rows.some((r) => !Number.isFinite(r.value))) throw new Error('2 列の棒にできる行数と値を確認してください。');
-  const color = toHex(resolveMetricColor(chart.presentation) ?? BRAND.primary);
-  const negative = mixColor(color, '#FFFFFF', 0.38);
-  const top = sampleBodyTop(Boolean(chart.note)) + 8;
-  const rowHeight = Math.min(COLUMN.maxRowHeight, (SAMPLE_FRAME.bodyBottom - top) / half);
-  const width = (SAMPLE_FRAME.right - SAMPLE_FRAME.left - COLUMN.gap) / 2;
-  const nameWidth = Math.min(COLUMN.nameMax, Math.max(...rows.map((r) => textWidth(r.area_name, COLUMN.nameSize)))) + 12;
-  const plot = width - nameWidth;
-  const signed = rows.some((r) => r.value < 0) && rows.some((r) => r.value > 0);
-  const valueWidth = Math.max(...rows.map((r) => textWidth(chart.formatValue(r.value), COLUMN.valueSize))) + 8;
-  const largest = Math.max(...rows.map((r) => Math.abs(r.value))) || 1;
-  // Signed: a bar reaches from the zero line to the edge at the largest value. Unsigned: the value column keeps the right edge.
-  const reach = signed ? plot / 2 : plot - valueWidth;
-  const column = (list: typeof rows, left: number) => list.map((r, i) => {
-    const y = top + i * rowHeight, middle = y + rowHeight / 2;
-    const zero = left + nameWidth + (signed ? plot / 2 : 0);
-    const length = Math.max(2, reach * Math.abs(r.value) / largest);
-    const inward = signed && r.value < 0;
-    const value = signed
-      ? `<text x="${zero + (inward ? 8 : -8)}" y="${middle + 8}" text-anchor="${inward ? 'start' : 'end'}" font-size="${COLUMN.valueSize}" fill="${theme.muted}">${chart.formatValue(r.value)}</text>`
-      : `<text x="${left + width}" y="${middle + 8}" text-anchor="end" font-size="${COLUMN.valueSize}" fill="${theme.muted}">${chart.formatValue(r.value)}</text>`;
-    const rule = signed ? `<line x1="${zero}" y1="${y + 3}" x2="${zero}" y2="${y + rowHeight - 3}" stroke="${theme.line}" stroke-width="2"/>` : '';
-    return `<g data-rank="${r.rank}" data-value="${r.value}"><text x="${left}" y="${middle + 9}" font-size="${COLUMN.nameSize}" fill="${theme.ink}">${escapeXml(r.area_name)}</text>${rule}<rect data-bar-value="true" x="${(inward ? zero - length : zero).toFixed(1)}" y="${(y + COLUMN.barInset).toFixed(1)}" width="${length.toFixed(1)}" height="${(rowHeight - COLUMN.barInset * 2).toFixed(1)}" fill="${r.value < 0 ? negative : color}"/>${value}</g>`;
-  }).join('');
-  return sampleFrame({
-    title: chart.title, titleSize: fitTitleSize(chart.title), meta: `${chart.yearLabel} · 単位：${chart.unit}`, note: chart.note, source: chart.source,
-    attributes: 'data-image-template="bar" data-variant="columns"',
-    body: column(rows.slice(0, half), SAMPLE_FRAME.left) + column(rows.slice(half), SAMPLE_FRAME.left + width + COLUMN.gap),
-    theme,
-  });
+/** The same cards for a scope's areas (resolveAreaChart): one bar type, whatever the set. */
+export function renderAreaBarsChart(chart: AreaChart, theme: ChartTheme = LIGHT_THEME) {
+  if (chart.rows.length < 2) throw new Error('棒グラフには 2 つ以上の地域が要ります。');
+  return drawBars(chart, chart.rows, theme, { title: chart.title, upper: '上位', lower: '下位', attributes: scopeAttributes(chart.scope) });
 }
 
-function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: ChartTheme) {
-  const rows = { top: allRows.slice(0, 5), bottom: allRows.slice(-5) };
+function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: ChartTheme, labels: { title: string; upper: string; lower: string; attributes?: string }) {
+  // Five each, or half each when there are fewer than ten rows.
+  const each = Math.min(5, Math.floor(allRows.length / 2));
+  const rows = { top: allRows.slice(0, each), bottom: allRows.slice(-each) };
   const axis = rankingBarAxis(allRows.map((row) => row.value), chart.presentation);
   const dark = theme.name === 'dark';
   // The metric's own colour (strong end of its scheme), so its bars and its map share one hue.
@@ -124,12 +92,12 @@ function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: Cha
       return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${CARD.rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${fill}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}${marker}</g>`;
     }).join('')}`;
   return sampleFrame({
-    title: chart.title + 'ランキング', titleSize: fitTitleSize(chart.title + 'ランキング'),
+    title: labels.title, titleSize: fitTitleSize(labels.title),
     meta: `${chart.yearLabel} · 単位：${chart.unit}${axis.truncated ? ` · 範囲：${chart.formatValue(axis.min)}–${chart.formatValue(axis.max)}` : ''}`,
     note: chart.note,
     source: chart.source,
-    attributes: `data-image-template="bar" data-domain-min="${axis.min}" data-domain-max="${axis.max}"`,
-    body: group(rows.top, '上位5県', top, color) + group(rows.bottom, '下位5県', top + groupHeight + groupGap, lower),
+    attributes: `data-image-template="bar" data-domain-min="${axis.min}" data-domain-max="${axis.max}"${labels.attributes ? ` ${labels.attributes}` : ''}`,
+    body: group(rows.top, labels.upper, top, color) + group(rows.bottom, labels.lower, top + groupHeight + groupGap, lower),
     theme,
   });
 }

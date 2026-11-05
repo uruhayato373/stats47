@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
-import { rankingChartFromArticleData, partialBarChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { rankingChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
 import { PREF_NAMES } from '../../../../.claude/scripts/lib/prefectures.cjs';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { prefectureChordNodes, regionChordNodes, renderChordChart, type MigrationPair } from '@/lib/template-chord';
-import { renderColumnBarsChart } from '@/lib/template-ranking-bars';
 import { renderTileMapChart } from '@/lib/template-ranking-tile-map';
 
 const code = (i: number) => `${String(i + 1).padStart(2, '0')}000`;
@@ -61,25 +60,5 @@ describe('基準の県のあるタイル地図', () => {
   });
   it('allowBaseArea が無ければ棒の経路は 46 県を 47 県にしない', () => {
     expect(rankingChartFromArticleData(article('population-migration-inter-prefecture'), { ...opts, allowBaseArea: false })).toHaveProperty('skip');
-  });
-});
-
-describe('棒の 2 列の形', () => {
-  const chartOf = (values: number[]) => {
-    const chart = partialBarChartFromArticleData({ title: '市町村の比率', year: '2024', unit: '%', data: values.map((value, i) => ({ areaName: `市${i}`, value })) });
-    if ('skip' in chart) throw Error(chart.skip);
-    return chart;
-  };
-  it('全行を描き、見本と同じ印を持つ', () => {
-    const svg = renderColumnBarsChart(chartOf(Array.from({ length: 30 }, (_, i) => 30 - i)));
-    expect(svg.match(/data-rank="/g)).toHaveLength(30);
-    expect(svg).toContain('data-variant="columns"');
-    expect(svg).not.toContain('<line');
-  });
-  it('正負が混ざると 0 の線を引く', () => {
-    expect(renderColumnBarsChart(chartOf([5, 3, -2, -8]))).toContain('<line');
-  });
-  it('2 列に収まらない行数は描かない', () => {
-    expect(() => renderColumnBarsChart(chartOf(Array.from({ length: 61 }, (_, i) => i + 1)))).toThrow();
   });
 });
