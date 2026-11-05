@@ -614,6 +614,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:fabrics-yarn-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fabrics-yarn-group-consumption-expenditure",
           "kind": "ranking"
         }

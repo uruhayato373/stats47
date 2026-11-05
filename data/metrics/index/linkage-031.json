@@ -3137,6 +3137,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:underwear-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:underwear-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -6501,7 +6505,7 @@
     },
     {
       "metricKey": "utilities-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:utilities-budget-share-kakei",
       "title": "消費支出に占める光熱・水道の割合",
       "sources": [
         {
@@ -6807,6 +6811,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:utilities-expenditure-total-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:utilities-expenditure-total",
           "kind": "ranking"
@@ -9577,6 +9585,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:vegetables-seaweed-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:vegetables-seaweed-group-consumption-expenditure",
           "kind": "ranking"

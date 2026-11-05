@@ -808,6 +808,12 @@ jobs:
           npm run check:display-units --workspace=@stats47/data-configs
         continue-on-error: false
 
+      - name: 🎨 Color Policy Ledger Gate
+        run: |
+          # 指標 × 粒度の配色の台帳 (生成物) の整合。判定の規則は packages/types/src/color-policy.ts
+          npx tsx .claude/scripts/metrics/check-color-policies.ts
+        continue-on-error: false
+
       - name: 🧺 Kakei Item Classification Gate
         run: |
           # 家計調査 metric の文言が総務省の収支項目分類の「× 含まれない」例示と矛盾しないことを担保。

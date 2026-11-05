@@ -3,9 +3,9 @@ import sharp from 'sharp';
 import { renderRankingTileMap } from '@/lib/template-ranking-tile-map';
 import { renderAll47TileSvg } from '../../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../../remotion/src/features/data-cards/tile-scale';
-import { applyColorPolicy } from '../../../../packages/types/src/color-policy';
 import { resolveChoroplethScale } from '../../../../packages/visualization/src/server';
 import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
+import { applyColorPolicy } from '../../../../packages/types/src/color-policy';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 const names = ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'];
 // Synthetic values test code-to-prefecture mapping; live data stays in the SHA-verified R2 snapshot.
@@ -18,6 +18,7 @@ const fixture = () => ({
 });
 // One far-out value turns the map from the continuous ramp to five steps (color-policy.ts).
 const stepped = () => { const input = fixture(); input.data[0].value = 200; return input; };
+const SAMPLE = applyColorPolicy(RANKING_SAMPLE_METRIC.visualization, stepped().data.map((r) => r.value));
 function tile(svg: string, code: string) {
   const match = new RegExp(`<g transform="translate\\(([\\d.]+),([\\d.]+)\\)" data-area="${code}" data-value="([^"]+)"><rect width="([\\d.]+)" height="([\\d.]+)"`).exec(svg);
   expect(match).toBeTruthy();
@@ -39,7 +40,7 @@ describe('compact tile-map basic form (4:5 images)', () => {
     expect(svg.match(/data-top="/g)?.length).toBeGreaterThanOrEqual(3);
     expect(svg).toContain('上位3県');
     // One legend row per class (colour, range, number of prefectures); the counts cover all 47.
-    const scale = resolveTileScale(RANKING_SAMPLE_METRIC.visualization, input.data.map((r) => r.value))!;
+    const scale = resolveTileScale(SAMPLE, input.data.map((r) => r.value))!;
     const counts = [...svg.matchAll(/<g data-legend-row="\d+">.*?>(\d+)県<\/text><\/g>/g)].map((m) => Number(m[1]));
     expect(counts).toHaveLength(scale.colors.length);
     expect(counts.reduce((a, b) => a + b, 0)).toBe(47);
@@ -63,8 +64,8 @@ describe('compact tile-map basic form (4:5 images)', () => {
   });
   it('resolves tile colours exactly like the ranking page (sync resolver vs resolveChoroplethScale)', async () => {
     const values = stepped().data.map((r) => r.value);
-    const site = await resolveChoroplethScale(applyColorPolicy(RANKING_SAMPLE_METRIC.visualization, values), values.map((value, i) => ({ areaCode: String(i), value })));
-    const tiles = resolveTileScale(RANKING_SAMPLE_METRIC.visualization, values)!;
+    const site = await resolveChoroplethScale(SAMPLE, values.map((value, i) => ({ areaCode: String(i), value })));
+    const tiles = resolveTileScale(SAMPLE, values)!;
     expect(tiles.colors).toEqual(site.colors);
     expect(tiles.boundaries).toEqual(site.boundaries);
     for (const value of values) expect(tiles.colorAt(value)).toBe(site.colorAtValue(value));

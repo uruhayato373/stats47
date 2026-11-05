@@ -473,6 +473,11 @@ export const DATASETS = [
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),
   d("ogp.inventory", "data/ogp/{name}", "state", "site", "data", "OGP・カード画像の棚卸し"),
   d("provenance.queue", "data/provenance/{name}", "state", "data", "data", "出典・再現性の是正キュー"),
+  d("metrics.color-policies", "data/ranking/color-policies/policies.json", "state", "data", "data", "指標 × 粒度の配色 (連続か 5 段階か・一方向か発散か)。R2 の値から作る生成物 (build-color-policies.ts)。結合は metricPresentation", {
+    schema: "data/ranking/color-policies/policies.schema.json",
+    refs: [{ field: "policies[].metricKey", to: "registry:metrics" }],
+  }),
+  d("metrics.color-policies-schema", "data/ranking/color-policies/policies.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("ranking.audits", "data/ranking/{name}", "state", "data", "data", "ランキングの整合性監査・拡充 wave の索引"),
   d("ranking.wave-drafts", "data/ranking/wave-r1-drafts/{**}", "evidence", "data", "data", "ランキング拡充 wave の下書き"),
   d("site.link-audit", "data/site/{name}", "state", "site", "data", "サイト内リンクの監査"),

@@ -70,6 +70,8 @@
     "estat:catalog:search": "node --import tsx .claude/scripts/estat/catalog.mjs search",
     "themes:compositions": "tsx .claude/scripts/metrics/build-composition-ledger.ts",
     "themes:compositions:check": "tsx .claude/scripts/metrics/build-composition-ledger.ts --check",
+    "color-policies:build": "tsx .claude/scripts/metrics/build-color-policies.ts",
+    "color-policies:check": "tsx .claude/scripts/metrics/check-color-policies.ts",
     "estat:monthly": "node .claude/scripts/estat/build-monthly-ledger.mjs",
     "estat:monthly:check": "node .claude/scripts/estat/build-monthly-ledger.mjs --check",
     "estat:kakei-classification:build": "node .claude/scripts/estat/build-kakei-classification.mjs",

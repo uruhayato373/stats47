@@ -565,3 +565,13 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 - e-Stat 年の正規化: `.claude/rules/estat-api.md`
 - タクソノミー役割分担: `docs/01_技術設計/03_情報設計.md`
 - UI 振り分け util: `apps/web/src/features/ranking/utils/classify-subtitle.ts`
+
+## 配色の台帳 (2026-11-05)
+
+配色は 2 つに分けて持つ。**指標定義 (`visualization`) は人が決めるもの** (色相・基準値・手書きの区切り)、**配色の台帳 (`data/ranking/color-policies/policies.json`) は値が決めるもの** (連続か 5 段階か・一方向か発散か)。主キーは指標 × 粒度 (都道府県・市区町村の統合・分割)。
+
+- 判定の規則の正本は `packages/types/src/color-policy.ts`。連続が既定で、テューキーの外れ値 (四分位範囲の 3 倍の外) があるときだけ 5 段階。正負の両方があれば発散の配色。
+- 図は結合した結果だけを読む (`metricPresentation(metric, grain)`)。サイトと SNS は `item.json` の `visualization` がその結合で、`generate-ranking-items` が焼き込む。
+- 指標定義に `classification` を書かない (`check-metric-contract` が止める)。手で区切りを決めた `threshold` だけは例外で、台帳より優先する。
+- 台帳は生成物なので手で直さない。週次の `color-policies-weekly.yml` が作り直し、`npm run color-policies:check` (PR CI) が整合を検査する。判定が変わった指標が画面へ届くのは `sync-snapshots` の後。
+- 記事だけの図 (指標に結び付かない図) は台帳に行が無いので、同じ規則をその場で計算する (`applyColorPolicy`)。

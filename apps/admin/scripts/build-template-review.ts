@@ -29,6 +29,7 @@ import { chartSourceName, groupedBarChartFromArticleData, lineChartFromArticleDa
 import { PREF_NAMES } from '../../../.claude/scripts/lib/prefectures.cjs';
 import { assertMinimalChartCopy } from '../../../.claude/scripts/media/lib/image-copy.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../.claude/scripts/lib/site-config.cjs';
+import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 import { fetchMunicipalityTopologyForWardMode } from '../../../packages/gis/src/mlit/fetch-ward-mode-topology';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
@@ -96,7 +97,7 @@ async function areaInputs() {
   const rows = parseStatsValuesPayload(await json(`app/stats/${AREA_METRIC}/cities.json`)).rows.filter((row) => row.yearCode === AREA_YEAR);
   const chartOf = (scope: AreaScope) => resolveAreaChart({
     title: `${metric.title}`, yearLabel: `${AREA_YEAR}年`, unit: rows[0].unit ?? metric.unit, source: metricSource(AREA_METRIC) ?? '',
-    presentation: metric.visualization!, scope, values: rows.map((row) => ({ areaCode: row.areaCode, value: row.value })),
+    presentation: metricPresentation(metric, scope.level === 'municipality' && scope.wardMode === 'split' ? 'municipality-split' : 'municipality-merged'), scope, values: rows.map((row) => ({ areaCode: row.areaCode, value: row.value })),
   });
   const topologyOf = async (wardMode: 'merged' | 'split') => await fetchMunicipalityTopologyForWardMode('14', wardMode) as unknown as Topology;
   return { chartOf, merged: await topologyOf('merged'), split: await topologyOf('split') };

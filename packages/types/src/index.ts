@@ -140,6 +140,7 @@ export {
 export { EXPANDED_THEME_SETS } from './indicator-sets/expanded';
 
 export * from "./metric-presentation";
+export * from "./color-policy";
 export * from './chart-data';
 export * from './value-display';
 

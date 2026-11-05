@@ -2154,6 +2154,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:sports-drink-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:sports-drink-consumption-expenditure",
           "kind": "ranking"
         }

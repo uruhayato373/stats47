@@ -2608,6 +2608,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:adult-sneakers-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:adult-sneakers-consumption-expenditure",
           "kind": "ranking"
         }
@@ -7100,6 +7104,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:alcoholic-beverages-group-consumption-expenditure",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:alcoholic-beverages-group-consumption-expenditure",
           "kind": "ranking"
@@ -12709,6 +12717,10 @@
         },
         {
           "pageId": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:solar-panel-housing-prefecture-gap",
           "kind": "blog"
         },
         {

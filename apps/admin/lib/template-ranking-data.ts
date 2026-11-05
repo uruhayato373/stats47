@@ -1,3 +1,5 @@
+import { applyColorPolicy } from '../../../packages/types/src/color-policy';
+import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { maximumTemperature } from '../../../data/metrics/maximum-temperature';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
 import {
@@ -39,9 +41,11 @@ export function rankingInputFromStats(raw: unknown) {
   };
 }
 
+/** The fixed sample's colours: its definition joined with the colour ledger. */
+export const RANKING_SAMPLE_PRESENTATION = metricPresentation(RANKING_SAMPLE_METRIC);
+
 export function rankingSampleLabels() {
   const metric = RANKING_SAMPLE_METRIC;
-  assertMetricPresentation(metric.visualization);
   const format = new Intl.NumberFormat('ja-JP', {
     minimumFractionDigits: metric.display?.decimalPlaces ?? 0,
     maximumFractionDigits: metric.display?.decimalPlaces ?? 0,
@@ -56,7 +60,7 @@ export function rankingSampleLabels() {
 }
 
 /** Read the authored bar policy; comparisonDomain remains the site's dot-plot policy. */
-export function rankingBarAxis(values: number[], presentation: MetricPresentation = RANKING_SAMPLE_METRIC.visualization) {
+export function rankingBarAxis(values: number[], presentation: MetricPresentation = RANKING_SAMPLE_PRESENTATION) {
   assertMetricPresentation(presentation);
   const policy = presentation.barDomain ?? DEFAULT_BAR_DOMAIN;
   const domain = resolveBarDomain(values, policy);
@@ -126,7 +130,8 @@ export function chartValueLabels(unit: string, values: number[], decimalPlaces?:
 }
 
 /** The fixed real-data sample as a chart, optionally with another bar/colour policy. */
-export function sampleRankingChart(raw: { data: RankingChartRow[] }, presentation: MetricPresentation = RANKING_SAMPLE_METRIC.visualization): RankingChart {
+// A sample's rows are not the metric's published values, so its colours are worked out from those rows.
+export function sampleRankingChart(raw: { data: RankingChartRow[] }, presentation: MetricPresentation = applyColorPolicy(RANKING_SAMPLE_METRIC.visualization, raw.data.map((row) => row.value))): RankingChart {
   const label = rankingSampleLabels();
   const rows = assertRankingRows(raw.data);
   const values = chartValueLabels(RANKING_SAMPLE_METRIC.unit, rows.map((r) => r.value), RANKING_SAMPLE_METRIC.display?.decimalPlaces);

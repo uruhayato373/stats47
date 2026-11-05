@@ -13,7 +13,7 @@ import {
 
 function config(overrides: Partial<MetricConfig> = {}): MetricConfig {
   return {
-    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
     key: "test-calc",
     title: "テスト計算指標",
     unit: "円",

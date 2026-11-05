@@ -4791,6 +4791,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:insecticide-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:insecticide-consumption-expenditure",
           "kind": "ranking"
         }
@@ -6685,6 +6689,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:interior-furnishings-group-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:interior-furnishings-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -8281,6 +8289,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:jam-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
@@ -8569,6 +8581,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:japanese-clothing-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:japanese-clothing-group-consumption-expenditure",
           "kind": "ranking"

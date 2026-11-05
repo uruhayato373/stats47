@@ -30,6 +30,14 @@ export interface MetricPresentation {
   isSymmetrized?: boolean;
 }
 
+/**
+ * What a metric definition holds. Steps are worked out from the values and live in the colour ledger, so a
+ * definition writes classification only for thresholds a person chose.
+ */
+export interface AuthoredPresentation extends Omit<MetricPresentation, 'classification'> {
+  classification?: Extract<ColorClassification, { method: 'threshold' }>;
+}
+
 /** Runtime snapshots use the same complete presentation contract as authored definitions. */
 export function assertMetricPresentation(
   value: unknown

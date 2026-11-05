@@ -6220,6 +6220,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:pumpkin-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:saitama-food-culture",
           "kind": "blog"
         },
@@ -6270,6 +6274,10 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pumpkin-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {

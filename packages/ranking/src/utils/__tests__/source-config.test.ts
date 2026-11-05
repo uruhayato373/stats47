@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { isDerivedSource, readRecipe, resolveEstatParams } from "../source-config";
 
 const recipe = buildRecipe({
-    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   key: "k",
   title: "t",
   unit: "人",
@@ -22,7 +22,7 @@ const recipe = buildRecipe({
 });
 
 const derivedRecipe = buildRecipe({
-    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   key: "k2",
   title: "t2",
   unit: "千円",

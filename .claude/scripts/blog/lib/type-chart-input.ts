@@ -6,7 +6,10 @@
  */
 import { prefectureShortName } from '../../../../packages/area/src/utils/prefecture-short-name';
 import { DEFAULT_SEQUENTIAL_SCHEME, colorSchemeTypeOf, normalizeColorScheme } from '../../../../packages/types/src/color-scheme';
-import { assertMetricPresentation, type MetricPresentation } from '../../../../packages/types/src/metric-presentation';
+import { metricPresentation } from '../../../../packages/data-configs/src/color-policy';
+import type { VisualizationConfig } from '../../../../packages/data-configs/src/types';
+import { applyColorPolicy } from '../../../../packages/types/src/color-policy';
+import type { MetricPresentation } from '../../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
 import type { ScatterChart } from '../../../../apps/admin/lib/template-relationship-scatter';
 import type { LineChart, LineSeries } from '../../../../apps/admin/lib/template-trend-line';
@@ -15,6 +18,7 @@ import type { GroupedBarChart } from '../../../../apps/admin/lib/template-groupe
 import type { AreaChartInput, AreaScope } from '../../../../apps/admin/lib/template-area-scope';
 
 export interface ArticleMetric {
+  key?: string;
   title?: string;
   subtitle?: string;
   unit?: string;
@@ -36,23 +40,17 @@ const SEQUENTIAL_DEFAULTS = {
  */
 function presentationOf(data: Record<string, unknown>, metric?: ArticleMetric): MetricPresentation {
   const authored = normalizeColorScheme((data.scheme ?? data.colorScheme) as string | undefined);
-  let base: MetricPresentation | undefined;
-  try {
-    if (metric?.visualization) {
-      assertMetricPresentation(metric.visualization);
-      base = metric.visualization;
-    }
-  } catch {
-    base = undefined;
-  }
+  // A metric's chart uses its ledger row. An article's own data has none, so the same rule runs on its values.
+  const base = metric?.key && metric.visualization ? metricPresentation(metric as { key: string; visualization: VisualizationConfig }) : undefined;
   if (base && !authored) return base;
   const scheme = authored ?? DEFAULT_SEQUENTIAL_SCHEME;
   const diverging = colorSchemeTypeOf(scheme) === 'diverging';
-  return {
+  const values = (Array.isArray(data.data) ? data.data : []).flatMap((row: { value?: unknown }) => (typeof row.value === 'number' ? [row.value] : []));
+  return applyColorPolicy({
     ...(base ?? SEQUENTIAL_DEFAULTS),
     colorScheme: scheme,
     colorSchemeType: diverging ? 'diverging' : 'sequential',
-  } as MetricPresentation;
+  } as MetricPresentation, values);
 }
 
 export function rankingChartFromArticleData(

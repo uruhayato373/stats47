@@ -4,10 +4,35 @@ import type { ColorClassification } from './color-classification';
 const FAR_OUT_FENCE = 3;
 const SIGNED_STEPS = 3;
 const CLASSES = 5;
+const MIN_VALUES_FOR_FENCE = 4;
+const SIGNED_SCHEME = 'interpolateRdBu';
+
+/** The areas a colour was worked out over. The same metric can lean differently per set. */
+export const COLOR_GRAINS = ['prefecture', 'municipality-merged', 'municipality-split'] as const;
+export type ColorGrain = (typeof COLOR_GRAINS)[number];
 
 export interface ColorPolicy {
   colorSchemeType: 'sequential' | 'diverging';
   classification: ColorClassification;
+}
+
+/** One row of the colour ledger (data/ranking/color-policies): the result, not the reasoning. */
+export interface ColorPolicyRow extends ColorPolicy {
+  metricKey: string;
+  grain: ColorGrain;
+  /** Set when the values overturn the metric's own scheme: one-way metrics with values on both sides of zero. */
+  colorScheme?: string;
+  /** The year the values came from. */
+  year: string;
+  areaCount: number;
+}
+
+/** What a colour decision reads from a metric's definition. */
+interface AuthoredColor {
+  colorScheme?: string | null;
+  colorSchemeType?: string;
+  classification?: ColorClassification;
+  divergingMidpoint?: unknown;
 }
 
 /** Linear interpolation between order statistics; `sorted` is ascending. */
@@ -20,6 +45,7 @@ function quantile(sorted: readonly number[], p: number) {
 
 /** True when a value lies beyond the far-out fence, so a linear colour ramp would wash out the rest. */
 export function hasFarOutValue(values: readonly number[]) {
+  if (values.length < MIN_VALUES_FOR_FENCE) return false;
   const sorted = [...values].sort((a, b) => a - b);
   const q1 = quantile(sorted, 0.25);
   const q3 = quantile(sorted, 0.75);
@@ -45,7 +71,7 @@ export function signedThresholds(values: readonly number[]) {
  */
 export function colorPolicyOf(values: readonly number[]): ColorPolicy {
   const signed = values.some((v) => v < 0) && values.some((v) => v > 0);
-  const stepped = values.length >= 4 && hasFarOutValue(values);
+  const stepped = hasFarOutValue(values);
   if (!signed) {
     return { colorSchemeType: 'sequential', classification: stepped ? { method: 'quantile', classes: CLASSES } : { method: 'continuous' } };
   }
@@ -53,18 +79,36 @@ export function colorPolicyOf(values: readonly number[]): ColorPolicy {
   return { colorSchemeType: 'diverging', classification: thresholds ? { method: 'threshold', thresholds } : { method: 'continuous' } };
 }
 
-const SIGNED_SCHEME = 'interpolateRdBu';
+const hasOwnCentre = (authored: AuthoredColor) =>
+  authored.colorSchemeType === 'diverging' && authored.divergingMidpoint !== undefined && authored.divergingMidpoint !== 'zero';
+
+/** A metric's definition plus its values give one ledger row. A metric centred on its own reference keeps it. */
+export function colorPolicyRow(metricKey: string, grain: ColorGrain, authored: AuthoredColor, year: string, values: readonly number[]): ColorPolicyRow {
+  const base = { metricKey, grain, year, areaCount: values.length };
+  if (hasOwnCentre(authored)) {
+    return { ...base, colorSchemeType: 'diverging', classification: hasFarOutValue(values) ? { method: 'equal-interval', classes: CLASSES } : { method: 'continuous' } };
+  }
+  const policy = colorPolicyOf(values);
+  const overturned = policy.colorSchemeType === 'diverging' && authored.colorSchemeType !== 'diverging';
+  return { ...base, ...policy, ...(overturned ? { colorScheme: SIGNED_SCHEME } : {}) };
+}
 
 /**
- * A metric's colour encoding with the steps worked out from its values. Written thresholds stay as they
- * are, and a metric centred on its own reference (a price index around 100) keeps that centre.
+ * The join of a metric's definition and its ledger row: the one presentation charts read. Thresholds written
+ * in the definition win, and a metric with no row yet (no values) falls back to the continuous ramp.
  */
-export function applyColorPolicy<T extends { colorScheme?: string | null; colorSchemeType?: string; classification?: ColorClassification; divergingMidpoint?: unknown }>(encoding: T, values: readonly number[]): T {
-  if (encoding.classification?.method === 'threshold') return encoding;
-  const policy = colorPolicyOf(values);
-  const ownCentre = encoding.colorSchemeType === 'diverging' && encoding.divergingMidpoint !== undefined && encoding.divergingMidpoint !== 'zero';
-  if (ownCentre) return values.length >= 4 && hasFarOutValue(values) ? encoding : { ...encoding, classification: { method: 'continuous' } };
-  if (policy.colorSchemeType === 'diverging' && encoding.colorSchemeType !== 'diverging')
-    return { ...encoding, ...policy, colorScheme: SIGNED_SCHEME, divergingMidpoint: 'zero' };
-  return { ...encoding, classification: policy.classification };
+export function joinColorPolicy<T extends AuthoredColor>(authored: T, row?: Pick<ColorPolicyRow, 'colorSchemeType' | 'classification' | 'colorScheme'>): Omit<T, 'classification'> & { classification: ColorClassification } {
+  if (authored.classification?.method === 'threshold') return { ...authored, classification: authored.classification };
+  if (!row) return { ...authored, classification: { method: 'continuous' } };
+  const overturned = row.colorScheme !== undefined;
+  return {
+    ...authored,
+    classification: row.classification,
+    ...(overturned ? { colorScheme: row.colorScheme, colorSchemeType: row.colorSchemeType, divergingMidpoint: 'zero' } : {}),
+  };
+}
+
+/** For a chart whose values have no ledger row: an article's own data. Same decision, worked out on the spot. */
+export function applyColorPolicy<T extends AuthoredColor>(authored: T, values: readonly number[]) {
+  return joinColorPolicy(authored, colorPolicyRow('', 'prefecture', authored, '', values));
 }

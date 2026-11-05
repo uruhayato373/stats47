@@ -1,3 +1,4 @@
+import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { averageTemperature } from '../../../data/metrics/average-temperature';
 import { keroseneConsumptionQuantity } from '../../../data/metrics/kerosene-consumption-quantity';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
@@ -80,7 +81,7 @@ export function renderRelationshipScatter(raw: unknown, theme: ChartTheme = LIGH
   return renderRelationshipScatterChart({
     title: `${xMetric.title}と${yMetric.title}`, meta: `${RELATIONSHIP_SAMPLE_YEAR}年`, source,
     xLabel: `${xMetric.title}（${unitLabel(xMetric.unit)}）`, yLabel: `${yMetric.title}（${unitLabel(yMetric.unit)}・${Y_SCOPE}）`,
-    points: relationshipPoints(raw), presentation: yMetric.visualization,
+    points: relationshipPoints(raw), presentation: metricPresentation(yMetric),
   }, theme);
 }
 
