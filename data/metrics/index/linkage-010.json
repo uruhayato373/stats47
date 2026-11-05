@@ -3502,6 +3502,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:gasoline-consumption-quantity-vs-single-mother-employment",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gasoline-expenditure-ranking",
           "kind": "blog"
         },
@@ -7732,6 +7736,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:gloves-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:gloves-consumption-expenditure",
           "kind": "ranking"

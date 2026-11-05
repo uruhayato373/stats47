@@ -262,6 +262,7 @@ function issueHtml(i) {
         <span class="chip ${i.answerability}">${ANS[i.answerability]}</span>
         <span class="chip">${UNIT[i.unit]}</span>
         ${i.sensitive ? `<span class="chip heavy">重い問い</span>` : ""}
+        ${i.revenue.map((r) => `<span class="chip">${esc(r)}</span>`).join("")}
       </div>
       ${rel ? `<dl class="rel">${rel}</dl>` : ""}
       ${more}

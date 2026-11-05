@@ -23,7 +23,9 @@ describe('geographic distribution map basic form', () => {
     expect(fillOf(svg, '47')).not.toBe(fillOf(svg, '01'));
   }, 20000); // First render also loads the site's D3 scale implementation.
   it('keeps far islands out: mainland stays above the source line and a slanted rule sets off Okinawa', async () => {
-    const svg = await renderDistributionMap(fixture());
+    const input = fixture();
+    input.data[0].value = 200; // A far-out value gives the stepped legend with its counts.
+    const svg = await renderDistributionMap(input);
     const ys = (part: string) => [...part.matchAll(/ d="([^"]+)"/g)].flatMap((m) => [...m[1].matchAll(/[\d.]+,([\d.]+)/g)].map((p) => Number(p[1])));
     const mainland = ys(svg.split('data-map="mainland"')[1].split('</g>')[0]);
     // 点が多く Math.max(...mainland) は環境によって引数の上限を超えるので畳み込む

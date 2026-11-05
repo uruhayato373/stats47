@@ -297,6 +297,8 @@ estat スキル（`/search-estat`, `/inspect-estat-meta`, `/fetch-estat-data`）
 
 ### commercial — 商業・サービス業
 
+**月次データの台帳**: サイトの指標は年単位なので、月別の図や季節の話題に使う表は `data/estat/monthly/decisions.json` で採否・使い道・問いを管理する (管理画面 `/data/monthly`)。e-Stat カタログを取り直したら `npm run estat:monthly` で台帳を作り直し、新しい調査には判断を足す。
+
 **商業動態統計調査（経産省、月次/年次）** — 55件
 
 | statsDataId | 指標名 | 備考 |

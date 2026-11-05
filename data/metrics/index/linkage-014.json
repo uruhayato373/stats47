@@ -4943,6 +4943,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:kiwi-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:kiwi-consumption-quantity",
           "kind": "ranking"
         }

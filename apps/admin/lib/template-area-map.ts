@@ -16,12 +16,12 @@ const pointsOf = (d: string) => [...d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map((m
 /** The prefecture whose boundary file a scope draws. The whole nation's municipalities do not fit one image. */
 function prefectureOf(chart: AreaChart) {
   const { scope } = chart;
-  if (scope.level === 'prefecture' || scope.within.kind === 'nation') throw Error('市区町村の地図は 1 つの県か市の中だけを描きます。');
-  return scope.within.kind === 'prefecture' ? scope.within.prefCode : scope.within.cityCode.slice(0, 2);
+  if (scope.level === 'prefecture' || scope.within.kind === 'nation') throw Error('市区町村の地図は 1 つの県の中だけを描きます。');
+  return scope.within.prefCode;
 }
 
 /**
- * One prefecture's or designated city's municipalities coloured by the metric's scale, joined by area code.
+ * One prefecture's municipalities coloured by the metric's scale, joined by area code.
  * The topology must be the scope's WardMode (fetchMunicipalityTopologyForWardMode): the merged file has no
  * wards and the split file no whole cities, so a mismatch fails here rather than drawing a blank city.
  */

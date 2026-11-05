@@ -264,7 +264,7 @@ export function renderAll47TileSvg(
       opts.panel.caption ? text(opts.panel.caption, MAP.left, panelTop + 176, 30, panelWidth, theme.ink, 700) : '',
     ].join('')
     : renderTopThree(entries, { x: MAP.left, top: panelTop, width: panelWidth, rowGap, unit, format: fmt, capitalCities: opts.capitalCities, theme });
-  const legend = renderClassLegend(scale, entries.map((r) => r.value), { right: MAP.left + MAP.width, bottom: MAP.bottom - 12, format: fmtBoundary, countUnit: opts.capitalCities ? '市' : '県', theme });
+  const legend = renderClassLegend(scale, entries.filter((r) => r.areaCode !== opts.baseAreaCode).map((r) => r.value), { right: MAP.left + MAP.width, bottom: MAP.bottom - 12, format: fmtBoundary, countUnit: opts.capitalCities ? '市' : '県', theme });
 
   // Minimal copy (chart-image-copy.md): metric, year, unit, the city/prefecture scope, legend and source.
   // No publisher, slogans or how-to-read notes; those belong to the post text.

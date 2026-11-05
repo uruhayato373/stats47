@@ -7,6 +7,12 @@ const BOILERPLATE = [
   /タイルの(?:大きさ|面積)は/,
   /タイルは.*模式図/,
   /色が濃いほど/,
+  // How to read a chart belongs to the text around it, not the image (2026-11-05: chord and stacked notes).
+  /(?:帯|線|棒|円|点)の(?:太さ|長さ|大きさ|色)は/,
+  /色は.+(?:元|先)の/,
+  /政令指定都市は(?:市全体|行政区)/,
+  /各(?:行|列|地域|棒)は/,
+  /を\s*100\s*[%％]とした/,
   /画像をクリック|原寸で開|詳しくは|スワイプ|こちらをクリック/,
   // 2026-11-02 owner decision: the publisher is named in the article or post text, not in the image.
   /stats47/i,

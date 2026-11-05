@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-11-04T10:56:11.022Z",
+  "updatedAt": "2026-11-05T10:00:21.756Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -22718,6 +22718,906 @@
           "subline": "物価と購入量を比べる\n2000〜2024年のデータ",
           "subject": "緑と明るいクリーム、黄色のアクセント。右側に切った断面が見える食パンを一つのまとまりとして大きく描き、白紙の値札を一点添える。顔・表情・手足を付けない。上昇下降の矢印、天秤、グラフ、数式、価格数字を描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
           "evidence": "https://note.com/stats47/n/nc3a7ebf40516 2026-10-15公開本文確認。本文は2000〜2024年の家計調査とCPIで、2008年前後と2021年以降の食パン価格・購入数量の違いを読む。値上がりすると必ず売れるという一般化やギッフェン財との因果認定をカバーで行わず、物価と量の問いに留める。 人物・キャラクターは使わない。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-clothing",
+      "noteUrl": "https://note.com/stats47/n/n233c24eee1e4",
+      "revisions": [
+        {
+          "sha256": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-clothing/revisions/4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1.png"
+          },
+          "bytes": 1790894,
+          "id": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-de78f5e07d8b",
+          "createdAt": "2026-11-04T23:07:39.058Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9b7e2949af4446dfdb7fa103b707560de88e729538f007afbc6ad18cb6f0de17"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:07:43.184Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9b7e2949af4446dfdb7fa103b707560de88e729538f007afbc6ad18cb6f0de17",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-clothing/inputs/9b7e2949af4446dfdb7fa103b707560de88e729538f007afbc6ad18cb6f0de17.json"
+              },
+              "bytes": 8587
+            },
+            "production": {
+              "id": "NCI-00508",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "de78f5e07d8b5f884a0962a03fb2b79ef221c937ebf6f2658844a0b555de81a4"
+            }
+          }
+        },
+        {
+          "sha256": "4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-clothing/revisions/4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e.png"
+          },
+          "bytes": 479539,
+          "id": "4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-04T23:20:10.453Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332350727/rectangle_large_type_2_c4c8f3ff2a20b61ae5cdb634e270f51e.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e"
+          }
+        }
+      ],
+      "candidateRevisionId": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1",
+      "approvedRevisionId": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332350727/rectangle_large_type_2_c4c8f3ff2a20b61ae5cdb634e270f51e.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-04T23:20:10.453Z",
+        "revisionId": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00508",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "服にお金を使うのは\n寒い県なのか",
+          "subline": "コートと被服費全体で答えが変わる",
+          "subject": "ハンガーに掛けた厚手のコートと、畳んだマフラーを描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。服やタグに文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。女性用コートは年平均気温と相関-0.54だが、被服及び履物費全体は-0.02。被服費は消費支出総額と0.81で連動する。題名の問いを見出しにした。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-education",
+      "noteUrl": "https://note.com/stats47/n/n048102731761",
+      "revisions": [
+        {
+          "sha256": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-education/revisions/d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f.png"
+          },
+          "bytes": 1961424,
+          "id": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-6f21355184fb",
+          "createdAt": "2026-11-04T23:07:51.567Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1beeb375c62cbc7ad471d9c1b4c5286d2ec8107b77062aae493d71a21fceaaf4"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:07:55.449Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1beeb375c62cbc7ad471d9c1b4c5286d2ec8107b77062aae493d71a21fceaaf4",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-education/inputs/1beeb375c62cbc7ad471d9c1b4c5286d2ec8107b77062aae493d71a21fceaaf4.json"
+              },
+              "bytes": 8520
+            },
+            "production": {
+              "id": "NCI-00509",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "6f21355184fb5c2d51bc2068c4e9e433ae2c1ebe7d2c22c798b1a014c71f63e1"
+            }
+          }
+        },
+        {
+          "sha256": "1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-education/revisions/1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8.png"
+          },
+          "bytes": 502566,
+          "id": "1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-04T23:39:16.381Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332356324/rectangle_large_type_2_aea2fb42072643eff6d48148544586ae.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8"
+          }
+        }
+      ],
+      "candidateRevisionId": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f",
+      "approvedRevisionId": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332356324/rectangle_large_type_2_aea2fb42072643eff6d48148544586ae.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-04T23:39:16.381Z",
+        "revisionId": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00509",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "教育費の県差は\n8.7倍か、4.2倍か",
+          "subline": "1年の順位を信じすぎないために",
+          "subject": "無地の表紙の教科書を積み、その横に鉛筆と砂時計を置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。本や紙に文字・数字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。教育費の1位と47位の倍率は2024年8.7倍、2025年6.0倍、2021〜2025年の5年平均4.2倍。1年の値には調査の振れが強く混ざる。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-food",
+      "noteUrl": "https://note.com/stats47/n/n1c3f57ef31da",
+      "revisions": [
+        {
+          "sha256": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-food/revisions/00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c.png"
+          },
+          "bytes": 1999940,
+          "id": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-7850649db0d7",
+          "createdAt": "2026-11-04T23:10:18.890Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1439d3f13ebdf8ac82b43721a9965b405a6b6b9925195fd2d1363285bc8c60b2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:10:22.591Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1439d3f13ebdf8ac82b43721a9965b405a6b6b9925195fd2d1363285bc8c60b2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-food/inputs/1439d3f13ebdf8ac82b43721a9965b405a6b6b9925195fd2d1363285bc8c60b2.json"
+              },
+              "bytes": 8675
+            },
+            "production": {
+              "id": "NCI-00510",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "7850649db0d704ad208390050fca1c41525ed3720d9b2f7411aebdc03711c704"
+            }
+          }
+        },
+        {
+          "sha256": "435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-food/revisions/435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099.png"
+          },
+          "bytes": 510908,
+          "id": "435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-04T23:59:46.640Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332361233/rectangle_large_type_2_409adc2dcc03373f9da7296d88bdd3c2.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099"
+          }
+        }
+      ],
+      "candidateRevisionId": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c",
+      "approvedRevisionId": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332361233/rectangle_large_type_2_409adc2dcc03373f9da7296d88bdd3c2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-04T23:59:46.640Z",
+        "revisionId": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00510",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "香川は家で食べる\nうどんも日本一？",
+          "subline": "外食と購入を家計調査で並べる",
+          "subject": "湯気の立つうどんの丼と箸を手前に、奥に無地の袋に入った生うどんと乾麺の束を並べる。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や袋に文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。外食の日本そば・うどんは香川(高松市)、生うどん・そばは19年連続1位、乾うどん・そばは高松市と秋田市がほぼ互角。題名の問いをそのまま見出しにした。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-furniture",
+      "noteUrl": "https://note.com/stats47/n/na17bb46da162",
+      "revisions": [
+        {
+          "sha256": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-furniture/revisions/b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8.png"
+          },
+          "bytes": 2061571,
+          "id": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-4c6914a4a222",
+          "createdAt": "2026-11-04T23:08:39.421Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a8784797c1353b94f566403895175144184cccdccc1c5fc9bb4bd9e8906026e7"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:08:43.915Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a8784797c1353b94f566403895175144184cccdccc1c5fc9bb4bd9e8906026e7",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-furniture/inputs/a8784797c1353b94f566403895175144184cccdccc1c5fc9bb4bd9e8906026e7.json"
+              },
+              "bytes": 8625
+            },
+            "production": {
+              "id": "NCI-00511",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "4c6914a4a222ec0dbc25a27ad13ef0afef8757c8469ed0c9e6cdebe1544cc9c1"
+            }
+          }
+        },
+        {
+          "sha256": "282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-furniture/revisions/282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161.png"
+          },
+          "bytes": 472720,
+          "id": "282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T00:20:16.949Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332366650/rectangle_large_type_2_c045af31a903f324c17ca92bce506827.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161"
+          }
+        }
+      ],
+      "candidateRevisionId": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8",
+      "approvedRevisionId": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332366650/rectangle_large_type_2_c045af31a903f324c17ca92bce506827.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T00:20:16.949Z",
+        "revisionId": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00511",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "エアコン1位の市は\n毎年変わる",
+          "subline": "ストーブとの違いで読むランキング",
+          "subject": "白い壁掛けエアコンと、床に置いた石油ストーブを1台ずつ描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。家電や紙に文字・数字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。2021〜2025年のエアコン1位は神戸市、長野市、岡山市、高松市、京都市で毎年違う。順位はその年の買い替えを映す面があり、ストーブとの違いを読む記事。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-health",
+      "noteUrl": "https://note.com/stats47/n/n611c1b73fb3f",
+      "revisions": [
+        {
+          "sha256": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-health/revisions/bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7.png"
+          },
+          "bytes": 2012712,
+          "id": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-203a0d286444",
+          "createdAt": "2026-11-04T23:08:51.892Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "dca58414377b7c86e514c75377f13ebc1931d9ced0d33e7c83b77ccfc7ceddc7"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:08:55.852Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "dca58414377b7c86e514c75377f13ebc1931d9ced0d33e7c83b77ccfc7ceddc7",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-health/inputs/dca58414377b7c86e514c75377f13ebc1931d9ced0d33e7c83b77ccfc7ceddc7.json"
+              },
+              "bytes": 8512
+            },
+            "production": {
+              "id": "NCI-00512",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "203a0d286444cd464c81061ba3c17ed3fc74759c14720f848d1ed1069e7674ae"
+            }
+          }
+        },
+        {
+          "sha256": "0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-health/revisions/0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2.png"
+          },
+          "bytes": 543753,
+          "id": "0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T00:40:42.010Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332371857/rectangle_large_type_2_6bbfb967fbdd04d21545d59016220bcf.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2"
+          }
+        }
+      ],
+      "candidateRevisionId": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7",
+      "approvedRevisionId": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332371857/rectangle_large_type_2_6bbfb967fbdd04d21545d59016220bcf.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T00:40:42.010Z",
+        "revisionId": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00512",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "歯医者の多い県は\n歯科にお金を使う？",
+          "subline": "5年平均で確かめる",
+          "subject": "白い歯の模型と歯ブラシ、小さな手鏡を並べる。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。道具や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。歯科診療所の数と歯科診療代の相関は0.28、東京都を除くと0.13で関係はほとんど見えない。1年の順位は振れが大きいので5年平均で比べる記事。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-housing",
+      "noteUrl": "https://note.com/stats47/n/n8f82dbdbce9d",
+      "revisions": [
+        {
+          "sha256": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-housing/revisions/08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943.png"
+          },
+          "bytes": 1907202,
+          "id": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-5f3dfe8d3ca5",
+          "createdAt": "2026-11-04T23:09:06.746Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e5f508f4db0b00413aba72af6f18c7a1b0f728f348be8ee0de3ef3c2198c9194"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:09:11.223Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e5f508f4db0b00413aba72af6f18c7a1b0f728f348be8ee0de3ef3c2198c9194",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-housing/inputs/e5f508f4db0b00413aba72af6f18c7a1b0f728f348be8ee0de3ef3c2198c9194.json"
+              },
+              "bytes": 8593
+            },
+            "production": {
+              "id": "NCI-00513",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "5f3dfe8d3ca51446eb56c0e7882e5de1e7470078828873e422760e5bfb564ff5"
+            }
+          }
+        },
+        {
+          "sha256": "866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-housing/revisions/866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843.png"
+          },
+          "bytes": 465209,
+          "id": "866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T01:01:33.561Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332377796/rectangle_large_type_2_440fee4e6dbc0f72ba2047d09d136704.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843"
+          }
+        }
+      ],
+      "candidateRevisionId": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943",
+      "approvedRevisionId": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332377796/rectangle_large_type_2_440fee4e6dbc0f72ba2047d09d136704.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T01:01:33.561Z",
+        "revisionId": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00513",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "家賃の12.7倍は\n家賃の高さではない",
+          "subline": "持ち家の0円が入る平均を読む",
+          "subject": "一軒家とアパートの小さな模型を並べ、手前に玄関の鍵を置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。模型や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。那覇市年242,241円と津市年19,055円で12.7倍。家計調査は持ち家の世帯を0円として平均に含むため、差の大部分は家賃を払う世帯の割合の差。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-other",
+      "noteUrl": "https://note.com/stats47/n/n966ddd9d83bb",
+      "revisions": [
+        {
+          "sha256": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-other/revisions/19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa.png"
+          },
+          "bytes": 1863128,
+          "id": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-36bfb82f52e9",
+          "createdAt": "2026-11-04T23:09:19.850Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "cfa3d7b2495c2879c2cb8c87d340447281ce13e0550e18ee0cffbcaeb20276a2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:09:23.463Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "cfa3d7b2495c2879c2cb8c87d340447281ce13e0550e18ee0cffbcaeb20276a2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-other/inputs/cfa3d7b2495c2879c2cb8c87d340447281ce13e0550e18ee0cffbcaeb20276a2.json"
+              },
+              "bytes": 8687
+            },
+            "production": {
+              "id": "NCI-00514",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "36bfb82f52e98db7b01aab568d5ff88b702a46198ec4c2f3fd8c6817e3718c2f"
+            }
+          }
+        },
+        {
+          "sha256": "f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-other/revisions/f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12.png"
+          },
+          "bytes": 489337,
+          "id": "f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T01:21:35.741Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332384421/rectangle_large_type_2_1dca28c3810b887ac66cc873d4d6b44b.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12"
+          }
+        }
+      ],
+      "candidateRevisionId": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa",
+      "approvedRevisionId": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332384421/rectangle_large_type_2_1dca28c3810b887ac66cc873d4d6b44b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T01:21:35.741Z",
+        "revisionId": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00514",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "進学の仕送りが\n最も少ないのは大阪市",
+          "subline": "地元の大学でどこまで説明できるか",
+          "subject": "食品と日用品を詰めた無地の段ボール箱と、無地の封筒を描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。箱や封筒に文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。国内遊学仕送り金の2021〜2025年5年平均は富山市年117,825円、大阪市年4,533円。大学収容力指数で説明できるのは一部で、受け入れが小さくても仕送りが少ない市がある。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-recreation",
+      "noteUrl": "https://note.com/stats47/n/nb48d1909a2ea",
+      "revisions": [
+        {
+          "sha256": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-recreation/revisions/82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765.png"
+          },
+          "bytes": 1964396,
+          "id": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-ecd5cc1b473a",
+          "createdAt": "2026-11-04T23:09:32.305Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "cc4a0b05ee2fe71143e78a3c7a8e9739d4078c35adcb975a4b2b476fb7c69576"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:09:35.869Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "cc4a0b05ee2fe71143e78a3c7a8e9739d4078c35adcb975a4b2b476fb7c69576",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-recreation/inputs/cc4a0b05ee2fe71143e78a3c7a8e9739d4078c35adcb975a4b2b476fb7c69576.json"
+              },
+              "bytes": 8600
+            },
+            "production": {
+              "id": "NCI-00515",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "ecd5cc1b473a1ed8d412e7a67759ee64cd91fda46d80162e1bac65cb5a9694a5"
+            }
+          }
+        },
+        {
+          "sha256": "65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-recreation/revisions/65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1.png"
+          },
+          "bytes": 516019,
+          "id": "65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T01:42:03.385Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332391189/rectangle_large_type_2_0f3e32d23f2a74d37b93315b43d3d88f.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1"
+          }
+        }
+      ],
+      "candidateRevisionId": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765",
+      "approvedRevisionId": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332391189/rectangle_large_type_2_0f3e32d23f2a74d37b93315b43d3d88f.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T01:42:03.385Z",
+        "revisionId": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765"
+      },
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00515",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "普及率1位は徳島\n支出1位は福井",
+          "subline": "ケーブルテレビの受信料を読む",
+          "subject": "画面が無地の小さなブラウン管風テレビと、束ねた同軸ケーブルを描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。テレビや紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。ケーブルテレビ受信料の支出は福井市が2025年1位(2015年以降の11年のうち10年)、令和3年3月末の世帯普及率の全国1位は徳島県。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-transport",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-transport/revisions/3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27.png"
+          },
+          "bytes": 1962038,
+          "id": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-b4e063170862",
+          "createdAt": "2026-11-04T23:09:44.402Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "80af866360a094d9697f69cbafc1955ae8ee5e69b98e991b26aed78247bb96b1"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:09:48.083Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "80af866360a094d9697f69cbafc1955ae8ee5e69b98e991b26aed78247bb96b1",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-transport/inputs/80af866360a094d9697f69cbafc1955ae8ee5e69b98e991b26aed78247bb96b1.json"
+              },
+              "bytes": 8610
+            },
+            "production": {
+              "id": "NCI-00516",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "b4e063170862346c235cce60e2db8f12f28fe8f6d9ef6d94a036d5dd1c58b214"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
+      "approvedRevisionId": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00516",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "電車代が少ない県は\n交通費も少ない？",
+          "subline": "公共交通と車の費用を足して比べる",
+          "subject": "無地の電車の切符と車の鍵を並べて置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。切符や鍵に文字・数字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。鉄道運賃は東京都区部と那覇市で2025年18倍、5年平均9.6倍。公共交通に車の費用を足すと電車代の順位との順位相関は0.15でほとんど関係がない。"
+        }
+      }
+    },
+    {
+      "articleKey": "b-kakei-expense-utilities",
+      "noteUrl": null,
+      "revisions": [
+        {
+          "sha256": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-utilities/revisions/89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912.png"
+          },
+          "bytes": 1835930,
+          "id": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
+          "kind": "candidate",
+          "version": "pop-NCP-005-v3-f457e8a079a9",
+          "createdAt": "2026-11-04T23:09:55.643Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d2fa6b5842997aaf2077c6fa60551a055f419eb867c36991629c542bf7cb4599"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+            "reviewedAt": "2026-11-04T23:09:59.759Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d2fa6b5842997aaf2077c6fa60551a055f419eb867c36991629c542bf7cb4599",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/b-kakei-expense-utilities/inputs/d2fa6b5842997aaf2077c6fa60551a055f419eb867c36991629c542bf7cb4599.json"
+              },
+              "bytes": 8514
+            },
+            "production": {
+              "id": "NCI-00517",
+              "policyId": "NCP-005",
+              "policyVersion": 3,
+              "planSha256": "f457e8a079a9bd70bb590f827ab48b1ec8151fdeb8ce4a00ec758fba453c79d6"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
+      "approvedRevisionId": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00517",
+        "policyId": "NCP-005",
+        "policyVersion": 3,
+        "brief": {
+          "headline": "光熱費の県差は\nどの燃料が作るのか",
+          "subline": "電気代1.7倍、灯油56.5倍",
+          "subject": "赤い灯油用ポリタンクと大きな電球を並べて置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。容器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+          "evidence": "本文確認2026-11-05。題名どおり電気代の差は1.7倍、灯油は56.5倍(青森市と大阪市)。答えは比べる相手で変わる記事なので、見出しは問いのまま断定しない。"
         }
       }
     },

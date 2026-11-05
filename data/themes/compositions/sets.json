@@ -1,0 +1,547 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "sets": 20,
+    "parts": 75,
+    "withIssues": 1
+  },
+  "sets": [
+    {
+      "id": "aging-society/theme-age-composition",
+      "theme": "aging-society",
+      "title": "年齢3区分人口構成",
+      "parts": [
+        {
+          "metricKey": "theme-age-composition-young-population",
+          "label": "年少人口(0〜14歳)",
+          "unit": "人"
+        },
+        {
+          "metricKey": "theme-age-composition-production-age-population",
+          "label": "生産年齢人口(15〜64歳)",
+          "unit": "人"
+        },
+        {
+          "metricKey": "theme-age-composition-elderly-population",
+          "label": "老年人口(65歳以上)",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "construction-industry/construction-industry-workforce-demographics-composition-1",
+      "theme": "construction-industry",
+      "title": "年齢階層別の建設業就業者数（構成比）",
+      "parts": [
+        {
+          "metricKey": "construction-employed-under30",
+          "label": "30歳未満の建設業就業者",
+          "unit": "人"
+        },
+        {
+          "metricKey": "construction-employed-age30to54",
+          "label": "30〜54歳の建設業就業者",
+          "unit": "人"
+        },
+        {
+          "metricKey": "construction-employed-age55plus",
+          "label": "55歳以上の建設業就業者",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "education-culture/education-culture-cultural-facilities-and-arts-composition-1",
+      "theme": "education-culture",
+      "title": "施設種別ごとの博物館等入館者数内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "registered-museum-visitors",
+          "label": "登録博物館の入館者数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "designated-museum-visitors",
+          "label": "指定施設の入館者数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "museum-like-facility-visitors",
+          "label": "博物館類似施設の入館者数",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "healthcare/healthcare-emergency-medical-care-composition-3",
+      "theme": "healthcare",
+      "title": "傷病程度別の救急搬送人員内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "ambulance-transported-deaths",
+          "label": "救急搬送人員（初診時死亡）",
+          "unit": "人"
+        },
+        {
+          "metricKey": "ambulance-transported-severe",
+          "label": "救急搬送人員（重症）",
+          "unit": "人"
+        },
+        {
+          "metricKey": "ambulance-transported-moderate",
+          "label": "救急搬送人員（中等症）",
+          "unit": "人"
+        },
+        {
+          "metricKey": "ambulance-transported-mild",
+          "label": "救急搬送人員（軽症）",
+          "unit": "人"
+        },
+        {
+          "metricKey": "ambulance-transported-other",
+          "label": "救急搬送人員（その他）",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "healthcare/healthcare-medical-system-and-resources-composition-1",
+      "theme": "healthcare",
+      "title": "年齢階層別の医療施設従事医師数内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "medical-physicians-under-40",
+          "label": "40歳未満の医療施設従事医師数（2024年末）",
+          "unit": "人"
+        },
+        {
+          "metricKey": "medical-physicians-age-40-59",
+          "label": "40〜59歳の医療施設従事医師数（2024年末）",
+          "unit": "人"
+        },
+        {
+          "metricKey": "medical-physicians-age-60-plus",
+          "label": "60歳以上の医療施設従事医師数（2024年末）",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "landslide-exposure/landslide-exposure-disaster-type-breakdown-composition-1",
+      "theme": "landslide-exposure",
+      "title": "警戒区域の現象別内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "debris-flow-warning-zone-count",
+          "label": "土石流の警戒区域数",
+          "unit": "区域"
+        },
+        {
+          "metricKey": "steep-slope-warning-zone-count",
+          "label": "急傾斜地崩壊の警戒区域数",
+          "unit": "区域"
+        },
+        {
+          "metricKey": "landslip-warning-zone-count",
+          "label": "地滑りの警戒区域数",
+          "unit": "区域"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "landslide-exposure/landslide-exposure-special-hazard-breakdown-composition-1",
+      "theme": "landslide-exposure",
+      "title": "特別警戒区域の現象別内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "debris-flow-special-warning-zone-count",
+          "label": "土石流の特別警戒区域数",
+          "unit": "区域"
+        },
+        {
+          "metricKey": "steep-slope-special-warning-zone-count",
+          "label": "急傾斜地崩壊の特別警戒区域数",
+          "unit": "区域"
+        },
+        {
+          "metricKey": "landslip-special-warning-zone-count",
+          "label": "地滑りの特別警戒区域数",
+          "unit": "区域"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "living-housing/living-housing-housing-construction-trends-composition-2",
+      "theme": "living-housing",
+      "title": "利用関係別新設住宅着工戸数の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "new-owner-occupied-starts",
+          "label": "持家の新設着工戸数",
+          "unit": "戸"
+        },
+        {
+          "metricKey": "new-rental-starts",
+          "label": "貸家の新設着工戸数",
+          "unit": "戸"
+        },
+        {
+          "metricKey": "new-condo-starts",
+          "label": "分譲住宅の新設着工戸数",
+          "unit": "戸"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "living-housing/living-housing-vacant-housing-and-safety-composition-1",
+      "theme": "living-housing",
+      "title": "目的別空き家戸数の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "vacant-housing-excluding-rental-sale-secondary",
+          "label": "賃貸・売却用及び二次的住宅を除く空き家",
+          "unit": "戸"
+        },
+        {
+          "metricKey": "vacant-housing-for-rent",
+          "label": "賃貸用の空き家",
+          "unit": "戸"
+        },
+        {
+          "metricKey": "vacant-housing-for-sale",
+          "label": "売却用の空き家",
+          "unit": "戸"
+        },
+        {
+          "metricKey": "vacant-housing-secondary-residences",
+          "label": "二次的住宅",
+          "unit": "戸"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "population-dynamics/population-dynamics-birth-rate-and-maternity-composition-2",
+      "theme": "population-dynamics",
+      "title": "母の年齢階級別出生数の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "births-mother-under25",
+          "label": "母が25歳未満の出生数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "births-mother-age25to29",
+          "label": "母が25〜29歳の出生数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "births-mother-age30to34",
+          "label": "母が30〜34歳の出生数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "births-mother-age35to39",
+          "label": "母が35〜39歳の出生数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "births-mother-age40plus",
+          "label": "母が40歳以上の出生数",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "population-dynamics/population-dynamics-birth-rate-and-maternity-composition-3",
+      "theme": "population-dynamics",
+      "title": "出生順位別の出生数内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "births-first-child",
+          "label": "第1子の出生数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "births-second-child",
+          "label": "第2子の出生数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "births-third-child-plus",
+          "label": "第3子以降の出生数",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "real-income/real-income-household-composition",
+      "theme": "real-income",
+      "title": "消費支出10費目の構成",
+      "parts": [
+        {
+          "metricKey": "household-survey-food-expenditure",
+          "label": "食料",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-housing-expenditure",
+          "label": "住居",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-utilities-expenditure",
+          "label": "光熱・水道",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-furniture-household-goods-expenditure",
+          "label": "家具・家事用品",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-clothing-footwear-expenditure",
+          "label": "被服及び履物",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-healthcare-expenditure",
+          "label": "保健医療",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-transport-communication-expenditure",
+          "label": "交通・通信",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-education-expenditure",
+          "label": "教育",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-culture-recreation-expenditure",
+          "label": "教養娯楽",
+          "unit": "円"
+        },
+        {
+          "metricKey": "household-survey-other-expenditure",
+          "label": "その他の消費支出",
+          "unit": "円"
+        }
+      ],
+      "issues": [
+        "too-many-parts"
+      ]
+    },
+    {
+      "id": "regional-energy/regional-energy-regional-co2-emissions-composition-2",
+      "theme": "regional-energy",
+      "title": "部門別CO₂排出量の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "regional-industry-co2-emissions-estimate",
+          "label": "産業部門のCO₂推計",
+          "unit": "千t-CO₂"
+        },
+        {
+          "metricKey": "regional-business-co2-emissions-estimate",
+          "label": "業務その他部門のCO₂推計",
+          "unit": "千t-CO₂"
+        },
+        {
+          "metricKey": "regional-household-co2-emissions-estimate",
+          "label": "家庭部門のCO₂推計",
+          "unit": "千t-CO₂"
+        },
+        {
+          "metricKey": "regional-transport-co2-emissions-estimate",
+          "label": "運輸部門のCO₂推計（航空を除く）",
+          "unit": "千t-CO₂"
+        },
+        {
+          "metricKey": "regional-waste-co2-emissions-estimate",
+          "label": "一般廃棄物焼却のCO₂推計",
+          "unit": "千t-CO₂"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "regional-energy/regional-energy-renewable-energy-adoption-composition-3",
+      "theme": "regional-energy",
+      "title": "新規認定設備と移行設備の導入容量内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "fit-fip-new-approved-installed-capacity",
+          "label": "制度開始後の新規認定分の導入容量",
+          "unit": "kW"
+        },
+        {
+          "metricKey": "fit-transition-installed-capacity",
+          "label": "旧制度から移行した設備の導入容量",
+          "unit": "kW"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "regional-energy/regional-energy-sector-energy-breakdown-composition-1",
+      "theme": "regional-energy",
+      "title": "部門別最終エネルギー消費量の構成比",
+      "parts": [
+        {
+          "metricKey": "regional-industry-final-energy-consumption",
+          "label": "産業部門の最終エネルギー消費量",
+          "unit": "TJ"
+        },
+        {
+          "metricKey": "regional-business-final-energy-consumption",
+          "label": "業務他部門の最終エネルギー消費量",
+          "unit": "TJ"
+        },
+        {
+          "metricKey": "regional-household-final-energy-consumption",
+          "label": "家庭部門の最終エネルギー消費量",
+          "unit": "TJ"
+        },
+        {
+          "metricKey": "regional-household-car-final-energy-consumption",
+          "label": "家庭乗用車の最終エネルギー消費量",
+          "unit": "TJ"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "roads/roads-road-bridge-maintenance-composition-2",
+      "theme": "roads",
+      "title": "措置が必要な道路橋の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "road-bridge-condition-iii-count",
+          "label": "道路橋の早期措置段階（Ⅲ）",
+          "unit": "橋"
+        },
+        {
+          "metricKey": "road-bridge-condition-iv-count",
+          "label": "道路橋の緊急措置段階（Ⅳ）",
+          "unit": "橋"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "roads/roads-road-tunnel-maintenance-composition-2",
+      "theme": "roads",
+      "title": "措置が必要なトンネルの内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "road-tunnel-condition-iii-count",
+          "label": "トンネルの早期措置段階（Ⅲ）",
+          "unit": "本"
+        },
+        {
+          "metricKey": "road-tunnel-condition-iv-count",
+          "label": "トンネルの緊急措置段階（Ⅳ）",
+          "unit": "本"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "safety/safety-natural-disaster-impact-composition-1",
+      "theme": "safety",
+      "title": "自然災害による人的被害の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "natural-disaster-deaths",
+          "label": "自然災害による死者数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "natural-disaster-missing-persons",
+          "label": "自然災害による行方不明者数",
+          "unit": "人"
+        },
+        {
+          "metricKey": "natural-disaster-injured-persons",
+          "label": "自然災害による負傷者数",
+          "unit": "人"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "safety/safety-natural-disaster-impact-composition-2",
+      "theme": "safety",
+      "title": "自然災害による住家被害の内訳（構成比）",
+      "parts": [
+        {
+          "metricKey": "natural-disaster-destroyed-houses",
+          "label": "自然災害による全壊住家棟数",
+          "unit": "棟"
+        },
+        {
+          "metricKey": "natural-disaster-half-destroyed-houses",
+          "label": "自然災害による半壊住家棟数",
+          "unit": "棟"
+        },
+        {
+          "metricKey": "natural-disaster-partially-damaged-houses",
+          "label": "自然災害による一部破損住家棟数",
+          "unit": "棟"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "single-parent-households/single-parent-income-composition",
+      "theme": "single-parent-households",
+      "title": "母子世帯の年間所得階級別構成",
+      "parts": [
+        {
+          "metricKey": "single-mother-households-income-under100",
+          "label": "母子世帯の所得100万円未満",
+          "unit": "世帯"
+        },
+        {
+          "metricKey": "single-mother-households-income-100to199",
+          "label": "母子世帯の所得100〜199万円",
+          "unit": "世帯"
+        },
+        {
+          "metricKey": "single-mother-households-income-200to299",
+          "label": "母子世帯の所得200〜299万円",
+          "unit": "世帯"
+        },
+        {
+          "metricKey": "single-mother-households-income-300to399",
+          "label": "母子世帯の所得300〜399万円",
+          "unit": "世帯"
+        },
+        {
+          "metricKey": "single-mother-households-income-400to499",
+          "label": "母子世帯の所得400〜499万円",
+          "unit": "世帯"
+        },
+        {
+          "metricKey": "single-mother-households-income-500plus",
+          "label": "母子世帯の所得500万円以上",
+          "unit": "世帯"
+        }
+      ],
+      "issues": []
+    }
+  ]
+}

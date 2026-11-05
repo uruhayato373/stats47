@@ -5274,6 +5274,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:footwear-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:footwear-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -7166,6 +7170,10 @@
         },
         {
           "pageId": "blog:foreign-residents-diversity-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:international-cooperation-volunteer-map",
           "kind": "blog"
         },
         {
@@ -12651,6 +12659,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:fruit-vegetable-juice-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fruit-vegetable-juice-consumption-expenditure",
           "kind": "ranking"
         }
@@ -12687,6 +12699,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:fruits-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fruits-group-consumption-expenditure",
           "kind": "ranking"
@@ -12874,6 +12890,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:furniture-household-expenditure-total-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:furniture-household-expenditure-total",
           "kind": "ranking"
         }
@@ -12882,7 +12902,7 @@
     },
     {
       "metricKey": "furniture-household-goods-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:furniture-household-goods-budget-share-kakei",
       "title": "消費支出に占める家具・家事用品の割合",
       "sources": [
         {

@@ -72,7 +72,9 @@ function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: Cha
   const rowWash = mixColor(color, card, dark ? 0.82 : 0.9);
   const track = mixColor(color, card, dark ? 0.7 : 0.8);
   // The strong colour is too dark to read as text on the dark paper.
-  const valueInk = dark ? mixColor(color, '#FFFFFF', 0.35) : color;
+  const valueInk = dark ? mixColor(color, '#FFFFFF', 0.65) : color;
+  // Dark ranks and bars on the dark rows sit too close in lightness: lift them as the paper lifts the maps.
+  const barOn = (fill: string) => (dark ? mixColor(fill, '#FFFFFF', 0.3) : fill);
   const left = SAMPLE_FRAME.left, width = SAMPLE_FRAME.right - left;
   const plotWidth = RANKING_BAR_PLOT.right - RANKING_BAR_PLOT.left;
   const top = sampleBodyTop(Boolean(chart.note)) + 8;
@@ -89,7 +91,7 @@ function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: Cha
       const rowFill = i % 2 === 0 ? rowWash : dark ? card : '';
       const barY = rowTop + 56, origin = xAt(axis.baseline), end = xAt(r.value);
       const marker = axis.truncated && Math.abs(end - origin) < 0.5 ? `<circle cx="${end}" cy="${barY + 5}" r="6" fill="${fill}"/>` : '';
-      return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${CARD.rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${fill}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}${marker}</g>`;
+      return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${CARD.rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${barOn(fill)}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}${marker}</g>`;
     }).join('')}`;
   return sampleFrame({
     title: labels.title, titleSize: fitTitleSize(labels.title),

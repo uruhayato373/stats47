@@ -1395,6 +1395,94 @@
       "r2_access": "none",
       "status": "note_only"
     },
+    "b-kakei-expense-clothing": {
+      "vertical": "stats47-note",
+      "title": "服にお金を使うのは寒い県なのか ── コートと被服費全体で答えが変わる",
+      "url": "https://note.com/stats47/n/n233c24eee1e4",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-clothing",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-education": {
+      "vertical": "stats47-note",
+      "title": "教育費の県差は8.7倍か、4.2倍か ── 1年の順位を信じすぎないために",
+      "url": "https://note.com/stats47/n/n048102731761",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-education",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-food": {
+      "vertical": "stats47-note",
+      "title": "香川は家で食べるうどんも日本一なのか ── 外食と購入を家計調査で並べる",
+      "url": "https://note.com/stats47/n/n1c3f57ef31da",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-food",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-furniture": {
+      "vertical": "stats47-note",
+      "title": "エアコンを一番買う市は毎年変わる ── ストーブとの違いで読む、家電のランキング",
+      "url": "https://note.com/stats47/n/na17bb46da162",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-furniture",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-health": {
+      "vertical": "stats47-note",
+      "title": "歯医者の多い県ほど、歯科にお金を使っているのか ── 5年平均で確かめる",
+      "url": "https://note.com/stats47/n/n611c1b73fb3f",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-health",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-housing": {
+      "vertical": "stats47-note",
+      "title": "家賃の支出が12.7倍違っても、家賃が12.7倍高いわけではない ── 持ち家の0円が入る平均を読む",
+      "url": "https://note.com/stats47/n/n8f82dbdbce9d",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-housing",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-other": {
+      "vertical": "stats47-note",
+      "title": "進学の仕送りが最も少ないのは大阪市 ── 地元に大学があることで、どこまで説明できるか",
+      "url": "https://note.com/stats47/n/n966ddd9d83bb",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-other",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-recreation": {
+      "vertical": "stats47-note",
+      "title": "ケーブルテレビの普及率1位は徳島なのに、支出の1位は福井 ── 加入の多さだけでは決まらない受信料",
+      "url": "https://note.com/stats47/n/nb48d1909a2ea",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-recreation",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-kakei-gyoza-counting": {
       "vertical": "stats47-note",
       "title": "「ぎょうざ消費日本一」は何を数えていて、何を数えていないのか",

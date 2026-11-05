@@ -1,38 +1,50 @@
-import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { rankingRows } from './template-ranking-bars';
-import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
+import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
+import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
+import { LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 
 export const RANKING_TABLE_SAMPLE_ID = 'maximum-temperature-table';
-const ROWS = 10;
-const HEADER_HEIGHT = 72;
-const COLUMN = { rank: 136, name: 192, valueRight: SAMPLE_FRAME.right - 32 } as const;
+const COLUMN_COUNT = 2;
+const COLUMN_GAP = 32;
+const HEADER_HEIGHT = 44;
+const TEXT_SIZE = 28;
+const HEADER_SIZE = 22;
+const CELL = { rankRight: 48, name: 64, valueInset: 12 } as const;
+
+/** The sample's fixed input, drawn by the same table every chart uses. */
+export function renderRankingTable(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
+  return renderRankingTableChart(sampleRankingChart({ data: rankingRows(raw) }), theme);
+}
 
 /**
- * Read values in aligned columns at frame size: the top ten fill the body down to the source line.
- * Ranks take the metric's own colour (as the bars do); bars and axes belong to the bar-chart form.
+ * Every prefecture in two columns read top to bottom, so no row is left out. Ranks take the metric's own
+ * colour (as the bars do); bars and axes belong to the bar-chart form.
  */
-export function renderRankingTable(raw: unknown) {
-  const label = rankingSampleLabels();
-  const rows = rankingRows(raw).slice(0, ROWS);
-  const color = resolveMetricColor(RANKING_SAMPLE_METRIC.visualization) ?? BRAND.primary;
-  const top = sampleBodyTop(Boolean(label.subtitle)) + 24;
-  const width = SAMPLE_FRAME.right - SAMPLE_FRAME.left;
-  const rowHeight = (SAMPLE_FRAME.bodyBottom - top - HEADER_HEIGHT) / ROWS;
-  const header = `<rect x="${SAMPLE_FRAME.left}" y="${top}" width="${width}" height="${HEADER_HEIGHT}" fill="${BRAND.wash}"/>
-    <g font-size="30" font-weight="700" fill="${BRAND.muted}">
-      <text x="${COLUMN.rank}" y="${top + 47}" text-anchor="middle">順位</text>
-      <text x="${COLUMN.name}" y="${top + 47}">都道府県</text>
-      <text x="${COLUMN.valueRight}" y="${top + 47}" text-anchor="end">${escapeXml(`${label.title.replace(/ランキング$/, '')}（${label.unit}）`)}</text>
-    </g>`;
-  const body = rows.map((row, i) => {
-    const y = top + HEADER_HEIGHT + i * rowHeight;
-    const baseline = y + rowHeight / 2 + 15;
-    return `<g data-rank="${row.rank}" data-value="${row.value}">${i % 2 ? `<rect x="${SAMPLE_FRAME.left}" y="${y}" width="${width}" height="${rowHeight}" fill="${BRAND.wash}" opacity="0.5"/>` : ''}<text x="${COLUMN.rank}" y="${baseline}" text-anchor="middle" font-size="44" font-weight="700" fill="${color}">${row.rank}</text><text x="${COLUMN.name}" y="${baseline}" font-size="44" font-weight="600">${escapeXml(row.area_name)}</text><text x="${COLUMN.valueRight}" y="${baseline}" text-anchor="end" font-size="44" font-weight="700">${label.formatValue(row.value)}</text></g>`;
-  }).join('');
+export function renderRankingTableChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
+  const rows = assertRankingRows(chart.rows);
+  const color = toHex(resolveMetricColor(chart.presentation) ?? BRAND.primary);
+  const rankColor = theme.name === 'dark' ? mixColor(color, '#FFFFFF', 0.45) : color;
+  const top = sampleBodyTop(Boolean(chart.note)) + 8;
+  const perColumn = Math.ceil(rows.length / COLUMN_COUNT);
+  const rowHeight = (SAMPLE_FRAME.bodyBottom - top - HEADER_HEIGHT) / perColumn;
+  const width = (SAMPLE_FRAME.right - SAMPLE_FRAME.left - COLUMN_GAP) / COLUMN_COUNT;
+  const column = (index: number) => {
+    const left = SAMPLE_FRAME.left + index * (width + COLUMN_GAP), right = left + width - CELL.valueInset;
+    const header = `<rect x="${left}" y="${top}" width="${width}" height="${HEADER_HEIGHT}" fill="${theme.wash}"/><g font-size="${HEADER_SIZE}" font-weight="700" fill="${theme.muted}"><text x="${left + CELL.rankRight}" y="${top + 30}" text-anchor="end">順位</text><text x="${left + CELL.name}" y="${top + 30}">都道府県</text><text x="${right}" y="${top + 30}" text-anchor="end">${escapeXml(chart.unit)}</text></g>`;
+    const body = rows.slice(index * perColumn, (index + 1) * perColumn).map((row, i) => {
+      const y = top + HEADER_HEIGHT + i * rowHeight, baseline = y + rowHeight / 2 + TEXT_SIZE * 0.36;
+      const stripe = i % 2 ? `<rect x="${left}" y="${y.toFixed(1)}" width="${width}" height="${rowHeight.toFixed(1)}" fill="${theme.wash}" opacity="0.5"/>` : '';
+      return `<g data-rank="${row.rank}" data-value="${row.value}">${stripe}<text x="${left + CELL.rankRight}" y="${baseline.toFixed(1)}" text-anchor="end" font-size="${TEXT_SIZE}" font-weight="700" fill="${rankColor}">${row.rank}</text><text x="${left + CELL.name}" y="${baseline.toFixed(1)}" font-size="${TEXT_SIZE}" font-weight="600">${escapeXml(row.area_name)}</text><text x="${right}" y="${baseline.toFixed(1)}" text-anchor="end" font-size="${TEXT_SIZE}" font-weight="700">${chart.formatValue(row.value)}</text></g>`;
+    }).join('');
+    return header + body;
+  };
+  const title = `${chart.title}ランキング`;
   return sampleFrame({
-    title: label.title, meta: `${RANKING_SAMPLE_YEAR}年 · 上位10県`, note: label.subtitle || undefined, source: label.source,
-    body: header + body,
+    title, titleSize: fitTitleSize(title), meta: `${chart.yearLabel} · 単位：${chart.unit}`, note: chart.note, source: chart.source,
+    attributes: 'data-image-template="table"',
+    body: Array.from({ length: COLUMN_COUNT }, (_, index) => column(index)).join(''),
+    theme,
   });
 }

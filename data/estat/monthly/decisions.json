@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "statCode": "00200561",
+      "decision": "use",
+      "reason": "品目ごとの季節の波を読める。金額は全国と 52 市、数量は全国。",
+      "areaGrain": "nation-and-cities",
+      "tables": [
+        "0004023601",
+        "0004023602"
+      ],
+      "siteUse": [
+        "article",
+        "sns"
+      ],
+      "issues": [
+        "issue:K02"
+      ],
+      "fetcher": ".claude/scripts/blog/fetch-kakei-monthly.mjs"
+    },
+    {
+      "statCode": "00550030",
+      "decision": "use",
+      "reason": "コンビニ・百貨店・スーパーの販売額を都道府県別に月で読める。",
+      "areaGrain": "prefecture",
+      "tables": [
+        "0003395254",
+        "0003395232"
+      ],
+      "siteUse": [
+        "article",
+        "theme"
+      ],
+      "issues": [
+        "issue:H09"
+      ]
+    },
+    {
+      "statCode": "00250011",
+      "decision": "use",
+      "reason": "外国人の入国を空港・港と国籍別に月で読める。",
+      "areaGrain": "port",
+      "tables": [
+        "0003449063",
+        "0003449064"
+      ],
+      "siteUse": [
+        "article",
+        "sns"
+      ],
+      "issues": [
+        "issue:B10"
+      ]
+    },
+    {
+      "statCode": "00200523",
+      "decision": "use",
+      "reason": "都道府県間の移動を月で読める。春の移動の山が見える。",
+      "areaGrain": "prefecture",
+      "tables": [
+        "0003420473",
+        "0003423613"
+      ],
+      "siteUse": [
+        "article",
+        "theme"
+      ],
+      "issues": [
+        "issue:B06",
+        "issue:B07"
+      ]
+    },
+    {
+      "statCode": "00200565",
+      "decision": "hold",
+      "reason": "特定の商品・サービスの支出を月で読める。地域は全国・地方・都市階級までで、県の比較には使えない見込み。"
+    },
+    {
+      "statCode": "00200531",
+      "decision": "hold",
+      "reason": "就業・雇用の月の動きが読める。全国の値が中心で、県の比較にならない。"
+    },
+    {
+      "statCode": "00200524",
+      "decision": "hold",
+      "reason": "月別の人口推計。全国の値で、県の比較は年次の指標で足りる。"
+    },
+    {
+      "statCode": "00450071",
+      "decision": "hold",
+      "reason": "賃金の月の動き。賞与月の波はあるが、話題の案が無い。"
+    },
+    {
+      "statCode": "00450399",
+      "decision": "hold",
+      "reason": "医療費の伸びが月で読める。表の地域の単位を確かめてから決める。",
+      "issues": [
+        "issue:F03"
+      ]
+    },
+    {
+      "statCode": "00600120",
+      "decision": "hold",
+      "reason": "住宅着工が月で読める。県の表の有無を確かめてから決める。",
+      "issues": [
+        "issue:H10"
+      ]
+    },
+    {
+      "statCode": "00600350",
+      "decision": "hold",
+      "reason": "鉄道の旅客数が運輸局別に月で読める。県より粗い。",
+      "issues": [
+        "issue:H03"
+      ]
+    },
+    {
+      "statCode": "00600280",
+      "decision": "hold",
+      "reason": "港別の入港と貨物が月で読める。港のランキングと合わせて使う案がある。"
+    },
+    {
+      "statCode": "00200571",
+      "decision": "hold",
+      "reason": "品目の小売価格が月で読める。県庁所在市の比較に使える見込みで、表を確かめてから決める。",
+      "issues": [
+        "issue:D01"
+      ]
+    },
+    {
+      "statCode": "00200544",
+      "decision": "hold",
+      "reason": "サービス業の売上の月の動き。全国の値が中心。"
+    },
+    {
+      "statCode": "00200546",
+      "decision": "hold",
+      "reason": "サービス業の売上の月の動き。全国の値が中心。"
+    },
+    {
+      "statCode": "00450023",
+      "decision": "hold",
+      "reason": "病院の患者数と病床利用率が月で読める。季節の波の話題の案が無い。"
+    },
+    {
+      "statCode": "00100001",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00100401",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00250001",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250002",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250003",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250004",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250005",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250006",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250007",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00250010",
+      "decision": "exclude",
+      "reason": "業務の統計で、月の波を読む話題が無い。"
+    },
+    {
+      "statCode": "00350310",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00350320",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00450021",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00450151",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00550050",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00550051",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00550200",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00550210",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00550560",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00550580",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00551130",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600130",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600140",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600260",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600270",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600300",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600310",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600330",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600340",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600370",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600371",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    },
+    {
+      "statCode": "00600880",
+      "decision": "exclude",
+      "reason": "地域の比較にも暮らしの話題にも使う予定が無い。"
+    }
+  ]
+}

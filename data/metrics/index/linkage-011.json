@@ -5306,6 +5306,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:health-supplements-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:health-supplements-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5314,7 +5318,7 @@
     },
     {
       "metricKey": "healthcare-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:healthcare-budget-share-kakei",
       "title": "消費支出に占める保健医療の割合",
       "sources": [
         {
