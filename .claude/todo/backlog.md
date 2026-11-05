@@ -1004,13 +1004,12 @@ updated: 2026-11-01
 - **進み具合の記録**: 2026-11-04 に散布図 183 枚を反映。2026-11-05 に note のランキング図の型を入れた。見本はオーナーが確認した。
 - **配色の台帳 (2026-11-05)**: 連続か 5 段階か・一方向か発散かを値から決め、`data/ranking/color-policies/policies.json` に指標 × 粒度で持つようにした (規則は `metric-config-standards.md`「配色の台帳」)。図の生成はこの結合を読む。サイトの地図へ届くのは main マージ後に `item.json` を作り直してから。main へのマージは未実施。
 
-### [SEO-META-WARD-BOTTOM-01] 指標 4 件の SEO 文の最下位の市区町村が実データと合わず、develop の検査が赤になっている
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+### [MUNI-RANKING-DENSITY-MISSING-01] 有効な指標 population-density-habitable に公開ランキングが無い
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-06] [領域:サイト]
 
-- **症状**: `audit-seo-meta-facts --fail-on-new` が 4 件で落ち、Develop Quality Gate の Catalog Gates が失敗する (run の head は 13d8860c2)。main への PR も同じ検査で止まる。
-- **該当**: `elderly-population-ratio` (主張 浜松市浜名区 / 実 大熊町)、`housing-floor-area` (主張 与那国町 / 実 大阪市浪速区)、`population-density-habitable` (主張 浜松市浜名区 / 実 双葉町)、`retail-stores-per` (主張 熊本市北区 / 実 豊能町)。
-- **未確認**: 原因。主張か実データのどちらが正しいかを調べていない。行政区を含むかどうかの集合の違いの可能性があるが、検証はしていない。
-- **完了の判定**: 4 件の SEO 文を実データに合わせ、`--update-baseline` を使わずに検査が通る。
+- **症状**: `isActive: true` で `app/stats/<key>/cities.json` は 200 なのに、`app/municipalities/ranking/<key>/item.json` と `app/ranking/<key>/item.json` はどちらも 404 (2026-11-06 実測)。
+- **未確認**: 生成処理の対象から外れた原因。ページの URL の応答も未確認。
+- **完了の判定**: 原因が分かり、公開するか無効にするかが決まって、指標の状態と R2 が一致する。
 
 ### [NOTE-FIGURE-ROLLOUT-01] 公開中の note 記事の図を共通の型へ差し替える
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:商品]
