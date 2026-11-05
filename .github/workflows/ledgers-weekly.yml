@@ -2,7 +2,7 @@ name: 🎨 Data ledgers
 
 # 外部の値から作る台帳を作り直し、develop へ書き戻す。読むだけで R2 には書かない。
 # - 配色 (data/ranking/color-policies): R2 の値から。サイトと SNS へはデプロイの指標の生成で届く
-# - 月次の表 (data/estat/monthly/ledger.json): e-Stat カタログから。判断の無い調査が増えると最後の手順で赤になる
+# - 月次の表 (data/estat/monthly/ledger.json): e-Stat カタログから。判断の無い調査が増えると赤になるが、台帳は書き戻す
 # 正典: .claude/rules/metric-config-standards.md「配色の台帳」
 
 on:
@@ -50,18 +50,18 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: 🎨 Build the colour ledger
+        id: colour
         run: |
           npm run --silent color-policies:build
           npm run --silent color-policies:check -- --strict
 
       - name: 📅 Build the monthly ledger
-        id: monthly
-        continue-on-error: true
         run: |
           npm run --silent estat:catalog:pull
           npm run --silent estat:monthly
 
       - name: 📮 Commit the ledgers
+        if: ${{ !cancelled() && steps.colour.outcome == 'success' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -70,9 +70,3 @@ jobs:
           git commit -m "chore(data): refresh the color and monthly ledgers [skip ci]"
           git pull --rebase origin develop
           git push origin develop
-
-      - name: 🚦 Report the monthly ledger
-        if: steps.monthly.outcome == 'failure'
-        run: |
-          echo "::error::月次の台帳の判断に漏れがある。data/estat/monthly/decisions.json を更新する"
-          exit 1

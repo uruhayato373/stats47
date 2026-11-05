@@ -69,7 +69,6 @@ async function build() {
     while (next < metrics.length) {
       const metric = metrics[next++];
       if (next % PROGRESS_EVERY === 0) console.log(`${next} / ${metrics.length} 指標`);
-      const before = rows.length;
       let failed = false, hasValues = false;
       const add = (grain: ColorGrain, found: ReturnType<typeof latestValues>) => {
         if (found) rows.push(colorPolicyRow(metric.key, grain, metric.visualization, found.year, found.values));
@@ -85,7 +84,8 @@ async function build() {
         const hasWards = cities.some((row) => wards.has(row.areaCode) && typeof row.value === 'number' && row.value !== 0);
         if (hasWards) add('municipality-split', latestValues(cities, (code) => split.has(code)));
       }
-      if (rows.length === before) skips.push({ metricKey: metric.key, reason: failed ? 'fetch-failed' : hasValues ? 'too-few-areas' : 'no-values' });
+      // Workers share rows, so the check is by key rather than by how far the array grew.
+      if (!rows.some((row) => row.metricKey === metric.key)) skips.push({ metricKey: metric.key, reason: failed ? 'fetch-failed' : hasValues ? 'too-few-areas' : 'no-values' });
     }
   }));
   if (failures > metrics.length * 2 * MAX_FAILURE_SHARE) throw new Error(`R2 の取得失敗が多すぎる (${failures} 件)。台帳を更新しない`);
