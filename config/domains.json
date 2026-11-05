@@ -15,6 +15,7 @@
           { "label": "月次レビュー", "href": "/strategy/reviews/monthly" }
         ] },
         { "label": "領域と構え", "href": "/strategy/lanes", "kind": "actions" },
+        { "label": "事業イシューマップ", "href": "/strategy/issue-map", "kind": "results" },
         { "label": "pilot 判定", "href": "/strategy/pilots", "kind": "results" },
         { "label": "商品の台帳", "href": "/strategy/products", "kind": "results" },
         { "label": "方針", "href": "/strategy", "kind": "policy" }
