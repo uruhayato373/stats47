@@ -11,6 +11,7 @@ import { chartValueLabels, type RankingChart, type RankingChartRow } from '../..
 import type { ScatterChart } from '../../../../apps/admin/lib/template-relationship-scatter';
 import type { LineChart, LineSeries } from '../../../../apps/admin/lib/template-trend-line';
 import type { StackedChart } from '../../../../apps/admin/lib/template-composition-stacked';
+import type { AreaChartInput, AreaScope } from '../../../../apps/admin/lib/template-area-scope';
 
 export interface ArticleMetric {
   title?: string;
@@ -143,26 +144,23 @@ function articleSeries(parsed: unknown): LineSeries[] | { skip: string } {
   return rows.length ? [{ label: text(data.label) || '値', points: toPoints(rows) }] : [];
 }
 
-/** Rows that are not the 47 prefectures: one chart of whatever the article's data lists, ranked by value. */
-export function partialBarChartFromArticleData(parsed: unknown, opts: { metric?: ArticleMetric } = {}): RankingChart | { skip: string } {
+/**
+ * Article municipal json → the area chart input. Rows join by area code and the set comes from the manifest's
+ * areaScope: names in the data are for readers and are not matched against anything.
+ */
+export function areaChartFromArticleData(parsed: unknown, scope: AreaScope | undefined, opts: { metric?: ArticleMetric } = {}): AreaChartInput | { skip: string } {
+  if (!scope) return { skip: 'source.json に areaScope が無い' };
   const data = (Array.isArray(parsed) ? { data: parsed } : parsed) as Record<string, unknown>;
-  const items = (Array.isArray(data?.data) ? data.data : []) as Row[];
-  const named = items.flatMap((it) => {
-    const name = text(it.areaName) || text(it.label) || text(it.name) || text(it.pref);
-    return typeof it.value === 'number' && Number.isFinite(it.value) && name ? [{ name, value: it.value }] : [];
-  });
-  if (!named.length) return { skip: '名前と値のある行が無い' };
-  const sorted = [...named].sort((a, b) => b.value - a.value);
-  const rows: RankingChartRow[] = sorted.map((it) => ({
-    rank: sorted.findIndex((other) => other.value === it.value) + 1, area_code: '', area_name: it.name, value: it.value,
-  }));
+  const items = (Array.isArray(data?.data) ? data.data : []) as { areaCode?: unknown; value?: unknown }[];
+  if (!items.length || items.some((it) => !/^\d{5}$/.test(String(it.areaCode ?? '')))) return { skip: '地域コードの無い行がある' };
   const title = splitTitle((text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, ''));
   if (!title.title) return { skip: '図の名前がデータに無い' };
-  const yearLabel = text(data.subtitle) || (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : '');
   return {
-    title: title.title, yearLabel, source: text(data.source), note: title.condition || text(opts.metric?.subtitle) || undefined,
-    presentation: presentationOf(data, opts.metric), rows,
-    ...chartValueLabels(text(data.unit), rows.map((r) => r.value), text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined),
+    title: title.title, yearLabel: text(data.subtitle) || (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : ''),
+    unit: text(data.unit), source: text(data.source), note: title.condition || undefined,
+    presentation: presentationOf(data, opts.metric),
+    decimalPlaces: text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined,
+    scope, values: items.map((it) => ({ areaCode: String(it.areaCode), value: numberOr(it.value) })),
   };
 }
 

@@ -29,6 +29,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const CARDS_DIR = path.join(PROJECT_ROOT, "apps/web/public/finance-cards/cities");
 const SIMILAR_JSON = path.join(PROJECT_ROOT, "apps/web/public/finance-cards/similar-averages.json");
 const PREFECTURES_JSON = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
+const CITIES_JSON = path.join(PROJECT_ROOT, "packages/area/src/data/cities.json");
 
 const args = process.argv.slice(2);
 const getArg = (flag, fallback = null) => {
@@ -62,6 +63,25 @@ if (!fs.existsSync(cardFile)) {
 const CARDS = JSON.parse(fs.readFileSync(cardFile, "utf8"));
 const SIMILAR = JSON.parse(fs.readFileSync(SIMILAR_JSON, "utf8"));
 
+// 決算カードは団体名をキーに持つので、地域マスタでコードへ写す。図は名前でなくコードで結ぶ。
+// 表記の違いは小書きのケだけを同一視する (駒ケ根市 / 駒ヶ根市)
+const nameKey = (name) => name.replace(/ヶ/g, "ケ");
+const CODE_BY_NAME = new Map(
+  JSON.parse(fs.readFileSync(CITIES_JSON, "utf8"))
+    .filter((c) => c.level === "2" && c.cityCode.startsWith(PREF.slice(0, 2)))
+    .map((c) => [nameKey(c.cityName.split(" ").pop()), c.cityCode])
+);
+function areaCodeOf(name) {
+  const code = CODE_BY_NAME.get(nameKey(name));
+  if (!code) {
+    console.error(`[error] 地域マスタに無い団体: ${name}`);
+    process.exit(3);
+  }
+  return code;
+}
+// 決算カードの単位は基礎自治体 (政令指定都市は市全体)
+const AREA_SCOPE = { level: "municipality", wardMode: "merged", within: { kind: "prefecture", prefCode: PREF.slice(0, 2) } };
+
 const median = (nums) => {
   const s = [...nums].sort((a, b) => a - b);
   const m = Math.floor(s.length / 2);
@@ -88,6 +108,7 @@ function ranking(rows, { title, label, unit, palette, decimals }) {
     generatedBy: "fetch-municipal-finance.mjs",
     data: sorted.map((r, i) => ({
       rank: i + 1,
+      areaCode: areaCodeOf(r.name),
       areaName: r.name,
       pref: r.name,
       value: r.value,
@@ -163,7 +184,7 @@ function main() {
       palette: "blue",
       decimals: 2,
     }),
-    { label: `${SELF}の市町村別 財政力指数`, unit: "", transform: `${YEAR} 年度の fiscalIndex を降順に並べる (${fi.length} 団体)` },
+    { label: `${SELF}の市町村別 財政力指数`, unit: "", areaScope: AREA_SCOPE, transform: `${YEAR} 年度の fiscalIndex を降順に並べる (${fi.length} 団体)` },
   );
   write(
     `${DATA_NAME}-finance-debt-ranking`,
@@ -174,7 +195,7 @@ function main() {
       palette: "red",
       decimals: 1,
     }),
-    { label: `${SELF}の市町村別 実質公債費比率`, unit: "％", transform: `${YEAR} 年度の debtServiceRatio を降順に並べる (${ds.length} 団体)` },
+    { label: `${SELF}の市町村別 実質公債費比率`, unit: "％", areaScope: AREA_SCOPE, transform: `${YEAR} 年度の debtServiceRatio を降順に並べる (${ds.length} 団体)` },
   );
   write(
     `${DATA_NAME}-finance-timeseries`,

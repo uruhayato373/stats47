@@ -208,6 +208,8 @@ export function lintImageTypeSvg(filename, svg) {
   if (!['light', 'dark'].includes(imageThemeOf(svg) ?? ''))
     errors.push(`型の画像に data-theme (light/dark) が無い (${path_base(filename)})`);
   errors.push(...imageTextErrors(filename, svg));
+  if (/<svg[^>]*data-scope="municipality"/.test(String(svg)) && !/<svg[^>]*data-ward-mode="(?:merged|split)"/.test(String(svg)))
+    errors.push(`市区町村の型の画像に統合か分割かの印が無い (data-ward-mode) (${path_base(filename)})`);
   if (imageTemplateOf(svg) === 'scatter') errors.push(...scatterTypeErrors(filename, svg));
   return { errors, warnings: [] };
 }
