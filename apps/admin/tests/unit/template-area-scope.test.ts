@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { chartSourceShapeErrors } from '../../../../.claude/scripts/lib/chart-source-schema.mjs';
 import { lintImageTypeSvg } from '../../../../.claude/scripts/lib/svg-lint.mjs';
-import { areaChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { areaChartFromArticleData, chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, lineChartFromArticleData, stackedChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 import { areasOf, resolveAreaChart, type AreaScope, type AreaValue } from '@/lib/template-area-scope';
+import { renderGroupedBarsChart } from '@/lib/template-grouped-bars';
 import { renderAreaBarsChart } from '@/lib/template-ranking-bars';
 
 const presentation = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential', domain: { mode: 'extent' }, classification: { method: 'continuous' }, trendDomain: { mode: 'extent' }, comparisonDomain: { mode: 'extent' } } as never;
@@ -62,11 +64,29 @@ describe('順位は集合ごとに数える', () => {
   it('47 県がそろわない都道府県の図は止める', () => {
     expect(() => resolveAreaChart({ ...base, scope: { level: 'prefecture' }, values: [{ areaCode: '01000', value: 1 }] })).toThrow('47');
   });
-  it('政令指定都市のある県は統合か分割かを画像に書く', () => {
-    expect(resolveAreaChart({ ...base, scope: merged, values }).note).toBe('政令指定都市は市全体');
-    expect(resolveAreaChart({ ...base, scope: split, values }).note).toBe('政令指定都市は行政区ごと');
-    const noCity = resolveAreaChart({ ...base, scope: { level: 'municipality', wardMode: 'merged', within: { kind: 'prefecture', prefCode: '16' } }, values: [{ areaCode: '16201', value: 1 }] });
-    expect(noCity.note).toBeUndefined();
+  it('統合か分割かを文で書かず、画像の印だけで持つ', () => {
+    expect(resolveAreaChart({ ...base, scope: merged, values }).note).toBeUndefined();
+    expect(resolveAreaChart({ ...base, scope: split, values }).note).toBeUndefined();
+  });
+});
+
+describe('画像の文言', () => {
+  it('読み方の説明を止める', () => {
+    for (const text of ['帯の太さは移動した人数', '色は移動元の地方', '政令指定都市は市全体', '各行は47都道府県の合計', '総量を 100％とした割合'])
+      expect(() => assertMinimalChartCopy(`<svg><text>${text}</text></svg>`)).toThrow();
+  });
+  it('記事の説明文を条件の行へ流さず、意味を変える条件だけを残す', () => {
+    const line = lineChartFromArticleData({ title: '支出額の推移 (二人以上の世帯・全国)', subtitle: '説明の文', unit: '円', data: [{ year: 2020, value: 1 }] });
+    expect(line).toMatchObject({ title: '支出額の推移', note: '二人以上の世帯・全国' });
+    const compared = lineChartFromArticleData({ title: '出生率の推移（東京 vs 沖縄、1980-2023）', data: [{ year: 2020, value: 1 }] });
+    expect(compared).toMatchObject({ title: '出生率の推移', note: undefined });
+  });
+  it('積み上げの年は見出しの行へ移し、説明の subtitle を使わない', () => {
+    const chart = stackedChartFromArticleData({ title: '産出額の構成（2018年）', subtitle: '各地域の総量を 100％とした割合', unit: '%', series: [{ label: '米', data: [{ year: '東北', value: 1 }] }] });
+    expect(chart).toMatchObject({ meta: '2018年 · 単位：%', note: undefined });
+  });
+  it('長い調査名は調査の名前だけにする', () => {
+    expect(chartSourceName({}, { statsName: '家計調査 家計収支編 二人以上の世帯' }, () => undefined)).toBe('家計調査');
   });
 });
 
@@ -92,5 +112,29 @@ describe('棒の型と記事のデータ', () => {
     const svg = '<svg viewBox="0 0 1080 1350" data-image-template="bar" data-theme="light" data-scope="municipality"></svg>';
     expect(lintImageTypeSvg('a.svg', svg).errors.join()).toContain('統合か分割');
     expect(lintImageTypeSvg('a.svg', svg.replace('data-scope', 'data-ward-mode="merged" data-scope')).errors).toEqual([]);
+  });
+});
+
+describe('グループ棒グラフ', () => {
+  const monthly = { title: '支出額', unit: '円', series: ['2000年', '2024年'].map((label, i) => ({ label, data: ['1月', '2月', '3月'].map((year, m) => ({ year, value: (i + 1) * (m + 1) })) })) };
+  it('月の軸を周期の軸と見分け、年の軸は折れ線のままにする', () => {
+    expect(hasCyclicAxis(monthly)).toBe(true);
+    expect(hasCyclicAxis({ data: [{ year: 2020, value: 1 }, { year: '2021年度', value: 2 }] })).toBe(false);
+  });
+  it('全部の棒を描き、値の軸を 0 から始める', () => {
+    const chart = groupedBarChartFromArticleData(monthly);
+    if ('skip' in chart) throw Error(chart.skip);
+    const svg = renderGroupedBarsChart({ ...chart, source: '家計調査' });
+    expect(svg).toContain('data-image-template="grouped-bar"');
+    expect(svg.match(/<rect data-value="/g)).toHaveLength(6);
+    expect(svg).toContain('>0</text>');
+  });
+  it('欠測は 0 の棒にしない', () => {
+    const svg = renderGroupedBarsChart({ title: 'a', meta: 'b', source: 'c', groups: ['1月', '2月'], series: [{ label: 'x', values: [1, null] }] });
+    expect(svg.match(/<rect data-value="/g)).toHaveLength(1);
+  });
+  it('棒が細くなりすぎる組み合わせは止める', () => {
+    const series = Array.from({ length: 12 }, (_, i) => ({ label: String(i), values: Array(12).fill(1) }));
+    expect(() => renderGroupedBarsChart({ title: 'a', meta: 'b', source: 'c', groups: Array.from({ length: 12 }, (_, i) => `${i + 1}月`), series })).toThrow('細すぎ');
   });
 });

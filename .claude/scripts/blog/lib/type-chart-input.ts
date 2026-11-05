@@ -11,6 +11,7 @@ import { chartValueLabels, type RankingChart, type RankingChartRow } from '../..
 import type { ScatterChart } from '../../../../apps/admin/lib/template-relationship-scatter';
 import type { LineChart, LineSeries } from '../../../../apps/admin/lib/template-trend-line';
 import type { StackedChart } from '../../../../apps/admin/lib/template-composition-stacked';
+import type { GroupedBarChart } from '../../../../apps/admin/lib/template-grouped-bars';
 import type { AreaChartInput, AreaScope } from '../../../../apps/admin/lib/template-area-scope';
 
 export interface ArticleMetric {
@@ -104,6 +105,10 @@ export function rankingChartFromArticleData(
 const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
 const numberOr = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 const TITLE_MAX_CHARS = 21;
+const REDUNDANT_CONDITION = /\d{4}\s*[-–〜~]\s*\d{4}|\svs\s/;
+const YEAR_ONLY = /^\d{4}年度?$/;
+/** The survey's name without its table and edition: 「家計調査 家計収支編 …」→「家計調査」. */
+const shortSurveyName = (name: string) => name.split(/[\s（(]/)[0];
 const xOf = (p: Record<string, unknown>) => String(p.year ?? p.x ?? p.label ?? '');
 
 /**
@@ -113,7 +118,7 @@ const xOf = (p: Record<string, unknown>) => String(p.year ?? p.x ?? p.label ?? '
 export function chartSourceName(data: unknown, manifest: Record<string, unknown>, metricSource: (key: string) => string | undefined) {
   const written = data && !Array.isArray(data) ? text((data as Record<string, unknown>).source) : '';
   if (written) return written;
-  if (text(manifest.statsName)) return text(manifest.statsName);
+  if (text(manifest.statsName)) return shortSurveyName(text(manifest.statsName));
   const key = text(manifest.rankingKey) || text(manifest.metricKey) || /^r2:app\/(?:ranking|stats)\/([^/]+)\//.exec(text(manifest.source))?.[1];
   return (key && metricSource(key)) || '';
 }
@@ -122,11 +127,13 @@ export function chartSourceName(data: unknown, manifest: Record<string, unknown>
 export function splitTitle(title: string) {
   const m = /^(.+?)[\s　]*[（(]([^（()）]+)[)）]$/.exec(title.trim());
   const named = m ? { title: m[1], condition: m[2] } : { title: title.trim(), condition: '' };
-  // A title too long for one line breaks at its first space: 「北海道の取り分 乳用牛・生乳・…」.
-  const spaced = named.title.length > TITLE_MAX_CHARS ? /^(\S+)\s+(.+)$/.exec(named.title) : null;
-  return spaced ? { title: spaced[1], condition: [spaced[2], named.condition].filter(Boolean).join(' · ') } : named;
+  // A title too long for one line keeps its first phrase: the rest repeats what the chart's labels show.
+  const spaced = named.title.length > TITLE_MAX_CHARS ? /^(\S+)\s+.+$/.exec(named.title) : null;
+  // Only a condition that changes what a number means stays (chart-image-copy.md): a period or a comparison
+  // the chart already shows does not.
+  const condition = named.condition.split(/[、,]/).map((part) => part.trim()).filter((part) => part && !REDUNDANT_CONDITION.test(part)).join('・');
+  return { title: spaced ? spaced[1] : named.title, condition };
 }
-const joinNotes = (...parts: unknown[]) => [...new Set(parts.map(text).filter(Boolean))].join(' · ') || undefined;
 const decimalsIn = (values: number[]) => Math.min(2, Math.max(0, ...values.map((v) => (String(v).split('.')[1] ?? '').length)));
 
 /** The series of an article's line json, in any of its written forms. */
@@ -164,6 +171,24 @@ export function areaChartFromArticleData(parsed: unknown, scope: AreaScope | und
   };
 }
 
+/** True when the x labels are not years: a cycle such as twelve months, which a line would read as a trend. */
+export function hasCyclicAxis(parsed: unknown) {
+  const series = articleSeries(parsed);
+  if ('skip' in series) return false;
+  return series.some((s) => s.points.some((p) => !/^\d{4}/.test(p.x)));
+}
+
+/** Article json with non-year categories → the grouped bars. */
+export function groupedBarChartFromArticleData(parsed: unknown): GroupedBarChart | { skip: string } {
+  const line = lineChartFromArticleData(parsed);
+  if ('skip' in line) return line;
+  const groups = [...new Set(line.series.flatMap((s) => s.points.map((p) => p.x)))];
+  return {
+    title: line.title, meta: line.meta, note: line.note, source: line.source, groups,
+    series: line.series.map((s) => ({ label: s.label, values: groups.map((g) => s.points.find((p) => p.x === g)?.value ?? null) })),
+  };
+}
+
 /** Article line json → the line type. Too many lines to tell apart stay a reason to fix the data. */
 export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: number } = {}): LineChart | { skip: string } {
   const data = (Array.isArray(parsed) ? {} : parsed) as Record<string, unknown>;
@@ -180,11 +205,13 @@ export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: nu
   return {
     title: named.title,
     meta: [period, unit && `単位：${unit}`].filter(Boolean).join(' · ') || text(data.subtitle),
-    note: joinNotes(named.condition, period || unit ? text(data.subtitle) : ''),
+    note: named.condition || undefined,
     source: text(data.source),
     series, decimals: decimalsIn(values),
   };
 }
+
+const QUOTED_SOURCE = /[^・·\s]*「[^」]+」/;
 
 /** Article stacked json (series with one value per bar, or one wide row per bar) → the stacked type. */
 export function stackedChartFromArticleData(parsed: unknown): StackedChart | { skip: string } {
@@ -204,12 +231,13 @@ export function stackedChartFromArticleData(parsed: unknown): StackedChart | { s
   if (!groups.length || !categories.length) return { skip: '区分か棒が無い' };
   const named = splitTitle(text(data.title) || text(data.label) || '内訳');
   const unit = text(data.unit);
+  const year = YEAR_ONLY.test(named.condition) ? named.condition : text(data.year) ? `${text(data.year)}年` : '';
   const values = categories.flatMap((c) => c.values.flatMap((v) => (v === null ? [] : [v])));
   return {
     title: named.title,
-    meta: [text(data.subtitle) || (text(data.year) ? `${text(data.year)}年` : ''), unit && `単位：${unit}`].filter(Boolean).join(' · '),
-    note: joinNotes(named.condition),
-    source: text(data.source),
+    meta: [year, unit && `単位：${unit}`].filter(Boolean).join(' · '),
+    note: YEAR_ONLY.test(named.condition) ? undefined : named.condition || undefined,
+    source: text(data.source) || (QUOTED_SOURCE.exec(text(data.subtitle))?.[0] ?? ''),
     groups, categories, normalized: data.normalized === true, unit, decimals: decimalsIn(values),
   };
 }

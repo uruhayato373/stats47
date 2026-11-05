@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "月次の統計の採否 (data/estat/monthly/decisions.json)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "decisions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "statCode",
+          "decision",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "statCode": {
+            "type": "string",
+            "pattern": "^\\d{8}$"
+          },
+          "decision": {
+            "enum": [
+              "use",
+              "hold",
+              "exclude"
+            ],
+            "description": "use = 図にできる表が決まっている / hold = 使える見込みで確かめてから決める / exclude = 使わない"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "areaGrain": {
+            "enum": [
+              "nation",
+              "nation-and-cities",
+              "prefecture",
+              "port"
+            ]
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^\\d{10}$"
+            },
+            "uniqueItems": true
+          },
+          "siteUse": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "article",
+                "sns",
+                "theme"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^issue:[A-Z]\\d{2}(-\\d+)?$"
+            },
+            "uniqueItems": true
+          },
+          "fetcher": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

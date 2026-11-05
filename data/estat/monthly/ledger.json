@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "catalogTables": 227309,
+    "monthlyTables": 8695,
+    "surveys": 48
+  },
+  "surveys": [
+    {
+      "statCode": "00550200",
+      "statName": "経済産業省生産動態統計調査",
+      "govOrg": "経済産業省",
+      "tables": 7115,
+      "prefectureTables": 0,
+      "latestUpdate": "2025-04-17",
+      "pinned": []
+    },
+    {
+      "statCode": "00550210",
+      "statName": "経済産業省特定業種石油等消費動態統計調査",
+      "govOrg": "経済産業省",
+      "tables": 650,
+      "prefectureTables": 0,
+      "latestUpdate": "2014-04-09",
+      "pinned": []
+    },
+    {
+      "statCode": "00200531",
+      "statName": "労働力調査",
+      "govOrg": "総務省",
+      "tables": 113,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-30",
+      "pinned": []
+    },
+    {
+      "statCode": "00550030",
+      "statName": "商業動態統計調査",
+      "govOrg": "経済産業省",
+      "tables": 94,
+      "prefectureTables": 20,
+      "latestUpdate": "2025-07-11",
+      "pinned": [
+        {
+          "statsDataId": "0003395232",
+          "title": "- 百貨店・スーパー販売　都道府県別販売額前年比増減率",
+          "updatedDate": "2025-01-22"
+        },
+        {
+          "statsDataId": "0003395254",
+          "title": "- コンビニエンスストア販売　都道府県別販売額等及び前年比増減率",
+          "updatedDate": "2025-01-22"
+        }
+      ]
+    },
+    {
+      "statCode": "00450399",
+      "statName": "「医療費の動向」調査",
+      "govOrg": "厚生労働省",
+      "tables": 87,
+      "prefectureTables": 0,
+      "latestUpdate": "2025-03-31",
+      "pinned": []
+    },
+    {
+      "statCode": "00200565",
+      "statName": "家計消費状況調査",
+      "govOrg": "総務省",
+      "tables": 61,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-30",
+      "pinned": []
+    },
+    {
+      "statCode": "00600120",
+      "statName": "建築着工統計調査",
+      "govOrg": "国土交通省",
+      "tables": 59,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-07-06",
+      "pinned": []
+    },
+    {
+      "statCode": "00450071",
+      "statName": "毎月勤労統計調査",
+      "govOrg": "厚生労働省",
+      "tables": 42,
+      "prefectureTables": 0,
+      "latestUpdate": "2021-10-12",
+      "pinned": []
+    },
+    {
+      "statCode": "00550050",
+      "statName": "特定サービス産業動態統計調査",
+      "govOrg": "経済産業省",
+      "tables": 42,
+      "prefectureTables": 0,
+      "latestUpdate": "2025-03-31",
+      "pinned": []
+    },
+    {
+      "statCode": "00600140",
+      "statName": "建設関連業等の動態統計調査",
+      "govOrg": "国土交通省",
+      "tables": 42,
+      "prefectureTables": 0,
+      "latestUpdate": "2022-06-03",
+      "pinned": []
+    },
+    {
+      "statCode": "00600300",
+      "statName": "造船造機統計調査",
+      "govOrg": "国土交通省",
+      "tables": 36,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-06-08",
+      "pinned": []
+    },
+    {
+      "statCode": "00550560",
+      "statName": "鉄鋼生産内訳月報",
+      "govOrg": "経済産業省",
+      "tables": 33,
+      "prefectureTables": 0,
+      "latestUpdate": "2020-03-27",
+      "pinned": []
+    },
+    {
+      "statCode": "00600330",
+      "statName": "自動車輸送統計調査",
+      "govOrg": "国土交通省",
+      "tables": 33,
+      "prefectureTables": 2,
+      "latestUpdate": "2026-09-17",
+      "pinned": []
+    },
+    {
+      "statCode": "00250011",
+      "statName": "出入国管理統計",
+      "govOrg": "法務省",
+      "tables": 32,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-26",
+      "pinned": [
+        {
+          "statsDataId": "0003449063",
+          "title": "総括 港別　出入国者",
+          "updatedDate": "2026-10-26"
+        },
+        {
+          "statsDataId": "0003449064",
+          "title": "総括 港別　入国外国人の国籍・地域",
+          "updatedDate": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "statCode": "00450151",
+      "statName": "薬事工業生産動態統計調査",
+      "govOrg": "厚生労働省",
+      "tables": 27,
+      "prefectureTables": 6,
+      "latestUpdate": "2019-02-21",
+      "pinned": []
+    },
+    {
+      "statCode": "00600280",
+      "statName": "港湾調査",
+      "govOrg": "国土交通省",
+      "tables": 26,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-09-15",
+      "pinned": []
+    },
+    {
+      "statCode": "00200561",
+      "statName": "家計調査",
+      "govOrg": "総務省",
+      "tables": 18,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-09",
+      "pinned": [
+        {
+          "statsDataId": "0004023601",
+          "title": "品目分類 品目分類（2025年改定）（総数：金額）",
+          "updatedDate": "2026-10-09"
+        },
+        {
+          "statsDataId": "0004023602",
+          "title": "品目分類 品目分類（2025年改定）（総数：数量）",
+          "updatedDate": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "statCode": "00250007",
+      "statName": "保護統計調査",
+      "govOrg": "法務省",
+      "tables": 17,
+      "prefectureTables": 7,
+      "latestUpdate": "2026-10-26",
+      "pinned": []
+    },
+    {
+      "statCode": "00200523",
+      "statName": "住民基本台帳人口移動報告",
+      "govOrg": "総務省",
+      "tables": 15,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-27",
+      "pinned": [
+        {
+          "statsDataId": "0003420473",
+          "title": "男女別都道府県内移動者数，他都道府県からの転入者数及び他都道府県への転出者数－全国，都道府県，３大都市圏（東京圏，名古屋圏，大阪圏），21大都市（移動者，日本人移動者，外国人移動者）（2005年4月～）",
+          "updatedDate": "2026-10-27"
+        },
+        {
+          "statsDataId": "0003423613",
+          "title": "男女，移動前の住所地別都道府県間移動者数－都道府県，３大都市圏（東京圏，名古屋圏，大阪圏），21大都市（移動者）（2019年1月～）",
+          "updatedDate": "2026-10-27"
+        }
+      ]
+    },
+    {
+      "statCode": "00600130",
+      "statName": "建設工事受注動態統計調査",
+      "govOrg": "国土交通省",
+      "tables": 14,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-30",
+      "pinned": []
+    },
+    {
+      "statCode": "00100001",
+      "statName": "景気ウォッチャー調査",
+      "govOrg": "内閣府",
+      "tables": 12,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-23",
+      "pinned": []
+    },
+    {
+      "statCode": "00600340",
+      "statName": "内航船舶輸送統計調査",
+      "govOrg": "国土交通省",
+      "tables": 11,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-09-29",
+      "pinned": []
+    },
+    {
+      "statCode": "00600350",
+      "statName": "鉄道輸送統計調査",
+      "govOrg": "国土交通省",
+      "tables": 10,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-13",
+      "pinned": []
+    },
+    {
+      "statCode": "00100401",
+      "statName": "機械受注統計調査",
+      "govOrg": "内閣府",
+      "tables": 8,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-15",
+      "pinned": []
+    },
+    {
+      "statCode": "00200524",
+      "statName": "人口推計",
+      "govOrg": "総務省",
+      "tables": 8,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-20",
+      "pinned": []
+    },
+    {
+      "statCode": "00250002",
+      "statName": "登記統計",
+      "govOrg": "法務省",
+      "tables": 8,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-26",
+      "pinned": []
+    },
+    {
+      "statCode": "00200544",
+      "statName": "サービス産業動向調査",
+      "govOrg": "総務省",
+      "tables": 7,
+      "prefectureTables": 0,
+      "latestUpdate": "2025-05-26",
+      "pinned": []
+    },
+    {
+      "statCode": "00551130",
+      "statName": "ガス事業生産動態統計調査",
+      "govOrg": "資源エネルギー庁",
+      "tables": 7,
+      "prefectureTables": 0,
+      "latestUpdate": "2018-09-07",
+      "pinned": []
+    },
+    {
+      "statCode": "00600310",
+      "statName": "鉄道車両等生産動態統計調査",
+      "govOrg": "国土交通省",
+      "tables": 7,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-23",
+      "pinned": []
+    },
+    {
+      "statCode": "00250003",
+      "statName": "検察統計調査",
+      "govOrg": "法務省",
+      "tables": 6,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-07",
+      "pinned": []
+    },
+    {
+      "statCode": "00250006",
+      "statName": "少年矯正統計調査",
+      "govOrg": "法務省",
+      "tables": 6,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-09-28",
+      "pinned": []
+    },
+    {
+      "statCode": "00350310",
+      "statName": "特殊貿易統計",
+      "govOrg": "財務省",
+      "tables": 6,
+      "prefectureTables": 0,
+      "latestUpdate": "2019-07-09",
+      "pinned": []
+    },
+    {
+      "statCode": "00450023",
+      "statName": "病院報告",
+      "govOrg": "厚生労働省",
+      "tables": 5,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-02-20",
+      "pinned": []
+    },
+    {
+      "statCode": "00600260",
+      "statName": "建設総合統計",
+      "govOrg": "国土交通省",
+      "tables": 5,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-20",
+      "pinned": []
+    },
+    {
+      "statCode": "00200546",
+      "statName": "サービス産業動態統計調査",
+      "govOrg": "総務省",
+      "tables": 4,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-23",
+      "pinned": []
+    },
+    {
+      "statCode": "00250010",
+      "statName": "人権侵犯事件統計",
+      "govOrg": "法務省",
+      "tables": 4,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-26",
+      "pinned": []
+    },
+    {
+      "statCode": "00550051",
+      "statName": "特定サービス産業動態売上高指数",
+      "govOrg": "経済産業省",
+      "tables": 4,
+      "prefectureTables": 0,
+      "latestUpdate": "2023-01-26",
+      "pinned": []
+    },
+    {
+      "statCode": "00450021",
+      "statName": "医療施設調査",
+      "govOrg": "厚生労働省",
+      "tables": 3,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-03-11",
+      "pinned": []
+    },
+    {
+      "statCode": "00600270",
+      "statName": "建設工事費デフレーター",
+      "govOrg": "国土交通省",
+      "tables": 3,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-30",
+      "pinned": []
+    },
+    {
+      "statCode": "00600370",
+      "statName": "自動車燃料消費量調査",
+      "govOrg": "国土交通省",
+      "tables": 3,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-23",
+      "pinned": []
+    },
+    {
+      "statCode": "00200571",
+      "statName": "小売物価統計調査",
+      "govOrg": "総務省",
+      "tables": 2,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-30",
+      "pinned": []
+    },
+    {
+      "statCode": "00250001",
+      "statName": "訟務事件統計",
+      "govOrg": "法務省",
+      "tables": 2,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-26",
+      "pinned": []
+    },
+    {
+      "statCode": "00250005",
+      "statName": "矯正統計調査",
+      "govOrg": "法務省",
+      "tables": 2,
+      "prefectureTables": 0,
+      "latestUpdate": "2026-10-16",
+      "pinned": []
+    },
+    {
+      "statCode": "00350320",
+      "statName": "船舶・航空機統計",
+      "govOrg": "財務省",
+      "tables": 2,
+      "prefectureTables": 0,
+      "latestUpdate": "2019-11-29",
+      "pinned": []
+    },
+    {
+      "statCode": "00250004",
+      "statName": "婦人補導統計調査",
+      "govOrg": "法務省",
+      "tables": 1,
+      "prefectureTables": 0,
+      "latestUpdate": "2024-07-10",
+      "pinned": []
+    },
+    {
+      "statCode": "00550580",
+      "statName": "機能性化学品動向調査",
+      "govOrg": "経済産業省",
+      "tables": 1,
+      "prefectureTables": 0,
+      "latestUpdate": "2018-10-01",
+      "pinned": []
+    },
+    {
+      "statCode": "00600371",
+      "statName": "トラック輸送情報",
+      "govOrg": "国土交通省",
+      "tables": 1,
+      "prefectureTables": 0,
+      "latestUpdate": "2022-08-31",
+      "pinned": []
+    },
+    {
+      "statCode": "00600880",
+      "statName": "設備工事業に係る受注高調査",
+      "govOrg": "国土交通省",
+      "tables": 1,
+      "prefectureTables": 0,
+      "latestUpdate": "2022-06-07",
+      "pinned": []
+    }
+  ]
+}
