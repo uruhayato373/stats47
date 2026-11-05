@@ -14,7 +14,7 @@ import { prefectureChordNodes, regionChordNodes, renderChordChart, type Migratio
 import { renderStackedChart } from '../lib/template-composition-stacked';
 import { renderDistributionMapChart } from '../lib/template-distribution-map';
 import { renderCompositionHeatmap, renderCompositionPie } from '../lib/template-minor-charts';
-import { rankingRows, renderColumnBarsChart, renderPartialBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
+import { rankingRows, renderColumnBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
 import { rankingInputFromStats, sampleRankingChart } from '../lib/template-ranking-data';
 import { renderRankingTable } from '../lib/template-ranking-table';
 import { renderTileMapChart } from '../lib/template-ranking-tile-map';
@@ -73,12 +73,6 @@ async function stackedSample(id: string, label: string, slug: string, base: stri
   chart.source = chartSourceName(data, await json(blog(slug, base, 'source.json')), metricSource);
   return both(id, label, (theme) => renderStackedChart(chart, theme));
 }
-async function partialSample(id: string, label: string, slug: string, base: string) {
-  const chart = partialBarChartFromArticleData(await json(blog(slug, base)));
-  if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
-  return both(id, label, (theme) => renderPartialBarsChart(chart, theme));
-}
-
 async function columnSample(id: string, label: string, slug: string, base: string) {
   const chart = partialBarChartFromArticleData(await json(blog(slug, base)));
   if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
@@ -108,10 +102,9 @@ async function main() {
   const chordHead = { meta: `${MIGRATION_YEAR}年 · 単位：人`, note: '帯の太さは移動した人数 · 色は移動元の地方', source: MIGRATION_SOURCE };
   const rows: Row[] = [
     {
-      id: 'bar', title: '棒グラフ', status: 'review', summary: '順位と値を読む型。47 県のカードは決定済みで、47 県以外と 2 列の形が確認待ち。',
+      id: 'bar', title: '棒グラフ', status: 'review', summary: '順位と値を読む型。47 県はカード、県以外の行は全行の 2 列で描く。県が行になる図はタイル地図を使う。',
       samples: [
         both('bar', '上位 5・下位 5 のカード', (theme) => renderRankingBarsChart(ranking, theme)),
-        await partialSample('bar-signed', 'カード・負の値あり', 'osaka-migration-flow', 'osaka-migration-flow-migration-ranking'),
         await columnSample('bar-columns', '全行の 2 列', 'niigata-municipal-finance', 'niigata-municipal-finance-finance-debt-ranking'),
       ],
     },

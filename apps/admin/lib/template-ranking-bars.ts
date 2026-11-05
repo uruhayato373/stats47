@@ -40,7 +40,6 @@ export function rankingBarRows(raw: unknown) {
 // a thin bar under the name. Kept from the earlier blog ranking cards, coloured by the metric.
 export const RANKING_BAR_PLOT = { left: 196, right: SAMPLE_FRAME.right - 24 } as const;
 const CARD = { band: 60, rowHeight: 84, bandGap: 10, radius: 14, badge: 27 } as const;
-const PAIRED_MIN_ROWS = 10;
 
 /** One common frame for the four media; the complete 47-prefecture input stays in R2. */
 export function renderRankingBars(raw: unknown, presentation: MetricPresentation = RANKING_SAMPLE_METRIC.visualization, theme: ChartTheme = LIGHT_THEME) {
@@ -49,20 +48,10 @@ export function renderRankingBars(raw: unknown, presentation: MetricPresentation
 
 /** Upper and lower five of any complete ranking, in the metric's colour (lower five in its lighter tint). */
 export function renderRankingBarsChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
-  return drawBars(chart, assertRankingRows(chart.rows), theme, { title: chart.title + 'ランキング', upper: '上位5県', lower: '下位5県' });
+  return drawBars(chart, assertRankingRows(chart.rows), theme);
 }
 
-/**
- * The same cards for rows that are not the 47 prefectures (46 partners of one prefecture, the cities of a
- * prefecture, occupations): upper and lower five when there are ten or more, otherwise every row.
- */
-export function renderPartialBarsChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
-  const rows = [...chart.rows].sort((a, b) => a.rank - b.rank || b.value - a.value);
-  if (!rows.length || rows.some((r) => !Number.isFinite(r.value))) throw new Error('棒グラフの値を確認してください。');
-  return drawBars(chart, rows, theme, { title: chart.title, upper: '上位5', lower: '下位5' });
-}
-
-const COLUMN = { gap: 40, nameMax: 170, nameSize: 26, valueSize: 23, barInset: 7, maxRows: 30 } as const;
+const COLUMN = { gap: 40, nameMax: 170, nameSize: 26, valueSize: 23, barInset: 7, maxRows: 30, maxRowHeight: 84 } as const;
 
 /**
  * Every row in two columns, for rows that cannot go on a map (cities, occupations). Negative values
@@ -75,7 +64,7 @@ export function renderColumnBarsChart(chart: RankingChart, theme: ChartTheme = L
   const color = toHex(resolveMetricColor(chart.presentation) ?? BRAND.primary);
   const negative = mixColor(color, '#FFFFFF', 0.38);
   const top = sampleBodyTop(Boolean(chart.note)) + 8;
-  const rowHeight = (SAMPLE_FRAME.bodyBottom - top) / half;
+  const rowHeight = Math.min(COLUMN.maxRowHeight, (SAMPLE_FRAME.bodyBottom - top) / half);
   const width = (SAMPLE_FRAME.right - SAMPLE_FRAME.left - COLUMN.gap) / 2;
   const nameWidth = Math.min(COLUMN.nameMax, Math.max(...rows.map((r) => textWidth(r.area_name, COLUMN.nameSize)))) + 12;
   const plot = width - nameWidth;
@@ -103,9 +92,8 @@ export function renderColumnBarsChart(chart: RankingChart, theme: ChartTheme = L
   });
 }
 
-function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: ChartTheme, labels: { title: string; upper: string; lower: string }) {
-  const paired = allRows.length >= PAIRED_MIN_ROWS;
-  const rows = paired ? { top: allRows.slice(0, 5), bottom: allRows.slice(-5) } : { top: allRows, bottom: [] };
+function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: ChartTheme) {
+  const rows = { top: allRows.slice(0, 5), bottom: allRows.slice(-5) };
   const axis = rankingBarAxis(allRows.map((row) => row.value), chart.presentation);
   const dark = theme.name === 'dark';
   // The metric's own colour (strong end of its scheme), so its bars and its map share one hue.
@@ -122,29 +110,26 @@ function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: Cha
   const top = sampleBodyTop(Boolean(chart.note)) + 8;
   const groupHeight = CARD.band + CARD.bandGap + CARD.rowHeight * 5;
   const groupGap = SAMPLE_FRAME.bodyBottom - top - groupHeight * 2;
-  // Without the two bands every row is one card and the rows share the height.
-  const rowHeight = paired ? CARD.rowHeight : Math.min(CARD.rowHeight * 1.2, (SAMPLE_FRAME.bodyBottom - top) / allRows.length);
-  const rowsTop = paired ? CARD.band + CARD.bandGap : 0;
   const signed = axis.min < 0 && axis.max > 0;
   const xAt = (value: number) => RANKING_BAR_PLOT.left + plotWidth * (value - axis.min) / (axis.max - axis.min);
   const unit = escapeXml(chart.unit);
   const group = (data: typeof rows.top, title: string, y: number, fill: string) => `
-    ${paired ? `<rect x="${left}" y="${y}" width="${width}" height="${CARD.band}" rx="${CARD.radius}" fill="${fill}"/>
-    <text x="${left + 28}" y="${y + 41}" font-size="32" font-weight="700" fill="#FFFFFF">${title}</text>` : ''}
+    <rect x="${left}" y="${y}" width="${width}" height="${CARD.band}" rx="${CARD.radius}" fill="${fill}"/>
+    <text x="${left + 28}" y="${y + 41}" font-size="32" font-weight="700" fill="#FFFFFF">${title}</text>
     ${data.map((r, i) => {
-      const rowTop = y + rowsTop + i * rowHeight;
+      const rowTop = y + CARD.band + CARD.bandGap + i * CARD.rowHeight;
       const rowFill = i % 2 === 0 ? rowWash : dark ? card : '';
       const barY = rowTop + 56, origin = xAt(axis.baseline), end = xAt(r.value);
       const marker = axis.truncated && Math.abs(end - origin) < 0.5 ? `<circle cx="${end}" cy="${barY + 5}" r="6" fill="${fill}"/>` : '';
-      return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${fill}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}${marker}</g>`;
+      return `<g data-rank="${r.rank}" data-value="${r.value}">${rowFill ? `<rect x="${left}" y="${rowTop}" width="${width}" height="${CARD.rowHeight - 6}" rx="${CARD.radius}" fill="${rowFill}"${outlineAttrs(theme)}/>` : ''}<circle cx="${left + 52}" cy="${rowTop + 39}" r="${CARD.badge}" fill="${fill}"/><text x="${left + 52}" y="${rowTop + 49}" text-anchor="middle" font-size="${r.rank >= 10 ? 26 : 30}" font-weight="700" fill="#FFFFFF">${r.rank}</text><text x="${RANKING_BAR_PLOT.left}" y="${rowTop + 44}" font-size="38" font-weight="700" fill="${theme.ink}">${escapeXml(r.area_name)}</text><text x="${RANKING_BAR_PLOT.right}" y="${rowTop + 44}" text-anchor="end" font-size="40" font-weight="700" fill="${valueInk}">${chart.formatValue(r.value)}<tspan font-size="26" dx="4">${unit}</tspan></text><rect data-bar-track="true" x="${RANKING_BAR_PLOT.left}" y="${barY}" width="${plotWidth}" height="10" rx="5" fill="${track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${fill}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}${marker}</g>`;
     }).join('')}`;
   return sampleFrame({
-    title: labels.title, titleSize: fitTitleSize(labels.title),
+    title: chart.title + 'ランキング', titleSize: fitTitleSize(chart.title + 'ランキング'),
     meta: `${chart.yearLabel} · 単位：${chart.unit}${axis.truncated ? ` · 範囲：${chart.formatValue(axis.min)}–${chart.formatValue(axis.max)}` : ''}`,
     note: chart.note,
     source: chart.source,
     attributes: `data-image-template="bar" data-domain-min="${axis.min}" data-domain-max="${axis.max}"`,
-    body: group(rows.top, labels.upper, top, color) + (paired ? group(rows.bottom, labels.lower, top + groupHeight + groupGap, lower) : ''),
+    body: group(rows.top, '上位5県', top, color) + group(rows.bottom, '下位5県', top + groupHeight + groupGap, lower),
     theme,
   });
 }
