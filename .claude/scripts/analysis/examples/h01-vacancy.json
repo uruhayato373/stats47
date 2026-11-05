@@ -1,0 +1,9 @@
+{
+  "question": "H01 空き家が増えているのは、人口が減った町だけか",
+  "metrics": [
+    { "alias": "vacancy", "key": "vacant-housing-ratio", "years": [2013, 2018, 2023] },
+    { "alias": "population", "key": "japanese-population", "years": [2010, 2020] }
+  ],
+  "compareColumn": "population_2020",
+  "reliability": [{ "alias": "vacancy", "years": [2013, 2018, 2023] }]
+}

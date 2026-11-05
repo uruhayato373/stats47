@@ -252,6 +252,8 @@
     "issues:candidates": "node .claude/scripts/issues/check-issue-graph.mjs --candidates",
     "issues:view": "node .claude/scripts/issues/render-issue-view.mjs",
     "test:issue-graph": "node --test .claude/scripts/issues/__tests__/issue-graph.test.mjs",
+    "analysis:frame": "tsx .claude/scripts/analysis/analysis-frame.ts",
+    "test:analysis-frame": "node --test .claude/scripts/analysis/__tests__/analysis-frame.test.mjs",
     "metrics:verify-snapshots": "tsx packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts",
     "metrics:check": "npm run metrics:check --workspace packages/data-configs",
     "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs",

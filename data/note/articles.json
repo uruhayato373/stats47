@@ -11413,6 +11413,274 @@
       },
       "noteUrl": "https://note.com/stats47/n/n5d86476e9c73",
       "publishedAt": "2026-11-04"
+    },
+    {
+      "key": "b-kakei-expense-food",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "香川は家で食べるうどんも日本一なのか ── 外食と購入を家計調査で並べる",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-food",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "8d687cddc6d6d9e9baecf2bda37ac883702cae31110128449bfcd0d160c481a5",
+          "files": 10,
+          "bytes": 193465,
+          "savedAt": "2026-11-04T23:59:51.203Z"
+        },
+        "verifiedAt": "2026-11-04T23:59:51.203Z"
+      },
+      "stats47Targets": [
+        "/ranking/food-expenditure-total",
+        "/ranking/fresh-udon-soba-consumption-expenditure",
+        "/ranking/soba-udon-dining-consumption-expenditure"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n1c3f57ef31da",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-housing",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "家賃の支出が12.7倍違っても、家賃が12.7倍高いわけではない ── 持ち家の0円が入る平均を読む",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-housing",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "4a614a0739de9a958625a3382da14806a0fbb656d885d5a2d2db3e69ca30959d",
+          "files": 10,
+          "bytes": 272582,
+          "savedAt": "2026-11-05T01:01:38.511Z"
+        },
+        "verifiedAt": "2026-11-05T01:01:38.511Z"
+      },
+      "stats47Targets": [
+        "/ranking/home-ownership-rate-kakei",
+        "/ranking/housing-expenditure-total",
+        "/ranking/private-rent-consumption-expenditure"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n8f82dbdbce9d",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-utilities",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "電気代の差は1.7倍、灯油は56.5倍 ── 光熱費の県差はどの燃料が作っているのか",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-utilities",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "e9186a92c1d37db3937a7ff6cd4abb1ac398226a2e0f5621af1d12e9bd42c816",
+          "files": 10,
+          "bytes": 222862,
+          "savedAt": "2026-11-05T12:50:09.745Z"
+        },
+        "verifiedAt": "2026-11-05T12:50:09.745Z"
+      },
+      "stats47Targets": [
+        "/ranking/electricity-consumption-expenditure",
+        "/ranking/kerosene-consumption-expenditure",
+        "/ranking/utilities-expenditure-total"
+      ],
+      "noteUrl": "https://note.com/stats47/n/na2be61f32e15",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-furniture",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "エアコンを一番買う市は毎年変わる ── ストーブとの違いで読む、家電のランキング",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-furniture",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "d156448af09b0ca646fcdfd855efc8879631398238d04094df3fe5b0d6957b70",
+          "files": 10,
+          "bytes": 199475,
+          "savedAt": "2026-11-05T00:20:21.953Z"
+        },
+        "verifiedAt": "2026-11-05T00:20:21.953Z"
+      },
+      "stats47Targets": [
+        "/ranking/air-conditioner-consumption-expenditure",
+        "/ranking/furniture-household-expenditure-total",
+        "/ranking/heater-consumption-expenditure"
+      ],
+      "noteUrl": "https://note.com/stats47/n/na17bb46da162",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-clothing",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "服にお金を使うのは寒い県なのか ── コートと被服費全体で答えが変わる",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-clothing",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "55bd811683d213f4ad347af52ed5bc2e826d59ef6ffdda44664fd113386adc16",
+          "files": 10,
+          "bytes": 187241,
+          "savedAt": "2026-11-04T23:20:16.986Z"
+        },
+        "verifiedAt": "2026-11-04T23:20:16.986Z"
+      },
+      "stats47Targets": [
+        "/ranking/clothing-footwear-expenditure-total",
+        "/ranking/laundry-service-consumption-expenditure",
+        "/ranking/womens-coat-consumption-expenditure"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n233c24eee1e4",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-health",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "歯医者の多い県ほど、歯科にお金を使っているのか ── 5年平均で確かめる",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-health",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b7ef993581cb03c39c5b63e274e65000041408f9e8ad8bd58dc5b1eb34bc7ee1",
+          "files": 10,
+          "bytes": 281112,
+          "savedAt": "2026-11-05T00:40:46.991Z"
+        },
+        "verifiedAt": "2026-11-05T00:40:46.991Z"
+      },
+      "stats47Targets": [
+        "/ranking/dental-clinic-count-per-100k",
+        "/ranking/dental-fee-consumption-expenditure",
+        "/ranking/health-medical-expenditure-total"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n611c1b73fb3f",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-transport",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "電車代が少ない県は、交通費も少ないのか ── 公共交通と車の費用を足して比べる",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-transport",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "4dac832aa532337018c19668d4938ac0aa8e7e37509eb1e611be2f982660ee2b",
+          "files": 10,
+          "bytes": 292978,
+          "savedAt": "2026-11-05T12:29:48.250Z"
+        },
+        "verifiedAt": "2026-11-05T12:29:48.250Z"
+      },
+      "stats47Targets": [
+        "/ranking/gasoline-consumption-expenditure",
+        "/ranking/train-fare-consumption-expenditure",
+        "/ranking/transport-communication-expenditure-total"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n952c8fdd32a6",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-education",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "教育費の県差は8.7倍か、4.2倍か ── 1年の順位を信じすぎないために",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-education",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "551118b38ba498522647d8d10ca273cf5f1b5f80f6cf3fff118703a3bb30214e",
+          "files": 12,
+          "bytes": 374787,
+          "savedAt": "2026-11-04T23:39:21.055Z"
+        },
+        "verifiedAt": "2026-11-04T23:39:21.055Z"
+      },
+      "stats47Targets": [
+        "/ranking/education-expenditure-total",
+        "/ranking/tuition-consumption-expenditure"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n048102731761",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-recreation",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "ケーブルテレビの普及率1位は徳島なのに、支出の1位は福井 ── 加入の多さだけでは決まらない受信料",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-recreation",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "06dd309113cf3d3826f7537305ee84b3b6de4d4b3d630f0564c36b51e022338d",
+          "files": 8,
+          "bytes": 234826,
+          "savedAt": "2026-11-05T01:42:08.536Z"
+        },
+        "verifiedAt": "2026-11-05T01:42:08.536Z"
+      },
+      "stats47Targets": [
+        "/ranking/cable-tv-fee-consumption-expenditure",
+        "/ranking/culture-recreation-expenditure-total"
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb48d1909a2ea",
+      "publishedAt": "2026-11-05"
+    },
+    {
+      "key": "b-kakei-expense-other",
+      "vertical": "stats47-note",
+      "series": "B",
+      "title": "進学の仕送りが最も少ないのは大阪市 ── 地元に大学があることで、どこまで説明できるか",
+      "magazine": "s47-kakei-reading",
+      "isPaid": false,
+      "status": "published",
+      "r2Path": "note/stats47-note/b-kakei-expense-other",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "9b0d4473bac9a10b3a40fefdb57804ef12490d49e67ee7028743c62eeb29a673",
+          "files": 8,
+          "bytes": 167849,
+          "savedAt": "2026-11-05T01:21:40.488Z"
+        },
+        "verifiedAt": "2026-11-05T01:21:40.488Z"
+      },
+      "stats47Targets": [
+        "/ranking/domestic-student-remittance-consumption-expenditure",
+        "/ranking/other-living-expenditure-total",
+        "/ranking/university-capacity-index"
+      ],
+      "noteUrl": "https://note.com/stats47/n/n966ddd9d83bb",
+      "publishedAt": "2026-11-05"
     }
   ]
 }

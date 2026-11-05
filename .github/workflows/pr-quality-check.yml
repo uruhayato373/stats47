@@ -153,6 +153,7 @@ jobs:
           npx tsx packages/data-configs/scripts/check-metric-contract.ts
           npm run content:check
           npm run test:issue-graph
+          npm run test:analysis-frame
         continue-on-error: false
 
       - name: 🔁 Sync-Snapshots Task Drift

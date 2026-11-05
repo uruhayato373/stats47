@@ -38,7 +38,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 検索語がまだ無い論点を拾う。
 
 - テーマの `evidenceTopics` (`data/themes/catalogs/<key>.json`) の `question` を読み、台帳に無い問いを大きな問いにする
-- 白書を読み直すときは `/research-theme-catalog` (担当 `theme-researcher`) に頼む。NotebookLM は `gh` の認証が要るのでクラウドの環境では呼べない。Mac のセッションで行う
+- 白書を読み直すときは `/research-theme-catalog` (担当 `theme-researcher`) に頼む。NotebookLM はクラウドの環境では呼べない。ローカルで行い、Windows は証明書ストアを使う起動が要る（`.claude/rules/local-environment.md`「Windows の NotebookLM 連携」）。返ってきた統計名は指標の `source` と照合してから `dataNote` に書く
 - 記事の着想の一覧は `/plan-article-queue` が持つ。台帳はそこへ渡す問いの出どころで、ネタの採点は写さない
 
 ## 問いの書き方
@@ -86,6 +86,14 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 npm run content:sync -- --from-r2   # R2 の記事一覧からページ索引を作り直す。引数なしだと新しい記事が載らない
 npm run issues:check
 ```
+
+市区町村のデータで問いを確かめるときは、計算の前に表を組み立てて検査を通す。指標と年を書いた spec を渡す（例: `.claude/scripts/analysis/examples/`）。
+
+```bash
+npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.json --out /tmp/frame.json
+```
+
+公開の自治体だけの表を作り、県の合計との検算・指標の年・抜けた町の偏り・変化の信頼性を報告する。合計が合わなければ止まる。問いの選択と、定義が循環していないかの判断は人が行う。市ごとの変化の信頼性が低いと出たら順位にしない。素の `fetch` が通らない環境では `--data-dir` に `<key>.cities.json` を置く。
 
 ## 6. 見送る
 

@@ -1,0 +1,11 @@
+{
+  "question": "M01 製造業が強い地域の強さは、規模か生産性か",
+  "metrics": [
+    { "alias": "shipment", "key": "manufacturing-shipment-amount", "total": true },
+    { "alias": "employees", "key": "manufacturing-employees" },
+    { "alias": "establishments", "key": "manufacturing-establishments" },
+    { "alias": "daytime", "key": "day-time-population" },
+    { "alias": "daytimeRatio", "key": "day-time-population-ratio" }
+  ],
+  "compareColumn": "daytime_2020"
+}
