@@ -3,6 +3,7 @@ import sharp from 'sharp';
 import { renderRankingTileMap } from '@/lib/template-ranking-tile-map';
 import { renderAll47TileSvg } from '../../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../../remotion/src/features/data-cards/tile-scale';
+import { applyColorPolicy } from '../../../../packages/types/src/color-policy';
 import { resolveChoroplethScale } from '../../../../packages/visualization/src/server';
 import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
@@ -15,6 +16,8 @@ const fixture = () => ({
     area_name: names[(i + 42) % 47], year: '2024', value: 36.2 - i * 0.25,
   })),
 });
+// One far-out value turns the map from the continuous ramp to five steps (color-policy.ts).
+const stepped = () => { const input = fixture(); input.data[0].value = 200; return input; };
 function tile(svg: string, code: string) {
   const match = new RegExp(`<g transform="translate\\(([\\d.]+),([\\d.]+)\\)" data-area="${code}" data-value="([^"]+)"><rect width="([\\d.]+)" height="([\\d.]+)"`).exec(svg);
   expect(match).toBeTruthy();
@@ -22,7 +25,7 @@ function tile(svg: string, code: string) {
 }
 describe('compact tile-map basic form (4:5 images)', () => {
   it('uses the shared renderer with the metric colour scale, top three and a bounded legend', async () => {
-    const input = fixture();
+    const input = stepped();
     const svg = await renderRankingTileMap(input);
     const plain = renderAll47TileSvg(
       input.data.map((r) => ({ areaCode: r.area_code, areaName: r.area_name, value: r.value })),
@@ -59,8 +62,8 @@ describe('compact tile-map basic form (4:5 images)', () => {
     expect(iwate.w).toBeGreaterThan(62);
   });
   it('resolves tile colours exactly like the ranking page (sync resolver vs resolveChoroplethScale)', async () => {
-    const values = fixture().data.map((r) => r.value);
-    const site = await resolveChoroplethScale(RANKING_SAMPLE_METRIC.visualization, values.map((value, i) => ({ areaCode: String(i), value })));
+    const values = stepped().data.map((r) => r.value);
+    const site = await resolveChoroplethScale(applyColorPolicy(RANKING_SAMPLE_METRIC.visualization, values), values.map((value, i) => ({ areaCode: String(i), value })));
     const tiles = resolveTileScale(RANKING_SAMPLE_METRIC.visualization, values)!;
     expect(tiles.colors).toEqual(site.colors);
     expect(tiles.boundaries).toEqual(site.boundaries);
@@ -74,7 +77,7 @@ describe('compact tile-map basic form (4:5 images)', () => {
     await expect(renderRankingTileMap({ ...input, data: input.data.slice(0, 46) })).rejects.toThrow();
   });
   it('draws the dark theme with the same tiles, outlined tiles and swatches on grey paper', async () => {
-    const input = fixture();
+    const input = stepped();
     const light = await renderRankingTileMap(input), dark = await renderRankingTileMap(input, CHART_THEMES.dark);
     const fills = (svg: string) => [...svg.matchAll(/data-area="(\d+)" data-value="[^"]+"><rect [^>]*fill="([^"]+)"/g)].map((m) => m[1] + m[2]);
     expect(fills(dark)).toEqual(fills(light));

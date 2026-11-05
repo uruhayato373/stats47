@@ -1,4 +1,5 @@
 import * as d3chromatic from 'd3-scale-chromatic';
+import { applyColorPolicy } from '../../../../../packages/types/src/color-policy';
 import {
   DEFAULT_SEQUENTIAL_SCHEME,
   d3KeyOfColorScheme,
@@ -21,10 +22,11 @@ export interface TileValueDisplay {
  * only the palette lookup is static instead of a dynamic `import('d3')`.
  */
 export function resolveTileScale(
-  visualization: NumericColorEncoding & { colorScheme?: string | null },
+  metricEncoding: NumericColorEncoding & { colorScheme?: string | null },
   values: number[],
   display: TileValueDisplay = {}
 ): All47Scale | undefined {
+  const visualization = applyColorPolicy(metricEncoding, values);
   // item.json can carry a categorical scheme at runtime; tiles need an ordered numeric scale.
   if ((visualization.colorSchemeType as string | undefined) === 'categorical') return undefined;
   const scheme = visualization.colorScheme ?? (visualization.colorSchemeType === 'diverging' ? 'interpolateRdBu' : DEFAULT_SEQUENTIAL_SCHEME);

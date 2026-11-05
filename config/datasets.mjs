@@ -262,6 +262,8 @@ export const DATASETS = [
       { field: "links[].page", to: "content.pages", key: "pages[].id" },
     ],
   }),
+  d("themes.composition-sets", "data/themes/compositions/sets.json", "state", "data", "data", "足すと全体になる指標の組。テーマのカタログの積み上げから作る生成物 (build-composition-ledger.ts)", { schema: "data/themes/schema/composition-sets.schema.json" }),
+  d("themes.composition-sets-schema", "data/themes/schema/composition-sets.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),
   d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "config", "data", "config", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
   d("seo.keywords", "data/seo/keywords.json", "state", "site", "data", "キーワード改善サイクルの対象キーワード"),
