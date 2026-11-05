@@ -243,6 +243,7 @@
     "content:check": "tsx apps/web/scripts/sync-content-catalog.ts --check && tsx apps/web/scripts/validate-content-catalog.ts && npm run issues:check",
     "issues:check": "node .claude/scripts/issues/check-issue-graph.mjs",
     "issues:coverage": "node .claude/scripts/issues/check-issue-graph.mjs --coverage",
+    "issues:view": "node .claude/scripts/issues/render-issue-view.mjs",
     "test:issue-graph": "node --test .claude/scripts/issues/__tests__/issue-graph.test.mjs",
     "metrics:verify-snapshots": "tsx packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts",
     "metrics:check": "npm run metrics:check --workspace packages/data-configs",
