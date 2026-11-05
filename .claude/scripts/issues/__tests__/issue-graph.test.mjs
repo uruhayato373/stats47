@@ -13,6 +13,7 @@ import { fileURLToPath } from "node:url";
 import {
   classifyCoverage,
   computeReach,
+  findQueryCandidates,
   indexPages,
   parentIdOf,
   parseCsv,
@@ -123,6 +124,41 @@ test("GSC の URL と CSV の読み", () => {
   assert.equal(pathOfUrl("https://stats47.jp/"), "/");
   assert.equal(pathOfUrl("https://stats47.jp/blog/a/?utm=1"), "/blog/a");
   assert.deepEqual(parseCsv('page,clicks\n"https://x/a,b",3\r\n'), [{ page: "https://x/a,b", clicks: "3" }]);
+});
+
+test("問いの候補は『なぜ・理由・関係』型の語を週をまたいで合算し、表示の多い順に出す", () => {
+  const weeks = [
+    [
+      { query: "沖縄 持ち家率 なぜ", clicks: "1", impressions: "10" },
+      { query: "東京 人口 ランキング", clicks: "9", impressions: "999" },
+      { query: "北陸 米作りが盛んな理由", clicks: "0", impressions: "20" },
+    ],
+    [{ query: "沖縄  持ち家率　なぜ", clicks: "2", impressions: "15" }],
+  ];
+  assert.deepEqual(findQueryCandidates({ issues: [], weeks }), [
+    { query: "沖縄 持ち家率 なぜ", clicks: 3, impressions: 25 },
+    { query: "北陸 米作りが盛んな理由", clicks: 0, impressions: 20 },
+  ]);
+});
+
+test("問いの候補から、すでに問いが受けている語を空白違いも含めて除く。見送った問いの語も再び出さない", () => {
+  const weeks = [[
+    { query: "沖縄 持ち家率 なぜ", clicks: "1", impressions: "10" },
+    { query: "新潟県 身長 高い 理由", clicks: "1", impressions: "10" },
+    { query: "完全失業率と有効求人倍率 関係", clicks: "1", impressions: "10" },
+  ]];
+  const issues = [
+    minor("issue:H06-1", { queries: ["沖縄持ち家率 なぜ"] }),
+    minor("issue:F13-1", { status: "dropped", dropReason: "答えが出ない", queries: ["新潟県 身長 高い理由"] }),
+    major("issue:A01"),
+  ];
+  assert.deepEqual(findQueryCandidates({ issues, weeks }).map((c) => c.query), ["完全失業率と有効求人倍率 関係"]);
+});
+
+test("問いの候補に、統計用語の『関係』と主語の無い語を入れない", () => {
+  const weeks = [["40代 配偶関係 未婚 割合", "東京 主要駅 位置関係", "何故", "何故？", "原因は？", "ストレスと寿命の関係"]
+    .map((query) => ({ query, clicks: "0", impressions: "5" }))];
+  assert.deepEqual(findQueryCandidates({ issues: [], weeks }).map((c) => c.query), ["ストレスと寿命の関係"]);
 });
 
 test("リポジトリの台帳そのものが検査を通る", () => {
