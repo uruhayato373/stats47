@@ -305,6 +305,17 @@ describe('市区町村URLのknown集合と旧query移行', () => {
     return nextRequest;
   }
 
+  test('公開記事に無い slug は 410 で、確認中の下書きの slug だけ開発サーバーで通す', () => {
+    expect(middleware(request('/blog/not-real-draft')).status).toBe(410);
+    process.env.BLOG_PREVIEW_SLUG = 'not-real-draft';
+    try {
+      expect(middleware(request('/blog/not-real-draft')).status).not.toBe(410);
+      expect(middleware(request('/blog/another-unknown-draft')).status).toBe(410);
+    } finally {
+      delete process.env.BLOG_PREVIEW_SLUG;
+    }
+  });
+
   test('known theme/rankingは通し、unknownは410にする', () => {
     expect(
       middleware(request('/municipalities/themes/aging-society')).status

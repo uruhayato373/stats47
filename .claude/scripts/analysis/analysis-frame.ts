@@ -90,7 +90,7 @@ async function main() {
 
   const out = arg("--out");
   if (out) {
-    writeFileSync(out, `${JSON.stringify({ question: spec.question, columns: frame.columns, rows: coverage.rows, report: { totals, years, coverage: { ...coverage, rows: undefined }, reliability, summary } }, null, 2)}\n`);
+    writeFileSync(out, `${JSON.stringify({ question: spec.question, columns: frame.columns, rows: coverage.rows, droppedRows: frame.rows.filter((row) => !coverage.rows.includes(row)), report: { totals, years, coverage: { ...coverage, rows: undefined }, reliability, summary } }, null, 2)}\n`);
     console.log(`→ ${out}`);
   }
   process.exit(summary.ok ? 0 : 1);

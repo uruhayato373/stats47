@@ -2,32 +2,71 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "図の台帳。1 枚の図を型 (image-templates.json) と分析 (analyses.json) に結び、同じ図をどこへ出すかを持つ。データは写さず、指標の key と年で指す。公開の状態の正本は配信先の台帳 (ページの索引・posts.json) にあり、ここの status は展開の予定を表す。",
   "type": "object",
-  "required": ["version", "figures"],
+  "required": [
+    "version",
+    "figures"
+  ],
   "additionalProperties": false,
   "properties": {
-    "version": { "const": 1 },
+    "version": {
+      "const": 1
+    },
     "figures": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "analysis", "template", "title", "scope", "metrics", "destinations"],
+        "required": [
+          "id",
+          "analysis",
+          "template",
+          "title",
+          "scope",
+          "metrics",
+          "destinations"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^figure:[A-Z][0-9]{2}(-[0-9]+)?-[a-z0-9-]+$" },
-          "analysis": { "type": "string", "pattern": "^analysis:" },
-          "template": { "type": "string", "minLength": 1 },
-          "title": { "type": "string", "minLength": 1 },
-          "scope": { "enum": ["prefecture", "municipality"] },
+          "id": {
+            "type": "string",
+            "pattern": "^figure:[A-Z][0-9]{2}(-[0-9]+)?-[a-z0-9-]+$"
+          },
+          "analysis": {
+            "type": "string",
+            "pattern": "^analysis:"
+          },
+          "template": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "enum": [
+              "prefecture",
+              "municipality"
+            ]
+          },
           "metrics": {
             "type": "array",
             "minItems": 1,
             "items": {
               "type": "object",
-              "required": ["key", "year"],
+              "required": [
+                "key",
+                "year"
+              ],
               "additionalProperties": false,
               "properties": {
-                "key": { "type": "string", "minLength": 1 },
-                "year": { "type": "integer", "minimum": 1900 }
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "year": {
+                  "type": "integer",
+                  "minimum": 1900
+                }
               }
             }
           },
@@ -36,15 +75,156 @@
             "minItems": 1,
             "items": {
               "type": "object",
-              "required": ["channel", "status"],
+              "required": [
+                "channel",
+                "status"
+              ],
               "additionalProperties": false,
               "properties": {
-                "channel": { "enum": ["site", "x", "note"] },
-                "page": { "type": "string", "minLength": 1 },
-                "postId": { "type": "integer", "minimum": 1 },
-                "status": { "enum": ["planned", "draft", "published"] }
+                "channel": {
+                  "enum": [
+                    "site",
+                    "x",
+                    "note"
+                  ]
+                },
+                "page": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "postId": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "status": {
+                  "enum": [
+                    "planned",
+                    "draft",
+                    "published"
+                  ]
+                },
+                "slug": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9-]+$",
+                  "description": "まだページの索引に無い記事の下書き。公開したら page に置き換える"
+                }
               },
-              "oneOf": [{ "required": ["page"] }, { "required": ["postId"] }]
+              "oneOf": [
+                {
+                  "required": [
+                    "page"
+                  ]
+                },
+                {
+                  "required": [
+                    "postId"
+                  ]
+                },
+                {
+                  "required": [
+                    "slug"
+                  ]
+                }
+              ]
+            }
+          },
+          "chart": {
+            "type": "object",
+            "description": "図の中身の定義。値は持たず、分析の結果の JSON のどの項目を描くかを指す",
+            "required": [
+              "name",
+              "alt",
+              "meta",
+              "source",
+              "rows",
+              "category",
+              "unit",
+              "transform",
+              "series",
+              "displaySources"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "alt": {
+                "type": "string",
+                "minLength": 1
+              },
+              "meta": {
+                "type": "string",
+                "minLength": 1,
+                "description": "{towns} のように結果の値を差し込める"
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rows": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "string",
+                "minLength": 1
+              },
+              "count": {
+                "type": "string",
+                "minLength": 1
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1
+              },
+              "transform": {
+                "type": "string",
+                "minLength": 1
+              },
+              "series": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "field"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "field": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "displaySources": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "label"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "surveyId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
             }
           }
         }

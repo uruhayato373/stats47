@@ -24,7 +24,7 @@
       "question": "空き家が増えているのは、人口が減った町だけか",
       "spec": ".claude/scripts/analysis/examples/h01-vacancy.json",
       "script": ".claude/scripts/analysis/h01-vacancy-population.ts",
-      "finding": "1,052 市区町村で、2013→2023 年に差し引きで増えた空き家 70 万戸のうち 97.2% は人口が減った町にある。人口が増えた 212 市区町村は 2013 年に空き家の 36.0% を抱えていたが、増加分では 2.8% で、空き家率の変化の中央値は -1.00 ポイントである。人口増減と空き家率の変化の相関は -0.54 で、10 市区町村以上ある 45 県のうち 44 県で県の中でも負の向きである。空き家の種類では、2023 年の賃貸・売却用と別荘を除く空き家の率は人口増減と -0.72、賃貸用の率は 0.04 である。",
+      "finding": "1,052 市区町村で、2013→2023 年に差し引きで増えた空き家 70 万戸のうち 97.2% は人口が減った町にある。人口が増えた 212 市区町村は 2013 年に空き家の 36.0% を抱えていたが、増加分では 2.8% で、空き家率の変化の中央値は -1.00 ポイントである。人口増減と空き家率の変化の相関は -0.54 で、10 市区町村以上ある 45 県のうち 44 県で県の中でも負の向きである。空き家の種類では、2023 年の賃貸・売却用と二次的住宅を除く空き家の率は人口増減と -0.72、賃貸用の率は 0.04 である。",
       "caveats": [
         "相関で、人口減が空き家を生むとまでは言えない",
         "空き家は 2013→2023 年、人口は 2010→2020 年で期間がずれている",
@@ -33,7 +33,40 @@
         "空き家の種類は 2023 年の水準だけで、増加の内訳ではない",
         "増加分は差し引きで、各区分の中に空き家が減った町も含む"
       ],
-      "observedAt": "2026-11-05"
+      "observedAt": "2026-11-05",
+      "article": {
+        "slug": "vacant-houses-population-decline",
+        "titleHint": "空き家が増えたのは人口が減った町だけか",
+        "chars": "2400-3200",
+        "links": [
+          {
+            "href": "/blog/vacant-housing-aging-correlation",
+            "label": "空き家率と高齢化の関係"
+          },
+          {
+            "href": "/blog/vacant-house-crisis",
+            "label": "徳島の空き家率の分析"
+          },
+          {
+            "href": "/themes/living-housing",
+            "label": "暮らし・住まいのテーマ"
+          }
+        ],
+        "sourceLinks": [
+          {
+            "href": "/municipalities/ranking/vacant-houses-city",
+            "label": "空き家数の市区町村ランキングをもっと見る"
+          },
+          {
+            "href": "/municipalities/ranking/vacant-housing-ratio",
+            "label": "空き家率の市区町村ランキングをもっと見る"
+          },
+          {
+            "href": "/municipalities/ranking/vacant-housing-rate-excluding-rental-sale-secondary",
+            "label": "賃貸・売却用及び二次的住宅を除く空き家率の市区町村ランキングをもっと見る"
+          }
+        ]
+      }
     }
   ]
 }

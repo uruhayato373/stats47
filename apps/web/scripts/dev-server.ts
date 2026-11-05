@@ -183,7 +183,8 @@ async function main(): Promise<void> {
     }
     if (isStopping) return;
     console.log(`[dev] R2 data/images: ${gatewayUrl}`);
-    next = startNext(nextPort, gatewayUrl);
+    // blog:preview は下書きを重ねるサーバーを中継の手前に置く
+    next = startNext(nextPort, process.env.BLOG_PREVIEW_R2_URL || gatewayUrl);
   } else {
     next = startNext(nextPort);
   }

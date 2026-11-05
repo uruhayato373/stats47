@@ -138,6 +138,21 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [BLOG-AD-ROW-HYDRATION-01] ブログの本文の広告の段が段落の中に入り、hydration に失敗する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:サイト]
+
+- **起点**: 開発サーバーで公開済みの `/blog/vacant-house-crisis` を開くと、`<ad-row>` の `<div>` が `<p>` の中に入り `In HTML, <div> cannot be a descendant of <p>` が出る。2026-11-03 の広告の段の導入以降、段を差し込む全記事に当てはまる見込み (確認したのは公開済み 1 本と下書き 1 本)。
+- **原因**: `apps/web/src/features/blog/components/md-content.tsx` の `p` の判定 `hasBlockElement` の一覧に `ad-row` が無い。
+- **次**: 一覧に `ad-row` を足し、本文の広告の段で hydration エラーが出ないことをテストで固定する。
+- **完了条件**: 広告の段がある記事で hydration エラーが出ず、段の表示位置が変わらない。
+
+### [WEB-REGION-TEST-WIN-PATH-01] テーマ・地域のページの比較検査が Windows のパス区切りで落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:管理]
+
+- **起点**: `apps/web/src/__tests__/region-page-no-comparison.test.ts` の 3 件が Windows で失敗する。実際は `app\areas\page.tsx`、期待は `app/areas/page.tsx` で、`relative` の結果を `/` にそろえていない。
+- **次**: 検査の中でパスを `/` 区切りへそろえる。
+- **完了条件**: Windows で `npm run test -w web` のこの 3 件が通る。
+
 ### [NOTE-PLAYWRIGHT-DIALOG-CRASH-01] note 公開中の Playwright 起動スクリプトがダイアログ処理の競合でブラウザごと落ちる
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-05] [領域:商品]
 
