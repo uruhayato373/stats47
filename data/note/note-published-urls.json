@@ -1483,6 +1483,28 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "b-kakei-expense-transport": {
+      "vertical": "stats47-note",
+      "title": "電車代が少ない県は、交通費も少ないのか ── 公共交通と車の費用を足して比べる",
+      "url": "https://note.com/stats47/n/n952c8fdd32a6",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-transport",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "b-kakei-expense-utilities": {
+      "vertical": "stats47-note",
+      "title": "電気代の差は1.7倍、灯油は56.5倍 ── 光熱費の県差はどの燃料が作っているのか",
+      "url": "https://note.com/stats47/n/na2be61f32e15",
+      "is_paid": false,
+      "published_at": "2026-11-05",
+      "r2_path": "note/stats47-note/b-kakei-expense-utilities",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-kakei-gyoza-counting": {
       "vertical": "stats47-note",
       "title": "「ぎょうざ消費日本一」は何を数えていて、何を数えていないのか",
