@@ -511,6 +511,14 @@ function trackedFiles() {
     .filter(Boolean);
 }
 
+/** 中身の検査だけは未追跡の台帳も読む。新しい台帳を git add する前の検査が素通りしないように (置き場の検査は追跡ファイルのまま) */
+function contentFiles() {
+  const untracked = execFileSync("git", ["-C", ROOT, "ls-files", "-z", "--others", "--exclude-standard"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+    .split("\0")
+    .filter(Boolean);
+  return [...trackedFiles(), ...untracked];
+}
+
 function main() {
   const domainIds = new Set(JSON.parse(readFileSync(resolve(ROOT, DOMAINS), "utf8")).domains.map((x) => x.id));
   const result = checkDatasets({
@@ -526,15 +534,16 @@ function main() {
     imageExt: IMAGE_EXT,
     agentState: AGENT_STATE,
   });
+  const contents = contentFiles();
   result.errors.push(...checkSchemas({
     datasets: DATASETS,
-    files: trackedFiles(),
+    files: contents,
     readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")),
     exists: (p) => existsSync(resolve(ROOT, p)),
   }));
   const refs = checkRefs({
     datasets: DATASETS,
-    files: trackedFiles(),
+    files: contents,
     readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")),
     readText: (p) => readFileSync(resolve(ROOT, p), "utf8"),
     registries: REGISTRIES,

@@ -34,6 +34,9 @@ const LABEL_FONT = 32;
 const AXIS_FONT = 30;
 const DOT_R = 10;
 const NAMED_DOT_R = 13;
+// About a thousand municipalities share the plot: dots this small keep the cloud readable at 320px.
+const MUNICIPAL_DOT_R = 4;
+const MUNICIPAL_NAMED_DOT_R = 9;
 // A lowercase l reads as a vertical bar at 320px; the axis shows the litre symbol as L.
 export const unitLabel = (unit: string) => (unit === 'l' ? 'L' : unit);
 
@@ -60,7 +63,7 @@ export function relationshipPoints(raw: unknown) {
 }
 
 export interface ScatterPoint { code: string; name: string; x: number; y: number }
-/** Any 47-prefecture relationship: axis labels carry their units, `meta` the year(s). */
+/** Any relationship between areas: axis labels carry their units, `meta` the year(s). */
 export interface ScatterChart {
   title: string; meta: string; note?: string; source: string;
   xLabel: string; yLabel: string; points: ScatterPoint[];
@@ -70,6 +73,8 @@ export interface ScatterChart {
   formatX?: (value: number) => string; formatY?: (value: number) => string;
   /** Prefectures left out on purpose (the source states which and why); the rest must all be there. */
   excludedCount?: number;
+  /** What a dot is. Prefectures must all be there; municipalities are the set the caller built, counted in the meta line. */
+  level?: 'prefecture' | 'municipality';
   /** Prefectures the article names; labelled before the extremes when they clear the other dots. */
   labelNames?: string[];
 }
@@ -85,13 +90,17 @@ export function renderRelationshipScatter(raw: unknown, theme: ChartTheme = LIGH
   }, theme);
 }
 
-/** A 4:5 scatter sized for 320px display: 47 points in the metric's tint, up to four named in its strong colour, regression line. */
+/** A 4:5 scatter sized for 320px display: the points in the metric's tint, up to four named in its strong colour, regression line. */
 export function renderRelationshipScatterChart(chart: ScatterChart, theme: ChartTheme = LIGHT_THEME) {
   const { points } = chart;
-  const expected = 47 - (chart.excludedCount ?? 0);
-  if (points.length !== expected || new Set(points.map((p) => p.code)).size !== expected ||
+  const municipal = chart.level === 'municipality';
+  const expected = municipal ? points.length : 47 - (chart.excludedCount ?? 0);
+  const areaCount = municipal ? `${expected.toLocaleString('ja-JP')}市区町村` : `${expected}都道府県`;
+  const everyPrefecture = !municipal && expected === 47;
+  const dotR = municipal ? MUNICIPAL_DOT_R : DOT_R, namedDotR = municipal ? MUNICIPAL_NAMED_DOT_R : NAMED_DOT_R;
+  if (!expected || points.length !== expected || new Set(points.map((p) => p.code)).size !== expected ||
     points.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)))
-    throw Error(`散布図は${expected}都道府県の値が必要です。`);
+    throw Error(municipal ? '散布図の市区町村の値を確認してください。' : `散布図は${areaCount}の値が必要です。`);
   const xDomain = resolveChartDomain(points.map((p) => p.x), { mode: 'extent', padding: 0.05 });
   const yDomain = resolveChartDomain(points.map((p) => p.y), { mode: 'extent', padding: 0.08 });
   if (!xDomain || !yDomain) throw Error('散布図の値がありません。');
@@ -117,7 +126,8 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
   const reg = linearRegression(points);
   // Name the article's prefectures, then the extremes, only where the label clears every other dot.
   const named = (chart.labelNames ?? []).map((n) => points.find((p) => p.name === n)).filter((p): p is ScatterPoint => Boolean(p));
-  const extremes = [
+  // A single municipality's extreme is mostly sample noise, so only the names the caller chose appear.
+  const extremes = municipal ? [] : [
     points.reduce((a, b) => (b.y > a.y ? b : a)), points.reduce((a, b) => (b.x > a.x ? b : a)),
     points.reduce((a, b) => (b.x < a.x ? b : a)), points.reduce((a, b) => (b.y < a.y ? b : a)),
   ];
@@ -129,7 +139,7 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
     const width = p.name.length * LABEL_FONT;
     const x0 = toLeft ? cx - 18 - width : cx + 18, x1 = x0 + width;
     const clear = x0 >= PLOT.left && x1 <= PLOT.right && points.every((o) => o === p ||
-      sx(o.x) + DOT_R < x0 || sx(o.x) - DOT_R > x1 || Math.abs(sy(o.y) - cy) > LABEL_FONT / 2 + DOT_R);
+      sx(o.x) + dotR < x0 || sx(o.x) - dotR > x1 || Math.abs(sy(o.y) - cy) > LABEL_FONT / 2 + dotR);
     if (clear) {
       namedPoints.add(p);
       labels.push(`<text x="${toLeft ? cx - 18 : cx + 18}" y="${cy + 11}" text-anchor="${toLeft ? 'end' : 'start'}" font-size="${LABEL_FONT}" font-weight="700">${escapeXml(p.name)}</text>`);
@@ -137,14 +147,14 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
   }
   const dot = (p: ScatterPoint) => {
     const isNamed = namedPoints.has(p);
-    return `<circle data-pref="${p.code}" cx="${sx(p.x)}" cy="${sy(p.y)}" r="${isNamed ? NAMED_DOT_R : DOT_R}" fill="${isNamed ? ink.named : ink.dot}" stroke="${ink.dotEdge}" stroke-width="2"/>`;
+    return `<circle data-pref="${p.code}" cx="${sx(p.x)}" cy="${sy(p.y)}" r="${isNamed ? namedDotR : dotR}" fill="${isNamed ? ink.named : ink.dot}" stroke="${ink.dotEdge}" stroke-width="${municipal ? 1 : 2}"/>`;
   };
   // Long axis labels shrink to their side of the plot, as the title does.
   const axisFont = (label: string, length: number) => Math.min(AXIS_FONT, Math.floor(length / label.length));
   return sampleFrame({
     // Two metric names can run long; shrink the title to the frame width instead of letting it overflow.
-    title: chart.title, titleSize: Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length)), meta: expected === 47 ? chart.meta : `${chart.meta}・${expected}都道府県`, note: chart.note, source: chart.source, theme,
-    ariaLabel: `${chart.title}・${expected === 47 ? '全47' : expected}都道府県`, attributes: `data-image-template="scatter" data-points="${points.length}"`,
+    title: chart.title, titleSize: Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length)), meta: everyPrefecture ? chart.meta : `${chart.meta}・${areaCount}`, note: chart.note, source: chart.source, theme,
+    ariaLabel: `${chart.title}・${everyPrefecture ? '全47都道府県' : areaCount}`, attributes: `data-image-template="scatter" data-points="${points.length}"`,
     body: `<defs><clipPath id="scatter-plot"><rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}"/></clipPath></defs>
       <rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}" fill="${ink.plot}" stroke="${ink.edge}"/>
       ${xTicks.join('')}${yTicks.join('')}

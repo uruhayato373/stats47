@@ -6,6 +6,7 @@
  *   node .claude/scripts/issues/check-issue-graph.mjs --coverage   # 棚卸し (GSC の直近 4 週と突き合わせる)
  *   node .claude/scripts/issues/check-issue-graph.mjs --coverage --weeks 8 --limit 50 --json
  *   node .claude/scripts/issues/check-issue-graph.mjs --candidates # 問いの候補 (「なぜ・理由・関係」型でどの問いの queries にも無い検索語)
+ *   node .claude/scripts/issues/check-issue-graph.mjs --figures    # まだ載っていない図の配信先と、台帳どうしのずれ
  *
  * 規則の本体は issue-graph-core.mjs。形と外部キーは check-datasets が見る。
  */
@@ -19,6 +20,7 @@ import {
   computeReach,
   findQueryCandidates,
   indexPages,
+  listFigureDestinations,
   parseCsv,
   READ_THRESHOLD,
   sumTraffic,
@@ -42,6 +44,19 @@ const pageFiles = readdirSync(join(PROJECT_ROOT, PAGES_DIR))
 const pages = indexPages(pageFiles);
 const { issues } = readJson(datasetPath("content.issues"));
 const { links } = readJson(datasetPath("content.issue-links"));
+
+if (flag("--figures")) {
+  const { figures } = readJson(datasetPath("content.figures"));
+  const { analyses } = readJson(datasetPath("content.analyses"));
+  const rows = listFigureDestinations({ figures, analyses, posts: readJson(datasetPath("sns.posts")).posts, pages });
+  if (flag("--json")) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    for (const r of rows) console.log(`${r.drift ? "!" : " "} ${r.figure} (${r.issue}) ${r.channel} ${r.target}: 台帳 ${r.status} / 実際 ${r.actual}`);
+    console.log(`図の配信先: 未掲載 ${rows.length} 件 (うち ずれ ${rows.filter((r) => r.drift).length} 件。! がずれ)`);
+  }
+  process.exit(rows.some((r) => r.drift) ? 1 : 0);
+}
 
 if (!flag("--coverage") && !flag("--candidates")) {
   const { errors, warnings } = validateIssueGraph({ issues, links, pages });

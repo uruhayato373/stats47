@@ -262,6 +262,19 @@ export const DATASETS = [
       { field: "links[].page", to: "content.pages", key: "pages[].id" },
     ],
   }),
+  d("content.analyses", "data/content/analyses.json", "config", "data", "data", "問いに答える分析の台帳。入力の spec と再現のスクリプトを持ち、値は持たない", {
+    schema: "data/content/schema/analyses.schema.json",
+    refs: [{ field: "analyses[].issue", to: "content.issues", key: "issues[].id" }],
+  }),
+  d("content.figures", "data/content/figures.json", "config", "data", "data", "図の台帳。分析と型に結び、同じ図の配信先を持つ。データは写さない", {
+    schema: "data/content/schema/figures.schema.json",
+    refs: [
+      { field: "figures[].analysis", to: "content.analyses", key: "analyses[].id" },
+      { field: "figures[].template", to: "content.image-templates", key: "templates[].id" },
+      { field: "figures[].destinations[].page", to: "content.pages", key: "pages[].id" },
+      { field: "figures[].destinations[].postId", to: "sns.posts", key: "posts[].id" },
+    ],
+  }),
   d("themes.composition-sets", "data/themes/compositions/sets.json", "state", "data", "data", "足すと全体になる指標の組。テーマのカタログの積み上げから作る生成物 (build-composition-ledger.ts)", { schema: "data/themes/schema/composition-sets.schema.json" }),
   d("themes.composition-sets-schema", "data/themes/schema/composition-sets.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),
