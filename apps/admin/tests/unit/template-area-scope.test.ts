@@ -22,11 +22,6 @@ describe('地域の範囲', () => {
     expect(areasOf(split).has(YOKOHAMA)).toBe(false);
     expect(areasOf(split).get(TSURUMI)).toBe('横浜市鶴見区');
   });
-  it('政令指定都市の中では行政区の名前だけにする', () => {
-    const areas = areasOf({ level: 'municipality', wardMode: 'split', within: { kind: 'designated-city', cityCode: YOKOHAMA } });
-    expect(areas.size).toBe(18);
-    expect(areas.get(TSURUMI)).toBe('鶴見区');
-  });
   it('東京の特別区はどちらのフラグでも区ごとで、特別区部は入らない', () => {
     for (const wardMode of ['merged', 'split'] as const) {
       const areas = areasOf({ level: 'municipality', wardMode, within: { kind: 'prefecture', prefCode: '13' } });
@@ -34,8 +29,8 @@ describe('地域の範囲', () => {
       expect(areas.has('13100')).toBe(false);
     }
   });
-  it('政令指定都市でないコードは止める', () => {
-    expect(() => areasOf({ level: 'municipality', wardMode: 'split', within: { kind: 'designated-city', cityCode: YOKOSUKA } })).toThrow('政令指定都市');
+  it('実在しない県のコードは止める', () => {
+    expect(() => areasOf({ level: 'municipality', wardMode: 'merged', within: { kind: 'prefecture', prefCode: '48' } })).toThrow('都道府県コード');
   });
 });
 
@@ -91,7 +86,7 @@ describe('棒の型と記事のデータ', () => {
   it('source.json の範囲は型と同じ形だけを通す', () => {
     expect(chartSourceShapeErrors({ kind: 'manual', areaScope: merged })).toEqual([]);
     expect(chartSourceShapeErrors({ kind: 'manual', areaScope: { level: 'municipality', within: { kind: 'nation' } } })).not.toEqual([]);
-    expect(chartSourceShapeErrors({ kind: 'manual', areaScope: { level: 'municipality', wardMode: 'merged', within: { kind: 'designated-city', cityCode: YOKOHAMA } } })).not.toEqual([]);
+    expect(chartSourceShapeErrors({ kind: 'manual', areaScope: { level: 'municipality', wardMode: 'split', within: { kind: 'designated-city', cityCode: YOKOHAMA } } })).not.toEqual([]);
   });
   it('市区町村の画像が統合か分割かを持たなければ検査で止める', () => {
     const svg = '<svg viewBox="0 0 1080 1350" data-image-template="bar" data-theme="light" data-scope="municipality"></svg>';

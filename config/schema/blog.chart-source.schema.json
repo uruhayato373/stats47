@@ -174,40 +174,6 @@
               ]
             }
           }
-        },
-        {
-          "type": "object",
-          "required": [
-            "level",
-            "wardMode",
-            "within"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "level": {
-              "const": "municipality"
-            },
-            "wardMode": {
-              "const": "split"
-            },
-            "within": {
-              "type": "object",
-              "required": [
-                "kind",
-                "cityCode"
-              ],
-              "additionalProperties": false,
-              "properties": {
-                "kind": {
-                  "const": "designated-city"
-                },
-                "cityCode": {
-                  "type": "string",
-                  "pattern": "^\\d{5}$"
-                }
-              }
-            }
-          }
         }
       ]
     }

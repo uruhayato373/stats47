@@ -95,9 +95,9 @@
     {
       "id": "choropleth",
       "label": "地図（実際の形）",
-      "policy": "【使い分け】地理的なまとまり（分布・点・線）を見せる型。県ごとの値は地図に書かず、値を読ませるときはタイルマップを使う。【タイルマップと地図の共通の形（2026-11-02 オーナー決定）】見出し（指標名・年と単位・定義1行）と出典の位置・文字の大きさ・背景はほかの見本の枠と同じ。左上の日本海側に上位3県（同値は同順位）。右下に凡例を区分ごとの1行（色・範囲・県の数）で高い順に並べ、色だけに頼らせない（data-cards/all47-svg.ts の renderTopThree と renderClassLegend を両方の型で使う。連続の配色だけは両端つきの帯）。配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。 地図の計算はバズ地図と同じ buzz-map/geo.ts の computeBuzzMapGeo（本土を大きく。大東諸島・奄美より南の離島など範囲外の島は描かない）。沖縄は上位3県の下に、島の範囲に合わせた小さい枠で描く（computeBuzzMapGeo の insetBox。バズ地図の既定の大きい枠は点・線の描き分けで使う）。暗い表示用の版は地色 #262626・県境 #8A8A8A（chart-theme.ts）。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズ地図型C〜E）。 市区町村版は1つの県か政令指定都市の境界を地域コードで結んで色分けし、上位3と凡例を地図の下に置く。政令指定都市の統合か分割かは図の範囲で決まり、境界も同じフラグの版を使う（template-area-map.ts）。",
+      "policy": "【使い分け】地理的なまとまり（分布・点・線）を見せる型。県ごとの値は地図に書かず、値を読ませるときはタイルマップを使う。【タイルマップと地図の共通の形（2026-11-02 オーナー決定）】見出し（指標名・年と単位・定義1行）と出典の位置・文字の大きさ・背景はほかの見本の枠と同じ。左上の日本海側に上位3県（同値は同順位）。右下に凡例を区分ごとの1行（色・範囲・県の数）で高い順に並べ、色だけに頼らせない（data-cards/all47-svg.ts の renderTopThree と renderClassLegend を両方の型で使う。連続の配色だけは両端つきの帯）。配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。 地図の計算はバズ地図と同じ buzz-map/geo.ts の computeBuzzMapGeo（本土を大きく。大東諸島・奄美より南の離島など範囲外の島は描かない）。沖縄は上位3県の下に、島の範囲に合わせた小さい枠で描く（computeBuzzMapGeo の insetBox。バズ地図の既定の大きい枠は点・線の描き分けで使う）。暗い表示用の版は地色 #262626・県境 #8A8A8A（chart-theme.ts）。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズ地図型C〜E）。 市区町村版は1つの県の境界を地域コードで結んで色分けし、上位3と凡例を地図の下に置く。政令指定都市の統合か分割かは図の範囲で決まり、境界も同じフラグの版を使う（template-area-map.ts）。",
       "renderer": "apps/remotion/src/features/buzz-map/",
-      "version": 9,
+      "version": 10,
       "profiles": {
         "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
         "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
@@ -941,6 +941,92 @@
           "buzzMapTypes": [
             "flow"
           ]
+        }
+      ],
+      "metricColor": "scale"
+    },
+    {
+      "id": "choropleth",
+      "label": "地図（実際の形）",
+      "policy": "【使い分け】地理的なまとまり（分布・点・線）を見せる型。県ごとの値は地図に書かず、値を読ませるときはタイルマップを使う。【タイルマップと地図の共通の形（2026-11-02 オーナー決定）】見出し（指標名・年と単位・定義1行）と出典の位置・文字の大きさ・背景はほかの見本の枠と同じ。左上の日本海側に上位3県（同値は同順位）。右下に凡例を区分ごとの1行（色・範囲・県の数）で高い順に並べ、色だけに頼らせない（data-cards/all47-svg.ts の renderTopThree と renderClassLegend を両方の型で使う。連続の配色だけは両端つきの帯）。配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。 地図の計算はバズ地図と同じ buzz-map/geo.ts の computeBuzzMapGeo（本土を大きく。大東諸島・奄美より南の離島など範囲外の島は描かない）。沖縄は上位3県の下に、島の範囲に合わせた小さい枠で描く（computeBuzzMapGeo の insetBox。バズ地図の既定の大きい枠は点・線の描き分けで使う）。暗い表示用の版は地色 #262626・県境 #8A8A8A（chart-theme.ts）。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズ地図型C〜E）。 市区町村版は1つの県か政令指定都市の境界を地域コードで結んで色分けし、上位3と凡例を地図の下に置く。政令指定都市の統合か分割かは図の範囲で決まり、境界も同じフラグの版を使う（template-area-map.ts）。",
+      "renderer": "apps/remotion/src/features/buzz-map/",
+      "version": 9,
+      "profiles": {
+        "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
+        "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
+        "instagram": "共通の4:5（1080×1350px）で制作する。表紙・出典は別の型として管理する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "distribution",
+        "trend"
+      ],
+      "variants": [
+        {
+          "id": "fill",
+          "label": "地域の塗り",
+          "status": "ready",
+          "buzzMapTypes": [
+            "A"
+          ]
+        },
+        {
+          "id": "fill-animation",
+          "label": "塗りの時系列（動画）",
+          "status": "ready",
+          "buzzMapTypes": [
+            "B"
+          ]
+        },
+        {
+          "id": "point",
+          "label": "点",
+          "status": "ready",
+          "buzzMapTypes": [
+            "C"
+          ]
+        },
+        {
+          "id": "line",
+          "label": "線",
+          "status": "ready",
+          "buzzMapTypes": [
+            "D"
+          ]
+        },
+        {
+          "id": "overlay",
+          "label": "塗り・点・線の組み合わせ",
+          "status": "ready",
+          "buzzMapTypes": [
+            "E"
+          ]
+        },
+        {
+          "id": "mesh",
+          "label": "メッシュの塗り",
+          "status": "planned",
+          "buzzMapTypes": [
+            "F"
+          ]
+        },
+        {
+          "id": "flow",
+          "label": "流れの矢印",
+          "status": "planned",
+          "buzzMapTypes": [
+            "flow"
+          ]
+        },
+        {
+          "id": "municipality-merged",
+          "label": "市区町村（政令指定都市を統合）",
+          "status": "ready"
+        },
+        {
+          "id": "municipality-split",
+          "label": "市区町村（政令指定都市を分割）",
+          "status": "ready"
         }
       ],
       "metricColor": "scale"

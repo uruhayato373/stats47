@@ -112,7 +112,6 @@ async function main() {
   });
   const { chartOf, merged, split } = await areaInputs();
   const inPrefecture = (wardMode: 'merged' | 'split'): AreaScope => ({ level: 'municipality', wardMode, within: { kind: 'prefecture', prefCode: '14' } });
-  const inCity: AreaScope = { level: 'municipality', wardMode: 'split', within: { kind: 'designated-city', cityCode: '14100' } };
   const pairs = (await json(`app/stats/population-migration-inter-prefecture/migration-flow-${MIGRATION_YEAR}.json`)).rows as MigrationPair[];
   const chordHead = { meta: `${MIGRATION_YEAR}年 · 単位：人`, note: '帯の太さは移動した人数 · 色は移動元の地方', source: MIGRATION_SOURCE };
   const rows: Row[] = [
@@ -122,7 +121,6 @@ async function main() {
         both('bar', '上位 5・下位 5 のカード', (theme) => renderRankingBarsChart(ranking, theme)),
         both('bar-merged', '県の中・政令指定都市を統合', (theme) => renderAreaBarsChart(chartOf(inPrefecture('merged')), theme)),
         both('bar-split', '県の中・政令指定都市を分割', (theme) => renderAreaBarsChart(chartOf(inPrefecture('split')), theme)),
-        both('bar-city', '政令指定都市の中の行政区', (theme) => renderAreaBarsChart(chartOf(inCity), theme)),
       ],
     },
     {
@@ -139,7 +137,6 @@ async function main() {
         both('map', '都道府県版', (theme) => renderDistributionMapChart(ranking, theme)),
         both('map-merged', '市区町村・政令指定都市を統合', (theme) => renderAreaMapChart(chartOf(inPrefecture('merged')), merged, theme)),
         both('map-split', '市区町村・政令指定都市を分割', (theme) => renderAreaMapChart(chartOf(inPrefecture('split')), split, theme)),
-        both('map-city', '政令指定都市の中の行政区', (theme) => renderAreaMapChart(chartOf(inCity), split, theme)),
       ],
     },
     {
