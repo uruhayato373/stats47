@@ -1,0 +1,63 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { PanelCard, StatusBadge, type Tone } from '@/components/admin-ui';
+import { Grid, Stack } from '@/components/layout-primitives';
+import { PageHeading } from '@/components/ops/primitives';
+import { projectRoot } from '@/lib/server/project-root';
+
+export const dynamic = 'force-dynamic';
+export const metadata = { title: '型の最終確認 — stats47 admin' };
+
+type Status = 'done' | 'review' | 'unused';
+type Sample = { label: string; light?: string; dark?: string };
+type Row = { id: string; title: string; status: Status; summary: string; samples: Sample[] };
+
+const STATUS: Record<Status, { label: string; tone: Tone }> = {
+  review: { label: '確認待ち', tone: 'warn' },
+  done: { label: '決定済み', tone: 'good' },
+  unused: { label: '未使用', tone: 'neutral' },
+};
+const SOURCE = 'apps/admin/scripts/build-template-review.ts';
+
+function readManifest() {
+  const file = path.join(projectRoot(), '.local/template-review/manifest.json');
+  if (!fs.existsSync(file)) return null;
+  return JSON.parse(fs.readFileSync(file, 'utf8')) as { generatedAt: string; rows: Row[] };
+}
+
+function SampleImage({ name, label }: { name?: string; label: string }) {
+  if (!name) return <p className="text-sm text-muted-foreground">{label}版なし</p>;
+  // Local review images served by the API route; next/image would only re-encode them.
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={`/api/template-review/${name}`} alt={label} loading="lazy" className="w-full rounded-md border" />;
+}
+
+function TemplateRow({ row }: { row: Row }) {
+  const status = STATUS[row.status];
+  return (
+    <PanelCard id={row.id} title={row.title} description={row.summary} action={<StatusBadge tone={status.tone}>{status.label}</StatusBadge>}>
+      <Stack>
+        {row.samples.map((sample) => (
+          <Stack key={sample.label} gap="sm">
+            <p className="text-sm font-medium">{sample.label}</p>
+            <Grid min="lg" lines={false} className="max-w-3xl">
+              <SampleImage name={sample.light} label="明るい" />
+              <SampleImage name={sample.dark} label="暗い" />
+            </Grid>
+          </Stack>
+        ))}
+      </Stack>
+    </PanelCard>
+  );
+}
+
+export default function Page() {
+  const manifest = readManifest();
+  return (
+    <Stack gap="lg">
+      <PageHeading title="型の最終確認" source={SOURCE} />
+      {!manifest && <p>見本がまだありません。npx tsx {SOURCE} で作ります。</p>}
+      {manifest?.rows.map((row) => <TemplateRow key={row.id} row={row} />)}
+    </Stack>
+  );
+}

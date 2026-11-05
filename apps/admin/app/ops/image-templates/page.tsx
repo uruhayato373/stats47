@@ -8,6 +8,8 @@ import {
   templateCatalog,
   basicTemplateQuery,
 } from '@/lib/image-template-basics';
+import Link from 'next/link';
+import { buttonVariants } from '@stats47/components';
 import { redirect } from 'next/navigation';
 import { taxonomyQuery } from '../../../../../.claude/scripts/media/lib/taxonomy.mjs';
 import { loadStatisticalSamples } from '@/lib/server/template-statistical-samples';
@@ -63,7 +65,9 @@ export default async function Page({
         title="型の基本形"
         source={datasetPath('content.image-templates')}
         accessLabel="型の方針を保存できます"
-      />
+      >
+        <Link href="/ops/image-templates/review" className={buttonVariants({ variant: 'outline', size: 'sm' })}>型の最終確認</Link>
+      </PageHeading>
       <ImageTemplateWorkspace
         initial={{ templates, samples: loadStatisticalSamples(projectRoot()) }}
       />

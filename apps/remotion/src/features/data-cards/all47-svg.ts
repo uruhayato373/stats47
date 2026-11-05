@@ -33,6 +33,8 @@ export interface All47Options {
   panel?: All47Panel;
   /** Paper and text colours (light by default); tile colours do not change. */
   theme?: ChartTheme;
+  /** The area the others are measured against (e.g. Osaka in Osaka's moves): written 基準, not a value. */
+  baseAreaCode?: string;
 }
 const escape = (s: string) =>
   s
@@ -241,6 +243,9 @@ export function renderAll47TileSvg(
   const body = renderTileMapBody(entries, {
     width: MAP.width, height: MAP.bottom - MAP.top,
     scale: opts.scale, capitalCities: opts.capitalCities, formatValue: opts.formatValue, theme: opts.theme,
+    tileOverride: opts.baseAreaCode
+      ? (code) => (code === opts.baseAreaCode ? { fill: (opts.theme ?? LIGHT_THEME).wash, lines: [prefectureShortName(entries.find((e) => e.areaCode === code)!.areaName), '基準'] } : undefined)
+      : undefined,
   });
   const theme = opts.theme ?? LIGHT_THEME;
   const { scale, pitch } = body;

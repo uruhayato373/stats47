@@ -23,7 +23,7 @@ describe('酒類の実統計入力を用いる積み上げ棒見本', () => {
     for (const year of ['2008年度', '2013年度', '2018年度']) expect(svg).toContain(`>${year}</text>`);
     expect(svg).toContain('出典：国税庁「酒のしおり」');
     // One 100% bar per fiscal year, eight segments each; a single legend (no per-bar category lists).
-    expect(svg.match(/data-year="/g)).toHaveLength(3);
+    expect(svg.match(/data-group="/g)).toHaveLength(3);
     for (const label of labels) expect(svg.split(`>${label}</text>`).length - 1).toBe(1);
     expect(() => assertMinimalChartCopy(svg)).not.toThrow();
     const png = await sharp(Buffer.from(svg)).png().toBuffer();

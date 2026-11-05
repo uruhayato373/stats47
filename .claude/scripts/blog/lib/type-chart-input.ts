@@ -9,6 +9,8 @@ import { DEFAULT_SEQUENTIAL_SCHEME, colorSchemeTypeOf, normalizeColorScheme } fr
 import { assertMetricPresentation, type MetricPresentation } from '../../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
 import type { ScatterChart } from '../../../../apps/admin/lib/template-relationship-scatter';
+import type { LineChart, LineSeries } from '../../../../apps/admin/lib/template-trend-line';
+import type { StackedChart } from '../../../../apps/admin/lib/template-composition-stacked';
 
 export interface ArticleMetric {
   title?: string;
@@ -20,6 +22,7 @@ export interface ArticleMetric {
 }
 type Row = { value?: unknown; areaCode?: unknown; area_code?: unknown; pref?: unknown; areaName?: unknown; label?: unknown; name?: unknown };
 
+const MIGRATION_METRIC_KEY = 'population-migration-inter-prefecture';
 const SEQUENTIAL_DEFAULTS = {
   domain: { mode: 'extent' }, classification: { method: 'continuous' },
   trendDomain: { mode: 'extent' }, comparisonDomain: { mode: 'extent' },
@@ -52,7 +55,7 @@ function presentationOf(data: Record<string, unknown>, metric?: ArticleMetric): 
 
 export function rankingChartFromArticleData(
   parsed: unknown,
-  opts: { metric?: ArticleMetric; prefCodeOf: (name: string) => string; prefNameOf: (code: string) => string }
+  opts: { metric?: ArticleMetric; prefCodeOf: (name: string) => string; prefNameOf: (code: string) => string; allowBaseArea?: boolean }
 ): RankingChart | { skip: string } {
   const data = (Array.isArray(parsed) ? { data: parsed } : parsed) as Record<string, unknown>;
   const items = (Array.isArray(data?.data) ? data.data : []) as Row[];
@@ -62,6 +65,10 @@ export function rankingChartFromArticleData(
     const code = /^\d{1,5}$/.test(raw) ? raw.slice(0, 2).padStart(2, '0') : opts.prefCodeOf(raw);
     return { code, value: it.value as number };
   });
+  // A prefecture's moves list its 46 partners: the missing prefecture is the base, not a gap in the data.
+  const partnerOfBase = opts.allowBaseArea && coded.length === 46 && data.rankingKey === MIGRATION_METRIC_KEY;
+  const baseCode = partnerOfBase ? Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, '0')).find((c) => !coded.some((it) => it.code === c)) : undefined;
+  if (baseCode) coded.push({ code: baseCode, value: 0 });
   const codes = new Set(coded.map((it) => it.code));
   if (coded.length !== 47 || codes.size !== 47 || coded.some((it) => !/^\d{2}$/.test(it.code) || Number(it.code) < 1 || Number(it.code) > 47))
     return { skip: `47都道府県がそろっていない (有効値 ${coded.length} 件・県 ${codes.size} 件)` };
@@ -73,7 +80,6 @@ export function rankingChartFromArticleData(
     area_name: opts.prefNameOf(it.code),
     value: it.value,
   }));
-  const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
   const title = (text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, '');
   // The subtitle carries the label as shown (「2022年度」); otherwise the year is a calendar year.
   const subtitleYear = /^\d{4}年度?$/.exec(text(data.subtitle))?.[0];
@@ -86,10 +92,127 @@ export function rankingChartFromArticleData(
     note: text(opts.metric?.subtitle) || undefined,
     presentation: presentationOf(data, opts.metric),
     rows,
+    baseAreaCode: baseCode ? `${baseCode}000` : undefined,
     // Large quantities read in 万・億・兆 (one unit per chart, from the unit canon). Otherwise the
     // metric's decimal places apply when the article's unit is the metric's own unit.
     ...chartValueLabels(text(data.unit), rows.map((r) => r.value),
       text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined),
+  };
+}
+
+const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+const numberOr = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+const TITLE_MAX_CHARS = 21;
+const xOf = (p: Record<string, unknown>) => String(p.year ?? p.x ?? p.label ?? '');
+
+/**
+ * The short source an image shows: the article data's own, the survey the manifest names, or the metric's.
+ * The manifest's `source` is an R2 path for most derived charts, which still names the metric.
+ */
+export function chartSourceName(data: unknown, manifest: Record<string, unknown>, metricSource: (key: string) => string | undefined) {
+  const written = data && !Array.isArray(data) ? text((data as Record<string, unknown>).source) : '';
+  if (written) return written;
+  if (text(manifest.statsName)) return text(manifest.statsName);
+  const key = text(manifest.rankingKey) || text(manifest.metricKey) || /^r2:app\/(?:ranking|stats)\/([^/]+)\//.exec(text(manifest.source))?.[1];
+  return (key && metricSource(key)) || '';
+}
+
+/** A trailing （…） of a title reads as a condition: it moves to the line under the title. */
+export function splitTitle(title: string) {
+  const m = /^(.+?)[\s　]*[（(]([^（()）]+)[)）]$/.exec(title.trim());
+  const named = m ? { title: m[1], condition: m[2] } : { title: title.trim(), condition: '' };
+  // A title too long for one line breaks at its first space: 「北海道の取り分 乳用牛・生乳・…」.
+  const spaced = named.title.length > TITLE_MAX_CHARS ? /^(\S+)\s+(.+)$/.exec(named.title) : null;
+  return spaced ? { title: spaced[1], condition: [spaced[2], named.condition].filter(Boolean).join(' · ') } : named;
+}
+const joinNotes = (...parts: unknown[]) => [...new Set(parts.map(text).filter(Boolean))].join(' · ') || undefined;
+const decimalsIn = (values: number[]) => Math.min(2, Math.max(0, ...values.map((v) => (String(v).split('.')[1] ?? '').length)));
+
+/** The series of an article's line json, in any of its written forms. */
+function articleSeries(parsed: unknown): LineSeries[] | { skip: string } {
+  const data = (Array.isArray(parsed) ? { data: parsed } : parsed) as Record<string, unknown>;
+  if (data?.series != null && !Array.isArray(data.series)) return { skip: 'series が配列でない (取得結果の控え)' };
+  const toPoints = (rows: Record<string, unknown>[]) => rows.map((p) => ({ x: xOf(p), value: numberOr(p.value ?? p.y) }));
+  if (Array.isArray(data?.series))
+    return (data.series as { label?: string; data?: Record<string, unknown>[] }[]).filter((s) => Array.isArray(s.data) && s.data.length)
+      .map((s, i) => ({ label: s.label || `系列${i + 1}`, points: toPoints(s.data!) }));
+  const rows = (Array.isArray(data?.data) ? data.data : []) as Record<string, unknown>[];
+  // Long form: one row per area and year.
+  const areas = [...new Set(rows.map((r) => text(r.areaName)).filter(Boolean))];
+  if (areas.length > 1) return areas.map((label) => ({ label, points: toPoints(rows.filter((r) => r.areaName === label)) }));
+  return rows.length ? [{ label: text(data.label) || '値', points: toPoints(rows) }] : [];
+}
+
+/** Rows that are not the 47 prefectures: one chart of whatever the article's data lists, ranked by value. */
+export function partialBarChartFromArticleData(parsed: unknown, opts: { metric?: ArticleMetric } = {}): RankingChart | { skip: string } {
+  const data = (Array.isArray(parsed) ? { data: parsed } : parsed) as Record<string, unknown>;
+  const items = (Array.isArray(data?.data) ? data.data : []) as Row[];
+  const named = items.flatMap((it) => {
+    const name = text(it.areaName) || text(it.label) || text(it.name) || text(it.pref);
+    return typeof it.value === 'number' && Number.isFinite(it.value) && name ? [{ name, value: it.value }] : [];
+  });
+  if (!named.length) return { skip: '名前と値のある行が無い' };
+  const sorted = [...named].sort((a, b) => b.value - a.value);
+  const rows: RankingChartRow[] = sorted.map((it) => ({
+    rank: sorted.findIndex((other) => other.value === it.value) + 1, area_code: '', area_name: it.name, value: it.value,
+  }));
+  const title = splitTitle((text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, ''));
+  if (!title.title) return { skip: '図の名前がデータに無い' };
+  const yearLabel = text(data.subtitle) || (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : '');
+  return {
+    title: title.title, yearLabel, source: text(data.source), note: title.condition || text(opts.metric?.subtitle) || undefined,
+    presentation: presentationOf(data, opts.metric), rows,
+    ...chartValueLabels(text(data.unit), rows.map((r) => r.value), text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined),
+  };
+}
+
+/** Article line json → the line type. Too many lines to tell apart stay a reason to fix the data. */
+export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: number } = {}): LineChart | { skip: string } {
+  const data = (Array.isArray(parsed) ? {} : parsed) as Record<string, unknown>;
+  const series = articleSeries(parsed);
+  if ('skip' in series) return series;
+  if (!series.length) return { skip: '系列が無い' };
+  if (series.length > (opts.maxSeries ?? 8)) return { skip: `系列が多すぎる (${series.length})` };
+  const named = splitTitle(text(data.title) || '推移');
+  const xs = [...new Set(series.flatMap((s) => s.points.map((p) => p.x)))];
+  const years = xs.map((x) => /^\d{4}/.exec(x)?.[0]).filter(Boolean).map(Number);
+  const period = years.length === xs.length && years.length ? `${Math.min(...years)}–${Math.max(...years)}年` : '';
+  const unit = text(data.unit);
+  const values = series.flatMap((s) => s.points.flatMap((p) => (p.value === null ? [] : [p.value])));
+  return {
+    title: named.title,
+    meta: [period, unit && `単位：${unit}`].filter(Boolean).join(' · ') || text(data.subtitle),
+    note: joinNotes(named.condition, period || unit ? text(data.subtitle) : ''),
+    source: text(data.source),
+    series, decimals: decimalsIn(values),
+  };
+}
+
+/** Article stacked json (series with one value per bar, or one wide row per bar) → the stacked type. */
+export function stackedChartFromArticleData(parsed: unknown): StackedChart | { skip: string } {
+  const data = (Array.isArray(parsed) ? { data: parsed } : parsed) as Record<string, unknown>;
+  let groups: string[], categories: StackedChart['categories'];
+  if (Array.isArray(data.series)) {
+    const series = (data.series as { label?: string; data?: Record<string, unknown>[] }[]).filter((s) => Array.isArray(s.data) && s.data.length);
+    groups = [...new Set(series.flatMap((s) => s.data!.map(xOf)))];
+    categories = series.map((s, i) => ({ label: s.label || `区分${i + 1}`, values: groups.map((g) => numberOr(s.data!.find((p) => xOf(p) === g)?.value)) }));
+  } else {
+    const rows = (Array.isArray(data.data) ? data.data : Array.isArray(data.rows) ? data.rows : []) as Record<string, unknown>[];
+    const name = (r: Record<string, unknown>) => text(r.areaName) || text(r.label) || text(r.name);
+    groups = rows.map(name);
+    const keys = [...new Set(rows.flatMap((r) => Object.keys(r).filter((k) => typeof r[k] === 'number')))];
+    categories = keys.map((label) => ({ label, values: rows.map((r) => numberOr(r[label])) }));
+  }
+  if (!groups.length || !categories.length) return { skip: '区分か棒が無い' };
+  const named = splitTitle(text(data.title) || text(data.label) || '内訳');
+  const unit = text(data.unit);
+  const values = categories.flatMap((c) => c.values.flatMap((v) => (v === null ? [] : [v])));
+  return {
+    title: named.title,
+    meta: [text(data.subtitle) || (text(data.year) ? `${text(data.year)}年` : ''), unit && `単位：${unit}`].filter(Boolean).join(' · '),
+    note: joinNotes(named.condition),
+    source: text(data.source),
+    groups, categories, normalized: data.normalized === true, unit, decimals: decimalsIn(values),
   };
 }
 
