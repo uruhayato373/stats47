@@ -4,6 +4,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { R2_PUBLIC_BASE_URL } from '../../../../scripts/lib/site-config.cjs';
 import { datasetPath } from "../../../../../config/datasets.mjs";
+import { NOTE_RANKING_IMAGES } from '../../../../scripts/note/lib/note-render-spec.mjs';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../../..');
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -653,7 +654,7 @@ ${top[0].area_name}が全国1位、${bottom.at(-1)!.area_name}が47位。${reade
 ## 上位5：分析
 
 <!-- note投稿時: この画像行を削除し、images/chart-x-1200x630.png をアップロード -->
-![${readerLabel}上位5](images/chart-x-1200x630.png)
+![${readerLabel}の上位5・下位5](images/chart-x-1200x630.png)
 
 ${topParagraphs.join('\n\n')}
 
@@ -880,11 +881,7 @@ async function check(rankingKey: string, requireImages: boolean) {
   if (!provenance.source.includes(`app/stats/${rankingKey}/values.json`))
     errors.push('provenance source不一致');
 
-  const expected = new Map([
-    ['images/choropleth-map-1080x1080.png', [1080, 1080]],
-    ['images/chart-x-1200x630.png', [1200, 630]],
-    ['images/boxplot-1200x630.png', [1200, 630]],
-  ]);
+  const expected = new Map(NOTE_RANKING_IMAGES.map((image) => [image.file, [image.width, image.height]]));
   if (requireImages) {
     for (const [relativePath, dimensions] of expected) {
       const imagePath = path.join(outDir, relativePath);
