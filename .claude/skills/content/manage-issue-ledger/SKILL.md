@@ -38,7 +38,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 検索語がまだ無い論点を拾う。
 
 - テーマの `evidenceTopics` (`data/themes/catalogs/<key>.json`) の `question` を読み、台帳に無い問いを大きな問いにする
-- 白書を読み直すときは `/research-theme-catalog` (担当 `theme-researcher`) に頼む。NotebookLM は `gh` の認証が要るのでクラウドの環境では呼べない。Mac のセッションで行う
+- 白書を読み直すときは `/research-theme-catalog` (担当 `theme-researcher`) に頼む。NotebookLM はクラウドの環境では呼べない。ローカルで行い、Windows は証明書ストアを使う起動が要る（`.claude/rules/local-environment.md`「Windows の NotebookLM 連携」）。返ってきた統計名は指標の `source` と照合してから `dataNote` に書く
 - 記事の着想の一覧は `/plan-article-queue` が持つ。台帳はそこへ渡す問いの出どころで、ネタの採点は写さない
 
 ## 問いの書き方

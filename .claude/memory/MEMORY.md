@@ -1,4 +1,6 @@
 # Memory Index
+- [data refresh cancel mismatch](feedback_data_refresh_cancel_mismatch.md) — Data Refresh を最終同期中に止めると item だけ新しい年になり画面が空になる。止めたら公開データ監査と範囲指定の再実行
+- [codex exec stdin](feedback_codex_exec_stdin.md) — 背景実行の codex exec は標準入力待ちで無言で止まる。</dev/null で閉じ、公開前記事は --article を渡す
 - [r2-write pending replaced](feedback_r2_write_pending_replaced.md) — r2-write の待機は 1 本だけ。後の run が待機中を cancelled にする。完了を待って次を起動する
 - [chart ledger read first](feedback_chart_ledger_read_first.md) — 図のデータ欠けを語る前に台帳を読む。形の合格は値の正しさを保証しない。型の見た目は見本を見せてから全件へ
 - [note profile launch](feedback_note_profile_launch.md) — note の専用プロファイルは素の Chrome で開かず Playwright 経由で起動する。401 なら保存済みセッションを確認してオーナーへ
@@ -55,6 +57,7 @@
 - [generatestaticparams r2 notfound stuck](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParamsを付けるとbuild時R2不可でnotFound固着。撤去しrevalidateのみ。正典nextjs-ssg-preservation.md
 - [ai content remediation queue](project_ai_content_remediation_queue.md) — ranking AIは9/8に2,166件done・残0を全量実測。追加12件R2 SHA一致、TS/KNOWN/R2/queue集合差分0。非阻害警告・意味レビュー範囲・課金条件は別記。canonical入力の回帰テストあり
 - [blog svg lineage enforcement](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
+- [commit in batches](feedback_commit_in_batches.md) — 確認で修正を重ねる間は毎回コミットしない。まとまりで 1 回
 - [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [cloudflare workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ/home featuredが空→wrangler.tomlのCLOUDFLARE_WORKERS="true"でR2読みskipを疑う。テーマはR2 values.json+force-dynamic
 - [dev server web only](feedback_dev_server_web_only.md) — dev は npm run dev:web。常駐は background + Ready の polling。R2 URL と S3 変数の継承を確かめてから画面監査。正典 local-environment.md

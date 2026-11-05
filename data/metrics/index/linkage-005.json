@@ -2337,7 +2337,7 @@
     },
     {
       "metricKey": "culture-recreation-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:culture-recreation-budget-share-kakei",
       "title": "消費支出に占める教養娯楽の割合",
       "sources": [
         {
@@ -4891,6 +4891,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:cutlet-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:cutlet-consumption-expenditure",
           "kind": "ranking"
         }
@@ -6300,6 +6304,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:dairy-eggs-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:dairy-eggs-group-consumption-expenditure",
           "kind": "ranking"

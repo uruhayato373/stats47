@@ -4,6 +4,7 @@ import { lintImageTypeSvg } from '../../../../.claude/scripts/lib/svg-lint.mjs';
 import { areaChartFromArticleData, chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, lineChartFromArticleData, stackedChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 import { areasOf, resolveAreaChart, type AreaScope, type AreaValue } from '@/lib/template-area-scope';
+import { applyColorPolicy, colorPolicyOf, signedThresholds } from '../../../../packages/types/src/color-policy';
 import { renderGroupedBarsChart } from '@/lib/template-grouped-bars';
 import { renderAreaBarsChart } from '@/lib/template-ranking-bars';
 
@@ -136,5 +137,40 @@ describe('グループ棒グラフ', () => {
   it('棒が細くなりすぎる組み合わせは止める', () => {
     const series = Array.from({ length: 12 }, (_, i) => ({ label: String(i), values: Array(12).fill(1) }));
     expect(() => renderGroupedBarsChart({ title: 'a', meta: 'b', source: 'c', groups: Array.from({ length: 12 }, (_, i) => `${i + 1}月`), series })).toThrow('細すぎ');
+  });
+});
+
+describe('配色の使い分け', () => {
+  it('正負のある値は 0 を中心に、外れ値に引きずられない区切りにする', () => {
+    const values = [-6077, -1604, -959, -493, -64, 33, 58, 193, 350, 523, 932, 1290, 2335, 4207];
+    const thresholds = signedThresholds(values)!;
+    expect(thresholds).toHaveLength(4);
+    expect(thresholds[0]).toBe(-thresholds[3]);
+    expect(thresholds[1]).toBe(-thresholds[2]);
+    expect(thresholds[3]).toBeLessThan(2000);
+  });
+  it('同じ大きさばかりで区切れないときは止めずに既定へ戻す', () => {
+    expect(signedThresholds([-1, 1, -1, 1])).toBeNull();
+  });
+  it('外れ値が無ければ連続、あれば段階にする', () => {
+    const even = Array.from({ length: 47 }, (_, i) => 28 + i / 6);
+    expect(colorPolicyOf(even)).toEqual({ colorSchemeType: 'sequential', classification: { method: 'continuous' } });
+    expect(colorPolicyOf([...even.slice(1), 500]).classification).toEqual({ method: 'quantile', classes: 5 });
+  });
+  it('正負があれば発散にし、外れ値があるときだけ 0 を中心に段階にする', () => {
+    const signed = Array.from({ length: 46 }, (_, i) => i - 23);
+    expect(colorPolicyOf(signed)).toEqual({ colorSchemeType: 'diverging', classification: { method: 'continuous' } });
+    expect(colorPolicyOf([...signed, -6000]).classification.method).toBe('threshold');
+  });
+  it('書かれた区切りと、指標が持つ基準の中心を守る', () => {
+    const values = Array.from({ length: 47 }, (_, i) => 90 + i / 2);
+    const written = { colorSchemeType: 'sequential', classification: { method: 'threshold' as const, thresholds: [1, 2] } };
+    expect(applyColorPolicy(written, values)).toBe(written);
+    const centred = applyColorPolicy({ colorSchemeType: 'diverging', divergingMidpoint: 'custom', classification: { method: 'equal-interval', classes: 5 } as const }, values);
+    expect(centred).toMatchObject({ colorSchemeType: 'diverging', divergingMidpoint: 'custom', classification: { method: 'continuous' } });
+  });
+  it('一方向の指標でも値に正負があれば発散の配色へ替える', () => {
+    const signed = Array.from({ length: 46 }, (_, i) => i - 23);
+    expect(applyColorPolicy({ colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' }, signed)).toMatchObject({ colorScheme: 'interpolateRdBu', colorSchemeType: 'diverging', divergingMidpoint: 'zero' });
   });
 });

@@ -2879,7 +2879,7 @@
       "key": "clothing-footwear-budget-share-kakei",
       "title": "消費支出に占める被服及び履物の割合",
       "href": "/ranking/clothing-footwear-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:clothing-footwear-expenditure-ratio-multi-person-households",
@@ -4087,7 +4087,7 @@
       "key": "culture-recreation-budget-share-kakei",
       "title": "消費支出に占める教養娯楽の割合",
       "href": "/ranking/culture-recreation-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:culture-recreation-cost-all-households",
@@ -5495,7 +5495,7 @@
       "key": "education-budget-share-kakei",
       "title": "消費支出に占める教育の割合",
       "href": "/ranking/education-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:education-cost-all-households",
@@ -7967,7 +7967,7 @@
       "key": "furniture-household-goods-budget-share-kakei",
       "title": "消費支出に占める家具・家事用品の割合",
       "href": "/ranking/furniture-household-goods-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:furniture-household-goods-expenditure-ratio-multi-person-households",
@@ -9343,7 +9343,7 @@
       "key": "healthcare-budget-share-kakei",
       "title": "消費支出に占める保健医療の割合",
       "href": "/ranking/healthcare-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:healthcare-cost-all-households",
@@ -10287,7 +10287,7 @@
       "key": "housing-budget-share-kakei",
       "title": "消費支出に占める住居の割合",
       "href": "/ranking/housing-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:housing-charges-consumption-expenditure",
@@ -15535,7 +15535,7 @@
       "key": "other-consumption-budget-share-kakei",
       "title": "消費支出に占めるその他の消費支出の割合",
       "href": "/ranking/other-consumption-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:other-consumption-expenditure-ratio-multi-person-households",
@@ -24559,7 +24559,7 @@
       "key": "transport-communication-budget-share-kakei",
       "title": "消費支出に占める交通・通信の割合",
       "href": "/ranking/transport-communication-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:transport-communication-expenditure-ratio-multi-person-households",
@@ -25319,7 +25319,7 @@
       "key": "utilities-budget-share-kakei",
       "title": "消費支出に占める光熱・水道の割合",
       "href": "/ranking/utilities-budget-share-kakei",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:utilities-expenditure-ratio-multi-person-households",

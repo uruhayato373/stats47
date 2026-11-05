@@ -802,6 +802,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:recreational-durables-group-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:recreational-durables-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -871,6 +875,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:recreational-goods-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:recreational-goods-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -907,6 +915,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:recreational-services-group-consumption-expenditure",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:recreational-services-group-consumption-expenditure",
           "kind": "ranking"
@@ -4838,6 +4850,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:remittances-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:remittances-group-consumption-expenditure",
           "kind": "ranking"

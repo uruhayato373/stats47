@@ -975,6 +975,221 @@
       "issue": "issue:K02",
       "page": "blog:fresh-seafood-consumption-quantity-prefecture-gap",
       "role": "answers"
+    },
+    {
+      "issue": "issue:F13-2",
+      "page": "ranking:avg-height-high-school-2nd-male",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:M02-2",
+      "page": "ranking:food-self-sufficiency-rate-calorie",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:M02-2",
+      "page": "survey:prefectural-food-self-sufficiency",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:M02-3",
+      "page": "blog:fishery-workers-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J06-1",
+      "page": "ranking:wind-power-capacity",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:J06-1",
+      "page": "ranking:wind-power-turbine-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:K01-1",
+      "page": "blog:cup-noodles-expenditure-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-2",
+      "page": "blog:bonito-catch-prefecture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-2",
+      "page": "blog:katsuobushi-expenditure-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-1",
+      "page": "blog:chocolate-expenditure-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E01-1",
+      "page": "blog:academic-achievement-test-prefecture-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M01-1",
+      "page": "blog:semiconductor-electronics-regional-map",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D09-1",
+      "page": "ranking:persons-on-public-assistance-per-1000",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D02-1",
+      "page": "blog:minimum-wage-increase-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F01-1",
+      "page": "ranking:life-expectancy-0-male",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F01-1",
+      "page": "ranking:life-expectancy-0-female",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B09-1",
+      "page": "blog:day-time-population-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H06-2",
+      "page": "ranking:owner-occupied-housing-ratio",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F18",
+      "page": "blog:abortion-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F19",
+      "page": "blog:sports-urban-paradox",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F17",
+      "page": "ranking:psychiatric-bed-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H23",
+      "page": "blog:convenience-store-density-map",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H23",
+      "page": "ranking:convenience-store-count-commercial",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H24",
+      "page": "blog:pachinko-participation-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H24",
+      "page": "ranking:pachinko-shop-density-per-10k",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:J18",
+      "page": "blog:annual-sunshine-duration-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J19",
+      "page": "blog:precipitation-snow-regional-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C13",
+      "page": "blog:workplace-accident-regional-map",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C12",
+      "page": "ranking:building-fire-count-per-100-thousand-people",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:J09-1",
+      "page": "geo:population-landslide-exposure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J09-1",
+      "page": "ranking:landslide-warning-zone-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D13",
+      "page": "blog:deposit-securities-prefecture-personality",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D13",
+      "page": "ranking:household-savings-balance",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H25",
+      "page": "blog:gasoline-expenditure-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H25",
+      "page": "ranking:automobile-related-group-consumption-expenditure",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:K01-3",
+      "page": "survey:kakei-chousa",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F03-1",
+      "page": "ranking:average-length-of-stay",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F03-1",
+      "page": "ranking:general-hospital-avg-length-of-stay",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B12",
+      "page": "ranking:foreign-worker-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B10-1",
+      "page": "ranking:total-overnight-guests",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F02",
+      "page": "ranking:general-hospital-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I09",
+      "page": "ranking:local-allocation-tax-prefecture",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I09",
+      "page": "ranking:national-treasury-disbursement-prefecture",
+      "role": "evidence"
     }
   ]
 }

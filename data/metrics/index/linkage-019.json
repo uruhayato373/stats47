@@ -106,6 +106,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:oils-seasonings-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:oils-seasonings-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2990,6 +2994,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:other-clothing-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-clothing-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -3183,7 +3191,7 @@
     },
     {
       "metricKey": "other-consumption-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:other-consumption-budget-share-kakei",
       "title": "消費支出に占めるその他の消費支出の割合",
       "sources": [
         {
@@ -4093,6 +4101,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:other-fuel-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:other-fuel-group-consumption-expenditure",
           "kind": "ranking"
@@ -5382,6 +5394,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:other-mens-shirt-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-mens-shirt-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5530,6 +5546,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:other-mushroom-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-mushroom-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5640,6 +5660,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:other-noodle-dining-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:other-noodle-dining-consumption-expenditure",
           "kind": "ranking"

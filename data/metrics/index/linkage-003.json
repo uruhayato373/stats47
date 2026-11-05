@@ -2281,6 +2281,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:childrens-socks-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:childrens-socks-consumption-expenditure",
           "kind": "ranking"
         }
@@ -4930,7 +4934,7 @@
     },
     {
       "metricKey": "clothing-footwear-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:clothing-footwear-budget-share-kakei",
       "title": "消費支出に占める被服及び履物の割合",
       "sources": [
         {
@@ -5310,6 +5314,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:clothing-services-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:clothing-services-group-consumption-expenditure",
           "kind": "ranking"
@@ -6963,6 +6971,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:communication-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:communication-group-consumption-expenditure",
           "kind": "ranking"

@@ -315,7 +315,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 1013,
+    "count": 1022,
     "representatives": [
       {
         "rankingKey": "beef-consumption-quantity",
