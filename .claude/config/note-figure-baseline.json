@@ -1,0 +1,4 @@
+{
+  "maxArticlesToFix": 2,
+  "note": "note 本文の照合で直すべき記事の上限。縮小専用。build-note-figure-ledger.mjs --check が見る"
+}

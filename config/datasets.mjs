@@ -217,6 +217,8 @@ export const DATASETS = [
   d("note.articles-schema", "data/note/articles.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.body-figures", "data/note/body-figures.json", "ledger", "product", "data", "note 本文の図の台帳。記事ごとの図・指標・年と今の R2 との照合 (build-note-figure-ledger.mjs の生成物。有料本文は書かない)", { schema: "data/note/body-figures.schema.json" }),
   d("note.body-figures-schema", "data/note/body-figures.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
+  d("note.body-figure-reviews", "data/note/body-figure-reviews.json", "ledger", "product", "data", "note 本文の照合で人が読んで誤検知と確かめた主張と理由", { schema: "data/note/body-figure-reviews.schema.json" }),
+  d("note.body-figure-reviews-schema", "data/note/body-figure-reviews.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.magazines", "data/note/magazines.json", "ledger", "product", "data", "note マガジンの台帳 (記事台帳の magazine が参照するキーの正本)", { schema: "data/note/magazines.schema.json" }),
   d("note.magazines-schema", "data/note/magazines.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.paid-landing", "data/note/paid-landing/{name}.json", "config", "product", "data", "公開済み有料記事の無料部分の文言 (patch-note-paid-landing.mjs の入力)", { schema: "data/note/paid-landing.schema.json" }),

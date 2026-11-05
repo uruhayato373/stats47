@@ -186,6 +186,7 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 
 - 指標と年は `data-provenance.json`・`chart-data.json` から読む。回収した旧記事には無いので、指標は記事台帳の `stats47Targets` (1 指標を指すときだけ)、年は題名、図の種類は直前の見出しから読む。
 - `valueCheck`: `match` 固定コピーが今の値と一致 / `body-match` 本文の順位・値が一致 / `changed` 固定コピーと今の値が違う / `body-differs` 本文の順位・値が今の値と合わない / `no-year` 年を読めない / `year-gone` その年の値が R2 に無い / `unmapped` データの図があるのに指標に結べない / `no-data-figure` 統計の図が無い / `body-unread` 本文を読めない。本文が R2 に無い無料記事は note.com の公開 API から読み、画像は URL で持つ。同値の県の通し番号と、同じ文の別の県を拾う逆引きの不一致は数えない。
+- 照合の誤検知は本文を読んで確かめ、検査の文言のまま理由つきで `data/note/body-figure-reviews.json` に足す。本文が変わって別の文言が出ればまた挙がる。直すべき記事の上限は `.claude/config/note-figure-baseline.json` (縮小専用) で、週次の note-circulation が `--check` で見る。
 - 有料本文の文章と値を台帳へ書かない。`bodyIssueSample` は無料・有料を問わず順位の照合結果の短文だけを持つ。
 
 ## 本文画像の改善台帳

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfTargets, yearOfTitle } from '../build-note-figure-ledger.mjs';
+import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfTargets, yearOfBody, yearOfTitle } from '../build-note-figure-ledger.mjs';
 
 test('本文の画像を直前の見出しと結び、./ と外部 URL と重複を除く', () => {
   const md = '## 【コロプレス地図】分布\n![](./images/image-01.png)\n## 上位\n![a](images/image-02.png)\n![](https://x.test/a.png)\n![](images/image-01.png)';
@@ -52,4 +52,10 @@ test('note.com の本文 HTML から見出しと画像を読み、画像の順�
   const md = noteHtmlToMarkdown(html);
   assert.deepEqual(bodyImagesOf(md, { remote: true }), [{ file: 'https://assets.st-note.com/x.png', section: '【コロプレス地図】分布' }]);
   assert.match(md, /東京都は1位/);
+});
+
+test('題名に年が無い記事は、本文で最も多く書かれた、値のある年を使う', () => {
+  assert.equal(yearOfBody('2023年の値。2023年と2020年を比べた。1999年の話。', ['2020', '2023']), '2023');
+  assert.equal(yearOfBody('2020年と2023年', ['2020', '2023']), '2023');
+  assert.equal(yearOfBody('年の記載なし', ['2020']), null);
 });
