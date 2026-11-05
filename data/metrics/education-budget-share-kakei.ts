@@ -48,5 +48,5 @@ export const educationBudgetShareKakei: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
 };
