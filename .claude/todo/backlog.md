@@ -147,7 +147,7 @@ updated: 2026-11-01
 - **禁止**: 判断の前にカードを消さない。
 
 ### [STRATEGY-ISSUE-MAP-01] 事業のイシューマップ（コンテンツの4型×3収益源）を管理画面で管理し、レビューのたびに更新する
-タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:戦略]
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:戦略] [進行中]
 
 - **起点**: 2026-11-05 にオーナーと『イシューからはじめよ』の型（イシュー → 分解 → 絵コンテ → ストーリーライン）で事業戦略を分解した。図は Artifact `https://claude.ai/artifact/4v9AuVPHsSe2zYhJDSVqxu`（Version 4。オーナーだけが開ける。Claude は Artifact ツールの `action: "read"` で読める）。オーナー指示は「図はいったんこのままで、管理画面で管理し、プロジェクトを進める中で順次改善する」。
 - **図の中身（Artifact が読めないときはこれを正本にする）**:
