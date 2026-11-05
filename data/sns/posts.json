@@ -40506,6 +40506,20 @@
       "domain": "blog",
       "content_key": "manufacturing-productivity",
       "caption": "製造業が強い町は、工場が多い町ではなく、1つの工場が大きい町でした。\n人口あたり出荷額の差のうち、63%は工場の大きさ、37%は工場の数の差です。\n県で見ると、工場の数と大きさはほぼ無関係（相関-0.01）。福井・岐阜は数の県、山口・大分は大きさの県です。\nhttps://stats47.jp/blog/manufacturing-productivity?utm_source=x&utm_medium=social&utm_campaign=blog-manufacturing-productivity"
+    },
+    {
+      "id": 1196,
+      "status": "draft",
+      "approval": {
+        "state": "pending"
+      },
+      "created_at": "2026-11-05T11:39:10.991Z",
+      "updated_at": "2026-11-05T11:39:10.991Z",
+      "platform": "x",
+      "post_type": "original",
+      "domain": "blog",
+      "content_key": "vacant-housing-aging-correlation",
+      "caption": "空き家が増えたのは、ほぼ人口が減った町でした。\n差し引きで増えた空き家の97%は人口減の町です。人口が増えた町は2013年に空き家の36%を抱えていましたが、増加分では3%だけでした。\n全国1,052市区町村の比較です。\nhttps://stats47.jp/blog/vacant-housing-aging-correlation?utm_source=x&utm_medium=social&utm_campaign=blog-vacant-housing-aging-correlation"
     }
   ]
 }

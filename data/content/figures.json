@@ -42,6 +42,48 @@
           "status": "draft"
         }
       ]
+    },
+    {
+      "id": "figure:H01-vacancy-change-bars",
+      "analysis": "analysis:H01-vacancy-population",
+      "template": "grouped-bar",
+      "title": "人口の増減と空き家率の変化",
+      "scope": "municipality",
+      "metrics": [
+        {
+          "key": "vacant-housing-ratio",
+          "year": 2013
+        },
+        {
+          "key": "vacant-housing-ratio",
+          "year": 2023
+        },
+        {
+          "key": "japanese-population",
+          "year": 2010
+        },
+        {
+          "key": "japanese-population",
+          "year": 2020
+        }
+      ],
+      "destinations": [
+        {
+          "channel": "site",
+          "page": "blog:vacant-housing-aging-correlation",
+          "status": "planned"
+        },
+        {
+          "channel": "site",
+          "page": "municipality-ranking:vacant-housing-ratio",
+          "status": "planned"
+        },
+        {
+          "channel": "x",
+          "postId": 1196,
+          "status": "draft"
+        }
+      ]
     }
   ]
 }
