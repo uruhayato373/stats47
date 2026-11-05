@@ -3,45 +3,213 @@
   "title": "ブログ図の出典 manifest (app/blog/<slug>/data/<name>.source.json)",
   "description": "kind の語彙と再取得に必要なフィールドの正典は .claude/scripts/lib/chart-provenance.mjs の CHART_SOURCE_KIND_SPECS。ここは形だけを固定する。散布図の軸は generate-article-charts.ts が axes に書き戻す。",
   "type": "object",
-  "required": ["kind"],
+  "required": [
+    "kind"
+  ],
   "properties": {
     "kind": {
-      "enum": ["ranking", "metric", "estat", "scatter", "derived", "manual", "correlation", "calculated", "composite", "ranking-pair", "ranking-join", "derived-scatter", "authored", "bar", "line"]
+      "enum": [
+        "ranking",
+        "metric",
+        "estat",
+        "scatter",
+        "derived",
+        "manual",
+        "correlation",
+        "calculated",
+        "composite",
+        "ranking-pair",
+        "ranking-join",
+        "derived-scatter",
+        "authored",
+        "bar",
+        "line"
+      ]
     },
     "axes": {
       "type": "object",
       "description": "散布図の両軸。生成器が全点の照合で決めて書く (手で書かない)",
-      "required": ["x", "y"],
+      "required": [
+        "x",
+        "y"
+      ],
       "additionalProperties": false,
       "properties": {
-        "x": { "$ref": "#/definitions/axis" },
-        "y": { "$ref": "#/definitions/axis" }
+        "x": {
+          "$ref": "#/definitions/axis"
+        },
+        "y": {
+          "$ref": "#/definitions/axis"
+        }
       }
     },
-    "excludedAreas": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-    "exclusionReason": { "type": "string", "minLength": 1 },
+    "excludedAreas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "exclusionReason": {
+      "type": "string",
+      "minLength": 1
+    },
     "generatedBy": {
       "type": "string",
       "description": "作ったスクリプト。リポジトリにある物を書く (一時ファイルは作り直せない)",
-      "not": { "pattern": "^/tmp/" }
+      "not": {
+        "pattern": "^/tmp/"
+      }
+    },
+    "areaScope": {
+      "$ref": "#/definitions/areaScope"
     }
   },
   "definitions": {
     "axis": {
       "type": "object",
-      "required": ["year", "proof"],
+      "required": [
+        "year",
+        "proof"
+      ],
       "additionalProperties": false,
       "properties": {
-        "metricKey": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-        "year": { "type": "string", "pattern": "\\d{4}" },
-        "scale": { "type": "number", "exclusiveMinimum": 0 },
+        "metricKey": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "year": {
+          "type": "string",
+          "pattern": "\\d{4}"
+        },
+        "scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
         "proof": {
           "description": "values = 全点が metricKey の観測値と一致した / manifest = 計算した軸などで年を source.json とラベルから読んだ",
-          "enum": ["values", "manifest"]
+          "enum": [
+            "values",
+            "manifest"
+          ]
         }
       },
-      "if": { "properties": { "proof": { "const": "values" } } },
-      "then": { "required": ["metricKey"] }
+      "if": {
+        "properties": {
+          "proof": {
+            "const": "values"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "metricKey"
+        ]
+      }
+    },
+    "areaScope": {
+      "description": "市区町村の図が比べる地域の集合。型は apps/admin/lib/template-area-scope.ts の AreaScope",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "level"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "const": "prefecture"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "level",
+            "wardMode",
+            "within"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "const": "municipality"
+            },
+            "wardMode": {
+              "enum": [
+                "merged",
+                "split"
+              ]
+            },
+            "within": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "kind"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "nation"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "prefCode"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "prefecture"
+                    },
+                    "prefCode": {
+                      "type": "string",
+                      "pattern": "^\\d{2}$"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "level",
+            "wardMode",
+            "within"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "const": "municipality"
+            },
+            "wardMode": {
+              "const": "split"
+            },
+            "within": {
+              "type": "object",
+              "required": [
+                "kind",
+                "cityCode"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "designated-city"
+                },
+                "cityCode": {
+                  "type": "string",
+                  "pattern": "^\\d{5}$"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -51,4 +51,6 @@ if (failures.length) { console.error(`note circulation gate failed: ${failures.j
 console.log(`note circulation gate passed: ${s.total} articles`);
 NODE
 fi
+# 本文の図の台帳 (CI が土曜 04:00 に作る) から、直すべき記事を出す
+run body-figures npm run --silent note:figures -- --check
 if [ "${#failed[@]}" -gt 0 ]; then echo "落ちた検査: ${failed[*]}"; exit 1; fi

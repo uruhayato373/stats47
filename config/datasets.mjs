@@ -215,6 +215,10 @@ export const DATASETS = [
   d("note.kakei-expense-evidence-schema", "data/note/kakei-expense-evidence.schema.json", "config", "product", "data", "上の対応表の JSON Schema"),
   d("note.articles", "data/note/articles.json", "ledger", "product", "data", "note 記事の ID 台帳 (編集メタ・本文の所在とマニフェストの SHA)。本文と画像の実体は R2", { schema: "data/note/articles.schema.json" }),
   d("note.articles-schema", "data/note/articles.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
+  d("note.body-figures", "data/note/body-figures.json", "ledger", "product", "data", "note 本文の図の台帳。記事ごとの図・指標・年と今の R2 との照合 (build-note-figure-ledger.mjs の生成物。有料本文は書かない)", { schema: "data/note/body-figures.schema.json" }),
+  d("note.body-figures-schema", "data/note/body-figures.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
+  d("note.body-figure-reviews", "data/note/body-figure-reviews.json", "ledger", "product", "data", "note 本文の照合で人が読んで誤検知と確かめた主張と理由", { schema: "data/note/body-figure-reviews.schema.json" }),
+  d("note.body-figure-reviews-schema", "data/note/body-figure-reviews.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.magazines", "data/note/magazines.json", "ledger", "product", "data", "note マガジンの台帳 (記事台帳の magazine が参照するキーの正本)", { schema: "data/note/magazines.schema.json" }),
   d("note.magazines-schema", "data/note/magazines.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.paid-landing", "data/note/paid-landing/{name}.json", "config", "product", "data", "公開済み有料記事の無料部分の文言 (patch-note-paid-landing.mjs の入力)", { schema: "data/note/paid-landing.schema.json" }),
@@ -245,6 +249,19 @@ export const DATASETS = [
   d("content.external", "data/content/external.json", "state", "data", "data", "stats47 の外の公開物 (note 記事・SNS の投稿) の ID と指標・記事への関係。note のカタログと data/sns/posts.json から再生成"),
   d("content.pages", "data/content/pages/{name}.json", "state", "data", "data", "ID索引の種別・県別分割。必要なページ種別だけアプリへ読み込む", { schema: "data/content/schema/pages.schema.json" }),
   d("content.schema", "data/content/schema/{name}.schema.json", "config", "data", "data", "ページ・タグ・回遊台帳の形状契約"),
+  // 問いは分類軸ではなく、ページを結ぶ参照関係の起点 (docs/01_技術設計/03_情報設計.md「問いの台帳」)。
+  // 意味の検査 (親子・役割・導出できる関係の写し) は npm run issues:check、棚卸しは npm run issues:coverage
+  d("content.issues", "data/content/issues.json", "config", "data", "data", "記事・ページを作る起点の問いの台帳。ID は不変、小さな問いの親は ID から導出する", {
+    schema: "data/content/schema/issues.schema.json",
+    refs: [{ field: "issues[].primaryTheme", to: "content.pages", key: "pages[].id" }],
+  }),
+  d("content.issue-links", "data/content/issue-links.json", "config", "data", "data", "問いとページの関係 (答え・根拠)。導出できる関係は書かない", {
+    schema: "data/content/schema/issue-links.schema.json",
+    refs: [
+      { field: "links[].issue", to: "content.issues", key: "issues[].id" },
+      { field: "links[].page", to: "content.pages", key: "pages[].id" },
+    ],
+  }),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),
   d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "config", "data", "config", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
   d("seo.keywords", "data/seo/keywords.json", "state", "site", "data", "キーワード改善サイクルの対象キーワード"),

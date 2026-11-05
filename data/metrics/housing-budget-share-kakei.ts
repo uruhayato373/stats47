@@ -48,5 +48,5 @@ export const housingBudgetShareKakei: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
 };

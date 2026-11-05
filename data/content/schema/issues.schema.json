@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "問いの台帳。問いは分類軸ではなく、ページを結ぶ参照関係の起点 (docs/01_技術設計/03_情報設計.md)。意味の検査は .claude/scripts/issues/check-issue-graph.mjs",
+  "type": "object",
+  "required": ["version", "issues"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": 1 },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "level", "question", "unit", "answerability", "sensitive", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^issue:[A-Z][0-9]{2}(-[0-9]+)?$" },
+          "level": { "enum": ["major", "minor"] },
+          "question": { "type": "string", "minLength": 5 },
+          "unit": { "enum": ["prefecture", "municipality"] },
+          "answerability": { "enum": ["relation", "caveat", "myth"] },
+          "primaryTheme": { "type": ["string", "null"], "pattern": "^theme:" },
+          "dataNote": { "type": "string", "minLength": 1 },
+          "pitfall": { "type": "string", "minLength": 1 },
+          "queries": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+          "sensitive": { "type": "boolean" },
+          "status": { "enum": ["active", "dropped"] },
+          "dropReason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

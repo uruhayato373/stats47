@@ -1,0 +1,730 @@
+{
+  "version": 1,
+  "links": [
+    {
+      "issue": "issue:A01",
+      "page": "ranking:unmarried-ratio-male-30-34",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A01",
+      "page": "ranking:per-taxpayer-taxable-income",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A02",
+      "page": "blog:fertility-fiscal-nexus",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A02",
+      "page": "ranking:per-taxpayer-taxable-income",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A03",
+      "page": "blog:birth-death-gap-decline",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A03",
+      "page": "blog:marriage-unmarried-crisis",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A04",
+      "page": "ranking:dual-income-household-ratio",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A04",
+      "page": "ranking:total-fertility-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A05",
+      "page": "ranking:nursery-waiting-children-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A05",
+      "page": "ranking:total-fertility-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A06",
+      "page": "ranking:floor-area-per-dwelling-owner",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A06",
+      "page": "ranking:total-fertility-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A07",
+      "page": "ranking:interprefecture-net-migration-age15to24",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A08",
+      "page": "ranking:three-generation-household-members",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A09",
+      "page": "blog:divorces-per-total-population",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A09",
+      "page": "blog:marriage-divorce-okinawa",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A10",
+      "page": "blog:fertility-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A11",
+      "page": "ranking:sex-ratio-age-20-39",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:A12",
+      "page": "ranking:elderly-living-alone-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B01",
+      "page": "ranking:foreign-resident-count-per-100k",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B01",
+      "page": "ranking:criminal-recognition-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B02",
+      "page": "blog:foreign-population-growth-rate",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B02",
+      "page": "blog:foreign-resident-five-percent-municipalities",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B03",
+      "page": "ranking:foreign-resident-count-per-100k",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B04",
+      "page": "ranking:foreign-worker-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B06",
+      "page": "ranking:interprefecture-net-migration-age15to24",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B07",
+      "page": "ranking:moving-in-excess-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B08",
+      "page": "ranking:moving-in-excess-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:B09",
+      "page": "blog:day-time-population-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B09",
+      "page": "blog:population-density-urbanization",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B09",
+      "page": "blog:population-migration-tokyo-concentration",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B10",
+      "page": "ranking:total-overnight-guests-foreign",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C01",
+      "page": "ranking:criminal-recognition-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C02",
+      "page": "ranking:criminal-recognition-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C02",
+      "page": "ranking:day-time-population-ratio",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C04",
+      "page": "ranking:vacant-housing-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C05",
+      "page": "blog:police-officer-density-vs-crime-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C06",
+      "page": "ranking:traffic-accident-casualties-elderly-65plus",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C07",
+      "page": "blog:traffic-accident-deaths-regional-risk",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C07",
+      "page": "blog:safe-driving-5-features",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:C08",
+      "page": "ranking:commute-by-bicycle",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:C10",
+      "page": "ranking:child-abuse-consultation-cases",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D01",
+      "page": "blog:low-cost-low-income-prefectures",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D01",
+      "page": "blog:consumer-price-regional-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D02",
+      "page": "blog:minimum-wage-1000yen-breakthrough",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D03",
+      "page": "ranking:gender-wage-gap",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D04",
+      "page": "ranking:high-school-advancement-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D05",
+      "page": "ranking:dual-income-household-ratio",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D06",
+      "page": "ranking:gini-coefficient-disposable-income",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D07",
+      "page": "ranking:laspeyres-index-prefecture",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:D08",
+      "page": "blog:non-regular-employment-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D09",
+      "page": "blog:households-on-public-assistance-per-1000-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D10",
+      "page": "ranking:side-job-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:E01",
+      "page": "blog:academic-achievement-test-prefecture-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E02",
+      "page": "blog:tutoring-cost-university-advancement-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E03",
+      "page": "ranking:education-expenditure-ratio-pref-finance",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:E05",
+      "page": "blog:school-nonattendance-pattern",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E06",
+      "page": "blog:university-advancement-capacity",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E07",
+      "page": "ranking:elementary-school-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:E08",
+      "page": "ranking:single-mother-households",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:E10",
+      "page": "ranking:library-count-per-million",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:E10",
+      "page": "ranking:hobby-participation-rate-reading",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F01",
+      "page": "ranking:per-taxpayer-taxable-income",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F02",
+      "page": "ranking:physicians-in-medical-facilities-per-100k",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F02",
+      "page": "ranking:healthy-life-expectancy-male",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F03",
+      "page": "blog:cc-estat-05-medical-cost-choropleth",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F03",
+      "page": "blog:late-elderly-medical-expense-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F04",
+      "page": "ranking:salt-intake-male-age-adjusted",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F04",
+      "page": "ranking:deaths-cerebrovascular-disease-per-100k",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F05",
+      "page": "ranking:daily-steps-male-20to64-age-adjusted",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F06",
+      "page": "blog:suicide-rate-aging-nexus",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F07",
+      "page": "ranking:specific-health-checkup-participation-rate",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F08",
+      "page": "ranking:bmi-male-20to69-age-adjusted",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F09",
+      "page": "blog:alcohol-prefecture-map",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F10",
+      "page": "ranking:ambulance-hospital-arrival-time",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F11",
+      "page": "ranking:delivery-hospital-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:F12",
+      "page": "ranking:smoking-rate-male-age-adjusted",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:G01",
+      "page": "ranking:long-term-care-certified-persons",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:G06",
+      "page": "blog:elderly-population-care-capacity-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H01",
+      "page": "blog:vacant-housing-aging-correlation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H01",
+      "page": "blog:vacant-house-crisis",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H02",
+      "page": "blog:long-commute-telework-potential",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H03",
+      "page": "geo:population-station-access",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H04",
+      "page": "ranking:densely-inhabited-district-population-ratio",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H05",
+      "page": "geo:population-land-price",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H06",
+      "page": "ranking:owner-occupied-housing-ratio",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H07",
+      "page": "geo:population-snow-designation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:H08",
+      "page": "ranking:furusato-donation-amount-prefecture",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H08",
+      "page": "ranking:furusato-tax-deduction-municipal-prefecture",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H09",
+      "page": "ranking:large-retail-store-count-per-100k",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:H10",
+      "page": "ranking:new-housing-starts",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I01",
+      "page": "blog:local-finance-theme-overview",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I01",
+      "page": "blog:ishikawa-municipal-finance",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I02",
+      "page": "ranking:municipal-general-administration-staff",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I03",
+      "page": "ranking:municipality-count",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I04",
+      "page": "blog:governor-election-turnout-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I04",
+      "page": "blog:voter-turnout-house-single-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I05",
+      "page": "ranking:elderly-welfare-expenditure-ratio-pref-finance",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I06",
+      "page": "ranking:prefectural-assembly-female-share",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:I08",
+      "page": "blog:water-infrastructure-crisis",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I09",
+      "page": "ranking:local-allocation-tax-ratio-pref-finance",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:J01",
+      "page": "ranking:heatstroke-emergency-transports",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:J03",
+      "page": "ranking:disaster-damage-amount-per-person",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:J04",
+      "page": "geo:population-flood-risk",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J04",
+      "page": "blog:2050-population-flood-exposure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J05",
+      "page": "blog:waste-management-recycling-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J06",
+      "page": "blog:sunshine-solar-housing-correlation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J06",
+      "page": "blog:solar-panel-housing-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:J07",
+      "page": "blog:farmland-crisis-abandoned-land",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:A12",
+      "page": "blog:aging-solo-living-crisis",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:B02",
+      "page": "blog:foreign-residents-diversity-map",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F01",
+      "page": "blog:health-life-expectancy-structure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I01",
+      "page": "blog:local-government-debt-burden",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I01",
+      "page": "blog:local-tax-revenue-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F13",
+      "page": "blog:middle-school-height-east-west-puzzle",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F13",
+      "page": "blog:child-height-regional-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F13",
+      "page": "blog:prefectural-height-male-female-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01",
+      "page": "blog:chicken-consumption-quantity",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01",
+      "page": "blog:konbu-consumption-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01",
+      "page": "blog:rice-consumption-quantity-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01",
+      "page": "blog:fresh-fruit-consumption-quantity-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01",
+      "page": "blog:apple-expenditure-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01",
+      "page": "blog:banana-consumption-quantity",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02",
+      "page": "blog:noodle-consumption-prefecture-character",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02",
+      "page": "blog:fresh-udon-soba-consumption-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02",
+      "page": "blog:food-consumption-prefecture-battle",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02",
+      "page": "blog:wheat-flour-consumption-prefecture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02",
+      "page": "blog:tofu-consumption-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03",
+      "page": "blog:engel-coefficient-vs-prefectural-income",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03",
+      "page": "blog:engel-coefficient-prefecture-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03",
+      "page": "blog:household-spending-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:L01",
+      "page": "blog:childcare-friendly-prefecture-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:L02",
+      "page": "blog:livable-prefecture-composite-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:L03",
+      "page": "geo:population-public-facility-access",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M01",
+      "page": "blog:manufacturing-aichi-dominance",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M01",
+      "page": "blog:automotive-industry-transformation-map",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M01",
+      "page": "blog:manufacturing-productivity",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M01",
+      "page": "municipality-ranking:manufacturing-shipment-amount",
+      "role": "evidence"
+    },
+    {
+      "issue": "issue:M02",
+      "page": "blog:fishery-catch-aquaculture-shift",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:M02-1",
+      "page": "blog:rice-harvest-volume-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:F13-1",
+      "page": "blog:avg-height-high-school-2nd-male",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D07-1",
+      "page": "blog:high-school-teacher-salary-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D07-1",
+      "page": "blog:school-teacher-annual-income",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I08-1",
+      "page": "blog:sewerage-coverage-rate-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:I08-1",
+      "page": "blog:sewerage-water-supply-gap",
+      "role": "answers"
+    }
+  ]
+}

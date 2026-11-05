@@ -1,0 +1,124 @@
+import prefectures from '../../../packages/area/src/data/prefectures.json';
+import { buildMunicipalityEntityPolicy, resolveWardModeAreas, type WardMode } from '../../../packages/area/src/municipalities';
+import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
+import { chartValueLabels, type RankingChart } from './template-ranking-data';
+
+/**
+ * Which areas a chart compares. Grain and range are separate axes, and every value, rank and shape follows
+ * from them: 政令指定都市 are one area or their wards (WardMode), compared across the nation, one prefecture or
+ * one designated city. Comparing a city's wards is only possible with its wards split out.
+ */
+export type AreaScope =
+  | { level: 'prefecture' }
+  | { level: 'municipality'; wardMode: WardMode; within: { kind: 'nation' } }
+  | { level: 'municipality'; wardMode: WardMode; within: { kind: 'prefecture'; prefCode: string } }
+  | { level: 'municipality'; wardMode: 'split'; within: { kind: 'designated-city'; cityCode: string } };
+
+/** One observation as R2 stores it. Names and ranks are not inputs: names come from the area master, ranks from the set. */
+export interface AreaValue { areaCode: string; value: number | null }
+
+export interface AreaChartInput {
+  title: string;
+  yearLabel: string;
+  unit: string;
+  source: string;
+  note?: string;
+  presentation: MetricPresentation;
+  decimalPlaces?: number;
+  scope: AreaScope;
+  values: AreaValue[];
+}
+
+export interface AreaChart extends RankingChart {
+  scope: AreaScope;
+  /** Areas of the set with no value. They stay blank on a map and out of the ranks. */
+  missing: string[];
+}
+
+const PREFECTURE_COUNT = 47;
+const WARD_NOTE: Record<WardMode, string> = { merged: '政令指定都市は市全体', split: '政令指定都市は行政区ごと' };
+const policy = (() => {
+  let built: ReturnType<typeof buildMunicipalityEntityPolicy> | undefined;
+  return () => (built ??= buildMunicipalityEntityPolicy());
+})();
+const allCodes = (() => {
+  let built: Set<string> | undefined;
+  return () => (built ??= new Set([...policy().entities.map((entity) => entity.code), ...prefectures.map((p) => p.prefCode)]));
+})();
+
+/** Master name 「神奈川県 横浜市 鶴見区」: the prefecture is the frame's, and inside a city its name is too. */
+const municipalityLabel = (name: string, insideCity: boolean) => {
+  const parts = name.split(' ').slice(1);
+  return insideCity ? parts[parts.length - 1] : parts.join('');
+};
+
+/** The areas a scope compares, code → the name shown. The set is the only place a scope is interpreted. */
+export function areasOf(scope: AreaScope): Map<string, string> {
+  if (scope.level === 'prefecture') return new Map(prefectures.map((p) => [p.prefCode, p.prefName]));
+  const { codes, designatedCityCodes } = resolveWardModeAreas(policy(), scope.wardMode);
+  const { within } = scope;
+  if (within.kind === 'prefecture' && !prefectures.some((p) => p.prefCode === `${within.prefCode}000`))
+    throw Error(`都道府県コードが実在しない: ${within.prefCode}`);
+  if (within.kind === 'designated-city' && !designatedCityCodes.has(within.cityCode))
+    throw Error(`政令指定都市でない: ${within.cityCode}`);
+  const areas = new Map<string, string>();
+  for (const entity of policy().entities) {
+    if (!codes.has(entity.code)) continue;
+    if (within.kind === 'prefecture' && !entity.code.startsWith(within.prefCode)) continue;
+    if (within.kind === 'designated-city' && !('parentMunicipalityCode' in entity && entity.parentMunicipalityCode === within.cityCode)) continue;
+    areas.set(entity.code, municipalityLabel(entity.name, within.kind === 'designated-city'));
+  }
+  return areas;
+}
+
+/** Marks an image with its scope, so a check can refuse a municipal image that does not say which set it counted. */
+export function scopeAttributes(scope: AreaScope) {
+  if (scope.level === 'prefecture') return 'data-scope="prefecture"';
+  const { within } = scope;
+  const range = within.kind === 'nation' ? 'nation' : within.kind === 'prefecture' ? `prefecture:${within.prefCode}` : `designated-city:${within.cityCode}`;
+  return `data-scope="municipality" data-ward-mode="${scope.wardMode}" data-within="${range}"`;
+}
+
+const hasDesignatedCity = (scope: AreaScope) => {
+  if (scope.level === 'prefecture' || scope.within.kind === 'designated-city') return false;
+  const { within } = scope;
+  const { designatedCityCodes } = resolveWardModeAreas(policy(), 'merged');
+  return [...designatedCityCodes].some((code) => within.kind === 'nation' || code.startsWith(within.prefCode));
+};
+
+/**
+ * The chart a scope gives: the file holds every area, the scope picks the set, and ranks are counted inside
+ * that set. A ward's rank never mixes with the cities', and a metric without ward values cannot be split.
+ */
+export function resolveAreaChart(input: AreaChartInput): AreaChart {
+  const areas = areasOf(input.scope);
+  const unknown = input.values.filter((row) => !allCodes().has(row.areaCode)).map((row) => row.areaCode);
+  if (unknown.length) throw Error(`地域マスタに無いコード: ${[...new Set(unknown)].slice(0, 5).join(' ')}`);
+  const seen = new Set<string>();
+  const observed = input.values.filter((row): row is { areaCode: string; value: number } => {
+    if (!areas.has(row.areaCode) || row.value === null || !Number.isFinite(row.value)) return false;
+    if (seen.has(row.areaCode)) throw Error(`同じ地域の値が 2 つある: ${row.areaCode}`);
+    seen.add(row.areaCode);
+    return true;
+  });
+  if (!observed.length) throw Error('この範囲に値がありません。');
+  if (input.scope.level === 'prefecture' && observed.length !== PREFECTURE_COUNT)
+    throw Error(`47都道府県の値がそろっていません (${observed.length})。`);
+  if (input.scope.level === 'municipality' && input.scope.wardMode === 'split') {
+    const wards = observed.filter((row) => resolveWardModeAreas(policy(), 'split').codes.has(row.areaCode) && !resolveWardModeAreas(policy(), 'merged').codes.has(row.areaCode));
+    if (!wards.length || wards.every((row) => row.value === 0)) throw Error('行政区の値が集計されていない指標は分割できません。');
+  }
+  const sorted = [...observed].sort((a, b) => b.value - a.value);
+  const rows = sorted.map((row) => ({
+    rank: sorted.findIndex((other) => other.value === row.value) + 1,
+    area_code: row.areaCode, area_name: areas.get(row.areaCode)!, value: row.value,
+  }));
+  const wardNote = input.scope.level === 'municipality' && hasDesignatedCity(input.scope) ? WARD_NOTE[input.scope.wardMode] : '';
+  return {
+    title: input.title, yearLabel: input.yearLabel, source: input.source, presentation: input.presentation, rows,
+    note: [input.note, wardNote].filter(Boolean).join(' · ') || undefined,
+    scope: input.scope,
+    missing: [...areas.keys()].filter((code) => !seen.has(code)),
+    ...chartValueLabels(input.unit, rows.map((row) => row.value), input.decimalPlaces),
+  };
+}

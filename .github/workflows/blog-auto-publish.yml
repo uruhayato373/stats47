@@ -59,7 +59,8 @@ env:
 jobs:
   auto-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    # 1 本 25 秒前後かかる。40 分だと 81 本の公開で一覧の更新の前に打ち切られた (2026-11-05)
+    timeout-minutes: 120
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

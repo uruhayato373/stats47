@@ -1,0 +1,36 @@
+{
+  "kind": "calculated",
+  "yKey": "per-capita-prefectural-income-h27",
+  "year": "x:2021/y:2021",
+  "generatedBy": ".claude/scripts/blog/rebuild-scatter-data.mjs",
+  "inputs": [
+    {
+      "rankingKey": "total-production-in-the-prefecture",
+      "year": "2021",
+      "role": "numerator"
+    },
+    {
+      "rankingKey": "total-population",
+      "year": "2021",
+      "role": "denominator"
+    },
+    {
+      "rankingKey": "per-capita-prefectural-income-h27",
+      "year": "2021",
+      "role": "y"
+    }
+  ],
+  "formula": "x = total-production-in-the-prefecture (百万円) ÷ total-population (人) × 100 = 万円 (整数に丸め) / y = per-capita-prefectural-income-h27",
+  "axes": {
+    "x": {
+      "year": "2021年",
+      "proof": "manifest"
+    },
+    "y": {
+      "metricKey": "per-capita-prefectural-income-h27",
+      "year": "2021年度",
+      "proof": "values"
+    }
+  },
+  "pearsonR": 0.9122
+}

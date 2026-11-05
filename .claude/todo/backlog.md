@@ -67,9 +67,10 @@ updated: 2026-11-01
 ### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
 
+- **検出した小さな不整合 (2026-11-05)**: `data/metrics/university-capacity-index.ts` の seoTitle は京都府 238.4 だが R2 の 2024 年度は 238.3。有料記事 `d-kakei-category-dataset` の題「教育費は8.7倍違う」は単年の値で、5 年平均は 4.2 倍。P-14 の snapshot の title は note の題と異なる。`data-refresh.yml` の dispatch は `--ref` を無視して main を checkout する。`data/surveys/taxonomy.json` の blog の部分は実際の記事とずれている。
 - **記事の公開 (2026-11-05)**: 合格 81 本を背景画像つきで送り箱へ入れた (PR 1221 のマージ後・リンク先 82 指標が本番で 200 を確認)。残り: `blog:batch` の候補は kakei-chousa で尽きた。other-mushroom・laundry-detergent・rent-group は critic REVISE のまま非公開。`blog:batch` は既存の `contents/blog` の slug を対象外にするので、不合格の再挑戦は `write-blog-headless.ts --slugs` で行う。
 - **調査資料の注意 (2026-11-05)**: `docs/31_note記事原稿/kakei-research/` の背景の URL は検索結果の確認までで、原典の数値は未確認。家計調査の民営家賃が全世帯平均か借家世帯平均かは未確認。教育 5 品目は順位の変動が大きく、複数年の確認が要る。ledger の `kind` は item と group が混在し階層が二重に数えられうる。
-- **予定の 6 表 (2026-11-05)**: 分析単位 7 件 (proposed) と構成比の 9 指標 (`*-budget-share-kakei`・isActive:false) と図の生成定義を実装済み。全国の 11 件は本番の /japan の図で確認し published へ。残り: e-Stat の実値確認 (data-refresh は dispatch だと main を checkout するので main マージ後)、確認後に指標を isActive:true・分析単位を published/value-checked へ変え、`npm run estat:kakei-ledger:build` と axis-charts の再生成・テーマの章追加を行う。全国の 5 表は data-refresh で確かめられないので generate-kakei-axis-charts.ts を appId のある環境で回す。
+- **予定の 6 表 (2026-11-05)**: CI で実値を確認 (data-refresh dry_run run 41937467945 で 9 指標 pref=893、kakei-axis-charts run 41933668698 で図 7 枚)。9 指標を isActive:true、分析単位を published/value-checked、台帳の予定の表 0。残り: data-refresh で 9 指標を取り込み値が 0〜100 に収まるか確かめる、kakei-axis-charts を publish=true で回す (図の分類名の注記を除いた版)、既知キー・sitemap は sync-snapshots の sync-ranking-keys が作る。
 - **データ商品の導線 (2026-11-04 オーナー判断)**: サイトの案内は商品ページを経由して note へ出す。詳細ページは短い中継のまま残す。note の販売記事 13 本の題を見直した。家計のデータ集は新しく作らず P-14 (`prefecture-household-consumption`) を 841 指標へ更新する。
 - **全面展開の進み具合 (2026-11-04)**: 計画は `/Users/minamidaisuke/.claude/plans/smooth-stargazing-kay.md`、到達の実測は `data/surveys/kakei-coverage.json`。済み: 到達の報告 (`report-kakei-coverage.ts`)、全品目のリンク一覧 (`household-food-spending`)、未判定 131 件 (指標 124・除外 7)。県の上位品目は 11-02 に実装済み。次: 124 指標の取り込み (`data/data-refresh-requests.json` は dryRun のまま 41800174049 が取り消された。r2-write が空いてから出し直す)、予定の 6 表、調査材料、記事、note。
 - **方針の更新 (2026-11-04 オーナー判断)**: 既存の是正だけで止めず、品目も量産し、NotebookLM と Deep Research を使ってできることをすべて展開する。下の 11-01 の「新規品目の量産より」はこの判断で上書きする。
@@ -116,6 +117,18 @@ updated: 2026-11-01
 - **完了条件**: GA4 で `product_click` がキーイベントになり、`product-referrals.csv` に置き場所 × 商品 ID の行が出て、KDP の月次が範囲付きで台帳に自動で入り、EXP-013 の 6 週の数字 (表示・クリック・注文、または判定不能とその理由) が実験台帳に記録された。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [ISSUE-LEDGER-TOP10-01] 問いの台帳から、最初に記事にする10本を選ぶ
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:check] [起票:2026-11-05] [領域:商品]
+
+- **起点**: `data/content/issues.json`（大きな問い 109・小さな問い 5。県・市区町村のどこまで降りれば答えが出るか、答えの深さ relation / caveat / myth 付き）と `data/content/issue-links.json`。規約は `docs/01_技術設計/03_情報設計.md`「問いの台帳」
+- **次**: ① 需要・答えが出る・意外性・更新性の4基準で上位10本に絞る（候補: A01〜A03 所得×結婚×出生、D01 物価を引いた豊かさ、答えの記事がまだ無い問い） ② 選んだ問いの `dataNote` の統計が実在し、市区町村まで取れるかを1本ずつ当てる（台帳作成時は未確認） ③ `STRATEGY-DATA-PRODUCT-FIRST-01` と整合させる（問い記事＝入口、作り方・加工データ＝出口）
+
+### [ISSUE-COVERAGE-GROW-01] 棚卸しで「紐づかないが読まれている」ページに問いを足し、「読まれていない」ページの扱いを決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:coverage] [起票:2026-11-05] [領域:商品]
+
+- **起点**: `npm run issues:coverage`（2026-W40〜W43 の GSC と突き合わせ）。公開 4,372 ページのうち、紐づく 336・テーマ経由のみ 579・紐づかないが読まれている 1,649・紐づかず読まれていない 1,808
+- **次**: ① 読まれているのに紐づかないページの上位から、GSC の検索語を `queries` に持つ小さな問いを足す（最大のまとまりは家計調査の品目で、大きな問い K01〜K03 の下に入る） ② 上からの大きな問いを NotebookLM で白書から拾う（クラウドの環境は gh の認証が無く呼べないので Mac で） ③ 読まれていない 1,808 ページ（ranking 890・municipality-ranking 643・blog 226 ほか）を、統合・転送・検索除外・そのままのどれにするか本人が決める。自動では消さない
 
 ### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-04] [領域:商品]
@@ -873,28 +886,89 @@ updated: 2026-11-01
 - **残り**: ② 公開済みの積み上げ棒 (約 4 枚) を作り直して前後を比べ、R2 へ上げる (承認が要る)。実機・localhost での見た目は未確認。
 - **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
 
-### [CHART-TYPE-ROLLOUT-01] 読者が見る統計の図をサイトと note で共通の型にそろえ、今の R2 の値と一致させる
+### [CHART-TYPE-ROLLOUT-01] 統計の図を種類ごとに 1 つの型から作り、サイト・note・SNS で同じ型を使う
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-04] [領域:サイト]
 
-- **ゴール (2026-11-04 オーナー決定)**: 読者が見る統計の図は、サイトと note のどちらも、今の R2 の値と一致した共通の型になっている。今後は機械が崩れを止める。
-- **順番と完了の判定**:
-  1. サイトの残り: 公開中の散布図の型でない図が理由つきの例外だけ、`staleValues` が 0 (`BLOG-CHART-STALE-VALUES-01`)
-  2. note の配線: 公開 429 本の本文の図が台帳に載り、記事・図・指標・年がたどれる
-  3. note の検査: 週次で値を照らし、直すべき記事が自動で一覧になる
-  4. note の型: ランキング記事の 3 種 (地図・棒・箱ひげ) が共通の型から作られる
-  5. note の更新: 直すべき記事が検査で 0 件。更新後の公開ページを確認済み
-  6. 残りの図: 折れ線などを共通の型へ移す
-- **止まる場面**: 本文の結論が変わる記事の書き直し / note への最初の更新の見本 / 有料記事の更新方法 / main へのデプロイ。それ以外は確認なしで進める。
-- **制約**: 有料記事の添付は 1 日 10 回まで。`ins_img` は見出しの直前で画像がずれる既知の不具合がある。note の本文更新はエディタ操作で全文を差し替える。
-- **進み具合**: 2026-11-04 に散布図 183 枚を反映 (3,524 件を公開 URL で確認)。段階 1 が進行中。
+- **ゴール (2026-11-05 オーナー決定)**: 統計の図は、種類ごとに 1 つの型から作られ、サイト・note・SNS で同じ型を使う。型から外れた図は機械が止める。11-04 のゴールは型の統一・値の正しさ・記事への反映を 1 つにしていて記事の修正へ広がったので、型の統一だけに絞った。
+- **完了の判定**: ① 図の種類ごとに型が 1 つあり、管理画面で見本を確かめられる ② 各媒体の生成処理がその型を使い、旧い描画処理が残っていない ③ 新しく作る図が型から外れると検査で止まる。
+- **完了に含めないもの**: 公開中の記事の差し替え (`NOTE-FIGURE-ROLLOUT-01`)、記事の修正 (`NOTE-FIGURE-FIX-01`)。値の検査 (`audit-chart-axes.ts`・`data/note/body-figures.json`) は週次で動くものをそのまま使い、作業を足さない。
+- **今の位置 (2026-11-05 棚卸し)**: 公開中のブログの図 2,127 枚を R2 から全件数えた。型の印があるのは 1,635 枚 (棒 1,017・タイル地図 424・散布図 194)、無いのは 492 枚で、内訳は旧い棒 175・五分位の棒 59・要点カードと工程図 124・折れ線 86・旧いタイル地図 31・積み上げ 6・旧い散布図 5・レーダー 3・ヒートマップ 2・ウォーターフォール 1 (型の印の無い図は図の中身から分類した)。「棒・地図・散布図は型」は正しくなかった。散布図の検査 `audit-chart-axes.ts` は名前に scatter を含む図しか見ていない。
+- **棚卸しの表 (媒体別)**:
+  | 図の種類 | サイト | note | X・Threads | Instagram |
+  |---|---|---|---|---|
+  | 棒 | 型 1,017・旧 234 | ランキング記事は型、ほかは記事の生成と同じ | 使わない (全 47 県タイルが既定)。`quick-still --layout` は別の描画 | 使わない |
+  | タイル地図 | 型 424・旧 31 | 記事の生成と同じ | 型 (`all47-svg.ts`) | 型 (地図カルーセル・表紙・ヒント) |
+  | 地図 (実際の形) | 図なし | ランキング記事は型 | バズ地図: 地図の計算だけ共通で描画は別 | 同左 |
+  | 散布図 | 型 194・旧 5 | 記事の生成は型。`generate-note-charts/scripts/scatter.js` が別の描画 | 投稿なし | 別の描画 (`CorrelationScatterSlide`) |
+  | 表 | 図なし | 確認できず | 図なし | 別の描画 (`RankingTableSlide`) |
+  | 折れ線 | 旧 86 | 旧 (svg-builder) | 図なし | 図なし |
+  | 積み上げ | 旧 6 | 旧 (svg-builder)。`generate-kakei-charts` が別の描画 | 図なし | 図なし |
+  | 箱ひげ | 図なし | ランキング記事は型 | 図なし | 図なし |
+  | 型の台帳に無い図 | 要点カード 124 | 家計 (`render-note-household`) | 比較・地域・レシート・図鑑・順位の乗り換え | 同左 |
+- **型の確認 (2026-11-05)**: 管理画面の `/ops/image-templates/review` に型だけを明暗で並べた (`apps/admin/scripts/build-template-review.ts` が公開 R2 から `.local/` へ見本を作る。ローカル専用)。折れ線・積み上げ・市区町村の棒・タイルの基準の県・地図の市区町村版 (政令指定都市の統合と分割)・コード図 (地方別と都道府県別) の見た目はオーナーの確認待ちで、記事の生成処理 (`generate-article-charts.ts`) にはまだつないでいない。使い分けはオーナー決定: 棒の型は上位と下位のカード 1 つ、タイル地図は都道府県だけ、地図は都道府県版と市区町村版、組み合わせの全体はコード図。市区町村の図は `AreaScope` (粒度・WardMode・比べる範囲) を必ず持ち、値は地域コードで結び、順位は集合ごとに計算する (`apps/admin/lib/template-area-scope.ts`・方針は `docs/01_技術設計/03_情報設計.md` の政令指定都市の表示)。レーダー・ウォーターフォール・要点カード・SNS 専用カードは型ではないので画面から外した。扱いは未決。
+- **棚卸しの注意**: note の公開図 1,313 枚のうち 1,129 枚は台帳の画像名からは種類が判らない (`data/note/body-figures.json` の diagram)。note の列は生成処理を読んだ結果で、公開物の枚数ではない。旧い棒のうち負の値を含む図は型が対応していない (`isSignedBar`)。行数が 47 未満の図と json の無い図は、指標の R2 の値を取り直さないと型にできない。
+- **順番**:
+  1. 棚卸し: 図の種類 × 媒体 (サイト・note・X・Instagram・Threads) の表を実測で埋める。どの生成処理が型を使うかを、コードと公開物で確かめる。
+  2. 折れ線と積み上げを型へ移す。見た目は見本を見せてから全件へ流す。旧い棒・タイル地図・散布図の残りを同じ段階で扱うかはオーナーの判断を待つ。
+  3. 管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う)。使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消す。
+  4. 新しい図が型から外れたら止める検査を全媒体へ広げる。
+- **止まる場面**: 型の見本の確認 / main へのデプロイ。
+- **進み具合の記録**: 2026-11-04 に散布図 183 枚を反映。2026-11-05 に note のランキング図の型を入れた。見本はオーナーが確認した。
 
-### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]
+### [NOTE-FIGURE-ROLLOUT-01] 公開中の note 記事の図を共通の型へ差し替える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:商品]
 
-- **起点**: 2026-11-04 に `audit-chart-axes.ts` を初めて全件に掛け、棒と地図 1,780 枚のうち 5 枚が見つかった。一覧は `data/blog/chart-axes-LATEST.md`。
-- **対象**: `library-museum-cultural-capital` (library-lending-books・比が 1,500 万倍近く、別の指標の可能性) / `marriage-divorce-okinawa` (divorces-per-total-population) / `prefectural-income-gdp-ranking` (per-capita-kenmin-shotoku-h27) / `solar-panel-housing-prefecture-gap` (solar-panel-housing-rate) / `university-advancement-capacity` (university-capacity-index)。
-- **次**: 指標の値が直ったのか、図の指標の指定が誤りかを記事ごとに確かめ、本文の結論が変わるなら書き直して審査を通す (同じ年の値の変化は `refresh-article-data-years` では取り直せない)。
-- **完了条件**: `chart-axes-queue.json` の `summary.staleValues` が 0 になる。
+- **起点**: `CHART-TYPE-ROLLOUT-01` から切り離した反映の作業。型が新しくなっても公開中の note の画像は旧いままである。
+- **道具**: `update-note-body-figures.mjs` が公開版の本文の画像だけを替える (文章・カード・タグ・カバーは変えない)。有料記事は止める。
+- **制約**: 会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」)。ブラウザの経路へ付け替えるかは未決なので Mac で実行する。R2 の書き込みも Mac で行う。有料記事の添付は 1 日 10 回まで。実際の更新はまだ一度も動かしていない。
+- **次 (Mac で実行。更新はオーナー承認済み)**: `git pull` のあと、次の順に行う。
+  1. `npm run note:session:check` で口座が stats47 と確かめる。
+  2. `node .claude/scripts/note/update-note-body-figures.mjs --key a-maximum-temperature` で dry-run し、画像 3 枚だけが変わると確かめる。
+  3. 同じコマンドに `--commit` を付けて更新する。`UPDATED` と 4 項目の検査の成功を確かめる。
+  4. https://note.com/stats47/n/n91e96edf3950 をスマホ幅で開き、3 枚の表示と文字の読みやすさを確かめる。
+  5. 正本を入れ替える: `npm run note:article -- checkout a-maximum-temperature` → `node .claude/scripts/note/render-ranking-images.mjs a-maximum-temperature` → `npm run note:article -- save a-maximum-temperature`。
+  6. 問題があれば旧画像へ戻す。旧 URL は本文の 3 枚 `1785758058-E56siOjDtpzWauISgHe3knN0.png`・`1785758073-0DMrteVW2nJZR4AIU3d87aBO.png`・`1785758089-gziOwk519uFJ7KEAvBspbjh0.png` (`https://assets.st-note.com/img/` の下)。
+  7. 見え方が良ければ、残りのランキング記事へ広げる前にオーナーへ確認する。
+- **完了条件**: 型にできるランキング記事の公開版の図が新しい型になり、更新後のページを確かめた。対象と本数は最高気温の結果を見てオーナーと決める。
+
+### [NOTE-FIGURE-FIX-01] 本文の照合で見つかった note 記事の誤りを直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
+- **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
+- **次**: ① は 1 文の修正。note への最初の更新は `NOTE-FIGURE-ROLLOUT-01` の結果を見てから行う。② は e-Stat の表で確かめてから、記事か指標のどちらを直すかを決める。
+- **完了条件**: `node .claude/scripts/note/build-note-figure-ledger.mjs --check` の直すべき記事が 0 件で、`.claude/config/note-figure-baseline.json` の上限も 0 に下げた。
+
+### [BLOG-CHART-FILES-MISSING-01] 公開中のブログ本文が指す図が R2 に無い
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **証拠 (2026-11-05)**: R2 の `app/blog/all.json` の全記事を数えた。`climate-lifestyle-connection` の 4 枚 (sunshine-pacific-vs-nihonkai・precipitation-gap・snow-kerosene-scatter・clear-days-map) と `medical-access-regional-gap` の 3 枚 (physicians-ranking・bed-occupancy-ranking・summary-findings) の `data/<名前>.svg` が 404 だった。別に 6 記事 (estimated-hourly-wage-ranking・gender-wage-gap-ranking・nurse-salary-ranking・telework-income-correlation・tokyo-real-income-after-rent・truck-driver-salary-trend) は一覧にあるのに `article.md` が 404 だった。
+- **未確認**: 公開ページの表示はまだ見ていない。
+- **次**: 2 記事と 6 記事を本番のページで開き、図の欠けと 404 を確かめる。原因を調べ、図の再生成か一覧からの除外を決める。
+- **完了条件**: 一覧の全記事に `article.md` があり、本文が指す図がすべて R2 にある。
+
+### [BLOG-PUBLISH-AUDIT-KAKEI-01] 公開後の検査が家計調査の 9 指標で落ち、送り箱の掃除が止まる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **証拠 (2026-11-05)**: `blog-auto-publish.yml` の公開後の検査が、`*-budget-share-kakei` の 9 指標で `values.json` が 404 になり失敗する。記事の公開そのものは成功している。この失敗で「Remove published drafts」が skip され、公開済みの記事が `contents/blog` に残る。
+- **次**: 9 指標を有効にした `863c80cd6` の後に値が投入されたかを確かめ、投入するか有効化を外す。`contents/blog` の公開済みの原稿が消えることを確かめる。
+- **完了条件**: 公開の run が成功し、送り箱の掃除が動く。
+
+### [BLOG-METRIC-DEFINITION-GAPS-01] 記事が使う指標の定義が config に無く、本文で断定できない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **起点**: 2026-11-05 の記事の書き直しの審査で、次の定義が指標定義シートから取れなかった。
+- **対象**: `university-capacity-index` の計算式 (e-Stat の項目定義と統計局のページでは確認できなかった) / `annual-sunshine-duration` の観測地点 / `dual-income-household-ratio` の分母 / `high-school-advancement-rate` の範囲 (短大などを含むか)。
+- **同じ起点の誤り**: `data/metrics/university-capacity-index.ts` の seoTitle・seoDescription が 238.4 / 47.4 で、R2 の 2024 年度は 238.3 / 46.7。手書きの値が更新に追従していない。
+- **次**: 統計局の指標計算式の資料で確かめて `description` に書く。確かめられたら該当記事の「確認していません」の注記を外す。seo 文の数字は手書きをやめる方法を検討する。
+- **完了条件**: 4 指標の定義シートが「対象の記述なし」を返さない。
+
+### [BLOG-SCATTER-LABEL-SIDE-01] 散布図の県名が、点と重なる側しか試さず消える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **起点**: `university-advancement-capacity/capacity-vs-advancement-scatter` で labelPoints に京都府・奈良県・香川県を指定しても、片側だけ試して重なるので名前が出ず、端の県が代わりに出た。
+- **次**: `apps/admin/lib/template-relationship-scatter.ts` で反対側と上下も試す。公開中の図の見た目が変わるので、見本を確かめてから全件へ流す。
+- **完了条件**: labelPoints の県が、物理的に置けない場合を除いて図に出る。
 
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
@@ -1678,7 +1752,9 @@ updated: 2026-11-01
 - **次**: 所有者 API (`/api/v3/notes/<id>` の body。有料は所有者のセッションが要る) から本文を取り、作業コピー (draft.md + 画像) を組み立てて
   `body.store` を `r2-public` (無料) か `r2-private` (有料) に変え、`npm run note:article -- save <key>` で保存する。既存の
   `catalog/restore-from-notecom.py` の出力形式を確かめて使う。公開 API は大量取得で 403 になるので、1 回 10 本程度に区切る (`feedback_note_editor_autosave_drafts`)。
-- **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。
+- **実測 (2026-11-05)**: 73 本はすべて無料の公開記事 (A 65 本・B 8 本) で、公開 API から読める。本文の図の台帳 (`data/note/body-figures.json`) は今は読むだけで、R2 へは保存していない。
+- **再発防止 (2026-11-05 オーナー指示)**: 回収で 0 にした後、`note-only` を増やせないようにする。`articles.schema.json` の語彙から `note-only` を外し、公開済みの記事に `body.manifest` が無いと `note:catalog:validate` が止める。新規公開は `note:article save` の後でないと公開済みにならないことを、公開の経路で確かめる。
+- **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。語彙から `note-only` が消え、公開済みで本文が R2 に無い記事を検査が止める。
 
 ### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:商品]
@@ -3858,6 +3934,17 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [ISSUE-PAYING-NEED-01] イシュー: 雑学の読者で広告を伸ばすのか、統計を仕事に使う人から売上を得るのか
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **問い**: stats47 が解く問題は、好奇心ではなく、むしろ仕事の問題なのか。統計を仕事に使う人は、お金を払うほど困っているのか。
+- **仮説**: 今解いているのは「地元や話題の数字が気になる」という好奇心。仕事で払う人はまだ確かめられていない。
+- **実測 (2026-11-05 観測)**: 検索 14,733 クリック/28日、食べ物の消費量が約 31%。note 売上は累計 600 円で、売れたのは「e-Stat×Claude Code×自治体」の 300 円記事 2 件。ランキング有料記事 47 本は閲覧 4,842 で売上 0。聞き取りは 0 件 (`data/products/admin-stat-interviews.json`)。
+- **位置づけ**: どの顧客を選ぶかの上位の問い。行政の検証そのものは `ADMIN-STAT-PILOT-01` が持ち、9-25 に一時停止、期日 10-02 を超過している。
+- **次**: `ADMIN-STAT-PILOT-01` の段階 1 を再開するか、別の仕事の読者を先に確かめるかをオーナーと決める。
+- **禁止**: 答えが出る前に、行政向け商品の制作を増やさない。
+- **完了条件**: 聞き取りの結果が `admin-stat-interviews.json` にあり、どちらへ進むかをオーナーが決めて `02_収益化戦略.md` へ反映している。
 
 ### [KDP-MANUSCRIPT-PUBLIC-REPO-01] 販売中の本の原稿が公開リポジトリで無料で読める状態を決める
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-04] [領域:商品]

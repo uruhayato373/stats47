@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "問いとページの関係。answers = 問いに答える読み物、evidence = 答えの根拠のデータ。答えの記事が使う指標やテーマの写しは書かない (検査が止める)",
+  "type": "object",
+  "required": ["version", "links"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": 1 },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["issue", "page", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "issue": { "type": "string", "pattern": "^issue:[A-Z][0-9]{2}(-[0-9]+)?$" },
+          "page": { "type": "string", "pattern": "^[a-z][a-z-]*:.+" },
+          "role": { "enum": ["answers", "evidence"] }
+        }
+      }
+    }
+  }
+}

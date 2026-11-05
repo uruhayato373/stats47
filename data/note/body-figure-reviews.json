@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "metricOverrides": {
+    "recovered-n0e8fd0068d4e": {
+      "rankingKey": "maternal-health-guidance-per-100-births",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n15ee88b5169d": {
+      "rankingKey": "national-health-insurance-medical-expense-per-person",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n1e63abcfba72": {
+      "rankingKey": "media-avg-time-unemployed-male",
+      "year": "2021",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n218588ef2f67": {
+      "rankingKey": "special-law-criminal-arrest-count-per-population",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n24b5000d587f": {
+      "rankingKey": "media-avg-time-unemployed-female",
+      "year": "2021",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n2b4298e9ac07": {
+      "rankingKey": "hobby-leisure-avg-time-unemployed-male",
+      "year": "2021",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n391d3ef70d29": {
+      "rankingKey": "police-officer-count-per-population",
+      "year": "2023",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n4dae901ea3e8": {
+      "rankingKey": "avg-savings-rate-worker-households",
+      "year": "2023",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n99f53e7a1f33": {
+      "rankingKey": "annual-emergency-dispatches-per-1000",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-ndc600ddb7c44": {
+      "rankingKey": "room-aircon-ownership-multi-person-households-per-1000",
+      "year": "2014",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n99561600d4fe": {
+      "rankingKey": "hobby-leisure-avg-time-unemployed-female",
+      "year": "2021",
+      "evidence": "題名の宮城県 1 位と 1.9 倍が 2021 年の値と一致する (2026-11-05)"
+    },
+    "recovered-n3f65c01be9a8": {
+      "rankingKey": "general-dust-emission-facility-count",
+      "evidence": "題名の主題から指標を決めた。年は本文から読む (2026-11-05)",
+      "year": "2022"
+    },
+    "recovered-n5158c5766a07": {
+      "rankingKey": "current-life-insurance-balance-ratio-multi-person-households",
+      "evidence": "題名の主題から指標を決めた。年は本文から読む (2026-11-05)"
+    },
+    "recovered-nfe69996fb5c9": {
+      "rankingKey": "utilities-expenditure-ratio-multi-person-households",
+      "evidence": "題名の主題から指標を決めた。年は本文から読む (2026-11-05)"
+    }
+  },
+  "reviews": {
+    "a-convenience-store-sales": [
+      {
+        "issue": "VALUE_MISMATCH (要確認): 本文「奈良...2,540.3万円」 が data と 300.2倍 乖離 → data: convenience-store-sales=7627百万円",
+        "reason": "図の固定コピーは今の値と一致している。本文の金額は全国平均との差などの派生額で、県の値ではない",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "a-minimum-wage-by-region": [
+      {
+        "issue": "VALUE_MISMATCH (要確認): 本文「沖縄...953円」 が data と 1.0倍 乖離 → data: minimum-wage-by-region=952円",
+        "reason": "953円は九州・沖縄の地域中央値で、沖縄県の値ではない",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "a-new-graduate-starting-salary-university-female": [
+      {
+        "issue": "VALUE_MISMATCH (要確認): 本文「沖縄...190.25千円」 が data と 1.1倍 乖離 → data: new-graduate-starting-salary-university-female=175.5千円",
+        "reason": "190.25千円は九州・沖縄の地域中央値で、沖縄県の値 175.5 は本文でも正しい",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "a-new-graduate-starting-salary-university-male": [
+      {
+        "issue": "VALUE_MISMATCH (要確認): 本文「沖縄...194.25千円」 が data と 1.1倍 乖離 → data: new-graduate-starting-salary-university-male=174.7千円",
+        "reason": "194.25千円は九州・沖縄の地域中央値で、沖縄県の値 174.7 は本文でも正しい",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "a-overseas-travel-annual-participation-rate-15plus": [
+      {
+        "issue": "RANK_MISMATCH: 本文「秋田...45位」 → data: overseas-travel-annual-participation-rate-15plus=47位",
+        "reason": "「岩手県と秋田県が45位・47位」を 2 県まとめて読んだ誤読。秋田県は 47 位で正しい",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "d-kakei-spending-personality": [
+      {
+        "issue": "RANK_MISMATCH: 本文「山形...1位」 → data: food-expenditure-ratio-multi-person-households=20位",
+        "reason": "品目ごとの 1 位を並べた記事で、台帳の 1 指標の順位とは別の指標",
+        "reviewedAt": "2026-11-05"
+      },
+      {
+        "issue": "RANK_MISMATCH: 本文「東京...1位」 → data: food-expenditure-ratio-multi-person-households=15位",
+        "reason": "品目ごとの 1 位を並べた記事で、台帳の 1 指標の順位とは別の指標",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n04d95ae14bc1": [
+      {
+        "issue": "RANK_MISMATCH: 本文「愛知...2位」 → data: real-public-debt-service-ratio=8位",
+        "reason": "「全国2位」は愛知県の財政力指数の順位で、この指標の順位ではない",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n28943c36410a": [
+      {
+        "issue": "VALUE_MISMATCH (要確認): 本文「青森...25％」 が data と 1.1倍 乖離 → data: hobby-participation-rate-reading=22.7％",
+        "reason": "「25％前後」は東北の他県の話で、青森県の値 22.7 は本文でも正しい",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n523b6fbeabdf": [
+      {
+        "issue": "RANK_MISMATCH: 本文「神奈川...41位」 → data: sports-participation-rate-baseball=4位",
+        "reason": "「栃木県は41位」を神奈川県の順位と誤読した",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n578b6e871067": [
+      {
+        "issue": "RANK_MISMATCH: 本文「青森...44位」 → data: study-participation-rate-business=47位",
+        "reason": "「北東北3県は44位以下」で、青森県の 47 位と合う",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n827191af8c1c": [
+      {
+        "issue": "RANK_MISMATCH: 本文「東京...1位」 → data: overseas-travel-annual-participation-rate-10plus=9位",
+        "reason": "東京都の 1 位は 2001 年版の話で、2021 年の順位ではない",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n8df3cf170cf4": [
+      {
+        "issue": "RANK_MISMATCH: 本文「青森...40位」 → data: sports-participation-rate-softball=47位",
+        "reason": "「いずれも40位台」で、青森県の 47 位と合う",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-nbf1373427ca3": [
+      {
+        "issue": "RANK_MISMATCH: 本文「宮城...38位」 → data: study-participation-rate-computer=10位",
+        "reason": "「38位以下」は宮城県以外の 5 県の話",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-ncaddeaf3e2ff": [
+      {
+        "issue": "RANK_MISMATCH: 本文「宮崎...1位」 → data: sports-participation-rate-table-tennis=46位",
+        "reason": "「全国1位」はバレーボールの順位で、卓球は本文でも 46 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-ne62fa955bcff": [
+      {
+        "issue": "RANK_MISMATCH: 本文「埼玉...1位」 → data: travel-leisure-annual-participation-rate-10plus=10位",
+        "reason": "埼玉県の 1 位は 15 歳以上の別の指標の話",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-nf0c533293f5b": [
+      {
+        "issue": "RANK_MISMATCH: 本文「神奈川...3位」 → data: hobby-participation-rate-classical-music=2位",
+        "reason": "神奈川県は本文でも 2 位。「福井県が3位」を誤読した",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-nf0fc2a7eb326": [
+      {
+        "issue": "RANK_MISMATCH: 本文「東京...1位」 → data: study-participation-rate-home-economics=2位",
+        "reason": "東京都の順位は 2 位で本文も合う。京都府の 1 位の文を誤読した",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-nf962c6702b93": [
+      {
+        "issue": "VALUE_MISMATCH (要確認): 本文「高知...2,309時間」 が data と 1.0倍 乖離 → data: annual-sunshine-duration=2249時間",
+        "reason": "2,309時間は 2024 年の関連ランキングの紹介文で、記事の 2023 年の値ではない",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-nfa4057b9b8de": [
+      {
+        "issue": "RANK_MISMATCH: 本文「京都...1位」 → data: hobby-participation-rate-tea-ceremony=4位",
+        "reason": "京都府は本文でも 5 位の扱い。同率 1 位は富山・奈良・広島で題名と本文に矛盾は無い",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-nfbdfd99fee1b": [
+      {
+        "issue": "RANK_MISMATCH: 本文「沖縄...41位」 → data: hobby-participation-rate-home-movie=24位",
+        "reason": "41位は映画館での鑑賞の順位で、この指標は本文でも 24 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n15ee88b5169d": [
+      {
+        "issue": "RANK_MISMATCH: 本文「東京...45位」 → data: national-health-insurance-medical-expense-per-person=46位",
+        "reason": "「46位の東京都や45位の埼玉県」で、東京都は本文でも 46 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n5f183fcf5b97": [
+      {
+        "issue": "RANK_MISMATCH: 本文「大阪...1位」 → data: future-burden-ratio=38位",
+        "reason": "「経常収支1位」は別の指標の順位で、この指標は本文でも 38 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-ne82a6c83ed45": [
+      {
+        "issue": "RANK_MISMATCH: 本文「大阪...5位」 → data: local-debt-current-ratio=41位",
+        "reason": "「財政力5位」は別の指標の順位で、この指標は本文でも 41 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ]
+  }
+}

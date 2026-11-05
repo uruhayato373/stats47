@@ -15,6 +15,19 @@ const TITLE_Y = 120;
 const META_Y = 184;
 const NOTE_Y = 230;
 
+/** Rough drawn width of a label: full width for Japanese, about 0.58 for Latin and digits. */
+export const textWidth = (text: string, size: number) => [...text].reduce((sum, c) => sum + (c.charCodeAt(0) < 0x2e80 ? size * 0.58 : size), 0);
+const TITLE_MIN_SIZE = 36;
+/** The largest title size that fits the frame, down to the smallest size still read as a title. */
+export function fitTitleSize(title: string, largest = 72) {
+  const width = SAMPLE_FRAME.right - SAMPLE_FRAME.left;
+  return Math.max(TITLE_MIN_SIZE, Math.min(largest, Math.floor(largest * width / textWidth(title, largest))));
+}
+
+const LINE_MIN_SIZE = 24;
+/** A condition line's size: its usual size, smaller only when the line would run off the frame. */
+const fitLine = (line: string, size: number) => Math.max(LINE_MIN_SIZE, Math.min(size, Math.floor(size * (SAMPLE_FRAME.right - SAMPLE_FRAME.left) / textWidth(line, size))));
+
 /** The first y the chart body may use, below the header lines actually drawn. */
 export const sampleBodyTop = (hasNote: boolean) => (hasNote ? 272 : 226);
 
@@ -27,9 +40,9 @@ export function sampleFrame(options: {
     <rect width="${SAMPLE_FRAME.width}" height="${SAMPLE_FRAME.height}" fill="${theme.paper}"/>
     <g font-family="${FONT}" fill="${theme.ink}">
       <text x="${SAMPLE_FRAME.left}" y="${TITLE_Y}" font-size="${titleSize}" font-weight="700">${escapeXml(title)}</text>
-      <text x="${SAMPLE_FRAME.left}" y="${META_Y}" font-size="32" fill="${theme.muted}">${escapeXml(meta)}</text>
-      ${note ? `<text x="${SAMPLE_FRAME.left}" y="${NOTE_Y}" font-size="28" fill="${theme.muted}">${escapeXml(note)}</text>` : ''}
+      <text x="${SAMPLE_FRAME.left}" y="${META_Y}" font-size="${fitLine(meta, 32)}" fill="${theme.muted}">${escapeXml(meta)}</text>
+      ${note ? `<text x="${SAMPLE_FRAME.left}" y="${NOTE_Y}" font-size="${fitLine(note, 28)}" fill="${theme.muted}">${escapeXml(note)}</text>` : ''}
       ${body}
-      <text x="${SAMPLE_FRAME.left}" y="1310" font-size="26" fill="${theme.muted}">出典：${escapeXml(source)}</text>
+      ${source ? `<text x="${SAMPLE_FRAME.left}" y="1310" font-size="26" fill="${theme.muted}">出典：${escapeXml(source)}</text>` : ''}
     </g></svg>`;
 }

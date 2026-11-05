@@ -48,5 +48,5 @@ export const clothingFootwearBudgetShareKakei: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
 };

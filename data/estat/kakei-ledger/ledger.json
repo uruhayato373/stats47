@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-04T22:23:21.647Z",
+ "generatedAt": "2026-11-04T23:59:24.218Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-03T00:59:30.102Z",
@@ -14,8 +14,7 @@
   "tablesWithMeta": 126,
   "tablesByStatus": {
    "excluded": 106,
-   "planned": 6,
-   "adopted": 14
+   "adopted": 20
   },
   "tablesByCycle": {
    "月次": 18,
@@ -177,11 +176,21 @@
      "count": 41
     }
    ],
-   "metrics": [],
+   "metrics": [
+    "clothing-footwear-budget-share-kakei",
+    "culture-recreation-budget-share-kakei",
+    "education-budget-share-kakei",
+    "furniture-household-goods-budget-share-kakei",
+    "healthcare-budget-share-kakei",
+    "housing-budget-share-kakei",
+    "other-consumption-budget-share-kakei",
+    "transport-communication-budget-share-kakei",
+    "utilities-budget-share-kakei"
+   ],
    "analyses": [
     "budget-share-city"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {
@@ -916,7 +925,7 @@
     "consumption-housing-tenure",
     "housing-cost-housing-tenure"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {
@@ -1361,7 +1370,7 @@
    "analyses": [
     "food-single-age-sex"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {
@@ -5740,7 +5749,7 @@
    "analyses": [
     "beer-monthly-spending"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {
@@ -5789,7 +5798,7 @@
    "analyses": [
     "beer-monthly-quantity"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {
@@ -7036,7 +7045,7 @@
    "analyses": [
     "item-quantity-age"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {

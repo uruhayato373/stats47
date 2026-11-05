@@ -177,7 +177,7 @@ export function findUnsupportedNumbers(spec, bodyText) {
   return [...missing];
 }
 
-async function uploadImage(ctx, filePath) {
+export async function uploadImage(ctx, filePath) {
   const buffer = readFileSync(filePath);
   const { width, height } = pngSize(buffer);
   const name = basename(filePath);
@@ -196,7 +196,7 @@ async function uploadImage(ctx, filePath) {
   return { uploadedUrl: data.url, width, height };
 }
 
-async function fetchOwnerNote(ctx, noteKey, query = "") {
+export async function fetchOwnerNote(ctx, noteKey, query = "") {
   const r = await ctx.request.get(`https://note.com/api/v3/notes/${noteKey}?${query}ts=${Date.now()}`, { headers: { "User-Agent": UA } });
   if (r.status() !== 200) throw new Error(`note API ${r.status()}`);
   const data = (await r.json())?.data;
@@ -217,6 +217,70 @@ function loadSpec(key) {
 }
 function saveSpec(path, spec) {
   writeFileSync(path, `${JSON.stringify(spec, null, 2)}\n`, "utf8");
+}
+
+/**
+ * エディタを開いて「公開に進む」→「更新する」を押し、公開 PUT の本文 / separator だけを差し替える。
+ * 価格とタグは公開版から変わっていなければ送らない (変わっていたら止める)。無料記事は有料エリアの手順を飛ばす。
+ */
+export async function publishEditedBody(ctx, noteKey, published, { freeBody, payBody, separator }) {
+  const page = await ctx.newPage();
+  const state = { status: null };
+  try {
+    await page.route("**/api/v1/text_notes/**", async (route) => {
+      const request = route.request();
+      if (request.method() !== "PUT") { await route.continue(); return; }
+      try {
+        const payload = request.postDataJSON();
+        if (Number(payload.price || 0) !== Number(published.price || 0)) throw new Error("price changed before update");
+        if (!Array.isArray(payload.hashtags) || payload.hashtags.length !== (published.hashtag_notes || []).length) {
+          throw new Error(`hashtags changed before update (${payload.hashtags?.length})`);
+        }
+        payload.free_body = freeBody;
+        payload.pay_body = payBody;
+        payload.separator = separator;
+        state.sent = { freeLength: freeBody.length, payLength: payBody?.length ?? 0, separator, hashtags: payload.hashtags.length };
+        await route.continue({ postData: JSON.stringify(payload), headers: { ...request.headers(), "content-type": "application/json" } });
+      } catch (error) {
+        state.guardError = error.message;
+        await route.fulfill({ status: 409, contentType: "application/json", body: '{"error":"blocked by landing guard"}' });
+      }
+    });
+    page.on("response", (response) => {
+      const request = response.request();
+      if (request.method() === "PUT" && request.url().includes("/api/v1/text_notes/")) state.status = response.status();
+    });
+    await page.goto(`https://editor.note.com/notes/${noteKey}/edit?draft_reedit=true`, { waitUntil: "domcontentloaded", timeout: 30_000 });
+    await page.waitForTimeout(2_800);
+    if (await page.locator('[contenteditable="true"][role="textbox"]').count() !== 1) throw new Error("記事編集画面を確認できません");
+    await page.getByRole("button", { name: "公開に進む" }).click();
+    await page.locator('[placeholder="ハッシュタグを追加する"]').waitFor({ state: "visible", timeout: 15_000 });
+    if (Number(published.price || 0) > 0) {
+    const areaButton = page.getByRole("button", { name: "有料エリア設定", exact: true });
+    if (await areaButton.count() !== 1) throw new Error("有料エリア設定ボタンを確認できません (有料設定が外れている?)");
+    // 下書きに有料ラインが無い (separator null) と「更新する」が出ない。UI 上はどこかにラインを置けばよく、
+    // 実際の境界は PUT payload の separator / free_body / pay_body で決める (2026-09-20 実測: 中断 run の下書きで再現)。
+    await areaButton.click();
+    await page.waitForTimeout(1_500);
+    const pressed = page.locator("#paywall-line[aria-pressed='true']");
+    if (await pressed.count() === 0) {
+      const lineButtons = page.getByRole("button", { name: "ラインをこの場所に変更", exact: true });
+      if (await lineButtons.count() === 0) throw new Error("有料ラインの候補ボタンが見つかりません");
+      await lineButtons.first().click();
+      await page.waitForTimeout(1_000);
+      if (await page.locator("#paywall-line[aria-pressed='true']").count() === 0) throw new Error("有料ラインを置けませんでした");
+    }
+    }
+    const updateButton = page.getByRole("button", { name: "更新する", exact: true });
+    await updateButton.first().waitFor({ state: "visible", timeout: 15_000 });
+    await updateButton.first().click();
+    for (let attempt = 0; attempt < 20 && !Number.isInteger(state.status); attempt += 1) await page.waitForTimeout(500);
+    if (!Number.isInteger(state.status)) throw new Error(`更新APIが発火しません: ${JSON.stringify(state)}`);
+    if (state.status < 200 || state.status >= 300) throw new Error(state.guardError || `更新APIが失敗: ${JSON.stringify(state)}`);
+  } finally {
+    await page.close().catch(() => {});
+  }
+  return state;
 }
 
 async function processArticle(ctx, article, options) {
@@ -278,61 +342,7 @@ async function processArticle(ctx, article, options) {
     registered = native.registered;
   } finally { await apiPage.close(); }
 
-  // editor を開いて「公開に進む」→ 更新する。PUT を横取りして本文 / separator だけ差し替える。
-  const page = await ctx.newPage();
-  const state = { status: null };
-  try {
-    await page.route("**/api/v1/text_notes/**", async (route) => {
-      const request = route.request();
-      if (request.method() !== "PUT") { await route.continue(); return; }
-      try {
-        const payload = request.postDataJSON();
-        if (Number(payload.price || 0) !== Number(published.price || 0)) throw new Error("price changed before update");
-        if (!Array.isArray(payload.hashtags) || payload.hashtags.length !== (published.hashtag_notes || []).length) {
-          throw new Error(`hashtags changed before update (${payload.hashtags?.length})`);
-        }
-        payload.free_body = composed.html;
-        payload.pay_body = pay;
-        payload.separator = newSeparator;
-        state.sent = { freeLength: composed.html.length, payLength: pay.length, separator: newSeparator, hashtags: payload.hashtags.length };
-        await route.continue({ postData: JSON.stringify(payload), headers: { ...request.headers(), "content-type": "application/json" } });
-      } catch (error) {
-        state.guardError = error.message;
-        await route.fulfill({ status: 409, contentType: "application/json", body: '{"error":"blocked by landing guard"}' });
-      }
-    });
-    page.on("response", (response) => {
-      const request = response.request();
-      if (request.method() === "PUT" && request.url().includes("/api/v1/text_notes/")) state.status = response.status();
-    });
-    await page.goto(`https://editor.note.com/notes/${noteKey}/edit?draft_reedit=true`, { waitUntil: "domcontentloaded", timeout: 30_000 });
-    await page.waitForTimeout(2_800);
-    if (await page.locator('[contenteditable="true"][role="textbox"]').count() !== 1) throw new Error("記事編集画面を確認できません");
-    await page.getByRole("button", { name: "公開に進む" }).click();
-    await page.locator('[placeholder="ハッシュタグを追加する"]').waitFor({ state: "visible", timeout: 15_000 });
-    const areaButton = page.getByRole("button", { name: "有料エリア設定", exact: true });
-    if (await areaButton.count() !== 1) throw new Error("有料エリア設定ボタンを確認できません (有料設定が外れている?)");
-    // 下書きに有料ラインが無い (separator null) と「更新する」が出ない。UI 上はどこかにラインを置けばよく、
-    // 実際の境界は PUT payload の separator / free_body / pay_body で決める (2026-09-20 実測: 中断 run の下書きで再現)。
-    await areaButton.click();
-    await page.waitForTimeout(1_500);
-    const pressed = page.locator("#paywall-line[aria-pressed='true']");
-    if (await pressed.count() === 0) {
-      const lineButtons = page.getByRole("button", { name: "ラインをこの場所に変更", exact: true });
-      if (await lineButtons.count() === 0) throw new Error("有料ラインの候補ボタンが見つかりません");
-      await lineButtons.first().click();
-      await page.waitForTimeout(1_000);
-      if (await page.locator("#paywall-line[aria-pressed='true']").count() === 0) throw new Error("有料ラインを置けませんでした");
-    }
-    const updateButton = page.getByRole("button", { name: "更新する", exact: true });
-    await updateButton.first().waitFor({ state: "visible", timeout: 15_000 });
-    await updateButton.first().click();
-    for (let attempt = 0; attempt < 20 && !Number.isInteger(state.status); attempt += 1) await page.waitForTimeout(500);
-    if (!Number.isInteger(state.status)) throw new Error(`更新APIが発火しません: ${JSON.stringify(state)}`);
-    if (state.status < 200 || state.status >= 300) throw new Error(state.guardError || `更新APIが失敗: ${JSON.stringify(state)}`);
-  } finally {
-    await page.close().catch(() => {});
-  }
+  const state = await publishEditedBody(ctx, noteKey, published, { freeBody: composed.html, payBody: pay, separator: newSeparator });
 
   // live 検証: 所有者 API (全文) と公開 API (無料部分) の両方
   let live; let publicAfter;

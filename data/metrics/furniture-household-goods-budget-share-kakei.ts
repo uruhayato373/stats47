@@ -48,5 +48,5 @@ export const furnitureHouseholdGoodsBudgetShareKakei: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
 };

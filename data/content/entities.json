@@ -1024,6 +1024,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:clothing-footwear-budget-share-kakei",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:cod-pollution-load",
       "to": "theme:environmental-quality",
       "relation": "contains"
@@ -1275,6 +1280,11 @@
     },
     {
       "from": "ranking:cultural-facility-admission-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:culture-recreation-budget-share-kakei",
       "to": "theme:household-food-spending",
       "relation": "contains"
     },
@@ -1551,6 +1561,11 @@
     {
       "from": "ranking:earthquake-retrofit-housing",
       "to": "theme:earthquake-exposure",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:education-budget-share-kakei",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -2089,6 +2104,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:furniture-household-goods-budget-share-kakei",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:furusato-donation-amount-prefecture",
       "to": "theme:local-finance",
       "relation": "contains"
@@ -2281,6 +2301,11 @@
     {
       "from": "ranking:health-checkup-recipients",
       "to": "theme:health-checkups",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:healthcare-budget-share-kakei",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -2616,6 +2641,11 @@
     {
       "from": "ranking:housework-avg-time-male",
       "to": "theme:gender-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:housing-budget-share-kakei",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -3670,6 +3700,11 @@
     },
     {
       "from": "ranking:other-citrus-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:other-consumption-budget-share-kakei",
       "to": "theme:household-food-spending",
       "relation": "contains"
     },
@@ -5154,6 +5189,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:transport-communication-budget-share-kakei",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:travel-participation-rate-day-trip",
       "to": "theme:tourism",
       "relation": "contains"
@@ -5271,6 +5311,11 @@
     {
       "from": "ranking:urbanization-control-area-ratio",
       "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:utilities-budget-share-kakei",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {

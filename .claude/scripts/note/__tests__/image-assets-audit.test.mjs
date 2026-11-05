@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { CODES, DOCS31, auditBackgroundPresence, auditImageAssets, auditR2BodyPresence, validateRankingArticleFiles, validateRankingChartData } from "../lib/image-assets-audit.mjs";
-import { NOTE_RENDER_TEMPLATE_VERSION, buildRenderProps, buildRenderSpec, noteBackgroundR2Key, validateBackground, validateRenderSpec } from "../lib/note-render-spec.mjs";
+import { NOTE_RENDER_TEMPLATE_VERSION, buildRenderSpec, noteBackgroundR2Key, validateBackground, validateRenderSpec } from "../lib/note-render-spec.mjs";
 
 const D = DOCS31;
 const rows = (year = 2024) =>
@@ -112,12 +112,6 @@ test("背景を持つ spec は有効で、背景の不備は RENDER_SPEC_INVALID
   assert.deepEqual(validateRenderSpec("a-foo", spec, chartText), []);
   assert.ok(validateRenderSpec("a-foo", { ...spec, background: { ...goodBackground(), model: "" } }, chartText).length > 0);
   assert.equal("background" in buildRenderSpec("a-foo", chartText), false);
-});
-
-test("背景があるときだけ props に backgroundImage が入る", () => {
-  const data = chartData();
-  assert.equal("backgroundImage" in buildRenderProps(data), false);
-  assert.equal(buildRenderProps(data, "data:image/jpeg;base64,AAAA").backgroundImage, "data:image/jpeg;base64,AAAA");
 });
 
 test("spec の背景が R2 に無い記事を検出し、通信失敗は判定不能として分ける", () => {

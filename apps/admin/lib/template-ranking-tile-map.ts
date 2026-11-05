@@ -20,6 +20,6 @@ export function renderTileMapChart(chart: RankingChart, theme: ChartTheme = LIGH
   if (!scale) throw Error('タイルマップの配色を解決できません。');
   return renderAll47TileSvg(
     rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value })),
-    { title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, formatValue: chart.formatValue, theme }
+    { title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, formatValue: chart.formatValue, theme, baseAreaCode: chart.baseAreaCode }
   );
 }
