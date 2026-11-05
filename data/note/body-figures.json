@@ -4,12 +4,14 @@
     "articles": 429,
     "figures": 1313,
     "byValueCheck": {
-      "no-data-figure": 275,
+      "no-data-figure": 251,
+      "unmapped": 1,
       "match": 39,
-      "body-match": 96,
-      "body-differs": 2,
+      "body-match": 116,
+      "body-differs": 3,
       "no-year": 1,
-      "product-sample": 16
+      "product-sample": 16,
+      "year-gone": 2
     }
   },
   "articles": [
@@ -532,6 +534,7 @@
       "noteUrl": "https://note.com/stats47/n/nce1681932f40",
       "isPaid": true,
       "store": "r2-private",
+      "rankingKey": "total-population",
       "figures": [
         {
           "file": "images/flow-1-chart-pipeline.svg",
@@ -878,10 +881,10 @@
         },
         {
           "file": "images/infographic-1-map-time-comparison.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "unmapped"
     },
     {
       "key": "16-subsidy-doc-consistency",
@@ -6634,10 +6637,12 @@
       "noteUrl": "https://note.com/stats47/n/n0e8fd0068d4e",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "maternal-health-guidance-per-100-births",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6649,10 +6654,10 @@
         },
         {
           "file": "images/image-04.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n144d350fc14e",
@@ -6703,10 +6708,12 @@
       "noteUrl": "https://note.com/stats47/n/n15ee88b5169d",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "national-health-insurance-medical-expense-per-person",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6722,10 +6729,10 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n1649910097fb",
@@ -6759,10 +6766,12 @@
       "noteUrl": "https://note.com/stats47/n/n16950238dfd8",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "fiscal-strength-index-prefecture",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6773,17 +6782,19 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n1b943c7d414d",
       "noteUrl": "https://note.com/stats47/n/n1b943c7d414d",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "pharmacy-count-per-100k",
+      "year": "2023",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6798,17 +6809,19 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n1e63abcfba72",
       "noteUrl": "https://note.com/stats47/n/n1e63abcfba72",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "media-avg-time-unemployed-male",
+      "year": "2021",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6820,20 +6833,22 @@
         },
         {
           "file": "images/image-04.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n218588ef2f67",
       "noteUrl": "https://note.com/stats47/n/n218588ef2f67",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "special-law-criminal-arrest-count-per-population",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6849,20 +6864,22 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n21cb13582fe6",
       "noteUrl": "https://note.com/stats47/n/n21cb13582fe6",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "apple-consumption-expenditure",
+      "year": "2023",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6877,17 +6894,19 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n24b5000d587f",
       "noteUrl": "https://note.com/stats47/n/n24b5000d587f",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "media-avg-time-unemployed-female",
+      "year": "2021",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -6899,10 +6918,10 @@
         },
         {
           "file": "images/image-04.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n250b7aab145f",
@@ -7044,10 +7063,12 @@
       "noteUrl": "https://note.com/stats47/n/n2b4298e9ac07",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "hobby-leisure-avg-time-unemployed-male",
+      "year": "2021",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7063,10 +7084,10 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n361a963fb079",
@@ -7148,10 +7169,12 @@
       "noteUrl": "https://note.com/stats47/n/n391d3ef70d29",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "police-officer-count-per-population",
+      "year": "2023",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7167,10 +7190,10 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n3a4efa70c02a",
@@ -7279,10 +7302,12 @@
       "noteUrl": "https://note.com/stats47/n/n3f65c01be9a8",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "general-dust-emission-facility-count",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7298,10 +7323,10 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "year-gone"
     },
     {
       "key": "recovered-n46a8eb03072b",
@@ -7378,10 +7403,12 @@
       "noteUrl": "https://note.com/stats47/n/n4dae901ea3e8",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "avg-savings-rate-worker-households",
+      "year": "2023",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7393,10 +7420,10 @@
         },
         {
           "file": "images/image-04.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n4e1e67f70686",
@@ -7430,10 +7457,12 @@
       "noteUrl": "https://note.com/stats47/n/n5158c5766a07",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "current-life-insurance-balance-ratio-multi-person-households",
+      "year": "2019",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7449,10 +7478,14 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-differs",
+      "bodyIssues": 1,
+      "bodyIssueSample": [
+        "TITLE_EXTREME_MISMATCH: 題名「東京…最下位」 → data の最下位は 愛知"
+      ]
     },
     {
       "key": "recovered-n51f946877627",
@@ -7540,10 +7573,12 @@
       "noteUrl": "https://note.com/stats47/n/n567416b632f6",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "real-balance-ratio",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7558,7 +7593,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n578b6e871067",
@@ -7592,6 +7627,7 @@
       "noteUrl": "https://note.com/stats47/n/n581a1409b2c9",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "university-count-per-100k",
       "figures": [],
       "valueCheck": "no-data-figure"
     },
@@ -7731,10 +7767,12 @@
       "noteUrl": "https://note.com/stats47/n/n5f183fcf5b97",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "future-burden-ratio",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -7749,7 +7787,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n6305d990f2d2",
@@ -7839,6 +7877,7 @@
       "noteUrl": "https://note.com/stats47/n/n6f8a367906d1",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "maximum-temperature",
       "figures": [],
       "valueCheck": "no-data-figure"
     },
@@ -8012,21 +8051,23 @@
       "noteUrl": "https://note.com/stats47/n/n863f429319ca",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "maximum-temperature",
+      "year": "2024",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-03.png",
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n88d2a55a9e36",
@@ -8087,10 +8128,12 @@
       "noteUrl": "https://note.com/stats47/n/n91e82ac3b13c",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "number-of-hotel-rooms",
+      "year": "2017",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -8101,7 +8144,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n93a6656b2096",
@@ -8187,10 +8230,12 @@
       "noteUrl": "https://note.com/stats47/n/n99561600d4fe",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "hobby-leisure-avg-time-unemployed-female",
+      "year": "2021",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -8202,20 +8247,22 @@
         },
         {
           "file": "images/image-04.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n99f53e7a1f33",
       "noteUrl": "https://note.com/stats47/n/n99f53e7a1f33",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "annual-emergency-dispatches-per-1000",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -8231,10 +8278,10 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n9dcb0680cea6",
@@ -8457,6 +8504,7 @@
       "noteUrl": "https://note.com/stats47/n/nb2d65c42c28b",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "maximum-temperature",
       "figures": [],
       "valueCheck": "no-data-figure"
     },
@@ -8732,6 +8780,7 @@
       "noteUrl": "https://note.com/stats47/n/nd5f8b5072cdb",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "population-density-per-km2-total-area",
       "figures": [],
       "valueCheck": "no-data-figure"
     },
@@ -8767,10 +8816,12 @@
       "noteUrl": "https://note.com/stats47/n/ndc600ddb7c44",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "room-aircon-ownership-multi-person-households-per-1000",
+      "year": "2014",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -8782,10 +8833,10 @@
         },
         {
           "file": "images/image-04.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nddd927386fce",
@@ -8855,10 +8906,12 @@
       "noteUrl": "https://note.com/stats47/n/ne31a2574e231",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "current-balance-ratio",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -8873,7 +8926,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ne3cdb7819c41",
@@ -8988,10 +9041,12 @@
       "noteUrl": "https://note.com/stats47/n/ne82a6c83ed45",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "local-debt-current-ratio",
+      "year": "2022",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -9006,7 +9061,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-ne85980349fda",
@@ -9067,6 +9122,7 @@
       "noteUrl": "https://note.com/stats47/n/ned30a382334d",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "university-count-per-100k",
       "figures": [],
       "valueCheck": "no-data-figure"
     },
@@ -9287,10 +9343,12 @@
       "noteUrl": "https://note.com/stats47/n/nfe69996fb5c9",
       "isPaid": false,
       "store": "r2-public",
+      "rankingKey": "utilities-expenditure-ratio-multi-person-households",
+      "year": "2023",
       "figures": [
         {
           "file": "images/image-01.png",
-          "kind": "diagram"
+          "kind": "ranking-map"
         },
         {
           "file": "images/image-02.png",
@@ -9306,10 +9364,10 @@
         },
         {
           "file": "images/image-05.png",
-          "kind": "diagram"
+          "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "no-data-figure"
+      "valueCheck": "year-gone"
     },
     {
       "key": "sunshine-solar-housing",
