@@ -625,6 +625,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:company-housing-rent-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:company-housing-rent-consumption-expenditure",
           "kind": "ranking"
         }
@@ -9359,6 +9363,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:cosmetic-cream-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:cosmetic-cream-consumption-expenditure",
           "kind": "ranking"
         }
@@ -10419,6 +10427,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:craft-materials-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:craft-materials-consumption-expenditure",
           "kind": "ranking"

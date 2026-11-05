@@ -476,10 +476,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:prefectural-income-gdp-ranking",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:per-capita-kenmin-shotoku-h27",
           "kind": "ranking"
         }
@@ -1182,11 +1178,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:prefectural-income-gdp-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:purchasing-power-adjusted",
           "kind": "blog"
         },
         {
           "pageId": "blog:real-disposable-income-reversal",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:university-advancement-capacity",
           "kind": "blog"
         },
         {
@@ -3713,6 +3717,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:pet-supplies-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:pet-supplies-consumption-expenditure",
           "kind": "ranking"
         }
@@ -6069,6 +6077,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:pickled-chinese-cabbage-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
@@ -8111,6 +8123,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:pocket-money-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:pocket-money-group-consumption-expenditure",
           "kind": "ranking"

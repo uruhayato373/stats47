@@ -3449,6 +3449,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:western-clothing-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:western-clothing-group-consumption-expenditure",
           "kind": "ranking"
         }

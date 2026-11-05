@@ -355,6 +355,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:pots-kettles-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:pots-kettles-consumption-expenditure",
           "kind": "ranking"
         }
@@ -4256,6 +4260,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:prepared-foods-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:prepared-foods-group-consumption-expenditure",
           "kind": "ranking"

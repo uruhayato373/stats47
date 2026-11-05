@@ -4102,6 +4102,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:books-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:books-consumption-expenditure",
           "kind": "ranking"
         }
@@ -4138,6 +4142,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:books-printed-matter-group-consumption-expenditure",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:books-printed-matter-group-consumption-expenditure",
           "kind": "ranking"
@@ -9232,6 +9240,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:camera-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:household-education-leisure",
           "kind": "japan-theme"
         },
@@ -11608,6 +11620,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:cereals-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:cereals-group-consumption-expenditure",
           "kind": "ranking"

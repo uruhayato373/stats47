@@ -2199,6 +2199,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:automobile-related-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:automobile-related-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -9534,6 +9538,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:beans-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:beans-consumption-expenditure",
           "kind": "ranking"
         }
@@ -9916,6 +9924,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:bed-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:bed-consumption-expenditure",
           "kind": "ranking"
@@ -11722,6 +11734,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:bento-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:bento-consumption-expenditure",
           "kind": "ranking"
         }
@@ -11758,6 +11774,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:beverages-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:beverages-group-consumption-expenditure",
           "kind": "ranking"

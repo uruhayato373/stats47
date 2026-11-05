@@ -68,6 +68,7 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
 
 - **指標追加の手順の穴 (2026-11-05)**: `metrics:regen-derived` は `kakei-ranking-directory.generated.ts` を作り直さず、`content:sync` が `generate:catalog` より先に走る。`isActive:true` にした指標は取り込みと既知キーの生成までテーマのリンク先が開かず、止める検査が無い。`blog:batch` は既存の slug を対象外にする。
+- **公開一覧の同期の穴 (2026-11-05)**: `sync-snapshots` の sync-ranking-keys は sitemap と公開一覧を更新するが `data/metrics/index/` を作り直さないので、記事の公開後に develop→main の PR (1239) で `Stale metric linkage shard` になった。手で `npm run metrics:build-index` を流して通した。同期の job で索引も再生成すれば再発しない。
 - **検出した小さな不整合 (2026-11-05)**: `data/metrics/university-capacity-index.ts` の seoTitle は京都府 238.4 だが R2 の 2024 年度は 238.3。有料記事 `d-kakei-category-dataset` の題「教育費は8.7倍違う」は単年の値で、5 年平均は 4.2 倍。P-14 の snapshot の title は note の題と異なる。`data-refresh.yml` の dispatch は `--ref` を無視して main を checkout する。`data/surveys/taxonomy.json` の blog の部分は実際の記事とずれている。
 - **記事の公開 (2026-11-05)**: 合格 81 本を背景画像つきで送り箱へ入れた (PR 1221 のマージ後・リンク先 82 指標が本番で 200 を確認)。残り: `blog:batch` の候補は kakei-chousa で尽きた。other-mushroom・laundry-detergent・rent-group は critic REVISE のまま非公開。`blog:batch` は既存の `contents/blog` の slug を対象外にするので、不合格の再挑戦は `write-blog-headless.ts --slugs` で行う。
 - **調査資料の注意 (2026-11-05)**: `docs/31_note記事原稿/kakei-research/` の背景の URL は検索結果の確認までで、原典の数値は未確認。家計調査の民営家賃が全世帯平均か借家世帯平均かは未確認。教育 5 品目は順位の変動が大きく、複数年の確認が要る。ledger の `kind` は item と group が混在し階層が二重に数えられうる。

@@ -1958,6 +1958,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:shampoo-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shampoo-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2518,6 +2522,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:shirts-sweaters-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:shirts-sweaters-group-consumption-expenditure",
           "kind": "ranking"
@@ -5282,6 +5290,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:gasoline-consumption-quantity-vs-single-mother-employment",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:single-mother-employment-rate",
@@ -10085,6 +10097,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:social-expenses-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:social-expenses-group-consumption-expenditure",
           "kind": "ranking"

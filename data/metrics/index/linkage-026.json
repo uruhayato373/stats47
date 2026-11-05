@@ -8551,10 +8551,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:per-capita-income-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:small-business-dominance-map",
           "kind": "blog"
         },
