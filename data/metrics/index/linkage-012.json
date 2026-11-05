@@ -6844,6 +6844,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:household-consumables-group-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:household-consumables-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -7111,6 +7115,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:household-durables-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:household-durables-group-consumption-expenditure",
           "kind": "ranking"
@@ -11637,6 +11645,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:household-utensils-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:household-utensils-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -13739,7 +13751,7 @@
     },
     {
       "metricKey": "housing-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:housing-budget-share-kakei",
       "title": "消費支出に占める住居の割合",
       "sources": [
         {
@@ -14802,6 +14814,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:housing-repairs-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:housing-repairs-group-consumption-expenditure",
           "kind": "ranking"

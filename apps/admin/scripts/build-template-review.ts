@@ -29,6 +29,7 @@ import { chartSourceName, groupedBarChartFromArticleData, lineChartFromArticleDa
 import { PREF_NAMES } from '../../../.claude/scripts/lib/prefectures.cjs';
 import { assertMinimalChartCopy } from '../../../.claude/scripts/media/lib/image-copy.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../.claude/scripts/lib/site-config.cjs';
+import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 import { fetchMunicipalityTopologyForWardMode } from '../../../packages/gis/src/mlit/fetch-ward-mode-topology';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
@@ -82,12 +83,12 @@ async function groupedSample(id: string, label: string, slug: string, base: stri
   chart.source = chartSourceName(data, await json(blog(slug, base, 'source.json')), metricSource) || chart.source;
   return both(id, label, (theme) => renderGroupedBarsChart(chart, theme));
 }
-async function stackedSample(id: string, label: string, slug: string, base: string) {
+async function stackedSample(id: string, label: string, slug: string, base: string, normalized?: boolean) {
   const data = await json(blog(slug, base));
   const chart = stackedChartFromArticleData(data);
   if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
   chart.source = chartSourceName(data, await json(blog(slug, base, 'source.json')), metricSource) || chart.source;
-  return both(id, label, (theme) => renderStackedChart(chart, theme));
+  return both(id, label, (theme) => renderStackedChart(normalized === undefined ? chart : { ...chart, normalized, title: chart.title.replace(/の構成比$/, ''), unit: '千kL', meta: '単位：千kL' }, theme));
 }
 const AREA_METRIC = 'total-population';
 const AREA_YEAR = '2020';
@@ -96,7 +97,7 @@ async function areaInputs() {
   const rows = parseStatsValuesPayload(await json(`app/stats/${AREA_METRIC}/cities.json`)).rows.filter((row) => row.yearCode === AREA_YEAR);
   const chartOf = (scope: AreaScope) => resolveAreaChart({
     title: `${metric.title}`, yearLabel: `${AREA_YEAR}年`, unit: rows[0].unit ?? metric.unit, source: metricSource(AREA_METRIC) ?? '',
-    presentation: metric.visualization!, scope, values: rows.map((row) => ({ areaCode: row.areaCode, value: row.value })),
+    presentation: metricPresentation(metric, scope.level === 'municipality' && scope.wardMode === 'split' ? 'municipality-split' : 'municipality-merged'), scope, values: rows.map((row) => ({ areaCode: row.areaCode, value: row.value })),
   });
   const topologyOf = async (wardMode: 'merged' | 'split') => await fetchMunicipalityTopologyForWardMode('14', wardMode) as unknown as Topology;
   return { chartOf, merged: await topologyOf('merged'), split: await topologyOf('split') };
@@ -118,9 +119,8 @@ async function main() {
   const input = rankingInputFromStats(await json('app/stats/maximum-temperature/values.json'));
   const ranking = sampleRankingChart({ data: rankingRows(input) });
   const liquor = await json(blog('alcohol-prefecture-map', 'liquor-type-breakdown'));
-  const change = await renderTileChangeSample({
-    item: await json(CHANGE_SAMPLE_SOURCES.item.key), values: await json(CHANGE_SAMPLE_SOURCES.values.key),
-  });
+  const changeInput = { item: await json(CHANGE_SAMPLE_SOURCES.item.key), values: await json(CHANGE_SAMPLE_SOURCES.values.key) };
+  const change = { light: await renderTileChangeSample(changeInput), dark: await renderTileChangeSample(changeInput, CHART_THEMES.dark) };
   const { chartOf, merged, split } = await areaInputs();
   const inPrefecture = (wardMode: 'merged' | 'split'): AreaScope => ({ level: 'municipality', wardMode, within: { kind: 'prefecture', prefCode: '14' } });
   const pairs = (await json(`app/stats/population-migration-inter-prefecture/migration-flow-${MIGRATION_YEAR}.json`)).rows as MigrationPair[];
@@ -139,7 +139,7 @@ async function main() {
       samples: [
         both('tile', '値の塗り', (theme) => renderTileMapChart(ranking, theme)),
         await baseTileSample('tile-base', '基準の県あり・正負の値', 'osaka-migration-flow', 'osaka-migration-flow-migration-map'),
-        { label: '2 時点の増減', light: save('tile-change-light', change) },
+        both('tile-change', '2 時点の増減', (theme) => change[theme.name]),
       ],
     },
     {
@@ -167,7 +167,7 @@ async function main() {
       samples: [
         await stackedSample('stacked-share', '100%・棒が少ない', 'alcohol-prefecture-map', 'liquor-type-breakdown'),
         await stackedSample('stacked-many', '100%・棒が多い', 'cc-estat-13-agri-sankey', 'cc-estat-13-agri-sankey-region-category-stacked'),
-        await stackedSample('stacked-value', '実数', 'inbound-by-nationality-regional-preference', 'nationality-composition-top15'),
+        await stackedSample('stacked-value', '実数・棒が少ない', 'alcohol-prefecture-map', 'liquor-type-breakdown', false),
       ],
     },
     {
@@ -186,16 +186,16 @@ async function main() {
       samples: [both('boxplot', '地方別', (theme) => renderRegionalBoxplotChart(ranking, theme))],
     },
     {
-      id: 'table', title: 'テーブル', status: 'unused', summary: '行と列で読む型。今はどの媒体も使っておらず、暗い版は無い。',
-      samples: [{ label: '上位 10 県', light: save('table-light', renderRankingTable(input)) }],
+      id: 'table', title: 'テーブル', status: 'unused', summary: '全 47 都道府県の値を行で読む型。今はどの媒体も使っていない。',
+      samples: [both('table', '全 47 都道府県', (theme) => renderRankingTable(input, theme))],
     },
     {
-      id: 'pie', title: '円グラフ', status: 'unused', summary: '構成比を見せる型。今はどの媒体も使っておらず、暗い版は無い。',
-      samples: [{ label: '構成比', light: save('pie-light', renderCompositionPie(liquor)) }],
+      id: 'pie', title: '円グラフ', status: 'unused', summary: '構成比を見せる型。今はどの媒体も使っていない。',
+      samples: [both('pie', '構成比', (theme) => renderCompositionPie(liquor, theme))],
     },
     {
-      id: 'heatmap', title: 'ヒートマップ', status: 'unused', summary: '行と列の濃淡で見せる型。今はどの媒体も使っておらず、暗い版は無い。',
-      samples: [{ label: '年と区分', light: save('heatmap-light', renderCompositionHeatmap(liquor)) }],
+      id: 'heatmap', title: 'ヒートマップ', status: 'unused', summary: '行と列の濃淡で見せる型。今はどの媒体も使っていない。',
+      samples: [both('heatmap', '年と区分', (theme) => renderCompositionHeatmap(liquor, theme))],
     },
   ];
   fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), rows }, null, 2));

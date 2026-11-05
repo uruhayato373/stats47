@@ -1,4 +1,5 @@
 import { buildDataCard } from '../../../.claude/scripts/sns/lib/data-card-input';
+import type { ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { renderTileChangeSvg } from '../../remotion/src/features/data-cards/TileChange';
 
 /** Fixed population snapshots: the change sample is rebuilt from these exact bytes only. */
@@ -21,7 +22,7 @@ export const CHANGE_SAMPLE_SOURCES = {
  * The tile-map's change variant: the same card the X/Threads tile-change image uses
  * (TileChange.tsx → all47-svg.ts), for the total population 1975 → 2025.
  */
-export async function renderTileChangeSample(input: { item: unknown; values: unknown }) {
+export async function renderTileChangeSample(input: { item: unknown; values: unknown }, theme?: ChartTheme) {
   const byKey: Record<string, unknown> = {
     [CHANGE_SAMPLE_SOURCES.item.key]: input.item,
     [CHANGE_SAMPLE_SOURCES.values.key]: input.values,
@@ -35,5 +36,5 @@ export async function renderTileChangeSample(input: { item: unknown; values: unk
     async () => { throw Error('増減タイルは県の形を使いません。'); }
   );
   if (card.kind !== 'tile-change') throw Error('増減タイルの入力ではありません。');
-  return renderTileChangeSvg(card);
+  return renderTileChangeSvg(card, theme);
 }

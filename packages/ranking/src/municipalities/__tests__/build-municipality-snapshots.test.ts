@@ -48,7 +48,7 @@ const policy: MunicipalityEntityPolicy = {
 };
 
 const metric = {
-  visualization: getMetricConfig('total-population')!.visualization,
+  visualization: { ...getMetricConfig('total-population')!.visualization, classification: { method: 'quantile', classes: 5 } as const },
   key: 'metric',
   title: 'テスト指標',
   unit: '％',

@@ -41,7 +41,6 @@ export const totalPopulation: MetricConfig = {
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
-    classification: { method: "quantile", classes: 5 },
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
   },

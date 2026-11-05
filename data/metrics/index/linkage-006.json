@@ -529,6 +529,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:sunshine-solar-housing-correlation",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:detached-house-ratio",
           "kind": "ranking"
         }
@@ -4211,6 +4215,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:domestic-services-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:domestic-services-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -4853,6 +4861,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:dress-shirt-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:dress-shirt-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5063,6 +5075,10 @@
       "consumers": [
         {
           "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:dried-mackerel-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -5762,6 +5778,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:drinking-out-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:drinking-out-consumption-expenditure",
           "kind": "ranking"
         },
@@ -6135,6 +6155,10 @@
         },
         {
           "pageId": "blog:household-structure-transformation",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:marriage-divorce-okinawa",
           "kind": "blog"
         },
         {
@@ -7890,7 +7914,7 @@
     },
     {
       "metricKey": "education-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:education-budget-share-kakei",
       "title": "消費支出に占める教育の割合",
       "sources": [
         {
@@ -8685,6 +8709,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:education-expenditure-total-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:education-expenditure-total",
           "kind": "ranking"

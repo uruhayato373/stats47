@@ -31,6 +31,7 @@
  *   - workflow: .github/workflows/generate-article-charts.yml (PR で --validate 自動実行)
  */
 
+import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
@@ -818,7 +819,8 @@ function metricConfigOf(baseName: string, parsed: unknown) {
   return key ? getMetricConfig(key) : undefined;
 }
 function metricVisualizationOf(baseName: string, parsed: unknown) {
-  return metricConfigOf(baseName, parsed)?.visualization;
+  const metric = metricConfigOf(baseName, parsed);
+  return metric && metricPresentation(metric);
 }
 
 /**

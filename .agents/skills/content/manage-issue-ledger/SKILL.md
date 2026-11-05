@@ -38,7 +38,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 検索語がまだ無い論点を拾う。
 
 - テーマの `evidenceTopics` (`data/themes/catalogs/<key>.json`) の `question` を読み、台帳に無い問いを大きな問いにする
-- 白書を読み直すときは `/research-theme-catalog` (担当 `theme-researcher`) に頼む。NotebookLM は `gh` の認証が要るのでクラウドの環境では呼べない。Mac のセッションで行う
+- 白書を読み直すときは `/research-theme-catalog` (担当 `theme-researcher`) に頼む。NotebookLM はクラウドの環境では呼べない。ローカルで行い、Windows は証明書ストアを使う起動が要る（`.claude/rules/local-environment.md`「Windows の NotebookLM 連携」）。返ってきた統計名は指標の `source` と照合してから `dataNote` に書く
 - 記事の着想の一覧は `/plan-article-queue` が持つ。台帳はそこへ渡す問いの出どころで、ネタの採点は写さない
 
 ## 問いの書き方
@@ -86,6 +86,24 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 npm run content:sync -- --from-r2   # R2 の記事一覧からページ索引を作り直す。引数なしだと新しい記事が載らない
 npm run issues:check
 ```
+
+市区町村のデータで問いを確かめるときは、計算の前に表を組み立てて検査を通す。指標と年を書いた spec を渡す（例: `.claude/scripts/analysis/examples/`）。
+
+```bash
+npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.json --out /tmp/frame.json
+```
+
+公開の自治体だけの表を作り、県の合計との検算・指標の年・抜けた町の偏り・変化の信頼性を報告する。合計が合わなければ止まる。問いの選択と、定義が循環していないかの判断は人が行う。市ごとの変化の信頼性が低いと出たら順位にしない。素の `fetch` が通らない環境では `--data-dir` に `<key>.cities.json` を置く。
+
+分析の結論は `data/content/analyses.json`、図は `data/content/figures.json` に残す。図は `data/content-operations/image-templates.json` の型を指し、配信先はページの ID か `data/sns/posts.json` の投稿 ID で指す。公開の状態の正本は配信先の台帳にある。実例は `.claude/scripts/analysis/m01-factory-size.ts`（型は `scatter`、県へ足し上げ）と `h01-vacancy-population.ts`（型は `grouped-bar`、市区町村のまま区分）。散布図を市区町村の点で描くときは `renderRelationshipScatterChart` に `level: "municipality"` を渡す。端の町の名前は揺れが大きいので自動では出ず、`labelNames` で指定した町だけが出る。
+
+ページへの掲載は人が行い、自動では公開しない。残りは次の一覧で見る。配信先の台帳と食い違うと `!` が付き、exit 1 になる。
+
+```bash
+npm run issues:figures
+```
+
+記事の下書きは `contents/blog/<slug>/article.md` に `published: false` で置く。公開中の記事を直す下書きも同じで、`published: false` の間は自動公開も掃除もされない。`published: true` にして develop へ push すると公開される。下書きを置いたら、図の配信先の `status` を `draft` にする。
 
 ## 6. 見送る
 

@@ -760,6 +760,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:supplementary-education-group-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:supplementary-education-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2680,6 +2684,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:tatami-replacement-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:tatami-replacement-consumption-expenditure",
           "kind": "ranking"
         }
@@ -3611,6 +3619,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:tea-drink-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:tea-drink-consumption-expenditure",
           "kind": "ranking"

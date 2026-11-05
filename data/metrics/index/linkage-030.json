@@ -2299,6 +2299,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:marriage-divorce-okinawa",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:total-fertility-rate",
           "kind": "blog"
         },
@@ -4677,6 +4681,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:foreign-residents-diversity-map",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:future-population-tokyo-paradox",
           "kind": "blog"
         },
@@ -4697,11 +4705,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:prefectural-income-gdp-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:prefecture-population-city-concentration",
           "kind": "blog"
         },
         {
           "pageId": "blog:retail-establishments-by-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:retail-store-count-vs-nurses-per-100k-population",
           "kind": "blog"
         },
         {
@@ -8272,7 +8288,7 @@
     },
     {
       "metricKey": "transport-communication-budget-share-kakei",
-      "pageId": null,
+      "pageId": "ranking:transport-communication-budget-share-kakei",
       "title": "消費支出に占める交通・通信の割合",
       "sources": [
         {
@@ -8771,6 +8787,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:transport-communication-expenditure-total-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:transport-communication-expenditure-total",
           "kind": "ranking"
         }
@@ -8971,6 +8991,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:transportation-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:transportation-group-consumption-expenditure",
           "kind": "ranking"

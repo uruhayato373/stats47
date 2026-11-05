@@ -22,7 +22,7 @@ const baseConfig: MetricConfig = {
   years: { from: 2009, to: 2024 },
   yearFormat: "fiscal",
   visualization: { domain: { mode: 'extent' },
-    classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
+    trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
     colorScheme: "interpolateBlues",
     colorSchemeType: "sequential",
 
@@ -86,7 +86,7 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.tags).toEqual([{ tagKey: "人口" }, { tagKey: "人口動態" }]);
     expect(item.valueDisplay).toEqual({ conversionFactor: 1, decimalPlaces: 0 });
     expect(item.visualization).toMatchObject({ domain: { mode: 'extent' },
-    classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
+    classification: { method: 'quantile', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
       colorScheme: "interpolateBlues",
       colorSchemeType: "sequential",
 

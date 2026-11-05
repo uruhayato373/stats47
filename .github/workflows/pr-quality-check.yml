@@ -153,6 +153,7 @@ jobs:
           npx tsx packages/data-configs/scripts/check-metric-contract.ts
           npm run content:check
           npm run test:issue-graph
+          npm run test:analysis-frame
         continue-on-error: false
 
       - name: 🔁 Sync-Snapshots Task Drift
@@ -806,6 +807,12 @@ jobs:
           # 図の表示単位の台帳 (data/metrics/display-units/) が規則と一致し、読めない単位の大きい指標が増えていないこと。
           # 規約: .claude/rules/unit-semantics-standards.md §2.6
           npm run check:display-units --workspace=@stats47/data-configs
+        continue-on-error: false
+
+      - name: 🎨 Color Policy Ledger Gate
+        run: |
+          # 指標 × 粒度の配色の台帳 (生成物) の整合。判定の規則は packages/types/src/color-policy.ts
+          npx tsx .claude/scripts/metrics/check-color-policies.ts
         continue-on-error: false
 
       - name: 🧺 Kakei Item Classification Gate

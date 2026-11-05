@@ -106,6 +106,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:meat-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:meat-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2562,6 +2566,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:medical-services-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:medical-services-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2598,6 +2606,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:medical-supplies-group-consumption-expenditure-prefecture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:medical-supplies-group-consumption-expenditure",
           "kind": "ranking"
@@ -2850,6 +2862,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:medicines-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:medicines-group-consumption-expenditure",
           "kind": "ranking"
@@ -4087,6 +4103,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:microwave-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:household-appliances",
           "kind": "japan-theme"
         },
@@ -4862,6 +4882,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:milk-consumption-quantity-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:milk-consumption-quantity",
@@ -5905,6 +5929,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:miscellaneous-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:miscellaneous-group-consumption-expenditure",
           "kind": "ranking"
