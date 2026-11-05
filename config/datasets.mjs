@@ -359,6 +359,7 @@ export const DATASETS = [
   d("products.ledger", "data/products/product-ledger.json", "state", "product", "data", "商品の台帳 (価格・状態・閲覧・売上を既存の記録から集めたもの)"),
   d("products.ledger-summary", "data/products/PRODUCT-LEDGER.md", "report", "product", "data", "商品の台帳の要約 (週次・月次レビューが読む)"),
   d("products.note-cover-urls", "data/products/note-cover-urls.json", "state", "product", "data", "note の販売記事の表紙画像の URL。サイトの商品カードが使う"),
+  d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する)"),
   d("products.price-history", "data/products/price-history.json", "ledger", "product", "data", "商品の価格実験と価格変更の履歴", { schema: "config/schema/products.price-history.schema.json" }),
   d("products.free-sample-delivery", "data/products/free-sample-delivery.json", "ledger", "product", "data", "無料見本の配布の記録", { schema: "config/schema/products.free-sample-delivery.schema.json" }),
   d("products.interviews", "data/products/admin-stat-interviews.json", "evidence", "product", "data", "行政実務向け商品の聞き取り"),

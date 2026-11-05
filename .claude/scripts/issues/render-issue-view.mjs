@@ -56,6 +56,7 @@ const view = issues.map((i) => ({
   dataNote: i.dataNote ?? null,
   pitfall: i.pitfall ?? null,
   queries: i.queries ?? [],
+  revenue: i.revenue ?? [],
   answers: links.filter((l) => l.issue === i.id && l.role === "answers").map((l) => ref(l.page)),
   evidence: links.filter((l) => l.issue === i.id && l.role === "evidence").map((l) => ref(l.page)),
 }));
