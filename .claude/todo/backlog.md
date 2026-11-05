@@ -890,7 +890,8 @@ updated: 2026-11-01
 - **進み具合**: 2026-11-04 に散布図 183 枚を反映 (3,524 件を公開 URL で確認)。2026-11-05 に値の違う図の記事 5 本を結論から書き直して審査を通し、段階 1 を完了した (散布図 194 枚すべて型・未解決 0・`staleValues` 0)。段階 2・3 は台帳 `data/note/body-figures.json` と週次の `--check` を入れ、公開 429 本を照らした。候補はすべて本文を読み、誤検知は理由つきで `data/note/body-figure-reviews.json` へ分けた。
 - **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
 - **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
-- **次**: 段階 4 はランキング 3 種を共通の型へ移す。段階 5 の最初の更新は見本を見せて止まる。
+- **段階 4 (2026-11-05)**: オーナーが見本を確認し、`render-ranking-images.mjs` を共通の型へ替えた (地図・棒・地方別の箱ひげ、1080×1350)。公開中の note の画像はまだ旧版のまま。残りは、管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う) ことと、使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消すこと。
+- **次**: 段階 5 の最初の更新は見本を見せて止まる。
 
 ### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]

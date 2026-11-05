@@ -149,7 +149,7 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
    (2026-09-29 に、カタログの `r2Body` 既定が `true` で、登録しただけで「保存済み」になっていた a-* 14 本が R2 に無かった。)
 6. **旧背景の参照を保全する。** 旧 `render-spec.json` のbackground・Drive/R2原本・SHAは履歴として保持する。新しいカバーの正本は上記private R2と画像台帳で、旧背景＋文字合成へ戻さない。
 7. **本文画像とカバーの生成口を分ける。** ランキング本文3枚は `render-ranking-images.mjs` が作り、`ensure-note-images.mjs` が不足を検査する。カバーはCodex imagegenの採用済み版を `materialize-cover.mjs` で復元する。欠落時に本文レンダラーでカバーを代作しない。
-8. **決定的であることを保つ。** 同じ入力から `render-ranking-images.mjs` は同じバイト列を作る (2026-09-30 に同一 SHA を実測)。
+8. **決定的であることを保つ。** 同じ入力と同じフォントから `render-ranking-images.mjs` は同じ画像を作る。
    テンプレートに時刻・乱数・外部取得を入れない。入れるなら入力として spec に固定する。
 
 ## 機械検査 (`npm run note:images:audit`)
@@ -166,19 +166,17 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 `note-image-assets`・週次 (週次レビューの `npm run weekly:audits` の note-circulation。結果は `${TMPDIR}/note-image-assets.json`)。
 `/weekly-review` は `npm run note:images:audit -- --json` の `summary` を読む。
 
-## ランキング記事の本文画像 3 枚 (choropleth / chart / boxplot)
+## ランキング記事の本文画像 3 枚 (地図 / 棒 / 地方別の箱ひげ)
 
-`node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` が `chart-data.json` だけから本文3枚を作り、`render-spec.json` を書く
-(`--all` 全記事 / `--stale` 古い記事だけ / `--check` 検査のみ)。R2 や `.local` のデータは読まない。
+2026-11-05 オーナー決定で、サイトと同じ共通の型の画像 (4:5・1080×1350) へ移した。`node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` が `chart-data.json` だけから本文 3 枚を作り、`render-spec.json` を書く (`--all` 全記事 / `--stale` 古い記事だけ / `--check` 検査のみ)。R2 や `.local` のデータは読まない。
 
-- テンプレートは `apps/remotion/src/features/ranking-note/` (note 専用)。X・Instagram と共有する `ranking-x/` は変えない
-  (`RankingBoxplot` にだけ opt-in の `marginLeft` / `niceTicks` を足した。省略時は従来と同じ出力)。
-- **色は値でなく順位で決める。** 値で塗ると、東京都・北海道のような外れ値が 1 県あるだけで残り 46 県が同じ薄い色になる。
-- props 欠落時は別指標のモックに落ちず例外にする (他記事のデータで画像が焼かれる事故を防ぐ)。
-- **見た目を変えたら** `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、
-  `render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
-- Remotionのカバー出力も制作入力であり、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは
-  `NOTE-COVER-ROLLOUT-20260928` が持ち、共通画像台帳の現在の候補SHAに対する採用ポインタが実際に note へ載せる画像を決める。
+- 描画は `build-ranking-type-images.ts`。地図は `renderTileMapChart`、棒は `renderRankingBarsChart`、箱ひげは `renderRegionalBoxplotChart` (`apps/admin/lib/template-regional-boxplot.ts`) で、本文の地域中央値に合わせて地方ごとに箱を並べる。色と単位は指標定義から決める。発行元の表記は入れない。
+- ファイル名は `draft.md` と `publish-note` が参照するので変えていない。名前の寸法 (`1080x1080` など) は旧版のままで、中身は 1080×1350 である。
+- `chart-data.json` の順位は同値にも通し番号を振っている。型の入力は値から順位を計算し直し、同値は同順位になる。本文の順位とずれる記事は更新のときに確かめる。
+- 47 県がそろわない指標は型にできず、生成が止まる。
+- PNG にする librsvg は「°C」の 2 文字を離して描くので、`rasterSafeSvg` が 1 文字の「℃」へ置き換える。
+- **見た目を変えたら** `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、`render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
+- カバーは Remotion の制作入力のままで、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは `NOTE-COVER-ROLLOUT-20260928` が持つ。
 
 ## 本文の図の台帳 (2026-11-05)
 
