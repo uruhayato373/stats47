@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "note 本文の図の台帳",
+  "description": "data/note/body-figures.json の形の契約。公開済み記事ごとに本文の図と指標・年、今の R2 の値との照合結果を持つ。有料本文の文章や値は書かない。build-note-figure-ledger.mjs が作る生成物",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "summary", "articles"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["articles", "figures", "byValueCheck"],
+      "properties": {
+        "articles": { "type": "integer", "minimum": 0 },
+        "figures": { "type": "integer", "minimum": 0 },
+        "byValueCheck": { "type": "object", "additionalProperties": { "type": "integer" } }
+      }
+    },
+    "articles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "isPaid", "store", "figures", "valueCheck"],
+        "properties": {
+          "key": { "type": "string" },
+          "noteUrl": { "type": "string" },
+          "isPaid": { "type": "boolean" },
+          "store": { "enum": ["r2-public", "r2-private", "note-only"] },
+          "rankingKey": { "type": "string" },
+          "year": { "type": "string" },
+          "valueCheck": {
+            "enum": ["match", "body-match", "changed", "body-differs", "no-year", "year-gone", "unmapped", "no-data-figure", "body-not-in-r2"]
+          },
+          "changedPrefectures": { "type": "integer", "minimum": 1 },
+          "bodyIssues": { "type": "integer", "minimum": 1 },
+          "bodyIssueSample": { "type": "array", "items": { "type": "string" } },
+          "figures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["file", "kind"],
+              "properties": {
+                "file": { "type": "string" },
+                "kind": { "enum": ["ranking-map", "ranking-bar", "ranking-boxplot", "chart", "diagram"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

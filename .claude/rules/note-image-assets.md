@@ -180,6 +180,14 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 - Remotionのカバー出力も制作入力であり、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは
   `NOTE-COVER-ROLLOUT-20260928` が持ち、共通画像台帳の現在の候補SHAに対する採用ポインタが実際に note へ載せる画像を決める。
 
+## 本文の図の台帳 (2026-11-05)
+
+`data/note/body-figures.json` (Schema: `body-figures.schema.json`) は公開済み記事の本文の図・指標・年と、今の R2 の値との照合結果を持つ生成物で、手で書かない。`npm run note:figures` が作り、有料本文は非公開 R2 にあるので S3 認証のある CI (`note-figure-ledger-weekly.yml`) で毎週作り直す。認証の無い手元では `--public-only` で無料記事だけ試せる (台帳は書かない)。
+
+- 指標と年は `data-provenance.json`・`chart-data.json` から読む。回収した旧記事には無いので、指標は記事台帳の `stats47Targets` (1 指標を指すときだけ)、年は題名、図の種類は直前の見出しから読む。
+- `valueCheck`: `match` 固定コピーが今の値と一致 / `body-match` 本文の順位・値が一致 / `changed` 固定コピーと今の値が違う / `body-differs` 本文の順位・値が今の値と合わない / `no-year` 年を読めない / `year-gone` その年の値が R2 に無い / `unmapped` データの図があるのに指標に結べない / `no-data-figure` 統計の図が無い / `body-not-in-r2` 本文が note.com にしか無い。
+- 有料本文の文章と値を台帳へ書かない。`bodyIssueSample` は無料・有料を問わず順位の照合結果の短文だけを持つ。
+
 ## 本文画像の改善台帳
 
 本文画像の使用先・元データ・旧新比較・スマホ確認は `/ops/image-library` で管理する。手順・R2候補保存・入力復元・失効条件は `apps/admin/README.md`「記事・画像の改善管理」。統計図は保存した数値・年・単位を使う決定的rendererで生成し、カバーの画像生成経路とは分ける。

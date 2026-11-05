@@ -119,6 +119,7 @@
     "sns:trace:test": "node --test .claude/scripts/sns/__tests__/post-trace-core.test.mjs .claude/scripts/lib/__tests__/sns-posts-store.test.cjs",
     "note:assets:test": "node --test .claude/scripts/note/__tests__/cover-assets.test.mjs .claude/scripts/note/__tests__/question-cover-data.test.mjs .claude/scripts/note/__tests__/cover-production.test.mjs .claude/scripts/note/__tests__/cover-category-contract.test.mjs .claude/scripts/note/__tests__/cover-generation-guards.test.mjs",
     "note:images:audit": "node .claude/scripts/note/audit-note-image-assets.mjs",
+    "note:figures": "node .claude/scripts/note/build-note-figure-ledger.mjs",
     "note:images:regen": "node .claude/scripts/note/regen-derived-png.mjs",
     "note:images:test": "node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs",
     "note:images:ensure": "node .claude/scripts/note/ensure-note-images.mjs",

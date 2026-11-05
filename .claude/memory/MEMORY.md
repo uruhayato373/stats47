@@ -155,6 +155,7 @@
 - [workflow policy comment import](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
 - [help flag runs script](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
 - [blog background codex only](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする
+- [codex blocked on windows proxy](feedback_codex_blocked_on_windows_proxy.md) — 会社PCのCodexはプロキシで503。ブログの題名を変える前に背景を確かめ、作れないなら題名を保つ
 - [file backlog as you go](feedback_file_backlog_as_you_go.md) — 長い作業では範囲外の課題を見つけた時点で backlog へ起票しながら進める。既存カード検索→追記優先、CI 待ち中の起票コミットはマージ後に push
 - [metric display state](feedback_metric_display_state.md) — 計算方法/年/地域は観測値・単位・系列・配色を一括確定。SSOT移行はCLI/索引/配信まで検査し、途中停止したmetadata反映は全件の完了を確認
 - [zsh word splitting](feedback_zsh_word_splitting.md) — Bash ツールは zsh。未クォート変数が単語に分かれず for/set -- が 1 要素で進む。${=var} か while read、反復後に件数を照合
