@@ -892,10 +892,23 @@ updated: 2026-11-01
 - **ゴール (2026-11-05 オーナー決定)**: 統計の図は、種類ごとに 1 つの型から作られ、サイト・note・SNS で同じ型を使う。型から外れた図は機械が止める。11-04 のゴールは型の統一・値の正しさ・記事への反映を 1 つにしていて記事の修正へ広がったので、型の統一だけに絞った。
 - **完了の判定**: ① 図の種類ごとに型が 1 つあり、管理画面で見本を確かめられる ② 各媒体の生成処理がその型を使い、旧い描画処理が残っていない ③ 新しく作る図が型から外れると検査で止まる。
 - **完了に含めないもの**: 公開中の記事の差し替え (`NOTE-FIGURE-ROLLOUT-01`)、記事の修正 (`NOTE-FIGURE-FIX-01`)。値の検査 (`audit-chart-axes.ts`・`data/note/body-figures.json`) は週次で動くものをそのまま使い、作業を足さない。
-- **今の位置 (2026-11-05)**: サイトはランキング棒・地図・散布図が型になった (散布図 194 枚すべて型・値の違う図 0 枚)。note はランキング記事の 3 種 (地図・棒・地方別の箱ひげ) の生成を型へ切り替えた (`render-ranking-images.mjs`)。サイトの残りは 2026-11-04 の集計で折れ線 81・積み上げ 6・要点カード 123・判別できない図 117 枚。note のその他の図と SNS の各媒体は未確認。
+- **今の位置 (2026-11-05 棚卸し)**: 公開中のブログの図 2,127 枚を R2 から全件数えた。型の印があるのは 1,635 枚 (棒 1,017・タイル地図 424・散布図 194)、無いのは 492 枚で、内訳は旧い棒 175・五分位の棒 59・要点カードと工程図 124・折れ線 86・旧いタイル地図 31・積み上げ 6・旧い散布図 5・レーダー 3・ヒートマップ 2・ウォーターフォール 1 (型の印の無い図は図の中身から分類した)。「棒・地図・散布図は型」は正しくなかった。散布図の検査 `audit-chart-axes.ts` は名前に scatter を含む図しか見ていない。
+- **棚卸しの表 (媒体別)**:
+  | 図の種類 | サイト | note | X・Threads | Instagram |
+  |---|---|---|---|---|
+  | 棒 | 型 1,017・旧 234 | ランキング記事は型、ほかは記事の生成と同じ | 使わない (全 47 県タイルが既定)。`quick-still --layout` は別の描画 | 使わない |
+  | タイル地図 | 型 424・旧 31 | 記事の生成と同じ | 型 (`all47-svg.ts`) | 型 (地図カルーセル・表紙・ヒント) |
+  | 地図 (実際の形) | 図なし | ランキング記事は型 | バズ地図: 地図の計算だけ共通で描画は別 | 同左 |
+  | 散布図 | 型 194・旧 5 | 記事の生成は型。`generate-note-charts/scripts/scatter.js` が別の描画 | 投稿なし | 別の描画 (`CorrelationScatterSlide`) |
+  | 表 | 図なし | 確認できず | 図なし | 別の描画 (`RankingTableSlide`) |
+  | 折れ線 | 旧 86 | 旧 (svg-builder) | 図なし | 図なし |
+  | 積み上げ | 旧 6 | 旧 (svg-builder)。`generate-kakei-charts` が別の描画 | 図なし | 図なし |
+  | 箱ひげ | 図なし | ランキング記事は型 | 図なし | 図なし |
+  | 型の台帳に無い図 | 要点カード 124 | 家計 (`render-note-household`) | 比較・地域・レシート・図鑑・順位の乗り換え | 同左 |
+- **棚卸しの注意**: note の公開図 1,313 枚のうち 1,129 枚は台帳の画像名からは種類が判らない (`data/note/body-figures.json` の diagram)。note の列は生成処理を読んだ結果で、公開物の枚数ではない。旧い棒のうち負の値を含む図は型が対応していない (`isSignedBar`)。行数が 47 未満の図と json の無い図は、指標の R2 の値を取り直さないと型にできない。
 - **順番**:
   1. 棚卸し: 図の種類 × 媒体 (サイト・note・X・Instagram・Threads) の表を実測で埋める。どの生成処理が型を使うかを、コードと公開物で確かめる。
-  2. 折れ線と積み上げを型へ移す。見た目は見本を見せてから全件へ流す。
+  2. 折れ線と積み上げを型へ移す。見た目は見本を見せてから全件へ流す。旧い棒・タイル地図・散布図の残りを同じ段階で扱うかはオーナーの判断を待つ。
   3. 管理画面の型の見本へ地方別の箱ひげを登録する (見本の PNG は非公開 R2 へ置くので Mac で行う)。使われなくなった Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` を消す。
   4. 新しい図が型から外れたら止める検査を全媒体へ広げる。
 - **止まる場面**: 型の見本の確認 / main へのデプロイ。
@@ -924,6 +937,14 @@ updated: 2026-11-01
 - **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
 - **次**: ① は 1 文の修正。note への最初の更新は `NOTE-FIGURE-ROLLOUT-01` の結果を見てから行う。② は e-Stat の表で確かめてから、記事か指標のどちらを直すかを決める。
 - **完了条件**: `node .claude/scripts/note/build-note-figure-ledger.mjs --check` の直すべき記事が 0 件で、`.claude/config/note-figure-baseline.json` の上限も 0 に下げた。
+
+### [BLOG-CHART-FILES-MISSING-01] 公開中のブログ本文が指す図が R2 に無い
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **証拠 (2026-11-05)**: R2 の `app/blog/all.json` の全記事を数えた。`climate-lifestyle-connection` の 4 枚 (sunshine-pacific-vs-nihonkai・precipitation-gap・snow-kerosene-scatter・clear-days-map) と `medical-access-regional-gap` の 3 枚 (physicians-ranking・bed-occupancy-ranking・summary-findings) の `data/<名前>.svg` が 404 だった。別に 6 記事 (estimated-hourly-wage-ranking・gender-wage-gap-ranking・nurse-salary-ranking・telework-income-correlation・tokyo-real-income-after-rent・truck-driver-salary-trend) は一覧にあるのに `article.md` が 404 だった。
+- **未確認**: 公開ページの表示はまだ見ていない。
+- **次**: 2 記事と 6 記事を本番のページで開き、図の欠けと 404 を確かめる。原因を調べ、図の再生成か一覧からの除外を決める。
+- **完了条件**: 一覧の全記事に `article.md` があり、本文が指す図がすべて R2 にある。
 
 ### [BLOG-PUBLISH-AUDIT-KAKEI-01] 公開後の検査が家計調査の 9 指標で落ち、送り箱の掃除が止まる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]

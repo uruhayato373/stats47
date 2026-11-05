@@ -13,9 +13,10 @@ import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { classifyCoverage, computeReach, indexPages, parentIdOf, parseCsv, READ_THRESHOLD, sumTraffic } from "./issue-graph-core.mjs";
+import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
-const SITE = "https://stats47.jp";
+const SITE = SITE_ORIGIN;
 const out = process.argv[2] ?? "/tmp/stats47-issue-view.html";
 const readJson = (rel) => JSON.parse(readFileSync(join(PROJECT_ROOT, rel), "utf8"));
 
