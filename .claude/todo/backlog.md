@@ -887,7 +887,7 @@ updated: 2026-11-01
   6. 残りの図: 折れ線などを共通の型へ移す
 - **止まる場面**: 本文の結論が変わる記事の書き直し / note への最初の更新の見本 / 有料記事の更新方法 / main へのデプロイ。それ以外は確認なしで進める。
 - **制約**: 有料記事の添付は 1 日 10 回まで。`ins_img` は見出しの直前で画像がずれる既知の不具合がある。note の本文更新はエディタ操作で全文を差し替える。
-- **進み具合**: 2026-11-04 に散布図 183 枚を反映 (3,524 件を公開 URL で確認)。段階 1 が進行中。
+- **進み具合**: 2026-11-04 に散布図 183 枚を反映 (3,524 件を公開 URL で確認)。2026-11-05 に値の違う図の記事 5 本を結論から書き直して審査を通した (婚姻・県民所得・太陽光 2 本・大学)。段階 1 が進行中。
 
 ### [BLOG-CHART-STALE-VALUES-01] 公開中の図 5 枚の値が指標の今の値と違う記事を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-04] [領域:サイト]
@@ -896,6 +896,22 @@ updated: 2026-11-01
 - **対象**: `library-museum-cultural-capital` (library-lending-books・比が 1,500 万倍近く、別の指標の可能性) / `marriage-divorce-okinawa` (divorces-per-total-population) / `prefectural-income-gdp-ranking` (per-capita-kenmin-shotoku-h27) / `solar-panel-housing-prefecture-gap` (solar-panel-housing-rate) / `university-advancement-capacity` (university-capacity-index)。
 - **次**: 指標の値が直ったのか、図の指標の指定が誤りかを記事ごとに確かめ、本文の結論が変わるなら書き直して審査を通す (同じ年の値の変化は `refresh-article-data-years` では取り直せない)。
 - **完了条件**: `chart-axes-queue.json` の `summary.staleValues` が 0 になる。
+
+### [BLOG-METRIC-DEFINITION-GAPS-01] 記事が使う指標の定義が config に無く、本文で断定できない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **起点**: 2026-11-05 の記事の書き直しの審査で、次の定義が指標定義シートから取れなかった。
+- **対象**: `university-capacity-index` の計算式 (e-Stat の項目定義と統計局のページでは確認できなかった) / `annual-sunshine-duration` の観測地点 / `dual-income-household-ratio` の分母 / `high-school-advancement-rate` の範囲 (短大などを含むか)。
+- **同じ起点の誤り**: `data/metrics/university-capacity-index.ts` の seoTitle・seoDescription が 238.4 / 47.4 で、R2 の 2024 年度は 238.3 / 46.7。手書きの値が更新に追従していない。
+- **次**: 統計局の指標計算式の資料で確かめて `description` に書く。確かめられたら該当記事の「確認していません」の注記を外す。seo 文の数字は手書きをやめる方法を検討する。
+- **完了条件**: 4 指標の定義シートが「対象の記述なし」を返さない。
+
+### [BLOG-SCATTER-LABEL-SIDE-01] 散布図の県名が、点と重なる側しか試さず消える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト]
+
+- **起点**: `university-advancement-capacity/capacity-vs-advancement-scatter` で labelPoints に京都府・奈良県・香川県を指定しても、片側だけ試して重なるので名前が出ず、端の県が代わりに出た。
+- **次**: `apps/admin/lib/template-relationship-scatter.ts` で反対側と上下も試す。公開中の図の見た目が変わるので、見本を確かめてから全件へ流す。
+- **完了条件**: labelPoints の県が、物理的に置けない場合を除いて図に出る。
 
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]

@@ -1,0 +1,23 @@
+{
+  "kind": "scatter",
+  "xKey": "detached-house-ratio",
+  "yKey": "solar-panel-housing-rate",
+  "year": "x:2023/y:2023",
+  "generatedBy": ".claude/scripts/blog/rebuild-scatter-data.mjs",
+  "xSource": "r2:app/stats/detached-house-ratio/values.json",
+  "ySource": "r2:app/stats/solar-panel-housing-rate/values.json",
+  "restore": "node .claude/scripts/blog/rebuild-scatter-data.mjs --spec <spec> --out <dir>",
+  "axes": {
+    "x": {
+      "metricKey": "detached-house-ratio",
+      "year": "2023年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "solar-panel-housing-rate",
+      "year": "2023年",
+      "proof": "values"
+    }
+  },
+  "pearsonR": 0.4275
+}

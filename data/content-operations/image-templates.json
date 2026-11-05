@@ -207,7 +207,7 @@
       "purposes": [
         "relationship"
       ],
-      "metricColor": "none"
+      "metricColor": "single"
     },
     {
       "id": "radar",
