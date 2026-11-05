@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "insecticide-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "殺虫・防虫剤消費支出額",
+  "readerLabel": "殺虫・防虫剤への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/insecticide-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug insecticide-consumption-expenditure-prefecture-gap --keys insecticide-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T10:52:28.544Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

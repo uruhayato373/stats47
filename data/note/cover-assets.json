@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-11-04T07:09:46.472Z",
+  "updatedAt": "2026-11-04T10:56:11.022Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -52722,6 +52722,31 @@
             "sourceUrl": "https://assets.st-note.com/production/uploads/images/328108845/rectangle_large_type_2_e231b5f9102ba62bd93dfa364986ce9d.png?fit=bounds&quality=85&width=1280",
             "sourceSha256": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572"
           }
+        },
+        {
+          "sha256": "5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-household-consumption-pack/revisions/5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b.png"
+          },
+          "bytes": 427793,
+          "id": "5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-04T10:55:20.378Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b"
+          }
         }
       ],
       "candidateRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
@@ -52729,7 +52754,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-11-04T04:11:44.099Z",
+        "observedAt": "2026-11-04T10:55:20.378Z",
         "revisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7"
       },
       "missingVersions": [],

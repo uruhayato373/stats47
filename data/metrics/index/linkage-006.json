@@ -2,6 +2,3148 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "designated-difficult-disease",
+      "pageId": "ranking:designated-difficult-disease",
+      "title": "指定難病受給者証所持者数（都道府県別・疾患総数）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004048079",
+          "filters": {
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004048079",
+          "cdCat01": "100"
+        },
+        "derived": false,
+        "configHash": "580ba4927d65ada9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:designated-difficult-disease-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:designated-difficult-disease",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "designated-museum-visitors",
+      "pageId": "ranking:designated-museum-visitors",
+      "title": "指定施設の入館者数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040439522&fileKind=0"
+        },
+        "fetcherKey": "manual",
+        "configHash": "3b4c4683883b0612"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:designated-museum-visitors",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "designer-annual-income",
+      "pageId": "ranking:designer-annual-income",
+      "title": "デザイナーの平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1224"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1224"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "c68329cc8d3e9877"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:designer-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "detached-house-ratio",
+      "pageId": "ranking:detached-house-ratio",
+      "title": "一戸建住宅比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H01401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01401"
+        },
+        "derived": false,
+        "configHash": "9a9499f783b218b0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:solar-panel-housing-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:detached-house-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "detached-houses",
+      "pageId": null,
+      "title": "一戸建住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H1401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H1401"
+        },
+        "derived": false,
+        "configHash": "d9b5232d768716fe"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:detached-houses",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:detached-houses",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "detached-houses-non-wooden",
+      "pageId": null,
+      "title": "一戸建住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H140102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H140102"
+        },
+        "derived": false,
+        "configHash": "31bb685bec561730"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:detached-houses-non-wooden",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:detached-houses-non-wooden",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "detached-houses-wooden",
+      "pageId": null,
+      "title": "一戸建住宅数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H140101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H140101"
+        },
+        "derived": false,
+        "configHash": "e9cea408315db4c3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:detached-houses-wooden",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:detached-houses-wooden",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "detergents-group-consumption-expenditure",
+      "pageId": "ranking:detergents-group-consumption-expenditure",
+      "title": "洗剤消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040502000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040502000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "02016f9504b5b5e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:detergents-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "dietitian-annual-income",
+      "pageId": "ranking:dietitian-annual-income",
+      "title": "栄養士の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1151"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1151"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "eb309145a11cceca"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:dietitian-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "dining-out-consumption-expenditure",
+      "pageId": "ranking:dining-out-consumption-expenditure",
+      "title": "外食消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "011200000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "011200000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "70ffec16fbf41fad"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:dining-out-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:movie-theater-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:school-lunch-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:dining-out-consumption-expenditure",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "disability-support-facility-count",
+      "pageId": null,
+      "title": "障害者支援施設等数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020210",
+          "filters": {
+            "cdCat01": "J2905"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020210",
+          "cdCat01": "J2905"
+        },
+        "derived": false,
+        "configHash": "e96b8c76b9f1b9e9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:disability-support-facility-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:disability-support-facility-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disabled-employment-rate",
+      "pageId": "ranking:disabled-employment-rate",
+      "title": "障害者就職率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03602"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03602"
+        },
+        "derived": false,
+        "configHash": "e1b3e7e0fd598433"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:disabled-employment-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:disability-support",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "disability-support"
+      ]
+    },
+    {
+      "metricKey": "disabled-job-ratio-per-1000",
+      "pageId": "ranking:disabled-job-ratio-per-1000",
+      "title": "就職者に占める身体障害者の比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03601"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03601"
+        },
+        "derived": false,
+        "configHash": "4148a35376336e40"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:disabled-job-ratio-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-damage-amount",
+      "pageId": "ranking:disaster-damage-amount",
+      "title": "災害被害額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K5112"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K5112"
+        },
+        "ops": {
+          "valueScale": 1000000
+        },
+        "derived": true,
+        "configHash": "c4a1cc7826933c43"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:disaster-damage-amount",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-damage-amount-per-person",
+      "pageId": "ranking:disaster-damage-amount-per-person",
+      "title": "災害被害額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K07105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K07105"
+        },
+        "derived": false,
+        "configHash": "33305c639f213f5c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:disaster-damage-per-person-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:earthquake-insurance-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:safety",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:disaster-damage-amount-per-person",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "disaster-recovery-expenditure-ratio-pref-finance",
+      "pageId": "ranking:disaster-recovery-expenditure-ratio-pref-finance",
+      "title": "災害復旧費割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0312301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0312301"
+        },
+        "derived": false,
+        "configHash": "d71ab15d4b44dc0e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:disaster-recovery-expenditure-ratio-pref-finance",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-recovery-expense-municipal",
+      "pageId": null,
+      "title": "災害復旧費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320311"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320311"
+        },
+        "derived": false,
+        "configHash": "56c49b9984cf886a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:disaster-recovery-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:disaster-recovery-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-recovery-expenses-prefecture",
+      "pageId": "ranking:disaster-recovery-expenses-prefecture",
+      "title": "災害復旧費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310312"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310312"
+        },
+        "derived": false,
+        "configHash": "9d8b949152347d3a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:disaster-recovery-expenses-prefecture",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "disaster-recovery-project-expense-municipal",
+      "pageId": null,
+      "title": "災害復旧事業費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320407"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320407"
+        },
+        "derived": false,
+        "configHash": "2a2a831fb854d310"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:disaster-recovery-project-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:disaster-recovery-project-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-recovery-project-expenses-prefecture",
+      "pageId": "ranking:disaster-recovery-project-expenses-prefecture",
+      "title": "災害復旧事業費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310407"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310407"
+        },
+        "derived": false,
+        "configHash": "e1f5e9f486f26417"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:disaster-recovery-project-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-relief-expense-municipal",
+      "pageId": null,
+      "title": "災害救助費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D3203035"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D3203035"
+        },
+        "derived": false,
+        "configHash": "667be1db3651d68e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:disaster-relief-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:disaster-relief-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disaster-relief-expenses-prefecture",
+      "pageId": "ranking:disaster-relief-expenses-prefecture",
+      "title": "災害救助費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103035"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103035"
+        },
+        "derived": false,
+        "configHash": "7d348c5e4c727fe1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:peach-consumption-quantity-vs-disaster-relief-expenses",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:disaster-relief-expenses-prefecture",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "discharged-patients",
+      "pageId": "ranking:discharged-patients",
+      "title": "退院患者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010109",
+          "filters": {
+            "cdCat01": "I821003"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010109",
+          "cdCat01": "I821003"
+        },
+        "derived": false,
+        "configHash": "57dbf90f212e9aa4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:discharged-patients",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "dispatched-workers",
+      "pageId": null,
+      "title": "雇用者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2410"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2410"
+        },
+        "derived": false,
+        "configHash": "980acd8e35d37c4d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:dispatched-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:dispatched-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "disposable-income-after-rent",
+      "pageId": "ranking:disposable-income-after-rent",
+      "title": "家賃差引の参考額（月額）",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "ops": {
+          "calc": {
+            "type": "subtraction",
+            "numeratorKey": "disposable-income-worker-households",
+            "denominatorKey": "private-rent-consumption-expenditure",
+            "periodAlign": {
+              "numerator": "monthly",
+              "denominator": "annual",
+              "result": "monthly"
+            },
+            "decimalPlaces": 0
+          }
+        },
+        "derived": true,
+        "fetcherKey": "calculated",
+        "configHash": "08438df4227ba1b7"
+      },
+      "dependencies": [
+        "disposable-income-worker-households",
+        "private-rent-consumption-expenditure"
+      ],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:real-disposable-income-reversal",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:disposable-income-after-rent",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:real-income",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "real-income"
+      ]
+    },
+    {
+      "metricKey": "disposable-income-worker-households",
+      "pageId": "ranking:disposable-income-worker-households",
+      "title": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010112",
+          "filters": {
+            "cdCat01": "L3130"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010112",
+          "cdCat01": "L3130"
+        },
+        "derived": false,
+        "configHash": "acac9e51ce43e00a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:real-disposable-income-reversal",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:real-income",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:disposable-income-worker-households",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:real-income",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "real-income"
+      ]
+    },
+    {
       "metricKey": "divorces",
       "pageId": "ranking:divorces",
       "title": "離婚件数",
@@ -1039,6 +4181,43 @@
       ]
     },
     {
+      "metricKey": "domestic-services-group-consumption-expenditure",
+      "pageId": "ranking:domestic-services-group-consumption-expenditure",
+      "title": "家事サービス消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040600000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040600000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2da819745d8cc12f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:domestic-services-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "domestic-student-remittance-consumption-expenditure",
       "pageId": "ranking:domestic-student-remittance-consumption-expenditure",
       "title": "国内遊学仕送り金消費支出額",
@@ -1810,6 +4989,43 @@
         },
         {
           "pageId": "ranking:dressing-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "dried-foods-seaweed-group-consumption-expenditure",
+      "pageId": "ranking:dried-foods-seaweed-group-consumption-expenditure",
+      "title": "乾物・海藻消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010520000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010520000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1596476819f236a3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:dried-foods-seaweed-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -4673,6 +7889,50 @@
       "themes": []
     },
     {
+      "metricKey": "education-budget-share-kakei",
+      "pageId": null,
+      "title": "消費支出に占める教育の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002070003",
+          "filters": {
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002070003",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city",
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "152"
+            ],
+            "denominatorCodes": [
+              "059"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "70d7c0891ead8264"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:education-budget-share-kakei",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "education-cost-all-households",
       "pageId": "ranking:education-cost-all-households",
       "title": "教育費",
@@ -5600,2729 +8860,6 @@
         },
         {
           "pageId": "ranking:eggplant-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-care-employment-rate",
-      "pageId": "ranking:elderly-care-employment-rate",
-      "title": "介護をしている人の就業率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004008584",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "00",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004008584",
-          "cdCat01": "0",
-          "cdCat02": "00",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat04",
-            "numeratorCodes": [
-              "1"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "e1f0f148eb9e060b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-care-employment-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-class-lecture-count-per-million",
-      "pageId": "ranking:elderly-class-lecture-count-per-million",
-      "title": "高齢者学級・講座数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010207",
-          "filters": {
-            "cdCat01": "#G03207"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010207",
-          "cdCat01": "#G03207"
-        },
-        "derived": false,
-        "configHash": "9c59630dfcbb9b3a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-class-lecture-count-per-million",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-couple-households",
-      "pageId": null,
-      "title": "高齢夫婦のみの世帯数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A8201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A8201"
-        },
-        "derived": false,
-        "configHash": "c0dcb07e7113581d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-couple-households",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:aging-society",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-couple-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-couple-only-household-ratio",
-      "pageId": "ranking:elderly-couple-only-household-ratio",
-      "title": "高齢夫婦のみの世帯の割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A06302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A06302"
-        },
-        "derived": false,
-        "configHash": "2262a0deb852b045"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "municipality-ranking:elderly-couple-only-household-ratio",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:single-parent-households",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-couple-only-household-ratio",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society",
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "elderly-day-service-within-500m-household-ratio",
-      "pageId": null,
-      "title": "老人デイサービスセンターまで500m未満の世帯の割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004025626",
-          "filters": {
-            "cdTab": "13-2023",
-            "cdCat01": "00"
-          }
-        },
-        {
-          "role": "city",
-          "statsDataId": "0004025626",
-          "filters": {
-            "cdTab": "13-2023",
-            "cdCat01": "00"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004025626",
-          "cdCat01": "00",
-          "cdTab": "13-2023"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat02",
-            "numeratorCodes": [
-              "1",
-              "2"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "845e021a1c3c4ef5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-day-service-within-500m-household-ratio",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-day-service-within-500m-household-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-equipment-dwellings",
-      "pageId": null,
-      "title": "高齢者等用設備住宅数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H2230"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H2230"
-        },
-        "derived": false,
-        "configHash": "f231723ea53d7735"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-equipment-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-equipment-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-friendly-apartment-dwellings",
-      "pageId": null,
-      "title": "高齢者対応型共同住宅数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H140330"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H140330"
-        },
-        "derived": false,
-        "configHash": "6652939ee4381ed9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-friendly-apartment-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-friendly-apartment-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-general-worker-old-population-ratio",
-      "pageId": "ranking:elderly-general-worker-old-population-ratio",
-      "title": "高齢一般労働者割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0350406"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0350406"
-        },
-        "derived": false,
-        "configHash": "388f43739f13f728"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-general-worker-old-population-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-general-worker-old-population-ratio-pre2019",
-      "pageId": "ranking:elderly-general-worker-old-population-ratio-pre2019",
-      "title": "高齢一般労働者割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0350403"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0350403"
-        },
-        "derived": false,
-        "configHash": "8a6a8f3e044dbe09"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-general-worker-old-population-ratio-pre2019",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-household-detail",
-      "pageId": "ranking:elderly-household-detail",
-      "title": "65歳以上世帯員のいる主世帯数（家族類型総数）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003355281",
-          "filters": {
-            "cdCat01": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003355281",
-          "cdCat01": "0"
-        },
-        "derived": false,
-        "configHash": "8b5e576a82b47ee9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-household-detail",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-living-alone-rate",
-      "pageId": "ranking:elderly-living-alone-rate",
-      "title": "65歳以上人口に占める一人暮らしの割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {}
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat01",
-            "numeratorCodes": [
-              "A811105"
-            ],
-            "denominatorCodes": [
-              "A1303"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "c4c894ab67cff824"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:elderly-living-alone-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "elderly-on-public-assistance-per-1000-65plus",
-      "pageId": "ranking:elderly-on-public-assistance-per-1000-65plus",
-      "title": "生活保護被保護高齢者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J0110902"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J0110902"
-        },
-        "derived": false,
-        "configHash": "59b80693900ec8f0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:dual-income-household-ratio-vs-elderly-on-public-assistance",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:elderly-on-public-assistance-per-1000-65plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-population-ratio",
-      "pageId": null,
-      "title": "65歳以上人口割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020301",
-          "filters": {
-            "cdCat01": "#A03506"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020301",
-          "cdCat01": "#A03506"
-        },
-        "derived": false,
-        "configHash": "c440f111c6435b32"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-population-ratio",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:aging-society",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-population-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-single-households",
-      "pageId": null,
-      "title": "65歳以上世帯員の単独世帯数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A8301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A8301"
-        },
-        "derived": false,
-        "configHash": "cbe29caf00194db4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-single-households",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:aging-society",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-single-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-single-households-female",
-      "pageId": null,
-      "title": "65歳以上世帯員の単独世帯数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A830102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A830102"
-        },
-        "derived": false,
-        "configHash": "c673c6ed0d9ec5ae"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-single-households-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:aging-society",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-single-households-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-single-households-male",
-      "pageId": null,
-      "title": "65歳以上世帯員の単独世帯数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A830101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A830101"
-        },
-        "derived": false,
-        "configHash": "41e4b46ea5185f9d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-single-households-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:aging-society",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-single-households-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-single-person-households",
-      "pageId": "ranking:elderly-single-person-households",
-      "title": "高齢単身世帯数（60歳以上の者1人）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A8303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A8303"
-        },
-        "derived": false,
-        "configHash": "6faa765de6577436"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-single-person-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-welfare-expenditure-ratio-pref-finance",
-      "pageId": "ranking:elderly-welfare-expenditure-ratio-pref-finance",
-      "title": "老人福祉費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0310501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0310501"
-        },
-        "derived": false,
-        "configHash": "cc1d8769fe9830be"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:nursing-care-shortage-2040",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:elderly-welfare-expenditure-ratio-pref-finance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-welfare-expense-municipal",
-      "pageId": null,
-      "title": "老人福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020204",
-          "filters": {
-            "cdCat01": "D3203032"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020204",
-          "cdCat01": "D3203032"
-        },
-        "derived": false,
-        "configHash": "798f2f3ca0cda087"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-welfare-expense-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-welfare-expense-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-welfare-expenses-prefecture",
-      "pageId": "ranking:elderly-welfare-expenses-prefecture",
-      "title": "老人福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103032"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103032"
-        },
-        "derived": false,
-        "configHash": "af76c3e137f40060"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:elderly-welfare-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-welfare-facility-count",
-      "pageId": null,
-      "title": "老人福祉施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020210",
-          "filters": {
-            "cdCat01": "J2304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020210",
-          "cdCat01": "J2304"
-        },
-        "derived": false,
-        "configHash": "ce2defddf1a9a3ae"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:elderly-welfare-facility-count",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:childcare-services",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:disability-support",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:long-term-care",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-welfare-facility-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elderly-workers-ratio",
-      "pageId": "ranking:elderly-workers-ratio",
-      "title": "高齢就業者割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0350303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0350303"
-        },
-        "derived": false,
-        "configHash": "3fa617b9f8e0eb4e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "municipality-ranking:elderly-workers-ratio",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-wages",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:elderly-workers-ratio",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "electrician-annual-income",
-      "pageId": "ranking:electrician-annual-income",
-      "title": "電気工事従事者の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1671"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1671"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "80e9d31ef49f870d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:electrician-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "electricity-consumption-expenditure",
-      "pageId": "ranking:electricity-consumption-expenditure",
-      "title": "電気代消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "030100000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "030100000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "8ffd603ca5c53577"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:gas-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:heating-cost-vs-disposable-income",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:electricity-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "electricity-consumption-quantity",
-      "pageId": "ranking:electricity-consumption-quantity",
-      "title": "電気使用量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "030100000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "030100000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "e50e3b1d56db9e46"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:electricity-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:electricity-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "electricity-demand",
-      "pageId": "ranking:electricity-demand",
-      "title": "電力需要量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H05107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H05107"
-        },
-        "derived": false,
-        "configHash": "8dcace244cae44bf"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:cc-estat-14-energy-area-chart",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:electricity-demand-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:energy-infrastructure-gas-electricity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:electricity-demand",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:regional-energy",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "regional-energy"
-      ]
-    },
-    {
-      "metricKey": "electricity-generation-capacity",
-      "pageId": "ranking:electricity-generation-capacity",
-      "title": "発電電力量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H05106"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H05106"
-        },
-        "derived": false,
-        "configHash": "9e962469d452634a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-economy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:electricity-demand-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:renewable-energy-regional-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:electricity-generation-capacity",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-economy",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-economy"
-      ]
-    },
-    {
-      "metricKey": "elementary-long-term-absent-students",
-      "pageId": "ranking:elementary-long-term-absent-students",
-      "title": "小学校長期欠席児童数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010105",
-          "filters": {
-            "cdCat01": "E2508"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010105",
-          "cdCat01": "E2508"
-        },
-        "derived": false,
-        "configHash": "4cfb86a2d46e50b9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:elementary-long-term-absent-students",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "elementary-school-children-1-per",
-      "pageId": "ranking:elementary-school-children-1-per",
-      "title": "小学校児童数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E0510205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E0510205"
-        },
-        "derived": false,
-        "configHash": "0f303460f8d3f35b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:elementary-school-children-1-per",
           "kind": "ranking"
         }
       ],

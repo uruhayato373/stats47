@@ -2,6 +2,1571 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "cheese-consumption-expenditure",
+      "pageId": "ranking:cheese-consumption-expenditure",
+      "title": "チーズ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010420040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010420040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "7697a4615d36a926"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:cheese-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:cheese-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "cheese-consumption-quantity",
+      "pageId": "ranking:cheese-consumption-quantity",
+      "title": "チーズ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010420040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010420040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b98117102abb2c0b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:cheese-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "chest-consumption-expenditure",
+      "pageId": "ranking:chest-consumption-expenditure",
+      "title": "たんす消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040130010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040130010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c0c9dd93d99c9678"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:chest-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "chest-consumption-quantity",
+      "pageId": "ranking:chest-consumption-quantity",
+      "title": "たんす購入数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "040130010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "040130010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "71be1d9656ce5fa9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:chest-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "chicken-consumption-expenditure",
+      "pageId": "ranking:chicken-consumption-expenditure",
+      "title": "鶏肉消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010310030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010310030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "4b590de4f3f22f47"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:chicken-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "chicken-consumption-quantity",
+      "pageId": "ranking:chicken-consumption-quantity",
+      "title": "鶏肉消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010310030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010310030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d3286a2508d6816a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:beef-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:chicken-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:chicken-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:chicken-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "chikuwa-consumption-expenditure",
+      "pageId": "ranking:chikuwa-consumption-expenditure",
+      "title": "ちくわ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010230020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010230020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "41f344920e9f8b29"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:chikuwa-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "child-abuse-consultation-cases",
+      "pageId": "ranking:child-abuse-consultation-cases",
+      "title": "児童相談所における児童虐待相談の対応件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J3209"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J3209"
+        },
+        "derived": false,
+        "configHash": "8d66ff8a1acf8741"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:child-abuse-consultation-cases",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "child-consultation-center-cases",
+      "pageId": "ranking:child-consultation-center-cases",
+      "title": "児童相談所受付件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J3207"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J3207"
+        },
+        "derived": false,
+        "configHash": "da14286818e38013"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:child-consultation-center-cases",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "child-consultation-center-cases-per-1000",
+      "pageId": "ranking:child-consultation-center-cases-per-1000",
+      "title": "児童相談所受付件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J05210"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J05210"
+        },
+        "derived": false,
+        "configHash": "bec5a6e04f5387ab"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:child-consultation-center-cases-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "child-rearing-allowance-recipients",
+      "pageId": "ranking:child-rearing-allowance-recipients",
+      "title": "児童扶養手当受給者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdTab": "00001",
+            "cdCat01": "J1401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J1401",
+          "cdTab": "00001"
+        },
+        "derived": false,
+        "configHash": "4abcea6f475afeec"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:single-parent-households",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:child-rearing-allowance-recipients",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:single-parent-households",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance",
+        "single-parent-households"
+      ]
+    },
+    {
+      "metricKey": "child-welfare-expenditure-ratio-pref-finance",
+      "pageId": "ranking:child-welfare-expenditure-ratio-pref-finance",
+      "title": "児童福祉費割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0310601"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0310601"
+        },
+        "derived": false,
+        "configHash": "f9bb4ac6bb458199"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:child-welfare-expenditure-ratio-pref-finance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "child-welfare-expense-municipal",
+      "pageId": null,
+      "title": "児童福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D3203033"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D3203033"
+        },
+        "derived": false,
+        "configHash": "1ce55301a9c652c8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:child-welfare-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:child-welfare-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "child-welfare-expenses-prefecture",
+      "pageId": "ranking:child-welfare-expenses-prefecture",
+      "title": "児童福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103033"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103033"
+        },
+        "derived": false,
+        "configHash": "3b60f7acb00594ff"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:child-welfare-expenses-prefecture",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "child-welfare-facility-count",
+      "pageId": null,
+      "title": "児童福祉施設等数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020210",
+          "filters": {
+            "cdCat01": "J250204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020210",
+          "cdCat01": "J250204"
+        },
+        "derived": false,
+        "configHash": "794d4d4155fbed82"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:child-welfare-facility-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:child-welfare-facility-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "child-welfare-facility-count-per-100k",
       "pageId": "ranking:child-welfare-facility-count-per-100k",
       "title": "児童福祉施設等数",
@@ -501,6 +2066,80 @@
       "themes": []
     },
     {
+      "metricKey": "childrens-shirts-sweaters-group-consumption-expenditure",
+      "pageId": "ranking:childrens-shirts-sweaters-group-consumption-expenditure",
+      "title": "子供用シャツ・セーター類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "050330000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "050330000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "107d0915687945b6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:childrens-shirts-sweaters-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "childrens-shirts-sweaters-group-consumption-quantity",
+      "pageId": "ranking:childrens-shirts-sweaters-group-consumption-quantity",
+      "title": "子供用シャツ・セーター類消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "050330000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "050330000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ab1ac1d453a5466f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:childrens-shirts-sweaters-group-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "childrens-shoes-consumption-expenditure",
       "pageId": "ranking:childrens-shoes-consumption-expenditure",
       "title": "子供用靴・サンダル消費支出額",
@@ -717,6 +2356,43 @@
       "consumers": [
         {
           "pageId": "ranking:childrens-underwear-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "childrens-underwear-group-consumption-expenditure",
+      "pageId": "ranking:childrens-underwear-group-consumption-expenditure",
+      "title": "子供用下着類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "050430000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "050430000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "26de3296ccf2f15d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:childrens-underwear-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -3253,6 +4929,50 @@
       "themes": []
     },
     {
+      "metricKey": "clothing-footwear-budget-share-kakei",
+      "pageId": null,
+      "title": "消費支出に占める被服及び履物の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002070003",
+          "filters": {
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002070003",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city",
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "122"
+            ],
+            "denominatorCodes": [
+              "059"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "be6eda404e94a06b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:clothing-footwear-budget-share-kakei",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "clothing-footwear-expenditure-ratio-multi-person-households",
       "pageId": "ranking:clothing-footwear-expenditure-ratio-multi-person-households",
       "title": "被服及び履物費割合",
@@ -3361,6 +5081,43 @@
       "consumers": [
         {
           "pageId": "ranking:clothing-rental-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "clothing-services-group-consumption-expenditure",
+      "pageId": "ranking:clothing-services-group-consumption-expenditure",
+      "title": "被服関連サービス消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "050800000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "050800000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "06b18433a579b0ec"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:clothing-services-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -3747,6 +5504,43 @@
         },
         {
           "pageId": "ranking:cod-roe-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "coffee-cocoa-group-consumption-expenditure",
+      "pageId": "ranking:coffee-cocoa-group-consumption-expenditure",
+      "title": "コーヒー・ココア消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "011020000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "011020000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d12c172e4d5c8b35"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:coffee-cocoa-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -4940,6 +6734,43 @@
       "consumers": [
         {
           "pageId": "ranking:commission-fees-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "communication-group-consumption-expenditure",
+      "pageId": "ranking:communication-group-consumption-expenditure",
+      "title": "通信消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070300000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070300000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0110f29a8cf54095"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:communication-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -6998,1283 +8829,6 @@
         },
         {
           "pageId": "ranking:commuters-to-other-municipalities",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-to-other-municipalities-female",
-      "pageId": null,
-      "title": "他市区町村への通勤者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270502"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270502"
-        },
-        "derived": false,
-        "configHash": "395be25db60ef12a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-to-other-municipalities-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-to-other-municipalities-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-to-other-municipalities-male",
-      "pageId": null,
-      "title": "他市区町村への通勤者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F270501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F270501"
-        },
-        "derived": false,
-        "configHash": "1d522f82938eeb1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-to-other-municipalities-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-to-other-municipalities-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-to-other-municipality-same-prefecture",
-      "pageId": null,
-      "title": "県内他市区町村への通勤・通学者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H7303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H7303"
-        },
-        "derived": false,
-        "configHash": "b9aac1fe2ac48665"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-to-other-municipality-same-prefecture",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-to-other-municipality-same-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-to-other-prefecture",
-      "pageId": null,
-      "title": "他県への通勤・通学者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H7304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H7304"
-        },
-        "derived": false,
-        "configHash": "4ef2fd0909566de6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-to-other-prefecture",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-to-other-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-total",
-      "pageId": "ranking:commuters-total",
-      "title": "自宅外通勤・通学者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H7301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H7301"
-        },
-        "derived": false,
-        "configHash": "09c81ed8b2dc4213"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:regional-transport",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "municipality-ranking:commuters-total",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-total",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:regional-transport",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "regional-transport"
-      ]
-    },
-    {
-      "metricKey": "commuters-using-three-plus-modes",
-      "pageId": null,
-      "title": "自宅外通勤・通学者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H730109"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H730109"
-        },
-        "derived": false,
-        "configHash": "2b9a7f258b63fd72"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-using-three-plus-modes",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-using-three-plus-modes",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-using-two-modes",
-      "pageId": null,
-      "title": "自宅外通勤・通学者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H730108"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H730108"
-        },
-        "derived": false,
-        "configHash": "4a3b64909881f11b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-using-two-modes",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-using-two-modes",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "commuters-within-own-municipality",
-      "pageId": null,
-      "title": "自市区町村内通勤・通学者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H7302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H7302"
-        },
-        "derived": false,
-        "configHash": "16c222d33a47ee04"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:commuters-within-own-municipality",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-mobility",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:regional-transport",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:commuters-within-own-municipality",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "company-executives",
-      "pageId": null,
-      "title": "役員数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F2402"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F2402"
-        },
-        "derived": false,
-        "configHash": "7884f51789f7ba4c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:company-executives",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-wages",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:company-executives",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "company-housing-rent-consumption-expenditure",
-      "pageId": "ranking:company-housing-rent-consumption-expenditure",
-      "title": "給与住宅家賃消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "020100030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "020100030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "bb50f80e44f6d2a9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:company-housing-rent-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "company-housing-rent-consumption-quantity",
-      "pageId": "ranking:company-housing-rent-consumption-quantity",
-      "title": "給与住宅家賃消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "020100030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "020100030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "7a88e42b3d5a1ed0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:company-housing-rent-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "complainant-count",
-      "pageId": "ranking:complainant-count",
-      "title": "有訴者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010109",
-          "filters": {
-            "cdCat01": "I8103"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010109",
-          "cdCat01": "I8103"
-        },
-        "derived": false,
-        "configHash": "69a87ad72678f0cc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:complainant-count-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:complainant-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "complainant-rate-per-1000",
-      "pageId": "ranking:complainant-rate-per-1000",
-      "title": "有訴者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I04105"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I04105"
-        },
-        "derived": false,
-        "configHash": "a1cc7a092d70d196"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:complainant-rate-per-1000",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "compound-services-private-employees",
-      "pageId": null,
-      "title": "従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C220851"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C220851"
-        },
-        "derived": false,
-        "configHash": "56bf3e47b46318dc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:compound-services-private-employees",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:compound-services-private-employees",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "compound-services-private-establishments",
-      "pageId": null,
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C210851"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C210851"
-        },
-        "derived": false,
-        "configHash": "11a033a091a589a3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:compound-services-private-establishments",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:business-demography",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:compound-services-private-establishments",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "compound-services-private-net-value-added",
-      "pageId": null,
-      "title": "業種別の純付加価値額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C620121"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C620121"
-        },
-        "derived": false,
-        "configHash": "d58086c3e4c4bba4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:compound-services-private-net-value-added",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:compound-services-private-net-value-added",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "compound-services-private-sales",
-      "pageId": null,
-      "title": "売上金額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C610121"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C610121"
-        },
-        "derived": false,
-        "configHash": "b03be2b85929aaa3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:compound-services-private-sales",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:compound-services-private-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "comprehensive-park-count",
-      "pageId": "ranking:comprehensive-park-count",
-      "title": "総合公園数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H9107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H9107"
-        },
-        "derived": false,
-        "configHash": "90acee8e4ff0eb35"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:comprehensive-park-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "compulsory-education-school-count-per-100k-6-14",
-      "pageId": "ranking:compulsory-education-school-count-per-100k-6-14",
-      "title": "義務教育学校数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E0110107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E0110107"
-        },
-        "derived": false,
-        "configHash": "b5cb96650c04aece"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:compulsory-education-school-count-per-100k-6-14",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "confectionery-consumption-expenditure",
-      "pageId": "ranking:confectionery-consumption-expenditure",
-      "title": "菓子類消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010800000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010800000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "a0976befbdd0ca18"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:confectionery-consumption-expenditure-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:confectionery-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "consolidated-real-deficit-ratio-municipal",
-      "pageId": null,
-      "title": "連結実質赤字比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020304",
-          "filters": {
-            "cdCat01": "#D02215"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020304",
-          "cdCat01": "#D02215"
-        },
-        "derived": false,
-        "configHash": "155604b9a73ed2b2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:consolidated-real-deficit-ratio-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:consolidated-real-deficit-ratio-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "construction-contract-disaster-recovery",
-      "pageId": null,
-      "title": "災害復旧工事請負契約額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003458635",
-          "filters": {
-            "cdCat01": "100",
-            "cdCat02": "140"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003458635",
-          "cdCat01": "100",
-          "cdCat02": "140"
-        },
-        "derived": false,
-        "configHash": "576c51d06095a75b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:construction-contract-disaster-recovery",
           "kind": "ranking"
         }
       ],

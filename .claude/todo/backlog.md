@@ -67,6 +67,12 @@ updated: 2026-11-01
 ### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
 
+- **検出した小さな不整合 (2026-11-05)**: `data/metrics/university-capacity-index.ts` の seoTitle は京都府 238.4 だが R2 の 2024 年度は 238.3。有料記事 `d-kakei-category-dataset` の題「教育費は8.7倍違う」は単年の値で、5 年平均は 4.2 倍。P-14 の snapshot の title は note の題と異なる。`data-refresh.yml` の dispatch は `--ref` を無視して main を checkout する。`data/surveys/taxonomy.json` の blog の部分は実際の記事とずれている。
+- **記事の公開 (2026-11-05)**: 合格 81 本を背景画像つきで送り箱へ入れた (PR 1221 のマージ後・リンク先 82 指標が本番で 200 を確認)。残り: `blog:batch` の候補は kakei-chousa で尽きた。other-mushroom・laundry-detergent・rent-group は critic REVISE のまま非公開。`blog:batch` は既存の `contents/blog` の slug を対象外にするので、不合格の再挑戦は `write-blog-headless.ts --slugs` で行う。
+- **調査資料の注意 (2026-11-05)**: `docs/31_note記事原稿/kakei-research/` の背景の URL は検索結果の確認までで、原典の数値は未確認。家計調査の民営家賃が全世帯平均か借家世帯平均かは未確認。教育 5 品目は順位の変動が大きく、複数年の確認が要る。ledger の `kind` は item と group が混在し階層が二重に数えられうる。
+- **予定の 6 表 (2026-11-05)**: 分析単位 7 件 (proposed) と構成比の 9 指標 (`*-budget-share-kakei`・isActive:false) と図の生成定義を実装済み。全国の 11 件は本番の /japan の図で確認し published へ。残り: e-Stat の実値確認 (data-refresh は dispatch だと main を checkout するので main マージ後)、確認後に指標を isActive:true・分析単位を published/value-checked へ変え、`npm run estat:kakei-ledger:build` と axis-charts の再生成・テーマの章追加を行う。全国の 5 表は data-refresh で確かめられないので generate-kakei-axis-charts.ts を appId のある環境で回す。
+- **データ商品の導線 (2026-11-04 オーナー判断)**: サイトの案内は商品ページを経由して note へ出す。詳細ページは短い中継のまま残す。note の販売記事 13 本の題を見直した。家計のデータ集は新しく作らず P-14 (`prefecture-household-consumption`) を 841 指標へ更新する。
+- **全面展開の進み具合 (2026-11-04)**: 計画は `/Users/minamidaisuke/.claude/plans/smooth-stargazing-kay.md`、到達の実測は `data/surveys/kakei-coverage.json`。済み: 到達の報告 (`report-kakei-coverage.ts`)、全品目のリンク一覧 (`household-food-spending`)、未判定 131 件 (指標 124・除外 7)。県の上位品目は 11-02 に実装済み。次: 124 指標の取り込み (`data/data-refresh-requests.json` は dryRun のまま 41800174049 が取り消された。r2-write が空いてから出し直す)、予定の 6 表、調査材料、記事、note。
 - **方針の更新 (2026-11-04 オーナー判断)**: 既存の是正だけで止めず、品目も量産し、NotebookLM と Deep Research を使ってできることをすべて展開する。下の 11-01 の「新規品目の量産より」はこの判断で上書きする。
 - **展開の実測 (2026-11-04)**: 公開ランキング 717/717 指標。品目 656 のうち採用 655。未判定 130 (中分類 122・その他 7・品目 1)。テーマに載る指標 150/717 (食卓と家計の支出 132)、県の固定枠 6/717、ブログのリンクがある指標 310/717 (記事 276 本)、note の家計記事 75 本。表 126 は採用 14・予定 6・除外 106。
 - **方針 (2026-11-01 オーナー判断)**: 11月のサイト重点を家計調査にする (月次の範囲は `.claude/todo/monthly.md` 重点1)。新規品目の量産より、既存の検索入口と年次・調査粒度の是正、`/survey/kakei-chousa` → `/themes/household-food-spending` → 代表ランキング → ブログの説明と回遊を優先する。検証できる全切り口 (品目・10大費目・全国時系列・年収階級/五分位・世帯類型・貯蓄負債) を既存のランキング/テーマ/調査ハブ/ブログに割り振る (126表を126ページへ機械変換する意味ではない)。優先理由は 2026-10-19 のユーザー判断で、CTR を実測したものではない。
@@ -154,6 +160,7 @@ updated: 2026-11-01
 - **起点 (2026-11-04 オーナー決定)**: note のデータ集 13 本を値下げした (テーマ別 12 本 ¥980・総合集 ¥2,980。同日に ¥1,980・¥4,980 から再変更)。実験の定義と変更の履歴は `data/products/price-history.json` の `PRICE-DATA-PACK-2026-11`、判断の記録は `data/products/product-strategy.json`、集計は `data/products/PRODUCT-LEDGER.md` と管理画面の「商品の台帳」。
 - **分かっていること**: 値下げ前の 2026-10 はテーマ別 12 本で計 93 PV、総合集 14 PV、売上 ¥0。データ集の公開は 10 月 24〜25 日で、観測は約 1 週間。10 月 31 日以降の売上は未確認で、次の土曜の記録で読む。買った人がいた場合の対応は未決。
 - **次**: ① 導線: 有料データ集の閲覧を増やす (`PRODUCT-REFERRAL-MEASURE-01` と合わせ、ランキングと記事の案内のクリックを週次で読む) ② 判定日に基準どおり続ける・変える・止めるを決め、`price-history.json` の `status`・`result` と `product-strategy.json` の `decisions` に書く ③ 実験の判定後に、有料の下書き 54 本を公開するかを 1 本ずつ決める。
+- **同時の変更 (2026-11-04)**: 同じ日に note の 13 本の題へ「都道府県別」「CSV・Excel」などの検索語を入れた (本文・価格は不変)。判定では価格の効果と題の効果を分けられない。
 - **判定**: 導線を入れてから 8 週で 5 件以上売れたら続ける。1〜4 件なら価格か見せ方を 1 回だけ変える。0 件ならデータの単体販売を止める。基準の 5 件は仮の値で、月 1,000 PV 弱の閲覧を前提にしている。期日の 2026-12-30 は導線が今日入った場合の日付なので、導線が遅れたら後ろへずらす。旧価格の購入者の有無は未確認。
 - **停止条件・禁止**: 判定まで価格を重ねて変えない (前後を比べられなくなる)。価格を変えるときは `update-note-price.mjs` を使い、先に履歴へ書く。不安を煽る訴求で閲覧を増やさない。
 - **完了条件**: 判定の結果と次の価格が履歴と決定の記録にあり、商品の台帳に反映されている。
@@ -818,11 +825,19 @@ updated: 2026-11-01
 - **案**: 目的ごとに指標と重みを明示した 4 本 (子育て・老後・単身・移住)。重みと指標は記事内に書き、読者が組み替えられることを示す。市区町村の子育て (`MUNI-KOSODATE-RANKING-01`) と指標を揃える。
 - **決めること**: 総合の 1 本の 4 週の実績を見てから作るか、今作るか。合成指標は恣意的に見えるので、重みの根拠を書けない目的は作らない。
 
+### [BLOG-REGION-PUBLISHED-FIX-01] 公開済み 10 本の地方のくくりと題の約束の誤りを直す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-11-04] [領域:サイト]
+
+- **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 10 本で見つかった。検出は前後の文ごと全件読み、「新潟など東北」「内陸県の山形」のような本物の誤りだった。gate が止めるのは再公開の時だけなので、公開中の記事は直るまで残る。
+- **対象**: `assembly-answer-chatgpt-5steps` `croquette-consumption-expenditure-prefecture-gap` `hospital-bed-utilization-map` `nagano-food-culture` `pork-consumption-quantity` `school-nonattendance-pattern` `sugar-consumption-prefecture-gap` `tochigi-food-culture` `tuna-consumption-quantity-vs-annual-new-inpatients-general` `yamagata-food-culture`
+- **完了条件**: 各記事の quality-gate で `地方のくくり` と `題の約束` の blocker が 0。`/brushup-blog --target article` で本文を直す。
+
 ### [BLOG-HEADLESS-AUTHOR-01] ブログ執筆を headless `claude -p` のバッチに移し、本数を増やしながら 1 本あたりの費用と通過率を記録する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run] [起票:2026-10-28] [領域:サイト] [進行中]
 
 - **背景 (2026-10-28 オーナー指示)**: 「Claude のトークン消費を節約してブログをもっと展開したい」。Agent tool (article-writer / blog-critic) は subagent が CLAUDE.md と rules を毎ターン読み、是正で約 10 万トークン/本・旧 CI で $8.2/本だった。ランキング解説の headless 経路は $0.51/件 (`ranking-content-standards.md`)。
 - **実装 (branch `claude/determined-newton-2d077c`)**: `packages/ai-content/src/scripts/write-blog-headless.ts` + `src/services/claude-cli-runner.ts`。準備 (`generate-blog-article.ts`) が作った prompt を sonnet・effort low の `claude -p` で書き、`quality-gate.mjs` + `ci-factual-gate.mjs` → 別プロセスの critic (`buildBlogCriticPrompt`・本文だけ) → REVISE なら指摘と原稿を author に返して 1 回書き直す。記録は `data/blog/headless-runs.csv`。公開はしない (`published:false` のまま)。手順は `/write-prepared-article` の「headless 経路」。
+- **量産の入口 (2026-11-04)**: `npm run blog:batch` に一本化した (対象選定〜`--ingest`・一覧。`blog-quality-standards.md`「量産バッチ」)。書く前の材料・書く価値の判定・地方と題の検査も入れた。
 - **実測 (2026-10-28 の要約、明細は `data/blog/headless-runs.csv`)**: 5 本・15 run で、1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27。審査 prompt に書き手の制約と重大度の基準を書き verdict を blocker の有無からコードで決めるよう直した後は 2/4 PASS・PASS 1 本 $0.32 (Agent tool 経路の約 1/25)。残る blocker は記事の事実誤り (山口と岡山を隣接と書く・北海道を東北に含める・題が「なぜ」を約束して答えない) と、審査が順位の整合を疑う誤判定。費用は CLI の `total_cost_usd` (API 換算・Pro/Max の OAuth では実請求ではない)。
 - **次 (実行順)**: ⓪ author prompt (`blog-article-prompt.ts`) に「題で『なぜ』を約束したら本文で答える。答えられないなら題を変える」と、地方区分・隣接の言及は prompt に渡した区分だけを使う指示を足す (残る blocker の多数) ① 型B 以外 (A / D2 / F) で 3〜5 本ずつ回し、型ごとの通過率と費用を CSV に貯める ② 通過率が低い型は critic の指摘を読んで author prompt (`blog-article-prompt.ts`) 側を直す (critic は緩めない) ③ PASS 分を `--ingest` で確定して develop へ push する (公開は週次計画の本数で人が決める)。
 - **完了条件**: 型ごとに 5 本以上の実測が CSV にあり、既定の運転設定 (型・本数・rounds) を skill に書いている。

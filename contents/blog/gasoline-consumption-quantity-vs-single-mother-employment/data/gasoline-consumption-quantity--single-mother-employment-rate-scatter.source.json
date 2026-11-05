@@ -1,0 +1,25 @@
+{
+  "kind": "correlation",
+  "base": "gasoline-consumption-quantity",
+  "pair": "single-mother-employment-rate",
+  "xKey": "gasoline-consumption-quantity",
+  "yKey": "single-mother-employment-rate",
+  "pearsonR": 0.7671545957734096,
+  "partialRPopulation": 0.5997549736580458,
+  "unit": "l × ％",
+  "label": "ガソリン消費量 と 母子世帯の母の就業割合 の関係",
+  "source": "r2:app/correlation/by-ranking-key/gasoline-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug gasoline-consumption-quantity-vs-single-mother-employment --base gasoline-consumption-quantity --pair single-mother-employment-rate --data-name gasoline-consumption-quantity--single-mother-employment-rate",
+  "axes": {
+    "x": {
+      "metricKey": "gasoline-consumption-quantity",
+      "year": "2025年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "single-mother-employment-rate",
+      "year": "2020年",
+      "proof": "values"
+    }
+  }
+}

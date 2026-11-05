@@ -1,30 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-04",
+  "date": "2026-11-05",
   "period": {
-    "periodStart": "2026-10-26",
-    "periodEnd": "2026-11-01",
+    "periodStart": "2026-10-27",
+    "periodEnd": "2026-11-02",
     "windowDays": 7
   },
-  "inputHash": "c3a00434793d7adcc09d2c13d3550df179bd91f4b5f4da1dfef30ba5e61c4214",
+  "inputHash": "46bed532aab147f8ac74a9a74d93b7caedd61292d8faf1866c163b626c7bc9f6",
   "movements": [
-    {
-      "keyword": "高知 生活保護 多い",
-      "targetPath": "/blog/households-on-public-assistance-per-1000-prefecture-gap",
-      "before": 6,
-      "after": 87,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -81
-    },
     {
       "keyword": "苫小牧市 人口",
       "targetPath": "/areas/01000/cities/01213",
       "before": 74,
-      "after": 10.018181818181818,
+      "after": 10.096774193548388,
       "beforeImpressions": 1,
-      "impressions": 55,
-      "change": 63.981818181818184
+      "impressions": 62,
+      "change": 63.903225806451616
     },
     {
       "keyword": "保健師 年収",
@@ -39,10 +30,10 @@
       "keyword": "尾鷲市 人口",
       "targetPath": "/areas/24000/cities/24209",
       "before": 64,
-      "after": 8.135135135135135,
+      "after": 8.131578947368421,
       "beforeImpressions": 1,
-      "impressions": 37,
-      "change": 55.86486486486486
+      "impressions": 38,
+      "change": 55.868421052631575
     },
     {
       "keyword": "人口動態統計",
@@ -54,15 +45,6 @@
       "change": 47
     },
     {
-      "keyword": "水戸 人流",
-      "targetPath": "/areas/08000/cities/08201",
-      "before": 58.5,
-      "after": 12,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": 46.5
-    },
-    {
       "keyword": "フリーランス人口",
       "targetPath": "/ranking/freelance-count",
       "before": 18,
@@ -70,6 +52,15 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": -45
+    },
+    {
+      "keyword": "看護師 給料ランキング 都道府県",
+      "targetPath": "/ranking/practical-nurse-annual-income",
+      "before": 60,
+      "after": 15,
+      "beforeImpressions": 3,
+      "impressions": 2,
+      "change": 45
     },
     {
       "keyword": "高卒 初任 給 平均",
@@ -90,13 +81,22 @@
       "change": 42.5
     },
     {
-      "keyword": "岡山市 人工",
-      "targetPath": "/areas/33000/cities/33100",
-      "before": 52,
-      "after": 10,
+      "keyword": "外国人人口",
+      "targetPath": "/themes/foreign-residents",
+      "before": 100,
+      "after": 58,
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 42
+    },
+    {
+      "keyword": "愛西市人口",
+      "targetPath": "/areas/23000/cities/23232",
+      "before": 49.5,
+      "after": 9,
+      "beforeImpressions": 4,
+      "impressions": 2,
+      "change": 40.5
     }
   ],
   "verdicts": [

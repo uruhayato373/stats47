@@ -26,7 +26,7 @@ describe("DataUsageCard", () => {
 
   it("CSV を落とす前から、その分野のデータ集を案内する", () => {
     render(<DataUsageCard {...baseProps} />);
-    const product = screen.getByRole("link", { name: "内容を見る" });
+    const product = screen.getByRole("link", { name: new RegExp(findStorefrontProduct("data-p-04")!.title) });
     expect(product.getAttribute("href")).toBe("/products/data-p-04");
     expect(screen.getByText(findStorefrontProduct('data-p-04')!.title, { exact: false })).toBeTruthy();
   });

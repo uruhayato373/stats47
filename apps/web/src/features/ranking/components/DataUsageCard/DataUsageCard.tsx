@@ -3,14 +3,12 @@
 import { useState } from "react";
 
 import { Button, buttonVariants } from "@stats47/components/atoms/ui/button";
-import { hrefFor } from "@stats47/data-configs/content/href";
-import { formatValueWithPrecision } from "@stats47/utils";
 import { Download } from "lucide-react";
 
 import { SurfaceCard } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
-import { findDataProductForRanking, TrackedProductLink } from "@/features/products";
+import { findDataProductForRanking, ProductItem } from "@/features/products";
 
 import {
   setDeclaredPurpose,
@@ -116,20 +114,7 @@ export function DataUsageCard({
       </p>
       {/* 常に出す (2026-11-04)。以前は CSV を落として「業務」と答えた人にしか出ず、ランキングからの商品クリックが 0 件だった */}
       {workProduct && (
-        <p className="mt-2 text-xs text-muted-foreground">
-          同じ分野の指標をまとめて資料に使うなら、{workProduct.title.replace(/をお渡しします$/, "")}
-          （{formatValueWithPrecision(workProduct.priceYen, 0)}円）があります。{" "}
-          <TrackedProductLink
-            href={hrefFor("product", { slug: workProduct.slug })}
-            label={`${workProduct.id}:${workProduct.title}`}
-            surface="ranking_product"
-            product={workProduct}
-            placement="ranking_data_card"
-            className="text-primary underline underline-offset-2"
-          >
-            内容を見る
-          </TrackedProductLink>
-        </p>
+        <ProductItem product={workProduct} layout="row" surface="ranking_product" placement="ranking_data_card" />
       )}
 
       {survey === "asking" && (

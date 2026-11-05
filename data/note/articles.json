@@ -8356,7 +8356,7 @@
     {
       "key": "prefecture-population-household-pack",
       "vertical": "product-sales",
-      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "title": "都道府県別 人口・世帯データ 134指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8379,7 +8379,7 @@
     {
       "key": "prefecture-income-wage-hiring-pack",
       "vertical": "product-sales",
-      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "title": "都道府県別 賃金・求人・働き方データ 107指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8402,7 +8402,7 @@
     {
       "key": "prefecture-tourism-lodging-pack",
       "vertical": "product-sales",
-      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "title": "都道府県別 宿泊・交通・旅行データ 44指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8425,7 +8425,7 @@
     {
       "key": "prefecture-municipal-finance-pack",
       "vertical": "product-sales",
-      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "title": "都道府県別 自治体財政・職員給与データ 119指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8448,7 +8448,7 @@
     {
       "key": "prefecture-healthcare-nursing-pack",
       "vertical": "product-sales",
-      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "title": "都道府県別 医療・介護データ 237指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8471,7 +8471,7 @@
     {
       "key": "prefecture-education-childcare-pack",
       "vertical": "product-sales",
-      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "title": "都道府県別 学校・保育・社会教育データ 244指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8494,7 +8494,7 @@
     {
       "key": "prefecture-migration-living-pack",
       "vertical": "product-sales",
-      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "title": "都道府県別 住居費・物価・気候データ 76指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8517,7 +8517,7 @@
     {
       "key": "prefecture-retail-trade-area-pack",
       "vertical": "product-sales",
-      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "title": "都道府県別 商業・小売データ 69指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8540,7 +8540,7 @@
     {
       "key": "prefecture-industry-economy-pack",
       "vertical": "product-sales",
-      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "title": "都道府県別 産業・農業・家計データ 132指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8563,7 +8563,7 @@
     {
       "key": "prefecture-disaster-infrastructure-pack",
       "vertical": "product-sales",
-      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "title": "都道府県別 防災・交通・インフラデータ 230指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8586,7 +8586,7 @@
     {
       "key": "prefecture-map-chart-assets-pack",
       "vertical": "product-sales",
-      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "title": "都道府県の地図・ランキング素材 28指標｜PNG・SVG・PowerPoint",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8609,7 +8609,7 @@
     {
       "key": "prefecture-all-in-one-pack",
       "vertical": "product-sales",
-      "title": "47都道府県 2,073指標の統計データ総合集",
+      "title": "47都道府県 統計データ総合集 2,073指標｜CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 2980,
@@ -8653,7 +8653,7 @@
     {
       "key": "prefecture-household-consumption-pack",
       "vertical": "product-sales",
-      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "title": "県庁所在市別 家計調査データ 832指標｜品目別 CSV・Excel",
       "magazine": null,
       "isPaid": true,
       "priceJpy": 980,
@@ -8662,12 +8662,12 @@
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
+          "sha256": "11d6852faca17511192e7a1cf0b6d7459bf56072d812dbf5e115c5f5bf7bf8f4",
           "files": 4,
-          "bytes": 241703,
-          "savedAt": "2026-10-24T16:25:50.138Z"
+          "bytes": 241882,
+          "savedAt": "2026-11-04T10:55:17.953Z"
         },
-        "verifiedAt": "2026-10-24T16:25:50.138Z"
+        "verifiedAt": "2026-11-04T10:55:17.953Z"
       },
       "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
       "publishedAt": "2026-10-25",
@@ -10660,12 +10660,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "82ccd822ada53001bf070aa9c7ebd64973c4b978f88990b223ddc6b0f6a49e7a",
+          "sha256": "cbcbb13c759dd095fb44c04865d3d7390c71e979ed0f663434dc69d443e00eae",
           "files": 4,
-          "bytes": 38786,
-          "savedAt": "2026-10-13T03:28:45.176Z"
+          "bytes": 39010,
+          "savedAt": "2026-11-04T10:16:14.397Z"
         },
-        "verifiedAt": "2026-10-13T03:28:45.176Z"
+        "verifiedAt": "2026-11-04T10:16:14.397Z"
       },
       "stats47Targets": [
         "/areas/15000",
@@ -10757,12 +10757,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "646dc7aeb4dfe47926ac60af2a9d9854f0aa91c94f542ad1f1c9d111f8e3871a",
+          "sha256": "a5938f66ed67add53f734551d085b9ca02b50b78d07c494583869da8d4920472",
           "files": 4,
-          "bytes": 35525,
-          "savedAt": "2026-10-13T03:28:49.576Z"
+          "bytes": 35749,
+          "savedAt": "2026-11-04T10:16:16.612Z"
         },
-        "verifiedAt": "2026-10-13T03:28:49.576Z"
+        "verifiedAt": "2026-11-04T10:16:16.612Z"
       },
       "stats47Targets": [
         "/areas/40000",

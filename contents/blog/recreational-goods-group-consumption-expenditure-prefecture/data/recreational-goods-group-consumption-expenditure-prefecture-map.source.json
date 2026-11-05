@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "recreational-goods-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "教養娯楽用品消費支出額",
+  "readerLabel": "教養娯楽用品への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/recreational-goods-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug recreational-goods-group-consumption-expenditure-prefecture --keys recreational-goods-group-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T12:36:07.667Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

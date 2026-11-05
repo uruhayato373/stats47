@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "education-expenditure-total",
+  "year": "2025",
+  "unit": "円",
+  "label": "教育費",
+  "readerLabel": "教育費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/education-expenditure-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug education-expenditure-total-prefecture-gap --keys education-expenditure-total --data-name education-expenditure-total-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T10:52:41.392Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

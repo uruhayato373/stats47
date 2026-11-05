@@ -31,8 +31,9 @@ const TABLES: Record<string, { revision: string; codeTable: string }> = {
 /**
  * 品目分類 (収支項目分類) ではない家計調査の表。品目コードの照合の対象外 (2026-11-02)。
  * 貯蓄・負債編は貯蓄・負債の項目 (cat01 = 012 貯蓄・028 負債 など) で、収支項目分類の改定と関係しない。
+ * 0002070003 は用途分類の表で、cat01 は 3 桁 (059 消費支出 など)。品目の改定表の 9 桁コードと対応しない。
  */
-const NON_ITEM_CLASSIFICATION_TABLES = new Set(["0002210008"]);
+const NON_ITEM_CLASSIFICATION_TABLES = new Set(["0002210008", "0002070003"]);
 
 interface CheckResult {
   key: string;

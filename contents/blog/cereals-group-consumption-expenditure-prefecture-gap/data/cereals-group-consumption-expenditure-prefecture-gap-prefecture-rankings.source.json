@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "cereals-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "穀類消費支出額",
+  "readerLabel": "穀類への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/cereals-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cereals-group-consumption-expenditure-prefecture-gap --keys cereals-group-consumption-expenditure --data-name cereals-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T11:23:29.657Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

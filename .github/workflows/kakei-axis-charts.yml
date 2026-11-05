@@ -1,0 +1,64 @@
+name: 📊 Kakei axis charts (e-Stat)
+
+# 家計調査の全国の比較図 (app/survey/kakei-chousa/axis-charts.json) を e-Stat から作る。
+# 全国だけの表は指標にならず data-refresh を通らないので、ここで値を確かめて反映する。
+# publish=false は生成と検査だけで R2 へ書かない。生成物は artifact で読める (公開統計の値だけ)。
+# 件数・単位が定義と合わなければ生成スクリプトが止まる。
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "true: 生成物を R2 へ反映する"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  # r2-write の待ち枠を奪わない。書き込み先はこの 1 キーだけで data-refresh と重ならない
+  group: kakei-axis-charts
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  charts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 📦 Install
+        run: npm ci --ignore-scripts
+
+      - name: 📊 Generate charts
+        env:
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+        run: npx tsx packages/stats-r2/src/scripts/generate-kakei-axis-charts.ts --write
+
+      - name: 📤 Upload charts
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: kakei-axis-charts
+          path: .local/r2/app/survey/kakei-chousa/axis-charts.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: ☁️ Push to R2
+        if: inputs.publish == 'true'
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/survey/kakei-chousa

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "books-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "書籍消費支出額",
+  "readerLabel": "書籍への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/books-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug books-consumption-expenditure-prefecture-gap --keys books-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T10:52:51.096Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

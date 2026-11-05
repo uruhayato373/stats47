@@ -26,9 +26,10 @@ import "dotenv/config";
  *   npx tsx packages/ai-content/src/scripts/write-blog-headless.ts \
  *     [--slugs a,b] [--author claude-sonnet|claude-haiku|claude-opus|gemini-api] \
  *     [--critic claude-sonnet|claude-haiku|claude-opus|gemini-api|none] [--effort low] \
- *     [--retries 1] [--revise-rounds 1] [--limit 3] [--run-id ID] [--dry-run]
+ *     [--retries 1] [--revise-rounds 1] [--limit 3] [--concurrency 1] [--run-id ID] [--dry-run]
  *
  *   --slugs 省略時は article.prompt.txt があり article.md が無い slug を名前順に --limit 件
+ *   --concurrency は同時に書く本数 (1〜3)
  *   --dry-run は LLM を呼ばず、対象と prompt 長だけ出す
  *
  * 正典: .claude/rules/blog-quality-standards.md / skill /write-blog-headless
@@ -43,7 +44,11 @@ import { REGIONS } from "@stats47/area";
 import { isClaudeCliAlias, type ClaudeCliAlias } from "../services/claude-cli-output";
 import { callClaudeCli } from "../services/claude-cli-runner";
 import { GeminiTextError, generateContentText, resolveTextModel } from "../services/gemini-text-client";
-import { buildBlogCriticPrompt, decideBlogCriticVerdict } from "../services/prompts/blog-article-prompt";
+import {
+  MATERIALS_HEADING,
+  buildBlogCriticPrompt,
+  decideBlogCriticVerdict,
+} from "../services/prompts/blog-article-prompt";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -86,6 +91,7 @@ const CRITIC = (getArg("--critic") ?? "claude-sonnet") as Engine | "none";
 const EFFORT = getArg("--effort") ?? "low";
 const RETRIES = Number(getArg("--retries") ?? "1");
 const LIMIT = Number(getArg("--limit") ?? "3");
+const CONCURRENCY = Number(getArg("--concurrency") ?? "1");
 /** critic REVISE のあと指摘を返して書き直す回数 */
 const REVISE_ROUNDS = Number(getArg("--revise-rounds") ?? "1");
 const DRY_RUN = args.includes("--dry-run");
@@ -182,20 +188,24 @@ function withResearch(prompt: string, dir: string): string {
  * 本文で計算した割合・県の数の誤りだった (2026-10-28 の 33 本で blocker の 18/21)。地方区分は @stats47/area の
  * 7 区分を正とし、県の所属を表で渡す。
  */
-function buildRegionGuide(): string {
+function buildRegionGuide(basePrompt: string): string {
+  // 材料の節に地方別の順位があれば、同じ県の並びをもう一度渡さない
+  const hasMaterials = basePrompt.includes(MATERIALS_HEADING);
   const names = new Map(
     (JSON.parse(
       fs.readFileSync(path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
     ) as { prefCode: string; prefName: string }[]).map((p) => [p.prefCode, p.prefName]),
   );
   return [
-    "# 地方のくくり (この表だけを使います)",
-    ...REGIONS.map((r) => `- ${r.regionName}: ${r.prefectures.map((c) => names.get(c) ?? c).join("、")}`),
+    hasMaterials ? "# 地方のくくり (材料の地方別の順位にある 7 区分だけを使います)" : "# 地方のくくり (この表だけを使います)",
+    ...(hasMaterials
+      ? []
+      : REGIONS.map((r) => `- ${r.regionName}: ${r.prefectures.map((c) => names.get(c) ?? c).join("、")}`)),
     "県を地方でまとめるときは上の 7 区分だけを使います。北陸・山陰・甲信越・東海などの小区分や「日本海側」のような言い換えで県をくくりません。",
     "「いずれも◯◯」「◯県が◯◯」とまとめる前に、挙げた県の数と所属を上の表で確かめます。",
     "",
     "# 本文で計算する数値",
-    "実データに無い差・割合・平均・県の数を新しく計算して書きません。比べるときは実データの値と順位を並べます。",
+    "実データと材料に無い差・割合・平均・県の数を新しく計算して書きません。比べるときは実データの値と順位を並べます。",
     "倍率を書くのは実データにある最大と最小の比だけにします。",
   ].join("\n");
 }
@@ -205,7 +215,7 @@ function buildAuthorPrompt(
   blockers: string[],
   revision: { article: string; findings: string[] } | null,
 ): string {
-  const parts = [basePrompt, "", buildRegionGuide()];
+  const parts = [basePrompt, "", buildRegionGuide(basePrompt)];
   if (revision) {
     parts.push(
       "",
@@ -388,6 +398,7 @@ async function main() {
   if (!isEngine(AUTHOR)) throw new Error(`--author は claude-haiku|claude-sonnet|claude-opus|gemini-api: ${AUTHOR}`);
   if (CRITIC !== "none" && !isEngine(CRITIC)) throw new Error(`--critic が不正: ${CRITIC}`);
   if (!Number.isInteger(RETRIES) || RETRIES < 0 || RETRIES > 2) throw new Error("--retries は 0〜2");
+  if (!Number.isInteger(CONCURRENCY) || CONCURRENCY < 1 || CONCURRENCY > 3) throw new Error("--concurrency は 1〜3");
   if (!Number.isInteger(REVISE_ROUNDS) || REVISE_ROUNDS < 0 || REVISE_ROUNDS > 2) {
     throw new Error("--revise-rounds は 0〜2");
   }
@@ -400,12 +411,17 @@ async function main() {
   log(`対象 ${slugs.length} 本: ${slugs.join(" ")} / author ${AUTHOR} / critic ${CRITIC} / effort ${EFFORT}`);
   if (!DRY_RUN && (AUTHOR === "gemini-api" || CRITIC === "gemini-api")) await preflightGemini();
 
-  // 直列で回す。並列にすると一時スロットリングで author 分を捨てる (ランキング解説 batch1 の実測)
+  // 既定は直列。並列にすると一時スロットリングで author 分を捨てることがある (ランキング解説 batch1 の実測)。
+  // claude-cli-runner が一時スロットリングを待って再試行するので、量産バッチは 3 本まで並べる。
   const results: SlugResult[] = [];
-  for (const slug of slugs) {
-    log(`\n=== ${slug} ===`);
-    results.push(await processSlug(slug));
-  }
+  const pending = [...slugs];
+  const worker = async () => {
+    for (let slug = pending.shift(); slug !== undefined; slug = pending.shift()) {
+      log(`\n=== ${slug} ===`);
+      results.push(await processSlug(slug));
+    }
+  };
+  await Promise.all(Array.from({ length: CONCURRENCY }, worker));
   if (DRY_RUN) return;
 
   const report = path.join(PROJECT_ROOT, ".local/ci", `${RUN_ID}.json`);

@@ -77,6 +77,43 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - Gemini の無料枠 (`--author gemini-api`) と NotebookLM の調査材料 (`contents/blog/<slug>/research.md`) は同じバッチに
   入る。白書の数値は factual gate の外なので本文に書かせない
 
+### 量産バッチ (`npm run blog:batch`・2026-11-04〜)
+
+新規記事の量産の入口は 1 本である。実測は Workflow が 1 本約 34 万トークン、headless が約 2.8〜3.5 万トークンで、量産に Workflow を使わない。
+
+```bash
+npm run blog:batch -- --source kakei-chousa --count 6
+```
+
+対象選定 (topic-queue の pending × 直近 4 週の GSC 表示回数の順) → 準備 → research.md の取り込み → headless 最大 3 並列
+(`--retries 2 --revise-rounds 2`) → 合格分の `--ingest` → 結果の一覧、まで順に実行する。**公開も R2 への書き込みも
+しない。** push は人が行う。背景は Codex の工程なので、未生成の記事を一覧と作るコマンドで出す。一覧は `.local/ci/<run-id>-summary.md`。
+
+- `--source` はトピックの出どころ (`kakei-rollout`)、metric の `surveyId` / `source.kind` (`kakei-chousa`)、調査名 (`家計調査`) のどれでも当たる
+- 送り箱に dir がある slug は選ばない。別の作業が持っている記事に触らないため。topic-queue の status も書かない
+- `--dry-run` は対象を出すだけで何も書かない。`--topics` は topicKey の直接指定、`--notebook` / `--research-dir` は調査材料の取り込み
+- `--ingest` が公開フラグ後のゲートで背景の blocker だけを返す記事は「背景待ち」と数える (失敗ではない)
+
+### 書く前の材料 (2026-11-04〜)
+
+2026-11-04 の 18 本 (sonnet・effort low) は初回の合格が 8 本で、不合格の主因は順位の取り違え・地方のくくりの誤り・題の約束不足だった。
+どれも**モデルに数えさせた結果**で文章力ではないので、数える部分をコードへ移した。`blog-article-materials.ts` が 1位と最下位の差・
+倍率・1位と2位の差・中央値・同順位・上位と下位 10 県の地方の内訳・地方別の順位を計算して prompt に渡す (2 指標なら両方の上位に
+入る県と順位の開きも渡す)。地方の区分は `packages/area` の `REGIONS`。ここにある値は本文に書いてよい。値の地方平均は渡さない
+(率の指標で単純平均を地方の値のように書くと定義を取り違えるため)。
+
+### 書く価値の事前判定 (2026-11-04〜)
+
+`checkTopicWorth` (`blog-topic-gate.ts`) が準備の段で止める。閾値は active 2,484 指標の最新年と公開済み 767 本で決めた。
+
+| 止める形 | 閾値 | 実測 |
+|---|---|---|
+| 上位と下位に差が無い | 上位 5 県と下位 5 県の平均の差が中央値の 1% 未満 | 1 指標・公開済み 0 本。3% にすると身長 (1.4%・ブログの表示 2.3 万) を止めるので 1% にした |
+| 順位が付かない | 値の種類が 10 未満 | 25 指標。公開済み 4 本のブログ表示は 0 |
+| 欠けが多い (家計調査のみ) | 購入世帯のある県が 40 未満 | 21 指標 |
+
+家計調査の 0 は標本に購入世帯が無かった県で、統計上の 0 ではない。内陸県の水産業のような本物の 0 は止めない。
+
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
 `published: true` の記事は `contents/blog/<slug>/review.md` (headless の critic か blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
@@ -709,6 +746,10 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
 | 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
 | タイトル: 年の違う図を並べた記事で title/seoTitle に年が 1 つだけ (図の年と一致) | 機械 | warn | `lintMixedYearTitle` (`title-year-lint.mjs`)。2026-10-26 実測 公開済み 11・送り箱 2 件。正当な並べ方も含むため blocker 化はオーナー判断 |
+| 地方: 県の所属・地方の端・上位 N 県の地方・地方の県の数・日本海側と内陸県 | 機械 | blocker | `lintRegionClaims` (`region-claim-lint.mjs`)。公開済み 767 本で 9 本、検出は前後の文ごと全件読んだ。隣接県の誤りは見ない |
+| 題: 問うた倍率が本文に無い・題の倍率が本文に無い・題の県が本文に 1 回以下・description の視点が本文に無い | 機械 | blocker | `lintTitlePromises` (`title-promise-lint.mjs`)。公開済み 767 本で 2 本 |
+| 題: 倍率が図の最大最小の比と合わない / 理由を約束し本文が「断定できない」を繰り返す | 機械 | warn | 同上。公開済み 11 / 37 本。「平均の 5 倍」は誤りと言い切れず、後者は critic PASS の 18 本にも出る。根拠の無い断定を弱めた結果でもあるので blocker にしない |
+| 題: 本文が約束に答えているか | **critic** | — | 機械が見るのは上の形だけ |
 | 数値: 図の値を上位概念の名前 (「スルメイカ」→「イカ類」) で呼ばない | 機械 | warn | `lintHypernymMetricNames` (`metric-name-lint.mjs`)。同文に図の値があるときだけ。実測 0 件 |
 | 数値: 「N年と比べ」の N が時系列の期間内の極値 (極値と明示した比較は除外) | 機械 | warn | `lintExtremeBaseYear` (`metric-name-lint.mjs`)。実測 0 件 |
 | callout の個数 | **critic** | — | 最低数を強制しない。必要性と情報量を意味判断する |

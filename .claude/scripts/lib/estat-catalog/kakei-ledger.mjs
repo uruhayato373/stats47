@@ -83,19 +83,21 @@ export function kakeiMetricInput(metric) {
   if (metric?.source?.kind !== "kakei-chousa") return null;
   const filter = metric.source.filter ?? {};
   const sum = filter.axisSum?.axis === "cat01" ? filter.axisSum.codes : null;
+  const ratio = filter.axisRatio?.axis === "cat01" ? [...filter.axisRatio.numeratorCodes, ...filter.axisRatio.denominatorCodes] : null;
+  const combined = sum ?? ratio;
   return {
     key: metric.key,
     statsDataId: String(filter.statsDataId ?? ""),
     cdCat02: filter.cdCat02 != null ? String(filter.cdCat02) : null,
-    codes: sum ? sum.map(String) : filter.cdCat01 ? [String(filter.cdCat01)] : [],
-    via: sum ? "sum" : "single",
+    codes: combined ? combined.map(String) : filter.cdCat01 ? [String(filter.cdCat01)] : [],
+    via: combined ? "sum" : "single",
   };
 }
 
 /**
  * 分析単位 (packages/data-configs/src/kakei-analysis-catalog.ts) を表ごとにまとめる。
  * 指標だけを使い手として数えると、全国ページの図やブログで使っている表が「未判断」に見えていた (2026-11-02)。
- * @param {{ id: string, statsDataId: string, state: "configured" | "staged" | "proposed" }[]} analyses
+ * @param {{ id: string, statsDataId: string, state: "configured" | "published" | "staged" | "proposed" }[]} analyses
  */
 function groupAnalysesByTable(analyses) {
   const byTable = new Map();
@@ -120,7 +122,7 @@ function tableStatus(metricKeys, analyses, decided) {
  * @param {{ statsDataId: string, dim: string, code: string, name: string, unit: string | null, level: string | null, parentCode: string | null }[]} p.classes
  *   カタログ index/classes/00200561.json の行
  * @param {KakeiMetricInput[]} p.metrics
- * @param {{ id: string, statsDataId: string, state: "configured" | "staged" | "proposed" }[]} [p.analyses]  分析単位 (kakei-analysis-catalog.ts)
+ * @param {{ id: string, statsDataId: string, state: "configured" | "published" | "staged" | "proposed" }[]} [p.analyses]  分析単位 (kakei-analysis-catalog.ts)
  * @param {KakeiDecisions} p.decisions
  * @param {string} p.generatedAt
  * @param {string | null} p.catalogGeneratedAt
@@ -230,7 +232,7 @@ function summarize(tables, items) {
  * @param {object} p
  * @param {ReturnType<typeof buildKakeiLedger>} p.ledger  ファイルの台帳
  * @param {KakeiMetricInput[]} p.metrics  現在の metric config
- * @param {{ id: string, statsDataId: string, state: "configured" | "staged" | "proposed" }[]} [p.analyses]  現在の分析単位
+ * @param {{ id: string, statsDataId: string, state: "configured" | "published" | "staged" | "proposed" }[]} [p.analyses]  現在の分析単位
  * @param {Map<string, string[]> | null} [p.lensTables]  切り口台帳の表 → その表を使う切り口 (null なら切り口との整合は見ない)
  * @param {KakeiDecisions} p.decisions
  * @returns {{ level: "error" | "warn", code: string, message: string }[]}

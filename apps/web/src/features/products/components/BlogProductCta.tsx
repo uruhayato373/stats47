@@ -9,6 +9,7 @@ import {
   findKindleProductForBlog,
 } from "../storefront";
 
+import { ProductItem } from "./ProductItem";
 import { TrackedProductLink } from "./TrackedProductLink";
 
 export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
@@ -24,15 +25,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
         {dataProduct.title.replace(/をお渡しします$/, "")}
         （{dataProduct.priceYen.toLocaleString("ja-JP")}円）があります。固定年度のデータで、自動更新はありません。必要な年度・地域粒度・納品形式を購入前に確認してください。
       </p>
-      <TrackedProductLink
-        href={hrefFor("product", { slug: dataProduct.slug })}
-        label={`${dataProduct.id}:${dataProduct.title}`}
-        surface="blog_product"
-        product={dataProduct}
-        className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        データ集の内容と条件を確認する →
-      </TrackedProductLink>
+      <ProductItem product={dataProduct} layout="row" surface="blog_product" placement="blog_product" />
     </>
   );
 

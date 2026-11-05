@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "medicines-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "医薬品消費支出額",
+  "readerLabel": "医薬品への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/medicines-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug medicines-group-consumption-expenditure-prefecture-gap --keys medicines-group-consumption-expenditure --data-name medicines-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:35:04.578Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -32,15 +32,15 @@ describe("権利要確認の指標を有料パックから除く", () => {
     }
   });
 
-  it("除外件数: P-06 中体連 10 件 / P-08 パチンコ 1 件 / P-12 11 件、その他のパックは 0 件", () => {
-    const expected: Record<string, number> = { "P-06": 10, "P-08": 1, "P-12": 11 };
+  it("除外件数: P-06 部活動 15 件 / P-08 パチンコ 1 件 / P-09 1 件 / P-12 17 件、その他のパックは 0 件", () => {
+    const expected: Record<string, number> = { "P-06": 15, "P-08": 1, "P-09": 1, "P-12": 17 };
     for (const id of PACK_IDS) {
       const loaded = loadPackSnapshotDatasets(id)!;
       expect(loaded.excluded?.length ?? 0, id).toBe(expected[id] ?? 0);
     }
-    expect(loadPackSnapshotDatasets("P-06")!.datasets.length).toBe(244);
-    expect(loadPackSnapshotDatasets("P-08")!.datasets.length).toBe(69);
-    expect(loadPackSnapshotDatasets("P-12")!.datasets.length).toBe(2073);
+    expect(loadPackSnapshotDatasets("P-06")!.datasets.length).toBe(261);
+    expect(loadPackSnapshotDatasets("P-08")!.datasets.length).toBe(74);
+    expect(loadPackSnapshotDatasets("P-12")!.datasets.length).toBe(2491);
   });
 
   it("除外記録には指標キー・指標名・理由 (license 欄の「要確認」) が入る", () => {

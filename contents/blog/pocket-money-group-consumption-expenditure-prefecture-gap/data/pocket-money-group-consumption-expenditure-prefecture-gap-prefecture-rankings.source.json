@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pocket-money-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "こづかい(使途不明)消費支出額",
+  "readerLabel": "こづかい(使途不明)への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/pocket-money-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pocket-money-group-consumption-expenditure-prefecture-gap --keys pocket-money-group-consumption-expenditure --data-name pocket-money-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:36:37.993Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

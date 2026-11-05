@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "japanese-clothing-group-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "和服消費支出額",
+  "readerLabel": "和服への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/japanese-clothing-group-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug japanese-clothing-group-consumption-expenditure-prefecture --keys japanese-clothing-group-consumption-expenditure --data-name japanese-clothing-group-consumption-expenditure-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-11-04T12:33:55.709Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

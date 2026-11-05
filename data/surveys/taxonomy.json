@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T05:51:18.074Z",
+  "generatedAt": "2026-11-04T22:46:03.264Z",
   "masterSurveyCount": 151,
   "ranking": {
-    "metrics": 2607,
-    "activeMetrics": 2463,
-    "applicableMetrics": 2518,
-    "activeApplicableMetrics": 2375,
+    "metrics": 2740,
+    "activeMetrics": 2587,
+    "applicableMetrics": 2651,
+    "activeApplicableMetrics": 2499,
     "notApplicable": 89,
     "activeNotApplicable": 88,
-    "resolved": 2518,
+    "resolved": 2651,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2375,
+    "activeResolved": 2499,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -165,7 +165,7 @@
       "japan-post-statistics": 6,
       "job-placement-statistics": 11,
       "junior-high-athletics-membership-survey": 10,
-      "kakei-chousa": 720,
+      "kakei-chousa": 844,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
       "life-insurance-business-statistics": 4,
@@ -3221,7 +3221,7 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "rankingCount": 720,
+      "rankingCount": 844,
       "themeKeys": [
         "earthquake-exposure",
         "household-assets-debt",

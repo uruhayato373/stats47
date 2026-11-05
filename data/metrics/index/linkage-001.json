@@ -2,6 +2,273 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "area-ratio-of-total",
+      "pageId": "ranking:area-ratio-of-total",
+      "title": "面積割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010202",
+          "filters": {
+            "cdCat01": "#B01101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010202",
+          "cdCat01": "#B01101"
+        },
+        "derived": false,
+        "configHash": "cb7d1df288c176ad"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:area-ratio-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:area-ratio-of-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "art-museum-count",
+      "pageId": "ranking:art-museum-count",
+      "title": "美術博物館数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348770",
+          "filters": {
+            "cdCat01": "00000500",
+            "cdCat02": "182"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003348770",
+          "cdCat01": "00000500",
+          "cdCat02": "182"
+        },
+        "derived": false,
+        "configHash": "5fc3f87695d108f1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:art-museum-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
       "metricKey": "artificial-forest-area",
       "pageId": "ranking:artificial-forest-area",
       "title": "人工造林面積",
@@ -1822,6 +2089,117 @@
         },
         {
           "pageId": "ranking:automobile-environmental-tax-grant-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "automobile-maintenance-group-consumption-expenditure",
+      "pageId": "ranking:automobile-maintenance-group-consumption-expenditure",
+      "title": "自動車等維持消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070230000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070230000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "89e9f0ca3de074e9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:automobile-maintenance-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "automobile-purchases-group-consumption-expenditure",
+      "pageId": "ranking:automobile-purchases-group-consumption-expenditure",
+      "title": "自動車等購入消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070210000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070210000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "89511d8809851f1b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:automobile-purchases-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "automobile-related-group-consumption-expenditure",
+      "pageId": "ranking:automobile-related-group-consumption-expenditure",
+      "title": "自動車等関係費消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070200000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070200000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "19d80bdb4d6e7244"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:automobile-related-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -6966,6 +7344,43 @@
       "themes": []
     },
     {
+      "metricKey": "bags-group-consumption-expenditure",
+      "pageId": "ranking:bags-group-consumption-expenditure",
+      "title": "かばん類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100132000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100132000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "dcb0774fc3159264"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:bags-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "bamboo-production",
       "pageId": "ranking:bamboo-production",
       "title": "竹材生産量",
@@ -9163,6 +9578,43 @@
       "themes": []
     },
     {
+      "metricKey": "beauty-products-group-consumption-expenditure",
+      "pageId": "ranking:beauty-products-group-consumption-expenditure",
+      "title": "理美容用品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100120000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100120000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "adbb24623c522e31"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:beauty-products-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "beauty-salon-count",
       "pageId": "ranking:beauty-salon-count",
       "title": "美容所数",
@@ -9398,6 +9850,43 @@
       ]
     },
     {
+      "metricKey": "beauty-services-group-consumption-expenditure",
+      "pageId": "ranking:beauty-services-group-consumption-expenditure",
+      "title": "理美容サービス消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100110000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100110000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "02df7dd3ac4fb2fc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:beauty-services-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "bed-consumption-expenditure",
       "pageId": "ranking:bed-consumption-expenditure",
       "title": "ベッド消費支出額",
@@ -9506,6 +9995,43 @@
         },
         {
           "pageId": "ranking:bed-utilization-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "bedding-group-consumption-expenditure",
+      "pageId": "ranking:bedding-group-consumption-expenditure",
+      "title": "寝具類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "040300000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "040300000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d3031599d69891aa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:bedding-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
@@ -11203,2346 +11729,15 @@
       "themes": []
     },
     {
-      "metricKey": "biomass-power-station-count",
-      "pageId": null,
-      "title": "バイオマス発電施設数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "ksjDataId": "P03",
-          "ksjVersion": "13"
-        },
-        "fetcherKey": "mlit_ksj",
-        "configHash": "4ea62d6c9c854fc7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:biomass-power-station-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "births",
-      "pageId": "ranking:births",
-      "title": "出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A4101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A4101"
-        },
-        "derived": false,
-        "configHash": "131aed39051698ea"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:birth-death-gap-decline",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:births",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:births",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society",
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-first-child",
-      "pageId": "ranking:births-first-child",
-      "title": "第1子の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411918",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat01": "00100",
-            "cdCat02": "00110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411918",
-          "cdCat01": "00100",
-          "cdCat02": "00110",
-          "cdTab": "10040"
-        },
-        "derived": false,
-        "configHash": "9a994963862a408c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-first-child",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-mother-age25to29",
-      "pageId": "ranking:births-mother-age25to29",
-      "title": "母が25〜29歳の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411631",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat01": "00240",
-            "cdCat02": "00100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411631",
-          "cdCat01": "00240",
-          "cdCat02": "00100",
-          "cdTab": "10040"
-        },
-        "derived": false,
-        "configHash": "f4ac85fb248f4ea8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-mother-age25to29",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-mother-age30to34",
-      "pageId": "ranking:births-mother-age30to34",
-      "title": "母が30〜34歳の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411631",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat01": "00250",
-            "cdCat02": "00100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411631",
-          "cdCat01": "00250",
-          "cdCat02": "00100",
-          "cdTab": "10040"
-        },
-        "derived": false,
-        "configHash": "d986898413613e9f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-mother-age30to34",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-mother-age35to39",
-      "pageId": "ranking:births-mother-age35to39",
-      "title": "母が35〜39歳の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411631",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat01": "00260",
-            "cdCat02": "00100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411631",
-          "cdCat01": "00260",
-          "cdCat02": "00100",
-          "cdTab": "10040"
-        },
-        "derived": false,
-        "configHash": "5ddf4c9d426a47ea"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-mother-age35to39",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-mother-age40plus",
-      "pageId": "ranking:births-mother-age40plus",
-      "title": "母が40歳以上の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411631",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat02": "00100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411631",
-          "cdCat02": "00100",
-          "cdTab": "10040"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat01",
-            "codes": [
-              "00280",
-              "00300",
-              "00310"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "75f5204fb42606ec"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-mother-age40plus",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-mother-under25",
-      "pageId": "ranking:births-mother-under25",
-      "title": "母が25歳未満の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411631",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat02": "00100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411631",
-          "cdCat02": "00100",
-          "cdTab": "10040"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat01",
-            "codes": [
-              "00190",
-              "00220",
-              "00230"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "7ffd315b1c16b518"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-mother-under25",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-second-child",
-      "pageId": "ranking:births-second-child",
-      "title": "第2子の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411918",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat01": "00100",
-            "cdCat02": "00120"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411918",
-          "cdCat01": "00100",
-          "cdCat02": "00120",
-          "cdTab": "10040"
-        },
-        "derived": false,
-        "configHash": "c7f348ea145e47e1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-second-child",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "births-third-child-plus",
-      "pageId": "ranking:births-third-child-plus",
-      "title": "第3子以降の出生数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003411918",
-          "filters": {
-            "cdTab": "10040",
-            "cdCat01": "00100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003411918",
-          "cdCat01": "00100",
-          "cdTab": "10040"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat02",
-            "codes": [
-              "00140",
-              "00150",
-              "00170",
-              "00180",
-              "00190",
-              "00200",
-              "00210",
-              "00220"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "8b1003e58d4e53be"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:births-third-child-plus",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "biscuit-consumption-expenditure",
-      "pageId": "ranking:biscuit-consumption-expenditure",
-      "title": "ビスケット消費支出額",
+      "metricKey": "beverages-group-consumption-expenditure",
+      "pageId": "ranking:beverages-group-consumption-expenditure",
+      "title": "飲料消費支出額",
       "sources": [
         {
           "role": "primary",
           "statsDataId": "0004023605",
           "filters": {
-            "cdCat01": "010800100",
+            "cdCat01": "011000000",
             "cdCat02": "03"
           }
         }
@@ -13551,20 +11746,57 @@
         "kind": "kakei-chousa",
         "estatParams": {
           "statsDataId": "0004023605",
-          "cdCat01": "010800100",
+          "cdCat01": "011000000",
           "cdCat02": "03"
         },
         "ops": {
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "b91130540d352e47"
+        "configHash": "aaca931c064d676f"
       },
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "ranking:biscuit-consumption-expenditure",
+          "pageId": "ranking:beverages-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "bicycle-purchases-group-consumption-expenditure",
+      "pageId": "ranking:bicycle-purchases-group-consumption-expenditure",
+      "title": "自転車購入消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070220001",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070220001",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b7fef7fa03b327f9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:bicycle-purchases-group-consumption-expenditure",
           "kind": "ranking"
         }
       ],
