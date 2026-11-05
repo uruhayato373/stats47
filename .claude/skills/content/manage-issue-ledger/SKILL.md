@@ -87,6 +87,14 @@ npm run content:sync -- --from-r2   # R2 の記事一覧からページ索引を
 npm run issues:check
 ```
 
+市区町村のデータで問いを確かめるときは、計算の前に表を組み立てて検査を通す。指標と年を書いた spec を渡す（例: `.claude/scripts/analysis/examples/`）。
+
+```bash
+npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.json --out /tmp/frame.json
+```
+
+公開の自治体だけの表を作り、県の合計との検算・指標の年・抜けた町の偏り・変化の信頼性を報告する。合計が合わなければ止まる。問いの選択と、定義が循環していないかの判断は人が行う。市ごとの変化の信頼性が低いと出たら順位にしない。素の `fetch` が通らない環境では `--data-dir` に `<key>.cities.json` を置く。
+
 ## 6. 見送る
 
 問いを消さず、`status: "dropped"` と `dropReason` を書く。見送った問いの `queries` は `issues:candidates` に再び出なくなる。
