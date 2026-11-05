@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "rows": 3937,
-    "continuous": 1679,
-    "stepped": 2258,
+    "rows": 3951,
+    "continuous": 1684,
+    "stepped": 2267,
     "diverging": 108
   },
   "policies": [
@@ -5757,7 +5757,7 @@
     {
       "metricKey": "cpi-change-rate-excl-food-energy",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -5767,7 +5767,7 @@
     {
       "metricKey": "cpi-change-rate-excl-fresh-food",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -5777,7 +5777,7 @@
     {
       "metricKey": "cpi-change-rate-excl-fresh-food-energy",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -5787,7 +5787,7 @@
     {
       "metricKey": "cpi-change-rate-excl-owner-rent",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -5962,7 +5962,7 @@
       "metricKey": "crime-rate-per-1k",
       "grain": "municipality-merged",
       "year": "2005",
-      "areaCount": 1741,
+      "areaCount": 1711,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -5973,7 +5973,7 @@
       "metricKey": "crime-rate-per-1k",
       "grain": "municipality-split",
       "year": "2005",
-      "areaCount": 1892,
+      "areaCount": 1832,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -7712,7 +7712,7 @@
     {
       "metricKey": "disposable-income-worker-households",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -9095,7 +9095,7 @@
       "metricKey": "elderly-population-ratio",
       "grain": "municipality-merged",
       "year": "2020",
-      "areaCount": 1741,
+      "areaCount": 1740,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "continuous"
@@ -9105,7 +9105,7 @@
       "metricKey": "elderly-population-ratio",
       "grain": "municipality-split",
       "year": "2020",
-      "areaCount": 1892,
+      "areaCount": 1889,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "continuous"
@@ -9875,6 +9875,28 @@
       }
     },
     {
+      "metricKey": "employed-persons-mainly-working",
+      "grain": "municipality-merged",
+      "year": "2020",
+      "areaCount": 1741,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
+      "metricKey": "employed-persons-mainly-working",
+      "grain": "municipality-split",
+      "year": "2020",
+      "areaCount": 1890,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
       "metricKey": "employed-persons-male",
       "grain": "municipality-merged",
       "year": "2020",
@@ -9887,6 +9909,28 @@
     },
     {
       "metricKey": "employed-persons-male",
+      "grain": "municipality-split",
+      "year": "2020",
+      "areaCount": 1890,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
+      "metricKey": "employed-persons-on-leave",
+      "grain": "municipality-merged",
+      "year": "2020",
+      "areaCount": 1741,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
+      "metricKey": "employed-persons-on-leave",
       "grain": "municipality-split",
       "year": "2020",
       "areaCount": 1890,
@@ -10681,12 +10725,11 @@
     {
       "metricKey": "female-part-time-hourly-wage",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
-        "method": "quantile",
-        "classes": 5
+        "method": "continuous"
       }
     },
     {
@@ -10703,7 +10746,7 @@
     {
       "metricKey": "female-parttime-workers",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -11999,7 +12042,7 @@
       "metricKey": "foreign-population-per-100k",
       "grain": "municipality-merged",
       "year": "2020",
-      "areaCount": 1741,
+      "areaCount": 1740,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -12010,7 +12053,7 @@
       "metricKey": "foreign-population-per-100k",
       "grain": "municipality-split",
       "year": "2020",
-      "areaCount": 1892,
+      "areaCount": 1889,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -12355,6 +12398,16 @@
     },
     {
       "metricKey": "fresh-fish-group-consumption-quantity",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "fresh-fruit-consumption-quantity",
       "grain": "prefecture",
       "year": "2025",
       "areaCount": 47,
@@ -13034,6 +13087,17 @@
       }
     },
     {
+      "metricKey": "general-affairs-expenses-prefecture",
+      "grain": "prefecture",
+      "year": "2022",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
       "metricKey": "general-clinic-count",
       "grain": "prefecture",
       "year": "2023",
@@ -13316,7 +13380,7 @@
       "metricKey": "general-hospital-per-100k",
       "grain": "municipality-merged",
       "year": "2020",
-      "areaCount": 1741,
+      "areaCount": 1740,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -13327,7 +13391,7 @@
       "metricKey": "general-hospital-per-100k",
       "grain": "municipality-split",
       "year": "2020",
-      "areaCount": 1892,
+      "areaCount": 1889,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -13383,6 +13447,28 @@
       "grain": "prefecture",
       "year": "2020",
       "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
+      "metricKey": "general-households-in-dwellings",
+      "grain": "municipality-merged",
+      "year": "2020",
+      "areaCount": 1741,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
+      "metricKey": "general-households-in-dwellings",
+      "grain": "municipality-split",
+      "year": "2020",
+      "areaCount": 1890,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -14364,6 +14450,16 @@
       }
     },
     {
+      "metricKey": "health-supplements-group-consumption-expenditure",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
       "metricKey": "healthcare-budget-share-kakei",
       "grain": "prefecture",
       "year": "2025",
@@ -14596,6 +14692,16 @@
     },
     {
       "metricKey": "high-school-graduates-job-ratio",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "high-school-graduates-out-of-prefecture-job-ratio",
       "grain": "prefecture",
       "year": "2023",
       "areaCount": 47,
@@ -14855,6 +14961,47 @@
     },
     {
       "metricKey": "hobby-participation-rate-gardening",
+      "grain": "prefecture",
+      "year": "2021",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "hobby-participation-rate-go",
+      "grain": "prefecture",
+      "year": "2021",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "hobby-participation-rate-home-movie",
+      "grain": "prefecture",
+      "year": "2021",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "hobby-participation-rate-instrument",
+      "grain": "prefecture",
+      "year": "2021",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
+      }
+    },
+    {
+      "metricKey": "hobby-participation-rate-japanese-dance",
       "grain": "prefecture",
       "year": "2021",
       "areaCount": 47,
@@ -15739,17 +15886,18 @@
       "metricKey": "housing-floor-area",
       "grain": "municipality-merged",
       "year": "2023",
-      "areaCount": 1741,
+      "areaCount": 1059,
       "colorSchemeType": "sequential",
       "classification": {
-        "method": "continuous"
+        "method": "quantile",
+        "classes": 5
       }
     },
     {
       "metricKey": "housing-floor-area",
       "grain": "municipality-split",
       "year": "2023",
-      "areaCount": 1892,
+      "areaCount": 1208,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "continuous"
@@ -16891,7 +17039,7 @@
     {
       "metricKey": "japanese-movers-out",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -17631,7 +17779,7 @@
     {
       "metricKey": "kidney-failure-death-rate",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -18529,7 +18677,7 @@
     {
       "metricKey": "liver-disease-death-rate",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -19220,7 +19368,7 @@
     {
       "metricKey": "manufacturing-employees",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -19253,7 +19401,7 @@
     {
       "metricKey": "manufacturing-establishment-site-area",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -19263,7 +19411,7 @@
     {
       "metricKey": "manufacturing-establishments",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -19296,7 +19444,7 @@
     {
       "metricKey": "manufacturing-industry-added-value",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -20402,7 +20550,7 @@
     {
       "metricKey": "middle-school-teachers-ratio-female",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -20919,7 +21067,7 @@
     {
       "metricKey": "movers-in",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -27633,7 +27781,7 @@
     {
       "metricKey": "pneumonia-death-rate",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -29246,7 +29394,7 @@
       "metricKey": "population-density-habitable",
       "grain": "municipality-split",
       "year": "2020",
-      "areaCount": 1892,
+      "areaCount": 1890,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -31252,7 +31400,7 @@
     {
       "metricKey": "public-bond-expenses-purpose-prefecture",
       "grain": "prefecture",
-      "year": "2021",
+      "year": "2022",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -32486,11 +32634,12 @@
     {
       "metricKey": "regular-cash-salary-female",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
-        "method": "continuous"
+        "method": "quantile",
+        "classes": 5
       }
     },
     {
@@ -32506,7 +32655,7 @@
     {
       "metricKey": "regular-cash-salary-male",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -33444,7 +33593,7 @@
       "metricKey": "retail-stores-per",
       "grain": "municipality-split",
       "year": "2006",
-      "areaCount": 1892,
+      "areaCount": 1862,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -34852,7 +35001,7 @@
     {
       "metricKey": "senility-death-rate",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -36613,7 +36762,7 @@
     {
       "metricKey": "spouse-income",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -38101,7 +38250,7 @@
     {
       "metricKey": "total-area-including-northern-territories-and-takeshima",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -38718,7 +38867,7 @@
       "metricKey": "traffic-accident-per-100k",
       "grain": "municipality-split",
       "year": "2005",
-      "areaCount": 1892,
+      "areaCount": 1853,
       "colorSchemeType": "sequential",
       "classification": {
         "method": "quantile",
@@ -40650,7 +40799,7 @@
     {
       "metricKey": "water-supply-population-ratio-2012on",
       "grain": "prefecture",
-      "year": "2022",
+      "year": "2023",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
