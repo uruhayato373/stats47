@@ -1,5 +1,75 @@
 {
   "schemaVersion": 1,
+  "metricOverrides": {
+    "recovered-n0e8fd0068d4e": {
+      "rankingKey": "maternal-health-guidance-per-100-births",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n15ee88b5169d": {
+      "rankingKey": "national-health-insurance-medical-expense-per-person",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n1e63abcfba72": {
+      "rankingKey": "media-avg-time-unemployed-male",
+      "year": "2021",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n218588ef2f67": {
+      "rankingKey": "special-law-criminal-arrest-count-per-population",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n24b5000d587f": {
+      "rankingKey": "media-avg-time-unemployed-female",
+      "year": "2021",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n2b4298e9ac07": {
+      "rankingKey": "hobby-leisure-avg-time-unemployed-male",
+      "year": "2021",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n391d3ef70d29": {
+      "rankingKey": "police-officer-count-per-population",
+      "year": "2023",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n4dae901ea3e8": {
+      "rankingKey": "avg-savings-rate-worker-households",
+      "year": "2023",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n99f53e7a1f33": {
+      "rankingKey": "annual-emergency-dispatches-per-1000",
+      "year": "2022",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-ndc600ddb7c44": {
+      "rankingKey": "room-aircon-ownership-multi-person-households-per-1000",
+      "year": "2014",
+      "evidence": "本文の県名と数字が全指標の中でこの指標のこの年だけに一致し、題名の主題とも合う (2026-11-05)"
+    },
+    "recovered-n99561600d4fe": {
+      "rankingKey": "hobby-leisure-avg-time-unemployed-female",
+      "year": "2021",
+      "evidence": "題名の宮城県 1 位と 1.9 倍が 2021 年の値と一致する (2026-11-05)"
+    },
+    "recovered-n3f65c01be9a8": {
+      "rankingKey": "general-dust-emission-facility-count",
+      "evidence": "題名の主題から指標を決めた。年は本文から読む (2026-11-05)",
+      "year": "2022"
+    },
+    "recovered-n5158c5766a07": {
+      "rankingKey": "current-life-insurance-balance-ratio-multi-person-households",
+      "evidence": "題名の主題から指標を決めた。年は本文から読む (2026-11-05)"
+    },
+    "recovered-nfe69996fb5c9": {
+      "rankingKey": "utilities-expenditure-ratio-multi-person-households",
+      "evidence": "題名の主題から指標を決めた。年は本文から読む (2026-11-05)"
+    }
+  },
   "reviews": {
     "a-convenience-store-sales": [
       {
@@ -143,6 +213,27 @@
       {
         "issue": "RANK_MISMATCH: 本文「沖縄...41位」 → data: hobby-participation-rate-home-movie=24位",
         "reason": "41位は映画館での鑑賞の順位で、この指標は本文でも 24 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n15ee88b5169d": [
+      {
+        "issue": "RANK_MISMATCH: 本文「東京...45位」 → data: national-health-insurance-medical-expense-per-person=46位",
+        "reason": "「46位の東京都や45位の埼玉県」で、東京都は本文でも 46 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-n5f183fcf5b97": [
+      {
+        "issue": "RANK_MISMATCH: 本文「大阪...1位」 → data: future-burden-ratio=38位",
+        "reason": "「経常収支1位」は別の指標の順位で、この指標は本文でも 38 位",
+        "reviewedAt": "2026-11-05"
+      }
+    ],
+    "recovered-ne82a6c83ed45": [
+      {
+        "issue": "RANK_MISMATCH: 本文「大阪...5位」 → data: local-debt-current-ratio=41位",
+        "reason": "「財政力5位」は別の指標の順位で、この指標は本文でも 41 位",
         "reviewedAt": "2026-11-05"
       }
     ]

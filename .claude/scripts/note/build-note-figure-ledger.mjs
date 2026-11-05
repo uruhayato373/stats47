@@ -33,6 +33,8 @@ const LEDGER = path.join(ROOT, datasetPath('note.body-figures'));
 const REVIEWS = path.join(ROOT, datasetPath('note.body-figure-reviews'));
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const CONCURRENCY = 6;
+/** note の公開 API は大量取得で 403 を返すので、間を空けて取り直す */
+const NOTE_API_WAIT_MS = 4000;
 /** 固定コピーの丸めで生じる差を許す幅 (最後の桁の 1.5 目盛り)。audit-chart-axes.ts と同じ */
 const LAST_DIGIT_TOLERANCE = 1.5;
 
@@ -68,6 +70,7 @@ export function noteHtmlToMarkdown(html) {
   return html
     .replace(/<figure[^>]*>\s*<img[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/figure>/g, (_, src) => `\n![](${src.split('?')[0]})\n`)
     .replace(/<img[^>]*src="([^"]+)"[^>]*>/g, (_, src) => `\n![](${src.split('?')[0]})\n`)
+    .replace(/<a [^>]*href="([^"]+)"[^>]*>/g, ' $1 ')
     .replace(/<h([2-4])[^>]*>([\s\S]*?)<\/h\1>/g, (_, level, text) => `\n${'#'.repeat(Number(level))} ${text}\n`)
     .replace(/<\/(p|li|blockquote)>/g, '\n')
     .replace(/<[^>]+>/g, '');
@@ -77,6 +80,11 @@ export function noteHtmlToMarkdown(html) {
 export function rankingKeyOfTargets(targets) {
   const keys = (targets ?? []).map((t) => /^\/ranking\/([^/?#]+)/.exec(t)?.[1]).filter(Boolean);
   return keys.length === 1 ? keys[0] : null;
+}
+
+/** 本文の最初のランキングへのリンクを主指標として読む。旧記事の導線は主指標を先頭に置く */
+export function rankingKeyOfBody(markdown) {
+  return /\/ranking\/([a-z0-9-]+)/.exec(markdown)?.[1] ?? null;
 }
 
 /** 題名の【2021年版】や 2023年 から記事の年を読む。2 つ以上の年を書く題名は決められない */
@@ -91,6 +99,8 @@ export function figureKindOf(file, provenanceCharts, section = '', isRankingArti
   const ranking = RANKING_IMAGES.find(([pattern]) => pattern.test(base));
   if (ranking) return ranking[1];
   if (provenanceCharts.includes(file)) return 'chart';
+  // 【コロプレス地図】の見出しは旧記事の決まった型で、指標が分からなくても統計の図と分かる
+  if (/コロプレス|箱ひげ/.test(section)) return HEADING_KINDS.find(([pattern]) => pattern.test(section))[1];
   const named = isRankingArticle ? HEADING_KINDS.find(([pattern]) => pattern.test(section)) : null;
   return named ? named[1] : 'diagram';
 }
@@ -138,6 +148,23 @@ export function isTieNotation(issue, rows) {
   return tied > 1 && stated > above && stated <= above + tied;
 }
 
+/** 題名の「1位は○○」「○○は最下位」を今の値と照らす。article-factual-check は「最下位」を見ない */
+export function titleExtremeIssues(title, rows) {
+  if (rows.length === 0) return [];
+  const short = (name) => name.replace(/[都府県]$/, '');
+  const values = rows.map((r) => r.value);
+  const groups = { '1位': rows.filter((r) => r.value === Math.max(...values)), '最下位': rows.filter((r) => r.value === Math.min(...values)) };
+  const issues = [];
+  for (const row of rows) {
+    const name = short(row.areaName);
+    for (const [word, group] of Object.entries(groups)) {
+      const claimed = new RegExp(`${word}(?:は|に|の)?${name}|${name}[都道府県]?(?:は|が)?${word}`).test(title);
+      if (claimed && !group.includes(row)) issues.push(`TITLE_EXTREME_MISMATCH: 題名「${name}…${word}」 → data の${word}は ${group.map((r) => short(r.areaName)).join('・')}`);
+    }
+  }
+  return issues;
+}
+
 /** 本文で最も多く書かれた年のうち、指標に値がある年。題名に年が無い記事に使う */
 export function yearOfBody(markdown, availableYears) {
   const counts = new Map();
@@ -173,11 +200,15 @@ const prefectureRows = (key) => {
 async function readNoteBody(article) {
   const id = /\/n\/(n[a-f0-9]+)/.exec(article.noteUrl ?? '')?.[1];
   if (!id) return null;
-  const detail = await fetchNoteDetail(id).catch(() => null);
-  return detail?.body ? noteHtmlToMarkdown(detail.body) : null;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const detail = await fetchNoteDetail(id).catch(() => null);
+    if (detail?.body) return noteHtmlToMarkdown(detail.body);
+    await new Promise((done) => setTimeout(done, NOTE_API_WAIT_MS * (attempt + 1)));
+  }
+  return null;
 }
 
-async function inspectArticle(article, readFile, reviews) {
+async function inspectArticle(article, readFile, { reviews, metricOverrides }) {
   const entry = { key: article.key, noteUrl: article.noteUrl, isPaid: Boolean(article.isPaid), store: article.body.store };
   const reviewed = reviews[article.key]?.map((r) => r.issue) ?? [];
   const noteOnly = article.body.store === 'note-only' || !article.body.manifest;
@@ -187,7 +218,9 @@ async function inspectArticle(article, readFile, reviews) {
   const provenance = provenanceText ? JSON.parse(provenanceText) : null;
   const chartText = noteOnly ? null : await readFile(article, 'chart-data.json');
   const chart = chartText ? JSON.parse(chartText) : null;
-  const rankingKey = provenance?.rankingKey ?? chart?._meta?.rankingKey ?? rankingKeyOfTargets(article.stats47Targets);
+  const rankingKey = provenance?.rankingKey ?? chart?._meta?.rankingKey ?? rankingKeyOfTargets(article.stats47Targets) ?? metricOverrides[article.key]?.rankingKey
+    // 本文のリンクは複数の指標を扱う記事にも出るので、ランキング型の見出しがある記事にだけ使う
+    ?? (/コロプレス|箱ひげ/.test(draft) ? rankingKeyOfBody(draft) : null);
   const charts = Array.isArray(provenance?.charts) ? provenance.charts : [];
   const figures = bodyImagesOf(draft, { remote: noteOnly }).map(({ file, section }) => ({ file, kind: figureKindOf(file, charts, section, Boolean(rankingKey)) }));
   const hasDataFigure = figures.some((f) => f.kind !== 'diagram');
@@ -195,7 +228,7 @@ async function inspectArticle(article, readFile, reviews) {
   if (!rankingKey) return { ...entry, figures, valueCheck: hasDataFigure ? 'unmapped' : 'no-data-figure' };
   if (!hasDataFigure && !provenance) return { ...entry, rankingKey, figures, valueCheck: 'no-data-figure' };
   const metricRows = await prefectureRows(rankingKey);
-  const year = String(provenance?.year ?? chart?._meta?.year ?? '') || yearOfTitle(article.title)
+  const year = String(provenance?.year ?? chart?._meta?.year ?? metricOverrides[article.key]?.year ?? '') || yearOfTitle(article.title)
     || yearOfBody(draft, [...new Set(metricRows.map((r) => String(r.yearCode)))]);
   if (!year) return { ...entry, rankingKey, figures, valueCheck: 'no-year' };
   const located = { ...entry, rankingKey, year, figures };
@@ -203,7 +236,10 @@ async function inspectArticle(article, readFile, reviews) {
   if (rows.length === 0) return { ...located, valueCheck: 'year-gone' };
   const changed = chart ? countChangedValues(chart.data, new Map(rows.map((r) => [String(r.areaCode), r.value]))) : null;
   if (changed > 0) return { ...located, valueCheck: 'changed', changedPrefectures: changed };
-  const issues = await bodyClaimIssues(draft, rankingKey, rows, reviewed);
+  const issues = [
+    ...(await bodyClaimIssues(draft, rankingKey, rows, reviewed)),
+    ...titleExtremeIssues(article.title, rows).filter((issue) => !reviewed.includes(issue)),
+  ];
   if (issues.length > 0) return { ...located, valueCheck: 'body-differs', bodyIssues: issues.length, bodyIssueSample: issues.slice(0, 5) };
   return { ...located, valueCheck: chart ? 'match' : 'body-match' };
 }
@@ -228,10 +264,10 @@ async function main(argv) {
     const bytes = await privateStore.get(`${article.r2Path}/${name}`);
     return bytes ? bytes.toString('utf8') : null;
   };
-  const reviews = JSON.parse(fs.readFileSync(REVIEWS, 'utf8')).reviews;
+  const reviewLedger = JSON.parse(fs.readFileSync(REVIEWS, 'utf8'));
   const articles = [];
   for (let i = 0; i < targets.length; i += CONCURRENCY) {
-    articles.push(...await Promise.all(targets.slice(i, i + CONCURRENCY).map((a) => inspectArticle(a, readFile, reviews))));
+    articles.push(...await Promise.all(targets.slice(i, i + CONCURRENCY).map((a) => inspectArticle(a, readFile, reviewLedger))));
   }
   articles.sort((a, b) => a.key.localeCompare(b.key));
   const summary = tally(articles);

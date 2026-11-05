@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfTargets, yearOfBody, yearOfTitle } from '../build-note-figure-ledger.mjs';
+import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfBody, rankingKeyOfTargets, titleExtremeIssues, yearOfBody, yearOfTitle } from '../build-note-figure-ledger.mjs';
 
 test('本文の画像を直前の見出しと結び、./ と外部 URL と重複を除く', () => {
   const md = '## 【コロプレス地図】分布\n![](./images/image-01.png)\n## 上位\n![a](images/image-02.png)\n![](https://x.test/a.png)\n![](images/image-01.png)';
@@ -58,4 +58,22 @@ test('題名に年が無い記事は、本文で最も多く書かれた、値�
   assert.equal(yearOfBody('2023年の値。2023年と2020年を比べた。1999年の話。', ['2020', '2023']), '2023');
   assert.equal(yearOfBody('2020年と2023年', ['2020', '2023']), '2023');
   assert.equal(yearOfBody('年の記載なし', ['2020']), null);
+});
+
+test('【コロプレス地図】の見出しの図は、指標に結べない記事でも統計の図に数える', () => {
+  assert.equal(figureKindOf('images/image-01.png', [], '【コロプレス地図】日本全国の分布', false), 'ranking-map');
+});
+
+test('本文の最初のランキングへのリンクを主指標にする', () => {
+  assert.equal(rankingKeyOfBody('[財政](https://stats47.jp/ranking/fiscal-strength-index)\n[別](/ranking/other)'), 'fiscal-strength-index');
+  assert.equal(rankingKeyOfBody(noteHtmlToMarkdown('<a href="https://stats47.jp/ranking/a-b">x</a>')), 'a-b');
+  assert.equal(rankingKeyOfBody('リンクなし'), null);
+});
+
+test('題名の 1 位と最下位を今の値と照らし、同値は同じ順位として認める', () => {
+  const rows = [{ areaName: '鹿児島県', value: 29.9 }, { areaName: '東京都', value: 18 }, { areaName: '愛知県', value: 16.3 }];
+  assert.deepEqual(titleExtremeIssues('鹿児島県がトップ、東京は最下位。', rows), ['TITLE_EXTREME_MISMATCH: 題名「東京…最下位」 → data の最下位は 愛知']);
+  assert.deepEqual(titleExtremeIssues('1位は鹿児島県｜愛知が最下位', rows), []);
+  const tied = [{ areaName: '富山県', value: 1.3 }, { areaName: '広島県', value: 1.3 }, { areaName: '沖縄県', value: 0.5 }];
+  assert.deepEqual(titleExtremeIssues('茶道 1位は広島県', tied), []);
 });
