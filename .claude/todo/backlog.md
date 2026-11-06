@@ -173,6 +173,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [H01-VACANT-ARTICLE-PUBLISH-01] H01 の空き家の記事を背景画像つきで公開し、図の台帳と X の下書きを進める
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
+
+- **起点**: 記事 `vacant-houses-population-decline` は `contents/blog` に `published: false` で入っていて、本文は審査 PASS、残りは背景画像だけ (`issues:figures` で背景待ち)。2026-11-06 は Codex が社内プロキシの 503 で 5 回とも止まった。
+- **次**: ① `npm run blog-images:codex -- request-article --slug vacant-houses-population-decline --article contents/blog/vacant-houses-population-decline/article.md` のあと Codex で生成して `ingest-article` で取り込む (Gemini へ切り替えない) ② オーナーが下書き全文を確認する ③ `published: true` にして develop へ push する ④ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ⑤ X の下書き 1196 をオーナーの承認へ回す。
+- **完了条件**: 記事が本番で公開され、`issues:figures` の H01 の記事の行が消え、X の投稿の状態が台帳と一致している。
+
 ### [BLOG-AD-ROW-HYDRATION-01] ブログの本文の広告の段が段落の中に入り、hydration に失敗する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:サイト]
 
