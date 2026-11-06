@@ -2094,6 +2094,181 @@
       "id": "blog:sme-business-sentiment-regional-gap",
       "type": "type:reference",
       "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:2050-population-flood-exposure",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:alcohol-prefecture-map",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:automotive-industry-transformation-map",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:birth-death-gap-decline",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:cc-estat-05-medical-cost-choropleth",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:child-height-regional-gap",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:consumer-price-regional-gap",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:emergency-hospital-general-clinic-count-per-100k-prefecture",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:engel-coefficient-prefecture-ranking",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:fire-department-pump-car-count-per-100-thousand-people",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:fishery-catch-aquaculture-shift",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:food-consumption-prefecture-battle",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:foreign-population-growth-rate",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:foreign-residents-diversity-map",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:health-life-expectancy-structure",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:local-finance-theme-overview",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:local-government-debt-burden",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:local-tax-revenue-gap",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:long-commute-telework-potential",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:manufacturing-aichi-dominance",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:manufacturing-productivity",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:marriage-divorce-okinawa",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:middle-school-height-east-west-puzzle",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:minimum-wage-1000yen-breakthrough",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:population-decline-land-price-divergence",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:population-density-urbanization",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:population-migration-tokyo-concentration",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:rice-consumption-quantity-ranking",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:safe-driving-5-features",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:school-teacher-annual-income",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:sunshine-solar-housing-correlation",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:tablet-ownership-multi-person-households-per-1000",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:vacant-house-crisis",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:vacant-housing-aging-correlation",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:wheat-flour-consumption-prefecture",
+      "type": "type:reference",
+      "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
     }
   ]
 }

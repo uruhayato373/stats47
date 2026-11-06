@@ -7,8 +7,10 @@ import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { COVERAGE_CHANNELS, UNCLASSIFIED, type CoverageItem } from "@/lib/content-coverage";
 import { contentCoverage } from "@/lib/server/content-coverage";
 import { questionProgress } from "@/lib/server/question-progress";
+import { metricRows } from "@/lib/server/reference-metrics";
 import { hasError } from "@/lib/server/state-io";
 import { QUESTION_STAGES, type QuestionRow } from "@/lib/question-progress";
+import type { MetricRow } from "@/lib/reference-metrics";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "コンテンツ一覧 — stats47 admin" };
@@ -36,6 +38,32 @@ const QUESTION_COLUMNS: GridColumn[] = [
 ];
 
 const wired = (r: QuestionRow) => r.products * 1000 + r.figures * 100 + r.answers;
+
+const METRIC_COLUMNS: GridColumn[] = [
+  { id: "title", header: "ランキング", sortable: true },
+  { id: "municipality", header: "市区町村", sortable: true, nowrap: true },
+  { id: "blogs", header: "記事", numeric: true, sortable: true },
+  { id: "notes", header: "note", numeric: true, sortable: true },
+  { id: "posts", header: "SNS", numeric: true, sortable: true },
+];
+
+function toMetricRow(r: MetricRow): GridRow {
+  return {
+    id: r.key,
+    facet: r.blogs + r.notes + r.posts > 0 ? "wired" : "none",
+    search: `${r.title} ${r.key}`,
+    sort: [r.title, r.hasMunicipality ? 1 : 0, r.blogs, r.notes, r.posts],
+    cells: [
+      <Link key="title" className={LINK} href={`/content/metrics/${encodeURIComponent(r.key)}`}>
+        {r.title}
+      </Link>,
+      r.hasMunicipality ? "あり" : "—",
+      r.blogs,
+      r.notes,
+      r.posts,
+    ],
+  };
+}
 
 function toItemRow(i: CoverageItem): GridRow {
   return {
@@ -98,6 +126,22 @@ function PaperPage({ title, question }: { title: string; question: string }) {
   );
 }
 
+/** 参照型は指標が主で、つながる記事・note・SNS の数を指標ごとに並べる。中身は指標の詳細で見る */
+function ReferencePage({ title, question }: { title: string; question: string }) {
+  const rows = metricRows();
+  return (
+    <>
+      <PageHeading title={title} source="ページ索引 + external">
+        <p className="m-0 text-sm text-muted-foreground">{question}</p>
+        <Link className={`${LINK} text-sm`} href={`${PAGE}?type=reference&view=pages`}>
+          ページの一覧を見る
+        </Link>
+      </PageHeading>
+      {hasError(rows) ? <ErrorNote error={rows.error} /> : <DataGrid columns={METRIC_COLUMNS} rows={rows.map(toMetricRow)} searchPlaceholder="指標を検索…" facets={[{ value: "wired", label: "配線あり" }, { value: "none", label: "配線なし" }]} />}
+    </>
+  );
+}
+
 /** 型ごとのコンテンツの一覧 (型 B)。媒体のタブと表だけを置く */
 export default async function ContentTypesPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const params = await searchParams;
@@ -112,6 +156,7 @@ export default async function ContentTypesPage({ searchParams }: { searchParams:
   }
   const row = data.rows.find((r) => r.type === `type:${params.type}` || r.type === params.type) ?? data.rows[0];
   if (row.type === "type:paper") return <PaperPage title={row.title} question={row.question} />;
+  if (row.type === "type:reference" && params.view !== "pages") return <ReferencePage title={row.title} question={row.question} />;
   const type = row.type === UNCLASSIFIED ? null : row.type;
   const available = COVERAGE_CHANNELS.filter((c) => row.cells[c.id].published + row.cells[c.id].preparing > 0);
   const tab = available.find((c) => c.id === params.channel)?.id ?? available[0]?.id ?? "site";

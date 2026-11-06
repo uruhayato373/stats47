@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+
+import { SITE } from "@stats47/types";
 import Link from "next/link";
 
 import { Cell, DataTable, PanelCard, Row, StatusBadge } from "@/components/admin-ui";
@@ -82,7 +84,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
               <Row key={`${p.role}:${p.id}`}>
                 <Cell nowrap>{p.role === "answers" ? "答え" : "根拠"}</Cell>
                 <Cell>
-                  <a className={LINK} href={`https://stats47.jp${p.href}`} target="_blank" rel="noreferrer">
+                  <a className={LINK} href={`${SITE.origin}${p.href}`} target="_blank" rel="noreferrer">
                     {p.title}
                   </a>
                 </Cell>

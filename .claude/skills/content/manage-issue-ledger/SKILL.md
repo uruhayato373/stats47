@@ -69,7 +69,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 
 `data/content/issue-links.json` に 1 組 1 役割で書く。
 
-- `answers` = 問いに本文で答える読み物 (blog / geo / japan-theme)
+- `answers` = 問いに本文で正面から答える読み物 (blog / geo / japan-theme)。**問いごとに 1 本だけ**。関連する記事は指標でつながるので書かない
 - `evidence` = 根拠のデータ (ranking / theme / survey など)
 
 **導出できる関係は書かない**。問いの `primaryTheme`、小さな問いが親から継ぐテーマ、答えの記事が使う指標のランキングは台帳から毎回求める。書くと `issues:check` が止める。非公開のページも指せない。
