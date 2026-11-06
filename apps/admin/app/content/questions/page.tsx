@@ -32,6 +32,7 @@ const COLUMNS: GridColumn[] = [
   { id: "notes", header: "note", numeric: true, sortable: true },
   { id: "posts", header: "SNS", numeric: true, sortable: true },
   { id: "paid", header: "有料 note", numeric: true, sortable: true },
+  { id: "products", header: "企画した商品", numeric: true, sortable: true },
 ];
 
 function toGridRow(r: QuestionRow): GridRow {
@@ -40,7 +41,7 @@ function toGridRow(r: QuestionRow): GridRow {
     facet: r.stage,
     search: `${r.id} ${r.question}`,
     tone: r.openDestinations > 0 ? "warn" : undefined,
-    sort: [r.id, null, QUESTION_STAGES.indexOf(r.stage), r.answers, r.evidence, r.analyses, r.figures, r.openDestinations, r.relatedNotes, r.relatedPosts, r.relatedPaidNotes],
+    sort: [r.id, null, QUESTION_STAGES.indexOf(r.stage), r.answers, r.evidence, r.analyses, r.figures, r.openDestinations, r.relatedNotes, r.relatedPosts, r.relatedPaidNotes, r.products],
     cells: [
       <code key="id" className="font-mono text-xs">
         {r.id.replace("issue:", "")}
@@ -60,6 +61,7 @@ function toGridRow(r: QuestionRow): GridRow {
       r.relatedNotes,
       r.relatedPosts,
       r.relatedPaidNotes,
+      r.products,
     ],
   };
 }
@@ -92,7 +94,7 @@ export default function QuestionProgressPage() {
           <StatCard label="配信待ち" icon={<SendIcon />} value={summary.openDestinations} tone={summary.openDestinations ? "warn" : "good"} sub="図の配信先の件数" />
           <StatCard label="背景画像の待ち" icon={<FileImageIcon />} value={summary.imageWaiting} tone={summary.imageWaiting ? "warn" : "good"} sub="記事の本数" />
           <StatCard label="台帳のずれ" icon={<CircleAlertIcon />} value={summary.drift} tone={summary.drift ? "bad" : "good"} sub="図の台帳と配信先の台帳" />
-          <StatCard label="有料 note へ届く問い" icon={<SquareCheckBigIcon />} value={summary.withPaidNote} sub="同じページを経由する関係のみ" />
+          <StatCard label="商品につながる問い" icon={<SquareCheckBigIcon />} value={summary.withProduct} sub={`ページ経由の有料 note ${summary.withPaidNote}`} />
         </Grid>
       </Section>
 
@@ -126,7 +128,7 @@ export default function QuestionProgressPage() {
       </Section>
 
       <Section title="問いの一覧">
-        <p className="m-0 text-sm text-muted-foreground">note・SNS・有料 note は、問いのページを経由して辿れる件数である。問いから直接指す項目は台帳に無い。</p>
+        <p className="m-0 text-sm text-muted-foreground">note・SNS・有料 note は、問いのページを経由して辿れる件数である。企画した商品は、問いの台帳の products が直接指す商品の数である。</p>
         <DataGrid
           columns={COLUMNS}
           rows={rows.map(toGridRow)}

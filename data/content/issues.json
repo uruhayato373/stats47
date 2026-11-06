@@ -2603,6 +2603,7 @@
         "データ",
         "実務"
       ],
+      "products": ["note:muni-manufacturing-shipment-data"],
       "sensitive": false,
       "status": "active"
     },

@@ -1,0 +1,95 @@
+{
+  "towns": 764,
+  "shareDensity": 0.369,
+  "shareSize": 0.631,
+  "prefectureCorrelation": -0.01,
+  "topBySize": [
+    "山口県 39.2 億円",
+    "大分県 34.2 億円",
+    "三重県 31.9 億円"
+  ],
+  "topByDensity": [
+    "福井県 33.3 所",
+    "岐阜県 32.8 所",
+    "長野県 30.0 所"
+  ],
+  "droppedTowns": 57,
+  "examples": [
+    {
+      "name": "愛知県 田原市",
+      "perCapitaManYen": 4348,
+      "perTenThousand": 12.6,
+      "sizeOkuYen": 344.1
+    },
+    {
+      "name": "福岡県 苅田町",
+      "perCapitaManYen": 6552,
+      "perTenThousand": 27.1,
+      "sizeOkuYen": 242.1
+    },
+    {
+      "name": "愛知県 豊田市",
+      "perCapitaManYen": 4862,
+      "perTenThousand": 22,
+      "sizeOkuYen": 221.2
+    },
+    {
+      "name": "新潟県 燕市",
+      "perCapitaManYen": 656,
+      "perTenThousand": 104,
+      "sizeOkuYen": 6.3
+    },
+    {
+      "name": "岐阜県 関市",
+      "perCapitaManYen": 530,
+      "perTenThousand": 71.3,
+      "sizeOkuYen": 7.4
+    },
+    {
+      "name": "長野県 岡谷市",
+      "perCapitaManYen": 380,
+      "perTenThousand": 77.2,
+      "sizeOkuYen": 4.9
+    }
+  ],
+  "quarters": [
+    {
+      "label": "上位4分の1",
+      "towns": 191,
+      "density": 26.6,
+      "size": 26.5,
+      "densityRatio": 2.74,
+      "sizeRatio": 5.14
+    },
+    {
+      "label": "2番目",
+      "towns": 191,
+      "density": 22.5,
+      "size": 13.7,
+      "densityRatio": 2.32,
+      "sizeRatio": 2.65
+    },
+    {
+      "label": "3番目",
+      "towns": 191,
+      "density": 18.6,
+      "size": 8.8,
+      "densityRatio": 1.92,
+      "sizeRatio": 1.72
+    },
+    {
+      "label": "下位4分の1",
+      "towns": 191,
+      "density": 9.7,
+      "size": 5.2,
+      "densityRatio": 1,
+      "sizeRatio": 1
+    }
+  ],
+  "sizeEmployeeCorrelation": 0.89,
+  "employeesPerEstablishment": {
+    "愛知県 田原市": 189,
+    "新潟県 燕市": 20
+  },
+  "prefectureFigureTowns": 1684
+}

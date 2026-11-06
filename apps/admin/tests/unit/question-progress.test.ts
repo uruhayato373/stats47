@@ -16,7 +16,7 @@ import { buildQuestionProgress, nextActionOf, stageOf, type ProgressInput } from
 const base = (over: Partial<ProgressInput> = {}): ProgressInput => ({
   issues: [
     { id: "issue:H01", level: "major", question: "空き家の問い", status: "active" },
-    { id: "issue:A01", level: "major", question: "答えのある問い", status: "active" },
+    { id: "issue:A01", level: "major", question: "答えのある問い", status: "active", products: ["note:paid"] },
     { id: "issue:B01", level: "major", question: "手つかずの問い", status: "active" },
     { id: "issue:C01", level: "major", question: "見送った問い", status: "dropped" },
   ],
@@ -78,6 +78,8 @@ describe("buildQuestionProgress", () => {
     expect(rows.find((r) => r.id === "issue:A01")).toMatchObject({ stage: "既存記事のみ", relatedNotes: 2, relatedPosts: 1, relatedPaidNotes: 1 });
     expect(rows.find((r) => r.id === "issue:B01")).toMatchObject({ stage: "答えなし", relatedNotes: 0, relatedPaidNotes: 0 });
     expect(summary.withPaidNote).toBe(1);
+    expect(summary.withProduct).toBe(1);
+    expect(rows.find((r) => r.id === "issue:A01")?.products).toBe(1);
   });
 
   it("配信先が公開済みのはずなのにページが無ければ、ずれとして先に直させる", () => {

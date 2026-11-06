@@ -13,6 +13,8 @@ import { join } from "node:path";
 
 import sharp from "sharp";
 
+import { CHART_THEMES } from "../../../apps/remotion/src/features/data-cards/chart-theme";
+import { renderGroupedBarsChart, type GroupedBarChart } from "../../../apps/admin/lib/template-grouped-bars";
 import { renderRelationshipScatterChart, type ScatterChart } from "../../../apps/admin/lib/template-relationship-scatter";
 import { correlation } from "./analysis-frame-core.mjs";
 
@@ -23,6 +25,7 @@ interface FrameRow {
   name: string;
   shipment_2023: number;
   establishments_2024: number;
+  employees_2024: number;
   daytime_2020: number;
   daytimeRatio_2020: number;
 }
@@ -77,19 +80,57 @@ const chart: ScatterChart = {
   points,
   labelNames,
 };
+// 市区町村: 人口あたり出荷額で 4 等分し、下位の町を 1 としたときの中央値の倍率を比べる
+const median = (values: number[]) => [...values].sort((x, y) => x - y)[Math.floor(values.length / 2)];
+const ranked = [...towns].sort((a, b) => b.shipment_2023 / population(b) - a.shipment_2023 / population(a));
+const quarters = [0, 1, 2, 3].map((i) => {
+  const group = ranked.slice(Math.floor((i * ranked.length) / 4), Math.floor(((i + 1) * ranked.length) / 4));
+  return {
+    label: ["上位4分の1", "2番目", "3番目", "下位4分の1"][i],
+    towns: group.length,
+    density: median(group.map((t) => (t.establishments_2024 / population(t)) * 1e4)),
+    size: median(group.map((t) => t.shipment_2023 / t.establishments_2024 / 100)),
+  };
+});
+const base = quarters[3];
+const quarterRows = quarters.map((q) => ({
+  ...q,
+  density: Number(q.density.toFixed(1)),
+  size: Number(q.size.toFixed(1)),
+  densityRatio: Number((q.density / base.density).toFixed(2)),
+  sizeRatio: Number((q.size / base.size).toFixed(2)),
+}));
+const quarterChart: GroupedBarChart = {
+  title: "強い町は数より大きさで差がつく",
+  meta: `人口3万人以上の${towns.length}市区町村。下位4分の1を1とした倍率`,
+  source: "社会・人口統計体系",
+  groups: quarterRows.map((q) => q.label),
+  series: [
+    { label: "事業所の数", values: quarterRows.map((q) => q.densityRatio) },
+    { label: "1事業所あたり出荷額", values: quarterRows.map((q) => q.sizeRatio) },
+  ],
+};
 const svg = renderRelationshipScatterChart(chart);
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, "figure.svg"), svg);
+writeFileSync(join(outDir, "figure-dark.svg"), renderRelationshipScatterChart(chart, CHART_THEMES.dark));
+writeFileSync(join(outDir, "figure.json"), `${JSON.stringify(chart, null, 2)}\n`);
+writeFileSync(join(outDir, "figure-quarters.svg"), renderGroupedBarsChart(quarterChart, CHART_THEMES.light));
+writeFileSync(join(outDir, "figure-quarters-dark.svg"), renderGroupedBarsChart(quarterChart, CHART_THEMES.dark));
+writeFileSync(join(outDir, "figure-quarters.json"), `${JSON.stringify(quarterChart, null, 2)}\n`);
 main();
 
 async function main() {
   await sharp(Buffer.from(svg), { limitInputPixels: 40_000_000 }).png().toFile(join(outDir, "figure.png"));
+  await sharp(Buffer.from(renderGroupedBarsChart(quarterChart, CHART_THEMES.light)), { limitInputPixels: 40_000_000 }).png().toFile(join(outDir, "figure-quarters.png"));
   const result = {
     towns: towns.length,
     shareDensity: Number(share.density.toFixed(3)),
     shareSize: Number(share.size.toFixed(3)),
     prefectureCorrelation: r === null ? null : Number(r.toFixed(2)),
     topBySize: [...points].sort((a, b) => b.y - a.y).slice(0, 3).map((p) => `${p.name} ${p.y.toFixed(1)} 億円`),
+    quarters: quarterRows,
+    sizeEmployeeCorrelation: Number((correlation(towns.map((t) => Math.log(t.shipment_2023 / t.establishments_2024)), towns.map((t) => Math.log(t.employees_2024 / t.establishments_2024))) ?? 0).toFixed(2)),
     topByDensity: [...points].sort((a, b) => b.x - a.x).slice(0, 3).map((p) => `${p.name} ${p.x.toFixed(1)} 所`),
   };
   writeFileSync(join(outDir, "result.json"), `${JSON.stringify(result, null, 2)}\n`);

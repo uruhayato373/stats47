@@ -6,10 +6,10 @@ import { listFigureDestinations } from "../../../.claude/scripts/issues/issue-gr
  *
  * 事業の問い (data/business/issue-map.json) とは混ぜない (2026-11-06 オーナー判断)。ここは事業の台帳を読まず、
  * 問いの `revenue` も出さない。収益の判断は事業イシューマップが持つ。
- * 商品の列は配信先としての到達を数えるだけで、同じページを経由する関係であって、問いから企画した商品とは限らない。
+ * 有料 note の列は同じページを経由する関係で、問いから企画した商品とは限らない。問いから企画した商品は `products` が直接指す。
  */
 
-export type QuestionIssue = { id: string; level: "major" | "minor"; question: string; status: "active" | "dropped"; sensitive?: boolean };
+export type QuestionIssue = { id: string; level: "major" | "minor"; question: string; status: "active" | "dropped"; sensitive?: boolean; products?: string[] };
 export type QuestionLink = { issue: string; page: string; role: "answers" | "evidence" };
 export type QuestionAnalysis = { id: string; issue: string; status: string };
 export type QuestionDestination = { channel: string; status: string; page?: string; postId?: number; slug?: string };
@@ -59,12 +59,14 @@ export type QuestionRow = {
   relatedNotes: number;
   relatedPosts: number;
   relatedPaidNotes: number;
+  /** 問いから企画して台帳で直接指している商品 */
+  products: number;
 };
 
 export type QuestionProgress = {
   rows: QuestionRow[];
   open: OpenDestination[];
-  summary: { questions: number; answered: number; analyses: number; figures: number; openDestinations: number; imageWaiting: number; drift: number; withPaidNote: number };
+  summary: { questions: number; answered: number; analyses: number; figures: number; openDestinations: number; imageWaiting: number; drift: number; withPaidNote: number; withProduct: number };
 };
 
 /** 実際の状態から、次にする作業を 1 つ返す */
@@ -127,6 +129,7 @@ export function buildQuestionProgress(input: ProgressInput): QuestionProgress {
       relatedNotes: notes.length,
       relatedPosts: related.size - notes.length,
       relatedPaidNotes: notes.filter((id) => paidNoteIds.has(id)).length,
+      products: issue.products?.length ?? 0,
     };
   });
 
@@ -142,6 +145,7 @@ export function buildQuestionProgress(input: ProgressInput): QuestionProgress {
       imageWaiting: new Set(open.filter((d) => d.actual === "背景待ち").map((d) => d.target)).size,
       drift: open.filter((d) => d.drift).length,
       withPaidNote: rows.filter((r) => r.relatedPaidNotes > 0).length,
+      withProduct: rows.filter((r) => r.products > 0).length,
     },
   };
 }

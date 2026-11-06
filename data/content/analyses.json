@@ -15,7 +15,8 @@
         "出荷額は 2023 年、事業所数は 2024 年、人口は 2020 年で年がずれている。事業所の集計範囲が出荷額と同じかは未確認",
         "人口が小さく値の無い 57 自治体は表に含まれない"
       ],
-      "observedAt": "2026-11-05"
+      "observedAt": "2026-11-05",
+      "article": { "slug": "manufacturing-strength-factory-size", "titleHint": "製造業が強い町は、工場が多い町か、大きい町か", "chars": "3000-4000", "links": [{ "href": "/blog/manufacturing-productivity", "label": "製造業の1人あたり出荷額の県別の比較" }] }
     },
     {
       "id": "analysis:H01-vacancy-population",

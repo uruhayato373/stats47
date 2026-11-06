@@ -28,17 +28,44 @@
       "destinations": [
         {
           "channel": "site",
-          "page": "blog:manufacturing-productivity",
-          "status": "planned"
-        },
-        {
-          "channel": "site",
-          "page": "municipality-ranking:manufacturing-shipment-amount",
-          "status": "planned"
+          "slug": "manufacturing-strength-factory-size",
+          "status": "draft"
         },
         {
           "channel": "x",
           "postId": 1195,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "id": "figure:M01-town-quarters-bars",
+      "analysis": "analysis:M01-factory-size",
+      "template": "grouped-bar",
+      "title": "強い町は数より大きさで差がつく",
+      "scope": "municipality",
+      "metrics": [
+        {
+          "key": "manufacturing-shipment-amount",
+          "year": 2023
+        },
+        {
+          "key": "manufacturing-establishments",
+          "year": 2024
+        },
+        {
+          "key": "day-time-population",
+          "year": 2020
+        },
+        {
+          "key": "day-time-population-ratio",
+          "year": 2020
+        }
+      ],
+      "destinations": [
+        {
+          "channel": "site",
+          "slug": "manufacturing-strength-factory-size",
           "status": "draft"
         }
       ]

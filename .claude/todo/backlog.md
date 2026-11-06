@@ -173,6 +173,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [MUNI-SIZE-RANKING-01] 1事業所あたり出荷額と事業所数の市区町村ランキングを足すかを決める
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-06] [領域:データ]
+
+- **起点**: M01 の記事の審査で、読者が自分の町の型を確かめる先が無いと分かった。市区町村ランキングは出荷額の総額だけで、事業所数と 1 事業所あたり出荷額が無い。
+- **やること**: 需要 (GSC の検索語) を見て、2 つの市区町村ランキングを足すかを決める。足すなら記事の導線を差し替える。
+- **完了条件**: 足す・足さないの判断が記録され、足す場合は記事から自分の町の型を確かめられる。
+
 ### [CI-LEAD-TIME-01] デプロイの skip と指標生成の省略の効果を実測する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:gh run list --workflow deploy-workers.yml] [起票:2026-11-06] [領域:管理]
 
@@ -188,20 +195,20 @@ updated: 2026-11-01
 - **やること**: ① 撤去 3 本の実行をオーナーに確認し、`GONE_BLOG_SLUGS` の手順で反映する (本文は `archive-blog-articles.mjs` で退避してから) ② 統合 9 本・書き直し 23 本の処置を決め、`decisions` に書く ③ note の用途別商品とサービスの型 (題名から仮置き) を確定する ④ URL の規則で参照型にした 420 本のうち、題名に「なぜ」を含む 187 本を参照型のままにしてよいかを確認する ⑤ 2026-10-28 以降に公開した相関の記事は、計測が 28 日を超えた週の `content-types:fit` で改めて判定する。
 - **完了条件**: `/content/expansion` の処置の案が 0 件で、決定が台帳にあり、note の仮置きが確定している。
 
-### [ISSUE-PRODUCT-LINK-01] 販売する商品から、起点の問いを直接指せるようにする
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run issues:check] [起票:2026-11-06] [領域:商品]
+### [ISSUE-PRODUCT-LINK-01] 既存の商品に、起点の問いを指す項目を足す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-06] [領域:商品]
 
-- **起点**: `/content/questions` の有料 note の列は、同じページを経由して辿れる件数だけで、問いから企画した商品とは区別できない (2026-11-06 実測: 問い 204 件のうち 6 件、有料 note 152 本のうち 3 本)。商品の台帳に問いの項目が無い。
-- **境界**: 指すのは社会の問い (`data/content/issues.json`) だけで、事業イシューマップ (`data/business/issue-map.json`) と混ぜない。問いの `revenue` とマップの列を対応づけない (2026-11-06 オーナー判断)。
-- **やること**: ① 商品の正本 (note の記事台帳・Kindle のカタログ) のどこに問いの ID を持つかを決める ② 新しい商品から書き、既存は根拠があるものだけ足す ③ 外部キー検査と `/content/questions` の列を直接の関係へ切り替える。
-- **完了条件**: 問いから直接指された商品の件数が画面に出て、存在しない問いの ID を `npm run check-datasets` が止める。
+- **起点**: 問いの台帳に `products` を足し、M01 から製造品出荷額の商品を直接指した (`/content/questions` の「企画した商品」)。実在は `check-datasets` が見る。Kindle は外部台帳の ID が無いので対象外のまま。
+- **境界**: 指すのは社会の問いだけで、事業イシューマップと混ぜない。同じ指標を使うだけの商品は書かない。
+- **やること**: 新しい商品は企画の時点で書く。既存の商品は根拠があるものだけ足す。Kindle を指す必要が出たら外部台帳に ID を足す。
+- **完了条件**: 問いから企画した商品がすべて `products` で辿れる。
 
-### [H01-VACANT-ARTICLE-PUBLISH-01] H01 の空き家の記事を背景画像つきで公開し、図の台帳と X の下書きを進める
+### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
-- **起点**: 記事 `vacant-houses-population-decline` は `contents/blog` に `published: false` で入っていて、本文は審査 PASS、残りは背景画像だけ (`issues:figures` で背景待ち)。2026-11-06 は Codex が社内プロキシの 503 で 5 回とも止まった。
-- **次**: ① `npm run blog-images:codex -- request-article --slug vacant-houses-population-decline --article contents/blog/vacant-houses-population-decline/article.md` のあと Codex で生成して `ingest-article` で取り込む (Gemini へ切り替えない) ② オーナーが下書き全文を確認する ③ `published: true` にして develop へ push する ④ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ⑤ X の下書き 1196 をオーナーの承認へ回す。
-- **完了条件**: 記事が本番で公開され、`issues:figures` の H01 の記事の行が消え、X の投稿の状態が台帳と一致している。
+- **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。背景画像は 2026-11-06 に Codex で生成して取り込み済み。M01 は既存記事 `manufacturing-productivity` の更新をやめて新しい記事にした (既存記事は図データの欠落など過去の負債を直さないと再公開できない)。
+- **次**: ① オーナーが下書き全文を確認する ② `published: true` にして develop へ push する ③ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ④ X の下書き 1195・1196 をオーナーの承認へ回す。
+- **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
 
 ### [BLOG-AD-ROW-HYDRATION-01] ブログの本文の広告の段が段落の中に入り、hydration に失敗する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:サイト]

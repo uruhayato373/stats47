@@ -45,7 +45,7 @@ npm run blog-images:codex -- request-article --slug <slug>
 
 # 生成後のpathとrequest JSONのpromptHashを渡す
 npm run blog-images:codex -- ingest-article \
-  --slug <slug> --input <generated-path> --prompt-hash <sha256-...>
+  --slug <slug> --input <generated-path> --prompt-hash <sha256-...>  # 公開前は --article <article.md> も付ける
 
 # 公開前staged記事のbundleを生成
 npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug <slug>

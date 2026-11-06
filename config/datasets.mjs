@@ -255,7 +255,10 @@ export const DATASETS = [
   // 意味の検査 (親子・役割・導出できる関係の写し) は npm run issues:check、棚卸しは npm run issues:coverage
   d("content.issues", "data/content/issues.json", "config", "data", "data", "記事・ページを作る起点の問いの台帳。ID は不変、小さな問いの親は ID から導出する", {
     schema: "data/content/schema/issues.schema.json",
-    refs: [{ field: "issues[].primaryTheme", to: "content.pages", key: "pages[].id" }],
+    refs: [
+      { field: "issues[].primaryTheme", to: "content.pages", key: "pages[].id" },
+      { field: "issues[].products[]", to: "content.external", key: "pages[].id" },
+    ],
   }),
   d("content.issue-links", "data/content/issue-links.json", "config", "data", "data", "問いとページの関係 (答え・根拠)。導出できる関係は書かない", {
     schema: "data/content/schema/issue-links.schema.json",
