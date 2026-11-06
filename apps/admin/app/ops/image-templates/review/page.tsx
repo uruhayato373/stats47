@@ -35,6 +35,12 @@ function TemplateRow({ row }: { row: ReviewRow }) {
   return (
     <PanelCard id={row.id} title={row.title} description={row.summary} action={<StatusBadge tone={status.tone}>{status.label}</StatusBadge>}>
       <Stack>
+        {row.fit && (
+          <Stack gap="sm">
+            <p className="text-sm">答える問い: {row.fit.answers}</p>
+            <p className="text-sm">必要なデータ: {row.fit.needs}</p>
+          </Stack>
+        )}
         {row.samples.length === 0 && <p className="text-sm text-muted-foreground">見本なし</p>}
         {row.samples.map((sample) => (
           <Stack key={sample.label} gap="sm">
