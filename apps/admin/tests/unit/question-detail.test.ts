@@ -1,0 +1,42 @@
+import { describe, expect, it } from "vitest";
+
+import { articleFigures, frontmatterValue, outlineOf, verdictOf } from "@/lib/question-detail";
+
+/** 守る意図: 下書きの中身 (題名・構成・図・審査) を、ファイルを開かずに画面で確かめられる */
+const markdown = `---
+title: "記事の題名"
+description: 説明文
+---
+
+本文
+
+## 最初の節
+
+![図](data/a.svg)
+
+## 次の節
+
+![別の図](data/b.svg)
+![画像](images/c.png)
+`;
+
+describe("下書きの読み取り", () => {
+  it("frontmatter の値から引用符を外し、本文の同名の語を拾わない", () => {
+    expect(frontmatterValue(markdown, "title")).toBe("記事の題名");
+    expect(frontmatterValue(markdown, "description")).toBe("説明文");
+    expect(frontmatterValue("title: 本文", "title")).toBeNull();
+  });
+
+  it("h2 を本文の順に返す", () => {
+    expect(outlineOf(markdown)).toEqual(["最初の節", "次の節"]);
+  });
+
+  it("本文で使う SVG の図だけを順に返す", () => {
+    expect(articleFigures(markdown)).toEqual(["a.svg", "b.svg"]);
+  });
+
+  it("審査が無ければ null を返す", () => {
+    expect(verdictOf("---\nverdict: PASS\n---")).toBe("PASS");
+    expect(verdictOf("")).toBeNull();
+  });
+});

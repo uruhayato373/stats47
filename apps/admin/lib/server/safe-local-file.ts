@@ -13,6 +13,7 @@ import path from "node:path";
 export const MIME: Record<string, string> = {
   ".mp4": "video/mp4",
   ".png": "image/png",
+  ".svg": "image/svg+xml",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",

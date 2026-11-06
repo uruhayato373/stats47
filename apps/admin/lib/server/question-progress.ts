@@ -4,11 +4,14 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { classifyAll } from "../../../../.claude/scripts/content-types/classify-core.mjs";
+import { readClassifyInputs } from "../../../../.claude/scripts/content-types/content-types-io.mjs";
 import { readDraftStates } from "../../../../.claude/scripts/issues/issue-draft-state.mjs";
 import { indexPages } from "../../../../.claude/scripts/issues/issue-graph-core.mjs";
-import { buildQuestionProgress, type ExternalLink, type QuestionAnalysis, type QuestionFigure, type QuestionIssue, type QuestionLink, type QuestionProgress } from "../question-progress";
+import { articleFigures, frontmatterValue, outlineOf, verdictOf } from "../question-detail";
+import { buildQuestionProgress, type ExternalLink, type QuestionAnalysis, type QuestionDestination, type QuestionFigure, type QuestionIssue, type QuestionLink, type QuestionProgress } from "../question-progress";
 import { projectRoot } from "./project-root";
-import { readJson, statePath, type Wrapped } from "./state-io";
+import { fileExists, readJson, readText, statePath, type Wrapped } from "./state-io";
 
 /** 問いの進み具合の入力を読む。読み取りのみで、事業の台帳 (business.issue-map) は読まない */
 export function questionProgress(): Wrapped<QuestionProgress> {
@@ -33,6 +36,105 @@ export function questionProgress(): Wrapped<QuestionProgress> {
       externalLinks: readJson<{ links: ExternalLink[] }>(datasetPath("content.external")).links,
       paidNoteIds: new Set(products.filter((p) => p.channel === "note" && (p.priceYen ?? 0) > 0).map((p) => `note:${p.key}`)),
     });
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+export type DraftView = {
+  slug: string;
+  title: string;
+  description: string | null;
+  state: string;
+  verdict: string | null;
+  type: string | null;
+  issue: string | null;
+  outline: string[];
+  figures: string[];
+  hasBackground: boolean;
+  chars: number;
+};
+
+export type QuestionDetail = {
+  issue: QuestionIssue & { dataNote?: string; pitfall?: string };
+  analyses: Array<QuestionAnalysis & { question?: string; finding?: string; caveats?: string[] }>;
+  pages: Array<{ id: string; role: string; title: string; href: string; published: boolean }>;
+  drafts: DraftView[];
+  figures: Array<{ id: string; title: string; template: string; destinations: QuestionDestination[] }>;
+  posts: Array<{ id: number; status: string; platform: string; caption: string; approval: string }>;
+  products: Array<{ id: string; title: string; href: string | null; priceJpy: number | null; status: string }>;
+};
+
+const issuesLedger = () => readJson<{ issues: Array<QuestionIssue & { dataNote?: string; pitfall?: string }> }>(datasetPath("content.issues")).issues;
+const analysesLedger = () => readJson<{ analyses: Array<QuestionAnalysis & { question?: string; finding?: string; caveats?: string[]; article?: { slug: string } }> }>(datasetPath("content.analyses")).analyses;
+const figuresLedger = () => readJson<{ figures: QuestionFigure[] }>(datasetPath("content.figures")).figures;
+
+function readDrafts(): DraftView[] {
+  const root = projectRoot();
+  const inputs = readClassifyInputs(root);
+  const classified = classifyAll(inputs);
+  const analyses = analysesLedger();
+  const issueBySlug = new Map(analyses.flatMap((a) => (a.article?.slug ? [[a.article.slug, a.issue] as const] : [])));
+  const states = readDraftStates(root, [{ destinations: inputs.draftSlugs.map((slug: string) => ({ slug })) }]);
+  return inputs.draftSlugs.map((slug: string): DraftView => {
+    const dir = path.posix.join("contents/blog", slug);
+    const markdown = readText(path.posix.join(dir, "article.md"));
+    const review = fileExists(path.posix.join(dir, "review.md")) ? readText(path.posix.join(dir, "review.md")) : "";
+    return {
+      slug,
+      title: frontmatterValue(markdown, "title") ?? slug,
+      description: frontmatterValue(markdown, "description"),
+      state: states.get(slug) ?? "不明",
+      verdict: verdictOf(review),
+      type: classified.get(`blog:${slug}`)?.type ?? null,
+      issue: issueBySlug.get(slug) ?? null,
+      outline: outlineOf(markdown),
+      figures: articleFigures(markdown),
+      hasBackground: fileExists(path.posix.join(datasetDir("blog.article-backgrounds"), `${slug}.jpg`)),
+      chars: markdown.length,
+    };
+  });
+}
+
+/** 公開待ちの下書きの一覧 */
+export function draftList(): Wrapped<DraftView[]> {
+  try {
+    return readDrafts();
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+/** 1 つの問いの配線。無い問いは null */
+export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
+  try {
+    const issue = issuesLedger().find((i) => i.id === id);
+    if (!issue) return null;
+    const analyses = analysesLedger().filter((a) => a.issue === id);
+    const analysisIds = new Set(analyses.map((a) => a.id));
+    const figures = figuresLedger().filter((f) => analysisIds.has(f.analysis));
+    const { links } = readJson<{ links: QuestionLink[] }>(datasetPath("content.issue-links"));
+    const inputs = readClassifyInputs(projectRoot());
+    const pageById = new Map<string, { id: string; title: string; href: string; published?: boolean }>(inputs.pages.map((p: { id: string; title: string; href: string; published?: boolean }) => [p.id, p]));
+    const postIds = new Set(figures.flatMap((f) => f.destinations.flatMap((d) => (d.postId === undefined ? [] : [d.postId]))));
+    const noteOf = new Map<string, { key: string; title: string; noteUrl?: string; priceJpy?: number; status: string }>(inputs.notes.map((n: { key: string; title: string; noteUrl?: string; priceJpy?: number; status: string }) => [`note:${n.key}`, n]));
+    return {
+      issue,
+      analyses,
+      pages: links.filter((l) => l.issue === id).map((l) => {
+        const page = pageById.get(l.page);
+        return { id: l.page, role: l.role, title: page?.title ?? l.page, href: page?.href ?? "", published: page?.published === true };
+      }),
+      drafts: readDrafts().filter((d) => d.issue === id),
+      figures,
+      posts: inputs.posts.filter((p: { id: number }) => postIds.has(p.id)).map((p: { id: number; status: string; platform: string; caption?: string; approval?: { state?: string } }) => ({
+        id: p.id, status: p.status, platform: p.platform, caption: p.caption ?? "", approval: p.approval?.state ?? "未設定",
+      })),
+      products: (issue.products ?? []).map((productId) => {
+        const note = noteOf.get(productId);
+        return { id: productId, title: note?.title ?? productId, href: note?.noteUrl ?? null, priceJpy: note?.priceJpy ?? null, status: note?.status ?? "不明" };
+      }),
+    };
   } catch (e) {
     return { error: e instanceof Error ? e.message : String(e) };
   }

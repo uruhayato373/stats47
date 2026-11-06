@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { CircleAlertIcon, FileImageIcon, MessageCircleQuestionIcon, SendIcon, ShapesIcon, SquareCheckBigIcon } from "lucide-react";
 
 import { Cell, DataGrid, DataTable, Row, StatCard, StatusBadge, type GridColumn, type GridRow } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { QUESTION_STAGES, type QuestionRow, type QuestionStage } from "@/lib/question-progress";
-import { questionProgress } from "@/lib/server/question-progress";
+import { draftList, questionProgress, type DraftView } from "@/lib/server/question-progress";
 import { hasError } from "@/lib/server/state-io";
 
 export const dynamic = "force-dynamic";
@@ -35,6 +36,41 @@ const COLUMNS: GridColumn[] = [
   { id: "products", header: "企画した商品", numeric: true, sortable: true },
 ];
 
+const DRAFT_COLUMNS: GridColumn[] = [
+  { id: "title", header: "題名" },
+  { id: "state", header: "状態", sortable: true, nowrap: true },
+  { id: "verdict", header: "審査", sortable: true, nowrap: true },
+  { id: "background", header: "背景", sortable: true, nowrap: true },
+  { id: "issue", header: "問い", sortable: true, nowrap: true },
+];
+
+function toDraftRow(d: DraftView): GridRow {
+  const verdict = d.verdict ?? "未実施";
+  const background = d.hasBackground ? "あり" : "なし";
+  const issue = d.issue?.replace("issue:", "") ?? null;
+  return {
+    id: d.slug,
+    facet: d.state,
+    search: `${d.title} ${d.slug}`,
+    sort: [null, d.state, verdict, background, issue],
+    cells: [
+      <span key="title">
+        {d.title} <code className="font-mono text-xs text-muted-foreground">{d.slug}</code>
+      </span>,
+      d.state,
+      verdict,
+      background,
+      d.issue ? (
+        <Link key="issue" className="font-medium underline-offset-4 hover:underline" href={`/content/questions/${encodeURIComponent(d.issue)}`}>
+          {issue}
+        </Link>
+      ) : (
+        "—"
+      ),
+    ],
+  };
+}
+
 function toGridRow(r: QuestionRow): GridRow {
   return {
     id: r.id,
@@ -47,7 +83,9 @@ function toGridRow(r: QuestionRow): GridRow {
         {r.id.replace("issue:", "")}
       </code>,
       <span key="question">
-        {r.question}
+        <Link className="font-medium underline-offset-4 hover:underline" href={`/content/questions/${encodeURIComponent(r.id)}`}>
+          {r.question}
+        </Link>
         {r.sensitive ? <span className="ml-1 text-xs text-muted-foreground">(慎重に扱う)</span> : null}
       </span>,
       <StatusBadge key="stage" tone={stageTone[r.stage]}>
@@ -78,6 +116,7 @@ export default function QuestionProgressPage() {
     );
   }
   const { summary, open, rows } = data;
+  const drafts = draftList();
 
   return (
     <>
@@ -124,6 +163,19 @@ export default function QuestionProgressPage() {
           </DataTable>
         ) : (
           <p className="m-0 text-sm text-muted-foreground">配信待ちの図はありません。</p>
+        )}
+      </Section>
+
+      <Section title={`contents/blog の原稿 (${hasError(drafts) ? "読めない" : drafts.length})`}>
+        {hasError(drafts) ? (
+          <ErrorNote error={drafts.error} />
+        ) : (
+          <DataGrid
+            columns={DRAFT_COLUMNS}
+            rows={[...drafts].sort((x, y) => Number(y.issue !== null) - Number(x.issue !== null) || x.slug.localeCompare(y.slug)).map(toDraftRow)}
+            searchPlaceholder="題名を検索…"
+            facets={[...new Set(drafts.map((d) => d.state))].sort().map((state) => ({ value: state, label: state }))}
+          />
         )}
       </Section>
 
