@@ -2,6 +2,7 @@
  * ブログ記事の背景が「今の記事の内容」に合っているかを判定する (公開前の検査用)。
  *
  * 公開時のサムネイル生成 (generate-blog-thumbnails.ts) は、背景を次の順で選ぶ。
+ *   0. git の全面構図背景 (assets/blog/fullbleed-backgrounds/<slug>.jpg)
  *   1. git の記事固有背景 (assets/blog/article-backgrounds/<slug>.jpg) — prompt は今の記事から計算する
  *   2. 旧 Codex カタログ (BLOG_CODEX_BACKGROUND_BY_SLUG) — prompt はタイトルに依らない
  *   3. R2 に公開済みの AI 背景 — 記録した promptHash が今のタイトルから計算した値と一致するときだけ再利用
@@ -11,7 +12,7 @@
  */
 
 export type BlogBackgroundStatus =
-  | { kind: 'article-asset' | 'codex-catalog' | 'published-ai'; ok: true }
+  | { kind: 'fullbleed-asset' | 'article-asset' | 'codex-catalog' | 'published-ai'; ok: true }
   | { kind: 'stale-ai' | 'missing'; ok: false; message: string }
   | { kind: 'unavailable'; ok: null; message: string };
 
@@ -46,6 +47,7 @@ export function codexBackgroundCommand(
 export function decideBlogBackgroundStatus(input: {
   slug: string;
   articlePath: string;
+  hasFullbleedAsset?: boolean;
   hasArticleAsset: boolean;
   hasCodexCatalog: boolean;
   /** 'unavailable' = R2 を読めなかった (通信失敗など) */
@@ -53,6 +55,7 @@ export function decideBlogBackgroundStatus(input: {
   /** 今の記事から計算した promptHash (現行版と旧版) */
   currentPromptHashes: readonly string[];
 }): BlogBackgroundStatus {
+  if (input.hasFullbleedAsset) return { kind: 'fullbleed-asset', ok: true };
   if (input.hasArticleAsset) return { kind: 'article-asset', ok: true };
   if (input.hasCodexCatalog) return { kind: 'codex-catalog', ok: true };
   const command = codexBackgroundCommand(input.slug, input.articlePath);

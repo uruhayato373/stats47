@@ -542,6 +542,7 @@ export const DATASETS = [
   // ── assets/ : 画像などの素材の原本 ──
   d("blog.outbox", "contents/blog/{**}", "outbox", "site", "contents", "ブログの公開待ち原稿 (develop への push で blog-auto-publish が R2 へ公開し、公開した slug を消す)"),
   d("blog.article-backgrounds", "assets/blog/article-backgrounds/{**}", "asset", "site", "assets", "ブログ記事のサムネイル背景の原本 (サムネイル生成が読む)"),
+  d("blog.fullbleed-backgrounds", "assets/blog/fullbleed-backgrounds/{**}", "asset", "site", "assets", "ブログ記事の全面構図サムネイル背景の原本 (サムネイル生成が読む)", { planned: true }),
   d("blog.codex-backgrounds", "assets/blog/codex-backgrounds/{**}", "asset", "site", "assets", "Codex で生成したブログ背景の原本と採用状態"),
   d("ogp.backgrounds", "assets/ogp/{**}", "asset", "site", "assets", "OGP・サムネイルのブランド背景と、その元画像"),
   d("area.specialty-illustrations", "assets/area-specialty/{**}", "asset", "site", "assets", "県ページの特産品イラストの原本 (sync-snapshots が R2 へ反映)"),

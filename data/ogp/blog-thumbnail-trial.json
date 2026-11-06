@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "route": "blog-background",
+  "generatedAt": "2026-11-06",
+  "generator": {
+    "tool": "codex-imagegen",
+    "invoke": "mcp",
+    "model": "gpt-6-astra"
+  },
+  "status": "trial-not-adopted",
+  "dataNote": "試作の記録。絵は .local/blog-thumb-trial/20261106 にあり、git と R2 に入れていない。request-article の依頼のうち構図・背景・画風・配色の行だけを差し替えた。ingest はしておらず、公開中のサムネイルと OGP は変えていない。",
+  "selection": "W43 の検索着地が多い順。suicide-rate-aging-nexus は題材を考えて除き、次点の local-tax-revenue-gap を入れた。",
+  "result": {
+    "articles": 20,
+    "backgroundColors": {
+      "indigo": 14,
+      "teal": 5,
+      "terracotta": 1
+    },
+    "avgThumbnailBytesCurrent": 17939,
+    "avgThumbnailBytesTrial": 15537
+  },
+  "items": [
+    {
+      "slug": "automotive-industry-transformation-map",
+      "outputSha256": "00337ea2022fb39c1317d044b4238c58f2c0c27f99176ea0580c8d21d99ca800",
+      "trialPromptSha256": "ba29dcf088c707605b6cad7139fb36386d6ced089e57ecf10697da9001e2e742",
+      "basePromptHash": "sha256-a9d08ddb08cceceb2b8752e345a3d567c8fdca98df0f2eb5c1cf2580172dfae8",
+      "thumbnailBytes": 13656,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "outputSha256": "31a94d09a6c92daba42fb574d331f887ccd540b5694b13d87c498ac7fb5d8f70",
+      "trialPromptSha256": "673c6213d90dd3f2655d58637fc3701dc9a8bb45b97439ee86d20fdda5d397f9",
+      "basePromptHash": "sha256-f1d13548b6cce5b8851c6a23cd795b356f2b316263b8e10b412b9da7acf71bd1",
+      "thumbnailBytes": 9890,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "academic-achievement-test-prefecture-ranking",
+      "outputSha256": "6ca36eb7a8a8dbd816e541f434e17d39ded48068182bbe32a3de93098604d801",
+      "trialPromptSha256": "242e94bf409cec72f8892e40981e6d8a6489e6ee0100fb530a62e5e80d0888fc",
+      "basePromptHash": "sha256-00224ab42ebcaedd9dd8fac68ec974557b9521ec1708a297728500bad8026027",
+      "thumbnailBytes": 17928,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "outputSha256": "a52c5f681c029d167ff0068103d6f5d221012c668b507eccb35839b48a2919d1",
+      "trialPromptSha256": "292b7b91e3d1ca8f8060396f0860bf19c8b2f412901e1500ff188d31ba81c131",
+      "basePromptHash": "sha256-0a34ea3e6b609460a8233a136a6331b9a71b393128daf5818ac4ea3db8b891c0",
+      "thumbnailBytes": 21920,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "livable-prefecture-composite-ranking",
+      "outputSha256": "f3e53477ad1e9166485b4bd6b68e9b1679cbab6cce5eddb9aaf3438971c2dde8",
+      "trialPromptSha256": "5b4b9bdcf06df3dd88bc1573dda28d04143d8a39fa2368edd0fd6eb6a260cfee",
+      "basePromptHash": "sha256-332d431b8ba4e43a5abfea7e490bcc0f742db12038038b1c1a5f570a7468c5e9",
+      "thumbnailBytes": 12704,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "outputSha256": "9c0797bc990be0dc6f1cbea22d3679383b18f1295aae464c4448fd29b8866e5a",
+      "trialPromptSha256": "496d8b0e9231cce653e112e0a93a17a2861efea3a8854189fee78412596e16b4",
+      "basePromptHash": "sha256-a97477f4a8a956af54a1e6b1ceb3cfc5993bfce7b3b31d862c2427ba00037ca7",
+      "thumbnailBytes": 13264,
+      "review": "要確認。工場労働者 1 人の絵で、記事の多様性の主題に対して固定観念を強める恐れ"
+    },
+    {
+      "slug": "alcohol-prefecture-map",
+      "outputSha256": "0b3bff1c4d1b52cf76b01c2ad26913a28fcec854d1698735277a1788e379f963",
+      "trialPromptSha256": "3567473d30aa8b5eb4b8b132f0a2332ee37ffeb35fe4abc2d0ebb94cb949bd0b",
+      "basePromptHash": "sha256-54b0f82bfaa8ed84fdd2f66111a443e807988cabe8a28771714b0f770fe7f9ff",
+      "thumbnailBytes": 11086,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "local-government-debt-burden",
+      "outputSha256": "74c633ad4f19814b1113a0488b29c60deda1f7da213ba83773d91211ccc58af2",
+      "trialPromptSha256": "b60bbae96441e9ad89627c6236c69c215ce550507f020b3514fe598e8cbfc0da",
+      "basePromptHash": "sha256-5d3a369887f1a7f61532a144adc76e8dded15014f690956a964d14d81e868a9e",
+      "thumbnailBytes": 13192,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "outputSha256": "29fa9fc44dad7549ab928da1bce5de16f260b16da3e6fb7a611b8dd1102a1aba",
+      "trialPromptSha256": "039066d6a81b9601d92e0cdfc7dfae7189ae997d1d8d5260b9327b634e8df153",
+      "basePromptHash": "sha256-4221bdc7548e5674516d32b5d68946c416299a38b7a4b70e42e2af9895743424",
+      "thumbnailBytes": 12242,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "outputSha256": "208acf24f5897a0615d4d0b84867f937686998df2deb2d7f547c95473b733b10",
+      "trialPromptSha256": "758a7436f03d7720b7de7af761f8e6e2e57b1a8f891db9a6add24208b40c1b5f",
+      "basePromptHash": "sha256-fc731f25586970dd66b576cd757201fa189cccd06286604c731f087160cf6ec8",
+      "thumbnailBytes": 15340,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "rice-harvest-volume-prefecture-gap",
+      "outputSha256": "d422d1e7c1090a17883a46766f8856c62ec1ae9ebd2c9b9cdf443ffbce1dafd5",
+      "trialPromptSha256": "a2bd6acd2a0fd82bf96b8b7122060605549608ce47fa734863d50621b80ed81f",
+      "basePromptHash": "sha256-e6a0bcea903f89c7159ccacf8586a5010d0ed3ad7cb32928b0c977fb23ae3419",
+      "thumbnailBytes": 23088,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "outputSha256": "404c7e8b2cbc89f101e1df687ef433096ef3e5b90fec5d479ebeb510573fa069",
+      "trialPromptSha256": "cc52641297c71be20910818ace3603ec2111750be99c954962cd1603b2962a29",
+      "basePromptHash": "sha256-3d139b339b6ba17c8b1638123ae986a3f65a3d4a5b84d2621c6eb4d7c876f9e5",
+      "thumbnailBytes": 13860,
+      "review": "要再生成。日よけの緑とオレンジの帯が実在のチェーンを連想させる"
+    },
+    {
+      "slug": "konbu-consumption-prefecture-gap",
+      "outputSha256": "5198bb37009b102890856744c3ff266ee1f9282f0aac328d415202cfdd51d0a9",
+      "trialPromptSha256": "5678caf5d8e62934c87e108aeaccc9f1987726d054816900db0a52a5082a02c6",
+      "basePromptHash": "sha256-157cbf3d44db1276c5f12802b2cccd61cdfb650350f3a1f5bd7278b0438c40a7",
+      "thumbnailBytes": 19532,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "outputSha256": "60a06c4825119ede84e0f4a2b082b4f382538282d1e4b93b8fc03fafa28cd940",
+      "trialPromptSha256": "3495a83343279903cee017b136dc893820b0d54fc76b823dfdcccf786906ae47",
+      "basePromptHash": "sha256-143a04a40bc3d516381a82ae29cd8e5b14a3ef2b878af4a0e21a3ee65c53c0fe",
+      "thumbnailBytes": 14368,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "outputSha256": "55cb77b8b55569d4b87390bbd2af8e8fc85660735c3f425876008c84fdaa1693",
+      "trialPromptSha256": "441e6ed94d46224964478a039b432b1818eb62ceb5eaa90f4e997685e4549ddb",
+      "basePromptHash": "sha256-3820eb41f6063808865889914ad3b6c0e2e03d6c060327f26eec97ad18c02615",
+      "thumbnailBytes": 21112,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "chicken-consumption-quantity",
+      "outputSha256": "6d0a7362c0e4f44fe14ca08e1e5433bda4014f156949207235bac9d56e01f130",
+      "trialPromptSha256": "cd75ea2af68200261667c3130d93704619a94dcf142d1fd745dacefda9ce6f75",
+      "basePromptHash": "sha256-3e864ae110b57774009fada24c1dade135207d3724a0ab31621ffe8f42d1c912",
+      "thumbnailBytes": 15740,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "rice-consumption-quantity-ranking",
+      "outputSha256": "f84d79707dbd11b9bafe3db93966be2a72a93488726268fa6152814ba0c8cd28",
+      "trialPromptSha256": "dbae576502e3355558d60b08767a7fcfe03fd8c7cae8fbc1f9dcf995a55094cb",
+      "basePromptHash": "sha256-66bdce92fb878a7f05bdd240b6bb5cc756c17946ec865032f7740a3c25a8f09f",
+      "thumbnailBytes": 13052,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "outputSha256": "110acce467225204144b1aaa325f2c87981d6b68e6c93a1d56f73e0c832aa885",
+      "trialPromptSha256": "7347cbe2ba0dafe81038b3069b87ecef614b8bc216f2d247c3f6f40ce767daa1",
+      "basePromptHash": "sha256-c5d4d9baebc53d00024e204c9fa321dc46b83e8a8d9c478d2eef689c7dab17a2",
+      "thumbnailBytes": 23468,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "outputSha256": "3b5ed9f6ca7895fe37d2e8d8b9a328b4094798d6ccaacec862df24745a9676b1",
+      "trialPromptSha256": "ebde487ad325da0045bc1cc142c8b6a7b8cd60e732df3bdb89a2227eef64387e",
+      "basePromptHash": "sha256-7b8164d9b1ee8f6208ce42637b91867cced676ecc7b91017be993e95082ae431",
+      "thumbnailBytes": 11732,
+      "review": "文字なし。主題は判読できる"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "outputSha256": "79618eec7b1cdfe74cd2b363b793a9bee4735234c01e41077922dbe229499841",
+      "trialPromptSha256": "ff520e54feb9bda196c3972dc2eae3a3d8c443bd9b47616fcc40ea9234a4434e",
+      "basePromptHash": "sha256-d6047ba61863cb2c808afa0e6134df9833ce4d74619b08cf625af6065dfce5bc",
+      "thumbnailBytes": 13572,
+      "review": "文字なし。主題は判読できる"
+    }
+  ],
+  "photoSamples": {
+    "promptVersion": "blog-photo-v1",
+    "status": "sample-not-ingested",
+    "items": [
+      {
+        "slug": "convenience-store-density-map",
+        "outputSha256": "94f02cde54e0ce97929a251fec64f1a26b3bfc3d2ab6da0fb849e28a5b03a115",
+        "review": "おにぎりと飲み物。人物・店舗なし"
+      },
+      {
+        "slug": "foreign-residents-diversity-map",
+        "outputSha256": "d2ca1eca16b7811cf455c9068736a774b7d7bbd47ca4df742c521d00cbcb2609",
+        "review": "地球儀と歯車。地図の禁止に対し地球儀の扱いは要判断"
+      },
+      {
+        "slug": "local-government-debt-burden",
+        "outputSha256": "e975ac9b017ca07be4265176eb8f7d95ce5e2af0604d1777de93250abdefe79a",
+        "review": "貯金箱と電卓。やや定番"
+      },
+      {
+        "slug": "aging-solo-living-crisis",
+        "outputSha256": "43c932517dd092838f4a7a6136afcb80c97e2a8c7b7d71de2db18804c1939ddb",
+        "review": "眼鏡と湯のみ。人物なしで主題が伝わる"
+      },
+      {
+        "slug": "health-life-expectancy-structure",
+        "outputSha256": "ce21809d13be1bf12e36fa5707237531351e8195d8e5077b7650928a078a62e4",
+        "review": "砂時計と聴診器。処置の場面なし"
+      },
+      {
+        "slug": "automotive-industry-transformation-map",
+        "outputSha256": "94783707ae7de2a103ca995a6d2e08ff53ba38a658749a52aa09b119f621c9ce",
+        "review": "歯車 2 つ。車が出ず主題が弱い"
+      }
+    ]
+  }
+}

@@ -1,4 +1,6 @@
 #!/usr/bin/env tsx
+import { blogRendererSourcesForBackground, renderBlogImageBundleForBackground } from './lib/blog-fullbleed-render';
+import { resolvePreferredArticleBackgroundSource } from './lib/blog-fullbleed-background';
 /**
  * staged blog article から、fingerprint が変わった画像 bundle だけを生成する。
  *
@@ -26,11 +28,9 @@ import { config as loadEnv } from 'dotenv';
 import { OGP_MODEL, OGP_PROMPT_VERSION } from './data/blog-ogp-visual-catalog';
 import {
   BLOG_IMAGE_GENERATOR_SPEC,
-  blogRendererSources,
 } from './data/image-generator-registry';
 import {
   parseBlogArticleImageContext,
-  resolveArticleBackgroundSource,
 } from './lib/blog-article-background';
 import { backgroundRecord } from './lib/blog-background-status';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
@@ -256,12 +256,12 @@ async function readReusableAiBackground(options: {
   const keys = blogImageKeys(options.slug);
   const visual = resolveOgpVisual(parseOgpVisualFrontmatter(options.markdown));
   const articleSource = options.markdown
-    ? await resolveArticleBackgroundSource(
+    ? await resolvePreferredArticleBackgroundSource(
         PROJECT_ROOT,
         parseBlogArticleImageContext(options.slug, options.markdown)
       )
     : null;
-  const legacyCodexSource = await resolveCodexBackgroundSource(
+  const legacyCodexSource = articleSource ? null : await resolveCodexBackgroundSource(
     PROJECT_ROOT,
     options.slug
   );
@@ -424,10 +424,6 @@ async function main(): Promise<void> {
     );
   }
 
-  const aiRendererHash = calculateRendererHash(
-    PROJECT_ROOT,
-    blogRendererSources('ai')
-  );
   const inspector = createImageGenerationInspector(PUBLIC_URL);
   const prepared = await pMap(slugs, async (slug) => {
     const source = readBlogData(join(blogRoot, slug));
@@ -458,7 +454,7 @@ async function main(): Promise<void> {
           promptHash: background.metadata.promptHash,
           sha256: background.metadata.sha256,
         },
-        rendererHash: aiRendererHash,
+        rendererHash: calculateRendererHash(PROJECT_ROOT, blogRendererSourcesForBackground(background.metadata.promptVersion)),
       }),
     };
   });
@@ -516,7 +512,6 @@ async function main(): Promise<void> {
   }
 
   const { loadFonts } = await import('./lib/blog-thumbnail-render');
-  const { renderBlogImageBundle } = await import('./lib/blog-image-render');
   const fonts = loadFonts(PROJECT_ROOT);
   const failures: Array<{ slug: string; error: unknown }> = [];
   const generatedManifests = new Map<
@@ -532,7 +527,7 @@ async function main(): Promise<void> {
         subtitle: item.data.subtitle,
         background: item.background.metadata,
       };
-      await renderBlogImageBundle({
+      await renderBlogImageBundleForBackground(item.background.metadata.promptVersion, {
         data: item.data,
         fonts,
         outputs: {
