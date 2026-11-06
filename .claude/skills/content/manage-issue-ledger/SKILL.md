@@ -24,7 +24,7 @@ npm run issues:candidates   # 問いの候補の検索語 (--limit N / --weeks N
 npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-issue-view.html。Artifact に載せる)
 ```
 
-問いごとの進み具合 (ページ・分析・図・配信先・次の作業) は管理画面の `/content/questions` で見る。事業イシューマップ (`/strategy/issue-map`) とは別物で、片方の台帳をもう片方の画面へ持ち込まない。
+問いの一覧は管理画面の論文型のタブ (`/content/types?type=paper&channel=questions`) で見る。問いを押すと分析・記事・図・投稿・商品の配線が見える。事業イシューマップ (`/strategy/issue-map`) とは別物で、片方の台帳をもう片方の画面へ持ち込まない。
 
 形と外部キーは `node .claude/scripts/lib/check-datasets.mjs` が見る。GSC は土曜の週次記録 (`data/gsc/snapshots/`) を読むので、最新週が古ければ棚卸しの結果にそう書く。
 

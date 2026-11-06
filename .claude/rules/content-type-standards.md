@@ -48,7 +48,7 @@ paths:
 | `npm run check-datasets` | 規則が指す型の実在と、事業イシューマップの行が持つ型の定義の写しのずれ |
 | `npm run content-types:test` | 判定そのものの回帰 |
 
-管理画面の `/content/expansion` は同じ判定で件数を出す。
+管理画面の `/content/expansion` は同じ判定で 4 型 × 媒体の件数を出し、`/content/types` が型ごとの一覧を出す。
 
 ## 禁止
 

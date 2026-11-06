@@ -70,7 +70,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
       <PageHeading title={issue.question} source={`${issue.id} — 問いの台帳 + 配信先の台帳`}>
         {issue.dataNote ? <p className="m-0 max-w-4xl text-sm text-muted-foreground">使う統計: {issue.dataNote}</p> : null}
         {issue.pitfall ? <p className="m-0 max-w-4xl text-sm text-muted-foreground">読み違えやすい点: {issue.pitfall}</p> : null}
-        <Link className={`${LINK} text-sm`} href="/content/questions">
+        <Link className={`${LINK} text-sm`} href="/content/types?type=paper&channel=questions">
           問いの一覧へ戻る
         </Link>
       </PageHeading>

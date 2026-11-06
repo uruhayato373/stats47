@@ -96,15 +96,6 @@ function readDrafts(): DraftView[] {
   });
 }
 
-/** 公開待ちの下書きの一覧 */
-export function draftList(): Wrapped<DraftView[]> {
-  try {
-    return readDrafts();
-  } catch (e) {
-    return { error: e instanceof Error ? e.message : String(e) };
-  }
-}
-
 /** 1 つの問いの配線。無い問いは null */
 export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
   try {

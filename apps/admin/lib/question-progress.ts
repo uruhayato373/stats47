@@ -30,20 +30,6 @@ export type ProgressInput = {
 export const QUESTION_STAGES = ["答えなし", "既存記事のみ", "分析中", "配信待ち", "配信済み"] as const;
 export type QuestionStage = (typeof QUESTION_STAGES)[number];
 
-export type OpenDestination = {
-  issue: string | null;
-  question: string;
-  figure: string;
-  figureTitle: string;
-  template: string;
-  channel: string;
-  target: string;
-  status: string;
-  actual: string;
-  drift: boolean;
-  next: string;
-};
-
 export type QuestionRow = {
   id: string;
   question: string;
@@ -55,7 +41,7 @@ export type QuestionRow = {
   analyses: number;
   figures: number;
   openDestinations: number;
-  /** 問いのページを経由して辿れる外部の公開物。問いから直接指す項目は台帳に無い */
+  /** 問いのページを経由して辿れる外部の公開物 */
   relatedNotes: number;
   relatedPosts: number;
   relatedPaidNotes: number;
@@ -63,23 +49,7 @@ export type QuestionRow = {
   products: number;
 };
 
-export type QuestionProgress = {
-  rows: QuestionRow[];
-  open: OpenDestination[];
-  summary: { questions: number; answered: number; analyses: number; figures: number; openDestinations: number; imageWaiting: number; drift: number; withPaidNote: number; withProduct: number };
-};
-
-/** 実際の状態から、次にする作業を 1 つ返す */
-export function nextActionOf(d: { channel: string; status: string; actual: string; drift: boolean }): string {
-  if (d.drift) return "台帳と実際のずれを直す";
-  if (d.actual === "執筆待ち" || d.actual === "下書きなし") return "記事の下書きを作る";
-  if (d.actual === "レビュー待ち") return "記事を審査する";
-  if (d.actual === "背景待ち") return "背景画像を Codex で生成する";
-  if (d.actual === "公開待ち") return "人が確認して公開する";
-  if (d.actual === "公開処理中") return "公開の完了を待つ";
-  if (d.channel === "site") return "ページへ図を載せる";
-  return "投稿の承認へ回す";
-}
+export type QuestionProgress = { rows: QuestionRow[] };
 
 export function stageOf(c: { answers: number; analyses: number; destinations: number; openDestinations: number }): QuestionStage {
   if (c.destinations > 0) return c.openDestinations > 0 ? "配信待ち" : "配信済み";
@@ -90,18 +60,8 @@ export function stageOf(c: { answers: number; analyses: number; destinations: nu
 export function buildQuestionProgress(input: ProgressInput): QuestionProgress {
   const { issues, links, analyses, figures, posts, pages, drafts, externalLinks, paidNoteIds } = input;
   const active = issues.filter((i) => i.status === "active");
-  const questionOf = new Map(issues.map((i) => [i.id, i.question]));
-  const figureOf = new Map(figures.map((f) => [f.id, f]));
   const issueOfAnalysis = new Map(analyses.map((a) => [a.id, a.issue]));
-
-  const rawOpen: Array<Omit<OpenDestination, "question" | "figureTitle" | "template" | "next">> = listFigureDestinations({ figures, analyses, posts, pages, drafts });
-  const open: OpenDestination[] = rawOpen.map((d) => ({
-    ...d,
-    question: (d.issue && questionOf.get(d.issue)) || "問いが見つからない",
-    figureTitle: figureOf.get(d.figure)?.title ?? d.figure,
-    template: figureOf.get(d.figure)?.template ?? "",
-    next: nextActionOf(d),
-  }));
+  const open: Array<{ issue: string | null }> = listFigureDestinations({ figures, analyses, posts, pages, drafts });
 
   const externalByPage = new Map<string, string[]>();
   for (const l of externalLinks) externalByPage.set(l.to, [...(externalByPage.get(l.to) ?? []), l.from]);
@@ -133,19 +93,5 @@ export function buildQuestionProgress(input: ProgressInput): QuestionProgress {
     };
   });
 
-  return {
-    rows,
-    open,
-    summary: {
-      questions: rows.length,
-      answered: rows.filter((r) => r.answers > 0).length,
-      analyses: analyses.length,
-      figures: figures.length,
-      openDestinations: open.length,
-      imageWaiting: new Set(open.filter((d) => d.actual === "背景待ち").map((d) => d.target)).size,
-      drift: open.filter((d) => d.drift).length,
-      withPaidNote: rows.filter((r) => r.relatedPaidNotes > 0).length,
-      withProduct: rows.filter((r) => r.products > 0).length,
-    },
-  };
+  return { rows };
 }

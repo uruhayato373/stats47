@@ -95,6 +95,7 @@ describe("nav-registry (左メニューの SSOT)", () => {
     expect(labels("/strategy/lanes").at(-1)).toBe("領域と構え");
     expect(labels("/")).toEqual(["ホーム"]);
     expect(labels("/no-such-page")).toEqual([]);
+    expect(labels("/content/questions/issue%3AM01").at(-1)).toBe("論文型");
     for (const href of navHrefs(NAV_GROUPS)) {
       const [p, q] = href.split("?");
       expect(navTrail(p, params(q)).at(-1)?.href, href).toBe(href);

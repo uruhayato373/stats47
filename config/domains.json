@@ -88,7 +88,11 @@
       "manages": "4 つの型の展開・問い・図と画像・記事と投稿の改善・参考文献",
       "nav": [
         { "label": "展開状況", "href": "/content/expansion", "kind": "inventory" },
-        { "label": "問いの進み具合", "href": "/content/questions", "kind": "actions" },
+        { "label": "参照型", "href": "/content/types?type=reference", "kind": "inventory" },
+        { "label": "教科書型", "href": "/content/types?type=textbook", "kind": "inventory" },
+        { "label": "論文型", "href": "/content/types?type=paper", "kind": "inventory" },
+        { "label": "作り方型", "href": "/content/types?type=howto", "kind": "inventory" },
+        { "label": "記事の処置の案", "href": "/content/fit", "kind": "actions" },
         { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
         { "label": "記事・投稿の改善", "href": "/product/content-quality", "kind": "actions" },
         { "label": "参考文献管理", "href": "/content/references", "kind": "inventory" },
