@@ -24,8 +24,8 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mergeKdpOperationalState } from "./kdp-status.mjs";
-import { advancePublicationStage } from "./kdp-publication-stage.mjs";
+import { mergeKdpOperationalState, normalizeKdpStatus } from "./kdp-status.mjs";
+import { advancePublicationStage, hasUnpublishedPredecessor } from "./kdp-publication-stage.mjs";
 import { KDP_ACCOUNT, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 // このファイル: .claude/scripts/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
@@ -143,6 +143,29 @@ export function writeBackKdpState(id, shelf, checkedAt = new Date().toISOString(
     writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
     return true;
   } catch {
+    return false;
+  }
+}
+
+/** 旧版の出版停止を本棚 read-back の結果で記録する。全旧版が止まれば新版の工程を previous_unpublished へ進める。 */
+export function writeBackPreviousEditionUnpublished(id, asin, statusLabel, checkedAt = new Date().toISOString()) {
+  try {
+    const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
+    const listing = j.listings?.[id];
+    const edition = listing?.previousEditions?.find((e) => e.asin === asin);
+    if (!edition) return false;
+    edition.status = "withdrawn";
+    edition.kdpStatus = normalizeKdpStatus(statusLabel);
+    edition.kdpStatusLabel = statusLabel;
+    edition.kdpStatusCheckedAt = checkedAt;
+    edition.unpublishedAt = checkedAt;
+    if (!hasUnpublishedPredecessor(listing)) {
+      j.listings[id] = advancePublicationStage(listing, "previous_unpublished", checkedAt, { statusLabel, asin: listing.asin });
+    }
+    writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
+    return true;
+  } catch (error) {
+    console.error(`[kdp-previous] ${id}: ${error instanceof Error ? error.message : String(error)}`);
     return false;
   }
 }

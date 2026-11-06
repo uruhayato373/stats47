@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { mergeKdpOperationalState, normalizeKdpStatus } from "../kdp-status.mjs";
+import { pendingPredecessors } from "../kdp-publication-stage.mjs";
 
 test("KDPの日本語statusを運用状態へ正規化する", () => {
   assert.equal(normalizeKdpStatus("下書き"), "draft");
@@ -52,4 +53,14 @@ test("出版停止を決めた withdrawn は本棚が live のままでも liste
   assert.equal(next.kdpStatus, "live");
   const listed = mergeKdpOperationalState({ id: "K-S1-98", status: "approved" }, { status: "販売中" }, "2026-10-27T00:00:00.000Z");
   assert.equal(listed.status, "listed");
+});
+
+test("出版停止の対象は、新版が販売中の本の未停止の旧版だけで、現行の ASIN は渡らない", () => {
+  const edition = { asin: "B000000001", draftId: "A1", title: "旧題", kdpStatus: "live", unpublishAfterReplacementLive: true };
+  const listing = { kdpStatus: "live", asin: "B000000002", previousEditions: [edition] };
+  assert.deepEqual(pendingPredecessors(listing), [edition]);
+  assert.deepEqual(pendingPredecessors({ ...listing, kdpStatus: "in_review" }), [], "新版が販売中でなければ止めない");
+  assert.deepEqual(pendingPredecessors({ ...listing, asin: edition.asin }), [], "現行と同じ ASIN は止めない");
+  assert.deepEqual(pendingPredecessors({ ...listing, previousEditions: [{ ...edition, unpublishedAt: "2026-11-06T00:00:00.000Z" }] }), []);
+  assert.deepEqual(pendingPredecessors({ ...listing, previousEditions: [{ ...edition, unpublishAfterReplacementLive: false }] }), []);
 });

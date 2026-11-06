@@ -434,6 +434,12 @@ const GATES = [
     run: (all) => eslintGate(all),
   },
   {
+    name: "Image Routes",
+    why: "AI で描く画像は config/image-generation-routes.json の経路だけ。画像 API の直接呼び出しを増やさない",
+    run: () => tryRun("node", [checker("check-image-generation-routes.mjs")]),
+    hint: "Codex の経路を使う。例外は config/image-generation-routes.json の登録と撤去カードが要る",
+  },
+  {
     name: "Env Registry",
     why: "新規 process.env は .claude/config/env-registry.json への登録が必須",
     run: () => tryRun("node", [checker("check-env-registry.cjs")]),

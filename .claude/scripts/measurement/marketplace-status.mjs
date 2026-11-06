@@ -31,7 +31,8 @@ try {
     sales = await collectKdpReport(reportsPage, listings, output.replace(/\.json$/, '.xlsx'));
     monthlyRoyalties = await collectKdpMonthlyReport(reportsPage, listings, output.replace(/\.json$/, '.monthly.xlsx'));
     for (const [id, entry] of Object.entries(listings)) {
-      if (!entry.draftId) continue;
+      // 出版停止済みの本はアーカイブされると通常の本棚に出ないので、状態の確認対象にしない (2026-11-06)
+      if (!entry.draftId || entry.withdrawal?.unpublishedAt) continue;
       const value = await readBookshelfState(page, entry.draftId, { ...entry, reuseVisibleRow: true });
       records.push({ id, found: value.found, status: value.status ?? null, asin: value.asin ?? null });
     }

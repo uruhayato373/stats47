@@ -8,6 +8,11 @@
  *   node .claude/scripts/kdp/kdp-unpublish.mjs --id K-S2-01 --probe        # メニュー・確認ダイアログの構造を採取 (確定しない)
  *   node .claude/scripts/kdp/kdp-unpublish.mjs --id K-S2-01 --commit       # ★実行 (outward-facing・オーナー指示のうえで)
  *   node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit    # withdrawal 付き live 全冊
+ *   node .claude/scripts/kdp/kdp-unpublish.mjs --previous-of K-S1-01 --probe  # 新版が販売中の本の旧版 (確定しない)
+ *   node .claude/scripts/kdp/kdp-unpublish.mjs --all-previous --commit     # ★新版へ置き換え済みの旧版すべて
+ *
+ * 旧版 (2026-11-06 追加): 対象は pendingPredecessors が返す previousEditions だけ。現行の ASIN は渡らない。
+ * 本棚の行は ASIN・題名の先頭に加えて旧版の draftId とも一致し、他の ASIN を含まないときだけ触る。
  *
  * 安全境界 (kdp-session / kdp-flow と同じ):
  *   - account assert に失敗したら何もしない。
@@ -26,7 +31,9 @@ import {
   sleep,
   waitForLogin,
   writeBackKdpState,
+  writeBackPreviousEditionUnpublished,
 } from "./lib/kdp-session.mjs";
+import { pendingPredecessors } from "./lib/kdp-publication-stage.mjs";
 
 const BASE = "https://kdp.amazon.co.jp/ja_JP";
 const args = process.argv.slice(2);
@@ -38,9 +45,12 @@ const COMMIT = args.includes("--commit");
 const PROBE = args.includes("--probe");
 const ALL = args.includes("--all-withdrawn");
 const ONE = getArg("--id");
+const ALL_PREVIOUS = args.includes("--all-previous");
+const PREVIOUS_OF = getArg("--previous-of");
+const PREVIOUS = ALL_PREVIOUS || Boolean(PREVIOUS_OF);
 
-if (!ALL && !ONE) {
-  console.error("usage: --id <K-..> | --all-withdrawn  [--probe] [--commit]");
+if (!ALL && !ONE && !PREVIOUS) {
+  console.error("usage: --id <K-..> | --all-withdrawn | --previous-of <K-..> | --all-previous  [--probe] [--commit]");
   process.exit(2);
 }
 if (!PROBE && !COMMIT) {
@@ -49,7 +59,7 @@ if (!PROBE && !COMMIT) {
 }
 
 const listings = readListings();
-const targets = (ALL ? Object.keys(listings) : [ONE]).filter((id) => {
+const withdrawalIds = PREVIOUS ? [] : (ALL ? Object.keys(listings) : [ONE]).filter((id) => {
   const l = listings[id];
   if (!l) {
     console.error(`skip ${id}: listing なし`);
@@ -69,11 +79,17 @@ const targets = (ALL ? Object.keys(listings) : [ONE]).filter((id) => {
   }
   return true;
 });
+const previousTargets = PREVIOUS
+  ? (ALL_PREVIOUS ? Object.keys(listings) : [PREVIOUS_OF]).flatMap((id) =>
+      pendingPredecessors(listings[id]).map((edition) => ({ id, lst: edition, previous: true })),
+    )
+  : [];
+const targets = PREVIOUS ? previousTargets : withdrawalIds.map((id) => ({ id, lst: listings[id], previous: false }));
 if (targets.length === 0) {
   console.error("ABORT: 対象 0 冊");
   process.exit(1);
 }
-console.log(`[unpublish] 対象 ${targets.length} 冊: ${targets.join(", ")} (${COMMIT ? "★COMMIT" : "probe"})`);
+console.log(`[unpublish] 対象 ${targets.length} 冊: ${targets.map((t) => `${t.id}${t.previous ? `/${t.lst.asin}` : ""}`).join(", ")} (${COMMIT ? "★COMMIT" : "probe"})`);
 
 const ts = new Date().toISOString().replace(/[:.]/g, "-");
 const outDir = join(DEBUG_DIR, `unpublish-${ts}`);
@@ -97,7 +113,7 @@ async function locateRow(page, lst) {
     await sleep(7000);
   }
   return page.evaluate(
-    ({ asin, title }) => {
+    ({ asin, title, draftId }) => {
       const STATUS = /変更内容をレビュー中|変更のレビュー中|出版準備中|公開準備中|レビュー中|審査中|処理中|販売中|出版済み|ライブ|下書き|販売停止/;
       const rows = [...document.querySelectorAll("tr, [role=row], article, li, div")]
         .filter((e) => {
@@ -125,10 +141,12 @@ async function locateRow(page, lst) {
         text: text.slice(0, 300),
         status: (text.match(STATUS) || [])[0] || "不明",
         titleOk: text.includes(title.slice(0, 8)),
+        draftOk: !!row.querySelector(`a[href*="/title-setup/kindle/${draftId}/"]`),
+        asins: [...new Set(text.match(/\bB0[A-Z0-9]{8}\b/g) || [])],
         buttons,
       };
     },
-    { asin: lst.asin, title: lst.title },
+    { asin: lst.asin, title: lst.title, draftId: lst.draftId ?? "" },
   );
 }
 
@@ -140,9 +158,8 @@ try {
   const acct = await assertAccount(page, { tag: "[unpublish]" });
   if (!acct.ok) throw new Error("account assert failed");
 
-  for (const id of targets) {
-    const lst = listings[id];
-    const tag = `[unpublish ${id}]`;
+  for (const { id, lst, previous } of targets) {
+    const tag = `[unpublish ${id}${previous ? ` 旧版 ${lst.asin}` : ""}]`;
     const row = await locateRow(page, lst);
     if (!row) {
       console.error(`${tag} 本棚に ASIN ${lst.asin} の行が無い → 停止`);
@@ -154,8 +171,14 @@ try {
       results.push({ id, ok: false, reason: "title-mismatch", row });
       break;
     }
+    if (previous && (!row.draftOk || row.asins.length !== 1 || row.asins[0] !== lst.asin)) {
+      console.error(`${tag} 行が旧版と一致しない (draftOk=${row.draftOk} asins=${row.asins.join(",")}) → 停止`);
+      results.push({ id, ok: false, reason: "previous-row-mismatch", row });
+      break;
+    }
     if (!LIVE.test(row.status)) {
       console.log(`${tag} status=${row.status} (販売中でない) → skip`);
+      if (previous) writeBackPreviousEditionUnpublished(id, lst.asin, row.status);
       results.push({ id, ok: true, skipped: true, status: row.status });
       continue;
     }
@@ -253,7 +276,8 @@ try {
     const after = await locateRow(page, lst);
     const changed = !!after && !LIVE.test(after.status);
     console.log(`${tag} read-back: ${after ? after.status : "行なし"} → ${changed ? "OK (出版停止を受理)" : "NG (まだ販売中)"}`);
-    if (after) writeBackKdpState(id, { status: after.status, asin: lst.asin });
+    if (after && !previous) writeBackKdpState(id, { status: after.status, asin: lst.asin });
+    if (previous && changed) writeBackPreviousEditionUnpublished(id, lst.asin, after.status);
     if (!changed) {
       results.push({ id, ok: false, reason: "still-live", after });
       break;

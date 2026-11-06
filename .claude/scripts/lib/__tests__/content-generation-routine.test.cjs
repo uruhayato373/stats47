@@ -112,7 +112,6 @@ test('reviewed recipe migration is explicit, hash-gated, and runs before the sta
 test('every request-driven workflow consumes its request even when the run fails', () => {
   for (const workflow of [
     '.github/workflows/data-refresh.yml',
-    '.github/workflows/gemini-image-run.yml',
   ]) {
     const source = read(workflow);
     const at = source.indexOf('Consume');

@@ -96,7 +96,7 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/ai-content-outp
 ## 担当外（委譲）
 - 観測値投入（metric config → e-Stat → R2 `app/stats`）→ **data-ingester**。
 - R2 push（`.local/r2/` → 本番 R2）→ **r2-publisher**、公開多段 → **ranking-publisher**。
-- 画像プロンプト（OGP / SNS 素材）→ **image-prompt-curator**（`generate-ai-content` の画像系派生）。
+- 画像プロンプト（OGP / SNS 素材）→ **image-prompt-curator**。
 - ページ UI 層（考察カードの描画・合成）→ **ranking-ui-manager**。
 - 意味レビュー（採点）→ **ranking-content-critic**（自己採点しない）。
 

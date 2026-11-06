@@ -222,27 +222,8 @@ async function selectKdpCategories(page, paths, tag, log, warnings) {
   }
 }
 
-/** Details ステップ: 言語・タイトル・サブタイトル・著者・内容紹介・キーワード。 */
-export async function fillKdpDetails(page, lst, { tag = "[kdp]" } = {}) {
-  const log = [];
-  const warnings = [];
-  const need = (ok, what) => { if (ok) log.push(`${tag} ✓ ${what}`); else warnings.push(`${what} を充填できず (DOM 変更の可能性・--probe で確認)`); };
-
-  // ★日本語フォームはフリガナ・ローマ字も必須。SSOT は packages/product-factory の kdp-reading.ts。
-  need((await fillById(page, "data-title", lst.title)) || (await fillByLabel(page, /Book Title|タイトル|Title/i, lst.title)), "タイトル");
-  need(await fillById(page, "data-title-pronunciation", lst.titleKana), "タイトルのフリガナ");
-  need(await fillById(page, "data-title-romanized", lst.titleRomaji), "タイトルのローマ字");
-  if (lst.editionNumber) need(await fillById(page, "data-edition-number", lst.editionNumber), "版番号");
-  if (lst.subtitle) {
-    need((await fillById(page, "data-subtitle", lst.subtitle)) || (await fillByLabel(page, /Subtitle|サブタイトル/i, lst.subtitle)), "サブタイトル");
-    need(await fillById(page, "data-subtitle-pronunciation", lst.subtitleKana), "サブタイトルのフリガナ");
-    need(await fillById(page, "data-subtitle-romanized", lst.subtitleRomaji), "サブタイトルのローマ字");
-  }
-  // 著者は姓・名が別欄 (屋号なので姓に入れて名は空)。
-  need(await fillById(page, "data-primary-author-last-name", lst.authorLastName ?? lst.author), "著者の姓");
-  need(await fillById(page, "data-primary-author-first-name", lst.authorFirstName ?? ""), "著者の名");
-  need(await fillById(page, "data-primary-author-pronunciation", lst.authorKana), "著者のフリガナ");
-  need(await fillById(page, "data-primary-author-name-romanized", lst.authorRomaji), "著者のローマ字");
+/** 内容紹介とキーワードだけを入れる。既刊の紹介文の更新でも同じ処理を使う。 */
+async function fillDescriptionAndKeywords(page, lst, { tag, need, log, warnings }) {
   // 内容紹介 (Description)
   // ★KDP は CKEditor (iframe.cke_wysiwyg_frame) を使う (2026-08-12 実測)。
   //   hidden の data[description] に直接書くと React/CKEditor の状態と同期せず保存されないので、
@@ -294,6 +275,49 @@ export async function fillKdpDetails(page, lst, { tag = "[kdp]" } = {}) {
   }
   if (kwFilled >= Math.min(3, lst.keywords.length)) log.push(`${tag} ✓ キーワード ${kwFilled}/${lst.keywords.length}`);
   else warnings.push(`キーワード欄を特定できず (${kwFilled} 件のみ・--probe で確認)`);
+}
+
+/** 既刊の紹介文とキーワードだけを入れる (題名・カテゴリ・原稿・表紙には触らない)。 */
+export async function fillKdpListingCopy(page, lst, { tag = "[kdp]" } = {}) {
+  const log = [];
+  const warnings = [];
+  const need = (ok, what) => { if (ok) log.push(`${tag} ✓ ${what}`); else warnings.push(`${what} を充填できず`); };
+  await fillDescriptionAndKeywords(page, lst, { tag, need, log, warnings });
+  return { log, warnings };
+}
+
+/** 画面の内容紹介とキーワードを読み戻す。 */
+export async function readKdpListingCopy(page) {
+  return page.evaluate(() => {
+    const instance = Object.values(window.CKEDITOR?.instances ?? {})[0];
+    const description = (instance?.getData() ?? "").replace(/<br\s*\/?>/g, "\n").replace(/<\/p>/g, "\n").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ");
+    const keywords = [...Array(7).keys()].map((index) => document.getElementById(`data-keywords-${index}`)?.value ?? "");
+    return { description, keywords };
+  });
+}
+
+/** Details ステップ: 言語・タイトル・サブタイトル・著者・内容紹介・キーワード。 */
+export async function fillKdpDetails(page, lst, { tag = "[kdp]" } = {}) {
+  const log = [];
+  const warnings = [];
+  const need = (ok, what) => { if (ok) log.push(`${tag} ✓ ${what}`); else warnings.push(`${what} を充填できず (DOM 変更の可能性・--probe で確認)`); };
+
+  // ★日本語フォームはフリガナ・ローマ字も必須。SSOT は packages/product-factory の kdp-reading.ts。
+  need((await fillById(page, "data-title", lst.title)) || (await fillByLabel(page, /Book Title|タイトル|Title/i, lst.title)), "タイトル");
+  need(await fillById(page, "data-title-pronunciation", lst.titleKana), "タイトルのフリガナ");
+  need(await fillById(page, "data-title-romanized", lst.titleRomaji), "タイトルのローマ字");
+  if (lst.editionNumber) need(await fillById(page, "data-edition-number", lst.editionNumber), "版番号");
+  if (lst.subtitle) {
+    need((await fillById(page, "data-subtitle", lst.subtitle)) || (await fillByLabel(page, /Subtitle|サブタイトル/i, lst.subtitle)), "サブタイトル");
+    need(await fillById(page, "data-subtitle-pronunciation", lst.subtitleKana), "サブタイトルのフリガナ");
+    need(await fillById(page, "data-subtitle-romanized", lst.subtitleRomaji), "サブタイトルのローマ字");
+  }
+  // 著者は姓・名が別欄 (屋号なので姓に入れて名は空)。
+  need(await fillById(page, "data-primary-author-last-name", lst.authorLastName ?? lst.author), "著者の姓");
+  need(await fillById(page, "data-primary-author-first-name", lst.authorFirstName ?? ""), "著者の名");
+  need(await fillById(page, "data-primary-author-pronunciation", lst.authorKana), "著者のフリガナ");
+  need(await fillById(page, "data-primary-author-name-romanized", lst.authorRomaji), "著者のローマ字");
+  await fillDescriptionAndKeywords(page, lst, { tag, need, log, warnings });
   // ★成人向けコンテンツのラジオを先に選ぶ。**これを選ぶまでカテゴリボタンが disabled** で、
   //   カテゴリは必須なのでウィザードが 1 歩も進まない (2026-08-12 実測)。統計データブックなので「いいえ」。
   const adultOk = await page.evaluate(() => {

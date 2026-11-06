@@ -16,6 +16,7 @@ export const COCONALA_ACCOUNT = "config/coconala-account.json";
 export const COCONALA_PROFILE = "config/coconala-profile.ts";
 export const COCONALA_ASSETS_DIR = "config/coconala/assets";
 export const KDP_LISTINGS = "config/kdp-listings.json";
+export const KDP_LISTING_COPY = "data/products/kdp-listing-copy.json";
 export const KDP_ACCOUNT = "config/kdp-account.json";
 export const NOTE_ACCOUNT = "config/note-account.json";
 

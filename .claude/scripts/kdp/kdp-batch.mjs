@@ -127,6 +127,11 @@ try {
           results.push({ id, ok: true, detail: "未作成" });
           continue;
         }
+        // 出版停止済みの本はアーカイブされると通常の本棚に出ない (2026-11-06)
+        if (lst.withdrawal?.unpublishedAt) {
+          results.push({ id, ok: true, detail: "出版停止済み (確認対象外)" });
+          continue;
+        }
         const shelf = await readBookshelfState(page, lst.draftId, {
           asin: lst.asin || "",
           title: lst.title || "",

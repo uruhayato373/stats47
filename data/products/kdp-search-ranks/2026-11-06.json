@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-05T23:36:04.957Z",
+  "scope": "kindle-search-first-page",
+  "rows": [
+    {
+      "query": "インバウンド",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "エネルギー 都道府県",
+      "status": "ok",
+      "resultCount": 13,
+      "ranks": []
+    },
+    {
+      "query": "スポーツ 都道府県",
+      "status": "ok",
+      "resultCount": 12,
+      "ranks": []
+    },
+    {
+      "query": "テレワーク",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "デジタル 都道府県",
+      "status": "ok",
+      "resultCount": 20,
+      "ranks": []
+    },
+    {
+      "query": "人口減少",
+      "status": "ok",
+      "resultCount": 22,
+      "ranks": []
+    },
+    {
+      "query": "介護 都道府県",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "住みやすい県",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "健康寿命",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "再生可能エネルギー",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "図書館 統計",
+      "status": "ok",
+      "resultCount": 19,
+      "ranks": []
+    },
+    {
+      "query": "地価 都道府県",
+      "status": "ok",
+      "resultCount": 17,
+      "ranks": []
+    },
+    {
+      "query": "地域経済",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "地方財政",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-06",
+          "asin": "B0HF1XFXBY",
+          "rank": 14
+        }
+      ]
+    },
+    {
+      "query": "大学進学率 都道府県",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "子育て 都道府県",
+      "status": "ok",
+      "resultCount": 7,
+      "ranks": []
+    },
+    {
+      "query": "家計調査",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-02",
+          "asin": "B0HKF4NLDV",
+          "rank": 8
+        }
+      ]
+    },
+    {
+      "query": "宿泊 都道府県",
+      "status": "ok",
+      "resultCount": 4,
+      "ranks": []
+    },
+    {
+      "query": "平均寿命 都道府県",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "手取り 都道府県",
+      "status": "ok",
+      "resultCount": 2,
+      "ranks": []
+    },
+    {
+      "query": "携帯 都道府県",
+      "status": "ok",
+      "resultCount": 18,
+      "ranks": []
+    },
+    {
+      "query": "教育費",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-05",
+          "asin": "B0HKF5MMF9",
+          "rank": 11
+        }
+      ]
+    },
+    {
+      "query": "文化 都道府県",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "未婚率",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "東京一極集中",
+      "status": "ok",
+      "resultCount": 23,
+      "ranks": []
+    },
+    {
+      "query": "治安 都道府県",
+      "status": "ok",
+      "resultCount": 2,
+      "ranks": []
+    },
+    {
+      "query": "犯罪 統計",
+      "status": "ok",
+      "resultCount": 17,
+      "ranks": []
+    },
+    {
+      "query": "県民性",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "県民所得",
+      "status": "ok",
+      "resultCount": 10,
+      "ranks": []
+    },
+    {
+      "query": "移住",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "移住 ランキング",
+      "status": "ok",
+      "resultCount": 20,
+      "ranks": []
+    },
+    {
+      "query": "自治体 財政",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-06",
+          "asin": "B0HF1XFXBY",
+          "rank": 14
+        }
+      ]
+    },
+    {
+      "query": "製造業 都道府県",
+      "status": "ok",
+      "resultCount": 5,
+      "ranks": []
+    },
+    {
+      "query": "観光統計",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "財政力指数",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "都道府県 年収",
+      "status": "ok",
+      "resultCount": 5,
+      "ranks": [
+        {
+          "id": "K-S1-01",
+          "asin": "B0HKFB434W",
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "query": "防災 都道府県",
+      "status": "ok",
+      "resultCount": 19,
+      "ranks": []
+    },
+    {
+      "query": "電気代 都道府県",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "食文化 都道府県",
+      "status": "ok",
+      "resultCount": 24,
+      "ranks": []
+    }
+  ]
+}

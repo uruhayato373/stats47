@@ -30,7 +30,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   1. push (cloud 用・2026-07-30 追加): develop に data/data-refresh-requests.json を
 #      commit/push → 本 workflow が実行 → 消費した request を git rm で commit-back [skip ci]。
 #      cloud セッションは actions:write が無く workflow_dispatch 不可 (403) のため。
-#      gemini-image-run.yml と同じ方式。
+#      youtube-upload-request と同じ方式。
 #   2. workflow_dispatch (ローカル): metric/since/dry_run を入力して手動実行
 #   3. schedule: 2026-11-05 に停止 (再開条件はカード DATA-REFRESH-SCHEDULE-RESUME-01)
 #

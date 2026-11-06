@@ -17,15 +17,15 @@
       "readingSourceTitle": "年収が高い県は、暮らしも豊かなのか",
       "readingSourceSubtitle": "家賃と物価を引いて読み直す47都道府県の家計",
       "language": "ja",
-      "description": "Previously published as 実質手取りの地図 — 住む県で変わる、暮らしのお金 by stats47.\n\n県民所得、家計調査の所得・支出、貯蓄と地域財政を別の対象として読み、対象世帯・年次・分母の一致を確認します。地域の平均を個人の手取りや県民性へ置き換えず、比較の限界と確認手順を整理します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 実質手取りの地図 — 住む県で変わる、暮らしのお金 by stats47.\n\n年収ランキングで上位の県に住めば、暮らしにゆとりが出るのだろうか。年収・県民所得・可処分所得のどれを見れば、自分の判断に使えるのか分からない。転職や結婚で住む県を比べるときの、その迷いを数字の読み方から整理します。\n\n【この本で分かること】\n・県民所得と家計調査の所得が別の統計で、そのまま比べられない理由が分かる\n・エンゲル係数や電気・ガス・灯油の支出から、家計の負担の違いを読める\n・貯蓄残高の平均が二人以上世帯の値である点に注意して読める\n・交通・通信費など、支出の構造が県でどう違うかを比べられる\n\n【こんな方に】\n・転職・就職・結婚を機に住む県を比べている方\n・年収ランキングの数字をうのみにしたくない方\n・家計の統計の読み方を身につけたい方\n\n【収録内容】\n図 36 点、47 都道府県の全県表 17 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
-        "都道府県",
-        "家計",
-        "所得",
+        "県民所得",
         "可処分所得",
+        "貯蓄",
+        "エンゲル係数",
         "家計調査",
-        "地域比較",
-        "統計"
+        "消費支出",
+        "地域差"
       ],
       "categoryPaths": [
         {
@@ -72,8 +72,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T11:25:10.271Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T11:25:10.271Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:07:46.971Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:37:36.793Z",
@@ -96,6 +96,11 @@
         "live": {
           "at": "2026-11-03T11:25:10.271Z",
           "statusLabel": "販売中",
+          "asin": "B0HKFB434W"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:07:46.971Z",
+          "statusLabel": "下書き",
           "asin": "B0HKFB434W"
         }
       },
@@ -163,15 +168,16 @@
           "epubPath": ".local/kindle-books/K-S1-01/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-01/v1/cover.jpg",
           "draftId": "A1D19U5YVCZV0O",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HF17SQ9N",
           "publishedAt": "2026-08-13",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:56:01.741Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:07:46.971Z",
           "supersededAt": "2026-09-19T23:46:52.457Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:07:46.971Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -198,14 +204,15 @@
       "readingSourceTitle": "食卓の支出と購入数量 — 家計調査の地域差を読む",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as 消費量日本一の食卓 — 家計調査で読む47都道府県の食 by stats47.\n\n家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読みます。生産地や県民全体の消費を直接測る統計ではないことも整理します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 消費量日本一の食卓 — 家計調査で読む47都道府県の食 by stats47.\n\n「うちの県は○○の消費量が日本一」と聞いても、それが本当に食卓の習慣なのか、統計の取り方の癖なのか分からない。地元の名物や食文化を、数字で人に説明したい方のための本です。\n\n【この本で分かること】\n・麺類・味噌・砂糖・かに・さばの地域差を、図と全県表で確かめられる\n・支出額が多いことと、買う量が多いことの違いが分かる\n・家計調査の値が県全体ではなく県庁所在市の値であることを押さえて読める\n・生産地の話と消費の話を分けて説明できるようになる\n\n【こんな方に】\n・地元の名物や食文化を数字で語りたい方\n・「日本一」の話題の根拠を確かめたい方\n・家計調査を初めて読む方\n\n【収録内容】\n図 11 点、47 都道府県の全県表 6 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
         "食文化",
-        "家計調査",
-        "県民性",
-        "消費量",
-        "雑学"
+        "県庁所在市",
+        "味噌",
+        "かに",
+        "さば",
+        "麺類"
       ],
       "categoryPaths": [
         {
@@ -251,9 +258,9 @@
       "salesStartedAt": "2026-09-27",
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
-      "kdpStatusCheckedAt": "2026-11-03T11:15:02.777Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T11:15:02.777Z",
+      "kdpStatusCheckedAt": "2026-11-05T23:57:58.914Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T23:57:58.914Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:14.446Z",
@@ -275,6 +282,11 @@
         },
         "live": {
           "at": "2026-11-03T11:15:02.777Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKF4NLDV"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T23:57:58.914Z",
           "statusLabel": "販売中",
           "asin": "B0HKF4NLDV"
         }
@@ -342,15 +354,16 @@
           "epubPath": ".local/kindle-books/K-S1-02/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-02/v1/cover.jpg",
           "draftId": "AVO8838RAAG8U",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HF1N51T8",
           "publishedAt": "2026-08-13",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:56:25.802Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:08:29.289Z",
           "supersededAt": "2026-09-20T00:09:18.116Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:08:29.289Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -377,14 +390,15 @@
       "readingSourceTitle": "人口減少と世帯の地図 — 未婚・単身・東京集中",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "未婚率・単身高齢・世帯構造の変化・東京一極集中を束ね、人口減少が暮らしの単位をどう変えたかを読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "未婚率や一人暮らしの高齢者の割合は、県でどう違うのだろう。東京への人口集中の裏で、自分の県の世帯の姿はどうなっているのか。人口減少の話を、県ごとの数字で確かめたい方のための本です。\n\n【この本で分かること】\n・30代前半男性の未婚率を県ごとに比べ、30代前半の男女の未婚率の全国推移も読める\n・単身高齢世帯の県別の割合と、世帯構造の地域差が分かる\n・東京への人口移動の集中を、社会増減率と転入超過率で確かめられる\n・将来人口の見通しから東京の変化を読める\n\n【こんな方に】\n・人口や世帯の変化を県ごとに数字で知りたい方\n・自分の県の世帯の姿を確かめたい方\n・人口減少の議論を根拠から理解したい方\n\n【収録内容】\n図 18 点、47 都道府県の全県表 8 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "人口減少",
         "未婚率",
-        "世帯",
+        "単身世帯",
+        "単独世帯",
         "東京一極集中",
-        "統計"
+        "人口移動",
+        "世帯構造"
       ],
       "categoryPaths": [
         {
@@ -482,14 +496,15 @@
       "readingSourceTitle": "健康と医療の地図 — 寿命・自殺・介護2040",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "寿命、自殺に関する指標、介護職員の必要数と病院の利用指標を比較し、医療資源の数と個人の健康状態を区別して読みます。掲載した化学工業の集計は医薬品・医療機器だけの生産額ではないことも整理します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "寿命が長い県は医療が手厚いのだろうか。介護職員や病床の数字を見ても、足りているのか判断できない。医療や介護の統計を、足りる・足りないと決めつけずに読みたい方のための本です。\n\n【この本で分かること】\n・健康寿命と平均寿命の違いと、県の差の読み方が分かる\n・2040年度の介護職員の必要数の全国推計と、県ごとの施設数・定員・従事者数を確かめられる\n・病床利用率の地域差から、病院の使われ方を読める\n・医療資源の数と健康状態を分けて考えられるようになる\n\n【こんな方に】\n・自分や親の住む県の医療・介護の数字を調べたい方\n・医療資源の数と健康状態を分けて考えたい方\n・医療や介護の統計を仕事で使う方\n\n【収録内容】\n図 21 点、47 都道府県の全県表 8 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
         "健康寿命",
-        "医療",
-        "介護",
+        "平均寿命",
         "自殺率",
-        "統計"
+        "介護職員",
+        "病床利用率",
+        "高齢化"
       ],
       "categoryPaths": [
         {
@@ -587,14 +602,15 @@
       "readingSourceTitle": "教育と子育ての地図 — 教育費・進学率・子育て指標",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as 教育と子育ての地図 — 教育費・進学率・待機児童 by stats47.\n\n公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較します。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 教育と子育ての地図 — 教育費・進学率・待機児童 by stats47.\n\n教育費や進学率は県でどう違うのだろう。保育所等の利用率の差も含めて、数字の意味を取り違えずに読みたい。子どもの進学や引っ越しを考えるときの材料を整理したい保護者の方のための本です。\n\n【この本で分かること】\n・子ども1人当たりの教育費と、その県の差を比べられる\n・公費の教育費と、家計の授業料支出を、別の指標として読み分けられる\n・大学進学を、入学者数と定員の関係から見られる\n・子育て関連の指標を合成した順位の限界が分かる\n\n【こんな方に】\n・子どもの進学や引っ越しを考えている保護者の方\n・子育てしやすい県のランキングの根拠を知りたい方\n・教育の統計を仕事で使う方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 4 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "教育費",
-        "進学率",
-        "保育",
-        "子育て",
-        "統計"
+        "授業料",
+        "大学進学",
+        "保育所",
+        "幼稚園",
+        "公費",
+        "学校教育費"
       ],
       "categoryPaths": [
         {
@@ -641,8 +657,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T11:52:17.756Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T11:52:17.756Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:09:11.500Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:25:38.935Z",
@@ -665,6 +681,11 @@
         "live": {
           "at": "2026-11-03T11:52:17.756Z",
           "statusLabel": "販売中",
+          "asin": "B0HKF5MMF9"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:09:11.500Z",
+          "statusLabel": "下書き",
           "asin": "B0HKF5MMF9"
         }
       },
@@ -731,15 +752,16 @@
           "epubPath": ".local/kindle-books/K-S1-05/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-05/v1/cover.jpg",
           "draftId": "A35OGN7O5LSWPY",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HF356WR9",
           "publishedAt": "2026-08-16",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:57:37.787Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:09:11.500Z",
           "supersededAt": "2026-09-20T00:27:23.137Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:09:11.500Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -766,14 +788,15 @@
       "readingSourceTitle": "自治体財政の地図 — 財政力・借金・将来負担",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "財政力指数、時系列、地方税、地方債務と将来負担比率を比較し、指標ごとの分母・控除・平均期間を確認します。家計の収支とは異なる地方財政の集計として読み、単一指標から健全性を断定しません。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "自分の県の財政は健全なのだろうか。財政力指数や将来負担比率をニュースで見ても、読み方が分からない。借金の多さを示す数字の見方を、落ち着いて確かめたい方のための本です。\n\n【この本で分かること】\n・財政力指数の見方と、県による格差が分かる\n・1981年度以降の収録年度で財政力指数の変化を追える（欠測期間あり）\n・地方税収と地方債の負担を県ごとに比べられる\n・将来負担比率の分母と控除を押さえて読める\n\n【こんな方に】\n・自分の県の財政を数字で知りたい方\n・都道府県の財政指標の読み方を知りたい方\n・地方自治に関わる仕事や学びの中で財政指標を使う方\n\n【収録内容】\n図 21 点、47 都道府県の全県表 8 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "自治体財政",
+        "地方財政",
         "財政力指数",
+        "地方税",
         "地方債",
-        "将来負担",
-        "統計"
+        "将来負担比率",
+        "健全化"
       ],
       "categoryPaths": [
         {
@@ -871,14 +894,15 @@
       "readingSourceTitle": "観光とインバウンドの地図 — 宿泊・国籍・回復",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as 観光とインバウンドの地図 — 宿泊・国籍・回復 by stats47.\n\n延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読みます。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別します。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 観光とインバウンドの地図 — 宿泊・国籍・回復 by stats47.\n\n観光や宿泊の仕事で、自分の県の宿泊者数や外国人の割合が全国のどの位置にあるのか、根拠を付けて説明したい。そんな場面で使える本です。\n\n【この本で分かること】\n・延べ宿泊者数の地域差と集中の度合いが分かる\n・国籍によって宿泊先がどう違うかを比べられる\n・インバウンドの回復を、全国と国籍別、上位4都道府県の集中度の変化で確かめられる\n・人泊と実人数の違いを押さえて説明できる\n\n【こんな方に】\n・観光や宿泊の仕事に関わる方\n・地域の観光企画の根拠を探している方\n・インバウンドの統計を読み解きたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 5 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "観光",
-        "インバウンド",
-        "宿泊",
-        "旅行",
-        "統計"
+        "延べ宿泊者数",
+        "訪日外国人",
+        "観光統計",
+        "外国人宿泊者",
+        "海外旅行",
+        "宿泊旅行統計"
       ],
       "categoryPaths": [
         {
@@ -925,8 +949,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T12:09:25.171Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T12:09:25.171Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:09:53.460Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:25:51.557Z",
@@ -949,6 +973,11 @@
         "live": {
           "at": "2026-11-03T12:09:25.171Z",
           "statusLabel": "販売中",
+          "asin": "B0HKFB2359"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:09:53.460Z",
+          "statusLabel": "下書き",
           "asin": "B0HKFB2359"
         }
       },
@@ -1015,15 +1044,16 @@
           "epubPath": ".local/kindle-books/K-S1-07/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-07/v1/cover.jpg",
           "draftId": "A1MX39POA70MGT",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HDYG6DLX",
           "publishedAt": "2026-08-13",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:58:23.510Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:09:53.460Z",
           "supersededAt": "2026-09-20T00:36:27.704Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:09:53.460Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -1050,14 +1080,15 @@
       "readingSourceTitle": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as エネルギーとインフラの地図 — 電力・再エネ・水道 by stats47.\n\nエネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読みます。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱いません。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as エネルギーとインフラの地図 — 電力・再エネ・水道 by stats47.\n\n光熱・水道の価格水準や、エネルギーの使われ方は県でどう違うのだろう。再エネ設備の地域差や、ガス・電気の供給の違いも知りたい。暮らしと地域のエネルギーを数字で確かめたい方のための本です。\n\n【この本で分かること】\n・エネルギー消費の構造が県によってどう違うかが分かる\n・再生可能エネルギーの設備の地域差を比べられる\n・電力需要とガス・電気の供給の違いを読める\n・ガソリンと車の暮らしの地域差を確かめられる\n\n【こんな方に】\n・光熱・水道の価格水準の地域差を知りたい方\n・地域の供給や設備の統計を調べる前提を整理したい方\n・エネルギーの地域差を学びたい方\n\n【収録内容】\n図 13 点、47 都道府県の全県表 6 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "エネルギー",
         "再生可能エネルギー",
-        "ガス",
-        "インフラ",
-        "統計"
+        "太陽光",
+        "電力需要",
+        "都市ガス",
+        "ガソリン",
+        "風力"
       ],
       "categoryPaths": [
         {
@@ -1104,8 +1135,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T12:18:59.274Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T12:18:59.274Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:10:35.503Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:14.759Z",
@@ -1128,6 +1159,11 @@
         "live": {
           "at": "2026-11-03T12:18:59.274Z",
           "statusLabel": "販売中",
+          "asin": "B0HKDVYP8M"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:10:35.503Z",
+          "statusLabel": "下書き",
           "asin": "B0HKDVYP8M"
         }
       },
@@ -1194,15 +1230,16 @@
           "epubPath": ".local/kindle-books/K-S1-08/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-08/v1/cover.jpg",
           "draftId": "A1VVCMM09NW06F",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HDYLY7WM",
           "publishedAt": "2026-08-13",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:58:45.387Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:10:35.503Z",
           "supersededAt": "2026-09-20T00:54:04.570Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:10:35.503Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -1229,14 +1266,15 @@
       "readingSourceTitle": "産業と地域経済の地図 — 製造・中小・地価",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as 産業と地域経済の地図 — 製造・中小・農林 by stats47.\n\n製造業の集計、事業所規模、工業用水、商業地地価を比較します。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 産業と地域経済の地図 — 製造・中小・農林 by stats47.\n\n製造業の出荷額が大きい県は、稼ぐ力も大きいのだろうか。事業所の規模や地価が県でどう違うのかも知りたい。事業や工場の立地を考えるときに、製造業の集計の読み方を押さえたい方のための本です。\n\n【この本で分かること】\n・愛知に集中する製造業の姿を数字で確かめられる\n・出荷額と付加価値、従業者当たりの値を分けて読める\n・中小企業の分布と工業用水の使われ方を比べられる\n・商業地の地価の推移を、金額と変動率で読める\n\n【こんな方に】\n・事業や工場の立地を考えている方\n・地域経済の数字を仕事で使う方\n・製造業の地域差を学びたい方\n\n【収録内容】\n図 18 点、47 都道府県の全県表 5 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "製造業",
-        "地域経済",
+        "製造品出荷額",
+        "付加価値",
         "中小企業",
-        "地価",
-        "統計"
+        "商業地",
+        "工業用水",
+        "愛知"
       ],
       "categoryPaths": [
         {
@@ -1283,8 +1321,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T12:28:48.392Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T12:28:48.392Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:11:17.585Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:36:12.760Z",
@@ -1307,6 +1345,11 @@
         "live": {
           "at": "2026-11-03T12:28:48.392Z",
           "statusLabel": "販売中",
+          "asin": "B0HKDXP4NM"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:11:17.585Z",
+          "statusLabel": "下書き",
           "asin": "B0HKDXP4NM"
         }
       },
@@ -1373,15 +1416,16 @@
           "epubPath": ".local/kindle-books/K-S1-09/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-09/v1/cover.jpg",
           "draftId": "A7VASEPR22DVW",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HDYB4CBV",
           "publishedAt": "2026-08-13",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:59:08.905Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:11:17.585Z",
           "supersededAt": "2026-09-20T01:03:00.637Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:11:17.585Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -1408,14 +1452,15 @@
       "readingSourceTitle": "安全と環境の地図 — 犯罪・労災・公害・防災",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as 安全と環境の地図 — 犯罪・労災・公害・防災 by stats47.\n\n犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読みます。集計値から個人の被害確率や地域の安全性全般を断定しません。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 安全と環境の地図 — 犯罪・労災・公害・防災 by stats47.\n\n住む県の治安や安全の統計が気になる。でも、犯罪の認知件数や労災、公害苦情の順位をどう読めば、自分の暮らしの安全に結び付くのか分からない。そんな方のために、数字の読み方から整理した本です。\n\n【この本で分かること】\n・犯罪の認知件数と検挙の違いを押さえて読める\n・労働災害と公害苦情の地域差を比べられる\n・廃棄物とリサイクルの差を確かめられる\n・火災・地震保険料の支出額の地域差と、加入率との違いを押さえて読める\n\n【こんな方に】\n・引っ越し先の治安の統計を読み比べたい方\n・件数の多さだけで県を判断したくない方\n・地域の安全の統計を仕事で使う方\n\n【収録内容】\n図 19 点、47 都道府県の全県表 10 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
         "犯罪率",
         "労働災害",
-        "防災",
-        "環境",
-        "統計"
+        "公害苦情",
+        "廃棄物",
+        "リサイクル",
+        "地震保険"
       ],
       "categoryPaths": [
         {
@@ -1462,8 +1507,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T12:37:25.475Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T12:37:25.475Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:12:00.157Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:15.059Z",
@@ -1486,6 +1531,11 @@
         "live": {
           "at": "2026-11-03T12:37:25.475Z",
           "statusLabel": "販売中",
+          "asin": "B0HKDV78TG"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:12:00.157Z",
+          "statusLabel": "下書き",
           "asin": "B0HKDV78TG"
         }
       },
@@ -1552,15 +1602,16 @@
           "epubPath": ".local/kindle-books/K-S1-10/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-10/v1/cover.jpg",
           "draftId": "A2QV2ULXW8GXID",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HDZ45H6C",
           "publishedAt": "2026-08-13",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:59:31.053Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:12:00.157Z",
           "supersededAt": "2026-09-20T01:12:26.793Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:12:00.157Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -1587,14 +1638,15 @@
       "readingSourceTitle": "文化・スポーツ・余暇の地図",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as 文化・スポーツ・余暇の地図 by stats47.\n\n図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較します。施設数と利用、参加と頻度、市の家計と県全体を区別して読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as 文化・スポーツ・余暇の地図 by stats47.\n\n図書館やスポーツ施設が多い県は、文化的で活動的な県なのだろうか。施設の数と、住民の利用や参加はどれだけ結び付くのか。身近な余暇の違いを、数字で確かめたい方のための本です。\n\n【この本で分かること】\n・図書館と博物館の数の地域差を比べられる\n・スポーツ施設の数と、実際の参加を分けて読める\n・スポーツの行動者率を県ごとに確かめられる\n・映画館などへの支出の違いが分かる\n\n【こんな方に】\n・住む県の文化やスポーツの環境が気になる方\n・地域の文化施設の統計を仕事で使う方\n・余暇の地域差に関心がある方\n\n【収録内容】\n図 15 点、47 都道府県の全県表 11 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "文化",
-        "スポーツ",
         "図書館",
-        "余暇",
-        "統計"
+        "博物館",
+        "スポーツ施設",
+        "行動者率",
+        "映画館",
+        "社会生活基本調査"
       ],
       "categoryPaths": [
         {
@@ -1641,8 +1693,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T12:45:16.796Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T12:45:16.796Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:12:42.239Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:15.359Z",
@@ -1665,6 +1717,11 @@
         "live": {
           "at": "2026-11-03T12:45:16.796Z",
           "statusLabel": "販売中",
+          "asin": "B0HKFGQB8Q"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:12:42.239Z",
+          "statusLabel": "下書き",
           "asin": "B0HKFGQB8Q"
         }
       },
@@ -1731,15 +1788,16 @@
           "epubPath": ".local/kindle-books/K-S1-11/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-11/v1/cover.jpg",
           "draftId": "A3HMM993XMOE3Q",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HH88J9YH",
           "publishedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T01:59:52.940Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:12:42.239Z",
           "salesStartedAt": "2026-09-06",
           "supersededAt": "2026-09-20T01:23:36.923Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:12:42.239Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -1766,14 +1824,15 @@
       "readingSourceTitle": "デジタル生活の地図 — 通信・PC・テレワーク",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "Previously published as デジタル生活の地図 — 通信・PC・テレワーク by stats47.\n\nテレビ・ラジオ・新聞・雑誌の利用時間、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較します。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読みます。\n\n【本書の構成】\n統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。",
+      "description": "Previously published as デジタル生活の地図 — 通信・PC・テレワーク by stats47.\n\nテレワークやデジタル環境で住む場所を選びたいが、通信の契約やパソコンの支出、テレワークの実施率が県でどう違うのか分からない。契約件数と利用者数の違いなど、数字の意味から確かめたい方のための本です。\n\n【この本で分かること】\n・テレビ・ラジオ・新聞・雑誌の利用時間の男女差が分かる\n・人口を超える携帯契約の数字の読み方が分かる\n・テレワークの地域差を県ごとに比べられる\n・コンビニの密度やパソコン支出の違いを確かめられる\n\n【こんな方に】\n・テレワークで住む場所を選びたい方\n・デジタル環境の地域差を知りたい方\n・通信の統計を仕事で使う方\n\n【収録内容】\n図 11 点、47 都道府県の全県表 6 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "デジタル",
-        "テレワーク",
-        "通信",
-        "ICT",
-        "統計"
+        "携帯電話",
+        "パソコン",
+        "コンビニ",
+        "メディア",
+        "有業者",
+        "社会生活基本調査"
       ],
       "categoryPaths": [
         {
@@ -1820,8 +1879,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-11-03T12:53:59.728Z",
-      "publicationStage": "live",
-      "publicationStageUpdatedAt": "2026-11-03T12:53:59.728Z",
+      "publicationStage": "previous_unpublished",
+      "publicationStageUpdatedAt": "2026-11-05T22:13:24.481Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:15.664Z",
@@ -1844,6 +1903,11 @@
         "live": {
           "at": "2026-11-03T12:53:59.728Z",
           "statusLabel": "販売中",
+          "asin": "B0HKF7C6JQ"
+        },
+        "previous_unpublished": {
+          "at": "2026-11-05T22:13:24.481Z",
+          "statusLabel": "下書き",
           "asin": "B0HKF7C6JQ"
         }
       },
@@ -1910,15 +1974,16 @@
           "epubPath": ".local/kindle-books/K-S1-12/v1/book.epub",
           "coverPath": ".local/kindle-books/K-S1-12/v1/cover.jpg",
           "draftId": "AMH6ZZXN3T35Y",
-          "status": "listed",
+          "status": "withdrawn",
           "asin": "B0HG55D649",
           "publishedAt": "2026-08-22",
           "salesStartedAt": "2026-08-30",
-          "kdpStatus": "live",
-          "kdpStatusLabel": "販売中",
-          "kdpStatusCheckedAt": "2026-09-19T02:00:14.879Z",
+          "kdpStatus": "draft",
+          "kdpStatusLabel": "下書き",
+          "kdpStatusCheckedAt": "2026-11-05T22:13:24.481Z",
           "supersededAt": "2026-09-20T01:32:41.230Z",
-          "unpublishAfterReplacementLive": true
+          "unpublishAfterReplacementLive": true,
+          "unpublishedAt": "2026-11-05T22:13:24.481Z"
         }
       ],
       "publicationStageLastAttempt": {
@@ -1945,14 +2010,15 @@
       "readingSourceTitle": "住む県の選び方 — 統計で比べる5つの条件",
       "readingSourceSubtitle": null,
       "language": "ja",
-      "description": "「住みやすい県ランキング」を見ても、自分の暮らしに合う県は分かりません。独身で働く人と、小さな子どもを育てる世帯と、定年後の夫婦とでは、大事な数字が違うからです。\n\n本書は、家賃・賃金・仕事・子育て・医療・災害の統計を読み比べ、あなた自身の条件で住む県を絞り込む手順の本です。譲れない条件で候補を減らし、残った県に自分の重みで点数を付けるところまで、実際の数字で計算して見せます。\n\n【本書でできること】\n・総合ランキングの順位がなぜ人によって当てはまらないのかが分かります\n・家賃は高いが賃金も高い県を、手元に残るお金の見方で比べられます\n・20〜30代の単身者、子育て世帯、老後の暮らしの 3 つの場面で、見る順番が分かります\n・巻末の 47 都道府県の表だけで、自分の点数を計算できます\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとにしています。国・自治体や e-Stat の公認・推奨を示すものではありません。県の平均は個人の暮らしを保証するものではありません。年と定義は巻末の「出典と方法」に載せています。本書は特定の県を薦める本ではなく、住む場所を決める最後の判断は読者に委ねます。",
+      "description": "「住みやすい県ランキング」を見ても、自分の暮らしに合う県は分からない。独身で働く人と、小さな子どもを育てる世帯と、定年後の夫婦とでは、大事な数字が違うからです。あなた自身の条件で住む県を絞り込むための手順の本です。\n\n【この本で分かること】\n・総合ランキングの順位が人によって当てはまらない理由が分かる\n・家賃と賃金の差を並べ、比べるときの限界を押さえて読める\n・単身者・子育て世帯・老後の場面ごとに、見る数字の順番が分かる\n・巻末の全県の表と第8章の式で、自分の条件の点数を計算できる\n\n【こんな方に】\n・転職・結婚・子育てで住む県を比べている方\n・老後の住まいを考えている方\n・総合ランキングでは決められない方\n\n【収録内容】\n47 都道府県の全県表 3 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
       "keywords": [
         "都道府県",
-        "移住",
+        "転職",
         "住みやすさ",
         "家賃",
         "子育て",
-        "統計"
+        "通勤",
+        "老後"
       ],
       "categoryPaths": [
         {
@@ -1990,13 +2056,13 @@
       "epubPath": ".local/kindle-books/K-S1-13/v1-20261104-r8/book.epub",
       "coverPath": ".local/kindle-books/K-S1-13/v1-20261104-r8/cover.jpg",
       "status": "listed",
-      "asin": null,
+      "asin": "B0HQBGV4RD",
       "publishedAt": "2026-11-04",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-11-04T02:13:43.517Z",
-      "publicationStage": "submitted",
-      "publicationStageUpdatedAt": "2026-11-04T02:13:43.517Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-11-05T22:16:00.000Z",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-11-05T22:16:00.000Z",
       "publicationStageEvidence": {
         "details_filled": {
           "at": "2026-11-04T01:50:10.665Z",
@@ -2011,6 +2077,11 @@
           "at": "2026-11-04T02:13:43.517Z",
           "statusLabel": "レビュー中",
           "asin": null
+        },
+        "live": {
+          "at": "2026-11-05T22:16:00.000Z",
+          "statusLabel": "販売中",
+          "asin": "B0HQBGV4RD"
         }
       },
       "draftId": "A1AX2129DSG4I6",
@@ -2021,7 +2092,8 @@
         "manuscriptUploaded": true,
         "coverUploaded": true
       },
-      "lastSubmittedAt": "2026-11-04"
+      "lastSubmittedAt": "2026-11-04",
+      "salesStartedAt": "2026-11-05"
     },
     "K-S2-01": {
       "id": "K-S2-01",

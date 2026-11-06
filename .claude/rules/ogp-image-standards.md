@@ -1,6 +1,8 @@
 ---
 paths:
   - "apps/web/src/features/ogp/**"
+  - "config/image-generation-routes.json"
+  - ".claude/scripts/lib/check-image-generation-routes.mjs"
   - "apps/web/src/features/geo-analysis/**/*Thumbnail*"
   - "apps/web/scripts/*geo-source-thumbnails.ts"
   - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
@@ -29,6 +31,21 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 ---
 
 ## ブランド表現の共通ゲート
+
+## 生成経路の一本化 (2026-11-06 オーナー決定)
+
+画像の作り方は 3 種類に分ける。AI で描くのは 1 だけで、数値を含む図を AI に描かせない。
+
+| 種類 | 担当 | 対象 |
+|---|---|---|
+| 1. AI で描く絵 | **Codex built-in imagegen** | ブログ背景・note 表紙・リンクカード背景・Kindle 表紙・特産品イラスト |
+| 2. データから作る図 | **プログラム (Remotion・Satori・SVG)** | SNS・YouTube の図とサムネイル・OGP・グラフ・地図。図の型は `data/content-operations/image-templates.json` |
+| 3. 文章 | Claude (ランキング解説の日次処理だけ Gemini) | 記事・紹介文・解説 |
+
+経路の正本は **`config/image-generation-routes.json`** で、種類 1 の入口・正本の置き場所・制作記録をここに登録する。
+画像 API を直接呼ぶコードは `check-image-generation-routes.mjs` (`preflight`・CI) が止める。撤去待ちの既存コードは
+`legacy` に撤去カード付きで載せ (削除条件: カードの完了)、減らすだけにする。保存先は公開範囲の理由で媒体ごとに分かれていてよい。制作記録に
+プロンプト (または確定した依頼)・出力の SHA・目視の結果を残す点だけを共通にする。
 
 視覚方針の正典は [`デザインシステム`](../../docs/01_技術設計/04_デザインシステム.md) の「地域のデータアトラス」。本規約は画像種別・配信・生成方式を担当する。既存の個別 renderer や画像プロンプトを更新するときは、以下を満たす。
 
@@ -411,14 +428,14 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
 - **背景が古い・無い記事 (2026-10-07〜)**: 記事の書き直しでタイトルなどを変えると、公開済み AI 背景の
   promptHash が外れ、公開時のサムネイル検査がその記事を skip する。quality-gate は送り箱の記事でこれを
   push 前に止め、Codex の手順 (`request-article --article`) を示す。ブログ背景の Gemini 新規生成は止めた
-  (`gemini-image-run.yml` の task `blog-ogp` は受け付けずに失敗する)。cloud セッションでは codex MCP に
+  (生成の workflow は 2026-11-06 に撤去した)。cloud セッションでは codex MCP に
   接続できないため、生成はオーナーのローカルで行う。経路の集約は backlog `BLOG-BG-PIPELINE-CONSOLIDATE-01`。
 - **役割分担**: catalog / Codex MCP生成 / git JPEG ingest / 品質監査 = `image-prompt-curator`
   (`/generate-blog-images`)、最終bundle生成・記事公開連動 = `blog-editor`、
   effect 判定 = `improvement-triage`。R2 push は共通exact plan publisher。
 - **既存 Gemini fallbackの削除条件**: 公開中の全slugがCodex catalog + git JPEGへ移行し、
   R2の全`ogp/generation.json`でGemini背景が0件になった時点で、Gemini client / cache /
-  ビジュアルカタログと `gemini-image-run.yml` のブログ部分を同一リリースで削除する
+  ビジュアルカタログを同一リリースで削除する
   (backlog `BLOG-BG-PIPELINE-CONSOLIDATE-01` の 3)。
 - **展開状況**: 公開434記事のうち既存固有AI背景124件を再利用し、共有・重複だった310件は
   記事contextから固有git JPEGを生成済み (2026-08-22)。`blog-images:codex queue`の完了条件はtargets=0。

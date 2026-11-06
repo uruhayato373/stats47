@@ -1,4 +1,5 @@
 /** KDP preflight: deterministic metadata checks plus a fresh bookshelf capacity snapshot. */
+import { restrictedDescriptionIssues } from "./kdp-listing-copy.mjs";
 import { normalizeKdpStatus } from "./kdp-status.mjs";
 import { sleep } from "./kdp-session.mjs";
 
@@ -30,6 +31,8 @@ export function validateKdpListingMetadata(id, listing) {
   } else {
     warnings.push("readingSourceTitle がない旧台帳。次回の改訂提案生成で付与する");
   }
+  // 既刊の更新も新規も、KDP が受け付けない内容を送らない。原稿の詳しい監査は kdp-listing-copy check
+  for (const issue of restrictedDescriptionIssues(listing?.description)) need(false, `紹介文: ${issue}`);
   need(Array.isArray(listing?.keywords) && listing.keywords.length >= 1 && listing.keywords.length <= 7, "キーワードは1〜7件");
   need(Array.isArray(listing?.categoryPaths) && listing.categoryPaths.length >= 1 && listing.categoryPaths.length <= 3, "カテゴリは1〜3枠");
   need(Number.isInteger(listing?.priceYen) && listing.priceYen > 0, "価格が正の整数でない");
