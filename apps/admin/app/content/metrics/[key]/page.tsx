@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { SITE } from "@stats47/types";
 
 import { Cell, DataTable, Row } from "@/components/admin-ui";
 import { Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
+import { localSiteHref } from "@/lib/local-site";
 import { metricDetail } from "@/lib/server/reference-metrics";
 import { hasError } from "@/lib/server/state-io";
 import type { MetricExternalPage } from "@/lib/reference-metrics";
@@ -54,11 +54,11 @@ export default async function MetricDetailPage({ params }: { params: Promise<{ k
     <>
       <PageHeading title={data.title} source={`ranking:${data.key} — ページ索引 + external`}>
         <div className="flex flex-wrap gap-4 text-sm">
-          <a className={LINK} href={`${SITE.origin}${data.href}`} target="_blank" rel="noreferrer">
+          <a className={LINK} href={localSiteHref(data.href)} target="_blank" rel="noreferrer">
             ランキングを開く
           </a>
           {data.municipalityHref ? (
-            <a className={LINK} href={`${SITE.origin}${data.municipalityHref}`} target="_blank" rel="noreferrer">
+            <a className={LINK} href={localSiteHref(data.municipalityHref)} target="_blank" rel="noreferrer">
               市区町村ランキングを開く
             </a>
           ) : null}
@@ -68,7 +68,7 @@ export default async function MetricDetailPage({ params }: { params: Promise<{ k
         </div>
       </PageHeading>
       <Section title={`記事 (${data.blogs.length})`}>
-        <ExternalTable pages={data.blogs.map((b) => ({ ...b, href: `${SITE.origin}${b.href}` }))} empty="この指標を使う記事はありません。" />
+        <ExternalTable pages={data.blogs.map((b) => ({ ...b, href: localSiteHref(b.href) }))} empty="この指標を使う記事はありません。" />
       </Section>
       <Section title={`note (${data.notes.length})`}>
         <ExternalTable pages={data.notes} empty="この指標を使う note はありません。" />

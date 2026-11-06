@@ -29,6 +29,7 @@ import {
 import { Cell, DataGrid, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, Freshness } from "@/components/ops/primitives";
+import { localSiteHref } from "@/lib/local-site";
 import { businessPlanAdminData, businessPlanLabels } from "@/lib/server/business-plan";
 import { hasError } from "@/lib/server/state-io";
 
@@ -332,7 +333,7 @@ export function GeoLifecycle({ data }: { data: BusinessPlanData }) {
 export function GisCatalog({ data }: { data: BusinessPlanData }) {
   return (
     <Section title="GIS取得・ライセンスカタログ">
-      <a href="http://localhost:3000/geo/data-catalog" className={`${LINK} self-start`}>
+      <a href={localSiteHref("/geo/data-catalog")} className={`${LINK} self-start`}>
         サイト表示を確認 →
       </a>
       {hasError(data.gisCatalog) ? (

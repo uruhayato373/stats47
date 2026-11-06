@@ -1,24 +1,23 @@
 import { notFound } from "next/navigation";
 
-import { SITE } from "@stats47/types";
 import Link from "next/link";
 
 import { Cell, DataTable, PanelCard, Row, StatusBadge } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
+import { localSiteHref } from "@/lib/local-site";
 import { questionDetail, type DraftView } from "@/lib/server/question-progress";
 import { hasError } from "@/lib/server/state-io";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "問いの配線 — stats47 admin" };
 
-const SITE_LOCAL = "http://localhost:3000";
 const LINK = "font-medium underline-offset-4 hover:underline";
 
 function RankingLink({ href }: { href: string | null }) {
   if (!href) return <span className="text-muted-foreground">なし</span>;
   return (
-    <a className={LINK} href={`${SITE.origin}${href}`} target="_blank" rel="noreferrer">
+    <a className={LINK} href={localSiteHref(href)} target="_blank" rel="noreferrer">
       開く
     </a>
   );
@@ -52,7 +51,7 @@ function DraftCard({ draft }: { draft: DraftView }) {
         </Grid>
         <p className="m-0 text-xs text-muted-foreground">
           本番と同じ画面で読む: <code className="font-mono">npm run blog:preview -- --slug {draft.slug}</code> のあと{" "}
-          <a className={LINK} href={`${SITE_LOCAL}/blog/${draft.slug}`} target="_blank" rel="noreferrer">
+          <a className={LINK} href={localSiteHref(`/blog/${draft.slug}`)} target="_blank" rel="noreferrer">
             localhost で開く
           </a>
         </p>
@@ -93,7 +92,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
               <Row key={`${p.role}:${p.id}`}>
                 <Cell nowrap>{p.role === "answers" ? "答え" : "根拠"}</Cell>
                 <Cell>
-                  <a className={LINK} href={`${SITE.origin}${p.href}`} target="_blank" rel="noreferrer">
+                  <a className={LINK} href={localSiteHref(p.href)} target="_blank" rel="noreferrer">
                     {p.title}
                   </a>
                 </Cell>
