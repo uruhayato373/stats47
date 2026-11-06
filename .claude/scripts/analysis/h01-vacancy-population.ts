@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 /**
  * H01 の分析: 空き家が増えているのは、人口が減った町だけか。
- * 台帳 data/content/analyses.json・figures.json の結論の数字と図をここから再現する。
+ * 台帳 data/content/analyses.json の結論の数字をここから再現する。図と記事の下書きは npm run analysis:draft が結果の JSON から作る。
  *
  *   npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.json --out .local/analysis/h01/frame.json
  *   npx tsx .claude/scripts/analysis/h01-vacancy-population.ts .local/analysis/h01/frame.json .local/analysis/h01
@@ -11,9 +11,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import sharp from "sharp";
-
-import { renderGroupedBarsChart } from "../../../apps/admin/lib/template-grouped-bars";
 import { correlation } from "./analysis-frame-core.mjs";
 
 interface FrameRow {
@@ -35,7 +32,8 @@ if (!framePath || !outDir) {
   console.error("引数: <frame.json> <出力先>");
   process.exit(2);
 }
-const rows: FrameRow[] = JSON.parse(readFileSync(framePath, "utf8")).rows;
+const frame = JSON.parse(readFileSync(framePath, "utf8"));
+const rows: FrameRow[] = frame.rows;
 const round = (v: number, digits = 2) => Number(v.toFixed(digits));
 const median = (values: number[]) => {
   const s = [...values].sort((a, b) => a - b);
@@ -70,8 +68,15 @@ const groups = GROUPS.map(({ label, test }) => {
     increase,
     increaseShare: round((increase / totalIncrease) * 100, 1),
     stock2013Share: round((sum(members.map((t) => t.vacant_2013)) / totalStock) * 100, 1),
+    medianAbandoned2023: round(median(members.map((t) => t.abandoned_2023))),
+    medianRental2023: round(median(members.map((t) => t.rental_2023))),
   };
 });
+
+// 表から抜けた町が人口の減り方で偏っていないかを読む
+const droppedChanges = (frame.droppedRows as Partial<FrameRow>[])
+  .filter((d) => (d.population_2010 ?? 0) > 0 && (d.population_2020 ?? 0) > 0)
+  .map((d) => (d.population_2020! / d.population_2010! - 1) * 100);
 
 const r = (a: number[], b: number[]) => round(correlation(a, b) ?? Number.NaN);
 const populationChanges = towns.map((t) => t.populationChange);
@@ -83,23 +88,18 @@ const withinPrefecture = [...byPrefecture.values()]
   .filter((members) => members.length >= 10)
   .map((members) => correlation(members.map((t) => t.populationChange), members.map((t) => t.vacancyChange)) ?? 0);
 
-const chart = {
-  title: "人口の増減と空き家率の変化",
-  meta: `空き家 2013→2023年・人口 2010→2020年・${towns.length.toLocaleString("ja-JP")}市区町村`,
-  source: "住宅・土地統計調査・国勢調査",
-  groups: groups.map((g) => g.label),
-  series: [{ label: "空き家率の変化の中央値（ポイント）", values: groups.map((g) => g.medianChange) }],
-};
-const svg = renderGroupedBarsChart(chart);
 mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, "figure.svg"), svg);
 main();
 
-async function main() {
-  await sharp(Buffer.from(svg), { limitInputPixels: 40_000_000 }).png().toFile(join(outDir, "figure.png"));
+function main() {
   const result = {
     towns: towns.length,
     correlationChange: r(populationChanges, towns.map((t) => t.vacancyChange)),
+    fiveYearReliability: r(towns.map((t) => t.vacancy_2018 - t.vacancy_2013), towns.map((t) => t.vacancy_2023 - t.vacancy_2018)),
+    declineShareOfIncrease: round((1 - groups[0].increase / totalIncrease) * 100, 1),
+    droppedTowns: frame.droppedRows.length,
+    medianPopulationChange: round(median(populationChanges), 1),
+    medianPopulationChangeDropped: round(median(droppedChanges), 1),
     totalIncrease,
     groups,
     withinPrefecture: {
