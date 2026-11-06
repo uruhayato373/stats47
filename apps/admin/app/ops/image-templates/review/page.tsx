@@ -1,8 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PanelCard, StatusBadge, type Tone } from '@/components/admin-ui';
+import type { ReactNode } from 'react';
+import { Cell, DataTable, PanelCard, Row, StatusBadge, type Tone } from '@/components/admin-ui';
 import { Grid, Stack } from '@/components/layout-primitives';
 import { PageHeading } from '@/components/ops/primitives';
+import { mapRows, videoRows, type MapRow, type VideoRow } from '@/lib/server/media-unification';
 import { projectRoot } from '@/lib/server/project-root';
 import type { ReviewRow, ReviewStatus } from '@/lib/template-review-rows';
 
@@ -56,11 +58,56 @@ function TemplateRow({ row }: { row: ReviewRow }) {
   );
 }
 
+const Mark = ({ on, label = '使う', off = 'まだ' }: { on: boolean; label?: string; off?: string }) => <StatusBadge tone={on ? 'good' : 'warn'}>{on ? label : off}</StatusBadge>;
+
+function MapStatus({ rows }: { rows: MapRow[] }) {
+  const ledger = rows.filter((row) => row.ledgerColor).length;
+  return (
+    <PanelCard id="unification-map" title="地図の共通化" description={`形と投影は ${rows.filter((row) => row.geometry).length} / ${rows.length} 件が土台を使う。色は ${ledger} 件が指標の配色を読み、残りは処理ごとの配色。`}>
+      <DataTable columns={['処理', '形と投影', '指標の配色']}>
+        {rows.map((row) => (
+          <Row key={row.file}>
+            <Cell>{row.file}</Cell>
+            <Cell><Mark on={row.geometry} /></Cell>
+            <Cell><Mark on={row.ledgerColor} /></Cell>
+          </Row>
+        ))}
+      </DataTable>
+    </PanelCard>
+  );
+}
+
+const MAP_LABEL: Record<VideoRow['map'], ReactNode> = {
+  base: <StatusBadge tone="good">土台</StatusBadge>, tile: <StatusBadge tone="good">タイル</StatusBadge>, own: <StatusBadge tone="warn">別の処理</StatusBadge>, none: '描かない',
+};
+
+function VideoStatus({ rows }: { rows: VideoRow[] }) {
+  const maps = rows.filter((row) => row.map === 'base' || row.map === 'own');
+  return (
+    <PanelCard id="unification-video" title="動画の共通化" description={`動画の構成 ${rows.length} 件。形の地図を描く ${maps.length} 件のうち土台を使うのは ${maps.filter((row) => row.map === 'base').length} 件、タイルは ${rows.filter((row) => row.map === 'tile').length} 件。指標の配色は ${rows.filter((row) => row.ledgerColor).length} 件、静止画と同じ紙と文字の色は ${rows.filter((row) => row.theme).length} 件。`}>
+      <DataTable columns={['構成', '置き場', '描画の手順', '地図', '指標の配色', '紙と文字の色']}>
+        {rows.map((row) => (
+          <Row key={row.id}>
+            <Cell>{row.id}</Cell>
+            <Cell>{row.feature}</Cell>
+            <Cell><Mark on={row.rendered} label="あり" off="なし" /></Cell>
+            <Cell>{MAP_LABEL[row.map]}</Cell>
+            <Cell><Mark on={row.ledgerColor} /></Cell>
+            <Cell><Mark on={row.theme} /></Cell>
+          </Row>
+        ))}
+      </DataTable>
+    </PanelCard>
+  );
+}
+
 export default function Page() {
   const manifest = readManifest();
   return (
     <Stack gap="lg">
       <PageHeading title="型の最終確認" source={SOURCE} />
+      <MapStatus rows={mapRows()} />
+      <VideoStatus rows={videoRows()} />
       {!manifest && <p>見本がまだありません。npx tsx {SOURCE} で作ります。</p>}
       {manifest?.rows.map((row) => <TemplateRow key={row.id} row={row} />)}
     </Stack>
