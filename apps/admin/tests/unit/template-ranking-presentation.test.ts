@@ -5,6 +5,7 @@ import { resolveChoroplethScale } from '../../../../packages/visualization/src/s
 import { generateChoroplethSvg } from '../../../../packages/svg-builder/src/charts/choropleth';
 import {
   RANKING_SAMPLE_METRIC,
+  RANKING_SAMPLE_PRESENTATION,
   rankingInputFromStats,
   rankingBarAxis,
 } from '@/lib/template-ranking-data';
@@ -78,7 +79,7 @@ describe('shared ranking/image presentation contract', () => {
     expect(bindings).toHaveLength(5);
     for (const binding of bindings) {
       expect(binding?.visualization).toEqual(
-        RANKING_SAMPLE_METRIC.visualization
+        RANKING_SAMPLE_PRESENTATION
       );
       expect(binding?.dataKey).toBe(
         'app/stats/maximum-temperature/values.json'
@@ -111,12 +112,12 @@ describe('shared ranking/image presentation contract', () => {
     });
     expect(
       rankingBarAxis([28.4, 36.2], {
-        ...RANKING_SAMPLE_METRIC.visualization,
+        ...RANKING_SAMPLE_PRESENTATION,
         barDomain: { mode: 'zero' },
       })
     ).toMatchObject({ min: 0, max: 36.2, truncated: false });
     const { barDomain: _barDomain, ...withoutOverride } =
-      RANKING_SAMPLE_METRIC.visualization;
+      RANKING_SAMPLE_PRESENTATION;
     expect(_barDomain).toEqual({ mode: 'extent' });
     expect(rankingBarAxis([28.4, 36.2], withoutOverride)).toMatchObject({
       min: 28.4,
@@ -125,7 +126,7 @@ describe('shared ranking/image presentation contract', () => {
   });
   it('takes fixed limits from the metric ledger and applies them to bar widths without rounding', () => {
     const policy = {
-      ...RANKING_SAMPLE_METRIC.visualization,
+      ...RANKING_SAMPLE_PRESENTATION,
       barDomain: { mode: 'fixed' as const, min: 0, max: 37 },
     };
     expect(rankingBarAxis([28.4, 36.2], policy)).toMatchObject({
@@ -162,11 +163,11 @@ describe('shared ranking/image presentation contract', () => {
     });
     expect(firstWidth(cropped)).toBeCloseTo((PLOT * 6) / 7);
     expect(cropped).toContain('範囲：30.0–37.0');
-    expect(RANKING_SAMPLE_METRIC.visualization.barDomain).toEqual({
+    expect(RANKING_SAMPLE_PRESENTATION.barDomain).toEqual({
       mode: 'extent',
     });
     const item = buildRankingItemFromMetric(
-      { ...RANKING_SAMPLE_METRIC, visualization: policy },
+      { ...RANKING_SAMPLE_METRIC, visualization: { ...RANKING_SAMPLE_METRIC.visualization, barDomain: policy.barDomain } },
       { values: { yearCodes: ['2024'] }, now: '2026-10-19' }
     );
     const snapshot = parseRankingItemSnapshot(
@@ -183,7 +184,7 @@ describe('shared ranking/image presentation contract', () => {
           : method === 'threshold'
             ? { method, thresholds: [1, 3] }
             : { method, classes: 5 };
-      const config = { ...RANKING_SAMPLE_METRIC.visualization, classification };
+      const config = { ...RANKING_SAMPLE_PRESENTATION, classification };
       const data = [0, 1, 2, 3, 10].map((value, i) => ({
         areaCode: String(i + 1).padStart(2, '0'),
         value,
@@ -209,7 +210,7 @@ describe('shared ranking/image presentation contract', () => {
   );
   it('uses the same class colors in Remotion as the site and static SVG', async () => {
     const config = {
-      ...RANKING_SAMPLE_METRIC.visualization,
+      ...RANKING_SAMPLE_PRESENTATION,
       colorScheme: 'interpolateRdBu',
       colorSchemeType: 'diverging' as const,
       divergingMidpoint: 'custom' as const,
@@ -256,7 +257,7 @@ describe('shared ranking/image presentation contract', () => {
   });
   it('retains a declared diverging center, symmetric fixed limits and reversal in static maps', async () => {
     const config = {
-      ...RANKING_SAMPLE_METRIC.visualization,
+      ...RANKING_SAMPLE_PRESENTATION,
       colorScheme: 'interpolateRdBu',
       colorSchemeType: 'diverging' as const,
       divergingMidpoint: 'custom' as const,

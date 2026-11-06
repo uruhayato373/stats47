@@ -12,7 +12,7 @@ model: sonnet
 
 ## 担当範囲
 
-- 画像プロンプト生成 (`generate-ai-content` の画像系派生)
+- 画像プロンプト生成 (生成は `config/image-generation-routes.json` の経路だけ)
 - 画像プロンプト catalog の維持 (`.claude/skills/image-prompt/reference/catalog.md`、 43 種)
 - 記事context promptとgit JPEGの維持 (`blog-article-background.ts` /
   `assets/blog-article-backgrounds/<slug>.jpg`)
@@ -32,7 +32,6 @@ note記事カバーは `/image-prompt --use-case note-header` の専用経路に
 | ----------------------------------- | ----------------------------------------------------------------------- |
 | `image-prompt` (skill カテゴリ)     | 画像プロンプト生成・catalog 参照                                        |
 | `/generate-blog-images`             | 記事ごとの固有背景をCodexで生成・ingest・bundle検証                     |
-| `/generate-ai-content` (画像系派生) | Gemini CLI / 外部 AI 経由の生成                                         |
 | `/audit-ogp-images`                 | OGP / カバー / リンクカード画像の目視ギャラリー生成・棚卸し (read-only) |
 
 ## 担当外

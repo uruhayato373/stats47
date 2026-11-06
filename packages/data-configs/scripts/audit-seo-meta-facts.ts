@@ -39,6 +39,7 @@ import {
   type SeoFactFinding,
 } from "../src/seo-meta-facts.js";
 import type { MetricConfig } from "../src/types.js";
+import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from "@stats47/area";
 import { SITE } from "@stats47/types";
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -47,8 +48,11 @@ const REPO_ROOT = resolve(__dirname, "../../..");
 const BASELINE = resolve(REPO_ROOT, `${datasetDir("data-quality.state")}/seo-meta-facts-baseline.json`);
 const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const CONCURRENCY = 16;
+// cities.json also holds administrative wards, which the published municipality ranking leaves out.
+const MUNICIPALITY_RANKING_AREAS = resolveWardModeAreas(buildMunicipalityEntityPolicy(), "merged").codes;
 
 interface StatsRow {
+  areaCode: string;
   areaName: string;
   yearCode: string;
   value: number | null;
@@ -90,7 +94,10 @@ async function fetchStats(
   const res = await fetch(`${R2}/app/stats/${key}/${file}`).catch(() => null);
   if (!res || !res.ok) return null;
   const payload = (await res.json().catch(() => null)) as { rows?: StatsRow[] } | null;
-  return payload?.rows?.length ? payload.rows : null;
+  const rows = isCityOnly
+    ? payload?.rows?.filter((row) => MUNICIPALITY_RANKING_AREAS.has(row.areaCode))
+    : payload?.rows;
+  return rows?.length ? rows : null;
 }
 
 function loadBaseline(): Set<string> {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-11-05T10:00:21.756Z",
+  "updatedAt": "2026-11-05T12:50:55.121Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -23491,7 +23491,7 @@
     },
     {
       "articleKey": "b-kakei-expense-transport",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n952c8fdd32a6",
       "revisions": [
         {
           "sha256": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
@@ -23537,11 +23537,41 @@
               "planSha256": "b4e063170862346c235cce60e2db8f12f28fe8f6d9ef6d94a036d5dd1c58b214"
             }
           }
+        },
+        {
+          "sha256": "fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-transport/revisions/fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1.png"
+          },
+          "bytes": 504423,
+          "id": "fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T12:29:43.654Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332608891/rectangle_large_type_2_983528f029b42da3198a1833efd217cd.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1"
+          }
         }
       ],
       "candidateRevisionId": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
       "approvedRevisionId": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332608891/rectangle_large_type_2_983528f029b42da3198a1833efd217cd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T12:29:43.654Z",
+        "revisionId": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00516",
@@ -23557,7 +23587,7 @@
     },
     {
       "articleKey": "b-kakei-expense-utilities",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/na2be61f32e15",
       "revisions": [
         {
           "sha256": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
@@ -23603,11 +23633,41 @@
               "planSha256": "f457e8a079a9bd70bb590f827ab48b1ec8151fdeb8ce4a00ec758fba453c79d6"
             }
           }
+        },
+        {
+          "sha256": "768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-utilities/revisions/768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed.png"
+          },
+          "bytes": 445328,
+          "id": "768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-11-05T12:50:02.926Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/332617343/rectangle_large_type_2_39e20fc5be949411cc1b39368c97c0ee.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed"
+          }
         }
       ],
       "candidateRevisionId": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
       "approvedRevisionId": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/332617343/rectangle_large_type_2_39e20fc5be949411cc1b39368c97c0ee.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-11-05T12:50:02.926Z",
+        "revisionId": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00517",

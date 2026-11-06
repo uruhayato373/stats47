@@ -61,7 +61,7 @@ test("入口の一覧と台本のファイルが 1 対 1 で、台本は失敗�
     assert.match(script(id), /^cd "\$\(dirname "\$0"\)\/\.\.\/\.\.\/\.\.\/\.\."$/m, `${id}: リポジトリの根へ移っていない`);
   }
   // consistency は他の監査が書き終えた文書を検査するので最後に置く
-  assert.equal(ids.length, 12);
+  assert.equal(ids.length, 13);
   assert.match(runner, /\{ id: "consistency"[^\n]*\n\];/);
   // 時間制限では台本の子の node までグループごと止める (bash だけ止めると後続の監査が始まらない)
   assert.match(runner, /detached: true/);

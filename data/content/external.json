@@ -1381,6 +1381,134 @@
       ]
     },
     {
+      "id": "note:b-kakei-expense-clothing",
+      "kind": "note",
+      "key": "b-kakei-expense-clothing",
+      "title": "服にお金を使うのは寒い県なのか ── コートと被服費全体で答えが変わる",
+      "href": "https://note.com/stats47/n/n233c24eee1e4",
+      "published": true,
+      "rankingKeys": [
+        "clothing-footwear-expenditure-total",
+        "laundry-service-consumption-expenditure",
+        "womens-coat-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-education",
+      "kind": "note",
+      "key": "b-kakei-expense-education",
+      "title": "教育費の県差は8.7倍か、4.2倍か ── 1年の順位を信じすぎないために",
+      "href": "https://note.com/stats47/n/n048102731761",
+      "published": true,
+      "rankingKeys": [
+        "education-expenditure-total",
+        "tuition-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-food",
+      "kind": "note",
+      "key": "b-kakei-expense-food",
+      "title": "香川は家で食べるうどんも日本一なのか ── 外食と購入を家計調査で並べる",
+      "href": "https://note.com/stats47/n/n1c3f57ef31da",
+      "published": true,
+      "rankingKeys": [
+        "food-expenditure-total",
+        "fresh-udon-soba-consumption-expenditure",
+        "soba-udon-dining-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-furniture",
+      "kind": "note",
+      "key": "b-kakei-expense-furniture",
+      "title": "エアコンを一番買う市は毎年変わる ── ストーブとの違いで読む、家電のランキング",
+      "href": "https://note.com/stats47/n/na17bb46da162",
+      "published": true,
+      "rankingKeys": [
+        "air-conditioner-consumption-expenditure",
+        "furniture-household-expenditure-total",
+        "heater-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-health",
+      "kind": "note",
+      "key": "b-kakei-expense-health",
+      "title": "歯医者の多い県ほど、歯科にお金を使っているのか ── 5年平均で確かめる",
+      "href": "https://note.com/stats47/n/n611c1b73fb3f",
+      "published": true,
+      "rankingKeys": [
+        "dental-clinic-count-per-100k",
+        "dental-fee-consumption-expenditure",
+        "health-medical-expenditure-total"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-housing",
+      "kind": "note",
+      "key": "b-kakei-expense-housing",
+      "title": "家賃の支出が12.7倍違っても、家賃が12.7倍高いわけではない ── 持ち家の0円が入る平均を読む",
+      "href": "https://note.com/stats47/n/n8f82dbdbce9d",
+      "published": true,
+      "rankingKeys": [
+        "home-ownership-rate-kakei",
+        "housing-expenditure-total",
+        "private-rent-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-other",
+      "kind": "note",
+      "key": "b-kakei-expense-other",
+      "title": "進学の仕送りが最も少ないのは大阪市 ── 地元に大学があることで、どこまで説明できるか",
+      "href": "https://note.com/stats47/n/n966ddd9d83bb",
+      "published": true,
+      "rankingKeys": [
+        "domestic-student-remittance-consumption-expenditure",
+        "other-living-expenditure-total",
+        "university-capacity-index"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-recreation",
+      "kind": "note",
+      "key": "b-kakei-expense-recreation",
+      "title": "ケーブルテレビの普及率1位は徳島なのに、支出の1位は福井 ── 加入の多さだけでは決まらない受信料",
+      "href": "https://note.com/stats47/n/nb48d1909a2ea",
+      "published": true,
+      "rankingKeys": [
+        "cable-tv-fee-consumption-expenditure",
+        "culture-recreation-expenditure-total"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-transport",
+      "kind": "note",
+      "key": "b-kakei-expense-transport",
+      "title": "電車代が少ない県は、交通費も少ないのか ── 公共交通と車の費用を足して比べる",
+      "href": "https://note.com/stats47/n/n952c8fdd32a6",
+      "published": true,
+      "rankingKeys": [
+        "gasoline-consumption-expenditure",
+        "train-fare-consumption-expenditure",
+        "transport-communication-expenditure-total"
+      ]
+    },
+    {
+      "id": "note:b-kakei-expense-utilities",
+      "kind": "note",
+      "key": "b-kakei-expense-utilities",
+      "title": "電気代の差は1.7倍、灯油は56.5倍 ── 光熱費の県差はどの燃料が作っているのか",
+      "href": "https://note.com/stats47/n/na2be61f32e15",
+      "published": true,
+      "rankingKeys": [
+        "electricity-consumption-expenditure",
+        "kerosene-consumption-expenditure",
+        "utilities-expenditure-total"
+      ]
+    },
+    {
       "id": "note:b-kakei-gyoza-counting",
       "kind": "note",
       "key": "b-kakei-gyoza-counting",
@@ -11738,6 +11866,146 @@
     {
       "from": "note:b-kakei-bread-giffen",
       "to": "ranking:white-bread-consumption-quantity",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-clothing",
+      "to": "ranking:clothing-footwear-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-clothing",
+      "to": "ranking:laundry-service-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-clothing",
+      "to": "ranking:womens-coat-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-education",
+      "to": "ranking:education-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-education",
+      "to": "ranking:tuition-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-food",
+      "to": "ranking:food-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-food",
+      "to": "ranking:fresh-udon-soba-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-food",
+      "to": "ranking:soba-udon-dining-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-furniture",
+      "to": "ranking:air-conditioner-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-furniture",
+      "to": "ranking:furniture-household-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-furniture",
+      "to": "ranking:heater-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-health",
+      "to": "ranking:dental-clinic-count-per-100k",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-health",
+      "to": "ranking:dental-fee-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-health",
+      "to": "ranking:health-medical-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-housing",
+      "to": "ranking:home-ownership-rate-kakei",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-housing",
+      "to": "ranking:housing-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-housing",
+      "to": "ranking:private-rent-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-other",
+      "to": "ranking:domestic-student-remittance-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-other",
+      "to": "ranking:other-living-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-other",
+      "to": "ranking:university-capacity-index",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-recreation",
+      "to": "ranking:cable-tv-fee-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-recreation",
+      "to": "ranking:culture-recreation-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-transport",
+      "to": "ranking:gasoline-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-transport",
+      "to": "ranking:train-fare-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-transport",
+      "to": "ranking:transport-communication-expenditure-total",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-utilities",
+      "to": "ranking:electricity-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-utilities",
+      "to": "ranking:kerosene-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "note:b-kakei-expense-utilities",
+      "to": "ranking:utilities-expenditure-total",
       "relation": "uses"
     },
     {

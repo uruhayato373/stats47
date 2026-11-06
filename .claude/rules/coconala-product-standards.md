@@ -356,6 +356,19 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する（coconala の `discover-categories` 相当）。実機での初回調整が前提。
 - **KU（KDP Select 独占）は既定 未登録**（`kuEnrolled:false`・販売のみ）。判断はオーナー。**規約リスク**: 出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残るため低頻度（出品時・価格改定時）に限る。
 - **公開・既刊修正の前にR2 archive gate必須**。ローカル6ファイルのSHAが最新の検証済みrevisionと一致しなければKDP操作を停止する。修正は原稿/表紙SSOTを編集→再生成→新revisionをR2へpush→`kdp-publish --update`で修正下書き→`--update --commit`で再申請する。旧revisionは削除せずrollback可能にする。
+#### 紹介文とキーワード (2026-11-06 オーナー依頼)
+
+紹介文は読者が買うかを決める文章で、定型文の差し替えにしない。正本は `data/products/kdp-listing-copy.json` で、
+`config/kdp-listings.json` の `description` と `keywords` はここから作る。台帳を手で直さない。
+
+- **構成**: 読者の悩み → 【この本で分かること】 → 【こんな方に】 → 【収録内容】 → 【データについて】。新版は冒頭に KDP が求める旧版の刊行情報を置く ([KDP](https://kdp.amazon.com/en_US/help/topic/GW7J4WEKBVU25YEC)、2026-11-06 確認)。
+- **収録内容**: 図と全県表の数は `kindle-quality.json` の EPUB 実測から入れる。手で書かない。
+- **載せられない内容**: URL・連絡先・レビュー・価格や入手方法・時期に左右される情報・広告 ([メタデータ指針](https://kdp.amazon.com/en_US/help/topic/G201097560)、2026-11-06 確認)。サイト名の URL も載せない。
+- **キーワード**: 7 枠すべて使い、題名の語を重ねず、宣伝語を入れず、本文にある語だけにする ([キーワード](https://kdp.amazon.com/en_US/help/topic/G201298500)、同日確認)。
+- **本が答える範囲で書く**: カタログの `readerProblem` は読者の悩みであって、本の約束ではない。そのまま紹介文に写すと本に無い内容を約束する (2026-11-06 の照合で 13 冊中 10 冊に 26 件。例: 県別の回復率が無いのに「県ごとに確かめられる」)。原稿は書き手と別のエージェントが EPUB の本文と照合し、`review.epubSha256` に今の版を記録しないと `apply` が止める。
+- **検査**: `npm run kdp:listing-copy -- check` (全項目)。`kdp-preflight` は載せられない内容を入稿前に止める。原稿は別エージェントのレビューとオーナー承認を経て `apply` で台帳へ写し、`kdp-update-listing-copy.mjs` で紹介文とキーワードだけを反映する。提出後は「変更事項のレビュー中」で詳細画面が開けないので `submitted` とし、レビュー後に `--verify` で一致を確かめて `reflected` にする。
+- **効果の計測**: `targetQueries` の検索順位を週次監査 `kdp-search-ranks` が `data/products/kdp-search-ranks/` に記録する。読み取れない語は `unreadable` で、圏外と混同しない。
+
 #### KDP 入稿フォームの実仕様 (2026-08-12 に実機で確定)
 
 移植元 (doboku-note) の英語版フォーム前提の実装は**日本語版でほぼ動かなかった**。実測で分かった要点:

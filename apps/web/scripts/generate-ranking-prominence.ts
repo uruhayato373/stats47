@@ -8,7 +8,7 @@
  * - `/ranking` は R2 非依存の純静的 SSG を維持する (home の featured がビルド時に空焼きされる
  *   問題を避けるため意図的にそうなっている)。索引が要る情報はビルド前に焼くしかない。
  * - 共通 Header と索引が runtime に `listAllMetrics()` を呼ぶと、METRICS_REGISTRY が
- *   ほぼ全 route の bundle に入る (`generate-runtime-metric-summaries.ts` 参照)。
+ *   ほぼ全 route の bundle に入る。
  *
  * 何を決めるか:
  * - カテゴリごとの代表ランキング (索引 6 件。ヘッダーはその先頭 4 件を使う)

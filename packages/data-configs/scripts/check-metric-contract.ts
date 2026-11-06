@@ -25,7 +25,7 @@ import { METRICS_DIR, REPO_ROOT } from './_lib';
 import { checkMetricSchema, METRIC_SCHEMA_PATH } from './metric-schema';
 import { checkThemePropsSchema } from './theme-props-schema';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
-import { assertMetricPresentation } from '@stats47/types';
+import { assertMetricPresentation, joinColorPolicy } from '@stats47/types';
 
 checkMetricSchema(true);
 checkThemePropsSchema(true);
@@ -112,7 +112,7 @@ const entries: MetricLinkageEntry[] = keys.map((key) => {
     errors.push(`${key}: ${JSON.stringify(validate.errors)}`);
   const v = metric.visualization;
   try {
-    assertMetricPresentation(v);
+    assertMetricPresentation(joinColorPolicy(v));
   } catch (error) {
     errors.push(`${key}: ${String(error)}`);
   }
@@ -151,16 +151,12 @@ const entries: MetricLinkageEntry[] = keys.map((key) => {
     if (domain.mode !== 'fixed' && (domain.padding ?? 0) < 0)
       errors.push(`${key}: negative domain padding`);
   }
+  // Steps are the colour ledger's: a definition writes classification only for thresholds a person chose.
   const classification = v.classification;
+  if (classification && classification.method !== 'threshold')
+    errors.push(`${key}: classification belongs to the colour ledger; only threshold may be written`);
   if (
-    'classes' in classification &&
-    (!Number.isInteger(classification.classes) ||
-      classification.classes < 2 ||
-      classification.classes > 9)
-  )
-    errors.push(`${key}: classes must be 2–9`);
-  if (
-    'thresholds' in classification &&
+    classification?.method === 'threshold' &&
     (classification.thresholds.length === 0 ||
       classification.thresholds.some(
         (value, index, array) =>

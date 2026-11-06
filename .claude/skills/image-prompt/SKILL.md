@@ -7,6 +7,8 @@ primary_agent: image-prompt-curator
 co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 ---
 
+画像の生成は `config/image-generation-routes.json` の経路 (Codex imagegen) だけを使う。本スキルはプロンプトの型を選ぶ道具で、Midjourney などの外部ツールを本番の生成経路にしない。
+
 外部 AI 画像生成（Midjourney、DALL-E、Nano Banana 等）用のプロンプトを、テンプレートカタログから選んで生成する。
 
 ## スコープ

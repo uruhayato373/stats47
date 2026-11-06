@@ -351,7 +351,7 @@ describe('blog chart taxonomy', () => {
   it('metric 自体が理由付き対象外なら chart も not-applicable にする', () => {
     const registry = {
       'administrative-report': {
-    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
         key: 'administrative-report',
         title: '行政業務報告',
         unit: '件',

@@ -71,12 +71,10 @@ describe("広告コンポーネントの impression 計装カバレッジ", () =
     ).toBe(true);
   });
 
-  it("2026-08-04 に是正した 4 コンポーネントが計装を維持している", () => {
+  it("2026-08-04 に是正したコンポーネントが計装を維持している", () => {
     // 退行の直接検知。ここが落ちたら計装が剥がれている。
     for (const file of [
       "NativeAffiliateRow.tsx",
-      "FurusatoNozeiCard.tsx",
-      "RakutenItemsCard.tsx",
       "VariantAdSlot.tsx",
     ]) {
       const source = readFileSync(join(COMPONENTS_DIR, file), "utf8");

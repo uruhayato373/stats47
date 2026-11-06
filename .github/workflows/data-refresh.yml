@@ -30,9 +30,9 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   1. push (cloud 用・2026-07-30 追加): develop に data/data-refresh-requests.json を
 #      commit/push → 本 workflow が実行 → 消費した request を git rm で commit-back [skip ci]。
 #      cloud セッションは actions:write が無く workflow_dispatch 不可 (403) のため。
-#      gemini-image-run.yml と同じ方式。
+#      youtube-upload-request と同じ方式。
 #   2. workflow_dispatch (ローカル): metric/since/dry_run を入力して手動実行
-#   3. schedule (毎月): 全 metric を実 push
+#   3. schedule: 2026-11-05 に停止 (再開条件はカード DATA-REFRESH-SCHEDULE-RESUME-01)
 #
 # request file 形式 (data/data-refresh-requests.json):
 #   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false,
@@ -86,10 +86,8 @@ on:
         required: false
         default: false
         type: boolean
-  # 毎月 5日 03:00 UTC (= 12:00 JST) に全 metric を refresh。schedule 実行は
-  # inputs が空 → 全 metric・実 push (dry_run 既定 'true' は workflow_dispatch のみ適用)。
-  schedule:
-    - cron: "0 3 5 * *"
+  # ★毎月 5 日の定期実行は 2026-11-05 のオーナー判断で停止した。指標の台帳とカタログの整理が
+  #   終わるまで全範囲の更新は手動で起動する。再開はカード DATA-REFRESH-SCHEDULE-RESUME-01。
 
 permissions:
   # push トリガー時に consume commit-back するため write が要る

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { detectPrefCodeFromText, getFurusatoNozeiLink } from "../furusato-nozei";
+import { detectPrefCodeFromText } from "../furusato-nozei";
 
 describe("detectPrefCodeFromText", () => {
   it("接尾辞つきの県名を検出する", () => {
@@ -50,11 +50,4 @@ describe("detectPrefCodeFromText", () => {
     expect(detectPrefCodeFromText(undefined)).toBeNull();
   });
 
-  it("検出した prefCode がそのまま getFurusatoNozeiLink で解決できる", () => {
-    const code = detectPrefCodeFromText("香川のうどん消費量");
-    expect(code).toBe("37000");
-    const link = getFurusatoNozeiLink(code!);
-    expect(link?.prefName).toBe("香川県");
-    expect(link?.rakutenAreaSlug).toBe("kagawa");
-  });
 });

@@ -30,7 +30,7 @@ const SLOT_COMPONENTS = new Set(placements.slotTypes.map((slot) => slot.componen
 /** 広告を描く部品 (隣り合わせの判定で「内容」に数えない) */
 const AD_COMPONENTS = new Set([
   ...SLOT_COMPONENTS,
-  'AdSenseAd', 'BannerAd', 'AffiliateAdSlot', 'SidebarPromoBanner', 'RakutenItemsCard', 'FurusatoNozeiCard',
+  'AdSenseAd', 'BannerAd', 'AffiliateAdSlot', 'SidebarPromoBanner',
   // 本文の広告のセル (広告を包むだけで、内容には数えない)
   'AdCell',
 ]);

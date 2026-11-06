@@ -32,8 +32,7 @@ import {
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
-import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
+import { resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { adRowTargets, BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
@@ -185,11 +184,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const bannerVertical = resolveContentVertical(bannerInput).vertical;
-    const rakutenPlacement = resolveBlogRakutenPlacement({
-        title: article.title,
-        subtitle: article.frontmatter.subtitle,
-        vertical: resolveContentVertical(affiliateInput).vertical,
-    });
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const articleRankingKeys = await getRankingKeysForArticle(slug);
     const relatedArticles = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['blog'], rankingKeys: articleRankingKeys, tagIds: contentTagIds(tagKeys), limit: 3});
@@ -393,16 +387,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {/* 自社 Kindle 本が無い記事だけ、バナーと同じ vertical に合う一般書籍 (Amazon) を出す */}
                     {!findKindleProductForBlog(slug) && <RelatedAmazonBook vertical={bannerVertical} />}
 
-                    {/* PC・モバイル共通の読了導線。右レールとの重複は作らない。 */}
-                    {rakutenPlacement && (
-                        <Suspense fallback={null}>
-                            {rakutenPlacement.kind === "furusato" ? (
-                                <FurusatoNozeiCard areaCode={rakutenPlacement.areaCode} position="blog-furusato-content" layout="content" />
-                            ) : (
-                                <RakutenItemsCard sourceText={rakutenPlacement.sourceText} position="blog-rakuten-content" layout="content" />
-                            )}
-                        </Suspense>
-                    )}
                 </PanelGrid>
             </ArticleShell>
         </>

@@ -41,6 +41,7 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01               # 下書き�
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (★実公開・要オーナー承認)
 node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --probe  # 取り下げ (withdrawal 付き live 本) の確認ダイアログまで採取・確定しない
 node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit # ★出版停止を実行 (本棚 read-back「下書き」で成功判定・要オーナー指示)
+node .claude/scripts/kdp/kdp-unpublish.mjs --all-previous --commit  # ★新版が販売中の本の旧版を出版停止 (previousEditions。--previous-of <id> で 1 冊、--probe で確定せず確認。要オーナー指示)
 ```
 
 ## フロー (1 冊を出版する)

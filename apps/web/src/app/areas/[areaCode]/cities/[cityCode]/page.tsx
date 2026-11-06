@@ -22,6 +22,7 @@ import { MunicipalityWardBreakdownSection } from "@/features/municipalities/serv
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 import { UrlPolicy } from "@/lib/url-policy";
 
+import type { MetricPresentation } from "@stats47/types";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -33,7 +34,8 @@ interface PageProps {
  * R2 を読まずに索引から外す。
  */
 /** 行政区の内訳の地図は人口を塗るので、人口の指標と同じ色の方式を使う */
-const WARD_MAP_VISUALIZATION = getMetricConfig("total-population")!.visualization;
+// A few wards at a time, so five quantile steps; the colour ledger holds nation-wide sets, not one city's wards.
+const WARD_MAP_VISUALIZATION = { ...getMetricConfig("total-population")!.visualization, classification: { method: "quantile", classes: 5 } } satisfies MetricPresentation;
 
 async function readDatabook(areaCode: string, cityCode: string) {
   return UrlPolicy.city.isIndexable(areaCode, cityCode)

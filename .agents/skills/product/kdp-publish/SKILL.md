@@ -87,6 +87,12 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
     `node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --probe` (メニュー・確認ダイアログの採取だけ) →
     `--commit` で KDP 本棚の「電子書籍の出版停止」を実行する。対象は withdrawal かつ kdpStatus=live かつ ASIN あり
     に限り、行は ASIN + 題名で特定、成功判定は本棚 read-back が「下書き」になること (押せた = 成功にしない)。
+8d. **紹介文とキーワード (2026-11-06)**: 原稿は `data/products/kdp-listing-copy.json`。`npm run kdp:listing-copy -- check` で監査し、
+    オーナー承認後に `apply --id <id>` で台帳へ写し、`kdp-update-listing-copy.mjs --id <id> --commit` で紹介文とキーワードだけを KDP へ反映する (原稿・表紙は再投入しない)。レビュー後に `--verify` で読み直す。検索順位は週次監査
+    `.claude/scripts/management/weekly-audits/kdp-search-ranks.sh` が記録する。規則は `coconala-product-standards.md` §8。
+8c. **新版公開後の旧版 (2026-11-06)**: `previousEditions` の旧版は新版が販売中になっても自動では止まらない。新版の販売中を
+    本棚で確かめたら、オーナー指示のうえで `kdp-unpublish.mjs --all-previous --probe` → `--commit` で止める (`--previous-of <id>` で 1 冊)。
+    行は ASIN・題名・旧版の draftId がすべて一致したときだけ操作し、結果は旧版の `unpublishedAt` と新版の `previous_unpublished` に記録する。
     1 冊でも失敗したら残りを止める。実行後は listing に `status: "withdrawn"` と `withdrawal.unpublishedAt / readBack / evidence`
     を残す (2026-09-19 に 10 冊実施、証跡 `.local/kdp-debug/unpublish-<ts>/`)。ストアの商品ページが消えるまで数時間〜72 時間かかる。理由は各 listing の `blockReason` / `withdrawal.reason` にあり、消さない。`kdp-batch` はどちらも draft/verify/publish の対象から外す。
 9. **既刊修正**: 原稿/表紙SSOTを修正・新versionへ生成し、`kindle:archive --push --id <ID> --version <VERSION>`で保全、同版を`--audit --deep --record`で検証してから`--update`。出品台帳のEPUB/表紙パス・保全版・ローカル全必須ファイルのSHAに加え、`kdp-release-gate.mjs`が現行原稿・本文品質・対象版の独立レビューを確認する。未達なら単発でもバッチでも送らない。本文検査だけでオーナー承認を代替しない。

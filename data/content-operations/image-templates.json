@@ -29,7 +29,11 @@
           "label": "全行の2列",
           "status": "ready"
         }
-      ]
+      ],
+      "review": {
+        "status": "review",
+        "summary": "順位と値を読む型は上位と下位のカード 1 つ。比べる地域の集合で順位が変わる。全体を見せる図は地図を使う。"
+      }
     },
     {
       "id": "table",
@@ -48,7 +52,11 @@
         "comparison",
         "composition"
       ],
-      "metricColor": "single"
+      "metricColor": "single",
+      "review": {
+        "status": "unused",
+        "summary": "全 47 都道府県の値を行で読む型。今はどの媒体も使っていない。"
+      }
     },
     {
       "id": "tile-map",
@@ -90,7 +98,11 @@
           "status": "ready"
         }
       ],
-      "metricColor": "scale"
+      "metricColor": "scale",
+      "review": {
+        "status": "review",
+        "summary": "全県の値を 1 枚で読む型。基準の県がある形が確認待ち。"
+      }
     },
     {
       "id": "choropleth",
@@ -176,7 +188,11 @@
           "status": "ready"
         }
       ],
-      "metricColor": "scale"
+      "metricColor": "scale",
+      "review": {
+        "status": "review",
+        "summary": "地理のまとまりを見せる型。都道府県版と市区町村版がある。"
+      }
     },
     {
       "id": "line",
@@ -193,7 +209,11 @@
       "purposes": [
         "trend"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "review",
+        "summary": "推移を見せる型。1 本は始点と終点の値、複数は凡例と線の端の値。"
+      }
     },
     {
       "id": "stacked-bar",
@@ -211,7 +231,11 @@
       "purposes": [
         "composition"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "review",
+        "summary": "内訳を見せる型。100% と実数の両方を描く。"
+      }
     },
     {
       "id": "grouped-bar",
@@ -230,7 +254,11 @@
         "comparison",
         "trend"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "review",
+        "summary": "区分ごとに棒を並べて比べる型。月のように周期のある軸は折れ線でなくこの型を使う。"
+      }
     },
     {
       "id": "scatter",
@@ -248,7 +276,11 @@
       "purposes": [
         "relationship"
       ],
-      "metricColor": "single"
+      "metricColor": "single",
+      "review": {
+        "status": "done",
+        "summary": "2 つの指標の関係を見せる型。"
+      }
     },
     {
       "id": "radar",
@@ -266,7 +298,11 @@
       "purposes": [
         "comparison"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "undecided",
+        "summary": "複数の軸で比べる図。公開中のブログに 3 枚ある。見本が無く、型として持つかが未定。"
+      }
     },
     {
       "id": "chord",
@@ -296,7 +332,11 @@
           "status": "ready"
         }
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "review",
+        "summary": "「どこからどこへ」の全組み合わせを見せる型。"
+      }
     },
     {
       "id": "sankey",
@@ -315,7 +355,11 @@
         "relationship",
         "composition"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "undecided",
+        "summary": "流れの量を見せる図。見本が無く、型として持つかが未定。"
+      }
     },
     {
       "id": "waterfall",
@@ -333,7 +377,11 @@
       "purposes": [
         "composition"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "undecided",
+        "summary": "増減の積み重ねを見せる図。公開中のブログに 1 枚ある。見本が無く、型として持つかが未定。"
+      }
     },
     {
       "id": "boxplot",
@@ -351,7 +399,11 @@
       "purposes": [
         "distribution"
       ],
-      "metricColor": "single"
+      "metricColor": "single",
+      "review": {
+        "status": "done",
+        "summary": "地方ごとの分布を見せる型。"
+      }
     },
     {
       "id": "pie",
@@ -369,7 +421,11 @@
       "purposes": [
         "composition"
       ],
-      "metricColor": "none"
+      "metricColor": "none",
+      "review": {
+        "status": "unused",
+        "summary": "構成比を見せる型。今はどの媒体も使っていない。"
+      }
     },
     {
       "id": "heatmap",
@@ -388,7 +444,11 @@
         "distribution",
         "trend"
       ],
-      "metricColor": "scale"
+      "metricColor": "scale",
+      "review": {
+        "status": "unused",
+        "summary": "行と列の濃淡で見せる型。今はどの媒体も使っていない。"
+      }
     },
     {
       "id": "unclassified",

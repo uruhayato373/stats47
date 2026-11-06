@@ -11475,17 +11475,25 @@
       "title": "電気代の差は1.7倍、灯油は56.5倍 ── 光熱費の県差はどの燃料が作っているのか",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-kakei-expense-utilities",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "e9186a92c1d37db3937a7ff6cd4abb1ac398226a2e0f5621af1d12e9bd42c816",
+          "files": 10,
+          "bytes": 222862,
+          "savedAt": "2026-11-05T12:50:09.745Z"
+        },
+        "verifiedAt": "2026-11-05T12:50:09.745Z"
       },
       "stats47Targets": [
         "/ranking/electricity-consumption-expenditure",
         "/ranking/kerosene-consumption-expenditure",
         "/ranking/utilities-expenditure-total"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/na2be61f32e15",
+      "publishedAt": "2026-11-05"
     },
     {
       "key": "b-kakei-expense-furniture",
@@ -11575,17 +11583,25 @@
       "title": "電車代が少ない県は、交通費も少ないのか ── 公共交通と車の費用を足して比べる",
       "magazine": "s47-kakei-reading",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/b-kakei-expense-transport",
       "body": {
         "store": "r2-public",
-        "manifest": null
+        "manifest": {
+          "sha256": "4dac832aa532337018c19668d4938ac0aa8e7e37509eb1e611be2f982660ee2b",
+          "files": 10,
+          "bytes": 292978,
+          "savedAt": "2026-11-05T12:29:48.250Z"
+        },
+        "verifiedAt": "2026-11-05T12:29:48.250Z"
       },
       "stats47Targets": [
         "/ranking/gasoline-consumption-expenditure",
         "/ranking/train-fare-consumption-expenditure",
         "/ranking/transport-communication-expenditure-total"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n952c8fdd32a6",
+      "publishedAt": "2026-11-05"
     },
     {
       "key": "b-kakei-expense-education",

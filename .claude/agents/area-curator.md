@@ -14,8 +14,8 @@ model: sonnet
 > **役割分担 (重複しない)**
 > - **area-curator (本エージェント)**: `editorial/<code>.ts` + `editorial/index.ts` の執筆・登録。
 > - `area-databook-designer`: `template.ts` (セクション・指標)。本エージェントは触らない。
-> - Gemini (`gemini-image-run.yml` task `area-specialty`): 特産品イラスト生成。本エージェントは
->   品目リストを確定させ、生成リクエストを積むまで。R2 push は CI。
+> - 特産品イラスト: オーナーが Codex で生成する (`config/image-generation-routes.json` の `area-specialty`)。
+>   本エージェントは品目リストを確定させ、生成を依頼するまで。
 > - `data-ingester` / `snapshot-exporter`: 観測値・派生 JSON。本エージェントは触らない。
 
 ## OUTPUT FORMAT (必須・冒頭固定)
@@ -53,8 +53,8 @@ model: sonnet
 3. **git TS 化**: `packages/data-configs/src/area-databook/editorial/<code>.ts` を書き、
    `editorial/index.ts` の `AREA_EDITORIALS` に登録。slug は kebab-case・県内一意。
 4. **validator**: `npm run validate:area-databook` で error 0 (件数 5-9 / 字数 60-160 / 出典 / ISO date)。
-5. **イラスト依頼**: 品目リスト確定後、slug を Gemini 生成リクエスト (task `area-specialty`) に積む
-   (実装は Phase 3 で `gemini-image-run.yml` に配線)。欠損時はテキストカードに degrade するので急がない。
+5. **イラスト依頼**: 品目リスト確定後、slug をオーナーへ渡して Codex で生成する
+   (`area-databook-standards.md` §5)。欠損時はテキストカードに degrade するので急がない。
 
 ## editorial ファイルの型 (AreaEditorial)
 

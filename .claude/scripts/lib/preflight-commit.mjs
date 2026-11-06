@@ -310,7 +310,6 @@ export const PR_GATES = [
         "generate-known-tag-keys.ts",
         "generate-unpublished-blog-slugs.ts",
         "generate-ranking-prominence.ts",
-        "generate-runtime-metric-summaries.ts",
       ]) {
         const r = await tryRun("npx", ["tsx", `scripts/${script}`, "--check"], { cwd: WEB_DIR });
         if (!r.ok) return { ...r, hint: `cd apps/web && npx tsx scripts/${script}` };
@@ -432,6 +431,12 @@ const GATES = [
     name: "ESLint",
     why: "import/order・no-duplicate-imports・set-state-in-effect 等",
     run: (all) => eslintGate(all),
+  },
+  {
+    name: "Image Routes",
+    why: "AI で描く画像は config/image-generation-routes.json の経路だけ。画像 API の直接呼び出しを増やさない",
+    run: () => tryRun("node", [checker("check-image-generation-routes.mjs")]),
+    hint: "Codex の経路を使う。例外は config/image-generation-routes.json の登録と撤去カードが要る",
   },
   {
     name: "Env Registry",

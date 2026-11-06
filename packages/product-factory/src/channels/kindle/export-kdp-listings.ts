@@ -14,8 +14,9 @@ import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 import { assertBookVersion } from "./build-book";
 import { authoredBookSha256 } from "./revision-evidence";
-import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
-import { SITE } from "@stats47/data-configs";
+import { KDP_LISTING_COPY, KDP_LISTINGS } from "../../../../../config/paths.mjs";
+import { datasetPath } from "../../../../../config/datasets.mjs";
+import { renderListingDescription } from "../../../../../.claude/scripts/kdp/lib/kdp-listing-copy.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const OUT = join(REPO_ROOT, KDP_LISTINGS);
@@ -140,8 +141,23 @@ function buildDescription(concept: string): string {
     `統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n` +
     `【データについて】\n` +
     `e-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n` +
-    `基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト ${SITE.domain}（${SITE.name}）でもご覧いただけます。`
+    `基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。`
   );
+}
+
+/** 承認済みの紹介文原稿。新版の免責文は promote-kdp-listing が冒頭に足す。 */
+function readApprovedCopy(id: string): { description: string; keywords: readonly string[] } | null {
+  const copies = JSON.parse(readFileSync(join(REPO_ROOT, KDP_LISTING_COPY), "utf8")).books as Record<string, {
+    status: string; hook: string; points: string[]; forWhom: string[]; keywords: string[]; targetQueries: string[];
+  }>;
+  const copy = copies[id];
+  if (!copy || copy.status === "draft") return null;
+  const quality = JSON.parse(readFileSync(join(REPO_ROOT, datasetPath("kindle.quality")), "utf8")) as {
+    books: { id: string; figures: number; fullTables: number }[];
+  };
+  const facts = quality.books.find((book) => book.id === id);
+  if (!facts) throw new Error(`${id}: kindle-quality.json に実測が無い`);
+  return { description: renderListingDescription(copy, facts), keywords: copy.keywords };
 }
 
 function readExisting(): Record<string, KdpListing> {
@@ -183,6 +199,7 @@ function main(): void {
       throw new Error(`${b.id}: current manuscript/catalog differs from the requested EPUB edition`);
     }
     const prev = existing[b.id];
+    const approvedCopy = readApprovedCopy(b.id);
     listings[b.id] = {
       id: b.id,
       title: b.title,
@@ -199,8 +216,8 @@ function main(): void {
       readingSourceTitle: KDP_READING_SOURCES[b.id]?.title ?? "",
       readingSourceSubtitle: KDP_READING_SOURCES[b.id]?.subtitle ?? null,
       language: "ja",
-      description: b.kdpExclusive?.description ?? buildDescription(b.concept),
-      keywords: [...b.keywords].slice(0, 7),
+      description: approvedCopy?.description ?? b.kdpExclusive?.description ?? buildDescription(b.concept),
+      keywords: [...(approvedCopy?.keywords ?? b.keywords)].slice(0, 7),
       categoryPaths: kdpCategoriesFor(b.id).map((c) => ({ ...c })), // SSOT から生成 (実在検査つき)
       applyDrm: KDP_APPLY_DRM,
       aiDisclosure: {

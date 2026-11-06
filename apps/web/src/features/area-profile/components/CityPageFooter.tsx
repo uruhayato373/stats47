@@ -1,5 +1,5 @@
 import { AdCell } from "@/features/ads";
-import { AreaBannerAd, FurusatoNozeiCard } from "@/features/ads/server";
+import { AreaBannerAd } from "@/features/ads/server";
 
 import { adSlotBox } from "@/lib/ad-placements";
 import {
@@ -41,7 +41,6 @@ export function CityPageFooter({
         activeCityCode={activeCityCode}
       />
       <AreaBannerAd />
-      <FurusatoNozeiCard areaCode={areaCode} position="city-furusato-content" layout="content" />
     </>
   );
 }

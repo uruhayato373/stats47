@@ -5,7 +5,6 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 
 import { AdRow, composeAdRows, isLandscapeBanner } from "@/features/ads";
-import { detectProductKeyword } from "@/features/ads/constants/product-keywords";
 
 import {
   HUB_INCONTENT,
@@ -27,7 +26,6 @@ import {
   RankingPageSupplementCardsSection,
 } from "./RankingPageAsyncSections";
 import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateSection";
-import { RankingPageRakutenNativeSection } from "./RankingPageRakutenNativeSection";
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
 
@@ -76,14 +74,10 @@ export function RankingPageClientShell({
   // (2026-09-16)。中段 native はモバイル=商品軸・デスクトップ=1位県の返礼品、上段 in-content は
   // 描画しない。usedAffiliateAds は据え置き — 出さなかった A8 が右レールへ流れ込まないようにする。
   const isKakeiChousa = (model.originalSurveys ?? []).some((survey) => survey.id === "kakei-chousa");
-  const top1Entry = computeRankingHeaderStats(model.rankingValues ?? []).top3[0] ?? null;
-  const hasProductKeyword = detectProductKeyword(model.rankingName ?? "") !== null;
-  const useRakutenNative = (model.affiliateVertical ?? null) !== null
-    && isKakeiChousa
-    && (top1Entry !== null || hasProductKeyword);
+  const hideAffiliateOnKakei = (model.affiliateVertical ?? null) !== null && isKakeiChousa;
   // 家計調査の品目は段の A8 も出さず AdSense の枠だけにする (読了位置と同じ判断)
   const bodyCells = (cells: typeof midRow) =>
-    useRakutenNative ? cells.filter((cell) => cell.kind === "adsense") : cells;
+    hideAffiliateOnKakei ? cells.filter((cell) => cell.kind === "adsense") : cells;
   const trackingCategory = `ranking-${model.rankingItem.categoryKey ?? "general"}`;
 
   return (
@@ -157,14 +151,7 @@ export function RankingPageClientShell({
         adRowFooter: bodyCells(footerRow).length > 0 ? (
           <AdRow key="ad-row-footer" cells={bodyCells(footerRow)} position="ranking-row-2" trackingCategory={trackingCategory} />
         ) : null,
-        nativeAffiliate: useRakutenNative ? (
-          <RankingPageRakutenNativeSection
-            key="native-affiliate"
-            rankingName={model.rankingName}
-            top1={top1Entry ? { areaCode: top1Entry.areaCode, areaName: top1Entry.areaName } : null}
-            hasProductKeyword={hasProductKeyword}
-          />
-        ) : (
+        nativeAffiliate: hideAffiliateOnKakei ? null : (
           <RankingPageNativeAffiliateSection
             key="native-affiliate"
             banners={nativeAffiliateBanners}

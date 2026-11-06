@@ -216,6 +216,22 @@
       "note": "1 で開発サーバーのアフィリエイト在庫を全ての意図軸の代わりの広告に置き換え、広告枠の配置をローカルで確かめる (npm run dev:web:ad-preview)。本番のビルドでは働かない"
     },
     {
+      "name": "BLOG_PREVIEW_R2_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "npm run blog:preview が開発サーバーへ渡す。下書きを重ねるサーバーの URL で、R2 の読み先をここへ向ける。本番には無い"
+    },
+    {
+      "name": "BLOG_PREVIEW_SLUG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "npm run blog:preview が開発サーバーへ渡す。公開記事の一覧に無くても確認できる下書きの slug。本番には無い"
+    },
+    {
       "name": "ANALYZE",
       "visibility": "server",
       "contexts": [
@@ -1199,20 +1215,6 @@
     },
     {
       "name": "R2_SECRET_ACCESS_KEY",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "RAKUTEN_ACCESS_KEY",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "RAKUTEN_APP_ID",
       "visibility": "server",
       "contexts": [
         "process"

@@ -7,7 +7,6 @@ import {
   isRegionalFoodCultureTitle,
   resolveBlogBannerInput,
 } from "../blog-affiliate-policy";
-import { resolveBlogRakutenPlacement } from "../blog-rakuten-placement";
 
 describe("BLOG_AFFILIATE_POLICY", () => {
   it("blocks unrelated furusato ads on the golf article despite kakei provenance", () => {
@@ -43,17 +42,11 @@ describe("BLOG_AFFILIATE_POLICY", () => {
 describe("resolveBlogBannerInput", () => {
   const kakei = { surveyIds: ["kakei-chousa"], tagKeys: ["家計調査", "ビール"] };
 
-  it("家計調査の品目記事は A8 バナーを出さず、楽天の商品カードは残す", () => {
+  it("家計調査の品目記事は A8 バナーを出さない", () => {
     const title = "ビールが一番売れる月は7月ではない?";
     const bannerInput = resolveBlogBannerInput("beer-peak-month-july-to-december", kakei, { title });
     expect(resolveContentVertical(bannerInput).vertical).toBeNull();
     expect(resolveContentVerticalChain(bannerInput)).toEqual({ blocked: true, steps: [] });
-    // 楽天カードは従来の解決 (furusato) で判定するので、品目の商品カードが出る
-    const placement = resolveBlogRakutenPlacement({
-      title,
-      vertical: resolveContentVertical(applyBlogAffiliatePolicy("beer-peak-month-july-to-december", kakei)).vertical,
-    });
-    expect(placement?.kind).toBe("items");
   });
 
   it("地域の食卓・特産品の記事は furusato のまま", () => {
@@ -68,11 +61,9 @@ describe("resolveBlogBannerInput", () => {
     expect(resolveContentVertical(byTag)).toEqual(resolveContentVertical({ surveyIds: [], tagKeys: ["ふるさと納税"] }));
   });
 
-  it("地域判定は楽天の県別返礼品カードと同じ関数を使う", () => {
+  it("単一県の食卓・特産品の記事を判定する", () => {
     expect(isRegionalFoodCultureTitle("秋田の食卓｜さんま・みそが日本一")).toBe(true);
     expect(isRegionalFoodCultureTitle("東北の食卓はなぜ塩辛い")).toBe(false); // 単一県でない
     expect(isRegionalFoodCultureTitle("秋田のエアコン購入")).toBe(false); // 食卓・特産品でない
-    const placement = resolveBlogRakutenPlacement({ title: "秋田の食卓｜さんま・みそが日本一", vertical: "furusato" });
-    expect(placement).toEqual({ kind: "furusato", areaCode: "05000" });
   });
 });

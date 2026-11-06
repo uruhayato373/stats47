@@ -44,6 +44,6 @@ export const elderlyPopulationRatio: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "65歳以上人口割合ランキング市区町村【2020年】｜1位群馬県 南牧村（65.24％）",
-  "seoDescription": "2020年の65歳以上人口割合の市区町村別ランキング。1位群馬県 南牧村（65.24％）、最下位静岡県 浜松市 浜名区（0％）で地図やグラフで市区町村を比較。",
+  "seoDescription": "2020年の65歳以上人口割合の市区町村別ランキング。1位群馬県 南牧村（65.24％）、最下位福島県 大熊町（10.27％）で地図やグラフで市区町村を比較。",
   "isActive": true,
 };

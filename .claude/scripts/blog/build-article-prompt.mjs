@@ -10,12 +10,13 @@
  * 数値は data/*.json からしか読まない (プロンプト側で丸めたり補完したりしない)。
  *
  * Usage:
- *   node .claude/scripts/blog/build-article-prompt.mjs --slug <slug> --archetype <F|G|E>
+ *   node .claude/scripts/blog/build-article-prompt.mjs --slug <slug> --archetype <F|G|E|Q>
  *     --title-hint "<参考の題>"
  *     --links "/areas/20000|長野県のデータ,/themes/population-dynamics|人口動態のテーマ"
  *     [--source-links "moving-in-excess-rate|転入超過率ランキング"]
  *     [--figures "file.svg|alt,file2.svg|alt2"]   図の順と説明 (省略時は data/ の SVG を名前順)
  *     [--chars 2800-3400] [--base-dir contents/blog]
+ *     [--materials <file>]   問いへの結論と注意点 (型 Q は analysis-draft.ts が渡す)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -39,6 +40,7 @@ const SOURCE_LINKS = getArg("--source-links", "");
 const FIGURES = getArg("--figures", "");
 const CHARS = getArg("--chars", "2800-3400");
 const BASE_DIR = getArg("--base-dir", "contents/blog");
+const MATERIALS = getArg("--materials", "");
 if (!SLUG || !ARCHETYPE) {
   console.error("usage: --slug <slug> --archetype <F|G|E> --title-hint <t> --links <a|b,...> [--source-links ...] [--figures ...] [--chars 2800-3400]");
   process.exit(1);
@@ -56,9 +58,12 @@ const ARCHETYPE_GUIDE = {
 最後に「この主題を追うならどこを見ればよいか」へ読者を送ります。
 指標を並べるだけにせず、指標どうしの食い違い (ある指標で上位の県が別の指標では下位、など) を
 必ず 1 つは取り上げて、単一のランキングでは見えないことを示します。`,
+  Q: `1 つの問いに、分析の結論で答えます。冒頭の 3 段落で答えを先に書き、続く節で根拠を図ごとに説明します。
+結論にある限定 (対象の市区町村の範囲・期間・指標の定義) を省きません。個々の町の変化は揺れが大きいので、
+順位にせず、区分にまとめた集団の傾向として書きます。「データについて」の節で期間のずれと対象の偏りを説明します。`,
 };
 if (!ARCHETYPE_GUIDE[ARCHETYPE]) {
-  console.error(`[error] 未対応の型: ${ARCHETYPE} (F/G/E のみ)`);
+  console.error(`[error] 未対応の型: ${ARCHETYPE} (F/G/E/Q のみ)`);
   process.exit(1);
 }
 
@@ -100,11 +105,20 @@ function renderData() {
       out.push(`- 全${rows.length}件:`);
       rows.forEach((r, i) => {
         const rank = r.rank ?? i + 1;
+        if (r.areaName === undefined && r.pref === undefined) {
+          // 分析の区分: 順位ではなく、区分の名前と系列の値を並べる
+          const { label, unit: rowUnit, ...values } = r;
+          out.push(`${label} ${Object.entries(values).map(([k, v]) => `${k}=${fmt(v)}`).join(" / ")} (${rowUnit ?? ""})`);
+          return;
+        }
         out.push(`${rank}位 ${r.areaName ?? r.pref} ${fmt(r.value)}${unit}`);
       });
     } else if (Array.isArray(j.points)) {
       out.push(`- 全${j.points.length}点 (x=${j.xLabel} / y=${j.yLabel}):`);
       j.points.forEach((p) => out.push(`${p.label} x=${fmt(p.x)} y=${fmt(p.y)}`));
+    } else {
+      // 分析の結果の要約: 形を崩さずそのまま渡す
+      out.push("```json", JSON.stringify(j, null, 2), "```");
     }
     out.push("");
   }
@@ -170,7 +184,7 @@ const prompt = `あなたは日本の都道府県統計サイト stats47.jp の�
 
 ${ARCHETYPE_GUIDE[ARCHETYPE]}
 
-# 実データ (これが唯一の数値の出どころ)
+${MATERIALS ? `${fs.readFileSync(MATERIALS, "utf8")}\n` : ""}# 実データ (これが唯一の数値の出どころ)
 
 ${renderData()}
 # 本文に必ず含めるもの
@@ -183,7 +197,7 @@ ${
   sourceLinks.length
     ? `## ランキングへの導線 (図の直後に 1 枚ずつ。同じ href を 2 枚以上置きません)
 
-${sourceLinks.map((s) => `\`<source-link href="/ranking/${s.href}">${s.label}</source-link>\``).join("\n")}
+${sourceLinks.map((s) => `\`<source-link href="${s.href.startsWith("/") ? s.href : `/ranking/${s.href}`}">${s.label}</source-link>\``).join("\n")}
 `
     : `## ランキングカードは使いません
 

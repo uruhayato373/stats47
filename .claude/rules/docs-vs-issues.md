@@ -85,7 +85,6 @@ skill、agent、prompt、READMEへ複製しない。
 | Cloudflare 日次 usage 閾値違反 | `cloudflare-alert,auto-generated` | `.github/workflows/cloudflare-usage-daily.yml` |
 | PSI 週次計測の閾値違反 | `psi-alert,auto-generated` | `.github/workflows/fetch-metrics-weekly.yml` の psi job |
 | OGP/カード/note 画像の生成漏れ (自動修復後も残存) | `ogp-alert,auto-generated` | `.github/workflows/quality-suite-weekly.yml` の ogp-images job |
-| 楽天カタログ同期の失敗 | `rakuten-alert,auto-generated` | `.github/workflows/sync-rakuten-catalog.yml` |
 | テーマチャートの e-Stat 取得失敗 | `theme-alert,auto-generated` | `.github/workflows/quality-suite-weekly.yml` の theme job |
 | e-Stat → R2 更新の失敗 | `data-refresh-alert,auto-generated` | `.github/workflows/data-refresh.yml` |
 | 相関 snapshot 再計算の失敗 | `correlation-alert,auto-generated` | `.github/workflows/correlation-refresh.yml` |

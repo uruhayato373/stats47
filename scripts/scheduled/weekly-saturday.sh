@@ -22,7 +22,7 @@ SCRIPTS="$PROJECT_DIR/scripts/scheduled"
 LOCK="$LOG_DIR/weekly-saturday.lock"
 # 監査が書く記録 (旧 workflow が git add していたもの)。clone は毎回 origin/develop に戻すので、ここにある差分は監査の分だけ
 AUDIT_RECORDS=(
-  data/blog data/site data/provenance data/ranking data/data-quality data/estat data/metrics data/surveys data/note data/ci
+  data/blog data/site data/provenance data/ranking data/data-quality data/estat data/metrics data/surveys data/note data/products/kdp-search-ranks data/ci
   contents/blog .claude/todo/backlog.md .claude/config/survey-taxonomy-ratchet.json
   packages/data-configs/src/prominence/ranking-prominence.generated.ts
 )

@@ -262,6 +262,43 @@ export function findQueryCandidates({ issues, weeks }) {
 }
 
 /** RFC 4180 の最小の CSV 読み (GSC の pages.csv は引用符付きの値を含みうる) */
+/**
+ * 図の配信先のうち、まだ載っていないものと、図の台帳と配信先の台帳の状態がずれたものを返す。
+ * 公開の状態の正本は配信先の台帳なので、ここでは比べるだけで直さない。
+ * ページが公開中でも図が載っているとは限らないため、ページは「公開済みと書いたのにページが無い」だけをずれとする。
+ */
+export function listFigureDestinations({ figures, analyses, posts, pages, drafts = new Map() }) {
+  const issueOf = new Map(analyses.map((a) => [a.id, a.issue]));
+  const postOf = new Map(posts.map((p) => [p.id, p]));
+  return figures.flatMap((figure) =>
+    figure.destinations.flatMap((d) => {
+      if (d.slug !== undefined) {
+        const actual = drafts.get(d.slug) ?? "下書きなし";
+        return [{ figure: figure.id, issue: issueOf.get(figure.analysis) ?? null, channel: d.channel, target: `blog:${d.slug}`, status: d.status, actual, drift: actual === "下書きなし" }];
+      }
+      const actual = d.postId === undefined ? (pages.get(d.page)?.published ? "公開中" : "なし") : (postOf.get(d.postId)?.status ?? "なし");
+      const placed = d.status === "published";
+      const drift =
+        d.postId === undefined
+          ? placed && actual === "なし"
+          : placed !== (actual === "posted") || actual === "なし" || actual === "deleted";
+      if (placed && !drift) return [];
+      return [{ figure: figure.id, issue: issueOf.get(figure.analysis) ?? null, channel: d.channel, target: d.page ?? `post:${d.postId}`, status: d.status, actual, drift }];
+    }),
+  );
+}
+
+/**
+ * 下書きが公開までの何待ちかを返す。先に済ませるものから順に見る。
+ * 背景画像は別の工程なので、本文の審査が通ったあとの待ちとして数える。
+ */
+export function classifyDraft({ hasArticle, published, verdict, hasBackground }) {
+  if (!hasArticle) return "執筆待ち";
+  if (verdict !== "PASS") return "レビュー待ち";
+  if (!hasBackground) return "背景待ち";
+  return published ? "公開処理中" : "公開待ち";
+}
+
 export function parseCsv(text) {
   const rows = [];
   let row = [];

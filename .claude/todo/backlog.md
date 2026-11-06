@@ -136,7 +136,86 @@ updated: 2026-11-01
 - **禁止**: 価格を変えない。新しいテーマを足さない。N03・Geoshape の境界を売る地図に使わない。note への差し替えは人手のログインとオーナー承認を経る。
 - **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。売る地図の境界の出どころが README と `LICENSE-ja.txt` に書かれている。
 
+### [KDP-OLD-EDITIONS-UNPUBLISH-01] 出版停止した S1 の旧版 9 冊が Amazon の商品ページから消えたことを確かめる
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-06] [期日:2026-11-09] [領域:商品]
+
+- **済み (2026-11-06)**: `kdp-unpublish.mjs --all-previous --commit` で 9 冊を出版停止した (K-S1-01 B0HF17SQ9N・02 B0HF1N51T8・05 B0HF356WR9・07 B0HDYG6DLX・08 B0HDYLY7WM・09 B0HDYB4CBV・10 B0HDZ45H6C・11 B0HH88J9YH・12 B0HG55D649)。本棚の読み直しで 9 冊すべて「下書き」、新版 9 冊は「販売中」。台帳は `unpublishedAt` と `previous_unpublished` を記録済み。
+- **未確認**: 直後 (07:16 JST) の商品ページは 9 冊とも HTTP 200 のまま。KDP ヘルプ (https://kdp.amazon.com/en_US/help/topic/G4QJH4ENN4FZRFMP、2026-11-06 確認) は出版停止の反映に最大 72 時間かかるとしている。
+- **本棚の整理 (2026-11-06 済み)**: 旧版 9 冊・取り下げ 10 冊・空の下書き `A3NM35CIRM1ZDQ` をアーカイブした (公開歴のある本は削除できない)。出版停止済みの本は週次の本棚確認の対象から外した (`marketplace-status.mjs`・`kdp-batch.mjs`)。
+- **検証**: 9 つの ASIN を `curl -sL -o /dev/null -w '%{http_code}' -A 'Mozilla/5.0' https://www.amazon.co.jp/dp/<ASIN>` で確かめる。
+- **期限後の判断**: 2026-11-09 に 404 または購入ボタンなしならこのカードを消す。購入できるままなら、本棚の状態を読み直し、KDP サポートへの問い合わせをオーナーに諮る。
+- **完了条件**: 9 つの商品ページで購入できないことを確認した。
+
+### [KDP-LISTING-COPY-01] 販売中 13 冊の紹介文とキーワードの改善案を承認し、KDP へ反映して効果を測る
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [期日:2026-11-09] [領域:商品]
+
+- **事実 (2026-11-06)**: K-S1-01〜12 の紹介文は `export-kdp-listings.ts` の `buildDescription` が `concept` に同じ定型文を足したもの。カタログの `design.readerProblem` は紹介文に使っていない。機械の検査は社内語の混入・短すぎ・e-Stat の言及だけで、訴求は見ていない。K-S1-13 だけが `kdpExclusive.description` で読者の課題から書いてある。
+- **検索の実測 (2026-11-06・ブラウザ・電子書籍カテゴリ・1 回の観測)**: 30 語の 1 ページ目に出たのは 5 語 (家計調査 K-S1-02 8 位、都道府県 年収 K-S1-01 9 位、教育費 K-S1-05 9 位、地方財政と自治体 財政 K-S1-06 14 位)。「都道府県 統計」「47都道府県」「人口減少」「健康寿命」「インバウンド」「移住」には出ない。
+- **[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える**: 検証は上の 30 語の再測定と販売台帳の 4 週の注文。KDP の検索が何を見るかの公式の仕様は未確認。
+- **済み (2026-11-06)**: 原稿の正本 `data/products/kdp-listing-copy.json`・監査 `npm run kdp:listing-copy -- check` (13 冊合格)・入稿前の検査 (`kdp-preflight`)・検索順位の週次記録 (基準 `data/products/kdp-search-ranks/2026-11-06.json`) を作った。原稿は別エージェントが EPUB と 2 回照合し、1 回目 26 件・2 回目 2 件の指摘を直した。
+- **やること**: ① (済み 2026-11-06: オーナー承認、13 冊を台帳へ写し `kdp-update-listing-copy.mjs` で KDP へ提出) ② レビュー後に `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify` で読み直して `reflected` にする (2026-11-09 に実行) ③ 4 週後に検索 39 語の順位と注文を基準と比べる ④ K-S1-13 の表紙の縮小時の視認性と、K-S1-01 の表紙「6つ」と本文の章数を確かめる ⑤ 紹介文の悩みの文に本文で扱わない語が無いかを機械で見つける検査を足す (「移住」「電気代」など、本文に 0 件か否定の文脈だけの語が 1 回目の指摘の多くを占めた)。
+- **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
+- **完了条件**: 12 冊の紹介文とキーワードが KDP に反映され、30 語の再測定と 4 週の注文が記録された。
+
+### [KDP-LISTING-WIRING-01] 紹介文の検査を CI と公開の経路につなぎ、表紙の規則を機械で見る
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [領域:商品]
+
+- **事実 (2026-11-06)**: `kdp:test` は PR の CI で動くが、`kdp:listing-copy check` はどの CI にも入っていない。`check` は原稿から作った紹介文を見るので、台帳の `description`・`keywords` が原稿とずれても止まらない。新刊の `kdp-publish --commit` は原稿の有無と別エージェントの照合を要求しない (`kdp-preflight` は禁止事項だけ)。表紙の検査は寸法と文字の照合だけで、縮小時の読みやすさと「47都道府県」の見え方は見ていない。
+- **やること**: ① `check` を PR の CI へ入れ、台帳と原稿の一致も見る ② 販売中の本と新刊の公開に原稿・照合の記録を必須にする ③ 表紙の縮小確認 (検索結果の大きさ) を規約と検査へ足す ④ 表紙の「47都道府県」の扱いをオーナーと決めてから、見本 1 冊 → 全冊の順で Codex で作り直す。
+- **完了条件**: 台帳を手で変えると CI が落ち、原稿の無い本は公開で止まり、表紙の縮小確認の記録が残る。
+
+### [IMAGE-ROUTES-CATEGORY-CODEX-01] カテゴリ画像の生成を Gemini から Codex へ移し、旧スクリプトを撤去する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-image-generation-routes.mjs] [起票:2026-11-06] [領域:サイト]
+
+- **事実**: `generate-category-images.ts` と `generate-category-heroes.ts` が Gemini の画像 API を直接呼ぶ。`config/image-generation-routes.json` の `legacy` に載せて、新しい直接呼び出しだけを止めている。
+- **やること**: 次にカテゴリ画像を作るときに Codex の経路を登録し、2 本を撤去して `legacy` から外す。既存の画像は作り直さない。
+- **完了条件**: 2 本が消え、`legacy` が `BLOG-BG-PIPELINE-CONSOLIDATE-01` の分だけになった。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [H01-VACANT-ARTICLE-PUBLISH-01] H01 の空き家の記事を背景画像つきで公開し、図の台帳と X の下書きを進める
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
+
+- **起点**: 記事 `vacant-houses-population-decline` は `contents/blog` に `published: false` で入っていて、本文は審査 PASS、残りは背景画像だけ (`issues:figures` で背景待ち)。2026-11-06 は Codex が社内プロキシの 503 で 5 回とも止まった。
+- **次**: ① `npm run blog-images:codex -- request-article --slug vacant-houses-population-decline --article contents/blog/vacant-houses-population-decline/article.md` のあと Codex で生成して `ingest-article` で取り込む (Gemini へ切り替えない) ② オーナーが下書き全文を確認する ③ `published: true` にして develop へ push する ④ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ⑤ X の下書き 1196 をオーナーの承認へ回す。
+- **完了条件**: 記事が本番で公開され、`issues:figures` の H01 の記事の行が消え、X の投稿の状態が台帳と一致している。
+
+### [BLOG-AD-ROW-HYDRATION-01] ブログの本文の広告の段が段落の中に入り、hydration に失敗する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:サイト]
+
+- **起点**: 開発サーバーで公開済みの `/blog/vacant-house-crisis` を開くと、`<ad-row>` の `<div>` が `<p>` の中に入り `In HTML, <div> cannot be a descendant of <p>` が出る。2026-11-03 の広告の段の導入以降、段を差し込む全記事に当てはまる見込み (確認したのは公開済み 1 本と下書き 1 本)。
+- **原因**: `apps/web/src/features/blog/components/md-content.tsx` の `p` の判定 `hasBlockElement` の一覧に `ad-row` が無い。
+- **次**: 一覧に `ad-row` を足し、本文の広告の段で hydration エラーが出ないことをテストで固定する。
+- **完了条件**: 広告の段がある記事で hydration エラーが出ず、段の表示位置が変わらない。
+
+### [WEB-REGION-TEST-WIN-PATH-01] テーマ・地域のページの比較検査が Windows のパス区切りで落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:管理]
+
+- **起点**: `apps/web/src/__tests__/region-page-no-comparison.test.ts` の 3 件が Windows で失敗する。実際は `app\areas\page.tsx`、期待は `app/areas/page.tsx` で、`relative` の結果を `/` にそろえていない。
+- **次**: 検査の中でパスを `/` 区切りへそろえる。
+- **完了条件**: Windows で `npm run test -w web` のこの 3 件が通る。
+
+### [STRATEGY-ISSUE-MAP-PV-CHART-01] 広告の効率が出たら、事業イシューマップに月 ¥1 万へ要る PV のグラフを足す
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run test -w apps/admin] [起票:2026-11-05] [領域:戦略]
+
+- **起点**: `/strategy/issue-map` は KPI `site-pageviews`・`ad-yield` から計算できるときだけグラフを載せる。2026-11-05 時点の `data/measurement-cycle/latest.json` は `ad-yield` の `value` が `null`（再開後 4 週のベースライン期間）で計算できないので、画面に載せていない。
+- **次**: `ad-yield` に値が出たら、`site-pageviews` と合わせて必要 PV を `apps/admin/lib/issue-map.ts` で計算し、画面に足す。効率の値はマップに写さず KPI から読む。
+- **完了条件**: `ad-yield` が値を持つときだけグラフが出て、`null` のときは出ないことをテストで固定している。
+
+### [ADMIN-AGENT-MODELS-WIN-PATH-01] 管理画面の agent-models テストが Windows のパス区切りで落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w apps/admin] [起票:2026-11-05] [領域:管理]
+
+- **起点**: `apps/admin/tests/unit/agent-models.test.ts` の「frontmatter の無いファイルは画面を落とさず errors に載せる」が Windows で失敗する。期待は `.claude/agents/broken.md`、実際は `.claude\agents\broken.md`（2026-11-05 に develop の `4d1add868` で確認）。
+- **次**: `agentModelCatalog` が返す `file` を `/` 区切りにそろえる。
+- **完了条件**: Windows で `npm run test -w apps/admin` が通る。
+
+### [NOTE-PLAYWRIGHT-DIALOG-CRASH-01] note 公開中の Playwright 起動スクリプトがダイアログ処理の競合でブラウザごと落ちる
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-05] [領域:商品]
+
+- **証拠**: 2026-11-05 の note 公開で、`Page.handleJavaScriptDialog: No dialog is showing` の未処理例外によりブラウザが 1 回終了した。ログイン切れではなく、保存済みの下書きから再開して重複公開はなかった。
+- **次**: ① 起動スクリプトでこの例外だけを無視し、ほかの例外は落とす ② 公開の手順で commit と push を `&&` でつなぎ、pre-commit で止まったときに push へ進まないようにする。
+- **オーナー作業**: 題名なしの下書き `n0ae79d01a60b` と `nbb8ef52bd1ff` の削除。
+- **完了条件**: 同じ例外で落ちない起動スクリプトがリポジトリにあり、手順の commit 失敗が公開の報告に現れる。
 
 ### [ADMIN-COMPETITOR-VIEW-01] 競合調査の結果を管理画面で見られるようにする
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:商品]
@@ -162,6 +241,7 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:coverage] [起票:2026-11-05] [領域:商品]
 
 - **起点**: `npm run issues:coverage`（2026-W40〜W43 の GSC と突き合わせ）。公開 4,372 ページのうち、紐づかないが読まれている 1,550
+- **進み具合 (2026-11-05)**: 検索語と読まれているページから 20 本、白書 (NotebookLM の引用つき) から 6 本を足し、重なる 4 本は `C12`・`D13`・`F17`・`B12` へ検索語と根拠を移した。問いは 204 本、読まれているのに紐づかないページは 1,502。検索語の残りは `npm run issues:candidates` で見る。
 - **次**: ① 読まれているのに紐づかないページの上位から、GSC の検索語を `queries` に持つ小さな問いを足す（最大のまとまりは家計調査の品目で、大きな問い K01〜K03 の下に入る） ② 上からの大きな問いを NotebookLM で白書から拾う（クラウドの環境は gh の認証が無く呼べないので Mac で） ③ 読まれていない 1,808 ページ（ranking 890・municipality-ranking 643・blog 226 ほか）を、統合・転送・検索除外・そのままのどれにするか本人が決める。自動では消さない
 
 ### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
@@ -548,6 +628,7 @@ updated: 2026-11-01
   2. 実装: 共通の案件を本文の中段・下段の広告の段に出す解決を足す (`resolve-affiliate-ad.ts`。vertical の解決は文脈の案件に残す)。広告の段の部品は 300×250 を広い画面で横 3 枠・モバイルで 1 枠にする。サイトの規則「枠同士を隣り合わせにしない」(配置の台帳と検査) に、本文の広告の段を例外として足す。
   3. 試験 (2 週間): 調査ハブとテーマのページだけ。中段を AdSense の横 3 枠、下段を共通の案件の横 3 枠にする。AdSense は 1,000 PV あたり収益を試験の前後で比べ、上がらなければ元に戻す。共通の案件はクリック率を先に見て、成約は 4〜8 週に延ばして確かめる。開始前に必要な表示・クリック数を計算して記録する。
 - **進捗 (2026-11-03)**: 「共通 = 対象者が広く、気軽に始められる」を §3.2 に書いた。共通の案件の一覧 (`generic-affiliate.ts`) を楽天カード (楽天アフィリエイト・1,500 円) と TOSSY だけにし、調査ハブとテーマの PR の列を共通の案件の横 3 枠に替えた (commit 803c1aaa0・develop。手元の画面で 2 枠・モバイル 1 枠を確認)。提携の申請: もしもの楽天カード (2,800 円)・A8 の SBI新生銀行・Audible・エポスカード。三井住友カード（NL）は審査中。**広告の台帳の R2 への公開 (`publish-affiliate-ads.yml`) は本番の確認前なので取り消した** — `affiliate-ads-data.ts` を develop へ push すると自動で走るので、リリースのときに走らせる。
+- **2026-11-06 オーナー判断**: 楽天市場の商品カードと返礼品カード、日次同期、楽天 API の取得を試験の途中で撤去した (2 か月 40 クリック・注文 0 件)。試験の前後比較では、この変更が混ざる。楽天カードの案件は残す。
 - **進捗 (11-03 夕)**: 本文の広告を広告の段 (`AdRow`) に統一 (テーマ・ランキング・ブログ・トップ・カテゴリ・市区町村のハブ)。右レールの AdSense は本文の横のときだけ。台帳 `config/ads/placements.json`。楽天カードは R2 反映済み。デプロイは PR #1214。
 - **残り**: ① 申請中の 6 案件が通ったら段の PR の枠を埋める。② 段は 11-03 に残りのページへ広げ、モバイルの AdSense 0 のページは解消した。モバイルの PR が無いページをどうするかは `AFF-MOBILE-PR-GAP-01`、配置の週次の撮影は `AD-LAYOUT-WEEKLY-CAPTURE-01`。③ 土曜の記録で前後を比べ、続けるか戻すかを決める。必要数: PR は表示約 24,000 回 (クリック 30 回。直近 4 週の CTR 0.13%・週約 8,300 回で約 3 週)、AdSense は 1,000 PV あたり収益 (W43 ¥21) を 4 週平均で比べる。
 - **停止条件・禁止**: 保険の見積もり・相談は出さない (`AFF-HEAVY-FINANCE-STOP-01`)。不安を煽る訴求・誤解を招く案件は使わない。複数の枠の案件を同時に入れ替えない。本番への反映 (デプロイ・R2) はオーナーの承認後。
@@ -993,6 +1074,14 @@ updated: 2026-11-01
   4. 新しい図が型から外れたら止める検査を全媒体へ広げる。
 - **止まる場面**: 型の見本の確認 / main へのデプロイ。
 - **進み具合の記録**: 2026-11-04 に散布図 183 枚を反映。2026-11-05 に note のランキング図の型を入れた。見本はオーナーが確認した。
+- **配色の台帳 (2026-11-05)**: 連続か 5 段階か・一方向か発散かを値から決め、`data/ranking/color-policies/policies.json` に指標 × 粒度で持つようにした (規則は `metric-config-standards.md`「配色の台帳」)。図の生成はこの結合を読む。サイトの地図へ届くのは main マージ後に `item.json` を作り直してから。main へのマージは未実施。
+
+### [MUNI-RANKING-DENSITY-MISSING-01] 有効な指標 population-density-habitable に公開ランキングが無い
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-06] [領域:サイト]
+
+- **症状**: `isActive: true` で `app/stats/<key>/cities.json` は 200 なのに、`app/municipalities/ranking/<key>/item.json` と `app/ranking/<key>/item.json` はどちらも 404 (2026-11-06 実測)。
+- **未確認**: 生成処理の対象から外れた原因。ページの URL の応答も未確認。
+- **完了の判定**: 原因が分かり、公開するか無効にするかが決まって、指標の状態と R2 が一致する。
 
 ### [NOTE-FIGURE-ROLLOUT-01] 公開中の note 記事の図を共通の型へ差し替える
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:商品]
@@ -1337,7 +1426,7 @@ updated: 2026-11-01
 - **決定 (2026-11-04 オーナー)**: 既刊は登録せず、KDP セレクト専用の新作 1 冊 (K-S1-13。原稿は `.local/kindle-private/K-S1-13/` で repo に入れない) で 70% の効果を確かめる。本の組み立ては `freshFile` に repo の外の相対パスを渡せば読める。
 - **進捗 (2026-11-04)**: K-S1-13『住む県の選び方 — 統計で比べる5つの条件』を ¥500・70%・KDP セレクト登録ありで KDP の審査へ提出した (draftId A1AX2129DSG4I6、本棚はレビュー中)。原稿は `packages/product-factory/.local/kindle-private/K-S1-13/`、本は R2 の暗号化保全 (revision d60ed0e8069a929a)。
 - **紹介文の更新が要る (2026-11-04)**: 審査へ出した紹介文に「国・自治体や e-Stat の公認・推奨を示すものではありません」が無かった (data-provenance-standards の要求)。台帳とカタログは直したので、販売開始後に KDP の紹介文を更新する。カタログの変更で authoredSha が r8 と変わるので、組み立て直し (受領証・保全も) が要る。
-- **次**: ① 本棚の「販売中」と ASIN を確かめる ② 売上と KENP を土曜の記録で読み、35% の既刊と比べる。90 日の自動更新の既定は未確認なので、期限前に KDP の本棚で確かめる 原稿の控えは Drive の `stats47/Kindle原稿/K-S1-13/` にある。KDP の管理画面の規約を確かめる。`kdp-form.mjs` の登録は「人手確認推奨」のままで、自動の登録は実装を確かめていない。
+- **次**: ① (済み 2026-11-06: 本棚は販売中、ASIN B0HQBGV4RD。上の紹介文の更新はここから着手できる) ② 売上と KENP を土曜の記録で読み、35% の既刊と比べる。90 日の自動更新の既定は未確認なので、期限前に KDP の本棚で確かめる 原稿の控えは Drive の `stats47/Kindle原稿/K-S1-13/` にある。KDP の管理画面の規約を確かめる。`kdp-form.mjs` の登録は「人手確認推奨」のままで、自動の登録は実装を確かめていない。
 - **完了条件**: 35% の原因が公式の条件と台帳の設定で説明され、変えるかどうかをオーナーが決めた。
 
 ### [AREA-TOC-MOBILE-01] 県ページの目次をスマホでも本文上部に出すか、16 項目をどう見せるかを決める
@@ -2975,9 +3064,6 @@ updated: 2026-11-01
   - 代表品目が 3 品目以上登録された県が 30 県以上ある (未登録の県は県名だけの検索で 1 店 1 件)。
   - 表の契約テストと選び方の単体テストが CI で動き、直す前の実装で落ちることを確認済み。
   - 週次の要約が `data/affiliate/` に 1 回以上記録され、週次メトリクス Issue に 1 行出ている。
-- **統合 (2026-10-26 オーナー判断): `AD-SAME-SHOP-DEDUP-01`** 1 ページに同じ店の楽天商品が並ぶのを抑える
-  - **次**: 楽天商品カードの選定に「1 ページ 1 店舗あたり上限」を入れる。上限値は現状の分布を測ってから決める。
-  - **完了条件**: 週次 page-quality の同一店舗重複が 0 ページ。広告のクリック計測 (`affiliate_vertical`) を壊さない。
 
 ### [UI-CHART-TEXT-LOOP-01] チャートの文字のはみ出し・重なりを座標で検出し、起票から修正・本番確認までのループに乗せる
 
@@ -3186,18 +3272,6 @@ updated: 2026-11-01
   ブロックリスト該当案件、クリックを促す表現は禁止。note 記事の更新は outward-facing なので実行前にオーナー承認を得る。
 - **完了条件**: ①の結果を証拠付きで記録する。分離できる場合はパイロット 1 本が公開済みで観測 ID が起票されていること、
   分離できない場合は不採用の判断を `docs/00_プロジェクト管理/02_収益化戦略.md` へ 1 行で反映していること。
-
-### [AFF-RAKUTEN-FIRST-01] 家計調査ページで楽天商品カードを native 枠より上に出し、計測を分離する
-
-タグ: [UI・UX] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-03] [期日:2026-10-31] [領域:アフィリエイト]
-
-- **owner**: ranking-ui-manager / affiliate-manager
-- **なぜ**: 家計調査の品目ランキングの読者に最も合うのは品目一致の楽天商品カードだが、右レールの末尾 (`RakutenItemsCard`) では GA4 で `blog-sidebar` / `ranking-sidebar` に混ざり効果を分離できない。
-- **現在地**: PR963 で公開し、計測定義の切替は 2026-09-13T05:02:32Z。固定28日baselineは `data/affiliate/affiliate-placement-baseline-2026-09-08.json`。
-- **次**: `rakuten-sidebar` のpage/device別計測を確認し、未取得なら商品在庫・DOM表示・GA4送信を切り分ける。明示日付の確定した14日以上の非重複窓で表示/PV・商品クリックを比較する (GA4のdays指定は当日を含むinclusive窓)。楽天成果レポート未取得の間は収益増と判定せず、直前のPR945の影響と混在するため因果効果は断定しない。
-- **未完了**: 「楽天市場で探す」は通常検索URLのまま (affiliate_clickから除外済み)。収益化するには楽天公式リンク作成で発行した検索リンクを取得し、生成URLを改変せず採用する。
-- **停止条件**: 取得失敗・他県混入・PR/計測欠落があれば担当へ修正を引き渡す。収益化されていない通常検索リンクを成果クリックに含めない。
-- **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が native 枠と比較できる。
 
 ### [PREFECTURE-DEVIATION-S5-01] 『47都道府県の偏差値』の一次資料候補25件をmetric/theme/ranking候補へ展開する
 
@@ -3440,13 +3514,6 @@ updated: 2026-11-01
 - **次**: git 内の `data/estat/ssds-candidates.json` を catalog の `index/tables/` から再生成する形に置き換え、
   find-metrics に「未登録の候補」を引ける索引を足す。読み手を `git grep ssds-candidates` で洗い出してから進める。
 - **完了条件**: `ssds-candidates.json` が catalog 派生の生成物になり (手編集の入口が無い)、find-metrics で未登録候補が 1 件以上引ける。
-
-### [AFF-RANKING-RAKUTEN-NATIVE-01] 家計調査系 ranking の本文 A8 を外し、中段を楽天カード (モバイル rakuten-native / デスクトップ furusato-native) へ置換する
-
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:アフィリエイト]
-
-- 2026-10 月次計画で improvements から降格。再開条件: まとまりのデプロイでオーナーが本番反映を決めた時。反映後 4 週で `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` を link_position 別に before/after (AFF-RESOLUTION-EFFECT-01 と窓が重なるため guard: confounded)。改善行を戻すときは `[kpi: affiliate-yield]` を付ける。
-- ローカル実装済み・未デプロイ。baseline (GA4 28日 〜2026-08-28): 楽天商品カード右レール 424 imp / 0 click、中段 native A8 等 2,545 imp / 1 click。[target: rakuten-native+furusato-native 合計 imp ≥ 2,000/28日 かつ click ≥ 1]。
 
 ### [RANKING-REINDEX-01] 復帰 56 ranking (5 週連続 GSC imp 0) の coverageState を URL Inspection で確定し、未収録なら sitemap 再送信する
 
@@ -3956,6 +4023,15 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: 機械の検査が全冊を毎週記録し、2 冊で 3 段の試行の結果 (指摘・トークン・直した箇所) が残り、残りの冊へ広げるかをオーナーが決めた。
 
 ## 🟢 低 — 再開条件を満たしたら着手する
+
+### [DATA-REFRESH-SCHEDULE-RESUME-01] 月次の全範囲更新を止めたので、main への反映と再開の条件を管理する
+タグ: [インフラ・計測] [種類:意思決定] [実行:対話] [起票:2026-11-05] [領域:データ]
+
+- **判断**: 2026-11-05 にオーナーが「指標の台帳とカタログが整理できていない間は全範囲の更新は不要」と判断し、`data-refresh.yml` の毎月 5 日の定期起動を外した。手動起動と develop の依頼ファイルからの起動は残した。
+- **期限**: GitHub の定期実行は main の設定で動くので、**2026-12-05 12:00 JST より前に**この変更を main へ入れる。次のまとまったデプロイに同乗させる。
+- **証拠**: run 42010655216 を最終同期 3,416 / 17,474 件で取り消した。24 指標の年の食い違いは run 42022242257 で修復し、公開データ監査は 0 件。ほかの約 14,000 件は 11-04 までの内容で、同じ年の値の改訂が未反映の可能性がある。
+- **次**: ① 台帳とカタログの整理が終わる時期をオーナーが決める ② その後に全範囲を手動で 1 回実行し、中断しない ③ 定期起動を戻すかを決める。
+- **完了条件**: main から定期起動が消えていることを確認し、再開か廃止かの判断が記録されている。
 
 ### [MUNI-PEER-DATASET-01] 1 自治体と類似団体の現況データ一式 (計画策定の現況分析向け) を作るかを、EXP-007 の結果を見て決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:商品]

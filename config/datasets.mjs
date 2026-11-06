@@ -199,6 +199,8 @@ export const DATASETS = [
   d("coconala.profile", P.COCONALA_PROFILE, "config", "product", "config", "ココナラの公開プロフィール文面"),
   d("coconala.assets", `${P.COCONALA_ASSETS_DIR}/{name}`, "config", "product", "config", "ココナラのプロフィール・商品画像と生成プロンプト"),
   d("kdp.listings", P.KDP_LISTINGS, "config", "product", "config", "KDP の出品内容と公開・審査状態", { schema: "config/schema/kdp.listings.schema.json" }),
+  d("image.routes", "config/image-generation-routes.json", "config", "ops", "config", "AI 画像の生成経路の登録 (未登録の画像 API 呼び出しを止める)", { schema: "config/schema/image-generation-routes.schema.json" }),
+  d("kdp.listing-copy", P.KDP_LISTING_COPY, "config", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", { schema: "config/schema/kdp.listing-copy.schema.json" }),
   d("kdp.account", P.KDP_ACCOUNT, "config", "product", "config", "KDP の期待アカウント (個人情報は .local 側)", { schema: "config/schema/kdp.account.schema.json" }),
   d("note.account", P.NOTE_ACCOUNT, "config", "product", "config", "note の期待アカウント", { schema: "config/schema/note.account.schema.json" }),
   d("asp.connection", P.AFFILIATE_ASP, "config", "affiliate", "config", "A8 / もしも / afb の接続設定とサイト帰属", { schema: "config/schema/asp.connection.schema.json" }),
@@ -260,6 +262,19 @@ export const DATASETS = [
     refs: [
       { field: "links[].issue", to: "content.issues", key: "issues[].id" },
       { field: "links[].page", to: "content.pages", key: "pages[].id" },
+    ],
+  }),
+  d("content.analyses", "data/content/analyses.json", "config", "data", "data", "問いに答える分析の台帳。入力の spec と再現のスクリプトを持ち、値は持たない", {
+    schema: "data/content/schema/analyses.schema.json",
+    refs: [{ field: "analyses[].issue", to: "content.issues", key: "issues[].id" }],
+  }),
+  d("content.figures", "data/content/figures.json", "config", "data", "data", "図の台帳。分析と型に結び、同じ図の配信先を持つ。データは写さない", {
+    schema: "data/content/schema/figures.schema.json",
+    refs: [
+      { field: "figures[].analysis", to: "content.analyses", key: "analyses[].id" },
+      { field: "figures[].template", to: "content.image-templates", key: "templates[].id" },
+      { field: "figures[].destinations[].page", to: "content.pages", key: "pages[].id" },
+      { field: "figures[].destinations[].postId", to: "sns.posts", key: "posts[].id" },
     ],
   }),
   d("themes.composition-sets", "data/themes/compositions/sets.json", "state", "data", "data", "足すと全体になる指標の組。テーマのカタログの積み上げから作る生成物 (build-composition-ledger.ts)", { schema: "data/themes/schema/composition-sets.schema.json" }),
@@ -367,6 +382,7 @@ export const DATASETS = [
   d("products.publication-receipts", "data/products/{name}-{date}.json", "evidence", "product", "data", "商品の公開・準備の受領記録"),
   d("kdp.weekly-publication", "data/products/kdp-weekly-publication.json", "state", "product", "data", "KDP 週次公開の判定"),
   d("kindle.figure-reviews", "data/products/kindle-figure-reviews.json", "state", "product", "data", "既刊 Kindle の図の評価 (図の sha256 ごと。同じ図を二度評価しない。KINDLE-QUALITY-LOOP-01)"),
+  d("kdp.search-ranks", "data/products/kdp-search-ranks/{date}.json", "series", "product", "data", "KDP の本の Kindle 検索 1 ページ目の順位"),
   d("kindle.quality", "data/products/kindle-quality.json", "state", "product", "data", "既刊 Kindle の中身の機械の検査 (章ごとの図・全県表・リンクと印。KINDLE-QUALITY-LOOP-01)"),
   d("products.status", "data/products/{name}-status.json", "state", "product", "data", "商品・書籍・note の生成と販売準備の状態"),
   d("kindle.verification", "data/products/kindle-{name}-verification.json", "evidence", "product", "data", "Kindle 版ごとの検証記録"),
@@ -420,6 +436,7 @@ export const DATASETS = [
   d("business-plan.history", "data/business-plan/history/{date}.json", "series", "strategy", "data", "事業計画の派生状態の履歴", { retain: "business-plan" }),
   d("business.experiments", "data/business/experiments.json", "ledger", "strategy", "data", "実験の台帳 (PDCA)", { schema: "config/schema/business.experiments.schema.json" }),
   d("business.pilot-board", "data/business/pilot-board.json", "ledger", "strategy", "data", "収益化 pilot の判定ボードの入力 (開始日・窓・判定に使う指標)", { schema: "config/schema/business.pilot-board.schema.json" }),
+  d("business.issue-map", "data/business/issue-map.json", "ledger", "strategy", "data", "事業イシューマップの入力 (主イシュー・仮説・前提・4 型 × 3 収益源の 12 マス・ストーリーライン・注記)。判定日と進み具合は写さず ID で台帳を指す", { schema: "config/schema/business.issue-map.schema.json" }),
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
@@ -473,6 +490,11 @@ export const DATASETS = [
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),
   d("ogp.inventory", "data/ogp/{name}", "state", "site", "data", "OGP・カード画像の棚卸し"),
   d("provenance.queue", "data/provenance/{name}", "state", "data", "data", "出典・再現性の是正キュー"),
+  d("ranking.color-policies", "data/ranking/color-policies/policies.json", "state", "data", "data", "指標 × 粒度の配色 (連続か 5 段階か・一方向か発散か)。R2 の値から作る生成物 (build-color-policies.ts)。結合は metricPresentation", {
+    schema: "data/ranking/color-policies/policies.schema.json",
+    refs: [{ field: "policies[].metricKey", to: "registry:metrics" }],
+  }),
+  d("ranking.color-policies-schema", "data/ranking/color-policies/policies.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("ranking.audits", "data/ranking/{name}", "state", "data", "data", "ランキングの整合性監査・拡充 wave の索引"),
   d("ranking.wave-drafts", "data/ranking/wave-r1-drafts/{**}", "evidence", "data", "data", "ランキング拡充 wave の下書き"),
   d("site.link-audit", "data/site/{name}", "state", "site", "data", "サイト内リンクの監査"),

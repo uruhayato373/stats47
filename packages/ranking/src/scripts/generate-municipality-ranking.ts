@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { metricPresentation } from '@stats47/data-configs/color-policy';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -187,7 +188,7 @@ async function generateForKey(
       subtitle: subtitleByKey.get(rankingKey) ?? null,
       description: metric.description,
       unit: metric.unit,
-      visualization: metric.visualization,
+      visualization: metricPresentation(metric, 'municipality-merged'),
       source: {
         displayName: sourceDisplayName,
         url: sourceUrl,

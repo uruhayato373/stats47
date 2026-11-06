@@ -262,7 +262,8 @@ function checkContentTypePolicy(
       if (OLD_CATEGORY_KEYS.has(slug)) return gone();
       // 公開記事カタログに無い slug を page の notFound() へ渡すと、OpenNext で
       // HTTP 200 +「記事が見つかりません」が固着しうるため前段で 410 にする。
-      if (!UrlPolicy.blog.isKnownPublished(slug)) return gone();
+      // BLOG_PREVIEW_SLUG は npm run blog:preview が開発サーバーにだけ渡す。本番には無い
+      if (!UrlPolicy.blog.isKnownPublished(slug) && slug !== process.env.BLOG_PREVIEW_SLUG) return gone();
     }
   }
 

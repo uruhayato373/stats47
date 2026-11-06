@@ -32,7 +32,6 @@ import { resolveContentVerticalChain } from "@/features/ads/constants/affiliate-
 import type { ResolvedAffiliateBanner } from "@/features/ads/types";
 
 import { RankingPageClientShell } from "../components/RankingKeyPage/RankingPageClientShell";
-import { RankingPageRakutenNativeSection } from "../components/RankingKeyPage/RankingPageRakutenNativeSection";
 
 import type { RankingPageModel } from "../services/load-ranking-page-model";
 
@@ -58,7 +57,6 @@ vi.mock("../components/RankingKeyPage/RankingPageAsyncSections", () => ({
 }));
 vi.mock("@/components/layout/Breadcrumbs", () => ({ Breadcrumbs: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageNativeAffiliateSection", () => ({ RankingPageNativeAffiliateSection: () => null }));
-vi.mock("../components/RankingKeyPage/RankingPageRakutenNativeSection", () => ({ RankingPageRakutenNativeSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageRelatedRankingsSection", () => ({ RankingPageRelatedRankingsSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageSidebarSection", () => ({ RankingPageSidebarSection: () => null }));
 
@@ -199,13 +197,12 @@ describe("ranking native アフィリエイトの解決契約", () => {
 
     const kakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: kakeiModel });
     const kakeiSections = kakeiRendered.props.sections as {
-      nativeAffiliate: ReactElement<{ top1: { areaCode: string } | null; hasProductKeyword: boolean }>;
+      nativeAffiliate: ReactElement | null;
       adRowMid: ReactElement<{ cells: Cell[] }> | null;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
-    expect(kakeiSections.nativeAffiliate.type).toBe(RankingPageRakutenNativeSection);
-    expect(kakeiSections.nativeAffiliate.props.top1?.areaCode).toBe("07000");
-    expect(kakeiSections.nativeAffiliate.props.hasProductKeyword).toBe(true);
+    // 楽天の商品カードは 2026-11-06 に撤去した。A8 も戻さず、下段の PR は出さない
+    expect(kakeiSections.nativeAffiliate).toBeNull();
     // 広告の段の A8 も家計調査系では描画しない (2026-09-16 オーナー判断)。AdSense の枠だけが残る
     expect(cellIds(kakeiSections.adRowMid)).toEqual(["adsense:mid", "adsense:hub"]);
 

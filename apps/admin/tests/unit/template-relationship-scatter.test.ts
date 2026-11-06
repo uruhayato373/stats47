@@ -192,3 +192,40 @@ describe('blog scatter as the shared type', () => {
     expect(scatterChartFromArticleData(articleData(), { ...opts, y: { year: null } })).toHaveProperty('skip');
   });
 });
+
+// The prototype's H01 needed about a thousand municipalities; the prefecture rule must not loosen with it.
+describe('relationship scatter across municipalities', () => {
+  const town = (i: number) => ({ code: String(10000 + i), name: `町${i}`, x: i, y: i * 2 + (i % 7) });
+  const chart = (points: ReturnType<typeof town>[]) => ({
+    title: '人口と空き家率', meta: '2023年', source: '住宅・土地統計調査', xLabel: '人口増減率（%）', yLabel: '空き家率（%）', points,
+    level: 'municipality' as const,
+  });
+
+  it('draws the set the caller built and counts it once in the meta line', () => {
+    const svg = renderRelationshipScatterChart(chart(Array.from({ length: 1052 }, (_, i) => town(i))));
+    expect(svg.match(/<circle data-pref=/g)).toHaveLength(1052);
+    expect(svg).toContain('2023年・1,052市区町村');
+    expect(svg).not.toContain('都道府県');
+    expect(svg).toMatch(/r="4"/);
+  });
+
+  it('names only the areas the caller chose, never the extremes', () => {
+    const points = [town(0), town(40), town(200), town(600), town(1000)];
+    expect(renderRelationshipScatterChart(chart(points))).not.toContain('font-weight="700">町');
+    const named = renderRelationshipScatterChart({ ...chart(points), labelNames: ['町200'] });
+    expect(named.match(/font-weight="700">町/g)).toHaveLength(1);
+    expect(named).toContain('>町200<');
+  });
+
+  it('stops a duplicate area, a broken value or an empty set', () => {
+    const points = Array.from({ length: 5 }, (_, i) => town(i));
+    expect(() => renderRelationshipScatterChart(chart([...points, points[0]]))).toThrow('市区町村');
+    expect(() => renderRelationshipScatterChart(chart([...points, { ...town(9), y: Number.NaN }]))).toThrow('市区町村');
+    expect(() => renderRelationshipScatterChart(chart([]))).toThrow('市区町村');
+  });
+
+  it('still requires every prefecture when no level is given', () => {
+    const { level: _level, ...prefectures } = chart(Array.from({ length: 46 }, (_, i) => town(i)));
+    expect(() => renderRelationshipScatterChart(prefectures)).toThrow('47都道府県');
+  });
+});

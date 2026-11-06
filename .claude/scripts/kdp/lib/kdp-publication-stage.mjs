@@ -21,6 +21,23 @@ export function hasUnpublishedPredecessor(listing) {
   );
 }
 
+/** Superseded editions still waiting to be unpublished. Only a live replacement with a different ASIN qualifies. */
+export function pendingPredecessors(listing) {
+  if (listing?.kdpStatus !== "live" || !listing?.asin || listing?.withdrawal) return [];
+  const previous = Array.isArray(listing.previousEditions) ? listing.previousEditions : [];
+  return previous.filter(
+    (edition) =>
+      edition?.unpublishAfterReplacementLive === true &&
+      edition?.kdpStatus === "live" &&
+      edition?.asin &&
+      edition?.draftId &&
+      edition?.title &&
+      edition.asin !== listing.asin &&
+      !edition.unpublishedAt &&
+      !edition.withdrawal?.unpublishedAt,
+  );
+}
+
 export function stageForKdpStatus(listing, kdpStatus) {
   if (kdpStatus === "in_review") return "submitted";
   if (kdpStatus === "live") {

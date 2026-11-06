@@ -2,6 +2,7 @@ import 'server-only';
 import fs from 'node:fs';
 import path from 'node:path';
 import { datasetDir } from '../../../../config/datasets.mjs';
+import { metricPresentation } from '../../../../packages/data-configs/src/color-policy';
 import {
   imageLibrary,
   FILES,
@@ -90,7 +91,7 @@ export function resolveStatisticalSamples(
       definitionPath: `${datasetDir('metrics.definitions')}/${metric.key}.ts`,
       dataKey: source.key,
       dataSha256: source.sha256,
-      visualization: metric.visualization,
+      visualization: metricPresentation(metric),
     } : undefined;
     return { ...sample, media, basisImages, binding };
   });

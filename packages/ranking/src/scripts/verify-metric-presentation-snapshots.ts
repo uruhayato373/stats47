@@ -2,6 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { getMetricConfig } from '@stats47/data-configs';
+import { metricPresentation } from '@stats47/data-configs/color-policy';
+import type { ColorGrain } from '@stats47/types';
 import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
 import {
   parseRankingItemSnapshot,
@@ -15,11 +17,11 @@ import {
 const root = path.resolve(process.argv[2] ?? '.local/r2');
 const read = (key: string): unknown =>
   JSON.parse(fs.readFileSync(path.join(root, key), 'utf8'));
-function checkPresentation(key: string, presentation: unknown): void {
+function checkPresentation(key: string, presentation: unknown, grain: ColorGrain = 'prefecture'): void {
   const config = getMetricConfig(key);
   if (
     !config ||
-    JSON.stringify(presentation) !== JSON.stringify(config.visualization)
+    JSON.stringify(presentation) !== JSON.stringify(metricPresentation(config, grain))
   )
     throw new Error(
       `Snapshot presentation differs from canonical metric: ${key}`
@@ -61,7 +63,7 @@ for (const key of KNOWN_MUNICIPALITY_RANKING_KEYS) {
   const values = parseMunicipalityRankingValuesSnapshot(
     read(`app/municipalities/ranking/${key}/values.json`)
   );
-  checkPresentation(key, item.visualization);
+  checkPresentation(key, item.visualization, 'municipality-merged');
   if (
     item.rankingKey !== key ||
     values.rankingKey !== key ||

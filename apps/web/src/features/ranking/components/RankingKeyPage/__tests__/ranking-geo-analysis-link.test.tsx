@@ -13,7 +13,7 @@ vi.mock("@/features/ads", () => ({
   SidebarPromoBanner: () => null,
   selectPromoBannerIndexForRanking: () => 0,
 }));
-vi.mock("@/features/ads/server", () => ({ AffiliateAdSlot: () => null, RakutenItemsCard: () => null }));
+vi.mock("@/features/ads/server", () => ({ AffiliateAdSlot: () => null }));
 vi.mock("@/features/theme-dashboard/server", () => ({ listRelatedThemesForRankingKeys: () => [] }));
 vi.mock("@/features/blog/server", () => ({ readNavigationArticlesFromR2: async () => [] }));
 vi.mock("../../RankingSidebar", () => ({ RankingItemsSidebar: () => null }));

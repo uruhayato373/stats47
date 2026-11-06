@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KDP の紹介文・キーワードの原稿",
+  "description": "data/products/kdp-listing-copy.json の形状契約。人が判断して書く原稿の正本で、KDP 台帳 (config/kdp-listings.json) の description と keywords はここから組み立てる。内容の規則は .claude/scripts/kdp/lib/kdp-listing-copy.mjs の auditListingCopy が検査する。",
+  "type": "object",
+  "required": ["schemaVersion", "books"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "dataNote": { "type": "string", "minLength": 1 },
+    "books": {
+      "type": "object",
+      "propertyNames": { "pattern": "^K-S[1-4]-\\d{2}$" },
+      "additionalProperties": { "$ref": "#/definitions/book" }
+    }
+  },
+  "definitions": {
+    "book": {
+      "type": "object",
+      "required": ["status", "hook", "points", "forWhom", "keywords", "targetQueries"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "description": "draft = 案。approved = オーナー承認済み。submitted = KDP へ提出し変更のレビュー中。reflected = レビュー後に KDP の画面を読み直して一致を確認済み。",
+          "enum": ["draft", "approved", "submitted", "reflected"]
+        },
+        "hook": { "description": "読者の悩みから始める冒頭の段落。", "type": "string", "minLength": 40, "maxLength": 200 },
+        "points": { "description": "読み終えて分かること。", "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "string", "minLength": 8 } },
+        "forWhom": { "description": "想定読者。", "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "string", "minLength": 6 } },
+        "keywords": { "description": "KDP のキーワード 7 枠。", "type": "array", "minItems": 7, "maxItems": 7, "items": { "type": "string", "minLength": 2, "maxLength": 50 } },
+        "targetQueries": { "description": "検索順位を定点観測する検索語。", "type": "array", "minItems": 3, "maxItems": 8, "items": { "type": "string", "minLength": 2 } },
+        "review": {
+          "description": "書き手と別のエージェントが原稿を EPUB の本文と照合した記録。版が変わると無効になる。",
+          "type": "object",
+          "required": ["reviewer", "reviewedAt", "epubSha256"],
+          "additionalProperties": false,
+          "properties": {
+            "reviewer": { "type": "string" },
+            "reviewedAt": { "$ref": "common.schema.json#/$defs/date" },
+            "epubSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "approvedAt": { "$ref": "common.schema.json#/$defs/date" },
+        "submittedAt": { "$ref": "common.schema.json#/$defs/date" },
+        "reflectedAt": { "$ref": "common.schema.json#/$defs/date" }
+      }
+    }
+  }
+}

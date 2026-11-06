@@ -1,12 +1,8 @@
-import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
-/** Shared authored defaults. Each metric may override its classification and numeric axes. */
+import type { AuthoredPresentation } from '../../../packages/types/src/metric-presentation';
+/** Shared authored defaults. Each metric may override its numeric axes. Colour steps come from the colour ledger. */
 export const DEFAULT_METRIC_PRESENTATION = {
   domain: { mode: 'extent' },
   barDomain: { mode: 'extent' },
-  classification: { method: 'equal-interval', classes: 5 },
   trendDomain: { mode: 'extent', padding: 0.08 },
   comparisonDomain: { mode: 'extent', padding: 0.05 },
-} as const satisfies Pick<
-  MetricPresentation,
-  'domain' | 'classification' | 'trendDomain' | 'comparisonDomain' | 'barDomain'
->;
+} as const satisfies Pick<AuthoredPresentation, 'domain' | 'trendDomain' | 'comparisonDomain' | 'barDomain'>;
