@@ -46,8 +46,6 @@ const HARDCODED_VERTICAL = new RegExp(
  * 追加するときは「なぜその枠が単一 vertical 固定なのか」をここに書く。
  */
 const HARDCODED_VERTICAL_ALLOWLIST: Record<string, string> = {
-  // ふるさと納税カードは furusato 導線そのもの。他の vertical では描画されない。
-  "FurusatoNozeiCard.tsx": "furusato 専用カード",
   // labor 固定の自社プロモ枠。ASP 在庫ではなく常設リンク。
   "SidebarPromoBanner.tsx": "labor 固定の常設プロモ枠",
 };

@@ -127,85 +127,10 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 | `share` | `trackShare` | `method` / `content_type` / `item_id` は GA4 標準（要否×） | 要否× | 共有 |
 | `page_not_found` | `trackNotFound` | `page_path` / `page_referrer`（登録不要・レポート可） | 要否× | 監視 |
 
-> **affiliate の配置値・クリック定義変更 (2026-09-08・実装準備、未デプロイ)**:
-> `RakutenItemsCard` の商品クリックはカード impression と同じ `link_position` を送り、
-> `FurusatoNozeiCard` の商品クリックも `sidebar-item` から `sidebar` へ揃える。
-> 本文に置く楽天カードは `area-furusato-content` / `city-furusato-content` /
-> `blog-furusato-content` / `blog-rakuten-content` を使い、同じカードの表示とクリックを一致させる。
-> ブログ右レールの商品カードは本文読了後へ移設し、二重表示・二重impressionを作らない。
-> 家計調査の ranking で広告意図が `null` でない場合、関連ランキング直後へ移す既存商品カードは
-> `rakuten-sidebar` を使う。その他の ranking 商品カードは `ranking-sidebar` を維持する。
-> 登録済み `link_position` / `ad_id` / `affiliate_vertical` を再利用し、新しい custom dimension は無い。
-> 楽天市場の通常検索リンクは `affiliate_click` の対象から外し、商品リンクのクリックだけを数える。
-> impression はカード単位で、表示中タブで50%以上を連続1秒満たした場合だけ送る。
-> 50%未満・退出・タブ非表示では待機を破棄し、再表示時に1秒を取り直す。
-> 旧実装は交差率未確認のため過大計上し得た。今回の厳密化、旧 `*-item` と親配置の分離、検索クリック除外で
-> CTR の定義が変わるため、デプロイ境界をまたぐ配置別CTRを単純比較しない。
-> 公開後は日付を固定した非重複期間で `pagePath × deviceCategory × ad_id × link_position` とPVを取得する。
-
-> **値の追加 (2026-10-28・ランキングの県の詳細パネル、Flowly の試行)**: ランキング詳細の地図・表で県を押すと右から開く
-> 詳細パネル (`RankingAreaDetailSheet`) を足した。開いたとき `ui_interaction` を `ui_action=detail_open`・`ui_target=map|table`、
-> パネルの中の前後送りを `ui_action=region_select`・`ui_target=detail_sheet` で送り、どちらも `area_code` を付ける。
-> パネルの中のリンクは `nav_surface=ranking_detail_sheet`。すべて登録済みの dimension の値追加で、GA4 側の作業は無い。
-> 判定 (台帳 `data/design-references/references.json` の flowly): 公開から 4 週で、`ranking_detail_sheet` の `nav_click`
-> と `ranking_table` の県名リンクを合わせた県ページへの遷移が、公開前の 4 週の `ranking_table` より増えたかで広げるかを決める。
-
-> **nav_surface の値変更 (2026-10-27・サイドバー型の骨組み、未デプロイ)**: 公開サイトの骨組みをテンプレート
-> (shadcndashboard) のサイドバー型に替え、ヘッダーのナビ (メガメニュー) とモバイルドロワーを撤去した。サイト全体のナビは
-> `AppSidebar` だけになり、`nav_surface` は PC の常設サイドバー = `sidebar`、lg (1024px) 未満で Sheet として開いたもの =
-> `sidebar-mobile` の 2 値で送る (送信は共通のクリック監視 `NavClickTracker` が `data-nav-surface` / `data-nav-label` から行う)。
-> ヘッダーの行 (`SiteHeader`) に残るリンク (狭い画面のロゴ = ホームへ) は値 `header` で送る (2026-10-28 追加)。
-> 旧値 `desktop-header` / `mobile-drawer` はデプロイ日を境に 0 件になる。登録済み `nav_surface` の**値変更**で新しい
-> custom dimension は無い。サイドバーはカテゴリ 17 件とテーマを開閉できるグループ (既定は開く) に入れ、テーマは 5 系統ごとに開閉する項目 (既定は閉じ、現在地のテーマを含む系統だけ開く) に分け、主要ナビに「調査」(/survey) を加えたので、デプロイ前後のグローバルナビの件数・
-> ラベル別の内訳を単純比較しない。フッターに足した主要ナビ・テーマのリンクは既存の `footer` で数える。
-
-> **nav_surface の値追加 (2026-09-06・商品導線)**: 商品一覧→商品詳細を
-> `product_catalog`、ブログ本文末→文脈一致したKindle詳細を `blog_product` として追加した。
-> どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
-> 商品詳細→Amazon/ココナラは `cta_click` の登録済み `link_position`
-> (`product_kindle` / `product_coconala`) と当該ページ path の組み合わせで商品別に集計する。
-> 2026-10-07 にランキング右レール「関連記事」→その記事を収録したKindle詳細を `ranking_product` として追加した
-> (値追加のみ)。同日から Kindle の販売先リンクには Amazon アソシエイトのタグが付く。
-
-> **商品送客 (2026-11-03・未デプロイ)**: 商品案内の表示を `product_impression`、販売先 (Amazon / note / ココナラ) へ
-> 出ていくクリックを `product_click` で送る。パラメータは `product_destination` (販売先)・`product_id` (販売先での ID。
-> Amazon は ASIN、note は記事・マガジンのキー。外部 URL から `productReferralOf` が取り出し、形が合わなければ送らない)・
-> `link_position` (置き場所: `blog_product` / `ranking_product` / `municipality_ranking_product` / `ranking_csv_product` / `product_catalog` /
-> `product_companion` / `ranking-footer`。商品詳細から出たクリックは、詳細へ来る前の案内の置き場所を同じタブの
-> sessionStorage から引き継ぎ、無ければ `product_detail`)。`product_click` だけをキーイベントにする
-> (`AUTHORED_KEY_EVENTS`。サイト内の商品詳細への移動は `nav_click` のまま数えない)。`cta_click` の
-> `product_kindle` / `product_coconala` は 2026-10-07 からの時系列を切らないため並行して送る (同じクリックが 2 イベントに
-> 出るので足し合わせない)。商品詳細の販売先ボタン自体の表示は送らない (置き場所ごとの「表示 → クリック」の分母を
-> 案内の表示に揃えるため)。注文は GA4 では取らず、KDP は販売台帳 (`products:sales`)、Amazon アソシエイト経由の注文は
-> アソシエイトのレポートで読む (アトリビューション分析はしない)。
-
-> **カスタムチャネルグループ (2026-11-03)**: 「stats47 (自社商品を分ける)」(`channelGroups/16259405349`) を Admin API v1alpha で作った。
-> 既定のチャネルの前に `Own products` (流入元が kindle か note、かつメディアが ebook か referral) を置き、残りは既定のチャネルグループの写し。
-> Kindle の UTM (`utm_medium=ebook`) は既定では Unassigned になるので、自社商品からの戻りを読むときはこのグループを使う。
-> note.com の自然な参照 (source=note.com) は入らない。既定のチャネルグループ (primary) は変えていない。
-
-> **Amazon 関連書籍 (2026-10-07)**: ブログ記事末の一般書籍推薦は `affiliate_click` の
-> `link_position=related-books`、`ad_id=amazon-<ASIN>` で送る。Kindle 自社本がある記事には出さない。
-
-> **nav_surface の値追加 (2026-09-07・ブログ回遊導線)**: `/blog` の右レールを
-> `blog_sidebar`、モバイルの記事一覧前を `blog_discovery_mobile` として追加した。
-> `nav_label` は `popular:<slug>` / `category:<key>` / `theme:<key>` / `area:<name>` で、
-> 人気記事・カテゴリ・テーマ・都道府県のどの導線が回遊へ寄与したかを比較する。
-> 登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
-> note のリンクカードは query 付き UTM を使わず、記事別 clean path
-> `/products/<slug>/from/note/<noteId>` を経由する。サイト側で
-> `utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=<noteId>`
-> へ転送するため、新しい custom dimension なしで記事別の送客と販売先 CTA を結合できる。
-
+> **楽天市場のカードの計測 (2026-11-06 撤去)**: `rakuten-items` と `*-furusato-*`・`rakuten-*` の `link_position` は過去の記録にだけ残る。
 > **nav_surface の値追加 (2026-09-15・県ページ回遊導線)**: 都道府県ページ右レールの
 > 共通カテゴリ一覧を `area_sidebar` として追加した。登録済み `nav_surface` / `nav_label` の
 > 値追加であり、新しい custom dimension はない。
-
-> **link_position の値追加 (2026-09-16・ranking 本文中段の楽天カード置換)**: 家計調査系
-> ranking の本文中段 native (`RankingPageRakutenNativeSection`) に `rakuten-native`
-> (`RakutenItemsCard`、モバイル・商品軸) と `furusato-native` (`FurusatoNozeiCard`、
-> デスクトップ・1位県の地域軸) を追加した。どちらも登録済み `link_position` の値追加で、
-> 新しい custom dimension の登録は不要。
 
 > **nav_surface の値追加 (2026-10-07・同じ指標を使うテーマ)**: ランキングの右レール「この指標を使うテーマ」
 > (`RailLinksCard`) のクリックに `ranking_theme` を送る。`nav_label` はテーマ名。登録済み `nav_surface` /

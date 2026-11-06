@@ -431,11 +431,6 @@ jobs:
           # (2026-08-06 実測: 公開 422 記事が 1 件も提出されず sitemap/4.xml は /blog のみだった)。
           # 記事公開で R2 が変わるとこの定数は陳腐化するので PR で鮮度を弾く。
           (cd apps/web && npx tsx scripts/generate-sitemap-blog-entries.ts --check)
-          # Header / home ポータル / 楽天商品カードが使うカテゴリ件数・代表ランキング・
-          # 品目語の生成物。ずれると表示が実データと食い違う。生成物を挟む理由は
-          # 「共通 Header 経由で METRICS_REGISTRY が全 route の bundle に入るのを防ぐ」
-          # (apps/web/scripts/generate-runtime-metric-summaries.ts)。
-          (cd apps/web && npx tsx scripts/generate-runtime-metric-summaries.ts --check)
           # 索引 (/ranking のカテゴリ別代表)・ホーム注目 8 件・問いかけコピーの生成物。
           # /ranking を R2 非依存の純静的 SSG のまま保つため、選定結果をビルド前に焼いている。
           # 入力は git TS + git 管理下の GSC snapshot だけなのでネットワーク不要。

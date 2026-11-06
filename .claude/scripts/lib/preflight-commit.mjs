@@ -310,7 +310,6 @@ export const PR_GATES = [
         "generate-known-tag-keys.ts",
         "generate-unpublished-blog-slugs.ts",
         "generate-ranking-prominence.ts",
-        "generate-runtime-metric-summaries.ts",
       ]) {
         const r = await tryRun("npx", ["tsx", `scripts/${script}`, "--check"], { cwd: WEB_DIR });
         if (!r.ok) return { ...r, hint: `cd apps/web && npx tsx scripts/${script}` };

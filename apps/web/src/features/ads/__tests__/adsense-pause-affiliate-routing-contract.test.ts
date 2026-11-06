@@ -10,9 +10,8 @@ const AREA_PAGE = readFileSync(
 );
 
 describe('AdSense pause affiliate routing contract', () => {
-  it('keeps prefecture monetization on prefecture-specific furusato links', () => {
-    expect(AREA_PAGE).toContain('<FurusatoNozeiCard');
-    expect(AREA_PAGE).toContain('position="area-furusato-content"');
+  it('does not bring back the removed Rakuten furusato card or the older banners', () => {
+    expect(AREA_PAGE).not.toContain('FurusatoNozeiCard');
     expect(AREA_PAGE).not.toContain('resolveAreaPageAffiliateBanners');
     expect(AREA_PAGE).not.toContain('position="area-content"');
     expect(AREA_PAGE).not.toContain('<AreaBannerAd');

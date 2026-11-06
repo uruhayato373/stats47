@@ -1,5 +1,4 @@
 // Components (Client-safe)
-// ★ FurusatoNozeiCard / RakutenItemsCard は **server.ts へ移した** (2026-08-04)。
 //   R2 reader (server-only) を読むようになったため、この barrel に残すと
 //   client component (md-content.tsx が BannerAd を import) の module graph に
 //   server-only が混入して webpack build が落ちる。

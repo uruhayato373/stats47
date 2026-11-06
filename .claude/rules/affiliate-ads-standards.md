@@ -260,7 +260,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
   明示policyへ追加する。広告の有無や vertical をモデルの推測で一括変更しない。
 - **出典調査だけで決まる furusato の決定的規則 (2026-09-24 オーナー判断)**: 家計調査の品目記事 (ビール・エアコン・
   「身長が高い県ほどせんべい」等) にふるさと納税ポータルが出ていた。出典調査だけで furusato になる記事のうち、
-  タイトルが単一県の食卓・食文化・特産品・返礼品 (`isRegionalFoodCultureTitle`。楽天の県別返礼品カードと同じ判定)
+  タイトルが単一県の食卓・食文化・特産品・返礼品 (`isRegionalFoodCultureTitle`)
   でないものは **A8 の banner/text を出さない** (`resolveBlogBannerInput`)。タグへ落とすと economy (FP 相談・NISA) に
   なりさらに合わないので空にする (§5)。楽天カードの判定は変えず、品目記事の商品カードは残す。
   実測: 出典調査だけで furusato の 222 本 → 抑止 180 本 / 維持 42 本。成果はふるさと本舗 729 表示・2 クリック、
@@ -625,13 +625,13 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 | ページ種別 | アフィリ枠 | 解決キー |
 |---|---|---|
-| blog | 本文 banner / 本文 text (自動挿入 最大4) / 右レール banner / 読了後の楽天商品または県別返礼品（最大1枚）/ ハウス枠×2 | surveyIds → tagKeys → vertical、記事タイトル・副題 → 品目／単一県 |
-| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品。AdSense停止中は本文中段 banner 1 + 右レール banner ≤2 を上段へ移設。**家計調査系は本文の A8 (上段 in-content + 中段 native) を出さず、中段を楽天カードへ置換** (モバイル=商品軸 `rakuten-native`、デスクトップ=1位県の地域軸 `furusato-native`。右レール商品カードはデスクトップ限定 `hidden lg:block`。除外リストは据え置きでレールへ流さない。2026-09-16) | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
+| blog | 本文 banner / 本文 text (自動挿入 最大4) / 右レール banner / ハウス枠×2 | surveyIds → tagKeys → vertical、記事タイトル・副題 → 品目／単一県 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4。AdSense停止中は本文中段 banner 1 + 右レール banner ≤2 を上段へ移設。**家計調査系は本文の A8 (上段 in-content + 中段 native) を出さず、中段を楽天カードへ置換** (モバイル=商品軸 `rakuten-native`、デスクトップ=1位県の地域軸 `furusato-native`。右レール商品カードはデスクトップ限定 `hidden lg:block`。除外リストは据え置きでレールへ流さない。2026-09-16) | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
 | category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
 | survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
 | themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
-| areas 県 | ハウス枠 / `AreaBannerAd` / 県データブック後の楽天ふるさと納税。AdSense停止中は本文中段 banner 1 | `area-sidebar` / 本文は `furusato` vertical / 5桁県コード |
-| areas 市区町村 | `AreaBannerAd` / 本文末の楽天ふるさと納税 | `area-sidebar` / 親県コードへ正規化 |
+| areas 県 | ハウス枠 / `AreaBannerAd`。AdSense停止中は本文中段 banner 1 | `area-sidebar` / 本文は `furusato` vertical / 5桁県コード |
+| areas 市区町村 | `AreaBannerAd` | `area-sidebar` / 親県コードへ正規化 |
 | areas 市区町村 カテゴリ (`/areas/*/cities/*/<categoryKey>`) | native ≤3 (`position=city-native`) | URL の categoryKey → vertical (2026-09-02) |
 | japan (`/japan/<themeSlug>`) | native ≤3 (`position=japan-native`) | 都道府県テーマと同じ slug → `THEME_AFFILIATE_MAP` (2026-09-02) |
 | municipalities テーマ (`/municipalities/themes/<slug>`) | native ≤3 (`position=municipality-theme-native`) | `MUNICIPALITY_THEME_AFFILIATE_MAP` (2026-09-02。slug を足したら写像も足す — 契約テストが全件を要求) |
@@ -639,8 +639,6 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | home | ハウス枠 / native ≤4 (economy 固定) / 右レールの PR 1 枚 (AdSense との間に運営者のプロフィール。縦長の枠は 2026-10-30 に外した) | 無し (vertical 解決の手掛かりが無いページ) |
 | compare | native ≤4 | categoryKey → vertical |
 
-> blog / areas の楽天導線は 2026-09-08 にローカル実装。オーナー指定により未デプロイ・R2未更新。
-> ranking の商品カードは 2026-09-16 から家計調査系のみデスクトップ右レール + モバイル本文中段 (上記) に配置する。新しい枠を一覧・home・themeには増やさない。
 >
 > **2026-09-02 の全ページ棚卸し**: GSC 2026-W35 の imp を route 別に集計し、枠の無い route が
 > `/japan` (54 imp/週)・`/municipalities` (0)・`/geo` (0)・法務ページだけであることを確認した。
@@ -729,69 +727,10 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | `targetRankingKeys` | **ページ限定配置** | 高EPC 案件を特定ランキングだけに当てる | 同上 (フィールド) |
 | `SIDEBAR_PROMO_BANNERS` | 対象ランキング限定の固定案件枠 | labor の対象keyのみ。本文・通常レールとの同一案件重複は禁止 | `constants/sidebar-banners.ts` |
 | 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | `affiliate-direct-placements-data.ts` |
-| 楽天動的 (API) | 文脈商品・返礼品 | 審査不要・在庫無限。食品/地域文脈 | `rakuten-api.ts` (env の App ID) |
 
-> **★楽天 API は新ポータル (openapi.rakuten.co.jp) 仕様 — 2026-08-04 に移行。**
-> 旧 `app.rakuten.co.jp/services/api/.../20220601` は新ポータル発行のキーを受け付けない
-> (`wrong_parameter`)。実機プローブで確定した要点:
->
-> | 項目 | 値 |
-> |---|---|
-> | endpoint | `https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701` |
-> | 認証 | `applicationId` (クエリ) + `accessKey` (**ヘッダ**) の **両方必須**。`X-Access-Key` は不可 |
-> | env | `RAKUTEN_APP_ID` (Application ID=UUID) / `RAKUTEN_ACCESS_KEY` (Access Key=秘匿値) |
-> | 応答 | `Items` (大文字)。`formatVersion=2` で要素フラット。**画像は `string[]`** → `normalizeRakutenItems` が `{imageUrl}[]` に揃える |
->
-> **★配信は R2 snapshot 経由。実行時に楽天 API を叩かない。**
-> 楽天の Expected QPS は **1** だが、`deploy-workers.yml` の warm-cache が sitemap の全 URL を
-> 順に叩くため、デプロイのたびに ISR が総入れ替えになり **646 ページ分の呼び出しがバースト**する。
-> 429 で弾かれてもカードは `[]` に degrade して静かに消えるだけで気づけない。
-> 日次 cron `sync-rakuten-catalog.yml` が 1 QPS 以下で全品目を取得し、
-> `app/rakuten/items/<品目>.json` / `app/rakuten/furusato/<県コード>.json` に焼く。
-> ページは `repositories/rakuten-snapshot.ts` の reader で R2 だけを読む
-> (鮮度は旧 ISR 24h と同等)。**コンポーネントから `searchRakutenItems` を直接呼ばないこと。**
->
-> **★Allowed IP を `0.0.0.0/0` から変更しないこと。** 楽天アプリの Allowed IP は必須項目だが、
-> **GitHub Actions ランナーの送信元 IP は動的**で個別登録できない。特定 IP に戻すと cron が
-> 403 `CLIENT_IP_NOT_ALLOWED` で全滅し、R2 が更新されなくなる。アクセス制御は accessKey が担う。
-> **API Access Scopes の `Rakuten Ichiba API` チェックも必須** (外すと同様に全滅する)。
-> アプリの有効期限は **2027-03-07**。失効時も同じ症状になる。
->
-> 症状の見分け方: 商品カードは fallback を持たないため**消える**が、ふるさと納税カードは
-> 静的リンクへ degrade するので「出ている」ように見える。0 件の切り分けはこの非対称に注意する。
-
-**楽天動的カードの品目辞書はハードコードしない。** `constants/product-keywords.ts` が
-metric config (git TS SSOT) の title から機械導出する — 家計調査系 metric は
-「{品目}消費支出額」「{品目}消費量」という決まった形なので接尾辞を剥がせば品目が取れる。
-手で品目リストを持つと metric 追加のたびにドリフトする。「◯◯代/料/費/賃/税」は費目であって
-商品ではないので除外し、通販で買えないもの (都市ガス・ガソリン) も落とす。
-**品目を検出できないページ・API が 0 件のページでは何も描画しない** — 無差別に出すと
-記事と無関係な商品が並び読者価値を損なう (`blog-quality-standards.md` のリンク配置規律と同じ)。
-
-**返礼品の検索・地域一致**: `553283` は楽天の「ギフト券・商品券・ギフトコード」であって、
-ふるさと納税の共通genreではない（[楽天の分類](https://www.rakuten.co.jp/category/553283/)）。
-食品genre `100227` で `ふるさと納税 + 県名 + signatureKeyword` → 品質検証後0件ならsignatureを外して検索する。
-新規取得は商品名にふるさと納税を含み、ショップ名が対象の都道府県名で始まる返礼品だけを採用する。
-旧snapshotにショップ情報がない場合は、商品名の都道府県名が対象県だけと確認できたものを
-`legacy-title` として区別する。削除条件: 47県すべてをショップ検証付きで再取得・公開し、旧キャッシュが失効した後。ショップ検証済みや最新再取得済みとは扱わない。
-送料専用・地域不明・別県商品は除外し、食文化記事のfood文脈では券類も除外する。
-通常商品のさんま／秋刀魚等の表記揺れは共有品質関数で扱い、品目違い・器具・寄附商品を混ぜない。
-検索は30件取得して地域検証後に最大4件。フォールバックの呼び出し「間」にも1.2秒空ける。
-通常の商品検索は `NGKeyword=ふるさと納税` で寄附商品を分離する。
-
-**楽天カードの表示契約**: 本文はモバイル2列・広い画面4列、既存ranking右レールは2列。
-ブログは `blog-rakuten-placement.ts` が1枚だけ選ぶ。単一県の食卓・食文化・特産品・返礼品記事は
-その県の返礼品、複数県の比較・品目記事は該当商品。公開タイトルと副題だけを判定に使い、
-本文中の偶然の言及では増やさない。健康・事故等の別文脈には置かない。
-リンクはAPI発行のものを改変せず、通常URLを成果クリックとして記録しない。
-寄附額／商品価格を区別して表示し、最新の金額・受付／在庫状況はリンク先で確認する旨を付ける。
-県別返礼品に在庫がなければ同じ県の一覧へ戻す。Affiliate ID未設定時は広告を出さない。
-
-返礼品だけを再取得する入口は `sync-rakuten-catalog.ts --scope furusato`（workflow入力も同名）。
-既定は従来通りall。API再取得をファイルへ保存する検証は `--local .local/<directory>`、
-保存しない検証は `--dry-run`。両者の同時指定は禁止。認証不在・失敗・正常0件をmanifestで区別し、
-失敗時は既存snapshotを上書きしない。旧snapshotのオフライン再検証は `audit-rakuten-catalog.ts` を使い、
-元のgeneratedAtを保持する。本番R2反映は承認後に既存CIを使う。
+> **楽天市場の商品カードと返礼品カードは 2026-11-06 に撤去した (オーナー判断)。** 2 か月で 40 クリック・注文 0 件で、共通の案件を上回る実測が無いため。
+> 日次同期 (`sync-rakuten-catalog.yml`)・楽天 API の取得・品目語の生成物も一緒に撤去した。楽天アフィリエイトの案件 (楽天カード) と成果の記録は残す。
+> 復活させる前に、撤去のコミットと共通の案件の試験結果を読む。
 
 ### 需要 × 供給の突合は機械が行う
 

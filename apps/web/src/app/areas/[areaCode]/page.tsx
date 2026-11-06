@@ -27,7 +27,7 @@ import {
   AdRow,
   composeAdRows,
 } from '@/features/ads';
-import { FurusatoNozeiCard, resolveGenericAffiliateBanners } from '@/features/ads/server';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { AreaDatabookSection } from '@/features/area-databook';
 import { getAreaDatabook } from '@/features/area-databook/server';
 import {
@@ -214,14 +214,6 @@ export default async function AreaProfilePage({ params }: PageProps) {
             <AreaDatabookSection
               areaCode={areaCode}
               areaName={profile.areaName}
-            />
-          </Suspense>
-
-          <Suspense fallback={null}>
-            <FurusatoNozeiCard
-              areaCode={areaCode}
-              position="area-furusato-content"
-              layout="content"
             />
           </Suspense>
 

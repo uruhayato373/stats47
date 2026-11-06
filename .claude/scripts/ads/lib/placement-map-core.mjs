@@ -151,10 +151,10 @@ export function resolveVerticalsForPage(page, maps) {
     case "index":
       return page.key === "blog" ? { verticals: ["furusato"], reason: "blog-index-furusato" } : { verticals: [], reason: `no-slot:index:${page.key}` };
     case "areas":
-      // 県プロフィールはfurusato本文に加え、area-sidebarと楽天カードを持つ。
+      // 県プロフィールはfurusato本文とarea-sidebarを持つ。
       return { verticals: ["furusato"], reason: "area-furusato" };
     case "city":
-      // CityPageFooterはAreaBannerAdと県別楽天カード。furusato verticalの本文resolverはない。
+      // CityPageFooterはAreaBannerAd。furusato verticalの本文resolverはない。
       return { verticals: ["furusato"], reason: "city-furusato" };
     case "survey": {
       const resolved = resolveIntent({ surveyIds: [page.key] }, "none");

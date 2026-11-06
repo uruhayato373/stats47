@@ -77,7 +77,6 @@ describe("Workers Cache invalidation wiring", () => {
     ".github/workflows/publish-blog.yml",
     ".github/workflows/purge-cdn.yml",
     ".github/workflows/regenerate-blog-svgs.yml",
-    ".github/workflows/sync-rakuten-catalog.yml",
     ".github/workflows/sync-snapshots.yml",
   ];
 

@@ -31,16 +31,6 @@ const BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
  */
 export const WATCHED = [
   {
-    key: "app/rakuten/items/うどん.json",
-    maxAgeDays: 3,
-    why: "sync-rakuten-catalog.yml (日次)。古いと商品名・価格が古いまま配信される",
-  },
-  {
-    key: "app/rakuten/furusato/01000.json",
-    maxAgeDays: 3,
-    why: "sync-rakuten-catalog.yml (日次)。ふるさと納税カードの返礼品が古くなる",
-  },
-  {
     key: "app/blog/all.json",
     maxAgeDays: 14,
     why: "blog-auto-publish.yml (公開のたび)。止まると新規記事が一覧に出ない",

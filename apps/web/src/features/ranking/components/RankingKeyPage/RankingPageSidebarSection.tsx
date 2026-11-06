@@ -11,7 +11,7 @@ import {
 import type { AffiliateVertical } from "@/features/ads/constants/affiliate-category";
 import type { AffiliateDestination } from "@/features/ads/constants/affiliate-delivery-policy";
 import { SIDEBAR_PROMO_BANNERS } from "@/features/ads/constants/sidebar-banners";
-import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
+import { AffiliateAdSlot } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
 import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
 
@@ -62,16 +62,6 @@ export function RankingPageSidebarSection({
   rankingName,
   excludeAffiliateAds = [],
 }: RankingPageSidebarSectionProps) {
-  // 品目が一致する家計調査だけを優先する。null（広告なし）の解決結果は覆さない。
-  // 品目・R2在庫がない場合、カード自身が何も描画しない。
-  const prioritizeRakutenItems = affiliateVertical !== null
-    && surveys.some((survey) => survey.id === "kakei-chousa");
-  const rakutenItems = (
-    <RakutenItemsCard
-      sourceText={rankingName}
-      position={prioritizeRakutenItems ? "rakuten-sidebar" : "ranking-sidebar"}
-    />
-  );
   const promoBannerIndex = selectPromoBannerIndexForRanking(rankingKey);
   const reservedPromo = affiliateVertical === "labor" ? SIDEBAR_PROMO_BANNERS[promoBannerIndex] : undefined;
   const contextualAffiliateBanners = (
@@ -139,9 +129,6 @@ export function RankingPageSidebarSection({
         vertical={affiliateVertical}
         excludeAds={excludeAffiliateAds}
       />
-      {/* 家計調査の品目 (優先表示) の商品カードは、本文中段 (RankingPageRakutenNativeSection) のモバイル版と重複させないため
-          デスクトップ限定 (2026-09-16)。2026-10-29 に AdSense 上段の前から PR の枠の中へ移した */}
-      {prioritizeRakutenItems ? <div className="hidden lg:block">{rakutenItems}</div> : rakutenItems}
       {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       {/* 分野のランキング一覧を PR の枠と右レールの最後の AdSense の間に置き、広告の枠を隣り合わせにしない
           (2026-10-29 オーナー判断。AdSense 上段が上に上がり、デスクトップでは最初の画面に入ることがある) */}

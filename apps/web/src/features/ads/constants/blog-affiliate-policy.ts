@@ -22,13 +22,6 @@ export const BLOG_AFFILIATE_POLICY: Readonly<Record<string, BlogAffiliatePolicyE
   },
 };
 
-/**
- * 楽天カードを出しうる記事の vertical (`resolveBlogRakutenPlacement` の入口条件)。
- * 楽天カタログ同期の purge 対象 (`apps/web/scripts/lib/rakuten-purge-targets.ts`) も同じ集合で記事を選ぶ。
- * CLI から import されるため、このファイルには `@/` alias の import を持ち込まない。
- */
-export const BLOG_RAKUTEN_VERTICALS: ReadonlySet<AffiliateVertical> = new Set(["furusato", "economy", "travel"]);
-
 export function applyBlogAffiliatePolicy(
   slug: string,
   input: ContentVerticalInput,
@@ -41,7 +34,7 @@ export function applyBlogAffiliatePolicy(
 
 /**
  * 単一県の食卓・食文化・特産品・返礼品を主題にした記事か。この記事だけがふるさと納税と読者の関心が重なる。
- * 楽天カード (`resolveBlogRakutenPlacement` の県別返礼品) と A8 バナー (`resolveBlogBannerInput`) の両方がこの判定を使う。
+ * A8 バナー (`resolveBlogBannerInput`) がこの判定を使う。
  */
 export function isRegionalFoodCultureTitle(title: string, subtitle?: string | null): boolean {
   const sourceText = [title, subtitle].filter(Boolean).join("\n");

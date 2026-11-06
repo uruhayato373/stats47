@@ -16,12 +16,11 @@ features/ads/
 ├── components/
 │   ├── AffiliateAdSlot.tsx        # テキスト広告スロット（DB → AdSense フォールバック）
 │   ├── AdSenseAdWrapper.tsx       # AdSense 広告ラッパー
-│   ├── FurusatoNozeiCard.tsx      # ふるさと納税専用カード
 │   ├── RelatedAmazonBook.tsx      # ブログ記事末の関連書籍（Amazon アソシエイト）
 │   └── tracked-affiliate-link.tsx # GA4クリック計測付きリンク（use client）
 ├── constants/
 │   ├── affiliate-category.ts      # カテゴリマッピング・テーマ・型定義
-│   ├── furusato-nozei.ts          # ふるさと納税リンク定数
+│   ├── furusato-nozei.ts          # 本文からの県名判定
 │   └── related-books.ts           # カテゴリ別関連書籍定数
 ├── repositories/
 │   └── affiliate-ad-repository.ts # DB操作（Server Only）
