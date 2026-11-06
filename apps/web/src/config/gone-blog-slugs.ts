@@ -14,6 +14,10 @@
  * - 記事を復活させる場合はここから削除
  */
 export const GONE_BLOG_SLUGS = new Set<string>([
+  // 読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (2026-11-06・data/content/type-fit-review.json)。本文は private R2 に退避済み
+  "annual-sunshine-duration-vs-auto-liability-insurance-amount",
+  "road-length-per-km2-vs-residential-building-starts",
+  "shumai-consumption-expenditure-vs-jr-freight-shipment",
   // 非商用KSJ原典に依存する旧記事を承認済み公開終了 (2026-09-06)。再公開不可。
   "airport-count-vs-wind-power-plant-count-facility",
   "dam-count-prefecture-gap",
