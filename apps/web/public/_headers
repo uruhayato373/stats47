@@ -25,3 +25,6 @@
 # ランキングの地図と /themes の増減率コロプレスが同じ URL を読む。
 /prefecture.topojson
   Content-Type: application/json; charset=utf-8
+
+/municipalities.topojson
+  Content-Type: application/json; charset=utf-8
