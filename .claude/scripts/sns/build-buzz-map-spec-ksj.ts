@@ -301,11 +301,6 @@ async function main() {
     console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
     console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
     console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
-    if (years) {
-      console.log(`\nレンダ (時系列リール試写):`);
-      console.log(`  npx remotion render src/index.ts BuzzMap-Reel-11 /tmp/${opts.id}-preview.mp4 \\`);
-      console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json --frames=0-89 --scale=0.5`);
-    }
     return;
   }
 

@@ -17,9 +17,8 @@ describe('地図と動画の共通化の状況', () => {
     expect(rows.length).toBeGreaterThan(5);
     expect(rows.filter((row) => !row.geometry).map((row) => row.file)).toEqual([]);
   });
-  it('動画の一覧は実際の構成を読み、バズ地図が地図の土台へ届く', () => {
-    const buzz = videoRows(ROOT).find((row) => row.id === 'BuzzMap-Reel-916');
-    expect(buzz).toMatchObject({ map: 'base', rendered: true });
+  it('動画の一覧は実際の構成を読み、共有の入口の先まで追う', () => {
+    expect(videoRows(ROOT).find((row) => row.id === 'BarChartRace-InstagramReel')).toMatchObject({ rendered: true });
     expect(mapRows(ROOT).map((row) => row.file)).not.toContain('apps/admin/lib/server/media-unification.ts');
     expect(videoRows(ROOT).find((row) => row.id === 'RankingInstagram-Reel')?.feature).not.toContain('index');
   });

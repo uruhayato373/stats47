@@ -6,9 +6,7 @@ import { Composition, Folder } from 'remotion';
 import { z } from 'zod';
 // Shorts (shared)
 import { BarChartRaceShortPreview } from './shared/components/shorts/previews/BarChartRaceShortPreview';
-import { RankCardPreview } from './shared/components/shorts/previews/RankCardPreview';
 import { RankingTablePreview } from './shared/components/shorts/previews/RankingTablePreview';
-import { RankingTitlePreview } from './shared/components/shorts/previews/RankingTitlePreview';
 import { ReelLastPagePreview } from './shared/components/shorts/previews/ReelLastPagePreview';
 // Maps (shared)
 // ranking-youtube-ges
@@ -20,19 +18,13 @@ import { CarouselPreview } from './features/ranking-instagram/previews/CarouselP
 import { RankingTableSlidePreview } from './features/ranking-instagram/previews/RankingTableSlidePreview';
 // ranking-quiz-instagram
 import { RankingQuizCarouselPreview } from './features/ranking-quiz-instagram/previews/RankingQuizCarouselPreview';
-import { RankingQuizReelPreview } from './features/ranking-quiz-instagram/reel/previews/RankingQuizReelPreview';
-import { getQuizReelTimeline } from './features/ranking-quiz-instagram/reel/timeline';
 // area-instagram (地域カルーセル・火/土枠)
 import { AreaInstagramCarouselPreview } from './features/area-instagram/previews/AreaInstagramCarouselPreview';
 // correlation-instagram (相関カルーセル・水枠)
 import { CorrelationInstagramCarouselPreview } from './features/correlation-instagram/previews/CorrelationInstagramCarouselPreview';
 // buzz-map (バズ地図カード)
 import { BuzzMapStillPreview } from './features/buzz-map/previews/BuzzMapStillPreview';
-import {
-  BuzzMapReelPreview,
-  calculateBuzzMapReelMetadata,
-} from './features/buzz-map/previews/BuzzMapReelPreview';
-import { BUZZ_MAP_RATIOS, BUZZ_MAP_REEL_DEFAULTS } from './features/buzz-map/tokens';
+import { BUZZ_MAP_RATIOS } from './features/buzz-map/tokens';
 // ranking-x
 import { ChoroplethMapStillPreview } from './features/ranking-x/previews/ChoroplethMapStillPreview';
 import { RankingChartXPreview } from './features/ranking-x/previews/RankingChartXPreview';
@@ -40,7 +32,6 @@ import { GeoInsightCardPreview } from './features/geo-x/previews/GeoInsightCardP
 import type { GeoInsightCardProps } from './features/geo-x/GeoInsightCard';
 // ranking-youtube
 import { ThumbnailPreview } from './features/ranking-youtube/previews/ThumbnailPreview';
-import { RankingScrollGesPreview } from './features/ranking-youtube/previews/RankingScrollGesPreview';
 // ranking-note
 import { NoteCoverPreview } from './features/ranking-note/previews/NoteCoverPreview';
 // kazu-note
@@ -53,17 +44,11 @@ import { CompareCarouselInstagramPreview } from './features/compare-carousel-ins
 import { MapCarouselInstagramPreview } from './features/map-carousel-instagram/previews/MapCarouselInstagramPreview';
 // area-profile-instagram
 import { AreaProfileCarouselPreview } from './features/area-profile-instagram/previews/AreaProfileCarouselPreview';
-// migration-flow
-import { MigrationFlowReelPreview } from './features/migration-flow/previews/MigrationFlowReelPreview';
-import { MIGRATION_FLOW_DURATION } from '@stats47/migration-flow';
-// station-passengers
-import { StationPassengersReelPreview } from './features/station-passengers/previews/StationPassengersReelPreview';
-import { STATION_PASSENGERS_DURATION } from './features/station-passengers';
 // Charts (shared)
 // Utils
-import { SCENE_DURATION, VIDEO_CONFIG } from './utils/constants';
+import { VIDEO_CONFIG } from './utils/constants';
 import { barChartRacePreviewData } from './utils/preview-data-bar-chart-race';
-import { KazuNoteCoverSchema, AreaProfileCarouselSchema, BarChartRaceShortSchema, CarouselPreviewSchema, CommonPreviewSchema, CompareCarouselInstagramSchema, ComparisonCarouselSchema, MapCarouselInstagramSchema, MigrationFlowSchema, StationPassengersSchema, LayoutPreviewSchema, RankCardPreviewSchema, RankingShortSchema, RankingQuizCarouselSchema, RankingQuizReelSchema, AreaInstagramCarouselSchema, CorrelationInstagramCarouselSchema, RankingTablePreviewSchema, ThumbnailPreviewSchema } from './utils/schema';
+import { KazuNoteCoverSchema, AreaProfileCarouselSchema, BarChartRaceShortSchema, CarouselPreviewSchema, CommonPreviewSchema, CompareCarouselInstagramSchema, ComparisonCarouselSchema, MapCarouselInstagramSchema, LayoutPreviewSchema, RankingShortSchema, RankingQuizCarouselSchema, AreaInstagramCarouselSchema, CorrelationInstagramCarouselSchema, RankingTablePreviewSchema, ThumbnailPreviewSchema } from './utils/schema';
 
 export const RemotionRoot: React.FC = () => {
 
@@ -223,17 +208,6 @@ export const RemotionRoot: React.FC = () => {
             }}
           />
 
-          {/* 予想クイズ型リール (9:16・音声なし・18秒)。カルーセルと同じ props (meta/allEntries/quiz) */}
-          <Composition
-            id="RankingQuizInstagram-Reel"
-            component={RankingQuizReelPreview}
-            durationInFrames={getQuizReelTimeline().totalDuration}
-            fps={VIDEO_CONFIG.fps}
-            width={VIDEO_CONFIG.width}
-            height={VIDEO_CONFIG.height}
-            schema={RankingQuizReelSchema}
-            defaultProps={{}}
-          />
         </Folder>
 
         <Folder name="YouTube">
@@ -256,46 +230,11 @@ export const RemotionRoot: React.FC = () => {
                 gesBackground: true,
               } as any}
             />
-            {/* YouTube Shorts B: 全47件を高速表示・モーション無し（~55秒） */}
-            <Composition
-              id="RankingYouTube-Short-Full"
-              component={RankingShort}
-              durationInFrames={getShortTimeline("youtube-short-full").totalDuration}
-              fps={VIDEO_CONFIG.fps}
-              width={VIDEO_CONFIG.width}
-              height={VIDEO_CONFIG.height}
-              schema={RankingShortSchema}
-              defaultProps={{
-                theme: "dark",
-                variant: "youtube-short-full",
-                showSafeAreas: false,
-                hookText: '',
-                displayTitle: '',
-                gesBackground: true,
-              } as any}
-            />
           </Folder>
 
           <Folder name="Normal">
 
 
-            {/* YouTube GES背景 横スクロール動画 (16:9 Full HD 1920×1080) */}
-            <Composition
-              id="RankingYouTube-ScrollGes"
-              component={RankingScrollGesPreview}
-              width={CANVAS.youtube16x9.width}
-              height={CANVAS.youtube16x9.height}
-              fps={VIDEO_CONFIG.fps}
-              durationInFrames={120 + (90 * 37 + 120 * 7 + 180 * 3) + 120}
-              schema={CommonPreviewSchema.extend({
-                precision: z.number().optional(),
-                musicPath: z.string().optional(),
-                hookText: z.string().optional(),
-              })}
-              defaultProps={{
-                theme: 'dark' as const,
-              }}
-            />
 
 
             {/* YouTube サムネイル: 衝撃数字型 (16:9) */}
@@ -569,111 +508,11 @@ export const RemotionRoot: React.FC = () => {
       {/* 47都道府県 × 1976-2024 年次前年度比 コロプレス時系列 */}
 
       {/* 都道府県間 人口移動フロー (YouTube 16:9) */}
-      <Folder name="MigrationFlow">
-        <Composition
-          id="MigrationFlow-Reel"
-          component={MigrationFlowReelPreview}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={MIGRATION_FLOW_DURATION}
-          schema={MigrationFlowSchema}
-          defaultProps={{
-            theme: 'light' as const,
-            focusPrefCode: '28',
-          }}
-        />
-
-
-        {/* IG Reels / TikTok / YouTube Shorts 用 portrait 動画 (1080x1920) */}
-        <Composition
-          id="MigrationFlow-Reel-Portrait"
-          component={MigrationFlowReelPreview}
-          width={1080}
-          height={1920}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={MIGRATION_FLOW_DURATION}
-          schema={MigrationFlowSchema}
-          defaultProps={{
-            theme: 'light' as const,
-            focusPrefCode: '13',
-            format: 'portrait' as const,
-          }}
-        />
-
-
-
-      </Folder>
 
       {/* 駅別乗降客数バブルマップ (国土数値情報 S12) */}
-      <Folder name="StationPassengers">
-        {/* YouTube・X 用 16:9 */}
-        <Composition
-          id="StationPassengers-Reel"
-          component={StationPassengersReelPreview}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={STATION_PASSENGERS_DURATION}
-          schema={StationPassengersSchema}
-          defaultProps={{
-            prefCode: '22',
-            format: 'landscape' as const,
-          }}
-        />
-
-        {/* Instagram Reels・YouTube Shorts・TikTok 用 9:16 */}
-        <Composition
-          id="StationPassengers-Reel-Portrait"
-          component={StationPassengersReelPreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={STATION_PASSENGERS_DURATION}
-          schema={StationPassengersSchema}
-          defaultProps={{
-            prefCode: '22',
-            format: 'portrait' as const,
-          }}
-        />
-
-        {/* Instagram フィード用 1:1 */}
-        <Composition
-          id="StationPassengers-Reel-Square"
-          component={StationPassengersReelPreview}
-          width={CANVAS.square.width}
-          height={CANVAS.square.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={STATION_PASSENGERS_DURATION}
-          schema={StationPassengersSchema}
-          defaultProps={{
-            prefCode: '22',
-            format: 'square' as const,
-          }}
-        />
-      </Folder>
 
       {/* パイプライン用据え置きコンポジション */}
       <Folder name="pipeline-stills">
-        {/* ランクカード (9:16) */}
-        <Composition
-          id="RankCard"
-          component={RankCardPreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={SCENE_DURATION.rank5}
-          schema={RankCardPreviewSchema.extend({
-            title: z.string().optional(),
-            totalCount: z.number().optional(),
-          })}
-          defaultProps={{
-            rank: 1,
-            theme: 'dark' as const,
-            showGuides: false,
-            showSafeAreas: false,
-          }}
-        />
 
 
 
@@ -708,24 +547,6 @@ export const RemotionRoot: React.FC = () => {
           }}
         />
 
-        {/* イントロフック: RankingTitle (1080x1920) */}
-        <Composition
-          id="RankingTitle"
-          component={RankingTitlePreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={SCENE_DURATION.intro}
-          schema={CommonPreviewSchema.extend({
-            catchphrase1: z.string().optional(),
-            catchphrase2: z.string().optional(),
-          })}
-          defaultProps={{
-            theme: 'dark' as const,
-            showGuides: false,
-            showSafeAreas: false,
-          }}
-        />
       </Folder>
 
       {/* ===== buzz-map (バズ地図カード。規約: .claude/rules/buzz-map-standards.md) ===== */}
@@ -768,28 +589,6 @@ export const RemotionRoot: React.FC = () => {
           height={BUZZ_MAP_RATIOS['916'].height}
           fps={1}
           durationInFrames={1}
-          defaultProps={{ ratio: '916' as const }}
-        />
-        {/* 型B 時系列アニメ (1:1 = X 動画)。尺は spec の speed/hold から自動算出 */}
-        <Composition
-          id="BuzzMap-Reel-11"
-          component={BuzzMapReelPreview}
-          width={BUZZ_MAP_RATIOS['11'].width}
-          height={BUZZ_MAP_RATIOS['11'].height}
-          fps={BUZZ_MAP_REEL_DEFAULTS.fps}
-          durationInFrames={900}
-          calculateMetadata={calculateBuzzMapReelMetadata}
-          defaultProps={{ ratio: '11' as const }}
-        />
-        {/* 型B 時系列アニメ (9:16 = IG リール/TikTok) */}
-        <Composition
-          id="BuzzMap-Reel-916"
-          component={BuzzMapReelPreview}
-          width={BUZZ_MAP_RATIOS['916'].width}
-          height={BUZZ_MAP_RATIOS['916'].height}
-          fps={BUZZ_MAP_REEL_DEFAULTS.fps}
-          durationInFrames={900}
-          calculateMetadata={calculateBuzzMapReelMetadata}
           defaultProps={{ ratio: '916' as const }}
         />
       </Folder>

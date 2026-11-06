@@ -51,10 +51,9 @@ export function parseCompositions(source: string): CompositionBlock[] {
 }
 
 const IMPORT = /(?:from|import)\s+['"]([^'"]+)['"]/g;
-const WORKSPACE: Record<string, string> = { '@stats47/migration-flow': 'packages/migration-flow/src/index.ts', '@stats47/station-passengers': 'packages/station-passengers/src/index.ts' };
 
 function resolveImport(root: string, from: string, specifier: string) {
-  const base = WORKSPACE[specifier] ?? (specifier.startsWith('@/') ? `apps/remotion/src/${specifier.slice(2)}` : specifier.startsWith('.') ? path.posix.join(path.posix.dirname(from), specifier) : null);
+  const base = (specifier.startsWith('@/') ? `apps/remotion/src/${specifier.slice(2)}` : specifier.startsWith('.') ? path.posix.join(path.posix.dirname(from), specifier) : null);
   if (!base) return null;
   return [base, `${base}.ts`, `${base}.tsx`, `${base}/index.ts`, `${base}/index.tsx`].find((file) => /\.\w+$/.test(file) && fs.existsSync(path.join(root, file))) ?? null;
 }

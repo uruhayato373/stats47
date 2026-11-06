@@ -45,7 +45,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 
 - `.local/r2/sns/ranking/<rankingKey>/{tiktok/,instagram/,x/}` — レンダリング済みメディア
 - `.local/r2/sns/geo/<contentKey>/x/stills/<contentKey>.png` — Geo専用静止画。隣接`source.json`に出典・レイヤー・演算・SHAを記録
-- buzz-map: `.local/r2/sns/buzz-map/<id>/instagram/{stills/slide-1-cover-1080x1350.png,reel.mp4,caption.txt}`（IG は R2 公開 URL 前提。`BuzzMap-Still-45`=4:5 静止画 / `BuzzMap-Reel-916`=9:16 リール）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録。X は従来どおり `x/stills/`
+- buzz-map: `.local/r2/sns/buzz-map/<id>/instagram/{stills/slide-1-cover-1080x1350.png,caption.txt}`（IG は R2 公開 URL 前提。`BuzzMap-Still-45`=4:5 静止画 / `BuzzMap-Reel-916`=9:16 リール）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録。X は従来どおり `x/stills/`
 
 ## OGP・画像生成の役割分担
 
