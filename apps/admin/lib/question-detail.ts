@@ -23,3 +23,25 @@ export function verdictOf(review: string): string | null {
 export function articleFigures(markdown: string): string[] {
   return [...markdown.matchAll(/!\[[^\]]*\]\(data\/([^)]+\.svg)\)/g)].map((m) => m[1]);
 }
+
+export type AnalysisInput = { key: string; title: string; derived: boolean; rankingHref: string | null; municipalityHref: string | null };
+
+type InputPage = { title: string; href: string; published?: boolean };
+
+/**
+ * 分析に使ったデータを、入力と求めた指標の順に 1 回ずつ並べる。
+ * リンクは公開中のページだけにし、無ければ null を返す (画面に「なし」と出す)。
+ */
+export function analysisInputs(specKeys: string[], derived: Array<{ key: string; label: string }>, pageOf: (id: string) => InputPage | undefined): AnalysisInput[] {
+  const published = (id: string) => {
+    const page = pageOf(id);
+    return page?.published ? page : undefined;
+  };
+  const row = (key: string, label: string | null): AnalysisInput => {
+    const ranking = published(`ranking:${key}`);
+    const municipality = published(`municipality-ranking:${key}`);
+    return { key, title: label ?? ranking?.title ?? municipality?.title ?? key, derived: label !== null, rankingHref: ranking?.href ?? null, municipalityHref: municipality?.href ?? null };
+  };
+  const seen = new Set<string>();
+  return [...specKeys.map((key) => row(key, null)), ...derived.map((d) => row(d.key, d.label))].filter((r) => !seen.has(r.key) && Boolean(seen.add(r.key)));
+}

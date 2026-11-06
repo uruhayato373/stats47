@@ -79,6 +79,6 @@ ogImage: /blog/manufacturing-strength-factory-size/og.png
 
 製造業が強い町の差は、主に1つの工場の大きさで説明できました。人口あたり出荷額の差の63.1%は1事業所あたり出荷額、36.9%は事業所の数です。県で見ると2つの要素はほぼ無関係で、数で強い県と大きさで強い県は別々にあります。
 
-自分の町の出荷額は[市区町村ランキング](/municipalities/ranking/manufacturing-shipment-amount)で確かめられます。この記事の6つの例では、1事業所あたり出荷額が200億円を超える町は大きさの型、10億円に届かない町は数の型でした。あわせて[製造業の1人あたり出荷額の県別の比較](/blog/manufacturing-productivity)も読むと、県の産業の違いが見えてきます。
+自分の町の値は、[出荷額の市区町村ランキング](/municipalities/ranking/manufacturing-shipment-amount)と[事業所数の市区町村ランキング](/municipalities/ranking/manufacturing-establishments)で確かめられます。この記事の6つの例では、1事業所あたり出荷額が200億円を超える町は大きさの型、10億円に届かない町は数の型でした。あわせて[製造業の1人あたり出荷額の県別の比較](/blog/manufacturing-productivity)も読むと、県の産業の違いが見えてきます。
 
 資料づくりなどで長い期間の推移を使う場合は、最新の市区町村の境域にそろえた1980〜2023年の[CSVとGeoJSONのデータ](https://note.com/stats47/n/n5d86476e9c73)も用意しています。

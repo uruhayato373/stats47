@@ -8,7 +8,7 @@ import { classifyAll } from "../../../../.claude/scripts/content-types/classify-
 import { readClassifyInputs } from "../../../../.claude/scripts/content-types/content-types-io.mjs";
 import { readDraftStates } from "../../../../.claude/scripts/issues/issue-draft-state.mjs";
 import { indexPages } from "../../../../.claude/scripts/issues/issue-graph-core.mjs";
-import { articleFigures, frontmatterValue, outlineOf, verdictOf } from "../question-detail";
+import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf, type AnalysisInput } from "../question-detail";
 import { buildQuestionProgress, type ExternalLink, type QuestionAnalysis, type QuestionDestination, type QuestionFigure, type QuestionIssue, type QuestionLink, type QuestionProgress } from "../question-progress";
 import { projectRoot } from "./project-root";
 import { fileExists, readJson, readText, statePath, type Wrapped } from "./state-io";
@@ -63,13 +63,15 @@ export type QuestionDetail = {
   figures: Array<{ id: string; title: string; template: string; destinations: QuestionDestination[] }>;
   posts: Array<{ id: number; status: string; platform: string; caption: string; approval: string }>;
   products: Array<{ id: string; title: string; href: string | null; priceJpy: number | null; status: string }>;
+  /** 分析の spec と求めた指標から自動で作る。手で配線しない */
+  inputs: AnalysisInput[];
   /** ページを経由して辿れる note と投稿。問いから企画したものとは限らない */
   relatedNotes: Array<{ id: string; title: string; href: string | null; via: string }>;
   relatedPosts: Array<{ id: number; caption: string; platform: string; status: string; via: string }>;
 };
 
 const issuesLedger = () => readJson<{ issues: Array<QuestionIssue & { dataNote?: string; pitfall?: string }> }>(datasetPath("content.issues")).issues;
-const analysesLedger = () => readJson<{ analyses: Array<QuestionAnalysis & { question?: string; finding?: string; caveats?: string[]; article?: { slug: string } }> }>(datasetPath("content.analyses")).analyses;
+const analysesLedger = () => readJson<{ analyses: Array<QuestionAnalysis & { question?: string; finding?: string; caveats?: string[]; spec?: string; derivedMetrics?: Array<{ key: string; label: string }>; article?: { slug: string } }> }>(datasetPath("content.analyses")).analyses;
 const figuresLedger = () => readJson<{ figures: QuestionFigure[] }>(datasetPath("content.figures")).figures;
 
 function readDrafts(): DraftView[] {
@@ -116,7 +118,9 @@ export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
     const external = readJson<{ links: ExternalLink[] }>(datasetPath("content.external")).links.filter((l) => own.some((o) => o.page === l.to));
     const viaOf = (to: string) => pageById.get(to)?.title ?? to;
     const postOf = new Map<number, { id: number; platform: string; status: string; caption?: string }>(inputs.posts.map((p: { id: number; platform: string; status: string; caption?: string }) => [p.id, p]));
+    const specKeys = analyses.flatMap((a) => (a.spec ? readJson<{ metrics: Array<{ key: string }> }>(a.spec).metrics.map((m) => m.key) : []));
     return {
+      inputs: analysisInputs(specKeys, analyses.flatMap((a) => a.derivedMetrics ?? []), (pageId) => pageById.get(pageId)),
       relatedNotes: external.filter((l) => l.from.startsWith("note:")).map((l) => {
         const note = noteOf.get(l.from);
         return { id: l.from, title: note?.title ?? l.from, href: note?.noteUrl ?? null, via: viaOf(l.to) };

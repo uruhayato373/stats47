@@ -15,6 +15,15 @@ export const metadata = { title: "問いの配線 — stats47 admin" };
 const SITE_LOCAL = "http://localhost:3000";
 const LINK = "font-medium underline-offset-4 hover:underline";
 
+function RankingLink({ href }: { href: string | null }) {
+  if (!href) return <span className="text-muted-foreground">なし</span>;
+  return (
+    <a className={LINK} href={`${SITE.origin}${href}`} target="_blank" rel="noreferrer">
+      開く
+    </a>
+  );
+}
+
 function DraftCard({ draft }: { draft: DraftView }) {
   return (
     <PanelCard title={draft.title} description={draft.description ?? undefined}>
@@ -65,7 +74,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
       </>
     );
   }
-  const { issue, analyses, pages, drafts, figures, posts, products, relatedNotes, relatedPosts } = data;
+  const { issue, analyses, inputs, pages, drafts, figures, posts, products, relatedNotes, relatedPosts } = data;
 
   return (
     <>
@@ -126,7 +135,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
             {relatedPosts.map((p) => (
               <Row key={`${p.id}:${p.via}`}>
                 <Cell nowrap>
-                  <Link className={LINK} href={`/sns/${p.id}`}>
+                  <Link className={LINK} href={`/sns/${p.id}`} target="_blank">
                     {p.id}
                   </Link>
                 </Cell>
@@ -158,6 +167,32 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
           <p className="m-0 text-sm text-muted-foreground">分析はまだありません。</p>
         )}
       </Section>
+
+      {inputs.length ? (
+        <Section title={`分析に使ったデータ (${inputs.length})`}>
+          <DataTable columns={["データ", "都道府県", "市区町村", "配線"]}>
+            {inputs.map((input) => (
+              <Row key={input.key}>
+                <Cell>
+                  {input.title}
+                  {input.derived ? <span className="ml-1 text-xs text-muted-foreground">(分析で計算)</span> : null}
+                </Cell>
+                <Cell nowrap>
+                  <RankingLink href={input.rankingHref} />
+                </Cell>
+                <Cell nowrap>
+                  <RankingLink href={input.municipalityHref} />
+                </Cell>
+                <Cell nowrap>
+                  <Link className={LINK} href={`/content/metrics/${encodeURIComponent(input.key)}`} target="_blank">
+                    記事・note・SNS
+                  </Link>
+                </Cell>
+              </Row>
+            ))}
+          </DataTable>
+        </Section>
+      ) : null}
 
       <Section title={`公開待ちの記事 (${drafts.length})`}>
         {drafts.length ? (
@@ -197,7 +232,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
             {posts.map((p) => (
               <Row key={p.id}>
                 <Cell nowrap>
-                  <Link className={LINK} href={`/sns/${p.id}`}>
+                  <Link className={LINK} href={`/sns/${p.id}`} target="_blank">
                     {p.id}
                   </Link>
                 </Cell>

@@ -269,7 +269,10 @@ export const DATASETS = [
   }),
   d("content.analyses", "data/content/analyses.json", "config", "data", "data", "問いに答える分析の台帳。入力の spec と再現のスクリプトを持ち、値は持たない", {
     schema: "data/content/schema/analyses.schema.json",
-    refs: [{ field: "analyses[].issue", to: "content.issues", key: "issues[].id" }],
+    refs: [
+      { field: "analyses[].issue", to: "content.issues", key: "issues[].id" },
+      { field: "analyses[].derivedMetrics[].key", to: "registry:metrics" },
+    ],
   }),
   d("content.types", "data/content/content-types.json", "config", "data", "data", "コンテンツの 4 型の定義と、ページ・投稿・商品を型へ振り分ける規則。ID と規則だけを持ち、件数は持たない", {
     schema: "data/content/schema/content-types.schema.json",
