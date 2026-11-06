@@ -6,6 +6,8 @@ disable-model-invocation: true
 primary_agent: article-writer
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # /write-prepared-article — 準備済みブログ記事を書き上げる
 
 新規記事を書く**主経路**。準備 (接地・健全性ゲート・SVG・prompt) は決定的スクリプトが行い、

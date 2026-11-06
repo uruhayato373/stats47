@@ -6,6 +6,8 @@ argument-hint: <記事パスまたは slug> [--mode expert|proofread]
 primary_agent: blog-critic
 ---
 
+**4 型の審査 (必須)**: 記事の型 (`data/content/content-types.json`) の約束を満たすかも審査する。約束と落とす例は `.claude/rules/content-type-standards.md`。
+
 ブログ記事を 2 モードでレビューする。 旧 `/expert-review` と `/proofread-article` を統合した skill。
 
 ## 引数

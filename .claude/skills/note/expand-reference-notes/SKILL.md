@@ -7,6 +7,8 @@ primary_agent: note-manager
 co_agents: [note-critic]
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # expand-reference-notes
 
 教材の分析企画 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`) のうち、展開先に note を含むものを記事にする。

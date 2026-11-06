@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "コンテンツの 4 型と分類の規則",
+  "type": "object",
+  "required": ["version", "dataNote", "types", "rules", "assignments"],
+  "additionalProperties": false,
+  "definitions": {
+    "typeId": { "type": "string", "pattern": "^type:[a-z]+$" },
+    "typeMap": { "type": "object", "additionalProperties": { "$ref": "#/definitions/typeId" } }
+  },
+  "properties": {
+    "version": { "const": 1 },
+    "dataNote": { "type": "string", "minLength": 1 },
+    "types": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "question", "examples"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/definitions/typeId" },
+          "title": { "type": "string", "minLength": 1 },
+          "question": { "type": "string", "minLength": 1 },
+          "examples": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "required": ["pageKinds", "excludedPageKinds", "blogSlugSuffixes", "blogSlugInfixes", "noteVerticals", "noteSeries", "snsDomains", "kindle"],
+      "additionalProperties": false,
+      "properties": {
+        "pageKinds": { "$ref": "#/definitions/typeMap" },
+        "excludedPageKinds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "blogSlugSuffixes": { "$ref": "#/definitions/typeMap" },
+        "blogSlugInfixes": { "$ref": "#/definitions/typeMap" },
+        "noteVerticals": { "$ref": "#/definitions/typeMap" },
+        "noteSeries": { "$ref": "#/definitions/typeMap" },
+        "snsDomains": { "$ref": "#/definitions/typeMap" },
+        "kindle": { "$ref": "#/definitions/typeId" }
+      }
+    },
+    "assignments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^(blog|note|sns|kindle):.+$" },
+          "type": { "$ref": "#/definitions/typeId" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

@@ -17,7 +17,6 @@ import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import {
   classifyCoverage,
-  classifyDraft,
   computeReach,
   findQueryCandidates,
   indexPages,
@@ -27,6 +26,7 @@ import {
   sumTraffic,
   validateIssueGraph,
 } from "./issue-graph-core.mjs";
+import { readDraftStates } from "./issue-draft-state.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
 const readJson = (rel) => JSON.parse(readFileSync(join(PROJECT_ROOT, rel), "utf8"));
@@ -49,20 +49,7 @@ const { links } = readJson(datasetPath("content.issue-links"));
 if (flag("--figures")) {
   const { figures } = readJson(datasetPath("content.figures"));
   const { analyses } = readJson(datasetPath("content.analyses"));
-  const drafts = new Map(
-    [...new Set(figures.flatMap((f) => f.destinations.map((d) => d.slug)).filter(Boolean))].map((slug) => {
-      const dir = join(PROJECT_ROOT, "contents/blog", slug);
-      const read = (file) => (existsSync(join(dir, file)) ? readFileSync(join(dir, file), "utf8") : "");
-      const article = read("article.md");
-      if (!existsSync(dir)) return [slug, "下書きなし"];
-      return [slug, classifyDraft({
-        hasArticle: article !== "",
-        published: /^published:\s*true\s*$/m.test(article),
-        verdict: read("review.md").match(/^verdict:\s*(\w+)/m)?.[1] ?? null,
-        hasBackground: existsSync(join(PROJECT_ROOT, "assets/blog/article-backgrounds", `${slug}.jpg`)),
-      })];
-    }),
-  );
+  const drafts = readDraftStates(PROJECT_ROOT, figures);
   const rows = listFigureDestinations({ figures, analyses, posts: readJson(datasetPath("sns.posts")).posts, pages, drafts });
   if (flag("--json")) {
     console.log(JSON.stringify(rows, null, 2));

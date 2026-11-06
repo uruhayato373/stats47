@@ -14,10 +14,10 @@
     { "id": "biz:col:data", "title": "データ販売", "description": "読者・組織がファイルに払う。CSV・Excel・GeoJSON" }
   ],
   "rows": [
-    { "id": "biz:row:reference", "title": "参照型", "question": "1 位はどこか", "examples": "ランキング・雑学" },
-    { "id": "biz:row:textbook", "title": "教科書型", "question": "この統計で何がわかるか、どう使うか", "examples": "家計調査でわかること、財政指標の定義と各地の状況、調査ハブ" },
-    { "id": "biz:row:paper", "title": "論文型", "question": "自分たちの〇〇はどうなるか", "examples": "Geo 分析など問いへの答え", "relatedDataset": "content.issues" },
-    { "id": "biz:row:howto", "title": "作り方型", "question": "どうやって作るか、自分の仕事でどう再現するか", "examples": "e-Stat × Claude Code の実務、再現手順・テンプレート" }
+    { "id": "biz:row:reference", "contentType": "type:reference", "title": "参照型", "question": "1 位はどこか", "examples": "ランキング・雑学" },
+    { "id": "biz:row:textbook", "contentType": "type:textbook", "title": "教科書型", "question": "この統計で何がわかるか、どう使うか", "examples": "家計調査でわかること、財政指標の定義と各地の状況、調査ハブ" },
+    { "id": "biz:row:paper", "contentType": "type:paper", "title": "論文型", "question": "自分たちの〇〇はどうなるか", "examples": "Geo 分析など問いへの答え", "relatedDataset": "content.issues" },
+    { "id": "biz:row:howto", "contentType": "type:howto", "title": "作り方型", "question": "どうやって作るか、自分の仕事でどう再現するか", "examples": "e-Stat × Claude Code の実務、再現手順・テンプレート" }
   ],
   "cells": [
     {

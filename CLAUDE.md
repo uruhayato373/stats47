@@ -87,6 +87,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `agent-output-contract.md` | Agent tool 起動時の prompt 設計 (Task Capsule + Output Format) | 常時 |
 | `evidence-based-judgment.md` | improvement / 判定系 (effect/* 更新・仕様主張・原因推定)。閾値の SSOT は `.claude/scripts/lib/effect-verdict/thresholds.mjs` | 常時 |
 | `coding-standards.md` | TypeScript / React / Next.js コード全般 | apps・packages の ts/tsx |
+| `content-type-standards.md` | コンテンツの 4 型 (全コンテンツが参照型・教科書型・論文型・作り方型のどれかに属する。型の約束・宣言・機械の止め・洗い出し) | contents/blog・skills の blog/note/sns/product/content・content-types |
 | `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (curiosity gap・図あたり字数・critic 必須) | contents/blog・scripts/blog・skills/blog |
 | `blog-data-schema.md` | ブログ data/*.json の統一 schema・3 点セット系譜・wave 命名 | 同上 |
 | `blog-svg-chart-standards.md` | ブログ SVG チャート (svg-builder カタログ・サイズ gate) | packages/svg-builder・contents/blog data |

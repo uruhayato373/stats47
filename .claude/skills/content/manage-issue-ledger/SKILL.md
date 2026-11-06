@@ -1,9 +1,11 @@
 ---
 name: manage-issue-ledger
-domain: site
+domain: content
 description: 問いの台帳 (data/content/issues.json・issue-links.json) を回す。検査と棚卸しで状況を見て、検索語と白書から問いを足し、ページへ配線し、答えの無い問いを既存の生産スキルへ渡し、不要な問いを見送る。Use when user says "問いの台帳", "問いを足す", "問いを見送る", "答えの無い問い", "issues:coverage".
 primary_agent: blog-seo-strategist
 ---
+
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
 
 # manage-issue-ledger
 
@@ -21,6 +23,8 @@ npm run issues:coverage     # 公開ページの棚卸し (GSC の直近 4 週)
 npm run issues:candidates   # 問いの候補の検索語 (--limit N / --weeks N / --json)
 npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-issue-view.html。Artifact に載せる)
 ```
+
+問いごとの進み具合 (ページ・分析・図・配信先・次の作業) は管理画面の `/content/questions` で見る。事業イシューマップ (`/strategy/issue-map`) とは別物で、片方の台帳をもう片方の画面へ持ち込まない。
 
 形と外部キーは `node .claude/scripts/lib/check-datasets.mjs` が見る。GSC は土曜の週次記録 (`data/gsc/snapshots/`) を読むので、最新週が古ければ棚卸しの結果にそう書く。
 

@@ -6,6 +6,8 @@ argument-hint: --target queue [--next 5] | --target article <slug> [--focus CTR-
 primary_agent: article-writer
 ---
 
+**4 型の審査 (必須)**: 記事の型 (`data/content/content-types.json`) の約束を満たすかも審査する。約束と落とす例は `.claude/rules/content-type-standards.md`。
+
 # /brushup-blog — ブログ記事 brushup (優先度キュー生成 + 1 記事リライト + 一括リライト)
 
 旧 `/brushup-blog-priority` (キュー生成)・`/brushup-blog-article` (1 記事リライト)・`/auto-brushup-batch` (一括 rewrite) を統合した skill。 `--target` で 3 モードを切り替える。 **リライトの実行エンジンは `--target article` に一本化**され、`--target batch` はそのエンジンをユーザー指示時に複数記事へループ適用する (cron 自律実行はしない)。
