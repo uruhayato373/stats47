@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "maxStateAgeDays": 10,
   "ranking": {
-    "minActiveResolved": 2371,
+    "minActiveResolved": 2508,
     "minActiveCoveragePct": 100
   },
   "rankingBaselineAdjustment": {
@@ -40,20 +40,20 @@
     }
   ],
   "theme": {
-    "minResolvedMetricGroups": 396,
+    "minResolvedMetricGroups": 400,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
-    "minResolvedCharts": 61,
+    "minResolvedCharts": 79,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
   "blog": {
-    "minCharts": 1950,
-    "minResolvedCharts": 1799,
+    "minCharts": 2124,
+    "minResolvedCharts": 1969,
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
     "maxMissingLineageCharts": 0,
-    "maxLegacyDataSourceSectionArticles": 59,
+    "maxLegacyDataSourceSectionArticles": 58,
     "maxSourcelessChartArticles": 1,
     "requireSnapshotSources": true
   },

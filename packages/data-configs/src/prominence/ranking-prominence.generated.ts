@@ -319,18 +319,18 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 1022,
     "representatives": [
       {
-        "rankingKey": "beef-consumption-quantity",
-        "title": "牛肉消費量",
-        "readerLabel": "牛肉消費量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間牛肉消費量",
-        "hook": "牛肉消費量が最も多い都市は？"
-      },
-      {
         "rankingKey": "natto-consumption-expenditure",
         "title": "納豆消費支出額",
         "readerLabel": "納豆への支出",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
         "hook": "納豆への支出が最も多い都市は？"
+      },
+      {
+        "rankingKey": "beef-consumption-quantity",
+        "title": "牛肉消費量",
+        "readerLabel": "牛肉消費量",
+        "subtitle": "都道府県庁所在市の二人以上世帯の年間牛肉消費量",
+        "hook": "牛肉消費量が最も多い都市は？"
       },
       {
         "rankingKey": "pork-consumption-quantity",
@@ -347,18 +347,18 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "米消費量が最も多い都市は？"
       },
       {
-        "rankingKey": "air-conditioner-consumption-quantity",
-        "title": "エアコン購入数量",
-        "readerLabel": "エアコン購入数量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間エアコン購入数量",
-        "hook": "エアコン購入数量が最も多い都市は？"
+        "rankingKey": "bacon-consumption-expenditure",
+        "title": "ベーコン消費支出額",
+        "readerLabel": "ベーコンへの支出",
+        "subtitle": "都道府県庁所在市の二人以上世帯の年間ベーコン消費支出額",
+        "hook": "ベーコンへの支出が最も多い都市は？"
       },
       {
-        "rankingKey": "apple-consumption-quantity",
-        "title": "りんご消費量",
-        "readerLabel": "りんご消費量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間りんご消費量",
-        "hook": "りんご消費量が最も多い都市は？"
+        "rankingKey": "bread-consumption-expenditure",
+        "title": "パン消費支出額",
+        "readerLabel": "パンへの支出",
+        "subtitle": "都道府県庁所在市の二人以上世帯の年間パン消費支出額（合計）",
+        "hook": "パンへの支出が最も多い都市は？"
       }
     ]
   },
@@ -762,18 +762,18 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "郵便局数が最も多い県は？"
       },
       {
-        "rankingKey": "telephone-subscription-count",
-        "title": "電話加入数",
-        "readerLabel": "電話加入数",
-        "subtitle": "総数",
-        "hook": "電話加入数が最も多い県は？"
-      },
-      {
         "rankingKey": "information-communication-expenditure",
         "title": "情報通信関係費",
         "readerLabel": "情報通信関係費",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間支出額（固定電話通信料・移動電話通信料・NHK放送受信料・ケーブルテレビ受信料・他の受信料の合計）",
         "hook": "情報通信関係費が最も多い都市は？"
+      },
+      {
+        "rankingKey": "telephone-subscription-count",
+        "title": "電話加入数",
+        "readerLabel": "電話加入数",
+        "subtitle": "総数",
+        "hook": "電話加入数が最も多い県は？"
       },
       {
         "rankingKey": "transport-communication-expenditure-ratio-multi-person-households",
@@ -838,13 +838,22 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "order": 5
   },
   {
+    "rankingKey": "natto-consumption-expenditure",
+    "title": "納豆消費支出額",
+    "readerLabel": "納豆への支出",
+    "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
+    "hook": "納豆への支出が最も多い都市は？",
+    "categoryKey": "economy",
+    "order": 6
+  },
+  {
     "rankingKey": "police-officer-count",
     "title": "警察官数",
     "readerLabel": "警察官数",
     "subtitle": "総数",
     "hook": "警察官数が最も多い県は？",
     "categoryKey": "safetyenvironment",
-    "order": 6
+    "order": 7
   },
   {
     "rankingKey": "public-bath-count-per-100k",
@@ -853,15 +862,6 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "subtitle": "人口10万人当たり",
     "hook": "公衆浴場数が最も多い県は？",
     "categoryKey": "commercial",
-    "order": 7
-  },
-  {
-    "rankingKey": "beef-consumption-quantity",
-    "title": "牛肉消費量",
-    "readerLabel": "牛肉消費量",
-    "subtitle": "都道府県庁所在市の二人以上世帯の年間牛肉消費量",
-    "hook": "牛肉消費量が最も多い都市は？",
-    "categoryKey": "economy",
     "order": 8
   }
 ];
@@ -911,12 +911,12 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "barber-beauty-salon-count",
   "convenience-store-count-commercial",
   "number-of-commercial-employees-wholesale-retail",
-  "beef-consumption-quantity",
   "natto-consumption-expenditure",
+  "beef-consumption-quantity",
   "pork-consumption-quantity",
   "rice-consumption-quantity",
-  "air-conditioner-consumption-quantity",
-  "apple-consumption-quantity",
+  "bacon-consumption-expenditure",
+  "bread-consumption-expenditure",
   "new-condo-starts",
   "new-housing-starts",
   "new-rental-starts",
@@ -968,8 +968,8 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "railway-passengers",
   "public-phone-count",
   "post-office-count",
-  "telephone-subscription-count",
   "information-communication-expenditure",
+  "telephone-subscription-count",
   "transport-communication-expenditure-ratio-multi-person-households",
   "information-communication-coefficient"
 ];
@@ -1000,8 +1000,8 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "beef-cattle-count": 0.6875,
   "beef-consumption-quantity": 0.9403,
   "certified-childcare-center-count-per-100k-0-5": 0.6725,
-  "chicken-consumption-expenditure": 0.8278,
-  "chinese-noodles-consumption-expenditure": 0.7716,
+  "chicken-consumption-expenditure": 0.8313,
+  "chinese-noodles-consumption-expenditure": 0.775,
   "cleaning-shop-count-per-100k": 0.775,
   "consumer-price-difference-index-housing": 0.8587,
   "consumer-price-difference-index-overall": 0.7325,
@@ -1026,13 +1026,13 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "food-self-sufficiency-rate-calorie": 0.805,
   "foreign-resident-count-per-100k": 0.3704,
   "forest-area-ratio": 0.4049,
-  "fresh-udon-soba-consumption-expenditure": 0.7153,
+  "fresh-udon-soba-consumption-expenditure": 0.7188,
   "future-population-change-rate-2050": 0.575,
   "gas-station-count-per-100km": 0.6625,
   "general-clinic-count-per-100k": 0.48,
   "general-hospital-bed-count-per-100k": 0.48,
   "general-hospital-count-per-100k": 0.48,
-  "green-tea-consumption-expenditure": 0.7153,
+  "green-tea-consumption-expenditure": 0.7188,
   "healthy-life-expectancy-female": 0.6288,
   "healthy-life-expectancy-male": 0.5588,
   "households": 0.6725,
@@ -1063,7 +1063,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "residential-land-price-change-rate": 0.6625,
   "rice-harvest-volume": 0.5,
   "room-utilization-rate": 0.7601,
-  "sake-consumption-expenditure": 0.7716,
+  "sake-consumption-expenditure": 0.775,
   "salt-intake-female-age-adjusted": 0.4425,
   "salt-intake-male-age-adjusted": 0.3863,
   "self-financing-ratio": 0.5313,

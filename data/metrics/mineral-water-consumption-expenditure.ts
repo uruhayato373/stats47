@@ -26,7 +26,7 @@ export const mineralWaterConsumptionExpenditure: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2007,
+    "from": 2005,
     "to": 2025,
   },
   "yearFormat": "calendar",

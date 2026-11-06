@@ -26,7 +26,7 @@ export const internetFeeConsumptionExpenditure: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2007,
+    "from": 2002,
     "to": 2025,
   },
   "yearFormat": "calendar",
