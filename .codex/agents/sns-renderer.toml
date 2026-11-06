@@ -47,7 +47,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 Remotion は以下 2 領域の担当。他方式と役割を混同しないこと:
 
 - **固定 OGP（複雑なビジュアル）** → `apps/remotion/src/features/ogp/DefaultOgp*.tsx`, `BlogOgp*.tsx` 等。`remotion still` で書き出し
-- **SNS 動画・静止画（動的データ入り）** → `RankingInstagram*`, `RankingTikTok*`, `RankingX*`, `BarChartRace*` 等。本エージェントの主戦場
+- **SNS 動画・静止画（動的データ入り）** → `RankingInstagram*`, `RankingX*`, `BarChartRace*` 等。本エージェントの主戦場
 
 **Remotion が担当しないもの**:
 - 記事別 OGP の動的テキスト生成 → Satori（`apps/web/src/app/**/opengraph-image.tsx`）

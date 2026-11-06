@@ -11,10 +11,7 @@ import { RankingTablePreview } from './shared/components/shorts/previews/Ranking
 import { RankingTitlePreview } from './shared/components/shorts/previews/RankingTitlePreview';
 import { ReelLastPagePreview } from './shared/components/shorts/previews/ReelLastPagePreview';
 // Maps (shared)
-import { TileGridMapScenePreview } from './shared/components/maps/previews/TileGridMapScenePreview';
 // ranking-youtube-ges
-import { RankingShortGes } from './features/ranking-youtube-ges/RankingShortGes';
-import { RankCardGesPreview } from './features/ranking-youtube-ges/previews/RankCardGesPreview';
 // Layouts
 import { LandscapePreview } from './features/layouts/previews/LandscapePreview';
 import { PortraitPreview } from './features/layouts/previews/PortraitPreview';
@@ -38,19 +35,12 @@ import {
 import { BUZZ_MAP_RATIOS, BUZZ_MAP_REEL_DEFAULTS } from './features/buzz-map/tokens';
 // ranking-x
 import { ChoroplethMapStillPreview } from './features/ranking-x/previews/ChoroplethMapStillPreview';
-import { RankingBoxplotPreview } from './features/ranking-x/previews/RankingBoxplotPreview';
 import { RankingChartXPreview } from './features/ranking-x/previews/RankingChartXPreview';
 import { GeoInsightCardPreview } from './features/geo-x/previews/GeoInsightCardPreview';
 import type { GeoInsightCardProps } from './features/geo-x/GeoInsightCard';
 // ranking-youtube
 import { ThumbnailPreview } from './features/ranking-youtube/previews/ThumbnailPreview';
-import { RankingNormalPreview } from './features/ranking-youtube/previews/RankingNormalPreview';
-import { RankingHorizontalBarPreview } from './features/ranking-youtube/previews/RankingHorizontalBarPreview';
-import { RankingCountdownPreview } from './features/ranking-youtube/previews/RankingCountdownPreview';
-import { StaticRankingPreview } from './features/ranking-youtube/previews/StaticRankingPreview';
-import { RankingMigrationPreview } from './features/ranking-youtube/previews/RankingMigrationPreview';
 import { RankingScrollGesPreview } from './features/ranking-youtube/previews/RankingScrollGesPreview';
-import { BarChartRaceNormalPreview } from './features/ranking-youtube/previews/BarChartRaceNormalPreview';
 // ranking-note
 import { NoteCoverPreview } from './features/ranking-note/previews/NoteCoverPreview';
 // kazu-note
@@ -61,63 +51,19 @@ import { ComparisonCarouselPreview } from './features/compare-instagram/previews
 import { CompareCarouselInstagramPreview } from './features/compare-carousel-instagram/previews/CompareCarouselInstagramPreview';
 // map-carousel-instagram (ig-series 共通デザイン・地図)
 import { MapCarouselInstagramPreview } from './features/map-carousel-instagram/previews/MapCarouselInstagramPreview';
-// compare-short
-import { ComparisonShortPreview } from './features/compare-short/previews/ComparisonShortPreview';
-import { getComparisonShortTimeline } from './features/compare-short/ComparisonShort';
 // area-profile-instagram
 import { AreaProfileCarouselPreview } from './features/area-profile-instagram/previews/AreaProfileCarouselPreview';
-// population-choropleth
-import { CompareChoroplethStillPreview } from './features/population-choropleth/previews/CompareChoroplethStillPreview';
-import { ChoroplethProgressiveReelPreview } from './features/population-choropleth/previews/ChoroplethProgressiveReelPreview';
-import { ChoroplethBarChartReelPreview } from './features/population-choropleth/previews/ChoroplethBarChartReelPreview';
-import { ChoroplethStaticReelPreview } from './features/population-choropleth/previews/ChoroplethStaticReelPreview';
-import { BAR_CHART_REEL_DURATION } from './features/population-choropleth/ChoroplethBarChartReel';
-import { STATIC_REEL_DURATION } from './features/population-choropleth/ChoroplethStaticReel';
-// population-yoy-47
-import {
-  PopulationYoy47Landscape,
-  PopulationYoy47Portrait,
-  getPopulationYoy47Duration,
-} from './features/population-yoy-47/PopulationYoy47Scene';
 // migration-flow
 import { MigrationFlowReelPreview } from './features/migration-flow/previews/MigrationFlowReelPreview';
-import { MigrationFlowCoverPreview } from './features/migration-flow/MigrationFlowCoverPreview';
-import { MIGRATION_FLOW_DURATION, COVER_WIDTH, COVER_HEIGHT } from '@stats47/migration-flow';
+import { MIGRATION_FLOW_DURATION } from '@stats47/migration-flow';
 // station-passengers
 import { StationPassengersReelPreview } from './features/station-passengers/previews/StationPassengersReelPreview';
 import { STATION_PASSENGERS_DURATION } from './features/station-passengers';
-import { MigrationIntro, MIGRATION_INTRO_DURATION } from './features/migration-flow/MigrationIntro';
-import { MigrationSegmentTelop, MIGRATION_TELOP_DURATION } from './features/migration-flow/MigrationSegmentTelop';
-import { MigrationThumbnail } from './features/migration-flow/MigrationThumbnail';
 // Charts (shared)
-import { BarChartRaceScenePreview } from './shared/components/charts/previews/BarChartRaceScenePreview';
 // Utils
 import { SCENE_DURATION, VIDEO_CONFIG } from './utils/constants';
 import { barChartRacePreviewData } from './utils/preview-data-bar-chart-race';
-import {
-  KazuNoteCoverSchema,
-  AreaProfileCarouselSchema,
-  BarChartRaceShortSchema,
-  CarouselPreviewSchema,
-  CommonPreviewSchema,
-  CompareCarouselInstagramSchema,
-  ComparisonCarouselSchema,
-  ComparisonShortSchema,
-  MapCarouselInstagramSchema,
-  PopulationChoroplethSchema,
-  MigrationFlowSchema,
-  StationPassengersSchema,
-  LayoutPreviewSchema,
-  RankCardPreviewSchema,
-  RankingShortSchema,
-  RankingQuizCarouselSchema,
-  RankingQuizReelSchema,
-  AreaInstagramCarouselSchema,
-  CorrelationInstagramCarouselSchema,
-  RankingTablePreviewSchema,
-  ThumbnailPreviewSchema,
-  TileGridMapScenePreviewSchema,
-} from './utils/schema';
+import { KazuNoteCoverSchema, AreaProfileCarouselSchema, BarChartRaceShortSchema, CarouselPreviewSchema, CommonPreviewSchema, CompareCarouselInstagramSchema, ComparisonCarouselSchema, MapCarouselInstagramSchema, MigrationFlowSchema, StationPassengersSchema, LayoutPreviewSchema, RankCardPreviewSchema, RankingShortSchema, RankingQuizCarouselSchema, RankingQuizReelSchema, AreaInstagramCarouselSchema, CorrelationInstagramCarouselSchema, RankingTablePreviewSchema, ThumbnailPreviewSchema } from './utils/schema';
 
 export const RemotionRoot: React.FC = () => {
 
@@ -328,65 +274,10 @@ export const RemotionRoot: React.FC = () => {
                 gesBackground: true,
               } as any}
             />
-            {/* YouTube Shorts C: 6秒静止画ランキング TOP15（競合「ランクの森」フォーマット） */}
-            <Composition
-              id="RankingYouTube-Static"
-              component={StaticRankingPreview}
-              durationInFrames={180}
-              fps={VIDEO_CONFIG.fps}
-              width={VIDEO_CONFIG.width}
-              height={VIDEO_CONFIG.height}
-              schema={CommonPreviewSchema}
-              defaultProps={{
-                theme: "dark" as const,
-                showSafeAreas: false,
-                displayTitle: '',
-              }}
-            />
           </Folder>
 
           <Folder name="Normal">
-            {/* YouTube 通常動画 (16:9 Full HD 1920×1080) */}
-            <Composition
-              id="RankingYouTube-Normal"
-              component={RankingNormalPreview}
-              width={CANVAS.youtube16x9.width}
-              height={CANVAS.youtube16x9.height}
-              fps={VIDEO_CONFIG.fps}
-              durationInFrames={120 + VIDEO_CONFIG.fps * 4 * 47 + 120} // イントロ4秒 + 4秒*47県 + アウトロ4秒
-              schema={CommonPreviewSchema.extend({
-                framesPerPref: z.number().optional(),
-                precision: z.number().optional(),
-                musicPath: z.string().optional(),
-                hookText: z.string().optional(),
-              })}
-              defaultProps={{
-                theme: 'dark' as const,
-                showSafeAreas: false,
-                framesPerPref: VIDEO_CONFIG.fps * 4,
-              }}
-            />
 
-            {/* YouTube 横棒グラフ動画 (16:9 Full HD 1920×1080) — 競合風スタイル */}
-            <Composition
-              id="RankingYouTube-HorizontalBar"
-              component={RankingHorizontalBarPreview}
-              width={CANVAS.youtube16x9.width}
-              height={CANVAS.youtube16x9.height}
-              fps={VIDEO_CONFIG.fps}
-              durationInFrames={120 + 150 * 47 + 120} // イントロ4秒 + 5秒*47県 + アウトロ4秒
-              schema={CommonPreviewSchema.extend({
-                framesPerPref: z.number().optional(),
-                precision: z.number().optional(),
-                musicPath: z.string().optional(),
-                hookText: z.string().optional(),
-              })}
-              defaultProps={{
-                theme: 'dark' as const,
-                showSafeAreas: false,
-                framesPerPref: 150,
-              }}
-            />
 
             {/* YouTube GES背景 横スクロール動画 (16:9 Full HD 1920×1080) */}
             <Composition
@@ -406,42 +297,7 @@ export const RemotionRoot: React.FC = () => {
               }}
             />
 
-            {/* YouTube 人口移動推移動画 (16:9 Full HD 1920×1080) */}
-            <Composition
-              id="RankingYouTube-Migration"
-              component={RankingMigrationPreview}
-              width={CANVAS.youtube16x9.width}
-              height={CANVAS.youtube16x9.height}
-              fps={VIDEO_CONFIG.fps}
-              durationInFrames={120 + VIDEO_CONFIG.fps * 4 * 47}
-              schema={CommonPreviewSchema.extend({
-                framesPerPref: z.number().optional(),
-                precision: z.number().optional(),
-              })}
-              defaultProps={{
-                theme: 'light' as const,
-                showSafeAreas: false,
-                framesPerPref: VIDEO_CONFIG.fps * 4,
-                precision: 1,
-              }}
-            />
 
-            {/* YouTube カウントダウン動画 (16:9 Full HD 1920×1080) */}
-            <Composition
-              id="RankingYouTube-Countdown"
-              component={RankingCountdownPreview}
-              width={CANVAS.youtube16x9.width}
-              height={CANVAS.youtube16x9.height}
-              fps={VIDEO_CONFIG.fps}
-              durationInFrames={VIDEO_CONFIG.fps * 300} // 約5分 (可変対応予定)
-              schema={CommonPreviewSchema.extend({
-                precision: z.number().optional(),
-              })}
-              defaultProps={{
-                theme: 'dark' as const,
-                showSafeAreas: false,
-              }}
-            />
             {/* YouTube サムネイル: 衝撃数字型 (16:9) */}
             <Composition
               id="RankingYouTube-Thumb-Hero"
@@ -461,93 +317,7 @@ export const RemotionRoot: React.FC = () => {
           </Folder>
         </Folder>
 
-        <Folder name="TikTok">
-          {/* TikTok 版 (収益化対応・全47都道府県) */}
-          <Composition
-            id="RankingTikTok-Short"
-            component={RankingShort}
-            durationInFrames={getShortTimeline("tiktok").totalDuration}
-            fps={VIDEO_CONFIG.fps}
-            width={VIDEO_CONFIG.width}
-            height={VIDEO_CONFIG.height}
-            schema={RankingShortSchema}
-            defaultProps={{
-              theme: "dark",
-              variant: "tiktok",
-              showSafeAreas: false,
-              hookText: '',
-              displayTitle: '',
-              gesBackground: true,
-            } as any}
-          />
 
-        </Folder>
-
-        <Folder name="YouTube-GES">
-          {/* GES 背景版 (縦型) */}
-          <Composition
-            id="RankingYouTubeGES-Short"
-            component={RankingShortGes as any}
-            durationInFrames={getShortTimeline("youtube").totalDuration}
-            fps={VIDEO_CONFIG.fps}
-            width={VIDEO_CONFIG.width}
-            height={VIDEO_CONFIG.height}
-            schema={RankingShortSchema}
-            defaultProps={{
-              theme: "dark",
-              meta: {
-                title: "都道府県別 年収ランキング",
-                subtitle: "2024年最新データ",
-                unit: "円"
-              },
-              topEntries: [
-                { rank: 1, areaCode: "13000", areaName: "東京都", value: 6200000 },
-                { rank: 2, areaCode: "14000", areaName: "神奈川県", value: 5800000 },
-                { rank: 3, areaCode: "23000", areaName: "愛知県", value: 5600000 },
-                { rank: 4, areaCode: "27000", areaName: "大阪府", value: 5500000 },
-                { rank: 5, areaCode: "11000", areaName: "埼玉県", value: 5400000 },
-              ],
-              allEntries: [],
-              showSafeAreas: false,
-            } as any}
-          />
-
-          {/* GES 背景版 全47県 (RankingShort + gesBackground) */}
-          <Composition
-            id="RankingYouTubeGES-Full"
-            component={RankingShort}
-            durationInFrames={getShortTimeline("youtube").totalDuration}
-            fps={VIDEO_CONFIG.fps}
-            width={VIDEO_CONFIG.width}
-            height={VIDEO_CONFIG.height}
-            schema={RankingShortSchema}
-            defaultProps={{
-              theme: "dark",
-              variant: "youtube",
-              showSafeAreas: false,
-              hookText: '',
-              displayTitle: '',
-              gesBackground: true,
-            } as any}
-          />
-
-          {/* GES ランクカード (9:16) */}
-          <Composition
-            id="RankingYouTubeGES-RankCard"
-            component={RankCardGesPreview as any}
-            width={CANVAS.portrait.width}
-            height={CANVAS.portrait.height}
-            fps={VIDEO_CONFIG.fps}
-            durationInFrames={90}
-            schema={RankCardPreviewSchema}
-            defaultProps={{
-              rank: 1,
-              theme: 'dark' as const,
-              showGuides: false,
-              showSafeAreas: false,
-            }}
-          />
-        </Folder>
       </Folder>
 
       <Folder name="BarChartRace">
@@ -594,64 +364,8 @@ export const RemotionRoot: React.FC = () => {
           } as any}
         />
 
-        {/* Bar Chart Race: TikTok */}
-        <Composition
-          id="BarChartRace-TikTok"
-          component={BarChartRaceShortPreview}
-          durationInFrames={getBarChartRaceTimeline({ frameCount: barChartRacePreviewData.frames.length }).totalDuration}
-          fps={VIDEO_CONFIG.fps}
-          width={VIDEO_CONFIG.width}
-          height={VIDEO_CONFIG.height}
-          schema={BarChartRaceShortSchema}
-          defaultProps={{
-            theme: "dark",
-            variant: "tiktok",
-            showSafeAreas: false,
-            frames: barChartRacePreviewData.frames,
-            title: barChartRacePreviewData.title,
-            unit: barChartRacePreviewData.unit,
-            eventLabels: barChartRacePreviewData.eventLabels,
-          } as any}
-        />
 
-        {/* Bar Chart Race Scene のみ（コンポーネント単体プレビュー） */}
-        <Composition
-          id="BarChartRace-Scene"
-          component={BarChartRaceScenePreview}
-          durationInFrames={Math.max(0, barChartRacePreviewData.frames.length - 1) * 36}
-          fps={VIDEO_CONFIG.fps}
-          width={VIDEO_CONFIG.width}
-          height={VIDEO_CONFIG.height}
-          schema={BarChartRaceShortSchema}
-          defaultProps={{
-            theme: "dark",
-            frames: barChartRacePreviewData.frames,
-            title: barChartRacePreviewData.title,
-            unit: barChartRacePreviewData.unit,
-            eventLabels: barChartRacePreviewData.eventLabels,
-          } as any}
-        />
 
-        {/* Bar Chart Race 通常動画 (16:9 Full HD 1920x1080) */}
-        <Composition
-          id="BarChartRace-Normal"
-          component={BarChartRaceNormalPreview}
-          durationInFrames={getBarChartRaceTimeline({ frameCount: barChartRacePreviewData.frames.length }).totalDuration}
-          fps={VIDEO_CONFIG.fps}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          schema={BarChartRaceShortSchema}
-          defaultProps={{
-            theme: "dark",
-            topN: 47,
-            frames: barChartRacePreviewData.frames,
-            title: barChartRacePreviewData.title,
-            unit: barChartRacePreviewData.unit,
-            hookText: barChartRacePreviewData.hookText,
-            eventLabels: barChartRacePreviewData.eventLabels,
-            enableSpoilerHook: barChartRacePreviewData.enableSpoilerHook,
-          } as any}
-        />
       </Folder>
 
       <Folder name="Note">
@@ -707,23 +421,6 @@ export const RemotionRoot: React.FC = () => {
           />
         </Folder>
 
-        <Folder name="Short">
-          {/* 比較ショート動画 (1080x1920, 9:16) */}
-          <Composition
-            id="CompareShort"
-            component={ComparisonShortPreview}
-            durationInFrames={getComparisonShortTimeline(7).totalDuration}
-            fps={VIDEO_CONFIG.fps}
-            width={VIDEO_CONFIG.width}
-            height={VIDEO_CONFIG.height}
-            schema={ComparisonShortSchema}
-            defaultProps={{
-              theme: 'dark' as const,
-              showSafeAreas: false,
-              hookText: 'どっちが上？',
-            }}
-          />
-        </Folder>
       </Folder>
 
       <Folder name="MapCarousel">
@@ -868,99 +565,8 @@ export const RemotionRoot: React.FC = () => {
         />
       </Folder>
 
-      <Folder name="population-choropleth">
-        {/* 横並び比較スチル (1200x630, OGP) */}
-        <Composition
-          id="PopChoropleth-CompareStill"
-          component={CompareChoroplethStillPreview}
-          width={CANVAS.ogp.width}
-          height={CANVAS.ogp.height}
-          fps={1}
-          durationInFrames={1}
-          schema={PopulationChoroplethSchema}
-          defaultProps={{
-            theme: 'dark' as const,
-            showGuides: false,
-          }}
-        />
-
-        {/* Progressive Reveal リール (1080x1920) */}
-        <Composition
-          id="PopChoropleth-ProgressiveReel"
-          component={ChoroplethProgressiveReelPreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={2550}
-          schema={PopulationChoroplethSchema}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-
-        {/* 横棒チャートリール (1080x1920) */}
-        <Composition
-          id="PopChoropleth-BarChartReel"
-          component={ChoroplethBarChartReelPreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={BAR_CHART_REEL_DURATION}
-          schema={PopulationChoroplethSchema}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-
-        {/* Static + テキストオーバーレイ リール (1080x1920) */}
-        <Composition
-          id="PopChoropleth-StaticReel"
-          component={ChoroplethStaticReelPreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={STATIC_REEL_DURATION}
-          schema={PopulationChoroplethSchema}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-      </Folder>
 
       {/* 47都道府県 × 1976-2024 年次前年度比 コロプレス時系列 */}
-      <Folder name="population-yoy-47">
-        {/* 横 16:9 (YouTube 1920x1080) */}
-        <Composition
-          id="PopulationYoy47-Landscape"
-          component={PopulationYoy47Landscape}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={getPopulationYoy47Duration()}
-          schema={z.object({
-            theme: z.enum(['light', 'dark']).optional(),
-          })}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-
-        {/* 縦 9:16 (Reels / Shorts 1080x1920) */}
-        <Composition
-          id="PopulationYoy47-Portrait"
-          component={PopulationYoy47Portrait}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={getPopulationYoy47Duration()}
-          schema={z.object({
-            theme: z.enum(['light', 'dark']).optional(),
-          })}
-          defaultProps={{
-            theme: 'dark' as const,
-          }}
-        />
-      </Folder>
 
       {/* 都道府県間 人口移動フロー (YouTube 16:9) */}
       <Folder name="MigrationFlow">
@@ -978,19 +584,6 @@ export const RemotionRoot: React.FC = () => {
           }}
         />
 
-        {/* IG Reels サムネ用 portrait 静止画 (1080x1920) */}
-        <Composition
-          id="MigrationFlow-Cover"
-          component={MigrationFlowCoverPreview}
-          width={COVER_WIDTH}
-          height={COVER_HEIGHT}
-          fps={1}
-          durationInFrames={1}
-          schema={MigrationFlowSchema}
-          defaultProps={{
-            focusPrefCode: '13',
-          }}
-        />
 
         {/* IG Reels / TikTok / YouTube Shorts 用 portrait 動画 (1080x1920) */}
         <Composition
@@ -1008,51 +601,8 @@ export const RemotionRoot: React.FC = () => {
           }}
         />
 
-        {/* イントロ: タイトル + 全国コロプレス地図 */}
-        <Composition
-          id="MigrationFlow-Intro"
-          component={MigrationIntro}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={MIGRATION_INTRO_DURATION}
-          schema={z.object({ theme: z.enum(['light', 'dark']).optional() })}
-          defaultProps={{ theme: 'light' as const }}
-        />
 
-        {/* 区切りテロップ（県ごとに props 差し替えでレンダー） */}
-        <Composition
-          id="MigrationFlow-Telop"
-          component={MigrationSegmentTelop}
-          width={CANVAS.youtube16x9.width}
-          height={CANVAS.youtube16x9.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={MIGRATION_TELOP_DURATION}
-          schema={z.object({
-            position: z.number().optional(),
-            prefName: z.string().optional(),
-            net: z.number().optional(),
-            theme: z.enum(['light', 'dark']).optional(),
-          })}
-          defaultProps={{
-            position: 1,
-            prefName: '広島県',
-            net: -9921,
-            theme: 'light' as const,
-          }}
-        />
 
-        {/* YouTube サムネイル (1280×720) */}
-        <Composition
-          id="MigrationFlow-Thumbnail"
-          component={MigrationThumbnail}
-          width={CANVAS.youtube.width}
-          height={CANVAS.youtube.height}
-          fps={1}
-          durationInFrames={1}
-          schema={z.object({})}
-          defaultProps={{}}
-        />
       </Folder>
 
       {/* 駅別乗降客数バブルマップ (国土数値情報 S12) */}
@@ -1125,40 +675,7 @@ export const RemotionRoot: React.FC = () => {
           }}
         />
 
-        {/* タイルグリッドマップ — static (9:16) */}
-        <Composition
-          id="TileGridMap-Static"
-          component={TileGridMapScenePreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={SCENE_DURATION.mapStatic}
-          schema={TileGridMapScenePreviewSchema}
-          defaultProps={{
-            mode: 'static' as const,
-            theme: 'dark' as const,
-            showGuides: false,
-            showSafeAreas: true,
-            hookText: '',
-          }}
-        />
 
-        {/* タイルグリッドマップ — progressive (9:16) */}
-        <Composition
-          id="TileGridMap-Progressive"
-          component={TileGridMapScenePreview}
-          width={CANVAS.portrait.width}
-          height={CANVAS.portrait.height}
-          fps={VIDEO_CONFIG.fps}
-          durationInFrames={25 * 60}
-          schema={TileGridMapScenePreviewSchema}
-          defaultProps={{
-            mode: 'progressive' as const,
-            theme: 'dark' as const,
-            showGuides: false,
-            showSafeAreas: true,
-          }}
-        />
 
         {/* ランキングテーブル (9:16) */}
         <Composition

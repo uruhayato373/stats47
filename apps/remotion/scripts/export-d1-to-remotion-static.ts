@@ -13,12 +13,10 @@
  * 以前は master feature が D1 から再生成していたが Phase C で廃止 (静的 Reference 化)。
  */
 import { exportMigrationFlow } from "./exporters/migration-flow.js";
-import { exportPopulationYoy47 } from "./exporters/population-yoy-47.js";
 import { exportStationPassengers } from "./exporters/station-passengers.js";
 
 type FeatureName =
   | "migration-flow"
-  | "population-yoy-47"
   | "station-passengers"
   | "all";
 
@@ -49,7 +47,6 @@ const FEATURES: Record<
   (year?: number) => Promise<{ files: number; skipped: string[] }>
 > = {
   "migration-flow": (year) => exportMigrationFlow(year),
-  "population-yoy-47": () => exportPopulationYoy47(),
   "station-passengers": () => exportStationPassengers(),
 };
 

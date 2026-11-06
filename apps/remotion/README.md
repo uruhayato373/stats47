@@ -186,7 +186,6 @@ e-Stat / MLIT
 | Feature | public output | R2 source |
 |---|---|---|
 | `migration-flow` | `public/migration-flow/pref-net-{year}.json`, `{NN}.json` | `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json` |
-| `population-yoy-47` | `public/population-yoy-47/timeseries.json` | `app/stats/japanese-population/values.json` |
 | `station-passengers` | `public/station-passengers/index.json` | `app/stats/station-passengers-annual-total/values.json` |
 | `port-bubble` | feature-specific derived JSON | `app/stats/<port-metric>/ports.json` |
 

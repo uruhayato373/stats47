@@ -2,7 +2,7 @@
 /**
  * 任意 ranking metric の YoY (year-over-year) 時系列 JSON を生成する汎用パイプライン。
  *
- * Pipeline (build-population-yoy-data.cjs を汎用化したもの):
+ * Pipeline:
  *   1. .local/r2/app/ranking/<metricKey>/values.json を読む
  *   2. 47県揃いの年だけを使って yoyRatio(p, t) = P(p, t) / P(p, t-1) を算出
  *      (47県未揃いの年や前年データが欠ける年はスキップ → 連続セグメントのみ扱う)
