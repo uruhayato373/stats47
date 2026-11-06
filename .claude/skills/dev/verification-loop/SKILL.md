@@ -10,7 +10,6 @@ primary_agent: devops-runner
 ## 用途
 
 - 大規模リファクタリング後の品質確認
-- `/deploy` 前の最終チェック（Step 2 の代替）
 - PR 作成前の self-review
 - 変更をまとめた節目の確認（時間経過だけで同じ検査を再実行しない）
 
@@ -113,6 +112,5 @@ git diff --numstat HEAD | awk '{added+=$1; deleted+=$2} END {print "+" added " /
 
 ## 関連スキル
 
-- `/deploy` — デプロイフロー（Step 2 をこのスキルで置換可能）
 - `/security-review` — 詳細セキュリティレビュー
 - `/run-tests` — テスト実行（Phase 4 の詳細版）

@@ -31,6 +31,13 @@ main への push は `deploy-workers.yml` の `scope` job が差分から判定�
 - 一覧へ足す前に、Worker の build の import と Deploy job の生成工程が読まないことを確かめる。Worker は実行時に git のファイルを読めない。
 - 指標の入力を変えていない PR は Build Check の指標生成 (実測 4.2 分) を省く。判定は同じファイルの `needsMetricMetadata`。
 
+### 手順を足す前に削る
+
+規律を足すときは、同じ差分で不要になった手順を消す。2026-11-06 に消したもの:
+
+- `/deploy` の手元の型検査・ESLint・全テスト (CI と重複)、DB とローカル R2 ミラーの確認 (廃止済み)、feature ブランチ化の必須化。
+- `deploy-workers.yml` の improvement-log の自動追記 2 工程。書く先の移動に追従せず、2026-09 以降の自動コミットは 0 件だった。
+
 ### 変えないと判断したもの
 
 - **Deploy の snapshot 工程**: 毎回実行は DEPLOY-METRIC-RELEASE-TIMEOUT-01 の再発防止。送信は中身の差分だけで、指標の変更が無ければ 0〜10 件で終わる。4,000 件台の回は実際に中身が変わっている。

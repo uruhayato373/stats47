@@ -58,7 +58,7 @@
 
 | 種別 | 記録先 |
 |---|---|
-| 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
+| 完了前検証 | 変更の規模に応じて選ぶ (`.claude/rules/local-environment.md`「検証コマンドの粒度」)。全体の検査は CI が持つ |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
 | **改善施策の TODO 真実源** (status / tier / 期日) | `.claude/todo/improvements.md` |

@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # 本番に関係しないパスだけの push ではデプロイしない。判断できないときはデプロイする。
@@ -361,51 +361,3 @@ jobs:
       # だったのを、index の件数ハードコードとして発見した (どの監視も緑のままだった)。
       - name: 🗺️ Sitemap index の整合性
         run: bash .github/scripts/check-sitemap-index.sh https://stats47.jp
-
-      # commit message に施策 ID (EXP-NNN / T0-T3-XXX-NN) があれば improvement-log に stub を追記。
-      # 詳細: .claude/scripts/lib/append-improvement-log.mjs / .claude/rules/evidence-based-judgment.md
-      - name: 📝 Append improvement-log stub
-        continue-on-error: true
-        run: |
-          MSG=$(git log -1 --pretty=%s%n%n%b "$GITHUB_SHA")
-          SHA="${GITHUB_SHA:0:7}"
-          DATE=$(date -u +%Y-%m-%d)
-          node .claude/scripts/lib/append-improvement-log.mjs \
-            --message "$MSG" \
-            --sha "$SHA" \
-            --date "$DATE"
-
-      - name: 💾 Commit improvement-log changes to develop
-        continue-on-error: true
-        run: |
-          if git diff --quiet .claude/skills/analytics/; then
-            echo "No improvement-log changes."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # main ブランチに居る。main の improvement-log に追記した版を develop へコピーすると、
-          # develop にだけある追記 (fetch-metrics-weekly の効果判定など) を main の古い版で巻き戻す。
-          # main 側の追記は「stub が要るか」の判定にだけ使って捨て、develop へ切り替えてから追記し直す。
-          # 契約: workflow-commit-back-core.cjs の findForeignTreeRestore。
-          git checkout -- .claude/skills/analytics/
-
-          git fetch origin develop
-          git checkout develop
-          git pull --rebase origin develop
-
-          node .claude/scripts/lib/append-improvement-log.mjs \
-            --message "$(git log -1 --pretty=%s%n%n%b "$GITHUB_SHA")" \
-            --sha "${GITHUB_SHA:0:7}" \
-            --date "$(date -u +%Y-%m-%d)"
-          git add .claude/skills/analytics/
-
-          if git diff --cached --quiet; then
-            echo "No actual diff after merge."
-            exit 0
-          fi
-
-          SHORTSHA="${GITHUB_SHA:0:7}"
-          git commit -m "docs(improvement-log): auto-stub for deploy ${SHORTSHA} [skip ci]"
-          git push origin develop

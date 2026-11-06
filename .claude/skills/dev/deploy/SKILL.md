@@ -18,7 +18,7 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 - **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff` で develop に取り込む。PR は不要 (`pr-quality-check.yml` は main PR でしか走らない)
 - **develop**: 統合ブランチ。feature/* からの直 merge を受け、`git push origin develop` で remote 反映
-- **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。CI green → マージ → Cloudflare Pages 自動デプロイ
+- **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。CI green → マージ → Cloudflare Workers 自動デプロイ
 
 ## 実行環境の判定（★最初に必ず確認）
 
@@ -94,7 +94,6 @@ web モードでは下表の MCP ツールだけを使う。
 ## 前提
 
 - 変更がすべてコミット済みであること
-- **現在ブランチが feature/* であること**。develop にいる場合は Step 1.5 で feature 化してから進める
 
 ## 手順
 
@@ -153,62 +152,9 @@ git rev-list --count origin/develop..origin/main   # main が develop より先�
 
   詳細規約: `.claude/rules/branch-workflow.md` の「hotfix / main 直行を入れたら main → develop を即同期する」。
 
-### Step 1.5: feature ブランチ化（develop/main にいる場合）
+### Step 3: feature ブランチがあれば develop へ直 merge
 
-`$CURRENT_BRANCH` が `develop` or `main` の場合、未 push コミットがあるなら **feature ブランチへ移動**する。ブランチ名はユーザーに確認するか `feature/<日時>-<短い要約>` 形式で提案。
-
-```bash
-# develop の未 push コミットを feature ブランチに移動
-git checkout -b feature/20260418-<topic>
-
-# develop を origin に合わせる（ローカルの先行コミットは feature に移動済み）
-git branch -f develop origin/develop
-```
-
-既に feature/* にいる場合はこの Step をスキップ。
-
-### Step 2: テスト・型チェック・ビルド
-
-リリース段階のローカル事前ゲート (`.claude/rules/local-environment.md`「検証コマンドの粒度」
-参照)。PR 作成前に fail-fast するためのもので、Step 4 の CI (`pr-quality-check.yml`) と
-重複させる意図はない — CI 待ちより先にここで落とすことで往復を減らす。
-
-以下を**順番に**実行する。いずれかが失敗した場合はユーザーに報告し、続行するか確認する。
-
-```bash
-# 1. 型チェック
-npx tsc --noEmit -p apps/web/tsconfig.json
-
-# 2. ESLint
-cd apps/web && npx eslint src/ --ext .ts,.tsx && cd ../..
-
-# 3. ユニットテスト
-cd apps/web && npx vitest run && cd ../..
-
-# 4. 再発防止ガード (.claude/scripts/lib/check-*.cjs — 検出時 exit 1 で停止)
-node .claude/scripts/lib/check-published-drafts.cjs   # 公開済み記事の下書きが contents/blog に残っていないか
-```
-
-全パスしたら Step 2.5 へ進む。
-
-### Step 2.5: R2 スナップショット更新漏れチェック（sync 忘れ防止）
-
-ローカルで DB データ（ranking・sns_posts 等）や R2 アセット（記事・画像）を編集していた場合、
-本番デプロイ後にコードと R2 スナップショットがずれてエラーになる事故を防ぐため、push 前に確認する。
-
-- DB データを変更した場合 → `/sync-snapshots` で R2 スナップショットを再生成・push 済みか確認
-- R2 アセット（画像等）を変更した場合 → `/push-r2` で push 済みか確認
-
-#### R2 差分チェック（簡易: ローカル変更時刻ベース）
-
-```bash
-find .local/r2 -type f -newermt "24 hours ago" 2>/dev/null | head -5
-```
-
-- **出力が空** → R2 は OK
-- **ファイルが出る** → 該当ファイルを表示してユーザーに `/push-r2` 実行可否を確認
-
-### Step 3: feature ブランチを develop へ直 merge
+CI が検査の権威なので、ここで型検査・lint・全テストをやり直さない (`.claude/rules/local-environment.md`「検証コマンドの粒度」)。develop が origin と一致していれば、この Step は飛ばす。
 
 PR は不要 (CI 発火しない)。ローカルで直接マージする。
 
@@ -239,10 +185,7 @@ OWNER_APPROVED_RELEASE=1 gh pr create --base main --head develop --title "Releas
 - <ファイル別の変更内容>
 
 ## 検証
-- [x] tsc --noEmit pass
-- [x] eslint pass
-- [x] vitest run pass
-- [x] R2 sync OK（.local/r2/ に 24h 以内の未 push ファイルなし）
+- CI の結果を参照
 - [ ] Playwright E2E（該当なら）
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
@@ -252,15 +195,11 @@ EOF
 
 PR URL を出力。CI が green になるまで次へ進まない。
 
-### Step 5: CI 完了待ち & PR マージ
+### Step 5: CI green を確認して PR マージ
 
-**ローカル**:
+**ローカル**: CI の結果は PR の画面か `gh pr checks <PR_NUMBER>` で確かめる。待つ間は同じ確認を繰り返さない。
 
 ```bash
-# CI 完了待ち (polling、最大 10 分)
-gh pr checks <PR_NUMBER> --watch || true
-
-# CI green を確認してマージ
 OWNER_APPROVED_RELEASE=1 gh pr merge <PR_NUMBER> --merge
 ```
 
@@ -285,8 +224,6 @@ git push origin --delete $CURRENT_BRANCH 2>/dev/null || true  # リモート削�
 ### Step 7: 完了報告
 
 - マージしたブランチ名
-- テスト・型チェック・ESLint の結果サマリ
-- **R2 sync の実行有無**
 - develop, main それぞれの push 結果
 - PR URL とマージ時刻
 - Cloudflare デプロイ完了確認
@@ -335,7 +272,6 @@ sitemap / middleware と無関係 (blog 記事追加のみ、バグ修正のみ�
 
 ## エラー時の方針
 
-- テスト/型チェック/ESLint の失敗 → ユーザーに確認し、続行 or 中止を判断
 - マージコンフリクト → **自動解決しない**。ユーザーに状況を報告し指示を仰ぐ
 - push 失敗 → ユーザーに報告し、リトライ or 手動対応を相談
 - CI 失敗 → 失敗 job のログを確認、修正コミットを feature に作って再 push、再度 develop merge → 既存 PR は自動再 CI
