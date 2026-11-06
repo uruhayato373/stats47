@@ -19,6 +19,33 @@ const STATUS: Record<ReviewStatus, { label: string; tone: Tone }> = {
 };
 const SOURCE = 'apps/admin/scripts/build-template-review.ts';
 
+interface ReviewVideo { id: string; label: string; file: string; source: string; seconds: number }
+
+function readVideos() {
+  const file = path.join(projectRoot(), '.local/video-review/manifest.json');
+  if (!fs.existsSync(file)) return null;
+  return JSON.parse(fs.readFileSync(file, 'utf8')) as { generatedAt: string; videos: ReviewVideo[] };
+}
+
+function VideoSamples({ manifest }: { manifest: ReturnType<typeof readVideos> }) {
+  return (
+    <PanelCard id="video-samples" title="動画の見本" description={manifest ? `公開中のデータで描いた実物 (大きさは半分)。作成 ${manifest.generatedAt.slice(0, 16).replace('T', ' ')} UTC` : '見本がまだありません。'}>
+      {!manifest && <p className="text-sm">npm run review-videos --workspace remotion で作ります。</p>}
+      {manifest && (
+        <Grid min="lg" lines={false}>
+          {manifest.videos.map((video) => (
+            <Stack key={video.id} gap="sm">
+              <p className="text-sm font-medium">{video.label}</p>
+              <video src={`/api/video-review/${video.file}`} controls preload="metadata" className="w-full max-w-xs rounded-md border" />
+              <p className="text-sm text-muted-foreground">{video.id} · {video.source} · {video.seconds} 秒</p>
+            </Stack>
+          ))}
+        </Grid>
+      )}
+    </PanelCard>
+  );
+}
+
 function readManifest() {
   const file = path.join(projectRoot(), '.local/template-review/manifest.json');
   if (!fs.existsSync(file)) return null;
@@ -106,6 +133,7 @@ export default function Page() {
   return (
     <Stack gap="lg">
       <PageHeading title="型の最終確認" source={SOURCE} />
+      <VideoSamples manifest={readVideos()} />
       <MapStatus rows={mapRows()} />
       <VideoStatus rows={videoRows()} />
       {!manifest && <p>見本がまだありません。npx tsx {SOURCE} で作ります。</p>}

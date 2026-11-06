@@ -183,3 +183,4 @@
 - [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳 (2026-11-04)。実験は 12-30 判定まで価格を変えない。戦略への質問は NotebookLM「stats47 商品戦略」
 - [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — develop は保護なし。リポジトリの自動削除をオンにすると develop→main のマージで develop が消える
 - [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず capture-pages.mjs --all で撮って画像を読む (2026-11-04 指摘)
+- [windows remotion render](feedback_windows_remotion_render.md) — WindowsのRemotion描画はrspackとcompositorのWindows用部品を手元へ展開しChromeを指定。npm ciで消える
