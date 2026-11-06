@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "period": {
-    "periodStart": "2026-10-27",
-    "periodEnd": "2026-11-02",
+    "periodStart": "2026-10-28",
+    "periodEnd": "2026-11-03",
     "windowDays": 7
   },
-  "inputHash": "5916a0e05e290a9820ac8c5831819cec8cf28a299ffb7f690fda11ee537c65e2",
+  "inputHash": "fdd0912f5ea737569ce437fc3d6728900c01836dea567cd23cfc9b6f809b9632",
   "movements": [
     {
       "keyword": "苫小牧市 人口",
       "targetPath": "/areas/01000/cities/01213",
       "before": 74,
-      "after": 10.096774193548388,
+      "after": 10.012987012987013,
       "beforeImpressions": 1,
-      "impressions": 62,
-      "change": 63.903225806451616
+      "impressions": 77,
+      "change": 63.98701298701299
     },
     {
       "keyword": "保健師 年収",
@@ -27,13 +27,13 @@
       "change": -62
     },
     {
-      "keyword": "尾鷲市 人口",
-      "targetPath": "/areas/24000/cities/24209",
-      "before": 64,
-      "after": 8.131578947368421,
+      "keyword": "品川 区 人口",
+      "targetPath": "/areas/13000/cities/13109",
+      "before": 10,
+      "after": 59,
       "beforeImpressions": 1,
-      "impressions": 38,
-      "change": 55.868421052631575
+      "impressions": 1,
+      "change": -49
     },
     {
       "keyword": "人口動態統計",
@@ -72,15 +72,6 @@
       "change": -43.5
     },
     {
-      "keyword": "徳島 人流",
-      "targetPath": "/areas/36000/cities/36201",
-      "before": 55,
-      "after": 12.5,
-      "beforeImpressions": 1,
-      "impressions": 6,
-      "change": 42.5
-    },
-    {
       "keyword": "外国人人口",
       "targetPath": "/themes/foreign-residents",
       "before": 100,
@@ -90,13 +81,22 @@
       "change": 42
     },
     {
+      "keyword": "大河原町 人口",
+      "targetPath": "/areas/04000/cities/04321",
+      "before": 51.5,
+      "after": 9.785714285714286,
+      "beforeImpressions": 2,
+      "impressions": 14,
+      "change": 41.714285714285715
+    },
+    {
       "keyword": "愛西市人口",
       "targetPath": "/areas/23000/cities/23232",
-      "before": 49.5,
-      "after": 9,
-      "beforeImpressions": 4,
-      "impressions": 2,
-      "change": 40.5
+      "before": 49.666666666666664,
+      "after": 9.333333333333334,
+      "beforeImpressions": 3,
+      "impressions": 3,
+      "change": 40.33333333333333
     }
   ],
   "verdicts": [

@@ -1731,6 +1731,17 @@
             "windowDays": 7
           },
           "snapshotHash": "5916a0e05e290a9820ac8c5831819cec8cf28a299ffb7f690fda11ee537c65e2"
+        },
+        {
+          "date": "2026-11-06",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-10-28",
+            "periodEnd": "2026-11-03",
+            "windowDays": 7
+          },
+          "snapshotHash": "fdd0912f5ea737569ce437fc3d6728900c01836dea567cd23cfc9b6f809b9632"
         }
       ]
     }
