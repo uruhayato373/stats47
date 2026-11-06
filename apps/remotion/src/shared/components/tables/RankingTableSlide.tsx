@@ -49,8 +49,8 @@ export const RankingTableSlide: React.FC<RankingTableSlideProps> = ({
   if (meta.normalizationBasis) attrParts.push(meta.normalizationBasis);
   const attrText = attrParts.join("・");
 
-  const rowBgEven = isDark ? "#1E293B" : colors.card;
-  const rowBgOdd = isDark ? "#0F172A" : colors.background;
+  const rowBgEven = isDark ? COLOR_SCHEMES.dark.card : colors.card;
+  const rowBgOdd = isDark ? COLOR_SCHEMES.dark.background : colors.background;
   const rankColor = isDark ? "#818CF8" : BRAND.primary;
 
   return (

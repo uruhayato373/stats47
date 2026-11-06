@@ -4,6 +4,7 @@ import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remo
 import { schemeTableau10 } from "d3-scale-chromatic";
 import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 import { formatValueWithPrecision, getMaxDecimalPlaces } from "@stats47/utils";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 import {
   BRAND,
@@ -18,7 +19,6 @@ import {
   type EventLabel,
   type InterpolatedBarItem,
 } from "../../utils/bar-chart-race";
-import { SITE } from "@stats47/types";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -179,40 +179,14 @@ export const BarChartRaceScene: React.FC<BarChartRaceSceneProps> = ({
           gap: 12,
         }}
       >
-        {/* ブランドバッジ + 統計で見る都道府県 */}
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              backgroundColor: BRAND.primary,
-              color: BRAND.white,
-              padding: "8px 22px",
-              borderRadius: 8,
-              fontSize: 30,
-              fontWeight: FONT.weight.black,
-              letterSpacing: 1,
-            }}
-          >
-            stats47
-          </div>
-          <div
-            style={{
-              fontSize: 32,
-              fontWeight: FONT.weight.bold,
-              color: colors.muted,
-              letterSpacing: 2,
-            }}
-          >
-            {SITE.name}
-          </div>
-        </div>
-
+        
         {/* 期間バッジ */}
         {frames.length > 0 && (
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
-              backgroundColor: isDark ? "rgba(30, 41, 59, 0.85)" : "rgba(255, 255, 255, 0.9)",
+              backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.85)` : "rgba(255, 255, 255, 0.9)",
               color: BRAND.secondary,
               border: `3px solid ${BRAND.secondary}`,
               borderRadius: 50,

@@ -31,6 +31,9 @@ export const COLOR_SCHEMES = {
   },
 } as const;
 
+/** The dark paper as `r, g, b`, for translucent surfaces over a video or a gradient. */
+export const DARK_PAPER_RGB = [1, 3, 5].map((i) => parseInt(COLOR_SCHEMES.dark.background.slice(i, i + 2), 16)).join(", ");
+
 export type ThemeName = keyof typeof COLOR_SCHEMES;
 export type ColorScheme = (typeof COLOR_SCHEMES)[ThemeName];
 

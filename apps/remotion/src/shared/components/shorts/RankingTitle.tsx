@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { BRAND, COLOR_SCHEMES, FONT, SPACING, type ThemeName } from "@/shared";
-import { SITE } from "@stats47/types";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 interface RankingTitleProps {
     titleMain: string;
@@ -68,39 +68,6 @@ export const RankingTitle: React.FC<RankingTitleProps> = ({
             </AbsoluteFill>
 
             {/* 2. サイトブランディング — セーフゾーン直下 (top: 268px) */}
-            <div style={{
-                position: "absolute",
-                top: 268,
-                left: 0,
-                right: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 20,
-                zIndex: 10,
-                opacity: brandingSpring,
-                transform: `translateY(${interpolate(brandingSpring, [0, 1], [-16, 0])}px)`,
-            }}>
-                <div style={{
-                    backgroundColor: BRAND.primary,
-                    color: BRAND.white,
-                    padding: "8px 22px",
-                    borderRadius: 8,
-                    fontSize: 30,
-                    fontWeight: FONT.weight.black,
-                    letterSpacing: 1,
-                }}>
-                    stats47
-                </div>
-                <div style={{
-                    fontSize: 32,
-                    fontWeight: FONT.weight.bold,
-                    color: colors.muted,
-                    letterSpacing: 2,
-                }}>
-                    {SITE.name}
-                </div>
-            </div>
 
             {/* 3. メインコンテンツ
                  上部ブランディング(top:268, 高さ~54px → 下端 322px) と
@@ -127,7 +94,7 @@ export const RankingTitle: React.FC<RankingTitleProps> = ({
                 }}>
                     <span style={{
                         display: "inline-block",
-                        backgroundColor: isDark ? "rgba(30, 41, 59, 0.85)" : "rgba(255, 255, 255, 0.9)",
+                        backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.85)` : "rgba(255, 255, 255, 0.9)",
                         color: BRAND.secondary,
                         border: `3px solid ${BRAND.secondary}`,
                         borderRadius: 50,
@@ -184,7 +151,7 @@ export const RankingTitle: React.FC<RankingTitleProps> = ({
                 }} />
 
                 {/* キャッチフレーズ1 (赤い傾斜帯) — hookText が指定された場合はそちらを表示 */}
-                <div style={{
+                {phrase1 && <div style={{
                     width: "120%",
                     transform: `rotate(-3deg) scaleX(${catch1Spring})`,
                     backgroundColor: BRAND.danger,
@@ -207,12 +174,12 @@ export const RankingTitle: React.FC<RankingTitleProps> = ({
                     }}>
                         {phrase1}
                     </h2>
-                </div>
+                </div>}
 
                 {/* キャッチフレーズ2 (グラスモーフィズムカード) */}
                 <div style={{
                     width: "90%",
-                    backgroundColor: isDark ? "rgba(30, 41, 59, 0.9)" : "rgba(255, 255, 255, 0.95)",
+                    backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.9)` : "rgba(255, 255, 255, 0.95)",
                     padding: `${SPACING.xl}px`,
                     borderRadius: 28,
                     border: `2px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.06)"}`,

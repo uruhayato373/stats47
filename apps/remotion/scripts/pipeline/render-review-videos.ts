@@ -43,8 +43,15 @@ async function rankingProps(variant: string) {
 }
 
 async function raceProps(variant: string) {
-  const [config, data] = [await json(`sns/bar-chart-race/${RACE_KEY}/config.json`), await json(`sns/bar-chart-race/${RACE_KEY}/data.json`)];
-  return { theme: 'dark', variant, topN: 15, showSafeAreas: false, frames: data.frames, title: config.title, unit: config.unit, hookText: config.hookText, eventLabels: config.eventLabels, enableSpoilerHook: config.enableSpoilerHook ?? false, colorScheme: config.colorScheme };
+  const [config, stats] = [await json(`sns/bar-chart-race/${RACE_KEY}/config.json`), await json(`app/stats/${RACE_KEY}/values.json`)];
+  const years = new Map<string, { date: string; items: { name: string; value: number }[] }>();
+  for (const row of stats.rows as { areaCode: string; areaName: string; yearCode: string; yearName: string; value: number | null }[]) {
+    if (!/^\d{2}000$/.test(row.areaCode) || row.areaCode === '00000' || row.value === null) continue;
+    if (!years.has(row.yearCode)) years.set(row.yearCode, { date: row.yearName, items: [] });
+    years.get(row.yearCode)!.items.push({ name: row.areaName, value: row.value });
+  }
+  const frames = [...years.keys()].sort().map((year) => years.get(year)!);
+  return { theme: 'dark', variant, topN: 15, showSafeAreas: false, frames, title: config.title, unit: config.unit, hookText: config.hookText, eventLabels: config.eventLabels, enableSpoilerHook: config.enableSpoilerHook ?? false, colorScheme: config.colorScheme };
 }
 
 const raceDuration = (props: Awaited<ReturnType<typeof raceProps>>) =>

@@ -4,6 +4,7 @@ import { formatValueWithPrecision } from "@stats47/utils";
 
 import { BRAND, COLOR_SCHEMES, FONT, RANK_COLORS, SafetyZoneOverlay, type PrefectureSilhouette, type ThemeName } from "@/shared";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 
 interface RankCardProps {
@@ -120,14 +121,14 @@ export const RankCard: React.FC<RankCardProps> = ({
             <AbsoluteFill
               style={{
                 background: isDark
-                  ? "linear-gradient(to bottom, rgba(15,23,42,0.5) 0%, rgba(15,23,42,0.25) 30%, rgba(15,23,42,0.25) 70%, rgba(15,23,42,0.6) 100%)"
+                  ? `linear-gradient(to bottom, rgba(${DARK_PAPER_RGB},0.5) 0%, rgba(${DARK_PAPER_RGB},0.25) 30%, rgba(${DARK_PAPER_RGB},0.25) 70%, rgba(${DARK_PAPER_RGB},0.6) 100%)`
                   : "linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, rgba(255,255,255,0.5) 100%)",
               }}
             />
             <AbsoluteFill
               style={{
                 background: isDark
-                  ? "radial-gradient(circle at center, transparent 30%, rgba(15,23,42,0.5) 100%)"
+                  ? `radial-gradient(circle at center, transparent 30%, rgba(${DARK_PAPER_RGB},0.5) 100%)`
                   : "radial-gradient(circle at center, transparent 30%, rgba(255,255,255,0.3) 100%)",
               }}
             />
@@ -183,8 +184,8 @@ export const RankCard: React.FC<RankCardProps> = ({
           <div style={{
             padding: "8px 24px",
             backgroundColor: gesBackground
-              ? (isDark ? "rgba(30, 41, 59, 0.45)" : "rgba(255, 255, 255, 0.5)")
-              : (isDark ? "rgba(30, 41, 59, 0.8)" : "rgba(255, 255, 255, 0.9)"),
+              ? (isDark ? `rgba(${DARK_PAPER_RGB}, 0.45)` : "rgba(255, 255, 255, 0.5)")
+              : (isDark ? `rgba(${DARK_PAPER_RGB}, 0.8)` : "rgba(255, 255, 255, 0.9)"),
             borderRadius: 50,
             fontSize: 44,
             fontWeight: FONT.weight.bold,
@@ -221,8 +222,8 @@ export const RankCard: React.FC<RankCardProps> = ({
           position: "relative",
           marginTop: 120,
           backgroundColor: gesBackground
-            ? (isDark ? "rgba(15, 23, 42, 0.45)" : "rgba(255, 255, 255, 0.5)")
-            : (isDark ? "rgba(15, 23, 42, 0.85)" : "rgba(255, 255, 255, 0.9)"),
+            ? (isDark ? `rgba(${DARK_PAPER_RGB}, 0.45)` : "rgba(255, 255, 255, 0.5)")
+            : (isDark ? `rgba(${DARK_PAPER_RGB}, 0.85)` : "rgba(255, 255, 255, 0.9)"),
           borderRadius: 48,
           border: `2px solid ${isTop3 ? rankAccent : colors.border}`,
           padding: 64,
@@ -363,7 +364,7 @@ export const RankCard: React.FC<RankCardProps> = ({
           <div style={{
             width: "100%",
             padding: 32,
-            backgroundColor: isDark ? "rgba(30, 41, 59, 0.6)" : "rgba(241, 245, 249, 0.9)",
+            backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.6)` : "rgba(241, 245, 249, 0.9)",
             borderRadius: 24,
             display: "flex",
             alignItems: "center",

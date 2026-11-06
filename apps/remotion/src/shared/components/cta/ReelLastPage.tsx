@@ -45,7 +45,7 @@ export const ReelLastPage: React.FC<ReelLastPageProps> = ({
         fontFamily: FONT.family,
         color: colors.foreground,
         background: isDark
-          ? "radial-gradient(circle at 50% 50%, #1E293B 0%, #000000 100%)"
+          ? `radial-gradient(circle at 50% 50%, ${COLOR_SCHEMES.dark.card} 0%, ${COLOR_SCHEMES.dark.background} 100%)`
           : "radial-gradient(circle at 50% 50%, #F8FAFC 0%, #E2E8F0 100%)",
         overflow: "hidden",
       }}

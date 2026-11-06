@@ -140,7 +140,7 @@ export const BarChartRaceShort: React.FC<BarChartRaceShortProps> = ({
     ? propsFrames
     : MOCK_BAR_CHART_RACE_FRAMES;
   const title = propsTitle || "都道府県別 人口ランキング";
-  const unit = propsUnit || "千人";
+  const unit = propsUnit ?? "";
   const eventLabels = propsEventLabels || MOCK_EVENT_LABELS;
 
   // BGM: 指定があればそれを、なければタイトルからハッシュで決定的に選択
