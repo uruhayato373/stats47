@@ -7,4 +7,5 @@ export { resolveColorInterpolator } from "./create-color-schemes";
 export { createDivergingColorScale } from "./create-diverging-color-scale";
 export { createSequentialColorScale } from "./create-sequential-color-scale";
 export { normalizeColorScheme } from "./normalize-color-scheme";
+export { resolveChoroplethScale } from "./resolve-choropleth-scale";
 

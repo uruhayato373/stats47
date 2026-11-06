@@ -174,7 +174,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | 場所 | 理由 |
 |---|---|---|
-| `RankingMapChartClient` | `@/features/ranking/components/RankingMapChart` | ランキング (都道府県・市区町村) の Leaflet のコロプレス。市区町村のランキングの節からも使う。Leaflet の地図の共通化 (2026-11-03 の棚卸しの A) までここに置く |
+| `RankingMapChartClient` | `@/features/ranking/components/RankingMapChart` | ランキング (都道府県・全国の市区町村・県内の市区町村・市の行政区) の地図。`RankingSvgMap` が d3-geo の SVG で描き、ズームは d3-zoom。背景タイルと凡例を持たず、濃淡で全体を見せる (値はホバー・タップ先・表で読む)。発散の配色は基準だけ出す。全国の地図は `map-shapes.ts` が沖縄本島周辺を日本海側へ移し、小笠原・南鳥島・宮古・八重山・大東は描かない。Leaflet はここへ戻さない (実際の場所を読む Geo の地図だけが使う)。形データは `npm run gis:prefecture-svg-topology` / `gis:national-city-topology` で作る |
 | `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 (描画の土台を直接読むので `d3-only-in-registered-components` の例外に載せている) |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |

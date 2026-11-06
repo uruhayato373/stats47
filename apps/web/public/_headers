@@ -28,3 +28,6 @@
 
 /municipalities.topojson
   Content-Type: application/json; charset=utf-8
+
+/prefecture-simple.topojson
+  Content-Type: application/json; charset=utf-8

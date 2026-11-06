@@ -100,11 +100,6 @@ export default function RootLayout({
     // style-lyra: テンプレートと同じルートのクラス。lyra の見た目は部品の className に書き込んであり、このクラスには依存しない (2026-10-28 CSS-3)
     <html lang="ja" className="style-lyra" suppressHydrationWarning>
       <head>
-        {/*
-         * 地図タイルへの preconnect は全ページには置かない。地図のあるランキングページは
-         * getInitialMapTileUrls の preload が地理院タイル (cyberjapandata.gsi.go.jp) への
-         * 接続を document 解析時に始める。旧 cartocdn の hint は 2026-08-05 に削除済み。
-         */}
         {/* R2 storage への preconnect（ブログ記事内の SVG/PNG） */}
         <link
           rel="preconnect"

@@ -53,6 +53,9 @@ const rules = [
         'src/features/infra-history/components/InfraHistoryExplorer.tsx',
         'src/features/geo-map/components/GeoSubjectMap.tsx',
         'src/features/geo-questions/components/QuestionMap.tsx',
+        // ランキングの地図。形の変換とズームを持つ (chart-component-standards.md)
+        'src/features/ranking/components/RankingMapChart/RankingSvgMap.tsx',
+        'src/features/ranking/components/RankingMapChart/map-shapes.ts',
         // 2 県の市区町村の並列表示。描画は共通の DivergingChoroplethMap に任せる (§2-D)
         'src/features/region-comparison/components/MunicipalityChoroplethSection.tsx',
       ].includes(relativePath),
@@ -189,15 +192,6 @@ const rules = [
     message:
       'Do not reintroduce MapPanel. Use ChartPanel for map and chart visualization panels.',
     pattern: /\bMapPanel\b/,
-  },
-  {
-    id: 'no-direct-leaflet-tile-options',
-    message:
-      'Do not pin Leaflet tile options in feature components. Use useThemedLeafletTile(theme).',
-    pattern: /\bTILE_OPTIONS_(?:LIGHT|DARK)\b/,
-    allow: (relativePath) =>
-      relativePath ===
-      'src/features/map-visualization/utils/use-themed-leaflet-tile.ts',
   },
   {
     id: 'no-legacy-leaflet-border-color-constants',

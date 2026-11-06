@@ -90,7 +90,9 @@ export function MunicipalityNationalMap({ title, visualization, unit, decimalPla
             areaType="city"
             topology={topology}
             fitExcludeCodes={TOKYO_ISLAND_EXCLUDE_CODES}
+            fitNationwide
             bare
+            colorViewSwitch
             mapClassName="h-[420px]"
           />
         ) : (
