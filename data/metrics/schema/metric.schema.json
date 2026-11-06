@@ -777,6 +777,26 @@
     "visualization": {
       "type": "object",
       "properties": {
+        "classification": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "const": "threshold"
+            },
+            "thresholds": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "method",
+            "thresholds"
+          ],
+          "additionalProperties": false
+        },
         "colorScheme": {
           "enum": [
             "interpolateBlues",
@@ -885,62 +905,6 @@
                 "mode",
                 "min",
                 "max"
-              ],
-              "additionalProperties": false
-            }
-          ]
-        },
-        "classification": {
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {
-                "method": {
-                  "type": "string",
-                  "const": "continuous"
-                }
-              },
-              "required": [
-                "method"
-              ],
-              "additionalProperties": false
-            },
-            {
-              "type": "object",
-              "properties": {
-                "method": {
-                  "enum": [
-                    "equal-interval",
-                    "quantile"
-                  ]
-                },
-                "classes": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "method",
-                "classes"
-              ],
-              "additionalProperties": false
-            },
-            {
-              "type": "object",
-              "properties": {
-                "method": {
-                  "type": "string",
-                  "const": "threshold"
-                },
-                "thresholds": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  }
-                }
-              },
-              "required": [
-                "method",
-                "thresholds"
               ],
               "additionalProperties": false
             }
@@ -1145,7 +1109,6 @@
         "colorScheme",
         "colorSchemeType",
         "domain",
-        "classification",
         "trendDomain",
         "comparisonDomain"
       ],

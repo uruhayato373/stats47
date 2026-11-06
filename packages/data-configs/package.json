@@ -10,6 +10,11 @@
       "import": "./src/index.ts",
       "require": "./src/index.ts"
     },
+    "./color-policy": {
+      "types": "./src/color-policy.ts",
+      "import": "./src/color-policy.ts",
+      "require": "./src/color-policy.ts"
+    },
     "./registry": {
       "types": "./src/registry.ts",
       "import": "./src/registry.ts",

@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "図の台帳。1 枚の図を型 (image-templates.json) と分析 (analyses.json) に結び、同じ図をどこへ出すかを持つ。データは写さず、指標の key と年で指す。公開の状態の正本は配信先の台帳 (ページの索引・posts.json) にあり、ここの status は展開の予定を表す。",
+  "type": "object",
+  "required": ["version", "figures"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": 1 },
+    "figures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "analysis", "template", "title", "scope", "metrics", "destinations"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^figure:[A-Z][0-9]{2}(-[0-9]+)?-[a-z0-9-]+$" },
+          "analysis": { "type": "string", "pattern": "^analysis:" },
+          "template": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "scope": { "enum": ["prefecture", "municipality"] },
+          "metrics": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["key", "year"],
+              "additionalProperties": false,
+              "properties": {
+                "key": { "type": "string", "minLength": 1 },
+                "year": { "type": "integer", "minimum": 1900 }
+              }
+            }
+          },
+          "destinations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["channel", "status"],
+              "additionalProperties": false,
+              "properties": {
+                "channel": { "enum": ["site", "x", "note"] },
+                "page": { "type": "string", "minLength": 1 },
+                "postId": { "type": "integer", "minimum": 1 },
+                "status": { "enum": ["planned", "draft", "published"] }
+              },
+              "oneOf": [{ "required": ["page"] }, { "required": ["postId"] }]
+            }
+          }
+        }
+      }
+    }
+  }
+}

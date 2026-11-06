@@ -4,7 +4,7 @@ import { lintImageTypeSvg } from '../../../../.claude/scripts/lib/svg-lint.mjs';
 import { areaChartFromArticleData, chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, lineChartFromArticleData, stackedChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 import { areasOf, resolveAreaChart, type AreaScope, type AreaValue } from '@/lib/template-area-scope';
-import { applyColorPolicy, colorPolicyOf, signedThresholds } from '../../../../packages/types/src/color-policy';
+import { applyColorPolicy, colorPolicyOf, colorPolicyRow, joinColorPolicy, signedThresholds } from '../../../../packages/types/src/color-policy';
 import { renderGroupedBarsChart } from '@/lib/template-grouped-bars';
 import { renderAreaBarsChart } from '@/lib/template-ranking-bars';
 
@@ -165,9 +165,17 @@ describe('配色の使い分け', () => {
   it('書かれた区切りと、指標が持つ基準の中心を守る', () => {
     const values = Array.from({ length: 47 }, (_, i) => 90 + i / 2);
     const written = { colorSchemeType: 'sequential', classification: { method: 'threshold' as const, thresholds: [1, 2] } };
-    expect(applyColorPolicy(written, values)).toBe(written);
+    expect(applyColorPolicy(written, values)).toEqual(written);
     const centred = applyColorPolicy({ colorSchemeType: 'diverging', divergingMidpoint: 'custom', classification: { method: 'equal-interval', classes: 5 } as const }, values);
     expect(centred).toMatchObject({ colorSchemeType: 'diverging', divergingMidpoint: 'custom', classification: { method: 'continuous' } });
+  });
+  it('行の無い指標は連続になり、基準を持つ指標は外れ値があっても基準のまま段階になる', () => {
+    expect(joinColorPolicy({ colorScheme: 'interpolateBlues' }).classification).toEqual({ method: 'continuous' });
+    const values = [...Array.from({ length: 46 }, (_, i) => 100 + i / 10), 300];
+    const authored = { colorSchemeType: 'diverging', divergingMidpoint: 'custom' };
+    const row = colorPolicyRow('a', 'prefecture', authored, '2024', values);
+    expect(row).toMatchObject({ metricKey: 'a', grain: 'prefecture', year: '2024', areaCount: 47, classification: { method: 'equal-interval', classes: 5 } });
+    expect(joinColorPolicy(authored, row)).toMatchObject({ divergingMidpoint: 'custom', classification: { method: 'equal-interval' } });
   });
   it('一方向の指標でも値に正負があれば発散の配色へ替える', () => {
     const signed = Array.from({ length: 46 }, (_, i) => i - 23);

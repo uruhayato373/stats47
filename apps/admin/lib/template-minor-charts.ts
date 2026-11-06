@@ -3,7 +3,7 @@ import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 import { rankingRows } from './template-ranking-bars';
-import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
+import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
 import { compositionSampleRows } from './template-composition-stacked';
 import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
@@ -48,7 +48,7 @@ export function renderDistributionBoxplot(raw: unknown) {
   const fence = { lo: q1 - 1.5 * (q3 - q1), hi: q3 + 1.5 * (q3 - q1) };
   const inner = values.filter((v) => v >= fence.lo && v <= fence.hi);
   const whisker = { lo: Math.min(...inner), hi: Math.max(...inner) };
-  const color = resolveMetricColor(RANKING_SAMPLE_METRIC.visualization) ?? BRAND.primary;
+  const color = resolveMetricColor(RANKING_SAMPLE_PRESENTATION) ?? BRAND.primary;
   const top = sampleBodyTop(Boolean(label.subtitle)) + 60;
   const axis = { left: SAMPLE_FRAME.left + 40, right: SAMPLE_FRAME.right - 40 };
   const [min, max] = [values[0], values[values.length - 1]];

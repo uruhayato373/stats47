@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
-import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type RankingChart } from './template-ranking-data';
+import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type RankingChart } from './template-ranking-data';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { scopeAttributes, type AreaChart } from './template-area-scope';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
@@ -43,7 +43,7 @@ export const RANKING_BAR_PLOT = { left: 196, right: SAMPLE_FRAME.right - 24 } as
 const CARD = { band: 60, rowHeight: 84, bandGap: 10, radius: 14, badge: 27 } as const;
 
 /** One common frame for the four media; the complete 47-prefecture input stays in R2. */
-export function renderRankingBars(raw: unknown, presentation: MetricPresentation = RANKING_SAMPLE_METRIC.visualization, theme: ChartTheme = LIGHT_THEME) {
+export function renderRankingBars(raw: unknown, presentation: MetricPresentation = RANKING_SAMPLE_PRESENTATION, theme: ChartTheme = LIGHT_THEME) {
   return renderRankingBarsChart(sampleRankingChart({ data: rankingRows(raw) }, presentation), theme);
 }
 

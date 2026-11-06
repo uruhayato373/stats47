@@ -1,3 +1,4 @@
+import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { engelCoefficient } from '../../../data/metrics/engel-coefficient';
 import { foodExpenditureTotal } from '../../../data/metrics/food-expenditure-total';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
@@ -160,7 +161,7 @@ export function renderLineChart(chart: LineChart, theme: ChartTheme = LIGHT_THEM
 }
 
 /** A portrait line form using the site's authored trend domain and shared SVG scales. */
-export function renderTrendLine(raw: unknown, presentation: MetricPresentation = TREND_SAMPLE_METRIC.visualization) {
+export function renderTrendLine(raw: unknown, presentation: MetricPresentation = metricPresentation(TREND_SAMPLE_METRIC)) {
   const rows = trendSampleRows(raw);
   assertMetricPresentation(presentation);
   const domain = resolveNumericDomain(rows.map((row) => row.value), presentation.trendDomain);

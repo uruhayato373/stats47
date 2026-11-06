@@ -15,6 +15,7 @@ import {
   computeReach,
   findQueryCandidates,
   indexPages,
+  listFigureDestinations,
   parentIdOf,
   parseCsv,
   pathOfUrl,
@@ -172,4 +173,26 @@ test("リポジトリの台帳そのものが検査を通る", () => {
     pages,
   });
   assert.deepEqual(errors, []);
+});
+
+test("図の配信先: 載せ忘れを一覧し、台帳どうしのずれを見分ける", () => {
+  const analyses = [{ id: "analysis:A", issue: "issue:A" }];
+  const pages = new Map([["blog:live", { published: true }]]);
+  const posts = [{ id: 1, status: "posted" }, { id: 2, status: "draft" }, { id: 3, status: "deleted" }];
+  const rows = (destinations) => listFigureDestinations({ figures: [{ id: "figure:A", analysis: "analysis:A", destinations }], analyses, posts, pages });
+
+  // 載せ終えたものは消え、まだのものは問いまで辿れる形で残る
+  assert.deepEqual(rows([{ channel: "site", page: "blog:live", status: "published" }, { channel: "x", postId: 1, status: "published" }]), []);
+  const [planned] = rows([{ channel: "site", page: "blog:live", status: "planned" }]);
+  assert.equal(planned.issue, "issue:A");
+  assert.equal(planned.drift, false);
+  assert.equal(rows([{ channel: "x", postId: 2, status: "draft" }])[0].drift, false);
+
+  // 公開の状態の正本は配信先の台帳。食い違いはずれとして出す
+  const drift = (d) => rows([d])[0]?.drift;
+  assert.equal(drift({ channel: "x", postId: 1, status: "draft" }), true, "投稿済みなのに図の台帳が下書きのまま");
+  assert.equal(drift({ channel: "x", postId: 2, status: "published" }), true, "投稿していないのに公開済みと書いた");
+  assert.equal(drift({ channel: "x", postId: 3, status: "draft" }), true, "投稿を消した");
+  assert.equal(drift({ channel: "x", postId: 9, status: "draft" }), true, "投稿が台帳に無い");
+  assert.equal(drift({ channel: "site", page: "blog:gone", status: "published" }), true, "公開済みと書いたページが無い");
 });

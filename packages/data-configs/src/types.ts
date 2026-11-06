@@ -1,4 +1,4 @@
-import type { MetricPresentation } from "@stats47/types";
+import type { AuthoredPresentation, MetricPresentation } from "@stats47/types";
 /**
  * MetricConfig 型定義 — page ごとの統計データ要件の真実源 (SSOT)
  *
@@ -311,7 +311,7 @@ export interface YearExclusion {
 }
 
 /** 可視化 */
-export type VisualizationConfig = MetricPresentation;
+export type VisualizationConfig = AuthoredPresentation;
 
 /** 表示 */
 export type DisplayConfig = import('@stats47/types').ValueDisplayConfig;
