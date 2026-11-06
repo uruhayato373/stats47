@@ -3,6 +3,7 @@ import type { Feature, FeatureCollection, Geometry } from "geojson";
 import React, { useMemo } from "react";
 import type { Topology } from "topojson-specification";
 
+import { CHART_THEMES } from "@stats47/types";
 import type { Station, StationPassengerData } from "./types";
 import { mercator, topologyFeatures } from "../../gis/src/map/geometry.mjs";
 
@@ -81,8 +82,8 @@ const OUTLINE = "#D97706"; // 県境 (琥珀)
 const RAIL = "#94A3B8"; // 在来線など (スレートグレー)
 const SHINKANSEN = "#2563EB"; // 新幹線 (ロイヤルブルー)
 const MAP_BG = "#EAEEF3";
-const FG = "#1E293B";
-const MUTED = "#64748B";
+const FG = CHART_THEMES.light.ink;
+const MUTED = CHART_THEMES.light.muted;
 const FONT =
   '"Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif';
 
@@ -269,7 +270,7 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
   const { mapRect } = L;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#F8FAFC", fontFamily: FONT }}>
+    <AbsoluteFill style={{ backgroundColor: CHART_THEMES.light.paper, fontFamily: FONT }}>
       {/* ───────── 地図 ───────── */}
       <svg
         width={L.width}

@@ -16,6 +16,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@stats47/types": "*",
     "d3-geo": "^3.1.0",
     "topojson-client": "^3.1.0"
   },

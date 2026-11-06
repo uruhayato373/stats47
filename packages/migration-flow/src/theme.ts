@@ -3,22 +3,24 @@
  * apps/remotion の brand.ts から必要分のみ抜粋（パッケージ自己完結のため）。
  */
 
+import { CHART_THEMES } from "@stats47/types";
+
 export const COLOR_SCHEMES = {
   light: {
-    background: "#FFFFFF",
-    foreground: "#0F172A",
-    muted: "#64748B",
+    background: CHART_THEMES.light.paper,
+    foreground: CHART_THEMES.light.ink,
+    muted: CHART_THEMES.light.muted,
     accent: "#3B82F6",
-    border: "#E2E8F0",
-    card: "#F8FAFC",
+    border: CHART_THEMES.light.wash,
+    card: "#FFFFFF",
   },
   dark: {
-    background: "#0F172A",
-    foreground: "#F1F5F9",
-    muted: "#94A3B8",
+    background: CHART_THEMES.dark.paper,
+    foreground: CHART_THEMES.dark.ink,
+    muted: CHART_THEMES.dark.muted,
     accent: "#60A5FA",
-    border: "#334155",
-    card: "#1E293B",
+    border: CHART_THEMES.dark.line,
+    card: CHART_THEMES.dark.wash,
   },
 } as const;
 

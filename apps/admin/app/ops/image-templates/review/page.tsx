@@ -92,7 +92,7 @@ function VideoStatus({ rows }: { rows: VideoRow[] }) {
             <Cell>{row.feature}</Cell>
             <Cell><Mark on={row.rendered} label="あり" off="なし" /></Cell>
             <Cell>{MAP_LABEL[row.map]}</Cell>
-            <Cell><Mark on={row.ledgerColor} /></Cell>
+            <Cell><Mark on={row.ledgerColor} off="指標を使わない色" /></Cell>
             <Cell><Mark on={row.theme} /></Cell>
           </Row>
         ))}
