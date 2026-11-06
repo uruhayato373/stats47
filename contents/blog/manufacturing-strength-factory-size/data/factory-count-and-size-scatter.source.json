@@ -1,8 +1,0 @@
-{
-  "kind": "derived",
-  "source": "r2:app/stats/manufacturing-shipment-amount/cities.json + r2:app/stats/manufacturing-establishments/cities.json + r2:app/stats/day-time-population/cities.json + r2:app/stats/day-time-population-ratio/cities.json",
-  "transform": "市区町村の表を県へ足し上げ、人口1万人あたりの事業所数と1事業所あたり出荷額を求める。人口は昼間人口を昼夜間人口比率で割って求める",
-  "generatedBy": ".claude/scripts/analysis/m01-factory-size.ts",
-  "areaScope": { "level": "prefecture" },
-  "displaySources": [ { "label": "社会・人口統計体系" } ]
-}

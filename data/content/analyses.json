@@ -5,37 +5,123 @@
       "id": "analysis:M01-factory-size",
       "issue": "issue:M01",
       "status": "draft",
-      "question": "製造業が強い市の差は、工場の数か 1 工場の大きさか",
+      "stage": "reviewed",
+      "question": "製造業が強い地域の強さは、規模か生産性か",
       "spec": ".claude/scripts/analysis/examples/m01-manufacturing.json",
-      "derivedMetrics": [{ "key": "manufacturing-shipment-amount-per-establishment", "label": "1事業所あたり出荷額" }, { "key": "manufacturing-shipment-amount-per-employee", "label": "従業者1人あたり出荷額" }],
-      "script": ".claude/scripts/analysis/m01-factory-size.ts",
-      "finding": "人口 3 万人以上の 764 市区町村で、人口あたり出荷額の差の 63.1% は 1 事業所あたり出荷額、36.9% は事業所の数で説明できる。県で見ると、事業所の数と 1 事業所あたり出荷額の相関は -0.01 で、ほぼ無関係である。",
-      "caveats": [
-        "恒等式の分解で、工場が大きい理由までは言えない",
-        "出荷額は原料費を含む。効率の比較には付加価値を使う",
-        "出荷額は 2023 年、事業所数は 2024 年、人口は 2020 年で年がずれている。事業所の集計範囲が出荷額と同じかは未確認",
-        "人口が小さく値の無い 57 自治体は表に含まれない"
+      "derivedMetrics": [
+        {
+          "key": "manufacturing-shipment-amount-per-establishment",
+          "label": "1事業所あたり出荷額"
+        },
+        {
+          "key": "manufacturing-shipment-amount-per-employee",
+          "label": "従業者1人あたり出荷額"
+        }
       ],
-      "observedAt": "2026-11-05",
-      "article": { "slug": "manufacturing-strength-factory-size", "titleHint": "製造業が強い町は、工場が多い町か、大きい町か", "chars": "3000-4000", "links": [{ "href": "/blog/manufacturing-productivity", "label": "製造業の1人あたり出荷額の県別の比較" }] }
+      "script": ".claude/scripts/analysis/m01-factory-size.ts",
+      "finding": "人口 3 万人以上の 764 市区町村で、人口あたり出荷額の対数の分散のうち、工場の数が単独で 31.6%、規模 (1 工場の人数) が 19.8%、生産性の目安の 1 人あたり出荷額が 17.1%、規模と 1 人あたりの重なりが 20.9%、工場の数と他の重なりが 10.7%。規模と生産性の目安は単独でほぼ同じで、重なりは切り分けられず、どちらかとは言えない。工場の数は他の 2 つとほぼ無関係 (対数の相関 0.10・0.12) で、規模と 1 人あたり出荷額は相関 0.57 で一緒に動く。",
+      "caveats": [
+        "恒等式の分解で、工場が多い理由や大きい理由までは言えない",
+        "規模と 1 人あたり出荷額の重なり 20.9% はどちらにも割り振れない",
+        "1 人あたり出荷額は原料費を含み、生産性そのものではない。市区町村の付加価値はこの表に無い",
+        "業種の内訳が無いので、町の型の理由は確かめられない",
+        "上位の町だけの分解は 3 要素が打ち消し合い、割合として読めないので行わない",
+        "出荷額は 2023 年、従業者数と事業所数は 2024 年、人口は 2020 年で年がずれている",
+        "出荷額は従業者 4 人以上の事業所の値。事業所数と従業者数はより小さい事業所を含むとみられる (1 工場の平均が 4 人未満の町が 11)。公式の定義では未確認",
+        "値がそろう 1,669 市区町村のうち人口 3 万人以上の 764 が対象。人口 3 万人未満の 905 町は比較に入れていない。出荷額などが 0 の 15 村と値の無い 57 自治体は含まれない"
+      ],
+      "observedAt": "2026-11-06",
+      "article": {
+        "slug": "manufacturing-strength-factory-size",
+        "titleHint": "製造業が強い町の強さは、工場の数か、規模か、1人あたりか",
+        "chars": "3000-4000",
+        "links": [
+          {
+            "href": "/blog/manufacturing-productivity",
+            "label": "製造業の1人あたり出荷額の県別の比較"
+          }
+        ]
+      },
+      "questionTerms": [
+        "規模",
+        "生産性"
+      ],
+      "viewpoints": [
+        {
+          "layer": "question",
+          "status": "done",
+          "result": "規模を 1 工場の人数、生産性の目安を 1 人あたり出荷額で測る。付加価値が無いので生産性そのものではない",
+          "evidence": "center"
+        },
+        {
+          "layer": "data",
+          "status": "done",
+          "result": "値がそろう 1,669 市区町村のうち人口 3 万人以上の 764。出荷額は 4 人以上の値で、事業所数と従業者数の範囲は未確認",
+          "evidence": "usableTowns"
+        },
+        {
+          "layer": "decomposition",
+          "status": "done",
+          "result": "3 要素の単独の分散と重なりに分けて残す",
+          "evidence": "shares"
+        },
+        {
+          "layer": "robustness",
+          "status": "done",
+          "result": "人口 1 万・3 万・10 万人で形がほぼ同じ",
+          "evidence": "robustness"
+        },
+        {
+          "layer": "baseline",
+          "status": "done",
+          "result": "3 つの型の比率は全 764 町でも上位 191 町でもほぼ同じで、上位だけの特徴ではない",
+          "evidence": "typesAllTowns"
+        },
+        {
+          "layer": "counterexample",
+          "status": "done",
+          "result": "府中町・知多市が傾向から外れる。中部は数の町が半分で、九州・沖縄の 11 町には数の町が無い",
+          "evidence": "typesByRegion"
+        },
+        {
+          "layer": "limits",
+          "status": "done",
+          "result": "上位だけの分解は打ち消し合うので行わない。因果と業種は言えない",
+          "evidence": "correlations"
+        },
+        {
+          "layer": "figures",
+          "status": "done",
+          "result": "各図の読み方を図の台帳に書いた。4 区分は並べ方で当然の高さではなく倍率の順を読む",
+          "evidence": "quarters"
+        }
+      ]
     },
     {
       "id": "analysis:H01-vacancy-population",
       "issue": "issue:H01",
       "status": "draft",
+      "stage": "reviewed",
       "question": "空き家が増えているのは、人口が減った町だけか",
       "spec": ".claude/scripts/analysis/examples/h01-vacancy.json",
       "script": ".claude/scripts/analysis/h01-vacancy-population.ts",
-      "finding": "1,052 市区町村で、2013→2023 年に差し引きで増えた空き家 70 万戸のうち 97.2% は人口が減った町にある。人口が増えた 212 市区町村は 2013 年に空き家の 36.0% を抱えていたが、増加分では 2.8% で、空き家率の変化の中央値は -1.00 ポイントである。人口増減と空き家率の変化の相関は -0.54 で、10 市区町村以上ある 45 県のうち 44 県で県の中でも負の向きである。空き家の種類では、2023 年の賃貸・売却用と二次的住宅を除く空き家の率は人口増減と -0.72、賃貸用の率は 0.04 である。",
+      "finding": "1,052 市区町村で、2013→2023 年に差し引きで増えた空き家 70 万戸のうち 97.2% は人口が減った町にある。人口が増えた 212 市区町村は 2013 年に空き家の 36.0% を抱えていたが、差し引きの増加分では 2.8% で、空き家率の変化の中央値は -1.00 ポイントである。増えた町だけを足すと人口が増えた町は 19.6% で、増えた分を減った町が打ち消している。増減を分けると、人口が増えた町は住宅が増えた分の約 28.7 万戸と率の低下の約 -26.7 万戸がほぼ釣り合い、人口が 5% を超えて減った町は率の上昇の約 41.5 万戸がその区分の増加の 8 割を占める。全体では差し引きの増加の 77.6% が住宅の増加の分である。人口増減と空き家率の変化の相関は -0.54 で、10 市区町村以上ある 45 県のうち 44 県で県の中でも負の向きである。空き家の種類では、2023 年の賃貸・売却用と二次的住宅を除く空き家の率は人口増減と -0.72、賃貸用の率は 0.04 である。",
       "caveats": [
         "相関で、人口減が空き家を生むとまでは言えない",
         "空き家は 2013→2023 年、人口は 2010→2020 年で期間がずれている",
         "住宅・土地統計調査は標本調査で、5 年変化の信頼性は r=-0.03。市ごとの順位にせず、集団の傾向として読む",
         "表に無い 689 自治体は小さな町村が中心で、人口増減率の中央値は -16.1%。人口が減った町の増加はこの表より大きい可能性がある",
         "空き家の種類は 2023 年の水準だけで、増加の内訳ではない",
-        "増加分は差し引きで、各区分の中に空き家が減った町も含む"
+        "増加分は差し引きで、各区分の中に空き家が減った町も含む",
+        "97.2% は差し引きの値。増えた町だけの 19.6% は町ごとの揺れを含むので幅をもって読む",
+        "増減の内訳の総住宅数は空き家数と丸められた空き家率からの逆算で、目安である",
+        "東京都の特別区は区ごと、政令指定都市は市全体で数える",
+        "世帯数はこの表に無く、住宅の増加と空き家の関係の理由は言えない",
+        "97.2% は町を選び直すと 85〜114% ほどの幅があり (調査の標本誤差は含まない)、小数まで言える値ではない",
+        "住宅の増加と率の低下の釣り合いは恒等式の関係で、空き家が増えなかった理由は言えない",
+        "0〜5% 減の町の増加は住宅の増加の分がほとんどで、人口の減少とは結び付けられない"
       ],
-      "observedAt": "2026-11-05",
+      "observedAt": "2026-11-06",
       "article": {
         "slug": "vacant-houses-population-decline",
         "titleHint": "空き家が増えたのは人口が減った町だけか",
@@ -68,7 +154,61 @@
             "label": "賃貸・売却用及び二次的住宅を除く空き家率の市区町村ランキングをもっと見る"
           }
         ]
-      }
+      },
+      "questionTerms": [
+        "空き家",
+        "人口が減った町"
+      ],
+      "viewpoints": [
+        {
+          "layer": "question",
+          "status": "done",
+          "result": "空き家の増加を数の差し引きで、町の区分を 2010→2020 年の日本人人口の増減で測る。率と増えた町だけの値も並べた",
+          "evidence": "declineShareOfIncrease"
+        },
+        {
+          "layer": "data",
+          "status": "done",
+          "result": "空き家率の分母は総住宅数。標本調査で 1,052 市区町村のみ。期間は 3 年ずれ、特別区と政令市で粒度が違う",
+          "evidence": "droppedTowns"
+        },
+        {
+          "layer": "decomposition",
+          "status": "done",
+          "result": "差し引きの増加を率の変化の分と住宅の増減の分へ分けた",
+          "evidence": "changeShares"
+        },
+        {
+          "layer": "robustness",
+          "status": "done",
+          "result": "線引き 0/-2/-5/-10%、期間 2 分割、人口規模 4 層で向きが保たれ、別荘地 9 町を除いても相関は -0.54。97.2% は町を選び直すと 85〜114% の幅がある",
+          "evidence": "populationLines"
+        },
+        {
+          "layer": "baseline",
+          "status": "done",
+          "result": "増加の割合を 2013 年の保有の割合と比べた。増えた町だけの割合も示した",
+          "evidence": "growthShareOfGrossIncrease"
+        },
+        {
+          "layer": "counterexample",
+          "status": "done",
+          "result": "人口が増えた町の中で福岡市や大田区などの減少が増加を打ち消す。県の中でも 44/45 県で同じ向き",
+          "evidence": "withinPrefecture"
+        },
+        {
+          "layer": "limits",
+          "status": "done",
+          "result": "因果は言えない。空き家の種類は水準だけで増加の内訳ではない。町ごとの順位にしない (信頼性 r=-0.03)",
+          "evidence": "fiveYearReliability"
+        },
+        {
+          "layer": "figures",
+          "status": "done",
+          "result": "各図の読み方を図の台帳に書いた。保有と増加の棒は差し引きの値として読む",
+          "evidence": "groups"
+        }
+      ]
     }
   ]
 }

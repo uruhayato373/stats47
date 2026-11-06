@@ -2,15 +2,20 @@
   "version": 1,
   "figures": [
     {
-      "id": "figure:M01-factory-size-scatter",
+      "id": "figure:M01-factor-shares",
       "analysis": "analysis:M01-factory-size",
-      "template": "scatter",
-      "title": "工場の数と工場の大きさ",
-      "scope": "prefecture",
+      "template": "grouped-bar",
+      "title": "町の差の内訳",
+      "reads": "工場の数が約 3 割で、規模と 1 人あたりは単独でほぼ同じ。重なりは切り分けられない",
+      "scope": "municipality",
       "metrics": [
         {
           "key": "manufacturing-shipment-amount",
           "year": 2023
+        },
+        {
+          "key": "manufacturing-employees",
+          "year": 2024
         },
         {
           "key": "manufacturing-establishments",
@@ -42,12 +47,91 @@
       "id": "figure:M01-town-quarters-bars",
       "analysis": "analysis:M01-factory-size",
       "template": "grouped-bar",
-      "title": "強い町は数より大きさで差がつく",
+      "title": "4つの区分の3要素",
+      "reads": "高さそのものではなく、3 要素の倍率が 2 倍台で偏らないこと",
       "scope": "municipality",
       "metrics": [
         {
           "key": "manufacturing-shipment-amount",
           "year": 2023
+        },
+        {
+          "key": "manufacturing-employees",
+          "year": 2024
+        },
+        {
+          "key": "manufacturing-establishments",
+          "year": 2024
+        },
+        {
+          "key": "day-time-population",
+          "year": 2020
+        },
+        {
+          "key": "day-time-population-ratio",
+          "year": 2020
+        }
+      ],
+      "destinations": [
+        {
+          "channel": "site",
+          "slug": "manufacturing-strength-factory-size",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "id": "figure:M01-people-productivity-scatter",
+      "analysis": "analysis:M01-factory-size",
+      "template": "scatter",
+      "title": "人の多い工場と1人あたり出荷額",
+      "reads": "規模の大きい町ほど 1 人あたりも高い傾向と、そこから外れる町",
+      "scope": "municipality",
+      "metrics": [
+        {
+          "key": "manufacturing-shipment-amount",
+          "year": 2023
+        },
+        {
+          "key": "manufacturing-employees",
+          "year": 2024
+        },
+        {
+          "key": "manufacturing-establishments",
+          "year": 2024
+        },
+        {
+          "key": "day-time-population",
+          "year": 2020
+        },
+        {
+          "key": "day-time-population-ratio",
+          "year": 2020
+        }
+      ],
+      "destinations": [
+        {
+          "channel": "site",
+          "slug": "manufacturing-strength-factory-size",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "id": "figure:M01-town-types-map",
+      "analysis": "analysis:M01-factory-size",
+      "template": "choropleth",
+      "title": "上位191町の3つの型",
+      "reads": "型の比率に地域差があること",
+      "scope": "municipality",
+      "metrics": [
+        {
+          "key": "manufacturing-shipment-amount",
+          "year": 2023
+        },
+        {
+          "key": "manufacturing-employees",
+          "year": 2024
         },
         {
           "key": "manufacturing-establishments",
@@ -75,6 +159,7 @@
       "analysis": "analysis:H01-vacancy-population",
       "template": "grouped-bar",
       "title": "空き家の保有と増加の割合",
+      "reads": "差し引きの増加は人口減の町に偏る。増えた町だけを足した値とは違う",
       "scope": "municipality",
       "metrics": [
         {
@@ -120,7 +205,7 @@
             "field": "stock2013Share"
           },
           {
-            "label": "増えた空き家",
+            "label": "差し引きの増加",
             "field": "increaseShare"
           }
         ]
@@ -134,10 +219,83 @@
       ]
     },
     {
+      "id": "figure:H01-vacant-change-sources",
+      "analysis": "analysis:H01-vacancy-population",
+      "template": "grouped-bar",
+      "title": "空き家の増減の内訳",
+      "scope": "municipality",
+      "metrics": [
+        {
+          "key": "vacant-houses-city",
+          "year": 2013
+        },
+        {
+          "key": "vacant-houses-city",
+          "year": 2023
+        },
+        {
+          "key": "vacant-housing-ratio",
+          "year": 2013
+        },
+        {
+          "key": "vacant-housing-ratio",
+          "year": 2023
+        },
+        {
+          "key": "japanese-population",
+          "year": 2010
+        },
+        {
+          "key": "japanese-population",
+          "year": 2020
+        }
+      ],
+      "destinations": [
+        {
+          "channel": "site",
+          "slug": "vacant-houses-population-decline",
+          "status": "draft"
+        }
+      ],
+      "chart": {
+        "source": "住宅・土地統計調査・国勢調査",
+        "rows": "groups",
+        "category": "label",
+        "count": "towns",
+        "transform": "空き家の増減を、空き家率の変化の分と総住宅数の増減の分に分ける。総住宅数は空き家数と空き家率から逆算する",
+        "displaySources": [
+          {
+            "label": "住宅・土地統計調査",
+            "surveyId": "housing-land-survey"
+          },
+          {
+            "label": "国勢調査",
+            "surveyId": "census"
+          }
+        ],
+        "name": "vacant-change-sources-bars",
+        "alt": "人口の増減で分けた、空き家の増減の内訳",
+        "meta": "人口の増減で分けた差し引きの増減（万戸）・{towns}市区町村",
+        "unit": "万戸",
+        "series": [
+          {
+            "label": "空き家率の変化の分",
+            "field": "rateEffectMan"
+          },
+          {
+            "label": "住宅の増減の分",
+            "field": "housingEffectMan"
+          }
+        ]
+      },
+      "reads": "人口増の町は住宅が増えた分を率の低下が打ち消し、大きく減った町は率の上昇が増加の大半を占める"
+    },
+    {
       "id": "figure:H01-vacancy-change-bars",
       "analysis": "analysis:H01-vacancy-population",
       "template": "grouped-bar",
       "title": "人口の増減と空き家率の変化",
+      "reads": "空き家率の中央値は人口の増減の順に並ぶ。町ごとの順位にはしない",
       "scope": "municipality",
       "metrics": [
         {
@@ -207,6 +365,7 @@
       "analysis": "analysis:H01-vacancy-population",
       "template": "grouped-bar",
       "title": "人口の増減と空き家の種類",
+      "reads": "2023 年の水準の比較で、増加の内訳ではない",
       "scope": "municipality",
       "metrics": [
         {
@@ -244,7 +403,7 @@
         ],
         "name": "vacancy-type-by-population-bars",
         "alt": "人口の増減で分けた、空き家の種類ごとの空き家率の中央値",
-        "meta": "2023年・空き家率の中央値（%）・{towns}市区町村",
+        "meta": "2023年・空き家率の中央値（%）・人口は2010〜2020年の増減・{towns}市区町村",
         "unit": "％",
         "series": [
           {

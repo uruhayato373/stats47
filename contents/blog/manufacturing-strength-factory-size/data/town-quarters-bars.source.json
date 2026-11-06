@@ -1,8 +1,18 @@
 {
   "kind": "derived",
-  "source": "r2:app/stats/manufacturing-shipment-amount/cities.json + r2:app/stats/manufacturing-establishments/cities.json + r2:app/stats/day-time-population/cities.json + r2:app/stats/day-time-population-ratio/cities.json",
-  "transform": "人口3万人以上の市区町村を人口あたり出荷額で 4 等分し、各区分の中央値を下位 4 分の 1 に対する倍率で示す",
+  "source": "r2:app/stats/manufacturing-shipment-amount/cities.json + r2:app/stats/manufacturing-employees/cities.json + r2:app/stats/manufacturing-establishments/cities.json + r2:app/stats/day-time-population/cities.json + r2:app/stats/day-time-population-ratio/cities.json",
+  "transform": "人口3万人以上の市区町村を人口あたり出荷額で 4 等分し、3 項の各区分の中央値を下位 4 分の 1 に対する倍率で示す",
   "generatedBy": ".claude/scripts/analysis/m01-factory-size.ts",
-  "areaScope": { "level": "municipality", "wardMode": "merged", "within": { "kind": "nation" } },
-  "displaySources": [ { "label": "社会・人口統計体系" } ]
+  "areaScope": {
+    "level": "municipality",
+    "wardMode": "merged",
+    "within": {
+      "kind": "nation"
+    }
+  },
+  "displaySources": [
+    {
+      "label": "社会・人口統計体系"
+    }
+  ]
 }

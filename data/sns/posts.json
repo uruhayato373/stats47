@@ -40500,12 +40500,12 @@
         "state": "pending"
       },
       "created_at": "2026-11-05T08:48:29.897Z",
-      "updated_at": "2026-11-06T04:39:57.830Z",
+      "updated_at": "2026-11-06T08:11:32.497Z",
       "platform": "x",
       "post_type": "original",
       "domain": "blog",
       "content_key": "manufacturing-strength-factory-size",
-      "caption": "製造業が強い町は、工場が多い町ではなく、1つの工場が大きい町でした。\n人口あたり出荷額の差のうち、63%は工場の大きさ、37%は工場の数の差です。\n県で見ると、工場の数と大きさはほぼ無関係（相関-0.01）。福井・岐阜は数の県、山口・大分は大きさの県です。\nhttps://stats47.jp/blog/manufacturing-strength-factory-size?utm_source=x&utm_medium=social&utm_campaign=blog-manufacturing-strength-factory-size"
+      "caption": "製造業が強い町の差のうち、約3割は工場の数でした。\n規模と1人あたり出荷額は単独ではどちらも2割弱で、約2割は重なって切り分けられません。\n工場の数は他の2つとほぼ無関係で、規模と1人あたり出荷額は一緒に動きます。人口3万人以上の764市区町村の分解です。\nhttps://stats47.jp/blog/manufacturing-strength-factory-size?utm_source=x&utm_medium=social&utm_campaign=blog-manufacturing-strength-factory-size"
     },
     {
       "id": 1196,
@@ -40514,12 +40514,12 @@
         "state": "pending"
       },
       "created_at": "2026-11-05T11:39:10.991Z",
-      "updated_at": "2026-11-05T11:39:10.991Z",
+      "updated_at": "2026-11-06T08:35:20.676Z",
       "platform": "x",
       "post_type": "original",
       "domain": "blog",
       "content_key": "vacant-houses-population-decline",
-      "caption": "空き家が増えたのは、ほぼ人口が減った町でした。\n差し引きで増えた空き家の97%は人口減の町です。人口が増えた町は2013年に空き家の36%を抱えていましたが、増加分では3%だけでした。\n全国1,052市区町村の比較です。\nhttps://stats47.jp/blog/vacant-houses-population-decline?utm_source=x&utm_medium=social&utm_campaign=blog-vacant-houses-population-decline"
+      "caption": "空き家が増えたのは、人口が減った町だけではありませんでした。\n増えた町だけを足すと、約2割は人口が増えた町です。ただし差し引きで見ると、増加の大半は人口が減った町に集まります。\n全国1,052市区町村の比較です。\nhttps://stats47.jp/blog/vacant-houses-population-decline?utm_source=x&utm_medium=social&utm_campaign=blog-vacant-houses-population-decline"
     }
   ]
 }

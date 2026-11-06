@@ -813,6 +813,12 @@ jobs:
           npx tsx .claude/scripts/metrics/check-color-policies.ts
         continue-on-error: false
 
+      - name: 🔎 Analysis Cycle Gate
+        run: |
+          # 問いの分析の工程。視点の結果・根拠・問いの語が揃うまで止める (.claude/scripts/analysis/analysis-cycle-core.mjs)
+          node .claude/scripts/analysis/check-analysis-cycle.mjs
+        continue-on-error: false
+
       - name: 📚 Monthly and Composition Ledger Gate
         run: |
           # 月次の判断と台帳の食い違い、テーマの積み上げと内訳の台帳のずれを止める。どちらも通信なしで動く

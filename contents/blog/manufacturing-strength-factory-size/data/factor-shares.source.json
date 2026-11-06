@@ -1,0 +1,18 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/manufacturing-shipment-amount/cities.json + r2:app/stats/manufacturing-employees/cities.json + r2:app/stats/manufacturing-establishments/cities.json + r2:app/stats/day-time-population/cities.json + r2:app/stats/day-time-population-ratio/cities.json",
+  "transform": "人口あたり出荷額の対数の分散を、工場の数・1工場の人数・1人あたり出荷額の 3 項へ共分散で割り振る。人口の線引きを 1 万・3 万・10 万人で比べる",
+  "generatedBy": ".claude/scripts/analysis/m01-factory-size.ts",
+  "areaScope": {
+    "level": "municipality",
+    "wardMode": "merged",
+    "within": {
+      "kind": "nation"
+    }
+  },
+  "displaySources": [
+    {
+      "label": "社会・人口統計体系"
+    }
+  ]
+}

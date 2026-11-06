@@ -47,6 +47,31 @@
             "type": "string",
             "minLength": 5
           },
+          "stage": {
+            "description": "工程。判定は .claude/scripts/analysis/analysis-cycle-core.mjs",
+            "enum": ["framed", "viewpoints", "figures", "draft", "reviewed", "approved", "published", "evaluated"]
+          },
+          "questionTerms": {
+            "description": "台帳の問いの語。結論と記事がこの語で答える",
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "viewpoints": {
+            "description": "視点の層ごとの結果。evidence は analysis-summary.json の中のキー",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["layer", "status"],
+              "additionalProperties": false,
+              "properties": {
+                "layer": { "type": "string" },
+                "status": { "enum": ["done", "na"] },
+                "result": { "type": "string", "minLength": 1 },
+                "evidence": { "type": "string", "minLength": 1 },
+                "reason": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
           "spec": {
             "type": "string",
             "pattern": "^\\.claude/scripts/analysis/"

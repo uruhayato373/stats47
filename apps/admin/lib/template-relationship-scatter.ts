@@ -154,7 +154,7 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
   return sampleFrame({
     // Two metric names can run long; shrink the title to the frame width instead of letting it overflow.
     title: chart.title, titleSize: Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length)), meta: everyPrefecture ? chart.meta : `${chart.meta}・${areaCount}`, note: chart.note, source: chart.source, theme,
-    ariaLabel: `${chart.title}・${everyPrefecture ? '全47都道府県' : areaCount}`, attributes: `data-image-template="scatter" data-points="${points.length}"`,
+    ariaLabel: `${chart.title}・${everyPrefecture ? '全47都道府県' : areaCount}`, attributes: `data-image-template="scatter" data-points="${points.length}"${municipal ? ' data-level="municipality"' : ''}`,
     body: `<defs><clipPath id="scatter-plot"><rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}"/></clipPath></defs>
       <rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}" fill="${ink.plot}" stroke="${ink.edge}"/>
       ${xTicks.join('')}${yTicks.join('')}

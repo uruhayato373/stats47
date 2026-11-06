@@ -16,6 +16,15 @@
       "increase": 19920,
       "increaseShare": 2.8,
       "stock2013Share": 36,
+      "grossIncrease": 195350,
+      "grossDecrease": -175430,
+      "townsWithIncrease": 108,
+      "vacancyRate2013": 12.1,
+      "housingGrowth": 10.8,
+      "rateEffectMan": -26.7,
+      "housingEffectMan": 28.7,
+      "medianChange2013to2018": -0.75,
+      "medianChange2018to2023": -0.15,
       "medianAbandoned2023": 3.6,
       "medianRental2023": 5.5
     },
@@ -27,6 +36,15 @@
       "increase": 172920,
       "increaseShare": 24.7,
       "stock2013Share": 28.6,
+      "grossIncrease": 250210,
+      "grossDecrease": -77290,
+      "townsWithIncrease": 157,
+      "vacancyRate2013": 13,
+      "housingGrowth": 7.3,
+      "rateEffectMan": 0.9,
+      "housingEffectMan": 16.4,
+      "medianChange2013to2018": 0.11,
+      "medianChange2018to2023": 0.15,
       "medianAbandoned2023": 5.5,
       "medianRental2023": 6.05
     },
@@ -38,6 +56,15 @@
       "increase": 508620,
       "increaseShare": 72.5,
       "stock2013Share": 35.4,
+      "grossIncrease": 551860,
+      "grossDecrease": -43240,
+      "townsWithIncrease": 512,
+      "vacancyRate2013": 15.3,
+      "housingGrowth": 3.4,
+      "rateEffectMan": 41.5,
+      "housingEffectMan": 9.3,
+      "medianChange2013to2018": 1.43,
+      "medianChange2018to2023": 1.42,
       "medianAbandoned2023": 10.3,
       "medianRental2023": 5.4
     }
@@ -48,5 +75,63 @@
     "median": -0.54
   },
   "correlationAbandoned2023": -0.72,
-  "correlationRental2023": 0.04
+  "correlationRental2023": 0.04,
+  "changeShares": {
+    "rate": 22.4,
+    "housing": 77.6
+  },
+  "declineShareInterval": {
+    "low": 85.4,
+    "high": 113.9
+  },
+  "totalGrossIncrease": 997420,
+  "growthShareOfGrossIncrease": 19.6,
+  "populationLines": [
+    {
+      "line": 0,
+      "towns": 212,
+      "netShare": 2.8
+    },
+    {
+      "line": -2,
+      "towns": 296,
+      "netShare": 9.6
+    },
+    {
+      "line": -5,
+      "towns": 448,
+      "netShare": 27.5
+    },
+    {
+      "line": -10,
+      "towns": 693,
+      "netShare": 60.6
+    }
+  ],
+  "populationSizes": [
+    {
+      "from": 0,
+      "towns": 139,
+      "correlation": -0.36
+    },
+    {
+      "from": 20000,
+      "towns": 399,
+      "correlation": -0.5
+    },
+    {
+      "from": 50000,
+      "towns": 239,
+      "correlation": -0.53
+    },
+    {
+      "from": 100000,
+      "towns": 275,
+      "correlation": -0.39
+    }
+  ],
+  "resort": {
+    "towns": 9,
+    "correlationWithout": -0.54
+  }
 }

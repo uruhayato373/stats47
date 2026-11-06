@@ -267,11 +267,15 @@ export const DATASETS = [
       { field: "links[].page", to: "content.pages", key: "pages[].id" },
     ],
   }),
+  d("content.analysis-viewpoints", "data/content/analysis-viewpoints.json", "config", "data", "data", "分析で確かめる視点の層", {
+    schema: "data/content/schema/analysis-viewpoints.schema.json",
+  }),
   d("content.analyses", "data/content/analyses.json", "config", "data", "data", "問いに答える分析の台帳。入力の spec と再現のスクリプトを持ち、値は持たない", {
     schema: "data/content/schema/analyses.schema.json",
     refs: [
       { field: "analyses[].issue", to: "content.issues", key: "issues[].id" },
       { field: "analyses[].derivedMetrics[].key", to: "registry:metrics" },
+      { field: "analyses[].viewpoints[].layer", to: "content.analysis-viewpoints", key: "layers[].id" },
     ],
   }),
   d("content.types", "data/content/content-types.json", "config", "data", "data", "コンテンツの 4 型の定義と、ページ・投稿・商品を型へ振り分ける規則。ID と規則だけを持ち、件数は持たない", {

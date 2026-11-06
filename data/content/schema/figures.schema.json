@@ -42,6 +42,15 @@
             "type": "string",
             "minLength": 1
           },
+          "reads": {
+            "description": "この図で読者が何を読むか。並べ方で当然の差を主張しない",
+            "type": "string",
+            "minLength": 1
+          },
+          "colorView": {
+            "description": "地図の型で、分析の目的に合わせて選ぶ見方 (packages/types/src/color-policy.ts の COLOR_VIEWS)。書かなければ配色の台帳の判定に従う。",
+            "enum": ["continuous", "distribution"]
+          },
           "scope": {
             "enum": [
               "prefecture",
