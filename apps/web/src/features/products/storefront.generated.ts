@@ -636,5 +636,24 @@ export const STOREFRONT_PRODUCTS = [
       "telework-gap-tokyo-6x",
       "convenience-store-density-map"
     ]
+  },
+  {
+    "id": "K-S1-13",
+    "slug": "kindle-k-s1-13",
+    "channel": "kindle",
+    "channelLabel": "Kindle電子書籍",
+    "title": "住む県の選び方 — 統計で比べる5つの条件",
+    "description": "総合の住みやすさランキングに頼らず、自分の条件に合う指標を選んで 47 都道府県を比べる手順の本。題名の 5 つの条件は、家賃・仕事・子育て・医療・災害の 5 つの切り口のことです。第8章では、そこから自分の譲れない条件を 3 つに絞ります。",
+    "priceYen": 500,
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HQBGV4RD",
+    "included": [
+      "Kindle電子書籍",
+      "固定時点の公的統計",
+      "図表とテーマ解説"
+    ],
+    "audience": [
+      "地域差を読み物として知りたい方"
+    ],
+    "sourceBlogSlugs": []
   }
 ] as const satisfies readonly StorefrontProduct[];
