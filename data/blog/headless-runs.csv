@@ -409,3 +409,4 @@ kb-retry,2026-11-04,laundry-detergent-consumption-expenditure-prefecture-gap,cla
 kb-retry,2026-11-04,transportation-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,2,2,20745,9667,0.1796,pass,PASS,86
 kb-retry,2026-11-04,rent-group-consumption-expenditure-prefecture-gap,claude-sonnet,claude-sonnet,low,3,3,33463,14880,0.2826,pass,REVISE,134
 kb-retry,2026-11-04,transport-communication-expenditure-total-prefecture-gap,claude-sonnet,claude-sonnet,low,3,2,24296,13714,0.2343,pass,PASS,127
+blog-20261105221722,2026-11-05,vacant-houses-population-decline,claude-sonnet,claude-sonnet,low,2,1,14443,9377,0.1515,pass,PASS,82

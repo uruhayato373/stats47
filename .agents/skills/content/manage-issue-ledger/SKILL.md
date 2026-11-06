@@ -103,7 +103,18 @@ npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.j
 npm run issues:figures
 ```
 
-記事の下書きは `contents/blog/<slug>/article.md` に `published: false` で置く。公開中の記事を直す下書きも同じで、`published: false` の間は自動公開も掃除もされない。`published: true` にして develop へ push すると公開される。下書きを置いたら、図の配信先の `status` を `draft` にする。
+分析の結論から記事の下書きを作るときは、次の 1 コマンドで図・データ・出典・指示文を作り、headless の書き手・品質ゲート・審査まで通す。`analyses.json` の `article` と `figures.json` の `chart` が入力で、値は分析の結果の JSON からだけ読む。今の対応は `grouped-bar` の型だけで、未対応の型は止まる。
+
+```bash
+npm run analysis:draft -- --analysis analysis:H01-vacancy-population --result .local/analysis/h01/result.json
+npm run blog:preview -- --slug vacant-houses-population-decline
+```
+
+`blog:preview` は開発サーバーの R2 の手前に下書きを重ね、本番と同じ記事ページで見せる。worktree では Turbopack が `next` を見つけられないので `WEB_DEV_BUNDLER=webpack` を付ける。
+
+下書きは `published: false` で止まり、自動公開も掃除もされない。背景画像は別の工程で、`issues:figures` の「背景待ち」で分かる。公開は人が `published: true` にして develop へ push する。公開したら `figures.json` の `slug` を `page` に置き換える。
+
+審査の PASS は機械の床で、分析の記事は別の審査で読み直してから公開する。H01 では headless が PASS を出した版にも因果に寄った語が残り、agent の審査は自己矛盾を見つけた。
 
 ## 6. 見送る
 

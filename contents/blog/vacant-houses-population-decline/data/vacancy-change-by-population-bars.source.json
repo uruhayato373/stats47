@@ -1,0 +1,23 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/vacant-housing-ratio/cities.json + r2:app/stats/vacant-houses-city/cities.json + r2:app/stats/vacant-housing-rate-excluding-rental-sale-secondary/cities.json + r2:app/stats/vacant-housing-rate-for-rent/cities.json + r2:app/stats/japanese-population/cities.json",
+  "transform": "人口の増減で市区町村を 3 区分し、区分ごとの中央値または合計の割合を計算する",
+  "generatedBy": ".claude/scripts/analysis/analysis-draft.ts",
+  "areaScope": {
+    "level": "municipality",
+    "wardMode": "merged",
+    "within": {
+      "kind": "nation"
+    }
+  },
+  "displaySources": [
+    {
+      "label": "住宅・土地統計調査",
+      "surveyId": "housing-land-survey"
+    },
+    {
+      "label": "国勢調査",
+      "surveyId": "census"
+    }
+  ]
+}

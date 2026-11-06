@@ -144,7 +144,7 @@ function makeMdComponents(
             const altText = typeof alt === "string" ? alt : "";
             const resolvedSrc =
                 slug && !src.startsWith("http") && !src.startsWith("/")
-                    ? `${R2_PUBLIC_BASE_URL}/${blogR2Key(slug, src)}`
+                    ? `${process.env.NEXT_PUBLIC_R2_PUBLIC_URL || R2_PUBLIC_BASE_URL}/${blogR2Key(slug, src)}`
                     : src;
             const isSvg = resolvedSrc.endsWith(".svg");
             return (
