@@ -4,10 +4,9 @@ import path from 'node:path';
 import os from 'node:os';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { geoArea, geoMercator, geoPath } from 'd3-geo';
+import { geoArea, geoPath } from 'd3-geo';
 import { scaleSequential } from 'd3-scale';
 import { interpolateYlOrRd } from 'd3-scale-chromatic';
-import { feature } from 'topojson-client';
 import type { Feature, Geometry } from 'geojson';
 import sharp from 'sharp';
 import satori from 'satori';
@@ -34,6 +33,7 @@ import { noteCoverCategory } from './catalog/cover-categories';
 import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { assertCoverGenerationType } from './lib/cover-assets.mjs';
+import { topologyFeatures, fittedMercator, heightFittedMercator, largestPolygon } from '../../../packages/gis/src/map/geometry.mjs';
 async function main() {
   assertCoverGenerationType('note-covers');
   const { fetchCoverSource, createCoverStore } = await import('./lib/cover-storage.mjs');
@@ -78,8 +78,8 @@ async function main() {
       'utf8'
     )
   );
-  const fc = feature(topo, topo.objects.pref) as any;
-  const projection = geoMercator().fitExtent(
+  const fc = topologyFeatures(topo, 'pref') as any;
+  const projection = fittedMercator(
     [
       [15, 10],
       [423, 400],
@@ -87,12 +87,7 @@ async function main() {
     fc
   );
   const project = geoPath(projection);
-  const largestPolygon = (f: any) => f.geometry.type === 'MultiPolygon'
-    ? { ...f, geometry: { type: 'Polygon', coordinates: f.geometry.coordinates.reduce((best: any, part: any) =>
-      geoArea({ type: 'Polygon', coordinates: part } as any) >
-      geoArea({ type: 'Polygon', coordinates: best } as any) ? part : best) } }
-    : f;
-  const mainFeatures = fc.features.filter((f: any) => f.properties.N03_007 !== '47').map(largestPolygon);
+    const mainFeatures = fc.features.filter((f: any) => f.properties.N03_007 !== '47').map(largestPolygon);
   const okinawa = largestPolygon(fc.features.find((f: any) => f.properties.N03_007 === '47'));
   const rankColors = ['#dce9fb', '#accbf3', '#75a7e5', '#397cc9', '#10448f'];
   async function horizontalMap(ranks?: Map<string, number>) {
@@ -107,7 +102,7 @@ async function main() {
     const main = await sharp(Buffer.from(svg)).resize(1752, 1640)
       .rotate(55, { background: '#00000000' }).trim()
       .resize(850, 490, { fit: 'contain', background: '#00000000' }).png().toBuffer();
-    const insetPath = geoPath(geoMercator().fitExtent([[8, 8], [137, 77]], okinawa));
+    const insetPath = geoPath(fittedMercator([[8, 8], [137, 77]], okinawa));
     const inset = `<svg xmlns="http://www.w3.org/2000/svg" width="145" height="85"><path d="${insetPath(okinawa)}" fill="${color('47')}" stroke="${stroke('47')}" stroke-width="${ranks?.get('47') === 1 ? 3 : 1.5}"/></svg>`;
     return {
       mapImage: `data:image/png;base64,${main.toString('base64')}`,
@@ -280,12 +275,12 @@ async function main() {
     const domain: [number, number] = [Math.min(...values.values()), Math.max(...values.values())];
     const scale = scaleSequential(domain, (t) => interpolateYlOrRd(0.15 + 0.70 * t));
     const collection = { type: 'FeatureCollection' as const, features: mainFeatures };
-    const mapProjection = geoMercator().fitHeight(575, collection);
+    const mapProjection = heightFittedMercator(575, collection);
     const bounds = geoPath(mapProjection).bounds(collection);
     const translation = mapProjection.translate();
     mapProjection.translate([translation[0] + 1226 - bounds[1][0], translation[1] + 18 - bounds[0][1]]);
     const mapPath = geoPath(mapProjection);
-    const insetPath = geoPath(geoMercator().fitExtent([[1045, 462], [1190, 533]], okinawa));
+    const insetPath = geoPath(fittedMercator([[1045, 462], [1190, 533]], okinawa));
     const color = (code: string) => scale(values.get(code)!);
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="670">${mainFeatures.map((f: Feature<Geometry, { N03_007: string }>) =>
       `<path d="${mapPath(f)}" fill="${color(f.properties.N03_007)}" stroke="#ba8d70" stroke-width="1.5"/>`).join('')}<path d="${insetPath(okinawa)}" fill="${color('47')}" stroke="#ba8d70" stroke-width="1.5"/></svg>`;
@@ -392,7 +387,7 @@ async function main() {
     if (!prefFeature) throw Error('prefecture shape missing ' + code);
     const city = code === '13000' ? '東京都区部' : pref.cityName;
     const municipalityTopo = JSON.parse(fs.readFileSync(path.join(ROOT, 'apps/remotion/public/buzz-map/municipalities.topojson'), 'utf8'));
-    const municipalities = feature(municipalityTopo, municipalityTopo.objects[Object.keys(municipalityTopo.objects)[0]]) as any;
+    const municipalities = topologyFeatures(municipalityTopo) as any;
     const cityFeatures = municipalities.features.filter((f: any) =>
       f.properties.N03_001 === pref.prefName &&
       (code === '13000' ? /^131\d{2}$/.test(f.properties.N03_007) :
@@ -407,7 +402,7 @@ async function main() {
             geoArea({ type: 'Polygon', coordinates: largest } as any) ? part : largest),
         }
       : prefFeature;
-    const focus = geoMercator().fitExtent([[15, 10], [423, 400]], focusGeometry as any);
+    const focus = fittedMercator([[15, 10], [423, 400]], focusGeometry as any);
     const focusPath = geoPath(focus);
     const colored = `<svg xmlns="http://www.w3.org/2000/svg" width="438" height="410"><path d="${focusPath(prefFeature)}" fill="#bfd3f7" stroke="#5d8bdc" stroke-width="2.5"/>${cityFeatures.map((f: any) => `<path d="${focusPath(f)}" fill="#275fcf" stroke="#fff" stroke-width="1.5"/>`).join('')}</svg>`;
     const png = await sharp(Buffer.from(colored))

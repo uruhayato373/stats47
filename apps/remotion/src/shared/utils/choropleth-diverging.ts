@@ -3,16 +3,16 @@ import {
   resolveSymmetricDomain,
   summarizeNumericValues,
 } from '@stats47/types';
-import { geoMercator, geoPath } from "d3-geo";
+import { geoPath } from "d3-geo";
 import { interpolateRdBu } from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
-import { feature } from "topojson-client";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
 import type {
   CityPathInfo,
   PopulationRecord,
 } from "../../features/population-choropleth/types";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
+import { topologyFeatures, fittedMercator } from '../../../../../packages/gis/src/map/geometry.mjs';
 
 export interface DivergingChoroplethOptions {
   width?: number;
@@ -45,13 +45,7 @@ export function computeDivergingChoroplethPaths(
     excludeCodes = new Set<string>(),
   } = options;
 
-  const objectName = Object.keys(topology.objects)[0];
-  if (!objectName) return [];
-
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection,
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
 
   // データマップ構築
   const dataMap = new Map<string, PopulationRecord>();
@@ -75,7 +69,7 @@ export function computeDivergingChoroplethPaths(
   const colorScale = resolveColorEncoding({colorSchemeType:'diverging',divergingMidpoint:1,isSymmetrized:true}, ratios, interpolateRdBu, noDataColor).colorAtValue;
 
   // 投影
-  const projection = geoMercator().fitExtent(
+  const projection = fittedMercator(
     [
       [padding, padding],
       [width - padding, height - padding],
@@ -140,13 +134,7 @@ export function computeDivergingPathsWithScale(
     excludeCodes = new Set<string>(),
   } = options;
 
-  const objectName = Object.keys(topology.objects)[0];
-  if (!objectName) return [];
-
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection,
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
 
   const dataMap = new Map<string, PopulationRecord>();
   for (const rec of data) {
@@ -163,7 +151,7 @@ export function computeDivergingPathsWithScale(
     features: featuresForFit,
   };
 
-  const projection = geoMercator().fitExtent(
+  const projection = fittedMercator(
     [
       [padding, padding],
       [width - padding, height - padding],

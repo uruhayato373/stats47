@@ -1,9 +1,9 @@
-import { geoArea, geoMercator, geoPath } from "d3-geo";
+import { geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
 import { interpolateRdBu } from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
-import { feature } from "topojson-client";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
+import { topologyFeatures, fittedMercator, largestPolygon } from "../../../gis/src/map/geometry.mjs";
 
 import { PREF_CAPITAL_COORDS } from "./pref-capitals";
 import { regionOf, type Region } from "./regions";
@@ -34,31 +34,6 @@ export interface BuildMapOptions {
 
 /** 焦点県の主要ポリゴンが地図枠に占める割合（自動ズーム） */
 const FOCUS_FILL = 0.42;
-
-/** (Multi)Polygon のうち最大面積のポリゴンだけの Feature を返す（島嶼を除外） */
-function largestPolygon(feat: Feature): Feature {
-  const g = feat.geometry;
-  if (g.type !== "MultiPolygon") return feat;
-  let best = g.coordinates[0];
-  let bestArea = -1;
-  for (const coords of g.coordinates) {
-    const poly: Feature = {
-      type: "Feature",
-      properties: {},
-      geometry: { type: "Polygon", coordinates: coords },
-    };
-    const a = geoArea(poly);
-    if (a > bestArea) {
-      bestArea = a;
-      best = coords;
-    }
-  }
-  return {
-    type: "Feature",
-    properties: {},
-    geometry: { type: "Polygon", coordinates: best },
-  };
-}
 
 export interface RegionFlow {
   region: Region;
@@ -110,10 +85,7 @@ export function buildMigrationMap(
 
   const objectName = Object.keys(topology.objects)[0];
   if (!objectName) return empty;
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection,
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
 
   const focusFeat = geojson.features.find(
     (f) => f.properties?.N03_007 === data.focusCode,
@@ -126,7 +98,7 @@ export function buildMigrationMap(
   const cy = (mapRect.y0 + mapRect.y1) / 2;
   const fitW = (mapRect.x1 - mapRect.x0) * FOCUS_FILL;
   const fitH = (mapRect.y1 - mapRect.y0) * FOCUS_FILL;
-  const projection = geoMercator().fitExtent(
+  const projection = fittedMercator(
     [
       [cx - fitW / 2, cy - fitH / 2],
       [cx + fitW / 2, cy + fitH / 2],
@@ -177,12 +149,8 @@ export function buildMigrationMap(
   // ── 焦点県の市区町村コロプレス ──
   const municipalityShapes: PrefShape[] = [];
   if (cityTopology && municipalities && municipalities.length > 0) {
-    const cityObj = Object.keys(cityTopology.objects)[0];
-    if (cityObj) {
-      const cityGeo = feature(
-        cityTopology,
-        cityTopology.objects[cityObj] as GeometryCollection,
-      ) as FeatureCollection;
+    {
+      const cityGeo = topologyFeatures(cityTopology);
       // 転入超過「率」= 純移動 /(転入+転出) で着色する。
       // 絶対数だと神戸市のような大都市は僅差でも色が付くため、
       // 都市規模の偏りを除いた率で塗る。

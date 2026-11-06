@@ -94,6 +94,10 @@ N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は
 `datasets.ts` の `usageTerms` に使い方ごとの条件と公式ページの文言・確認日を書き、`resolveKsjUsageTerms` で引く。
 利用条件を他の台帳 (交通網の変遷など) に複製しない。
 
+## 地図の土台 (2026-11-06)
+
+静止画と動画の地図は、境界データから図の座標を作る処理を `packages/gis/src/map/geometry.mjs` だけで持つ (`topologyFeatures`・`fittedMercator`・`largestPolygon` など)。各処理の違いは、その上に何を描くかだけにする。`geoMercator` を直接呼ぶと `packages/gis/src/map/__tests__/geometry.test.ts` が止める。サイトの対話地図 (d3) と KML の書き出しだけが例外で、同じテストの一覧に載せてある。タイルの配置は `TILE_GRID_LAYOUT` が 1 つの正本で、4:5 と動画はそこから導く。
+
 ## 地物の区分 (色分け) の台帳
 
 属性で地物を色分けする区分は `packages/gis/src/mlit-ksj/classifications.ts` だけに書く (公開口 `@stats47/gis/mlit-ksj/classifications`)。

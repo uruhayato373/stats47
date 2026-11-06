@@ -1,12 +1,12 @@
-import { geoMercator, geoPath } from "d3-geo";
+import { geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
 import { interpolateRdBu } from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
-import { feature } from "topojson-client";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
 import type { CityPathInfo } from "../population-choropleth/types";
 import type { YoyRecord } from "./types";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
+import { topologyFeatures, centeredMercator } from "../../../../../packages/gis/src/map/geometry.mjs";
 
 export interface ProjectionConfig {
   width: number;
@@ -56,21 +56,12 @@ export function computeYearPaths(
   colorScale: (ratio: number) => string,
   config: ProjectionConfig,
 ): CityPathInfo[] {
-  const objectName = Object.keys(topology.objects)[0];
-  if (!objectName) return [];
-
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection,
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
 
   const dataMap = new Map<string, YoyRecord>();
   for (const rec of records) dataMap.set(rec.areaCode, rec);
 
-  const projection = geoMercator()
-    .center(config.center)
-    .scale(config.scale)
-    .translate([config.width / 2, config.height / 2]);
+  const projection = centeredMercator({ center: config.center, scale: config.scale, translate: [config.width / 2, config.height / 2] });
 
   const pathGenerator = geoPath().projection(projection);
 

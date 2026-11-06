@@ -9,12 +9,12 @@
  * - 16:9 は本土トリム（インセットなし・左寄せ）
  */
 
-import { geoCentroid, geoMercator, geoPath } from "d3-geo";
+import { geoCentroid, geoPath } from "d3-geo";
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from "geojson";
-import { feature } from "topojson-client";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
 
 import { BUZZ_MAP_RATIOS, MAINLAND_BBOX, type BuzzMapRatio } from "./tokens";
+import { topologyFeatures, fittedMercator } from "../../../../../packages/gis/src/map/geometry.mjs";
 
 export interface BuzzMapPathInfo {
   code: string;
@@ -97,12 +97,7 @@ export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D" |
 }
 
 function toFeatures(topology: Topology): Feature[] {
-  const objectName = Object.keys(topology.objects)[0];
-  if (!objectName) return [];
-  const fc = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection
-  ) as FeatureCollection;
+  const fc = topologyFeatures(topology);
   return fc.features;
 }
 
@@ -191,7 +186,7 @@ function fitAndRender(
   fitTarget: Feature | FeatureCollection,
   box: Box
 ): BuzzMapPathInfo[] {
-  const projection = geoMercator().fitExtent(
+  const projection = fittedMercator(
     [
       [box.x0, box.y0],
       [box.x1, box.y1],
@@ -294,20 +289,20 @@ export function computeBuzzMapGeo(
   let points: BuzzMapProjectedPoint[] | null = null;
   let lines: BuzzMapProjectedLine[] | null = null;
   if (opts.points || opts.lineFeatures) {
-    const mainProj = geoMercator().fitExtent(
+    const mainProj = fittedMercator(
       [
         [region.x0, region.y0],
         [region.x1, region.y1],
       ],
       frame
     );
-    let insetProj: ReturnType<typeof geoMercator> | null = null;
+    let insetProj: ReturnType<typeof fittedMercator> | null = null;
     if (insetBox && okinawaFeatures.length > 0) {
       const okiFc: FeatureCollection = {
         type: "FeatureCollection",
         features: okinawaFeatures,
       };
-      insetProj = geoMercator().fitExtent(
+      insetProj = fittedMercator(
         [
           [insetBox.x + 12, insetBox.y + 12],
           [insetBox.x + insetBox.width - 12, insetBox.y + insetBox.height - 12],
@@ -327,7 +322,7 @@ export function computeBuzzMapGeo(
       points = [];
       for (const [key, coords] of Object.entries(opts.points)) {
         for (const [lon, lat] of coords) {
-          let proj: ReturnType<typeof geoMercator> | null = null;
+          let proj: ReturnType<typeof fittedMercator> | null = null;
           if (inMainland2(lon, lat)) proj = mainProj;
           else if (inInsetDomain(lon, lat)) proj = insetProj ?? mainProj;
           if (!proj) continue;

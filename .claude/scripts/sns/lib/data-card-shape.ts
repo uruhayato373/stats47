@@ -1,9 +1,10 @@
-import { geoArea, geoMercator, geoPath } from 'd3-geo';
+import { geoArea, geoPath } from 'd3-geo';
 import type { Feature, Geometry } from 'geojson';
+import { fittedMercator } from '../../../../packages/gis/src/map/geometry.mjs';
 
 /** Preserve real boundaries; label a mainland crop explicitly when distant islands dominate. */
 export function prefectureShape(prefecture: Feature<Geometry>) {
-  const projection = geoMercator().fitExtent(
+  const projection = fittedMercator(
     [
       [10, 10],
       [310, 310],

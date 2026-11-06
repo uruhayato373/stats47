@@ -1,11 +1,11 @@
 import { resolveColorEncoding, type NumericColorEncoding } from '@stats47/types';
-import { geoArea, geoCentroid, geoMercator, geoPath } from "d3-geo";
+import { geoArea, geoCentroid, geoPath } from "d3-geo";
 import * as chromatic from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
-import { feature } from "topojson-client";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
 import { to5DigitPrefCode } from "@stats47/area";
+import { topologyFeatures, fittedMercator } from '../../../../../packages/gis/src/map/geometry.mjs';
 
 // ---------------------------------------------------------
 // 型定義
@@ -137,10 +137,7 @@ export function computePrefectureSilhouette(
   const objectName = Object.keys(topology.objects)[0];
   if (!objectName) return null;
 
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
 
   const normalizedCode = normalizePrefCode(areaCode);
   const target = geojson.features.find((feat: Feature) => {
@@ -169,7 +166,7 @@ export function computePrefectureSilhouette(
     features: [filtered],
   };
 
-  const projection = geoMercator().fitExtent(
+  const projection = fittedMercator(
     [
       [padding, padding],
       [width - padding, height - padding],
@@ -210,13 +207,7 @@ export function computeChoroplethPaths(
   } = options;
 
   // TopoJSON → GeoJSON 変換
-  const objectName = Object.keys(topology.objects)[0];
-  if (!objectName) return [];
-
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
 
   // データマップ構築 (5桁正規化コード → 値)
   const valueMap = new Map<string, number>();
@@ -230,8 +221,7 @@ export function computeChoroplethPaths(
   const colorScale = resolveColorEncoding(options.encoding ?? {colorSchemeType, divergingMidpoint: divergingMidpointValue ?? 'zero'}, values, interpolator, noDataColor).colorAtValue;
 
   // 投影
-  const projection = geoMercator()
-    .fitExtent(
+  const projection = fittedMercator(
       [
         [padding + offsetX, padding + offsetY],
         [width - padding + offsetX, height - padding + offsetY],

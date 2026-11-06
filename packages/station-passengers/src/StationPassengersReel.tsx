@@ -1,10 +1,10 @@
-import { geoMercator, geoPath } from "d3-geo";
+import { geoPath } from "d3-geo";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import React, { useMemo } from "react";
-import { feature } from "topojson-client";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
 
 import type { Station, StationPassengerData } from "./types";
+import { mercator, topologyFeatures } from "../../gis/src/map/geometry.mjs";
 
 /** 24 秒 @ 30fps。Remotion 側の durationInFrames に使う */
 export const STATION_PASSENGERS_DURATION = 720;
@@ -148,11 +148,7 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
   /** 県境ポリゴン + 駅ポイント + 路線ラインの投影 */
   const placed = useMemo(() => {
     const { mapRect } = L;
-    const objName = Object.keys(topology.objects)[0];
-    const geo = feature(
-      topology,
-      topology.objects[objName] as GeometryCollection,
-    ) as FeatureCollection;
+    const geo = topologyFeatures(topology);
     const prefFeat = geo.features.find(
       (f) => f.properties?.N03_007 === data.prefCode,
     );
@@ -162,7 +158,7 @@ export const StationPassengersReel: React.FC<StationPassengersReelProps> = ({
     const fitW = (mapRect.x1 - mapRect.x0) * 0.96;
     const fitH = (mapRect.y1 - mapRect.y0) * 0.96;
 
-    const projection = geoMercator();
+    const projection = mercator();
     if (prefFeat) {
       projection.fitExtent(
         [

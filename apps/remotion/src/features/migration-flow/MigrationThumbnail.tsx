@@ -5,13 +5,13 @@ import {
   delayRender,
   staticFile,
 } from "remotion";
-import { geoMercator, geoPath } from "d3-geo";
+import { geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
-import { feature } from "topojson-client";
 import type { Feature, FeatureCollection } from "geojson";
-import type { GeometryCollection, Topology } from "topojson-specification";
+import type { Topology } from "topojson-specification";
 import { FONT } from "@stats47/migration-flow";
 import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
+import { topologyFeatures, fittedMercator } from "../../../../../packages/gis/src/map/geometry.mjs";
 
 interface PrefMigration {
   code: string;
@@ -69,11 +69,8 @@ export const MigrationThumbnail: React.FC = () => {
     ])
       .then(([topo, netData]: [Topology, { entries: PrefMigration[] }]) => {
         if (cancelled) return;
-        const geo = feature(
-          topo,
-          topo.objects.pref as GeometryCollection,
-        ) as FeatureCollection;
-        const proj = geoMercator().fitExtent(
+        const geo = topologyFeatures(topo, 'pref');
+        const proj = fittedMercator(
           [
             [14, 14],
             [MAP_W - 14, MAP_H - 14],
