@@ -41,7 +41,7 @@ export type QuestionRow = {
   analyses: number;
   figures: number;
   openDestinations: number;
-  /** 問いのページを経由して辿れる外部の公開物 */
+  /** 問いのページを経由して辿れる note と投稿、図の配信先の投稿 */
   relatedNotes: number;
   relatedPosts: number;
   relatedPaidNotes: number;
@@ -70,7 +70,8 @@ export function buildQuestionProgress(input: ProgressInput): QuestionProgress {
     const own = links.filter((l) => l.issue === issue.id);
     const ownAnalyses = analyses.filter((a) => a.issue === issue.id);
     const ownFigures = figures.filter((f) => issueOfAnalysis.get(f.analysis) === issue.id);
-    const related = new Set(own.flatMap((l) => externalByPage.get(l.page) ?? []));
+    const figurePosts = ownFigures.flatMap((f) => f.destinations.flatMap((d) => (d.postId === undefined ? [] : [`sns:${d.postId}`])));
+    const related = new Set([...own.flatMap((l) => externalByPage.get(l.page) ?? []), ...figurePosts]);
     const notes = [...related].filter((id) => id.startsWith("note:"));
     const answers = own.filter((l) => l.role === "answers").length;
     const destinations = ownFigures.reduce((n, f) => n + f.destinations.length, 0);

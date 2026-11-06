@@ -32,7 +32,7 @@ export default function ContentExpansionPage() {
             <Cell>{r.title}</Cell>
             {COVERAGE_CHANNELS.map((c) => (
               <Cell key={c.id} nowrap>
-                <Link href={`/content/types?type=${r.type.replace("type:", "")}&channel=${c.id}`} className={LINK}>
+                <Link href={r.type === "type:paper" ? "/content/types?type=paper" : `/content/types?type=${r.type.replace("type:", "")}&channel=${c.id}`} className={LINK}>
                   {r.cells[c.id].published.toLocaleString()}
                 </Link>
                 <span className="ml-2 text-xs text-muted-foreground">未公開 {r.cells[c.id].preparing.toLocaleString()}</span>

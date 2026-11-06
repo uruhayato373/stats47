@@ -39,7 +39,7 @@
       "japan-theme": "type:textbook",
       "municipality-theme": "type:textbook",
       "geo": "type:paper",
-      "geo-layer": "type:paper"
+      "geo-layer": "type:reference"
     },
     "excludedPageKinds": [
       "category",
@@ -54,7 +54,7 @@
       "-consumption-expenditure": "type:reference",
       "-consumption-quantity": "type:reference",
       "-food-culture": "type:reference",
-      "-migration-flow": "type:paper"
+      "-migration-flow": "type:reference"
     },
     "noteVerticals": {
       "koumuin-claude-code": "type:howto",
@@ -87,11 +87,11 @@
       "migration-flow": "type:reference",
       "theme": "type:textbook",
       "geo": "type:paper",
-      "correlation-carousel": "type:paper"
+      "correlation-carousel": "type:reference"
     },
     "kindle": "type:reference",
     "blogSlugInfixes": {
-      "-vs-": "type:paper"
+      "-vs-": "type:reference"
     }
   },
   "assignments": [
@@ -102,23 +102,23 @@
     },
     {
       "id": "blog:2050-station-access-population",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:advancement-plus-employment-rate-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:agriculture-hokkaido-dominance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:agriculture-output-employment-productivity-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:ai-claude-code-pref-analysis",
@@ -127,8 +127,8 @@
     },
     {
       "id": "blog:allocation-tax-area",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:annual-precipitation-rainy-season-gap",
@@ -142,33 +142,33 @@
     },
     {
       "id": "blog:bank-deposit-balance-shikoku-anomaly",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:barber-beauty-salon-regional-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:beef-unmarried-ratio",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:beer-peak-month-july-to-december",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:black-tea-income-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:bonito-catch-zero-prefectures-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:bread-city-ranking-kyoto-quiz",
@@ -272,13 +272,13 @@
     },
     {
       "id": "blog:census-2025-population-change-rate-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:climate-lifestyle-connection",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:commercial-land-price-trend",
@@ -287,23 +287,23 @@
     },
     {
       "id": "blog:commercial-sales-productivity-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:communication-cost-burden",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:consumption-expenditure-multi-person-households-per-month",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:cpi-change-regional-pattern",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:crime-rate-regional-gap",
@@ -317,18 +317,18 @@
     },
     {
       "id": "blog:dairy-cattle-count",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:dairy-cattle-hokkaido-monopoly",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:depopulation-area-medical-facilities",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:development-history-place-name-map",
@@ -347,13 +347,13 @@
     },
     {
       "id": "blog:dual-income-house-size",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:dual-income-reversal",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:education-cost-per-child",
@@ -367,13 +367,13 @@
     },
     {
       "id": "blog:elderly-ratio-rise-2020-2025",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:electricity-bill-hike-impact",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:electricity-demand-gap",
@@ -382,8 +382,8 @@
     },
     {
       "id": "blog:elementary-school-children-count",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:energy-consumption-structure-shift",
@@ -397,8 +397,8 @@
     },
     {
       "id": "blog:engineer-telework-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:estat-7-techniques-from-unusable-to-usable",
@@ -412,8 +412,8 @@
     },
     {
       "id": "blog:expenditure-structure-comparison",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:extreme-heat-days-prefecture",
@@ -422,23 +422,23 @@
     },
     {
       "id": "blog:firefighting-capacity-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:fiscal-health-50years-trend",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:fiscal-self-reliance-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:fishery-species-prefecture-specialty",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:food-culture-prefecture-map",
@@ -447,8 +447,8 @@
     },
     {
       "id": "blog:food-price-regional-2026",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:food-spending-pattern",
@@ -462,33 +462,33 @@
     },
     {
       "id": "blog:forest-coverage-woodland-economy",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:future-burden-ratio-extreme-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:future-population-disappearing-prefectures",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:future-population-tokyo-paradox",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:garbage-total-output",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:gasoline-car-society-map",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:gender-wage-gap-ranking",
@@ -497,13 +497,13 @@
     },
     {
       "id": "blog:general-bed-utilization-pressure-map",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:general-hospital-bed-occupancy-rate",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:golf-green-fee-consumption-ranking",
@@ -512,13 +512,13 @@
     },
     {
       "id": "blog:habitable-area-land-use",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:half-population-elderly-municipalities",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:hama-ura-tsu-coastal-place-names",
@@ -527,18 +527,18 @@
     },
     {
       "id": "blog:healthy-life-expectancy-male-female-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:high-school-advancement-rate",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:highschool-starting-salary-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:highway-japan-58years",
@@ -547,13 +547,13 @@
     },
     {
       "id": "blog:home-ownership-rate-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:homeownership-vacancy-four-types",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:hospital-bed-utilization-map",
@@ -562,38 +562,38 @@
     },
     {
       "id": "blog:household-growth-population-decline-census-2025",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:household-income-tokyo-okinawa",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:household-spending-before-after-inflation",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:household-structure-daytime-population-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:household-structure-transformation",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:housing-cost-livability-trend",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:ict-digital-divide-composite-analysis",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:ict-media-consumption-gender-gap",
@@ -607,8 +607,8 @@
     },
     {
       "id": "blog:inbound-overnight-guests-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:inbound-overnight-regional-gap",
@@ -617,123 +617,123 @@
     },
     {
       "id": "blog:inbound-overnight-stay-concentration",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-1000man-which-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-alcohol",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-appliance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-beverage",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-car",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-clothing",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-dining",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-education",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-food-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-lesson",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-luxury-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-medical-health",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-overview",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-recreation-services",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-regressive",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:income-quintile-travel",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:industrial-water-manufacturing-nexus",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:information-communication-coefficient-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:inpatient-rate-aging-burden",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:international-cooperation-volunteer-map",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:it-establishments-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:it-industry-concentration",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:kanagawa-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:kawa-gawa-river-place-name-map",
@@ -742,8 +742,8 @@
     },
     {
       "id": "blog:kochi-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:koumuin-ai-tenshoku-1500man",
@@ -762,8 +762,8 @@
     },
     {
       "id": "blog:local-tax-regional-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:lotus-root-green-beans-mandarin-consumption",
@@ -772,28 +772,28 @@
     },
     {
       "id": "blog:manufacturing-labor-productivity-pref",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:manufacturing-output-outlier-cities",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:manufacturing-shipment-prefecture-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:medical-access-regional-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:metabolic-syndrome-prevalence-among-checkup-recipients",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:minimum-wage-1000yen-prefecture",
@@ -802,13 +802,13 @@
     },
     {
       "id": "blog:minimum-wage-gap-regional-economy",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:miyazaki-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:mobile-contracts-over-population",
@@ -817,33 +817,33 @@
     },
     {
       "id": "blog:municipalities-without-general-hospitals",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:municipalities-without-schools",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:municipality-population-change-census-2025",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:municipality-population-decline-tiers",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:nagano-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:natto-child-weight-correlation",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:natto-consumption-east-west-divide",
@@ -852,13 +852,13 @@
     },
     {
       "id": "blog:necktie-stockings-market-shrink",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:niigata-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:nurse-salary-ranking",
@@ -867,13 +867,13 @@
     },
     {
       "id": "blog:nursing-care-shortage-2040",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:okinawa-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:overnight-guests-inbound-recovery",
@@ -887,23 +887,23 @@
     },
     {
       "id": "blog:pachinko-education-cost",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:park-green-space-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:paved-road-total-length",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:per-capita-income-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:pharma-medical-device-production-map",
@@ -912,48 +912,48 @@
     },
     {
       "id": "blog:pharmacy-count-prefecture-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:pollution-complaints-regional-map",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:post-office-last-window",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:prefectural-debt-future-burden",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:prefectural-income-gdp-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:prefecture-population-city-concentration",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:prefecture-salary-gap-career",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:prefecture-salary-remote-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:price-index-high-low-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:public-phone-count",
@@ -967,23 +967,23 @@
     },
     {
       "id": "blog:public-phone-prefecture-vanishing",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:purchasing-power-adjusted",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:railway-theme-overview",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:real-disposable-income-reversal",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:real-income-taxpayer",
@@ -992,23 +992,23 @@
     },
     {
       "id": "blog:recycling-rate-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:renewable-energy-regional-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:retail-establishments-by-prefecture",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:rice-spending-quantity-gap-2025",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:road-infrastructure-density",
@@ -1022,13 +1022,13 @@
     },
     {
       "id": "blog:savings-rate-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:sixth-industry-direct-sales",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:small-business-dominance-map",
@@ -1037,13 +1037,13 @@
     },
     {
       "id": "blog:software-engineer-income-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:spinach-consumption-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:sports-facility-regional-divide",
@@ -1062,8 +1062,8 @@
     },
     {
       "id": "blog:system-consultant-income-ranking",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:telework-gap-tokyo-6x",
@@ -1072,13 +1072,13 @@
     },
     {
       "id": "blog:telework-income-correlation",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:telework-rate-tokyo-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:temperature-extremes-map",
@@ -1087,23 +1087,23 @@
     },
     {
       "id": "blog:tokyo-real-income-after-rent",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:total-fertility-rate",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:towns-villages-larger-than-cities",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:toyama-municipal-finance",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:travel-behavior-gender-gap",
@@ -1112,23 +1112,23 @@
     },
     {
       "id": "blog:truck-driver-2024-crisis",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:truck-driver-salary-trend",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:tuna-consumption-medical-expense-correlation",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:tuna-medical-expense",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:udon-soba-food-culture-prefecture-map",
@@ -1137,13 +1137,13 @@
     },
     {
       "id": "blog:unemployment-structure",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:unemployment-tertiary-industry-link",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:unmarried-rate-40years-crisis",
@@ -1162,13 +1162,13 @@
     },
     {
       "id": "blog:water-sewage-crisis",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:welfare-expenses-squeeze",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:wheat-flour-consumption-food-culture-gap",
@@ -1187,8 +1187,8 @@
     },
     {
       "id": "blog:working-hours-overtime-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:yato-yatsu-place-name-boundary",
@@ -2057,8 +2057,8 @@
     },
     {
       "id": "sns:480",
-      "type": "type:paper",
-      "reason": "人口移動の理由を扱う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "sns:1196",
@@ -2067,18 +2067,18 @@
     },
     {
       "id": "blog:electricity-generation-manufacturing-establishments-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:household-spending-debt-propensity-gap",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:vacant-housing-rate-inherited-home-risk",
-      "type": "type:paper",
-      "reason": "題名が地域差の理由・関係を問う"
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
       "id": "blog:intellectual-crime-tokyo-kagawa-gap",

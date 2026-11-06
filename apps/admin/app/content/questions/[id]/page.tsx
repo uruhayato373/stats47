@@ -63,17 +63,80 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
       </>
     );
   }
-  const { issue, analyses, pages, drafts, figures, posts, products } = data;
+  const { issue, analyses, pages, drafts, figures, posts, products, relatedNotes, relatedPosts } = data;
 
   return (
     <>
       <PageHeading title={issue.question} source={`${issue.id} — 問いの台帳 + 配信先の台帳`}>
         {issue.dataNote ? <p className="m-0 max-w-4xl text-sm text-muted-foreground">使う統計: {issue.dataNote}</p> : null}
         {issue.pitfall ? <p className="m-0 max-w-4xl text-sm text-muted-foreground">読み違えやすい点: {issue.pitfall}</p> : null}
-        <Link className={`${LINK} text-sm`} href="/content/types?type=paper&channel=questions">
+        <Link className={`${LINK} text-sm`} href="/content/types?type=paper">
           問いの一覧へ戻る
         </Link>
       </PageHeading>
+
+      <Section title={`サイト (${pages.length})`}>
+        {pages.length ? (
+          <DataTable columns={["役割", "ページ", "公開"]}>
+            {pages.map((p) => (
+              <Row key={`${p.role}:${p.id}`}>
+                <Cell nowrap>{p.role === "answers" ? "答え" : "根拠"}</Cell>
+                <Cell>
+                  <a className={LINK} href={`https://stats47.jp${p.href}`} target="_blank" rel="noreferrer">
+                    {p.title}
+                  </a>
+                </Cell>
+                <Cell nowrap>{p.published ? "公開" : "未公開"}</Cell>
+              </Row>
+            ))}
+          </DataTable>
+        ) : (
+          <p className="m-0 text-sm text-muted-foreground">ページはまだありません。</p>
+        )}
+      </Section>
+
+      <Section title={`note (${relatedNotes.length})`}>
+        {relatedNotes.length ? (
+          <DataTable columns={["記事", "経由したページ"]}>
+            {relatedNotes.map((n) => (
+              <Row key={`${n.id}:${n.via}`}>
+                <Cell>
+                  {n.href ? (
+                    <a className={LINK} href={n.href} target="_blank" rel="noreferrer">
+                      {n.title}
+                    </a>
+                  ) : (
+                    n.title
+                  )}
+                </Cell>
+                <Cell muted>{n.via}</Cell>
+              </Row>
+            ))}
+          </DataTable>
+        ) : (
+          <p className="m-0 text-sm text-muted-foreground">つながる note はありません。</p>
+        )}
+      </Section>
+
+      <Section title={`SNS (${relatedPosts.length + posts.length})`}>
+        {relatedPosts.length ? (
+          <DataTable columns={["ID", "媒体", "状態", "本文", "経由したページ"]}>
+            {relatedPosts.map((p) => (
+              <Row key={`${p.id}:${p.via}`}>
+                <Cell nowrap>
+                  <Link className={LINK} href={`/sns/${p.id}`}>
+                    {p.id}
+                  </Link>
+                </Cell>
+                <Cell nowrap>{p.platform}</Cell>
+                <Cell nowrap>{p.status}</Cell>
+                <Cell>{p.caption}</Cell>
+                <Cell muted>{p.via}</Cell>
+              </Row>
+            ))}
+          </DataTable>
+        ) : null}
+      </Section>
 
       <Section title={`分析 (${analyses.length})`}>
         {analyses.length ? (
@@ -172,25 +235,6 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
         )}
       </Section>
 
-      <Section title={`答え・根拠のページ (${pages.length})`}>
-        {pages.length ? (
-          <DataTable columns={["役割", "ページ", "公開"]}>
-            {pages.map((p) => (
-              <Row key={`${p.role}:${p.id}`}>
-                <Cell nowrap>{p.role === "answers" ? "答え" : "根拠"}</Cell>
-                <Cell>
-                  <a className={LINK} href={`https://stats47.jp${p.href}`} target="_blank" rel="noreferrer">
-                    {p.title}
-                  </a>
-                </Cell>
-                <Cell nowrap>{p.published ? "公開" : "未公開"}</Cell>
-              </Row>
-            ))}
-          </DataTable>
-        ) : (
-          <p className="m-0 text-sm text-muted-foreground">ページはまだありません。</p>
-        )}
-      </Section>
     </>
   );
 }

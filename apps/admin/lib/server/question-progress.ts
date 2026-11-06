@@ -63,6 +63,9 @@ export type QuestionDetail = {
   figures: Array<{ id: string; title: string; template: string; destinations: QuestionDestination[] }>;
   posts: Array<{ id: number; status: string; platform: string; caption: string; approval: string }>;
   products: Array<{ id: string; title: string; href: string | null; priceJpy: number | null; status: string }>;
+  /** ページを経由して辿れる note と投稿。問いから企画したものとは限らない */
+  relatedNotes: Array<{ id: string; title: string; href: string | null; via: string }>;
+  relatedPosts: Array<{ id: number; caption: string; platform: string; status: string; via: string }>;
 };
 
 const issuesLedger = () => readJson<{ issues: Array<QuestionIssue & { dataNote?: string; pitfall?: string }> }>(datasetPath("content.issues")).issues;
@@ -109,7 +112,19 @@ export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
     const pageById = new Map<string, { id: string; title: string; href: string; published?: boolean }>(inputs.pages.map((p: { id: string; title: string; href: string; published?: boolean }) => [p.id, p]));
     const postIds = new Set(figures.flatMap((f) => f.destinations.flatMap((d) => (d.postId === undefined ? [] : [d.postId]))));
     const noteOf = new Map<string, { key: string; title: string; noteUrl?: string; priceJpy?: number; status: string }>(inputs.notes.map((n: { key: string; title: string; noteUrl?: string; priceJpy?: number; status: string }) => [`note:${n.key}`, n]));
+    const own = links.filter((l) => l.issue === id);
+    const external = readJson<{ links: ExternalLink[] }>(datasetPath("content.external")).links.filter((l) => own.some((o) => o.page === l.to));
+    const viaOf = (to: string) => pageById.get(to)?.title ?? to;
+    const postOf = new Map<number, { id: number; platform: string; status: string; caption?: string }>(inputs.posts.map((p: { id: number; platform: string; status: string; caption?: string }) => [p.id, p]));
     return {
+      relatedNotes: external.filter((l) => l.from.startsWith("note:")).map((l) => {
+        const note = noteOf.get(l.from);
+        return { id: l.from, title: note?.title ?? l.from, href: note?.noteUrl ?? null, via: viaOf(l.to) };
+      }),
+      relatedPosts: external.filter((l) => l.from.startsWith("sns:")).flatMap((l) => {
+        const post = postOf.get(Number(l.from.slice(4)));
+        return post && post.status !== "deleted" ? [{ id: post.id, caption: (post.caption ?? "").split("\n")[0], platform: post.platform, status: post.status, via: viaOf(l.to) }] : [];
+      }),
       issue,
       analyses,
       pages: links.filter((l) => l.issue === id).map((l) => {
