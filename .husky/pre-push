@@ -1,0 +1,3 @@
+#!/bin/sh
+# 変更に関係するテストだけを push の前に走らせる (全件は CI)。飛ばすときは git push --no-verify
+node .claude/scripts/lib/pre-push-tests.mjs || exit 1

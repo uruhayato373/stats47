@@ -15,6 +15,28 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 PR は **develop → main の 1 段階のみ**。feature/* → develop は直 merge で可 (個人開発、self-review 前提)。
 
+## 待ち時間を増やさない運用 (2026-11-06 実測)
+
+push から本番まで約 40 分 (PR 検査 11.7 分・デプロイ 22.4 分・反映後の確認 6.3 分。中央値)。リポジトリは PUBLIC で Actions の分数は課金されないので、短縮の価値は実行分数ではなく**人が待つ時間**で測る。
+
+- **develop→main の PR は、出すと決めてから開く。** 開いている間の push は実行中の検査を cancel する (2026-11-05〜06 に 34 run 中 21 run、平均 7.7 分。確認できた 22 件はすべてセッションの push で、bot ではない)。開いたあとは merge まで develop へ push しない。作業はブランチに溜める。
+- **本番に効く変更と運用の変更を分ける。** 急ぐ本番の変更を、管理画面やルールの大きな変更と同じ PR に載せない。
+- **push の前に `.husky/pre-push` が関係するテストを走らせる。** 全件は CI が持つ。
+
+### デプロイの要否
+
+main への push は `deploy-workers.yml` の `scope` job が差分から判定する (`.claude/scripts/lib/plan-deploy-scope.mjs`)。本番に関係しないと確かめたパスだけの push は Deploy job を skip する。一覧に無いパスと、差分を読めないときは必ずデプロイする。手動実行は常にデプロイする。
+
+- skip でも workflow は success で終わるので、`workflow_run` で続く Post-Deploy Smoke などは動く。
+- 一覧へ足す前に、Worker の build の import と Deploy job の生成工程が読まないことを確かめる。Worker は実行時に git のファイルを読めない。
+- 指標の入力を変えていない PR は Build Check の指標生成 (実測 4.2 分) を省く。判定は同じファイルの `needsMetricMetadata`。
+
+### 変えないと判断したもの
+
+- **Deploy の snapshot 工程**: 毎回実行は DEPLOY-METRIC-RELEASE-TIMEOUT-01 の再発防止。送信は中身の差分だけで、指標の変更が無ければ 0〜10 件で終わる。4,000 件台の回は実際に中身が変わっている。
+- **develop gate と PR の検査の重複**: 並列に走るので待ち時間は増えず、PUBLIC なので分数の費用も無い。
+- **Post-Deploy Smoke**: Playwright のブラウザ確認で、Deploy 内の curl の確認とは別物。本番への反映は Deploy to Production の時点で終わっていて、後続は誰も待たない。
+
 ## 実行環境による差分 (web / クラウド)
 
 `gh` CLI と GitHub Actions の起動可否が環境で異なる。混同すると「dispatch できるはず」と誤認する (2026-06-02 発生)。

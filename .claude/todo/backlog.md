@@ -173,6 +173,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CI-LEAD-TIME-01] デプロイの skip と指標生成の省略の効果を実測する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:gh run list --workflow deploy-workers.yml] [起票:2026-11-06] [領域:管理]
+
+- **起点**: 2026-11-06 に `scope` job・`needsMetricMetadata`・`.husky/pre-push`・PR を開く時機の規則を入れた (`.claude/rules/branch-workflow.md`「待ち時間を増やさない運用」)。push から本番まで約 40 分が基準値で、skip の判定と PR の短縮は本番でまだ動いていない。
+- **やること**: ① main へ入ったあと、本番に関係しない push で Deploy job が skip されることを run で確かめる ② 関係する push で必ずデプロイされることを確かめる ③ 指標に無関係な PR の Build Check が 10.9 分から約 6.7 分になるかを測る (算式: 10.9 − 生成 4.2) ④ PR 検査の cancel の割合が 21/34 から下がるかを 2 週間後に見る。
+- **完了条件**: 4 点の実測を `.claude/rules/branch-workflow.md` に記録している。
+
 ### [CONTENT-TYPE-FIT-01] 型に合っていない記事の処置を決めて反映する
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run content-types:check] [起票:2026-11-06] [領域:コンテンツ]
 

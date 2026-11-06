@@ -56,6 +56,7 @@ jobs:
       visualization: ${{ steps.plan.outputs.visualization }}
       remote_assets: ${{ steps.plan.outputs.remote_assets }}
       workflow_contracts: ${{ steps.plan.outputs.workflow_contracts }}
+      metric_metadata: ${{ steps.plan.outputs.metric_metadata }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -1249,7 +1250,9 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
+      # 指標の入力を変えていない PR は生成を省き、中継が本番の値を返す (実測 4.2 分。判定は plan-deploy-scope.mjs)
       - name: Generate metric metadata for this PR
+        if: needs.changes.outputs.metric_metadata == 'true'
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: |
@@ -1297,6 +1300,7 @@ jobs:
           retention-days: 1
 
       - name: Share verified metric metadata
+        if: needs.changes.outputs.metric_metadata == 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: pr-metric-metadata
@@ -1400,6 +1404,7 @@ jobs:
           path: apps/web/.next
 
       - name: Reuse verified metric metadata
+        if: needs.changes.outputs.metric_metadata == 'true'
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: pr-metric-metadata

@@ -170,6 +170,7 @@
 - [run full web tests before push](feedback_run_full_web_tests_before_push.md) — 部品・route の変更や別ブランチの取り込み後は、触れた workspace の vitest 全件を push 前に。部分実行で既存テストを見落とし CI を赤にした (2026-10-21 web・10-25 admin)
 - [business vs content issues](feedback_business_vs_content_issues.md) — 事業イシューマップと問いの台帳は台帳・画面・語彙を混ぜない (2026-11-06 オーナー判断)
 - [content four types](feedback_content_four_types.md) — 全コンテンツは4型のどれかに属する。未分類で作らない。正本content-types.json・題名の「なぜ」だけで論文型にしない (2026-11-06)
+- [ci speed is wait time](feedback_ci_speed_wait_time.md) — リポは PUBLIC で分数は無料。CI 短縮は人の待ち時間で測る。重複に見えても並列なら待ちは増えない。遅い工程は毎回理由を読んでから触る (2026-11-06)
 - [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — type-check:scripts の差分キャッシュは barrel 経由の新しい型エラーを隠す。push 前は .local/tsbuildinfo を消して回す (2026-10-30 PR #1200)
 - [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る

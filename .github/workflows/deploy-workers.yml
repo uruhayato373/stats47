@@ -14,7 +14,35 @@ permissions:
   contents: write
 
 jobs:
+  # 本番に関係しないパスだけの push ではデプロイしない。判断できないときはデプロイする。
+  # paths-ignore を使わないのは、一覧に無いパスを必ずデプロイする判定をテストで固定するため。
+  # 正典: .claude/rules/branch-workflow.md「デプロイの要否」、一覧は plan-deploy-scope.mjs。
+  scope:
+    runs-on: ubuntu-latest
+    name: Plan deploy
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      deploy: ${{ steps.plan.outputs.deploy }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Decide whether this push needs a deploy
+        id: plan
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            node .claude/scripts/lib/plan-deploy-scope.mjs "${{ github.event.before }}" "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+          fi
+
   deploy:
+    needs: scope
+    if: needs.scope.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     name: Deploy
     # Metric contract migrations publish the matching snapshots before building.
