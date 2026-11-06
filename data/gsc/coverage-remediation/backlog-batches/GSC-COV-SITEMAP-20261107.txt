@@ -1,0 +1,10 @@
+https://stats47.jp/api/ranking/academic-achievement-test-average-rate/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/academic-achievement-test-average-rate/download?format=kml&basis=original
+https://stats47.jp/api/ranking/accountant-annual-income/download?format=json
+https://stats47.jp/api/ranking/adult-sandals-consumption-quantity/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/agricultural-output-per-employed-person/download?format=csv
+https://stats47.jp/api/ranking/agriculture-forestry-fisheries-expenditure-ratio-pref-finance/download?format=csv&basis=original
+https://stats47.jp/api/ranking/air-fare-consumption-expenditure/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/air-fare-consumption-expenditure/download?format=kml&basis=original
+https://stats47.jp/api/ranking/alcohol-sales-per-adult-shochu/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/alcohol-sales-per-adult-shochu/download?format=kml&basis=original

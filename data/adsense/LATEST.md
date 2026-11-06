@@ -1,35 +1,37 @@
-# AdSense Latest — 2026-W43
+# AdSense Latest — 2026-W44
 
 ## 確定7日 KPI (finalized7d・前週比は直前の重複しない7日)
 
 | Metric | 確定7日 | 前週比 |
 |---|---|---|
-| Earnings | 210.00 ▲ |  (+44.8%) |
-| Page Views | 10209 ▲ |  (+20.8%) |
-| Page RPM | 21.000 ▲ | |
-| Impressions | 10259 ▲ |  (+38.7%) |
-| 公式 Imp RPM | ¥20.00 | |
-| Clicks | 25 ▲ |  (+66.7%) |
-| CTR | 0.24% · | |
-| 公式 CPC | ¥8.00 | |
-| Viewability | 40.0% · | |
-| Ad Requests | 29591 | |
-| Coverage | 35.7% | |
+| Earnings | 313.00 ▲ |  (+49.0%) |
+| Page Views | 11716 ▲ |  (+14.8%) |
+| Page RPM | 27.000 ▲ | |
+| Impressions | 12640 ▲ |  (+23.2%) |
+| 公式 Imp RPM | ¥25.00 | |
+| Clicks | 48 ▲ |  (+92.0%) |
+| CTR | 0.38% · | |
+| 公式 CPC | ¥7.00 | |
+| Viewability | 45.6% ▲ | |
+| Ad Requests | 32859 | |
+| Coverage | 40.3% | |
 
 ## 収益分解
 
-- Impression density (imp/PV): **1.005** (前週 0.875)
-- Viewable imp / PV: **0.402**
-- 公式 Imp RPM: ¥20.00 / 公式 CPC: ¥8.00
+- Impression density (imp/PV): **1.079** (前週 1.005)
+- Viewable imp / PV: **0.492**
+- 公式 Imp RPM: ¥25.00 / 公式 CPC: ¥7.00
 
 ## デバイス別（確定7日 / 前週比）
 
 | Platform | RPM | Viewability | 公式CPC | 収益/click(legacy) | imp/PV | Earnings |
 |---|---|---|---|---|---|---|
 | Connected TV | ¥0.00 · | 0.0% · | ¥0.00 | ¥0.00 | 0.000 | ¥0.00 |
-| Desktop | ¥25.00 ▲ | 41.6% ▼ -3.9pp | ¥8.00 | ¥8.32 | 1.223 | ¥158.00 (+62.9%) |
-| Mobile | ¥13.00 · | 31.9% ▲ | ¥10.00 | ¥9.80 | 0.620 | ¥49.00 (+4.3%) |
-| Tablet | ¥14.00 ▼ | 57.6% ▲ +12.9pp | ¥4.00 | ¥4.00 | 1.054 | ¥4.00 (+100.0%) |
+| Desktop | ¥24.00 ▼ | 45.7% ▲ +4.1pp | ¥8.00 | ¥8.40 | 1.213 | ¥168.00 (+6.3%) |
+| Mobile | ¥33.00 ▲ | 45.1% ▲ +13.2pp | ¥5.00 | ¥5.38 | 0.892 | ¥140.00 (+185.7%) |
+| Tablet | ¥11.00 ▼ | 49.5% ▼ -8.1pp | ¥3.00 | ¥2.50 | 0.801 | ¥5.00 (+25.0%) |
+
+> ⚠️ **要確認の退行**: Tablet viewability -8.1pp（57.6%→49.5%）
 
 履歴: [`history.csv`](./history.csv) / [`history-devices.csv`](./history-devices.csv) (デバイス別) / [`history-units.csv`](./history-units.csv) (ユニット別) / [`history-formats.csv`](./history-formats.csv) (フォーマット別) / [`history-placements.csv`](./history-placements.csv) (配置別) / [`history-bid-types.csv`](./history-bid-types.csv) (入札型別)
 

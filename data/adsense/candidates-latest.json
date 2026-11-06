@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W43",
-  "generatedAt": "2026-10-30T21:37:13.845Z",
+  "week": "2026-W44",
+  "generatedAt": "2026-11-06T22:39:11.175Z",
   "period": {
-    "periodStart": "2026-10-18",
-    "periodEnd": "2026-10-24",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-31",
     "windowDays": 7
   },
-  "previousWeek": "2026-W42",
+  "previousWeek": "2026-W43",
   "limits": {
     "maxCandidates": 3,
     "activeWipLimit": 2,
@@ -19,86 +19,40 @@
       "id": "format-low-yield::ON_PAGE@Desktop",
       "rule": "format-low-yield",
       "key": "ON_PAGE@Desktop",
-      "score": 10.6316,
+      "score": 2.9474,
       "evidence": [
         {
           "metric": "imp_rpm",
           "current": 19,
-          "deviceMedian": 202
+          "deviceMedian": 56
         },
         {
           "metric": "viewability",
-          "previous": 0.4548,
-          "current": 0.4149
+          "previous": 0.4149,
+          "current": 0.4532
         },
         {
           "metric": "ctr",
-          "previous": 0.0016,
-          "current": 0.0025
+          "previous": 0.0025,
+          "current": 0.002
         },
         {
           "metric": "impressions",
-          "current": 7638
+          "current": 8357
         }
       ],
       "sample": {
-        "impressions": 7638
+        "impressions": 8357
       },
       "confidence": 0.6,
       "expectedLever": "低収益 format の整理提案 (Auto ads 変更は allowlist 外・提案のみ)",
       "guardrail": "収益 guardrail。UX (INTERSTITIAL 頻度) を悪化させない",
       "rollback": "AdSense 管理画面設定を元に戻す (人間操作)",
-      "earliestDecisionDate": "2026-11-07",
+      "earliestDecisionDate": "2026-11-14",
       "judgment": {
-        "day14": "2026-11-07",
-        "day28": "2026-11-21",
-        "day56": "2026-12-19"
-      },
-      "pastEffect": null,
-      "confounders": [
-        "format 間の在庫シフト"
-      ],
-      "notes": [],
-      "externalActionFlag": false
-    },
-    {
-      "id": "format-low-yield::ON_PAGE@HighEndMobile",
-      "rule": "format-low-yield",
-      "key": "ON_PAGE@HighEndMobile",
-      "score": 10.0952,
-      "evidence": [
-        {
-          "metric": "imp_rpm",
-          "current": 21,
-          "deviceMedian": 212
-        },
-        {
-          "metric": "viewability",
-          "previous": 0.2948,
-          "current": 0.3189
-        },
-        {
-          "metric": "ctr",
-          "previous": 0.0032,
-          "current": 0.0022
-        },
-        {
-          "metric": "impressions",
-          "current": 2228
-        }
-      ],
-      "sample": {
-        "impressions": 2228
-      },
-      "confidence": 0.6,
-      "expectedLever": "低収益 format の整理提案 (Auto ads 変更は allowlist 外・提案のみ)",
-      "guardrail": "収益 guardrail。UX (INTERSTITIAL 頻度) を悪化させない",
-      "rollback": "AdSense 管理画面設定を元に戻す (人間操作)",
-      "earliestDecisionDate": "2026-11-07",
-      "judgment": {
-        "day14": "2026-11-07",
-        "day28": "2026-11-21",
-        "day56": "2026-12-19"
+        "day14": "2026-11-14",
+        "day28": "2026-11-28",
+        "day56": "2026-12-26"
       },
       "pastEffect": null,
       "confounders": [
@@ -111,16 +65,16 @@
       "id": "placement-low-viewability::MANUAL@HighEndMobile",
       "rule": "placement-low-viewability",
       "key": "MANUAL@HighEndMobile",
-      "score": 2.0338,
+      "score": 1.9115,
       "evidence": [
         {
           "metric": "viewability",
-          "current": 0.3189,
+          "current": 0.3384,
           "threshold": 0.5
         },
         {
           "metric": "impressions",
-          "current": 2228
+          "current": 2955
         },
         {
           "metric": "weeks_below",
@@ -128,18 +82,59 @@
         }
       ],
       "sample": {
-        "impressions": 2228,
+        "impressions": 2955,
         "weeks": 2
       },
       "confidence": 0.75,
       "expectedLever": "低 viewability 1 枠のみ移設または非表示",
       "guardrail": "収益・他枠の viewability を悪化させない。同時に複数枠を変えない",
       "rollback": "枠設定の revert",
-      "earliestDecisionDate": "2026-11-07",
+      "earliestDecisionDate": "2026-11-14",
       "judgment": {
-        "day14": "2026-11-07",
-        "day28": "2026-11-21",
-        "day56": "2026-12-19"
+        "day14": "2026-11-14",
+        "day28": "2026-11-28",
+        "day56": "2026-12-26"
+      },
+      "pastEffect": null,
+      "confounders": [
+        "lazy-load 距離との交絡"
+      ],
+      "notes": [],
+      "externalActionFlag": false
+    },
+    {
+      "id": "placement-low-viewability::MANUAL@Desktop",
+      "rule": "placement-low-viewability",
+      "key": "MANUAL@Desktop",
+      "score": 1.3035,
+      "evidence": [
+        {
+          "metric": "viewability",
+          "current": 0.4533,
+          "threshold": 0.5
+        },
+        {
+          "metric": "impressions",
+          "current": 8365
+        },
+        {
+          "metric": "weeks_below",
+          "current": 2
+        }
+      ],
+      "sample": {
+        "impressions": 8365,
+        "weeks": 2
+      },
+      "confidence": 0.75,
+      "expectedLever": "低 viewability 1 枠のみ移設または非表示",
+      "guardrail": "収益・他枠の viewability を悪化させない。同時に複数枠を変えない",
+      "rollback": "枠設定の revert",
+      "earliestDecisionDate": "2026-11-14",
+      "judgment": {
+        "day14": "2026-11-14",
+        "day28": "2026-11-28",
+        "day56": "2026-12-26"
       },
       "pastEffect": null,
       "confounders": [
