@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T22:33:22.298Z",
-  "runId": "1793399056543",
+  "generatedAt": "2026-11-06T22:37:34.404Z",
+  "runId": "1794003768185",
   "sources": [
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-10-30T22:24:27.972Z",
+      "observedAt": "2026-11-06T22:23:18.243Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1793399056543",
+      "runId": "1794003768185",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -18,8 +18,8 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "f6c0ba4c55c089a696fe63a1643330541982adbba697633342b2dfa9e1e93661",
-        "bytes": 314278
+        "sha256": "50f2d3c2db521bf52453b880040c3cbfa29ab7929c2d7b5fe1442a417a580dbc",
+        "bytes": 311500
       },
       "quality": null,
       "knownIncomplete": null,
@@ -28,11 +28,11 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-10-30T22:26:07.775Z",
+      "observedAt": "2026-11-06T22:25:19.600Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1793399056543",
+      "runId": "1794003768185",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": true,
@@ -40,12 +40,12 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "db22d989ec210c23002e242e0e4c54214c8f3ad2649ed141133a3bb03993cf26",
-        "bytes": 2562100
+        "sha256": "054c4006170db8240f6c5d50828dc052fec7c319b2784933d10f0644c0073e6b",
+        "bytes": 2628592
       },
       "quality": {
-        "expectedRows": 428,
-        "observedRows": 428,
+        "expectedRows": 439,
+        "observedRows": 439,
         "missingRows": 0,
         "totalsMatched": true,
         "paginationComplete": true,
@@ -59,20 +59,20 @@
     {
       "source": "gsc",
       "capability": "verified-coverage-export",
-      "observedAt": "2026-10-30T22:29:42.704Z",
+      "observedAt": "2026-11-06T22:29:32.773Z",
       "activated": true,
-      "status": "pass",
-      "code": null,
-      "runId": "1793399056543",
+      "status": "failed",
+      "code": "timeout",
+      "runId": "1794003768185",
       "runAttempt": 1,
-      "metricsAvailable": true,
+      "metricsAvailable": false,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "ba116209e55c94b59cbeef708f3451e21aff59268782f44e75c16e2fb398b2fe",
-        "bytes": 3450007
+        "sha256": "e9d29bfd3cfcbf97ecd23b83e9eb9fdff71ee383cbc465bfc3fb23b6f9d08bb1",
+        "bytes": 2498
       },
       "quality": null,
       "knownIncomplete": null,
@@ -81,11 +81,11 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-30T22:31:31.651Z",
+      "observedAt": "2026-11-06T22:34:58.247Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "1793399056543",
+      "runId": "1794003768185",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -93,7 +93,7 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "8e24d7bd05f63c70a1d4d7895ac05e0e598474e43c445669c6a1e7ab69308bc5",
+        "sha256": "cffe5126c8e8f25417b9865c8c9d9658969d6a96112357696e010edd56fbc886",
         "bytes": 1452
       },
       "quality": null,
@@ -103,11 +103,11 @@
     {
       "source": "rakuten",
       "capability": "monthly-outcomes",
-      "observedAt": "2026-10-30T22:33:11.997Z",
+      "observedAt": "2026-11-06T22:37:19.362Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1793399056543",
+      "runId": "1794003768185",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -115,8 +115,8 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "dfdc73af8bb3d306881b3e0d93ddb9630918ef23ac224804a80cff49ab1c04cc",
-        "bytes": 1045
+        "sha256": "17db19943d546a07cd3c22e3faa61834e130f3cf9c360e5f1918631b7c4acfc8",
+        "bytes": 1377
       },
       "quality": null,
       "knownIncomplete": null,
