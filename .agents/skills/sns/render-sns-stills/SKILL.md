@@ -95,9 +95,6 @@ npx tsx .claude/scripts/sns/render-note-household.ts --input <固定snapshot.jso
 | YouTube Normal | `RankingYouTube-ScrollGes` | `youtube/scroll-ges.mp4` |
 | YouTube Normal Thumb | `RankingYouTube-Thumb-Hero` | `youtube/stills/thumbnail-1280x720.png` |
 | note | `RankingNote-Cover` | `note/images/cover-1280x670.png` |
-| note | `RankingNote-ChoroplethMap` | `note/images/choropleth-map-1080x1080.png` |
-| note | `RankingNote-Chart` | `note/images/chart-x-1200x630.png` |
-| note | `RankingNote-Boxplot` | `note/images/boxplot-1200x630.png` |
 | Instagram（カルーセル表紙） | `RankingInstagram-Cover` | `instagram/stills/slide-1-cover-1080x1350.png` |
 | Instagram（全47位テーブル） | `RankingInstagram-Table` | `instagram/stills/slide-2-table-1080x1350.png` |
 | Instagram（CTA） | `RankingInstagram-CTA` | `instagram/stills/slide-3-cta-1080x1350.png` |

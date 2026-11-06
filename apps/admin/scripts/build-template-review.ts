@@ -16,7 +16,7 @@ import { renderGroupedBarsChart } from '../lib/template-grouped-bars';
 import { renderAreaMapChart } from '../lib/template-area-map';
 import { resolveAreaChart, type AreaScope } from '../lib/template-area-scope';
 import { renderCompositionHeatmap, renderCompositionPie } from '../lib/template-minor-charts';
-import { rankingRows, renderAreaBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
+import { rankingRows, renderAreaBarsChart, renderItemBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
 import { rankingInputFromStats, sampleRankingChart } from '../lib/template-ranking-data';
 import { renderRankingTable } from '../lib/template-ranking-table';
 import { renderTileMapChart } from '../lib/template-ranking-tile-map';
@@ -29,7 +29,7 @@ import { renderLineChart } from '../lib/template-trend-line';
 import { regionNetSteps, renderWaterfallChart } from '../lib/template-waterfall';
 import { CHART_THEMES } from '../../remotion/src/features/data-cards/chart-theme';
 import { datasetPath } from '../../../config/datasets.mjs';
-import { chartSourceName, groupedBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../../../.claude/scripts/blog/lib/type-chart-input';
+import { chartSourceName, groupedBarChartFromArticleData, itemBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../../../.claude/scripts/blog/lib/type-chart-input';
 import { PREF_NAMES } from '../../../.claude/scripts/lib/prefectures.cjs';
 import { assertMinimalChartCopy } from '../../../.claude/scripts/media/lib/image-copy.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../.claude/scripts/lib/site-config.cjs';
@@ -132,6 +132,13 @@ async function radarSample(id: string, label: string, base: string) {
   };
   return both(id, label, (theme) => renderRadarChart(chart, theme));
 }
+async function itemBarSample(id: string, label: string, slug: string, base: string) {
+  const data = await json(blog(slug, base));
+  const chart = itemBarChartFromArticleData(data);
+  if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
+  chart.source = chartSourceName(data, await json(blog(slug, base, 'source.json')), metricSource) || chart.source;
+  return both(id, label, (theme) => renderItemBarsChart(chart, theme));
+}
 async function sankeySample(id: string, label: string) {
   const data = await json(blog(AGRI_SLUG, AGRI_BASE));
   const source = chartSourceName(data, await json(blog(AGRI_SLUG, AGRI_BASE, 'source.json')), metricSource);
@@ -160,6 +167,8 @@ async function main() {
         both('bar', '上位 5・下位 5 のカード', (theme) => renderRankingBarsChart(ranking, theme)),
         both('bar-merged', '県の中・政令指定都市を統合', (theme) => renderAreaBarsChart(chartOf(inPrefecture('merged')), theme)),
         both('bar-split', '県の中・政令指定都市を分割', (theme) => renderAreaBarsChart(chartOf(inPrefecture('split')), theme)),
+        await itemBarSample('bar-items', '県に限らない行', 'income-quintile-alcohol', 'wine-quintile'),
+        await itemBarSample('bar-partial', '一部の県', 'aquaculture-harvest-prefecture-gap', 'aquaculture-harvest-prefecture-gap-prefecture-rankings'),
     ],
     'tile-map': [
         both('tile', '値の塗り', (theme) => renderTileMapChart(ranking, theme)),

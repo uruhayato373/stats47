@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { itemBarChartFromArticleData, radarChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderRadarChart, type RadarChart } from '@/lib/template-radar';
+import { renderItemBarsChart } from '@/lib/template-ranking-bars';
+import type { ItemBarChart } from '@/lib/template-ranking-data';
 import { flowsFromTable, renderSankeyChart, type SankeyChart } from '@/lib/template-sankey';
 import { regionNetSteps, renderWaterfallChart, type WaterfallChart } from '@/lib/template-waterfall';
 
@@ -82,6 +85,41 @@ describe('ウォーターフォールの型', () => {
     expect(steps.reduce((sum, step) => sum + step.value, 0)).toBe(30);
     expect(steps[0].value).toBe(70);
     expect(steps[steps.length - 1].value).toBe(-40);
+  });
+});
+
+describe('棒の型の県に限らない行', () => {
+  const labels = { yearLabel: '2024年', unit: '円', source: '家計調査', formatValue: String, presentation: { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential', domain: { mode: 'extent' }, classification: { method: 'continuous' }, trendDomain: { mode: 'extent' }, comparisonDomain: { mode: 'extent' } } } as never as Omit<ItemBarChart, 'title' | 'rows'>;
+  const rows = (n: number) => Array.from({ length: n }, (_, i) => ({ name: `階級${i + 1}`, value: i + 1 }));
+  it('10 行までは作者の順で全行を描き、順位を付けない', () => {
+    const svg = renderItemBarsChart({ ...labels, title: '見本', rows: rows(6) });
+    expect(svg).toContain('data-image-template="bar" data-items="true"');
+    expect(svg.indexOf('階級1')).toBeLessThan(svg.indexOf('階級6'));
+    expect(svg).not.toContain('data-rank');
+  });
+  it('11 行以上は上位と下位のカードにし、順位を集合の中で数える', () => {
+    const svg = renderItemBarsChart({ ...labels, title: '見本', rows: rows(12) });
+    expect(svg).toContain('data-rank="1"');
+    expect(svg).toContain('data-rank="12"');
+    expect(svg).toContain('階級12');
+    expect(svg).not.toContain('>階級6<');
+  });
+  it('一部の県の行は県名のまま読み、重複した名前は止める', () => {
+    const data = { title: '養殖収獲量', year: '2023', unit: 't', data: [{ areaName: '北海道', value: 3 }, { areaName: '広島県', value: 2 }] };
+    const chart = itemBarChartFromArticleData(data);
+    expect('skip' in chart ? chart.skip : chart.rows.map((row) => row.name)).toEqual(['北海道', '広島県']);
+    expect(itemBarChartFromArticleData({ ...data, data: [{ areaName: 'a', value: 1 }, { areaName: 'a', value: 2 }] })).toHaveProperty('skip');
+  });
+});
+
+describe('記事のデータからレーダーの型へ', () => {
+  const data = { title: '東京都の6軸レーダー（47都道府県で正規化）', axes: radar.axes, series: radar.series };
+  it('系列の名前で題をつけ、年は入力の範囲を出し、条件を題から移す', () => {
+    const chart = radarChartFromArticleData(data, { inputs: [{ year: '2024' }, { year: '2021' }] });
+    expect('skip' in chart ? chart.skip : [chart.title, chart.meta]).toEqual(['東京都の3指標', '2021〜2024年 · 47都道府県で正規化']);
+  });
+  it('軸か系列が無ければ型にしない', () => {
+    expect(radarChartFromArticleData({ title: 'x' }, {})).toHaveProperty('skip');
   });
 });
 

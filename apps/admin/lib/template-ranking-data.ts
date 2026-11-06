@@ -94,6 +94,11 @@ export interface RankingChart {
   baseAreaCode?: string;
 }
 
+/** Rows that are not a full ranking: a partial set of prefectures, items, income classes. Order is the author's. */
+export interface ItemBarChart extends Omit<RankingChart, 'rows' | 'baseAreaCode'> {
+  rows: { name: string; value: number }[];
+}
+
 /** 47 prefectures, each once, ranks consistent with values (ties share a rank); sorted by rank. */
 export function assertRankingRows(rows: RankingChartRow[]) {
   const sorted = [...rows].sort((a, b) => a.rank - b.rank || b.value - a.value);

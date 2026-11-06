@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
-import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type RankingChart } from './template-ranking-data';
+import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type ItemBarChart, type RankingChart } from './template-ranking-data';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { scopeAttributes, type AreaChart } from './template-area-scope';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
@@ -41,6 +41,8 @@ export function rankingBarRows(raw: unknown) {
 // a thin bar under the name. Kept from the earlier blog ranking cards, coloured by the metric.
 export const RANKING_BAR_PLOT = { left: 196, right: SAMPLE_FRAME.right - 24 } as const;
 const CARD = { band: 60, rowHeight: 84, bandGap: 10, radius: 14, badge: 27 } as const;
+const ITEM_ROWS_MAX = 10;
+const ITEM_ROW_MAX = 150;
 
 /** One common frame for the four media; the complete 47-prefecture input stays in R2. */
 export function renderRankingBars(raw: unknown, presentation: MetricPresentation = RANKING_SAMPLE_PRESENTATION, theme: ChartTheme = LIGHT_THEME) {
@@ -58,23 +60,69 @@ export function renderAreaBarsChart(chart: AreaChart, theme: ChartTheme = LIGHT_
   return drawBars(chart, chart.rows, theme, { title: chart.title, upper: '上位', lower: '下位', attributes: scopeAttributes(chart.scope) });
 }
 
+const metaLine = (chart: { yearLabel: string; unit: string; formatValue: (value: number) => string }, axis: { truncated: boolean; min: number; max: number }) =>
+  [chart.yearLabel, chart.unit && `単位：${chart.unit}`, axis.truncated && `範囲：${chart.formatValue(axis.min)}–${chart.formatValue(axis.max)}`].filter(Boolean).join(' · ');
+
+/**
+ * A set of rows that is not a full ranking. Up to ten rows all show, in the author's order and without ranks;
+ * beyond that the same upper and lower cards, with ranks counted inside the set.
+ */
+export function renderItemBarsChart(chart: ItemBarChart, theme: ChartTheme = LIGHT_THEME) {
+  if (chart.rows.length > ITEM_ROWS_MAX) {
+    const sorted = [...chart.rows].sort((a, b) => b.value - a.value);
+    const rows = sorted.map((row) => ({ rank: sorted.findIndex((other) => other.value === row.value) + 1, area_code: '', area_name: row.name, value: row.value }));
+    return drawBars({ ...chart, rows }, rows, theme, { title: chart.title, upper: '上位', lower: '下位', attributes: 'data-items="true"' });
+  }
+  // These rows compare amounts, so bars start at zero whatever range a ranking metric would use.
+  const values = chart.rows.map((row) => row.value);
+  const axis = { min: Math.min(0, ...values), max: Math.max(0, ...values), baseline: 0, truncated: false };
+  const colors = barColors(chart, theme);
+  const left = SAMPLE_FRAME.left, width = SAMPLE_FRAME.right - left;
+  const top = sampleBodyTop(Boolean(chart.note)) + 8;
+  const rowHeight = Math.min(ITEM_ROW_MAX, (SAMPLE_FRAME.bodyBottom - top) / chart.rows.length);
+  const plot = { left: left + 28, right: SAMPLE_FRAME.right - 28 };
+  const xAt = (value: number) => plot.left + (plot.right - plot.left) * (value - axis.min) / (axis.max - axis.min);
+  const signed = axis.min < 0 && axis.max > 0;
+  const rows = chart.rows.map((row, i) => {
+    const y = top + i * rowHeight, barY = y + rowHeight - 34;
+    const origin = xAt(axis.baseline), end = xAt(row.value);
+    const valueText = `${chart.formatValue(row.value)}<tspan font-size="26" dx="4">${escapeXml(chart.unit)}</tspan>`;
+    const wash = i % 2 === 0 ? `<rect x="${left}" y="${y}" width="${width}" height="${rowHeight - 6}" rx="${CARD.radius}" fill="${colors.rowWash}"${outlineAttrs(theme)}/>` : '';
+    return `<g data-value="${row.value}">${wash}<text x="${plot.left}" y="${barY - 16}" font-size="36" font-weight="700" fill="${theme.ink}">${escapeXml(row.name)}</text><text x="${plot.right}" y="${barY - 16}" text-anchor="end" font-size="40" font-weight="700" fill="${colors.valueInk}">${valueText}</text><rect data-bar-track="true" x="${plot.left}" y="${barY}" width="${plot.right - plot.left}" height="10" rx="5" fill="${colors.track}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${barY}" width="${Math.abs(end - origin)}" height="10" rx="5" fill="${colors.barOn(colors.color)}"/>${signed ? `<line x1="${origin}" y1="${barY - 5}" x2="${origin}" y2="${barY + 15}" stroke="${theme.ink}" stroke-width="2"/>` : ''}</g>`;
+  }).join('');
+  return sampleFrame({
+    title: chart.title, titleSize: fitTitleSize(chart.title), meta: metaLine(chart, axis), note: chart.note, source: chart.source,
+    attributes: `data-image-template="bar" data-items="true" data-domain-min="${axis.min}" data-domain-max="${axis.max}"`,
+    body: rows, theme,
+  });
+}
+
+/** The colours of a bar image, all from the metric's own colour. */
+function barColors(chart: { presentation: MetricPresentation }, theme: ChartTheme) {
+  const dark = theme.name === 'dark';
+  // The metric's own colour (strong end of its scheme), so its bars and its map share one hue.
+  const color = toHex(resolveMetricColor(chart.presentation) ?? BRAND.primary);
+  const card = dark ? theme.paper : '#FFFFFF';
+  return {
+    color, card,
+    // The lower five in a lighter tint: toward white in both themes so it reads apart from the upper band.
+    lower: mixColor(color, '#FFFFFF', dark ? 0.3 : 0.38),
+    rowWash: mixColor(color, card, dark ? 0.82 : 0.9),
+    track: mixColor(color, card, dark ? 0.7 : 0.8),
+    // The strong colour is too dark to read as text on the dark paper.
+    valueInk: dark ? mixColor(color, '#FFFFFF', 0.65) : color,
+    // Dark ranks and bars on the dark rows sit too close in lightness: lift them as the paper lifts the maps.
+    barOn: (fill: string) => (dark ? mixColor(fill, '#FFFFFF', 0.3) : fill),
+  };
+}
+
 function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: ChartTheme, labels: { title: string; upper: string; lower: string; attributes?: string }) {
   // Five each, or half each when there are fewer than ten rows.
   const each = Math.min(5, Math.floor(allRows.length / 2));
   const rows = { top: allRows.slice(0, each), bottom: allRows.slice(-each) };
   const axis = rankingBarAxis(allRows.map((row) => row.value), chart.presentation);
   const dark = theme.name === 'dark';
-  // The metric's own colour (strong end of its scheme), so its bars and its map share one hue.
-  const color = toHex(resolveMetricColor(chart.presentation) ?? BRAND.primary);
-  const card = dark ? theme.paper : '#FFFFFF';
-  // The lower five in a lighter tint: toward white in both themes so it reads apart from the upper band.
-  const lower = mixColor(color, '#FFFFFF', dark ? 0.3 : 0.38);
-  const rowWash = mixColor(color, card, dark ? 0.82 : 0.9);
-  const track = mixColor(color, card, dark ? 0.7 : 0.8);
-  // The strong colour is too dark to read as text on the dark paper.
-  const valueInk = dark ? mixColor(color, '#FFFFFF', 0.65) : color;
-  // Dark ranks and bars on the dark rows sit too close in lightness: lift them as the paper lifts the maps.
-  const barOn = (fill: string) => (dark ? mixColor(fill, '#FFFFFF', 0.3) : fill);
+  const { color, card, lower, rowWash, track, valueInk, barOn } = barColors(chart, theme);
   const left = SAMPLE_FRAME.left, width = SAMPLE_FRAME.right - left;
   const plotWidth = RANKING_BAR_PLOT.right - RANKING_BAR_PLOT.left;
   const top = sampleBodyTop(Boolean(chart.note)) + 8;
@@ -95,7 +143,7 @@ function drawBars(chart: RankingChart, allRows: RankingChart['rows'], theme: Cha
     }).join('')}`;
   return sampleFrame({
     title: labels.title, titleSize: fitTitleSize(labels.title),
-    meta: `${chart.yearLabel} · 単位：${chart.unit}${axis.truncated ? ` · 範囲：${chart.formatValue(axis.min)}–${chart.formatValue(axis.max)}` : ''}`,
+    meta: metaLine(chart, axis),
     note: chart.note,
     source: chart.source,
     attributes: `data-image-template="bar" data-domain-min="${axis.min}" data-domain-max="${axis.max}"${labels.attributes ? ` ${labels.attributes}` : ''}`,

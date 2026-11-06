@@ -1,8 +1,8 @@
 /**
  * Article ranking/map data → the shared image types' input (apps/admin/lib/template-ranking-data.ts).
  *
- * The types need all 47 prefectures with finite values. Data that cannot give that (ports, partial
- * surveys, duplicates) returns a reason instead, and the caller keeps the svg-builder chart.
+ * A ranking or map needs all 47 prefectures with finite values. Data that cannot give that (ports, partial
+ * surveys, items) goes to the bar's list of rows, and data that gives neither returns a reason, which stops the chart.
  */
 import { prefectureShortName } from '../../../../packages/area/src/utils/prefecture-short-name';
 import { DEFAULT_SEQUENTIAL_SCHEME, colorSchemeTypeOf, normalizeColorScheme } from '../../../../packages/types/src/color-scheme';
@@ -10,8 +10,9 @@ import { metricPresentation } from '../../../../packages/data-configs/src/color-
 import type { VisualizationConfig } from '../../../../packages/data-configs/src/types';
 import { applyColorPolicy } from '../../../../packages/types/src/color-policy';
 import type { MetricPresentation } from '../../../../packages/types/src/metric-presentation';
-import { chartValueLabels, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
+import { chartValueLabels, type ItemBarChart, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
 import type { ScatterChart } from '../../../../apps/admin/lib/template-relationship-scatter';
+import type { RadarChart } from '../../../../apps/admin/lib/template-radar';
 import type { LineChart, LineSeries } from '../../../../apps/admin/lib/template-trend-line';
 import type { StackedChart } from '../../../../apps/admin/lib/template-composition-stacked';
 import type { GroupedBarChart } from '../../../../apps/admin/lib/template-grouped-bars';
@@ -83,8 +84,9 @@ export function rankingChartFromArticleData(
   const title = (text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, '');
   // The subtitle carries the label as shown (「2022年度」); otherwise the year is a calendar year.
   const subtitleYear = /^\d{4}年度?$/.exec(text(data.subtitle))?.[0];
-  const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : '');
-  if (!title || !yearLabel) return { skip: '指標名か年がデータに無い' };
+  // Without a year the subtitle is the only condition the data states, and it takes the year's place.
+  const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle));
+  if (!title) return { skip: '図の名前がデータに無い' };
   return {
     title,
     yearLabel,
@@ -97,6 +99,40 @@ export function rankingChartFromArticleData(
     // metric's decimal places apply when the article's unit is the metric's own unit.
     ...chartValueLabels(text(data.unit), rows.map((r) => r.value),
       text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined),
+  };
+}
+
+/** Any rows with a name and a value (a partial set of prefectures, items, income classes) → the bar's list of rows. */
+export function itemBarChartFromArticleData(parsed: unknown, opts: { metric?: ArticleMetric } = {}): ItemBarChart | { skip: string } {
+  const data = (Array.isArray(parsed) ? { data: parsed } : parsed) as Record<string, unknown>;
+  const items = (Array.isArray(data?.data) ? data.data : []) as Row[];
+  const rows = items.flatMap((it) => {
+    const name = String(it.areaName ?? it.label ?? it.name ?? it.pref ?? '').trim();
+    return name && typeof it.value === 'number' && Number.isFinite(it.value) ? [{ name, value: it.value }] : [];
+  });
+  if (rows.length < 2 || new Set(rows.map((row) => row.name)).size !== rows.length) return { skip: '名前と値の行が 2 つ以上そろわない' };
+  const named = splitTitle((text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, ''));
+  if (!named.title) return { skip: '図の名前がデータに無い' };
+  return {
+    title: named.title, note: named.condition || undefined, source: text(data.source),
+    yearLabel: /^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle),
+    presentation: presentationOf(data, opts.metric), rows,
+    ...chartValueLabels(text(data.unit), rows.map((row) => row.value)),
+  };
+}
+
+/** Article radar json → the radar type. The values stay as the article normalized them. */
+export function radarChartFromArticleData(parsed: unknown, manifest: Record<string, unknown>): RadarChart | { skip: string } {
+  const data = (Array.isArray(parsed) ? {} : parsed) as Record<string, unknown>;
+  const series = (Array.isArray(data.series) ? data.series : []) as RadarChart['series'];
+  const axes = (Array.isArray(data.axes) ? data.axes : []) as RadarChart['axes'];
+  const names = series.filter((s) => !s.reference).map((s) => s.name);
+  if (!axes.length || !names.length) return { skip: '軸か系列が無い' };
+  const years = (Array.isArray(manifest.inputs) ? manifest.inputs as { year?: unknown }[] : []).map((input) => text(input.year)).filter(Boolean).sort();
+  return {
+    title: `${names.join('と')}の${axes.length}指標`,
+    meta: [years.length ? `${years[0]}〜${years[years.length - 1]}年` : text(data.subtitle), splitTitle(text(data.title)).condition].filter(Boolean).join(' · '),
+    source: text(data.source), axes, series,
   };
 }
 

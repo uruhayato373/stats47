@@ -2,7 +2,7 @@
 /**
  * fetch-quintile-data.ts
  * 家計調査「年間収入五分位階級別（全国）」を e-Stat から取得し、ブログ記事用の
- * 五分位バー / 時系列折れ線 SVG を svg-builder で生成する（3点セット: json + source.json + svg）。
+ * 五分位バー / 時系列折れ線のデータを作る（json + source.json。図は generate-article-charts が型で描く）。
  *
  * 都道府県ランキングではなく「全国×年収5階級」の全国型記事用。数値は e-Stat 実値のみ（捏造禁止）。
  *
@@ -14,12 +14,11 @@
  *   # スキャン（全品目の V/I 比を一括算出 → /tmp/quintile-scan.json）
  *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --mode scan [--year 2025]
  *
- * 出力: contents/blog/<slug>/data/<name>-quintile[.-timeseries].{json,source.json,svg}
+ * 出力: contents/blog/<slug>/data/<name>-quintile[-timeseries].{json,source.json}
  */
 
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { generateBarChartSvg, generateLineSvg } from "../../../packages/svg-builder/src/charts/index.ts";
 import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -27,6 +26,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 // (2026-11-02 に たばこ・宿泊料・食料 の 2024 年で全 6 区分の一致を確認)。改定で分割・統合した品目は旧コードで値が返らない
 const STATS_DATA_ID_AMOUNT = "0004023607";
 const CAT02_TWO_PERSON = "03"; // 二人以上の世帯（2000年～）
+const QUINTILE_SOURCE = "家計調査";
 
 function getAppId(): string {
   const env = fs.readFileSync(path.join(PROJECT_ROOT, "apps/web/.env.development"), "utf8");
@@ -65,14 +65,12 @@ async function estat(params: Record<string, string>): Promise<any> {
   return Array.isArray(v) ? v : [v];
 }
 
-function writeTriple(slug: string, base: string, json: unknown, source: unknown, svg: string) {
+function writePair(slug: string, base: string, json: unknown, source: unknown) {
   const dir = path.join(PROJECT_ROOT, "contents/blog", slug, "data");
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, `${base}.json`), JSON.stringify(json, null, 1));
   fs.writeFileSync(path.join(dir, `${base}.source.json`), JSON.stringify(source, null, 2));
-  const provenance = `<!-- data-source: ${base}.json | generated: ${new Date().toISOString()} -->\n`;
-  fs.writeFileSync(path.join(dir, `${base}.svg`), provenance + svg);
-  console.log(`[quintile] ${slug}/data/${base}.{json,source.json,svg}`);
+  console.log(`[quintile] ${slug}/data/${base}.{json,source.json} — 図は generate-article-charts --slug ${slug} で描く`);
 }
 
 // ---------- bar モード ----------
@@ -103,19 +101,6 @@ async function runBar() {
     .filter((c) => byCode[c] != null)
     .map((c) => ({ areaName: QUINTILE_LABELS[c], rank: c === "00" ? 0 : Number(c), value: byCode[c], unit }));
 
-  // BarItem[]（single layout・階級順・平均は先頭）
-  const items = data.map((d) => ({ label: d.areaName, value: d.value }));
-  const svg = generateBarChartSvg(items, {
-    title: `${title}（年収五分位別）`,
-    subtitle: `${year}年 二人以上世帯・全国`,
-    source: "e-Stat（政府統計の総合窓口）家計調査",
-    unit,
-    palette: "blue",
-    layout: "single",
-    showAxis: true,
-    ariaLabel: `${title}の年収五分位階級別 ${year}年`,
-  });
-
   const source = {
     kind: "estat",
     statsDataId: STATS_DATA_ID_AMOUNT,
@@ -127,7 +112,7 @@ async function runBar() {
     fetchedAt: new Date().toISOString(),
     restore: `npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug ${slug} --name ${name} --item ${item} --year ${year}${includeAverage ? "" : " --no-average"}`,
   };
-  writeTriple(slug, `${name}-quintile`, { title: `${title}（年収五分位別）`, unit, year, data }, source, svg);
+  writePair(slug, `${name}-quintile`, { title: `${title}（年収五分位別）`, unit, year, source: QUINTILE_SOURCE, data }, source);
   // コンソールに実値（記事執筆の参照用）
   console.log("  値:", data.map((d) => `${d.areaName}=${d.value}${unit}`).join(" / "));
   if (byCode["01"] && byCode["05"]) console.log(`  V/I比: ${(byCode["05"] / byCode["01"]).toFixed(2)}倍`);
@@ -162,28 +147,6 @@ async function runLine() {
     return { label: QUINTILE_LABELS[code], data: pts };
   });
 
-  // StatsSchema[] に変換して generateLineSvg
-  const statsData = series.flatMap((s, si) =>
-    s.data.map((pt) => ({
-      metricKey: "value",
-      areaCode: String(si + 1).padStart(2, "0"),
-      areaName: s.label,
-      yearCode: String(pt.year),
-      yearName: String(pt.year),
-      value: pt.value,
-      unit,
-    })),
-  );
-  const svg = generateLineSvg(statsData, {
-    title: `${title}の推移（年収五分位別）`,
-    subtitle: `${from}〜 二人以上世帯・全国`,
-    unit,
-    xKey: "yearCode",
-    seriesKey: "areaCode",
-    yLabel: `${title}（${unit}）`,
-    legendPosition: "bottom",
-  });
-
   const source = {
     kind: "estat",
     statsDataId: STATS_DATA_ID_AMOUNT,
@@ -194,7 +157,7 @@ async function runLine() {
     fetchedAt: new Date().toISOString(),
     restore: `npx tsx .claude/scripts/blog/fetch-quintile-data.ts --mode line --slug ${slug} --name ${name} --item ${item} --from ${from}`,
   };
-  writeTriple(slug, `${name}-quintile-timeseries`, { title: `${title}の推移（年収五分位別）`, unit, series }, source, svg);
+  writePair(slug, `${name}-quintile-timeseries`, { title: `${title}の推移（年収五分位別）`, unit, source: QUINTILE_SOURCE, series }, source);
   // 参照用: 各系列の最初と最後
   for (const s of series) {
     const f = s.data[0], l = s.data[s.data.length - 1];
