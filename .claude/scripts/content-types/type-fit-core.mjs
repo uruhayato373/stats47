@@ -24,7 +24,7 @@ const seriesTail = (slug) => slug.split("-").slice(-2).join("-");
 
 /**
  * 同じ型で同じ指標の組を扱う記事を、クリックの少ない方を統合候補として組にする。
- * 作り方型は題材の指標が重なるだけで別の記事なので見ない。
+ * ノウハウ型は題材の指標が重なるだけで別の記事なので見ない。
  */
 export function findMergePairs(articles) {
   const groups = new Map();

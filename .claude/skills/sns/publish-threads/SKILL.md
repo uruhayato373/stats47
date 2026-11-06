@@ -7,7 +7,7 @@ argument-hint: "--from-queue [--limit N] [--offset N] [--dry-run]"
 primary_agent: x-strategist
 ---
 
-**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・ノウハウ型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
 
 # publish-threads — Threads の予約投稿 (Playwright)
 

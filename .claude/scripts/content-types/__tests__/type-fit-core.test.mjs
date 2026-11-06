@@ -28,7 +28,7 @@ test("型ごとの約束が欠けると書き直しの案になる", () => {
   assert.equal(proposeAction(article({ body: "本文" }), undefined).proposal, "rewrite");
 });
 
-test("同じ型で同じ指標でも、作り方型と連載は統合の組にしない", () => {
+test("同じ型で同じ指標でも、ノウハウ型と連載は統合の組にしない", () => {
   const a = article({ id: "blog:x", slug: "x-long", rankingKeys: ["k"], clicks: 5 });
   const b = article({ id: "blog:y", slug: "y-short", rankingKeys: ["k"] });
   assert.deepEqual([...findMergePairs([a, b])], [["blog:y", "blog:x"]]);

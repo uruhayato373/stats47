@@ -1,6 +1,6 @@
 ---
 name: feedback_content_four_types
-description: 全コンテンツは参照型・教科書型・論文型・作り方型のどれかに属する。未分類で作らず、機械の止めを緩めない
+description: 全コンテンツは参照型・教科書型・論文型・ノウハウ型のどれかに属する。未分類で作らず、機械の止めを緩めない
 metadata:
   type: feedback
 ---

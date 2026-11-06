@@ -22,7 +22,7 @@
     },
     {
       "id": "type:howto",
-      "title": "作り方型",
+      "title": "ノウハウ型",
       "question": "どうやって作るか、自分の仕事でどう再現するか",
       "examples": "e-Stat × Claude Code の実務、再現手順・テンプレート"
     }

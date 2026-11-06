@@ -5,7 +5,7 @@ description: metric/トレンドから記事下書きを R2 観測値直 fetch �
 primary_agent: article-writer
 ---
 
-**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・ノウハウ型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
 
 1 つの metric (統計指標) を起点に、`article.md` 雛形 + チャート画像までを一気通貫で生成する **orchestrator スキル**。**企画文書 (旧 docs/20) は介さない** — 「生成 → 公開 → ライブで反復」が基本フロー。
 

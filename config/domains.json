@@ -91,7 +91,7 @@
         { "label": "参照型", "href": "/content/types?type=reference", "kind": "inventory" },
         { "label": "教科書型", "href": "/content/types?type=textbook", "kind": "inventory" },
         { "label": "論文型", "href": "/content/types?type=paper", "kind": "inventory" },
-        { "label": "作り方型", "href": "/content/types?type=howto", "kind": "inventory" },
+        { "label": "ノウハウ型", "href": "/content/types?type=howto", "kind": "inventory" },
         { "label": "記事の処置の案", "href": "/content/fit", "kind": "actions" },
         { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
         { "label": "記事・投稿の改善", "href": "/product/content-quality", "kind": "actions" },
