@@ -188,6 +188,20 @@ updated: 2026-11-01
 - **次**: 検査の中でパスを `/` 区切りへそろえる。
 - **完了条件**: Windows で `npm run test -w web` のこの 3 件が通る。
 
+### [STRATEGY-ISSUE-MAP-PV-CHART-01] 広告の効率が出たら、事業イシューマップに月 ¥1 万へ要る PV のグラフを足す
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run test -w apps/admin] [起票:2026-11-05] [領域:戦略]
+
+- **起点**: `/strategy/issue-map` は KPI `site-pageviews`・`ad-yield` から計算できるときだけグラフを載せる。2026-11-05 時点の `data/measurement-cycle/latest.json` は `ad-yield` の `value` が `null`（再開後 4 週のベースライン期間）で計算できないので、画面に載せていない。
+- **次**: `ad-yield` に値が出たら、`site-pageviews` と合わせて必要 PV を `apps/admin/lib/issue-map.ts` で計算し、画面に足す。効率の値はマップに写さず KPI から読む。
+- **完了条件**: `ad-yield` が値を持つときだけグラフが出て、`null` のときは出ないことをテストで固定している。
+
+### [ADMIN-AGENT-MODELS-WIN-PATH-01] 管理画面の agent-models テストが Windows のパス区切りで落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w apps/admin] [起票:2026-11-05] [領域:管理]
+
+- **起点**: `apps/admin/tests/unit/agent-models.test.ts` の「frontmatter の無いファイルは画面を落とさず errors に載せる」が Windows で失敗する。期待は `.claude/agents/broken.md`、実際は `.claude\agents\broken.md`（2026-11-05 に develop の `4d1add868` で確認）。
+- **次**: `agentModelCatalog` が返す `file` を `/` 区切りにそろえる。
+- **完了条件**: Windows で `npm run test -w apps/admin` が通る。
+
 ### [NOTE-PLAYWRIGHT-DIALOG-CRASH-01] note 公開中の Playwright 起動スクリプトがダイアログ処理の競合でブラウザごと落ちる
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-05] [領域:商品]
 

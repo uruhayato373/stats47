@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "description": "事業イシューマップ (管理画面 /strategy/issue-map) の入力。社会の問いの台帳 data/content/issues.json とは別物で、事業の問いを biz: の ID で持つ。判定日と進み具合は写さず、refs の ID で improvements・pilot-board・experiments・backlog から引く。マスの評価は実測なしに変えない (.claude/rules/evidence-based-judgment.md)。履歴は git に任せる。",
+  "observedAt": "2026-W43",
+  "issue": {
+    "id": "biz:issue",
+    "question": "stats47 のコンテンツは、どの型を、どの収益源で回収すれば、運営費と改善の工数を賄えるか。",
+    "hypothesis": "参照型で集め、作り方型で売り、論文型で信頼を作る。売れた実績は作り方型だけで、統計の内容（教科書型・データ）で売れるかはこれから確かめる。",
+    "criteria": ["答えで制作の配分が変わる", "マスごとに数字の仮説にできる", "今ある計器と小さな販売実験で答えが出る"]
+  },
+  "columns": [
+    { "id": "biz:col:ads", "title": "広告", "description": "広告主が読者の注意に払う。AdSense・アフィリエイト・物販" },
+    { "id": "biz:col:content", "title": "コンテンツ販売", "description": "読者が文章に払う。note・KDP" },
+    { "id": "biz:col:data", "title": "データ販売", "description": "読者・組織がファイルに払う。CSV・Excel・GeoJSON" }
+  ],
+  "rows": [
+    { "id": "biz:row:reference", "title": "参照型", "question": "1 位はどこか", "examples": "ランキング・雑学" },
+    { "id": "biz:row:textbook", "title": "教科書型", "question": "この統計で何がわかるか、どう使うか", "examples": "家計調査でわかること、財政指標の定義と各地の状況、調査ハブ" },
+    { "id": "biz:row:paper", "title": "論文型", "question": "自分たちの〇〇はどうなるか", "examples": "Geo 分析など問いへの答え", "relatedDataset": "content.issues" },
+    { "id": "biz:row:howto", "title": "作り方型", "question": "どうやって作るか、自分の仕事でどう再現するか", "examples": "e-Stat × Claude Code の実務、再現手順・テンプレート" }
+  ],
+  "cells": [
+    {
+      "id": "biz:reference:ads",
+      "row": "biz:row:reference",
+      "column": "biz:col:ads",
+      "rating": "◎",
+      "ratingLabel": "主力",
+      "states": [
+        { "kind": "seen", "label": "流入は見えている" },
+        { "kind": "open", "label": "効率は未検証" }
+      ],
+      "evidence": "検索クリックは 28 日 14,733 と 4 週前から +48% だが、効率は概算 ¥12〜16 / 1,000 PV で、月 ¥1 万には今の 12〜16 倍の PV が要る。",
+      "judgments": [
+        { "picture": "広告ユニット別の 1,000 表示あたり収益 × 視認率の散布図", "ref": { "kind": "improvement", "id": "ADSENSE-PLACEMENT-01" } },
+        { "picture": "PV の実績線と里程標の線の重ね描き", "ref": { "kind": "backlog", "id": "PV-100K-LEVERS-01" } }
+      ]
+    },
+    {
+      "id": "biz:reference:content",
+      "row": "biz:row:reference",
+      "column": "biz:col:content",
+      "rating": "✕",
+      "ratingLabel": "やらない",
+      "states": [
+        { "kind": "seen", "label": "見えている" },
+        { "kind": "unknown", "label": "KDP 内訳待ちで保留" }
+      ],
+      "evidence": "note の雑学有料記事 47 本は閲覧 4,842 で売上 ¥0、サイトから Kindle への案内は 3,901 閲覧に 1 クリックだった。",
+      "next": "例外: KDP の読み放題だけは計器が戻るまで判定不能",
+      "refs": [{ "kind": "pilot", "id": "kdp" }]
+    },
+    {
+      "id": "biz:reference:data",
+      "row": "biz:row:reference",
+      "column": "biz:col:data",
+      "rating": "○",
+      "ratingLabel": "条件つき",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "基本の CSV は無料のまま束ねて加工したものだけを売る案で、「製造品出荷額 ランキング 市町村」は CTR 46%・28 日 390 クリックある。",
+      "judgments": [
+        { "picture": "導線のクリック → 購入の 8 週の積み上げ（5 件の線つき）", "ref": { "kind": "experiment", "id": "EXP-007" } }
+      ],
+      "refs": [{ "kind": "backlog", "id": "MUNI-DATA-PRODUCT-PILOT-01" }]
+    },
+    {
+      "id": "biz:textbook:ads",
+      "row": "biz:row:textbook",
+      "column": "biz:col:ads",
+      "rating": "○",
+      "ratingLabel": "入口",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "「〇〇とは」型の検索の入口になり、調査ハブは表示がつき始めた段階である（介護サービス施設調査のハブで GSC 表示 1,460 / 28 日）。",
+      "judgments": [
+        { "picture": "調査ハブの入口 URL のクリックと 2 ページ目への到達（公開後 4 週）", "ref": { "kind": "backlog", "id": "CONTENT-KAKEI-EXPANSION-01" } }
+      ]
+    },
+    {
+      "id": "biz:textbook:content",
+      "row": "biz:row:textbook",
+      "column": "biz:col:content",
+      "rating": "○",
+      "ratingLabel": "最初の候補",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "統計の内容で売れた実績はまだ無く、業務文脈の着地が 28 日 4,555 と伸びていても購入意思の代わりにはならない。",
+      "judgments": [
+        { "picture": "財政比較 2 本の閲覧 → 購入の比較（書く層 / 書かない層）", "ref": { "kind": "improvement", "id": "NOTE-FISCAL-PEER-SALES-01" } }
+      ]
+    },
+    {
+      "id": "biz:textbook:data",
+      "row": "biz:row:textbook",
+      "column": "biz:col:data",
+      "rating": "○",
+      "ratingLabel": "条件つき",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "説明とセットの用途別 Excel は作業時間を減らす商品で支払者が組織になりうるが、聞き取りは 0 / 3 件で止まっている。",
+      "judgments": [
+        { "picture": "担当者 3 人 × 作業工程の所要時間の表、支払者候補 × 購入経路の表", "ref": { "kind": "backlog", "id": "ADMIN-STAT-PILOT-01" } }
+      ],
+      "refs": [{ "kind": "backlog", "id": "ISSUE-PAYING-NEED-01" }]
+    },
+    {
+      "id": "biz:paper:ads",
+      "row": "biz:row:paper",
+      "column": "biz:col:ads",
+      "rating": "○",
+      "ratingLabel": "信頼",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "結論・方法・途中データまで無料で出し、流入の量より方法まで読む行動を見る（収益化戦略 §3.4）。",
+      "judgments": [{ "picture": "Geo 4 本の方法・途中データまで読んだ率と回遊", "ref": null }]
+    },
+    {
+      "id": "biz:paper:content",
+      "row": "biz:row:paper",
+      "column": "biz:col:content",
+      "rating": "△",
+      "ratingLabel": "補助",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "売れるのは答えた問いが読者自身の仕事の問いのときだけで、有料の実績はまだ無い。",
+      "next": "受け皿のカードなし。教科書型の判定後に問いを選ぶ"
+    },
+    {
+      "id": "biz:paper:data",
+      "row": "biz:row:paper",
+      "column": "biz:col:data",
+      "rating": "○",
+      "ratingLabel": "条件つき",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "結論は無料にし、再現手順・データ辞書・加工済み CSV / JSON・検証 manifest を再現パックとして売る案で、価格・販売数は未検証である。",
+      "next": "開始条件: 用途と購入需要を確かめてから（収益化戦略 §3.4）。作り方型のデータ販売と中身が重なる"
+    },
+    {
+      "id": "biz:howto:ads",
+      "row": "biz:row:howto",
+      "column": "biz:col:ads",
+      "rating": "△",
+      "ratingLabel": "補助",
+      "states": [{ "kind": "seen", "label": "見えている" }],
+      "evidence": "サイトの Claude Code 連載ブログの閲覧は 28 日で 25（全体の 0.06%）で、サイトの読者と作り方型の読者はほとんど重ならない。",
+      "next": "集客はサイトではなく note の中で行う（収益化戦略 §3.5）"
+    },
+    {
+      "id": "biz:howto:content",
+      "row": "biz:row:howto",
+      "column": "biz:col:content",
+      "rating": "◎",
+      "ratingLabel": "実績あり",
+      "states": [
+        { "kind": "seen", "label": "売れた" },
+        { "kind": "open", "label": "継続は未検証" }
+      ],
+      "evidence": "売れた実績はこのマスだけで、e-Stat × Claude Code の記事の 2 件が確定している（件数と金額の食い違いは注記を参照）。",
+      "judgments": [
+        { "picture": "1 商品の 4 週の実売の積み上げ（商品を決めた日から）", "ref": { "kind": "pilot", "id": "knowhow-product" } }
+      ]
+    },
+    {
+      "id": "biz:howto:data",
+      "row": "biz:row:howto",
+      "column": "biz:col:data",
+      "rating": "○",
+      "ratingLabel": "条件つき",
+      "states": [{ "kind": "open", "label": "未検証" }],
+      "evidence": "テンプレート・スクリプト・再現手順のファイル一式で、論文型の再現パックと中身が重なるのでどちらの行で売るかを 1 つに決める。",
+      "next": "開始条件: コンテンツ販売で 1 商品が売れてから"
+    }
+  ],
+  "premises": [
+    {
+      "id": "biz:premise:revenue-breakdown",
+      "title": "売上を内訳つきで測れているか",
+      "state": { "kind": "unknown", "label": "判定不能" },
+      "evidence": "週次収益は W40〜W43 の 4 週続けて判定不能で、KDP は再ログイン待ち、土曜の記録が develop に届いていなかった。",
+      "judgments": [
+        { "picture": "週次収益の内訳 4 源が全部埋まった表", "ref": { "kind": "backlog", "id": "MEASUREMENT-MAC-DIRECT-01" } }
+      ]
+    },
+    {
+      "id": "biz:premise:reach-line",
+      "title": "「届いた」と言える線があるか",
+      "state": { "kind": "undecided", "label": "未決" },
+      "evidence": "運営費は月 ¥1,556〜1,846 で決まっているが、工数の時間単価・上限は未決である（§3.4 は開始前に決めると定める）。"
+    },
+    {
+      "id": "biz:premise:effort-focus",
+      "title": "工数がイシューに向いているか",
+      "state": { "kind": "seen", "label": "見えている" },
+      "evidence": "10 月の Must は W41・W42 が 1/2 で、W44 は計画なし、W43 は計画外のコミットが 273 件だった。"
+    }
+  ],
+  "storyline": {
+    "steps": [
+      {
+        "key": "空",
+        "kind": "事実",
+        "title": "集めているのは参照型、売れたのは作り方型だけ",
+        "points": [
+          "検索クリックは 4 週で +48%。流入の大半はランキング（参照型）",
+          "参照型の有料記事 47 本は ¥0。売れたのは作り方型（e-Stat × Claude Code × 自治体の統計業務）で、統計の内容で売れた実績はまだ無い",
+          "AdSense は週 ¥210、A8・楽天は 10 月の成約 0。週次収益は 4 週続けて判定不能"
+        ]
+      },
+      {
+        "key": "雨",
+        "kind": "意味",
+        "title": "型によって回収の仕方が違い、払う理由は「時間が減る」こと",
+        "points": [
+          "参照型は売れないので広告で回収するしかなく、今の効率では 12〜16 倍の PV が要る（参照 × 広告）",
+          "統計の内容で払う理由がありそうなのは、覚える時間・まとめる時間が減る教科書型とデータ。ただし証拠はまだ無い。行政実務の需要もここに入る（教科書 × 販売・データ）",
+          "論文型は、問いが読者自身の仕事の問いになったときだけ売れる（論文 × 販売）",
+          "作り方型の読者はサイトではなく note にいる。サイトの流入とは別に集める（作り方 × 広告）",
+          "計器が戻らないと、どのマスも判定日に答えが出ない（前提）"
+        ]
+      },
+      {
+        "key": "傘",
+        "kind": "打ち手",
+        "title": "参照型で集め、作り方型で売り、論文型で信頼を作る",
+        "points": [
+          "記録の到達と KDP・note の売上計測を毎週の先頭に置く（前提）",
+          "参照型は売らずに広告に絞り、本文の枠を優先して効率を上げる（参照 × 広告）",
+          "教科書型の有料を 1 本ずつ試し、結果で次の 1 本を決める（教科書 × 販売）",
+          "作り方型の有料を 1 商品決めて 4 週測る。売れた実績がある唯一の行なので、重点の候補にする（作り方 × 販売）",
+          "データは製造品出荷額で判定し、行政向けは作る前に聞き取り 3 件（参照・教科書 × データ）",
+          "論文型は無料のまま出し、仕事の問いに答えるものだけ有料の候補にする（論文型）",
+          "やらない：参照型の有料化、アフィリエイトの枠の拡大、SNS の新媒体"
+        ]
+      }
+    ],
+    "summary": "stats47 は参照型で人を集め、作り方型で売り、論文型で信頼をつくる。統計の内容（教科書型・データ）が「時間が減る」ことで買われるかを確かめる。"
+  },
+  "notes": [
+    {
+      "id": "biz:note:sold-count",
+      "observedAt": "2026-11-05",
+      "text": "売れた note の件数と中身が文書ごとに食い違う。vault の販売実績台帳は 2 件 ¥600、02_収益化戦略.md §3.5 は 3 件 ¥900、KNOWHOW-QA-BOARD-01 は Ollama オフライン 1 件を含む。e-Stat × Claude Code の 2 件は確定している。",
+      "cells": ["biz:howto:content"]
+    },
+    {
+      "id": "biz:note:fiscal-peer",
+      "observedAt": "2026-11-05",
+      "text": "NOTE-FISCAL-PEER-SALES-01 の財政比較 2 本は「コードを書く層 / 書かない層」の比較で、作り方型に近く、教科書型の販売の検証にはならない。",
+      "cells": ["biz:textbook:content"]
+    },
+    {
+      "id": "biz:note:kdp-account",
+      "observedAt": "2026-11-05",
+      "text": "KDP の 7〜9 月 ¥17,780（vault memos/家計/収入_2026.csv）は doboku-note と共用のアカウントで、stats47 の本の分が分かっていない。分かるまで「参照 × 販売 ✕」は保留扱いにする。",
+      "cells": ["biz:reference:content"]
+    }
+  ]
+}

@@ -120,6 +120,8 @@ primary_agent: strategy-advisor
    重点領域の KPI に紐づかない施策から `improvement-triage` に判定・backlog 降格を依頼し、上限内に戻す。
    `[target:]` の無い施策は、根拠を付けて target を書くか backlog へ降格するかを決める（放置すると永久に判定できない）。
 
+4. **主イシューと仮説を見直す**: 管理画面 `/strategy/issue-map` と `data/business/issue-map.json` の `issue`・`storyline` を読み、前月の判定で主イシューや仮説が変わるかを確かめる。実測が仮説を崩していれば `.claude/rules/evidence-based-judgment.md` に従って台帳を更新し、根拠を月次計画の「現状サマリー」に 1 行で書く。4 型 × 3 収益源の構成を変えるときはオーナーの判断を取る。マップの中身は月次計画へ写さず、マスの ID で参照する。
+
 ### Phase 3: 月次計画の組み立て
 
 各重点テーマについて:
