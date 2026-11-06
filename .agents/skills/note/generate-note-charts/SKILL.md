@@ -66,15 +66,7 @@ const rows = payload.rows
 
 #### 方法 A: 同梱スクリプト（推奨）
 
-散布図は同梱スクリプトで JSON 設定ファイルから生成できる。
-
-**散布図:**
-
-```bash
-node "${CLAUDE_SKILL_DIR}/scripts/scatter.js" config.json output.svg
-```
-
-設定ファイルの書式は [scatter.js のヘッダコメント](scripts/scatter.js) を参照。
+統計の図は全媒体で同じ型から作る。散布図も `generate-article-charts` の型で描き、別の描画を持たない (正本は型の台帳 `data/content-operations/image-templates.json`)。
 
 **カバー画像は担当外:**
 
@@ -134,7 +126,6 @@ node "${CLAUDE_SKILL_DIR}/scripts/svg-to-png.js" docs/31_note記事原稿/<slug>
 |------|----------|
 | 色・フォント・サイズ規約 | [reference/design-system.md](reference/design-system.md) |
 | チャート種別の選び方 | [reference/chart-patterns.md](reference/chart-patterns.md) |
-| 散布図スクリプト | [scripts/scatter.js](scripts/scatter.js) |
 | 旧カバーテンプレート（実行禁止・履歴のみ） | [scripts/cover-template.js](scripts/cover-template.js) |
 | SVG→PNG 変換 | [scripts/svg-to-png.js](scripts/svg-to-png.js) |
 | 完成例 SVG | [examples/](examples/) |

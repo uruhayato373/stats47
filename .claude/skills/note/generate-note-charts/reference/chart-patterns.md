@@ -34,7 +34,7 @@
 
 | チャート | 生成方法 | viewBox | 備考 |
 |----------|----------|---------|------|
-| 散布図 | `scripts/scatter.js` | 600×540 | JSON 設定から自動生成 |
+| 散布図 | `generate-article-charts` の型 | 1080×1350 | 全媒体で同じ型 |
 | カバー画像 | `scripts/cover-template.js` | 1280×670 | テンプレートをコピーして編集 |
 | 横棒グラフ | `@stats47/svg-builder` | 960×624 | `generateBarChartSvg` |
 | タイルマップ | `@stats47/svg-builder` | 720×720 | `generateChoroplethSvg`（寸法の正典は `blog-svg-chart-standards.md` §5） |
