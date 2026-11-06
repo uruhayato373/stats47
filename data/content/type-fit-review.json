@@ -1,0 +1,482 @@
+{
+  "version": 1,
+  "observedAt": "2026-11-06",
+  "gscWeeks": [
+    "2026-W40",
+    "2026-W41",
+    "2026-W42",
+    "2026-W43"
+  ],
+  "dataNote": "公開ブログの本文の信号と GSC のクリックから作る処置の案。items は作り直しで置き換わり、decisions は人が書いて残す。note の有料本文は読まない。",
+  "articlesRead": 848,
+  "articlesUnobserved": 246,
+  "items": [
+    {
+      "id": "blog:annual-sales-amount-prefecture-gap",
+      "title": "商業の販売額で東京都が突出するのはなぜか？",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 0
+    },
+    {
+      "id": "blog:annual-sunshine-duration-prefecture-gap",
+      "title": "日照時間1位はなぜ高知?日本海側との差",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 73,
+      "impressions": 3831
+    },
+    {
+      "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "title": "日照時間が長い県は保険金も高い?",
+      "type": "type:paper",
+      "proposal": "retire",
+      "signals": [
+        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
+      ],
+      "clicks": 0,
+      "impressions": 6
+    },
+    {
+      "id": "blog:beef-unmarried-ratio",
+      "title": "牛肉を食べる県は未婚が少ない?",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
+      "clicks": 0,
+      "impressions": 125
+    },
+    {
+      "id": "blog:designated-difficult-disease-prefecture-gap",
+      "title": "指定難病の受給者数はなぜ都市に多いのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 14,
+      "impressions": 612
+    },
+    {
+      "id": "blog:dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "title": "共働きが多い県ほど家は広い、その理由は?",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:dual-income-house-size",
+      "clicks": 0,
+      "impressions": 356
+    },
+    {
+      "id": "blog:engineer-telework-prefecture",
+      "title": "エンジニアがリモートで働ける県・働けない県、テレワーク率は最大6倍差｜なぜ地方ほど在宅勤務が広がらないのか (2022)",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 8,
+      "impressions": 362
+    },
+    {
+      "id": "blog:engineer-vs-professions-income",
+      "title": "ソフトウェアエンジニアの年収は専門職で中位｜医師1443万 vs ソフト508万、年収を左右する「職種の壁」 (2023)",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 0,
+      "impressions": 14
+    },
+    {
+      "id": "blog:foreign-resident-population-prefecture-gap",
+      "title": "外国人住民が最も多い都道府県はどこか？",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 0,
+      "impressions": 0
+    },
+    {
+      "id": "blog:geothermal-power-plant-count-prefecture-gap",
+      "title": "地熱発電「33都府県で0件」の意味、FIT導入94件を読む",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 18,
+      "impressions": 816
+    },
+    {
+      "id": "blog:habitable-area-land-use",
+      "title": "土地が少ない県ほど効率的に使っている逆説",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 74,
+      "impressions": 12117
+    },
+    {
+      "id": "blog:highschool-starting-salary-gap",
+      "title": "最低賃金トップの東京が高卒初任給で三重に負ける理由",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 1,
+      "impressions": 326
+    },
+    {
+      "id": "blog:inbound-overnight-regional-gap",
+      "title": "外国人宿泊の67%が上位4都道府県に集中",
+      "type": "type:reference",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:overnight-guests-inbound-recovery",
+      "clicks": 0,
+      "impressions": 71
+    },
+    {
+      "id": "blog:kochi-municipal-finance",
+      "title": "高知県34市町村、なぜ借金比率がマイナスの町があるのか",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 8,
+      "impressions": 358
+    },
+    {
+      "id": "blog:minimum-wage-increase-rate-prefecture-gap",
+      "title": "最低賃金はなぜ東京1163円・秋田951円?｜上昇率は地方が逆転する14年",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある",
+        "言える範囲の説明が無い"
+      ],
+      "mergeWith": "blog:minimum-wage-gap-regional-economy",
+      "clicks": 0,
+      "impressions": 37
+    },
+    {
+      "id": "blog:municipality-population-decline-tiers",
+      "title": "人口1割減の街、割合1位は北海道ではない?",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:census-2025-population-change-rate-prefecture",
+      "clicks": 0,
+      "impressions": 181
+    },
+    {
+      "id": "blog:national-pension-payment-rate-prefecture-gap",
+      "title": "国民年金の納付率、島根と大阪でなぜ17ポイント違うのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 9,
+      "impressions": 576
+    },
+    {
+      "id": "blog:nuclear-power-plant-count-prefecture-gap",
+      "title": "原発の「0か所」は施設なし？33基と15発電所の違い",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 7,
+      "impressions": 2619
+    },
+    {
+      "id": "blog:park-green-space-gap",
+      "title": "自然豊かな滋賀に国立公園はゼロ──3指標で変わる47都道府県の「緑」の本当の姿",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 15,
+      "impressions": 2795
+    },
+    {
+      "id": "blog:population-density-urbanization",
+      "title": "埼玉が昼夜人口比率で全国最下位の理由──高密度なのに昼間だれもいない",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 50,
+      "impressions": 8470
+    },
+    {
+      "id": "blog:pork-consumption-expenditure",
+      "title": "豚肉消費、新潟が最多3.9万円なのに、なぜ東京の隣・茨城が最少なのか (2024年)",
+      "type": "type:reference",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:pork-consumption-quantity",
+      "clicks": 0,
+      "impressions": 112
+    },
+    {
+      "id": "blog:precipitation-snow-regional-gap",
+      "title": "「雨が多い」と「雨の日が多い」は別物──47都道府県を4タイプに分類すると見えてくること",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 241,
+      "impressions": 27650
+    },
+    {
+      "id": "blog:railway-theme-overview",
+      "title": "鉄道3指標でみる県差、沖縄はなぜ特異なのか",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 46,
+      "impressions": 2212
+    },
+    {
+      "id": "blog:real-disposable-income-vs-per-capita-social-welfare",
+      "title": "所得が低い県ほど福祉費が高いのはなぜ?",
+      "type": "type:paper",
+      "proposal": "retire",
+      "signals": [
+        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
+      ],
+      "clicks": 0,
+      "impressions": 8
+    },
+    {
+      "id": "blog:rice-harvest-volume-prefecture-gap",
+      "title": "日本の米作はなぜ東北・北陸に集中するのか",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 399,
+      "impressions": 37433
+    },
+    {
+      "id": "blog:road-length-per-km2-vs-residential-building-starts",
+      "title": "道路密度が高い県は住宅着工も多いのか",
+      "type": "type:paper",
+      "proposal": "retire",
+      "signals": [
+        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
+      ],
+      "clicks": 0,
+      "impressions": 0
+    },
+    {
+      "id": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
+      "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
+      "type": "type:paper",
+      "proposal": "retire",
+      "signals": [
+        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
+      ],
+      "clicks": 0,
+      "impressions": 0
+    },
+    {
+      "id": "blog:software-engineer-income-gap",
+      "title": "ソフトウェアエンジニアの年収、最も高い県は東京じゃない？京都608万 vs 沖縄402万、1.5倍差の真因 (2023)",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 0,
+      "impressions": 24
+    },
+    {
+      "id": "blog:system-consultant-income-ranking",
+      "title": "システムコンサルタントの年収トップは秋田、東京は伸び悩む？なぜ高年収IT職は大都市に偏らないのか (2023)",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある",
+        "言える範囲の説明が無い"
+      ],
+      "mergeWith": "blog:engineer-vs-professions-income",
+      "clicks": 0,
+      "impressions": 149
+    },
+    {
+      "id": "blog:towns-villages-larger-than-cities",
+      "title": "市より人口が多い町があるのはなぜか",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:prefecture-population-city-concentration",
+      "clicks": 0,
+      "impressions": 34
+    },
+    {
+      "id": "blog:truck-driver-2024-crisis",
+      "title": "タクシーは2.5倍・バスは2倍・トラックは1.7倍──運輸3職種の地域格差が違う理由",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 0,
+      "impressions": 34
+    },
+    {
+      "id": "blog:tuna-medical-expense",
+      "title": "まぐろを食べる県は医療費が安い?",
+      "type": "type:paper",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:tuna-consumption-quantity-vs-national-medical-expense-per",
+      "clicks": 0,
+      "impressions": 203
+    },
+    {
+      "id": "blog:vacant-housing-rate-vs-dependent-population-index",
+      "title": "空き家が多い県は高齢者も多い?",
+      "type": "type:paper",
+      "proposal": "retire",
+      "signals": [
+        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
+      ],
+      "clicks": 0,
+      "impressions": 0
+    },
+    {
+      "id": "blog:vacant-housing-vs-land-price",
+      "title": "空き家が多い県ほど地価は下がる?",
+      "type": "type:paper",
+      "proposal": "retire",
+      "signals": [
+        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
+      ],
+      "clicks": 0,
+      "impressions": 5
+    },
+    {
+      "id": "blog:voluntary-car-insurance-rate-bodily-injury-prefecture-gap",
+      "title": "任意自動車保険はなぜ都市部で高いのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 545
+    },
+    {
+      "id": "blog:voter-turnout-house-single-prefecture-gap",
+      "title": "衆院選の投票率、なぜ山形と山口で15ポイント違うのか",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 1,
+      "impressions": 50
+    },
+    {
+      "id": "blog:water-sewage-crisis",
+      "title": "上水道は98%完備、下水道は徳島22%──同じ水インフラで77ポイントの格差が生じた理由",
+      "type": "type:paper",
+      "proposal": "rewrite",
+      "signals": [
+        "言える範囲の説明が無い"
+      ],
+      "clicks": 1,
+      "impressions": 121
+    },
+    {
+      "id": "blog:yato-yatsu-place-name-boundary",
+      "title": "「谷戸」と「谷津」、境界はどこにあるのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 20,
+      "impressions": 379
+    }
+  ],
+  "decisions": [
+    {
+      "id": "blog:real-disposable-income-vs-per-capita-social-welfare",
+      "action": "keep",
+      "decidedAt": "2026-11-06",
+      "reason": "2 つの指標に実際の結びつきがあり、読者の問いとして成り立つ。クリックが無いだけでは撤去しない"
+    },
+    {
+      "id": "blog:vacant-housing-rate-vs-dependent-population-index",
+      "action": "keep",
+      "decidedAt": "2026-11-06",
+      "reason": "2 つの指標に実際の結びつきがあり、読者の問いとして成り立つ。クリックが無いだけでは撤去しない"
+    },
+    {
+      "id": "blog:vacant-housing-vs-land-price",
+      "action": "keep",
+      "decidedAt": "2026-11-06",
+      "reason": "2 つの指標に実際の結びつきがあり、読者の問いとして成り立つ。クリックが無いだけでは撤去しない"
+    },
+    {
+      "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "action": "retire",
+      "decidedAt": "2026-11-06",
+      "reason": "オーナー決定。2026-08-30 公開で全期間クリック 0、他の記事・SNS・note・問いの台帳からの参照 0 件"
+    },
+    {
+      "id": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
+      "action": "retire",
+      "decidedAt": "2026-11-06",
+      "reason": "オーナー決定。2026-08-30 公開で全期間クリック 0、他の記事・SNS・note・問いの台帳からの参照 0 件"
+    },
+    {
+      "id": "blog:road-length-per-km2-vs-residential-building-starts",
+      "action": "retire",
+      "decidedAt": "2026-11-06",
+      "reason": "オーナー決定。2026-08-30 公開で全期間クリック 0、他の記事・SNS・note・問いの台帳からの参照 0 件"
+    }
+  ]
+}

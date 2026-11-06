@@ -78,6 +78,8 @@ function storeInTempRoot(seed) {
   fs.mkdirSync(path.join(root, 'config'), { recursive: true });
   for (const f of ['datasets.mjs', 'paths.mjs']) fs.copyFileSync(path.join(repo, 'config', f), path.join(root, 'config', f));
   fs.mkdirSync(path.join(root, 'data/sns'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'data/content'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'data/content/content-types.json'), JSON.stringify({ rules: { snsDomains: { ranking: 'type:reference' } }, assignments: [] }));
   fs.writeFileSync(path.join(root, 'data/sns/posts.json'), JSON.stringify(seed));
   const store = require(path.join(root, '.claude/scripts/lib/sns-posts-store.cjs'));
   const read = () => JSON.parse(fs.readFileSync(path.join(root, 'data/sns/posts.json'), 'utf8'));
@@ -122,6 +124,18 @@ test('insert は承認待ち (pending) を既定にし、最上位の古い next
   assert.equal(saved.nextId, undefined);
   assert.equal(saved.total_count, undefined);
   assert.equal(saved._meta.nextId, 2);
+});
+
+test('型の決まらない domain の下書きは足せず、ブログを指す投稿は足せる', () => {
+  const { store } = storeInTempRoot({ _meta: { count: 0, nextId: 1 }, posts: [] });
+  assert.throws(() => store.insert({ ...base, domain: 'unknown' }), /型が決まっていません/);
+  assert.equal(store.insert({ ...base, domain: 'blog', content_key: 'q' }).domain, 'blog');
+});
+
+test('投稿済みの記録は型が決まらなくても落とさない (投稿の記録を失わないため。検査は content-types:check が担う)', () => {
+  const { store } = storeInTempRoot({ _meta: { count: 0, nextId: 1 }, posts: [] });
+  const row = store.insert({ ...base, domain: 'unknown', status: 'posted', post_url: 'https://x.com/a/status/1' });
+  assert.equal(row.domain, 'unknown');
 });
 
 test('updateMany は 1 件でも検査に落ちれば何も書かない (backfill の途中状態を残さない)', () => {

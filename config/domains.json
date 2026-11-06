@@ -41,7 +41,6 @@
       "nav": [
         { "label": "販売状態", "href": "/product/status", "kind": "actions" },
         { "label": "note 商品企画", "href": "/product/note-plan", "kind": "inventory" },
-        { "label": "記事・投稿の改善", "href": "/product/content-quality", "kind": "actions" },
         { "label": "チャネル別", "channels": "product", "kind": "actions" },
         { "label": "売上", "href": "/revenue", "kind": "results" }
       ]
@@ -83,16 +82,29 @@
       ]
     },
     {
+      "id": "content",
+      "label": "コンテンツ",
+      "role": "つくる",
+      "manages": "4 つの型の展開・問い・図と画像・記事と投稿の改善・参考文献",
+      "nav": [
+        { "label": "展開状況", "href": "/content/expansion", "kind": "inventory" },
+        { "label": "問いの進み具合", "href": "/content/questions", "kind": "actions" },
+        { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
+        { "label": "記事・投稿の改善", "href": "/product/content-quality", "kind": "actions" },
+        { "label": "参考文献管理", "href": "/content/references", "kind": "inventory" },
+        { "label": "型の見本", "href": "/ops/image-templates", "kind": "assets" },
+        { "label": "画像ライブラリ", "href": "/ops/image-library", "kind": "assets" }
+      ]
+    },
+    {
       "id": "data",
       "label": "データ",
       "role": "つくる",
-      "manages": "ランキング・テーマ・Geo・データ品質・出典と参考文献",
+      "manages": "ランキング・テーマ・Geo・データ品質・出典",
       "nav": [
-        { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
         { "label": "Geo 分析", "href": "/data/geo", "kind": "inventory" },
         { "label": "月次データの台帳", "href": "/data/monthly", "kind": "inventory" },
         { "label": "内訳の台帳", "href": "/data/compositions", "kind": "inventory" },
-        { "label": "参考文献管理", "href": "/content/references", "kind": "inventory" },
         { "label": "調査カタログ", "href": "/research", "kind": "inventory" },
         { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" },
         { "label": "指標を選ぶ視点", "href": "/quality/theme-viewpoints", "kind": "results" }
@@ -109,9 +121,7 @@
         { "label": "CI ワークフロー", "href": "/ops/workflows", "kind": "results" },
         { "label": "Mac の定期実行", "href": "/ops/mac-schedule", "kind": "results" },
         { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
-        { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
-        { "label": "型の見本", "href": "/ops/image-templates", "kind": "assets" },
-        { "label": "画像ライブラリ", "href": "/ops/image-library", "kind": "assets" }
+        { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" }
       ]
     }
   ],

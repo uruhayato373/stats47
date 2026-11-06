@@ -152,7 +152,9 @@ jobs:
         run: |
           npx tsx packages/data-configs/scripts/check-metric-contract.ts
           npm run content:check
+          node .claude/scripts/content-types/check-content-types.mjs
           npm run test:issue-graph
+          npm run content-types:test
           npm run test:analysis-frame
         continue-on-error: false
 

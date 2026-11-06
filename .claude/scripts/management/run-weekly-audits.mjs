@@ -38,6 +38,7 @@ const AUDITS = [
   { id: "note-product-cards", label: "note の商品カード", timeout: 30 },
   { id: "kdp-search-ranks", label: "KDP の本の Kindle 検索順位", timeout: 10 },
   { id: "blog-remediation", label: "ブログの是正キュー・公開済み原稿の掃除", timeout: 25 },
+  { id: "content-type-fit", label: "4 型の検査・型に合っていない記事の案", timeout: 10 },
   { id: "consistency", label: "agent・skill・文書・公開 snapshot の整合", timeout: 10 },
 ];
 

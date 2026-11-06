@@ -21,7 +21,7 @@ test("正本の domains.json は error 0 で、全領域とメニュー項目を
     pathExists: (p) => fs.existsSync(path.join(ROOT, p)),
   });
   assert.deepEqual(result.errors, []);
-  assert.equal(result.domainCount, 8);
+  assert.equal(result.domainCount, 9);
   assert.ok(result.navCount > 0);
 });
 

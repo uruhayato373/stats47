@@ -5,6 +5,8 @@ description: note 記事（A/B/C/D シリーズ）の意味レビュー専任。
 model: opus
 ---
 
+**4 型の審査 (必須)**: 記事の型 (`data/content/content-types.json`) の約束を満たすかも審査する。約束と落とす例は `.claude/rules/content-type-standards.md`。
+
 # Note Critic Agent
 
 note.com 記事の品質レビューを専任する agent。`edit-note-draft` スキルが「修正案提案」を担うのに対し、

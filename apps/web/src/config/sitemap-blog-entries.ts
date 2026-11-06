@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-11-05
- * 件数: blog 848 / tag 70 / survey 149
+ * 最終生成日: 2026-11-06
+ * 件数: blog 845 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -48,7 +48,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "annual-precipitation-rainy-season-gap", lastModified: "2026-06-07" },
   { slug: "annual-sales-amount-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "annual-sunshine-duration-prefecture-gap", lastModified: "2026-09-02" },
-  { slug: "annual-sunshine-duration-vs-auto-liability-insurance-amount", lastModified: "2026-08-30" },
   { slug: "aomori-food-culture", lastModified: "2026-07-10" },
   { slug: "apple-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "aquaculture-harvest-prefecture-gap", lastModified: "2026-10-28" },
@@ -680,7 +679,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "road-infrastructure-density", lastModified: "2026-03-06" },
   { slug: "road-length-per-km2-vs-average-road-traffic-volume", lastModified: "2026-08-30" },
   { slug: "road-length-per-km2-vs-local-special-grant-prefecture", lastModified: "2026-08-31" },
-  { slug: "road-length-per-km2-vs-residential-building-starts", lastModified: "2026-08-30" },
   { slug: "road-total-length-vs-core-agricultural-workers", lastModified: "2026-10-28" },
   { slug: "roadside-station-count-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "roadside-station-count-vs-forest-road-length", lastModified: "2026-08-30" },
@@ -716,7 +714,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "shochu-consumption-prefecture-gap", lastModified: "2026-06-07" },
   { slug: "shochu-expenditure-vs-sake-ranking", lastModified: "2026-07-10" },
   { slug: "shrimp-consumption-quantity-prefecture-gap", lastModified: "2026-09-01" },
-  { slug: "shumai-consumption-expenditure-vs-jr-freight-shipment", lastModified: "2026-08-30" },
   { slug: "shumai-consumption-expenditure-vs-main-household-ratio-main", lastModified: "2026-08-29" },
   { slug: "sixth-industry-direct-sales", lastModified: "2026-03-06" },
   { slug: "sleep-avg-time-female-prefecture-gap", lastModified: "2026-10-28" },

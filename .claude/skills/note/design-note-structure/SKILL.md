@@ -5,6 +5,8 @@ description: note 記事（B/C/D シリーズ）の構成を設計する。Use w
 primary_agent: note-manager
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 note 記事（B/C/D シリーズ）の構成を設計する。シリーズに応じた構成テンプレートを適用する。
 
 > **A シリーズ（ランキング記事・量産型）はこの4ステップワークフローの対象外です。** A シリーズは自動生成スキルで処理するため、validate → design → write → edit の手順は不要です。

@@ -268,6 +268,16 @@ export const DATASETS = [
     schema: "data/content/schema/analyses.schema.json",
     refs: [{ field: "analyses[].issue", to: "content.issues", key: "issues[].id" }],
   }),
+  d("content.types", "data/content/content-types.json", "config", "data", "data", "コンテンツの 4 型の定義と、ページ・投稿・商品を型へ振り分ける規則。ID と規則だけを持ち、件数は持たない", {
+    schema: "data/content/schema/content-types.schema.json",
+    refs: [
+      ...["pageKinds.*", "blogSlugSuffixes.*", "blogSlugInfixes.*", "noteVerticals.*", "noteSeries.*", "snsDomains.*", "kindle"].map((f) => ({ field: `rules.${f}`, to: "content.types", key: "types[].id" })),
+      { field: "assignments[].type", to: "content.types", key: "types[].id" },
+    ],
+  }),
+  d("content.type-fit-review", "data/content/type-fit-review.json", "ledger", "data", "data", "型に合っていない記事の処置の案 (機械) と決定 (人)。npm run content-types:fit が案を作り直し、決定は残す", {
+    schema: "data/content/schema/type-fit-review.schema.json",
+  }),
   d("content.figures", "data/content/figures.json", "config", "data", "data", "図の台帳。分析と型に結び、同じ図の配信先を持つ。データは写さない", {
     schema: "data/content/schema/figures.schema.json",
     refs: [
@@ -436,7 +446,10 @@ export const DATASETS = [
   d("business-plan.history", "data/business-plan/history/{date}.json", "series", "strategy", "data", "事業計画の派生状態の履歴", { retain: "business-plan" }),
   d("business.experiments", "data/business/experiments.json", "ledger", "strategy", "data", "実験の台帳 (PDCA)", { schema: "config/schema/business.experiments.schema.json" }),
   d("business.pilot-board", "data/business/pilot-board.json", "ledger", "strategy", "data", "収益化 pilot の判定ボードの入力 (開始日・窓・判定に使う指標)", { schema: "config/schema/business.pilot-board.schema.json" }),
-  d("business.issue-map", "data/business/issue-map.json", "ledger", "strategy", "data", "事業イシューマップの入力 (主イシュー・仮説・前提・4 型 × 3 収益源の 12 マス・ストーリーライン・注記)。判定日と進み具合は写さず ID で台帳を指す", { schema: "config/schema/business.issue-map.schema.json" }),
+  d("business.issue-map", "data/business/issue-map.json", "ledger", "strategy", "data", "事業イシューマップの入力 (主イシュー・仮説・前提・4 型 × 3 収益源の 12 マス・ストーリーライン・注記)。判定日と進み具合は写さず ID で台帳を指す", {
+    schema: "config/schema/business.issue-map.schema.json",
+    refs: [{ field: "rows[].contentType", to: "content.types", key: "types[].id", copies: ["title", "question", "examples"] }],
+  }),
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),

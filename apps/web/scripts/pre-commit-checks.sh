@@ -112,6 +112,14 @@ if [ -n "$STAGED_DOCS" ]; then
   fi
 fi
 
+# 4 types of content: every article, note and post must resolve to a type before it is committed.
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(contents/blog/|data/note/articles\.json$|data/sns/posts\.json$|data/content/content-types\.json$|\.claude/scripts/content-types/)'; then
+  if ! (cd "$GUARD_ROOT" && npm run content-types:check); then
+    echo "コンテンツの型が決まっていません (.claude/rules/content-type-standards.md)"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # Canonical metric and content contracts: reject schema, ID and generated-index drift.
 if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content)/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog)\.ts$|package\.json$)'; then
   if ! (cd "$GUARD_ROOT" && npm run metrics:check && npm run content:check); then
