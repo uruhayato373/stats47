@@ -36,7 +36,7 @@ Geo企画を一度きりの作業にせず、git TSカタログから無料閲�
 
 - `--content <contentId|all>`: 既定は`all`。launch orderで`geo-016 → geo-031 → geo-062 → geo-001`。
 - `--surfaces <csv>`: 既定は`geo,blog,x,note`。
-- `--publish`: R2、X、note、develop→mainを含む外部公開を許可する。無い場合は生成・監査・draft登録まで。
+- `--publish`: R2、X、noteの外部公開を許可する。無い場合は生成・監査・draft登録まで。develop→mainはオーナーの明示の指示があるときだけ行う。
 
 ## Phase 1: カタログとGeo証拠
 

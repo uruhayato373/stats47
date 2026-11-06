@@ -73,7 +73,7 @@ node .claude/scripts/instagram/generate-schedule.cjs \
    ```bash
    git add data/sns/instagram-wXX-schedule.json
    git commit -m "feat(instagram): WXX スケジュール追加"
-   # develop 経由で develop→main PR (通常デプロイフローに同乗)
+   # develop へ push すれば予約表は読まれる。main 宛ての PR は開かない
    ```
 
 4. 不足アセットがある場合:

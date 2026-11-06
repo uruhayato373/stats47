@@ -24,6 +24,7 @@ const DANGEROUS_PATTERNS = [
   // 並行エージェント / branch-workflow (コマンド先頭のみ照合し、commit メッセージ中の言及では止めない)
   { pattern: /(?:^|[;&|(\n]\s*)git\s+add\s+(?:\S+\s+)*(?:-A|--all|\.)(?=\s|$|[;&|)])/, reason: "git add -A / --all / . は禁止です (並行エージェントの WIP 混入防止)。対象ファイルを明示して add してください" },
   { pattern: /(?:^|[;&|(\n]\s*)git\s+push\b[^;&|\n]*\s(?:\S*:)?main(?=\s|$|[;&|)])/, reason: "main への直接 push は禁止です。develop→main は PR 経由のみ (.claude/rules/branch-workflow.md)" },
+  { pattern: /(?:^|[;&|(\n]\s*)gh\s+pr\s+(?:merge\b|create\b[^;&|\n]*--base[=\s]+main(?=\s|$|[;&|)]))/, reason: "main へのマージは本番反映の判断で、オーナーの明示の指示が要ります。npm run release:status で状況を報告して確認してください。指示があるときは OWNER_APPROVED_RELEASE=1 を先頭に付けて実行します (.claude/rules/branch-workflow.md)" },
 
   // シークレット漏洩
   { pattern: /cat\s+\.env/, reason: ".env ファイルの内容がコンソールに出力されます" },
@@ -46,7 +47,7 @@ const ADVISORY_PATTERNS = [
     context: [
       "[branch-workflow] develop→main は PR 経由のみ。main 直 push 禁止。",
       "commit 件名に skip-ci 系トークンを引用しない (run が 0 件になる)。merge 後に rebase しない。",
-      "本番反映 (deploy / main マージ) は outward-facing。明示指示が無ければ実行前に確認する。",
+      "main マージは本番反映の判断。オーナーの指示なしに PR を開かない・merge しない。本番に効く変更は 1 日 1 回にまとめる。PR が開いている間は develop へ push しない。状況は npm run release:status。",
       "正典: .claude/rules/branch-workflow.md (Read すると全文が載る)",
     ].join("\n"),
   },

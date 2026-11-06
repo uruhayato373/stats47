@@ -58,7 +58,7 @@
 - [ai content remediation queue](project_ai_content_remediation_queue.md) — ranking AIは9/8に2,166件done・残0を全量実測。追加12件R2 SHA一致、TS/KNOWN/R2/queue集合差分0。非阻害警告・意味レビュー範囲・課金条件は別記。canonical入力の回帰テストあり
 - [blog svg lineage enforcement](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
 - [commit in batches](feedback_commit_in_batches.md) — 確認で修正を重ねる間は毎回コミットしない。まとまりで 1 回
-- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
+- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — オーナーの指示なしに develop→main の PR を開かない・マージしない (hook が止める)。本番に効く変更は 1 日 1 回。状況は release:status
 - [cloudflare workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ/home featuredが空→wrangler.tomlのCLOUDFLARE_WORKERS="true"でR2読みskipを疑う。テーマはR2 values.json+force-dynamic
 - [dev server web only](feedback_dev_server_web_only.md) — dev は npm run dev:web。常駐は background + Ready の polling。R2 URL と S3 変数の継承を確かめてから画面監査。正典 local-environment.md
 - [blog auto publish reconcile limits](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。contents/blog=ephemeral outbox

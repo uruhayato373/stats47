@@ -8,6 +8,8 @@ primary_agent: devops-runner
 
 変更を develop → main (PR + CI 経由) へ反映して本番デプロイする。
 
+**オーナーの明示の指示があるときだけ実行する。** 最初に `npm run release:status` を実行し、案が `ask-owner` でなければ結果を報告して止まる (障害の修正でオーナーが指示したときを除く)。`gh pr create --base main` と `gh pr merge` には先頭に `OWNER_APPROVED_RELEASE=1` を付ける。指示なしに付けない。PR を開いたらマージまで develop へ push しない。正典 `.claude/rules/branch-workflow.md`「main へのマージは本番反映の判断」。
+
 ## ブランチ運用ルール
 
 ```
@@ -122,7 +124,7 @@ git status -s | grep -v "^??" | head             # 自分以外の tracked 変�
   git fetch origin main
   git rebase --onto origin/main <feature の分岐元 SHA> $CURRENT_BRANCH
   git push -u origin $CURRENT_BRANCH
-  gh pr create --base main --head $CURRENT_BRANCH --title "…" --body "…"
+  OWNER_APPROVED_RELEASE=1 gh pr create --base main --head $CURRENT_BRANCH --title "…" --body "…"
   ```
 
   この場合デプロイ後に `develop` が `main` より遅れるので、別途 `main → develop` を取り込んで同期する（並行セッションが落ち着いてから）。
@@ -229,7 +231,7 @@ git push origin develop
 ここで PR を作成 → `pr-quality-check.yml` の CI が自動発火する。
 
 ```bash
-gh pr create --base main --head develop --title "Release: <短い要約>" --body "$(cat <<'EOF'
+OWNER_APPROVED_RELEASE=1 gh pr create --base main --head develop --title "Release: <短い要約>" --body "$(cat <<'EOF'
 ## Summary
 - <1-3 行の要約>
 
@@ -259,7 +261,7 @@ PR URL を出力。CI が green になるまで次へ進まない。
 gh pr checks <PR_NUMBER> --watch || true
 
 # CI green を確認してマージ
-gh pr merge <PR_NUMBER> --merge
+OWNER_APPROVED_RELEASE=1 gh pr merge <PR_NUMBER> --merge
 ```
 
 **web / クラウド** (`gh` が無い。`curl` は使えない → 上記「実行環境の判定」):
