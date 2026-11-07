@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "kiwi-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "キウイフルーツ消費支出額",
+  "readerLabel": "キウイフルーツへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/kiwi-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug kiwi-consumption-expenditure-prefecture-gap --keys kiwi-consumption-expenditure --data-name kiwi-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-11-04T10:52:18.678Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

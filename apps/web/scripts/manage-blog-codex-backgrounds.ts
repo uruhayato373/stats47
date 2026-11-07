@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 
 import {
@@ -9,11 +9,10 @@ import {
   validateCodexBackgroundCatalog,
 } from './lib/blog-codex-background-workflow';
 import {
-  articleBackgroundAssetPath,
-  createArticleImagegenRequest,
-  ingestArticleBackgroundAsset,
   parseBlogArticleImageContext,
 } from './lib/blog-article-background';
+import { createFullbleedImagegenRequest, ingestFullbleedBackgroundAsset, hasLocalArticleBackground } from './lib/blog-fullbleed-background';
+import { BLOG_CODEX_BACKGROUND_BY_SLUG } from './data/blog-codex-background-catalog';
 import { SITE } from '@stats47/types';
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
@@ -60,8 +59,8 @@ async function loadArticleMarkdown(
 function writeArticleRequest(
   slug: string,
   markdown: string
-): ReturnType<typeof createArticleImagegenRequest> {
-  const request = createArticleImagegenRequest(
+): ReturnType<typeof createFullbleedImagegenRequest> {
+  const request = createFullbleedImagegenRequest(
     parseBlogArticleImageContext(slug, markdown)
   );
   const requestPath = join(
@@ -102,28 +101,11 @@ async function createArticleQueue(force: boolean): Promise<void> {
       };
     })
   );
-  const shaCounts = new Map<string, number>();
-  const firstSlugBySha = new Map<string, string>();
-  for (const state of states) {
-    if (state.sha256) {
-      shaCounts.set(state.sha256, (shaCounts.get(state.sha256) ?? 0) + 1);
-      if (!firstSlugBySha.has(state.sha256)) {
-        firstSlugBySha.set(state.sha256, state.slug);
-      }
-    }
-  }
   const targets = states.filter((state) => {
-    const localExists = existsSync(
-      resolve(PROJECT_ROOT, articleBackgroundAssetPath(state.slug))
-    );
-    return (
-      force ||
-      (!localExists &&
-        (state.source === 'shared' ||
-          (state.sha256 !== null &&
-            (shaCounts.get(state.sha256) ?? 0) > 1 &&
-            firstSlugBySha.get(state.sha256) !== state.slug)))
-    );
+    const localExists = hasLocalArticleBackground(PROJECT_ROOT, state.slug) || Boolean(BLOG_CODEX_BACKGROUND_BY_SLUG[state.slug]);
+    // Even --force must not replace an existing article illustration.
+    return !localExists && !(state.source === 'ai' && state.sha256) &&
+      (force || state.source === 'shared' || !state.sha256);
   });
   const requests = [];
   for (const { slug } of targets) {
@@ -226,7 +208,7 @@ async function main(): Promise<void> {
       slug,
       await loadArticleMarkdown(slug, args)
     );
-    const result = await ingestArticleBackgroundAsset({
+    const result = await ingestFullbleedBackgroundAsset({
       projectRoot: PROJECT_ROOT,
       context,
       inputPath: resolve(requiredArg(args, '--input')),

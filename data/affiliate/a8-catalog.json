@@ -13834,7 +13834,7 @@
       "epcYen": 222,
       "confirmRatePct": 20.31,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -13845,9 +13845,25 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T22:58:03.042Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:53.956Z"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-11-06T22:41:30.098Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
-      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "_priority": 20,
+      "_ce": 45.08819999999999,
+      "selectedForRegister": true,
+      "priority": 20
     },
     "s00000014783001": {
       "programId": "s00000014783001",
@@ -13887,7 +13903,7 @@
       "epcYen": 51,
       "confirmRatePct": 66.66,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -13898,9 +13914,69 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T22:58:25.038Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.009Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-06T22:41:41.259Z"
         }
       ],
-      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "_priority": 20,
+      "_ce": 33.9966,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_10-led-emeao_a8_001",
+        "title": "【累計お問合わせ数10万件突破！】＜LED照明工事＞業者ご紹介サービス【EMEAO ! 】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+DXWFQQ+2LHA+1TIYU9",
+        "programRef": "a8:s00000012115011",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www20.a8.net/svt/bgt?aid=261031037843&wid=001&eno=01&mid=s00000012115011006000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4BESU5+DXWFQQ+2LHA+1TIYU9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_10-led-emeao_a8_text_001",
+          "title": "【累計お問合わせ数10万件突破！】＜LED照明工事＞業者ご紹介サービス【EMEAO ! 】",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+DXWFQQ+2LHA+1TK94Y",
+          "programRef": "a8:s00000012115011",
+          "areaCode": null,
+          "vertical": "housing",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4BESU5+DXWFQQ+2LHA+1TK94Y",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
+        }
+      ]
     },
     "s00000024144003": {
       "programId": "s00000024144003",
@@ -14173,7 +14249,7 @@
       "epcYen": 7,
       "confirmRatePct": 33.33,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -14184,6 +14260,66 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T23:00:00.897Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.217Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-06T22:41:52.310Z"
+        }
+      ],
+      "_priority": 10,
+      "_ce": 2.3331,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_it-techclips_a8_001",
+        "title": "ITエンジニアのための転職エージェント【TechClipsエージェント】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+DZOQK2+3SWM+61Z81",
+        "programRef": "a8:s00000017743001",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=261031037846&wid=001&eno=01&mid=s00000017743001017000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4BESU5+DZOQK2+3SWM+61Z81",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_it-techclips_a8_text_001",
+          "title": "ITエンジニアのための転職エージェント【TechClipsエージェント】",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+DZOQK2+3SWM+5YJRM",
+          "programRef": "a8:s00000017743001",
+          "areaCode": null,
+          "vertical": "labor",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4BESU5+DZOQK2+3SWM+5YJRM",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
         }
       ]
     },
@@ -14531,7 +14667,7 @@
       "score": 0.44000000000000006,
       "rewardYen": 10500,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -14542,6 +14678,66 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T23:01:39.784Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.517Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-06T22:42:00.540Z"
+        }
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_2_a8_001",
+        "title": "プロパンガス料金を見直して最大2万円還元！【エネポケ】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+ER2ODU+5Y42+5ZMCH",
+        "programRef": "a8:s00000027749001",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=261031037892&wid=001&eno=01&mid=s00000027749001006000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4BESU5+ER2ODU+5Y42+5ZMCH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_2_a8_text_001",
+          "title": "プロパンガス料金を見直して最大2万円還元！【エネポケ】",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+ER2ODU+5Y42+5YJRM",
+          "programRef": "a8:s00000027749001",
+          "areaCode": null,
+          "vertical": "energy",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4BESU5+ER2ODU+5Y42+5YJRM",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
         }
       ]
     },
@@ -14555,7 +14751,7 @@
       "score": 0.44000000000000006,
       "rewardYen": 12000,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -14566,6 +14762,66 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T23:01:49.531Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.530Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-06T22:42:08.173Z"
+        }
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000026856001_a8_001",
+        "title": "東京都限定 初期費用ゼロで太陽光発電と蓄電池を設置！【ゼロスタート ソーラー】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+ERO3ZM+5R80+5YZ75",
+        "programRef": "a8:s00000026856001",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=261031037893&wid=001&eno=01&mid=s00000026856001003000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4BESU5+ERO3ZM+5R80+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_s00000026856001_a8_text_001",
+          "title": "東京都限定 初期費用ゼロで太陽光発電と蓄電池を設置！【ゼロスタート ソーラー】",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+ERO3ZM+5R80+5YJRM",
+          "programRef": "a8:s00000026856001",
+          "areaCode": null,
+          "vertical": "housing",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4BESU5+ERO3ZM+5R80+5YJRM",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
         }
       ]
     },
@@ -14652,7 +14908,7 @@
       "epcYen": 11,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -14663,6 +14919,66 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T23:02:08.957Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.582Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-06T22:42:47.222Z"
+        }
+      ],
+      "_priority": 10,
+      "_ce": 6.6,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_6-600_a8_001",
+        "title": "月額6,600円〜からのマイカーリース【リースナブル】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+ESUZ76+46IW+60OXD",
+        "programRef": "a8:s00000019508001",
+        "areaCode": null,
+        "vertical": "mobility",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=261031037895&wid=001&eno=01&mid=s00000019508001011000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4BESU5+ESUZ76+46IW+60OXD",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_6-600_a8_text_001",
+          "title": "月額6,600円〜からのマイカーリース【リースナブル】",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+ESUZ76+46IW+5YJRM",
+          "programRef": "a8:s00000019508001",
+          "areaCode": null,
+          "vertical": "mobility",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4BESU5+ESUZ76+46IW+5YJRM",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
         }
       ]
     },
@@ -14729,7 +15045,7 @@
       "rewardYen": 5455,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -14740,8 +15056,17 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T23:02:27.696Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.611Z"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000000076017": {
       "programId": "s00000000076017",
@@ -15172,7 +15497,7 @@
       "rewardRatePct": 20,
       "confirmRatePct": 100,
       "rewardType": "rate",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -15183,8 +15508,17 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-30T23:03:33.693Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.778Z"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000027484001": {
       "programId": "s00000027484001",
@@ -15793,7 +16127,7 @@
       "epcYen": 24,
       "confirmRatePct": 40.94,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -15804,8 +16138,15 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-11-03T06:20:25.076Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.968Z"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 9.8256
     },
     "s00000015142001": {
       "programId": "s00000015142001",
@@ -16082,7 +16423,7 @@
       "epcYen": 45,
       "confirmRatePct": 70.2,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -16093,8 +16434,15 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-11-03T06:20:15.827Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-11-06T22:40:54.926Z"
         }
-      ]
+      ],
+      "_priority": 20,
+      "_ce": 31.590000000000003
     },
     "s00000027734001": {
       "programId": "s00000027734001",
@@ -16576,5 +16924,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-03T06:48:58.563Z"
+  "updatedAt": "2026-11-06T22:42:47.343Z"
 }

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "metricDefinition": "note-dashboard-2026-09-08",
+  "account": "stats47",
+  "fetchedAt": "2026-11-06T22:39:15.086Z",
+  "period": {
+    "start": "2026-10-10",
+    "end": "2026-11-06"
+  },
+  "status": "incomplete",
+  "coverage": {
+    "complete": false
+  },
+  "articles": [],
+  "issues": [
+    {
+      "code": "collection_failed",
+      "message": "Command failed: /Users/minamidaisuke/.browser-use-env/bin/browser-use --session note-metrics-95683-1794004695508 --json --headed --profile Profile 5 open https://note.com/settings/account\n"
+    }
+  ]
+}

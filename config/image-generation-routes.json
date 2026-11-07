@@ -2,11 +2,12 @@
   "schemaVersion": 1,
   "dataNote": "AI で描く画像の生成経路の正本。判断の説明は .claude/rules/ogp-image-standards.md。新しい経路はここへ登録してから作る。legacy は減らすだけで増やさない。",
   "routes": [
-    { "id": "blog-background", "label": "ブログ記事の背景", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/skills/blog/generate-blog-images/SKILL.md", "master": "git の JPEG (assets/blog/article-backgrounds)", "record": "背景の生成記録と promptHash" },
+    { "id": "blog-background", "label": "ブログ記事の背景", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/skills/blog/generate-blog-images/SKILL.md", "master": "git の JPEG (新規は assets/blog/fullbleed-backgrounds、旧来は assets/blog/article-backgrounds)", "record": "背景の生成記録と promptHash" },
     { "id": "note-cover", "label": "note の表紙", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/skills/image-prompt/SKILL.md", "master": "private R2 と data/note/cover-assets.json", "record": "制作 ID・プロンプト・入力と出力の SHA・目視" },
     { "id": "link-card-background", "label": "リンクカードの背景", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/scripts/ogp/link-card-production.ts", "master": "R2 の共通背景", "record": "確定した依頼と生成物の SHA" },
     { "id": "kindle-cover", "label": "Kindle の表紙", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/skills/product/build-kindle-book/SKILL.md", "master": "候補は Drive、承認版は R2 (cover-design.ts に SHA)", "record": "cover-design.ts の SHA と文字の照合結果" },
-    { "id": "area-specialty", "label": "県ページの特産品イラスト", "generator": "codex-imagegen", "invoke": "owner-session", "entry": ".claude/rules/area-databook-standards.md", "master": "R2 app/areas", "record": "品目 slug とファイル" }
+    { "id": "area-specialty", "label": "県ページの特産品イラスト", "generator": "codex-imagegen", "invoke": "owner-session", "entry": ".claude/rules/area-databook-standards.md", "master": "R2 app/areas", "record": "品目 slug とファイル" },
+    { "id": "ranking-card-motif", "label": "ランキングカードの絵 (試作)", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/rules/ogp-image-standards.md", "master": "試作の間は置かない。採用した絵だけ assets/ogp/ranking-card-motifs", "record": "data/ogp/ranking-card-motif-trial.json (プロンプト・出力の SHA・目視)" }
   ],
   "deterministicRoutes": [
     { "id": "sns-stills", "label": "SNS・YouTube の図とサムネイル", "entry": ".claude/skills/sns/render-sns-stills/SKILL.md", "note": "データから Remotion で描く。図の型は data/content-operations/image-templates.json" },

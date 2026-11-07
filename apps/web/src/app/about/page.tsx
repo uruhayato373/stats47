@@ -279,6 +279,9 @@ export default function AboutPage() {
             </div>
           </div>
           <Separator className="my-4" />
+          <p className={TEXT_STYLE_WITH_MARGIN}>
+            ブログの一覧などに表示する画像は生成したイメージで、実際の場所や調査の場面を写したものではありません。
+          </p>
           <p className="text-xs font-semibold mb-2">編集 6 原則</p>
           <ol className={`${TEXT_STYLE} list-decimal pl-5 space-y-1 text-muted-foreground`}>
             <li><strong>わかりやすさ</strong>: 専門知識ゼロでも楽しめる入口を</li>

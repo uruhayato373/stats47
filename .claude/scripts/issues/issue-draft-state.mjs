@@ -24,7 +24,7 @@ export function readDraftStates(root, figures) {
         hasArticle: article !== "",
         published: /^published:\s*true\s*$/m.test(article),
         verdict: read("review.md").match(/^verdict:\s*(\w+)/m)?.[1] ?? null,
-        hasBackground: existsSync(join(root, "assets/blog/article-backgrounds", `${slug}.jpg`)),
+        hasBackground: ["fullbleed-backgrounds", "article-backgrounds"].some(dir => existsSync(join(root, "assets/blog", dir, `${slug}.jpg`))),
       })];
     }),
   );

@@ -22,7 +22,7 @@ metadata:
 ## 出力契約
 
 - OGP: `ogp/ogp.png`、1200×630。大きなタイトル・カテゴリ・ブランドを合成する。
-- サイト内カード: `thumbnail-{light,dark}.webp`、640×336。画像内テキストなし。タイトルはDOM側。
+- サイト内カード: `thumbnail-{light,dark}.webp`、640×336。画像内テキストなし。タイトルはDOM側。全面の写真風の記事はライトとダークに同じ絵を使う。
 - manifest: `ogp/generation.json`。背景source / SHA / visualType / renderer fingerprintを記録する。
 - 各記事は記事固有AI背景の`ogp/background.jpg`を持つ。共有背景やブランド背景へ暗黙fallbackしない。
 
@@ -31,9 +31,9 @@ metadata:
 - `slug` は公開または公開予定の記事slugを使う。
 - 1背景には1つの視覚モチーフだけを定義する。
 - タイトル、数字、グラフ、装飾パターンを背景へ描かない。地理そのものが主題でない限り日本地図を使わない。
-- 左55%をOGPタイトル安全域、右42%をカードでも読めるモチーフ領域にする。
-- プロンプトは`blog-article-background.ts`がfrontmatterと本文導入から決定的に作る。手書きプロンプトを配信契約にしない。
-- 選択順は `記事固有git JPEG > 検証済み公開AI背景（既存記事の移行互換）`。どちらも無ければ失敗させる。
+- 新規の絵は全面の写真風にする。写すのは一般的な物・食べ物・道具だけで、人物・建物・店舗・風景・実在の場所を出さない (`ogp-image-standards.md`「ブログのサムネイル」)。旧構図の左55%の余白は旧経路の記事だけに残る。
+- プロンプトは`blog-fullbleed-background.ts`がfrontmatterと本文導入から決定的に作る (旧経路の記事は`blog-article-background.ts`)。手書きプロンプトを配信契約にしない。
+- 選択順は `全面の写真風のgit JPEG (assets/blog/fullbleed-backgrounds) > 記事固有git JPEG > 検証済み公開AI背景（既存記事の移行互換）`。どちらも無ければ失敗させる。
 
 ## Mode A: 新規記事（既定）
 

@@ -21,7 +21,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ path: s
   const [kind, ...rest] = segments ?? [];
   const base = ROOTS[kind];
   if (!base || !IMAGE.test(rest.at(-1) ?? "")) return Response.json({ error: "対象外" }, { status: 404 });
-  const resolved = resolveSafe(path.join(projectRoot(), base), rest);
+  const fullbleed = kind === "background"
+    ? resolveSafe(path.join(projectRoot(), datasetDir("blog.fullbleed-backgrounds")), rest)
+    : null;
+  const resolved = fullbleed && (!("error" in fullbleed) || fullbleed.error.kind === "forbidden")
+    ? fullbleed : resolveSafe(path.join(projectRoot(), base), rest);
   if ("error" in resolved) {
     return Response.json({ error: resolved.error.message }, { status: resolved.error.kind === "forbidden" ? 403 : 404 });
   }

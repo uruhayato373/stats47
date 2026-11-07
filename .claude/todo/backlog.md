@@ -173,6 +173,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [RANKING-CARD-WEBP-UNUSED-01] ランキングカードの WebP 4,918 枚の読み手を確かめ、不要なら生成と週次修復を止める
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:grep -rn "rankingThumbnailKeys" apps packages] [起票:2026-11-06] [領域:サイト]
+
+- **事実**: `app/ranking/<key>/thumbnail-{light,dark}.webp` のキー関数 `rankingThumbnailKeys` を使うのは `generate-ogp-images.ts` だけで、`apps/web/src` からの参照は見つからなかった。本番 7 ページ (`/`・`/ranking`・`/blog`・ランキング詳細・ブログ詳細・`/themes`・`/category/population`) の HTML にも参照が無かった (2026-11-06)。読者が見るランキングの地図は `FeaturedRankings`・`RankingLinkCard` などがその場で描く SVG である。
+- **未確認**: 外部や他の経路 (動的な組み立て) からの利用。検索で見つからなかっただけで、不在は確定していない。撤去の前に、作られた経緯を git log で確かめる。
+- **やること**: ① 読み手の有無を確定する ② 無ければ `--type ranking-cards` の生成・週次の ogp-images job・`sync-snapshots.yml` のフック・ギャラリーの ranking-card タブを止め、`OGP-RANKING-CARD-BLOG-REPAIR-01` の ranking 分を閉じる ③ 経路 `ranking-card-motif` は対象の画像が表示されないので、続けるか取り下げるかを決める。
+- **停止条件**: 読み手が見つかった場合は止めず、その表示面を確かめてから判断する。R2 の実体の削除はオーナーの判断を待つ。
+- **完了条件**: 読み手の有無が確定し、不要なら生成・監査・規約 (`ogp-image-standards.md` のカード欄) から外れている。
+
 ### [MUNI-SIZE-RANKING-01] 1事業所あたり出荷額の市区町村ランキングを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-06] [領域:データ]
 

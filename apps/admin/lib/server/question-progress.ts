@@ -99,7 +99,7 @@ function readDrafts(): DraftView[] {
       issue: issueBySlug.get(slug) ?? null,
       outline: outlineOf(markdown),
       figures: articleFigures(markdown),
-      hasBackground: fileExists(path.posix.join(datasetDir("blog.article-backgrounds"), `${slug}.jpg`)),
+      hasBackground: ["blog.fullbleed-backgrounds", "blog.article-backgrounds"].some(id => fileExists(path.posix.join(datasetDir(id), `${slug}.jpg`))),
       chars: markdown.length,
     };
   });
