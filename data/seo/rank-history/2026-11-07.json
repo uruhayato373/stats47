@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-11-07",
+  "generatedAt": "2026-11-07T00:46:41.286Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-10-29",
+      "periodEnd": "2026-11-04",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2628,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 5.235955056179775,
+        "impressions": 445,
+        "clicks": 9
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.7547169811320753,
+        "impressions": 530,
+        "clicks": 5
+      },
+      {
+        "keyword": "中2男子 平均身長",
+        "targetPath": "/blog/middle-school-height-east-west-puzzle",
+        "rank": 9.026392961876834,
+        "impressions": 341,
+        "clicks": 1
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 6,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "漁港が多い県",
+        "targetPath": "/ranking/fishing-port-count-by-type",
+        "rank": 4.625,
+        "impressions": 8,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 5.75,
+        "impressions": 4,
+        "clicks": 0
+      },
+      {
+        "keyword": "酷暑日の都道府県数",
+        "targetPath": "/blog/extreme-heat-days-prefecture",
+        "rank": 9.074973600844773,
+        "impressions": 947,
+        "clicks": 0
+      },
+      {
+        "keyword": "酷暑日の都道府県数",
+        "targetPath": "/blog/temperature-extremes-map",
+        "rank": 9.560975609756097,
+        "impressions": 41,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.816593886462882,
+        "impressions": 229,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-annual-income-vs-new-graduate-starting",
+        "rank": 49,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 33,
+        "impressions": 3,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 19.22222222222222,
+        "impressions": 9,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-10-22",
+      "periodEnd": "2026-10-28",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2417,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 7.348027842227379,
+        "impressions": 431,
+        "clicks": 10
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 3.206896551724138,
+        "impressions": 58,
+        "clicks": 2
+      },
+      {
+        "keyword": "中2男子 平均身長",
+        "targetPath": "/blog/middle-school-height-east-west-puzzle",
+        "rank": 9.253378378378379,
+        "impressions": 296,
+        "clicks": 0
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 10,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 4,
+        "impressions": 3,
+        "clicks": 0
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count-per-1000",
+        "rank": 9,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 10,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 5.666666666666667,
+        "impressions": 3,
+        "clicks": 0
+      },
+      {
+        "keyword": "漁港が多い県",
+        "targetPath": "/ranking/fishing-port-count-by-type",
+        "rank": 5.912280701754386,
+        "impressions": 57,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 7.888888888888889,
+        "impressions": 9,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.508849557522124,
+        "impressions": 226,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 12.294117647058824,
+        "impressions": 17,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 22.333333333333332,
+        "impressions": 3,
+        "clicks": 0
+      }
+    ]
+  }
+}

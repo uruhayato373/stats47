@@ -265,6 +265,11 @@
       "date": "2026-11-06",
       "file": "data/seo/rank-history/2026-11-06.json",
       "sha256": "657d3209046ab58dc84641171b6daeb79056c4f69b750638a4147216cafc46ab"
+    },
+    {
+      "date": "2026-11-07",
+      "file": "data/seo/rank-history/2026-11-07.json",
+      "sha256": "4f0ae46d5810b49820d7df3b871f14219bd3166c1298d5aeac41295e2f48944d"
     }
   ]
 }
