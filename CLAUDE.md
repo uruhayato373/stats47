@@ -40,7 +40,7 @@
 - **Geo分析は結論だけ作らない**: Geo/GIS掛け合わせコンテンツは、計算入力・決定的空間演算・補助レイヤー・県別途中artifact・保存則・最終集計を同じcanonical着地で辿れることを必須とする。X・ブログ・noteもこのlineageへ接続し、単一指標ランキングと混在させない → `.claude/rules/geo-analysis-standards.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 - **ログインが要る計測値はブラウザで取りに行かない**: A8・楽天・note・KDP・GSC/GA4/AdSense の画面の数字は、毎週土曜の朝に Mac が記録した `data/` から読む。読むための管理画面と読み取りスクリプトは hook が止める (例外はオーナーが会話で頼んだときだけ) → `.claude/rules/recorded-measurement-first.md`
-- **デプロイは溜めて1回・勝手にしない**: UI/ロジックの反復ごとに本番デプロイしない（develop→main PR + CI + Cloudflare deploy が毎回 6-8分×2 走りコスト/時間の無駄）。**localhost (`npm run dev:web`) で確認し、まとまりで1回だけデプロイ**。デプロイは (a) ユーザーが明示的に求めたとき、(b) 本番でしか再現しない問題の検証時（例: Cloudflare Workers ランタイム固有の R2/env 問題）のみ。本番反映は outward-facing なので、明示指示が無ければ**実行前に確認する** → `.claude/rules/branch-workflow.md`
+- **main へのマージは本番反映の判断・勝手にしない**: オーナーの明示の指示なしに develop→main の PR を開かず、マージしない (hook が止める)。作業が終わったら `npm run release:status` を報告して止まる。本番に効く変更はまとめて 1 日 1 回、急ぐ障害の修正だけその場で出す。UI/ロジックの反復は localhost (`npm run dev:web`) で確認する。PR が開いている間は develop へ push しない → `.claude/rules/branch-workflow.md`
 - **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**Codex を使う経路は 2 つあり、規律が違う**:
   - **① Claude Code から MCP 経由** (`mcp__codex__codex`) — Claude のツールコールとして**同期実行**されるため HEAD/index の奪い合いは構造的に起きない。既定は `sandbox:"read-only"`。規約は **`.claude/rules/codex-mcp.md`**
   - **② standalone Codex** (VSCode 拡張 / `codex` TUI) — 独立プロセス。**⚠️ git 競合注意**: 同一作業ツリーで同時編集すると commit 混在・WIP 混入・型/lock 不整合が起きる（実例: 2026-06-21 に Codex の zod schema 型エラー + package-lock 未更新で CI 2回 fail）。同時に走らせない、または git worktree を分ける
@@ -58,7 +58,7 @@
 
 | 種別 | 記録先 |
 |---|---|
-| 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
+| 完了前検証 | 変更の規模に応じて選ぶ (`.claude/rules/local-environment.md`「検証コマンドの粒度」)。全体の検査は CI が持つ |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
 | **改善施策の TODO 真実源** (status / tier / 期日) | `.claude/todo/improvements.md` |
@@ -87,7 +87,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `agent-output-contract.md` | Agent tool 起動時の prompt 設計 (Task Capsule + Output Format) | 常時 |
 | `evidence-based-judgment.md` | improvement / 判定系 (effect/* 更新・仕様主張・原因推定)。閾値の SSOT は `.claude/scripts/lib/effect-verdict/thresholds.mjs` | 常時 |
 | `coding-standards.md` | TypeScript / React / Next.js コード全般 | apps・packages の ts/tsx |
-| `content-type-standards.md` | コンテンツの 4 型 (全コンテンツが参照型・教科書型・論文型・作り方型のどれかに属する。型の約束・宣言・機械の止め・洗い出し) | contents/blog・skills の blog/note/sns/product/content・content-types |
+| `content-type-standards.md` | コンテンツの 4 型 (全コンテンツが参照型・教科書型・論文型・ノウハウ型のどれかに属する。型の約束・宣言・機械の止め・洗い出し) | contents/blog・skills の blog/note/sns/product/content・content-types |
 | `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (curiosity gap・図あたり字数・critic 必須) | contents/blog・scripts/blog・skills/blog |
 | `blog-data-schema.md` | ブログ data/*.json の統一 schema・3 点セット系譜・wave 命名 | 同上 |
 | `blog-svg-chart-standards.md` | ブログ SVG チャート (svg-builder カタログ・サイズ gate) | packages/svg-builder・contents/blog data |

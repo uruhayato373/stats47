@@ -24,7 +24,7 @@ const seriesTail = (slug) => slug.split("-").slice(-2).join("-");
 
 /**
  * 同じ型で同じ指標の組を扱う記事を、クリックの少ない方を統合候補として組にする。
- * 作り方型は題材の指標が重なるだけで別の記事なので見ない。
+ * ノウハウ型は題材の指標が重なるだけで別の記事なので見ない。
  */
 export function findMergePairs(articles) {
   const groups = new Map();
@@ -66,7 +66,7 @@ export function isObservable(publishedDate, gscEnd) {
  */
 export function proposeAction({ slug, type, body, clicks, impressions, observable, answers = false }, mergeWith) {
   const gaps = promiseGaps(type, body);
-  const unasked = observable && !answers && type === "type:paper" && slug.includes("-vs-") && clicks === 0 && impressions < 10;
+  const unasked = observable && !answers && slug.includes("-vs-") && clicks === 0 && impressions < 10;
   if (unasked) return { proposal: "retire", signals: ["2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)", ...gaps] };
   if (mergeWith && observable && clicks === 0) return { proposal: "merge", signals: ["同じ指標の組の記事がある", ...gaps], mergeWith };
   if (gaps.length) return { proposal: "rewrite", signals: gaps };

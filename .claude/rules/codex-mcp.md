@@ -16,6 +16,7 @@ Claude Code から **MCP 経由で OpenAI Codex を呼ぶ**ときの実行規約
 > |---|---|---|---|
 > | **①** | **Claude Code → MCP (`mcp__codex__codex`)** | Claude のツールコールとして同期実行 | **本ルール** |
 > | ② | standalone Codex (VSCode 拡張 / `codex` TUI) | 独立プロセス。`AGENTS.md` (=`CLAUDE.md` symlink) を読む | 同時起動禁止 or worktree 分離 (CLAUDE.md「並行エージェント」節) |
+> | ④ | `codex exec` (スクリプトからの直接実行) | 問いの分析の実行役 `npm run analysis:run`。read-only + `--output-schema` で JSON を返す。標準入力は閉じる | `.claude/skills/content/run-analysis/SKILL.md` |
 > | ③ | Codex built-in imagegen | Codex CLI/IDEで直接、または①経由で画像生成 | blog は `/generate-blog-images`。area は `area-databook-standards.md` §5 |
 
 ---
@@ -87,7 +88,7 @@ url: https://chatgpt.com/backend-api/codex/responses
 Claude Codeが生成要求JSONを組み立て直さず、
 `npm run blog-images:codex -- request --slug <slug>` の `mcp.arguments` をそのまま使う。
 
-1. `mcp__codex__codex` を `sandbox: read-only` / `approval-policy: never` / repo root `cwd` で呼ぶ。
+1. `mcp__codex__codex` を `sandbox: read-only` / `approval-policy: never` / repo root `cwd` で呼ぶ。 `model_not_found` のときは `~/.codex/models_cache.json` の `visibility: list` のモデルを `model` に指定する (2026-11-06 は `gpt-6-astra`。`config.toml` の `gpt-6-sol` は ChatGPT アカウントで使えない)。`ingest-article` は公開前の記事なら `--article` も付ける
 2. Codexは組み込み `$imagegen` で1枚だけ生成し、repoを編集せず生成画像pathとprompt hashを返す。
 3. Claude側が `npm run blog-images:codex -- ingest ...` で1200×630 JPEGへ正規化してgit assetへ取り込む。
 4. `npm run check:blog-images` と画像pipeline testを通す。

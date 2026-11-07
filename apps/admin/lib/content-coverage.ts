@@ -4,8 +4,8 @@
  * 件数だけを出し、回収できるかの判断は事業イシューマップに任せる (事業の問いと混ぜない)。
  */
 
-import { SITE } from "@stats47/types";
 
+import { localSiteHref } from "./local-site";
 import { classifyAll, classifyBlog, classifyNote, classifyPost } from "../../../.claude/scripts/content-types/classify-core.mjs";
 
 export const COVERAGE_CHANNELS = [
@@ -70,7 +70,7 @@ export function buildContentCoverage({ ledger, pages, answerPages, notes, posts,
         title: p?.title ?? slug,
         state: p?.published ? "公開" : "未公開",
         detail: p?.kind ?? "原稿",
-        href: p?.published ? `${SITE.origin}${p.href}` : null,
+        href: p?.published ? localSiteHref(p.href) : null,
       };
     });
 

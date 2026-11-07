@@ -61,9 +61,13 @@ describe("型の決め方", () => {
     expect(classifyNote({ key: "x", title: "", status: "published", series: "Z" }, rules, none).type).toBeNull();
   });
 
+  it("問いに結びつかない記事は、URL が相関の形でも論文型にしない", () => {
+    expect(classifyBlog("a-vs-b", "blog:v", false, rules, none)).toMatchObject({ type: "type:reference", how: "URL の -vs-" });
+    expect(classifyBlog("a-vs-b", "blog:v", true, rules, none).type).toBe("type:paper");
+  });
+
   it("URL の中の規則は末尾の規則より弱い", () => {
-    expect(classifyBlog("a-vs-b", "blog:v", false, rules, none).type).toBe("type:paper");
-    expect(classifyBlog("a-vs-b-prefecture-gap", "blog:w", false, rules, none).type).toBe("type:reference");
+    expect(classifyBlog("a-vs-b-prefecture-gap", "blog:w", false, rules, none).how).toBe("URL の末尾 -prefecture-gap");
   });
 
   it("マガジンはシリーズより強い", () => {

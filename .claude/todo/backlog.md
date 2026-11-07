@@ -173,16 +173,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵を main へ入れ、残りの記事へ広げる
+### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵の残りとテーマの画像を片付ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]
 
-- **状態 (2026-11-07)**: 検索流入の多い 20 本を `feat/blog-photo-thumbnails` から R2 へ反映した (run 42301411424)。サムネイルは 40 枚とも差し替わり、ライトとダークは同じ絵。OGP は 19 本が同一バイト。`sports-urban-paradox` だけ変わったが、反映前の画像を保存しておらず原因は未確認。
-- **期限 2026-11-14 の週次修復より前**: `quality-suite-weekly.yml` の ogp-images job は main のコードで動く。このブランチが main に入っていないと、全面の絵を知らないコードが 20 本を旧構図へ戻す。PR 1244 が閉じたら develop へ入れ、main へのマージをオーナーに諮る。間に合わなければ戻ることを前提に、絵は git にあるので再反映できる。
-- **残り**: 公開 848 本のうち 828 本。死亡・犯罪・災害・中絶などの慎重な題材は別枠で判断する。テーマ 56 件は経路の登録とカードの実装が先。
-- **直すこと**: サムネイルは平均 44.9KB で現行の 2.5 倍。WebP の品質を下げて確認する。歯車・地球儀・聴診器が重なるので題材の分散を確かめる。`sports-urban-paradox` の OGP は「スポー / ツ」で改行している。
-- **別ブランチの分**: `feat/m01-through` にある `draft-file` の route・`question-progress.ts`・`draft-background-route.test.ts` は develop に無いので、新しい置き場の判定を本体の作業ツリーに未コミットで残した。そのブランチの commit に含める。
-- **完了条件**: main に入り、週次修復の後も 20 本が写真のまま残り、全件の可否をオーナーが決めている。
-
+- **状態 (2026-11-07)**: 公開 848 本のうち 845 本を写真風 (`blog-photo-v2`) で main と R2 へ反映した。
+- **残す 3 本**: `abortion-rate-prefecture-gap`・`early-neonatal-deaths-prefecture-gap`・`international-cooperation-volunteer-map` は旧来の絵のまま。題材に合う絵を決めてから差し替える。
+- **未確認**: 人が全件を見ていない。Codex の一次判定だけの絵が大半で、主題と遠い絵が約 15 本ある。週次修復 (2026-11-14) の後も写真のまま残るかを確かめる。
+- **テーマ 56 件**: 経路の登録と一覧カードの実装が先。規約の既定「カード画像は作らない」の変更が要る。
+- **別件**: `.claude/scripts/themes/__tests__/tsunami-evacuation.test.mjs` が `data/metrics/*` を拡張子なしで読めず失敗し、push 前の検査を止める。
+- **完了条件**: 3 本とテーマの扱いが決まり、週次修復の後も 845 本が変わらない。
 
 ### [RANKING-CARD-WEBP-UNUSED-01] ランキングカードの WebP 4,918 枚の読み手を確かめ、不要なら生成と週次修復を止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:grep -rn "rankingThumbnailKeys" apps packages] [起票:2026-11-06] [領域:サイト]
@@ -215,29 +214,72 @@ updated: 2026-11-01
 - **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261107.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
 - **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+### [MUNI-SIZE-RANKING-01] 1事業所あたり出荷額の市区町村ランキングを作る
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-06] [領域:データ]
+
+- **起点**: M01 の結論の中心の指標なのに、市区町村ランキングが無い。県の `manufacturing-shipment-amount-per-establishment` はある。事業所数の市区町村ランキングは公開済み (2026-11-06 に確認)。管理画面の問いの詳細が「なし」と示している。
+- **やること**: ① 出荷額 (2023 年) と事業所数 (2024 年) の年のずれを許すかを決める ② 市区町村の値の作り方を `.claude/rules/metric-config-standards.md` の多段依存に沿って決める ③ R2 へ生成して公開する (本番の反映はオーナーの指示で) ④ 記事の案内を足す。1 人あたり出荷額の市区町村ランキングも同じ手順で判断する。
+- **完了条件**: 問いの詳細の市区町村の欄にリンクが出て、本番で開ける。
+
+### [CI-LEAD-TIME-01] デプロイの skip と指標生成の省略の効果を実測する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:gh run list --workflow deploy-workers.yml] [起票:2026-11-06] [領域:管理]
+
+- **起点**: 2026-11-06 に `scope` job・`needsMetricMetadata`・`.husky/pre-push`・PR を開く時機の規則を入れた (`.claude/rules/branch-workflow.md`「待ち時間を増やさない運用」)。push から本番まで約 40 分が基準値で、skip の判定と PR の短縮は本番でまだ動いていない。
+- **やること**: ① main へ入ったあと、本番に関係しない push で Deploy job が skip されることを run で確かめる ② 関係する push で必ずデプロイされることを確かめる ③ 指標に無関係な PR の Build Check が 10.9 分から約 6.7 分になるかを測る (算式: 10.9 − 生成 4.2) ④ PR 検査の cancel の割合が 21/34 から下がるかを 2 週間後に見る。
+- **完了条件**: 4 点の実測を `.claude/rules/branch-workflow.md` に記録している。
 
 ### [CONTENT-TYPE-FIT-01] 型に合っていない記事の処置を決めて反映する
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run content-types:check] [起票:2026-11-06] [領域:コンテンツ]
 
-- **起点**: 2026-11-06 に全コンテンツを 4 型へ振り分け、機械の止めとルールを入れた (`.claude/rules/content-type-standards.md`)。処置の案は `data/content/type-fit-review.json` にあり、一覧は `/content/expansion`。公開から 28 日に満たない 246 本はクリックで判定していない。
+- **起点**: 2026-11-06 に全コンテンツを 4 型へ振り分け、機械の止めとルールを入れた (`.claude/rules/content-type-standards.md`)。処置の案は `data/content/type-fit-review.json` にあり、一覧は `/content/fit`。公開から 28 日に満たない 246 本はクリックで判定していない。
 - **決定済み (撤去 3 本・実行待ち)**: `annual-sunshine-duration-vs-auto-liability-insurance-amount`・`shumai-consumption-expenditure-vs-jr-freight-shipment`・`road-length-per-km2-vs-residential-building-starts`。残す決定は 3 本。
 - **やること**: ① 撤去 3 本の実行をオーナーに確認し、`GONE_BLOG_SLUGS` の手順で反映する (本文は `archive-blog-articles.mjs` で退避してから) ② 統合 9 本・書き直し 23 本の処置を決め、`decisions` に書く ③ note の用途別商品とサービスの型 (題名から仮置き) を確定する ④ URL の規則で参照型にした 420 本のうち、題名に「なぜ」を含む 187 本を参照型のままにしてよいかを確認する ⑤ 2026-10-28 以降に公開した相関の記事は、計測が 28 日を超えた週の `content-types:fit` で改めて判定する。
-- **完了条件**: `/content/expansion` の処置の案が 0 件で、決定が台帳にあり、note の仮置きが確定している。
+- **完了条件**: `/content/fit`が 0 件で、決定が台帳にあり、note の仮置きが確定している。
 
-### [ISSUE-PRODUCT-LINK-01] 販売する商品から、起点の問いを直接指せるようにする
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run issues:check] [起票:2026-11-06] [領域:商品]
+### [ISSUE-PRODUCT-LINK-01] 既存の商品に、起点の問いを指す項目を足す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-06] [領域:商品]
 
-- **起点**: `/content/questions` の有料 note の列は、同じページを経由して辿れる件数だけで、問いから企画した商品とは区別できない (2026-11-06 実測: 問い 204 件のうち 6 件、有料 note 152 本のうち 3 本)。商品の台帳に問いの項目が無い。
-- **境界**: 指すのは社会の問い (`data/content/issues.json`) だけで、事業イシューマップ (`data/business/issue-map.json`) と混ぜない。問いの `revenue` とマップの列を対応づけない (2026-11-06 オーナー判断)。
-- **やること**: ① 商品の正本 (note の記事台帳・Kindle のカタログ) のどこに問いの ID を持つかを決める ② 新しい商品から書き、既存は根拠があるものだけ足す ③ 外部キー検査と `/content/questions` の列を直接の関係へ切り替える。
-- **完了条件**: 問いから直接指された商品の件数が画面に出て、存在しない問いの ID を `npm run check-datasets` が止める。
+- **起点**: 問いの台帳に `products` を足し、M01 から製造品出荷額の商品を直接指した (`/content/questions` の「企画した商品」)。実在は `check-datasets` が見る。Kindle は外部台帳の ID が無いので対象外のまま。
+- **境界**: 指すのは社会の問いだけで、事業イシューマップと混ぜない。同じ指標を使うだけの商品は書かない。
+- **やること**: 新しい商品は企画の時点で書く。既存の商品は根拠があるものだけ足す。Kindle を指す必要が出たら外部台帳に ID を足す。
+- **完了条件**: 問いから企画した商品がすべて `products` で辿れる。
 
-### [H01-VACANT-ARTICLE-PUBLISH-01] H01 の空き家の記事を背景画像つきで公開し、図の台帳と X の下書きを進める
+### [ANALYSIS-CYCLE-01] 問いの分析・図・記事・審査・公開後の評価を、視点の層で自動に回す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run issues:check] [起票:2026-11-06] [領域:サイト]
+
+- **起点**: M01 は機械の検査と記事の審査を PASS したのに、問い「規模か生産性か」を「数か大きさか」に言い換えたまま答えていなかった。再分析と新しい審査で、重なりの等分・全体との比較の欠け・集計範囲の未確認が順に見つかった。原因は書く工程より前に「何を確かめるか」の点検が無いこと。
+- **設計**: ① `analyses.json` に工程の状態と視点の台帳を持つ ② 視点の層 (問いの固定 / データの定義 / 分解 / 頑健性 / 基準比較 / 反例と地理 / 言えないこと / 図の読み方) ごとに「結果」か「対象外の理由」を必須にする ③ 分析の前に、結論を見せない別の agent が確かめる項目を先に出す ④ 機械で止められる項目は検査へ移す ⑤ 公開後の計測を問いの台帳へ戻す。
+- **進み具合 (2026-11-06)**: 視点の台帳 `analysis-viewpoints.json`、`npm run analysis:check`、品質ゲートへの配線、`analysis-critic` を入れた。古い M01 は 14 件で止まり、結論を見ない点検は既知の見落としの大半を事前に挙げた。
+- **進み具合 (2026-11-06 続き)**: H01 にも点検・反証・審査を通した。差し引きの見出し、増減の内訳、97.2% の幅が新しく分かり、本文を直した。
+- **次**: ① 点検役の指示を足した版を測り直す ② 工程を順に呼ぶ実行役を作り、次の 1 問を最初から通す ③ 賃貸用など空き家の種類別の率の分母を指標定義に宣言する (賃貸用とその他の合計が空き家率を超える町が 10 ある) ④ 散布図の傾向線が直線だけなので、曲線の関係に区分ごとの中央値の線を足せるようにする (H01 の賃貸用以外の図)。
+- **残る穴 (2026-11-07)**: 分析の図の `-lines.json`・`-scatter.json` は `chartType` を持ち、`generate-article-charts.ts` の振り分けに掛かる。`regenerate-blog-svgs.yml` を `dry_run=false` で流すと 4:5 の図が旧形式で上書きされうる (コードの読み取りで確認、実行はしていない)。生成器が `data-image-template` 付きの図を飛ばすようにする。
+- **M01 の作り直し (2026-11-07)**: 再計算では数値が合っていたのに、問いへの答え方と図に問題が残っていた。段ごとの差に分けると結論が変わり、反証で 3 要素の配分が事業所数の裾切りに依存すると分かったので、人の厚みと 1 人あたり出荷額の 2 要素へ組み直した。点検役には「全体の割合が強い町にも当てはまるか」「結論が測定の裾切りに依存しないか」を確認項目へ足す。
+- **実行役 (2026-11-07)**: `npm run analysis:run` (`/run-analysis`) を作り、M01・H01 を最終審査の手前まで通した。順番はコード、判断は Codex、最終審査だけ Claude。止めとして主張と幅の照合、反証の記録、審査と本文のハッシュ、図の名前の判定、視点 2 層を足した。作り直す前の M01 に反証を掛ける測り直しは、指示文を 5 つの必須試験にして段の試験 broken・測定の試験 weak を返した (fixture `__tests__/fixtures/m01-before.json`)。
+- **残り**: ① 新しい問いは台帳の行と spec が要る。問いから spec を作る工程が無い ② 分析スクリプトを Codex が新規に書く経路は未検証 ③ NotebookLM の経路 (`--notebooks`) は未実行 ④ 1 次審査の Codex は 1 回 30〜40 万トークン (キャッシュ込み) で、読むファイルを絞ると減らせる ⑤ 反証の必須試験を複数の問いで測る。
+- **止まる場面**: 設計の確認 / 公開の判断。
+- **完了の判定**: 新しい問いが、人の指示なしで下書きと審査まで進み、`published: false` で止まる。M01 の失敗を再現した入力で、書く前に止まる。
+
+### [PROVENANCE-REGEN-STALE-01] 調査の対応表の生成物が古く、再生成すると検査が落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w @stats47/data-configs] [起票:2026-11-07] [領域:サイト]
+
+- **起点**: `build-estat-provenance.ts` を流すと `ssdsTableIds` が 36→43、`statsDataIdToSurvey` が 135→148 件へ増え、合成 id が 55→56 になって `survey-master-consistency` が落ちる。PR #1244 の修正では再生成せず、表 ID 2 件だけを手で足した。
+- **次**: 増える 7 表の扱いを決め、再生成しても検査が通る状態にする。
+- **完了条件**: 生成物と生成器の出力が一致し、検査が通る。
+
+### [PRE-PUSH-WORKTREE-01] pre-push フックが develop から切った worktree で落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:git push --dry-run] [起票:2026-11-07] [領域:サイト]
+
+- **起点**: `core.hooksPath` が本体の絶対パスなので、本体が `.husky/pre-push` を持つブランチにいると、スクリプトの無い develop の worktree の push が `MODULE_NOT_FOUND` で落ちる (2026-11-07)。
+- **次**: フックがスクリプトの有無を確かめるか、hooksPath を相対にする。
+- **完了条件**: develop から切った worktree で push できる。
+- **追記 (2026-11-07)**: フックが選ぶテストのうち、`generate-article-charts-ranks.test.mjs` の「入力が昇順でも値の降順を維持し」は統合前の develop でも落ちる (ランキングの図が型の画像へ移ってラベルの形が変わったためとみられる。原因は未確認)。`page-quality/__tests__/ui-review.test.mjs` はフックが tsx なしで動かすので `ERR_MODULE_NOT_FOUND` になる。どちらも直すまで、フックは関係の無い push を止める。
+
+### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
-- **起点**: 記事 `vacant-houses-population-decline` は `contents/blog` に `published: false` で入っていて、本文は審査 PASS、残りは背景画像だけ (`issues:figures` で背景待ち)。2026-11-06 は Codex が社内プロキシの 503 で 5 回とも止まった。
-- **次**: ① `npm run blog-images:codex -- request-article --slug vacant-houses-population-decline --article contents/blog/vacant-houses-population-decline/article.md` のあと Codex で生成して `ingest-article` で取り込む (Gemini へ切り替えない) ② オーナーが下書き全文を確認する ③ `published: true` にして develop へ push する ④ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ⑤ X の下書き 1196 をオーナーの承認へ回す。
-- **完了条件**: 記事が本番で公開され、`issues:figures` の H01 の記事の行が消え、X の投稿の状態が台帳と一致している。
+- **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。背景画像は 2026-11-06 に Codex で生成して取り込み済み。M01 は既存記事 `manufacturing-productivity` の更新をやめて新しい記事にした (既存記事は図データの欠落など過去の負債を直さないと再公開できない)。
+- **次**: ① オーナーが下書き全文を確認する ② `published: true` にして develop へ push する ③ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ④ X の下書き 1195・1196 をオーナーの承認へ回す。
+- **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
 
 ### [BLOG-AD-ROW-HYDRATION-01] ブログの本文の広告の段が段落の中に入り、hydration に失敗する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:サイト]
@@ -317,15 +359,15 @@ updated: 2026-11-01
 - **起点**: 2026-11-05 にオーナーと『イシューからはじめよ』の型（イシュー → 分解 → 絵コンテ → ストーリーライン）で事業戦略を分解した。図は Artifact `https://claude.ai/artifact/4v9AuVPHsSe2zYhJDSVqxu`（Version 5。オーナーだけが開ける。Claude は Artifact ツールの `action: "read"` で読める）。オーナー指示は「図はいったんこのままで、管理画面で管理し、プロジェクトを進める中で順次改善する」。
 - **図の中身（Artifact が読めないときはこれを正本にする）**:
   - 主イシュー: stats47 のコンテンツは、どの型をどの収益源で回収すれば、運営費と改善の工数を賄えるか。
-  - 仮説: 参照型で集め、作り方型で売り、論文型で信頼を作る。売れた実績は作り方型だけで、統計の内容（教科書型・データ）で売れるかはこれから確かめる。
-  - 行（コンテンツの型）: 参照型（ランキング・雑学）／教科書型（家計調査でわかること、財政指標の定義と各地の状況、調査ハブ）／論文型（Geo 分析など問いへの答え）／作り方型（e-Stat × Claude Code の実務、再現手順・テンプレート）。
+  - 仮説: 参照型で集め、ノウハウ型で売り、論文型で信頼を作る。売れた実績はノウハウ型だけで、統計の内容（教科書型・データ）で売れるかはこれから確かめる。
+  - 行（コンテンツの型）: 参照型（ランキング・雑学）／教科書型（家計調査でわかること、財政指標の定義と各地の状況、調査ハブ）／論文型（Geo 分析など問いへの答え）／ノウハウ型（e-Stat × Claude Code の実務、再現手順・テンプレート）。
   - 列（収益源）: 広告（AdSense・アフィリエイト・物販）／コンテンツ販売（note・KDP）／データ販売（CSV・Excel・GeoJSON）。
   - 12 マスの評価: 参照×広告 ◎・参照×販売 ✕・参照×データ ○／教科書×広告 ○・教科書×販売 ○・教科書×データ ○（`ADMIN-STAT-PILOT-01` はここ）／論文×広告 ○・論文×販売 △・論文×データ ○／作り方×広告 △・作り方×販売 ◎・作り方×データ ○。
   - 前提の帯: 売上を内訳つきで測れているか（判定不能）、「届いた」と言える線（工数の時間単価は未決）、工数がイシューに向いているか。
   - 絵コンテ: 月 ¥1 万に要る PV（効率 ¥12〜22 / 1,000 PV で 45〜83 万 PV、今は約 5.2 万）と、マスごとの判定日の表。
-  - 起点の悩み（マップ全体の出発点。新しい行・列ではない）: 統計は探すのに半日・加工にもう半日かかり、資料に使う図を作るのにも手間がかかる（オーナーの県庁職員の経験。`01_プロジェクト定義.md` のキャッチフレーズ）。この悩みを回収するマスは三つに分かれる。手間を減らすやり方を売る＝作り方型×販売（売れた実績はここだけ）、加工済みのデータ・比較表を売る＝教科書型×データ（`ADMIN-STAT-PILOT-01`）、資料にそのまま使える図・CSV＝参照・教科書×データ。オーナーの経験は仮説を作る材料で、需要の証拠ではない（`04_ターゲットペルソナ.md` §5）。体験談そのものを物語の入口にするかは群 D の境界の決定に従う（`STRATEGY-SSOT-ALIGN-4X3-01`）。
-  - ストーリーライン（本の 4 段）: ① 問題意識（起点の悩みを入口にする。そのうえで、集客は伸びたが収益は小さく、測れてもいない）→ ② 主張「参照型で集めて広告で回収し、作り方型で売る。統計の内容で売れるかは 12 月末までに確かめる」とサブイシュー 3 本（1. 参照型は広告でしか回収できず量だけでは 1 桁足りない／2. 払う理由は時間が減ることで、今売れているのは作り方型だけ／3. 統計の内容で売れるかは 12 月末までの実験で白黒がつく）→ ③ サブイシューごとの仮説・根拠・絵コンテ・判定日（サブイシュー 2 の絵コンテは、資料作りを 1 業務に絞り（例: 類似団体と比べた人件費の 5 年推移）、従来の手順と stats47 + Claude Code を使った手順の作業時間を実測した表とする。時間の削減は実測値として示し、約束しない）→ ④ 意味合い（計器を戻す・参照型は広告の密度・作り方型の 1 商品・統計の内容は判定日で決める）と分岐。
-- **初期データに入れる注記（2026-11-05 の確認結果）**: ① 売れた note の件数と中身が文書ごとに食い違う（vault の販売実績台帳は 2 件 ¥600、`02_収益化戦略.md` §3.5 は 3 件 ¥900、`KNOWHOW-QA-BOARD-01` は Ollama オフライン 1 件を含む）。e-Stat × Claude Code の 2 件は確定。② `NOTE-FISCAL-PEER-SALES-01` の財政比較 2 本は「コードを書く層 / 書かない層」の比較で、作り方型に近く、教科書型の販売の検証にはならない。③ KDP の 7〜9 月 ¥17,780（vault `memos/家計/収入_2026.csv`）は doboku-note と共用のアカウントで、stats47 の本の分が分かっていない。分かるまで「参照×販売 ✕」は保留扱いにする。
+  - 起点の悩み（マップ全体の出発点。新しい行・列ではない）: 統計は探すのに半日・加工にもう半日かかり、資料に使う図を作るのにも手間がかかる（オーナーの県庁職員の経験。`01_プロジェクト定義.md` のキャッチフレーズ）。この悩みを回収するマスは三つに分かれる。手間を減らすやり方を売る＝ノウハウ型×販売（売れた実績はここだけ）、加工済みのデータ・比較表を売る＝教科書型×データ（`ADMIN-STAT-PILOT-01`）、資料にそのまま使える図・CSV＝参照・教科書×データ。オーナーの経験は仮説を作る材料で、需要の証拠ではない（`04_ターゲットペルソナ.md` §5）。体験談そのものを物語の入口にするかは群 D の境界の決定に従う（`STRATEGY-SSOT-ALIGN-4X3-01`）。
+  - ストーリーライン（本の 4 段）: ① 問題意識（起点の悩みを入口にする。そのうえで、集客は伸びたが収益は小さく、測れてもいない）→ ② 主張「参照型で集めて広告で回収し、ノウハウ型で売る。統計の内容で売れるかは 12 月末までに確かめる」とサブイシュー 3 本（1. 参照型は広告でしか回収できず量だけでは 1 桁足りない／2. 払う理由は時間が減ることで、今売れているのはノウハウ型だけ／3. 統計の内容で売れるかは 12 月末までの実験で白黒がつく）→ ③ サブイシューごとの仮説・根拠・絵コンテ・判定日（サブイシュー 2 の絵コンテは、資料作りを 1 業務に絞り（例: 類似団体と比べた人件費の 5 年推移）、従来の手順と stats47 + Claude Code を使った手順の作業時間を実測した表とする。時間の削減は実測値として示し、約束しない）→ ④ 意味合い（計器を戻す・参照型は広告の密度・ノウハウ型の 1 商品・統計の内容は判定日で決める）と分岐。
+- **初期データに入れる注記（2026-11-05 の確認結果）**: ① 売れた note の件数と中身が文書ごとに食い違う（vault の販売実績台帳は 2 件 ¥600、`02_収益化戦略.md` §3.5 は 3 件 ¥900、`KNOWHOW-QA-BOARD-01` は Ollama オフライン 1 件を含む）。e-Stat × Claude Code の 2 件は確定。② `NOTE-FISCAL-PEER-SALES-01` の財政比較 2 本は「コードを書く層 / 書かない層」の比較で、ノウハウ型に近く、教科書型の販売の検証にはならない。③ KDP の 7〜9 月 ¥17,780（vault `memos/家計/収入_2026.csv`）は doboku-note と共用のアカウントで、stats47 の本の分が分かっていない。分かるまで「参照×販売 ✕」は保留扱いにする。
 - **別物との区別**: `data/content/issues.json`（社会の問いの台帳＝記事の素材）とは別のものである。こちらは事業の問いを扱う。ID の体系と名前を分け（例: `biz:` の接頭辞、画面名は「事業イシューマップ」）、論文型の行から問いの台帳へリンクするだけにする。
 - **次（実行順）**:
   ① データ: `data/business/issue-map.json` と `config/schema/business.issue-map.schema.json` を作り、`config/datasets.mjs` に 1 行足す（`business.pilot-board` と同じ形）。持つのは、起点の悩み・主イシュー・仮説・前提・行と列の定義・12 マス（評価・状態・根拠の一文・参照する台帳 ID）・ストーリーライン・注記。判定日と進み具合は improvements・pilot-board・experiments・backlog を ID で参照し、日付や状態を写さない。
@@ -342,16 +384,16 @@ updated: 2026-11-01
 - **依存**: 次の 2 点はオーナーが vault で決める（決定記録は未作成）。決まるまで群 D には触らない。(a) 境界の案「統計が無くても成り立つ記事は kazu-note。サイト運営・開発のノウハウは売らない」。(b) kazu-note を収益の面にするか、物語の入口に戻すか（公務員ノートの判定日 12-10）。
 - **群（原因ごとに直すと個別の行がまとめて片づく）**:
   - A. 「本線は行政実務向け商品（用途別 Excel）」が現役: `02_収益化戦略.md` 26・77-90・112・117-121・214-216・439-454 行、`01_プロジェクト定義.md` 41-42・264-269 行、`03_マーケティング戦略.md` 25・53・184 行、`.claude/memory/MEMORY.md` 21 行、`.claude/memory/project_monetization_contract.md` 57 行、`packages/data-configs/src/business-plan/catalog.ts` 597 行、backlog の `ADMIN-STAT-PILOT-01`。
-  - B. 作り方型が副次・未選定の扱い: `02_収益化戦略.md` 334・424 行、`data/business/pilot-board.json` 29 行（「商品が未選定で未公開」だが販売中の記事がある）、`data/business/experiments.json`（作り方型の打ち手が無い）、`data/products/product-strategy.json` 76-83 行（¥300 の売上を「指標の読み解き」の群に計上）、`data/products/PRODUCT-LEDGER.md`、backlog の `KNOWHOW-PRODUCT-PILOT-01`。
+  - B. ノウハウ型が副次・未選定の扱い: `02_収益化戦略.md` 334・424 行、`data/business/pilot-board.json` 29 行（「商品が未選定で未公開」だが販売中の記事がある）、`data/business/experiments.json`（ノウハウ型の打ち手が無い）、`data/products/product-strategy.json` 76-83 行（¥300 の売上を「指標の読み解き」の群に計上）、`data/products/PRODUCT-LEDGER.md`、backlog の `KNOWHOW-PRODUCT-PILOT-01`。
   - C. stats47 の役割が「データ商品」: backlog の `STRATEGY-DATA-PRODUCT-FIRST-01`（vault 11-04 の決定が起点。その決定自体が vault 11-02 の決定と食い違っている）。
   - D. 公務員 AI と境界: `.claude/skills/note/koumuin-claude-code/MAGAZINE.md` 25 行・`INDEX.md` 24 行、`data/note/magazines.json` 5-8 行、`docs/30_note記事企画/note戦略.md` 241 行、`04_ターゲットペルソナ.md` 27 行、backlog の `KNOWHOW-PRODUCT-PILOT-01` のテーマ候補 (D)・導線案 (c)、`NOTE-PRODUCT-LADDER-01` の段 4。
   - E. 参照型を売る前提（KDP の雑学本）: `02_収益化戦略.md` 314・463 行、backlog の `KDP-EXPANSION-01`、`.claude/agents/kindle-publisher.md` 10-12・28 行、`.claude/rules/coconala-product-standards.md` 124・276 行、`project_monetization_contract.md` 64 行。KDP の本ごとの売上が分かるまで保留する。
   - F. 「note の有料はノウハウだけ」が教科書型・データの有料を締め出す: `02_収益化戦略.md` 203-206 行（同じ文書の §3.4 でデータ集の価格実験が進行中）、`note戦略.md` 13-14 行、backlog の `NOTE-FREE-DEFAULT-01`。
   - G. 「売れない原因は導線、新商品は作らない」の判断: `02_収益化戦略.md` 344-345 行、`experiments.json` 876 行（EXP-013）、`product-strategy.json` 159 行、backlog の `PRODUCT-REFERRAL-MEASURE-01`。
-  - H. 分類軸が 4×3 と対応しない: `catalog.ts` 155・474・1068 行（5 収益レイヤー・paid-purchases の合算）、`pilot-board.json` 8・24・39 行（雑学の回収経路 3 つ）、`02_収益化戦略.md` §3.5・§3.6、`04_ターゲットペルソナ.md` 13・23 行、`.claude/skills/management/monetization-strategy/SKILL.md` 38-48 行、`.claude/agents/note-critic.md`・`.claude/skills/note/design-note-structure/SKILL.md`（作り方型の制作・レビューの担当が無い）、`apps/admin/app/strategy/pilots/page.tsx` 13 行、`.claude/shared-policy/application.json`。
+  - H. 分類軸が 4×3 と対応しない: `catalog.ts` 155・474・1068 行（5 収益レイヤー・paid-purchases の合算）、`pilot-board.json` 8・24・39 行（雑学の回収経路 3 つ）、`02_収益化戦略.md` §3.5・§3.6、`04_ターゲットペルソナ.md` 13・23 行、`.claude/skills/management/monetization-strategy/SKILL.md` 38-48 行、`.claude/agents/note-critic.md`・`.claude/skills/note/design-note-structure/SKILL.md`（ノウハウ型の制作・レビューの担当が無い）、`apps/admin/app/strategy/pilots/page.tsx` 13 行、`.claude/shared-policy/application.json`。
   - I. ココナラ撤退の残り: `.claude/agents/coconala-operator.md`・`coconala-product-manager.md`・`README.md` 93-94 行、`.claude/skills/product/coconala-publish/`・`build-coconala-product/`、`.claude/rules/coconala-product-standards.md` 11・94 行、`CLAUDE.md` 121 行、`apps/admin/lib/server/revenue.ts` 242 行、`catalog.ts` 242-243・854-855 行、`02_収益化戦略.md` 342・349-350・507 行、backlog の `NOTE-PRODUCT-LADDER-01` 段 5。
   - J. 数字・状態・ID の食い違い: `.claude/memory/project_product_ledger.md` 12 行（価格は ¥980・¥2,980 に再変更済み）、`experiments.json` 593 行（EXP-007 が proposed のまま）、`01_プロジェクト定義.md` 252 行と `03_マーケティング戦略.md` 23 行（AdSense は 10-11 に再開済み）、`02_収益化戦略.md` 349 行（旧 ID `NOTE-FISCAL-PEER-PUBLISH-01`）、backlog の `MUNI-DATA-PRODUCT-PILOT-01`（「売上 2 件」）、`.claude/todo/improvements.md` 25 行（財政比較 2 本の比較の設計）。
-  - K. 計画に作り方型が無い: `.claude/todo/monthly.md` 8-13・79 行。
+  - K. 計画にノウハウ型が無い: `.claude/todo/monthly.md` 8-13・79 行。
 - **次（実行順）**: ① 群 I と群 J は判断が要らないので先にまとめて直す（agent・スキルの削除や統合は `check-agent-skill-consistency.cjs` を通す）。② 群 A・B・C・F・G は `02_収益化戦略.md` の改訂案（§2.1・§2.3・§3.3〜§3.6・§5 の領域表・§6）をオーナーに出し、承認後に反映する。続けて `MEMORY.md`・`project_monetization_contract.md`・01・03・04 を合わせる。③ 群 H は `catalog.ts` の `revenueLayers` と `pilot-board.json` の `route` を 3 収益源に寄せるかをオーナーと決める（機械の正典なので schema・テスト・管理画面を同じ差分で直す）。④ 群 E は KDP の本ごとの売上を確かめてから。⑤ 群 D は境界の決定後。⑥ 群 K は次の `/monthly-plan` で扱う。
 - **完了条件**: 各群の記述がイシューマップの見方と矛盾しない。`npm run docs:check`・`npm run check-datasets`・`npm run type-check`・`npm run business-plan:check` が通る。収益化戦略の方針の段落の変更はオーナーの承認を得ている。
 - **禁止**: vault の決定記録（`memos/*decision*`）を書き換えない。オーナーの承認なしに収益化戦略の方針の段落を変えない。境界が決まる前に公務員 AI 関連の商品・マガジンを消さない。

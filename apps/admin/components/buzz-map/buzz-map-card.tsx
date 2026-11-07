@@ -1,10 +1,10 @@
 "use client";
 
-import { SITE } from "@stats47/types";
 
 import { StatusBadge, type Tone } from "@/components/admin-ui";
 import { MediaPreview } from "@/components/media-preview";
 import { Card, Collapsible, CollapsibleContent, CollapsibleTrigger } from "@stats47/components";
+import { localSiteHref } from "@/lib/local-site";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
 
 const READINESS_TONE: Record<string, Tone> = {
@@ -39,7 +39,7 @@ export function BuzzMapCard({ entry }: { entry: BuzzMapEntryDTO }) {
   const primaryUrl = entry.primaryUrl
     ? entry.primaryUrl.startsWith("http")
       ? entry.primaryUrl
-      : `${SITE.origin}${entry.primaryUrl}`
+      : localSiteHref(entry.primaryUrl)
     : null;
 
   return (

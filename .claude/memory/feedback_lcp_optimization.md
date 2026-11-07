@@ -38,3 +38,5 @@ PSI fetch script (`.claude/scripts/psi/fetch-psi-audit.mjs`) は `lcp-breakdown-
 
 - `/knowledge`: `.claude/skills/management/knowledge/SKILL.md` の「HTML 削減 = LCP 改善 は成り立たない」エントリ
 - 関連 Issue: #74 (EXP-002 ADVERSE), #101 (EXP-003 案 A 結果)
+
+2026-11-06: ランキングの地図は SVG になり、背景タイルと先読みを外した (オーナー判断)。LCP 要素はタイルではなくなるので、次の計測で要素を特定し直す。2026-08-02 の撤回は先読みだけ残して描画を消したため。[[feedback_no_feature_specific_components]]

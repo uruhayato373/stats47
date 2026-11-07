@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-11-07
- * 件数: blog 845 / tag 70 / survey 149
+ * 件数: blog 847 / tag 71 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -488,6 +488,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "manufacturing-shipment-amount-vs-manufacturing", lastModified: "2026-10-28" },
   { slug: "manufacturing-shipment-amount-vs-regional-industry-co2", lastModified: "2026-10-28" },
   { slug: "manufacturing-shipment-prefecture-ranking", lastModified: "2026-06-07" },
+  { slug: "manufacturing-strength-factory-size", lastModified: "2026-11-07" },
   { slug: "marriage-divorce-okinawa", lastModified: "2026-03-09" },
   { slug: "marriage-unmarried-crisis", lastModified: "2026-06-07" },
   { slug: "mayonnaise-consumption-expenditure", lastModified: "2026-06-07" },
@@ -820,6 +821,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "urban-parks-green-infrastructure", lastModified: "2026-03-06" },
   { slug: "utilities-expenditure-total-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "vacant-house-crisis", lastModified: "2026-03-04" },
+  { slug: "vacant-houses-population-decline", lastModified: "2026-11-06" },
   { slug: "vacant-housing-aging-correlation", lastModified: "2026-07-09" },
   { slug: "vacant-housing-rate-vs-dependent-population-index", lastModified: "2026-08-30" },
   { slug: "vacant-housing-rate-vs-standard-price-change-rate-commercial", lastModified: "2026-08-30" },
@@ -883,8 +885,8 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "エンゲル係数", lastModified: "2026-09-05" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "人口", lastModified: "2026-08-29" },
-  { tagKey: "人口減少", lastModified: "2026-10-23" },
-  { tagKey: "住宅", lastModified: "2026-08-29" },
+  { tagKey: "人口減少", lastModified: "2026-11-06" },
+  { tagKey: "住宅", lastModified: "2026-11-06" },
   { tagKey: "健康", lastModified: "2026-08-28" },
   { tagKey: "共働き", lastModified: "2026-08-28" },
   { tagKey: "出生率", lastModified: "2026-06-08" },
@@ -901,7 +903,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "家計", lastModified: "2026-08-29" },
   { tagKey: "家計調査", lastModified: "2026-11-02" },
   { tagKey: "少子化", lastModified: "2026-06-14" },
-  { tagKey: "市区町村", lastModified: "2026-10-23" },
+  { tagKey: "市区町村", lastModified: "2026-11-07" },
   { tagKey: "年収", lastModified: "2026-09-05" },
   { tagKey: "所得格差", lastModified: "2026-07-19" },
   { tagKey: "教育", lastModified: "2026-09-05" },
@@ -923,9 +925,10 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "産業構造", lastModified: "2026-06-02" },
   { tagKey: "相関", lastModified: "2026-10-09" },
   { tagKey: "社会保障", lastModified: "2026-08-11" },
+  { tagKey: "空き家率", lastModified: "2026-11-06" },
   { tagKey: "納豆", lastModified: "2026-07-19" },
   { tagKey: "経済", lastModified: "2026-06-21" },
-  { tagKey: "製造業", lastModified: "2026-08-29" },
+  { tagKey: "製造業", lastModified: "2026-11-07" },
   { tagKey: "観光", lastModified: "2026-08-30" },
   { tagKey: "財政", lastModified: "2026-08-28" },
   { tagKey: "賃金", lastModified: "2026-06-15" },

@@ -8,7 +8,7 @@
     "2026-W43"
   ],
   "dataNote": "公開ブログの本文の信号と GSC のクリックから作る処置の案。items は作り直しで置き換わり、decisions は人が書いて残す。note の有料本文は読まない。",
-  "articlesRead": 848,
+  "articlesRead": 845,
   "articlesUnobserved": 246,
   "items": [
     {
@@ -34,20 +34,9 @@
       "impressions": 3831
     },
     {
-      "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "title": "日照時間が長い県は保険金も高い?",
-      "type": "type:paper",
-      "proposal": "retire",
-      "signals": [
-        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
-      ],
-      "clicks": 0,
-      "impressions": 6
-    },
-    {
       "id": "blog:beef-unmarried-ratio",
       "title": "牛肉を食べる県は未婚が少ない?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "merge",
       "signals": [
         "同じ指標の組の記事がある"
@@ -70,7 +59,7 @@
     {
       "id": "blog:dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
       "title": "共働きが多い県ほど家は広い、その理由は?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "merge",
       "signals": [
         "同じ指標の組の記事がある"
@@ -80,23 +69,12 @@
       "impressions": 356
     },
     {
-      "id": "blog:engineer-telework-prefecture",
-      "title": "エンジニアがリモートで働ける県・働けない県、テレワーク率は最大6倍差｜なぜ地方ほど在宅勤務が広がらないのか (2022)",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 8,
-      "impressions": 362
-    },
-    {
       "id": "blog:engineer-vs-professions-income",
       "title": "ソフトウェアエンジニアの年収は専門職で中位｜医師1443万 vs ソフト508万、年収を左右する「職種の壁」 (2023)",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "rewrite",
       "signals": [
-        "言える範囲の説明が無い"
+        "順位・値の提示が無い"
       ],
       "clicks": 0,
       "impressions": 14
@@ -124,28 +102,6 @@
       "impressions": 816
     },
     {
-      "id": "blog:habitable-area-land-use",
-      "title": "土地が少ない県ほど効率的に使っている逆説",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 74,
-      "impressions": 12117
-    },
-    {
-      "id": "blog:highschool-starting-salary-gap",
-      "title": "最低賃金トップの東京が高卒初任給で三重に負ける理由",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 1,
-      "impressions": 326
-    },
-    {
       "id": "blog:inbound-overnight-regional-gap",
       "title": "外国人宿泊の67%が上位4都道府県に集中",
       "type": "type:reference",
@@ -158,33 +114,208 @@
       "impressions": 71
     },
     {
-      "id": "blog:kochi-municipal-finance",
-      "title": "高知県34市町村、なぜ借金比率がマイナスの町があるのか",
-      "type": "type:paper",
+      "id": "blog:inbound-overnight-stay-concentration",
+      "title": "宿泊回復は全国一様か",
+      "type": "type:reference",
+      "proposal": "merge",
+      "signals": [
+        "同じ指標の組の記事がある"
+      ],
+      "mergeWith": "blog:overnight-guests-inbound-recovery",
+      "clicks": 0,
+      "impressions": 12
+    },
+    {
+      "id": "blog:income-1000man-which-prefecture",
+      "title": "年収1000万に届く県はある？答えは「県ではなく職種」、医師だけが平均で大台超え (2023)",
+      "type": "type:reference",
       "proposal": "rewrite",
       "signals": [
-        "言える範囲の説明が無い"
+        "順位・値の提示が無い"
       ],
-      "clicks": 8,
-      "impressions": 358
+      "clicks": 0,
+      "impressions": 27
+    },
+    {
+      "id": "blog:income-quintile-alcohol",
+      "title": "酒の所得格差、焼酎はなぜ低所得層に多いのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 1,
+      "impressions": 23
+    },
+    {
+      "id": "blog:income-quintile-appliance",
+      "title": "家電の買い替え、年収でどう変わるのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 3
+    },
+    {
+      "id": "blog:income-quintile-beverage",
+      "title": "紅茶は本当に贅沢品なのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 25
+    },
+    {
+      "id": "blog:income-quintile-car",
+      "title": "車は地方の足、なぜ都会では贅沢品になるのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 93
+    },
+    {
+      "id": "blog:income-quintile-clothing",
+      "title": "外に着る服ほど年収差が出るのはなぜ?",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 64
+    },
+    {
+      "id": "blog:income-quintile-dining",
+      "title": "外食は「贅沢財」なのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 6
+    },
+    {
+      "id": "blog:income-quintile-food-gap",
+      "title": "同じ食卓でも中身が違う理由とは",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 21
+    },
+    {
+      "id": "blog:income-quintile-lesson",
+      "title": "習い事の支出、なぜ61倍も違うのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 1
+    },
+    {
+      "id": "blog:income-quintile-luxury-ranking",
+      "title": "腕時計だけ格差が突出するのはなぜ?",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 11
+    },
+    {
+      "id": "blog:income-quintile-medical-health",
+      "title": "医療費で払うのは機能より感情",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 0,
+      "impressions": 49
+    },
+    {
+      "id": "blog:income-quintile-overview",
+      "title": "年収で消費支出はどこまで変わるのか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 7,
+      "impressions": 325
+    },
+    {
+      "id": "blog:income-quintile-recreation-services",
+      "title": "ゴルフの所得格差、娯楽5品目で最小だった",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 2,
+      "impressions": 87
+    },
+    {
+      "id": "blog:income-quintile-travel",
+      "title": "旅行費の格差、意外にも宿泊料が最大",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 7,
+      "impressions": 235
+    },
+    {
+      "id": "blog:kochi-migration-flow",
+      "title": "高知県の転出超過、なぜ4年で最大に",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 20,
+      "impressions": 1092
     },
     {
       "id": "blog:minimum-wage-increase-rate-prefecture-gap",
       "title": "最低賃金はなぜ東京1163円・秋田951円?｜上昇率は地方が逆転する14年",
       "type": "type:paper",
-      "proposal": "merge",
+      "proposal": "rewrite",
       "signals": [
-        "同じ指標の組の記事がある",
         "言える範囲の説明が無い"
       ],
-      "mergeWith": "blog:minimum-wage-gap-regional-economy",
       "clicks": 0,
       "impressions": 37
     },
     {
+      "id": "blog:municipalities-without-schools",
+      "title": "小学校が1つもない街はどこにあるか",
+      "type": "type:reference",
+      "proposal": "rewrite",
+      "signals": [
+        "順位・値の提示が無い"
+      ],
+      "clicks": 144,
+      "impressions": 1773
+    },
+    {
       "id": "blog:municipality-population-decline-tiers",
       "title": "人口1割減の街、割合1位は北海道ではない?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "merge",
       "signals": [
         "同じ指標の組の記事がある"
@@ -214,17 +345,6 @@
       ],
       "clicks": 7,
       "impressions": 2619
-    },
-    {
-      "id": "blog:park-green-space-gap",
-      "title": "自然豊かな滋賀に国立公園はゼロ──3指標で変わる47都道府県の「緑」の本当の姿",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 15,
-      "impressions": 2795
     },
     {
       "id": "blog:population-density-urbanization",
@@ -261,20 +381,9 @@
       "impressions": 27650
     },
     {
-      "id": "blog:railway-theme-overview",
-      "title": "鉄道3指標でみる県差、沖縄はなぜ特異なのか",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 46,
-      "impressions": 2212
-    },
-    {
       "id": "blog:real-disposable-income-vs-per-capita-social-welfare",
       "title": "所得が低い県ほど福祉費が高いのはなぜ?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "retire",
       "signals": [
         "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
@@ -294,46 +403,23 @@
       "impressions": 37433
     },
     {
-      "id": "blog:road-length-per-km2-vs-residential-building-starts",
-      "title": "道路密度が高い県は住宅着工も多いのか",
-      "type": "type:paper",
-      "proposal": "retire",
-      "signals": [
-        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
-      ],
-      "clicks": 0,
-      "impressions": 0
-    },
-    {
-      "id": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
-      "type": "type:paper",
-      "proposal": "retire",
-      "signals": [
-        "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
-      ],
-      "clicks": 0,
-      "impressions": 0
-    },
-    {
-      "id": "blog:software-engineer-income-gap",
-      "title": "ソフトウェアエンジニアの年収、最も高い県は東京じゃない？京都608万 vs 沖縄402万、1.5倍差の真因 (2023)",
-      "type": "type:paper",
+      "id": "blog:rice-spending-quantity-gap-2025",
+      "title": "米を買う量はほぼ横ばいなのに、支出が大きく増えた",
+      "type": "type:reference",
       "proposal": "rewrite",
       "signals": [
-        "言える範囲の説明が無い"
+        "順位・値の提示が無い"
       ],
       "clicks": 0,
-      "impressions": 24
+      "impressions": 0
     },
     {
       "id": "blog:system-consultant-income-ranking",
       "title": "システムコンサルタントの年収トップは秋田、東京は伸び悩む？なぜ高年収IT職は大都市に偏らないのか (2023)",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "merge",
       "signals": [
-        "同じ指標の組の記事がある",
-        "言える範囲の説明が無い"
+        "同じ指標の組の記事がある"
       ],
       "mergeWith": "blog:engineer-vs-professions-income",
       "clicks": 0,
@@ -342,7 +428,7 @@
     {
       "id": "blog:towns-villages-larger-than-cities",
       "title": "市より人口が多い町があるのはなぜか",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "merge",
       "signals": [
         "同じ指標の組の記事がある"
@@ -352,20 +438,9 @@
       "impressions": 34
     },
     {
-      "id": "blog:truck-driver-2024-crisis",
-      "title": "タクシーは2.5倍・バスは2倍・トラックは1.7倍──運輸3職種の地域格差が違う理由",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 0,
-      "impressions": 34
-    },
-    {
       "id": "blog:tuna-medical-expense",
       "title": "まぐろを食べる県は医療費が安い?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "merge",
       "signals": [
         "同じ指標の組の記事がある"
@@ -377,7 +452,7 @@
     {
       "id": "blog:vacant-housing-rate-vs-dependent-population-index",
       "title": "空き家が多い県は高齢者も多い?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "retire",
       "signals": [
         "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
@@ -388,7 +463,7 @@
     {
       "id": "blog:vacant-housing-vs-land-price",
       "title": "空き家が多い県ほど地価は下がる?",
-      "type": "type:paper",
+      "type": "type:reference",
       "proposal": "retire",
       "signals": [
         "2 指標の相関で読者の問いの証拠が無い (28 日以上の計測でクリック 0・表示 10 未満)"
@@ -417,17 +492,6 @@
       ],
       "clicks": 1,
       "impressions": 50
-    },
-    {
-      "id": "blog:water-sewage-crisis",
-      "title": "上水道は98%完備、下水道は徳島22%──同じ水インフラで77ポイントの格差が生じた理由",
-      "type": "type:paper",
-      "proposal": "rewrite",
-      "signals": [
-        "言える範囲の説明が無い"
-      ],
-      "clicks": 1,
-      "impressions": 121
     },
     {
       "id": "blog:yato-yatsu-place-name-boundary",

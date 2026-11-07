@@ -8,6 +8,17 @@ function mobileSource(container: HTMLElement): HTMLSourceElement | null {
 }
 
 describe('ResponsiveArticleImage', () => {
+  it('4:5 の型の画像は PC で 560px までに抑え、横長の図は広げたままにする', () => {
+    const { container: typed } = render(<ResponsiveArticleImage src="data/income-ranking.svg" alt="順位" />);
+    expect(typed.querySelector('img')?.className).toContain('sm:max-w-[560px]');
+    const { container: lines } = render(<ResponsiveArticleImage src="data/rate-lines.svg" alt="推移" />);
+    expect(lines.querySelector('img')?.className).toContain('sm:max-w-[560px]');
+    const { container: legacy } = render(<ResponsiveArticleImage src="data/rate-trend.svg" alt="推移" />);
+    expect(legacy.querySelector('img')?.className).not.toContain('max-w-[560px]');
+    const { container: wide } = render(<ResponsiveArticleImage src="data/tax-breakdown.svg" alt="内訳" />);
+    expect(wide.querySelector('img')?.className).not.toContain('max-w-[560px]');
+  });
+
   it('積み上げ棒は 639px 以下で -mobile.svg に切り替え、比率は画像に任せる (2:3 に固定しない)', () => {
     const { container } = render(<ResponsiveArticleImage src="data/tax-breakdown.svg" alt="内訳" />);
 

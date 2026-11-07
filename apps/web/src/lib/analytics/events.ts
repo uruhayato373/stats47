@@ -123,6 +123,8 @@ export const UI_ACTIONS = [
   'year_change',
   'basis_change',
   'area_type_change',
+  // 地図の見方 (連続 / 分布) の切り替え (2026-11-06 値追加。登録済み dimension の値追加のみ)
+  'color_view_change',
   'region_select',
   'expand',
   'filter',

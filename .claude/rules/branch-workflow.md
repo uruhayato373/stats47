@@ -15,6 +15,35 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 PR は **develop → main の 1 段階のみ**。feature/* → develop は直 merge で可 (個人開発、self-review 前提)。
 
+## 待ち時間を増やさない運用 (2026-11-06 実測)
+
+push から本番まで約 40 分 (PR 検査 11.7 分・デプロイ 22.4 分・反映後の確認 6.3 分。中央値)。リポジトリは PUBLIC で Actions の分数は課金されないので、短縮の価値は実行分数ではなく**人が待つ時間**で測る。
+
+- **develop→main の PR は、オーナーが出すと決めてから開く。** 開いている間の push は実行中の検査を cancel する (2026-11-05〜06 に 34 run 中 21 run、平均 7.7 分。確認できた 22 件はすべてセッションの push で、bot ではない)。開いたあとは merge まで develop へ push しない。作業はブランチに溜める。
+- **本番に効く変更と運用の変更を分ける。** 急ぐ本番の変更を、管理画面やルールの大きな変更と同じ PR に載せない。
+- **push の前に `.husky/pre-push` が関係するテストを走らせる。** 全件は CI が持つ。
+
+### デプロイの要否
+
+main への push は `deploy-workers.yml` の `scope` job が差分から判定する (`.claude/scripts/lib/plan-deploy-scope.mjs`)。本番に関係しないと確かめたパスだけの push は Deploy job を skip する。一覧に無いパスと、差分を読めないときは必ずデプロイする。手動実行は常にデプロイする。
+
+- skip でも workflow は success で終わるので、`workflow_run` で続く Post-Deploy Smoke などは動く。
+- 一覧へ足す前に、Worker の build の import と Deploy job の生成工程が読まないことを確かめる。Worker は実行時に git のファイルを読めない。
+- 指標の入力を変えていない PR は Build Check の指標生成 (実測 4.2 分) を省く。判定は同じファイルの `needsMetricMetadata`。
+
+### 手順を足す前に削る
+
+規律を足すときは、同じ差分で不要になった手順を消す。2026-11-06 に消したもの:
+
+- `/deploy` の手元の型検査・ESLint・全テスト (CI と重複)、DB とローカル R2 ミラーの確認 (廃止済み)、feature ブランチ化の必須化。
+- `deploy-workers.yml` の improvement-log の自動追記 2 工程。書く先の移動に追従せず、2026-09 以降の自動コミットは 0 件だった。
+
+### 変えないと判断したもの
+
+- **Deploy の snapshot 工程**: 毎回実行は DEPLOY-METRIC-RELEASE-TIMEOUT-01 の再発防止。送信は中身の差分だけで、指標の変更が無ければ 0〜10 件で終わる。4,000 件台の回は実際に中身が変わっている。
+- **develop gate と PR の検査の重複**: 並列に走るので待ち時間は増えず、PUBLIC なので分数の費用も無い。
+- **Post-Deploy Smoke**: Playwright のブラウザ確認で、Deploy 内の curl の確認とは別物。本番への反映は Deploy to Production の時点で終わっていて、後続は誰も待たない。
+
 ## 実行環境による差分 (web / クラウド)
 
 `gh` CLI と GitHub Actions の起動可否が環境で異なる。混同すると「dispatch できるはず」と誤認する (2026-06-02 発生)。
@@ -226,8 +255,23 @@ origin 側に既に違反があれば継承 (直して commit に含めてよい
 
 ## デプロイ
 
-- `/deploy` スキルで実行
+- `/deploy` スキルで実行する。オーナーの明示の指示があるときだけで、自分の判断では始めない
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
+
+### main へのマージは本番反映の判断 (2026-11-06 オーナー決定)
+
+**エージェントは、オーナーの明示の指示なしに develop→main の PR を開かず、マージしない。** スキルやカードの手順に PR の作成が書かれていても同じで、作業が終わったら `npm run release:status` の結果を報告して止まる。「反映する」「デプロイして」のような本番への指示だけを指示として扱い、「コミットして」「push して」は含まない。
+
+| 変更の種類 | 扱い |
+|---|---|
+| 本番に効く (サイトのコード・指標・ページ索引など) | まとめて 1 日 1 回。出すと決めてから PR を開く |
+| 本番に効かない (`plan-deploy-scope.mjs` の一覧だけ) | 急がない。次に出すときに同乗させる |
+| 障害の修正など急ぐもの | オーナーの指示でその場で出す |
+
+- 機械の止め: `.claude/hooks/pre-bash-safety.js` が `gh pr create --base main` と `gh pr merge` を止める。指示があるときだけ先頭に `OWNER_APPROVED_RELEASE=1` を付ける。自分の判断で付けない。
+- クラウドの `mcp__github__create_pull_request` / `merge_pull_request` は hook を通らないので、同じ規律を手順で守る。
+- `sync-snapshots.yml` がキーの減少で開く main 宛ての PR は機械の例外で、マージは人が判断する。
+- 背景: 2026-10-26〜11-06 の 12 日で 30 回デプロイし、「溜めて 1 回」の文章だけでは止まらなかった。
 
 ### デプロイ頻度の規律 — 毎回デプロイしない
 

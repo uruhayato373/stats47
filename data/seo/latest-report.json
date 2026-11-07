@@ -6,7 +6,7 @@
     "periodEnd": "2026-11-04",
     "windowDays": 7
   },
-  "inputHash": "89cd6352ef18ae30bfd7f146e5e02019911320a071efe218c2b5f670fddde1bc",
+  "inputHash": "54c71c51df2949ec8d4d109406f651ca84fa1df429d7069baac6ed4edc3370c2",
   "movements": [
     {
       "keyword": "保健師 年収",
@@ -106,16 +106,7 @@
       "reason": "query-page-not-reported"
     }
   ],
-  "selected": {
-    "keyword": "酷暑日の都道府県数",
-    "targetPath": "/blog/extreme-heat-days-prefecture",
-    "rank": 9.074973600844773,
-    "impressions": 947,
-    "clicks": 0,
-    "group": 5,
-    "previousMethod": null,
-    "editableFile": null
-  },
+  "selected": null,
   "observing": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
@@ -172,6 +163,11 @@
       "keyword": "漁港が多い県",
       "targetPath": "/ranking/fishing-port-count-by-type",
       "proposalId": "40167993253-1"
+    },
+    {
+      "keyword": "酷暑日の都道府県数",
+      "targetPath": "/blog/extreme-heat-days-prefecture",
+      "proposalId": "42320157489-1"
     }
   ]
 }

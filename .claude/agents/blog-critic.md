@@ -110,6 +110,7 @@ slug: <slug>
 reviewer: blog-critic
 mode: expert | panel
 verdict: PASS | REVISE
+articleSha256: <審査を始める時点の article.md の sha256。問いに答える記事で必須。shasum -a 256 で取る>
 date: YYYY-MM-DD
 ---
 ## 評価サマリ

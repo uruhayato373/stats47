@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { latestValues } from '../build-color-policies';
-import { colorPolicyErrors, schemaDriftErrors, unaccountedMetrics } from '../check-color-policies';
+import { colorPolicyOf, colorViewOf } from '../../../../packages/types/src/color-policy';
+import { colorPolicyErrors, figureColorViewErrors, figureViewDriftErrors, schemaDriftErrors, unaccountedMetrics } from '../check-color-policies';
 
 const row = (over = {}) => ({ metricKey: 'a', grain: 'prefecture', colorSchemeType: 'sequential', classification: { method: 'continuous' }, year: '2024', areaCount: 47, ...over }) as never;
 const ledgerOf = (policies: never[], skipped: { metricKey: string; reason: 'no-values' }[] = []) => ({
@@ -59,4 +60,27 @@ test('Schema の値が型とずれたら止める', () => {
   } });
   assert.deepEqual(schemaDriftErrors(schema(['prefecture', 'municipality-merged', 'municipality-split'])), []);
   assert.match(schemaDriftErrors(schema(['prefecture'])).join(), /粒度/);
+});
+
+test('配色の判定は連続でも段階でも地図の見方のどちらかに当たる', () => {
+  const even = [1, 2, 3, 4, 5, 6, 7, 8];
+  assert.equal(colorViewOf(colorPolicyOf(even))?.id, 'continuous');
+  assert.equal(colorViewOf(colorPolicyOf([...even, 1000]))?.id, 'distribution');
+});
+
+test('見方に無い塗り方の行は止める', () => {
+  const errors = colorPolicyErrors(ledgerOf([row({ classification: { method: 'equal-interval', classes: 5 } })]), () => true);
+  assert.ok(errors.some((error) => error.includes('地図の見方')));
+});
+
+test('値の濃淡で塗らない型の colorView は止める', () => {
+  const templates = [{ id: 'choropleth', metricColor: 'scale' }, { id: 'scatter', metricColor: 'none' }];
+  assert.deepEqual(figureColorViewErrors([{ id: 'a', template: 'choropleth', colorView: 'distribution' }, { id: 'b', template: 'scatter' }], templates), []);
+  assert.equal(figureColorViewErrors([{ id: 'c', template: 'scatter', colorView: 'distribution' }], templates).length, 1);
+});
+
+test('図の台帳の Schema が見方の語彙からずれたら止める', () => {
+  const schemaOf = (values: string[]) => ({ properties: { figures: { items: { properties: { colorView: { enum: values } } } } } });
+  assert.deepEqual(figureViewDriftErrors(schemaOf(['distribution', 'continuous'])), []);
+  assert.equal(figureViewDriftErrors(schemaOf(['continuous'])).length, 1);
 });

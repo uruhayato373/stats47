@@ -65,7 +65,7 @@ ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも 
                                        (※ sync-snapshots 未配線。手動 or スクリプト実行が要る場合あり)
 5. GONE から除外                    → apps/web/src/config/gone-ranking-keys.ts から該当キーを削除
                                        (復帰時。GONE に残ると 410 のまま)
-6. commit → deploy                  → devops-runner / /deploy に委譲 (develop→main PR→CI→Cloudflare)
+6. commit → deploy                  → オーナーの指示で devops-runner / /deploy に委譲 (develop→main PR→CI→Cloudflare)
 7. CDN purge                        → /purge-cdn に委譲 (GONE 410 はエッジ 7 日キャッシュ・404 は ISR)
 8. 本番実測                         → Googlebot UA で 200 を確認 (下記コマンド)
 ```

@@ -12,11 +12,29 @@ export function fillMeta(meta, result) {
   });
 }
 
+/** 折れ線の入力。系列は結果の行をそのまま使う */
+function buildLineChart(figure, rows, result) {
+  const { chart } = figure;
+  for (const row of rows) {
+    if (!row.points?.length || row.points.some((point) => !Number.isFinite(point.value))) throw new Error(`${figure.id}: ${row.label} の点が足りない`);
+  }
+  return { title: figure.title, meta: fillMeta(chart.meta, result), source: chart.source, decimals: chart.decimals, series: rows };
+}
+
+/** 散布図の入力。点の名前は出さず、町の順位に読ませない */
+function buildScatterChart(figure, rows, result) {
+  const { chart } = figure;
+  if (rows.some((point) => !Number.isFinite(point.x) || !Number.isFinite(point.y))) throw new Error(`${figure.id}: 点の値が足りない`);
+  return { title: figure.title, meta: fillMeta(chart.meta, result), note: chart.note, source: chart.source, level: "municipality", xLabel: chart.xLabel, yLabel: chart.yLabel, points: rows, labelNames: [] };
+}
+
 /** 図の定義と結果から、型の部品へ渡す図の入力を作る。定義した項目が結果に無ければ止める */
 export function buildChart(figure, result) {
   const { chart } = figure;
   const rows = result[chart.rows];
   if (!Array.isArray(rows) || rows.length === 0) throw new Error(`${figure.id}: 結果に行 ${chart.rows} が無い`);
+  if (figure.template === "line") return buildLineChart(figure, rows, result);
+  if (figure.template === "scatter") return buildScatterChart(figure, rows, result);
   const valueOf = (row, field) => {
     const value = row[field];
     if (typeof value !== "number" || !Number.isFinite(value)) throw new Error(`${figure.id}: ${row[chart.category]} の ${field} が数値でない`);
@@ -34,6 +52,12 @@ export function buildChart(figure, result) {
 /** 図の点データ。本文の照合と再生成の入力になる */
 export function buildChartData(figure, built, result) {
   const { chart } = figure;
+  // 執筆の指示文の読み手に合わせ、時系列の形 ({ year, value }) にそろえる
+  if (figure.template === "line") {
+    const series = built.series.map((line) => ({ label: line.label, data: line.points.map((point) => ({ year: Number.parseInt(point.x, 10), value: point.value })) }));
+    return { title: built.title, chartType: "line", unit: chart.unit, series };
+  }
+  if (figure.template === "scatter") return { title: built.title, chartType: "scatter", level: built.level, unit: chart.unit, points: built.points };
   const rows = result[chart.rows];
   return {
     title: built.title,
@@ -47,7 +71,7 @@ export function buildChartData(figure, built, result) {
 }
 
 /** 図の出典。指標は分析の spec から導くので、台帳に写しを持たない */
-export function buildChartSource({ figure, spec, generatedBy }) {
+export function buildChartSource({ figure, spec, generatedBy, result }) {
   const { chart, scope } = figure;
   const file = scope === "municipality" ? "cities.json" : "values.json";
   return {
@@ -57,6 +81,7 @@ export function buildChartSource({ figure, spec, generatedBy }) {
     generatedBy,
     ...(scope === "municipality" ? { areaScope: { level: "municipality", wardMode: "merged", within: { kind: "nation" } } } : {}),
     displaySources: chart.displaySources,
+    ...(figure.template === "scatter" ? { expectedPointCount: result[chart.rows].length, pearsonR: result[chart.correlationField] } : {}),
   };
 }
 

@@ -77,3 +77,12 @@ test("削除した投稿への指定は宛先なしにせず、どこにも無�
   const ledger = { assignments: [{ id: "sns:2" }, { id: "blog:gone" }] };
   assert.deepEqual(findStaleAssignments(ledger, new Map(), new Set(["sns:2"])), ["blog:gone"]);
 });
+
+test("公開で送り箱から消えた答えの記事は索引に載る前でも論文型で、指す投稿も型を継ぐ", () => {
+  const m = classifyAll(input({
+    answerPages: new Set(["blog:published-answer"]),
+    posts: [{ id: 1, status: "draft", domain: "blog", content_key: "published-answer" }],
+  }));
+  assert.equal(m.get("blog:published-answer").type, "type:paper");
+  assert.equal(m.get("sns:1").type, "type:paper");
+});

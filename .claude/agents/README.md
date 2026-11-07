@@ -57,6 +57,7 @@
 | `article-writer` | site | 1 metric → 1 記事 (並列起動量産単位) | 既存 |
 | `chart-author` 🆕 | site | SVG / Remotion チャート生成 (blog / note 共通) | blog-editor + note-manager 分離 |
 | `blog-critic` 🆕 | site | expert review / panel review | blog-editor 分割 |
+| `analysis-critic` 🆕 | site | 問いの分析の点検 (plan: 結論を見ない確認項目 / refute: 反証)。read-only | 2026-11-06 新設 |
 | `note-manager` | product | note.com 公開LC / 公開URLトラッキング (本文SSOT=R2、editorialメタ/URL=git TS note-catalog、派生indexは手編集禁止。`/content/note`で運用確認。chartはchart-authorへ委譲) | 既存縮退 |
 | `note-critic` 🆕 | product | note 記事 (A/B/C/D シリーズ) の意味レビュー専任。read-only、verdict を review.md に書き出す。blog-critic の note 版 | 2026-06-22 新設 |
 | `ranking-content-author` 🆕 | data | ranking ページの ai-content (考察/地域傾向/FAQ/県別解説) 生成・是正 + 決定的ゲート (audit-ai-content.mjs)。生成は image-prompt-curator/data-ingester から移管 | 2026-06-21 新設 |

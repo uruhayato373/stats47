@@ -37,6 +37,7 @@ import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 import {
   MunicipalityPrefectureLinks,
+  MunicipalityNationalMap,
   MunicipalityRankingCommentary,
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
@@ -263,12 +264,17 @@ export default async function MunicipalityRankingPage({
               ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
             />
           </div>
-          {!prefectureCode && (
-            <p className="mt-1 text-xs text-muted-foreground">
-              都道府県で絞り込むと、県内の分布地図を表示します。
-            </p>
-          )}
         </section>
+      )}
+
+      {!prefectureCode && (
+        <MunicipalityNationalMap
+          title={item.title}
+          visualization={item.visualization}
+          unit={snapshot.unit}
+          decimalPlaces={precision}
+          values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
+        />
       )}
 
       {prefectureCode && (

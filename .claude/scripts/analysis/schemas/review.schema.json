@@ -1,0 +1,3 @@
+{"type":"object","additionalProperties":false,"required":["verdict","findings"],"properties":{
+"verdict":{"type":"string","enum":["PASS","REVISE"]},
+"findings":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["severity","text"],"properties":{"severity":{"type":"string","enum":["BLOCK","MAJOR","MINOR"]},"text":{"type":"string"}}}}}}

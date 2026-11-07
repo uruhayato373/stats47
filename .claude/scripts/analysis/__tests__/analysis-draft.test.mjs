@@ -77,3 +77,22 @@ test("書き手への材料に結論と注意点が全部入る", () => {
   const text = buildMaterials({ analysis: { question: "問い", finding: "結論", caveats: ["注意1", "注意2"] } });
   for (const part of ["問い", "結論", "注意1", "注意2"]) assert.ok(text.includes(part));
 });
+
+test("折れ線は系列を結果からそのまま作り、欠けた点は止める", () => {
+  const line = { id: "figure:line", template: "line", title: "題", chart: { rows: "trend", meta: "{towns}町", source: "出典", decimals: 1 } };
+  const trend = [{ label: "増", points: [{ x: "2013年", value: 1 }, { x: "2023年", value: 2 }] }];
+  assert.deepEqual(buildChart(line, { towns: 3, trend }).series, trend);
+  assert.throws(() => buildChart(line, { towns: 3, trend: [{ label: "増", points: [{ x: "2013年", value: null }] }] }), /点が足りない/);
+});
+
+test("散布図は市区町村の点として描き、相関と点数を出典へ残す", () => {
+  const scatter = { id: "figure:s", template: "scatter", title: "題", scope: "municipality", chart: { rows: "points", meta: "説明", source: "出典", xLabel: "x", yLabel: "y", correlationField: "r", transform: "t", displaySources: [] } };
+  const result = { r: -0.7, points: [{ code: "1", name: "a", x: 1, y: 2 }, { code: "2", name: "b", x: 2, y: 3 }] };
+  const built = buildChart(scatter, result);
+  assert.equal(built.level, "municipality");
+  assert.deepEqual(built.labelNames, []);
+  assert.equal(buildChartData(scatter, built, result).chartType, "scatter");
+  const source = buildChartSource({ figure: scatter, spec: { metrics: [{ key: "a" }] }, generatedBy: "x", result });
+  assert.equal(source.expectedPointCount, 2);
+  assert.equal(source.pearsonR, -0.7);
+});

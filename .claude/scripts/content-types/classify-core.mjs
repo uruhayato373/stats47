@@ -77,6 +77,10 @@ export function classifyAll(input) {
     const id = `blog:${slug}`;
     if (!result.has(id)) result.set(id, classifyBlog(slug, id, answerPages.has(id), rules, assigned));
   }
+  // 公開で送り箱から消え、まだ索引に載っていない答えの記事も論文型と決まる
+  for (const id of answerPages) {
+    if (id.startsWith("blog:") && !result.has(id)) result.set(id, classifyBlog(id.slice("blog:".length), id, true, rules, assigned));
+  }
   for (const note of notes) result.set(`note:${note.key}`, classifyNote(note, rules, assigned));
   for (const book of books) {
     if (book.channel === "kdp" && book.status !== "withdrawn") result.set(`kindle:${book.key}`, classifyBook(book.key, rules, assigned));

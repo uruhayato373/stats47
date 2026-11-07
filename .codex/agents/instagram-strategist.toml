@@ -1,7 +1,7 @@
 name = "instagram-strategist"
 description = "Instagramアカウント「統計で見る都道府県 | @stats47jp」の投稿戦略・パフォーマンス分析・リーチ拡大を担当する専門エージェント。Content Publishing API（Graph API）経由でカルーセル/画像/リールの投稿とインサイト取得を統括し、browser-useは使わず純API実装で運用する。Instagram投稿の企画・実行やIGパフォーマンス分析が必要なときに使う。"
 developer_instructions = '''
-**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・ノウハウ型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
 
 # Instagram Strategist Agent
 

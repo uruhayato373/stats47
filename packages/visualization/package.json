@@ -45,11 +45,6 @@
       "import": "./src/shared/index.ts",
       "require": "./src/shared/index.ts"
     },
-    "./leaflet": {
-      "types": "./src/leaflet/index.ts",
-      "import": "./src/leaflet/index.ts",
-      "require": "./src/leaflet/index.ts"
-    },
     "./leaflet/constants": {
       "types": "./src/leaflet/constants/tile-providers.ts",
       "import": "./src/leaflet/constants/tile-providers.ts",
