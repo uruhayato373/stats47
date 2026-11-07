@@ -173,6 +173,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [COCONALA-SESSION-TEST-STALE-01] 撤退済みの GEO-SERVICE-01 の fixLimit を期待するテストが push 前の検査を止める
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/coconala/__tests__/session.test.mjs] [起票:2026-11-08] [領域:管理]
+
+- **症状 (2026-11-08 観測)**: `.claude/scripts/coconala/__tests__/session.test.mjs` の「configured revision counts reach the form layer」が `GEO-SERVICE-01` の `fixLimit` を `'1'` と期待するが、`config/coconala-listings.json` では 2026-10-26 (`b10983e30`) から未設定 (出品は withdrawn)。push 前の検査 (`pre-push-tests.mjs`) が落ち、関係の無い push を止める。
+- **次**: 撤退した出品の `fixLimit` を残すか決め、テストの期待値か設定のどちらかを合わせる (ココナラは撤退済みなので、テスト側で withdrawn を除くのが最小)。
+- **完了条件**: 検証コマンドが通る。
+
 ### [LOCAL-PRODUCT-OUTPUTS-OFFLOAD-01] 商品の生成物と SNS 画像をローカルから外し、R2 / Drive を読む形にする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-local-registry.mjs] [起票:2026-11-08] [領域:管理]
 
