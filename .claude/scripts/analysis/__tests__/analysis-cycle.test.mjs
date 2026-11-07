@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 
-import { analysisCycleErrors, ANALYSIS_STAGES } from "../analysis-cycle-core.mjs";
+import { analysisCycleErrors, ANALYSIS_STAGES, reviewedArticleText } from "../analysis-cycle-core.mjs";
 
 const ROOT = join(import.meta.dirname, "../../../..");
 const { layers } = JSON.parse(readFileSync(join(ROOT, "data/content/analysis-viewpoints.json"), "utf8"));
@@ -120,6 +120,11 @@ test("MAJOR が残る PASS は認めない (H01 の実例)", () => {
   const review = `verdict: PASS\narticleSha256: ${"a".repeat(64)}\n- [MAJOR][title-promise] 副題が幅より強い`;
   assert.ok(reviewedRun({ review }).includes("審査の BLOCK か MAJOR の指摘が残っている"));
   assert.deepEqual(reviewedRun({ review: review.replace("MAJOR", "MINOR") }), []);
+});
+
+test("公開の切り替えは審査の後の本文の変更に数えない", () => {
+  assert.equal(reviewedArticleText("---\npublished: true\n---\n本文"), "---\npublished: false\n---\n本文");
+  assert.equal(reviewedArticleText("published: true は本文の語"), "published: true は本文の語");
 });
 
 test("ハッシュの無い PASS は認めない", () => {

@@ -272,6 +272,7 @@ updated: 2026-11-01
 - **起点**: `core.hooksPath` が本体の絶対パスなので、本体が `.husky/pre-push` を持つブランチにいると、スクリプトの無い develop の worktree の push が `MODULE_NOT_FOUND` で落ちる (2026-11-07)。
 - **次**: フックがスクリプトの有無を確かめるか、hooksPath を相対にする。
 - **完了条件**: develop から切った worktree で push できる。
+- **追記 (2026-11-07)**: フックが選ぶテストのうち、`generate-article-charts-ranks.test.mjs` の「入力が昇順でも値の降順を維持し」は統合前の develop でも落ちる (ランキングの図が型の画像へ移ってラベルの形が変わったためとみられる。原因は未確認)。`page-quality/__tests__/ui-review.test.mjs` はフックが tsx なしで動かすので `ERR_MODULE_NOT_FOUND` になる。どちらも直すまで、フックは関係の無い push を止める。
 
 ### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]

@@ -7,6 +7,9 @@ const SHARES_TOTAL = 100;
 const SHARES_TOLERANCE = 0.5;
 const MIN_ROBUSTNESS_CASES = 2;
 
+/** 審査は下書きの本文に対して行う。公開の切り替えは本文の変更ではないので、比べる前に下書きの形へ戻す */
+export const reviewedArticleText = (article) => article?.replace(/^published: true$/m, "published: false") ?? null;
+
 const reached = (analysis, stage) => ANALYSIS_STAGES.indexOf(analysis.stage) >= ANALYSIS_STAGES.indexOf(stage);
 const resolve = (object, path) => path.split(".").reduce((value, key) => (value === undefined || value === null ? undefined : value[key]), object);
 

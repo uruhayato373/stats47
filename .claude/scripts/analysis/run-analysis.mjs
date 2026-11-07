@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
 import { MAX_ROUNDS, draftBlockers, nextStep } from "./analysis-run-core.mjs";
+import { reviewedArticleText } from "./analysis-cycle-core.mjs";
 import { checkAnalyses } from "./check-analysis-cycle.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -231,7 +232,7 @@ function currentState() {
   const article = readText(articlePath);
   const summary = readText(summaryPath);
   const review = readText(reviewPath);
-  const articleSha = article ? sha256(article) : null;
+  const articleSha = article ? sha256(reviewedArticleText(article)) : null;
   const cycle = checkAnalyses(slug).errors.map((e) => e.replace(`${analysisId}: `, ""));
   const ledgerErrors = cycle.filter((e) => /視点|主張|結論が問い/.test(e));
   const findings = [...(review ?? "").matchAll(/^- \[(BLOCK|MAJOR|MINOR)\](.*)$/gm)].map(([, severity, text]) => ({ severity, text: text.trim() }));

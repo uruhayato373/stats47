@@ -7,7 +7,7 @@ import path from "node:path";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { classifyAll } from "../../../../.claude/scripts/content-types/classify-core.mjs";
 import { readClassifyInputs } from "../../../../.claude/scripts/content-types/content-types-io.mjs";
-import { analysisCycleErrors } from "../../../../.claude/scripts/analysis/analysis-cycle-core.mjs";
+import { analysisCycleErrors, reviewedArticleText } from "../../../../.claude/scripts/analysis/analysis-cycle-core.mjs";
 import { readDraftStates } from "../../../../.claude/scripts/issues/issue-draft-state.mjs";
 import { indexPages } from "../../../../.claude/scripts/issues/issue-graph-core.mjs";
 import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf, viewpointRows, type AnalysisInput, type AnalysisViewpoint, type ViewpointLayer, type ViewpointRow } from "../question-detail";
@@ -126,7 +126,7 @@ function analysisCycle(analysis: CycleAnalysis, issue: { question: string }, fig
     figures: figures.filter((f) => f.analysis === analysis.id),
     article,
     review: read("review.md"),
-    hashes: { article: sha256(article), summary: sha256(summary) },
+    hashes: { article: sha256(reviewedArticleText(article)), summary: sha256(summary) },
   });
   return { id: analysis.id, stage: analysis.stage, rows, problems };
 }
