@@ -14,7 +14,7 @@ tags:
   - 市区町村
 publishedAt: 2026-11-06
 updatedAt: "2026-11-06"
-published: false
+published: true
 ogImage: /blog/vacant-houses-population-decline/og.png
 ---
 

@@ -12,7 +12,7 @@ tags:
   - 市区町村
 publishedAt: 2026-11-07
 updatedAt: "2026-11-07"
-published: false
+published: true
 ogImage: /blog/manufacturing-strength-factory-size/og.png
 ---
 

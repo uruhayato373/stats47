@@ -5,7 +5,7 @@
       "id": "analysis:M01-factory-size",
       "issue": "issue:M01",
       "status": "draft",
-      "stage": "reviewed",
+      "stage": "approved",
       "question": "製造業が強い地域の強さは、規模か生産性か",
       "spec": ".claude/scripts/analysis/examples/m01-manufacturing.json",
       "derivedMetrics": [
@@ -203,7 +203,7 @@
       "id": "analysis:H01-vacancy-population",
       "issue": "issue:H01",
       "status": "draft",
-      "stage": "reviewed",
+      "stage": "approved",
       "question": "空き家が増えているのは、人口が減った町だけか",
       "spec": ".claude/scripts/analysis/examples/h01-vacancy.json",
       "script": ".claude/scripts/analysis/h01-vacancy-population.ts",
