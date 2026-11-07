@@ -341,7 +341,39 @@ test('worktreeStatus: メインの working tree は root=true で stale 判定�
 });
 
 // ---- ファイル単位の保持期限と容量上限 (2026-10-10: 会話記録・生成画像・.local/r2 の肥大化対策) ----
-import { planFileRetention, pruneFiles, checkFootprint, unregisteredLocalEntries } from '../local-resources.mjs';
+import { planFileRetention, pruneFiles, checkFootprint, unregisteredLocalEntries, pruneCodexThreadHistory } from '../local-resources.mjs';
+import { createRequire } from 'node:module';
+
+test('Codex の投影 DB からは、記録の消えた exec スレッドの行だけを消す (アプリの会話と記録の残る行は残す)', (t) => {
+  const { home } = homeFixture(t);
+  const Database = createRequire(import.meta.url)('better-sqlite3');
+  fs.mkdirSync(path.join(home, '.codex'), { recursive: true });
+  const kept = path.join(home, '.codex/sessions/kept.jsonl');
+  fs.mkdirSync(path.dirname(kept), { recursive: true });
+  fs.writeFileSync(kept, '{}');
+  const state = new Database(path.join(home, '.codex/state.sqlite'));
+  state.exec('create table threads (id text, source text, rollout_path text)');
+  const insert = state.prepare('insert into threads values (?, ?, ?)');
+  insert.run('gone-exec', 'exec', path.join(home, '.codex/sessions/gone.jsonl'));
+  insert.run('kept-exec', 'exec', kept);
+  insert.run('gone-app', 'vscode', path.join(home, '.codex/sessions/gone-app.jsonl'));
+  state.close();
+  const history = new Database(path.join(home, '.codex/history.sqlite'));
+  history.exec('create table thread_turns (thread_id text, turn_id text); create table thread_items (thread_id text, item_json text)');
+  for (const id of ['gone-exec', 'kept-exec', 'gone-app']) {
+    history.prepare('insert into thread_turns values (?, ?)').run(id, 't1');
+    history.prepare('insert into thread_items values (?, ?)').run(id, 'x'.repeat(1000));
+  }
+  history.close();
+  const cfg = { stateDb: '~/.codex/state.sqlite', historyDb: '~/.codex/history.sqlite' };
+  assert.equal(pruneCodexThreadHistory(cfg, { home }).threads, 1, '乾式は数えるだけ');
+  const result = pruneCodexThreadHistory(cfg, { home, apply: true });
+  assert.deepEqual([result.threads, result.rows], [1, 2]);
+  const after = new Database(path.join(home, '.codex/history.sqlite'), { readonly: true });
+  assert.deepEqual(after.prepare('select thread_id from thread_turns order by thread_id').all().map((r) => r.thread_id), ['gone-app', 'kept-exec']);
+  after.close();
+  assert.deepEqual(pruneCodexThreadHistory(null, { home }), { skipped: 'not-configured' });
+});
 
 test('.local 直下は localRegistry か cachePaths に載る名前だけを許し、無い名前を返す', (t) => {
   const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-registry-test-')));
@@ -424,6 +456,18 @@ test('計画後に書き換わったファイル・設定に無い root・7 日�
   assert.equal(fs.existsSync(file), true);
   assert.throws(() => pruneFiles(plan, [], { home }), /not configured/);
   assert.equal(planFileRetention([{ root: '~/.codex/sessions', ageDays: 1 }], { home })[0].skipped, 'ageDays must be >= 7');
+});
+
+test('入れ子のフォルダが同時に空になっても、片付けの途中で止まらない', (t) => {
+  const { home, put } = homeFixture(t);
+  put('.codex/sessions/a/b/c/deep.jsonl', 40);
+  put('.codex/sessions/a/b/mid.jsonl', 40);
+  put('.codex/sessions/a/top.jsonl', 40);
+  const entries = [{ root: '~/.codex/sessions', match: '*', ageDays: 7 }];
+  const plan = planFileRetention(entries, { home });
+  assert.equal(pruneFiles(plan, entries, { home }).removedFiles, 3);
+  assert.equal(fs.existsSync(path.join(home, '.codex/sessions/a')), false);
+  assert.equal(fs.existsSync(path.join(home, '.codex/sessions')), true);
 });
 
 test('maxGiB を超えた分は期限内でも古い順に回収し、直近 keepHours のファイルは残す', (t) => {

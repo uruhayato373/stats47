@@ -448,7 +448,7 @@ page-quality (週次 `quality-suite-weekly.yml` の page-quality job) / PSI (週
 hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。
 
 月次監査は親子フォルダーを一度の走査で集計し、ユーザー共通のCodex/Claude保存領域も測る。
-共有履歴DB・認証profileは自動削除しない。定期処理の失敗は成功済みの日次計測とは別に再試行する。
+認証profileは自動削除しない。Codex の会話の投影 DB (`thread_history_*.sqlite`) は、元の記録が消えた exec スレッドの行だけを日次で消す (アプリでの会話は消さない)。定期処理の失敗は成功済みの日次計測とは別に再試行する。
 ビルド成果物とTurbo保存対象から、standalone内に入れ子になった `.next/cache` も除外する。
 
 - Turboは `turbo.json` のキャッシュ上限 `2GB`、同時実行2件。実行時にTurbo自身が回収する。
@@ -496,9 +496,11 @@ R2成果物・provenanceと原典URLの再取得可能性を確認して処理�
 | `.next/cache`・`apps/web/.next/dev` (Turbopack の dev キャッシュ)・`apps/{web,admin}/.local/next-*` (別出力先の dev/e2e)・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
 | `.local/*-trial`・`.local/*-debug` (試作・画面キャプチャ。使うスクリプトがフォルダを作り直す) | 14日 | 同上 |
 | `.local/verification/{release,seo,x-visuals}/*`・`.local/geo-source-*` | 30日 (実行ごとのフォルダ単位) | 同上 |
-| `.local/r2/*` (push staging。上位フォルダごとに判定。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる。**`sns` は未投稿の X / Threads 画像の唯一の置き場なので除外**) | 7日 | 同上 |
+| `.local/r2/*` (push staging。上位フォルダごとに判定。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる。`sns` は下の行でファイル単位に判定) | 7日 | 同上 |
+| `.local/r2/sns/**` (SNS 画像の生成・予約の作業領域。画像の正本は private R2 の `sns-assets/` で、`archive-sns-assets.mjs` が予約・投稿後に保全する。予約時にローカルに無ければ `publish-x` / `publish-threads` が private R2 から照合つきで戻す) | 30日 + 0.5GiB (ファイル単位) | 同上 (`fileRetention`) |
 | `~/.claude/projects/**/*.jsonl` (Claude Code の会話記録。`cleanupPeriodDays: 7` が残すサブエージェント分を回収。`memory` とリンク先は対象外) | 7日 (ファイル単位) | 同上 (`fileRetention`) |
-| `~/.codex/{sessions,archived_sessions,generated_images}` (Codex の会話記録と生成画像。`thread_history_*.sqlite` は Codex の内部 DB なので対象外) | 7日 + 容量上限 (sessions 2GiB・画像 1GiB。超過分は直近 24 時間を除き古い順。ファイル単位) | 同上 (`fileRetention` の `maxGiB`) |
+| `~/.codex/{sessions,archived_sessions,generated_images}` (Codex の会話記録と生成画像。`thread_history_*.sqlite` は下の行) | 7日 + 容量上限 (sessions 2GiB・画像 1GiB。超過分は直近 24 時間を除き古い順。ファイル単位) | 同上 (`fileRetention` の `maxGiB`) |
+| `~/.codex/thread_history_*.sqlite` (会話の投影 DB。記録を消しても行が残り、2026-11-08 に 2,827 スレッドで 5.3GB) | 元の記録が消えた exec スレッドの行だけを消して VACUUM。上限 1GiB を超えたら警告 | 同上 (`codexThreadHistory`) |
 | `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
 | 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
 | git追跡の生snapshot (psi/url-inspection/cloudflare/note/releases/analytics週次) | `prune-state-snapshots.mjs` の `RETENTION_POLICIES` | `fetch-metrics-weekly.yml` |
@@ -550,6 +552,7 @@ Codex の記録は期限に加えて `maxGiB` を超えた分を古い順に消�
 | 人が見返す作業記録・候補画像・納品物の控え | Google Drive `stats47/` |
 | 作業の途中だけ要るもの | OS の一時領域 (`os.tmpdir()`)。終わったら消す |
 | ログイン済みブラウザ・小さい作業状態 | `.local` (台帳に auth / state で登録) |
+| 商品・記事の納品物 | private R2 の記事保存 (`note:article save` の `product/`) か Kindle の暗号化保管。ローカルの生成出力は 30 日で消える |
 
 - **スキルとエージェントは作ったものを最後に消す。** 残すものは上の置き場へ移してから消す。
   一回きりの調査スクリプトやログを `.local` 直下に置かない。

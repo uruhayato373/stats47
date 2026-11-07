@@ -290,6 +290,26 @@
     {
       "path": ".local/note-card-repair",
       "ageDays": 30
+    },
+    {
+      "path": ".local/coconala-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/geo-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/muni-data-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-products-revisions",
+      "ageDays": 30
     }
   ],
   "scratchRoots": {
@@ -389,6 +409,13 @@
       "ageDays": 7,
       "why": "Codex の生成画像。採用した画像は git (assets/) か R2 に置く規則。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
       "maxGiB": 1
+    },
+    {
+      "root": ".local/r2/sns",
+      "match": "*",
+      "ageDays": 30,
+      "maxGiB": 0.5,
+      "why": "X / Threads / Instagram 画像の生成・予約の作業領域。画像の正本は private R2 の sns-assets/ (archive-sns-assets.mjs が予約・投稿後に保全)。予約時に無ければ publish-x / publish-threads が private R2 から戻す (2026-11-08)"
     }
   ],
   "footprintBudgets": [
@@ -415,6 +442,10 @@
     {
       "path": "~/.codex/generated_images",
       "maxGiB": 2
+    },
+    {
+      "path": "~/.codex/thread_history_1.sqlite",
+      "maxGiB": 1
     }
   ],
   "localRegistry": [
@@ -516,7 +547,7 @@
     {
       "pattern": "r2",
       "kind": "state",
-      "why": "R2 push staging の親。中身は cachePaths .local/r2/* が期限で消す (sns は未投稿画像の唯一の置き場)"
+      "why": "R2 push staging の親。中身は cachePaths .local/r2/* (sns 以外) と fileRetention .local/r2/sns (ファイル単位 30 日・0.5GiB) が回収する"
     },
     {
       "pattern": "tsbuildinfo",
@@ -532,31 +563,6 @@
       "pattern": "stop-docs-success.json",
       "kind": "state",
       "why": "Stop hook の文書検査の成功記録"
-    },
-    {
-      "pattern": "coconala-products",
-      "kind": "product",
-      "why": "note カバー設計が読む v3 パックの data.csv だけを残す (2026-11-08 に納品パック本体を削除)"
-    },
-    {
-      "pattern": "geo-products",
-      "kind": "product",
-      "why": "Geo 商品の生成物。販売カタログと note 添付が読む。正本は private R2"
-    },
-    {
-      "pattern": "muni-data-products",
-      "kind": "product",
-      "why": "市区町村データ商品の生成物"
-    },
-    {
-      "pattern": "note-products",
-      "kind": "product",
-      "why": "note 商品記事の生成物。販売カタログが読む"
-    },
-    {
-      "pattern": "note-products-revisions",
-      "kind": "product",
-      "why": "note 商品記事の改訂版。販売カタログが読む"
     },
     {
       "pattern": "kindle-private",
@@ -583,5 +589,10 @@
       "kind": "state",
       "why": "検索順位の定点観測の記録"
     }
-  ]
+  ],
+  "codexThreadHistory": {
+    "stateDb": "~/.codex/state_5.sqlite",
+    "historyDb": "~/.codex/thread_history_1.sqlite",
+    "why": "Codex の会話の投影 DB。元の記録 (sessions) を期限で消しても行が残るので、記録の消えた exec スレッドの行だけを日次で消す。ファイル名の版が変わったらここを直す"
+  }
 }

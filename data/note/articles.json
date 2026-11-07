@@ -11404,12 +11404,12 @@
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "e1ca72333b27e34e2003e7806f69911569937ebedae67f0e8d209ecd262b9a87",
-          "files": 8,
-          "bytes": 478169,
-          "savedAt": "2026-11-04T07:09:36.646Z"
+          "sha256": "a628f9a97558fd34816da1d778e24b6d59a05a7601767df019d2d8d1083f3a79",
+          "files": 9,
+          "bytes": 7742417,
+          "savedAt": "2026-11-07T22:43:31.226Z"
         },
-        "verifiedAt": "2026-11-04T07:09:36.646Z"
+        "verifiedAt": "2026-11-07T22:43:31.226Z"
       },
       "noteUrl": "https://note.com/stats47/n/n5d86476e9c73",
       "publishedAt": "2026-11-04"

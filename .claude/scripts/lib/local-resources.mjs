@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { LOCAL_RESOURCES } from '../../../config/paths.mjs';
 
@@ -543,6 +544,11 @@ export function pruneFiles(plan, entries = CONFIG.fileRetention ?? [], { home = 
     // 消したファイルの親から root の手前まで、空になったフォルダだけを消す
     for (let dir of [...touched].sort((a, b) => b.length - a.length)) {
       while (dir !== item.root && dir.startsWith(item.root + path.sep)) {
+        // 入れ子の空フォルダは別の経路で先に消えていることがある (2026-11-08 に .local/r2/sns で ENOENT)
+        if (!fs.existsSync(dir)) {
+          dir = path.dirname(dir);
+          continue;
+        }
         if (fs.readdirSync(dir).length) break;
         fs.rmdirSync(dir);
         dir = path.dirname(dir);
@@ -550,6 +556,52 @@ export function pruneFiles(plan, entries = CONFIG.fileRetention ?? [], { home = 
     }
   }
   return { removedBytes, removedFiles };
+}
+
+/**
+ * Codex の会話の投影 DB (thread_history) から、元の記録 (rollout) が消えた exec スレッドの行だけを消す。
+ * 投影は記録から作られ、記録を消しても行が残る (2026-11-08 に一括生成 2,827 スレッドで 5.3GB)。
+ * アプリでの会話 (exec 以外) と、記録が残るスレッドには触れない。DB が無い・形が違うときは何もしない。
+ * @param {{ stateDb: string, historyDb: string } | undefined} cfg @param {{ apply?: boolean, home?: string, exists?: (p: string) => boolean }} [options]
+ */
+export function pruneCodexThreadHistory(cfg = CONFIG.codexThreadHistory, { apply = false, home = os.homedir(), exists = fs.existsSync } = {}) {
+  if (!cfg) return { skipped: 'not-configured' };
+  const stateDb = resolveConfigPath(cfg.stateDb, home);
+  const historyDb = resolveConfigPath(cfg.historyDb, home);
+  if (!fs.existsSync(stateDb) || !fs.existsSync(historyDb)) return { skipped: 'missing' };
+  const Database = createRequire(import.meta.url)('better-sqlite3');
+  const state = new Database(stateDb, { readonly: true, fileMustExist: true });
+  let orphaned;
+  try {
+    orphaned = new Set(
+      state.prepare("select id, rollout_path from threads where source = 'exec'").all()
+        .filter((row) => row.rollout_path && !exists(row.rollout_path))
+        .map((row) => row.id)
+    );
+  } finally {
+    state.close();
+  }
+  const history = new Database(historyDb, { fileMustExist: true, timeout: 60000 });
+  try {
+    const present = history.prepare('select distinct thread_id from thread_turns').all().map((r) => r.thread_id);
+    const targets = present.filter((id) => orphaned.has(id));
+    const result = { threads: targets.length, rows: 0, bytesBefore: fs.statSync(historyDb).size, bytesAfter: null };
+    if (!apply || !targets.length) return result;
+    const tables = history.prepare("select name from sqlite_master where type = 'table' and name like 'thread_%'").all().map((r) => r.name)
+      .filter((name) => history.prepare(`select 1 from pragma_table_info('${name}') where name = 'thread_id'`).get());
+    const remove = history.transaction((ids) => {
+      for (const table of tables) {
+        const stmt = history.prepare(`delete from "${table}" where thread_id = ?`);
+        for (const id of ids) result.rows += stmt.run(id).changes;
+      }
+    });
+    remove(targets);
+    history.exec('vacuum');
+    result.bytesAfter = fs.statSync(historyDb).size;
+    return result;
+  } finally {
+    history.close();
+  }
 }
 
 /** footprintBudgets の各パスの容量を測り、上限を超えたものを warning にする (肥大化の機械検知)
@@ -729,6 +781,13 @@ export async function main(args = process.argv.slice(2)) {
         const pruned = pruneFiles(retention);
         result.removedBytes += pruned.removedBytes;
         result.removedFiles = pruned.removedFiles;
+        try {
+          result.codexThreadHistory = pruneCodexThreadHistory(CONFIG.codexThreadHistory, { apply: true });
+          const h = result.codexThreadHistory;
+          if (h.bytesAfter != null) result.removedBytes += Math.max(0, h.bytesBefore - h.bytesAfter);
+        } catch (error) {
+          result.codexThreadHistory = { error: error.message };
+        }
         result.after = measure();
       }
       if (!gisOnly) {

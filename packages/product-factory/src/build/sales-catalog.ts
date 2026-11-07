@@ -189,8 +189,16 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
       channels: [{ channel: "note", publicationStatus: url ? "published-recorded" : "draft", checkedAt: null,
         url: url || null, priceYen: num(n.price_jpy) ?? p.priceYen, priceStatus: url ? "recorded" : "proposal", blockers: [] }],
       nextAction: url ? "公開済み本文・添付・購入導線をログイン済み画面で再照合する" : p.readinessGate };
+    // 販売中の納品物の正本は private R2 の記事保存 (本文 + product/*.zip)。ローカルの生成物は作業出力で、
+    // 期限で消える (2026-11-08)。ローカルが無くても、台帳が読み戻し照合済みの版を持てばそれを根拠にする。
+    const saved = obj(obj(noteArticles.find((item) => item.key === p.articleKey)?.body).manifest);
+    const savedVerified = str(obj(noteArticles.find((item) => item.key === p.articleKey)?.body).verifiedAt);
     if (o.artifactDirectory) inspect(o, "MANIFEST.json");
-    else o.blockers.push("本文・添付・再現テスト・出典利用条件・独立レビューが未完了");
+    else if (str(saved.sha256) && savedVerified) {
+      o.buildStatus = "hash-verified";
+      o.artifactSha256 = str(saved.sha256);
+      o.evidencePaths.push(noteLedgerPath);
+    } else o.blockers.push("本文・添付・再現テスト・出典利用条件・独立レビューが未完了");
     o.blockers.push(url ? "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）" : p.readinessGate);
     offers.push(o);
   }

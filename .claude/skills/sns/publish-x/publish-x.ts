@@ -992,8 +992,27 @@ function jstDateStr(d: Date): string {
   return jst.toISOString().slice(0, 10);
 }
 
-// --from-queue の media 不在時に quick-still で決定的に再生成する (ranking domain のみ)。
+// --from-queue の media 不在時は、台帳に保全済みの private R2 の画像を照合つきで戻す (2026-11-08。
+// .local/r2/sns は期限で消える作業領域で、画像の正本は private R2 の sns-assets/)。戻せないときだけ
+// quick-still で決定的に再生成する (ranking domain のみ)。
+async function restoreArchivedMedia(post: PostConfig): Promise<void> {
+  if (post.imagePaths.length > 0 || !post.recordId) return;
+  const row = store.loadAll().find((p: Record<string, unknown>) => p.id === post.recordId);
+  if (!row) return;
+  try {
+    const { ensureSnsImageLocal } = await import("../../../scripts/media/lib/storage.mjs");
+    const restored = await ensureSnsImageLocal(row, PROJECT_ROOT);
+    if (restored) {
+      post.imagePaths = [restored];
+      console.log(`↓ id=${post.recordId} の画像を用意しました (${path.relative(PROJECT_ROOT, restored)})`);
+    }
+  } catch (e) {
+    console.error(`⚠️  private R2 からの画像の復元に失敗 (id=${post.recordId}): ${(e as Error).message}`);
+  }
+}
+
 async function ensureQueueMedia(post: PostConfig): Promise<void> {
+  await restoreArchivedMedia(post);
   if (!post.regenKey || post.imagePaths.length > 0) return;
   console.log(`🖼  media 不在 → quick-still 再生成: ${post.regenKey}`);
   try {

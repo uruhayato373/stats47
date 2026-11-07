@@ -262,6 +262,13 @@ async function publishOne(page: Page, item: QueueItem, dryRun: boolean, noLedger
   try {
     await openComposer(page);
     if (item.mediaPath) {
+      // .local/r2/sns は期限で消える。無ければ台帳に保全済みの private R2 の版を戻す (2026-11-08)
+      if (!fs.existsSync(item.mediaPath)) {
+        const row = store.loadAll().find((p: any) => p.id === item.id);
+        const { ensureSnsImageLocal } = await import("../../../scripts/media/lib/storage.mjs");
+        const restored = row ? await ensureSnsImageLocal(row, PROJECT_ROOT) : null;
+        if (restored) item.mediaPath = restored;
+      }
       if (!fs.existsSync(item.mediaPath)) throw new Error(`画像がありません: ${item.mediaPath}`);
       await attachImage(page, item.mediaPath);
     }

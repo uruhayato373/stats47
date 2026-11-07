@@ -586,8 +586,8 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 
 次の 8 日間に予約・下書きがある X / Threads / Instagram 投稿の画像と本文を、毎週日曜 07:30 に Mac の launchd
 (`scripts/scheduled/sns-image-review.sh` → `.claude/scripts/sns/review-sns-images.ts`) が確認する。
-**CI でなく Mac で動かすのは、X / Threads の画像が投稿時にこの Mac から上げていて `.local/r2/sns/` にしか無いため**
-(R2 には Instagram の素材だけがある)。
+**CI でなく Mac で動かすのは、X / Threads の画像をこの Mac で作り `.local/r2/sns/` から上げるため**
+(作業コピーは 30 日で消える。正本は private R2 の `sns-assets/` で、確認ジョブと `publish-x` / `publish-threads` はローカルに無ければそこから照合つきで戻す。2026-11-08)。
 
 1. 機械検査: 画像の欠落・Instagram 画像が 1080x1350 か・本文の長さ (X は重み付き 280、Threads 500 字、Instagram 2200 字)
 2. Claude (sonnet・`Read`/`Glob` だけ) が `.claude/prompts/local/sns-image-review.md` に沿って画像と本文を見て、

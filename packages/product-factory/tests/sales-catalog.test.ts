@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { BUSINESS_PLAN_M1_NOTE_PRODUCTS } from "@stats47/data-configs/business-plan";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
 import { buildSalesCatalog, CURRENT_SALES_REVISIONS, csvCell, escapeHtml, localPath, renderSalesCsv, renderSalesHtml, verifyManifest } from "../src/build/sales-catalog";
 
@@ -27,6 +28,17 @@ describe("sales readiness does not conflate generation and publication", () => {
       url: 'https://note.com/stats47/n/n323af74c09cc', priceStatus: 'recorded', priceYen: 4500,
       checkedAt: '2026-10-26T02:00:00Z', blockers: [] });
     expect(offer.buildStatus).toBe('missing');
+  });
+  it('treats a note product saved and read back in private R2 as verified without a local build (2026-11-08)', () => {
+    const root = fixture();
+    const product = BUSINESS_PLAN_M1_NOTE_PRODUCTS[0];
+    json(root, 'data/note/articles.json', { articles: [{ key: product.articleKey, status: 'published',
+      body: { store: 'r2-private', manifest: { sha256: 'a'.repeat(64), files: 10 }, verifiedAt: '2026-11-08T00:00:00Z' } }] });
+    const offer = buildSalesCatalog(root, '2026-11-08').offers.find((item) => item.id === product.id)!;
+    expect(offer).toMatchObject({ buildStatus: 'hash-verified', artifactSha256: 'a'.repeat(64), artifactDirectory: null });
+    expect(offer.blockers.join()).not.toContain('本文・添付');
+    json(root, 'data/note/articles.json', { articles: [{ key: product.articleKey, status: 'draft', body: { store: 'r2-private', manifest: null } }] });
+    expect(buildSalesCatalog(root, '2026-11-08').offers.find((item) => item.id === product.id)!.buildStatus).toBe('missing');
   });
   it("keeps the entire authored population when all evidence is missing", () => {
     const c = buildSalesCatalog(fixture(), "2026-09-06");
