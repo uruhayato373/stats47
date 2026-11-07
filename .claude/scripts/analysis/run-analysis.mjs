@@ -5,7 +5,9 @@
  * 結果はファイルに置くので Claude の会話を消費しない。Claude を使うのは最終審査の 1 回だけ。
  * 公開はしない。止まったら理由を 1 行で出して終わる。
  *
- *   npm run analysis:run -- --analysis analysis:M01-factory-size [--notebooks "A,B"] [--max-steps 12] [--dry-run]
+ *   npm run analysis:run -- --analysis analysis:M01-factory-size [--notebooks "A,B"] [--plan-figures] [--writer claude|codex] [--max-steps 12] [--dry-run]
+ *
+ * 文章は既定で Claude の書き手が書く。実行役は小包 (writer-packet.md) を作って止まり、セッションが article-writer に渡す。
  */
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -14,7 +16,7 @@ import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
-import { MAX_ROUNDS, draftBlockers, nextStep } from "./analysis-run-core.mjs";
+import { MAX_ROUNDS, buildWriterPacket, draftBlockers, nextStep, reviewMode } from "./analysis-run-core.mjs";
 import { reviewedArticleText } from "./analysis-cycle-core.mjs";
 import { checkAnalyses } from "./check-analysis-cycle.mjs";
 
@@ -62,7 +64,12 @@ const paths = {
   research: join(work, "research.json"),
   result: join(work, "result.json"),
   run: join(work, "run.json"),
+  inventory: join(work, "inventory.json"),
+  packet: join(work, "writer-packet.md"),
+  sheet: join(work, "figures-sheet.png"),
+  numbers: join(work, "numbers.json"),
 };
+const writer = arg("--writer") ?? "claude";
 const slug = first.article?.slug;
 const articleDir = at("contents/blog", slug ?? "");
 const articlePath = join(articleDir, "article.md");
@@ -88,9 +95,9 @@ const prompt = (name, values) => readFileSync(at(HERE, "prompts", `${name}.md`),
  * Codex を 1 回呼ぶ。標準入力を閉じないと背景実行で無言で止まる (2026-10 の実例)。
  * read-only なので作業ツリーを書かず、返答はファイルにだけ残す。
  */
-function codex(step, text, { schema, sandbox = "read-only" }) {
+function codex(step, text, { schema, sandbox = "read-only", images = [] }) {
   const out = join(work, `${step}.out`);
-  const args = ["exec", "--json", "--ephemeral", "-s", sandbox, "-C", ROOT, "-o", out];
+  const args = ["exec", "--json", "--ephemeral", "-s", sandbox, "-C", ROOT, "-o", out, ...images.flatMap((image) => ["-i", image])];
   if (schema) args.push("--output-schema", at(HERE, "schemas", `${schema}.schema.json`));
   const started = Date.now();
   const done = shell("codex", [...args, text], { allowFailure: true });
@@ -210,12 +217,76 @@ const STEPS = {
     saveRun();
   },
   review() {
-    const articleSha = sha256(readFileSync(articlePath));
-    const body = JSON.parse(codex("review", prompt("review", shared()), { schema: "review" }));
+    const articleSha = sha256(reviewedArticleText(readFileSync(articlePath, "utf8")));
+    const { mode, previous } = reviewMode(run.reviewHistory);
+    const modeText = mode === "full"
+      ? "初回の審査。読者の目で全文を見る。"
+      : `再審査。前回の指摘が解消したかだけを確かめ、新しい指摘は BLOCK だけを出す。前回の指摘:\n${formatFindings(previous)}`;
+    const unmatched = unmatchedNumbers();
+    const images = renderSheet() ? [paths.sheet] : [];
+    const body = JSON.parse(codex("review", prompt("review", { ...shared(), mode: modeText, unmatched: unmatched.map((n) => `- ${n}`).join("\n") || "(なし)" }), { schema: "review", images }));
     run.firstReview = { articleSha, ...body };
+    run.reviewHistory = [...(run.reviewHistory ?? []), { articleSha, findings: body.findings }];
     saveRun();
   },
+  inventory() {
+    const terms = loadAnalysis().inventoryTerms.join(",");
+    shell("npm", ["run", "-s", "analysis:inventory", "--", "--terms", terms, "--level", "city", "--out", rel(paths.inventory)]);
+  },
+  figures() {
+    const analysis = loadAnalysis();
+    const templates = Object.keys(readJson(at(datasetPath("content.figures"))).figures.reduce((all, f) => ({ ...all, [f.template]: 1 }), {})).join("・");
+    const body = JSON.parse(codex("figures", prompt("figures", {
+      ...shared(), result: rel(paths.result), templates, chars: analysis.article?.chars ?? "", issueCode: short.toUpperCase(), analysisId, slug,
+    }), { schema: "figures" }));
+    const planned = body.figures.map((line) => JSON.parse(line));
+    const ledgerPath = at(datasetPath("content.figures"));
+    const ledger = readJson(ledgerPath);
+    const before = JSON.stringify(ledger);
+    ledger.figures = [...ledger.figures.filter((f) => f.analysis !== analysisId), ...planned];
+    writeJson(ledgerPath, ledger);
+    // 台帳の形が崩れたら書き戻して止める
+    const check = shell("npm", ["run", "-s", "check-datasets"], { allowFailure: true });
+    if (check.status !== 0) {
+      writeFileSync(ledgerPath, `${JSON.stringify(JSON.parse(before), null, 2)}\n`);
+      throw new Error(`図の台帳が形に合わない:\n${check.stdout.slice(-800)}`);
+    }
+    shell("npm", ["run", "-s", "analysis:draft", "--", "--analysis", analysisId, "--result", rel(paths.result), "--figures-only"]);
+    rmSync(join(articleDir, "article.prompt.txt"), { force: true });
+    run.figurePlan = { summarySha: sha256(readFileSync(summaryPath)), count: planned.length };
+    saveRun();
+  },
+  packet({ findings, reason }) {
+    const analysis = loadAnalysis();
+    writeFileSync(paths.packet, buildWriterPacket({
+      question: issue.question, terms: (analysis.questionTerms ?? []).join("・"), analysis, figures: figuresOf(),
+      summaryPath: rel(summaryPath), articlePath: rel(articlePath), reason, findings, unmatchedNumbers: existsSync(articlePath) ? unmatchedNumbers() : [],
+    }));
+    run.rounds.draft += 1;
+    saveRun();
+    console.log(`■ 止まった: needs-writer — ${reason}。Agent article-writer に ${rel(paths.packet)} を渡して書かせ、もう一度実行する`);
+    process.exit(0);
+  },
 };
+
+/** 本文の数値のうち、分析の出力に出どころが無いもの。道具が無ければ空 */
+function unmatchedNumbers() {
+  if (!existsSync(articlePath) || !existsSync(summaryPath)) return [];
+  const done = shell("npm", ["run", "-s", "analysis:numbers", "--", "--article", rel(articlePath), "--summary", rel(summaryPath)], { allowFailure: true });
+  try {
+    const result = JSON.parse(done.stdout.slice(done.stdout.indexOf("{")));
+    writeJson(paths.numbers, result);
+    return (result.unmatched ?? []).map((n) => (typeof n === "string" ? n : `${n.text ?? n.value} (${n.context ?? ""})`));
+  } catch {
+    return [];
+  }
+}
+
+/** 図の一覧画像。道具が無ければ作らない */
+function renderSheet() {
+  const done = shell("npm", ["run", "-s", "analysis:contact-sheet", "--", "--dir", rel(join(articleDir, "data")), "--out", rel(paths.sheet)], { allowFailure: true });
+  return done.status === 0 && existsSync(paths.sheet);
+}
 
 function gateBlockers() {
   const done = shell("node", [".claude/scripts/blog/quality-gate.mjs", rel(articlePath)], { allowFailure: true });
@@ -244,6 +315,11 @@ function currentState() {
     wantsResearch: Boolean(arg("--notebooks")),
     research: existsSync(paths.research),
     plan: existsSync(paths.plan),
+    wantsInventory: Boolean(analysis.inventoryTerms?.length),
+    inventory: existsSync(paths.inventory),
+    wantsFigurePlan: process.argv.includes("--plan-figures"),
+    figurePlanFresh: run.figurePlan?.summarySha === (summary ? sha256(summary) : null),
+    writer,
     script: existsSync(at(analysis.script)),
     summaryFresh: Boolean(summary) && run.scriptSha === sha256(readFileSync(at(analysis.script))) && existsSync(paths.result),
     ledgerReady: Boolean(summary) && ledgerErrors.length === 0,

@@ -51,6 +51,11 @@
             "description": "工程。判定は .claude/scripts/analysis/analysis-cycle-core.mjs",
             "enum": ["framed", "viewpoints", "figures", "draft", "reviewed", "approved", "published", "evaluated"]
           },
+          "inventoryTerms": {
+            "description": "データ棚卸し (npm run analysis:inventory) に渡す語。使える指標の見落としを防ぐ",
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
           "questionTerms": {
             "description": "台帳の問いの語。結論と記事がこの語で答える",
             "type": "array",

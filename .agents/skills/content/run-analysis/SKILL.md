@@ -20,23 +20,24 @@ npm run analysis:run -- --analysis analysis:H01-vacancy-population --notebooks "
 
 ## 担当の分け方
 
-Claude のトークンを節約するため、会話へ載せるのは止まった理由だけにする。
+Claude のトークンを節約するため、会話へ載せるのは止まった理由だけにする。判断は 3 つの役割に分け、それぞれに必要なものだけを渡す。
 
-| 工程 | 担当 | 結果の置き場 |
+| 工程 | 担当 | 渡すもの / 結果の置き場 |
 |---|---|---|
 | 順番・やり直し・止める場所 | コード (`analysis-run-core.mjs`) | `.local/analysis/<id>/run.json` |
+| データ棚卸し | スクリプト (`analysis:inventory`。台帳の `inventoryTerms`) | `inventory.json` |
 | 論点の下調べ | NotebookLM (`--notebooks` のときだけ。数値の根拠にしない) | `research.json` |
-| 計画・結論の台帳・反証・下書き・1 次審査 | Codex (read-only・JSON の型を指定) | `plan.json`・`analyses.json`・`article.md` |
-| 計算と図 | 分析スクリプト | `analysis-summary.json`・`data/` |
-| 最終審査 | Claude の `blog-critic` を 1 回 | `review.md` |
+| 計画・計算・反証・結論の台帳・図の割り当て・1 次審査 | Codex (read-only・JSON の型を指定・読むファイルを指定) | `plan.json`・`analyses.json`・`figures.json` |
+| 図の描画 | スクリプト (`analysis:draft --figures-only`) | 記事の `data/` |
+| 文章 | Claude の `article-writer` | 小包 `writer-packet.md` (主張・注意点・図の読み方・数値の出どころ) |
+| 数値の照合 | スクリプト (`analysis:numbers`) | 出どころの無い数値だけを審査へ渡す |
+| 読者の目の最終審査 | Claude の `blog-critic` (全文は 1 回、あとは差分) | `review.md` |
 
-Codex は規約の文脈を持たないので、指示文 `prompts/*.md` に読むファイルを書く。Codex の返答はファイルへ書き、Claude は読み直さない。
+Codex は規約の文脈を持たないので、指示文 `prompts/*.md` に読むファイルを書き、それ以外を探させない。文章は Codex に書かせない (2026-11-07 に、用語の定義より先に結論の語が出る導入になった)。`--writer codex` で戻せる。
 
-## 止まったとき
+1 次審査は 2 回目以降、前回の指摘の解消と新しい BLOCK だけを見る。指摘には本文の引用を付けさせる (直すたびに別の論点が出て収束しなかったため)。図の一覧画像 (`analysis:contact-sheet`) を添えて、図ごとに主張と合っているかも見る。
 
-- `needs-final-review`: 表示された `articleSha256` を添えて `blog-critic` を起動し、`review.md` の frontmatter に書かせる。PASS ならもう一度 `analysis:run` を実行すると `reviewed` になる。
-- `needs-owner`: やり直しが 2 回で解消しない。`run.json` と `analyses.json` の `refutation` を読み、判断してから続ける。
-- 上限の手数で止まったら、そのまま再実行すると続きから進む。
+図の割り当て (`--plan-figures`) は、反証の後、書く前に 1 主張 1 枚で行う。枚数は 1 枚あたり 800〜1,000 字になるまで。
 
 ## 機械が止めるもの
 

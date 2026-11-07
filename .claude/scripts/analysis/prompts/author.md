@@ -4,6 +4,8 @@
 <sources>問い: {{question}} / 確かめる項目: {{plan}} / 入力: {{frame}} / 計算: {{script}} / 出力: {{summary}} / 視点: data/content/analysis-viewpoints.json / 今の結論: {{finding}}</sources>
 <done_when>結論・注意点・主張・視点の結果がすべて出力の値を根拠に書かれている</done_when>
 </task>
+上に挙げたファイル以外を開かない。リポジトリを検索しない。足りないときは足りないと返す。
+
 前回の指摘:
 {{findings}}
 
