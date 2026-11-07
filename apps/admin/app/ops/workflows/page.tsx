@@ -191,7 +191,7 @@ export default async function WorkflowsPage({ searchParams }: { searchParams: Pr
         count={rows.length}
         note={
           <>
-            定期実行は main にある定義で動く。Mac の launchd で動く土曜ランナーなどは{" "}
+            定期実行は main にある定義で動く。Mac の launchd で動く定期実行と、週次レビューで手で回す週次の取得は{" "}
             <Link href="/ops/mac-schedule" className="font-medium underline-offset-4 hover:underline">
               Mac の定期実行
             </Link>{" "}

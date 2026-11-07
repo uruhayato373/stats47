@@ -23,12 +23,12 @@ paths:
 
 | 取得 | 周期 | 入口 |
 |---|---|---|
-| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週土曜 JST 07:00 | Mac の土曜ランナー (`scripts/scheduled/weekly-saturday.sh`) の 1 段目 `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
+| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週土曜の週次レビューの最初 (手動) | 週次の取得 `npm run weekly:collect` (`scripts/scheduled/weekly-saturday.sh`) の 1 段目 `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
 | 週次の計測→記録→改善サイクル | 毎週土曜 JST 02:00 (計測)。施策の記録は土曜の週次レビューの中 | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要)・`/weekly-review` Phase 0b |
 
-認証付き計測は土曜 07:00 に取り、同じ土曜の週次レビューが計測 state を作り直して読む (2026-10-26 に木曜 17:30 から移した。ログインが切れていても、オーナーがレビューの場で入り直せる日に取るため)。記録は次の取得まで 8 日間「今の値」として使う
+認証付き計測は土曜の週次レビューの最初に `npm run weekly:collect` で手で取り、同じレビューが計測 state を作り直して読む (2026-10-26 に木曜 17:30 から土曜 07:00 の自動実行へ移し、2026-11-08 に自動実行をやめてレビューの中へ移した。無人だとログイン切れ・時間切れで 2 週続けて落ち、誰も気づかなかったため。オーナーがいればその場で入り直せる。やっていない週は review-cadence-guard が Issue にする)。記録は次の取得まで 8 日間「今の値」として使う
 (鮮度の判定と保管庫からの復元が共有する `.claude/scripts/measurement/sources.mjs` の `MEASUREMENT_MAX_AGE_MS`)。
-セッションが切れて取得に失敗した週は、土曜のレビューの冒頭でオーナーが入り直して取り直す。取り直さなければ次の土曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
+セッションが切れて取得に失敗した取得元は、レビューの場でオーナーが入り直して取り直す。取り直さなければ次の土曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
 
 ## 判断に使う記録
 
@@ -38,7 +38,7 @@ paths:
 | note・KDP の売上 | `data/authenticated/revenue-history.json`・`data/products/sales-ledger.json` |
 | A8 の成果 / 楽天の成果 | `data/affiliate/a8-results.json` / `data/affiliate/rakuten-results.json` |
 | 提携の状態 (A8 / ASP 横断) | `data/affiliate/a8-catalog.json` / `data/affiliate/affiliate-catalog.json` |
-| note の記事別の閲覧 | `data/note/dashboard/latest.json` (土曜ランナーの 2 段目。認証付き計測の後) |
+| note の記事別の閲覧 | `data/note/dashboard/latest.json` (`weekly:collect` の 2 段目。認証付き計測の後) |
 | アフィリエイトの表示・クリック (GA4) | `data/affiliate/ga4-affiliate-history.csv` |
 | 週次収益 (NSM)・計測の鮮度 | `data/nsm/weekly-snapshots/`・`data/measurement-cycle/latest.json` |
 | 検索の実績 (GSC) / 除外理由 | `data/gsc/snapshots/<週>/`・`data/gsc/LATEST.md` / `data/gsc/coverage-drilldown/` |

@@ -15,12 +15,17 @@ import { cadenceOf, scheduleSortKey } from "@/lib/server/workflows";
 const SCHEDULED = path.resolve(__dirname, "../../../../scripts/scheduled");
 
 describe("parsePlist", () => {
-  it("土曜ランナーの定義から Label・台本・土曜 07:00 を読む", () => {
-    const def = parsePlist(fs.readFileSync(path.join(SCHEDULED, "com.stats47.weekly-saturday.plist"), "utf8"));
-    expect(def.label).toBe("com.stats47.weekly-saturday");
-    expect(def.script).toMatch(/scripts\/scheduled\/weekly-saturday\.sh$/);
-    expect(def.slots).toEqual([{ weekday: 6, hour: 7, minute: 0 }]);
-    expect(slotLabel(def.slots[0])).toBe("毎週土 07:00");
+  it("予約画像の週次確認の定義から Label・台本・日曜 07:30 を読む", () => {
+    const def = parsePlist(fs.readFileSync(path.join(SCHEDULED, "com.stats47.sns-image-review.plist"), "utf8"));
+    expect(def.label).toBe("com.stats47.sns-image-review");
+    expect(def.script).toMatch(/scripts\/scheduled\/sns-image-review\.sh$/);
+    expect(def.slots).toEqual([{ weekday: 0, hour: 7, minute: 30 }]);
+    expect(slotLabel(def.slots[0])).toBe("毎週日 07:30");
+  });
+
+  it("週次の取得は launchd で自動起動しない (2026-11-08 オーナー決定。週次レビューの最初に npm run weekly:collect で手で回す)", () => {
+    expect(fs.existsSync(path.join(SCHEDULED, "com.stats47.weekly-saturday.plist"))).toBe(false);
+    expect(fs.readdirSync(SCHEDULED).filter((f) => f.endsWith(".plist")).some((f) => fs.readFileSync(path.join(SCHEDULED, f), "utf8").includes("weekly-saturday.sh"))).toBe(false);
   });
 
   it("時刻が複数の定義 (配列) を全部読み、コメント内の <key> を拾わない", () => {

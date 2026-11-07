@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 計測→記録→改善サイクルの週次 state を作り直す。
 # 呼び出し元: fetch-metrics-weekly.yml (土曜 02:00 JST。GA4/GSC snapshot の直後) と、土曜の /weekly-review Phase 0b (Mac)。
-# レビューでも作り直すのは、Mac が土曜 07:00 に取る認証付き計測 (A8・note・KDP・楽天) が 02:00 の state に入らないため
+# レビューでも作り直すのは、土曜のレビューの最初に Mac で取る認証付き計測 (npm run weekly:collect) (A8・note・KDP・楽天) が 02:00 の state に入らないため
 # (2026-10-26 に CI の improvement-cycle-weekly.yml から移した)。
 # GA4 Admin の監査は週ごとに data/google-admin/audits/<週>.json へ残し (前の週との差分を計測の記録に出すため)、
 # 作業用の .claude/state/metrics/google-admin は消す (2026-11-04 オーナー判断。それまでは差分を追えなかった)。

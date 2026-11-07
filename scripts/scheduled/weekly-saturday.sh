@@ -1,17 +1,17 @@
 #!/bin/bash
-# 土曜ランナー (launchd 毎週土曜 07:00。2026-10-26 に Mac の土曜の 3 本と週次監査をこの 1 本にまとめた。doboku-note の
-# weekly-review.sh と同じ形)。ログインが要る取得と週次監査を、土曜の週次レビューの前にこの Mac で順に回す。
+# 週次の取得 (`npm run weekly:collect`)。週次レビュー (/weekly-review) の最初の段で、オーナーがいるときに手で回す
+# (2026-11-08 オーナー決定。launchd の毎週土曜 07:00 の自動起動はやめた。無人だとログイン切れ・時間切れで 2 週続けて
+# 落ち、誰も気づかなかったため。レビューの場ならその場で入り直せる。やっていない週は review-cadence-guard が Issue にする)。
+# ログインが要る取得と週次監査を、この Mac で順に回す。
 #   1. 認証付き計測: measurement-session-refresh.sh (ログインを保ち、専用 clone で取得・記録して develop へ push)
 #   2. note の計測: fetch-note-metrics.sh (表紙監査 + note のダッシュボード。作業フォルダに書く。従来どおり)
 #   3. ASP の巡回: scout-asp-weekly.sh (A8 の審査確認・精選・コード取得。作業フォルダに書く。従来どおり)
 #   4. 週次監査 11 本: 専用 clone で `npm run weekly:audits` を回し、監査が書いた記録を develop へ push する。
 #      要約とログは作業フォルダの .local/weekly-audits/<日付>/ にも写す (レビューはそこを読む)
 # API で取れる計測 (GSC・GA4・AdSense・PSI・Cloudflare・Instagram Graph) は CI のまま (Mac が眠っていても欠けないように)。
-# 1 つが落ちても次へ進み、どれかが落ちたら最後に exit 1 (launchd のログと週次レビューの Phase 0b で拾う)。
+# 1 つが落ちても次へ進み、どれかが落ちたら最後に exit 1 (週次レビューの Phase 0b で拾う)。合計で 1〜2 時間かかるので、
+# レビューではバックグラウンドで起動し、終わるまでに Phase 0 を進める。
 #
-# 導入: cp scripts/scheduled/com.stats47.weekly-saturday.plist ~/Library/LaunchAgents/ &&
-#       launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.stats47.weekly-saturday.plist
-# 即実行: launchctl kickstart gui/$(id -u)/com.stats47.weekly-saturday
 # ログ: ~/Library/Logs/stats47/weekly-saturday.log (各段のログは同じフォルダの <段>.log)
 
 source "$(dirname "$0")/_common.sh"

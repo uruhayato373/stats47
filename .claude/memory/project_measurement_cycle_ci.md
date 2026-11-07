@@ -25,10 +25,11 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
   CI の健全性・整合) も 2026-10-26 にレビューの Phase 0b step 0 `npm run weekly:audits` へ移した (第 3 段階)。台本は
   `.claude/scripts/management/weekly-audits/<id>.sh`、Issue は作らず結果をレビュー本文とカードへ書く。backlog.md を書く監査が
   2 本あるので順に走らせ、consistency を最後に置く。Mac からだと internal-links だけで 1 時間前後かかる (東京の edge にキャッシュが無い)。
-- Mac: 土曜 07:00 の土曜ランナー `scripts/scheduled/weekly-saturday.sh` (launchd `com.stats47.weekly-saturday`) 1 本が、認証付き計測 → note の計測 →
+- Mac: 週次の取得 `npm run weekly:collect` (`scripts/scheduled/weekly-saturday.sh`) 1 本が、認証付き計測 → note の計測 →
   ASP の巡回 → 週次監査 (専用 clone `~/stats47-measurement` で回して記録を develop へ push、要約を作業フォルダの `.local/weekly-audits/` へ写す) を順に回す
-  (2026-10-26 に個別の launchd 3 本からまとめた。doboku-note の weekly-review.sh と同じ形)。API の計測は CI のまま。
-  **plist を repo で変えたら `~/Library/LaunchAgents/` へ入れ直す** (第 1 段階で土曜へ移した 3 本が、この Mac では木・月・日の旧時刻のまま動いていた)。
+  (2026-10-26 に個別の launchd 3 本からまとめた)。API の計測は CI のまま。**2026-11-08 に launchd の土曜 07:00 の自動起動をやめ、
+  週次レビューの最初に手で回す形にした** (無人だとログイン切れ・時間切れで 2 週続けて落ちて誰も気づかなかった。オーナーがいればその場で入り直せる。
+  やっていない週は review-cadence-guard が Issue にする)。
 
 **Why:** ログインが要る計測を土曜に寄せると、認証付き計測 (07:00) の後に記録する必要があり、CI で順序を保つより
 オーナーが居るレビューの中で行うほうが単純だった。無人 Claude は `.claude/` (保護パス) に書けず、提案 JSON を経由する回り道が要っていた。

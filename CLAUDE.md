@@ -40,7 +40,7 @@
 - **観測値・派生を永続 DB に入れない** (DB 肥大で解約に至った経緯があるため R2 に置く)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。正典: `docs/01_技術設計/02_データアーキテクチャ.md`
 - **Geo分析は結論だけ作らない**: Geo/GIS掛け合わせコンテンツは、計算入力・決定的空間演算・補助レイヤー・県別途中artifact・保存則・最終集計を同じcanonical着地で辿れることを必須とする。X・ブログ・noteもこのlineageへ接続し、単一指標ランキングと混在させない → `.claude/rules/geo-analysis-standards.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
-- **ログインが要る計測値はブラウザで取りに行かない**: A8・楽天・note・KDP・GSC/GA4/AdSense の画面の数字は、毎週土曜の朝に Mac が記録した `data/` から読む。読むための管理画面と読み取りスクリプトは hook が止める (例外はオーナーが会話で頼んだときだけ) → `.claude/rules/recorded-measurement-first.md`
+- **ログインが要る計測値はブラウザで取りに行かない**: A8・楽天・note・KDP・GSC/GA4/AdSense の画面の数字は、毎週土曜の週次レビューの最初に Mac で取得 (`npm run weekly:collect`) して記録した `data/` から読む。読むための管理画面と読み取りスクリプトは hook が止める (例外はオーナーが会話で頼んだときだけ) → `.claude/rules/recorded-measurement-first.md`
 - **main へのマージは本番反映の判断・勝手にしない**: オーナーの明示の指示なしに develop→main の PR を開かず、マージしない (hook が止める)。作業が終わったら `npm run release:status` を報告して止まる。本番に効く変更はまとめて 1 日 1 回、急ぐ障害の修正だけその場で出す。UI/ロジックの反復は localhost (`npm run dev:web`) で確認する。PR が開いている間は develop へ push しない → `.claude/rules/branch-workflow.md`
 - **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**Codex を使う経路は 2 つあり、規律が違う**:
   - **① Claude Code から MCP 経由** (`mcp__codex__codex`) — Claude のツールコールとして**同期実行**されるため HEAD/index の奪い合いは構造的に起きない。既定は `sandbox:"read-only"`。規約は **`.claude/rules/codex-mcp.md`**

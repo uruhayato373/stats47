@@ -627,7 +627,7 @@ snapshot の `manifest.json` が `status: error` の週は本節の数値を書�
 
 ## 運用ルール
 
-- **毎週土曜に実行**する想定 (土曜 02:00 の計測と 07:00 の Mac の認証付き計測の後。計測 state の作り直し・施策の記録・週次要約はレビューの中で行う)。`/weekly-plan` (来週分) は依頼範囲に含まれる場合だけレビュー後に実行する
+- **毎週土曜に実行**する想定 (土曜 02:00 の計測の後。認証付き計測はレビューの最初に `npm run weekly:collect` で手で取る。計測 state の作り直し・施策の記録・週次要約はレビューの中で行う)。`/weekly-plan` (来週分) は依頼範囲に含まれる場合だけレビュー後に実行する
 - `.claude/todo/weekly.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
 - 週次レビュー履歴は本skill referenceへ蓄積し、批判的レビュー全文は蓄積しない
 - `/weekly-plan` の Phase 1 Track D が前週のskill referenceレビューを参照する
