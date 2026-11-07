@@ -54,17 +54,9 @@ npx remotion still src/index.ts BuzzMap-Still-45 \
 node -e "const s=require('./src/features/buzz-map/specs/<id>.json');s.showSummary=true;console.log(JSON.stringify(s))" > /tmp/props.json
 npx remotion still src/index.ts BuzzMap-Still-45 ../../.local/r2/sns/buzz-map/<id>/x/stills/<id>-final.png --props=/tmp/props.json
 
-# 型B 試写（先頭3秒・半解像度で高速確認）
-npx remotion render src/index.ts BuzzMap-Reel-11 /tmp/<id>-preview.mp4 \
-  --props=src/features/buzz-map/specs/<id>.json --frames=0-89 --scale=0.5
-
-# 型B 本尺（尺は spec の speed/holdSeconds から自動算出）
-npx remotion render src/index.ts BuzzMap-Reel-11 \
-  ../../.local/r2/sns/buzz-map/<id>/x/<id>-11.mp4 \
-  --props=src/features/buzz-map/specs/<id>.json
 ```
 
-比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` / `BuzzMap-Reel-{11,916}`。型C 点プロット・型D 線ネットワークは型A と同じ `BuzzMap-Still-*`（型D 時系列リールは `BuzzMap-Reel-*`）。
+比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` 。型C 点プロット・型D 線ネットワークは型A と同じ `BuzzMap-Still-*`（型D 時系列リールは `BuzzMap-Reel-*`）。
 
 ### Instagram 配信レイアウト（素材生成 → R2 → draft 登録）
 
@@ -74,10 +66,6 @@ IG Graph API は **R2 公開 URL** を要求するため、IG 配信は専用パ
 # 静止画 (型A/C/E)
 npx remotion still src/index.ts BuzzMap-Still-45 \
   ../../.local/r2/sns/buzz-map/<id>/instagram/stills/slide-1-cover-1080x1350.png \
-  --props=src/features/buzz-map/specs/<id>.json --browser-executable=$CHROME
-# リール (型D・尺は spec 駆動)
-npx remotion render src/index.ts BuzzMap-Reel-916 \
-  ../../.local/r2/sns/buzz-map/<id>/instagram/reel.mp4 \
   --props=src/features/buzz-map/specs/<id>.json --browser-executable=$CHROME
 # caption を同ディレクトリに (sns-content-standards §2-3 準拠。出典は metric config SSOT に合わせる)
 #   → .local/r2/sns/buzz-map/<id>/instagram/caption.txt
@@ -113,7 +101,7 @@ npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 2
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --mode line-network \
   --r2-key app/highway-history/highway-sections.topojson --id <id> --year-prop N06_002 \
   --title "..." --accent infra --label-hit "高速道路 総延長km" --data-year "1962-2020"
-#   → 静止画 BuzzMap-Still-45（最新年全網図） / 時系列 BuzzMap-Reel-11（--frames=0-89 --scale=0.5 で試写）
+#   → 静止画 BuzzMap-Still-45（最新年全網図） / 時系列は静止画の `year` で出す。動画 (撤去済み) ではなく（--frames=0-89 --scale=0.5 で試写）
 
 # DPF（GraphQL 取得した GeoJSON を投入）
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...

@@ -16,17 +16,20 @@ import { renderGroupedBarsChart } from '../lib/template-grouped-bars';
 import { renderAreaMapChart } from '../lib/template-area-map';
 import { resolveAreaChart, type AreaScope } from '../lib/template-area-scope';
 import { renderCompositionHeatmap, renderCompositionPie } from '../lib/template-minor-charts';
-import { rankingRows, renderAreaBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
+import { rankingRows, renderAreaBarsChart, renderItemBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
 import { rankingInputFromStats, sampleRankingChart } from '../lib/template-ranking-data';
 import { renderRankingTable } from '../lib/template-ranking-table';
 import { renderTileMapChart } from '../lib/template-ranking-tile-map';
 import { renderRegionalBoxplotChart } from '../lib/template-regional-boxplot';
 import { CHANGE_SAMPLE_SOURCES, renderTileChangeSample } from '../lib/template-tile-change';
+import { renderRadarChart, type RadarChart } from '../lib/template-radar';
 import { reviewRowsOf, type ReviewSample, type SampledTemplate } from '../lib/template-review-rows';
+import { flowsFromTable, renderSankeyChart } from '../lib/template-sankey';
 import { renderLineChart } from '../lib/template-trend-line';
+import { regionNetSteps, renderWaterfallChart } from '../lib/template-waterfall';
 import { CHART_THEMES } from '../../remotion/src/features/data-cards/chart-theme';
 import { datasetPath } from '../../../config/datasets.mjs';
-import { chartSourceName, groupedBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../../../.claude/scripts/blog/lib/type-chart-input';
+import { chartSourceName, groupedBarChartFromArticleData, itemBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../../../.claude/scripts/blog/lib/type-chart-input';
 import { PREF_NAMES } from '../../../.claude/scripts/lib/prefectures.cjs';
 import { assertMinimalChartCopy } from '../../../.claude/scripts/media/lib/image-copy.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../.claude/scripts/lib/site-config.cjs';
@@ -111,6 +114,37 @@ async function baseTileSample(id: string, label: string, slug: string, base: str
 }
 const MIGRATION_YEAR = 2025;
 const MIGRATION_SOURCE = '住民基本台帳人口移動報告';
+const TOKYO_CODE = '13000';
+const OSAKA_CODE = '27000';
+const RADAR_SLUG = 'cc-estat-09-radar-prefecture';
+const RADAR_SOURCE = '社会・人口統計体系';
+const AGRI_SLUG = 'cc-estat-13-agri-sankey';
+const AGRI_BASE = 'cc-estat-13-agri-sankey-region-category-stacked';
+
+async function radarSample(id: string, label: string, base: string) {
+  const [data, manifest] = [await json(blog(RADAR_SLUG, base)), await json(blog(RADAR_SLUG, base, 'source.json'))];
+  const years = (manifest.inputs as { year: string }[]).map((input) => input.year).sort();
+  const series = data.series as RadarChart['series'];
+  const chart: RadarChart = {
+    title: `${series.filter((s) => !s.reference).map((s) => s.name).join('と')}の${data.axes.length}指標`,
+    meta: `${years[0]}〜${years[years.length - 1]}年 · 47都道府県の最小を0、最大を1に換算`,
+    source: RADAR_SOURCE, axes: data.axes, series,
+  };
+  return both(id, label, (theme) => renderRadarChart(chart, theme));
+}
+async function itemBarSample(id: string, label: string, slug: string, base: string) {
+  const data = await json(blog(slug, base));
+  const chart = itemBarChartFromArticleData(data);
+  if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
+  chart.source = chartSourceName(data, await json(blog(slug, base, 'source.json')), metricSource) || chart.source;
+  return both(id, label, (theme) => renderItemBarsChart(chart, theme));
+}
+async function sankeySample(id: string, label: string) {
+  const data = await json(blog(AGRI_SLUG, AGRI_BASE));
+  const source = chartSourceName(data, await json(blog(AGRI_SLUG, AGRI_BASE, 'source.json')), metricSource);
+  const chart = { title: '地方別の農業産出額の内訳', meta: `${data.year}年 · 単位：${data.valueUnit}`, source, ...flowsFromTable(data) };
+  return both(id, label, (theme) => renderSankeyChart(chart, theme));
+}
 
 async function main() {
   for (const file of fs.existsSync(OUT) ? fs.readdirSync(OUT) : []) fs.rmSync(path.join(OUT, file));
@@ -124,11 +158,17 @@ async function main() {
   const inPrefecture = (wardMode: 'merged' | 'split'): AreaScope => ({ level: 'municipality', wardMode, within: { kind: 'prefecture', prefCode: '14' } });
   const pairs = (await json(`app/stats/population-migration-inter-prefecture/migration-flow-${MIGRATION_YEAR}.json`)).rows as MigrationPair[];
   const chordHead = { meta: `${MIGRATION_YEAR}年 · 単位：人`, source: MIGRATION_SOURCE };
+  const netMoves = (name: string, code: string) => ({
+    title: `${name}の転入超過の内訳`, meta: `${MIGRATION_YEAR}年 · 地方別 · 単位：人`, source: MIGRATION_SOURCE,
+    steps: regionNetSteps(pairs, code), totalLabel: '転入超過',
+  });
   const samples: Record<SampledTemplate, Sample[]> = {
     bar: [
         both('bar', '上位 5・下位 5 のカード', (theme) => renderRankingBarsChart(ranking, theme)),
         both('bar-merged', '県の中・政令指定都市を統合', (theme) => renderAreaBarsChart(chartOf(inPrefecture('merged')), theme)),
         both('bar-split', '県の中・政令指定都市を分割', (theme) => renderAreaBarsChart(chartOf(inPrefecture('split')), theme)),
+        await itemBarSample('bar-items', '県に限らない行', 'income-quintile-alcohol', 'wine-quintile'),
+        await itemBarSample('bar-partial', '一部の県', 'aquaculture-harvest-prefecture-gap', 'aquaculture-harvest-prefecture-gap-prefecture-rankings'),
     ],
     'tile-map': [
         both('tile', '値の塗り', (theme) => renderTileMapChart(ranking, theme)),
@@ -155,6 +195,15 @@ async function main() {
     chord: [
         both('chord-region', '地方別', (theme) => renderChordChart({ title: '地方のあいだの人の移動', ...chordHead, ...regionChordNodes(pairs) }, theme)),
         both('chord-pref', '都道府県別', (theme) => renderChordChart({ title: '都道府県のあいだの人の移動', ...chordHead, ...prefectureChordNodes(pairs, PREF_NAMES as string[]) }, theme)),
+    ],
+    radar: [
+        await radarSample('radar-two', '2 県と中央値', 'tokyo-kyoto-radar'),
+        await radarSample('radar-one', '1 県と中央値', 'tokyo-radar'),
+    ],
+    sankey: [await sankeySample('sankey', '地方から品目へ')],
+    waterfall: [
+        both('waterfall-up', '増だけの内訳', (theme) => renderWaterfallChart(netMoves('東京都', TOKYO_CODE), theme)),
+        both('waterfall-mixed', '増と減が混ざる内訳', (theme) => renderWaterfallChart(netMoves('大阪府', OSAKA_CODE), theme)),
     ],
     boxplot: [both('boxplot', '地方別', (theme) => renderRegionalBoxplotChart(ranking, theme))],
     table: [both('table', '全 47 都道府県', (theme) => renderRankingTable(input, theme))],

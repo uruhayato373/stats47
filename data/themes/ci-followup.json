@@ -1,31 +1,757 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-31",
+  "observedAt": "2026-11-07",
   "status": "fail",
   "themeCount": 55,
   "runtime": {
     "expected": 112,
     "checked": 112,
-    "failed": 12
+    "failed": 112
   },
   "problems": [
+    "aging-society/1440:missing-chart:theme-age-composition",
+    "aging-society/1440:missing-chart:theme-late-elderly-medical-expense-trend",
+    "aging-society/1440:prefecture-selector",
+    "aging-society/1440:section-cards:age-structure:0/1",
+    "aging-society/1440:section-cards:birth-aging:1/2",
+    "aging-society/1440:section-cards:birth-and-marriage:0/1",
+    "aging-society/1440:section-cards:elderly-work-and-care:0/1",
+    "aging-society/1440:section:birth-and-marriage:0",
+    "aging-society/1440:section:elderly-work-and-care:0",
+    "aging-society/390:missing-chart:theme-age-composition",
+    "aging-society/390:missing-chart:theme-late-elderly-medical-expense-trend",
+    "aging-society/390:prefecture-selector",
+    "aging-society/390:section-cards:age-structure:0/1",
+    "aging-society/390:section-cards:birth-aging:1/2",
+    "aging-society/390:section-cards:birth-and-marriage:0/1",
+    "aging-society/390:section-cards:elderly-work-and-care:0/1",
+    "aging-society/390:section:birth-and-marriage:0",
+    "aging-society/390:section:elderly-work-and-care:0",
+    "agriculture-production/1440:prefecture-selector",
+    "agriculture-production/1440:section-cards:dairy-farming-production:0/3",
+    "agriculture-production/1440:section-cards:livestock-production:0/3",
+    "agriculture-production/1440:section:dairy-farming-production:0",
+    "agriculture-production/1440:section:livestock-production:0",
+    "agriculture-production/390:prefecture-selector",
+    "agriculture-production/390:section-cards:dairy-farming-production:0/3",
+    "agriculture-production/390:section-cards:livestock-production:0/3",
+    "agriculture-production/390:section:dairy-farming-production:0",
+    "agriculture-production/390:section:livestock-production:0",
+    "business-demography/1440:prefecture-selector",
+    "business-demography/1440:section-cards:business-metabolism:0/2",
+    "business-demography/1440:section:business-metabolism:0",
+    "business-demography/390:prefecture-selector",
+    "business-demography/390:section-cards:business-metabolism:0/2",
+    "business-demography/390:section:business-metabolism:0",
+    "childcare-services/1440:prefecture-selector",
+    "childcare-services/1440:section-cards:childcare-demand:0/1",
+    "childcare-services/1440:section:childcare-demand:0",
+    "childcare-services/390:prefecture-selector",
+    "childcare-services/390:section-cards:childcare-demand:0/1",
+    "childcare-services/390:section:childcare-demand:0",
+    "climate/1440:missing-chart:theme-climate-temperature-extremes",
+    "climate/1440:prefecture-selector",
+    "climate/1440:section-cards:climate-warming-and-heatstroke:0/2",
+    "climate/1440:section-cards:rain-snow:0/2",
+    "climate/1440:section-cards:snowfall-and-accumulation:0/1",
+    "climate/1440:section-cards:sunshine:0/1",
+    "climate/1440:section-cards:temperature:0/1",
+    "climate/1440:section:climate-warming-and-heatstroke:0",
+    "climate/1440:section:rain-snow:0",
+    "climate/1440:section:snowfall-and-accumulation:0",
+    "climate/1440:section:sunshine:0",
+    "climate/1440:section:temperature:0",
+    "climate/390:missing-chart:theme-climate-temperature-extremes",
+    "climate/390:prefecture-selector",
+    "climate/390:section-cards:climate-warming-and-heatstroke:0/2",
+    "climate/390:section-cards:rain-snow:0/2",
+    "climate/390:section-cards:snowfall-and-accumulation:0/1",
+    "climate/390:section-cards:sunshine:0/1",
+    "climate/390:section-cards:temperature:0/1",
+    "climate/390:section:climate-warming-and-heatstroke:0",
+    "climate/390:section:rain-snow:0",
+    "climate/390:section:snowfall-and-accumulation:0",
+    "climate/390:section:sunshine:0",
+    "climate/390:section:temperature:0",
+    "communication-access/1440:prefecture-selector",
+    "communication-access/390:prefecture-selector",
+    "community-participation/1440:prefecture-selector",
+    "community-participation/390:prefecture-selector",
+    "construction-industry/1440:missing-chart:construction-industry-workforce-demographics-composition-1",
+    "construction-industry/1440:prefecture-selector",
+    "construction-industry/1440:section-cards:architect-wages:0/1",
+    "construction-industry/1440:section-cards:construction-businesses:0/1",
+    "construction-industry/1440:section:architect-wages:0",
+    "construction-industry/1440:section:construction-businesses:0",
+    "construction-industry/390:missing-chart:construction-industry-workforce-demographics-composition-1",
+    "construction-industry/390:prefecture-selector",
+    "construction-industry/390:section-cards:architect-wages:0/1",
+    "construction-industry/390:section-cards:construction-businesses:0/1",
+    "construction-industry/390:section:architect-wages:0",
+    "construction-industry/390:section:construction-businesses:0",
+    "consumer-prices/1440:prefecture-selector",
+    "consumer-prices/1440:section-cards:expenses:0/1",
+    "consumer-prices/1440:section-cards:food-prices-and-expenditure:0/1",
+    "consumer-prices/1440:section-cards:overall:0/1",
+    "consumer-prices/1440:section-cards:utilities-prices-and-expenditure:0/1",
+    "consumer-prices/1440:section:food-prices-and-expenditure:0",
+    "consumer-prices/1440:section:overall:0",
+    "consumer-prices/1440:section:utilities-prices-and-expenditure:0",
+    "consumer-prices/390:prefecture-selector",
+    "consumer-prices/390:section-cards:expenses:0/1",
+    "consumer-prices/390:section-cards:food-prices-and-expenditure:0/1",
+    "consumer-prices/390:section-cards:overall:0/1",
+    "consumer-prices/390:section-cards:utilities-prices-and-expenditure:0/1",
+    "consumer-prices/390:section:food-prices-and-expenditure:0",
+    "consumer-prices/390:section:overall:0",
+    "consumer-prices/390:section:utilities-prices-and-expenditure:0",
+    "cultural-participation/1440:prefecture-selector",
+    "cultural-participation/1440:section-cards:cultural-facilities:1/2",
+    "cultural-participation/390:prefecture-selector",
+    "cultural-participation/390:section-cards:cultural-facilities:1/2",
+    "daily-time-use/1440:prefecture-selector",
+    "daily-time-use/390:prefecture-selector",
+    "disability-support/1440:prefecture-selector",
+    "disability-support/390:prefecture-selector",
+    "earthquake-exposure/1440:prefecture-selector",
+    "earthquake-exposure/1440:section-cards:earthquake-retrofit-past-performance:0/1",
+    "earthquake-exposure/1440:section-cards:fire-earthquake-insurance-spending:0/1",
+    "earthquake-exposure/1440:section-cards:housing-earthquake-resistance:0/1",
+    "earthquake-exposure/1440:section:earthquake-retrofit-past-performance:0",
+    "earthquake-exposure/1440:section:fire-earthquake-insurance-spending:0",
+    "earthquake-exposure/390:prefecture-selector",
+    "earthquake-exposure/390:section-cards:earthquake-retrofit-past-performance:0/1",
+    "earthquake-exposure/390:section-cards:fire-earthquake-insurance-spending:0/1",
+    "earthquake-exposure/390:section-cards:housing-earthquake-resistance:0/1",
+    "earthquake-exposure/390:section:earthquake-retrofit-past-performance:0",
+    "earthquake-exposure/390:section:fire-earthquake-insurance-spending:0",
+    "education-culture/1440:missing-chart:education-culture-cultural-facilities-and-arts-composition-1",
+    "education-culture/1440:missing-chart:theme-edu-higher-education-trend",
+    "education-culture/1440:missing-chart:theme-edu-higher-education-trend-attainment",
+    "education-culture/1440:prefecture-selector",
+    "education-culture/1440:section-cards:cultural-facilities-and-arts:0/3",
+    "education-culture/1440:section-cards:cultural-property-preservation:0/3",
+    "education-culture/1440:section-cards:higher-education-and-advancement:0/2",
+    "education-culture/1440:section-cards:higher-education:0/1",
+    "education-culture/1440:section-cards:lifelong-learning-and-libraries:1/2",
+    "education-culture/1440:section-cards:school-environment-and-closures:0/2",
+    "education-culture/1440:section-cards:schools:1/2",
+    "education-culture/1440:section:cultural-facilities-and-arts:0",
+    "education-culture/1440:section:higher-education:0",
+    "education-culture/1440:section:school-environment-and-closures:0",
+    "education-culture/390:missing-chart:education-culture-cultural-facilities-and-arts-composition-1",
+    "education-culture/390:missing-chart:theme-edu-higher-education-trend",
+    "education-culture/390:missing-chart:theme-edu-higher-education-trend-attainment",
+    "education-culture/390:prefecture-selector",
+    "education-culture/390:section-cards:cultural-facilities-and-arts:0/3",
+    "education-culture/390:section-cards:cultural-property-preservation:0/3",
+    "education-culture/390:section-cards:higher-education-and-advancement:0/2",
+    "education-culture/390:section-cards:higher-education:0/1",
+    "education-culture/390:section-cards:lifelong-learning-and-libraries:1/2",
+    "education-culture/390:section-cards:school-environment-and-closures:0/2",
+    "education-culture/390:section-cards:schools:1/2",
+    "education-culture/390:section:cultural-facilities-and-arts:0",
+    "education-culture/390:section:higher-education:0",
+    "education-culture/390:section:school-environment-and-closures:0",
+    "environmental-quality/1440:prefecture-selector",
+    "environmental-quality/1440:section-cards:air-quality-and-pm25:0/2",
+    "environmental-quality/1440:section-cards:lake-sea-water-quality:0/1",
+    "environmental-quality/1440:section-cards:river-water-quality:0/1",
+    "environmental-quality/1440:section:lake-sea-water-quality:0",
+    "environmental-quality/1440:section:river-water-quality:0",
+    "environmental-quality/390:prefecture-selector",
+    "environmental-quality/390:section-cards:air-quality-and-pm25:0/2",
+    "environmental-quality/390:section-cards:lake-sea-water-quality:0/1",
+    "environmental-quality/390:section-cards:river-water-quality:0/1",
+    "environmental-quality/390:section:lake-sea-water-quality:0",
+    "environmental-quality/390:section:river-water-quality:0",
+    "fishery-marine/1440:missing-chart:theme-fishery-output-trend-marine",
+    "fishery-marine/1440:prefecture-selector",
+    "fishery-marine/1440:section-cards:species:0/1",
+    "fishery-marine/1440:section:species:0",
+    "fishery-marine/390:missing-chart:theme-fishery-output-trend-marine",
+    "fishery-marine/390:prefecture-selector",
+    "fishery-marine/390:section-cards:species:0/1",
+    "fishery-marine/390:section:species:0",
     "foreign-residents/1440:missing-chart:theme-foreign-nationality-trend",
+    "foreign-residents/1440:missing-chart:theme-foreign-total-trend",
+    "foreign-residents/1440:prefecture-selector",
+    "foreign-residents/1440:section-cards:foreign-employing-establishments:0/1",
+    "foreign-residents/1440:section-cards:foreign-workers:0/1",
+    "foreign-residents/1440:section:foreign-employing-establishments:0",
+    "foreign-residents/1440:section:foreign-workers:0",
     "foreign-residents/390:missing-chart:theme-foreign-nationality-trend",
+    "foreign-residents/390:missing-chart:theme-foreign-total-trend",
+    "foreign-residents/390:prefecture-selector",
+    "foreign-residents/390:section-cards:foreign-employing-establishments:0/1",
+    "foreign-residents/390:section-cards:foreign-workers:0/1",
+    "foreign-residents/390:section:foreign-employing-establishments:0",
+    "foreign-residents/390:section:foreign-workers:0",
+    "forestry-timber/1440:prefecture-selector",
+    "forestry-timber/1440:section-cards:forestry-workforce-and-entities:0/3",
+    "forestry-timber/1440:section-cards:lumber-processing-industry:0/2",
+    "forestry-timber/1440:section-cards:timber-production-and-output:0/6",
+    "forestry-timber/1440:section:forestry-workforce-and-entities:0",
+    "forestry-timber/1440:section:lumber-processing-industry:0",
+    "forestry-timber/1440:section:timber-production-and-output:0",
+    "forestry-timber/390:prefecture-selector",
+    "forestry-timber/390:section-cards:forestry-workforce-and-entities:0/3",
+    "forestry-timber/390:section-cards:lumber-processing-industry:0/2",
+    "forestry-timber/390:section-cards:timber-production-and-output:0/6",
+    "forestry-timber/390:section:forestry-workforce-and-entities:0",
+    "forestry-timber/390:section:lumber-processing-industry:0",
+    "forestry-timber/390:section:timber-production-and-output:0",
+    "freight-logistics/1440:prefecture-selector",
+    "freight-logistics/390:prefecture-selector",
+    "gender-participation/1440:prefecture-selector",
+    "gender-participation/1440:section-cards:decision-making-participation:0/2",
+    "gender-participation/1440:section-cards:work-and-wage-gap:1/2",
+    "gender-participation/1440:section:decision-making-participation:0",
+    "gender-participation/390:prefecture-selector",
+    "gender-participation/390:section-cards:decision-making-participation:0/2",
+    "gender-participation/390:section-cards:work-and-wage-gap:1/2",
+    "gender-participation/390:section:decision-making-participation:0",
+    "geographic-access/1440:prefecture-selector",
+    "geographic-access/1440:section-cards:railway-access:0/1",
+    "geographic-access/390:prefecture-selector",
+    "geographic-access/390:section-cards:railway-access:0/1",
+    "health-checkups/1440:prefecture-selector",
+    "health-checkups/1440:section-cards:dental-health-checkup:0/1",
+    "health-checkups/1440:section-cards:eating-lifestyle-habits:0/2",
+    "health-checkups/1440:section-cards:health-checkup-and-metabolic:0/3",
+    "health-checkups/1440:section-cards:vegetable-and-salt-intake:0/4",
+    "health-checkups/1440:section:dental-health-checkup:0",
+    "health-checkups/1440:section:eating-lifestyle-habits:0",
+    "health-checkups/1440:section:health-checkup-and-metabolic:0",
+    "health-checkups/390:prefecture-selector",
+    "health-checkups/390:section-cards:dental-health-checkup:0/1",
+    "health-checkups/390:section-cards:eating-lifestyle-habits:0/2",
+    "health-checkups/390:section-cards:health-checkup-and-metabolic:0/3",
+    "health-checkups/390:section-cards:vegetable-and-salt-intake:0/4",
+    "health-checkups/390:section:dental-health-checkup:0",
+    "health-checkups/390:section:eating-lifestyle-habits:0",
+    "health-checkups/390:section:health-checkup-and-metabolic:0",
+    "healthcare/1440:missing-chart:healthcare-emergency-medical-care-composition-3",
+    "healthcare/1440:missing-chart:healthcare-medical-system-and-resources-composition-1",
+    "healthcare/1440:missing-chart:theme-health-death-causes-donut",
+    "healthcare/1440:missing-chart:theme-health-expense-trend",
+    "healthcare/1440:missing-chart:theme-health-supply-trend",
+    "healthcare/1440:missing-chart:theme-health-supply-trend-hospitals",
+    "healthcare/1440:prefecture-selector",
+    "healthcare/1440:section-cards:access:0/1",
+    "healthcare/1440:section-cards:emergency-medical-care:1/3",
+    "healthcare/1440:section-cards:healthy-years:0/1",
+    "healthcare/1440:section-cards:home-care-and-nursing:0/4",
+    "healthcare/1440:section-cards:life-expectancy-and-health:1/3",
+    "healthcare/1440:section-cards:medical-system-and-resources:0/1",
+    "healthcare/1440:section-cards:mental-health-support:0/3",
+    "healthcare/1440:section-cards:perinatal-and-pediatric-care:0/6",
+    "healthcare/1440:section:causes-of-death:0",
+    "healthcare/1440:section:healthy-years:0",
+    "healthcare/1440:section:home-care-and-nursing:0",
+    "healthcare/1440:section:mental-health-support:0",
+    "healthcare/1440:section:perinatal-and-pediatric-care:0",
+    "healthcare/390:missing-chart:healthcare-emergency-medical-care-composition-3",
+    "healthcare/390:missing-chart:healthcare-medical-system-and-resources-composition-1",
+    "healthcare/390:missing-chart:theme-health-death-causes-donut",
+    "healthcare/390:missing-chart:theme-health-expense-trend",
+    "healthcare/390:missing-chart:theme-health-supply-trend",
+    "healthcare/390:missing-chart:theme-health-supply-trend-hospitals",
+    "healthcare/390:prefecture-selector",
+    "healthcare/390:section-cards:access:0/1",
+    "healthcare/390:section-cards:emergency-medical-care:1/3",
+    "healthcare/390:section-cards:healthy-years:0/1",
+    "healthcare/390:section-cards:home-care-and-nursing:0/4",
+    "healthcare/390:section-cards:life-expectancy-and-health:1/3",
+    "healthcare/390:section-cards:medical-system-and-resources:0/1",
+    "healthcare/390:section-cards:mental-health-support:0/3",
+    "healthcare/390:section-cards:perinatal-and-pediatric-care:0/6",
+    "healthcare/390:section:causes-of-death:0",
+    "healthcare/390:section:healthy-years:0",
+    "healthcare/390:section:home-care-and-nursing:0",
+    "healthcare/390:section:mental-health-support:0",
+    "healthcare/390:section:perinatal-and-pediatric-care:0",
+    "household-assets-debt/1440:prefecture-selector",
+    "household-assets-debt/1440:section-cards:capital-city-savings-debt:0/2",
+    "household-assets-debt/1440:section:capital-city-savings-debt:0",
+    "household-assets-debt/390:prefecture-selector",
+    "household-assets-debt/390:section-cards:capital-city-savings-debt:0/2",
+    "household-assets-debt/390:section:capital-city-savings-debt:0",
+    "household-food-spending/1440:missing-chart:household-food-spending-alcohol-trend",
+    "household-food-spending/1440:missing-chart:household-food-spending-staple-trend",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-alcohol-spending",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-communication",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-dashi-seaweed",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-dining-cuisines",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-fish-everyday",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-fish-everyday-2",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-fish-white",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-fruit",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-leisure",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-meat",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-root-vegetables",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-seafood-total",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-seasonings",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-shellfish-crustacean",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-soft-drinks",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-sweets-processed",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-tea-coffee",
+    "household-food-spending/1440:missing-chart:household-food-spending-trend-travel",
+    "household-food-spending/1440:prefecture-selector",
+    "household-food-spending/1440:section-cards:household-food-spending-beyond-food:1/6",
+    "household-food-spending/1440:section-cards:household-food-spending-budget-shares:0/2",
+    "household-food-spending/1440:section-cards:household-food-spending-dining-out:0/2",
+    "household-food-spending/1440:section-cards:household-food-spending-drinks:0/4",
+    "household-food-spending/1440:section-cards:household-food-spending-meat-dairy:0/2",
+    "household-food-spending/1440:section-cards:household-food-spending-pantry:0/2",
+    "household-food-spending/1440:section-cards:household-food-spending-seafood:0/5",
+    "household-food-spending/1440:section-cards:household-food-spending-vegetables-fruit:0/5",
+    "household-food-spending/1440:section:household-food-spending-budget-shares:0",
+    "household-food-spending/1440:section:household-food-spending-dining-out:0",
+    "household-food-spending/1440:section:household-food-spending-seafood:0",
+    "household-food-spending/1440:section:household-food-spending-vegetables-fruit:0",
+    "household-food-spending/390:missing-chart:household-food-spending-alcohol-trend",
+    "household-food-spending/390:missing-chart:household-food-spending-staple-trend",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-alcohol-spending",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-communication",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-dashi-seaweed",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-dining-cuisines",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-fish-everyday",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-fish-everyday-2",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-fish-white",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-fruit",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-leisure",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-meat",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-root-vegetables",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-seafood-total",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-seasonings",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-shellfish-crustacean",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-soft-drinks",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-sweets-processed",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-tea-coffee",
+    "household-food-spending/390:missing-chart:household-food-spending-trend-travel",
+    "household-food-spending/390:prefecture-selector",
+    "household-food-spending/390:section-cards:household-food-spending-beyond-food:1/6",
+    "household-food-spending/390:section-cards:household-food-spending-budget-shares:0/2",
+    "household-food-spending/390:section-cards:household-food-spending-dining-out:0/2",
+    "household-food-spending/390:section-cards:household-food-spending-drinks:0/4",
+    "household-food-spending/390:section-cards:household-food-spending-meat-dairy:0/2",
+    "household-food-spending/390:section-cards:household-food-spending-pantry:0/2",
+    "household-food-spending/390:section-cards:household-food-spending-seafood:0/5",
+    "household-food-spending/390:section-cards:household-food-spending-vegetables-fruit:0/5",
+    "household-food-spending/390:section:household-food-spending-budget-shares:0",
+    "household-food-spending/390:section:household-food-spending-dining-out:0",
+    "household-food-spending/390:section:household-food-spending-seafood:0",
+    "household-food-spending/390:section:household-food-spending-vegetables-fruit:0",
+    "information-industry/1440:prefecture-selector",
+    "information-industry/390:prefecture-selector",
+    "innovation-patents/1440:prefecture-selector",
+    "innovation-patents/390:prefecture-selector",
     "labor-mobility/1440:missing-chart:labor-mobility-turnover-vs-jobchange",
+    "labor-mobility/1440:missing-chart:theme-lm-employment-mobility-trend",
+    "labor-mobility/1440:prefecture-selector",
+    "labor-mobility/1440:section-cards:employment-mobility:0/1",
+    "labor-mobility/1440:section-cards:non-regular-employment-conditions:0/4",
+    "labor-mobility/1440:section-cards:working-hours-and-flexible-work:1/4",
+    "labor-mobility/1440:section:employment-mobility:0",
+    "labor-mobility/1440:section:non-regular-employment-conditions:0",
     "labor-mobility/390:missing-chart:labor-mobility-turnover-vs-jobchange",
+    "labor-mobility/390:missing-chart:theme-lm-employment-mobility-trend",
+    "labor-mobility/390:prefecture-selector",
+    "labor-mobility/390:section-cards:employment-mobility:0/1",
+    "labor-mobility/390:section-cards:non-regular-employment-conditions:0/4",
+    "labor-mobility/390:section-cards:working-hours-and-flexible-work:1/4",
+    "labor-mobility/390:section:employment-mobility:0",
+    "labor-mobility/390:section:non-regular-employment-conditions:0",
+    "labor-wages/1440:missing-chart:labor-wages-gender-gap",
+    "labor-wages/1440:prefecture-selector",
+    "labor-wages/1440:section-cards:female-labor-participation-and-earnings:1/2",
+    "labor-wages/1440:section-cards:wage-differences:1/3",
+    "labor-wages/390:missing-chart:labor-wages-gender-gap",
+    "labor-wages/390:prefecture-selector",
+    "labor-wages/390:section-cards:female-labor-participation-and-earnings:1/2",
+    "labor-wages/390:section-cards:wage-differences:1/3",
+    "land-property-market/1440:prefecture-selector",
+    "land-property-market/1440:section-cards:residential-land-price-trends:0/1",
+    "land-property-market/1440:section-cards:residential-land-prices:0/3",
+    "land-property-market/1440:section:residential-land-price-trends:0",
+    "land-property-market/390:prefecture-selector",
+    "land-property-market/390:section-cards:residential-land-price-trends:0/1",
+    "land-property-market/390:section-cards:residential-land-prices:0/3",
+    "land-property-market/390:section:residential-land-price-trends:0",
+    "landslide-exposure/1440:missing-chart:landslide-exposure-disaster-type-breakdown-composition-1",
+    "landslide-exposure/1440:missing-chart:landslide-exposure-special-hazard-breakdown-composition-1",
+    "landslide-exposure/1440:prefecture-selector",
+    "landslide-exposure/1440:section-cards:disaster-type-breakdown:0/1",
+    "landslide-exposure/1440:section-cards:landslide-hazard-overview:0/2",
+    "landslide-exposure/1440:section-cards:special-hazard-breakdown:0/1",
+    "landslide-exposure/1440:section:landslide-hazard-overview:0",
+    "landslide-exposure/1440:section:special-hazard-breakdown:0",
+    "landslide-exposure/390:missing-chart:landslide-exposure-disaster-type-breakdown-composition-1",
+    "landslide-exposure/390:missing-chart:landslide-exposure-special-hazard-breakdown-composition-1",
+    "landslide-exposure/390:prefecture-selector",
+    "landslide-exposure/390:section-cards:disaster-type-breakdown:0/1",
+    "landslide-exposure/390:section-cards:landslide-hazard-overview:0/2",
+    "landslide-exposure/390:section-cards:special-hazard-breakdown:0/1",
+    "landslide-exposure/390:section:landslide-hazard-overview:0",
+    "landslide-exposure/390:section:special-hazard-breakdown:0",
     "living-housing/1440:missing-chart:lh-dwelling-floor-area-trend",
+    "living-housing/1440:missing-chart:lh-household-structure-trend",
+    "living-housing/1440:missing-chart:lh-household-structure-trend-single",
+    "living-housing/1440:missing-chart:living-housing-housing-construction-trends-composition-2",
+    "living-housing/1440:missing-chart:living-housing-vacant-housing-and-safety-composition-1",
     "living-housing/1440:missing-chart:vacancy-ownership-rate-trend",
+    "living-housing/1440:prefecture-selector",
+    "living-housing/1440:section-cards:dwelling-space:0/2",
+    "living-housing/1440:section-cards:household-structure-and-elderly:1/4",
+    "living-housing/1440:section-cards:housing-construction-trends:0/2",
+    "living-housing/1440:section-cards:housing-cost-and-space:0/2",
+    "living-housing/1440:section-cards:urban-environment-and-parks:1/3",
+    "living-housing/1440:section-cards:vacant-housing-and-safety:0/3",
+    "living-housing/1440:section:dwelling-space:0",
+    "living-housing/1440:section:housing-construction-trends:0",
+    "living-housing/1440:section:housing-cost-and-space:0",
+    "living-housing/1440:section:vacant-housing-and-safety:0",
     "living-housing/390:missing-chart:lh-dwelling-floor-area-trend",
+    "living-housing/390:missing-chart:lh-household-structure-trend",
+    "living-housing/390:missing-chart:lh-household-structure-trend-single",
+    "living-housing/390:missing-chart:living-housing-housing-construction-trends-composition-2",
+    "living-housing/390:missing-chart:living-housing-vacant-housing-and-safety-composition-1",
     "living-housing/390:missing-chart:vacancy-ownership-rate-trend",
+    "living-housing/390:prefecture-selector",
+    "living-housing/390:section-cards:dwelling-space:0/2",
+    "living-housing/390:section-cards:household-structure-and-elderly:1/4",
+    "living-housing/390:section-cards:housing-construction-trends:0/2",
+    "living-housing/390:section-cards:housing-cost-and-space:0/2",
+    "living-housing/390:section-cards:urban-environment-and-parks:1/3",
+    "living-housing/390:section-cards:vacant-housing-and-safety:0/3",
+    "living-housing/390:section:dwelling-space:0",
+    "living-housing/390:section:housing-construction-trends:0",
+    "living-housing/390:section:housing-cost-and-space:0",
+    "living-housing/390:section:vacant-housing-and-safety:0",
+    "local-economy/1440:prefecture-selector",
+    "local-economy/1440:section-cards:income:2/3",
+    "local-economy/1440:section-cards:industrial-specialization:0/3",
+    "local-economy/1440:section-cards:industry:0/2",
+    "local-economy/1440:section-cards:value-added-by-enterprises:0/2",
+    "local-economy/1440:section:industry:0",
+    "local-economy/1440:section:value-added-by-enterprises:0",
+    "local-economy/390:prefecture-selector",
+    "local-economy/390:section-cards:income:2/3",
+    "local-economy/390:section-cards:industrial-specialization:0/3",
+    "local-economy/390:section-cards:industry:0/2",
+    "local-economy/390:section-cards:value-added-by-enterprises:0/2",
+    "local-economy/390:section:industry:0",
+    "local-economy/390:section:value-added-by-enterprises:0",
+    "local-finance/1440:section-cards:candidate-122:2/4",
+    "local-finance/1440:section-cards:candidate-123:0/6",
+    "local-finance/1440:section-cards:candidate-125:0/7",
+    "local-finance/1440:section-cards:candidate-50:1/3",
+    "local-finance/1440:section-cards:candidate-92:0/3",
+    "local-finance/1440:section:candidate-123:0",
+    "local-finance/1440:section:candidate-125:0",
+    "local-finance/1440:section:candidate-92:0",
+    "local-finance/390:section-cards:candidate-122:2/4",
+    "local-finance/390:section-cards:candidate-123:0/6",
+    "local-finance/390:section-cards:candidate-125:0/7",
+    "local-finance/390:section-cards:candidate-50:1/3",
+    "local-finance/390:section-cards:candidate-92:0/3",
+    "local-finance/390:section:candidate-123:0",
+    "local-finance/390:section:candidate-125:0",
+    "local-finance/390:section:candidate-92:0",
+    "local-government-digital/1440:prefecture-selector",
+    "local-government-digital/1440:section-cards:auto-tax-dx:0/3",
+    "local-government-digital/1440:section-cards:online-procedure-progress:0/2",
+    "local-government-digital/1440:section-cards:tax-and-recruitment-dx:0/2",
+    "local-government-digital/1440:section:auto-tax-dx:0",
+    "local-government-digital/1440:section:online-procedure-progress:0",
+    "local-government-digital/1440:section:tax-and-recruitment-dx:0",
+    "local-government-digital/390:prefecture-selector",
+    "local-government-digital/390:section-cards:auto-tax-dx:0/3",
+    "local-government-digital/390:section-cards:online-procedure-progress:0/2",
+    "local-government-digital/390:section-cards:tax-and-recruitment-dx:0/2",
+    "local-government-digital/390:section:auto-tax-dx:0",
+    "local-government-digital/390:section:online-procedure-progress:0",
+    "local-government-digital/390:section:tax-and-recruitment-dx:0",
+    "local-services/1440:prefecture-selector",
+    "local-services/1440:section-cards:amusement-and-recreation:2/4",
+    "local-services/1440:section-cards:living-related-services:2/4",
+    "local-services/1440:section-cards:media-and-information-production:2/4",
+    "local-services/390:prefecture-selector",
+    "local-services/390:section-cards:amusement-and-recreation:2/4",
+    "local-services/390:section-cards:living-related-services:2/4",
+    "local-services/390:section-cards:media-and-information-production:2/4",
+    "long-term-care/1440:prefecture-selector",
+    "long-term-care/1440:section-cards:care-needs-and-fiscal-scale:1/2",
+    "long-term-care/390:prefecture-selector",
+    "long-term-care/390:section-cards:care-needs-and-fiscal-scale:1/2",
+    "manufacturing/1440:missing-chart:manufacturing-establishments-employees-trend",
+    "manufacturing/1440:missing-chart:manufacturing-establishments-employees-trend-employees",
     "manufacturing/1440:missing-chart:manufacturing-shipment-value-trend",
+    "manufacturing/1440:missing-chart:theme-manufacturing-labor-productivity",
+    "manufacturing/1440:missing-chart:theme-manufacturing-labor-productivity-establishment",
+    "manufacturing/1440:prefecture-selector",
+    "manufacturing/1440:section-cards:factory-location-area:0/1",
+    "manufacturing/1440:section-cards:food-manufacturing-industry:0/3",
+    "manufacturing/1440:section:food-manufacturing-industry:0",
+    "manufacturing/1440:section:location:0",
+    "manufacturing/390:missing-chart:manufacturing-establishments-employees-trend",
+    "manufacturing/390:missing-chart:manufacturing-establishments-employees-trend-employees",
     "manufacturing/390:missing-chart:manufacturing-shipment-value-trend",
+    "manufacturing/390:missing-chart:theme-manufacturing-labor-productivity",
+    "manufacturing/390:missing-chart:theme-manufacturing-labor-productivity-establishment",
+    "manufacturing/390:prefecture-selector",
+    "manufacturing/390:section-cards:factory-location-area:0/1",
+    "manufacturing/390:section-cards:food-manufacturing-industry:0/3",
+    "manufacturing/390:section:food-manufacturing-industry:0",
+    "manufacturing/390:section:location:0",
+    "natural-environment/1440:prefecture-selector",
+    "natural-environment/1440:section-cards:national-park-visitors:0/1",
+    "natural-environment/1440:section:national-park-visitors:0",
+    "natural-environment/390:prefecture-selector",
+    "natural-environment/390:section-cards:national-park-visitors:0/1",
+    "natural-environment/390:section:national-park-visitors:0",
+    "occupation-salary/1440:missing-chart:theme-occ-edu-trend",
+    "occupation-salary/1440:missing-chart:theme-occ-it-trend",
     "occupation-salary/1440:missing-chart:theme-occ-medical-trend",
+    "occupation-salary/1440:missing-chart:theme-occ-service-trend",
+    "occupation-salary/1440:missing-chart:theme-occ-transport-trend",
+    "occupation-salary/1440:prefecture-selector",
+    "occupation-salary/1440:section-cards:education:0/1",
+    "occupation-salary/1440:section-cards:it-professional:0/1",
+    "occupation-salary/1440:section-cards:medical-care:0/1",
+    "occupation-salary/1440:section-cards:transport-construction:0/1",
+    "occupation-salary/1440:section:education:0",
+    "occupation-salary/1440:section:it-professional:0",
+    "occupation-salary/1440:section:medical-care:0",
+    "occupation-salary/1440:section:services:0",
+    "occupation-salary/1440:section:transport-construction:0",
+    "occupation-salary/390:missing-chart:theme-occ-edu-trend",
+    "occupation-salary/390:missing-chart:theme-occ-it-trend",
     "occupation-salary/390:missing-chart:theme-occ-medical-trend",
+    "occupation-salary/390:missing-chart:theme-occ-service-trend",
+    "occupation-salary/390:missing-chart:theme-occ-transport-trend",
+    "occupation-salary/390:prefecture-selector",
+    "occupation-salary/390:section-cards:education:0/1",
+    "occupation-salary/390:section-cards:it-professional:0/1",
+    "occupation-salary/390:section-cards:medical-care:0/1",
+    "occupation-salary/390:section-cards:transport-construction:0/1",
+    "occupation-salary/390:section:education:0",
+    "occupation-salary/390:section:it-professional:0",
+    "occupation-salary/390:section:medical-care:0",
+    "occupation-salary/390:section:services:0",
+    "occupation-salary/390:section:transport-construction:0",
+    "population-dynamics/1440:missing-chart:birth-death-count-trend",
+    "population-dynamics/1440:missing-chart:population-dynamics-birth-rate-and-maternity-composition-2",
+    "population-dynamics/1440:missing-chart:population-dynamics-birth-rate-and-maternity-composition-3",
+    "population-dynamics/1440:missing-chart:theme-pop-migration-trend",
+    "population-dynamics/1440:prefecture-selector",
+    "population-dynamics/1440:section-cards:birth-rate-and-maternity:0/3",
+    "population-dynamics/1440:section-cards:population-trend-and-future:0/2",
+    "population-dynamics/1440:section-cards:residence-and-foreign-population:0/3",
+    "population-dynamics/1440:section-cards:youth-migration-and-education:0/3",
+    "population-dynamics/1440:section:birth-rate-and-maternity:0",
+    "population-dynamics/1440:section:population-trend-and-future:0",
+    "population-dynamics/390:missing-chart:birth-death-count-trend",
+    "population-dynamics/390:missing-chart:population-dynamics-birth-rate-and-maternity-composition-2",
+    "population-dynamics/390:missing-chart:population-dynamics-birth-rate-and-maternity-composition-3",
+    "population-dynamics/390:missing-chart:theme-pop-migration-trend",
+    "population-dynamics/390:prefecture-selector",
+    "population-dynamics/390:section-cards:birth-rate-and-maternity:0/3",
+    "population-dynamics/390:section-cards:population-trend-and-future:0/2",
+    "population-dynamics/390:section-cards:residence-and-foreign-population:0/3",
+    "population-dynamics/390:section-cards:youth-migration-and-education:0/3",
+    "population-dynamics/390:section:birth-rate-and-maternity:0",
+    "population-dynamics/390:section:population-trend-and-future:0",
     "ports/1440:missing-chart:ports-cargo-trend",
+    "ports/1440:prefecture-selector",
+    "ports/1440:section-cards:cargo:0/2",
+    "ports/1440:section-cards:ships-passengers:0/1",
+    "ports/1440:section-cards:trade:0/1",
+    "ports/1440:section:cargo:0",
+    "ports/1440:section:ships-passengers:0",
+    "ports/1440:section:trade:0",
     "ports/390:missing-chart:ports-cargo-trend",
+    "ports/390:prefecture-selector",
+    "ports/390:section-cards:cargo:0/2",
+    "ports/390:section-cards:ships-passengers:0/1",
+    "ports/390:section-cards:trade:0/1",
+    "ports/390:section:cargo:0",
+    "ports/390:section:ships-passengers:0",
+    "ports/390:section:trade:0",
+    "public-assistance/1440:prefecture-selector",
+    "public-assistance/1440:section-cards:poverty-support-consultation:0/1",
+    "public-assistance/1440:section:poverty-support-consultation:0",
+    "public-assistance/390:prefecture-selector",
+    "public-assistance/390:section-cards:poverty-support-consultation:0/1",
+    "public-assistance/390:section:poverty-support-consultation:0",
     "quality-process:1",
+    "railway/1440:missing-chart:railway-freight-trend",
+    "railway/1440:missing-chart:railway-passenger-trend",
+    "railway/1440:missing-chart:railway-passenger-trend-jr",
+    "railway/1440:prefecture-selector",
+    "railway/1440:section-cards:stations:0/2",
+    "railway/1440:section:freight:0",
+    "railway/390:missing-chart:railway-freight-trend",
+    "railway/390:missing-chart:railway-passenger-trend",
+    "railway/390:missing-chart:railway-passenger-trend-jr",
+    "railway/390:prefecture-selector",
+    "railway/390:section-cards:stations:0/2",
+    "railway/390:section:freight:0",
+    "real-income/1440:missing-chart:real-income-cpi-breakdown",
+    "real-income/1440:missing-chart:real-income-cpi-breakdown-expenses",
+    "real-income/1440:missing-chart:real-income-household-composition",
+    "real-income/1440:missing-chart:theme-real-income-actual-vs-disposable",
+    "real-income/1440:prefecture-selector",
+    "real-income/1440:section-cards:after-rent:0/1",
+    "real-income/1440:section-cards:household-consumption-expenditure:0/1",
+    "real-income/1440:section-cards:income-and-asset-inequality:0/2",
+    "real-income/1440:section-cards:purchasing-power:0/1",
+    "real-income/1440:section:after-rent:0",
+    "real-income/1440:section:household-consumption-expenditure:0",
+    "real-income/1440:section:income-and-asset-inequality:0",
+    "real-income/1440:section:prices:0",
+    "real-income/1440:section:purchasing-power:0",
+    "real-income/390:missing-chart:real-income-cpi-breakdown",
+    "real-income/390:missing-chart:real-income-cpi-breakdown-expenses",
+    "real-income/390:missing-chart:real-income-household-composition",
+    "real-income/390:missing-chart:theme-real-income-actual-vs-disposable",
+    "real-income/390:prefecture-selector",
+    "real-income/390:section-cards:after-rent:0/1",
+    "real-income/390:section-cards:household-consumption-expenditure:0/1",
+    "real-income/390:section-cards:income-and-asset-inequality:0/2",
+    "real-income/390:section-cards:purchasing-power:0/1",
+    "real-income/390:section:after-rent:0",
+    "real-income/390:section:household-consumption-expenditure:0",
+    "real-income/390:section:income-and-asset-inequality:0",
+    "real-income/390:section:prices:0",
+    "real-income/390:section:purchasing-power:0",
+    "regional-energy/1440:missing-chart:regional-energy-regional-co2-emissions-composition-2",
+    "regional-energy/1440:missing-chart:regional-energy-renewable-energy-adoption-composition-3",
+    "regional-energy/1440:missing-chart:regional-energy-sector-energy-breakdown-composition-1",
+    "regional-energy/1440:prefecture-selector",
+    "regional-energy/1440:section-cards:energy-consumption-scale:0/3",
+    "regional-energy/1440:section-cards:regional-co2-emissions:0/2",
+    "regional-energy/1440:section-cards:renewable-energy-adoption:0/3",
+    "regional-energy/1440:section-cards:sector-energy-breakdown:0/1",
+    "regional-energy/1440:section:energy-consumption-scale:0",
+    "regional-energy/1440:section:regional-co2-emissions:0",
+    "regional-energy/1440:section:renewable-energy-adoption:0",
+    "regional-energy/1440:section:sector-energy-breakdown:0",
+    "regional-energy/390:missing-chart:regional-energy-regional-co2-emissions-composition-2",
+    "regional-energy/390:missing-chart:regional-energy-renewable-energy-adoption-composition-3",
+    "regional-energy/390:missing-chart:regional-energy-sector-energy-breakdown-composition-1",
+    "regional-energy/390:prefecture-selector",
+    "regional-energy/390:section-cards:energy-consumption-scale:0/3",
+    "regional-energy/390:section-cards:regional-co2-emissions:0/2",
+    "regional-energy/390:section-cards:renewable-energy-adoption:0/3",
+    "regional-energy/390:section-cards:sector-energy-breakdown:0/1",
+    "regional-energy/390:section:energy-consumption-scale:0",
+    "regional-energy/390:section:regional-co2-emissions:0",
+    "regional-energy/390:section:renewable-energy-adoption:0",
+    "regional-energy/390:section:sector-energy-breakdown:0",
+    "regional-transport/1440:prefecture-selector",
+    "regional-transport/390:prefecture-selector",
+    "retail-commerce/1440:prefecture-selector",
+    "retail-commerce/390:prefecture-selector",
+    "roads/1440:missing-chart:roads-length-trend",
+    "roads/1440:missing-chart:roads-road-bridge-maintenance-composition-2",
+    "roads/1440:missing-chart:roads-road-tunnel-maintenance-composition-2",
+    "roads/1440:prefecture-selector",
+    "roads/1440:section-cards:road-bridge-maintenance:0/2",
+    "roads/1440:section-cards:road-tunnel-maintenance:0/2",
+    "roads/1440:section:road-tunnel-maintenance:0",
+    "roads/390:missing-chart:roads-length-trend",
+    "roads/390:missing-chart:roads-road-bridge-maintenance-composition-2",
+    "roads/390:missing-chart:roads-road-tunnel-maintenance-composition-2",
+    "roads/390:prefecture-selector",
+    "roads/390:section-cards:road-bridge-maintenance:0/2",
+    "roads/390:section-cards:road-tunnel-maintenance:0/2",
+    "roads/390:section:road-tunnel-maintenance:0",
     "runtime-incomplete",
-    "runtime-process:1"
+    "runtime-process:1",
+    "safety/1440:missing-chart:crime-count-arrest-rate-trend",
+    "safety/1440:missing-chart:fire-emergency-trend",
+    "safety/1440:missing-chart:fire-emergency-trend-fire",
+    "safety/1440:missing-chart:safety-crime-types-donut",
+    "safety/1440:missing-chart:safety-fire-casualties-donut",
+    "safety/1440:missing-chart:safety-natural-disaster-impact-composition-1",
+    "safety/1440:missing-chart:safety-natural-disaster-impact-composition-2",
+    "safety/1440:missing-chart:traffic-accident-deaths-trend",
+    "safety/1440:prefecture-selector",
+    "safety/1440:section-cards:consumer-trouble-safety:0/1",
+    "safety/1440:section-cards:evacuation-and-disaster-prevention:0/4",
+    "safety/1440:section-cards:fire-and-emergency:0/3",
+    "safety/1440:section-cards:natural-disaster-impact:1/4",
+    "safety/1440:section:consumer-trouble-safety:0",
+    "safety/1440:section:fire-and-emergency:0",
+    "safety/390:missing-chart:crime-count-arrest-rate-trend",
+    "safety/390:missing-chart:fire-emergency-trend",
+    "safety/390:missing-chart:fire-emergency-trend-fire",
+    "safety/390:missing-chart:safety-crime-types-donut",
+    "safety/390:missing-chart:safety-fire-casualties-donut",
+    "safety/390:missing-chart:safety-natural-disaster-impact-composition-1",
+    "safety/390:missing-chart:safety-natural-disaster-impact-composition-2",
+    "safety/390:missing-chart:traffic-accident-deaths-trend",
+    "safety/390:prefecture-selector",
+    "safety/390:section-cards:consumer-trouble-safety:0/1",
+    "safety/390:section-cards:evacuation-and-disaster-prevention:0/4",
+    "safety/390:section-cards:fire-and-emergency:0/3",
+    "safety/390:section-cards:natural-disaster-impact:1/4",
+    "safety/390:section:consumer-trouble-safety:0",
+    "safety/390:section:fire-and-emergency:0",
+    "single-parent-households/1440:missing-chart:single-parent-income-composition",
+    "single-parent-households/1440:prefecture-selector",
+    "single-parent-households/1440:section-cards:single-parent-employment-rate:0/2",
+    "single-parent-households/1440:section:single-parent-employment-rate:0",
+    "single-parent-households/390:missing-chart:single-parent-income-composition",
+    "single-parent-households/390:prefecture-selector",
+    "single-parent-households/390:section-cards:single-parent-employment-rate:0/2",
+    "single-parent-households/390:section:single-parent-employment-rate:0",
+    "sports-participation/1440:prefecture-selector",
+    "sports-participation/1440:section-cards:children-fitness-and-exercise:0/4",
+    "sports-participation/1440:section-cards:resident-exercise-habits:1/3",
+    "sports-participation/1440:section-cards:sports-facilities-environment:2/4",
+    "sports-participation/1440:section:children-fitness-and-exercise:0",
+    "sports-participation/390:prefecture-selector",
+    "sports-participation/390:section-cards:children-fitness-and-exercise:0/4",
+    "sports-participation/390:section-cards:resident-exercise-habits:1/3",
+    "sports-participation/390:section-cards:sports-facilities-environment:2/4",
+    "sports-participation/390:section:children-fitness-and-exercise:0",
+    "tourism/1440:missing-chart:theme-tourism-hotel-supply-trend",
+    "tourism/1440:prefecture-selector",
+    "tourism/1440:section-cards:inbound-visitors-status:0/1",
+    "tourism/1440:section-cards:stays:1/2",
+    "tourism/1440:section-cards:tourism-consumption:0/2",
+    "tourism/1440:section:inbound-visitors-status:0",
+    "tourism/1440:section:tourism-consumption:0",
+    "tourism/390:missing-chart:theme-tourism-hotel-supply-trend",
+    "tourism/390:prefecture-selector",
+    "tourism/390:section-cards:inbound-visitors-status:0/1",
+    "tourism/390:section-cards:stays:1/2",
+    "tourism/390:section-cards:tourism-consumption:0/2",
+    "tourism/390:section:inbound-visitors-status:0",
+    "tourism/390:section:tourism-consumption:0",
+    "tsunami-exposure/1440:prefecture-selector",
+    "tsunami-exposure/1440:section-cards:tsunami-evacuation-building:0/1",
+    "tsunami-exposure/1440:section-cards:tsunami-evacuation-tower:0/1",
+    "tsunami-exposure/1440:section:tsunami-evacuation-tower:0",
+    "tsunami-exposure/390:prefecture-selector",
+    "tsunami-exposure/390:section-cards:tsunami-evacuation-building:0/1",
+    "tsunami-exposure/390:section-cards:tsunami-evacuation-tower:0/1",
+    "tsunami-exposure/390:section:tsunami-evacuation-tower:0",
+    "waste-recycling/1440:prefecture-selector",
+    "waste-recycling/390:prefecture-selector",
+    "water-services/1440:prefecture-selector",
+    "water-services/1440:section-cards:pipe-aging-rate:0/3",
+    "water-services/1440:section-cards:pipe-renewal-pace:0/2",
+    "water-services/1440:section:pipe-aging-rate:0",
+    "water-services/1440:section:pipe-renewal-pace:0",
+    "water-services/390:prefecture-selector",
+    "water-services/390:section-cards:pipe-aging-rate:0/3",
+    "water-services/390:section-cards:pipe-renewal-pace:0/2",
+    "water-services/390:section:pipe-aging-rate:0",
+    "water-services/390:section:pipe-renewal-pace:0"
   ],
   "checkpoints": [
     {
@@ -199,6 +925,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-aging-society",
+      "themeKey": "aging-society",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-climate",
       "themeKey": "climate",
       "checkpoint": "d7",
@@ -219,25 +955,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 3,
+          "value": 7,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 41,
+          "value": 22,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -245,10 +981,60 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-climate",
+      "themeKey": "climate",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 21,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 60,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -312,6 +1098,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-consumer-prices",
+      "themeKey": "consumer-prices",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-education-culture",
       "themeKey": "education-culture",
       "checkpoint": "d7",
@@ -333,25 +1129,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 17,
+          "value": 19,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 80,
+          "value": 75,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -359,10 +1155,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-education-culture",
+      "themeKey": "education-culture",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 45,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 108,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -427,6 +1274,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-fishery-marine",
+      "themeKey": "fishery-marine",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-healthcare",
       "themeKey": "healthcare",
       "checkpoint": "d7",
@@ -482,6 +1339,16 @@
           ]
         }
       },
+      "verdict": "aborted"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-healthcare",
+      "themeKey": "healthcare",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
       "verdict": "aborted"
     },
     {
@@ -543,6 +1410,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-labor-mobility",
+      "themeKey": "labor-mobility",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-labor-wages",
       "themeKey": "labor-wages",
       "checkpoint": "d7",
@@ -598,6 +1475,16 @@
           ]
         }
       },
+      "verdict": "aborted"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-labor-wages",
+      "themeKey": "labor-wages",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
       "verdict": "aborted"
     },
     {
@@ -659,6 +1546,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-living-housing",
+      "themeKey": "living-housing",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-local-economy",
       "themeKey": "local-economy",
       "checkpoint": "d7",
@@ -717,6 +1614,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-local-economy",
+      "themeKey": "local-economy",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-local-finance",
       "themeKey": "local-finance",
       "checkpoint": "d7",
@@ -737,25 +1644,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 13,
+          "value": 11,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 18,
+          "value": 21,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -763,10 +1670,60 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-local-finance",
+      "themeKey": "local-finance",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 53,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 50,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -794,25 +1751,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 19,
+          "value": 22,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 61,
+          "value": 55,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -820,10 +1777,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-manufacturing",
+      "themeKey": "manufacturing",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 39,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 121,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -851,14 +1859,14 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 9,
+          "value": 8,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
@@ -866,10 +1874,10 @@
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -877,10 +1885,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-occupation-salary",
+      "themeKey": "occupation-salary",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 18,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 10,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -943,6 +2002,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-population-dynamics",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260908-ports",
       "themeKey": "ports",
       "checkpoint": "d7",
@@ -964,25 +2033,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 1,
+          "value": 3,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 13,
+          "value": 18,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -990,10 +2059,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-ports",
+      "themeKey": "ports",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 10,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 30,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -1021,25 +2141,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 8,
-          "status": "measured-low",
-          "scope": "Japan",
-          "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
-          "weeks": [
-            "2026-W42"
-          ]
-        },
-        "gsc.impressions": {
           "value": 15,
           "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 8,
+          "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -1047,10 +2167,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-railway",
+      "themeKey": "railway",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 29,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 33,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -1078,25 +2249,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 84,
+          "value": 99,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 37,
+          "value": 25,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -1104,10 +2275,60 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-real-income",
+      "themeKey": "real-income",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 133,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 92,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": 0.8875,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -1135,25 +2356,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 17,
+          "value": 14,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 32,
+          "value": 22,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -1161,10 +2382,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-roads",
+      "themeKey": "roads",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 31,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 71,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -1192,25 +2464,25 @@
       ],
       "values": {
         "ga4.pageViews": {
-          "value": 4,
+          "value": 5,
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 48,
+          "value": 12,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "ga4.engagementRatePvWeighted": {
@@ -1218,10 +2490,61 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-safety",
+      "themeKey": "safety",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 5,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 80,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -1286,6 +2609,16 @@
       "verdict": "aborted"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20260908-tourism",
+      "themeKey": "tourism",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "not-observed",
+      "reasons": [],
+      "values": null,
+      "verdict": "aborted"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260909-construction-industry",
       "themeKey": "construction-industry",
       "checkpoint": "d7",
@@ -1323,6 +2656,53 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260909-construction-industry",
+      "themeKey": "construction-industry",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 32,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -1390,6 +2770,52 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260909-waste-recycling",
+      "themeKey": "waste-recycling",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 14,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 71,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260909-information-industry",
       "themeKey": "information-industry",
       "checkpoint": "d7",
@@ -1442,6 +2868,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260909-information-industry",
+      "themeKey": "information-industry",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 73,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-agriculture-production",
       "themeKey": "agriculture-production",
       "checkpoint": "d7",
@@ -1479,6 +2952,52 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-agriculture-production",
+      "themeKey": "agriculture-production",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 12,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 46,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -1548,6 +3067,55 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-business-demography",
+      "themeKey": "business-demography",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 39,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 155,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": 9,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-childcare-services",
       "themeKey": "childcare-services",
       "checkpoint": "d7",
@@ -1597,6 +3165,53 @@
           "weeks": [
             "2026-W41"
           ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-childcare-services",
+      "themeKey": "childcare-services",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 59,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
         }
       },
       "verdict": "pending"
@@ -1656,6 +3271,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-communication-access",
+      "themeKey": "communication-access",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 2,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-community-participation",
       "themeKey": "community-participation",
       "checkpoint": "d7",
@@ -1694,6 +3356,50 @@
           "weeks": [
             "2026-W42"
           ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-community-participation",
+      "themeKey": "community-participation",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "search-console",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
         },
         "internalNav.eventCount": {
           "value": null,
@@ -1762,6 +3468,49 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-cultural-participation",
+      "themeKey": "cultural-participation",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 3,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "search-console",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-daily-time-use",
       "themeKey": "daily-time-use",
       "checkpoint": "d7",
@@ -1814,6 +3563,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-daily-time-use",
+      "themeKey": "daily-time-use",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 15,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-disability-support",
       "themeKey": "disability-support",
       "checkpoint": "d7",
@@ -1851,6 +3647,53 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-disability-support",
+      "themeKey": "disability-support",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 32,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -1920,6 +3763,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-earthquake-exposure",
+      "themeKey": "earthquake-exposure",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 22,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-environmental-quality",
       "themeKey": "environmental-quality",
       "checkpoint": "d7",
@@ -1952,14 +3842,61 @@
           "weeks": []
         },
         "gsc.impressions": {
-          "value": 16,
+          "value": 1,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-environmental-quality",
+      "themeKey": "environmental-quality",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 18,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2029,6 +3966,55 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-forestry-timber",
+      "themeKey": "forestry-timber",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 27,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 69,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": 4,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-freight-logistics",
       "themeKey": "freight-logistics",
       "checkpoint": "d7",
@@ -2077,6 +4063,55 @@
           "periodEnd": "2026-10-10",
           "weeks": [
             "2026-W41"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-freight-logistics",
+      "themeKey": "freight-logistics",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 20,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 161,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": 8,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -2135,6 +4170,50 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-gender-participation",
+      "themeKey": "gender-participation",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "search-console",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-geographic-access",
       "themeKey": "geographic-access",
       "checkpoint": "d7",
@@ -2172,6 +4251,52 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-geographic-access",
+      "themeKey": "geographic-access",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 6,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 26,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2241,6 +4366,52 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-health-checkups",
+      "themeKey": "health-checkups",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 28,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 60,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-household-assets-debt",
       "themeKey": "household-assets-debt",
       "checkpoint": "d7",
@@ -2293,6 +4464,50 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-household-assets-debt",
+      "themeKey": "household-assets-debt",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "search-console",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-innovation-patents",
       "themeKey": "innovation-patents",
       "checkpoint": "d7",
@@ -2307,12 +4522,55 @@
       "themeKey": "innovation-patents",
       "checkpoint": "d28",
       "due": "2026-10-09",
+      "status": "launch-provisional",
+      "reasons": [],
+      "values": {
+        "ga4.pageViews": {
+          "value": 1,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 2,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-innovation-patents",
+      "themeKey": "innovation-patents",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
       "status": "insufficient-data",
       "reasons": [
         "missing-or-low-sample",
         "complete-window-unavailable",
         "window-includes-pre-publication",
-        "window-not-observed-yet"
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
       ],
       "values": {
         "ga4.pageViews": {
@@ -2325,14 +4583,15 @@
           "weeks": []
         },
         "gsc.impressions": {
-          "value": 24,
+          "value": 27,
           "status": "measured-low",
           "scope": "search-console",
-          "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2385,6 +4644,53 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-land-property-market",
+      "themeKey": "land-property-market",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 15,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2454,6 +4760,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-landslide-exposure",
+      "themeKey": "landslide-exposure",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 56,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-local-government-digital",
       "themeKey": "local-government-digital",
       "checkpoint": "d7",
@@ -2491,6 +4844,52 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-local-government-digital",
+      "themeKey": "local-government-digital",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 5,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 29,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2560,6 +4959,55 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-local-services",
+      "themeKey": "local-services",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 21,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 6,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": 4,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-long-term-care",
       "themeKey": "long-term-care",
       "checkpoint": "d7",
@@ -2612,6 +5060,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-long-term-care",
+      "themeKey": "long-term-care",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 9,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-natural-environment",
       "themeKey": "natural-environment",
       "checkpoint": "d7",
@@ -2649,6 +5144,53 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-natural-environment",
+      "themeKey": "natural-environment",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "window-not-observed-yet",
+        "non-overlapping-report-references-unavailable"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        },
+        "gsc.impressions": {
+          "value": 18,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2718,6 +5260,52 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-public-assistance",
+      "themeKey": "public-assistance",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 15,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 54,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-regional-energy",
       "themeKey": "regional-energy",
       "checkpoint": "d7",
@@ -2755,6 +5343,52 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-regional-energy",
+      "themeKey": "regional-energy",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 13,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 44,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2824,6 +5458,55 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-regional-transport",
+      "themeKey": "regional-transport",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 26,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 163,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": 3,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-retail-commerce",
       "themeKey": "retail-commerce",
       "checkpoint": "d7",
@@ -2861,6 +5544,52 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-retail-commerce",
+      "themeKey": "retail-commerce",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 14,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 51,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -2930,6 +5659,52 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-single-parent-households",
+      "themeKey": "single-parent-households",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 13,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 50,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-sports-participation",
       "themeKey": "sports-participation",
       "checkpoint": "d7",
@@ -2984,6 +5759,52 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-sports-participation",
+      "themeKey": "sports-participation",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 39,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 72,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-LAUNCH-20260911-tsunami-exposure",
       "themeKey": "tsunami-exposure",
       "checkpoint": "d7",
@@ -3021,6 +5842,52 @@
           "periodEnd": "2026-10-08",
           "weeks": [
             "2026-W41"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-tsunami-exposure",
+      "themeKey": "tsunami-exposure",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 5,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 26,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         },
         "internalNav.eventCount": {
@@ -3088,6 +5955,52 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-LAUNCH-20260911-water-services",
+      "themeKey": "water-services",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 6,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 64,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "internalNav.eventCount": {
+          "value": null,
+          "status": "insufficient-data",
+          "scope": "Japan",
+          "windowDays": 0,
+          "periodStart": null,
+          "periodEnd": null,
+          "weeks": []
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20260911-foreign-residents",
       "themeKey": "foreign-residents",
       "checkpoint": "d7",
@@ -3113,21 +6026,60 @@
           "status": "measured-low",
           "scope": "Japan",
           "windowDays": 28,
-          "periodStart": "2026-09-20",
-          "periodEnd": "2026-10-17",
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
           ]
         },
         "gsc.impressions": {
-          "value": 26,
+          "value": 1,
           "status": "measured-low",
           "scope": "search-console",
           "windowDays": 28,
-          "periodStart": "2026-09-18",
-          "periodEnd": "2026-10-15",
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
           "weeks": [
-            "2026-W42"
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260911-foreign-residents",
+      "themeKey": "foreign-residents",
+      "checkpoint": "d56",
+      "due": "2026-11-06",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 29,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 36,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W39",
+            "2026-W43"
           ]
         }
       },
@@ -3144,6 +6096,53 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20261007-aging-society",
+      "themeKey": "aging-society",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 62,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 951,
+          "status": "measured",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20261007-fishery-marine",
       "themeKey": "fishery-marine",
       "checkpoint": "d7",
@@ -3151,6 +6150,54 @@
       "status": "quality-only",
       "reasons": [],
       "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-fishery-marine",
+      "themeKey": "fishery-marine",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 15,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 103,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
       "verdict": "pending"
     },
     {
@@ -3164,6 +6211,54 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20261007-local-economy",
+      "themeKey": "local-economy",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 17,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 54,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20261007-healthcare",
       "themeKey": "healthcare",
       "checkpoint": "d7",
@@ -3171,6 +6266,54 @@
       "status": "quality-only",
       "reasons": [],
       "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-healthcare",
+      "themeKey": "healthcare",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 28,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 44,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
       "verdict": "pending"
     },
     {
@@ -3184,6 +6327,54 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20261007-labor-mobility",
+      "themeKey": "labor-mobility",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 20,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 11,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20261007-labor-wages",
       "themeKey": "labor-wages",
       "checkpoint": "d7",
@@ -3191,6 +6382,54 @@
       "status": "quality-only",
       "reasons": [],
       "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-labor-wages",
+      "themeKey": "labor-wages",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 16,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 12,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
       "verdict": "pending"
     },
     {
@@ -3204,6 +6443,54 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20261007-living-housing",
+      "themeKey": "living-housing",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 23,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 108,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20261007-population-dynamics",
       "themeKey": "population-dynamics",
       "checkpoint": "d7",
@@ -3211,6 +6498,53 @@
       "status": "quality-only",
       "reasons": [],
       "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261007-population-dynamics",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d28",
+      "due": "2026-11-04",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 86,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 120,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
       "verdict": "pending"
     },
     {
@@ -3224,6 +6558,54 @@
       "verdict": "pending"
     },
     {
+      "experimentId": "THEME-STRUCTURE-20261008-tourism",
+      "themeKey": "tourism",
+      "checkpoint": "d28",
+      "due": "2026-11-05",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 36,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 128,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
+    },
+    {
       "experimentId": "THEME-STRUCTURE-20261008-consumer-prices",
       "themeKey": "consumer-prices",
       "checkpoint": "d7",
@@ -3232,10 +6614,57 @@
       "reasons": [],
       "values": {},
       "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20261008-consumer-prices",
+      "themeKey": "consumer-prices",
+      "checkpoint": "d28",
+      "due": "2026-11-05",
+      "status": "insufficient-data",
+      "reasons": [
+        "missing-or-low-sample",
+        "window-includes-pre-publication"
+      ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 26,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 74,
+          "status": "measured-low",
+          "scope": "search-console",
+          "windowDays": 28,
+          "periodStart": "2026-09-25",
+          "periodEnd": "2026-10-22",
+          "weeks": [
+            "2026-W43"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": null,
+          "status": "measured-low",
+          "scope": "Japan",
+          "windowDays": 28,
+          "periodStart": "2026-09-27",
+          "periodEnd": "2026-10-24",
+          "weeks": [
+            "2026-W43"
+          ]
+        }
+      },
+      "verdict": "pending"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- foreign-residents/1440:missing-chart:theme-foreign-nationality-trend\n- foreign-residents/390:missing-chart:theme-foreign-nationality-trend\n- labor-mobility/1440:missing-chart:labor-mobility-turnover-vs-jobchange\n- labor-mobility/390:missing-chart:labor-mobility-turnover-vs-jobchange\n- living-housing/1440:missing-chart:lh-dwelling-floor-area-trend\n- living-housing/1440:missing-chart:vacancy-ownership-rate-trend\n- living-housing/390:missing-chart:lh-dwelling-floor-area-trend\n- living-housing/390:missing-chart:vacancy-ownership-rate-trend\n- manufacturing/1440:missing-chart:manufacturing-shipment-value-trend\n- manufacturing/390:missing-chart:manufacturing-shipment-value-trend\n- occupation-salary/1440:missing-chart:theme-occ-medical-trend\n- occupation-salary/390:missing-chart:theme-occ-medical-trend\n- ports/1440:missing-chart:ports-cargo-trend\n- ports/390:missing-chart:ports-cargo-trend\n- quality-process:1\n- runtime-incomplete\n- runtime-process:1\n\n結果: `data/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "8cc95d1f362328a66ef99fead993b0f05167817a898e9698fcac72e319fd9d56",
+  "alertBody": "# テーマ継続確認\n- aging-society/1440:missing-chart:theme-age-composition\n- aging-society/1440:missing-chart:theme-late-elderly-medical-expense-trend\n- aging-society/1440:prefecture-selector\n- aging-society/1440:section-cards:age-structure:0/1\n- aging-society/1440:section-cards:birth-aging:1/2\n- aging-society/1440:section-cards:birth-and-marriage:0/1\n- aging-society/1440:section-cards:elderly-work-and-care:0/1\n- aging-society/1440:section:birth-and-marriage:0\n- aging-society/1440:section:elderly-work-and-care:0\n- aging-society/390:missing-chart:theme-age-composition\n- aging-society/390:missing-chart:theme-late-elderly-medical-expense-trend\n- aging-society/390:prefecture-selector\n- aging-society/390:section-cards:age-structure:0/1\n- aging-society/390:section-cards:birth-aging:1/2\n- aging-society/390:section-cards:birth-and-marriage:0/1\n- aging-society/390:section-cards:elderly-work-and-care:0/1\n- aging-society/390:section:birth-and-marriage:0\n- aging-society/390:section:elderly-work-and-care:0\n- agriculture-production/1440:prefecture-selector\n- agriculture-production/1440:section-cards:dairy-farming-production:0/3\n- agriculture-production/1440:section-cards:livestock-production:0/3\n- agriculture-production/1440:section:dairy-farming-production:0\n- agriculture-production/1440:section:livestock-production:0\n- agriculture-production/390:prefecture-selector\n- agriculture-production/390:section-cards:dairy-farming-production:0/3\n- agriculture-production/390:section-cards:livestock-production:0/3\n- agriculture-production/390:section:dairy-farming-production:0\n- agriculture-production/390:section:livestock-production:0\n- business-demography/1440:prefecture-selector\n- business-demography/1440:section-cards:business-metabolism:0/2\n- business-demography/1440:section:business-metabolism:0\n- business-demography/390:prefecture-selector\n- business-demography/390:section-cards:business-metabolism:0/2\n- business-demography/390:section:business-metabolism:0\n- childcare-services/1440:prefecture-selector\n- childcare-services/1440:section-cards:childcare-demand:0/1\n- childcare-services/1440:section:childcare-demand:0\n- childcare-services/390:prefecture-selector\n- childcare-services/390:section-cards:childcare-demand:0/1\n- childcare-services/390:section:childcare-demand:0\n- climate/1440:missing-chart:theme-climate-temperature-extremes\n- climate/1440:prefecture-selector\n- climate/1440:section-cards:climate-warming-and-heatstroke:0/2\n- climate/1440:section-cards:rain-snow:0/2\n- climate/1440:section-cards:snowfall-and-accumulation:0/1\n- climate/1440:section-cards:sunshine:0/1\n- climate/1440:section-cards:temperature:0/1\n- climate/1440:section:climate-warming-and-heatstroke:0\n- climate/1440:section:rain-snow:0\n- climate/1440:section:snowfall-and-accumulation:0\n- climate/1440:section:sunshine:0\n- climate/1440:section:temperature:0\n- climate/390:missing-chart:theme-climate-temperature-extremes\n- climate/390:prefecture-selector\n- climate/390:section-cards:climate-warming-and-heatstroke:0/2\n- climate/390:section-cards:rain-snow:0/2\n- climate/390:section-cards:snowfall-and-accumulation:0/1\n- climate/390:section-cards:sunshine:0/1\n- climate/390:section-cards:temperature:0/1\n- climate/390:section:climate-warming-and-heatstroke:0\n- climate/390:section:rain-snow:0\n- climate/390:section:snowfall-and-accumulation:0\n- climate/390:section:sunshine:0\n- climate/390:section:temperature:0\n- communication-access/1440:prefecture-selector\n- communication-access/390:prefecture-selector\n- community-participation/1440:prefecture-selector\n- community-participation/390:prefecture-selector\n- construction-industry/1440:missing-chart:construction-industry-workforce-demographics-composition-1\n- construction-industry/1440:prefecture-selector\n- construction-industry/1440:section-cards:architect-wages:0/1\n- construction-industry/1440:section-cards:construction-businesses:0/1\n- construction-industry/1440:section:architect-wages:0\n- construction-industry/1440:section:construction-businesses:0\n- construction-industry/390:missing-chart:construction-industry-workforce-demographics-composition-1\n- construction-industry/390:prefecture-selector\n- construction-industry/390:section-cards:architect-wages:0/1\n- construction-industry/390:section-cards:construction-businesses:0/1\n- construction-industry/390:section:architect-wages:0\n- construction-industry/390:section:construction-businesses:0\n- consumer-prices/1440:prefecture-selector\n- consumer-prices/1440:section-cards:expenses:0/1\n- consumer-prices/1440:section-cards:food-prices-and-expenditure:0/1\n- consumer-prices/1440:section-cards:overall:0/1\n- consumer-prices/1440:section-cards:utilities-prices-and-expenditure:0/1\n- consumer-prices/1440:section:food-prices-and-expenditure:0\n- consumer-prices/1440:section:overall:0\n- consumer-prices/1440:section:utilities-prices-and-expenditure:0\n- consumer-prices/390:prefecture-selector\n- consumer-prices/390:section-cards:expenses:0/1\n- consumer-prices/390:section-cards:food-prices-and-expenditure:0/1\n- consumer-prices/390:section-cards:overall:0/1\n- consumer-prices/390:section-cards:utilities-prices-and-expenditure:0/1\n- consumer-prices/390:section:food-prices-and-expenditure:0\n- consumer-prices/390:section:overall:0\n- consumer-prices/390:section:utilities-prices-and-expenditure:0\n- cultural-participation/1440:prefecture-selector\n- cultural-participation/1440:section-cards:cultural-facilities:1/2\n- cultural-participation/390:prefecture-selector\n- cultural-participation/390:section-cards:cultural-facilities:1/2\n- daily-time-use/1440:prefecture-selector\n- daily-time-use/390:prefecture-selector\n- disability-support/1440:prefecture-selector\n- disability-support/390:prefecture-selector\n- earthquake-exposure/1440:prefecture-selector\n- earthquake-exposure/1440:section-cards:earthquake-retrofit-past-performance:0/1\n- earthquake-exposure/1440:section-cards:fire-earthquake-insurance-spending:0/1\n- earthquake-exposure/1440:section-cards:housing-earthquake-resistance:0/1\n- earthquake-exposure/1440:section:earthquake-retrofit-past-performance:0\n- earthquake-exposure/1440:section:fire-earthquake-insurance-spending:0\n- earthquake-exposure/390:prefecture-selector\n- earthquake-exposure/390:section-cards:earthquake-retrofit-past-performance:0/1\n- earthquake-exposure/390:section-cards:fire-earthquake-insurance-spending:0/1\n- earthquake-exposure/390:section-cards:housing-earthquake-resistance:0/1\n- earthquake-exposure/390:section:earthquake-retrofit-past-performance:0\n- earthquake-exposure/390:section:fire-earthquake-insurance-spending:0\n- education-culture/1440:missing-chart:education-culture-cultural-facilities-and-arts-composition-1\n- education-culture/1440:missing-chart:theme-edu-higher-education-trend\n- education-culture/1440:missing-chart:theme-edu-higher-education-trend-attainment\n- education-culture/1440:prefecture-selector\n- education-culture/1440:section-cards:cultural-facilities-and-arts:0/3\n- education-culture/1440:section-cards:cultural-property-preservation:0/3\n- education-culture/1440:section-cards:higher-education-and-advancement:0/2\n- education-culture/1440:section-cards:higher-education:0/1\n- education-culture/1440:section-cards:lifelong-learning-and-libraries:1/2\n- education-culture/1440:section-cards:school-environment-and-closures:0/2\n- education-culture/1440:section-cards:schools:1/2\n- education-culture/1440:section:cultural-facilities-and-arts:0\n- education-culture/1440:section:higher-education:0\n- education-culture/1440:section:school-environment-and-closures:0\n- education-culture/390:missing-chart:education-culture-cultural-facilities-and-arts-composition-1\n- education-culture/390:missing-chart:theme-edu-higher-education-trend\n- education-culture/390:missing-chart:theme-edu-higher-education-trend-attainment\n- education-culture/390:prefecture-selector\n- education-culture/390:section-cards:cultural-facilities-and-arts:0/3\n- education-culture/390:section-cards:cultural-property-preservation:0/3\n- education-culture/390:section-cards:higher-education-and-advancement:0/2\n- education-culture/390:section-cards:higher-education:0/1\n- education-culture/390:section-cards:lifelong-learning-and-libraries:1/2\n- education-culture/390:section-cards:school-environment-and-closures:0/2\n- education-culture/390:section-cards:schools:1/2\n- education-culture/390:section:cultural-facilities-and-arts:0\n- education-culture/390:section:higher-education:0\n- education-culture/390:section:school-environment-and-closures:0\n- environmental-quality/1440:prefecture-selector\n- environmental-quality/1440:section-cards:air-quality-and-pm25:0/2\n- environmental-quality/1440:section-cards:lake-sea-water-quality:0/1\n- environmental-quality/1440:section-cards:river-water-quality:0/1\n- environmental-quality/1440:section:lake-sea-water-quality:0\n- environmental-quality/1440:section:river-water-quality:0\n- environmental-quality/390:prefecture-selector\n- environmental-quality/390:section-cards:air-quality-and-pm25:0/2\n- environmental-quality/390:section-cards:lake-sea-water-quality:0/1\n- environmental-quality/390:section-cards:river-water-quality:0/1\n- environmental-quality/390:section:lake-sea-water-quality:0\n- environmental-quality/390:section:river-water-quality:0\n- fishery-marine/1440:missing-chart:theme-fishery-output-trend-marine\n- fishery-marine/1440:prefecture-selector\n- fishery-marine/1440:section-cards:species:0/1\n- fishery-marine/1440:section:species:0\n- fishery-marine/390:missing-chart:theme-fishery-output-trend-marine\n- fishery-marine/390:prefecture-selector\n- fishery-marine/390:section-cards:species:0/1\n- fishery-marine/390:section:species:0\n- foreign-residents/1440:missing-chart:theme-foreign-nationality-trend\n- foreign-residents/1440:missing-chart:theme-foreign-total-trend\n- foreign-residents/1440:prefecture-selector\n- foreign-residents/1440:section-cards:foreign-employing-establishments:0/1\n- foreign-residents/1440:section-cards:foreign-workers:0/1\n- foreign-residents/1440:section:foreign-employing-establishments:0\n- foreign-residents/1440:section:foreign-workers:0\n- foreign-residents/390:missing-chart:theme-foreign-nationality-trend\n- foreign-residents/390:missing-chart:theme-foreign-total-trend\n- foreign-residents/390:prefecture-selector\n- foreign-residents/390:section-cards:foreign-employing-establishments:0/1\n- foreign-residents/390:section-cards:foreign-workers:0/1\n- foreign-residents/390:section:foreign-employing-establishments:0\n- foreign-residents/390:section:foreign-workers:0\n- forestry-timber/1440:prefecture-selector\n- forestry-timber/1440:section-cards:forestry-workforce-and-entities:0/3\n- forestry-timber/1440:section-cards:lumber-processing-industry:0/2\n- forestry-timber/1440:section-cards:timber-production-and-output:0/6\n- forestry-timber/1440:section:forestry-workforce-and-entities:0\n- forestry-timber/1440:section:lumber-processing-industry:0\n- forestry-timber/1440:section:timber-production-and-output:0\n- forestry-timber/390:prefecture-selector\n- forestry-timber/390:section-cards:forestry-workforce-and-entities:0/3\n- forestry-timber/390:section-cards:lumber-processing-industry:0/2\n- forestry-timber/390:section-cards:timber-production-and-output:0/6\n- forestry-timber/390:section:forestry-workforce-and-entities:0\n- forestry-timber/390:section:lumber-processing-industry:0\n- forestry-timber/390:section:timber-production-and-output:0\n- freight-logistics/1440:prefecture-selector\n- freight-logistics/390:prefecture-selector\n- gender-participation/1440:prefecture-selector\n- gender-participation/1440:section-cards:decision-making-participation:0/2\n- gender-participation/1440:section-cards:work-and-wage-gap:1/2\n- gender-participation/1440:section:decision-making-participation:0\n- gender-participation/390:prefecture-selector\n- gender-participation/390:section-cards:decision-making-participation:0/2\n- gender-participation/390:section-cards:work-and-wage-gap:1/2\n- gender-participation/390:section:decision-making-participation:0\n- geographic-access/1440:prefecture-selector\n- geographic-access/1440:section-cards:railway-access:0/1\n- geographic-access/390:prefecture-selector\n- geographic-access/390:section-cards:railway-access:0/1\n- health-checkups/1440:prefecture-selector\n- health-checkups/1440:section-cards:dental-health-checkup:0/1\n- health-checkups/1440:section-cards:eating-lifestyle-habits:0/2\n- health-checkups/1440:section-cards:health-checkup-and-metabolic:0/3\n- health-checkups/1440:section-cards:vegetable-and-salt-intake:0/4\n- health-checkups/1440:section:dental-health-checkup:0\n- health-checkups/1440:section:eating-lifestyle-habits:0\n- health-checkups/1440:section:health-checkup-and-metabolic:0\n- health-checkups/390:prefecture-selector\n- health-checkups/390:section-cards:dental-health-checkup:0/1\n- health-checkups/390:section-cards:eating-lifestyle-habits:0/2\n- health-checkups/390:section-cards:health-checkup-and-metabolic:0/3\n- health-checkups/390:section-cards:vegetable-and-salt-intake:0/4\n- health-checkups/390:section:dental-health-checkup:0\n- health-checkups/390:section:eating-lifestyle-habits:0\n- health-checkups/390:section:health-checkup-and-metabolic:0\n- healthcare/1440:missing-chart:healthcare-emergency-medical-care-composition-3\n- healthcare/1440:missing-chart:healthcare-medical-system-and-resources-composition-1\n- healthcare/1440:missing-chart:theme-health-death-causes-donut\n- healthcare/1440:missing-chart:theme-health-expense-trend\n- healthcare/1440:missing-chart:theme-health-supply-trend\n- healthcare/1440:missing-chart:theme-health-supply-trend-hospitals\n- healthcare/1440:prefecture-selector\n- healthcare/1440:section-cards:access:0/1\n- healthcare/1440:section-cards:emergency-medical-care:1/3\n- healthcare/1440:section-cards:healthy-years:0/1\n- healthcare/1440:section-cards:home-care-and-nursing:0/4\n- healthcare/1440:section-cards:life-expectancy-and-health:1/3\n- healthcare/1440:section-cards:medical-system-and-resources:0/1\n- healthcare/1440:section-cards:mental-health-support:0/3\n- healthcare/1440:section-cards:perinatal-and-pediatric-care:0/6\n- healthcare/1440:section:causes-of-death:0\n- healthcare/1440:section:healthy-years:0\n- healthcare/1440:section:home-care-and-nursing:0\n- healthcare/1440:section:mental-health-support:0\n- healthcare/1440:section:perinatal-and-pediatric-care:0\n- healthcare/390:missing-chart:healthcare-emergency-medical-care-composition-3\n- healthcare/390:missing-chart:healthcare-medical-system-and-resources-composition-1\n- healthcare/390:missing-chart:theme-health-death-causes-donut\n- healthcare/390:missing-chart:theme-health-expense-trend\n- healthcare/390:missing-chart:theme-health-supply-trend\n- healthcare/390:missing-chart:theme-health-supply-trend-hospitals\n- healthcare/390:prefecture-selector\n- healthcare/390:section-cards:access:0/1\n- healthcare/390:section-cards:emergency-medical-care:1/3\n- healthcare/390:section-cards:healthy-years:0/1\n- healthcare/390:section-cards:home-care-and-nursing:0/4\n- healthcare/390:section-cards:life-expectancy-and-health:1/3\n- healthcare/390:section-cards:medical-system-and-resources:0/1\n- healthcare/390:section-cards:mental-health-support:0/3\n- healthcare/390:section-cards:perinatal-and-pediatric-care:0/6\n- healthcare/390:section:causes-of-death:0\n- healthcare/390:section:healthy-years:0\n- healthcare/390:section:home-care-and-nursing:0\n- healthcare/390:section:mental-health-support:0\n- healthcare/390:section:perinatal-and-pediatric-care:0\n- household-assets-debt/1440:prefecture-selector\n- household-assets-debt/1440:section-cards:capital-city-savings-debt:0/2\n- household-assets-debt/1440:section:capital-city-savings-debt:0\n- household-assets-debt/390:prefecture-selector\n- household-assets-debt/390:section-cards:capital-city-savings-debt:0/2\n- household-assets-debt/390:section:capital-city-savings-debt:0\n- household-food-spending/1440:missing-chart:household-food-spending-alcohol-trend\n- household-food-spending/1440:missing-chart:household-food-spending-staple-trend\n- household-food-spending/1440:missing-chart:household-food-spending-trend-alcohol-spending\n- household-food-spending/1440:missing-chart:household-food-spending-trend-communication\n- household-food-spending/1440:missing-chart:household-food-spending-trend-dashi-seaweed\n- household-food-spending/1440:missing-chart:household-food-spending-trend-dining-cuisines\n- household-food-spending/1440:missing-chart:household-food-spending-trend-fish-everyday\n- household-food-spending/1440:missing-chart:household-food-spending-trend-fish-everyday-2\n- household-food-spending/1440:missing-chart:household-food-spending-trend-fish-white\n- household-food-spending/1440:missing-chart:household-food-spending-trend-fruit\n- household-food-spending/1440:missing-chart:household-food-spending-trend-leisure\n- household-food-spending/1440:missing-chart:household-food-spending-trend-meat\n- household-food-spending/1440:missing-chart:household-food-spending-trend-root-vegetables\n- household-food-spending/1440:missing-chart:household-food-spending-trend-seafood-total\n- household-food-spending/1440:missing-chart:household-food-spending-trend-seasonings\n- household-food-spending/1440:missing-chart:household-food-spending-trend-shellfish-crustacean\n- household-food-spending/1440:missing-chart:household-food-spending-trend-soft-drinks\n- household-food-spending/1440:missing-chart:household-food-spending-trend-sweets-processed\n- household-food-spending/1440:missing-chart:household-food-spending-trend-tea-coffee\n- household-food-spending/1440:missing-chart:household-food-spending-trend-travel\n- household-food-spending/1440:prefecture-selector\n- household-food-spending/1440:section-cards:household-food-spending-beyond-food:1/6\n- household-food-spending/1440:section-cards:household-food-spending-budget-shares:0/2\n- household-food-spending/1440:section-cards:household-food-spending-dining-out:0/2\n- household-food-spending/1440:section-cards:household-food-spending-drinks:0/4\n- household-food-spending/1440:section-cards:household-food-spending-meat-dairy:0/2\n- household-food-spending/1440:section-cards:household-food-spending-pantry:0/2\n- household-food-spending/1440:section-cards:household-food-spending-seafood:0/5\n- household-food-spending/1440:section-cards:household-food-spending-vegetables-fruit:0/5\n- household-food-spending/1440:section:household-food-spending-budget-shares:0\n- household-food-spending/1440:section:household-food-spending-dining-out:0\n- household-food-spending/1440:section:household-food-spending-seafood:0\n- household-food-spending/1440:section:household-food-spending-vegetables-fruit:0\n- household-food-spending/390:missing-chart:household-food-spending-alcohol-trend\n- household-food-spending/390:missing-chart:household-food-spending-staple-trend\n- household-food-spending/390:missing-chart:household-food-spending-trend-alcohol-spending\n- household-food-spending/390:missing-chart:household-food-spending-trend-communication\n- household-food-spending/390:missing-chart:household-food-spending-trend-dashi-seaweed\n- household-food-spending/390:missing-chart:household-food-spending-trend-dining-cuisines\n- household-food-spending/390:missing-chart:household-food-spending-trend-fish-everyday\n- household-food-spending/390:missing-chart:household-food-spending-trend-fish-everyday-2\n- household-food-spending/390:missing-chart:household-food-spending-trend-fish-white\n- household-food-spending/390:missing-chart:household-food-spending-trend-fruit\n- household-food-spending/390:missing-chart:household-food-spending-trend-leisure\n- household-food-spending/390:missing-chart:household-food-spending-trend-meat\n- household-food-spending/390:missing-chart:household-food-spending-trend-root-vegetables\n- household-food-spending/390:missing-chart:household-food-spending-trend-seafood-total\n- household-food-spending/390:missing-chart:household-food-spending-trend-seasonings\n- household-food-spending/390:missing-chart:household-food-spending-trend-shellfish-crustacean\n- household-food-spending/390:missing-chart:household-food-spending-trend-soft-drinks\n- household-food-spending/390:missing-chart:household-food-spending-trend-sweets-processed\n- household-food-spending/390:missing-chart:household-food-spending-trend-tea-coffee\n- household-food-spending/390:missing-chart:household-food-spending-trend-travel\n- household-food-spending/390:prefecture-selector\n- household-food-spending/390:section-cards:household-food-spending-beyond-food:1/6\n- household-food-spending/390:section-cards:household-food-spending-budget-shares:0/2\n- household-food-spending/390:section-cards:household-food-spending-dining-out:0/2\n- household-food-spending/390:section-cards:household-food-spending-drinks:0/4\n- household-food-spending/390:section-cards:household-food-spending-meat-dairy:0/2\n- household-food-spending/390:section-cards:household-food-spending-pantry:0/2\n- household-food-spending/390:section-cards:household-food-spending-seafood:0/5\n- household-food-spending/390:section-cards:household-food-spending-vegetables-fruit:0/5\n- household-food-spending/390:section:household-food-spending-budget-shares:0\n- household-food-spending/390:section:household-food-spending-dining-out:0\n- household-food-spending/390:section:household-food-spending-seafood:0\n- household-food-spending/390:section:household-food-spending-vegetables-fruit:0\n- information-industry/1440:prefecture-selector\n- information-industry/390:prefecture-selector\n- innovation-patents/1440:prefecture-selector\n- innovation-patents/390:prefecture-selector\n- labor-mobility/1440:missing-chart:labor-mobility-turnover-vs-jobchange\n- labor-mobility/1440:missing-chart:theme-lm-employment-mobility-trend\n- labor-mobility/1440:prefecture-selector\n- labor-mobility/1440:section-cards:employment-mobility:0/1\n- labor-mobility/1440:section-cards:non-regular-employment-conditions:0/4\n- labor-mobility/1440:section-cards:working-hours-and-flexible-work:1/4\n- labor-mobility/1440:section:employment-mobility:0\n- labor-mobility/1440:section:non-regular-employment-conditions:0\n- labor-mobility/390:missing-chart:labor-mobility-turnover-vs-jobchange\n- labor-mobility/390:missing-chart:theme-lm-employment-mobility-trend\n- labor-mobility/390:prefecture-selector\n- labor-mobility/390:section-cards:employment-mobility:0/1\n- labor-mobility/390:section-cards:non-regular-employment-conditions:0/4\n- labor-mobility/390:section-cards:working-hours-and-flexible-work:1/4\n- labor-mobility/390:section:employment-mobility:0\n- labor-mobility/390:section:non-regular-employment-conditions:0\n- labor-wages/1440:missing-chart:labor-wages-gender-gap\n- labor-wages/1440:prefecture-selector\n- labor-wages/1440:section-cards:female-labor-participation-and-earnings:1/2\n- labor-wages/1440:section-cards:wage-differences:1/3\n- labor-wages/390:missing-chart:labor-wages-gender-gap\n- labor-wages/390:prefecture-selector\n- labor-wages/390:section-cards:female-labor-participation-and-earnings:1/2\n- labor-wages/390:section-cards:wage-differences:1/3\n- land-property-market/1440:prefecture-selector\n- land-property-market/1440:section-cards:residential-land-price-trends:0/1\n- land-property-market/1440:section-cards:residential-land-prices:0/3\n- land-property-market/1440:section:residential-land-price-trends:0\n- land-property-market/390:prefecture-selector\n- land-property-market/390:section-cards:residential-land-price-trends:0/1\n- land-property-market/390:section-cards:residential-land-prices:0/3\n- land-property-market/390:section:residential-land-price-trends:0\n- landslide-exposure/1440:missing-chart:landslide-exposure-disaster-type-breakdown-composition-1\n- landslide-exposure/1440:missing-chart:landslide-exposure-special-hazard-breakdown-composition-1\n- landslide-exposure/1440:prefecture-selector\n- landslide-exposure/1440:section-cards:disaster-type-breakdown:0/1\n- landslide-exposure/1440:section-cards:landslide-hazard-overview:0/2\n- landslide-exposure/1440:section-cards:special-hazard-breakdown:0/1\n- landslide-exposure/1440:section:landslide-hazard-overview:0\n- landslide-exposure/1440:section:special-hazard-breakdown:0\n- landslide-exposure/390:missing-chart:landslide-exposure-disaster-type-breakdown-composition-1\n- landslide-exposure/390:missing-chart:landslide-exposure-special-hazard-breakdown-composition-1\n- landslide-exposure/390:prefecture-selector\n- landslide-exposure/390:section-cards:disaster-type-breakdown:0/1\n- landslide-exposure/390:section-cards:landslide-hazard-overview:0/2\n- landslide-exposure/390:section-cards:special-hazard-breakdown:0/1\n- landslide-exposure/390:section:landslide-hazard-overview:0\n- landslide-exposure/390:section:special-hazard-breakdown:0\n- living-housing/1440:missing-chart:lh-dwelling-floor-area-trend\n- living-housing/1440:missing-chart:lh-household-structure-trend\n- living-housing/1440:missing-chart:lh-household-structure-trend-single\n- living-housing/1440:missing-chart:living-housing-housing-construction-trends-composition-2\n- living-housing/1440:missing-chart:living-housing-vacant-housing-and-safety-composition-1\n- living-housing/1440:missing-chart:vacancy-ownership-rate-trend\n- living-housing/1440:prefecture-selector\n- living-housing/1440:section-cards:dwelling-space:0/2\n- living-housing/1440:section-cards:household-structure-and-elderly:1/4\n- living-housing/1440:section-cards:housing-construction-trends:0/2\n- living-housing/1440:section-cards:housing-cost-and-space:0/2\n- living-housing/1440:section-cards:urban-environment-and-parks:1/3\n- living-housing/1440:section-cards:vacant-housing-and-safety:0/3\n- living-housing/1440:section:dwelling-space:0\n- living-housing/1440:section:housing-construction-trends:0\n- living-housing/1440:section:housing-cost-and-space:0\n- living-housing/1440:section:vacant-housing-and-safety:0\n- living-housing/390:missing-chart:lh-dwelling-floor-area-trend\n- living-housing/390:missing-chart:lh-household-structure-trend\n- living-housing/390:missing-chart:lh-household-structure-trend-single\n- living-housing/390:missing-chart:living-housing-housing-construction-trends-composition-2\n- living-housing/390:missing-chart:living-housing-vacant-housing-and-safety-composition-1\n- living-housing/390:missing-chart:vacancy-ownership-rate-trend\n- living-housing/390:prefecture-selector\n- living-housing/390:section-cards:dwelling-space:0/2\n- living-housing/390:section-cards:household-structure-and-elderly:1/4\n- living-housing/390:section-cards:housing-construction-trends:0/2\n- living-housing/390:section-cards:housing-cost-and-space:0/2\n- living-housing/390:section-cards:urban-environment-and-parks:1/3\n- living-housing/390:section-cards:vacant-housing-and-safety:0/3\n- living-housing/390:section:dwelling-space:0\n- living-housing/390:section:housing-construction-trends:0\n- living-housing/390:section:housing-cost-and-space:0\n- living-housing/390:section:vacant-housing-and-safety:0\n- local-economy/1440:prefecture-selector\n- local-economy/1440:section-cards:income:2/3\n- local-economy/1440:section-cards:industrial-specialization:0/3\n- local-economy/1440:section-cards:industry:0/2\n- local-economy/1440:section-cards:value-added-by-enterprises:0/2\n- local-economy/1440:section:industry:0\n- local-economy/1440:section:value-added-by-enterprises:0\n- local-economy/390:prefecture-selector\n- local-economy/390:section-cards:income:2/3\n- local-economy/390:section-cards:industrial-specialization:0/3\n- local-economy/390:section-cards:industry:0/2\n- local-economy/390:section-cards:value-added-by-enterprises:0/2\n- local-economy/390:section:industry:0\n- local-economy/390:section:value-added-by-enterprises:0\n- local-finance/1440:section-cards:candidate-122:2/4\n- local-finance/1440:section-cards:candidate-123:0/6\n- local-finance/1440:section-cards:candidate-125:0/7\n- local-finance/1440:section-cards:candidate-50:1/3\n- local-finance/1440:section-cards:candidate-92:0/3\n- local-finance/1440:section:candidate-123:0\n- local-finance/1440:section:candidate-125:0\n- local-finance/1440:section:candidate-92:0\n- local-finance/390:section-cards:candidate-122:2/4\n- local-finance/390:section-cards:candidate-123:0/6\n- local-finance/390:section-cards:candidate-125:0/7\n- local-finance/390:section-cards:candidate-50:1/3\n- local-finance/390:section-cards:candidate-92:0/3\n- local-finance/390:section:candidate-123:0\n- local-finance/390:section:candidate-125:0\n- local-finance/390:section:candidate-92:0\n- local-government-digital/1440:prefecture-selector\n- local-government-digital/1440:section-cards:auto-tax-dx:0/3\n- local-government-digital/1440:section-cards:online-procedure-progress:0/2\n- local-government-digital/1440:section-cards:tax-and-recruitment-dx:0/2\n- local-government-digital/1440:section:auto-tax-dx:0\n- local-government-digital/1440:section:online-procedure-progress:0\n- local-government-digital/1440:section:tax-and-recruitment-dx:0\n- local-government-digital/390:prefecture-selector\n- local-government-digital/390:section-cards:auto-tax-dx:0/3\n- local-government-digital/390:section-cards:online-procedure-progress:0/2\n- local-government-digital/390:section-cards:tax-and-recruitment-dx:0/2\n- local-government-digital/390:section:auto-tax-dx:0\n- local-government-digital/390:section:online-procedure-progress:0\n- local-government-digital/390:section:tax-and-recruitment-dx:0\n- local-services/1440:prefecture-selector\n- local-services/1440:section-cards:amusement-and-recreation:2/4\n- local-services/1440:section-cards:living-related-services:2/4\n- local-services/1440:section-cards:media-and-information-production:2/4\n- local-services/390:prefecture-selector\n- local-services/390:section-cards:amusement-and-recreation:2/4\n- local-services/390:section-cards:living-related-services:2/4\n- local-services/390:section-cards:media-and-information-production:2/4\n- long-term-care/1440:prefecture-selector\n- long-term-care/1440:section-cards:care-needs-and-fiscal-scale:1/2\n- long-term-care/390:prefecture-selector\n- long-term-care/390:section-cards:care-needs-and-fiscal-scale:1/2\n- manufacturing/1440:missing-chart:manufacturing-establishments-employees-trend\n- manufacturing/1440:missing-chart:manufacturing-establishments-employees-trend-employees\n- manufacturing/1440:missing-chart:manufacturing-shipment-value-trend\n- manufacturing/1440:missing-chart:theme-manufacturing-labor-productivity\n- manufacturing/1440:missing-chart:theme-manufacturing-labor-productivity-establishment\n- manufacturing/1440:prefecture-selector\n- manufacturing/1440:section-cards:factory-location-area:0/1\n- manufacturing/1440:section-cards:food-manufacturing-industry:0/3\n- manufacturing/1440:section:food-manufacturing-industry:0\n- manufacturing/1440:section:location:0\n- manufacturing/390:missing-chart:manufacturing-establishments-employees-trend\n- manufacturing/390:missing-chart:manufacturing-establishments-employees-trend-employees\n- manufacturing/390:missing-chart:manufacturing-shipment-value-trend\n- manufacturing/390:missing-chart:theme-manufacturing-labor-productivity\n- manufacturing/390:missing-chart:theme-manufacturing-labor-productivity-establishment\n- manufacturing/390:prefecture-selector\n- manufacturing/390:section-cards:factory-location-area:0/1\n- manufacturing/390:section-cards:food-manufacturing-industry:0/3\n- manufacturing/390:section:food-manufacturing-industry:0\n- manufacturing/390:section:location:0\n- natural-environment/1440:prefecture-selector\n- natural-environment/1440:section-cards:national-park-visitors:0/1\n- natural-environment/1440:section:national-park-visitors:0\n- natural-environment/390:prefecture-selector\n- natural-environment/390:section-cards:national-park-visitors:0/1\n- natural-environment/390:section:national-park-visitors:0\n- occupation-salary/1440:missing-chart:theme-occ-edu-trend\n- occupation-salary/1440:missing-chart:theme-occ-it-trend\n- occupation-salary/1440:missing-chart:theme-occ-medical-trend\n- occupation-salary/1440:missing-chart:theme-occ-service-trend\n- occupation-salary/1440:missing-chart:theme-occ-transport-trend\n- occupation-salary/1440:prefecture-selector\n- occupation-salary/1440:section-cards:education:0/1\n- occupation-salary/1440:section-cards:it-professional:0/1\n- occupation-salary/1440:section-cards:medical-care:0/1\n- occupation-salary/1440:section-cards:transport-construction:0/1\n- occupation-salary/1440:section:education:0\n- occupation-salary/1440:section:it-professional:0\n- occupation-salary/1440:section:medical-care:0\n- occupation-salary/1440:section:services:0\n- occupation-salary/1440:section:transport-construction:0\n- occupation-salary/390:missing-chart:theme-occ-edu-trend\n- occupation-salary/390:missing-chart:theme-occ-it-trend\n- occupation-salary/390:missing-chart:theme-occ-medical-trend\n- occupation-salary/390:missing-chart:theme-occ-service-trend\n- occupation-salary/390:missing-chart:theme-occ-transport-trend\n- occupation-salary/390:prefecture-selector\n- occupation-salary/390:section-cards:education:0/1\n- occupation-salary/390:section-cards:it-professional:0/1\n- occupation-salary/390:section-cards:medical-care:0/1\n- occupation-salary/390:section-cards:transport-construction:0/1\n- occupation-salary/390:section:education:0\n- occupation-salary/390:section:it-professional:0\n- occupation-salary/390:section:medical-care:0\n- occupation-salary/390:section:services:0\n- occupation-salary/390:section:transport-construction:0\n- population-dynamics/1440:missing-chart:birth-death-count-trend\n- population-dynamics/1440:missing-chart:population-dynamics-birth-rate-and-maternity-composition-2\n- population-dynamics/1440:missing-chart:population-dynamics-birth-rate-and-maternity-composition-3\n- population-dynamics/1440:missing-chart:theme-pop-migration-trend\n- population-dynamics/1440:prefecture-selector\n- population-dynamics/1440:section-cards:birth-rate-and-maternity:0/3\n- population-dynamics/1440:section-cards:population-trend-and-future:0/2\n- population-dynamics/1440:section-cards:residence-and-foreign-population:0/3\n- population-dynamics/1440:section-cards:youth-migration-and-education:0/3\n- population-dynamics/1440:section:birth-rate-and-maternity:0\n- population-dynamics/1440:section:population-trend-and-future:0\n- population-dynamics/390:missing-chart:birth-death-count-trend\n- population-dynamics/390:missing-chart:population-dynamics-birth-rate-and-maternity-composition-2\n- population-dynamics/390:missing-chart:population-dynamics-birth-rate-and-maternity-composition-3\n- population-dynamics/390:missing-chart:theme-pop-migration-trend\n- population-dynamics/390:prefecture-selector\n- population-dynamics/390:section-cards:birth-rate-and-maternity:0/3\n- population-dynamics/390:section-cards:population-trend-and-future:0/2\n- population-dynamics/390:section-cards:residence-and-foreign-population:0/3\n- population-dynamics/390:section-cards:youth-migration-and-education:0/3\n- population-dynamics/390:section:birth-rate-and-maternity:0\n- population-dynamics/390:section:population-trend-and-future:0\n- ports/1440:missing-chart:ports-cargo-trend\n- ports/1440:prefecture-selector\n- ports/1440:section-cards:cargo:0/2\n- ports/1440:section-cards:ships-passengers:0/1\n- ports/1440:section-cards:trade:0/1\n- ports/1440:section:cargo:0\n- ports/1440:section:ships-passengers:0\n- ports/1440:section:trade:0\n- ports/390:missing-chart:ports-cargo-trend\n- ports/390:prefecture-selector\n- ports/390:section-cards:cargo:0/2\n- ports/390:section-cards:ships-passengers:0/1\n- ports/390:section-cards:trade:0/1\n- ports/390:section:cargo:0\n- ports/390:section:ships-passengers:0\n- ports/390:section:trade:0\n- public-assistance/1440:prefecture-selector\n- public-assistance/1440:section-cards:poverty-support-consultation:0/1\n- public-assistance/1440:section:poverty-support-consultation:0\n- public-assistance/390:prefecture-selector\n- public-assistance/390:section-cards:poverty-support-consultation:0/1\n- public-assistance/390:section:poverty-support-consultation:0\n- quality-process:1\n- railway/1440:missing-chart:railway-freight-trend\n- railway/1440:missing-chart:railway-passenger-trend\n- railway/1440:missing-chart:railway-passenger-trend-jr\n- railway/1440:prefecture-selector\n- railway/1440:section-cards:stations:0/2\n- railway/1440:section:freight:0\n- railway/390:missing-chart:railway-freight-trend\n- railway/390:missing-chart:railway-passenger-trend\n- railway/390:missing-chart:railway-passenger-trend-jr\n- railway/390:prefecture-selector\n- railway/390:section-cards:stations:0/2\n- railway/390:section:freight:0\n- real-income/1440:missing-chart:real-income-cpi-breakdown\n- real-income/1440:missing-chart:real-income-cpi-breakdown-expenses\n- real-income/1440:missing-chart:real-income-household-composition\n- real-income/1440:missing-chart:theme-real-income-actual-vs-disposable\n- real-income/1440:prefecture-selector\n- real-income/1440:section-cards:after-rent:0/1\n- real-income/1440:section-cards:household-consumption-expenditure:0/1\n- real-income/1440:section-cards:income-and-asset-inequality:0/2\n- real-income/1440:section-cards:purchasing-power:0/1\n- real-income/1440:section:after-rent:0\n- real-income/1440:section:household-consumption-expenditure:0\n- real-income/1440:section:income-and-asset-inequality:0\n- real-income/1440:section:prices:0\n- real-income/1440:section:purchasing-power:0\n- real-income/390:missing-chart:real-income-cpi-breakdown\n- real-income/390:missing-chart:real-income-cpi-breakdown-expenses\n- real-income/390:missing-chart:real-income-household-composition\n- real-income/390:missing-chart:theme-real-income-actual-vs-disposable\n- real-income/390:prefecture-selector\n- real-income/390:section-cards:after-rent:0/1\n- real-income/390:section-cards:household-consumption-expenditure:0/1\n- real-income/390:section-cards:income-and-asset-inequality:0/2\n- real-income/390:section-cards:purchasing-power:0/1\n- real-income/390:section:after-rent:0\n- real-income/390:section:household-consumption-expenditure:0\n- real-income/390:section:income-and-asset-inequality:0\n- real-income/390:section:prices:0\n- real-income/390:section:purchasing-power:0\n- regional-energy/1440:missing-chart:regional-energy-regional-co2-emissions-composition-2\n- regional-energy/1440:missing-chart:regional-energy-renewable-energy-adoption-composition-3\n- regional-energy/1440:missing-chart:regional-energy-sector-energy-breakdown-composition-1\n- regional-energy/1440:prefecture-selector\n- regional-energy/1440:section-cards:energy-consumption-scale:0/3\n- regional-energy/1440:section-cards:regional-co2-emissions:0/2\n- regional-energy/1440:section-cards:renewable-energy-adoption:0/3\n- regional-energy/1440:section-cards:sector-energy-breakdown:0/1\n- regional-energy/1440:section:energy-consumption-scale:0\n- regional-energy/1440:section:regional-co2-emissions:0\n- regional-energy/1440:section:renewable-energy-adoption:0\n- regional-energy/1440:section:sector-energy-breakdown:0\n- regional-energy/390:missing-chart:regional-energy-regional-co2-emissions-composition-2\n- regional-energy/390:missing-chart:regional-energy-renewable-energy-adoption-composition-3\n- regional-energy/390:missing-chart:regional-energy-sector-energy-breakdown-composition-1\n- regional-energy/390:prefecture-selector\n- regional-energy/390:section-cards:energy-consumption-scale:0/3\n- regional-energy/390:section-cards:regional-co2-emissions:0/2\n- regional-energy/390:section-cards:renewable-energy-adoption:0/3\n- regional-energy/390:section-cards:sector-energy-breakdown:0/1\n- regional-energy/390:section:energy-consumption-scale:0\n- regional-energy/390:section:regional-co2-emissions:0\n- regional-energy/390:section:renewable-energy-adoption:0\n- regional-energy/390:section:sector-energy-breakdown:0\n- regional-transport/1440:prefecture-selector\n- regional-transport/390:prefecture-selector\n- retail-commerce/1440:prefecture-selector\n- retail-commerce/390:prefecture-selector\n- roads/1440:missing-chart:roads-length-trend\n- roads/1440:missing-chart:roads-road-bridge-maintenance-composition-2\n- roads/1440:missing-chart:roads-road-tunnel-maintenance-composition-2\n- roads/1440:prefecture-selector\n- roads/1440:section-cards:road-bridge-maintenance:0/2\n- roads/1440:section-cards:road-tunnel-maintenance:0/2\n- roads/1440:section:road-tunnel-maintenance:0\n- roads/390:missing-chart:roads-length-trend\n- roads/390:missing-chart:roads-road-bridge-maintenance-composition-2\n- roads/390:missing-chart:roads-road-tunnel-maintenance-composition-2\n- roads/390:prefecture-selector\n- roads/390:section-cards:road-bridge-maintenance:0/2\n- roads/390:section-cards:road-tunnel-maintenance:0/2\n- roads/390:section:road-tunnel-maintenance:0\n- runtime-incomplete\n- runtime-process:1\n- safety/1440:missing-chart:crime-count-arrest-rate-trend\n- safety/1440:missing-chart:fire-emergency-trend\n- safety/1440:missing-chart:fire-emergency-trend-fire\n- safety/1440:missing-chart:safety-crime-types-donut\n- safety/1440:missing-chart:safety-fire-casualties-donut\n- safety/1440:missing-chart:safety-natural-disaster-impact-composition-1\n- safety/1440:missing-chart:safety-natural-disaster-impact-composition-2\n- safety/1440:missing-chart:traffic-accident-deaths-trend\n- safety/1440:prefecture-selector\n- safety/1440:section-cards:consumer-trouble-safety:0/1\n- safety/1440:section-cards:evacuation-and-disaster-prevention:0/4\n- safety/1440:section-cards:fire-and-emergency:0/3\n- safety/1440:section-cards:natural-disaster-impact:1/4\n- safety/1440:section:consumer-trouble-safety:0\n- safety/1440:section:fire-and-emergency:0\n- safety/390:missing-chart:crime-count-arrest-rate-trend\n- safety/390:missing-chart:fire-emergency-trend\n- safety/390:missing-chart:fire-emergency-trend-fire\n- safety/390:missing-chart:safety-crime-types-donut\n- safety/390:missing-chart:safety-fire-casualties-donut\n- safety/390:missing-chart:safety-natural-disaster-impact-composition-1\n- safety/390:missing-chart:safety-natural-disaster-impact-composition-2\n- safety/390:missing-chart:traffic-accident-deaths-trend\n- safety/390:prefecture-selector\n- safety/390:section-cards:consumer-trouble-safety:0/1\n- safety/390:section-cards:evacuation-and-disaster-prevention:0/4\n- safety/390:section-cards:fire-and-emergency:0/3\n- safety/390:section-cards:natural-disaster-impact:1/4\n- safety/390:section:consumer-trouble-safety:0\n- safety/390:section:fire-and-emergency:0\n- single-parent-households/1440:missing-chart:single-parent-income-composition\n- single-parent-households/1440:prefecture-selector\n- single-parent-households/1440:section-cards:single-parent-employment-rate:0/2\n- single-parent-households/1440:section:single-parent-employment-rate:0\n- single-parent-households/390:missing-chart:single-parent-income-composition\n- single-parent-households/390:prefecture-selector\n- single-parent-households/390:section-cards:single-parent-employment-rate:0/2\n- single-parent-households/390:section:single-parent-employment-rate:0\n- sports-participation/1440:prefecture-selector\n- sports-participation/1440:section-cards:children-fitness-and-exercise:0/4\n- sports-participation/1440:section-cards:resident-exercise-habits:1/3\n- sports-participation/1440:section-cards:sports-facilities-environment:2/4\n- sports-participation/1440:section:children-fitness-and-exercise:0\n- sports-participation/390:prefecture-selector\n- sports-participation/390:section-cards:children-fitness-and-exercise:0/4\n- sports-participation/390:section-cards:resident-exercise-habits:1/3\n- sports-participation/390:section-cards:sports-facilities-environment:2/4\n- sports-participation/390:section:children-fitness-and-exercise:0\n- tourism/1440:missing-chart:theme-tourism-hotel-supply-trend\n- tourism/1440:prefecture-selector\n- tourism/1440:section-cards:inbound-visitors-status:0/1\n- tourism/1440:section-cards:stays:1/2\n- tourism/1440:section-cards:tourism-consumption:0/2\n- tourism/1440:section:inbound-visitors-status:0\n- tourism/1440:section:tourism-consumption:0\n- tourism/390:missing-chart:theme-tourism-hotel-supply-trend\n- tourism/390:prefecture-selector\n- tourism/390:section-cards:inbound-visitors-status:0/1\n- tourism/390:section-cards:stays:1/2\n- tourism/390:section-cards:tourism-consumption:0/2\n- tourism/390:section:inbound-visitors-status:0\n- tourism/390:section:tourism-consumption:0\n- tsunami-exposure/1440:prefecture-selector\n- tsunami-exposure/1440:section-cards:tsunami-evacuation-building:0/1\n- tsunami-exposure/1440:section-cards:tsunami-evacuation-tower:0/1\n- tsunami-exposure/1440:section:tsunami-evacuation-tower:0\n- tsunami-exposure/390:prefecture-selector\n- tsunami-exposure/390:section-cards:tsunami-evacuation-building:0/1\n- tsunami-exposure/390:section-cards:tsunami-evacuation-tower:0/1\n- tsunami-exposure/390:section:tsunami-evacuation-tower:0\n- waste-recycling/1440:prefecture-selector\n- waste-recycling/390:prefecture-selector\n- water-services/1440:prefecture-selector\n- water-services/1440:section-cards:pipe-aging-rate:0/3\n- water-services/1440:section-cards:pipe-renewal-pace:0/2\n- water-services/1440:section:pipe-aging-rate:0\n- water-services/1440:section:pipe-renewal-pace:0\n- water-services/390:prefecture-selector\n- water-services/390:section-cards:pipe-aging-rate:0/3\n- water-services/390:section-cards:pipe-renewal-pace:0/2\n- water-services/390:section:pipe-aging-rate:0\n- water-services/390:section:pipe-renewal-pace:0\n\n結果: `data/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "ed57f3bd7edd1dd9b36063dedceb78e9e3cce1efc9369b97ac2c99497dc93d82",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/41122877579"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/42295351706"
 }

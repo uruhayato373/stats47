@@ -1,10 +1,11 @@
 /** Verified geographic reference inputs, never a generated final cover. */
 import fs from 'node:fs';
 import path from 'node:path';
-import { geoArea, geoMercator, geoPath } from 'd3-geo';
+import { geoArea, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import sharp from 'sharp';
 import { COVER_ROOT, coverSha } from './cover-assets.mjs';
+import { topologyFeatures, fittedMercator } from '../../../../packages/gis/src/map/geometry.mjs';
 
 const SOURCE = 'apps/remotion/public/prefecture.topojson';
 const PREFECTURES = 'packages/area/src/data/prefectures.json';
@@ -14,7 +15,7 @@ function sourceData(root) {
   const identity = `${file}:${stat.mtimeMs}:${stat.size}:${prefStat.mtimeMs}:${prefStat.size}`;
   if (cached?.identity === identity) return cached;
   const bytes = fs.readFileSync(file), topology = JSON.parse(bytes);
-  const collection = feature(topology, topology.objects.pref);
+  const collection = topologyFeatures(topology, 'pref');
   if (collection.features.length !== 47 || new Set(collection.features.map(f => f.properties.N03_007)).size !== 47)
     throw Error('prefecture reference requires 47 unique geometries');
   cached = { identity, collection, sourceSha256: coverSha(bytes), prefectures: JSON.parse(fs.readFileSync(path.join(root, PREFECTURES), 'utf8')) };
@@ -31,7 +32,7 @@ export function prefectureCoverReference(articleKey, root = COVER_ROOT) {
   const parts = original.geometry.type === 'MultiPolygon' ? original.geometry.coordinates : [original.geometry.coordinates];
   const coordinates = parts.reduce((best, part) => geoArea({ type: 'Polygon', coordinates: part }) > geoArea({ type: 'Polygon', coordinates: best }) ? part : best);
   const geometry = { type: 'Polygon', coordinates };
-  const projected = geoPath(geoMercator().fitExtent([[32, 32], [480, 480]], geometry))(geometry);
+  const projected = geoPath(fittedMercator([[32, 32], [480, 480]], geometry))(geometry);
   if (!projected || /NaN|Infinity/.test(projected)) throw Error('invalid prefecture reference projection');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect width="512" height="512" fill="#fffdf7"/><path d="${projected}" fill="#0f172a"/></svg>`;
   return { reference: { kind: 'prefecture-mainland', code, name: prefecture.prefName, sourcePath: SOURCE,

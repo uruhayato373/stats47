@@ -5,6 +5,8 @@ description: note.com記事の公開ライフサイクル管理（公開URLト�
 model: sonnet
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # Note Manager Agent
 
 > **[移行ステータス]** 本 agent は note.com 専任 (公開ライフサイクル / 公開URLトラッキング / メモリ更新) に縮退。 チャート生成 (`/generate-note-charts`, `/generate-kakei-charts`) は `chart-author`、 表紙画像 (`/image-prompt --use-case note-header`) は `image-prompt-curator` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。

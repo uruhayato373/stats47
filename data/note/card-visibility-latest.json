@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T23:30:19.894Z",
+  "generatedAt": "2026-11-06T23:37:26.694Z",
   "account": "stats47",
   "summary": {
-    "catalogArticles": 428,
-    "checked": 428,
+    "catalogArticles": 439,
+    "checked": 439,
     "fetchFailed": 0,
     "browserVerifyFailedArticles": 0,
     "affectedArticles": 47,
@@ -15,9 +15,9 @@
     "missingCards": 0,
     "footerWithoutCards": 0,
     "spacingIssues": 175,
-    "newIssues": 111,
-    "continuedIssues": 64,
-    "resolvedIssues": 111
+    "newIssues": 0,
+    "continuedIssues": 175,
+    "resolvedIssues": 0
   },
   "articles": [
     {
@@ -3935,6 +3935,83 @@
       "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
       "storedCards": 3,
       "renderedCards": 3,
+      "issues": []
+    },
+    {
+      "key": "muni-manufacturing-shipment-data",
+      "noteUrl": "https://note.com/stats47/n/n5d86476e9c73",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-food",
+      "noteUrl": "https://note.com/stats47/n/n1c3f57ef31da",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-housing",
+      "noteUrl": "https://note.com/stats47/n/n8f82dbdbce9d",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-utilities",
+      "noteUrl": "https://note.com/stats47/n/na2be61f32e15",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-furniture",
+      "noteUrl": "https://note.com/stats47/n/na17bb46da162",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-clothing",
+      "noteUrl": "https://note.com/stats47/n/n233c24eee1e4",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-health",
+      "noteUrl": "https://note.com/stats47/n/n611c1b73fb3f",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-transport",
+      "noteUrl": "https://note.com/stats47/n/n952c8fdd32a6",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-education",
+      "noteUrl": "https://note.com/stats47/n/n048102731761",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-recreation",
+      "noteUrl": "https://note.com/stats47/n/nb48d1909a2ea",
+      "storedCards": 0,
+      "renderedCards": 0,
+      "issues": []
+    },
+    {
+      "key": "b-kakei-expense-other",
+      "noteUrl": "https://note.com/stats47/n/n966ddd9d83bb",
+      "storedCards": 0,
+      "renderedCards": 0,
       "issues": []
     }
   ]

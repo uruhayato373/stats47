@@ -23,9 +23,10 @@ import {
 } from "@/shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
-import { SITE } from "@stats47/types";
 import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
 import { to2DigitPrefCode } from "@stats47/area";
+import { SITE } from "@stats47/types";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -216,7 +217,7 @@ const InfoCard: React.FC<{
         justifyContent: "center",
         padding: "24px 36px",
         backgroundColor: isDark
-          ? (gesBackground ? "rgba(15, 23, 42, 0.55)" : "rgba(15, 23, 42, 0.3)")
+          ? (gesBackground ? `rgba(${DARK_PAPER_RGB}, 0.55)` : `rgba(${DARK_PAPER_RGB}, 0.3)`)
           : (gesBackground ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 0.35)"),
         borderRadius: 28,
         border: `2px solid ${isTop3 ? BRAND.secondary : colors.border}`,
@@ -460,14 +461,14 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
             <AbsoluteFill
               style={{
                 background: isDark
-                  ? "linear-gradient(to bottom, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.3) 30%, rgba(15,23,42,0.3) 70%, rgba(15,23,42,0.6) 100%)"
+                  ? `linear-gradient(to bottom, rgba(${DARK_PAPER_RGB},0.6) 0%, rgba(${DARK_PAPER_RGB},0.3) 30%, rgba(${DARK_PAPER_RGB},0.3) 70%, rgba(${DARK_PAPER_RGB},0.6) 100%)`
                   : "linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.2) 70%, rgba(255,255,255,0.5) 100%)",
               }}
             />
             <AbsoluteFill
               style={{
                 background: isDark
-                  ? "radial-gradient(circle at center, transparent 30%, rgba(15,23,42,0.5) 100%)"
+                  ? `radial-gradient(circle at center, transparent 30%, rgba(${DARK_PAPER_RGB},0.5) 100%)`
                   : "radial-gradient(circle at center, transparent 30%, rgba(255,255,255,0.3) 100%)",
               }}
             />
@@ -524,41 +525,6 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
           }}
         >
           {/* stats47 ブランディング（RankingTitle と同じスタイル） */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 20,
-              opacity: brandingSpring,
-              transform: `translateY(${interpolate(brandingSpring, [0, 1], [-16, 0])}px)`,
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: BRAND.primary,
-                color: "#FFFFFF",
-                padding: "8px 22px",
-                borderRadius: 8,
-                fontSize: 30,
-                fontWeight: FONT.weight.black,
-                letterSpacing: 1,
-              }}
-            >
-              stats47
-            </div>
-            <div
-              style={{
-                fontSize: 32,
-                fontWeight: FONT.weight.bold,
-                color: colors.muted,
-                letterSpacing: 2,
-                textShadow: gesHeaderShadow,
-              }}
-            >
-              {SITE.name}
-            </div>
-          </div>
 
           {/* サブタイトルバッジ（年度・属性情報） */}
           {subtitleText && (
@@ -566,7 +532,7 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
               <span
                 style={{
                   display: "inline-block",
-                  backgroundColor: isDark ? "rgba(30, 41, 59, 0.85)" : "rgba(255, 255, 255, 0.9)",
+                  backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.85)` : "rgba(255, 255, 255, 0.9)",
                   color: BRAND.secondary,
                   border: `2px solid ${BRAND.secondary}`,
                   borderRadius: 50,
@@ -894,7 +860,7 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
                 alignItems: "center",
                 gap: 16,
                 padding: "12px 32px",
-                backgroundColor: isDark ? "rgba(30, 41, 59, 0.8)" : "rgba(255, 255, 255, 0.9)",
+                backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.8)` : "rgba(255, 255, 255, 0.9)",
                 borderRadius: 50,
                 border: `1px solid ${colors.border}`,
               }}
@@ -906,7 +872,7 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
                   color: BRAND.primaryLight,
                 }}
               >
-                stats47.com
+                {SITE.domain}
               </span>
             </div>
           </div>

@@ -4,7 +4,6 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { generateChoroplethSvg } from '../../../packages/svg-builder/src/charts/choropleth.ts';
 import { svgThemeStyle } from '../../../packages/svg-builder/src/shared/theme.ts';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 
@@ -42,7 +41,6 @@ const ranks = item.rows.map((r: any) => ({ areaCode: r.areaCode, areaName: r.are
 write('flood-prefecture-rankings.json', { label: '2050年浸水想定区域人口比率', unit: '%', data: ranks });
 const map = { title: '2050年 浸水想定区域人口比率', subtitle: '1kmメッシュ中心点による近似', unit: '%', scheme: 'Oranges', legendLabels: ['比率が低い', '比率が高い'], data: ranks };
 write('flood-tile-grid.json', map);
-fs.writeFileSync(path.join(dir, 'flood-tile-grid.svg'), generateChoroplethSvg(ranks.map((r: any) => ({ code: r.areaCode, name: r.areaName, value: r.value })), { ...map, legendLabels: ['比率が低い', '比率が高い'], formatValue: (v) => v.toFixed(1) }));
 const sourceFor = (name: string, formula: string, surveyScopeReason: string) => write(`${name}.source.json`, { kind: 'derived', surveyScope: 'not-applicable', surveyScopeReason, source: `r2:${prefix}/item.json`, inputs: sources, generatedAt: item.generatedAt, generatedBy: '.claude/scripts/blog/generate-flood-exposure-article.ts', formula, license: 'CC BY 4.0; 国土交通省データを加工', dataFile: `${name}.json` });
 sourceFor('flood-tile-grid', 'item.rows[].values.floodExposureShare2050; no rank-to-rank join', '将来人口メッシュの中心点を洪水ポリゴンに包含判定し、重複を除いた区域内人口比率を県別に示す独自GIS派生値であり、統計調査の集計表ではない。入力・演算・保存則はcanonical Geo manifestへ接続する。');
 const line = { populationMeshes: manifest.quality.populatedMeshes, riverClass10: 107, riverClass20: 94, floodFeatures: item.dataQuality.inputCounts.floodFeatures, exposedMeshes: manifest.quality.exposedMeshes, prefectures: 47, conservationChecks: 47 };

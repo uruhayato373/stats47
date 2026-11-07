@@ -5,6 +5,8 @@ description: X (Twitter) アカウント「統計で見る都道府県 | stats47
 model: sonnet
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # X Strategist Agent
 
 X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿戦略・量産・パフォーマンス分析・リーチ拡大を担当する専門エージェント。**型・画像・頻度の SSOT は `.claude/rules/sns-content-standards.md` (§1/§2)** で、本エージェントは自前のテンプレを持たず必ずそこを参照する (過去に 4 箇所へドリフトした反省)。

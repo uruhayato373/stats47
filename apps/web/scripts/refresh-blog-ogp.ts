@@ -3,7 +3,7 @@ import {writeFileSync,mkdirSync} from 'node:fs';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {SITE,type ImageGenerationManifest} from '@stats47/types';
-import {blogRendererSources} from './data/image-generator-registry';
+import {blogRendererSourcesForBackground} from './lib/blog-fullbleed-render';
 import {blogImageKeys,createBlogImagePlan,publishedBlogSlugsFromIndex,resolveBlogImageData,stageBlogImagePath,type BlogImageMetadata,type BlogBackgroundInput} from './lib/blog-image-generation';
 import {deriveOgpFromFrontmatter,parseFrontmatter,loadFonts,renderToPng} from './lib/blog-thumbnail-render';
 import {buildBlogExternalOgp} from './lib/blog-image-render';
@@ -37,7 +37,7 @@ async function main(){
   const known=publishedBlogSlugsFromIndex(JSON.parse((await get('app/blog/all.json')).toString()));
   const selected=arg('--slug')?.split(',')??known;
   if(selected.some(slug=>!known.includes(slug)))throw Error('Unknown published blog slug');
-  const fonts=loadFonts(root),rendererHash=calculateRendererHash(root,blogRendererSources('ai'));
+  const fonts=loadFonts(root);
   const items:Parameters<typeof createImageGenerationPublishPlan>[0]['items']=[];
   let current=0;
   for(let offset=0;offset<selected.length&&items.length<limit;){
@@ -55,6 +55,7 @@ async function main(){
     const derived=deriveOgpFromFrontmatter(parseFrontmatter((await get(`app/blog/${slug}/article.md`)).toString()));
     if(!derived)throw Error(`${slug}: missing title`);
     const data=resolveBlogImageData(slug,{title:derived.title,subtitle:derived.subtitle??null});
+    const rendererHash=calculateRendererHash(root,blogRendererSourcesForBackground(bg.promptVersion));
     const plan=createBlogImagePlan({slug,data,background,rendererHash});
     if(old.fingerprint===plan.fingerprint)return null;
     const assetFiles=new Map<string,string>();

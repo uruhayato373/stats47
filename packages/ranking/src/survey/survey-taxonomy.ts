@@ -365,7 +365,7 @@ export function extractBlogChartSourceReferences(
 
   const estatReferences: SurveyEstatReference[] = [];
   for (const item of nested) {
-    const ids = splitStatsDataIds(item.statsDataId);
+    const ids = [...splitStatsDataIds(item.statsDataId), ...splitStatsDataIds(item.statsDataIds)];
     const params = isRecord(item.params) ? item.params : null;
     const cdCat01 =
       typeof item.cdCat01 === 'string'

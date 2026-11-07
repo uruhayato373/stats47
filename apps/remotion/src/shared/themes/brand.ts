@@ -6,28 +6,33 @@
  * Tailwind ではなくこの定数を参照する。
  */
 
+import { CHART_THEMES } from "@stats47/types";
+
 // ---------------------------------------------------------------------------
 // カラースキーム
 // ---------------------------------------------------------------------------
 
 export const COLOR_SCHEMES = {
   light: {
-    background: "#FFFFFF",
-    foreground: "#0F172A",
-    muted: "#64748B",
+    background: CHART_THEMES.light.paper,
+    foreground: CHART_THEMES.light.ink,
+    muted: CHART_THEMES.light.muted,
     accent: "#3B82F6",
-    border: "#E2E8F0",
-    card: "#F8FAFC",
+    border: CHART_THEMES.light.wash,
+    card: "#FFFFFF",
   },
   dark: {
-    background: "#0F172A",
-    foreground: "#F1F5F9",
-    muted: "#94A3B8",
+    background: CHART_THEMES.dark.paper,
+    foreground: CHART_THEMES.dark.ink,
+    muted: CHART_THEMES.dark.muted,
     accent: "#60A5FA",
-    border: "#334155",
-    card: "#1E293B",
+    border: CHART_THEMES.dark.line,
+    card: CHART_THEMES.dark.wash,
   },
 } as const;
+
+/** The dark paper as `r, g, b`, for translucent surfaces over a video or a gradient. */
+export const DARK_PAPER_RGB = [1, 3, 5].map((i) => parseInt(COLOR_SCHEMES.dark.background.slice(i, i + 2), 16)).join(", ");
 
 export type ThemeName = keyof typeof COLOR_SCHEMES;
 export type ColorScheme = (typeof COLOR_SCHEMES)[ThemeName];

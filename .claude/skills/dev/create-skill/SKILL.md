@@ -107,7 +107,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/helper.js" $ARGUMENTS
 **パラメータ駆動型**（推奨: 繰り返し使うスクリプト）:
 - JSON 設定ファイルを受け取り、出力を生成
 - スクリプト自体は変更不要
-- 例: `scatter.js config.json output.svg`
+- 例: `svg-to-png.js input.svg output.png`
 
 **テンプレート型**（カスタマイズが必要なスクリプト）:
 - `// CUSTOMIZE:` コメントで編集箇所を明示

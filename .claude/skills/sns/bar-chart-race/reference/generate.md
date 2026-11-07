@@ -62,7 +62,7 @@ const byYear = {};
 for (const r of filtered) {
   if (r.value == null) continue;
   if (!byYear[r.yearCode]) byYear[r.yearCode] = [];
-  byYear[r.yearCode].push({ yearCode: r.yearCode, yearName: r.yearName, areaName: r.areaName, value: Math.round(Number(r.value)) });
+  byYear[r.yearCode].push({ yearCode: r.yearCode, yearName: r.yearName, areaName: r.areaName, value: Number(r.value) }); // 丸めない。指数や割合は丸めると県の差が消える
 }
 for (const y of Object.keys(byYear)) byYear[y].sort((a, b) => b.value - a.value);
 ```

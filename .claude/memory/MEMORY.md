@@ -168,6 +168,8 @@
 - [windows npm install rolldown binding](feedback_windows_npm_install_rolldown_binding.md) — Windows用Rolldown任意依存のlock欠落。2026-10-20修復済み。再発時は親と同版のlock metadataを照合する
 - [dev streaming hidden dom copies](feedback_dev_streaming_hidden_dom_copies.md) — localhost の DOM 検査は hidden の `body > div[id^="S:"]` に本文の写しが残り件数が 2 倍に見える。可視の木 `body > div.relative` に絞って数える
 - [run full web tests before push](feedback_run_full_web_tests_before_push.md) — 部品・route の変更や別ブランチの取り込み後は、触れた workspace の vitest 全件を push 前に。部分実行で既存テストを見落とし CI を赤にした (2026-10-21 web・10-25 admin)
+- [business vs content issues](feedback_business_vs_content_issues.md) — 事業イシューマップと問いの台帳は台帳・画面・語彙を混ぜない (2026-11-06 オーナー判断)
+- [content four types](feedback_content_four_types.md) — 全コンテンツは4型のどれかに属する。未分類で作らない。正本content-types.json・題名の「なぜ」だけで論文型にしない (2026-11-06)
 - [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — type-check:scripts の差分キャッシュは barrel 経由の新しい型エラーを隠す。push 前は .local/tsbuildinfo を消して回す (2026-10-30 PR #1200)
 - [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
@@ -181,3 +183,4 @@
 - [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳 (2026-11-04)。実験は 12-30 判定まで価格を変えない。戦略への質問は NotebookLM「stats47 商品戦略」
 - [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — develop は保護なし。リポジトリの自動削除をオンにすると develop→main のマージで develop が消える
 - [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず capture-pages.mjs --all で撮って画像を読む (2026-11-04 指摘)
+- [windows remotion render](feedback_windows_remotion_render.md) — WindowsのRemotion描画はrspackとcompositorのWindows用部品を手元へ展開しChromeを指定。npm ciで消える

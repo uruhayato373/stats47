@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "route": "ranking-card-motif",
+  "generatedAt": "2026-11-06",
+  "generator": { "tool": "codex-imagegen", "invoke": "mcp", "model": "gpt-6-astra" },
+  "status": "trial-not-adopted",
+  "dataNote": "試作の記録。絵は git と R2 に入れていない。本番のカードは変えていない。合成は公開中の thumbnail-{light,dark}.webp に絵を重ねただけで、地図と文字は描き直していない。",
+  "commonPrompt": "A single die-cut sticker illustration. Soft gouache editorial illustration with clear shapes and gentle shading, modern Japanese data-magazine style. Thick clean uniform white sticker border. Centered on a completely flat, solid pure magenta background (#FF00FF). Square composition, the sticker fills about 80 percent of the frame. Strictly no text, no letters, no numbers, no logos, no map, no chart.",
+  "items": [
+    {
+      "metricKey": "general-hospital-count",
+      "colorScheme": "interpolateBlues",
+      "motif": "Japanese general hospital building, three-quarter angle, no signs with writing, no red cross or any cross emblem",
+      "palette": ["#0F5CA8", "#4A98CF", "#C6DBEF", "#FFFFFF"],
+      "outputSha256": "d32f63b9d82755d72036f1937dd57aa9ad636ce0be0613aadf5cb6067099d477",
+      "outputFormat": "RGB、マゼンタ背景",
+      "placement": { "x": 460, "y": 207, "width": 170, "height": 143 },
+      "changedPixelsOnMapOrText": { "light": 0, "dark": 0 },
+      "review": "文字・標章なし。配色は地図と合う。原寸と 200px で病院と分かる。関東の近くまで迫る。"
+    },
+    {
+      "metricKey": "annual-sunshine-duration",
+      "colorScheme": "interpolateOranges",
+      "motif": "One big cheerful stylised sun with bold rounded rays, no face",
+      "palette": ["#C8490A", "#F08A2C", "#FDD0A2"],
+      "outputSha256": "ff9b990c0589949392e7c102382fad69a97561cb454c17b5784734db5511be49",
+      "outputFormat": "RGBA、透過 (指示はマゼンタ背景)",
+      "placement": { "x": 468, "y": 189, "width": 162, "height": 161 },
+      "changedPixelsOnMapOrText": { "light": 0, "dark": 0 },
+      "review": "文字なし。配色は地図と合う。ライトでは白縁が背景に溶ける。病院と画風が揃っていない。"
+    },
+    {
+      "metricKey": "census-population-change-rate-5y",
+      "colorScheme": "interpolateRdYlGn",
+      "motif": "Small group of four people of different ages, faces minimal",
+      "palette": ["#1E3A5F", "#6B7F99", "#B2182B", "#2166AC"],
+      "outputSha256": "707b874ca5e77131d7a0ef2025bc8f1c8537dd382af177eaf9e4db973d692f6a",
+      "outputFormat": "RGBA、透過 (指示はマゼンタ背景)",
+      "placement": { "x": 487, "y": 180, "width": 143, "height": 170 },
+      "changedPixelsOnMapOrText": { "light": 0, "dark": 0 },
+      "review": "文字なし。服の赤青を赤・黄・緑の地図に合わせていない (配色を赤青と誤認して発注)。東北の海岸に近い。"
+    }
+  ]
+}

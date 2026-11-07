@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-30T23:23:47.251Z",
+  "generatedAt": "2026-11-06T23:30:37.561Z",
   "ssdsTablesProbed": 26,
   "ssdsTablesFound": 26,
   "totalSsdsIndicators": 5356,
-  "existingPairs": 2748,
+  "existingPairs": 2876,
   "newCandidates": 4065,
   "topUnits": [
     [

@@ -1,16 +1,16 @@
 import { DEFAULT_SEQUENTIAL_SCHEME, d3KeyOfColorScheme } from '@stats47/types';
-import { geoCentroid, geoMercator, type GeoProjection } from 'd3-geo';
+import { geoCentroid, type GeoProjection } from 'd3-geo';
 import * as d3chromatic from 'd3-scale-chromatic';
-import { feature } from 'topojson-client';
 import type {
   Feature,
   FeatureCollection,
   MultiPolygon,
   Polygon,
 } from 'geojson';
-import type { GeometryCollection, Topology } from 'topojson-specification';
+import type { Topology } from 'topojson-specification';
 
 import prefectureTopology from './prefecture-topology.generated.json';
+import { topologyFeatures, fittedMercator, mercator } from '../../../gis/src/map/geometry.mjs';
 
 /**
  * 配色を解決する。語彙とd3の実名は `@stats47/types` のカタログが SSOT (2026-07-31)。
@@ -78,10 +78,7 @@ export function readPrefectureFeatures(): Feature[] {
   // ビルド時に静的モジュールとして同梱する。実行時の node:fs には依存しない。
   const topology = prefectureTopology as unknown as Topology;
   const objectName = Object.keys(topology.objects)[0];
-  const geojson = feature(
-    topology,
-    topology.objects[objectName] as GeometryCollection
-  ) as FeatureCollection;
+  const geojson = topologyFeatures(topology);
   prefectureFeaturesCache = geojson.features;
   return prefectureFeaturesCache;
 }
@@ -285,7 +282,7 @@ function readMiniMainlandGeometry(): MiniMainlandShape[] {
     type: 'FeatureCollection',
     features: mainlandFeatures,
   };
-  const mainlandProjection = geoMercator()
+  const mainlandProjection = mercator()
     // d3 projection.angle は画面上の時計回りと符号が逆なので負値を渡す。
     .angle(-MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees)
     .fitExtent(
@@ -335,7 +332,7 @@ export function generatePrefectureOverviewSvg(): string {
     type: 'FeatureCollection',
     features: mainlandFeatures,
   };
-  const mainlandProjection = geoMercator().fitExtent(
+  const mainlandProjection = fittedMercator(
     [
       [OVERVIEW_MAINLAND_LEFT, MAP_PADDING],
       [WIDTH - MAP_PADDING, HEIGHT - MAP_PADDING],
@@ -343,7 +340,7 @@ export function generatePrefectureOverviewSvg(): string {
     mainlandCollection
   );
   const okinawaProjection = okinawa
-    ? geoMercator().fitExtent(
+    ? fittedMercator(
         [
           [
             OVERVIEW_OKINAWA_INSET.x + MAP_PADDING,

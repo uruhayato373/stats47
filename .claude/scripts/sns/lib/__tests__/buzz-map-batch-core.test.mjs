@@ -35,12 +35,12 @@ test("assetPlanForType: A/C/E は静止画のみ", () => {
   }
 });
 
-test("assetPlanForType: B/D は静止画 + X動画 + IGリール", () => {
+test("assetPlanForType: バズ地図の動画は作らず、B/D も静止画だけ", () => {
   for (const t of ["B", "D"]) {
     const p = assetPlanForType(t);
     assert.equal(p.still, true);
-    assert.equal(p.xVideo, true);
-    assert.equal(p.igReel, true);
+    assert.equal(p.xVideo, false);
+    assert.equal(p.igReel, false);
   }
 });
 
@@ -49,9 +49,9 @@ test("assetPlanForType: F/flow は renderer 未整備で renderable=false", () =
   assert.equal(assetPlanForType("flow").renderable, false);
 });
 
-test("compositionsForType: still=4:5, IGリール=9:16", () => {
+test("compositionsForType: still=4:5 だけを描く", () => {
   assert.equal(compositionsForType("A").still, "BuzzMap-Still-45");
-  assert.equal(compositionsForType("D").igReel, "BuzzMap-Reel-916");
+  assert.equal(compositionsForType("D").igReel, undefined);
 });
 
 // ── §8.2 R2 key ─────────────────────────────────────────────────────────────
@@ -66,8 +66,8 @@ test("r2KeysFor: §8.2 のキー構造 (still)", () => {
   assert.equal(keys.xCaption, "sns/buzz-map/vacant-housing-muni/x/caption.txt");
 });
 
-test("r2KeysFor: B/D は reel キーも含む", () => {
-  const keys = r2KeysFor("x", assetPlanForType("D"));
+test("r2KeysFor: 動画の計画があれば reel キーも含む", () => {
+  const keys = r2KeysFor("x", { still: true, xVideo: true, igReel: true, renderable: true, reason: null });
   assert.equal(keys.xReel, "sns/buzz-map/x/x/reel.mp4");
   assert.equal(keys.igReel, "sns/buzz-map/x/instagram/reel.mp4");
 });
@@ -83,9 +83,9 @@ test("expectedContentType: 拡張子 → Content-Type", () => {
 
 test("capVideos: 動画候補が上限内なら全て保持", () => {
   const cands = [
-    { ideaId: "a", assetPlan: assetPlanForType("D") },
-    { ideaId: "b", assetPlan: assetPlanForType("D") },
-    { ideaId: "c", assetPlan: assetPlanForType("D") },
+    { ideaId: "a", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } },
+    { ideaId: "b", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } },
+    { ideaId: "c", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } },
   ];
   const out = capVideos(cands, 3);
   assert.equal(out.every((c) => !c.videoDeferred), true);
@@ -94,10 +94,10 @@ test("capVideos: 動画候補が上限内なら全て保持", () => {
 
 test("capVideos: 上限超過分は静止画のみに降格 (videoDeferred)", () => {
   const cands = [
-    { ideaId: "a", assetPlan: assetPlanForType("D") },
-    { ideaId: "b", assetPlan: assetPlanForType("B") },
-    { ideaId: "c", assetPlan: assetPlanForType("D") },
-    { ideaId: "d", assetPlan: assetPlanForType("D") }, // 4本目 → 動画落とす
+    { ideaId: "a", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } },
+    { ideaId: "b", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } },
+    { ideaId: "c", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } },
+    { ideaId: "d", assetPlan: { still: true, xVideo: true, igReel: true, renderable: true, reason: null } }, // 4本目 → 動画落とす
   ];
   const out = capVideos(cands, 3);
   assert.equal(out[3].videoDeferred, true);

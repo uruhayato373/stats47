@@ -21,7 +21,7 @@ paths:
 
 > **画像の型の正本は型台帳**（`data/content-operations/image-templates.json`・管理画面 `/ops/image-templates`。2026-11-02 オーナー決定）。
 > バズ地図は独立した型ではなく、型台帳の「地図（実際の形）」(`choropleth`) の描き分け (`variants`) に当たる:
-> 型A=地域の塗り / 型B=塗りの時系列（動画） / 型C=点 / 型D=線 / 型E=組み合わせ / 型F=メッシュの塗り（未実装） / flow=流れの矢印（未実装）。
+> ★動画は 2026-11-06 に撤去した (`sns-content-standards.md` §2-4)。型B・型D も `BuzzMap-Still-*` の静止画だけを作り、下の Reel の記述は経緯として残す。型A=地域の塗り / 型B=塗りの時系列 / 型C=点 / 型D=線 / 型E=組み合わせ / 型F=メッシュの塗り（未実装） / flow=流れの矢印（未実装）。
 > 候補台帳 (`buzz-map-catalog.json`) の `recommendedType` は A〜F・flow のまま持ち、管理画面 `/buzz-map` は型台帳の言葉に読み替えて表示する。
 > 新しい描き分けを足すときは型台帳の `variants` に先に足す。下の表は描画仕様の詳細であり、型の一覧の正本ではない。
 

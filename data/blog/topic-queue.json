@@ -1,32 +1,31 @@
 {
-  "generatedAt": "2026-11-01T00:13:01.994Z",
-  "gscWeek": "2026-W43",
+  "generatedAt": "2026-11-06T22:39:19.302Z",
+  "gscWeek": "2026-W44",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 171,
     "pending": 90,
     "inProgress": 0,
     "done": 81,
-    "mustWritePending": 27,
+    "mustWritePending": 34,
     "byArchetype": {
       "B": 12,
       "A": 40,
+      "D2": 8,
       "G": 15,
-      "F": 15,
-      "D2": 8
+      "F": 15
     }
   },
   "correlationExclusions": {
-    "scale-pair": 66,
-    "count-pair": 86,
-    "same-category": 152,
-    "size-pair": 46,
-    "year-mismatch": 40,
+    "scale-pair": 70,
+    "count-pair": 96,
+    "same-category": 138,
+    "size-pair": 50,
     "low-n": 18,
+    "year-mismatch": 48,
     "self-derived": 3,
-    "synonym-family": 12,
-    "countPairOnly": 18,
-    "sizePairOnly": 13
+    "countPairOnly": 25,
+    "sizePairOnly": 17
   },
   "queue": [
     {
@@ -39,7 +38,7 @@
       "label": "高等学校教員の平均年収 × 高等学校卒業者に占める就職者の割合 (r=-0.69)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.6822236958083521,
+        "queryGap": 0.6710915035241561,
         "seasonality": 1,
         "surprise": 0.692,
         "competitionGap": 0.8
@@ -53,14 +52,14 @@
           "economy",
           "educationsports"
         ],
-        "gscImp": 755,
+        "gscImp": 684,
         "rankingUrls": [
           "/ranking/high-school-teacher-annual-income",
           "/ranking/high-school-graduates-job-ratio"
         ]
       },
       "suggestedTitle": "高等学校教員の平均年収が多い県は高等学校卒業者に占める就職者のが少ない?",
-      "combinedScore": 0.787,
+      "combinedScore": 0.783,
       "lane": "must-write",
       "status": "pending",
       "priority": 1
@@ -75,7 +74,7 @@
       "label": "高等学校教員の平均年収 × 男性所定内給与額 (r=0.69)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.6822236958083521,
+        "queryGap": 0.6710915035241561,
         "seasonality": 1,
         "surprise": 0.688,
         "competitionGap": 0.8
@@ -89,14 +88,14 @@
           "economy",
           "laborwage"
         ],
-        "gscImp": 755,
+        "gscImp": 684,
         "rankingUrls": [
           "/ranking/high-school-teacher-annual-income",
           "/ranking/male-scheduled-earnings"
         ]
       },
       "suggestedTitle": "高等学校教員の平均年収が多い県は男性所定内給与も多い?",
-      "combinedScore": 0.786,
+      "combinedScore": 0.782,
       "lane": "must-write",
       "status": "pending",
       "priority": 2
@@ -125,7 +124,7 @@
           "socialsecurity",
           "population"
         ],
-        "gscImp": 16569,
+        "gscImp": 16806,
         "rankingUrls": [
           "/ranking/general-hospital-count",
           "/ranking/average-persons-per-general-household"
@@ -138,40 +137,76 @@
       "priority": 3
     },
     {
-      "topicKey": "corr-national-medical-expense-per-person--tuna-consumption-quantity",
+      "topicKey": "corr-detached-house-ratio--gasoline-consumption-quantity",
       "archetype": "B",
       "metricKeys": [
-        "tuna-consumption-quantity",
-        "national-medical-expense-per-person"
+        "gasoline-consumption-quantity",
+        "detached-house-ratio"
       ],
-      "label": "まぐろ消費量 × 1人当たりの国民医療費 (r=-0.66)",
+      "label": "ガソリン消費量 × 一戸建住宅比率 (r=0.82)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.6969167393734398,
+        "queryGap": 0.6941161103328837,
         "seasonality": 0.3,
-        "surprise": 0.656,
+        "surprise": 0.824,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": -0.656,
-        "partialRPopulation": -0.619,
+        "pearsonR": 0.824,
+        "partialRPopulation": 0.573,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
           "economy",
-          "socialsecurity"
+          "construction"
         ],
-        "gscImp": 871,
+        "gscImp": 856,
         "rankingUrls": [
-          "/ranking/tuna-consumption-quantity",
-          "/ranking/national-medical-expense-per-person"
+          "/ranking/gasoline-consumption-quantity",
+          "/ranking/detached-house-ratio"
         ]
       },
-      "suggestedTitle": "まぐろが多い県は1人当たりの国民医療費が少ない?",
-      "combinedScore": 0.61,
+      "suggestedTitle": "ガソリンが多い県は一戸建住宅も多い?",
+      "combinedScore": 0.643,
       "lane": "must-write",
       "status": "pending",
       "priority": 4
+    },
+    {
+      "topicKey": "corr-total-area-excluding-northern-territories-and-takeshima--total-assessed-land-area",
+      "archetype": "B",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "total-assessed-land-area"
+      ],
+      "label": "総面積 × 評価総地積 (r=0.99)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.7277692549297151,
+        "seasonality": 0,
+        "surprise": 0.987,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.987,
+        "partialRPopulation": 0.987,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "landweather",
+          "administrativefinancial"
+        ],
+        "gscImp": 1188,
+        "rankingUrls": [
+          "/ranking/total-area-excluding-northern-territories-and-takeshima",
+          "/ranking/total-assessed-land-area"
+        ]
+      },
+      "suggestedTitle": "総面積が多い県は評価総地積も多い?",
+      "combinedScore": 0.612,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 5
     },
     {
       "topicKey": "corr-dual-income-household-ratio--persons-on-public-assistance-per-1000",
@@ -183,7 +218,7 @@
       "label": "共働き世帯割合 × 生活保護被保護実人員 (r=-0.80)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.7841458923699836,
+        "queryGap": 0.7930036788456967,
         "seasonality": 0,
         "surprise": 0.803,
         "competitionGap": 0.8
@@ -197,17 +232,17 @@
           "population",
           "socialsecurity"
         ],
-        "gscImp": 2034,
+        "gscImp": 2242,
         "rankingUrls": [
           "/ranking/dual-income-household-ratio",
           "/ranking/persons-on-public-assistance-per-1000"
         ]
       },
       "suggestedTitle": "共働き世帯が多い県は生活保護被保護実人員が少ない?",
-      "combinedScore": 0.595,
+      "combinedScore": 0.598,
       "lane": "must-write",
       "status": "pending",
-      "priority": 5
+      "priority": 6
     },
     {
       "topicKey": "corr-dual-income-household-ratio--public-assistance-nursing-beneficiaries-per-1000",
@@ -219,7 +254,7 @@
       "label": "共働き世帯割合 × 生活保護介護扶助人員 (r=-0.70)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.7841458923699836,
+        "queryGap": 0.7930036788456967,
         "seasonality": 0,
         "surprise": 0.704,
         "competitionGap": 0.8
@@ -233,161 +268,53 @@
           "population",
           "socialsecurity"
         ],
-        "gscImp": 2034,
+        "gscImp": 2242,
         "rankingUrls": [
           "/ranking/dual-income-household-ratio",
           "/ranking/public-assistance-nursing-beneficiaries-per-1000"
         ]
       },
       "suggestedTitle": "共働き世帯が多い県は生活保護介護扶助人員が少ない?",
-      "combinedScore": 0.575,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 6
-    },
-    {
-      "topicKey": "corr-gasoline-consumption-quantity--single-mother-employment-rate",
-      "archetype": "B",
-      "metricKeys": [
-        "gasoline-consumption-quantity",
-        "single-mother-employment-rate"
-      ],
-      "label": "ガソリン消費量 × 母子世帯の母の就業割合 (r=0.77)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.692083461376522,
-        "seasonality": 0,
-        "surprise": 0.768,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.768,
-        "partialRPopulation": 0.608,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "economy",
-          "socialsecurity"
-        ],
-        "gscImp": 831,
-        "rankingUrls": [
-          "/ranking/gasoline-consumption-quantity",
-          "/ranking/single-mother-employment-rate"
-        ]
-      },
-      "suggestedTitle": "ガソリンが多い県は母子世帯の母の就業も多い?",
-      "combinedScore": 0.556,
+      "combinedScore": 0.578,
       "lane": "must-write",
       "status": "pending",
       "priority": 7
     },
     {
-      "topicKey": "corr-average-height-primary-school-fifth-grade-male--other-mushroom-consumption-quantity",
+      "topicKey": "corr-roundwood-production-volume--total-area-excluding-northern-territories-and-takeshima",
       "archetype": "B",
       "metricKeys": [
-        "average-height-primary-school-fifth-grade-male",
-        "other-mushroom-consumption-quantity"
+        "total-area-excluding-northern-territories-and-takeshima",
+        "roundwood-production-volume"
       ],
-      "label": "平均身長 × 他のきのこ消費量 (r=0.70)",
+      "label": "総面積 × 素材生産量 (r=0.79)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.7221266411273096,
+        "queryGap": 0.7277692549297151,
         "seasonality": 0,
-        "surprise": 0.704,
+        "surprise": 0.786,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": 0.704,
-        "partialRPopulation": 0.706,
+        "pearsonR": 0.786,
+        "partialRPopulation": 0.798,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
-          "educationsports",
-          "economy"
+          "landweather",
+          "agriculture"
         ],
-        "gscImp": 1113,
+        "gscImp": 1188,
         "rankingUrls": [
-          "/ranking/average-height-primary-school-fifth-grade-male",
-          "/ranking/other-mushroom-consumption-quantity"
+          "/ranking/total-area-excluding-northern-territories-and-takeshima",
+          "/ranking/roundwood-production-volume"
         ]
       },
-      "suggestedTitle": "平均身長が多い県は他のきのこも多い?",
-      "combinedScore": 0.554,
+      "suggestedTitle": "総面積が多い県は素材も多い?",
+      "combinedScore": 0.572,
       "lane": "must-write",
       "status": "pending",
       "priority": 8
-    },
-    {
-      "topicKey": "corr-average-height-primary-school-fifth-grade-male--other-mushroom-consumption-expenditure",
-      "archetype": "B",
-      "metricKeys": [
-        "average-height-primary-school-fifth-grade-male",
-        "other-mushroom-consumption-expenditure"
-      ],
-      "label": "平均身長 × 他のきのこ消費支出額 (r=0.69)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.7221266411273096,
-        "seasonality": 0,
-        "surprise": 0.692,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.692,
-        "partialRPopulation": 0.696,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "educationsports",
-          "economy"
-        ],
-        "gscImp": 1113,
-        "rankingUrls": [
-          "/ranking/average-height-primary-school-fifth-grade-male",
-          "/ranking/other-mushroom-consumption-expenditure"
-        ]
-      },
-      "suggestedTitle": "平均身長が多い県は他のきのこも多い?",
-      "combinedScore": 0.551,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 9
-    },
-    {
-      "topicKey": "corr-road-expressway-length--total-assessed-land-area",
-      "archetype": "B",
-      "metricKeys": [
-        "road-expressway-length",
-        "total-assessed-land-area"
-      ],
-      "label": "道路実延長（高速道路） × 評価総地積 (r=0.80)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6592895824155863,
-        "seasonality": 0,
-        "surprise": 0.802,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.802,
-        "partialRPopulation": 0.802,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "infrastructure",
-          "administrativefinancial"
-        ],
-        "gscImp": 604,
-        "rankingUrls": [
-          "/ranking/road-expressway-length",
-          "/ranking/total-assessed-land-area"
-        ]
-      },
-      "suggestedTitle": "道路実延長が多い県は評価総地積も多い?",
-      "combinedScore": 0.551,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 10
     },
     {
       "topicKey": "corr-nuclear-family-household-count--port-ships-tonnage",
@@ -399,7 +326,7 @@
       "label": "核家族世帯数 × 入港船舶総トン数（港湾統計） (r=0.76)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.6818144312173993,
+        "queryGap": 0.6840439527589373,
         "seasonality": 0,
         "surprise": 0.759,
         "competitionGap": 0.8
@@ -413,17 +340,17 @@
           "population",
           "infrastructure"
         ],
-        "gscImp": 752,
+        "gscImp": 776,
         "rankingUrls": [
           "/ranking/nuclear-family-household-count",
           "/ranking/port-ships-tonnage"
         ]
       },
       "suggestedTitle": "核家族世帯が多い県は入港船舶総トンも多い?",
-      "combinedScore": 0.55,
+      "combinedScore": 0.551,
       "lane": "must-write",
       "status": "pending",
-      "priority": 11
+      "priority": 9
     },
     {
       "topicKey": "corr-road-total-length--total-assessed-land-area",
@@ -435,7 +362,7 @@
       "label": "道路実延長 × 評価総地積 (r=0.74)",
       "source": "correlation",
       "scores": {
-        "queryGap": 0.6800219025698184,
+        "queryGap": 0.6874268801356297,
         "seasonality": 0,
         "surprise": 0.743,
         "competitionGap": 0.8
@@ -449,14 +376,86 @@
           "infrastructure",
           "administrativefinancial"
         ],
-        "gscImp": 739,
+        "gscImp": 802,
         "rankingUrls": [
           "/ranking/road-total-length",
           "/ranking/total-assessed-land-area"
         ]
       },
       "suggestedTitle": "道路実延長が多い県は評価総地積も多い?",
-      "combinedScore": 0.547,
+      "combinedScore": 0.549,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 10
+    },
+    {
+      "topicKey": "corr-average-height-primary-school-fifth-grade-male--yakitori-consumption-expenditure",
+      "archetype": "B",
+      "metricKeys": [
+        "average-height-primary-school-fifth-grade-male",
+        "yakitori-consumption-expenditure"
+      ],
+      "label": "平均身長 × やきとり消費支出額 (r=0.67)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6920568141449124,
+        "seasonality": 0,
+        "surprise": 0.667,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.667,
+        "partialRPopulation": 0.678,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "educationsports",
+          "economy"
+        ],
+        "gscImp": 839,
+        "rankingUrls": [
+          "/ranking/average-height-primary-school-fifth-grade-male",
+          "/ranking/yakitori-consumption-expenditure"
+        ]
+      },
+      "suggestedTitle": "平均身長が多い県はやきとりも多い?",
+      "combinedScore": 0.536,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 11
+    },
+    {
+      "topicKey": "corr-average-height-primary-school-fifth-grade-male--other-root-vegetables-consumption-quantity",
+      "archetype": "B",
+      "metricKeys": [
+        "average-height-primary-school-fifth-grade-male",
+        "other-root-vegetables-consumption-quantity"
+      ],
+      "label": "平均身長 × 他の根菜消費量 (r=0.66)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6920568141449124,
+        "seasonality": 0,
+        "surprise": 0.658,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.658,
+        "partialRPopulation": 0.688,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "educationsports",
+          "economy"
+        ],
+        "gscImp": 839,
+        "rankingUrls": [
+          "/ranking/average-height-primary-school-fifth-grade-male",
+          "/ranking/other-root-vegetables-consumption-quantity"
+        ]
+      },
+      "suggestedTitle": "平均身長が多い県は他の根菜も多い?",
+      "combinedScore": 0.534,
       "lane": "must-write",
       "status": "pending",
       "priority": 12
@@ -470,47 +469,47 @@
       "label": "漁港数（漁港種類計）",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.85123169206585,
+        "queryGap": 0.8584970009205904,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 3904,
-        "gscClicks": 32,
-        "gscPosition": 6.23,
+        "gscImp": 4241,
+        "gscClicks": 41,
+        "gscPosition": 6.27,
         "seasonLabel": null,
         "rankingUrl": "/ranking/fishing-port-count-by-type"
       },
       "suggestedTitle": "漁港が多い県はどこ",
-      "combinedScore": 0.398,
+      "combinedScore": 0.4,
       "lane": "must-write",
       "status": "pending",
       "priority": 13
     },
     {
-      "topicKey": "gap-fishery-species-catch-pacific-saury",
+      "topicKey": "gap-physical-disability-certificates-issued",
       "archetype": "A",
       "metricKeys": [
-        "fishery-species-catch-pacific-saury"
+        "physical-disability-certificates-issued"
       ],
-      "label": "サンマ漁獲量",
+      "label": "身体障害者手帳交付数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.7273508023049341,
+        "queryGap": 0.748378404532727,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 1171,
-        "gscClicks": 11,
-        "gscPosition": 8.42,
+        "gscImp": 1452,
+        "gscClicks": 51,
+        "gscPosition": 4.13,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/fishery-species-catch-pacific-saury"
+        "rankingUrl": "/ranking/physical-disability-certificates-issued"
       },
-      "suggestedTitle": "サンマ漁獲量が多い県はどこ",
-      "combinedScore": 0.355,
+      "suggestedTitle": "身体障害者手帳交付が多い県はどこ",
+      "combinedScore": 0.362,
       "lane": "must-write",
       "status": "pending",
       "priority": 14
@@ -524,47 +523,47 @@
       "label": "サバ類漁獲量",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.7262914799975649,
+        "queryGap": 0.7301615746684291,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 1216,
+        "gscClicks": 13,
+        "gscPosition": 6.49,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/fishery-species-catch-mackerel"
+      },
+      "suggestedTitle": "サバ類漁獲量が多い県はどこ",
+      "combinedScore": 0.356,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 15
+    },
+    {
+      "topicKey": "gap-fishery-species-catch-pacific-saury",
+      "archetype": "A",
+      "metricKeys": [
+        "fishery-species-catch-pacific-saury"
+      ],
+      "label": "サンマ漁獲量",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.7252313563939211,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
         "gscImp": 1159,
-        "gscClicks": 15,
-        "gscPosition": 7,
+        "gscClicks": 12,
+        "gscPosition": 8.26,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/fishery-species-catch-mackerel"
+        "rankingUrl": "/ranking/fishery-species-catch-pacific-saury"
       },
-      "suggestedTitle": "サバ類漁獲量が多い県はどこ",
+      "suggestedTitle": "サンマ漁獲量が多い県はどこ",
       "combinedScore": 0.354,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 15
-    },
-    {
-      "topicKey": "gap-physical-disability-certificates-issued",
-      "archetype": "A",
-      "metricKeys": [
-        "physical-disability-certificates-issued"
-      ],
-      "label": "身体障害者手帳交付数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.7063830475932624,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 955,
-        "gscClicks": 21,
-        "gscPosition": 4.89,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/physical-disability-certificates-issued"
-      },
-      "suggestedTitle": "身体障害者手帳交付が多い県はどこ",
-      "combinedScore": 0.347,
       "lane": "must-write",
       "status": "pending",
       "priority": 16
@@ -578,23 +577,50 @@
       "label": "イワシ類漁獲量",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6933132240217267,
+        "queryGap": 0.6975365182097281,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 841,
-        "gscClicks": 4,
-        "gscPosition": 7.55,
+        "gscImp": 885,
+        "gscClicks": 5,
+        "gscPosition": 7.22,
         "seasonLabel": null,
         "rankingUrl": "/ranking/fishery-species-catch-sardine"
       },
       "suggestedTitle": "イワシ類漁獲量が多い県はどこ",
-      "combinedScore": 0.343,
+      "combinedScore": 0.344,
       "lane": "must-write",
       "status": "pending",
       "priority": 17
+    },
+    {
+      "topicKey": "gap-wedding-expense-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "wedding-expense-consumption-expenditure"
+      ],
+      "label": "婚礼関係費消費支出額",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.6381168245728849,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.6
+      },
+      "evidence": {
+        "gscImp": 496,
+        "gscClicks": 0,
+        "gscPosition": 7.93,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/wedding-expense-consumption-expenditure"
+      },
+      "suggestedTitle": "婚礼関係費消費量 日本一はどこ",
+      "combinedScore": 0.343,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 18
     },
     {
       "topicKey": "gap-food-manufacturing-shipment-amount",
@@ -605,23 +631,23 @@
       "label": "食料品製造業の製造品出荷額等",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6707111604516347,
+        "queryGap": 0.6879375876136291,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 675,
-        "gscClicks": 11,
-        "gscPosition": 5.53,
+        "gscImp": 806,
+        "gscClicks": 17,
+        "gscPosition": 5.57,
         "seasonLabel": null,
         "rankingUrl": "/ranking/food-manufacturing-shipment-amount"
       },
       "suggestedTitle": "食料品製造業の製造品出荷額等が多い県はどこ",
-      "combinedScore": 0.335,
+      "combinedScore": 0.341,
       "lane": "must-write",
       "status": "pending",
-      "priority": 18
+      "priority": 19
     },
     {
       "topicKey": "gap-pig-count",
@@ -632,23 +658,23 @@
       "label": "豚飼養頭数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6496662896429524,
+        "queryGap": 0.6631394525147546,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 550,
-        "gscClicks": 11,
-        "gscPosition": 6.59,
+        "gscImp": 633,
+        "gscClicks": 19,
+        "gscPosition": 5.89,
         "seasonLabel": null,
         "rankingUrl": "/ranking/pig-count"
       },
       "suggestedTitle": "豚飼養頭が多い県はどこ",
-      "combinedScore": 0.327,
+      "combinedScore": 0.332,
       "lane": "must-write",
       "status": "pending",
-      "priority": 19
+      "priority": 20
     },
     {
       "topicKey": "gap-pharmaceutical-sales-count",
@@ -659,77 +685,23 @@
       "label": "医薬品販売業数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6375895833182773,
+        "queryGap": 0.641972782609092,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 489,
-        "gscClicks": 11,
-        "gscPosition": 5.91,
+        "gscImp": 515,
+        "gscClicks": 12,
+        "gscPosition": 5.65,
         "seasonLabel": null,
         "rankingUrl": "/ranking/pharmaceutical-sales-count"
       },
       "suggestedTitle": "医薬品販売業が多い県はどこ",
-      "combinedScore": 0.323,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 20
-    },
-    {
-      "topicKey": "gap-abortion-rate",
-      "archetype": "A",
-      "metricKeys": [
-        "abortion-rate"
-      ],
-      "label": "人工妊娠中絶実施率",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.6253348142242582,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 434,
-        "gscClicks": 19,
-        "gscPosition": 4.77,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/abortion-rate"
-      },
-      "suggestedTitle": "人工妊娠中絶実施が多い県はどこ",
-      "combinedScore": 0.319,
+      "combinedScore": 0.325,
       "lane": "must-write",
       "status": "pending",
       "priority": 21
-    },
-    {
-      "topicKey": "gap-turnover-rate",
-      "archetype": "A",
-      "metricKeys": [
-        "turnover-rate"
-      ],
-      "label": "離職率",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.6189911538631728,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 408,
-        "gscClicks": 9,
-        "gscPosition": 4.03,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/turnover-rate"
-      },
-      "suggestedTitle": "離職が多い県はどこ",
-      "combinedScore": 0.317,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 22
     },
     {
       "topicKey": "gap-infant-deaths",
@@ -740,20 +712,47 @@
       "label": "乳児死亡数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6124990965281024,
+        "queryGap": 0.6321569134558684,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 383,
-        "gscClicks": 9,
-        "gscPosition": 7.33,
+        "gscImp": 468,
+        "gscClicks": 10,
+        "gscPosition": 7.18,
         "seasonLabel": null,
         "rankingUrl": "/ranking/infant-deaths"
       },
       "suggestedTitle": "乳児死亡が多い県はどこ",
-      "combinedScore": 0.314,
+      "combinedScore": 0.321,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 22
+    },
+    {
+      "topicKey": "gap-abortion-rate",
+      "archetype": "A",
+      "metricKeys": [
+        "abortion-rate"
+      ],
+      "label": "人工妊娠中絶実施率",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.6292677811960321,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 455,
+        "gscClicks": 20,
+        "gscPosition": 4.94,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/abortion-rate"
+      },
+      "suggestedTitle": "人工妊娠中絶実施が多い県はどこ",
+      "combinedScore": 0.32,
       "lane": "must-write",
       "status": "pending",
       "priority": 23
@@ -767,23 +766,131 @@
       "label": "肉用牛飼養頭数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6075575119652927,
+        "queryGap": 0.628816001706093,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 365,
-        "gscClicks": 5,
-        "gscPosition": 6.44,
+        "gscImp": 453,
+        "gscClicks": 10,
+        "gscPosition": 6.15,
         "seasonLabel": null,
         "rankingUrl": "/ranking/beef-cattle-count"
       },
       "suggestedTitle": "肉用牛飼養頭が多い県はどこ",
-      "combinedScore": 0.313,
+      "combinedScore": 0.32,
       "lane": "must-write",
       "status": "pending",
       "priority": 24
+    },
+    {
+      "topicKey": "gap-total-population",
+      "archetype": "A",
+      "metricKeys": [
+        "total-population"
+      ],
+      "label": "総人口",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.6294929284240152,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 456,
+        "gscClicks": 6,
+        "gscPosition": 7.95,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/total-population"
+      },
+      "suggestedTitle": "総人口が多い県はどこ",
+      "combinedScore": 0.32,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 25
+    },
+    {
+      "topicKey": "gap-physical-disability-certificates-issued-per-1000",
+      "archetype": "A",
+      "metricKeys": [
+        "physical-disability-certificates-issued-per-1000"
+      ],
+      "label": "身体障害者手帳交付数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.6229945325965528,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 428,
+        "gscClicks": 4,
+        "gscPosition": 7.98,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/physical-disability-certificates-issued-per-1000"
+      },
+      "suggestedTitle": "身体障害者手帳交付が多い県はどこ",
+      "combinedScore": 0.318,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 26
+    },
+    {
+      "topicKey": "gap-railway-passengers",
+      "archetype": "A",
+      "metricKeys": [
+        "railway-passengers"
+      ],
+      "label": "鉄道駅 乗降客数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.6069511329617623,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 366,
+        "gscClicks": 24,
+        "gscPosition": 8,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/railway-passengers"
+      },
+      "suggestedTitle": "鉄道駅 乗降客が多い県はどこ",
+      "combinedScore": 0.312,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 27
+    },
+    {
+      "topicKey": "gap-turnover-rate",
+      "archetype": "A",
+      "metricKeys": [
+        "turnover-rate"
+      ],
+      "label": "離職率",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.6,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 342,
+        "gscClicks": 14,
+        "gscPosition": 4.34,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/turnover-rate"
+      },
+      "suggestedTitle": "離職が多い県はどこ",
+      "combinedScore": 0.31,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 28
     },
     {
       "topicKey": "gap-annual-clear-days",
@@ -794,23 +901,23 @@
       "label": "年間快晴日数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6011767143919482,
+        "queryGap": 0.5966498475517714,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 343,
-        "gscClicks": 3,
-        "gscPosition": 9.01,
+        "gscImp": 331,
+        "gscClicks": 2,
+        "gscPosition": 8.84,
         "seasonLabel": null,
         "rankingUrl": "/ranking/annual-clear-days"
       },
       "suggestedTitle": "年間快晴日が多い県はどこ",
-      "combinedScore": 0.31,
+      "combinedScore": 0.309,
       "lane": "must-write",
       "status": "pending",
-      "priority": 25
+      "priority": 29
     },
     {
       "topicKey": "gap-fishery-species-catch-pollock",
@@ -821,23 +928,77 @@
       "label": "スケトウダラ漁獲量",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5877737333442716,
+        "queryGap": 0.5941429020860725,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 301,
-        "gscClicks": 6,
-        "gscPosition": 5.66,
+        "gscImp": 323,
+        "gscClicks": 5,
+        "gscPosition": 5.42,
         "seasonLabel": null,
         "rankingUrl": "/ranking/fishery-species-catch-pollock"
       },
       "suggestedTitle": "スケトウダラ漁獲量が多い県はどこ",
-      "combinedScore": 0.306,
+      "combinedScore": 0.308,
       "lane": "must-write",
       "status": "pending",
-      "priority": 26
+      "priority": 30
+    },
+    {
+      "topicKey": "gap-roundwood-production-volume",
+      "archetype": "A",
+      "metricKeys": [
+        "roundwood-production-volume"
+      ],
+      "label": "素材生産量",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.591247508690815,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 314,
+        "gscClicks": 11,
+        "gscPosition": 6.44,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/roundwood-production-volume"
+      },
+      "suggestedTitle": "素材が多い県はどこ",
+      "combinedScore": 0.307,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 31
+    },
+    {
+      "topicKey": "gap-annual-minimum-relative-humidity",
+      "archetype": "A",
+      "metricKeys": [
+        "annual-minimum-relative-humidity"
+      ],
+      "label": "年間最小相対湿度",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5918980150931502,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 316,
+        "gscClicks": 4,
+        "gscPosition": 8.64,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/annual-minimum-relative-humidity"
+      },
+      "suggestedTitle": "年間最小相対湿度が多い県はどこ",
+      "combinedScore": 0.307,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 32
     },
     {
       "topicKey": "gap-crude-birth-rate",
@@ -848,23 +1009,50 @@
       "label": "粗出生率",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5887911707127281,
+        "queryGap": 0.5909207050181045,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 304,
-        "gscClicks": 1,
-        "gscPosition": 6.92,
+        "gscImp": 313,
+        "gscClicks": 0,
+        "gscPosition": 6.71,
         "seasonLabel": null,
         "rankingUrl": "/ranking/crude-birth-rate"
       },
       "suggestedTitle": "粗出生が多い県はどこ",
+      "combinedScore": 0.307,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 33
+    },
+    {
+      "topicKey": "gap-road-tunnel-diagnosed-count",
+      "archetype": "A",
+      "metricKeys": [
+        "road-tunnel-diagnosed-count"
+      ],
+      "label": "道路トンネルの診断済総数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5892709156875643,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 308,
+        "gscClicks": 6,
+        "gscPosition": 5.93,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/road-tunnel-diagnosed-count"
+      },
+      "suggestedTitle": "道路トンネルの診断済総が多い県はどこ",
       "combinedScore": 0.306,
       "lane": "must-write",
       "status": "pending",
-      "priority": 27
+      "priority": 34
     },
     {
       "topicKey": "gap-architect-annual-income",
@@ -875,15 +1063,15 @@
       "label": "建築技術者の平均年収",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.4953176978695397,
+        "queryGap": 0.4937556903195637,
         "seasonality": 1,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 122,
+        "gscImp": 121,
         "gscClicks": 3,
-        "gscPosition": 7.66,
+        "gscPosition": 8.78,
         "seasonLabel": "ボーナス・貯蓄",
         "rankingUrl": "/ranking/architect-annual-income"
       },
@@ -891,7 +1079,115 @@
       "combinedScore": 0.523,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 28
+      "priority": 35
+    },
+    {
+      "topicKey": "gap-avg-savings-rate-worker-households",
+      "archetype": "A",
+      "metricKeys": [
+        "avg-savings-rate-worker-households"
+      ],
+      "label": "平均貯蓄率",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.4920568141449124,
+        "seasonality": 1,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 119,
+        "gscClicks": 7,
+        "gscPosition": 6.76,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/avg-savings-rate-worker-households"
+      },
+      "suggestedTitle": "平均貯蓄が多い県はどこ",
+      "combinedScore": 0.522,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 36
+    },
+    {
+      "topicKey": "gap-per-taxpayer-taxable-income",
+      "archetype": "A",
+      "metricKeys": [
+        "per-taxpayer-taxable-income"
+      ],
+      "label": "課税対象所得",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.4911967282180695,
+        "seasonality": 1,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 118,
+        "gscClicks": 5,
+        "gscPosition": 6.84,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/per-taxpayer-taxable-income"
+      },
+      "suggestedTitle": "課税対象所得が多い県はどこ",
+      "combinedScore": 0.522,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 37
+    },
+    {
+      "topicKey": "gap-gini-coefficient-disposable-income",
+      "archetype": "A",
+      "metricKeys": [
+        "gini-coefficient-disposable-income"
+      ],
+      "label": "等価可処分所得ジニ係数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.4867849063528233,
+        "seasonality": 1,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 113,
+        "gscClicks": 9,
+        "gscPosition": 6.8,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/gini-coefficient-disposable-income"
+      },
+      "suggestedTitle": "等価可処分所得ジニ係が多い県はどこ",
+      "combinedScore": 0.52,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 38
+    },
+    {
+      "topicKey": "gap-university-professor-annual-income",
+      "archetype": "A",
+      "metricKeys": [
+        "university-professor-annual-income"
+      ],
+      "label": "大学教授の平均年収",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.48496574968641765,
+        "seasonality": 1,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 111,
+        "gscClicks": 2,
+        "gscPosition": 12.9,
+        "seasonLabel": "進学・受験",
+        "rankingUrl": "/ranking/university-professor-annual-income"
+      },
+      "suggestedTitle": "大学教授の平均年収が多い県はどこ",
+      "combinedScore": 0.52,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 39
     },
     {
       "topicKey": "migration-01000",
@@ -908,7 +1204,7 @@
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 108,
+        "areaImp": 106,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/01000"
       },
@@ -916,35 +1212,7 @@
       "combinedScore": 0.52,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 29
-    },
-    {
-      "topicKey": "migration-27000",
-      "archetype": "G",
-      "metricKeys": [
-        "population-migration-inter-prefecture"
-      ],
-      "label": "大阪府 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
-      "scores": {
-        "queryGap": 0.6779088712725875,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 93,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/27000"
-      },
-      "suggestedTitle": "大阪府の人はどこへ移住する",
-      "combinedScore": 0.512,
-      "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "done_at": "2026-09-02",
-      "published_slug": "osaka-migration-flow",
-      "measured": null
+      "priority": 40
     },
     {
       "topicKey": "gap-nursery-teacher-annual-income",
@@ -955,50 +1223,130 @@
       "label": "保育士の平均年収",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.4608518709508698,
+        "queryGap": 0.48122789527535664,
         "seasonality": 1,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 87,
+        "gscImp": 107,
         "gscClicks": 0,
-        "gscPosition": 7.66,
+        "gscPosition": 8.01,
         "seasonLabel": "ボーナス・貯蓄",
         "rankingUrl": "/ranking/nursery-teacher-annual-income"
       },
       "suggestedTitle": "保育士の平均年収が多い県はどこ",
-      "combinedScore": 0.511,
+      "combinedScore": 0.518,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 30
+      "priority": 41
     },
     {
-      "topicKey": "gap-gini-coefficient-disposable-income",
+      "topicKey": "gap-cook-annual-income",
       "archetype": "A",
       "metricKeys": [
-        "gini-coefficient-disposable-income"
+        "cook-annual-income"
       ],
-      "label": "等価可処分所得ジニ係数",
+      "label": "飲食物調理従事者の平均年収",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.4471074968571692,
+        "queryGap": 0.4701872777347177,
+        "seasonality": 1,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 96,
+        "gscClicks": 0,
+        "gscPosition": 8.34,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/cook-annual-income"
+      },
+      "suggestedTitle": "飲食物調理従事者の平均年収が多い県はどこ",
+      "combinedScore": 0.515,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 42
+    },
+    {
+      "topicKey": "migration-27000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "大阪府 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
+      "scores": {
+        "queryGap": 0.6853017301501746,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 96,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/27000"
+      },
+      "suggestedTitle": "大阪府の人はどこへ移住する",
+      "combinedScore": 0.515,
+      "lane": "opportunity",
+      "status": "done",
+      "priority": null,
+      "done_at": "2026-09-02",
+      "published_slug": "osaka-migration-flow",
+      "measured": null
+    },
+    {
+      "topicKey": "migration-13000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "東京都 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
+      "scores": {
+        "queryGap": 0.6821807382738118,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 94,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/13000"
+      },
+      "suggestedTitle": "東京都の人はどこへ移住する",
+      "combinedScore": 0.514,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 43
+    },
+    {
+      "topicKey": "gap-male-scheduled-earnings",
+      "archetype": "A",
+      "metricKeys": [
+        "male-scheduled-earnings"
+      ],
+      "label": "男性所定内給与額",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.44645488117346876,
         "seasonality": 1,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
         "gscImp": 76,
-        "gscClicks": 4,
-        "gscPosition": 7.16,
+        "gscClicks": 0,
+        "gscPosition": 8.32,
         "seasonLabel": "ボーナス・貯蓄",
-        "rankingUrl": "/ranking/gini-coefficient-disposable-income"
+        "rankingUrl": "/ranking/male-scheduled-earnings"
       },
-      "suggestedTitle": "等価可処分所得ジニ係が多い県はどこ",
+      "suggestedTitle": "男性所定内給与が多い県はどこ",
       "combinedScore": 0.506,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 31
+      "priority": 44
     },
     {
       "topicKey": "migration-42000",
@@ -1009,46 +1357,48 @@
       "label": "長崎県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.6461923980704616,
+        "queryGap": 0.6526445300524042,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 75,
+        "areaImp": 77,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/42000"
       },
       "suggestedTitle": "長崎県の人はどこへ移住する",
-      "combinedScore": 0.501,
+      "combinedScore": 0.503,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 32
+      "priority": 45
     },
     {
-      "topicKey": "migration-23000",
-      "archetype": "G",
+      "topicKey": "gap-manufacturing-industry-annual-income",
+      "archetype": "A",
       "metricKeys": [
-        "population-migration-inter-prefecture"
+        "manufacturing-industry-annual-income"
       ],
-      "label": "愛知県 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
+      "label": "製造業で働く人の平均年収",
+      "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.6401830953915133,
-        "seasonality": 0.3,
+        "queryGap": 0.4336796030612784,
+        "seasonality": 1,
         "surprise": 0,
-        "competitionGap": 1
+        "competitionGap": 0.5
       },
       "evidence": {
-        "areaImp": 72,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/23000"
+        "gscImp": 67,
+        "gscClicks": 2,
+        "gscPosition": 11,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/manufacturing-industry-annual-income"
       },
-      "suggestedTitle": "愛知県の人はどこへ移住する",
-      "combinedScore": 0.499,
+      "suggestedTitle": "製造業で働く人の平均年収が多い県はどこ",
+      "combinedScore": 0.502,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 33
+      "priority": 46
     },
     {
       "topicKey": "migration-06000",
@@ -1059,48 +1409,73 @@
       "label": "山形県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.6360380830489809,
+        "queryGap": 0.6487533452633991,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 70,
+        "areaImp": 75,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/06000"
       },
       "suggestedTitle": "山形県の人はどこへ移住する",
-      "combinedScore": 0.498,
+      "combinedScore": 0.502,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 34
+      "priority": 47
     },
     {
-      "topicKey": "gap-university-professor-annual-income",
+      "topicKey": "migration-23000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "愛知県 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
+      "scores": {
+        "queryGap": 0.625332361283341,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 64,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/23000"
+      },
+      "suggestedTitle": "愛知県の人はどこへ移住する",
+      "combinedScore": 0.494,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 48
+    },
+    {
+      "topicKey": "gap-per-taxpayer-income",
       "archetype": "A",
       "metricKeys": [
-        "university-professor-annual-income"
+        "per-taxpayer-income"
       ],
-      "label": "大学教授の平均年収",
+      "label": "納税義務者1人当たり課税所得",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.40866178543122217,
+        "queryGap": 0.4099864578537522,
         "seasonality": 1,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 52,
-        "gscClicks": 1,
-        "gscPosition": 10.04,
-        "seasonLabel": "進学・受験",
-        "rankingUrl": "/ranking/university-professor-annual-income"
+        "gscImp": 53,
+        "gscClicks": 3,
+        "gscPosition": 6.38,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/per-taxpayer-income"
       },
-      "suggestedTitle": "大学教授の平均年収が多い県はどこ",
+      "suggestedTitle": "納税義務者1人当たり課税所得が多い県はどこ",
       "combinedScore": 0.493,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 35
+      "priority": 49
     },
     {
       "topicKey": "migration-04000",
@@ -1111,21 +1486,21 @@
       "label": "宮城県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.6228638681850412,
+        "queryGap": 0.6082632615217108,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 64,
+        "areaImp": 57,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/04000"
       },
       "suggestedTitle": "宮城県の人はどこへ移住する",
-      "combinedScore": 0.493,
+      "combinedScore": 0.488,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 36
+      "priority": 50
     },
     {
       "topicKey": "migration-34000",
@@ -1136,46 +1511,21 @@
       "label": "広島県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.6158132251234432,
+        "queryGap": 0.6082632615217108,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 61,
+        "areaImp": 57,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/34000"
       },
       "suggestedTitle": "広島県の人はどこへ移住する",
-      "combinedScore": 0.491,
+      "combinedScore": 0.488,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 37
-    },
-    {
-      "topicKey": "migration-16000",
-      "archetype": "G",
-      "metricKeys": [
-        "population-migration-inter-prefecture"
-      ],
-      "label": "富山県 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
-      "scores": {
-        "queryGap": 0.6109206278246926,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 59,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/16000"
-      },
-      "suggestedTitle": "富山県の人はどこへ移住する",
-      "combinedScore": 0.489,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 38
+      "priority": 51
     },
     {
       "topicKey": "migration-20000",
@@ -1186,18 +1536,18 @@
       "label": "長野県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.6084128234331162,
+        "queryGap": 0.6056579403491218,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 58,
+        "areaImp": 56,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/20000"
       },
       "suggestedTitle": "長野県の人はどこへ移住する",
-      "combinedScore": 0.488,
+      "combinedScore": 0.487,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -1214,96 +1564,46 @@
       "label": "兵庫県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.603267111826168,
+        "queryGap": 0.5947584296240376,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 56,
+        "areaImp": 52,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/28000"
       },
       "suggestedTitle": "兵庫県の人はどこへ移住する",
-      "combinedScore": 0.486,
+      "combinedScore": 0.483,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 39
+      "priority": 52
     },
     {
-      "topicKey": "migration-10000",
+      "topicKey": "migration-22000",
       "archetype": "G",
       "metricKeys": [
         "population-migration-inter-prefecture"
       ],
-      "label": "群馬県 の人口移動フロー (転出先/転入元)",
+      "label": "静岡県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5866710403917549,
+        "queryGap": 0.5830032096587909,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 50,
+        "areaImp": 48,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/10000"
+        "areaUrl": "/areas/22000"
       },
-      "suggestedTitle": "群馬県の人はどこへ移住する",
-      "combinedScore": 0.48,
+      "suggestedTitle": "静岡県の人はどこへ移住する",
+      "combinedScore": 0.479,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "migration-05000",
-      "archetype": "G",
-      "metricKeys": [
-        "population-migration-inter-prefecture"
-      ],
-      "label": "秋田県 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
-      "scores": {
-        "queryGap": 0.5712748329098358,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 45,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/05000"
-      },
-      "suggestedTitle": "秋田県の人はどこへ移住する",
-      "combinedScore": 0.475,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 41
-    },
-    {
-      "topicKey": "migration-13000",
-      "archetype": "G",
-      "metricKeys": [
-        "population-migration-inter-prefecture"
-      ],
-      "label": "東京都 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
-      "scores": {
-        "queryGap": 0.5679953415803989,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 44,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/13000"
-      },
-      "suggestedTitle": "東京都の人はどこへ移住する",
-      "combinedScore": 0.474,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 42
+      "priority": 53
     },
     {
       "topicKey": "migration-33000",
@@ -1314,7 +1614,7 @@
       "label": "岡山県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5679953415803989,
+        "queryGap": 0.5702463833443773,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
@@ -1325,10 +1625,38 @@
         "areaUrl": "/areas/33000"
       },
       "suggestedTitle": "岡山県の人はどこへ移住する",
-      "combinedScore": 0.474,
+      "combinedScore": 0.475,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 43
+      "priority": 54
+    },
+    {
+      "topicKey": "migration-08000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "茨城県 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
+      "scores": {
+        "queryGap": 0.5634360200759793,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 42,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/08000"
+      },
+      "suggestedTitle": "茨城県の人はどこへ移住する",
+      "combinedScore": 0.472,
+      "lane": "opportunity",
+      "status": "done",
+      "priority": null,
+      "done_at": "2026-09-01",
+      "published_slug": "ibaraki-migration-flow",
+      "measured": null
     },
     {
       "topicKey": "migration-29000",
@@ -1339,21 +1667,71 @@
       "label": "奈良県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5612118621513252,
+        "queryGap": 0.5563012339595695,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 42,
+        "areaImp": 40,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/29000"
       },
       "suggestedTitle": "奈良県の人はどこへ移住する",
-      "combinedScore": 0.471,
+      "combinedScore": 0.47,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 44
+      "priority": 55
+    },
+    {
+      "topicKey": "migration-16000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "富山県 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
+      "scores": {
+        "queryGap": 0.5526022264791788,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 39,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/16000"
+      },
+      "suggestedTitle": "富山県の人はどこへ移住する",
+      "combinedScore": 0.468,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 56
+    },
+    {
+      "topicKey": "migration-05000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "秋田県 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
+      "scores": {
+        "queryGap": 0.5488095633586509,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 38,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/05000"
+      },
+      "suggestedTitle": "秋田県の人はどこへ移住する",
+      "combinedScore": 0.467,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 57
     },
     {
       "topicKey": "migration-44000",
@@ -1364,18 +1742,18 @@
       "label": "大分県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5541052405301129,
+        "queryGap": 0.5488095633586509,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 40,
+        "areaImp": 38,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/44000"
       },
       "suggestedTitle": "大分県の人はどこへ移住する",
-      "combinedScore": 0.469,
+      "combinedScore": 0.467,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -1392,74 +1770,74 @@
       "label": "青森県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5504208348439059,
+        "queryGap": 0.5282565346769361,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 39,
+        "areaImp": 33,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/02000"
       },
       "suggestedTitle": "青森県の人はどこへ移住する",
-      "combinedScore": 0.468,
+      "combinedScore": 0.46,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 45
+      "priority": 58
     },
     {
-      "topicKey": "migration-08000",
+      "topicKey": "migration-14000",
       "archetype": "G",
       "metricKeys": [
         "population-migration-inter-prefecture"
       ],
-      "label": "茨城県 の人口移動フロー (転出先/転入元)",
+      "label": "神奈川県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5504208348439059,
+        "queryGap": 0.5282565346769361,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 39,
+        "areaImp": 33,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/08000"
+        "areaUrl": "/areas/14000"
       },
-      "suggestedTitle": "茨城県の人はどこへ移住する",
-      "combinedScore": 0.468,
+      "suggestedTitle": "神奈川県の人はどこへ移住する",
+      "combinedScore": 0.46,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
       "done_at": "2026-09-01",
-      "published_slug": "ibaraki-migration-flow",
+      "published_slug": "kanagawa-migration-flow",
       "measured": null
     },
     {
-      "topicKey": "migration-47000",
+      "topicKey": "migration-10000",
       "archetype": "G",
       "metricKeys": [
         "population-migration-inter-prefecture"
       ],
-      "label": "沖縄県 の人口移動フロー (転出先/転入元)",
+      "label": "群馬県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5387881270595352,
+        "queryGap": 0.5095068215649015,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 36,
+        "areaImp": 29,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/47000"
+        "areaUrl": "/areas/10000"
       },
-      "suggestedTitle": "沖縄県の人はどこへ移住する",
-      "combinedScore": 0.464,
+      "suggestedTitle": "群馬県の人はどこへ移住する",
+      "combinedScore": 0.453,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 46
+      "priority": 59
     },
     {
       "topicKey": "migration-15000",
@@ -1470,18 +1848,18 @@
       "label": "新潟県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.49177461661760075,
+        "queryGap": 0.4880700015791751,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 26,
+        "areaImp": 25,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/15000"
       },
       "suggestedTitle": "新潟県の人はどこへ移住する",
-      "combinedScore": 0.447,
+      "combinedScore": 0.446,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -1502,7 +1880,7 @@
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 108,
+        "areaImp": 106,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/01000"
       },
@@ -1510,58 +1888,7 @@
       "combinedScore": 0.445,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 47
-    },
-    {
-      "topicKey": "migration-14000",
-      "archetype": "G",
-      "metricKeys": [
-        "population-migration-inter-prefecture"
-      ],
-      "label": "神奈川県 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
-      "scores": {
-        "queryGap": 0.48029119433733025,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 24,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/14000"
-      },
-      "suggestedTitle": "神奈川県の人はどこへ移住する",
-      "combinedScore": 0.443,
-      "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "done_at": "2026-09-01",
-      "published_slug": "kanagawa-migration-flow",
-      "measured": null
-    },
-    {
-      "topicKey": "finance-gap-27000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "大阪府 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.6779088712725875,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 93,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/27000"
-      },
-      "suggestedTitle": "大阪府 財政が厳しい市町村",
-      "combinedScore": 0.437,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 48
+      "priority": 60
     },
     {
       "topicKey": "migration-38000",
@@ -1572,18 +1899,18 @@
       "label": "愛媛県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.46121706845639043,
+        "queryGap": 0.47607942855448876,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 21,
+        "areaImp": 23,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/38000"
       },
       "suggestedTitle": "愛媛県の人はどこへ移住する",
-      "combinedScore": 0.436,
+      "combinedScore": 0.442,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -1592,32 +1919,96 @@
       "measured": null
     },
     {
-      "topicKey": "migration-17000",
-      "archetype": "G",
-      "metricKeys": [
-        "population-migration-inter-prefecture"
-      ],
-      "label": "石川県 の人口移動フロー (転出先/転入元)",
-      "source": "migration-flow",
+      "topicKey": "finance-gap-27000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "大阪府 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
       "scores": {
-        "queryGap": 0.439342239620301,
-        "seasonality": 0.3,
+        "queryGap": 0.6853017301501746,
+        "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 18,
-        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
-        "areaUrl": "/areas/17000"
+        "areaImp": 96,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/27000"
       },
-      "suggestedTitle": "石川県の人はどこへ移住する",
-      "combinedScore": 0.429,
+      "suggestedTitle": "大阪府 財政が厳しい市町村",
+      "combinedScore": 0.44,
       "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "done_at": "2026-09-01",
-      "published_slug": "ishikawa-migration-flow",
-      "measured": null
+      "status": "pending",
+      "priority": 61
+    },
+    {
+      "topicKey": "finance-gap-13000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "東京都 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.6821807382738118,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 94,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/13000"
+      },
+      "suggestedTitle": "東京都 財政が厳しい市町村",
+      "combinedScore": 0.439,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 62
+    },
+    {
+      "topicKey": "finance-gap-42000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "長崎県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.6526445300524042,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 77,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/42000"
+      },
+      "suggestedTitle": "長崎県 財政が厳しい市町村",
+      "combinedScore": 0.428,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 63
+    },
+    {
+      "topicKey": "finance-gap-06000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "山形県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.6487533452633991,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 75,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/06000"
+      },
+      "suggestedTitle": "山形県 財政が厳しい市町村",
+      "combinedScore": 0.427,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 64
     },
     {
       "topicKey": "migration-30000",
@@ -1628,18 +2019,18 @@
       "label": "和歌山県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.43127482363681413,
+        "queryGap": 0.4153398667750129,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 17,
+        "areaImp": 15,
         "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
         "areaUrl": "/areas/30000"
       },
       "suggestedTitle": "和歌山県の人はどこへ移住する",
-      "combinedScore": 0.426,
+      "combinedScore": 0.42,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -1648,73 +2039,27 @@
       "measured": null
     },
     {
-      "topicKey": "finance-gap-42000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "長崎県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.6461923980704616,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 75,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/42000"
-      },
-      "suggestedTitle": "長崎県 財政が厳しい市町村",
-      "combinedScore": 0.426,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 49
-    },
-    {
       "topicKey": "finance-gap-23000",
       "archetype": "F",
       "metricKeys": [],
       "label": "愛知県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.6401830953915133,
+        "queryGap": 0.625332361283341,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 72,
+        "areaImp": 64,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/23000"
       },
       "suggestedTitle": "愛知県 財政が厳しい市町村",
-      "combinedScore": 0.424,
+      "combinedScore": 0.419,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 50
-    },
-    {
-      "topicKey": "finance-gap-06000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "山形県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.6360380830489809,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 70,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/06000"
-      },
-      "suggestedTitle": "山形県 財政が厳しい市町村",
-      "combinedScore": 0.423,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 51
+      "priority": 65
     },
     {
       "topicKey": "finance-gap-04000",
@@ -1723,21 +2068,21 @@
       "label": "宮城県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.6228638681850412,
+        "queryGap": 0.6082632615217108,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 64,
+        "areaImp": 57,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/04000"
       },
       "suggestedTitle": "宮城県 財政が厳しい市町村",
-      "combinedScore": 0.418,
+      "combinedScore": 0.413,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 52
+      "priority": 66
     },
     {
       "topicKey": "finance-gap-34000",
@@ -1746,47 +2091,21 @@
       "label": "広島県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.6158132251234432,
+        "queryGap": 0.6082632615217108,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 61,
+        "areaImp": 57,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/34000"
       },
       "suggestedTitle": "広島県 財政が厳しい市町村",
-      "combinedScore": 0.416,
+      "combinedScore": 0.413,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 53
-    },
-    {
-      "topicKey": "finance-gap-16000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "富山県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.6109206278246926,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 59,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/16000"
-      },
-      "suggestedTitle": "富山県 財政が厳しい市町村",
-      "combinedScore": 0.414,
-      "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "done_at": "2026-09-01",
-      "published_slug": "toyama-municipal-finance",
-      "measured": null
+      "priority": 67
     },
     {
       "topicKey": "finance-gap-20000",
@@ -1795,18 +2114,18 @@
       "label": "長野県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.6084128234331162,
+        "queryGap": 0.6056579403491218,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 58,
+        "areaImp": 56,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/20000"
       },
       "suggestedTitle": "長野県 財政が厳しい市町村",
-      "combinedScore": 0.413,
+      "combinedScore": 0.412,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -1821,90 +2140,72 @@
       "label": "兵庫県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.603267111826168,
+        "queryGap": 0.5947584296240376,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 56,
+        "areaImp": 52,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/28000"
       },
       "suggestedTitle": "兵庫県 財政が厳しい市町村",
-      "combinedScore": 0.411,
+      "combinedScore": 0.408,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 54
+      "priority": 68
     },
     {
-      "topicKey": "finance-gap-10000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "群馬県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
+      "topicKey": "migration-17000",
+      "archetype": "G",
+      "metricKeys": [
+        "population-migration-inter-prefecture"
+      ],
+      "label": "石川県 の人口移動フロー (転出先/転入元)",
+      "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5866710403917549,
-        "seasonality": 0,
+        "queryGap": 0.3722444618607355,
+        "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 50,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/10000"
+        "areaImp": 11,
+        "dataKey": "app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+        "areaUrl": "/areas/17000"
       },
-      "suggestedTitle": "群馬県 財政が厳しい市町村",
+      "suggestedTitle": "石川県の人はどこへ移住する",
       "combinedScore": 0.405,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 55
+      "status": "done",
+      "priority": null,
+      "done_at": "2026-09-01",
+      "published_slug": "ishikawa-migration-flow",
+      "measured": null
     },
     {
-      "topicKey": "finance-gap-05000",
+      "topicKey": "finance-gap-22000",
       "archetype": "F",
       "metricKeys": [],
-      "label": "秋田県 市区町村の財政格差 (決算カード)",
+      "label": "静岡県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.5712748329098358,
+        "queryGap": 0.5830032096587909,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 45,
+        "areaImp": 48,
         "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/05000"
+        "areaUrl": "/areas/22000"
       },
-      "suggestedTitle": "秋田県 財政が厳しい市町村",
-      "combinedScore": 0.4,
+      "suggestedTitle": "静岡県 財政が厳しい市町村",
+      "combinedScore": 0.404,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 56
-    },
-    {
-      "topicKey": "finance-gap-13000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "東京都 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.5679953415803989,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 44,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/13000"
-      },
-      "suggestedTitle": "東京都 財政が厳しい市町村",
-      "combinedScore": 0.399,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 57
+      "priority": 69
     },
     {
       "topicKey": "finance-gap-33000",
@@ -1913,7 +2214,7 @@
       "label": "岡山県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.5679953415803989,
+        "queryGap": 0.5702463833443773,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
@@ -1924,10 +2225,33 @@
         "areaUrl": "/areas/33000"
       },
       "suggestedTitle": "岡山県 財政が厳しい市町村",
-      "combinedScore": 0.399,
+      "combinedScore": 0.4,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 58
+      "priority": 70
+    },
+    {
+      "topicKey": "finance-gap-08000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "茨城県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.5634360200759793,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 42,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/08000"
+      },
+      "suggestedTitle": "茨城県 財政が厳しい市町村",
+      "combinedScore": 0.397,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 71
     },
     {
       "topicKey": "finance-gap-29000",
@@ -1936,21 +2260,70 @@
       "label": "奈良県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.5612118621513252,
+        "queryGap": 0.5563012339595695,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 42,
+        "areaImp": 40,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/29000"
       },
       "suggestedTitle": "奈良県 財政が厳しい市町村",
-      "combinedScore": 0.396,
+      "combinedScore": 0.395,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 59
+      "priority": 72
+    },
+    {
+      "topicKey": "finance-gap-16000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "富山県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.5526022264791788,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 39,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/16000"
+      },
+      "suggestedTitle": "富山県 財政が厳しい市町村",
+      "combinedScore": 0.393,
+      "lane": "opportunity",
+      "status": "done",
+      "priority": null,
+      "done_at": "2026-09-01",
+      "published_slug": "toyama-municipal-finance",
+      "measured": null
+    },
+    {
+      "topicKey": "finance-gap-05000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "秋田県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.5488095633586509,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 38,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/05000"
+      },
+      "suggestedTitle": "秋田県 財政が厳しい市町村",
+      "combinedScore": 0.392,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 73
     },
     {
       "topicKey": "finance-gap-44000",
@@ -1959,70 +2332,21 @@
       "label": "大分県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.5541052405301129,
+        "queryGap": 0.5488095633586509,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 40,
+        "areaImp": 38,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/44000"
       },
       "suggestedTitle": "大分県 財政が厳しい市町村",
-      "combinedScore": 0.394,
+      "combinedScore": 0.392,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 60
-    },
-    {
-      "topicKey": "finance-gap-02000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "青森県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.5504208348439059,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 39,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/02000"
-      },
-      "suggestedTitle": "青森県 財政が厳しい市町村",
-      "combinedScore": 0.393,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 61
-    },
-    {
-      "topicKey": "finance-gap-47000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "沖縄県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.5387881270595352,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 36,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/47000"
-      },
-      "suggestedTitle": "沖縄県 財政が厳しい市町村",
-      "combinedScore": 0.389,
-      "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "done_at": "2026-09-01",
-      "published_slug": "okinawa-municipal-finance",
-      "measured": null
+      "priority": 74
     },
     {
       "topicKey": "gap-domestic-travel-consumption-by-destination",
@@ -2033,15 +2357,15 @@
       "label": "日本人旅行者の県内消費額",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5483978093051687,
+        "queryGap": 0.5485903942987859,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 0.6
       },
       "evidence": {
-        "gscImp": 205,
-        "gscClicks": 12,
-        "gscPosition": 6.23,
+        "gscImp": 207,
+        "gscClicks": 14,
+        "gscPosition": 6.42,
         "seasonLabel": "観光・宿泊",
         "rankingUrl": "/ranking/domestic-travel-consumption-by-destination"
       },
@@ -2049,60 +2373,7 @@
       "combinedScore": 0.387,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 62
-    },
-    {
-      "topicKey": "finance-gap-15000",
-      "archetype": "F",
-      "metricKeys": [],
-      "label": "新潟県 市区町村の財政格差 (決算カード)",
-      "source": "finance-cards",
-      "scores": {
-        "queryGap": 0.49177461661760075,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 1
-      },
-      "evidence": {
-        "areaImp": 26,
-        "dataPath": "apps/web/public/finance-cards/cities/",
-        "areaUrl": "/areas/15000"
-      },
-      "suggestedTitle": "新潟県 財政が厳しい市町村",
-      "combinedScore": 0.372,
-      "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "done_at": "2026-09-02",
-      "published_slug": "niigata-municipal-finance",
-      "measured": null
-    },
-    {
-      "topicKey": "gap-inbound-travel-consumption-by-destination",
-      "archetype": "D2",
-      "metricKeys": [
-        "inbound-travel-consumption-by-destination"
-      ],
-      "label": "訪日外国人旅行者の県内消費額",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.4953176978695397,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 0.6
-      },
-      "evidence": {
-        "gscImp": 122,
-        "gscClicks": 18,
-        "gscPosition": 6.81,
-        "seasonLabel": "観光・宿泊",
-        "rankingUrl": "/ranking/inbound-travel-consumption-by-destination"
-      },
-      "suggestedTitle": "訪日外国人旅行者の県内消費消費量 日本一はどこ",
-      "combinedScore": 0.368,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 63
+      "priority": 75
     },
     {
       "topicKey": "finance-gap-14000",
@@ -2111,18 +2382,18 @@
       "label": "神奈川県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.48029119433733025,
+        "queryGap": 0.5282565346769361,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 24,
+        "areaImp": 33,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/14000"
       },
       "suggestedTitle": "神奈川県 財政が厳しい市町村",
-      "combinedScore": 0.368,
+      "combinedScore": 0.385,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -2137,18 +2408,18 @@
       "label": "高知県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.4742001098811077,
+        "queryGap": 0.4991715382169019,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 23,
+        "areaImp": 27,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/39000"
       },
       "suggestedTitle": "高知県 財政が厳しい市町村",
-      "combinedScore": 0.366,
+      "combinedScore": 0.375,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
@@ -2157,30 +2428,163 @@
       "measured": null
     },
     {
+      "topicKey": "gap-inbound-travel-consumption-by-destination",
+      "archetype": "D2",
+      "metricKeys": [
+        "inbound-travel-consumption-by-destination"
+      ],
+      "label": "訪日外国人旅行者の県内消費額",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5107957633078496,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 0.6
+      },
+      "evidence": {
+        "gscImp": 143,
+        "gscClicks": 20,
+        "gscPosition": 8.94,
+        "seasonLabel": "観光・宿泊",
+        "rankingUrl": "/ranking/inbound-travel-consumption-by-destination"
+      },
+      "suggestedTitle": "訪日外国人旅行者の県内消費消費量 日本一はどこ",
+      "combinedScore": 0.374,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 76
+    },
+    {
+      "topicKey": "finance-gap-47000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "沖縄県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.49372358541968725,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 26,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/47000"
+      },
+      "suggestedTitle": "沖縄県 財政が厳しい市町村",
+      "combinedScore": 0.373,
+      "lane": "opportunity",
+      "status": "done",
+      "priority": null,
+      "done_at": "2026-09-01",
+      "published_slug": "okinawa-municipal-finance",
+      "measured": null
+    },
+    {
+      "topicKey": "finance-gap-15000",
+      "archetype": "F",
+      "metricKeys": [],
+      "label": "新潟県 市区町村の財政格差 (決算カード)",
+      "source": "finance-cards",
+      "scores": {
+        "queryGap": 0.4880700015791751,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 1
+      },
+      "evidence": {
+        "areaImp": 25,
+        "dataPath": "apps/web/public/finance-cards/cities/",
+        "areaUrl": "/areas/15000"
+      },
+      "suggestedTitle": "新潟県 財政が厳しい市町村",
+      "combinedScore": 0.371,
+      "lane": "opportunity",
+      "status": "done",
+      "priority": null,
+      "done_at": "2026-09-02",
+      "published_slug": "niigata-municipal-finance",
+      "measured": null
+    },
+    {
+      "topicKey": "gap-number-of-hotel-rooms",
+      "archetype": "A",
+      "metricKeys": [
+        "number-of-hotel-rooms"
+      ],
+      "label": "ホテル営業施設客室数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.46017919343828206,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 87,
+        "gscClicks": 2,
+        "gscPosition": 7.82,
+        "seasonLabel": "観光・宿泊",
+        "rankingUrl": "/ranking/number-of-hotel-rooms"
+      },
+      "suggestedTitle": "ホテル営業施設客室が多い県はどこ",
+      "combinedScore": 0.336,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 77
+    },
+    {
       "topicKey": "finance-gap-17000",
       "archetype": "F",
       "metricKeys": [],
       "label": "石川県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.439342239620301,
+        "queryGap": 0.3722444618607355,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
       },
       "evidence": {
-        "areaImp": 18,
+        "areaImp": 11,
         "dataPath": "apps/web/public/finance-cards/cities/",
         "areaUrl": "/areas/17000"
       },
       "suggestedTitle": "石川県 財政が厳しい市町村",
-      "combinedScore": 0.354,
+      "combinedScore": 0.33,
       "lane": "opportunity",
       "status": "done",
       "priority": null,
       "done_at": "2026-09-02",
       "published_slug": "ishikawa-municipal-finance",
       "measured": null
+    },
+    {
+      "topicKey": "gap-japanese-movers-out",
+      "archetype": "A",
+      "metricKeys": [
+        "japanese-movers-out"
+      ],
+      "label": "転出者数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.43215691345586843,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 66,
+        "gscClicks": 0,
+        "gscPosition": 9.07,
+        "seasonLabel": "引越し・移住",
+        "rankingUrl": "/ranking/japanese-movers-out"
+      },
+      "suggestedTitle": "転出者が多い県はどこ",
+      "combinedScore": 0.326,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 78
     },
     {
       "topicKey": "gap-number-of-hotel-facilities",
@@ -2191,452 +2595,47 @@
       "label": "ホテル営業施設数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.45967551632956605,
+        "queryGap": 0.4290421396817513,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 86,
-        "gscClicks": 1,
-        "gscPosition": 7.06,
+        "gscImp": 64,
+        "gscClicks": 0,
+        "gscPosition": 7.3,
         "seasonLabel": "観光・宿泊",
         "rankingUrl": "/ranking/number-of-hotel-facilities"
       },
       "suggestedTitle": "ホテル営業施設が多い県はどこ",
-      "combinedScore": 0.336,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 64
-    },
-    {
-      "topicKey": "gap-microwave-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "microwave-consumption-expenditure"
-      ],
-      "label": "電子レンジ消費支出額",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5298311381618073,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.6
-      },
-      "evidence": {
-        "gscImp": 171,
-        "gscClicks": 5,
-        "gscPosition": 5.8,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/microwave-consumption-expenditure"
-      },
-      "suggestedTitle": "電子レンジ消費量 日本一はどこ",
-      "combinedScore": 0.305,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 65
-    },
-    {
-      "topicKey": "gap-specialized-school-students",
-      "archetype": "A",
-      "metricKeys": [
-        "specialized-school-students"
-      ],
-      "label": "専修学校生徒数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5770046966488581,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 271,
-        "gscClicks": 10,
-        "gscPosition": 7.16,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/specialized-school-students"
-      },
-      "suggestedTitle": "専修学校生徒が多い県はどこ",
-      "combinedScore": 0.302,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 66
-    },
-    {
-      "topicKey": "gap-railway-passengers",
-      "archetype": "A",
-      "metricKeys": [
-        "railway-passengers"
-      ],
-      "label": "鉄道駅 乗降客数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5715656248487824,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 257,
-        "gscClicks": 17,
-        "gscPosition": 8.12,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/railway-passengers"
-      },
-      "suggestedTitle": "鉄道駅 乗降客が多い県はどこ",
-      "combinedScore": 0.3,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 67
-    },
-    {
-      "topicKey": "gap-roundwood-production-volume",
-      "archetype": "A",
-      "metricKeys": [
-        "roundwood-production-volume"
-      ],
-      "label": "素材生産量",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5707646098411273,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 255,
-        "gscClicks": 9,
-        "gscPosition": 6.48,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/roundwood-production-volume"
-      },
-      "suggestedTitle": "素材が多い県はどこ",
-      "combinedScore": 0.3,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 68
-    },
-    {
-      "topicKey": "gap-annual-minimum-relative-humidity",
-      "archetype": "A",
-      "metricKeys": [
-        "annual-minimum-relative-humidity"
-      ],
-      "label": "年間最小相対湿度",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5662440070881364,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 244,
-        "gscClicks": 2,
-        "gscPosition": 8.86,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/annual-minimum-relative-humidity"
-      },
-      "suggestedTitle": "年間最小相対湿度が多い県はどこ",
-      "combinedScore": 0.298,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 69
-    },
-    {
-      "topicKey": "gap-theft-offenses-recognized",
-      "archetype": "A",
-      "metricKeys": [
-        "theft-offenses-recognized"
-      ],
-      "label": "窃盗犯認知件数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5628269328242803,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 236,
-        "gscClicks": 11,
-        "gscPosition": 6.59,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/theft-offenses-recognized"
-      },
-      "suggestedTitle": "窃盗犯認知件が多い県はどこ",
-      "combinedScore": 0.297,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 70
-    },
-    {
-      "topicKey": "gap-road-tunnel-diagnosed-count",
-      "archetype": "A",
-      "metricKeys": [
-        "road-tunnel-diagnosed-count"
-      ],
-      "label": "道路トンネルの診断済総数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5615157060600494,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 233,
-        "gscClicks": 5,
-        "gscPosition": 6.02,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/road-tunnel-diagnosed-count"
-      },
-      "suggestedTitle": "道路トンネルの診断済総が多い県はどこ",
-      "combinedScore": 0.297,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 71
-    },
-    {
-      "topicKey": "gap-tertiary-industry-establishment-ratio-census",
-      "archetype": "A",
-      "metricKeys": [
-        "tertiary-industry-establishment-ratio-census"
-      ],
-      "label": "第3次産業事業所数構成比",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5632603225551576,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 237,
-        "gscClicks": 3,
-        "gscPosition": 8.31,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/tertiary-industry-establishment-ratio-census"
-      },
-      "suggestedTitle": "第3次産業事業所数構成比が多い県はどこ",
-      "combinedScore": 0.297,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 72
-    },
-    {
-      "topicKey": "gap-kiwi-consumption-quantity",
-      "archetype": "D2",
-      "metricKeys": [
-        "kiwi-consumption-quantity"
-      ],
-      "label": "キウイフルーツ消費量",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5041342049867796,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.6
-      },
-      "evidence": {
-        "gscImp": 133,
-        "gscClicks": 3,
-        "gscPosition": 7.51,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/kiwi-consumption-quantity"
-      },
-      "suggestedTitle": "キウイフルーツ消費量 日本一はどこ",
-      "combinedScore": 0.296,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 73
-    },
-    {
-      "topicKey": "gap-mothers-age-at-first-birth",
-      "archetype": "A",
-      "metricKeys": [
-        "mothers-age-at-first-birth"
-      ],
-      "label": "第1子出生時の母の平均年齢",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5453553244798071,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 199,
-        "gscClicks": 6,
-        "gscPosition": 5.61,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/mothers-age-at-first-birth"
-      },
-      "suggestedTitle": "第1子出生時の母の平均年齢が多い県はどこ",
-      "combinedScore": 0.291,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 74
-    },
-    {
-      "topicKey": "gap-prefecture-designated-cultural-property-count",
-      "archetype": "A",
-      "metricKeys": [
-        "prefecture-designated-cultural-property-count"
-      ],
-      "label": "都道府県指定等文化財件数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5458686916737548,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 200,
-        "gscClicks": 3,
-        "gscPosition": 8.55,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/prefecture-designated-cultural-property-count"
-      },
-      "suggestedTitle": "都道府県指定等文化財件が多い県はどこ",
-      "combinedScore": 0.291,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 75
-    },
-    {
-      "topicKey": "gap-other-mushroom-consumption-quantity",
-      "archetype": "D2",
-      "metricKeys": [
-        "other-mushroom-consumption-quantity"
-      ],
-      "label": "他のきのこ消費量",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.4838200163852802,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.6
-      },
-      "evidence": {
-        "gscImp": 109,
-        "gscClicks": 3,
-        "gscPosition": 6.73,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/other-mushroom-consumption-quantity"
-      },
-      "suggestedTitle": "他のきのこ消費量 日本一はどこ",
-      "combinedScore": 0.289,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 76
-    },
-    {
-      "topicKey": "gap-ordinary-construction-expenses-prefecture",
-      "archetype": "A",
-      "metricKeys": [
-        "ordinary-construction-expenses-prefecture"
-      ],
-      "label": "普通建設事業費",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5384375339887415,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 186,
-        "gscClicks": 12,
-        "gscPosition": 5.61,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/ordinary-construction-expenses-prefecture"
-      },
-      "suggestedTitle": "普通建設事業費が多い県はどこ",
-      "combinedScore": 0.288,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 77
-    },
-    {
-      "topicKey": "gap-hobby-participation-rate-reading",
-      "archetype": "A",
-      "metricKeys": [
-        "hobby-participation-rate-reading"
-      ],
-      "label": "趣味としての読書の行動者率",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5321974471810107,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 175,
-        "gscClicks": 13,
-        "gscPosition": 5.32,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/hobby-participation-rate-reading"
-      },
-      "suggestedTitle": "趣味としての読書の行動者が多い県はどこ",
-      "combinedScore": 0.286,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 78
-    },
-    {
-      "topicKey": "gap-serious-crime-per-100k",
-      "archetype": "A",
-      "metricKeys": [
-        "serious-crime-per-100k"
-      ],
-      "label": "凶悪犯認知件数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5327806210300698,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 176,
-        "gscClicks": 6,
-        "gscPosition": 6.88,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/serious-crime-per-100k"
-      },
-      "suggestedTitle": "凶悪犯認知件が多い県はどこ",
-      "combinedScore": 0.286,
+      "combinedScore": 0.325,
       "lane": "opportunity",
       "status": "pending",
       "priority": 79
     },
     {
-      "topicKey": "gap-sports-participation-rate-bowling",
-      "archetype": "A",
+      "topicKey": "gap-hair-coloring-consumption-expenditure",
+      "archetype": "D2",
       "metricKeys": [
-        "sports-participation-rate-bowling"
+        "hair-coloring-consumption-expenditure"
       ],
-      "label": "ボウリングの行動者率",
+      "label": "ヘアカラーリング剤消費支出額",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5327806210300698,
+        "queryGap": 0.5750225808029131,
         "seasonality": 0,
         "surprise": 0,
-        "competitionGap": 0.5
+        "competitionGap": 0.6
       },
       "evidence": {
-        "gscImp": 176,
-        "gscClicks": 3,
-        "gscPosition": 4.23,
+        "gscImp": 268,
+        "gscClicks": 84,
+        "gscPosition": 2.31,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/sports-participation-rate-bowling"
+        "rankingUrl": "/ranking/hair-coloring-consumption-expenditure"
       },
-      "suggestedTitle": "ボウリングの行動者が多い県はどこ",
-      "combinedScore": 0.286,
+      "suggestedTitle": "ヘアカラーリング剤消費量 日本一はどこ",
+      "combinedScore": 0.321,
       "lane": "opportunity",
       "status": "pending",
       "priority": 80
@@ -2650,263 +2649,263 @@
       "label": "ごみのリサイクル率",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5255545030722553,
+        "queryGap": 0.5772898713122352,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 164,
-        "gscClicks": 3,
-        "gscPosition": 6.9,
+        "gscImp": 274,
+        "gscClicks": 7,
+        "gscPosition": 6.78,
         "seasonLabel": null,
         "rankingUrl": "/ranking/waste-recycling-rate"
       },
       "suggestedTitle": "ごみのリサイクルが多い県はどこ",
-      "combinedScore": 0.284,
+      "combinedScore": 0.302,
       "lane": "opportunity",
       "status": "pending",
       "priority": 81
     },
     {
-      "topicKey": "gap-pumpkin-consumption-quantity",
-      "archetype": "D2",
+      "topicKey": "gap-mothers-age-at-first-birth",
+      "archetype": "A",
       "metricKeys": [
-        "pumpkin-consumption-quantity"
+        "mothers-age-at-first-birth"
       ],
-      "label": "かぼちゃ消費量",
+      "label": "第1子出生時の母の平均年齢",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.46430235859239855,
+        "queryGap": 0.5742555647919003,
         "seasonality": 0,
         "surprise": 0,
-        "competitionGap": 0.6
+        "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 90,
-        "gscClicks": 8,
-        "gscPosition": 5.34,
+        "gscImp": 266,
+        "gscClicks": 9,
+        "gscPosition": 5.68,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/pumpkin-consumption-quantity"
+        "rankingUrl": "/ranking/mothers-age-at-first-birth"
       },
-      "suggestedTitle": "かぼちゃ消費量 日本一はどこ",
-      "combinedScore": 0.283,
+      "suggestedTitle": "第1子出生時の母の平均年齢が多い県はどこ",
+      "combinedScore": 0.301,
       "lane": "opportunity",
       "status": "pending",
       "priority": 82
     },
     {
-      "topicKey": "gap-fishery-species-catch-sea-bream",
+      "topicKey": "gap-tertiary-industry-establishment-ratio-census",
       "archetype": "A",
       "metricKeys": [
-        "fishery-species-catch-sea-bream"
+        "tertiary-industry-establishment-ratio-census"
       ],
-      "label": "タイ類漁獲量",
+      "label": "第3次産業事業所数構成比",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5236658278986049,
+        "queryGap": 0.5730942002489979,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 161,
-        "gscClicks": 1,
-        "gscPosition": 7.45,
+        "gscImp": 263,
+        "gscClicks": 4,
+        "gscPosition": 8.3,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/fishery-species-catch-sea-bream"
+        "rankingUrl": "/ranking/tertiary-industry-establishment-ratio-census"
       },
-      "suggestedTitle": "タイ類漁獲量が多い県はどこ",
-      "combinedScore": 0.283,
+      "suggestedTitle": "第3次産業事業所数構成比が多い県はどこ",
+      "combinedScore": 0.301,
       "lane": "opportunity",
       "status": "pending",
       "priority": 83
     },
     {
-      "topicKey": "gap-fishery-species-catch-snow-crab",
+      "topicKey": "gap-theft-offenses-recognized",
       "archetype": "A",
       "metricKeys": [
-        "fishery-species-catch-snow-crab"
+        "theft-offenses-recognized"
       ],
-      "label": "ズワイガニ漁獲量",
+      "label": "窃盗犯認知件数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5197812193730743,
+        "queryGap": 0.5699314993728354,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 155,
-        "gscClicks": 7,
-        "gscPosition": 6.83,
+        "gscImp": 255,
+        "gscClicks": 12,
+        "gscPosition": 6.2,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/fishery-species-catch-snow-crab"
+        "rankingUrl": "/ranking/theft-offenses-recognized"
       },
-      "suggestedTitle": "ズワイガニ漁獲量が多い県はどこ",
-      "combinedScore": 0.282,
+      "suggestedTitle": "窃盗犯認知件が多い県はどこ",
+      "combinedScore": 0.299,
       "lane": "opportunity",
       "status": "pending",
       "priority": 84
     },
     {
-      "topicKey": "gap-specific-health-guidance-completion-rate",
+      "topicKey": "gap-prefecture-designated-cultural-property-count",
       "archetype": "A",
       "metricKeys": [
-        "specific-health-guidance-completion-rate"
+        "prefecture-designated-cultural-property-count"
       ],
-      "label": "特定保健指導実施率",
+      "label": "都道府県指定等文化財件数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5157442349366412,
+        "queryGap": 0.5691253801936088,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 149,
-        "gscClicks": 15,
-        "gscPosition": 8.29,
+        "gscImp": 253,
+        "gscClicks": 3,
+        "gscPosition": 8.98,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/specific-health-guidance-completion-rate"
+        "rankingUrl": "/ranking/prefecture-designated-cultural-property-count"
       },
-      "suggestedTitle": "特定保健指導実施が多い県はどこ",
-      "combinedScore": 0.281,
+      "suggestedTitle": "都道府県指定等文化財件が多い県はどこ",
+      "combinedScore": 0.299,
       "lane": "opportunity",
       "status": "pending",
       "priority": 85
     },
     {
-      "topicKey": "gap-stillbirths-after-22-weeks",
+      "topicKey": "gap-specialized-school-students",
       "archetype": "A",
       "metricKeys": [
-        "stillbirths-after-22-weeks"
+        "specialized-school-students"
       ],
-      "label": "死産数",
+      "label": "専修学校生徒数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.5177825175625265,
+        "queryGap": 0.5649971277411682,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 152,
-        "gscClicks": 11,
-        "gscPosition": 3.05,
+        "gscImp": 243,
+        "gscClicks": 8,
+        "gscPosition": 7.12,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/stillbirths-after-22-weeks"
+        "rankingUrl": "/ranking/specialized-school-students"
       },
-      "suggestedTitle": "死産が多い県はどこ",
-      "combinedScore": 0.281,
+      "suggestedTitle": "専修学校生徒が多い県はどこ",
+      "combinedScore": 0.298,
       "lane": "opportunity",
       "status": "pending",
       "priority": 86
     },
     {
-      "topicKey": "gap-voter-turnout-governor",
-      "archetype": "A",
-      "metricKeys": [
-        "voter-turnout-governor"
-      ],
-      "label": "都道府県知事選挙投票率",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5150557379948668,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 148,
-        "gscClicks": 10,
-        "gscPosition": 5.62,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/voter-turnout-governor"
-      },
-      "suggestedTitle": "都道府県知事選挙投票が多い県はどこ",
-      "combinedScore": 0.28,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 87
-    },
-    {
-      "topicKey": "gap-employed-people-ratio-tertiary",
-      "archetype": "A",
-      "metricKeys": [
-        "employed-people-ratio-tertiary"
-      ],
-      "label": "第3次産業就業者比率",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5101028281408517,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 141,
-        "gscClicks": 6,
-        "gscPosition": 6.99,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/employed-people-ratio-tertiary"
-      },
-      "suggestedTitle": "第3次産業就業者が多い県はどこ",
-      "combinedScore": 0.279,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 88
-    },
-    {
-      "topicKey": "gap-insecticide-consumption-expenditure",
+      "topicKey": "gap-consumption-expenditure-total",
       "archetype": "D2",
       "metricKeys": [
-        "insecticide-consumption-expenditure"
+        "consumption-expenditure-total"
       ],
-      "label": "殺虫・防虫剤消費支出額",
+      "label": "消費支出総額",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.42143051327209,
+        "queryGap": 0.5086319008902499,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.6
       },
       "evidence": {
-        "gscImp": 59,
-        "gscClicks": 0,
-        "gscPosition": 3.47,
+        "gscImp": 140,
+        "gscClicks": 6,
+        "gscPosition": 4.94,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/insecticide-consumption-expenditure"
+        "rankingUrl": "/ranking/consumption-expenditure-total"
       },
-      "suggestedTitle": "殺虫消費量 日本一はどこ",
+      "suggestedTitle": "消費支出総消費量 日本一はどこ",
+      "combinedScore": 0.298,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 87
+    },
+    {
+      "topicKey": "gap-umbrella-consumption-quantity",
+      "archetype": "D2",
+      "metricKeys": [
+        "umbrella-consumption-quantity"
+      ],
+      "label": "傘購入数量",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.4578163383767716,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.6
+      },
+      "evidence": {
+        "gscImp": 85,
+        "gscClicks": 5,
+        "gscPosition": 5.04,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/umbrella-consumption-quantity"
+      },
+      "suggestedTitle": "傘購入数消費量 日本一はどこ",
+      "combinedScore": 0.28,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 88
+    },
+    {
+      "topicKey": "gap-household-survey-consumption-expenditure",
+      "archetype": "D2",
+      "metricKeys": [
+        "household-survey-consumption-expenditure"
+      ],
+      "label": "全国家計構造調査の消費支出",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.42251425289795924,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.6
+      },
+      "evidence": {
+        "gscImp": 60,
+        "gscClicks": 4,
+        "gscPosition": 5.8,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/household-survey-consumption-expenditure"
+      },
+      "suggestedTitle": "全国家計構造調査の消費支出消費量 日本一はどこ",
       "combinedScore": 0.268,
       "lane": "opportunity",
       "status": "pending",
       "priority": 89
     },
     {
-      "topicKey": "gap-pear-consumption-quantity",
+      "topicKey": "gap-hat-consumption-quantity",
       "archetype": "D2",
       "metricKeys": [
-        "pear-consumption-quantity"
+        "hat-consumption-quantity"
       ],
-      "label": "梨消費量",
+      "label": "帽子購入数量",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.4067011564559583,
+        "queryGap": 0.411872376242852,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 0.6
       },
       "evidence": {
-        "gscImp": 51,
-        "gscClicks": 7,
-        "gscPosition": 3.84,
+        "gscImp": 54,
+        "gscClicks": 4,
+        "gscPosition": 4.83,
         "seasonLabel": null,
-        "rankingUrl": "/ranking/pear-consumption-quantity"
+        "rankingUrl": "/ranking/hat-consumption-quantity"
       },
-      "suggestedTitle": "梨消費量消費量 日本一はどこ",
-      "combinedScore": 0.262,
+      "suggestedTitle": "帽子消費量 日本一はどこ",
+      "combinedScore": 0.264,
       "lane": "opportunity",
       "status": "pending",
       "priority": 90
@@ -4958,1400 +4957,6 @@
       "in_progress_at": "2026-08-29",
       "done_at": "2026-08-29",
       "published_slug": "sex-ratio-total-prefecture-gap"
-    },
-    {
-      "topicKey": "kakei-milk-consumption-quantity",
-      "archetype": "D2",
-      "metricKeys": [
-        "milk-consumption-quantity"
-      ],
-      "label": "牛乳消費量",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/milk-consumption-quantity"
-      },
-      "suggestedTitle": "牛乳消費量",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 100
-    },
-    {
-      "topicKey": "kakei-drinking-out-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "drinking-out-consumption-expenditure"
-      ],
-      "label": "飲酒代消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/drinking-out-consumption-expenditure"
-      },
-      "suggestedTitle": "飲酒代消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 99
-    },
-    {
-      "topicKey": "kakei-microwave-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "microwave-consumption-expenditure"
-      ],
-      "label": "電子レンジ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/microwave-consumption-expenditure"
-      },
-      "suggestedTitle": "電子レンジ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 98
-    },
-    {
-      "topicKey": "kakei-kiwi-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "kiwi-consumption-expenditure"
-      ],
-      "label": "キウイフルーツ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/kiwi-consumption-expenditure"
-      },
-      "suggestedTitle": "キウイフルーツ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 97
-    },
-    {
-      "topicKey": "kakei-other-mushroom-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "other-mushroom-consumption-expenditure"
-      ],
-      "label": "他のきのこ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/other-mushroom-consumption-expenditure"
-      },
-      "suggestedTitle": "他のきのこ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 96
-    },
-    {
-      "topicKey": "kakei-pumpkin-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "pumpkin-consumption-expenditure"
-      ],
-      "label": "かぼちゃ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/pumpkin-consumption-expenditure"
-      },
-      "suggestedTitle": "かぼちゃ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 95
-    },
-    {
-      "topicKey": "kakei-insecticide-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "insecticide-consumption-expenditure"
-      ],
-      "label": "殺虫・防虫剤消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/insecticide-consumption-expenditure"
-      },
-      "suggestedTitle": "殺虫・防虫剤消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 94
-    },
-    {
-      "topicKey": "kakei-transport-communication-expenditure-total",
-      "archetype": "D",
-      "metricKeys": [
-        "transport-communication-expenditure-total"
-      ],
-      "label": "交通・通信費",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/transport-communication-expenditure-total"
-      },
-      "suggestedTitle": "交通・通信費",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 93
-    },
-    {
-      "topicKey": "kakei-bento-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "bento-consumption-expenditure"
-      ],
-      "label": "弁当消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/bento-consumption-expenditure"
-      },
-      "suggestedTitle": "弁当消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 92
-    },
-    {
-      "topicKey": "kakei-camera-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "camera-consumption-expenditure"
-      ],
-      "label": "カメラ・ビデオカメラ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/camera-consumption-expenditure"
-      },
-      "suggestedTitle": "カメラ・ビデオカメラ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 91
-    },
-    {
-      "topicKey": "kakei-education-expenditure-total",
-      "archetype": "D",
-      "metricKeys": [
-        "education-expenditure-total"
-      ],
-      "label": "教育費",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/education-expenditure-total"
-      },
-      "suggestedTitle": "教育費",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 90
-    },
-    {
-      "topicKey": "kakei-other-mens-shirt-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "other-mens-shirt-consumption-expenditure"
-      ],
-      "label": "他の男子用シャツ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/other-mens-shirt-consumption-expenditure"
-      },
-      "suggestedTitle": "他の男子用シャツ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 89
-    },
-    {
-      "topicKey": "kakei-shampoo-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "shampoo-consumption-expenditure"
-      ],
-      "label": "シャンプー消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/shampoo-consumption-expenditure"
-      },
-      "suggestedTitle": "シャンプー消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 88
-    },
-    {
-      "topicKey": "kakei-books-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "books-consumption-expenditure"
-      ],
-      "label": "書籍消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/books-consumption-expenditure"
-      },
-      "suggestedTitle": "書籍消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 87
-    },
-    {
-      "topicKey": "kakei-cosmetic-cream-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "cosmetic-cream-consumption-expenditure"
-      ],
-      "label": "化粧クリーム消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/cosmetic-cream-consumption-expenditure"
-      },
-      "suggestedTitle": "化粧クリーム消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 86
-    },
-    {
-      "topicKey": "kakei-pickled-chinese-cabbage-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "pickled-chinese-cabbage-consumption-expenditure"
-      ],
-      "label": "はくさい漬消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/pickled-chinese-cabbage-consumption-expenditure"
-      },
-      "suggestedTitle": "はくさい漬消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 85
-    },
-    {
-      "topicKey": "kakei-utilities-expenditure-total",
-      "archetype": "D",
-      "metricKeys": [
-        "utilities-expenditure-total"
-      ],
-      "label": "光熱・水道費",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/utilities-expenditure-total"
-      },
-      "suggestedTitle": "光熱・水道費",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 84
-    },
-    {
-      "topicKey": "kakei-dried-mackerel-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "dried-mackerel-consumption-expenditure"
-      ],
-      "label": "干しあじ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/dried-mackerel-consumption-expenditure"
-      },
-      "suggestedTitle": "干しあじ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 83
-    },
-    {
-      "topicKey": "kakei-adult-sneakers-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "adult-sneakers-consumption-expenditure"
-      ],
-      "label": "大人用運動靴消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/adult-sneakers-consumption-expenditure"
-      },
-      "suggestedTitle": "大人用運動靴消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 82
-    },
-    {
-      "topicKey": "kakei-sports-drink-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "sports-drink-consumption-expenditure"
-      ],
-      "label": "スポーツドリンク消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/sports-drink-consumption-expenditure"
-      },
-      "suggestedTitle": "スポーツドリンク消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 81
-    },
-    {
-      "topicKey": "kakei-dress-shirt-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "dress-shirt-consumption-expenditure"
-      ],
-      "label": "ワイシャツ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/dress-shirt-consumption-expenditure"
-      },
-      "suggestedTitle": "ワイシャツ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 80
-    },
-    {
-      "topicKey": "kakei-jam-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "jam-consumption-expenditure"
-      ],
-      "label": "ジャム消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/jam-consumption-expenditure"
-      },
-      "suggestedTitle": "ジャム消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 79
-    },
-    {
-      "topicKey": "kakei-adult-sandals-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "adult-sandals-consumption-expenditure"
-      ],
-      "label": "大人用サンダル消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/adult-sandals-consumption-expenditure"
-      },
-      "suggestedTitle": "大人用サンダル消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 78
-    },
-    {
-      "topicKey": "kakei-fruit-vegetable-juice-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "fruit-vegetable-juice-consumption-expenditure"
-      ],
-      "label": "果実・野菜ジュース消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/fruit-vegetable-juice-consumption-expenditure"
-      },
-      "suggestedTitle": "果実・野菜ジュース消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 77
-    },
-    {
-      "topicKey": "kakei-other-noodle-dining-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "other-noodle-dining-consumption-expenditure"
-      ],
-      "label": "他の麺類外食消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/other-noodle-dining-consumption-expenditure"
-      },
-      "suggestedTitle": "他の麺類外食消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 76
-    },
-    {
-      "topicKey": "kakei-furniture-household-expenditure-total",
-      "archetype": "D",
-      "metricKeys": [
-        "furniture-household-expenditure-total"
-      ],
-      "label": "家具・家事用品費",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/furniture-household-expenditure-total"
-      },
-      "suggestedTitle": "家具・家事用品費",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 75
-    },
-    {
-      "topicKey": "kakei-childrens-socks-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "childrens-socks-consumption-expenditure"
-      ],
-      "label": "子供用靴下消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/childrens-socks-consumption-expenditure"
-      },
-      "suggestedTitle": "子供用靴下消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 74
-    },
-    {
-      "topicKey": "kakei-bed-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "bed-consumption-expenditure"
-      ],
-      "label": "ベッド消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/bed-consumption-expenditure"
-      },
-      "suggestedTitle": "ベッド消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 73
-    },
-    {
-      "topicKey": "kakei-company-housing-rent-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "company-housing-rent-consumption-expenditure"
-      ],
-      "label": "給与住宅家賃消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/company-housing-rent-consumption-expenditure"
-      },
-      "suggestedTitle": "給与住宅家賃消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 72
-    },
-    {
-      "topicKey": "kakei-cutlet-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "cutlet-consumption-expenditure"
-      ],
-      "label": "カツレツ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/cutlet-consumption-expenditure"
-      },
-      "suggestedTitle": "カツレツ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 71
-    },
-    {
-      "topicKey": "kakei-laundry-detergent-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "laundry-detergent-consumption-expenditure"
-      ],
-      "label": "洗濯用洗剤消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/laundry-detergent-consumption-expenditure"
-      },
-      "suggestedTitle": "洗濯用洗剤消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 70
-    },
-    {
-      "topicKey": "kakei-pet-supplies-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "pet-supplies-consumption-expenditure"
-      ],
-      "label": "ペット・他のペット用品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/pet-supplies-consumption-expenditure"
-      },
-      "suggestedTitle": "ペット・他のペット用品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 69
-    },
-    {
-      "topicKey": "kakei-pots-kettles-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "pots-kettles-consumption-expenditure"
-      ],
-      "label": "鍋・やかん消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/pots-kettles-consumption-expenditure"
-      },
-      "suggestedTitle": "鍋・やかん消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 68
-    },
-    {
-      "topicKey": "kakei-tea-drink-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "tea-drink-consumption-expenditure"
-      ],
-      "label": "茶飲料消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/tea-drink-consumption-expenditure"
-      },
-      "suggestedTitle": "茶飲料消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 67
-    },
-    {
-      "topicKey": "kakei-craft-materials-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "craft-materials-consumption-expenditure"
-      ],
-      "label": "手芸・工芸材料消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/craft-materials-consumption-expenditure"
-      },
-      "suggestedTitle": "手芸・工芸材料消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 66
-    },
-    {
-      "topicKey": "kakei-gloves-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "gloves-consumption-expenditure"
-      ],
-      "label": "手袋消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/gloves-consumption-expenditure"
-      },
-      "suggestedTitle": "手袋消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 65
-    },
-    {
-      "topicKey": "kakei-other-toys-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "other-toys-consumption-expenditure"
-      ],
-      "label": "他の玩具消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/other-toys-consumption-expenditure"
-      },
-      "suggestedTitle": "他の玩具消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 64
-    },
-    {
-      "topicKey": "kakei-tatami-replacement-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "tatami-replacement-consumption-expenditure"
-      ],
-      "label": "畳替え消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/tatami-replacement-consumption-expenditure"
-      },
-      "suggestedTitle": "畳替え消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 63
-    },
-    {
-      "topicKey": "kakei-beans-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "beans-consumption-expenditure"
-      ],
-      "label": "豆類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/beans-consumption-expenditure"
-      },
-      "suggestedTitle": "豆類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 62
-    },
-    {
-      "topicKey": "kakei-paper-diapers-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "paper-diapers-consumption-expenditure"
-      ],
-      "label": "紙おむつ消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/paper-diapers-consumption-expenditure"
-      },
-      "suggestedTitle": "紙おむつ消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 61
-    },
-    {
-      "topicKey": "kakei-cereals-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "cereals-group-consumption-expenditure"
-      ],
-      "label": "穀類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/cereals-group-consumption-expenditure"
-      },
-      "suggestedTitle": "穀類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-meat-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "meat-group-consumption-expenditure"
-      ],
-      "label": "肉類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/meat-group-consumption-expenditure"
-      },
-      "suggestedTitle": "肉類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-dairy-eggs-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "dairy-eggs-group-consumption-expenditure"
-      ],
-      "label": "乳卵類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/dairy-eggs-group-consumption-expenditure"
-      },
-      "suggestedTitle": "乳卵類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-vegetables-seaweed-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "vegetables-seaweed-group-consumption-expenditure"
-      ],
-      "label": "野菜・海藻消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/vegetables-seaweed-group-consumption-expenditure"
-      },
-      "suggestedTitle": "野菜・海藻消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-fruits-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "fruits-group-consumption-expenditure"
-      ],
-      "label": "果物消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/fruits-group-consumption-expenditure"
-      },
-      "suggestedTitle": "果物消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-oils-seasonings-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "oils-seasonings-group-consumption-expenditure"
-      ],
-      "label": "油脂・調味料消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/oils-seasonings-group-consumption-expenditure"
-      },
-      "suggestedTitle": "油脂・調味料消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-prepared-foods-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "prepared-foods-group-consumption-expenditure"
-      ],
-      "label": "調理食品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/prepared-foods-group-consumption-expenditure"
-      },
-      "suggestedTitle": "調理食品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-beverages-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "beverages-group-consumption-expenditure"
-      ],
-      "label": "飲料消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/beverages-group-consumption-expenditure"
-      },
-      "suggestedTitle": "飲料消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-alcoholic-beverages-group-consumption-expenditure",
-      "archetype": "D2",
-      "metricKeys": [
-        "alcoholic-beverages-group-consumption-expenditure"
-      ],
-      "label": "酒類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/alcoholic-beverages-group-consumption-expenditure"
-      },
-      "suggestedTitle": "酒類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-rent-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "rent-group-consumption-expenditure"
-      ],
-      "label": "家賃地代消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/rent-group-consumption-expenditure"
-      },
-      "suggestedTitle": "家賃地代消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-housing-repairs-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "housing-repairs-group-consumption-expenditure"
-      ],
-      "label": "設備修繕・維持消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/housing-repairs-group-consumption-expenditure"
-      },
-      "suggestedTitle": "設備修繕・維持消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-other-fuel-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "other-fuel-group-consumption-expenditure"
-      ],
-      "label": "他の光熱消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/other-fuel-group-consumption-expenditure"
-      },
-      "suggestedTitle": "他の光熱消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-household-durables-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "household-durables-group-consumption-expenditure"
-      ],
-      "label": "家庭用耐久財消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/household-durables-group-consumption-expenditure"
-      },
-      "suggestedTitle": "家庭用耐久財消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-interior-furnishings-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "interior-furnishings-group-consumption-expenditure"
-      ],
-      "label": "室内装備・装飾品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/interior-furnishings-group-consumption-expenditure"
-      },
-      "suggestedTitle": "室内装備・装飾品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-bedding-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "bedding-group-consumption-expenditure"
-      ],
-      "label": "寝具類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/bedding-group-consumption-expenditure"
-      },
-      "suggestedTitle": "寝具類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-household-utensils-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "household-utensils-group-consumption-expenditure"
-      ],
-      "label": "家事雑貨消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/household-utensils-group-consumption-expenditure"
-      },
-      "suggestedTitle": "家事雑貨消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-household-consumables-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "household-consumables-group-consumption-expenditure"
-      ],
-      "label": "家事用消耗品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/household-consumables-group-consumption-expenditure"
-      },
-      "suggestedTitle": "家事用消耗品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-domestic-services-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "domestic-services-group-consumption-expenditure"
-      ],
-      "label": "家事サービス消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/domestic-services-group-consumption-expenditure"
-      },
-      "suggestedTitle": "家事サービス消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-japanese-clothing-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "japanese-clothing-group-consumption-expenditure"
-      ],
-      "label": "和服消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/japanese-clothing-group-consumption-expenditure"
-      },
-      "suggestedTitle": "和服消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-western-clothing-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "western-clothing-group-consumption-expenditure"
-      ],
-      "label": "洋服消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/western-clothing-group-consumption-expenditure"
-      },
-      "suggestedTitle": "洋服消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-shirts-sweaters-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "shirts-sweaters-group-consumption-expenditure"
-      ],
-      "label": "シャツ・セーター類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/shirts-sweaters-group-consumption-expenditure"
-      },
-      "suggestedTitle": "シャツ・セーター類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-underwear-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "underwear-group-consumption-expenditure"
-      ],
-      "label": "下着類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/underwear-group-consumption-expenditure"
-      },
-      "suggestedTitle": "下着類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-fabrics-yarn-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "fabrics-yarn-group-consumption-expenditure"
-      ],
-      "label": "生地・糸類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/fabrics-yarn-group-consumption-expenditure"
-      },
-      "suggestedTitle": "生地・糸類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-other-clothing-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "other-clothing-group-consumption-expenditure"
-      ],
-      "label": "他の被服消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/other-clothing-group-consumption-expenditure"
-      },
-      "suggestedTitle": "他の被服消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-footwear-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "footwear-group-consumption-expenditure"
-      ],
-      "label": "履物類消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/footwear-group-consumption-expenditure"
-      },
-      "suggestedTitle": "履物類消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-clothing-services-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "clothing-services-group-consumption-expenditure"
-      ],
-      "label": "被服関連サービス消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/clothing-services-group-consumption-expenditure"
-      },
-      "suggestedTitle": "被服関連サービス消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-medicines-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "medicines-group-consumption-expenditure"
-      ],
-      "label": "医薬品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/medicines-group-consumption-expenditure"
-      },
-      "suggestedTitle": "医薬品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-health-supplements-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "health-supplements-group-consumption-expenditure"
-      ],
-      "label": "健康保持用摂取品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/health-supplements-group-consumption-expenditure"
-      },
-      "suggestedTitle": "健康保持用摂取品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-medical-supplies-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "medical-supplies-group-consumption-expenditure"
-      ],
-      "label": "保健医療用品・器具消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/medical-supplies-group-consumption-expenditure"
-      },
-      "suggestedTitle": "保健医療用品・器具消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-medical-services-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "medical-services-group-consumption-expenditure"
-      ],
-      "label": "保健医療サービス消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/medical-services-group-consumption-expenditure"
-      },
-      "suggestedTitle": "保健医療サービス消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-transportation-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "transportation-group-consumption-expenditure"
-      ],
-      "label": "交通消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/transportation-group-consumption-expenditure"
-      },
-      "suggestedTitle": "交通消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-automobile-related-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "automobile-related-group-consumption-expenditure"
-      ],
-      "label": "自動車等関係費消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/automobile-related-group-consumption-expenditure"
-      },
-      "suggestedTitle": "自動車等関係費消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-communication-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "communication-group-consumption-expenditure"
-      ],
-      "label": "通信消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/communication-group-consumption-expenditure"
-      },
-      "suggestedTitle": "通信消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-supplementary-education-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "supplementary-education-group-consumption-expenditure"
-      ],
-      "label": "補習教育消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/supplementary-education-group-consumption-expenditure"
-      },
-      "suggestedTitle": "補習教育消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-recreational-durables-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "recreational-durables-group-consumption-expenditure"
-      ],
-      "label": "教養娯楽用耐久財消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/recreational-durables-group-consumption-expenditure"
-      },
-      "suggestedTitle": "教養娯楽用耐久財消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-recreational-goods-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "recreational-goods-group-consumption-expenditure"
-      ],
-      "label": "教養娯楽用品消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/recreational-goods-group-consumption-expenditure"
-      },
-      "suggestedTitle": "教養娯楽用品消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-books-printed-matter-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "books-printed-matter-group-consumption-expenditure"
-      ],
-      "label": "書籍・他の印刷物消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/books-printed-matter-group-consumption-expenditure"
-      },
-      "suggestedTitle": "書籍・他の印刷物消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-recreational-services-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "recreational-services-group-consumption-expenditure"
-      ],
-      "label": "教養娯楽サービス消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/recreational-services-group-consumption-expenditure"
-      },
-      "suggestedTitle": "教養娯楽サービス消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-miscellaneous-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "miscellaneous-group-consumption-expenditure"
-      ],
-      "label": "諸雑費消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/miscellaneous-group-consumption-expenditure"
-      },
-      "suggestedTitle": "諸雑費消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-pocket-money-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "pocket-money-group-consumption-expenditure"
-      ],
-      "label": "こづかい(使途不明)消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/pocket-money-group-consumption-expenditure"
-      },
-      "suggestedTitle": "こづかい(使途不明)消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-social-expenses-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "social-expenses-group-consumption-expenditure"
-      ],
-      "label": "交際費消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/social-expenses-group-consumption-expenditure"
-      },
-      "suggestedTitle": "交際費消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
-    },
-    {
-      "topicKey": "kakei-remittances-group-consumption-expenditure",
-      "archetype": "D",
-      "metricKeys": [
-        "remittances-group-consumption-expenditure"
-      ],
-      "label": "仕送り金消費支出額",
-      "source": "kakei-rollout",
-      "evidence": {
-        "rankingUrl": "/ranking/remittances-group-consumption-expenditure"
-      },
-      "suggestedTitle": "仕送り金消費支出額",
-      "combinedScore": 0,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
     }
   ]
 }

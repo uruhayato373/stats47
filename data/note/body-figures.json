@@ -1,17 +1,16 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "articles": 429,
-    "figures": 1313,
+    "articles": 439,
+    "figures": 1332,
     "byValueCheck": {
-      "no-data-figure": 251,
+      "no-data-figure": 261,
       "unmapped": 1,
       "match": 39,
-      "body-match": 116,
-      "body-differs": 3,
+      "body-match": 117,
+      "body-differs": 4,
       "no-year": 1,
-      "product-sample": 16,
-      "year-gone": 2
+      "product-sample": 16
     }
   },
   "articles": [
@@ -3280,6 +3279,172 @@
         },
         {
           "file": "https://assets.st-note.com/img/1789517429-vRGYz2ox5wSCjZ1DThAdpXib.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-clothing",
+      "noteUrl": "https://note.com/stats47/n/n233c24eee1e4",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-education",
+      "noteUrl": "https://note.com/stats47/n/n048102731761",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-3.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-food",
+      "noteUrl": "https://note.com/stats47/n/n1c3f57ef31da",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-furniture",
+      "noteUrl": "https://note.com/stats47/n/na17bb46da162",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-health",
+      "noteUrl": "https://note.com/stats47/n/n611c1b73fb3f",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-housing",
+      "noteUrl": "https://note.com/stats47/n/n8f82dbdbce9d",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-other",
+      "noteUrl": "https://note.com/stats47/n/n966ddd9d83bb",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-recreation",
+      "noteUrl": "https://note.com/stats47/n/nb48d1909a2ea",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-transport",
+      "noteUrl": "https://note.com/stats47/n/n952c8fdd32a6",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
+          "kind": "diagram"
+        }
+      ],
+      "valueCheck": "no-data-figure"
+    },
+    {
+      "key": "b-kakei-expense-utilities",
+      "noteUrl": "https://note.com/stats47/n/na2be61f32e15",
+      "isPaid": false,
+      "store": "r2-public",
+      "figures": [
+        {
+          "file": "images/table-1.png",
+          "kind": "diagram"
+        },
+        {
+          "file": "images/table-2.png",
           "kind": "diagram"
         }
       ],
@@ -7326,7 +7491,7 @@
           "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "year-gone"
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-n46a8eb03072b",
@@ -9367,7 +9532,11 @@
           "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "year-gone"
+      "valueCheck": "body-differs",
+      "bodyIssues": 1,
+      "bodyIssueSample": [
+        "TITLE_EXTREME_MISMATCH: 題名「青森…最下位」 → data の最下位は 東京・三重・大分"
+      ]
     },
     {
       "key": "sunshine-solar-housing",

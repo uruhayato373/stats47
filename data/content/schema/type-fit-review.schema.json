@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "型に合っていない記事の洗い出し",
+  "type": "object",
+  "required": ["version", "observedAt", "gscWeeks", "dataNote", "articlesRead", "articlesUnobserved", "items", "decisions"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": 1 },
+    "observedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "gscWeeks": { "type": "array", "items": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" } },
+    "dataNote": { "type": "string", "minLength": 1 },
+    "articlesRead": { "type": "integer", "minimum": 0 },
+    "articlesUnobserved": { "type": "integer", "minimum": 0 },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "type", "proposal", "signals", "clicks", "impressions"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^blog:.+$" },
+          "title": { "type": "string" },
+          "type": { "type": "string", "pattern": "^type:[a-z]+$" },
+          "proposal": { "enum": ["rewrite", "merge", "retire"] },
+          "signals": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "mergeWith": { "type": "string", "pattern": "^blog:.+$" },
+          "clicks": { "type": "integer", "minimum": 0 },
+          "impressions": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "action", "decidedAt", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^blog:.+$" },
+          "action": { "enum": ["keep", "rewrite", "merge", "retire"] },
+          "decidedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

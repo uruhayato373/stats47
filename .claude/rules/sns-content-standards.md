@@ -227,22 +227,19 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 | 金 | 県どうしの比較 | `CompareInstagram-Carousel` |
 | 日 | 地図カード / テーマ (交互) | buzz-map / テーマ |
 
-- リールは週 1 本 (§2-4)。クイズのリールと年次推移 (バーチャートレース) を隔週で交互に出す
+- リールは週 1 本 (§2-4)。ランキングのリールと年次推移 (バーチャートレース) を出す
 - すべての項目に出典と年を載せる。家計調査は「県庁所在市の値」と明記する
 - **判定 (2026-10-25)**: 4 週間の切り口別の保存数・リーチを `/update-sns-metrics` で比べる。
   カルーセル全体のリーチ中央値が単枚画像期の 58 を超えなければ、本数を週 3 本へ戻す
 
-### 2-4. Instagram リール
+### 2-4. 動画は 2 種類だけ (2026-11-06 オーナー決定)
+
+作る動画は**ランキングのショート** (`RankingYouTube-Short`・`RankingInstagram-Reel`) と**バーチャートレース** (`BarChartRace-YouTubeShort`・`BarChartRace-InstagramReel`) だけにする。
+実績 (`data/sns/metric-snapshots/` の投稿ごとの最新値): YouTube ショート 63 本の再生数の中央値 663、バーチャートレース 2 本の中央値 1,440。
+予想クイズのリール、バズ地図の動画、人の移動と駅の動画は撤去した。予想クイズのカルーセル (§2-3b) とバズ地図の静止画は残す。動画を増やすときは、実績を示してから決める。
 
 - **15 字以内のフック**を冒頭に (予測 → 答え合わせ型)。例:「1 位は意外なあの県」
 - 数字対比 × 意外性で 3-5 秒以内に引く。完視聴・保存を狙う
-- **予想クイズ型リールは YouTube pilot から独立して週 1 本出してよい (2026-09-23 オーナー判断)**。
-  pilot が動画 0 本のまま止まり、IG のリールも 0 本になっていたため。§0 の「リールは通常動画から切り出す」は
-  pilot の切り出し分にだけ適用する。生成は Remotion `RankingQuizInstagram-Reel` (1080x1920・無音) で、
-  入力はカルーセルと同じ quiz props (§2-3b)。正解・順位・値はデータから導出し、カルーセルで失敗する spec はリールでも失敗する
-- **配信**: domain は `ranking-quiz-reel` (台帳は domain + content_key で重複判定するため、同じ指標のカルーセル
-  `ranking-quiz` と分ける)。R2 は `sns/ranking-quiz-reel/<rankingKey>/instagram/` に `reel.mp4` と `caption.txt` を置き、
-  schedule JSON に `{"type":"reels","domain":"ranking-quiz-reel","content_key":"<rankingKey>",...}` を足すと IG cron が投稿する
 
 ### 2-5. 6 角度フレーム (共通)
 

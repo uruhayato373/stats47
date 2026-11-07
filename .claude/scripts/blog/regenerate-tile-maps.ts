@@ -3,7 +3,7 @@
  * regenerate-tile-maps.ts
  *
  * 公開済みブログ記事のタイルマップ(choropleth)を現行デザインで一括再生成するオーケストレータ。
- * デザインの正典は svg-builder の `generateChoroplethSvg` (本スクリプトは寸法や配色を持たない)。
+ * 見た目の正典はタイル地図の型 (apps/admin/lib/template-ranking-tile-map.ts)。本スクリプトは寸法や配色を持たない。
  * 不変量は `lintTileGridQuality` が公開前にブロックする → `.claude/rules/blog-svg-chart-standards.md` §6-2。
  *
  * ## データ取得ルール (SSOT・捏造禁止)
@@ -30,7 +30,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { yearLabelOf } from "./lib/ranking-year-label.mjs";
-import { generateChoroplethSvg } from "../../../packages/svg-builder/src/charts/index.ts";
+import { renderTileMapChart } from "../../../apps/admin/lib/template-ranking-tile-map";
+import { rankingChartFromArticleData } from "./lib/type-chart-input";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
 import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
@@ -211,9 +212,6 @@ async function main() {
         results.push({ ...t, error: `SSOT照合 失敗 (最大一致 ${best ? Math.round(best.rate * 100) : 0}% / key ${t.keys.length})` });
         continue;
       }
-      const items = best.values
-        .map((v) => ({ code: codeOf(v.areaName), name: v.areaName.replace(/[都道府県]$/, ""), value: v.value }))
-        .filter((x) => x.code);
       const dir = path.join(STAGE, t.slug, "data");
       fs.mkdirSync(dir, { recursive: true });
       const json = {
@@ -251,15 +249,11 @@ async function main() {
           2,
         ),
       );
-      const newSvg = generateChoroplethSvg(items, {
-        title: best.title,
-        subtitle: best.yearLabel,
-        unit: best.unit,
-        ...(best.colorScheme ? { scheme: best.colorScheme } : {}),
-        ...(best.isReversed ? { reverse: true } : {}),
-      });
+      const chart = rankingChartFromArticleData(json, { prefCodeOf: (name) => codeOf(name) ?? "", prefNameOf: (code) => json.data.find((row) => String(row.areaCode).startsWith(code))?.areaName ?? code });
+      if ("skip" in chart) throw new Error(chart.skip);
+      const newSvg = renderTileMapChart(chart);
       fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
-      results.push({ ...t, oldSvg, newSvg, key: best.key, year: best.year, rate: Math.round(best.rate * 100), n: items.length });
+      results.push({ ...t, oldSvg, newSvg, key: best.key, year: best.year, rate: Math.round(best.rate * 100), n: json.data.length });
     } catch (e) {
       results.push({ ...t, error: String((e as Error)?.message || e).slice(0, 120) });
     }

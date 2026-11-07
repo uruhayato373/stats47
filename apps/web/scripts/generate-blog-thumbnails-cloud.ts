@@ -1,4 +1,6 @@
 #!/usr/bin/env tsx
+import { blogRendererSourcesForBackground, renderBlogImageBundleForBackground } from './lib/blog-fullbleed-render';
+import { hasLocalArticleBackground, resolvePreferredArticleBackgroundSource } from './lib/blog-fullbleed-background';
 /**
  * R2 上の公開記事を入力に、変更された blog image bundle だけを生成する。
  *
@@ -38,7 +40,6 @@ import {
 import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
 import {
   parseBlogArticleImageContext,
-  resolveArticleBackgroundSource,
 } from './lib/blog-article-background';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
@@ -337,7 +338,7 @@ async function main(): Promise<void> {
     Boolean(options.outDir) &&
     Boolean(options.slugs) &&
     options.slugs!.every(
-      (slug) => BLOG_CODEX_BACKGROUND_BY_SLUG[slug] !== undefined
+      (slug) => hasLocalArticleBackground(PROJECT_ROOT, slug) || BLOG_CODEX_BACKGROUND_BY_SLUG[slug] !== undefined
     );
   if (!store && !isCodexPilot) {
     throw new Error(
@@ -410,11 +411,11 @@ async function main(): Promise<void> {
         ? { ogpVisualType: options.visualTypeOverride }
         : {}),
     });
-    const articleSource = await resolveArticleBackgroundSource(
+    const articleSource = await resolvePreferredArticleBackgroundSource(
       PROJECT_ROOT,
       parseBlogArticleImageContext(slug, markdown)
     );
-    const legacyCodexSource = await resolveCodexBackgroundSource(
+    const legacyCodexSource = articleSource ? null : await resolveCodexBackgroundSource(
       PROJECT_ROOT,
       slug
     );
@@ -457,7 +458,7 @@ async function main(): Promise<void> {
           promptHash: background.metadata.promptHash,
           sha256: background.metadata.sha256,
         },
-        rendererHash: baseRendererHash,
+        rendererHash: calculateRendererHash(PROJECT_ROOT, blogRendererSourcesForBackground(ai.promptVersion)),
       });
       const status = await inspector.inspect(plan);
       if (status.reason === 'probe-error') {
@@ -672,7 +673,6 @@ async function main(): Promise<void> {
     : null;
   if (pilotRoot) rmSync(pilotRoot, { recursive: true, force: true });
   const { loadFonts } = await import('./lib/blog-thumbnail-render');
-  const { renderBlogImageBundle } = await import('./lib/blog-image-render');
   const fonts = loadFonts(PROJECT_ROOT);
   const failures: Array<{ slug: string; error: unknown }> = [];
   const generatedManifests = new Map<
@@ -700,7 +700,7 @@ async function main(): Promise<void> {
         store,
         cache: backgroundCache,
       });
-      await renderBlogImageBundle({
+      await renderBlogImageBundleForBackground(item.background.metadata.promptVersion, {
         data: item.data,
         fonts,
         outputs: {

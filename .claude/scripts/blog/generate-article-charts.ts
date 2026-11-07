@@ -39,6 +39,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  classifyChartTypeFromName,
+  imageTemplateOf,
   lintScatterData,
   lintScatterParity,
   lintScatterQuality,
@@ -49,27 +51,25 @@ import {
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import { observedOnly } from '../lib/blog-observed-values.mjs';
 import { buildProvenanceLine } from '../lib/svg-provenance.mjs';
-// Layer 1 共有ライブラリ (SSoT)。CLI 内インライン生成を廃し svg-builder に一本化。
-// tsx 実行のため TS ソースを直接 import する (このスクリプトは tsx で起動する)。
-import {
-  generateBarChartSvg,
-  generateChoroplethSvg,
-  generateLineSvg,
-  generateRadarSvg,
-  generateScatterSvg,
-  generateStackedBarSvg,
-  generateFindingsCardSvg,
-} from '../../../packages/svg-builder/src/charts/index.ts';
+// 統計の図は型 (apps/admin/lib/template-*.ts) だけで描く。svg-builder に残すのは型の台帳に無い要点カードだけ。
+import { generateFindingsCardSvg } from '../../../packages/svg-builder/src/charts/index.ts';
+import { datasetPath } from '../../../config/datasets.mjs';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
-import { metricHueOf, toShortColorScheme } from '../../../packages/types/src/color-scheme';
 // The shared 4:5 image types (bars / tile map), light and dark, same as note・X・Instagram.
-import { renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking-bars';
+import { renderStackedChart } from '../../../apps/admin/lib/template-composition-stacked';
+import { renderGroupedBarsChart } from '../../../apps/admin/lib/template-grouped-bars';
+import { renderRadarChart } from '../../../apps/admin/lib/template-radar';
+import { renderItemBarsChart, renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking-bars';
 import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
+import { renderLineChart } from '../../../apps/admin/lib/template-trend-line';
 import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { matchScatterAxis, metricKeysInSource, prefecturesNamedNear, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from './lib/type-chart-input';
+import { chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, itemBarChartFromArticleData, lineChartFromArticleData, matchScatterAxis, metricKeysInSource, prefecturesNamedNear, radarChartFromArticleData, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf, stackedChartFromArticleData } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
+const TEMPLATE_IDS = new Set(
+  JSON.parse(fs.readFileSync(path.resolve(path.dirname(__filename), '../../..', datasetPath('content.image-templates')), 'utf8')).templates.map((template) => template.id)
+);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 
@@ -107,7 +107,7 @@ const prefNameOf = (v) => {
 const prefCodeOf = (name) => {
   const s = String(name || '').trim();
   if (/^\d{1,5}$/.test(s)) return s.slice(0, 2).padStart(2, '0');
-  return PREF_NAME_TO_CODE.get(s) || '';
+  return PREF_NAME_TO_CODE.get(s) || PREF_NAME_TO_CODE.get(`${s}県`) || PREF_NAME_TO_CODE.get(`${s}府`) || PREF_NAME_TO_CODE.get(`${s}都`) || '';
 };
 
 // ---------- CLI 引数 ----------
@@ -194,6 +194,7 @@ function detectChartTypeFromName(filename) {
   if (filename.endsWith('-prefecture-rankings.json')) return 'bar';
   if (filename.endsWith('-top5-bottom5.json')) return 'bar';
   if (filename.endsWith('-top-bottom.json')) return 'bar';
+  if (filename.endsWith('-quintile.json')) return 'bar';
   if (filename.endsWith('-rate-ranking.json')) return 'bar';
   if (filename.endsWith('-income-ranking.json')) return 'bar';
   if (filename.endsWith('-tile-grid.json')) return 'tile-grid';
@@ -208,264 +209,7 @@ function detectChartTypeFromName(filename) {
   return null;
 }
 
-// ---------- 記事 JSON → svg-builder アダプター ----------
-// 各 gen*Svg 関数は記事の柔軟な JSON 形式を svg-builder の型安全 API に変換して呼ぶ。
-
-/** areaName 候補を探す共通ヘルパー */
-const rawName = (it) => it.pref || it.areaName || it.label || it.name || '';
-const normPref = (s) =>
-  String(s || '')
-    .replace(/[都道府県]$/, '')
-    .replace(/^北海$/, '北海道')
-    .trim();
-
-/**
- * bar chart: [{ pref, value }] / { data, title, subtitle, unit, layout? }
- * → svg-builder generateBarChartSvg (BarItem[] with separator)
- *
- * 件数は標準の「上位5+下位5」に固定（10件は廃止）。データが10件未満のときだけ
- * 重複しない範囲に自動縮小する。
- * layout（または layoutOverride）:
- *   "columns"（デフォルト）= 横長2列カード（ブログ本文 + X 用）
- *   "mobile"              = 縦長スタックカード（ブログ mobile + note 本文用）
- *   "portrait"            = 縦長スタックカード（Instagram 用、4:5）
- *   "single"             = 縦1列+中略
- */
-function genBarChartSvg(
-  data: any,
-  layoutOverride?: 'columns' | 'mobile' | 'portrait' | 'single'
-) {
-  // 値の無い県を 0 として下位に並べない (blog-observed-values.mjs)
-  const items = observedOnly(Array.isArray(data) ? data : data.data || []);
-  if (!items.length) return `<!-- empty data -->`;
-  const title =
-    (Array.isArray(data) ? null : data.title) ?? '都道府県別ランキング';
-  const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
-  const source = (Array.isArray(data) ? null : data.source) ?? undefined;
-  const unit = (Array.isArray(data) ? null : data.unit) ?? '';
-  const palette = (Array.isArray(data) ? null : data.palette) ?? 'red';
-  const rightPalette =
-    (Array.isArray(data) ? null : data.rightPalette) ?? 'blue';
-  // 標準は上位5+下位5 のみ。件数が少ない場合は上下が重複しない範囲に縮小。
-  const N = Math.min(5, Math.floor(items.length / 2) || 1);
-  const layout =
-    layoutOverride ?? (Array.isArray(data) ? null : data.layout) ?? 'columns';
-  const highLabel = (Array.isArray(data) ? null : data.highLabel) ?? '上位';
-  const lowLabel = (Array.isArray(data) ? null : data.lowLabel) ?? '下位';
-  const showBars = (Array.isArray(data) ? null : data.showBars) ?? true;
-  const highlightPref = (Array.isArray(data) ? null : data.highlightPref) ?? undefined;
-  const focusNote = (Array.isArray(data) ? null : data.focusNote) ?? undefined;
-
-  // 記事 JSON の rank は旧 fetcher が連番で作っている場合があるため、
-  // values snapshot の正典と同じ「値降順・同値は同順位」で導出する。
-  // 配色の reverse/isReversed は順位方向ではない。
-  const sorted = [...items]
-    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0))
-    .map((it, _i, all) => ({
-      ...it,
-      rank: all.findIndex((other) => (other.value ?? 0) === (it.value ?? 0)) + 1,
-    }));
-  const top = sorted.slice(0, N);
-  // 下位 N 件: sorted は降順なので slice(-N) は「下位の中で値が大きい順」=
-  // 順位の昇順と一致する。同数を含む場合は 43〜47 位とは限らない。
-  // 抽出後の並びで順位を付け直さず、全件から導出した順位を保持する。
-  const bottom = sorted.slice(-N);
-
-  const barItems = [
-    ...top.map((it) => ({
-      label: `${it.rank}位 ${rawName(it)}`,
-      name: rawName(it),
-      rank: it.rank,
-      value: it.value ?? 0,
-    })),
-    { label: '…', value: 0, isSeparator: true },
-    ...bottom.map((it) => ({
-      label: `${it.rank}位 ${rawName(it)}`,
-      name: rawName(it),
-      rank: it.rank,
-      value: it.value ?? 0,
-    })),
-  ];
-
-  return generateBarChartSvg(barItems, {
-    title,
-    subtitle,
-    source,
-    unit,
-    palette,
-    rightPalette,
-    layout,
-    highLabel,
-    lowLabel,
-    showBars,
-    // 数字コード ('43000') でも名前でも受ける。bar-chart 側が 都/道/府/県 接尾辞を落として照合する。
-    highlightName: highlightPref ? prefNameOf(highlightPref) : undefined,
-    focusNote,
-  });
-}
-
-/**
- * tile-grid map: [{ pref, value }] / { data, title, unit }
- * → svg-builder generateChoroplethSvg (ChoroplethItem[])
- */
-function genTileGridMapSvg(data) {
-  const get = (k) => (Array.isArray(data) ? undefined : data[k]);
-  const items = Array.isArray(data) ? data : data.data || [];
-  if (!items.length) return `<!-- empty data -->`;
-  const title = get('title') ?? '都道府県マップ';
-  const unit = get('unit') ?? '';
-  const highlightPref = get('highlightPref');
-
-  const choroplethItems = items
-    .filter((it) => typeof it.value === 'number' && isFinite(it.value))
-    .map((it) => ({
-      code: prefCodeOf(rawName(it)),
-      name: normPref(rawName(it)),
-      value: it.value,
-    }))
-    .filter((it) => it.code && it.name);
-
-  if (!choroplethItems.length) return `<!-- empty choropleth data -->`;
-  return generateChoroplethSvg(choroplethItems, {
-    title,
-    unit,
-    subtitle: get('subtitle'),
-    // D3 カラースキーム名 (例 "Blues" / "Viridis" / "RdYlGn")。未指定時は既定 Reds。
-    scheme: get('scheme') ?? get('colorScheme'),
-    reverse: get('reverse'),
-    showValue: get('showValue'),
-    colorMin: get('colorMin'),
-    colorMax: get('colorMax'),
-    legendLabels: get('legendLabels'),
-    highlightCode: highlightPref ? prefCodeOf(highlightPref) : undefined,
-  });
-}
-
-/**
- * line chart: { title, unit, series:[{label,data:[{year,value}]}] }
- *           / { title, unit, data:[{year,value}], label? }
- * → svg-builder generateLineSvg (StatsSchema[])
- * 系列が複数あれば seriesKey="areaCode"、単系列は areaCode を仮置き。
- */
-function genLineChartSvg(data) {
-  const title = (Array.isArray(data) ? null : data.title) ?? '推移';
-  const unit = (Array.isArray(data) ? null : data.unit) ?? '';
-  const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
-
-  let series = data.series;
-  // 指標コードをキーにした取得結果の控え ({series: {A4101: {...}, ...}}) は図の入力ではない。
-  // 単位の違う指標を 1 枚に重ねることになるので描かずに飛ばす (2026-10-06 birth-death で CI が停止)
-  if (series != null && !Array.isArray(series)) return null;
-  if (!series && Array.isArray(data.data))
-    series = [{ label: data.label || '値', data: data.data }];
-  if (!series && Array.isArray(data)) series = [{ label: '値', data }];
-  series = (series || []).filter((s) => Array.isArray(s.data) && s.data.length);
-  if (!series.length) return `<!-- empty line data -->`;
-
-  // StatsSchema[] に変換: areaCode = series インデックス (仮), yearCode = 年
-  const statsData = series.flatMap((s, si) =>
-    s.data.map((pt) => ({
-      metricKey: 'value',
-      areaCode: String(si + 1).padStart(2, '0'),
-      areaName: s.label || `系列${si + 1}`,
-      yearCode: String(pt.year ?? pt.x ?? ''),
-      yearName: String(pt.year ?? pt.x ?? ''),
-      value:
-        typeof pt.value === 'number'
-          ? pt.value
-          : typeof pt.y === 'number'
-            ? pt.y
-            : null,
-      unit,
-    }))
-  );
-
-  return generateLineSvg(statsData, {
-    title,
-    subtitle,
-    unit,
-    xKey: 'yearCode',
-    seriesKey: 'areaCode',
-    yLabel: data.yLabel ?? (unit ? `${title}（${unit}）` : title),
-    legendPosition: series.length > 1 ? 'bottom' : 'bottom',
-  });
-}
-
-/**
- * stacked-bar: { title, subtitle?, unit?, normalized?, horizontal?, series:[{label, data:[{year, value}]}] }
- * → svg-builder generateStackedBarSvg。series = 積み上げる区分、data[].year = 棒 (グループ)。
- * line と同じ series 形式なので、時系列の内訳をそのまま渡せる。
- * 任意の referenceLine: { value, label } で比べる基準の線 (例: 全国平均) を引く。
- * layout "mobile" はブログのスマホ本文・note 本文用 (640 幅・最小 20px)。
- */
-function genStackedBarSvg(data, layout: 'default' | 'mobile' = 'default') {
-  const series = (data.series || []).filter(
-    (s) => Array.isArray(s.data) && s.data.length
-  );
-  if (!series.length) return `<!-- empty stacked data -->`;
-  const unit = data.unit ?? '';
-  const statsData = series.flatMap((s, si) =>
-    s.data.map((pt) => ({
-      metricKey: 'value',
-      areaCode: String(si + 1).padStart(2, '0'),
-      areaName: s.label || `区分${si + 1}`,
-      yearCode: String(pt.year ?? pt.x ?? ''),
-      yearName: String(pt.year ?? pt.x ?? ''),
-      value: typeof pt.value === 'number' ? pt.value : null,
-      unit,
-    }))
-  );
-  return generateStackedBarSvg(statsData, {
-    title: data.title ?? '内訳',
-    subtitle: data.subtitle,
-    unit,
-    xKey: 'yearCode',
-    seriesKey: 'areaCode',
-    normalized: data.normalized === true,
-    horizontal: data.horizontal === true,
-    referenceLine: data.referenceLine ?? undefined,
-    layout,
-  });
-}
-
-/**
- * scatter: { title, xLabel, yLabel, xUnit?, yUnit?, points:[{label,x,y}] }
- * → svg-builder generateScatterSvg (ScatterPoint[])
- */
-function genScatterChartSvg(data) {
-  const title = data.title ?? '散布図';
-  const xLabel = data.xLabel ?? 'X';
-  const yLabel = data.yLabel ?? 'Y';
-  const raw = data.points || data.data || [];
-  const points = raw
-    .filter((p) => typeof p.x === 'number' && typeof p.y === 'number')
-    .map((p) => ({
-      name: p.label || p.pref || p.areaName || '',
-      code: p.code || prefCodeOf(p.label || p.pref || p.areaName || ''),
-      x: p.x,
-      y: p.y,
-    }));
-  if (!points.length) return `<!-- empty scatter data -->`;
-  return generateScatterSvg(points, {
-    title,
-    xLabel: data.xUnit ? `${xLabel}（${data.xUnit}）` : xLabel,
-    yLabel: data.yUnit ? `${yLabel}（${data.yUnit}）` : yLabel,
-    // 本文が名指しする点に県名を直接書く (任意。data JSON の labelPoints: ["東京都", ...])
-    labelNames: Array.isArray(data.labelPoints) ? data.labelPoints : undefined,
-  });
-}
-
-/**
- * radar: { title, axes:[{key,label}], series:[{name, values:{<key>:0..1}, palette?, reference?}] }
- * → svg-builder generateRadarSvg。正規化・反転は data JSON を作る側で済ませておく。
- */
-function genRadarChartSvg(data) {
-  return generateRadarSvg(data.axes ?? [], data.series ?? [], {
-    title: data.title ?? 'レーダーチャート',
-    subtitle: data.subtitle,
-  });
-}
-
+// ---------- 型の台帳に無い図 (要点カード) ----------
 /**
  * findings card: { title?, findings: string[] | [{text}] } / string[]
  * → svg-builder generateFindingsCardSvg
@@ -491,6 +235,16 @@ function genStubSvg(chartType, name) {
 // lint ロジックは .claude/scripts/lib/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
 
 /** ファイルパスから SVG を読んで lint する */
+/** A statistical chart must come from a template in the ledger. Only the charts the ledger leaves out pass. */
+function lintChartTemplate(filename, content) {
+  const template = imageTemplateOf(content);
+  const kind = classifyChartTypeFromName(filename);
+  const errors = template
+    ? (TEMPLATE_IDS.has(template) ? [] : [`型の台帳に無い型: ${template}`])
+    : (kind && kind !== 'summary' ? [`型から作られていない統計の図 (${kind})。generate-article-charts で作り直す`] : []);
+  return { errors, warnings: [] };
+}
+
 function validateSvg(svgPath) {
   if (!fs.existsSync(svgPath))
     return { errors: ['file not found'], warnings: [] };
@@ -500,6 +254,7 @@ function validateSvg(svgPath) {
   const jsonData = jsonMeta.find((item) => item.file === jsonFilename)?.parsed;
   // filename を渡すと tile-grid でテーマ関連 WARN を抑止する (仕様上テーマ非依存のため)
   const checks = [
+    lintChartTemplate(filename, content),
     lintSvgContent(content, filename),
     lintSvgSize(filename, content),
     lintScatterQuality(filename, content, jsonData),
@@ -823,61 +578,73 @@ function metricVisualizationOf(baseName: string, parsed: unknown) {
   return metric && metricPresentation(metric);
 }
 
-/**
- * Ranking bars and tile maps with all 47 prefectures are drawn as the shared image types: `<name>.svg`
- * (light) and `<name>-dark.svg` (shown on the site's dark theme). The ranking's `-mobile.svg` and
- * `-ig.svg` are the same 4:5 image, so the article's mobile switch and Instagram keep their file names.
- * Returns null when the data cannot give the types (not all 47), and the svg-builder chart is used.
- */
-function writeTypeChart(baseName: string, type: string, parsed: unknown, provenance: string): string | null {
-  if (type !== 'bar' && type !== 'tile-grid' && type !== 'scatter') return null;
-  const chart = type === 'scatter'
-    ? scatterCharts.get(baseName) ?? { skip: '散布図の入力が無い' }
-    : rankingChartFromArticleData(parsed, {
-      metric: metricConfigOf(baseName, parsed),
-      prefCodeOf,
-      prefNameOf: (code) => prefNameOf(code),
-    });
-  if ('skip' in chart) {
-    warn(`${baseName}: 型の画像にしない (${chart.skip})。svg-builder の図を使う`);
-    return null;
+const metricSourceOf = (key: string) => {
+  const source = getMetricConfig(key)?.source;
+  return source && 'displayName' in source ? source.displayName : undefined;
+};
+const manifestOf = (baseName: string) => {
+  const file = path.join(DATA_DIR, `${baseName}.source.json`);
+  return (fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {}) as Record<string, unknown>;
+};
+type ChartTheme = (typeof CHART_THEMES)['light'];
+const withSource = <T extends { source: string }>(chart: T, parsed: unknown, baseName: string): T =>
+  ({ ...chart, source: chartSourceName(parsed, manifestOf(baseName), metricSourceOf) || chart.source });
+
+/** What a kind of chart draws with: the template's renderer, or the reason its data cannot give the template. */
+function typeRendererOf(baseName: string, type: string, parsed: unknown): ((theme: ChartTheme) => string) | { skip: string } {
+  if (type === 'scatter') {
+    const chart = scatterCharts.get(baseName) ?? { skip: '散布図の入力が無い' };
+    return 'skip' in chart ? chart : (theme) => renderRelationshipScatterChart(chart as ScatterChart, theme);
   }
-  const render = (theme: (typeof CHART_THEMES)['light']) => type === 'scatter'
-    ? renderRelationshipScatterChart(chart as ScatterChart, theme)
-    : (type === 'bar' ? renderRankingBarsChart : renderTileMapChart)(chart as Parameters<typeof renderRankingBarsChart>[0], theme);
+  if (type === 'bar' || type === 'tile-grid') {
+    const metric = metricConfigOf(baseName, parsed);
+    const ranking = rankingChartFromArticleData(parsed, { metric, prefCodeOf, prefNameOf: (code) => prefNameOf(code) });
+    if (!('skip' in ranking)) {
+      const render = type === 'bar' ? renderRankingBarsChart : renderTileMapChart;
+      return (theme) => render(ranking, theme);
+    }
+    // Not all 47: the map cannot be filled, and the bar's card takes any set of rows.
+    const items = itemBarChartFromArticleData(parsed, { metric });
+    if ('skip' in items) return { skip: `${ranking.skip}・${items.skip}` };
+    return (theme) => renderItemBarsChart(items, theme);
+  }
+  if (type === 'line') {
+    if (hasCyclicAxis(parsed)) {
+      const chart = groupedBarChartFromArticleData(parsed);
+      return 'skip' in chart ? chart : (theme) => renderGroupedBarsChart(withSource(chart, parsed, baseName), theme);
+    }
+    const chart = lineChartFromArticleData(parsed);
+    return 'skip' in chart ? chart : (theme) => renderLineChart(withSource(chart, parsed, baseName), theme);
+  }
+  if (type === 'stacked-bar') {
+    const chart = stackedChartFromArticleData(parsed);
+    return 'skip' in chart ? chart : (theme) => renderStackedChart(withSource(chart, parsed, baseName), theme);
+  }
+  const chart = radarChartFromArticleData(parsed, manifestOf(baseName));
+  return 'skip' in chart ? chart : (theme) => renderRadarChart(withSource(chart, parsed, baseName), theme);
+}
+const TEMPLATE_KINDS = new Set(['bar', 'tile-grid', 'line', 'stacked-bar', 'radar', 'scatter']);
+
+/**
+ * Every statistical chart is one of the shared 4:5 types: `<name>.svg` (light) and `<name>-dark.svg`, shown on
+ * the site's dark theme. `-mobile.svg` and `-ig.svg` are the same image, so the article's mobile switch and
+ * Instagram keep their file names. A chart whose data cannot give its type stops here: there is no other drawing.
+ */
+function writeTypeChart(baseName: string, type: string, parsed: unknown, provenance: string): string {
+  const render = typeRendererOf(baseName, type, parsed);
+  if ('skip' in render) throw new Error(`型の画像にできない (${render.skip})`);
   const light = render(CHART_THEMES.light), dark = render(CHART_THEMES.dark);
   const write = (suffix: string, svg: string) => fs.writeFileSync(path.join(DATA_DIR, `${baseName}${suffix}.svg`), provenance + svg, 'utf8');
   write('-dark', dark);
-  if (type === 'bar') {
-    write('-mobile', light);
-    write('-ig', light);
-  }
-  log(`  [gen] ${baseName}-dark.svg${type === 'bar' ? ' / -mobile.svg / -ig.svg' : ''}  (型の画像 4:5)`);
+  if (type === 'bar' || type === 'stacked-bar') write('-mobile', light);
+  if (type === 'bar') write('-ig', light);
+  log(`  [gen] ${baseName}-dark.svg  (型の画像 4:5)`);
   return light;
-}
-function withMetricColors(parsed: any, type: string, visualization: ReturnType<typeof metricVisualizationOf>) {
-  if (!visualization) return parsed;
-  const data = Array.isArray(parsed) ? { data: parsed } : parsed;
-  if (type === 'bar') {
-    const hue = visualization.colorSchemeType === 'diverging' ? null : metricHueOf(visualization.colorScheme);
-    return hue ? { ...data, palette: data.palette ?? hue, rightPalette: data.rightPalette ?? data.palette ?? hue } : parsed;
-  }
-  if (type === 'tile-grid') {
-    const scheme = toShortColorScheme(visualization.colorScheme);
-    return scheme && data.scheme === undefined && data.colorScheme === undefined ? { ...data, scheme } : parsed;
-  }
-  return parsed;
 }
 
 // Default mode: generate SVGs
 const chartNames: string[] = [];
 const failedCharts: string[] = [];
-// 負の値を含む棒 (人口の転入超過など) は 1 列の形でしか描けない (svg-builder の bar-chart)。横長・スマホ・Instagram の
-// 形は作らず、記事の画像部品は -mobile.svg が無ければ元の図を出す
-const isSignedBar = (parsed: unknown) => {
-  const rows = Array.isArray(parsed) ? parsed : ((parsed as { data?: unknown[] } | null)?.data ?? []);
-  return observedOnly(rows as { value?: unknown }[]).some((row) => typeof row.value === 'number' && row.value < 0);
-};
 // Scatter type images need the year, which the article data does not carry: find the year whose
 // observed values give exactly the 47 points (R2 app/stats/<key>/values.json, read once per metric).
 const R2_FETCH = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -950,33 +717,13 @@ for (const { file, type, parsed } of jsonMeta) {
   const baseName = file.replace(/\.json$/, '');
   const svgPath = path.join(DATA_DIR, `${baseName}.svg`);
   let svg;
-  const colored = withMetricColors(parsed, type ?? "", metricVisualizationOf(baseName, parsed));
   const provenance = buildProvenanceLine(file, new Date());
-  const typeSvg = type ? writeTypeChart(baseName, type, parsed, provenance) : null;
-  if (typeSvg) {
-    svg = typeSvg;
-  } else if (type === 'bar') {
-    svg = genBarChartSvg(colored, isSignedBar(parsed) ? 'single' : undefined);
-  } else if (type === 'tile-grid') {
-    svg = genTileGridMapSvg(colored);
-  } else if (type === 'line') {
-    svg = genLineChartSvg(parsed);
-    if (svg === null) {
-      warn(`${file}: series が配列でない (取得結果の控え) — チャート入力ではないので skip`);
-      continue;
-    }
-  } else if (type === 'scatter') {
-    svg = genScatterChartSvg(parsed);
-  } else if (type === 'radar') {
-    svg = genRadarChartSvg(parsed);
+  if (type && TEMPLATE_KINDS.has(type)) {
+    svg = writeTypeChart(baseName, type, parsed, provenance);
   } else if (type === 'summary') {
     svg = genFindingsCardSvg(parsed);
-  } else if (type === 'stacked-bar') {
-    svg = genStackedBarSvg(parsed);
   } else if (type) {
-    warn(
-      `chart type "${type}" not implemented for ${file} — emitting stub SVG`
-    );
+    warn(`chart type "${type}" not implemented for ${file} — emitting stub SVG`);
     svg = genStubSvg(type, baseName);
   } else {
     warn(`unknown chart type for ${file} — skipping`);
@@ -999,49 +746,6 @@ for (const { file, type, parsed } of jsonMeta) {
   chartNames.push(baseName);
   log(`  [gen] ${baseName}.svg  (${(svg.length / 1024).toFixed(1)} KB)`);
 
-  // ランキング棒は同じ検証済みデータから媒体別バリアントを同時出力する。
-  // - <name>.svg: PC / X 用の横長 columns
-  // - <name>-mobile.svg: ブログ mobile / note 本文用の可読性優先レイアウト
-  // - <name>-ig.svg: Instagram 専用 4:5。記事 markdown には埋め込まない
-  if (type === 'bar' && !typeSvg && !isSignedBar(parsed)) {
-    const mobileSvg = genBarChartSvg(parsed, 'mobile');
-    fs.writeFileSync(
-      path.join(DATA_DIR, `${baseName}-mobile.svg`),
-      provenance + mobileSvg,
-      'utf8'
-    );
-    log(
-      `  [gen] ${baseName}-mobile.svg  (本文mobile ${(mobileSvg.length / 1024).toFixed(1)} KB)`
-    );
-    const igSvg = genBarChartSvg(parsed, 'portrait');
-    fs.writeFileSync(
-      path.join(DATA_DIR, `${baseName}-ig.svg`),
-      provenance + igSvg,
-      'utf8'
-    );
-    log(
-      `  [gen] ${baseName}-ig.svg  (IG縦長 ${(igSvg.length / 1024).toFixed(1)} KB)`
-    );
-  }
-  // 積み上げ棒もスマホ本文用を同じデータから出す (横長の図を CSS で縮めると文字が 4px 台になる)。
-  // 見出しがスマホの読める範囲に収まらないときは縮めずに作らない (desktop の図は作る)
-  if (type === 'stacked-bar' && !svg.startsWith('<!--')) {
-    try {
-      const mobileSvg = genStackedBarSvg(parsed, 'mobile');
-      fs.writeFileSync(
-        path.join(DATA_DIR, `${baseName}-mobile.svg`),
-        provenance + mobileSvg,
-        'utf8'
-      );
-      log(
-        `  [gen] ${baseName}-mobile.svg  (本文mobile ${(mobileSvg.length / 1024).toFixed(1)} KB)`
-      );
-    } catch (e) {
-      warn(
-        `${file}: スマホ用の積み上げ棒を作れない (${e instanceof Error ? e.message : String(e)})。見出しを短くして作り直す`
-      );
-    }
-  }
  } catch (error) {
   warn(`${file}: 図を描けない (${error instanceof Error ? error.message : String(error)})。今の SVG を残す`);
   failedCharts.push(file);

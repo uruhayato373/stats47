@@ -6,6 +6,8 @@ model: sonnet
 effort: high
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # Article Writer Agent
 
 1つのmetricを受け取ってブログ記事1本の原稿を完成させる単機能エージェント。

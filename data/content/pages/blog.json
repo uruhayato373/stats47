@@ -472,7 +472,7 @@
       "key": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
       "title": "日照時間が長い県は保険金も高い?",
       "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "published": true,
+      "published": false,
       "rankingKeys": [
         "annual-sunshine-duration",
         "auto-liability-insurance-amount-received-per-payment"
@@ -11198,7 +11198,7 @@
       "key": "road-length-per-km2-vs-residential-building-starts",
       "title": "道路密度が高い県は住宅着工も多いのか",
       "href": "/blog/road-length-per-km2-vs-residential-building-starts",
-      "published": true,
+      "published": false,
       "rankingKeys": [
         "residential-building-starts",
         "road-length-per-km2"
@@ -11929,7 +11929,7 @@
       "key": "shumai-consumption-expenditure-vs-jr-freight-shipment",
       "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
       "href": "/blog/shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "published": true,
+      "published": false,
       "rankingKeys": [
         "jr-freight-shipment",
         "shumai-consumption-expenditure"

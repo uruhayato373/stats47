@@ -86,6 +86,16 @@
             "summary": { "type": "string", "minLength": 1 }
           }
         },
+        "fit": {
+          "description": "コンテンツと型を両方向から結ぶ情報。answers = この図で答える問い (内容から型を選ぶ入口)、needs = 必要なデータの形 (型から使える内容を探す入口)",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["answers", "needs"],
+          "properties": {
+            "answers": { "type": "string", "minLength": 1 },
+            "needs": { "type": "string", "minLength": 1 }
+          }
+        },
         "variants": {
           "description": "同じ型の中の描き分け (地図の重ね方・出し方)。別の型にはしない",
           "type": "array",

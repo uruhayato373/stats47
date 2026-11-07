@@ -25,7 +25,7 @@ export const otherClothingMisc2025GroupConsumptionExpenditure: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2025,
+    "from": 2000,
     "to": 2025,
   },
   "yearFormat": "calendar",

@@ -58,6 +58,13 @@ export function toBarChartRaceFrames(stats: StatsSchema[]): BarChartRaceFrame[] 
 /**
  * 2フレーム間を t (0-1) で線形補間し、topN+5 件の InterpolatedBarItem[] を返す
  */
+/** How far a bar has moved to its new rank: it holds, moves in the middle of the year, then holds again. */
+const RANK_MOVE = { start: 0.3, length: 0.4 };
+export function rankProgress(t: number) {
+  const x = Math.min(1, Math.max(0, (t - RANK_MOVE.start) / RANK_MOVE.length));
+  return x * x * (3 - 2 * x);
+}
+
 export function interpolateRaceFrame(
   frameA: BarChartRaceFrame,
   frameB: BarChartRaceFrame,
@@ -69,7 +76,7 @@ export function interpolateRaceFrame(
   // ランク付与（value 降順）
   const rank = (items: { name: string; value: number }[]) =>
     [...items]
-      .sort((a, b) => b.value - a.value)
+      .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name))
       .slice(0, expandedN)
       .map((item, i) => ({ ...item, rank: i }));
 
@@ -92,7 +99,7 @@ export function interpolateRaceFrame(
       result.push({
         name,
         value: a.value + (b.value - a.value) * t,
-        rank: a.rank + (b.rank - a.rank) * t,
+        rank: a.rank + (b.rank - a.rank) * rankProgress(t),
         opacity: 1,
       });
     } else if (a && !b) {

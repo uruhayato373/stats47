@@ -91,13 +91,8 @@ npx tsx .claude/scripts/sns/render-note-household.ts --input <固定snapshot.jso
 | X | `RankingX-Chart` | `x/stills/chart-x-1200x630.png` |
 | X | `RankingX-ChoroplethMap` | `x/stills/choropleth-map-1200x630.png` |
 | YouTube Short A | `RankingYouTube-Short` | `youtube-short/shorts-a.mp4` |
-| YouTube Short B | `RankingYouTube-Short-Full` | `youtube-short/shorts-b.mp4` |
-| YouTube Normal | `RankingYouTube-ScrollGes` | `youtube/scroll-ges.mp4` |
 | YouTube Normal Thumb | `RankingYouTube-Thumb-Hero` | `youtube/stills/thumbnail-1280x720.png` |
 | note | `RankingNote-Cover` | `note/images/cover-1280x670.png` |
-| note | `RankingNote-ChoroplethMap` | `note/images/choropleth-map-1080x1080.png` |
-| note | `RankingNote-Chart` | `note/images/chart-x-1200x630.png` |
-| note | `RankingNote-Boxplot` | `note/images/boxplot-1200x630.png` |
 | Instagram（カルーセル表紙） | `RankingInstagram-Cover` | `instagram/stills/slide-1-cover-1080x1350.png` |
 | Instagram（全47位テーブル） | `RankingInstagram-Table` | `instagram/stills/slide-2-table-1080x1350.png` |
 | Instagram（CTA） | `RankingInstagram-CTA` | `instagram/stills/slide-3-cta-1080x1350.png` |
@@ -194,25 +189,11 @@ cd apps/remotion && npx remotion still src/index.ts RankingX-Chart \
   --props /tmp/sns-props.json
 ```
 
-コマンド例（ranking ドメイン / YouTube Normal — 動画）:
-```bash
-cd apps/remotion && npx remotion render src/index.ts RankingYouTube-ScrollGes \
-  "../../<baseDir>/youtube/scroll-ges.mp4" \
-  --props /tmp/sns-props-yt.json
-```
-
 **`youtube` 指定時の挙動**:
-- `sns=youtube` → YouTube Short A/B + YouTube Normal + サムネイルの **全て** をレンダリング
-- `sns=youtube-short` → YouTube Short A版（32秒 / 上位5件+全47件テーブル）+ B版（55秒 / 全47件高速・モーション無し）の両方
-- `sns=youtube-short-full` → YouTube Short B版のみ
-- `sns=youtube-normal` → YouTube Normal ScrollGes (`youtube/scroll-ges.mp4`) + サムネイル（Hero）
+- `sns=youtube` → YouTube Short (`youtube-short/shorts-a.mp4`) + サムネイル
+- `sns=youtube-short` → YouTube Short のみ
 
-**YouTube Short A/B テスト**:
-- A版 `RankingYouTube-Short`（variant: `youtube-short`）: 上位5件 RankCard → タイルマップ → 全47件テーブル → CTA（~32秒）
-- B版 `RankingYouTube-Short-Full`（variant: `youtube-short-full`）: 全47件を高速表示（モーション無し即表示）→ CTA（~55秒）
-- 同じランキングキーで両方投稿し、維持率を比較して最適な尺を判断する
-- A版の props: `variant: "youtube-short"`、B版の props: `variant: "youtube-short-full"`
-- 出力: A版 → `youtube-short/shorts-a.mp4`、B版 → `youtube-short/shorts-b.mp4`
+**YouTube Short**: `RankingYouTube-Short` (上位 5 件と全 47 件の表)。props の `variant` は `youtube-short`、出力は `youtube-short/shorts-a.mp4`。
 
 **注意**: YouTube Normal は `remotion render`（動画）を使用する。`remotion still`（静止画）ではない。ScrollGes はGES背景動画付きのためレンダリング時間が長い（約30分）。他のレンダリングと並列実行を推奨。レンダリング後のmp4は投稿完了後に削除してディスクを回収すること（~700MB）。
 

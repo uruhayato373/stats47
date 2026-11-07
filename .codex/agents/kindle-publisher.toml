@@ -1,6 +1,8 @@
 name = "kindle-publisher"
 description = "product-factoryのKindle書籍カタログ、書き下ろしmanuscript、EPUB3 generator、30%比率gate、READINESSを管理する。書籍設計・EPUB生成・検証に使う。KDP uploadとKindle Previewer実機確認は人間へ渡す。"
 developer_instructions = '''
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # Kindle Publisher Agent
 
 stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量産する

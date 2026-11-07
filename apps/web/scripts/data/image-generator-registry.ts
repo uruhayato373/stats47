@@ -16,6 +16,7 @@ export const GEO_THUMBNAIL_GENERATOR_SPEC = {
     'apps/web/scripts/lib/geo-source-thumbnail-render.ts',
     'apps/web/scripts/generate-geo-source-thumbnails.ts',
     'packages/visualization/src/server/generate-mini-prefecture-svg.ts',
+    'packages/gis/src/map/geometry.mjs',
     'packages/visualization/src/server/prefecture-topology.generated.json',
     'node_modules/d3-geo/package.json',
     'node_modules/topojson-client/package.json',
@@ -99,6 +100,7 @@ export const IMAGE_GENERATOR_SPECS = {
       'packages/ranking/src/types/ranking-thumbnail.ts',
       'packages/visualization/src/server/generate-ranking-thumbnail-map-svg.ts',
       'packages/visualization/src/server/generate-mini-prefecture-svg.ts',
+      'packages/gis/src/map/geometry.mjs',
       'packages/visualization/src/server/prefecture-topology.generated.json',
       // ★配色カタログ (2026-07-31)。generate-mini-prefecture-svg が手書き 9 種の
       //   INTERPOLATORS をやめてカタログ経由の解決に変わったため、renderer の依存に入る。

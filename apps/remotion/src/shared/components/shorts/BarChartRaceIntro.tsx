@@ -18,9 +18,9 @@ import type { TileGridCell } from "@stats47/visualization";
 import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared";
-import { SITE } from "@stats47/types";
 import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
 import { prefectureShortName } from "@stats47/area/short-name";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -155,7 +155,7 @@ export const BarChartRaceIntro: React.FC<BarChartRaceIntroProps> = ({
   const brandingSpring = spring({ frame: frame - 3, from: 0, to: 1, ...sprOptions });
   const hookSpring = spring({ frame: frame - 30, from: 0, to: 1, ...sprOptions });
 
-  const phrase1 = hookText ?? "どこが1位？";
+  const phrase1 = hookText || "どこが1位？";
 
   // 最終年のデータでマップを色分け
   const lastFrame = frames[frames.length - 1];
@@ -216,39 +216,12 @@ export const BarChartRaceIntro: React.FC<BarChartRaceIntroProps> = ({
         }}
       >
         {/* stats47 ブランディング */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          opacity: brandingSpring,
-          transform: `translateY(${interpolate(brandingSpring, [0, 1], [-16, 0])}px)`,
-        }}>
-          <div style={{
-            backgroundColor: BRAND.primary,
-            color: BRAND.white,
-            padding: "6px 18px",
-            borderRadius: 8,
-            fontSize: 26,
-            fontWeight: FONT.weight.black,
-            letterSpacing: 1,
-          }}>
-            stats47
-          </div>
-          <div style={{
-            fontSize: 28,
-            fontWeight: FONT.weight.bold,
-            color: colors.muted,
-            letterSpacing: 2,
-          }}>
-            {SITE.name}
-          </div>
-        </div>
 
         {/* 期間バッジ */}
         <div style={{ transform: `scale(${brandingSpring})`, opacity: brandingSpring }}>
           <span style={{
             display: "inline-block",
-            backgroundColor: isDark ? "rgba(30, 41, 59, 0.85)" : "rgba(255, 255, 255, 0.9)",
+            backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.85)` : "rgba(255, 255, 255, 0.9)",
             color: BRAND.secondary,
             border: `2px solid ${BRAND.secondary}`,
             borderRadius: 50,

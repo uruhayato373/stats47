@@ -411,4 +411,12 @@ describe('blog chart taxonomy', () => {
       resolveBlogChartSurveyTaxonomy(null, {} as MetricRegistry).status
     ).toBe('missing-lineage');
   });
+
+  it('図の出典の statsDataIds (複数形) も統計表の参照として読む', () => {
+    const references = extractBlogChartSourceReferences({
+      kind: 'derived',
+      statsDataIds: ['0004023605', '0004023606'],
+    });
+    expect(references.statsDataIds).toEqual(['0004023605', '0004023606']);
+  });
 });

@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { resolvePreferredArticleBackgroundSource } from './lib/blog-fullbleed-background';
 /**
  * 送り箱の記事に、今の内容に合う背景があるかを判定して JSON を 1 行出す (読み取り専用)。
  * quality-gate.mjs が push 前に呼ぶ。判定の規則は lib/blog-background-status.ts。
@@ -12,7 +13,6 @@ import { basename, dirname, join, relative } from 'node:path';
 import { SITE } from '@stats47/types';
 import {
   parseBlogArticleImageContext,
-  resolveArticleBackgroundSource,
 } from './lib/blog-article-background';
 import {
   backgroundRecord,
@@ -72,15 +72,16 @@ async function main(): Promise<void> {
   const visual = resolveOgpVisual(parseOgpVisualFrontmatter(markdown));
   const promptArgs = { ...visual, title: derived.title };
   // 公開時と同じく、記事固有背景と旧カタログは画像の形式・寸法まで検証して使う。壊れていれば例外になる
-  const [articleSource, codexSource] = await Promise.all([
-    resolveArticleBackgroundSource(PROJECT_ROOT, parseBlogArticleImageContext(slug, markdown)),
-    resolveCodexBackgroundSource(PROJECT_ROOT, slug),
-  ]);
+  const articleSource = await resolvePreferredArticleBackgroundSource(
+    PROJECT_ROOT, parseBlogArticleImageContext(slug, markdown)
+  );
+  const codexSource = articleSource ? null : await resolveCodexBackgroundSource(PROJECT_ROOT, slug);
   const publishedBackground =
     articleSource || codexSource ? null : await readPublishedBackground(slug);
   const status = decideBlogBackgroundStatus({
     slug,
     articlePath,
+    hasFullbleedAsset: articleSource?.promptVersion === 'blog-fullbleed-v1',
     hasArticleAsset: articleSource !== null,
     hasCodexCatalog: codexSource !== null,
     publishedBackground,

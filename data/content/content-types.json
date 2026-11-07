@@ -1,0 +1,2099 @@
+{
+  "version": 1,
+  "dataNote": "コンテンツの 4 型の定義と、ページ・投稿・商品を型へ振り分ける規則の正本。事業イシューマップの行はここを ID で指し、定義の写しのずれは check-datasets が止める。ブログは問いに答える記事 (issue-links の answers) を論文型へ導出する。規則で決まらないものは未分類のまま管理画面に出し、推測で埋めない。優先順は assignments → 導出 → 規則。",
+  "types": [
+    {
+      "id": "type:reference",
+      "title": "参照型",
+      "question": "1 位はどこか",
+      "examples": "ランキング・雑学"
+    },
+    {
+      "id": "type:textbook",
+      "title": "教科書型",
+      "question": "この統計で何がわかるか、どう使うか",
+      "examples": "家計調査でわかること、財政指標の定義と各地の状況、調査ハブ"
+    },
+    {
+      "id": "type:paper",
+      "title": "論文型",
+      "question": "自分たちの〇〇はどうなるか",
+      "examples": "Geo 分析など問いへの答え"
+    },
+    {
+      "id": "type:howto",
+      "title": "作り方型",
+      "question": "どうやって作るか、自分の仕事でどう再現するか",
+      "examples": "e-Stat × Claude Code の実務、再現手順・テンプレート"
+    }
+  ],
+  "rules": {
+    "pageKinds": {
+      "ranking": "type:reference",
+      "municipality-ranking": "type:reference",
+      "area": "type:reference",
+      "area-theme": "type:reference",
+      "city": "type:reference",
+      "survey": "type:textbook",
+      "theme": "type:textbook",
+      "japan-theme": "type:textbook",
+      "municipality-theme": "type:textbook",
+      "geo": "type:paper",
+      "geo-layer": "type:paper"
+    },
+    "excludedPageKinds": [
+      "category",
+      "page",
+      "product",
+      "tag"
+    ],
+    "blogSlugSuffixes": {
+      "-prefecture-gap": "type:reference",
+      "-expenditure-ranking": "type:reference",
+      "-expenditure-prefecture": "type:reference",
+      "-consumption-expenditure": "type:reference",
+      "-consumption-quantity": "type:reference",
+      "-food-culture": "type:reference",
+      "-migration-flow": "type:paper"
+    },
+    "noteVerticals": {
+      "koumuin-claude-code": "type:howto",
+      "koumuin-estat-claude-code": "type:howto",
+      "koumuin-gis": "type:howto"
+    },
+    "noteSeries": {
+      "A": "type:reference",
+      "D": "type:howto",
+      "B": "type:paper",
+      "C": "type:paper"
+    },
+    "snsDomains": {
+      "ranking": "type:reference",
+      "bar-chart-race": "type:reference",
+      "ranking-quiz": "type:reference",
+      "ranking-quiz-reel": "type:reference",
+      "compare-carousel": "type:reference",
+      "map-carousel": "type:reference",
+      "buzz-map": "type:reference",
+      "tile-change": "type:reference",
+      "area": "type:reference",
+      "area-atlas": "type:reference",
+      "area-carousel": "type:reference",
+      "household-receipt": "type:reference",
+      "rank-routes": "type:reference",
+      "station-passengers": "type:reference",
+      "port": "type:reference",
+      "highway-history": "type:reference",
+      "migration-flow": "type:reference",
+      "theme": "type:textbook",
+      "geo": "type:paper",
+      "correlation-carousel": "type:paper"
+    },
+    "kindle": "type:reference",
+    "blogSlugInfixes": {
+      "-vs-": "type:paper"
+    }
+  },
+  "assignments": [
+    {
+      "id": "blog:2050-population-map-reading",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "blog:2050-station-access-population",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:advancement-plus-employment-rate-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:agriculture-hokkaido-dominance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:agriculture-output-employment-productivity-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:ai-claude-code-pref-analysis",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:allocation-tax-area",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:annual-precipitation-rainy-season-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:assembly-answer-chatgpt-5steps",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:bank-deposit-balance-shikoku-anomaly",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:barber-beauty-salon-regional-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:beef-unmarried-ratio",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:beer-peak-month-july-to-december",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:black-tea-income-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:bonito-catch-zero-prefectures-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:bread-city-ranking-kyoto-quiz",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:cc-estat-01-setup",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-02-search-skill",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-03-population-bar",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-04-aging-heatmap",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-06-income-scatter",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-07-birthrate-line",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-08-bar-chart-race",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-09-radar-prefecture",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-10-wage-box-plot",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-11-tourism-stacked",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-12-housing-treemap",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-13-agri-sankey",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-14-energy-area-chart",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-15-crime-small-multiple",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-16-commerce-bubble",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-17-edu-slope-graph",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-18-cache-r2",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-19-skill-pipeline",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:cc-estat-20-publish",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:census-2025-population-change-rate-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:climate-lifestyle-connection",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:commercial-land-price-trend",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:commercial-sales-productivity-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:communication-cost-burden",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:consumption-expenditure-multi-person-households-per-month",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:cpi-change-regional-pattern",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:crime-rate-regional-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:curry-roux-consumption-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:dairy-cattle-count",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:dairy-cattle-hokkaido-monopoly",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:depopulation-area-medical-facilities",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:development-history-place-name-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:distinctive-place-name-kanji-by-prefecture",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:dual-income-childcare-dilemma",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:dual-income-house-size",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:dual-income-reversal",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:education-cost-per-child",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:education-expenses-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:elderly-ratio-rise-2020-2025",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:electricity-bill-hike-impact",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:electricity-demand-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:elementary-school-children-count",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:energy-consumption-structure-shift",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:energy-infrastructure-gas-electricity",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:engineer-telework-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:estat-7-techniques-from-unusable-to-usable",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:estimated-hourly-wage-ranking",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:expenditure-structure-comparison",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:extreme-heat-days-prefecture",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:firefighting-capacity-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:fiscal-health-50years-trend",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:fiscal-self-reliance-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:fishery-species-prefecture-specialty",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:food-culture-prefecture-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:food-price-regional-2026",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:food-spending-pattern",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:food-trio-prefecture-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:forest-coverage-woodland-economy",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:future-burden-ratio-extreme-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:future-population-disappearing-prefectures",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:future-population-tokyo-paradox",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:garbage-total-output",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:gasoline-car-society-map",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:gender-wage-gap-ranking",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:general-bed-utilization-pressure-map",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:general-hospital-bed-occupancy-rate",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:golf-green-fee-consumption-ranking",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:habitable-area-land-use",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:half-population-elderly-municipalities",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:hama-ura-tsu-coastal-place-names",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:healthy-life-expectancy-male-female-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:high-school-advancement-rate",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:highschool-starting-salary-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:highway-japan-58years",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:home-ownership-rate-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:homeownership-vacancy-four-types",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:hospital-bed-utilization-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:household-growth-population-decline-census-2025",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:household-income-tokyo-okinawa",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:household-spending-before-after-inflation",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:household-structure-daytime-population-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:household-structure-transformation",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:housing-cost-livability-trend",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:ict-digital-divide-composite-analysis",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:ict-media-consumption-gender-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:inbound-by-nationality-regional-preference",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:inbound-overnight-guests-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:inbound-overnight-regional-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:inbound-overnight-stay-concentration",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-1000man-which-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-alcohol",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-appliance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-beverage",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-car",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-clothing",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-dining",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-education",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-food-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-lesson",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-luxury-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-medical-health",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-overview",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-recreation-services",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-regressive",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:income-quintile-travel",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:industrial-water-manufacturing-nexus",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:information-communication-coefficient-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:inpatient-rate-aging-burden",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:international-cooperation-volunteer-map",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:it-establishments-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:it-industry-concentration",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:kanagawa-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:kawa-gawa-river-place-name-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:kochi-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:koumuin-ai-tenshoku-1500man",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:koumuin-claude-code-estat-automation",
+      "type": "type:howto",
+      "reason": "題名が手順・実務の再現を扱う"
+    },
+    {
+      "id": "blog:library-museum-cultural-capital",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:local-tax-regional-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:lotus-root-green-beans-mandarin-consumption",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:manufacturing-labor-productivity-pref",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:manufacturing-output-outlier-cities",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:manufacturing-shipment-prefecture-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:medical-access-regional-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:metabolic-syndrome-prevalence-among-checkup-recipients",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:minimum-wage-1000yen-prefecture",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:minimum-wage-gap-regional-economy",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:miyazaki-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:mobile-contracts-over-population",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:municipalities-without-general-hospitals",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:municipalities-without-schools",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:municipality-population-change-census-2025",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:municipality-population-decline-tiers",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:nagano-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:natto-child-weight-correlation",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:natto-consumption-east-west-divide",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:necktie-stockings-market-shrink",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:niigata-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:nurse-salary-ranking",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:nursing-care-shortage-2040",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:okinawa-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:overnight-guests-inbound-recovery",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:overseas-travel-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:pachinko-education-cost",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:park-green-space-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:paved-road-total-length",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:per-capita-income-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:pharma-medical-device-production-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:pharmacy-count-prefecture-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:pollution-complaints-regional-map",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:post-office-last-window",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:prefectural-debt-future-burden",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:prefectural-income-gdp-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:prefecture-population-city-concentration",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:prefecture-salary-gap-career",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:prefecture-salary-remote-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:price-index-high-low-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:public-phone-count",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:public-phone-count-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:public-phone-prefecture-vanishing",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:purchasing-power-adjusted",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:railway-theme-overview",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:real-disposable-income-reversal",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:real-income-taxpayer",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:recycling-rate-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:renewable-energy-regional-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:retail-establishments-by-prefecture",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:rice-spending-quantity-gap-2025",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:road-infrastructure-density",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:savings-balance-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:savings-rate-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:sixth-industry-direct-sales",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:small-business-dominance-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:software-engineer-income-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:spinach-consumption-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:sports-facility-regional-divide",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:sports-participation-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:students-per-teacher-class-size-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:system-consultant-income-ranking",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:telework-gap-tokyo-6x",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:telework-income-correlation",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:telework-rate-tokyo-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:temperature-extremes-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:tokyo-real-income-after-rent",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:total-fertility-rate",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:towns-villages-larger-than-cities",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:toyama-municipal-finance",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:travel-behavior-gender-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:truck-driver-2024-crisis",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:truck-driver-salary-trend",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:tuna-consumption-medical-expense-correlation",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:tuna-medical-expense",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:udon-soba-food-culture-prefecture-map",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:unemployment-structure",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:unemployment-tertiary-industry-link",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:unmarried-rate-40years-crisis",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:urban-parks-green-infrastructure",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:waiting-children-progress",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:water-sewage-crisis",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:welfare-expenses-squeeze",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:wheat-flour-consumption-food-culture-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:white-bread-price-up-quantity-up",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "blog:winter-coat-bargain-purchase-price",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "blog:working-hours-overtime-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:yato-yatsu-place-name-boundary",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "note:b-hottest-prefecture",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-kakei-bread-giffen",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-kakei-gyoza-counting",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-kakei-quantity-price",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-kakei-winter-bargain",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-ref-inc-a05",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-ref-inc-a06",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-inc-a55",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-gis-a33",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a01-04",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a04-03",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-ref-kakei-a05-06",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-mh-a07",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-mh-a08",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-mh-a09",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a03",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a04",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a05",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a06",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a07",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a08",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a09",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a11",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a13",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a15",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a17",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a19",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a21",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a26",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a31",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a36",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a40",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a42",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a45",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a49",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a51",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a07",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a09",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a10",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a12",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a13",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a14",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a15",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a16",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a17",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a18",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a19",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a20",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a21",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a22",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a24",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a25",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a26",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a27",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a28",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a29",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a30",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a31",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a32",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a33",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a34",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a35",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a36",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a37",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a38",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a39",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a40",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a42",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a43",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a44",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a45",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-dev-a02",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a41",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a47",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a48",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a49",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a50",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a51",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-prc-a52",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a01-05",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-02",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-04",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-05",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-06",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-07",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-08",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a02-09",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a03-01",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a03-04",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a04-01",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a04-04",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-ref-kakei-a05-04",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a01-01",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-ref-kakei-a04-02",
+      "type": "type:reference",
+      "reason": "題名が順位・倍率の紹介を中心とする"
+    },
+    {
+      "id": "note:b-kakei-expense-housing",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-kakei-expense-furniture",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:b-kakei-expense-education",
+      "type": "type:textbook",
+      "reason": "題名が統計の読み方を扱う"
+    },
+    {
+      "id": "note:ppt-japan-map-assets",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:ppt-ranking-chart-assets",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:ppt-onepager-sns-assets",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:ppt-data-explainer-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-region-intro-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-market-proposal-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-relocation-hiring-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-tourism-demand-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-healthcare-education-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-government-policy-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-media-report-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:ppt-seminar-research-deck",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:excel-choropleth-map",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:excel-ranking-auto",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:excel-integrated-dashboard",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:excel-gap-timeseries-analysis",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:excel-population-migration",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:excel-business-location",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:excel-domain-comparison",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:excel-data-utilities",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:data-packs-basic",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:data-packs-population-economy",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:data-packs-living-infrastructure",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:data-packs-industry-tourism",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:data-packs-government-safety",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:data-packs-culture-demographics",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:data-packs-advanced",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:industry-retail-food-location",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:industry-service-location",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:industry-tourism-realestate",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:industry-hiring-branch",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:industry-marketing-furusato",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:industry-government-promotion",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:industry-media-sns",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:gov-estat-workflow",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:gov-similar-municipality",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:gov-kpi-ebpm",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:gov-presentation-decks",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:gov-koho-visuals",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:gov-training-materials",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:media-ranking-visuals",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:media-video-social-visuals",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:media-editorial-toolkit",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:edu-classroom-materials",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:edu-inquiry-worksheets",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:edu-excel-stats-literacy",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:life-relocation-comparison",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:life-family-career-comparison",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:life-retirement-weighting",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:service-map-chart-creation",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:service-regional-report",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:service-business-comparison",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:service-dashboard-build",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:license-guide",
+      "type": "type:textbook",
+      "reason": "用途別に説明と資料をセットで提供する"
+    },
+    {
+      "id": "note:free-samples",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-population-household-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-income-wage-hiring-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-tourism-lodging-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-municipal-finance-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-healthcare-nursing-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-education-childcare-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-migration-living-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-retail-trade-area-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-industry-economy-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-disaster-infrastructure-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-map-chart-assets-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-all-in-one-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-free-trial-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:prefecture-household-consumption-pack",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "note:h-howto-csv-mojibake",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:h-howto-mymaps-kml",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:h-howto-mymaps-share",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:h-howto-qgis-choropleth",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:h-howto-excel-filled-map",
+      "type": "type:howto",
+      "reason": "手順・テンプレート・道具を提供する"
+    },
+    {
+      "id": "note:muni-manufacturing-shipment-data",
+      "type": "type:reference",
+      "reason": "指標を束ねたデータ・素材を提供する"
+    },
+    {
+      "id": "sns:480",
+      "type": "type:paper",
+      "reason": "人口移動の理由を扱う"
+    },
+    {
+      "id": "sns:1196",
+      "type": "type:paper",
+      "reason": "公開前の空き家の記事 (論文型) を指す"
+    },
+    {
+      "id": "blog:electricity-generation-manufacturing-establishments-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:household-spending-debt-propensity-gap",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:vacant-housing-rate-inherited-home-risk",
+      "type": "type:paper",
+      "reason": "題名が地域差の理由・関係を問う"
+    },
+    {
+      "id": "blog:intellectual-crime-tokyo-kagawa-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:nursery-shortage-urban-prefecture",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:sme-business-sentiment-regional-gap",
+      "type": "type:reference",
+      "reason": "題名が順位・地域差の紹介を中心とする"
+    }
+  ]
+}

@@ -21,12 +21,11 @@
 export function assetPlanForType(type) {
   switch (type) {
     case "A":
+    case "B":
     case "C":
+    case "D":
     case "E":
       return { still: true, xVideo: false, igReel: false, renderable: true, reason: null };
-    case "B":
-    case "D":
-      return { still: true, xVideo: true, igReel: true, renderable: true, reason: null };
     case "F":
     case "flow":
       return {
@@ -52,8 +51,6 @@ export function compositionsForType(type) {
   const plan = assetPlanForType(type);
   const comps = {};
   if (plan.still) comps.still = "BuzzMap-Still-45"; // 1080×1350 4:5 (X/IG 共用)
-  if (plan.xVideo) comps.xVideo = type === "B" ? "BuzzMap-Reel-11" : "BuzzMap-Reel-11"; // X 1:1/正方
-  if (plan.igReel) comps.igReel = "BuzzMap-Reel-916"; // IG 9:16
   return comps;
 }
 

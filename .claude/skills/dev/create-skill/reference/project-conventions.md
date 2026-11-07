@@ -80,7 +80,7 @@ const blog     = (await (await fetch(`${R2}/app/blog/all.json`)).json()).article
 
 | パターン | 参考スキル | 特徴 |
 |----------|-----------|------|
-| scripts/ 同梱 | `/generate-note-charts` | scatter.js (パラメータ駆動), cover-template.js (テンプレート), svg-to-png.js (汎用) |
+| scripts/ 同梱 | `/generate-note-charts` | cover-template.js (テンプレート), svg-to-png.js (汎用) |
 | reference/ 分離 | `/generate-note-charts` | design-system.md, chart-patterns.md |
 | examples/ 同梱 | `/generate-note-charts` | 完成 SVG を保存 |
 | ワークフローチェーン | `/write-note-section` | validate → investigate → design → write → edit |

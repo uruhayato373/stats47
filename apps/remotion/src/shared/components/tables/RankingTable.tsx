@@ -7,6 +7,7 @@ import { BRAND, COLOR_SCHEMES, FONT, RADIUS, SPACING, type ThemeName } from "../
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
 import { SafetyZoneOverlay } from "../utils/SafetyZoneOverlay";
 import { SITE } from "@stats47/types";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 /** テーブルの表示スタイル */
 type TableStyle = "standard" | "neon";
@@ -221,7 +222,7 @@ interface WatermarkRowProps {
 
 const WatermarkRow: React.FC<WatermarkRowProps> = ({ isNeon, isDark, themeColors }) => {
   const cardBg = isNeon
-    ? isDark ? "rgba(30, 41, 59, 0.4)" : "rgba(255, 255, 255, 0.6)"
+    ? isDark ? `rgba(${DARK_PAPER_RGB}, 0.4)` : "rgba(255, 255, 255, 0.6)"
     : themeColors.card;
 
   return (
@@ -268,7 +269,7 @@ const CardRow: React.FC<CardRowProps> = ({
   const isTop3 = entry.rank <= 3;
 
   const cardBg = isNeon
-    ? isDark ? "rgba(30, 41, 59, 0.7)" : "rgba(255, 255, 255, 0.9)"
+    ? isDark ? `rgba(${DARK_PAPER_RGB}, 0.7)` : "rgba(255, 255, 255, 0.9)"
     : themeColors.card;
 
   const borderColor = isTop3

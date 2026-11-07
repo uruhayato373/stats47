@@ -2,9 +2,9 @@
   "complete": true,
   "summary": {
     "metrics": 850,
-    "ranking": 841,
+    "ranking": 850,
     "theme": 850,
-    "area": 231,
+    "area": 233,
     "blog": 389,
     "unreached": 0,
     "undecidedItems": 0,
@@ -324,7 +324,7 @@
       "key": "bicycle-purchases-group-consumption-expenditure",
       "ranking": true,
       "theme": true,
-      "area": false,
+      "area": true,
       "blog": false
     },
     {
@@ -875,7 +875,7 @@
     },
     {
       "key": "clothing-footwear-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1092,7 +1092,7 @@
     },
     {
       "key": "culture-recreation-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1365,7 +1365,7 @@
     },
     {
       "key": "education-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1437,7 +1437,7 @@
       "key": "enoki-consumption-quantity",
       "ranking": true,
       "theme": true,
-      "area": true,
+      "area": false,
       "blog": false
     },
     {
@@ -1785,7 +1785,7 @@
     },
     {
       "key": "furniture-household-goods-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -1899,7 +1899,7 @@
       "key": "gift-money-group-consumption-expenditure",
       "ranking": true,
       "theme": true,
-      "area": false,
+      "area": true,
       "blog": false
     },
     {
@@ -2170,7 +2170,7 @@
     },
     {
       "key": "healthcare-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -2303,7 +2303,7 @@
     },
     {
       "key": "housing-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -3395,7 +3395,7 @@
     },
     {
       "key": "other-consumption-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -4426,7 +4426,7 @@
       "key": "processed-fruits-group-consumption-expenditure",
       "ranking": true,
       "theme": true,
-      "area": false,
+      "area": true,
       "blog": false
     },
     {
@@ -5453,7 +5453,7 @@
     },
     {
       "key": "transport-communication-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false
@@ -5537,7 +5537,7 @@
     },
     {
       "key": "utilities-budget-share-kakei",
-      "ranking": false,
+      "ranking": true,
       "theme": true,
       "area": false,
       "blog": false

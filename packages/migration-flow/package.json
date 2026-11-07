@@ -21,6 +21,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@stats47/types": "*",
     "d3-geo": "^3.1.0",
     "d3-scale": "^4.0.0",
     "d3-scale-chromatic": "^3.1.0",

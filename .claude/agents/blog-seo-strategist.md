@@ -5,6 +5,8 @@ description: ブログSEO拡充戦略の「戦略オーケストレーション�
 model: sonnet
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 # Blog SEO Strategist Agent
 
 ブログSEO拡充戦略の**オーケストレーション層のオーナー兼 SSOT**。2026-07-12 新設、旧ブログ SEO 拡充計画

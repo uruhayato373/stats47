@@ -5,6 +5,8 @@ description: 新規ブログ記事の「次に何を書くか」を状態付き�
 primary_agent: trend-scout
 ---
 
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+
 新規記事のネタ選定エンジン。「どの記事を直すか」の是正キュー (`/brushup-blog --target queue`) の**新規版**。
 何を書くかの真実源は **`data/blog/topic-queue.json`** (`build-topic-queue.mjs` が生成)。
 

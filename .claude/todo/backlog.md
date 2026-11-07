@@ -173,6 +173,65 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵を main へ入れ、残りの記事へ広げる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]
+
+- **状態 (2026-11-07)**: 検索流入の多い 20 本を `feat/blog-photo-thumbnails` から R2 へ反映した (run 42301411424)。サムネイルは 40 枚とも差し替わり、ライトとダークは同じ絵。OGP は 19 本が同一バイト。`sports-urban-paradox` だけ変わったが、反映前の画像を保存しておらず原因は未確認。
+- **期限 2026-11-14 の週次修復より前**: `quality-suite-weekly.yml` の ogp-images job は main のコードで動く。このブランチが main に入っていないと、全面の絵を知らないコードが 20 本を旧構図へ戻す。PR 1244 が閉じたら develop へ入れ、main へのマージをオーナーに諮る。間に合わなければ戻ることを前提に、絵は git にあるので再反映できる。
+- **残り**: 公開 848 本のうち 828 本。死亡・犯罪・災害・中絶などの慎重な題材は別枠で判断する。テーマ 56 件は経路の登録とカードの実装が先。
+- **直すこと**: サムネイルは平均 44.9KB で現行の 2.5 倍。WebP の品質を下げて確認する。歯車・地球儀・聴診器が重なるので題材の分散を確かめる。`sports-urban-paradox` の OGP は「スポー / ツ」で改行している。
+- **別ブランチの分**: `feat/m01-through` にある `draft-file` の route・`question-progress.ts`・`draft-background-route.test.ts` は develop に無いので、新しい置き場の判定を本体の作業ツリーに未コミットで残した。そのブランチの commit に含める。
+- **完了条件**: main に入り、週次修復の後も 20 本が写真のまま残り、全件の可否をオーナーが決めている。
+
+
+### [RANKING-CARD-WEBP-UNUSED-01] ランキングカードの WebP 4,918 枚の読み手を確かめ、不要なら生成と週次修復を止める
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:grep -rn "rankingThumbnailKeys" apps packages] [起票:2026-11-06] [領域:サイト]
+
+- **事実**: `app/ranking/<key>/thumbnail-{light,dark}.webp` のキー関数 `rankingThumbnailKeys` を使うのは `generate-ogp-images.ts` だけで、`apps/web/src` からの参照は見つからなかった。本番 7 ページ (`/`・`/ranking`・`/blog`・ランキング詳細・ブログ詳細・`/themes`・`/category/population`) の HTML にも参照が無かった (2026-11-06)。読者が見るランキングの地図は `FeaturedRankings`・`RankingLinkCard` などがその場で描く SVG である。
+- **未確認**: 外部や他の経路 (動的な組み立て) からの利用。検索で見つからなかっただけで、不在は確定していない。撤去の前に、作られた経緯を git log で確かめる。
+- **やること**: ① 読み手の有無を確定する ② 無ければ `--type ranking-cards` の生成・週次の ogp-images job・`sync-snapshots.yml` のフック・ギャラリーの ranking-card タブを止め、`OGP-RANKING-CARD-BLOG-REPAIR-01` の ranking 分を閉じる ③ 経路 `ranking-card-motif` は対象の画像が表示されないので、続けるか取り下げるかを決める。
+- **停止条件**: 読み手が見つかった場合は止めず、その表示面を確かめてから判断する。R2 の実体の削除はオーナーの判断を待つ。
+- **完了条件**: 読み手の有無が確定し、不要なら生成・監査・規約 (`ogp-image-standards.md` のカード欄) から外れている。
+
+
+
+### [GSC-COV-SITEMAP-20261107] GSC 是正: sitemap に無い未登録ページ 10 件を sitemap へ載せるか noindex にする
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261107.txt] [起票:2026-11-07] [領域:サイト]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`data/gsc/coverage-remediation/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261107.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/api/ranking/academic-achievement-test-average-rate/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-22)
+  - https://stats47.jp/api/ranking/academic-achievement-test-average-rate/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-22)
+  - https://stats47.jp/api/ranking/accountant-annual-income/download?format=json (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-24)
+  - https://stats47.jp/api/ranking/adult-sandals-consumption-quantity/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-22)
+  - https://stats47.jp/api/ranking/agricultural-output-per-employed-person/download?format=csv (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-23)
+  - https://stats47.jp/api/ranking/agriculture-forestry-fisheries-expenditure-ratio-pref-finance/download?format=csv&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-24)
+  - https://stats47.jp/api/ranking/air-fare-consumption-expenditure/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-23)
+  - https://stats47.jp/api/ranking/air-fare-consumption-expenditure/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-23)
+  - https://stats47.jp/api/ranking/alcohol-sales-per-adult-shochu/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-24)
+  - https://stats47.jp/api/ranking/alcohol-sales-per-adult-shochu/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-10-24)
+- **次**: 200 を返すが sitemap に無く、Google も登録していない。sitemap の生成元 (`apps/web/src/app/sitemap.ts` と参照している config) で除外している理由を読み、`--probe <url>` で本文量を見て、検索に出す価値があれば sitemap へ載せ、薄い・重複なら noindex にする。同じ種類の URL は同じ規則で揃える。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261107.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
+### [CONTENT-TYPE-FIT-01] 型に合っていない記事の処置を決めて反映する
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run content-types:check] [起票:2026-11-06] [領域:コンテンツ]
+
+- **起点**: 2026-11-06 に全コンテンツを 4 型へ振り分け、機械の止めとルールを入れた (`.claude/rules/content-type-standards.md`)。処置の案は `data/content/type-fit-review.json` にあり、一覧は `/content/expansion`。公開から 28 日に満たない 246 本はクリックで判定していない。
+- **決定済み (撤去 3 本・実行待ち)**: `annual-sunshine-duration-vs-auto-liability-insurance-amount`・`shumai-consumption-expenditure-vs-jr-freight-shipment`・`road-length-per-km2-vs-residential-building-starts`。残す決定は 3 本。
+- **やること**: ① 撤去 3 本の実行をオーナーに確認し、`GONE_BLOG_SLUGS` の手順で反映する (本文は `archive-blog-articles.mjs` で退避してから) ② 統合 9 本・書き直し 23 本の処置を決め、`decisions` に書く ③ note の用途別商品とサービスの型 (題名から仮置き) を確定する ④ URL の規則で参照型にした 420 本のうち、題名に「なぜ」を含む 187 本を参照型のままにしてよいかを確認する ⑤ 2026-10-28 以降に公開した相関の記事は、計測が 28 日を超えた週の `content-types:fit` で改めて判定する。
+- **完了条件**: `/content/expansion` の処置の案が 0 件で、決定が台帳にあり、note の仮置きが確定している。
+
+### [ISSUE-PRODUCT-LINK-01] 販売する商品から、起点の問いを直接指せるようにする
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run issues:check] [起票:2026-11-06] [領域:商品]
+
+- **起点**: `/content/questions` の有料 note の列は、同じページを経由して辿れる件数だけで、問いから企画した商品とは区別できない (2026-11-06 実測: 問い 204 件のうち 6 件、有料 note 152 本のうち 3 本)。商品の台帳に問いの項目が無い。
+- **境界**: 指すのは社会の問い (`data/content/issues.json`) だけで、事業イシューマップ (`data/business/issue-map.json`) と混ぜない。問いの `revenue` とマップの列を対応づけない (2026-11-06 オーナー判断)。
+- **やること**: ① 商品の正本 (note の記事台帳・Kindle のカタログ) のどこに問いの ID を持つかを決める ② 新しい商品から書き、既存は根拠があるものだけ足す ③ 外部キー検査と `/content/questions` の列を直接の関係へ切り替える。
+- **完了条件**: 問いから直接指された商品の件数が画面に出て、存在しない問いの ID を `npm run check-datasets` が止める。
+
 ### [H01-VACANT-ARTICLE-PUBLISH-01] H01 の空き家の記事を背景画像つきで公開し、図の台帳と X の下書きを進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
@@ -1052,6 +1111,13 @@ updated: 2026-11-01
 - **ゴール (2026-11-05 オーナー決定)**: 統計の図は、種類ごとに 1 つの型から作られ、サイト・note・SNS で同じ型を使う。型から外れた図は機械が止める。11-04 のゴールは型の統一・値の正しさ・記事への反映を 1 つにしていて記事の修正へ広がったので、型の統一だけに絞った。
 - **完了の判定**: ① 図の種類ごとに型が 1 つあり、管理画面で見本を確かめられる ② 各媒体の生成処理がその型を使い、旧い描画処理が残っていない ③ 新しく作る図が型から外れると検査で止まる。
 - **完了に含めないもの**: 公開中の記事の差し替え (`NOTE-FIGURE-ROLLOUT-01`)、記事の修正 (`NOTE-FIGURE-FIX-01`)。値の検査 (`audit-chart-axes.ts`・`data/note/body-figures.json`) は週次で動くものをそのまま使い、作業を足さない。
+- **型を持つ判断 (2026-11-06 オーナー決定)**: レーダー・サンキー・ウォーターフォールも型として持つ。内容から型を選ぶ入口と、型から使える内容を探す入口の両方があるので、公開中の枚数の少なさでは外さない。型の台帳 `image-templates.json` の `fit` (`answers` = 答える問い、`needs` = 必要なデータの形) が両方の入口の情報を持つ。`fit` から候補の内容を機械で探す仕組みはまだ無い。
+- **進み具合 (2026-11-06)**: 型は全 15 種の見本がオーナーの確認を通った (未使用 3 を除き決定済み)。`generate-article-charts.ts` の統計の図は全て型で描き、旧い描画と代替の経路を外した。全 47 県がそろわない行と五分位は棒の型の `items` で描く (10 行まで全行、11 行以上は上位と下位)。`--validate` は型から作られていない統計の図を止める。公開中の図 1,876 枚の元データを型へ通すと、描けないのはタイトルの無い図と 2 枚のヒートマップなど少数で、再生成の時に警告で残る。Remotion の `RankingNote-ChoroplethMap/Chart/Boxplot` は削除済み。`regenerate-tile-maps.ts`・`generate-flood-exposure-article.ts` も型へ移し、note の `scatter.js` は削除した。残り: `generate-kakei-charts` (上位 10・下位 10 の 2 列と正負の棒。型へ移すと見せ方が変わるのでオーナーの判断が要る)、Instagram の `CorrelationScatterSlide`・`RankingTableSlide`、`render-article-pilot.ts`・`quick-still --layout` の試作の経路、Kindle の `ranking-databook.ts` (図の棒を svg-builder で描く)、箱ひげの見本の登録 (Mac)、使われなくなった svg-builder の関数と `blog-svg-chart-standards.md` の説明の削除。公開中の図の差し替えは `regenerate-blog-svgs.yml` を動かすまで起きない。
+- **地図の土台 (2026-11-06)**: 投影と形の読み込みを `packages/gis/src/map/geometry.mjs` へ集約した (12 ファイル)。移行の前後で主な地図の出力は一致した。残る重複は地図の色の解決 (`choropleth.ts`・`choropleth-diverging.ts`・動画ごとの配色) で、配色の台帳を通すと公開画像が変わるので別に扱う。
+- **動画の整理 (2026-11-06)**: どこからも使われていない Remotion の構成 25 個と部品を削除した (TikTok・人口の地図動画・YouTube の通常動画と GES・比較ショートなど)。残すのは描画の手順がある構成 (`BarChartRace`・`MigrationFlow-Reel`・`StationPassengers-Reel`・`BuzzMap`・`RankingYouTube-Short`・Instagram のリールなど)。戻すときは git の履歴から復元する。残りの動画を静止画と同じ土台へ載せる作業は未着手。
+- **動画の色 (2026-11-06)**: 紙・文字・線の色の正本を `packages/types/src/chart-theme.ts` の `CHART_THEMES` 1 つにし、Remotion の `COLOR_SCHEMES`・`migration-flow`・`station-passengers` をここから導く。ランキングの動画は元から `meta.presentation` で指標の配色を読む。人の移動・駅・バズ地図の色は指標ではなくデータ自身の区分なので対象外。Windows の PC では `@rspack/binding-win32-x64-msvc` が無く Remotion の描画が動かないので、変更後の動画と SNS 画像の見た目は未確認。Mac で `RankingInstagram-Table`・`MigrationFlow-Reel` を描いて確かめ、動画のコマを確認ページの見本に足す。
+- **動画は 2 種類 (2026-11-06 オーナー決定)**: ランキングのショートとバーチャートレースだけを残し、予想クイズのリール・バズ地図の動画・人の移動と駅の動画を撤去した (`sns-content-standards.md` §2-4)。`@stats47/migration-flow`・`station-passengers` とその public データはサイトの再生機と生成処理が使うので残す。`prepare-buzz-map-batch.ts` の動画の分岐は計画が常に静止画だけになったので動かない。
+- **動画の見本 (2026-11-06)**: 確認ページで残した 4 本を再生できる (`npm run review-videos --workspace remotion`、出力は `.local/video-review/`)。実物で見つけた単位の誤り・重なり・丸め・紺の面・枠内の発行元の表示・空の帯は 2026-11-06 に直した。終わりの画面の `stats47.jp` は送客の案内なので残す。バーチャートレースの値は 5 桁まで出るので、桁数の上限はオーナーの見た目の確認で決める。地球の背景動画はこの PC に無いので見本は無しで描いた。
 - **今の位置 (2026-11-05 棚卸し)**: 公開中のブログの図 2,127 枚を R2 から全件数えた。型の印があるのは 1,635 枚 (棒 1,017・タイル地図 424・散布図 194)、無いのは 492 枚で、内訳は旧い棒 175・五分位の棒 59・要点カードと工程図 124・折れ線 86・旧いタイル地図 31・積み上げ 6・旧い散布図 5・レーダー 3・ヒートマップ 2・ウォーターフォール 1 (型の印の無い図は図の中身から分類した)。「棒・地図・散布図は型」は正しくなかった。散布図の検査 `audit-chart-axes.ts` は名前に scatter を含む図しか見ていない。
 - **棚卸しの表 (媒体別)**:
   | 図の種類 | サイト | note | X・Threads | Instagram |
@@ -4089,6 +4155,15 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [IMAGE-BOUNDARY-CONSOLIDATE-01] 画像まわりの依存の向きと重複を直す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-06]
+
+2026-11-06 の監査で出た指摘 4・9・10 に対応する。手順は vault の `memos/stats47画像まわり_次セッションの指示.md`、指摘の全文は `memos/stats47画像まわり監査_2026-11.md`。
+
+- **範囲**: `GONE_BLOG_SLUGS` と `BRAND` を共有パッケージへ移す。`OgpVisualType` を `as const` の配列から導出する。`generate-blog-thumbnails.ts` と `generate-blog-thumbnails-cloud.ts` の重複を lib へ移す
+- **判断待ち**: `BRAND` を移すと `rendererHash` が変わり、全画像の fingerprint が変わる。週次の自動修復は種別ごとに500件までなので、既定のままでは ranking で5週ほど [OGP Alert] が続く。手動で上限を上げるか、`BRAND` だけ後回しにするかをオーナーが決める
+- **完了条件**: 別ブランチの PR が作られ、型検査と関連テストが通っていること。本番デプロイと R2 への書き込みはしない
 
 ### [PRODUCT-LINEUP-2026-11] 残りの判断: 統計の地図・グラフを資料用に作る受注をココナラで始めるか
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-05] [領域:商品]

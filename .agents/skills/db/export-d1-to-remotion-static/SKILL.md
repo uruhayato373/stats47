@@ -49,7 +49,6 @@ Phase 6 (2026-05-27) で観測値の SSOT を R2 に移行済。各 exporter は
 | feature | 出力 | 入力 (R2) |
 |---|---|---|
 | `migration-flow` | `pref-net-{year}.json` + `{NN}.json` × 47 + `municipalities/{NN}.json` × 47 | `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json`, `app/stats/population-migration-net-municipality/cities.json` |
-| `population-yoy-47` | `timeseries.json` | `app/stats/japanese-population/values.json` |
 | `station-passengers` | `index.json` | `app/stats/station-passengers-annual-total/values.json` |
 | `master` | `packages/area/src/data/{prefectures,cities}.json` | D1 `prefectures` / `cities` (master 系のみ D1 残存) |
 

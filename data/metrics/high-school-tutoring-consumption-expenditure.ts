@@ -25,7 +25,7 @@ export const highSchoolTutoringConsumptionExpenditure: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2007,
+    "from": 2000,
     "to": 2025,
   },
   "yearFormat": "calendar",

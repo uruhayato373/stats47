@@ -6,6 +6,8 @@ model: sonnet
 effort: high
 ---
 
+**4 型の審査 (必須)**: 記事の型 (`data/content/content-types.json`) の約束を満たすかも審査する。約束と落とす例は `.claude/rules/content-type-standards.md`。
+
 # Blog Critic Agent
 
 ブログ記事の品質レビューを専任する agent。 blog-editor から expert-review / panel-review を切り出した。 記事本文は read-only で読み、**意味的品質** (読者価値 / 冗長・図表重複 / curiosity gap の真正性 / 内部リンク / callout / factual) を判断する。 記事の修正は呼び元 agent (article-writer 等) に委ねる。

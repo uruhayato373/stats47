@@ -30,6 +30,7 @@ const { datasetPath } = require("../../../config/datasets.mjs");
 const ROOT = path.resolve(__dirname, "../../..");
 const STORE_PATH = path.join(ROOT, datasetPath("sns.posts"));
 const LOG_PATH = path.join(ROOT, datasetPath("sns.post-log"));
+const CONTENT_TYPES_FILE = path.join(ROOT, datasetPath("content.types"));
 
 const STATUSES = ["draft", "scheduled", "posted", "deleted"];
 // unrecorded = 承認の記録を始める前の行。承認された証拠が無いので approved に読み替えない
@@ -120,6 +121,19 @@ function assertRecordIntegrity(record) {
   }
 }
 
+/**
+ * 新しい投稿は 4 型のどれかに決まる domain でなければ足せない (正典 content-type-standards.md)。
+ * ブログ・note を指す投稿は指している先の型を継ぐので、ここでは行き先の有無だけを見る。
+ */
+function assertContentTypeDecided(record) {
+  // 投稿済みの記録は落とさない。実際に出た投稿の記録を失うほうが害が大きく、検査は content-types:check が担う
+  if (!record.domain || record.status === "posted") return;
+  const { rules, assignments } = JSON.parse(fs.readFileSync(CONTENT_TYPES_FILE, "utf8"));
+  const inherits = (record.domain === "blog" || record.domain === "note") && record.content_key;
+  if (inherits || rules.snsDomains[record.domain] || assignments.some((a) => a.id === `sns:${record.id}`)) return;
+  throw new Error(`投稿の domain=${record.domain} に型が決まっていません。4 型の台帳 (content.types) の rules.snsDomains に足してください (id=${record.id})`);
+}
+
 function read() {
   try {
     const data = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
@@ -180,6 +194,7 @@ function insert(record) {
     ...record,
   };
   assertRecordIntegrity(row);
+  assertContentTypeDecided(row);
   data.posts.push(row);
   data._meta.nextId = id + 1;
   write(data);

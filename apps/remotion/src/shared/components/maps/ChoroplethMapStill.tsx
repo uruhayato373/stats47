@@ -14,6 +14,7 @@ import type { RankingEntry, RankingMeta } from "../../types/ranking";
 import type { ChoroplethPathInfo } from "../../utils/choropleth";
 import { ChoroplethMapSvg } from "./ChoroplethMapSvg";
 import { SITE } from "@stats47/types";
+import { DARK_PAPER_RGB } from "../../themes/brand";
 
 interface ChoroplethMapStillProps {
   meta: RankingMeta;
@@ -197,7 +198,7 @@ export const ChoroplethMapStill: React.FC<ChoroplethMapStillProps> = ({
               width: 420,
               zIndex: 10,
               backgroundColor: isDark
-                ? "rgba(15, 23, 42, 0.9)"
+                ? `rgba(${DARK_PAPER_RGB}, 0.9)`
                 : "rgba(255, 255, 255, 0.92)",
               backdropFilter: "blur(20px)",
               borderRadius: RADIUS.xl,
@@ -304,7 +305,7 @@ export const ChoroplethMapStill: React.FC<ChoroplethMapStillProps> = ({
               width: 420,
               zIndex: 10,
               backgroundColor: isDark
-                ? "rgba(15, 23, 42, 0.9)"
+                ? `rgba(${DARK_PAPER_RGB}, 0.9)`
                 : "rgba(255, 255, 255, 0.92)",
               backdropFilter: "blur(20px)",
               borderRadius: RADIUS.xl,
