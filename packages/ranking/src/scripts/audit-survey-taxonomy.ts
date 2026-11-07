@@ -20,6 +20,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { canonicalSurveyHubKey } from '@stats47/data-configs/content/href';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
 import surveysMaster from '../data/surveys.json';
@@ -415,7 +416,11 @@ async function auditBlog() {
       ]),
     ].sort();
     const snapshotSurveyIdSet = new Set(article.snapshotSurveyIds);
-    const missingSurveyIds = derivedSurveyIds.filter(
+    // snapshot は同じ調査の別 ID をハブへ寄せて焼くので、比べる前に同じ形へそろえる
+    const snapshotExpectedIds = [
+      ...new Set(derivedSurveyIds.map(canonicalSurveyHubKey)),
+    ];
+    const missingSurveyIds = snapshotExpectedIds.filter(
       (id) => !snapshotSurveyIdSet.has(id)
     );
     if (missingSurveyIds.length > 0) {
@@ -424,7 +429,7 @@ async function auditBlog() {
         surveyIds: missingSurveyIds,
       });
     }
-    const missingIndexIds = derivedSurveyIds.filter(
+    const missingIndexIds = snapshotExpectedIds.filter(
       (id) => !(snapshot?.surveyArticleIndex?.[id] ?? []).includes(article.slug)
     );
     if (missingIndexIds.length > 0) {
