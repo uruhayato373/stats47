@@ -37,11 +37,11 @@ describe('full-bleed article backgrounds', () => {
     expect(scenes.size).toBe(8);
     expect(lighting.size).toBe(4);
     const request = createFullbleedImagegenRequest(context);
-    expect(request).toMatchObject({ promptVersion: 'blog-photo-v1', model: 'gpt-image-2', assetPath: 'assets/blog/fullbleed-backgrounds/example-article.jpg' });
+    expect(request).toMatchObject({ promptVersion: 'blog-photo-v2', model: 'gpt-image-2', assetPath: 'assets/blog/fullbleed-backgrounds/example-article.jpg' });
     for (const value of [context.title, context.description, context.introduction, fullbleedBackgroundScene(context.slug), fullbleedBackgroundLighting(context.slug)]) expect(request.prompt).toContain(value);
     expect(request.prompt).not.toMatch(/left 55|rightmost|x=780|empty title|solid colour field|background colour|#[0-9a-f]{6}/i);
     expect(request.prompt).toContain('Use case: photorealistic-natural');
-    expect(request.prompt).toContain('Never show people, body parts, hands, faces, animals in distress, buildings, shops, vehicles on roads, streets, landscapes, or any place.');
+    expect(request.prompt).toContain('people, body parts, hands, faces, animals in distress, buildings, shops, vehicles on roads, streets, landscapes, or any place.');
     expect(request.prompt).toContain('recognisable real places or landmarks');
     expect(request.prompt).toContain('Device and document constraints:');
     expect(createFullbleedImagegenRequest(context)).toEqual(request);
@@ -58,7 +58,7 @@ describe('full-bleed article backgrounds', () => {
     expect(hasLocalArticleBackground(dir, context.slug)).toBe(true);
     put(dir, createFullbleedImagegenRequest(context).assetPath, bytes);
     const full = await resolvePreferredArticleBackgroundSource(dir, context);
-    expect(full!.promptVersion).toBe('blog-photo-v1');
+    expect(full!.promptVersion).toBe('blog-photo-v2');
     expect(blogRendererSourcesForBackground(full!.promptVersion)).toEqual([...blogRendererSources('ai'), 'apps/web/scripts/lib/blog-fullbleed-render.ts']);
     const project = resolve(import.meta.dirname, '../../../../..');
     expect(calculateRendererHash(project, blogRendererSourcesForBackground(full!.promptVersion))).not.toBe(calculateRendererHash(project, blogRendererSources('ai')));
@@ -87,13 +87,13 @@ describe('full-bleed article backgrounds', () => {
     const bytes = await sharp(await jpeg()).composite([{ input: Buffer.from('<svg width="1200" height="630"><rect width="180" height="630" fill="#24807F"/><circle cx="1000" cy="315" r="150" fill="#DFA32B"/></svg>') }]).jpeg().toBuffer();
     const data = { title: '題名', subtitle: '副題' };
     const outputs = { light: join(dir, 'light.webp'), dark: join(dir, 'dark.webp'), ogp: join(dir, 'ogp.png'), background: join(dir, 'background.jpg') };
-    await renderBlogImageBundleForBackground('blog-photo-v1', { data, fonts: [], outputs, aiBackground: { buffer: bytes, sha256: sha256(bytes) } });
-    const expected = await sharp(bytes).resize(640, 336, { fit: 'fill' }).webp({ quality: 90 }).toBuffer();
+    await renderBlogImageBundleForBackground('blog-photo-v2', { data, fonts: [], outputs, aiBackground: { buffer: bytes, sha256: sha256(bytes) } });
+    const expected = await sharp(bytes).resize(640, 336, { fit: 'fill' }).webp({ quality: 62, effort: 6 }).toBuffer();
     expect(readFileSync(outputs.light)).toEqual(expected);
     expect(readFileSync(outputs.dark)).toEqual(expected);
     expect(readFileSync(outputs.background)).toEqual(bytes);
     expect(renderToPng).toHaveBeenCalledWith(buildBlogExternalOgp(data), [], outputs.ogp);
-    await expect(renderBlogImageBundleForBackground('blog-photo-v1', { data, fonts: [], outputs, aiBackground: { buffer: bytes, sha256: 'wrong' } })).rejects.toThrow('SHA');
+    await expect(renderBlogImageBundleForBackground('blog-photo-v2', { data, fonts: [], outputs, aiBackground: { buffer: bytes, sha256: 'wrong' } })).rejects.toThrow('SHA');
   });
   it('accepts full-bleed assets without a legacy or published background', () => {
     expect(decideBlogBackgroundStatus({ slug: context.slug, articlePath: 'article.md', hasFullbleedAsset: true, hasArticleAsset: false, hasCodexCatalog: false, publishedBackground: null, currentPromptHashes: [] })).toEqual({ kind: 'fullbleed-asset', ok: true });

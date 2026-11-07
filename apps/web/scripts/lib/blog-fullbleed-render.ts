@@ -23,7 +23,7 @@ export async function renderFullbleedBlogImageBundle(
   // Resize the entire canvas; both themes receive exactly the same encoded bytes.
   const thumbnail = await sharp(options.aiBackground.buffer)
     .resize(BLOG_THUMBNAIL_SIZE.width, BLOG_THUMBNAIL_SIZE.height, { fit: 'fill' })
-    .webp({ quality: 90 }).toBuffer();
+    .webp({ quality: 62, effort: 6 }).toBuffer();
   writeFileSync(options.outputs.light, thumbnail);
   writeFileSync(options.outputs.dark, thumbnail);
   writeFileSync(options.outputs.background, options.aiBackground.buffer);

@@ -6,7 +6,7 @@ import { BLOG_AI_BACKGROUND_HEIGHT, BLOG_AI_BACKGROUND_WIDTH } from './blog-ai-b
 import { sha256 } from './image-generation-manifest';
 import { BLOG_ARTICLE_BACKGROUND_MODEL, articleBackgroundAssetPath, resolveArticleBackgroundSource, type BlogArticleImageContext, type BlogArticleBackgroundSource, type BlogArticleImagegenRequest } from './blog-article-background';
 
-export const BLOG_FULLBLEED_BACKGROUND_PROMPT_VERSION = 'blog-photo-v1';
+export const BLOG_FULLBLEED_BACKGROUND_PROMPT_VERSION = 'blog-photo-v2';
 export const BLOG_FULLBLEED_BACKGROUND_ASSET_DIR = 'assets/blog/fullbleed-backgrounds';
 export const FULLBLEED_SCENES = [
   'a worn dark wooden table',
@@ -25,12 +25,23 @@ export const FULLBLEED_LIGHTING = [
   'bright even daylight from above',
 ] as const;
 
+export const FULLBLEED_CAMERA = [
+  'overhead flat-lay view from directly above',
+  'low eye-level side view close to the surface',
+  'tight close-up crop that shows material detail',
+  'three-quarter view from a slight height',
+] as const;
+
 export function fullbleedBackgroundScene(slug: string) {
   return FULLBLEED_SCENES[createHash('sha256').update(slug).digest().readUInt32BE(0) % FULLBLEED_SCENES.length];
 }
 
 export function fullbleedBackgroundLighting(slug: string) {
   return FULLBLEED_LIGHTING[createHash('sha256').update(slug).digest()[4] % FULLBLEED_LIGHTING.length];
+}
+
+export function fullbleedBackgroundCamera(slug: string) {
+  return FULLBLEED_CAMERA[createHash('sha256').update(slug).digest()[5] % FULLBLEED_CAMERA.length];
 }
 
 export function buildFullbleedBackgroundPrompt(context: BlogArticleImageContext): string {
@@ -41,13 +52,14 @@ export function buildFullbleedBackgroundPrompt(context: BlogArticleImageContext)
     `Article title (context only; do not draw it): ${context.title}`,
     context.description ? `Article summary: ${context.description}` : 'Article summary: Use the introduction below.',
     context.introduction ? `Article introduction: ${context.introduction}` : '',
-    "Subject: choose one immediately recognisable real-world still life of at most two main physical objects that hints at the question of the article at a glance. Use only generic everyday objects, food, produce, tools, or materials. Show food cooked and ready to eat on the table, never raw meat or raw fish. For abstract topics, use one simple physical metaphor made of such objects. Never show people, body parts, hands, faces, animals in distress, buildings, shops, vehicles on roads, streets, landscapes, or any place. Do not illustrate every example mentioned in the article.",
+    "Subject: choose one immediately recognisable real-world still life of at most two main physical objects that hints at the question of the article at a glance. Use only generic everyday objects, food, produce, tools, or materials. Show food cooked and ready to eat on the table, never raw meat or raw fish. For abstract topics, use one simple physical metaphor made of such objects. Never show paper money, banknotes, cheques, ID cards, uniforms, caps with insignia, badges, medals, flags, emblems, official seals, people, body parts, hands, faces, animals in distress, buildings, shops, vehicles on roads, streets, landscapes, or any place. Do not illustrate every example mentioned in the article.",
     `Scene/backdrop: the objects rest on ${fullbleedBackgroundScene(context.slug)}. Full-bleed to all four edges, with soft out-of-focus depth. No frame.`,
     `Lighting: ${fullbleedBackgroundLighting(context.slug)}.`,
+    `Camera: ${fullbleedBackgroundCamera(context.slug)}.`,
     "Style/medium: editorial still-life photography shot on a full-frame camera with a 50mm lens, real materials and textures, shallow depth of field, subtle film grain, slight natural imperfections, muted realistic colour grading like a Japanese lifestyle magazine. It must look like a real photograph taken by a person, not a render, not an illustration, not an over-polished stock image.",
     "Composition/framing: 1200 by 630 canvas; one clear subject group placed slightly off-centre and large, filling most of the frame with natural negative space, framed so a 640 by 336 card and a 200 pixel wide thumbnail still read instantly.",
     "Color palette: natural realistic colours of the real objects",
-    "Constraints: no text, letters, numbers, logos, labels, packaging print, signage, watermark, maps, charts, identifiable real people, recognisable real places or landmarks, disaster or accident scenes, medical procedures, or the colours, stripes, signage or trade dress of any real store, brand or chain",
+    "Constraints: no text, letters, numbers, logos, labels, packaging print, signage, watermark, maps, globes, charts, identifiable real people, recognisable real places or landmarks, disaster or accident scenes, medical procedures, or the colours, stripes, signage or trade dress of any real store, brand or chain",
     'Device and document constraints: all screens and paper surfaces must be blank and unmarked; no charts, graphs, plots, bars, pies, grids, tables, dashboards, code-like strokes, interface icons, menus, or logos, including inside a computer screen. A device may have a plain dark screen or be closed. Do not depict the article title, statistics, or a screenshot of its output.',
   ].filter(Boolean).join('\n');
 }

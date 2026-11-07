@@ -18,7 +18,7 @@ it('request-article writes a full-bleed request at the unchanged request path', 
   await vi.waitFor(() => expect(io.writes.size).toBe(1));
   const [file, body] = [...io.writes][0];
   expect(file).toMatch(/\.local\/blog-imagegen\/requests\/new-example\.json$/);
-  expect(JSON.parse(body)).toMatchObject({ assetPath: 'assets/blog/fullbleed-backgrounds/new-example.jpg', promptVersion: 'blog-photo-v1' });
+  expect(JSON.parse(body)).toMatchObject({ assetPath: 'assets/blog/fullbleed-backgrounds/new-example.jpg', promptVersion: 'blog-photo-v2' });
 });
 
 it('queue excludes both local asset directories and published AI even with --force', async () => {
@@ -37,5 +37,5 @@ it('queue excludes both local asset directories and published AI even with --for
   await vi.waitFor(() => expect([...io.writes.keys()].some(file => file.endsWith('/queue.json'))).toBe(true));
   const queue = JSON.parse([...io.writes].find(([file]) => file.endsWith('/queue.json'))![1]);
   expect(queue.requests.map((request: { slug: string }) => request.slug)).toEqual(['missing-example']);
-  expect(queue.requests[0].promptVersion).toBe('blog-photo-v1');
+  expect(queue.requests[0].promptVersion).toBe('blog-photo-v2');
 });
