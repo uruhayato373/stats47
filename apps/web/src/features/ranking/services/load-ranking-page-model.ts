@@ -9,7 +9,6 @@ import {
   type GroupRankingItem,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
-import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyRankingAffiliatePolicy } from "@/features/ads/constants/ranking-affiliate-policy";
@@ -63,7 +62,7 @@ export async function loadRankingPageModel(rankingKey: string) {
   // 都道府県 TopoJSON はここで取得しない。1,015,004 bytes が RSC payload へ直列化され、
   // ranking HTML 1,232,628 bytes の約 82% を占めていた (2026-08-05 実測)。地図は
   // next/dynamic の ssr:false でサーバー描画されないため hydration まで使われず、
-  // 純粋な無駄だった。RankingMapChartClient が /prefecture.topojson を client fetch する。
+  // 純粋な無駄だった。RankingMapChartClient が簡略化した形データを client fetch する。
 
   const aiContentPromise = readRankingAiContentFromR2(rankingKey, AREA_TYPE).catch(
     (error) => {
@@ -208,7 +207,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     breadcrumbCategory,
     structuredData,
     faqStructuredData,
-    initialTileUrls: getInitialMapTileUrls(),
   };
 }
 

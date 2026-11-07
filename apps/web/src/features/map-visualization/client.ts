@@ -6,4 +6,3 @@ export {
   getLeafletBorderColor,
   rankingItemToMapConfig,
 } from "./utils/ranking-map-adapters";
-export { useThemedLeafletTile } from "./utils/use-themed-leaflet-tile";

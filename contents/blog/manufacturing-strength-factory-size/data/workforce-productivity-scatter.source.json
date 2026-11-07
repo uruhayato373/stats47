@@ -1,0 +1,20 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/manufacturing-shipment-amount/cities.json + r2:app/stats/manufacturing-employees/cities.json + r2:app/stats/manufacturing-establishments/cities.json + r2:app/stats/day-time-population/cities.json + r2:app/stats/day-time-population-ratio/cities.json",
+  "transform": "人口3万人以上の市区町村の人口1万人あたり従業者数と1人あたり出荷額を、両軸とも対数で点に示す",
+  "generatedBy": ".claude/scripts/analysis/m01-factory-size.ts",
+  "areaScope": {
+    "level": "municipality",
+    "wardMode": "merged",
+    "within": {
+      "kind": "nation"
+    }
+  },
+  "displaySources": [
+    {
+      "label": "社会・人口統計体系"
+    }
+  ],
+  "expectedPointCount": 764,
+  "pearsonR": 0.43
+}

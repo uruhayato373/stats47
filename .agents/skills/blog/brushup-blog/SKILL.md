@@ -407,12 +407,11 @@ git checkout develop
 git merge --no-ff feature/brushup-batch-YYYY-MM-DD -m "Merge brushup-batch YYYY-MM-DD"
 git push origin develop
 
-gh pr create --base main --head develop \
-  --title "brushup-batch YYYY-MM-DD (N 記事)" \
-  --body "$(cat /tmp/brushup-report.md)"
 ```
 
-**ここで停止する。`gh pr merge --auto` は付けない** — CI green 確認後に人間がマージする (`.claude/rules/branch-workflow.md` の develop→main ゲート)。
+**main 宛ての PR は開かない。** 記事は develop への push で公開の経路に乗る。コードの変更を本番へ出すかはオーナーが決める (`npm run release:status` を報告する)。
+
+**ここで停止する。** マージと本番反映はオーナーの指示で `/deploy` が行う (`.claude/rules/branch-workflow.md`)。
 
 ### Step 4: history 更新
 

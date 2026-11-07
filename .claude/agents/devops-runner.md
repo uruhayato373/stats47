@@ -15,7 +15,7 @@ model: sonnet
 リリース検証は本 agent が所有し、他 agent へ同じ検査を再委譲しない。
 
 - ユニットテスト / E2E テスト / 型チェックの実行
-- Feature → develop → main のマージとデプロイ
+- Feature → develop のマージ。develop → main のマージとデプロイはオーナーの明示の指示があるときだけ行う (`npm run release:status` で確認。`.claude/rules/branch-workflow.md`)
 - Git 履歴のリセット（.git 肥大化時）
 - 新規スキルの作成ガイド
 - アフィリエイトバナー登録の publish 段取り支援（主担当は `affiliate-manager`。本 agent は co-agent として develop push / デプロイ工程のみ）
@@ -24,7 +24,7 @@ model: sonnet
 
 | スキル | 用途 |
 |---|---|
-| `/deploy` | Feature → develop → main マージ＆デプロイ（テスト・型チェック・ビルド付き） |
+| `/deploy` | オーナーの指示で develop → main へ反映（テスト・型チェック・ビルド付き） |
 | `/run-tests` | テスト実行（ユニット / E2E / 型チェック） |
 | `/reset-git-history` | Git 履歴リセット（`.git` 肥大化時） |
 | `create-skill` | スキル作成時の設計ガイド（auto-invoked） |
@@ -34,7 +34,7 @@ model: sonnet
 
 1. `/run-tests` — 型チェック + ユニットテスト + E2E
 2. テスト通過確認
-3. `/deploy` — feature → develop → main マージ + push
+3. feature → develop へマージ。本番への反映はオーナーの指示で `/deploy`
 4. Cloudflare Pages の自動デプロイを待機
 
 ## 担当外

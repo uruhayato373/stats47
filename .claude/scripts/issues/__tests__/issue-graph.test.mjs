@@ -2,6 +2,7 @@
  * 問いの台帳の検査が守る意図:
  *   - 同じ事実を二か所に持たない (小さな問いの親・テーマ・答えの記事が使う指標は導出し、写しを書かせない)
  *   - 役割とページ種別を取り違えない (答え = 読み物、根拠 = データ)
+ *   - 答えの記事は問いごとに 1 本。関連する記事を答えとして積み上げない
  *   - 棚卸しの 4 分類が経路と読まれ方の両方で決まる
  */
 import assert from "node:assert/strict";
@@ -213,4 +214,12 @@ test("下書きの待ち: 本文の審査が先で、背景画像は別の工程
   assert.equal(row("背景待ち").actual, "背景待ち");
   assert.equal(row("背景待ち").target, "blog:a");
   assert.equal(row(null).drift, true, "台帳に下書きがあると書いたのに実物が無い");
+});
+
+test("1 つの問いに答えを 2 本結ぶと止まる", () => {
+  const issues = [{ id: "issue:A01", level: "major", question: "問い", unit: "prefecture", answerability: "relation", primaryTheme: "theme:aging-society", revenue: ["広告"], status: "active" }];
+  const pages = indexPages([{ pages: [page("blog:a"), page("blog:b")] }]);
+  const answers = (...keys) => keys.map((key) => ({ issue: "issue:A01", page: `blog:${key}`, role: "answers" }));
+  assert.equal(validateIssueGraph({ issues, links: answers("a"), pages }).errors.filter((e) => e.includes("1 本だけ")).length, 0);
+  assert.equal(validateIssueGraph({ issues, links: answers("a", "b"), pages }).errors.filter((e) => e.includes("1 本だけ")).length, 1);
 });

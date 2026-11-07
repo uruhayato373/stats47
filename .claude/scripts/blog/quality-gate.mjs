@@ -44,6 +44,7 @@ import { lintRegionClaims } from '../lib/region-claim-lint.mjs';
 import { TITLE_PROMISE_WARNING_RULES, lintTitlePromises } from '../lib/title-promise-lint.mjs';
 import { lintHypernymMetricNames, lintExtremeBaseYear } from '../lib/metric-name-lint.mjs';
 import { lintBlogContentType } from '../content-types/blog-type-lint.mjs';
+import { checkAnalyses } from '../analysis/check-analysis-cycle.mjs';
 import {
   lintSvgContent,
   lintSvgSize,
@@ -378,6 +379,9 @@ warnings.push(...sourceLinkLint.warnings);
 const contentTypeLint = lintBlogContentType(PROJECT_ROOT, slug, articlePath);
 checks.contentType = contentTypeLint.type;
 blockers.push(...contentTypeLint.blockers);
+
+// 問いの分析の工程 (正典 manage-issue-ledger)。問いに答える記事は視点と根拠が揃うまで公開しない
+blockers.push(...checkAnalyses(slug).errors);
 
 // 括弧内数値挿入 (2026-07-31 追加、paren-number-lint.mjs)
 // 「都道府県名の直後に括弧で値・順位を入れない」= blog-quality-standards.md「数値の書き方」。

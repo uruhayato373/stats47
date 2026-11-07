@@ -240,7 +240,9 @@ function scatterTypeErrors(filename, svg) {
   const errors = [];
   // 県名は点の横に text-anchor 付きで置かれる。長い題名は同じ大きさになるので大きさだけでは見分けない
   const names = [...String(svg).matchAll(/text-anchor="(?:start|end)" font-size="32" font-weight="700">([^<]+)</g)].map((m) => m[1]);
-  const short = names.filter((n) => !PREF_NAMES.includes(n));
+  // 市区町村の散布図の名前は呼び出し元が選んだ町名
+  const municipal = String(svg).includes('data-level="municipality"');
+  const short = municipal ? [] : names.filter((n) => !PREF_NAMES.includes(n));
   if (short.length) errors.push(`散布図の県名が正式名でない: ${short.join(' ')} (${path_base(filename)})`);
   if (imageThemeOf(svg) === 'dark') {
     const paper = /<rect\b[^>]*fill="(#[0-9a-fA-F]{6})"/.exec(String(svg))?.[1];
@@ -479,7 +481,7 @@ export function lintScatterData(filename, jsonData, sourceData) {
     explicitCount !== undefined &&
     (!Number.isInteger(explicitCount) ||
       explicitCount < 1 ||
-      explicitCount > PREFECTURE_SCATTER_POINT_COUNT)
+      (explicitCount > PREFECTURE_SCATTER_POINT_COUNT && jsonData?.level !== 'municipality'))
   ) {
     errors.push(
       `expectedPointCount=${String(explicitCount)} は1〜${PREFECTURE_SCATTER_POINT_COUNT}の整数でなければならない`

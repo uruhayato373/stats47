@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
+import { PREFECTURE_SVG_TOPOJSON_PATH } from "@/constants/static-assets";
 
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../../../../..");
 
@@ -12,103 +12,48 @@ function source(path: string): string {
 }
 
 const RANKING_MAP = "apps/web/src/features/ranking/components/RankingMapChart/RankingMapChartClient.tsx";
-const SHARED_MAP = "packages/visualization/src/leaflet/components/LeafletChoroplethMap.tsx";
 const PAGE_MODEL = "apps/web/src/features/ranking/services/load-ranking-page-model.ts";
+const HEAD_ASSETS = "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageHeadAssets.tsx";
 const CLIENT_SHELL =
   "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx";
-const PUBLIC_TOPOJSON = "apps/web/public/prefecture.topojson";
+const PUBLIC_TOPOJSON = "apps/web/public/prefecture-simple.topojson";
 
 /**
- * ランキング地図のベースマップ契約。
+ * ランキング地図の配信の契約。
  *
- * 経緯: 2026-08-02 の commit 2152490d が LCP 対策としてランキングページから
- * ベースマップタイルを外し、その状態を固定するテストを置いた。しかし
- * **タイルの preload だけがページモデルに残り**、描画されないタイルを
- * デスクトップで高優先度に 4 枚先読みする状態で本番配信されていた。
- * PSI は対策 16 時間後でも ranking 詳細が LCP 5.2〜7.0s のままで改善は確認できず、
- * 2026-08-03 にオーナー判断で対策を撤回した。
- *
- * このテストは「背景を消さない」ことではなく、**preload と描画が食い違わない**ことを
- * 守る。片方だけを消す変更は、どちらの方向でもここで落ちる。
+ * 2026-11-06 に背景タイルを外して SVG の地図にした。2026-08-02 にも背景を外したが、タイルの先読みだけが
+ * ページに残り、描画されないタイルを高優先度で読んでいた (2026-08-03 に撤回)。先読みと描画を食い違わせない。
  */
-describe("ranking map base tile contract", () => {
-  it("renders a base tile layer on the ranking map", () => {
-    const rankingMap = source(RANKING_MAP);
-    expect(rankingMap).toContain("tileUrl={currentTile.url}");
-    expect(rankingMap).toContain("attribution={currentTile.attribution}");
-  });
-
-  it("lets the reader switch tile providers", () => {
-    expect(source(RANKING_MAP)).toContain("<TileSwitcher");
-  });
-
-  it("requires a tile url on the shared map so a missing base map cannot type-check", () => {
-    const sharedMap = source(SHARED_MAP);
-    // optional (`tileUrl?:`) に戻すと、引数を落とす変更が型検査を通ってしまう
-    expect(sharedMap).toContain("tileUrl: string;");
-    expect(sharedMap).not.toContain("tileUrl?: string;");
-    // 背景の不透明度など他の属性は足してよい。tileUrl を url に渡していることだけを固定する
-    expect(sharedMap).toMatch(/<TileLayer url=\{tileUrl\} attribution=\{attribution\}[^>]*\/>/);
+describe("ranking map delivery contract", () => {
+  it("does not preload map tiles for a map without tiles", () => {
+    expect(source(HEAD_ASSETS)).not.toContain('rel="preload"');
+    expect(source(PAGE_MODEL)).not.toContain("getInitialMapTileUrls");
+    expect(source(RANKING_MAP)).not.toContain("tileUrl");
   });
 
   /**
-   * 都道府県 TopoJSON を RSC payload へ載せない契約。
+   * 形データを RSC payload へ載せない契約。
    *
-   * 経緯: サーバーが fetchPrefectureTopology() の結果を props で client 境界へ渡しており、
-   * 1,015,004 bytes が RSC payload へ直列化されていた。2026-08-05 実測で ranking HTML は
-   * 非圧縮 1,232,628 bytes、その約 82% がこれ。地図は next/dynamic の ssr:false なので
-   * サーバーでは一度も描画されず、hydration まで使われない純粋な無駄だった。
+   * 経緯: サーバーが形データを props で client 境界へ渡しており、1,015,004 bytes が RSC payload へ
+   * 直列化されていた (2026-08-05 実測で ranking HTML の約 82%)。
    */
-  it("does not fetch the prefecture topology on the server", () => {
+  it("does not fetch the topology on the server", () => {
     const pageModel = source(PAGE_MODEL);
     expect(pageModel).not.toContain("fetchPrefectureTopology");
     expect(pageModel).not.toContain("topologyPromise");
   });
 
   it("does not hand the topology across the client boundary", () => {
-    // ここで props に載せると 1MB が毎リクエストの HTML に戻る
     expect(source(CLIENT_SHELL)).not.toContain("topology=");
   });
 
-  it("loads the prefecture topology from a same-origin static asset", () => {
-    // パスは constants/static-assets.ts が単一ソース。地図はその定数を fetch する
-    expect(source(RANKING_MAP)).toContain("fetch(PREFECTURE_TOPOJSON_PATH)");
-    expect(PREFECTURE_TOPOJSON_PATH).toBe("/prefecture.topojson");
+  it("loads the simplified topology from a same-origin static asset", () => {
+    expect(source(RANKING_MAP)).toContain("PREFECTURE_SVG_TOPOJSON_PATH");
+    expect(PREFECTURE_SVG_TOPOJSON_PATH).toBe("/prefecture-simple.topojson");
     expect(existsSync(resolve(PROJECT_ROOT, PUBLIC_TOPOJSON))).toBe(true);
   });
 
-  /**
-   * ベースマップを TopoJSON 取得の後ろに直列で並べない契約。
-   *
-   * 経緯: 上の「RSC payload に載せない」対策で 1MB は HTML から消えた (FCP 3,462ms →
-   * 1,673ms) が、client fetch した TopoJSON が届くまで Skeleton を出していたため
-   * LeafletChoroplethMap が一度も render されず、next/dynamic の chunk 取得すら
-   * 始まらなかった。結果 TopoJSON 取得 → chunk 取得 → map 初期化 → タイル <img> の
-   * 直列鎖ができ、LCP 要素であるタイルが 1MB を待つ状態になった。
-   * 2026-09-06 PSI 実測でモバイル LCP 12,650ms、対策前 baseline 9,347ms より悪化。
-   *
-   * 描画側の不変量は
-   * packages/visualization/.../LeafletChoroplethMap.basemap-contract.test.tsx が
-   * 実際の render で固定する。ここは呼び出し側が再び gate を戻さないことを見る。
-   */
-  it("does not gate the base map on the prefecture topology", () => {
-    const loadingGate = /const isMapLoading\s*=([\s\S]*?);/.exec(source(RANKING_MAP))?.[1];
-    expect(loadingGate).toBeDefined();
-    expect(loadingGate).not.toContain("prefTopology");
-  });
-
-  it("renders the map while the topology is still null", () => {
-    const mapClient = source(RANKING_MAP);
-    // topology 未取得を fallback 扱いにすると、取得失敗と区別できないまま
-    // ベースマップごと消える
-    expect(mapClient).not.toContain("activeTopology === null ? (");
-    expect(mapClient).toContain("topology={activeTopology}");
-  });
-
-  it("keeps the tile preload and the tile layer in sync", () => {
-    const preloadsTiles = source(PAGE_MODEL).includes("getInitialMapTileUrls");
-    const rendersTiles = source(RANKING_MAP).includes("tileUrl=");
-    // 先読みだけ残す / 描画だけ残す のどちらも無駄か表示欠落になる
-    expect(preloadsTiles).toBe(rendersTiles);
+  it("keeps the map code out of the initial JavaScript", () => {
+    expect(source(RANKING_MAP)).toMatch(/dynamic\(\(\) => import\("\.\/RankingSvgMap"\)/);
   });
 });

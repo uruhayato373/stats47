@@ -99,6 +99,15 @@ export function validateIssueGraph({ issues, links, pages }) {
     answerRankingKeys.set(link.issue, keys);
   }
 
+  // 答えの記事は問いごとに 1 本。関連する記事は指標でつながるので台帳に書かない (2026-11-06 オーナー決定)
+  const answerCount = new Map();
+  for (const link of links) {
+    if (link.role === "answers") answerCount.set(link.issue, (answerCount.get(link.issue) ?? 0) + 1);
+  }
+  for (const [issue, count] of answerCount) {
+    if (count > 1) errors.push(`${issue}: 答えのページは 1 本だけ (${count} 本ある)`);
+  }
+
   for (const link of links) {
     const where = `${link.issue} → ${link.page}`;
     const pair = `${link.issue}\u0000${link.page}`;

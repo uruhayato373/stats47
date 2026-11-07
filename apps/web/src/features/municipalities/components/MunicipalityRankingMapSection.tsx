@@ -74,7 +74,7 @@ export async function MunicipalityRankingMapSection({
     <section aria-label={`${prefName}の分布地図`} className="mt-5">
       <SectionHeader title={`${prefName}の分布地図`} hideRule className="mb-0" />
       <div className="mt-2 border border-border p-2">
-        {/* 地図はランキングと同じ部品 (Leaflet) で描く。県内は分位 5 段・島嶼部は範囲の計算から外し、押すと市区町村のページへ (2026-10-30) */}
+        {/* 地図はランキングと同じ部品 (Leaflet) で描く。県内の塗り方は配色の台帳の判定・島嶼部は範囲の計算から外し、押すと市区町村のページへ (2026-10-30) */}
         <RankingMapChartClient
           rankingItem={{
             title: title ?? `${prefName}の分布`,
@@ -93,6 +93,7 @@ export async function MunicipalityRankingMapSection({
           areaHrefs={hrefByCode}
           navSurface="municipalities_map"
           bare
+          colorViewSwitch
           mapClassName="h-[420px]"
         />
       </div>
@@ -100,7 +101,7 @@ export async function MunicipalityRankingMapSection({
         政令指定都市は市単位で表示しています。灰色は比較対象外
         (データなし) の地域です。
         {FIT_EXCLUDE_BY_PREF[prefectureCode]
-          ? '島嶼部は初期表示範囲の外にあります (地図を縮小すると表示されます)。'
+          ? '島嶼部は地図に表示していません (値は表で確認できます)。'
           : ''}
       </p>
     </section>

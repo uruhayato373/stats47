@@ -167,7 +167,7 @@ R2成果物・provenanceを検証し、原典の公式URL（洪水は下記R2原
 | ----------- | -------------------------------------------- | --------------------------------------- |
 | **point**   | PortLeafletMap, FishingPortLeafletMap        | CircleMarker + Tooltip                  |
 | **line**    | （新規）                                     | GeoJSON + Polyline style                |
-| **polygon** | LeafletChoroplethMap, ChoroplethGeoJsonLayer | GeoJSON + fillColor/fillOpacity         |
+| **polygon** | RankingSvgMap (ランキング) / Leaflet の GeoJSON レイヤー (Geo) | GeoJSON + fillColor/fillOpacity         |
 | **mesh**    | （新規）                                     | Canvas ヒートマップ or GeoJSON グリッド |
 
 ## モジュール構成

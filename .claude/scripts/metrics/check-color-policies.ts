@@ -8,9 +8,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { datasetPath } from '../../../config/datasets.mjs';
+import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
 import { getMetricConfig, listAllMetrics } from '../../../packages/data-configs/src/registry';
-import { COLOR_GRAINS, COLOR_SKIP_REASONS, type ColorPolicyRow, type ColorPolicySkip } from '../../../packages/types/src/color-policy';
+import { COLOR_GRAINS, COLOR_SKIP_REASONS, COLOR_VIEWS, colorViewOf, type ColorPolicyRow, type ColorPolicySkip } from '../../../packages/types/src/color-policy';
 
 export type Ledger = { schemaVersion: 1; summary: Record<string, number>; skipped: ColorPolicySkip[]; policies: ColorPolicyRow[] };
 
@@ -34,6 +34,7 @@ export function colorPolicyErrors(ledger: Ledger, metricOf: (key: string) => unk
     seen.add(key);
     if (!metricOf(row.metricKey)) errors.push(`指標定義に無い: ${row.metricKey}`);
     if (row.classification.method === 'threshold' && row.colorSchemeType !== 'diverging') errors.push(`区切りは発散の配色だけ: ${key}`);
+    if (row.colorSchemeType === 'sequential' && !colorViewOf(row)) errors.push(`地図の見方 (COLOR_VIEWS) に無い塗り方: ${key}`);
     if (row.colorScheme !== undefined && row.colorSchemeType !== 'diverging') errors.push(`配色の差し替えは発散の配色だけ: ${key}`);
   }
   const withRow = new Set(ledger.policies.map((row) => row.metricKey));
@@ -65,6 +66,18 @@ export function schemaDriftErrors(schema: { properties: Record<string, { items: 
   ];
 }
 
+/** A figure's view only means something on a template coloured by value; elsewhere nothing would read it. */
+export function figureColorViewErrors(figures: { id: string; template: string; colorView?: string }[], templates: { id: string; metricColor?: string }[]) {
+  const scaled = new Set(templates.filter((template) => template.metricColor === 'scale').map((template) => template.id));
+  return figures.filter((figure) => figure.colorView && !scaled.has(figure.template)).map((figure) => `値の濃淡で塗らない型に colorView がある: ${figure.id}`);
+}
+
+/** The figures schema repeats the view ids; JSON Schema cannot import them. */
+export function figureViewDriftErrors(schema: { properties: { figures: { items: { properties: { colorView: { enum: string[] } } } } } }) {
+  const authored = [...schema.properties.figures.items.properties.colorView.enum].sort();
+  return JSON.stringify(authored) === JSON.stringify(COLOR_VIEWS.map((view) => view.id).sort()) ? [] : ['Schema の colorView が COLOR_VIEWS と違う'];
+}
+
 if (process.argv[1]?.endsWith('check-color-policies.ts')) {
   const file = path.resolve(__dirname, '../../..', datasetPath('ranking.color-policies'));
   const schemaFile = path.resolve(__dirname, '../../..', datasetPath('ranking.color-policies-schema'));
@@ -75,6 +88,11 @@ if (process.argv[1]?.endsWith('check-color-policies.ts')) {
   const errors = [
     ...colorPolicyErrors(ledger, getMetricConfig),
     ...schemaDriftErrors(JSON.parse(fs.readFileSync(schemaFile, 'utf8'))),
+    ...figureViewDriftErrors(JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../..', datasetDir('content.schema'), 'figures.schema.json'), 'utf8'))),
+    ...figureColorViewErrors(
+      JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../..', datasetPath('content.figures')), 'utf8')).figures,
+      JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../..', datasetPath('content.image-templates')), 'utf8')).templates,
+    ),
     ...(strict ? unaccounted : []),
   ];
   if (!strict) for (const line of unaccounted) console.warn(`⚠ ${line} (次の週次で作られる)`);

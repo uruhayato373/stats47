@@ -636,7 +636,7 @@ awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {
 3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
    （`export-blog-snapshot.ts` が article.md frontmatter を直接読んで `app/blog/all.json` を生成 = 完全DBレス。D1 articles テーブルは廃止済）
 4. 改善バックログ `.claude/todo/improvements.md` に BLOG-CTR-NN として記録
-5. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
+5. feature ブランチで commit → develop merge。本番への反映はオーナーの指示で `/deploy` (`branch-workflow.md`)
 
 ## 実証データ (2026-05-23 ベース)
 

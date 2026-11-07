@@ -1,0 +1,18 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/manufacturing-shipment-amount/cities.json + r2:app/stats/manufacturing-employees/cities.json + r2:app/stats/manufacturing-establishments/cities.json + r2:app/stats/day-time-population/cities.json + r2:app/stats/day-time-population-ratio/cities.json",
+  "transform": "人口あたり出荷額で 4 段に分け、隣どうしの対数の平均の差を、人口あたり従業者数と1人あたり出荷額へ分ける。足すと全体の差に一致する",
+  "generatedBy": ".claude/scripts/analysis/m01-factory-size.ts",
+  "areaScope": {
+    "level": "municipality",
+    "wardMode": "merged",
+    "within": {
+      "kind": "nation"
+    }
+  },
+  "displaySources": [
+    {
+      "label": "社会・人口統計体系"
+    }
+  ]
+}

@@ -72,7 +72,7 @@ primary_agent: theme-component-builder
      npx tsx apps/web/scripts/verify-page-components-snapshot.ts
    ```
 5. **本番反映**: `/push-r2` (または `push-r2-wrangler.ts`) で `.local/r2` → 本番 R2。該当ページの ISR を curl で確認
-6. feature ブランチで commit → develop merge → PR develop → main → CI green → deploy
+6. feature ブランチで commit → develop merge。本番への反映はオーナーの指示で `/deploy`
 
 ## 関連
 

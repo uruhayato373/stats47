@@ -47,6 +47,74 @@
             "type": "string",
             "minLength": 5
           },
+          "stage": {
+            "description": "工程。判定は .claude/scripts/analysis/analysis-cycle-core.mjs",
+            "enum": ["framed", "viewpoints", "figures", "draft", "reviewed", "approved", "published", "evaluated"]
+          },
+          "questionTerms": {
+            "description": "台帳の問いの語。結論と記事がこの語で答える",
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "viewpoints": {
+            "description": "視点の層ごとの結果。evidence は analysis-summary.json の中のキー",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["layer", "status"],
+              "additionalProperties": false,
+              "properties": {
+                "layer": { "type": "string" },
+                "status": { "enum": ["done", "na"] },
+                "result": { "type": "string", "minLength": 1 },
+                "evidence": { "type": "string", "minLength": 1 },
+                "reason": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "claims": {
+            "description": "結論の主張。value と interval は analysis-summary.json の中のキー。above / below / straddles は幅と照らす基準で、言い過ぎを機械で止める",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["text", "value"],
+              "additionalProperties": false,
+              "properties": {
+                "text": { "type": "string", "minLength": 1 },
+                "value": { "type": "string", "minLength": 1 },
+                "interval": { "type": "string", "minLength": 1 },
+                "above": { "type": "number" },
+                "below": { "type": "number" },
+                "straddles": { "type": "number" }
+              }
+            }
+          },
+          "refutation": {
+            "description": "反証の記録。summarySha256 は反証した時点の analysis-summary.json のハッシュ。分析の出力が変わると無効になる",
+            "type": "object",
+            "required": ["reviewer", "at", "summarySha256", "checks"],
+            "additionalProperties": false,
+            "properties": {
+              "reviewer": { "type": "string", "minLength": 1 },
+              "at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+              "summarySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "checks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["claim", "test", "numbers", "verdict"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "claim": { "type": "string", "minLength": 1 },
+                    "test": { "type": "string", "minLength": 1 },
+                    "numbers": { "type": "string", "minLength": 1 },
+                    "verdict": { "enum": ["holds", "weak", "broken"] }
+                  }
+                }
+              }
+            }
+          },
           "spec": {
             "type": "string",
             "pattern": "^\\.claude/scripts/analysis/"
@@ -66,6 +134,11 @@
               "type": "string",
               "minLength": 1
             }
+          },
+          "derivedMetrics": {
+            "type": "array",
+            "description": "入力の掛け算や割り算で求めた指標。同じ定義のランキングがある key を書く",
+            "items": { "type": "object", "required": ["key", "label"], "additionalProperties": false, "properties": { "key": { "type": "string", "minLength": 1 }, "label": { "type": "string", "minLength": 1 } } }
           },
           "observedAt": {
             "type": "string",

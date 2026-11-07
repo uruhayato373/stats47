@@ -53,3 +53,7 @@ git commit --no-verify -m "message"
 ## 関連ドキュメント
 
 - [CI/CD ガイド](../.github/workflows/README.md)
+
+## pre-push
+
+`pre-push` は変更に関係するテストだけを走らせる (`.claude/scripts/lib/pre-push-tests.mjs`)。全件は CI が持つ。CI では動かない。飛ばすときは `git push --no-verify`。

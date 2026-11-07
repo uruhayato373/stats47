@@ -7,6 +7,16 @@ const CLASSES = 5;
 const MIN_VALUES_FOR_FENCE = 4;
 const SIGNED_SCHEME = 'interpolateRdBu';
 
+/**
+ * The two views of a one-way colour ramp. Same hue: continuous shows the size of the gaps, distribution where each
+ * area stands among the rest. The ledger picks one per metric, the site lets readers switch, a figure can name one.
+ */
+export const COLOR_VIEWS = [
+  { id: 'continuous', label: '連続', description: '値に比例した濃さで塗る。差の大きさが見える', classification: { method: 'continuous' } },
+  { id: 'distribution', label: '分布', description: `順位で ${CLASSES} 区分に分けて塗る。全体の中の位置が見える`, classification: { method: 'quantile', classes: CLASSES } },
+] as const satisfies readonly { id: string; label: string; description: string; classification: ColorClassification }[];
+const [CONTINUOUS, DISTRIBUTION] = COLOR_VIEWS;
+
 /** The areas a colour was worked out over. The same metric can lean differently per set. */
 export const COLOR_GRAINS = ['prefecture', 'municipality-merged', 'municipality-split'] as const;
 export type ColorGrain = (typeof COLOR_GRAINS)[number];
@@ -80,7 +90,7 @@ export function colorPolicyOf(values: readonly number[]): ColorPolicy {
   const signed = values.some((v) => v < 0) && values.some((v) => v > 0);
   const stepped = hasFarOutValue(values);
   if (!signed) {
-    return { colorSchemeType: 'sequential', classification: stepped ? { method: 'quantile', classes: CLASSES } : { method: 'continuous' } };
+    return { colorSchemeType: 'sequential', classification: stepped ? DISTRIBUTION.classification : CONTINUOUS.classification };
   }
   const thresholds = stepped ? signedThresholds(values) : null;
   return { colorSchemeType: 'diverging', classification: thresholds ? { method: 'threshold', thresholds } : { method: 'continuous' } };
@@ -118,4 +128,25 @@ export function joinColorPolicy<T extends AuthoredColor>(authored: T, row?: Pick
 /** For a chart whose values have no ledger row: an article's own data. Same decision, worked out on the spot. */
 export function applyColorPolicy<T extends AuthoredColor>(authored: T, values: readonly number[]) {
   return joinColorPolicy(authored, colorPolicyRow('', 'prefecture', authored, '', values));
+}
+
+interface Viewable {
+  colorSchemeType?: string;
+  classification?: ColorClassification;
+}
+
+/** The view a config already is, if any. Hand-written thresholds are not a view. */
+export const colorViewOf = (config: Viewable) => {
+  const current = JSON.stringify(config.classification ?? CONTINUOUS.classification);
+  return COLOR_VIEWS.find((view) => JSON.stringify(view.classification) === current);
+};
+
+/** The views a config can switch between. A diverging scheme or hand-written bins carry their own meaning, so none. */
+export const colorViewsFor = (config: Viewable): readonly (typeof COLOR_VIEWS)[number][] =>
+  config.colorSchemeType === 'sequential' && colorViewOf(config) ? COLOR_VIEWS : [];
+
+/** The config drawn with a chosen view. With none chosen, or none that apply, the config stands. */
+export function withColorView<T extends Viewable>(config: T, viewId: string | null): T {
+  const view = colorViewsFor(config).find((candidate) => candidate.id === viewId);
+  return view ? { ...config, classification: view.classification } : config;
 }

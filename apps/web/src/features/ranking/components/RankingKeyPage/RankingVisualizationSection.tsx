@@ -179,6 +179,7 @@ export function RankingVisualizationSection({
                             rankingValues={rankingValues}
                             areaType={areaType}
                             bare
+                            colorViewSwitch
                             mapClassName="h-full"
                             selectedPrefectureCode={detailAreaCode ?? highlightAreaCode}
                             onPrefectureClick={(code) => openDetail(code, "map")}

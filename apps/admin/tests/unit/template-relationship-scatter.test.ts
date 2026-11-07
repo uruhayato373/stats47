@@ -228,4 +228,15 @@ describe('relationship scatter across municipalities', () => {
     const { level: _level, ...prefectures } = chart(Array.from({ length: 46 }, (_, i) => town(i)));
     expect(() => renderRelationshipScatterChart(prefectures)).toThrow('47都道府県');
   });
+
+  it('logAxes は 1・2・5 の目盛りを実際の値で書き、桁の違う点を等間隔に置く', () => {
+    const points = [1, 10, 100].flatMap((x, i) => [{ code: `a${i}`, name: `a${i}`, x, y: x / 100 }, { code: `b${i}`, name: `b${i}`, x: x * 2, y: (x * 2) / 100 }]);
+    const svg = renderRelationshipScatterChart({
+      title: 'きざみ', meta: 'メタ', source: '出典', xLabel: '横', yLabel: '縦', level: 'municipality', logAxes: true, points,
+    });
+    expect(svg).toContain('>100</text>');
+    expect(svg).toContain('>0.5</text>');
+    const cx = (code: string) => Number(svg.match(new RegExp(`data-pref="${code}" cx="([0-9.]+)"`))?.[1]);
+    expect(cx('a1') - cx('a0')).toBeCloseTo(cx('a2') - cx('a1'), 5);
+  });
 });

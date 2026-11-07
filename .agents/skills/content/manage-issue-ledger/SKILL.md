@@ -5,7 +5,7 @@ description: 問いの台帳 (data/content/issues.json・issue-links.json) を�
 primary_agent: blog-seo-strategist
 ---
 
-**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・ノウハウ型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
 
 # manage-issue-ledger
 
@@ -24,7 +24,7 @@ npm run issues:candidates   # 問いの候補の検索語 (--limit N / --weeks N
 npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-issue-view.html。Artifact に載せる)
 ```
 
-問いごとの進み具合 (ページ・分析・図・配信先・次の作業) は管理画面の `/content/questions` で見る。事業イシューマップ (`/strategy/issue-map`) とは別物で、片方の台帳をもう片方の画面へ持ち込まない。
+問いの一覧は管理画面の論文型 (`/content/types?type=paper`) で見る。問いを押すと分析・記事・図・投稿・商品の配線が見える。事業イシューマップ (`/strategy/issue-map`) とは別物で、片方の台帳をもう片方の画面へ持ち込まない。
 
 形と外部キーは `node .claude/scripts/lib/check-datasets.mjs` が見る。GSC は土曜の週次記録 (`data/gsc/snapshots/`) を読むので、最新週が古ければ棚卸しの結果にそう書く。
 
@@ -62,13 +62,14 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 | `primaryTheme` | 大きな問いだけが持つ。小さな問いは親から引き継ぐ |
 | `dataNote` / `pitfall` | 使う統計と、読み違えやすい点。生産スキルへの入力になるので分かっている範囲で書く |
 | `revenue` | 答えがつながる収益。`広告` / `データ` / `ノウハウ` / `実務` (行政や業務で使う人) を 1〜3 個。仮置きなので売上の根拠にしない |
+| `products` | 問いから企画した商品の ID (`note:<key>`)。同じ指標を使うだけの商品は書かない。実在は `check-datasets` が見る |
 | `sensitive` | 犯罪・自殺・虐待・生活保護など、地域や属性への偏見を招きやすい重い問いを `true` にする |
 
 ## 4. 配線する
 
 `data/content/issue-links.json` に 1 組 1 役割で書く。
 
-- `answers` = 問いに本文で答える読み物 (blog / geo / japan-theme)
+- `answers` = 問いに本文で正面から答える読み物 (blog / geo / japan-theme)。**問いごとに 1 本だけ**。関連する記事は指標でつながるので書かない
 - `evidence` = 根拠のデータ (ranking / theme / survey など)
 
 **導出できる関係は書かない**。問いの `primaryTheme`、小さな問いが親から継ぐテーマ、答えの記事が使う指標のランキングは台帳から毎回求める。書くと `issues:check` が止める。非公開のページも指せない。
@@ -98,6 +99,10 @@ npm run analysis:frame -- --spec .claude/scripts/analysis/examples/h01-vacancy.j
 ```
 
 公開の自治体だけの表を作り、県の合計との検算・指標の年・抜けた町の偏り・変化の信頼性を報告する。合計が合わなければ止まる。問いの選択と、定義が循環していないかの判断は人が行う。市ごとの変化の信頼性が低いと出たら順位にしない。素の `fetch` が通らない環境では `--data-dir` に `<key>.cities.json` を置く。
+
+分析を審査の手前まで進めるときは `/run-analysis` (`npm run analysis:run`) を使う。順番はコード、判断は Codex、最終審査だけ Claude が持つので、会話のトークンを使わない。
+
+分析は工程 (`stage`) と視点の層 (`data/content/analysis-viewpoints.json`) で進める。書き始める前に `analysis-critic` の plan を結論なしで走らせ、確認項目を分析に入れる。`analyses.json` の `viewpoints` には層ごとに結果と `analysis-summary.json` の根拠か、対象外の理由を書き、`questionTerms` に台帳の問いの語を書く。`npm run analysis:check` が揃うまで止める。品質ゲートも同じ判定を読む。
 
 分析の結論は `data/content/analyses.json`、図は `data/content/figures.json` に残す。図は `data/content-operations/image-templates.json` の型を指し、配信先はページの ID か `data/sns/posts.json` の投稿 ID で指す。公開の状態の正本は配信先の台帳にある。実例は `.claude/scripts/analysis/m01-factory-size.ts`（型は `scatter`、県へ足し上げ）と `h01-vacancy-population.ts`（型は `grouped-bar`、市区町村のまま区分）。散布図を市区町村の点で描くときは `renderRelationshipScatterChart` に `level: "municipality"` を渡す。端の町の名前は揺れが大きいので自動では出ず、`labelNames` で指定した町だけが出る。
 

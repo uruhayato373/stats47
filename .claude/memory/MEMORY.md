@@ -58,7 +58,7 @@
 - [ai content remediation queue](project_ai_content_remediation_queue.md) — ranking AIは9/8に2,166件done・残0を全量実測。追加12件R2 SHA一致、TS/KNOWN/R2/queue集合差分0。非阻害警告・意味レビュー範囲・課金条件は別記。canonical入力の回帰テストあり
 - [blog svg lineage enforcement](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
 - [commit in batches](feedback_commit_in_batches.md) — 確認で修正を重ねる間は毎回コミットしない。まとまりで 1 回
-- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
+- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — オーナーの指示なしに develop→main の PR を開かない・マージしない (hook が止める)。本番に効く変更は 1 日 1 回。状況は release:status
 - [cloudflare workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ/home featuredが空→wrangler.tomlのCLOUDFLARE_WORKERS="true"でR2読みskipを疑う。テーマはR2 values.json+force-dynamic
 - [dev server web only](feedback_dev_server_web_only.md) — dev は npm run dev:web。常駐は background + Ready の polling。R2 URL と S3 変数の継承を確かめてから画面監査。正典 local-environment.md
 - [blog auto publish reconcile limits](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。contents/blog=ephemeral outbox
@@ -170,6 +170,7 @@
 - [run full web tests before push](feedback_run_full_web_tests_before_push.md) — 部品・route の変更や別ブランチの取り込み後は、触れた workspace の vitest 全件を push 前に。部分実行で既存テストを見落とし CI を赤にした (2026-10-21 web・10-25 admin)
 - [business vs content issues](feedback_business_vs_content_issues.md) — 事業イシューマップと問いの台帳は台帳・画面・語彙を混ぜない (2026-11-06 オーナー判断)
 - [content four types](feedback_content_four_types.md) — 全コンテンツは4型のどれかに属する。未分類で作らない。正本content-types.json・題名の「なぜ」だけで論文型にしない (2026-11-06)
+- [ci speed is wait time](feedback_ci_speed_wait_time.md) — リポは PUBLIC で分数は無料。CI 短縮は人の待ち時間で測る。重複に見えても並列なら待ちは増えない。遅い工程は毎回理由を読んでから触る (2026-11-06)
 - [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — type-check:scripts の差分キャッシュは barrel 経由の新しい型エラーを隠す。push 前は .local/tsbuildinfo を消して回す (2026-10-30 PR #1200)
 - [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
@@ -184,3 +185,5 @@
 - [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — develop は保護なし。リポジトリの自動削除をオンにすると develop→main のマージで develop が消える
 - [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず capture-pages.mjs --all で撮って画像を読む (2026-11-04 指摘)
 - [windows remotion render](feedback_windows_remotion_render.md) — WindowsのRemotion描画はrspackとcompositorのWindows用部品を手元へ展開しChromeを指定。npm ciで消える
+- [analysis question drift](feedback_analysis_question_drift.md) — 分析は台帳の問いの語で答え、恒等式を分け切り、重なりを等分しない。審査のPASSは問いへの答えを保証しない
+- [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は観点でなく計算手順つきの必須試験にする。誤った結論の fixture で検出を確かめる

@@ -1,6 +1,8 @@
 import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 
+import { needsMetricMetadata } from './plan-deploy-scope.mjs';
+
 const CODE_EXTENSION = /\.(?:cjs|cts|js|jsx|json|mjs|mts|ts|tsx|ya?ml)$/;
 const ROOT_BUILD_FILES = new Set([
   'package.json',
@@ -77,6 +79,7 @@ export function classifyPrQualityPaths(inputPaths) {
     visualization: ciCore || chartSource,
     remote_assets: ciCore || remoteAssets,
     workflow_contracts: ciCore || workflowContracts,
+    metric_metadata: needsMetricMetadata(paths),
   };
 }
 

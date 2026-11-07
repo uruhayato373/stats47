@@ -1,0 +1,3 @@
+{"type":"object","additionalProperties":false,"required":["measures","checks"],"properties":{
+"measures":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["term","column","how"],"properties":{"term":{"type":"string"},"column":{"type":"string"},"how":{"type":"string"}}}},
+"checks":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["layer","item","risk"],"properties":{"layer":{"type":"string"},"item":{"type":"string"},"risk":{"type":"string"}}}}}}

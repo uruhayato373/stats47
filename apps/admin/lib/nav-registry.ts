@@ -73,6 +73,12 @@ export function isActive(
     return currentLayer === null || !TODO_LAYERS.has(currentLayer);
   }
   if (path === "/content") return pathname === "/content";
+  if (path === "/content/types") {
+    const type = new URLSearchParams(query).get("type");
+    if (pathname.startsWith("/content/questions/")) return type === "paper";
+    if (pathname.startsWith("/content/metrics/")) return type === "reference";
+    return pathname === path && (searchParams.get("type") ?? "reference") === type;
+  }
   return pathname === path || pathname.startsWith(path + "/");
 }
 

@@ -1,7 +1,7 @@
 name = "blog-editor"
 description = "ブログ記事の公開・一括公開・品質是正リライトを担当する縮退エージェント（トレンド発見はtrend-scout、企画・記事生成はarticle-writer、チャート生成はchart-author、レビューはblog-criticへ分離済）。記事を公開・brushupするときに使う。"
 developer_instructions = '''
-**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・作り方型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
+**4 型の宣言 (必須)**: 作る前に参照型・教科書型・論文型・ノウハウ型のどれか 1 つを決める。型は `data/content/content-types.json` で決まり、`npm run content-types:check` が通らなければ `assignments` に理由つきで足す。正典 `.claude/rules/content-type-standards.md`。
 
 # Blog Editor Agent
 
