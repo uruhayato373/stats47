@@ -14,6 +14,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { renderStackedChart } from "../../../apps/admin/lib/template-composition-stacked";
+import { renderGroupBoxplotChart } from "../../../apps/admin/lib/template-group-boxplot";
 import { renderGroupedBarsChart } from "../../../apps/admin/lib/template-grouped-bars";
 import { renderRelationshipScatterChart } from "../../../apps/admin/lib/template-relationship-scatter";
 import { renderLineChart } from "../../../apps/admin/lib/template-trend-line";
@@ -23,7 +25,14 @@ import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInpu
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const GENERATED_BY = ".claude/scripts/analysis/analysis-draft.ts";
-const RENDERERS = { "grouped-bar": renderGroupedBarsChart, line: renderLineChart, scatter: renderRelationshipScatterChart } as const;
+// line は chart.series を書くと 2 時点の変化 (スロープ) になる。stacked-bar は 100% 積み上げ
+const RENDERERS = {
+  "grouped-bar": renderGroupedBarsChart,
+  "stacked-bar": renderStackedChart,
+  line: renderLineChart,
+  scatter: renderRelationshipScatterChart,
+  boxplot: renderGroupBoxplotChart,
+} as const;
 
 const arg = (name: string) => {
   const i = process.argv.indexOf(name);

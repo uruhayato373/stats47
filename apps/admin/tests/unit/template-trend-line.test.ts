@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 import { resolveNumericDomain } from '../../../../packages/types/src/metric-presentation';
-import { renderTrendLine, trendSampleRows, TREND_SAMPLE_METRIC } from '@/lib/template-trend-line';
+import { renderLineChart, renderTrendLine, trendSampleRows, TREND_SAMPLE_METRIC } from '@/lib/template-trend-line';
 import { metricPresentation } from '../../../../packages/data-configs/src/color-policy';
 
 const values = [26.3,27.7,27.3,26.3,28.8,29.4,26.2,27.7,29.2,28.2,28.6,28.1,28.3,28.9,30.2,26.7,31.4,30.9];
@@ -41,5 +41,22 @@ describe('real annual-series portrait line sample', () => {
     const fixed = { ...metricPresentation(TREND_SAMPLE_METRIC), trendDomain: { mode: 'fixed', min: 20, max: 35 } as const };
     expect(renderTrendLine(fixture(), fixed)).toContain('data-domain-min="20" data-domain-max="35"');
     expect(() => renderTrendLine(fixture(), { ...fixed, trendDomain: { mode: 'fixed', min: 27, max: 30 } })).toThrow('表示範囲');
+  });
+});
+
+describe('2 時点の変化 (スロープ)', () => {
+  const chart = {
+    title: '題', meta: '空き家率（%）', source: '調査', decimals: 1, startLabels: true,
+    series: [
+      { label: '人口増', points: [{ x: '2013年', value: 11.2 }, { x: '2023年', value: 10.4 }] },
+      { label: '人口減', points: [{ x: '2013年', value: 15.3 }, { x: '2023年', value: 19.8 }] },
+    ],
+  };
+  it('両端に値を置き、値の軸の目盛りの数字は出さない', () => {
+    const svg = renderLineChart(chart);
+    expect(svg).toContain('data-form="slope"');
+    for (const value of ['11.2', '10.4', '15.3', '19.8']) expect(svg).toContain(`>${value}</text>`);
+    expect(svg.match(/text-anchor="end" font-size="28"/g)).toBeNull();
+    expect(renderLineChart({ ...chart, startLabels: undefined })).toMatch(/text-anchor="end" font-size="28"/);
   });
 });
