@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T23:31:37.041Z",
+  "generatedAt": "2026-11-07T00:01:58.244Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2740,
@@ -758,44 +758,13 @@
     "charts": 2124,
     "applicableCharts": 1975,
     "byStatus": {
-      "resolved": 1969,
-      "unresolved": 6,
+      "resolved": 1975,
+      "unresolved": 0,
       "not-applicable": 149,
       "missing-lineage": 0
     },
-    "coveragePct": 99.7,
-    "unresolvedCharts": [
-      {
-        "slug": "bread-city-ranking-kyoto-quiz",
-        "base": "bread-city-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "frozen-gyoza-spending-prefecture-gap",
-        "base": "gyoza-city-spending-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "rice-spending-quantity-gap-2025",
-        "base": "rice-consumption-expenditure-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "rice-spending-quantity-gap-2025",
-        "base": "rice-consumption-quantity-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "rice-spending-quantity-gap-2025",
-        "base": "rice-spending-quantity-index-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "rice-spending-quantity-gap-2025",
-        "base": "rice-city-spending-growth-ranking",
-        "status": "unresolved"
-      }
-    ],
+    "coveragePct": 100,
+    "unresolvedCharts": [],
     "snapshotSchemaVersion": 2,
     "dataSources": {
       "legacySectionArticles": [
@@ -858,9 +827,7 @@
         "waste-management-recycling-gap",
         "workplace-accident-regional-map"
       ],
-      "sourcelessChartArticles": [
-        "cc-estat-17-edu-slope-graph"
-      ],
+      "sourcelessChartArticles": [],
       "snapshotSourcesMissingArticles": []
     },
     "snapshotLineageMissingArticles": [
