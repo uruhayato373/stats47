@@ -435,7 +435,7 @@
       "id": "boxplot",
       "label": "箱ひげ図・分布",
       "policy": "四分位・中央値・外れ値の定義と固定入力を照合する。スマホで軸と凡例が読めるようにする。",
-      "renderer": null,
+      "renderer": "apps/admin/lib/template-group-boxplot.ts",
       "version": 1,
       "profiles": {
         "note": "本文幅320pxで確認する。",
