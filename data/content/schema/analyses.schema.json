@@ -72,6 +72,49 @@
               }
             }
           },
+          "claims": {
+            "description": "結論の主張。value と interval は analysis-summary.json の中のキー。above / below / straddles は幅と照らす基準で、言い過ぎを機械で止める",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["text", "value"],
+              "additionalProperties": false,
+              "properties": {
+                "text": { "type": "string", "minLength": 1 },
+                "value": { "type": "string", "minLength": 1 },
+                "interval": { "type": "string", "minLength": 1 },
+                "above": { "type": "number" },
+                "below": { "type": "number" },
+                "straddles": { "type": "number" }
+              }
+            }
+          },
+          "refutation": {
+            "description": "反証の記録。summarySha256 は反証した時点の analysis-summary.json のハッシュ。分析の出力が変わると無効になる",
+            "type": "object",
+            "required": ["reviewer", "at", "summarySha256", "checks"],
+            "additionalProperties": false,
+            "properties": {
+              "reviewer": { "type": "string", "minLength": 1 },
+              "at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+              "summarySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "checks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["claim", "test", "numbers", "verdict"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "claim": { "type": "string", "minLength": 1 },
+                    "test": { "type": "string", "minLength": 1 },
+                    "numbers": { "type": "string", "minLength": 1 },
+                    "verdict": { "enum": ["holds", "weak", "broken"] }
+                  }
+                }
+              }
+            }
+          },
           "spec": {
             "type": "string",
             "pattern": "^\\.claude/scripts/analysis/"

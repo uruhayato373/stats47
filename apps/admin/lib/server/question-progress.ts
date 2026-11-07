@@ -1,14 +1,16 @@
 import "server-only";
 
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { classifyAll } from "../../../../.claude/scripts/content-types/classify-core.mjs";
 import { readClassifyInputs } from "../../../../.claude/scripts/content-types/content-types-io.mjs";
+import { analysisCycleErrors } from "../../../../.claude/scripts/analysis/analysis-cycle-core.mjs";
 import { readDraftStates } from "../../../../.claude/scripts/issues/issue-draft-state.mjs";
 import { indexPages } from "../../../../.claude/scripts/issues/issue-graph-core.mjs";
-import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf, type AnalysisInput } from "../question-detail";
+import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf, viewpointRows, type AnalysisInput, type AnalysisViewpoint, type ViewpointLayer, type ViewpointRow } from "../question-detail";
 import { buildQuestionProgress, type ExternalLink, type QuestionAnalysis, type QuestionDestination, type QuestionFigure, type QuestionIssue, type QuestionLink, type QuestionProgress } from "../question-progress";
 import { projectRoot } from "./project-root";
 import { fileExists, readJson, readText, statePath, type Wrapped } from "./state-io";
@@ -58,9 +60,11 @@ export type DraftView = {
 export type QuestionDetail = {
   issue: QuestionIssue & { dataNote?: string; pitfall?: string };
   analyses: Array<QuestionAnalysis & { question?: string; finding?: string; caveats?: string[] }>;
+  /** 分析ごとの工程と視点の結果。npm run analysis:check と同じ判定を読む */
+  cycles: Array<{ id: string; stage: string | null; rows: ViewpointRow[]; problems: string[] }>;
   pages: Array<{ id: string; role: string; title: string; href: string; published: boolean }>;
   drafts: DraftView[];
-  figures: Array<{ id: string; title: string; template: string; destinations: QuestionDestination[] }>;
+  figures: Array<{ id: string; title: string; template: string; reads?: string; destinations: QuestionDestination[] }>;
   posts: Array<{ id: number; status: string; platform: string; caption: string; approval: string }>;
   products: Array<{ id: string; title: string; href: string | null; priceJpy: number | null; status: string }>;
   /** 分析の spec と求めた指標から自動で作る。手で配線しない */
@@ -71,7 +75,7 @@ export type QuestionDetail = {
 };
 
 const issuesLedger = () => readJson<{ issues: Array<QuestionIssue & { dataNote?: string; pitfall?: string }> }>(datasetPath("content.issues")).issues;
-const analysesLedger = () => readJson<{ analyses: Array<QuestionAnalysis & { question?: string; finding?: string; caveats?: string[]; spec?: string; derivedMetrics?: Array<{ key: string; label: string }>; article?: { slug: string } }> }>(datasetPath("content.analyses")).analyses;
+const analysesLedger = () => readJson<{ analyses: Array<QuestionAnalysis & CycleFields & { question?: string; finding?: string; caveats?: string[]; spec?: string; derivedMetrics?: Array<{ key: string; label: string }>; article?: { slug: string } }> }>(datasetPath("content.analyses")).analyses;
 const figuresLedger = () => readJson<{ figures: QuestionFigure[] }>(datasetPath("content.figures")).figures;
 
 function readDrafts(): DraftView[] {
@@ -99,6 +103,32 @@ function readDrafts(): DraftView[] {
       chars: markdown.length,
     };
   });
+}
+
+type CycleFields = { stage?: string; questionTerms?: string[]; viewpoints?: AnalysisViewpoint[]; article?: { slug?: string } };
+type CycleAnalysis = QuestionAnalysis & CycleFields & { finding?: string };
+
+/** 1 つの分析の工程。下書きと審査は記事のフォルダから読む */
+function analysisCycle(analysis: CycleAnalysis, issue: { question: string }, figures: QuestionFigure[]) {
+  const { layers } = readJson<{ layers: ViewpointLayer[] }>(datasetPath("content.analysis-viewpoints"));
+  const rows = viewpointRows(analysis.viewpoints ?? [], layers);
+  if (!analysis.stage) return { id: analysis.id, stage: null, rows, problems: [] };
+  const dir = analysis.article?.slug ? path.posix.join("contents/blog", analysis.article.slug) : null;
+  const read = (name: string) => (dir && fileExists(path.posix.join(dir, name)) ? readText(path.posix.join(dir, name)) : null);
+  const summary = read("data/analysis-summary.json");
+  const article = read("article.md");
+  const sha256 = (text: string | null) => (text === null ? null : createHash("sha256").update(text).digest("hex"));
+  const problems: string[] = analysisCycleErrors({
+    analysis,
+    issue,
+    layers,
+    summary: summary ? JSON.parse(summary) : {},
+    figures: figures.filter((f) => f.analysis === analysis.id),
+    article,
+    review: read("review.md"),
+    hashes: { article: sha256(article), summary: sha256(summary) },
+  });
+  return { id: analysis.id, stage: analysis.stage, rows, problems };
 }
 
 /** 1 つの問いの配線。無い問いは null */
@@ -131,6 +161,7 @@ export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
       }),
       issue,
       analyses,
+      cycles: analyses.map((a) => analysisCycle(a, issue, figures)),
       pages: links.filter((l) => l.issue === id).map((l) => {
         const page = pageById.get(l.page);
         return { id: l.page, role: l.role, title: page?.title ?? l.page, href: page?.href ?? "", published: page?.published === true };

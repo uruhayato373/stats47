@@ -1,0 +1,2 @@
+{"type":"object","additionalProperties":false,"required":["checks"],"properties":{
+"checks":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["claim","test","numbers","verdict"],"properties":{"claim":{"type":"string"},"test":{"type":"string"},"numbers":{"type":"string"},"verdict":{"type":"string","enum":["holds","weak","broken"]}}}}}}

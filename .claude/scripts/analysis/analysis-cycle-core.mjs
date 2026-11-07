@@ -40,6 +40,48 @@ function viewpointErrors({ analysis, layers, summary }) {
   return errors;
 }
 
+/** 結論の主張を、値と幅に照らす。「過半」と書くなら幅の下限が基準を超えていなければならない */
+function claimErrors({ analysis, summary }) {
+  const claims = analysis.claims ?? [];
+  if (!claims.length) return ["結論の主張 (claims) が無い"];
+  const errors = [];
+  for (const claim of claims) {
+    const value = resolve(summary, claim.value);
+    if (typeof value !== "number") {
+      errors.push(`主張の値が分析の出力に無い: ${claim.value}`);
+      continue;
+    }
+    if (claim.above === undefined && claim.below === undefined && claim.straddles === undefined) continue;
+    const interval = claim.interval ? resolve(summary, claim.interval) : undefined;
+    // 幅は [下限, 上限] でも { low, high } でもよい
+    const [low, high] = Array.isArray(interval) ? interval : [interval?.low, interval?.high];
+    if (typeof low !== "number" || typeof high !== "number") {
+      errors.push(`主張の幅が分析の出力に無い: ${claim.interval ?? "(未指定)"}`);
+      continue;
+    }
+    if (claim.above !== undefined && low <= claim.above) errors.push(`主張「${claim.text}」: 幅 ${low}〜${high} が ${claim.above} を上回ると言えない`);
+    if (claim.below !== undefined && high >= claim.below) errors.push(`主張「${claim.text}」: 幅 ${low}〜${high} が ${claim.below} を下回ると言えない`);
+    if (claim.straddles !== undefined && (low >= claim.straddles || high <= claim.straddles))
+      errors.push(`主張「${claim.text}」: 幅 ${low}〜${high} が ${claim.straddles} をまたいでいない`);
+  }
+  return errors;
+}
+
+/** 反証は今の分析の出力に対して行い、崩れた主張を残したまま下書きへ進まない */
+function refutationErrors({ analysis, hashes }) {
+  const { refutation } = analysis;
+  if (!refutation) return ["反証の記録が無い"];
+  const errors = [];
+  if (refutation.summarySha256 !== hashes.summary) errors.push("反証の後に分析の出力が変わった。反証をやり直す");
+  for (const check of refutation.checks) if (check.verdict === "broken") errors.push(`反証で崩れた主張が残っている: ${check.claim}`);
+  return errors;
+}
+
+/** 4:5 の型の画像は記事の幅の上限と暗い版の判定に名前で掛かる。掛からない名前は 672px で出る */
+function figureNameErrors({ articleFigures }) {
+  return articleFigures.filter((figure) => figure.typeImage && !figure.recognized).map((figure) => `型の画像なのに記事の表示で判定されない名前: ${figure.name}`);
+}
+
 function questionErrors({ analysis, issue, article }) {
   const terms = analysis.questionTerms ?? [];
   const errors = [];
@@ -53,21 +95,26 @@ function questionErrors({ analysis, issue, article }) {
 }
 
 /** 今の工程に居てよいかを返す。空なら進める */
-export function analysisCycleErrors({ analysis, issue, layers, summary, figures, article, review }) {
+export function analysisCycleErrors({ analysis, issue, layers, summary, figures, article, review, hashes = {}, articleFigures = [] }) {
   if (!ANALYSIS_STAGES.includes(analysis.stage)) return [`工程が不明: ${analysis.stage}`];
   if (!reached(analysis, "viewpoints")) return [];
-  const errors = [...questionErrors({ analysis, issue, article }), ...viewpointErrors({ analysis, layers, summary })];
+  const errors = [...questionErrors({ analysis, issue, article }), ...viewpointErrors({ analysis, layers, summary }), ...claimErrors({ analysis, summary })];
   if (reached(analysis, "figures")) {
     if (!figures.length) errors.push("図が台帳に無い");
     for (const figure of figures) if (!figure.reads) errors.push(`図の読み方 (reads) が無い: ${figure.id}`);
   }
   if (reached(analysis, "draft")) {
+    errors.push(...refutationErrors({ analysis, hashes }), ...figureNameErrors({ articleFigures }));
     if (!article) errors.push("記事の下書きが無い");
     else {
       const images = (article.match(/!\[[^\]]*\]\(data\/[^)]+\)/g) ?? []).length;
       if (images < figures.length) errors.push(`図の台帳 ${figures.length} 枚に対し、記事の図は ${images} 枚`);
     }
   }
-  if (reached(analysis, "reviewed") && !/^verdict:\s*PASS\b/m.test(review ?? "")) errors.push("審査が PASS していない");
+  if (reached(analysis, "reviewed")) {
+    if (!/^verdict:\s*PASS\b/m.test(review ?? "")) errors.push("審査が PASS していない");
+    else if (/^- \[(BLOCK|MAJOR)\]/m.test(review)) errors.push("審査の BLOCK か MAJOR の指摘が残っている");
+    else if (review.match(/^articleSha256:\s*([0-9a-f]{64})\s*$/m)?.[1] !== hashes.article) errors.push("審査の後に本文が変わった。審査をやり直す");
+  }
   return errors;
 }

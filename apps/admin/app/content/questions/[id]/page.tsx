@@ -6,7 +6,10 @@ import { Cell, DataTable, PanelCard, Row, StatusBadge } from "@/components/admin
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { localSiteHref } from "@/lib/local-site";
-import { questionDetail, type DraftView } from "@/lib/server/question-progress";
+import { ANALYSIS_STAGE_LABELS } from "@/lib/question-detail";
+import { questionDetail, type DraftView, type QuestionDetail } from "@/lib/server/question-progress";
+
+type QuestionCycle = QuestionDetail["cycles"][number];
 import { hasError } from "@/lib/server/state-io";
 
 export const dynamic = "force-dynamic";
@@ -60,6 +63,43 @@ function DraftCard({ draft }: { draft: DraftView }) {
   );
 }
 
+const VIEWPOINT_TONE = { 済み: "good", 対象外: "neutral", 未: "warn" } as const;
+
+/** 分析の工程と視点の結果。npm run analysis:check が止めるものをそのまま見せる */
+function AnalysisCycle({ cycle }: { cycle?: QuestionCycle }) {
+  if (!cycle) return null;
+  return (
+    <Stack>
+      <div className="flex flex-wrap items-center gap-1.5 text-sm">
+        <span>工程</span>
+        <StatusBadge tone={cycle.stage ? "good" : "warn"}>{cycle.stage ? ANALYSIS_STAGE_LABELS[cycle.stage] ?? cycle.stage : "未登録"}</StatusBadge>
+        {cycle.problems.length ? <StatusBadge tone="bad">止まる点 {cycle.problems.length} 件</StatusBadge> : null}
+      </div>
+      {cycle.problems.length ? (
+        <ul className="m-0 list-disc pl-5 text-sm">
+          {cycle.problems.map((problem) => (
+            <li key={problem}>{problem}</li>
+          ))}
+        </ul>
+      ) : null}
+      <DataTable columns={["視点", "状態", "結果", "根拠"]}>
+        {cycle.rows.map((row) => (
+          <Row key={row.id}>
+            <Cell nowrap>{row.label}</Cell>
+            <Cell nowrap>
+              <StatusBadge tone={VIEWPOINT_TONE[row.status]}>{row.status}</StatusBadge>
+            </Cell>
+            <Cell>{row.text || row.ask}</Cell>
+            <Cell nowrap muted>
+              {row.evidence ? <code className="font-mono text-xs">{row.evidence}</code> : "-"}
+            </Cell>
+          </Row>
+        ))}
+      </DataTable>
+    </Stack>
+  );
+}
+
 /** 1 つの問いから作ったものと配線先 (型 C: 詳細)。問い → 分析 → 記事 → 図の配信先 → 投稿 → 商品 の順に出す */
 export default async function QuestionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -73,7 +113,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
       </>
     );
   }
-  const { issue, analyses, inputs, pages, drafts, figures, posts, products, relatedNotes, relatedPosts } = data;
+  const { issue, analyses, cycles, inputs, pages, drafts, figures, posts, products, relatedNotes, relatedPosts } = data;
 
   return (
     <>
@@ -159,6 +199,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
                     <li key={caveat}>{caveat}</li>
                   ))}
                 </ul>
+                <AnalysisCycle cycle={cycles.find((cycle) => cycle.id === a.id)} />
               </Stack>
             </PanelCard>
           ))
@@ -206,11 +247,12 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
       </Section>
 
       <Section title={`図の配信先 (${figures.reduce((n, f) => n + f.destinations.length, 0)})`}>
-        <DataTable columns={["図", "型", "媒体", "配信先", "状態"]}>
+        <DataTable columns={["図", "読み方", "型", "媒体", "配信先", "状態"]}>
           {figures.flatMap((f) =>
             f.destinations.map((d) => (
               <Row key={`${f.id}:${d.channel}:${d.page ?? d.slug ?? d.postId}`}>
                 <Cell>{f.title}</Cell>
+                <Cell muted>{f.reads ?? "-"}</Cell>
                 <Cell nowrap muted>
                   {f.template}
                 </Cell>

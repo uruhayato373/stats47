@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf } from "@/lib/question-detail";
+import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf, viewpointRows } from "@/lib/question-detail";
 
 /** 守る意図: 下書きの中身 (題名・構成・図・審査) を、ファイルを開かずに画面で確かめられる */
 const markdown = `---
@@ -58,5 +58,28 @@ describe("分析に使ったデータ", () => {
 
   it("入力と求めた指標が重なっても 1 回だけ並べる", () => {
     expect(analysisInputs(["a"], [{ key: "a", label: "重複" }], (id) => pages.get(id)).map((r) => r.derived)).toEqual([false]);
+  });
+});
+
+/** 守る意図: 視点の抜けを画面で隠さず、対象外は理由を見せる */
+describe("viewpointRows", () => {
+  const layers = [
+    { id: "data", label: "データの定義", ask: "定義は比べられるか" },
+    { id: "baseline", label: "基準比較", ask: "全体と比べたか" },
+    { id: "limits", label: "言えないこと", ask: "限界を分けたか" },
+  ];
+  it("済み・対象外・未を層の順に返す", () => {
+    const rows = viewpointRows(
+      [
+        { layer: "limits", status: "done", result: "因果は言えない", evidence: "correlations" },
+        { layer: "baseline", status: "na", reason: "比べる全体が無い" },
+      ],
+      layers,
+    );
+    expect(rows.map((row) => [row.label, row.status, row.text, row.evidence])).toEqual([
+      ["データの定義", "未", "", null],
+      ["基準比較", "対象外", "比べる全体が無い", null],
+      ["言えないこと", "済み", "因果は言えない", "correlations"],
+    ]);
   });
 });

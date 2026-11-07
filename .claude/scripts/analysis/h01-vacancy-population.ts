@@ -139,6 +139,14 @@ function declineShareInterval() {
 const RESORT_RATE = 15;
 const nonResort = towns.filter((t) => t.vacancy_2023 - t.abandoned_2023 - t.rental_2023 <= RESORT_RATE);
 const totalGrossIncrease = sum(groups.map((g) => g.grossIncrease));
+// 折れ線: 区分ごとの空き家率の中央値を 3 時点で並べる
+const VACANCY_YEARS = [2013, 2018, 2023] as const;
+const trendSeries = GROUPS.map(({ label, test }) => ({
+  label,
+  points: VACANCY_YEARS.map((year) => ({ x: `${year}年`, value: round(median(towns.filter(test).map((t) => t[`vacancy_${year}`]))) })),
+}));
+// 散布図: 町の値は点としてだけ描き、名前は出さない
+const pointsOf = (value: (t: Town) => number) => towns.map((t) => ({ code: t.code, name: t.name, x: round(t.populationChange), y: value(t) }));
 
 mkdirSync(outDir, { recursive: true });
 main();
@@ -169,6 +177,9 @@ function main() {
     declineShareInterval: declineShareInterval(),
     totalGrossIncrease,
     growthShareOfGrossIncrease: round((groups[0].grossIncrease / totalGrossIncrease) * 100, 1),
+    trendSeries,
+    abandonedPoints: pointsOf((t) => t.abandoned_2023),
+    rentalPoints: pointsOf((t) => t.rental_2023),
     populationLines,
     populationSizes,
     resort: { towns: towns.length - nonResort.length, correlationWithout: r(nonResort.map((t) => t.populationChange), nonResort.map((t) => t.vacancyChange)) },

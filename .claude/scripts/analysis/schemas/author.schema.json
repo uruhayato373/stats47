@@ -1,0 +1,5 @@
+{"type":"object","additionalProperties":false,"required":["finding","caveats","claims","viewpoints"],"properties":{
+"finding":{"type":"string"},
+"caveats":{"type":"array","items":{"type":"string"}},
+"claims":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["text","value","interval","above","below","straddles"],"properties":{"text":{"type":"string"},"value":{"type":"string"},"interval":{"type":["string","null"]},"above":{"type":["number","null"]},"below":{"type":["number","null"]},"straddles":{"type":["number","null"]}}}},
+"viewpoints":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["layer","result","evidence"],"properties":{"layer":{"type":"string"},"result":{"type":"string"},"evidence":{"type":"string"}}}}}}

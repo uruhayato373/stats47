@@ -45,3 +45,31 @@ export function analysisInputs(specKeys: string[], derived: Array<{ key: string;
   const seen = new Set<string>();
   return [...specKeys.map((key) => row(key, null)), ...derived.map((d) => row(d.key, d.label))].filter((r) => !seen.has(r.key) && Boolean(seen.add(r.key)));
 }
+
+export type AnalysisViewpoint = { layer: string; status: "done" | "na"; result?: string; evidence?: string; reason?: string };
+export type ViewpointLayer = { id: string; label: string; ask: string };
+export type ViewpointRow = { id: string; label: string; ask: string; status: "済み" | "対象外" | "未"; text: string; evidence: string | null };
+
+/** 工程の表示名。順序の正本は analysis-cycle-core.mjs の ANALYSIS_STAGES */
+export const ANALYSIS_STAGE_LABELS: Record<string, string> = {
+  framed: "表を作成",
+  viewpoints: "視点の確認",
+  figures: "図",
+  draft: "下書き",
+  reviewed: "審査済み",
+  approved: "オーナー確認済み",
+  published: "公開",
+  evaluated: "評価済み",
+};
+
+/** 視点の層ごとの結果。分析に行が無い層は「未」として出し、抜けを隠さない */
+export function viewpointRows(viewpoints: readonly AnalysisViewpoint[], layers: readonly ViewpointLayer[]): ViewpointRow[] {
+  const byLayer = new Map(viewpoints.map((row) => [row.layer, row]));
+  return layers.map((layer) => {
+    const row = byLayer.get(layer.id);
+    const base = { id: layer.id, label: layer.label, ask: layer.ask };
+    if (!row) return { ...base, status: "未", text: "", evidence: null };
+    if (row.status === "na") return { ...base, status: "対象外", text: row.reason ?? "", evidence: null };
+    return { ...base, status: "済み", text: row.result ?? "", evidence: row.evidence ?? null };
+  });
+}

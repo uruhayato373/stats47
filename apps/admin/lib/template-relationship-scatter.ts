@@ -77,6 +77,19 @@ export interface ScatterChart {
   level?: 'prefecture' | 'municipality';
   /** Prefectures the article names; labelled before the extremes when they clear the other dots. */
   labelNames?: string[];
+  /** Draw both axes on a log scale, for values spanning orders of magnitude. The trend line follows, so it fits the logs. */
+  logAxes?: boolean;
+}
+
+/** 1, 2, 5 of each power of ten inside a log10 domain. */
+function logTicks([min, max]: readonly [number, number]) {
+  const ticks: number[] = [];
+  for (let power = Math.floor(min); power <= Math.ceil(max); power++)
+    for (const step of [1, 2, 5]) {
+      const value = step * 10 ** power;
+      if (Math.log10(value) >= min && Math.log10(value) <= max) ticks.push(value);
+    }
+  return ticks;
 }
 
 /** The sample: kerosene against temperature from the two fixed snapshots. */
@@ -92,7 +105,7 @@ export function renderRelationshipScatter(raw: unknown, theme: ChartTheme = LIGH
 
 /** A 4:5 scatter sized for 320px display: the points in the metric's tint, up to four named in its strong colour, regression line. */
 export function renderRelationshipScatterChart(chart: ScatterChart, theme: ChartTheme = LIGHT_THEME) {
-  const { points } = chart;
+  const points = chart.logAxes ? chart.points.map((p) => ({ ...p, x: Math.log10(p.x), y: Math.log10(p.y) })) : chart.points;
   const municipal = chart.level === 'municipality';
   const expected = municipal ? points.length : 47 - (chart.excludedCount ?? 0);
   const areaCount = municipal ? `${expected.toLocaleString('ja-JP')}市区町村` : `${expected}都道府県`;
@@ -119,10 +132,13 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
   const sy = linearScale(yDomain[0], yDomain[1], PLOT.bottom, PLOT.top);
   const grouped = (v: number) => v.toLocaleString('ja-JP', { maximumFractionDigits: 2 });
   const fx = chart.formatX ?? grouped, fy = chart.formatY ?? grouped;
-  const xTicks = niceTicks(xDomain[0], xDomain[1], 5).map((v) =>
-    `<line x1="${sx(v)}" x2="${sx(v)}" y1="${PLOT.top}" y2="${PLOT.bottom}" stroke="${ink.grid}"/><text x="${sx(v)}" y="${PLOT.bottom + 44}" text-anchor="middle" font-size="28" fill="${ink.tick}">${fx(v)}</text>`);
-  const yTicks = niceTicks(yDomain[0], yDomain[1], 5).map((v) =>
-    `<line x1="${PLOT.left}" x2="${PLOT.right}" y1="${sy(v)}" y2="${sy(v)}" stroke="${ink.grid}"/><text x="${PLOT.left - 16}" y="${sy(v) + 10}" text-anchor="end" font-size="28" fill="${ink.tick}">${fy(v)}</text>`);
+  const axisTicks = (domain: readonly [number, number], format: (value: number) => string) => chart.logAxes
+    ? logTicks(domain).map((value) => ({ v: Math.log10(value), label: format(value) }))
+    : niceTicks(domain[0], domain[1], 5).map((v) => ({ v, label: format(v) }));
+  const xTicks = axisTicks(xDomain, fx).map(({ v, label }) =>
+    `<line x1="${sx(v)}" x2="${sx(v)}" y1="${PLOT.top}" y2="${PLOT.bottom}" stroke="${ink.grid}"/><text x="${sx(v)}" y="${PLOT.bottom + 44}" text-anchor="middle" font-size="28" fill="${ink.tick}">${label}</text>`);
+  const yTicks = axisTicks(yDomain, fy).map(({ v, label }) =>
+    `<line x1="${PLOT.left}" x2="${PLOT.right}" y1="${sy(v)}" y2="${sy(v)}" stroke="${ink.grid}"/><text x="${PLOT.left - 16}" y="${sy(v) + 10}" text-anchor="end" font-size="28" fill="${ink.tick}">${label}</text>`);
   const reg = linearRegression(points);
   // Name the article's prefectures, then the extremes, only where the label clears every other dot.
   const named = (chart.labelNames ?? []).map((n) => points.find((p) => p.name === n)).filter((p): p is ScatterPoint => Boolean(p));
@@ -138,8 +154,9 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
     const cx = sx(p.x), cy = sy(p.y), toLeft = cx > (PLOT.left + PLOT.right) / 2;
     const width = p.name.length * LABEL_FONT;
     const x0 = toLeft ? cx - 18 - width : cx + 18, x1 = x0 + width;
-    const clear = x0 >= PLOT.left && x1 <= PLOT.right && points.every((o) => o === p ||
-      sx(o.x) + dotR < x0 || sx(o.x) - dotR > x1 || Math.abs(sy(o.y) - cy) > LABEL_FONT / 2 + dotR);
+    // Hundreds of municipal dots leave no clear gap, and the caller named this town for the article: its small dots may sit under the label.
+    const clear = x0 >= PLOT.left && x1 <= PLOT.right && ((municipal && named.includes(p)) || points.every((o) => o === p ||
+      sx(o.x) + dotR < x0 || sx(o.x) - dotR > x1 || Math.abs(sy(o.y) - cy) > LABEL_FONT / 2 + dotR));
     if (clear) {
       namedPoints.add(p);
       labels.push(`<text x="${toLeft ? cx - 18 : cx + 18}" y="${cy + 11}" text-anchor="${toLeft ? 'end' : 'start'}" font-size="${LABEL_FONT}" font-weight="700">${escapeXml(p.name)}</text>`);

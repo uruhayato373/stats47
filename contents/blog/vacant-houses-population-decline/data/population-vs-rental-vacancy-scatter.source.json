@@ -1,0 +1,25 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/vacant-housing-ratio/cities.json + r2:app/stats/vacant-houses-city/cities.json + r2:app/stats/vacant-housing-rate-excluding-rental-sale-secondary/cities.json + r2:app/stats/vacant-housing-rate-for-rent/cities.json + r2:app/stats/japanese-population/cities.json",
+  "transform": "市区町村ごとの 2010〜2020 年の人口の増減と 2023 年の空き家率を点で示す",
+  "generatedBy": ".claude/scripts/analysis/analysis-draft.ts",
+  "areaScope": {
+    "level": "municipality",
+    "wardMode": "merged",
+    "within": {
+      "kind": "nation"
+    }
+  },
+  "displaySources": [
+    {
+      "label": "住宅・土地統計調査",
+      "surveyId": "housing-land-survey"
+    },
+    {
+      "label": "国勢調査",
+      "surveyId": "census"
+    }
+  ],
+  "expectedPointCount": 1052,
+  "pearsonR": 0.04
+}

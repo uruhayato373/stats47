@@ -1,0 +1,339 @@
+{
+  "towns": 764,
+  "shares": {
+    "density": 31.6,
+    "people": 19.8,
+    "productivity": 17.1,
+    "peopleProductivity": 20.9,
+    "densityOverlap": 10.7
+  },
+  "robustness": [
+    {
+      "minimum": 10000,
+      "towns": 1209,
+      "density": 28.5,
+      "people": 21.6,
+      "productivity": 17.9,
+      "peopleProductivity": 21.3,
+      "densityOverlap": 10.8
+    },
+    {
+      "minimum": 30000,
+      "towns": 764,
+      "density": 31.6,
+      "people": 19.8,
+      "productivity": 17.1,
+      "peopleProductivity": 20.9,
+      "densityOverlap": 10.7
+    },
+    {
+      "minimum": 100000,
+      "towns": 283,
+      "density": 31.7,
+      "people": 19.8,
+      "productivity": 14.6,
+      "peopleProductivity": 18.9,
+      "densityOverlap": 15.1
+    }
+  ],
+  "quarters": [
+    {
+      "label": "上位4分の1",
+      "towns": 191,
+      "density": 26.6,
+      "people": 52,
+      "productivity": 0.51,
+      "densityRatio": 2.74,
+      "peopleRatio": 2.42,
+      "productivityRatio": 2.22
+    },
+    {
+      "label": "2番目",
+      "towns": 191,
+      "density": 22.5,
+      "people": 37.6,
+      "productivity": 0.35,
+      "densityRatio": 2.32,
+      "peopleRatio": 1.75,
+      "productivityRatio": 1.54
+    },
+    {
+      "label": "3番目",
+      "towns": 191,
+      "density": 18.6,
+      "people": 30.5,
+      "productivity": 0.29,
+      "densityRatio": 1.92,
+      "peopleRatio": 1.42,
+      "productivityRatio": 1.26
+    },
+    {
+      "label": "下位4分の1",
+      "towns": 191,
+      "density": 9.7,
+      "people": 21.5,
+      "productivity": 0.23,
+      "densityRatio": 1,
+      "peopleRatio": 1,
+      "productivityRatio": 1
+    }
+  ],
+  "center": {
+    "density": 19.2,
+    "people": 34.4,
+    "productivity": 0.33
+  },
+  "correlations": {
+    "densityPeople": 0.1,
+    "densityProductivity": 0.12,
+    "peopleProductivity": 0.57
+  },
+  "types": [
+    {
+      "label": "数の町",
+      "towns": 67,
+      "examples": [
+        {
+          "rank": 8,
+          "name": "東京都 瑞穂町",
+          "perCapitaManYen": 2261,
+          "density": 85.6,
+          "people": 25,
+          "productivityOkuYen": 1.06,
+          "type": "数の町"
+        },
+        {
+          "rank": 30,
+          "name": "愛知県 碧南市",
+          "perCapitaManYen": 1253,
+          "density": 46.8,
+          "people": 48,
+          "productivityOkuYen": 0.56,
+          "type": "数の町"
+        },
+        {
+          "rank": 37,
+          "name": "愛知県 小牧市",
+          "perCapitaManYen": 1148,
+          "density": 45.9,
+          "people": 54,
+          "productivityOkuYen": 0.47,
+          "type": "数の町"
+        }
+      ]
+    },
+    {
+      "label": "規模の町",
+      "towns": 58,
+      "examples": [
+        {
+          "rank": 9,
+          "name": "栃木県 上三川町",
+          "perCapitaManYen": 2088,
+          "density": 21.4,
+          "people": 130,
+          "productivityOkuYen": 0.75,
+          "type": "規模の町"
+        },
+        {
+          "rank": 14,
+          "name": "広島県 府中町",
+          "perCapitaManYen": 1877,
+          "density": 6.6,
+          "people": 395,
+          "productivityOkuYen": 0.71,
+          "type": "規模の町"
+        },
+        {
+          "rank": 19,
+          "name": "群馬県 大泉町",
+          "perCapitaManYen": 1620,
+          "density": 27.6,
+          "people": 100,
+          "productivityOkuYen": 0.59,
+          "type": "規模の町"
+        }
+      ]
+    },
+    {
+      "label": "1人あたりの町",
+      "towns": 66,
+      "examples": [
+        {
+          "rank": 2,
+          "name": "愛知県 豊田市",
+          "perCapitaManYen": 4862,
+          "density": 22,
+          "people": 128,
+          "productivityOkuYen": 1.73,
+          "type": "1人あたりの町"
+        },
+        {
+          "rank": 10,
+          "name": "千葉県 袖ケ浦市",
+          "perCapitaManYen": 2085,
+          "density": 16.9,
+          "people": 63,
+          "productivityOkuYen": 1.95,
+          "type": "1人あたりの町"
+        },
+        {
+          "rank": 11,
+          "name": "茨城県 神栖市",
+          "perCapitaManYen": 2002,
+          "density": 22.1,
+          "people": 67,
+          "productivityOkuYen": 1.35,
+          "type": "1人あたりの町"
+        }
+      ]
+    }
+  ],
+  "typesAllTowns": {
+    "数の町": 301,
+    "規模の町": 221,
+    "1人あたりの町": 242
+  },
+  "typesByRegion": [
+    {
+      "label": "北海道・東北",
+      "towns": 90,
+      "top": 14,
+      "数の町": 2,
+      "規模の町": 5,
+      "1人あたりの町": 7
+    },
+    {
+      "label": "関東",
+      "towns": 218,
+      "top": 47,
+      "数の町": 19,
+      "規模の町": 12,
+      "1人あたりの町": 16
+    },
+    {
+      "label": "中部",
+      "towns": 155,
+      "top": 58,
+      "数の町": 29,
+      "規模の町": 16,
+      "1人あたりの町": 13
+    },
+    {
+      "label": "近畿",
+      "towns": 121,
+      "top": 36,
+      "数の町": 10,
+      "規模の町": 12,
+      "1人あたりの町": 14
+    },
+    {
+      "label": "中国・四国",
+      "towns": 75,
+      "top": 25,
+      "数の町": 7,
+      "規模の町": 5,
+      "1人あたりの町": 13
+    },
+    {
+      "label": "九州・沖縄",
+      "towns": 105,
+      "top": 11,
+      "数の町": 0,
+      "規模の町": 8,
+      "1人あたりの町": 3
+    }
+  ],
+  "linearPeopleProductivity": 0.43,
+  "usableTowns": 1669,
+  "townsUnderFourPeople": 11,
+  "named": [
+    {
+      "rank": 3,
+      "name": "愛知県 田原市",
+      "perCapitaManYen": 4348,
+      "density": 12.6,
+      "people": 189,
+      "productivityOkuYen": 1.82,
+      "type": "1人あたりの町"
+    },
+    {
+      "rank": 27,
+      "name": "愛知県 知多市",
+      "perCapitaManYen": 1388,
+      "density": 10.2,
+      "people": 48,
+      "productivityOkuYen": 2.82,
+      "type": "1人あたりの町"
+    },
+    {
+      "rank": 14,
+      "name": "広島県 府中町",
+      "perCapitaManYen": 1877,
+      "density": 6.6,
+      "people": 395,
+      "productivityOkuYen": 0.71,
+      "type": "規模の町"
+    },
+    {
+      "rank": 13,
+      "name": "千葉県 市原市",
+      "perCapitaManYen": 1898,
+      "density": 11.4,
+      "people": 69,
+      "productivityOkuYen": 2.43,
+      "type": "1人あたりの町"
+    }
+  ],
+  "topPrefectures": [
+    {
+      "name": "愛知県",
+      "count": 22
+    },
+    {
+      "name": "茨城県",
+      "count": 16
+    },
+    {
+      "name": "静岡県",
+      "count": 13
+    },
+    {
+      "name": "兵庫県",
+      "count": 12
+    },
+    {
+      "name": "埼玉県",
+      "count": 10
+    },
+    {
+      "name": "滋賀県",
+      "count": 9
+    }
+  ],
+  "smallTowns": {
+    "count": 905,
+    "top": [
+      {
+        "name": "香川県 直島町",
+        "perCapitaManYen": 17575,
+        "population": 3103
+      },
+      {
+        "name": "山口県 和木町",
+        "perCapitaManYen": 8635,
+        "population": 6035
+      },
+      {
+        "name": "宮城県 大衡村",
+        "perCapitaManYen": 8402,
+        "population": 5850
+      },
+      {
+        "name": "愛知県 飛島村",
+        "perCapitaManYen": 7611,
+        "population": 4575
+      }
+    ]
+  }
+}

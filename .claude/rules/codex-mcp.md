@@ -16,6 +16,7 @@ Claude Code から **MCP 経由で OpenAI Codex を呼ぶ**ときの実行規約
 > |---|---|---|---|
 > | **①** | **Claude Code → MCP (`mcp__codex__codex`)** | Claude のツールコールとして同期実行 | **本ルール** |
 > | ② | standalone Codex (VSCode 拡張 / `codex` TUI) | 独立プロセス。`AGENTS.md` (=`CLAUDE.md` symlink) を読む | 同時起動禁止 or worktree 分離 (CLAUDE.md「並行エージェント」節) |
+> | ④ | `codex exec` (スクリプトからの直接実行) | 問いの分析の実行役 `npm run analysis:run`。read-only + `--output-schema` で JSON を返す。標準入力は閉じる | `.claude/skills/content/run-analysis/SKILL.md` |
 > | ③ | Codex built-in imagegen | Codex CLI/IDEで直接、または①経由で画像生成 | blog は `/generate-blog-images`。area は `area-databook-standards.md` §5 |
 
 ---

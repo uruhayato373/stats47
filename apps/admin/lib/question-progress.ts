@@ -13,7 +13,7 @@ export type QuestionIssue = { id: string; level: "major" | "minor"; question: st
 export type QuestionLink = { issue: string; page: string; role: "answers" | "evidence" };
 export type QuestionAnalysis = { id: string; issue: string; status: string };
 export type QuestionDestination = { channel: string; status: string; page?: string; postId?: number; slug?: string };
-export type QuestionFigure = { id: string; analysis: string; template: string; title: string; destinations: QuestionDestination[] };
+export type QuestionFigure = { id: string; analysis: string; template: string; title: string; reads?: string; destinations: QuestionDestination[] };
 export type ExternalLink = { from: string; to: string };
 export type ProgressInput = {
   issues: QuestionIssue[];

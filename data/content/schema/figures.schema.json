@@ -49,7 +49,10 @@
           },
           "colorView": {
             "description": "地図の型で、分析の目的に合わせて選ぶ見方 (packages/types/src/color-policy.ts の COLOR_VIEWS)。書かなければ配色の台帳の判定に従う。",
-            "enum": ["continuous", "distribution"]
+            "enum": [
+              "continuous",
+              "distribution"
+            ]
           },
           "scope": {
             "enum": [
@@ -146,10 +149,8 @@
               "meta",
               "source",
               "rows",
-              "category",
               "unit",
               "transform",
-              "series",
               "displaySources"
             ],
             "additionalProperties": false,
@@ -233,6 +234,23 @@
                     }
                   }
                 }
+              },
+              "decimals": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "note": {
+                "type": "string"
+              },
+              "xLabel": {
+                "type": "string"
+              },
+              "yLabel": {
+                "type": "string"
+              },
+              "correlationField": {
+                "type": "string",
+                "description": "散布図の相関係数を持つ結果のキー"
               }
             }
           }

@@ -27,6 +27,7 @@ bar / tile-grid / scatter の寸法・配色・透過背景の規定は、型に
 | 散布図の形 | 47 点 (`excludedAreas` と理由を source.json に持つ図はその点数で、見出しに「41都道府県」と出す) を縦軸の指標の色で描く。指標が既定の青のときは分野の色 (`SCATTER_CATEGORY_SCHEME`) を使う。県名は正式名で出す。県名を出す点 (最大 4 つ。data JSON の `labelPoints`、図の置かれた H2 節の本文に出る県 (`prefecturesNamedNear`)、端の県の順。点と重なる名前は出さない) は棒の上位と同じ濃い色、残りは同じ色の薄い版。回帰の破線を入れる。題名は指標名だけで、注記の行は置かず、数字の読み方が変わる情報 (分母・県庁所在市・学年や性別) だけを軸の名前に短く入れる。軸は指標ごとに表示単位 (万円など) をそろえる。暗い版は点を明るくする |
 | 散布図の軸と年 | data JSON に年が無いので、`source.json` の 2 指標と source.json・本文に出る指標キー (`metricKeysInSource`) の R2 観測値 (`app/stats/<key>/values.json`) から、全点が丸めた値で完全に一致する指標・年・桁 (万人など) を軸ごとに探す (`matchScatterAxis`)。一致した軸は指標名と出典を使う。一致しない軸 (計算した値) は記事のラベルと単位を書かれたまま使い、年は `sourceAxisYear` がラベルと source.json から読む。年も出典も分からない図と、理由なく県が欠けた図は型にせず svg-builder の図のまま残す。両軸の年が違えば「横軸 2024年・縦軸 2021年度」と出す |
 | 寸法 | 1080×1350 (4:5)。PC もスマホも同じ画像。`-mobile.svg` と `-ig.svg` は明るい版と同じ中身 (記事の切り替えと Instagram のファイル名を保つため) |
+| 記事の中の幅 | PC は最大 560px (高さ 700px)、スマホは全幅。672px 幅だと高さが 840px になり 1 枚が画面に収まらない。判定は `ResponsiveArticleImage` と `responsive-chart.ts` の名前の接尾辞で、分析の図は `-bars`・`-lines`・`-scatter` を使う。`-trend` は既存の横長の折れ線の名前なので使わない (使うと 4:5 の図が 672px に広がる) |
 | 棒グラフの形 | 上位5県・下位5県のカード。色の帯の見出し・丸い順位・1行おきの色・名前の下の細い棒・右の値と単位。色は指標の色 1 色 (`resolveMetricColor`)、下位は同じ色の薄い版 |
 | 地図の形 | 管理画面のタイルマップの型。左上に上位3県、右下に区分ごとの凡例 (色・範囲・県の数)。区分は指標の `classification` |
 | 暗い表示 | `<name>-dark.svg` を必ず 1 組で出す。地色 #262626、県境・タイル・凡例の色見本・棒の行に #8A8A8A の線。色の組は `apps/remotion/src/features/data-cards/chart-theme.ts` (`CHART_THEMES`) が正典 |

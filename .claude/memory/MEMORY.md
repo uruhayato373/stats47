@@ -185,3 +185,4 @@
 - [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — develop は保護なし。リポジトリの自動削除をオンにすると develop→main のマージで develop が消える
 - [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず capture-pages.mjs --all で撮って画像を読む (2026-11-04 指摘)
 - [analysis question drift](feedback_analysis_question_drift.md) — 分析は台帳の問いの語で答え、恒等式を分け切り、重なりを等分しない。審査のPASSは問いへの答えを保証しない
+- [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は観点でなく計算手順つきの必須試験にする。誤った結論の fixture で検出を確かめる

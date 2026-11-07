@@ -15,13 +15,15 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { renderGroupedBarsChart } from "../../../apps/admin/lib/template-grouped-bars";
+import { renderRelationshipScatterChart } from "../../../apps/admin/lib/template-relationship-scatter";
+import { renderLineChart } from "../../../apps/admin/lib/template-trend-line";
 import { CHART_THEMES } from "../../../apps/remotion/src/features/data-cards/chart-theme";
 import { datasetPath } from "../../../config/datasets.mjs";
 import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInputProblems } from "./analysis-draft-core.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const GENERATED_BY = ".claude/scripts/analysis/analysis-draft.ts";
-const RENDERERS = { "grouped-bar": renderGroupedBarsChart } as const;
+const RENDERERS = { "grouped-bar": renderGroupedBarsChart, line: renderLineChart, scatter: renderRelationshipScatterChart } as const;
 
 const arg = (name: string) => {
   const i = process.argv.indexOf(name);
@@ -61,12 +63,13 @@ mkdirSync(dataDir, { recursive: true });
 
 for (const figure of figures) {
   const { name } = figure.chart;
-  const render = RENDERERS[figure.template as keyof typeof RENDERERS];
+  // buildChart は図の型に合った形を返す。図の型と描画の組は台帳の検査 draftInputProblems が保証する
+  const render = RENDERERS[figure.template as keyof typeof RENDERERS] as unknown as (chart: unknown, theme: typeof CHART_THEMES.light) => string;
   const built = buildChart(figure, result);
   writeFileSync(join(dataDir, `${name}.svg`), render(built, CHART_THEMES.light));
   writeFileSync(join(dataDir, `${name}-dark.svg`), render(built, CHART_THEMES.dark));
   writeJson(join(dataDir, `${name}.json`), buildChartData(figure, built, result));
-  writeJson(join(dataDir, `${name}.source.json`), buildChartSource({ figure, spec, generatedBy: GENERATED_BY }));
+  writeJson(join(dataDir, `${name}.source.json`), buildChartSource({ figure, spec, generatedBy: GENERATED_BY, result }));
 }
 writeJson(join(dataDir, "analysis-summary.json"), result);
 console.log(`図 ${figures.length} 枚 → ${join("contents/blog", article.slug, "data")}`);

@@ -74,6 +74,7 @@ const server = createServer(async (req, res) => {
 server.listen(PORT, () => {
   const base = `http://127.0.0.1:${PORT}`;
   console.log(`確認先: http://localhost:3000/blog/${slug}`);
-  const env = { BLOG_PREVIEW_R2_URL: base, R2_PUBLIC_FETCH_URL: base, NEXT_PUBLIC_R2_PUBLIC_URL: base, BLOG_PREVIEW_SLUG: slug };
+  // S3 の認証情報があると公開 URL の指定より S3 を先に読み、下書きを重ねられない
+  const env = { R2_S3_ENDPOINT: "", BLOG_PREVIEW_R2_URL: base, R2_PUBLIC_FETCH_URL: base, NEXT_PUBLIC_R2_PUBLIC_URL: base, BLOG_PREVIEW_SLUG: slug };
   spawn("npm", ["run", "dev:web"], { cwd: ROOT, stdio: "inherit", shell: process.platform === "win32", env: { ...process.env, ...env } });
 });

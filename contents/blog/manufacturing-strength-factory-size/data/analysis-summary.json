@@ -7,6 +7,11 @@
     "peopleProductivity": 20.9,
     "densityOverlap": 10.7
   },
+  "wholeShares": {
+    "thickness": 56.5,
+    "productivity": 17.1,
+    "overlap": 26.5
+  },
   "robustness": [
     {
       "minimum": 10000,
@@ -36,6 +41,404 @@
       "densityOverlap": 15.1
     }
   ],
+  "center": {
+    "thickness": 690,
+    "productivity": 0.33
+  },
+  "bothHighInTop20": 18,
+  "stepsFivePieces": [
+    {
+      "label": "下位と3番目",
+      "ratio": 3.51,
+      "density": 50.5,
+      "people": 31.9,
+      "productivity": 17.6,
+      "thickness": 82.4
+    },
+    {
+      "label": "3番目と2番目",
+      "ratio": 1.78,
+      "density": 43.4,
+      "people": 28.4,
+      "productivity": 28.2,
+      "thickness": 71.8
+    },
+    {
+      "label": "2番目と上位",
+      "ratio": 1.74,
+      "density": 38.1,
+      "people": 32.2,
+      "productivity": 29.8,
+      "thickness": 70.2
+    },
+    {
+      "label": "4段目",
+      "ratio": 2.31,
+      "density": 7,
+      "people": 38.3,
+      "productivity": 54.7,
+      "thickness": 45.3
+    }
+  ],
+  "stepTrim": [
+    {
+      "rate": 0.1,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.64,
+          "density": 48.6,
+          "people": 32.7,
+          "productivity": 18.7,
+          "thickness": 81.3
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 1.99,
+          "density": 37.5,
+          "people": 31.2,
+          "productivity": 31.3,
+          "thickness": 68.7
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.31,
+          "density": 25.8,
+          "people": 35.7,
+          "productivity": 38.6,
+          "thickness": 61.4
+        }
+      ]
+    },
+    {
+      "rate": 0.2,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.64,
+          "density": 48.6,
+          "people": 32.7,
+          "productivity": 18.7,
+          "thickness": 81.3
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 1.99,
+          "density": 37.5,
+          "people": 31.2,
+          "productivity": 31.3,
+          "thickness": 68.7
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.16,
+          "density": 30.5,
+          "people": 37.3,
+          "productivity": 32.2,
+          "thickness": 67.8
+        }
+      ]
+    }
+  ],
+  "stepTrimThickness": [
+    {
+      "rate": 0.1,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.64,
+          "density": 48.6,
+          "people": 32.7,
+          "productivity": 18.7,
+          "thickness": 81.3
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 1.99,
+          "density": 37.5,
+          "people": 31.2,
+          "productivity": 31.3,
+          "thickness": 68.7
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.29,
+          "density": 17.8,
+          "people": 31.7,
+          "productivity": 50.6,
+          "thickness": 49.4
+        }
+      ]
+    },
+    {
+      "rate": 0.2,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.64,
+          "density": 48.6,
+          "people": 32.7,
+          "productivity": 18.7,
+          "thickness": 81.3
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 1.99,
+          "density": 37.5,
+          "people": 31.2,
+          "productivity": 31.3,
+          "thickness": 68.7
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.19,
+          "density": 11.6,
+          "people": 32.9,
+          "productivity": 55.5,
+          "thickness": 44.5
+        }
+      ]
+    }
+  ],
+  "stepsDaytime": [
+    {
+      "label": "下位と3番目",
+      "ratio": 3.68,
+      "density": 48.3,
+      "people": 31.5,
+      "productivity": 20.2,
+      "thickness": 79.8
+    },
+    {
+      "label": "3番目と2番目",
+      "ratio": 2,
+      "density": 38.6,
+      "people": 32.7,
+      "productivity": 28.7,
+      "thickness": 71.3
+    },
+    {
+      "label": "2番目と上位",
+      "ratio": 2.47,
+      "density": 14.4,
+      "people": 37,
+      "productivity": 48.5,
+      "thickness": 51.5
+    }
+  ],
+  "steps": [
+    {
+      "label": "下位と3番目",
+      "ratio": 3.64,
+      "density": 48.6,
+      "people": 32.7,
+      "productivity": 18.7,
+      "thickness": 81.3
+    },
+    {
+      "label": "3番目と2番目",
+      "ratio": 1.99,
+      "density": 37.5,
+      "people": 31.2,
+      "productivity": 31.3,
+      "thickness": 68.7
+    },
+    {
+      "label": "2番目と上位",
+      "ratio": 2.51,
+      "density": 17.4,
+      "people": 35.4,
+      "productivity": 47.2,
+      "thickness": 52.8
+    }
+  ],
+  "stepIntervals": [
+    {
+      "label": "下位と3番目",
+      "density": [
+        40.7,
+        56.8
+      ],
+      "people": [
+        26.9,
+        38.9
+      ],
+      "productivity": [
+        13.7,
+        23.6
+      ],
+      "thickness": [
+        76.4,
+        86.3
+      ]
+    },
+    {
+      "label": "3番目と2番目",
+      "density": [
+        22.8,
+        52.7
+      ],
+      "people": [
+        20.6,
+        41.8
+      ],
+      "productivity": [
+        22.9,
+        39.5
+      ],
+      "thickness": [
+        60.5,
+        77.1
+      ]
+    },
+    {
+      "label": "2番目と上位",
+      "density": [
+        7.1,
+        29
+      ],
+      "people": [
+        27.7,
+        43.2
+      ],
+      "productivity": [
+        39.5,
+        53.7
+      ],
+      "thickness": [
+        46.3,
+        60.5
+      ]
+    }
+  ],
+  "stepRobustness": [
+    {
+      "label": "人口1万人以上",
+      "towns": 1209,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.71,
+          "density": 41.5,
+          "people": 35.2,
+          "productivity": 23.3,
+          "thickness": 76.7
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 2.08,
+          "density": 37.8,
+          "people": 31.4,
+          "productivity": 30.8,
+          "thickness": 69.2
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.58,
+          "density": 18.3,
+          "people": 37.5,
+          "productivity": 44.2,
+          "thickness": 55.8
+        }
+      ]
+    },
+    {
+      "label": "人口3万人以上",
+      "towns": 764,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.64,
+          "density": 48.6,
+          "people": 32.7,
+          "productivity": 18.7,
+          "thickness": 81.3
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 1.99,
+          "density": 37.5,
+          "people": 31.2,
+          "productivity": 31.3,
+          "thickness": 68.7
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.51,
+          "density": 17.4,
+          "people": 35.4,
+          "productivity": 47.2,
+          "thickness": 52.8
+        }
+      ]
+    },
+    {
+      "label": "人口10万人以上",
+      "towns": 283,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.82,
+          "density": 46.7,
+          "people": 30.8,
+          "productivity": 22.5,
+          "thickness": 77.5
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 2.16,
+          "density": 43.8,
+          "people": 35.8,
+          "productivity": 20.4,
+          "thickness": 79.6
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.54,
+          "density": 22.7,
+          "people": 28.4,
+          "productivity": 48.9,
+          "thickness": 51.1
+        }
+      ]
+    },
+    {
+      "label": "人口3万人以上で東京23区を除く",
+      "towns": 741,
+      "steps": [
+        {
+          "label": "下位と3番目",
+          "ratio": 3.34,
+          "density": 55.9,
+          "people": 25.6,
+          "productivity": 18.4,
+          "thickness": 81.6
+        },
+        {
+          "label": "3番目と2番目",
+          "ratio": 1.94,
+          "density": 32.4,
+          "people": 33.6,
+          "productivity": 34,
+          "thickness": 66
+        },
+        {
+          "label": "2番目と上位",
+          "ratio": 2.47,
+          "density": 17.2,
+          "people": 35.7,
+          "productivity": 47,
+          "thickness": 53
+        }
+      ]
+    }
+  ],
+  "bottomTowns": [
+    "神奈川県 逗子市",
+    "兵庫県 芦屋市",
+    "東京都 杉並区",
+    "東京都 世田谷区"
+  ],
   "quarters": [
     {
       "label": "上位4分の1",
@@ -43,6 +446,7 @@
       "density": 26.6,
       "people": 52,
       "productivity": 0.51,
+      "thickness": 1376,
       "densityRatio": 2.74,
       "peopleRatio": 2.42,
       "productivityRatio": 2.22
@@ -53,6 +457,7 @@
       "density": 22.5,
       "people": 37.6,
       "productivity": 0.35,
+      "thickness": 862,
       "densityRatio": 2.32,
       "peopleRatio": 1.75,
       "productivityRatio": 1.54
@@ -63,6 +468,7 @@
       "density": 18.6,
       "people": 30.5,
       "productivity": 0.29,
+      "thickness": 551,
       "densityRatio": 1.92,
       "peopleRatio": 1.42,
       "productivityRatio": 1.26
@@ -73,216 +479,65 @@
       "density": 9.7,
       "people": 21.5,
       "productivity": 0.23,
+      "thickness": 217,
       "densityRatio": 1,
       "peopleRatio": 1,
       "productivityRatio": 1
     }
   ],
-  "center": {
-    "density": 19.2,
-    "people": 34.4,
-    "productivity": 0.33
-  },
   "correlations": {
-    "densityPeople": 0.1,
-    "densityProductivity": 0.12,
-    "peopleProductivity": 0.57
+    "thicknessProductivity": 0.43
   },
-  "types": [
-    {
-      "label": "数の町",
-      "towns": 67,
-      "examples": [
-        {
-          "rank": 8,
-          "name": "東京都 瑞穂町",
-          "perCapitaManYen": 2261,
-          "density": 85.6,
-          "people": 25,
-          "productivityOkuYen": 1.06,
-          "type": "数の町"
-        },
-        {
-          "rank": 30,
-          "name": "愛知県 碧南市",
-          "perCapitaManYen": 1253,
-          "density": 46.8,
-          "people": 48,
-          "productivityOkuYen": 0.56,
-          "type": "数の町"
-        },
-        {
-          "rank": 37,
-          "name": "愛知県 小牧市",
-          "perCapitaManYen": 1148,
-          "density": 45.9,
-          "people": 54,
-          "productivityOkuYen": 0.47,
-          "type": "数の町"
-        }
-      ]
-    },
-    {
-      "label": "規模の町",
-      "towns": 58,
-      "examples": [
-        {
-          "rank": 9,
-          "name": "栃木県 上三川町",
-          "perCapitaManYen": 2088,
-          "density": 21.4,
-          "people": 130,
-          "productivityOkuYen": 0.75,
-          "type": "規模の町"
-        },
-        {
-          "rank": 14,
-          "name": "広島県 府中町",
-          "perCapitaManYen": 1877,
-          "density": 6.6,
-          "people": 395,
-          "productivityOkuYen": 0.71,
-          "type": "規模の町"
-        },
-        {
-          "rank": 19,
-          "name": "群馬県 大泉町",
-          "perCapitaManYen": 1620,
-          "density": 27.6,
-          "people": 100,
-          "productivityOkuYen": 0.59,
-          "type": "規模の町"
-        }
-      ]
-    },
-    {
-      "label": "1人あたりの町",
-      "towns": 66,
-      "examples": [
-        {
-          "rank": 2,
-          "name": "愛知県 豊田市",
-          "perCapitaManYen": 4862,
-          "density": 22,
-          "people": 128,
-          "productivityOkuYen": 1.73,
-          "type": "1人あたりの町"
-        },
-        {
-          "rank": 10,
-          "name": "千葉県 袖ケ浦市",
-          "perCapitaManYen": 2085,
-          "density": 16.9,
-          "people": 63,
-          "productivityOkuYen": 1.95,
-          "type": "1人あたりの町"
-        },
-        {
-          "rank": 11,
-          "name": "茨城県 神栖市",
-          "perCapitaManYen": 2002,
-          "density": 22.1,
-          "people": 67,
-          "productivityOkuYen": 1.35,
-          "type": "1人あたりの町"
-        }
-      ]
-    }
-  ],
-  "typesAllTowns": {
-    "数の町": 301,
-    "規模の町": 221,
-    "1人あたりの町": 242
-  },
-  "typesByRegion": [
-    {
-      "label": "北海道・東北",
-      "towns": 90,
-      "top": 14,
-      "数の町": 2,
-      "規模の町": 5,
-      "1人あたりの町": 7
-    },
-    {
-      "label": "関東",
-      "towns": 218,
-      "top": 47,
-      "数の町": 19,
-      "規模の町": 12,
-      "1人あたりの町": 16
-    },
-    {
-      "label": "中部",
-      "towns": 155,
-      "top": 58,
-      "数の町": 29,
-      "規模の町": 16,
-      "1人あたりの町": 13
-    },
-    {
-      "label": "近畿",
-      "towns": 121,
-      "top": 36,
-      "数の町": 10,
-      "規模の町": 12,
-      "1人あたりの町": 14
-    },
-    {
-      "label": "中国・四国",
-      "towns": 75,
-      "top": 25,
-      "数の町": 7,
-      "規模の町": 5,
-      "1人あたりの町": 13
-    },
-    {
-      "label": "九州・沖縄",
-      "towns": 105,
-      "top": 11,
-      "数の町": 0,
-      "規模の町": 8,
-      "1人あたりの町": 3
-    }
-  ],
-  "linearPeopleProductivity": 0.43,
   "usableTowns": 1669,
   "townsUnderFourPeople": 11,
   "named": [
     {
+      "rank": 1,
+      "name": "福岡県 苅田町",
+      "perCapitaManYen": 6552,
+      "thickness": 4113,
+      "people": 152,
+      "productivityOkuYen": 1.59
+    },
+    {
+      "rank": 2,
+      "name": "愛知県 豊田市",
+      "perCapitaManYen": 4862,
+      "thickness": 2816,
+      "people": 128,
+      "productivityOkuYen": 1.73
+    },
+    {
       "rank": 3,
       "name": "愛知県 田原市",
       "perCapitaManYen": 4348,
-      "density": 12.6,
+      "thickness": 2385,
       "people": 189,
-      "productivityOkuYen": 1.82,
-      "type": "1人あたりの町"
+      "productivityOkuYen": 1.82
     },
     {
       "rank": 27,
       "name": "愛知県 知多市",
       "perCapitaManYen": 1388,
-      "density": 10.2,
+      "thickness": 491,
       "people": 48,
-      "productivityOkuYen": 2.82,
-      "type": "1人あたりの町"
+      "productivityOkuYen": 2.82
     },
     {
-      "rank": 14,
-      "name": "広島県 府中町",
-      "perCapitaManYen": 1877,
-      "density": 6.6,
-      "people": 395,
-      "productivityOkuYen": 0.71,
-      "type": "規模の町"
+      "rank": 127,
+      "name": "富山県 黒部市",
+      "perCapitaManYen": 586,
+      "thickness": 2281,
+      "people": 77,
+      "productivityOkuYen": 0.26
     },
     {
       "rank": 13,
       "name": "千葉県 市原市",
       "perCapitaManYen": 1898,
-      "density": 11.4,
+      "thickness": 783,
       "people": 69,
-      "productivityOkuYen": 2.43,
-      "type": "1人あたりの町"
+      "productivityOkuYen": 2.43
     }
   ],
   "topPrefectures": [
