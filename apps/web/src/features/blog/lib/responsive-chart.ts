@@ -13,6 +13,8 @@ const TYPE_SCATTER_SUFFIX = /-scatter\.svg$/i;
 const TYPE_BARS_SUFFIX = /-bars\.svg$/i;
 /** 分析の折れ線の図。`-trend` は既存の横長の折れ線の名前なので使わない */
 const TYPE_LINES_SUFFIX = /-lines\.svg$/i;
+/** 分析の箱ひげの図。区分ごとの分布を 4:5 の 1 枚で描く */
+const TYPE_BOXPLOT_SUFFIX = /-boxplot\.svg$/i;
 
 const SPECIALIZED_VARIANT = /-(?:mobile|ig|dark)\.svg$/i;
 
@@ -48,6 +50,6 @@ export function resolveMobileChartSource(src: string): string | null {
 export function resolveDarkChartSource(src: string): string | null {
   const { path, suffix } = splitPath(src);
   if (SPECIALIZED_VARIANT.test(path)) return null;
-  if (!RESPONSIVE_RANKING_SUFFIX.test(path) && !TYPE_MAP_SUFFIX.test(path) && !TYPE_BARS_SUFFIX.test(path) && !TYPE_LINES_SUFFIX.test(path) && !TYPE_SCATTER_SUFFIX.test(path)) return null;
+  if (!RESPONSIVE_RANKING_SUFFIX.test(path) && !TYPE_MAP_SUFFIX.test(path) && !TYPE_BARS_SUFFIX.test(path) && !TYPE_LINES_SUFFIX.test(path) && !TYPE_BOXPLOT_SUFFIX.test(path) && !TYPE_SCATTER_SUFFIX.test(path)) return null;
   return `${path.replace(/\.svg$/i, "-dark.svg")}${suffix}`;
 }

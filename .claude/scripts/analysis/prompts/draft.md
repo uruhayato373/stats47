@@ -4,6 +4,8 @@
 <sources>規約: .claude/rules/blog-quality-standards.md・.claude/rules/content-type-standards.md / 問い: {{question}} / 結論: {{finding}} / 主張: {{claims}} / 注意点: {{caveats}} / 数値: {{summary}} / 図: {{figures}} / 今の本文: {{article}} / 記事の条件: {{articleMeta}}</sources>
 <done_when>問いに最初の段落で答え、本文の数値がすべて出力にある</done_when>
 </task>
+上に挙げたファイル以外を開かない。リポジトリを検索しない。足りないときは足りないと返す。
+
 直す指摘:
 {{findings}}
 
