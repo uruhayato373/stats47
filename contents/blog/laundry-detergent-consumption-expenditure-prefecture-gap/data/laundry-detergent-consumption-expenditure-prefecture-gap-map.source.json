@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "laundry-detergent-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "洗濯用洗剤消費支出額",
+  "readerLabel": "洗濯用洗剤への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/laundry-detergent-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug laundry-detergent-consumption-expenditure-prefecture-gap --keys laundry-detergent-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-04T11:22:57.978Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
