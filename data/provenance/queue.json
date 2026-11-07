@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-30T23:00:07.374Z",
-  "metricTotal": 3186,
+  "generatedAt": "2026-11-06T23:05:30.734Z",
+  "metricTotal": 3324,
   "byClass": {
-    "A": 2942,
-    "C": 202,
+    "A": 3079,
+    "C": 203,
     "A'": 29,
     "B": 13
   },
   "needsWorkCount": 0,
   "needsWork": [],
   "blogLineage": {
-    "total": 1627,
+    "total": 1952,
     "byStatus": {
-      "both": 1551,
+      "both": 1876,
       "jsonOnly": 0,
       "neither": 76
     }

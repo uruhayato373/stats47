@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 2,
+  "source": "gsc",
+  "weekId": "2026-W44",
+  "anchor": "2026-11-01",
+  "delayDays": 3,
+  "generatedAt": "2026-11-06T22:29:54.085Z",
+  "finalized7d": {
+    "periodStart": "2026-10-23",
+    "periodEnd": "2026-10-29",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-11-06T22:29:54.085Z",
+    "source": "gsc",
+    "limitations": [
+      "取得遅延 3 日を考慮 (anchor=2026-11-01)",
+      "position は日別 impressions 加重平均 (GSC API の期間集計と ±0.01 程度ずれうる)"
+    ],
+    "kpis": {
+      "clicks": 5042,
+      "impressions": 173019,
+      "ctr": 0.0291,
+      "position": 7
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    }
+  },
+  "previous7d": {
+    "periodStart": "2026-10-16",
+    "periodEnd": "2026-10-22",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-11-06T22:29:54.085Z",
+    "source": "gsc",
+    "limitations": [
+      "取得遅延 3 日を考慮 (anchor=2026-11-01)",
+      "position は日別 impressions 加重平均 (GSC API の期間集計と ±0.01 程度ずれうる)"
+    ],
+    "kpis": {
+      "clicks": 4136,
+      "impressions": 129610,
+      "ctr": 0.0319,
+      "position": 6.89
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    }
+  },
+  "rolling28d": {
+    "periodStart": "2026-10-02",
+    "periodEnd": "2026-10-29",
+    "windowDays": 28,
+    "isFinalized": true,
+    "generatedAt": "2026-11-06T22:29:54.085Z",
+    "source": "gsc",
+    "limitations": [
+      "取得遅延 3 日を考慮 (anchor=2026-11-01)",
+      "position は日別 impressions 加重平均 (GSC API の期間集計と ±0.01 程度ずれうる)",
+      "機会発見用。前回 snapshot と 21 日重複するため WoW 比較禁止"
+    ],
+    "kpis": {
+      "clicks": 16701,
+      "impressions": 528667,
+      "ctr": 0.0316,
+      "position": 6.82
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 28,
+      "expectedCount": 28
+    }
+  },
+  "wow": {
+    "clicks": {
+      "delta": 906,
+      "pct": 21.9
+    },
+    "impressions": {
+      "delta": 43409,
+      "pct": 33.5
+    },
+    "ctr": {
+      "delta": -0.0028,
+      "pct": -8.8
+    },
+    "position": {
+      "delta": 0.11,
+      "pct": 1.6
+    }
+  },
+  "wowBlockedReason": null
+}

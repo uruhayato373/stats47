@@ -51,6 +51,7 @@ describe('ranking taxonomy follow-up retirements', () => {
       }
       floor -= step.retiredResolvedKeys.length;
     }
-    expect(ratchet.ranking.minActiveResolved).toBe(floor);
+    // 週次の監査が実数まで引き上げるので、撤去で下げた分を下回らないことだけを見る
+    expect(ratchet.ranking.minActiveResolved).toBeGreaterThanOrEqual(floor);
   });
 });

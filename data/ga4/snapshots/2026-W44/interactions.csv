@@ -1,0 +1,8 @@
+ui_action,ui_target,contentGroup,eventCount
+year_change,chart,ranking,1268
+basis_change,chart,ranking,887
+tab_switch,table,ranking,577
+detail_open,table,ranking,191
+detail_open,map,ranking,174
+tab_switch,map,ranking,32
+region_select,detail_sheet,ranking,11

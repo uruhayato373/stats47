@@ -1,16 +1,16 @@
 {
-  "total": 1952,
+  "total": 2126,
   "staged": false,
   "byStatus": {
-    "both": 1876,
+    "both": 2056,
     "jsonOnly": 0,
-    "neither": 76
+    "neither": 70
   },
   "byMethod": {
-    "done": 1876,
-    "manual": 33,
+    "done": 2056,
+    "manual": 32,
     "ssot-restore": 17,
-    "ssot-restore-new": 26
+    "ssot-restore-new": 21
   },
   "autoRecoverableCount": 0,
   "entries": [
@@ -161,6 +161,28 @@
       "slug": "accommodation-expenditure-ranking",
       "base": "accommodation-expenditure-timeseries",
       "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "adult-sneakers-consumption-expenditure-prefecture-gap",
+      "base": "adult-sneakers-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "adult-sneakers-consumption-expenditure-prefecture-gap",
+      "base": "adult-sneakers-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -576,6 +598,28 @@
       "residualCard": null
     },
     {
+      "slug": "alcoholic-beverages-group-consumption-expenditure",
+      "base": "alcoholic-beverages-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "alcoholic-beverages-group-consumption-expenditure",
+      "base": "alcoholic-beverages-group-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "allocation-tax-area",
       "base": "allocation-tax-area-prefecture-rankings",
       "chartType": "ranking",
@@ -810,6 +854,28 @@
       "slug": "area-ratio-prefecture-gap",
       "base": "area-ratio-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "automobile-related-group-consumption-expenditure-prefecture",
+      "base": "automobile-related-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "automobile-related-group-consumption-expenditure-prefecture",
+      "base": "automobile-related-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -1225,6 +1291,50 @@
       "residualCard": null
     },
     {
+      "slug": "beans-consumption-expenditure-prefecture-gap",
+      "base": "beans-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "beans-consumption-expenditure-prefecture-gap",
+      "base": "beans-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bed-consumption-expenditure-prefecture-gap",
+      "base": "bed-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bed-consumption-expenditure-prefecture-gap",
+      "base": "bed-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "beef-consumption-prefecture-gap",
       "base": "beef-consumption-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -1412,6 +1522,50 @@
       "residualCard": null
     },
     {
+      "slug": "bento-consumption-expenditure-prefecture-gap",
+      "base": "bento-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bento-consumption-expenditure-prefecture-gap",
+      "base": "bento-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "beverages-group-consumption-expenditure-prefecture-gap",
+      "base": "beverages-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "beverages-group-consumption-expenditure-prefecture-gap",
+      "base": "beverages-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "birth-death-gap-decline",
       "base": "natural-increase-rate-ranking",
       "chartType": "ranking",
@@ -1577,9 +1731,86 @@
       "residualCard": null
     },
     {
+      "slug": "books-consumption-expenditure-prefecture-gap",
+      "base": "books-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "books-consumption-expenditure-prefecture-gap",
+      "base": "books-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "books-printed-matter-group-consumption-expenditure",
+      "base": "books-printed-matter-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "books-printed-matter-group-consumption-expenditure",
+      "base": "books-printed-matter-group-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "brazilian-resident-population-prefecture-gap",
       "base": "brazilian-resident-population-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bread-city-ranking-kyoto-quiz",
+      "base": "bread-city-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bread-city-ranking-kyoto-quiz",
+      "base": "bread-city-ranking-kyoto-quiz-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "bread-city-ranking-kyoto-quiz",
+      "base": "bread-city-ranking-kyoto-quiz-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -1788,6 +2019,28 @@
     {
       "slug": "cake-consumption-expenditure-prefecture-gap",
       "base": "cake-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "camera-consumption-expenditure-prefecture-gap",
+      "base": "camera-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "camera-consumption-expenditure-prefecture-gap",
+      "base": "camera-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -2314,6 +2567,28 @@
       "residualCard": null
     },
     {
+      "slug": "cereals-group-consumption-expenditure-prefecture-gap",
+      "base": "cereals-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "cereals-group-consumption-expenditure-prefecture-gap",
+      "base": "cereals-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "cheese-expenditure-ranking",
       "base": "cheese-expenditure-ranking-ranking",
       "chartType": "ranking",
@@ -2501,6 +2776,28 @@
       "residualCard": null
     },
     {
+      "slug": "childrens-socks-consumption-expenditure-prefecture-gap",
+      "base": "childrens-socks-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "childrens-socks-consumption-expenditure-prefecture-gap",
+      "base": "childrens-socks-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "chinese-noodles-consumption-expenditure-prefecture-gap",
       "base": "chinese-noodles-consumption-expenditure-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -2602,6 +2899,28 @@
     {
       "slug": "clothing-footwear-expenditure-total-prefecture-gap",
       "base": "clothing-footwear-expenditure-total-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "clothing-services-group-consumption-expenditure-prefecture",
+      "base": "clothing-services-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "clothing-services-group-consumption-expenditure-prefecture",
+      "base": "clothing-services-group-consumption-expenditure-prefecture-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -2831,6 +3150,28 @@
       "residualCard": null
     },
     {
+      "slug": "communication-group-consumption-expenditure-prefecture-gap",
+      "base": "communication-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "communication-group-consumption-expenditure-prefecture-gap",
+      "base": "communication-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "commute-by-bicycle-prefecture-gap",
       "base": "commute-by-bicycle-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -2866,6 +3207,28 @@
     {
       "slug": "commute-by-car-prefecture-gap",
       "base": "commute-by-car-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "company-housing-rent-consumption-expenditure-prefecture-gap",
+      "base": "company-housing-rent-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "company-housing-rent-consumption-expenditure-prefecture-gap",
+      "base": "company-housing-rent-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -3194,6 +3557,28 @@
       "residualCard": null
     },
     {
+      "slug": "cosmetic-cream-consumption-expenditure-prefecture-gap",
+      "base": "cosmetic-cream-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "cosmetic-cream-consumption-expenditure-prefecture-gap",
+      "base": "cosmetic-cream-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "cpi-change-rate-culture-recreation-prefecture-gap",
       "base": "cpi-change-rate-culture-recreation-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -3284,6 +3669,28 @@
     {
       "slug": "crab-expenditure-ranking",
       "base": "crab-expenditure-ranking-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "craft-materials-consumption-expenditure-prefecture-gap",
+      "base": "craft-materials-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "craft-materials-consumption-expenditure-prefecture-gap",
+      "base": "craft-materials-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -3535,6 +3942,28 @@
       "residualCard": null
     },
     {
+      "slug": "cutlet-consumption-expenditure-prefecture-gap",
+      "base": "cutlet-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "cutlet-consumption-expenditure-prefecture-gap",
+      "base": "cutlet-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "daikon-consumption-quantity-prefecture-gap",
       "base": "daikon-consumption-quantity-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -3625,6 +4054,28 @@
     {
       "slug": "dairy-cattle-holdings-prefecture-gap",
       "base": "dairy-cattle-holdings-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dairy-eggs-group-consumption-expenditure-prefecture-gap",
+      "base": "dairy-eggs-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dairy-eggs-group-consumption-expenditure-prefecture-gap",
+      "base": "dairy-eggs-group-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -4140,6 +4591,72 @@
       "residualCard": null
     },
     {
+      "slug": "domestic-services-group-consumption-expenditure-prefecture",
+      "base": "domestic-services-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "domestic-services-group-consumption-expenditure-prefecture",
+      "base": "domestic-services-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dress-shirt-consumption-expenditure-prefecture-gap",
+      "base": "dress-shirt-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dress-shirt-consumption-expenditure-prefecture-gap",
+      "base": "dress-shirt-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dried-mackerel-consumption-expenditure-prefecture-gap",
+      "base": "dried-mackerel-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dried-mackerel-consumption-expenditure-prefecture-gap",
+      "base": "dried-mackerel-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "dried-udon-soba-consumption-expenditure-prefecture-gap",
       "base": "dried-udon-soba-consumption-expenditure-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -4153,6 +4670,28 @@
     {
       "slug": "dried-udon-soba-consumption-expenditure-prefecture-gap",
       "base": "dried-udon-soba-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "drinking-out-consumption-expenditure-prefecture-gap",
+      "base": "drinking-out-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "drinking-out-consumption-expenditure-prefecture-gap",
+      "base": "drinking-out-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -4572,6 +5111,28 @@
       "slug": "education-cost-per-child",
       "base": "education-cost-summary-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "education-expenditure-total-prefecture-gap",
+      "base": "education-expenditure-total-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "education-expenditure-total-prefecture-gap",
+      "base": "education-expenditure-total-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -5264,6 +5825,28 @@
     {
       "slug": "fabric-softener-consumption-expenditure-prefecture-gap",
       "base": "fabric-softener-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fabrics-yarn-group-consumption-expenditure-prefecture-gap",
+      "base": "fabrics-yarn-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fabrics-yarn-group-consumption-expenditure-prefecture-gap",
+      "base": "fabrics-yarn-group-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -6340,6 +6923,28 @@
       "residualCard": null
     },
     {
+      "slug": "footwear-group-consumption-expenditure-prefecture-gap",
+      "base": "footwear-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "footwear-group-consumption-expenditure-prefecture-gap",
+      "base": "footwear-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "foreign-overnight-guests-prefecture-gap",
       "base": "foreign-overnight-guests-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -6464,12 +7069,12 @@
       "slug": "foreign-residents-diversity-map",
       "base": "manufacturing-vs-foreign-scatter",
       "chartType": "scatter",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "foreign-residents-diversity-map",
@@ -6737,6 +7342,17 @@
     },
     {
       "slug": "frozen-gyoza-spending-prefecture-gap",
+      "base": "gyoza-city-spending-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "frozen-gyoza-spending-prefecture-gap",
       "base": "gyoza-frozen-consumption-expenditure-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
@@ -6749,6 +7365,50 @@
     {
       "slug": "frozen-gyoza-spending-prefecture-gap",
       "base": "frozen-gyoza-spending-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fruit-vegetable-juice-consumption-expenditure-prefecture-gap",
+      "base": "fruit-vegetable-juice-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fruit-vegetable-juice-consumption-expenditure-prefecture-gap",
+      "base": "fruit-vegetable-juice-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fruits-group-consumption-expenditure-prefecture-gap",
+      "base": "fruits-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fruits-group-consumption-expenditure-prefecture-gap",
+      "base": "fruits-group-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -6903,6 +7563,28 @@
     {
       "slug": "furikake-expenditure-ranking",
       "base": "furikake-expenditure-ranking-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "furniture-household-expenditure-total-prefecture-gap",
+      "base": "furniture-household-expenditure-total-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "furniture-household-expenditure-total-prefecture-gap",
+      "base": "furniture-household-expenditure-total-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -7297,6 +7979,39 @@
       "residualCard": null
     },
     {
+      "slug": "gasoline-consumption-quantity-vs-single-mother-employment",
+      "base": "gasoline-consumption-quantity-vs-single-mother-employment-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "gasoline-consumption-quantity-vs-single-mother-employment",
+      "base": "single-mother-employment-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "gasoline-consumption-quantity-vs-single-mother-employment",
+      "base": "gasoline-consumption-quantity--single-mother-employment-rate-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "gasoline-expenditure-ranking",
       "base": "gasoline-expenditure-amount-ranking",
       "chartType": "ranking",
@@ -7443,6 +8158,28 @@
       "slug": "gifu-food-culture",
       "base": "gifu-quantity-price-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "gloves-consumption-expenditure-prefecture-gap",
+      "base": "gloves-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "gloves-consumption-expenditure-prefecture-gap",
+      "base": "gloves-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -7784,6 +8521,28 @@
       "slug": "health-life-expectancy-structure",
       "base": "health-doctors-scatter",
       "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "health-supplements-group-consumption-expenditure-prefecture",
+      "base": "health-supplements-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "health-supplements-group-consumption-expenditure-prefecture",
+      "base": "health-supplements-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8232,9 +8991,53 @@
       "residualCard": "CHART-LINEAGE-RESIDUAL-01"
     },
     {
+      "slug": "household-consumables-group-consumption-expenditure",
+      "base": "household-consumables-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-consumables-group-consumption-expenditure",
+      "base": "household-consumables-group-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "household-consumption-expenditure-ranking",
       "base": "household-consumption-expenditure-ranking-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-durables-group-consumption-expenditure-prefecture",
+      "base": "household-durables-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-durables-group-consumption-expenditure-prefecture",
+      "base": "household-durables-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8562,6 +9365,28 @@
       "residualCard": null
     },
     {
+      "slug": "household-utensils-group-consumption-expenditure-prefecture",
+      "base": "household-utensils-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-utensils-group-consumption-expenditure-prefecture",
+      "base": "household-utensils-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "households-on-public-assistance-per-1000-prefecture-gap",
       "base": "households-on-public-assistance-per-1000-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -8598,6 +9423,28 @@
       "slug": "housing-cost-livability-trend",
       "base": "rent-floorarea-scatter",
       "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "housing-repairs-group-consumption-expenditure-prefecture-gap",
+      "base": "housing-repairs-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "housing-repairs-group-consumption-expenditure-prefecture-gap",
+      "base": "housing-repairs-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -9882,6 +10729,28 @@
       "residualCard": null
     },
     {
+      "slug": "insecticide-consumption-expenditure-prefecture-gap",
+      "base": "insecticide-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "insecticide-consumption-expenditure-prefecture-gap",
+      "base": "insecticide-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "instant-noodles-consumption-prefecture-gap",
       "base": "instant-noodles-consumption-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -9896,6 +10765,28 @@
       "slug": "instant-noodles-consumption-prefecture-gap",
       "base": "instant-noodles-consumption-prefecture-gap-timeseries",
       "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "interior-furnishings-group-consumption-expenditure",
+      "base": "interior-furnishings-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "interior-furnishings-group-consumption-expenditure",
+      "base": "interior-furnishings-group-consumption-expenditure-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -9929,23 +10820,23 @@
       "slug": "international-cooperation-volunteer-map",
       "base": "travel-vs-volunteer-scatter",
       "chartType": "scatter",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "international-cooperation-volunteer-map",
       "base": "foreign-pop-vs-volunteer-scatter",
       "chartType": "scatter",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "ishikawa-food-culture",
@@ -10138,6 +11029,50 @@
       "slug": "iwate-food-culture",
       "base": "iwate-quantity-price-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "jam-consumption-expenditure-prefecture-gap",
+      "base": "jam-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "jam-consumption-expenditure-prefecture-gap",
+      "base": "jam-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "japanese-clothing-group-consumption-expenditure-prefecture",
+      "base": "japanese-clothing-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "japanese-clothing-group-consumption-expenditure-prefecture",
+      "base": "japanese-clothing-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -10533,6 +11468,28 @@
     {
       "slug": "ketchup-consumption-quantity-prefecture-gap",
       "base": "ketchup-consumption-quantity-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kiwi-consumption-quantity-prefecture-gap",
+      "base": "kiwi-consumption-quantity-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kiwi-consumption-quantity-prefecture-gap",
+      "base": "kiwi-consumption-quantity-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -11917,6 +12874,28 @@
       "residualCard": null
     },
     {
+      "slug": "marriage-divorce-okinawa",
+      "base": "marriage-vs-divorce-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "marriage-divorce-okinawa",
+      "base": "dual-income-vs-divorce-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "marriage-unmarried-crisis",
       "base": "inline-chart-1",
       "chartType": "unknown",
@@ -11931,6 +12910,94 @@
       "slug": "mayonnaise-consumption-expenditure",
       "base": "mayonnaise-consumption-expenditure-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "meat-group-consumption-expenditure-prefecture-gap",
+      "base": "meat-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "meat-group-consumption-expenditure-prefecture-gap",
+      "base": "meat-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "medical-services-group-consumption-expenditure-prefecture",
+      "base": "medical-services-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "medical-services-group-consumption-expenditure-prefecture",
+      "base": "medical-services-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "medical-supplies-group-consumption-expenditure-prefecture",
+      "base": "medical-supplies-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "medical-supplies-group-consumption-expenditure-prefecture",
+      "base": "medical-supplies-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "medicines-group-consumption-expenditure-prefecture-gap",
+      "base": "medicines-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "medicines-group-consumption-expenditure-prefecture-gap",
+      "base": "medicines-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -12005,6 +13072,28 @@
       "residualCard": null
     },
     {
+      "slug": "microwave-consumption-expenditure-prefecture-gap",
+      "base": "microwave-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "microwave-consumption-expenditure-prefecture-gap",
+      "base": "microwave-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "middle-school-height-east-west-puzzle",
       "base": "height-ranking",
       "chartType": "ranking",
@@ -12063,6 +13152,28 @@
       "slug": "mie-food-culture",
       "base": "mie-quantity-price-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "milk-consumption-quantity-prefecture-gap",
+      "base": "milk-consumption-quantity-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "milk-consumption-quantity-prefecture-gap",
+      "base": "milk-consumption-quantity-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -12140,6 +13251,28 @@
       "slug": "minimum-wage-increase-rate-prefecture-gap",
       "base": "minimum-wage-2024-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "miscellaneous-group-consumption-expenditure-prefecture-gap",
+      "base": "miscellaneous-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "miscellaneous-group-consumption-expenditure-prefecture-gap",
+      "base": "miscellaneous-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -13479,6 +14612,28 @@
       "residualCard": null
     },
     {
+      "slug": "oils-seasonings-group-consumption-expenditure-prefecture-gap",
+      "base": "oils-seasonings-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "oils-seasonings-group-consumption-expenditure-prefecture-gap",
+      "base": "oils-seasonings-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "oita-food-culture",
       "base": "shiitake-ranking",
       "chartType": "ranking",
@@ -13787,6 +14942,28 @@
       "residualCard": null
     },
     {
+      "slug": "other-clothing-group-consumption-expenditure-prefecture-gap",
+      "base": "other-clothing-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-clothing-group-consumption-expenditure-prefecture-gap",
+      "base": "other-clothing-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "other-cosmetics-consumption-expenditure-prefecture-gap",
       "base": "other-cosmetics-consumption-expenditure-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -13853,6 +15030,28 @@
       "residualCard": null
     },
     {
+      "slug": "other-fuel-group-consumption-expenditure-prefecture-gap",
+      "base": "other-fuel-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-fuel-group-consumption-expenditure-prefecture-gap",
+      "base": "other-fuel-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "other-japanese-sweets-consumption-expenditure-prefecture-gap",
       "base": "other-japanese-sweets-consumption-expenditure-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -13897,6 +15096,72 @@
       "residualCard": null
     },
     {
+      "slug": "other-mens-shirt-consumption-expenditure-prefecture-gap",
+      "base": "other-mens-shirt-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-mens-shirt-consumption-expenditure-prefecture-gap",
+      "base": "other-mens-shirt-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-mushroom-consumption-expenditure-prefecture-gap",
+      "base": "other-mushroom-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-mushroom-consumption-expenditure-prefecture-gap",
+      "base": "other-mushroom-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-noodle-dining-consumption-expenditure-prefecture-gap",
+      "base": "other-noodle-dining-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-noodle-dining-consumption-expenditure-prefecture-gap",
+      "base": "other-noodle-dining-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "other-processed-meat-consumption-expenditure-prefecture-gap",
       "base": "other-processed-meat-consumption-expenditure-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -13932,6 +15197,28 @@
     {
       "slug": "other-stationery-consumption-expenditure-prefecture-gap",
       "base": "other-stationery-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-toys-consumption-expenditure-prefecture-gap",
+      "base": "other-toys-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "other-toys-consumption-expenditure-prefecture-gap",
+      "base": "other-toys-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -14249,6 +15536,28 @@
       "residualCard": null
     },
     {
+      "slug": "paper-diapers-consumption-expenditure-prefecture-gap",
+      "base": "paper-diapers-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "paper-diapers-consumption-expenditure-prefecture-gap",
+      "base": "paper-diapers-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "park-green-space-gap",
       "base": "nature-park-area-ratio-ranking",
       "chartType": "ranking",
@@ -14447,6 +15756,28 @@
       "residualCard": null
     },
     {
+      "slug": "pear-consumption-quantity-prefecture-gap",
+      "base": "pear-consumption-quantity-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pear-consumption-quantity-prefecture-gap",
+      "base": "pear-consumption-quantity-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
       "base": "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -14505,12 +15836,12 @@
       "slug": "per-capita-income-gap",
       "base": "income-vs-industry-scatter",
       "chartType": "scatter",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "per-capita-income-gap",
@@ -14636,6 +15967,28 @@
     {
       "slug": "pet-food-consumption-expenditure-prefecture-gap",
       "base": "pet-food-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pet-supplies-consumption-expenditure-prefecture-gap",
+      "base": "pet-supplies-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pet-supplies-consumption-expenditure-prefecture-gap",
+      "base": "pet-supplies-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -14799,6 +16152,28 @@
       "residualCard": null
     },
     {
+      "slug": "pickled-chinese-cabbage-consumption-expenditure-prefecture",
+      "base": "pickled-chinese-cabbage-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pickled-chinese-cabbage-consumption-expenditure-prefecture",
+      "base": "pickled-chinese-cabbage-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "pickled-plum-consumption-expenditure-prefecture-gap",
       "base": "pickled-plum-consumption-expenditure-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -14878,6 +16253,28 @@
     {
       "slug": "pneumonia-death-rate-prefecture-gap",
       "base": "pneumonia-death-rate-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pocket-money-group-consumption-expenditure-prefecture-gap",
+      "base": "pocket-money-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pocket-money-group-consumption-expenditure-prefecture-gap",
+      "base": "pocket-money-group-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -15107,6 +16504,28 @@
       "residualCard": null
     },
     {
+      "slug": "pots-kettles-consumption-expenditure-prefecture-gap",
+      "base": "pots-kettles-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pots-kettles-consumption-expenditure-prefecture-gap",
+      "base": "pots-kettles-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "precipitation-snow-regional-gap",
       "base": "precipitation-ranking",
       "chartType": "ranking",
@@ -15218,8 +16637,8 @@
     },
     {
       "slug": "prefectural-income-gdp-ranking",
-      "base": "summary-findings",
-      "chartType": "findings",
+      "base": "gdp-per-capita-vs-income-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -15308,6 +16727,28 @@
       "slug": "prefecture-salary-remote-gap",
       "base": "prefecture-salary-remote-gap-rent-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "prepared-foods-group-consumption-expenditure-prefecture-gap",
+      "base": "prepared-foods-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "prepared-foods-group-consumption-expenditure-prefecture-gap",
+      "base": "prepared-foods-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -15712,6 +17153,50 @@
       "residualCard": null
     },
     {
+      "slug": "pumpkin-consumption-expenditure-prefecture-gap",
+      "base": "pumpkin-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pumpkin-consumption-expenditure-prefecture-gap",
+      "base": "pumpkin-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pumpkin-consumption-quantity-prefecture-gap",
+      "base": "pumpkin-consumption-quantity-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "pumpkin-consumption-quantity-prefecture-gap",
+      "base": "pumpkin-consumption-quantity-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "purchasing-power-adjusted",
       "base": "income-ranking",
       "chartType": "ranking",
@@ -15759,12 +17244,12 @@
       "slug": "purchasing-power-adjusted",
       "base": "income-vs-price-scatter",
       "chartType": "scatter",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "railway-station-count-prefecture-gap",
@@ -15998,6 +17483,72 @@
       "residualCard": null
     },
     {
+      "slug": "recreational-durables-group-consumption-expenditure",
+      "base": "recreational-durables-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "recreational-durables-group-consumption-expenditure",
+      "base": "recreational-durables-group-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "recreational-goods-group-consumption-expenditure-prefecture",
+      "base": "recreational-goods-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "recreational-goods-group-consumption-expenditure-prefecture",
+      "base": "recreational-goods-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "recreational-services-group-consumption-expenditure",
+      "base": "recreational-services-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "recreational-services-group-consumption-expenditure",
+      "base": "recreational-services-group-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "recycling-rate-gap",
       "base": "recycling-rate-ranking",
       "chartType": "ranking",
@@ -16088,6 +17639,28 @@
     {
       "slug": "regular-cash-salary-male-prefecture-gap",
       "base": "regular-cash-salary-male-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "remittances-group-consumption-expenditure-prefecture-gap",
+      "base": "remittances-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "remittances-group-consumption-expenditure-prefecture-gap",
+      "base": "remittances-group-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -16218,6 +17791,17 @@
       "residualCard": null
     },
     {
+      "slug": "retail-store-count-vs-nurses-per-100k-population",
+      "base": "retail-per-100k-vs-nurses-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "rice-consumption-quantity-ranking",
       "base": "rice-consumption-quantity-ranking",
       "chartType": "ranking",
@@ -16253,6 +17837,50 @@
     {
       "slug": "rice-harvest-volume-prefecture-gap",
       "base": "rice-yield-per-10a-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "rice-spending-quantity-gap-2025",
+      "base": "rice-consumption-expenditure-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "rice-spending-quantity-gap-2025",
+      "base": "rice-consumption-quantity-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "rice-spending-quantity-gap-2025",
+      "base": "rice-spending-quantity-index-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "rice-spending-quantity-gap-2025",
+      "base": "rice-city-spending-growth-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -17197,6 +18825,28 @@
       "residualCard": null
     },
     {
+      "slug": "shampoo-consumption-expenditure-prefecture-gap",
+      "base": "shampoo-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "shampoo-consumption-expenditure-prefecture-gap",
+      "base": "shampoo-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "shiga-food-culture",
       "base": "coffee-ranking",
       "chartType": "ranking",
@@ -17288,6 +18938,28 @@
       "slug": "shimane-food-culture",
       "base": "shimane-quantity-price-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "shirts-sweaters-group-consumption-expenditure-prefecture-gap",
+      "base": "shirts-sweaters-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "shirts-sweaters-group-consumption-expenditure-prefecture-gap",
+      "base": "shirts-sweaters-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -17637,6 +19309,28 @@
       "residualCard": null
     },
     {
+      "slug": "social-expenses-group-consumption-expenditure-prefecture-gap",
+      "base": "social-expenses-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "social-expenses-group-consumption-expenditure-prefecture-gap",
+      "base": "social-expenses-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "software-engineer-income-gap",
       "base": "software-engineer-income-prefecture-rankings",
       "chartType": "ranking",
@@ -17715,18 +19409,18 @@
     },
     {
       "slug": "solar-panel-housing-prefecture-gap",
-      "base": "solar-low-detached-contrast",
-      "chartType": "unknown",
-      "hasJson": false,
+      "base": "detached-vs-solar-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "solar-panel-housing-prefecture-gap",
-      "base": "detached-vs-solar-scatter",
+      "base": "sunshine-vs-solar-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
@@ -17882,6 +19576,28 @@
       "slug": "spinach-consumption-ranking",
       "base": "spinach-expenditure-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "sports-drink-consumption-expenditure-prefecture-gap",
+      "base": "sports-drink-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "sports-drink-consumption-expenditure-prefecture-gap",
+      "base": "sports-drink-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -18352,6 +20068,28 @@
       "residualCard": null
     },
     {
+      "slug": "supplementary-education-group-consumption-expenditure",
+      "base": "supplementary-education-group-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "supplementary-education-group-consumption-expenditure",
+      "base": "supplementary-education-group-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "sushi-dining-consumption-expenditure",
       "base": "sushi-expenditure-ranking",
       "chartType": "ranking",
@@ -18616,6 +20354,28 @@
       "residualCard": null
     },
     {
+      "slug": "tatami-replacement-consumption-expenditure-prefecture-gap",
+      "base": "tatami-replacement-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "tatami-replacement-consumption-expenditure-prefecture-gap",
+      "base": "tatami-replacement-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "taxi-driver-income-prefecture-gap",
       "base": "taxi-driver-income-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -18640,6 +20400,28 @@
     {
       "slug": "taxi-fare-consumption-expenditure-prefecture-gap",
       "base": "taxi-fare-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "tea-drink-consumption-expenditure-prefecture-gap",
+      "base": "tea-drink-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "tea-drink-consumption-expenditure-prefecture-gap",
+      "base": "tea-drink-consumption-expenditure-prefecture-gap-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -19331,6 +21113,50 @@
       "residualCard": null
     },
     {
+      "slug": "transport-communication-expenditure-total-prefecture-gap",
+      "base": "transport-communication-expenditure-total-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "transport-communication-expenditure-total-prefecture-gap",
+      "base": "transport-communication-expenditure-total-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "transportation-group-consumption-expenditure-prefecture-gap",
+      "base": "transportation-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "transportation-group-consumption-expenditure-prefecture-gap",
+      "base": "transportation-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "travel-behavior-gender-gap",
       "base": "travel-rate-ranking",
       "chartType": "ranking",
@@ -19881,6 +21707,28 @@
       "residualCard": null
     },
     {
+      "slug": "underwear-group-consumption-expenditure-prefecture-gap",
+      "base": "underwear-group-consumption-expenditure-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "underwear-group-consumption-expenditure-prefecture-gap",
+      "base": "underwear-group-consumption-expenditure-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "unemployment-structure",
       "base": "unemployment-rate-ranking",
       "chartType": "ranking",
@@ -19970,17 +21818,6 @@
     },
     {
       "slug": "university-advancement-capacity",
-      "base": "advancement-rate-ranking",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "university-advancement-capacity",
       "base": "capacity-index-map",
       "chartType": "tilemap",
       "hasJson": true,
@@ -19992,7 +21829,18 @@
     },
     {
       "slug": "university-advancement-capacity",
-      "base": "advancement-vs-university-scatter",
+      "base": "advancement-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "capacity-vs-advancement-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
@@ -20003,8 +21851,8 @@
     },
     {
       "slug": "university-advancement-capacity",
-      "base": "university-summary-findings",
-      "chartType": "findings",
+      "base": "advancement-vs-university-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -20137,6 +21985,28 @@
       "slug": "urban-parks-green-infrastructure",
       "base": "park-summary-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "utilities-expenditure-total-prefecture-gap",
+      "base": "utilities-expenditure-total-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "utilities-expenditure-total-prefecture-gap",
+      "base": "utilities-expenditure-total-prefecture-gap-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -20411,6 +22281,28 @@
     {
       "slug": "vacuum-cleaner-consumption-quantity-prefecture-gap",
       "base": "vacuum-cleaner-consumption-quantity-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vegetables-seaweed-group-consumption-expenditure-prefecture",
+      "base": "vegetables-seaweed-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vegetables-seaweed-group-consumption-expenditure-prefecture",
+      "base": "vegetables-seaweed-group-consumption-expenditure-prefecture-map",
       "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
@@ -20885,6 +22777,28 @@
       "slug": "welfare-expenses-squeeze",
       "base": "welfare-ratio-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "western-clothing-group-consumption-expenditure-prefecture",
+      "base": "western-clothing-group-consumption-expenditure-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "western-clothing-group-consumption-expenditure-prefecture",
+      "base": "western-clothing-group-consumption-expenditure-prefecture-map",
+      "chartType": "tilemap",
       "hasJson": true,
       "hasSource": true,
       "status": "both",

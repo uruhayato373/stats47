@@ -462,7 +462,11 @@ async function auditBlog() {
           (article) =>
             article.sourcesBaked &&
             article.sourceCount === 0 &&
-            article.charts.some((chart) => chart.base !== '(article)')
+            // 作例など調査を持たない図 (not-applicable) だけの記事は、出典が無いのが正しい
+            article.charts.some(
+              (chart) =>
+                chart.base !== '(article)' && chart.status !== 'not-applicable'
+            )
         )
         .map((article) => article.slug)
         .sort(),

@@ -434,6 +434,7 @@ export const DATASETS = [
   d("sns.drafts", "data/sns/{name}-drafts.md", "state", "sns", "data", "SNS シリーズの下書き"),
   d("gsc.coverage-queue", "data/gsc/coverage-remediation/coverage-remediation-queue.json", "state", "site", "data", "GSC カバレッジ是正キュー"),
   d("gsc.coverage-queue-latest", "data/gsc/coverage-remediation/LATEST.md", "report", "site", "data", "是正キューの要約"),
+  d("gsc.coverage-backlog-batches", "data/gsc/coverage-remediation/backlog-batches/{**}", "state", "site", "data", "是正キューを backlog カードへ束ねた URL の一覧"),
   d("gsc.coverage-totals", "data/gsc/coverage-totals-history.csv", "series", "site", "data", "カバレッジ件数の推移 (是正キュー側)"),
   d("search-growth.state", "data/search-growth/{name}.json", "state", "site", "data", "検索成長の候補・健全性・抑制台帳"),
   d("search-growth.manifests", "data/search-growth/manifests/{week}.json", "evidence", "site", "data", "検索成長の週次入力の固定", { retain: "search-growth-manifests" }),

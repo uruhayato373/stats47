@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "42320157489-1",
+  "status": "implementation-needed",
+  "keyword": "酷暑日の都道府県数",
+  "targetPath": "/blog/extreme-heat-days-prefecture",
+  "needs": "検索者は、気象庁が2026年4月に名付けた「酷暑日」(日最高気温40℃以上)を今年どれだけの都道府県が観測したか、つまり県数と県名を知りたい。GSCには「今年 昨日までの記録で…酷暑日の都道府県数」のようなクイズ形式の検索が多く、答えとなる数字を求めている。",
+  "gap": "対象ページは「酷暑日」という語を一度も使わず、35℃以上の猛暑日を扱う。数値も2024年の「日最高気温の月平均の最高値」(熊本36.2℃など)で、40℃以上の日や観測県数は載っていない。ページ自身も猛暑日日数そのものではないと断っている。947回表示で0クリックなのは、検索意図に答えていないため。title等の語句置換では埋まらない。",
+  "done": "自動適用できる置換はない。selected.editableFile が null で、不足は観測値の新規投入だから。必要な作業は2つ。(1)気象庁の「日最高気温40℃以上の地点」統計(2024年版は ds.data.jma.go.jp/stats/stat/202415/amd_mxtem_ov40_202415.html の形式)から2026年の都道府県別の40℃以上観測日・地点を取得し、集計日と出典を明記して記事に追加する。(2)「酷暑日」の定義(2026年4月気象庁決定)と、県数が地点ベースである注記を入れる。記事本文の所有ファイルは今回の調査で特定できなかった。完了条件は、本文に2026年の酷暑日観測県数と県名、集計日、出典が載ること。",
+  "method": "data",
+  "competitors": [
+    {
+      "url": "https://ds.data.jma.go.jp/stats/stat/202415/amd_mxtem_ov40_202415.html",
+      "findings": "気象庁の2024年夏(6〜8月)の一次統計。気象官署とアメダス914地点のうち9地点が40℃以上で、日付・気温・都道府県・市町村・地点名を1地点1行で並べる。県別の集計表はなく、数えると7都道府県(静岡、群馬、栃木、茨城、埼玉、三重、岐阜)。2026年の県数を知りたい検索者には、年が古く県別集計もないため直接の答えにならない。"
+    },
+    {
+      "url": "https://www.sakigake.jp/news/article/20260725CO0064/",
+      "findings": "2026年7月25日時点のニュース。40℃以上の日が5日連続となり、2010年以降の最長記録だった。同日の酷暑日は岐阜2地点、三重、静岡、愛知、山梨の各1地点で計6地点、5県。その日の速報で、今年累計の県数は書かれていない。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/blog/extreme-heat-days-prefecture",
+      "status": 200,
+      "fetchedAt": "2026-11-07T00:46:49.904Z",
+      "inputHash": "89cd6352ef18ae30bfd7f146e5e02019911320a071efe218c2b5f670fddde1bc",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "01d4d6d76e689cd423c456f9bc12bd07405284e4b55d33cdec7b438892f77e30",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "3bfc2448c28fdf4ca9c3c7e048717303b7e831c970f038905f5559fa2cb388f4"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "酷暑日の都道府県数"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/blog/extreme-heat-days-prefecture"
+      },
+      {
+        "name": "WebSearch",
+        "target": "酷暑日 40℃以上 観測 都道府県 一覧 気象庁 名称"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://ds.data.jma.go.jp/stats/stat/202415/amd_mxtem_ov40_202415.html"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.sakigake.jp/news/article/20260725CO0064/"
+      }
+    ]
+  },
+  "selectedAt": "2026-11-07",
+  "inputHash": "89cd6352ef18ae30bfd7f146e5e02019911320a071efe218c2b5f670fddde1bc",
+  "methods": [],
+  "files": []
+}

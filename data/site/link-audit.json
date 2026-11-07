@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-30T22:59:47.451Z",
+  "generatedAt": "2026-11-06T23:04:18.328Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
   "pagesCrawled": 141,
-  "pagesKnown": 9983,
-  "uniqueTargets": 4533,
+  "pagesKnown": 10246,
+  "uniqueTargets": 3564,
   "statusCount": {
-    "200": 4423,
+    "200": 3454,
     "301": 110
   },
   "brokenCount": 0,
