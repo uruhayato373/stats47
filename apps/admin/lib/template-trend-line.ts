@@ -47,6 +47,8 @@ export interface LineChart {
   /** The metric's authored range; otherwise a nice range around the values. */
   domain?: [number, number];
   ariaLabel?: string;
+  /** Two-point change (slope): every line carries its first value on the left, so the value axis has no tick labels. */
+  startLabels?: boolean;
 }
 
 const MAX_X_LABELS = 7;
@@ -119,15 +121,17 @@ export function renderLineChart(chart: LineChart, theme: ChartTheme = LIGHT_THEM
   const tickFormat = formatter(tickDecimals);
   const lastPoints = series.map((s) => [...s.points].reverse().find((p) => p.value !== null));
   const endWidth = Math.max(...lastPoints.map((p) => textWidth(p ? format(p.value! * factor) : '', END_LABEL_SIZE)));
+  const firstPoints = series.map((s) => s.points.find((p) => p.value !== null));
+  const startWidth = Math.max(...firstPoints.map((p) => textWidth(p ? format(p.value! * factor) : '', END_LABEL_SIZE)));
   const plot = {
-    left: SAMPLE_FRAME.left + Math.max(...tickValues.map((t) => textWidth(tickFormat(t), 28))) + 20,
+    left: SAMPLE_FRAME.left + (chart.startLabels ? startWidth : Math.max(...tickValues.map((t) => textWidth(tickFormat(t), 28)))) + 20,
     right: SAMPLE_FRAME.right - endWidth - 18, top, bottom: SAMPLE_FRAME.bodyBottom - 70,
   };
   const xAt = (x: string) => plot.left + (plot.right - plot.left) * position(x);
   const yAt = (value: number) => plot.bottom - (plot.bottom - plot.top) * (value - domain[0]) / (domain[1] - domain[0]);
   const grid = tickValues.map((tick) => {
     const y = yAt(tick / factor);
-    return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" stroke="${theme.line}" stroke-width="1.5"/><text x="${plot.left - 20}" y="${y + 10}" text-anchor="end" font-size="28" fill="${theme.muted}">${tickFormat(tick)}</text>`;
+    return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" stroke="${theme.line}" stroke-width="1.5"/>${chart.startLabels ? '' : `<text x="${plot.left - 20}" y="${y + 10}" text-anchor="end" font-size="28" fill="${theme.muted}">${tickFormat(tick)}</text>`}`;
   }).join('');
   const labels = xLabels(xs).map((x) => `<text x="${xAt(x)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="28" fill="${theme.muted}">${escapeXml(x.replace(/年度?$/, ''))}</text>`).join('');
   const dots = xs.length <= DOT_LIMIT;
@@ -146,7 +150,9 @@ export function renderLineChart(chart: LineChart, theme: ChartTheme = LIGHT_THEM
   }).join('');
   const endYs = spreadLabels(lastPoints.map((p) => (p ? yAt(p.value!) : plot.top) + 13), plot.top, plot.bottom, END_LABEL_GAP);
   const ends = lastPoints.map((p, i) => (p ? `<text x="${xAt(p.x) + 18}" y="${endYs[i]}" font-size="${END_LABEL_SIZE}" font-weight="700" fill="${colorOf(i)}">${format(p.value! * factor)}</text>` : '')).join('');
-  const first = single ? series[0].points.find((p) => p.value !== null) : undefined;
+  const startYs = spreadLabels(firstPoints.map((p) => (p ? yAt(p.value!) : plot.top) + 13), plot.top, plot.bottom, END_LABEL_GAP);
+  const starts = chart.startLabels ? firstPoints.map((p, i) => (p ? `<text x="${xAt(p.x) - 18}" y="${startYs[i]}" text-anchor="end" font-size="${END_LABEL_SIZE}" font-weight="700" fill="${colorOf(i)}">${format(p.value! * factor)}</text>` : '')).join('') : '';
+  const first = single && !chart.startLabels ? series[0].points.find((p) => p.value !== null) : undefined;
   // Below its point, or beside it when the point sits on the floor of the plot (the year labels are under it).
   const onFloor = first ? yAt(first.value!) + 58 > plot.bottom - 8 : false;
   const firstY = first ? yAt(first.value!) + (onFloor ? 10 : 58) : 0;
@@ -154,8 +160,8 @@ export function renderLineChart(chart: LineChart, theme: ChartTheme = LIGHT_THEM
   return sampleFrame({
     title: chart.title, titleSize: fitTitleSize(chart.title), meta: chart.meta, note: chart.note, source: chart.source,
     ariaLabel: chart.ariaLabel ?? chart.title,
-    attributes: `data-image-template="line" data-domain-min="${domain[0]}" data-domain-max="${domain[1]}"`,
-    body: legendItems.join('') + grid + labels + lines + ends + firstLabel,
+    attributes: `data-image-template="line"${chart.startLabels ? ' data-form="slope"' : ''} data-domain-min="${domain[0]}" data-domain-max="${domain[1]}"`,
+    body: legendItems.join('') + grid + labels + lines + ends + starts + firstLabel,
     theme,
   });
 }

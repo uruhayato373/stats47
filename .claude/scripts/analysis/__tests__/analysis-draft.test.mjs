@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInputProblems, fillMeta } from "../analysis-draft-core.mjs";
+import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInputProblems, fillMeta, NAME_SUFFIX } from "../analysis-draft-core.mjs";
 
 const result = {
   towns: 1052,
@@ -22,7 +22,7 @@ const figure = {
   scope: "municipality",
   template: "grouped-bar",
   chart: {
-    name: "a",
+    name: "a-bars",
     meta: "2023年・{towns}市区町村",
     source: "調査",
     rows: "groups",
@@ -95,4 +95,51 @@ test("散布図は市区町村の点として描き、相関と点数を出典�
   const source = buildChartSource({ figure: scatter, spec: { metrics: [{ key: "a" }] }, generatedBy: "x", result });
   assert.equal(source.expectedPointCount, 2);
   assert.equal(source.pearsonR, -0.7);
+});
+
+test("型ごとの名前の接尾辞と必須の項目が無い図は書き始める前に止める", () => {
+  const base = { analysis: { id: "a", article: {} }, supportedTemplates: Object.keys(NAME_SUFFIX) };
+  const wrongName = draftInputProblems({ ...base, figures: [{ ...figure, chart: { ...figure.chart, name: "a-stacked" } }] });
+  assert.match(wrongName.join(), /-bars で終える/);
+  const noSeries = draftInputProblems({ ...base, figures: [{ ...figure, template: "stacked-bar", chart: { ...figure.chart, series: undefined } }] });
+  assert.match(noSeries.join(), /chart.series が無い/);
+  const slope = { ...figure, template: "line", chart: { ...figure.chart, name: "a-lines", category: undefined } };
+  assert.match(draftInputProblems({ ...base, figures: [slope] }).join(), /category が無い/);
+  // 記事の表示が暗い版と 4:5 を選べない旧い横長の名前は使わない
+  for (const suffix of Object.values(NAME_SUFFIX)) assert.ok(!/-(stacked|trend)$/.test(suffix));
+});
+
+test("100% 積み上げは区分を series から作り、値は結果のまま運ぶ", () => {
+  const stacked = { ...figure, template: "stacked-bar", chart: { ...figure.chart, series: [{ label: "持ち家", field: "own" }, { label: "借家", field: "rent" }] } };
+  const res = { towns: 2, groups: [{ label: "増", towns: 1, own: 60, rent: 40 }, { label: "減", towns: 1, own: 3, rent: 1 }] };
+  const built = buildChart(stacked, res);
+  assert.equal(built.normalized, true);
+  assert.deepEqual(built.categories, [{ label: "持ち家", values: [60, 3] }, { label: "借家", values: [40, 1] }]);
+  const data = buildChartData(stacked, built, res);
+  assert.equal(data.chartType, "stacked-bar");
+  assert.deepEqual(data.data[1], { label: "減", towns: 1, unit: "ポイント", 持ち家: 3, 借家: 1 });
+  assert.throws(() => buildChart(stacked, { ...res, groups: [{ label: "増", own: -1, rent: 2 }] }), /負の値/);
+  assert.throws(() => buildChart(stacked, { ...res, groups: [{ label: "増", own: 1 }] }), /rent が数値でない/);
+});
+
+test("折れ線に series を書くと 2 時点の変化になり、行ごとに 1 本の線で両端に値を置く", () => {
+  const slope = { ...figure, template: "line", chart: { ...figure.chart, name: "a-slope-lines", decimals: 1, series: [{ label: "2013年", field: "v2013" }, { label: "2023年", field: "v2023" }] } };
+  const res = { towns: 2, groups: [{ label: "増", v2013: 10, v2023: 9.5 }, { label: "減", v2013: 14, v2023: 18.2 }] };
+  const built = buildChart(slope, res);
+  assert.equal(built.startLabels, true);
+  assert.deepEqual(built.series[1], { label: "減", points: [{ x: "2013年", value: 14 }, { x: "2023年", value: 18.2 }] });
+  const data = buildChartData(slope, built, res);
+  assert.equal(data.form, "slope");
+  assert.deepEqual(data.series[1].data, [{ year: 2013, value: 14 }, { year: 2023, value: 18.2 }]);
+  assert.throws(() => buildChart({ ...slope, chart: { ...slope.chart, series: slope.chart.series.slice(0, 1) } }, res), /series を 2 つ/);
+});
+
+test("箱ひげは分析が計算した 5 つの値をそのまま描き、順序が崩れた行は止める", () => {
+  const box = { ...figure, template: "boxplot", chart: { ...figure.chart, name: "a-boxplot", series: undefined } };
+  const row = { label: "増", towns: 212, min: 2, q1: 8, median: 10.5, q3: 13, max: 30 };
+  const built = buildChart(box, { towns: 212, groups: [row] });
+  assert.deepEqual(built.groups, [{ label: "増", min: 2, q1: 8, median: 10.5, q3: 13, max: 30 }]);
+  assert.deepEqual(buildChartData(box, built, { groups: [row] }).data[0], { label: "増", min: 2, q1: 8, median: 10.5, q3: 13, max: 30, towns: 212, unit: "ポイント" });
+  assert.throws(() => buildChart(box, { towns: 1, groups: [{ ...row, q3: 9 }] }), /崩れている/);
+  assert.throws(() => buildChart(box, { towns: 1, groups: [{ ...row, median: undefined }] }), /median が数値でない/);
 });
