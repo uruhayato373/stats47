@@ -5,7 +5,7 @@
  * 結果はファイルに置くので Claude の会話を消費しない。Claude を使うのは最終審査の 1 回だけ。
  * 公開はしない。止まったら理由を 1 行で出して終わる。
  *
- *   npm run analysis:run -- --analysis analysis:M01-factory-size [--notebooks "A,B"] [--plan-figures] [--writer claude|codex] [--max-steps 12] [--dry-run]
+ *   npm run analysis:run -- --analysis analysis:M01-factory-size [--notebooks "A,B"] [--plan-figures] [--rewrite] [--direction "<オーナーの方針>"] [--writer claude|codex] [--max-steps 12] [--dry-run]
  *
  * 文章は既定で Claude の書き手が書く。実行役は小包 (writer-packet.md) を作って止まり、セッションが article-writer に渡す。
  */
@@ -160,7 +160,12 @@ const STEPS = {
       ? "読むだけ。ファイルを書かない。外部へ書くコマンドを実行しない"
       : `${analysis.script} だけを書いてよい。frame.json を入力に result.json・図の SVG と JSON を出力先へ書く既存の ${HERE}/m01-factory-size.ts と同じ形にする。他のファイルを変えない`;
     const before = hasScript ? "" : shell("git", ["status", "--porcelain"]).stdout;
-    const reply = codex("author", prompt("author", { ...shared(), findings: formatFindings(findings), authorScope: scope }), { schema: "author", sandbox: hasScript ? "read-only" : "workspace-write" });
+    const refutation = JSON.stringify((analysis.refutation?.checks ?? []).map(({ claim, verdict, numbers }) => ({ claim, verdict, numbers })));
+    const resultKeys = existsSync(paths.result) ? Object.keys(readJson(paths.result)).join("・") : "(なし)";
+    // オーナーの方針 (--direction) は前回の指摘より先に置く。物差しの選び方のような判断は Codex に任せない
+    const direction = arg("--direction");
+    const findingsText = [direction ? `- オーナーの方針: ${direction}` : "", formatFindings(findings)].filter(Boolean).join("\n");
+    const reply = codex("author", prompt("author", { ...shared(), findings: findingsText, authorScope: scope, refutation, resultKeys }), { schema: "author", sandbox: hasScript ? "read-only" : "workspace-write" });
     if (!hasScript) {
       const added = shell("git", ["status", "--porcelain"]).stdout.split("\n").filter((line) => line && !before.includes(line));
       const stray = added.filter((line) => !line.includes(analysis.script));
@@ -187,8 +192,11 @@ const STEPS = {
       shell("npm", ["run", "-s", "analysis:draft", "--", "--analysis", analysisId, "--result", rel(paths.result), "--figures-only"]);
       rmSync(join(articleDir, "article.prompt.txt"), { force: true });
     } else {
-      for (const file of readdirSync(work)) {
-        if (/\.(svg|json)$/.test(file) && !["frame.json", "plan.json", "research.json", "result.json", "run.json"].includes(file))
+      // 図の SVG と、同じ名前の図の点データだけを写す。作業用の JSON (棚卸し・照合など) は記事に入れない
+      const files = readdirSync(work);
+      for (const file of files) {
+        const base = file.replace(/(-dark)?\.svg$|\.json$/, "");
+        if (file.endsWith(".svg") || (file.endsWith(".json") && files.includes(`${base}.svg`)))
           copyFileSync(join(work, file), join(articleDir, "data", file));
       }
       copyFileSync(paths.result, summaryPath);
@@ -203,6 +211,7 @@ const STEPS = {
         reviewer: "codex",
         at: new Date().toISOString().slice(0, 10),
         summarySha256: sha256(readFileSync(summaryPath)),
+        claimsSha256: sha256(JSON.stringify(loadAnalysis().claims ?? [])),
         checks: body.checks,
       },
     });
@@ -251,9 +260,14 @@ const STEPS = {
       writeFileSync(ledgerPath, `${JSON.stringify(JSON.parse(before), null, 2)}\n`);
       throw new Error(`図の台帳が形に合わない:\n${check.stdout.slice(-800)}`);
     }
+    // 描画に失敗しても割り当てをやり直さない (Codex を余分に呼ばない)
+    run.figurePlan = { summarySha: sha256(readFileSync(summaryPath)), claimsSha: sha256(JSON.stringify(analysis.claims ?? [])), count: planned.length, rendered: false };
+    saveRun();
+  },
+  render() {
     shell("npm", ["run", "-s", "analysis:draft", "--", "--analysis", analysisId, "--result", rel(paths.result), "--figures-only"]);
     rmSync(join(articleDir, "article.prompt.txt"), { force: true });
-    run.figurePlan = { summarySha: sha256(readFileSync(summaryPath)), count: planned.length };
+    run.figurePlan = { ...run.figurePlan, rendered: true };
     saveRun();
   },
   packet({ findings, reason }) {
@@ -262,6 +276,7 @@ const STEPS = {
       question: issue.question, terms: (analysis.questionTerms ?? []).join("・"), analysis, figures: figuresOf(),
       summaryPath: rel(summaryPath), articlePath: rel(articlePath), reason, findings, unmatchedNumbers: existsSync(articlePath) ? unmatchedNumbers() : [],
     }));
+    if (reason === "改稿" && existsSync(articlePath)) run.rewriteFrom = sha256(readFileSync(articlePath));
     run.rounds.draft += 1;
     saveRun();
     console.log(`■ 止まった: needs-writer — ${reason}。Agent article-writer に ${rel(paths.packet)} を渡して書かせ、もう一度実行する`);
@@ -318,13 +333,20 @@ function currentState() {
     wantsInventory: Boolean(analysis.inventoryTerms?.length),
     inventory: existsSync(paths.inventory),
     wantsFigurePlan: process.argv.includes("--plan-figures"),
-    figurePlanFresh: run.figurePlan?.summarySha === (summary ? sha256(summary) : null),
+    // 図は主張に当てるので、主張が変われば割り当てもやり直す
+    figurePlanFresh: run.figurePlan?.summarySha === (summary ? sha256(summary) : null)
+      && run.figurePlan?.claimsSha === sha256(JSON.stringify(analysis.claims ?? [])),
+    figuresRendered: Boolean(run.figurePlan?.rendered),
+    rewrite: process.argv.includes("--rewrite"),
+    rewritten: Boolean(run.rewriteFrom) && run.rewriteFrom !== (article ? sha256(article) : null),
     writer,
     script: existsSync(at(analysis.script)),
     summaryFresh: Boolean(summary) && run.scriptSha === sha256(readFileSync(at(analysis.script))) && existsSync(paths.result),
     ledgerReady: Boolean(summary) && ledgerErrors.length === 0,
     ledgerErrors,
-    refutationFresh: analysis.refutation?.summarySha256 === (summary ? sha256(summary) : null),
+    refutationFresh: analysis.refutation?.summarySha256 === (summary ? sha256(summary) : null)
+      && (!analysis.refutation?.claimsSha256 || analysis.refutation.claimsSha256 === sha256(JSON.stringify(analysis.claims ?? []))),
+    weakClaims: (analysis.refutation?.checks ?? []).filter((c) => c.verdict === "weak").map((c) => `${c.claim}: ${c.numbers}`),
     brokenClaims: (analysis.refutation?.checks ?? []).filter((c) => c.verdict === "broken").map((c) => `${c.claim}: ${c.numbers}`),
     article: Boolean(article),
     articleSha,

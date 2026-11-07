@@ -83,6 +83,10 @@ for (const figure of figures) {
 writeJson(join(dataDir, "analysis-summary.json"), result);
 console.log(`図 ${figures.length} 枚 → ${join("contents/blog", article.slug, "data")}`);
 
+if (process.argv.includes("--figures-only")) {
+  console.log("図だけを描いた。指示文と書き手は使っていない (--figures-only)");
+  process.exit(0);
+}
 const materials = join(ROOT, ".local/analysis", `${article.slug}.material.md`);
 mkdirSync(dirname(materials), { recursive: true });
 writeFileSync(materials, buildMaterials({ analysis }));
@@ -101,10 +105,6 @@ const prompt = spawnSync(process.execPath, [
 ], { cwd: ROOT, stdio: "inherit" });
 if (prompt.status !== 0) process.exit(prompt.status ?? 1);
 
-if (process.argv.includes("--figures-only")) {
-  console.log("書き手は呼んでいない (--figures-only)");
-  process.exit(0);
-}
 if (existsSync(join(articleDir, "article.md"))) {
   console.error(`✗ article.md が既にある。上書きしない: ${article.slug}`);
   process.exit(1);

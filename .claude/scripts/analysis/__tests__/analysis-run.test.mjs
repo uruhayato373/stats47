@@ -6,7 +6,7 @@ import { MAX_ROUNDS, buildWriterPacket, draftBlockers, nextStep, reviewMode } fr
 const done = {
   frame: true, wantsResearch: false, research: false, plan: true, script: true, summaryFresh: true,
   ledgerReady: true, ledgerErrors: [], refutationFresh: true, brokenClaims: [], article: true, articleSha: "a",
-  wantsInventory: false, inventory: false, wantsFigurePlan: false, figurePlanFresh: true, writer: "claude",
+  wantsInventory: false, inventory: false, wantsFigurePlan: false, figurePlanFresh: true, figuresRendered: true, writer: "claude", weakClaims: [], rewrite: false, rewritten: false,
   gateBlockers: [], firstReview: { articleSha: "a", verdict: "PASS", findings: [] },
   finalReview: { articleSha: "a", verdict: "PASS", findings: [] }, rounds: { ledger: 0, author: 0, draft: 0 },
 };
@@ -87,4 +87,20 @@ test("書き手の小包は主張・図・数値の出どころだけを渡し�
   assert.match(packet, /data\/gap-steps-bars\.svg/);
   assert.match(packet, /52\.8%/);
   assert.doesNotMatch(packet, /frame\.json/);
+});
+
+test("weak の主張は結論の台帳へ 1 回だけ戻し、そのあとは進む", () => {
+  assert.equal(step({ weakClaims: ["x: 言い換え"] }).step, "author");
+  assert.equal(step({ weakClaims: ["x: 言い換え"], rounds: { ledger: 0, author: 1, draft: 0 } }).step, "done");
+});
+
+test("図の割り当てと描画を分け、描画の失敗で割り当てをやり直さない", () => {
+  assert.equal(step({ wantsFigurePlan: true, figurePlanFresh: true, figuresRendered: false }).step, "render");
+});
+
+test("公開版を広げるときは、品質ゲートより先に改稿の小包を出す", () => {
+  const next = step({ rewrite: true, rewritten: false, gateBlockers: ["字数"] });
+  assert.equal(next.step, "packet");
+  assert.equal(next.reason, "改稿");
+  assert.equal(step({ rewrite: true, rewritten: true }).step, "done");
 });

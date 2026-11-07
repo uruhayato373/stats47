@@ -32,12 +32,17 @@ export function nextStep(state) {
     return { step: "author", findings: state.ledgerErrors, round: "ledger" };
   }
   if (!state.refutationFresh) return { step: "refute" };
+  // weak は言い換えれば残る主張。結論の台帳へ 1 回だけ戻して言い換えさせ、反証をやり直す
+  if (state.weakClaims?.length && state.rounds.author < 1) return { step: "author", findings: state.weakClaims, round: "author" };
   if (state.brokenClaims.length) {
     if (state.rounds.author >= MAX_ROUNDS) return stop("needs-owner", `反証で崩れた主張が ${MAX_ROUNDS} 回で解消しない`);
     return { step: "author", findings: state.brokenClaims, round: "author" };
   }
   if (state.wantsFigurePlan && !state.figurePlanFresh) return { step: "figures" };
+  if (state.wantsFigurePlan && !state.figuresRendered) return { step: "render" };
   if (!state.article) return state.writer === "codex" ? { step: "draft", findings: [] } : { step: "packet", findings: [], reason: "初稿" };
+  // 公開版を広げるときは、品質ゲートや審査より先に全体を書き直させる
+  if (state.rewrite && !state.rewritten) return { step: "packet", findings: [], reason: "改稿" };
   if (state.gateBlockers.length) return redraft(state, "品質ゲート", state.gateBlockers);
   if (state.firstReview?.articleSha !== state.articleSha) return { step: "review" };
   if (state.firstReview.verdict !== "PASS") return redraft(state, "1 次審査", state.firstReview.findings);
@@ -62,7 +67,7 @@ export function buildWriterPacket({ question, terms, analysis, figures, summaryP
   const figs = figures.map((f) => `- ![${f.chart?.alt ?? f.title}](data/${f.chart?.name ?? f.id}.svg) ${f.title}: ${f.reads}`).join("\n");
   const fix = findings.map((f) => `- ${typeof f === "string" ? f : `[${f.severity}] ${f.text}`}`).join("\n");
   return `<task>
-<goal>${reason === "初稿" ? "論文型の記事の初稿を書く" : `指摘 (${reason}) の箇所だけを直す`}</goal>
+<goal>${reason === "初稿" ? "論文型の記事の初稿を書く" : reason === "改稿" ? "記事の条件の字数を目安に、主張と図に沿って章を組み直し、全体を書き直す" : `指摘 (${reason}) の箇所だけを直す`}</goal>
 <scope>書いてよいのは ${articlePath} だけ。データ・図・台帳を変えない。R2 や外部へ書かない</scope>
 <sources>規約 .claude/rules/blog-quality-standards.md・.claude/rules/content-type-standards.md。数値の出どころ ${summaryPath} (本文の数値はここから取る。自分で計算し直さない)。今の本文 ${articlePath}</sources>
 <done_when>問いに最初の段落で答え、主張より強く書かず、図をすべて載せた</done_when>
