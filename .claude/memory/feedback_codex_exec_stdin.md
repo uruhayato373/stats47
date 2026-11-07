@@ -8,4 +8,4 @@ metadata:
 スクリプトから `codex exec` を動かすときは `</dev/null` を付ける。付けずに Bash のバックグラウンドで動かすと、記録 (`~/.codex/sessions`) を 1 行も残さず CPU も使わずに止まり続ける (2026-11-04 に 7 時間 23 分止まった)。
 
 **Why:** 標準入力が端末でないと codex exec はそこから追加入力を読む。閉じれば同じコマンドが 45 秒で終わった。
-**How to apply:** ブログ背景の一括生成は `request-article --article` → `codex exec ... </dev/null` → `ingest-article --article` の順。公開前の記事は `--article` を付けないと R2 を読みに行って 404 になる。止まって見えたら経過時間と CPU 時間を比べる。[[feedback-blog-background-codex-only]]
+**How to apply:** ブログ背景の一括生成は `request-article --article` → `codex exec --ephemeral ... </dev/null` (`--ephemeral` が無いと記録が 1 回数 MB ずつ溜まり、2026-11-06〜07 に 20GB) → `ingest-article --article` の順。公開前の記事は `--article` を付けないと R2 を読みに行って 404 になる。止まって見えたら経過時間と CPU 時間を比べる。[[feedback-blog-background-codex-only]]

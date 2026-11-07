@@ -11,6 +11,23 @@
     "apps/web/.next/cache",
     "apps/admin/.next/cache",
     "apps/web/.next/standalone/apps/web/.next/cache",
+    "apps/web/.next/dev",
+    {
+      "path": "apps/web/.local/next-*",
+      "ageDays": 7
+    },
+    {
+      "path": "apps/admin/.local/next-*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/*-trial",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/*-debug",
+      "ageDays": 14
+    },
     {
       "path": ".turbo/cache/*",
       "ageDays": 7
@@ -131,20 +148,23 @@
     {
       "root": "~/.codex/sessions",
       "match": "*",
-      "ageDays": 30,
-      "why": "Codex の会話記録。知見は repo (.claude/rules・skills・memory・backlog) に残す運用で、記録は直近の再開用"
+      "ageDays": 7,
+      "why": "Codex の会話記録。知見は repo (.claude/rules・skills・memory・backlog) に残す運用で、記録は直近の再開用。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
+      "maxGiB": 2
     },
     {
       "root": "~/.codex/archived_sessions",
       "match": "*",
-      "ageDays": 30,
-      "why": "Codex のアーカイブ済み会話記録"
+      "ageDays": 7,
+      "why": "Codex のアーカイブ済み会話記録。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
+      "maxGiB": 1
     },
     {
       "root": "~/.codex/generated_images",
       "match": "*",
-      "ageDays": 30,
-      "why": "Codex の生成画像。採用した画像は git (assets/) か R2 に置く規則"
+      "ageDays": 7,
+      "why": "Codex の生成画像。採用した画像は git (assets/) か R2 に置く規則。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
+      "maxGiB": 1
     }
   ],
   "footprintBudgets": [

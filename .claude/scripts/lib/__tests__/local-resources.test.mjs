@@ -400,6 +400,23 @@ test('計画後に書き換わったファイル・設定に無い root・7 日�
   assert.equal(planFileRetention([{ root: '~/.codex/sessions', ageDays: 1 }], { home })[0].skipped, 'ageDays must be >= 7');
 });
 
+test('maxGiB を超えた分は期限内でも古い順に回収し、直近 keepHours のファイルは残す', (t) => {
+  const { home, put } = homeFixture(t);
+  const body = 'x'.repeat(1024);
+  const older = put('.codex/sessions/2026/11/a.jsonl', 3, body);
+  const middle = put('.codex/sessions/2026/11/b.jsonl', 2, body);
+  const recent = put('.codex/sessions/2026/11/c.jsonl', 0.1, body);
+  const budget = (1024 * 1.5) / 2 ** 30; // 1.5 ファイル分
+  const entries = [{ root: '~/.codex/sessions', match: '*', ageDays: 7, maxGiB: budget }];
+  const plan = planFileRetention(entries, { home });
+  assert.deepEqual(plan[0].files.map((f) => f.file), [older, middle], '上限に収まるまで古い順。直近 24 時間は上限超過でも残す');
+  pruneFiles(plan, entries, { home });
+  assert.equal(fs.existsSync(recent), true);
+  const noBudget = [{ root: '~/.codex/sessions', match: '*', ageDays: 7 }];
+  put('.codex/sessions/2026/11/d.jsonl', 2, body);
+  assert.deepEqual(planFileRetention(noBudget, { home })[0].files, [], 'maxGiB が無ければ期限だけで判定する');
+});
+
 test('容量上限を超えたパスを over にする', (t) => {
   const { home } = homeFixture(t);
   fs.mkdirSync(path.join(home, '.codex/generated_images'), { recursive: true });

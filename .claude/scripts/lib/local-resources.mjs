@@ -488,6 +488,7 @@ export function planFileRetention(
     const matcher = globToRegExp(entry.match ?? '*');
     const exclude = new Set(entry.excludeDirs ?? []);
     const cutoff = now - entry.ageDays * 86400000;
+    const kept = [];
     const visit = (dir) => {
       for (const name of fs.readdirSync(dir)) {
         const full = path.join(dir, name);
@@ -495,13 +496,28 @@ export function planFileRetention(
         if (stat.isSymbolicLink()) continue;
         if (stat.isDirectory()) {
           if (!exclude.has(name)) visit(full);
-        } else if (stat.isFile() && matcher.test(name) && stat.mtimeMs < cutoff) {
-          item.files.push({ file: full, mtimeMs: stat.mtimeMs, bytes: stat.size });
-          item.bytes += stat.size;
+        } else if (stat.isFile() && matcher.test(name)) {
+          const file = { file: full, mtimeMs: stat.mtimeMs, bytes: stat.size };
+          if (stat.mtimeMs < cutoff) {
+            item.files.push(file);
+            item.bytes += stat.size;
+          } else kept.push(file);
         }
       }
     };
     visit(root);
+    // 期限内でも maxGiB を超えた分は古い順に回収する (2026-11-06〜07 の一括生成で 2 日に 20GB 溜まり、
+    // 30 日の期限では 1 バイトも消えなかった)。直近 keepHours (既定 24) のファイルは作業中とみなして残す。
+    if (Number.isFinite(entry.maxGiB)) {
+      const keepCutoff = now - (entry.keepHours ?? 24) * 3600000;
+      let remaining = kept.reduce((n, f) => n + f.bytes, 0);
+      for (const f of kept.sort((a, b) => a.mtimeMs - b.mtimeMs)) {
+        if (remaining <= entry.maxGiB * GiB || f.mtimeMs >= keepCutoff) break;
+        item.files.push(f);
+        item.bytes += f.bytes;
+        remaining -= f.bytes;
+      }
+    }
     return item;
   });
 }
