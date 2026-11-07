@@ -66,6 +66,230 @@
     {
       "path": ".local/geo-source-*",
       "ageDays": 30
+    },
+    {
+      "path": ".local/ci/*",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/analysis/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/blog-imagegen/*",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/theme-design/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/howto-shots/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/blog-linkfix",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/blog-srclink-fix",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/blog-datasource-fix",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/fresh-briefs",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/image-staging/*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/infra-history",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-cover-assets",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-listing-revisions",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/nier",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/r2-manifest",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/a8-offer-inspect",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/a8-append-preview.ts",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/a8-ui",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/model-canary",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-backgrounds",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/paid-landing/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kakei-*-log.tsv",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/image-generation-publish-plan-*.json",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-books",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-quality",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-cover-drafts",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-audit",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/d1",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/estat-catalog",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/next-*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/affiliate-harvest",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/affiliate-offer-inspect",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/gsi-pni",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/video-review",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/template-review",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/layout-review",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/ad-layout",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/theme-qa/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/sns-research/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/design-reference",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/stats47",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/ogp-pilot",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/codex-ogp-pilot",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/sns-quick",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/image-cache",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/content-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-product-archives",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-reference-figure-audit",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-reference-covers",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-figure-update",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/cfa-hoiku",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/push-chunk-*",
+      "ageDays": 1
+    },
+    {
+      "path": ".local/chart-axes.txt",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/generated-blog-svg-keys.txt",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/metric-release-plan.*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-card-repair",
+      "ageDays": 30
     }
   ],
   "scratchRoots": {
@@ -191,6 +415,173 @@
     {
       "path": "~/.codex/generated_images",
       "maxGiB": 2
+    }
+  ],
+  "localRegistry": [
+    {
+      "pattern": "playwright-*-profile",
+      "kind": "auth",
+      "why": "ログイン済みブラウザ。refresh-session が playwright-${source}-profile で開く"
+    },
+    {
+      "pattern": "playwright-*-state.json",
+      "kind": "auth",
+      "why": "ログイン状態の書き出し"
+    },
+    {
+      "pattern": "kdp-account.local.json",
+      "kind": "auth",
+      "why": "KDP アカウント照合の手元値"
+    },
+    {
+      "pattern": "owner-browser-allow.*",
+      "kind": "auth",
+      "why": "オーナーが会話で許可した管理画面の記録 (recorded-measurement-first)"
+    },
+    {
+      "pattern": "affiliate-status",
+      "kind": "state",
+      "why": "ASP の提携状態。protectedPaths"
+    },
+    {
+      "pattern": "affiliate-ops",
+      "kind": "state",
+      "why": "ASP 操作の記録 (asp-operation-store)"
+    },
+    {
+      "pattern": "authenticated-*",
+      "kind": "state",
+      "why": "土曜の認証付き計測の受け渡し"
+    },
+    {
+      "pattern": "product-sales-evidence",
+      "kind": "state",
+      "why": "販売実績の取得証跡"
+    },
+    {
+      "pattern": "product-portfolio",
+      "kind": "state",
+      "why": "商品ポートフォリオの派生レポート"
+    },
+    {
+      "pattern": "selection-backfill",
+      "kind": "state",
+      "why": "ThemeCatalog selection の夜間 backfill の進捗"
+    },
+    {
+      "pattern": "geo-content-pipeline",
+      "kind": "state",
+      "why": "Geo の非公開運用台帳 (r2-storage-design.md)"
+    },
+    {
+      "pattern": "weekly-audits",
+      "kind": "state",
+      "why": "週次監査の結果。管理画面が読む"
+    },
+    {
+      "pattern": "sns-review",
+      "kind": "state",
+      "why": "予約中 SNS 画像の週次確認の最新結果"
+    },
+    {
+      "pattern": "note-card-repair-journal.json",
+      "kind": "state",
+      "why": "note カード修復の journal"
+    },
+    {
+      "pattern": "x-posted.jsonl",
+      "kind": "state",
+      "why": "X 投稿の確認記録"
+    },
+    {
+      "pattern": "threads-scheduled.jsonl",
+      "kind": "state",
+      "why": "Threads 予約の記録"
+    },
+    {
+      "pattern": "resource-health",
+      "kind": "state",
+      "why": "ローカル資源の日次点検の記録"
+    },
+    {
+      "pattern": "locks",
+      "kind": "state",
+      "why": "実行中の処理の排他ロック"
+    },
+    {
+      "pattern": "verification",
+      "kind": "state",
+      "why": "検証出力の親。中身は cachePaths が期限で消す"
+    },
+    {
+      "pattern": "r2",
+      "kind": "state",
+      "why": "R2 push staging の親。中身は cachePaths .local/r2/* が期限で消す (sns は未投稿画像の唯一の置き場)"
+    },
+    {
+      "pattern": "tsbuildinfo",
+      "kind": "state",
+      "why": "型検査の incremental cache"
+    },
+    {
+      "pattern": "*-cache.json",
+      "kind": "state",
+      "why": "pre-commit の stat キャッシュ"
+    },
+    {
+      "pattern": "stop-docs-success.json",
+      "kind": "state",
+      "why": "Stop hook の文書検査の成功記録"
+    },
+    {
+      "pattern": "coconala-products",
+      "kind": "product",
+      "why": "note カバー設計が読む v3 パックの data.csv だけを残す (2026-11-08 に納品パック本体を削除)"
+    },
+    {
+      "pattern": "geo-products",
+      "kind": "product",
+      "why": "Geo 商品の生成物。販売カタログと note 添付が読む。正本は private R2"
+    },
+    {
+      "pattern": "muni-data-products",
+      "kind": "product",
+      "why": "市区町村データ商品の生成物"
+    },
+    {
+      "pattern": "note-products",
+      "kind": "product",
+      "why": "note 商品記事の生成物。販売カタログが読む"
+    },
+    {
+      "pattern": "note-products-revisions",
+      "kind": "product",
+      "why": "note 商品記事の改訂版。販売カタログが読む"
+    },
+    {
+      "pattern": "kindle-private",
+      "kind": "product",
+      "why": "KDP セレクト専用本の非公開原稿。book-catalog が packages/product-factory/.local/kindle-private を読む (repo に入れない)。控えは Drive stats47/Kindle原稿/K-S1-13-v1-20261104-r8"
+    },
+    {
+      "pattern": "sns-gallery-state.json",
+      "kind": "state",
+      "why": "管理画面のギャラリー固有の状態"
+    },
+    {
+      "pattern": "measurement-lock-hash",
+      "kind": "state",
+      "why": "土曜の認証付き計測が依存の変化を検知するハッシュ"
+    },
+    {
+      "pattern": "note-card-*journal.json",
+      "kind": "state",
+      "why": "note カード修復・画像差し替えの再開用 journal"
+    },
+    {
+      "pattern": "seo-rank-watch",
+      "kind": "state",
+      "why": "検索順位の定点観測の記録"
     }
   ]
 }

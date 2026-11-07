@@ -173,6 +173,17 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [LOCAL-PRODUCT-OUTPUTS-OFFLOAD-01] 商品の生成物と SNS 画像をローカルから外し、R2 / Drive を読む形にする
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-local-registry.mjs] [起票:2026-11-08] [領域:管理]
+
+- **背景 (2026-11-08)**: ローカル容量の整理で `.local` を 10GB から 1.7GB にした。そのとき、コードがローカルの生成物を直接読んでいるため、外せないものが残った。台帳は `config/local-resources.json` の `localRegistry`（kind: product）。
+  - 販売カタログ (`sales-catalog.ts`) と note の添付 (`prepare-article.cjs`) が読む `geo-products`・`muni-data-products`・`note-products`・`note-products-revisions`（計約 60MB）
+  - note カバー設計 (`cover-designs.ts`) が読む `.local/coconala-products/P-XX/v3-20261012-mac-r4/data.csv`（14 本。納品パック本体は削除済み）
+  - X / Threads の画像の唯一の置き場 `.local/r2/sns`（619MB。`cachePaths` の除外）
+- **次**: それぞれを private R2 の固定版（SHA 付き）から読む形へ変え、ローカルは作業中の一時領域だけにする。SNS 画像は `archive-sns-assets.mjs` の private R2 `sns-assets/` への移行済み分を照合し、未投稿の分だけを残す。
+- **停止条件**: 公開中の note 有料記事の添付・販売中商品の配布物を変えない。R2 の削除は `r2-maintenance.yml` の経路だけ。
+- **完了条件**: 上の名前が `localRegistry` の product から外れ、`check-local-registry.mjs` が通る。`.local/r2/sns` が期限付きの作業領域になる。
+
 ### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵の残りとテーマの画像を片付ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]
 

@@ -268,8 +268,22 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
   ├─ 計測・台帳・改善ログ・レビュー・監査と是正のキュー → data/<取得元>/ (台帳に 1 行足してから)
   ├─ 画像などの素材の原本                           → assets/<用途>/
   ├─ エージェントの運用をやめたら不要になる状態だけ   → .claude/state/ (AGENT_STATE に理由を足してから)
-  └─ PR/Issue 連携が本質                            → GitHub Issues (enhancement/bug)
+  ├─ PR/Issue 連携が本質                            → GitHub Issues (enhancement/bug)
+  ├─ 人が見返す作業記録・候補画像・納品物の控え      → Google Drive `stats47/` (drive-archive.mjs で照合して移す)
+  └─ 作業の途中だけ要るもの                          → OS の一時領域 (os.tmpdir())。終わったら消す
 ```
+
+**作ったら消す (2026-11-08 オーナー指示)**: スキルとエージェントは、作業の途中で作ったファイルを、作業の最後に消す。
+残す価値があるものは、上の分類どおり git・R2・Drive のどれかへ移してから消す。ローカルは正本にしない。
+`.local/` に新しい置き場を作るときは、`config/local-resources.json` に登録する。登録先は 2 つある。
+- **期限で消す作業領域**: `cachePaths` に `ageDays` 付きで登録する。
+- **年齢では消さないもの**: `localRegistry` に、種類（auth / state / product）と理由付きで登録する。
+
+登録の無い置き場は、次の 2 か所で検出される。
+- **書く前**: コード・SKILL.md・agent 定義を対象に、PR CI の `check-local-registry.mjs` が止める。
+- **書いた後**: 日次の `local:cleanup` が、`.local` 直下の名前を台帳と照合して警告する。
+
+詳細は `local-environment.md`「ローカルに残さない」。
 
 レビュー全文は新規保存しない。迷う場合は未完了の行動か、恒久判断か、再生成可能な履歴かで分ける。
 アプリが読む配信データは常に **R2 JSON**（上流 SSOT は git TS、永続 DB は持たない）。

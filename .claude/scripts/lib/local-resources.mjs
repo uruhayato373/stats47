@@ -564,6 +564,29 @@ export function checkFootprint(budgets = CONFIG.footprintBudgets ?? [], { home =
   });
 }
 
+/**
+ * `.local` 直下の名前が台帳に載っているかを確かめる。載る先は localRegistry (auth / state / product = 年齢では消さない)
+ * か、`.local/<名前>` で始まる cachePaths (work = 期限で消す)。どちらにも無い名前は誰も消さないまま溜まるので返す
+ * (2026-11-08 に一回きりの調査スクリプト・ログ・試作が 180 個、計 2.6GB 残っていた)。
+ * @param {any} [config] @param {string} [root] @returns {string[]}
+ */
+export function unregisteredLocalEntries(config = CONFIG, root = ROOT) {
+  const dir = path.join(root, '.local');
+  if (!fs.existsSync(dir)) return [];
+  const patterns = [
+    ...(config.localRegistry ?? []).map((e) => e.pattern),
+    ...cacheEntries(config)
+      .map((e) => e.path.split(/[\\/]+/))
+      .filter((segments) => segments[0] === '.local' && segments.length > 1)
+      .map((segments) => segments[1]),
+    ...(config.protectedPaths ?? [])
+      .map((p) => p.split(/[\\/]+/))
+      .filter((segments) => segments[0] === '.local' && segments.length > 1)
+      .map((segments) => segments[1]),
+  ].map(globToRegExp);
+  return fs.readdirSync(dir).filter((name) => !patterns.some((re) => re.test(name)));
+}
+
 function record(name, value) {
   fs.mkdirSync(STATE, { recursive: true });
   const destination = path.join(STATE, `${name}.json`);
@@ -719,6 +742,13 @@ export async function main(args = process.argv.slice(2)) {
         ];
         for (const f of over)
           console.error(`[local-resources] 容量上限超過: ${f.path} ${(f.bytes / GiB).toFixed(1)}GiB > ${f.maxGiB}GiB`);
+        result.unregistered = unregisteredLocalEntries();
+        if (result.unregistered.length) {
+          target.warnings.push({ key: 'local-unregistered', level: 'warning', names: result.unregistered });
+          console.error(
+            `[local-resources] .local に台帳の無い名前: ${result.unregistered.join(', ')} — 使い終わったなら消し、残すなら config/local-resources.json の localRegistry か cachePaths に登録する`
+          );
+        }
       }
     }
     if (args.includes('--record')) {

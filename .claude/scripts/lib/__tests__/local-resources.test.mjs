@@ -341,7 +341,33 @@ test('worktreeStatus: メインの working tree は root=true で stale 判定�
 });
 
 // ---- ファイル単位の保持期限と容量上限 (2026-10-10: 会話記録・生成画像・.local/r2 の肥大化対策) ----
-import { planFileRetention, pruneFiles, checkFootprint } from '../local-resources.mjs';
+import { planFileRetention, pruneFiles, checkFootprint, unregisteredLocalEntries } from '../local-resources.mjs';
+
+test('.local 直下は localRegistry か cachePaths に載る名前だけを許し、無い名前を返す', (t) => {
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-registry-test-')));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  for (const name of ['playwright-x-profile', 'ci', 'probe-a.mjs', 'c10.log', 'rakuten-cli-test-ab'])
+    fs.mkdirSync(path.join(root, '.local', name), { recursive: true });
+  const config = {
+    localRegistry: [{ pattern: 'playwright-*-profile', kind: 'auth' }],
+    cachePaths: [{ path: '.local/ci/*', ageDays: 14 }, { path: '.local/rakuten-cli-test-*', ageDays: 7 }],
+    cacheAgeDays: 7,
+    protectedPaths: [],
+  };
+  assert.deepEqual(unregisteredLocalEntries(config, root).sort(), ['c10.log', 'probe-a.mjs']);
+});
+
+test('設定の契約: localRegistry は種類と理由を持ち、work は cachePaths に期限を持つ', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '../../../..', LOCAL_RESOURCES), 'utf8'));
+  for (const e of config.localRegistry) {
+    assert.ok(['auth', 'state', 'product'].includes(e.kind), `${e.pattern} の kind`);
+    assert.ok(e.why && e.why.length >= 8, `${e.pattern} に残す理由が無い`);
+  }
+  const auth = config.localRegistry.filter((e) => e.kind === 'auth').map((e) => e.pattern);
+  assert.ok(auth.includes('playwright-*-profile'), 'ログイン済みブラウザを期限で消さない');
+  const cachePatterns = config.cachePaths.map((e) => (typeof e === 'string' ? e : e.path));
+  for (const p of auth) assert.ok(!cachePatterns.some((c) => c === `.local/${p}`), `${p} を期限で消す設定にしない`);
+});
 
 const DAY = 86400000;
 function homeFixture(t) {

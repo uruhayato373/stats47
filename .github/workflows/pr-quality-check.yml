@@ -141,8 +141,11 @@ jobs:
             .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \
             .claude/scripts/lib/__tests__/check-render-ci-contract.test.cjs \
-            .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs
+            .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs \
+            .claude/scripts/lib/__tests__/check-local-registry.test.mjs \
+            .claude/scripts/lib/__tests__/local-resources.test.mjs
           node .claude/scripts/lib/check-datasets.mjs
+          node .claude/scripts/lib/check-local-registry.mjs
           node .claude/scripts/lib/check-money-unit-audit.cjs --base origin/main
           node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main
           node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
