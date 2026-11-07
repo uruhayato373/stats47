@@ -173,16 +173,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵を main へ入れ、残りの記事へ広げる
+### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵の残りとテーマの画像を片付ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]
 
-- **状態 (2026-11-07)**: 検索流入の多い 20 本を `feat/blog-photo-thumbnails` から R2 へ反映した (run 42301411424)。サムネイルは 40 枚とも差し替わり、ライトとダークは同じ絵。OGP は 19 本が同一バイト。`sports-urban-paradox` だけ変わったが、反映前の画像を保存しておらず原因は未確認。
-- **期限 2026-11-14 の週次修復より前**: `quality-suite-weekly.yml` の ogp-images job は main のコードで動く。このブランチが main に入っていないと、全面の絵を知らないコードが 20 本を旧構図へ戻す。PR 1244 が閉じたら develop へ入れ、main へのマージをオーナーに諮る。間に合わなければ戻ることを前提に、絵は git にあるので再反映できる。
-- **残り**: 公開 848 本のうち 828 本。死亡・犯罪・災害・中絶などの慎重な題材は別枠で判断する。テーマ 56 件は経路の登録とカードの実装が先。
-- **直すこと**: サムネイルは平均 44.9KB で現行の 2.5 倍。WebP の品質を下げて確認する。歯車・地球儀・聴診器が重なるので題材の分散を確かめる。`sports-urban-paradox` の OGP は「スポー / ツ」で改行している。
-- **別ブランチの分**: `feat/m01-through` にある `draft-file` の route・`question-progress.ts`・`draft-background-route.test.ts` は develop に無いので、新しい置き場の判定を本体の作業ツリーに未コミットで残した。そのブランチの commit に含める。
-- **完了条件**: main に入り、週次修復の後も 20 本が写真のまま残り、全件の可否をオーナーが決めている。
-
+- **状態 (2026-11-07)**: 公開 848 本のうち 845 本を写真風 (`blog-photo-v2`) で main と R2 へ反映した。
+- **残す 3 本**: `abortion-rate-prefecture-gap`・`early-neonatal-deaths-prefecture-gap`・`international-cooperation-volunteer-map` は旧来の絵のまま。題材に合う絵を決めてから差し替える。
+- **未確認**: 人が全件を見ていない。Codex の一次判定だけの絵が大半で、主題と遠い絵が約 15 本ある。週次修復 (2026-11-14) の後も写真のまま残るかを確かめる。
+- **テーマ 56 件**: 経路の登録と一覧カードの実装が先。規約の既定「カード画像は作らない」の変更が要る。
+- **別件**: `.claude/scripts/themes/__tests__/tsunami-evacuation.test.mjs` が `data/metrics/*` を拡張子なしで読めず失敗し、push 前の検査を止める。
+- **完了条件**: 3 本とテーマの扱いが決まり、週次修復の後も 845 本が変わらない。
 
 ### [RANKING-CARD-WEBP-UNUSED-01] ランキングカードの WebP 4,918 枚の読み手を確かめ、不要なら生成と週次修復を止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:grep -rn "rankingThumbnailKeys" apps packages] [起票:2026-11-06] [領域:サイト]
