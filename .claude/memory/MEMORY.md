@@ -190,3 +190,4 @@
 - [blog photo thumbnail](project_blog_photo_thumbnail.md) — ブログ新規サムネイルは全面の写真風。人物・場所なし。旧経路の版を上げると全記事の指紋が変わるので触らない
 - [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は観点でなく計算手順つきの必須試験にする。誤った結論の fixture で検出を確かめる
 - [snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — 検査の「本番データの欠落」は比較の誤りのことがある。再生成の前に生成側の関数で 1 件確かめる
+- [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree はセッション再開で消える。worktree はリポジトリ内に置き節目ごとにコミット
