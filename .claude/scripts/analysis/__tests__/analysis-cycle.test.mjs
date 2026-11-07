@@ -127,6 +127,11 @@ test("公開の切り替えは審査の後の本文の変更に数えない", ()
   assert.equal(reviewedArticleText("published: true は本文の語"), "published: true は本文の語");
 });
 
+test("公開で送り箱から消えた記事は検査しない (2026-11-07 に公開後の CI を止めた実例)", () => {
+  assert.deepEqual(run({ analysis: { ...analysis, stage: "approved" }, summary: {}, article: null, review: null }), []);
+  assert.ok(run({ analysis: { ...analysis, stage: "reviewed" }, summary: {}, article: null, review: null }).length > 0);
+});
+
 test("ハッシュの無い PASS は認めない", () => {
   assert.ok(reviewedRun({ review: "verdict: PASS" }).includes("審査の後に本文が変わった。審査をやり直す"));
 });

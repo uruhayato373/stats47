@@ -101,6 +101,8 @@ function questionErrors({ analysis, issue, article }) {
 export function analysisCycleErrors({ analysis, issue, layers, summary, figures, article, review, hashes = {}, articleFigures = [] }) {
   if (!ANALYSIS_STAGES.includes(analysis.stage)) return [`工程が不明: ${analysis.stage}`];
   if (!reached(analysis, "viewpoints")) return [];
+  // 公開すると CI が送り箱の記事を消す (blog-data-schema.md §0)。検査は公開の前に済んでいる
+  if (reached(analysis, "approved") && article === null) return [];
   const errors = [...questionErrors({ analysis, issue, article }), ...viewpointErrors({ analysis, layers, summary }), ...claimErrors({ analysis, summary })];
   if (reached(analysis, "figures")) {
     if (!figures.length) errors.push("図が台帳に無い");
