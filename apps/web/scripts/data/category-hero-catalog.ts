@@ -136,3 +136,62 @@ export function buildCategoryHeroPrompt(categoryKey: string): string {
   }
   return CATEGORY_HERO_STYLE + entry.subject + CATEGORY_HERO_COMPOSITION;
 }
+
+/**
+ * /ranking のカテゴリカード上部の装飾イラスト (public/images/categories/<key>.webp・768×512)。
+ * 17 枚を 1 セットの画風にそろえるため、スタイルの前置を共通にする。
+ * 生成は Codex (config/image-generation-routes.json の category-card)。2026-11-09 に
+ * Gemini を直接呼ぶ旧スクリプト generate-category-images.ts から移した (プロンプトは同じ)。
+ */
+export const CATEGORY_CARD_STYLE =
+  "Minimal flat editorial vector illustration for a Japanese government-statistics website. " +
+  "Soft muted palette of indigo, slate blue and warm neutral tones on a very light off-white background. " +
+  "Clean geometric shapes, gentle subtle gradients, calm and trustworthy mood, isometric-lite perspective, " +
+  "generous negative space, centered composition. Absolutely no text, no letters, no numbers, no logos, no UI. " +
+  "Subject: ";
+
+/** categoryKey → カテゴリカードの装飾イラストの主題。 */
+export const CATEGORY_CARD_SUBJECTS: Record<string, string> = {
+  landweather:
+    "a serene Japanese landscape with layered mountains, a coastline, and soft weather clouds with a small sun",
+  population:
+    "a small diverse group of simple people silhouettes with a few house shapes, evoking households and demographics",
+  laborwage:
+    "an office worker with a briefcase beside a bar chart and a few stacked coins, evoking work and wages",
+  agriculture:
+    "terraced rice fields, a small fishing boat on water, and a stylized forest, evoking farming, forestry and fishery",
+  miningindustry:
+    "a tidy factory building with a smokestack and interlocking gears, evoking manufacturing and industry",
+  commercial:
+    "a friendly small shop storefront with an awning and a shopping bag, evoking retail and services",
+  economy:
+    "a pie chart, a few coins and small buildings with a household budget notebook, evoking economy and finance",
+  construction:
+    "modern houses with a construction crane and land plots, evoking housing, land and construction",
+  energy:
+    "power transmission lines with a wind turbine, a solar panel and water droplets, evoking energy and water",
+  tourism:
+    "an airplane and a train with a rolling suitcase and a simple landmark, evoking transport and tourism",
+  educationsports:
+    "a graduation cap, an open book and a sports ball, evoking education, culture and sports",
+  administrativefinancial:
+    "a classical government building with columns and a few documents, evoking public administration and finance",
+  safetyenvironment:
+    "a shield with balanced scales of justice and green leaves, evoking justice, safety and environment",
+  socialsecurity:
+    "a hospital building with a heart and a medical cross held by caring hands, evoking social security and health",
+  international:
+    "a globe with a few connection lines and small abstract flags, evoking international affairs",
+  infrastructure:
+    "a bridge, a road and utility poles, evoking public infrastructure facilities",
+  ict: "abstract network nodes with a wifi symbol, a satellite and a circuit motif, evoking ICT and technology",
+};
+
+/** categoryKey からカテゴリカードの生成プロンプトを組み立てる。 */
+export function buildCategoryCardPrompt(categoryKey: string): string {
+  const subject = CATEGORY_CARD_SUBJECTS[categoryKey];
+  if (!subject) {
+    throw new Error(`unknown category card key: ${categoryKey}`);
+  }
+  return CATEGORY_CARD_STYLE + subject;
+}

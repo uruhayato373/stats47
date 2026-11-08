@@ -146,13 +146,6 @@ updated: 2026-11-01
 - **やること**: ① `check` を PR の CI へ入れ、台帳と原稿の一致も見る ② 販売中の本と新刊の公開に原稿・照合の記録を必須にする ③ 表紙の縮小確認 (検索結果の大きさ) を規約と検査へ足す ④ 表紙の「47都道府県」の扱いをオーナーと決めてから、見本 1 冊 → 全冊の順で Codex で作り直す。
 - **完了条件**: 台帳を手で変えると CI が落ち、原稿の無い本は公開で止まり、表紙の縮小確認の記録が残る。
 
-### [IMAGE-ROUTES-CATEGORY-CODEX-01] カテゴリ画像の生成を Gemini から Codex へ移し、旧スクリプトを撤去する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-image-generation-routes.mjs] [起票:2026-11-06] [領域:サイト]
-
-- **事実**: `generate-category-images.ts` と `generate-category-heroes.ts` が Gemini の画像 API を直接呼ぶ。`config/image-generation-routes.json` の `legacy` に載せて、新しい直接呼び出しだけを止めている。
-- **やること**: 次にカテゴリ画像を作るときに Codex の経路を登録し、2 本を撤去して `legacy` から外す。既存の画像は作り直さない。
-- **完了条件**: 2 本が消え、`legacy` が `BLOG-BG-PIPELINE-CONSOLIDATE-01` の分だけになった。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [PAGE-UI-REVIEW-COVERAGE-01] ページ UI の週次確認で読むべき画面の 9 割が読まれず、新しい指摘の行き先が無い

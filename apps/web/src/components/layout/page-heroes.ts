@@ -87,7 +87,7 @@ function categoryHeroImage(categoryKey: string): HeroImageAsset {
     sourceImage: `assets/page-heroes/category-${categoryKey}-hero.jpg`,
     aspectRatio: "3:2 (1536×1024)",
     prompt: `apps/web/scripts/data/category-hero-catalog.ts → buildCategoryHeroPrompt("${categoryKey}")`,
-    regenerate: `npx tsx apps/web/scripts/generate-category-heroes.ts --apply --only ${categoryKey} --force`,
+    regenerate: `npx tsx apps/web/scripts/print-category-hero-prompts.ts --category ${categoryKey} (Codex で生成)`,
   };
 }
 
