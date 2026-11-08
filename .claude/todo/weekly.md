@@ -113,12 +113,13 @@ W45 のレビューは 11-14 に書く。ここでは計画の checkbox と back
 
 ### Must（絶対達成、3件）
 
-- [ ] **製造品出荷額の商品の実験を running にし、6 週の計測を始める** [S] — `MUNI-DATA-PRODUCT-SALE-01`（🔴 2 番目・商品領域・KPI `paid-purchases`）。
+- [x] **製造品出荷額の商品の実験を running にし、6 週の計測を始める** [S] — `MUNI-DATA-PRODUCT-PILOT-01`（商品領域・KPI `paid-purchases`）。
   note の公開 (11-04) は済んだが、実験の台帳 `data/business/experiments.json` の EXP-007 は proposed のまま、開始日と判定日も無い (11-09 確認)。月次のゴールの「EXP-007 が running で判定日が入っている」を満たしていない。
   ① ランキングページの 1 行の案内が本番に出ているかを確かめる (develop にあって本番に無いなら、開始日はデプロイ日にする)
   ② EXP-007 を running にし、開始日と 6 週の判定日 (カードの 2026-12-16 か、本番に出た日から 6 週) を入れる
   ③ 週次で読むもの (案内の `nav_click`・note の販売数) と、その取得元を台帳かカードに 1 行で書く。
   完了条件: `node .claude/scripts/lib/experiments-state.mjs active` に EXP-007 が running で出て、判定日が入っている。
+  **結果 (2026-11-09)**: ① 案内は 11-04 の PR #1219 (main 13:11 JST) で本番に出ていた。本番の `/municipalities/ranking/manufacturing-shipment-amount` が HTTP 200 で `/products/data-muni-manufacturing` へのリンクを持つ (curl で確認)。② EXP-007 を running にし、開始日 2026-11-04・判定日 2026-12-16 を入れた。③ 週次で読むもの (案内のクリック = GA4 の nav_click / product_click、販売数 = 販売台帳の note 行) を EXP-007 の `measurement` に書いた。6 週の観測は実験台帳が持つので、🔴 の `MUNI-DATA-PRODUCT-SALE-01` は消した。
 - [ ] **家計調査の記事のうち、題に 2024 年の値が残り流入の多い 6 本を 2025 年の値へ書き直す** [M] — `KAKEI-EXPANSION-02`（データ領域）/ `CONTENT-KAKEI-EXPANSION-01`（サイト領域）。
   上位 5 品目のランキングは 2025 年になったが、題 (title / seoTitle) に 2024 年の値が残る記事が 138 本ある。題と順位が食い違うと、検索から来た読者が混乱する。
   今週は流入の多い 6 本 (チョコレート・すし・緑茶・即席麺・清酒・牛肉。一覧は `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`) に絞り、題・本文・図をランキングの 2025 年の値にそろえる。
@@ -153,7 +154,7 @@ W45 のレビューは 11-14 に書く。ここでは計画の checkbox と back
 
 ### 🔴 の扱い
 
-🔴 は 12 枚で上限 10 を超えている (月次計画の時点では 8 枚。その後に増えた)。今週の Must は上位 2 枚 (`MEASUREMENT-MAC-DIRECT-01`・`MUNI-DATA-PRODUCT-SALE-01`) を含む。
+🔴 は 12 枚で上限 10 を超えている (月次計画の時点では 8 枚。その後に増えた)。今週の Must は上位 2 枚 (`MEASUREMENT-MAC-DIRECT-01`・製造品出荷額の商品) を含む。
 3 番目の `IA-REGION-THEME-01` は W44 に計画外で 2〜5 段目を実装済みで、重点外なので今週は Must にしない。11-14 のレビューで、🔴 を 10 枚以下へ下げる対象を挙げる。
 
 ## オーナー作業
@@ -194,7 +195,7 @@ W45 のレビューは 11-14 に書く。ここでは計画の checkbox と back
 - 前週レビュー: `data/reviews/weekly/2026-W44.md` (W45 のレビューは 11-14)
 - 11 月の重点: `.claude/todo/monthly.md`
 - 計測サイクル: `data/measurement-cycle/latest.json` (W44、11-08)
-- backlog: `MUNI-DATA-PRODUCT-SALE-01` / `KAKEI-EXPANSION-02` / `CONTENT-KAKEI-EXPANSION-01` / `MEASUREMENT-MAC-DIRECT-01` / `MUNI-DATA-DEDUP-01` / `KAKEI-MULTIAXIS-01` / `KDP-LEDGER-AUTO-01` / `CF-CPU-SURGE-01`
+- backlog: `MUNI-DATA-PRODUCT-PILOT-01` / `KAKEI-EXPANSION-02` / `CONTENT-KAKEI-EXPANSION-01` / `MEASUREMENT-MAC-DIRECT-01` / `MUNI-DATA-DEDUP-01` / `KAKEI-MULTIAXIS-01` / `KDP-LEDGER-AUTO-01` / `CF-CPU-SURGE-01`
 - 改善施策: `ADSENSE-PLACEMENT-01` / `MUNI-PREF-RANKING-OBS-01` / `RELATED-ARTICLES-EFFECT-01`
 - 打ち手の台帳: `data/business/experiments.json` (EXP-006・EXP-007・EXP-013)
 

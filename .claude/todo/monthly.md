@@ -3,7 +3,7 @@ title: 今月の重点
 type: monthly-plan
 month: 2026-11
 date: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-09
 status: active
 focus_themes:
   - 家計調査の年次更新を起点にランキング・テーマ・ブログ・調査ハブの内容と回遊を整える
@@ -97,11 +97,11 @@ tags: []
 - **構成タスク**:
   - 組替済み時系列 CSV (自治体 1,719・1980〜2023)・空の値の記号の注記・全国合計の照合・README [M] — `MUNI-DATA-PRODUCT-BUILD-01` (→ W45 下調べ済み、W46 作成)
   - 境界の GeoJSON を e-Stat「令和2年国勢調査 町丁・字等境界データ」を市区町村で結合して作る [M] — `MUNI-DATA-PRODUCT-BUILD-01` (→ W46〜W47)
-  - 価格 (¥980〜2,980) を決め、note の有料記事 (無料部分に上位 10 自治体の表と列の説明) を作る [M] — `MUNI-DATA-PRODUCT-SALE-01` (→ W47)
-  - ランキングページに 1 行の案内を置き、EXP-007 を running にする [S] — `MUNI-DATA-PRODUCT-SALE-01` (→ W48)
+  - 価格 (¥980〜2,980) を決め、note の有料記事 (無料部分に上位 10 自治体の表と列の説明) を作る [M] — `MUNI-DATA-PRODUCT-PILOT-01` (→ 2026-11-04 に ¥980 で公開済み)
+  - ランキングページに 1 行の案内を置き、EXP-007 を running にする [S] — `MUNI-DATA-PRODUCT-PILOT-01` (→ 案内は 11-04 に本番。EXP-007 は 11-09 に running・判定日 2026-12-16)
   - 製造品出荷額の 2 指標が R2 で同じ値になっている件を正す [S] — `MUNI-DATA-DEDUP-01` (→ W46。商品の出典の表 ID を確定させるため)
 - **依存・ブロッカー**: note の有料記事の公開と価格はオーナーの承認。e-Stat API で空の値の記号を取り直すには appId が要る。note の売上の計測 (`AUTH-CREDENTIAL-REGISTER-01`) が戻らないと、販売数を判定できない。
-- **真実源リンク**: `backlog.md#MUNI-DATA-PRODUCT-PILOT-01`、`backlog.md#MUNI-DATA-PRODUCT-SALE-01`、`backlog.md#MUNI-DATA-PRODUCT-PILOT-01`、`backlog.md#MUNI-DATA-DEDUP-01`
+- **真実源リンク**: `backlog.md#MUNI-DATA-PRODUCT-PILOT-01`、`data/business/experiments.json` (EXP-007)、`backlog.md#MUNI-DATA-DEDUP-01`
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
