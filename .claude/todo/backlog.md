@@ -45,6 +45,7 @@ updated: 2026-11-01
 - **残り**:
   - ⑤ 全国の値 (手元 `.local/r2/app/japan/<指標>/series.json` に生成済み) を R2 へ push してからデプロイする。push 前にデプロイすると 25 ページが「0 指標」の空ページになるので、順を入れ替えない (R2 push・デプロイは承認を得てから)。
   - ③ 人口の多い市から市区町村×テーマのページを検索に出す段階は未着手。
+- **R2 の確認 (2026-11-09)**: 全国の値 160 件 (`app/japan/*/series.json`) は公開 R2 にローカルと同じバイトで載っていた (SHA-256 を全件照合、`diff-push-r2.ts --prefix app/japan --dry-run` も差分 0)。デプロイはオーナー承認 (11-09「今日反映する」) で PR #1248 に載せた。マージ・デプロイ後に全国テーマの代表ページが指標を持って表示されることを確かめる。
 - **完了条件**: 5 段がそろい、どの地域×テーマのページでもパンくずの各段から Sheet で移れ、題名に地域が入っている。
 
 ### [THEME-DASHBOARD-TEXT-TRIM-01] テーマページのデータの表とチャートの説明を畳み、ダッシュボードとして短くする
@@ -92,6 +93,7 @@ updated: 2026-11-01
 - **オーナー判断 (2026-11-01)**: Gemini をランキング解説の量産手段へ戻す。旧キーは 48 run 中 44 run が HTTP 402 で停止し生成 0 件。課金設定なしの専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` へ登録済み (キーの文字列は git・会話へ出さない)。無料枠 project のためキー再発行は求めず、現キーで続けてよい。
 - **確認済み (2026-11-01)**: 確認用 branch `codex/gemini-kakei-20261101` で、`gemini-3.5-flash-lite` を使った run `41271164945` が structured preflight・1件の生成・決定的監査・独立 Gemini critic すべて PASS (`verify_only=true` で記録・commit・R2 publish は skip)。`gemini-2.5-flash-lite` は structured preflight で HTTP 404。repository variable は未設定。
 - **次**: ① 日次公開を起動する前に feature branch の変更を review し、公開の承認を得る ② repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ③ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ④ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
+- **起動 (2026-11-09 オーナー承認)**: main と develop の workflow・スクリプトが同じで、モデルが 1 件確認と同じ `gemini-3.5-flash-lite` (workflow の env で固定) であることを確かめ、repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定した。11-05〜11-08 の定期 run は変数が無いため skipped だった。残り: ③ 初回の定期 run (2026-11-10 07:15 JST) と `publish-ai-content.yml` の R2 読み戻しを確かめる ④ 7 run の評価。
 - **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
 - **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
 
