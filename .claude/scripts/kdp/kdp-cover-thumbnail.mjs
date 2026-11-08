@@ -32,7 +32,7 @@ if (!["render", "record"].includes(command) || !id) {
 }
 
 const listing = readListings()[id];
-if (!listing) throw new Error(`${id}: config/kdp-listings.json に無い`);
+if (!listing) throw new Error(`${id}: KDP の出品台帳に無い`);
 const coverAbs = resolve(ROOT, listing.coverPath ?? "");
 if (!listing.coverPath || !existsSync(coverAbs)) throw new Error(`${id}: 表紙が無い (${listing.coverPath})。R2 の archive から復元してから行う`);
 const coverSha256 = createHash("sha256").update(readFileSync(coverAbs)).digest("hex");
