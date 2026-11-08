@@ -1409,12 +1409,6 @@ updated: 2026-11-01
 - **停止条件**: 添付の差し替えは有料商品の納品物を変えるのでオーナー承認の後。
 - **完了条件**: 13 パックの PowerPoint で 1 位が一番上に並び、note の添付が新しい版に替わっている。
 
-### [NOTE-DELIVERY-CONTRACT-DRIFT-01] 出品台帳の note 納品版 (v3) が、note に添付した版 (v4) と食い違っている
-タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:商品]
-
-- **実測 (2026-10-28)**: 当時の `config/coconala-listings.json` の `_noteDelivery.artifactDirectory` (2026-11-08 に v3 のまま `data/products/note-pack-deliveries.json` へ移した。今の正本はこちら) は 13 パックとも `v3-20261012-mac-r4` を指す。note の有料記事に添付したのは `data/products/note-pack-regeneration-2026-10-24.json` の `v4-20261024-mac-r2` の ZIP (private R2 `note/product-archives/`)。`build-revision.ts` は `_noteDelivery` を読むので、次に販売準備原稿を作ると公開中と違う版の件数・枚数で書かれる。
-- **次**: `note-pack-deliveries.json` の `_delivery` を v4 の manifestSha256 へ合わせるか、note の納品の正本を regeneration の記録へ一本化するかを決めて直す。Office の確認記録 (`data/products/note-pack-office-verification-2026-10-28.json`) は v4 の ZIP に結びついている。
-- **完了条件**: note の販売準備原稿の生成が、添付中の版と同じ manifest を読む。
 
 ### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/admin] [起票:2026-10-27] [領域:管理]

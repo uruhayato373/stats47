@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-08T00:38:52.367Z",
+  "checkedAt": "2026-11-08T01:12:32.694Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
@@ -24,14 +24,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-01/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-01/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-01/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-01/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -59,14 +57,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-02/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-02/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-02/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-02/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -94,14 +90,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-03/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-03/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-03/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-03/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -129,14 +123,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-04/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-04/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-04/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-04/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -164,14 +156,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-05/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-05/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-05/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-05/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -199,15 +189,13 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-06/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-06/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-06/v3-20261012-mac-r4/manifest.json'",
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-06/v4-20261024-mac-r2/manifest.json'",
         "歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -235,14 +223,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-07/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-07/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-07/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-07/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -270,14 +256,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-08/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-08/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-08/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-08/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -305,14 +289,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-09/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-09/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-09/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-09/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -340,14 +322,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-10/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-10/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-10/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-10/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -375,14 +355,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-11/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-11/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-11/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-11/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -410,15 +388,13 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-12/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-12/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-12/v3-20261012-mac-r4/manifest.json'",
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-12/v4-20261024-mac-r2/manifest.json'",
         "歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -482,14 +458,12 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-14/v3-20261012-mac-r4",
+      "artifactDirectory": ".local/data-packs/P-14/v4-20261024-mac-r2",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-14/v3-20261012-mac-r4/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-14/v4-20261024-mac-r2/manifest.json'"
       ],
-      "ownerGates": [
-        "配布前にOffice実機の表示・編集を確認する"
-      ],
+      "ownerGates": [],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -2967,7 +2941,7 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-11-08T00:38:52.367Z",
+  "generatedAt": "2026-11-08T01:12:32.694Z",
   "total": 62,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",
