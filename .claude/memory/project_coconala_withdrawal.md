@@ -27,4 +27,4 @@ metadata:
 
 **2026-11-08 の削除**: 出品台帳 `config/coconala-listings.json`・アカウント・プロフィール・画像、`.claude/scripts/coconala/`、agent `coconala-operator`、skill `/coconala-publish`、管理画面 `/product/coconala`、GEO 受託の納品生成を削除した。
 note の納品版の固定値は台帳の `_noteDelivery` から `data/products/note-pack-deliveries.json` へ移し、規約は `data-pack-standards.md` (データパック・note) と `kindle-publishing-standards.md` (Kindle) に分けた。
-agent は `data-pack-manager`、skill は `/build-data-pack` へ改名した。GitHub Secrets の `MEASUREMENT_SESSION_COCONALA` とキーチェーンの削除はオーナー判断で残る (`AUTH-CREDENTIAL-REGISTER-01`)。
+agent は `data-pack-manager`、skill は `/build-data-pack` へ改名した。同日、オーナーの指示で Mac のキーチェーンの `stats47-measurement-coconala` と登録表 `env-registry.json` の `MEASUREMENT_SESSION_COCONALA` を削除した (GitHub Secrets には元から無かった)。

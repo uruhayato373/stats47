@@ -709,15 +709,14 @@ updated: 2026-11-01
   ③ `low-elevation-population-ratio-5m` の書き手 `packages/gis/src/geo-analysis/low-elevation-population-overlay.py` が `meta.recipe` を書かない (作り直すと未焼きに戻る)。書き手を変えると manifest の `definitionSha256` が合わず `npm run geo:audit-low-elevation` が止まる (`audit-geo-analysis-artifacts.ts:470`) ので、単独では直さず、次に低標高の Geo を再生成するとき (G04-a の ZIP 176 件と 1km メッシュ人口が要る) に同じ作業で直す。直し方は `node --import tsx .claude/scripts/data/lib/print-metric-recipe.ts low-elevation-population-ratio-5m` の出力を `meta.recipe` に入れ、`audit` で recipe の有無も検査する。
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
-### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
+### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 
-- **経緯**: 資格情報の正本は `.claude/config/auth-credentials.json`、状態は管理画面 `/ops/auth`。2026-10-01 に Mac・Windows・CI へ登録済み (ID と登録先は `/ops/auth`)。ココナラは 2026-10-19 の撤退で認証付き計測の対象から外し、Windows のココナラ登録は不要になった。認証付き計測は土曜の Mac 取得へ移した (`MEASUREMENT-MAC-DIRECT-01`)。2026-10-27 に `MEASUREMENT-AUTH-RESTORE-01` (improvements.md) をこのカードへ統合した。経過は `git log -p -- .claude/todo/backlog.md`。
+- **経緯**: 資格情報の正本は `.claude/config/auth-credentials.json`、状態は管理画面 `/ops/auth`。2026-10-01 に Mac・Windows・CI へ登録済み (ID と登録先は `/ops/auth`)。ココナラは 2026-10-19 の撤退で認証付き計測の対象から外し、2026-11-08 に Mac のキーチェーンの `stats47-measurement-coconala` と登録表の `MEASUREMENT_SESSION_COCONALA` を削除した (GitHub Secrets には残っていなかった)。認証付き計測は土曜の Mac 取得へ移した (`MEASUREMENT-MAC-DIRECT-01`)。2026-10-27 に `MEASUREMENT-AUTH-RESTORE-01` (improvements.md) をこのカードへ統合した。経過は `git log -p -- .claude/todo/backlog.md`。
 - **残り (オーナーのみ・パスワードは対話入力)**:
   1. **再認証**: `auth_required` で止まっている取得元 (2026-W42 時点で gsc・kdp、10-19 にもしも) を `node .claude/scripts/measurement/refresh-session.mjs <source> --headed` で入れ直す。検証は `npm run measurement:status -- --check` と次の `data/measurement-cycle/latest.json` の kdp・gsc の freshness が pass であること。
   2. **パスワード経路の実証**: A8・もしも・楽天のパスワードでの自動ログインは未実証。セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は本棚が有効でも Reports 認証で止まることがあり、`latest.json` の `relogin` が `human_required` / `login_failed` なら人の再認証か Mac 側収集を検討する。
-  3. GitHub Secrets の `MEASUREMENT_SESSION_COCONALA` と Mac のキーチェーンの `stats47-measurement-coconala` を消すかを決める。
-- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
