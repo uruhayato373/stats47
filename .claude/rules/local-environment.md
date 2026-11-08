@@ -448,7 +448,7 @@ page-quality (週次 `quality-suite-weekly.yml` の page-quality job) / PSI (週
 hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。
 
 月次監査は親子フォルダーを一度の走査で集計し、ユーザー共通のCodex/Claude保存領域も測る。
-共有履歴DB・認証profileは自動削除しない。定期処理の失敗は成功済みの日次計測とは別に再試行する。
+認証profileは自動削除しない。Codex の会話の投影 DB (`thread_history_*.sqlite`) は、元の記録が消えた exec スレッドの行だけを日次で消す (アプリでの会話は消さない)。定期処理の失敗は成功済みの日次計測とは別に再試行する。
 ビルド成果物とTurbo保存対象から、standalone内に入れ子になった `.next/cache` も除外する。
 
 - Turboは `turbo.json` のキャッシュ上限 `2GB`、同時実行2件。実行時にTurbo自身が回収する。
@@ -493,11 +493,14 @@ R2成果物・provenanceと原典URLの再取得可能性を確認して処理�
 
 | 対象 | 寿命 | 消す主体 |
 |---|---|---|
-| `.next/cache`・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
+| `.next/cache`・`apps/web/.next/dev` (Turbopack の dev キャッシュ)・`apps/{web,admin}/.local/next-*` (別出力先の dev/e2e)・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
+| `.local/*-trial`・`.local/*-debug` (試作・画面キャプチャ。使うスクリプトがフォルダを作り直す) | 14日 | 同上 |
 | `.local/verification/{release,seo,x-visuals}/*`・`.local/geo-source-*` | 30日 (実行ごとのフォルダ単位) | 同上 |
-| `.local/r2/*` (push staging。上位フォルダごとに判定。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる。**`sns` は未投稿の X / Threads 画像の唯一の置き場なので除外**) | 7日 | 同上 |
+| `.local/r2/*` (push staging。上位フォルダごとに判定。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる。`sns` は下の行でファイル単位に判定) | 7日 | 同上 |
+| `.local/r2/sns/**` (SNS 画像の生成・予約の作業領域。画像の正本は private R2 の `sns-assets/` で、`archive-sns-assets.mjs` が予約・投稿後に保全する。予約時にローカルに無ければ `publish-x` / `publish-threads` が private R2 から照合つきで戻す) | 30日 + 0.5GiB (ファイル単位) | 同上 (`fileRetention`) |
 | `~/.claude/projects/**/*.jsonl` (Claude Code の会話記録。`cleanupPeriodDays: 7` が残すサブエージェント分を回収。`memory` とリンク先は対象外) | 7日 (ファイル単位) | 同上 (`fileRetention`) |
-| `~/.codex/{sessions,archived_sessions,generated_images}` (Codex の会話記録と生成画像。`thread_history_*.sqlite` は Codex の内部 DB なので対象外) | 30日 (ファイル単位) | 同上 (`fileRetention`) |
+| `~/.codex/{sessions,archived_sessions,generated_images}` (Codex の会話記録と生成画像。`thread_history_*.sqlite` は下の行) | 7日 + 容量上限 (sessions 2GiB・画像 1GiB。超過分は直近 24 時間を除き古い順。ファイル単位) | 同上 (`fileRetention` の `maxGiB`) |
+| `~/.codex/thread_history_*.sqlite` (会話の投影 DB。記録を消しても行が残り、2026-11-08 に 2,827 スレッドで 5.3GB) | 元の記録が消えた exec スレッドの行だけを消して VACUUM。上限 1GiB を超えたら警告 | 同上 (`codexThreadHistory`) |
 | `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
 | 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
 | git追跡の生snapshot (psi/url-inspection/cloudflare/note/releases/analytics週次) | `prune-state-snapshots.mjs` の `RETENTION_POLICIES` | `fetch-metrics-weekly.yml` |
@@ -528,6 +531,42 @@ tsc だけ並列になる。vitest の残り 86 秒はテスト自身のモジ�
 `.claude/memory`・バックログへ書き、記録は直近の再開と確認にだけ使う (モデル使用量の集計は週ごとに `local-mac.json` へ積み上げるので、
 元の記録を消しても数字は残る)。肥大化の検知は `footprintBudgets` (`.local` 8GiB・`apps/web/.next` 4GiB・`~/.claude/projects` 5GiB・
 Codex の記録と画像 各 2〜3GiB) で、日次の `cleanup` が超過を `latest.json` の warnings に載せる。境界の契約は `npm run local:resources:test`。
+
+**警告だけでは容量は減らない** (2026-11-08)。ブログ写真 845 本の一括生成とその画質確認で `codex exec` を 2 日に約 2,900 回動かし、
+`~/.codex` の記録と画像が 20GB 増えた。日次の掃除は毎朝超過を警告したが、30 日の期限内なので 1 バイトも消さず、空きが 2〜15GiB まで落ちた。
+Codex の記録は期限に加えて `maxGiB` を超えた分を古い順に消す。**スクリプトから `codex exec` を回すときは `--ephemeral` を付け**、
+記録そのものを書かせない (採用した画像は ingest で git / R2 に入るので、Codex 側の写しは要らない)。一括の試作は `.local/<名前>-trial` に置き、
+終わったら成果を git / R2 へ移して消す。
+
+### ローカルに残さない (2026-11-08 オーナー指示)
+
+**ローカルは作業の途中だけ使う場所で、正本を置かない。** 撤退した事業の残骸や、一回きりの調査で作ったものを残すと、容量が増えるだけになる。
+2026-11-08 の棚卸しでは、`.local` に一回きりの調査スクリプト・ログ・試作が 180 個（2.6GB）残っていた。ほかにも次のものがあった。
+- 撤退したココナラの納品パック（2.1GB）
+- R2 に保管済みの Kindle の旧版（870MB）
+
+| 残すもの | 置き場 |
+|---|---|
+| コード・設定・小さい台帳 | git |
+| サイト・配信で使う画像とデータ、商品の固定版 | R2 (公開 / private) |
+| 人が見返す作業記録・候補画像・納品物の控え | Google Drive `stats47/` |
+| 作業の途中だけ要るもの | OS の一時領域 (`os.tmpdir()`)。終わったら消す |
+| ログイン済みブラウザ・小さい作業状態 | `.local` (台帳に auth / state で登録) |
+| 商品・記事の納品物 | private R2 の記事保存 (`note:article save` の `product/`) か Kindle の暗号化保管。ローカルの生成出力は 30 日で消える |
+
+- **スキルとエージェントは作ったものを最後に消す。** 残すものは上の置き場へ移してから消す。
+  一回きりの調査スクリプトやログを `.local` 直下に置かない。
+- **`.local/<名前>` の置き場は `config/local-resources.json` に登録する。** 期限で消すものは `cachePaths`（`ageDays`）、
+  年齢では消さないものは `localRegistry`（`kind`: auth / state / product と `why`）に書く。
+  - 書く前の検査: コード・SKILL.md・agent 定義に台帳の無い `.local/<名前>` があれば、`check-local-registry.mjs` が PR CI で止める。
+  - 書いた後の検査: 日次の `local:cleanup` が `.local` 直下を台帳と照合し、無い名前を `latest.json` の warnings（`local-unregistered`）に載せる。
+- **Drive へ移すときは `node .claude/scripts/lib/drive-archive.mjs <.local/…> <stats47/からの相対パス> --apply`。**
+  コピーした全ファイルの SHA-256 を読み戻して照合し、一致したときだけローカルを消す。Drive 側に同名がある場合は上書きせず止まる。
+  クラウドへのアップロード完了はマウント上の照合では分からないので、Drive のコネクタで実在を確かめる。
+- **事業から撤退したら、その事業の置き場を台帳から外す。** 外すとその置き場は日次の点検で警告され続けるので、
+  正本を R2 か Drive へ移して消すまで残骸が残らない。ログイン情報（`playwright-<名前>-profile`・`-state.json`）も、撤退したら消す。
+- **R2 に正本がある生成物は、ローカルの写しを期限で消す。** Kindle の書籍は `kindle:archive --audit --all --deep` が全冊の暗号化保管を照合してから消し、
+  必要なときは `--restore` で戻す。
 
 WIPのあるworktree、認証profile、参考文献、成果物や運用台帳は年齢だけで消さない。
 `.local/r2` は R2 への push staging で、秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため常駐させない

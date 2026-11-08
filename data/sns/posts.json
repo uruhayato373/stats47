@@ -19544,7 +19544,7 @@
       "id": 701,
       "status": "draft",
       "created_at": "2026-07-16T06:07:32.583Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:50:22.670Z",
       "platform": "instagram",
       "post_type": "image",
       "media_format": "image",
@@ -19560,13 +19560,30 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/701/image-1/eb5c7555b1c3e63f79d242cb2e1feba09805d25d2d5069514736c77549bee1e1.png"
+          },
+          "sha256": "eb5c7555b1c3e63f79d242cb2e1feba09805d25d2d5069514736c77549bee1e1",
+          "bytes": 358822,
+          "mime": "image/png",
+          "source": "sns/buzz-map/population-growth-muni/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 702,
       "status": "draft",
       "created_at": "2026-07-16T06:07:32.595Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:50:25.952Z",
       "platform": "instagram",
       "post_type": "image",
       "media_format": "image",
@@ -19582,13 +19599,30 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/702/image-1/6486f1bd2ffba71fd22c19b1e3137b8a4e2d432b6846c62bb2e41ec13a395eea.png"
+          },
+          "sha256": "6486f1bd2ffba71fd22c19b1e3137b8a4e2d432b6846c62bb2e41ec13a395eea",
+          "bytes": 290350,
+          "mime": "image/png",
+          "source": "sns/buzz-map/vacant-housing-muni/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 703,
       "status": "draft",
       "created_at": "2026-07-16T06:07:32.606Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:50:29.619Z",
       "platform": "instagram",
       "post_type": "image",
       "media_format": "image",
@@ -19604,13 +19638,30 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/703/image-1/2b0ca1fc0279a62005e5cb31b784c932a9ec55c6882b8cf78e15afd59e8a3595.png"
+          },
+          "sha256": "2b0ca1fc0279a62005e5cb31b784c932a9ec55c6882b8cf78e15afd59e8a3595",
+          "bytes": 370112,
+          "mime": "image/png",
+          "source": "sns/buzz-map/no-station-muni/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 704,
       "status": "draft",
       "created_at": "2026-07-16T10:58:49.316Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:50:33.267Z",
       "platform": "instagram",
       "post_type": "image",
       "domain": "buzz-map",
@@ -19624,13 +19675,30 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/704/image-1/d1ad4db757da8c6a212edebac6c43d3d2b8d0244f4ac8b738fb8339d5cbe4830.png"
+          },
+          "sha256": "d1ad4db757da8c6a212edebac6c43d3d2b8d0244f4ac8b738fb8339d5cbe4830",
+          "bytes": 285731,
+          "mime": "image/png",
+          "source": "sns/buzz-map/onsen-place-names/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 705,
       "status": "draft",
       "created_at": "2026-07-17T00:03:43.064Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:50:37.869Z",
       "platform": "x",
       "post_type": "single",
       "domain": "buzz-map",
@@ -19646,13 +19714,30 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/705/image-1/6486f1bd2ffba71fd22c19b1e3137b8a4e2d432b6846c62bb2e41ec13a395eea.png"
+          },
+          "sha256": "6486f1bd2ffba71fd22c19b1e3137b8a4e2d432b6846c62bb2e41ec13a395eea",
+          "bytes": 290350,
+          "mime": "image/png",
+          "source": "sns/buzz-map/vacant-housing-muni/x/stills/vacant-housing-muni-45.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 706,
       "status": "draft",
       "created_at": "2026-07-17T00:03:52.788Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:50:41.748Z",
       "platform": "x",
       "post_type": "single",
       "domain": "buzz-map",
@@ -19668,7 +19753,24 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/706/image-1/d210c062259d5d3ce3d7d1cee55cd9ad62b140798f5886a71637d5c55cf93a4b.png"
+          },
+          "sha256": "d210c062259d5d3ce3d7d1cee55cd9ad62b140798f5886a71637d5c55cf93a4b",
+          "bytes": 299254,
+          "mime": "image/png",
+          "source": "sns/buzz-map/migration-inflow-top-decile-muni/x/stills/migration-inflow-top-decile-muni-45.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 707,
@@ -26329,7 +26431,7 @@
       "id": 896,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.641Z",
-      "updated_at": "2026-10-11T14:31:40.173Z",
+      "updated_at": "2026-11-07T22:50:44.193Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26353,13 +26455,30 @@
       },
       "material_keys": [
         "x/area/39000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/896/image-1/43f3451468b13497d70bb1ca0a3c485711b75ca2571332bd68c2a4951eb04a22.png"
+          },
+          "sha256": "43f3451468b13497d70bb1ca0a3c485711b75ca2571332bd68c2a4951eb04a22",
+          "bytes": 148811,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/39000/x/stills/39000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 897,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.647Z",
-      "updated_at": "2026-10-11T14:31:40.186Z",
+      "updated_at": "2026-11-07T22:50:46.871Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26383,13 +26502,30 @@
       },
       "material_keys": [
         "x/area/40000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/897/image-1/4b4611236a4d77e96d3a4c49fb9ef5842ca81f6bf777024c87ce40bcb1736048.png"
+          },
+          "sha256": "4b4611236a4d77e96d3a4c49fb9ef5842ca81f6bf777024c87ce40bcb1736048",
+          "bytes": 174726,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/40000/x/stills/40000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 898,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.656Z",
-      "updated_at": "2026-10-11T14:31:40.198Z",
+      "updated_at": "2026-11-07T22:50:49.458Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26413,13 +26549,30 @@
       },
       "material_keys": [
         "x/area/41000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/898/image-1/33628ff8866c08fd793d252ecccb98135064737d14a460afdf6ed99cd5a5544b.png"
+          },
+          "sha256": "33628ff8866c08fd793d252ecccb98135064737d14a460afdf6ed99cd5a5544b",
+          "bytes": 169116,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/41000/x/stills/41000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 899,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.664Z",
-      "updated_at": "2026-10-11T14:31:40.210Z",
+      "updated_at": "2026-11-07T22:50:52.060Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26443,13 +26596,30 @@
       },
       "material_keys": [
         "x/area/42000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/899/image-1/9c5f72f63ad139c2bd1bb8096437251cccb8cd2ab4bf4ccde5b33f094941422c.png"
+          },
+          "sha256": "9c5f72f63ad139c2bd1bb8096437251cccb8cd2ab4bf4ccde5b33f094941422c",
+          "bytes": 206874,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/42000/x/stills/42000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 900,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.672Z",
-      "updated_at": "2026-10-11T14:31:40.224Z",
+      "updated_at": "2026-11-07T22:50:54.694Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26473,13 +26643,30 @@
       },
       "material_keys": [
         "x/area/43000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/900/image-1/f13ca88c2af7cb78ce3b8720543400962e7f8571501a03696de858bc058d76b8.png"
+          },
+          "sha256": "f13ca88c2af7cb78ce3b8720543400962e7f8571501a03696de858bc058d76b8",
+          "bytes": 178025,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/43000/x/stills/43000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 901,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.684Z",
-      "updated_at": "2026-10-11T14:31:40.243Z",
+      "updated_at": "2026-11-07T22:50:57.035Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26503,13 +26690,30 @@
       },
       "material_keys": [
         "x/area/44000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/901/image-1/5ae7ca44efbc206c4e122704395b370e912193ccdf3013b1bd3f588f64925f35.png"
+          },
+          "sha256": "5ae7ca44efbc206c4e122704395b370e912193ccdf3013b1bd3f588f64925f35",
+          "bytes": 171790,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/44000/x/stills/44000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 902,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.692Z",
-      "updated_at": "2026-10-11T14:31:40.255Z",
+      "updated_at": "2026-11-07T22:50:59.268Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26533,13 +26737,30 @@
       },
       "material_keys": [
         "x/area/45000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/902/image-1/291172c4c67325fae5879908adf46500602844bc0db0ae99bdd52a10fcaa12d5.png"
+          },
+          "sha256": "291172c4c67325fae5879908adf46500602844bc0db0ae99bdd52a10fcaa12d5",
+          "bytes": 137373,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/45000/x/stills/45000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 903,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.702Z",
-      "updated_at": "2026-10-11T14:31:40.273Z",
+      "updated_at": "2026-11-07T22:51:01.788Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26563,13 +26784,30 @@
       },
       "material_keys": [
         "x/area/46000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/903/image-1/af81e9faa8f480a75c1aea74afc1ba8c0ffc5886dc57a1c37568ccba6ce55fef.png"
+          },
+          "sha256": "af81e9faa8f480a75c1aea74afc1ba8c0ffc5886dc57a1c37568ccba6ce55fef",
+          "bytes": 129338,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/46000/x/stills/46000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
       "id": 904,
       "status": "draft",
       "created_at": "2026-08-30T00:12:20.707Z",
-      "updated_at": "2026-10-11T14:31:40.286Z",
+      "updated_at": "2026-11-07T22:51:04.639Z",
       "platform": "x",
       "post_type": "original",
       "domain": "area",
@@ -26593,6 +26831,23 @@
       },
       "material_keys": [
         "x/area/47000"
+      ],
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/x/904/image-1/665b71650f99eb4672263c1c000e345134492b5d09e29285c95c04996ebc8db2.png"
+          },
+          "sha256": "665b71650f99eb4672263c1c000e345134492b5d09e29285c95c04996ebc8db2",
+          "bytes": 106694,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/47000/x/stills/47000.png",
+          "width": 1200,
+          "height": 630
+        }
       ]
     },
     {
@@ -31314,7 +31569,7 @@
       "id": 1030,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.215Z",
-      "updated_at": "2026-10-21T19:01:46.617Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31333,7 +31588,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/DewAkRUiHtG",
-      "posted_at": "2026-10-21T08:45:01.000Z"
+      "posted_at": "2026-10-21T08:45:01.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1030/image-1/04851c9799383c4a2ae7c3ce6e4ba5b8bfa0c7522a35c660b64f5c7917a4f9ee.png"
+          },
+          "sha256": "04851c9799383c4a2ae7c3ce6e4ba5b8bfa0c7522a35c660b64f5c7917a4f9ee",
+          "bytes": 165001,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/28000/x/stills/28000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1031,
@@ -31378,7 +31650,7 @@
       "id": 1032,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.227Z",
-      "updated_at": "2026-10-22T18:56:00.862Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31397,7 +31669,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/DeyilomCHpX",
-      "posted_at": "2026-10-22T08:20:47.000Z"
+      "posted_at": "2026-10-22T08:20:47.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1032/image-1/9229a037cbf1a8afd6824751086fa96a66b81b28bd9914e0ffbeb3a3a044a7ca.png"
+          },
+          "sha256": "9229a037cbf1a8afd6824751086fa96a66b81b28bd9914e0ffbeb3a3a044a7ca",
+          "bytes": 156866,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/29000/x/stills/29000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1033,
@@ -31442,7 +31731,7 @@
       "id": 1034,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.239Z",
-      "updated_at": "2026-10-23T18:48:15.470Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31461,7 +31750,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/De1JqU1kwVq",
-      "posted_at": "2026-10-23T08:40:41.000Z"
+      "posted_at": "2026-10-23T08:40:41.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1034/image-1/08ba5f846e9a311b7b91844eea46227200502eeec8878df6c74f807d467c3bd8.png"
+          },
+          "sha256": "08ba5f846e9a311b7b91844eea46227200502eeec8878df6c74f807d467c3bd8",
+          "bytes": 142605,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/30000/x/stills/30000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1035,
@@ -31506,7 +31812,7 @@
       "id": 1036,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.250Z",
-      "updated_at": "2026-10-24T17:43:01.634Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31525,7 +31831,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/De3rB8SAo7g",
-      "posted_at": "2026-10-24T08:10:45.000Z"
+      "posted_at": "2026-10-24T08:10:45.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1036/image-1/bcd81eef1d1a572be0a5b6be35a63f45361b1515e3813c2fcc9a015bebae9041.png"
+          },
+          "sha256": "bcd81eef1d1a572be0a5b6be35a63f45361b1515e3813c2fcc9a015bebae9041",
+          "bytes": 139875,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/31000/x/stills/31000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1037,
@@ -31570,7 +31893,7 @@
       "id": 1038,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.261Z",
-      "updated_at": "2026-10-25T17:55:41.319Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31589,7 +31912,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/De6SGHJAoTO",
-      "posted_at": "2026-10-25T08:30:35.000Z"
+      "posted_at": "2026-10-25T08:30:35.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1038/image-1/e9829042703c45b23b84a818d068c96250fbc17af789e8e5ee7444d2a64b8129.png"
+          },
+          "sha256": "e9829042703c45b23b84a818d068c96250fbc17af789e8e5ee7444d2a64b8129",
+          "bytes": 148612,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/32000/x/stills/32000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1039,
@@ -31634,7 +31974,7 @@
       "id": 1040,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.272Z",
-      "updated_at": "2026-10-26T20:13:59.087Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31653,7 +31993,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/De84meIiHhI",
-      "posted_at": "2026-10-26T08:45:32.000Z"
+      "posted_at": "2026-10-26T08:45:32.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1040/image-1/2fa8c52c9e6d93d1ec62563f245997bc69da554644b41427dd7a24f871a21b8a.png"
+          },
+          "sha256": "2fa8c52c9e6d93d1ec62563f245997bc69da554644b41427dd7a24f871a21b8a",
+          "bytes": 166469,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/33000/x/stills/33000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1041,
@@ -31698,7 +32055,7 @@
       "id": 1042,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.283Z",
-      "updated_at": "2026-10-27T19:44:31.337Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31717,7 +32074,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/De_akZpAoQh",
-      "posted_at": "2026-10-27T08:20:50.000Z"
+      "posted_at": "2026-10-27T08:20:50.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1042/image-1/66d6586c2233bccd959fbf70a74e5fa48b4d7bbeb98115667149d33dcca91c89.png"
+          },
+          "sha256": "66d6586c2233bccd959fbf70a74e5fa48b4d7bbeb98115667149d33dcca91c89",
+          "bytes": 178199,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/34000/x/stills/34000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1043,
@@ -31762,7 +32136,7 @@
       "id": 1044,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.294Z",
-      "updated_at": "2026-10-28T19:56:10.379Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31781,7 +32155,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/DfCBqZ3Eege",
-      "posted_at": "2026-10-28T08:40:55.000Z"
+      "posted_at": "2026-10-28T08:40:55.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1044/image-1/0629608a070c3cb6404b1679f311e1b4e3dde21bb5d57d5edf0763b9089c4e2a.png"
+          },
+          "sha256": "0629608a070c3cb6404b1679f311e1b4e3dde21bb5d57d5edf0763b9089c4e2a",
+          "bytes": 173541,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/35000/x/stills/35000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1045,
@@ -31826,7 +32217,7 @@
       "id": 1046,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.304Z",
-      "updated_at": "2026-10-29T19:55:56.447Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31845,7 +32236,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/DfEi-xHkUuF",
-      "posted_at": "2026-10-29T08:10:32.000Z"
+      "posted_at": "2026-10-29T08:10:32.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1046/image-1/d40daea68738b2541ca96483e89ad8de9d3f69007e144cda9cf84dc0624543f3.png"
+          },
+          "sha256": "d40daea68738b2541ca96483e89ad8de9d3f69007e144cda9cf84dc0624543f3",
+          "bytes": 151982,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/36000/x/stills/36000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1047,
@@ -31890,7 +32298,7 @@
       "id": 1048,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.315Z",
-      "updated_at": "2026-10-30T19:46:05.661Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31909,7 +32317,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/DfHKEITkyCG",
-      "posted_at": "2026-10-30T08:30:32.000Z"
+      "posted_at": "2026-10-30T08:30:32.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1048/image-1/2b712b4d73627eedfc8ea1bd76fde36a28cacc225f7b039e5cea63255268d454.png"
+          },
+          "sha256": "2b712b4d73627eedfc8ea1bd76fde36a28cacc225f7b039e5cea63255268d454",
+          "bytes": 184181,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/37000/x/stills/37000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1049,
@@ -31954,7 +32379,7 @@
       "id": 1050,
       "status": "posted",
       "created_at": "2026-09-23T08:51:18.326Z",
-      "updated_at": "2026-10-31T18:53:55.087Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31973,7 +32398,24 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "post_url": "https://www.threads.com/@stats47jp/post/DfJwk0JEw-z",
-      "posted_at": "2026-10-31T08:45:32.000Z"
+      "posted_at": "2026-10-31T08:45:32.000Z",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/threads/1050/image-1/71c64c76e56217219054318b29f7056f8d21cd59eadedd6b8d88277709b0e9e5.png"
+          },
+          "sha256": "71c64c76e56217219054318b29f7056f8d21cd59eadedd6b8d88277709b0e9e5",
+          "bytes": 191997,
+          "mime": "image/png",
+          "source": ".local/r2/sns/area/38000/x/stills/38000.png",
+          "width": 1200,
+          "height": 630
+        }
+      ]
     },
     {
       "id": 1051,
@@ -33836,7 +34278,7 @@
         "note": "承認の記録より前に IG cron が投稿 (2026-10-09)"
       },
       "created_at": "2026-10-09T03:56:52.465Z",
-      "updated_at": "2026-10-22T23:34:45.783Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
@@ -33845,7 +34287,69 @@
       "scheduled_at": "2026-10-09T10:00:00.000Z",
       "post_url": "https://www.instagram.com/p/DeRQY84G5tI/",
       "posted_at": "2026-10-09T10:07:02Z",
-      "external_id": "18099734702638689"
+      "external_id": "18099734702638689",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1083/slide-1/03666dfb908b813305d068bdca6363cddf866b6c25ae6496fb8adcdf74be0da9.png"
+          },
+          "sha256": "03666dfb908b813305d068bdca6363cddf866b6c25ae6496fb8adcdf74be0da9",
+          "bytes": 82015,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/23000-vs-40000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1083/slide-2/410700d155579cba5cd63a2ab748ba02b0c9f9e70f5f186eba673bc6e452023e.png"
+          },
+          "sha256": "410700d155579cba5cd63a2ab748ba02b0c9f9e70f5f186eba673bc6e452023e",
+          "bytes": 186767,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/23000-vs-40000/instagram/stills/slide-2-duel-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1083/slide-3/87ce14f203ad0e4fdea3e74f559d1287583021b2345bd2f7f9cc695eb367a3c5.png"
+          },
+          "sha256": "87ce14f203ad0e4fdea3e74f559d1287583021b2345bd2f7f9cc695eb367a3c5",
+          "bytes": 79685,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/23000-vs-40000/instagram/stills/slide-3-summary-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1083/slide-4/3389e397974c6a61748326404e09cab1c6e75770ad0fb88e885cf24483450227.png"
+          },
+          "sha256": "3389e397974c6a61748326404e09cab1c6e75770ad0fb88e885cf24483450227",
+          "bytes": 123619,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/23000-vs-40000/instagram/stills/slide-4-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1084,
@@ -33858,7 +34362,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:52.743Z",
-      "updated_at": "2026-10-10T15:50:49.357Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -33867,7 +34371,84 @@
       "scheduled_at": "2026-10-10T10:00:00.000Z",
       "posted_at": "2026-10-10T15:50:49.347Z",
       "post_url": "https://www.instagram.com/p/DeUch2EkeJe/",
-      "external_id": "18108998984264676"
+      "external_id": "18108998984264676",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1084/slide-1/870a5f5620c19c12c87859edf03628009987764a9cc3ba125c325d96bbd1918a.png"
+          },
+          "sha256": "870a5f5620c19c12c87859edf03628009987764a9cc3ba125c325d96bbd1918a",
+          "bytes": 86203,
+          "mime": "image/png",
+          "source": "sns/area-carousel/03000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1084/slide-2/a1c77e26c6de3b8785389ed2107b9158fd6f0c737c9f86d6decf6350d922c493.png"
+          },
+          "sha256": "a1c77e26c6de3b8785389ed2107b9158fd6f0c737c9f86d6decf6350d922c493",
+          "bytes": 128319,
+          "mime": "image/png",
+          "source": "sns/area-carousel/03000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1084/slide-3/4dd952216fee3a81cfc8114daddf608092d4f490ebb03cf45f100f24fc4ec3df.png"
+          },
+          "sha256": "4dd952216fee3a81cfc8114daddf608092d4f490ebb03cf45f100f24fc4ec3df",
+          "bytes": 144020,
+          "mime": "image/png",
+          "source": "sns/area-carousel/03000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1084/slide-4/12b0bb3daea191af6149d2805a7a028d16e147d969d4264b10ff04dc47a963a5.png"
+          },
+          "sha256": "12b0bb3daea191af6149d2805a7a028d16e147d969d4264b10ff04dc47a963a5",
+          "bytes": 105569,
+          "mime": "image/png",
+          "source": "sns/area-carousel/03000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1084/slide-5/91f5fa48a682bb7a479532f3b0ef503ab8aa2f38d0739b0baa328b283171be8b.png"
+          },
+          "sha256": "91f5fa48a682bb7a479532f3b0ef503ab8aa2f38d0739b0baa328b283171be8b",
+          "bytes": 114262,
+          "mime": "image/png",
+          "source": "sns/area-carousel/03000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1085,
@@ -33880,7 +34461,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:52.947Z",
-      "updated_at": "2026-10-11T16:16:01.245Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "map-carousel",
@@ -33889,7 +34470,69 @@
       "scheduled_at": "2026-10-11T10:00:00.000Z",
       "posted_at": "2026-10-11T16:16:01.234Z",
       "post_url": "https://www.instagram.com/p/DeXENZAiRWG/",
-      "external_id": "18146175838603331"
+      "external_id": "18146175838603331",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1085/slide-1/39fe9440d939928caf70efed413153ada0fb67bbcf4e5e5071c06288210c8a13.png"
+          },
+          "sha256": "39fe9440d939928caf70efed413153ada0fb67bbcf4e5e5071c06288210c8a13",
+          "bytes": 90700,
+          "mime": "image/png",
+          "source": "sns/map-carousel/beef-consumption-expenditure/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1085/slide-2/2e6aac2ab166bea82866cd0fb2c2e34e158d88f88680e637863f5f62506afd0d.png"
+          },
+          "sha256": "2e6aac2ab166bea82866cd0fb2c2e34e158d88f88680e637863f5f62506afd0d",
+          "bytes": 132902,
+          "mime": "image/png",
+          "source": "sns/map-carousel/beef-consumption-expenditure/instagram/stills/slide-2-choropleth-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1085/slide-3/0a394ac16ef61bd369a084010818bf991911debf501e47aa144f3a4c0ff401de.png"
+          },
+          "sha256": "0a394ac16ef61bd369a084010818bf991911debf501e47aa144f3a4c0ff401de",
+          "bytes": 108406,
+          "mime": "image/png",
+          "source": "sns/map-carousel/beef-consumption-expenditure/instagram/stills/slide-3-topbottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1085/slide-4/e9dec93998dbeed077a1b94101eab79589fe6fbd5be9ced1357fc411100ef5db.png"
+          },
+          "sha256": "e9dec93998dbeed077a1b94101eab79589fe6fbd5be9ced1357fc411100ef5db",
+          "bytes": 128193,
+          "mime": "image/png",
+          "source": "sns/map-carousel/beef-consumption-expenditure/instagram/stills/slide-4-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1086,
@@ -33902,7 +34545,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:53.142Z",
-      "updated_at": "2026-10-12T10:17:25.688Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -33911,7 +34554,84 @@
       "scheduled_at": "2026-10-12T10:00:00.000Z",
       "posted_at": "2026-10-12T10:17:25.676Z",
       "post_url": "https://www.instagram.com/p/DeY_9shld4R/",
-      "external_id": "18115468055047770"
+      "external_id": "18115468055047770",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1086/slide-1/edd3ff470ad3eca9027a3f08fb08c3196b43d4b4624305a27993d7b3adbbb1d9.png"
+          },
+          "sha256": "edd3ff470ad3eca9027a3f08fb08c3196b43d4b4624305a27993d7b3adbbb1d9",
+          "bytes": 132919,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whitebait-consumption-quantity/instagram/stills/slide-1-question-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1086/slide-2/3d9e06119bcd8ab79f94039b02387e548cd9f9e86ec40d8fa39dda61012e0411.png"
+          },
+          "sha256": "3d9e06119bcd8ab79f94039b02387e548cd9f9e86ec40d8fa39dda61012e0411",
+          "bytes": 140881,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whitebait-consumption-quantity/instagram/stills/slide-2-hint-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1086/slide-3/e6ce130b61894a301a3b8f4cc4917793f38a100fef46bbda53e388dc7aec5016.png"
+          },
+          "sha256": "e6ce130b61894a301a3b8f4cc4917793f38a100fef46bbda53e388dc7aec5016",
+          "bytes": 132270,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whitebait-consumption-quantity/instagram/stills/slide-3-answer-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1086/slide-4/3364de0f633a4283f5f0f46f9773f4b0b23bc87d30932294473f593ca993c440.png"
+          },
+          "sha256": "3364de0f633a4283f5f0f46f9773f4b0b23bc87d30932294473f593ca993c440",
+          "bytes": 232941,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whitebait-consumption-quantity/instagram/stills/slide-4-table-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1086/slide-5/c86f9c0721eb2e69cf28e8d962c6a617eb208a73e85b5b9620678c61176be994.png"
+          },
+          "sha256": "c86f9c0721eb2e69cf28e8d962c6a617eb208a73e85b5b9620678c61176be994",
+          "bytes": 133517,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whitebait-consumption-quantity/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1087,
@@ -33924,7 +34644,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:53.389Z",
-      "updated_at": "2026-10-13T10:08:32.152Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -33933,7 +34653,84 @@
       "scheduled_at": "2026-10-13T10:00:00.000Z",
       "posted_at": "2026-10-13T10:08:32.144Z",
       "post_url": "https://www.instagram.com/p/DebjveJFhhC/",
-      "external_id": "18117551341769158"
+      "external_id": "18117551341769158",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1087/slide-1/bcec3d4a0251e9b6eec52a709e218dc4366230a04ce80532c8ab0f7cd0d1fa46.png"
+          },
+          "sha256": "bcec3d4a0251e9b6eec52a709e218dc4366230a04ce80532c8ab0f7cd0d1fa46",
+          "bytes": 92248,
+          "mime": "image/png",
+          "source": "sns/area-carousel/27000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1087/slide-2/174161bbfa60dcbb7776f8522eedfd7f73231eb516fd28a2c5929d219b66e348.png"
+          },
+          "sha256": "174161bbfa60dcbb7776f8522eedfd7f73231eb516fd28a2c5929d219b66e348",
+          "bytes": 143990,
+          "mime": "image/png",
+          "source": "sns/area-carousel/27000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1087/slide-3/32d24c7e769a10c34785383510bc2dbe77328ecdfaef2b420364f36e5e01d4ee.png"
+          },
+          "sha256": "32d24c7e769a10c34785383510bc2dbe77328ecdfaef2b420364f36e5e01d4ee",
+          "bytes": 125383,
+          "mime": "image/png",
+          "source": "sns/area-carousel/27000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1087/slide-4/3071ef0948b3704348f8ad7f99e7f9704bbc9da6a708d17ea88eea0f4183dbf7.png"
+          },
+          "sha256": "3071ef0948b3704348f8ad7f99e7f9704bbc9da6a708d17ea88eea0f4183dbf7",
+          "bytes": 116947,
+          "mime": "image/png",
+          "source": "sns/area-carousel/27000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1087/slide-5/30650b329b7ed0b72a476e322a589384a8cd67e74cd95b119e401cc4f8fc14fc.png"
+          },
+          "sha256": "30650b329b7ed0b72a476e322a589384a8cd67e74cd95b119e401cc4f8fc14fc",
+          "bytes": 114921,
+          "mime": "image/png",
+          "source": "sns/area-carousel/27000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1088,
@@ -33946,7 +34743,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:53.642Z",
-      "updated_at": "2026-10-14T08:26:33.127Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "reel",
       "domain": "ranking-quiz-reel",
@@ -33955,7 +34752,19 @@
       "scheduled_at": "2026-10-14T03:00:00.000Z",
       "posted_at": "2026-10-14T08:26:33.114Z",
       "post_url": "https://www.instagram.com/reel/Ded81JJipH-/",
-      "external_id": "18139097041626193"
+      "external_id": "18139097041626193",
+      "assets": [
+        {
+          "role": "video",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1088/video-1.mp4",
+          "sha256": "33b1ec27db0bf85d1506835144dc31b87c56d755ac881ffc26d7b386cd5064d5",
+          "bytes": 1926205,
+          "mime": "video/mp4",
+          "source": "sns/ranking-quiz-reel/ramen-dining-consumption-expenditure/instagram/reel.mp4"
+        }
+      ]
     },
     {
       "id": 1089,
@@ -33968,7 +34777,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.050Z",
-      "updated_at": "2026-10-14T15:01:19.683Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
@@ -33977,7 +34786,84 @@
       "scheduled_at": "2026-10-14T10:00:00.000Z",
       "posted_at": "2026-10-14T15:01:19.672Z",
       "post_url": "https://www.instagram.com/p/DeeqCv1lvuF/",
-      "external_id": "18087617363288464"
+      "external_id": "18087617363288464",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1089/slide-1/da82ad5811172f364cca48c20079aee2ef37d680f2ac7c5e3f5864cf1188e809.png"
+          },
+          "sha256": "da82ad5811172f364cca48c20079aee2ef37d680f2ac7c5e3f5864cf1188e809",
+          "bytes": 103245,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1089/slide-2/70a6cb40b44b178f57111f66340f0d648f7c3c1a26534960e0418af965248122.png"
+          },
+          "sha256": "70a6cb40b44b178f57111f66340f0d648f7c3c1a26534960e0418af965248122",
+          "bytes": 102608,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio/instagram/stills/slide-2-scatter-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1089/slide-3/670dd76693507af0739b8d538d94d0a954c9c0cfc03af9c9f0c20f47df4e645a.png"
+          },
+          "sha256": "670dd76693507af0739b8d538d94d0a954c9c0cfc03af9c9f0c20f47df4e645a",
+          "bytes": 156883,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio/instagram/stills/slide-3-highlights-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1089/slide-4/bc53d6700a8c931f2eb88a929c0b1c91705af86e4f2cb1888b96f7c896940b8e.png"
+          },
+          "sha256": "bc53d6700a8c931f2eb88a929c0b1c91705af86e4f2cb1888b96f7c896940b8e",
+          "bytes": 100716,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio/instagram/stills/slide-4-caution-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1089/slide-5/dfaf33f496519d36941505865a634bb1d8737c449b95f3452e4c3e9918698b02.png"
+          },
+          "sha256": "dfaf33f496519d36941505865a634bb1d8737c449b95f3452e4c3e9918698b02",
+          "bytes": 116064,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/coffee-shop-consumption-expenditure--final-education-university-graduate-school-ratio/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1090,
@@ -33990,7 +34876,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.275Z",
-      "updated_at": "2026-10-15T14:53:39.133Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -33999,7 +34885,84 @@
       "scheduled_at": "2026-10-15T10:00:00.000Z",
       "posted_at": "2026-10-15T14:53:39.121Z",
       "post_url": "https://www.instagram.com/p/DehN9mcjg9p/",
-      "external_id": "18055045895804076"
+      "external_id": "18055045895804076",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1090/slide-1/673ddc8b73c8cd1301af852f086323ca5b920fdcf1e643e08b67ccb98422f915.png"
+          },
+          "sha256": "673ddc8b73c8cd1301af852f086323ca5b920fdcf1e643e08b67ccb98422f915",
+          "bytes": 133681,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/mochi-consumption-expenditure/instagram/stills/slide-1-question-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1090/slide-2/35c7f0fed9342f4b7525dede5708f9d1743faedb9458f5ae94ed976fb87a8d61.png"
+          },
+          "sha256": "35c7f0fed9342f4b7525dede5708f9d1743faedb9458f5ae94ed976fb87a8d61",
+          "bytes": 136465,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/mochi-consumption-expenditure/instagram/stills/slide-2-hint-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1090/slide-3/70adf4d996a92dacc297a1940950be6eff8a3afa3320d4d982a0866e061a7810.png"
+          },
+          "sha256": "70adf4d996a92dacc297a1940950be6eff8a3afa3320d4d982a0866e061a7810",
+          "bytes": 126229,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/mochi-consumption-expenditure/instagram/stills/slide-3-answer-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1090/slide-4/c95792d268c5c7c4db385788371343b7cebc73e296783f1ea743cb99b77d72a8.png"
+          },
+          "sha256": "c95792d268c5c7c4db385788371343b7cebc73e296783f1ea743cb99b77d72a8",
+          "bytes": 242764,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/mochi-consumption-expenditure/instagram/stills/slide-4-table-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1090/slide-5/87f87f2e012f20f95f30940b83fcdf8136e6c85eb8897e16a082769cff4fdfbb.png"
+          },
+          "sha256": "87f87f2e012f20f95f30940b83fcdf8136e6c85eb8897e16a082769cff4fdfbb",
+          "bytes": 134545,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/mochi-consumption-expenditure/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1091,
@@ -34012,7 +34975,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.435Z",
-      "updated_at": "2026-10-16T14:45:29.781Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
@@ -34021,7 +34984,69 @@
       "scheduled_at": "2026-10-16T10:00:00.000Z",
       "posted_at": "2026-10-16T14:45:29.773Z",
       "post_url": "https://www.instagram.com/p/Dejx0ayEZ6Z/",
-      "external_id": "18491630785107786"
+      "external_id": "18491630785107786",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1091/slide-1/de3d7d82a1ecc666730a51dbac0c68792fced9c3f5a0b719fee045cdcaf6e3cf.png"
+          },
+          "sha256": "de3d7d82a1ecc666730a51dbac0c68792fced9c3f5a0b719fee045cdcaf6e3cf",
+          "bytes": 84703,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/01000-vs-47000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1091/slide-2/891994795da116abfd7fafd727a27a7d22c8d464a0f50fc136c52888846f3202.png"
+          },
+          "sha256": "891994795da116abfd7fafd727a27a7d22c8d464a0f50fc136c52888846f3202",
+          "bytes": 181450,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/01000-vs-47000/instagram/stills/slide-2-duel-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1091/slide-3/9bfa8a0189e7afc2d00b3147f09fa413a595a232f9240bd533be2e8732a925f2.png"
+          },
+          "sha256": "9bfa8a0189e7afc2d00b3147f09fa413a595a232f9240bd533be2e8732a925f2",
+          "bytes": 81262,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/01000-vs-47000/instagram/stills/slide-3-summary-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1091/slide-4/3007304f0798b9efe4f93a38874e4ee4ae7c333f2eabc1ae471d923c7e4ebff1.png"
+          },
+          "sha256": "3007304f0798b9efe4f93a38874e4ee4ae7c333f2eabc1ae471d923c7e4ebff1",
+          "bytes": 125031,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/01000-vs-47000/instagram/stills/slide-4-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1092,
@@ -34034,7 +35059,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:54.634Z",
-      "updated_at": "2026-10-17T13:38:56.905Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -34043,7 +35068,84 @@
       "scheduled_at": "2026-10-17T10:00:00.000Z",
       "posted_at": "2026-10-17T13:38:56.892Z",
       "post_url": "https://www.instagram.com/p/DemPAAgG6MN/",
-      "external_id": "17946309219348083"
+      "external_id": "17946309219348083",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1092/slide-1/18461b7a3597f2704f6681bc3c33a24f6bd36b42899fd36c3cc0684564c531af.png"
+          },
+          "sha256": "18461b7a3597f2704f6681bc3c33a24f6bd36b42899fd36c3cc0684564c531af",
+          "bytes": 87159,
+          "mime": "image/png",
+          "source": "sns/area-carousel/17000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1092/slide-2/6c9dfa80c7febd2dc0bfd7dcc76dc222a0d0dfc029c60c2544d70e207901a34a.png"
+          },
+          "sha256": "6c9dfa80c7febd2dc0bfd7dcc76dc222a0d0dfc029c60c2544d70e207901a34a",
+          "bytes": 125232,
+          "mime": "image/png",
+          "source": "sns/area-carousel/17000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1092/slide-3/35b632af676e7b1bdd9727b728c2da680ef46ecc342d9b4104f56b93c6ec6dc7.png"
+          },
+          "sha256": "35b632af676e7b1bdd9727b728c2da680ef46ecc342d9b4104f56b93c6ec6dc7",
+          "bytes": 122292,
+          "mime": "image/png",
+          "source": "sns/area-carousel/17000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1092/slide-4/aeead11f2fb020759a1f6b717ce1f48dad7086b7379b08a3f59427084d414a53.png"
+          },
+          "sha256": "aeead11f2fb020759a1f6b717ce1f48dad7086b7379b08a3f59427084d414a53",
+          "bytes": 94965,
+          "mime": "image/png",
+          "source": "sns/area-carousel/17000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1092/slide-5/937584277701b865dceffcb577a3d8ea497b29aa63cc569bc625e84e3d80e96a.png"
+          },
+          "sha256": "937584277701b865dceffcb577a3d8ea497b29aa63cc569bc625e84e3d80e96a",
+          "bytes": 113815,
+          "mime": "image/png",
+          "source": "sns/area-carousel/17000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1093,
@@ -34076,7 +35178,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:55.500Z",
-      "updated_at": "2026-10-19T16:56:09.463Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -34085,7 +35187,84 @@
       "scheduled_at": "2026-10-19T10:00:00.000Z",
       "posted_at": "2026-10-19T16:56:09.455Z",
       "post_url": "https://www.instagram.com/p/DervKb2lO3K/",
-      "external_id": "18104868320458484"
+      "external_id": "18104868320458484",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1094/slide-1/902e9485b1a5ab6ff04b1a1b1d7f891577c856f9cd5169f21548e83957201280.png"
+          },
+          "sha256": "902e9485b1a5ab6ff04b1a1b1d7f891577c856f9cd5169f21548e83957201280",
+          "bytes": 136184,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/katsuobushi-consumption-quantity/instagram/stills/slide-1-question-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1094/slide-2/2f5ee29f4e6b5c31742f7f6d2e953acf127577f39784200718d3247ddd1b41f4.png"
+          },
+          "sha256": "2f5ee29f4e6b5c31742f7f6d2e953acf127577f39784200718d3247ddd1b41f4",
+          "bytes": 141710,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/katsuobushi-consumption-quantity/instagram/stills/slide-2-hint-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1094/slide-3/1eb7f78fbcb270039b954b7cb2a3784dc79c57b055bc7feed178f9c2fb4663a0.png"
+          },
+          "sha256": "1eb7f78fbcb270039b954b7cb2a3784dc79c57b055bc7feed178f9c2fb4663a0",
+          "bytes": 132828,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/katsuobushi-consumption-quantity/instagram/stills/slide-3-answer-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1094/slide-4/477e480f8063cf904b99ff6d48fce6c74bb5689129dc8ffa17f4fc6f4f53c8f8.png"
+          },
+          "sha256": "477e480f8063cf904b99ff6d48fce6c74bb5689129dc8ffa17f4fc6f4f53c8f8",
+          "bytes": 233943,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/katsuobushi-consumption-quantity/instagram/stills/slide-4-table-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1094/slide-5/9c63ecdd17744b71a8032dbd85fe2f8eb9776ffce549e9f77e5e95acc349f0f6.png"
+          },
+          "sha256": "9c63ecdd17744b71a8032dbd85fe2f8eb9776ffce549e9f77e5e95acc349f0f6",
+          "bytes": 133321,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/katsuobushi-consumption-quantity/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1095,
@@ -34098,7 +35277,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:55.821Z",
-      "updated_at": "2026-10-20T14:57:52.622Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -34107,7 +35286,84 @@
       "scheduled_at": "2026-10-20T10:00:00.000Z",
       "posted_at": "2026-10-20T14:57:52.611Z",
       "post_url": "https://www.instagram.com/p/DeuGa1zGqbw/",
-      "external_id": "18037899263656975"
+      "external_id": "18037899263656975",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1095/slide-1/58df37bb1eefddd7c7f1d74b0c81d852c4cc0cb23e32800b394a56d235eee489.png"
+          },
+          "sha256": "58df37bb1eefddd7c7f1d74b0c81d852c4cc0cb23e32800b394a56d235eee489",
+          "bytes": 84846,
+          "mime": "image/png",
+          "source": "sns/area-carousel/45000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1095/slide-2/49a10b024902a3be1f9ed856927cbad89c3db81965df5e5293a42b89c4fbeb07.png"
+          },
+          "sha256": "49a10b024902a3be1f9ed856927cbad89c3db81965df5e5293a42b89c4fbeb07",
+          "bytes": 138029,
+          "mime": "image/png",
+          "source": "sns/area-carousel/45000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1095/slide-3/3db447527b7194d9a94a10bc4534913c27a7de6cba2ce5a01db5d1960e42e301.png"
+          },
+          "sha256": "3db447527b7194d9a94a10bc4534913c27a7de6cba2ce5a01db5d1960e42e301",
+          "bytes": 148639,
+          "mime": "image/png",
+          "source": "sns/area-carousel/45000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1095/slide-4/1dcf0345727d91bac6138c8cce6b1870eae9c1289a598fbd38b55856055d7c12.png"
+          },
+          "sha256": "1dcf0345727d91bac6138c8cce6b1870eae9c1289a598fbd38b55856055d7c12",
+          "bytes": 128566,
+          "mime": "image/png",
+          "source": "sns/area-carousel/45000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1095/slide-5/4be9c94375fc911af16464ca09a04f3760bf5691193e7844ccde57ec3e9f97bc.png"
+          },
+          "sha256": "4be9c94375fc911af16464ca09a04f3760bf5691193e7844ccde57ec3e9f97bc",
+          "bytes": 114084,
+          "mime": "image/png",
+          "source": "sns/area-carousel/45000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1096,
@@ -34120,7 +35376,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:56.127Z",
-      "updated_at": "2026-10-21T08:18:11.964Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "reel",
       "domain": "bar-chart-race",
@@ -34129,7 +35385,19 @@
       "scheduled_at": "2026-10-21T03:00:00.000Z",
       "posted_at": "2026-10-21T08:18:11.952Z",
       "post_url": "https://www.instagram.com/reel/Dev9cQrDsTg/",
-      "external_id": "18118028683772477"
+      "external_id": "18118028683772477",
+      "assets": [
+        {
+          "role": "video",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1096/video-1.mp4",
+          "sha256": "e8e8b684e8b55bd0499c43471500e0a21ad34bd8d3206a09512a162e49765318",
+          "bytes": 12343962,
+          "mime": "video/mp4",
+          "source": "sns/bar-chart-race/coffee-consumption-quantity/instagram/reel.mp4"
+        }
+      ]
     },
     {
       "id": 1097,
@@ -34142,7 +35410,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:56.308Z",
-      "updated_at": "2026-10-21T15:05:25.192Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
@@ -34151,7 +35419,84 @@
       "scheduled_at": "2026-10-21T10:00:00.000Z",
       "posted_at": "2026-10-21T15:05:25.184Z",
       "post_url": "https://www.instagram.com/p/DewsE6nlF61/",
-      "external_id": "18096894491128015"
+      "external_id": "18096894491128015",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1097/slide-1/822d0d8a5e7bd89fbaafedd3de55ca3b254f72f06229edce7967a5cc4dda9c49.png"
+          },
+          "sha256": "822d0d8a5e7bd89fbaafedd3de55ca3b254f72f06229edce7967a5cc4dda9c49",
+          "bytes": 98266,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/fish-pickled-consumption-expenditure--average-temperature/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1097/slide-2/291e4d0519b999d71301c25ffe48a322ef98ba3e4dff029956ca45200f97d550.png"
+          },
+          "sha256": "291e4d0519b999d71301c25ffe48a322ef98ba3e4dff029956ca45200f97d550",
+          "bytes": 99738,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/fish-pickled-consumption-expenditure--average-temperature/instagram/stills/slide-2-scatter-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1097/slide-3/21a89cb354ad6a80bab2cde47c98a34c4c870a59fc7d9030074544ba5fd71133.png"
+          },
+          "sha256": "21a89cb354ad6a80bab2cde47c98a34c4c870a59fc7d9030074544ba5fd71133",
+          "bytes": 142310,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/fish-pickled-consumption-expenditure--average-temperature/instagram/stills/slide-3-highlights-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1097/slide-4/900f1e0f8bcbc90c4705dc024695bfe24efdfe528031399eee06bcdb21ab35d8.png"
+          },
+          "sha256": "900f1e0f8bcbc90c4705dc024695bfe24efdfe528031399eee06bcdb21ab35d8",
+          "bytes": 101337,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/fish-pickled-consumption-expenditure--average-temperature/instagram/stills/slide-4-caution-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1097/slide-5/dfaf33f496519d36941505865a634bb1d8737c449b95f3452e4c3e9918698b02.png"
+          },
+          "sha256": "dfaf33f496519d36941505865a634bb1d8737c449b95f3452e4c3e9918698b02",
+          "bytes": 116064,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/fish-pickled-consumption-expenditure--average-temperature/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1098,
@@ -34164,7 +35509,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:57.345Z",
-      "updated_at": "2026-10-22T15:06:14.353Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -34173,7 +35518,84 @@
       "scheduled_at": "2026-10-22T10:00:00.000Z",
       "posted_at": "2026-10-22T15:06:14.339Z",
       "post_url": "https://www.instagram.com/p/DezQ90RFY8G/",
-      "external_id": "18111481052079159"
+      "external_id": "18111481052079159",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1098/slide-1/f72c7452364e8a2cc1bb01ae13aee82a3ebdbb7ce8d96245d3030fd2ef0598a0.png"
+          },
+          "sha256": "f72c7452364e8a2cc1bb01ae13aee82a3ebdbb7ce8d96245d3030fd2ef0598a0",
+          "bytes": 135797,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whisky-consumption-expenditure/instagram/stills/slide-1-question-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1098/slide-2/95675e46febc00424f6ffa3e44de5a73afe5fbe7ad6e3e9374d960fc8c79ce11.png"
+          },
+          "sha256": "95675e46febc00424f6ffa3e44de5a73afe5fbe7ad6e3e9374d960fc8c79ce11",
+          "bytes": 140813,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whisky-consumption-expenditure/instagram/stills/slide-2-hint-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1098/slide-3/5e51b11a3c64b554cf6eda43fe8998febc43f75998a673bb232f31141cbeee69.png"
+          },
+          "sha256": "5e51b11a3c64b554cf6eda43fe8998febc43f75998a673bb232f31141cbeee69",
+          "bytes": 130530,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whisky-consumption-expenditure/instagram/stills/slide-3-answer-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1098/slide-4/e45f374a42cbfbe8b8e3342e4d3cbb4d9a2cdebd2b1fb4228504a0e8953cea2f.png"
+          },
+          "sha256": "e45f374a42cbfbe8b8e3342e4d3cbb4d9a2cdebd2b1fb4228504a0e8953cea2f",
+          "bytes": 248169,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whisky-consumption-expenditure/instagram/stills/slide-4-table-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1098/slide-5/3fe17a5bfeccf2c2da163de7f0ab2fe5d7184e396e422502eef04d0b8d0ac88e.png"
+          },
+          "sha256": "3fe17a5bfeccf2c2da163de7f0ab2fe5d7184e396e422502eef04d0b8d0ac88e",
+          "bytes": 133466,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/whisky-consumption-expenditure/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1099,
@@ -34186,7 +35608,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:57.733Z",
-      "updated_at": "2026-10-23T14:56:25.735Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
@@ -34195,7 +35617,69 @@
       "scheduled_at": "2026-10-23T10:00:00.000Z",
       "posted_at": "2026-10-23T14:56:25.722Z",
       "post_url": "https://www.instagram.com/p/De10owrILJa/",
-      "external_id": "17987181066088665"
+      "external_id": "17987181066088665",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1099/slide-1/7d3d6b8d0daa47bdc26a72aafe1cfbd4209fcc6468cf1b986f06e4650e8b94b8.png"
+          },
+          "sha256": "7d3d6b8d0daa47bdc26a72aafe1cfbd4209fcc6468cf1b986f06e4650e8b94b8",
+          "bytes": 82178,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/26000-vs-28000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1099/slide-2/e22d4f0a8bfcdd44a43a5ef34ffb4870d069d7170b19cd253062b66b53d5654b.png"
+          },
+          "sha256": "e22d4f0a8bfcdd44a43a5ef34ffb4870d069d7170b19cd253062b66b53d5654b",
+          "bytes": 158796,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/26000-vs-28000/instagram/stills/slide-2-duel-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1099/slide-3/b049ddef3b580e58483bebb9da57cbfd0278bdbc8792ff1e74d2e06f56f07588.png"
+          },
+          "sha256": "b049ddef3b580e58483bebb9da57cbfd0278bdbc8792ff1e74d2e06f56f07588",
+          "bytes": 79039,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/26000-vs-28000/instagram/stills/slide-3-summary-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1099/slide-4/612d837505f3d654efd40038ce517d72a50eee895843924f77510b5ac0c76835.png"
+          },
+          "sha256": "612d837505f3d654efd40038ce517d72a50eee895843924f77510b5ac0c76835",
+          "bytes": 124012,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/26000-vs-28000/instagram/stills/slide-4-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1100,
@@ -34208,7 +35692,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:57.877Z",
-      "updated_at": "2026-10-24T13:58:09.918Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
@@ -34217,7 +35701,84 @@
       "scheduled_at": "2026-10-24T10:00:00.000Z",
       "posted_at": "2026-10-24T13:58:09.904Z",
       "post_url": "https://www.instagram.com/p/De4Sw8GFW6n/",
-      "external_id": "18115132349145176"
+      "external_id": "18115132349145176",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1100/slide-1/2a479c477c87d099cebef944be5217f405fcbdf1896e88b762d963feac4cc8f5.png"
+          },
+          "sha256": "2a479c477c87d099cebef944be5217f405fcbdf1896e88b762d963feac4cc8f5",
+          "bytes": 97734,
+          "mime": "image/png",
+          "source": "sns/area-carousel/15000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1100/slide-2/2d4d6ddb6a2502766f88fab54eca049c618fa24d190388f0ad01e89038b18fcf.png"
+          },
+          "sha256": "2d4d6ddb6a2502766f88fab54eca049c618fa24d190388f0ad01e89038b18fcf",
+          "bytes": 125246,
+          "mime": "image/png",
+          "source": "sns/area-carousel/15000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1100/slide-3/1b9f30e97bf782942b70518d5a72342ac589196eab33d2094a070e19dca9fadb.png"
+          },
+          "sha256": "1b9f30e97bf782942b70518d5a72342ac589196eab33d2094a070e19dca9fadb",
+          "bytes": 119220,
+          "mime": "image/png",
+          "source": "sns/area-carousel/15000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1100/slide-4/4f4dfac26001f6b47f865273bb46795520cd84e32792674c6f379f2d593437c2.png"
+          },
+          "sha256": "4f4dfac26001f6b47f865273bb46795520cd84e32792674c6f379f2d593437c2",
+          "bytes": 103255,
+          "mime": "image/png",
+          "source": "sns/area-carousel/15000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1100/slide-5/97c2073168993333dce8b7e482c5a37fe63e6ec94fef5de464d7faa11d335f90.png"
+          },
+          "sha256": "97c2073168993333dce8b7e482c5a37fe63e6ec94fef5de464d7faa11d335f90",
+          "bytes": 114221,
+          "mime": "image/png",
+          "source": "sns/area-carousel/15000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1101,
@@ -34250,7 +35811,7 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:58.253Z",
-      "updated_at": "2026-10-26T16:44:40.448Z",
+      "updated_at": "2026-11-07T22:50:03.818Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
@@ -34259,7 +35820,84 @@
       "scheduled_at": "2026-10-26T10:00:00.000Z",
       "posted_at": "2026-10-26T16:44:40.434Z",
       "post_url": "https://www.instagram.com/p/De9vaK6ldZE/",
-      "external_id": "17960757177011599"
+      "external_id": "17960757177011599",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1102/slide-1/6116079b4edac91a36f93b6b9325e54373bffab6320d68eda1c2414cea5f0c2c.png"
+          },
+          "sha256": "6116079b4edac91a36f93b6b9325e54373bffab6320d68eda1c2414cea5f0c2c",
+          "bytes": 135055,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/white-bread-consumption-quantity/instagram/stills/slide-1-question-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1102/slide-2/9a6a0d3348ec7e6e3a436c0a759b2aa03cfc72b821830976f5ee5a091aa73f7a.png"
+          },
+          "sha256": "9a6a0d3348ec7e6e3a436c0a759b2aa03cfc72b821830976f5ee5a091aa73f7a",
+          "bytes": 148611,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/white-bread-consumption-quantity/instagram/stills/slide-2-hint-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1102/slide-3/baeaedf76dc669986aea1c085c7b88324a1b63f3ca1bc4005c5c39c1292e1e08.png"
+          },
+          "sha256": "baeaedf76dc669986aea1c085c7b88324a1b63f3ca1bc4005c5c39c1292e1e08",
+          "bytes": 141778,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/white-bread-consumption-quantity/instagram/stills/slide-3-answer-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1102/slide-4/4f5b40c2d165773115e2c7231f0ec8e7ca6f0caabdc3e038ae1cc52547f77df4.png"
+          },
+          "sha256": "4f5b40c2d165773115e2c7231f0ec8e7ca6f0caabdc3e038ae1cc52547f77df4",
+          "bytes": 261696,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/white-bread-consumption-quantity/instagram/stills/slide-4-table-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1102/slide-5/73603ec5224cd208c230b44eb57280b272039a689e89a315f9a27fb773fabf3c.png"
+          },
+          "sha256": "73603ec5224cd208c230b44eb57280b272039a689e89a315f9a27fb773fabf3c",
+          "bytes": 134760,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/white-bread-consumption-quantity/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1103,
@@ -34272,13 +35910,90 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:58.813Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:51:18.713Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
       "content_key": "33000",
       "caption": "【都道府県データ】岡山県、全国で何位？\n\n全国トップクラス:\n平均余命（女性 0歳時点・平均寿命） 1位（88.29年・2020年）\n乳用牛飼養頭数（乳用牛・めすの飼養頭数合計） 9位（15100頭・2025年）\n粗出生率 9位（6.27人口千対・2023年）\n二人以上世帯の1か月の消費支出 9位（324.2千円・2024年）\n博物館数 10位（17.6館・2021年）\n\n全国では下位:\n平均初婚年齢（夫）（夫の年齢） 44位（30.1歳・2023年）\n海面漁業漁獲量 38位（3127トン・2023年）\n食料費割合 38位（26.3％・2024年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n出典: 人口動態統計（2020年）、畜産統計調査（2025年）、人口動態統計（2023年）、社会・人口統計体系（2024年）、社会・人口統計体系（2021年）、社会・人口統計体系（2023年）\n\n#都道府県データ #統計 #地方創生 #ランキング #都道府県あるある #暮らし #地域比較 #日本 #データで見る日本 #岡山県",
-      "scheduled_at": "2026-10-27T10:00:00.000Z"
+      "scheduled_at": "2026-10-27T10:00:00.000Z",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1103/slide-1/fb9990c7c02b784857d18ac605f3b2f6f0072982c238161918771af285ba42a9.png"
+          },
+          "sha256": "fb9990c7c02b784857d18ac605f3b2f6f0072982c238161918771af285ba42a9",
+          "bytes": 96084,
+          "mime": "image/png",
+          "source": "sns/area-carousel/33000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1103/slide-2/32079633436ea0c583b7b85325a54c1480b2cbf38b4fc8dcb79047e5ceca6600.png"
+          },
+          "sha256": "32079633436ea0c583b7b85325a54c1480b2cbf38b4fc8dcb79047e5ceca6600",
+          "bytes": 166155,
+          "mime": "image/png",
+          "source": "sns/area-carousel/33000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1103/slide-3/bb6ee55bd987092c17904606050bc8a0afbca83a9136d38942fef56b81044454.png"
+          },
+          "sha256": "bb6ee55bd987092c17904606050bc8a0afbca83a9136d38942fef56b81044454",
+          "bytes": 121319,
+          "mime": "image/png",
+          "source": "sns/area-carousel/33000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1103/slide-4/a77bedf26a2bddc77eaed92c408ac5eb3b29c4ce4810fd7d7f09b16765c27d9b.png"
+          },
+          "sha256": "a77bedf26a2bddc77eaed92c408ac5eb3b29c4ce4810fd7d7f09b16765c27d9b",
+          "bytes": 124545,
+          "mime": "image/png",
+          "source": "sns/area-carousel/33000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1103/slide-5/7a8fdf2d8fd062bd59a4c198c06b6ec15a0aad574bce4ddee384a990dc737146.png"
+          },
+          "sha256": "7a8fdf2d8fd062bd59a4c198c06b6ec15a0aad574bce4ddee384a990dc737146",
+          "bytes": 112953,
+          "mime": "image/png",
+          "source": "sns/area-carousel/33000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1104,
@@ -34291,13 +36006,25 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:59.099Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:51:19.901Z",
       "platform": "instagram",
       "post_type": "reel",
       "domain": "ranking-quiz-reel",
       "content_key": "tuna-consumption-quantity",
       "caption": "【都道府県クイズ】まぐろをいちばん多く買う県は？\n\nA 青森県\nB 静岡県\nC 群馬県\n\n答えは動画の最後に👀\n予想をコメントで教えてください💬\n\n保存して、お寿司の話題に📌\n全47都道府県のランキングはプロフィールのリンクから\n\nデータ: 総務省「家計調査」2024年（県庁所在市・二人以上世帯の年間購入量（2024年））\n\n#都道府県クイズ #都道府県ランキング #まぐろ #マグロ #家計調査 #雑学 #クイズ #統計 #stats47",
-      "scheduled_at": "2026-10-28T03:00:00.000Z"
+      "scheduled_at": "2026-10-28T03:00:00.000Z",
+      "assets": [
+        {
+          "role": "video",
+          "order": 1,
+          "state": "archived",
+          "drive_path": "SNS素材/instagram/1104/video-1.mp4",
+          "sha256": "0bd072d68d27f5157c34348dacaaf51e894cb83c9bb77b31c3adc2aa57e6571e",
+          "bytes": 1863775,
+          "mime": "video/mp4",
+          "source": "sns/ranking-quiz-reel/tuna-consumption-quantity/instagram/reel.mp4"
+        }
+      ]
     },
     {
       "id": 1105,
@@ -34310,13 +36037,90 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:59.252Z",
-      "updated_at": "2026-10-21T01:24:14.949Z",
+      "updated_at": "2026-11-07T22:51:35.631Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "correlation-carousel",
       "content_key": "actual-income-worker-households-per-month--accommodation-consumption-expenditure",
       "caption": "【データの相関】実収入 × 宿泊料消費支出額\n\n収入の多い県ほど、宿泊にお金を使う？\n\n縦軸: 宿泊料消費支出額（円・2024年）出典: 家計調査\n横軸: 実収入（千円・2024年）出典: 社会・人口統計体系\n\n相関係数 r=0.77（人口の影響を除くと r=0.72）\n\n相関は因果関係を示しません。\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県のデータが見られます\n\n#都道府県データ #統計 #相関 #データ分析 #日本 #ランキング #暮らし #地域比較 #データで見る日本 #administrativefinancial #economy",
-      "scheduled_at": "2026-10-28T10:00:00.000Z"
+      "scheduled_at": "2026-10-28T10:00:00.000Z",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1105/slide-1/2f277cc889c117e36e57e244109dd77431deca1c44157c793da00c1324c5e6c2.png"
+          },
+          "sha256": "2f277cc889c117e36e57e244109dd77431deca1c44157c793da00c1324c5e6c2",
+          "bytes": 96662,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1105/slide-2/deb77e2719130a25cb3a1461a24bb9715ab2f090e0dfb0c7595a1f320914aef1.png"
+          },
+          "sha256": "deb77e2719130a25cb3a1461a24bb9715ab2f090e0dfb0c7595a1f320914aef1",
+          "bytes": 100249,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/stills/slide-2-scatter-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1105/slide-3/b0ae6a122deb9916f879cad87aa3d63cd8b9b45496ec654ea7c7aceff940e4e7.png"
+          },
+          "sha256": "b0ae6a122deb9916f879cad87aa3d63cd8b9b45496ec654ea7c7aceff940e4e7",
+          "bytes": 138171,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/stills/slide-3-highlights-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1105/slide-4/b2b52e8abb35fed1a004f9db9722661377b9a9e8837bbe09a8ade6b170cbaf39.png"
+          },
+          "sha256": "b2b52e8abb35fed1a004f9db9722661377b9a9e8837bbe09a8ade6b170cbaf39",
+          "bytes": 103120,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/stills/slide-4-caution-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1105/slide-5/f0c2f883da0316a00bfc9bd847ac6beadc712d8a0dd1661e00f4b17cbc6fedf8.png"
+          },
+          "sha256": "f0c2f883da0316a00bfc9bd847ac6beadc712d8a0dd1661e00f4b17cbc6fedf8",
+          "bytes": 118478,
+          "mime": "image/png",
+          "source": "sns/correlation-carousel/actual-income-worker-households-per-month--accommodation-consumption-expenditure/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1106,
@@ -34329,13 +36133,90 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:59.707Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:51:50.698Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
       "content_key": "crab-consumption-expenditure",
       "caption": "【都道府県クイズ】かににいちばんお金を使う県は？\n\nA 北海道\nB 福井県\nC 鳥取県\n\nヒントは2枚目、答えは3枚目👉\n予想をコメントで教えてください💬\n\n保存して、冬のかにシーズンの前に📌\n全47都道府県のランキングはプロフィールのリンクから\n\nデータ: 総務省「家計調査」2024年（県庁所在市・二人以上世帯の年間支出（2024年））\n\n#都道府県クイズ #都道府県ランキング #かに #カニ #家計調査 #雑学 #クイズ #統計 #stats47",
-      "scheduled_at": "2026-10-29T10:00:00.000Z"
+      "scheduled_at": "2026-10-29T10:00:00.000Z",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1106/slide-1/82063884b99edc5ee47fe0cb0199ecf1c823bee23bd9e78a527c6f579a7dee2b.png"
+          },
+          "sha256": "82063884b99edc5ee47fe0cb0199ecf1c823bee23bd9e78a527c6f579a7dee2b",
+          "bytes": 130864,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/crab-consumption-expenditure/instagram/stills/slide-1-question-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1106/slide-2/b27b5ce0493651b09c61cf18d631a5cc8f77407896d67d8b3b5bfc5435129be9.png"
+          },
+          "sha256": "b27b5ce0493651b09c61cf18d631a5cc8f77407896d67d8b3b5bfc5435129be9",
+          "bytes": 137853,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/crab-consumption-expenditure/instagram/stills/slide-2-hint-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1106/slide-3/5fc512cc25626006e7041e70bff3c960c92ddc21c935a4930fa7f171d29c83b5.png"
+          },
+          "sha256": "5fc512cc25626006e7041e70bff3c960c92ddc21c935a4930fa7f171d29c83b5",
+          "bytes": 133434,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/crab-consumption-expenditure/instagram/stills/slide-3-answer-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1106/slide-4/c0a73ce8f346f5021e26af5a1561defd207a02afc52fb8e6e7d3bda10d45a1d8.png"
+          },
+          "sha256": "c0a73ce8f346f5021e26af5a1561defd207a02afc52fb8e6e7d3bda10d45a1d8",
+          "bytes": 242564,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/crab-consumption-expenditure/instagram/stills/slide-4-table-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1106/slide-5/c5c6e0a7cb4b8beed2c7e6362682fda2d6d3324ea449260b939c30285769e963.png"
+          },
+          "sha256": "c5c6e0a7cb4b8beed2c7e6362682fda2d6d3324ea449260b939c30285769e963",
+          "bytes": 136552,
+          "mime": "image/png",
+          "source": "sns/ranking-quiz/crab-consumption-expenditure/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1107,
@@ -34348,13 +36229,75 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:59.871Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:52:01.588Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
       "content_key": "04000-vs-34000",
       "caption": "【県どうしの比較】宮城県 vs 広島県\n\n海面漁業漁獲量: 宮城県が大きい（2023年・出典: 社会・人口統計体系）\n住宅地地価変動率: 宮城県が大きい（2024年・出典: 社会・人口統計体系）\n粗出生率: 広島県が大きい（2023年・出典: 人口動態統計）\n女性所定内給与額: 広島県が大きい（2022年・出典: 賃金構造基本統計調査）\n平均余命（女性 0歳時点・平均寿命）: 広島県が大きい（2020年・出典: 人口動態統計）\n\n数値が大きかったのは 宮城県 2項目 / 広島県 3項目\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県比較 #宮城県 #広島県 #都道府県ランキング #統計 #暮らし #地域比較 #雑学 #stats47",
-      "scheduled_at": "2026-10-30T10:00:00.000Z"
+      "scheduled_at": "2026-10-30T10:00:00.000Z",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1107/slide-1/da636eae7ddb60c3107dd60a36f3dcf4433b417142ee2de35ca426c3c7e45b2e.png"
+          },
+          "sha256": "da636eae7ddb60c3107dd60a36f3dcf4433b417142ee2de35ca426c3c7e45b2e",
+          "bytes": 81221,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/04000-vs-34000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1107/slide-2/a44215bbd3b3a79c7b3a91d7dd1dc3f13bb906a33298aee1e157f0efbb4c7686.png"
+          },
+          "sha256": "a44215bbd3b3a79c7b3a91d7dd1dc3f13bb906a33298aee1e157f0efbb4c7686",
+          "bytes": 157644,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/04000-vs-34000/instagram/stills/slide-2-duel-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1107/slide-3/b1396d1c126828dd606fc9de364f3768545dfd5862cfd65db8796baa9bab61ba.png"
+          },
+          "sha256": "b1396d1c126828dd606fc9de364f3768545dfd5862cfd65db8796baa9bab61ba",
+          "bytes": 81147,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/04000-vs-34000/instagram/stills/slide-3-summary-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1107/slide-4/40b309fb36636defca3685ecc9a05a1f8783c4c3fd4c4feb511df710a2c05a5d.png"
+          },
+          "sha256": "40b309fb36636defca3685ecc9a05a1f8783c4c3fd4c4feb511df710a2c05a5d",
+          "bytes": 123248,
+          "mime": "image/png",
+          "source": "sns/compare-carousel/04000-vs-34000/instagram/stills/slide-4-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1108,
@@ -34367,13 +36310,90 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:57:00.139Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-11-07T22:52:16.488Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "area-carousel",
       "content_key": "25000",
       "caption": "【都道府県データ】滋賀県、全国で何位？\n\n全国トップクラス:\n平均余命（男性 0歳時点・平均寿命） 1位（82.73年・2020年）\n粗出生率 3位（6.57人口千対・2023年）\n金融負債残高 7位（6194千円・2019年）\n年平均相対湿度 8位（76％・2024年）\n男性所定内給与額 9位（331.8千円・2022年）\n\n全国では下位:\n一般病院数（総数） 44位（51施設・2023年）\n有効求人倍率 41位（1.08倍・2022年）\n乳用牛飼養頭数（乳用牛・めすの飼養頭数合計） 41位（2310頭・2025年）\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n出典: 人口動態統計（2020年）、人口動態統計（2023年）、社会・人口統計体系（2019年）、社会・人口統計体系（2024年）、賃金構造基本統計調査（2022年）、社会・人口統計体系（2023年）、社会・人口統計体系（2022年）、畜産統計調査（2025年）\n\n#都道府県データ #統計 #地方創生 #ランキング #都道府県あるある #暮らし #地域比較 #日本 #データで見る日本 #滋賀県",
-      "scheduled_at": "2026-10-31T10:00:00.000Z"
+      "scheduled_at": "2026-10-31T10:00:00.000Z",
+      "assets": [
+        {
+          "role": "slide",
+          "order": 1,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1108/slide-1/8010d79d42229a3f713fc34c02061c8fa4d6c32121dd31b8f82d3b000a8f4682.png"
+          },
+          "sha256": "8010d79d42229a3f713fc34c02061c8fa4d6c32121dd31b8f82d3b000a8f4682",
+          "bytes": 100427,
+          "mime": "image/png",
+          "source": "sns/area-carousel/25000/instagram/stills/slide-1-cover-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 2,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1108/slide-2/8cdb54be7df23674616bfc7787bf8b1d59c2181dbcf60e3e104fc05de6577b1e.png"
+          },
+          "sha256": "8cdb54be7df23674616bfc7787bf8b1d59c2181dbcf60e3e104fc05de6577b1e",
+          "bytes": 162441,
+          "mime": "image/png",
+          "source": "sns/area-carousel/25000/instagram/stills/slide-2-top-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 3,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1108/slide-3/23b3014a5e7d2b8c3ff9d5735678f1b91cf8ca9815bfdf7a5f247fe48b403ad8.png"
+          },
+          "sha256": "23b3014a5e7d2b8c3ff9d5735678f1b91cf8ca9815bfdf7a5f247fe48b403ad8",
+          "bytes": 125928,
+          "mime": "image/png",
+          "source": "sns/area-carousel/25000/instagram/stills/slide-3-bottom-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 4,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1108/slide-4/8ac931bedfad2fbd4d02c629601b9eb2ffd60fdd4fe017b72a20753284b90baf.png"
+          },
+          "sha256": "8ac931bedfad2fbd4d02c629601b9eb2ffd60fdd4fe017b72a20753284b90baf",
+          "bytes": 142024,
+          "mime": "image/png",
+          "source": "sns/area-carousel/25000/instagram/stills/slide-4-sources-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "role": "slide",
+          "order": 5,
+          "state": "archived",
+          "r2": {
+            "bucket": "stats47-private",
+            "key": "sns-assets/instagram/1108/slide-5/f5ee001552fef9808f3f324f97d2e3fe13cacb2c94c3222d2fa42abae1082e9f.png"
+          },
+          "sha256": "f5ee001552fef9808f3f324f97d2e3fe13cacb2c94c3222d2fa42abae1082e9f",
+          "bytes": 114684,
+          "mime": "image/png",
+          "source": "sns/area-carousel/25000/instagram/stills/slide-5-outro-1080x1350.png",
+          "width": 1080,
+          "height": 1350
+        }
+      ]
     },
     {
       "id": 1109,
@@ -40477,7 +42497,7 @@
         "state": "pending"
       },
       "created_at": "2026-10-23T04:28:03.346Z",
-      "updated_at": "2026-10-27T00:21:20.169Z",
+      "updated_at": "2026-11-07T22:52:16.814Z",
       "platform": "x",
       "post_type": "original",
       "domain": "blog",
@@ -40491,7 +42511,15 @@
       "metric_keys": null,
       "geo_role": null,
       "analysis_ids": null,
-      "claim_metric_key": null
+      "claim_metric_key": null,
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "missing",
+          "reason": "ローカルに無い (.local/r2/sns/blog/municipality-population-change-census-2025/x/stills/municipality-population-change-census-2025.png。.local/r2 は 7 日で消える)"
+        }
+      ]
     },
     {
       "id": 1195,
@@ -40500,12 +42528,20 @@
         "state": "pending"
       },
       "created_at": "2026-11-05T08:48:29.897Z",
-      "updated_at": "2026-11-06T22:28:41.054Z",
+      "updated_at": "2026-11-07T22:52:17.046Z",
       "platform": "x",
       "post_type": "original",
       "domain": "blog",
       "content_key": "manufacturing-strength-factory-size",
-      "caption": "製造業が強い町の強さは、規模か生産性か。\n弱い町と中くらいの町の差は、約8割が人口あたりの従業者数でした。\n上位の町と2番目の町の差は、従業者数と1人あたり出荷額がほぼ半々です。人口3万人以上の764市区町村の分解です。\nhttps://stats47.jp/blog/manufacturing-strength-factory-size?utm_source=x&utm_medium=social&utm_campaign=blog-manufacturing-strength-factory-size"
+      "caption": "製造業が強い町の強さは、規模か生産性か。\n弱い町と中くらいの町の差は、約8割が人口あたりの従業者数でした。\n上位の町と2番目の町の差は、従業者数と1人あたり出荷額がほぼ半々です。人口3万人以上の764市区町村の分解です。\nhttps://stats47.jp/blog/manufacturing-strength-factory-size?utm_source=x&utm_medium=social&utm_campaign=blog-manufacturing-strength-factory-size",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "missing",
+          "reason": "台帳に素材の記録が無い"
+        }
+      ]
     },
     {
       "id": 1196,
@@ -40514,12 +42550,20 @@
         "state": "pending"
       },
       "created_at": "2026-11-05T11:39:10.991Z",
-      "updated_at": "2026-11-06T08:35:20.676Z",
+      "updated_at": "2026-11-07T22:52:17.280Z",
       "platform": "x",
       "post_type": "original",
       "domain": "blog",
       "content_key": "vacant-houses-population-decline",
-      "caption": "空き家が増えたのは、人口が減った町だけではありませんでした。\n増えた町だけを足すと、約2割は人口が増えた町です。ただし差し引きで見ると、増加の大半は人口が減った町に集まります。\n全国1,052市区町村の比較です。\nhttps://stats47.jp/blog/vacant-houses-population-decline?utm_source=x&utm_medium=social&utm_campaign=blog-vacant-houses-population-decline"
+      "caption": "空き家が増えたのは、人口が減った町だけではありませんでした。\n増えた町だけを足すと、約2割は人口が増えた町です。ただし差し引きで見ると、増加の大半は人口が減った町に集まります。\n全国1,052市区町村の比較です。\nhttps://stats47.jp/blog/vacant-houses-population-decline?utm_source=x&utm_medium=social&utm_campaign=blog-vacant-houses-population-decline",
+      "assets": [
+        {
+          "role": "image",
+          "order": 1,
+          "state": "missing",
+          "reason": "台帳に素材の記録が無い"
+        }
+      ]
     }
   ]
 }

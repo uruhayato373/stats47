@@ -1,4 +1,4 @@
-export type StorefrontChannel = "kindle" | "coconala" | "note";
+export type StorefrontChannel = "kindle" | "note";
 
 /** 公開販売面に出せる情報だけを持つ、商品ハブ用の派生型。 */
 export interface StorefrontProduct {

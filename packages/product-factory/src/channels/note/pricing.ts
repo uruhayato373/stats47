@@ -1,6 +1,5 @@
 /**
  * note 商品の価格帯 (仕様 §9)。提案値であり、公開時に人間が確定する。
- * 同一ファイルをココナラでも売る場合は価格・ライセンス・更新条件を合わせる。
  */
 
 export type NotePriceTier = "lite" | "business" | "data-pack" | "magazine" | "free";

@@ -1,7 +1,7 @@
 /**
  * SNS 投稿画像の週次確認 (Mac ローカル・launchd `scripts/scheduled/sns-image-review.sh`)。
  *
- * X / Threads の画像は投稿時にこの Mac から各 SNS へ上げており R2 に無い (`.local/r2/sns/...` だけにある) ので、
+ * X / Threads の画像は投稿時にこの Mac から各 SNS へ上げる。作業コピーは `.local/r2/sns/...` (30 日で消える)、正本は private R2 の sns-assets/ なので、
  * CI ではなくこの Mac で動かす。Instagram は R2 公開 URL から取る。
  * 決定的な検査 (画像の欠落・Instagram 画像の寸法・本文の長さ) をしたあと、Claude (読み取り専用) に
  * 画像と本文を見せて指摘を構造化出力で受け取り、見せていない投稿を指す指摘は捨てる。
@@ -91,6 +91,13 @@ async function resolveImage(source: string, mediaDir: string): Promise<{ source:
       if (buf) {
         path = join(mediaDir, source.replace(/[/\\]/g, "__"));
         writeFileSync(path, buf);
+      } else {
+        // .local/r2/sns は期限で消える。台帳に保全済みの private R2 の版があれば照合つきで戻す (2026-11-08)
+        const row = store.loadAll().find((p: Record<string, unknown>) => p.media_path === source && Array.isArray(p.assets));
+        if (row) {
+          const { ensureSnsImageLocal } = await import("../media/lib/storage.mjs");
+          path = (await ensureSnsImageLocal(row, PROJECT_ROOT).catch(() => null)) ?? undefined;
+        }
       }
     }
   } else {

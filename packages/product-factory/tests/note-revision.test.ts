@@ -5,17 +5,16 @@ import { dirname, join } from 'node:path';
 import JSZip from 'jszip';
 import { describe, expect, it } from 'vitest';
 import { CANONICAL_ARTICLES } from '../src/channels/note/article-plan';
-import { buildNoteRevision, validateNoteRevision } from '../src/channels/note/build/build-revision';
+import { buildNoteRevision, NOTE_PACK_DELIVERIES, validateNoteRevision } from '../src/channels/note/build/build-revision';
 import { buildNoteArticle } from '../src/channels/note/build/build-note';
 import { promoteAllNoteArticles, promoteNoteArticle } from '../src/channels/note/build/promote-note';
-import { COCONALA_LISTINGS } from '../../../config/paths.mjs';
 
 const sha = (value: Buffer | string) => createHash('sha256').update(value).digest('hex');
 async function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'note-revision-'));
-  const dir = join(root, '.local/coconala-products/P-01/v2-test');
+  const dir = join(root, '.local/data-packs/P-01/v2-test');
   mkdirSync(dir, { recursive: true });
-  mkdirSync(join(root, dirname(COCONALA_LISTINGS)), { recursive: true });
+  mkdirSync(join(root, dirname(NOTE_PACK_DELIVERIES)), { recursive: true });
   const zip = new JSZip();
   for (let i = 1; i <= 9; i++) zip.file(`ppt/slides/slide${i}.xml`, '<slide/>');
   const contents: Record<string, Buffer | string> = {
@@ -29,10 +28,10 @@ async function fixture() {
   const bytes = JSON.stringify(manifest);
   writeFileSync(join(dir, 'manifest.json'), bytes);
   const listing = { title: '検証用統計パック', _delivery: {
-    artifactDirectory: '.local/coconala-products/P-01/v2-test', manifestSha256: sha(bytes),
+    artifactDirectory: '.local/data-packs/P-01/v2-test', manifestSha256: sha(bytes),
     indicatorCount: 1, pptxIndicatorCount: 1, hasXlsx: false, officeValidation: 'owner-pending',
   } };
-  writeFileSync(join(root, COCONALA_LISTINGS), JSON.stringify({ listings: { 'P-01': listing } }));
+  writeFileSync(join(root, NOTE_PACK_DELIVERIES), JSON.stringify({ schemaVersion: 1, packs: { 'P-01': listing } }));
   return { root, dir, listing };
 }
 
@@ -43,7 +42,7 @@ describe('note private revisions', () => {
     expect(() => promoteNoteArticle(CANONICAL_ARTICLES[0], undefined, { dryRun: false })).toThrow('promote --apply is blocked');
     expect(() => promoteAllNoteArticles([], undefined, { dryRun: false })).toThrow('must not be overwritten');
     const outRoot = mkdtempSync(join(tmpdir(), 'note-legacy-fixture-'));
-    const opts = { outRoot, coconalaRoot: join(outRoot, 'absent-inputs') };
+    const opts = { outRoot, dataPackRoot: join(outRoot, 'absent-inputs') };
     buildNoteArticle(CANONICAL_ARTICLES[0], undefined, opts);
     expect(() => buildNoteArticle(CANONICAL_ARTICLES[0], undefined, opts)).toThrow('never overwrite');
   });
@@ -85,7 +84,7 @@ describe('note private revisions', () => {
   it('refuses an unpinned manifest and traversal revision', async () => {
     const { root, listing } = await fixture();
     listing._delivery.manifestSha256 = '';
-    writeFileSync(join(root, COCONALA_LISTINGS), JSON.stringify({ listings: { 'P-01': listing } }));
+    writeFileSync(join(root, NOTE_PACK_DELIVERIES), JSON.stringify({ schemaVersion: 1, packs: { 'P-01': listing } }));
     const report = await buildNoteRevision({ root, revision: 'r4', articles: [CANONICAL_ARTICLES[0]] });
     expect(report.items[0].validationErrors).toContain('pinned delivery contract missing');
     await expect(buildNoteRevision({ root, revision: '../escape' })).rejects.toThrow('invalid revision');

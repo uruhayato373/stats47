@@ -92,7 +92,7 @@ export function rakutenLine(rakutenResults, asOf) {
 
 /**
  * 商品の実売の行。実売台帳 (`data/products/sales-ledger.json`) は CLI で証拠付きの記録を足す形で、
- * KDP・ココナラの売上を自動で取り込む経路はまだ無い。よって台帳が空でも、販売中の商品があれば ¥0 ではなく未計測。
+ * KDP の売上を自動で取り込む経路はまだ無い。よって台帳が空でも、販売中の商品があれば ¥0 ではなく未計測。
  * 以前は台帳が空なら「¥0」と書き、記録があっても存在しない `date` / `amountYen` を読んで常に ¥0 になっていた (2026-09-25)。
  *
  * @param {{ ledger: object|null, liveProductCount: number|null, weekStart: string, weekEnd: string }} input

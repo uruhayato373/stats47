@@ -1,6 +1,6 @@
 ---
 paths:
-  - ".claude/scripts/{note,coconala,kdp,google-admin}/**"
+  - ".claude/scripts/{note,kdp,google-admin}/**"
   - ".claude/skills/{note,product,sns/x-viral-research,sns/update-x-profile}/**"
   - ".claude/agents/note-manager.md"
 ---

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { LOCAL_RESOURCES } from '../../../config/paths.mjs';
 
@@ -488,6 +489,7 @@ export function planFileRetention(
     const matcher = globToRegExp(entry.match ?? '*');
     const exclude = new Set(entry.excludeDirs ?? []);
     const cutoff = now - entry.ageDays * 86400000;
+    const kept = [];
     const visit = (dir) => {
       for (const name of fs.readdirSync(dir)) {
         const full = path.join(dir, name);
@@ -495,13 +497,28 @@ export function planFileRetention(
         if (stat.isSymbolicLink()) continue;
         if (stat.isDirectory()) {
           if (!exclude.has(name)) visit(full);
-        } else if (stat.isFile() && matcher.test(name) && stat.mtimeMs < cutoff) {
-          item.files.push({ file: full, mtimeMs: stat.mtimeMs, bytes: stat.size });
-          item.bytes += stat.size;
+        } else if (stat.isFile() && matcher.test(name)) {
+          const file = { file: full, mtimeMs: stat.mtimeMs, bytes: stat.size };
+          if (stat.mtimeMs < cutoff) {
+            item.files.push(file);
+            item.bytes += stat.size;
+          } else kept.push(file);
         }
       }
     };
     visit(root);
+    // 期限内でも maxGiB を超えた分は古い順に回収する (2026-11-06〜07 の一括生成で 2 日に 20GB 溜まり、
+    // 30 日の期限では 1 バイトも消えなかった)。直近 keepHours (既定 24) のファイルは作業中とみなして残す。
+    if (Number.isFinite(entry.maxGiB)) {
+      const keepCutoff = now - (entry.keepHours ?? 24) * 3600000;
+      let remaining = kept.reduce((n, f) => n + f.bytes, 0);
+      for (const f of kept.sort((a, b) => a.mtimeMs - b.mtimeMs)) {
+        if (remaining <= entry.maxGiB * GiB || f.mtimeMs >= keepCutoff) break;
+        item.files.push(f);
+        item.bytes += f.bytes;
+        remaining -= f.bytes;
+      }
+    }
     return item;
   });
 }
@@ -527,6 +544,11 @@ export function pruneFiles(plan, entries = CONFIG.fileRetention ?? [], { home = 
     // 消したファイルの親から root の手前まで、空になったフォルダだけを消す
     for (let dir of [...touched].sort((a, b) => b.length - a.length)) {
       while (dir !== item.root && dir.startsWith(item.root + path.sep)) {
+        // 入れ子の空フォルダは別の経路で先に消えていることがある (2026-11-08 に .local/r2/sns で ENOENT)
+        if (!fs.existsSync(dir)) {
+          dir = path.dirname(dir);
+          continue;
+        }
         if (fs.readdirSync(dir).length) break;
         fs.rmdirSync(dir);
         dir = path.dirname(dir);
@@ -534,6 +556,52 @@ export function pruneFiles(plan, entries = CONFIG.fileRetention ?? [], { home = 
     }
   }
   return { removedBytes, removedFiles };
+}
+
+/**
+ * Codex の会話の投影 DB (thread_history) から、元の記録 (rollout) が消えた exec スレッドの行だけを消す。
+ * 投影は記録から作られ、記録を消しても行が残る (2026-11-08 に一括生成 2,827 スレッドで 5.3GB)。
+ * アプリでの会話 (exec 以外) と、記録が残るスレッドには触れない。DB が無い・形が違うときは何もしない。
+ * @param {{ stateDb: string, historyDb: string } | undefined} cfg @param {{ apply?: boolean, home?: string, exists?: (p: string) => boolean }} [options]
+ */
+export function pruneCodexThreadHistory(cfg = CONFIG.codexThreadHistory, { apply = false, home = os.homedir(), exists = fs.existsSync } = {}) {
+  if (!cfg) return { skipped: 'not-configured' };
+  const stateDb = resolveConfigPath(cfg.stateDb, home);
+  const historyDb = resolveConfigPath(cfg.historyDb, home);
+  if (!fs.existsSync(stateDb) || !fs.existsSync(historyDb)) return { skipped: 'missing' };
+  const Database = createRequire(import.meta.url)('better-sqlite3');
+  const state = new Database(stateDb, { readonly: true, fileMustExist: true });
+  let orphaned;
+  try {
+    orphaned = new Set(
+      state.prepare("select id, rollout_path from threads where source = 'exec'").all()
+        .filter((row) => row.rollout_path && !exists(row.rollout_path))
+        .map((row) => row.id)
+    );
+  } finally {
+    state.close();
+  }
+  const history = new Database(historyDb, { fileMustExist: true, timeout: 60000 });
+  try {
+    const present = history.prepare('select distinct thread_id from thread_turns').all().map((r) => r.thread_id);
+    const targets = present.filter((id) => orphaned.has(id));
+    const result = { threads: targets.length, rows: 0, bytesBefore: fs.statSync(historyDb).size, bytesAfter: null };
+    if (!apply || !targets.length) return result;
+    const tables = history.prepare("select name from sqlite_master where type = 'table' and name like 'thread_%'").all().map((r) => r.name)
+      .filter((name) => history.prepare(`select 1 from pragma_table_info('${name}') where name = 'thread_id'`).get());
+    const remove = history.transaction((ids) => {
+      for (const table of tables) {
+        const stmt = history.prepare(`delete from "${table}" where thread_id = ?`);
+        for (const id of ids) result.rows += stmt.run(id).changes;
+      }
+    });
+    remove(targets);
+    history.exec('vacuum');
+    result.bytesAfter = fs.statSync(historyDb).size;
+    return result;
+  } finally {
+    history.close();
+  }
 }
 
 /** footprintBudgets の各パスの容量を測り、上限を超えたものを warning にする (肥大化の機械検知)
@@ -546,6 +614,29 @@ export function checkFootprint(budgets = CONFIG.footprintBudgets ?? [], { home =
     const bytes = measure(target);
     return { path: b.path, bytes, maxGiB: b.maxGiB, over: bytes / GiB > b.maxGiB };
   });
+}
+
+/**
+ * `.local` 直下の名前が台帳に載っているかを確かめる。載る先は localRegistry (auth / state / product = 年齢では消さない)
+ * か、`.local/<名前>` で始まる cachePaths (work = 期限で消す)。どちらにも無い名前は誰も消さないまま溜まるので返す
+ * (2026-11-08 に一回きりの調査スクリプト・ログ・試作が 180 個、計 2.6GB 残っていた)。
+ * @param {any} [config] @param {string} [root] @returns {string[]}
+ */
+export function unregisteredLocalEntries(config = CONFIG, root = ROOT) {
+  const dir = path.join(root, '.local');
+  if (!fs.existsSync(dir)) return [];
+  const patterns = [
+    ...(config.localRegistry ?? []).map((e) => e.pattern),
+    ...cacheEntries(config)
+      .map((e) => e.path.split(/[\\/]+/))
+      .filter((segments) => segments[0] === '.local' && segments.length > 1)
+      .map((segments) => segments[1]),
+    ...(config.protectedPaths ?? [])
+      .map((p) => p.split(/[\\/]+/))
+      .filter((segments) => segments[0] === '.local' && segments.length > 1)
+      .map((segments) => segments[1]),
+  ].map(globToRegExp);
+  return fs.readdirSync(dir).filter((name) => !patterns.some((re) => re.test(name)));
 }
 
 function record(name, value) {
@@ -690,6 +781,13 @@ export async function main(args = process.argv.slice(2)) {
         const pruned = pruneFiles(retention);
         result.removedBytes += pruned.removedBytes;
         result.removedFiles = pruned.removedFiles;
+        try {
+          result.codexThreadHistory = pruneCodexThreadHistory(CONFIG.codexThreadHistory, { apply: true });
+          const h = result.codexThreadHistory;
+          if (h.bytesAfter != null) result.removedBytes += Math.max(0, h.bytesBefore - h.bytesAfter);
+        } catch (error) {
+          result.codexThreadHistory = { error: error.message };
+        }
         result.after = measure();
       }
       if (!gisOnly) {
@@ -703,6 +801,13 @@ export async function main(args = process.argv.slice(2)) {
         ];
         for (const f of over)
           console.error(`[local-resources] 容量上限超過: ${f.path} ${(f.bytes / GiB).toFixed(1)}GiB > ${f.maxGiB}GiB`);
+        result.unregistered = unregisteredLocalEntries();
+        if (result.unregistered.length) {
+          target.warnings.push({ key: 'local-unregistered', level: 'warning', names: result.unregistered });
+          console.error(
+            `[local-resources] .local に台帳の無い名前: ${result.unregistered.join(', ')} — 使い終わったなら消し、残すなら ${LOCAL_RESOURCES} の localRegistry か cachePaths に登録する`
+          );
+        }
       }
     }
     if (args.includes('--record')) {

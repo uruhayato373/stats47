@@ -508,7 +508,7 @@ async function main() {
       const copy = NOTE_COVER_COPY[a.catalogKey] ?? EXTRA_COVER_HEADLINES[a.catalogKey];
       if (!spec || !copy) throw Error('dataset figure/copy missing ' + a.catalogKey);
       const isPack = spec.kind === 'pack-csv';
-      if (isPack && !path.resolve(ROOT, spec.source).startsWith(path.join(ROOT, '.local/coconala-products') + path.sep))
+      if (isPack && !path.resolve(ROOT, spec.source).startsWith(path.join(ROOT, '.local/data-packs') + path.sep))
         throw Error('pack-csv source must be a local product build ' + a.catalogKey);
       const url = isPack ? spec.source : `${R2_PUBLIC_BASE_URL}/${spec.source}`;
       const name = `${a.catalogKey}-figure${path.extname(spec.source)}`;

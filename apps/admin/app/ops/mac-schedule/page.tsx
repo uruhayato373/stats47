@@ -12,7 +12,8 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Mac の定期実行 — stats47 admin" };
 
 /**
- * /ops/mac-schedule — Mac の launchd で動く定期実行 (土曜ランナーほか) の定義・この Mac への登録・最後の結果を目視する画面。
+ * /ops/mac-schedule — Mac の launchd で動く定期実行の定義・この Mac への登録・最後の結果と、週次レビューの最初に手で回す
+ * 週次の取得 (npm run weekly:collect) の結果を目視する画面。
  * 読み取り専用。launchctl は呼ばず、リポジトリの plist・~/Library/LaunchAgents・~/Library/Logs/stats47 を読む。
  * GitHub Actions の定期実行は /ops/workflows。
  */
@@ -77,8 +78,8 @@ export default function MacSchedulePage() {
       </>
     );
   }
-  const runner = v.jobs.find((j) => j.def.label === "com.stats47.weekly-saturday");
-  const others = v.jobs.filter((j) => j !== runner);
+  const runner = v.saturday.overall;
+  const others = v.jobs; // 週次の取得は launchd の定義に無い (手動)
   const drift = v.jobs.filter((j) => j.installed === "different").length;
   const audits = v.saturday.audits;
   const auditFailed = audits?.results.filter((r) => r.status !== "pass").length ?? 0;
@@ -93,11 +94,11 @@ export default function MacSchedulePage() {
         ) : null}
         <Grid min="sm">
           <StatCard
-            label="土曜ランナー"
+            label="週次の取得"
             icon={<CalendarClockIcon />}
-            value={runner ? RESULT[runner.log.result].label : "定義なし"}
-            tone={runner?.log.result === "ok" ? "good" : runner?.log.result === "failed" ? "bad" : "neutral"}
-            sub={runner ? `最後の開始 ${jst(runner.log.startedAt)}` : undefined}
+            value={RESULT[runner.result].label}
+            tone={runner.result === "ok" ? "good" : runner.result === "failed" ? "bad" : "neutral"}
+            sub={runner.startedAt ? `最後の開始 ${jst(runner.startedAt)}` : "まだ回していない"}
           />
           <StatCard
             label="週次監査"
@@ -110,7 +111,7 @@ export default function MacSchedulePage() {
           <StatCard label="定義に無い登録" icon={<PackageXIcon />} value={v.strayInstalled.length} tone={v.strayInstalled.length ? "warn" : "good"} />
         </Grid>
 
-        <Section title="土曜ランナー (毎週土曜 07:00)">
+        <Section title="週次の取得 (週次レビューの最初に手で回す)">
           <DataTable columns={["段", "中身", "最後の結果"]}>
             {v.saturday.steps.map((s, i) => (
               <Row key={s.id}>
@@ -124,7 +125,7 @@ export default function MacSchedulePage() {
           </DataTable>
           <p className="text-xs text-muted-foreground">
             1 段が落ちても次の段へ進む。ログは <code className="font-mono text-xs">~/Library/Logs/stats47/&lt;段&gt;.log</code>、全体は <code className="font-mono text-xs">weekly-saturday.log</code>。
-            すぐ 1 回走らせるには <code className="font-mono text-xs">launchctl kickstart gui/$(id -u)/com.stats47.weekly-saturday</code>。
+            回すには <code className="font-mono text-xs">npm run weekly:collect</code> (2026-11-08 に launchd の土曜 07:00 の自動起動をやめた)。
           </p>
         </Section>
 
@@ -152,7 +153,7 @@ export default function MacSchedulePage() {
             </DataTable>
           ) : (
             <p className="text-sm text-muted-foreground">
-              まだ要約が無い。土曜ランナーの後か、<code className="font-mono text-xs">npm run weekly:audits</code> を走らせた後に <code className="font-mono text-xs">.local/weekly-audits/&lt;日付&gt;/summary.json</code> ができる。
+              まだ要約が無い。<code className="font-mono text-xs">npm run weekly:collect</code> の後か、<code className="font-mono text-xs">npm run weekly:audits</code> を走らせた後に <code className="font-mono text-xs">.local/weekly-audits/&lt;日付&gt;/summary.json</code> ができる。
             </p>
           )}
           <p className="text-xs text-muted-foreground">
@@ -162,7 +163,7 @@ export default function MacSchedulePage() {
 
         <Section title={`定期実行の定義 (${v.jobs.length})`}>
           <DataTable columns={["定期実行", "時刻", "この Mac への登録", "最後の結果"]}>
-            {[...(runner ? [runner] : []), ...others].map((j) => (
+            {others.map((j) => (
               <Row key={j.file}>
                 <Cell>
                   <div className="font-semibold">{j.def.label.replace(/^com\.stats47\./, "")}</div>

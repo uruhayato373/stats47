@@ -7,7 +7,6 @@
  * - エラーは「短い分類 + HTTP status」だけを持つ。API キー・レスポンス本文全文は絶対に出さない。
  *
  * 正典: .claude/rules/ogp-image-standards.md §5 (画像生成 AI: ブログ OGP の記事別背景)
- * 参考: apps/web/scripts/generate-category-images.ts (呼び出し作法。エラー安全性を本クライアントで改善)
  */
 
 import { OGP_MODEL } from "../data/blog-ogp-visual-catalog";

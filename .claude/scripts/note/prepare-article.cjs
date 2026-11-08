@@ -46,10 +46,11 @@ const productAttachmentAfter = fmF("product_attachment_after");
 let productAttachment = null;
 if (productArchiveField) {
   const archivePath = path.resolve(projectRoot, productArchiveField);
-  // Geo products and the data packs zipped for note sales (2026-10-12) are the only allowed attachment roots.
-  const productRoots = [".local/geo-products", ".local/note-product-archives"].map((dir) => path.join(projectRoot, dir) + path.sep);
+  // 添付の ZIP は、R2 の記事保存から取り出した作業コピー (docs/31) か、生成直後の作業出力 (.local) だけを許す。
+  // 販売中の納品物の正本は private R2 の記事保存の product/ (2026-11-08。ローカルを正本にしない)。
+  const productRoots = ["docs/31_note記事原稿", ".local/geo-products", ".local/note-product-archives"].map((dir) => path.join(projectRoot, dir) + path.sep);
   if (!productRoots.some((root) => archivePath.startsWith(root)) || path.extname(archivePath).toLowerCase() !== ".zip") {
-    console.error("ERROR: product_archive must be a ZIP under .local/geo-products or .local/note-product-archives");
+    console.error("ERROR: product_archive must be a ZIP under docs/31_note記事原稿 (note:article checkout), .local/geo-products or .local/note-product-archives");
     process.exit(1);
   }
   if (!fs.existsSync(archivePath)) {

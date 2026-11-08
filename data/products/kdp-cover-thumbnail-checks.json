@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "dataNote": "表紙を検索結果の大きさに縮めて目で確かめた記録。表紙の SHA-256 ごとに 1 件。書き手は node .claude/scripts/kdp/kdp-cover-thumbnail.mjs record。kdp-publish --commit は今の表紙の readable の記録を要求する。",
+  "books": {}
+}

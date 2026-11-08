@@ -1,6 +1,6 @@
 /**
  * source-manifest.json / product-links.json ジェネレータ (仕様 §5・§7・§13)。
- * 出典・年次・ライセンスの provenance を商品 manifest から集約し、note↔ココナラ↔stats47 の
+ * 出典・年次・ライセンスの provenance を商品 manifest から集約し、note↔データパック↔stats47 の
  * リンクを 1 箇所にまとめる (共通 productId/version でドリフト検知できるようにする)。
  */
 import { readFileSync, existsSync } from "node:fs";
@@ -11,7 +11,7 @@ import type { ProductDefinition } from "../../../catalog/types";
 import { LICENSE_REGISTRY, type LicenseId } from "../../../catalog/licenses";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
-const COCONALA_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
+const DATA_PACK_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/data-packs");
 
 export interface ProductProvenance {
   readonly productId: string;
@@ -33,9 +33,9 @@ interface ProductManifestShape {
 export function resolveProvenance(
   article: NoteArticlePlan,
   products: readonly ProductDefinition[],
-  opts: { coconalaRoot?: string; version?: string } = {},
+  opts: { dataPackRoot?: string; version?: string } = {},
 ): ProductProvenance[] {
-  const root = opts.coconalaRoot ?? COCONALA_ROOT_DEFAULT;
+  const root = opts.dataPackRoot ?? DATA_PACK_ROOT_DEFAULT;
   const version = opts.version ?? "v1";
   const byId = new Map(products.map((p) => [p.id, p]));
   const out: ProductProvenance[] = [];
@@ -81,7 +81,7 @@ export function buildSourceManifest(
 }
 
 /**
- * product-links.json: note 記事 ↔ ココナラ商品 ↔ stats47 の対応。
+ * product-links.json: note 記事 ↔ データパック ↔ stats47 の対応。
  * productId/version を共通参照し、価格・版のドリフトを後段で検知できるようにする。
  */
 export function buildProductLinks(
@@ -100,7 +100,7 @@ export function buildProductLinks(
       return {
         productId: pid,
         name: p?.name ?? "(不明)",
-        coconalaPriceYen: p?.price.initialYen ?? null,
+        catalogPriceYen: p?.price.initialYen ?? null,
         licenseId: p?.licenseId ?? null,
         status: p?.status ?? null,
       };

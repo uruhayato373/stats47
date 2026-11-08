@@ -1,5 +1,5 @@
 /**
- * KDP の紹介文とキーワードの組み立てと監査 (2026-11-06 オーナー依頼。正典 coconala-product-standards.md §8)。
+ * KDP の紹介文とキーワードの組み立てと監査 (2026-11-06 オーナー依頼。正典 kindle-publishing-standards.md)。
  *
  * 紹介文は定型文の差し替えではなく、読者の悩み・読み終えて分かること・想定読者・収録内容を本ごとに持つ。
  * 図と全県表の数は実際の EPUB を測った kindle-quality.json から入れ、手で書かない。
@@ -63,6 +63,30 @@ export function hasCurrentReview(copy, facts) {
   return Boolean(copy?.review?.epubSha256) && copy.review.epubSha256 === facts?.epubSha256;
 }
 
+/**
+ * KDP へ送った原稿 (status: submitted / reflected) は、台帳の紹介文・キーワードと一致し続ける。
+ * 台帳を手で直すとここで止まる (台帳は原稿から apply で作る)。
+ */
+export function ledgerDriftIssues(copy, listing, description) {
+  if (!["submitted", "reflected"].includes(copy?.status)) return [];
+  const issues = [];
+  if (listing?.description !== description) issues.push("台帳の紹介文が原稿と違う (台帳を手で直さず、原稿を直して apply する)");
+  if (JSON.stringify(listing?.keywords ?? []) !== JSON.stringify(copy.keywords ?? [])) issues.push("台帳のキーワードが原稿と違う");
+  return issues;
+}
+
+/**
+ * 公開 (新刊・既刊の更新) の前提。承認済みか KDP へ送った原稿があり、今の EPUB と照合した
+ * 別エージェントのレビューがあること。原稿の無い本を公開しない。
+ */
+export function publicationCopyIssues(id, copy, facts) {
+  if (!copy) return [`${id}: 紹介文の原稿が無い (紹介文の原稿の台帳 kdp.listing-copy に書いて承認を得る)`];
+  const issues = [];
+  if (!["approved", "submitted", "reflected"].includes(copy.status)) issues.push(`${id}: 原稿が承認されていない (status=${copy.status ?? "なし"})`);
+  if (!hasCurrentReview(copy, facts)) issues.push(`${id}: 今の EPUB と照合した別エージェントのレビューが無い`);
+  return issues;
+}
+
 /** KDP が受け付けない内容の検査。台帳の紹介文を KDP へ送る前にも使う。 */
 export function restrictedDescriptionIssues(description) {
   const body = String(description ?? "").replace(/^Previously published as .*$/m, "");
@@ -84,6 +108,7 @@ export function auditListingCopy(id, books, bookText) {
   const { copy, listing, description } = entry;
 
   errors.push(...restrictedDescriptionIssues(description));
+  errors.push(...ledgerDriftIssues(copy, listing, description));
 
   if (listing.replacesAsin && !description.startsWith(previousEditionDisclaimer(listing))) {
     errors.push("新版は紹介文の冒頭に旧版の刊行情報が要る");

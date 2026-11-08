@@ -512,7 +512,7 @@
       "id": "ctr-opportunity::/ranking/food-self-sufficiency-rate-calorie",
       "url": "/ranking/food-self-sufficiency-rate-calorie",
       "type": "ctr-opportunity",
-      "status": "pending",
+      "status": "dismissed",
       "score": 0.0751,
       "scoreBreakdown": {
         "impact": 0.6708,
@@ -599,7 +599,9 @@
       ],
       "expectedMetric": "CTR 0.45% → 期待 5.0% 帯",
       "suggestedVerification": "seoTitle/description の curiosity gap 改修後、4/8 週で GSC CTR を再計測 (1 件ずつ query 確認・一括 rewrite 禁止)",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "dismissedAt": "2026-11-08T00:16:04.494Z",
+      "dismissReason": "2026-W44 週次レビュー: データ品質キューで最新 2021 年・推定 3 周期遅れ (data/data-quality/checks/LATEST.md の更新候補 3 位)。題名の改修より先にデータを更新する (DATA-QUALITY-LOOP-01)。更新後に CTR を測り直す"
     },
     {
       "id": "ctr-opportunity::/blog/middle-school-height-east-west-puzzle",

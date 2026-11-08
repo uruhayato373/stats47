@@ -194,13 +194,6 @@
       ]
     },
     {
-      "name": "MEASUREMENT_SESSION_COCONALA",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
-      ]
-    },
-    {
       "name": "ACCESSIBILITY_BASELINE",
       "visibility": "server",
       "contexts": [

@@ -141,8 +141,11 @@ jobs:
             .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \
             .claude/scripts/lib/__tests__/check-render-ci-contract.test.cjs \
-            .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs
+            .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs \
+            .claude/scripts/lib/__tests__/check-local-registry.test.mjs \
+            .claude/scripts/lib/__tests__/local-resources.test.mjs
           node .claude/scripts/lib/check-datasets.mjs
+          node .claude/scripts/lib/check-local-registry.mjs
           node .claude/scripts/lib/check-money-unit-audit.cjs --base origin/main
           node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main
           node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
@@ -675,8 +678,10 @@ jobs:
       - name: 📚 KDP / Review Cadence Contract Guard
         # KDP の公開前ゲート (archive / preflight / 週次承認) と、週次・月次レビューの周期判定を検証する。
         # どちらもテストはあったが CI から一度も実行されていなかった (2026-10-02 に orphan 検査で発見)。
+        # kdp:listing-copy check は販売中の本の紹介文の監査と、台帳と原稿の一致 (台帳の手直しを止める) を見る。
         run: |
           npm run kdp:test
+          npm run kdp:listing-copy -- check
           npm run review-cadence:test
         continue-on-error: false
 

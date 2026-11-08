@@ -3,7 +3,7 @@ import type { SalesChannel, SalesLedger, SalesSummary } from "./types";
 // 検証は認証付き計測の CI (素の node) と共有するため ledger-core.mjs に置く
 export { validateSalesLedger } from "./ledger-core.mjs";
 
-const CHANNELS: readonly SalesChannel[] = ["kdp", "coconala"];
+const CHANNELS: readonly SalesChannel[] = ["kdp"];
 
 export function summarizeSalesLedger(ledger: SalesLedger): SalesSummary {
   const observations = ledger.observations;

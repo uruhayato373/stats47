@@ -4,7 +4,7 @@
  *   Drive (非公開・人が見る・耐久): stats47/Kindle表紙/<bookId>/candidates/   ← imagegen の出力・採用前の候補・元画像
  *   R2   (公開・CI が SHA 検証して読む): media/kindle-cover-assets/<bookId>/<revision>/  ← 承認した最終版だけ
  *
- * 承認前の版を公開 R2 に出さないための分離。契約: .claude/rules/coconala-product-standards.md「カバー画像の SSOT」。
+ * 承認前の版を公開 R2 に出さないための分離。契約: .claude/rules/kindle-publishing-standards.md「カバー画像の SSOT」。
  * Drive のマウント解決は参考資料 vault (source-vault) と同じ実装を使う。
  */
 import { resolve } from "node:path";

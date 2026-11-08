@@ -8,11 +8,11 @@ type: project
 
 **原因**: 設計status・外部公開state・納品物の品質を同じ欄で表現し、メモが過去の生成件数とコマンドを複製していた。Kindle監査もv1を再生成していた。
 
-**対策**: 商品定義は `packages/product-factory/src/catalog/` とKindle/GeoのTSを読む。外部公開記録は `config/{coconala,kdp}-listings.json`、納品版は `_delivery` のmanifest SHAを参照する。横断一覧は `products:report` が同じTSと証跡から生成する `data/products/catalog-status.json`。件数・状態を本メモへ複製しない。人間向けは `.local/product-portfolio/catalog.{html,csv}`。
+**対策**: 商品定義は `packages/product-factory/src/catalog/` とKindle/GeoのTSを読む。外部公開記録は note が `data/note/articles.json`、Kindle が `config/kdp-listings.json`、note の納品版は `data/products/note-pack-deliveries.json` の `_delivery` のmanifest SHAを参照する。横断一覧は `products:report` が同じTSと証跡から生成する `data/products/catalog-status.json`。件数・状態を本メモへ複製しない。人間向けは `.local/product-portfolio/catalog.{html,csv}`。
 
 **安全条件**: Kindleは `--version <NEW_VERSION>` で生成し既存版を上書きしない。全予定キーの欠落をmetadataに記録する。内部の書き下ろし比率・本文量、EPUB構造、意味レビュー、Previewer、暗号化版保全、公開承認を別ゲートにする。30%はAmazonの許諾基準ではない。監査の `verify-publishable.mts --apply` は拒否する。
 
-**証拠**: `packages/product-factory/README.md`、`.claude/rules/coconala-product-standards.md`、`tests/{sales-catalog,kindle-revision,kindle-ranking-label,kindle-verify-cli}.test.ts`（2026-09-06）。未完了作業は `.claude/todo/backlog.md`。
+**証拠**: `packages/product-factory/README.md`、`.claude/rules/data-pack-standards.md`・`.claude/rules/kindle-publishing-standards.md`、`tests/{sales-catalog,kindle-revision,kindle-ranking-label,kindle-verify-cli}.test.ts`（2026-09-06）。未完了作業は `.claude/todo/backlog.md`。
 
 **PDF表示の問題**: 小さな日本語データブックで、pdftotextは全文を返すのにPoppler描画では文字の大半が消えた。
 **原因**: 同一内容でNoto JPのsubset埋め込みだけを無効化すると全4ページの文字が復帰した。pdf-lib issue #1232の既知症状とも一致する。

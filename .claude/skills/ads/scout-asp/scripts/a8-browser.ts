@@ -55,7 +55,7 @@ const STATE_PATH = path.join(PROFILE_ROOT, ".local/playwright-a8-state.json");
 //   申請 (apply) は detail の <select name="webSiteId">、広告コード取得 (harvest) は
 //   <select name="websiteId"> (小文字 w・別名) を stats47 側に選んでから進む。
 //   選べない場合は誤サイト提携・誤サイトコードを防ぐため中止する
-//   (publish-x / coconala の account assert と同じ思想)。
+//   (publish-x / kdp の account assert と同じ思想)。
 //   ラベルは登録時の表記に依存するため候補を複数持ち、部分一致で吸収する。
 //   どれにも当たらなければ実際の option 一覧を出して停止する (推測で押さない)。
 const TARGET_SITE_LABELS = ["統計で見る都道府県", "stats47"];

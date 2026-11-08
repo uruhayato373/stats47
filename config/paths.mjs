@@ -10,13 +10,10 @@
  * TS (product-factory / apps) の両方から読むため、型は隣の `paths.d.mts` に置く。
  */
 
-// 販売チャネル (ココナラ / Kindle / note) の出品台帳・アカウント・プロフィール
-export const COCONALA_LISTINGS = "config/coconala-listings.json";
-export const COCONALA_ACCOUNT = "config/coconala-account.json";
-export const COCONALA_PROFILE = "config/coconala-profile.ts";
-export const COCONALA_ASSETS_DIR = "config/coconala/assets";
+// 販売チャネル (Kindle) の出品台帳・アカウント
 export const KDP_LISTINGS = "config/kdp-listings.json";
 export const KDP_LISTING_COPY = "data/products/kdp-listing-copy.json";
+export const KDP_COVER_THUMBNAIL_CHECKS = "data/products/kdp-cover-thumbnail-checks.json";
 export const KDP_ACCOUNT = "config/kdp-account.json";
 export const NOTE_ACCOUNT = "config/note-account.json";
 

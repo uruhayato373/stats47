@@ -5,6 +5,7 @@ import {
   LISTING_DATA_BLOCK,
   auditListingCopy,
   hasCurrentReview,
+  publicationCopyIssues,
   renderListingDescription,
   restrictedDescriptionIssues,
 } from "../kdp-listing-copy.mjs";
@@ -84,4 +85,23 @@ test("本文との照合は今の EPUB に対するものだけを有効にす�
   assert.equal(hasCurrentReview({ review: { epubSha256: "a".repeat(64) } }, facts2), true);
   assert.equal(hasCurrentReview({ review: { epubSha256: "b".repeat(64) } }, facts2), false);
   assert.equal(hasCurrentReview({}, facts2), false);
+});
+
+test("KDP へ送った原稿は台帳と一致し続け、台帳の手直しを止める", () => {
+  const sent = copy({ status: "submitted" });
+  const description = renderListingDescription(sent, facts);
+  const synced = { ...listing, description, keywords: [...sent.keywords] };
+  assert.deepEqual(audit(sent, synced), []);
+  assert.ok(audit(sent, { ...synced, description: `${description}追記` }).some((m) => m.includes("台帳の紹介文")));
+  assert.ok(audit(sent, { ...synced, keywords: ["手で変えた語", ...sent.keywords.slice(1)] }).some((m) => m.includes("台帳のキーワード")));
+  // 送る前の原稿 (承認前・承認済み) は台帳と違ってよい (apply 前のため)
+  assert.deepEqual(audit(copy({ status: "approved" }), synced), []);
+});
+
+test("原稿・承認・今の EPUB との照合が無い本は公開しない", () => {
+  const reviewed = { epubSha256: "abc" };
+  assert.ok(publicationCopyIssues("K-A", undefined, facts)[0].includes("原稿が無い"));
+  assert.ok(publicationCopyIssues("K-A", copy({ status: "draft", review: reviewed }), { ...facts, epubSha256: "abc" }).some((m) => m.includes("承認されていない")));
+  assert.ok(publicationCopyIssues("K-A", copy({ status: "approved", review: reviewed }), { ...facts, epubSha256: "new" }).some((m) => m.includes("照合")));
+  assert.deepEqual(publicationCopyIssues("K-A", copy({ status: "approved", review: reviewed }), { ...facts, epubSha256: "abc" }), []);
 });

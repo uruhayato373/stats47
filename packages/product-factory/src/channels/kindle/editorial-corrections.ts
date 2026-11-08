@@ -9,7 +9,7 @@ export interface EditorialCorrection {
  * Kindle 各冊の全章独立レビュー (review.md) を反映した書籍版だけの校訂。
  * before は R2 article.md の逐語 (太字・リンク記法を含む)。1 回だけ現れることを correctBookArticle が保証する。
  * 同じ誤りは公開ブログにも残るので、サイト側は blog remediation で別途直す (backlog PRODUCT-SALES-READINESS-01)。
- * 追加・再生成は .local/kindle-audit/book-fix.mjs が既存エントリを保持したまま行う (既存 3 件を落とした事故の再発防止)。
+ * 追加・再生成は Google Drive `stats47/Kindle原稿/_audit-diffs/book-fix.mjs` (2026-11-08 に .local/kindle-audit から移した。使うときは手元へコピーする) が既存エントリを保持したまま行う (既存 3 件を落とした事故の再発防止)。
  */
 export const KINDLE_EDITORIAL_CORRECTIONS: Readonly<Record<string, readonly EditorialCorrection[]>> = {
   "aging-solo-living-crisis": [

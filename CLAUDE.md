@@ -27,6 +27,7 @@
 - **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
 - **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
+- **作ったら消す・ローカルを正本にしない**: スキル・エージェント・メインとも、作業で作ったファイルは最後に消す。残すものは git・R2・Google Drive (`drive-archive.mjs`) へ移してから消す。`.local/<名前>` の新しい置き場は `config/local-resources.json` に寿命か理由を付けて登録する (`check-local-registry.mjs` が PR で止める) → `.claude/rules/local-environment.md`「ローカルに残さない」
 - **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、計測・監査・是正キューの記録は `data/<取得元>/` へ置く (`.claude/state/` はエージェント運用の状態だけ。判断は `.claude/rules/data-storage.md`)。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
 - **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
 - **参考文献は private Google Drive で保全し、利用実装仕様書を通して展開する**: 固定ルートは `stats47/参考文献/<資料名>/<版>/` (1 資料 1 版 = 1 directory。PDF・`pages/`・`md/`・`figures/` を展開したまま置き、tar bundle にしない)。folder名は日本語を優先する。ローカルマウントから`$TMPDIR/stats47-source-vault/`へ検証付きで復元し、`npm run source-vault:process`の共通OCR・ページ画像・内部cropを使う。全ページ処理後は`npm run source-vault:inventory`で本文・書籍値を含まない解決台帳を生成し、coverage 100%を確認してからprofile単位で一時領域を削除する。リポジトリ内の`books/`、`docs/books/`、`.claude/pdfs/`は`npm run source-vault:check`で禁止する。資料単位のactiveな利用実装仕様書で権利・一次資料・mapping・gateを定義してから既存SSOTへ反映する → `.claude/rules/reference-source-standards.md`
@@ -39,7 +40,7 @@
 - **観測値・派生を永続 DB に入れない** (DB 肥大で解約に至った経緯があるため R2 に置く)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。正典: `docs/01_技術設計/02_データアーキテクチャ.md`
 - **Geo分析は結論だけ作らない**: Geo/GIS掛け合わせコンテンツは、計算入力・決定的空間演算・補助レイヤー・県別途中artifact・保存則・最終集計を同じcanonical着地で辿れることを必須とする。X・ブログ・noteもこのlineageへ接続し、単一指標ランキングと混在させない → `.claude/rules/geo-analysis-standards.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
-- **ログインが要る計測値はブラウザで取りに行かない**: A8・楽天・note・KDP・GSC/GA4/AdSense の画面の数字は、毎週土曜の朝に Mac が記録した `data/` から読む。読むための管理画面と読み取りスクリプトは hook が止める (例外はオーナーが会話で頼んだときだけ) → `.claude/rules/recorded-measurement-first.md`
+- **ログインが要る計測値はブラウザで取りに行かない**: A8・楽天・note・KDP・GSC/GA4/AdSense の画面の数字は、毎週土曜の週次レビューの最初に Mac で取得 (`npm run weekly:collect`) して記録した `data/` から読む。読むための管理画面と読み取りスクリプトは hook が止める (例外はオーナーが会話で頼んだときだけ) → `.claude/rules/recorded-measurement-first.md`
 - **main へのマージは本番反映の判断・勝手にしない**: オーナーの明示の指示なしに develop→main の PR を開かず、マージしない (hook が止める)。作業が終わったら `npm run release:status` を報告して止まる。本番に効く変更はまとめて 1 日 1 回、急ぐ障害の修正だけその場で出す。UI/ロジックの反復は localhost (`npm run dev:web`) で確認する。PR が開いている間は develop へ push しない → `.claude/rules/branch-workflow.md`
 - **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**Codex を使う経路は 2 つあり、規律が違う**:
   - **① Claude Code から MCP 経由** (`mcp__codex__codex`) — Claude のツールコールとして**同期実行**されるため HEAD/index の奪い合いは構造的に起きない。既定は `sandbox:"read-only"`。規約は **`.claude/rules/codex-mcp.md`**
@@ -119,7 +120,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `survey-content-standards.md` | survey ハブの編集コンテンツ | features/survey・skills/survey |
 | `ranking-content-standards.md` | ランキング AI 解説の生成パイプライン (都道府県専用) | packages/ai-content・scripts/ai-content |
 | `affiliate-ads-standards.md` | アフィリエイト広告 (vertical ハブ・配置・ASP 運用・計測) | features/ads・scripts/ads・skills/ads |
-| `coconala-product-standards.md` | ココナラ / Kindle / note 商品ファクトリー | packages/product-factory・skills/product |
+| `data-pack-standards.md` | データパック (P-01〜P-14) の生成と note 販売 | product-factory の catalog・build・note チャネル・skills/product/build-data-pack |
+| `kindle-publishing-standards.md` | Kindle 書籍の生成・検証と KDP 出品 | product-factory の kindle チャネル・scripts/kdp・skills の kindle/kdp |
 | `branch-workflow.md` | PR・デプロイ・DB データ反映 (develop→main・skip-ci トークン・main 同期) | .github・.husky・skills/dev/deploy |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド・Windows の罠 | package.json・turbo.json・dev-server |
 | `docs-vs-issues.md` | 文書作成・配置・整理・削除と docs / skill / state / Issues の使い分け (文書変更時必読) | docs・.claude/todo・skills/management |
@@ -129,7 +131,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `model-prompting.md` | Claude モデル別の task capsule・effort・委譲設計 | .claude/agents・skills の SKILL.md |
 | `critic-review-protocol.md` | critic 系 agent のレビュー共通プロトコル | agents/*-critic・review.md |
 | `codex-mcp.md` | Claude Code から codex MCP を呼ぶとき (セカンドオピニオン・画像生成) | skills/blog/generate-blog-images・.mcp.json |
-| `browser-use-cleanup.md` | browser-use を使うスキル (daemon 停止 + タブクローズ) | scripts/note・coconala・kdp |
+| `browser-use-cleanup.md` | browser-use を使うスキル (daemon 停止 + タブクローズ) | scripts/note・kdp |
 
 ### コアドキュメント
 

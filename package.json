@@ -19,9 +19,6 @@
     "check:release-local": "tsx apps/web/scripts/local-verification.ts release",
     "build": "turbo run build",
     "affiliate:a8-outcome:check": "node .claude/scripts/ads/check-a8-outcome-gate.mjs --json",
-    "coconala-publish": "node .claude/scripts/coconala/coconala-publish.mjs",
-    "coconala-edit": "node .claude/scripts/coconala/coconala-edit.mjs",
-    "coconala-delete-draft": "node .claude/scripts/coconala/coconala-delete-draft.mjs",
     "kdp:weekly": "npm run products:kindle:weekly --workspace=@stats47/product-factory --",
     "kindle:quality": "npm run products:kindle:quality --workspace=@stats47/product-factory --",
     "kdp:weekly-publish": "node .claude/scripts/kdp/kdp-weekly-publish.mjs",
@@ -260,6 +257,10 @@
     "analysis:check": "node .claude/scripts/analysis/check-analysis-cycle.mjs",
     "analysis:draft": "tsx .claude/scripts/analysis/analysis-draft.ts",
     "analysis:run": "node .claude/scripts/analysis/run-analysis.mjs",
+    "analysis:inventory": "node .claude/scripts/analysis/analysis-inventory.mjs",
+    "analysis:numbers": "node .claude/scripts/analysis/check-article-numbers.mjs",
+    "analysis:contact-sheet": "node .claude/scripts/analysis/figure-contact-sheet.mjs",
+    "test:analysis-tools": "node --test .claude/scripts/analysis/__tests__/analysis-inventory.test.mjs .claude/scripts/analysis/__tests__/article-numbers.test.mjs .claude/scripts/analysis/__tests__/figure-contact-sheet.test.mjs",
     "blog:preview": "node .claude/scripts/blog/preview-draft.mjs",
     "issues:view": "node .claude/scripts/issues/render-issue-view.mjs",
     "test:analysis-cycle": "node --test .claude/scripts/analysis/__tests__/analysis-cycle.test.mjs .claude/scripts/analysis/__tests__/analysis-run.test.mjs",
@@ -279,6 +280,7 @@
     "media:state:pull": "node .claude/scripts/media/sync-r2-state.mjs pull",
     "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push",
     "weekly:audits": "node .claude/scripts/management/run-weekly-audits.mjs",
+    "weekly:collect": "bash scripts/scheduled/weekly-saturday.sh",
     "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs"
   },
   "devDependencies": {

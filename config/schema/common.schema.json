@@ -47,12 +47,7 @@
     },
     "salesChannel": {
       "description": "販売台帳の販路",
-      "enum": ["kdp", "coconala"]
-    },
-    "coconalaListingId": {
-      "description": "ココナラの出品台帳のキー (商品ファクトリーのテーマパック P-NN と Geo サービス)",
-      "type": "string",
-      "pattern": "^(P-\\d{2}|GEO-[A-Z]+-\\d{2})$"
+      "enum": ["kdp"]
     },
     "kindleBookId": {
       "type": "string",

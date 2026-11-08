@@ -4,7 +4,7 @@
  * kdp-form.mjs — KDP 出品フォーム (3ステップ: Details → Content → Pricing) のベストエフォート充填。
  *
  * ★KDP は React SPA で DOM が変わりやすい。ここのセレクタは label/role ベースで堅牢化しているが、
- *   初回は kdp-publish.mjs --probe で構造を確認し、必要ならここを調整すること (coconala-form の discover 相当)。
+ *   初回は kdp-publish.mjs --probe で構造を確認し、必要ならここを調整すること。
  * ★各フィールドは try/catch で、見つからなければ warnings に積んで継続する (偽成功を防ぐ)。
  *   warnings が残るときは kdp-publish.mjs が公開を止める。
  */

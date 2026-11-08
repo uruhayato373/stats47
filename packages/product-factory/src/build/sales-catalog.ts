@@ -6,10 +6,9 @@ import { BUSINESS_PLAN_M1_NOTE_PRODUCTS } from "@stats47/data-configs/business-p
 import { ALL_PRODUCTS } from "../catalog/products";
 import { KINDLE_BOOKS } from "../channels/kindle/book-catalog";
 import { CANONICAL_ARTICLES } from "../channels/note/article-plan";
-import { GEO_SERVICE_OFFER } from "../channels/geo/service-offer";
 import { authoredBookSha256, semanticReviewErrors, revisionEditorIds, type ReviewedChapter } from "../channels/kindle/revision-evidence";
 import { FREE_SAMPLE_STATE, readFreeSampleDelivery } from "./free-sample-delivery";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 // note の公開 URL の形は config/schema/common.schema.json の noteUrl が唯一の定義
 import { NOTE_URL_PATTERN } from "../../../../.claude/scripts/lib/dataset-shape.mjs";
@@ -69,11 +68,11 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     try { return obj(JSON.parse(readFileSync(localPath(root, path), "utf8"))); }
     catch { warnings.push(`Missing or invalid evidence: ${path}`); return {}; }
   };
-  const cp = COCONALA_LISTINGS, kp = KDP_LISTINGS;
+  // 販路は note と Kindle だけ (2026-11-08 にココナラを撤去)。パックの納品版は note の台帳が固定する
+  const kp = KDP_LISTINGS, dp = datasetPath("products.note-pack-deliveries");
   const ap = datasetPath("kindle.archives"), np = datasetPath("note.published-urls");
-  const pp = `${datasetDir("products.publication-receipts")}/coconala-packs-2026-09-06.json`, gp = `${datasetDir("products.publication-receipts")}/geo-service-readiness-2026-09-06.json`;
-  const coco = obj(read(cp).listings), kdp = obj(read(kp).listings), archives = obj(read(ap).books);
-  const ni = read(np), notes = obj(ni.articles), packs = read(pp), geo = read(gp);
+  const kdp = obj(read(kp).listings), archives = obj(read(ap).books), deliveries = obj(read(dp).packs);
+  const ni = read(np), notes = obj(ni.articles);
   const noteLedgerPath = datasetPath('note.articles');
   const noteArticles = list(read(noteLedgerPath).articles).map(obj);
   const nrp = `.local/note-products-revisions/${noteRevision}/report.json`;
@@ -86,20 +85,19 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
   const offers: SalesOffer[] = ALL_PRODUCTS.map(p => {
     let free = null;
     if (p.id === "P-13") { try { free = readFreeSampleDelivery(root); } catch { warnings.push("invalid free sample pin"); } }
-    const l = obj(coco[p.id]), d = obj(free?._delivery ?? l._delivery), receipt = list(packs.items).map(obj).find(i => i.id === p.id);
+    const d = obj(free?._delivery ?? obj(deliveries[p.id])._delivery);
     const o: SalesOffer = {
       id: p.id, title: p.name, kind: "pack", catalogStatus: p.status, scope: p.jobToBeDone,
       free: p.price.initialYen === 0, candidate: false, buildStatus: "missing", artifactDirectory: str(d.artifactDirectory) || null,
-      artifactSha256: null, blockers: [], ownerGates: [], evidencePaths: [cp, pp],
-      channels: [{ channel: "coconala", publicationStatus: str(l.status) || "not-listed", checkedAt: str(receipt?.verifiedAt) || null,
-        url: str(l.serviceUrl) || null, priceYen: num(l.priceYen) ?? p.price.initialYen, priceStatus: l.priceYen ? "recorded" : "proposal", blockers: [] }],
+      artifactSha256: null, blockers: [], ownerGates: [], evidencePaths: [dp],
+      channels: [],
       nextAction: "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
     };
     if (o.artifactDirectory) {
       if (!str(d.manifestSha256)) o.blockers.push("納品版の固定SHAがない");
       inspect(o, "manifest.json", str(d.manifestSha256));
     } else o.blockers.push("現行納品版が未固定。旧版への自動フォールバックは禁止");
-    if (p.formats.some(f => f === "pptx" || f === "xlsx") && d.officeValidation !== "verified") o.ownerGates.push(l.status === "listed" ? "Office実機の表示・編集確認（未確認と明示して出品中）" : "配布前にOffice実機の表示・編集を確認する");
+    if (p.formats.some(f => f === "pptx" || f === "xlsx") && d.officeValidation !== "verified") o.ownerGates.push("配布前にOffice実機の表示・編集を確認する");
     if (free) { o.evidencePaths.push(FREE_SAMPLE_STATE); o.nextAction = "無料見本の内容・配布方法をレビューし、承認後に公開する。Office編集機能の見本ではない"; o.ownerGates.push("無料サンプルの配布承認"); }
     if (["P-06", "P-12"].includes(p.id)) o.blockers.push("歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない");
     const a = CANONICAL_ARTICLES.find(a => a.memberProductIds.includes(p.id));
@@ -119,15 +117,6 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     }
     return o;
   });
-  const g = GEO_SERVICE_OFFER, pub = obj(geo.publication), sample = str(geo.sampleOutput);
-  const geoListing = obj(coco[g.id]);
-  offers.push({ id: g.id, title: g.title, kind: "service", catalogStatus: g.status, scope: g.scope, free: false, candidate: false,
-    buildStatus: sample && existsSync(join(root, sample)) ? "generated" : "missing", artifactDirectory: sample || null, artifactSha256: null,
-    blockers: ["見本は神奈川県。受注県ごとに生成・保存則・出典・内容確認が必要"], ownerGates: [], evidencePaths: [gp, cp],
-    channels: [{ channel: "coconala", publicationStatus: str(geoListing.status) || str(geo.status) || "unknown", checkedAt: str(obj(geoListing._withdrawal).decisionDate) || str(pub.anonymousCheckedAt) || null,
-      url: str(pub.serviceUrl) || null, priceYen: g.priceYen, priceStatus: "recorded", blockers: [] }],
-    nextAction: geoListing.status === 'withdrawn' ? 'ココナラ撤退済み。新規受付を行わない。'
-      : "受注時に対象県・固定条件を照合し、専用納品CLIで生成・検証する" });
   for (const b of KINDLE_BOOKS) {
     const l = obj(kdp[b.id]), archive = obj(archives[b.id]);
     const revision = list(archive.revisions).map(obj).find(r => r.revision === archive.latestRevision);
@@ -185,12 +174,20 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     const n = obj(notes[p.articleKey]), url = str(n.url), dir = `.local/geo-products/${p.articleKey}`;
     const o: SalesOffer = { id: p.id, title: str(n.title) || p.title, kind: "article", catalogStatus: p.status, scope: p.readerOutcome,
       free: false, candidate: !url, buildStatus: "missing", artifactDirectory: existsSync(join(root, dir)) ? dir : null,
-      artifactSha256: null, blockers: [], ownerGates: [], evidencePaths: [np, gp],
+      artifactSha256: null, blockers: [], ownerGates: [], evidencePaths: [np],
       channels: [{ channel: "note", publicationStatus: url ? "published-recorded" : "draft", checkedAt: null,
         url: url || null, priceYen: num(n.price_jpy) ?? p.priceYen, priceStatus: url ? "recorded" : "proposal", blockers: [] }],
       nextAction: url ? "公開済み本文・添付・購入導線をログイン済み画面で再照合する" : p.readinessGate };
+    // 販売中の納品物の正本は private R2 の記事保存 (本文 + product/*.zip)。ローカルの生成物は作業出力で、
+    // 期限で消える (2026-11-08)。ローカルが無くても、台帳が読み戻し照合済みの版を持てばそれを根拠にする。
+    const saved = obj(obj(noteArticles.find((item) => item.key === p.articleKey)?.body).manifest);
+    const savedVerified = str(obj(noteArticles.find((item) => item.key === p.articleKey)?.body).verifiedAt);
     if (o.artifactDirectory) inspect(o, "MANIFEST.json");
-    else o.blockers.push("本文・添付・再現テスト・出典利用条件・独立レビューが未完了");
+    else if (str(saved.sha256) && savedVerified) {
+      o.buildStatus = "hash-verified";
+      o.artifactSha256 = str(saved.sha256);
+      o.evidencePaths.push(noteLedgerPath);
+    } else o.blockers.push("本文・添付・再現テスト・出典利用条件・独立レビューが未完了");
     o.blockers.push(url ? "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）" : p.readinessGate);
     offers.push(o);
   }
@@ -204,7 +201,7 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     } catch { offer.blockers.push("納品物リンクの安全なパスを確認できない"); }
   }
   return { schemaVersion: 2, checkedAt, selectedRevisions: { kindle: kindleVersion ?? "latest-local", note: noteRevision },
-    scope: "既存14パック・32冊・Geo役務1・Geo note15企画。販売先違いは同一商品内のvariant。その他の未定義商品は含まない。",
+    scope: "既存14パック・Kindle 本・Geo note15企画。販路は note と Kindle だけ (2026-11-08 にココナラを撤去)。販売先違いは同一商品内のvariant。その他の未定義商品は含まない。",
     summary: { total: offers.length, existing: offers.filter(o => !o.candidate).length, candidates: offers.filter(o => o.candidate).length,
       free: offers.filter(o => o.free).length, hashVerified: offers.filter(o => o.buildStatus === "hash-verified").length }, warnings, offers };
 }

@@ -546,7 +546,7 @@ export type DatasetCoverFigure =
   | { kind: 'geo-item'; source: string; metric: string; invert?: boolean; caption: string }
   | { kind: 'stats-values'; source: string; year: string; invert?: boolean; caption: string }
   | { kind: 'image'; source: string; caption: string }
-  // pack-csv: a column of the pack's own data.csv (local .local/coconala-products build) drawn as a choropleth.
+  // pack-csv: a column of the pack's own data.csv (local .local/data-packs build) drawn as a choropleth.
   | { kind: 'pack-csv'; source: string; column: string; caption: string };
 export const DATASET_COVER_FIGURES: Record<string, DatasetCoverFigure> = {
   'd-geo-ipss-prefecture-map': { kind: 'stats-values', source: 'app/stats/future-population-change-rate-2050/values.json', year: '2050', invert: true,
@@ -561,18 +561,18 @@ export const DATASET_COVER_FIGURES: Record<string, DatasetCoverFigure> = {
     caption: '家計調査 五分位階級別の品目格差（2024年）' },
   'd-kakei-category-dataset': { kind: 'image', source: 'note/stats47-note/n68f5e09c8d62/images/image-04.png',
     caption: '家計調査の教育費 1位と47位（2024年）' },
-  "prefecture-population-household-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-01/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
-  "prefecture-income-wage-hiring-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-02/v3-20261012-mac-r4/data.csv", column: "有効求人倍率（倍・2022）", caption: "収録データの例: 有効求人倍率" },
-  "prefecture-tourism-lodging-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-03/v3-20261012-mac-r4/data.csv", column: "延べ宿泊者数（人泊・2024）", caption: "収録データの例: 延べ宿泊者数" },
-  "prefecture-municipal-finance-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-04/v3-20261012-mac-r4/data.csv", column: "財政力指数（都道府県財政）（指数・2022）", caption: "収録データの例: 財政力指数" },
-  "prefecture-healthcare-nursing-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-05/v3-20261012-mac-r4/data.csv", column: "医師数（人・2022）", caption: "収録データの例: 医師数" },
-  "prefecture-education-childcare-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-06/v3-20261012-mac-r4/data.csv", column: "図書館数（人口100万人当たり）（館・2021）", caption: "収録データの例: 図書館数" },
-  "prefecture-migration-living-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-07/v3-20261012-mac-r4/data.csv", column: "年平均気温（℃・2024）", caption: "収録データの例: 年平均気温" },
-  "prefecture-retail-trade-area-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-08/v3-20261012-mac-r4/data.csv", column: "商業年間商品販売額（卸売業＋小売業）（百万円・2022）", caption: "収録データの例: 商業年間商品販売額" },
-  "prefecture-industry-economy-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-09/v3-20261012-mac-r4/data.csv", column: "耕地放棄面積（ｈａ・2014）", caption: "収録データの例: 耕地放棄面積" },
-  "prefecture-disaster-infrastructure-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-10/v3-20261012-mac-r4/data.csv", column: "道路実延長（高速道路）（km・2023）", caption: "収録データの例: 道路実延長" },
-  "prefecture-map-chart-assets-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-11/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
-  "prefecture-all-in-one-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-12/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
-  "prefecture-free-trial-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-13/v3-20261012-mac-r4/data.csv", column: "総人口（人・2024）", caption: "収録データの例: 総人口" },
-  "prefecture-household-consumption-pack": { kind: 'pack-csv', source: ".local/coconala-products/P-14/v3-20261012-mac-r4/data.csv", column: "りんご消費支出額（都道府県庁所在市の二人以上世帯の年間りんご消費支出額）（円・2024）", caption: "収録データの例: りんご消費支出額" },
+  "prefecture-population-household-pack": { kind: 'pack-csv', source: ".local/data-packs/P-01/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
+  "prefecture-income-wage-hiring-pack": { kind: 'pack-csv', source: ".local/data-packs/P-02/v3-20261012-mac-r4/data.csv", column: "有効求人倍率（倍・2022）", caption: "収録データの例: 有効求人倍率" },
+  "prefecture-tourism-lodging-pack": { kind: 'pack-csv', source: ".local/data-packs/P-03/v3-20261012-mac-r4/data.csv", column: "延べ宿泊者数（人泊・2024）", caption: "収録データの例: 延べ宿泊者数" },
+  "prefecture-municipal-finance-pack": { kind: 'pack-csv', source: ".local/data-packs/P-04/v3-20261012-mac-r4/data.csv", column: "財政力指数（都道府県財政）（指数・2022）", caption: "収録データの例: 財政力指数" },
+  "prefecture-healthcare-nursing-pack": { kind: 'pack-csv', source: ".local/data-packs/P-05/v3-20261012-mac-r4/data.csv", column: "医師数（人・2022）", caption: "収録データの例: 医師数" },
+  "prefecture-education-childcare-pack": { kind: 'pack-csv', source: ".local/data-packs/P-06/v3-20261012-mac-r4/data.csv", column: "図書館数（人口100万人当たり）（館・2021）", caption: "収録データの例: 図書館数" },
+  "prefecture-migration-living-pack": { kind: 'pack-csv', source: ".local/data-packs/P-07/v3-20261012-mac-r4/data.csv", column: "年平均気温（℃・2024）", caption: "収録データの例: 年平均気温" },
+  "prefecture-retail-trade-area-pack": { kind: 'pack-csv', source: ".local/data-packs/P-08/v3-20261012-mac-r4/data.csv", column: "商業年間商品販売額（卸売業＋小売業）（百万円・2022）", caption: "収録データの例: 商業年間商品販売額" },
+  "prefecture-industry-economy-pack": { kind: 'pack-csv', source: ".local/data-packs/P-09/v3-20261012-mac-r4/data.csv", column: "耕地放棄面積（ｈａ・2014）", caption: "収録データの例: 耕地放棄面積" },
+  "prefecture-disaster-infrastructure-pack": { kind: 'pack-csv', source: ".local/data-packs/P-10/v3-20261012-mac-r4/data.csv", column: "道路実延長（高速道路）（km・2023）", caption: "収録データの例: 道路実延長" },
+  "prefecture-map-chart-assets-pack": { kind: 'pack-csv', source: ".local/data-packs/P-11/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
+  "prefecture-all-in-one-pack": { kind: 'pack-csv', source: ".local/data-packs/P-12/v3-20261012-mac-r4/data.csv", column: "総人口（人・2025）", caption: "収録データの例: 総人口" },
+  "prefecture-free-trial-pack": { kind: 'pack-csv', source: ".local/data-packs/P-13/v3-20261012-mac-r4/data.csv", column: "総人口（人・2024）", caption: "収録データの例: 総人口" },
+  "prefecture-household-consumption-pack": { kind: 'pack-csv', source: ".local/data-packs/P-14/v3-20261012-mac-r4/data.csv", column: "りんご消費支出額（都道府県庁所在市の二人以上世帯の年間りんご消費支出額）（円・2024）", caption: "収録データの例: りんご消費支出額" },
 };

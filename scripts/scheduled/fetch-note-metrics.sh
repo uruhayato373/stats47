@@ -1,5 +1,5 @@
 #!/bin/bash
-# 土曜ランナー weekly-saturday.sh の 2 段目 (毎週土曜 07:00 の認証付き計測の後。2026-10-26 に月曜 09:15 の単独 launchd からまとめた)
+# 週次の取得 weekly-saturday.sh (npm run weekly:collect・週次レビューの最初に手で回す) の 2 段目 (認証付き計測の後。2026-10-26 に月曜 09:15 の単独 launchd からまとめた)
 # 実体は .claude/scripts/note/fetch-note-metrics.sh（browser-use で note dashboard を取得）
 #
 # 実行ログ: ~/Library/Logs/stats47/fetch-note-metrics.log

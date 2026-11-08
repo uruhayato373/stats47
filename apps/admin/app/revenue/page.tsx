@@ -161,7 +161,7 @@ export default function RevenuePage() {
         )}
       </Section>
 
-      <Section title="販売台帳 (証拠付きの手入力・KDP / ココナラ)">
+      <Section title="販売台帳 (証拠付きの手入力・KDP)">
         {hasError(d.productSales) ? (
           <ErrorNote error={d.productSales.error} />
         ) : (
@@ -199,7 +199,7 @@ export default function RevenuePage() {
                 ))}
               </DataTable>
             ) : (
-              <p className="text-sm text-muted-foreground">KDPまたはココナラの公式レポートを保存後、product-factoryの販売台帳CLIで記録します。</p>
+              <p className="text-sm text-muted-foreground">KDPの公式レポートを保存後、product-factoryの販売台帳CLIで記録します。</p>
             )}
           </>
         )}

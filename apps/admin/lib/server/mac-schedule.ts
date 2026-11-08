@@ -14,7 +14,7 @@ import { wrap } from "./state-io";
  *   - この Mac への登録: ~/Library/LaunchAgents/<Label>.plist (定義と時刻が一致しているか。2026-10-26 に土曜へ移した
  *     3 本が、リポジトリだけ直して Mac では旧時刻のまま動いていたため)
  *   - 結果: ~/Library/Logs/stats47/<名前>.log の `=== <時刻> [<名前>] start / ok / FAILED rc=N ===` (_common.sh の log_run が書く)
- * 土曜ランナー (scripts/scheduled/weekly-saturday.sh) は段ごとのログと、週次監査の要約 .local/weekly-audits/<日付>/summary.json も読む。
+ * 週次の取得 (npm run weekly:collect = scripts/scheduled/weekly-saturday.sh。2026-11-08 から launchd ではなく週次レビューの最初に手で回す) は段ごとのログと、週次監査の要約 .local/weekly-audits/<日付>/summary.json も読む。
  */
 
 export const SCHEDULE_DIR = "scripts/scheduled";
@@ -65,12 +65,14 @@ export interface MacSchedule {
   /** リポジトリの台本が自分で登録を作るもの (local-resources.sh など。plist はリポジトリに置かない) */
   scriptInstalled: string[];
   saturday: {
+    /** 週次の取得 (npm run weekly:collect) 全体の最後の結果。weekly-saturday.log を読む (2026-11-08 から手動) */
+    overall: LogStatus;
     steps: Array<{ id: string; label: string; log: LogStatus }>;
     audits: { day: string; results: WeeklyAuditResult[] } | null;
   };
 }
 
-/** 土曜ランナーの段 (weekly-saturday.sh の `step <名前>` と同じ順。名前はログのファイル名) */
+/** 週次の取得の段 (weekly-saturday.sh の `step <名前>` と同じ順。名前はログのファイル名) */
 export const SATURDAY_STEPS = [
   { id: "measurement", label: "認証付き計測 (ログイン → 取得 → 記録)" },
   { id: "note-metrics", label: "note の計測 (表紙監査 + ダッシュボード)" },
@@ -205,6 +207,7 @@ export function macSchedule() {
       strayInstalled,
       scriptInstalled,
       saturday: {
+        overall: readLog("weekly-saturday"),
         steps: SATURDAY_STEPS.map((s) => ({ ...s, log: readLog(s.id) })),
         audits: latestAudits(),
       },

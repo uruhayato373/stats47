@@ -390,7 +390,7 @@
   }
 }
 
-/* Coconala の Playwright 実測 font stack と同じ順序を使用する。 */
+/* 端末フォントの font stack (Hiragino-first)。 */
 .portal-header {
   font-family:
     'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo,
@@ -433,7 +433,7 @@
   }
 
   body {
-    /* Coconala と同じ Hiragino-first。Web フォントは追加せず端末フォントへフォールバックする。 */
+    /* Hiragino-first。Web フォントは追加せず端末フォントへフォールバックする。 */
     font-family: "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
       Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;

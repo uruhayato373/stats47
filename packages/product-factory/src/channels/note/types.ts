@@ -1,7 +1,7 @@
 /**
  * note 商品展開ファクトリー — 型定義 (SSOT)
  *
- * 恒久仕様: .claude/rules/coconala-product-standards.md §9
+ * 恒久仕様: .claude/rules/data-pack-standards.md §6
  * 完全DBレス: mapping・article-plan・生成コードは git TS が SSOT。
  * 商品側は productId/version、note 側は slug/series を持ち、本ファイルの型で結合する。
  * .local/note-products/ の draft.md 等は派生物 (手編集を正典にしない・note.com へ投稿しない)。
@@ -19,7 +19,6 @@ export type NoteProductSeries =
   | "media-data-visuals" // G: 記事・動画・SNS 図版
   | "statistics-education" // H: 探究・授業・研修
   | "life-area-comparison" // I: 移住・転職・子育て
-  | "custom-analysis-services" // J: 個別制作の選び方・事例 (無料 → ココナラ受注)
   | "license-guide" // K: ライセンス・版の違い (比較記事に集約)
   | "free-samples"; // L: 無料サンプル記事
 
@@ -27,7 +26,7 @@ export type NoteProductSeries =
  * disposition。現行商品すべてに必須。
  * - standalone-paid: 単独有料記事 (その記事の唯一の商品)
  * - bundle-member: テーマ記事・マガジンに束ねる (複数商品を 1 有料記事へ)
- * - free-lead: 無料解説からココナラ受注 / 有料商品へ誘導 (J サービス・L 無料サンプル)
+ * - free-lead: 無料解説から有料商品へ誘導 (L 無料サンプル)
  * - catalog-only: 独立記事を作らず比較記事内でのみ扱う (K ライセンス variant)
  */
 export type NoteDisposition = "standalone-paid" | "bundle-member" | "free-lead" | "catalog-only";
@@ -55,8 +54,8 @@ export interface NoteProductMapping {
   readonly priceJpy: number;
   /** 有料ライン以降に添付する商品 (この商品の生成物)。無料記事は []。 */
   readonly attachmentProductIds: readonly string[];
-  /** リンクするココナラ商品 ID (= 束ね対象商品)。 */
-  readonly coconalaProductIds: readonly string[];
+  /** 記事が束ねるデータパックの商品 ID。 */
+  readonly productIds: readonly string[];
   /** 送客先 stats47 パス (無料コンテンツへの導線)。 */
   readonly stats47Targets: readonly string[];
   readonly priority: 1 | 2 | 3;

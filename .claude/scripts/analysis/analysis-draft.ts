@@ -14,6 +14,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { renderStackedChart } from "../../../apps/admin/lib/template-composition-stacked";
+import { renderGroupBoxplotChart } from "../../../apps/admin/lib/template-group-boxplot";
 import { renderGroupedBarsChart } from "../../../apps/admin/lib/template-grouped-bars";
 import { renderRelationshipScatterChart } from "../../../apps/admin/lib/template-relationship-scatter";
 import { renderLineChart } from "../../../apps/admin/lib/template-trend-line";
@@ -23,7 +25,14 @@ import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInpu
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const GENERATED_BY = ".claude/scripts/analysis/analysis-draft.ts";
-const RENDERERS = { "grouped-bar": renderGroupedBarsChart, line: renderLineChart, scatter: renderRelationshipScatterChart } as const;
+// line は chart.series を書くと 2 時点の変化 (スロープ) になる。stacked-bar は 100% 積み上げ
+const RENDERERS = {
+  "grouped-bar": renderGroupedBarsChart,
+  "stacked-bar": renderStackedChart,
+  line: renderLineChart,
+  scatter: renderRelationshipScatterChart,
+  boxplot: renderGroupBoxplotChart,
+} as const;
 
 const arg = (name: string) => {
   const i = process.argv.indexOf(name);
@@ -74,6 +83,10 @@ for (const figure of figures) {
 writeJson(join(dataDir, "analysis-summary.json"), result);
 console.log(`図 ${figures.length} 枚 → ${join("contents/blog", article.slug, "data")}`);
 
+if (process.argv.includes("--figures-only")) {
+  console.log("図だけを描いた。指示文と書き手は使っていない (--figures-only)");
+  process.exit(0);
+}
 const materials = join(ROOT, ".local/analysis", `${article.slug}.material.md`);
 mkdirSync(dirname(materials), { recursive: true });
 writeFileSync(materials, buildMaterials({ analysis }));
@@ -92,10 +105,6 @@ const prompt = spawnSync(process.execPath, [
 ], { cwd: ROOT, stdio: "inherit" });
 if (prompt.status !== 0) process.exit(prompt.status ?? 1);
 
-if (process.argv.includes("--figures-only")) {
-  console.log("書き手は呼んでいない (--figures-only)");
-  process.exit(0);
-}
 if (existsSync(join(articleDir, "article.md"))) {
   console.error(`✗ article.md が既にある。上書きしない: ${article.slug}`);
   process.exit(1);

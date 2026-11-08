@@ -81,7 +81,7 @@ export const KDP_PORTFOLIO_POLICY = {
   title: "残りのKindleを継続出版するか判断",
   reason: "公開済み書籍の売上・KENPを実測し、需要があるシリーズだけを1冊ずつ再開する",
   resumeCondition: "オーナーの明示承認 + 売上またはKENPの需要証拠",
-  source: ".claude/rules/coconala-product-standards.md §8",
+  source: ".claude/rules/kindle-publishing-standards.md",
 };
 
 /**

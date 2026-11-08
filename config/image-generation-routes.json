@@ -7,6 +7,8 @@
     { "id": "link-card-background", "label": "リンクカードの背景", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/scripts/ogp/link-card-production.ts", "master": "R2 の共通背景", "record": "確定した依頼と生成物の SHA" },
     { "id": "kindle-cover", "label": "Kindle の表紙", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/skills/product/build-kindle-book/SKILL.md", "master": "候補は Drive、承認版は R2 (cover-design.ts に SHA)", "record": "cover-design.ts の SHA と文字の照合結果" },
     { "id": "area-specialty", "label": "県ページの特産品イラスト", "generator": "codex-imagegen", "invoke": "owner-session", "entry": ".claude/rules/area-databook-standards.md", "master": "R2 app/areas", "record": "品目 slug とファイル" },
+    { "id": "category-hero", "label": "カテゴリページの hero 画像", "generator": "codex-imagegen", "invoke": "mcp", "entry": "apps/web/scripts/print-category-hero-prompts.ts", "master": "assets/page-heroes/category-<key>-hero.jpg (配信は apps/web/public/images の webp)", "record": "プロンプトは category-hero-catalog.ts が決定的に持つ" },
+    { "id": "category-card", "label": "ランキングのカテゴリカードの絵", "generator": "codex-imagegen", "invoke": "mcp", "entry": "apps/web/scripts/print-category-hero-prompts.ts", "master": "apps/web/public/images/categories/<key>.webp", "record": "プロンプトは category-hero-catalog.ts が決定的に持つ (--kind card)" },
     { "id": "ranking-card-motif", "label": "ランキングカードの絵 (試作)", "generator": "codex-imagegen", "invoke": "mcp", "entry": ".claude/rules/ogp-image-standards.md", "master": "試作の間は置かない。採用した絵だけ assets/ogp/ranking-card-motifs", "record": "data/ogp/ranking-card-motif-trial.json (プロンプト・出力の SHA・目視)" }
   ],
   "deterministicRoutes": [
@@ -15,8 +17,6 @@
   ],
   "legacy": [
     { "path": "apps/web/scripts/lib/gemini-image-client.ts", "removalCard": "BLOG-BG-PIPELINE-CONSOLIDATE-01", "reason": "公開済みの Gemini 背景が残る間の互換" },
-    { "path": "apps/web/scripts/data/blog-ogp-visual-catalog.ts", "removalCard": "BLOG-BG-PIPELINE-CONSOLIDATE-01", "reason": "公開済みの Gemini 背景が残る間の互換" },
-    { "path": "apps/web/scripts/generate-category-images.ts", "removalCard": "IMAGE-ROUTES-CATEGORY-CODEX-01", "reason": "カテゴリ画像の Codex 移行待ち" },
-    { "path": "apps/web/scripts/generate-category-heroes.ts", "removalCard": "IMAGE-ROUTES-CATEGORY-CODEX-01", "reason": "カテゴリ画像の Codex 移行待ち" }
+    { "path": "apps/web/scripts/data/blog-ogp-visual-catalog.ts", "removalCard": "BLOG-BG-PIPELINE-CONSOLIDATE-01", "reason": "公開済みの Gemini 背景が残る間の互換" }
   ]
 }

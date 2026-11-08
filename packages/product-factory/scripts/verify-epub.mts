@@ -18,7 +18,7 @@
  *     ③ 本文不変量   — `content-invariants.ts` (Web 記事の名残・年/年度混在・率系の単位・冊間重複。
  *                      2026-09-19 の全冊監査で見つかった、①②を通り抜ける欠陥)
  *
- *   ②の不変量は `.claude/rules/coconala-product-standards.md` §8 の表が正典で、
+ *   ②の不変量は `.claude/rules/kindle-publishing-standards.md` の表が正典で、
  *   生成器側のユニットテスト (`src/generators/__tests__/epub.test.ts`) と同じことを
  *   **生成物に対して**確かめる (生成器を通さず手で置いた EPUB も検査できる)。
  */
@@ -83,7 +83,7 @@ interface Finding {
 
 /**
  * レイアウト不変量。epubcheck が見ない「読めるか」を見る。
- * 不変量の正典は `.claude/rules/coconala-product-standards.md` §8。
+ * 不変量の正典は `.claude/rules/kindle-publishing-standards.md`。
  */
 function checkLayout(epub: string): Finding[] {
   const f: Finding[] = [];

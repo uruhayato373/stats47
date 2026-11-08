@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-03T05:00:00.000Z",
+  "updated_at": "2026-11-08T21:51:52.235Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -590,19 +590,27 @@
         "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
         "note": "GSC「製造品出荷額 ランキング 市町村」CTR 46%・平均1.3位、該当ページ28日390クリック。データ販売の実売は0"
       },
-      "status": "proposed",
+      "status": "running",
       "created_at": "2026-10-28T03:14:01.490Z",
-      "started_at": null,
+      "started_at": "2026-11-04T04:11:16.000Z",
       "result": null,
       "learnings": null,
       "closed_at": null,
-      "actions": [],
+      "actions": [
+        "2026-11-04 note 有料記事 (¥980) 公開 https://note.com/stats47/n/n5d86476e9c73",
+        "2026-11-04 市区町村ランキング (manufacturing-shipment-amount) に商品ページへの案内を設置 (e08614740f, PR #1219)"
+      ],
       "pending_user_actions": [],
-      "next_check_date": null,
+      "next_check_date": "2026-12-16",
       "history": [
         {
           "date": "2026-10-28T03:14:01.490Z",
           "action": "proposed"
+        },
+        {
+          "date": "2026-11-08T21:51:44.719Z",
+          "action": "running",
+          "note": "2026-11-04 に note で ¥980 で販売開始し、同日 PR #1219 (main 13:11 JST) で市区町村ランキング→/products/data-muni-manufacturing の案内を本番に出した。2026-11-09 に本番の両 URL が HTTP 200・案内リンクありを確認"
         }
       ],
       "card": "MUNI-DATA-PRODUCT-PILOT-01",
@@ -620,7 +628,8 @@
         "MUNI-DATA-LICENSE-CHECK-01",
         "MUNI-DATA-PRODUCT-BUILD-01",
         "MUNI-DATA-PRODUCT-SALE-01"
-      ]
+      ],
+      "measurement": "週次で読む: 案内のクリック = GA4 の nav_click / product_click (遷移先 /products/data-muni-manufacturing)、販売数 = data/products/sales-ledger.json の note 行 (土曜の認証付き計測で記録)。判定日 2026-12-16 (開始から 6 週)"
     },
     {
       "id": "EXP-008",
@@ -881,7 +890,7 @@
         "effort": 1,
         "learning": 3,
         "certainty": 2,
-        "weighted": 2.0,
+        "weighted": 2,
         "verdict": "proposed",
         "reason": "計測の実装は済み (PRODUCT-REFERRAL-MEASURE-01)。GA4 の dimension 登録と本番デプロイを待つ"
       },

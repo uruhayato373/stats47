@@ -1,7 +1,7 @@
 /**
  * canonical 記事プラン (SSOT)。
  *
- * ココナラの商品カタログ (P-01〜P-14) から 1 パック = 1 記事で決定的に導出する。
+ * データパックの商品カタログ (P-01〜P-14) から 1 パック = 1 記事で決定的に導出する。
  * 商品 ID・価格・テーマを別の手書き台帳へ複製しないため、商品追加・変更時は
  * `ALL_PRODUCTS` だけを編集すれば note 側の coverage も追従する。
  */
@@ -36,7 +36,7 @@ function articleRole(product: ProductDefinition): NoteArticleRole {
 
 function articlePrice(product: ProductDefinition): number {
   if (product.theme === "free-trial") return 0;
-  // note の既存価格帯 (最大 9,800 円) に収めた提案値。ココナラ価格の SSOT は変更しない。
+  // note の既存価格帯 (最大 9,800 円) に収めた提案値。カタログ価格 (packs.ts) は変更しない。
   return Math.min(9_800, Math.max(500, product.price.initialYen));
 }
 

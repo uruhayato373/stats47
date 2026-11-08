@@ -1,9 +1,9 @@
 # @stats47/product-factory
 
-stats47 の地図・チャート・公的統計から、ココナラ向け Office・データ商品と Kindle 向け EPUB を
-決定的に生成・検証するワークスペース。
+stats47 の地図・チャート・公的統計から、note で売る Office・データ商品（データパック）と Kindle 向け EPUB を
+決定的に生成・検証するワークスペース。note と Kindle は互いの台帳を読まずに回る（ココナラは 2026-10-19 撤退、2026-11-08 に経路を削除）。
 
-- 恒久仕様: `.claude/rules/coconala-product-standards.md`
+- 恒久仕様: データパックと note は `.claude/rules/data-pack-standards.md`、Kindle は `.claude/rules/kindle-publishing-standards.md`
 - 商品カタログ SSOT: `src/catalog/products/packs.ts`（P-01〜P-14 の14テーマパック）
 - 旧商品案の由来: Git履歴上の旧 A-01〜L-07。現行の由来情報は `packs.ts` の `sourceIds`
 - 残タスク: `.claude/todo/backlog.md`
@@ -17,19 +17,19 @@ PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2
   `sourceIds` に由来情報として残す。
 - `src/build/` と `src/generators/` に PPTX / XLSX / CSV / SVG / PNG / PDF / 販売文 /
   manifest / readiness の生成器を実装済み。
-- 設計statusは `packs.ts`、外部公開実績は `config/{coconala,kdp}-listings.json`。
+- 設計statusは `packs.ts`、外部公開実績は note が `data/note/articles.json`、Kindle が `config/kdp-listings.json`。
   生成・公開・販売品質を同じstatusで代用しない。横断一覧は `products:report` で再生成する。
 - PowerPoint / Excel の構造検証と自動テストは実装済み。Windows/Mac Office実機での表示、
   再着色、再計算は人間が `READINESS.md` に沿って確認する。
 - noteチャネルは現行14パックから計画を導出し、型検査・テスト対象。販売準備は `revision` を使い、
-  公開済みパックの `_delivery` 固定SHAから別版を作る。旧v1直参照のgenerate/promoteは使わない。
+  納品版台帳 `data/products/note-pack-deliveries.json` の `_delivery` 固定SHAから別版を作る。旧v1直参照のgenerate/promoteは使わない。
 - Kindleチャネルは `src/channels/kindle/` に同居する。EPUB生成とKDPフォーム操作を分離し、
   ログイン、税務・銀行情報、実公開は人間工程とする。
 
 ## CLI
 
 ```bash
-# ココナラ商品
+# データパック
 npm run products:catalog  --workspace=@stats47/product-factory -- --check
 npm run products:validate --workspace=@stats47/product-factory -- --id P-01
 npm run products:generate --workspace=@stats47/product-factory -- --id P-01 --version <NEW_VERSION>
@@ -64,8 +64,8 @@ npm run type-check --workspace=@stats47/product-factory
 npm run test:run   --workspace=@stats47/product-factory
 ```
 
-全商品生成には明示的な `--all` が必要。ココナラ/KDPへの実公開は生成CLIの責務ではなく、
-専用Playwrightスクリプトの `--commit` とオーナー承認を必須とする。
+全商品生成には明示的な `--all` が必要。note/KDPへの実公開は生成CLIの責務ではなく、
+専用の公開フローとオーナー承認を必須とする。
 
 ## 技術上の制約
 
@@ -106,46 +106,20 @@ KDPの単発・バッチは共有flowで送信版と保全済み必須5ファイ
 画面の既存「アップロード済み」だけを現行版の証拠にしない。同じセッションで検証済みEPUB/表紙の固定bytesを送信し、処理完了と最終read-backを確認する。公開直前に版とSHAを再照合し、送信証拠がなければ再投入する。これはPreviewer・本人による申告/公開承認を代替しない。
 
 無料P-13は総人口2024のPDF・PNG・CSV見本（Office非同梱）。生成時の固定先は
-`data/products/free-sample-delivery.json`に記録し、Coconalaの公開記録へ混ぜない。
+`data/products/free-sample-delivery.json`に記録し、有料パックの納品版台帳へ混ぜない。
 note無料原稿はこのpinだけを参照し、有料パックの添付を露出しない。
 Noto JPのPDFはフォント全体を埋め込む。subsetでは文字抽出が成功しても描画文字が欠けるため、
 `tests/free-sample.test.ts`で埋め込みバイトを検査し、生成後にはページ画像も確認する。
 
-### 公開済み定型パックの納品物照合
+### 定型パックの納品物照合
 
-販売文の件数・形式は `config/coconala-listings.json` の `_delivery` で、実際の
-manifest SHA・CSVの47地域・出典行数・PowerPoint抜粋数と照合する。
-`node .claude/scripts/coconala/render-pack-previews.mjs` が読み取り検査、`--render` がCSV見本画像生成。
-見本はExcelのスクリーンショットを装わず、実数値と出典・対象範囲を表示する。
-`node .claude/scripts/coconala/audit-revised-deliveries.mjs` で旧版との数値・欠損位置保存、
-Excel一覧の全セル、PPT抜粋・PDF全指標の定義、PDFの全テキスト矩形がページ内にあることを検査する（Poppler必須）。
-
-2026-09-06の表示修正版は `.local/coconala-products/P-*/v2-20260906-r1/`。
-旧版v1のハッシュ検証後、`rebuild-pack-deliveries.mjs --id P-XX --build` で別版を生成する。
+note で売る納品版は `data/products/note-pack-deliveries.json` の `_delivery`（成果物ディレクトリと manifest SHA）で固定し、
+`.claude/scripts/products/lib/pack-evidence.mjs` が manifest SHA・CSVの47地域・出典行数・PowerPoint抜粋数と照合する。
 数値・欠損・年・単位は固定し、公式メタデータ由来の指標名を `verified-product-labels.ts` に固定する。
 `product-indicator-label.ts` はソースの表ID・分類コードが変わったら再照合を要求する。
 短いサイト用titleをそのまま納品物の定義として使わない。基準年固定版を「最新」と宣伝しない。
-現行メタにない歴史系列2件は出典の注意事項と `revision-audit.json` に未再確認と記録する。
-改訂は原観測値の全量再取得・Office実機互換性検証を意味しない。納品先の選択は `_delivery` を正とし、旧版を送らない。
-
-### Geo専用の納品見本（既存P-*パックとは別）
-
-`src/channels/geo/service-offer.ts` が `GEO-SERVICE-01` の商品範囲・承認済み販売条件を管理する。
-`npm run products:geo:delivery --workspace=@stats47/product-factory -- --pref 14` で、
-地価地点と人口メッシュの対応を保持した1県の納品見本を生成する。01〜47に対応するが、
-毎回全国47県のartifact SHA・空間結合・保存則と公開manifest同一性を先に検証する。
-
-出力は `.local/coconala-products/GEO-SERVICE-01/pref-<NN>-draft-*/`。既存出力・note商品を
-上書きしない。HTMLレポート、SVG模式図、地点CSV、メッシュWKT CSV、原artifact、
-出典・辞書・利用条件・SHA付きZIPと、出品文案・READINESSを作る。
-背景タイルは含まない。JGD2011の経緯度を維持し、距離・面積測定、住所検索、任意商圏、
-将来価格の推定、Office編集機能を標榜しない。データ部分のCC BYの権利を
-独自説明文・レイアウトの再販売禁止と混同しない。
-
-生成成功・販売条件承認は外部出品・需要確認を意味しない。承認の証拠は商品定義の
-`approvalRecord`を参照する。既存noteの利用反応と公開条件を確認してから1商品だけ出品する。
-`products:geo:validate` は既存4本のnoteパック専用で、本サービスの検証とは別。
-原典の全量再取得・QGIS/Office実機確認を行ったという保証は付けない。
+公開済み note 記事の本文と添付の正本は private R2（`note:article save/verify`）で、ローカルの生成物は 30 日で消える。
+納品先の選択は `_delivery` を正とし、旧版を送らない。
 
 - PPTX: `pptxgenjs` の `custGeom` で県別に再着色できる地図とネイティブチャートを生成する。
 - XLSX: `exceljs` で値変更後に再計算する数式を生成する。ネイティブチャート生成は保証しない。

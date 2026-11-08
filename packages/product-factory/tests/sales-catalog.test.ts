@@ -3,7 +3,8 @@ import { createHash } from "node:crypto";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
+import { BUSINESS_PLAN_M1_NOTE_PRODUCTS } from "@stats47/data-configs/business-plan";
+import { KDP_LISTINGS } from "../../../config/paths.mjs";
 import { buildSalesCatalog, CURRENT_SALES_REVISIONS, csvCell, escapeHtml, localPath, renderSalesCsv, renderSalesHtml, verifyManifest } from "../src/build/sales-catalog";
 
 const roots: string[] = [];
@@ -11,13 +12,6 @@ function fixture() { const root = mkdtempSync(join(tmpdir(), "sales-catalog-test
 function json(root: string, path: string, value: unknown) { const full = join(root, path); mkdirSync(join(full, ".."), { recursive: true }); writeFileSync(full, JSON.stringify(value)); }
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
 describe("sales readiness does not conflate generation and publication", () => {
-  it('a withdrawn Geo service does not become published again from an old readiness receipt', () => {
-    const root = fixture();
-    json(root, COCONALA_LISTINGS, { listings: { 'GEO-SERVICE-01': { status: 'withdrawn', _withdrawal: { decisionDate: '2026-10-19' } } } });
-    json(root, 'data/products/geo-service-readiness-2026-09-06.json', { status: 'published', publication: { anonymousCheckedAt: '2026-09-06' } });
-    expect(buildSalesCatalog(root, '2026-10-26').offers.find((item) => item.id === 'GEO-SERVICE-01')!.channels[0])
-      .toMatchObject({ publicationStatus: 'withdrawn', checkedAt: '2026-10-19' });
-  });
   it('reads a published note from the article SSOT even when the local preparation revision is missing', () => {
     const root = fixture();
     json(root, 'data/note/articles.json', { articles: [{ key: 'prefecture-migration-living-pack', status: 'published',
@@ -28,10 +22,21 @@ describe("sales readiness does not conflate generation and publication", () => {
       checkedAt: '2026-10-26T02:00:00Z', blockers: [] });
     expect(offer.buildStatus).toBe('missing');
   });
+  it('treats a note product saved and read back in private R2 as verified without a local build (2026-11-08)', () => {
+    const root = fixture();
+    const product = BUSINESS_PLAN_M1_NOTE_PRODUCTS[0];
+    json(root, 'data/note/articles.json', { articles: [{ key: product.articleKey, status: 'published',
+      body: { store: 'r2-private', manifest: { sha256: 'a'.repeat(64), files: 10 }, verifiedAt: '2026-11-08T00:00:00Z' } }] });
+    const offer = buildSalesCatalog(root, '2026-11-08').offers.find((item) => item.id === product.id)!;
+    expect(offer).toMatchObject({ buildStatus: 'hash-verified', artifactSha256: 'a'.repeat(64), artifactDirectory: null });
+    expect(offer.blockers.join()).not.toContain('本文・添付');
+    json(root, 'data/note/articles.json', { articles: [{ key: product.articleKey, status: 'draft', body: { store: 'r2-private', manifest: null } }] });
+    expect(buildSalesCatalog(root, '2026-11-08').offers.find((item) => item.id === product.id)!.buildStatus).toBe('missing');
+  });
   it("keeps the entire authored population when all evidence is missing", () => {
     const c = buildSalesCatalog(fixture(), "2026-09-06");
-    expect(c.offers).toHaveLength(63);
-    expect(new Set(c.offers.map(o => o.id)).size).toBe(63);
+    expect(c.offers).toHaveLength(62);
+    expect(new Set(c.offers.map(o => o.id)).size).toBe(62);
     expect(c.summary.free).toBe(1);
     expect(c.offers.filter(o => o.kind === "book")).toHaveLength(33);
     expect(c.offers.every(o => o.buildStatus === "missing")).toBe(true);
@@ -81,6 +86,6 @@ describe("sales readiness does not conflate generation and publication", () => {
     const c = buildSalesCatalog(fixture(), "today");
     c.offers[0].title = "<img src=x onerror=alert(1)>";
     expect(renderSalesHtml(c)).not.toContain("<img src=x");
-    expect(renderSalesCsv(c).split("\r\n")).toHaveLength(79); // 62 offers + 14 note variants + header + terminator
+    expect(renderSalesCsv(c).split("\r\n")).toHaveLength(64); // 62 offers × 1 販路 (パックは note・本は Kindle・Geo は note) + header + terminator
   });
 });

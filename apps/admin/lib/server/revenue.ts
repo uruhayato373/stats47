@@ -2,7 +2,7 @@ import "server-only";
 
 import fs from "node:fs";
 
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import {
   cached,
@@ -34,7 +34,7 @@ export interface RevenueChannel {
 /** 計測範囲。画面の冒頭バナーで必ず出す */
 interface ProductSalesObservation {
   id: string;
-  channel: "kdp" | "coconala";
+  channel: "kdp";
   productId: string;
   periodStart: string;
   periodEnd: string;
@@ -150,7 +150,7 @@ function readCandidates(): RevenueSummary["candidates"] {
   });
 }
 
-/** 販売台帳 (証拠つきの実測だけ)。/revenue と /product/coconala が同じ読み口を使う */
+/** 販売台帳 (証拠つきの実測だけ)。/revenue が読む */
 export function readProductSales(): RevenueSummary["productSales"] {
   return wrap(() => {
     const ledger = readJson<ProductSalesLedger>(
@@ -172,19 +172,13 @@ export function readProductSales(): RevenueSummary["productSales"] {
   });
 }
 
-function readPublishedCounts(): { kindle: number; coconala: number } {
+function readPublishedCounts(): { kindle: number } {
   const kdp = readJson<{
     listings: Record<string, { kdpStatus?: string; asin?: string | null }>;
   }>(KDP_LISTINGS);
-  const coconala = readJson<{
-    listings: Record<string, { status?: string; serviceUrl?: string | null }>;
-  }>(COCONALA_LISTINGS);
   return {
     kindle: Object.values(kdp.listings).filter(
       (row) => row.kdpStatus === "live" && Boolean(row.asin),
-    ).length,
-    coconala: Object.values(coconala.listings).filter(
-      (row) => row.status === "listed" && Boolean(row.serviceUrl),
     ).length,
   };
 }
@@ -217,14 +211,11 @@ function revenueCoverage(
   const auto = wrap(latestAutoObservation);
   const autoDate = (channel: string) => ("error" in auto ? undefined : auto.get(channel));
   const kdpAuto = autoState(autoDate("kdp"));
-  const coconalaAuto = autoState(autoDate("coconala"));
   const noteAuto = autoState(autoDate("note"));
   const counts = wrap(readPublishedCounts);
   const observations = "error" in productSales ? [] : productSales.observations;
   const kindlePeriods = observations.filter((row) => row.channel === "kdp").length;
-  const coconalaPeriods = observations.filter((row) => row.channel === "coconala").length;
   const kindleCount = "error" in counts ? "?" : String(counts.kindle);
-  const coconalaCount = "error" in counts ? "?" : String(counts.coconala);
 
   return [
     { channel: "AdSense", state: "measured", note: "週次 CSV (history.csv ほか 5 種)" },
@@ -237,11 +228,6 @@ function revenueCoverage(
       channel: "Kindle (KDP)",
       state: kindlePeriods > 0 || kdpAuto.fresh ? "measured" : "unmeasured",
       note: `${kindleCount}冊販売中・${kdpAuto.label} (ロイヤリティ見積り)・証拠付き販売期間 ${kindlePeriods}件`,
-    },
-    {
-      channel: "ココナラ",
-      state: coconalaPeriods > 0 || coconalaAuto.fresh ? "measured" : "unmeasured",
-      note: `${coconalaCount}商品公開中・${coconalaAuto.label} (累積売上)・証拠付き販売期間 ${coconalaPeriods}件`,
     },
     {
       channel: "note",

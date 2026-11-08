@@ -45,7 +45,7 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 - **ASIN後追い回収は初回公開申請日を保持する**: `writeBackListing` は既存 `publishedAt` を上書きせず、未設定時だけ日付を入れる。
 - **KDP運用状態は`listed`と分離**: `kdpStatus=draft|in_review|live|unknown`、生表示、確認日時、最終申請日、販売中を初めて確認した日をlistingsに保存する。管理画面は審査中を公開済みにしない。
 - **既刊修正はarchive-first**: ローカル6ファイルのSHAがR2の最新検証済みrevisionと一致しなければ`--update`/`--commit`を停止する。修正前revisionを残しrollback可能にする。
-- 書籍生成・カタログ=kindle-publisher、KDP出品操作=kdp-operatorに分離(coconala-product-manager/operatorと同型)。
+- 書籍生成・カタログ=kindle-publisher、KDP出品操作=kdp-operatorに分離(data-pack-manager/operatorと同型)。
 - 各書籍READINESS.mdにKindle Previewer確認〜アップロード手順を同梱。
 - 書き下ろし章の最終仕上げは article-writer→blog-critic の既存品質ゲート。
 - 需要ファースト: manuscript昇格→生成→オーナー明示承認後にKDP公開→4週実測(KENP/販売)→良ければ横展開。公開バッチはKDPの未公開タイトル上限を超えない。
@@ -94,4 +94,4 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 
 ## 正典
 
-`.claude/rules/coconala-product-standards.md §8` (product-factory同居) / 企画SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts`。初期市場・書籍調査はGit履歴。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]
+`.claude/rules/kindle-publishing-standards.md` (product-factory同居) / 企画SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts`。初期市場・書籍調査はGit履歴。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]

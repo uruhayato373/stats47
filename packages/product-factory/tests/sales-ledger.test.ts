@@ -58,7 +58,7 @@ describe("sales ledger", () => {
         observations: [
           {
             id: "bad",
-            channel: "coconala",
+            channel: "kdp",
             productId: "P-04",
             periodStart: "2026-09-07",
             periodEnd: "2026-09-06",
@@ -154,7 +154,6 @@ describe("sales ledger の証拠参照", () => {
       { ...vaultRow, evidencePath: "vault:kdp/monthly/month-24" },
       { ...vaultRow, evidencePath: "vault:kdp/session" },
       { ...vaultRow, evidencePath: "vault:../kdp/monthly/month-1" },
-      { ...vaultRow, channel: "coconala" },
     ]) {
       expect(() => validateSalesLedger({ schemaVersion: 1, observations: [bad] })).toThrow(/evidencePath/);
     }

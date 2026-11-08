@@ -14,7 +14,19 @@ primary_agent: strategy-advisor
 
 `$ARGUMENTS`は`YYYY-Www`。省略時は期限が来ている週 (`node .claude/scripts/management/check-review-cadence.mjs` の「期限が来ている週次レビュー」。土曜からは直前に終わった週)。終わっていない週は受け付けない。
 
-**毎週土曜に実行する** (2026-10-10 オーナー決定)。同じ土曜の 02:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測し、07:00 に Mac が認証付き計測を取ったあとに書く (2026-10-26 に金曜から土曜の朝へ集約)。計測 state の作り直しと改善施策の記録 (旧 CI の無人 triage) もこのレビューの中で行う (Phase 0b)。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする。
+**毎週土曜に実行する** (2026-10-10 オーナー決定)。同じ土曜の 02:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測している。ログインが要る取得と週次監査は自動では回さず、このレビューの最初に `npm run weekly:collect` で手で回す (2026-11-08 オーナー決定。launchd の土曜 07:00 の自動起動は、無人だとログイン切れ・時間切れで 2 週続けて落ちたのでやめた。オーナーがいればその場で入り直せる)。計測 state の作り直しと改善施策の記録 (旧 CI の無人 triage) もこのレビューの中で行う (Phase 0b)。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする (やっていない週だけ知らせる)。
+
+## 最初に: 週次の取得を起動する
+
+レビューを始めたら、まず週次の取得をバックグラウンドで起動する。認証付き計測 → note の計測 → ASP の巡回 → 週次監査 11 本を
+順に回し、合計 1〜2 時間かかる。終わるまでに Phase 0 を進め、Phase 0b の前に結果を読む。
+
+```bash
+npm run weekly:collect   # = scripts/scheduled/weekly-saturday.sh。ログは ~/Library/Logs/stats47/weekly-saturday.log と <段>.log
+```
+
+ログインが切れた取得元 (KDP・GSC の画面など) は、その場でオーナーに入り直してもらい、その段だけ取り直す
+(`bash scripts/scheduled/measurement-session-refresh.sh`)。この Mac 以外では取れない (ログインは Mac だけが持つ)。
 
 ## Phase 0: NSM snapshot
 
@@ -47,11 +59,12 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 2026-10-26 に CI の無人 triage (`improvement-cycle-weekly.yml`) と週次要約 (`weekly-metrics-issue.yml`) をやめ、
 同じ処理をここで行う。対話のセッションは `.claude/` に書けるので、提案ファイルを経由せずに台帳を直接更新する。
 
-0. 週次監査の結果を読む (2026-10-26 に CI の週次監査 11 本から移した)。土曜 07:00 の Mac の土曜ランナー
-   (`scripts/scheduled/weekly-saturday.sh`) が、認証付き計測・note の計測・ASP の巡回の後に専用 clone で 11 本を回し、
-   記録を develop へ push して、要約を作業フォルダの `.local/weekly-audits/<当日>/summary.md` へ写す。先に `git pull` する。
-   各段と 11 本の結果は管理画面 `/ops/mac-schedule` でも見られる。要約が無い・当日でない (ランナーが落ちた・Mac が眠っていた) ときは、ログ `~/Library/Logs/stats47/weekly-saturday.log` を読んでから
-   ここで走らせる (1 本ずつ順に走るので background で始めて他の段を進める。Mac からだと internal-links だけで 1 時間前後かかる)。
+0. 週次監査の結果を読む (2026-10-26 に CI の週次監査 11 本から移した)。冒頭で起動した `npm run weekly:collect` が、
+   認証付き計測・note の計測・ASP の巡回の後に専用 clone で 11 本を回し、記録を develop へ push して、
+   要約を作業フォルダの `.local/weekly-audits/<当日>/summary.md` へ写す。終わったら `git pull` する。
+   各段と 11 本の結果は管理画面 `/ops/mac-schedule` でも見られる。要約が無い・当日でない (取得が途中で落ちた) ときは、
+   ログ `~/Library/Logs/stats47/weekly-saturday.log` を読んでから、監査だけをここで走らせる
+   (1 本ずつ順に走るので background で始めて他の段を進める。Mac からだと internal-links だけで 1 時間前後かかる)。
 
    ```bash
    npm run weekly:audits        # 要約は .local/weekly-audits/<日付>/summary.md、各ログは同じ場所
@@ -64,7 +77,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 2. 計測 state を作り直す。02:00 の計測の後に入った認証付き計測を state に入れるため。
 
    ```bash
-   git pull --rebase --autostash origin develop   # Mac が 07:00 に push した記録を取り込む
+   git pull --rebase --autostash origin develop   # weekly:collect が push した記録を取り込む
    bash .claude/scripts/metrics/refresh-measurement-cycle.sh [YYYY-Www]
    ```
 

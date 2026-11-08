@@ -58,7 +58,7 @@ describe('design', () => {
     expect(PALETTES.filter((p) => p.cvdSafe).length).toBeGreaterThanOrEqual(3);
     expect(paletteById('okabe-ito').kind).toBe('categorical');
   });
-  it('fixes layout dims incl. 620x620 coconala thumbnail', () => {
+  it('fixes layout dims incl. 620x620 square thumbnail', () => {
     expect(LAYOUTS['thumb-square'].wPx).toBe(620);
     expect(LAYOUTS['16x9'].wPx / LAYOUTS['16x9'].hPx).toBeCloseTo(16 / 9, 2);
   });

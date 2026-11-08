@@ -21,7 +21,6 @@ const SERIES_ACCENT: Record<string, string> = {
   "media-data-visuals": "#c81e77",
   "statistics-education": "#b8860b",
   "life-area-comparison": "#1a9850",
-  "custom-analysis-services": "#4b5563",
   "license-guide": "#2c7fb8",
   "free-samples": "#1a9850",
 };

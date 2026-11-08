@@ -11,6 +11,23 @@
     "apps/web/.next/cache",
     "apps/admin/.next/cache",
     "apps/web/.next/standalone/apps/web/.next/cache",
+    "apps/web/.next/dev",
+    {
+      "path": "apps/web/.local/next-*",
+      "ageDays": 7
+    },
+    {
+      "path": "apps/admin/.local/next-*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/*-trial",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/*-debug",
+      "ageDays": 14
+    },
     {
       "path": ".turbo/cache/*",
       "ageDays": 7
@@ -48,6 +65,250 @@
     },
     {
       "path": ".local/geo-source-*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/ci/*",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/analysis/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/blog-imagegen/*",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/theme-design/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/howto-shots/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/blog-linkfix",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/blog-srclink-fix",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/blog-datasource-fix",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/fresh-briefs",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/image-staging/*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/infra-history",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-cover-assets",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-listing-revisions",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/nier",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/r2-manifest",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/a8-offer-inspect",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/a8-append-preview.ts",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/a8-ui",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/model-canary",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-backgrounds",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/paid-landing/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kakei-*-log.tsv",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/image-generation-publish-plan-*.json",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-books",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-quality",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-cover-drafts",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/kindle-audit",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/d1",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/estat-catalog",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/next-*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/affiliate-harvest",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/affiliate-offer-inspect",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/gsi-pni",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/video-review",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/template-review",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/layout-review",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/ad-layout",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/theme-qa/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/sns-research/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/design-reference",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/stats47",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/ogp-pilot",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/codex-ogp-pilot",
+      "ageDays": 14
+    },
+    {
+      "path": ".local/sns-quick",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/image-cache",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/content-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-product-archives",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-reference-figure-audit",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-reference-covers",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-figure-update",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/cfa-hoiku",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/push-chunk-*",
+      "ageDays": 1
+    },
+    {
+      "path": ".local/chart-axes.txt",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/generated-blog-svg-keys.txt",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/metric-release-plan.*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-card-repair",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/data-packs",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/geo-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/muni-data-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-products",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/note-products-revisions",
       "ageDays": 30
     }
   ],
@@ -131,20 +392,30 @@
     {
       "root": "~/.codex/sessions",
       "match": "*",
-      "ageDays": 30,
-      "why": "Codex の会話記録。知見は repo (.claude/rules・skills・memory・backlog) に残す運用で、記録は直近の再開用"
+      "ageDays": 7,
+      "why": "Codex の会話記録。知見は repo (.claude/rules・skills・memory・backlog) に残す運用で、記録は直近の再開用。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
+      "maxGiB": 2
     },
     {
       "root": "~/.codex/archived_sessions",
       "match": "*",
-      "ageDays": 30,
-      "why": "Codex のアーカイブ済み会話記録"
+      "ageDays": 7,
+      "why": "Codex のアーカイブ済み会話記録。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
+      "maxGiB": 1
     },
     {
       "root": "~/.codex/generated_images",
       "match": "*",
+      "ageDays": 7,
+      "why": "Codex の生成画像。採用した画像は git (assets/) か R2 に置く規則。一括生成で数日に数十GB溜まるため maxGiB 超過分も古い順に回収する (2026-11-08)",
+      "maxGiB": 1
+    },
+    {
+      "root": ".local/r2/sns",
+      "match": "*",
       "ageDays": 30,
-      "why": "Codex の生成画像。採用した画像は git (assets/) か R2 に置く規則"
+      "maxGiB": 0.5,
+      "why": "X / Threads / Instagram 画像の生成・予約の作業領域。画像の正本は private R2 の sns-assets/ (archive-sns-assets.mjs が予約・投稿後に保全)。予約時に無ければ publish-x / publish-threads が private R2 から戻す (2026-11-08)"
     }
   ],
   "footprintBudgets": [
@@ -171,6 +442,157 @@
     {
       "path": "~/.codex/generated_images",
       "maxGiB": 2
+    },
+    {
+      "path": "~/.codex/thread_history_1.sqlite",
+      "maxGiB": 1
     }
-  ]
+  ],
+  "localRegistry": [
+    {
+      "pattern": "playwright-*-profile",
+      "kind": "auth",
+      "why": "ログイン済みブラウザ。refresh-session が playwright-${source}-profile で開く"
+    },
+    {
+      "pattern": "playwright-*-state.json",
+      "kind": "auth",
+      "why": "ログイン状態の書き出し"
+    },
+    {
+      "pattern": "kdp-account.local.json",
+      "kind": "auth",
+      "why": "KDP アカウント照合の手元値"
+    },
+    {
+      "pattern": "owner-browser-allow.*",
+      "kind": "auth",
+      "why": "オーナーが会話で許可した管理画面の記録 (recorded-measurement-first)"
+    },
+    {
+      "pattern": "affiliate-status",
+      "kind": "state",
+      "why": "ASP の提携状態。protectedPaths"
+    },
+    {
+      "pattern": "affiliate-ops",
+      "kind": "state",
+      "why": "ASP 操作の記録 (asp-operation-store)"
+    },
+    {
+      "pattern": "authenticated-*",
+      "kind": "state",
+      "why": "土曜の認証付き計測の受け渡し"
+    },
+    {
+      "pattern": "product-sales-evidence",
+      "kind": "state",
+      "why": "販売実績の取得証跡"
+    },
+    {
+      "pattern": "product-portfolio",
+      "kind": "state",
+      "why": "商品ポートフォリオの派生レポート"
+    },
+    {
+      "pattern": "selection-backfill",
+      "kind": "state",
+      "why": "ThemeCatalog selection の夜間 backfill の進捗"
+    },
+    {
+      "pattern": "geo-content-pipeline",
+      "kind": "state",
+      "why": "Geo の非公開運用台帳 (r2-storage-design.md)"
+    },
+    {
+      "pattern": "weekly-audits",
+      "kind": "state",
+      "why": "週次監査の結果。管理画面が読む"
+    },
+    {
+      "pattern": "sns-review",
+      "kind": "state",
+      "why": "予約中 SNS 画像の週次確認の最新結果"
+    },
+    {
+      "pattern": "note-card-repair-journal.json",
+      "kind": "state",
+      "why": "note カード修復の journal"
+    },
+    {
+      "pattern": "x-posted.jsonl",
+      "kind": "state",
+      "why": "X 投稿の確認記録"
+    },
+    {
+      "pattern": "threads-scheduled.jsonl",
+      "kind": "state",
+      "why": "Threads 予約の記録"
+    },
+    {
+      "pattern": "resource-health",
+      "kind": "state",
+      "why": "ローカル資源の日次点検の記録"
+    },
+    {
+      "pattern": "locks",
+      "kind": "state",
+      "why": "実行中の処理の排他ロック"
+    },
+    {
+      "pattern": "verification",
+      "kind": "state",
+      "why": "検証出力の親。中身は cachePaths が期限で消す"
+    },
+    {
+      "pattern": "r2",
+      "kind": "state",
+      "why": "R2 push staging の親。中身は cachePaths .local/r2/* (sns 以外) と fileRetention .local/r2/sns (ファイル単位 30 日・0.5GiB) が回収する"
+    },
+    {
+      "pattern": "tsbuildinfo",
+      "kind": "state",
+      "why": "型検査の incremental cache"
+    },
+    {
+      "pattern": "*-cache.json",
+      "kind": "state",
+      "why": "pre-commit の stat キャッシュ"
+    },
+    {
+      "pattern": "stop-docs-success.json",
+      "kind": "state",
+      "why": "Stop hook の文書検査の成功記録"
+    },
+    {
+      "pattern": "kindle-private",
+      "kind": "product",
+      "why": "KDP セレクト専用本の非公開原稿。book-catalog が packages/product-factory/.local/kindle-private を読む (repo に入れない)。控えは Drive stats47/Kindle原稿/K-S1-13-v1-20261104-r8"
+    },
+    {
+      "pattern": "sns-gallery-state.json",
+      "kind": "state",
+      "why": "管理画面のギャラリー固有の状態"
+    },
+    {
+      "pattern": "measurement-lock-hash",
+      "kind": "state",
+      "why": "土曜の認証付き計測が依存の変化を検知するハッシュ"
+    },
+    {
+      "pattern": "note-card-*journal.json",
+      "kind": "state",
+      "why": "note カード修復・画像差し替えの再開用 journal"
+    },
+    {
+      "pattern": "seo-rank-watch",
+      "kind": "state",
+      "why": "検索順位の定点観測の記録"
+    }
+  ],
+  "codexThreadHistory": {
+    "stateDb": "~/.codex/state_5.sqlite",
+    "historyDb": "~/.codex/thread_history_1.sqlite",
+    "why": "Codex の会話の投影 DB。元の記録 (sessions) を期限で消しても行が残るので、記録の消えた exec スレッドの行だけを日次で消す。ファイル名の版が変わったらここを直す"
+  }
 }

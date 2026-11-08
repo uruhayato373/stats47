@@ -27,8 +27,7 @@ PORT=5000 npm run admin    # ポート変更
 | パス | セクション | 内容 |
 |---|---|---|
 | `/` | ホーム | 各セクションへのナビ + 件数サマリ (`GET /api/assets/summary`) |
-| `/product/status` | 販売状態 | 商品チャネル (note・ココナラ・Kindle) の件数・公開段階。左メニューは「商品」グループの下に「チャネル別」の枝 (定義は `apps/admin/lib/channel-registry.ts`) |
-| `/product/coconala` | ココナラ | `coconala-listings.json` と product-factory カタログを突合した出品状況 (出品中・台帳のみ・未出品) |
+| `/product/status` | 販売状態 | 商品チャネル (note・Kindle) の件数・公開段階。左メニューは「商品」グループの下に「チャネル別」の枝 (定義は `apps/admin/lib/channel-registry.ts`) |
 | `/content` | コンテンツ運用 | X / Instagram / note / Kindle の件数・制作段階・次アクション・SSOT監査を横断表示 |
 | `/content/{x,instagram}` | SNSチャネル別 | `/sns` の共通コンポーネントをチャネル別に初期絞り込み。Geo role・素材・caption・状態を閲覧 |
 | `/content/note` | note運用 | 記事台帳 + R2本文所在 + 公開URL/準備状態。読み取り専用 |

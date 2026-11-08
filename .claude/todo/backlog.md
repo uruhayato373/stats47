@@ -36,25 +36,6 @@ updated: 2026-11-01
 - **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
 - **完了条件**: 土曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
 
-### [MUNI-DATA-PRODUCT-SALE-01] 製造品出荷額のデータ商品を stats47 の note で売り、ランキングページに 1 行の案内を置いて 6 週計測する
-タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
-
-- **親**: `MUNI-DATA-PRODUCT-PILOT-01` (EXP-007)。データは 2026-11-04 に完成。残る前提は `MUNI-MANUFACTURING-VALUE-CHECK-01` の川崎市の注記の確認。
-- **次**: 2026-11-04 に note で ¥980 で公開し、市区町村ランキングに案内を置いた。6 週の判定日は 2026-12-16。週次でクリックと販売を記録する。
-- **判定**: 親カードの基準 (6 週で CTA クリック率 2% 以上かつ販売 3 件以上 → 2 テーマ目へ。1〜2 件は 1 回だけ変えて再判定。0 件は無料配布へ)。
-- **完了条件**: 6 週の記録があり、親カードで続ける・変える・止めるが決まった。
-
-### [IA-REGION-THEME-01] 地域×テーマのページをそろえ、パンくずで地域・テーマを選ぶ形にする
-タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
-
-- **起点 (2026-10-31 オーナー決定・推奨で進める)**: テーマページの帯が分かりにくいので、地域 (全国・都道府県・市区町村) × テーマで作れるページをそろえ、URL は「地域が上・テーマが下」、パンくずの各段から Sheet で選び、題名に地域を入れる。帯は無くし、題名の横に地域・テーマのアイコンを置く。
-- **決めたこと**: ① 市区町村×テーマのページ (≈ 45,900) は最初 noindex・サイトマップ外、人口の多い市から段階的に出す ② 市区町村テーマの slug は都道府県の 56 テーマにそろえ、旧 `/municipalities/themes/*` は 301 ③ 全国のテーマは全国の値を持つ指標のあるテーマだけ増やす。
-- **済 (2026-10-31)**: ① 題名・パンくず・Sheet (`ThemeRegionNav`、commit 6ae8cf607) ② `/areas/県/テーマ/cities` (サイトマップ未掲載。載せるかは公開後の検索の様子で決める) ③ `/areas/県/cities/市/テーマ` (noindex) と旧分野ページからの 301 ④ `/municipalities/themes/<都道府県のテーマ>` への slug 統一と旧 29 slug の 301 ⑤ の定義 (`JAPAN_CATALOGS` に 25 テーマ追加、18 → 43 テーマ・159 指標)。
-- **残り**:
-  - ⑤ 全国の値 (手元 `.local/r2/app/japan/<指標>/series.json` に生成済み) を R2 へ push してからデプロイする。push 前にデプロイすると 25 ページが「0 指標」の空ページになるので、順を入れ替えない (R2 push・デプロイは承認を得てから)。
-  - ③ 人口の多い市から市区町村×テーマのページを検索に出す段階は未着手。
-- **完了条件**: 5 段がそろい、どの地域×テーマのページでもパンくずの各段から Sheet で移れ、題名に地域が入っている。
-
 ### [THEME-DASHBOARD-TEXT-TRIM-01] テーマページのデータの表とチャートの説明を畳み、ダッシュボードとして短くする
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
 
@@ -100,6 +81,7 @@ updated: 2026-11-01
 - **オーナー判断 (2026-11-01)**: Gemini をランキング解説の量産手段へ戻す。旧キーは 48 run 中 44 run が HTTP 402 で停止し生成 0 件。課金設定なしの専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` へ登録済み (キーの文字列は git・会話へ出さない)。無料枠 project のためキー再発行は求めず、現キーで続けてよい。
 - **確認済み (2026-11-01)**: 確認用 branch `codex/gemini-kakei-20261101` で、`gemini-3.5-flash-lite` を使った run `41271164945` が structured preflight・1件の生成・決定的監査・独立 Gemini critic すべて PASS (`verify_only=true` で記録・commit・R2 publish は skip)。`gemini-2.5-flash-lite` は structured preflight で HTTP 404。repository variable は未設定。
 - **次**: ① 日次公開を起動する前に feature branch の変更を review し、公開の承認を得る ② repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ③ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ④ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
+- **起動 (2026-11-09 オーナー承認)**: main と develop の workflow・スクリプトが同じで、モデルが 1 件確認と同じ `gemini-3.5-flash-lite` (workflow の env で固定) であることを確かめ、repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定した。11-05〜11-08 の定期 run は変数が無いため skipped だった。残り: ③ 初回の定期 run (2026-11-10 07:15 JST) と `publish-ai-content.yml` の R2 読み戻しを確かめる ④ 7 run の評価。
 - **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
 - **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
 
@@ -136,16 +118,6 @@ updated: 2026-11-01
 - **禁止**: 価格を変えない。新しいテーマを足さない。N03・Geoshape の境界を売る地図に使わない。note への差し替えは人手のログインとオーナー承認を経る。
 - **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。売る地図の境界の出どころが README と `LICENSE-ja.txt` に書かれている。
 
-### [KDP-OLD-EDITIONS-UNPUBLISH-01] 出版停止した S1 の旧版 9 冊が Amazon の商品ページから消えたことを確かめる
-タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-06] [期日:2026-11-09] [領域:商品]
-
-- **済み (2026-11-06)**: `kdp-unpublish.mjs --all-previous --commit` で 9 冊を出版停止した (K-S1-01 B0HF17SQ9N・02 B0HF1N51T8・05 B0HF356WR9・07 B0HDYG6DLX・08 B0HDYLY7WM・09 B0HDYB4CBV・10 B0HDZ45H6C・11 B0HH88J9YH・12 B0HG55D649)。本棚の読み直しで 9 冊すべて「下書き」、新版 9 冊は「販売中」。台帳は `unpublishedAt` と `previous_unpublished` を記録済み。
-- **未確認**: 直後 (07:16 JST) の商品ページは 9 冊とも HTTP 200 のまま。KDP ヘルプ (https://kdp.amazon.com/en_US/help/topic/G4QJH4ENN4FZRFMP、2026-11-06 確認) は出版停止の反映に最大 72 時間かかるとしている。
-- **本棚の整理 (2026-11-06 済み)**: 旧版 9 冊・取り下げ 10 冊・空の下書き `A3NM35CIRM1ZDQ` をアーカイブした (公開歴のある本は削除できない)。出版停止済みの本は週次の本棚確認の対象から外した (`marketplace-status.mjs`・`kdp-batch.mjs`)。
-- **検証**: 9 つの ASIN を `curl -sL -o /dev/null -w '%{http_code}' -A 'Mozilla/5.0' https://www.amazon.co.jp/dp/<ASIN>` で確かめる。
-- **期限後の判断**: 2026-11-09 に 404 または購入ボタンなしならこのカードを消す。購入できるままなら、本棚の状態を読み直し、KDP サポートへの問い合わせをオーナーに諮る。
-- **完了条件**: 9 つの商品ページで購入できないことを確認した。
-
 ### [KDP-LISTING-COPY-01] 販売中 13 冊の紹介文とキーワードの改善案を承認し、KDP へ反映して効果を測る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [期日:2026-11-09] [領域:商品]
 
@@ -157,21 +129,32 @@ updated: 2026-11-01
 - **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
 - **完了条件**: 12 冊の紹介文とキーワードが KDP に反映され、30 語の再測定と 4 週の注文が記録された。
 
-### [KDP-LISTING-WIRING-01] 紹介文の検査を CI と公開の経路につなぎ、表紙の規則を機械で見る
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [領域:商品]
-
-- **事実 (2026-11-06)**: `kdp:test` は PR の CI で動くが、`kdp:listing-copy check` はどの CI にも入っていない。`check` は原稿から作った紹介文を見るので、台帳の `description`・`keywords` が原稿とずれても止まらない。新刊の `kdp-publish --commit` は原稿の有無と別エージェントの照合を要求しない (`kdp-preflight` は禁止事項だけ)。表紙の検査は寸法と文字の照合だけで、縮小時の読みやすさと「47都道府県」の見え方は見ていない。
-- **やること**: ① `check` を PR の CI へ入れ、台帳と原稿の一致も見る ② 販売中の本と新刊の公開に原稿・照合の記録を必須にする ③ 表紙の縮小確認 (検索結果の大きさ) を規約と検査へ足す ④ 表紙の「47都道府県」の扱いをオーナーと決めてから、見本 1 冊 → 全冊の順で Codex で作り直す。
-- **完了条件**: 台帳を手で変えると CI が落ち、原稿の無い本は公開で止まり、表紙の縮小確認の記録が残る。
-
-### [IMAGE-ROUTES-CATEGORY-CODEX-01] カテゴリ画像の生成を Gemini から Codex へ移し、旧スクリプトを撤去する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-image-generation-routes.mjs] [起票:2026-11-06] [領域:サイト]
-
-- **事実**: `generate-category-images.ts` と `generate-category-heroes.ts` が Gemini の画像 API を直接呼ぶ。`config/image-generation-routes.json` の `legacy` に載せて、新しい直接呼び出しだけを止めている。
-- **やること**: 次にカテゴリ画像を作るときに Codex の経路を登録し、2 本を撤去して `legacy` から外す。既存の画像は作り直さない。
-- **完了条件**: 2 本が消え、`legacy` が `BLOG-BG-PIPELINE-CONSOLIDATE-01` の分だけになった。
-
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [MUNI-THEME-INDEX-STAGING-01] 市区町村×テーマのページを、人口の多い市から段階的に検索に出す
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
+
+- **経緯**: `IA-REGION-THEME-01` (地域×テーマのページの 5 段) は 2026-11-09 に本番で完了を確かめて消した (全国テーマ 50 本が HTTP 200、代表 `/japan/information-industry` に推移の図・地域とテーマを選ぶパンくず・題名の地域)。残った段階的な公開をこのカードへ分けた。
+- **決めてあること (2026-10-31 オーナー決定)**: 市区町村×テーマのページ (`/areas/県/cities/市/テーマ`、約 45,900) は最初 noindex・サイトマップ外で、人口の多い市から段階的に検索に出す。
+- **次**: ① 最初に出す市の範囲 (人口の閾値) と 1 回の件数を決める ② その範囲だけ index・サイトマップへ入れる ③ 4 週の登録数と表示を記録してから次の範囲へ広げる。
+- **停止条件**: 本番反映はオーナー承認の後。中身の薄いページ (値が少ない市) を検索に出さない。
+- **完了条件**: 最初の範囲が検索に出て、4 週の登録数と表示が記録されている。
+
+
+### [PAGE-UI-REVIEW-COVERAGE-01] ページ UI の週次確認で読むべき画面の 9 割が読まれず、新しい指摘の行き先が無い
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-08] [領域:サイト]
+
+- **観測 (2026-11-08・W44 週次レビュー)**: `data/page-quality/metrics/ui-review-latest.json` (監査 2026-10-30) は `reviewStatus: reviewed` だが、読んだ切り出しは 196 枚中 22 枚で、読み残し 63 画面・全部読めたページ 0。指摘 10 件と新しい機械検出 166 件 (Issue #1015) の振り分け先が無かった。
+- **次**: 読み残しの原因 (エージェントの読む上限か、切り出しの枚数か) を `quality-suite-weekly.yml` の page-quality job のログで確かめ、全ページを読める形にする。指摘 10 件のうち直すものはテンプレートごとの `UI-FIX-*` カードへ分ける。
+- **完了条件**: 次の週次確認で `readCoverage.unreadScreens` が 0 で、Issue #1015 の指摘がすべてカードか見送り理由に振り分けられている。
+
+### [PAGE-QUALITY-ERRORS-01] ページ品質の週次監査の error 164 件を種類ごとに減らす
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-08] [領域:サイト]
+
+- **観測 (2026-11-06 の監査・Issue #1014)**: 対象 9,400 URL で error 164・warning 4,303 (HTML/RSC 肥大化・DOM 過剰・リンク重複・広告重複・構造化データ・画像切れ)。前の受け皿カード `PAGE-QUALITY-ERROR-BACKLOG-01` は既に無い。
+- **次**: 管理画面 `/quality/page-audit` で error を種類別に数え、件数の多い 1 種類から原因を直す。
+- **完了条件**: error が 0 になり、Issue #1014 が自動で閉じる。
+
 
 ### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵の残りとテーマの画像を片付ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]
@@ -256,6 +239,8 @@ updated: 2026-11-01
 - **M01 の作り直し (2026-11-07)**: 再計算では数値が合っていたのに、問いへの答え方と図に問題が残っていた。段ごとの差に分けると結論が変わり、反証で 3 要素の配分が事業所数の裾切りに依存すると分かったので、人の厚みと 1 人あたり出荷額の 2 要素へ組み直した。点検役には「全体の割合が強い町にも当てはまるか」「結論が測定の裾切りに依存しないか」を確認項目へ足す。
 - **実行役 (2026-11-07)**: `npm run analysis:run` (`/run-analysis`) を作り、M01・H01 を最終審査の手前まで通した。順番はコード、判断は Codex、最終審査だけ Claude。止めとして主張と幅の照合、反証の記録、審査と本文のハッシュ、図の名前の判定、視点 2 層を足した。作り直す前の M01 に反証を掛ける測り直しは、指示文を 5 つの必須試験にして段の試験 broken・測定の試験 weak を返した (fixture `__tests__/fixtures/m01-before.json`)。
 - **残り**: ① 新しい問いは台帳の行と spec が要る。問いから spec を作る工程が無い ② 分析スクリプトを Codex が新規に書く経路は未検証 ③ NotebookLM の経路 (`--notebooks`) は未実行 ④ 1 次審査の Codex は 1 回 30〜40 万トークン (キャッシュ込み) で、読むファイルを絞ると減らせる ⑤ 反証の必須試験を複数の問いで測る。
+- **図中心の実行役 (2026-11-07〜08)**: ブランチ `feat/analysis-runner-v2` (未 push)。データ棚卸し・数値照合・図の一覧画像・積み上げ/スロープ/箱ひげの型・書き手 (Claude) への小包・2 回目以降は確認だけの 1 次審査・反証の言い換えの反映・オーナーの方針 (`--direction`)・改稿の小包 (`--rewrite`) を足した。M01 の拡張は付加価値を主にする方針 (オーナー決定) で試し、主張 22 件まで作れた。ただし作業用フォルダが消え、M01 の拡張の分析スクリプトと手元の検証の計算は失われた。
+- **次 (この順)**: ① 図の割り当てを「主張 1 件に 1 枚」から「読者が 1 枚で読む比較ごとに 1 枚」へ変え、値が 1 つだけの図・同じ行を分けた図を機械で止める。頑健性の確認は 1 枚にまとめる (試行では数字 1 つの棒が 18 枚並んだ) ② M01 の分析スクリプトを付加価値まで広げ直す。再現すべき値は人口 3 万人以上 754 町・付加価値の段差の人の厚み 88.8/68.0/75.1・一番上の段差の 95% の幅 67〜82・全体の分散 70.5/12.1/17.3・付加価値率の中央値 0.21・全規模センサスと 2024 年の比 1.74/1.10・1980→2020 の順位相関 0.70 と上位残留 116/182・2000→2023 の事業所 0.67 倍と出荷額 1.12 倍・3 万人未満 850 町の 70.3/68.4/65.0。散布図や積み上げを描けるよう町ごとの行も出力に持たせる。1980・2000 の出荷額は合併前の行で県の合計の検算が 1.9〜3.1% ずれるので別名で読む ③ `npm run analysis:run -- --analysis analysis:M01-factory-size --plan-figures --rewrite --direction "主な物差しは付加価値..."` で改稿の小包を作り、article-writer へ ④ 公開済みの M01・H01 の台帳の工程を `published` にする (2026-11-07 に本番 200 を確認済み)
 - **止まる場面**: 設計の確認 / 公開の判断。
 - **完了の判定**: 新しい問いが、人の指示なしで下書きと審査まで進み、`published: false` で止まる。M01 の失敗を再現した入力で、書く前に止まる。
 
@@ -345,11 +330,20 @@ updated: 2026-11-01
 - **進み具合 (2026-11-05)**: 検索語と読まれているページから 20 本、白書 (NotebookLM の引用つき) から 6 本を足し、重なる 4 本は `C12`・`D13`・`F17`・`B12` へ検索語と根拠を移した。問いは 204 本、読まれているのに紐づかないページは 1,502。検索語の残りは `npm run issues:candidates` で見る。
 - **次**: ① 読まれているのに紐づかないページの上位から、GSC の検索語を `queries` に持つ小さな問いを足す（最大のまとまりは家計調査の品目で、大きな問い K01〜K03 の下に入る） ② 上からの大きな問いを NotebookLM で白書から拾う（クラウドの環境は gh の認証が無く呼べないので Mac で） ③ 読まれていない 1,808 ページ（ranking 890・municipality-ranking 643・blog 226 ほか）を、統合・転送・検索除外・そのままのどれにするか本人が決める。自動では消さない
 
+### [CONTENT-PUBLIC-WORKS-FISCAL-01] 「公共事業は無駄か」を、都道府県の土木費・普通建設事業費と財政指標の関係で確かめて記事にする
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-07] [領域:サイト]
+
+- **起点**: issue [#1245](https://github.com/uruhayato373/stats47/issues/1245)（切り口・一次資料）。既存のランキング `ordinary-construction-expenses-prefecture`・`local-bonds-prefecture`・`local-allocation-tax-prefecture` は絶対額なので、人口・歳出総額で割ってから比べる
+- **確かめる関係（どれも未検証の仮説）**: ① 1人あたり普通建設事業費 × 財政力指数（財政力が弱い県ほど高い） ② 1990年代の普通建設事業費 × 今の実質公債費比率・将来負担比率（時間差のある正の相関） ③ 経常収支比率 × 土木費の構成比（負の相関） ④ 地方交付税への依存 × 普通建設事業費（正の相関）。面積あたりの値も並べ、面積・地形という共通の原因と見分ける
+- **次**: ① 財政指標（財政力指数・実質公債費比率・将来負担比率・経常収支比率）と目的別歳出の土木費が都道府県別・年次で取れるかを、e-Stat の社会・人口統計体系と総務省「地方財政状況調査」で当てる ② 1990年代まで遡れる系列を確かめる ③ 取れた分で散布図を作り、記事の軸を1本に絞る（第一候補: 1990年代の1人あたり普通建設事業費 × 今の実質公債費比率）
+- **注意**: 災害の年（東日本大震災後の岩手・宮城・福島など）は外れ値になるので複数年の平均で見る。都道府県の決算だけでは市町村の道路・下水道が抜ける。相関を因果として書かない
+- **完了条件**: 仮説①〜④の判定（支持・棄却・データ不足）を根拠のデータと一緒に issue #1245 に残し、記事を1本公開する
+
 ### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-04] [領域:商品]
 
 - **起点**: 2026-11-04 の3面方針で、stats47 の役割はデータ商品になった（vault `memos/20261104_decision_kazu-noteは軸を1つにして商品を広げる.md`）。データの解説はAIに置き換えられやすく、公的データの突合・GIS の可視化・継続更新は真似されにくい
-- **次**: ① 🔴 高のカードをデータ商品に効くものとそれ以外に分ける ② 記事の量産のカードを止めるか下げるかを本人が決める ③ `MUNI-DATA-PRODUCT-SALE-01` の次に出すデータ商品の候補を挙げる
+- **次**: ① 🔴 高のカードをデータ商品に効くものとそれ以外に分ける ② 記事の量産のカードを止めるか下げるかを本人が決める ③ 製造品出荷額の商品 (EXP-007) の次に出すデータ商品の候補を挙げる
 - **完了条件**: 配分の判断を backlog の並びに反映した。
 - **禁止**: 判断の前にカードを消さない。
 
@@ -391,7 +385,7 @@ updated: 2026-11-01
   - F. 「note の有料はノウハウだけ」が教科書型・データの有料を締め出す: `02_収益化戦略.md` 203-206 行（同じ文書の §3.4 でデータ集の価格実験が進行中）、`note戦略.md` 13-14 行、backlog の `NOTE-FREE-DEFAULT-01`。
   - G. 「売れない原因は導線、新商品は作らない」の判断: `02_収益化戦略.md` 344-345 行、`experiments.json` 876 行（EXP-013）、`product-strategy.json` 159 行、backlog の `PRODUCT-REFERRAL-MEASURE-01`。
   - H. 分類軸が 4×3 と対応しない: `catalog.ts` 155・474・1068 行（5 収益レイヤー・paid-purchases の合算）、`pilot-board.json` 8・24・39 行（雑学の回収経路 3 つ）、`02_収益化戦略.md` §3.5・§3.6、`04_ターゲットペルソナ.md` 13・23 行、`.claude/skills/management/monetization-strategy/SKILL.md` 38-48 行、`.claude/agents/note-critic.md`・`.claude/skills/note/design-note-structure/SKILL.md`（ノウハウ型の制作・レビューの担当が無い）、`apps/admin/app/strategy/pilots/page.tsx` 13 行、`.claude/shared-policy/application.json`。
-  - I. ココナラ撤退の残り: `.claude/agents/coconala-operator.md`・`coconala-product-manager.md`・`README.md` 93-94 行、`.claude/skills/product/coconala-publish/`・`build-coconala-product/`、`.claude/rules/coconala-product-standards.md` 11・94 行、`CLAUDE.md` 121 行、`apps/admin/lib/server/revenue.ts` 242 行、`catalog.ts` 242-243・854-855 行、`02_収益化戦略.md` 342・349-350・507 行、backlog の `NOTE-PRODUCT-LADDER-01` 段 5。
+  - I. ココナラ撤退の残り: agent・skill・規約・管理画面・出品台帳・`CLAUDE.md`・`revenue.ts`・`catalog.ts` は 2026-11-08 (`c5e9ee3a1`) に削除・改名済み。残りは `02_収益化戦略.md` の受注チャネル (地図・資料の受注を再開するか) の判断と、backlog の `NOTE-PRODUCT-LADDER-01` 段 5。
   - J. 数字・状態・ID の食い違い: `.claude/memory/project_product_ledger.md` 12 行（価格は ¥980・¥2,980 に再変更済み）、`experiments.json` 593 行（EXP-007 が proposed のまま）、`01_プロジェクト定義.md` 252 行と `03_マーケティング戦略.md` 23 行（AdSense は 10-11 に再開済み）、`02_収益化戦略.md` 349 行（旧 ID `NOTE-FISCAL-PEER-PUBLISH-01`）、backlog の `MUNI-DATA-PRODUCT-PILOT-01`（「売上 2 件」）、`.claude/todo/improvements.md` 25 行（財政比較 2 本の比較の設計）。
   - K. 計画にノウハウ型が無い: `.claude/todo/monthly.md` 8-13・79 行。
 - **次（実行順）**: ① 群 I と群 J は判断が要らないので先にまとめて直す（agent・スキルの削除や統合は `check-agent-skill-consistency.cjs` を通す）。② 群 A・B・C・F・G は `02_収益化戦略.md` の改訂案（§2.1・§2.3・§3.3〜§3.6・§5 の領域表・§6）をオーナーに出し、承認後に反映する。続けて `MEMORY.md`・`project_monetization_contract.md`・01・03・04 を合わせる。③ 群 H は `catalog.ts` の `revenueLayers` と `pilot-board.json` の `route` を 3 収益源に寄せるかをオーナーと決める（機械の正典なので schema・テスト・管理画面を同じ差分で直す）。④ 群 E は KDP の本ごとの売上を確かめてから。⑤ 群 D は境界の決定後。⑥ 群 K は次の `/monthly-plan` で扱う。
@@ -683,15 +677,14 @@ updated: 2026-11-01
   ③ `low-elevation-population-ratio-5m` の書き手 `packages/gis/src/geo-analysis/low-elevation-population-overlay.py` が `meta.recipe` を書かない (作り直すと未焼きに戻る)。書き手を変えると manifest の `definitionSha256` が合わず `npm run geo:audit-low-elevation` が止まる (`audit-geo-analysis-artifacts.ts:470`) ので、単独では直さず、次に低標高の Geo を再生成するとき (G04-a の ZIP 176 件と 1km メッシュ人口が要る) に同じ作業で直す。直し方は `node --import tsx .claude/scripts/data/lib/print-metric-recipe.ts low-elevation-population-ratio-5m` の出力を `meta.recipe` に入れ、`audit` で recipe の有無も検査する。
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
-### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
+### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 
-- **経緯**: 資格情報の正本は `.claude/config/auth-credentials.json`、状態は管理画面 `/ops/auth`。2026-10-01 に Mac・Windows・CI へ登録済み (ID と登録先は `/ops/auth`)。ココナラは 2026-10-19 の撤退で認証付き計測の対象から外し、Windows のココナラ登録は不要になった。認証付き計測は土曜の Mac 取得へ移した (`MEASUREMENT-MAC-DIRECT-01`)。2026-10-27 に `MEASUREMENT-AUTH-RESTORE-01` (improvements.md) をこのカードへ統合した。経過は `git log -p -- .claude/todo/backlog.md`。
+- **経緯**: 資格情報の正本は `.claude/config/auth-credentials.json`、状態は管理画面 `/ops/auth`。2026-10-01 に Mac・Windows・CI へ登録済み (ID と登録先は `/ops/auth`)。ココナラは 2026-10-19 の撤退で認証付き計測の対象から外し、2026-11-08 に Mac のキーチェーンの `stats47-measurement-coconala` と登録表の `MEASUREMENT_SESSION_COCONALA` を削除した (GitHub Secrets には残っていなかった)。認証付き計測は土曜の Mac 取得へ移した (`MEASUREMENT-MAC-DIRECT-01`)。2026-10-27 に `MEASUREMENT-AUTH-RESTORE-01` (improvements.md) をこのカードへ統合した。経過は `git log -p -- .claude/todo/backlog.md`。
 - **残り (オーナーのみ・パスワードは対話入力)**:
   1. **再認証**: `auth_required` で止まっている取得元 (2026-W42 時点で gsc・kdp、10-19 にもしも) を `node .claude/scripts/measurement/refresh-session.mjs <source> --headed` で入れ直す。検証は `npm run measurement:status -- --check` と次の `data/measurement-cycle/latest.json` の kdp・gsc の freshness が pass であること。
   2. **パスワード経路の実証**: A8・もしも・楽天のパスワードでの自動ログインは未実証。セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は本棚が有効でも Reports 認証で止まることがあり、`latest.json` の `relogin` が `human_required` / `login_failed` なら人の再認証か Mac 側収集を検討する。
-  3. GitHub Secrets の `MEASUREMENT_SESSION_COCONALA` と Mac のキーチェーンの `stats47-measurement-coconala` を消すかを決める。
-- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
@@ -1313,7 +1306,7 @@ updated: 2026-11-01
 - **提供価値・支払う理由**: ランキングと地図は無料のまま。有料は「組替済み時系列 CSV＋GeoJSON＋出典・注記」の1テーマ1ファイル (¥980〜2,980)。比べる相手は東洋経済『都市データパック』(¥24,200〜) で、必要な1テーマだけを安く買える。境界データと合併履歴は無料で出回るので、売り物は組替済みの時系列の値に絞る。買い手の主役は計画策定を受けたコンサルの担当者。
 - **需要の証拠**: GSC「製造品出荷額 ランキング 市町村」CTR 46%・平均1.3位、該当ページは28日で390クリック。note の売上2件は e-Stat × Claude Code × 自治体の統計業務。**データ単品が売れるかは未検証**。
 - **販売条件 (`MUNI-DATA-LICENSE-CHECK-01`)**: 値の CSV と結合キーは出典・加工の記載で売ってよい。境界は N03・Geoshape (販売は測量法第29条の申請が要ると判定) を使わず、e-Stat「令和2年国勢調査 町丁・字等境界データ」を市区町村に結合して同梱する。
-- **子カード (実行順)**: 🔴 `MUNI-DATA-LICENSE-CHECK-01` (販売条件) → 🟡 `MUNI-DATA-PRODUCT-SALE-01` (売って計測)。次の候補 🟢 `MUNI-PEER-DATASET-01` (EXP-012) は本カードの判定後。
+- **子カード (実行順)**: 🔴 `MUNI-DATA-LICENSE-CHECK-01` (販売条件) → 売って計測 (2026-11-04 に note ¥980 で販売開始・ランキングに案内。6 週の計測は `data/business/experiments.json` の EXP-007 が running で持つ。判定日 2026-12-16。週次で案内のクリックと note の販売数を読み、判定日に本カードの基準で続ける・変える・止めるを決める)。次の候補 🟢 `MUNI-PEER-DATASET-01` (EXP-012) は本カードの判定後。
 - **次 (実行順)**: ① 製造品出荷額の市区町村データを最新境域へ組み替えた時系列と、結合済み GeoJSON を作る (既存の cities 指標と ETL を使う。出典・年次・組替の注記を付ける) ② 価格と販売面 (stats47 の note) を決める ③ 該当ページに「このデータを CSV＋地図データで」の1行 CTA を置き、`nav_click` で計測する ④ オーナー承認と人手ログインで公開し、6週の CTA クリックと販売を販売台帳 (`npm run products:sales --workspace=@stats47/product-factory`) に記録する。
 - **データ完成 (2026-11-04)**: `node --import tsx .claude/scripts/products/build-muni-data-product.mjs --metric manufacturing-shipment-amount --skip-geo` で `.local/muni-data-products/manufacturing-shipment-amount/` に CSV (1,719 自治体 × 44 年 = 75,636 行)・区の別表 (8,536 行)・検算表・README・境界 GeoJSON (1,719 地物) がある。全国合計は 2,068 件の照合で未説明の差 0 件、2023 年の差は 0.02%。e-Stat の記号は CI (`muni-data-symbols.yml`) で取り込み済みで、X 1,801・− 2,473、R2 との値の差 0 件、統計表は 0000020203。頂点の 5% 間引きは見た目で決めた暫定値で、県境の隙間の量は測っていない。公開リポジトリなので販売物を CI の artifact に載せない。2 テーマ目は specs に 1 件足す。
 - **判定 (6週)**: CTA クリック率2%以上 (28日でおよそ8クリック) かつ販売3件以上なら、2テーマ目 (財政指標) へ進む。1〜2件なら価格かテーマを1回だけ変えて再判定する。0件ならデータ販売は止め、同じデータを無料配布 (被リンク・権威) に回す。
@@ -1384,12 +1377,6 @@ updated: 2026-11-01
 - **停止条件**: 添付の差し替えは有料商品の納品物を変えるのでオーナー承認の後。
 - **完了条件**: 13 パックの PowerPoint で 1 位が一番上に並び、note の添付が新しい版に替わっている。
 
-### [NOTE-DELIVERY-CONTRACT-DRIFT-01] 出品台帳の note 納品版 (v3) が、note に添付した版 (v4) と食い違っている
-タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:商品]
-
-- **実測 (2026-10-28)**: `config/coconala-listings.json` の `_noteDelivery.artifactDirectory` は 13 パックとも `v3-20261012-mac-r4` を指す。note の有料記事に添付したのは `data/products/note-pack-regeneration-2026-10-24.json` の `v4-20261024-mac-r2` の ZIP (private R2 `note/product-archives/`)。`build-revision.ts` は `_noteDelivery` を読むので、次に販売準備原稿を作ると公開中と違う版の件数・枚数で書かれる。
-- **次**: `_noteDelivery` を v4 の manifestSha256 へ合わせるか、note の納品の正本を regeneration の記録へ一本化するかを決めて直す。Office の確認記録 (`data/products/note-pack-office-verification-2026-10-28.json`) は v4 の ZIP に結びついている。
-- **完了条件**: note の販売準備原稿の生成が、添付中の版と同じ manifest を読む。
 
 ### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/admin] [起票:2026-10-27] [領域:管理]
@@ -4197,6 +4184,15 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [KDP-COVER-47PREF-DECISION-01] Kindle の表紙の「47都道府県」の扱いを決め、見本 1 冊 → 全冊の順で作り直すか決める
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-09] [領域:商品]
+
+- **経緯**: `KDP-LISTING-WIRING-01` の ④ を分けた (①〜③ の CI・公開の検査と表紙の縮小確認は 2026-11-09 に実装済み)。表紙の検査は寸法と文字の照合と、縮小しても題名が読めるかの目視記録 (`kdp-cover-thumbnail.mjs`) まで。「47都道府県」の文字を表紙でどう見せるかは決まっていない。
+- **決めること**: 「47都道府県」を表紙に残すか・どの大きさで置くか。作り直すなら Codex で見本 1 冊を作り、縮小確認を通してから全冊へ広げる。
+- **停止条件**: 表紙の差し替えは KDP への外部変更で、オーナー承認の後。差し替えたら縮小確認を取り直す。
+- **完了条件**: 扱いが決まり、作り直す場合は見本 1 冊の縮小確認の記録がある。作り直さない場合はこのカードを消す。
+
 
 ### [IMAGE-BOUNDARY-CONSOLIDATE-01] 画像まわりの依存の向きと重複を直す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-06]

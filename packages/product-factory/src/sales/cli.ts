@@ -5,7 +5,7 @@ import path from "node:path";
 
 import { summarizeSalesLedger, validateSalesLedger } from "./ledger";
 import { mergeSalesCoverage, mergeSalesObservations, salesObservationId } from "./ledger-core.mjs";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import type { SalesChannel, SalesCoverage, SalesLedger, SalesObservation } from "./types";
 import { datasetPath } from "../../../../config/datasets.mjs";
@@ -51,6 +51,7 @@ function resolveEvidence(relativePath: string): { path: string; sha256: string }
 }
 
 function assertPublishedProduct(channel: SalesChannel, productId: string): void {
+  // 販売台帳の販路は KDP だけ (2026-11-08 にココナラを撤去。note の売上は認証付き計測が別に記録する)
   if (channel === "kdp") {
     const file = JSON.parse(fs.readFileSync(path.join(ROOT, KDP_LISTINGS), "utf8")) as {
       listings: Record<string, { kdpStatus?: string; asin?: string | null }>;
@@ -61,14 +62,7 @@ function assertPublishedProduct(channel: SalesChannel, productId: string): void 
     }
     return;
   }
-
-  const file = JSON.parse(fs.readFileSync(path.join(ROOT, COCONALA_LISTINGS), "utf8")) as {
-    listings: Record<string, { status?: string; serviceUrl?: string | null }>;
-  };
-  const listing = file.listings[productId];
-  if (!listing || listing.status !== "listed" || !listing.serviceUrl) {
-    throw new Error(`${productId} is not a listed Coconala product with a service URL`);
-  }
+  throw new Error(`unknown sales channel: ${channel}`);
 }
 
 function writeLedger(ledger: SalesLedger): void {
@@ -78,7 +72,7 @@ function writeLedger(ledger: SalesLedger): void {
 
 function record(): void {
   const channel = required("--channel") as SalesChannel;
-  if (channel !== "kdp" && channel !== "coconala") throw new Error("--channel must be kdp|coconala");
+  if (channel !== "kdp") throw new Error("--channel must be kdp");
   const evidence = resolveEvidence(required("--evidence"));
   const productId = required("--product-id");
   assertPublishedProduct(channel, productId);

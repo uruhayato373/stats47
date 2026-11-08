@@ -716,7 +716,7 @@ function checkOrphanScripts(findings) {
     "apps/web/scripts",
   ];
   // パッケージ直下の README は docs と同じく運用手順の置き場 (例: product-factory README の
-  // coconala 改訂版の再生成・検査コマンド)。パッケージのソース全体は読まない (重く、参照の根拠にならない)
+  // データパック・Kindle の生成・検査コマンド)。パッケージのソース全体は読まない (重く、参照の根拠にならない)
   const packageReadmes = (() => {
     try {
       return fs

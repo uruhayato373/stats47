@@ -73,6 +73,13 @@
       "cumulativeYen": 0,
       "monthToDateYen": 0,
       "observedAt": "2026-10-19T08:33:57.530Z"
+    },
+    {
+      "channel": "kdp",
+      "date": "2026-11-07",
+      "royaltyYen": 0,
+      "paidOrders": 0,
+      "observedAt": "2026-11-08T00:12:10.238Z"
     }
   ]
 }

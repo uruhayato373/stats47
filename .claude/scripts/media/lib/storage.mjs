@@ -39,3 +39,21 @@ export async function archiveSnsImage({platform,id,role,order,bytes,mime,source,
   const stored=await storeVerified(store,key,bytes);
   return {role,order,state:'archived',r2:{bucket:stored.bucket,key:stored.key},sha256:stored.sha256,bytes:stored.bytes,mime,source:source??null,...(drivePath?{drive_path:drivePath}:{})};
 }
+/**
+ * 投稿台帳の行の 1 枚目の画像がローカルに無ければ、保全済みの private R2 の版を照合つきで戻す (2026-11-08)。
+ * .local/r2/sns は期限で消える作業領域で、画像の正本は private R2 の sns-assets/。戻せた・元からあった場合はその絶対パス、
+ * 保全の記録が無ければ null を返す。書き先は repo の .local 配下に限る。
+ * @param {Record<string, any>} row @param {string} root @returns {Promise<string|null>}
+ */
+export async function ensureSnsImageLocal(row, root) {
+  const rel = row?.media_path ? String(row.media_path) : '';
+  const saved = (Array.isArray(row?.assets) ? row.assets : []).find((a) => a?.state === 'archived' && a?.r2 && a?.order === 1 && ['image', 'slide'].includes(String(a?.role)));
+  const target = rel && !/^https?:/.test(rel) ? path.resolve(root, rel) : saved ? path.join(root, '.local/r2/sns/_queue', `${row.platform}-${row.id}${path.extname(String(saved.r2.key))}`) : null;
+  if (!target) return null;
+  if (fs.existsSync(target)) return target;
+  if (!saved || !target.startsWith(path.join(root, '.local') + path.sep)) return null;
+  const bytes = await readVerified({ ...saved.r2, sha256: saved.sha256, bytes: saved.bytes });
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, bytes);
+  return target;
+}

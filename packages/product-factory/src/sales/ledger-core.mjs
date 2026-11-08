@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const SHA256_PATTERN = /^[a-f0-9]{64}$/;
-const CHANNELS = ["kdp", "coconala"];
+const CHANNELS = ["kdp"];
 const LOCAL_EVIDENCE_PREFIX = ".local/product-sales-evidence/";
 // 暗号化保管庫 (private R2 `operations/authenticated-measurement/<key>.enc`) の KDP 月次レポート。
 // 24 か月の ring (`kdpMonthlyVaultKey`) なので month-0〜23 だけを認める。

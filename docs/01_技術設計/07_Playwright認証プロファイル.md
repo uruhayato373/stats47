@@ -45,7 +45,7 @@ product code、対応format、scope、必要roleまで確認する。
 | note の記事投稿 | 公式 API 無し。非公開エンドポイントは note が保証せず規約・アカウントリスクがある | Playwright |
 | A8 の提携申請・広告コード取得 | メディア側の該当 API は見当たらない（A8 の公開 API は広告主・ASP 事業者向けの成果確定／成果連携） | Playwright |
 | afb 成果データ取得 | [公式の成果情報API](https://www.afi-b.com/guide/api-linkage/)と[仕様書](https://drive.google.com/file/d/1-k9l9QA16sNhSzxtX7LK1A2szQx25OY7/view)（2023-12-25版、2026-09-21確認） | `AFB_API_KEY` Secretで公式APIを使う。成果取得ではCookieを移送しない。提携操作は別のローカル経路 |
-| ココナラ / もしも | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
+| もしも | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
 
 ### CI 実行について
 
@@ -76,7 +76,6 @@ product code、対応format、scope、必要roleまで確認する。
 | note | 帰属・期間・全ページ・合計・公開カタログ・カバーの照合 | 欠落記事はnull。不完全データを全件成功にしない |
 | GSC | property照合、概要と5分類の詳細CSV。ZIP内カテゴリ・件数・URLのサイト帰属をingestで照合 | APIの検索パフォーマンスとは別経路。概要CSVの成功を詳細CSV成功にしない。UI exportの上限は各分類1,000行 |
 | KDP | known ASINで口座照合、登録書籍の出版状態、昨日の注文/KENP/電子書籍ロイヤリティ見積り、月別の電子書籍/KENPロイヤリティ | Reportsは別認証。現版/旧版ASINと著者名を照合し共用口座の他サイト書籍を除外。月次ロイヤリティを入金・税引後利益・週次純収益にしない |
-| ココナラ | seller照合、全体と公開商品別の対象期間/閲覧/販売件数/お気に入り、全体販売額、期間と行合計照合 | 有料表示数・商品別販売額・問い合わせ数はnull/未取得。ローリング30日を確定7日や手数料控除後収益にしない |
 
 保存先はprivate bucket `stats47-private` の `operations/authenticated-measurement/<source>/`。
 `MEASUREMENT_VAULT_KEY`によるAES-256-GCMでobject addressごとに認証し、PUT後GETの一致を検証する。
@@ -160,7 +159,6 @@ MCP が有用なのは**セレクタ確定の探索工程**である。実機を
 | `playwright-a8-profile/` + `playwright-a8-state.json` | A8.net               | `.claude/skills/ads/scout-asp/scripts/`、`.claude/scripts/ads/`         | storage state の再注入を併用                            |
 | `playwright-moshimo-profile/`                         | もしもアフィリエイト | `.claude/scripts/ads/`                                                  | `config/affiliate-asp.json` の site ID を照合   |
 | `playwright-afb-profile/`                             | afb                  | `.claude/scripts/ads/`                                                  | login から完了まで同一 headed process                   |
-| `playwright-coconala-profile/`                        | ココナラ             | `.claude/scripts/coconala/`                                             | `config/coconala-account.json` の seller を照合 |
 | `playwright-kdp-profile/`                             | Amazon KDP           | `.claude/scripts/kdp/`                                                  | `config/kdp-account.json` の account を照合     |
 | `playwright-note-profile/`                            | note                 | `.claude/scripts/note/`                                                 | `config/note-account.json` の account を照合    |
 | `playwright-google-admin-profile/`                    | Google Admin         | `.claude/scripts/google-admin/`                                         | GSC link / GA4 Library のAPI非提供操作だけに使う         |
@@ -180,7 +178,7 @@ archive skill だけが参照する profile は Active 一覧へ含めない。�
 - もしも: 対象 site ID を config と照合する。
 - afbの提携操作: storage state の別 process 復元や headless が拒否される場合がある。ログインから対象確認、操作完了まで同一 headed process で行う。成果取得は上記の公式API経路へ分離する。
 
-### ココナラ / KDP
+### KDP
 
 専用 config の account assertion が一致しない場合は停止する。KDP の税務情報、銀行口座、2FA は自動入力しない。
 
@@ -197,7 +195,7 @@ GA4 Admin API、AdSense read API、CIの承認境界、設定変更のallowlist�
 現在は二つの実装が混在している。
 
 1. ASP 共通基盤は、既知の main checkout が実在すればそこを使い、無ければ script 位置から repository root を解決する。
-2. X、Instagram、ココナラ、KDP の一部は main checkout の絶対 path を使用する。
+2. X、Instagram、KDP の一部は main checkout の絶対 path を使用する。
 
 このため browser 操作は原則として main checkout から実行する。別 OS または別 clone で動かす場合は、空 profile を正しい profile と誤認していないか、対象 script の `PROFILE_ROOT` / `PROFILE_DIR` を先に確認する。
 

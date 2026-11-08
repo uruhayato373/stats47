@@ -8,7 +8,7 @@
 #
 # ★★ 2026-08-16 以降このジョブは launchd に登録されていない (KDP 出品は手動のみ) ★★
 #   plist を ~/Library/LaunchAgents/ から削除済み。**再登録にはオーナーの新しい明示指示が要る**。
-#   正典: .claude/rules/coconala-product-standards.md §8「実公開を cron / launchd で無人実行しない」
+#   正典: .claude/rules/kindle-publishing-standards.md「実公開を cron / launchd で無人実行しない」
 #   再開する場合: launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.stats47.kdp-resume-daily.plist
 #   (repo の scripts/scheduled/com.stats47.kdp-resume-daily.plist をコピーしてから)
 #

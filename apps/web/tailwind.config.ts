@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const coconalaFontFamily = [
+const siteFontFamily = [
   "Hiragino Kaku Gothic ProN",
   "Hiragino Kaku Gothic Pro",
   "Meiryo",
@@ -35,8 +35,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: coconalaFontFamily,
-        mono: coconalaFontFamily,
+        sans: siteFontFamily,
+        mono: siteFontFamily,
       },
       // 色と角丸 (bg-card / rounded-card / text-positive …) は @stats47/ui-theme/theme.css の @theme が持つ (管理画面・動画アプリと共有)
       keyframes: {

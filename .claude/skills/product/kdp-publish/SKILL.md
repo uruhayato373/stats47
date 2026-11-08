@@ -7,7 +7,7 @@ primary_agent: kdp-operator
 co_agents: [kindle-publisher]
 ---
 
-Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行う (coconala-operator からの移植)。
+Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行う。
 永続プロファイル + account assert + draft-first + `--commit` gate。
 
 ```
@@ -55,7 +55,7 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
   ユーザーがその場で明示した場合だけ`kdp-weekly-publish --commit`を使う。
 - **KDP フォームは React SPA で DOM が変わりやすい**。日本語版の実仕様 (id 名指し / CKEditor /
   カテゴリの掲載場所チェック / AUI ボタンは実クリックのみ / 表紙は JPEG) は
-  `.claude/rules/coconala-product-standards.md` §KDP 入稿フォームの実仕様 が正典。
+  `.claude/rules/kindle-publishing-standards.md` §KDP 入稿フォームの実仕様 が正典。
   変わったら `--probe` で dump してからそこを直す。
 - **判定は read-back で行う**。「押せた」を成功にすると、1 枠も入っていないのに ✓ が並ぶ
   (実際にカテゴリでそうなった)。件数・表示の変化を確かめる。
@@ -89,7 +89,11 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
     に限り、行は ASIN + 題名で特定、成功判定は本棚 read-back が「下書き」になること (押せた = 成功にしない)。
 8d. **紹介文とキーワード (2026-11-06)**: 原稿は `data/products/kdp-listing-copy.json`。`npm run kdp:listing-copy -- check` で監査し、
     オーナー承認後に `apply --id <id>` で台帳へ写し、`kdp-update-listing-copy.mjs --id <id> --commit` で紹介文とキーワードだけを KDP へ反映する (原稿・表紙は再投入しない)。レビュー後に `--verify` で読み直す。検索順位は週次監査
-    `.claude/scripts/management/weekly-audits/kdp-search-ranks.sh` が記録する。規則は `coconala-product-standards.md` §8。
+    `.claude/scripts/management/weekly-audits/kdp-search-ranks.sh` が記録する。規則は `kindle-publishing-standards.md`。
+8e. **公開 (`--commit`) の前提 (2026-11-09)**: `kdp-publish --commit` は、承認済み (approved / submitted / reflected) の紹介文の原稿と
+    今の EPUB と照合した別エージェントのレビュー、今の表紙の縮小確認の記録 (readable) が無いと止まる。縮小確認は
+    `node .claude/scripts/kdp/kdp-cover-thumbnail.mjs render --id <id>` で縮小画像を作って目で見て、`record --id <id> --verdict readable --by <名前>` で書く。
+    KDP へ送った原稿 (submitted / reflected) と台帳の紹介文・キーワードのずれは PR の CI (`kdp:listing-copy -- check`) が止める。
 8c. **新版公開後の旧版 (2026-11-06)**: `previousEditions` の旧版は新版が販売中になっても自動では止まらない。新版の販売中を
     本棚で確かめたら、オーナー指示のうえで `kdp-unpublish.mjs --all-previous --probe` → `--commit` で止める (`--previous-of <id>` で 1 冊)。
     行は ASIN・題名・旧版の draftId がすべて一致したときだけ操作し、結果は旧版の `unpublishedAt` と新版の `previous_unpublished` に記録する。
@@ -114,6 +118,6 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
 
 ## 関連
 
-- 規約: `.claude/rules/coconala-product-standards.md §8`
+- 規約: `.claude/rules/kindle-publishing-standards.md`
 - スクリプト: `.claude/scripts/kdp/` / SoT: `config/kdp-listings.json` / アカウント: `config/kdp-account.json`
 - agent: `.claude/agents/kdp-operator.md` / 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

@@ -571,7 +571,7 @@ const S2_BOOKS: readonly KindleBookDraft[] = S2_THEMES.map((t) => ({
   ],
   priceYen: 500 as const,
   newContentNote: `テーマ解説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した主要ランキング (上位5+下位5・格差・全国平均)。全指標データは ${t.pack} で提供 (書籍は読む用ダイジェスト)。`,
-  sourceIdeas: [`coconala:${t.pack}`],
+  sourceIdeas: [`pack:${t.pack}`],
   keywords: ["都道府県", t.label, "ランキング", "データブック", "統計"],
   status: "generated" as const,
 }));

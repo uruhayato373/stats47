@@ -157,7 +157,8 @@
             "properties": {
               "name": {
                 "type": "string",
-                "pattern": "^[a-z0-9-]+$"
+                "pattern": "^[a-z0-9-]+$",
+                "description": "記事の図の名前。型ごとに接尾辞を決める (grouped-bar と stacked-bar は -bars、line は -lines、scatter は -scatter、boxplot は -boxplot。analysis-draft-core.mjs の NAME_SUFFIX)"
               },
               "alt": {
                 "type": "string",
@@ -174,11 +175,13 @@
               },
               "rows": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "description": "結果の JSON の行の配列のキー。boxplot の行は min・q1・median・q3・max を数で持つ"
               },
               "category": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "description": "行の名前の項目。棒・積み上げの棒・スロープの線・箱ひげの行の名前になる"
               },
               "count": {
                 "type": "string",
@@ -212,7 +215,8 @@
                       "minLength": 1
                     }
                   }
-                }
+                },
+                "description": "行から値を読む項目。grouped-bar は系列、stacked-bar は 100% 積み上げの区分 (行の合計を 100% として描く)、line に書くと 2 時点の変化 (スロープ) で始点と終点の 2 つ"
               },
               "displaySources": {
                 "type": "array",

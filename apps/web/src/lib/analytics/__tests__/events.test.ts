@@ -332,7 +332,7 @@ describe("GA4 カスタムイベント", () => {
     expect(productReferralOf("https://www.amazon.co.jp/dp/B0HF1XFXBY?tag=stats47-22")).toEqual({ destination: "amazon", productId: "B0HF1XFXBY" });
     expect(productReferralOf("https://note.com/stats47/n/ne47eb45f8a15")).toEqual({ destination: "note", productId: "ne47eb45f8a15" });
     expect(productReferralOf("https://note.com/stats47/m/m1b836e4c8dce?utm_source=stats47")).toEqual({ destination: "note", productId: "m1b836e4c8dce" });
-    expect(productReferralOf("https://coconala.com/services/4323722")).toEqual({ destination: "coconala", productId: "4323722" });
+    expect(productReferralOf("https://coconala.com/services/4323722")).toBeNull();
     expect(productReferralOf("https://www.amazon.co.jp/s?k=stats47")).toBeNull();
     expect(productReferralOf("https://stats47.jp/products/data-p-04")).toBeNull();
     expect(productReferralOf("not a url")).toBeNull();

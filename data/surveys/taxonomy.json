@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T05:53:09.080Z",
+  "generatedAt": "2026-11-07T23:56:49.443Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2740,
@@ -754,11 +754,11 @@
     }
   },
   "blog": {
-    "articles": 848,
-    "charts": 2124,
-    "applicableCharts": 1975,
+    "articles": 847,
+    "charts": 2123,
+    "applicableCharts": 1974,
     "byStatus": {
-      "resolved": 1975,
+      "resolved": 1974,
       "unresolved": 0,
       "not-applicable": 149,
       "missing-lineage": 0
@@ -895,7 +895,6 @@
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
         "road-length-per-km2-vs-local-special-grant-prefecture",
-        "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk",
@@ -1002,6 +1001,7 @@
         "local-tax-revenue-gap",
         "major-lake-area-prefecture-gap",
         "manufacturing-output-outlier-cities",
+        "manufacturing-strength-factory-size",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
@@ -1033,7 +1033,6 @@
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
         "road-length-per-km2-vs-local-special-grant-prefecture",
-        "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
         "savings-rate-gap",
@@ -1054,6 +1053,7 @@
         "unmarried-rate-40years-crisis",
         "urban-parks-green-infrastructure",
         "vacant-house-crisis",
+        "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
@@ -1113,6 +1113,7 @@
         "manufacturing-shipment-amount-vs-manufacturing",
         "manufacturing-shipment-amount-vs-regional-industry-co2",
         "manufacturing-shipment-prefecture-ranking",
+        "manufacturing-strength-factory-size",
         "pharma-medical-device-production-map",
         "prefectural-income-gdp-ranking",
         "retail-establishments-by-prefecture",
@@ -1147,6 +1148,7 @@
         "manufacturing-shipment-amount-vs-manufacturing",
         "manufacturing-shipment-amount-vs-regional-industry-co2",
         "manufacturing-shipment-prefecture-ranking",
+        "manufacturing-strength-factory-size",
         "pharma-medical-device-production-map",
         "semiconductor-electronics-regional-map",
         "wholesale-annual-sales-amount-prefecture-gap"
@@ -1211,9 +1213,6 @@
         "forest-coverage-woodland-economy",
         "roadside-station-count-vs-forest-road-length"
       ],
-      "freight-regional-flow-survey": [
-        "shumai-consumption-expenditure-vs-jr-freight-shipment"
-      ],
       "gas-business-statistics": [
         "energy-infrastructure-gas-electricity",
         "gas-expenditure-ranking",
@@ -1273,6 +1272,7 @@
         "solar-power-housing-prefecture-gap",
         "sunshine-solar-housing-correlation",
         "vacant-house-crisis",
+        "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-rate-vs-standard-price-change-rate-commercial",
@@ -1287,8 +1287,7 @@
         "home-ownership-rate-ranking",
         "new-condo-starts-prefecture-gap",
         "new-housing-starts-prefecture-gap",
-        "new-rental-starts-prefecture-gap",
-        "road-length-per-km2-vs-residential-building-starts"
+        "new-rental-starts-prefecture-gap"
       ],
       "industrial-statistics": [
         "industrial-water-manufacturing-nexus",
@@ -1296,7 +1295,6 @@
         "semiconductor-electronics-regional-map"
       ],
       "insurance-rate-org-statistics": [
-        "annual-sunshine-duration-vs-auto-liability-insurance-amount",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk",
         "voluntary-car-insurance-rate-bodily-injury-prefecture-gap"
@@ -1611,7 +1609,6 @@
         "shochu-consumption-prefecture-gap",
         "shochu-expenditure-vs-sake-ranking",
         "shrimp-consumption-quantity-prefecture-gap",
-        "shumai-consumption-expenditure-vs-jr-freight-shipment",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
         "social-expenses-group-consumption-expenditure-prefecture-gap",
@@ -2004,6 +2001,7 @@
         "unmarried-rate-40years-crisis",
         "urban-parks-green-infrastructure",
         "vacant-house-crisis",
+        "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
@@ -2151,7 +2149,6 @@
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
         "road-length-per-km2-vs-local-special-grant-prefecture",
-        "road-length-per-km2-vs-residential-building-starts",
         "road-total-length-vs-core-agricultural-workers",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk"
@@ -2357,7 +2354,6 @@
       "weather-statistics": [
         "annual-precipitation-rainy-season-gap",
         "annual-sunshine-duration-prefecture-gap",
-        "annual-sunshine-duration-vs-auto-liability-insurance-amount",
         "extreme-heat-days-prefecture",
         "livable-prefecture-composite-ranking",
         "precipitation-snow-regional-gap",
@@ -2511,7 +2507,6 @@
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
         "road-length-per-km2-vs-local-special-grant-prefecture",
-        "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk",
@@ -2674,6 +2669,7 @@
         "local-tax-revenue-gap",
         "major-lake-area-prefecture-gap",
         "manufacturing-output-outlier-cities",
+        "manufacturing-strength-factory-size",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
@@ -2705,7 +2701,6 @@
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
         "road-length-per-km2-vs-local-special-grant-prefecture",
-        "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
         "savings-rate-gap",
@@ -2726,6 +2721,7 @@
         "unmarried-rate-40years-crisis",
         "urban-parks-green-infrastructure",
         "vacant-house-crisis",
+        "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
@@ -2867,6 +2863,7 @@
         "manufacturing-shipment-amount-vs-manufacturing",
         "manufacturing-shipment-amount-vs-regional-industry-co2",
         "manufacturing-shipment-prefecture-ranking",
+        "manufacturing-strength-factory-size",
         "pharma-medical-device-production-map",
         "prefectural-income-gdp-ranking",
         "retail-establishments-by-prefecture",
@@ -2915,6 +2912,7 @@
         "manufacturing-shipment-amount-vs-manufacturing",
         "manufacturing-shipment-amount-vs-regional-industry-co2",
         "manufacturing-shipment-prefecture-ranking",
+        "manufacturing-strength-factory-size",
         "pharma-medical-device-production-map",
         "semiconductor-electronics-regional-map",
         "wholesale-annual-sales-amount-prefecture-gap"
@@ -3101,9 +3099,7 @@
         "freight-logistics",
         "railway"
       ],
-      "blogSlugs": [
-        "shumai-consumption-expenditure-vs-jr-freight-shipment"
-      ]
+      "blogSlugs": []
     },
     {
       "surveyId": "gas-business-statistics",
@@ -3217,6 +3213,7 @@
         "solar-power-housing-prefecture-gap",
         "sunshine-solar-housing-correlation",
         "vacant-house-crisis",
+        "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-rate-vs-standard-price-change-rate-commercial",
@@ -3238,8 +3235,7 @@
         "home-ownership-rate-ranking",
         "new-condo-starts-prefecture-gap",
         "new-housing-starts-prefecture-gap",
-        "new-rental-starts-prefecture-gap",
-        "road-length-per-km2-vs-residential-building-starts"
+        "new-rental-starts-prefecture-gap"
       ]
     },
     {
@@ -3267,7 +3263,6 @@
       "rankingCount": 10,
       "themeKeys": [],
       "blogSlugs": [
-        "annual-sunshine-duration-vs-auto-liability-insurance-amount",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk",
         "voluntary-car-insurance-rate-bodily-injury-prefecture-gap"
@@ -3621,7 +3616,6 @@
         "shochu-consumption-prefecture-gap",
         "shochu-expenditure-vs-sake-ranking",
         "shrimp-consumption-quantity-prefecture-gap",
-        "shumai-consumption-expenditure-vs-jr-freight-shipment",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
         "social-expenses-group-consumption-expenditure-prefecture-gap",
@@ -4349,6 +4343,7 @@
         "unmarried-rate-40years-crisis",
         "urban-parks-green-infrastructure",
         "vacant-house-crisis",
+        "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
@@ -4617,7 +4612,6 @@
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
         "road-length-per-km2-vs-local-special-grant-prefecture",
-        "road-length-per-km2-vs-residential-building-starts",
         "road-total-length-vs-core-agricultural-workers",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk"
@@ -5031,7 +5025,6 @@
       "blogSlugs": [
         "annual-precipitation-rainy-season-gap",
         "annual-sunshine-duration-prefecture-gap",
-        "annual-sunshine-duration-vs-auto-liability-insurance-amount",
         "extreme-heat-days-prefecture",
         "livable-prefecture-composite-ranking",
         "precipitation-snow-regional-gap",

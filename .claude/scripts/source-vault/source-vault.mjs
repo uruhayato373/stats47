@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// @ts-nocheck — 型検査の範囲外 (SCRIPT-LIB-CHECKJS-01 の範囲は lib・measurement・metrics/lib)。lib/drive-archive.mjs が
+// resolveVaultRoot を import するため検査に引き込まれる。範囲を広げるときに型注釈を足して外す。
 
 /**
  * 参考文献 private vault CLI (expanded layout)

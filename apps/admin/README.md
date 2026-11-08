@@ -23,8 +23,7 @@ PORT=5000 npm run admin    # ポート上書き
 | パス                              | 内容                                                                                                                                                                                               |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/`                               | 導線 + 件数サマリ                                                                                                                                                                                  |
-| `/product/status`                 | 商品チャネル (note・ココナラ・Kindle) の件数・公開段階。チャネルの定義は `lib/channel-registry.ts`                                                                                                 |
-| `/product/coconala`               | ココナラの出品状況 (`coconala-listings.json` × product-factory カタログ)                                                                                                                           |
+| `/product/status`                 | 商品チャネル (note・Kindle) の件数・公開段階。チャネルの定義は `lib/channel-registry.ts`                                                                                                 |
 | `/content`                        | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ                                                                                                                 |
 | `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示                                                                                                                        |
 | `/content/note`                   | Git記事台帳 (`data/note/articles.json`)・R2本文所在・公開URL・公開ゲートの読み取り専用ミラー。未公開レコードを本文未作成・同題重複・販売条件・カバー・内容レビューで絞り込む。note.comエディタの下書き件数とは区別する |
