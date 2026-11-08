@@ -3,14 +3,14 @@
   "_comment": "A8 レポート CSV（fetch-a8-ui-csv.mjs）の正規化 SSOT。A8 は確定処理で過去分が遡及変化するため upsert 運用（最新 fetch が正）。手で編集しない。",
   "_siteScopeNote": "siteSummary のみ対象サイトに完全分離された実績（真実源）。monthly / daily / programPeriod は **口座横断**（doboku-note 込み）で、programPeriod は programIdMap の allowlist で対象サイト分だけを抽出したもの。crossCheck が siteSummary との突合結果。",
   "site": "統計で見る都道府県",
-  "updatedAt": "2026-10-30T22:25:21.449Z",
-  "lastRun": "2026-10-30T22-24-39Z",
+  "updatedAt": "2026-11-08T00:10:01.550Z",
+  "lastRun": "2026-11-08T00-09-53Z",
   "period": {
-    "raw": "202610-202610",
-    "start": "2026-10",
-    "end": "2026-10",
+    "raw": "202611-202611",
+    "start": "2026-11",
+    "end": "2026-11",
     "granularity": "month",
-    "singleMonth": "2026-10"
+    "singleMonth": "2026-11"
   },
   "siteSummary": [
     {
@@ -57,6 +57,21 @@
       "pendingRevenueYen": 0,
       "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
+    },
+    {
+      "site": "統計で見る都道府県",
+      "impressions": 30663,
+      "clicks": 88,
+      "conversions": 0,
+      "grossRevenueYen": 0,
+      "approved": 0,
+      "revenueYen": 0,
+      "cancelledCount": 0,
+      "cancelledYen": 0,
+      "pendingCount": 0,
+      "pendingRevenueYen": 0,
+      "fetchedAt": "2026-11-08T00:09:53.640Z",
+      "period": "202611-202611"
     }
   ],
   "monthly": [
@@ -4862,40 +4877,40 @@
     "hasShortfall": true,
     "withinBounds": false,
     "shortfall": {
-      "clicks": 180,
+      "clicks": 88,
       "revenueYen": 0
     },
     "deltas": {
       "clicks": {
-        "site": 522,
-        "picked": 342,
-        "exclusive": 276,
-        "shared": 66,
-        "lowerBound": 276,
-        "upperBound": 342,
-        "delta": -180,
+        "site": 88,
+        "picked": 0,
+        "exclusive": 0,
+        "shared": 0,
+        "lowerBound": 0,
+        "upperBound": 0,
+        "delta": -88,
         "toleranceBasis": "other-site-clicks",
-        "otherSiteClicks": 182,
-        "unmappedClicks": 11,
-        "tolerance": 105
+        "otherSiteClicks": 62,
+        "unmappedClicks": 0,
+        "tolerance": 62
       },
       "conversions": {
         "site": 0,
-        "picked": 1,
+        "picked": 0,
         "exclusive": 0,
-        "shared": 1,
+        "shared": 0,
         "lowerBound": 0,
-        "upperBound": 1,
-        "delta": 1
+        "upperBound": 0,
+        "delta": 0
       },
       "grossRevenueYen": {
         "site": 0,
-        "picked": 13534,
+        "picked": 0,
         "exclusive": 0,
-        "shared": 13534,
+        "shared": 0,
         "lowerBound": 0,
-        "upperBound": 13534,
-        "delta": 13534
+        "upperBound": 0,
+        "delta": 0
       },
       "approved": {
         "site": 0,
@@ -4916,84 +4931,12 @@
         "delta": 0
       }
     },
-    "period": "202610-202610"
+    "period": "202611-202611"
   },
-  "unmapped": [
-    {
-      "programId": "s00000020569001",
-      "programRaw": "本格オンラインヨガ・フィットネスのSOELU",
-      "clicks": 2,
-      "grossRevenueYen": 0
-    },
-    {
-      "programId": "s00000021719001",
-      "programRaw": "【国産高品質】ULTORAプロテイン",
-      "clicks": 2,
-      "grossRevenueYen": 0
-    },
-    {
-      "programId": "s00000027681001",
-      "programRaw": "自宅でプロの味！低温調理器【エンペラータマリン】",
-      "clicks": 2,
-      "grossRevenueYen": 0
-    },
-    {
-      "programId": "s00000008903004",
-      "programRaw": "【DMM．com証券】DMM CFD 新規ユーザー獲得プロモーション",
-      "clicks": 1,
-      "grossRevenueYen": 0
-    }
-  ],
-  "notAttributable": [
-    {
-      "program": "af_tvcm-up-web_a8_001+af_tvcm-up-web_a8_text_001",
-      "programId": "s00000012624009",
-      "programRaw": "TVCM放映で知名度UP★ココナラ｜Webサイト・デザイン・動画・イラストなど発注者 募集",
-      "period": "202610-202610",
-      "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
-    },
-    {
-      "program": "af_jobs_a8_001",
-      "programId": "s00000023057002",
-      "programRaw": "日本最大級 施工管理・建設業界の転職サイト「建設JOBs」",
-      "period": "202610-202610",
-      "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
-    },
-    {
-      "program": "af_buildjob_construction_001+af_s00000024757004_a8_text_001",
-      "programId": "s00000024757004",
-      "programRaw": "ビルドジョブ｜建設業界特化の転職エージェントの無料キャリア面談",
-      "period": "202610-202610",
-      "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
-    }
-  ],
-  "missingProgramCandidates": [
-    {
-      "programId": "s00000020569001",
-      "programRaw": "本格オンラインヨガ・フィットネスのSOELU",
-      "clicks": 2,
-      "grossRevenueYen": 0
-    },
-    {
-      "programId": "s00000021719001",
-      "programRaw": "【国産高品質】ULTORAプロテイン",
-      "clicks": 2,
-      "grossRevenueYen": 0
-    },
-    {
-      "programId": "s00000027681001",
-      "programRaw": "自宅でプロの味！低温調理器【エンペラータマリン】",
-      "clicks": 2,
-      "grossRevenueYen": 0
-    },
-    {
-      "programId": "s00000008903004",
-      "programRaw": "【DMM．com証券】DMM CFD 新規ユーザー獲得プロモーション",
-      "clicks": 1,
-      "grossRevenueYen": 0
-    }
-  ],
-  "unmappedCount": 5,
+  "unmapped": [],
+  "notAttributable": [],
+  "missingProgramCandidates": [],
+  "unmappedCount": 0,
   "otherSiteSummary": [
     {
       "site": "KAZU（X @uruhayato373）",
@@ -5030,6 +4973,33 @@
       "revenueYen": 0,
       "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
+    },
+    {
+      "site": "KAZU（X @uruhayato373）",
+      "clicks": 6,
+      "conversions": 0,
+      "grossRevenueYen": 0,
+      "revenueYen": 0,
+      "fetchedAt": "2026-11-08T00:09:53.640Z",
+      "period": "202611-202611"
+    },
+    {
+      "site": "doboku-note",
+      "clicks": 54,
+      "conversions": 0,
+      "grossRevenueYen": 0,
+      "revenueYen": 0,
+      "fetchedAt": "2026-11-08T00:09:53.640Z",
+      "period": "202611-202611"
+    },
+    {
+      "site": "doboku-note（note）",
+      "clicks": 2,
+      "conversions": 0,
+      "grossRevenueYen": 0,
+      "revenueYen": 0,
+      "fetchedAt": "2026-11-08T00:09:53.640Z",
+      "period": "202611-202611"
     }
   ]
 }

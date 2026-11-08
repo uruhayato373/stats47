@@ -1,8 +1,8 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-11-02T22:15:09.594Z",
+  "generatedAt": "2026-11-08T18:16:22.632Z",
   "inventorySnapshot": "data/affiliate/inventory-latest.json",
-  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-10-31.json",
+  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-11-07.json",
   "freshness": {
     "inventoryDays": 0,
     "ga4Days": 0
@@ -15,6 +15,7 @@
     "status": "blocked",
     "reasons": [
       "a8-cross-check-shortfall",
+      "a8-results-month-missing",
       "eligible-candidate-missing"
     ]
   },
@@ -53,8 +54,8 @@
   },
   "recommendedActions": [],
   "ga4Totals": {
-    "impressions": 4349,
-    "clicks": 5,
-    "ctr": 0.0011496895838123706
+    "impressions": 6892,
+    "clicks": 3,
+    "ctr": 0.00043528728961114336
   }
 }
