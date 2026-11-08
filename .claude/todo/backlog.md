@@ -417,7 +417,7 @@ updated: 2026-11-01
   - F. 「note の有料はノウハウだけ」が教科書型・データの有料を締め出す: `02_収益化戦略.md` 203-206 行（同じ文書の §3.4 でデータ集の価格実験が進行中）、`note戦略.md` 13-14 行、backlog の `NOTE-FREE-DEFAULT-01`。
   - G. 「売れない原因は導線、新商品は作らない」の判断: `02_収益化戦略.md` 344-345 行、`experiments.json` 876 行（EXP-013）、`product-strategy.json` 159 行、backlog の `PRODUCT-REFERRAL-MEASURE-01`。
   - H. 分類軸が 4×3 と対応しない: `catalog.ts` 155・474・1068 行（5 収益レイヤー・paid-purchases の合算）、`pilot-board.json` 8・24・39 行（雑学の回収経路 3 つ）、`02_収益化戦略.md` §3.5・§3.6、`04_ターゲットペルソナ.md` 13・23 行、`.claude/skills/management/monetization-strategy/SKILL.md` 38-48 行、`.claude/agents/note-critic.md`・`.claude/skills/note/design-note-structure/SKILL.md`（ノウハウ型の制作・レビューの担当が無い）、`apps/admin/app/strategy/pilots/page.tsx` 13 行、`.claude/shared-policy/application.json`。
-  - I. ココナラ撤退の残り: `.claude/agents/coconala-operator.md`・`coconala-product-manager.md`・`README.md` 93-94 行、`.claude/skills/product/coconala-publish/`・`build-coconala-product/`、`.claude/rules/coconala-product-standards.md` 11・94 行、`CLAUDE.md` 121 行、`apps/admin/lib/server/revenue.ts` 242 行、`catalog.ts` 242-243・854-855 行、`02_収益化戦略.md` 342・349-350・507 行、backlog の `NOTE-PRODUCT-LADDER-01` 段 5。
+  - I. ココナラ撤退の残り: agent・skill・規約・管理画面・出品台帳・`CLAUDE.md`・`revenue.ts`・`catalog.ts` は 2026-11-08 (`c5e9ee3a1`) に削除・改名済み。残りは `02_収益化戦略.md` の受注チャネル (地図・資料の受注を再開するか) の判断と、backlog の `NOTE-PRODUCT-LADDER-01` 段 5。
   - J. 数字・状態・ID の食い違い: `.claude/memory/project_product_ledger.md` 12 行（価格は ¥980・¥2,980 に再変更済み）、`experiments.json` 593 行（EXP-007 が proposed のまま）、`01_プロジェクト定義.md` 252 行と `03_マーケティング戦略.md` 23 行（AdSense は 10-11 に再開済み）、`02_収益化戦略.md` 349 行（旧 ID `NOTE-FISCAL-PEER-PUBLISH-01`）、backlog の `MUNI-DATA-PRODUCT-PILOT-01`（「売上 2 件」）、`.claude/todo/improvements.md` 25 行（財政比較 2 本の比較の設計）。
   - K. 計画にノウハウ型が無い: `.claude/todo/monthly.md` 8-13・79 行。
 - **次（実行順）**: ① 群 I と群 J は判断が要らないので先にまとめて直す（agent・スキルの削除や統合は `check-agent-skill-consistency.cjs` を通す）。② 群 A・B・C・F・G は `02_収益化戦略.md` の改訂案（§2.1・§2.3・§3.3〜§3.6・§5 の領域表・§6）をオーナーに出し、承認後に反映する。続けて `MEMORY.md`・`project_monetization_contract.md`・01・03・04 を合わせる。③ 群 H は `catalog.ts` の `revenueLayers` と `pilot-board.json` の `route` を 3 収益源に寄せるかをオーナーと決める（機械の正典なので schema・テスト・管理画面を同じ差分で直す）。④ 群 E は KDP の本ごとの売上を確かめてから。⑤ 群 D は境界の決定後。⑥ 群 K は次の `/monthly-plan` で扱う。
@@ -1413,8 +1413,8 @@ updated: 2026-11-01
 ### [NOTE-DELIVERY-CONTRACT-DRIFT-01] 出品台帳の note 納品版 (v3) が、note に添付した版 (v4) と食い違っている
 タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:商品]
 
-- **実測 (2026-10-28)**: `config/coconala-listings.json` の `_noteDelivery.artifactDirectory` は 13 パックとも `v3-20261012-mac-r4` を指す。note の有料記事に添付したのは `data/products/note-pack-regeneration-2026-10-24.json` の `v4-20261024-mac-r2` の ZIP (private R2 `note/product-archives/`)。`build-revision.ts` は `_noteDelivery` を読むので、次に販売準備原稿を作ると公開中と違う版の件数・枚数で書かれる。
-- **次**: `_noteDelivery` を v4 の manifestSha256 へ合わせるか、note の納品の正本を regeneration の記録へ一本化するかを決めて直す。Office の確認記録 (`data/products/note-pack-office-verification-2026-10-28.json`) は v4 の ZIP に結びついている。
+- **実測 (2026-10-28)**: 当時の `config/coconala-listings.json` の `_noteDelivery.artifactDirectory` (2026-11-08 に v3 のまま `data/products/note-pack-deliveries.json` へ移した。今の正本はこちら) は 13 パックとも `v3-20261012-mac-r4` を指す。note の有料記事に添付したのは `data/products/note-pack-regeneration-2026-10-24.json` の `v4-20261024-mac-r2` の ZIP (private R2 `note/product-archives/`)。`build-revision.ts` は `_noteDelivery` を読むので、次に販売準備原稿を作ると公開中と違う版の件数・枚数で書かれる。
+- **次**: `note-pack-deliveries.json` の `_delivery` を v4 の manifestSha256 へ合わせるか、note の納品の正本を regeneration の記録へ一本化するかを決めて直す。Office の確認記録 (`data/products/note-pack-office-verification-2026-10-28.json`) は v4 の ZIP に結びついている。
 - **完了条件**: note の販売準備原稿の生成が、添付中の版と同じ manifest を読む。
 
 ### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
