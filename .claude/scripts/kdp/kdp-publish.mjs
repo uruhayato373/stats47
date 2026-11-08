@@ -15,13 +15,19 @@
  * ★税務情報 (Tax interview)・銀行口座が未完了だと KDP は公開させない。これは人間が事前に完了させる。
  * ★KU (KDP Select 独占) 登録は kdp-listings.json の kuEnrolled=false を尊重 (当面 未登録=販売のみ)。
  */
-import { writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { datasetPath } from "../../../config/datasets.mjs";
+import { KDP_COVER_THUMBNAIL_CHECKS, KDP_LISTING_COPY } from "../../../config/paths.mjs";
 import {
   ROOT, launchContext, waitForLogin, assertAccount, readListings, resolveAsset, shotPath, sleep,
 } from "./lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft } from "./lib/kdp-flow.mjs";
 import { assertKindleReleaseReady } from "./lib/kdp-release-gate.mjs";
 import { runKdpPreflight, validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
+import { publicationCopyIssues } from "./lib/kdp-listing-copy.mjs";
+import { coverThumbnailIssues } from "./lib/kdp-cover-thumbnail.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
@@ -51,11 +57,33 @@ if (!PROBE) {
   }
 }
 
+// 公開 (--commit) は、承認済みの紹介文の原稿と、今の EPUB と照合した別エージェントのレビューを必須にする。
+if (COMMIT) {
+  const readJson = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8"));
+  const copy = readJson(KDP_LISTING_COPY).books?.[ID];
+  const facts = readJson(datasetPath("kindle.quality")).books.find((book) => book.id === ID);
+  const issues = publicationCopyIssues(ID, copy, facts);
+  if (issues.length) {
+    console.error(`[preflight] ABORT: ${issues.join(" / ")}`);
+    process.exit(1);
+  }
+}
+
 // 資産 (EPUB/カバー) の存在をブラウザ起動前に確認 (中断で orphan 下書きを残さない)。
 const epub = resolveAsset(lst.epubPath);
 if (!epub.ok) { console.error(`ABORT: ${epub.reason}`); process.exit(1); }
 const cover = resolveAsset(lst.coverPath);
 if (!cover.ok) console.warn(`[warn] カバー未検出 (${lst.coverPath}) — KDP Cover Creator で作成可`);
+// 公開 (--commit) は、今の表紙を検索結果の大きさに縮めて読めると記録したものに限る (kdp-cover-thumbnail.mjs)。
+if (COMMIT) {
+  const record = JSON.parse(readFileSync(resolve(ROOT, KDP_COVER_THUMBNAIL_CHECKS), "utf8")).books?.[ID];
+  const coverSha256 = cover.ok ? createHash("sha256").update(readFileSync(cover.abs)).digest("hex") : null;
+  const issues = coverThumbnailIssues(ID, record, coverSha256);
+  if (issues.length) {
+    console.error(`[preflight] ABORT: ${issues.join(" / ")}`);
+    process.exit(1);
+  }
+}
 
 // 出品前チェック (KDP 制約)。タイトル/キーワードの明白な逸脱を起動前に弾く。
 if (!lst.title?.trim()) { console.error("ABORT: title 空"); process.exit(1); }

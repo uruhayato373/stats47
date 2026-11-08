@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KDP の表紙の縮小確認の記録",
+  "description": "data/products/kdp-cover-thumbnail-checks.json の形状契約。表紙を検索結果の大きさに縮めた画像を目で見て、題名が読めるかを判定した記録。表紙の SHA-256 ごとに 1 件で、表紙を差し替えたら取り直す。書き手は .claude/scripts/kdp/kdp-cover-thumbnail.mjs record。",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "books"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "dataNote": {
+      "type": "string",
+      "minLength": 1
+    },
+    "books": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^K-S[1-4]-\\d{2}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/check"
+      }
+    }
+  },
+  "definitions": {
+    "check": {
+      "type": "object",
+      "required": [
+        "coverSha256",
+        "heightsPx",
+        "verdict",
+        "checkedAt",
+        "checkedBy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "coverSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "coverPath": {
+          "type": "string"
+        },
+        "heightsPx": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1
+        },
+        "verdict": {
+          "description": "readable = 縮小しても題名が読める。unreadable = 読めない (公開を止める)。",
+          "enum": [
+            "readable",
+            "unreadable"
+          ]
+        },
+        "note": {
+          "type": "string"
+        },
+        "checkedAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+        },
+        "checkedBy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

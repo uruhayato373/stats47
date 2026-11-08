@@ -1,5 +1,6 @@
 export declare const KDP_LISTINGS: string;
 export declare const KDP_LISTING_COPY: string;
+export declare const KDP_COVER_THUMBNAIL_CHECKS: string;
 export declare const KDP_ACCOUNT: string;
 export declare const NOTE_ACCOUNT: string;
 export declare const AFFILIATE_ASP: string;

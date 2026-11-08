@@ -13,6 +13,7 @@
 // 販売チャネル (Kindle) の出品台帳・アカウント
 export const KDP_LISTINGS = "config/kdp-listings.json";
 export const KDP_LISTING_COPY = "data/products/kdp-listing-copy.json";
+export const KDP_COVER_THUMBNAIL_CHECKS = "data/products/kdp-cover-thumbnail-checks.json";
 export const KDP_ACCOUNT = "config/kdp-account.json";
 export const NOTE_ACCOUNT = "config/note-account.json";
 

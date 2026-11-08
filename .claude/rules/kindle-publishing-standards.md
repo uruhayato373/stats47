@@ -253,6 +253,14 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する。実機での初回調整が前提。
 - **KU（KDP Select 独占）は既定 未登録**（`kuEnrolled:false`・販売のみ）。判断はオーナー。**規約リスク**: 出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残るため低頻度（出品時・価格改定時）に限る。
 - **公開・既刊修正の前にR2 archive gate必須**。ローカル6ファイルのSHAが最新の検証済みrevisionと一致しなければKDP操作を停止する。修正は原稿/表紙SSOTを編集→再生成→新revisionをR2へpush→`kdp-publish --update`で修正下書き→`--update --commit`で再申請する。旧revisionは削除せずrollback可能にする。
+### 表紙の縮小確認 (2026-11-09)
+
+読者が最初に見るのは検索結果の小さな表紙なので、公開の前に縮めても題名が読めるかを目で確かめる。
+`node .claude/scripts/kdp/kdp-cover-thumbnail.mjs render --id <ID>` で 120px / 220px の高さの PNG を一時領域に作り、
+見た判定を `record --id <ID> --verdict readable|unreadable --by <名前>` で `data/products/kdp-cover-thumbnail-checks.json` に書く。
+記録は表紙の SHA-256 ごとで、表紙を差し替えたら取り直す。`kdp-publish --commit` は今の表紙に readable の記録が無いと止まる。
+高さは仮置きの目安で、Amazon の公式の寸法ではない (実測で違えば `lib/kdp-cover-thumbnail.mjs` を直す)。
+
 ### 紹介文とキーワード (2026-11-06 オーナー依頼)
 
 紹介文は読者が買うかを決める文章で、定型文の差し替えにしない。正本は `data/products/kdp-listing-copy.json` で、
