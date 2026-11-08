@@ -206,7 +206,7 @@ export async function passTotpIfOffered(page, conf, cred) {
  * Reports で再ログインを求められたら同じ資格情報で 1 回だけ送信し、それでも通らなければ止める。
  * 送信して通ったときだけ reauthenticated: true を返す (呼び側はそれを新しい世代として扱う)。
  */
-async function afterKdpLogin(page, cred) {
+async function afterKdpLogin(page, cred, { waitHuman = false } = {}) {
   const { assertAccount } = await import('../kdp/lib/kdp-session.mjs');
   const account = await assertAccount(page, { tag: '[refresh-session kdp]' });
   if (!account.ok) return { status: 'account_mismatch', reason: account.reason };
@@ -215,6 +215,18 @@ async function afterKdpLogin(page, cred) {
     await openKdpReports(page);
     return { status: 'ok' };
   } catch (error) {
+    // --wait-human: Reports のログイン画面のまま、人が (2FA 含め) 通すのを最大 10 分待つ。自動入力はしない。
+    // 以前は本棚のログインだけを待ち、Reports の認証では待たずに終わっていた (2026-11-08 の週次レビューで判明)。
+    if (/auth_required/.test(String(error.message)) && waitHuman) {
+      console.error('[refresh-session kdp] Reports のログインを開いたブラウザで済ませてください (最大 10 分待つ)');
+      try {
+        await page.getByRole('tab', { name: '昨日', exact: true }).first().waitFor({ state: 'visible', timeout: 600000 });
+        if (new URL(page.url()).origin !== 'https://kdpreports.amazon.co.jp') return { status: 'account_mismatch', reason: 'reports_origin' };
+        return { status: 'ok', reauthenticated: true };
+      } catch {
+        return { status: 'human_required', reason: 'Reports のログインが 10 分以内に終わらなかった' };
+      }
+    }
     if (!/auth_required/.test(String(error.message)) || !cred) return { status: 'reports_auth_required', reason: 'Reports の認証が必要 (資格情報ストア未登録か --wait-human で人が通す)' };
   }
   await submitCredential(page, LOGIN.kdp, cred);
@@ -298,7 +310,7 @@ export async function refresh(source, { root, publish, headed, waitHuman, chromi
     }
     if (source === 'kdp') {
       const page = context.pages()[0];
-      const after = await afterKdpLogin(page, waitHuman ? null : readCredential(source));
+      const after = await afterKdpLogin(page, waitHuman ? null : readCredential(source), { waitHuman });
       if (after.status !== 'ok') {
         // 口座不一致・2FA・再ログイン失敗は自動で繰り返さない (アカウントロックと別口座の混入を避ける)
         if (after.status !== 'reports_auth_required') writeFileSync(failMark, `${new Date().toISOString()} ${after.status}\n`, { mode: 0o600 });
