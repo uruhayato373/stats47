@@ -1,30 +1,39 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-07",
+  "date": "2026-11-09",
   "period": {
-    "periodStart": "2026-10-29",
-    "periodEnd": "2026-11-04",
+    "periodStart": "2026-10-31",
+    "periodEnd": "2026-11-06",
     "windowDays": 7
   },
-  "inputHash": "037fcb5a90b19e59b387c33a4098831855ddf968892f3531e891fd3a5d227f47",
+  "inputHash": "8460dbe35273199353a351153952bb5aa6c81686c610bec4fe4fae42d805d732",
   "movements": [
     {
-      "keyword": "保健師 年収",
-      "targetPath": "/ranking/public-health-nurse-annual-income",
-      "before": 3,
-      "after": 65,
+      "keyword": "自治体 数",
+      "targetPath": "/blog/municipality-count-prefecture-gap",
+      "before": 8,
+      "after": 77.33333333333333,
       "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -62
+      "impressions": 3,
+      "change": -69.33333333333333
     },
     {
-      "keyword": "都道府県",
-      "targetPath": "/",
-      "before": 18,
-      "after": 78,
+      "keyword": "埼玉 県 人口",
+      "targetPath": "/areas/11000/cities/11100",
+      "before": 26,
+      "after": 87,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -61
+    },
+    {
+      "keyword": "松本 市 人口",
+      "targetPath": "/areas/20000/cities/20202",
+      "before": 10.5,
+      "after": 67,
       "beforeImpressions": 2,
       "impressions": 1,
-      "change": -60
+      "change": -56.5
     },
     {
       "keyword": "品川 区 人口",
@@ -36,22 +45,22 @@
       "change": -49
     },
     {
-      "keyword": "人口動態統計",
-      "targetPath": "/japan/population-dynamics",
-      "before": 54,
-      "after": 7,
-      "beforeImpressions": 1,
+      "keyword": "離婚 率 日本",
+      "targetPath": "/blog/divorces-per-total-population",
+      "before": 34.5,
+      "after": 83,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": 47
+      "change": -48.5
     },
     {
-      "keyword": "看護師 給料ランキング 都道府県",
-      "targetPath": "/ranking/practical-nurse-annual-income",
-      "before": 60,
-      "after": 13.666666666666666,
-      "beforeImpressions": 3,
-      "impressions": 3,
-      "change": 46.333333333333336
+      "keyword": "四日市 人口",
+      "targetPath": "/areas/24000/cities/24202",
+      "before": 15.166666666666666,
+      "after": 60,
+      "beforeImpressions": 6,
+      "impressions": 1,
+      "change": -44.833333333333336
     },
     {
       "keyword": "高卒 初任 給 平均",
@@ -63,15 +72,6 @@
       "change": -43.5
     },
     {
-      "keyword": "空港が多い県",
-      "targetPath": "/blog/airport-count-prefecture-gap",
-      "before": 45,
-      "after": 2,
-      "beforeImpressions": 1,
-      "impressions": 9,
-      "change": 43
-    },
-    {
       "keyword": "外国人人口",
       "targetPath": "/themes/foreign-residents",
       "before": 100,
@@ -81,22 +81,22 @@
       "change": 42
     },
     {
-      "keyword": "大河原町 人口",
-      "targetPath": "/areas/04000/cities/04321",
-      "before": 51.5,
-      "after": 9.785714285714286,
-      "beforeImpressions": 2,
-      "impressions": 14,
-      "change": 41.714285714285715
+      "keyword": "漁獲量",
+      "targetPath": "/japan/fishery-marine",
+      "before": 52,
+      "after": 10,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 42
     },
     {
-      "keyword": "愛西市人口",
-      "targetPath": "/areas/23000/cities/23232",
-      "before": 49.666666666666664,
-      "after": 9.6,
-      "beforeImpressions": 3,
-      "impressions": 5,
-      "change": 40.06666666666666
+      "keyword": "住民税 ランキング",
+      "targetPath": "/municipalities/ranking/municipal-resident-tax",
+      "before": 49,
+      "after": 8,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 41
     }
   ],
   "verdicts": [
@@ -106,7 +106,16 @@
       "reason": "query-page-not-reported"
     }
   ],
-  "selected": null,
+  "selected": {
+    "keyword": "金沢市 人口",
+    "targetPath": "/areas/17000/cities/17201",
+    "rank": 7.226120857699805,
+    "impressions": 513,
+    "clicks": 0,
+    "group": 5,
+    "previousMethod": null,
+    "editableFile": null
+  },
   "observing": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
