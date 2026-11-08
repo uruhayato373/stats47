@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T04:12:45.883Z",
-  "week": "2026-W45",
-  "scheduledAction": "4週実測で需要が確認できた場合だけ第2パイロットを最大1冊出版",
+  "generatedAt": "2026-11-07T23:16:46.076Z",
+  "week": "2026-W44",
+  "scheduledAction": "第1パイロットを計測。新規出版なし",
   "portfolio": {
-    "registeredCatalogCount": 32,
+    "registeredCatalogCount": 33,
     "activePublicationTargetCount": 15,
     "maxNewPublicationsPerWeek": 1,
     "cohortMeasurementWeeks": 4,
-    "s1Live": 12,
+    "s1Live": 13,
     "s1InReview": 0,
     "pilotLive": 0,
     "pilotInReview": 0

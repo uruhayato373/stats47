@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T09:42:24.625Z",
+  "generatedAt": "2026-11-07T23:16:51.854Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
@@ -8,7 +8,7 @@
   },
   "scan": {
     "dirs": 9,
-    "transcripts": 53,
+    "transcripts": 42,
     "skipped": 0,
     "weeks": [
       "2026-W29",
@@ -746,85 +746,17 @@
       "scope": "main",
       "agentType": "(main)",
       "model": "claude-opus-5-5",
-      "effort": "high",
-      "runs": 1,
-      "calls": 293,
-      "tokens": {
-        "input": 586,
-        "output": 461682,
-        "cacheWrite5m": 0,
-        "cacheWrite1h": 1086679,
-        "cacheRead": 152913868
-      },
-      "costUsd": 48.5122
-    },
-    {
-      "week": "2026-W45",
-      "scope": "main",
-      "agentType": "(main)",
-      "model": "claude-opus-5-5",
-      "effort": "medium",
-      "runs": 3,
-      "calls": 505,
-      "tokens": {
-        "input": 1010,
-        "output": 676793,
-        "cacheWrite5m": 0,
-        "cacheWrite1h": 1863821,
-        "cacheRead": 232628176
-      },
-      "costUsd": 74.9761
-    },
-    {
-      "week": "2026-W45",
-      "scope": "sub",
-      "agentType": "analysis-critic",
-      "model": "claude-sonnet-5-5",
-      "effort": "high",
-      "runs": 2,
-      "calls": 9,
-      "tokens": {
-        "input": 18,
-        "output": 19664,
-        "cacheWrite5m": 158418,
-        "cacheWrite1h": 0,
-        "cacheRead": 778816
-      },
-      "costUsd": 0.7485
-    },
-    {
-      "week": "2026-W45",
-      "scope": "sub",
-      "agentType": "blog-critic",
-      "model": "claude-sonnet-5-5",
-      "effort": "high",
-      "runs": 5,
-      "calls": 67,
-      "tokens": {
-        "input": 146,
-        "output": 117294,
-        "cacheWrite5m": 898953,
-        "cacheWrite1h": 0,
-        "cacheRead": 9794426
-      },
-      "costUsd": 5.3795
-    },
-    {
-      "week": "2026-W45",
-      "scope": "sub",
-      "agentType": "general-purpose",
-      "model": "claude-sonnet-5-5",
       "effort": "medium",
       "runs": 2,
-      "calls": 53,
+      "calls": 363,
       "tokens": {
-        "input": 108,
-        "output": 32077,
-        "cacheWrite5m": 305150,
-        "cacheWrite1h": 0,
-        "cacheRead": 7731785
+        "input": 726,
+        "output": 223841,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 891748,
+        "cacheRead": 158673872
       },
-      "costUsd": 2.6302
+      "costUsd": 43.3485
     }
   ]
 }

@@ -173,6 +173,20 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [PAGE-UI-REVIEW-COVERAGE-01] ページ UI の週次確認で読むべき画面の 9 割が読まれず、新しい指摘の行き先が無い
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-08] [領域:サイト]
+
+- **観測 (2026-11-08・W44 週次レビュー)**: `data/page-quality/metrics/ui-review-latest.json` (監査 2026-10-30) は `reviewStatus: reviewed` だが、読んだ切り出しは 196 枚中 22 枚で、読み残し 63 画面・全部読めたページ 0。指摘 10 件と新しい機械検出 166 件 (Issue #1015) の振り分け先が無かった。
+- **次**: 読み残しの原因 (エージェントの読む上限か、切り出しの枚数か) を `quality-suite-weekly.yml` の page-quality job のログで確かめ、全ページを読める形にする。指摘 10 件のうち直すものはテンプレートごとの `UI-FIX-*` カードへ分ける。
+- **完了条件**: 次の週次確認で `readCoverage.unreadScreens` が 0 で、Issue #1015 の指摘がすべてカードか見送り理由に振り分けられている。
+
+### [PAGE-QUALITY-ERRORS-01] ページ品質の週次監査の error 164 件を種類ごとに減らす
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-08] [領域:サイト]
+
+- **観測 (2026-11-06 の監査・Issue #1014)**: 対象 9,400 URL で error 164・warning 4,303 (HTML/RSC 肥大化・DOM 過剰・リンク重複・広告重複・構造化データ・画像切れ)。前の受け皿カード `PAGE-QUALITY-ERROR-BACKLOG-01` は既に無い。
+- **次**: 管理画面 `/quality/page-audit` で error を種類別に数え、件数の多い 1 種類から原因を直す。
+- **完了条件**: error が 0 になり、Issue #1014 が自動で閉じる。
+
 ### [COCONALA-SESSION-TEST-STALE-01] 撤退済みの GEO-SERVICE-01 の fixLimit を期待するテストが push 前の検査を止める
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/coconala/__tests__/session.test.mjs] [起票:2026-11-08] [領域:管理]
 
@@ -180,15 +194,6 @@ updated: 2026-11-01
 - **次**: 撤退した出品の `fixLimit` を残すか決め、テストの期待値か設定のどちらかを合わせる (ココナラは撤退済みなので、テスト側で withdrawn を除くのが最小)。
 - **完了条件**: 検証コマンドが通る。
 
-### [LOCAL-PRODUCT-OUTPUTS-OFFLOAD-01] 商品の生成物と SNS 画像をローカルから外し、R2 / Drive を読む形にする
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-local-registry.mjs] [起票:2026-11-08] [領域:管理]
-
-- **完了 (2026-11-08・週次レビューで削除してよい)**: 証拠は次のとおり。
-  - 販売中の市区町村データの納品 ZIP (この PC にしか無かった) を `note:article save` で private R2 の記事保存の `product/` へ入れ、`note:article verify --deep` 合格。
-  - 販売カタログ (`sales-catalog.ts`) は R2 の照合済みの版を根拠にする (テスト追加・直す前のコードで落ちることを確認)。note 添付 (`prepare-article.cjs`) は `note:article checkout` の作業コピーを受け付ける。
-  - 商品の生成出力 5 フォルダ (`coconala-products`・`geo-products`・`muni-data-products`・`note-products`・`note-products-revisions`) は `localRegistry` の product から外して 30 日の作業領域にし、`check-local-registry.mjs` 合格。
-  - SNS 画像は投稿済み・予約・下書きの全行を `archive-sns-assets.mjs` で private R2 `sns-assets/` へ保全 (未保全 0 行)。`.local/r2/sns` はファイル単位 30 日・0.5GiB で回収し、`publish-x`・`publish-threads`・週次の画像確認は無ければ private R2 から照合つきで戻す (`ensureSnsImageLocal`・実データで SHA 一致を確認)。
-- **残る既知の状態**: 下書き 1194 は画像ファイルが以前から無く、1195・1196 は画像が未作成 (`assets` に missing と理由を記録)。予約の前に画像を作る。
 
 ### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵の残りとテーマの画像を片付ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]

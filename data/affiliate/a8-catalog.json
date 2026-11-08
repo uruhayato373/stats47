@@ -15045,7 +15045,7 @@
       "rewardYen": 5455,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -15061,12 +15061,63 @@
           "from": "applied",
           "to": "approved",
           "at": "2026-11-06T22:40:54.611Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-07T23:20:08.550Z"
         }
       ],
       "_priority": 10,
       "_ce": 0,
       "selectedForRegister": true,
-      "priority": 10
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000021674001_a8_001",
+        "title": "メディカルアロマ検定＆メディカルアロマインストラクター資格取得講座",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+EI56B6+4N8K+61JSH",
+        "programRef": "a8:s00000021674001",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=261031037877&wid=001&eno=01&mid=s00000021674001015000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4BESU5+EI56B6+4N8K+61JSH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_s00000021674001_a8_text_001",
+          "title": "メディカルアロマ検定＆メディカルアロマインストラクター資格取得講座",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+EI56B6+4N8K+5YJRM",
+          "programRef": "a8:s00000021674001",
+          "areaCode": null,
+          "vertical": "education",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4BESU5+EI56B6+4N8K+5YJRM",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
+        }
+      ]
     },
     "s00000000076017": {
       "programId": "s00000000076017",
@@ -15497,7 +15548,7 @@
       "rewardRatePct": 20,
       "confirmRatePct": 100,
       "rewardType": "rate",
-      "status": "approved",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -15513,12 +15564,63 @@
           "from": "applied",
           "to": "approved",
           "at": "2026-11-06T22:40:54.778Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-11-07T23:20:14.477Z"
         }
       ],
       "_priority": 10,
       "_ce": 0,
       "selectedForRegister": true,
-      "priority": 10
+      "priority": 10,
+      "adDraft": {
+        "id": "af_new-zero_a8_001",
+        "title": "姿勢の専門家が開発！はくだけ整体【整体パンツNEW ZERO】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+EWFKTU+59Z6+BXB8X",
+        "programRef": "a8:s00000024621002",
+        "areaCode": null,
+        "vertical": "health",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=261031037901&wid=001&eno=01&mid=s00000024621002003000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4BESU5+EWFKTU+59Z6+BXB8X",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_new-zero_a8_text_001",
+          "title": "姿勢の専門家が開発！はくだけ整体【整体パンツNEW ZERO】",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BESU5+EWFKTU+59Z6+BWVTE",
+          "programRef": "a8:s00000024621002",
+          "areaCode": null,
+          "vertical": "health",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4BESU5+EWFKTU+59Z6+BWVTE",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
+        }
+      ]
     },
     "s00000027484001": {
       "programId": "s00000027484001",
@@ -16924,5 +17026,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-06T22:42:47.343Z"
+  "updatedAt": "2026-11-07T23:20:14.477Z"
 }
