@@ -1,8 +1,8 @@
 # 図の年が古い公開記事 (stale-data-years)
 
-- 生成: 2026-11-06T23:43:24.560Z
-- 公開記事 848 件のうち、使う指標を snapshot から読めた記事 812 件を判定
-- 図の年が指標の最新年より古い記事: **288 件**。遅れの大きい順
+- 生成: 2026-11-08T00:06:00.144Z
+- 公開記事 847 件のうち、使う指標を snapshot から読めた記事 811 件を判定
+- 図の年が指標の最新年より古い記事: **287 件**。遅れの大きい順
 - 直し方: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull --apply` で図を最新年で作り直す → 本文の年と数値を書き直して critic を通す (`/brushup-blog` の focus `最新データ更新`)。本文がその年そのものを主題にした図だけ、取り直さず source.json に `yearPinnedReason` を書く (本文が図の年を語っていない図は図だけの食い違いなので取り直す)
 
 | 記事 | 指標 (図の年 → 最新年) |
@@ -58,4 +58,4 @@
 | `castella-expenditure-ranking` | `castella-consumption-expenditure` 2024 → 2025 |
 | `cc-estat-08-bar-chart-race` | `manufacturing-shipment-amount` 2023 → 2024 |
 
-ほか 238 件 (全件は stale-data-years.json)
+ほか 237 件 (全件は stale-data-years.json)

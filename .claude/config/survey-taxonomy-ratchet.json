@@ -49,12 +49,12 @@
   },
   "blog": {
     "minCharts": 2124,
-    "minResolvedCharts": 1969,
+    "minResolvedCharts": 1974,
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
     "maxMissingLineageCharts": 0,
     "maxLegacyDataSourceSectionArticles": 58,
-    "maxSourcelessChartArticles": 1,
+    "maxSourcelessChartArticles": 0,
     "requireSnapshotSources": true
   },
   "themeBaselineAdjustment": {

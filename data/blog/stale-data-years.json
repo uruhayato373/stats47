@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-06T23:43:24.560Z",
-  "published": 848,
-  "withRankingRefs": 812,
+  "generatedAt": "2026-11-08T00:06:00.144Z",
+  "published": 847,
+  "withRankingRefs": 811,
   "stale": [
     {
       "slug": "agriculture-output-employment-productivity-gap",
@@ -7042,17 +7042,6 @@
       "stale": [
         {
           "rankingKey": "shrimp-consumption-quantity",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
-      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
-      "stale": [
-        {
-          "rankingKey": "shumai-consumption-expenditure",
           "articleYear": "2024",
           "latestYear": "2025"
         }

@@ -1,6 +1,6 @@
 # e-Stat の実在年と metric config の years の差分 (LATEST)
 
-- 生成: 2026-11-06T23:30:18.504Z
+- 生成: 2026-11-07T23:55:55.322Z
 - 対象: 県の値を e-Stat (estat / kakei-chousa) から取り込む有効な metric 2373 件 (表 148・取り出し条件 2371)。市区町村の値は対象外
 - 台帳: `data/estat/availability/tables/<statsDataId>.json`。取り込みと同じ取得と県の判定で、`years` で絞らずに年ごとの値のある県を数えたもの
 - 全県: その条件で最も多く値が出た年の県の数 (港湾・漁業のように 47 県がそろわない統計があるため 47 に固定しない)。一部の県だけの年は分類に入れない (diff.json の `partial`)

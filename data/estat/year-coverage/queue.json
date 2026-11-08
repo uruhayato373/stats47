@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T23:17:00.825Z",
+  "generatedAt": "2026-11-07T23:50:52.643Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -1101,7 +1101,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:46.426Z"
+      "checkedAt": "2026-11-07T23:49:59.914Z"
     },
     "annual-precipitation": {
       "key": "annual-precipitation",
@@ -3720,7 +3720,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:47.320Z"
+      "checkedAt": "2026-11-07T23:50:00.834Z"
     },
     "building-fire-count-per-100-thousand-people": {
       "key": "building-fire-count-per-100-thousand-people",
@@ -5720,7 +5720,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:41.116Z"
+      "checkedAt": "2026-11-07T23:49:53.973Z"
     },
     "damaged-vacant-housing-ratio": {
       "key": "damaged-vacant-housing-ratio",
@@ -5731,7 +5731,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:22.867Z"
+      "checkedAt": "2026-11-07T23:50:31.652Z"
     },
     "densely-populated-area": {
       "key": "densely-populated-area",
@@ -6094,7 +6094,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:23.801Z"
+      "checkedAt": "2026-11-07T23:50:32.473Z"
     },
     "elderly-friendly-apartment-dwellings": {
       "key": "elderly-friendly-apartment-dwellings",
@@ -6213,7 +6213,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:24.456Z"
+      "checkedAt": "2026-11-07T23:50:33.085Z"
     },
     "employee-ratio-300plus-employee-establishments-private": {
       "key": "employee-ratio-300plus-employee-establishments-private",
@@ -6291,7 +6291,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:25.193Z"
+      "checkedAt": "2026-11-07T23:50:33.681Z"
     },
     "factory-establishment-count": {
       "key": "factory-establishment-count",
@@ -6779,7 +6779,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:41.779Z"
+      "checkedAt": "2026-11-07T23:49:54.685Z"
     },
     "fishery-management-orgs": {
       "key": "fishery-management-orgs",
@@ -6788,7 +6788,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:42.379Z"
+      "checkedAt": "2026-11-07T23:49:55.312Z"
     },
     "fishery-workers-coastal-offshore": {
       "key": "fishery-workers-coastal-offshore",
@@ -6797,7 +6797,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:42.986Z"
+      "checkedAt": "2026-11-07T23:49:55.914Z"
     },
     "fishing-port-count-by-type": {
       "key": "fishing-port-count-by-type",
@@ -6806,7 +6806,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:43.611Z"
+      "checkedAt": "2026-11-07T23:49:56.633Z"
     },
     "fishing-vessel-crew": {
       "key": "fishing-vessel-crew",
@@ -6815,7 +6815,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:44.217Z"
+      "checkedAt": "2026-11-07T23:49:57.347Z"
     },
     "fishing-vessel-tonnage-class": {
       "key": "fishing-vessel-tonnage-class",
@@ -6824,7 +6824,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:44.863Z"
+      "checkedAt": "2026-11-07T23:49:57.955Z"
     },
     "five-year-residence-other-prefecture": {
       "key": "five-year-residence-other-prefecture",
@@ -7538,7 +7538,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:23.496Z"
+      "checkedAt": "2026-11-07T23:49:35.889Z"
     },
     "hobby-participation-rate-popular-music": {
       "key": "hobby-participation-rate-popular-music",
@@ -7549,7 +7549,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:24.256Z"
+      "checkedAt": "2026-11-07T23:49:36.874Z"
     },
     "hobby-participation-rate-pottery": {
       "key": "hobby-participation-rate-pottery",
@@ -7560,7 +7560,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:25.074Z"
+      "checkedAt": "2026-11-07T23:49:37.676Z"
     },
     "hobby-participation-rate-reading": {
       "key": "hobby-participation-rate-reading",
@@ -7571,7 +7571,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:26.000Z"
+      "checkedAt": "2026-11-07T23:49:38.412Z"
     },
     "hobby-participation-rate-sewing": {
       "key": "hobby-participation-rate-sewing",
@@ -7582,7 +7582,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:26.723Z"
+      "checkedAt": "2026-11-07T23:49:39.127Z"
     },
     "hobby-participation-rate-shogi": {
       "key": "hobby-participation-rate-shogi",
@@ -7593,7 +7593,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:27.675Z"
+      "checkedAt": "2026-11-07T23:49:40.260Z"
     },
     "hobby-participation-rate-sports-spectating": {
       "key": "hobby-participation-rate-sports-spectating",
@@ -7604,7 +7604,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:28.459Z"
+      "checkedAt": "2026-11-07T23:49:41.175Z"
     },
     "hobby-participation-rate-tea-ceremony": {
       "key": "hobby-participation-rate-tea-ceremony",
@@ -7615,7 +7615,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:29.469Z"
+      "checkedAt": "2026-11-07T23:49:41.891Z"
     },
     "hobby-participation-rate-theater": {
       "key": "hobby-participation-rate-theater",
@@ -7626,7 +7626,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:30.245Z"
+      "checkedAt": "2026-11-07T23:49:42.527Z"
     },
     "hobby-participation-rate-theme-parks": {
       "key": "hobby-participation-rate-theme-parks",
@@ -7637,7 +7637,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:30.994Z"
+      "checkedAt": "2026-11-07T23:49:43.196Z"
     },
     "hobby-participation-rate-video-games": {
       "key": "hobby-participation-rate-video-games",
@@ -7648,7 +7648,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:31.713Z"
+      "checkedAt": "2026-11-07T23:49:43.939Z"
     },
     "hobby-participation-rate-western-dance": {
       "key": "hobby-participation-rate-western-dance",
@@ -7659,7 +7659,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:32.449Z"
+      "checkedAt": "2026-11-07T23:49:44.758Z"
     },
     "hobby-participation-rate-writing": {
       "key": "hobby-participation-rate-writing",
@@ -7670,7 +7670,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:33.266Z"
+      "checkedAt": "2026-11-07T23:49:45.577Z"
     },
     "home-helper-count-per-100k": {
       "key": "home-helper-count-per-100k",
@@ -7728,7 +7728,7 @@
         "2024"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:33.845Z"
+      "checkedAt": "2026-11-07T23:49:46.248Z"
     },
     "hospital-staff-by-occupation": {
       "key": "hospital-staff-by-occupation",
@@ -7739,7 +7739,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:34.554Z"
+      "checkedAt": "2026-11-07T23:49:47.108Z"
     },
     "household-head-annual-income-per-household": {
       "key": "household-head-annual-income-per-household",
@@ -7750,7 +7750,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:35.389Z"
+      "checkedAt": "2026-11-07T23:49:47.928Z"
     },
     "household-income-by-type": {
       "key": "household-income-by-type",
@@ -7761,7 +7761,7 @@
         "2018"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:36.243Z"
+      "checkedAt": "2026-11-07T23:49:48.747Z"
     },
     "household-members-outside-dwellings": {
       "key": "household-members-outside-dwellings",
@@ -7800,7 +7800,7 @@
         "2018"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:37.159Z"
+      "checkedAt": "2026-11-07T23:49:49.467Z"
     },
     "households-on-public-assistance-per-1000": {
       "key": "households-on-public-assistance-per-1000",
@@ -7849,7 +7849,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:37.918Z"
+      "checkedAt": "2026-11-07T23:49:50.386Z"
     },
     "housing-land-liabilities-ratio-multi-person-households": {
       "key": "housing-land-liabilities-ratio-multi-person-households",
@@ -7860,7 +7860,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:38.736Z"
+      "checkedAt": "2026-11-07T23:49:51.567Z"
     },
     "husband-childcare-rate": {
       "key": "husband-childcare-rate",
@@ -7871,7 +7871,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:39.571Z"
+      "checkedAt": "2026-11-07T23:49:52.433Z"
     },
     "in-prefecture-employed-people-ratio": {
       "key": "in-prefecture-employed-people-ratio",
@@ -7950,7 +7950,7 @@
         "2024"
       ],
       "verdict": "extend-candidate",
-      "checkedAt": "2026-10-26T03:02:40.340Z"
+      "checkedAt": "2026-11-07T23:49:53.355Z"
     },
     "inflow-population-ratio": {
       "key": "inflow-population-ratio",
@@ -8007,7 +8007,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:02:45.557Z"
+      "checkedAt": "2026-11-07T23:49:58.681Z"
     },
     "inpatients-per-fulltime-physician-per-day": {
       "key": "inpatients-per-fulltime-physician-per-day",
@@ -8097,7 +8097,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:47.996Z"
+      "checkedAt": "2026-11-07T23:50:01.444Z"
     },
     "junior-high-school-within-1km-household-ratio": {
       "key": "junior-high-school-within-1km-household-ratio",
@@ -8108,7 +8108,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:26.313Z"
+      "checkedAt": "2026-11-07T23:50:34.313Z"
     },
     "laundry-beauty-bath-industry-employees": {
       "key": "laundry-beauty-bath-industry-employees",
@@ -8119,7 +8119,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:48.936Z"
+      "checkedAt": "2026-11-07T23:50:02.315Z"
     },
     "laundry-beauty-bath-industry-establishments": {
       "key": "laundry-beauty-bath-industry-establishments",
@@ -8130,7 +8130,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:49.675Z"
+      "checkedAt": "2026-11-07T23:50:02.980Z"
     },
     "library-main-count": {
       "key": "library-main-count",
@@ -8141,7 +8141,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:50.427Z"
+      "checkedAt": "2026-11-07T23:50:03.712Z"
     },
     "main-household-ratio-main-earner-employee-commute-90min": {
       "key": "main-household-ratio-main-earner-employee-commute-90min",
@@ -8152,7 +8152,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:51.445Z"
+      "checkedAt": "2026-11-07T23:50:04.823Z"
     },
     "manufacturing-net-value-added-private": {
       "key": "manufacturing-net-value-added-private",
@@ -8165,7 +8165,7 @@
         "2020"
       ],
       "verdict": "extend-candidate",
-      "checkedAt": "2026-10-26T03:02:52.307Z"
+      "checkedAt": "2026-11-07T23:50:06.564Z"
     },
     "manufacturing-sales-private": {
       "key": "manufacturing-sales-private",
@@ -8179,7 +8179,7 @@
         "2020"
       ],
       "verdict": "extend-candidate",
-      "checkedAt": "2026-10-26T03:02:53.123Z"
+      "checkedAt": "2026-11-07T23:50:07.282Z"
     },
     "maternal-child-health-guidance": {
       "key": "maternal-child-health-guidance",
@@ -8190,7 +8190,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:53.904Z"
+      "checkedAt": "2026-11-07T23:50:07.971Z"
     },
     "media-production-employees": {
       "key": "media-production-employees",
@@ -8201,7 +8201,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:54.668Z"
+      "checkedAt": "2026-11-07T23:50:08.625Z"
     },
     "media-production-establishments": {
       "key": "media-production-establishments",
@@ -8212,7 +8212,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:55.481Z"
+      "checkedAt": "2026-11-07T23:50:09.329Z"
     },
     "medical-facility-within-500m-household-ratio": {
       "key": "medical-facility-within-500m-household-ratio",
@@ -8223,7 +8223,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:27.043Z"
+      "checkedAt": "2026-11-07T23:50:35.185Z"
     },
     "mental-health-application": {
       "key": "mental-health-application",
@@ -8234,7 +8234,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:56.296Z"
+      "checkedAt": "2026-11-07T23:50:09.973Z"
     },
     "midwife-by-prefecture": {
       "key": "midwife-by-prefecture",
@@ -8245,7 +8245,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:57.002Z"
+      "checkedAt": "2026-11-07T23:50:10.652Z"
     },
     "new-graduate-starting-salary-college-male": {
       "key": "new-graduate-starting-salary-college-male",
@@ -8256,7 +8256,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:57.966Z"
+      "checkedAt": "2026-11-07T23:50:11.582Z"
     },
     "new-graduate-starting-salary-university-female": {
       "key": "new-graduate-starting-salary-university-female",
@@ -8267,7 +8267,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:59.036Z"
+      "checkedAt": "2026-11-07T23:50:12.504Z"
     },
     "non-regular-employment-rate": {
       "key": "non-regular-employment-rate",
@@ -8278,7 +8278,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:02:59.818Z"
+      "checkedAt": "2026-11-07T23:50:13.322Z"
     },
     "nonprimary-enterprises-count": {
       "key": "nonprimary-enterprises-count",
@@ -8289,7 +8289,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:00.746Z"
+      "checkedAt": "2026-11-07T23:50:14.141Z"
     },
     "nonprimary-enterprises-employees": {
       "key": "nonprimary-enterprises-employees",
@@ -8300,7 +8300,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:01.632Z"
+      "checkedAt": "2026-11-07T23:50:14.925Z"
     },
     "nonprimary-enterprises-under5-count": {
       "key": "nonprimary-enterprises-under5-count",
@@ -8311,7 +8311,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:02.506Z"
+      "checkedAt": "2026-11-07T23:50:15.677Z"
     },
     "nonprimary-enterprises-under5-employees": {
       "key": "nonprimary-enterprises-under5-employees",
@@ -8322,7 +8322,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:03.198Z"
+      "checkedAt": "2026-11-07T23:50:16.496Z"
     },
     "nonregular-continuation-wish-rate": {
       "key": "nonregular-continuation-wish-rate",
@@ -8333,7 +8333,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:03.862Z"
+      "checkedAt": "2026-11-07T23:50:17.374Z"
     },
     "nonregular-employees-count": {
       "key": "nonregular-employees-count",
@@ -8344,7 +8344,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:04.671Z"
+      "checkedAt": "2026-11-07T23:50:18.237Z"
     },
     "nonregular-job-change-wish-rate": {
       "key": "nonregular-job-change-wish-rate",
@@ -8355,7 +8355,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:05.509Z"
+      "checkedAt": "2026-11-07T23:50:19.059Z"
     },
     "number-of-hotel-facilities": {
       "key": "number-of-hotel-facilities",
@@ -8430,7 +8430,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:27.766Z"
+      "checkedAt": "2026-11-07T23:50:35.864Z"
     },
     "nurses-per-100k-population": {
       "key": "nurses-per-100k-population",
@@ -8441,7 +8441,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:06.118Z"
+      "checkedAt": "2026-11-07T23:50:19.774Z"
     },
     "ordinary-household-members-outside-dwellings": {
       "key": "ordinary-household-members-outside-dwellings",
@@ -8459,7 +8459,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:03:06.621Z"
+      "checkedAt": "2026-11-07T23:50:20.491Z"
     },
     "park-within-500m-household-ratio": {
       "key": "park-within-500m-household-ratio",
@@ -8470,7 +8470,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:28.466Z"
+      "checkedAt": "2026-11-07T23:50:36.570Z"
     },
     "pharmacy-count-by-prefecture": {
       "key": "pharmacy-count-by-prefecture",
@@ -8481,7 +8481,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:07.242Z"
+      "checkedAt": "2026-11-07T23:50:21.207Z"
     },
     "port-entry-vessel-count": {
       "key": "port-entry-vessel-count",
@@ -8490,7 +8490,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:03:07.824Z"
+      "checkedAt": "2026-11-07T23:50:21.821Z"
     },
     "post-office-bank-within-500m-household-ratio": {
       "key": "post-office-bank-within-500m-household-ratio",
@@ -8501,7 +8501,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:29.830Z"
+      "checkedAt": "2026-11-07T23:50:37.285Z"
     },
     "primary-school-commute-time-weekday": {
       "key": "primary-school-commute-time-weekday",
@@ -8512,7 +8512,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:09.053Z"
+      "checkedAt": "2026-11-07T23:50:22.852Z"
     },
     "projected-population-2050-city": {
       "key": "projected-population-2050-city",
@@ -8532,7 +8532,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:09.731Z"
+      "checkedAt": "2026-11-07T23:50:23.408Z"
     },
     "public-sewer-housing-ratio": {
       "key": "public-sewer-housing-ratio",
@@ -8543,7 +8543,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:30.974Z"
+      "checkedAt": "2026-11-07T23:50:37.898Z"
     },
     "rabies-vaccination-dogs": {
       "key": "rabies-vaccination-dogs",
@@ -8554,7 +8554,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:10.344Z"
+      "checkedAt": "2026-11-07T23:50:24.013Z"
     },
     "recreational-fishing-count": {
       "key": "recreational-fishing-count",
@@ -8563,7 +8563,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-26T03:03:10.922Z"
+      "checkedAt": "2026-11-07T23:50:24.584Z"
     },
     "renovation-rate": {
       "key": "renovation-rate",
@@ -8574,7 +8574,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:11.625Z"
+      "checkedAt": "2026-11-07T23:50:25.507Z"
     },
     "retail-employees": {
       "key": "retail-employees",
@@ -8600,7 +8600,7 @@
         "2021"
       ],
       "verdict": "extend-candidate",
-      "checkedAt": "2026-10-26T03:03:12.243Z"
+      "checkedAt": "2026-11-07T23:50:26.937Z"
     },
     "retail-establishments-by-prefecture": {
       "key": "retail-establishments-by-prefecture",
@@ -8611,7 +8611,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:12.963Z"
+      "checkedAt": "2026-11-07T23:50:27.658Z"
     },
     "retail-sales-amount-by-prefecture": {
       "key": "retail-sales-amount-by-prefecture",
@@ -8622,7 +8622,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:13.647Z"
+      "checkedAt": "2026-11-07T23:50:28.376Z"
     },
     "retail-sales-area-by-class": {
       "key": "retail-sales-area-by-class",
@@ -8633,7 +8633,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:14.285Z"
+      "checkedAt": "2026-11-07T23:50:29.046Z"
     },
     "retail-stores-per": {
       "key": "retail-stores-per",
@@ -8642,7 +8642,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-26T03:03:14.797Z"
+      "checkedAt": "2026-11-07T23:50:29.566Z"
     },
     "rice-cultivated-area": {
       "key": "rice-cultivated-area",
@@ -8653,7 +8653,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:15.415Z"
+      "checkedAt": "2026-11-07T23:50:30.108Z"
     },
     "rice-harvest-volume": {
       "key": "rice-harvest-volume",
@@ -8664,7 +8664,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:16.066Z"
+      "checkedAt": "2026-11-07T23:50:30.528Z"
     },
     "rice-yield-per-10a": {
       "key": "rice-yield-per-10a",
@@ -8675,7 +8675,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-26T03:03:16.534Z"
+      "checkedAt": "2026-11-07T23:50:30.947Z"
     },
     "room-utilization-rate": {
       "key": "room-utilization-rate",
@@ -8731,7 +8731,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:33.712Z"
+      "checkedAt": "2026-11-07T23:50:40.285Z"
     },
     "seismic-retrofit-owner-houses-since-2014": {
       "key": "seismic-retrofit-owner-houses-since-2014",
@@ -8760,7 +8760,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:35.637Z"
+      "checkedAt": "2026-11-07T23:50:41.738Z"
     },
     "sewerage-coverage-rate": {
       "key": "sewerage-coverage-rate",
@@ -8771,7 +8771,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:38.275Z"
+      "checkedAt": "2026-11-07T23:50:42.910Z"
     },
     "side-job-rate": {
       "key": "side-job-rate",
@@ -8782,7 +8782,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:39.520Z"
+      "checkedAt": "2026-11-07T23:50:43.941Z"
     },
     "single-father-employment-rate": {
       "key": "single-father-employment-rate",
@@ -8793,7 +8793,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:40.937Z"
+      "checkedAt": "2026-11-07T23:50:44.699Z"
     },
     "single-households-age65plus-female": {
       "key": "single-households-age65plus-female",
@@ -8804,7 +8804,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:41.876Z"
+      "checkedAt": "2026-11-07T23:50:45.477Z"
     },
     "single-households-age65plus-male": {
       "key": "single-households-age65plus-male",
@@ -8815,7 +8815,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:42.655Z"
+      "checkedAt": "2026-11-07T23:50:45.983Z"
     },
     "single-mother-employment-rate": {
       "key": "single-mother-employment-rate",
@@ -8826,7 +8826,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:43.643Z"
+      "checkedAt": "2026-11-07T23:50:46.909Z"
     },
     "single-mother-households-income-100to199": {
       "key": "single-mother-households-income-100to199",
@@ -8837,7 +8837,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:44.318Z"
+      "checkedAt": "2026-11-07T23:50:47.504Z"
     },
     "single-mother-households-income-200to299": {
       "key": "single-mother-households-income-200to299",
@@ -8848,7 +8848,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:44.931Z"
+      "checkedAt": "2026-11-07T23:50:47.975Z"
     },
     "single-mother-households-income-300to399": {
       "key": "single-mother-households-income-300to399",
@@ -8859,7 +8859,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:45.664Z"
+      "checkedAt": "2026-11-07T23:50:48.604Z"
     },
     "single-mother-households-income-400to499": {
       "key": "single-mother-households-income-400to499",
@@ -8870,7 +8870,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:46.193Z"
+      "checkedAt": "2026-11-07T23:50:49.083Z"
     },
     "single-mother-households-income-500plus": {
       "key": "single-mother-households-income-500plus",
@@ -8881,7 +8881,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:46.642Z"
+      "checkedAt": "2026-11-07T23:50:49.674Z"
     },
     "single-mother-households-income-under100": {
       "key": "single-mother-households-income-under100",
@@ -8892,7 +8892,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:47.240Z"
+      "checkedAt": "2026-11-07T23:50:50.175Z"
     },
     "smartphone-ownership-multi-person-households-per-1000": {
       "key": "smartphone-ownership-multi-person-households-per-1000",
@@ -8903,7 +8903,7 @@
         "2014"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:48.307Z"
+      "checkedAt": "2026-11-07T23:50:51.210Z"
     },
     "smartphone-usage-rate-by-sex": {
       "key": "smartphone-usage-rate-by-sex",
@@ -8914,7 +8914,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:49.866Z"
+      "checkedAt": "2026-11-07T23:50:52.342Z"
     },
     "smartphone-usage-students": {
       "key": "smartphone-usage-students",
@@ -9220,7 +9220,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:31.908Z"
+      "checkedAt": "2026-11-07T23:50:38.513Z"
     },
     "study-participation-rate-academic": {
       "key": "study-participation-rate-academic",
@@ -9738,7 +9738,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:32.509Z"
+      "checkedAt": "2026-11-07T23:50:39.007Z"
     },
     "vacant-housing-rate-for-rent": {
       "key": "vacant-housing-rate-for-rent",
@@ -9749,7 +9749,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:32.948Z"
+      "checkedAt": "2026-11-07T23:50:39.640Z"
     },
     "vacant-housing-secondary-residences": {
       "key": "vacant-housing-secondary-residences",

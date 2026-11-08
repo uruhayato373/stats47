@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T23:31:06.925Z",
+  "generatedAt": "2026-11-07T23:56:33.368Z",
   "source": {
     "values": "R2 app/ranking/<key>/values.json (最新年・40 県以上)",
     "rule": "packages/data-configs/src/unit/chart-display-scale.ts"

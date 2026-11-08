@@ -1,13 +1,13 @@
 {
-  "total": 2126,
+  "total": 2125,
   "staged": false,
   "byStatus": {
-    "both": 2056,
+    "both": 2055,
     "jsonOnly": 0,
     "neither": 70
   },
   "byMethod": {
-    "done": 2056,
+    "done": 2055,
     "manual": 32,
     "ssot-restore": 17,
     "ssot-restore-new": 21
@@ -733,39 +733,6 @@
       "slug": "annual-sunshine-duration-prefecture-gap",
       "base": "annual-sunshine-duration-prefecture-gap-map",
       "chartType": "tilemap",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "base": "annual-sunshine-duration-vs-auto-liability-insurance-amount-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "base": "auto-liability-insurance-amount-received-per-payment-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "base": "annual-sunshine-duration--auto-liability-insurance-amount-received-per-payment-scatter",
-      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -12852,6 +12819,39 @@
       "residualCard": null
     },
     {
+      "slug": "manufacturing-strength-factory-size",
+      "base": "gap-steps-bars",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "manufacturing-strength-factory-size",
+      "base": "factor-shares-bars",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "manufacturing-strength-factory-size",
+      "base": "workforce-productivity-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "marriage-divorce-okinawa",
       "base": "marriage-rate",
       "chartType": "unknown",
@@ -18022,39 +18022,6 @@
       "residualCard": null
     },
     {
-      "slug": "road-length-per-km2-vs-residential-building-starts",
-      "base": "road-length-per-km2-vs-residential-building-starts-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "road-length-per-km2-vs-residential-building-starts",
-      "base": "residential-building-starts-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "road-length-per-km2-vs-residential-building-starts",
-      "base": "road-length-per-km2--residential-building-starts-scatter",
-      "chartType": "scatter",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
       "slug": "road-total-length-vs-core-agricultural-workers",
       "base": "road-total-length-vs-core-agricultural-workers-prefecture-rankings",
       "chartType": "ranking",
@@ -19059,39 +19026,6 @@
       "slug": "shrimp-consumption-quantity-prefecture-gap",
       "base": "shrimp-consumption-quantity-prefecture-gap-map",
       "chartType": "tilemap",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "base": "shumai-consumption-expenditure-vs-jr-freight-shipment-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "base": "jr-freight-shipment-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "base": "shumai-consumption-expenditure--jr-freight-shipment-scatter",
-      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -22039,6 +21973,61 @@
     {
       "slug": "vacant-house-crisis",
       "base": "vacant-aging-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vacant-houses-population-decline",
+      "base": "vacant-stock-and-increase-share-bars",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vacant-houses-population-decline",
+      "base": "vacant-change-sources-bars",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vacant-houses-population-decline",
+      "base": "vacancy-rate-by-population-lines",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vacant-houses-population-decline",
+      "base": "population-vs-rental-vacancy-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "vacant-houses-population-decline",
+      "base": "population-vs-abandoned-vacancy-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
