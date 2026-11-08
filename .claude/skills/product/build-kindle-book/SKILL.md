@@ -14,7 +14,7 @@ EPUB3 を生成・検証して、**オーナーの Kindle Previewer 検証・KDP
 
 ## 大原則
 
-- **必ず `.claude/rules/coconala-product-standards.md §8`（Kindle 出版チャネル）に従う**。
+- **必ず `.claude/rules/kindle-publishing-standards.md`（Kindle 出版チャネル）に従う**。
 - 書籍定義は git TS (`src/channels/kindle/book-catalog.ts` = `KINDLE_BOOKS`) が SSOT。本文素材は
   **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/` は
   **git 管理外・公開 R2 へ平文で置かない**。KDP送信版は`kindle:archive --push`で暗号化R2保全する。長文の書き下ろしは `src/channels/kindle/manuscripts/<id>/*.md` (freshFile)。
@@ -67,7 +67,7 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    が review.md の PASS を実 EPUB の章 SHA・authoredSha256 に結び付けた `review.json` を書く (PASS でない版・再生成が要る版には書けない)。
    `node --import tsx packages/product-factory/scripts/verify-publishable.mts --version <VERSION> --book <id> --content-only` で本文側の blocker 0 を確認する。
    表紙背景は Codex MCP (`mcp__codex__codex`) の built-in imagegen で文字なし画像を作り、まず `stash-cover-candidate.mts` で Drive の候補フォルダ (非公開) へ置き
-   (二層の規約は `.claude/rules/coconala-product-standards.md`「カバー画像は二層」)、採用するものを `ingest-cover-background.mts --input drive:<id>/<file> --band` で
+   (二層の規約は `.claude/rules/kindle-publishing-standards.md`「カバー画像は二層」)、採用するものを `ingest-cover-background.mts --input drive:<id>/<file> --band` で
    `.local/r2/media/kindle-cover-assets/<id>/<revision>/background.jpg`へ正規化する。1冊ずつ目視承認後、完成PNG/JPEGと
    manifestを同revisionへstageし、`push-exact-r2-assets.ts`で明示キーだけをR2へ反映する。Gitには
    `cover-design.ts`のR2 key/SHA/byte/寸法だけを残す (プロンプトの型は Drive の `stats47/Kindle表紙/_imagegen-tooling/`の `build-prompts.mjs`)。
@@ -113,11 +113,11 @@ Amazon の変換そのものを見るには、Send to Kindle (Web) で EPUB を�
 
 ## 関連
 
-- 規約: `.claude/rules/coconala-product-standards.md §8`
+- 規約: `.claude/rules/kindle-publishing-standards.md`
 - SSOT: `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts`
 - 台帳: `data/products/kindle-status.json`
-- 企画・市場判断: `.claude/rules/coconala-product-standards.md §8` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
+- 企画・市場判断: `.claude/rules/kindle-publishing-standards.md` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
 - agent: `.claude/agents/kindle-publisher.md`
 - 品質ゲート（書き下ろし）: `.claude/rules/blog-quality-standards.md`（ですます調・critic PASS）
-- note・KDP・Brain・ココナラ横断の商品ポートフォリオと需要ゲート:
-  `../build-coconala-product/reference/multi-channel-content-product-factory.md`
+- note・KDP・Brain 横断の商品ポートフォリオと需要ゲート:
+  `../build-data-pack/reference/multi-channel-content-product-factory.md`

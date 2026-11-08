@@ -11,7 +11,7 @@ const SECTIONS = [
   {
     href: "/product/status",
     title: "販売状態",
-    desc: "note・ココナラ・Kindle の商品数と公開段階。各チャネルの詳細へ",
+    desc: "note・Kindle の商品数と公開段階。各チャネルの詳細へ",
   },
   {
     href: "/content",
@@ -46,7 +46,7 @@ const SECTIONS = [
   {
     href: "/revenue",
     title: "売上",
-    desc: "商品の週次実売 (ココナラ・note・KDP の自動取得)・販売台帳・AdSense の週次実績 (2026-09-20 停止)。未計測は 0 円と表示しない",
+    desc: "商品の週次実売 (note・KDP の自動取得)・販売台帳・AdSense の週次実績 (2026-09-20 停止)。未計測は 0 円と表示しない",
   },
   {
     href: "/affiliate",

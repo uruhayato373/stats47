@@ -7,7 +7,7 @@ import { CANONICAL_ARTICLES } from '../article-plan';
 import type { NoteArticlePlan } from '../types';
 import { scanText } from '../validators/claims';
 import { readFreeSampleDelivery } from '../../../build/free-sample-delivery';
-import { COCONALA_LISTINGS } from '../../../../../../config/paths.mjs';
+import { datasetPath } from '../../../../../../config/datasets.mjs';
 import { SITE } from '@stats47/data-configs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../../../../..');
@@ -17,20 +17,20 @@ interface Delivery {
   artifactDirectory: string; manifestSha256: string; indicatorCount: number;
   pptxIndicatorCount: number; hasXlsx: boolean; officeValidation: string;
 }
-interface Listing { title: string; serviceUrl?: string; _delivery?: Delivery; _noteDelivery?: Delivery }
+interface Listing { title?: string; _delivery?: Delivery }
 interface PackEvidence {
   manifest: { productId: string; version: string; year: string; files: FileEvidence[] };
   manifestSha256: string; rows: string[][]; sources: Record<string, string>[];
   count: number; slides: number; hasXlsx: boolean;
 }
 
+/** note の有料データパックの納品物の固定値 (data/products/note-pack-deliveries.json) と無料見本 (P-13) を読む。
+ *  2026-11-08 にココナラの出品台帳から独立させた。題名は記事の計画 (article-plan) のものを使う。 */
+export const NOTE_PACK_DELIVERIES = datasetPath('products.note-pack-deliveries');
 function preparationListings(root: string): Record<string, Listing> {
-  const listings = JSON.parse(readFileSync(join(root, COCONALA_LISTINGS), 'utf8')) as { listings: Record<string, Listing> };
+  const ledger = JSON.parse(readFileSync(join(root, NOTE_PACK_DELIVERIES), 'utf8')) as { packs: Record<string, Listing> };
   const free = readFreeSampleDelivery(root);
-  // _noteDelivery: a note-only build (2026-10-12, regenerated on another PC). The Coconala _delivery promise is left as is.
-  const note = Object.fromEntries(Object.entries(listings.listings).map(([id, listing]) =>
-    [id, listing._noteDelivery ? { ...listing, _delivery: listing._noteDelivery } : listing]));
-  return { ...note, ...(free ? { 'P-13': free } : {}) };
+  return { ...ledger.packs, ...(free ? { 'P-13': free } : {}) };
 }
 export interface NoteRevisionItem {
   productId: string; slug: string; access: string; proposedPriceYen: number;
@@ -50,11 +50,11 @@ function contained(root: string, candidate: string): void {
   if (!rel || rel.startsWith('..') || isAbsolute(rel)) throw new Error(`unsafe path: ${candidate}`);
 }
 
-/** The shared Coconala audit verifies the manifest and every file, CSV counts and PPT scope. */
+/** The shared pack audit verifies the manifest and every file, CSV counts and PPT scope. */
 async function verifyInput(root: string, pid: string, listing: Listing): Promise<PackEvidence> {
   const contract = listing._delivery;
   if (!contract || !/^[a-f0-9]{64}$/.test(contract.manifestSha256)) throw new Error('pinned delivery contract missing');
-  const artifactRoot = resolve(root, '.local/coconala-products', pid);
+  const artifactRoot = resolve(root, '.local/data-packs', pid);
   const dir = resolve(root, contract.artifactDirectory);
   contained(artifactRoot, dir);
   contained(realpathSync(artifactRoot), realpathSync(dir));
@@ -69,7 +69,7 @@ async function verifyInput(root: string, pid: string, listing: Listing): Promise
     contained(dir, resolve(dir, file.path));
     contained(realpathSync(dir), realpathSync(resolve(dir, file.path)));
   }
-  const audit = await import(pathToFileURL(join(ROOT, '.claude/scripts/coconala/lib/pack-evidence.mjs')).href) as {
+  const audit = await import(pathToFileURL(join(ROOT, '.claude/scripts/products/lib/pack-evidence.mjs')).href) as {
     inspectPack(root: string, listing: Listing): Promise<PackEvidence>;
   };
   return audit.inspectPack(root, listing);
@@ -202,7 +202,7 @@ export async function validateNoteRevision(revision: string, root = ROOT): Promi
         const evidence = await verifyInput(root, item.productId, listing);
         if (evidence.manifestSha256 !== item.sourceManifestSha256) throw new Error('source manifest changed');
       } else if (!item.missingProducts.includes(item.productId)) throw new Error('missing source not declared');
-      if (item.access === 'free' && item.attachments.some(file => !file.sourcePath.startsWith('.local/coconala-products/P-13/'))) throw new Error('free article exposes a paid product');
+      if (item.access === 'free' && item.attachments.some(file => !file.sourcePath.startsWith('.local/data-packs/P-13/'))) throw new Error('free article exposes a paid product');
       errors.push(...item.validationErrors.map(error => `${item.productId}: ${error}`));
     } catch (error) { errors.push(`${item.productId}: ${error instanceof Error ? error.message : String(error)}`); }
   }

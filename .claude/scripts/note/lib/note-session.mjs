@@ -1,5 +1,5 @@
 /**
- * note-operator セッション基盤 (coconala-session と同型)
+ * note-operator セッション基盤 (kdp-session と同型)
  *
  * 永続プロファイル (.local/playwright-note-profile) で note.com を開き、
  * account assert (urlname==stats47) を通してから操作させる。別アカウントは即中断。

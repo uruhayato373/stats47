@@ -11,7 +11,6 @@ const PAGES = [
   { path: "/", heading: "管理コンソール" },
   { path: "/content", heading: "コンテンツ運用" },
   { path: "/product/status", heading: "販売状態" },
-  { path: "/product/coconala", heading: "ココナラ" },
   { path: "/content/x", heading: "X運用" },
   { path: "/content/instagram", heading: "Instagram運用" },
   { path: "/content/note", heading: "note運用" },

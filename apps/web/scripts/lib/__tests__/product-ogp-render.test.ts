@@ -94,7 +94,7 @@ describe('resolveProductBackground', () => {
     ).toThrow('未知のkindle商品IDです');
   });
 
-  it.each(['coconala', 'note'] as const)('%s商品は共通ブランド背景を指す', (channel) => {
+  it.each(['note'] as const)('%s商品は共通ブランド背景を指す', (channel) => {
     const background = resolveProductBackground({
       projectRoot: PROJECT_ROOT,
       channel,

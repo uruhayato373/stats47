@@ -1,7 +1,7 @@
 /**
- * ココナラ商品ファクトリー — 型定義 (SSOT)
+ * 商品ファクトリー (データパック) — 型定義 (SSOT)
  *
- * 正典: .claude/rules/coconala-product-standards.md
+ * 正典: .claude/rules/data-pack-standards.md
  * 商品案の由来: Git履歴上の旧 A-01〜L-07。現行トレースは packs.ts の sourceIds。
  *
  * 2026-07-23: 旧 174 件カタログ (A-01〜L-07・family 別) を、テーマ別 14 パック (P-01〜P-14)
@@ -29,7 +29,7 @@ export type PackTheme =
   | "free-trial" // P-13: 無料お試し (note/リード用・コナラ非出品)
   | "household-consumption"; // P-14: 家計・消費 (家計調査の消費品目・旧 P-09 から分離)
 
-/** 納品ファイル形式。ココナラ対応形式のうち本ファクトリーが扱う範囲。 */
+/** 納品ファイル形式。本ファクトリーが扱う範囲。 */
 export type ProductFormat =
   | "pptx"
   | "xlsx"
@@ -59,9 +59,8 @@ export type ProductRisk = "normal" | "high-stakes" | "rights-review";
 
 /**
  * 商品定義のライフサイクル状態。cataloged から approved まで一方向に進む。
- * 販売先での公開状態はここに持たない (2026-10-27)。ココナラは config/coconala-listings.json、note は
- * data/note/articles.json、KDP は config/kdp-listings.json が正本。旧 "listed" はココナラの出品を写していたが、
- * 2026-10-19 の撤退後も P-01 が listed のまま残り、出品台帳 (withdrawn) と食い違ったので型から外した。
+ * 販売先での公開状態はここに持たない (2026-10-27)。note は data/note/articles.json、KDP は
+ * config/kdp-listings.json が正本。旧 "listed" は撤退したココナラの出品を写していて実態と食い違ったので型から外した。
  */
 export type ProductStatus =
   | "cataloged"

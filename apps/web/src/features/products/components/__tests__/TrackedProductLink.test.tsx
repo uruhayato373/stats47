@@ -79,13 +79,13 @@ describe("product links", () => {
           Amazon
         </TrackedProductOutboundLink>
         <TrackedProductOutboundLink
-          href="https://coconala.com/services/4323722"
+          href="https://note.com/stats47/n/ne47eb45f8a15"
           productId="P-01"
           productSlug="data-p-01"
           productTitle="人口・世帯データ集"
-          channel="coconala"
+          channel="note"
         >
-          ココナラ
+          note
         </TrackedProductOutboundLink>
       </>,
     );
@@ -94,9 +94,9 @@ describe("product links", () => {
     const amazon = screen.getByRole("link", { name: "Amazon" });
     expect(amazon.getAttribute("href")).toBe("https://www.amazon.co.jp/dp/B0HF1XFXBY?tag=stats47-22");
     expect(amazon.getAttribute("rel")).toContain("sponsored");
-    const coconala = screen.getByRole("link", { name: "ココナラ" });
-    expect(coconala.getAttribute("href")).toBe("https://coconala.com/services/4323722");
-    expect(coconala.getAttribute("rel")).not.toContain("sponsored");
+    const note = screen.getByRole("link", { name: "note" });
+    expect(note.getAttribute("href")).toBe("https://note.com/stats47/n/ne47eb45f8a15");
+    expect(note.getAttribute("rel")).not.toContain("sponsored");
   });
   it("販売先クリックを product_click (キーイベント) で送り、詳細へ来る前の案内の置き場所を link_position に入れる", () => {
     render(

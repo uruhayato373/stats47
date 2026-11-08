@@ -1,7 +1,7 @@
 /**
  * images-plan.json ジェネレータ (仕様 §11)。
  * 画像種・入力・alt・caption・生成担当を記録する。既存の商品プレビュー
- * (.local/coconala-products/<id>/<version>/preview/) を再利用し、同じ画像を複製しない。
+ * (.local/data-packs/<id>/<version>/preview/) を再利用し、同じ画像を複製しない。
  */
 import type { NoteArticlePlan } from "../types";
 
@@ -32,7 +32,7 @@ export function buildImagesPlan(article: NoteArticlePlan): string {
     entries.push({
       kind: "completion",
       filename: "images/completion.png",
-      input: `.local/coconala-products/${firstMember}/v1/preview/thumbnail-620x620.png`,
+      input: `.local/data-packs/${firstMember}/v1/preview/thumbnail-620x620.png`,
       alt: "完成イメージ：都道府県データの地図",
       caption: "テンプレートで作れる完成イメージ",
       generator: "reuse-product-preview",

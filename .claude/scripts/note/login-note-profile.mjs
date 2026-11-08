@@ -1,7 +1,7 @@
 /**
  * note.com 永続プロファイルへの対話ログイン (note-operator 用)
  *
- * coconala-operator と同型: 専用の永続プロファイル (.local/playwright-note-profile) を使い、
+ * kdp-operator と同型: 専用の永続プロファイル (.local/playwright-note-profile) を使い、
  * ログイン状態を跨いで保持する。headed Chrome を開き、ユーザーが stats47 でログインするのを待つ。
  * current_user の urlname==stats47 を検知したら config/note-account.json を書き、終了する。
  *

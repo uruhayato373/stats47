@@ -805,7 +805,7 @@ export async function main(args = process.argv.slice(2)) {
         if (result.unregistered.length) {
           target.warnings.push({ key: 'local-unregistered', level: 'warning', names: result.unregistered });
           console.error(
-            `[local-resources] .local に台帳の無い名前: ${result.unregistered.join(', ')} — 使い終わったなら消し、残すなら config/local-resources.json の localRegistry か cachePaths に登録する`
+            `[local-resources] .local に台帳の無い名前: ${result.unregistered.join(', ')} — 使い終わったなら消し、残すなら ${LOCAL_RESOURCES} の localRegistry か cachePaths に登録する`
           );
         }
       }

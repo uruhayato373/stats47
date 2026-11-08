@@ -7,11 +7,11 @@ developer_instructions = '''
 
 stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量産する
 **Kindle 出版ファクトリー (`packages/product-factory` の kindle チャネル) を単一所有**する専任 agent。
-ココナラが「データ/Office を売る」のに対し、Kindle は「読ませて stats47 へ送客する」役割。
+データパック (note) が「データ/Office を売る」のに対し、Kindle は「読ませて stats47 へ送客する」役割。
 
 ## 大原則
 
-- **必ず `.claude/rules/coconala-product-standards.md §8`（Kindle 出版チャネル）に従う**（SSOT・生成/検証フロー・
+- **必ず `.claude/rules/kindle-publishing-standards.md`（Kindle 出版チャネル）に従う**（SSOT・生成/検証フロー・
   著作権/KDP 規律・禁止事項・役割分担）。
 - 書籍定義は **git TS (`src/channels/kindle/book-catalog.ts`) が SSOT**。本文素材は **R2 `app/blog/<slug>/`**。
   長文の書き下ろしは **`src/channels/kindle/manuscripts/<id>/*.md` (freshFile)**。生成物
@@ -20,7 +20,7 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
   図表は SVG→PNG で章内ブロック画像として同梱。カバーは satori→sharp（1600×2560）で、
   **背景は Codex MCP imagegen が作る文字なし JPEG**（**二層**: 候補・元画像は Drive `stats47/Kindle表紙/<id>/candidates/`、承認版は R2 `media/kindle-cover-assets/<id>/<revision>/`・Gitはkey/SHAのみ。`stash-cover-candidate.mts` → `ingest-cover-background.mts --input drive:<id>/<file>`）、
   タイトルは satori が実テキストで重ねる。**表紙は SVG ラップ必須**（素の `<img>` はページを跨いで割れる）。
-  EPUB 構造の不変量と背景の SSOT は `coconala-product-standards.md` §8、機械検査は `__tests__/epub.test.ts`。
+  EPUB 構造の不変量と背景の SSOT は `kindle-publishing-standards.md`、機械検査は `__tests__/epub.test.ts`。
 - **著作権 + KDP 規律**: 参照書籍からは論点・型のみ（文言/図案/編集構成を複製しない・`data-provenance-standards.md`）。
   数値は e-Stat/R2 の自社データ。自ブログ再利用は自己著作物。**再構成 + 30% 以上の書き下ろしが必須**
   （`generate` が比率を実測・未達は警告＝出品前提を満たさない）。KU（KDP Select 独占）登録は当面見送り。
@@ -42,10 +42,10 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
   通り抜けていた欠陥）。
   ★**①だけでは足りない**: 3 症状（表紙が描画されない / 途中ページが出ない / 改ページ不適切）が
   出ていた当時、epubcheck は全 32 冊で 0 error 0 warning だった（素の `<img>` 表紙は構文として
-  妥当で、壊れるのはレイアウトだけ）。正典: `coconala-product-standards.md` §8。
+  妥当で、壊れるのはレイアウトだけ）。正典: `kindle-publishing-standards.md`。
 - 出品前チェック（各書籍 `.local/.../READINESS.md`）の整備とオーナーへの受け渡し。
 - **既刊の中身の点検と改訂 (KINDLE-QUALITY-LOOP-01)**。手順は `build-kindle-book` SKILL の「既刊の中身の点検」、規約は
-  `coconala-product-standards.md` §8「既刊の点検と改訂」。トークンを使う段ほど対象を絞る: ① `npm run kindle:quality` (機械・0 トークン)
+  `kindle-publishing-standards.md`「既刊の点検と改訂」。トークンを使う段ほど対象を絞る: ① `npm run kindle:quality` (機械・0 トークン)
   ② `capture-figures.mjs` → Haiku (印の付いた図だけ・評価済みの図は sha256 で飛ばす) ③ `notebooklm-review.ts` (1 冊 1 notebook)。
   改訂の版は `/content/kindle/<id>?version=<版>` で見比べ、全県表を付けた版は `capture-pages.mjs` で改ページの取り残し 0 を確かめてから渡す。
 - `/content/kindle` でcatalog / manuscripts / `.local` EPUB・表紙 / KDP listingの集合と状態を確認し、
@@ -86,11 +86,11 @@ BEHAVIOR CONTRACT（命令）:
 
 - 触れてよい: `packages/product-factory/src/channels/kindle/**`・`src/generators/epub.ts`・`manuscripts/**`・
   `.local/kindle-books/**`・`data/products/kindle-status.json`。
-- 触れない: R2 配信物、KDP、ブログ本文の SSOT（R2 記事＝`blog-editor` の領域）、ココナラ商品（`coconala-*`）。
+- 触れない: R2 配信物、KDP、ブログ本文の SSOT（R2 記事＝`blog-editor` の領域）、データパック（`data-pack-manager` の領域）。
 
 ## 関連
 
-- 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/build-kindle-book/SKILL.md`
-- 企画・市場判断: `.claude/rules/coconala-product-standards.md §8` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
+- 規約: `.claude/rules/kindle-publishing-standards.md` / skill: `.claude/skills/product/build-kindle-book/SKILL.md`
+- 企画・市場判断: `.claude/rules/kindle-publishing-standards.md` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
 - 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 品質基準（書き下ろし）: `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`'''

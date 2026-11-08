@@ -239,8 +239,8 @@ export const BUSINESS_PLAN_DECISIONS: readonly BusinessPlanDecision[] = [
     '無料の結論と出典に対し、再現性・高解像度・更新差分を商品化する。',
     '既存product-factoryへ需要確認済みの企画だけ登録する。',
     ['docs/00_プロジェクト管理/02_収益化戦略.md'],
-    ['coconala-product-manager', 'kindle-publisher'],
-    ['build-coconala-product', 'build-kindle-book'],
+    ['data-pack-manager', 'kindle-publisher'],
+    ['build-data-pack', 'build-kindle-book'],
     ['paid-purchases']
   ),
   d(
@@ -851,8 +851,8 @@ export const BUSINESS_PLAN_INITIATIVES: readonly BusinessPlanInitiative[] = [
     title: '再現可能なデータ商品',
     wave: 'scale',
     status: 'gated',
-    owner: 'coconala-product-manager',
-    skills: ['build-coconala-product'],
+    owner: 'data-pack-manager',
+    skills: ['build-data-pack'],
     deliverables: ['加工済みデータ', '方法・更新条件', '商品READINESS'],
     readinessGate: '無料分析の需要と購入意図を実測しライセンス確認済み',
     metricIds: ['paid-purchases', 'weekly-revenue'],

@@ -1,10 +1,9 @@
 /**
  * kdp-session.mjs — Amazon KDP (kdp.amazon.co.jp) Playwright 自動操作の共有セッション基盤 (stats47)
  * ---------------------------------------------------------------------------
- * coconala-operator (.claude/scripts/coconala/lib/coconala-session.mjs) と同じ設計を KDP へ移植。
  * 永続プロファイル + ログイン gate + account assert 方式。
  *
- * ★安全境界 (最重要・coconala と同思想):
+ * ★安全境界 (最重要):
  *   - ログイン認証はエージェントが行わない。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP
  *     アカウント** に手動ログインし、永続プロファイル (.local/playwright-kdp-profile) に保持する。
  *   - 税務情報 (Tax interview)・銀行口座・支払情報の入力は **人間工程**。この基盤は一切触らない。

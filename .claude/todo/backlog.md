@@ -187,13 +187,6 @@ updated: 2026-11-01
 - **次**: 管理画面 `/quality/page-audit` で error を種類別に数え、件数の多い 1 種類から原因を直す。
 - **完了条件**: error が 0 になり、Issue #1014 が自動で閉じる。
 
-### [COCONALA-SESSION-TEST-STALE-01] 撤退済みの GEO-SERVICE-01 の fixLimit を期待するテストが push 前の検査を止める
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/coconala/__tests__/session.test.mjs] [起票:2026-11-08] [領域:管理]
-
-- **症状 (2026-11-08 観測)**: `.claude/scripts/coconala/__tests__/session.test.mjs` の「configured revision counts reach the form layer」が `GEO-SERVICE-01` の `fixLimit` を `'1'` と期待するが、`config/coconala-listings.json` では 2026-10-26 (`b10983e30`) から未設定 (出品は withdrawn)。push 前の検査 (`pre-push-tests.mjs`) が落ち、関係の無い push を止める。
-- **次**: 撤退した出品の `fixLimit` を残すか決め、テストの期待値か設定のどちらかを合わせる (ココナラは撤退済みなので、テスト側で withdrawn を除くのが最小)。
-- **完了条件**: 検証コマンドが通る。
-
 
 ### [BLOG-PHOTO-ROLLOUT-01] ブログの写真風の絵の残りとテーマの画像を片付ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run test:image-pipeline] [起票:2026-11-07] [領域:サイト]

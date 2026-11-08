@@ -1,1 +1,0 @@
-../../../../../.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md

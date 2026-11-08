@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "description": "note 有料データパックの納品物の固定値 (場所・manifest の SHA・指標数)。改訂版の準備 (note/cli.ts revision) と販売カタログが読む。2026-11-08 にココナラの出品台帳の _noteDelivery から移した (ココナラ撤退)。生成物の置き場は .local/data-packs/<商品ID>/<版>/",
+  "packs": {
+    "P-01": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-01/v3-20261012-mac-r4",
+        "indicatorCount": 134,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "84a35ff69d55f26d4e990d9c19402f4f01ef419e05be5a27bb255b552a7ba7af",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "総人口（人・2025）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-02": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-02/v3-20261012-mac-r4",
+        "indicatorCount": 107,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "6ab602eaa5743a82ee196e117121cb5af0c70e057dea7dfa51f1b4da82541600",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "有効求人倍率（倍・2022）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-03": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-03/v3-20261012-mac-r4",
+        "indicatorCount": 44,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "124c5e6a7a7ce8fc0a4738bd2f75fc8d2d683e86150f1135980611dc59a3219a",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "延べ宿泊者数（人泊・2024）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-04": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-04/v3-20261012-mac-r4",
+        "indicatorCount": 119,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "20954923a96be395eb8a6b01d8529b4cd6ea7211df04e01c8295fefb68912524",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "財政力指数（都道府県財政）（指数・2022）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-05": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-05/v3-20261012-mac-r4",
+        "indicatorCount": 237,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "fc179db1e60186740ecdc9eb3edbccc9d284ed235c7ccb989376266f8c70ec42",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "医師数（人・2022）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-06": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-06/v3-20261012-mac-r4",
+        "indicatorCount": 244,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "4522b0c4ea9d6c27b73833bcd025dcda7fafc5043a71641a7a09462681ecde06",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "図書館数（人口100万人当たり）（館・2021）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-07": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-07/v3-20261012-mac-r4",
+        "indicatorCount": 76,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "b216028adcc4129370b959a3d4d6b0bee5e23f381329f8689e4c00fc64351be4",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "年平均気温（℃・2024）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-08": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-08/v3-20261012-mac-r4",
+        "indicatorCount": 69,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "ef35f077a2773a05afffa6d8032ce206bdb0f68163d913ee9a6b05fc88a3a76c",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "商業年間商品販売額（卸売業＋小売業）（百万円・2022）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-09": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-09/v3-20261012-mac-r4",
+        "indicatorCount": 132,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "39a415358286d9f0f441c31a5538126082c4067646797b14508ead6d69eb6c87",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "耕地放棄面積（ｈａ・2014）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-10": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-10/v3-20261012-mac-r4",
+        "indicatorCount": 230,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "aabeaa9798628e90e9080f65673125dca56f05e0ec981a91d368a36920147ed9",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "道路実延長（高速道路）（km・2023）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-11": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-11/v3-20261012-mac-r4",
+        "indicatorCount": 28,
+        "pptxIndicatorCount": 28,
+        "hasXlsx": false,
+        "manifestSha256": "ebfad8dd50d2d3fb8a5b6715e0060b15a041c39366d12d48d376016f9ec7e3d2",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "総人口（人・2025）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-12": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-12/v3-20261012-mac-r4",
+        "indicatorCount": 2073,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "3fc30b9361c9da18342e1b466f3972dc40e94495f2867460189982dc74910d90",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "総人口（人・2025）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    },
+    "P-14": {
+      "_delivery": {
+        "artifactDirectory": ".local/data-packs/P-14/v3-20261012-mac-r4",
+        "indicatorCount": 685,
+        "pptxIndicatorCount": 30,
+        "hasXlsx": true,
+        "manifestSha256": "af4f50d7fd287a800ab267ea7541c07b1e58e9a2a0653e609caff494f82be495",
+        "officeValidation": "owner-pending",
+        "verifiedAt": "2026-10-12",
+        "previewHeader": "アクセサリー消費支出額（都道府県庁所在市の二人以上世帯の年間アクセサリー消費支出額）（円・2024）",
+        "labelRevision": "2026-10-12",
+        "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      }
+    }
+  }
+}

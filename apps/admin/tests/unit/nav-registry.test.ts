@@ -58,11 +58,6 @@ describe("nav-registry (左メニューの SSOT)", () => {
     expect(isNavItemActive("/content/note/covers", params(), "/content", hrefs)).toBe(false);
   });
 
-  it("販売状態とココナラは別の画面として現在地を持つ", () => {
-    expect(isNavItemActive("/product/coconala", params(), "/product/coconala", hrefs)).toBe(true);
-    expect(isNavItemActive("/product/coconala", params(), "/product/status", hrefs)).toBe(false);
-  });
-
   it("より具体的な項目が一致するとき、親 (/strategy) は現在地にならない", () => {
     expect(isNavItemActive("/strategy/lanes", params(), "/strategy", hrefs)).toBe(false);
     expect(isNavItemActive("/strategy/lanes", params(), "/strategy/lanes", hrefs)).toBe(true);

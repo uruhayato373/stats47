@@ -9,8 +9,7 @@ import { recordFreeSampleDelivery } from "../src/build/free-sample-delivery";
 import { ALL_PRODUCTS } from "../src/catalog/products";
 import { notoSansJpBytes } from "../src/generators/jp-font";
 import { CANONICAL_ARTICLES } from "../src/channels/note/article-plan";
-import { buildNoteRevision, validateNoteRevision } from "../src/channels/note/build/build-revision";
-import { COCONALA_LISTINGS } from "../../../config/paths.mjs";
+import { NOTE_PACK_DELIVERIES, buildNoteRevision, validateNoteRevision } from "../src/channels/note/build/build-revision";
 
 const roots: string[] = [];
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
@@ -18,7 +17,7 @@ describe("free sample is real, pinned, and not an editable Office promise", () =
   it("generates a complete-font PDF and connects only free files to note", async () => {
     const root = mkdtempSync(join(tmpdir(), "free-sample-")); roots.push(root);
     const product = ALL_PRODUCTS.find(p => p.id === "P-13")!;
-    const res = await buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/coconala-products"), version: "test-r1" });
+    const res = await buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/data-packs"), version: "test-r1" });
     const bytes = readFileSync(join(res.outDir, "databook.pdf"));
     const doc = await PDFDocument.load(bytes);
     const originalFont = Buffer.from(notoSansJpBytes());
@@ -26,11 +25,11 @@ describe("free sample is real, pinned, and not an editable Office promise", () =
       Buffer.from(decodePDFRawStream(object).decode()).equals(originalFont))).toBe(true);
     expect(readFileSync(join(res.outDir, "listing/listing.md"), "utf8")).toContain("PNGは固定画像");
     expect(readFileSync(join(res.outDir, "READINESS.md"), "utf8")).not.toContain("[x] Excel");
-    await expect(buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/coconala-products"), version: "test-r1" })).rejects.toThrow();
+    await expect(buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/data-packs"), version: "test-r1" })).rejects.toThrow();
     expect(readFileSync(join(res.outDir, "databook.pdf")).equals(bytes)).toBe(true);
     recordFreeSampleDelivery(root, res.outDir);
-    mkdirSync(join(root, dirname(COCONALA_LISTINGS)), { recursive: true });
-    writeFileSync(join(root, COCONALA_LISTINGS), JSON.stringify({ listings: {} }));
+    mkdirSync(join(root, dirname(NOTE_PACK_DELIVERIES)), { recursive: true });
+    writeFileSync(join(root, NOTE_PACK_DELIVERIES), JSON.stringify({ schemaVersion: 1, packs: {} }));
     const article = CANONICAL_ARTICLES.find(a => a.memberProductIds[0] === "P-13")!;
     const report = await buildNoteRevision({ root, revision: "test-r1", articles: [article] });
     expect(report.items[0].missingProducts).toEqual([]);

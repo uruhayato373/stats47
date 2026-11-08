@@ -11,7 +11,6 @@ import { BUSINESS_PLAN_M1_ANALYSES } from "@stats47/data-configs/business-plan";
 import { REGISTRIES } from "../../../config/datasets.mjs";
 import { resolveRegistry } from "../../../.claude/scripts/lib/check-datasets.mjs";
 import { ALL_PRODUCTS } from "../src/catalog/products";
-import { GEO_SERVICE_OFFER } from "../src/channels/geo/service-offer";
 
 const ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
 const readText = (path: string) => readFileSync(resolve(ROOT, path), "utf8");
@@ -24,7 +23,7 @@ describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む",
 
   it("product-ids = ALL_PRODUCTS と Geo サービスの ID", () => {
     expect(sorted(resolveRegistry(REGISTRIES["product-ids"], readText))).toEqual(
-      sorted([...ALL_PRODUCTS.map((p) => p.id), GEO_SERVICE_OFFER.id]),
+      sorted(ALL_PRODUCTS.map((p) => p.id)),
     );
   });
 

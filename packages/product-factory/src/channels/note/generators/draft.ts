@@ -4,7 +4,7 @@
  *
  * 規律:
  *  - 有料記事は `<!-- paid:start -->` を有料境界の SSOT マーカーとし、添付はマーカー後ろに置く。
- *  - 無料記事 (J/K/L) は有料境界を持たない。J はココナラ受注へ、L は有料版へ、K は選び方へ誘導。
+ *  - 無料記事 (K/L) は有料境界を持たない。L は有料版へ、K は選び方へ誘導。
  *  - markdown 表を使わない (箇条書きのみ)。誇大・保証・公認示唆を書かない。相関を因果と書かない。
  *  - 地の文はですます調。数値の断定は provenance に基づく範囲のみ。
  */
@@ -185,33 +185,25 @@ function renderPaidDraft(
   return `${frontmatter(article)}\n\n${free.join("\n")}`;
 }
 
-/** 無料記事 (J=サービス誘導 / K=比較 / L=サンプル) の draft.md。 */
+/** 無料記事 (K=比較 / L=サンプル) の draft.md。 */
 function renderFreeDraft(
   article: NoteArticlePlan,
   members: readonly ProductDefinition[],
 ): string {
   const audience = uniq(members.flatMap((p) => p.audience));
-  const isService = article.series === "custom-analysis-services";
   const isLicense = article.series === "license-guide";
 
-  const cta = isService
+  const cta = isLicense
     ? [
-        "## 依頼の流れ",
-        "- ご相談内容（対象テーマ・地域・指標・納期）をお知らせください。",
-        "- 見本の範囲・工数・お見積りをご提示します。",
-        "- 制作はココナラの取引画面で進めます（プラットフォーム外での直接取引はお受けしていません）。",
+        "## 選び方の目安",
+        "- まず「無料で試す」→「基準年固定の買い切り」→「更新版」の順で検討すると失敗しにくいです。",
+        "- クライアント納品に使う場合はクライアントワーク可ライセンスを選んでください。",
       ]
-    : isLicense
-      ? [
-          "## 選び方の目安",
-          "- まず「無料で試す」→「基準年固定の買い切り」→「更新版」の順で検討すると失敗しにくいです。",
-          "- クライアント納品に使う場合はクライアントワーク可ライセンスを選んでください。",
-        ]
-      : [
-          "## 無料サンプルの使い方",
-          "- ダウンロードして、実際に色や項目を変更できるか確認してください。",
-          "- 使い勝手が合えば、同じ形式の有料版をご検討ください。",
-        ];
+    : [
+        "## 無料サンプルの使い方",
+        "- ダウンロードして、実際に色や項目を変更できるか確認してください。",
+        "- 使い勝手が合えば、同じ形式の有料版をご検討ください。",
+      ];
 
   const body = [
     `# ${article.title}`,

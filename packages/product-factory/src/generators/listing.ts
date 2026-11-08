@@ -1,6 +1,6 @@
 /**
  * 販売文 (listing.md) ジェネレータ。商品定義 + データセットから、出品ページ向けの説明文を作る。
- * ココナラ外への直接誘導は入れない (禁止事項)。
+ * 販売先の外への直接誘導は入れない (禁止事項)。
  * 納品物は product.formats から導出する (xlsx 商品に「PowerPoint 本体」と書かない・形式ズレ防止)。
  */
 import type { ProductDefinition, ProductFormat } from "../catalog/types";

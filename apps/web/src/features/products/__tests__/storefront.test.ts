@@ -64,12 +64,12 @@ describe("product storefront", () => {
     const kindle = STOREFRONT_PRODUCTS.filter(
       (product) => product.channel === "kindle"
     );
-    const coconala = STOREFRONT_PRODUCTS.filter(
+    const note = STOREFRONT_PRODUCTS.filter(
       (product) => product.channel === "note"
     );
 
     expect(kindle.length).toBeGreaterThan(0);
-    expect(coconala.length).toBeGreaterThan(0);
+    expect(note.length).toBeGreaterThan(0);
     expect(
       kindle.every((product) =>
         /^https:\/\/www\.amazon\.co\.jp\/dp\/[A-Z0-9]+$/.test(
@@ -78,7 +78,7 @@ describe("product storefront", () => {
       )
     ).toBe(true);
     expect(
-      coconala.every((product) =>
+      note.every((product) =>
         /^https:\/\/note\.com\/stats47\/n\/n[a-f0-9]{12}$/.test(product.externalUrl)
       )
     ).toBe(true);

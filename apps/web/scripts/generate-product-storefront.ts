@@ -13,9 +13,8 @@ import path from "node:path";
 
 import { readArticleLedger } from "../../../.claude/scripts/note/lib/article-ledger.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
+import { KDP_LISTINGS } from "../../../config/paths.mjs";
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
-import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channels/geo/service-offer";
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
 import { NOTE_PRODUCT_MAPPINGS } from "../../../packages/product-factory/src/channels/note/product-note-mapping";
 
@@ -26,25 +25,13 @@ import type { StorefrontProduct } from "../src/features/products/types";
 
 const ROOT = path.resolve(__dirname, "../../..");
 const KDP_LISTINGS_PATH = path.join(ROOT, KDP_LISTINGS);
-const COCONALA_LISTINGS_PATH = path.join(ROOT, COCONALA_LISTINGS);
 const OUTPUT_PATH = path.join(
   ROOT,
   "apps/web/src/features/products/storefront.generated.ts",
 );
 
-interface CoconalaListing {
-  readonly title: string;
-  readonly priceYen: number;
-  readonly status: string;
-  readonly serviceUrl?: string | null;
-}
-
 interface KdpListingsFile {
   readonly listings: Readonly<Record<string, KindleStorefrontListing>>;
-}
-
-interface CoconalaListingsFile {
-  readonly listings: Readonly<Record<string, CoconalaListing>>;
 }
 
 /** 商品カタログ (product-factory) を通さず、note の台帳だけで公開状態が決まるデータ商品。 */
@@ -64,7 +51,6 @@ function readJson<T>(filePath: string): T {
 
 function buildStorefrontProducts(): StorefrontProduct[] {
   const kdp = readJson<KdpListingsFile>(KDP_LISTINGS_PATH).listings;
-  const coconala = readJson<CoconalaListingsFile>(COCONALA_LISTINGS_PATH).listings;
 
   const booksById = new Map(KINDLE_BOOKS.map((book) => [book.id, book]));
   const productsById = new Map(ALL_PRODUCTS.map((product) => [product.id, product]));
@@ -92,45 +78,6 @@ function buildStorefrontProducts(): StorefrontProduct[] {
         audience: ["地域差を読み物として知りたい方"],
         sourceBlogSlugs,
       }];
-    });
-
-  const dataProducts = Object.entries(coconala)
-    .filter(([id]) => id === GEO_SERVICE_OFFER.id)
-    .filter(([, listing]) => listing.status === "listed" && Boolean(listing.serviceUrl))
-    .map(([id, listing]): StorefrontProduct => {
-      const product = productsById.get(id);
-      if (!product && id !== GEO_SERVICE_OFFER.id) {
-        throw new Error(`Coconala listing ${id}: 商品契約に定義がありません`);
-      }
-      if (id === GEO_SERVICE_OFFER.id) {
-        return {
-          id,
-          slug: `service-${id.toLowerCase()}`,
-          channel: "coconala",
-          channelLabel: "個別分析サービス",
-          title: listing.title,
-          description: GEO_SERVICE_OFFER.outcome,
-          priceYen: listing.priceYen,
-          externalUrl: listing.serviceUrl as string,
-          included: ["説明付きHTMLレポート", "地点・メッシュCSV", "出典・検算結果"],
-          audience: [GEO_SERVICE_OFFER.audience],
-          sourceBlogSlugs: [],
-        };
-      }
-      if (!product) throw new Error(`Coconala listing ${id}: 商品契約に定義がありません`);
-      return {
-        id,
-        slug: `data-${id.toLowerCase()}`,
-        channel: "coconala",
-        channelLabel: "編集可能データ",
-        title: listing.title,
-        description: product.jobToBeDone,
-        priceYen: listing.priceYen,
-        externalUrl: listing.serviceUrl as string,
-        included: product.formats.map((format) => format.toUpperCase()),
-        audience: [...product.audience],
-        sourceBlogSlugs: [],
-      };
     });
 
   const noteArticles = readArticleLedger().articles as readonly NoteArticle[];
@@ -162,7 +109,7 @@ function buildStorefrontProducts(): StorefrontProduct[] {
     }];
   });
   const coverUrls = readJson<Record<string, string>>(path.join(ROOT, datasetPath("products.note-cover-urls")));
-  return [...kindleProducts, ...dataProducts, ...noteProducts, ...standaloneProducts]
+  return [...kindleProducts, ...noteProducts, ...standaloneProducts]
     .map((product) => (coverUrls[product.externalUrl] ? { ...product, coverImageUrl: coverUrls[product.externalUrl] } : product))
     .sort((a, b) => a.slug.localeCompare(b.slug));
 }

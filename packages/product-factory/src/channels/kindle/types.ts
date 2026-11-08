@@ -1,7 +1,7 @@
 /**
  * Kindle 出版ファクトリー — 型定義 (SSOT)
  *
- * 正典: .claude/rules/coconala-product-standards.md (§kindle) / このファイル
+ * 正典: .claude/rules/kindle-publishing-standards.md / このファイル
  * 企画の SSOT: book-catalog.ts の sourceIdeas / newContentNote。
  * 初期市場調査・書籍調査は Git 履歴に保持する。
  *

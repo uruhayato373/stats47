@@ -1,133 +1,30 @@
 ---
 paths:
-  - "packages/product-factory/**"
-  - ".claude/{scripts/coconala,scripts/kdp,skills/product}/**"
-  - "data/products/**"
-  - "config/{coconala,kdp}-*.json"
-  - ".claude/agents/{coconala-*,kdp-operator,kindle-publisher}.md"
+  - "packages/product-factory/src/channels/kindle/**"
+  - "packages/product-factory/src/generators/epub.ts"
+  - "packages/product-factory/scripts/**"
+  - ".claude/{scripts/kdp,skills/product/build-kindle-book,skills/product/kdp-publish}/**"
+  - "config/kdp-*.json"
+  - "data/products/{kdp,kindle}-*"
+  - ".claude/agents/{kdp-operator,kindle-publisher}.md"
 ---
-# ココナラ商品ファクトリー標準 (product-factory SSOT)
+# Kindle 出版標準 (product-factory kindle チャネル)
 
-ココナラで販売する stats47 の都道府県データ商品（PowerPoint / Excel / CSV / SVG / PNG / PDF）を、
-共通部品から段階的に生成する **実行規約の単一ソース (SSOT)**。商品カタログ・生成・検証・出品準備に
-関わる agent (`coconala-product-manager`) / skill (`/build-coconala-product`) / 人間はこれに従う。
+Amazon KDP 向けの電子書籍 (EPUB3) の企画・生成・検証・出品の **実行規約の単一ソース (SSOT)**。
+書籍カタログ・EPUB 生成・検証は agent `kindle-publisher` (skill `/build-kindle-book`)、
+KDP の出品フォーム操作は agent `kdp-operator` (skill `/kdp-publish`) が担い、どちらもこのファイルに従う。
+データパック (note で売る PowerPoint / Excel / CSV) の規約は `data-pack-standards.md` で、Kindle はそれに依存しない。
 
-> **方式**: `buzz-map-standards.md` / `affiliate-ads-standards.md` と同じ「rules に規約 1 ファイル、
-> skill/agent は参照のみ」。本ファイルを恒久仕様の SSOT とする。旧 A-01〜L-07 の調査履歴は
-> Git履歴、現行の商品定義・由来・値・コードは下記の git TS を正典とする。
+## 1. 位置づけと SSOT
 
----
 
-## 1. SSOT 構造（どのデータがどこにあるか）
-
-完全DBレス準拠（`docs/01_技術設計/02_データアーキテクチャ.md`）。永続/公開 DB を持たない。
-
-| データ | SSOT | 形 | 備考 |
-|---|---|---|---|
-| 商品定義（P-01〜P-14・テーマ別 14 パック） | `packages/product-factory/src/catalog/` | git TS | `src/catalog/products/packs.ts` 1 ファイル。`ProductDefinition`（`theme`/`datasets`/`sourceIds`）型。**ここだけ編集**。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
-| ライセンス / テンプレ / family メタ | `src/catalog/{licenses,templates,families}.ts` | git TS | 再販売禁止は `resale: false` で型固定 |
-| 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
-| 商品に焼く実データ | `src/data/datasets/<key>.ts` | git TS スナップショット | **基準年固定**。R2 から取得して手記の SOURCES を添える |
-| 生成バイナリ（pptx/xlsx/pdf/png…） | `.local/coconala-products/<id>/<version>/` | 派生物・**git 管理外** | 手編集を正典にしない・公開 R2 へ置かない |
-| リリース台帳（生成状況） | `data/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
-
-- **商品定義=git TS が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
-- **実データは R2 → git TS スナップショット（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
-
----
-
-## 2. 生成・検証フロー
-
-```bash
-# カタログ検証（ID 一意・レビュー集合一致・価格整合・参照存在）
-npm run products:catalog  --workspace=@stats47/product-factory -- --check
-# 生成（単品 / 全商品）— 生成先は .local/coconala-products/<id>/<version>/
-npm run products:generate --workspace=@stats47/product-factory -- --id <ID> --version <NEW_VERSION>
-npm run products:generate --workspace=@stats47/product-factory -- --all --version <NEW_VERSION>
-# リリース台帳を再生成
-npm run products:report   --workspace=@stats47/product-factory
-# 型 / テスト
-npm run type-check --workspace=@stats47/product-factory
-npm run test:run   --workspace=@stats47/product-factory
-```
-
-- ジェネレータ: pptx（**pptxgenjs custGeom で県別に再着色できる地図** + ネイティブチャート）/ xlsx（**exceljs・
-  値編集で再計算する RANK 数式**。ネイティブチャート/塗り分け地図は不可 → Excel 側の挿入手順を案内）/ csv(BOM) /
-  svg+png / manual.pdf（pdf-lib + NotoSansJP subset）/ listing / manifest / readiness。
-- 地図結合は**都道府県コード**（名称文字列をキーにしない）。全図表にタイトル・単位・基準年・出典を持たせる。
-
----
-
-## 3. 出典・利用許諾・免責（全成果物に必須）
-
-- `SOURCES.csv`（調査名・表名・statsDataId・URL・年・取得日・単位・加工式・注意事項）を同梱する。
-- `LICENSE-ja.txt`（利用範囲・クライアントワーク可否・**再販売/再配布禁止**・出典表示義務・免責）を同梱する。
-- e-Stat の**公認・推奨と誤認させない**。国・府省・自治体作成物と誤認させない（`evidence-based-judgment.md` 準拠）。
-- 欠損・秘匿・非該当を 0 にしない（`Dataset` は null + 理由で保持）。異年次結合は避ける。
-- 架空サンプルは商品内・販売文で明示（`isSample`）。実データ商品は基準年固定・買い切りを明示。
-
----
-
-## 4. 禁止事項
-
-| NG | OK |
-|---|---|
-| 生成バイナリを git / 公開 R2 に置く | `.local/`（git 管理外）に生成し、配信しない |
-| 生成物 (pptx/xlsx/json) を手編集して真実源化 | git TS を編集 → `generate` で再生成 |
-| 実在しない商品 ID / licenseId / metric を書く | validator（`catalog --check`）が弾く |
-| **実データ未接続パックを status=approved にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。`packs.ts` の status は商品として完成したか (`cataloged`/`approved`) だけを持ち、公開状態は持たない。ココナラの公開状態の正本は `config/coconala-listings.json` (2026-10-19 撤退で全件 withdrawn。2026-10-27 に `listed` を型から外した) |
-| 架空データを実データと偽る | `Dataset.isSample` で分離・販売文に明記 |
-| **オーナー承認なしにココナラへ実公開（`--commit`）** | 下書き作成は自動化可・実公開は `--commit` + オーナー承認（§6） |
-| 全商品を一括出品して WIP を増やす | 戦略（`docs/02_実装計画/01`）どおり 1 商品ずつ需要実測 |
-| Office 実機未確認で「互換性検証済み」と書く | 構造(OOXML)検証と実機検証を区別して報告 |
-
----
-
-## 5. Office 実機検証（Phase 4・人間工程）
-
-生成は OOXML 構造レベルでのみ検証できる。**PowerPoint / Excel 実機（Windows/Mac 365）での県別再着色・
-チャート編集追従・表示崩れは、オーナーが各商品の `READINESS.md` に沿って目視する**。Office の無い環境では
-「生成成功」を「互換性検証済み」と報告しない。
-
----
-
-## 6. 出品規律（出品フォームは自動化・実公開とログインは人間工程）
-
-> **★2026-07-23 方針変更（オーナー判断）**: 旧「ログイン・出品・アップロードを一切自動化しない」を撤回し、
-> doboku-note の実証済みパイプライン（`coconala-operator` / `/coconala-publish`）を stats47 へ移植した。
-> **出品フォームの入力は Playwright で自動化する**が、下記のガードを**人間工程として維持**する。
-
-- **ログイン認証はエージェントが行わない**。初回のみ人間が headed ブラウザで **stats47 のココナラアカウント**へ手動ログインし、永続プロファイル `.local/playwright-coconala-profile` に保持する（★doboku-note の `dobokunote` とは別アカウント・別プロファイル）。
-- **account assert 必須**: `coconala-account.json`の期待`userId`と`/mypage/user`の本人プロフィール「表示を確認する」リンクを照合する。おすすめ出品者リンクやページ全体の表示名では代替しない。ID未設定・取得不能・複数・不一致では停止する。期待アカウントの変更はオーナー承認が必要。
-- **draft-first + `--commit` gate + オーナー承認**: 既定は「下書きで保存」。**実公開（`--commit`）は outward-facing・不可逆寄りのため、オーナーが明示承認したときだけ**実行する。バリデーションエラー（記入エラー）時は「公開した」と報告しない。
-- **1 商品ずつ検証**。一括出品しない。閲覧・お気に入り・問い合わせ・購入・サポート工数・手取りを記録する。
-- 反応が無ければ同系統を増やさず、対象・用途・価格・サンプルを見直す（レビュー §実行規律）。
-- **規約リスク**: ココナラ利用規約に「出品者が自分の出品をブラウザ自動化することを禁じる明示条項」は doboku 調査（2026-07-18）では未確認だが、bot 検知の運用リスクは残るため自動操作は低頻度（出品時・価格改定時）に限る。
-- 実装: agent `coconala-operator` / skill `/coconala-publish` / `.claude/scripts/coconala/`（session/form lib + publish/edit/delete-draft）。出品内容 SoT = `config/coconala-listings.json`（product-factory から 1 商品ずつ書き起こす）。
-
----
-
-## 7. 役割分担
-
-| 工程 | 担当 |
-|---|---|
-| カタログ / ジェネレータ / SSOT の管理・生成・検証・出品準備 | `coconala-product-manager`（skill `/build-coconala-product`） |
-| **出品フォーム操作（新規出品・修正・下書き掃除）・出品内容 SoT** | `coconala-operator`（skill `/coconala-publish`・`.claude/scripts/coconala/`） |
-| 実データ（新 metric）の R2 投入 | `data-ingester` |
-| e-Stat 実在検証 | `estat-researcher` |
-| Office 実機検証・実公開（`--commit`）の承認 | 人間（オーナー・Windows 実機） |
-
----
-
-## 8. Kindle 出版チャネル（product-factory に同居）
-
-同じ product-factory に、Amazon KDP 向けの電子書籍 (EPUB3) を生成する **kindle チャネル** を持つ（2026-07-23 新設）。ココナラが「Office/データを売る」のに対し、Kindle は「読ませて送客する」役割で、既存ブログ 98 記事・ランキング ai-content を再構成して束ねる。ランキング大全は競合先行で弱いため、S1 論点読み物を最優先する。
+product-factory の **kindle チャネル** が Amazon KDP 向けの電子書籍 (EPUB3) を生成する（2026-07-23 新設）。データパックが「Office/データを売る」のに対し、Kindle は「読ませて送客する」役割で、既存ブログ 98 記事・ランキング ai-content を再構成して束ねる。ランキング大全は競合先行で弱いため、S1 論点読み物を最優先する。
 
 - **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/` は派生物（git 管理外・手編集を正典にしない）だが、**KDPへ送る版は送信前にAES-256-GCM暗号化してR2 `archive/kindle-encrypted/<id>/v1/<revision>/`へ完全bundleで保全する**。配信用R2へ平文EPUBを置かない。
 - **別PC復元の正典**は `data/products/kindle-archives.json`（Git）+ 上記R2暗号化bundle。`book.epub / cover.jpg / cover.png / metadata.json / READINESS.md`（`review.md`があれば同梱）のSHA-256からimmutable revisionを作る。暗号鍵はR2/Gitへ置かず、`KINDLE_ARCHIVE_KEY`、未設定時は当該PCの`R2_SECRET_ACCESS_KEY`からHKDFで導出する。認証Cookie・2FA・KDP profileはarchive対象外。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
-#### 既刊の点検と改訂 (KINDLE-QUALITY-LOOP-01)
+### 既刊の点検と改訂 (KINDLE-QUALITY-LOOP-01)
 
 - **全県表**: 図だけでは中位の県の値が本に無いので、ブログ章の末尾に「全47都道府県の値」を付ける (`full-tables.ts`・catalog の `fullTables: true`)。
   表は**図と同じデータ** (R2 `app/blog/<slug>/data/<name>.json`、無ければ同じ年の `app/ranking/<key>/values.json`) から作り、年が違えば作らない。
@@ -139,7 +36,7 @@ npm run test:run   --workspace=@stats47/product-factory
   全県表の見出し・つづきの小見出しの取り残しと 1〜2 行だけのページが 0 であることを確かめる。Send to Kindle で Amazon の変換は確かめられるが、
   Kindle for Web はパーソナル・ドキュメントを表示しないので、変換後の見た目は Kindle アプリか端末でしか見られない。
 
-#### 編集設計 (design) が無い本は作らない (2026-09-19 確定)
+### 編集設計 (design) が無い本は作らない (2026-09-19 確定)
 
 2026-09-19 の全 32 冊監査で、カタログは「データが何か」(`concept`) しか持たず、**誰のどんな悩みを解決するか・
 無料 (stats47.jp) と何が違って何に支払うのか・需要の証拠・タイトルの型**がどこにも無かった (書名 13 冊が
@@ -161,7 +58,7 @@ npm run test:run   --workspace=@stats47/product-factory
 backlog `KDP-EXPANSION-01` の順で設計してから再生成する。design を埋めるだけで需要ありとは判定しない
 (共通方針の原則)。表紙の主題は読点でも折る (`splitTitle`)。
 
-#### 章の中身の作り方（2026-08-12 確定・S2/S3/S4 の 20 冊）
+### 章の中身の作り方（2026-08-12 確定・S2/S3/S4 の 20 冊）
 
 出品前の中身実測で、S2×11 / S3×8 / S4×1 の 20 冊が **1 章 = 定型 1 文 (144〜200 字) + 図**
 しかなく、総字数 4,313〜6,001 字だった。S1 の 12 冊 (1 章 2,000〜3,500 字) と同じ値段で
@@ -195,7 +92,7 @@ backlog `KDP-EXPANSION-01` の順で設計してから再生成する。design �
 推定値にすぎず、実測 fresh は必要量の 2.2 倍あったので、そこで 7 字差を落とすと本来の要件から
 外れた数字を守らせることになる。
 
-#### 生成品質と外部公開状態を分離する
+### 生成品質と外部公開状態を分離する
 
 監査でEPUBを再生成・上書きしない。機械検証だけで出品台帳のstatusをdraftへ戻さない。
 `verify-publishable.mts` は既存版を読み取る互換入口であり、`--apply`は拒否する。
@@ -210,7 +107,7 @@ npm run products:report --workspace=@stats47/product-factory -- --kindle-version
 公開実績はKDP出品台帳の確認日付きstatus、販売準備は横断カタログの残工程を読む。
 書き下ろし30%は内部編集品質基準で、Amazonが認める安全基準ではない。
 
-#### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
+### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
 
 Kindle Previewer で「表紙が描画されない / 途中ページが表示されない / 改ページが不適切」の
 3 症状が出た。原因は**表紙が素の `<img>`** で、`max-width:100%` の幅合わせだと 1600×2560 の
@@ -227,7 +124,7 @@ Kindle Previewer で「表紙が描画されない / 途中ページが表示さ
 | CSS に `page-break-after:avoid`（見出し）/ `figure img{max-height}` / `orphans:widows` | 見出しの孤立と図のページ跨ぎを止める |
 | 扉と奥付は `.colophon{page-break-before:always}` で 2 ページに分ける | 1 ページに詰め込むと書籍の体裁にならない |
 
-#### 検証は 3 層 (2026-08-12 配線・2026-09-19 に ③ を追加)
+### 検証は 3 層 (2026-08-12 配線・2026-09-19 に ③ を追加)
 
 ```bash
 npm run products:kindle:verify-epub  --workspace=@stats47/product-factory            # 全 32 冊
@@ -277,7 +174,7 @@ S1 各冊に「この記事 / 本記事」が 11〜38 件、S2/S3 で同一章�
 
 内部比率はAmazonの許諾・審査合格基準ではない。著作権者自身のWeb公開素材と他者の素材を区別し、AI生成内容の申告を別途確認する（[KDPコンテンツガイドライン](https://kdp.amazon.com/en_US/help/topic/G200635600)）。
 - **CLI**: `products:kindle:{plan,validate,generate,report,kdp-listings}`（`generate --id K-S1-01`）。生成は `.local` への書き出しのみ。
-#### 本文量の床 — 比率ゲートだけでは「本になっていない本」が通る (2026-08-12 実測)
+### 本文量の床 — 比率ゲートだけでは「本になっていない本」が通る (2026-08-12 実測)
 
 30% 書き下ろしゲートは**比率**しか見ないので、分母が小さいほど満たしやすい。実測で
 **S2/S3/S4 の 20 冊が総字数 4,313〜5,725 字・1 章 144〜191 字**（定型 1 文 + 図の羅列）なのに
@@ -296,7 +193,7 @@ S1 各冊に「この記事 / 本記事」が 11〜38 件、S2/S3 で同一章�
 
 **S1 の 12 冊は合格・S2/S3/S4 の 20 冊は不合格**だった。以下の章コンポーザで是正した。
 
-#### 章コンポーザ — ranking 章の本文は ai-content から組む (2026-08-12 新設)
+### 章コンポーザ — ranking 章の本文は ai-content から組む (2026-08-12 新設)
 
 R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済みの解説
 (insights 400〜700字 / regionalAnalysis 700〜1,000字 / faq / 県別解説 47県) を持つ。
@@ -326,9 +223,9 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 
 - **需要ファースト**: 一括生成せず 1 冊ずつ manuscript へ昇格 → 生成 → 人間が KDP 公開 → 4 週実測（KENP/販売数）→ 良ければ横展開。パイロット = **K-S1-01『実質手取りの地図』**（血肉 = 家計・所得系ブログ 9 本 + 書き下ろし）。書き下ろしの最終仕上げは `article-writer` → `blog-critic` の既存品質ゲートを通す。
 
-### KDP 出品自動化（2026-07-23・coconala-operator から移植）
+## 2. KDP 出品自動化（2026-07-23）
 
-> **★方針**: 旧「KDP アップロードは人間工程で自動化しない」を、coconala と同じ**「出品フォームは Playwright で自動化・ただし下記ガードを人間工程として維持」**へ改訂した。
+> **★方針**: 旧「KDP アップロードは人間工程で自動化しない」を、**「出品フォームは Playwright で自動化・ただし下記ガードを人間工程として維持」**へ改訂した。
 
 - **ログイン認証・2FA はエージェントが行わない**。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP アカウント**へ手動ログインし、永続プロファイル `.local/playwright-kdp-profile` に保持する。
 - **税務情報（Tax interview）・銀行口座・支払情報の入力は人間工程**。KDP はこれらが未完了だと公開させない。エージェントは一切触らない。
@@ -353,10 +250,10 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
   launchctl にも未登録。**「一度承認を得たから以後ずっと無人で公開してよい」とはしない**
   （承認は都度・1 冊ずつ）。スクリプト `scripts/scheduled/kdp-resume-daily.sh` と repo 内 plist は
   再開できるよう残してあるが、**再登録するにはオーナーの新しい明示指示が要る**。
-- **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する（coconala の `discover-categories` 相当）。実機での初回調整が前提。
+- **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する。実機での初回調整が前提。
 - **KU（KDP Select 独占）は既定 未登録**（`kuEnrolled:false`・販売のみ）。判断はオーナー。**規約リスク**: 出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残るため低頻度（出品時・価格改定時）に限る。
 - **公開・既刊修正の前にR2 archive gate必須**。ローカル6ファイルのSHAが最新の検証済みrevisionと一致しなければKDP操作を停止する。修正は原稿/表紙SSOTを編集→再生成→新revisionをR2へpush→`kdp-publish --update`で修正下書き→`--update --commit`で再申請する。旧revisionは削除せずrollback可能にする。
-#### 紹介文とキーワード (2026-11-06 オーナー依頼)
+### 紹介文とキーワード (2026-11-06 オーナー依頼)
 
 紹介文は読者が買うかを決める文章で、定型文の差し替えにしない。正本は `data/products/kdp-listing-copy.json` で、
 `config/kdp-listings.json` の `description` と `keywords` はここから作る。台帳を手で直さない。
@@ -369,7 +266,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **検査**: `npm run kdp:listing-copy -- check` (全項目)。`kdp-preflight` は載せられない内容を入稿前に止める。原稿は別エージェントのレビューとオーナー承認を経て `apply` で台帳へ写し、`kdp-update-listing-copy.mjs` で紹介文とキーワードだけを反映する。提出後は「変更事項のレビュー中」で詳細画面が開けないので `submitted` とし、レビュー後に `--verify` で一致を確かめて `reflected` にする。
 - **効果の計測**: `targetQueries` の検索順位を週次監査 `kdp-search-ranks` が `data/products/kdp-search-ranks/` に記録する。読み取れない語は `unreadable` で、圏外と混同しない。
 
-#### KDP 入稿フォームの実仕様 (2026-08-12 に実機で確定)
+### KDP 入稿フォームの実仕様 (2026-08-12 に実機で確定)
 
 移植元 (doboku-note) の英語版フォーム前提の実装は**日本語版でほぼ動かなかった**。実測で分かった要点:
 
@@ -419,63 +316,13 @@ account assert後は本棚を直前取得し、`下書き + レビュー中 + �
 
 - 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow,status,archive-gate}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`）。完成物保全・復元は `npm run kindle:archive --workspace=@stats47/r2-storage -- --push|--audit|--restore`。出品内容と公開状態の SSOT は `config/kdp-listings.json`、暗号化archive台帳は `data/products/kindle-archives.json`。書籍生成・カタログは `kindle-publisher` に委譲。
 
-役割分担（追加分）:
+## 3. 役割分担
 
 | 工程 | 担当 |
 |---|---|
-| kindle カタログ / EPUB 生成器 / SSOT の管理・生成・検証 | `coconala-product-manager`（product-factory オーナー・当面兼務） |
+| kindle カタログ / EPUB 生成器 / SSOT の管理・生成・検証 | `kindle-publisher`（skill `/build-kindle-book`） |
 | 書き下ろし章（はじめに・おわりに・横断分析）の執筆・レビュー | `article-writer` → `blog-critic`（既存ブログ品質ゲート） |
 | 本文素材（ブログ / ai-content）の供給 | `blog-editor` / `ranking-content-author` |
 | **KDP 出品フォーム操作（下書き作成・修正・公開）・出品内容 SoT** | `kdp-operator`（skill `/kdp-publish`・`.claude/scripts/kdp/`） |
 | ログイン・2FA・Tax interview・銀行口座・Kindle Previewer 最終目視・実公開（`--commit`）承認・KU 判断 | 人間（オーナー） |
 
----
-
-## 9. note 商品チャネル
-
-`packages/product-factory/src/channels/note/` は、商品カタログから note の無料・有料記事候補、
-添付manifest、画像計画、ハッシュタグを生成するチャネルとする。商品定義を複製せず、
-商品側は `src/catalog/products/packs.ts`、note editorial メタは
-記事台帳 `data/note/articles.json`（git の JSON + `articles.schema.json`。規約は `.claude/scripts/note/catalog/README.md`）を SSOT とし、mapping で結合する。
-
-> **現在の実装**: article-planとmappingはP-01〜P-14から導出し、TypeScript/Vitestの対象。
-> 販売準備は `note/cli.ts revision --revision <NEW_REVISION> --all` を使い、出品台帳の
-> `_delivery` 固定SHAから非公開の別版を作る。旧v1直参照のgenerate/promoteで改訂版を公開しない。
-> 商品別の公開記録・品質・人間確認待ちは `products:report` の派生カタログで分離する。
-
-### SSOTと生成物
-
-- mapping・記事計画・生成コードは git TS、`.local/note-products/` の生成物は派生物とする。
-- 承認前の生成物を note.com、R2、公開用カタログへ自動反映しない。
-- 添付は `.local/coconala-products/<id>/<version>/manifest.json` を参照し、商品ファイルを複製して
-  新しいSSOTを作らない。
-- 有料境界は `<!-- paid:start -->` を唯一のマーカーとし、有料ラインと添付物を境界より後ろに置く。
-
-### 決定的検証
-
-- 14パックすべてのmapping coverage、productId・slug・seriesの一意性と参照整合を検査する。
-- canonical記事間の重複、同一商品の重複割当、添付循環参照、無料記事への有料添付混入を拒否する。
-- frontmatter、有料境界、添付manifest/hash、出典、基準年、単位、ライセンス、Office対応環境を検査する。
-- 誇大表現、収益保証、行政・e-Statの公認示唆、相関を因果とする表現、根拠のない数値を拒否する。
-- Office実機未確認の商品を有料添付可能・公開可能として扱わない。
-
-### 公開ゲート
-
-- 一括処理は `.local/` へのドラフト生成までとし、一括公開しない。
-- promote は既定dry-run、note.com公開は既存の専用公開フローへ分離する。
-- 公開、価格、無料・有料境界、添付内容は人間が記事単位で確認する。
-- noteの公開頻度は `.claude/rules/sns-content-standards.md` の上限に従う。
-
-## 関連
-
-- 商品案の由来: `packages/product-factory/src/catalog/products/packs.ts` の `sourceIds`（旧調査はGit履歴）
-- モジュール: `packages/product-factory/`（README + `src/`）
-- 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md` / データ保存先: `.claude/rules/data-storage.md`
-- 実証判定: `.claude/rules/evidence-based-judgment.md` / 収益化戦略: `docs/00_プロジェクト管理/02_収益化戦略.md`
-- agent: `.claude/agents/coconala-product-manager.md`（商品生成）/ `.claude/agents/coconala-operator.md`（出品自動化）
-- skill: `.claude/skills/product/build-coconala-product/SKILL.md` / `.claude/skills/product/coconala-publish/SKILL.md`
-- 出品スクリプト: `.claude/scripts/coconala/`（`coconala-{publish,edit,delete-draft}.mjs` + `lib/coconala-{session,form}.mjs`）
-- 出品 SoT: `config/coconala-listings.json` / アカウント: `config/coconala-account.json`（★stats47 専用・sellerName 要記入）
-- 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`（`playwright-coconala-profile`）
-- 移植元: doboku-note `.claude/agents/coconala-operator.md` / `.claude/skills/management/coconala-publish/`
-- **Kindle チャネル (§8)**: SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts` / CLI `src/channels/kindle/cli.ts` / 台帳 `data/products/kindle-status.json`

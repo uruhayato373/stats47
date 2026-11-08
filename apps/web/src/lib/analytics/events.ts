@@ -256,13 +256,13 @@ export function trackCtaClick(params: {
 
 /**
  * 販売先。商品の外部 URL のホストから決める (`productReferralOf`)。
- * ココナラは 2026-10-19 に撤退済みだが、残っている案内を数えられるよう語彙に残す。
+ * ココナラは 2026-10-19 に撤退し、2026-11-08 に語彙から外した (サイト・記事にココナラへの案内は残っていない)。
  */
-export type ProductDestination = 'amazon' | 'note' | 'coconala';
+export type ProductDestination = 'amazon' | 'note';
 
 export interface ProductReferralParams {
   destination: ProductDestination;
-  /** 販売先での商品 ID。Amazon は ASIN、note は記事・マガジンのキー、ココナラはサービス番号 */
+  /** 販売先での商品 ID。Amazon は ASIN、note は記事・マガジンのキー */
   productId: string;
   /** 案内の置き場所。登録済み `link_position` に入れる (例 `blog_product` / `ranking_product` / `ranking-footer`) */
   placement: string;
@@ -289,10 +289,6 @@ export function productReferralOf(externalUrl: string): Omit<ProductReferralPara
     const key = url.pathname.match(/^\/[^/]+\/[nm]\/([a-z0-9]+)\/?$/i)?.[1];
     return key ? { destination: 'note', productId: key } : null;
   }
-  if (host === 'coconala.com') {
-    const id = url.pathname.match(/^\/services\/(\d+)\/?$/)?.[1];
-    return id ? { destination: 'coconala', productId: id } : null;
-  }
   return null;
 }
 
@@ -313,7 +309,7 @@ export function trackProductImpression(params: ProductReferralParams): void {
 }
 
 /**
- * 販売先 (Amazon / note / ココナラ) へ出ていくクリック。GA4 のキーイベントにする。
+ * 販売先 (Amazon / note) へ出ていくクリック。GA4 のキーイベントにする。
  * サイト内の商品詳細への移動は数えない (それは `nav_click`)。商品詳細から出ていくときは、
  * 詳細へ来る前の案内の置き場所を `link_position` に入れる (`TrackedProductOutboundLink`)。
  */

@@ -1,4 +1,4 @@
-export type SalesChannel = "kdp" | "coconala";
+export type SalesChannel = "kdp";
 
 export interface SalesObservation {
   readonly id: string;

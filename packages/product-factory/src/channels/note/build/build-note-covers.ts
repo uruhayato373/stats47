@@ -14,7 +14,7 @@ import { renderCoverSvg } from "../generators/cover";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
 const DOCS31_ROOT_DEFAULT = resolve(REPO_ROOT, "docs/31_note記事原稿/product-sales");
-const COCONALA_ROOT = resolve(REPO_ROOT, ".local/coconala-products");
+const DATA_PACK_ROOT = resolve(REPO_ROOT, ".local/data-packs");
 
 export interface CoverBuildResult {
   readonly slug: string;
@@ -41,7 +41,7 @@ export async function buildNoteCover(
   let completion: string | null = null;
   if (article.access === "paid") {
     const firstMember = article.memberProductIds[0];
-    const preview = join(COCONALA_ROOT, firstMember, version, "preview", "thumbnail-620x620.png");
+    const preview = join(DATA_PACK_ROOT, firstMember, version, "preview", "thumbnail-620x620.png");
     if (firstMember && existsSync(preview)) {
       const dst = join(imagesDir, "completion.png");
       copyFileSync(preview, dst);

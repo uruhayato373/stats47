@@ -77,7 +77,7 @@ export const AUTHORED_KEY_EVENTS = Object.freeze([
   { eventName: "cta_click", countingMethod: "ONCE_PER_EVENT" },
   { eventName: "file_download", countingMethod: "ONCE_PER_EVENT" },
   { eventName: "contact_click", countingMethod: "ONCE_PER_EVENT" },
-  // 販売先 (Amazon / note / ココナラ) へ出ていくクリック。商品送客の成果 (PRODUCT-REFERRAL-MEASURE-01)
+  // 販売先 (Amazon / note) へ出ていくクリック。商品送客の成果 (PRODUCT-REFERRAL-MEASURE-01)
   { eventName: "product_click", countingMethod: "ONCE_PER_EVENT" },
 ]);
 

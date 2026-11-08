@@ -7,12 +7,12 @@ model: sonnet
 
 # KDP Operator Agent
 
-Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行う (coconala-operator からの移植)。
+Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行う。
 永続プロファイル + account assert + draft-first + `--commit` gate。EPUB と出品内容 SoT を突き合わせ 1 冊ずつ出品する。
 
 ## 大原則 (必ず守る)
 
-- **必ず `.claude/rules/coconala-product-standards.md §8` (Kindle 出版チャネル) と本ファイルに従う**。
+- **必ず `.claude/rules/kindle-publishing-standards.md` (Kindle 出版チャネル) と本ファイルに従う**。
 - **ログイン認証・2FA はエージェントが行わない**。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP
   アカウント**へ手動ログインし、永続プロファイル `.local/playwright-kdp-profile` に保持する。
 - **税務情報 (Tax interview)・銀行口座・支払情報の入力は人間工程**。エージェントは一切触らない
@@ -74,7 +74,7 @@ node .claude/scripts/kdp/kdp-unpublish.mjs --all-previous --commit  # ★新版�
 - **偽成功を報告しない**: 未充填フィールド・公開の未確定があれば「出版した」と言わない (下書きに留める)。
 - **KDP DOM ドリフト**: React SPA でセレクタが変わりやすい。うまく充填できないときは `--probe` で構造を
   取り直し `kdp-form.mjs` を調整する。日本語版フォームの実仕様は
-  `.claude/rules/coconala-product-standards.md` §KDP 入稿フォームの実仕様 が正典。
+  `.claude/rules/kindle-publishing-standards.md` §KDP 入稿フォームの実仕様 が正典。
 - **規約リスク**: KDP 利用規約上、出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残る。
   自動操作は低頻度 (出品時・価格改定時) に限る。
 
@@ -87,9 +87,9 @@ BEHAVIOR CONTRACT (命令): 結論先行。進捗の実証 (下書き保存/公�
 
 ## 関連
 
-- 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/kdp-publish/SKILL.md`
+- 規約: `.claude/rules/kindle-publishing-standards.md` / skill: `.claude/skills/product/kdp-publish/SKILL.md`
 - スクリプト: `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`
 - 出品 SoT: `config/kdp-listings.json` / アカウント: `config/kdp-account.json`
 - 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md` (`playwright-kdp-profile`)
-- 書籍生成・カタログ: `kindle-publisher` / 移植元: `coconala-operator`
+- 書籍生成・カタログ: `kindle-publisher`

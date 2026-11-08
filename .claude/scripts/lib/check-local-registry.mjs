@@ -13,6 +13,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { LOCAL_RESOURCES } from '../../../config/paths.mjs';
 
 const SOURCE = /\.(?:ts|tsx|mts|mjs|cjs|js|sh|ya?ml|md)$/;
 const SKIP = /(?:__tests__\/|\.test\.|(?:^|\/)check-local-registry\.mjs$|^docs\/|^\.claude\/(?:todo|memory|state)\/|^data\/)/;
@@ -58,7 +59,7 @@ export function auditLocalRefs(files, config) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-  const config = JSON.parse(readFileSync(resolve(root, 'config/local-resources.json'), 'utf8'));
+  const config = JSON.parse(readFileSync(resolve(root, LOCAL_RESOURCES), 'utf8'));
   const paths = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
     .split('\0')
     .filter((p) => p && SOURCE.test(p) && !SKIP.test(p));
@@ -72,7 +73,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   }
   const missing = auditLocalRefs(files, config);
   if (missing.length) {
-    for (const { path, name } of missing) console.error(`${path}: .local/${name} が config/local-resources.json の台帳に無い`);
+    for (const { path, name } of missing) console.error(`${path}: .local/${name} が ${LOCAL_RESOURCES} の台帳に無い`);
     console.error(
       `\n${missing.length} 件。一回きりの作業なら OS の一時領域 (os.tmpdir()) に作り、終わったら消す。残すなら cachePaths (期限) か localRegistry (auth / state / product と理由) に登録する。`
     );

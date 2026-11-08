@@ -62,7 +62,6 @@ export const GOVERNED = [
  *   assets/            素材の原本 (生成の入力・出力の原本。配信用に変換したものは public か R2 に置く)
  *   apps/*\/public/     アプリがそのまま配信する画像 (コードと一緒にデプロイされる)
  *   packages/*\/src/・packages/*\/data/  パッケージに同梱する画像・図形 (コードが import する・GIS の県形状など)
- *   config/coconala/assets/  ココナラのプロフィール・商品画像 (出品台帳と一緒に人が判断して変える)
  *   .claude/skills/**\/examples/ (と Codex 用ミラー .agents/)  スキルの説明に使う作例
  *   contents/blog/  ブログの公開待ち原稿 outbox (公開後に CI が消す)。note の原稿は git に置かない (正本は R2)
  */
@@ -70,7 +69,6 @@ export const IMAGE_ROOTS = [
   /^assets\//,
   /^apps\/[^/]+\/public\//,
   /^packages\/[^/]+\/(?:src|data)\//,
-  /^config\/coconala\/assets\//,
   /^\.(?:claude|agents)\/skills\/(?:[^/]+\/)+examples\//,
   /^contents\/blog\//,
 ];
@@ -139,9 +137,9 @@ export const REGISTRIES = {
     pattern: '^\\s*"([a-z0-9][a-z0-9-]*)":',
   },
   "product-ids": {
-    description: "商品ファクトリーのテーマパック (ALL_PRODUCTS) と Geo サービス (GEO_SERVICE_OFFER) の ID",
-    files: ["packages/product-factory/src/catalog/products/packs.ts", "packages/product-factory/src/channels/geo/service-offer.ts"],
-    pattern: "^\\s*id:\\s*[\"'](P-\\d{2}|GEO-[A-Z]+-\\d{2})[\"']",
+    description: "商品ファクトリーのテーマパック (ALL_PRODUCTS) の ID",
+    files: ["packages/product-factory/src/catalog/products/packs.ts"],
+    pattern: "^\\s*id:\\s*[\"'](P-\\d{2})[\"']",
   },
   "ranking-slug-redirects": {
     description: "公開後に置き換えた旧 ranking slug (RANKING_SLUG_REDIRECTS のキー。現行ページへ 301 する)",
@@ -190,14 +188,6 @@ export const DATASETS = [
   d("config.paths", "config/paths.{name}", "config", "ops", "config", "config/ の置き場の定数 (コードが import する)"),
   d("config.inbound-utm", "config/inbound-utm.{name}", "config", "product", "config", "商品 (Kindle・note) からサイトへ戻るリンクの UTM 規約 (コードが import する)"),
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
-  d("coconala.listings", P.COCONALA_LISTINGS, "config", "product", "config", "ココナラの出品内容と公開状態", {
-    schema: "config/schema/coconala.listings.schema.json",
-    // 出品のキーは商品ファクトリーのカタログ (P-NN) か Geo サービスの商品。孤立したキーは販売カタログが黙って読み飛ばしていた
-    refs: [{ field: "listings.$keys", to: "registry:product-ids" }],
-  }),
-  d("coconala.account", P.COCONALA_ACCOUNT, "config", "product", "config", "ココナラの期待アカウント (account assert)", { schema: "config/schema/coconala.account.schema.json" }),
-  d("coconala.profile", P.COCONALA_PROFILE, "config", "product", "config", "ココナラの公開プロフィール文面"),
-  d("coconala.assets", `${P.COCONALA_ASSETS_DIR}/{name}`, "config", "product", "config", "ココナラのプロフィール・商品画像と生成プロンプト"),
   d("kdp.listings", P.KDP_LISTINGS, "config", "product", "config", "KDP の出品内容と公開・審査状態", { schema: "config/schema/kdp.listings.schema.json" }),
   d("image.routes", "config/image-generation-routes.json", "config", "ops", "config", "AI 画像の生成経路の登録 (未登録の画像 API 呼び出しを止める)", { schema: "config/schema/image-generation-routes.schema.json" }),
   d("kdp.listing-copy", P.KDP_LISTING_COPY, "config", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", { schema: "config/schema/kdp.listing-copy.schema.json" }),
@@ -387,10 +377,13 @@ export const DATASETS = [
     // 販売の観測は出品台帳にある商品だけを指す。CLI の手入力 (sales/cli.ts) は書くときに確かめるが、自動記録と手編集は通らない
     refs: [
       { field: "observations[].productId", where: { channel: "kdp" }, to: "kdp.listings", key: "listings.$keys" },
-      { field: "observations[].productId", where: { channel: "coconala" }, to: "coconala.listings", key: "listings.$keys" },
     ],
   }),
   d("products.strategy", "data/products/product-strategy.json", "ledger", "product", "data", "商品戦略の台帳 (商品群の判断・決定の記録・次の論点。価格と実績は持たない)", { schema: "config/schema/products.strategy.schema.json" }),
+  d("products.note-pack-deliveries", "data/products/note-pack-deliveries.json", "ledger", "product", "data", "note 有料データパックの納品物の固定値 (置き場・manifest の SHA・指標数)。2026-11-08 にココナラの出品台帳から移した", {
+    schema: "config/schema/products.note-pack-deliveries.schema.json",
+    refs: [{ field: "packs.$keys", to: "registry:product-ids" }],
+  }),
   d("products.ledger", "data/products/product-ledger.json", "state", "product", "data", "商品の台帳 (価格・状態・閲覧・売上を既存の記録から集めたもの)"),
   d("products.ledger-summary", "data/products/PRODUCT-LEDGER.md", "report", "product", "data", "商品の台帳の要約 (週次・月次レビューが読む)"),
   d("products.note-cover-urls", "data/products/note-cover-urls.json", "state", "product", "data", "note の販売記事の表紙画像の URL。サイトの商品カードが使う"),

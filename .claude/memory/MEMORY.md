@@ -29,9 +29,8 @@
 - [geo mesh evidence integrity](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
 - [geo publication boundary](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する
 - [business plan adaptation contract](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
-- [kindle publishing factory](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・30%書き下ろし必須。KDPアップロードは人間工程。正典coconala-product-standards.md §8
-- [coconala publish automation](project_coconala_publish_automation.md) — ココナラ出品自動化。アカウントは config で照合、本人プロフィールの ID で確認。価格等は保存後に read-back、警告時は公開しない
-- [coconala withdrawal](project_coconala_withdrawal.md) — 2026-10-19 ココナラ撤退。14件受付休止・計測除外。出品台帳のwithdrawnはnote版公開後(先に変えるとnoteのリンク切れ)
+- [kindle publishing factory](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・30%書き下ろし必須。KDPアップロードは人間工程。正典kindle-publishing-standards.md
+- [coconala withdrawal](project_coconala_withdrawal.md) — 2026-10-19 撤退、11-08 に出品台帳・自動化・agentを削除。note の納品版は note-pack-deliveries.json
 - [coconala product factory](project_coconala_product_factory.md) — 商品設計・公開記録・固定納品版・販売準備を分離。件数はTSとproducts:reportを参照。改訂版上書き・監査による公開state変更を禁止
 - [note product rollout](project_note_product_rollout.md) — 現行パックからnote variantを導出。_delivery固定SHAで非公開revisionを生成し、薄い準備原稿と販売準備完了を区別
 - [periodic progress reports](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)
@@ -164,7 +163,6 @@
 - [zsh word splitting](feedback_zsh_word_splitting.md) — Bash ツールは zsh。未クォート変数が単語に分かれず for/set -- が 1 要素で進む。${=var} か while read、反復後に件数を照合
 - [portfolio keep decision 2026 10](feedback_portfolio_keep_decision_2026_10.md) — 2026-10-11 オーナー判断: SNS・テーマ/Geo/調査・商品は継続。簡素化は系統撤退でなく系統内の未使用・誤報・失敗の是正で行う。消す前に importer を全 workspace で数える
 - [note editor autosave drafts](feedback_note_editor_autosave_drafts.md) — noteエディタは操作を自動保存して下書きを作る。選択確認前にDeleteしない・編集途中で長く待たない。大量操作で公開APIが403
-- [coconala edit needs v2 delivery](feedback_coconala_edit_needs_v2_delivery.md) — ココナラ P-* の --commit 編集は納品版 v2 が .local にある PC でしか通らない。Mac 再生成はハッシュ不一致
 - [windows npm install rolldown binding](feedback_windows_npm_install_rolldown_binding.md) — Windows用Rolldown任意依存のlock欠落。2026-10-20修復済み。再発時は親と同版のlock metadataを照合する
 - [dev streaming hidden dom copies](feedback_dev_streaming_hidden_dom_copies.md) — localhost の DOM 検査は hidden の `body > div[id^="S:"]` に本文の写しが残り件数が 2 倍に見える。可視の木 `body > div.relative` に絞って数える
 - [run full web tests before push](feedback_run_full_web_tests_before_push.md) — 部品・route の変更や別ブランチの取り込み後は、触れた workspace の vitest 全件を push 前に。部分実行で既存テストを見落とし CI を赤にした (2026-10-21 web・10-25 admin)

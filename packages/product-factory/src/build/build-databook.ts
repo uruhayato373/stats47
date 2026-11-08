@@ -1,6 +1,6 @@
 /**
  * データブック商品ビルダー。複数の実データセット (各指標・基準年固定) を 1 商品に束ね、
- * 宣言された formats (xlsx / csv / pdf 等) の成果物を `.local/coconala-products/<id>/<version>/`
+ * 宣言された formats (xlsx / csv / pdf 等) の成果物を `.local/data-packs/<id>/<version>/`
  * に書き出す (git 管理外)。単一デモデータの汎用ビルダー (build-product.ts) とは別経路で、
  * 他 173 商品の挙動は変えない。
  */
@@ -28,7 +28,7 @@ import { reserveProductVersion, type ProductBuildOptions, type ProductBuildResul
 import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
-const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
+const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/data-packs");
 
 const SUPPORTED: ReadonlySet<ProductFormat> = new Set<ProductFormat>(["pptx", "xlsx", "csv", "pdf", "svg", "png"]);
 
@@ -95,10 +95,9 @@ function renderDatabookReadiness(product: ProductDefinition, databook: Databook)
     `- [ ] ${officeCheck}`,
     "- [ ] 各指標の基準年が用途に照らして妥当か（基準年は指標ごとに固定・SOURCES.csv で確認）",
     "- [ ] 単位表記が販売文とデータ（SOURCES.csv / 各シートのヘッダ）で一致しているか目視",
-    "- [ ] ココナラの最新手数料・禁止事項・対応形式（.xlsx / .pdf / .csv）を再確認",
     `- [ ] 価格の最終決定（カタログ想定 ${product.price.initialYen} 円〜）と採算ライン`,
     "- [ ] サムネイル・商品説明文の最終調整",
-    "- [ ] **ココナラへの出品（アップロード）** ← アカウント操作。私（Claude）は実行しません",
+    "- [ ] **note への公開** ← アカウント操作。公開は note-manager がオーナー承認後に行う",
     "",
     "## 免責",
     "- 公的統計の概況整理であり、医療・投資・防災等の意思決定結果を保証しません。",

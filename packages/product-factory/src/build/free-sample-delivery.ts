@@ -1,4 +1,4 @@
-/** Generated pin for the free sample; never a Coconala listing/publication record. */
+/** Generated pin for the free sample; never a publication record. */
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve, sep } from "node:path";
@@ -20,7 +20,7 @@ export function readFreeSampleDelivery(root: string): FreeSampleDelivery | null 
 export function recordFreeSampleDelivery(root: string, directory: string): void {
   // Windows の relative は "\" 区切りを返すので、下の正規表現と split に合わせて "/" に揃える (2026-10-27)
   const relativeDir = relative(resolve(root), resolve(directory)).split(sep).join("/");
-  if (!/^\.local\/coconala-products\/P-13\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(relativeDir)) throw new Error("unsafe free sample directory");
+  if (!/^\.local\/data-packs\/P-13\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(relativeDir)) throw new Error("unsafe free sample directory");
   const bytes = readFileSync(join(directory, "manifest.json"));
   const manifest = JSON.parse(bytes.toString("utf8"));
   if (manifest.productId !== "P-13" || relativeDir.split("/").pop() !== manifest.version) throw new Error("free sample identity mismatch");

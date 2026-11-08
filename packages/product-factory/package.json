@@ -2,7 +2,7 @@
   "name": "@stats47/product-factory",
   "version": "0.0.0",
   "private": true,
-  "description": "ココナラ商品ファクトリー — 14テーマパックの型付きカタログ・生成・検証基盤",
+  "description": "商品ファクトリー — データパック14本 (note) と Kindle 書籍の型付きカタログ・生成・検証基盤",
   "main": "./src/index.ts",
   "dependencies": {
     "@expo-google-fonts/noto-sans-jp": "^0.4.3",
@@ -35,7 +35,6 @@
     "products:geo:plan": "tsx src/channels/geo/cli.ts plan",
     "products:geo:generate": "tsx src/channels/geo/cli.ts generate",
     "products:geo:validate": "tsx src/channels/geo/cli.ts validate",
-    "products:geo:delivery": "tsx src/channels/geo/delivery-cli.ts",
     "products:kindle:plan": "tsx src/channels/kindle/cli.ts plan",
     "products:kindle:validate": "tsx src/channels/kindle/cli.ts validate",
     "products:kindle:generate": "tsx src/channels/kindle/cli.ts generate",

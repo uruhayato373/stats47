@@ -1,5 +1,5 @@
 /**
- * ココナラ商品ファクトリー CLI (Phase 1)。
+ * データパック商品ファクトリー CLI (Phase 1)。
  *
  * 使い方 (workspace 経由):
  *   npm run products:catalog  --workspace=@stats47/product-factory -- --check
@@ -9,12 +9,7 @@
  */
 import { ALL_PRODUCTS } from "./catalog/products";
 import { PACK_META } from "./catalog/packs";
-import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import { validateCatalog, validateListingPrices } from "./validators/catalog-validator";
-import { GEO_SERVICE_OFFER } from "./channels/geo/service-offer";
-import { COCONALA_LISTINGS } from "../../../config/paths.mjs";
+import { validateCatalog } from "./validators/catalog-validator";
 import type { PackTheme } from "./catalog/types";
 
 const argv = process.argv.slice(2);
@@ -35,11 +30,7 @@ function printCatalogSummary(): void {
 }
 
 function runCheck(): number {
-  const catalog = validateCatalog(ALL_PRODUCTS);
-  // 出品台帳の価格が商品定義の範囲に入るか (価格の正本は出品台帳。validateListingPrices の説明)
-  const listings = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../../..", COCONALA_LISTINGS), "utf8")).listings;
-  const priceErrors = validateListingPrices(ALL_PRODUCTS, listings, { [GEO_SERVICE_OFFER.id]: GEO_SERVICE_OFFER.priceYen });
-  const result = { ...catalog, ok: catalog.ok && priceErrors.length === 0, errors: [...catalog.errors, ...priceErrors] };
+  const result = validateCatalog(ALL_PRODUCTS);
   printCatalogSummary();
   if (result.ok) {
     console.log(`\n✅ catalog check: OK (${result.total} products, errors 0)`);
@@ -96,7 +87,7 @@ async function runGenerate(): Promise<number> {
     });
     const skippedFmt = new Set<string>();
     for (const r of results) for (const f of r.skippedFormats) skippedFmt.add(f);
-    console.log(`✅ 全 ${results.length} 商品を生成 → .local/coconala-products/`);
+    console.log(`✅ 全 ${results.length} 商品を生成 → .local/data-packs/`);
     if (skippedFmt.size > 0) console.log(`   未対応形式 (スキップ): ${[...skippedFmt].join(", ")}`);
     return 0;
   }

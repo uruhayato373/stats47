@@ -6,7 +6,7 @@
  */
 
 export type ChannelGroup = "product" | "sns";
-export type ChannelId = "note" | "coconala" | "kindle" | "x" | "instagram";
+export type ChannelId = "note" | "kindle" | "x" | "instagram";
 
 export type ChannelDef = {
   id: ChannelId;
@@ -18,7 +18,6 @@ export type ChannelDef = {
 
 export const CHANNELS: readonly ChannelDef[] = [
   { id: "note", label: "note", href: "/content/note", group: "product" },
-  { id: "coconala", label: "ココナラ", href: "/product/coconala", group: "product" },
   { id: "kindle", label: "Kindle", href: "/content/kindle", group: "product" },
   { id: "x", label: "X", href: "/content/x", group: "sns" },
   { id: "instagram", label: "Instagram", href: "/content/instagram", group: "sns" },

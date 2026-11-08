@@ -23,7 +23,7 @@ function reasonFor(disposition: NoteDisposition, article: NoteArticlePlan): stri
     case "bundle-member":
       return `有料記事「${article.title}」に ${article.memberProductIds.length} 商品を束ねた 1 つ`;
     case "free-lead":
-      return `無料記事「${article.title}」からココナラ受注・有料商品へ誘導`;
+      return `無料記事「${article.title}」から有料商品へ誘導`;
     case "catalog-only":
       return `比較記事「${article.title}」内でのみ扱う (独立記事化しない)`;
   }
@@ -68,7 +68,7 @@ export function buildNoteMappings(
       access: article.access,
       priceJpy: article.priceJpy,
       attachmentProductIds,
-      coconalaProductIds: article.memberProductIds,
+      productIds: article.memberProductIds,
       stats47Targets: article.stats47Targets,
       priority: article.priority,
       reason: reasonFor(disposition, article),

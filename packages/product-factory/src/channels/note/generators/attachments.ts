@@ -1,6 +1,6 @@
 /**
  * attachments.json ジェネレータ (仕様 §10)。
- * 商品 manifest (.local/coconala-products/<id>/<version>/manifest.json) を参照し、
+ * 商品 manifest (.local/data-packs/<id>/<version>/manifest.json) を参照し、
  * ファイルを複製せずに添付メタを組み立てる。有料記事のみ添付を持つ (無料記事は空)。
  */
 import { readFileSync, existsSync } from "node:fs";
@@ -10,7 +10,7 @@ import type { NoteArticlePlan } from "../types";
 import type { ProductDefinition, ProductStatus } from "../../../catalog/types";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
-const COCONALA_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
+const DATA_PACK_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/data-packs");
 
 /** 添付から除外する非成果物 (販売文・プレビュー・台帳)。 */
 const NON_DELIVERABLE_PREFIX = ["listing/", "preview/"];
@@ -57,7 +57,7 @@ interface ProductManifestShape {
 }
 
 export interface ResolveAttachmentsOptions {
-  readonly coconalaRoot?: string;
+  readonly dataPackRoot?: string;
   readonly version?: string;
 }
 
@@ -73,7 +73,7 @@ export function resolveAttachments(
 ): { attachments: NoteAttachment[]; missing: string[] } {
   if (article.access !== "paid") return { attachments: [], missing: [] };
 
-  const root = opts.coconalaRoot ?? COCONALA_ROOT_DEFAULT;
+  const root = opts.dataPackRoot ?? DATA_PACK_ROOT_DEFAULT;
   const version = opts.version ?? "v1";
   const byId = new Map(products.map((p) => [p.id, p]));
   const attachments: NoteAttachment[] = [];
@@ -92,7 +92,7 @@ export function resolveAttachments(
       attachments.push({
         productId: pid,
         version,
-        sourcePath: `.local/coconala-products/${pid}/${version}/`,
+        sourcePath: `.local/data-packs/${pid}/${version}/`,
         filename: "(未生成)",
         sha256: "",
         bytes: 0,
@@ -111,7 +111,7 @@ export function resolveAttachments(
       attachments.push({
         productId: pid,
         version: manifest.version,
-        sourcePath: `.local/coconala-products/${pid}/${manifest.version}/${f.path}`,
+        sourcePath: `.local/data-packs/${pid}/${manifest.version}/${f.path}`,
         filename: f.path,
         sha256: f.sha256,
         bytes: f.bytes,
@@ -133,7 +133,7 @@ export function buildAttachmentsJson(
   const payload = {
     slug: article.slug,
     access: article.access,
-    note: "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+    note: "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/data-packs)。verified=false の添付は実機検証まで販売添付を保留する。",
     attachments,
   };
   return JSON.stringify(payload, null, 2) + "\n";

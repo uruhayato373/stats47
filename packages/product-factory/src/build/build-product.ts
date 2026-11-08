@@ -1,6 +1,6 @@
 /**
  * 汎用 商品ビルダー。商品定義 + データセットから、宣言された formats の成果物を
- * `.local/coconala-products/<id>/<version>/` に書き出す (git 管理外)。
+ * `.local/data-packs/<id>/<version>/` に書き出す (git 管理外)。
  * 共通デモデータで全商品を生成し、形式・枠組み・販売文で差別化する
  * (商品ごとの個別テーマ接続は後段の磨き込み)。
  */
@@ -25,7 +25,7 @@ import { buildInputHash, sha256, type ProductManifest, type ManifestFile } from 
 import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
-const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
+const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/data-packs");
 
 /** exceljs/pptxgenjs/pdf-lib/sharp で生成できる形式。docx / web は Phase 未対応。 */
 const SUPPORTED: ReadonlySet<ProductFormat> = new Set<ProductFormat>(["pptx", "xlsx", "csv", "svg", "png", "pdf"]);

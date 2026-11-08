@@ -1,7 +1,7 @@
 ---
 paths:
   - ".claude/skills/{ads,analytics,management,product,sns,note}/**"
-  - ".claude/agents/{a8-report-collector,affiliate-manager,affiliate-operator,asp-scout,ga4-analyst,gsc-analyst,sns-metrics-sync,strategy-advisor,improvement-triage,note-manager,kdp-operator,coconala-operator,instagram-strategist,x-strategist}.md"
+  - ".claude/agents/{a8-report-collector,affiliate-manager,affiliate-operator,asp-scout,ga4-analyst,gsc-analyst,sns-metrics-sync,strategy-advisor,improvement-triage,note-manager,kdp-operator,instagram-strategist,x-strategist}.md"
   - ".claude/scripts/{measurement,ads,note,gsc,kdp}/**"
   - ".claude/hooks/pre-browser-admin-read.mjs"
   - "data/{authenticated,affiliate,nsm,measurement-cycle,products,gsc,ga4,sns,note,adsense}/**"

@@ -4,7 +4,7 @@ feature: multi-channel-content-product-factory
 created: 2026-07-18
 status: proposed
 owner: product-portfolio-manager
-tags: [収益化, note, KDP, Brain, ココナラ, コンテンツ販売, AI, product-factory]
+tags: [収益化, note, KDP, Brain, コンテンツ販売, AI, product-factory]
 ---
 
 # マルチチャネル・コンテンツ商品ファクトリー仕様
@@ -22,8 +22,8 @@ stats47の公的統計、記事、地図、チャート、Remotion動画、Offic
 目的は「AIで媒体ごとに薄いコンテンツを大量投稿すること」ではない。多数の仮説を低コストで作り、無料反応、
 商品クリック、実売、粗利、サポート負荷を計測し、反応が確認されたテーマと形式だけに人間レビューと制作予算を集中する。
 
-Office・データ商品の生成基盤は `.claude/rules/coconala-product-standards.md` を恒久仕様とする。
-本仕様は1つの商品原料をnote、KDP、Brain、ココナラ等へ変換し、ポートフォリオとして選別する上位仕様である。
+Office・データ商品の生成基盤は `.claude/rules/data-pack-standards.md` を恒久仕様とする。
+本仕様は1つの商品原料をnote、KDP、Brain等へ変換し、ポートフォリオとして選別する上位仕様である。
 
 ## 1. 背景と既存資産
 
@@ -48,7 +48,7 @@ Office・データ商品の生成基盤は `.claude/rules/coconala-product-stand
 - YouTube の通常動画 pilot は商品販売チャネル再開とはみなさない。商品販売を理由に本数・自動化を増やさず、TikTok は撤退を維持する。
 - Instagram/Xは既存頻度ガードを維持し、商品販売のために投稿上限を緩めない。
 - 有料note・KDP・Brain・外部販売は自動公開せず、人間承認を必須にする。
-- ココナラP-01のOffice実機検証を飛ばして商品数を増やさない。
+- データパックP-01のOffice実機検証を飛ばして商品数を増やさない。
 
 ## 2. 目的、成功条件、非目的
 
@@ -98,7 +98,7 @@ Office・データ商品の生成基盤は `.claude/rules/coconala-product-stand
   Brain / 動画講座 / 有料マガジン
     ↓ 個別要望あり
 サービス
-  ココナラ / 相談 / カスタマイズ / 研修
+  相談 / カスタマイズ / 研修
     ↓ 継続需要あり
 B2B
   法人ライセンス / 年次更新 / 調査・制作契約
@@ -164,7 +164,7 @@ B2B
 |---|---|---|---|---|
 | 移住・住宅・人口移動 | ranking/blog/note | 移住チェックPDF、Kindle | 比較Excel、個別レポート | stats47全県データ |
 | 年収・仕事・生活費 | GSC/note | 有料note、Kindle | Excel、キャリア比較資料 | 職種×地域×生活費 |
-| 公務員・自治体AI実務 | note/SNS | 実務note、PDF | Brain、講座、ココナラ、研修 | 元県庁職員経験×実装実績 |
+| 公務員・自治体AI実務 | note/SNS | 実務note、PDF | Brain、講座、研修 | 元県庁職員経験×実装実績 |
 
 医療、防災、治安、教育評価は高sensitivityとして初期販売対象から除外し、別審査を通す。
 
@@ -251,18 +251,10 @@ KDP固有gate:
 誇大的な収益表示、誰でも再現できるという断定、架空実績、過度なaffiliate報酬は使用しない。
 販売手数料、紹介制度、審査、返金条件は公開時にBrain販売者規約で再確認する。
 
-### 4.4 ココナラ
+### 4.4 ココナラ（撤退済み）
 
-`packages/product-factory/src/catalog/`の商品カタログを再利用する。
-
-- 完成品: PPTX/XLSX/PDF/CSV。
-- カスタマイズ: 色、県、業界、指標。
-- 分析代行: 顧客データと公開統計。
-- 制作代行: 記事、資料、SNS、動画。
-- 相談: 生成AI、行政統計、データ可視化。
-
-無料note/Kindle/Brainから「自分で作るのが難しい人」をココナラへ接続する。ココナラ商品説明に他媒体の全文を
-複製せず、納品物、修正回数、必要入力、非対応、納期、商用条件を明示する。
+2026-10-19 に撤退し、2026-11-08 に出品台帳・出品自動化・担当 agent を削除した。データパックは note で売る
+（`.claude/rules/data-pack-standards.md`）。地図・資料の受注を再開するかは収益化戦略の未決事項として扱う。
 
 ### 4.5 BOOTH / Gumroad / 自社販売
 
@@ -318,7 +310,7 @@ packages/product-factory/src/content-products/
 ```ts
 type Channel =
   | "stats47" | "note-free" | "note-paid" | "note-magazine"
-  | "kdp-ebook" | "kdp-paperback" | "brain" | "coconala"
+  | "kdp-ebook" | "kdp-paperback" | "brain"
   | "booth" | "gumroad" | "udemy" | "b2b";
 
 type ContentProductDefinition = {
@@ -381,7 +373,6 @@ type AiContentPolicy = {
 │   ├── note/
 │   ├── kdp/{manuscript,cover,metadata}/
 │   ├── brain/
-│   ├── coconala/
 │   └── files/
 ├── quality/
 │   ├── automated.json
@@ -492,7 +483,7 @@ type AiContentPolicy = {
 Kindle: 背景から複数ケースまで体系化
 Brain: 読者自身が再現する手順
 Excel/PPT: 作業を即時短縮
-ココナラ: 個別条件へ適用
+（受注チャネルは撤退済み）
 ```
 
 ### 7.5 Scale / Stop
@@ -643,7 +634,7 @@ Verdict: PASS | REVISE | BLOCK | ESCALATE-HUMAN.
 
 ## 10. gallery統合
 
-`apps/admin`に`/products`を追加する。ココナラ専用画面ではなく全channelのportfolio consoleとする。
+`apps/admin`に`/products`を追加する。チャネル専用画面ではなく全channelのportfolio consoleとする。
 
 ### 10.1 view
 
@@ -695,7 +686,7 @@ npm run products:content:report -- --month YYYY-MM
 
 ### 12.2 Integration
 
-- 1bundleからnote/KDP/Brain/coconala draftを生成。
+- 1bundleからnote/KDP/Brain draftを生成。
 - 媒体間でpromiseは一致し、本文は同文複製にならない。
 - product-factoryのPPTX/PDFをoffer deliverableとして参照。
 - sales export fixtureを個人情報なしでledgerへ取込。
@@ -780,7 +771,7 @@ Phaseを飛ばさない。複数channelを同時pilotしない。
 
 - Phase 0-2。
 - 3 verticalの無料需要と既存実績を集計。
-- ココナラP-01をOffice実機確認。
+- データパックP-01をOffice実機確認。
 - note pilot候補を1件選定。
 
 ### 31〜60日
@@ -793,7 +784,6 @@ Phaseを飛ばさない。複数channelを同時pilotしない。
 
 - noteをscale/hold/stop判定。
 - 売れた/質問が強い場合だけKDPまたはBrainのどちらか1つを公開候補へ。
-- ココナラはP-01実機green後に1商品だけ出品候補。
 - 月次reviewで次quarter配分を決定。
 
 ## 15. 初期商品カタログ案
@@ -806,7 +796,7 @@ Phaseを飛ばさない。複数channelを同時pilotしない。
 | MCP-INC-001 | 年収 | 年収だけでは選べない県比較 | 有料note | Kindle、生活費Excel |
 | MCP-INC-002 | 年収 | 職種別地域差 | PDF/CSV | キャリア比較資料、受託 |
 | MCP-INC-003 | 生活費 | 家賃×所得×物価 | Kindle | 移住Excel、住宅B2B |
-| MCP-AI-001 | 行政AI | Excel集計短縮の実例 | 実務note | Brain、ココナラ相談 |
+| MCP-AI-001 | 行政AI | Excel集計短縮の実例 | 実務note | Brain、相談 |
 | MCP-AI-002 | 行政AI | e-Stat資料自動化 | PDF/checklist | 講座、研修 |
 | MCP-AI-003 | 行政AI | DBレス統計サイトの構成 | 技術note | Brain、法人設計支援 |
 
@@ -865,7 +855,7 @@ OUTPUT FORMAT:
 未検証を完了と書かず、各結果にファイルまたはコマンドを付ける。
 
 BEHAVIOR CONTRACT:
-- .claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md のPhase 0だけを実施する。
+- .claude/skills/product/build-data-pack/reference/multi-channel-content-product-factory.md のPhase 0だけを実施する。
 - 実装、商品生成、外部アクセス、R2 write、公開、出品、git push、deployに進まない。
 - 既存未コミット変更を保護し、関連変更も所有者確認なしに編集しない。
 - 永続D1を追加しない。
@@ -885,8 +875,8 @@ MODEL ROUTING:
 必読:
 - CLAUDE.md
 - docs/00_プロジェクト管理/02_収益化戦略.md
-- .claude/rules/coconala-product-standards.md
-- .claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md
+- .claude/rules/data-pack-standards.md
+- .claude/skills/product/build-data-pack/reference/multi-channel-content-product-factory.md
 - docs/30_note記事企画/note戦略.md
 - .claude/scripts/note/catalog/README.md
 - .claude/rules/{data-storage,docs-vs-issues,agent-output-contract,evidence-based-judgment,branch-workflow}.md

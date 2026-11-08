@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * kdp-publish.mjs — KDP 電子書籍を kdp-listings.json の内容から出品する Playwright オペレータ (単発)。
- * coconala-publish.mjs と同じ安全弁 (account assert / draft-first / --commit gate / 偽成功を報告しない)。
+ * 安全弁 (account assert / draft-first / --commit gate / 偽成功を報告しない)。
  *
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --probe     # 出品フォームの構造を dump (セレクタ調整用・書き込みなし)
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01             # 下書きを完成させる (既定・冪等)

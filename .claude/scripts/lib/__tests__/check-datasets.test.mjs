@@ -11,7 +11,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, REGISTRIES, REGISTRY_REFS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
-import { COCONALA_LISTINGS, DOMAINS, KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { DOMAINS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, refValues, retiredHits, selectPath } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 import { assertDatasetShape } from "../dataset-shape.mjs";
@@ -421,20 +421,20 @@ test("実リポジトリの台帳の参照は error 0 件 (warn は理由を宣�
   for (const w of result.warnings) assert.ok(warnRefs.some(([id, field]) => w.includes(`${id} `) && w.includes(` の ${field}=`)), w);
 });
 
-test("4 つの台帳参照が宣言されている (投稿→指標・販売→出品・出品→商品カタログ・投稿→投稿) と広告の実験", () => {
+test("台帳参照が宣言されている (投稿→指標・販売→出品・納品版→商品カタログ・投稿→投稿) と広告の実験", () => {
   const refsOf = (id) => DATASETS.find((d) => d.id === id)?.refs ?? [];
   assert.ok(refsOf("sns.posts").some((r) => r.field === "posts[].metric_keys" && r.to === "registry:metrics"));
   assert.ok(refsOf("sns.posts").some((r) => r.field === "posts[].parent_post_id" && r.to === "sns.posts" && !r.severity));
-  assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["coconala.listings", "kdp.listings"]);
+  assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["kdp.listings"]);
   assert.ok(refsOf("sales.ledger").every((r) => !r.severity));
-  assert.ok(refsOf("coconala.listings").some((r) => r.to === "registry:product-ids" && !r.severity));
+  assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "registry:product-ids" && !r.severity));
   assert.ok(REGISTRY_REFS.some((r) => r.to === "affiliate.experiments" && !r.severity));
 });
 
 test("[mutation] 厳格化した schema は知らない項目と語彙外の値を落とす", () => {
-  const files = [KDP_LISTINGS, COCONALA_LISTINGS, datasetPath("sales.ledger")];
+  const files = [KDP_LISTINGS, datasetPath("products.note-pack-deliveries"), datasetPath("sales.ledger")];
   const store = Object.fromEntries(files.map((f) => [f, JSON.parse(readFileSync(resolve(ROOT, f), "utf8"))]));
-  const rows = DATASETS.filter((d) => ["kdp.listings", "coconala.listings", "sales.ledger"].includes(d.id));
+  const rows = DATASETS.filter((d) => ["kdp.listings", "products.note-pack-deliveries", "sales.ledger"].includes(d.id));
   const run = () =>
     checkSchemas({ datasets: rows, files, readJson: (p) => store[p] ?? JSON.parse(readFileSync(resolve(ROOT, p), "utf8")), exists: (p) => existsSync(resolve(ROOT, p)) });
   assert.deepEqual(run(), []);
@@ -442,9 +442,10 @@ test("[mutation] 厳格化した schema は知らない項目と語彙外の値�
   kdp.unknownField = true;
   assert.match(run().join("\n"), /kdp\.listings: .* が schema に合わない/);
   delete kdp.unknownField;
-  store[COCONALA_LISTINGS].listings["P-01"].status = "paused";
-  assert.match(run().join("\n"), /coconala\.listings: .* が schema に合わない/);
-  store[COCONALA_LISTINGS].listings["P-01"].status = "withdrawn";
+  const deliveries = store[datasetPath("products.note-pack-deliveries")].packs["P-01"]._delivery;
+  deliveries.officeValidation = "unknown";
+  assert.match(run().join("\n"), /products\.note-pack-deliveries: .* が schema に合わない/);
+  deliveries.officeValidation = "owner-pending";
   store[datasetPath("sales.ledger")].observations[0].channel = "booth";
   assert.match(run().join("\n"), /sales\.ledger: .* が schema に合わない/);
   store[datasetPath("sales.ledger")].observations[0].channel = "kdp";

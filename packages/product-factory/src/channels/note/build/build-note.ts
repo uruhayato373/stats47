@@ -21,7 +21,7 @@ export const NOTE_OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/note-products");
 
 export interface NoteBuildOptions {
   readonly outRoot?: string;
-  readonly coconalaRoot?: string;
+  readonly dataPackRoot?: string;
   readonly version?: string;
 }
 
@@ -49,11 +49,11 @@ export function buildNoteArticle(
   mkdirSync(outDir, { recursive: true });
 
   const { attachments, missing } = resolveAttachments(article, products, {
-    coconalaRoot: opts.coconalaRoot,
+    dataPackRoot: opts.dataPackRoot,
     version: opts.version,
   });
   const provenance = resolveProvenance(article, products, {
-    coconalaRoot: opts.coconalaRoot,
+    dataPackRoot: opts.dataPackRoot,
     version: opts.version,
   });
   const draft = renderDraft(article, products, attachments, provenance);

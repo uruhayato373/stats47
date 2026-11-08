@@ -90,13 +90,6 @@ export const NOTE_SERIES_REGISTRY: Readonly<Record<NoteProductSeries, NoteSeries
     themes: themesFor("life-area-comparison"),
     defaultStats47Targets: ["/areas", "/compare"],
   },
-  "custom-analysis-services": {
-    key: "custom-analysis-services",
-    name: "個別制作サービスの選び方・事例",
-    audience: "法人",
-    themes: themesFor("custom-analysis-services"),
-    defaultStats47Targets: ["/", "/ranking"],
-  },
   "license-guide": {
     key: "license-guide",
     name: "ライセンス・版の違いガイド",

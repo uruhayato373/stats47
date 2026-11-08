@@ -37,7 +37,7 @@
       "id": "product",
       "label": "商品",
       "role": "売る",
-      "manages": "行政資料・note・Kindle・ココナラ・売上・商品品質",
+      "manages": "行政資料・note・Kindle・売上・商品品質",
       "nav": [
         { "label": "販売状態", "href": "/product/status", "kind": "actions" },
         { "label": "note 商品企画", "href": "/product/note-plan", "kind": "inventory" },
@@ -151,7 +151,7 @@
   "navRules": [
     "サイドメニューは各領域の判断に使う画面だけを置く（種類は navKinds）",
     "並びは役割の順（決める → 売る → 集める → つくる → 支える）。domains の並びがそのままメニューの並びになる",
-    "チャネル（note・ココナラ・Kindle・X・Instagram）は最上位に並べず、商品・SNS の「チャネル別」の枝に入れる（中身は apps/admin/lib/channel-registry.ts から作る）",
+    "チャネル（note・Kindle・X・Instagram）は最上位に並べず、商品・SNS の「チャネル別」の枝に入れる（中身は apps/admin/lib/channel-registry.ts から作る）",
     "既存の URL は変えない。新しい画面は /<領域 id>/… に作る",
     "横断する視点（計測・品質・動線）は独立した領域にせず、対象の領域に割り振る",
     "領域の概要はグループ名から開く（/domains/<id>。判断に使う画面・構え・タスク・担当・文書を 1 画面に）",

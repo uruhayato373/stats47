@@ -120,7 +120,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `survey-content-standards.md` | survey ハブの編集コンテンツ | features/survey・skills/survey |
 | `ranking-content-standards.md` | ランキング AI 解説の生成パイプライン (都道府県専用) | packages/ai-content・scripts/ai-content |
 | `affiliate-ads-standards.md` | アフィリエイト広告 (vertical ハブ・配置・ASP 運用・計測) | features/ads・scripts/ads・skills/ads |
-| `coconala-product-standards.md` | ココナラ / Kindle / note 商品ファクトリー | packages/product-factory・skills/product |
+| `data-pack-standards.md` | データパック (P-01〜P-14) の生成と note 販売 | product-factory の catalog・build・note チャネル・skills/product/build-data-pack |
+| `kindle-publishing-standards.md` | Kindle 書籍の生成・検証と KDP 出品 | product-factory の kindle チャネル・scripts/kdp・skills の kindle/kdp |
 | `branch-workflow.md` | PR・デプロイ・DB データ反映 (develop→main・skip-ci トークン・main 同期) | .github・.husky・skills/dev/deploy |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド・Windows の罠 | package.json・turbo.json・dev-server |
 | `docs-vs-issues.md` | 文書作成・配置・整理・削除と docs / skill / state / Issues の使い分け (文書変更時必読) | docs・.claude/todo・skills/management |
@@ -130,7 +131,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `model-prompting.md` | Claude モデル別の task capsule・effort・委譲設計 | .claude/agents・skills の SKILL.md |
 | `critic-review-protocol.md` | critic 系 agent のレビュー共通プロトコル | agents/*-critic・review.md |
 | `codex-mcp.md` | Claude Code から codex MCP を呼ぶとき (セカンドオピニオン・画像生成) | skills/blog/generate-blog-images・.mcp.json |
-| `browser-use-cleanup.md` | browser-use を使うスキル (daemon 停止 + タブクローズ) | scripts/note・coconala・kdp |
+| `browser-use-cleanup.md` | browser-use を使うスキル (daemon 停止 + タブクローズ) | scripts/note・kdp |
 
 ### コアドキュメント
 
