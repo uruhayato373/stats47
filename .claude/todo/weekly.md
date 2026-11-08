@@ -154,8 +154,12 @@ W45 のレビューは 11-14 に書く。ここでは計画の checkbox と back
 
 ### 🔴 の扱い
 
-🔴 は 12 枚で上限 10 を超えている (月次計画の時点では 8 枚。その後に増えた)。今週の Must は上位 2 枚 (`MEASUREMENT-MAC-DIRECT-01`・製造品出荷額の商品) を含む。
-3 番目の `IA-REGION-THEME-01` は W44 に計画外で 2〜5 段目を実装済みで、重点外なので今週は Must にしない。11-14 のレビューで、🔴 を 10 枚以下へ下げる対象を挙げる。
+🔴 は 11-09 の朝に 12 枚で上限 10 を超えていた。下げずに片付ける方針で、11-09 のうちに 4 枚を完了して消した (8 枚)。
+`KDP-OLD-EDITIONS-UNPUBLISH-01` (旧版 9 冊が HTTP 404)・`MUNI-DATA-PRODUCT-SALE-01` (EXP-007 を running へ)・
+`IMAGE-ROUTES-CATEGORY-CODEX-01` (カテゴリ画像を Codex の経路へ)・`KDP-LISTING-WIRING-01` (紹介文の CI と公開の検査・表紙の縮小確認。
+表紙の「47都道府県」の扱いは判断待ちの `KDP-COVER-47PREF-DECISION-01` へ分けた)。
+残る 8 枚のうち、オーナーの承認が無いと終わらないのは `PRODUCT-REFERRAL-MEASURE-01` (本番反映)・`IA-REGION-THEME-01` (全国テーマの R2 push とデプロイ)・
+`AI-CONTENT-GEMINI-KEY-01` (日次量産の起動)・`DATA-PACK-BUNDLE-01` (note の添付の差し替え)・`KDP-LISTING-COPY-01` (KDP の反映と 4 週の記録)。
 
 ## オーナー作業
 
