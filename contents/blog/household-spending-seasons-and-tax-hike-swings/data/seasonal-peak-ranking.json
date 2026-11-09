@@ -1,0 +1,78 @@
+{
+  "chartType": "bar",
+  "title": "月ごとの山が高い品目・低い品目",
+  "subtitle": "最も多い月の支出（年平均の月を100とした指数）",
+  "unit": "指数",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "私立大学（4月）",
+      "value": 327,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 2,
+      "areaName": "寄付金（12月）",
+      "value": 280,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 3,
+      "areaName": "チョコレート（2月）",
+      "value": 246,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 4,
+      "areaName": "エアコン（7月）",
+      "value": 242,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 5,
+      "areaName": "ケーキ（12月）",
+      "value": 229,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 6,
+      "areaName": "住宅関係負担費（10月）",
+      "value": 104,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 7,
+      "areaName": "ヨーグルト（5月）",
+      "value": 104,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 8,
+      "areaName": "新聞（3月）",
+      "value": 103,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 9,
+      "areaName": "インターネット接続料（11月）",
+      "value": 102,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    },
+    {
+      "rank": 10,
+      "areaName": "民営家賃（10月）",
+      "value": 102,
+      "unit": "指数",
+      "label": "季節の山の高さ"
+    }
+  ]
+}

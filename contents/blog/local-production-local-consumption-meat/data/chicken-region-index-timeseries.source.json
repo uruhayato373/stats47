@@ -1,0 +1,29 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "chicken-consumption-quantity",
+      "year": "2020"
+    },
+    {
+      "rankingKey": "total-population",
+      "year": "2020"
+    },
+    {
+      "statsDataId": "0002006790",
+      "time": "2020"
+    }
+  ],
+  "formula": "産出の濃さ = 地方内の都道府県の産出額シェアの合計 ÷ 地方内の人口シェアの合計 ×100。購入量 = 地方内の県庁所在市の購入量の単純平均 ÷ 47市の単純平均 ×100。沖縄県は九州に含める。秘匿の県(秋田県、山形県、栃木県、埼玉県、滋賀県、奈良県)は産出を0として合計しており、その地方の産出の濃さは過小になる",
+  "generatedBy": "contents/blog/local-production-local-consumption-meat/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    },
+    {
+      "label": "生産農業所得統計",
+      "url": "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0002006790"
+    }
+  ]
+}

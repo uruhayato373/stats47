@@ -1,0 +1,1772 @@
+{
+  "year": 2020,
+  "population": "total-population 2020",
+  "meats": {
+    "牛肉": {
+      "spearman": {
+        "qLQ": -0.27,
+        "eLQ": -0.27,
+        "pLQ": -0.18,
+        "qShare": -0.35,
+        "eShare": -0.34,
+        "pShare": -0.19
+      },
+      "permP": {
+        "qLQ": 0.071,
+        "eLQ": 0.062,
+        "pLQ": 0.213,
+        "qShare": 0.017
+      },
+      "avg3yr": {
+        "qLQ": -0.3,
+        "eLQ": -0.28
+      },
+      "byYearQtyLQ": [
+        {
+          "year": 2007,
+          "value": -0.18
+        },
+        {
+          "year": 2008,
+          "value": -0.3
+        },
+        {
+          "year": 2009,
+          "value": -0.15
+        },
+        {
+          "year": 2010,
+          "value": -0.15
+        },
+        {
+          "year": 2011,
+          "value": -0.24
+        },
+        {
+          "year": 2012,
+          "value": -0.23
+        },
+        {
+          "year": 2013,
+          "value": -0.23
+        },
+        {
+          "year": 2014,
+          "value": -0.27
+        },
+        {
+          "year": 2015,
+          "value": -0.28
+        },
+        {
+          "year": 2016,
+          "value": -0.23
+        },
+        {
+          "year": 2017,
+          "value": -0.18
+        },
+        {
+          "year": 2018,
+          "value": -0.17
+        },
+        {
+          "year": 2019,
+          "value": -0.26
+        },
+        {
+          "year": 2020,
+          "value": -0.27
+        },
+        {
+          "year": 2021,
+          "value": -0.31
+        },
+        {
+          "year": 2022,
+          "value": -0.31
+        },
+        {
+          "year": 2023,
+          "value": -0.23
+        },
+        {
+          "year": 2024,
+          "value": -0.31
+        },
+        {
+          "year": 2025,
+          "value": -0.26
+        }
+      ],
+      "byYearQtyShare": [
+        {
+          "year": 2007,
+          "value": -0.29
+        },
+        {
+          "year": 2008,
+          "value": -0.38
+        },
+        {
+          "year": 2009,
+          "value": -0.23
+        },
+        {
+          "year": 2010,
+          "value": -0.23
+        },
+        {
+          "year": 2011,
+          "value": -0.28
+        },
+        {
+          "year": 2012,
+          "value": -0.29
+        },
+        {
+          "year": 2013,
+          "value": -0.31
+        },
+        {
+          "year": 2014,
+          "value": -0.34
+        },
+        {
+          "year": 2015,
+          "value": -0.32
+        },
+        {
+          "year": 2016,
+          "value": -0.27
+        },
+        {
+          "year": 2017,
+          "value": -0.26
+        },
+        {
+          "year": 2018,
+          "value": -0.28
+        },
+        {
+          "year": 2019,
+          "value": -0.33
+        },
+        {
+          "year": 2020,
+          "value": -0.35
+        },
+        {
+          "year": 2021,
+          "value": -0.34
+        },
+        {
+          "year": 2022,
+          "value": -0.37
+        },
+        {
+          "year": 2023,
+          "value": -0.31
+        },
+        {
+          "year": 2024,
+          "value": -0.31
+        },
+        {
+          "year": 2025,
+          "value": -0.27
+        }
+      ],
+      "topProducers": [
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "sharePct": 16.8,
+          "lq": 13.34,
+          "qtyG": 6328,
+          "qtyRank": 34,
+          "qtyIndex": 85,
+          "expYen": 25202,
+          "expRank": 22,
+          "pricePer100g": 398.3
+        },
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "sharePct": 14,
+          "lq": 3.38,
+          "qtyG": 6823,
+          "qtyRank": 31,
+          "qtyIndex": 91,
+          "expYen": 16039,
+          "expRank": 38,
+          "pricePer100g": 235.1
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "sharePct": 10.3,
+          "lq": 12.15,
+          "qtyG": 7546,
+          "qtyRank": 24,
+          "qtyIndex": 101,
+          "expYen": 24180,
+          "expRank": 24,
+          "pricePer100g": 320.4
+        },
+        {
+          "pref": "熊本県",
+          "city": "熊本市",
+          "sharePct": 5.8,
+          "lq": 4.21,
+          "qtyG": 8814,
+          "qtyRank": 13,
+          "qtyIndex": 118,
+          "expYen": 28165,
+          "expRank": 14,
+          "pricePer100g": 319.5
+        },
+        {
+          "pref": "岩手県",
+          "city": "盛岡市",
+          "sharePct": 3.8,
+          "lq": 3.96,
+          "qtyG": 4320,
+          "qtyRank": 46,
+          "qtyIndex": 58,
+          "expYen": 11327,
+          "expRank": 46,
+          "pricePer100g": 262.2
+        }
+      ],
+      "topConsumers": [
+        {
+          "pref": "京都府",
+          "city": "京都市",
+          "qtyG": 10831,
+          "sharePct": 0.2,
+          "shareRank": 40,
+          "lq": 0.1
+        },
+        {
+          "pref": "広島県",
+          "city": "広島市",
+          "qtyG": 10648,
+          "sharePct": 1,
+          "shareRank": 25.5,
+          "lq": 0.45
+        },
+        {
+          "pref": "山口県",
+          "city": "山口市",
+          "qtyG": 10128,
+          "sharePct": 0.7,
+          "shareRank": 32.5,
+          "lq": 0.66
+        },
+        {
+          "pref": "山形県",
+          "city": "山形市",
+          "qtyG": 9894,
+          "sharePct": 1.7,
+          "shareRank": 16.5,
+          "lq": 2.01
+        },
+        {
+          "pref": "奈良県",
+          "city": "奈良市",
+          "qtyG": 9762,
+          "sharePct": 0.2,
+          "shareRank": 40,
+          "lq": 0.19
+        }
+      ],
+      "nPrefectures": 47,
+      "excluded": [],
+      "nationalMeanQtyG": 7471,
+      "halves": {
+        "東日本（三重県以東）": {
+          "n": 24,
+          "spearmanQtyLQ": -0.43
+        },
+        "西日本（滋賀県以西）": {
+          "n": 23,
+          "spearmanQtyLQ": -0.61
+        }
+      },
+      "priceMean100g": 320.2,
+      "priceCheapest": [
+        [
+          "那覇市",
+          215.8
+        ],
+        [
+          "札幌市",
+          235.1
+        ],
+        [
+          "青森市",
+          243.3
+        ]
+      ],
+      "priceDearest": [
+        [
+          "大津市",
+          434.3
+        ],
+        [
+          "奈良市",
+          414.3
+        ],
+        [
+          "鹿児島市",
+          398.3
+        ]
+      ],
+      "topProducerPriceRank": [
+        [
+          "鹿児島市",
+          398.3,
+          45
+        ],
+        [
+          "札幌市",
+          235.1,
+          2
+        ],
+        [
+          "宮崎市",
+          320.4,
+          25
+        ],
+        [
+          "熊本市",
+          319.5,
+          24
+        ],
+        [
+          "盛岡市",
+          262.2,
+          7
+        ]
+      ],
+      "topLQ": [
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "lq": 13.34,
+          "sharePct": 16.8,
+          "qtyG": 6328,
+          "qtyRank": 34
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "lq": 12.15,
+          "sharePct": 10.3,
+          "qtyG": 7546,
+          "qtyRank": 24
+        },
+        {
+          "pref": "熊本県",
+          "city": "熊本市",
+          "lq": 4.21,
+          "sharePct": 5.8,
+          "qtyG": 8814,
+          "qtyRank": 13
+        },
+        {
+          "pref": "岩手県",
+          "city": "盛岡市",
+          "lq": 3.96,
+          "sharePct": 3.8,
+          "qtyG": 4320,
+          "qtyRank": 46
+        },
+        {
+          "pref": "佐賀県",
+          "city": "佐賀市",
+          "lq": 3.73,
+          "sharePct": 2.4,
+          "qtyG": 9525,
+          "qtyRank": 7
+        },
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "lq": 3.38,
+          "sharePct": 14,
+          "qtyG": 6823,
+          "qtyRank": 31
+        },
+        {
+          "pref": "長崎県",
+          "city": "長崎市",
+          "lq": 3.27,
+          "sharePct": 3.4,
+          "qtyG": 6717,
+          "qtyRank": 32
+        }
+      ],
+      "mean2019": 6671,
+      "mean2020": 7471,
+      "nationalMeanExpYen": 24286,
+      "totalShare": 100.2
+    },
+    "豚肉": {
+      "spearman": {
+        "qLQ": 0.21,
+        "eLQ": -0.06,
+        "pLQ": -0.45,
+        "qShare": 0.4,
+        "eShare": 0.15,
+        "pShare": -0.52
+      },
+      "permP": {
+        "qLQ": 0.147,
+        "eLQ": 0.677,
+        "pLQ": 0.002,
+        "qShare": 0.006
+      },
+      "avg3yr": {
+        "qLQ": 0.16,
+        "eLQ": -0.12
+      },
+      "byYearQtyLQ": [
+        {
+          "year": 2007,
+          "value": 0.23
+        },
+        {
+          "year": 2008,
+          "value": 0.23
+        },
+        {
+          "year": 2009,
+          "value": 0.28
+        },
+        {
+          "year": 2010,
+          "value": 0.24
+        },
+        {
+          "year": 2011,
+          "value": 0.05
+        },
+        {
+          "year": 2012,
+          "value": 0.24
+        },
+        {
+          "year": 2013,
+          "value": 0.05
+        },
+        {
+          "year": 2014,
+          "value": 0.03
+        },
+        {
+          "year": 2015,
+          "value": 0.05
+        },
+        {
+          "year": 2016,
+          "value": 0.1
+        },
+        {
+          "year": 2017,
+          "value": 0.19
+        },
+        {
+          "year": 2018,
+          "value": 0
+        },
+        {
+          "year": 2019,
+          "value": 0.25
+        },
+        {
+          "year": 2020,
+          "value": 0.21
+        },
+        {
+          "year": 2021,
+          "value": -0.05
+        },
+        {
+          "year": 2022,
+          "value": 0.23
+        },
+        {
+          "year": 2023,
+          "value": 0.17
+        },
+        {
+          "year": 2024,
+          "value": 0.14
+        },
+        {
+          "year": 2025,
+          "value": -0.03
+        }
+      ],
+      "byYearQtyShare": [
+        {
+          "year": 2007,
+          "value": 0.39
+        },
+        {
+          "year": 2008,
+          "value": 0.41
+        },
+        {
+          "year": 2009,
+          "value": 0.49
+        },
+        {
+          "year": 2010,
+          "value": 0.36
+        },
+        {
+          "year": 2011,
+          "value": 0.2
+        },
+        {
+          "year": 2012,
+          "value": 0.43
+        },
+        {
+          "year": 2013,
+          "value": 0.19
+        },
+        {
+          "year": 2014,
+          "value": 0.23
+        },
+        {
+          "year": 2015,
+          "value": 0.27
+        },
+        {
+          "year": 2016,
+          "value": 0.29
+        },
+        {
+          "year": 2017,
+          "value": 0.36
+        },
+        {
+          "year": 2018,
+          "value": 0.18
+        },
+        {
+          "year": 2019,
+          "value": 0.38
+        },
+        {
+          "year": 2020,
+          "value": 0.4
+        },
+        {
+          "year": 2021,
+          "value": 0.14
+        },
+        {
+          "year": 2022,
+          "value": 0.37
+        },
+        {
+          "year": 2023,
+          "value": 0.29
+        },
+        {
+          "year": 2024,
+          "value": 0.25
+        },
+        {
+          "year": 2025,
+          "value": 0.15
+        }
+      ],
+      "topProducers": [
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "sharePct": 13,
+          "lq": 10.33,
+          "qtyG": 21365,
+          "qtyRank": 32,
+          "qtyIndex": 95,
+          "expYen": 31748,
+          "expRank": 27,
+          "pricePer100g": 148.6
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "sharePct": 7.9,
+          "lq": 9.32,
+          "qtyG": 23356,
+          "qtyRank": 17,
+          "qtyIndex": 104,
+          "expYen": 33292,
+          "expRank": 17,
+          "pricePer100g": 142.5
+        },
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "sharePct": 7.8,
+          "lq": 1.88,
+          "qtyG": 27546,
+          "qtyRank": 1,
+          "qtyIndex": 122,
+          "expYen": 36333,
+          "expRank": 3,
+          "pricePer100g": 131.9
+        },
+        {
+          "pref": "群馬県",
+          "city": "前橋市",
+          "sharePct": 7,
+          "lq": 4.55,
+          "qtyG": 21802,
+          "qtyRank": 29,
+          "qtyIndex": 97,
+          "expYen": 31071,
+          "expRank": 29,
+          "pricePer100g": 142.5
+        },
+        {
+          "pref": "千葉県",
+          "city": "千葉市",
+          "sharePct": 6.8,
+          "lq": 1.36,
+          "qtyG": 24343,
+          "qtyRank": 11,
+          "qtyIndex": 108,
+          "expYen": 34358,
+          "expRank": 10,
+          "pricePer100g": 141.1
+        }
+      ],
+      "topConsumers": [
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "qtyG": 27546,
+          "sharePct": 7.8,
+          "shareRank": 3,
+          "lq": 1.88
+        },
+        {
+          "pref": "神奈川県",
+          "city": "横浜市",
+          "qtyG": 27465,
+          "sharePct": 0.8,
+          "shareRank": 27,
+          "lq": 0.11
+        },
+        {
+          "pref": "新潟県",
+          "city": "新潟市",
+          "qtyG": 26834,
+          "sharePct": 2.1,
+          "shareRank": 14,
+          "lq": 1.2
+        },
+        {
+          "pref": "山形県",
+          "city": "山形市",
+          "qtyG": 25658,
+          "sharePct": 2.1,
+          "shareRank": 14,
+          "lq": 2.48
+        },
+        {
+          "pref": "山梨県",
+          "city": "甲府市",
+          "qtyG": 25511,
+          "sharePct": 0.2,
+          "shareRank": 39.5,
+          "lq": 0.31
+        }
+      ],
+      "nPrefectures": 47,
+      "excluded": [],
+      "nationalMeanQtyG": 22561,
+      "halves": {
+        "東日本（三重県以東）": {
+          "n": 24,
+          "spearmanQtyLQ": -0.11
+        },
+        "西日本（滋賀県以西）": {
+          "n": 23,
+          "spearmanQtyLQ": 0.29
+        }
+      },
+      "priceMean100g": 143.3,
+      "priceCheapest": [
+        [
+          "新潟市",
+          126.4
+        ],
+        [
+          "盛岡市",
+          127
+        ],
+        [
+          "青森市",
+          130.8
+        ]
+      ],
+      "priceDearest": [
+        [
+          "東京都区部",
+          162.8
+        ],
+        [
+          "徳島市",
+          160.8
+        ],
+        [
+          "神戸市",
+          159
+        ]
+      ],
+      "topProducerPriceRank": [
+        [
+          "鹿児島市",
+          148.6,
+          37
+        ],
+        [
+          "宮崎市",
+          142.5,
+          24
+        ],
+        [
+          "札幌市",
+          131.9,
+          4
+        ],
+        [
+          "前橋市",
+          142.5,
+          23
+        ],
+        [
+          "千葉市",
+          141.1,
+          18
+        ]
+      ],
+      "topLQ": [
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "lq": 10.33,
+          "sharePct": 13,
+          "qtyG": 21365,
+          "qtyRank": 32
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "lq": 9.32,
+          "sharePct": 7.9,
+          "qtyG": 23356,
+          "qtyRank": 17
+        },
+        {
+          "pref": "岩手県",
+          "city": "盛岡市",
+          "lq": 5,
+          "sharePct": 4.8,
+          "qtyG": 23181,
+          "qtyRank": 18
+        },
+        {
+          "pref": "群馬県",
+          "city": "前橋市",
+          "lq": 4.55,
+          "sharePct": 7,
+          "qtyG": 21802,
+          "qtyRank": 29
+        },
+        {
+          "pref": "秋田県",
+          "city": "秋田市",
+          "lq": 3.81,
+          "sharePct": 2.9,
+          "qtyG": 22490,
+          "qtyRank": 25
+        },
+        {
+          "pref": "青森県",
+          "city": "青森市",
+          "lq": 3.46,
+          "sharePct": 3.4,
+          "qtyG": 25190,
+          "qtyRank": 7
+        },
+        {
+          "pref": "栃木県",
+          "city": "宇都宮市",
+          "lq": 3.2,
+          "sharePct": 4.9,
+          "qtyG": 22647,
+          "qtyRank": 24
+        }
+      ],
+      "mean2019": 20620,
+      "mean2020": 22561,
+      "nationalMeanExpYen": 32197,
+      "totalShare": 99.8
+    },
+    "鶏肉": {
+      "spearman": {
+        "qLQ": 0.2,
+        "eLQ": 0.14,
+        "pLQ": -0.25,
+        "qShare": 0.29,
+        "eShare": 0.2,
+        "pShare": -0.27
+      },
+      "permP": {
+        "qLQ": 0.206,
+        "eLQ": 0.375,
+        "pLQ": 0.116,
+        "qShare": 0.068
+      },
+      "avg3yr": {
+        "qLQ": 0.19,
+        "eLQ": 0.07
+      },
+      "byYearQtyLQ": [
+        {
+          "year": 2007,
+          "value": 0.31
+        },
+        {
+          "year": 2008,
+          "value": 0.32
+        },
+        {
+          "year": 2009,
+          "value": 0.48
+        },
+        {
+          "year": 2010,
+          "value": 0.39
+        },
+        {
+          "year": 2011,
+          "value": 0.29
+        },
+        {
+          "year": 2012,
+          "value": 0.27
+        },
+        {
+          "year": 2013,
+          "value": 0.25
+        },
+        {
+          "year": 2014,
+          "value": 0.24
+        },
+        {
+          "year": 2015,
+          "value": 0.3
+        },
+        {
+          "year": 2016,
+          "value": 0.29
+        },
+        {
+          "year": 2017,
+          "value": 0.18
+        },
+        {
+          "year": 2018,
+          "value": 0.27
+        },
+        {
+          "year": 2019,
+          "value": 0.26
+        },
+        {
+          "year": 2020,
+          "value": 0.2
+        },
+        {
+          "year": 2021,
+          "value": 0.03
+        },
+        {
+          "year": 2022,
+          "value": 0.18
+        },
+        {
+          "year": 2023,
+          "value": 0.07
+        },
+        {
+          "year": 2024,
+          "value": 0.22
+        },
+        {
+          "year": 2025,
+          "value": 0.12
+        }
+      ],
+      "byYearQtyShare": [
+        {
+          "year": 2007,
+          "value": 0.32
+        },
+        {
+          "year": 2008,
+          "value": 0.35
+        },
+        {
+          "year": 2009,
+          "value": 0.5
+        },
+        {
+          "year": 2010,
+          "value": 0.41
+        },
+        {
+          "year": 2011,
+          "value": 0.29
+        },
+        {
+          "year": 2012,
+          "value": 0.32
+        },
+        {
+          "year": 2013,
+          "value": 0.25
+        },
+        {
+          "year": 2014,
+          "value": 0.24
+        },
+        {
+          "year": 2015,
+          "value": 0.36
+        },
+        {
+          "year": 2016,
+          "value": 0.3
+        },
+        {
+          "year": 2017,
+          "value": 0.25
+        },
+        {
+          "year": 2018,
+          "value": 0.3
+        },
+        {
+          "year": 2019,
+          "value": 0.26
+        },
+        {
+          "year": 2020,
+          "value": 0.29
+        },
+        {
+          "year": 2021,
+          "value": 0.09
+        },
+        {
+          "year": 2022,
+          "value": 0.27
+        },
+        {
+          "year": 2023,
+          "value": 0.17
+        },
+        {
+          "year": 2024,
+          "value": 0.27
+        },
+        {
+          "year": 2025,
+          "value": 0.13
+        }
+      ],
+      "topProducers": [
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "sharePct": 19.3,
+          "lq": 22.76,
+          "qtyG": 24637,
+          "qtyRank": 2,
+          "qtyIndex": 130,
+          "expYen": 22678,
+          "expRank": 2,
+          "pricePer100g": 92
+        },
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "sharePct": 19.3,
+          "lq": 15.33,
+          "qtyG": 22348,
+          "qtyRank": 9,
+          "qtyIndex": 118,
+          "expYen": 21812,
+          "expRank": 3,
+          "pricePer100g": 97.6
+        },
+        {
+          "pref": "岩手県",
+          "city": "盛岡市",
+          "sharePct": 16.9,
+          "lq": 17.61,
+          "qtyG": 15887,
+          "qtyRank": 41,
+          "qtyIndex": 84,
+          "expYen": 14137,
+          "expRank": 41,
+          "pricePer100g": 89
+        },
+        {
+          "pref": "青森県",
+          "city": "青森市",
+          "sharePct": 6,
+          "lq": 6.11,
+          "qtyG": 17892,
+          "qtyRank": 29,
+          "qtyIndex": 94,
+          "expYen": 15886,
+          "expRank": 33,
+          "pricePer100g": 88.8
+        },
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "sharePct": 4.1,
+          "lq": 0.99,
+          "qtyG": 22478,
+          "qtyRank": 7,
+          "qtyIndex": 119,
+          "expYen": 18448,
+          "expRank": 19,
+          "pricePer100g": 82.1
+        }
+      ],
+      "topConsumers": [
+        {
+          "pref": "熊本県",
+          "city": "熊本市",
+          "qtyG": 26173,
+          "sharePct": 2.6,
+          "shareRank": 6,
+          "lq": 1.89
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "qtyG": 24637,
+          "sharePct": 19.3,
+          "shareRank": 1.5,
+          "lq": 22.76
+        },
+        {
+          "pref": "広島県",
+          "city": "広島市",
+          "qtyG": 24267,
+          "sharePct": 0.5,
+          "shareRank": 27,
+          "lq": 0.23
+        },
+        {
+          "pref": "福岡県",
+          "city": "福岡市",
+          "qtyG": 24138,
+          "sharePct": 0.7,
+          "shareRank": 23,
+          "lq": 0.17
+        },
+        {
+          "pref": "鳥取県",
+          "city": "鳥取市",
+          "qtyG": 22679,
+          "sharePct": 2.4,
+          "shareRank": 8.5,
+          "lq": 5.47
+        }
+      ],
+      "nPrefectures": 41,
+      "excluded": [
+        "秋田県",
+        "山形県",
+        "栃木県",
+        "埼玉県",
+        "滋賀県",
+        "奈良県"
+      ],
+      "nationalMeanQtyG": 18949,
+      "halves": {
+        "東日本（三重県以東）": {
+          "n": 20,
+          "spearmanQtyLQ": -0.36
+        },
+        "西日本（滋賀県以西）": {
+          "n": 21,
+          "spearmanQtyLQ": 0.33
+        }
+      },
+      "priceMean100g": 91.7,
+      "priceCheapest": [
+        [
+          "広島市",
+          80.7
+        ],
+        [
+          "那覇市",
+          81.3
+        ],
+        [
+          "岐阜市",
+          81.7
+        ]
+      ],
+      "priceDearest": [
+        [
+          "東京都区部",
+          105.7
+        ],
+        [
+          "徳島市",
+          102.3
+        ],
+        [
+          "大津市",
+          101.9
+        ]
+      ],
+      "topProducerPriceRank": [
+        [
+          "宮崎市",
+          92,
+          24
+        ],
+        [
+          "鹿児島市",
+          97.6,
+          41
+        ],
+        [
+          "盛岡市",
+          89,
+          19
+        ],
+        [
+          "青森市",
+          88.8,
+          17
+        ],
+        [
+          "札幌市",
+          82.1,
+          4
+        ]
+      ],
+      "topLQ": [
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "lq": 22.76,
+          "sharePct": 19.3,
+          "qtyG": 24637,
+          "qtyRank": 2
+        },
+        {
+          "pref": "岩手県",
+          "city": "盛岡市",
+          "lq": 17.61,
+          "sharePct": 16.9,
+          "qtyG": 15887,
+          "qtyRank": 41
+        },
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "lq": 15.33,
+          "sharePct": 19.3,
+          "qtyG": 22348,
+          "qtyRank": 9
+        },
+        {
+          "pref": "青森県",
+          "city": "青森市",
+          "lq": 6.11,
+          "sharePct": 6,
+          "qtyG": 17892,
+          "qtyRank": 29
+        },
+        {
+          "pref": "鳥取県",
+          "city": "鳥取市",
+          "lq": 5.47,
+          "sharePct": 2.4,
+          "qtyG": 22679,
+          "qtyRank": 5
+        },
+        {
+          "pref": "佐賀県",
+          "city": "佐賀市",
+          "lq": 3.89,
+          "sharePct": 2.5,
+          "qtyG": 21542,
+          "qtyRank": 11
+        },
+        {
+          "pref": "徳島県",
+          "city": "徳島市",
+          "lq": 3.33,
+          "sharePct": 1.9,
+          "qtyG": 18136,
+          "qtyRank": 22
+        }
+      ],
+      "mean2019": 17154,
+      "mean2020": 18949,
+      "nationalMeanExpYen": 17358,
+      "totalShare": 99.1
+    }
+  },
+  "headCountCheck": {
+    "beef": {
+      "heads": "beef-cattle-count 2025",
+      "consumptionYear": 2025,
+      "qtySpearman": -0.25,
+      "expSpearman": -0.26,
+      "perCapitaQtySpearman": -0.23,
+      "top": [
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "heads": 544700,
+          "qtyRank": 42
+        },
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "heads": 360400,
+          "qtyRank": 18
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "heads": 248400,
+          "qtyRank": 25
+        },
+        {
+          "pref": "熊本県",
+          "city": "熊本市",
+          "heads": 133200,
+          "qtyRank": 12
+        },
+        {
+          "pref": "長崎県",
+          "city": "長崎市",
+          "heads": 91100,
+          "qtyRank": 19
+        }
+      ]
+    },
+    "pork": {
+      "heads": "pig-count 2024",
+      "consumptionYear": 2025,
+      "qtySpearman": 0.12,
+      "expSpearman": -0.17,
+      "perCapitaQtySpearman": -0.04,
+      "top": [
+        {
+          "pref": "鹿児島県",
+          "city": "鹿児島市",
+          "heads": 1200000,
+          "qtyRank": 37
+        },
+        {
+          "pref": "北海道",
+          "city": "札幌市",
+          "heads": 752200,
+          "qtyRank": 7
+        },
+        {
+          "pref": "宮崎県",
+          "city": "宮崎市",
+          "heads": 721900,
+          "qtyRank": 47
+        },
+        {
+          "pref": "群馬県",
+          "city": "前橋市",
+          "heads": 610800,
+          "qtyRank": 23
+        },
+        {
+          "pref": "千葉県",
+          "city": "千葉市",
+          "heads": 580700,
+          "qtyRank": 8
+        }
+      ]
+    }
+  },
+  "regions": {
+    "牛肉": {
+      "北海道": {
+        "prodSharePct": 14,
+        "qtyIndex": 91,
+        "hiddenPrefs": []
+      },
+      "東北": {
+        "prodSharePct": 13.7,
+        "qtyIndex": 80,
+        "hiddenPrefs": []
+      },
+      "関東": {
+        "prodSharePct": 9.5,
+        "qtyIndex": 83,
+        "hiddenPrefs": []
+      },
+      "中部": {
+        "prodSharePct": 6.4,
+        "qtyIndex": 89,
+        "hiddenPrefs": []
+      },
+      "近畿": {
+        "prodSharePct": 5,
+        "qtyIndex": 126,
+        "hiddenPrefs": []
+      },
+      "中国": {
+        "prodSharePct": 5.1,
+        "qtyIndex": 118,
+        "hiddenPrefs": []
+      },
+      "四国": {
+        "prodSharePct": 2.2,
+        "qtyIndex": 110,
+        "hiddenPrefs": []
+      },
+      "九州・沖縄": {
+        "prodSharePct": 44.3,
+        "qtyIndex": 104,
+        "hiddenPrefs": []
+      }
+    },
+    "豚肉": {
+      "北海道": {
+        "prodSharePct": 7.8,
+        "qtyIndex": 122,
+        "hiddenPrefs": []
+      },
+      "東北": {
+        "prodSharePct": 16.6,
+        "qtyIndex": 107,
+        "hiddenPrefs": []
+      },
+      "関東": {
+        "prodSharePct": 26.4,
+        "qtyIndex": 106,
+        "hiddenPrefs": []
+      },
+      "中部": {
+        "prodSharePct": 9.7,
+        "qtyIndex": 104,
+        "hiddenPrefs": []
+      },
+      "近畿": {
+        "prodSharePct": 1.8,
+        "qtyIndex": 92,
+        "hiddenPrefs": []
+      },
+      "中国": {
+        "prodSharePct": 3.1,
+        "qtyIndex": 97,
+        "hiddenPrefs": []
+      },
+      "四国": {
+        "prodSharePct": 3.2,
+        "qtyIndex": 87,
+        "hiddenPrefs": []
+      },
+      "九州・沖縄": {
+        "prodSharePct": 31.2,
+        "qtyIndex": 98,
+        "hiddenPrefs": []
+      }
+    },
+    "鶏肉": {
+      "北海道": {
+        "prodSharePct": 4.1,
+        "qtyIndex": 119,
+        "hiddenPrefs": []
+      },
+      "東北": {
+        "prodSharePct": 25,
+        "qtyIndex": 85,
+        "hiddenPrefs": [
+          "秋田県",
+          "山形県"
+        ]
+      },
+      "関東": {
+        "prodSharePct": 4,
+        "qtyIndex": 92,
+        "hiddenPrefs": [
+          "栃木県",
+          "埼玉県"
+        ]
+      },
+      "中部": {
+        "prodSharePct": 4.1,
+        "qtyIndex": 90,
+        "hiddenPrefs": []
+      },
+      "近畿": {
+        "prodSharePct": 3.2,
+        "qtyIndex": 102,
+        "hiddenPrefs": [
+          "滋賀県",
+          "奈良県"
+        ]
+      },
+      "中国": {
+        "prodSharePct": 6.4,
+        "qtyIndex": 116,
+        "hiddenPrefs": []
+      },
+      "四国": {
+        "prodSharePct": 3.9,
+        "qtyIndex": 100,
+        "hiddenPrefs": []
+      },
+      "九州・沖縄": {
+        "prodSharePct": 48.4,
+        "qtyIndex": 115,
+        "hiddenPrefs": []
+      }
+    }
+  },
+  "absorption": {
+    "assumptions": "産出額のシェアを生産量のシェアとみなし、県の購入量は県庁所在市の1世帯あたり購入量×世帯数で、世帯数は人口に比例するとみなす。目安 = (人口シェア ÷ 産出額シェア) × (県庁所在市の購入量 ÷ 47市の平均)",
+    "rows": [
+      {
+        "label": "鹿児島県 牛肉",
+        "value": 6.3,
+        "prodSharePct": 16.8,
+        "popSharePct": 1.26,
+        "qtyIndex": 0.85
+      },
+      {
+        "label": "北海道 牛肉",
+        "value": 27,
+        "prodSharePct": 14,
+        "popSharePct": 4.14,
+        "qtyIndex": 0.91
+      },
+      {
+        "label": "宮崎県 牛肉",
+        "value": 8.3,
+        "prodSharePct": 10.3,
+        "popSharePct": 0.85,
+        "qtyIndex": 1.01
+      },
+      {
+        "label": "鹿児島県 豚肉",
+        "value": 9.2,
+        "prodSharePct": 13,
+        "popSharePct": 1.26,
+        "qtyIndex": 0.95
+      },
+      {
+        "label": "宮崎県 豚肉",
+        "value": 11.1,
+        "prodSharePct": 7.9,
+        "popSharePct": 0.85,
+        "qtyIndex": 1.04
+      },
+      {
+        "label": "北海道 豚肉",
+        "value": 64.8,
+        "prodSharePct": 7.8,
+        "popSharePct": 4.14,
+        "qtyIndex": 1.22
+      },
+      {
+        "label": "宮崎県 鶏肉",
+        "value": 5.7,
+        "prodSharePct": 19.3,
+        "popSharePct": 0.85,
+        "qtyIndex": 1.3
+      },
+      {
+        "label": "鹿児島県 鶏肉",
+        "value": 7.7,
+        "prodSharePct": 19.3,
+        "popSharePct": 1.26,
+        "qtyIndex": 1.18
+      },
+      {
+        "label": "岩手県 鶏肉",
+        "value": 4.8,
+        "prodSharePct": 16.9,
+        "popSharePct": 0.96,
+        "qtyIndex": 0.84
+      }
+    ]
+  },
+  "concentration": {
+    "牛肉": {
+      "top3": [
+        "鹿児島県",
+        "北海道",
+        "宮崎県"
+      ],
+      "prodShareTop3": 41.1,
+      "popShareTop3": 6.2,
+      "popShares": [
+        [
+          "鹿児島県",
+          1.26
+        ],
+        [
+          "北海道",
+          4.14
+        ],
+        [
+          "宮崎県",
+          0.85
+        ]
+      ]
+    },
+    "豚肉": {
+      "top3": [
+        "鹿児島県",
+        "宮崎県",
+        "北海道"
+      ],
+      "prodShareTop3": 28.7,
+      "popShareTop3": 6.2,
+      "popShares": [
+        [
+          "鹿児島県",
+          1.26
+        ],
+        [
+          "宮崎県",
+          0.85
+        ],
+        [
+          "北海道",
+          4.14
+        ]
+      ]
+    },
+    "鶏肉": {
+      "top3": [
+        "宮崎県",
+        "鹿児島県",
+        "岩手県"
+      ],
+      "prodShareTop3": 55.5,
+      "popShareTop3": 3.1,
+      "popShares": [
+        [
+          "宮崎県",
+          0.85
+        ],
+        [
+          "鹿児島県",
+          1.26
+        ],
+        [
+          "岩手県",
+          0.96
+        ]
+      ]
+    }
+  },
+  "leaveOneOut": {
+    "牛肉": {
+      "dropTopLQ": [
+        [
+          "鹿児島県",
+          -0.25
+        ],
+        [
+          "宮崎県",
+          -0.27
+        ],
+        [
+          "熊本県",
+          -0.3
+        ]
+      ],
+      "min": -0.31,
+      "max": -0.23,
+      "dropTop3LQ": -0.3
+    },
+    "豚肉": {
+      "dropTopLQ": [
+        [
+          "鹿児島県",
+          0.24
+        ],
+        [
+          "宮崎県",
+          0.21
+        ],
+        [
+          "岩手県",
+          0.21
+        ]
+      ],
+      "min": 0.17,
+      "max": 0.26,
+      "dropTop3LQ": 0.23
+    },
+    "鶏肉": {
+      "dropTopLQ": [
+        [
+          "宮崎県",
+          0.14
+        ],
+        [
+          "岩手県",
+          0.26
+        ],
+        [
+          "鹿児島県",
+          0.16
+        ]
+      ],
+      "min": 0.14,
+      "max": 0.26,
+      "dropTop3LQ": 0.16
+    }
+  },
+  "regionIndex": {
+    "牛肉": [
+      {
+        "r": "北海道",
+        "prodDensity": 338,
+        "qtyIndex": 91,
+        "hidden": []
+      },
+      {
+        "r": "東北",
+        "prodDensity": 201,
+        "qtyIndex": 80,
+        "hidden": []
+      },
+      {
+        "r": "関東",
+        "prodDensity": 27,
+        "qtyIndex": 83,
+        "hidden": []
+      },
+      {
+        "r": "中部",
+        "prodDensity": 38,
+        "qtyIndex": 89,
+        "hidden": []
+      },
+      {
+        "r": "近畿",
+        "prodDensity": 28,
+        "qtyIndex": 126,
+        "hidden": []
+      },
+      {
+        "r": "中国",
+        "prodDensity": 89,
+        "qtyIndex": 118,
+        "hidden": []
+      },
+      {
+        "r": "四国",
+        "prodDensity": 75,
+        "qtyIndex": 110,
+        "hidden": []
+      },
+      {
+        "r": "九州",
+        "prodDensity": 392,
+        "qtyIndex": 104,
+        "hidden": []
+      }
+    ],
+    "鶏肉": [
+      {
+        "r": "北海道",
+        "prodDensity": 99,
+        "qtyIndex": 119,
+        "hidden": []
+      },
+      {
+        "r": "東北",
+        "prodDensity": 366,
+        "qtyIndex": 85,
+        "hidden": [
+          "秋田県",
+          "山形県"
+        ]
+      },
+      {
+        "r": "関東",
+        "prodDensity": 12,
+        "qtyIndex": 92,
+        "hidden": [
+          "栃木県",
+          "埼玉県"
+        ]
+      },
+      {
+        "r": "中部",
+        "prodDensity": 24,
+        "qtyIndex": 90,
+        "hidden": []
+      },
+      {
+        "r": "近畿",
+        "prodDensity": 18,
+        "qtyIndex": 102,
+        "hidden": [
+          "滋賀県",
+          "奈良県"
+        ]
+      },
+      {
+        "r": "中国",
+        "prodDensity": 111,
+        "qtyIndex": 116,
+        "hidden": []
+      },
+      {
+        "r": "四国",
+        "prodDensity": 133,
+        "qtyIndex": 100,
+        "hidden": []
+      },
+      {
+        "r": "九州",
+        "prodDensity": 429,
+        "qtyIndex": 115,
+        "hidden": []
+      }
+    ]
+  }
+}

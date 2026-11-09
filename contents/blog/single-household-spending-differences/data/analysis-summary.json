@@ -1,0 +1,1416 @@
+{
+  "year": 2025,
+  "households": {
+    "singleSample": 646,
+    "twoSample": 7261,
+    "twoSize": 2.87,
+    "singleHeadAge": 58.6,
+    "twoHeadAge": 60.7,
+    "singleOwnRate": 59,
+    "twoOwnRate": 87.3,
+    "singleRentPayers": 35.1,
+    "twoRentPayers": 11.7
+  },
+  "consumption": {
+    "single": 2076507,
+    "twoOrMore": 3768007,
+    "all": 3118554,
+    "ratioHousehold": 0.55,
+    "ratioPerPerson": 1.58,
+    "ratioSqrtScale": 0.93,
+    "impliedSingleShareOfAll": 38.4
+  },
+  "perPerson": [
+    {
+      "label": "食料",
+      "value": 1.49
+    },
+    {
+      "label": "住居",
+      "value": 3.33
+    },
+    {
+      "label": "光熱・水道",
+      "value": 1.56
+    },
+    {
+      "label": "家具・家事用品",
+      "value": 1.34
+    },
+    {
+      "label": "被服及び履物",
+      "value": 1.4
+    },
+    {
+      "label": "保健医療",
+      "value": 1.58
+    },
+    {
+      "label": "交通・通信",
+      "value": 1.21
+    },
+    {
+      "label": "教育",
+      "value": 0.01
+    },
+    {
+      "label": "教養娯楽",
+      "value": 1.89
+    },
+    {
+      "label": "その他の消費支出",
+      "value": 1.73
+    }
+  ],
+  "perHousehold": [
+    {
+      "label": "食料",
+      "value": 0.52
+    },
+    {
+      "label": "住居",
+      "value": 1.16
+    },
+    {
+      "label": "光熱・水道",
+      "value": 0.54
+    },
+    {
+      "label": "家具・家事用品",
+      "value": 0.47
+    },
+    {
+      "label": "被服及び履物",
+      "value": 0.49
+    },
+    {
+      "label": "保健医療",
+      "value": 0.55
+    },
+    {
+      "label": "交通・通信",
+      "value": 0.42
+    },
+    {
+      "label": "教育",
+      "value": 0
+    },
+    {
+      "label": "教養娯楽",
+      "value": 0.66
+    },
+    {
+      "label": "その他の消費支出",
+      "value": 0.6
+    }
+  ],
+  "categoryShares": {
+    "single": [
+      28.5,
+      12.5,
+      14.1,
+      5.1,
+      11.2,
+      0,
+      12.2,
+      16.4
+    ],
+    "twoOrMore": [
+      30.2,
+      5.9,
+      15.2,
+      5.1,
+      14.6,
+      3.8,
+      10.2,
+      15
+    ],
+    "labels": [
+      "食料",
+      "住居",
+      "光熱・家具・被服",
+      "保健医療",
+      "交通・通信",
+      "教育",
+      "教養娯楽",
+      "その他の消費支出"
+    ]
+  },
+  "foodShares": {
+    "single": [
+      24.8,
+      17.4,
+      21,
+      8.3,
+      7.4,
+      4.7,
+      4.9,
+      11.5
+    ],
+    "twoOrMore": [
+      17.5,
+      14.3,
+      19.9,
+      10.2,
+      9.3,
+      9,
+      6.6,
+      13.2
+    ],
+    "labels": [
+      "外食",
+      "調理食品",
+      "菓子・飲料・酒類",
+      "野菜・海藻",
+      "穀類",
+      "肉類",
+      "魚介類",
+      "乳卵・果物・調味料ほか"
+    ]
+  },
+  "foodPerPerson": {
+    "food": 1.49,
+    "eatingOut": 2.12,
+    "prepared": 1.81,
+    "meat": 0.78,
+    "freshMeat": 0.73,
+    "fish": 1.1,
+    "rice": 1.01,
+    "vegetables": 1.2,
+    "alcoholOut": 3.56,
+    "rentPrivate": 6.62,
+    "car": 0.09
+  },
+  "moreItems": [
+    {
+      "label": "民営家賃",
+      "value": 4.18,
+      "code": "020100010",
+      "singleYen": 190092,
+      "twoOrMoreYen": 82450,
+      "range2019_2025": [
+        3.99,
+        4.81
+      ]
+    },
+    {
+      "label": "給与住宅家賃",
+      "value": 3.61,
+      "code": "020100030",
+      "singleYen": 12608,
+      "twoOrMoreYen": 6333,
+      "range2019_2025": [
+        2.99,
+        4.56
+      ]
+    },
+    {
+      "label": "タクシー代",
+      "value": 2.55,
+      "code": "070100070",
+      "singleYen": 6248,
+      "twoOrMoreYen": 4447,
+      "range2019_2025": [
+        2.23,
+        3.98
+      ]
+    },
+    {
+      "label": "飲酒代（外食）",
+      "value": 2.25,
+      "code": "011212020",
+      "singleYen": 24153,
+      "twoOrMoreYen": 19498,
+      "range2019_2025": [
+        2.25,
+        6.31
+      ]
+    },
+    {
+      "label": "たばこ",
+      "value": 2.18,
+      "code": "100140001",
+      "singleYen": 17066,
+      "twoOrMoreYen": 14222,
+      "range2019_2025": [
+        2.18,
+        2.71
+      ]
+    },
+    {
+      "label": "鉄道運賃",
+      "value": 2.01,
+      "code": "070100010",
+      "singleYen": 28538,
+      "twoOrMoreYen": 25821,
+      "range2019_2025": [
+        1.61,
+        2.47
+      ]
+    },
+    {
+      "label": "贈与金（香典・祝儀など）",
+      "value": 1.81,
+      "code": "100360001",
+      "singleYen": 75699,
+      "twoOrMoreYen": 76089,
+      "range2019_2025": [
+        1.29,
+        1.81
+      ]
+    },
+    {
+      "label": "映画・演劇等入場料",
+      "value": 1.78,
+      "code": "090442010",
+      "singleYen": 8246,
+      "twoOrMoreYen": 8383,
+      "range2019_2025": [
+        1.65,
+        2.55
+      ]
+    },
+    {
+      "label": "弁当",
+      "value": 1.61,
+      "code": "010910010",
+      "singleYen": 16811,
+      "twoOrMoreYen": 18968,
+      "range2019_2025": [
+        1.43,
+        1.93
+      ]
+    },
+    {
+      "label": "NHK放送受信料",
+      "value": 1.58,
+      "code": "090441010",
+      "singleYen": 10386,
+      "twoOrMoreYen": 11957,
+      "range2019_2025": [
+        1.39,
+        1.65
+      ]
+    }
+  ],
+  "lessItems": [
+    {
+      "label": "自動車購入",
+      "value": 0.05,
+      "code": "070210010",
+      "singleYen": 3291,
+      "twoOrMoreYen": 109579,
+      "range2019_2025": [
+        0.03,
+        0.15
+      ]
+    },
+    {
+      "label": "豚肉",
+      "value": 0.44,
+      "code": "010310020",
+      "singleYen": 8517,
+      "twoOrMoreYen": 35416,
+      "range2019_2025": [
+        0.44,
+        0.49
+      ]
+    },
+    {
+      "label": "鶏肉",
+      "value": 0.46,
+      "code": "010310030",
+      "singleYen": 5116,
+      "twoOrMoreYen": 20182,
+      "range2019_2025": [
+        0.45,
+        0.51
+      ]
+    },
+    {
+      "label": "牛肉",
+      "value": 0.52,
+      "code": "010310010",
+      "singleYen": 6018,
+      "twoOrMoreYen": 20880,
+      "range2019_2025": [
+        0.5,
+        0.58
+      ]
+    },
+    {
+      "label": "医療保険料",
+      "value": 0.58,
+      "code": "100150060",
+      "singleYen": 7413,
+      "twoOrMoreYen": 23077,
+      "range2019_2025": [
+        0.58,
+        0.79
+      ]
+    },
+    {
+      "label": "生鮮魚介",
+      "value": 0.62,
+      "code": "010210000",
+      "singleYen": 13989,
+      "twoOrMoreYen": 41089,
+      "range2019_2025": [
+        0.61,
+        0.65
+      ]
+    },
+    {
+      "label": "米",
+      "value": 0.64,
+      "code": "010110001",
+      "singleYen": 15031,
+      "twoOrMoreYen": 42739,
+      "range2019_2025": [
+        0.61,
+        0.66
+      ]
+    },
+    {
+      "label": "卵",
+      "value": 0.68,
+      "code": "010430001",
+      "singleYen": 5326,
+      "twoOrMoreYen": 14145,
+      "range2019_2025": [
+        0.68,
+        0.77
+      ]
+    },
+    {
+      "label": "調味料",
+      "value": 0.71,
+      "code": "010720000",
+      "singleYen": 17721,
+      "twoOrMoreYen": 45274,
+      "range2019_2025": [
+        0.69,
+        0.74
+      ]
+    },
+    {
+      "label": "生鮮野菜",
+      "value": 0.75,
+      "code": "010510000",
+      "singleYen": 32112,
+      "twoOrMoreYen": 78166,
+      "range2019_2025": [
+        0.73,
+        0.76
+      ]
+    }
+  ],
+  "ageSex": {
+    "cells": [
+      {
+        "label": "34歳以下の男",
+        "householdsByYear": [
+          46,
+          51,
+          45,
+          45,
+          44
+        ],
+        "householdsTotal": 231,
+        "monthlyConsumption": 159059,
+        "eatingOutRange": [
+          10.3,
+          13
+        ],
+        "rentRange": [
+          18.1,
+          22
+        ],
+        "headAge2025": 27.5
+      },
+      {
+        "label": "34歳以下の女",
+        "householdsByYear": [
+          23,
+          18,
+          23,
+          23,
+          23
+        ],
+        "householdsTotal": 110,
+        "monthlyConsumption": 180645,
+        "eatingOutRange": [
+          5.5,
+          8.4
+        ],
+        "rentRange": [
+          21.3,
+          26.2
+        ],
+        "headAge2025": 27.2
+      },
+      {
+        "label": "35〜59歳の男",
+        "householdsByYear": [
+          67,
+          61,
+          55,
+          59,
+          55
+        ],
+        "householdsTotal": 297,
+        "monthlyConsumption": 193955,
+        "eatingOutRange": [
+          6.2,
+          8.5
+        ],
+        "rentRange": [
+          11.8,
+          16.7
+        ],
+        "headAge2025": 50.1
+      },
+      {
+        "label": "35〜59歳の女",
+        "householdsByYear": [
+          58,
+          59,
+          59,
+          62,
+          56
+        ],
+        "householdsTotal": 294,
+        "monthlyConsumption": 180243,
+        "eatingOutRange": [
+          2.8,
+          5.1
+        ],
+        "rentRange": [
+          13.3,
+          15
+        ],
+        "headAge2025": 52
+      },
+      {
+        "label": "60歳以上の男",
+        "householdsByYear": [
+          120,
+          121,
+          123,
+          134,
+          117
+        ],
+        "householdsTotal": 615,
+        "monthlyConsumption": 151777,
+        "eatingOutRange": [
+          4.1,
+          5.6
+        ],
+        "rentRange": [
+          4.4,
+          6.5
+        ],
+        "headAge2025": 73.4
+      },
+      {
+        "label": "60歳以上の女",
+        "householdsByYear": [
+          349,
+          346,
+          345,
+          327,
+          351
+        ],
+        "householdsTotal": 1718,
+        "monthlyConsumption": 152659,
+        "eatingOutRange": [
+          1.9,
+          2.8
+        ],
+        "rentRange": [
+          3,
+          4.9
+        ],
+        "headAge2025": 75.9
+      }
+    ],
+    "rows": [
+      {
+        "label": "34歳以下の男",
+        "外食": 11.4,
+        "調理食品": 5.1,
+        "食料のその他": 9.1,
+        "家賃・地代": 20.6,
+        "保健医療": 3,
+        "交通・通信": 12.7,
+        "教養娯楽": 14.5,
+        "ほかの費目": 23.6
+      },
+      {
+        "label": "34歳以下の女",
+        "外食": 7,
+        "調理食品": 3.2,
+        "食料のその他": 9,
+        "家賃・地代": 23,
+        "保健医療": 4.3,
+        "交通・通信": 11.4,
+        "教養娯楽": 12,
+        "ほかの費目": 30.1
+      },
+      {
+        "label": "35〜59歳の男",
+        "外食": 7.3,
+        "調理食品": 5.7,
+        "食料のその他": 12.6,
+        "家賃・地代": 14.5,
+        "保健医療": 3.2,
+        "交通・通信": 14.9,
+        "教養娯楽": 11.3,
+        "ほかの費目": 30.5
+      },
+      {
+        "label": "35〜59歳の女",
+        "外食": 4,
+        "調理食品": 3.7,
+        "食料のその他": 13.6,
+        "家賃・地代": 13.9,
+        "保健医療": 5.1,
+        "交通・通信": 12.1,
+        "教養娯楽": 11.2,
+        "ほかの費目": 36.4
+      },
+      {
+        "label": "60歳以上の男",
+        "外食": 5,
+        "調理食品": 6.1,
+        "食料のその他": 18.1,
+        "家賃・地代": 5.6,
+        "保健医療": 5.8,
+        "交通・通信": 12.8,
+        "教養娯楽": 11.5,
+        "ほかの費目": 35.1
+      },
+      {
+        "label": "60歳以上の女",
+        "外食": 2.4,
+        "調理食品": 3.9,
+        "食料のその他": 19.4,
+        "家賃・地代": 4.1,
+        "保健医療": 5.9,
+        "交通・通信": 9.7,
+        "教養娯楽": 10,
+        "ほかの費目": 44.6
+      }
+    ]
+  },
+  "eatingOutShiftShare": {
+    "2007": {
+      "weights": [
+        23.4,
+        29.3,
+        47.3
+      ],
+      "within": [
+        11.6,
+        9.5,
+        4
+      ],
+      "agg": 7.7,
+      "A00": 7.7
+    },
+    "2019": {
+      "weights": [
+        18.9,
+        26.7,
+        54.4
+      ],
+      "within": [
+        13.3,
+        7.3,
+        3.8
+      ],
+      "agg": 6.8,
+      "A00": 6.8
+    },
+    "2025": {
+      "weights": [
+        21.2,
+        26.2,
+        52.6
+      ],
+      "within": [
+        9.8,
+        5.6,
+        3.8
+      ],
+      "agg": 5.6,
+      "A00": 5.6
+    },
+    "cf_2025weights_2007within": 7.4,
+    "cf_2007weights_2025within": 5.8,
+    "inputs": {
+      "weightType": "世帯数分布(抽出率調整・一万分比)",
+      "groups": [
+        "34歳以下",
+        "35〜59歳",
+        "60歳以上"
+      ],
+      "byYear": {
+        "2007": [
+          {
+            "group": "435",
+            "weightPer10000": 2337,
+            "monthlyConsumption": 183562,
+            "monthlyEatingOut": 21261
+          },
+          {
+            "group": "615",
+            "weightPer10000": 2931,
+            "monthlyConsumption": 188947,
+            "monthlyEatingOut": 18040
+          },
+          {
+            "group": "560",
+            "weightPer10000": 4732,
+            "monthlyConsumption": 149844,
+            "monthlyEatingOut": 5943
+          }
+        ],
+        "2019": [
+          {
+            "group": "435",
+            "weightPer10000": 1889,
+            "monthlyConsumption": 172324,
+            "monthlyEatingOut": 23004
+          },
+          {
+            "group": "615",
+            "weightPer10000": 2675,
+            "monthlyConsumption": 188697,
+            "monthlyEatingOut": 13724
+          },
+          {
+            "group": "560",
+            "weightPer10000": 5437,
+            "monthlyConsumption": 148601,
+            "monthlyEatingOut": 5595
+          }
+        ],
+        "2025": [
+          {
+            "group": "435",
+            "weightPer10000": 2118,
+            "monthlyConsumption": 177542,
+            "monthlyEatingOut": 17430
+          },
+          {
+            "group": "615",
+            "weightPer10000": 2622,
+            "monthlyConsumption": 198488,
+            "monthlyEatingOut": 11072
+          },
+          {
+            "group": "560",
+            "weightPer10000": 5260,
+            "monthlyConsumption": 158546,
+            "monthlyEatingOut": 6017
+          }
+        ]
+      }
+    }
+  },
+  "rentPerPayer": {
+    "singleRentYenPerYear": 211268,
+    "perPayerYenPerYear": 601903
+  },
+  "trend": {
+    "eatOut2000": [
+      10.6,
+      4.6
+    ],
+    "eatOut2021": [
+      5.6,
+      3.7
+    ],
+    "eatOut2025": [
+      7.1,
+      5.3
+    ],
+    "prepared2000": [
+      3.1,
+      2.6
+    ],
+    "prepared2025": [
+      4.9,
+      4.3
+    ],
+    "rent2000": [
+      11.8,
+      3.6
+    ],
+    "rent2025": [
+      10.2,
+      2.6
+    ]
+  },
+  "workers": {
+    "sampleSingle": 226,
+    "sampleTwo": 3913,
+    "householdSizeTwo": 3.2,
+    "headAgeSingle": 43.3,
+    "headAgeTwo": 51,
+    "ownRateSingle": 34.1,
+    "ownRateTwo": 82.2,
+    "rentPayersSingle": 56.3,
+    "rentPayersTwo": 16.5,
+    "consumptionSingle": 2298279,
+    "consumptionTwo": 4155566,
+    "food": {
+      "single": 26.4,
+      "two": 28.3
+    },
+    "housing": {
+      "single": 15.8,
+      "two": 5.8
+    },
+    "rows": [
+      {
+        "label": "民営家賃",
+        "value": 4.59,
+        "code": "020100010",
+        "singleWorkerYen": 303645,
+        "twoOrMoreWorkerYen": 119643,
+        "range2019_2025": [
+          4.37,
+          5.14
+        ]
+      },
+      {
+        "label": "鉄道運賃",
+        "value": 2.78,
+        "code": "070100010",
+        "singleWorkerYen": 47040,
+        "twoOrMoreWorkerYen": 30579,
+        "range2019_2025": [
+          2.05,
+          3.16
+        ]
+      },
+      {
+        "label": "飲酒代（外食）",
+        "value": 2.51,
+        "code": "011212020",
+        "singleWorkerYen": 35027,
+        "twoOrMoreWorkerYen": 25213,
+        "range2019_2025": [
+          2.51,
+          8.38
+        ]
+      },
+      {
+        "label": "弁当",
+        "value": 1.83,
+        "code": "010910010",
+        "singleWorkerYen": 19970,
+        "twoOrMoreWorkerYen": 19682,
+        "range2019_2025": [
+          1.76,
+          2.64
+        ]
+      },
+      {
+        "label": "外食",
+        "value": 1.47,
+        "code": "011200000",
+        "singleWorkerYen": 199897,
+        "twoOrMoreWorkerYen": 245295,
+        "range2019_2025": [
+          1.47,
+          1.92
+        ]
+      },
+      {
+        "label": "調理食品",
+        "value": 1.16,
+        "code": "010900000",
+        "singleWorkerYen": 105734,
+        "twoOrMoreWorkerYen": 165191,
+        "range2019_2025": [
+          1.16,
+          1.36
+        ]
+      },
+      {
+        "label": "交通・通信",
+        "value": 0.74,
+        "code": "070000000",
+        "singleWorkerYen": 281102,
+        "twoOrMoreWorkerYen": 684832,
+        "range2019_2025": [
+          0.74,
+          0.91
+        ]
+      },
+      {
+        "label": "米",
+        "value": 0.54,
+        "code": "010110001",
+        "singleWorkerYen": 12654,
+        "twoOrMoreWorkerYen": 42219,
+        "range2019_2025": [
+          0.37,
+          0.54
+        ]
+      },
+      {
+        "label": "生鮮魚介",
+        "value": 0.48,
+        "code": "010210000",
+        "singleWorkerYen": 9280,
+        "twoOrMoreWorkerYen": 35023,
+        "range2019_2025": [
+          0.44,
+          0.48
+        ]
+      },
+      {
+        "label": "生鮮肉",
+        "value": 0.36,
+        "code": "010310000",
+        "singleWorkerYen": 17691,
+        "twoOrMoreWorkerYen": 89883,
+        "range2019_2025": [
+          0.36,
+          0.41
+        ]
+      }
+    ],
+    "perPerson": {
+      "freshMeat": 0.63,
+      "eatingOut": 2.61,
+      "rice": 0.96,
+      "consumption": 1.77
+    }
+  },
+  "impliedWeights": [
+    {
+      "code": "001100000",
+      "name": "消費支出",
+      "weightPct": 38.4
+    },
+    {
+      "code": "010000000",
+      "name": "1 食料",
+      "weightPct": 38.4
+    },
+    {
+      "code": "020000000",
+      "name": "2 住居",
+      "weightPct": 38.3
+    },
+    {
+      "code": "030000000",
+      "name": "3 光熱・水道",
+      "weightPct": 38.4
+    },
+    {
+      "code": "070000000",
+      "name": "7 交通・通信",
+      "weightPct": 38.4
+    },
+    {
+      "code": "090000000",
+      "name": "9 教養娯楽",
+      "weightPct": 38.4
+    },
+    {
+      "code": "011200000",
+      "name": "1.12 外食",
+      "weightPct": 38.4
+    },
+    {
+      "code": "010310000",
+      "name": "1.3.1 生鮮肉",
+      "weightPct": 38.4
+    }
+  ],
+  "textDerived": {
+    "outPlusPreparedFoodShare": {
+      "single": 42.2,
+      "twoOrMore": 31.8,
+      "diffPoints": 10.4
+    },
+    "rentShareOfHousing": 81.3,
+    "mealOutRatioHousehold": 71.1,
+    "bentoTwoPerPersonYen": 6609,
+    "bentoPerPersonRatioSingleToTwo": 2.54,
+    "shareOfConsumption": {
+      "privateRent": {
+        "single": 9.15,
+        "twoOrMore": 2.19
+      },
+      "car": {
+        "single": 0.16,
+        "twoOrMore": 2.91
+      }
+    },
+    "eatingOutAndPrepared2025": {
+      "single": 12,
+      "twoOrMore": 9.6
+    },
+    "eatingOutRatioSingleToTwo": {
+      "y2000": 2.32,
+      "y2025": 1.34
+    },
+    "rentShareRatioSingleToTwo": {
+      "y2000": 3.23,
+      "y2025": 3.95
+    },
+    "rentShareSingle": [
+      11.6,
+      11.8,
+      11.8,
+      10.5,
+      10.2
+    ],
+    "rentRatioByYear": {
+      "2000": 3.23,
+      "2001": 3.38,
+      "2002": 3.29,
+      "2003": 3.3,
+      "2004": 3.26,
+      "2005": 2.99,
+      "2006": 3.2,
+      "2007": 3.2,
+      "2008": 3.77,
+      "2009": 3.38,
+      "2010": 3.01,
+      "2011": 2.92,
+      "2012": 3.06,
+      "2013": 3.43,
+      "2014": 3.62,
+      "2015": 3.31,
+      "2016": 3.51,
+      "2017": 3.56,
+      "2018": 3.39,
+      "2019": 3.6,
+      "2020": 3.88,
+      "2021": 3.7,
+      "2022": 4.01,
+      "2023": 4.36,
+      "2024": 3.9,
+      "2025": 3.95
+    },
+    "eatRecoverFrom2021": {
+      "single": 1.5,
+      "twoOrMore": 1.5
+    },
+    "housing": {
+      "singleRatio": 2.1
+    },
+    "transport": {
+      "carRelated": [
+        101095,
+        340255
+      ],
+      "transport": [
+        53927,
+        68431
+      ],
+      "railFare": [
+        28538,
+        25821
+      ]
+    },
+    "education": {
+      "single": 443,
+      "twoOrMore": 143269,
+      "tuition": 109781,
+      "supplementary": 31338
+    },
+    "twoOrMoreHousehold": {
+      "under18": 0.52,
+      "over65": 0.86
+    },
+    "allHouseholdsConsumption": 3118554,
+    "monthly": {
+      "single": 173042,
+      "twoOrMore": 314001
+    },
+    "usageTableFood2025": {
+      "yenPerYear": 535908,
+      "consumptionPerYear": 2076504,
+      "eatingOutShare": 5.6
+    },
+    "ageSexOwnership2025": {
+      "le34": {
+        "male": 7.4,
+        "female": 8.4
+      },
+      "ge60": {
+        "male": 80.2,
+        "female": 85.6
+      }
+    },
+    "eatingOutAgeSexRatio": 4.75
+  },
+  "sizeComparison": {
+    "unit": "1人あたり月平均円 (1人=単身世帯, 2〜5人=二人以上の世帯の人数別)",
+    "householdsInSample": [
+      3739,
+      1679,
+      1333,
+      406
+    ],
+    "yenPerPerson": {
+      "肉類": [
+        2238,
+        3225,
+        2909,
+        2746,
+        2535
+      ],
+      "生鮮魚介": [
+        1107,
+        1690,
+        1125,
+        784,
+        650
+      ],
+      "米": [
+        1189,
+        1411,
+        1229,
+        967,
+        909
+      ],
+      "外食": [
+        9761,
+        5403,
+        4966,
+        5118,
+        4292
+      ],
+      "調理食品": [
+        8289,
+        6022,
+        4691,
+        3533,
+        3148
+      ],
+      "酒類": [
+        1947,
+        1923,
+        1138,
+        842,
+        681
+      ],
+      "消費支出": [
+        173042,
+        140507,
+        108016,
+        90731,
+        72851
+      ],
+      "食料": [
+        44659,
+        39670,
+        30747,
+        25846,
+        22404
+      ],
+      "家賃・地代": [
+        17606,
+        3710,
+        3083,
+        2171,
+        1367
+      ],
+      "光熱・水道": [
+        13333,
+        11346,
+        8542,
+        6486,
+        5654
+      ],
+      "交通・通信": [
+        19190,
+        19758,
+        16584,
+        13303,
+        9943
+      ],
+      "保健医療": [
+        8690,
+        8140,
+        5482,
+        3598,
+        2801
+      ],
+      "教養娯楽": [
+        20250,
+        14206,
+        9811,
+        9178,
+        7172
+      ],
+      "生鮮肉": [
+        1707,
+        2618,
+        2381,
+        2263,
+        2099
+      ],
+      "生鮮野菜": [
+        2645,
+        3118,
+        2217,
+        1677,
+        1332
+      ]
+    },
+    "index": {
+      "肉類": [
+        69,
+        100,
+        90,
+        85,
+        79
+      ],
+      "生鮮魚介": [
+        66,
+        100,
+        67,
+        46,
+        38
+      ],
+      "米": [
+        84,
+        100,
+        87,
+        69,
+        64
+      ],
+      "外食": [
+        181,
+        100,
+        92,
+        95,
+        79
+      ],
+      "調理食品": [
+        138,
+        100,
+        78,
+        59,
+        52
+      ],
+      "酒類": [
+        101,
+        100,
+        59,
+        44,
+        35
+      ]
+    },
+    "singleToTwoPerson": {
+      "肉類": 0.69,
+      "生鮮魚介": 0.66,
+      "米": 0.84,
+      "外食": 1.81,
+      "調理食品": 1.38,
+      "酒類": 1.01,
+      "消費支出": 1.23,
+      "食料": 1.13,
+      "家賃・地代": 4.75,
+      "光熱・水道": 1.18,
+      "交通・通信": 0.97,
+      "保健医療": 1.07,
+      "教養娯楽": 1.43,
+      "生鮮肉": 0.65,
+      "生鮮野菜": 0.85
+    }
+  },
+  "keyItems": [
+    {
+      "label": "生鮮肉",
+      "singleYen": 21051,
+      "twoOrMoreYen": 83265,
+      "householdRatio": 0.25,
+      "perPersonRatio": 0.73,
+      "shareRatio": 0.46,
+      "singleSharePct": 1.01,
+      "twoOrMoreSharePct": 2.21
+    },
+    {
+      "label": "肉類",
+      "singleYen": 27826,
+      "twoOrMoreYen": 102244,
+      "householdRatio": 0.27,
+      "perPersonRatio": 0.78,
+      "shareRatio": 0.49,
+      "singleSharePct": 1.34,
+      "twoOrMoreSharePct": 2.71
+    },
+    {
+      "label": "牛肉",
+      "singleYen": 6018,
+      "twoOrMoreYen": 20880,
+      "householdRatio": 0.29,
+      "perPersonRatio": 0.83,
+      "shareRatio": 0.52,
+      "singleSharePct": 0.29,
+      "twoOrMoreSharePct": 0.55
+    },
+    {
+      "label": "豚肉",
+      "singleYen": 8517,
+      "twoOrMoreYen": 35416,
+      "householdRatio": 0.24,
+      "perPersonRatio": 0.69,
+      "shareRatio": 0.44,
+      "singleSharePct": 0.41,
+      "twoOrMoreSharePct": 0.94
+    },
+    {
+      "label": "鶏肉",
+      "singleYen": 5116,
+      "twoOrMoreYen": 20182,
+      "householdRatio": 0.25,
+      "perPersonRatio": 0.73,
+      "shareRatio": 0.46,
+      "singleSharePct": 0.25,
+      "twoOrMoreSharePct": 0.54
+    },
+    {
+      "label": "魚介類",
+      "singleYen": 29000,
+      "twoOrMoreYen": 75515,
+      "householdRatio": 0.38,
+      "perPersonRatio": 1.1,
+      "shareRatio": 0.7,
+      "singleSharePct": 1.4,
+      "twoOrMoreSharePct": 2
+    },
+    {
+      "label": "生鮮魚介",
+      "singleYen": 13989,
+      "twoOrMoreYen": 41089,
+      "householdRatio": 0.34,
+      "perPersonRatio": 0.98,
+      "shareRatio": 0.62,
+      "singleSharePct": 0.67,
+      "twoOrMoreSharePct": 1.09
+    },
+    {
+      "label": "米",
+      "singleYen": 15031,
+      "twoOrMoreYen": 42739,
+      "householdRatio": 0.35,
+      "perPersonRatio": 1.01,
+      "shareRatio": 0.64,
+      "singleSharePct": 0.72,
+      "twoOrMoreSharePct": 1.13
+    },
+    {
+      "label": "野菜・海藻",
+      "singleYen": 48865,
+      "twoOrMoreYen": 116581,
+      "householdRatio": 0.42,
+      "perPersonRatio": 1.2,
+      "shareRatio": 0.76,
+      "singleSharePct": 2.35,
+      "twoOrMoreSharePct": 3.09
+    },
+    {
+      "label": "外食",
+      "singleYen": 146908,
+      "twoOrMoreYen": 198759,
+      "householdRatio": 0.74,
+      "perPersonRatio": 2.12,
+      "shareRatio": 1.34,
+      "singleSharePct": 7.07,
+      "twoOrMoreSharePct": 5.27
+    },
+    {
+      "label": "調理食品",
+      "singleYen": 102781,
+      "twoOrMoreYen": 162964,
+      "householdRatio": 0.63,
+      "perPersonRatio": 1.81,
+      "shareRatio": 1.14,
+      "singleSharePct": 4.95,
+      "twoOrMoreSharePct": 4.32
+    },
+    {
+      "label": "飲酒代",
+      "singleYen": 24153,
+      "twoOrMoreYen": 19498,
+      "householdRatio": 1.24,
+      "perPersonRatio": 3.56,
+      "shareRatio": 2.25,
+      "singleSharePct": 1.16,
+      "twoOrMoreSharePct": 0.52
+    },
+    {
+      "label": "民営家賃",
+      "singleYen": 190092,
+      "twoOrMoreYen": 82450,
+      "householdRatio": 2.31,
+      "perPersonRatio": 6.62,
+      "shareRatio": 4.18,
+      "singleSharePct": 9.15,
+      "twoOrMoreSharePct": 2.19
+    },
+    {
+      "label": "家賃地代",
+      "singleYen": 211268,
+      "twoOrMoreYen": 97134,
+      "householdRatio": 2.18,
+      "perPersonRatio": 6.24,
+      "shareRatio": 3.95,
+      "singleSharePct": 10.17,
+      "twoOrMoreSharePct": 2.58
+    },
+    {
+      "label": "自動車購入",
+      "singleYen": 3291,
+      "twoOrMoreYen": 109579,
+      "householdRatio": 0.03,
+      "perPersonRatio": 0.09,
+      "shareRatio": 0.05,
+      "singleSharePct": 0.16,
+      "twoOrMoreSharePct": 2.91
+    },
+    {
+      "label": "医療保険料",
+      "singleYen": 7413,
+      "twoOrMoreYen": 23077,
+      "householdRatio": 0.32,
+      "perPersonRatio": 0.92,
+      "shareRatio": 0.58,
+      "singleSharePct": 0.36,
+      "twoOrMoreSharePct": 0.61
+    },
+    {
+      "label": "食事代",
+      "singleYen": 113961,
+      "twoOrMoreYen": 160265,
+      "householdRatio": 0.71,
+      "perPersonRatio": 2.04,
+      "shareRatio": 1.29,
+      "singleSharePct": 5.49,
+      "twoOrMoreSharePct": 4.25
+    },
+    {
+      "label": "弁当",
+      "singleYen": 16811,
+      "twoOrMoreYen": 18968,
+      "householdRatio": 0.89,
+      "perPersonRatio": 2.54,
+      "shareRatio": 1.61,
+      "singleSharePct": 0.81,
+      "twoOrMoreSharePct": 0.5
+    }
+  ]
+}

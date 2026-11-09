@@ -1,0 +1,51 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "chicken-consumption-quantity",
+      "year": "2020"
+    },
+    {
+      "rankingKey": "total-population",
+      "year": "2020"
+    },
+    {
+      "statsDataId": "0002006790",
+      "cat02": "021",
+      "time": "2020"
+    }
+  ],
+  "formula": "x = 都道府県の農業産出額（鶏）の全国シェア(%) ÷ 都道府県の人口の全国シェア(%)、y = 県庁所在市の二人以上の世帯の1世帯あたり年間購入量(g)。全て2020年",
+  "generatedBy": "contents/blog/local-production-local-consumption-meat/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    },
+    {
+      "label": "生産農業所得統計",
+      "url": "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0002006790"
+    }
+  ],
+  "expectedPointCount": 41,
+  "pearsonR": 0.25,
+  "excludedAreas": [
+    "秋田県",
+    "山形県",
+    "栃木県",
+    "埼玉県",
+    "滋賀県",
+    "奈良県"
+  ],
+  "exclusionReason": "生産農業所得統計で産出額が秘匿(x)の県。個々の経営体を特定できないため値が公表されていない",
+  "axes": {
+    "x": {
+      "year": "2020年",
+      "proof": "manifest"
+    },
+    "y": {
+      "year": "2020年",
+      "proof": "manifest"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "beef-consumption-quantity",
+      "year": "2020"
+    },
+    {
+      "rankingKey": "total-population",
+      "year": "2020"
+    },
+    {
+      "statsDataId": "0002006790",
+      "time": "2020"
+    }
+  ],
+  "formula": "産出の濃さ = 地方内の都道府県の産出額シェアの合計 ÷ 地方内の人口シェアの合計 ×100。購入量 = 地方内の県庁所在市の購入量の単純平均 ÷ 47市の単純平均 ×100。沖縄県は九州に含める",
+  "generatedBy": "contents/blog/local-production-local-consumption-meat/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    },
+    {
+      "label": "生産農業所得統計",
+      "url": "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0002006790"
+    }
+  ]
+}

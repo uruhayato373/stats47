@@ -1,0 +1,197 @@
+{
+  "title": "たいの年間支出額（県庁所在市）",
+  "subtitle": "2021〜2025年の平均",
+  "unit": "円",
+  "source": "家計調査（総務省）",
+  "scheme": "Reds",
+  "data": [
+    {
+      "areaName": "北海道",
+      "value": 510
+    },
+    {
+      "areaName": "青森県",
+      "value": 698
+    },
+    {
+      "areaName": "岩手県",
+      "value": 478
+    },
+    {
+      "areaName": "宮城県",
+      "value": 427
+    },
+    {
+      "areaName": "秋田県",
+      "value": 700
+    },
+    {
+      "areaName": "山形県",
+      "value": 574
+    },
+    {
+      "areaName": "福島県",
+      "value": 628
+    },
+    {
+      "areaName": "茨城県",
+      "value": 491
+    },
+    {
+      "areaName": "栃木県",
+      "value": 475
+    },
+    {
+      "areaName": "群馬県",
+      "value": 520
+    },
+    {
+      "areaName": "埼玉県",
+      "value": 819
+    },
+    {
+      "areaName": "千葉県",
+      "value": 1016
+    },
+    {
+      "areaName": "東京都",
+      "value": 1130
+    },
+    {
+      "areaName": "神奈川県",
+      "value": 1122
+    },
+    {
+      "areaName": "新潟県",
+      "value": 489
+    },
+    {
+      "areaName": "富山県",
+      "value": 707
+    },
+    {
+      "areaName": "石川県",
+      "value": 991
+    },
+    {
+      "areaName": "福井県",
+      "value": 587
+    },
+    {
+      "areaName": "山梨県",
+      "value": 444
+    },
+    {
+      "areaName": "長野県",
+      "value": 643
+    },
+    {
+      "areaName": "岐阜県",
+      "value": 942
+    },
+    {
+      "areaName": "静岡県",
+      "value": 446
+    },
+    {
+      "areaName": "愛知県",
+      "value": 920
+    },
+    {
+      "areaName": "三重県",
+      "value": 847
+    },
+    {
+      "areaName": "滋賀県",
+      "value": 1339
+    },
+    {
+      "areaName": "京都府",
+      "value": 1623
+    },
+    {
+      "areaName": "大阪府",
+      "value": 1688
+    },
+    {
+      "areaName": "兵庫県",
+      "value": 2124
+    },
+    {
+      "areaName": "奈良県",
+      "value": 1930
+    },
+    {
+      "areaName": "和歌山県",
+      "value": 1448
+    },
+    {
+      "areaName": "鳥取県",
+      "value": 669
+    },
+    {
+      "areaName": "島根県",
+      "value": 1008
+    },
+    {
+      "areaName": "岡山県",
+      "value": 1367
+    },
+    {
+      "areaName": "広島県",
+      "value": 1488
+    },
+    {
+      "areaName": "山口県",
+      "value": 1896
+    },
+    {
+      "areaName": "徳島県",
+      "value": 1347
+    },
+    {
+      "areaName": "香川県",
+      "value": 1489
+    },
+    {
+      "areaName": "愛媛県",
+      "value": 2037
+    },
+    {
+      "areaName": "高知県",
+      "value": 1569
+    },
+    {
+      "areaName": "福岡県",
+      "value": 1857
+    },
+    {
+      "areaName": "佐賀県",
+      "value": 2054
+    },
+    {
+      "areaName": "長崎県",
+      "value": 1801
+    },
+    {
+      "areaName": "熊本県",
+      "value": 2231
+    },
+    {
+      "areaName": "大分県",
+      "value": 1644
+    },
+    {
+      "areaName": "宮崎県",
+      "value": 1003
+    },
+    {
+      "areaName": "鹿児島県",
+      "value": 1634
+    },
+    {
+      "areaName": "沖縄県",
+      "value": 659
+    }
+  ]
+}

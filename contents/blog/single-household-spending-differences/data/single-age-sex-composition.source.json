@@ -1,0 +1,17 @@
+{
+  "kind": "estat",
+  "statsDataId": "0002190004",
+  "params": {
+    "cdCat02": "21",
+    "cdArea": "00000",
+    "time": "2021-2025"
+  },
+  "generatedBy": "contents/blog/single-household-spending-differences/analysis/build.mjs",
+  "transform": "用途分類の月平均支出額を各年の集計世帯数で重みづけして5年分をまとめ、消費支出に占める割合（％）に直した。食料のその他は食料から外食と調理食品を引いた値、ほかの費目は消費支出から表の7項目を引いた値",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ]
+}

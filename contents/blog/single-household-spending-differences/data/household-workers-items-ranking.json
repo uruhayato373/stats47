@@ -1,0 +1,118 @@
+{
+  "title": "勤労者世帯どうしで比べた割合（二人以上の勤労者世帯=1）",
+  "year": "2025",
+  "unit": "倍",
+  "source": "家計調査（総務省）",
+  "data": [
+    {
+      "label": "民営家賃",
+      "value": 4.59,
+      "code": "020100010",
+      "singleWorkerYen": 303645,
+      "twoOrMoreWorkerYen": 119643,
+      "range2019_2025": [
+        4.37,
+        5.14
+      ]
+    },
+    {
+      "label": "鉄道運賃",
+      "value": 2.78,
+      "code": "070100010",
+      "singleWorkerYen": 47040,
+      "twoOrMoreWorkerYen": 30579,
+      "range2019_2025": [
+        2.05,
+        3.16
+      ]
+    },
+    {
+      "label": "飲酒代（外食）",
+      "value": 2.51,
+      "code": "011212020",
+      "singleWorkerYen": 35027,
+      "twoOrMoreWorkerYen": 25213,
+      "range2019_2025": [
+        2.51,
+        8.38
+      ]
+    },
+    {
+      "label": "弁当",
+      "value": 1.83,
+      "code": "010910010",
+      "singleWorkerYen": 19970,
+      "twoOrMoreWorkerYen": 19682,
+      "range2019_2025": [
+        1.76,
+        2.64
+      ]
+    },
+    {
+      "label": "外食",
+      "value": 1.47,
+      "code": "011200000",
+      "singleWorkerYen": 199897,
+      "twoOrMoreWorkerYen": 245295,
+      "range2019_2025": [
+        1.47,
+        1.92
+      ]
+    },
+    {
+      "label": "調理食品",
+      "value": 1.16,
+      "code": "010900000",
+      "singleWorkerYen": 105734,
+      "twoOrMoreWorkerYen": 165191,
+      "range2019_2025": [
+        1.16,
+        1.36
+      ]
+    },
+    {
+      "label": "交通・通信",
+      "value": 0.74,
+      "code": "070000000",
+      "singleWorkerYen": 281102,
+      "twoOrMoreWorkerYen": 684832,
+      "range2019_2025": [
+        0.74,
+        0.91
+      ]
+    },
+    {
+      "label": "米",
+      "value": 0.54,
+      "code": "010110001",
+      "singleWorkerYen": 12654,
+      "twoOrMoreWorkerYen": 42219,
+      "range2019_2025": [
+        0.37,
+        0.54
+      ]
+    },
+    {
+      "label": "生鮮魚介",
+      "value": 0.48,
+      "code": "010210000",
+      "singleWorkerYen": 9280,
+      "twoOrMoreWorkerYen": 35023,
+      "range2019_2025": [
+        0.44,
+        0.48
+      ]
+    },
+    {
+      "label": "生鮮肉",
+      "value": 0.36,
+      "code": "010310000",
+      "singleWorkerYen": 17691,
+      "twoOrMoreWorkerYen": 89883,
+      "range2019_2025": [
+        0.36,
+        0.41
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "chartType": "bar",
+  "title": "購入数量が最も減った品目",
+  "subtitle": "117品目のうち・2025年の数量（2000年比）",
+  "unit": "％",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "パーマネント代",
+      "value": 19,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 2,
+      "areaName": "いか",
+      "value": 19,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 3,
+      "areaName": "かに",
+      "value": 26,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 4,
+      "areaName": "たこ",
+      "value": 29,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 5,
+      "areaName": "スカート",
+      "value": 30,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 6,
+      "areaName": "さやまめ",
+      "value": 31,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 7,
+      "areaName": "男性用スーツ",
+      "value": 31,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 8,
+      "areaName": "ワイシャツ",
+      "value": 37,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 9,
+      "areaName": "みかん",
+      "value": 37,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    },
+    {
+      "rank": 10,
+      "areaName": "梨",
+      "value": 38,
+      "unit": "％",
+      "label": "購入数量が最も減った品目"
+    }
+  ]
+}

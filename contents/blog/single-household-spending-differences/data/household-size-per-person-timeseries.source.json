@@ -1,0 +1,19 @@
+{
+  "kind": "estat",
+  "statsDataId": "0002070009",
+  "params": {
+    "cdArea": "00000",
+    "cdTime": "2025000000",
+    "cdCat02": "03",
+    "cdCat03": "01,02,03,04",
+    "singleHousehold": "0002190004 cdCat02=21 cdCat03=A00 cdCat04=0"
+  },
+  "generatedBy": "contents/blog/single-household-spending-differences/analysis/build.mjs",
+  "transform": "用途分類の月平均支出額。二人以上の世帯の2〜5人の世帯を世帯人員(2〜5)で割った1人あたりの額と、単身世帯の1人の額を、2人世帯の1人あたりの額=100にそろえた指数",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ]
+}

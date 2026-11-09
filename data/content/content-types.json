@@ -2269,6 +2269,56 @@
       "id": "blog:wheat-flour-consumption-prefecture",
       "type": "type:reference",
       "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
+    },
+    {
+      "id": "blog:household-spending-25-years-bought-less-bought-more",
+      "type": "type:paper",
+      "reason": "問い issue:K08 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:household-spending-seasons-and-tax-hike-swings",
+      "type": "type:paper",
+      "reason": "問い issue:K09 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:beer-happoshu-liquor-tax-steps-household-response",
+      "type": "type:paper",
+      "reason": "問い issue:K09-2 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:education-spending-income-quintile-decade",
+      "type": "type:paper",
+      "reason": "問い issue:K06-2 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:income-quintile-share-shift",
+      "type": "type:paper",
+      "reason": "問い issue:K06-3 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:income-quintile-high-income-sales-check",
+      "type": "type:paper",
+      "reason": "問い issue:K06-4 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:university-advancement-rate-definitions",
+      "type": "type:paper",
+      "reason": "問い issue:D04-3 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:single-household-spending-differences",
+      "type": "type:paper",
+      "reason": "問い issue:K07 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:local-production-local-consumption-meat",
+      "type": "type:paper",
+      "reason": "問い issue:K01-5 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
+    },
+    {
+      "id": "blog:fresh-seafood-east-west-boundary",
+      "type": "type:paper",
+      "reason": "問い issue:K02-2 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
     }
   ]
 }

@@ -1,0 +1,80 @@
+{
+  "title": "産出上位3県の県庁所在市の購入量（47市の平均=100）",
+  "year": "2020",
+  "unit": "指数",
+  "source": "家計調査・生産農業所得統計",
+  "data": [
+    {
+      "label": "鹿児島市 牛肉",
+      "value": 85,
+      "pref": "鹿児島県",
+      "sharePct": 16.8,
+      "qtyG": 6328,
+      "qtyRank": 34
+    },
+    {
+      "label": "札幌市 牛肉",
+      "value": 91,
+      "pref": "北海道",
+      "sharePct": 14,
+      "qtyG": 6823,
+      "qtyRank": 31
+    },
+    {
+      "label": "宮崎市 牛肉",
+      "value": 101,
+      "pref": "宮崎県",
+      "sharePct": 10.3,
+      "qtyG": 7546,
+      "qtyRank": 24
+    },
+    {
+      "label": "鹿児島市 豚肉",
+      "value": 95,
+      "pref": "鹿児島県",
+      "sharePct": 13,
+      "qtyG": 21365,
+      "qtyRank": 32
+    },
+    {
+      "label": "宮崎市 豚肉",
+      "value": 104,
+      "pref": "宮崎県",
+      "sharePct": 7.9,
+      "qtyG": 23356,
+      "qtyRank": 17
+    },
+    {
+      "label": "札幌市 豚肉",
+      "value": 122,
+      "pref": "北海道",
+      "sharePct": 7.8,
+      "qtyG": 27546,
+      "qtyRank": 1
+    },
+    {
+      "label": "宮崎市 鶏肉",
+      "value": 130,
+      "pref": "宮崎県",
+      "sharePct": 19.3,
+      "qtyG": 24637,
+      "qtyRank": 2
+    },
+    {
+      "label": "鹿児島市 鶏肉",
+      "value": 118,
+      "pref": "鹿児島県",
+      "sharePct": 19.3,
+      "qtyG": 22348,
+      "qtyRank": 9
+    },
+    {
+      "label": "盛岡市 鶏肉",
+      "value": 84,
+      "pref": "岩手県",
+      "sharePct": 16.9,
+      "qtyG": 15887,
+      "qtyRank": 41
+    }
+  ]
+}

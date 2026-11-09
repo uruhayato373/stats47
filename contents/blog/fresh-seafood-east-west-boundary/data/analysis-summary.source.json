@@ -1,0 +1,85 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "tuna-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "horse-mackerel-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "sardine-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "bonito-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "flounder-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "salmon-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "mackerel-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "saury-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "sea-bream-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "yellowtail-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "squid-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "octopus-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "shrimp-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "crab-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "clam-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "freshwater-clam-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "oyster-consumption-expenditure",
+      "year": "2007-2025"
+    },
+    {
+      "rankingKey": "scallop-consumption-expenditure",
+      "year": "2007-2025"
+    }
+  ],
+  "formula": "本文の数値の計算過程",
+  "generatedBy": "contents/blog/fresh-seafood-east-west-boundary/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ]
+}

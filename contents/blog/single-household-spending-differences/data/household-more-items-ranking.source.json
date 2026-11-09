@@ -1,0 +1,21 @@
+{
+  "kind": "estat",
+  "statsDataId": "0004023614",
+  "params": {
+    "tables": {
+      "single": "0004023614 cat02=21",
+      "twoOrMore": "0004023605 cat02=03",
+      "allHouseholds": "0004023612 cat02=11"
+    },
+    "area": "00000",
+    "time": "2025"
+  },
+  "generatedBy": "contents/blog/single-household-spending-differences/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ],
+  "transform": "品目の年間支出額が消費支出に占める割合を、単身世帯の割合 ÷ 二人以上の世帯の割合で比べた倍率。2019〜2025年の範囲は各年の同じ倍率の最小と最大"
+}

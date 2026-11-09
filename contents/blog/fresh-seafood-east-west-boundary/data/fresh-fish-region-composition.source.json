@@ -1,0 +1,85 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "tuna-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "horse-mackerel-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "sardine-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "bonito-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "flounder-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "salmon-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "mackerel-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "saury-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "sea-bream-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "yellowtail-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "squid-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "octopus-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "shrimp-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "crab-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "clam-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "freshwater-clam-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "oyster-consumption-expenditure",
+      "year": "2021-2025"
+    },
+    {
+      "rankingKey": "scallop-consumption-expenditure",
+      "year": "2021-2025"
+    }
+  ],
+  "formula": "各都市で18魚種の年間支出額（2021〜2025年平均）の合計に占める魚種の割合を出し、地方ブロック内の都市で単純平均した（合計100.0に丸め）",
+  "generatedBy": "contents/blog/fresh-seafood-east-west-boundary/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ]
+}

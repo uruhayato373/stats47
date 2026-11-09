@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
+  "year": "2024",
+  "unit": "％",
+  "label": "県内大学入学者割合",
+  "readerLabel": "県内大学入学者割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/in-pref-university-entrance-ratio-by-highschool-origin/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug university-advancement-rate-definitions --keys in-pref-university-entrance-ratio-by-highschool-origin --data-name in-pref-entrance-prefecture-rankings",
+  "fetchedAt": "2026-11-09T06:26:38.982Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

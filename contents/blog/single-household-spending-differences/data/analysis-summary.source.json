@@ -1,0 +1,21 @@
+{
+  "kind": "estat",
+  "statsDataId": "0004023614",
+  "params": {
+    "tables": {
+      "single": "0004023614 cat02=21",
+      "twoOrMore": "0004023605 cat02=03",
+      "allHouseholds": "0004023612 cat02=11"
+    },
+    "area": "00000",
+    "time": "2025"
+  },
+  "generatedBy": "contents/blog/single-household-spending-differences/analysis/build.mjs",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ],
+  "transform": "本文の数値の計算過程（単身世帯・二人以上の世帯・総世帯の2025年の値と各図の元の数）"
+}
