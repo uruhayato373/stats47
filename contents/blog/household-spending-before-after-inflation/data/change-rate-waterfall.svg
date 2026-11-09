@@ -1,0 +1,90 @@
+<svg width="960" height="440" viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="品目別 変化率（2019→2024年）">
+  <title>品目別 変化率（2019→2024年）</title>
+  <defs>
+    <linearGradient id="posBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="negBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="440" fill="#f9fafb" rx="8"/>
+  <text x="480" y="36" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">品目別 変化率（2019年 → 2024年）</text>
+  <text x="480" y="56" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" fill="#6b7280">二人以上の世帯・全国平均・年額ベース</text>
+
+  <!-- Chart area: x=80..920, y=80..380 -->
+  <!-- 0% line at y=340 -->
+  <!-- Scale: 1% = 8px -->
+  <!-- Bar width = 72, gap = 12, total = 84*10 = 840 → x start = 80 -->
+
+  <!-- Grid lines -->
+  <line x1="80" y1="340" x2="920" y2="340" stroke="#374151" stroke-width="1.5"/>
+  <text x="72" y="344" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#6b7280">0%</text>
+
+  <line x1="80" y1="260" x2="920" y2="260" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <text x="72" y="264" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#9ca3af">+10%</text>
+
+  <line x1="80" y1="180" x2="920" y2="180" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <text x="72" y="184" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#9ca3af">+20%</text>
+
+  <line x1="80" y1="100" x2="920" y2="100" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <text x="72" y="104" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#9ca3af">+30%</text>
+
+  <!-- 1. アイスクリーム +26.7% → height=213.6 -->
+  <rect x="86" y="126" width="72" height="214" rx="4" fill="url(#posBar)" opacity="0.9"/>
+  <text x="122" y="120" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#dc2626">+26.7%</text>
+  <text x="122" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">アイス</text>
+  <text x="122" y="414" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">クリーム</text>
+
+  <!-- Annotation on アイスクリーム -->
+  <rect x="88" y="88" width="106" height="24" rx="12" fill="#dc2626" opacity="0.1"/>
+  <text x="141" y="105" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" font-weight="bold" fill="#dc2626">5年で+26.7%</text>
+
+  <!-- 2. コーヒー +23.7% → height=189.6 -->
+  <rect x="170" y="150" width="72" height="190" rx="4" fill="url(#posBar)" opacity="0.85"/>
+  <text x="206" y="144" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+23.7%</text>
+  <text x="206" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">コーヒー</text>
+
+  <!-- 3. 焼肉 +21.3% → height=170.4 -->
+  <rect x="254" y="170" width="72" height="170" rx="4" fill="url(#posBar)" opacity="0.8"/>
+  <text x="290" y="164" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+21.3%</text>
+  <text x="290" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">焼肉</text>
+
+  <!-- 4. ビール +20.7% → height=165.6 -->
+  <rect x="338" y="174" width="72" height="166" rx="4" fill="url(#posBar)" opacity="0.75"/>
+  <text x="374" y="168" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+20.7%</text>
+  <text x="374" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">ビール</text>
+
+  <!-- 5. 中華そば外食 +20.3% → height=162.4 -->
+  <rect x="422" y="178" width="72" height="162" rx="4" fill="url(#posBar)" opacity="0.7"/>
+  <text x="458" y="172" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+20.3%</text>
+  <text x="458" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">中華そば</text>
+  <text x="458" y="414" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">外食</text>
+
+  <!-- 6. 中華麺 +19.0% → height=152.0 -->
+  <rect x="506" y="188" width="72" height="152" rx="4" fill="url(#posBar)" opacity="0.65"/>
+  <text x="542" y="182" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+19.0%</text>
+  <text x="542" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">中華麺</text>
+
+  <!-- 7. すし外食 +9.1% → height=72.8 -->
+  <rect x="590" y="267" width="72" height="73" rx="4" fill="url(#posBar)" opacity="0.6"/>
+  <text x="626" y="261" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+9.1%</text>
+  <text x="626" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">すし外食</text>
+
+  <!-- 8. 食パン +7.2% → height=57.6 -->
+  <rect x="674" y="282" width="72" height="58" rx="4" fill="url(#posBar)" opacity="0.55"/>
+  <text x="710" y="276" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+7.2%</text>
+  <text x="710" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">食パン</text>
+
+  <!-- 9. ワイン +1.2% → height=9.6 -->
+  <rect x="758" y="330" width="72" height="10" rx="4" fill="url(#posBar)" opacity="0.5"/>
+  <text x="794" y="324" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="600" fill="#dc2626">+1.2%</text>
+  <text x="794" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">ワイン</text>
+
+  <!-- 10. ぎょうざ -3.9% → height=31.2 (goes down) -->
+  <rect x="842" y="340" width="72" height="31" rx="4" fill="url(#negBar)" opacity="0.8"/>
+  <text x="878" y="385" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#2563eb">-3.9%</text>
+  <text x="878" y="400" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="11" fill="#374151">ぎょうざ</text>
+</svg>
