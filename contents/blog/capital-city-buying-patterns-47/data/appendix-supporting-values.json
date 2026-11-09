@@ -1,0 +1,985 @@
+{
+ "description": "本文の比・差・寄与・標準偏差・一致度などの計算値。式は formula、元の値は 家計調査 家計収支編 二人以上の世帯 品目分類(2025年改定) 年次 金額0004023605・数量0004023606 (cdCat02=03) から取り、47市は県庁所在市(NN003、福岡市は40004)、全国は00000。数量と平均価格の分解は ln(支出額の対全国比) = ln(数量の対全国比) + ln(平均価格の対全国比)。",
+ "values": {
+  "countCities": {
+   "value": 47,
+   "formula": "県庁所在市の数 (東京都区部・横浜市・静岡市・大阪市・福岡市を含む。川崎・浜松・堺・北九州は含まない)"
+  },
+  "countQuantityItems": {
+   "value": 190,
+   "formula": "数量表の分類コード数204のうち、金額表で下位の項目を持たない品目 (集計の親項目14を除く)"
+  },
+  "countLeafAmountItems": {
+   "value": 544,
+   "formula": "金額表で下位の項目を持つ項目と合計を除く、単位が円の末端品目"
+  },
+  "countAmountOnlyItems": {
+   "value": 354,
+   "formula": "544 - 190"
+  },
+  "countItemsZero2025": {
+   "value": 19,
+   "formula": "190品目のうち2025年に47市のどこかで支出額または数量が0の品目 (かに・あさり・公営家賃・畳替えなど)"
+  },
+  "countItems2025": {
+   "value": 171,
+   "formula": "190 - 19"
+  },
+  "countItemsAllYears": {
+   "value": 155,
+   "formula": "2007〜2025年の全年・全47市で支出額と数量が正の品目"
+  },
+  "countFoodItems171": {
+   "value": 122,
+   "formula": "171品目のうち分類コードが01で始まる食料の品目"
+  },
+  "countNonFoodItems171": {
+   "value": 49,
+   "formula": "171 - 122"
+  },
+  "countFoodItemsQuantity112": {
+   "value": 112,
+   "formula": "155品目のうち食料の品目"
+  },
+  "countFoodComposition206": {
+   "value": 206,
+   "formula": "食料の末端品目212のうち2007〜2025年の全年・全47市で支出額が正の品目"
+  },
+  "countFoodItems2025Only212": {
+   "value": 212,
+   "formula": "2025年に全47市で支出額が正の食料の末端品目"
+  },
+  "coverageDecomposable190": {
+   "value": 0.30161223161209627,
+   "formula": "190品目の全国2025年支出額の合計 / 全国の消費支出3,768,007円"
+  },
+  "coverageComplete171": {
+   "value": 0.26597694749505507,
+   "formula": "171品目の全国2025年支出額の合計 / 全国の消費支出3,768,007円"
+  },
+  "nationalConsumptionExpenditure2025": {
+   "value": 3768007,
+   "formula": "全国・二人以上の世帯・消費支出(円)・2025年 (統計表0004023605 cat01=001100000)"
+  },
+  "medianCityConsumptionRatio": {
+   "value": 0.9670969294908422,
+   "formula": "47市の消費支出の中央値3,644,028円 / 全国3,768,007円"
+  },
+  "countOfficialCities52": {
+   "value": 52,
+   "formula": "総務省が公表する県庁所在市と政令指定都市の市数。この記事の分析対象ではない"
+  },
+  "countOtherCities46": {
+   "value": 46,
+   "formula": "47市から比べる1市を除いた市数"
+  },
+  "statsDataIdAmount": {
+   "value": 4023605,
+   "formula": "統計表ID 0004023605 (金額)。先頭の0を除いた数値表記"
+  },
+  "statsDataIdQuantity": {
+   "value": 4023606,
+   "formula": "統計表ID 0004023606 (数量)。先頭の0を除いた数値表記"
+  },
+  "pooledQuantityShare2025": {
+   "value": 0.8039024402010124,
+   "formula": "Σ_i(Var_c ln Q + Cov_c(ln Q, ln P)) / Σ_i Var_c ln E。171品目・2025年。ln E = ln Q + ln P の恒等式(検算済み)"
+  },
+  "pooledPriceShare2025": {
+   "value": 0.19609755979898758,
+   "formula": "1 - 数量の寄与"
+  },
+  "countItemsQuantityVarGtPriceVar": {
+   "value": 161,
+   "formula": "Var_c ln Q > Var_c ln P の品目数 (171品目・2025年)"
+  },
+  "medianSdExpenditure": {
+   "value": 0.2620112701285061,
+   "formula": "品目ごとの47市の ln(支出額の対全国比) の標準偏差の中央値"
+  },
+  "medianSdQuantity": {
+   "value": 0.26654871084520504,
+   "formula": "同 ln(数量の対全国比)"
+  },
+  "medianSdPrice": {
+   "value": 0.13204794032370237,
+   "formula": "同 ln(平均価格の対全国比)。平均価格 = 支出額/数量"
+  },
+  "q1SdExpenditure": {
+   "value": 0.16117989878175887,
+   "formula": "品目ごとの標準偏差の下から25%点"
+  },
+  "q3SdExpenditure": {
+   "value": 0.38777341667698995,
+   "formula": "品目ごとの標準偏差の上から25%点"
+  },
+  "medianCorrQuantityPrice": {
+   "value": -0.32275622392616116,
+   "formula": "品目ごとの47市の ln Q と ln P の相関係数の中央値 (171品目・2025年)"
+  },
+  "pooledQuantityShareWinsor3": {
+   "value": 0.8182061494499544,
+   "formula": "ln の対全国比を ±ln3 で切って同じ計算"
+  },
+  "countItemsNoExtreme": {
+   "value": 115,
+   "formula": "47市の ln E, ln Q, ln P の絶対値がすべて ln3 以下の品目数"
+  },
+  "pooledQuantityShareNoExtreme": {
+   "value": 0.8144520349807374,
+   "formula": "上の115品目だけで同じ計算"
+  },
+  "pooledQuantityShareFood": {
+   "value": 0.9649858911600394,
+   "formula": "食料122品目で同じ計算"
+  },
+  "pooledQuantityShareNonFood": {
+   "value": 0.669876481004698,
+   "formula": "食料以外49品目で同じ計算"
+  },
+  "countFoodQuantityGtPrice": {
+   "value": 121,
+   "formula": "食料122品目のうち Var ln Q > Var ln P の品目数"
+  },
+  "countNonFoodQuantityGtPrice": {
+   "value": 40,
+   "formula": "食料以外49品目のうち Var ln Q > Var ln P の品目数"
+  },
+  "pooledQuantityShareByYearMin": {
+   "value": 0.8340689370189166,
+   "formula": "155品目・2007〜2025年の各年の数量の寄与の最小 (2025年)"
+  },
+  "pooledQuantityShareByYearMax": {
+   "value": 0.8849046722137024,
+   "formula": "同 最大 (2008年)"
+  },
+  "pooledQuantityShare10yMean": {
+   "value": 0.9197836697201384,
+   "formula": "155品目。2016〜2025年の ln 対全国比を市ごとに平均してから同じ計算"
+  },
+  "countItemsQuantityVarGtPrice10y": {
+   "value": 144,
+   "formula": "上の10年平均で Var ln Q > Var ln P の品目数 (155品目中)"
+  },
+  "splitHalfExpenditureMedian": {
+   "value": 0.9185345927354072,
+   "formula": "2016〜2025年を偶数年と奇数年に分けて平均した47市の ln 対全国比の相関を品目ごとに求めた中央値 (155品目)"
+  },
+  "splitHalfExpenditureShareAbove0.5": {
+   "value": 0.967741935483871,
+   "formula": "上の相関が0.5を超えた品目の割合"
+  },
+  "splitHalfQuantityMedian": {
+   "value": 0.895251554852588,
+   "formula": "2016〜2025年を偶数年と奇数年に分けて平均した47市の ln 対全国比の相関を品目ごとに求めた中央値 (155品目)"
+  },
+  "splitHalfQuantityShareAbove0.5": {
+   "value": 0.9548387096774194,
+   "formula": "上の相関が0.5を超えた品目の割合"
+  },
+  "splitHalfPriceMedian": {
+   "value": 0.715215668924716,
+   "formula": "2016〜2025年を偶数年と奇数年に分けて平均した47市の ln 対全国比の相関を品目ごとに求めた中央値 (155品目)"
+  },
+  "splitHalfPriceShareAbove0.5": {
+   "value": 0.8193548387096774,
+   "formula": "上の相関が0.5を超えた品目の割合"
+  },
+  "splitHalfKerosene": {
+   "value": 0.9967314233331641,
+   "formula": "灯油の支出額について、偶数年平均と奇数年平均の47市の相関"
+  },
+  "splitHalfPropaneGas": {
+   "value": 0.9907799386395003,
+   "formula": "プロパンガスの支出額について同じ"
+  },
+  "splitHalfDriedHorseMackerel": {
+   "value": 0.9799426996331501,
+   "formula": "干しあじの支出額について同じ"
+  },
+  "sameSidePairs_1.1": {
+   "value": 4811,
+   "formula": "2025年の |ln 対全国比| >= ln(1.1) の品目×市の組合せ数 (155品目×47市)"
+  },
+  "sameSideShareOfAll_1.1": {
+   "value": 0.660398078242965,
+   "formula": "上の組合せ数 / 7,285"
+  },
+  "sameSideRate_1.1": {
+   "value": 0.7733204000092381,
+   "formula": "上の組合せで、2016〜2024年の9年のうち2025年と同じ側に出る年の割合の平均"
+  },
+  "sameSidePairs_1.25": {
+   "value": 2569,
+   "formula": "2025年の |ln 対全国比| >= ln(1.25) の品目×市の組合せ数 (155品目×47市)"
+  },
+  "sameSideShareOfAll_1.25": {
+   "value": 0.3526424159231297,
+   "formula": "上の組合せ数 / 7,285"
+  },
+  "sameSideRate_1.25": {
+   "value": 0.8132866225509278,
+   "formula": "上の組合せで、2016〜2024年の9年のうち2025年と同じ側に出る年の割合の平均"
+  },
+  "sameSidePairs_1.5": {
+   "value": 1155,
+   "formula": "2025年の |ln 対全国比| >= ln(1.5) の品目×市の組合せ数 (155品目×47市)"
+  },
+  "sameSideShareOfAll_1.5": {
+   "value": 0.15854495538778313,
+   "formula": "上の組合せ数 / 7,285"
+  },
+  "sameSideRate_1.5": {
+   "value": 0.8342472342472342,
+   "formula": "上の組合せで、2016〜2024年の9年のうち2025年と同じ側に出る年の割合の平均"
+  },
+  "sameSidePairs_2.0": {
+   "value": 344,
+   "formula": "2025年の |ln 対全国比| >= ln(2.0) の品目×市の組合せ数 (155品目×47市)"
+  },
+  "sameSideShareOfAll_2.0": {
+   "value": 0.04722031571722718,
+   "formula": "上の組合せ数 / 7,285"
+  },
+  "sameSideRate_2.0": {
+   "value": 0.8533591731266149,
+   "formula": "上の組合せで、2016〜2024年の9年のうち2025年と同じ側に出る年の割合の平均"
+  },
+  "sameSidePairsAll": {
+   "value": 7285,
+   "formula": "155品目 × 47市"
+  },
+  "sameSideRateAll": {
+   "value": 0.7076641500800733,
+   "formula": "全組合せで同じ側に出る年の割合の平均"
+  },
+  "threshold1.25": {
+   "value": 1.25,
+   "formula": "離れの判定の閾値 (倍)"
+  },
+  "threshold0.8": {
+   "value": 0.8,
+   "formula": "1/1.25"
+  },
+  "threshold2": {
+   "value": 2.0,
+   "formula": "離れの判定の閾値 (倍)"
+  },
+  "thresholdClip3": {
+   "value": 3,
+   "formula": "対全国比を切る上限 (倍)・下限は1/3"
+  },
+  "splitThreshold0.5": {
+   "value": 0.5,
+   "formula": "相関の判定線"
+  },
+  "oppositeShare1.25": {
+   "value": 0.18671337744907224,
+   "formula": "1 - 同じ側に出る割合 (1.25倍以上の組合せ)"
+  },
+  "sameSidePairsQuantity": {
+   "value": 2657,
+   "formula": "2025年の |ln Quantity の対全国比| >= ln1.25 の組合せ数"
+  },
+  "sameSideRateQuantity": {
+   "value": 0.7960105382009786,
+   "formula": "同じ側に出る年の割合の平均"
+  },
+  "sameSidePairsPrice": {
+   "value": 1186,
+   "formula": "2025年の |ln Price の対全国比| >= ln1.25 の組合せ数"
+  },
+  "sameSideRatePrice": {
+   "value": 0.6714446318156267,
+   "formula": "同じ側に出る年の割合の平均"
+  },
+  "cityQuantityRatioMin": {
+   "value": 0.715105568676415,
+   "formula": "那覇市: 112の食料品目の ln 数量対全国比(2016〜2025年平均)の中央値のexp"
+  },
+  "cityQuantityRatioMax": {
+   "value": 1.1003708897975695,
+   "formula": "新潟市: 同"
+  },
+  "cityPriceRatioMin": {
+   "value": 0.9399827465139995,
+   "formula": "青森市: 112の食料品目の ln 平均価格対全国比(2016〜2025年平均)の中央値のexp"
+  },
+  "cityPriceRatioMax": {
+   "value": 1.0915673041468208,
+   "formula": "東京都区部: 同"
+  },
+  "cityPriceRatio_横浜市": {
+   "value": 1.0589536423153978,
+   "formula": "横浜市: 同"
+  },
+  "cityPriceRatio_神戸市": {
+   "value": 1.056902479688085,
+   "formula": "神戸市: 同"
+  },
+  "cityPriceRatio_秋田市": {
+   "value": 0.9618836072081401,
+   "formula": "秋田市: 同"
+  },
+  "cityPriceRatio_盛岡市": {
+   "value": 0.9622222411310836,
+   "formula": "盛岡市: 同"
+  },
+  "corrCityQuantityPrice10y": {
+   "value": -0.20010934334197555,
+   "formula": "47市の ln(数量の中央値比) と ln(平均価格の中央値比) の相関 (2016〜2025年平均)"
+  },
+  "corrCityQuantityPrice2025": {
+   "value": 0.048690039279638615,
+   "formula": "同 (2025年のみ・155品目の食料112品目)"
+  },
+  "medianCitiesAboveNational": {
+   "value": 21.0,
+   "formula": "品目ごとに支出額が全国を上回る市の数の中央値 (171品目)"
+  },
+  "minCitiesAbove": {
+   "value": 12,
+   "formula": "同 最少"
+  },
+  "maxCitiesAbove": {
+   "value": 33,
+   "formula": "同 最多"
+  },
+  "countItemsMedianCityBelow": {
+   "value": 126,
+   "formula": "47市の中央値が全国を下回る品目数"
+  },
+  "countItemsMedianCityAbove": {
+   "value": 45,
+   "formula": "47市の中央値が全国を上回る品目数"
+  },
+  "countItems30OrMoreBelow": {
+   "value": 29,
+   "formula": "30市以上が全国を下回る品目数"
+  },
+  "countItems30OrMoreAbove": {
+   "value": 4,
+   "formula": "30市以上が全国を上回る品目数"
+  },
+  "citiesBelowMenShoes": {
+   "value": 35,
+   "formula": "男性用靴: 全国を下回る市の数"
+  },
+  "citiesBelowUmeboshi": {
+   "value": 34,
+   "formula": "梅干し"
+  },
+  "citiesBelowKerosene": {
+   "value": 34,
+   "formula": "灯油"
+  },
+  "citiesBelowOtherNoodles": {
+   "value": 34,
+   "formula": "他の麺類"
+  },
+  "citiesAboveShirts": {
+   "value": 33,
+   "formula": "ワイシャツ: 全国を上回る市の数"
+  },
+  "citiesAboveMinceBeef": {
+   "value": 30,
+   "formula": "合いびき肉"
+  },
+  "citiesAboveEnoki": {
+   "value": 30,
+   "formula": "えのきたけ"
+  },
+  "citiesAbovePerm": {
+   "value": 30,
+   "formula": "パーマネント代"
+  },
+  "aomori_灯油_ratio": {
+   "value": 6.077618688771666,
+   "formula": "青森市の灯油の支出額 / 全国 (2025年)"
+  },
+  "aomori_灯油_sd": {
+   "value": 0.919399479751321,
+   "formula": "灯油の47市の ln 対全国比の標準偏差"
+  },
+  "aomori_灯油_z": {
+   "value": 2.4399893747823427,
+   "formula": "(ln 比 - 47市の平均) / 47市の標準偏差"
+  },
+  "aomori_ソーセージ_ratio": {
+   "value": 1.1924259190950448,
+   "formula": "青森市のソーセージの支出額 / 全国 (2025年)"
+  },
+  "aomori_ソーセージ_sd": {
+   "value": 0.09087574668490327,
+   "formula": "ソーセージの47市の ln 対全国比の標準偏差"
+  },
+  "aomori_ソーセージ_z": {
+   "value": 2.4233627555386605,
+   "formula": "(ln 比 - 47市の平均) / 47市の標準偏差"
+  },
+  "clusterExplainedK4": {
+   "value": 0.28295188884243405,
+   "formula": "Ward法4クラスタの級内平方和による説明率 (206品目・2025年)"
+  },
+  "clusterK4Size1": {
+   "value": 1,
+   "formula": "那覇市"
+  },
+  "clusterK4Size2": {
+   "value": 13,
+   "formula": "岡山市、山口市、徳島市、高松市、松山市、高知市、福岡市、佐賀市、長崎市、熊本市、大分市、宮崎市、鹿児島市"
+  },
+  "clusterK4Size3": {
+   "value": 14,
+   "formula": "富山市、金沢市、福井市、岐阜市、津市、大津市、京都市、大阪市、神戸市、奈良市、和歌山市、鳥取市、松江市、広島市"
+  },
+  "clusterK4Size4": {
+   "value": 19,
+   "formula": "札幌市、青森市、盛岡市、仙台市、秋田市、山形市、福島市、水戸市、宇都宮市、前橋市、さいたま市、千葉市、東京都区部、横浜市、新潟市、甲府市、長野市、静岡市、名古屋市"
+  },
+  "pc1Share": {
+   "value": 0.1762368714075437,
+   "formula": "第1主成分の寄与率"
+  },
+  "pc2Share": {
+   "value": 0.10278229866490589,
+   "formula": "第2主成分の寄与率"
+  },
+  "pc1RegionEta2": {
+   "value": 0.8886927472643826,
+   "formula": "第1主成分得点の地方区分(8区分)による説明率 η²"
+  },
+  "itemRegionEta2Median": {
+   "value": 0.44454837755376475,
+   "formula": "品目ごとの47市の ln 構成比(2016〜2025年平均)を地方区分で説明する η² の中央値"
+  },
+  "itemRegionEta2NullMedian": {
+   "value": 0.1415618090932116,
+   "formula": "市の並びを30回入れ替えたときの η² の中央値"
+  },
+  "itemRegionEta2ShareAboveNull95": {
+   "value": 0.8300970873786407,
+   "formula": "η² が入れ替え95%点を上回る品目の割合"
+  },
+  "ariYearsSplitK3": {
+   "value": 1.0,
+   "formula": "偶数年平均と奇数年平均で別々にWard法で分けた組の調整ランド指数"
+  },
+  "ariItemsSplitK3": {
+   "value": 0.34954931624246244,
+   "formula": "品目を半分に無作為に分けた2組の調整ランド指数の100回の平均"
+  },
+  "ariRegionK3": {
+   "value": 0.16649132081967014,
+   "formula": "Ward法の組と地方区分(8区分)の調整ランド指数"
+  },
+  "ariCat10K3": {
+   "value": -0.0335178755099646,
+   "formula": "食料の構成でのWard法の組と10費目の構成比でのWard法の組の調整ランド指数"
+  },
+  "ariRegionNull95K3": {
+   "value": 0.03738291493296755,
+   "formula": "組をシャッフルして地方区分と比べた調整ランド指数の95%点 (1000回)"
+  },
+  "ariYearsSplitK4": {
+   "value": 0.7227214078069861,
+   "formula": "偶数年平均と奇数年平均で別々にWard法で分けた組の調整ランド指数"
+  },
+  "ariItemsSplitK4": {
+   "value": 0.35060584649892085,
+   "formula": "品目を半分に無作為に分けた2組の調整ランド指数の100回の平均"
+  },
+  "ariRegionK4": {
+   "value": 0.3117045424958045,
+   "formula": "Ward法の組と地方区分(8区分)の調整ランド指数"
+  },
+  "ariCat10K4": {
+   "value": -0.03637658531240583,
+   "formula": "食料の構成でのWard法の組と10費目の構成比でのWard法の組の調整ランド指数"
+  },
+  "ariRegionNull95K4": {
+   "value": 0.050715186862243404,
+   "formula": "組をシャッフルして地方区分と比べた調整ランド指数の95%点 (1000回)"
+  },
+  "ariYearsSplitK5": {
+   "value": 0.6368467450831851,
+   "formula": "偶数年平均と奇数年平均で別々にWard法で分けた組の調整ランド指数"
+  },
+  "ariItemsSplitK5": {
+   "value": 0.3670765178142967,
+   "formula": "品目を半分に無作為に分けた2組の調整ランド指数の100回の平均"
+  },
+  "ariRegionK5": {
+   "value": 0.4098248662986963,
+   "formula": "Ward法の組と地方区分(8区分)の調整ランド指数"
+  },
+  "ariCat10K5": {
+   "value": 0.0686444348202685,
+   "formula": "食料の構成でのWard法の組と10費目の構成比でのWard法の組の調整ランド指数"
+  },
+  "ariRegionNull95K5": {
+   "value": 0.05139389504554849,
+   "formula": "組をシャッフルして地方区分と比べた調整ランド指数の95%点 (1000回)"
+  },
+  "ariYearsSplitK6": {
+   "value": 0.6539813701518954,
+   "formula": "偶数年平均と奇数年平均で別々にWard法で分けた組の調整ランド指数"
+  },
+  "ariItemsSplitK6": {
+   "value": 0.38587159965922047,
+   "formula": "品目を半分に無作為に分けた2組の調整ランド指数の100回の平均"
+  },
+  "ariRegionK6": {
+   "value": 0.4621410254774633,
+   "formula": "Ward法の組と地方区分(8区分)の調整ランド指数"
+  },
+  "ariCat10K6": {
+   "value": 0.09553224504996585,
+   "formula": "食料の構成でのWard法の組と10費目の構成比でのWard法の組の調整ランド指数"
+  },
+  "ariRegionNull95K6": {
+   "value": 0.05529898064631362,
+   "formula": "組をシャッフルして地方区分と比べた調整ランド指数の95%点 (1000回)"
+  },
+  "pc1Corr_合いびき肉": {
+   "value": 0.8946364546361887,
+   "formula": "第1主成分得点と合いびき肉の ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_たい": {
+   "value": 0.8206907184374622,
+   "formula": "第1主成分得点とたいの ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_鶏肉": {
+   "value": 0.8085522994693113,
+   "formula": "第1主成分得点と鶏肉の ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_さば": {
+   "value": 0.7601095427879323,
+   "formula": "第1主成分得点とさばの ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_牛肉": {
+   "value": 0.7426503844404148,
+   "formula": "第1主成分得点と牛肉の ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_他のきのこ": {
+   "value": -0.8422900814345342,
+   "formula": "第1主成分得点と他のきのこの ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_まぐろ": {
+   "value": -0.7938767274091852,
+   "formula": "第1主成分得点とまぐろの ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_塩さけ": {
+   "value": -0.7356979152972974,
+   "formula": "第1主成分得点と塩さけの ln 構成比(2025年)の相関"
+  },
+  "pc1Corr_中華そば": {
+   "value": -0.7252660744824946,
+   "formula": "第1主成分得点と中華そばの ln 構成比(2025年)の相関"
+  },
+  "distanceMedian": {
+   "value": 0.24230337619473202,
+   "formula": "47市の離れ幅の中央値 (206品目の ln 構成比対全国比、2016〜2025年平均の二乗平均平方根)"
+  },
+  "yearlyDeviationRms": {
+   "value": 0.15012467238979665,
+   "formula": "各年の ln 構成比対全国比と10年平均の差の二乗平均平方根 (206品目×47市×10年)"
+  },
+  "distanceRankCorr2025vs10y": {
+   "value": 0.8429694727104534,
+   "formula": "2025年のみの離れ幅の順位と10年平均の離れ幅の順位の相関"
+  },
+  "adjacentPairs": {
+   "value": 22,
+   "formula": "隣り合う県の県庁所在市の組 (22組)"
+  },
+  "adjacentPairsWithOpposite": {
+   "value": 18,
+   "formula": "1品目以上が逆向きの組数"
+  },
+  "ratio_福岡市_ワイン": {
+   "value": 1.3180097813932887,
+   "formula": "福岡市のワインの構成比 / 全国 (2016〜2025年平均)"
+  },
+  "ratio_佐賀市_ワイン": {
+   "value": 0.6827368277195186,
+   "formula": "佐賀市のワイン"
+  },
+  "ratio_福岡市_ようかん": {
+   "value": 0.7968921610595887,
+   "formula": "福岡市のようかんの構成比 / 全国 (2016〜2025年平均)"
+  },
+  "ratio_佐賀市_ようかん": {
+   "value": 1.871889832053771,
+   "formula": "佐賀市のようかん"
+  },
+  "oppositeFukuokaSaga": {
+   "value": 6,
+   "formula": "福岡市と佐賀市で、どちらも1.25倍以上または0.8倍以下に離れて向きが逆の品目数 (206品目)"
+  },
+  "oppositeYamaguchiFukuoka": {
+   "value": 6,
+   "formula": "山口市と福岡市で同じ"
+  },
+  "oppositeMatsuyamaKochi": {
+   "value": 5,
+   "formula": "松山市と高知市で同じ"
+  },
+  "catSd_食料": {
+   "value": 0.044242605440403114,
+   "formula": "食料が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_食料": {
+   "value": 0.9215022160008278,
+   "formula": "最小: 山口市 (倍)"
+  },
+  "catHigh_食料": {
+   "value": 1.1260548525489054,
+   "formula": "最大: 大阪市 (倍)"
+  },
+  "catSd_住居": {
+   "value": 0.16381398595044308,
+   "formula": "住居が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_住居": {
+   "value": 0.7459867441121038,
+   "formula": "最小: 福井市 (倍)"
+  },
+  "catHigh_住居": {
+   "value": 1.7239746632136825,
+   "formula": "最大: 那覇市 (倍)"
+  },
+  "catSd_光熱・水道": {
+   "value": 0.12084664199046845,
+   "formula": "光熱・水道が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_光熱・水道": {
+   "value": 0.826515765270888,
+   "formula": "最小: 東京都区部 (倍)"
+  },
+  "catHigh_光熱・水道": {
+   "value": 1.4857147107139637,
+   "formula": "最大: 青森市 (倍)"
+  },
+  "catSd_家具・家事用品": {
+   "value": 0.04887790346819346,
+   "formula": "家具・家事用品が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_家具・家事用品": {
+   "value": 0.8912964396157624,
+   "formula": "最小: 金沢市 (倍)"
+  },
+  "catHigh_家具・家事用品": {
+   "value": 1.147401412406368,
+   "formula": "最大: 松山市 (倍)"
+  },
+  "catSd_被服及び履物": {
+   "value": 0.08252437080390991,
+   "formula": "被服及び履物が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_被服及び履物": {
+   "value": 0.7878956417760987,
+   "formula": "最小: 那覇市 (倍)"
+  },
+  "catHigh_被服及び履物": {
+   "value": 1.156642377050459,
+   "formula": "最大: さいたま市 (倍)"
+  },
+  "catSd_保健医療": {
+   "value": 0.06209857952170766,
+   "formula": "保健医療が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_保健医療": {
+   "value": 0.8482079645416993,
+   "formula": "最小: 新潟市 (倍)"
+  },
+  "catHigh_保健医療": {
+   "value": 1.1049995540167348,
+   "formula": "最大: 横浜市 (倍)"
+  },
+  "catSd_交通・通信": {
+   "value": 0.11282185316791604,
+   "formula": "交通・通信が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_交通・通信": {
+   "value": 0.7272854857523022,
+   "formula": "最小: 東京都区部 (倍)"
+  },
+  "catHigh_交通・通信": {
+   "value": 1.1868842016255867,
+   "formula": "最大: 鳥取市 (倍)"
+  },
+  "catSd_教育": {
+   "value": 0.25639956648392254,
+   "formula": "教育が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_教育": {
+   "value": 0.5014105040650854,
+   "formula": "最小: 青森市 (倍)"
+  },
+  "catHigh_教育": {
+   "value": 1.6057620494390703,
+   "formula": "最大: さいたま市 (倍)"
+  },
+  "catSd_教養娯楽": {
+   "value": 0.07654487374923581,
+   "formula": "教養娯楽が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_教養娯楽": {
+   "value": 0.7857808298447655,
+   "formula": "最小: 那覇市 (倍)"
+  },
+  "catHigh_教養娯楽": {
+   "value": 1.1374038300807552,
+   "formula": "最大: 東京都区部 (倍)"
+  },
+  "catSd_その他の消費支出": {
+   "value": 0.07090122653494328,
+   "formula": "その他の消費支出が消費支出に占める割合の対全国比(ln)の47市の標準偏差 (2016〜2025年平均)"
+  },
+  "catLow_その他の消費支出": {
+   "value": 0.880589247453115,
+   "formula": "最小: 横浜市 (倍)"
+  },
+  "catHigh_その他の消費支出": {
+   "value": 1.2080992785647149,
+   "formula": "最大: 高松市 (倍)"
+  },
+  "householdSizeNat": {
+   "value": 2.87,
+   "formula": "全国 2025年"
+  },
+  "householdSizeMin": {
+   "value": 2.69,
+   "formula": "宮崎市"
+  },
+  "householdSizeMax": {
+   "value": 3.15,
+   "formula": "新潟市"
+  },
+  "householdSizeMedian": {
+   "value": 2.85,
+   "formula": "47市の中央値"
+  },
+  "headAgeNat": {
+   "value": 60.7,
+   "formula": "全国 2025年"
+  },
+  "headAgeMin": {
+   "value": 55.9,
+   "formula": "高知市"
+  },
+  "headAgeMax": {
+   "value": 64.8,
+   "formula": "長崎市"
+  },
+  "headAgeMedian": {
+   "value": 60.2,
+   "formula": "47市の中央値"
+  },
+  "ownershipRateNat": {
+   "value": 87.3,
+   "formula": "全国 2025年"
+  },
+  "ownershipRateMin": {
+   "value": 48.4,
+   "formula": "那覇市"
+  },
+  "ownershipRateMax": {
+   "value": 96.5,
+   "formula": "津市"
+  },
+  "ownershipRateMedian": {
+   "value": 85.7,
+   "formula": "47市の中央値"
+  },
+  "sampleHouseholdsNat": {
+   "value": 7261.0,
+   "formula": "全国 2025年"
+  },
+  "sampleHouseholdsMin": {
+   "value": 78.0,
+   "formula": "神戸市"
+  },
+  "sampleHouseholdsMax": {
+   "value": 290.0,
+   "formula": "東京都区部"
+  },
+  "sampleHouseholdsMedian": {
+   "value": 90.0,
+   "formula": "47市の中央値"
+  },
+  "r2FoodHouseholdSize": {
+   "value": 0.012487644218193096,
+   "formula": "47市の世帯人員と ln(食料支出の対全国比) の相関係数の2乗 (2025年)"
+  },
+  "pooledQuantityShareUncentered2025": {
+   "value": 0.8098716731598652,
+   "formula": "Σ_i(mean_c(ln Q^2) + mean_c(ln Q ln P)) / Σ_i mean_c(ln E^2)。47市の平均ではなく全国(ln比=0)まわりの二乗和。171品目・2025年"
+  },
+  "qtyCitiesAboveMedian": {
+   "value": 20.0,
+   "formula": "品目ごとに購入数量が全国を上回る市の数の中央値 (171品目・2025年)"
+  },
+  "qtyCitiesAboveMin": {
+   "value": 12,
+   "formula": "同 最少"
+  },
+  "qtyCitiesAboveMax": {
+   "value": 31,
+   "formula": "同 最多"
+  },
+  "qtyItemsMedianCityBelow": {
+   "value": 134,
+   "formula": "47市の中央値の市の数量が全国を下回る品目数"
+  },
+  "qtyItemsMedianCityAbove": {
+   "value": 37,
+   "formula": "同 上回る品目数"
+  },
+  "qtyItems30OrMoreBelow": {
+   "value": 42,
+   "formula": "30市以上が全国を下回る品目数 (数量)"
+  },
+  "qtyItems30OrMoreAbove": {
+   "value": 5,
+   "formula": "30市以上が全国を上回る品目数 (数量)"
+  },
+  "qtyCitiesBelow_ソーセージ": {
+   "value": 35,
+   "formula": "ソーセージ: 購入数量が全国を下回る市の数"
+  },
+  "qtyCitiesBelow_女性用靴下": {
+   "value": 35,
+   "formula": "女性用靴下: 購入数量が全国を下回る市の数"
+  },
+  "qtyCitiesBelow_かつお": {
+   "value": 35,
+   "formula": "かつお: 購入数量が全国を下回る市の数"
+  },
+  "qtyCitiesBelow_男性用靴": {
+   "value": 34,
+   "formula": "男性用靴: 購入数量が全国を下回る市の数"
+  },
+  "qtyCitiesAbove_ワイシャツ": {
+   "value": 31,
+   "formula": "ワイシャツ: 購入数量が全国を上回る市の数"
+  },
+  "qtyCitiesAbove_じゃがいも": {
+   "value": 30,
+   "formula": "じゃがいも: 購入数量が全国を上回る市の数"
+  },
+  "qtyCitiesAbove_合いびき肉": {
+   "value": 30,
+   "formula": "合いびき肉: 購入数量が全国を上回る市の数"
+  },
+  "qtyCitiesAbove_卵": {
+   "value": 30,
+   "formula": "卵: 購入数量が全国を上回る市の数"
+  },
+  "priceCitiesAboveMedian": {
+   "value": 24.0,
+   "formula": "品目ごとに平均価格が全国を上回る市の数の中央値"
+  },
+  "priceCitiesAboveMin": {
+   "value": 6,
+   "formula": "同 最少"
+  },
+  "priceCitiesAboveMax": {
+   "value": 36,
+   "formula": "同 最多"
+  },
+  "priceItemsMedianCityBelow": {
+   "value": 76,
+   "formula": "47市の中央値の市の平均価格が全国を下回る品目数"
+  },
+  "priceItemsMedianCityAbove": {
+   "value": 95,
+   "formula": "同 上回る品目数"
+  },
+  "cat10DistanceNaha": {
+   "value": 0.22283896052029606,
+   "formula": "那覇市: 10費目の ln 構成比対全国比(2016〜2025年平均)の二乗平均平方根"
+  },
+  "cat10DistanceMedian": {
+   "value": 0.11112648317926212,
+   "formula": "47市の中央値"
+  },
+  "cat10Distance_青森市": {
+   "value": 0.268362307933664,
+   "formula": "青森市: 同"
+  },
+  "cat10Distance_秋田市": {
+   "value": 0.2246377153253191,
+   "formula": "秋田市: 同"
+  },
+  "cat10Distance_那覇市": {
+   "value": 0.22283896052029606,
+   "formula": "那覇市: 同"
+  },
+  "nahaNearestRatioFood": {
+   "value": 1.91087486722694,
+   "formula": "那覇市の最近傍の市までの距離 / 47市の最近傍距離の中央値 (食料206品目・2025年・ユークリッド距離)"
+  },
+  "nahaNearestRatioCat10": {
+   "value": 2.465764546209246,
+   "formula": "同 (10費目の構成・2016〜2025年平均)"
+  },
+  "nahaSingletonShareK4Halves": {
+   "value": 0.665,
+   "formula": "品目を半分に分けた2組×100回のうち、4つに分けたとき那覇市が単独の組になる割合"
+  },
+  "nahaSingletonShareK3Halves": {
+   "value": 0.26,
+   "formula": "同 3つに分けたとき"
+  },
+  "pc1HalfCorrMedian": {
+   "value": 0.8135523587600273,
+   "formula": "品目を半分に分けた2組の第1主成分得点の相関の絶対値の中央値 (100回)"
+  },
+  "pc1HalfEta2Median": {
+   "value": 0.8363980455593105,
+   "formula": "半分の品目で求めた第1主成分得点の地方区分 η² の中央値"
+  },
+  "ari2025vs10yK3": {
+   "value": 0.9166936391239345,
+   "formula": "2025年の組と2016〜2025年平均の組の調整ランド指数"
+  },
+  "ari2025vs10yK4": {
+   "value": 0.6922261970014196,
+   "formula": "2025年の組と2016〜2025年平均の組の調整ランド指数"
+  },
+  "ari2025vs10yK5": {
+   "value": 0.5539377505305353,
+   "formula": "2025年の組と2016〜2025年平均の組の調整ランド指数"
+  },
+  "nahaSingletonK4_10yMean": {
+   "value": 1,
+   "formula": "2016〜2025年平均の食料206品目の構成で4つに分けたとき、那覇市だけの組になるか (1=単独)"
+  },
+  "noiseFloor10yMean": {
+   "value": 0.04747358977383506,
+   "formula": "年ごとのぶれ0.150 / √10 (各年のぶれが互いに独立という仮定。実測ではなく計算)"
+  },
+  "gapChibaYokohama": {
+   "value": 2.7194486636019812,
+   "formula": "横浜市の離れ幅 - 千葉市の離れ幅 (ポイント)"
+  },
+  "pairsAll": {
+   "value": 1081,
+   "formula": "47市の市の組合せ数 47×46/2"
+  },
+  "pairsAllMeanOpposite": {
+   "value": 9.343200740055504,
+   "formula": "全組合せで、どちらも1.25倍以上または0.8倍以下に離れて向きが逆の品目数の平均"
+  },
+  "adjacentMeanOpposite": {
+   "value": 1.9090909090909092,
+   "formula": "隣り合う22組での同じ平均"
+  },
+  "adjacentPairsSelectionNote": {
+   "value": 22,
+   "formula": "隣接する県の県庁所在市22組は筆者が選んだ組で、隣接する県の組のすべてではない"
+  }
+ }
+}
