@@ -467,19 +467,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "kind": "blog",
-      "key": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "title": "日照時間が長い県は保険金も高い?",
-      "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "published": false,
-      "rankingKeys": [
-        "annual-sunshine-duration",
-        "auto-liability-insurance-amount-received-per-payment"
-      ],
-      "tagIds": []
-    },
-    {
       "id": "blog:aomori-food-culture",
       "kind": "blog",
       "key": "aomori-food-culture",
@@ -3672,6 +3659,25 @@
         "tag:engel-coefficient",
         "tag:t-7b96c26b45e8",
         "tag:t-25dc8da388f1"
+      ]
+    },
+    {
+      "id": "blog:engel-coefficient-rise-hardship-2025",
+      "kind": "blog",
+      "key": "engel-coefficient-rise-hardship-2025",
+      "title": "エンゲル係数の上昇は苦しさの証拠か",
+      "href": "/blog/engel-coefficient-rise-hardship-2025",
+      "published": true,
+      "rankingKeys": [
+        "engel-coefficient",
+        "food-expenditure-ratio-multi-person-households"
+      ],
+      "tagIds": [
+        "tag:engel-coefficient",
+        "tag:t-ba8e4beb69bf",
+        "tag:t-25dc8da388f1",
+        "tag:food-expenditure",
+        "tag:aging-population"
       ]
     },
     {
@@ -7007,6 +7013,30 @@
       ]
     },
     {
+      "id": "blog:kakei-number-one-city-rotation",
+      "kind": "blog",
+      "key": "kakei-number-one-city-rotation",
+      "title": "消費量日本一は毎年入れ替わる?",
+      "href": "/blog/kakei-number-one-city-rotation",
+      "published": true,
+      "rankingKeys": [
+        "fresh-udon-soba-consumption-expenditure",
+        "gyoza-frozen-consumption-expenditure",
+        "natto-consumption-expenditure",
+        "ramen-dining-consumption-expenditure",
+        "rice-consumption-expenditure",
+        "white-bread-consumption-expenditure",
+        "white-bread-consumption-quantity"
+      ],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-5f22fa112083",
+        "tag:t-8c39f0203b51",
+        "tag:t-3dfcbdc38d3e",
+        "tag:t-e7b81a331c2e"
+      ]
+    },
+    {
       "id": "blog:kanagawa-food-culture",
       "kind": "blog",
       "key": "kanagawa-food-culture",
@@ -8022,6 +8052,26 @@
         "tag:manufacturing",
         "tag:economy",
         "tag:t-7055152b9ab6"
+      ]
+    },
+    {
+      "id": "blog:manufacturing-strength-factory-size",
+      "kind": "blog",
+      "key": "manufacturing-strength-factory-size",
+      "title": "製造業が強い町の強さは、規模か、生産性か",
+      "href": "/blog/manufacturing-strength-factory-size",
+      "published": true,
+      "rankingKeys": [
+        "day-time-population",
+        "day-time-population-ratio",
+        "manufacturing-employees",
+        "manufacturing-establishments",
+        "manufacturing-shipment-amount"
+      ],
+      "tagIds": [
+        "tag:manufacturing",
+        "tag:industrial-statistics",
+        "tag:t-0f04bb93e80e"
       ]
     },
     {
@@ -11193,19 +11243,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:road-length-per-km2-vs-residential-building-starts",
-      "kind": "blog",
-      "key": "road-length-per-km2-vs-residential-building-starts",
-      "title": "道路密度が高い県は住宅着工も多いのか",
-      "href": "/blog/road-length-per-km2-vs-residential-building-starts",
-      "published": false,
-      "rankingKeys": [
-        "residential-building-starts",
-        "road-length-per-km2"
-      ],
-      "tagIds": []
-    },
-    {
       "id": "blog:road-total-length-vs-core-agricultural-workers",
       "kind": "blog",
       "key": "road-total-length-vs-core-agricultural-workers",
@@ -11920,19 +11957,6 @@
       "published": true,
       "rankingKeys": [
         "shrimp-consumption-quantity"
-      ],
-      "tagIds": []
-    },
-    {
-      "id": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "kind": "blog",
-      "key": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
-      "href": "/blog/shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "published": false,
-      "rankingKeys": [
-        "jr-freight-shipment",
-        "shumai-consumption-expenditure"
       ],
       "tagIds": []
     },
@@ -13794,6 +13818,28 @@
         "tag:housing",
         "tag:aging-infrastructure",
         "tag:earthquake-resistance"
+      ]
+    },
+    {
+      "id": "blog:vacant-houses-population-decline",
+      "kind": "blog",
+      "key": "vacant-houses-population-decline",
+      "title": "空き家が増えたのは人口が減った町だけか",
+      "href": "/blog/vacant-houses-population-decline",
+      "published": true,
+      "rankingKeys": [
+        "japanese-population",
+        "vacant-houses-city",
+        "vacant-housing-rate-excluding-rental-sale-secondary",
+        "vacant-housing-rate-for-rent",
+        "vacant-housing-ratio"
+      ],
+      "tagIds": [
+        "tag:vacant-houses",
+        "tag:t-96b7af568d8e",
+        "tag:population-decline",
+        "tag:housing",
+        "tag:t-0f04bb93e80e"
       ]
     },
     {

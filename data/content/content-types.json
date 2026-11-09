@@ -96,16 +96,6 @@
   },
   "assignments": [
     {
-      "id": "blog:kakei-number-one-city-rotation",
-      "type": "type:paper",
-      "reason": "問い issue:K01-4 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
-    },
-    {
-      "id": "blog:engel-coefficient-rise-hardship-2025",
-      "type": "type:paper",
-      "reason": "問い issue:K03-1 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
-    },
-    {
       "id": "blog:2050-population-map-reading",
       "type": "type:textbook",
       "reason": "題名が統計の読み方を扱う"

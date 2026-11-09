@@ -1633,10 +1633,6 @@
       ],
       "consumers": [
         {
-          "pageId": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:auto-liability-insurance-amount-received-per-payment",
           "kind": "ranking"
         }

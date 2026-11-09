@@ -6668,6 +6668,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:manufacturing-strength-factory-size",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:day-time-population",
           "kind": "municipality-ranking"
         },
@@ -7091,6 +7095,10 @@
         },
         {
           "pageId": "blog:household-structure-daytime-population-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-strength-factory-size",
           "kind": "blog"
         },
         {

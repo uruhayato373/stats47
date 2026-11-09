@@ -8989,6 +8989,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:vacant-houses-population-decline",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:japanese-population",
           "kind": "municipality-ranking"
         },
@@ -9573,10 +9577,6 @@
         {
           "pageId": "area-theme:47000:freight-logistics",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
-          "kind": "blog"
         },
         {
           "pageId": "japan-theme:freight-logistics",

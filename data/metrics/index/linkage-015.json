@@ -5637,6 +5637,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:manufacturing-strength-factory-size",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:manufacturing",
           "kind": "japan-theme"
         },
@@ -6301,6 +6305,10 @@
         {
           "pageId": "area:47000",
           "kind": "area"
+        },
+        {
+          "pageId": "blog:manufacturing-strength-factory-size",
+          "kind": "blog"
         },
         {
           "pageId": "japan-theme:manufacturing",
@@ -7471,6 +7479,10 @@
         },
         {
           "pageId": "blog:manufacturing-shipment-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-strength-factory-size",
           "kind": "blog"
         },
         {
