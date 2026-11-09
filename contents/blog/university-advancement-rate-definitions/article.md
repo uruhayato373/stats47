@@ -14,7 +14,7 @@ tags:
   - 統計
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/university-advancement-rate-definitions/og.png
 ---
 

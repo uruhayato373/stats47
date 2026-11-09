@@ -15,7 +15,7 @@ tags:
   - 酒類消費
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/beer-happoshu-liquor-tax-steps-household-response/og.png
 ---
 

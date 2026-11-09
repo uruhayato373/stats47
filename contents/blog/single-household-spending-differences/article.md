@@ -14,7 +14,7 @@ tags:
   - 世帯構造
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/single-household-spending-differences/og.png
 ---
 

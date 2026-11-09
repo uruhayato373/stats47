@@ -14,7 +14,7 @@ tags:
   - 生活費
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/household-spending-25-years-bought-less-bought-more/og.png
 ---
 

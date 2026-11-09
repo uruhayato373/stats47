@@ -14,7 +14,7 @@ tags:
   - 家計
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/income-quintile-high-income-sales-check/og.png
 ---
 

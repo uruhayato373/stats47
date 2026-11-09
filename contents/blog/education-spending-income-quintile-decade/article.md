@@ -14,7 +14,7 @@ tags:
   - 年収五分位
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/education-spending-income-quintile-decade/og.png
 ---
 

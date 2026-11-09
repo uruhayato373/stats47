@@ -14,7 +14,7 @@ tags:
   - 家計調査
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/fresh-seafood-east-west-boundary/og.png
 ---
 
