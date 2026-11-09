@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-11-07
- * 件数: blog 847 / tag 71 / survey 149
+ * 最終生成日: 2026-11-09
+ * 件数: blog 849 / tag 71 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -249,6 +249,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "energy-consumption-structure-shift", lastModified: "2026-03-06" },
   { slug: "energy-infrastructure-gas-electricity", lastModified: "2026-03-06" },
   { slug: "engel-coefficient-prefecture-ranking", lastModified: "2026-03-16" },
+  { slug: "engel-coefficient-rise-hardship-2025", lastModified: "2026-11-09" },
   { slug: "engel-coefficient-vs-prefectural-income", lastModified: "2026-09-05" },
   { slug: "engineer-telework-prefecture", lastModified: "2026-06-02" },
   { slug: "engineer-vs-professions-income", lastModified: "2026-06-02" },
@@ -430,6 +431,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "junior-high-school-students-count-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "kagawa-food-culture", lastModified: "2026-07-10" },
   { slug: "kagoshima-food-culture", lastModified: "2026-07-10" },
+  { slug: "kakei-number-one-city-rotation", lastModified: "2026-11-09" },
   { slug: "kanagawa-food-culture", lastModified: "2026-07-10" },
   { slug: "kanagawa-migration-flow", lastModified: "2026-08-30" },
   { slug: "kanagawa-municipal-finance", lastModified: "2026-09-02" },
@@ -882,7 +884,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "インバウンド", lastModified: "2026-05-29" },
   { tagKey: "インフラ", lastModified: "2026-06-14" },
   { tagKey: "エネルギー", lastModified: "2026-09-02" },
-  { tagKey: "エンゲル係数", lastModified: "2026-09-05" },
+  { tagKey: "エンゲル係数", lastModified: "2026-11-09" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "人口", lastModified: "2026-08-29" },
   { tagKey: "人口減少", lastModified: "2026-11-06" },
@@ -901,7 +903,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "地方財政", lastModified: "2026-08-28" },
   { tagKey: "子育て", lastModified: "2026-07-11" },
   { tagKey: "家計", lastModified: "2026-08-29" },
-  { tagKey: "家計調査", lastModified: "2026-11-02" },
+  { tagKey: "家計調査", lastModified: "2026-11-09" },
   { tagKey: "少子化", lastModified: "2026-06-14" },
   { tagKey: "市区町村", lastModified: "2026-11-07" },
   { tagKey: "年収", lastModified: "2026-09-05" },
@@ -915,7 +917,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "消費", lastModified: "2026-11-01" },
   { tagKey: "消費支出", lastModified: "2026-11-02" },
   { tagKey: "消費者物価指数", lastModified: "2026-09-05" },
-  { tagKey: "消費量", lastModified: "2026-08-04" },
+  { tagKey: "消費量", lastModified: "2026-11-09" },
   { tagKey: "漁獲量", lastModified: "2026-09-05" },
   { tagKey: "焼酎", lastModified: "2026-07-10" },
   { tagKey: "物価", lastModified: "2026-08-28" },
@@ -937,13 +939,13 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "農業", lastModified: "2026-10-09" },
   { tagKey: "通勤", lastModified: "2026-10-09" },
   { tagKey: "都道府県", lastModified: "2026-09-05" },
-  { tagKey: "都道府県ランキング", lastModified: "2026-09-05" },
+  { tagKey: "都道府県ランキング", lastModified: "2026-11-09" },
   { tagKey: "都道府県別", lastModified: "2026-08-30" },
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-07-11" },
   { tagKey: "食費", lastModified: "2026-11-01" },
-  { tagKey: "高齢化", lastModified: "2026-07-20" },
+  { tagKey: "高齢化", lastModified: "2026-11-09" },
 ];
 
 /**
