@@ -72,6 +72,18 @@
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
+    },
+    "natto-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-09",
+      "firstFailedAt": "2026-11-09"
+    },
+    "manufacturing-shipment-amount": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-09",
+      "firstFailedAt": "2026-11-09"
     }
   }
 }
