@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "watermelon-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "source": "r2:app/ranking/watermelon-consumption-expenditure/values.json",
+  "verifiedMatchRate": 100,
+  "schemeSource": "item.json",
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)",
+  "fetchedAt": "2026-11-09T12:05:35.783Z",
+  "refreshedFromYear": "2024"
+}

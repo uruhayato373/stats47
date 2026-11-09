@@ -1,0 +1,416 @@
+{
+  "chartType": "line",
+  "title": "火災・地震保険料消費支出の推移（5系列）",
+  "subtitle": "2007〜2025年",
+  "unit": "円",
+  "source": "家計調査",
+  "rankingKey": "fire-earthquake-insurance-consumption-expenditure",
+  "series": [
+    {
+      "label": "全国平均",
+      "data": [
+        {
+          "year": 2007,
+          "value": 10209
+        },
+        {
+          "year": 2008,
+          "value": 10120
+        },
+        {
+          "year": 2009,
+          "value": 10799
+        },
+        {
+          "year": 2010,
+          "value": 9804
+        },
+        {
+          "year": 2011,
+          "value": 10781
+        },
+        {
+          "year": 2012,
+          "value": 11545
+        },
+        {
+          "year": 2013,
+          "value": 11613
+        },
+        {
+          "year": 2014,
+          "value": 11340
+        },
+        {
+          "year": 2015,
+          "value": 12857
+        },
+        {
+          "year": 2016,
+          "value": 12072
+        },
+        {
+          "year": 2017,
+          "value": 12497
+        },
+        {
+          "year": 2018,
+          "value": 11855
+        },
+        {
+          "year": 2019,
+          "value": 11724
+        },
+        {
+          "year": 2020,
+          "value": 13023
+        },
+        {
+          "year": 2021,
+          "value": 12653
+        },
+        {
+          "year": 2022,
+          "value": 13625
+        },
+        {
+          "year": 2023,
+          "value": 12709
+        },
+        {
+          "year": 2024,
+          "value": 13773
+        },
+        {
+          "year": 2025,
+          "value": 14028
+        }
+      ]
+    },
+    {
+      "label": "宮城県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 15389
+        },
+        {
+          "year": 2008,
+          "value": 8642
+        },
+        {
+          "year": 2009,
+          "value": 6689
+        },
+        {
+          "year": 2010,
+          "value": 9297
+        },
+        {
+          "year": 2011,
+          "value": 27196
+        },
+        {
+          "year": 2012,
+          "value": 10493
+        },
+        {
+          "year": 2013,
+          "value": 8440
+        },
+        {
+          "year": 2014,
+          "value": 11336
+        },
+        {
+          "year": 2015,
+          "value": 12730
+        },
+        {
+          "year": 2016,
+          "value": 17795
+        },
+        {
+          "year": 2017,
+          "value": 18872
+        },
+        {
+          "year": 2018,
+          "value": 14865
+        },
+        {
+          "year": 2019,
+          "value": 12143
+        },
+        {
+          "year": 2020,
+          "value": 14030
+        },
+        {
+          "year": 2021,
+          "value": 12209
+        },
+        {
+          "year": 2022,
+          "value": 17838
+        },
+        {
+          "year": 2023,
+          "value": 13663
+        },
+        {
+          "year": 2024,
+          "value": 8415
+        },
+        {
+          "year": 2025,
+          "value": 10561
+        }
+      ]
+    },
+    {
+      "label": "富山県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 13551
+        },
+        {
+          "year": 2008,
+          "value": 13929
+        },
+        {
+          "year": 2009,
+          "value": 22190
+        },
+        {
+          "year": 2010,
+          "value": 10822
+        },
+        {
+          "year": 2011,
+          "value": 15347
+        },
+        {
+          "year": 2012,
+          "value": 13759
+        },
+        {
+          "year": 2013,
+          "value": 19199
+        },
+        {
+          "year": 2014,
+          "value": 7230
+        },
+        {
+          "year": 2015,
+          "value": 10598
+        },
+        {
+          "year": 2016,
+          "value": 10871
+        },
+        {
+          "year": 2017,
+          "value": 5793
+        },
+        {
+          "year": 2018,
+          "value": 11133
+        },
+        {
+          "year": 2019,
+          "value": 10791
+        },
+        {
+          "year": 2020,
+          "value": 16881
+        },
+        {
+          "year": 2021,
+          "value": 10922
+        },
+        {
+          "year": 2022,
+          "value": 15063
+        },
+        {
+          "year": 2023,
+          "value": 15580
+        },
+        {
+          "year": 2024,
+          "value": 15068
+        },
+        {
+          "year": 2025,
+          "value": 31394
+        }
+      ]
+    },
+    {
+      "label": "静岡県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 11751
+        },
+        {
+          "year": 2008,
+          "value": 13873
+        },
+        {
+          "year": 2009,
+          "value": 20993
+        },
+        {
+          "year": 2010,
+          "value": 20279
+        },
+        {
+          "year": 2011,
+          "value": 19716
+        },
+        {
+          "year": 2012,
+          "value": 20414
+        },
+        {
+          "year": 2013,
+          "value": 18312
+        },
+        {
+          "year": 2014,
+          "value": 16142
+        },
+        {
+          "year": 2015,
+          "value": 11267
+        },
+        {
+          "year": 2016,
+          "value": 11210
+        },
+        {
+          "year": 2017,
+          "value": 17511
+        },
+        {
+          "year": 2018,
+          "value": 13929
+        },
+        {
+          "year": 2019,
+          "value": 16153
+        },
+        {
+          "year": 2020,
+          "value": 10988
+        },
+        {
+          "year": 2021,
+          "value": 24518
+        },
+        {
+          "year": 2022,
+          "value": 24446
+        },
+        {
+          "year": 2023,
+          "value": 14872
+        },
+        {
+          "year": 2024,
+          "value": 25227
+        },
+        {
+          "year": 2025,
+          "value": 26679
+        }
+      ]
+    },
+    {
+      "label": "宮崎県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 9702
+        },
+        {
+          "year": 2008,
+          "value": 7124
+        },
+        {
+          "year": 2009,
+          "value": 10116
+        },
+        {
+          "year": 2010,
+          "value": 9192
+        },
+        {
+          "year": 2011,
+          "value": 13936
+        },
+        {
+          "year": 2012,
+          "value": 11466
+        },
+        {
+          "year": 2013,
+          "value": 12676
+        },
+        {
+          "year": 2014,
+          "value": 15202
+        },
+        {
+          "year": 2015,
+          "value": 11593
+        },
+        {
+          "year": 2016,
+          "value": 13605
+        },
+        {
+          "year": 2017,
+          "value": 13078
+        },
+        {
+          "year": 2018,
+          "value": 11989
+        },
+        {
+          "year": 2019,
+          "value": 9692
+        },
+        {
+          "year": 2020,
+          "value": 16523
+        },
+        {
+          "year": 2021,
+          "value": 16702
+        },
+        {
+          "year": 2022,
+          "value": 15897
+        },
+        {
+          "year": 2023,
+          "value": 13853
+        },
+        {
+          "year": 2024,
+          "value": 28833
+        },
+        {
+          "year": 2025,
+          "value": 17932
+        }
+      ]
+    }
+  ],
+  "generatedBy": "manual-restore-from-r2-values"
+}

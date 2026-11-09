@@ -1,0 +1,12 @@
+{
+  "kind": "derived",
+  "rankingKeys": [
+    "fire-earthquake-insurance-consumption-expenditure"
+  ],
+  "source": "r2:app/ranking/fire-earthquake-insurance-consumption-expenditure/values.json",
+  "transform": "全19パーティション(2007-2025年)から全国平均(47都道府県の単純平均を四捨五入)と宮城県・富山県・静岡県・宮崎県の値を年ごとに抽出した5系列の折れ線",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/ranking/fire-earthquake-insurance-consumption-expenditure/values.json | python3 -c \"import json,sys; d=json.load(sys.stdin); [print(p['yearCode'], sum(v['value'] for v in p['values'])/len(p['values'])) for p in sorted(d['partitions'], key=lambda p: p['yearCode'])]\"",
+  "fetchedAt": "2026-11-09T12:00:00Z",
+  "generatedBy": "manual-restore-from-r2-values"
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "coffee-shop-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "喫茶代消費支出額",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/coffee-shop-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug coffee-shop-consumption-expenditure-prefecture-gap --keys coffee-shop-consumption-expenditure --with-map",
+  "fetchedAt": "2026-11-09T11:48:20.403Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "refreshedFromYear": "2024"
+}

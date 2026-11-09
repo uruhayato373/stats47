@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "cod-roe-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "たらこ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/cod-roe-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fukuoka-food-culture --keys cod-roe-consumption-expenditure --data-name mentaiko-ranking",
+  "fetchedAt": "2026-11-09T11:37:57.467Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "refreshedFromYear": "2024"
+}

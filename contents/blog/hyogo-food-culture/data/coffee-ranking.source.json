@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "coffee-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "label": "コーヒー消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/coffee-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug hyogo-food-culture --keys coffee-consumption-expenditure --data-name coffee-ranking",
+  "fetchedAt": "2026-11-09T11:55:23.637Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "refreshedFromYear": "2024"
+}
