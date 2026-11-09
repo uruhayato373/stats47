@@ -13,7 +13,7 @@ tags:
   - 地域差
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/capital-city-buying-patterns-47/og.png
 ---
 
