@@ -1185,6 +1185,11 @@
       "issue": "issue:K01-4",
       "page": "blog:kakei-number-one-city-rotation",
       "role": "answers"
+    },
+    {
+      "issue": "issue:D13-1",
+      "page": "japan-theme:household-assets-debt",
+      "role": "answers"
     }
   ]
 }
