@@ -263,6 +263,8 @@
     "test:analysis-tools": "node --test .claude/scripts/analysis/__tests__/analysis-inventory.test.mjs .claude/scripts/analysis/__tests__/article-numbers.test.mjs .claude/scripts/analysis/__tests__/figure-contact-sheet.test.mjs",
     "blog:preview": "node .claude/scripts/blog/preview-draft.mjs",
     "issues:view": "node .claude/scripts/issues/render-issue-view.mjs",
+    "issues:answer": "node .claude/scripts/issues/issue-answer-publish.mjs",
+    "estat:fetch": "node .claude/scripts/estat/fetch-stats-cached.mjs",
     "test:analysis-cycle": "node --test .claude/scripts/analysis/__tests__/analysis-cycle.test.mjs .claude/scripts/analysis/__tests__/analysis-run.test.mjs",
     "test:issue-graph": "node --test .claude/scripts/issues/__tests__/issue-graph.test.mjs",
     "analysis:frame": "tsx .claude/scripts/analysis/analysis-frame.ts",

@@ -137,7 +137,7 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 ```
 
 形の正典は `config/schema/blog.chart-source.schema.json`、値の検査は `audit-chart-axes.ts`。
-台帳を直すスクリプトはリポジトリに置く (`generatedBy` に `/tmp` を書いた図は週次の検査が `bad-shape` と数える)。点データが失われた図は
+台帳を直すスクリプトはリポジトリに置く (`generatedBy` に `/tmp` を書いた図は週次の検査が `bad-shape` と数える)。記事 1 本のための使い捨ての分析スクリプトは残さない。`kind` と取得条件 (`statsDataId`・`params`) を作り直しの正本にし、`generatedBy` は書かない。送り箱 `contents/blog/` は公開後に片付けるので、そこを指す `generatedBy` は `quality-gate.mjs` が止める (2026-11-09。分析の置き場も同じ理由でリポジトリの `.claude/scripts/` か、分析の流れ `npm run analysis:draft` の `GENERATED_BY` に限る)。点データが失われた図は
 `rebuild-scatter-data.mjs` が指標と年の指定から R2 の観測値で作り直し、公開中の図と照らす。
 本文と図の点データ・出典の版は private R2 `blog-archive/<slug>/` に残る (`archive-blog-articles.mjs`)。
 

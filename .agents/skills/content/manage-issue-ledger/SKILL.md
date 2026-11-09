@@ -87,6 +87,26 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 
 公開のあとで `answers` を足す。順序を逆にすると、ページがまだ索引に無いので `check-datasets` の外部キー検査か `issues:check` の非公開検査で止まる。
 
+### 全国の問いを書き手へまとめて渡すとき
+
+分析の流れ (`analysis:draft`) に乗らない全国の問い (家計調査の年収階級・世帯属性・時系列など) を `article-writer` へ渡すときの決まり。2026-11-09 に 10 本を 3 体で書いたとき、1 本あたり約 24 万トークンかかり、手戻りの多くは次の 5 点から出た。
+
+1. **書く前に分析の計画を審査させる**: 書き手を起動する前に `analysis-critic` の plan を、問いの台帳の行と使う表だけを渡して結論なしで走らせ、確認項目を書き手の prompt に入れる。分析の軸の取り違え (地産地消の記事は水準を引かずに主成分を取り、「量の多さ」の軸を「買い方」と読んだ) が審査での書き直しより前に止まる。
+2. **字数の目標を置かない**: 「問いに答え切ったら止める」を基準にし、2 万字のような目標は書かない。目標を置いても届いたのは 10 本中 0 本で、水増しを足しては審査で削る往復が起きた。下限は品質ゲートの床 (地の文 1,600 字・図あたり 350 字) だけ。
+3. **本文の数値は data に置く**: 型 Q の記事は、本文のすべての数値が `data/*.json` (図のデータか `data/appendix-supporting-values.json` の補助値) に無いと `quality-gate.mjs` が止める。比・増減率・差・外部の値 (税額など) は補助値に式と出典つきで置くよう書き手に伝える。
+4. **e-Stat の表は保存を共有する**: 書き手には `npm run -s estat:fetch -- --id <statsDataId> --param k=v` で取らせる。同じ取得条件なら `.local/estat-cache/` の同じファイルを返すので、並行する書き手が同じ表を取り直さない。作業ファイルは記事ごとの別ディレクトリ (`$TMPDIR/issue-answer/<slug>/`) に置かせる (共有の一時領域で同名の `lib.mjs` を上書きし合った)。使い捨ての分析スクリプトは残さず、図の `source.json` の取得条件を作り直しの正本にする (`blog-data-schema.md`)。
+5. **再審査は差分だけを渡す**: 審査のあとに数か所を直したときは、`blog-critic` に直した行と前の指摘だけを渡し、全文を読み直させない (2 か所の直しの再審査が全文で約 18 万トークンだった)。値を直したら、同じ値を記事の全体から検索して全部の出現箇所を直してから渡す (3 か所中 1 か所しか直らず BLOCK になった)。
+
+公開の前後は次の 2 コマンドで進める。
+
+```bash
+npm run issues:answer -- prepare --map K08=<slug>,K09=<slug>   # 問いの確かめ・4 型の仮の割り当て・gate/factual/審査/背景の表。背景の無い記事は Codex の依頼 JSON を作る
+# 背景を Codex で作り (generate-blog-images)、published: true にして develop へ push。公開の run が成功したら
+npm run issues:answer -- link                                   # 索引の作り直し・answers・仮の割り当ての削除・本の論点の展開記録・検査
+```
+
+`prepare` は `published: true` にする前に走らせる (審査の `articleSha256` は公開の印を付ける前の本文で取るため)。図は `npm run analysis:contact-sheet` か記事ごとの 1 枚の一覧画像で、呼び元が目で確かめる。
+
 ```bash
 npm run content:sync -- --from-r2   # R2 の記事一覧からページ索引を作り直す。引数なしだと新しい記事が載らない
 npm run issues:check

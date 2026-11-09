@@ -10,6 +10,11 @@ test("年 4 桁・日付・見出しの番号・小さな数え方・分母を�
   assert.deepEqual(texts(md), ["1,376人"]);
 });
 
+test("年齢・期間・区切りの値の整数は区分の名前として除き、量は残す", () => {
+  const md = "18歳未満の世帯員と30代、40〜49歳は、10年で2013〜17年と比べ6か月続き、150以上の品目が27品目、646世帯、13.6倍でした。";
+  assert.deepEqual(texts(md), ["27品", "646世", "13.6倍"]);
+});
+
 test("frontmatter は題名・副題・説明だけを読む", () => {
   const md = "---\ntitle: \"764町の分解\"\npublishedAt: 2026-11-07\nslug: a-1\n---\n本文";
   assert.deepEqual(texts(md), ["764町"]);

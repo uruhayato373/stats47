@@ -152,6 +152,7 @@ updated: 2026-11-01
 - **事象 (2026-11-09)**: `article-factual-check` は県名と順位の組で本文と data を照合するので、県名を含まない全国の家計調査の値 (年収五分位・年齢階級・時系列) や記事で計算した比率は照合されず、exit 0 でも数値の正しさは critic の目視だけが担保する。問いの台帳に粒度「全国」を足した (2026-11-09) ので、全国の記事が増える。
 - **次**: 全国の記事の data/*.json の値と本文の数値の対応を取る検査を設計する (単位・丸めの扱いを含む)。
 - **完了条件**: 全国の値だけの記事で、data に無い数値を本文に書くと検査が止める。
+- **完了の証拠 (2026-11-09)**: `quality-gate.mjs` が archetype Q の記事の本文の数値を `data/*.json` (補助値 `appendix-supporting-values.json` を含む) と `checkArticleNumbers` で照らし、根拠の無い数値を blocker にする。年齢・期間・区切りの整数は除く。テスト `quality-gate.q-numbers.test.mjs` (5 件・PR CI に配線) と `article-numbers.test.mjs` (11 件) が通る。追記の ① slug で下書きを読む ② 記事ディレクトリを受ける も同じ変更で直した。③ 値の直し漏れは、残った古い値が data と合わず同じ検査で止まる。週次レビューでカードを消してよい。
 - **追記 (2026-11-09・下書き 10 本の書き手と審査役の報告)**: ① `quality-gate.mjs` に slug だけを渡すと `.local/r2` の記事を探し、見つからないと factual の突合を飛ばす (article.md のパスを渡すと通る)。② `record-critic-findings.mjs` は記事ディレクトリ、`quality-gate.mjs` は article.md のパスを取り、引数の形が違うので審査役が EISDIR で止まった。③ 値を直したとき同じ値の他の出現箇所に届かない漏れが起きた (`household-spending-seasons-and-tax-hike-swings` の倍率 1.2→1.1 が 3 か所中 1 か所だけ直り、審査で BLOCK)。この 3 点も同じ検査の設計で扱う。
 
 ### [BLOG-KAKEI-PUBLISHED-FACT-FIX-01] 公開済みのビール系の記事 2 本に、出典と合わない記述がある
@@ -167,6 +168,8 @@ updated: 2026-11-01
 - **事象 (2026-11-09)**: 家計調査の下書き 10 本のうち 3 本は、図の `source.json` の `generatedBy` が `contents/blog/<slug>/analysis/build.mjs` を指す。`contents/blog` は公開後に片付ける送り箱なので、片付けたあとは指す先が無くなる。ほかの 7 本の生成スクリプトは書き手の一時領域にだけあり、リポジトリに入っていない。図の `source.json` は 10 本とも `inspectChartSourceManifest` が valid と判定する (e-Stat の表番号と取得条件で作り直せる) ので、公開は止めていない。並行する書き手が同じ一時領域で同名のファイル (`lib.mjs` など) を上書きし合う事故も報告された。
 - **次**: ① 記事の図を作る使い捨ての分析を、リポジトリに残すか (置き場と寿命) 残さないか (`generatedBy` に何を書くか) を `blog-data-schema.md` で決める ② 書き手の prompt に、作業ディレクトリを記事ごとに分けることを書く。
 - **完了条件**: `blog-data-schema.md` に分析スクリプトの扱いが書かれ、`generatedBy` が存在しない道を指す図を週次の検査が数える。
+- **進み (2026-11-09)**: 決めた。使い捨ての分析は残さず、取得条件を作り直しの正本にする (`blog-data-schema.md`)。`config/schema/blog.chart-source.schema.json` が `contents/blog/`・`/private/tmp/`・`/var/folders/` を指す `generatedBy` を形の違反にし、`quality-gate.mjs` が止める (旧来の `/tmp/` は改稿を止めない)。週次の `audit-chart-axes.ts` も同じ形の検査で `bad-shape` と数える。書き手の作業ディレクトリと e-Stat の保存の共有は `manage-issue-ledger` SKILL.md §5 に書いた。
+- **残り**: 公開済みの 3 本 (`single-household-spending-differences`・`local-production-local-consumption-meat`・`fresh-seafood-east-west-boundary`) の R2 の `source.json` 31 件が、まだ `contents/blog/<slug>/analysis/build.mjs` を指す。`generatedBy` を消して R2 へ書き戻す (R2 への書き込みはオーナーの承認を得てから)。
 
 ### [MUNI-THEME-INDEX-STAGING-01] 市区町村×テーマのページを、人口の多い市から段階的に検索に出す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
