@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-11-09
- * 件数: blog 859 / tag 74 / survey 149
+ * 件数: blog 861 / tag 74 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -106,6 +106,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "campsite-public-vs-paved-road-main-length", lastModified: "2026-08-30" },
   { slug: "campsite-public-vs-road-expressway-length", lastModified: "2026-08-30" },
   { slug: "candy-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "capital-city-buying-patterns-47", lastModified: "2026-11-09" },
   { slug: "car-ownership-household-prefecture-gap", lastModified: "2026-06-14" },
   { slug: "carbonated-drink-spending-prefecture-gap", lastModified: "2026-06-14" },
   { slug: "care-worker-income-prefecture-gap", lastModified: "2026-06-13" },
@@ -250,6 +251,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "employed-people-ratio-primary-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "energy-consumption-structure-shift", lastModified: "2026-03-06" },
   { slug: "energy-infrastructure-gas-electricity", lastModified: "2026-03-06" },
+  { slug: "engel-coefficient-living-standard-myth", lastModified: "2026-11-09" },
   { slug: "engel-coefficient-prefecture-ranking", lastModified: "2026-03-16" },
   { slug: "engel-coefficient-rise-hardship-2025", lastModified: "2026-11-09" },
   { slug: "engel-coefficient-vs-prefectural-income", lastModified: "2026-09-05" },
@@ -909,7 +911,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "医療費", lastModified: "2026-09-05" },
   { tagKey: "国勢調査", lastModified: "2026-10-23" },
   { tagKey: "地名", lastModified: "2026-07-17" },
-  { tagKey: "地域差", lastModified: "2026-07-10" },
+  { tagKey: "地域差", lastModified: "2026-11-09" },
   { tagKey: "地域格差", lastModified: "2026-07-12" },
   { tagKey: "地方財政", lastModified: "2026-08-28" },
   { tagKey: "子育て", lastModified: "2026-07-11" },
@@ -957,7 +959,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-11-09" },
-  { tagKey: "食費", lastModified: "2026-11-01" },
+  { tagKey: "食費", lastModified: "2026-11-09" },
   { tagKey: "高齢化", lastModified: "2026-11-09" },
 ];
 
