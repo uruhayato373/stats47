@@ -491,6 +491,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a04-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:engel-coefficient-rise-hardship-2025",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-02",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a04-02",
