@@ -1045,6 +1045,136 @@
       "issue": "issue:K10-47",
       "page": "blog:okinawa-food-culture",
       "role": "answers"
+    },
+    {
+      "issue": "issue:K06",
+      "page": "blog:income-quintile-overview",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-5",
+      "page": "blog:income-quintile-overview",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-1",
+      "page": "blog:income-quintile-regressive",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-6",
+      "page": "blog:income-quintile-medical-health",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-7",
+      "page": "blog:income-quintile-food-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-8",
+      "page": "blog:income-quintile-car",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-9",
+      "page": "blog:income-quintile-appliance",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-10",
+      "page": "blog:income-quintile-recreation-services",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-11",
+      "page": "blog:income-quintile-travel",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-12",
+      "page": "blog:income-quintile-clothing",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-13",
+      "page": "blog:income-quintile-luxury-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-14",
+      "page": "blog:income-quintile-dining",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K04",
+      "page": "blog:alcoholic-beverages-group-consumption-expenditure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K04-1",
+      "page": "blog:beer-peak-month-july-to-december",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-3",
+      "page": "blog:engel-coefficient-vs-prefectural-income",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-4",
+      "page": "blog:information-communication-coefficient-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K05",
+      "page": "blog:household-spending-before-after-inflation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K05-1",
+      "page": "blog:rice-spending-quantity-gap-2025",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K05-2",
+      "page": "blog:white-bread-price-up-quantity-up",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K08-1",
+      "page": "blog:necktie-stockings-market-shrink",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K09-1",
+      "page": "blog:winter-coat-bargain-purchase-price",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E01-2",
+      "page": "blog:spinach-consumption-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E01-3",
+      "page": "blog:academic-achievement-test-prefecture-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D04-1",
+      "page": "blog:high-school-advancement-rate",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D04-2",
+      "page": "blog:advancement-plus-employment-rate-prefecture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E02-1",
+      "page": "blog:tutoring-cost-university-advancement-gap",
+      "role": "answers"
     }
   ]
 }
