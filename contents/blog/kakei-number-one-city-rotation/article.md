@@ -14,7 +14,7 @@ tags:
   - ランキング
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/kakei-number-one-city-rotation/og.png
 ---
 

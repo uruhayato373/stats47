@@ -14,7 +14,7 @@ tags:
   - 高齢化
 publishedAt: 2026-11-09
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/engel-coefficient-rise-hardship-2025/og.png
 ---
 
