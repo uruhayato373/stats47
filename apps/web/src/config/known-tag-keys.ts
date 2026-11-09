@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-11-05
- * 件数: 911
+ * 最終生成日: 2026-11-09
+ * 件数: 912
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -633,6 +633,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "消費支出",
   "消費者物価",
   "消費者物価指数",
+  "消費行動",
   "消費量",
   "消防",
   "消防団",
