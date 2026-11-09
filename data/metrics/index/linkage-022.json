@@ -4216,6 +4216,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:local-production-local-consumption-meat",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:niigata-food-culture",
           "kind": "blog"
         },
@@ -4457,6 +4461,14 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:beef-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:local-production-local-consumption-meat",
+          "kind": "blog"
         },
         {
           "pageId": "blog:pork-consumption-expenditure",

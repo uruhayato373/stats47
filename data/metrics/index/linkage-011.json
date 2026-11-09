@@ -7441,6 +7441,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:university-advancement-rate-definitions",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:high-school-advancement-rate",
           "kind": "ranking"
         },

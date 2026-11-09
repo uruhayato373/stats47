@@ -1190,6 +1190,56 @@
       "issue": "issue:D13-1",
       "page": "japan-theme:household-assets-debt",
       "role": "answers"
+    },
+    {
+      "issue": "issue:K08",
+      "page": "blog:household-spending-25-years-bought-less-bought-more",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K09",
+      "page": "blog:household-spending-seasons-and-tax-hike-swings",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K09-2",
+      "page": "blog:beer-happoshu-liquor-tax-steps-household-response",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-2",
+      "page": "blog:education-spending-income-quintile-decade",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-3",
+      "page": "blog:income-quintile-share-shift",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-4",
+      "page": "blog:income-quintile-high-income-sales-check",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D04-3",
+      "page": "blog:university-advancement-rate-definitions",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K07",
+      "page": "blog:single-household-spending-differences",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-5",
+      "page": "blog:local-production-local-consumption-meat",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-2",
+      "page": "blog:fresh-seafood-east-west-boundary",
+      "role": "answers"
     }
   ]
 }

@@ -296,6 +296,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:university-advancement-rate-definitions",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:in-pref-university-entrance-ratio-by-highschool-origin",
           "kind": "ranking"
         },

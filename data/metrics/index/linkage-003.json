@@ -445,6 +445,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:local-production-local-consumption-meat",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:chicken-consumption-quantity",
           "kind": "ranking"
         }
@@ -3493,6 +3497,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:chocolate-snack-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:chocolate-consumption-expenditure",
           "kind": "ranking"
         }
@@ -4177,6 +4185,10 @@
         },
         {
           "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
         {

@@ -10160,6 +10160,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },

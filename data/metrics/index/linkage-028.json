@@ -4888,6 +4888,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },

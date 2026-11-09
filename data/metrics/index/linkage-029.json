@@ -1048,6 +1048,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:sushi-dining-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:sushi-takeout-consumption-expenditure",
           "kind": "ranking"
         }
