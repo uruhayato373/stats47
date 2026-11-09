@@ -136,6 +136,13 @@ async function isPublished(slug) {
 }
 
 async function link() {
+  // 公開の run は送り箱の掃除と sitemap・known-tag-keys の追随を develop へ書き戻す。取り込む前に索引を作ると
+  // タグの索引が古いまま残り、develop の content-identity-navigation が止まる (2026-11-09)
+  tryRun("git", ["fetch", "-q", "origin", "develop"]);
+  const behind = tryRun("git", ["rev-list", "--count", "HEAD..origin/develop"]);
+  if (behind.ok && Number(behind.out.trim()) > 0) {
+    throw new Error(`origin/develop が ${behind.out.trim()} コミット先にある。公開の run の書き戻しを git pull してから link する`);
+  }
   const types = readJson(TYPES_PATH);
   const pending = types.assignments
     .map((a) => ({ a, issue: REASON_RE.exec(a.reason ?? "")?.[1] }))
