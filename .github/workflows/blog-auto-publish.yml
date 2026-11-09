@@ -259,6 +259,13 @@ jobs:
           else
             echo "::warning::sitemap-blog-entries の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
           fi
+          # 新しいタグを持つ記事を公開すると known-tag-keys も古くなり、develop の Catalog Gates が落ちる
+          # (2026-11-09 に「消費行動」1 件で発生)。未登録のタグのページは 410 になるので同じコミットで追随させる。
+          if (cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-known-tag-keys.ts); then
+            git add apps/web/src/config/known-tag-keys.ts || true
+          else
+            echo "::warning::known-tag-keys の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
+          fi
           if git diff --cached --quiet; then
             echo "削除対象なし (contents/blog に公開済みドラフトの取り残しなし)"; exit 0
           fi
