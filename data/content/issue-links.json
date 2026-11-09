@@ -1240,6 +1240,16 @@
       "issue": "issue:K02-2",
       "page": "blog:fresh-seafood-east-west-boundary",
       "role": "answers"
+    },
+    {
+      "issue": "issue:K03-2",
+      "page": "blog:engel-coefficient-living-standard-myth",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10",
+      "page": "blog:capital-city-buying-patterns-47",
+      "role": "answers"
     }
   ]
 }

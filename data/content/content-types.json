@@ -2269,16 +2269,6 @@
       "id": "blog:wheat-flour-consumption-prefecture",
       "type": "type:reference",
       "reason": "問いの答えではない記事。順位・地域差の紹介を中心とする"
-    },
-    {
-      "id": "blog:engel-coefficient-living-standard-myth",
-      "type": "type:paper",
-      "reason": "問い issue:K03-2 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
-    },
-    {
-      "id": "blog:capital-city-buying-patterns-47",
-      "type": "type:paper",
-      "reason": "問い issue:K10 に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる"
     }
   ]
 }

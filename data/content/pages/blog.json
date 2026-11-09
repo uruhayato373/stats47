@@ -1366,6 +1366,21 @@
       ]
     },
     {
+      "id": "blog:capital-city-buying-patterns-47",
+      "kind": "blog",
+      "key": "capital-city-buying-patterns-47",
+      "title": "買い物の都市差は、量か値段か",
+      "href": "/blog/capital-city-buying-patterns-47",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:consumption-expenditure",
+        "tag:t-7b96c26b45e8",
+        "tag:t-6f414497615e"
+      ]
+    },
+    {
       "id": "blog:car-ownership-household-prefecture-gap",
       "kind": "blog",
       "key": "car-ownership-household-prefecture-gap",
@@ -3678,6 +3693,22 @@
       ]
     },
     {
+      "id": "blog:engel-coefficient-living-standard-myth",
+      "kind": "blog",
+      "key": "engel-coefficient-living-standard-myth",
+      "title": "エンゲル係数が高いと貧しい?",
+      "href": "/blog/engel-coefficient-living-standard-myth",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:engel-coefficient",
+        "tag:t-ba8e4beb69bf",
+        "tag:t-5b5af3a9d5e1",
+        "tag:consumption-expenditure",
+        "tag:food-expenditure"
+      ]
+    },
+    {
       "id": "blog:engel-coefficient-prefecture-ranking",
       "kind": "blog",
       "key": "engel-coefficient-prefecture-ranking",
@@ -5977,14 +6008,12 @@
       "id": "blog:household-spending-before-after-inflation",
       "kind": "blog",
       "key": "household-spending-before-after-inflation",
-      "title": "アイス+32%、ぎょうざだけ-8%──物価高で「切り捨てられた品目」がある",
+      "title": "アイス+27%、ぎょうざだけ-4%──物価高で「切り捨てられた品目」がある",
       "href": "/blog/household-spending-before-after-inflation",
       "published": true,
       "rankingKeys": [
         "avg-propensity-to-consume-worker-households",
         "consumption-expenditure-multi-person-households-per-month",
-        "cpi-change-rate-total",
-        "engel-coefficient",
         "food-expenditure-ratio-multi-person-households"
       ],
       "tagIds": [

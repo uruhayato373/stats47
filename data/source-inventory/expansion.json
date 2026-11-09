@@ -475,6 +475,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a04-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:engel-coefficient-living-standard-myth",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-01",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a04-01",
@@ -664,6 +672,14 @@
       "target": "note:b-ref-kakei-a05-06",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-00",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:capital-city-buying-patterns-47",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-01",
