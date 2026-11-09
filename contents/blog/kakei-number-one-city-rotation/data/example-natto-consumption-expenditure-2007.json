@@ -1,0 +1,378 @@
+[
+ {
+  "areaName": "福島県",
+  "cityName": "福島市",
+  "rank": 1,
+  "value": 6701.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "茨城県",
+  "cityName": "水戸市",
+  "rank": 2,
+  "value": 6432.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "群馬県",
+  "cityName": "前橋市",
+  "rank": 3,
+  "value": 5972.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "栃木県",
+  "cityName": "宇都宮市",
+  "rank": 4,
+  "value": 5795.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "長野県",
+  "cityName": "長野市",
+  "rank": 5,
+  "value": 5408.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "岩手県",
+  "cityName": "盛岡市",
+  "rank": 6,
+  "value": 5382.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "宮城県",
+  "cityName": "仙台市",
+  "rank": 7,
+  "value": 5273.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "青森県",
+  "cityName": "青森市",
+  "rank": 8,
+  "value": 5196.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "秋田県",
+  "cityName": "秋田市",
+  "rank": 9,
+  "value": 5020.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "山形県",
+  "cityName": "山形市",
+  "rank": 10,
+  "value": 4864.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "富山県",
+  "cityName": "富山市",
+  "rank": 11,
+  "value": 4601.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "北海道",
+  "cityName": "札幌市",
+  "rank": 12,
+  "value": 4554.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "千葉県",
+  "cityName": "千葉市",
+  "rank": 13,
+  "value": 4517.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "新潟県",
+  "cityName": "新潟市",
+  "rank": 14,
+  "value": 4513.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "鹿児島県",
+  "cityName": "鹿児島市",
+  "rank": 15,
+  "value": 4435.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "神奈川県",
+  "cityName": "横浜市",
+  "rank": 16,
+  "value": 4420.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "埼玉県",
+  "cityName": "さいたま市",
+  "rank": 17,
+  "value": 4400.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "熊本県",
+  "cityName": "熊本市",
+  "rank": 18,
+  "value": 4380.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "山梨県",
+  "cityName": "甲府市",
+  "rank": 19,
+  "value": 4302.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "福岡県",
+  "cityName": "福岡市",
+  "rank": 20,
+  "value": 4034.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "福井県",
+  "cityName": "福井市",
+  "rank": 21,
+  "value": 4019.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "東京都",
+  "cityName": "東京都区部",
+  "rank": 22,
+  "value": 3957.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "石川県",
+  "cityName": "金沢市",
+  "rank": 23,
+  "value": 3934.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "佐賀県",
+  "cityName": "佐賀市",
+  "rank": 24,
+  "value": 3820.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "静岡県",
+  "cityName": "静岡市",
+  "rank": 25,
+  "value": 3794.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "宮崎県",
+  "cityName": "宮崎市",
+  "rank": 26,
+  "value": 3605.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "長崎県",
+  "cityName": "長崎市",
+  "rank": 27,
+  "value": 3543.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "岐阜県",
+  "cityName": "岐阜市",
+  "rank": 28,
+  "value": 3454.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "滋賀県",
+  "cityName": "大津市",
+  "rank": 29,
+  "value": 3435.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "三重県",
+  "cityName": "津市",
+  "rank": 30,
+  "value": 3200.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "愛知県",
+  "cityName": "名古屋市",
+  "rank": 31,
+  "value": 3017.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "広島県",
+  "cityName": "広島市",
+  "rank": 32,
+  "value": 3003.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "大分県",
+  "cityName": "大分市",
+  "rank": 33,
+  "value": 2947.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "愛媛県",
+  "cityName": "松山市",
+  "rank": 34,
+  "value": 2938.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "山口県",
+  "cityName": "山口市",
+  "rank": 35,
+  "value": 2832.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "高知県",
+  "cityName": "高知市",
+  "rank": 36,
+  "value": 2806.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "奈良県",
+  "cityName": "奈良市",
+  "rank": 37,
+  "value": 2789.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "鳥取県",
+  "cityName": "鳥取市",
+  "rank": 38,
+  "value": 2747.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "沖縄県",
+  "cityName": "那覇市",
+  "rank": 39,
+  "value": 2735.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "島根県",
+  "cityName": "松江市",
+  "rank": 40,
+  "value": 2709.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "香川県",
+  "cityName": "高松市",
+  "rank": 41,
+  "value": 2694.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "岡山県",
+  "cityName": "岡山市",
+  "rank": 42,
+  "value": 2633.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "兵庫県",
+  "cityName": "神戸市",
+  "rank": 43,
+  "value": 2499.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "京都府",
+  "cityName": "京都市",
+  "rank": 44,
+  "value": 2422.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "大阪府",
+  "cityName": "大阪市",
+  "rank": 45,
+  "value": 2242.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "和歌山県",
+  "cityName": "和歌山市",
+  "rank": 46,
+  "value": 2077.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ },
+ {
+  "areaName": "徳島県",
+  "cityName": "徳島市",
+  "rank": 47,
+  "value": 2073.0,
+  "label": "納豆消費支出額 2007年",
+  "unit": "円"
+ }
+]

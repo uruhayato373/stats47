@@ -1,0 +1,288 @@
+[
+ {
+  "survey": "購入数量",
+  "metricKey": "banana-consumption-quantity",
+  "item": "バナナ",
+  "unit": "g",
+  "kyotoAvg": 21356.3,
+  "ranks": [
+   [
+    "兵庫県",
+    22720.0
+   ],
+   [
+    "奈良県",
+    21428.7
+   ],
+   [
+    "京都府",
+    21356.3
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "購入数量",
+  "metricKey": "chinese-cabbage-consumption-quantity",
+  "item": "はくさい",
+  "unit": "g",
+  "kyotoAvg": 9403.7,
+  "ranks": [
+   [
+    "大阪府",
+    9866.7
+   ],
+   [
+    "和歌山県",
+    9681.7
+   ],
+   [
+    "京都府",
+    9403.7
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "fish-tsukudani-type2-consumption-expenditure",
+  "item": "魚介のつくだ煮",
+  "unit": "円",
+  "kyotoAvg": 1448.0,
+  "ranks": [
+   [
+    "静岡県",
+    1835.3
+   ],
+   [
+    "長野県",
+    1556.0
+   ],
+   [
+    "京都府",
+    1448.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "購入数量",
+  "metricKey": "fresh-udon-soba-consumption-quantity",
+  "item": "生うどん・そば",
+  "unit": "g",
+  "kyotoAvg": 12409.0,
+  "ranks": [
+   [
+    "香川県",
+    17368.7
+   ],
+   [
+    "滋賀県",
+    12537.0
+   ],
+   [
+    "京都府",
+    12409.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "green-pepper-consumption-expenditure",
+  "item": "ピーマン",
+  "unit": "円",
+  "kyotoAvg": 2986.0,
+  "ranks": [
+   [
+    "神奈川県",
+    3130.3
+   ],
+   [
+    "東京都",
+    3049.3
+   ],
+   [
+    "京都府",
+    2986.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "ham-consumption-expenditure",
+  "item": "ハム",
+  "unit": "円",
+  "kyotoAvg": 5456.0,
+  "ranks": [
+   [
+    "神奈川県",
+    5649.7
+   ],
+   [
+    "東京都",
+    5641.3
+   ],
+   [
+    "京都府",
+    5456.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "onion-consumption-expenditure",
+  "item": "たまねぎ",
+  "unit": "円",
+  "kyotoAvg": 4891.3,
+  "ranks": [
+   [
+    "奈良県",
+    4913.3
+   ],
+   [
+    "神奈川県",
+    4911.7
+   ],
+   [
+    "京都府",
+    4891.3
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "購入数量",
+  "metricKey": "other-bread-consumption-quantity",
+  "item": "他のパン",
+  "unit": "g",
+  "kyotoAvg": 22937.7,
+  "ranks": [
+   [
+    "大阪府",
+    23895.3
+   ],
+   [
+    "滋賀県",
+    23824.3
+   ],
+   [
+    "京都府",
+    22937.7
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "other-dairy-consumption-expenditure",
+  "item": "他の乳製品",
+  "unit": "円",
+  "kyotoAvg": 1059.0,
+  "ranks": [
+   [
+    "神奈川県",
+    1120.7
+   ],
+   [
+    "東京都",
+    1070.7
+   ],
+   [
+    "京都府",
+    1059.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "other-dried-vegetables-seaweed-consumption-expenditure",
+  "item": "他の乾物・海藻",
+  "unit": "円",
+  "kyotoAvg": 3648.0,
+  "ranks": [
+   [
+    "秋田県",
+    3687.0
+   ],
+   [
+    "山形県",
+    3677.3
+   ],
+   [
+    "京都府",
+    3648.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "other-liquor-consumption-expenditure",
+  "item": "他の酒",
+  "unit": "円",
+  "kyotoAvg": 1980.0,
+  "ranks": [
+   [
+    "東京都",
+    2310.7
+   ],
+   [
+    "神奈川県",
+    2286.0
+   ],
+   [
+    "京都府",
+    1980.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "購入数量",
+  "metricKey": "persimmon-consumption-quantity",
+  "item": "柿",
+  "unit": "g",
+  "kyotoAvg": 2930.0,
+  "ranks": [
+   [
+    "岐阜県",
+    5122.3
+   ],
+   [
+    "奈良県",
+    4031.3
+   ],
+   [
+    "京都府",
+    2930.0
+   ]
+  ],
+  "citiesRanked": 47
+ },
+ {
+  "survey": "支出額",
+  "metricKey": "white-bread-consumption-expenditure",
+  "item": "食パン",
+  "unit": "円",
+  "kyotoAvg": 12914.3,
+  "ranks": [
+   [
+    "兵庫県",
+    14549.7
+   ],
+   [
+    "奈良県",
+    12998.3
+   ],
+   [
+    "京都府",
+    12914.3
+   ]
+  ],
+  "citiesRanked": 47
+ }
+]

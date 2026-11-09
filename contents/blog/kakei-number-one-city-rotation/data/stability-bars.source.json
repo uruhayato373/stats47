@@ -1,0 +1,12 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/<metricKey>/values.json（metricKey は rotation-items.json の key 列 626 指標）",
+  "upstream": "metric config (data/metrics, source.kind=kakei-chousa, statsDataId 0004023605/0004023606) → e-Stat → R2 app/stats",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ],
+  "transform": "3年平均は各年と前2年の単純平均（3年とも値のある都市だけ）。3年後との比較は2009〜2022年の各年tとt+3（3年平均は重ならない2つの窓）。一致は2009〜2025年の各年で単年の1位と同じ年を終点とする3年平均の1位が同じか"
+}

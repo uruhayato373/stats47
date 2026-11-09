@@ -1,0 +1,336 @@
+{
+  "title": "生うどん・そばの都市別の値",
+  "chartType": "line",
+  "unit": "円",
+  "metricKey": "fresh-udon-soba-consumption-expenditure",
+  "series": [
+    {
+      "label": "高松市",
+      "areaName": "香川県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 7654
+        },
+        {
+          "year": 2008,
+          "value": 8034
+        },
+        {
+          "year": 2009,
+          "value": 7961
+        },
+        {
+          "year": 2010,
+          "value": 8523
+        },
+        {
+          "year": 2011,
+          "value": 7355
+        },
+        {
+          "year": 2012,
+          "value": 6611
+        },
+        {
+          "year": 2013,
+          "value": 6869
+        },
+        {
+          "year": 2014,
+          "value": 6859
+        },
+        {
+          "year": 2015,
+          "value": 7952
+        },
+        {
+          "year": 2016,
+          "value": 7162
+        },
+        {
+          "year": 2017,
+          "value": 7475
+        },
+        {
+          "year": 2018,
+          "value": 6603
+        },
+        {
+          "year": 2019,
+          "value": 6015
+        },
+        {
+          "year": 2020,
+          "value": 7057
+        },
+        {
+          "year": 2021,
+          "value": 6735
+        },
+        {
+          "year": 2022,
+          "value": 5764
+        },
+        {
+          "year": 2023,
+          "value": 6384
+        },
+        {
+          "year": 2024,
+          "value": 6582
+        },
+        {
+          "year": 2025,
+          "value": 6450
+        }
+      ]
+    },
+    {
+      "label": "山形市",
+      "areaName": "山形県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 3996
+        },
+        {
+          "year": 2008,
+          "value": 4357
+        },
+        {
+          "year": 2009,
+          "value": 4504
+        },
+        {
+          "year": 2010,
+          "value": 4138
+        },
+        {
+          "year": 2011,
+          "value": 4318
+        },
+        {
+          "year": 2012,
+          "value": 4847
+        },
+        {
+          "year": 2013,
+          "value": 3727
+        },
+        {
+          "year": 2014,
+          "value": 4619
+        },
+        {
+          "year": 2015,
+          "value": 4112
+        },
+        {
+          "year": 2016,
+          "value": 3999
+        },
+        {
+          "year": 2017,
+          "value": 4736
+        },
+        {
+          "year": 2018,
+          "value": 4390
+        },
+        {
+          "year": 2019,
+          "value": 4335
+        },
+        {
+          "year": 2020,
+          "value": 4710
+        },
+        {
+          "year": 2021,
+          "value": 4419
+        },
+        {
+          "year": 2022,
+          "value": 4517
+        },
+        {
+          "year": 2023,
+          "value": 4805
+        },
+        {
+          "year": 2024,
+          "value": 4527
+        },
+        {
+          "year": 2025,
+          "value": 5251
+        }
+      ]
+    },
+    {
+      "label": "前橋市",
+      "areaName": "群馬県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 5235
+        },
+        {
+          "year": 2008,
+          "value": 5209
+        },
+        {
+          "year": 2009,
+          "value": 5714
+        },
+        {
+          "year": 2010,
+          "value": 4943
+        },
+        {
+          "year": 2011,
+          "value": 4894
+        },
+        {
+          "year": 2012,
+          "value": 4938
+        },
+        {
+          "year": 2013,
+          "value": 4873
+        },
+        {
+          "year": 2014,
+          "value": 3879
+        },
+        {
+          "year": 2015,
+          "value": 5202
+        },
+        {
+          "year": 2016,
+          "value": 4802
+        },
+        {
+          "year": 2017,
+          "value": 4313
+        },
+        {
+          "year": 2018,
+          "value": 4506
+        },
+        {
+          "year": 2019,
+          "value": 4315
+        },
+        {
+          "year": 2020,
+          "value": 4867
+        },
+        {
+          "year": 2021,
+          "value": 4560
+        },
+        {
+          "year": 2022,
+          "value": 4783
+        },
+        {
+          "year": 2023,
+          "value": 4699
+        },
+        {
+          "year": 2024,
+          "value": 4422
+        },
+        {
+          "year": 2025,
+          "value": 5132
+        }
+      ]
+    },
+    {
+      "label": "長野市",
+      "areaName": "長野県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 4039
+        },
+        {
+          "year": 2008,
+          "value": 5259
+        },
+        {
+          "year": 2009,
+          "value": 4923
+        },
+        {
+          "year": 2010,
+          "value": 4534
+        },
+        {
+          "year": 2011,
+          "value": 4265
+        },
+        {
+          "year": 2012,
+          "value": 3812
+        },
+        {
+          "year": 2013,
+          "value": 3736
+        },
+        {
+          "year": 2014,
+          "value": 4247
+        },
+        {
+          "year": 2015,
+          "value": 3758
+        },
+        {
+          "year": 2016,
+          "value": 4437
+        },
+        {
+          "year": 2017,
+          "value": 4405
+        },
+        {
+          "year": 2018,
+          "value": 3926
+        },
+        {
+          "year": 2019,
+          "value": 4284
+        },
+        {
+          "year": 2020,
+          "value": 4014
+        },
+        {
+          "year": 2021,
+          "value": 3931
+        },
+        {
+          "year": 2022,
+          "value": 5022
+        },
+        {
+          "year": 2023,
+          "value": 4814
+        },
+        {
+          "year": 2024,
+          "value": 5368
+        },
+        {
+          "year": 2025,
+          "value": 4412
+        }
+      ]
+    }
+  ]
+}

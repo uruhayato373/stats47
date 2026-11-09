@@ -1,0 +1,378 @@
+[
+ {
+  "areaName": "大阪府",
+  "rank": 1,
+  "value": 9866.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "大阪市"
+ },
+ {
+  "areaName": "和歌山県",
+  "rank": 2,
+  "value": 9681.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "和歌山市"
+ },
+ {
+  "areaName": "京都府",
+  "rank": 3,
+  "value": 9403.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "京都市"
+ },
+ {
+  "areaName": "滋賀県",
+  "rank": 4,
+  "value": 9370.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "大津市"
+ },
+ {
+  "areaName": "兵庫県",
+  "rank": 5,
+  "value": 9349.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "神戸市"
+ },
+ {
+  "areaName": "奈良県",
+  "rank": 6,
+  "value": 9032.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "奈良市"
+ },
+ {
+  "areaName": "千葉県",
+  "rank": 7,
+  "value": 8705.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "千葉市"
+ },
+ {
+  "areaName": "宮崎県",
+  "rank": 8,
+  "value": 8704.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "宮崎市"
+ },
+ {
+  "areaName": "富山県",
+  "rank": 9,
+  "value": 8434.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "富山市"
+ },
+ {
+  "areaName": "徳島県",
+  "rank": 10,
+  "value": 8400.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "徳島市"
+ },
+ {
+  "areaName": "佐賀県",
+  "rank": 11,
+  "value": 8362.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "佐賀市"
+ },
+ {
+  "areaName": "長崎県",
+  "rank": 12,
+  "value": 8343.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "長崎市"
+ },
+ {
+  "areaName": "島根県",
+  "rank": 13,
+  "value": 8145.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "松江市"
+ },
+ {
+  "areaName": "香川県",
+  "rank": 14,
+  "value": 8069.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "高松市"
+ },
+ {
+  "areaName": "広島県",
+  "rank": 15,
+  "value": 8062.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "広島市"
+ },
+ {
+  "areaName": "岡山県",
+  "rank": 16,
+  "value": 7993.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "岡山市"
+ },
+ {
+  "areaName": "鹿児島県",
+  "rank": 17,
+  "value": 7898.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "鹿児島市"
+ },
+ {
+  "areaName": "愛知県",
+  "rank": 18,
+  "value": 7662.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "名古屋市"
+ },
+ {
+  "areaName": "北海道",
+  "rank": 19,
+  "value": 7638.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "札幌市"
+ },
+ {
+  "areaName": "長野県",
+  "rank": 20,
+  "value": 7630.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "長野市"
+ },
+ {
+  "areaName": "東京都",
+  "rank": 21,
+  "value": 7616.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "東京都区部"
+ },
+ {
+  "areaName": "愛媛県",
+  "rank": 22,
+  "value": 7566.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "松山市"
+ },
+ {
+  "areaName": "大分県",
+  "rank": 23,
+  "value": 7516.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "大分市"
+ },
+ {
+  "areaName": "熊本県",
+  "rank": 24,
+  "value": 7504.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "熊本市"
+ },
+ {
+  "areaName": "山口県",
+  "rank": 25,
+  "value": 7442.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "山口市"
+ },
+ {
+  "areaName": "埼玉県",
+  "rank": 26,
+  "value": 7411.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "さいたま市"
+ },
+ {
+  "areaName": "岐阜県",
+  "rank": 27,
+  "value": 7408.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "岐阜市"
+ },
+ {
+  "areaName": "静岡県",
+  "rank": 28,
+  "value": 7363.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "静岡市"
+ },
+ {
+  "areaName": "神奈川県",
+  "rank": 29,
+  "value": 7257.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "横浜市"
+ },
+ {
+  "areaName": "福岡県",
+  "rank": 30,
+  "value": 7220.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "福岡市"
+ },
+ {
+  "areaName": "三重県",
+  "rank": 31,
+  "value": 7184.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "津市"
+ },
+ {
+  "areaName": "新潟県",
+  "rank": 32,
+  "value": 7151.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "新潟市"
+ },
+ {
+  "areaName": "鳥取県",
+  "rank": 33,
+  "value": 7108.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "鳥取市"
+ },
+ {
+  "areaName": "宮城県",
+  "rank": 34,
+  "value": 7074.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "仙台市"
+ },
+ {
+  "areaName": "高知県",
+  "rank": 35,
+  "value": 7041.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "高知市"
+ },
+ {
+  "areaName": "石川県",
+  "rank": 36,
+  "value": 7012.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "金沢市"
+ },
+ {
+  "areaName": "山梨県",
+  "rank": 37,
+  "value": 6975.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "甲府市"
+ },
+ {
+  "areaName": "福島県",
+  "rank": 38,
+  "value": 6787.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "福島市"
+ },
+ {
+  "areaName": "秋田県",
+  "rank": 39,
+  "value": 6743.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "秋田市"
+ },
+ {
+  "areaName": "群馬県",
+  "rank": 40,
+  "value": 6632.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "前橋市"
+ },
+ {
+  "areaName": "岩手県",
+  "rank": 41,
+  "value": 6320.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "盛岡市"
+ },
+ {
+  "areaName": "栃木県",
+  "rank": 42,
+  "value": 6231.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "宇都宮市"
+ },
+ {
+  "areaName": "青森県",
+  "rank": 43,
+  "value": 6112.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "青森市"
+ },
+ {
+  "areaName": "福井県",
+  "rank": 44,
+  "value": 6066.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "福井市"
+ },
+ {
+  "areaName": "茨城県",
+  "rank": 45,
+  "value": 6014.3,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "水戸市"
+ },
+ {
+  "areaName": "山形県",
+  "rank": 46,
+  "value": 5761.7,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "山形市"
+ },
+ {
+  "areaName": "沖縄県",
+  "rank": 47,
+  "value": 5125.0,
+  "label": "はくさい消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "那覇市"
+ }
+]

@@ -1,0 +1,146 @@
+[
+ {
+  "survey": "支出額",
+  "item": "かつお",
+  "metricKey": "bonito-consumption-expenditure",
+  "city": "高知県"
+ },
+ {
+  "survey": "購入数量",
+  "item": "かつお",
+  "metricKey": "bonito-consumption-quantity",
+  "city": "高知県"
+ },
+ {
+  "survey": "支出額",
+  "item": "にんじん",
+  "metricKey": "carrot-consumption-expenditure",
+  "city": "沖縄県"
+ },
+ {
+  "survey": "支出額",
+  "item": "カステラ",
+  "metricKey": "castella-consumption-expenditure",
+  "city": "長崎県"
+ },
+ {
+  "survey": "支出額",
+  "item": "揚げかまぼこ",
+  "metricKey": "deep-fried-fish-cake-consumption-expenditure",
+  "city": "鹿児島県"
+ },
+ {
+  "survey": "支出額",
+  "item": "魚介の缶詰",
+  "metricKey": "fish-canned-consumption-expenditure",
+  "city": "沖縄県"
+ },
+ {
+  "survey": "支出額",
+  "item": "かまぼこ",
+  "metricKey": "fish-paste-consumption-expenditure",
+  "city": "宮城県"
+ },
+ {
+  "survey": "支出額",
+  "item": "生うどん・そば",
+  "metricKey": "fresh-udon-soba-consumption-expenditure",
+  "city": "香川県"
+ },
+ {
+  "survey": "購入数量",
+  "item": "生うどん・そば",
+  "metricKey": "fresh-udon-soba-consumption-quantity",
+  "city": "香川県"
+ },
+ {
+  "survey": "支出額",
+  "item": "しじみ",
+  "metricKey": "freshwater-clam-consumption-expenditure",
+  "city": "島根県"
+ },
+ {
+  "survey": "購入数量",
+  "item": "しじみ",
+  "metricKey": "freshwater-clam-consumption-quantity",
+  "city": "島根県"
+ },
+ {
+  "survey": "支出額",
+  "item": "油揚げ・がんもどき",
+  "metricKey": "fried-tofu-consumption-expenditure",
+  "city": "福井県"
+ },
+ {
+  "survey": "支出額",
+  "item": "さやまめ",
+  "metricKey": "green-beans-consumption-expenditure",
+  "city": "新潟県"
+ },
+ {
+  "survey": "支出額",
+  "item": "かつお節・削り節",
+  "metricKey": "katsuobushi-consumption-expenditure",
+  "city": "沖縄県"
+ },
+ {
+  "survey": "購入数量",
+  "item": "かつお節・削り節",
+  "metricKey": "katsuobushi-consumption-quantity",
+  "city": "沖縄県"
+ },
+ {
+  "survey": "支出額",
+  "item": "こんにゃく",
+  "metricKey": "konnyaku-consumption-expenditure",
+  "city": "山形県"
+ },
+ {
+  "survey": "支出額",
+  "item": "他の加工肉",
+  "metricKey": "other-processed-meat-consumption-expenditure",
+  "city": "沖縄県"
+ },
+ {
+  "survey": "支出額",
+  "item": "梨",
+  "metricKey": "pear-consumption-expenditure",
+  "city": "鳥取県"
+ },
+ {
+  "survey": "支出額",
+  "item": "ほたて貝",
+  "metricKey": "scallop-consumption-expenditure",
+  "city": "青森県"
+ },
+ {
+  "survey": "購入数量",
+  "item": "ほたて貝",
+  "metricKey": "scallop-consumption-quantity",
+  "city": "青森県"
+ },
+ {
+  "survey": "支出額",
+  "item": "日本そば・うどん",
+  "metricKey": "soba-udon-dining-consumption-expenditure",
+  "city": "香川県"
+ },
+ {
+  "survey": "支出額",
+  "item": "さつまいも",
+  "metricKey": "sweet-potato-consumption-expenditure",
+  "city": "徳島県"
+ },
+ {
+  "survey": "支出額",
+  "item": "まぐろ",
+  "metricKey": "tuna-consumption-expenditure",
+  "city": "静岡県"
+ },
+ {
+  "survey": "購入数量",
+  "item": "まぐろ",
+  "metricKey": "tuna-consumption-quantity",
+  "city": "静岡県"
+ }
+]

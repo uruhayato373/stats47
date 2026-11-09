@@ -1,0 +1,695 @@
+{
+  "title": "1位と2位の差の推移",
+  "chartType": "line",
+  "unit": "％",
+  "series": [
+    {
+      "label": "生うどん・そば",
+      "metricKey": "fresh-udon-soba-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 46.2
+        },
+        {
+          "year": 2008,
+          "value": 52.8
+        },
+        {
+          "year": 2009,
+          "value": 39.3
+        },
+        {
+          "year": 2010,
+          "value": 72.4
+        },
+        {
+          "year": 2011,
+          "value": 50.3
+        },
+        {
+          "year": 2012,
+          "value": 33.9
+        },
+        {
+          "year": 2013,
+          "value": 41
+        },
+        {
+          "year": 2014,
+          "value": 34.2
+        },
+        {
+          "year": 2015,
+          "value": 52.9
+        },
+        {
+          "year": 2016,
+          "value": 49.1
+        },
+        {
+          "year": 2017,
+          "value": 57.8
+        },
+        {
+          "year": 2018,
+          "value": 46.5
+        },
+        {
+          "year": 2019,
+          "value": 38.8
+        },
+        {
+          "year": 2020,
+          "value": 45
+        },
+        {
+          "year": 2021,
+          "value": 47.7
+        },
+        {
+          "year": 2022,
+          "value": 14.8
+        },
+        {
+          "year": 2023,
+          "value": 31
+        },
+        {
+          "year": 2024,
+          "value": 22.6
+        },
+        {
+          "year": 2025,
+          "value": 22.8
+        }
+      ],
+      "medianGapPct": 45,
+      "fluctuationPct": 6.8,
+      "churnPct": 0,
+      "distinctLeaders": 1
+    },
+    {
+      "label": "中華そば(外食)",
+      "metricKey": "ramen-dining-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 54.1
+        },
+        {
+          "year": 2008,
+          "value": 28.4
+        },
+        {
+          "year": 2009,
+          "value": 8.8
+        },
+        {
+          "year": 2010,
+          "value": 1
+        },
+        {
+          "year": 2011,
+          "value": 7.9
+        },
+        {
+          "year": 2012,
+          "value": 7.5
+        },
+        {
+          "year": 2013,
+          "value": 26.3
+        },
+        {
+          "year": 2014,
+          "value": 29.6
+        },
+        {
+          "year": 2015,
+          "value": 35.7
+        },
+        {
+          "year": 2016,
+          "value": 22.3
+        },
+        {
+          "year": 2017,
+          "value": 30.1
+        },
+        {
+          "year": 2018,
+          "value": 39.6
+        },
+        {
+          "year": 2019,
+          "value": 12
+        },
+        {
+          "year": 2020,
+          "value": 11.2
+        },
+        {
+          "year": 2021,
+          "value": 2.2
+        },
+        {
+          "year": 2022,
+          "value": 5
+        },
+        {
+          "year": 2023,
+          "value": 15.6
+        },
+        {
+          "year": 2024,
+          "value": 37.4
+        },
+        {
+          "year": 2025,
+          "value": 31.6
+        }
+      ],
+      "medianGapPct": 22.3,
+      "fluctuationPct": 12,
+      "churnPct": 22.2,
+      "distinctLeaders": 3
+    },
+    {
+      "label": "ぎょうざ",
+      "metricKey": "gyoza-frozen-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 88.8
+        },
+        {
+          "year": 2008,
+          "value": 80.7
+        },
+        {
+          "year": 2009,
+          "value": 51.5
+        },
+        {
+          "year": 2010,
+          "value": 100
+        },
+        {
+          "year": 2011,
+          "value": 23.4
+        },
+        {
+          "year": 2012,
+          "value": 37.8
+        },
+        {
+          "year": 2013,
+          "value": 71.2
+        },
+        {
+          "year": 2014,
+          "value": 50.7
+        },
+        {
+          "year": 2015,
+          "value": 46.8
+        },
+        {
+          "year": 2016,
+          "value": 60.6
+        },
+        {
+          "year": 2017,
+          "value": 40.1
+        },
+        {
+          "year": 2018,
+          "value": 4.3
+        },
+        {
+          "year": 2019,
+          "value": 56.4
+        },
+        {
+          "year": 2020,
+          "value": 0.7
+        },
+        {
+          "year": 2021,
+          "value": 33.7
+        },
+        {
+          "year": 2022,
+          "value": 7.7
+        },
+        {
+          "year": 2023,
+          "value": 9.3
+        },
+        {
+          "year": 2024,
+          "value": 25.6
+        },
+        {
+          "year": 2025,
+          "value": 4.6
+        }
+      ],
+      "medianGapPct": 40.1,
+      "fluctuationPct": 9.5,
+      "churnPct": 11.1,
+      "distinctLeaders": 2
+    },
+    {
+      "label": "食パン(支出額)",
+      "metricKey": "white-bread-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 4
+        },
+        {
+          "year": 2008,
+          "value": 16.4
+        },
+        {
+          "year": 2009,
+          "value": 1.2
+        },
+        {
+          "year": 2010,
+          "value": 0.2
+        },
+        {
+          "year": 2011,
+          "value": 11.9
+        },
+        {
+          "year": 2012,
+          "value": 10.8
+        },
+        {
+          "year": 2013,
+          "value": 6.9
+        },
+        {
+          "year": 2014,
+          "value": 12.8
+        },
+        {
+          "year": 2015,
+          "value": 22.1
+        },
+        {
+          "year": 2016,
+          "value": 7.8
+        },
+        {
+          "year": 2017,
+          "value": 0.8
+        },
+        {
+          "year": 2018,
+          "value": 2.1
+        },
+        {
+          "year": 2019,
+          "value": 1.7
+        },
+        {
+          "year": 2020,
+          "value": 0.4
+        },
+        {
+          "year": 2021,
+          "value": 7
+        },
+        {
+          "year": 2022,
+          "value": 8.9
+        },
+        {
+          "year": 2023,
+          "value": 4
+        },
+        {
+          "year": 2024,
+          "value": 19.3
+        },
+        {
+          "year": 2025,
+          "value": 2.8
+        }
+      ],
+      "medianGapPct": 6.9,
+      "fluctuationPct": 5.8,
+      "churnPct": 44.4,
+      "distinctLeaders": 6
+    },
+    {
+      "label": "納豆",
+      "metricKey": "natto-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 4.2
+        },
+        {
+          "year": 2008,
+          "value": 3.3
+        },
+        {
+          "year": 2009,
+          "value": 26.1
+        },
+        {
+          "year": 2010,
+          "value": 8.6
+        },
+        {
+          "year": 2011,
+          "value": 3.3
+        },
+        {
+          "year": 2012,
+          "value": 0.4
+        },
+        {
+          "year": 2013,
+          "value": 6.2
+        },
+        {
+          "year": 2014,
+          "value": 1.8
+        },
+        {
+          "year": 2015,
+          "value": 5.2
+        },
+        {
+          "year": 2016,
+          "value": 0
+        },
+        {
+          "year": 2017,
+          "value": 21.6
+        },
+        {
+          "year": 2018,
+          "value": 4.4
+        },
+        {
+          "year": 2019,
+          "value": 2.1
+        },
+        {
+          "year": 2020,
+          "value": 10.8
+        },
+        {
+          "year": 2021,
+          "value": 0.8
+        },
+        {
+          "year": 2022,
+          "value": 9.1
+        },
+        {
+          "year": 2023,
+          "value": 4.1
+        },
+        {
+          "year": 2024,
+          "value": 8.8
+        },
+        {
+          "year": 2025,
+          "value": 4.7
+        }
+      ],
+      "medianGapPct": 4.4,
+      "fluctuationPct": 8.2,
+      "churnPct": 50,
+      "distinctLeaders": 3
+    },
+    {
+      "label": "チョコレート",
+      "metricKey": "chocolate-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 11.4
+        },
+        {
+          "year": 2008,
+          "value": 9.3
+        },
+        {
+          "year": 2009,
+          "value": 1.5
+        },
+        {
+          "year": 2010,
+          "value": 5.6
+        },
+        {
+          "year": 2011,
+          "value": 11.4
+        },
+        {
+          "year": 2012,
+          "value": 10.5
+        },
+        {
+          "year": 2013,
+          "value": 2.8
+        },
+        {
+          "year": 2014,
+          "value": 0.6
+        },
+        {
+          "year": 2015,
+          "value": 0.6
+        },
+        {
+          "year": 2016,
+          "value": 0.4
+        },
+        {
+          "year": 2017,
+          "value": 8.2
+        },
+        {
+          "year": 2018,
+          "value": 3
+        },
+        {
+          "year": 2019,
+          "value": 3.1
+        },
+        {
+          "year": 2020,
+          "value": 4.4
+        },
+        {
+          "year": 2021,
+          "value": 1.5
+        },
+        {
+          "year": 2022,
+          "value": 1.1
+        },
+        {
+          "year": 2023,
+          "value": 5
+        },
+        {
+          "year": 2024,
+          "value": 2.4
+        },
+        {
+          "year": 2025,
+          "value": 8.3
+        }
+      ],
+      "medianGapPct": 3.1,
+      "fluctuationPct": 8.5,
+      "churnPct": 88.9,
+      "distinctLeaders": 11
+    },
+    {
+      "label": "米(支出額)",
+      "metricKey": "rice-consumption-expenditure",
+      "data": [
+        {
+          "year": 2007,
+          "value": 1.4
+        },
+        {
+          "year": 2008,
+          "value": 4.2
+        },
+        {
+          "year": 2009,
+          "value": 2.2
+        },
+        {
+          "year": 2010,
+          "value": 4.3
+        },
+        {
+          "year": 2011,
+          "value": 4.9
+        },
+        {
+          "year": 2012,
+          "value": 1.2
+        },
+        {
+          "year": 2013,
+          "value": 1.7
+        },
+        {
+          "year": 2014,
+          "value": 15.2
+        },
+        {
+          "year": 2015,
+          "value": 4
+        },
+        {
+          "year": 2016,
+          "value": 2.2
+        },
+        {
+          "year": 2017,
+          "value": 7.2
+        },
+        {
+          "year": 2018,
+          "value": 1.8
+        },
+        {
+          "year": 2019,
+          "value": 3.6
+        },
+        {
+          "year": 2020,
+          "value": 9.7
+        },
+        {
+          "year": 2021,
+          "value": 1.6
+        },
+        {
+          "year": 2022,
+          "value": 4.5
+        },
+        {
+          "year": 2023,
+          "value": 1.3
+        },
+        {
+          "year": 2024,
+          "value": 4.6
+        },
+        {
+          "year": 2025,
+          "value": 2.7
+        }
+      ],
+      "medianGapPct": 3.6,
+      "fluctuationPct": 9.3,
+      "churnPct": 83.3,
+      "distinctLeaders": 8
+    },
+    {
+      "label": "食パン(購入数量)",
+      "metricKey": "white-bread-consumption-quantity",
+      "data": [
+        {
+          "year": 2007,
+          "value": 3.8
+        },
+        {
+          "year": 2008,
+          "value": 2
+        },
+        {
+          "year": 2009,
+          "value": 1.9
+        },
+        {
+          "year": 2010,
+          "value": 8.2
+        },
+        {
+          "year": 2011,
+          "value": 13.7
+        },
+        {
+          "year": 2012,
+          "value": 10.9
+        },
+        {
+          "year": 2013,
+          "value": 0.1
+        },
+        {
+          "year": 2014,
+          "value": 2.5
+        },
+        {
+          "year": 2015,
+          "value": 2.3
+        },
+        {
+          "year": 2016,
+          "value": 6.4
+        },
+        {
+          "year": 2017,
+          "value": 1.6
+        },
+        {
+          "year": 2018,
+          "value": 2.5
+        },
+        {
+          "year": 2019,
+          "value": 1.3
+        },
+        {
+          "year": 2020,
+          "value": 4
+        },
+        {
+          "year": 2021,
+          "value": 3.3
+        },
+        {
+          "year": 2022,
+          "value": 3.7
+        },
+        {
+          "year": 2023,
+          "value": 1.6
+        },
+        {
+          "year": 2024,
+          "value": 3.7
+        },
+        {
+          "year": 2025,
+          "value": 1.9
+        }
+      ],
+      "medianGapPct": 2.5,
+      "fluctuationPct": 6.5,
+      "churnPct": 77.8,
+      "distinctLeaders": 7
+    }
+  ]
+}

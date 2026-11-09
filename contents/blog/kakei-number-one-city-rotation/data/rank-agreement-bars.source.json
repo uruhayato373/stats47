@@ -1,0 +1,12 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/<metricKey>/values.json（metricKey は rotation-items.json の key 列 626 指標）",
+  "upstream": "metric config (data/metrics, source.kind=kakei-chousa, statsDataId 0004023605/0004023606) → e-Stat → R2 app/stats",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ],
+  "transform": "品目ごとに、2023〜2025年の単純平均で並べたk位の都市が、2025年の単年の値で並べたk位と同じ都市かを数える（3年とも値がある都市のみ）。上位5位内は2025年の単年で5位以内に入っていた割合"
+}

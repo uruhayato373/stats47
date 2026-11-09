@@ -1,0 +1,12 @@
+{
+  "kind": "derived",
+  "source": "r2:app/stats/<metricKey>/values.json（metricKey は rotation-items.json の key 列 626 指標）",
+  "upstream": "metric config (data/metrics, source.kind=kakei-chousa, statsDataId 0004023605/0004023606) → e-Stat → R2 app/stats",
+  "displaySources": [
+    {
+      "label": "家計調査",
+      "surveyId": "kakei-chousa"
+    }
+  ],
+  "transform": "品目分類コードの上4桁（0101穀類〜0112外食）で食料を12分野に分け、分野ごとに入れ替わり率（2008〜2025年の18回の前年比較で別の都市が1位になった割合）の品目平均を出す"
+}

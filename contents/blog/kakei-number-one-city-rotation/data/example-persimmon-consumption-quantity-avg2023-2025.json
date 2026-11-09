@@ -1,0 +1,378 @@
+[
+ {
+  "areaName": "岐阜県",
+  "rank": 1,
+  "value": 5122.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "岐阜市"
+ },
+ {
+  "areaName": "奈良県",
+  "rank": 2,
+  "value": 4031.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "奈良市"
+ },
+ {
+  "areaName": "京都府",
+  "rank": 3,
+  "value": 2930.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "京都市"
+ },
+ {
+  "areaName": "香川県",
+  "rank": 4,
+  "value": 2847.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "高松市"
+ },
+ {
+  "areaName": "北海道",
+  "rank": 5,
+  "value": 2801.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "札幌市"
+ },
+ {
+  "areaName": "兵庫県",
+  "rank": 6,
+  "value": 2529.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "神戸市"
+ },
+ {
+  "areaName": "和歌山県",
+  "rank": 7,
+  "value": 2500.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "和歌山市"
+ },
+ {
+  "areaName": "大阪府",
+  "rank": 8,
+  "value": 2427.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "大阪市"
+ },
+ {
+  "areaName": "鳥取県",
+  "rank": 9,
+  "value": 2402.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "鳥取市"
+ },
+ {
+  "areaName": "千葉県",
+  "rank": 10,
+  "value": 2297.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "千葉市"
+ },
+ {
+  "areaName": "長崎県",
+  "rank": 11,
+  "value": 2219.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "長崎市"
+ },
+ {
+  "areaName": "滋賀県",
+  "rank": 12,
+  "value": 2167.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "大津市"
+ },
+ {
+  "areaName": "東京都",
+  "rank": 13,
+  "value": 2108.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "東京都区部"
+ },
+ {
+  "areaName": "岩手県",
+  "rank": 14,
+  "value": 2064.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "盛岡市"
+ },
+ {
+  "areaName": "愛知県",
+  "rank": 15,
+  "value": 2060.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "名古屋市"
+ },
+ {
+  "areaName": "福岡県",
+  "rank": 16,
+  "value": 2010.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "福岡市"
+ },
+ {
+  "areaName": "鹿児島県",
+  "rank": 17,
+  "value": 1990.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "鹿児島市"
+ },
+ {
+  "areaName": "佐賀県",
+  "rank": 18,
+  "value": 1954.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "佐賀市"
+ },
+ {
+  "areaName": "島根県",
+  "rank": 19,
+  "value": 1881.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "松江市"
+ },
+ {
+  "areaName": "神奈川県",
+  "rank": 20,
+  "value": 1860.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "横浜市"
+ },
+ {
+  "areaName": "熊本県",
+  "rank": 21,
+  "value": 1857.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "熊本市"
+ },
+ {
+  "areaName": "秋田県",
+  "rank": 22,
+  "value": 1811.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "秋田市"
+ },
+ {
+  "areaName": "栃木県",
+  "rank": 23,
+  "value": 1804.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "宇都宮市"
+ },
+ {
+  "areaName": "山形県",
+  "rank": 24,
+  "value": 1789.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "山形市"
+ },
+ {
+  "areaName": "愛媛県",
+  "rank": 25,
+  "value": 1788.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "松山市"
+ },
+ {
+  "areaName": "茨城県",
+  "rank": 26,
+  "value": 1779.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "水戸市"
+ },
+ {
+  "areaName": "三重県",
+  "rank": 27,
+  "value": 1748.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "津市"
+ },
+ {
+  "areaName": "広島県",
+  "rank": 28,
+  "value": 1671.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "広島市"
+ },
+ {
+  "areaName": "青森県",
+  "rank": 29,
+  "value": 1651.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "青森市"
+ },
+ {
+  "areaName": "宮崎県",
+  "rank": 30,
+  "value": 1614.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "宮崎市"
+ },
+ {
+  "areaName": "宮城県",
+  "rank": 31,
+  "value": 1598.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "仙台市"
+ },
+ {
+  "areaName": "静岡県",
+  "rank": 32,
+  "value": 1578.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "静岡市"
+ },
+ {
+  "areaName": "大分県",
+  "rank": 33,
+  "value": 1523.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "大分市"
+ },
+ {
+  "areaName": "徳島県",
+  "rank": 34,
+  "value": 1480.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "徳島市"
+ },
+ {
+  "areaName": "福井県",
+  "rank": 35,
+  "value": 1469.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "福井市"
+ },
+ {
+  "areaName": "長野県",
+  "rank": 36,
+  "value": 1387.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "長野市"
+ },
+ {
+  "areaName": "埼玉県",
+  "rank": 37,
+  "value": 1356.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "さいたま市"
+ },
+ {
+  "areaName": "沖縄県",
+  "rank": 38,
+  "value": 1270.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "那覇市"
+ },
+ {
+  "areaName": "新潟県",
+  "rank": 39,
+  "value": 1265.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "新潟市"
+ },
+ {
+  "areaName": "富山県",
+  "rank": 40,
+  "value": 1260.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "富山市"
+ },
+ {
+  "areaName": "高知県",
+  "rank": 41,
+  "value": 1248.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "高知市"
+ },
+ {
+  "areaName": "山口県",
+  "rank": 42,
+  "value": 1190.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "山口市"
+ },
+ {
+  "areaName": "福島県",
+  "rank": 43,
+  "value": 1187.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "福島市"
+ },
+ {
+  "areaName": "山梨県",
+  "rank": 44,
+  "value": 1170.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "甲府市"
+ },
+ {
+  "areaName": "石川県",
+  "rank": 45,
+  "value": 1040.7,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "金沢市"
+ },
+ {
+  "areaName": "岡山県",
+  "rank": 46,
+  "value": 989.0,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "岡山市"
+ },
+ {
+  "areaName": "群馬県",
+  "rank": 47,
+  "value": 770.3,
+  "label": "柿消費量 2023〜2025年平均",
+  "unit": "g",
+  "cityName": "前橋市"
+ }
+]
