@@ -169,7 +169,7 @@ updated: 2026-11-01
 - **次**: ① 記事の図を作る使い捨ての分析を、リポジトリに残すか (置き場と寿命) 残さないか (`generatedBy` に何を書くか) を `blog-data-schema.md` で決める ② 書き手の prompt に、作業ディレクトリを記事ごとに分けることを書く。
 - **完了条件**: `blog-data-schema.md` に分析スクリプトの扱いが書かれ、`generatedBy` が存在しない道を指す図を週次の検査が数える。
 - **進み (2026-11-09)**: 決めた。使い捨ての分析は残さず、取得条件を作り直しの正本にする (`blog-data-schema.md`)。`config/schema/blog.chart-source.schema.json` が `contents/blog/`・`/private/tmp/`・`/var/folders/` を指す `generatedBy` を形の違反にし、`quality-gate.mjs` が止める (旧来の `/tmp/` は改稿を止めない)。週次の `audit-chart-axes.ts` も同じ形の検査で `bad-shape` と数える。書き手の作業ディレクトリと e-Stat の保存の共有は `manage-issue-ledger` SKILL.md §5 に書いた。
-- **残り**: 公開済みの 3 本 (`single-household-spending-differences`・`local-production-local-consumption-meat`・`fresh-seafood-east-west-boundary`) の R2 の `source.json` 31 件が、まだ `contents/blog/<slug>/analysis/build.mjs` を指す。`generatedBy` を消して R2 へ書き戻す (R2 への書き込みはオーナーの承認を得てから)。
+- **完了の証拠 (2026-11-09)**: 公開済みの 3 本の R2 の `source.json` 31 件から `generatedBy` を消して書き戻した (オーナー承認済み・`diff-push-r2.ts` で 31 件成功・エラー 0)。書き戻した 31 件を公開 URL から読み直し、手元の修正版と 31 件一致・`generatedBy` 0 件。他の項目は変えていない。上書き前の版は `blog-archive/` に退避済み。週次レビューでカードを消してよい。
 
 ### [MUNI-THEME-INDEX-STAGING-01] 市区町村×テーマのページを、人口の多い市から段階的に検索に出す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
