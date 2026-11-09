@@ -1,0 +1,12 @@
+{
+  "kind": "metric",
+  "metricKey": "green-tea-consumption-quantity",
+  "year": "2007-2025",
+  "unit": "g",
+  "label": "緑茶消費量",
+  "transform": "areas: 静岡県・福岡県・愛媛県・群馬県・沖縄県 / 各年の値と全47県内の順位 (同値は同順位)",
+  "source": "r2:app/stats/green-tea-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat 家計調査 → R2 app/stats",
+  "restore": "r2:app/stats/green-tea-consumption-quantity/values.json の rows から areaName が上記の行を yearCode ごとに抜き、同じ yearCode の全47県の value 降順で rank を付け直す",
+  "generatedBy": "article-writer (2026-11 年次更新)"
+}

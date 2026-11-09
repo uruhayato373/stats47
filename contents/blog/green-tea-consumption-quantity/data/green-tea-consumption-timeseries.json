@@ -1,0 +1,770 @@
+{
+  "title": "緑茶消費量の推移（県庁所在市・二人以上の世帯）",
+  "label": "緑茶消費量",
+  "unit": "g",
+  "source": "家計調査",
+  "rankingKey": "green-tea-consumption-quantity",
+  "generatedBy": "fetch-from-r2-stats-values",
+  "data": [
+    {
+      "areaName": "静岡県",
+      "year": 2007,
+      "rank": 2,
+      "value": 1819,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2008,
+      "rank": 1,
+      "value": 1868,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2009,
+      "rank": 2,
+      "value": 2017,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2010,
+      "rank": 1,
+      "value": 1858,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2011,
+      "rank": 1,
+      "value": 1858,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2012,
+      "rank": 1,
+      "value": 2004,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2013,
+      "rank": 1,
+      "value": 2352,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2014,
+      "rank": 3,
+      "value": 1559,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2015,
+      "rank": 1,
+      "value": 1764,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2016,
+      "rank": 5,
+      "value": 1105,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2017,
+      "rank": 1,
+      "value": 1517,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2018,
+      "rank": 1,
+      "value": 2333,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2019,
+      "rank": 1,
+      "value": 1938,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2020,
+      "rank": 1,
+      "value": 2323,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2021,
+      "rank": 1,
+      "value": 1759,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2022,
+      "rank": 1,
+      "value": 1401,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2023,
+      "rank": 3,
+      "value": 1217,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2024,
+      "rank": 1,
+      "value": 1415,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "静岡県",
+      "year": 2025,
+      "rank": 2,
+      "value": 1013,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2007,
+      "rank": 30,
+      "value": 877,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2008,
+      "rank": 22,
+      "value": 961,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2009,
+      "rank": 29,
+      "value": 888,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2010,
+      "rank": 18,
+      "value": 983,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2011,
+      "rank": 19,
+      "value": 1036,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2012,
+      "rank": 46,
+      "value": 576,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2013,
+      "rank": 34,
+      "value": 671,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2014,
+      "rank": 6,
+      "value": 1260,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2015,
+      "rank": 16,
+      "value": 986,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2016,
+      "rank": 30,
+      "value": 661,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2017,
+      "rank": 14,
+      "value": 933,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2018,
+      "rank": 18,
+      "value": 828,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2019,
+      "rank": 6,
+      "value": 1178,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2020,
+      "rank": 32,
+      "value": 667,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2021,
+      "rank": 5,
+      "value": 958,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2022,
+      "rank": 38,
+      "value": 522,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2023,
+      "rank": 38,
+      "value": 532,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2024,
+      "rank": 3,
+      "value": 1085,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "福岡県",
+      "year": 2025,
+      "rank": 1,
+      "value": 1221,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2007,
+      "rank": 40,
+      "value": 687,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2008,
+      "rank": 35,
+      "value": 722,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2009,
+      "rank": 47,
+      "value": 372,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2010,
+      "rank": 37,
+      "value": 744,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2011,
+      "rank": 37,
+      "value": 696,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2012,
+      "rank": 39,
+      "value": 660,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2013,
+      "rank": 38,
+      "value": 591,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2014,
+      "rank": 43,
+      "value": 556,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2015,
+      "rank": 29,
+      "value": 780,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2016,
+      "rank": 43,
+      "value": 478,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2017,
+      "rank": 42,
+      "value": 553,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2018,
+      "rank": 33,
+      "value": 737,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2019,
+      "rank": 35,
+      "value": 663,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2020,
+      "rank": 30,
+      "value": 703,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2021,
+      "rank": 10,
+      "value": 917,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2022,
+      "rank": 44,
+      "value": 460,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2023,
+      "rank": 40,
+      "value": 513,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2024,
+      "rank": 2,
+      "value": 1125,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": 2025,
+      "rank": 45,
+      "value": 386,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2007,
+      "rank": 18,
+      "value": 1089,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2008,
+      "rank": 18,
+      "value": 999,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2009,
+      "rank": 9,
+      "value": 1210,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2010,
+      "rank": 25,
+      "value": 905,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2011,
+      "rank": 17,
+      "value": 1056,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2012,
+      "rank": 28,
+      "value": 839,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2013,
+      "rank": 24,
+      "value": 852,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2014,
+      "rank": 27,
+      "value": 866,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2015,
+      "rank": 14,
+      "value": 998,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2016,
+      "rank": 17,
+      "value": 880,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2017,
+      "rank": 38,
+      "value": 624,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2018,
+      "rank": 39,
+      "value": 649,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2019,
+      "rank": 14,
+      "value": 973,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2020,
+      "rank": 23,
+      "value": 785,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2021,
+      "rank": 23,
+      "value": 744,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2022,
+      "rank": 37,
+      "value": 539,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2023,
+      "rank": 23,
+      "value": 704,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2024,
+      "rank": 5,
+      "value": 967,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "群馬県",
+      "year": 2025,
+      "rank": 43,
+      "value": 408,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2007,
+      "rank": 46,
+      "value": 514,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2008,
+      "rank": 47,
+      "value": 404,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2009,
+      "rank": 46,
+      "value": 383,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2010,
+      "rank": 47,
+      "value": 334,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2011,
+      "rank": 47,
+      "value": 320,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2012,
+      "rank": 47,
+      "value": 503,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2013,
+      "rank": 47,
+      "value": 307,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2014,
+      "rank": 24,
+      "value": 921,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2015,
+      "rank": 44,
+      "value": 486,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2016,
+      "rank": 47,
+      "value": 255,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2017,
+      "rank": 47,
+      "value": 384,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2018,
+      "rank": 47,
+      "value": 224,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2019,
+      "rank": 45,
+      "value": 495,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2020,
+      "rank": 38,
+      "value": 608,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2021,
+      "rank": 39,
+      "value": 520,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2022,
+      "rank": 47,
+      "value": 283,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2023,
+      "rank": 47,
+      "value": 217,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2024,
+      "rank": 47,
+      "value": 336,
+      "label": "緑茶消費量",
+      "unit": "g"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": 2025,
+      "rank": 40,
+      "value": 441,
+      "label": "緑茶消費量",
+      "unit": "g"
+    }
+  ]
+}

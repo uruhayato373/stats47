@@ -1,0 +1,12 @@
+{
+  "kind": "metric",
+  "metricKey": "instant-noodles-consumption-quantity",
+  "year": "2007-2025",
+  "unit": "g",
+  "label": "即席麺消費量",
+  "transform": "areas: 佐賀県・鳥取県・熊本県・岐阜県・東京都 / 各年の値と全47県内の順位 (同値は同順位)",
+  "source": "r2:app/stats/instant-noodles-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat 家計調査 → R2 app/stats",
+  "restore": "r2:app/stats/instant-noodles-consumption-quantity/values.json の rows から areaName が上記の行を yearCode ごとに抜き、同じ yearCode の全47県の value 降順で rank を付け直す",
+  "generatedBy": "article-writer (2026-11 年次更新)"
+}
