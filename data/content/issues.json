@@ -828,6 +828,22 @@
       "status": "active"
     },
     {
+      "id": "issue:D13-1",
+      "level": "minor",
+      "question": "年収が高い世帯ほど、貯金も借金も多いのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 貯蓄・負債編の年収 18 階級・五分位・十分位 (0002210010/12/14、全国・二人以上の世帯)",
+      "pitfall": "貯蓄・負債編の年間収入は家計収支編の年収と別の系列。負債の多くは住宅ローンで、持ち家と年齢で大きく変わる",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:D14",
       "level": "major",
       "question": "年収の壁があるとパートは働く時間を抑えるのか",
@@ -2528,6 +2544,22 @@
       "status": "active"
     },
     {
+      "id": "issue:K03-1",
+      "level": "minor",
+      "question": "エンゲル係数が 44 年ぶりに高いのは、暮らしが苦しくなったからか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 用途分類 年次の年間収入五分位 (0002070005)・世帯主年齢 (0002070011)。全国・二人以上の世帯",
+      "pitfall": "食料の値上がり、高齢世帯の増加、外食・中食の扱いで係数が動く。暦年と年度の値を混ぜない。五分位は世帯主の年齢と世帯人員も違う",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:K04",
       "level": "major",
       "question": "お酒にお金を使う県はどこか",
@@ -3231,6 +3263,150 @@
       "revenue": [
         "広告",
         "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K01-4",
+      "level": "minor",
+      "question": "「消費量日本一」の都市は毎年入れ替わるのか（1 年の値と 3 年平均）",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の年次支出額・購入数量 (0004023605/06)。県庁所在市と政令指定都市、2007〜2025 年",
+      "pitfall": "1 市あたり約 100 世帯の標本で、単年の順位は誤差で動く。総務省の公表は 3 年平均の順位もある。県全体ではなく県庁所在市の値",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K05",
+      "level": "major",
+      "question": "物価が上がったとき、家庭は食べ物の買い方をどう変えたのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の年次・月次の支出額と購入数量 (0004023601/02/05/06、全国・二人以上の世帯)、消費者物価指数",
+      "pitfall": "家計調査の平均価格は購入した品から出した値で、物価指数ではない。2025 年 1 月の分類改定をまたぐ品目は接続を確かめる",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K05-1",
+      "level": "minor",
+      "question": "米が値上がりした年、家庭は米を買う量を減らしたのか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 米の支出額・購入数量 (年次 0004023605/06・月次 0004023601/02)、全国・二人以上の世帯",
+      "pitfall": "購入数量は世帯が買った量で、もらい物や外食の米は入らない。数量の月次は全国だけ",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K05-2",
+      "level": "minor",
+      "question": "値上がりしても買う量が減らない食べ物は何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (全国・2000〜2025 年)",
+      "pitfall": "値上がりと量の増減を並べても因果は言えない。品質の変化 (高い品への置き換え) でも平均価格は上がる",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06",
+      "level": "major",
+      "question": "年収が高い世帯は、何にお金を多く使うのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 年間収入五分位別の品目の年次支出額・購入数量 (0004023607/08)、年収 18 階級の詳細結果表 4-2 (Excel)。全国・二人以上の世帯",
+      "pitfall": "五分位の上の世帯ほど世帯主の年齢と世帯人員が違うので、差を収入だけの効果と書かない。都市×年収の表は無く、地域と掛け合わせられない",
+      "revenue": [
+        "広告",
+        "データ",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-1",
+      "level": "minor",
+      "question": "年収が低い世帯ほど多くお金を使う品目は何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の品目の年次支出額 (0004023607)",
+      "pitfall": "低い五分位には高齢の無職世帯が多い。年齢別 (0004023609) と並べて読む",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K07",
+      "level": "major",
+      "question": "一人暮らしの世帯は、二人以上の世帯と何の買い方が違うのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 総世帯・単身世帯の品目別年次支出額 (0004023612/14)、単身世帯の年齢×性別の用途分類 (0002190004)",
+      "pitfall": "単身世帯の標本は約 1,000 世帯で少ない。世帯の人数が違うので、1 人あたりに直すかを明記する",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K08",
+      "level": "major",
+      "question": "この 25 年で、家庭が買わなくなったもの・買うようになったものは何か",
+      "unit": "japan",
+      "answerability": "relation",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 年報 6-1/6-2 (品目の支出額・購入数量、全国・二人以上の世帯、2000〜2025 年)",
+      "pitfall": "2025 年の分類改定で分割・統合された品目は接続を確かめる。途中年が欠ける品目がある",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K09",
+      "level": "major",
+      "question": "季節や増税で、家庭の買い方はどれだけ動くのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の月次支出額・購入数量 (0004023601/02、1985 年〜)",
+      "pitfall": "月次は標本の誤差が大きい。年の途中の月を年計として扱わない。気温など他の要因と並べても因果は言えない",
+      "revenue": [
+        "広告",
+        "ノウハウ"
       ],
       "sensitive": false,
       "status": "active"

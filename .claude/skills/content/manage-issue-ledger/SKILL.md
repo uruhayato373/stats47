@@ -57,7 +57,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 
 | 項目 | 書き方 |
 |---|---|
-| `unit` | 答えが出る粒度。`prefecture` か `municipality` (市区町村まで降りて答えが出る) |
+| `unit` | 答えが出る粒度。`prefecture` か `municipality` (市区町村まで降りて答えが出る) か `japan` (全国の集計でしか答えが出ない。家計調査の年収階級・世帯属性・全国時系列など。答えは blog か japan-theme で、県別地図やランキングに載せない) |
 | `answerability` | `relation` = 関係を示せる / `caveat` = 言える範囲と言えない範囲を並べる / `myth` = 集計では因果を言えないので誤解を解く型で書く |
 | `primaryTheme` | 大きな問いだけが持つ。小さな問いは親から引き継ぐ |
 | `dataNote` / `pitfall` | 使う統計と、読み違えやすい点。生産スキルへの入力になるので分かっている範囲で書く |
