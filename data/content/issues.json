@@ -669,6 +669,51 @@
       "status": "active"
     },
     {
+      "id": "issue:D04-1",
+      "level": "minor",
+      "question": "高校卒業者の大学等進学率が低い県は、教育水準が低いと言えるか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "学校基本調査 高等学校卒業者の大学等進学率",
+      "pitfall": "進学率は自宅から通える大学の数と地元の就職先に左右され、教育の質の指標ではない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D04-2",
+      "level": "minor",
+      "question": "進学率と就職率を合算すると、堅実な進路選択ができている県はどこか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "学校基本調査 大学等進学率・高卒就職率",
+      "pitfall": "2 つの率を足すのは独自の見方で、公式の指標ではない。浪人の扱いを確かめる",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:D04-3",
+      "level": "minor",
+      "question": "新聞が独自計算した『大学進学率』はなぜ公表値と食い違うのか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "学校基本調査 (大学等進学率の公表値と計算方法)",
+      "pitfall": "浪人を分子だけに入れると率が高く出る。報道の独自計算は定義を確かめる",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:D05",
       "level": "major",
       "question": "共働きが多い県ほど、世帯の所得は高いか",
@@ -902,6 +947,22 @@
       "revenue": [
         "広告",
         "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E02-1",
+      "level": "minor",
+      "question": "補習教育にお金をかけずに国公立大学へ進学できている県庁所在市はどこか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 教育費の内訳 (国公立・私立の授業料、補習教育、県庁所在市)",
+      "pitfall": "授業料は進学した家庭の支出で、進学率ではない。県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
       ],
       "sensitive": false,
       "status": "active"
@@ -2560,6 +2621,52 @@
       "status": "active"
     },
     {
+      "id": "issue:K03-2",
+      "level": "minor",
+      "question": "エンゲル係数が高いほど生活水準が低い、は本当か",
+      "unit": "japan",
+      "answerability": "myth",
+      "dataNote": "家計調査 エンゲル係数の長期推移と年間収入五分位別の値 (全国)",
+      "pitfall": "所得が上がると係数が下がる向きは言えても、係数が高いから貧しいとは言えない。世帯の年齢・人数・外食の多さでも動く",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K03-3",
+      "level": "minor",
+      "question": "エンゲル係数の順に県庁所在市を並べると、生活水準の指標として使えるか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 エンゲル係数・消費支出・食料費 (県庁所在市)、県民経済計算の 1 人あたり県民所得",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい。県民所得は県全体の値で、母集団が違う",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K03-4",
+      "level": "minor",
+      "question": "エンゲル係数の代わりに、生活水準を映す係数はあるか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 通信関係の支出 (固定電話・携帯電話・受信料など) と消費支出 (県庁所在市・全国)",
+      "pitfall": "独自に作る比率で公式の指標ではない。時系列では通信費の伸びで上がり続ける",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:K04",
       "level": "major",
       "question": "お酒にお金を使う県はどこか",
@@ -2568,6 +2675,21 @@
       "primaryTheme": "theme:household-food-spending",
       "dataNote": "家計調査",
       "pitfall": "標本が小さく順位の差は誤差の範囲のこともある。",
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K04-1",
+      "level": "minor",
+      "question": "家庭で飲む酒はビールから何へ移り、勝ち組の酒は何か",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 酒類 6 品目の支出額・購入数量 (全国の年次・月次、年間収入五分位)",
+      "pitfall": "2025 年の分類改定で酒類の区分が変わっていないかを確かめる。外で飲む酒は入らない",
+      "queries": [],
       "revenue": [
         "広告"
       ],
@@ -2974,6 +3096,22 @@
       "status": "active"
     },
     {
+      "id": "issue:K02-2",
+      "level": "minor",
+      "question": "生鮮魚介の好みは日本のどこで東西に分かれるか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "家計調査 生鮮魚介 18 品目の支出額 (県庁所在市)",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:E01-1",
       "level": "minor",
       "question": "北陸の学力が高いのはなぜか",
@@ -2986,6 +3124,37 @@
       ],
       "revenue": [
         "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E01-2",
+      "level": "minor",
+      "question": "学力テスト上位の県と、ほうれんそう・かれいの消費が多い県庁所在市はどこまで重なるか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "家計調査 (ほうれんそう・かれいの支出額と購入数量、県庁所在市)・全国学力・学習状況調査",
+      "pitfall": "県庁所在市の食品の買い方と県の学力は単位も対象も違う。符合は因果ではない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:E01-3",
+      "level": "minor",
+      "question": "公立小中学校の学力調査で継続して上位に入る県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "全国学力・学習状況調査の都道府県別平均正答率 (国立教育政策研究所)",
+      "pitfall": "年度ごとの問題の難しさが違い、正答率の差は小さい。過去年は未収載",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
       ],
       "sensitive": false,
       "status": "active"
@@ -3284,6 +3453,22 @@
       "status": "active"
     },
     {
+      "id": "issue:K01-5",
+      "level": "minor",
+      "question": "『地産地消』は本当に地元の消費者に支持されているか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 牛肉・豚肉・鶏肉の支出額・購入数量 (県庁所在市)、生産農業所得統計",
+      "pitfall": "産地は県全体、消費は県庁所在市の世帯の購入で、単位と対象が違う。もらい物や自家消費は入らない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:K05",
       "level": "major",
       "question": "物価が上がったとき、家庭は食べ物の買い方をどう変えたのか",
@@ -3364,6 +3549,206 @@
       "status": "active"
     },
     {
+      "id": "issue:K06-2",
+      "level": "minor",
+      "question": "年収階級によって、子どもの教育投資の中身と成果は10年でどう変わったか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の教育費・補習教育・授業料 (全国・二人以上の世帯)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-3",
+      "level": "minor",
+      "question": "所得五分位の所得シェアは1990年代から2010年代でどう動いたか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 年間収入五分位の年間収入 (用途分類 0002070005、全国)",
+      "pitfall": "五分位は世帯数で 5 等分した区分で、境目の年収は年ごとに変わる",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-4",
+      "level": "minor",
+      "question": "家計調査を年収階級別に読むとき、何を見れば『高所得世帯に売れている』と言えるか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の品目の支出額・購入数量・平均価格 (0004023607/08)",
+      "pitfall": "支出額だけで判断しない。支出の割合・数量・平均価格のどこで差がつくかを分けて見る。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "ノウハウ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-5",
+      "level": "minor",
+      "question": "食料・衣料・教育の支出は、年収が上がるとシェアも上がるのか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 年間収入五分位別の費目の支出 (用途分類、全国)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-6",
+      "level": "minor",
+      "question": "高所得世帯は薬や医療の何にお金を払い、何に払わないのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の医薬品・健康食品・マッサージ・眼鏡・歯科の支出",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-7",
+      "level": "minor",
+      "question": "高所得世帯への販売に安定して成功している食料品は何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の食料品目の支出額・数量 (かき・れんこん・もも・紅茶など)",
+      "pitfall": "単年の結果で入れ替わる品目がある。複数年で確かめる。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-8",
+      "level": "minor",
+      "question": "自動車関連で高所得世帯に高く売れているものは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の自動車購入・ガソリン・レンタカーの支出",
+      "pitfall": "自動車購入は買った年だけに出るので、世帯ごとの差が大きい。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-9",
+      "level": "minor",
+      "question": "家電のうち高所得世帯に高い機種を売れているものと売れていないものは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の家電の支出額・数量・平均価格",
+      "pitfall": "家電は買い替えの周期と出来事 (地デジ化など) で年ごとに大きく動く。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-10",
+      "level": "minor",
+      "question": "教養娯楽サービスのうち高所得世帯の消費が伸びているものは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の教養娯楽サービスの支出 (庭の手入れ・映画・ゴルフ・スポーツクラブなど)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-11",
+      "level": "minor",
+      "question": "旅行のうち、高所得世帯に最も売れているのは外国パック旅行か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の宿泊料・国内パック旅行・外国パック旅行の支出",
+      "pitfall": "旅行は感染症や為替で年ごとに大きく動く。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-12",
+      "level": "minor",
+      "question": "衣料品の中で、高所得世帯が最も差をつけて買うのは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の衣料品の支出額・数量・平均価格",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-13",
+      "level": "minor",
+      "question": "腕時計・装身具・ハンドバッグなど外見に関わる品目は高所得世帯にどれだけ売れているか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の腕時計・ハンドバッグ・かばん・傘の支出",
+      "pitfall": "装身具は品目が無い。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K06-14",
+      "level": "minor",
+      "question": "外食のうち高所得世帯にうまく売れている業態はどれか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の外食の業態別支出 (そば・うどん、和食、中華、洋食、すし、ハンバーガーなど)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:K07",
       "level": "major",
       "question": "一人暮らしの世帯は、二人以上の世帯と何の買い方が違うのか",
@@ -3396,6 +3781,21 @@
       "status": "active"
     },
     {
+      "id": "issue:K08-1",
+      "level": "minor",
+      "question": "帽子・ネクタイ・婦人用ストッキングの市場はどれだけ縮んだか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 帽子・ネクタイ・婦人用ストッキングの支出額・購入数量 (全国、2000 年〜)",
+      "pitfall": "2025 年の分類改定でネクタイ・ストッキングは接続できない。改定前の系列で止める",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
       "id": "issue:K09",
       "level": "major",
       "question": "季節や増税で、家庭の買い方はどれだけ動くのか",
@@ -3407,6 +3807,806 @@
       "revenue": [
         "広告",
         "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K09-1",
+      "level": "minor",
+      "question": "冬物バーゲンが成功したかどうかは、家計調査の何を見れば判定できるか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 婦人用コート・セーターの月次の支出額・購入数量、消費者物価指数",
+      "pitfall": "家計調査の平均価格は買った品の値段で、店頭の値下げ率とは違う。月次は全国だけ",
+      "queries": [],
+      "revenue": [
+        "ノウハウ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K09-2",
+      "level": "minor",
+      "question": "発泡酒・第3のビールの増税は消費者の行動をどう変えるか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 ビール・発泡酒・第 3 のビールの月次の支出額・購入数量 (酒税の改正前後)",
+      "pitfall": "税の改正と同じ時期の値上げや天候とは切り分けにくい",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10",
+      "level": "major",
+      "question": "県庁所在市の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (県庁所在市・二人以上の世帯)。支出額を購入数量と平均価格に分けて全国平均と比べる",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい。平均価格は買った品の値段で、物価ではない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-1",
+      "level": "minor",
+      "question": "札幌市（北海道）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (札幌市・二人以上の世帯)",
+      "pitfall": "札幌市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-2",
+      "level": "minor",
+      "question": "青森市（青森県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (青森市・二人以上の世帯)",
+      "pitfall": "青森市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-3",
+      "level": "minor",
+      "question": "盛岡市（岩手県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (盛岡市・二人以上の世帯)",
+      "pitfall": "盛岡市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-4",
+      "level": "minor",
+      "question": "仙台市（宮城県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (仙台市・二人以上の世帯)",
+      "pitfall": "仙台市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-5",
+      "level": "minor",
+      "question": "秋田市（秋田県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (秋田市・二人以上の世帯)",
+      "pitfall": "秋田市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-6",
+      "level": "minor",
+      "question": "山形市（山形県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (山形市・二人以上の世帯)",
+      "pitfall": "山形市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-7",
+      "level": "minor",
+      "question": "福島市（福島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (福島市・二人以上の世帯)",
+      "pitfall": "福島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-8",
+      "level": "minor",
+      "question": "水戸市（茨城県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (水戸市・二人以上の世帯)",
+      "pitfall": "水戸市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-9",
+      "level": "minor",
+      "question": "宇都宮市（栃木県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (宇都宮市・二人以上の世帯)",
+      "pitfall": "宇都宮市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-10",
+      "level": "minor",
+      "question": "前橋市（群馬県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (前橋市・二人以上の世帯)",
+      "pitfall": "前橋市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-11",
+      "level": "minor",
+      "question": "さいたま市（埼玉県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (さいたま市・二人以上の世帯)",
+      "pitfall": "さいたま市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-12",
+      "level": "minor",
+      "question": "千葉市（千葉県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (千葉市・二人以上の世帯)",
+      "pitfall": "千葉市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-13",
+      "level": "minor",
+      "question": "東京都区部（東京都）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (東京都区部・二人以上の世帯)",
+      "pitfall": "東京都区部の二人以上の世帯の値で、都全体ではない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-14",
+      "level": "minor",
+      "question": "横浜市（神奈川県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (横浜市・二人以上の世帯)",
+      "pitfall": "横浜市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-15",
+      "level": "minor",
+      "question": "新潟市（新潟県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (新潟市・二人以上の世帯)",
+      "pitfall": "新潟市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-16",
+      "level": "minor",
+      "question": "富山市（富山県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (富山市・二人以上の世帯)",
+      "pitfall": "富山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-17",
+      "level": "minor",
+      "question": "金沢市（石川県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (金沢市・二人以上の世帯)",
+      "pitfall": "金沢市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-18",
+      "level": "minor",
+      "question": "福井市（福井県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (福井市・二人以上の世帯)",
+      "pitfall": "福井市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-19",
+      "level": "minor",
+      "question": "甲府市（山梨県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (甲府市・二人以上の世帯)",
+      "pitfall": "甲府市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-20",
+      "level": "minor",
+      "question": "長野市（長野県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (長野市・二人以上の世帯)",
+      "pitfall": "長野市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-21",
+      "level": "minor",
+      "question": "岐阜市（岐阜県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (岐阜市・二人以上の世帯)",
+      "pitfall": "岐阜市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-22",
+      "level": "minor",
+      "question": "静岡市（静岡県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (静岡市・二人以上の世帯)",
+      "pitfall": "静岡市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-23",
+      "level": "minor",
+      "question": "名古屋市（愛知県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (名古屋市・二人以上の世帯)",
+      "pitfall": "名古屋市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-24",
+      "level": "minor",
+      "question": "津市（三重県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (津市・二人以上の世帯)",
+      "pitfall": "津市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-25",
+      "level": "minor",
+      "question": "大津市（滋賀県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (大津市・二人以上の世帯)",
+      "pitfall": "大津市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-26",
+      "level": "minor",
+      "question": "京都市（京都府）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (京都市・二人以上の世帯)",
+      "pitfall": "京都市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-27",
+      "level": "minor",
+      "question": "大阪市（大阪府）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (大阪市・二人以上の世帯)",
+      "pitfall": "大阪市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-28",
+      "level": "minor",
+      "question": "神戸市（兵庫県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (神戸市・二人以上の世帯)",
+      "pitfall": "神戸市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-29",
+      "level": "minor",
+      "question": "奈良市（奈良県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (奈良市・二人以上の世帯)",
+      "pitfall": "奈良市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-30",
+      "level": "minor",
+      "question": "和歌山市（和歌山県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (和歌山市・二人以上の世帯)",
+      "pitfall": "和歌山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-31",
+      "level": "minor",
+      "question": "鳥取市（鳥取県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (鳥取市・二人以上の世帯)",
+      "pitfall": "鳥取市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-32",
+      "level": "minor",
+      "question": "松江市（島根県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (松江市・二人以上の世帯)",
+      "pitfall": "松江市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-33",
+      "level": "minor",
+      "question": "岡山市（岡山県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (岡山市・二人以上の世帯)",
+      "pitfall": "岡山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-34",
+      "level": "minor",
+      "question": "広島市（広島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (広島市・二人以上の世帯)",
+      "pitfall": "広島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-35",
+      "level": "minor",
+      "question": "山口市（山口県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (山口市・二人以上の世帯)",
+      "pitfall": "山口市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-36",
+      "level": "minor",
+      "question": "徳島市（徳島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (徳島市・二人以上の世帯)",
+      "pitfall": "徳島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-37",
+      "level": "minor",
+      "question": "高松市（香川県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (高松市・二人以上の世帯)",
+      "pitfall": "高松市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-38",
+      "level": "minor",
+      "question": "松山市（愛媛県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (松山市・二人以上の世帯)",
+      "pitfall": "松山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-39",
+      "level": "minor",
+      "question": "高知市（高知県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (高知市・二人以上の世帯)",
+      "pitfall": "高知市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-40",
+      "level": "minor",
+      "question": "福岡市（福岡県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (福岡市・二人以上の世帯)",
+      "pitfall": "福岡市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-41",
+      "level": "minor",
+      "question": "佐賀市（佐賀県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (佐賀市・二人以上の世帯)",
+      "pitfall": "佐賀市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-42",
+      "level": "minor",
+      "question": "長崎市（長崎県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (長崎市・二人以上の世帯)",
+      "pitfall": "長崎市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-43",
+      "level": "minor",
+      "question": "熊本市（熊本県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (熊本市・二人以上の世帯)",
+      "pitfall": "熊本市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-44",
+      "level": "minor",
+      "question": "大分市（大分県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (大分市・二人以上の世帯)",
+      "pitfall": "大分市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-45",
+      "level": "minor",
+      "question": "宮崎市（宮崎県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (宮崎市・二人以上の世帯)",
+      "pitfall": "宮崎市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-46",
+      "level": "minor",
+      "question": "鹿児島市（鹿児島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (鹿児島市・二人以上の世帯)",
+      "pitfall": "鹿児島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active"
+    },
+    {
+      "id": "issue:K10-47",
+      "level": "minor",
+      "question": "那覇市（沖縄県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (那覇市・二人以上の世帯)",
+      "pitfall": "那覇市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
       ],
       "sensitive": false,
       "status": "active"

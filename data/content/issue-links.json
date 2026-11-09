@@ -805,6 +805,246 @@
       "issue": "issue:I09",
       "page": "ranking:national-treasury-disbursement-prefecture",
       "role": "evidence"
+    },
+    {
+      "issue": "issue:K01-3",
+      "page": "blog:frozen-gyoza-spending-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-1",
+      "page": "blog:hokkaido-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-2",
+      "page": "blog:aomori-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-3",
+      "page": "blog:iwate-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-4",
+      "page": "blog:miyagi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-5",
+      "page": "blog:akita-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-6",
+      "page": "blog:yamagata-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-7",
+      "page": "blog:fukushima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-8",
+      "page": "blog:ibaraki-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-9",
+      "page": "blog:tochigi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-10",
+      "page": "blog:gunma-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-11",
+      "page": "blog:saitama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-12",
+      "page": "blog:chiba-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-13",
+      "page": "blog:tokyo-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-14",
+      "page": "blog:kanagawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-15",
+      "page": "blog:niigata-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-16",
+      "page": "blog:toyama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-17",
+      "page": "blog:ishikawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-18",
+      "page": "blog:fukui-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-19",
+      "page": "blog:yamanashi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-20",
+      "page": "blog:nagano-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-21",
+      "page": "blog:gifu-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-22",
+      "page": "blog:shizuoka-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-23",
+      "page": "blog:aichi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-24",
+      "page": "blog:mie-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-25",
+      "page": "blog:shiga-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-26",
+      "page": "blog:kyoto-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-27",
+      "page": "blog:osaka-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-28",
+      "page": "blog:hyogo-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-29",
+      "page": "blog:nara-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-30",
+      "page": "blog:wakayama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-31",
+      "page": "blog:tottori-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-32",
+      "page": "blog:shimane-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-33",
+      "page": "blog:okayama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-34",
+      "page": "blog:hiroshima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-35",
+      "page": "blog:yamaguchi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-36",
+      "page": "blog:tokushima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-37",
+      "page": "blog:kagawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-38",
+      "page": "blog:ehime-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-39",
+      "page": "blog:kochi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-40",
+      "page": "blog:fukuoka-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-41",
+      "page": "blog:saga-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-42",
+      "page": "blog:nagasaki-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-43",
+      "page": "blog:kumamoto-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-44",
+      "page": "blog:oita-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-45",
+      "page": "blog:miyazaki-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-46",
+      "page": "blog:kagoshima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-47",
+      "page": "blog:okinawa-food-culture",
+      "role": "answers"
     }
   ]
 }

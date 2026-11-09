@@ -521,7 +521,10 @@ export const DATASETS = [
   d("sns.threads-schedule", "data/sns/threads-schedule.json", "state", "sns", "data", "Threads の予約表"),
   d("sns.port-bubble-captions", "data/sns/port-bubble-captions/{name}", "state", "sns", "data", "港湾バブルチャート投稿のキャプション"),
   d("source-inventory.manifests", "data/source-inventory/{name}/{name}/source-bundle-manifest.json", "evidence", "data", "data", "参考文献 (教材) の資料・版ごとの source bundle manifest (Drive の版 folder の全 file の SHA)"),
-  d("source-inventory.analyses", "data/source-inventory/{name}/{name}/analyses.json", "config", "data", "data", "参考文献 (教材) の分析企画。1 冊・1 版の問い・主張・採否・一次資料・展開先 (人と agent が判断して書く正本。展開先ごとの結果は expansion.json)", { schema: "data/source-inventory/analyses.schema.json" }),
+  d("source-inventory.analyses", "data/source-inventory/{name}/{name}/analyses.json", "config", "data", "data", "参考文献 (教材) の分析企画。1 冊・1 版の問い・主張・採否・一次資料・展開先 (人と agent が判断して書く正本。展開先ごとの結果は expansion.json)", {
+    schema: "data/source-inventory/analyses.schema.json",
+    refs: [{ field: "analyses[].issueIds[]", to: "content.issues", key: "issues[].id" }],
+  }),
   d("source-inventory.analyses-schema", "data/source-inventory/analyses.schema.json", "config", "data", "data", "上の分析企画の JSON Schema"),
   d("source-inventory.inventory", "data/source-inventory/{name}/{name}/inventory.json", "state", "data", "data", "参考文献のページ・項目単位の解決台帳 (source-inventory build が分析企画から生成)"),
   d("source-inventory.summary", "data/source-inventory/{name}/{name}/summary.json", "state", "data", "data", "上の解決台帳の集計"),
