@@ -1,2 +1,0 @@
-本文の数値と図の元データを作った作業用スクリプト (生成の記録)。産出側は e-Stat 統計表 0002006790 (p1.mjs が取得)、消費側は R2 app/stats/<beef|pork|chicken>-consumption-<quantity|expenditure>/values.json、total-population、beef-cattle-count、pig-count (作業時は /tmp/k15 に保存)。
-build.mjs が data/*.json を書き、scatter.mts が散布図 (4 枚) を描き、npx tsx .claude/scripts/blog/generate-article-charts.ts --slug local-production-local-consumption-meat が残りの図を描く。common.mjs は fresh-seafood-east-west-boundary/analysis にある。
