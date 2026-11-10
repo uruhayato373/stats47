@@ -69,15 +69,17 @@ export function industryCheck({ rows, mainRows, scale }) {
   const groups = new Map();
   for (const row of rows) {
     const key = `${row.code}|${row.year}`;
-    const group = groups.get(key) ?? { code: row.code, pref: row.pref, name: row.name, year: row.year, total: null, published: 0, hiddenIndustries: 0 };
+    const group = groups.get(key) ?? { code: row.code, pref: row.pref, name: row.name, year: row.year, total: null, published: 0, hiddenIndustries: 0, inWardTable: false };
     if (row.industry === TOTAL_INDUSTRY) group.total = row.value;
     else if (row.value != null) group.published += row.value;
     else if (row.note.startsWith('元データ記号')) group.hiddenIndustries += 1;
+    else if (row.note === DESIGNATED_NOTE) group.inWardTable = true;
     groups.set(key, group);
   }
   const checks = [...groups.values()].map((g) => {
     const mainValue = main.get(`${g.code}|${g.year}`) ?? null;
-    const unpublished = g.total == null ? null : g.total - g.published;
+    // 業種の内訳が区の別表にある市は、製造業計との差を出さない (全額が「公表されていない」に見えてしまう)
+    const unpublished = g.total == null || g.inWardTable ? null : g.total - g.published;
     const mainDiff = g.total == null || mainValue == null ? null : Math.round((g.total / scale - mainValue) * 100) / 100;
     return { ...g, unpublished, main: mainValue, mainDiff, matchesMain: mainDiff == null ? null : Math.abs(mainDiff) < 1 };
   });
@@ -99,6 +101,11 @@ export function renderIndustryReadme({ metric, spec, industry }) {
   const { tables, industries, rows, wardRows, check, designated } = industry;
   const years = [...new Set(tables.flatMap((t) => t.years))].sort((a, b) => a - b);
   const s = check.summary;
+  const latest = years.at(-1);
+  const latestChecks = check.checks.filter((c) => c.year === latest && c.total != null && c.unpublished != null);
+  const latestTotal = latestChecks.reduce((sum, c) => sum + c.total, 0);
+  const unpublishedShare = latestTotal ? latestChecks.reduce((sum, c) => sum + c.unpublished, 0) / latestTotal * 100 : 0;
+  const fullyPublished = latestChecks.filter((c) => c.hiddenIndustries === 0).length;
   const mismatchText = s.mismatches.length
     ? `合わない ${s.mismatches.length} 件: ${s.mismatches.slice(0, 10).map((m) => `${m.year} 年 ${m.name} (${m.mainDiff})`).join('、')}${s.mismatches.length > 10 ? ' ほか' : ''}`
     : '合わないものはありません';
@@ -113,7 +120,7 @@ export function renderIndustryReadme({ metric, spec, industry }) {
 - 出典: ${spec.industry.sourceLabel}。表は ${tables.map((t) => `${t.years.join('・')} 年実績 = ${t.statsDataId}`).join('、')}。
 - 対象は${spec.industry.scope}です。本体の時系列 (${spec.sourceLabel}) の 2020 年以前とは対象の範囲が違うので、業種別の表を 2020 年以前の年とつなげないでください。
 - 列は本体と同じ形に「業種コード」「業種名」を足したものです。**値の単位は ${tables[0].unit} で、本体 (${spec.unit}) と違います**。元の表のまま換算していません。
-- 「元データ記号 X (秘匿)」の行は、事業所が少なく数値が公表されていないものです。0 にせず空のまま載せています。製造業計から公表された業種の和を引いた差は検算表に「公表されていない業種の合計」として載せていますが、個々の業種の値を逆算しないでください。
+- 「元データ記号 X (秘匿)」の行は、事業所が少なく数値が公表されていないものです。0 にせず空のまま載せています。製造業計から公表された業種の和を引いた差は検算表に「公表されていない業種の合計」として載せていますが、個々の業種の値を逆算しないでください。${latest} 年は、公表されていない業種の合計が製造業計の ${unpublishedShare.toFixed(1)}% (区の別表に内訳がある市を除く ${latestChecks.length.toLocaleString()} 自治体の合計) で、秘匿の業種が 1 つも無い自治体は ${fullyPublished.toLocaleString()} です。
 - 区を持つ ${designated} 件 (政令市と東京都特別区部) は、市全体の業種別が e-Stat の表に無い場合、自治体の表では製造業計だけを載せ、業種の行は空欄にして「区の別表を参照」と注記しました。区 × 業種は別表にあります。
 - 検算: 製造業計 (${tables[0].unit}) を ${spec.industry.scale} で割った値と本体の${spec.title} (${spec.unit}) を、${s.compared.toLocaleString()} 件の自治体 × 年で比べ、${s.matchesMain.toLocaleString()} 件が 1 ${spec.unit}未満の差で一致しました。${mismatchText}。
 `;

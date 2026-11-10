@@ -45,6 +45,8 @@ test('政令市の業種の行は空欄にして区の別表へ案内し、製�
   const rows = buildIndustryRows({ tables, areas: [area('27100', '大阪府 大阪市')], designated: new Set(['27100']) });
   assert.equal(rows.find((r) => r.industry === '00').value, 4000);
   assert.match(rows.find((r) => r.industry === '31').note, /区の別表を参照/);
+  // 内訳が区の別表にある市は、製造業計の全額を「公表されていない業種の合計」にしない
+  assert.equal(industryCheck({ rows, mainRows: [], scale: 100 }).checks[0].unpublished, null);
 });
 
 test('表で単位や業種名が食い違う、同じ組み合わせが 2 行ある入力は止める', () => {
