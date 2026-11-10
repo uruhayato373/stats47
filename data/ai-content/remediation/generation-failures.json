@@ -74,16 +74,22 @@
       "firstFailedAt": "2026-09-05"
     },
     "natto-consumption-expenditure": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-09",
+      "lastFailedAt": "2026-11-10",
       "firstFailedAt": "2026-11-09"
     },
     "manufacturing-shipment-amount": {
+      "failCount": 2,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-10",
+      "firstFailedAt": "2026-11-09"
+    },
+    "inbound-visitors-by-destination": {
       "failCount": 1,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-09",
-      "firstFailedAt": "2026-11-09"
+      "lastFailedAt": "2026-11-10",
+      "firstFailedAt": "2026-11-10"
     }
   }
 }
