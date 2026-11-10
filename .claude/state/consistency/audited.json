@@ -1,6 +1,6 @@
 {
-  "hash": "bb38826707cd6a6ffc3fd9e4a88e91bbd88246f968cb25b6faeca3c0002719e9",
-  "audited_at": "2026-11-10T00:46:29",
+  "hash": "6df5ac577ed39f45c7aea5cb355a062b97b986001e38b81ac9070420e9fdd392",
+  "audited_at": "2026-11-10T00:53:57",
   "files": [
     ".agents/skills/content/manage-issue-ledger/SKILL.md",
     ".claude/scripts/issues/__tests__/issue-graph.test.mjs",

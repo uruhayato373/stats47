@@ -336,7 +336,7 @@ export function parseCsv(text) {
  *
  * 軸は「説明側 (explanatory)」と「結果側 (outcome)」で、それぞれ 比較 (compare)・構成 (compose)・変化 (change) のどれか。
  * 説明側が無い問い (記述の問い) は explanatory: null。名前を原因・結果にしないのは、相関を因果と読ませないため。
- * 説明側の比較が指標を持たないときは群の区分 (年収五分位・世帯類型など) として扱う。時間は軸にせず、結果側の変化で表す。
+ * 説明側が群の区分 (年収五分位・世帯類型など) のときは group: true を書く。時間は軸にせず、結果側の変化で表す。
  *
  * 決めるのは図の「目的」だけで、図の型そのものは図の型の台帳 (image-templates.json の purposes・renderer・review)
  * から引く。型の決定表をここに手書きすると台帳とずれるため (2026-11-10 Fable のレビュー)。
@@ -367,8 +367,9 @@ export function effectiveAxes(issue, byId) {
 
 export function figurePurpose({ explanatory, outcome }) {
   if (!explanatory) return SINGLE_PURPOSE[outcome.pattern];
-  // 指標を持たない比較の説明側は群の区分 (年収五分位・世帯類型・東西など)。群ごとの値は関係ではなく比較の図にする
-  const isGroup = explanatory.pattern === "compare" && !explanatory.metrics?.length;
+  // 群の区分 (年収五分位・世帯類型・東西など) は group: true で明示する。群ごとの値は関係ではなく比較の図にする。
+  // 指標が無いことを区分と読み替えない (量の指標の候補が見つからなかっただけの軸を棒グラフに回してしまう)
+  const isGroup = explanatory.pattern === "compare" && explanatory.group === true;
   if (isGroup && outcome.pattern === "compare") return "comparison";
   // 群ごとの推移は群を系列にした折れ線 (五分位なら 5 系列で line の上限に収まる)
   if (isGroup && outcome.pattern === "change") return "trend";
@@ -382,7 +383,7 @@ export function figurePurpose({ explanatory, outcome }) {
 /**
  * @param {{ issue: object, axes?: object, templates: object[], metricKeys?: Set<string> }} p
  * @returns {{ purpose: string|null, primary: string|null, allowed: string[], gaps: string[] }}
- *   gaps: 型未定 (軸が無い) / 描画器なし / 粒度不足 (全国の集計で関係を問う) / 未検証 (変化・構成の軸に指標が無い) / 指標なし (書いた指標が存在しない)
+ *   gaps: 型未定 (軸が無い) / 描画器なし / 粒度不足 (全国の集計で関係を問う) / 未検証 (群の区分以外の軸に指標が無い) / 指標なし (書いた指標が存在しない)
  */
 export function resolveAxesFigure({ issue, axes, templates, metricKeys }) {
   if (!axes) return { purpose: null, primary: null, allowed: [], gaps: ["型未定"] };
@@ -400,7 +401,8 @@ export function resolveAxesFigure({ issue, axes, templates, metricKeys }) {
   const sides = [axes.explanatory, axes.outcome].filter(Boolean);
   // 全国の単年値は 1 点なので、変化の軸が無ければ 2 つの値の関係を描けない
   if (issue.unit === "japan" && purpose === "relationship" && !sides.some((s) => s.pattern === "change")) gaps.push("粒度不足");
-  if (sides.some((s) => s.pattern !== "compare" && !s.metrics?.length)) gaps.push("未検証");
+  // 群の区分以外の軸は指標が無いと、データがあるか・描けるかを確かめられない
+  if (sides.some((s) => s.group !== true && !s.metrics?.length)) gaps.push("未検証");
   if (metricKeys && sides.some((s) => (s.metrics ?? []).some((k) => !metricKeys.has(k)))) gaps.push("指標なし");
 
   // 増減の内訳は滝の図が主 (台帳の waterfall が「全体の増減はどの要素の足し引きか」に答える)

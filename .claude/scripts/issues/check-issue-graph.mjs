@@ -11,7 +11,7 @@
  *
  * 規則の本体は issue-graph-core.mjs。形と外部キーは check-datasets が見る。
  */
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -75,7 +75,8 @@ if (flag("--axes")) {
     .filter((i) => i.status === "active" && i.id.startsWith(prefix))
     .map((issue) => ({ id: issue.id, question: issue.question, ...resolveAxesFigure({ issue, axes: effectiveAxes(issue, byId), templates, metricKeys }) }));
   if (flag("--json")) {
-    console.log(JSON.stringify(rows, null, 2));
+    // パイプへ大きな出力を書いた直後に process.exit すると途中で切れるので、同期で書く
+    writeSync(1, `${JSON.stringify(rows, null, 2)}\n`);
     process.exit(0);
   }
   const count = (g) => rows.filter((r) => r.gaps.includes(g)).length;

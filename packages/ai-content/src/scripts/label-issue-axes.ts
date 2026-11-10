@@ -37,6 +37,7 @@ interface Axis {
   label: string;
   pattern: string;
   metrics?: string[];
+  group?: true;
 }
 interface Issue {
   id: string;
@@ -102,11 +103,11 @@ const SYSTEM = `あなたは統計サイトの分析設計者です。問いご�
 - 軸は説明側 (explanatory) と結果側 (outcome)。説明側は比べる条件、結果側は評価する値。「どこが多いか」「何を多く買うか」のように条件の無い記述の問いは explanatory を null にする
 - 時間 (調査年・月・制度改正の前後) は軸にしない。年の推移は結果側の pattern を change にして表し、説明側は他に条件が無ければ null にする
 - 「◯◯市の世帯は何を多く買うか」のように 1 つの地域を全国と比べる問いは記述の問いなので explanatory を null にする
-- 説明側が群の区分 (年収五分位・世帯類型・東西など) のときは metrics を書かない。指標の値で地域を並べる説明側だけが metrics を持つ
+- 説明側が群の区分 (年収五分位・世帯類型・性別・有無・東西など) のときは "group": true を書き、metrics を書かない。量の説明側 (所得水準・高齢化率など) は group を書かない
 - pattern は compare (地域・品目の値の大小を比べる) / compose (全体の内訳・構成比) / change (年の推移・増減) のどれか 1 つ
 - label は 20 字以内の名詞句。因果を表す語 (原因・要因・せいで) を使わない
 - metrics は、その問いの「指標の候補」に載っているキーだけから選ぶ。候補に合うものが無ければ metrics を書かない。推測でキーを作らない
-- 出力は JSON 配列だけ: [{"id":"issue:..","explanatory":null|{"label":"..","pattern":"..","metrics":[..]},"outcome":{"label":"..","pattern":"..","metrics":[..]}}]。前置き・コードフェンスは書かない`;
+- 出力は JSON 配列だけ: [{"id":"issue:..","explanatory":null|{"label":"..","pattern":"..","metrics":[..]}|{"label":"..","pattern":"compare","group":true},"outcome":{"label":"..","pattern":"..","metrics":[..]}}]。前置き・コードフェンスは書かない`;
 
 const promptOf = (batch: Issue[]) =>
   batch
@@ -129,8 +130,9 @@ function clean(raw: unknown, issue: Issue): Issue["axes"] | null {
   const allowed = new Set(candidatesOf(issue).map((c) => c.key));
   const axis = (a: unknown): Axis | null => {
     if (!a || typeof a !== "object") return null;
-    const { label, pattern, metrics } = a as Axis;
+    const { label, pattern, metrics, group } = a as Axis;
     if (typeof label !== "string" || !label.trim() || !PATTERNS.has(pattern)) return null;
+    if (group === true) return { label: label.trim(), pattern: "compare", group: true };
     const kept = (Array.isArray(metrics) ? metrics : []).filter((k) => allowed.has(k));
     return { label: label.trim(), pattern, ...(kept.length ? { metrics: [...new Set(kept)] } : {}) };
   };

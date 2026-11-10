@@ -16,7 +16,23 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "課税対象所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "per-taxpayer-taxable-income"
+          ]
+        },
+        "outcome": {
+          "label": "30〜34歳男性の未婚者割合",
+          "pattern": "compare",
+          "metrics": [
+            "unmarried-ratio-male-30-34"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A02",
@@ -31,7 +47,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "課税対象所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "per-taxpayer-taxable-income"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A03",
@@ -46,7 +78,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "婚姻率と平均初婚年齢",
+          "pattern": "compare",
+          "metrics": [
+            "marriages-per-total-population",
+            "average-age-of-first-marriage-wife"
+          ]
+        },
+        "outcome": {
+          "label": "粗出生率",
+          "pattern": "compare",
+          "metrics": [
+            "crude-birth-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A04",
@@ -62,7 +111,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "共働き世帯の割合",
+          "pattern": "compare",
+          "metrics": [
+            "dual-income-household-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A05",
@@ -78,7 +143,23 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "保育所の待機児童数",
+          "pattern": "compare",
+          "metrics": [
+            "nursery-waiting-children-count"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A06",
@@ -93,7 +174,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "持ち家の延べ面積",
+          "pattern": "compare",
+          "metrics": [
+            "floor-area-per-dwelling-owner"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A07",
@@ -108,7 +205,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "若年層の転出超過",
+          "pattern": "compare",
+          "metrics": [
+            "interprefecture-net-migration-age15to24"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:A08",
@@ -123,7 +233,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "三世代世帯人員の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "three-generation-household-members"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:A09",
@@ -138,7 +261,25 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "婚姻・出生・人口増減の状況",
+          "pattern": "compare",
+          "metrics": [
+            "marriages-per-total-population",
+            "total-fertility-rate",
+            "population-growth-rate"
+          ]
+        },
+        "outcome": {
+          "label": "離婚率",
+          "pattern": "compare",
+          "metrics": [
+            "divorces-per-total-population"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A10",
@@ -154,7 +295,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "妻の平均初婚年齢",
+          "pattern": "compare",
+          "metrics": [
+            "average-age-of-first-marriage-wife"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A11",
@@ -169,7 +326,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "20〜39歳の男女比",
+          "pattern": "compare",
+          "metrics": [
+            "sex-ratio-age-20-39"
+          ]
+        },
+        "outcome": {
+          "label": "30〜34歳男性の未婚者割合",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:A12",
@@ -185,7 +355,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢者の暮らしの状況",
+          "pattern": "compare",
+          "metrics": [
+            "nursing-welfare-facility-count-per-100k-65plus",
+            "single-person-household-old-population-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "高齢者の一人暮らしの割合",
+          "pattern": "change",
+          "metrics": [
+            "elderly-living-alone-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B01",
@@ -201,7 +388,23 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人人口の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-resident-count-per-100k"
+          ]
+        },
+        "outcome": {
+          "label": "刑法犯認知件数の推移",
+          "pattern": "change",
+          "metrics": [
+            "criminal-recognition-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B02",
@@ -218,7 +421,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "外国人人口の多い町",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-population-per-100k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B03",
@@ -235,7 +448,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人人口の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-resident-count-per-100k"
+          ]
+        },
+        "outcome": {
+          "label": "人口の減り方",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:B04",
@@ -250,7 +476,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人労働者数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-worker-count"
+          ]
+        },
+        "outcome": {
+          "label": "人手不足の産業の分布",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:B05",
@@ -265,7 +504,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "外国人の子どもが多い市の学校課題",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:B06",
@@ -280,7 +526,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "15〜24歳の転出超過",
+          "pattern": "compare",
+          "metrics": [
+            "interprefecture-net-migration-age15to24"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B06-1",
@@ -295,7 +551,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "15〜24歳の転出超過",
+          "pattern": "compare",
+          "metrics": [
+            "interprefecture-net-migration-age15to24"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B07",
@@ -310,7 +576,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "転入超過率の推移",
+          "pattern": "change",
+          "metrics": [
+            "moving-in-excess-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B07-1",
@@ -325,7 +601,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "転入超過率の推移",
+          "pattern": "change",
+          "metrics": [
+            "moving-in-excess-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B08",
@@ -340,7 +626,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "転入超過率",
+          "pattern": "compare",
+          "metrics": [
+            "moving-in-excess-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B09",
@@ -355,7 +651,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "昼間人口の多い町",
+          "pattern": "compare",
+          "metrics": [
+            "day-time-population"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B10",
@@ -370,7 +676,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人延べ宿泊者数の多い地域",
+          "pattern": "compare",
+          "metrics": [
+            "total-overnight-guests-foreign"
+          ]
+        },
+        "outcome": {
+          "label": "住民の暮らしの変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:B11",
@@ -386,7 +705,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "20代の地元残留",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "将来の人口の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:B12",
@@ -402,7 +731,20 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人労働者数の多い県",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-worker-count"
+          ]
+        },
+        "outcome": {
+          "label": "日本人の賃金水準",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:B13",
@@ -417,7 +759,17 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人住民の多さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "空き家の少なさ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C01",
@@ -432,7 +784,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "刑法犯認知件数の推移",
+          "pattern": "change",
+          "metrics": [
+            "criminal-recognition-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C02",
@@ -448,7 +810,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "人口の分母の取り方",
+          "pattern": "compare",
+          "metrics": [
+            "day-time-population-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "人口あたり犯罪の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "criminal-recognition-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C03",
@@ -463,7 +841,17 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "所得水準の低さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "犯罪の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C04",
@@ -478,7 +866,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "空き家率の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "vacant-housing-rate"
+          ]
+        },
+        "outcome": {
+          "label": "犯罪の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C05",
@@ -494,7 +895,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "警察官・警察費の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "police-officer-count-per-population",
+            "per-capita-police-expenditure-pref-municipal"
+          ]
+        },
+        "outcome": {
+          "label": "刑法犯認知件数",
+          "pattern": "compare",
+          "metrics": [
+            "penal-code-offenses-recognized-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C06",
@@ -509,7 +927,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "高齢者の交通事故死傷者数",
+          "pattern": "change",
+          "metrics": [
+            "traffic-accident-casualties-elderly-65plus"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C07",
@@ -524,7 +952,25 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "車社会の度合い",
+          "pattern": "compare",
+          "metrics": [
+            "average-road-traffic-volume",
+            "road-length-per-km2",
+            "private-auto-insurance-penetration-rate-vehicle"
+          ]
+        },
+        "outcome": {
+          "label": "交通事故死者数",
+          "pattern": "compare",
+          "metrics": [
+            "traffic-accident-deaths-per-100k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C08",
@@ -539,7 +985,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "自転車通勤・通学の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "commute-by-bicycle"
+          ]
+        },
+        "outcome": {
+          "label": "自転車事故の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C09",
@@ -554,7 +1013,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢化率の高さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "特殊詐欺の被害の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C10",
@@ -569,7 +1038,17 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "児童虐待相談の対応件数",
+          "pattern": "change",
+          "metrics": [
+            "child-abuse-consultation-cases"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C11",
@@ -584,7 +1063,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "防犯カメラの設置数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "犯罪件数の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:C12",
@@ -600,7 +1089,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "火災による死亡者数",
+          "pattern": "compare",
+          "metrics": [
+            "fire-deaths-per-100k",
+            "building-fire-count-per-100-thousand-people"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D01",
@@ -617,7 +1117,23 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "real-disposable-income"
+          ]
+        },
+        "outcome": {
+          "label": "物価を引いた暮らしの豊かさ",
+          "pattern": "compare",
+          "metrics": [
+            "consumer-price-difference-index-overall"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D02",
@@ -634,7 +1150,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "最低賃金の引き上げ",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "雇用の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:D03",
@@ -650,7 +1176,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "男女間賃金格差",
+          "pattern": "compare",
+          "metrics": [
+            "gender-wage-gap"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D04",
@@ -666,7 +1202,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大学等進学率の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        },
+        "outcome": {
+          "label": "所得の高さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D04-1",
@@ -681,7 +1230,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大学等進学率の高低",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D04-2",
@@ -696,7 +1255,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "進学率と就職率の合算",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate",
+            "high-school-graduates-job-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D04-3",
@@ -711,7 +1281,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県内大学入学者割合",
+          "pattern": "compare",
+          "metrics": [
+            "in-pref-university-entrance-ratio-by-highschool-origin"
+          ]
+        },
+        "outcome": {
+          "label": "大学等進学率の公表値",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D05",
@@ -727,7 +1313,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "共働き世帯の割合",
+          "pattern": "compare",
+          "metrics": [
+            "dual-income-household-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "世帯の所得",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D06",
@@ -743,7 +1342,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "所得格差の大きさ",
+          "pattern": "compare",
+          "metrics": [
+            "gini-coefficient-disposable-income"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D07",
@@ -759,7 +1368,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公務員給与の水準",
+          "pattern": "compare",
+          "metrics": [
+            "laspeyres-index-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "民間の給与水準",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D07-1",
@@ -775,7 +1397,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公務員給与の水準",
+          "pattern": "compare",
+          "metrics": [
+            "laspeyres-index-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "高校教員の平均年収",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-teacher-annual-income"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D08",
@@ -791,7 +1429,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "非正規雇用率",
+          "pattern": "compare",
+          "metrics": [
+            "non-regular-employment-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D09",
@@ -807,7 +1455,17 @@
         "データ"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "生活保護の被保護世帯数",
+          "pattern": "compare",
+          "metrics": [
+            "households-on-public-assistance-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D10",
@@ -823,7 +1481,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "副業率",
+          "pattern": "compare",
+          "metrics": [
+            "side-job-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D11",
@@ -838,7 +1506,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ひとり親の母親の就業状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D12",
@@ -854,7 +1529,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "物価の変化率",
+          "pattern": "change",
+          "metrics": [
+            "cpi-change-rate-food"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D13",
@@ -870,7 +1555,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "貯蓄・資産の保有状況",
+          "pattern": "compare",
+          "metrics": [
+            "household-savings-balance",
+            "current-deposit-balance-ratio-multi-person-households",
+            "current-securities-balance-ratio-multi-person-households",
+            "current-life-insurance-balance-ratio-multi-person-households"
+          ]
+        },
+        "outcome": {
+          "label": "負債の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D13-1",
@@ -886,7 +1587,22 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "世帯の年収階級",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "貯蓄残高と負債残高",
+          "pattern": "compare",
+          "metrics": [
+            "financial-assets-balance-multi-person-households",
+            "financial-debt-balance"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D14",
@@ -902,7 +1618,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年収の壁の有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "パートの就業時間",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D15",
@@ -918,7 +1645,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大卒男性の初任給",
+          "pattern": "compare",
+          "metrics": [
+            "new-graduate-scheduled-salary-university-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E01",
@@ -933,7 +1670,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県民所得の水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "学力テストの平均正答率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E02",
@@ -949,7 +1696,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "補習教育への支出",
+          "pattern": "compare",
+          "metrics": [
+            "elementary-tutoring-consumption-expenditure",
+            "high-school-tutoring-consumption-expenditure"
+          ]
+        },
+        "outcome": {
+          "label": "学力と進学の水準",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E02-1",
@@ -965,7 +1729,24 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "補習教育への支出",
+          "pattern": "compare",
+          "metrics": [
+            "elementary-tutoring-consumption-expenditure",
+            "high-school-tutoring-consumption-expenditure"
+          ]
+        },
+        "outcome": {
+          "label": "大学等への進学率",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E03",
@@ -980,7 +1761,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "教育費の割合",
+          "pattern": "compare",
+          "metrics": [
+            "education-expenditure-ratio-pref-finance"
+          ]
+        },
+        "outcome": {
+          "label": "学力テストの平均正答率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E04",
@@ -995,7 +1789,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "学級規模の大小",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "学力テストの成績",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E05",
@@ -1010,7 +1815,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公立小学校費",
+          "pattern": "compare",
+          "metrics": [
+            "per-child-public-elementary-school-expenditure-pref-municipal"
+          ]
+        },
+        "outcome": {
+          "label": "不登校による長期欠席の比率",
+          "pattern": "compare",
+          "metrics": [
+            "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+            "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E06",
@@ -1025,7 +1847,23 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大学収容力の大小",
+          "pattern": "compare",
+          "metrics": [
+            "university-capacity-index"
+          ]
+        },
+        "outcome": {
+          "label": "県内大学入学者の割合",
+          "pattern": "compare",
+          "metrics": [
+            "in-pref-university-entrance-ratio-by-highschool-origin"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E07",
@@ -1040,7 +1878,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "小学校数の減少",
+          "pattern": "change",
+          "metrics": [
+            "elementary-school-count"
+          ]
+        },
+        "outcome": {
+          "label": "子育て世帯の転出入",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:E08",
@@ -1055,7 +1906,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "母子世帯数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "single-mother-households"
+          ]
+        },
+        "outcome": {
+          "label": "子どもの貧困(就学援助率)",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E09",
@@ -1070,7 +1934,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "子ども医療費の無料化範囲",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "子どもの受診の件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:E10",
@@ -1085,7 +1960,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "図書館数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "library-count-per-million"
+          ]
+        },
+        "outcome": {
+          "label": "子どもの読書量",
+          "pattern": "compare",
+          "metrics": [
+            "hobby-participation-rate-reading"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E11",
@@ -1101,7 +1992,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "教員の給与水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "学力調査の結果",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E12",
@@ -1117,7 +2018,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "学校給食の無償化",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "学力と定住の状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E13",
@@ -1133,7 +2045,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "児童生徒数の変化",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "教員数の変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F01",
@@ -1148,7 +2070,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "課税対象所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "per-taxpayer-taxable-income"
+          ]
+        },
+        "outcome": {
+          "label": "平均寿命",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F02",
@@ -1163,7 +2098,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "医師数・病院数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "physicians-in-medical-facilities-per-100k",
+            "general-hospital-count"
+          ]
+        },
+        "outcome": {
+          "label": "健康寿命",
+          "pattern": "compare",
+          "metrics": [
+            "healthy-life-expectancy-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F03",
@@ -1178,7 +2130,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "病院のベッド数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "住民1人あたり医療費",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F04",
@@ -1193,7 +2155,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "食塩摂取量",
+          "pattern": "compare",
+          "metrics": [
+            "salt-intake-male-age-adjusted"
+          ]
+        },
+        "outcome": {
+          "label": "脳血管疾患の死亡者数",
+          "pattern": "compare",
+          "metrics": [
+            "deaths-cerebrovascular-disease-per-100k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F05",
@@ -1208,7 +2186,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "男性の1日の歩数",
+          "pattern": "compare",
+          "metrics": [
+            "daily-steps-male-20to64-age-adjusted"
+          ]
+        },
+        "outcome": {
+          "label": "健康寿命",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F06",
@@ -1223,7 +2214,20 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "自殺者数と近年の推移",
+          "pattern": "change",
+          "metrics": [
+            "suicides-per-100k",
+            "suicide-count",
+            "suicide-count-65plus",
+            "ratio-65-plus"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F07",
@@ -1238,7 +2242,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "特定健診の受診率",
+          "pattern": "compare",
+          "metrics": [
+            "specific-health-checkup-participation-rate"
+          ]
+        },
+        "outcome": {
+          "label": "1人あたり医療費",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F08",
@@ -1254,7 +2271,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "自動車保有台数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "男性の肥満度(BMI)",
+          "pattern": "compare",
+          "metrics": [
+            "bmi-male-20to69-age-adjusted"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F09",
@@ -1269,7 +2299,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "酒類の消費量",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "肝疾患による死亡",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F10",
@@ -1285,7 +2325,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "救急車の病院収容所要時間",
+          "pattern": "compare",
+          "metrics": [
+            "ambulance-hospital-arrival-time"
+          ]
+        },
+        "outcome": {
+          "label": "救命率(生存率)",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F11",
@@ -1300,7 +2353,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "分娩取扱病院数の変化",
+          "pattern": "change",
+          "metrics": [
+            "delivery-hospital-count"
+          ]
+        },
+        "outcome": {
+          "label": "出生数の変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F12",
@@ -1315,7 +2381,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "男性の喫煙率の低下",
+          "pattern": "change",
+          "metrics": [
+            "smoking-rate-male-age-adjusted"
+          ]
+        },
+        "outcome": {
+          "label": "肺がん罹患・死亡の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F13",
@@ -1330,7 +2409,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "子どもの身長・体重の地域差",
+          "pattern": "compare",
+          "metrics": [
+            "average-height-primary-school-fifth-grade-male",
+            "average-height-primary-school-fifth-grade-female",
+            "average-height-middle-school-second-grade-male",
+            "average-height-middle-school-second-grade-female",
+            "average-weight-primary-school-fifth-grade-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F13-1",
@@ -1345,7 +2438,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "新潟の子どもの身長",
+          "pattern": "compare",
+          "metrics": [
+            "average-height-primary-school-fifth-grade-male",
+            "average-height-primary-school-fifth-grade-female",
+            "average-height-middle-school-second-grade-male",
+            "average-height-middle-school-second-grade-female",
+            "avg-height-high-school-2nd-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F14",
@@ -1360,7 +2467,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県民の所得水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "特定健診の受診率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F15",
@@ -1375,7 +2492,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "都道府県別の医師数の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F16",
@@ -1390,7 +2514,14 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "都道府県別の通院率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F17",
@@ -1408,7 +2539,23 @@
       "status": "active",
       "queries": [
         "沖縄 精神科 多い 理由"
-      ]
+      ],
+      "axes": {
+        "explanatory": {
+          "label": "精神病床数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "psychiatric-bed-count"
+          ]
+        },
+        "outcome": {
+          "label": "精神科病院の平均在院日数",
+          "pattern": "compare",
+          "metrics": [
+            "psychiatric-hospital-avg-length-of-stay"
+          ]
+        }
+      }
     },
     {
       "id": "issue:G01",
@@ -1424,7 +2571,20 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "65歳以上の就業率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "要介護認定者の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "long-term-care-certified-persons"
+          ]
+        }
+      }
     },
     {
       "id": "issue:G02",
@@ -1440,7 +2600,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "市別の介護保険料基準額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G03",
@@ -1456,7 +2623,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "通いの場・サロンの数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "要介護認定率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G04",
@@ -1472,7 +2649,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "認知症の人の将来推計",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:G05",
@@ -1488,7 +2672,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "都道府県別の介護離職者数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G06",
@@ -1504,7 +2695,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "老人ホームの定員の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "nursing-home-capacity-per-1000-65plus"
+          ]
+        },
+        "outcome": {
+          "label": "特養の入所申込者数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G07",
@@ -1520,7 +2724,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "免許返納者と店舗・バス停の分布",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G08",
@@ -1536,7 +2747,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢単身世帯の割合",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "孤立死の件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:G09",
@@ -1552,7 +2773,17 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢化率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "生活保護の保護率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G10",
@@ -1568,7 +2799,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "年齢3区分の人口構成比",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:G11",
@@ -1584,7 +2822,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "介護施設の定員数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "要介護認定率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G12",
@@ -1600,7 +2848,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "介護職員の賃金水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "介護職員の離職率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G13",
@@ -1615,7 +2873,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "障害者向け福祉施設の数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H01",
@@ -1632,7 +2897,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "人口の増減率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "空き家率の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H02",
@@ -1648,7 +2923,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "家賃の高さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "平均通勤時間",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H03",
@@ -1664,7 +2949,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "バス路線・駅の増減",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H04",
@@ -1680,7 +2975,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "人口集中地区の人口比率の推移",
+          "pattern": "change",
+          "metrics": [
+            "densely-inhabited-district-population-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H05",
@@ -1696,7 +3001,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "地価の上昇率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H06",
@@ -1712,7 +3024,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "持ち家比率の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "owner-occupied-housing-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "暮らしの満足度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H06-1",
@@ -1729,7 +3054,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "持ち家比率の都道府県差",
+          "pattern": "compare",
+          "metrics": [
+            "owner-occupied-housing-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H07",
@@ -1746,7 +3081,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "最深積雪の多い町",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H08",
@@ -1762,7 +3107,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ふるさと納税の受入額と控除額",
+          "pattern": "compare",
+          "metrics": [
+            "furusato-donation-amount-prefecture",
+            "furusato-tax-deduction-municipal-prefecture"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H08-1",
@@ -1777,7 +3133,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "ふるさと納税の受入額",
+          "pattern": "compare",
+          "metrics": [
+            "furusato-donation-amount-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "住民所得の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H09",
@@ -1793,7 +3162,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大型小売店の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "large-retail-store-count-per-100k"
+          ]
+        },
+        "outcome": {
+          "label": "商店街の小売事業所数の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H10",
@@ -1809,7 +3191,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "新設住宅の着工数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H11",
@@ -1825,7 +3217,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "2050年の人口の維持率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H12",
@@ -1840,7 +3239,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "集落の高齢化率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "無住化する集落の割合",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H13",
@@ -1856,7 +3265,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "鉄道の少なさ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "自動車への依存度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H14",
@@ -1872,7 +3291,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "2050年の駅近居住人口",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H15",
@@ -1888,7 +3314,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "鉄道かバスかの運行形態",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "地域の利用状況と収支",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H16",
@@ -1905,7 +3342,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "公共交通が使いにくい人口",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H17",
@@ -1920,7 +3364,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "コミュニティバスの有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "高齢者の外出頻度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H18",
@@ -1935,7 +3390,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "空き家バンクの実績",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "空き家の流通件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H19",
@@ -1951,7 +3416,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "持ち家の延べ面積",
+          "pattern": "compare",
+          "metrics": [
+            "floor-area-per-dwelling-owner"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H20",
@@ -1967,7 +3442,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "パソコンの所有数量",
+          "pattern": "compare",
+          "metrics": [
+            "pc-ownership-multi-person-households-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H21",
@@ -1982,7 +3467,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "通信費の支出額",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "仕事や学びでの利用状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H22",
@@ -1997,7 +3492,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "公衆電話の設置台数",
+          "pattern": "compare",
+          "metrics": [
+            "public-phone-count-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I01",
@@ -2013,7 +3518,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "市の財政力と将来負担",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I02",
@@ -2029,7 +3541,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "職員数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "municipal-general-administration-staff"
+          ]
+        },
+        "outcome": {
+          "label": "住民サービスの水準",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I03",
@@ -2044,7 +3569,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "合併の有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "合併後の人口の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I04",
@@ -2060,7 +3596,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "投票率の地域差",
+          "pattern": "compare",
+          "metrics": [
+            "voter-turnout-governor"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I05",
@@ -2076,7 +3622,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "若い世代の投票率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "老人福祉費の歳出割合",
+          "pattern": "compare",
+          "metrics": [
+            "elderly-welfare-expenditure-ratio-pref-finance"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I06",
@@ -2092,7 +3651,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "女性議員の割合",
+          "pattern": "compare",
+          "metrics": [
+            "prefectural-assembly-female-share"
+          ]
+        },
+        "outcome": {
+          "label": "保育関連の歳出",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I07",
@@ -2108,7 +3680,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "公共施設の老朽化度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I08",
@@ -2125,7 +3704,22 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "水道の供給条件",
+          "pattern": "compare",
+          "metrics": [
+            "water-supply-population",
+            "water-supply-capacity",
+            "water-supply-annual-volume"
+          ]
+        },
+        "outcome": {
+          "label": "水道料金の水準と今後の変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I08-1",
@@ -2143,7 +3737,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "水道の整備状況",
+          "pattern": "compare",
+          "metrics": [
+            "water-supply-population-ratio-2012on"
+          ]
+        },
+        "outcome": {
+          "label": "下水道普及率",
+          "pattern": "compare",
+          "metrics": [
+            "sewerage-penetration-rate-2012on"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I09",
@@ -2158,7 +3768,21 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "国からの財源への依存度",
+          "pattern": "compare",
+          "metrics": [
+            "local-allocation-tax-ratio-pref-finance",
+            "national-treasury-disbursement-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I09-1",
@@ -2174,7 +3798,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "国庫支出金の額",
+          "pattern": "compare",
+          "metrics": [
+            "national-treasury-disbursement-prefecture"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I10",
@@ -2190,7 +3824,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公務員の就業者割合",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "民間の就業者割合",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I11",
@@ -2206,7 +3850,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "借金返済の負担",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "新規投資の支出",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I12",
@@ -2222,7 +3876,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "税収が多い町と交付税に頼る町",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "歳入・歳出の構成",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:I13",
@@ -2237,7 +3902,17 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "生活保護の受給率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "市町村の財政状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I14",
@@ -2253,7 +3928,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "古い橋の数と点検の進み具合",
+          "pattern": "compare",
+          "metrics": [
+            "road-bridge-diagnosed-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I15",
@@ -2269,7 +3954,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "人口の減少",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "道路・橋の維持費負担",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I16",
@@ -2285,7 +3980,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "手続きのオンライン化の進度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J01",
@@ -2301,7 +4003,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "猛暑日の日数",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "熱中症の救急搬送人員",
+          "pattern": "change",
+          "metrics": [
+            "heatstroke-emergency-transports"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J02",
@@ -2317,7 +4032,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "桜の開花日の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:J03",
@@ -2333,7 +4055,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "災害の被害の大きさ",
+          "pattern": "compare",
+          "metrics": [
+            "disaster-damage-amount-per-person"
+          ]
+        },
+        "outcome": {
+          "label": "人口の転出",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J04",
@@ -2350,7 +4085,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "浸水想定区域の居住人口",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:J05",
@@ -2366,7 +4108,22 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "ごみ処理の取り組み",
+          "pattern": "compare",
+          "metrics": [
+            "waste-recycling-rate",
+            "garbage-landfill-rate",
+            "final-disposal-site-remaining-capacity"
+          ]
+        },
+        "outcome": {
+          "label": "1人あたりごみ排出量",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J06",
@@ -2382,7 +4139,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "日照と住宅の条件",
+          "pattern": "compare",
+          "metrics": [
+            "annual-sunshine-duration",
+            "detached-house-ratio",
+            "owner-occupied-housing-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "太陽光発電の普及",
+          "pattern": "compare",
+          "metrics": [
+            "solar-panel-housing-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J07",
@@ -2398,7 +4173,23 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "農業就業人口",
+          "pattern": "compare",
+          "metrics": [
+            "agricultural-employment-population"
+          ]
+        },
+        "outcome": {
+          "label": "耕作放棄地の面積",
+          "pattern": "change",
+          "metrics": [
+            "abandoned-cultivated-land-area"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J08",
@@ -2414,7 +4205,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "クマの出没件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:J09",
@@ -2430,7 +4228,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "土砂災害警戒区域に住む人口",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J10",
@@ -2446,7 +4251,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "低標高地域に住む人口の割合",
+          "pattern": "compare",
+          "metrics": [
+            "low-elevation-population-ratio-5m"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J11",
@@ -2462,7 +4277,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "津波避難場所の整備数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "津波に対する安全度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J12",
@@ -2477,7 +4302,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "木造住宅の割合",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "火災・地震の被害の大きさ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J13",
@@ -2493,7 +4328,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "電力消費量の用途別内訳",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:J14",
@@ -2508,7 +4350,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大規模太陽光発電所の立地",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "地域に残る経済効果",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J15",
@@ -2524,7 +4377,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "工場の集積度",
+          "pattern": "compare",
+          "metrics": [
+            "manufacturing-shipment-amount"
+          ]
+        },
+        "outcome": {
+          "label": "産業部門のCO2排出量",
+          "pattern": "compare",
+          "metrics": [
+            "regional-industry-co2-emissions-estimate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J16",
@@ -2540,7 +4409,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "最終処分場の残余容量",
+          "pattern": "compare",
+          "metrics": [
+            "final-disposal-site-remaining-capacity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J17",
@@ -2555,7 +4434,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "PM2.5の環境基準達成率",
+          "pattern": "compare",
+          "metrics": [
+            "pm25-general-station-compliance-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01",
@@ -2575,7 +4464,8 @@
       "axes": {
         "explanatory": {
           "label": "果物の産地かどうか",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "生鮮果物の消費量",
@@ -2603,7 +4493,8 @@
       "axes": {
         "explanatory": {
           "label": "東西・気候・歴史の区分",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "麺類の消費量と支出額",
@@ -2696,7 +4587,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "エンゲル係数の長期推移",
@@ -2835,7 +4727,28 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "子育て環境の指標",
+          "pattern": "compare",
+          "metrics": [
+            "childcare-employment-rate",
+            "nursery-utilization-rate",
+            "per-capita-child-welfare-expenditure-under17-pref-municipal",
+            "physicians-in-medical-facilities-per-100k",
+            "urban-park-area-per-person"
+          ]
+        },
+        "outcome": {
+          "label": "子育て成果の指標",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate",
+            "infant-mortality-rate-per-1000-births"
+          ]
+        }
+      }
     },
     {
       "id": "issue:L02",
@@ -2851,7 +4764,29 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "住環境・医療・治安の指標",
+          "pattern": "compare",
+          "metrics": [
+            "general-hospital-count-per-100k",
+            "owner-occupied-housing-ratio",
+            "private-rental-housing-rent-per-3-3m2",
+            "violent-crime-per-100k",
+            "maximum-temperature"
+          ]
+        },
+        "outcome": {
+          "label": "暮らしの豊かさの指標",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27",
+            "unemployment-rate",
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:L03",
@@ -2867,7 +4802,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "駅・バス停・施設への近さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M01",
@@ -2886,7 +4828,18 @@
         "note:muni-manufacturing-shipment-data"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "規模と生産性の区分",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "製造業の強さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M02",
@@ -2902,7 +4855,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "気候と土地の条件",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "農業・漁業の生産量",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M02-1",
@@ -2930,7 +4894,19 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "水稲の作付面積と収穫量",
+          "pattern": "compare",
+          "metrics": [
+            "rice-cultivated-area",
+            "rice-harvest-volume",
+            "rice-yield-per-10a"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M03",
@@ -2946,7 +4922,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "建設業の就業者数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "公共工事の受注額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M04",
@@ -2962,7 +4948,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "港湾の取扱規模",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "製造業の出荷額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M05",
@@ -2978,7 +4974,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "観光客数の増減",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "地元の収入の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:M06",
@@ -2994,7 +5000,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "観光客の平均宿泊日数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M07",
@@ -3010,7 +5023,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "宿泊税の有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "観光客数の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:M08",
@@ -3025,7 +5049,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "国立公園の面積",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "観光による稼ぎ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M09",
@@ -3041,7 +5075,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "農家数の増減",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "担い手への農地集積",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:M10",
@@ -3057,7 +5101,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "食料自給率の高い県の生産品目",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:M11",
@@ -3073,7 +5124,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "採卵鶏の飼養羽数の県別分布",
+          "pattern": "compare",
+          "metrics": [
+            "layer-hen-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M12",
@@ -3089,7 +5150,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "森林面積の多さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "林業産出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F13-2",
@@ -3108,7 +5179,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "県別の平均身長",
+          "pattern": "compare",
+          "metrics": [
+            "average-height-middle-school-second-grade-female",
+            "average-height-middle-school-second-grade-male",
+            "average-height-primary-school-fifth-grade-female",
+            "average-height-primary-school-fifth-grade-male",
+            "avg-height-high-school-2nd-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M02-2",
@@ -3130,7 +5215,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "県別の食料自給率(カロリー)",
+          "pattern": "compare",
+          "metrics": [
+            "food-self-sufficiency-rate-calorie"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M02-3",
@@ -3147,7 +5242,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "漁業就業者数の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "fishery-workers"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J06-1",
@@ -3166,7 +5271,27 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "日照時間と住宅条件",
+          "pattern": "compare",
+          "metrics": [
+            "annual-sunshine-duration",
+            "detached-house-ratio",
+            "owner-occupied-housing-ratio",
+            "solar-panel-housing-rate"
+          ]
+        },
+        "outcome": {
+          "label": "風力発電の導入量",
+          "pattern": "compare",
+          "metrics": [
+            "wind-power-capacity",
+            "wind-power-turbine-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-1",
@@ -3276,7 +5401,8 @@
       "axes": {
         "explanatory": {
           "label": "東日本と西日本の区分",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "生鮮魚介の品目別支出額",
@@ -3313,7 +5439,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "全国学力テスト平均正答率",
+          "pattern": "compare",
+          "metrics": [
+            "academic-achievement-test-average-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E01-2",
@@ -3328,7 +5464,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "ほうれんそうの消費量と支出",
+          "pattern": "compare",
+          "metrics": [
+            "spinach-consumption-expenditure",
+            "spinach-consumption-quantity"
+          ]
+        },
+        "outcome": {
+          "label": "全国学力テスト平均正答率",
+          "pattern": "compare",
+          "metrics": [
+            "academic-achievement-test-average-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E01-3",
@@ -3344,7 +5497,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "学力テスト平均正答率の推移",
+          "pattern": "change",
+          "metrics": [
+            "academic-achievement-test-average-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M01-1",
@@ -3363,7 +5526,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "製造品出荷額等の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "manufacturing-shipment-amount"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D09-1",
@@ -3382,7 +5555,18 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "生活保護の被保護者の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "households-on-public-assistance-per-1000",
+            "persons-on-public-assistance-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D02-1",
@@ -3400,7 +5584,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "地域別最低賃金",
+          "pattern": "compare",
+          "metrics": [
+            "minimum-wage-by-region"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F01-1",
@@ -3418,7 +5612,22 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "性別",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "出生時の平均余命",
+          "pattern": "compare",
+          "metrics": [
+            "life-expectancy-0-male",
+            "life-expectancy-0-female"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B09-1",
@@ -3435,7 +5644,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "昼間人口の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "day-time-population"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H06-2",
@@ -3452,7 +5671,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "持ち家比率の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "owner-occupied-housing-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F18",
@@ -3470,7 +5699,23 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        },
+        "outcome": {
+          "label": "人工妊娠中絶実施率",
+          "pattern": "compare",
+          "metrics": [
+            "abortion-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F19",
@@ -3485,7 +5730,26 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "社会体育施設の整備状況",
+          "pattern": "compare",
+          "metrics": [
+            "community-sports-facility-count-per-million",
+            "public-gymnasium-count-per-million"
+          ]
+        },
+        "outcome": {
+          "label": "スポーツの行動者率",
+          "pattern": "compare",
+          "metrics": [
+            "sports-annual-participation-rate-10plus",
+            "sports-participation-rate-golf",
+            "sports-participation-rate-walking"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H23",
@@ -3501,7 +5765,26 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "小売店の立地密度",
+          "pattern": "compare",
+          "metrics": [
+            "department-supermarket-count-per-100k",
+            "large-retail-store-count-per-100k",
+            "retail-store-count-per-1000"
+          ]
+        },
+        "outcome": {
+          "label": "コンビニエンスストア数",
+          "pattern": "compare",
+          "metrics": [
+            "convenience-store-count-per-100k",
+            "convenience-store-count-commercial"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H24",
@@ -3516,7 +5799,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "パチンコの行動者率",
+          "pattern": "compare",
+          "metrics": [
+            "hobby-participation-rate-pachinko"
+          ]
+        },
+        "outcome": {
+          "label": "パチンコ店の人口あたり店舗数",
+          "pattern": "compare",
+          "metrics": [
+            "pachinko-shop-density-per-10k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J18",
@@ -3536,7 +5835,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "年間日照時間の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "annual-sunshine-duration"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J19",
@@ -3555,7 +5864,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "降水日数と最深積雪",
+          "pattern": "compare",
+          "metrics": [
+            "annual-precipitation-days",
+            "maximum-snow-depth"
+          ]
+        },
+        "outcome": {
+          "label": "年間降水量",
+          "pattern": "compare",
+          "metrics": [
+            "annual-precipitation"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C13",
@@ -3574,7 +5900,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "労働災害の発生頻度",
+          "pattern": "compare",
+          "metrics": [
+            "frequency-of-occupational-accidents",
+            "work-accident-severity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J09-1",
@@ -3589,7 +5926,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "土砂災害警戒区域数",
+          "pattern": "compare",
+          "metrics": [
+            "landslide-warning-zone-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H25",
@@ -3605,7 +5952,22 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "都市と地方の区分",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "自動車関連の消費支出",
+          "pattern": "compare",
+          "metrics": [
+            "automobile-related-group-consumption-expenditure",
+            "gasoline-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-3",
@@ -3811,7 +6173,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入階級",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "品目別の支出額",
@@ -3837,7 +6200,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入階級",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "品目別の支出額",
@@ -3863,7 +6227,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入階級",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "教育費の内訳の推移",
@@ -3888,7 +6253,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "所得シェアの年次推移",
@@ -3914,7 +6280,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "品目の支出額・数量・平均価格",
@@ -3940,7 +6307,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "食料・衣料・教育の支出シェア",
@@ -3966,7 +6334,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "医薬品・医療関連の支出額",
@@ -3992,7 +6361,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "食料品目の支出額・数量",
@@ -4017,7 +6387,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "自動車関連の支出額",
@@ -4042,7 +6413,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "家電の支出額・数量・平均価格",
@@ -4067,7 +6439,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "教養娯楽サービスの支出額の推移",
@@ -4092,7 +6465,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "旅行種別の支出額",
@@ -4117,7 +6491,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "衣料品の支出額・数量・平均価格",
@@ -4142,7 +6517,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "身の回り品の支出額",
@@ -4167,7 +6543,8 @@
       "axes": {
         "explanatory": {
           "label": "年間収入五分位",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "外食業態別の支出額",
@@ -4193,7 +6570,8 @@
       "axes": {
         "explanatory": {
           "label": "世帯類型(単身・二人以上)",
-          "pattern": "compare"
+          "pattern": "compare",
+          "group": true
         },
         "outcome": {
           "label": "品目別の年間支出額",
@@ -6092,7 +8470,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "平均在院日数",
+          "pattern": "compare",
+          "metrics": [
+            "average-length-of-stay",
+            "general-hospital-avg-length-of-stay"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B10-1",
@@ -6108,7 +8497,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "延べ宿泊者数の推移",
+          "pattern": "change",
+          "metrics": [
+            "total-overnight-guests",
+            "total-overnight-guests-foreign"
+          ]
+        }
+      }
     }
   ]
 }

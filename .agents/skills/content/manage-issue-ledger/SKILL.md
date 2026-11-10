@@ -63,7 +63,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 | `dataNote` / `pitfall` | 使う統計と、読み違えやすい点。生産スキルへの入力になるので分かっている範囲で書く |
 | `revenue` | 答えがつながる収益。`広告` / `データ` / `ノウハウ` / `実務` (行政や業務で使う人) を 1〜3 個。仮置きなので売上の根拠にしない |
 | `products` | 問いから企画した商品の ID (`note:<key>`)。同じ指標を使うだけの商品は書かない。実在は `check-datasets` が見る |
-| `axes` | 説明側 (`explanatory`。記述の問いは `null`) と結果側 (`outcome`) を `{label, pattern, metrics?}` で書く。`pattern` は `compare` / `compose` / `change`、`metrics` は答えや根拠のページが使う指標キーから選ぶ。下書きは `npx tsx packages/ai-content/src/scripts/label-issue-axes.ts --prefix issue:K` (端末で実行・headless)、中身を見てから `--apply`。確認は `npm run issues:check -- --axes issue:K` |
+| `axes` | 説明側 (`explanatory`。記述の問いは `null`) と結果側 (`outcome`) を `{label, pattern, metrics?}` で書く。`pattern` は `compare` / `compose` / `change`、`metrics` は答えや根拠のページが使う指標キーから選ぶ。説明側が群の区分 (年収五分位・有無など) なら `group: true` を書き、指標は書かない。区分以外で指標の無い軸は `--axes` で「未検証」になる。下書きは `npx tsx packages/ai-content/src/scripts/label-issue-axes.ts --prefix issue:K` (端末で実行・headless)、中身を見てから `--apply`。確認は `npm run issues:check -- --axes issue:K` |
 | `sensitive` | 犯罪・自殺・虐待・生活保護など、地域や属性への偏見を招きやすい重い問いを `true` にする |
 
 ## 4. 配線する
