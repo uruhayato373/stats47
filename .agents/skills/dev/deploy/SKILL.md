@@ -259,7 +259,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - `apps/web/src/middleware.ts` のルール追加・変更（特に 410 / 301 / noindex 分岐）
 - `apps/web/src/app/**/page.tsx` の `generateMetadata` で `robots` / `canonical` を変更
 - `apps/web/src/app/robots.ts` / `sitemap.ts` / `manifest.ts` の変更
-- `apps/web/src/config/gone-*.ts` / `known-*.ts` / `legacy-category-keys.ts` への追加・削除
+- `apps/web/src/config/gone-*.ts` / `known-*.ts` への追加・削除
 - `apps/web/src/lib/url-policy.ts` の変更（indexable 判定の SSOT。area / cityCategory / ranking 等）
 
 **理由**: 本番の HTML 200 応答は `Cache-Control: s-maxage=86400` で Cloudflare エッジに最大 24 時間キャッシュされる。middleware ルール変更を即時反映するには Purge が必要。

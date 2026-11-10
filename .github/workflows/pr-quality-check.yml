@@ -808,6 +808,8 @@ jobs:
           # 規約: .claude/rules/metric-config-standards.md
           npm run validate:config --workspace=@stats47/data-configs
           npm run build:registry --workspace=@stats47/data-configs -- --check
+          # カテゴリのキーの型 (category-keys.generated.ts) が data/categories/categories.json と一致していること。
+          npm run build:category-keys --workspace=@stats47/data-configs -- --check
           # 図の表示単位の台帳 (data/metrics/display-units/) が規則と一致し、読めない単位の大きい指標が増えていないこと。
           # 規約: .claude/rules/unit-semantics-standards.md §2.6
           npm run check:display-units --workspace=@stats47/data-configs
@@ -927,7 +929,7 @@ jobs:
         run: |
           # カテゴリ内グループ分類 (SSOT) の整合を担保。存在しない metric key への
           # overrides、予約語 other の再定義、不正な正規表現を弾く。
-          # 規約: packages/data-configs/src/topics/README.md
+          # 規約: data/categories/topics.schema.json の description
           npm run validate:topics --workspace=@stats47/data-configs
         continue-on-error: false
 

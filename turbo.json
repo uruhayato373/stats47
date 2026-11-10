@@ -38,7 +38,9 @@
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
         "$TURBO_ROOT$/data/surveys/master/*.json",
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
-        "$TURBO_ROOT$/data/surveys/editorial/*.json"
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "lint": {
@@ -49,7 +51,9 @@
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
         "$TURBO_ROOT$/data/surveys/master/*.json",
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
-        "$TURBO_ROOT$/data/surveys/editorial/*.json"
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "type-check": {
@@ -60,7 +64,9 @@
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
         "$TURBO_ROOT$/data/surveys/master/*.json",
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
-        "$TURBO_ROOT$/data/surveys/editorial/*.json"
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "test": {
@@ -74,7 +80,9 @@
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
         "$TURBO_ROOT$/data/surveys/master/*.json",
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
-        "$TURBO_ROOT$/data/surveys/editorial/*.json"
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "dev": {

@@ -157,8 +157,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/categories.ts", why: "pending", phase: 3 },
-  { path: "packages/data-configs/src/topics/catalogs/", why: "pending", phase: 3 },
   { path: "packages/data-configs/src/theme-catalog/evidence-lenses.ts", why: "pending", phase: 4 },
   { path: "apps/web/src/config/ranking-redirects.ts", why: "pending", phase: 5 },
   { path: "apps/web/src/config/blog-redirects.ts", why: "pending", phase: 5 },
@@ -368,7 +366,10 @@ export const DATASETS = [
   d("themes.catalogs", "data/themes/catalogs/{name}.json", "master", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", { schema: "data/themes/schema/theme-catalog.schema.json" }),
   d("content.tags", "data/content/tags.json", "master", "data", "data", "タグの不変ID・表示名・既存URLキー・別名", { schema: "data/content/schema/tags.schema.json" }),
   d("content.routes", "data/content/routes.json", "master", "data", "data", "全公開ページ種別のIDとURLパラメータ契約", { schema: "data/content/schema/routes.schema.json" }),
-  d("content.navigation", "data/content/navigation.json", "master", "data", "data", "回遊関係の意味・優先度・件数と明示的な紐付け", { schema: "data/content/schema/navigation.schema.json" }),
+  d("content.navigation", "data/content/navigation.json", "master", "data", "data", "回遊関係の意味・優先度・件数と明示的な紐付け", {
+    schema: "data/content/schema/navigation.schema.json",
+    refs: [{ field: "categoryTags.$keys", to: "categories.master", key: "categories[].key" }],
+  }),
   d("content.entities", "data/content/entities.json", "state", "data", "data", "各正本から再生成するページID索引。観測値・記事本文は含まない", { schema: "data/content/schema/entities.schema.json" }),
   d("content.external", "data/content/external.json", "state", "data", "data", "stats47 の外の公開物 (note 記事・SNS の投稿) の ID と指標・記事への関係。note のカタログと data/sns/posts.json から再生成"),
   d("content.pages", "data/content/pages/{name}.json", "state", "data", "data", "ID索引の種別・県別分割。必要なページ種別だけアプリへ読み込む", { schema: "data/content/schema/pages.schema.json" }),
@@ -697,6 +698,13 @@ export const DATASETS = [
     schema: "config/schema/surveys.experiments.schema.json",
     refs: [{ field: "experiments[].surveyId", to: "surveys.master", key: "[].id" }],
   }),
+  d("categories.master", "data/categories/categories.json", "master", "data", "data", "カテゴリマスタ (/category/<key> の 17 軸。key・表示名・アイコン・SEO 概要。配列の順が表示順)。指標の category・トピックの categoryKey・回遊の categoryTags が key で指す。キーの型 CategoryKey はこの JSON から packages/data-configs/scripts/build-category-keys.ts が生成する (src/category-keys.generated.ts)。読み込みは packages/data-configs/src/categories.ts", { schema: "data/categories/categories.schema.json" }),
+  d("categories.master-schema", "data/categories/categories.schema.json", "schema", "data", "data", "上のカテゴリマスタの JSON Schema"),
+  d("categories.topics", "data/categories/topics/{name}.json", "master", "data", "data", "カテゴリ内のトピック (/category/<key> の一覧を束ねる見出し。1 カテゴリ 1 ファイル。指標を割り当てる規則 matchers を持つ)。解決の関数は packages/data-configs/src/topics/resolve-topic.ts", {
+    schema: "data/categories/topics.schema.json",
+    refs: [{ field: "categoryKey", to: "categories.master", key: "categories[].key" }, { field: "overrides.$keys", to: "registry:metrics" }],
+  }),
+  d("categories.topics-schema", "data/categories/topics.schema.json", "schema", "data", "data", "上のトピックの JSON Schema"),
   d("surveys.taxonomy", "data/surveys/taxonomy.json", "state", "data", "data", "ranking・テーマ・ブログの全量から調査への紐付けを横断監査した結果と、調査から各面への逆引き (audit-survey-taxonomy.ts が作る。手で編集しない)"),
   d("surveys.kakei-coverage", "data/surveys/kakei-coverage.json", "state", "data", "data", "家計調査の表・品目の展開の到達状況 (report-kakei-coverage.ts が作る。未到達があっても監査は失敗にしない)"),
   d("surveys.lenses", "data/surveys/lenses/{name}.json", "master", "data", "data", "統計調査の切り口台帳 (調査ごとの分析の切り口・使う表と軸・粒度・誤読の注意・チャネルの役割。資料の問いと分析単位はここを参照する。展開の状況は持たない)", {
@@ -907,6 +915,8 @@ export const RETIRED = [
   { from: "data/note/hashtags", to: "config/note-hashtags", since: "2026-10-06" },
   // 調査マスタ (2026-11-10 に packages/ から data/surveys/master/ へ。出典名の対応も同じ場所に JSON で置いた)
   { from: "packages/ranking/src/data/surveys", to: "data/surveys/master", since: "2026-11-10" },
+  // カテゴリ・トピックのマスタ (2026-11-10 に packages/data-configs/src から data/categories/ へ。キーの型は JSON から生成する)
+  { from: "packages/data-configs/src/topics/catalogs", to: "data/categories/topics", since: "2026-11-10" },
   { from: "sync-survey-master", to: "(廃止。対応表は調査の id だけを持つので、調査マスタへ同期するものが無い)", since: "2026-11-10" },
 ];
 

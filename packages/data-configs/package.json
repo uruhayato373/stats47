@@ -50,6 +50,11 @@
       "import": "./src/topics/index.ts",
       "require": "./src/topics/index.ts"
     },
+    "./category-keys": {
+      "types": "./src/category-keys.generated.ts",
+      "import": "./src/category-keys.generated.ts",
+      "require": "./src/category-keys.generated.ts"
+    },
     "./categories": {
       "types": "./src/categories.ts",
       "import": "./src/categories.ts",
@@ -153,6 +158,7 @@
   },
   "scripts": {
     "build:registry": "tsx scripts/build-registry.ts",
+    "build:category-keys": "tsx scripts/build-category-keys.ts",
     "validate:years": "tsx scripts/validate-metric-years.ts",
     "validate:config": "tsx scripts/check-metric-contract.ts && tsx scripts/validate-metric-config.ts",
     "generate:catalog": "tsx scripts/generate-theme-catalog.ts",

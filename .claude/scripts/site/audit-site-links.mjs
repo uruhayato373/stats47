@@ -140,11 +140,10 @@ async function collectNonSitemapUrls() {
   }
   // category / survey はリポジトリの定義から (ネットワーク非依存)
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-  const catSrc = path.join(root, "packages/data-configs/src/types.ts");
+  const catSrc = path.join(root, datasetPath("categories.master"));
   if (fs.existsSync(catSrc)) {
-    const m = fs.readFileSync(catSrc, "utf8").match(/CATEGORY_KEYS\s*=\s*\[([\s\S]*?)\]/);
-    for (const k of [...(m?.[1] ?? "").matchAll(/"([a-z0-9-]+)"/g)].map((x) => x[1])) {
-      urls.push(`/category/${k}`);
+    for (const c of JSON.parse(fs.readFileSync(catSrc, "utf8")).categories) {
+      urls.push(`/category/${c.key}`);
     }
   }
   const surveySrc = path.join(root, datasetPath("surveys.master"));

@@ -15,7 +15,7 @@
  *   /ranking/<key> … GONE_RANKING_KEYS にあれば 410 / KNOWN_RANKING_KEYS にも metric config にも
  *                    無ければ soft 404 (38 件の live 実測に対し 38/38 一致・誤検知 0)
  *   /blog/<slug>   … GONE_BLOG_SLUGS にあれば 410
- *   /category/<key>… CATEGORY_KEYS (17 軸) 外なら 404
+ *   /category/<key>… カテゴリマスタ (17 軸) 外なら 404
  *   /areas/<code>  … 01000-47000 以外なら 410
  *   /themes/<slug> … ThemeCatalog から生成した IndicatorSet の theme key 外なら 410
  *   /municipalities/ranking/<key>[/<県コード>]
@@ -27,7 +27,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREF_AREA_CODES } from "./prefectures.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 /**
  * リポジトリルートを上方向に探索して決める。
@@ -61,7 +61,7 @@ const SOURCES = {
   goneRankingKeys: "packages/ranking/src/config/gone-ranking-keys.ts",
   goneBlogSlugs: "apps/web/src/config/gone-blog-slugs.ts",
   blogRedirects: "apps/web/src/config/blog-redirects.ts",
-  categoryKeys: "packages/data-configs/src/types.ts",
+  categoryKeys: datasetPath("categories.master"),
   metricsDir: datasetDir("metrics.definitions"),
   themeSets: "packages/types/src/indicator-sets",
   geoAnalyses: "packages/data-configs/src/business-plan/m1.ts",
@@ -106,13 +106,7 @@ function loadKeySets() {
     }
   }
 
-  const catBlock = readRequired(SOURCES.categoryKeys).match(
-    /export const CATEGORY_KEYS = \[([\s\S]*?)\]/,
-  );
-  if (!catBlock) throw new Error("internal-link-lint: CATEGORY_KEYS を抽出できません");
-  const categories = new Set(
-    [...catBlock[1].matchAll(/["']([a-z]+)["']/g)].map((m) => m[1]),
-  );
+  const categories = new Set(JSON.parse(readRequired(SOURCES.categoryKeys)).categories.map((c) => c.key));
 
   const areaCodes = new Set(PREF_AREA_CODES);
 
@@ -316,7 +310,7 @@ export function lintInternalLinks(content, opts = {}) {
       checked++;
       if (sets.categories.size && !sets.categories.has(key)) {
         broken++;
-        blockers.push(`リンク切れ: ${link.href} — CATEGORY_KEYS 17 軸に存在しない (${where})`);
+        blockers.push(`リンク切れ: ${link.href} — カテゴリマスタ 17 軸に存在しない (${where})`);
       }
     } else if (type === "areas") {
       if (!key) continue;

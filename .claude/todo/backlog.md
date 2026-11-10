@@ -135,7 +135,7 @@ updated: 2026-11-01
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-10] [領域:データ]
 
 2026-11-10 にオーナーが承認した計画に沿って進める。計画の本体は会社の Windows PC の `C:\Users\m004195\.claude\plans\rdb-db-nextjs-spicy-marble.md` (リポジトリには置かない。全段が終わったら消す)。
-- **いまの段**: 段 2 完了 (2026-11-10。調査の一覧・出典名の対応・家計の分析単位・調査ハブの本文を `data/surveys/` へ移し、`data/surveys/README.md` を Schema にして消した)。次は段 3 (カテゴリ)。残りの一覧は `npm run check-datasets -- --er` の末尾に段ごとの件数で出る
+- **いまの段**: 段 3 完了 (2026-11-10。カテゴリとトピックを `data/categories/` へ移し、カテゴリのキーの型を JSON から生成する形にした)。次は段 4 (`config/` の業務マスタ)。残りの一覧は `npm run check-datasets -- --er` の末尾に段ごとの件数で出る
 - **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(3) `ssds-provenance.generated.json` を作り直すと、`cpi-annual` の名前が調査の一覧の名前 (消費者物価指数) に変わる (43 件)
 - **進め方**: 段ごとに新しいセッションで始め、計画のファイルと段の番号を渡す。段は 1 つずつ順に進め、終わるたびにこの「いまの段」を書き換える
 - **完了条件**: `packages/`・`apps/` の台帳の許可リストが空で、`config/` がシステムの設定だけになり、`npm run check-datasets` が通る
@@ -171,6 +171,13 @@ updated: 2026-11-01
 - **証拠 (2026-11-10)**: `.claude/scripts/surveys/validate-survey-portfolio.ts` の列挙 (LIFECYCLE など 6 つ) が、`config/schema/surveys.portfolio.schema.json` の enum と二重にある。同じファイルの調査 ID の実在の検査 (`masterIds.has`) も、カタログの `refs` と重なる
 - **証拠 (2026-11-10)**: `.claude/rules/survey-content-standards.md` が書く `relatedHubs[]` は、調査ハブの本文の型と Schema に無い
 - **完了条件**: 列挙と ID の実在は Schema と `refs` だけが持ち、検証スクリプトは意味の検査だけを持つ。規約の `relatedHubs[]` は、実装するか記述を消すかが決まっている
+
+### [MIDDLEWARE-REGISTRY-BUNDLE-01] middleware が指標の一覧 (3,324 件) を Edge のバンドルに取り込んでいる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-10] [領域:サイト]
+
+- **証拠 (2026-11-10)**: 静的 import をたどると、`apps/web/src/middleware.ts` → `lib/url-policy.ts` → `config/known-japan-slugs.ts` → `@stats47/data-configs` の `geo-scope` → `municipality-ranking-titles.ts` → `registry.ts` の経路がある。`legacy-category-keys.ts` は「Edge で指標の一覧を抱えない」ためにキーを写して持っていたが、別の経路で入っていた。バンドルの実測はしていない
+- **次**: 本番ビルドの middleware のサイズで実測し、入っていれば全国テーマの slug の一覧を、指標の一覧を import しない経路から引く
+- **完了条件**: middleware から `registry.ts` への import の経路が無いことを、テストか検査で固定している
 
 ### [KAKEI-CATALOG-CI-01] 家計の分析単位の台帳の実物との照合を PR の CI に載せる
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts] [起票:2026-11-10] [領域:データ]
@@ -1128,6 +1135,7 @@ updated: 2026-11-01
 - **証拠 (2026-10-28)**: ルートの `package.json` は `tsx` を devDependencies に持たないのに、`ui-theme:lyra`・`ui-theme:lyra:test`・`page-quality:test` が `node --import tsx` で動く (workspace からの巻き上げで偶然解決)。`apps/web` の `design-system:check` は `--experimental-strip-types` を付けて `.ts` を読む。`engines` は `"node": ">=22"` だけで、`.nvmrc` の版と型の除去が既定で有効な版 (22.18 以降) の関係が書かれていない。
 - **次**: ルートの devDependencies に `tsx` を足して lockfile を更新する。`engines` を `.nvmrc` と合わせる (22.14 を支える必要があるかは会社の Windows PC の版で決める)。
 - **観測 (2026-11-10)**: 会社の Windows PC の Node は 22.14.0 で、`.mjs` が `.ts` を直接 import すると `ERR_UNKNOWN_FILE_EXTENSION` で落ちる (型の除去が既定で有効になるのは 22.18 から)。`analysis:check` は pre-commit が呼ぶので `node --import tsx` に変えた。`.claude/scripts` には `.ts` を直接 import する `.mjs` がほかに約 10 本ある (`ads/build-placement-map.mjs`・`estat/gen-ssds-configs.mjs`・`lib/internal-link-lint.mjs` など)。22.14 を支えるなら同じく tsx 経由にする。
+- **観測 (2026-11-10)**: `apps/web` の `gone-blog-publication.test.ts` の 3 件も、`quality-gate.mjs` が `responsive-chart.ts` を直接 import するため Node 22.14 で落ちる。
 - **完了条件**: ルートの `package.json` に `tsx` があり、`npm run ui-theme:lyra:test` と `npm run design-system:check -w apps/web` が `.nvmrc` の版で通る。
 
 ### [DESIGN-CHECK-CLASSNAME-EXPR-01] design-system:check の上書き禁止の規則が、cn() やテンプレート文字列で書いた className を見ない
