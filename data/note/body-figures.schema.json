@@ -31,10 +31,11 @@
           "rankingKey": { "type": "string" },
           "year": { "type": "string" },
           "valueCheck": {
-            "enum": ["match", "body-match", "changed", "body-differs", "no-year", "year-gone", "unmapped", "no-data-figure", "product-sample", "body-unread"]
+            "enum": ["match", "body-match", "changed", "body-differs", "no-year", "year-gone", "unmapped", "no-data-figure", "product-sample", "product-untyped", "body-unread"]
           },
           "changedPrefectures": { "type": "integer", "minimum": 1 },
           "bodyIssues": { "type": "integer", "minimum": 1 },
+          "untypedFigures": { "type": "integer", "minimum": 1 },
           "bodyIssueSample": { "type": "array", "items": { "type": "string" } },
           "figures": {
             "type": "array",
@@ -44,7 +45,8 @@
               "required": ["file", "kind"],
               "properties": {
                 "file": { "type": "string" },
-                "kind": { "enum": ["ranking-map", "ranking-bar", "ranking-boxplot", "chart", "diagram"] }
+                "kind": { "enum": ["ranking-map", "ranking-bar", "ranking-boxplot", "chart", "diagram"] },
+                "template": { "type": "string", "description": "型の台帳 image-templates.json の id。商品の見本画像を figure-specs.json の型に結んだとき" }
               }
             }
           }

@@ -105,6 +105,22 @@ export function figureKindOf(file, provenanceCharts, section = '', isRankingArti
   return named ? named[1] : 'diagram';
 }
 
+/** 型の台帳の型 (未分類を除く)。商品の見本画像はここに無い型で描かない */
+const TEMPLATE_IDS = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, datasetPath('content.image-templates')), 'utf8'))
+  .templates.map((t) => t.id).filter((id) => id !== 'unclassified'));
+
+/**
+ * 商品の見本画像を、記事の figure-specs.json (render-product-figures.ts の入力) の型に結ぶ。
+ * 1 枚でも型が無い (spec に無い・台帳に無い型) 記事は product-untyped にする。手描きの画像を見分ける唯一の手がかり
+ */
+export function typeProductFigures(figures, specText, templateIds = TEMPLATE_IDS) {
+  const specs = specText ? JSON.parse(specText).figures ?? [] : [];
+  const templateOf = new Map(specs.map((spec) => [spec.file, spec.template]));
+  const typed = figures.map((f) => (templateIds.has(templateOf.get(f.file)) ? { ...f, template: templateOf.get(f.file) } : f));
+  const untyped = typed.filter((f) => !f.template).length;
+  return untyped ? { figures: typed, valueCheck: 'product-untyped', untypedFigures: untyped } : { figures: typed, valueCheck: 'product-sample' };
+}
+
 /** 固定コピーの値のうち、今の R2 の同じ年と違う県の数。比べられないときは null */
 export function countChangedValues(snapshot, observed) {
   if (!Array.isArray(snapshot) || snapshot.length === 0 || observed.size === 0) return null;
@@ -224,7 +240,7 @@ async function inspectArticle(article, readFile, { reviews, metricOverrides }) {
   const charts = Array.isArray(provenance?.charts) ? provenance.charts : [];
   const figures = bodyImagesOf(draft, { remote: noteOnly }).map(({ file, section }) => ({ file, kind: figureKindOf(file, charts, section, Boolean(rankingKey)) }));
   const hasDataFigure = figures.some((f) => f.kind !== 'diagram');
-  if (article.vertical === 'product-sales') return { ...entry, figures, valueCheck: 'product-sample' };
+  if (article.vertical === 'product-sales') return { ...entry, ...typeProductFigures(figures, noteOnly ? null : await readFile(article, 'figure-specs.json')) };
   if (!rankingKey) return { ...entry, figures, valueCheck: hasDataFigure ? 'unmapped' : 'no-data-figure' };
   if (!hasDataFigure && !provenance) return { ...entry, rankingKey, figures, valueCheck: 'no-data-figure' };
   const metricRows = await prefectureRows(rankingKey);
@@ -281,11 +297,15 @@ async function main(argv) {
 /** 直すべき記事を一覧にし、上限 (縮小専用) を超えたら止める */
 function checkLedger() {
   const ledger = JSON.parse(fs.readFileSync(LEDGER, 'utf8'));
-  const { maxArticlesToFix } = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude/config/note-figure-baseline.json'), 'utf8'));
+  const { maxArticlesToFix, maxUntypedProductArticles } = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude/config/note-figure-baseline.json'), 'utf8'));
   const toFix = ledger.articles.filter((a) => a.valueCheck === 'changed' || a.valueCheck === 'body-differs');
   console.log(`note 本文の図: 記事 ${ledger.summary.articles} / 図 ${ledger.summary.figures} / 直すべき記事 ${toFix.length} (上限 ${maxArticlesToFix})`);
   for (const a of toFix) console.log(`- ${a.key}: ${a.rankingKey} ${a.year} ${(a.bodyIssueSample ?? []).join(' / ') || `値の違う県 ${a.changedPrefectures}`}`);
-  if (toFix.length > maxArticlesToFix) process.exitCode = 1;
+  // 商品の見本画像は型の台帳の型で描く (render-product-figures.ts)。型の無い記事は縮小専用の上限で増加を止める
+  const untyped = ledger.articles.filter((a) => a.valueCheck === 'product-untyped');
+  console.log(`型の無い商品の見本画像: 記事 ${untyped.length} (上限 ${maxUntypedProductArticles})`);
+  for (const a of untyped) console.log(`- ${a.key}: 型の無い画像 ${a.untypedFigures} 枚`);
+  if (toFix.length > maxArticlesToFix || untyped.length > maxUntypedProductArticles) process.exitCode = 1;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

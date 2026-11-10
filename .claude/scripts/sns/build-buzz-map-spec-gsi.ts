@@ -186,7 +186,6 @@ async function main() {
   const source = [
     "出典: 国土地理院 電子国土基本図（地名情報）を加工して作成",
     [year, opts.pref ? `pref ${opts.pref}` : "全国"].filter(Boolean).join(" / "),
-    "stats47.jp",
   ];
 
   const spec: Record<string, unknown> = {

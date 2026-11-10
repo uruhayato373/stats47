@@ -100,6 +100,43 @@ export default async function ProductDetailPage({ params }: PageProps) {
         stats={`${product.priceYen.toLocaleString("ja-JP")}円 ・ 販売先 ${destinationLabel}`}
       />
 
+      {product.showcase && (
+        <div className="mb-6 space-y-6">
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            以下の図は、すべてこの商品のファイルの値から描いた見本です。地図は国土数値情報の行政区域の境界と、ファイルの自治体コードで結合しています。
+          </p>
+          {product.showcase.map((section) => (
+            <SurfaceSection key={section.heading} className="p-5">
+              <SectionHeader title={section.heading} hideRule className="mb-0" />
+              <p className="mt-2 text-sm leading-relaxed text-foreground">
+                {section.lead}
+              </p>
+              <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+                {section.figures.map((figure) => (
+                  <li key={figure.file}>
+                    <figure>
+                      {/* eslint-disable-next-line @next/next/no-img-element -- 公開 R2 の静的 PNG をそのまま出す (OGP 画像と同じ配信) */}
+                      <img
+                        src={ogpImageUrl(`app/products/${product.slug}/showcase/${figure.file}`)}
+                        alt={figure.alt}
+                        width={1080}
+                        height={1350}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-auto w-full border border-border"
+                      />
+                      <figcaption className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                        {figure.alt}
+                      </figcaption>
+                    </figure>
+                  </li>
+                ))}
+              </ul>
+            </SurfaceSection>
+          ))}
+        </div>
+      )}
+
       <SurfaceSection className="p-6">
         <SectionHeader
           title={

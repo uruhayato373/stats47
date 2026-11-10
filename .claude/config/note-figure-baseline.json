@@ -1,4 +1,5 @@
 {
   "maxArticlesToFix": 3,
-  "note": "note 本文の照合で直すべき記事の上限。縮小専用。build-note-figure-ledger.mjs --check が見る"
+  "maxUntypedProductArticles": 14,
+  "note": "note 本文の照合で直すべき記事の上限。縮小専用。build-note-figure-ledger.mjs --check が見る。maxUntypedProductArticles は型の台帳の型で描いていない見本画像を持つ商品記事の上限 (2026-11-10 の 15 本から縮小専用)"
 }

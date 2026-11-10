@@ -16,4 +16,13 @@ export interface StorefrontProduct {
   readonly audience: readonly string[];
   /** KDP 書籍へ実際に収録した公開ブログ。文脈一致 CTA の決定にだけ使う。 */
   readonly sourceBlogSlugs: readonly string[];
+  /** 商品のデータで作れる図の見本 (LP の節)。画像は公開 R2 の `app/products/<slug>/showcase/<file>` */
+  readonly showcase?: readonly StorefrontShowcaseSection[];
+}
+
+/** LP の 1 節。見出し・短い説明・図。図は型の台帳の型で商品の値から描いたもの (render-product-figures.ts) */
+export interface StorefrontShowcaseSection {
+  readonly heading: string;
+  readonly lead: string;
+  readonly figures: readonly { readonly file: string; readonly alt: string }[];
 }

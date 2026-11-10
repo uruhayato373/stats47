@@ -194,7 +194,6 @@ function main() {
     const source = [
       `出典: ${sourceName}を加工して作成`,
       `${year}年度データ / ${opts.level === "muni" ? "全国市区町村" : "都道府県"}`,
-      "stats47.jp",
     ];
 
     const spec = {

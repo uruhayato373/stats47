@@ -10,6 +10,16 @@
       "evidence": "2026-10 の note で ¥980 以上の 24 本は計 172 PV・売上 ¥0。比べる相手は データでみる県勢 2026 ¥3,300 と 都市データパック 2025 ¥19,800 (どちらも店頭表示)。データ集の公開は 10 月 24〜25 日で観測は約 1 週間。2026-11-04 に ¥1,980・¥4,980 へ下げた直後、販売の記録が 1 度も入らないうちにオーナーがさらに下げると決めた",
       "decisionRule": "導線を入れてから 8 週で 5 件以上売れたら続ける。1〜4 件なら価格か見せ方を 1 回だけ変える。0 件ならデータの単体販売を止める",
       "metric": "data/note/dashboard/latest.json の salesJpy と pageViews"
+    },
+    {
+      "id": "PRICE-MUNI-INDUSTRY-2026-11",
+      "startedOn": "2026-11-10",
+      "reviewOn": "2027-01-05",
+      "status": "running",
+      "hypothesis": "市区町村の製造品出荷額等のデータに、2021〜2023 年の業種別 (産業中分類 24 業種) の表と、比較・構成・変化の図の見本を足せば、¥1,980 でも資料作成の担当者に買われる",
+      "evidence": "変更前の ¥980 では note の閲覧 10・売上 ¥0 (data/products/product-ledger.json、2026-11 の記録)。2026-11-10 に中身 (業種別の表・ZIP v3)・無料部分・題名と価格を同時に変えた (オーナー決定)",
+      "decisionRule": "2027-01-05 に閲覧と売上を見て、続けるか ¥980 に戻すかを決める。中身と価格を同時に変えたので、売れ方の変化を価格だけの効果とは読まない",
+      "metric": "data/note/dashboard/latest.json の salesJpy と pageViews"
     }
   ],
   "changes": [
@@ -246,6 +256,15 @@
       "toYen": 980,
       "status": "applied",
       "appliedAt": "2026-11-04T02:20:18.702Z"
+    },
+    {
+      "experimentId": "PRICE-MUNI-INDUSTRY-2026-11",
+      "channel": "note",
+      "productKey": "muni-manufacturing-shipment-data",
+      "fromYen": 980,
+      "toYen": 1980,
+      "status": "applied",
+      "appliedAt": "2026-11-10T08:14:04.413Z"
     }
   ]
 }
