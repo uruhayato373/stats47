@@ -1,4 +1,4 @@
-<!-- data-source: yogurt-ranking.json | generated: 2026-11-09T12:08:05.319Z -->
+<!-- data-source: yogurt-ranking.json | generated: 2026-11-10T00:02:02.439Z -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="ヨーグルト消費支出額ランキング" data-theme="dark" data-image-template="bar" data-domain-min="9104" data-domain-max="18394">
     <rect width="1080" height="1350" fill="#262626"/>
     <g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif" fill="#F5F5F5">

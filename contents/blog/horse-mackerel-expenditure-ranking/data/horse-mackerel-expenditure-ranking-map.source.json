@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "horse-mackerel-consumption-expenditure",
+  "year": "2025",
+  "unit": "円",
+  "source": "r2:app/ranking/horse-mackerel-consumption-expenditure/values.json",
+  "verifiedMatchRate": 100,
+  "schemeSource": "item.json",
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)",
+  "fetchedAt": "2026-11-09T13:37:56.556Z",
+  "refreshedFromYear": "2024"
+}
