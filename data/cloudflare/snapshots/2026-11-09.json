@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-09",
+  "fetched_at": "2026-11-10T00:49:11.996Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 92043,
+    "totalErrors": 19,
+    "totalSubrequests": 1770,
+    "byScript": {
+      "stats47": {
+        "requests": 92043,
+        "errors": 19,
+        "subrequests": 1770,
+        "cpu_p50_us": 1020,
+        "cpu_p99_us": 3690563,
+        "wall_p50_us": 1070330,
+        "wall_p99_us": 9017474
+      }
+    },
+    "totalCpuTimeUs": 46358348948,
+    "cpuTimeError": null
+  },
+  "r2_operations": {
+    "classA": 3658,
+    "classB": 639027,
+    "otherOps": 189,
+    "totalEgressBytes": 112874592115,
+    "byBucket": {
+      "stats47-private": {
+        "classA": 179,
+        "classB": 405,
+        "other": 0,
+        "egressBytes": 2872938
+      },
+      "stats47": {
+        "classA": 3443,
+        "classB": 615263,
+        "other": 189,
+        "egressBytes": 108831859619
+      },
+      "doboku-note-archive": {
+        "classA": 34,
+        "classB": 5713,
+        "other": 0,
+        "egressBytes": 3887388396
+      },
+      "doboku-note": {
+        "classA": 2,
+        "classB": 17646,
+        "other": 0,
+        "egressBytes": 152471162
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 44837943201,
+    "totalObjects": 143386,
+    "byBucket": {
+      "stats47-private": {
+        "bytes": 3037252298,
+        "objects": 10090,
+        "uploads": 0
+      },
+      "stats47": {
+        "bytes": 33491939279,
+        "objects": 115022,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 977958015,
+        "objects": 14041,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "doboku-note-archive": {
+        "bytes": 7330793609,
+        "objects": 4233,
+        "uploads": 0
+      }
+    }
+  }
+}
