@@ -170,6 +170,14 @@ updated: 2026-11-01
   - 見本の全 URL の GET 検査が通る。
   - LP の無い商品の上限が 0 になっている。
 
+### [VACANCY-TYPES-TEST-NODE-TS-01] 空き家の種類のテストが data-configs の index.ts を node で読めずに落ち、関係の無い push を止める
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs] [起票:2026-11-10] [領域:管理]
+
+- **事象 (2026-11-10)**: `node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs` が `ERR_MODULE_NOT_FOUND: packages/data-configs/src/types` で落ちる (pass 0 / fail 1。Node v22.23.3)。`ingest-vacancy-types.mjs` が `require('…/packages/data-configs/src/registry.ts')` で TS を Node の型除去のまま読み、その先の `packages/data-configs/src/index.ts` の `export * from "./types"` (拡張子なし) を Node が解決できない。
+- **影響**: push 前テスト (`.claude/scripts/lib/pre-push-tests.mjs`) は、変更したファイルと名前が 4 文字以上重なる node のテストを選ぶ。`types.ts` を変えた push では、名前に `types` を含むこのテストが選ばれ、変更と無関係に push が止まる。2026-11-10 の商品 LP の push (`apps/web/src/features/products/types.ts` を変更) がこれで止まり、`--no-verify` で push した。develop の品質ゲート (develop-quality-gate.yml) は同日 success なので、CI では走っていないか別の起動方法で通っている (未確認)。
+- **次**: ① テストまたは `ingest-vacancy-types.mjs` を tsx 経由で読む形にする (他の `.claude/scripts` の TS 読み込みと同じ方法に合わせる)。`index.ts` の import に拡張子を付ける直し方は、web のビルドへの影響を確かめてからにする。② CI でこのテストが走っているかを確かめ、走っていないなら全件の node テストに載せる。③ 名前の重なりで無関係のテストを選ぶ件は、`selectNodeTests` の stem 判定 (`types` のような一般語) を見直すかを決める。
+- **完了条件**: 上の検証コマンドが pass し、CI の node テストにこのテストが含まれている。
+
 ### [PRODUCT-SAMPLE-TYPED-01] note のデータ商品の見本画像を型の画像へ差し替える
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-10] [領域:商品]
 
