@@ -189,5 +189,7 @@ PUT は再編集ドラフトの保存に留まり、本番へは適用されな�
 5. `https://note.com/api/v3/notes/<id>` を取得し、新しい見出しと figure 数が本文にあることを実測する
    (「記事が公開されました」モーダルと PUT 200 は下書き保存でも出るので証拠にしない)
 
+有料の商品記事 (添付の ZIP 1 つ) の本文・題名・添付の差し替えは `.claude/scripts/note/publish-product-paid-update.sh <記事キー>` (`FREE_PROBE`・`PAID_PROBE` を指定。価格は変えない。2026-11-10)。
+
 自動化は `.claude/scripts/note/publish-kakei-update.sh <slug>` (a-kakei 用。上の 5 手順と
 本文全消去 (実クリック + Range 全選択 + 実キー Backspace。eval の execCommand だけでは消えない) を実装)。

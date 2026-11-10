@@ -60,6 +60,12 @@ npm run products:report --workspace=@stats47/product-factory   # data/products/c
 note販売準備は `npx tsx packages/product-factory/src/channels/note/cli.ts revision --revision <NEW_REVISION> --all`。
 旧v1直参照のgenerate/promoteは使わず、納品版台帳 `data/products/note-pack-deliveries.json` の `_delivery` 固定SHAに接続する。
 
+### E2. note の見本画像を型で描く
+note の販売記事の見本画像 (地図・棒・推移・内訳・ファイルの中身) は手で描かない。記事の作業コピーに
+`figure-specs.json` (画像ごとに `file`・型の台帳の `template`・`input`) を置き、
+`npx tsx .claude/scripts/note/render-product-figures.ts --spec <記事>/figure-specs.json` で描く。spec も記事と一緒に
+`note:article save` で R2 へ保存する。型の無い画像を持つ記事は `build-note-figure-ledger.mjs --check` が縮小専用の上限で止める。
+
 ### F. オーナーへ渡す
 各商品の `.local/data-packs/<id>/<version>/READINESS.md`（機械充足項目 vs オーナー実施項目）を案内する。
 **実機検証（Windows 推奨）と公開の承認はオーナー**が行う。commit/push/deploy は明示指示があるときだけ。

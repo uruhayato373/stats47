@@ -281,7 +281,7 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 |---|---|---|
 | 出典 | 統計局の記載形式「出典：総務省統計局「◯◯調査」（URL）を加工して作成」を無料側に書く。有料側だけに置かない (無料部分の数値も加工値なので利用規約上の記載義務は無料側に生じる) | `paid_free_missing_source` (価格を問わず error) |
 | 対象読者・わかること | 「こんな人のためのデータです」「このデータでわかること」を見出し付きで各 3 点以上 | `paid_free_missing_intro` |
-| サンプル画像 | 添付ファイルの先頭行や集計図を実データから生成した画像で見せる (手書きしない。kakei は `build-kakei-dataset-sample-images.mjs`) | `paid_free_missing_image` |
+| サンプル画像 | 添付ファイルの先頭行や集計図を実データから生成した画像で見せる (手書きしない。kakei は `build-kakei-dataset-sample-images.mjs`)。データ商品 (vertical `product-sales`) の見本は型の台帳の型で描き、記事の `figure-specs.json` に型を残す (`render-product-figures.ts`。2026-11-10) | `paid_free_missing_image` / `product-untyped` |
 | 流入導線 | 同マガジンの無料記事の末尾カード (記事台帳 `data/note/articles.json` で同じ無料マガジンに属する有料記事から `update-published-navigation.mjs` が導出) と note マガジン所属で、他記事からのリンクを 1 本以上持つ | `paid_no_inbound_note_link` |
 
 **既存の有料記事へ後から足すときは editor を使わない。** `patch-note-paid-landing.mjs` が公開版の本文 HTML を所有者 API から取り、
