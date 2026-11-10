@@ -330,3 +330,88 @@ export function parseCsv(text) {
   const [head, ...body] = rows.filter((r) => r.length > 1 || r[0] !== "");
   return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i]])));
 }
+
+/**
+ * 分析の軸 (issues[].axes) から、問いに答える図の目的と型を引く。
+ *
+ * 軸は「説明側 (explanatory)」と「結果側 (outcome)」で、それぞれ 比較 (compare)・構成 (compose)・変化 (change) のどれか。
+ * 説明側が無い問い (記述の問い) は explanatory: null。名前を原因・結果にしないのは、相関を因果と読ませないため。
+ * 説明側の比較が指標を持たないときは群の区分 (年収五分位・世帯類型など) として扱う。時間は軸にせず、結果側の変化で表す。
+ *
+ * 決めるのは図の「目的」だけで、図の型そのものは図の型の台帳 (image-templates.json の purposes・renderer・review)
+ * から引く。型の決定表をここに手書きすると台帳とずれるため (2026-11-10 Fable のレビュー)。
+ */
+export const AXIS_PATTERNS = ["compare", "compose", "change"];
+
+/** 1 軸のときの目的。2 軸は figurePurpose が組み合わせで決める */
+const SINGLE_PURPOSE = { compare: "ranking", compose: "composition", change: "trend" };
+
+/** 目的ごとに先に使う型。47 県の全体を見せる図は地図を主にする (2026-11-03 オーナー決定) */
+const PREFERENCE = {
+  ranking: ["tile-map", "bar", "choropleth"],
+  comparison: ["bar", "grouped-bar", "radar"],
+  composition: ["stacked-bar", "waterfall", "sankey"],
+  trend: ["line", "tile-map", "choropleth"],
+  relationship: ["scatter", "chord", "sankey"],
+};
+
+/** 地域の境界や県の並びが要る型。全国の集計 (unit=japan) では描けない */
+const NEEDS_REGIONS = new Set(["tile-map", "choropleth"]);
+
+/** 小さな問いが軸を省いたら、粒度 (unit) が同じ親の軸を継ぐ。粒度が違えば指標も違うので継がない */
+export function effectiveAxes(issue, byId) {
+  if (issue.axes) return issue.axes;
+  const parent = byId.get(parentIdOf(issue.id) ?? "");
+  return parent && parent.unit === issue.unit ? parent.axes : undefined;
+}
+
+export function figurePurpose({ explanatory, outcome }) {
+  if (!explanatory) return SINGLE_PURPOSE[outcome.pattern];
+  // 指標を持たない比較の説明側は群の区分 (年収五分位・世帯類型・東西など)。群ごとの値は関係ではなく比較の図にする
+  const isGroup = explanatory.pattern === "compare" && !explanatory.metrics?.length;
+  if (isGroup && outcome.pattern === "compare") return "comparison";
+  // 群ごとの推移は群を系列にした折れ線 (五分位なら 5 系列で line の上限に収まる)
+  if (isGroup && outcome.pattern === "change") return "trend";
+  const pair = new Set([explanatory.pattern, outcome.pattern]);
+  // 説明側の群ごとの内訳 (比較×構成) と、増減の内訳 (構成×変化) は内訳の図。ほかは 2 つの値の関係として散布図などに還元する
+  if (explanatory.pattern === "compare" && outcome.pattern === "compose") return "composition";
+  if (pair.has("compose") && pair.has("change")) return "composition";
+  return "relationship";
+}
+
+/**
+ * @param {{ issue: object, axes?: object, templates: object[], metricKeys?: Set<string> }} p
+ * @returns {{ purpose: string|null, primary: string|null, allowed: string[], gaps: string[] }}
+ *   gaps: 型未定 (軸が無い) / 描画器なし / 粒度不足 (全国の集計で関係を問う) / 未検証 (変化・構成の軸に指標が無い) / 指標なし (書いた指標が存在しない)
+ */
+export function resolveAxesFigure({ issue, axes, templates, metricKeys }) {
+  if (!axes) return { purpose: null, primary: null, allowed: [], gaps: ["型未定"] };
+  const gaps = [];
+  const purpose = figurePurpose(axes);
+  const usable = templates.filter(
+    (t) => t.renderer != null && t.review?.status !== "unused" && (t.purposes ?? []).includes(purpose),
+  );
+  const allowed = usable
+    .map((t) => t.id)
+    .filter((id) => issue.unit !== "japan" || !NEEDS_REGIONS.has(id))
+    .sort((a, b) => rank(PREFERENCE[purpose], a) - rank(PREFERENCE[purpose], b));
+  if (!allowed.length) gaps.push("描画器なし");
+
+  const sides = [axes.explanatory, axes.outcome].filter(Boolean);
+  // 全国の単年値は 1 点なので、変化の軸が無ければ 2 つの値の関係を描けない
+  if (issue.unit === "japan" && purpose === "relationship" && !sides.some((s) => s.pattern === "change")) gaps.push("粒度不足");
+  if (sides.some((s) => s.pattern !== "compare" && !s.metrics?.length)) gaps.push("未検証");
+  if (metricKeys && sides.some((s) => (s.metrics ?? []).some((k) => !metricKeys.has(k)))) gaps.push("指標なし");
+
+  // 増減の内訳は滝の図が主 (台帳の waterfall が「全体の増減はどの要素の足し引きか」に答える)
+  const primary =
+    purpose === "composition" && sides.some((s) => s.pattern === "change") && allowed.includes("waterfall")
+      ? "waterfall"
+      : allowed[0] ?? null;
+  return { purpose, primary, allowed, gaps };
+}
+
+const rank = (order, id) => {
+  const i = order.indexOf(id);
+  return i < 0 ? order.length : i;
+};

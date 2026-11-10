@@ -1,7 +1,11 @@
 {
-  "hash": "79fb99b9a3973ef4dbf96c05f4099278d12f75262e4ae2204c92d6f57f3f8e70",
-  "audited_at": "2026-11-07T23:19:56",
+  "hash": "bb38826707cd6a6ffc3fd9e4a88e91bbd88246f968cb25b6faeca3c0002719e9",
+  "audited_at": "2026-11-10T00:46:29",
   "files": [
-    ".claude/scripts/measurement/refresh-session.mjs"
+    ".agents/skills/content/manage-issue-ledger/SKILL.md",
+    ".claude/scripts/issues/__tests__/issue-graph.test.mjs",
+    ".claude/scripts/issues/check-issue-graph.mjs",
+    ".claude/scripts/issues/issue-graph-core.mjs",
+    ".claude/skills/content/manage-issue-ledger/SKILL.md"
   ]
 }

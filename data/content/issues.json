@@ -2571,7 +2571,20 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "果物の産地かどうか",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "生鮮果物の消費量",
+          "pattern": "compare",
+          "metrics": [
+            "fresh-fruit-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K02",
@@ -2586,7 +2599,22 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "東西・気候・歴史の区分",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "麺類の消費量と支出額",
+          "pattern": "compare",
+          "metrics": [
+            "fresh-udon-soba-consumption-quantity",
+            "ramen-dining-consumption-expenditure",
+            "soba-udon-dining-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K03",
@@ -2602,7 +2630,23 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県民所得の水準",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27"
+          ]
+        },
+        "outcome": {
+          "label": "エンゲル係数",
+          "pattern": "compare",
+          "metrics": [
+            "engel-coefficient"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K03-1",
@@ -2618,7 +2662,21 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年収階級・世帯主年齢",
+          "pattern": "compose"
+        },
+        "outcome": {
+          "label": "エンゲル係数の推移",
+          "pattern": "change",
+          "metrics": [
+            "engel-coefficient",
+            "food-expenditure-ratio-multi-person-households"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K03-2",
@@ -2634,7 +2692,20 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "エンゲル係数の長期推移",
+          "pattern": "change",
+          "metrics": [
+            "engel-coefficient"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K03-3",
@@ -2649,7 +2720,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "1人当たり県民所得",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27"
+          ]
+        },
+        "outcome": {
+          "label": "県庁所在市のエンゲル係数",
+          "pattern": "compare",
+          "metrics": [
+            "engel-coefficient"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K03-4",
@@ -2664,7 +2751,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "1人当たり県民所得",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27"
+          ]
+        },
+        "outcome": {
+          "label": "情報通信関係の支出割合",
+          "pattern": "compare",
+          "metrics": [
+            "information-communication-coefficient",
+            "information-communication-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K04",
@@ -2679,7 +2783,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "酒類への支出額",
+          "pattern": "compare",
+          "metrics": [
+            "alcoholic-beverages-group-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K04-1",
@@ -2694,7 +2808,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "酒類の支出額の推移",
+          "pattern": "change",
+          "metrics": [
+            "alcoholic-beverages-group-consumption-expenditure",
+            "chuhai-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:L01",
@@ -2757,7 +2882,9 @@
         "データ",
         "実務"
       ],
-      "products": ["note:muni-manufacturing-shipment-data"],
+      "products": [
+        "note:muni-manufacturing-shipment-data"
+      ],
       "sensitive": false,
       "status": "active"
     },
@@ -3057,7 +3184,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "カップ麺の消費支出額",
+          "pattern": "compare",
+          "metrics": [
+            "cup-noodles-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-2",
@@ -3075,7 +3212,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "カツオの漁獲量",
+          "pattern": "compare",
+          "metrics": [
+            "fishery-species-catch-bonito"
+          ]
+        },
+        "outcome": {
+          "label": "カツオの消費量",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K02-1",
@@ -3093,7 +3246,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "チョコレートの消費支出額",
+          "pattern": "change",
+          "metrics": [
+            "chocolate-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K02-2",
@@ -3109,7 +3272,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "東日本と西日本の区分",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "生鮮魚介の品目別支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "clam-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "freshwater-clam-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "octopus-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "salmon-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "saury-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E01-1",
@@ -3434,7 +3621,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "家計調査の都市別順位",
+          "pattern": "compare",
+          "metrics": [
+            "fresh-fruit-consumption-quantity",
+            "gyoza-frozen-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-4",
@@ -3450,7 +3648,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額と購入数量の順位",
+          "pattern": "change",
+          "metrics": [
+            "fresh-udon-soba-consumption-expenditure",
+            "gyoza-frozen-consumption-expenditure",
+            "natto-consumption-expenditure",
+            "ramen-dining-consumption-expenditure",
+            "rice-consumption-expenditure",
+            "white-bread-consumption-expenditure",
+            "white-bread-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-5",
@@ -3466,7 +3680,26 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "肉の地元での生産規模",
+          "pattern": "compare",
+          "metrics": [
+            "total-population"
+          ]
+        },
+        "outcome": {
+          "label": "肉類の消費量",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-quantity",
+            "chicken-consumption-quantity",
+            "pork-consumption-quantity",
+            "pork-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K05",
@@ -3482,7 +3715,22 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "物価の上昇",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "食料の支出と購入量の変化",
+          "pattern": "change",
+          "metrics": [
+            "consumption-expenditure-multi-person-households-per-month",
+            "food-expenditure-ratio-multi-person-households",
+            "avg-propensity-to-consume-worker-households"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K05-1",
@@ -3497,7 +3745,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "米の価格の上昇",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "米の支出額と購入量",
+          "pattern": "change",
+          "metrics": [
+            "rice-consumption-expenditure",
+            "rice-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K05-2",
@@ -3513,7 +3775,22 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "品目別の価格の上昇",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "品目別の購入量",
+          "pattern": "change",
+          "metrics": [
+            "rice-consumption-expenditure",
+            "other-bread-consumption-expenditure",
+            "white-bread-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K06",
@@ -3530,7 +3807,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入階級",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "品目別の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-1",
@@ -3546,7 +3833,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入階級",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "品目別の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-2",
@@ -3562,7 +3859,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入階級",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "教育費の内訳の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:K06-3",
@@ -3577,7 +3884,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "所得シェアの年次推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:K06-4",
@@ -3593,7 +3910,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "品目の支出額・数量・平均価格",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-5",
@@ -3609,7 +3936,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "食料・衣料・教育の支出シェア",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:K06-6",
@@ -3625,7 +3962,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "医薬品・医療関連の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-7",
@@ -3641,7 +3988,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "食料品目の支出額・数量",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-8",
@@ -3656,7 +4013,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "自動車関連の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-9",
@@ -3671,7 +4038,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "家電の支出額・数量・平均価格",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-10",
@@ -3686,7 +4063,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "教養娯楽サービスの支出額の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:K06-11",
@@ -3701,7 +4088,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "旅行種別の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-12",
@@ -3716,7 +4113,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "衣料品の支出額・数量・平均価格",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-13",
@@ -3731,7 +4138,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "身の回り品の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K06-14",
@@ -3746,7 +4163,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "外食業態別の支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K07",
@@ -3762,7 +4189,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "世帯類型(単身・二人以上)",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "品目別の年間支出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K08",
@@ -3778,7 +4215,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・購入数量",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:K08-1",
@@ -3793,7 +4237,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ネクタイ・ストッキングの支出額",
+          "pattern": "change",
+          "metrics": [
+            "necktie-consumption-expenditure",
+            "womens-stockings-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K09",
@@ -3809,7 +4264,14 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の月次支出額・購入数量",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:K09-1",
@@ -3825,7 +4287,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "婦人用コートの支出額・購入数量",
+          "pattern": "change",
+          "metrics": [
+            "womens-coat-consumption-expenditure",
+            "womens-coat-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K09-2",
@@ -3840,7 +4313,14 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ビール類の月次支出額・購入数量",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:K10",
@@ -3857,7 +4337,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・購入数量",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:K10-1",
@@ -3873,7 +4360,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・消費量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "cheese-consumption-expenditure",
+            "cheese-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity",
+            "rice-consumption-expenditure",
+            "rice-consumption-quantity",
+            "salmon-consumption-expenditure",
+            "salmon-consumption-quantity",
+            "saury-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-2",
@@ -3889,7 +4400,30 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・消費量",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "cup-noodles-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity",
+            "scallop-consumption-expenditure",
+            "scallop-consumption-quantity",
+            "tuna-consumption-expenditure",
+            "tuna-consumption-quantity",
+            "watermelon-consumption-expenditure",
+            "watermelon-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-3",
@@ -3905,7 +4439,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・消費量",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "apple-consumption-quantity",
+            "chinese-noodles-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "persimmon-consumption-expenditure",
+            "persimmon-consumption-quantity",
+            "salted-salmon-consumption-expenditure",
+            "salted-salmon-consumption-quantity",
+            "tofu-consumption-expenditure",
+            "tofu-consumption-quantity",
+            "wakame-consumption-expenditure",
+            "wakame-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-4",
@@ -3921,7 +4479,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "仙台市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "chuhai-consumption-expenditure",
+            "chuhai-consumption-quantity",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "fish-paste-consumption-expenditure",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "oyster-consumption-expenditure",
+            "oyster-consumption-quantity",
+            "pumpkin-consumption-expenditure",
+            "pumpkin-consumption-quantity",
+            "wakame-consumption-expenditure",
+            "wakame-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-5",
@@ -3937,7 +4519,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "秋田市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "chinese-noodles-consumption-expenditure",
+            "chinese-noodles-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "miso-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-6",
@@ -3953,7 +4559,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "山形市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "cheese-consumption-expenditure",
+            "cheese-consumption-quantity",
+            "fresh-udon-soba-consumption-expenditure",
+            "fresh-udon-soba-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "katsuobushi-consumption-expenditure",
+            "katsuobushi-consumption-quantity",
+            "konnyaku-consumption-expenditure",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "persimmon-consumption-expenditure",
+            "persimmon-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-7",
@@ -3969,7 +4599,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "福島市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "cod-roe-consumption-expenditure",
+            "cod-roe-consumption-quantity",
+            "enoki-consumption-expenditure",
+            "enoki-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "konbu-tsukudani-consumption-expenditure",
+            "konbu-tsukudani-consumption-quantity",
+            "natto-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "oyster-consumption-quantity",
+            "peach-consumption-expenditure",
+            "peach-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-8",
@@ -3985,7 +4639,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "水戸市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "bonito-consumption-expenditure",
+            "bonito-consumption-quantity",
+            "cod-roe-consumption-expenditure",
+            "cod-roe-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "ham-consumption-expenditure",
+            "ham-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "melon-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-9",
@@ -4001,7 +4679,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "宇都宮市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "chinese-cabbage-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "scallop-consumption-expenditure",
+            "scallop-consumption-quantity",
+            "strawberry-consumption-expenditure",
+            "strawberry-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-10",
@@ -4017,7 +4719,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "前橋市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "cucumber-consumption-expenditure",
+            "dressing-consumption-expenditure",
+            "dressing-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity",
+            "leek-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "mackerel-consumption-quantity",
+            "miso-consumption-expenditure",
+            "miso-consumption-quantity",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "rice-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-11",
@@ -4033,7 +4759,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "さいたま市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "broccoli-consumption-expenditure",
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "cod-roe-consumption-expenditure",
+            "cod-roe-consumption-quantity",
+            "cucumber-consumption-expenditure",
+            "green-pepper-consumption-expenditure",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "octopus-consumption-expenditure",
+            "octopus-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity",
+            "pumpkin-consumption-expenditure",
+            "pumpkin-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-12",
@@ -4049,7 +4799,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "千葉市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "banana-consumption-expenditure",
+            "butter-consumption-expenditure",
+            "butter-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity",
+            "jelly-consumption-expenditure",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "orange-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-13",
@@ -4065,7 +4839,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "東京都区部の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "cheese-consumption-expenditure",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "green-pepper-consumption-expenditure",
+            "green-pepper-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-14",
@@ -4081,7 +4879,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "横浜市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "broccoli-consumption-expenditure",
+            "broccoli-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "grape-consumption-expenditure",
+            "grape-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "ham-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-15",
@@ -4097,7 +4919,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "新潟市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "curry-roux-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "pork-consumption-expenditure",
+            "potato-consumption-expenditure",
+            "potato-consumption-quantity",
+            "salted-salmon-consumption-expenditure",
+            "salted-salmon-consumption-quantity",
+            "wakame-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-16",
@@ -4113,7 +4959,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "富山市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "cucumber-consumption-expenditure",
+            "cucumber-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "horse-mackerel-consumption-expenditure",
+            "horse-mackerel-consumption-quantity",
+            "konbu-consumption-expenditure",
+            "konbu-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "salmon-consumption-expenditure",
+            "salmon-consumption-quantity",
+            "saury-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-17",
@@ -4129,7 +4999,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "金沢市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "chinese-noodles-consumption-expenditure",
+            "chinese-noodles-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "lotus-root-consumption-expenditure",
+            "lotus-root-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "other-japanese-sweets-consumption-expenditure",
+            "pickled-chinese-cabbage-consumption-expenditure",
+            "pickled-chinese-cabbage-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-18",
@@ -4145,7 +5039,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "福井市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "dried-udon-soba-consumption-expenditure",
+            "dried-udon-soba-consumption-quantity",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "furikake-consumption-expenditure",
+            "konbu-consumption-expenditure",
+            "konbu-consumption-quantity",
+            "konbu-tsukudani-consumption-expenditure",
+            "konbu-tsukudani-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-19",
@@ -4161,7 +5079,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "甲府市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "dressing-consumption-expenditure",
+            "dressing-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "grape-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "margarine-consumption-expenditure",
+            "margarine-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-20",
@@ -4177,7 +5119,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "長野市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "grape-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "katsuobushi-consumption-expenditure",
+            "katsuobushi-consumption-quantity",
+            "peach-consumption-expenditure",
+            "peach-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-21",
@@ -4193,7 +5159,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "岐阜市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "enoki-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "horse-mackerel-consumption-expenditure",
+            "horse-mackerel-consumption-quantity",
+            "persimmon-consumption-expenditure",
+            "persimmon-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-22",
@@ -4209,7 +5199,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "静岡市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "horse-mackerel-consumption-expenditure",
+            "horse-mackerel-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity",
+            "leek-consumption-expenditure",
+            "leek-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity",
+            "pickled-plum-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-23",
@@ -4225,7 +5239,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "名古屋市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "fresh-udon-soba-consumption-expenditure",
+            "fresh-udon-soba-consumption-quantity",
+            "green-pepper-consumption-expenditure",
+            "green-pepper-consumption-quantity",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "miso-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-24",
@@ -4241,7 +5279,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "津市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "beef-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "katsuobushi-consumption-expenditure",
+            "katsuobushi-consumption-quantity",
+            "other-fish-paste-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "oyster-consumption-quantity",
+            "peach-consumption-expenditure",
+            "peach-consumption-quantity",
+            "tuna-consumption-expenditure",
+            "tuna-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-25",
@@ -4257,7 +5319,31 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大津市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "beef-consumption-quantity",
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "coffee-consumption-expenditure",
+            "coffee-consumption-quantity",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "fresh-udon-soba-consumption-expenditure",
+            "green-pepper-consumption-expenditure",
+            "green-pepper-consumption-quantity",
+            "happoshu-consumption-expenditure",
+            "happoshu-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-26",
@@ -4273,7 +5359,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "京都市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "beef-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "butter-consumption-expenditure",
+            "chinese-food-dining-consumption-expenditure",
+            "eggplant-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "green-beans-consumption-expenditure",
+            "green-pepper-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-27",
@@ -4289,7 +5393,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大阪市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "beef-consumption-expenditure",
+            "bread-consumption-expenditure",
+            "chuhai-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "happoshu-consumption-expenditure",
+            "konbu-tsukudani-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-28",
@@ -4305,7 +5426,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "神戸市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "bread-consumption-expenditure",
+            "coffee-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "green-beans-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "leek-consumption-expenditure",
+            "lotus-root-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-29",
@@ -4321,7 +5460,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "奈良市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "green-pepper-consumption-expenditure",
+            "konbu-tsukudani-consumption-expenditure",
+            "lotus-root-consumption-expenditure",
+            "persimmon-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-30",
@@ -4337,7 +5493,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "和歌山市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "konbu-consumption-expenditure",
+            "mandarin-consumption-expenditure",
+            "margarine-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "peach-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-31",
@@ -4353,7 +5526,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "鳥取市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "cod-roe-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "enoki-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "freshwater-clam-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "pear-consumption-expenditure",
+            "sardine-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-32",
@@ -4369,7 +5559,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "松江市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bean-sprouts-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "freshwater-clam-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "margarine-consumption-expenditure",
+            "orange-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-33",
@@ -4385,7 +5592,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "岡山市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "burdock-consumption-expenditure",
+            "grape-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "other-bread-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "peach-consumption-expenditure",
+            "sauce-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-34",
@@ -4401,7 +5625,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "広島市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "beer-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "sauce-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-35",
@@ -4417,7 +5658,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "山口市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "burdock-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "fresh-shiitake-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "leek-consumption-expenditure",
+            "melon-consumption-expenditure",
+            "pear-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-36",
@@ -4433,7 +5691,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "徳島市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "chikuwa-consumption-expenditure",
+            "chinese-cabbage-consumption-expenditure",
+            "dried-nori-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "squid-consumption-expenditure",
+            "sweet-potato-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-37",
@@ -4449,7 +5725,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "高松市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "bonito-consumption-expenditure",
+            "clam-consumption-expenditure",
+            "deep-fried-fish-cake-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "fresh-udon-soba-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "leek-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-38",
@@ -4465,7 +5758,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "松山市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "chikuwa-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "lotus-root-consumption-expenditure",
+            "mochi-consumption-expenditure",
+            "other-citrus-consumption-expenditure",
+            "sauce-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-39",
@@ -4481,7 +5792,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "高知市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "bonito-consumption-expenditure",
+            "cabbage-consumption-expenditure",
+            "dried-mackerel-consumption-expenditure",
+            "fresh-shiitake-consumption-expenditure",
+            "happoshu-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "mandarin-consumption-expenditure",
+            "octopus-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-40",
@@ -4497,7 +5826,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "福岡市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "burdock-consumption-expenditure",
+            "cod-roe-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "konbu-consumption-expenditure",
+            "pickled-chinese-cabbage-consumption-expenditure",
+            "ramen-dining-consumption-expenditure",
+            "sashimi-platter-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-41",
@@ -4513,7 +5860,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "佐賀市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-nori-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "instant-noodles-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-42",
@@ -4529,7 +5893,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "長崎市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "bean-sprouts-consumption-expenditure",
+            "castella-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "other-fresh-fish-consumption-expenditure",
+            "ramen-dining-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-43",
@@ -4545,7 +5927,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "熊本市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bean-sprouts-consumption-expenditure",
+            "beef-consumption-expenditure",
+            "chicken-consumption-expenditure",
+            "dressing-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "melon-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-44",
@@ -4561,7 +5960,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大分市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "dried-shiitake-consumption-expenditure",
+            "grape-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "orange-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "sashimi-platter-consumption-expenditure",
+            "shochu-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-45",
@@ -4577,7 +5993,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "宮崎市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "cabbage-consumption-expenditure",
+            "chinese-cabbage-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "happoshu-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "sardine-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-46",
@@ -4593,7 +6026,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "鹿児島市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bean-sprouts-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "ketchup-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "persimmon-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "shochu-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K10-47",
@@ -4609,7 +6059,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "那覇市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bean-sprouts-consumption-expenditure",
+            "carrot-consumption-expenditure",
+            "chuhai-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "pickled-plum-consumption-expenditure",
+            "shochu-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F03-1",

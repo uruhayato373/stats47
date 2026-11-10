@@ -7,6 +7,7 @@
  *   node .claude/scripts/issues/check-issue-graph.mjs --coverage --weeks 8 --limit 50 --json
  *   node .claude/scripts/issues/check-issue-graph.mjs --candidates # 問いの候補 (「なぜ・理由・関係」型でどの問いの queries にも無い検索語)
  *   node .claude/scripts/issues/check-issue-graph.mjs --figures    # まだ載っていない図の配信先と、台帳どうしのずれ
+ *   node .claude/scripts/issues/check-issue-graph.mjs --axes [issue:K]  # 分析の軸から引いた図の目的・型と、埋まっていない理由
  *
  * 規則の本体は issue-graph-core.mjs。形と外部キーは check-datasets が見る。
  */
@@ -15,14 +16,17 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { METRIC_DEFINITIONS_DIR } from "../../../config/paths.mjs";
 import {
   classifyCoverage,
   computeReach,
+  effectiveAxes,
   findQueryCandidates,
   indexPages,
   listFigureDestinations,
   parseCsv,
   READ_THRESHOLD,
+  resolveAxesFigure,
   sumTraffic,
   validateIssueGraph,
 } from "./issue-graph-core.mjs";
@@ -58,6 +62,29 @@ if (flag("--figures")) {
     console.log(`図の配信先: 未掲載 ${rows.length} 件 (うち ずれ ${rows.filter((r) => r.drift).length} 件。! がずれ)`);
   }
   process.exit(rows.some((r) => r.drift) ? 1 : 0);
+}
+
+if (flag("--axes")) {
+  const { templates } = readJson(datasetPath("content.image-templates"));
+  const metricKeys = new Set(
+    readdirSync(join(PROJECT_ROOT, METRIC_DEFINITIONS_DIR)).filter((f) => f.endsWith(".ts")).map((f) => f.slice(0, -3)),
+  );
+  const byId = new Map(issues.map((i) => [i.id, i]));
+  const prefix = args[args.indexOf("--axes") + 1]?.startsWith("issue:") ? args[args.indexOf("--axes") + 1] : "issue:";
+  const rows = issues
+    .filter((i) => i.status === "active" && i.id.startsWith(prefix))
+    .map((issue) => ({ id: issue.id, question: issue.question, ...resolveAxesFigure({ issue, axes: effectiveAxes(issue, byId), templates, metricKeys }) }));
+  if (flag("--json")) {
+    console.log(JSON.stringify(rows, null, 2));
+    process.exit(0);
+  }
+  const count = (g) => rows.filter((r) => r.gaps.includes(g)).length;
+  for (const r of rows) console.log(`${r.gaps.length ? "!" : " "} ${r.id} ${r.purpose ?? "-"} → ${r.primary ?? "-"} (${r.allowed.join(",")}) ${r.gaps.join(",")}`);
+  console.log(
+    `軸: 対象 ${rows.length} 件 / 図が決まる ${rows.filter((r) => !r.gaps.length).length} / 型未定 ${count("型未定")} / 未検証 ${count("未検証")} / 粒度不足 ${count("粒度不足")} / 描画器なし ${count("描画器なし")} / 指標なし ${count("指標なし")}`,
+  );
+  // 書いた指標が存在しないのは台帳の誤り。ほかは埋める作業の残りなので止めない
+  process.exit(count("指標なし") ? 1 : 0);
 }
 
 if (!flag("--coverage") && !flag("--candidates")) {
