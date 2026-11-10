@@ -131,6 +131,45 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [PRODUCT-LP-SHOWCASE-01] 商品の LP (サイトの商品ページと note の記事) を、1 つの画像指定から全商品へ作れる仕組みとゲートにする
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx apps/web/scripts/generate-product-storefront.ts --check] [起票:2026-11-10] [領域:商品]
+
+- **起点 (2026-11-10 オーナー指示)**: 製造品出荷額の商品 (`muni-manufacturing-shipment-data` / サイトの `/products/data-muni-manufacturing`) を LP にした。分析の型 (比べる・構成を見る・変化を見る) ごとに作れる図と、ファイルの中身の見本を見せる形である。オーナーから「ほかの商品にも展開できる仕組みやゲートになっているか」と問われた。答えは「半分だけ」なので、このカードで残りの半分を作る。
+- **今ある部品 (他の商品にもそのまま使える)**:
+  - note の見本画像は、記事の作業ファイル `figure-specs.json` (画像ごとに `file`・型の台帳の `template`・`input`) から `.claude/scripts/note/render-product-figures.ts` が型の台帳 (`data/content-operations/image-templates.json`) の描画器だけで描く。経路は `config/image-generation-routes.json` の `note-product-samples`。spec は記事と一緒に private R2 へ保存する (`note:article save`)。
+  - 型の無い見本画像を持つ商品記事は、`.claude/scripts/note/build-note-figure-ledger.mjs --check` が `product-untyped` として数え、`.claude/config/note-figure-baseline.json` の `maxUntypedProductArticles` (14・縮小専用) を超えると止める。
+  - 公開中の note 有料記事の本文・題名・添付の差し替えは `.claude/scripts/note/publish-product-paid-update.sh` (記事 key・`FREE_PROBE`/`PAID_PROBE` を渡す) で他の商品にも使える。
+  - サイトの商品の型 `StorefrontProduct` (`apps/web/src/features/products/types.ts`) に、任意項目 `showcase` (節 = 見出し・短い説明・図の `file` と `alt`) を足した。商品ページ (`apps/web/src/app/products/[slug]/page.tsx`) は値があれば節を描く。画像の URL は公開 R2 の `app/products/<slug>/showcase/<file>` で、`ogpImageUrl()` で組む。
+- **穴 (展開と品質を妨げているもの)**:
+  1. **サイトの見本の設定がこの 1 商品にしか書けない**: 設定は `apps/web/scripts/generate-product-storefront.ts` の `STANDALONE_NOTE_PRODUCTS` に手で書いた。データ集 (note 有料データ集 14 件のうち P-01〜P-14 由来の 13 件) は `NOTE_PRODUCT_MAPPINGS` の経路、Kindle 13 件は KDP 台帳の経路で作られ、どちらも `showcase` を渡さない。
+  2. **画像の指定が二重管理**: 同じ 11 枚について、ファイル名と説明文を note の `figure-specs.json` とサイトの生成スクリプトの両方に書いている。片方だけ直すとずれる (`feedback_hand_synced_duplication` と同じ型の負債)。どの画像がどの節 (比べる・構成・変化・ファイルの中身) に属するかは、spec には無く、サイトの設定と note 本文にだけある。
+  3. **公開 R2 への配置が手作業で、検査も無い**: 2026-11-10 は `.local/r2/app/products/<slug>/showcase/` へ手でコピーし、`packages/r2-storage/src/scripts/push-exact-r2-assets.ts --prefix … --extension png` で置いた。サイトが指す画像が公開 R2 に無くても、生成の `--check`・型検査・テストのどれも止めない。その場合、本番で画像が切れる。
+  4. **CDN が 404 を覚える罠**: R2 に置く前にページや curl で画像の URL を読むと、`storage.stats47.jp` の Cloudflare が 404 を `max-age=14400` (4 時間) で覚える。2026-11-10 は、置く前の localhost 確認で最初に表示される 5 枚がこれを踏んだ。置いた後に読み戻すと、HEAD は 200 なのに GET は Not Found の HTML が返った (`cf-cache-status: HIT`)。この Mac の `.env.local` には `CLOUDFLARE_ZONE_ID` が無く、ローカルの `purge-cache.ts` は動かない。`gh workflow run purge-cdn.yml -f prefix=app/products/<slug>/showcase` で消した (run 42783049768)。
+  5. **LP の中身の約束を誰も検査していない**: 4 節 (比べる・構成・変化・ファイルの中身) がそろっているか、各図に alt があるか、どの商品に LP が無いかを数える検査は無い。note 側の検査が見ているのは「型で描いたか」だけである。
+  6. **note 本文の LP の節も手書き**: note 記事の「比べる・構成・変化」の見出しと説明文は、記事原稿に手で書いた。サイトの `lead` と同じ事実 (例: 豊田市 20 兆 5,272 億円・倉敷市の約 3.7 倍・輸送用機械 93.4%) を二か所に書いているので、値を直すと片方が古くなる。
+- **作るもの (推奨の設計)**:
+  1. **画像指定を 1 か所にまとめる**: `figure-specs.json` の各画像に `section` (`compare` / `structure` / `change` / `file`) と `alt` を持たせ、節の見出しと説明 (`lead`) も spec の `sections` に置く。spec の形は JSON Schema で固定する (置き場は `config/datasets.mjs` の規約に従い、台帳に 1 行足してから)。
+  2. **サイトの節を spec から導出する**: `generate-product-storefront.ts` が、公開済みの note 商品記事 (`data/note/articles.json`) ごとに spec を読み、`showcase` を作る。単独商品とデータ集の両方の経路で同じ関数を使う。`STANDALONE_NOTE_PRODUCTS` の手書きの `showcase` は消す。spec は private R2 にあるので、生成の入力にするには、公開してよい部分 (節・file・alt・lead・画像の sha256) だけを git の写し (`data/products/` か `data/note/`) に書き出す経路が要る。生成スクリプトが R2 を読む形にはしない (`--check` がネットワークに依存するため)。
+  3. **公開 R2 への配置を決定的にする**: spec から描いた画像を `app/products/<slug>/showcase/` へ置く処理を、sha256 付きの manifest (`push-exact-r2-assets.ts --manifest`) で行う。上の git の写しの sha256 と一致する画像だけを置く。R2 への書き込みは CI か、オーナー承認つきのローカル実行に限る。
+  4. **ゲートを足す**:
+     - 生成の `--check` (pre-commit・PR) で、`showcase` の各図に `alt` があり、4 節のうち `compare`・`file` を必ず含むこと (分析の型に当てはまらない商品は、理由つきで節を外せるようにする)。
+     - 週次 (または release 前) に、`showcase` の全 URL へ GET し、200・`image/png`・sha256 一致を確かめる検査。HEAD ではなく GET で見る (上の穴 4 で HEAD は 200 だった)。
+     - LP の無い公開中の note 商品の数を数え、縮小専用の上限を置く (`maxUntypedProductArticles` と同じ置き場 `.claude/config/` の baseline)。
+  5. **CDN の罠を手順に入れる**: 置く前に画像の公開 URL を読まない。確かめは `.local/` の写しを localhost で差し替えて見る。置いた後に読み戻して不一致なら `purge-cdn.yml` の prefix で消す。この手順を `/build-data-pack` の E2 と `.claude/rules/note-image-assets.md` に書く。
+  6. **note 本文の節も spec から組む** (やるかは実装時にオーナーへ確認): `lead` を spec に置いたら、note の記事原稿の LP の節も同じ値から作る。公開中の有料記事を書き換えるのは外部変更なので、記事ごとに承認を取る。
+- **次 (実行順)**: ① `muni-manufacturing-shipment-data` の spec に `section`・`alt`・`sections` を足し、サイトの `showcase` を spec の写しから導出して、生成物が今と同じになることを確かめる (差分 0 が移行の合格) → ② 画像の GET 検査と alt・節の検査を足し、1 枚消した spec で検査が落ちることを確かめる (検査器の検査) → ③ manifest での R2 配置に切り替える → ④ データ集 13 件に spec を作る。これは `PRODUCT-SAMPLE-TYPED-01` (見本画像を型へ) と同じ差分で行う。
+- **停止条件・禁止**:
+  - データ集 13 件の note の見せ方とサイトの商品ページは、価格実験 `PRICE-DATA-PACK-2026-11` の判定 (仮の期日 2026-12-30) まで変えない。導線の変更が価格の効果と混ざり、判定できなくなる。①〜③ は製造品出荷額の 1 商品だけで進めてよい。
+  - 公開 R2 への書き込み、CDN の消去、note 記事の更新、本番デプロイは、それぞれオーナーの承認を取る。
+  - 型の台帳に無い図を LP に載せない (型が足りなければ先に型を足す)。
+  - Kindle 13 件は対象外。中身の見本は書籍のページで、データの図とは別の話になる。必要になったら別カードにする。
+- **関連**: `PRODUCTS-PAGE-CONTENT-01` (商品ページで中身が分からない。このカードが仕組み、あちらが各商品の中身の是正) / `PRODUCT-SAMPLE-TYPED-01` (note の見本画像を型へ) / `PRODUCT-PACK-CONTENT-MISMATCH-01` (データ集の中身と説明の食い違い)。2026-11-10 の実装は commit `149629f56` (サイト) と `571272640` (note の型の経路)。
+- **完了条件**:
+  - 公開中の note データ商品すべてで、サイトの見本の節と note の見本画像が同じ spec から作られている。
+  - 生成スクリプトに手書きの `showcase` が 0 件。
+  - 見本の全 URL の GET 検査が通る。
+  - LP の無い商品の上限が 0 になっている。
+
 ### [PRODUCT-SAMPLE-TYPED-01] note のデータ商品の見本画像を型の画像へ差し替える
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-10] [領域:商品]
 
@@ -138,6 +177,7 @@ updated: 2026-11-01
 - **分かっていること**: `muni-manufacturing-shipment-data` は作業コピーに `figure-specs.json` (比較・構成・変化の 6 枚とファイルの中身 1 枚) があり、型の描画器で描けることを確かめた (R2 へは未保存・note は未更新)。データ集 14 本の地図 (`choropleth-map.png`・`sample-map.png`) は商品工場の独自の描画器で、型を通っていない。
 - **済み (2026-11-10)**: `muni-manufacturing-shipment-data` は型の画像 11 枚へ差し替え、上限を 14 にした (`MUNI-INDUSTRY-PRODUCT-01`)。
 - **次**: 週次の `note:figures` で台帳が `product-sample` になったことを確かめる → データ集の見本は価格実験 `PRICE-DATA-PACK-2026-11` の判定 (2026-12-30) の後に、`DATA-PACK-BUNDLE-01` の作り替えと同じ差分で型へ移す。
+- **関連**: サイトの商品ページの見本の節も同じ spec から作る仕組みは `PRODUCT-LP-SHOWCASE-01`。データ集の spec はあちらの ④ と同じ差分で作る。
 - **停止条件・禁止**: 公開中の有料記事の書き換えは note への外部変更なので、記事ごとにオーナーの承認を取る。価格実験の判定前にデータ集 13 本の見せ方を変えない (効果を分けられなくなる)。
 - **完了条件**: 公開中の商品記事の見本画像がすべて型に結ばれ、`maxUntypedProductArticles` が 0 になっている。
 
@@ -3166,6 +3206,7 @@ updated: 2026-11-01
   中: `/products/data-p-01` の「含まれるもの」がファイル形式の列挙だけで、収録指標・年次・見本が無い。低: 表紙画像が無い。
   「14 点の編集可能データ」に「個別分析サービス」が混ざる。
 - **注意**: note・商品販売レーンは「維持」。新作や新チャネルは足さず、既存商品の説明の是正だけを行う。
+- **進み (2026-11-10)**: `/products/data-muni-manufacturing` に、比べる・構成・変化・ファイルの中身の見本 (11 枚) と実際の収録内容を載せた (commit `149629f56`)。全商品へ広げる仕組みとゲートは `PRODUCT-LP-SHOWCASE-01`。
 - **完了条件**: 各商品に固有の内容紹介と収録内容・見本があり、定型文だけのカードが 0 件。
 
 ### [GA4-FULL-MEASUREMENT-01] GA4 を全ページで使い切る (計測の是正 → 文脈・操作・成果 → API 登録 → 週次集計・BigQuery)
