@@ -63,7 +63,7 @@ function check(): void {
     console.error(`❌ 調査の切り口台帳: error ${errors} 件`);
     process.exit(1);
   }
-  console.log(`✓ 調査の切り口台帳: ${ledgers.length} 調査・切り口 ${lensCount} 件。問い ${analyses.filter((a) => a.lensIds?.length).length} 件・分析単位 ${units.length} 件の参照が一致`);
+  console.log(`✓ 調査の切り口台帳: ${ledgers.length} 調査・切り口 ${lensCount} 件。問い ${analyses.filter((a) => a.lensIds?.length).length} 件・分析単位 ${units.length} 件 (切り口 id の実在は check-datasets の refs)`);
 }
 
 function status(): void {

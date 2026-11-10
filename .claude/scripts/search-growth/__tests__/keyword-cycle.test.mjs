@@ -102,6 +102,21 @@ test('same-day reruns cannot choose another keyword after the first enters coold
   assert.equal(runCycle(repo,data).selected,null);
 });
 
+test('調査ハブの本文の台帳 (JSON) でも、その調査の記録の既存の文字列だけを置き換え、移す前の TS と同じ値なら同じ断片になる', () => {
+  const source=JSON.stringify({schemaVersion:1,entries:[{surveyId:'census',summary:'old summary',readerQuestions:[{question:'old question',rankingKey:'a'}]},{surveyId:'other',summary:'another summary'}]},null,2)+String.fromCharCode(10);
+  const patch={property:'summary',oldText:'old summary',newText:'検索利用者が必要とする年齢別・男女別の定義を説明する。'};
+  const patched=JSON.parse(applyTextPatches(source,[patch],'/survey/census'));
+  assert.equal(patched.entries[0].summary,patch.newText);
+  assert.equal(patched.entries[1].summary,'another summary');
+  assert.equal(applyTextPatches(source,[{property:'question',oldText:'old question',newText:'検索する人が知りたい年齢別の問いを具体的に説明する。'}],'/survey/census').includes('検索する人が知りたい'),true);
+  assert.throws(()=>applyTextPatches(source,[{...patch,oldText:'another summary'}],'/survey/census'));
+  assert.throws(()=>applyTextPatches(source,[{...patch,property:'robots'}],'/survey/census'));
+  assert.throws(()=>applyTextPatches(source,[{...patch,newText:'<script>noindex new structure</script>'}],'/survey/census'));
+  const legacy="const x = { census: { summary: 'old summary', readerQuestions: [{ question: 'old question', rankingKey: 'a' }] }, other: { summary: 'another summary' } };";
+  assert.equal(pageFragment(source,'/survey/census'),pageFragment(legacy,'/survey/census'));
+  assert.notEqual(pageFragment(source,'/survey/census'),pageFragment(source.replace('old summary','new summary'),'/survey/census'));
+  assert.equal(pageFragment(source,'/survey/census'),pageFragment(source.replace('another summary','changed'),'/survey/census'));
+});
 test('survey cooldown compares only the observed page, not the other surveys in its shared file', () => {
   const before="const x = { census: { summary: 'census' }, other: { summary: 'other' } };";
   assert.equal(pageFragment(before,'/survey/census'),pageFragment(before.replace("'other'","'updated'"),'/survey/census'));

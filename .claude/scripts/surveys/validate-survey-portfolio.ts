@@ -2,7 +2,7 @@
  * validate-survey-portfolio.ts — survey ポートフォリオ state の決定的 lint
  *
  * 対象: data/surveys/{portfolio,experiments}.json
- * schema・判定規律の正典: data/surveys/README.md
+ * 形: カタログの surveys.portfolio・surveys.experiments (Schema)。判定規律: このスクリプトと運用文書
  * 運用設計: .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md
  *
  * enforce する規律 (根拠なし判定・重複実験・drift を機械的に禁止する):

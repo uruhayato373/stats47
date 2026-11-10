@@ -48,18 +48,11 @@ export function checkLensLedgers({ ledgers, tablesBySurvey = new Map(), analyses
   }
 
   for (const a of analyses) {
-    for (const lensId of a.lensIds ?? []) {
-      if (!lensById.has(lensId)) findings.push({ level: "error", code: "UNKNOWN_LENS", message: `${a.id}: 切り口 ${lensId} が台帳に無い` });
-    }
     const covered = a.surveyIds.filter((s) => surveysWithLedger.has(s));
     if (covered.length && !NON_PRODUCTION.has(a.resolution) && !(a.lensIds ?? []).some((l) => covered.some((s) => surveysWithLedger.get(s)?.has(l)))) {
       findings.push({ level: "error", code: "UNLINKED_QUESTION", message: `${a.id}: 調査 ${covered.join(",")} の問いなのに、その調査の切り口 (lensIds) に結ばれていない` });
     }
   }
-  for (const u of units) {
-    if (!lensById.has(u.lensId)) findings.push({ level: "error", code: "UNKNOWN_LENS", message: `${u.id}: 切り口 ${u.lensId} が台帳に無い` });
-  }
-
   const usedLenses = new Set([...analyses.flatMap((a) => a.lensIds ?? []), ...units.map((u) => u.lensId)]);
   for (const id of lensById.keys()) {
     if (!usedLenses.has(id)) findings.push({ level: "warn", code: "LENS_WITHOUT_QUESTIONS", message: `${id}: 問いも分析単位もまだ無い` });

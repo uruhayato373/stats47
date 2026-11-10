@@ -35,6 +35,11 @@
       "import": "./src/provenance/resolve-metric-provenance.ts",
       "require": "./src/provenance/resolve-metric-provenance.ts"
     },
+    "./survey-editorial": {
+      "types": "./src/survey-editorial.ts",
+      "import": "./src/survey-editorial.ts",
+      "require": "./src/survey-editorial.ts"
+    },
     "./source-name-to-survey": {
       "types": "./src/ssds/source-name-to-survey.ts",
       "import": "./src/ssds/source-name-to-survey.ts",

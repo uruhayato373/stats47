@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/surveys.portfolio.schema.json",
+  "title": "調査ポートフォリオ",
+  "description": "data/surveys/portfolio.json の形の契約。調査ごとの評価 (紐付け・在庫・編集状態・GSC/GA4 の計測) を 1 調査 1 行で持つ。調査マスタ (surveys.master)・紐付け監査・R2 の app/survey/all.json・調査ハブの本文 (surveys.editorial)・計測 snapshot・レビュー文書から常に作り直せる派生物で、変動値 (GSC/GA4/在庫/評価) はここにだけ置き、調査マスタと本文に計測値を書かない。機械項目は build-survey-portfolio.ts が再導出し、意味項目 (lifecycleStatus / editorialStatus / currentHypothesis / evidenceRefs) は同スクリプトの --set で変える。手で編集しない。判定の規律 (根拠の最低数・標本数・観測期間・drift・鮮度) は validate-survey-portfolio.ts と、運用文書 .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md が持つ。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "linkage", "surveys"],
+  "definitions": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "week": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "metricStatus": {
+      "description": "measured = 集計済みで最低標本数以上 (カウント値も比率値も解釈できる) / measured-low = 集計済みだが最低標本数未満 (カウント値だけ保存し、比率値は標本不足でノイズ支配のため保存しない) / insufficient-data = 集計自体が未実施・取得不能 (数値を持たない) / not-instrumented = 計装が存在しない (数値を持たない)",
+      "enum": ["measured", "measured-low", "insufficient-data", "not-instrumented"]
+    },
+    "metricBase": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "$ref": "#/definitions/metricStatus" },
+        "windowDays": { "description": "56 = 期間の重複しない 2 つの週次窓 (最新週と 4 週前) の合算。週次 snapshot は各週 last-28d 窓なので、重複する窓を合算しない", "type": "integer", "minimum": 1 },
+        "weeks": { "description": "合算に使った週次窓", "type": "array", "items": { "$ref": "#/definitions/week" } }
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": { "description": "生成日。既定 35 日を超えると validate-survey-portfolio.ts が stale として止める", "$ref": "#/definitions/date" },
+    "linkage": {
+      "description": "全体の紐付けの要約 (audit-survey-linkage --json の転記)。未分類は調査に帰属できないので、調査ごとの行ではなくここが正",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["auditedAt", "metrics", "resolved", "unresolved", "coveragePct", "unresolvedByReason", "uncoveredStatsDataIds", "orphanSurveys", "badOverrides"],
+      "properties": {
+        "auditedAt": { "description": "既定 35 日を超えると stale", "$ref": "#/definitions/date" },
+        "metrics": { "$ref": "#/definitions/count" },
+        "resolved": { "$ref": "#/definitions/count" },
+        "unresolved": { "$ref": "#/definitions/count" },
+        "coveragePct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "unresolvedByReason": { "type": "object", "additionalProperties": { "$ref": "#/definitions/count" } },
+        "uncoveredStatsDataIds": { "$ref": "#/definitions/count" },
+        "orphanSurveys": { "$ref": "#/definitions/count" },
+        "badOverrides": { "$ref": "#/definitions/count" }
+      }
+    },
+    "surveys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "surveyId", "name", "organization", "lifecycleStatus", "linkageStatus", "editorialStatus", "itemCount", "activeItemCount",
+          "liveItemCount", "latestDataYear", "unresolvedItemCount", "orphanStatus", "editorialContentExists", "readerQuestionCount",
+          "relatedArticleCount", "gscSnapshotRef", "ga4SnapshotRef", "metrics", "currentHypothesis", "evidenceRefs", "lastReviewedAt", "nextReviewAt"
+        ],
+        "properties": {
+          "surveyId": { "description": "一意。調査マスタ (surveys.master) の id と双方向に一致する (マスタにある調査は全部ここにある)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "name": { "description": "調査マスタから転記 (ずれの検知用)", "type": "string", "minLength": 1 },
+          "organization": { "description": "調査マスタから転記", "type": ["string", "null"] },
+          "lifecycleStatus": {
+            "description": "意味項目。keep = 現状維持でよい / observe = 需要観測中 (既定) / improve = 改善作業中 / editorial-candidate = 編集ハブ化の候補 (根拠付き) / linkage-fix-required = 紐付けの是正が先 / merge-candidate・retire-candidate = 統合・廃止の候補 / insufficient-data = 判断する計測が足りない",
+            "enum": ["keep", "observe", "improve", "editorial-candidate", "linkage-fix-required", "merge-candidate", "retire-candidate", "insufficient-data"]
+          },
+          "linkageStatus": {
+            "description": "ok / r2-drift = 公開中の指標があるのに R2 に無い (本当の stale) / inactive-only = 在庫がすべて未公開 (R2 に無いのは正常) / orphan = 指標 0 件 / unknown = R2 を取得できなかった",
+            "enum": ["ok", "r2-drift", "inactive-only", "orphan", "unknown"]
+          },
+          "editorialStatus": {
+            "description": "意味項目。fallback = 本文なし (既定の表示) / candidate = ハブ化候補・監査前 / audit-ready = 事前監査済みで実装できる / implemented = 本文を実装済み / measuring = 本番に出して効果測定中 / validated = 効果確認済み / rejected = 監査の結果ハブ化しない。implemented・measuring・validated は surveys.editorial に本文があることと一致する",
+            "enum": ["fallback", "candidate", "audit-ready", "implemented", "measuring", "validated", "rejected"]
+          },
+          "itemCount": { "description": "紐付け監査の調査ごとの指標数 (git の導出。未公開の在庫を含む)", "$ref": "#/definitions/count" },
+          "activeItemCount": { "description": "公開中の指標数 (配信されるべき数。都道府県の指標のみ)", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
+          "liveItemCount": { "description": "R2 の app/survey/all.json の件数 (本番で配信中)。市区町村など都道府県以外の粒度も含むので activeItemCount より大きくなりうる", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
+          "latestDataYear": { "description": "集計では埋めない。編集ハブ候補の個別の事前監査で書く。未確認は null", "type": ["string", "null"] },
+          "unresolvedItemCount": { "description": "原則 null (未分類は調査に帰属できない)。個別の調査で確定した場合だけ数値", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
+          "orphanStatus": { "description": "itemCount が 0", "type": "boolean" },
+          "editorialContentExists": { "description": "surveys.editorial から導出", "type": "boolean" },
+          "readerQuestionCount": { "description": "surveys.editorial から導出 (本文なしは null)", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
+          "relatedArticleCount": { "description": "surveys.editorial の relatedArticleSlugs の件数 (無ければ null)", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
+          "gscSnapshotRef": { "description": "集計に使った GSC snapshot のパス", "type": ["string", "null"] },
+          "ga4SnapshotRef": { "description": "集計に使った GA4 snapshot のパス", "type": ["string", "null"] },
+          "metrics": {
+            "description": "実測の集計コピー。取れない値は status で明示し、推測値を入れない",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "gsc": {
+                "allOf": [{ "$ref": "#/definitions/metricBase" }],
+                "type": "object",
+                "properties": {
+                  "status": {}, "windowDays": {}, "weeks": {},
+                  "impressions": { "description": "合算した表示回数。最低標本数は 56 日で 100", "$ref": "#/definitions/count" },
+                  "clicks": { "$ref": "#/definitions/count" },
+                  "ctr": { "description": "合算 clicks / 合算 impressions。measured のときだけ", "type": "number" },
+                  "averagePosition": { "description": "表示回数で重みを付けた平均。measured のときだけ", "type": "number" }
+                },
+                "additionalProperties": false
+              },
+              "ga4": {
+                "allOf": [{ "$ref": "#/definitions/metricBase" }],
+                "type": "object",
+                "properties": {
+                  "status": {}, "windowDays": {}, "weeks": {},
+                  "landingPageViews": { "description": "screenPageViews の合算 (加算できる)。最低標本数は 56 日で 100", "$ref": "#/definitions/count" },
+                  "activeUsersLast28d": { "description": "週をまたいで加算できないので最新の窓だけ", "$ref": "#/definitions/count" },
+                  "engagementRatePvWeighted": { "description": "週次 snapshot に engagedSessions が無いため、pageViews で重みを付けた engagementRate で代える", "type": "number" },
+                  "avgSessionDurationSecPvWeighted": { "type": "number" }
+                },
+                "additionalProperties": false
+              },
+              "internalNav": {
+                "allOf": [{ "$ref": "#/definitions/metricBase" }],
+                "type": "object",
+                "properties": {
+                  "status": {}, "windowDays": {}, "weeks": {},
+                  "rankingOutboundClicks": { "description": "調査ページからランキングへの nav_click。最低標本数は 56 日で 20", "$ref": "#/definitions/count" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "currentHypothesis": { "description": "意味項目。無ければ null", "type": ["string", "null"] },
+          "evidenceRefs": { "description": "レビュー文書・実測・実験 ID への参照。merge-candidate・retire-candidate は 2 件以上、editorial-candidate は 1 件以上", "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "lastReviewedAt": { "description": "reviews/ の該当文書の日付 (無ければ null)", "anyOf": [{ "$ref": "#/definitions/date" }, { "type": "null" }] },
+          "nextReviewAt": { "anyOf": [{ "$ref": "#/definitions/date" }, { "type": "null" }] }
+        }
+      }
+    }
+  }
+}

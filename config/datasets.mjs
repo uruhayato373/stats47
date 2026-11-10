@@ -157,8 +157,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/kakei-analysis-catalog.ts", why: "pending", phase: 2 },
-  { path: "apps/web/src/features/survey/survey-editorial.ts", why: "pending", phase: 2 },
   { path: "packages/data-configs/src/categories.ts", why: "pending", phase: 3 },
   { path: "packages/data-configs/src/topics/catalogs/", why: "pending", phase: 3 },
   { path: "packages/data-configs/src/theme-catalog/evidence-lenses.ts", why: "pending", phase: 4 },
@@ -222,7 +220,6 @@ export const OUTSIDE_DATA = [
  * description に書く。縮小専用。形の契約を文章で持つ README は、JSON Schema と検査へ移してから消す。
  */
 export const DATA_README_PENDING = {
-  "data/surveys/README.md": "portfolio.json・experiments.json の形と判定の規律を文章で持つ。段 2 で JSON Schema へ移して消す",
   "data/themes/README.md": "portfolio.json・experiments.json の形と、別 PC での再開手順を文章で持つ。段 4 で JSON Schema と skill へ移して消す",
 };
 
@@ -283,11 +280,6 @@ export const REGISTRIES = {
   "ranking-content-keys": {
     description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
     union: ["metrics", "ranking-slug-redirects"],
-  },
-  "kakei-analyses": {
-    description: "家計調査の分析単位 (KAKEI_ANALYSES の id)。年収階級・世帯類型など属性別の系列を、問いの軸が指す",
-    files: ["packages/data-configs/src/kakei-analysis-catalog.ts"],
-    pattern: "^    id: '([a-z0-9][a-z0-9-]*)',$",
   },
   "ksj-datasets": {
     description: "国土数値情報の GIS 台帳 (GIS_DATASETS) の dataId",
@@ -397,7 +389,7 @@ export const DATASETS = [
       // 軸が使うデータ。指標と系列 (家計調査の分析単位) の実在をここで見る。粒度が合うかは npm run issues:check
       ...["explanatory", "outcome"].flatMap((side) => [
         { field: `issues[].axes.${side}.data[].metric`, to: "registry:metrics" },
-        { field: `issues[].axes.${side}.data[].series`, to: "registry:kakei-analyses" },
+        { field: `issues[].axes.${side}.data[].series`, to: "surveys.analysis-units", key: "units[].id" },
       ]),
     ],
   }),
@@ -682,7 +674,10 @@ export const DATASETS = [
   d("source-inventory.manifests", "data/source-inventory/{name}/{name}/source-bundle-manifest.json", "evidence", "data", "data", "参考文献 (教材) の資料・版ごとの source bundle manifest (Drive の版 folder の全 file の SHA)"),
   d("source-inventory.analyses", "data/source-inventory/{name}/{name}/analyses.json", "master", "data", "data", "参考文献 (教材) の分析企画。1 冊・1 版の問い・主張・採否・一次資料・展開先 (人と agent が判断して書く正本。展開先ごとの結果は expansion.json)", {
     schema: "data/source-inventory/analyses.schema.json",
-    refs: [{ field: "analyses[].issueIds[]", to: "content.issues", key: "issues[].id" }],
+    refs: [
+      { field: "analyses[].issueIds[]", to: "content.issues", key: "issues[].id" },
+      { field: "analyses[].lensIds[]", to: "surveys.lenses", key: "lenses[].id" },
+    ],
   }),
   d("source-inventory.analyses-schema", "data/source-inventory/analyses.schema.json", "schema", "data", "data", "上の分析企画の JSON Schema"),
   d("source-inventory.inventory", "data/source-inventory/{name}/{name}/inventory.json", "state", "data", "data", "参考文献のページ・項目単位の解決台帳 (source-inventory build が分析企画から生成)"),
@@ -694,7 +689,16 @@ export const DATASETS = [
   d("source-inventory.expansion-schema", "data/source-inventory/expansion.schema.json", "schema", "data", "data", "上の展開記録の JSON Schema"),
   d("source-inventory.placement-decisions", "data/source-inventory/placement-decisions.json", "ledger", "data", "data", "参考文献由来の指標の展開判断 (展開先ごとの planned / rejected / blocked と理由)", { schema: "data/source-inventory/placement-decisions.schema.json" }),
   d("source-inventory.placement-decisions-schema", "data/source-inventory/placement-decisions.schema.json", "schema", "data", "data", "上の展開判断の JSON Schema"),
-  d("surveys.portfolio", "data/surveys/{name}", "state", "data", "data", "調査ポートフォリオ・分類・実験"),
+  d("surveys.portfolio", "data/surveys/portfolio.json", "ledger", "data", "data", "調査ポートフォリオ (調査ごとの紐付け・在庫・編集状態・GSC/GA4 の計測と、編集ハブ化の判断)。機械項目は build-survey-portfolio.ts が再導出し、意味項目は同スクリプトの --set で変える。手で編集しない", {
+    schema: "config/schema/surveys.portfolio.schema.json",
+    refs: [{ field: "surveys[].surveyId", to: "surveys.master", key: "[].id" }],
+  }),
+  d("surveys.experiments", "data/surveys/experiments.json", "ledger", "data", "data", "調査ハブの改善実験台帳 (baseline・7/28/56 日の観測・判定)。観測と判定は evaluate-survey-experiments.mjs が書く", {
+    schema: "config/schema/surveys.experiments.schema.json",
+    refs: [{ field: "experiments[].surveyId", to: "surveys.master", key: "[].id" }],
+  }),
+  d("surveys.taxonomy", "data/surveys/taxonomy.json", "state", "data", "data", "ranking・テーマ・ブログの全量から調査への紐付けを横断監査した結果と、調査から各面への逆引き (audit-survey-taxonomy.ts が作る。手で編集しない)"),
+  d("surveys.kakei-coverage", "data/surveys/kakei-coverage.json", "state", "data", "data", "家計調査の表・品目の展開の到達状況 (report-kakei-coverage.ts が作る。未到達があっても監査は失敗にしない)"),
   d("surveys.lenses", "data/surveys/lenses/{name}.json", "master", "data", "data", "統計調査の切り口台帳 (調査ごとの分析の切り口・使う表と軸・粒度・誤読の注意・チャネルの役割。資料の問いと分析単位はここを参照する。展開の状況は持たない)", {
     schema: "config/schema/surveys.lenses.schema.json",
     refs: [
@@ -702,6 +706,25 @@ export const DATASETS = [
       { field: "relatedSurveyIds[]", to: "surveys.master", key: "[].id" },
     ],
   }),
+  d("surveys.analysis-units", "data/surveys/analysis-units/kakei-chousa.json", "master", "data", "data", "家計調査の分析単位 (どの表のどの軸を、どのページで答えるか。問いの軸 series がこの id で指す)。切り口は surveys.lenses が持ち、指標の出典・値は metric config と R2 が持つ。読み込みと整合検査は packages/data-configs/src/kakei-analysis-catalog.ts", {
+    schema: "data/surveys/analysis-units/analysis-units.schema.json",
+    refs: [
+      { field: "surveyId", to: "surveys.master", key: "[].id" },
+      { field: "units[].lensId", to: "surveys.lenses", key: "lenses[].id" },
+      { field: "units[].placement.pageId", to: "content.pages", key: "pages[].id" },
+      { field: "units[].placement.metricKey", to: "registry:metrics" },
+    ],
+  }),
+  d("surveys.analysis-units-schema", "data/surveys/analysis-units/analysis-units.schema.json", "schema", "data", "data", "上の分析単位の JSON Schema"),
+  d("surveys.editorial", "data/surveys/editorial/editorial.json", "ledger", "data", "data", "調査ハブ (/survey/<id>) の本文 (要約・分かること・読者の問い・数字を読む注意・関連記事)。1 調査 1 件。調査の名前・機関・URL は持たず、ranking への導線は指標キー、記事は slug で指す。読み込みは packages/data-configs/src/survey-editorial.ts", {
+    schema: "data/surveys/editorial/editorial.schema.json",
+    refs: [
+      { field: "entries[].surveyId", to: "surveys.master", key: "[].id" },
+      { field: "entries[].readerQuestions[].rankingKey", to: "registry:metrics" },
+      { field: "entries[].relatedArticleSlugs[]", to: "blog.articles", key: "articles[].slug" },
+    ],
+  }),
+  d("surveys.editorial-schema", "data/surveys/editorial/editorial.schema.json", "schema", "data", "data", "上の調査ハブの本文の JSON Schema"),
   d("surveys.master", "data/surveys/master/surveys.json", "master", "data", "data", "調査マスタ (/survey/<id> の正本。id・名前・機関・URL・親の出典。調査の名前・機関・URL を持つのはここだけで、出典名の対応表や切り口台帳は id で指す)", { schema: "data/surveys/master/surveys.schema.json" }),
   d("surveys.master-schema", "data/surveys/master/surveys.schema.json", "schema", "data", "data", "上の調査マスタの JSON Schema"),
   d("surveys.source-names", "data/surveys/master/source-names.json", "master", "data", "data", "出典の書き方 (SSDS の原典名・指標の displayName・e-Stat の統計表 ID) から調査マスタの id への対応表。調査の名前・機関・URL は持たない。解決の関数は packages/data-configs/src/ssds/source-name-to-survey.ts", {

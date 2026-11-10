@@ -10,7 +10,7 @@
  * 紐付けの導出ロジックは書かない: itemCount 等は audit-survey-linkage.ts (--json) の実測値を転記する
  * (resolveSurveyLinkage への一本化 — survey-linkage-standards.md §5)。
  *
- * schema・判定規律の正典: data/surveys/README.md
+ * 形: カタログの surveys.portfolio・surveys.experiments (Schema)。判定規律: validate-survey-portfolio.ts
  * 運用設計: .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md
  *
  * Usage:

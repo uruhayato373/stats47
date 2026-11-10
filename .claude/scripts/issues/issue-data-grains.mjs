@@ -2,7 +2,7 @@
  * 問いの軸 (issues[].axes.*.data) が指すデータの実在と粒度を、正本から読む。
  *
  *   指標の粒度 … 指標の定義 (data/metrics/<key>.ts) の entities と、全国のテーマのページ (japan-theme) が持つ指標
- *   系列        … 家計調査の分析単位 (REGISTRIES["kakei-analyses"]。年収階級・世帯類型など属性別の値)
+ *   系列        … 家計調査の分析単位 (カタログの surveys.analysis-units。年収階級・世帯類型など属性別の値)
  *
  * 粒度の語彙は config/schema/common.schema.json の grain (prefecture / municipality / japan / capital-city)。
  * アプリの型は別の語で書くので、読み替えはここだけで行う:
@@ -14,9 +14,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { REGISTRIES } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 import { METRIC_DEFINITIONS_DIR } from "../../../config/paths.mjs";
-import { resolveRegistry } from "../lib/check-datasets.mjs";
 
 const ENTITY_GRAIN = { prefecture: "prefecture", city: "municipality" };
 
@@ -50,5 +49,6 @@ export function readMetricGrains(root, pages) {
 
 /** @returns {Set<string>} 系列 (家計調査の分析単位) の ID */
 export function readSeriesIds(root) {
-  return resolveRegistry(REGISTRIES["kakei-analyses"], (file) => readFileSync(join(root, file), "utf8"));
+  const { units } = JSON.parse(readFileSync(join(root, datasetPath("surveys.analysis-units")), "utf8"));
+  return new Set(units.map((u) => u.id));
 }

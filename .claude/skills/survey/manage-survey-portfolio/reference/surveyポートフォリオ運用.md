@@ -124,7 +124,7 @@ data/surveys/experiments.json               ← 改善実験台帳 (baseline / �
 | 改善バックログへの登録・effect/* 判定 | **improvement-triage (排他 writer)** | 所定形式で引き渡すのみ |
 | 編集本文の執筆・紐付け是正 | survey-curator (従来責務) | 本人 (ポートフォリオ評価と同一 agent だが、効果判定は実測 + validator + triage が拘束) |
 
-## 3. 判定規律 (state README `data/surveys/README.md` が schema 正典)
+## 3. 判定規律 (形はカタログの surveys.portfolio・surveys.experiments の Schema、機械の検査は validate-survey-portfolio.ts)
 
 - 観測期間: **7 日 = インデックス/canonical/404/計測異常の検知のみ** (効果判定に使わない) /
   **28 日 = 暫定判定** / **56 日 = 基本判定**。
@@ -191,7 +191,7 @@ orphan survey / linkage 未解決が多い / ranking 在庫がほぼない (item
 
 - 紐付け正典: `.claude/rules/survey-linkage-standards.md` / 編集正典: `.claude/rules/survey-content-standards.md`
 - agent: `.claude/agents/survey-curator.md` / skill: `.claude/skills/survey/manage-survey-portfolio/SKILL.md`
-- state schema: `data/surveys/README.md`
+- state の形: カタログの surveys.portfolio・surveys.experiments (Schema)
 - builder: `.claude/scripts/surveys/build-survey-portfolio.ts` / validator: `.claude/scripts/surveys/validate-survey-portfolio.ts`
 - 紐付け監査 skill: `.claude/skills/db/audit-survey-linkage/SKILL.md` (紐付け層の是正はそちら)
 - 前例パターン: theme-portfolio-manager (`.claude/skills/theme/manage-theme-portfolio/`)

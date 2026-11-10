@@ -39,14 +39,13 @@ test("切り口台帳のある調査の問いが切り口に結ばれていな�
   assert.deepEqual(codes(checkLensLedgers({ ...base, analyses: context })), []);
 });
 
-test("存在しない切り口・表への参照と、理由の無い blocked を止める (調査 id の実在は check-datasets の refs が止める)", () => {
+test("存在しない表への参照と、理由の無い blocked を止める (調査 id・切り口 id の実在は check-datasets の refs が止める)", () => {
   const broken = {
     ...base,
     ledgers: [{ ...ledger, lenses: [...ledger.lenses, { id: "kakei-seasonality", name: "季節", dataTables: ["9999999999"], channels: { blog: "b" }, readiness: { state: "blocked" } }] }],
-    units: [...base.units, { id: "x", lensId: "kakei-no-such-lens" }],
   };
   const c = codes(checkLensLedgers(broken));
-  for (const code of ["UNKNOWN_TABLE", "BLOCKED_WITHOUT_REASON", "UNKNOWN_LENS"]) assert.ok(c.includes(code), code);
+  for (const code of ["UNKNOWN_TABLE", "BLOCKED_WITHOUT_REASON"]) assert.ok(c.includes(code), code);
 });
 
 test("lensStatus は台帳に書いたチャネルごとに、展開記録の行を切り口で数える", () => {

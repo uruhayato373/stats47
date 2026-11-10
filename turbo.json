@@ -36,7 +36,9 @@
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
-        "$TURBO_ROOT$/data/surveys/master/*.json"
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json"
       ]
     },
     "lint": {
@@ -45,7 +47,9 @@
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
-        "$TURBO_ROOT$/data/surveys/master/*.json"
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json"
       ]
     },
     "type-check": {
@@ -54,7 +58,9 @@
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
-        "$TURBO_ROOT$/data/surveys/master/*.json"
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json"
       ]
     },
     "test": {
@@ -66,7 +72,9 @@
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
         "$TURBO_ROOT$/data/themes/catalogs/*.json",
-        "$TURBO_ROOT$/data/surveys/master/*.json"
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json"
       ]
     },
     "dev": {

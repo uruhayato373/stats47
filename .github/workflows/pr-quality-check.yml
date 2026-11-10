@@ -775,7 +775,7 @@ jobs:
         # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
         # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
-        # (本文生成・R2 push・deploy は行わない)。正典: data/surveys/README.md
+        # (本文生成・R2 push・deploy は行わない)。形: カタログの surveys.portfolio・surveys.experiments (Schema)
         run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
         continue-on-error: false
 
