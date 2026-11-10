@@ -1,0 +1,60 @@
+name: 🏭 e-Stat muni industry (市区町村 × 製造業の業種)
+
+# 市区町村 × 製造業の業種 (産業中分類) の製造品出荷額等を、e-Stat の地域編の表から取る。read-only (R2・git に書かない)。
+# e-Stat の appId は CI 専任。出力は e-Stat の公開値を「年・自治体・業種」に分けて並べ直した JSON だけで、
+# そろえた CSV・境界・README などの販売物は作らない (公開リポジトリの artifact は誰でも取れるため)。
+# 取り込み: gh run download <run> -n estat-muni-industry -D .local/muni-data-products/_cache/industry
+# のあと、Mac で build-muni-data-product.mjs を appId なしで回す。
+# 呼び出し: .claude/scripts/products/fetch-estat-muni-industry.mjs
+
+on:
+  workflow_dispatch:
+    inputs:
+      stats_data_ids:
+        description: "e-Stat の統計表 ID (市区町村 × 産業中分類の地域編。カンマ区切り)"
+        required: false
+        default: "0004048588,0004028808,0004035178"
+      areas:
+        description: "自治体コード (5 桁・カンマ区切り) か all"
+        required: false
+        default: "all"
+  push:
+    branches: [develop]
+    paths:
+      - ".github/workflows/estat-muni-industry.yml"
+      - ".claude/scripts/products/fetch-estat-muni-industry.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 📦 Install
+        run: npm ci
+
+      - name: 🏭 Fetch municipal industry rows
+        env:
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+          STATS_DATA_IDS: ${{ inputs.stats_data_ids || '0004048588,0004028808,0004035178' }}
+          AREAS: ${{ inputs.areas || 'all' }}
+        run: node .claude/scripts/products/fetch-estat-muni-industry.mjs --stats-data-ids "$STATS_DATA_IDS" --areas "$AREAS" --out "$RUNNER_TEMP/estat-muni-industry"
+
+      - name: 📤 Upload rows
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: estat-muni-industry
+          path: ${{ runner.temp }}/estat-muni-industry
+          if-no-files-found: error
+          retention-days: 7
