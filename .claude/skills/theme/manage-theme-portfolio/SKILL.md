@@ -16,7 +16,7 @@ schema・判定規律の正典: `data/themes/README.md`。
 
 | 作業 | 必読 |
 |---|---|
-| 1 テーマの指標・図・章の改善を提案する (表 1〜3・承認・検証の形) | `reference/theme-proposal-format.md`、視点は `config/theme-selection-viewpoints.json` (管理画面 `/quality/theme-viewpoints`) |
+| 1 テーマの指標・図・章の改善を提案する (表 1〜3・承認・検証の形) | `reference/theme-proposal-format.md`、視点は `data/themes/viewpoints/selection.json` (管理画面 `/quality/theme-viewpoints`) |
 | 採択済みの指標・チャート改善を実装へ渡す | `reference/theme-improvement-execution.md` |
 | 定義・比較時の注意カードを実装する | `reference/theme-guidance-implementation.md` |
 | keep/split/merge/parent-hub判定やURL移行を設計する | `reference/theme-taxonomy-reorganization.md` |

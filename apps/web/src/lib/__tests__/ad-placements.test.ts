@@ -3,12 +3,12 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import placements from '../../../../../config/ads/placements.json';
+import placements from '../../../../../data/ads/placements.json';
 import { AFFILIATE_ADS } from '../../../scripts/affiliate-ads-data';
 import { adSlotType } from '../ad-placements';
 
 /**
- * 広告の枠の台帳 (config/ads/placements.json) とコードの照合 (2026-10-29 新設。同日ランキングを載せて一般化)。
+ * 広告の枠の台帳 (data/ads/placements.json) とコードの照合 (2026-10-29 新設。同日ランキングを載せて一般化)。
  *
  * 台帳は「どの枠を、どのページの、どこに置くか」の正本。コードと別々に直すとずれるので、次をここで止める:
  *  (a) 置き方の目印 (marker) が、そのファイル (source) に台帳と同じ順である
@@ -49,7 +49,7 @@ function locate(list: Placement[]) {
   });
 }
 
-describe('広告の枠の台帳 (config/ads/placements.json)', () => {
+describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   it('ページの置き方が指す枠の種類は台帳にある', () => {
     for (const [page, list] of Object.entries(PAGES)) {
       for (const placement of list) expect(() => adSlotType(placement.slot), `${page}: ${placement.slot}`).not.toThrow();
@@ -149,7 +149,7 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
       }
     };
     walk('apps/web/src');
-    expect(unlisted, '台帳の config/ads/placements.json の pages に載せる').toEqual([]);
+    expect(unlisted, '台帳の data/ads/placements.json の pages に載せる').toEqual([]);
   });
 
   // 2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさ。幅に合わせて伸びる広告は、同日の本番の実測で

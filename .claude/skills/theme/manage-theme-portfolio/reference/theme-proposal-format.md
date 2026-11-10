@@ -13,7 +13,7 @@ fishery-marine・local-economy の 3 テーマをこの形で提案し、承認�
 
 ## 判断の基準
 
-指標を選ぶ視点は `config/theme-selection-viewpoints.json` が正本で、管理画面
+指標を選ぶ視点は `data/themes/viewpoints/selection.json` が正本で、管理画面
 `/quality/theme-viewpoints` で全テーマの該当箇所を見られる。提案の「理由」列には、どの視点で判断したかを
 視点の id (例: `card-chart-duplicate`) か、その規則の言葉で書く。視点に無い判断をしたら、提案のあとで
 視点の JSON に足すかをオーナーに確かめる (提案の中で黙って新しい基準を作らない)。
@@ -32,7 +32,7 @@ fishery-marine・local-economy の 3 テーマをこの形で提案し、承認�
 (`.claude/state/metrics/model-usage/canary/2026-10-07-theme-designer-claude-opus-5-5-high-vs-claude-opus-5-5-medium.json`)。
 提案も実装も medium を既定にする。両方の effort で落ちやすいのは「他テーマの主指標を一覧からも外す」と
 「総額は人口の多い県ほど大きいと注記する」の 2 つで、どちらも視点 (`owned-elsewhere`・`scale-vs-rate`) に書いてあるので、
-提案の前に `config/theme-selection-viewpoints.json` を読む。
+提案の前に `data/themes/viewpoints/selection.json` を読む。
 
 ## 置き場と状態
 

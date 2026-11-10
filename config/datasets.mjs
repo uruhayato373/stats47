@@ -127,11 +127,6 @@ export const SYSTEM_CONFIG = {
  * ここへ新しく足さない。
  */
 export const CONFIG_MOVE_PENDING = {
-  "admin.domains": "段 4",
-  "kdp.listings": "段 4",
-  "note.hashtags": "段 4",
-  "ads.placements": "段 4",
-  "themes.selection-viewpoints": "段 4",
 };
 
 /**
@@ -157,7 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/theme-catalog/evidence-lenses.ts", why: "pending", phase: 4 },
   { path: "apps/web/src/config/ranking-redirects.ts", why: "pending", phase: 5 },
   { path: "apps/web/src/config/blog-redirects.ts", why: "pending", phase: 5 },
   { path: "apps/web/src/config/legacy-theme-redirects.ts", why: "pending", phase: 5 },
@@ -317,7 +311,7 @@ export const DATASETS = [
   d("config.paths", "config/paths.{name}", "config", "ops", "config", "config/ の置き場の定数 (コードが import する)"),
   d("config.inbound-utm", "config/inbound-utm.{name}", "config", "product", "config", "商品 (Kindle・note) からサイトへ戻るリンクの UTM 規約 (コードが import する)"),
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
-  d("kdp.listings", P.KDP_LISTINGS, "ledger", "product", "config", "KDP の出品内容と公開・審査状態", { schema: "config/schema/kdp.listings.schema.json" }),
+  d("kdp.listings", P.KDP_LISTINGS, "ledger", "product", "data", "KDP の出品内容と公開・審査状態", { schema: "config/schema/kdp.listings.schema.json" }),
   d("image.routes", "config/image-generation-routes.json", "config", "ops", "config", "AI 画像の生成経路の登録 (未登録の画像 API 呼び出しを止める)", { schema: "config/schema/image-generation-routes.schema.json" }),
   d("kdp.listing-copy", P.KDP_LISTING_COPY, "ledger", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", { schema: "config/schema/kdp.listing-copy.schema.json" }),
   d("kdp.cover-thumbnail-checks", P.KDP_COVER_THUMBNAIL_CHECKS, "ledger", "product", "data", "KDP の表紙を検索結果の大きさに縮めて目で確かめた記録 (表紙の SHA ごと。公開の前提)", { schema: "config/schema/kdp.cover-thumbnail-checks.schema.json" }),
@@ -325,7 +319,7 @@ export const DATASETS = [
   d("note.account", P.NOTE_ACCOUNT, "config", "product", "config", "note の期待アカウント", { schema: "config/schema/note.account.schema.json" }),
   d("asp.connection", P.AFFILIATE_ASP, "config", "affiliate", "config", "A8 / もしも / afb の接続設定とサイト帰属", { schema: "config/schema/asp.connection.schema.json" }),
   d("a8.report-automation", P.A8_REPORT_AUTOMATION, "config", "affiliate", "config", "A8 レポート収集の設定と programIdMap", { schema: "config/schema/a8.report-automation.schema.json" }),
-  d("admin.domains", P.DOMAINS, "master", "strategy", "config", "領域の正本 (管理画面のメニュー・backlog の領域タグ)", { schema: "config/schema/admin.domains.schema.json" }),
+  d("admin.domains", P.DOMAINS, "master", "strategy", "data", "領域の正本 (管理画面のメニュー・backlog の領域タグ)", { schema: "config/schema/admin.domains.schema.json" }),
   d("config.schemas", "config/schema/{name}.schema.json", "schema", "ops", "config", "マスタ・台帳・設定の JSON の形の契約 (JSON Schema。ファイル名はカタログの id)"),
   d("psi.urls", P.PSI_URLS, "config", "site", "config", "PSI の計測対象 URL"),
   d("local.resources", P.LOCAL_RESOURCES, "config", "ops", "config", "端末の容量予算・掃除対象・保持日数", { schema: "config/schema/local.resources.schema.json" }),
@@ -349,7 +343,7 @@ export const DATASETS = [
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.cover-policies", "data/note/cover-policies.json", "master", "product", "data", "noteカバーのカテゴリ別方針ID・版・プロンプト", { schema: "data/note/cover-policies.schema.json" }),
   d("note.cover-policies-schema", "data/note/cover-policies.schema.json", "schema", "product", "data", "カバー方針のJSON Schema"),
-  d("note.hashtags", "config/note-hashtags/{name}.json", "ledger", "product", "config", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", {
+  d("note.hashtags", `${P.NOTE_HASHTAGS_DIR}/{name}.json`, "ledger", "product", "data", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", {
     schema: "config/schema/note.hashtags.schema.json",
     // title・noteUrl・vertical は記事台帳の写し。記事の題名を変えたら同じ差分で直す (2026-10-26 に 8 件ずれていた)
     refs: [{ field: "slug", to: "note.articles", key: "articles[].key", copies: ["title", "noteUrl", "vertical"] }],
@@ -363,7 +357,13 @@ export const DATASETS = [
   d("metrics.index", `${P.METRIC_DEFINITIONS_DIR}/index/{name}.json`, "state", "data", "data", "指標の出典座標と利用先の逆引き索引"),
   d("metrics.display-units", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.json`, "state", "data", "data", "公開中の都道府県ランキングごとの図の表示単位・倍率・小数桁と最新年の最大・最小 (build-chart-display-units.ts が R2 の値と規則から生成。手で編集しない)", { schema: `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json` }),
   d("metrics.display-units-schema", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json`, "schema", "data", "data", "上の台帳の JSON Schema"),
-  d("themes.catalogs", "data/themes/catalogs/{name}.json", "master", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", { schema: "data/themes/schema/theme-catalog.schema.json" }),
+  d("themes.catalogs", "data/themes/catalogs/{name}.json", "master", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", {
+    schema: "data/themes/schema/theme-catalog.schema.json",
+    refs: [
+      { field: "evidenceTopics[].lensKey", to: "themes.evidence-lenses", key: "lenses.$keys" },
+      { field: "evidenceTopics[].sourceKeys[]", to: "themes.evidence-lenses", key: "sources.$keys" },
+    ],
+  }),
   d("content.tags", "data/content/tags.json", "master", "data", "data", "タグの不変ID・表示名・既存URLキー・別名", { schema: "data/content/schema/tags.schema.json" }),
   d("content.routes", "data/content/routes.json", "master", "data", "data", "全公開ページ種別のIDとURLパラメータ契約", { schema: "data/content/schema/routes.schema.json" }),
   d("content.navigation", "data/content/navigation.json", "master", "data", "data", "回遊関係の意味・優先度・件数と明示的な紐付け", {
@@ -435,7 +435,16 @@ export const DATASETS = [
   d("themes.composition-sets", "data/themes/compositions/sets.json", "state", "data", "data", "足すと全体になる指標の組。テーマのカタログの積み上げから作る生成物 (build-composition-ledger.ts)", { schema: "data/themes/schema/composition-sets.schema.json" }),
   d("themes.composition-sets-schema", "data/themes/schema/composition-sets.schema.json", "schema", "data", "data", "上の台帳の JSON Schema"),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "schema", "data", "data", "上の定義の JSON Schema"),
-  d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "master", "data", "config", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
+  d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "master", "data", "data", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
+  d("themes.evidence-lenses", "data/themes/viewpoints/evidence-lenses.json", "master", "data", "data", "論点レンズ (lenses) と白書・報告書の出典 (sources)。テーマの evidenceTopics が lensKey・sourceKeys で指す。読み込みは packages/data-configs/src/theme-catalog/evidence-lenses.ts", { schema: "config/schema/themes.evidence-lenses.schema.json" }),
+  d("themes.public-dashboards", "data/themes/research/public-dashboards.json", "ledger", "data", "data", "公式ダッシュボードの研究カタログ (調べた公式ダッシュボードと、その問い・指標・可視化・ストーリー構成。調査日と検証日を持つ記録)。検査は check-public-dashboard-catalog.mjs、読み手は管理画面の研究ページ", {
+    schema: "config/schema/themes.public-dashboards.schema.json",
+    refs: [
+      { field: "stats47ThemeKeys[]", to: "themes.catalogs", key: "key" },
+      { field: "stories[].stats47ThemeKeys[]", to: "themes.catalogs", key: "key" },
+      { field: "stories[].dashboardId", to: "themes.public-dashboards", key: "dashboards[].id" },
+    ],
+  }),
   d("seo.keywords", "data/seo/keywords.json", "state", "site", "data", "キーワード改善サイクルの対象キーワード"),
   d("seo.selections", "data/seo/selections/{date}.json", "series", "site", "data", "週ごとの対象キーワードの選定"),
   d("seo.rank-history", "data/seo/rank-history/{date}.json", "series", "site", "data", "対象キーワードの順位の観測"),
@@ -766,7 +775,7 @@ export const DATASETS = [
   d("design.proposals", "assets/design-proposals/{name}", "asset", "site", "assets", "デザイン提案の画像"),
   d("design.reference", "assets/design-reference/{**}", "asset", "site", "assets", "参考サイト (shadcndashboard・Flowly など) の撮影と部品ごとの実測値。どれを参考にするかは台帳 design.references"),
   d("design.references", "data/design-references/references.json", "ledger", "site", "data", "参考サイトの台帳 (URL・採否と理由・撮影と実測の置き場・反映先)。管理画面「サイト > 参考サイト」が読む", { schema: "config/schema/design.references.schema.json" }),
-  d("ads.placements", "config/ads/placements.json", "master", "site", "config", "広告の枠の台帳 (大きさの語彙・枠の種類と箱の寸法・ページごとの置き方・共通のルール)。ページの置き方は apps/web の ad-placements テストがコードと照合する", { schema: "config/schema/ads.placements.schema.json" }),
+  d("ads.placements", P.ADS_PLACEMENTS, "master", "site", "data", "広告の枠の台帳 (大きさの語彙・枠の種類と箱の寸法・ページごとの置き方・共通のルール)。ページの置き方は apps/web の ad-placements テストがコードと照合する", { schema: "config/schema/ads.placements.schema.json" }),
   d("design.components", "data/design/components.json", "ledger", "site", "data", "部品の台帳 (部品の種類ごとの役割・正典の実装・枠・寸法・見本の採用元・使わない場面・検査)。props との一致は apps/web の design-components-ledger テストが照合する", { schema: "config/schema/design.components.schema.json" }),
   d("note.assets", "assets/note/{**}", "asset", "product", "assets", "note の背景・見出し・マガジン表紙の原本と生成の説明・マニフェスト"),
   d("affiliate.banners", "assets/affiliate-banners/{name}", "asset", "affiliate", "assets", "note 記事に貼るアフィリエイトのバナー画像"),
@@ -912,11 +921,17 @@ export const RETIRED = [
   { from: ".claude/state/sns/buzz-map-attribution-", to: "data/sns/buzz-map-attribution-", since: "2026-10-06" },
   { from: ".claude/state/sns/post-log.md", to: "data/sns/post-log.md", since: "2026-10-06" },
   { from: ".claude/state/sns/posts.json", to: "data/sns/posts.json", since: "2026-10-06" },
-  { from: "data/note/hashtags", to: "config/note-hashtags", since: "2026-10-06" },
   // 調査マスタ (2026-11-10 に packages/ から data/surveys/master/ へ。出典名の対応も同じ場所に JSON で置いた)
   { from: "packages/ranking/src/data/surveys", to: "data/surveys/master", since: "2026-11-10" },
   // カテゴリ・トピックのマスタ (2026-11-10 に packages/data-configs/src から data/categories/ へ。キーの型は JSON から生成する)
   { from: "packages/data-configs/src/topics/catalogs", to: "data/categories/topics", since: "2026-11-10" },
+  // config/ の業務マスタ・台帳と、skill 内の研究カタログ (2026-11-10 に data/ へ。config/ はシステムの設定だけ)
+  { from: "config/domains.json", to: "data/business/domains.json", since: "2026-11-10" },
+  { from: "config/kdp-listings.json", to: "data/products/kdp/listings.json", since: "2026-11-10" },
+  { from: "config/note-hashtags", to: "data/note/hashtags", since: "2026-11-10" },
+  { from: "config/ads/placements.json", to: "data/ads/placements.json", since: "2026-11-10" },
+  { from: "config/theme-selection-viewpoints.json", to: "data/themes/viewpoints/selection.json", since: "2026-11-10" },
+  { from: "research-theme-catalog/reference/public-dashboard-catalog.json", to: "data/themes/research/public-dashboards.json", since: "2026-11-10" },
   { from: "sync-survey-master", to: "(廃止。対応表は調査の id だけを持つので、調査マスタへ同期するものが無い)", since: "2026-11-10" },
 ];
 

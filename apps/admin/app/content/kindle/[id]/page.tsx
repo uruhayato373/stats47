@@ -46,7 +46,7 @@ export default async function KindleBookPage({
 
   return (
     <>
-      <PageHeading title={book.title} source={`${book.epubPath} (出品台帳 kdp-listings.json の epubPath)`}>
+      <PageHeading title={book.title} source={`${book.epubPath} (出品台帳 kdp.listings の epubPath)`}>
         <p className="text-sm text-muted-foreground">
           {book.id}
           {book.asin ? ` · ASIN ${book.asin}` : ""}

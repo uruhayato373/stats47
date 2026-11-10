@@ -32,7 +32,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
   `data/affiliate/placement-map-latest.json` (`build-placement-map.mjs` が週次 cron で生成) を維持する。
   propose は**この state を読む** (GSC×在庫×EPC の目視 JOIN は禁止 — 再現性が無く見落とすため)。
   配置を目で議論するときは、開発サーバーから `npx tsx .claude/scripts/ads/capture-ad-layout.ts` で台帳
-  (`config/ads/placements.json`) の全ページの種類 × 390/768/1440px を撮り (`.local/ad-layout/<日付>/`)、管理画面 `/affiliate/layout` で見せる。
+  (`data/ads/placements.json`) の全ページの種類 × 390/768/1440px を撮り (`.local/ad-layout/<日付>/`)、管理画面 `/affiliate/layout` で見せる。
   `reverseCandidates` の `shared: true` は doboku-note と同一 A8 口座の共用案件で、EPC は口座横断の実績。
   stats47 単独の実力として扱わない。`suggestedRankingKeys` は候補であって適用ではない (ブランド適合は意味判断)。
 - **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `data/affiliate/inventory-latest.json` の `coverage` から読む (固定値を持たない)。

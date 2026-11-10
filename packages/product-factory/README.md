@@ -17,7 +17,7 @@ PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2
   `sourceIds` に由来情報として残す。
 - `src/build/` と `src/generators/` に PPTX / XLSX / CSV / SVG / PNG / PDF / 販売文 /
   manifest / readiness の生成器を実装済み。
-- 設計statusは `packs.ts`、外部公開実績は note が `data/note/articles.json`、Kindle が `config/kdp-listings.json`。
+- 設計statusは `packs.ts`、外部公開実績は note が `data/note/articles.json`、Kindle が `data/products/kdp/listings.json`。
   生成・公開・販売品質を同じstatusで代用しない。横断一覧は `products:report` で再生成する。
 - PowerPoint / Excel の構造検証と自動テストは実装済み。Windows/Mac Office実機での表示、
   再着色、再計算は人間が `READINESS.md` に沿って確認する。

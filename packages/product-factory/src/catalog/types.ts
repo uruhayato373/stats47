@@ -60,7 +60,7 @@ export type ProductRisk = "normal" | "high-stakes" | "rights-review";
 /**
  * 商品定義のライフサイクル状態。cataloged から approved まで一方向に進む。
  * 販売先での公開状態はここに持たない (2026-10-27)。note は data/note/articles.json、KDP は
- * config/kdp-listings.json が正本。旧 "listed" は撤退したココナラの出品を写していて実態と食い違ったので型から外した。
+ * data/products/kdp/listings.json が正本。旧 "listed" は撤退したココナラの出品を写していて実態と食い違ったので型から外した。
  */
 export type ProductStatus =
   | "cataloged"

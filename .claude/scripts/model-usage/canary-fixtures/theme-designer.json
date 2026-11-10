@@ -1,5 +1,5 @@
 {
-  "_doc": "theme-designer の canary。2026-10-06 にオーナーが承認した local-economy の見直し (reviews/2026-10-06-theme-local-economy.md) を、見直し前の構成から当てさせる。課題文に正解語句 (重複・年固定・主担当・つながない・人口が多い県ほど) を入れない。正解は config/theme-selection-viewpoints.json の判断規則に対応する",
+  "_doc": "theme-designer の canary。2026-10-06 にオーナーが承認した local-economy の見直し (reviews/2026-10-06-theme-local-economy.md) を、見直し前の構成から当てさせる。課題文に正解語句 (重複・年固定・主担当・つながない・人口が多い県ほど) を入れない。正解は data/themes/viewpoints/selection.json の判断規則に対応する",
   "agent": "theme-designer",
   "fixtureVersion": 1,
   "cases": [

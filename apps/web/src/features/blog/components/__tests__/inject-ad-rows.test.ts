@@ -2,7 +2,7 @@
  * 本文への広告の段の差し込み (injectAdRows) のテスト (2026-11-03)。
  *
  * 位置計算・手で置いた広告の尊重・見出し不足のときの段の減らし方が絡み、目視では退行を検知できない。
- * 配置の正本: config/ads/placements.json の blog
+ * 配置の正本: data/ads/placements.json の blog
  */
 import { describe, expect, it } from "vitest";
 

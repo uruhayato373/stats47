@@ -15,7 +15,7 @@
  *     オーナー承認時のみ。KDP 公開は outward-facing・取り下げに時間がかかるため特に慎重に。
  *
  * SSOT: 出品内容 (title/description/keywords/price/epubPath 等) と公開状態 (status/asin) は
- *   config/kdp-listings.json。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS。
+ *   data/products/kdp/listings.json。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS。
  * ---------------------------------------------------------------------------
  */
 import { chromium } from "playwright";
@@ -65,7 +65,7 @@ export function readAccount() {
   return { ...read(ACCOUNT_PATH), ...read(ACCOUNT_LOCAL_PATH) };
 }
 
-/** kdp-listings.json を読む → { listings }。 */
+/** kdp.listings を読む → { listings }。 */
 function readListingsFile() {
   try {
     const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));

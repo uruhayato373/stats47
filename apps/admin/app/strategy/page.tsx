@@ -7,7 +7,7 @@ import { businessPlanAdminData } from "@/lib/server/business-plan";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "方針 — stats47 admin" };
 
-/** 判断の基準として読むものへの入口。どこに何があるかは領域の正本 config/domains.json が割り振る。 */
+/** 判断の基準として読むものへの入口。どこに何があるかは領域の正本 data/business/domains.json が割り振る。 */
 const LINKS = [
   { href: "/docs/00_プロジェクト管理/02_収益化戦略", title: "収益化戦略", body: "領域と構え・意思決定ゲート・検証規律の正本" },
   { href: "/strategy/policy", title: "共通方針", body: "3 プロジェクト共通の HARM と判断の問い" },

@@ -1,5 +1,5 @@
 /**
- * 広告の配置の一覧の撮影 (2026-11-03)。広告の枠の台帳 (config/ads/placements.json) の全てのページの種類を、
+ * 広告の配置の一覧の撮影 (2026-11-03)。広告の枠の台帳 (data/ads/placements.json) の全てのページの種類を、
  * モバイル 390・タブレット 768・デスクトップ 1440 の 3 幅で撮り、広告の枠に色付きの枠線とラベルを重ねる。
  * 管理画面の「広告の配置」(/affiliate/layout) が manifest を読み、台帳の定義と並べて見せる。
  *
@@ -24,10 +24,11 @@ import { chromium, type Page } from "playwright";
 import { VIEWPORTS, type ViewportSpec } from "../page-quality/lib/screenshots";
 import { scrollThroughPage } from "../page-quality/lib/ui-probe";
 
+import { ADS_PLACEMENTS } from "../../../config/paths.mjs";
 import { adsenseUnitNames, unitOfEntry } from "./lib/ad-layout-ledger";
 
 const REPO_ROOT = resolve(__dirname, "../../..");
-const PLACEMENTS_PATH = join(REPO_ROOT, "config/ads/placements.json");
+const PLACEMENTS_PATH = join(REPO_ROOT, ADS_PLACEMENTS);
 const OUT_ROOT = join(REPO_ROOT, ".local/ad-layout");
 /** slotId (番号) → ユニットの定数名 */
 const unitNames = adsenseUnitNames(REPO_ROOT);

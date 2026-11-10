@@ -185,7 +185,7 @@ TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよ�
 - 収益直結記事の企画 → `/monetize-article`
 - ランキング等へのバナー枠追加 (レンダリング変更) → 別 PR。`.claude/rules/nextjs-ssg-preservation.md` 厳守 (SSG 崩さない)
   本文の広告は広告の段 (`features/ads/components/slots/AdRow.tsx` + `composeAdRows`) で足し、置き場所と段の中身を
-  `config/ads/placements.json` に書く (`ad-placements.test.ts` が照合)。変えたら開発サーバーから
+  `data/ads/placements.json` に書く (`ad-placements.test.ts` が照合)。変えたら開発サーバーから
   `npx tsx .claude/scripts/ads/capture-ad-layout.ts --pages <種類>` で 390/768/1440px を撮り、管理画面 `/affiliate/layout` で確かめる
 
 ## 関連ファイル

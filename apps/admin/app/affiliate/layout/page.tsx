@@ -13,6 +13,7 @@ import {
   placementDefinitions,
 } from "@/lib/server/ad-layout";
 import { buttonVariants } from "@stats47/components";
+import { ADS_PLACEMENTS } from "../../../../../config/paths.mjs";
 
 export const metadata: Metadata = {
   title: "広告の配置 — stats47 管理コンソール",
@@ -166,7 +167,7 @@ function PageTypePanel({ manifest, pageType, defs }: { manifest: AdLayoutManifes
 
 /**
  * /affiliate/layout — 広告の配置をページの種類 × 画面の幅のスクショで見る。型 B (一覧): ページの種類ごとに 3 幅を横に並べ、
- * 下に撮影で見つけた枠と広告の枠の台帳 (config/ads/placements.json) の定義を並べる。読み取り専用。
+ * 下に撮影で見つけた枠と広告の枠の台帳 (data/ads/placements.json) の定義を並べる。読み取り専用。
  * 撮影は開発サーバーから `npx tsx .claude/scripts/ads/capture-ad-layout.ts` (.local/ad-layout/<日付>/)。
  */
 export default async function AdLayoutPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
@@ -175,7 +176,7 @@ export default async function AdLayoutPage({ searchParams }: { searchParams: Pro
   if (!manifest) {
     return (
       <>
-        <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/<日付>/manifest.json + config/ads/placements.json`} />
+        <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/<日付>/manifest.json + ${ADS_PLACEMENTS}`} />
         <PanelCard title="まだ撮影していません">
           <p className="m-0 text-sm">
             開発サーバーを起動し (npm run dev:web)、撮影します (npx tsx .claude/scripts/ads/capture-ad-layout.ts)。
@@ -192,7 +193,7 @@ export default async function AdLayoutPage({ searchParams }: { searchParams: Pro
 
   return (
     <>
-      <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/${manifest.date}/manifest.json + config/ads/placements.json`} />
+      <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/${manifest.date}/manifest.json + ${ADS_PLACEMENTS}`} />
       <Stack>
         <p className="m-0 text-sm text-muted-foreground">
           {new Date(manifest.generatedAt).toLocaleString("ja-JP")} に {manifest.baseUrl} から撮影 ({manifest.shots.length} 枚

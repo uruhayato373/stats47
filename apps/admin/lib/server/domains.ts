@@ -3,7 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
-import domainsConfig from "../../../../config/domains.json";
+import domainsConfig from "../../../../data/business/domains.json";
 
 import { projectRoot } from "./project-root";
 import { resolveSafe } from "./safe-local-file";
@@ -11,7 +11,7 @@ import { cached, frontmatterValue } from "./state-io";
 import { strategyLaneBoard, type LaneCard } from "./strategy-lanes";
 
 /**
- * 領域 (config/domains.json) ごとの概要と、docs/ の文書の一覧・本文 (doboku-note admin-app の /domains・/docs と同じ役割)。
+ * 領域 (data/business/domains.json) ごとの概要と、docs/ の文書の一覧・本文 (doboku-note admin-app の /domains・/docs と同じ役割)。
  * 文書の領域は check-domains.cjs の documentDomain (documents の最長一致) をそのまま使い、判定を二重に持たない。
  */
 

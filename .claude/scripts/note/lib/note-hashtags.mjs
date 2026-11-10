@@ -2,11 +2,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { NOTE_HASHTAGS_DIR } from '../../../../config/paths.mjs';
 import { PREF_NAMES } from '../../lib/prefectures.cjs';
 
 export const HASHTAG_COUNT = 99;
 export const HASHTAG_MODEL = 'claude-sonnet-5-5';
-export const HASHTAG_DIR = 'config/note-hashtags';
+export const HASHTAG_DIR = NOTE_HASHTAGS_DIR;
 const MAX_LENGTH = 25;
 // note silently drops tags with other scripts (2026-10-03: #αモデル vanished after a successful update).
 const ACCEPTED = /^#[0-9A-Za-z\u3041-\u3096\u30A1-\u30FA\u30FC\u30FB\u4E00-\u9FFF\u3005\uFF10-\uFF19\uFF21-\uFF3A\uFF41-\uFF5A_]+$/u;

@@ -13,7 +13,7 @@ import {
 } from "../../../../packages/product-factory/src/channels/kindle/epub-inspect";
 
 /**
- * 出品台帳 (config/kdp-listings.json) の epubPath が指す入稿版の EPUB を、管理画面で章ごとに読める形にする
+ * 出品台帳 (data/products/kdp/listings.json) の epubPath が指す入稿版の EPUB を、管理画面で章ごとに読める形にする
  * (読むだけ。EPUB は書き換えない)。章の読み出しと数え方は product-factory の epub-inspect.ts と共通。
  */
 

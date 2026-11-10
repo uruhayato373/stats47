@@ -60,7 +60,7 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 | `blog-editor` / `ranking-content-author` | 本文素材（ブログ記事・ai-content）の供給・是正 |
 | `data-ingester` | 観測値（新 metric）の R2 投入 |
 | `estat-researcher` | e-Stat 実在検証 |
-| `kdp-operator` | KDP 出品フォーム操作（下書き作成・修正・公開）・出品内容 SoT（`kdp-listings.json`） |
+| `kdp-operator` | KDP 出品フォーム操作（下書き作成・修正・公開）・出品内容 SoT（`kdp.listings`） |
 | 人間（オーナー） | Kindle Previewer 検証・KDP ログイン/2FA/税務/銀行・実公開承認・KU 登録判断 |
 
 ## 教材 (参考文献) と調査の切り口の受け取り

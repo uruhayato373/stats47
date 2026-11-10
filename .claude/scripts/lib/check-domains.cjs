@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 領域の正本 `config/domains.json` の整合検査 (DOMAIN-CONFIG-01)。
+ * 領域の正本 `data/business/domains.json` の整合検査 (DOMAIN-CONFIG-01)。
  *
  *   node .claude/scripts/lib/check-domains.cjs     # npm run check-domains
  *

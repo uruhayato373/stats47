@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "KDP の紹介文・キーワードの原稿",
-  "description": "data/products/kdp-listing-copy.json の形状契約。人が判断して書く原稿の正本で、KDP 台帳 (config/kdp-listings.json) の description と keywords はここから組み立てる。内容の規則は .claude/scripts/kdp/lib/kdp-listing-copy.mjs の auditListingCopy が検査する。",
+  "description": "data/products/kdp-listing-copy.json の形状契約。人が判断して書く原稿の正本で、KDP 台帳 (data/products/kdp/listings.json) の description と keywords はここから組み立てる。内容の規則は .claude/scripts/kdp/lib/kdp-listing-copy.mjs の auditListingCopy が検査する。",
   "type": "object",
   "required": ["schemaVersion", "books"],
   "additionalProperties": false,

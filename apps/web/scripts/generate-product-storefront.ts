@@ -3,7 +3,7 @@
  *
  * 真実源:
  * - 商品内容: packages/product-factory の型付きカタログ
- * - 公開状態・販売 URL: config/kdp-listings.json / data/note/articles.json
+ * - 公開状態・販売 URL: data/products/kdp/listings.json / data/note/articles.json
  * - ココナラ撤退済みのデータパックを旧出品URLから復活させない
  *
  * 下書き・審査中・ASIN/URL 未確定の商品は fail-closed で出力しない。
