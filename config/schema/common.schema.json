@@ -4,6 +4,10 @@
   "title": "台帳どうしで共有する型",
   "description": "config/ と data/ の台帳の JSON Schema が $ref で参照する共通の型 (2026-10-26)。同じ値の形を台帳ごとに書き分けない。コードから使うときは .claude/scripts/lib/dataset-shape.mjs の addCommonSchema(ajv) で Ajv に登録し、正規表現は commonPattern(name) で同じ定義から作る。",
   "$defs": {
+    "grain": {
+      "description": "データの粒度 (地域の単位)。問いの台帳の unit・軸の参照の grain が使う。アプリの型の別の語 (指標の entities の city、テーマの系列参照の national、家計の分析単位の capital-cities) との読み替えは .claude/scripts/issues/issue-data-grains.mjs だけで行う",
+      "enum": ["prefecture", "municipality", "japan", "capital-city"]
+    },
     "sha256": {
       "description": "小文字 16 進の SHA-256",
       "type": "string",

@@ -6,6 +6,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { describe, expect, it } from "vitest";
+import { KAKEI_ANALYSES } from "@stats47/data-configs";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { BUSINESS_PLAN_M1_ANALYSES } from "@stats47/data-configs/business-plan";
 import { REGISTRIES } from "../../../config/datasets.mjs";
@@ -54,6 +55,10 @@ describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む",
     for (const name of names) expect(metricKeys.has(name), `${name} は metricKeys に無い`).toBe(true);
     const geoPostKeys = resolveRegistry(REGISTRIES["geo-post-metric-keys"], readText, REGISTRIES);
     for (const key of metricKeys) expect(geoPostKeys.has(key), `${key} が Geo の投稿の参照先に無い`).toBe(true);
+  });
+
+  it("kakei-analyses = 家計調査の分析単位 (KAKEI_ANALYSES) の id", () => {
+    expect(sorted(resolveRegistry(REGISTRIES["kakei-analyses"], readText))).toEqual(sorted(KAKEI_ANALYSES.map((a) => a.id)));
   });
 
   it("ksj-datasets = GIS 台帳 (GIS_DATASETS) の dataId", async () => {

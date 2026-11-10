@@ -8,7 +8,7 @@
       "unit": "municipality",
       "answerability": "relation",
       "primaryTheme": "theme:aging-society",
-      "dataNote": "国勢調査（配偶関係）・市町村税課税状況等の調。関連記事の候補: per-capita-prefectural-income-h27-prefecture-gap, average-age-of-first-marriage-wife-prefecture-gap",
+      "dataNote": "国勢調査（配偶関係）・市町村税課税状況等の調",
       "pitfall": "男女で分ける。年齢構成をそろえる（25〜39歳に絞る）",
       "revenue": [
         "広告",
@@ -21,15 +21,20 @@
         "explanatory": {
           "label": "課税対象所得の高さ",
           "pattern": "compare",
-          "metrics": [
-            "per-taxpayer-taxable-income"
+          "data": [
+            {
+              "metric": "per-taxpayer-taxable-income"
+            }
           ]
         },
         "outcome": {
           "label": "30〜34歳男性の未婚者割合",
           "pattern": "compare",
-          "metrics": [
-            "unmarried-ratio-male-30-34"
+          "data": [
+            {
+              "metric": "unmarried-ratio-male-30-34",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -52,15 +57,20 @@
         "explanatory": {
           "label": "課税対象所得の高さ",
           "pattern": "compare",
-          "metrics": [
-            "per-taxpayer-taxable-income"
+          "data": [
+            {
+              "metric": "per-taxpayer-taxable-income"
+            }
           ]
         },
         "outcome": {
           "label": "合計特殊出生率",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "total-fertility-rate",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -83,16 +93,22 @@
         "explanatory": {
           "label": "婚姻率と平均初婚年齢",
           "pattern": "compare",
-          "metrics": [
-            "marriages-per-total-population",
-            "average-age-of-first-marriage-wife"
+          "data": [
+            {
+              "metric": "marriages-per-total-population"
+            },
+            {
+              "metric": "average-age-of-first-marriage-wife"
+            }
           ]
         },
         "outcome": {
           "label": "粗出生率",
           "pattern": "compare",
-          "metrics": [
-            "crude-birth-rate"
+          "data": [
+            {
+              "metric": "crude-birth-rate"
+            }
           ]
         }
       }
@@ -104,7 +120,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:gender-participation",
-      "dataNote": "国勢調査（就業率）・人口動態統計。関連記事の候補: dual-income-household-ratio-vs-elderly-on-public-assistance",
+      "dataNote": "国勢調査（就業率）・人口動態統計",
       "pitfall": "国際比較では正の関係もある。保育の整い方が交絡",
       "revenue": [
         "広告",
@@ -116,15 +132,19 @@
         "explanatory": {
           "label": "共働き世帯の割合",
           "pattern": "compare",
-          "metrics": [
-            "dual-income-household-ratio"
+          "data": [
+            {
+              "metric": "dual-income-household-ratio"
+            }
           ]
         },
         "outcome": {
           "label": "合計特殊出生率",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "total-fertility-rate"
+            }
           ]
         }
       }
@@ -148,15 +168,21 @@
         "explanatory": {
           "label": "保育所の待機児童数",
           "pattern": "compare",
-          "metrics": [
-            "nursery-waiting-children-count"
+          "data": [
+            {
+              "metric": "nursery-waiting-children-count",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
           "label": "合計特殊出生率",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "total-fertility-rate",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -179,15 +205,20 @@
         "explanatory": {
           "label": "持ち家の延べ面積",
           "pattern": "compare",
-          "metrics": [
-            "floor-area-per-dwelling-owner"
+          "data": [
+            {
+              "metric": "floor-area-per-dwelling-owner"
+            }
           ]
         },
         "outcome": {
           "label": "合計特殊出生率",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "total-fertility-rate",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -210,8 +241,11 @@
         "explanatory": {
           "label": "若年層の転出超過",
           "pattern": "compare",
-          "metrics": [
-            "interprefecture-net-migration-age15to24"
+          "data": [
+            {
+              "metric": "interprefecture-net-migration-age15to24",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -238,8 +272,11 @@
         "explanatory": {
           "label": "三世代世帯人員の多さ",
           "pattern": "compare",
-          "metrics": [
-            "three-generation-household-members"
+          "data": [
+            {
+              "metric": "three-generation-household-members",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -266,17 +303,29 @@
         "explanatory": {
           "label": "婚姻・出生・人口増減の状況",
           "pattern": "compare",
-          "metrics": [
-            "marriages-per-total-population",
-            "total-fertility-rate",
-            "population-growth-rate"
+          "data": [
+            {
+              "metric": "marriages-per-total-population",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "total-fertility-rate",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "population-growth-rate",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
           "label": "離婚率",
           "pattern": "compare",
-          "metrics": [
-            "divorces-per-total-population"
+          "data": [
+            {
+              "metric": "divorces-per-total-population",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -300,15 +349,19 @@
         "explanatory": {
           "label": "妻の平均初婚年齢",
           "pattern": "compare",
-          "metrics": [
-            "average-age-of-first-marriage-wife"
+          "data": [
+            {
+              "metric": "average-age-of-first-marriage-wife"
+            }
           ]
         },
         "outcome": {
           "label": "合計特殊出生率",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "total-fertility-rate"
+            }
           ]
         }
       }
@@ -331,8 +384,11 @@
         "explanatory": {
           "label": "20〜39歳の男女比",
           "pattern": "compare",
-          "metrics": [
-            "sex-ratio-age-20-39"
+          "data": [
+            {
+              "metric": "sex-ratio-age-20-39",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -360,16 +416,19 @@
         "explanatory": {
           "label": "高齢者の暮らしの状況",
           "pattern": "compare",
-          "metrics": [
-            "nursing-welfare-facility-count-per-100k-65plus",
-            "single-person-household-old-population-ratio"
+          "data": [
+            {
+              "metric": "nursing-welfare-facility-count-per-100k-65plus"
+            }
           ]
         },
         "outcome": {
           "label": "高齢者の一人暮らしの割合",
           "pattern": "change",
-          "metrics": [
-            "elderly-living-alone-rate"
+          "data": [
+            {
+              "metric": "single-person-household-old-population-ratio"
+            }
           ]
         }
       }
@@ -381,7 +440,7 @@
       "unit": "municipality",
       "answerability": "myth",
       "primaryTheme": "theme:foreign-residents",
-      "dataNote": "在留外国人統計・都道府県警の市区町村別刑法犯認知件数・警察庁 犯罪統計・人口動態統計。関連記事の候補: foreign-resident-population-prefecture-gap",
+      "dataNote": "在留外国人統計・都道府県警の市区町村別刑法犯認知件数・警察庁 犯罪統計・人口動態統計",
       "pitfall": "都市化・若い男性の割合・昼間人口が交絡。重い問い（上の注意）",
       "revenue": [
         "広告",
@@ -393,15 +452,19 @@
         "explanatory": {
           "label": "外国人人口の多さ",
           "pattern": "compare",
-          "metrics": [
-            "foreign-resident-count-per-100k"
+          "data": [
+            {
+              "metric": "foreign-resident-count-per-100k"
+            }
           ]
         },
         "outcome": {
           "label": "刑法犯認知件数の推移",
           "pattern": "change",
-          "metrics": [
-            "criminal-recognition-count"
+          "data": [
+            {
+              "metric": "criminal-recognition-count"
+            }
           ]
         }
       }
@@ -427,8 +490,10 @@
         "outcome": {
           "label": "外国人人口の多い町",
           "pattern": "compare",
-          "metrics": [
-            "foreign-population-per-100k"
+          "data": [
+            {
+              "metric": "foreign-population-per-100k"
+            }
           ]
         }
       }
@@ -453,8 +518,10 @@
         "explanatory": {
           "label": "外国人人口の多さ",
           "pattern": "compare",
-          "metrics": [
-            "foreign-resident-count-per-100k"
+          "data": [
+            {
+              "metric": "foreign-resident-count-per-100k"
+            }
           ]
         },
         "outcome": {
@@ -481,8 +548,10 @@
         "explanatory": {
           "label": "外国人労働者数の多さ",
           "pattern": "compare",
-          "metrics": [
-            "foreign-worker-count"
+          "data": [
+            {
+              "metric": "foreign-worker-count"
+            }
           ]
         },
         "outcome": {
@@ -532,8 +601,10 @@
         "outcome": {
           "label": "15〜24歳の転出超過",
           "pattern": "compare",
-          "metrics": [
-            "interprefecture-net-migration-age15to24"
+          "data": [
+            {
+              "metric": "interprefecture-net-migration-age15to24"
+            }
           ]
         }
       }
@@ -557,8 +628,11 @@
         "outcome": {
           "label": "15〜24歳の転出超過",
           "pattern": "compare",
-          "metrics": [
-            "interprefecture-net-migration-age15to24"
+          "data": [
+            {
+              "metric": "interprefecture-net-migration-age15to24",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -582,8 +656,10 @@
         "outcome": {
           "label": "転入超過率の推移",
           "pattern": "change",
-          "metrics": [
-            "moving-in-excess-rate"
+          "data": [
+            {
+              "metric": "moving-in-excess-rate"
+            }
           ]
         }
       }
@@ -607,8 +683,10 @@
         "outcome": {
           "label": "転入超過率の推移",
           "pattern": "change",
-          "metrics": [
-            "moving-in-excess-rate"
+          "data": [
+            {
+              "metric": "moving-in-excess-rate"
+            }
           ]
         }
       }
@@ -632,8 +710,10 @@
         "outcome": {
           "label": "転入超過率",
           "pattern": "compare",
-          "metrics": [
-            "moving-in-excess-rate"
+          "data": [
+            {
+              "metric": "moving-in-excess-rate"
+            }
           ]
         }
       }
@@ -657,8 +737,10 @@
         "outcome": {
           "label": "昼間人口の多い町",
           "pattern": "compare",
-          "metrics": [
-            "day-time-population"
+          "data": [
+            {
+              "metric": "day-time-population"
+            }
           ]
         }
       }
@@ -681,8 +763,11 @@
         "explanatory": {
           "label": "外国人延べ宿泊者数の多い地域",
           "pattern": "compare",
-          "metrics": [
-            "total-overnight-guests-foreign"
+          "data": [
+            {
+              "metric": "total-overnight-guests-foreign",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -724,7 +809,7 @@
       "unit": "prefecture",
       "answerability": "myth",
       "primaryTheme": "theme:foreign-residents",
-      "dataNote": "在留外国人統計・賃金構造基本統計調査。関連記事の候補: foreign-worker-count-prefecture-gap",
+      "dataNote": "在留外国人統計・賃金構造基本統計調査",
       "pitfall": "人手不足の産業に外国人が集まる逆の因果が混ざる。",
       "revenue": [
         "広告",
@@ -736,8 +821,10 @@
         "explanatory": {
           "label": "外国人労働者数の多い県",
           "pattern": "compare",
-          "metrics": [
-            "foreign-worker-count"
+          "data": [
+            {
+              "metric": "foreign-worker-count"
+            }
           ]
         },
         "outcome": {
@@ -790,8 +877,10 @@
         "outcome": {
           "label": "刑法犯認知件数の推移",
           "pattern": "change",
-          "metrics": [
-            "criminal-recognition-count"
+          "data": [
+            {
+              "metric": "criminal-recognition-count"
+            }
           ]
         }
       }
@@ -815,15 +904,19 @@
         "explanatory": {
           "label": "人口の分母の取り方",
           "pattern": "compare",
-          "metrics": [
-            "day-time-population-ratio"
+          "data": [
+            {
+              "metric": "day-time-population-ratio"
+            }
           ]
         },
         "outcome": {
           "label": "人口あたり犯罪の多さ",
           "pattern": "compare",
-          "metrics": [
-            "criminal-recognition-count"
+          "data": [
+            {
+              "metric": "criminal-recognition-count"
+            }
           ]
         }
       }
@@ -871,8 +964,10 @@
         "explanatory": {
           "label": "空き家率の高さ",
           "pattern": "compare",
-          "metrics": [
-            "vacant-housing-rate"
+          "data": [
+            {
+              "metric": "vacant-housing-ratio"
+            }
           ]
         },
         "outcome": {
@@ -900,16 +995,22 @@
         "explanatory": {
           "label": "警察官・警察費の多さ",
           "pattern": "compare",
-          "metrics": [
-            "police-officer-count-per-population",
-            "per-capita-police-expenditure-pref-municipal"
+          "data": [
+            {
+              "metric": "police-officer-count-per-population"
+            },
+            {
+              "metric": "per-capita-police-expenditure-pref-municipal"
+            }
           ]
         },
         "outcome": {
           "label": "刑法犯認知件数",
           "pattern": "compare",
-          "metrics": [
-            "penal-code-offenses-recognized-per-1000"
+          "data": [
+            {
+              "metric": "penal-code-offenses-recognized-per-1000"
+            }
           ]
         }
       }
@@ -933,8 +1034,10 @@
         "outcome": {
           "label": "高齢者の交通事故死傷者数",
           "pattern": "change",
-          "metrics": [
-            "traffic-accident-casualties-elderly-65plus"
+          "data": [
+            {
+              "metric": "traffic-accident-casualties-elderly-65plus"
+            }
           ]
         }
       }
@@ -957,17 +1060,25 @@
         "explanatory": {
           "label": "車社会の度合い",
           "pattern": "compare",
-          "metrics": [
-            "average-road-traffic-volume",
-            "road-length-per-km2",
-            "private-auto-insurance-penetration-rate-vehicle"
+          "data": [
+            {
+              "metric": "average-road-traffic-volume"
+            },
+            {
+              "metric": "road-length-per-km2"
+            },
+            {
+              "metric": "private-auto-insurance-penetration-rate-vehicle"
+            }
           ]
         },
         "outcome": {
           "label": "交通事故死者数",
           "pattern": "compare",
-          "metrics": [
-            "traffic-accident-deaths-per-100k"
+          "data": [
+            {
+              "metric": "traffic-accident-deaths-per-100k"
+            }
           ]
         }
       }
@@ -990,8 +1101,10 @@
         "explanatory": {
           "label": "自転車通勤・通学の多さ",
           "pattern": "compare",
-          "metrics": [
-            "commute-by-bicycle"
+          "data": [
+            {
+              "metric": "commute-by-bicycle"
+            }
           ]
         },
         "outcome": {
@@ -1044,8 +1157,10 @@
         "outcome": {
           "label": "児童虐待相談の対応件数",
           "pattern": "change",
-          "metrics": [
-            "child-abuse-consultation-cases"
+          "data": [
+            {
+              "metric": "child-abuse-consultation-cases"
+            }
           ]
         }
       }
@@ -1095,9 +1210,13 @@
         "outcome": {
           "label": "火災による死亡者数",
           "pattern": "compare",
-          "metrics": [
-            "fire-deaths-per-100k",
-            "building-fire-count-per-100-thousand-people"
+          "data": [
+            {
+              "metric": "fire-deaths-per-100k"
+            },
+            {
+              "metric": "building-fire-count-per-100-thousand-people"
+            }
           ]
         }
       }
@@ -1122,15 +1241,19 @@
         "explanatory": {
           "label": "所得の高さ",
           "pattern": "compare",
-          "metrics": [
-            "real-disposable-income"
+          "data": [
+            {
+              "metric": "real-disposable-income"
+            }
           ]
         },
         "outcome": {
           "label": "物価を引いた暮らしの豊かさ",
           "pattern": "compare",
-          "metrics": [
-            "consumer-price-difference-index-overall"
+          "data": [
+            {
+              "metric": "consumer-price-difference-index-overall"
+            }
           ]
         }
       }
@@ -1182,8 +1305,10 @@
         "outcome": {
           "label": "男女間賃金格差",
           "pattern": "compare",
-          "metrics": [
-            "gender-wage-gap"
+          "data": [
+            {
+              "metric": "gender-wage-gap"
+            }
           ]
         }
       }
@@ -1207,8 +1332,10 @@
         "explanatory": {
           "label": "大学等進学率の高さ",
           "pattern": "compare",
-          "metrics": [
-            "high-school-advancement-rate"
+          "data": [
+            {
+              "metric": "high-school-advancement-rate"
+            }
           ]
         },
         "outcome": {
@@ -1236,8 +1363,10 @@
         "outcome": {
           "label": "大学等進学率の高低",
           "pattern": "compare",
-          "metrics": [
-            "high-school-advancement-rate"
+          "data": [
+            {
+              "metric": "high-school-advancement-rate"
+            }
           ]
         }
       }
@@ -1261,9 +1390,13 @@
         "outcome": {
           "label": "進学率と就職率の合算",
           "pattern": "compare",
-          "metrics": [
-            "high-school-advancement-rate",
-            "high-school-graduates-job-ratio"
+          "data": [
+            {
+              "metric": "high-school-advancement-rate"
+            },
+            {
+              "metric": "high-school-graduates-job-ratio"
+            }
           ]
         }
       }
@@ -1286,15 +1419,19 @@
         "explanatory": {
           "label": "県内大学入学者割合",
           "pattern": "compare",
-          "metrics": [
-            "in-pref-university-entrance-ratio-by-highschool-origin"
+          "data": [
+            {
+              "metric": "in-pref-university-entrance-ratio-by-highschool-origin"
+            }
           ]
         },
         "outcome": {
           "label": "大学等進学率の公表値",
           "pattern": "compare",
-          "metrics": [
-            "high-school-advancement-rate"
+          "data": [
+            {
+              "metric": "high-school-advancement-rate"
+            }
           ]
         }
       }
@@ -1318,8 +1455,10 @@
         "explanatory": {
           "label": "共働き世帯の割合",
           "pattern": "compare",
-          "metrics": [
-            "dual-income-household-ratio"
+          "data": [
+            {
+              "metric": "dual-income-household-ratio"
+            }
           ]
         },
         "outcome": {
@@ -1348,8 +1487,11 @@
         "outcome": {
           "label": "所得格差の大きさ",
           "pattern": "compare",
-          "metrics": [
-            "gini-coefficient-disposable-income"
+          "data": [
+            {
+              "metric": "gini-coefficient-disposable-income",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -1373,8 +1515,10 @@
         "explanatory": {
           "label": "公務員給与の水準",
           "pattern": "compare",
-          "metrics": [
-            "laspeyres-index-prefecture"
+          "data": [
+            {
+              "metric": "laspeyres-index-prefecture"
+            }
           ]
         },
         "outcome": {
@@ -1402,15 +1546,19 @@
         "explanatory": {
           "label": "公務員給与の水準",
           "pattern": "compare",
-          "metrics": [
-            "laspeyres-index-prefecture"
+          "data": [
+            {
+              "metric": "laspeyres-index-prefecture"
+            }
           ]
         },
         "outcome": {
           "label": "高校教員の平均年収",
           "pattern": "compare",
-          "metrics": [
-            "high-school-teacher-annual-income"
+          "data": [
+            {
+              "metric": "high-school-teacher-annual-income"
+            }
           ]
         }
       }
@@ -1435,8 +1583,10 @@
         "outcome": {
           "label": "非正規雇用率",
           "pattern": "compare",
-          "metrics": [
-            "non-regular-employment-rate"
+          "data": [
+            {
+              "metric": "non-regular-employment-rate"
+            }
           ]
         }
       }
@@ -1461,8 +1611,10 @@
         "outcome": {
           "label": "生活保護の被保護世帯数",
           "pattern": "compare",
-          "metrics": [
-            "households-on-public-assistance-per-1000"
+          "data": [
+            {
+              "metric": "households-on-public-assistance-per-1000"
+            }
           ]
         }
       }
@@ -1487,8 +1639,10 @@
         "outcome": {
           "label": "副業率",
           "pattern": "compare",
-          "metrics": [
-            "side-job-rate"
+          "data": [
+            {
+              "metric": "side-job-rate"
+            }
           ]
         }
       }
@@ -1535,8 +1689,10 @@
         "outcome": {
           "label": "物価の変化率",
           "pattern": "change",
-          "metrics": [
-            "cpi-change-rate-food"
+          "data": [
+            {
+              "metric": "cpi-change-rate-food"
+            }
           ]
         }
       }
@@ -1560,11 +1716,19 @@
         "explanatory": {
           "label": "貯蓄・資産の保有状況",
           "pattern": "compare",
-          "metrics": [
-            "household-savings-balance",
-            "current-deposit-balance-ratio-multi-person-households",
-            "current-securities-balance-ratio-multi-person-households",
-            "current-life-insurance-balance-ratio-multi-person-households"
+          "data": [
+            {
+              "metric": "household-savings-balance"
+            },
+            {
+              "metric": "current-deposit-balance-ratio-multi-person-households"
+            },
+            {
+              "metric": "current-securities-balance-ratio-multi-person-households"
+            },
+            {
+              "metric": "current-life-insurance-balance-ratio-multi-person-households"
+            }
           ]
         },
         "outcome": {
@@ -1597,9 +1761,19 @@
         "outcome": {
           "label": "貯蓄残高と負債残高",
           "pattern": "compare",
-          "metrics": [
-            "financial-assets-balance-multi-person-households",
-            "financial-debt-balance"
+          "data": [
+            {
+              "metric": "financial-assets-balance-multi-person-households"
+            },
+            {
+              "metric": "financial-debt-balance"
+            },
+            {
+              "series": "savings-income-quintile"
+            },
+            {
+              "series": "savings-income-18-class"
+            }
           ]
         }
       }
@@ -1651,8 +1825,10 @@
         "outcome": {
           "label": "大卒男性の初任給",
           "pattern": "compare",
-          "metrics": [
-            "new-graduate-scheduled-salary-university-male"
+          "data": [
+            {
+              "metric": "new-graduate-scheduled-salary-university-male"
+            }
           ]
         }
       }
@@ -1701,16 +1877,22 @@
         "explanatory": {
           "label": "補習教育への支出",
           "pattern": "compare",
-          "metrics": [
-            "elementary-tutoring-consumption-expenditure",
-            "high-school-tutoring-consumption-expenditure"
+          "data": [
+            {
+              "metric": "elementary-tutoring-consumption-expenditure"
+            },
+            {
+              "metric": "high-school-tutoring-consumption-expenditure"
+            }
           ]
         },
         "outcome": {
           "label": "学力と進学の水準",
           "pattern": "compare",
-          "metrics": [
-            "high-school-advancement-rate"
+          "data": [
+            {
+              "metric": "high-school-advancement-rate"
+            }
           ]
         }
       }
@@ -1734,16 +1916,22 @@
         "explanatory": {
           "label": "補習教育への支出",
           "pattern": "compare",
-          "metrics": [
-            "elementary-tutoring-consumption-expenditure",
-            "high-school-tutoring-consumption-expenditure"
+          "data": [
+            {
+              "metric": "elementary-tutoring-consumption-expenditure"
+            },
+            {
+              "metric": "high-school-tutoring-consumption-expenditure"
+            }
           ]
         },
         "outcome": {
           "label": "大学等への進学率",
           "pattern": "compare",
-          "metrics": [
-            "high-school-advancement-rate"
+          "data": [
+            {
+              "metric": "high-school-advancement-rate"
+            }
           ]
         }
       }
@@ -1766,8 +1954,11 @@
         "explanatory": {
           "label": "教育費の割合",
           "pattern": "compare",
-          "metrics": [
-            "education-expenditure-ratio-pref-finance"
+          "data": [
+            {
+              "metric": "education-expenditure-ratio-pref-finance",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -1820,16 +2011,22 @@
         "explanatory": {
           "label": "公立小学校費",
           "pattern": "compare",
-          "metrics": [
-            "per-child-public-elementary-school-expenditure-pref-municipal"
+          "data": [
+            {
+              "metric": "per-child-public-elementary-school-expenditure-pref-municipal"
+            }
           ]
         },
         "outcome": {
           "label": "不登校による長期欠席の比率",
           "pattern": "compare",
-          "metrics": [
-            "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
-            "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000"
+          "data": [
+            {
+              "metric": "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000"
+            },
+            {
+              "metric": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000"
+            }
           ]
         }
       }
@@ -1852,15 +2049,19 @@
         "explanatory": {
           "label": "大学収容力の大小",
           "pattern": "compare",
-          "metrics": [
-            "university-capacity-index"
+          "data": [
+            {
+              "metric": "university-capacity-index"
+            }
           ]
         },
         "outcome": {
           "label": "県内大学入学者の割合",
           "pattern": "compare",
-          "metrics": [
-            "in-pref-university-entrance-ratio-by-highschool-origin"
+          "data": [
+            {
+              "metric": "in-pref-university-entrance-ratio-by-highschool-origin"
+            }
           ]
         }
       }
@@ -1883,8 +2084,10 @@
         "explanatory": {
           "label": "小学校数の減少",
           "pattern": "change",
-          "metrics": [
-            "elementary-school-count"
+          "data": [
+            {
+              "metric": "elementary-school-count"
+            }
           ]
         },
         "outcome": {
@@ -1911,8 +2114,10 @@
         "explanatory": {
           "label": "母子世帯数の多さ",
           "pattern": "compare",
-          "metrics": [
-            "single-mother-households"
+          "data": [
+            {
+              "metric": "single-mother-households"
+            }
           ]
         },
         "outcome": {
@@ -1965,15 +2170,19 @@
         "explanatory": {
           "label": "図書館数の多さ",
           "pattern": "compare",
-          "metrics": [
-            "library-count-per-million"
+          "data": [
+            {
+              "metric": "library-count-per-million"
+            }
           ]
         },
         "outcome": {
           "label": "子どもの読書量",
           "pattern": "compare",
-          "metrics": [
-            "hobby-participation-rate-reading"
+          "data": [
+            {
+              "metric": "hobby-participation-rate-reading"
+            }
           ]
         }
       }
@@ -1985,7 +2194,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:education-culture",
-      "dataNote": "地方公務員給与実態調査・全国学力・学習状況調査。関連記事の候補: high-school-teacher-annual-income-vs-new-graduate-starting",
+      "dataNote": "地方公務員給与実態調査・全国学力・学習状況調査",
       "pitfall": "給与は物価や年齢構成に左右され、学力には家庭環境が強く効く。",
       "revenue": [
         "広告",
@@ -2075,8 +2284,10 @@
         "explanatory": {
           "label": "課税対象所得の高さ",
           "pattern": "compare",
-          "metrics": [
-            "per-taxpayer-taxable-income"
+          "data": [
+            {
+              "metric": "per-taxpayer-taxable-income"
+            }
           ]
         },
         "outcome": {
@@ -2103,16 +2314,24 @@
         "explanatory": {
           "label": "医師数・病院数の多さ",
           "pattern": "compare",
-          "metrics": [
-            "physicians-in-medical-facilities-per-100k",
-            "general-hospital-count"
+          "data": [
+            {
+              "metric": "physicians-in-medical-facilities-per-100k",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "general-hospital-count"
+            }
           ]
         },
         "outcome": {
           "label": "健康寿命",
           "pattern": "compare",
-          "metrics": [
-            "healthy-life-expectancy-male"
+          "data": [
+            {
+              "metric": "healthy-life-expectancy-male",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -2160,15 +2379,19 @@
         "explanatory": {
           "label": "食塩摂取量",
           "pattern": "compare",
-          "metrics": [
-            "salt-intake-male-age-adjusted"
+          "data": [
+            {
+              "metric": "salt-intake-male-age-adjusted"
+            }
           ]
         },
         "outcome": {
           "label": "脳血管疾患の死亡者数",
           "pattern": "compare",
-          "metrics": [
-            "deaths-cerebrovascular-disease-per-100k"
+          "data": [
+            {
+              "metric": "deaths-cerebrovascular-disease-per-100k"
+            }
           ]
         }
       }
@@ -2191,8 +2414,10 @@
         "explanatory": {
           "label": "男性の1日の歩数",
           "pattern": "compare",
-          "metrics": [
-            "daily-steps-male-20to64-age-adjusted"
+          "data": [
+            {
+              "metric": "daily-steps-male-20to64-age-adjusted"
+            }
           ]
         },
         "outcome": {
@@ -2220,11 +2445,22 @@
         "outcome": {
           "label": "自殺者数と近年の推移",
           "pattern": "change",
-          "metrics": [
-            "suicides-per-100k",
-            "suicide-count",
-            "suicide-count-65plus",
-            "ratio-65-plus"
+          "data": [
+            {
+              "metric": "suicides-per-100k",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "suicide-count",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "suicide-count-65plus",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "ratio-65-plus"
+            }
           ]
         }
       }
@@ -2247,8 +2483,11 @@
         "explanatory": {
           "label": "特定健診の受診率",
           "pattern": "compare",
-          "metrics": [
-            "specific-health-checkup-participation-rate"
+          "data": [
+            {
+              "metric": "specific-health-checkup-participation-rate",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -2264,7 +2503,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:health-checkups",
-      "dataNote": "NDBオープンデータ（特定健診）・自動車保有台数。関連記事の候補: metabolic-syndrome-prevalence-among-checkup-recipients, fresh-vegetables-consumption-quantity-prefecture-gap",
+      "dataNote": "NDBオープンデータ（特定健診）・自動車保有台数",
       "pitfall": "年齢構成をそろえる",
       "revenue": [
         "広告",
@@ -2280,8 +2519,10 @@
         "outcome": {
           "label": "男性の肥満度(BMI)",
           "pattern": "compare",
-          "metrics": [
-            "bmi-male-20to69-age-adjusted"
+          "data": [
+            {
+              "metric": "bmi-male-20to69-age-adjusted"
+            }
           ]
         }
       }
@@ -2330,8 +2571,10 @@
         "explanatory": {
           "label": "救急車の病院収容所要時間",
           "pattern": "compare",
-          "metrics": [
-            "ambulance-hospital-arrival-time"
+          "data": [
+            {
+              "metric": "ambulance-hospital-arrival-time"
+            }
           ]
         },
         "outcome": {
@@ -2347,7 +2590,7 @@
       "unit": "municipality",
       "answerability": "caveat",
       "primaryTheme": "theme:healthcare",
-      "dataNote": "医療施設調査（分娩取扱施設）・人口動態統計。関連記事の候補: general-perinatal-center-count-prefecture-gap, early-neonatal-deaths-prefecture-gap",
+      "dataNote": "医療施設調査（分娩取扱施設）・人口動態統計",
       "pitfall": "出生が減ったから閉じた（逆の流れ）",
       "revenue": [
         "実務"
@@ -2358,8 +2601,11 @@
         "explanatory": {
           "label": "分娩取扱病院数の変化",
           "pattern": "change",
-          "metrics": [
-            "delivery-hospital-count"
+          "data": [
+            {
+              "metric": "delivery-hospital-count",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -2386,8 +2632,10 @@
         "explanatory": {
           "label": "男性の喫煙率の低下",
           "pattern": "change",
-          "metrics": [
-            "smoking-rate-male-age-adjusted"
+          "data": [
+            {
+              "metric": "smoking-rate-male-age-adjusted"
+            }
           ]
         },
         "outcome": {
@@ -2415,12 +2663,22 @@
         "outcome": {
           "label": "子どもの身長・体重の地域差",
           "pattern": "compare",
-          "metrics": [
-            "average-height-primary-school-fifth-grade-male",
-            "average-height-primary-school-fifth-grade-female",
-            "average-height-middle-school-second-grade-male",
-            "average-height-middle-school-second-grade-female",
-            "average-weight-primary-school-fifth-grade-male"
+          "data": [
+            {
+              "metric": "average-height-primary-school-fifth-grade-male"
+            },
+            {
+              "metric": "average-height-primary-school-fifth-grade-female"
+            },
+            {
+              "metric": "average-height-middle-school-second-grade-male"
+            },
+            {
+              "metric": "average-height-middle-school-second-grade-female"
+            },
+            {
+              "metric": "average-weight-primary-school-fifth-grade-male"
+            }
           ]
         }
       }
@@ -2444,12 +2702,22 @@
         "outcome": {
           "label": "新潟の子どもの身長",
           "pattern": "compare",
-          "metrics": [
-            "average-height-primary-school-fifth-grade-male",
-            "average-height-primary-school-fifth-grade-female",
-            "average-height-middle-school-second-grade-male",
-            "average-height-middle-school-second-grade-female",
-            "avg-height-high-school-2nd-male"
+          "data": [
+            {
+              "metric": "average-height-primary-school-fifth-grade-male"
+            },
+            {
+              "metric": "average-height-primary-school-fifth-grade-female"
+            },
+            {
+              "metric": "average-height-middle-school-second-grade-male"
+            },
+            {
+              "metric": "average-height-middle-school-second-grade-female"
+            },
+            {
+              "metric": "avg-height-high-school-2nd-male"
+            }
           ]
         }
       }
@@ -2461,7 +2729,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:health-checkups",
-      "dataNote": "特定健診・特定保健指導実施状況・県民経済計・市町村税課税状況。関連記事の候補: specific-health-checkup-participation-rate-vs-taxpayer",
+      "dataNote": "特定健診・特定保健指導実施状況・県民経済計・市町村税課税状況",
       "pitfall": "県平均の相関であり、個人の所得と受診の関係は分からない。",
       "revenue": [
         "広告"
@@ -2486,7 +2754,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:healthcare",
-      "dataNote": "医師・歯科医師・薬剤師統計。関連記事の候補: dental-clinic-count-prefecture-gap",
+      "dataNote": "医師・歯科医師・薬剤師統計",
       "pitfall": "義務年限後の流出や診療科の偏りを追えない。",
       "revenue": [
         "実務"
@@ -2508,7 +2776,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:healthcare",
-      "dataNote": "国民生活基礎調査・患者調査。関連記事の候補: outpatient-rate-per-1000-prefecture-gap, complainant-count-prefecture-gap",
+      "dataNote": "国民生活基礎調査・患者調査",
       "pitfall": "医療機関の近さや受診しやすさの違いが受療に出る。",
       "revenue": [
         "広告"
@@ -2544,15 +2812,19 @@
         "explanatory": {
           "label": "精神病床数の多さ",
           "pattern": "compare",
-          "metrics": [
-            "psychiatric-bed-count"
+          "data": [
+            {
+              "metric": "psychiatric-bed-count"
+            }
           ]
         },
         "outcome": {
           "label": "精神科病院の平均在院日数",
           "pattern": "compare",
-          "metrics": [
-            "psychiatric-hospital-avg-length-of-stay"
+          "data": [
+            {
+              "metric": "psychiatric-hospital-avg-length-of-stay"
+            }
           ]
         }
       }
@@ -2580,8 +2852,11 @@
         "outcome": {
           "label": "要介護認定者の多さ",
           "pattern": "compare",
-          "metrics": [
-            "long-term-care-certified-persons"
+          "data": [
+            {
+              "metric": "long-term-care-certified-persons",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -2700,8 +2975,10 @@
         "explanatory": {
           "label": "老人ホームの定員の多さ",
           "pattern": "compare",
-          "metrics": [
-            "nursing-home-capacity-per-1000-65plus"
+          "data": [
+            {
+              "metric": "nursing-home-capacity-per-1000-65plus"
+            }
           ]
         },
         "outcome": {
@@ -2981,8 +3258,11 @@
         "outcome": {
           "label": "人口集中地区の人口比率の推移",
           "pattern": "change",
-          "metrics": [
-            "densely-inhabited-district-population-ratio"
+          "data": [
+            {
+              "metric": "densely-inhabited-district-population-ratio",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -3029,8 +3309,10 @@
         "explanatory": {
           "label": "持ち家比率の高さ",
           "pattern": "compare",
-          "metrics": [
-            "owner-occupied-housing-ratio"
+          "data": [
+            {
+              "metric": "owner-occupied-housing-ratio"
+            }
           ]
         },
         "outcome": {
@@ -3060,8 +3342,10 @@
         "outcome": {
           "label": "持ち家比率の都道府県差",
           "pattern": "compare",
-          "metrics": [
-            "owner-occupied-housing-ratio"
+          "data": [
+            {
+              "metric": "owner-occupied-housing-ratio"
+            }
           ]
         }
       }
@@ -3113,9 +3397,15 @@
         "outcome": {
           "label": "ふるさと納税の受入額と控除額",
           "pattern": "compare",
-          "metrics": [
-            "furusato-donation-amount-prefecture",
-            "furusato-tax-deduction-municipal-prefecture"
+          "data": [
+            {
+              "metric": "furusato-donation-amount-prefecture",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "furusato-tax-deduction-municipal-prefecture",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -3126,7 +3416,7 @@
       "question": "ふるさと納税が多い町は住民の所得も増えるのか",
       "unit": "municipality",
       "answerability": "caveat",
-      "dataNote": "総務省 ふるさと納税現況調査・市町村税課税状況。関連記事の候補: furusato-fundraising-cost-prefecture-prefecture-gap",
+      "dataNote": "総務省 ふるさと納税現況調査・市町村税課税状況",
       "pitfall": "特産品など元々の地域資源の差が受入額と所得の両方に効く。",
       "revenue": [
         "実務",
@@ -3138,8 +3428,11 @@
         "explanatory": {
           "label": "ふるさと納税の受入額",
           "pattern": "compare",
-          "metrics": [
-            "furusato-donation-amount-prefecture"
+          "data": [
+            {
+              "metric": "furusato-donation-amount-prefecture",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -3167,8 +3460,10 @@
         "explanatory": {
           "label": "大型小売店の多さ",
           "pattern": "compare",
-          "metrics": [
-            "large-retail-store-count-per-100k"
+          "data": [
+            {
+              "metric": "large-retail-store-count-per-100k"
+            }
           ]
         },
         "outcome": {
@@ -3422,8 +3717,10 @@
         "outcome": {
           "label": "持ち家の延べ面積",
           "pattern": "compare",
-          "metrics": [
-            "floor-area-per-dwelling-owner"
+          "data": [
+            {
+              "metric": "floor-area-per-dwelling-owner"
+            }
           ]
         }
       }
@@ -3448,8 +3745,10 @@
         "outcome": {
           "label": "パソコンの所有数量",
           "pattern": "compare",
-          "metrics": [
-            "pc-ownership-multi-person-households-per-1000"
+          "data": [
+            {
+              "metric": "pc-ownership-multi-person-households-per-1000"
+            }
           ]
         }
       }
@@ -3498,8 +3797,10 @@
         "outcome": {
           "label": "公衆電話の設置台数",
           "pattern": "compare",
-          "metrics": [
-            "public-phone-count-per-1000"
+          "data": [
+            {
+              "metric": "public-phone-count-per-1000"
+            }
           ]
         }
       }
@@ -3546,8 +3847,10 @@
         "explanatory": {
           "label": "職員数の多さ",
           "pattern": "compare",
-          "metrics": [
-            "municipal-general-administration-staff"
+          "data": [
+            {
+              "metric": "municipal-general-administration-staff"
+            }
           ]
         },
         "outcome": {
@@ -3602,8 +3905,11 @@
         "outcome": {
           "label": "投票率の地域差",
           "pattern": "compare",
-          "metrics": [
-            "voter-turnout-governor"
+          "data": [
+            {
+              "metric": "voter-turnout-governor",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -3631,8 +3937,11 @@
         "outcome": {
           "label": "老人福祉費の歳出割合",
           "pattern": "compare",
-          "metrics": [
-            "elderly-welfare-expenditure-ratio-pref-finance"
+          "data": [
+            {
+              "metric": "elderly-welfare-expenditure-ratio-pref-finance",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -3656,8 +3965,11 @@
         "explanatory": {
           "label": "女性議員の割合",
           "pattern": "compare",
-          "metrics": [
-            "prefectural-assembly-female-share"
+          "data": [
+            {
+              "metric": "prefectural-assembly-female-share",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -3709,10 +4021,19 @@
         "explanatory": {
           "label": "水道の供給条件",
           "pattern": "compare",
-          "metrics": [
-            "water-supply-population",
-            "water-supply-capacity",
-            "water-supply-annual-volume"
+          "data": [
+            {
+              "metric": "water-supply-population",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "water-supply-capacity",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "water-supply-annual-volume",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -3742,15 +4063,19 @@
         "explanatory": {
           "label": "水道の整備状況",
           "pattern": "compare",
-          "metrics": [
-            "water-supply-population-ratio-2012on"
+          "data": [
+            {
+              "metric": "water-supply-population-ratio-2012on"
+            }
           ]
         },
         "outcome": {
           "label": "下水道普及率",
           "pattern": "compare",
-          "metrics": [
-            "sewerage-penetration-rate-2012on"
+          "data": [
+            {
+              "metric": "sewerage-penetration-rate-2012on"
+            }
           ]
         }
       }
@@ -3773,9 +4098,13 @@
         "explanatory": {
           "label": "国からの財源への依存度",
           "pattern": "compare",
-          "metrics": [
-            "local-allocation-tax-ratio-pref-finance",
-            "national-treasury-disbursement-prefecture"
+          "data": [
+            {
+              "metric": "local-allocation-tax-ratio-pref-finance"
+            },
+            {
+              "metric": "national-treasury-disbursement-prefecture"
+            }
           ]
         },
         "outcome": {
@@ -3804,8 +4133,10 @@
         "outcome": {
           "label": "国庫支出金の額",
           "pattern": "compare",
-          "metrics": [
-            "national-treasury-disbursement-prefecture"
+          "data": [
+            {
+              "metric": "national-treasury-disbursement-prefecture"
+            }
           ]
         }
       }
@@ -3896,7 +4227,7 @@
       "unit": "municipality",
       "answerability": "caveat",
       "primaryTheme": "theme:public-assistance",
-      "dataNote": "被保護者調査・市町村決算。関連記事の候補: gasoline-consumption-quantity-vs-public-assistance",
+      "dataNote": "被保護者調査・市町村決算",
       "pitfall": "地域の高齢化や雇用の違いが原因との区別がつかない。",
       "revenue": [
         "実務"
@@ -3934,8 +4265,10 @@
         "outcome": {
           "label": "古い橋の数と点検の進み具合",
           "pattern": "compare",
-          "metrics": [
-            "road-bridge-diagnosed-count"
+          "data": [
+            {
+              "metric": "road-bridge-diagnosed-count"
+            }
           ]
         }
       }
@@ -4012,8 +4345,10 @@
         "outcome": {
           "label": "熱中症の救急搬送人員",
           "pattern": "change",
-          "metrics": [
-            "heatstroke-emergency-transports"
+          "data": [
+            {
+              "metric": "heatstroke-emergency-transports"
+            }
           ]
         }
       }
@@ -4060,8 +4395,11 @@
         "explanatory": {
           "label": "災害の被害の大きさ",
           "pattern": "compare",
-          "metrics": [
-            "disaster-damage-amount-per-person"
+          "data": [
+            {
+              "metric": "disaster-damage-amount-per-person",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -4113,10 +4451,18 @@
         "explanatory": {
           "label": "ごみ処理の取り組み",
           "pattern": "compare",
-          "metrics": [
-            "waste-recycling-rate",
-            "garbage-landfill-rate",
-            "final-disposal-site-remaining-capacity"
+          "data": [
+            {
+              "metric": "waste-recycling-rate"
+            },
+            {
+              "metric": "garbage-landfill-rate",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "final-disposal-site-remaining-capacity",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
@@ -4144,17 +4490,25 @@
         "explanatory": {
           "label": "日照と住宅の条件",
           "pattern": "compare",
-          "metrics": [
-            "annual-sunshine-duration",
-            "detached-house-ratio",
-            "owner-occupied-housing-ratio"
+          "data": [
+            {
+              "metric": "annual-sunshine-duration"
+            },
+            {
+              "metric": "detached-house-ratio"
+            },
+            {
+              "metric": "owner-occupied-housing-ratio"
+            }
           ]
         },
         "outcome": {
           "label": "太陽光発電の普及",
           "pattern": "compare",
-          "metrics": [
-            "solar-panel-housing-rate"
+          "data": [
+            {
+              "metric": "solar-panel-housing-rate"
+            }
           ]
         }
       }
@@ -4178,15 +4532,20 @@
         "explanatory": {
           "label": "農業就業人口",
           "pattern": "compare",
-          "metrics": [
-            "agricultural-employment-population"
+          "data": [
+            {
+              "metric": "agricultural-employment-population",
+              "grain": "prefecture"
+            }
           ]
         },
         "outcome": {
           "label": "耕作放棄地の面積",
           "pattern": "change",
-          "metrics": [
-            "abandoned-cultivated-land-area"
+          "data": [
+            {
+              "metric": "abandoned-cultivated-land-area"
+            }
           ]
         }
       }
@@ -4257,8 +4616,10 @@
         "outcome": {
           "label": "低標高地域に住む人口の割合",
           "pattern": "compare",
-          "metrics": [
-            "low-elevation-population-ratio-5m"
+          "data": [
+            {
+              "metric": "low-elevation-population-ratio-5m"
+            }
           ]
         }
       }
@@ -4270,7 +4631,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:tsunami-exposure",
-      "dataNote": "津波避難タワー等整備状況・国土数値情報。関連記事の候補: tsunami-evacuation-tower-count-prefecture-gap",
+      "dataNote": "津波避難タワー等整備状況・国土数値情報",
       "pitfall": "施設の数が実際の避難のしやすさを保証するわけではない。",
       "revenue": [
         "広告",
@@ -4296,7 +4657,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:earthquake-exposure",
-      "dataNote": "住宅・土地統計調査・火災年報。関連記事の候補: wooden-housing-ratio-prefecture-gap",
+      "dataNote": "住宅・土地統計調査・火災年報",
       "pitfall": "築年数・耐震改修の有無・世帯の資力が混ざる。",
       "revenue": [
         "広告"
@@ -4321,7 +4682,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:regional-energy",
-      "dataNote": "都道府県別エネルギー消費統計・家計調査。関連記事の候補: electricity-consumption-quantity-prefecture-gap",
+      "dataNote": "都道府県別エネルギー消費統計・家計調査",
       "pitfall": "気候と産業構造の違いが重なる。",
       "revenue": [
         "広告",
@@ -4382,15 +4743,19 @@
         "explanatory": {
           "label": "工場の集積度",
           "pattern": "compare",
-          "metrics": [
-            "manufacturing-shipment-amount"
+          "data": [
+            {
+              "metric": "manufacturing-shipment-amount"
+            }
           ]
         },
         "outcome": {
           "label": "産業部門のCO2排出量",
           "pattern": "compare",
-          "metrics": [
-            "regional-industry-co2-emissions-estimate"
+          "data": [
+            {
+              "metric": "regional-industry-co2-emissions-estimate"
+            }
           ]
         }
       }
@@ -4415,8 +4780,10 @@
         "outcome": {
           "label": "最終処分場の残余容量",
           "pattern": "compare",
-          "metrics": [
-            "final-disposal-site-remaining-capacity"
+          "data": [
+            {
+              "metric": "final-disposal-site-remaining-capacity"
+            }
           ]
         }
       }
@@ -4440,8 +4807,10 @@
         "outcome": {
           "label": "PM2.5の環境基準達成率",
           "pattern": "compare",
-          "metrics": [
-            "pm25-general-station-compliance-rate"
+          "data": [
+            {
+              "metric": "pm25-general-station-compliance-rate"
+            }
           ]
         }
       }
@@ -4470,8 +4839,10 @@
         "outcome": {
           "label": "生鮮果物の消費量",
           "pattern": "compare",
-          "metrics": [
-            "fresh-fruit-consumption-quantity"
+          "data": [
+            {
+              "metric": "fresh-fruit-consumption-quantity"
+            }
           ]
         }
       }
@@ -4499,10 +4870,16 @@
         "outcome": {
           "label": "麺類の消費量と支出額",
           "pattern": "compare",
-          "metrics": [
-            "fresh-udon-soba-consumption-quantity",
-            "ramen-dining-consumption-expenditure",
-            "soba-udon-dining-consumption-expenditure"
+          "data": [
+            {
+              "metric": "fresh-udon-soba-consumption-quantity"
+            },
+            {
+              "metric": "ramen-dining-consumption-expenditure"
+            },
+            {
+              "metric": "soba-udon-dining-consumption-expenditure"
+            }
           ]
         }
       }
@@ -4526,15 +4903,19 @@
         "explanatory": {
           "label": "県民所得の水準",
           "pattern": "compare",
-          "metrics": [
-            "per-capita-prefectural-income-h27"
+          "data": [
+            {
+              "metric": "per-capita-prefectural-income-h27"
+            }
           ]
         },
         "outcome": {
           "label": "エンゲル係数",
           "pattern": "compare",
-          "metrics": [
-            "engel-coefficient"
+          "data": [
+            {
+              "metric": "engel-coefficient"
+            }
           ]
         }
       }
@@ -4562,9 +4943,15 @@
         "outcome": {
           "label": "エンゲル係数の推移",
           "pattern": "change",
-          "metrics": [
-            "engel-coefficient",
-            "food-expenditure-ratio-multi-person-households"
+          "data": [
+            {
+              "metric": "engel-coefficient",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "food-expenditure-ratio-multi-person-households",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -4593,8 +4980,11 @@
         "outcome": {
           "label": "エンゲル係数の長期推移",
           "pattern": "change",
-          "metrics": [
-            "engel-coefficient"
+          "data": [
+            {
+              "metric": "engel-coefficient",
+              "grain": "prefecture"
+            }
           ]
         }
       }
@@ -4617,15 +5007,19 @@
         "explanatory": {
           "label": "1人当たり県民所得",
           "pattern": "compare",
-          "metrics": [
-            "per-capita-prefectural-income-h27"
+          "data": [
+            {
+              "metric": "per-capita-prefectural-income-h27"
+            }
           ]
         },
         "outcome": {
           "label": "県庁所在市のエンゲル係数",
           "pattern": "compare",
-          "metrics": [
-            "engel-coefficient"
+          "data": [
+            {
+              "metric": "engel-coefficient"
+            }
           ]
         }
       }
@@ -4648,16 +5042,22 @@
         "explanatory": {
           "label": "1人当たり県民所得",
           "pattern": "compare",
-          "metrics": [
-            "per-capita-prefectural-income-h27"
+          "data": [
+            {
+              "metric": "per-capita-prefectural-income-h27"
+            }
           ]
         },
         "outcome": {
           "label": "情報通信関係の支出割合",
           "pattern": "compare",
-          "metrics": [
-            "information-communication-coefficient",
-            "information-communication-expenditure"
+          "data": [
+            {
+              "metric": "information-communication-coefficient"
+            },
+            {
+              "metric": "information-communication-expenditure"
+            }
           ]
         }
       }
@@ -4681,8 +5081,10 @@
         "outcome": {
           "label": "酒類への支出額",
           "pattern": "compare",
-          "metrics": [
-            "alcoholic-beverages-group-consumption-expenditure"
+          "data": [
+            {
+              "metric": "alcoholic-beverages-group-consumption-expenditure"
+            }
           ]
         }
       }
@@ -4706,9 +5108,15 @@
         "outcome": {
           "label": "酒類の支出額の推移",
           "pattern": "change",
-          "metrics": [
-            "alcoholic-beverages-group-consumption-expenditure",
-            "chuhai-consumption-expenditure"
+          "data": [
+            {
+              "metric": "alcoholic-beverages-group-consumption-expenditure",
+              "grain": "capital-city"
+            },
+            {
+              "metric": "chuhai-consumption-expenditure",
+              "grain": "capital-city"
+            }
           ]
         }
       }
@@ -4732,20 +5140,34 @@
         "explanatory": {
           "label": "子育て環境の指標",
           "pattern": "compare",
-          "metrics": [
-            "childcare-employment-rate",
-            "nursery-utilization-rate",
-            "per-capita-child-welfare-expenditure-under17-pref-municipal",
-            "physicians-in-medical-facilities-per-100k",
-            "urban-park-area-per-person"
+          "data": [
+            {
+              "metric": "childcare-employment-rate"
+            },
+            {
+              "metric": "nursery-utilization-rate"
+            },
+            {
+              "metric": "per-capita-child-welfare-expenditure-under17-pref-municipal"
+            },
+            {
+              "metric": "physicians-in-medical-facilities-per-100k"
+            },
+            {
+              "metric": "urban-park-area-per-person"
+            }
           ]
         },
         "outcome": {
           "label": "子育て成果の指標",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate",
-            "infant-mortality-rate-per-1000-births"
+          "data": [
+            {
+              "metric": "total-fertility-rate"
+            },
+            {
+              "metric": "infant-mortality-rate-per-1000-births"
+            }
           ]
         }
       }
@@ -4769,21 +5191,37 @@
         "explanatory": {
           "label": "住環境・医療・治安の指標",
           "pattern": "compare",
-          "metrics": [
-            "general-hospital-count-per-100k",
-            "owner-occupied-housing-ratio",
-            "private-rental-housing-rent-per-3-3m2",
-            "violent-crime-per-100k",
-            "maximum-temperature"
+          "data": [
+            {
+              "metric": "general-hospital-count-per-100k"
+            },
+            {
+              "metric": "owner-occupied-housing-ratio"
+            },
+            {
+              "metric": "private-rental-housing-rent-per-3-3m2"
+            },
+            {
+              "metric": "violent-crime-per-100k"
+            },
+            {
+              "metric": "maximum-temperature"
+            }
           ]
         },
         "outcome": {
           "label": "暮らしの豊かさの指標",
           "pattern": "compare",
-          "metrics": [
-            "per-capita-prefectural-income-h27",
-            "unemployment-rate",
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "per-capita-prefectural-income-h27"
+            },
+            {
+              "metric": "unemployment-rate"
+            },
+            {
+              "metric": "total-fertility-rate"
+            }
           ]
         }
       }
@@ -4900,10 +5338,16 @@
         "outcome": {
           "label": "水稲の作付面積と収穫量",
           "pattern": "compare",
-          "metrics": [
-            "rice-cultivated-area",
-            "rice-harvest-volume",
-            "rice-yield-per-10a"
+          "data": [
+            {
+              "metric": "rice-cultivated-area"
+            },
+            {
+              "metric": "rice-harvest-volume"
+            },
+            {
+              "metric": "rice-yield-per-10a"
+            }
           ]
         }
       }
@@ -4967,7 +5411,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:tourism",
-      "dataNote": "宿泊旅行統計調査・市町村税課税状況。関連記事の候補: average-length-of-stay-prefecture-gap",
+      "dataNote": "宿泊旅行統計調査・市町村税課税状況",
       "pitfall": "もともと経済規模の大きい都市に観光客も集まる。",
       "revenue": [
         "広告",
@@ -5068,7 +5512,7 @@
       "unit": "prefecture",
       "answerability": "caveat",
       "primaryTheme": "theme:agriculture-production",
-      "dataNote": "農林業センサス・農地中間管理機構実績。関連記事の候補: employed-people-ratio-primary-prefecture-gap",
+      "dataNote": "農林業センサス・農地中間管理機構実績",
       "pitfall": "平地と山間部の条件の違いが大きい。",
       "revenue": [
         "実務",
@@ -5130,8 +5574,10 @@
         "outcome": {
           "label": "採卵鶏の飼養羽数の県別分布",
           "pattern": "compare",
-          "metrics": [
-            "layer-hen-count"
+          "data": [
+            {
+              "metric": "layer-hen-count"
+            }
           ]
         }
       }
@@ -5185,12 +5631,22 @@
         "outcome": {
           "label": "県別の平均身長",
           "pattern": "compare",
-          "metrics": [
-            "average-height-middle-school-second-grade-female",
-            "average-height-middle-school-second-grade-male",
-            "average-height-primary-school-fifth-grade-female",
-            "average-height-primary-school-fifth-grade-male",
-            "avg-height-high-school-2nd-male"
+          "data": [
+            {
+              "metric": "average-height-middle-school-second-grade-female"
+            },
+            {
+              "metric": "average-height-middle-school-second-grade-male"
+            },
+            {
+              "metric": "average-height-primary-school-fifth-grade-female"
+            },
+            {
+              "metric": "average-height-primary-school-fifth-grade-male"
+            },
+            {
+              "metric": "avg-height-high-school-2nd-male"
+            }
           ]
         }
       }
@@ -5221,8 +5677,10 @@
         "outcome": {
           "label": "県別の食料自給率(カロリー)",
           "pattern": "compare",
-          "metrics": [
-            "food-self-sufficiency-rate-calorie"
+          "data": [
+            {
+              "metric": "food-self-sufficiency-rate-calorie"
+            }
           ]
         }
       }
@@ -5248,8 +5706,10 @@
         "outcome": {
           "label": "漁業就業者数の県別比較",
           "pattern": "compare",
-          "metrics": [
-            "fishery-workers"
+          "data": [
+            {
+              "metric": "fishery-workers"
+            }
           ]
         }
       }
@@ -5276,19 +5736,31 @@
         "explanatory": {
           "label": "日照時間と住宅条件",
           "pattern": "compare",
-          "metrics": [
-            "annual-sunshine-duration",
-            "detached-house-ratio",
-            "owner-occupied-housing-ratio",
-            "solar-panel-housing-rate"
+          "data": [
+            {
+              "metric": "annual-sunshine-duration"
+            },
+            {
+              "metric": "detached-house-ratio"
+            },
+            {
+              "metric": "owner-occupied-housing-ratio"
+            },
+            {
+              "metric": "solar-panel-housing-rate"
+            }
           ]
         },
         "outcome": {
           "label": "風力発電の導入量",
           "pattern": "compare",
-          "metrics": [
-            "wind-power-capacity",
-            "wind-power-turbine-count"
+          "data": [
+            {
+              "metric": "wind-power-capacity"
+            },
+            {
+              "metric": "wind-power-turbine-count"
+            }
           ]
         }
       }
@@ -5315,8 +5787,10 @@
         "outcome": {
           "label": "カップ麺の消費支出額",
           "pattern": "compare",
-          "metrics": [
-            "cup-noodles-consumption-expenditure"
+          "data": [
+            {
+              "metric": "cup-noodles-consumption-expenditure"
+            }
           ]
         }
       }
@@ -5342,15 +5816,19 @@
         "explanatory": {
           "label": "カツオの漁獲量",
           "pattern": "compare",
-          "metrics": [
-            "fishery-species-catch-bonito"
+          "data": [
+            {
+              "metric": "fishery-species-catch-bonito"
+            }
           ]
         },
         "outcome": {
           "label": "カツオの消費量",
           "pattern": "compare",
-          "metrics": [
-            "bonito-consumption-quantity"
+          "data": [
+            {
+              "metric": "bonito-consumption-quantity"
+            }
           ]
         }
       }
@@ -5377,8 +5855,10 @@
         "outcome": {
           "label": "チョコレートの消費支出額",
           "pattern": "change",
-          "metrics": [
-            "chocolate-consumption-expenditure"
+          "data": [
+            {
+              "metric": "chocolate-consumption-expenditure"
+            }
           ]
         }
       }
@@ -5407,19 +5887,43 @@
         "outcome": {
           "label": "生鮮魚介の品目別支出額",
           "pattern": "compare",
-          "metrics": [
-            "bonito-consumption-expenditure",
-            "clam-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "freshwater-clam-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "mackerel-consumption-expenditure",
-            "octopus-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "salmon-consumption-expenditure",
-            "sardine-consumption-expenditure",
-            "saury-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "octopus-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "salmon-consumption-expenditure"
+            },
+            {
+              "metric": "sardine-consumption-expenditure"
+            },
+            {
+              "metric": "saury-consumption-expenditure"
+            }
           ]
         }
       }
@@ -5445,8 +5949,10 @@
         "outcome": {
           "label": "全国学力テスト平均正答率",
           "pattern": "compare",
-          "metrics": [
-            "academic-achievement-test-average-rate"
+          "data": [
+            {
+              "metric": "academic-achievement-test-average-rate"
+            }
           ]
         }
       }
@@ -5469,16 +5975,22 @@
         "explanatory": {
           "label": "ほうれんそうの消費量と支出",
           "pattern": "compare",
-          "metrics": [
-            "spinach-consumption-expenditure",
-            "spinach-consumption-quantity"
+          "data": [
+            {
+              "metric": "spinach-consumption-expenditure"
+            },
+            {
+              "metric": "spinach-consumption-quantity"
+            }
           ]
         },
         "outcome": {
           "label": "全国学力テスト平均正答率",
           "pattern": "compare",
-          "metrics": [
-            "academic-achievement-test-average-rate"
+          "data": [
+            {
+              "metric": "academic-achievement-test-average-rate"
+            }
           ]
         }
       }
@@ -5503,8 +6015,10 @@
         "outcome": {
           "label": "学力テスト平均正答率の推移",
           "pattern": "change",
-          "metrics": [
-            "academic-achievement-test-average-rate"
+          "data": [
+            {
+              "metric": "academic-achievement-test-average-rate"
+            }
           ]
         }
       }
@@ -5532,8 +6046,10 @@
         "outcome": {
           "label": "製造品出荷額等の県別比較",
           "pattern": "compare",
-          "metrics": [
-            "manufacturing-shipment-amount"
+          "data": [
+            {
+              "metric": "manufacturing-shipment-amount"
+            }
           ]
         }
       }
@@ -5561,9 +6077,13 @@
         "outcome": {
           "label": "生活保護の被保護者の多さ",
           "pattern": "compare",
-          "metrics": [
-            "households-on-public-assistance-per-1000",
-            "persons-on-public-assistance-per-1000"
+          "data": [
+            {
+              "metric": "households-on-public-assistance-per-1000"
+            },
+            {
+              "metric": "persons-on-public-assistance-per-1000"
+            }
           ]
         }
       }
@@ -5590,8 +6110,10 @@
         "outcome": {
           "label": "地域別最低賃金",
           "pattern": "compare",
-          "metrics": [
-            "minimum-wage-by-region"
+          "data": [
+            {
+              "metric": "minimum-wage-by-region"
+            }
           ]
         }
       }
@@ -5622,9 +6144,13 @@
         "outcome": {
           "label": "出生時の平均余命",
           "pattern": "compare",
-          "metrics": [
-            "life-expectancy-0-male",
-            "life-expectancy-0-female"
+          "data": [
+            {
+              "metric": "life-expectancy-0-male"
+            },
+            {
+              "metric": "life-expectancy-0-female"
+            }
           ]
         }
       }
@@ -5650,8 +6176,10 @@
         "outcome": {
           "label": "昼間人口の県別比較",
           "pattern": "compare",
-          "metrics": [
-            "day-time-population"
+          "data": [
+            {
+              "metric": "day-time-population"
+            }
           ]
         }
       }
@@ -5677,8 +6205,10 @@
         "outcome": {
           "label": "持ち家比率の県別比較",
           "pattern": "compare",
-          "metrics": [
-            "owner-occupied-housing-ratio"
+          "data": [
+            {
+              "metric": "owner-occupied-housing-ratio"
+            }
           ]
         }
       }
@@ -5704,15 +6234,19 @@
         "explanatory": {
           "label": "合計特殊出生率",
           "pattern": "compare",
-          "metrics": [
-            "total-fertility-rate"
+          "data": [
+            {
+              "metric": "total-fertility-rate"
+            }
           ]
         },
         "outcome": {
           "label": "人工妊娠中絶実施率",
           "pattern": "compare",
-          "metrics": [
-            "abortion-rate"
+          "data": [
+            {
+              "metric": "abortion-rate"
+            }
           ]
         }
       }
@@ -5735,18 +6269,28 @@
         "explanatory": {
           "label": "社会体育施設の整備状況",
           "pattern": "compare",
-          "metrics": [
-            "community-sports-facility-count-per-million",
-            "public-gymnasium-count-per-million"
+          "data": [
+            {
+              "metric": "community-sports-facility-count-per-million"
+            },
+            {
+              "metric": "public-gymnasium-count-per-million"
+            }
           ]
         },
         "outcome": {
           "label": "スポーツの行動者率",
           "pattern": "compare",
-          "metrics": [
-            "sports-annual-participation-rate-10plus",
-            "sports-participation-rate-golf",
-            "sports-participation-rate-walking"
+          "data": [
+            {
+              "metric": "sports-annual-participation-rate-10plus"
+            },
+            {
+              "metric": "sports-participation-rate-golf"
+            },
+            {
+              "metric": "sports-participation-rate-walking"
+            }
           ]
         }
       }
@@ -5770,18 +6314,28 @@
         "explanatory": {
           "label": "小売店の立地密度",
           "pattern": "compare",
-          "metrics": [
-            "department-supermarket-count-per-100k",
-            "large-retail-store-count-per-100k",
-            "retail-store-count-per-1000"
+          "data": [
+            {
+              "metric": "department-supermarket-count-per-100k"
+            },
+            {
+              "metric": "large-retail-store-count-per-100k"
+            },
+            {
+              "metric": "retail-store-count-per-1000"
+            }
           ]
         },
         "outcome": {
           "label": "コンビニエンスストア数",
           "pattern": "compare",
-          "metrics": [
-            "convenience-store-count-per-100k",
-            "convenience-store-count-commercial"
+          "data": [
+            {
+              "metric": "convenience-store-count-per-100k"
+            },
+            {
+              "metric": "convenience-store-count-commercial"
+            }
           ]
         }
       }
@@ -5804,15 +6358,19 @@
         "explanatory": {
           "label": "パチンコの行動者率",
           "pattern": "compare",
-          "metrics": [
-            "hobby-participation-rate-pachinko"
+          "data": [
+            {
+              "metric": "hobby-participation-rate-pachinko"
+            }
           ]
         },
         "outcome": {
           "label": "パチンコ店の人口あたり店舗数",
           "pattern": "compare",
-          "metrics": [
-            "pachinko-shop-density-per-10k"
+          "data": [
+            {
+              "metric": "pachinko-shop-density-per-10k"
+            }
           ]
         }
       }
@@ -5841,8 +6399,10 @@
         "outcome": {
           "label": "年間日照時間の県別比較",
           "pattern": "compare",
-          "metrics": [
-            "annual-sunshine-duration"
+          "data": [
+            {
+              "metric": "annual-sunshine-duration"
+            }
           ]
         }
       }
@@ -5869,16 +6429,22 @@
         "explanatory": {
           "label": "降水日数と最深積雪",
           "pattern": "compare",
-          "metrics": [
-            "annual-precipitation-days",
-            "maximum-snow-depth"
+          "data": [
+            {
+              "metric": "annual-precipitation-days"
+            },
+            {
+              "metric": "maximum-snow-depth"
+            }
           ]
         },
         "outcome": {
           "label": "年間降水量",
           "pattern": "compare",
-          "metrics": [
-            "annual-precipitation"
+          "data": [
+            {
+              "metric": "annual-precipitation"
+            }
           ]
         }
       }
@@ -5906,9 +6472,13 @@
         "outcome": {
           "label": "労働災害の発生頻度",
           "pattern": "compare",
-          "metrics": [
-            "frequency-of-occupational-accidents",
-            "work-accident-severity"
+          "data": [
+            {
+              "metric": "frequency-of-occupational-accidents"
+            },
+            {
+              "metric": "work-accident-severity"
+            }
           ]
         }
       }
@@ -5932,8 +6502,10 @@
         "outcome": {
           "label": "土砂災害警戒区域数",
           "pattern": "compare",
-          "metrics": [
-            "landslide-warning-zone-count"
+          "data": [
+            {
+              "metric": "landslide-warning-zone-count"
+            }
           ]
         }
       }
@@ -5962,9 +6534,13 @@
         "outcome": {
           "label": "自動車関連の消費支出",
           "pattern": "compare",
-          "metrics": [
-            "automobile-related-group-consumption-expenditure",
-            "gasoline-consumption-expenditure"
+          "data": [
+            {
+              "metric": "automobile-related-group-consumption-expenditure"
+            },
+            {
+              "metric": "gasoline-consumption-expenditure"
+            }
           ]
         }
       }
@@ -5989,9 +6565,13 @@
         "outcome": {
           "label": "家計調査の都市別順位",
           "pattern": "compare",
-          "metrics": [
-            "fresh-fruit-consumption-quantity",
-            "gyoza-frozen-consumption-expenditure"
+          "data": [
+            {
+              "metric": "fresh-fruit-consumption-quantity"
+            },
+            {
+              "metric": "gyoza-frozen-consumption-expenditure"
+            }
           ]
         }
       }
@@ -6016,14 +6596,28 @@
         "outcome": {
           "label": "品目別の支出額と購入数量の順位",
           "pattern": "change",
-          "metrics": [
-            "fresh-udon-soba-consumption-expenditure",
-            "gyoza-frozen-consumption-expenditure",
-            "natto-consumption-expenditure",
-            "ramen-dining-consumption-expenditure",
-            "rice-consumption-expenditure",
-            "white-bread-consumption-expenditure",
-            "white-bread-consumption-quantity"
+          "data": [
+            {
+              "metric": "fresh-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "gyoza-frozen-consumption-expenditure"
+            },
+            {
+              "metric": "natto-consumption-expenditure"
+            },
+            {
+              "metric": "ramen-dining-consumption-expenditure"
+            },
+            {
+              "metric": "rice-consumption-expenditure"
+            },
+            {
+              "metric": "white-bread-consumption-expenditure"
+            },
+            {
+              "metric": "white-bread-consumption-quantity"
+            }
           ]
         }
       }
@@ -6047,18 +6641,28 @@
         "explanatory": {
           "label": "肉の地元での生産規模",
           "pattern": "compare",
-          "metrics": [
-            "total-population"
+          "data": [
+            {
+              "metric": "total-population"
+            }
           ]
         },
         "outcome": {
           "label": "肉類の消費量",
           "pattern": "compare",
-          "metrics": [
-            "beef-consumption-quantity",
-            "chicken-consumption-quantity",
-            "pork-consumption-quantity",
-            "pork-consumption-expenditure"
+          "data": [
+            {
+              "metric": "beef-consumption-quantity"
+            },
+            {
+              "metric": "chicken-consumption-quantity"
+            },
+            {
+              "metric": "pork-consumption-quantity"
+            },
+            {
+              "metric": "pork-consumption-expenditure"
+            }
           ]
         }
       }
@@ -6086,10 +6690,17 @@
         "outcome": {
           "label": "食料の支出と購入量の変化",
           "pattern": "change",
-          "metrics": [
-            "consumption-expenditure-multi-person-households-per-month",
-            "food-expenditure-ratio-multi-person-households",
-            "avg-propensity-to-consume-worker-households"
+          "data": [
+            {
+              "metric": "consumption-expenditure-multi-person-households-per-month"
+            },
+            {
+              "metric": "food-expenditure-ratio-multi-person-households",
+              "grain": "prefecture"
+            },
+            {
+              "metric": "avg-propensity-to-consume-worker-households"
+            }
           ]
         }
       }
@@ -6116,9 +6727,19 @@
         "outcome": {
           "label": "米の支出額と購入量",
           "pattern": "change",
-          "metrics": [
-            "rice-consumption-expenditure",
-            "rice-consumption-quantity"
+          "data": [
+            {
+              "metric": "rice-consumption-expenditure"
+            },
+            {
+              "metric": "rice-consumption-quantity"
+            },
+            {
+              "series": "rice-national-spending-trend"
+            },
+            {
+              "series": "rice-national-quantity-trend"
+            }
           ]
         }
       }
@@ -6146,10 +6767,18 @@
         "outcome": {
           "label": "品目別の購入量",
           "pattern": "change",
-          "metrics": [
-            "rice-consumption-expenditure",
-            "other-bread-consumption-expenditure",
-            "white-bread-consumption-quantity"
+          "data": [
+            {
+              "metric": "rice-consumption-expenditure"
+            },
+            {
+              "metric": "other-bread-consumption-expenditure",
+              "grain": "capital-city"
+            },
+            {
+              "metric": "white-bread-consumption-quantity",
+              "grain": "capital-city"
+            }
           ]
         }
       }
@@ -6285,7 +6914,15 @@
         },
         "outcome": {
           "label": "品目の支出額・数量・平均価格",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            },
+            {
+              "series": "item-quantity-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -6621,9 +7258,15 @@
         "outcome": {
           "label": "ネクタイ・ストッキングの支出額",
           "pattern": "change",
-          "metrics": [
-            "necktie-consumption-expenditure",
-            "womens-stockings-consumption-expenditure"
+          "data": [
+            {
+              "metric": "necktie-consumption-expenditure",
+              "grain": "capital-city"
+            },
+            {
+              "metric": "womens-stockings-consumption-expenditure",
+              "grain": "capital-city"
+            }
           ]
         }
       }
@@ -6647,7 +7290,15 @@
         "explanatory": null,
         "outcome": {
           "label": "品目別の月次支出額・購入数量",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "series": "beer-monthly-spending"
+            },
+            {
+              "series": "beer-monthly-quantity"
+            }
+          ]
         }
       }
     },
@@ -6671,9 +7322,13 @@
         "outcome": {
           "label": "婦人用コートの支出額・購入数量",
           "pattern": "change",
-          "metrics": [
-            "womens-coat-consumption-expenditure",
-            "womens-coat-consumption-quantity"
+          "data": [
+            {
+              "metric": "womens-coat-consumption-expenditure"
+            },
+            {
+              "metric": "womens-coat-consumption-quantity"
+            }
           ]
         }
       }
@@ -6744,22 +7399,52 @@
         "outcome": {
           "label": "品目別の支出額・消費量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "cheese-consumption-expenditure",
-            "cheese-consumption-quantity",
-            "crab-consumption-expenditure",
-            "crab-consumption-quantity",
-            "mandarin-consumption-expenditure",
-            "mandarin-consumption-quantity",
-            "pickled-plum-consumption-expenditure",
-            "pickled-plum-consumption-quantity",
-            "rice-consumption-expenditure",
-            "rice-consumption-quantity",
-            "salmon-consumption-expenditure",
-            "salmon-consumption-quantity",
-            "saury-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "cheese-consumption-expenditure"
+            },
+            {
+              "metric": "cheese-consumption-quantity"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-quantity"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-quantity"
+            },
+            {
+              "metric": "pickled-plum-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-plum-consumption-quantity"
+            },
+            {
+              "metric": "rice-consumption-expenditure"
+            },
+            {
+              "metric": "rice-consumption-quantity"
+            },
+            {
+              "metric": "salmon-consumption-expenditure"
+            },
+            {
+              "metric": "salmon-consumption-quantity"
+            },
+            {
+              "metric": "saury-consumption-expenditure"
+            }
           ]
         }
       }
@@ -6784,21 +7469,49 @@
         "outcome": {
           "label": "品目別の支出額・消費量",
           "pattern": "compare",
-          "metrics": [
-            "apple-consumption-expenditure",
-            "cup-noodles-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "flounder-consumption-quantity",
-            "freshwater-clam-consumption-expenditure",
-            "freshwater-clam-consumption-quantity",
-            "pickled-plum-consumption-expenditure",
-            "pickled-plum-consumption-quantity",
-            "scallop-consumption-expenditure",
-            "scallop-consumption-quantity",
-            "tuna-consumption-expenditure",
-            "tuna-consumption-quantity",
-            "watermelon-consumption-expenditure",
-            "watermelon-consumption-quantity"
+          "data": [
+            {
+              "metric": "apple-consumption-expenditure"
+            },
+            {
+              "metric": "cup-noodles-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-quantity"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-quantity"
+            },
+            {
+              "metric": "pickled-plum-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-plum-consumption-quantity"
+            },
+            {
+              "metric": "scallop-consumption-expenditure"
+            },
+            {
+              "metric": "scallop-consumption-quantity"
+            },
+            {
+              "metric": "tuna-consumption-expenditure"
+            },
+            {
+              "metric": "tuna-consumption-quantity"
+            },
+            {
+              "metric": "watermelon-consumption-expenditure"
+            },
+            {
+              "metric": "watermelon-consumption-quantity"
+            }
           ]
         }
       }
@@ -6823,22 +7536,52 @@
         "outcome": {
           "label": "品目別の支出額・消費量",
           "pattern": "compare",
-          "metrics": [
-            "apple-consumption-expenditure",
-            "apple-consumption-quantity",
-            "chinese-noodles-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "flounder-consumption-quantity",
-            "freshwater-clam-consumption-expenditure",
-            "freshwater-clam-consumption-quantity",
-            "persimmon-consumption-expenditure",
-            "persimmon-consumption-quantity",
-            "salted-salmon-consumption-expenditure",
-            "salted-salmon-consumption-quantity",
-            "tofu-consumption-expenditure",
-            "tofu-consumption-quantity",
-            "wakame-consumption-expenditure",
-            "wakame-consumption-quantity"
+          "data": [
+            {
+              "metric": "apple-consumption-expenditure"
+            },
+            {
+              "metric": "apple-consumption-quantity"
+            },
+            {
+              "metric": "chinese-noodles-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-quantity"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-quantity"
+            },
+            {
+              "metric": "persimmon-consumption-expenditure"
+            },
+            {
+              "metric": "persimmon-consumption-quantity"
+            },
+            {
+              "metric": "salted-salmon-consumption-expenditure"
+            },
+            {
+              "metric": "salted-salmon-consumption-quantity"
+            },
+            {
+              "metric": "tofu-consumption-expenditure"
+            },
+            {
+              "metric": "tofu-consumption-quantity"
+            },
+            {
+              "metric": "wakame-consumption-expenditure"
+            },
+            {
+              "metric": "wakame-consumption-quantity"
+            }
           ]
         }
       }
@@ -6863,22 +7606,52 @@
         "outcome": {
           "label": "仙台市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "chuhai-consumption-expenditure",
-            "chuhai-consumption-quantity",
-            "dried-shiitake-consumption-expenditure",
-            "dried-shiitake-consumption-quantity",
-            "fish-paste-consumption-expenditure",
-            "orange-consumption-expenditure",
-            "orange-consumption-quantity",
-            "oyster-consumption-expenditure",
-            "oyster-consumption-quantity",
-            "pumpkin-consumption-expenditure",
-            "pumpkin-consumption-quantity",
-            "wakame-consumption-expenditure",
-            "wakame-consumption-quantity"
+          "data": [
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "chuhai-consumption-expenditure"
+            },
+            {
+              "metric": "chuhai-consumption-quantity"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-quantity"
+            },
+            {
+              "metric": "fish-paste-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-quantity"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-quantity"
+            },
+            {
+              "metric": "pumpkin-consumption-expenditure"
+            },
+            {
+              "metric": "pumpkin-consumption-quantity"
+            },
+            {
+              "metric": "wakame-consumption-expenditure"
+            },
+            {
+              "metric": "wakame-consumption-quantity"
+            }
           ]
         }
       }
@@ -6903,22 +7676,52 @@
         "outcome": {
           "label": "秋田市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "chinese-noodles-consumption-expenditure",
-            "chinese-noodles-consumption-quantity",
-            "eggplant-consumption-expenditure",
-            "eggplant-consumption-quantity",
-            "flounder-consumption-expenditure",
-            "flounder-consumption-quantity",
-            "freshwater-clam-consumption-expenditure",
-            "freshwater-clam-consumption-quantity",
-            "green-beans-consumption-expenditure",
-            "green-beans-consumption-quantity",
-            "melon-consumption-expenditure",
-            "melon-consumption-quantity",
-            "miso-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "chinese-noodles-consumption-expenditure"
+            },
+            {
+              "metric": "chinese-noodles-consumption-quantity"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-quantity"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-quantity"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-quantity"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-quantity"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-quantity"
+            },
+            {
+              "metric": "miso-consumption-expenditure"
+            }
           ]
         }
       }
@@ -6943,22 +7746,52 @@
         "outcome": {
           "label": "山形市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "cheese-consumption-expenditure",
-            "cheese-consumption-quantity",
-            "fresh-udon-soba-consumption-expenditure",
-            "fresh-udon-soba-consumption-quantity",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "katsuobushi-consumption-expenditure",
-            "katsuobushi-consumption-quantity",
-            "konnyaku-consumption-expenditure",
-            "pear-consumption-expenditure",
-            "pear-consumption-quantity",
-            "persimmon-consumption-expenditure",
-            "persimmon-consumption-quantity"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "cheese-consumption-expenditure"
+            },
+            {
+              "metric": "cheese-consumption-quantity"
+            },
+            {
+              "metric": "fresh-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "fresh-udon-soba-consumption-quantity"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-quantity"
+            },
+            {
+              "metric": "konnyaku-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-quantity"
+            },
+            {
+              "metric": "persimmon-consumption-expenditure"
+            },
+            {
+              "metric": "persimmon-consumption-quantity"
+            }
           ]
         }
       }
@@ -6983,22 +7816,52 @@
         "outcome": {
           "label": "福島市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "cod-roe-consumption-expenditure",
-            "cod-roe-consumption-quantity",
-            "enoki-consumption-expenditure",
-            "enoki-consumption-quantity",
-            "green-beans-consumption-expenditure",
-            "green-beans-consumption-quantity",
-            "konbu-tsukudani-consumption-expenditure",
-            "konbu-tsukudani-consumption-quantity",
-            "natto-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "oyster-consumption-quantity",
-            "peach-consumption-expenditure",
-            "peach-consumption-quantity"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "cod-roe-consumption-expenditure"
+            },
+            {
+              "metric": "cod-roe-consumption-quantity"
+            },
+            {
+              "metric": "enoki-consumption-expenditure"
+            },
+            {
+              "metric": "enoki-consumption-quantity"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-quantity"
+            },
+            {
+              "metric": "konbu-tsukudani-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-tsukudani-consumption-quantity"
+            },
+            {
+              "metric": "natto-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-quantity"
+            },
+            {
+              "metric": "peach-consumption-expenditure"
+            },
+            {
+              "metric": "peach-consumption-quantity"
+            }
           ]
         }
       }
@@ -7023,22 +7886,52 @@
         "outcome": {
           "label": "水戸市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "bonito-consumption-expenditure",
-            "bonito-consumption-quantity",
-            "cod-roe-consumption-expenditure",
-            "cod-roe-consumption-quantity",
-            "freshwater-clam-consumption-expenditure",
-            "freshwater-clam-consumption-quantity",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "ham-consumption-expenditure",
-            "ham-consumption-quantity",
-            "mandarin-consumption-expenditure",
-            "mandarin-consumption-quantity",
-            "melon-consumption-expenditure"
+          "data": [
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "bonito-consumption-quantity"
+            },
+            {
+              "metric": "cod-roe-consumption-expenditure"
+            },
+            {
+              "metric": "cod-roe-consumption-quantity"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-quantity"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "ham-consumption-expenditure"
+            },
+            {
+              "metric": "ham-consumption-quantity"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-quantity"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7063,22 +7956,52 @@
         "outcome": {
           "label": "宇都宮市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "chinese-cabbage-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "mandarin-consumption-expenditure",
-            "mandarin-consumption-quantity",
-            "melon-consumption-expenditure",
-            "melon-consumption-quantity",
-            "orange-consumption-expenditure",
-            "orange-consumption-quantity",
-            "pear-consumption-expenditure",
-            "pear-consumption-quantity",
-            "scallop-consumption-expenditure",
-            "scallop-consumption-quantity",
-            "strawberry-consumption-expenditure",
-            "strawberry-consumption-quantity"
+          "data": [
+            {
+              "metric": "chinese-cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-quantity"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-quantity"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-quantity"
+            },
+            {
+              "metric": "pear-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-quantity"
+            },
+            {
+              "metric": "scallop-consumption-expenditure"
+            },
+            {
+              "metric": "scallop-consumption-quantity"
+            },
+            {
+              "metric": "strawberry-consumption-expenditure"
+            },
+            {
+              "metric": "strawberry-consumption-quantity"
+            }
           ]
         }
       }
@@ -7103,22 +8026,52 @@
         "outcome": {
           "label": "前橋市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "cucumber-consumption-expenditure",
-            "dressing-consumption-expenditure",
-            "dressing-consumption-quantity",
-            "jam-consumption-expenditure",
-            "jam-consumption-quantity",
-            "leek-consumption-expenditure",
-            "mackerel-consumption-expenditure",
-            "mackerel-consumption-quantity",
-            "miso-consumption-expenditure",
-            "miso-consumption-quantity",
-            "pear-consumption-expenditure",
-            "pear-consumption-quantity",
-            "rice-consumption-expenditure"
+          "data": [
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "cucumber-consumption-expenditure"
+            },
+            {
+              "metric": "dressing-consumption-expenditure"
+            },
+            {
+              "metric": "dressing-consumption-quantity"
+            },
+            {
+              "metric": "jam-consumption-expenditure"
+            },
+            {
+              "metric": "jam-consumption-quantity"
+            },
+            {
+              "metric": "leek-consumption-expenditure"
+            },
+            {
+              "metric": "mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "mackerel-consumption-quantity"
+            },
+            {
+              "metric": "miso-consumption-expenditure"
+            },
+            {
+              "metric": "miso-consumption-quantity"
+            },
+            {
+              "metric": "pear-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-quantity"
+            },
+            {
+              "metric": "rice-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7143,22 +8096,52 @@
         "outcome": {
           "label": "さいたま市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "broccoli-consumption-expenditure",
-            "clam-consumption-expenditure",
-            "clam-consumption-quantity",
-            "cod-roe-consumption-expenditure",
-            "cod-roe-consumption-quantity",
-            "cucumber-consumption-expenditure",
-            "green-pepper-consumption-expenditure",
-            "melon-consumption-expenditure",
-            "melon-consumption-quantity",
-            "octopus-consumption-expenditure",
-            "octopus-consumption-quantity",
-            "pickled-plum-consumption-expenditure",
-            "pickled-plum-consumption-quantity",
-            "pumpkin-consumption-expenditure",
-            "pumpkin-consumption-quantity"
+          "data": [
+            {
+              "metric": "broccoli-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-quantity"
+            },
+            {
+              "metric": "cod-roe-consumption-expenditure"
+            },
+            {
+              "metric": "cod-roe-consumption-quantity"
+            },
+            {
+              "metric": "cucumber-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-quantity"
+            },
+            {
+              "metric": "octopus-consumption-expenditure"
+            },
+            {
+              "metric": "octopus-consumption-quantity"
+            },
+            {
+              "metric": "pickled-plum-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-plum-consumption-quantity"
+            },
+            {
+              "metric": "pumpkin-consumption-expenditure"
+            },
+            {
+              "metric": "pumpkin-consumption-quantity"
+            }
           ]
         }
       }
@@ -7183,22 +8166,52 @@
         "outcome": {
           "label": "千葉市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "banana-consumption-expenditure",
-            "butter-consumption-expenditure",
-            "butter-consumption-quantity",
-            "dried-mackerel-consumption-expenditure",
-            "dried-mackerel-consumption-quantity",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "jam-consumption-expenditure",
-            "jam-consumption-quantity",
-            "jelly-consumption-expenditure",
-            "melon-consumption-expenditure",
-            "melon-consumption-quantity",
-            "orange-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "banana-consumption-expenditure"
+            },
+            {
+              "metric": "butter-consumption-expenditure"
+            },
+            {
+              "metric": "butter-consumption-quantity"
+            },
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "jam-consumption-expenditure"
+            },
+            {
+              "metric": "jam-consumption-quantity"
+            },
+            {
+              "metric": "jelly-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-quantity"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7223,22 +8236,52 @@
         "outcome": {
           "label": "東京都区部の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "cheese-consumption-expenditure",
-            "dried-mackerel-consumption-expenditure",
-            "dried-mackerel-consumption-quantity",
-            "eggplant-consumption-expenditure",
-            "eggplant-consumption-quantity",
-            "green-beans-consumption-expenditure",
-            "green-beans-consumption-quantity",
-            "green-pepper-consumption-expenditure",
-            "green-pepper-consumption-quantity",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "cheese-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-quantity"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-quantity"
+            },
+            {
+              "metric": "green-pepper-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-quantity"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            }
           ]
         }
       }
@@ -7263,22 +8306,52 @@
         "outcome": {
           "label": "横浜市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "broccoli-consumption-expenditure",
-            "broccoli-consumption-quantity",
-            "dried-mackerel-consumption-expenditure",
-            "dried-mackerel-consumption-quantity",
-            "eggplant-consumption-expenditure",
-            "eggplant-consumption-quantity",
-            "grape-consumption-expenditure",
-            "grape-consumption-quantity",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "ham-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "broccoli-consumption-expenditure"
+            },
+            {
+              "metric": "broccoli-consumption-quantity"
+            },
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-quantity"
+            },
+            {
+              "metric": "grape-consumption-expenditure"
+            },
+            {
+              "metric": "grape-consumption-quantity"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "ham-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7303,22 +8376,52 @@
         "outcome": {
           "label": "新潟市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "curry-roux-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "dried-shiitake-consumption-quantity",
-            "green-beans-consumption-expenditure",
-            "green-beans-consumption-quantity",
-            "mandarin-consumption-expenditure",
-            "mandarin-consumption-quantity",
-            "pear-consumption-expenditure",
-            "pear-consumption-quantity",
-            "pork-consumption-expenditure",
-            "potato-consumption-expenditure",
-            "potato-consumption-quantity",
-            "salted-salmon-consumption-expenditure",
-            "salted-salmon-consumption-quantity",
-            "wakame-consumption-expenditure"
+          "data": [
+            {
+              "metric": "curry-roux-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-quantity"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-quantity"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-quantity"
+            },
+            {
+              "metric": "pear-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-quantity"
+            },
+            {
+              "metric": "pork-consumption-expenditure"
+            },
+            {
+              "metric": "potato-consumption-expenditure"
+            },
+            {
+              "metric": "potato-consumption-quantity"
+            },
+            {
+              "metric": "salted-salmon-consumption-expenditure"
+            },
+            {
+              "metric": "salted-salmon-consumption-quantity"
+            },
+            {
+              "metric": "wakame-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7343,22 +8446,52 @@
         "outcome": {
           "label": "富山市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "cucumber-consumption-expenditure",
-            "cucumber-consumption-quantity",
-            "eggplant-consumption-expenditure",
-            "eggplant-consumption-quantity",
-            "horse-mackerel-consumption-expenditure",
-            "horse-mackerel-consumption-quantity",
-            "konbu-consumption-expenditure",
-            "konbu-consumption-quantity",
-            "mochi-consumption-expenditure",
-            "mochi-consumption-quantity",
-            "orange-consumption-expenditure",
-            "orange-consumption-quantity",
-            "salmon-consumption-expenditure",
-            "salmon-consumption-quantity",
-            "saury-consumption-expenditure"
+          "data": [
+            {
+              "metric": "cucumber-consumption-expenditure"
+            },
+            {
+              "metric": "cucumber-consumption-quantity"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-quantity"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "konbu-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-consumption-quantity"
+            },
+            {
+              "metric": "mochi-consumption-expenditure"
+            },
+            {
+              "metric": "mochi-consumption-quantity"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-quantity"
+            },
+            {
+              "metric": "salmon-consumption-expenditure"
+            },
+            {
+              "metric": "salmon-consumption-quantity"
+            },
+            {
+              "metric": "saury-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7383,22 +8516,52 @@
         "outcome": {
           "label": "金沢市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "chinese-noodles-consumption-expenditure",
-            "chinese-noodles-consumption-quantity",
-            "crab-consumption-expenditure",
-            "crab-consumption-quantity",
-            "lotus-root-consumption-expenditure",
-            "lotus-root-consumption-quantity",
-            "mochi-consumption-expenditure",
-            "mochi-consumption-quantity",
-            "orange-consumption-expenditure",
-            "orange-consumption-quantity",
-            "other-japanese-sweets-consumption-expenditure",
-            "pickled-chinese-cabbage-consumption-expenditure",
-            "pickled-chinese-cabbage-consumption-quantity"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "chinese-noodles-consumption-expenditure"
+            },
+            {
+              "metric": "chinese-noodles-consumption-quantity"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-quantity"
+            },
+            {
+              "metric": "lotus-root-consumption-expenditure"
+            },
+            {
+              "metric": "lotus-root-consumption-quantity"
+            },
+            {
+              "metric": "mochi-consumption-expenditure"
+            },
+            {
+              "metric": "mochi-consumption-quantity"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-quantity"
+            },
+            {
+              "metric": "other-japanese-sweets-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-chinese-cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-chinese-cabbage-consumption-quantity"
+            }
           ]
         }
       }
@@ -7423,22 +8586,52 @@
         "outcome": {
           "label": "福井市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "crab-consumption-expenditure",
-            "crab-consumption-quantity",
-            "dried-udon-soba-consumption-expenditure",
-            "dried-udon-soba-consumption-quantity",
-            "flounder-consumption-expenditure",
-            "flounder-consumption-quantity",
-            "furikake-consumption-expenditure",
-            "konbu-consumption-expenditure",
-            "konbu-consumption-quantity",
-            "konbu-tsukudani-consumption-expenditure",
-            "konbu-tsukudani-consumption-quantity",
-            "mandarin-consumption-expenditure",
-            "mandarin-consumption-quantity",
-            "mochi-consumption-expenditure",
-            "mochi-consumption-quantity"
+          "data": [
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-quantity"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-quantity"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-quantity"
+            },
+            {
+              "metric": "furikake-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-consumption-quantity"
+            },
+            {
+              "metric": "konbu-tsukudani-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-tsukudani-consumption-quantity"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-quantity"
+            },
+            {
+              "metric": "mochi-consumption-expenditure"
+            },
+            {
+              "metric": "mochi-consumption-quantity"
+            }
           ]
         }
       }
@@ -7463,22 +8656,52 @@
         "outcome": {
           "label": "甲府市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "clam-consumption-expenditure",
-            "clam-consumption-quantity",
-            "crab-consumption-expenditure",
-            "crab-consumption-quantity",
-            "dressing-consumption-expenditure",
-            "dressing-consumption-quantity",
-            "dried-mackerel-consumption-expenditure",
-            "dried-mackerel-consumption-quantity",
-            "freshwater-clam-consumption-expenditure",
-            "freshwater-clam-consumption-quantity",
-            "grape-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "margarine-consumption-expenditure",
-            "margarine-consumption-quantity"
+          "data": [
+            {
+              "metric": "clam-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-quantity"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-quantity"
+            },
+            {
+              "metric": "dressing-consumption-expenditure"
+            },
+            {
+              "metric": "dressing-consumption-quantity"
+            },
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-quantity"
+            },
+            {
+              "metric": "grape-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "margarine-consumption-expenditure"
+            },
+            {
+              "metric": "margarine-consumption-quantity"
+            }
           ]
         }
       }
@@ -7503,22 +8726,52 @@
         "outcome": {
           "label": "長野市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bamboo-shoot-consumption-quantity",
-            "crab-consumption-expenditure",
-            "crab-consumption-quantity",
-            "dried-mackerel-consumption-expenditure",
-            "dried-mackerel-consumption-quantity",
-            "grape-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "katsuobushi-consumption-expenditure",
-            "katsuobushi-consumption-quantity",
-            "peach-consumption-expenditure",
-            "peach-consumption-quantity",
-            "pickled-plum-consumption-expenditure",
-            "pickled-plum-consumption-quantity"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bamboo-shoot-consumption-quantity"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-quantity"
+            },
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "grape-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-quantity"
+            },
+            {
+              "metric": "peach-consumption-expenditure"
+            },
+            {
+              "metric": "peach-consumption-quantity"
+            },
+            {
+              "metric": "pickled-plum-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-plum-consumption-quantity"
+            }
           ]
         }
       }
@@ -7543,22 +8796,52 @@
         "outcome": {
           "label": "岐阜市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "clam-consumption-expenditure",
-            "clam-consumption-quantity",
-            "dried-shiitake-consumption-expenditure",
-            "dried-shiitake-consumption-quantity",
-            "eggplant-consumption-expenditure",
-            "eggplant-consumption-quantity",
-            "enoki-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "flounder-consumption-quantity",
-            "green-beans-consumption-expenditure",
-            "green-beans-consumption-quantity",
-            "horse-mackerel-consumption-expenditure",
-            "horse-mackerel-consumption-quantity",
-            "persimmon-consumption-expenditure",
-            "persimmon-consumption-quantity"
+          "data": [
+            {
+              "metric": "clam-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-quantity"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-quantity"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-quantity"
+            },
+            {
+              "metric": "enoki-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-quantity"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-quantity"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "persimmon-consumption-expenditure"
+            },
+            {
+              "metric": "persimmon-consumption-quantity"
+            }
           ]
         }
       }
@@ -7583,22 +8866,52 @@
         "outcome": {
           "label": "静岡市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "dried-mackerel-consumption-expenditure",
-            "dried-mackerel-consumption-quantity",
-            "green-tea-consumption-expenditure",
-            "green-tea-consumption-quantity",
-            "horse-mackerel-consumption-expenditure",
-            "horse-mackerel-consumption-quantity",
-            "jam-consumption-expenditure",
-            "jam-consumption-quantity",
-            "leek-consumption-expenditure",
-            "leek-consumption-quantity",
-            "mandarin-consumption-expenditure",
-            "mandarin-consumption-quantity",
-            "mochi-consumption-expenditure",
-            "mochi-consumption-quantity",
-            "pickled-plum-consumption-expenditure"
+          "data": [
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-quantity"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-quantity"
+            },
+            {
+              "metric": "jam-consumption-expenditure"
+            },
+            {
+              "metric": "jam-consumption-quantity"
+            },
+            {
+              "metric": "leek-consumption-expenditure"
+            },
+            {
+              "metric": "leek-consumption-quantity"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-quantity"
+            },
+            {
+              "metric": "mochi-consumption-expenditure"
+            },
+            {
+              "metric": "mochi-consumption-quantity"
+            },
+            {
+              "metric": "pickled-plum-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7623,22 +8936,52 @@
         "outcome": {
           "label": "名古屋市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "clam-consumption-expenditure",
-            "clam-consumption-quantity",
-            "dried-shiitake-consumption-expenditure",
-            "dried-shiitake-consumption-quantity",
-            "eggplant-consumption-expenditure",
-            "eggplant-consumption-quantity",
-            "fresh-udon-soba-consumption-expenditure",
-            "fresh-udon-soba-consumption-quantity",
-            "green-pepper-consumption-expenditure",
-            "green-pepper-consumption-quantity",
-            "melon-consumption-expenditure",
-            "melon-consumption-quantity",
-            "miso-consumption-expenditure"
+          "data": [
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "clam-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-quantity"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-quantity"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-quantity"
+            },
+            {
+              "metric": "fresh-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "fresh-udon-soba-consumption-quantity"
+            },
+            {
+              "metric": "green-pepper-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-quantity"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-quantity"
+            },
+            {
+              "metric": "miso-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7663,22 +9006,52 @@
         "outcome": {
           "label": "津市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "beef-consumption-expenditure",
-            "beef-consumption-quantity",
-            "crab-consumption-expenditure",
-            "crab-consumption-quantity",
-            "freshwater-clam-consumption-expenditure",
-            "freshwater-clam-consumption-quantity",
-            "katsuobushi-consumption-expenditure",
-            "katsuobushi-consumption-quantity",
-            "other-fish-paste-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "oyster-consumption-quantity",
-            "peach-consumption-expenditure",
-            "peach-consumption-quantity",
-            "tuna-consumption-expenditure",
-            "tuna-consumption-quantity"
+          "data": [
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "beef-consumption-quantity"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-quantity"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-quantity"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-quantity"
+            },
+            {
+              "metric": "other-fish-paste-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-quantity"
+            },
+            {
+              "metric": "peach-consumption-expenditure"
+            },
+            {
+              "metric": "peach-consumption-quantity"
+            },
+            {
+              "metric": "tuna-consumption-expenditure"
+            },
+            {
+              "metric": "tuna-consumption-quantity"
+            }
           ]
         }
       }
@@ -7703,22 +9076,52 @@
         "outcome": {
           "label": "大津市の品目別支出額と購入量",
           "pattern": "compare",
-          "metrics": [
-            "beef-consumption-expenditure",
-            "beef-consumption-quantity",
-            "black-tea-consumption-expenditure",
-            "black-tea-consumption-quantity",
-            "coffee-consumption-expenditure",
-            "coffee-consumption-quantity",
-            "flounder-consumption-expenditure",
-            "flounder-consumption-quantity",
-            "fresh-udon-soba-consumption-expenditure",
-            "green-pepper-consumption-expenditure",
-            "green-pepper-consumption-quantity",
-            "happoshu-consumption-expenditure",
-            "happoshu-consumption-quantity",
-            "jam-consumption-expenditure",
-            "jam-consumption-quantity"
+          "data": [
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "beef-consumption-quantity"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-quantity"
+            },
+            {
+              "metric": "coffee-consumption-expenditure"
+            },
+            {
+              "metric": "coffee-consumption-quantity"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-quantity"
+            },
+            {
+              "metric": "fresh-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-quantity"
+            },
+            {
+              "metric": "happoshu-consumption-expenditure"
+            },
+            {
+              "metric": "happoshu-consumption-quantity"
+            },
+            {
+              "metric": "jam-consumption-expenditure"
+            },
+            {
+              "metric": "jam-consumption-quantity"
+            }
           ]
         }
       }
@@ -7743,16 +9146,34 @@
         "outcome": {
           "label": "京都市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "beef-consumption-expenditure",
-            "black-tea-consumption-expenditure",
-            "butter-consumption-expenditure",
-            "chinese-food-dining-consumption-expenditure",
-            "eggplant-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "green-beans-consumption-expenditure",
-            "green-pepper-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "butter-consumption-expenditure"
+            },
+            {
+              "metric": "chinese-food-dining-consumption-expenditure"
+            },
+            {
+              "metric": "eggplant-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7777,15 +9198,31 @@
         "outcome": {
           "label": "大阪市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "beef-consumption-expenditure",
-            "bread-consumption-expenditure",
-            "chuhai-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "happoshu-consumption-expenditure",
-            "konbu-tsukudani-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "bread-consumption-expenditure"
+            },
+            {
+              "metric": "chuhai-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "happoshu-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-tsukudani-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7810,16 +9247,34 @@
         "outcome": {
           "label": "神戸市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "black-tea-consumption-expenditure",
-            "bread-consumption-expenditure",
-            "coffee-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "green-beans-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "leek-consumption-expenditure",
-            "lotus-root-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "bread-consumption-expenditure"
+            },
+            {
+              "metric": "coffee-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "green-beans-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "leek-consumption-expenditure"
+            },
+            {
+              "metric": "lotus-root-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7844,15 +9299,31 @@
         "outcome": {
           "label": "奈良市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "beef-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "dried-udon-soba-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "green-pepper-consumption-expenditure",
-            "konbu-tsukudani-consumption-expenditure",
-            "lotus-root-consumption-expenditure",
-            "persimmon-consumption-expenditure"
+          "data": [
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "green-pepper-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-tsukudani-consumption-expenditure"
+            },
+            {
+              "metric": "lotus-root-consumption-expenditure"
+            },
+            {
+              "metric": "persimmon-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7877,15 +9348,31 @@
         "outcome": {
           "label": "和歌山市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "beef-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "konbu-consumption-expenditure",
-            "mandarin-consumption-expenditure",
-            "margarine-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "peach-consumption-expenditure"
+          "data": [
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "margarine-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "peach-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7910,15 +9397,31 @@
         "outcome": {
           "label": "鳥取市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "cod-roe-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "enoki-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "freshwater-clam-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "pear-consumption-expenditure",
-            "sardine-consumption-expenditure"
+          "data": [
+            {
+              "metric": "cod-roe-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "enoki-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-expenditure"
+            },
+            {
+              "metric": "sardine-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7943,15 +9446,31 @@
         "outcome": {
           "label": "松江市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "bean-sprouts-consumption-expenditure",
-            "black-tea-consumption-expenditure",
-            "freshwater-clam-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "mackerel-consumption-expenditure",
-            "margarine-consumption-expenditure",
-            "orange-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "bean-sprouts-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "freshwater-clam-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "margarine-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            }
           ]
         }
       }
@@ -7976,15 +9495,31 @@
         "outcome": {
           "label": "岡山市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "black-tea-consumption-expenditure",
-            "burdock-consumption-expenditure",
-            "grape-consumption-expenditure",
-            "ground-meat-consumption-expenditure",
-            "other-bread-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "peach-consumption-expenditure",
-            "sauce-consumption-expenditure"
+          "data": [
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "burdock-consumption-expenditure"
+            },
+            {
+              "metric": "grape-consumption-expenditure"
+            },
+            {
+              "metric": "ground-meat-consumption-expenditure"
+            },
+            {
+              "metric": "other-bread-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "peach-consumption-expenditure"
+            },
+            {
+              "metric": "sauce-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8009,15 +9544,31 @@
         "outcome": {
           "label": "広島市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "beef-consumption-expenditure",
-            "beer-consumption-expenditure",
-            "black-tea-consumption-expenditure",
-            "ground-meat-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "oyster-consumption-expenditure",
-            "sardine-consumption-expenditure",
-            "sauce-consumption-expenditure"
+          "data": [
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "beer-consumption-expenditure"
+            },
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "ground-meat-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "oyster-consumption-expenditure"
+            },
+            {
+              "metric": "sardine-consumption-expenditure"
+            },
+            {
+              "metric": "sauce-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8042,15 +9593,31 @@
         "outcome": {
           "label": "山口市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "burdock-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "fresh-shiitake-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "leek-consumption-expenditure",
-            "melon-consumption-expenditure",
-            "pear-consumption-expenditure"
+          "data": [
+            {
+              "metric": "burdock-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "fresh-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "leek-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            },
+            {
+              "metric": "pear-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8075,16 +9642,34 @@
         "outcome": {
           "label": "徳島市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bonito-consumption-expenditure",
-            "chikuwa-consumption-expenditure",
-            "chinese-cabbage-consumption-expenditure",
-            "dried-nori-consumption-expenditure",
-            "dried-udon-soba-consumption-expenditure",
-            "ground-meat-consumption-expenditure",
-            "katsuobushi-consumption-expenditure",
-            "squid-consumption-expenditure",
-            "sweet-potato-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "chikuwa-consumption-expenditure"
+            },
+            {
+              "metric": "chinese-cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "dried-nori-consumption-expenditure"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "ground-meat-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "squid-consumption-expenditure"
+            },
+            {
+              "metric": "sweet-potato-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8109,15 +9694,31 @@
         "outcome": {
           "label": "高松市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "black-tea-consumption-expenditure",
-            "bonito-consumption-expenditure",
-            "clam-consumption-expenditure",
-            "deep-fried-fish-cake-consumption-expenditure",
-            "dried-udon-soba-consumption-expenditure",
-            "fresh-udon-soba-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "leek-consumption-expenditure"
+          "data": [
+            {
+              "metric": "black-tea-consumption-expenditure"
+            },
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "clam-consumption-expenditure"
+            },
+            {
+              "metric": "deep-fried-fish-cake-consumption-expenditure"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "fresh-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "leek-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8142,16 +9743,34 @@
         "outcome": {
           "label": "松山市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bonito-consumption-expenditure",
-            "chikuwa-consumption-expenditure",
-            "dried-udon-soba-consumption-expenditure",
-            "ground-meat-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "lotus-root-consumption-expenditure",
-            "mochi-consumption-expenditure",
-            "other-citrus-consumption-expenditure",
-            "sauce-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "chikuwa-consumption-expenditure"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "ground-meat-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "lotus-root-consumption-expenditure"
+            },
+            {
+              "metric": "mochi-consumption-expenditure"
+            },
+            {
+              "metric": "other-citrus-consumption-expenditure"
+            },
+            {
+              "metric": "sauce-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8176,16 +9795,34 @@
         "outcome": {
           "label": "高知市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "apple-consumption-expenditure",
-            "bonito-consumption-expenditure",
-            "cabbage-consumption-expenditure",
-            "dried-mackerel-consumption-expenditure",
-            "fresh-shiitake-consumption-expenditure",
-            "happoshu-consumption-expenditure",
-            "katsuobushi-consumption-expenditure",
-            "mandarin-consumption-expenditure",
-            "octopus-consumption-expenditure"
+          "data": [
+            {
+              "metric": "apple-consumption-expenditure"
+            },
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "dried-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "fresh-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "happoshu-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "mandarin-consumption-expenditure"
+            },
+            {
+              "metric": "octopus-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8210,16 +9847,34 @@
         "outcome": {
           "label": "福岡市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "burdock-consumption-expenditure",
-            "cod-roe-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "katsuobushi-consumption-expenditure",
-            "konbu-consumption-expenditure",
-            "pickled-chinese-cabbage-consumption-expenditure",
-            "ramen-dining-consumption-expenditure",
-            "sashimi-platter-consumption-expenditure"
+          "data": [
+            {
+              "metric": "burdock-consumption-expenditure"
+            },
+            {
+              "metric": "cod-roe-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "konbu-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-chinese-cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "ramen-dining-consumption-expenditure"
+            },
+            {
+              "metric": "sashimi-platter-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8244,15 +9899,31 @@
         "outcome": {
           "label": "佐賀市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bamboo-shoot-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "dried-nori-consumption-expenditure",
-            "dried-udon-soba-consumption-expenditure",
-            "flounder-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "instant-noodles-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bamboo-shoot-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "dried-nori-consumption-expenditure"
+            },
+            {
+              "metric": "dried-udon-soba-consumption-expenditure"
+            },
+            {
+              "metric": "flounder-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "instant-noodles-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8277,16 +9948,34 @@
         "outcome": {
           "label": "長崎市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "apple-consumption-expenditure",
-            "bean-sprouts-consumption-expenditure",
-            "castella-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "mackerel-consumption-expenditure",
-            "other-fresh-fish-consumption-expenditure",
-            "ramen-dining-consumption-expenditure"
+          "data": [
+            {
+              "metric": "apple-consumption-expenditure"
+            },
+            {
+              "metric": "bean-sprouts-consumption-expenditure"
+            },
+            {
+              "metric": "castella-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "other-fresh-fish-consumption-expenditure"
+            },
+            {
+              "metric": "ramen-dining-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8311,15 +10000,31 @@
         "outcome": {
           "label": "熊本市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bean-sprouts-consumption-expenditure",
-            "beef-consumption-expenditure",
-            "chicken-consumption-expenditure",
-            "dressing-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "ground-meat-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "melon-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bean-sprouts-consumption-expenditure"
+            },
+            {
+              "metric": "beef-consumption-expenditure"
+            },
+            {
+              "metric": "chicken-consumption-expenditure"
+            },
+            {
+              "metric": "dressing-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "ground-meat-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "melon-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8344,15 +10049,31 @@
         "outcome": {
           "label": "大分市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "dried-shiitake-consumption-expenditure",
-            "grape-consumption-expenditure",
-            "ground-meat-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "orange-consumption-expenditure",
-            "sardine-consumption-expenditure",
-            "sashimi-platter-consumption-expenditure",
-            "shochu-consumption-expenditure"
+          "data": [
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "grape-consumption-expenditure"
+            },
+            {
+              "metric": "ground-meat-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "orange-consumption-expenditure"
+            },
+            {
+              "metric": "sardine-consumption-expenditure"
+            },
+            {
+              "metric": "sashimi-platter-consumption-expenditure"
+            },
+            {
+              "metric": "shochu-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8377,15 +10098,31 @@
         "outcome": {
           "label": "宮崎市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bonito-consumption-expenditure",
-            "cabbage-consumption-expenditure",
-            "chinese-cabbage-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "happoshu-consumption-expenditure",
-            "horse-mackerel-consumption-expenditure",
-            "sardine-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bonito-consumption-expenditure"
+            },
+            {
+              "metric": "cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "chinese-cabbage-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "happoshu-consumption-expenditure"
+            },
+            {
+              "metric": "horse-mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "sardine-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8410,15 +10147,31 @@
         "outcome": {
           "label": "鹿児島市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bean-sprouts-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "green-tea-consumption-expenditure",
-            "ketchup-consumption-expenditure",
-            "mackerel-consumption-expenditure",
-            "persimmon-consumption-expenditure",
-            "sardine-consumption-expenditure",
-            "shochu-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bean-sprouts-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "green-tea-consumption-expenditure"
+            },
+            {
+              "metric": "ketchup-consumption-expenditure"
+            },
+            {
+              "metric": "mackerel-consumption-expenditure"
+            },
+            {
+              "metric": "persimmon-consumption-expenditure"
+            },
+            {
+              "metric": "sardine-consumption-expenditure"
+            },
+            {
+              "metric": "shochu-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8443,15 +10196,31 @@
         "outcome": {
           "label": "那覇市が多く買う品目の支出額",
           "pattern": "compare",
-          "metrics": [
-            "bean-sprouts-consumption-expenditure",
-            "carrot-consumption-expenditure",
-            "chuhai-consumption-expenditure",
-            "crab-consumption-expenditure",
-            "dried-shiitake-consumption-expenditure",
-            "katsuobushi-consumption-expenditure",
-            "pickled-plum-consumption-expenditure",
-            "shochu-consumption-expenditure"
+          "data": [
+            {
+              "metric": "bean-sprouts-consumption-expenditure"
+            },
+            {
+              "metric": "carrot-consumption-expenditure"
+            },
+            {
+              "metric": "chuhai-consumption-expenditure"
+            },
+            {
+              "metric": "crab-consumption-expenditure"
+            },
+            {
+              "metric": "dried-shiitake-consumption-expenditure"
+            },
+            {
+              "metric": "katsuobushi-consumption-expenditure"
+            },
+            {
+              "metric": "pickled-plum-consumption-expenditure"
+            },
+            {
+              "metric": "shochu-consumption-expenditure"
+            }
           ]
         }
       }
@@ -8476,9 +10245,13 @@
         "outcome": {
           "label": "平均在院日数",
           "pattern": "compare",
-          "metrics": [
-            "average-length-of-stay",
-            "general-hospital-avg-length-of-stay"
+          "data": [
+            {
+              "metric": "average-length-of-stay"
+            },
+            {
+              "metric": "general-hospital-avg-length-of-stay"
+            }
           ]
         }
       }
@@ -8503,9 +10276,13 @@
         "outcome": {
           "label": "延べ宿泊者数の推移",
           "pattern": "change",
-          "metrics": [
-            "total-overnight-guests",
-            "total-overnight-guests-foreign"
+          "data": [
+            {
+              "metric": "total-overnight-guests"
+            },
+            {
+              "metric": "total-overnight-guests-foreign"
+            }
           ]
         }
       }

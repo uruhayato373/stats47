@@ -150,6 +150,11 @@ export const REGISTRIES = {
     description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
     union: ["metrics", "ranking-slug-redirects"],
   },
+  "kakei-analyses": {
+    description: "家計調査の分析単位 (KAKEI_ANALYSES の id)。年収階級・世帯類型など属性別の系列を、問いの軸が指す",
+    files: ["packages/data-configs/src/kakei-analysis-catalog.ts"],
+    pattern: "^    id: '([a-z0-9][a-z0-9-]*)',$",
+  },
   "ksj-datasets": {
     description: "国土数値情報の GIS 台帳 (GIS_DATASETS) の dataId",
     files: ["packages/gis/src/mlit-ksj/datasets.ts"],
@@ -249,6 +254,11 @@ export const DATASETS = [
     refs: [
       { field: "issues[].primaryTheme", to: "content.pages", key: "pages[].id" },
       { field: "issues[].products[]", to: "content.external", key: "pages[].id" },
+      // 軸が使うデータ。指標と系列 (家計調査の分析単位) の実在をここで見る。粒度が合うかは npm run issues:check
+      ...["explanatory", "outcome"].flatMap((side) => [
+        { field: `issues[].axes.${side}.data[].metric`, to: "registry:metrics" },
+        { field: `issues[].axes.${side}.data[].series`, to: "registry:kakei-analyses" },
+      ]),
     ],
   }),
   d("content.issue-links", "data/content/issue-links.json", "config", "data", "data", "問いとページの関係 (答え・根拠)。導出できる関係は書かない", {
@@ -283,6 +293,7 @@ export const DATASETS = [
     schema: "data/content/schema/figures.schema.json",
     refs: [
       { field: "figures[].analysis", to: "content.analyses", key: "analyses[].id" },
+      { field: "figures[].metrics[].key", to: "registry:metrics" },
       { field: "figures[].template", to: "content.image-templates", key: "templates[].id" },
       { field: "figures[].destinations[].page", to: "content.pages", key: "pages[].id" },
       { field: "figures[].destinations[].postId", to: "sns.posts", key: "posts[].id" },

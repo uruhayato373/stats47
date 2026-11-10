@@ -28,7 +28,10 @@ export interface KakeiAnalysis {
       | 'housing-tenure'
       | 'month';
     year: 2025;
-    /** 実際の metric config と対応する場合だけ固定する。 */
+    /**
+     * 表の絞り込み (分類コード)。ranking の行は metric config と一致させる。全国の図の行は、その分析単位の図すべてに共通する絞り込みを書き、
+     * 図ごとに違う分類 (貯蓄と負債の cdCat01・男女の cdCat04) だけを図の生成 (packages/stats-r2/src/scripts/generate-kakei-axis-charts.ts の extraFilters) が足す。
+     */
     filters?: Readonly<Record<string, string>>;
   };
   evidence: 'value-checked' | 'metadata-checked';
@@ -197,6 +200,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'income-quintile',
       year: 2025,
+      filters: { cdCat01: '060', cdCat02: '03' },
     },
     evidence: 'value-checked',
     placement: {
@@ -216,6 +220,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'income-quintile',
       year: 2025,
+      filters: { cdCat01: '010110001', cdCat02: '03' },
     },
     evidence: 'value-checked',
     placement: {
@@ -235,6 +240,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'income-quintile',
       year: 2025,
+      filters: { cdCat01: '010110001', cdCat02: '03' },
     },
     evidence: 'value-checked',
     placement: {
@@ -254,6 +260,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'age',
       year: 2025,
+      filters: { cdCat01: '010110001', cdCat02: '03' },
     },
     evidence: 'value-checked',
     placement: {
@@ -273,6 +280,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'household-size',
       year: 2025,
+      filters: { cdCat01: '060', cdCat02: '03' },
     },
     evidence: 'value-checked',
     placement: {
@@ -351,6 +359,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'income-18-class',
       year: 2025,
+      filters: { cdCat02: '03' },
     },
     evidence: 'value-checked',
     placement: {
@@ -370,6 +379,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       geography: 'national',
       axis: 'income-quintile',
       year: 2025,
+      filters: { cdCat02: '03', cdCat04: '01' },
     },
     evidence: 'value-checked',
     placement: {

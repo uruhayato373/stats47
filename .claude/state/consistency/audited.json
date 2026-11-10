@@ -1,11 +1,14 @@
 {
-  "hash": "6df5ac577ed39f45c7aea5cb355a062b97b986001e38b81ac9070420e9fdd392",
-  "audited_at": "2026-11-10T00:53:57",
+  "hash": "163397bed430ec2d5ea5d08ab03969702580f4c3eccc629590eb397e17d1f5a0",
+  "audited_at": "2026-11-10T02:15:33",
   "files": [
     ".agents/skills/content/manage-issue-ledger/SKILL.md",
     ".claude/scripts/issues/__tests__/issue-graph.test.mjs",
     ".claude/scripts/issues/check-issue-graph.mjs",
+    ".claude/scripts/issues/issue-data-grains.d.mts",
+    ".claude/scripts/issues/issue-data-grains.mjs",
     ".claude/scripts/issues/issue-graph-core.mjs",
+    ".claude/scripts/lib/__tests__/workflow-node-version.test.cjs",
     ".claude/skills/content/manage-issue-ledger/SKILL.md"
   ]
 }
