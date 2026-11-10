@@ -17,3 +17,5 @@ note-manager も参照していなかった。展開カード `KAKEI-MARKETING-C
 - 展開先を持つ企画は、企画 × 展開先の記録 (`data/source-inventory/expansion.json`) に公開中のページ ID で結ぶ。全チャネル共通で、進み具合は `npm run reference:expansion -- status`、未着手は `pending --channel <展開先>`。各担当の手順に配線済み (2026-10-13)。
 
 関連 [[project_note_article_ledger]] [[project_kakei_marketing_book_pipeline]]。
+
+2026-11-10: この教訓は規則になった。マスタと台帳は `data/` の JSON + Schema、`config/` はシステムの設定だけで、`npm run check-datasets` が止める (`.claude/rules/data-storage.md`)。残りの移行はカード `LEDGER-DB-UNIFY-01`。

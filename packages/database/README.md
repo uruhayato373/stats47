@@ -30,17 +30,9 @@ stats47 の data layer は **2 層モデル** で構成される。永続 DB は
   schema 定義 (`packages/database/src/schema/*.ts`) は **型ソース / テスト基盤 / エフェメラル計算の temp table 型**
   として残す (配信 R2 に影響しない)。プロセス終了で消える前提のものだけ建ててよい。
 
-### データ分類と置き場 (決定表 — doc 12 §3 準拠)
+### データ分類と置き場
 
-| 種別 | サブ判定 | SSOT 置き場 | 該当 |
-|---|---|---|---|
-| **Authored / 設定** | 低volume・人手・型/review が効く | **git TS** → R2 へ反映 | テーマのチャート定義、各種カタログ定義 |
-| **Authored / 運用** | 関係・横断参照を持つ運用エンティティ | **git TS(定義が SSOT)** → 生成スクリプトで R2 JSON | page_components・theme_metrics・sns_posts・affiliate_ads・categories/themes |
-| **Reference** | 外部に真実源あり | **再生成** | metrics(TS registry)・articles(article.md)・estat_catalog(e-Stat API)・prefectures/cities(JSON) |
-| **Derived** | 計算で作れる | **エフェメラル計算 → R2**(永続しない) | area_profiles・correlations |
-
-> 横断クエリ・参照整合性は **実行時の動的 JOIN ではなくビルド時**に git TS (+必要なら R2 観測値) を入力に
-> 検証・生成して担保する。手編集 JSON を SSOT にしない (必ず git TS 定義 → 生成スクリプトで R2)。
+正本は `docs/01_技術設計/02_データアーキテクチャ.md`「データ分類」と `.claude/rules/data-storage.md` (ここには写さない)。
 
 ### R2 に置くもの (観測値 + 配信 snapshot)
 
