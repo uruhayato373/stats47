@@ -9,7 +9,6 @@ import {
   type BuzzMapRatio,
 } from "./tokens";
 import type { BuzzMapSpec } from "./types";
-import { SITE } from "@stats47/types";
 
 export interface BuzzMapSummaryEntry {
   label: string;
@@ -369,23 +368,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
         )}
       </div>
 
-      {/* ⑤ ブランド行（左下） */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0.045 * W,
-          bottom: 0.032 * H,
-          fontSize: 24 * s,
-          letterSpacing: "0.06em",
-          color: C.ink2,
-          display: "flex",
-          alignItems: "baseline",
-          gap: 12 * s,
-        }}
-      >
-        <span style={{ fontWeight: 700, color: C.ink }}>{SITE.domain}</span>
-        <span style={{ fontSize: 20 * s }}>{SITE.name}</span>
-      </div>
+      {/* ⑤ ブランド行（左下）は 2026-11-02 オーナー決定で廃止。発行元は投稿文で示す (chart-image-copy.md) */}
     </AbsoluteFill>
   );
 };

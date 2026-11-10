@@ -128,11 +128,10 @@ function main() {
     marker: (hasLines ? "line" : "point") as "line" | "point",
   }));
 
-  // ── 出典マージ (末尾 stats47.jp は 1 回) ──
+  // ── 出典マージ (データ出典だけ。旧 spec に残る発行元 stats47.jp は落とす。chart-image-copy.md) ──
   const srcLines = [
     ...(base?.source ?? []).filter((l) => l !== "stats47.jp"),
     ...overlay.source.filter((l) => l !== "stats47.jp"),
-    "stats47.jp",
   ];
 
   const spec: BuzzSpec = {

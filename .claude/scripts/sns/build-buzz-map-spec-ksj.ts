@@ -249,7 +249,6 @@ async function main() {
   const source = [
     `出典: ${sourceName}を加工して作成`,
     [yearLabel, "全国"].filter(Boolean).join(" / "),
-    "stats47.jp",
   ];
 
   // ─── 型D: 線ネットワーク (asset 配置 + years 自動導出 + km 集計) ───

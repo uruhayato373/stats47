@@ -43,7 +43,7 @@ export interface BuzzMapSpec {
   /** タイトルの手動改行（最大2行・助詞の前で切る）。指定時は title より優先 */
   titleLines?: string[];
   subtitle: string;
-  /** 出典行（複数行）。最終行はサイトドメイン */
+  /** 出典行（複数行）。データ出典だけで、発行元 (stats47.jp) は入れない（chart-image-copy.md） */
   source: string[];
   /** 強調色テーマ: social（人口・社会系） / infra（インフラ・経済系）。実色は theme のパレットで決まる */
   accent?: "social" | "infra";
