@@ -31,10 +31,15 @@ export function findItem(classObjs, itemName) {
   return candidates.sort((a, b) => a.size - b.size || a.name.length - b.name.length)[0] ?? null;
 }
 
-/** 行のどれかの軸が対象の自治体コードを持つ (コードそのもの、または「_23211_」のように名前に含む) か */
+/**
+ * 行のどれかの軸が対象の自治体を指すか。地域の軸のコードそのもの、または地域編のまとまった軸の名前
+ * 「…_2023_23211_豊田市_00_製造業計」の地域の部分で照合する。都道府県 (NN000) は名前では 2 桁 (「_23_愛知県_」)。
+ * 軸のコードの末尾一致は使わない (2026-11-10 に「…023000」が愛知県に誤って当たった)
+ */
 export function areaOf(dims, areas) {
   for (const code of areas) {
-    if (Object.values(dims).some((d) => d.code === code || d.code.endsWith(code) || d.name.includes(`_${code}_`) || d.name.startsWith(`${code}_`))) return code;
+    const inName = code.endsWith('000') ? [`_${code}_`, `_${code.slice(0, 2)}_`] : [`_${code}_`];
+    if (Object.values(dims).some((d) => d.code === code || inName.some((part) => new RegExp(`^\\d+_\\d{4}${part}`).test(d.name)))) return code;
   }
   return null;
 }
