@@ -71,10 +71,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:potato-consumption-expenditure",
           "kind": "ranking"
         }
@@ -301,10 +297,6 @@
         },
         {
           "pageId": "blog:banana-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:niigata-food-culture",
           "kind": "blog"
         },
         {

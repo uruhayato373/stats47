@@ -2624,15 +2624,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
+          "pageId": "blog:niigata-food-culture",
           "kind": "blog"
         },
         {
@@ -2911,15 +2907,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
+          "pageId": "blog:niigata-food-culture",
           "kind": "blog"
         },
         {
@@ -3887,6 +3879,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ibaraki-food-culture",
           "kind": "blog"
         },
@@ -3949,6 +3945,10 @@
         },
         {
           "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -5681,10 +5681,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:saitama-food-culture",
           "kind": "blog"
         },
@@ -5725,10 +5721,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "ranking:broccoli-consumption-quantity",
           "kind": "ranking"
@@ -6142,10 +6134,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
@@ -6192,10 +6180,6 @@
         },
         {
           "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -8584,7 +8568,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
+          "pageId": "blog:cheese-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -8634,10 +8618,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"

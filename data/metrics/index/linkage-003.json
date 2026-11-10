@@ -2629,6 +2629,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
@@ -2869,6 +2873,10 @@
         },
         {
           "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -3587,11 +3595,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
+          "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
@@ -3636,11 +3644,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
+          "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
@@ -4188,6 +4196,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
@@ -4201,6 +4213,10 @@
         },
         {
           "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -4255,6 +4271,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:clam-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
@@ -4268,6 +4288,10 @@
         },
         {
           "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -5644,11 +5668,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukushima-food-culture",
+          "pageId": "blog:ibaraki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -5701,11 +5725,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukushima-food-culture",
+          "pageId": "blog:ibaraki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {

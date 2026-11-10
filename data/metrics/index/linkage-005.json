@@ -4258,10 +4258,6 @@
           "kind": "area"
         },
         {
-          "pageId": "blog:mineral-water-spending-prefecture-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:savings-balance-gap",
           "kind": "blog"
         },
@@ -4579,6 +4575,10 @@
       "consumers": [
         {
           "pageId": "blog:curry-roux-consumption-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
           "kind": "blog"
         },
         {
@@ -4932,6 +4932,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:daikon-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5158,6 +5166,14 @@
         },
         {
           "pageId": "blog:daikon-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
         {

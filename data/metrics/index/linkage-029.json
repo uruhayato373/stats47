@@ -1089,15 +1089,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ibaraki-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
         {
@@ -1158,11 +1158,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kyoto-food-culture",
+          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -1171,6 +1171,10 @@
         },
         {
           "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sweet-potato-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -1740,7 +1744,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -1985,7 +1989,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2206,6 +2210,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
@@ -2264,6 +2272,10 @@
         },
         {
           "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
           "kind": "blog"
         },
         {

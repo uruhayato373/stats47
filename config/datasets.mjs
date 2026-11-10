@@ -612,6 +612,14 @@ export const DATASETS = [
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
+  d("blog.articles", "data/blog/ledger/articles.json", "ledger", "site", "data", "ブログ記事の ID 台帳 (slug・題・状態・公開日・更新日・使う指標・タグ・本文の所在)。記事の一覧の正本で、ページの索引 (content.pages の blog) はここから作る。本文と図の実体は R2。sync-content-catalog が R2 の app/blog/all.json を読んだときだけ upsert し、一覧から消えた記事は消さず状態を gone にする", {
+    schema: "data/blog/ledger/articles.schema.json",
+    refs: [
+      { field: "articles[].rankingKeys[]", to: "registry:metrics" },
+      { field: "articles[].tagIds[]", to: "content.tags", key: "tags[].id" },
+    ],
+  }),
+  d("blog.articles-schema", "data/blog/ledger/articles.schema.json", "schema", "site", "data", "上の台帳の JSON Schema"),
   d("blog.critic-findings", "data/blog/critic-findings/{date}.jsonl", "series", "site", "data", "ブログの審査 (critic) の BLOCK・MAJOR の指摘。日付ごとに追記し、型ごとに数えて規約・gate への格上げに使う", { retain: "blog-critic-findings" }),
   d("ci.health", "data/ci/{name}", "state", "ops", "data", "workflow の健全性・R2 の鮮度・認証付き計測の追いつき"),
   d("content.quality", "data/content-operations/quality.json", "ledger", "product", "data", "記事と画像の改善方針・目視確認・候補の参照", { schema: "data/content-operations/quality.schema.json" }),

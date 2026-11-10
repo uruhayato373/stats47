@@ -8779,7 +8779,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kanagawa-food-culture",
+          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -8836,7 +8836,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kanagawa-food-culture",
+          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -9121,15 +9121,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -9142,10 +9134,6 @@
         },
         {
           "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -9384,15 +9372,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -9405,10 +9385,6 @@
         },
         {
           "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -9459,10 +9435,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -9472,10 +9444,6 @@
         },
         {
           "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {

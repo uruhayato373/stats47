@@ -36,19 +36,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kyoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -469,10 +461,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
@@ -514,10 +502,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -760,10 +744,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
@@ -813,10 +793,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -2130,6 +2106,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
@@ -2188,6 +2168,10 @@
         },
         {
           "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
           "kind": "blog"
         },
         {
@@ -2960,6 +2944,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:ham-consumption-expenditure",
           "kind": "ranking"
         }
@@ -3002,6 +2994,14 @@
         },
         {
           "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
           "kind": "blog"
         },
         {
