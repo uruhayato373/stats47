@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { RANKING_BAR_PLOT, rankBadgeFontSize, rankingBarRows, renderItemBarsChart, renderRankingBars } from '@/lib/template-ranking-bars';
-import { RANKING_SAMPLE_PRESENTATION } from '@/lib/template-ranking-data';
-import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
+import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION } from '@/lib/template-ranking-data';
 import { resolveMetricColor } from '../../../remotion/src/features/data-cards/tile-scale';
 import { CHART_THEMES, toHex } from '../../../remotion/src/features/data-cards/chart-theme';
 
