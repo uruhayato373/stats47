@@ -14,7 +14,9 @@ import { renderStackedChart } from '../lib/template-composition-stacked';
 import { renderDistributionMapChart } from '../lib/template-distribution-map';
 import { renderGroupedBarsChart } from '../lib/template-grouped-bars';
 import { renderAreaMapChart } from '../lib/template-area-map';
-import { resolveAreaChart, type AreaScope } from '../lib/template-area-scope';
+import { areasOf, resolveAreaChart, type AreaScope } from '../lib/template-area-scope';
+import { renderTreemapChart } from '../lib/template-composition-treemap';
+import { renderFilePreview, type FilePreview } from '../lib/template-file-preview';
 import { renderCompositionHeatmap, renderCompositionPie } from '../lib/template-minor-charts';
 import { rankingRows, renderAreaBarsChart, renderItemBarsChart, renderRankingBarsChart } from '../lib/template-ranking-bars';
 import { rankingInputFromStats, sampleRankingChart } from '../lib/template-ranking-data';
@@ -37,6 +39,8 @@ import { metricPresentation } from '../../../packages/data-configs/src/color-pol
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 import { fetchMunicipalityTopologyForWardMode } from '../../../packages/gis/src/mlit/fetch-ward-mode-topology';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
+import { MANUFACTURING_SHIPMENT_AMOUNT_2023 } from '../../../packages/product-factory/src/data/datasets/manufacturing-shipment-amount';
+import { serializeDatasetCsv } from '../../../packages/product-factory/src/generators/csv';
 import type { Topology } from 'topojson-specification';
 
 const ROOT = path.resolve(__dirname, '../../..');
@@ -103,6 +107,33 @@ async function areaInputs() {
   });
   const topologyOf = async (wardMode: 'merged' | 'split') => await fetchMunicipalityTopologyForWardMode('14', wardMode) as unknown as Topology;
   return { chartOf, merged: await topologyOf('merged'), split: await topologyOf('split') };
+}
+const TREEMAP_METRIC = 'manufacturing-shipment-amount';
+const TREEMAP_YEAR = '2023';
+/** One prefecture's municipalities (designated cities whole), each once with a positive value. */
+async function treemapSample(id: string, label: string) {
+  const metric = getMetricConfig(TREEMAP_METRIC)!;
+  const areas = areasOf({ level: 'municipality', wardMode: 'merged', within: { kind: 'prefecture', prefCode: '23' } });
+  const rows = parseStatsValuesPayload(await json(`app/stats/${TREEMAP_METRIC}/cities.json`)).rows
+    .filter((row) => row.yearCode === TREEMAP_YEAR && areas.has(row.areaCode));
+  if (rows.length !== areas.size || rows.some((row) => !(Number(row.value) > 0))) throw Error(`${TREEMAP_METRIC}: 愛知県の ${areas.size} 市町村の値がそろっていない (${rows.length} 行)`);
+  return both(id, label, (theme) => renderTreemapChart({
+    title: `愛知県の${metric.title}の内訳`, meta: `${TREEMAP_YEAR}年 · ${rows.length}市町村 · 県内合計に占める割合`, source: metricSource(TREEMAP_METRIC) ?? '',
+    presentation: metricPresentation(metric, 'municipality-merged'),
+    items: rows.map((row) => ({ label: areas.get(row.areaCode)!, value: Number(row.value) })),
+  }, theme));
+}
+/** The data pack's own data.csv, as the generator writes it: the first rows, one middle row and the last. */
+function datasetCsvPreview(): FilePreview {
+  const csv = serializeDatasetCsv(MANUFACTURING_SHIPMENT_AMOUNT_2023).replace(/^\uFEFF/, '').trimEnd();
+  if (csv.includes('"')) throw Error('引用符を含む CSV は見本の分割に使えない');
+  const [header, ...rows] = csv.split('\r\n').map((line) => line.split(','));
+  const at = (code: string) => ({ cells: rows.find((row) => row[0] === code)! });
+  return {
+    title: 'データ集の data.csv の中身', meta: `data.csv · 全${rows.length}行`, source: MANUFACTURING_SHIPMENT_AMOUNT_2023.source.surveyName,
+    columns: header.map((label) => ({ label, align: label === '値' || label === '基準年' ? 'end' : 'start' })),
+    rows: [...rows.slice(0, 3).map((cells) => ({ cells })), { gap: true }, at('23000'), { gap: true }, { cells: rows.at(-1)! }],
+  };
 }
 async function baseTileSample(id: string, label: string, slug: string, base: string) {
   const names = PREF_NAMES as string[];
@@ -209,6 +240,8 @@ async function main() {
     table: [both('table', '全 47 都道府県', (theme) => renderRankingTable(input, theme))],
     pie: [both('pie', '構成比', (theme) => renderCompositionPie(liquor, theme))],
     heatmap: [both('heatmap', '年と区分', (theme) => renderCompositionHeatmap(liquor, theme))],
+    treemap: [await treemapSample('treemap', '県内の市町村の内訳')],
+    'file-preview': [both('file-preview', 'データ集の data.csv', (theme) => renderFilePreview(datasetCsvPreview(), theme))],
   };
   const rows = reviewRowsOf(JSON.parse(fs.readFileSync(path.join(ROOT, datasetPath('content.image-templates')), 'utf8')).templates, samples);
   fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), rows }, null, 2));
