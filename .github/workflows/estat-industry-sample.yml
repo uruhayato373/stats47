@@ -1,0 +1,58 @@
+name: 🏭 e-Stat industry sample (muni × 製造業の業種)
+
+# 商品の見本画像に使う、数自治体の製造業の業種別の値と表の構成だけを e-Stat から取る。read-only (R2・git に書かない)。
+# e-Stat の appId は CI 専任。リポジトリが公開なので artifact は誰でも取れるため、表全体や販売物はここで作らない。
+# 取り込み: gh run download <run> -n estat-industry-sample -D <作業領域>
+# 呼び出し: .claude/scripts/products/fetch-estat-industry-sample.mjs
+
+on:
+  workflow_dispatch:
+    inputs:
+      stats_data_id:
+        description: "e-Stat の統計表 ID (市区町村 × 産業中分類の表)"
+        required: false
+        default: "0004035178"
+      areas:
+        description: "自治体コード (5 桁・カンマ区切り。最大 10)"
+        required: false
+        default: "23211,33202,12219,27100,27140,23000"
+  push:
+    branches: [develop]
+    paths:
+      - ".github/workflows/estat-industry-sample.yml"
+      - ".claude/scripts/products/fetch-estat-industry-sample.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 📦 Install
+        run: npm ci
+
+      - name: 🏭 Fetch industry rows
+        env:
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+          STATS_DATA_ID: ${{ inputs.stats_data_id || '0004035178' }}
+          AREAS: ${{ inputs.areas || '23211,33202,12219,27100,27140,23000' }}
+        run: node .claude/scripts/products/fetch-estat-industry-sample.mjs --stats-data-id "$STATS_DATA_ID" --areas "$AREAS" --out "$RUNNER_TEMP/estat-industry-sample"
+
+      - name: 📤 Upload rows
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: estat-industry-sample
+          path: ${{ runner.temp }}/estat-industry-sample
+          if-no-files-found: error
+          retention-days: 7
