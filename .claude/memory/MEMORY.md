@@ -189,3 +189,4 @@
 - [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は観点でなく計算手順つきの必須試験にする。誤った結論の fixture で検出を確かめる
 - [snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — 検査の「本番データの欠落」は比較の誤りのことがある。再生成の前に生成側の関数で 1 件確かめる
 - [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree はセッション再開で消える。worktree はリポジトリ内に置き節目ごとにコミット
+- [stat image type ledger first](feedback_stat_image_type_ledger_first.md) — 統計の画像は描く前に image-templates.json で型を引く。商品の見本も例外にしない
