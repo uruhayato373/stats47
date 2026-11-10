@@ -36,7 +36,7 @@ import {
   type MetricRegistry,
 } from '@stats47/data-configs';
 
-import surveysMaster from '../data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 import { resolveSurveyLinkage } from '../builders/build-ranking-item-from-metric';
 import { SITE } from '@stats47/types';
 

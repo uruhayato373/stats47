@@ -1,5 +1,19 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-11-10T05:08:37",
-  "files": []
+  "hash": "7fc8c61625344e1f6605f1fb28f4bb03e7577d344153a9623197e700390e6eff",
+  "audited_at": "2026-11-10T06:16:21",
+  "files": [
+    ".claude/agents/survey-curator.md",
+    ".claude/rules/survey-content-standards.md",
+    ".claude/rules/survey-linkage-standards.md",
+    ".claude/scripts/lib/__tests__/survey-lenses.test.mjs",
+    ".claude/scripts/lib/plan-pr-quality.mjs",
+    ".claude/scripts/lib/survey-lenses.mjs",
+    ".claude/scripts/site/audit-site-links.mjs",
+    ".claude/scripts/source-vault/source-inventory.mjs",
+    ".claude/scripts/surveys/build-survey-portfolio.ts",
+    ".claude/scripts/surveys/survey-lenses.ts",
+    ".claude/scripts/surveys/validate-survey-portfolio.ts",
+    ".claude/scripts/themes/stage-theme-expansion.mjs",
+    ".claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md"
+  ]
 }

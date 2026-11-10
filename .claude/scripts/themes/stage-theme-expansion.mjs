@@ -11,7 +11,7 @@ import {
   inspectLocalMetricCoverage,
 } from './theme-expansion-core.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 // Local preparation only: canonical builders produce the release files; no upload capability.
 const require = createRequire(import.meta.url);
@@ -1509,7 +1509,7 @@ const {
 } = require('../../../packages/ranking/src/types/snapshot.ts');
 const surveys = JSON.parse(
   await readFile(
-    resolve(root, 'packages/ranking/src/data/surveys.json'),
+    resolve(root, datasetPath('surveys.master')),
     'utf8'
   )
 );

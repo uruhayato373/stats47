@@ -97,7 +97,7 @@ tags: [survey, portfolio, agent, governance]
 ## 2. アーキテクチャ (SSOT 分離)
 
 ```
-packages/ranking/src/data/surveys.json               ← 調査マスタ SSOT (linkage-standards §1・不変)
+surveys.master (カタログの ID)                    ← 調査マスタ SSOT (linkage-standards §1・不変)
 survey-linkage-standards.md + provenance 辞書        ← 紐付け SSOT (resolveSurveyLinkage に一本化・不変)
 apps/web/src/features/survey/survey-editorial.ts     ← 編集本文 SSOT (content-standards・不変)
 data/surveys/portfolio.json                 ← survey 別評価 (派生・再構築可能・手編集禁止)

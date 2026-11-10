@@ -1,7 +1,7 @@
 /**
  * build-survey-portfolio.ts — survey ポートフォリオ state の決定的 builder (upsert)
  *
- * 機械項目 (surveys.json のマスタ情報・紐付け監査の itemCount/orphan・R2 all.json の
+ * 機械項目 (調査マスタ surveys.master の情報・紐付け監査の itemCount/orphan・R2 all.json の
  * activeItemCount/linkage drift・survey-editorial.ts の編集実装状態・レビュー文書対応付け) を
  * 毎回再導出し、意味項目 (lifecycleStatus / editorialStatus / currentHypothesis / evidenceRefs /
  * metrics / nextReviewAt) は既存値を保持する (theme portfolio / blog remediation-queue と同じ upsert 思想)。
@@ -31,7 +31,7 @@ import { fileURLToPath } from "node:url";
 
 import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -42,7 +42,7 @@ const REVIEW_DIR = path.join(
 );
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
-const SURVEYS_JSON = path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
+const SURVEYS_JSON = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const AUDIT_SCRIPT = "packages/ranking/src/scripts/audit-survey-linkage.ts";
 const R2_ALL_URL = `${R2_PUBLIC_BASE_URL}/app/survey/all.json`;
 

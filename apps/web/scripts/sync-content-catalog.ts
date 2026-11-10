@@ -40,7 +40,7 @@ import prefectures from '../../../packages/area/src/data/prefectures.json';
 import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
 import { CATEGORIES } from '../../../packages/data-configs/src/categories';
 import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
-import surveys from '../../../packages/ranking/src/data/surveys.json';
+import surveys from '../../../data/surveys/master/surveys.json';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { KNOWN_TAG_KEYS } from '../src/config/known-tag-keys';

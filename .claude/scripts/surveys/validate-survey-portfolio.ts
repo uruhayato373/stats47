@@ -46,13 +46,13 @@ import {
   requiredSurveyReaderQuestionCount,
 } from "../../../apps/web/src/features/survey/survey-editorial";
 import { resolveSurveyTaxonomy } from "../../../packages/ranking/src/survey/survey-taxonomy";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
 const SURVEYS_JSON =
-  process.env.SURVEYS_JSON || path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
+  process.env.SURVEYS_JSON || path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const jsonMode = process.argv.includes("--json");
 const requireAllEditorial = process.argv.includes("--require-all-editorial");
 

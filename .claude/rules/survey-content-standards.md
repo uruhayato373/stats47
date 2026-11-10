@@ -82,7 +82,7 @@ survey 固有の編集情報は低 volume・人手・型/review 対象なので 
 ranking 紐付けの既存 SSOT (surveys.json / `resolveSurveyLinkage`) は変更しない。
 
 ```text
-packages/ranking/src/data/surveys.json
+surveys.master (カタログの ID)
   └─ 調査の reference 情報（名称・組織・URL）: 既存のまま
 
 apps/web/src/features/survey/survey-editorial.ts  ← survey 編集情報の git TS SSOT
@@ -124,7 +124,7 @@ R2 app/survey/<id>/items.json
 - 参照の向き: 資料の問い (`data/source-inventory/<source>/<edition>/analyses.json` の `lensIds`) と、調査ごとの分析単位
   (家計調査は `packages/data-configs/src/kakei-analysis-catalog.ts` の `lensId`。問い × 表の軸 × 載せるページ) が切り口を参照する。
   **切り口台帳のある調査を `surveyIds` に持つ問いは、資料を問わず 1 つ以上の切り口に結ぶ** (文脈だけの資料は任意)。
-- 検査: `npm run surveys:lenses:check` (PR CI)。調査 id・表 id の実在、問いと分析単位からの参照の実在、未接続の問いを止める。
+- 検査: `npm run surveys:lenses:check` (PR CI)。表 id の実在、問いと分析単位からの参照の実在 (調査 id の実在は check-datasets の refs)、未接続の問いを止める。
   品目単位の「どの品目を指標にし、どれを見送ったか」は調査ごとの台帳 (家計調査は `data/estat/kakei-ledger/`) が持ち、切り口台帳には書かない。
 - 新しい調査に切り口台帳を作るときは、表の棚卸し (e-Stat カタログ `npm run estat:catalog:search`) を先に行い、切り口ごとに使う表を確かめてから書く。
 

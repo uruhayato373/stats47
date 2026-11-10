@@ -65,7 +65,7 @@ interface ItemShard {
 async function readItemShards(): Promise<ItemShard[]> {
   return Promise.all(ITEM_SHARD_PATHS.map(async (shardPath) => JSON.parse(await readFile(shardPath, "utf8")) as ItemShard));
 }
-const SURVEYS_PATH = path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
+const SURVEYS_PATH = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const EXPERIMENTS_PATH = path.join(PROJECT_ROOT, datasetPath("business.experiments"));
 const SNS_POSTS_PATH = path.join(PROJECT_ROOT, datasetPath("sns.posts"));
 const SNS_UTM_POLICY_PATH = path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-utm.cjs");

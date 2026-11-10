@@ -1,14 +1,14 @@
 import Ajv from "ajv";
 import { describe, expect, it } from "vitest";
 
-import surveys from "../surveys.json";
-import schema from "../surveys.schema.json";
+import surveys from "../../../../../data/surveys/master/surveys.json";
+import schema from "../../../../../data/surveys/master/surveys.schema.json";
 
 type SurveyRow = { id: string; name: string; parentSourceId: string | null };
 const rows = surveys as SurveyRow[];
 
-describe("surveys.json (調査マスタ)", () => {
-  it("JSON Schema (surveys.schema.json) に適合する", () => {
+describe("調査マスタ (surveys.master)", () => {
+  it("JSON Schema に適合する", () => {
     const validate = new Ajv({ allErrors: true }).compile(schema);
     const ok = validate(surveys);
     expect(validate.errors ?? []).toEqual([]);

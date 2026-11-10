@@ -157,10 +157,7 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/ranking/src/data/", why: "pending", phase: 2 },
   { path: "packages/data-configs/src/kakei-analysis-catalog.ts", why: "pending", phase: 2 },
-  { path: "packages/data-configs/src/ssds/source-name-to-survey.ts", why: "pending", phase: 2 },
-  { path: "packages/data-configs/src/ssds/displayname-to-survey.ts", why: "pending", phase: 2 },
   { path: "apps/web/src/features/survey/survey-editorial.ts", why: "pending", phase: 2 },
   { path: "packages/data-configs/src/categories.ts", why: "pending", phase: 3 },
   { path: "packages/data-configs/src/topics/catalogs/", why: "pending", phase: 3 },
@@ -698,7 +695,25 @@ export const DATASETS = [
   d("source-inventory.placement-decisions", "data/source-inventory/placement-decisions.json", "ledger", "data", "data", "参考文献由来の指標の展開判断 (展開先ごとの planned / rejected / blocked と理由)", { schema: "data/source-inventory/placement-decisions.schema.json" }),
   d("source-inventory.placement-decisions-schema", "data/source-inventory/placement-decisions.schema.json", "schema", "data", "data", "上の展開判断の JSON Schema"),
   d("surveys.portfolio", "data/surveys/{name}", "state", "data", "data", "調査ポートフォリオ・分類・実験"),
-  d("surveys.lenses", "data/surveys/lenses/{name}.json", "master", "data", "data", "統計調査の切り口台帳 (調査ごとの分析の切り口・使う表と軸・粒度・誤読の注意・チャネルの役割。資料の問いと分析単位はここを参照する。展開の状況は持たない)", { schema: "config/schema/surveys.lenses.schema.json" }),
+  d("surveys.lenses", "data/surveys/lenses/{name}.json", "master", "data", "data", "統計調査の切り口台帳 (調査ごとの分析の切り口・使う表と軸・粒度・誤読の注意・チャネルの役割。資料の問いと分析単位はここを参照する。展開の状況は持たない)", {
+    schema: "config/schema/surveys.lenses.schema.json",
+    refs: [
+      { field: "surveyId", to: "surveys.master", key: "[].id" },
+      { field: "relatedSurveyIds[]", to: "surveys.master", key: "[].id" },
+    ],
+  }),
+  d("surveys.master", "data/surveys/master/surveys.json", "master", "data", "data", "調査マスタ (/survey/<id> の正本。id・名前・機関・URL・親の出典。調査の名前・機関・URL を持つのはここだけで、出典名の対応表や切り口台帳は id で指す)", { schema: "data/surveys/master/surveys.schema.json" }),
+  d("surveys.master-schema", "data/surveys/master/surveys.schema.json", "schema", "data", "data", "上の調査マスタの JSON Schema"),
+  d("surveys.source-names", "data/surveys/master/source-names.json", "master", "data", "data", "出典の書き方 (SSDS の原典名・指標の displayName・e-Stat の統計表 ID) から調査マスタの id への対応表。調査の名前・機関・URL は持たない。解決の関数は packages/data-configs/src/ssds/source-name-to-survey.ts", {
+    schema: "data/surveys/master/source-names.schema.json",
+    refs: [
+      { field: "knownSourceToSurvey.*", to: "surveys.master", key: "[].id" },
+      { field: "proposedSourceToSurvey.*", to: "surveys.master", key: "[].id" },
+      { field: "displayNameToSurvey.*", to: "surveys.master", key: "[].id" },
+      { field: "statsDataIdToSurveyOverride.*.id", to: "surveys.master", key: "[].id" },
+    ],
+  }),
+  d("surveys.source-names-schema", "data/surveys/master/source-names.schema.json", "schema", "data", "data", "上の対応表の JSON Schema"),
   d("themes.portfolio", "data/themes/{name}", "state", "data", "data", "テーマのポートフォリオ・品質・実験・CI レビュー"),
   d("themes.role-review", "data/themes/role-review/{name}", "state", "data", "data", "テーマの指標の役割レビューキュー"),
   d("themes.chart-audit", "data/themes/charts/{name}", "state", "data", "data", "テーマのチャートの本番監査"),
@@ -867,6 +882,9 @@ export const RETIRED = [
   { from: ".claude/state/sns/post-log.md", to: "data/sns/post-log.md", since: "2026-10-06" },
   { from: ".claude/state/sns/posts.json", to: "data/sns/posts.json", since: "2026-10-06" },
   { from: "data/note/hashtags", to: "config/note-hashtags", since: "2026-10-06" },
+  // 調査マスタ (2026-11-10 に packages/ から data/surveys/master/ へ。出典名の対応も同じ場所に JSON で置いた)
+  { from: "packages/ranking/src/data/surveys", to: "data/surveys/master", since: "2026-11-10" },
+  { from: "sync-survey-master", to: "(廃止。対応表は調査の id だけを持つので、調査マスタへ同期するものが無い)", since: "2026-11-10" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

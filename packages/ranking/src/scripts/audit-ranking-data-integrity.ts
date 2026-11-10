@@ -76,7 +76,7 @@ import {
 // HOME_FEATURED_RANKINGS は掲載価値スコアへの一元化で廃止。注目 8 件は生成物が持つ。
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 
-import surveysMaster from "../data/surveys.json";
+import surveysMaster from "../../../../data/surveys/master/surveys.json";
 
 import { expectedCalculatedYears } from "./lib/calculated-stats-core";
 import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";

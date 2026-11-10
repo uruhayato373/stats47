@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 
+import { datasetPath } from '../../../../../config/datasets.mjs';
 import { GONE_BLOG_SLUGS } from '../../../../../apps/web/src/config/gone-blog-slugs';
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
 import type { ImageObjectStore } from '../../image-pipeline';
@@ -15,9 +16,10 @@ const contractFiles = [
   'apps/web/src/features/blog/services/article-survey-taxonomy.ts',
   'apps/web/src/features/blog/services/article-metric-pairs.ts',
   'packages/ranking/src/survey/survey-taxonomy.ts',
-  'packages/ranking/src/data/surveys.json',
+  datasetPath('surveys.master'),
   'packages/ranking/src/builders/build-ranking-item-from-metric.ts',
   'packages/data-configs/src/provenance/resolve-metric-provenance.ts',
+  datasetPath('surveys.source-names'),
   'packages/data-configs/src/ssds/source-name-to-survey.ts',
   'packages/data-configs/src/ssds/displayname-to-survey.ts',
   'packages/data-configs/src/ssds/estat-provenance.generated.json',

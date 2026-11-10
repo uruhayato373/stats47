@@ -5,7 +5,7 @@ import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
  * 入力:
  *   - src/ssds/cdcat01-sources.generated.json … cdCat01 → {kind, sources[](原典名), formula?}
  *     (extract-ssds-sources.py が公式 Excel から生成)
- *   - src/ssds/source-name-to-survey.ts        … 原典名 → survey id 正規化辞書
+ *   - src/ssds/source-name-to-survey.ts        … 原典名 → survey id の対応 (正本は data/surveys/master/source-names.json)
  *
  * 出力:
  *   - src/ssds/ssds-provenance.generated.json  … cdCat01 → { kind, originalSurveys: [{id,name}] }
@@ -21,15 +21,20 @@ import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { datasetPath } from "../../../../config/datasets.mjs";
 import {
   CDCAT01_SOURCE_OVERRIDE,
   KNOWN_SOURCE_TO_SURVEY,
-  PROPOSED_NEW_SURVEYS,
+  PROPOSED_SOURCE_TO_SURVEY,
 } from "../../src/ssds/source-name-to-survey";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SSDS_DIR = join(__dirname, "../../src/ssds");
 const METRICS_DIR = resolve(__dirname, "../../../..", METRIC_DEFINITIONS_DIR);
+/** 調査の名前の正本は調査マスタ (対応表は id だけを持つ) */
+const SURVEY_MASTER_NAME = new Map(
+  (JSON.parse(readFileSync(resolve(__dirname, "../../../..", datasetPath("surveys.master")), "utf-8")) as Survey[]).map((s) => [s.id, s.name]),
+);
 
 type RawEntry = { kind: "base" | "indicator"; sources: string[]; formula?: string };
 type Survey = { id: string; name: string };
@@ -43,8 +48,8 @@ function autoSlug(name: string): string {
 function resolveSurvey(sourceName: string): Survey {
   const known = KNOWN_SOURCE_TO_SURVEY[sourceName];
   if (known) return { id: known, name: sourceName };
-  const proposed = PROPOSED_NEW_SURVEYS[sourceName];
-  if (proposed) return { id: proposed.id, name: proposed.name };
+  const proposed = PROPOSED_SOURCE_TO_SURVEY[sourceName];
+  if (proposed) return { id: proposed, name: SURVEY_MASTER_NAME.get(proposed) ?? sourceName };
   return { id: autoSlug(sourceName), name: sourceName };
 }
 

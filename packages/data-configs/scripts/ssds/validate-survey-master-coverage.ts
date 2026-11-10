@@ -2,7 +2,7 @@
  * survey マスタ整合性チェック (ビルド時 lint / CI 向け)。
  *
  * Phase 5 の再分配は metric → 原典 survey id でバケットを作る。その survey id が
- * surveys.json (master) に存在しないと /survey が孤児 (all.json 不在で 404) になる。
+ * 調査マスタ (surveys.master) に存在しないと /survey が孤児 (all.json 不在で 404) になる。
  * 本スクリプトは「全 metric を解決して得られる非合成 survey id が、すべて master に
  * 存在するか」を検証する。1 件でも欠けると exit 1 (CI fail)。
  *
@@ -13,11 +13,12 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { datasetPath } from "../../../../config/datasets.mjs";
 import { METRICS_REGISTRY } from "../../src/registry";
 import { resolveMetricProvenance } from "../../src/provenance/resolve-metric-provenance";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SURVEYS_JSON = join(__dirname, "../../../ranking/src/data/surveys.json");
+const SURVEYS_JSON = join(__dirname, "../../../..", datasetPath("surveys.master"));
 
 function isSynthetic(id: string): boolean {
   return id.startsWith("ssds-src:") || id.startsWith("src:");
