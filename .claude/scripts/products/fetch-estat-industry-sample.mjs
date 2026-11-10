@@ -19,10 +19,16 @@ const PAGE_LIMIT = 100000;
 const asList = (v) => (Array.isArray(v) ? v : v == null ? [] : [v]);
 const arg = (name) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : undefined; };
 
-/** 項目 (製造品出荷額等) の軸と、そのコード。地域・業種の軸より件数が少なく名前が完全一致するものを選ぶ */
+/**
+ * 項目 (製造品出荷額等) の軸と、そのコード。名前の完全一致を優先し、無ければ「製造品出荷額等（万円）」のように
+ * その名前で始まる項目を選ぶ。地域・業種の軸より件数が少ない軸の、名前が短いものを採る
+ */
 export function findItem(classObjs, itemName) {
-  const hits = classObjs.flatMap((obj) => asList(obj.CLASS).filter((c) => c['@name'] === itemName).map((c) => ({ id: obj['@id'], code: c['@code'], size: asList(obj.CLASS).length })));
-  return hits.sort((a, b) => a.size - b.size)[0] ?? null;
+  const hits = (match) => classObjs.flatMap((obj) => asList(obj.CLASS).filter((c) => match(c['@name'] ?? ''))
+    .map((c) => ({ id: obj['@id'], code: c['@code'], name: c['@name'], size: asList(obj.CLASS).length })));
+  const found = hits((n) => n === itemName);
+  const candidates = found.length ? found : hits((n) => n.startsWith(itemName));
+  return candidates.sort((a, b) => a.size - b.size || a.name.length - b.name.length)[0] ?? null;
 }
 
 /** 行のどれかの軸が対象の自治体コードを持つ (コードそのもの、または「_23211_」のように名前に含む) か */
@@ -46,8 +52,13 @@ async function main() {
     statsDataId, title: meta.TABLE_INF.TITLE?.$ ?? meta.TABLE_INF.TITLE, statName: meta.TABLE_INF.STAT_NAME?.$,
     classes: classObjs.map((obj) => ({ id: obj['@id'], name: obj['@name'], size: asList(obj.CLASS).length, first: asList(obj.CLASS).slice(0, 8).map((c) => `${c['@code']} ${c['@name']}`) })),
   };
+  // 失敗しても表の構成は残す (軸と名前を見て直すため)
+  fs.mkdirSync(out, { recursive: true });
+  fs.writeFileSync(path.join(out, 'structure.json'), JSON.stringify(structure, null, 1) + '\n');
+  for (const c of structure.classes) console.log(`${c.id} ${c.name} (${c.size}): ${c.first.slice(0, 3).join(' / ')}`);
   const item = findItem(classObjs, itemName);
   if (!item) throw Error(`項目「${itemName}」が表の軸に無い`);
+  console.log(`項目: ${item.id} ${item.code} ${item.name}`);
   const filter = { [`cd${item.id[0].toUpperCase()}${item.id.slice(1)}`]: item.code };
   const rows = [];
   let start = 1, total = 0;
@@ -63,7 +74,6 @@ async function main() {
     if (!next) break;
     start = Number(next);
   }
-  fs.mkdirSync(out, { recursive: true });
   fs.writeFileSync(path.join(out, 'structure.json'), JSON.stringify({ ...structure, item, filter, totalRows: total }, null, 1) + '\n');
   fs.writeFileSync(path.join(out, 'rows.json'), JSON.stringify({ statsDataId, itemName, areas, rows }, null, 1) + '\n');
   const found = new Set(rows.map((r) => r.area));

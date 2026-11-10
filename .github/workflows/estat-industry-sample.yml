@@ -50,6 +50,8 @@ jobs:
         run: node .claude/scripts/products/fetch-estat-industry-sample.mjs --stats-data-id "$STATS_DATA_ID" --areas "$AREAS" --out "$RUNNER_TEMP/estat-industry-sample"
 
       - name: 📤 Upload rows
+        # 取得に失敗しても表の構成 (structure.json) は残す
+        if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: estat-industry-sample
