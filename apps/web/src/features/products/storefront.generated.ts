@@ -10,14 +10,15 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-muni-manufacturing",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
-    "description": "市区町村別の製造品出荷額等を 1980〜2023 年の時系列でそろえ、最新の境界の地図データと結合して使う",
-    "priceYen": 980,
+    "title": "市区町村別 製造品出荷額等 1980〜2023年＋業種別 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+    "description": "市区町村別の製造品出荷額等を 1980〜2023 年の時系列と 2021〜2023 年の業種別 (産業中分類 24 業種) でそろえ、最新の境界の地図データと結合して使う",
+    "priceYen": 1980,
     "externalUrl": "https://note.com/stats47/n/n5d86476e9c73",
     "included": [
-      "CSV",
-      "GEOJSON",
-      "PNG"
+      "CSV (時系列 1980〜2023 年・1,719 自治体)",
+      "CSV (業種別 2021〜2023 年・24 業種)",
+      "GeoJSON (自治体の境界)",
+      "README・検算表"
     ],
     "audience": [
       "自治体の企画・産業振興担当",
@@ -25,6 +26,76 @@ export const STOREFRONT_PRODUCTS = [
       "研究者"
     ],
     "sourceBlogSlugs": [],
+    "showcase": [
+      {
+        "heading": "比べる：自治体の規模の順位と地図",
+        "lead": "2023 年は豊田市が 20 兆 5,272 億円で、2 位の倉敷市の約 3.7 倍です。同じ年の値を自治体コードで境界に結合すれば、全国の地図にも、県の中の地図にもなります。",
+        "figures": [
+          {
+            "file": "compare-bars-2023.png",
+            "alt": "製造品出荷額等の上位と下位の自治体（2023年）"
+          },
+          {
+            "file": "compare-map-2023.png",
+            "alt": "製造品出荷額等の色分け地図（2023年・市区町村別）"
+          },
+          {
+            "file": "aichi-map-2023.png",
+            "alt": "愛知県の製造品出荷額等（2023年）"
+          }
+        ]
+      },
+      {
+        "heading": "構成を見る：業種別の内訳と県内の割合",
+        "lead": "業種別の表で、自治体の製造業がどの業種に頼っているかが分かります。豊田市は輸送用機械が 93.4% を占め、倉敷市は石油製品・鉄鋼・化学、市原市は石油製品と化学で約 9 割です。",
+        "figures": [
+          {
+            "file": "industry-donut-toyota-2023.png",
+            "alt": "豊田市の製造品出荷額等の業種別内訳（2023年）"
+          },
+          {
+            "file": "industry-mix-3cities-2023.png",
+            "alt": "上位3市の業種構成（2023年）"
+          },
+          {
+            "file": "structure-aichi-treemap-2023.png",
+            "alt": "愛知県の製造品出荷額等の内訳（2023年・54市町村）"
+          },
+          {
+            "file": "structure-share-map-2023.png",
+            "alt": "県内の合計に占める割合（2023年・市区町村別）"
+          }
+        ]
+      },
+      {
+        "heading": "変化を見る：44 年の推移",
+        "lead": "1980 年に 1 位だった東京都特別区部を、豊田市は 2002 年に上回りました。1980 年と 2023 年を比べた倍率も地図にできます (物価で直していない名目の値)。",
+        "figures": [
+          {
+            "file": "change-trend-1980-2023.png",
+            "alt": "製造品出荷額等の推移（1980〜2023年）"
+          },
+          {
+            "file": "change-ratio-map-1980-2023.png",
+            "alt": "1980年→2023年で何倍か（市区町村別）"
+          }
+        ]
+      },
+      {
+        "heading": "ファイルの中身",
+        "lead": "CSV は自治体コード・年・値の形で、業種別は業種コードと業種名の列が加わります。値が空の行には、秘匿などの理由を注記の列に書いています。",
+        "figures": [
+          {
+            "file": "file-preview-toyota.png",
+            "alt": "時系列のCSVの中身（豊田市の行の一部）"
+          },
+          {
+            "file": "file-preview-industry-kurashiki.png",
+            "alt": "業種別のCSVの中身（倉敷市・2023年の一部）"
+          }
+        ]
+      }
+    ],
     "coverImageUrl": "https://assets.st-note.com/production/uploads/images/332041499/rectangle_large_type_2_ed3faeff21eb6e6a34de3f45686521e9.png?fit=bounds&quality=85&width=480"
   },
   {

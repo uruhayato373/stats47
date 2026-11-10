@@ -30,7 +30,7 @@ describe("product storefront", () => {
     expect(findDataProductForMunicipalityRanking("manufacturing-shipment-amount")).toMatchObject({
       id: "MUNI-MANUFACTURING",
       channel: "note",
-      priceYen: 980,
+      priceYen: 1980,
       externalUrl: "https://note.com/stats47/n/n5d86476e9c73",
     });
     expect(findDataProductForMunicipalityRanking("total-population")).toBeNull();
