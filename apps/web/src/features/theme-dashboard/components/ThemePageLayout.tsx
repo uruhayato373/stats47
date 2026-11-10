@@ -27,6 +27,7 @@ import { isAreaTheme } from '../config/area-theme-slugs';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { loadInitialThemeData } from '../lib/initial-theme-data';
 import { KAKEI_RANKING_DIRECTORY } from '../lib/kakei-ranking-directory.generated';
 import { prefectureCityOptions } from '../lib/prefecture-city-options';
 import {
@@ -44,6 +45,7 @@ import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
 import { ThemeRegionNav } from './ThemeRegionNav';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
+
 
 import type { ThemePageData } from '../lib/load-theme-data';
 import type { ThemeConfig } from '../types';
@@ -171,6 +173,12 @@ export async function ThemePageLayout({
         nativeBanners,
       );
   const providerPrefecture = areaContext ?? initialPrefecture;
+  // 指標カードの時系列と章の図の結果を初回描画で渡す (表示直後の POST を出さない。GSC-CRAWL-WASTE-01)
+  const initialThemeData = await loadInitialThemeData({
+    metricKeys: Object.keys(data.indicatorDataMap),
+    charts: pageCharts,
+    prefectureCode: providerPrefecture?.areaCode ?? null,
+  });
 
   return (
     <ThemePrefectureProvider
@@ -244,6 +252,7 @@ export async function ThemePageLayout({
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}
             chapterAdRows={[chapterRow1, chapterRow2]}
+            initialThemeData={initialThemeData}
           />
 
           {(themeMetrics.length > 0 || themeSurveys.length > 0) && (

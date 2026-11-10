@@ -1,5 +1,6 @@
 "use client";
 
+import { InitialThemeDataProvider } from "./InitialThemeDataContext";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { useThemePrefecture } from "./ThemePrefectureContext";
 
@@ -23,10 +24,12 @@ export function ThemeDashboardClient({
   pageCharts,
   chartSourceLinks,
   chapterAdRows,
+  initialThemeData,
 }: ThemeDashboardClientProps) {
   const { selectedPrefectureCode } = useThemePrefecture();
   return (
     <div className="min-w-0 space-y-4">
+      <InitialThemeDataProvider value={initialThemeData}>
       <ThemeMetricsDashboard
         themeConfig={themeConfig}
         metricGroups={metricGroups}
@@ -38,6 +41,7 @@ export function ThemeDashboardClient({
         selectedPrefectureCode={selectedPrefectureCode}
         chapterAdRows={chapterAdRows}
       />
+      </InitialThemeDataProvider>
     </div>
   );
 }

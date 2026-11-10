@@ -27,6 +27,7 @@ import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { metricSourceGroups } from '../lib/metric-source-groups';
 import { nationalSeriesName } from '../lib/metric-trend';
 
+import { useInitialMetricTimeseries } from './InitialThemeDataContext';
 import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
@@ -245,9 +246,20 @@ export function MetricSwitcherPanel({
    * キー付きなので県切替やチェック往復での競合を requestId 照合なしに扱える
    * (古い応答が届いても自分のキーに書き込むだけで、描画は現在のキーを引く)。
    */
+  const initialTimeseries = useInitialMetricTimeseries();
+  // サーバーが初回描画で渡した分 (表示中の県と全国) から始める。無い組だけ下の effect が取りに行く
   const [seriesCache, setSeriesCache] = useState<
     Record<string, MetricTimeseriesResult>
-  >({});
+  >(() => {
+    const seeded: Record<string, MetricTimeseriesResult> = {};
+    for (const metric of metrics) {
+      for (const code of [areaCode, NATIONAL_AREA_CODE]) {
+        const result = initialTimeseries(metric.metricKey, code);
+        if (result) seeded[cacheKey(metric.metricKey, code)] = result;
+      }
+    }
+    return seeded;
+  });
 
   const checkedKeysKey = checkedMetrics.map((m) => m.metricKey).join(',');
 

@@ -11,6 +11,7 @@ import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { MIN_TREND_YEARS, resolveMetricTrend, shouldFetchMetricTrend, type MetricTrend } from '../lib/metric-trend';
 
+import { useInitialMetricTimeseries } from './InitialThemeDataContext';
 import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi } from './metric-kpi';
@@ -64,9 +65,18 @@ export function SingleMetricCard({
     coveredByChapterChart: summaryOnly,
   });
 
+  const initialTimeseries = useInitialMetricTimeseries();
+  // サーバーが初回描画で渡した分 (表示中の県と全国) から始める。無い地域だけ下の effect が取りに行く
   const [series, setSeries] = useState<
     Record<string, MetricTimeseriesResult>
-  >({});
+  >(() => {
+    const seeded: Record<string, MetricTimeseriesResult> = {};
+    for (const code of [areaCode, NATIONAL_AREA_CODE]) {
+      const result = initialTimeseries(metric.metricKey, code);
+      if (result) seeded[code] = result;
+    }
+    return seeded;
+  });
 
   // 県選択時だけ、この指標の自地域 + 全国を未取得なら取る (取得済みは再取得しない)。
   useEffect(() => {

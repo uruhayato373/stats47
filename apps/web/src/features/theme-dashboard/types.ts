@@ -154,4 +154,6 @@ export interface ThemeDashboardClientProps {
   chartSourceLinks?: Record<string, Array<{ label: string; url: string }>>;
   /** 章の間に入れる広告の段 (ThemeMetricsDashboard の chapterAdRows) */
   chapterAdRows?: import("@/features/ads").AdRowCell[][];
+  /** 初回に表示する地域のデータ。指標カードと章の図が表示直後に取りに行く分をサーバーの描画で渡す */
+  initialThemeData?: import("./lib/initial-theme-data").InitialThemeData;
 }
