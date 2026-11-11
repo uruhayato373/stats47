@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import type { ContentTypeDef } from "@/lib/content-coverage";
 import { buildIssueMap, resolveRef, validateIssueMap, type IssueCell, type IssueMapSpec, type LedgerIndex } from "@/lib/issue-map";
 
 /**
@@ -31,6 +32,8 @@ const cell = (row: string, column: string, extra: Partial<IssueCell> = {}): Issu
   ...extra,
 });
 
+const TYPES: ContentTypeDef[] = [{ id: "type:a", title: "参照型", question: "1 位はどこか", examples: "ランキング" }];
+
 const SPEC: IssueMapSpec = {
   observedAt: "2026-W43",
   issue: { id: "biz:issue", question: "問い", hypothesis: "仮説", criteria: [] },
@@ -38,7 +41,7 @@ const SPEC: IssueMapSpec = {
     { id: "biz:col:ads", title: "広告", description: "" },
     { id: "biz:col:data", title: "データ", description: "" },
   ],
-  rows: [{ id: "biz:row:a", title: "参照型", question: "", examples: "" }],
+  rows: [{ id: "biz:row:a", contentType: "type:a" }],
   cells: [
     cell("a", "ads", {
       judgments: [
@@ -72,13 +75,13 @@ describe("事業イシューマップ", () => {
 
   it("参照先の無い ID は未定に紛れさせず problems に出す", () => {
     const spec = { ...SPEC, cells: [cell("a", "ads", { refs: [{ kind: "backlog", id: "GONE-01" }] }), SPEC.cells[1]] };
-    const map = buildIssueMap(spec, INDEX);
+    const map = buildIssueMap(spec, INDEX, TYPES);
     expect(map.problems).toEqual(["backlog の GONE-01 が参照先に無い"]);
     expect(map.rows[0].cells[0].otherRefs[0]).toMatchObject({ found: false, date: null });
   });
 
   it("判定日の表は日付の早い順で、未定は後ろ。今日より前だけを過ぎたとする", () => {
-    const { schedule } = buildIssueMap(SPEC, INDEX);
+    const { schedule } = buildIssueMap(SPEC, INDEX, TYPES);
     expect(schedule.map((s) => s.picture)).toEqual(["先の絵", "後の絵", "日付の無い絵", "前提の絵"]);
     expect(schedule.map((s) => s.overdue)).toEqual([true, false, false, false]);
     expect(schedule[0].label).toBe("参照型 × 広告");
@@ -86,21 +89,31 @@ describe("事業イシューマップ", () => {
   });
 
   it("注記は指定したマスにだけ付く", () => {
-    const [ads, data] = buildIssueMap(SPEC, INDEX).rows[0].cells;
+    const [ads, data] = buildIssueMap(SPEC, INDEX, TYPES).rows[0].cells;
     expect(ads.notes).toEqual([]);
     expect(data.notes.map((n) => n.id)).toEqual(["biz:note:x"]);
   });
 
+  it("行の題・問い・例は台帳に写さず型の台帳から結ぶので、型を直せば画面も変わる", () => {
+    const [row] = buildIssueMap(SPEC, INDEX, TYPES).rows;
+    expect(row).toMatchObject({ contentType: "type:a", title: "参照型", question: "1 位はどこか", examples: "ランキング" });
+    const renamed = buildIssueMap(SPEC, INDEX, [{ ...TYPES[0], title: "参照の型" }]);
+    expect(renamed.rows[0].title).toBe("参照の型");
+    expect(renamed.schedule[0].label).toBe("参照の型 × 広告");
+    expect(validateIssueMap(SPEC, [])).toEqual(["biz:row:a: 型 type:a が型の台帳に無い"]);
+  });
+
   it("欠けたマス・重複したマスを止める", () => {
-    const missing = validateIssueMap({ ...SPEC, cells: [SPEC.cells[0]], notes: [] });
+    const missing = validateIssueMap({ ...SPEC, cells: [SPEC.cells[0]], notes: [] }, TYPES);
     expect(missing).toEqual(["biz:row:a × biz:col:data のマスが無い"]);
-    const doubled = validateIssueMap({ ...SPEC, cells: [...SPEC.cells, SPEC.cells[0]], notes: [] });
+    const doubled = validateIssueMap({ ...SPEC, cells: [...SPEC.cells, SPEC.cells[0]], notes: [] }, TYPES);
     expect(doubled.join()).toContain("重複している");
   });
 
   it("リポジトリの台帳は 4 型 × 3 収益源の 12 マスがそろい、カードどおりの評価を持つ", () => {
     const spec = JSON.parse(readFileSync(resolve(__dirname, "../../../../data/business/issue-map.json"), "utf8")) as IssueMapSpec;
-    expect(validateIssueMap(spec)).toEqual([]);
+    const types = JSON.parse(readFileSync(resolve(__dirname, "../../../../data/content/content-types.json"), "utf8")) as { types: ContentTypeDef[] };
+    expect(validateIssueMap(spec, types.types)).toEqual([]);
     expect(spec.cells).toHaveLength(12);
     expect(spec.cells.map((c) => c.rating).join("")).toBe("◎✕○○○○○△○△◎○");
     // 判定日は参照先から引くので、根拠の文に日付の形で写さない

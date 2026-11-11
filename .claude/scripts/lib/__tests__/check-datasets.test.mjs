@@ -633,26 +633,21 @@ test("[mutation] data/ の中の README は一覧に無ければ落ち、消し�
   assert.match(checkDataReadmes({ files: ["data/a/x.json"], pending })[0], /DATA_README_PENDING に無いファイル: data\/a\/README\.md/);
 });
 
-test("ER は refs からテーブル・外部キー・統合の候補 (写し・1 対 1) を出す", () => {
+test("ER は refs からテーブル・外部キーを出し、統合の候補は写しを持つ参照だけにする", () => {
   const row = (id, path, kind, opts = {}) => ({ id, path, kind, domain: "site", target: "data", description: id, ...opts });
-  const store = {
-    "data/a.json": { items: [{ id: "x", title: "X" }, { id: "y", title: "Y" }] },
-    "data/b.json": { rows: [{ a: "x", title: "X" }, { a: "y", title: "Y" }] },
-    "data/c.json": { rows: [{ a: "x" }, { a: "x" }] },
-  };
   const er = buildEr({
     datasets: [
       row("t.a", "data/a.json", "master"),
       row("t.b", "data/b.json", "ledger", { refs: [{ field: "rows[].a", to: "t.a", key: "items[].id", copies: ["title"] }] }),
+      // 値が重複なく参照先を 1 件ずつ指すだけ (1 対 1) の参照。書き手や生成の記録が別の台帳もこの形になるので候補にしない
       row("t.c", "data/c.json", "ledger", { refs: [{ field: "rows[].a", to: "t.a", key: "items[].id" }] }),
       row("t.log", "data/log.csv", "series"),
     ],
-    files: Object.keys(store),
-    readJson: (p) => store[p],
   });
   assert.deepEqual(er.tables.map((t) => t.id), ["t.a", "t.b", "t.c"], "series はテーブルに数えない");
   assert.equal(er.edges.length, 2);
-  assert.deepEqual(er.candidates.map((c) => `${c.kind}:${c.from}`), ["写しを持つ:t.b", "1 対 1:t.b"], "重複して指す t.c は候補にしない");
+  assert.deepEqual(er.candidates.map((c) => `${c.kind}:${c.from}`), ["写しを持つ:t.b"], "写しを持たない t.c は候補にしない");
+  assert.match(er.candidates[0].detail, /rows\[\]\.a が title を写している/);
 });
 
 test("git grep の出力は CRLF の行も読む (Windows の作業ツリーで違反を見逃さない)", () => {

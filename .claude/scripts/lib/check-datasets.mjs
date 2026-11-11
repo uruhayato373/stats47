@@ -428,15 +428,11 @@ export function checkDataReadmes({ files, pending }) {
 }
 
 /**
- * カタログの refs から ER (テーブルと外部キー) を組み立てる。値は読むだけで検査はしない (検査は checkRefs)。
- * 統合の候補: 写しを持つ参照 (copies)、参照元の値が重複しない参照 (参照元の各記録が参照先の 1 記録に対応 = 列にできる)。
+ * カタログの refs から ER (テーブルと外部キー) を組み立てる。値は読まない (検査は checkRefs)。
+ * 統合の候補は写しを持つ参照 (copies) だけ。参照元の値が重複しないだけの参照 (1 対 1) は、書き手や生成の記録が
+ * 別の台帳まで拾い、統合しないと決めたものが毎回並ぶので候補にしない (2026-11-12 段 13 の決定)。
  */
-export function buildEr({ datasets, files, readJson, registryRefs = [] }) {
-  const byId = new Map(datasets.map((d) => [d.id, d]));
-  const filesOf = (ds) => {
-    const re = patternToRegExp(ds.path);
-    return files.filter((f) => re.test(f));
-  };
+export function buildEr({ datasets, registryRefs = [] }) {
   const tables = datasets.filter((d) => DB_KINDS.has(d.kind)).map((d) => ({ id: d.id, kind: d.kind, path: d.path }));
   const edges = [];
   const candidates = [];
@@ -444,19 +440,6 @@ export function buildEr({ datasets, files, readJson, registryRefs = [] }) {
     for (const ref of ds.refs ?? []) {
       edges.push({ from: ds.id, field: ref.field, to: ref.to, key: ref.key ?? null, copies: ref.copies ?? [], severity: ref.severity ?? "error" });
       if (ref.copies?.length) candidates.push({ kind: "写しを持つ", from: ds.id, to: ref.to, detail: `${ref.field} が ${ref.copies.join("・")} を写している` });
-      // 同じ台帳の中の参照 (注記のキー → 記録のキーなど) は、もとから 1 つのテーブルなので統合の候補にしない
-      if (!byId.has(ref.to) || ref.to === ds.id || ref.where || ref.unless) continue;
-      const values = [];
-      let records = 0;
-      for (const file of filesOf(ds)) {
-        for (const { value } of selectPath(readJson(file), ref.field)) {
-          records += 1;
-          values.push(...refValues(value, ref.parse));
-        }
-      }
-      if (values.length > 1 && values.length === records && new Set(values).size === values.length) {
-        candidates.push({ kind: "1 対 1", from: ds.id, to: ref.to, detail: `${ref.field} の ${values.length} 件が重複なく ${ref.to} を指す (参照先の列にできる)` });
-      }
     }
   }
   for (const ref of registryRefs) edges.push({ from: ref.from, field: "(ID)", to: ref.to, key: ref.key ?? null, copies: [], severity: ref.severity ?? "error" });
@@ -686,7 +669,7 @@ function main() {
   result.errors.push(...checkDataReadmes({ files: tracked, pending: DATA_README_PENDING }));
   const contents = contentFiles();
   if (process.argv.includes("--er")) {
-    printEr(buildEr({ datasets: DATASETS, files: contents, readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")), registryRefs: REGISTRY_REFS }));
+    printEr(buildEr({ datasets: DATASETS, registryRefs: REGISTRY_REFS }));
     return;
   }
   result.errors.push(...checkSchemas({

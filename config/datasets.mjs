@@ -284,10 +284,9 @@ export const DATASETS = [
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.cover-policies", "data/note/cover-policies.json", "master", "product", "data", "noteカバーのカテゴリ別方針ID・版・プロンプト", { schema: "data/note/cover-policies.schema.json" }),
   d("note.cover-policies-schema", "data/note/cover-policies.schema.json", "schema", "product", "data", "カバー方針のJSON Schema"),
-  d("note.hashtags", `${P.NOTE_HASHTAGS_DIR}/{name}.json`, "ledger", "product", "data", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", {
+  d("note.hashtags", "data/note/hashtags.json", "ledger", "product", "data", "note 記事ごとの承認済みハッシュタグ (記事の ID → タグ・本文の SHA・モデル・生成日時)。題・URL・系統は記事台帳から結ぶ。生成の記録を持ち書き手も別なので、記事台帳の列にはしない", {
     schema: "config/schema/note.hashtags.schema.json",
-    // title・noteUrl・vertical は記事台帳の写し。記事の題名を変えたら同じ差分で直す (2026-10-26 に 8 件ずれていた)
-    refs: [{ field: "slug", to: "note.articles", key: "articles[].key", copies: ["title", "noteUrl", "vertical"] }],
+    refs: [{ field: "hashtags.$keys", to: "note.articles", key: "articles[].key" }],
   }),
   d("metrics.definitions", `${P.METRIC_DEFINITIONS_DIR}/{name}.ts`, "master", "data", "data", "指標ID・取得元・単位・表示方針の型付き正本"),
   d("metrics.defaults", `${P.METRIC_DEFINITIONS_DIR}/defaults/{name}.ts`, "master", "data", "data", "指標表示の共通既定値。指標ごとに上書き可能"),
@@ -693,7 +692,7 @@ export const DATASETS = [
   d("business.pilot-board", "data/business/pilot-board.json", "ledger", "strategy", "data", "収益化 pilot の判定ボードの入力 (開始日・窓・判定に使う指標)", { schema: "config/schema/business.pilot-board.schema.json" }),
   d("business.issue-map", "data/business/issue-map.json", "ledger", "strategy", "data", "事業イシューマップの入力 (主イシュー・仮説・前提・4 型 × 3 収益源の 12 マス・ストーリーライン・注記)。判定日と進み具合は写さず ID で台帳を指す", {
     schema: "config/schema/business.issue-map.schema.json",
-    refs: [{ field: "rows[].contentType", to: "content.types", key: "types[].id", copies: ["title", "question", "examples"] }],
+    refs: [{ field: "rows[].contentType", to: "content.types", key: "types[].id" }],
   }),
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
@@ -1239,7 +1238,7 @@ export const RETIRED = [
   // config/ の業務マスタ・台帳と、skill 内の研究カタログ (2026-11-10 に data/ へ。config/ はシステムの設定だけ)
   { from: "config/domains.json", to: "data/business/domains.json", since: "2026-11-10" },
   { from: "config/kdp-listings.json", to: "data/products/kdp/listings.json", since: "2026-11-10" },
-  { from: "config/note-hashtags", to: "data/note/hashtags", since: "2026-11-10" },
+  { from: "config/note-hashtags", to: "data/note/hashtags.json", since: "2026-11-10" },
   { from: "config/ads/placements.json", to: "data/ads/placements.json", since: "2026-11-10" },
   { from: "config/theme-selection-viewpoints.json", to: "data/themes/viewpoints/selection.json", since: "2026-11-10" },
   { from: "research-theme-catalog/reference/public-dashboard-catalog.json", to: "data/themes/research/public-dashboards.json", since: "2026-11-10" },
@@ -1261,6 +1260,8 @@ export const RETIRED = [
   { from: "r2-storage/src/scripts/lib/license-retention-20260905.json", to: "data/geo/ksj/license-retention-20260905.json", since: "2026-11-11" },
   { from: "features/buzz-map/specs/", to: "data/sns/buzz-map/specs/ (見本の sample-*.json だけ Remotion に残す)", since: "2026-11-11" },
   { from: "ges/scripts/data/ports.json", to: "data/areas/master/ports.json (台帳 areas.ports を読む)", since: "2026-11-11" },
+  // 段 13 (2026-11-12): note のハッシュタグ 286 ファイルを、記事の ID をキーにした 1 つの表へ (題・URL・系統の写しは持たない)
+  { from: "data/note/hashtags/", to: "data/note/hashtags.json", since: "2026-11-12" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

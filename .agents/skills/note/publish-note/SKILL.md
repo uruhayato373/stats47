@@ -296,7 +296,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 ### 公開済み記事のハッシュタグ専用更新
 
 本文の差し替えを行わず、公開済み記事のタグを記事に合う 99 個へ置き換えるときは、提案と反映の 2 段で行う。
-タグの正本は `data/note/hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
+タグの正本は台帳 `note.hashtags` (git の `data/note/hashtags.json`。記事の ID ごとに 1 行)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
 
 ```bash
 # 1. タイトルと公開本文から Claude がタグ 99 個を提案し、検査 (lib/note-hashtags.mjs) を通ったものだけ保存する
