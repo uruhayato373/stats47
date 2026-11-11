@@ -192,12 +192,8 @@ export default async function CategoryPage({ params }: PageProps) {
       areaType: 'prefecture',
       // 名前の組み立ては調査ハブと同じ共通関数に寄せる (小見出しを括弧で全部つなぐと長すぎて読めない。2026-11-03)
       title: metricDisplayName(item),
-      subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
-      description: item.description,
-      demographicAttr: item.demographicAttr,
-      normalizationBasis: item.normalizationBasis,
       top1: rankingTop1Label(item),
       // 話題は R2 items.json に焼き込まれた topicKey をそのまま使う (分類の SSOT は packages/data-configs/src/topics/)
       ...(categoryTopics.length > 0

@@ -33,6 +33,9 @@ if [ "$COLLECT_RC" != 0 ]; then
 fi
 
 git add data/authenticated/latest.json data/authenticated/revenue-history.json data/products/sales-ledger.json
+# GSC の送信済みビューの推移は Mac の取り込み (ingest-gsc-export.py) だけが書く。CI は週フォルダしか戻さないので、
+# ここで積まないと次回の reset で消える (2026-11-11。週フォルダの submitted-totals.json は保管庫経由で CI が戻す)。
+if [ -f data/gsc/coverage-submitted-history.csv ]; then git add data/gsc/coverage-submitted-history.csv; fi
 if ! git diff --cached --quiet; then
   # データだけの記録なので pre-commit (型検査など数分) は通さない。CI の record job も同じ扱いだった。
   git -c core.hooksPath=/dev/null commit --quiet -m 'chore(metrics): authenticated measurement status (Mac)'

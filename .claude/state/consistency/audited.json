@@ -1,8 +1,12 @@
 {
-  "hash": "819c2d504ff639778df1d0678435f9a3a5457fec479f885d6d52392353394280",
-  "audited_at": "2026-11-11T00:24:43",
+  "hash": "e66a118b883fcaf32aa69d3d125c68156e7ec21d7c6dbdc458c7d19ecf9fa271",
+  "audited_at": "2026-11-11T02:31:19",
   "files": [
-    ".claude/scripts/note/__tests__/card-image-refresh.test.mjs",
-    ".claude/scripts/note/lib/card-image-refresh.mjs"
+    ".claude/rules/r2-storage-design.md",
+    ".claude/scripts/cloudflare/fetch-usage.mjs",
+    ".claude/scripts/cloudflare/lib/googlebot.mjs",
+    ".claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs",
+    ".claude/scripts/gsc/audit-operations-cycle.mjs",
+    ".claude/scripts/lib/__tests__/cloudflare-googlebot.test.mjs"
   ]
 }

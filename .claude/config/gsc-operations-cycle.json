@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "urlInspectionMaxAgeDays": 3,
+  "submittedViewMaxAgeDays": 8,
   "searchGrowthMaxAgeDays": 8,
   "minimumCandidateDecisionsPerWeek": 1,
   "minimumReviewsInTrailingFourWeeks": 3,

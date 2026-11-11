@@ -17,6 +17,7 @@ import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { GOOGLEBOT_QUERY, GOOGLEBOT_UA_LIKE, aggregateGooglebot, unavailableGooglebot } from "./lib/googlebot.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const SNAPSHOTS_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.snapshots"));
@@ -219,6 +220,34 @@ async function fetchR2Storage(accountTag) {
   return { totalBytes, totalObjects, byBucket };
 }
 
+async function cfRest(path) {
+  const token = process.env.CLOUDFLARE_API_TOKEN;
+  if (!token) throw new Error("CLOUDFLARE_API_TOKEN が未設定");
+  const res = await fetch(`https://api.cloudflare.com/client/v4${path}`, { headers: { Authorization: `Bearer ${token}` } });
+  const json = await res.json();
+  if (!json.success) throw new Error(`REST error: ${JSON.stringify(json.errors).slice(0, 300)}`);
+  return json.result;
+}
+
+/**
+ * Googlebot のリクエスト集計 (zone の httpRequestsAdaptiveGroups)。権限不足・取得失敗で日次全体を落とさず、
+ * 0 で埋めずに status: "unavailable" と理由を記録する。
+ */
+async function fetchGooglebot(since, until) {
+  try {
+    const zones = await cfRest("/zones?name=stats47.jp");
+    const zoneId = zones[0]?.id;
+    if (!zoneId) throw new Error("zone stats47.jp が見つからない");
+    const data = await gql(GOOGLEBOT_QUERY, {
+      z: zoneId,
+      f: { datetime_geq: since, datetime_leq: until, userAgent_like: GOOGLEBOT_UA_LIKE },
+    });
+    return aggregateGooglebot(data.viewer.zones[0]?.httpRequestsAdaptiveGroups || []);
+  } catch (err) {
+    return unavailableGooglebot(err);
+  }
+}
+
 async function main() {
   loadEnv();
   const opts = parseArgs();
@@ -231,12 +260,13 @@ async function main() {
 
   console.log(`Cloudflare usage snapshot: ${date} (UTC) [${since} - ${until}]`);
 
-  const [d1, workers, workersCpu, r2Ops, r2Storage] = await Promise.all([
+  const [d1, workers, workersCpu, r2Ops, r2Storage, googlebot] = await Promise.all([
     fetchD1(accountTag, since, until),
     fetchWorkers(accountTag, since, until),
     fetchWorkersCpuTotal(accountTag, since, until),
     fetchR2Operations(accountTag, since, until),
     fetchR2Storage(accountTag),
+    fetchGooglebot(since, until),
   ]);
 
   const snapshot = {
@@ -247,6 +277,7 @@ async function main() {
     workers: { ...workers, ...workersCpu },
     r2_operations: r2Ops,
     r2_storage: r2Storage,
+    googlebot,
   };
 
   mkdirSync(SNAPSHOTS_DIR, { recursive: true });
@@ -259,6 +290,9 @@ async function main() {
     ? `   Workers CPU total: 取得不能 (${workersCpu.cpuTimeError})`
     : `   Workers CPU total: ${(workersCpu.totalCpuTimeUs / 1000).toFixed(0)} ms`);
   console.log(`   R2 ops: classA=${r2Ops.classA}, classB=${r2Ops.classB}, egress=${(r2Ops.totalEgressBytes/1e6).toFixed(1)}MB`);
+  console.log(googlebot.status === "ok"
+    ? `   Googlebot: ${googlebot.total} reqs (POST path types: ${JSON.stringify(googlebot.postByPathType)})`
+    : `   Googlebot: 取得不能 (${googlebot.reason})`);
   console.log(`   R2 storage: ${(r2Storage.totalBytes/1e9).toFixed(2)}GB / ${r2Storage.totalObjects.toLocaleString()} objects`);
 }
 

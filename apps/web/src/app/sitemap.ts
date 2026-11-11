@@ -21,6 +21,7 @@ import {
   listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
 import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
+import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 import {
   readActiveKeysForSitemapFromR2,
   readSurveysFromR2,
@@ -186,13 +187,29 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
  */
 const SITEMAP_BASELINE = new Date('2026-05-25T00:00:00.000Z');
 
+/** 同じ条件で重複排除した上で、既知キーから作る退避用の一覧 (lastModified は SITEMAP_BASELINE) */
+function rankingPagesFromGit(): MetadataRoute.Sitemap {
+  return [...KNOWN_RANKING_KEYS]
+    .filter((rankingKey) => UrlPolicy.ranking.shouldIncludeInSitemap(rankingKey))
+    .map((rankingKey) => ({
+      url: `${BASE_URL}${hrefFor("ranking", { rankingKey })}`,
+      lastModified: SITEMAP_BASELINE,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    }));
+}
+
 async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
-  const result = await readActiveKeysForSitemapFromR2();
-  if (!isOk(result)) return [];
+  // reader は実行時に all.json が 404 だと ok([])、取得失敗だと err を返す。
+  // revalidate=86400 でその空が 24 時間残るため、空・失敗・reject は git 定数へ退避する (blog と同じ方針)。
+  const result = await readActiveKeysForSitemapFromR2().catch(() => null);
+  if (!result || !isOk(result) || result.data.length === 0) {
+    return rankingPagesFromGit();
+  }
 
   // ranking_items は (ranking_key, area_type) 複合主キーのため重複排除必須
   const seen = new Set<string>();
-  return result.data
+  const live = result.data
     .filter((row) => UrlPolicy.ranking.shouldIncludeInSitemap(row.rankingKey))
     .filter((row) => {
       if (seen.has(row.rankingKey)) return false;
@@ -213,6 +230,7 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       };
     });
+  return live.length > 0 ? live : rankingPagesFromGit();
 }
 
 /**
@@ -475,9 +493,8 @@ export default async function sitemap({
         ];
       case 'tags':
         return tagPagesFromGit();
-      // ranking は reader 側が KNOWN_RANKING_KEYS を返すため、ここに来たら素直に空
       case 'ranking':
-        return [];
+        return rankingPagesFromGit();
       // japan は R2 非依存の git constant のため catch 自体に到達しないが、
       // switch を Segment union に対して網羅させるためのフォールバックとして残す。
       case 'japan':
