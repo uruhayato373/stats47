@@ -1341,6 +1341,29 @@ updated: 2026-11-01
 - **仕組みの到達 (2026-11-11)**: 週次の上限チェック (`audit-note-published.mjs --check`・上限は `.claude/config/note-published-baseline.json`・`npm run weekly:audits` の `note-published`)、次に直す記事の並び (採点結果の `queue`)、手順書 `/remediate-note-published` を足した。週次監査の単体実行は通過。束の実測は、旧文言のカード 105 本・型で作り直せる画像 8 本・固定コピーが無く作り直せない画像 95 本・意味の確認 23 本 (計画時は作り直せる記事を 31 本と見込んだが、`chart-data.json` を持つのは 8 本だけ)。
 - **1 回目の束 (2026-11-11・オーナー許可・閲覧の多い順に 10 本の予定が 4 本目で停止)**: 反映できたのは 3 本 (`b-kakei-gyoza-counting`・`recovered-ncbed56eb7c3d`・`recovered-n581a1409b2c9`) で、旧文言の記事は 105 → 102 本。上限も 102 へ下げた。分かったことは 3 つ。① 道具が `FAIL` と出しても公開版は更新済みのことがある: 後ろの 2 本は公開 PUT のあとのカード画像の検証 (`Invalid URL`・`Verified source image bytes changed`。`lib/card-image-refresh.mjs`) で落ちており、文言は替わっていた (画像・カード・タグの数は反映前と同じ・下書きなし)。`FAIL` の記事は必ず公開 API で実物を確かめる。この検証の失敗の原因は未調査。② 説明文には別の言い回し (「表計算ソフトで開ける形で」) があり、1 回目は見出しだけが替わった。置き換えと採点の両方を直して流し直した。③ `recovered-n144d350fc14e` (沖縄の出生率) は、もともと未公開の下書きがあり目次の設定が公開版と違うので道具が止める。公開版は旧文言のまま。下書きを捨てるか公開するかはオーナーが note の画面で決める。**残り 102 本は未実行**で、①の原因を調べてから続ける。
 - **①の原因 (2026-11-11 確定・公開後の検証を公開 API の実物に対して読み取りだけで再現)**: 2 つあった。(a) `Invalid URL` は、添付ファイルの要素 (`embedded-service="attachment"`) が行き先の URL を持たず、リンクカードとして検証されていたため。対象外にして直した (`lib/card-image-refresh.mjs` の `targetFor`・テストで固定)。(b) `Verified source image bytes changed` は、リンクカードの台帳 (`data/ogp/link-card-rollout.json` と分割台帳・検証は 2026-10-27・版 `20261026-pop`) が古いため。サイトの OGP 画像 3,197 種のうち 1,606 種 (ranking 868・blog 609・themes 56・areas 47・products 25・トップ 1) は、今の配信物の SHA が台帳と違う。配信物の最終更新は 2026-10-30 で、台帳の検証のあとに作り直されている。トップの画像は多くの note 記事のカードが使うので、stats47.jp のカードを持つ記事の更新はほぼ毎回この検証で「失敗」と表示される (公開自体は済む)。**直し方は台帳を今の配信物で検証し直すこと** (OGP 側の手順。`OGP-RANKING-CARD-BLOG-REPAIR-01` の作り直しが進行中なら、それが済んでから)。台帳が新しくなるとカードの URL の版 (`s47_ogp`) も変わり、記事を更新したときに note 側のカード画像も新しい画像へ入れ替わる。なので順番は「台帳の検証し直し → 残り 102 本」。検証を緩めて先へ進めない。
+- **ここまでの全体像 (2026-11-11 の 1 セッションの記録。再開する人はここから読む)**:
+  - 発端は、県民所得の記事 (n80e58a01f660) を見て、内容・画像・導線に問題が複数あったこと。本文画像が共通の型でない・同じ図を 2 か所に貼っている・「元データ」のカードが無関係の記事を指す・記事の年が古い・本文に事実の誤りがある (下の「人が直す」)。
+  - 作ったもの: 採点 `npm run note:published:audit` (`audit-note-published.mjs`・判定 `lib/published-audit.mjs`・結果 `data/note/published-audit-latest.json`)、週次の上限チェック (`--check`・`.claude/config/note-published-baseline.json`・`weekly:audits` の `note-published`・品質ゲート台帳 `note-published-audit`)、次に直す記事の並び (結果の `queue`)、手順書 `/remediate-note-published`。
+  - 直した道具: カードの文言 (`DATASET_CARD_HEADING`・`datasetCardLead`・`rewriteLegacyDatasetCardWording`)、空のカード要素の空白を吸収する本文の比較 (`canonicalizeNoteEditorBody`)、添付の要素を画像の検証から外す (`card-image-refresh.mjs` の `targetFor`)。
+  - commit: `72bb33359` (採点と文言)・`105caf053` (添付の要素)・`56bf179db` と、この記録の commit。**どれも push していない** (オーナーの指示待ち)。
+- **今の数字 (2026-11-11 の最後の実測)**: 公開 439 本・違反なし 222 本・59 点以下 20 本。型でない本文画像 103 本 (無料のランキング記事の全部)・同じ画像の重複 111 本・旧文言のカード 102 本・記事の年が古い 3 本。束は、旧文言 102 本・型で作り直せる画像 8 本・`chart-data.json` が無く作り直せない画像 95 本・意味の確認 23 本。
+- **反映済みの 4 本**: `recovered-n80e58a01f660` (県民所得)・`b-kakei-gyoza-counting`・`recovered-ncbed56eb7c3d` (人口密度)・`recovered-n581a1409b2c9` (大学数)。4 本とも公開版で新しい文言を確かめた。変わったのは文言と、本文のテキストリンクへの UTM 付与 (既存の仕様)。
+- **再開の順番**:
+  1. `OGP-RANKING-CARD-BLOG-REPAIR-01` の②で、リンクカードの台帳を今の配信物へ合わせる (別セッションの台帳の整理が済んでから)。
+  2. `npm run note:published:audit` で測り直し、`/remediate-note-published dataset-card-wording 10` を流す。小さいモデル・低い effort でよい。1 日 10 本まで。
+  3. 道具が `FAIL` と出した記事は、公開 API (`https://note.com/api/v3/notes/<noteId>`) の `body` に新しい文言があるか・`has_draft` が false かを必ず確かめる。`FAIL` でも公開済みのことがあった。
+  4. 文言が済んだら画像へ進む。先に `NOTE-FIGURE-ROLLOUT-01` の試行 1 本 (`a-maximum-temperature`) を行い、スマホ幅の見え方をオーナーが見る。そのあと `ranking-image-type` の 8 本。95 本は、R2 の値 (`app/stats/<key>/values.json`) と記事の年から `chart-data.json` を作る手順を先に足す (契約は `.claude/rules/note-image-assets.md` の契約 3。年を読めない記事と 47 県がそろわない指標は対象外として一覧に残す)。
+  5. 最後に意味の確認 23 本。`note-critic` に該当の段落と 47 県の値だけを渡す。
+- **人が直す・決める (道具では進まない)**:
+  - `recovered-n144d350fc14e` (沖縄の出生率): 以前から未公開の下書きがあり、目次の設定が公開版と違うので道具が止める。下書きを捨てるか公開するかを note の画面で決める。旧文言のカードが 4 枚ある。
+  - 県民所得の記事の本文: 「中部 9 県のうち 7 県が全国平均を上回る」は 6 県が正しい (上回るのは愛知・福井・富山・静岡・山梨・岐阜。長野 2,788・新潟 2,784・石川 2,770 は下回る)。「全国平均 2,833 千円」は 47 都道府県の単純平均。「2023 年の TSMC 進出」は年の根拠を確かめていない。記事は 2020 年度で、サイトは 2021 年度を出している。
+  - 家計・所得のマガジン (`s47-economy`) の「このテーマのデータ」カードが、人口・世帯のパック (P-01) を指している。所得・賃金のパック (P-02) へ替えるかを決める (`data/note/magazines.json` の `paidProductId`)。
+  - タグは全 439 本で中央値 99 個 (上限 100)。意図した運用かを決める。違うなら採点の項目に足す。
+- **道具の癖 (次に同じ所で止まらないために)**:
+  - `update-published-navigation.mjs` は編集画面を開くので、途中で止まると未公開の下書きが残る。次の実行は「下書きが公開版と違う」で止まる。下書きと公開版の差が書式だけなら、本文の比較が吸収して進む。
+  - dry-run の `wouldDedupeFooterHeading` は、本文に何か変更があれば true になる。見出しの重複の有無としては読めない。文言の置き換えは `wouldRewriteDatasetWording` を見る。
+  - 実行のたびに `data/note/navigation/note-navigation-pilot-<日付>.json` を上書きする (dry-run でも書く)。
+  - コミットの pre-commit は作業ツリー全体を見るので、並行セッションの編集中のファイルで落ちることがある。自分の原因でなければ待つ (検査を飛ばさない)。
 - **残り 2 (意味の確認)**: 機械で判定できない記述の誤り (例: 同記事の「中部 9 県のうち 7 県が平均を上回る」は実際は 6 県) を、点数が低く閲覧の多い記事から週に上限を決めて読む。小さいモデル・低 effort で該当箇所だけを読ませ、上位モデルは有料記事に限る。
 - **残り 3 (修正)**: 画像は `NOTE-FIGURE-ROLLOUT-01`、値の誤りは `NOTE-FIGURE-FIX-01` の道具で直す。note への書き込みは 1 日 10 本程度に分け、毎回 dry-run の差分を確かめる。
 - **残り 4 (採点の拡張)**: タグは全 439 本で中央値 99 個 (上限 100) だった。意図した運用かをオーナーに確かめ、違うなら採点項目に足す。有料記事 (98 本) は公開 API に本文の全体が出ないので、型の寸法を測っていない。
@@ -1640,6 +1663,18 @@ updated: 2026-11-01
 - **2026-11-11 実測 (note の記事更新が公開後の検証で落ちる件から発見。`NOTE-PUBLISHED-AUDIT-01`)**: 作り直した画像の公開 SHA がリンクカードの台帳 (`data/ogp/link-card-rollout.json`・分割 `link-card-sites-NNN.json`) に戻っていない。台帳の site-ogp 3,197 種のうち 1,606 種 (ranking 868・blog 609・themes 56・areas 47・products 25・トップ 1) は、今の配信物の SHA が台帳と違う (トップは manifest の `generatedAt` が 2026-10-30T20:58・台帳の記録は 10-26)。公開 SHA を台帳へ記録する入口は `link-card-production.ts record-site --plan --run-url` だが、どの workflow からも呼ばれていないので、週次の自動修復 (`quality-suite-weekly.yml` の OGP image audit) が画像を作り直すたびに台帳が置き去りになる。その job は 10-30 (run 41122877579) と 11-06 (run 42295351706) に「Fail on unresolved image drift」で失敗している (11-06 は Self-heal の step も失敗)。サイトの og:image は固定の版 `?v=20261026-pop` で配られ、画像を作り直しても URL は変わらない。
 - **影響**: note の記事を更新する道具 (`update-published-navigation.mjs` など) は、公開のあとに stats47.jp のカードの画像を台帳の SHA と照合する。台帳が古いので `Verified source image bytes changed` で「失敗」と表示される (公開は済んでいる)。トップのカードは多くの記事にある。note 側のカード画像も古いまま残る (カードの URL の版 `s47_ogp` は台帳の SHA から作るため)。
 - **直し方の案 (未実装・オーナー判断待ち)**: ① 作り直しを最後まで終える (残り件数と Self-heal の失敗の原因を先に確かめる)。② 台帳を今の配信物へ合わせる。`record-site` は CI の公開計画と run の URL が要るので、配信中の manifest を読んで画像の SHA と寸法を確かめて記録する入口を足すか、週次 job が公開計画を `record-site` へ渡すように配線する。どの run が作ったかを確かめられない記録を、run の URL 付きで書かない。③ そのあと note の残り 102 本を流す。
+- **保留 (2026-11-11 オーナー判断)**: 別セッションが台帳の整理をしているので、②の実装はその整理が済んでから始める。コードはまだ 1 行も書いていない。再開のときは、先に `data/ogp/` と `.claude/scripts/ogp/lib/link-card-ledger.mjs` の形が下の前提から変わっていないかを確かめる。
+- **②の設計の案 (未実装。再開のときの出発点)**: `.claude/scripts/ogp/link-card-production.ts` にサブコマンドを 1 つ足す (名前の案 `resync-site [--dry-run] [--limit N]`)。R2 や本番には書かず、git の台帳だけを書く。
+  1. `kind: "site-ogp"` で `pageUrl` と `sitePublication` を持つ entry を順に見る。トップと `/category/*` は同じ画像 (`app/default/stats47/ogp/ogp.png`) を共有するので、取得は `manifestKey` ごとに 1 回にまとめる。
+  2. 配信中の manifest (`${R2_PUBLIC_BASE_URL}/${manifestKey}`) をキャッシュを避けて取る。形は `{ kind: "stats47-image-generation", schemaVersion: 1, generator, entityId, inputHash, rendererHash, fingerprint, generatedAt, assets: [{ key, variant: "ogp", contentType, width, height, sha256 … }] }` (2026-11-11 にトップの manifest で実測)。`kind`・`schemaVersion`・`variant: "ogp"` の asset の `key` が台帳の `imageKey` と同じことを確かめ、違えば止める。
+  3. manifest の SHA と asset の SHA が台帳と同じ entry は触らない (11-11 の実測で 3,197 種のうち 1,591 種)。
+  4. 違う entry だけ、画像を `?v=<asset の sha256>` で取り、バイト列の SHA が manifest の値と同じこと・寸法が 1200×630 であることを確かめてから `sitePublication` の `manifestSha256`・`fingerprint`・`sha256`・`verifiedAt` を書き換える。1 件でも合わなければ、その entry は書かずに一覧へ出して exit 1。
+  5. **出どころの扱いを先に決める。** `sitePublication.runUrl` は「この画像を公開した Actions の run」で、型では必須の文字列になっている。配信物から合わせた記録では run を確かめられないので、古い `runUrl` をそのまま残すと嘘の出どころになる。案は「`runUrl` を任意にして、配信物から合わせた記録には `source: "live-manifest"` と manifest の `generatedAt` を持たせる」。型 (`Entry`)・`link-card-ledger.mjs`・`link-card-ledger.d.mts`・`runUrl` を読む側 (`grep -rn runUrl .claude/scripts apps`) を同じ差分で直す。
+  6. テストは `.claude/scripts/ogp/__tests__/` に足す。固定するのは「同じなら触らない」「SHA が合わない画像は書かない」「寸法が違えば書かない」「共有の画像は 1 回だけ取る」「run を確かめられない記録に run の URL を書かない」。
+  7. 週次の配線: `quality-suite-weekly.yml` の OGP image audit が画像を作り直したあとに同じサブコマンドを流し、台帳の差分を develop へ書き戻す。配線しないと次の作り直しでまたずれる。
+- **②の確かめ方**: `--dry-run` の件数が 11-11 の実測 (違う 1,606 種・同じ 1,591 種) と大きく違わないこと。書いたあとに `node .claude/scripts/note/update-published-navigation.mjs --slug recovered-n581a1409b2c9` (dry-run) を流し、次に反映する記事で公開後の検証が `Verified source image bytes changed` を出さないこと。11-11 に落ちていたカードは、トップ (`https://stats47.jp/`)・`/ranking/final-education-university-graduate-school-ratio`・`/blog/university-advancement-capacity`。
+- **①で先に確かめること**: 週次の OGP image audit は 10-30 (run 41122877579) に「Fail on unresolved image drift」、11-06 (run 42295351706) に「Self-heal changed images」と「Fail on unresolved image drift」で失敗した。失敗の中身 (上限 1,000 で残っただけか・生成そのものが落ちたか) はログを読んでいない。`gh run view 42295351706 --log-failed` の OGP の job から読む。作り直しが続いている間は、合わせた台帳が毎週ずれる。
+- **台帳を合わせたあとに起きること**: カードの URL の版 `s47_ogp` は台帳の `imageUrl` と SHA から作る (`.claude/scripts/note/lib/card-image-refresh.mjs` の `versionUrl`)。台帳の SHA が変わると版も変わり、記事を更新したときに本文のカードの URL が書き換わって note がカード画像を取り直す。つまり note の記事の更新は、文言だけでなくカード画像の入れ替えも同時に行う。差分を見るときはこの URL の変更を想定に入れる。
 - **完了条件**: 週次 OGP 監査で ranking カードの更新必要が 0 件、ブログのサムネイル工程が成功している。
 
 ### [BLOG-AUTOMOTIVE-BIRTHDEATH-FOLLOWUP-01] 自動車産業の記事の題名と中身のずれ、出生と死亡の記事に残る critic の MAJOR 6 件を直す
