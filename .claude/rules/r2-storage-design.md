@@ -107,6 +107,7 @@ paths:
 | `media/note-backgrounds/` | note ランキング記事のカバーに使う生成AI背景 (`<slug>/<sha12>/background.jpg`・1280x670 JPEG)。作り直せない入力なので承認した最終版だけを保持 | GitはSHA・R2 key・モデル・指示文だけ (`render-spec.json`)。候補・元画像はDrive (`note-image-assets.md` 契約7) |
 | `archive/kindle-encrypted/` | KDPへ送信したEPUB・表紙・metadata・reviewの版別AES-256-GCM暗号化bundle | 配信用URLに対応しない別PC復元・rollback用。平文禁止、Git台帳=`data/products/kindle-archives.json` |
 | `estat-catalog/` | e-Stat メタデータ完全カタログ (statsDataId一覧・getMetaInfo要約・分類コード)。テーマ/相関/全国/市区町村展開の共通発見基盤 | 配信 snapshot ではなく再取得可能な API 由来カタログ。writer は `estat-catalog-monthly.yml` のみ (月次 cron + 専用ブランチ push)。詳細 `docs/02_実装計画/48_e-Statカタログ実装仕様.md` |
+| `robots.txt` | `storage.stats47.jp` の robots.txt (ルートに置く唯一の単独ファイル)。JSON・地理データのクロールを止め、画像は止めない | 原本は git の `packages/r2-storage/src/storage-host/robots.txt`。反映は `publish-storage-robots.yml` (手動・既定 dry-run) だけ。手で R2 を書き換えない |
 
 ## 生成画像の差分反映契約
 

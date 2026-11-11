@@ -7,7 +7,6 @@ import { GeoJSON } from 'react-leaflet';
 
 import { LeafletMapFrame } from '@/components/charts/LeafletMapFrame';
 
-import { fetchGeoSnowSourceAction } from '../actions';
 import {
   buildGeoSnowMapModel,
   SNOW_CLASS_LABELS,
@@ -19,6 +18,20 @@ import type {
   GeoAnalysisEvidenceManifest,
 } from '@stats47/gis';
 import type { FeatureCollection, Polygon, MultiPolygon } from 'geojson';
+// Same-origin GET so the browser and the CDN can cache it (a Server Action POST cannot be cached).
+async function fetchSnowSource(
+  pref: string,
+  generatedAt: string,
+  sha256: string
+): Promise<FeatureCollection<Polygon | MultiPolygon> | null> {
+  const query = new URLSearchParams({ v: generatedAt, sha: sha256 });
+  const response = await fetch(
+    `/api/geo/analysis/population-snow-designation/${pref}/snow-source?${query}`
+  );
+  return response.ok
+    ? ((await response.json()) as FeatureCollection<Polygon | MultiPolygon>)
+    : null;
+}
 export function GeoSnowDesignationLeafletMap({
   detail,
   view,
@@ -48,10 +61,11 @@ export function GeoSnowDesignationLeafletMap({
     if (view !== 'overlap' || !showSource) return;
     void (
       artifact
-        ? fetchGeoSnowSourceAction(to2DigitPrefCode(detail.areaCode), {
-            generatedAt: manifest.generatedAt,
-            sha256: artifact.sha256,
-          })
+        ? fetchSnowSource(
+            to2DigitPrefCode(detail.areaCode),
+            manifest.generatedAt,
+            artifact.sha256
+          )
         : Promise.resolve(null)
     )
       .then((value) => {

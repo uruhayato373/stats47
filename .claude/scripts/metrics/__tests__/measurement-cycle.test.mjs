@@ -341,3 +341,64 @@ test('paid purchases are unmeasurable, not zero, while products are live and no 
   assert.match(sold.value, /^1 件・¥1,200$/);
   assert.equal(summarizePaidPurchases({ ledger: null, liveProductCount: 3, ...week }).status, 'missing');
 });
+
+const submitted = (week, date, status, indexed, notIndexed) => ({ week, date, status, indexed, 'not-indexed': notIndexed });
+const coverage = (rows, over = {}) => kpi({
+  nodes: [{ id: 'index-coverage-rate', label: '登録率', tier: 'guardrail' }],
+  week: '2026-W45',
+  asOf: '2026-11-15',
+  submittedHistory: rows,
+  ...over,
+}).nodes[0];
+
+test('index coverage rate is indexed over indexed plus not-indexed from the latest captured row', () => {
+  // 2026-11-06 の画面の値: 登録済み 6,729・未登録 1,977 → 77.3%
+  const node = coverage([submitted('2026-W45', '2026-11-14', 'captured', '6729', '1977')]);
+  assert.equal(node.status, 'ok');
+  assert.equal(node.value, '77.3%');
+  assert.equal(node.previous, null);
+});
+
+test('index coverage rate is unmeasured, never zero, without a record', () => {
+  const absent = coverage(null);
+  assert.equal(absent.status, 'missing');
+  assert.equal(absent.value, null);
+  assert.equal(coverage([]).status, 'missing');
+  // 取得失敗の週 (status=missing・空欄) だけの記録でも値を作らない
+  const onlyMissing = coverage([submitted('2026-W45', '2026-11-14', 'missing', '', '')]);
+  assert.equal(onlyMissing.status, 'missing');
+  assert.equal(onlyMissing.value, null);
+});
+
+test('index coverage rate does not fall back to an older captured week when the latest week is missing', () => {
+  const node = coverage([
+    submitted('2026-W44', '2026-11-07', 'captured', '6729', '1977'),
+    submitted('2026-W45', '2026-11-14', 'missing', '', ''),
+  ]);
+  assert.equal(node.status, 'missing');
+  assert.equal(node.value, null);
+  assert.match(node.note, /2026-W45/);
+});
+
+test('index coverage rate degrades when it falls below the previous captured week, skipping missing weeks', () => {
+  const rows = [
+    submitted('2026-W43', '2026-10-31', 'captured', '7000', '1000'), // 87.5%
+    submitted('2026-W44', '2026-11-07', 'missing', '', ''),
+    submitted('2026-W45', '2026-11-14', 'captured', '6729', '1977'), // 77.3%
+  ];
+  const node = coverage(rows);
+  assert.equal(node.status, 'degraded');
+  assert.equal(node.value, '77.3%');
+  assert.equal(node.previous, '87.5%');
+  assert.match(node.note, /2026-W43/);
+  // 上がった・同じなら悪化ではない
+  const same = coverage([submitted('2026-W44', '2026-11-07', 'captured', '6729', '1977'), submitted('2026-W45', '2026-11-14', 'captured', '6729', '1977')]);
+  assert.equal(same.status, 'ok');
+  const up = coverage([submitted('2026-W44', '2026-11-07', 'captured', '6000', '2000'), submitted('2026-W45', '2026-11-14', 'captured', '6729', '1977')]);
+  assert.equal(up.status, 'ok');
+});
+
+test('index coverage rate treats an old capture as stale, not as current', () => {
+  const node = coverage([submitted('2026-W40', '2026-10-03', 'captured', '6729', '1977')]);
+  assert.equal(node.status, 'stale');
+});

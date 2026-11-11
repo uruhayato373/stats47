@@ -12,12 +12,8 @@ describe("CategoryRankingTable", () => {
             rankingKey: "annual-sunshine-duration",
             areaType: "prefecture",
             title: "年間日照時間",
-            subtitle: null,
             latestYear: "2024",
             unit: "時間",
-            description: null,
-            demographicAttr: null,
-            normalizationBasis: null,
           },
         ]}
       />,
@@ -32,12 +28,8 @@ describe("CategoryRankingTable", () => {
   it("家計調査の一覧は品目名で絞り込める", () => {
     const base = {
       areaType: "prefecture",
-      subtitle: null,
       latestYear: "2025",
       unit: "円",
-      description: null,
-      demographicAttr: null,
-      normalizationBasis: null,
       topicLabel: "食料 — 野菜・海藻",
     };
     render(
@@ -63,12 +55,8 @@ describe("CategoryRankingTable", () => {
       rankingKey: `item-${index}`,
       areaType: "prefecture",
       title: index === 0 ? "納豆消費支出額" : `品目${index}`,
-      subtitle: null,
       latestYear: "2025",
       unit: "円",
-      description: null,
-      demographicAttr: null,
-      normalizationBasis: null,
       topicLabel: "食料 — 野菜・海藻",
     }));
     render(

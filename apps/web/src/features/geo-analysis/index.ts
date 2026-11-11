@@ -50,6 +50,8 @@ export {
   type GeoDecisionRow,
 } from './lib/build-geo-decision-rows';
 export { loadGeoAnalysisSnapshot } from './lib/load-geo-analysis-snapshot';
+export { resolveGeoDetail } from './lib/resolve-geo-detail';
+export { resolveGeoSnowSource } from './lib/resolve-geo-snow-source';
 export {
   geoAnalysisPublicDataUrl,
   loadGeoAnalysisManifest,

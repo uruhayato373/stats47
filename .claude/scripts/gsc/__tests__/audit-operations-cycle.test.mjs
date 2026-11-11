@@ -124,6 +124,11 @@ function fixture({
     'data/gsc/url-inspection/LATEST.md',
     '# GSC URL Inspection — 2026-08-22\n'
   );
+  write(
+    root,
+    'data/gsc/coverage-submitted-history.csv',
+    'week,date,status,indexed,not-indexed\n2026-W34,2026-08-22,captured,6729,1977\n'
+  );
   for (const week of ['2026-W31', '2026-W32', '2026-W33', '2026-W34']) {
     write(
       root,
@@ -462,4 +467,27 @@ test('既定監査は原本を変えず、hash・週・契約・日時が一致�
       assert.equal(selectReassessment(original, '2026-W34', NOW), original);
     }
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+
+test('送信済みビューの記録の鮮度: 無い間は warn、missing/古い は fail、新しい captured は pass', (t) => {
+  const root = fixture();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const policy = { ...POLICY, submittedViewMaxAgeDays: 8 };
+  const level = () =>
+    auditOperationsCycle({ root, now: NOW, stage: 'monitor', policy }).checks.find(
+      (item) => item.code === 'submitted-view-freshness'
+    )?.level;
+  const header = 'week,date,status,indexed,not-indexed\n';
+  fs.rmSync(path.join(root, 'data/gsc/coverage-submitted-history.csv'));
+  assert.equal(level(), 'warn');
+  write(root, 'data/gsc/coverage-submitted-history.csv', `${header}2026-W34,2026-08-22,captured,6729,1977\n`);
+  assert.equal(level(), 'pass');
+  write(root, 'data/gsc/coverage-submitted-history.csv', `${header}2026-W33,2026-08-15,captured,6700,1990\n`);
+  assert.equal(level(), 'fail');
+  write(
+    root,
+    'data/gsc/coverage-submitted-history.csv',
+    `${header}2026-W33,2026-08-22,captured,6729,1977\n2026-W34,2026-08-23,missing,,\n`
+  );
+  assert.equal(level(), 'fail');
 });

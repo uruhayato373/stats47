@@ -53,7 +53,7 @@ export function RailNavRow({
 }: RailNavRowProps) {
   return (
     <Link
-      aria-current={active ? "page" : undefined}
+      {...(active ? { "aria-current": "page" as const } : {})}
       className={railNavRowClassName({ active, className })}
       {...props}
     >

@@ -3,7 +3,7 @@ title: 今月の重点
 type: monthly-plan
 month: 2026-11
 date: 2026-11-01
-updated: 2026-11-09
+updated: 2026-11-11
 status: active
 focus_themes:
   - 家計調査の年次更新を起点にランキング・テーマ・ブログ・調査ハブの内容と回遊を整える
@@ -70,6 +70,8 @@ tags: []
 | search-growth判断 | W43 で新しい判断 0 件 (approved 2・pending 2,563) | 週次最低 1 件を満たしていない | 上位 3 件 (自給率・道の駅・介護サービス) をオーナーが承認か却下 |
 | effect判定 | pending のみ (`insufficient-window`・`insufficient-target`) | target 欠落 1 件が FAIL (`SEO-TITLE-CTR-EFFECT-01`) | `SEO-TITLE-CTR-CLOSE-01` で終了の登録を決める |
 | index coverage | URL Inspection 10-31 / GSC 画面の書き出し 10-31 pass | fresh | 県別ページ 470 URL の登録数を W46 から週次で読む (`MUNI-PREF-RANKING-OBS-01`) |
+| 送信済み登録率 | 6,729 / 8,706 = 77.3% (GSC 画面 11-06。記録 `coverage-submitted-history.csv` は 11-14 の取得から) | 前月の記録なし (未取得) | 11-14 以降、週次レビューで毎週読む。2 か月続けて下がれば重点に上げるかを判断 (`GSC-SOURCE-FRESHNESS-01`) |
+| 検証の状態 | 送信済みビューの 5 理由 (noindex 578・robots 58・404 48・リダイレクトエラー 10・5xx 5) が 11-11 に「開始」 | 月内の結果待ち | 11-25 以降に結果を読む。「失敗」なら重点に上げるかを判断 (`GSC-MESSAGE-TRIAGE-01`・`GSC-SITEMAP-LASTMOD-01`) |
 
 ## 今月の重点テーマ（2 個）
 

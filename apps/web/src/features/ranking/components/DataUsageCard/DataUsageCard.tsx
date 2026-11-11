@@ -98,16 +98,21 @@ export function DataUsageCard({
         {MAP_FORMATS.map((m, i) => (
           <span key={m.format}>
             {i > 0 && " / "}
-            <a
-              href={`/api/ranking/${encodeURIComponent(rankingKey)}/download?format=${m.format}&basis=${mapBasis}`}
+            {/* 検索エンジンに KML・GeoJSON を辿らせないため <a href> ではなくボタンにする (Dataset 構造化データは CSV と JSON だけを指す) */}
+            <Button
+              type="button"
+              variant="link"
+              size="xs"
+              // 押せることが分かるよう、文中のリンクと同じく下線を付ける
+              className="underline"
               onClick={() => {
                 trackCsvDownload({ rankingKey, yearCode: "latest", fileExtension: m.format });
                 if (survey === "hidden") setSurvey("asking");
+                window.location.href = `/api/ranking/${encodeURIComponent(rankingKey)}/download?format=${m.format}&basis=${mapBasis}`;
               }}
-              className="text-primary underline underline-offset-2"
             >
               {m.label}
-            </a>
+            </Button>
           </span>
         ))}
         。Google マイマップ・Google Earth・QGIS で開けます。
