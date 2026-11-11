@@ -1,0 +1,81 @@
+{
+  "documents": [
+    {
+      "id": "project-definition",
+      "title": "プロジェクト定義",
+      "path": "docs/00_プロジェクト管理/01_プロジェクト定義.md",
+      "role": "ビジョン・事業境界・成功条件",
+      "owner": "strategy-advisor"
+    },
+    {
+      "id": "monetization-strategy",
+      "title": "収益化戦略",
+      "path": "docs/00_プロジェクト管理/02_収益化戦略.md",
+      "role": "収益レイヤー・NSM・需要ゲート",
+      "owner": "strategy-advisor"
+    },
+    {
+      "id": "marketing-strategy",
+      "title": "マーケティング戦略",
+      "path": "docs/00_プロジェクト管理/03_マーケティング戦略.md",
+      "role": "チャネル・1分析多用途展開・獲得サイクル",
+      "owner": "strategy-advisor"
+    },
+    {
+      "id": "personas",
+      "title": "ターゲット・ペルソナ",
+      "path": "docs/00_プロジェクト管理/04_ターゲットペルソナ.md",
+      "role": "4顧客層とJobs-to-be-Done",
+      "owner": "strategy-advisor"
+    },
+    {
+      "id": "data-architecture",
+      "title": "データアーキテクチャ",
+      "path": "docs/01_技術設計/02_データアーキテクチャ.md",
+      "role": "git TS / R2 / エフェメラル集計の境界",
+      "owner": "data-ingester"
+    },
+    {
+      "id": "information-architecture",
+      "title": "情報設計",
+      "path": "docs/01_技術設計/03_情報設計.md",
+      "role": "ページ責務・地域分析導線・index条件",
+      "owner": "site-ux-manager"
+    },
+    {
+      "id": "design-system",
+      "title": "デザインシステム",
+      "path": "docs/01_技術設計/04_デザインシステム.md",
+      "role": "公開サイトと管理画面のUI原則",
+      "owner": "site-ux-manager"
+    },
+    {
+      "id": "automation-inventory",
+      "title": "自動化インベントリ",
+      "path": "docs/01_技術設計/06_自動化インベントリ.md",
+      "role": "検証・state生成・CIの実行台帳",
+      "owner": "devops-runner"
+    },
+    {
+      "id": "analytics-events",
+      "title": "分析イベント規約",
+      "path": ".claude/rules/analytics-event-standards.md",
+      "role": "イベント名・GA4登録・計測可否の正典",
+      "owner": "ga4-analyst"
+    },
+    {
+      "id": "gis-data",
+      "title": "GISデータ規約",
+      "path": ".claude/rules/gis-data.md",
+      "role": "データセットの採用・ライセンス・R2パイプライン",
+      "owner": "gis-curator"
+    },
+    {
+      "id": "geo-m1-implementation",
+      "title": "GeoAI事業M1実装仕様",
+      "path": "docs/02_実装計画/47_GeoAI事業M1実装仕様.md",
+      "role": "2026年9月のサイト・X・note・計測・公開ゲート",
+      "owner": "strategy-advisor"
+    }
+  ]
+}

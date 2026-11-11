@@ -54,7 +54,12 @@
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
         "$TURBO_ROOT$/data/surveys/editorial/*.json",
         "$TURBO_ROOT$/data/categories/*.json",
-        "$TURBO_ROOT$/data/categories/topics/*.json"
+        "$TURBO_ROOT$/data/categories/topics/*.json",
+        "$TURBO_ROOT$/data/business-plan/plan/*.json",
+        "$TURBO_ROOT$/data/source-inventory/policies/*.json",
+        "$TURBO_ROOT$/data/source-inventory/japan-zue/*.json",
+        "$TURBO_ROOT$/data/ranking/hooks/*.json",
+        "$TURBO_ROOT$/data/data-quality/allowlists/*.json"
       ]
     },
     "lint": {
@@ -81,7 +86,12 @@
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
         "$TURBO_ROOT$/data/surveys/editorial/*.json",
         "$TURBO_ROOT$/data/categories/*.json",
-        "$TURBO_ROOT$/data/categories/topics/*.json"
+        "$TURBO_ROOT$/data/categories/topics/*.json",
+        "$TURBO_ROOT$/data/business-plan/plan/*.json",
+        "$TURBO_ROOT$/data/source-inventory/policies/*.json",
+        "$TURBO_ROOT$/data/source-inventory/japan-zue/*.json",
+        "$TURBO_ROOT$/data/ranking/hooks/*.json",
+        "$TURBO_ROOT$/data/data-quality/allowlists/*.json"
       ]
     },
     "type-check": {
@@ -108,7 +118,12 @@
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
         "$TURBO_ROOT$/data/surveys/editorial/*.json",
         "$TURBO_ROOT$/data/categories/*.json",
-        "$TURBO_ROOT$/data/categories/topics/*.json"
+        "$TURBO_ROOT$/data/categories/topics/*.json",
+        "$TURBO_ROOT$/data/business-plan/plan/*.json",
+        "$TURBO_ROOT$/data/source-inventory/policies/*.json",
+        "$TURBO_ROOT$/data/source-inventory/japan-zue/*.json",
+        "$TURBO_ROOT$/data/ranking/hooks/*.json",
+        "$TURBO_ROOT$/data/data-quality/allowlists/*.json"
       ]
     },
     "test": {
@@ -138,7 +153,12 @@
         "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
         "$TURBO_ROOT$/data/surveys/editorial/*.json",
         "$TURBO_ROOT$/data/categories/*.json",
-        "$TURBO_ROOT$/data/categories/topics/*.json"
+        "$TURBO_ROOT$/data/categories/topics/*.json",
+        "$TURBO_ROOT$/data/business-plan/plan/*.json",
+        "$TURBO_ROOT$/data/source-inventory/policies/*.json",
+        "$TURBO_ROOT$/data/source-inventory/japan-zue/*.json",
+        "$TURBO_ROOT$/data/ranking/hooks/*.json",
+        "$TURBO_ROOT$/data/data-quality/allowlists/*.json"
       ]
     },
     "dev": {

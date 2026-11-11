@@ -431,6 +431,9 @@ test("台帳参照が宣言されている (投稿→指標・販売→出品・
   assert.ok(refsOf("sales.ledger").every((r) => !r.severity));
   assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "products.packs" && !r.severity));
   assert.ok(refsOf("affiliate.ads").some((r) => r.field === "ads[].experimentId" && r.to === "affiliate.experiments" && !r.severity));
+  // Geo のコンテンツは事業計画のコンテンツの機会を ID で指す (位置から作っていた ID を 2026-11-11 に台帳へ固定した)
+  assert.ok(refsOf("geo.content-lifecycle").some((r) => r.field === "contents.$keys" && r.to === "business-plan.content-opportunities" && !r.severity));
+  assert.ok(refsOf("geo.analyses").some((r) => r.field === "analyses.*.contentId" && r.to === "business-plan.content-opportunities"));
 });
 
 test("[mutation] 厳格化した schema は知らない項目と語彙外の値を落とす", () => {

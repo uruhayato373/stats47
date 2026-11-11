@@ -152,14 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/business-plan/catalog.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/business-plan/content-opportunities.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/business-plan/m1.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/evidence-inventory/reference-sources.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/evidence-inventory/japan-zue/pilot.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/evidence-inventory/japan-zue/policy.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/prominence/ranking-hook-overrides.ts", why: "pending", phase: 11 },
-  { path: "packages/data-configs/src/expected-empty.ts", why: "pending", phase: 11 },
   // 段 12 で 1 件ずつ判定する (移す・生成物として残す・アプリの設定として残す)
   { path: "packages/gis/src/infra-history/networks.ts", why: "pending", phase: 12 },
   { path: "packages/gis/src/mlit-ksj/classifications.ts", why: "pending", phase: 12 },
@@ -661,6 +653,43 @@ export const DATASETS = [
   d("page-quality.backlog-batches", "data/page-quality/backlog-batches/{**}", "state", "site", "data", "UI 指摘を backlog カードへ束ねた記録"),
   d("business-plan.state", "data/business-plan/{name}.json", "state", "strategy", "data", "事業計画 SSOT から派生した最新状態と KPI ツリー"),
   d("business-plan.history", "data/business-plan/history/{date}.json", "series", "strategy", "data", "事業計画の派生状態の履歴", { retain: "business-plan" }),
+  d("business-plan.documents", "data/business-plan/plan/documents.json", "master", "strategy", "data", "事業計画が拠り所にする正典文書の一覧。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DOCUMENTS)", { schema: "config/schema/business-plan.documents.schema.json" }),
+  d("business-plan.decisions", "data/business-plan/plan/decisions.json", "ledger", "strategy", "data", "外部の事業計画書 25 章の章ごとの採否 (採用・適合変更・保留・不採用と理由・正典・担当)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DECISIONS)", {
+    schema: "config/schema/business-plan.decisions.schema.json",
+    refs: [{ field: "decisions[].metricIds[]", to: "business-plan.metrics", key: "metrics[].id" }],
+  }),
+  d("business-plan.metrics", "data/business-plan/plan/metrics.json", "master", "strategy", "data", "事業計画の指標と KPI ツリーの階層 (kpiTier を持つものが data/business-plan/kpi-tree.json に載り、施策とレーンが [kpi: id] で指せる)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_METRICS・buildKpiTree)", { schema: "config/schema/business-plan.metrics.schema.json" }),
+  d("business-plan.events", "data/business-plan/plan/events.json", "master", "strategy", "data", "事業計画が測る行動イベントと計測状況。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_EVENTS)", { schema: "config/schema/business-plan.events.schema.json" }),
+  d("business-plan.initiatives", "data/business-plan/plan/initiatives.json", "master", "strategy", "data", "事業計画の施策 (段階・着手の条件・測る指標)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_INITIATIVES)", {
+    schema: "config/schema/business-plan.initiatives.schema.json",
+    refs: [{ field: "initiatives[].metricIds[]", to: "business-plan.metrics", key: "metrics[].id" }],
+  }),
+  d("business-plan.pilot-specs", "data/business-plan/plan/pilot-specs.json", "ledger", "strategy", "data", "最初に実行するコンテンツの機会ごとの問い・使うデータ・方法・出し先・品質ゲート。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_PILOT_SPECS)", {
+    schema: "config/schema/business-plan.pilot-specs.schema.json",
+    refs: [
+      { field: "pilotSpecs[].contentId", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },
+      { field: "pilotSpecs[].dataRefs[].id", where: { kind: "metric" }, to: "registry:metrics" },
+      { field: "pilotSpecs[].dataRefs[].id", where: { kind: "gis" }, to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "pilotSpecs[].dataRefs[].id", where: { kind: "open-data" }, to: "open-data.datasets", key: "datasets[].id" },
+    ],
+  }),
+  d("business-plan.content-opportunities", "data/business-plan/plan/content-opportunities.json", "ledger", "strategy", "data", "事業計画書のコンテンツの機会 (geo-NNN)・X の投稿の案・note の商品の案。ID は明示して固定する (2026-11-11 まで配列の位置から作っていた)。読み込みは packages/data-configs/src/business-plan/content-opportunities.ts", { schema: "config/schema/business-plan.content-opportunities.schema.json" }),
+  d("business-plan.m1", "data/business-plan/plan/m1.json", "ledger", "strategy", "data", "M1 (2026 年 9 月) の実行計画 (基準分析・Geo 分析の並び・X の初期投稿・note の商品・経路と作業と公開ゲート)。Geo 分析と商品の題・価格は読み込み口が結ぶ。読み込みは packages/data-configs/src/business-plan/m1.ts (BUSINESS_PLAN_M1)", {
+    schema: "config/schema/business-plan.m1.schema.json",
+    refs: [
+      { field: "baselineAnalysis.contentId", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },
+      { field: "baselineAnalysis.rankingKey", to: "registry:metrics" },
+      { field: "baselineAnalysis.metricKeys[]", to: "registry:metrics" },
+      { field: "geoAnalysisSlugs[]", to: "geo.analyses", key: "analyses.$keys" },
+      { field: "xPosts[].campaign", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },
+      { field: "xPosts[].claimMetricKey", to: "registry:geo-post-metric-keys" },
+      { field: "xPosts[].metricKeys[]", to: "registry:geo-post-metric-keys" },
+      { field: "noteProducts[].id", to: "business-plan.content-opportunities", key: "noteProducts[].id" },
+      { field: "noteProducts[].sourceContentIds[]", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },
+      { field: "noteProducts[].articleKey", to: "note.articles", key: "articles[].key" },
+      { field: "plan.eventIds[]", to: "business-plan.events", key: "events[].id" },
+    ],
+  }),
   d("business.experiments", "data/business/experiments.json", "ledger", "strategy", "data", "実験の台帳 (PDCA)", { schema: "config/schema/business.experiments.schema.json" }),
   d("business.pilot-board", "data/business/pilot-board.json", "ledger", "strategy", "data", "収益化 pilot の判定ボードの入力 (開始日・窓・判定に使う指標)", { schema: "config/schema/business.pilot-board.schema.json" }),
   d("business.issue-map", "data/business/issue-map.json", "ledger", "strategy", "data", "事業イシューマップの入力 (主イシュー・仮説・前提・4 型 × 3 収益源の 12 マス・ストーリーライン・注記)。判定日と進み具合は写さず ID で台帳を指す", {
@@ -692,6 +721,10 @@ export const DATASETS = [
   d("content.note-blockers", "data/content-operations/note-generation-blockers.json", "state", "product", "data", "note 記事生成の止まっている理由"),
   d("data-quality.state", "data/data-quality/{name}", "state", "data", "data", "データ品質の要約・再取り込みキュー・ページ横断の事前検査・SEO メタの基準"),
   d("data-quality.checks", "data/data-quality/checks/{name}", "state", "data", "data", "データ品質の検査キュー"),
+  d("data-quality.expected-empty", "data/data-quality/allowlists/expected-empty.json", "ledger", "data", "data", "観測値が 0 件でよいと明示的に認めた指標 (理由・追跡先・失効日つき。取り込み・snapshot の生成・週次の live 監査が同じ定義を読む)。読み込みと判定の関数は packages/data-configs/src/expected-empty.ts", {
+    schema: "config/schema/data-quality.expected-empty.schema.json",
+    refs: [{ field: "entries[].key", to: "registry:metrics" }],
+  }),
   d("estat.candidates", "data/estat/{name}", "state", "data", "data", "e-Stat の拡充キュー・候補の要約・テーマ拡充の検証"),
   d("estat.meta", "data/estat/meta/{**}", "evidence", "data", "data", "e-Stat 統計表のメタ情報の控え"),
   d("estat.kakei-classification", "data/estat/kakei-classification/{**}", "evidence", "data", "data", "総務省 家計調査の収支項目分類と内容例示 (品目に何が含まれ何が含まれないか) の控え"),
@@ -740,6 +773,10 @@ export const DATASETS = [
     schema: "config/schema/geo.analyses.schema.json",
     refs: [
       { field: "analyses.*.relatedRankingKey", to: "registry:metrics" },
+      {
+        field: "analyses.*.contentId", to: "business-plan.content-opportunities", key: "contentOpportunities[].id", severity: "warn",
+        why: "土砂・低標高・公共施設の 3 分析の contentId (geo-107・geo-128・geo-129) が事業計画のコンテンツの機会 (geo-001〜geo-100) に無い (2026-11-11 の段 11 で宣言して判明)。機会を足すか contentId を直すかは事業計画の担当が決める",
+      },
       { field: "notes.$keys", to: "geo.analyses", key: "analyses.$keys" },
     ],
   }),
@@ -754,6 +791,7 @@ export const DATASETS = [
   d("geo.content-lifecycle", "data/geo/analyses/content-lifecycle.json", "ledger", "data", "data", "Geo コンテンツの公開ライフサイクルの手書き部分 (contentId ごとのテーマ・記事の slug と題案・公開計画。無料面・SNS・有料面の結合は読み込み口)。読み込みは packages/data-configs/src/business-plan/geo-content-lifecycle.ts", {
     schema: "config/schema/geo.content-lifecycle.schema.json",
     refs: [
+      { field: "contents.$keys", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },
       { field: "contents.*.themeKeys[]", to: "themes.catalogs", key: "key" },
       { field: "contents.*.blogSlug", to: "blog.articles", key: "articles[].slug" },
     ],
@@ -869,6 +907,14 @@ export const DATASETS = [
     refs: [{ field: "policies[].metricKey", to: "registry:metrics" }],
   }),
   d("ranking.color-policies-schema", "data/ranking/color-policies/policies.schema.json", "schema", "data", "data", "上の台帳の JSON Schema"),
+  d("ranking.hook-overrides", "data/ranking/hooks/overrides.json", "ledger", "data", "data", "ランキングの問いかけコピー (hook) と表示名の手動上書き (導出規則では意味が変わる・長すぎる例外だけ。notes は上書きごとの判断)。読み込みは packages/data-configs/src/prominence/ranking-hook-overrides.ts", {
+    schema: "config/schema/ranking.hook-overrides.schema.json",
+    refs: [
+      { field: "hooks.$keys", to: "registry:metrics" },
+      { field: "readerLabels.$keys", to: "registry:metrics" },
+      { field: "notes.$keys", to: "ranking.hook-overrides", key: "hooks.$keys" },
+    ],
+  }),
   d("ranking.audits", "data/ranking/{name}", "state", "data", "data", "ランキングの整合性監査・拡充 wave の索引"),
   d("ranking.wave-drafts", "data/ranking/wave-r1-drafts/{**}", "evidence", "data", "data", "ランキング拡充 wave の下書き"),
   d("site.link-audit", "data/site/{name}", "state", "site", "data", "サイト内リンクの監査"),
@@ -919,6 +965,22 @@ export const DATASETS = [
   d("source-inventory.expansion-schema", "data/source-inventory/expansion.schema.json", "schema", "data", "data", "上の展開記録の JSON Schema"),
   d("source-inventory.placement-decisions", "data/source-inventory/placement-decisions.json", "ledger", "data", "data", "参考文献由来の指標の展開判断 (展開先ごとの planned / rejected / blocked と理由)", { schema: "data/source-inventory/placement-decisions.schema.json" }),
   d("source-inventory.placement-decisions-schema", "data/source-inventory/placement-decisions.schema.json", "schema", "data", "data", "上の展開判断の JSON Schema"),
+  d("source-inventory.reference-source-policies", "data/source-inventory/policies/reference-sources.json", "ledger", "data", "data", "参考文献 (資料と版) ごとの解決方針 (解決台帳の場所・入力単位・既定の解決と理由) と、Claude の skill の手引きから採択した内部運用原則。読み込みは packages/data-configs/src/evidence-inventory/reference-sources.ts", { schema: "config/schema/source-inventory.reference-source-policies.schema.json" }),
+  d("source-inventory.japan-zue-pilot", "data/source-inventory/japan-zue/pilot.json", "ledger", "data", "data", "日本国勢図会の試行 (人が確かめた最初の 10 件と、最初に作るコンテンツの企画)。読み込みは packages/data-configs/src/evidence-inventory/japan-zue/pilot.ts", {
+    schema: "config/schema/source-inventory.japan-zue-pilot.schema.json",
+    refs: [
+      { field: "items[].metricKeys[]", to: "registry:metrics" },
+      { field: "items[].surveyIds[]", to: "surveys.master", key: "[].id" },
+      { field: "masterContent.metricKeys[]", to: "registry:metrics" },
+      { field: "masterContent.surveyIds[]", to: "surveys.master", key: "[].id" },
+      { field: "masterContent.article.sections[].metricKeys[]", to: "registry:metrics" },
+      { field: "masterContent.youtube.experimentId", to: "business.experiments", key: "experiments[].id" },
+    ],
+  }),
+  d("source-inventory.japan-zue-policy", "data/source-inventory/japan-zue/policy.json", "ledger", "data", "data", "日本国勢図会の解決方針 (版・確認日・規約の URL・所管機関の方針・人が決めた解決)。所管機関の名前に当てる正規表現と解決の関数は読み込み口 packages/data-configs/src/evidence-inventory/japan-zue/policy.ts にあり、organization で結ぶ", {
+    schema: "config/schema/source-inventory.japan-zue-policy.schema.json",
+    refs: [{ field: "manualOverrides.*.metricKeys[]", to: "registry:metrics" }],
+  }),
   d("surveys.portfolio", "data/surveys/portfolio.json", "ledger", "data", "data", "調査ポートフォリオ (調査ごとの紐付け・在庫・編集状態・GSC/GA4 の計測と、編集ハブ化の判断)。機械項目は build-survey-portfolio.ts が再導出し、意味項目は同スクリプトの --set で変える。手で編集しない", {
     schema: "config/schema/surveys.portfolio.schema.json",
     refs: [{ field: "surveys[].surveyId", to: "surveys.master", key: "[].id" }],

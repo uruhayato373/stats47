@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Geo コンテンツの公開ライフサイクルの手書き部分",
-  "description": "data/geo/analyses/content-lifecycle.json の形状契約。contents のキーが contentId (business-plan/content-opportunities の geo-NNN。参照は段 11)。ここは手で決める部分 (テーマ・記事の slug と題案・公開計画) だけで、無料面・SNS・有料面の経路や公開ゲートは読み込み口 packages/data-configs/src/business-plan/geo-content-lifecycle.ts が分析 (geo.analyses) と商品から結合して作る。数値の正典は canonical の Geo 分析と R2 の artifact。",
+  "description": "data/geo/analyses/content-lifecycle.json の形状契約。contents のキーが contentId (business-plan.content-opportunities の geo-NNN)。ここは手で決める部分 (テーマ・記事の slug と題案・公開計画) だけで、無料面・SNS・有料面の経路や公開ゲートは読み込み口 packages/data-configs/src/business-plan/geo-content-lifecycle.ts が分析 (geo.analyses) と商品から結合して作る。数値の正典は canonical の Geo 分析と R2 の artifact。",
   "type": "object",
   "required": ["contents"],
   "additionalProperties": false,

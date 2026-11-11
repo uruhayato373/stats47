@@ -19,6 +19,7 @@
  * (area コード形式・年範囲・limit 打ち切り)。**経路ごとに塞ぐのではなく「0 件を成功にしない」**
  * を不変条件にする。
  */
+import expectedEmptyData from "../../../data/data-quality/allowlists/expected-empty.json";
 
 /** 0 件が正当だと**明示的に**認めたエントリ */
 export interface ExpectedEmptyEntry {
@@ -40,25 +41,14 @@ export interface ExpectedEmptyEntry {
 }
 
 /**
- * 現在 0 件が許容されている metric。
+ * 現在 0 件が許容されている metric。記録の正本は台帳 `data-quality.expected-empty`
+ * (data/data-quality/allowlists/expected-empty.json + Schema)。ここは型を付けて読むだけ。
  *
  * ★エントリを足すときは「なぜ 0 件で正しいのか」を実測で確かめてから書くこと。
  * 「まだ調べていない」を許可に使わない (それは調査中の未解決課題であって正当な 0 件ではない)。
+ * 消してよいのは R2 の再生成後 (再生成すれば classifyEmptyOutcome が stale-allowlist で削除を促す)。
  */
-export const EXPECTED_EMPTY: readonly ExpectedEmptyEntry[] = [
-  // 2026-07-30: 6 件とも **config は是正済み**。残るのは R2 の再生成だけ。
-  //
-  // 真因は当初の診断「cdCat01 の誤座標」ではなく **表の形**だった:
-  //   - 患者調査 5 件: 都道府県が area 軸ではなく cat 軸 (連番 1=全国 2=北海道…) に入る表。
-  //     `@area` を読む通常経路では構造的に 0 行。→ source.areaAxis を新設
-  //   - 救急告示病院数: 3 年ごとの調査で 2021 年のデータが無いのに years を 2021 単年に固定。
-  //     取得 1008 行が全てフィルタ落ち。→ years:"all"
-  //
-  // ★このエントリを消してよいのは **R2 再生成後**。消すと監査 (i) が赤くなる。
-  //   再生成すれば rowCount>0 になり classifyEmptyOutcome が stale-allowlist で
-  //   「削除してください」と教えてくれる。
-
-];
+export const EXPECTED_EMPTY = expectedEmptyData.entries as readonly ExpectedEmptyEntry[];
 
 /** key (+entity) に対して**有効な** allowlist エントリを返す。期限切れは null */
 export function findExpectedEmpty(

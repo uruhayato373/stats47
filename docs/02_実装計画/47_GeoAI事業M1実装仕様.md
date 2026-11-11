@@ -13,7 +13,7 @@ tags: [geo, gis, population, x, note, analytics, admin]
 ## 0. 位置づけ
 
 本書は、2026年9月（M1）に実際に動かす範囲を固定する実装契約である。戦略を増やす文書ではない。
-型付きの実行正典は `packages/data-configs/src/business-plan/m1.ts`、運用確認はローカル管理画面
+実行正典は台帳 `business-plan.m1`、運用確認はローカル管理画面
 `/strategy`、公開サイトの実装は `apps/web/src/app/geo/` とする。
 
 本書の自動承認範囲はローカル実装・テスト・投稿draft登録までである。初回3空間分析のR2 writeは

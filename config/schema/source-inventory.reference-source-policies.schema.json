@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "参考文献の解決方針",
+  "description": "data/source-inventory/policies/reference-sources.json の形状契約。policies は参考文献 (資料と版) ごとに、解決台帳 (statePath。source-inventory build が生成する) の入力単位と、分析企画で解決しなかった項目・ページに当てる既定の解決と理由。原本・OCR 本文・数値は持たず、原本の公開での再利用は常に禁止。page 単位の Kindle 画面スキャンの資料は、各 analyses.json が全ページをページ範囲で解決し、範囲外のページがあると build が止まる (既定の解決へ落とさない)。claudeSkillsGuideAdoptions は Claude の skill の手引きから採択した内部運用原則と、それを反映したファイル (公開統計の根拠には使わない)。読み込み口は packages/data-configs/src/evidence-inventory/reference-sources.ts。",
+  "type": "object",
+  "required": ["policies", "claudeSkillsGuideAdoptions"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "policies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sourceKey", "edition", "statePath", "inputUnit", "fallbackResolution", "fallbackReason", "publicOriginalReuse"],
+        "additionalProperties": false,
+        "properties": {
+          "sourceKey": { "enum": ["japan-zue", "prefecture-databook", "prefecture-deviation", "claude-skills-guide", "kakei-marketing", "amusement-shop-density", "average-income-ranking", "capital-city-guide", "gis-business-guide", "money-health-ranking", "prefecture-ranking-consumption", "yabai-kenmin-ranking"] },
+          "edition": { "type": "string", "pattern": "^(?:\\d{4}(?:-\\d{2})?|unknown)$" },
+          "statePath": { "description": "解決台帳 (source-inventory.inventory) のパス。<資料>/<版>/inventory.json", "type": "string", "pattern": "^data/source-inventory/[a-z0-9-]+/[a-z0-9-]+/inventory\\.json$" },
+          "inputUnit": { "enum": ["quantitative-item", "page"] },
+          "fallbackResolution": { "enum": ["unreviewed", "reuse-existing-metric", "new-metric", "combined-analysis", "context-only", "primary-source-unavailable", "rights-hold", "not-quantitative", "not-applicable"] },
+          "fallbackReason": { "type": "string", "minLength": 1 },
+          "publicOriginalReuse": { "const": "forbidden" }
+        }
+      }
+    },
+    "claudeSkillsGuideAdoptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "sourceKey", "edition", "pages", "concept", "verifiedAgainst", "mappedFiles"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "sourceKey": { "const": "claude-skills-guide" },
+          "edition": { "const": "2026" },
+          "pages": { "type": "array", "minItems": 1, "items": { "type": "integer", "minimum": 1 } },
+          "concept": { "type": "string", "minLength": 1 },
+          "verifiedAgainst": { "description": "照合した公式の文書の URL", "type": "string", "pattern": "^https://" },
+          "mappedFiles": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    }
+  }
+}

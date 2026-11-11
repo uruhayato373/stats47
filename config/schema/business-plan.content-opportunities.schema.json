@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "事業計画のコンテンツの機会・X の案・note の商品",
+  "description": "data/business-plan/plan/content-opportunities.json の形状契約。事業計画書のコンテンツの機会 (geo-NNN)・X の投稿の案 (x-NN)・note の商品の案 (note-product-NN)。ID は明示して書き、配列の位置から作らない (2026-11-11 に位置から作っていた値をそのまま固定した)。ID の重複は Schema で縛れないので packages/data-configs/src/business-plan/__tests__/catalog.test.ts が止める。コンテンツの機会は Geo 分析 (geo.analyses の contentId)・公開ライフサイクル (geo.content-lifecycle)・パイロット (business-plan.pilot-specs)・M1 (business-plan.m1) から指される。pilotOrder はパイロットの順 (持つものだけが ready)。読み込み口は packages/data-configs/src/business-plan/content-opportunities.ts。",
+  "type": "object",
+  "required": ["contentOpportunities", "xIdeas", "noteProducts"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "contentOpportunities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "title", "geography", "primaryRevenue", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^geo-\\d{3}$" },
+          "category": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "geography": { "type": "string", "minLength": 1 },
+          "primaryRevenue": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["ready", "in-progress", "blocked", "gated", "candidate"] },
+          "pilotOrder": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "xIdeas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "format", "linkPolicy", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^x-\\d{2}$" },
+          "title": { "type": "string", "minLength": 1 },
+          "format": { "type": "string", "minLength": 1 },
+          "linkPolicy": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["ready", "in-progress", "blocked", "gated", "candidate"] }
+        }
+      }
+    },
+    "noteProducts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "month", "title", "priceYen", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^note-product-\\d{2}$" },
+          "month": { "description": "事業計画の何か月目に出すか", "type": "integer", "minimum": 1, "maximum": 12 },
+          "title": { "type": "string", "minLength": 1 },
+          "priceYen": { "type": "integer", "minimum": 0 },
+          "status": { "enum": ["ready", "in-progress", "blocked", "gated", "candidate"] }
+        }
+      }
+    }
+  }
+}

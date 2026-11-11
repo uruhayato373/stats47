@@ -413,7 +413,7 @@ async function main(): Promise<void> {
   if (unexpectedSkips.length > 0) {
     console.error(
       `[normalized] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.map((o) => o.key).join(", ")}\n` +
-        `        意図した 0 件なら packages/data-configs/src/expected-empty.ts に登録します`,
+        `        意図した 0 件なら台帳 data-quality.expected-empty に登録します`,
     );
     process.exitCode = 1;
   }

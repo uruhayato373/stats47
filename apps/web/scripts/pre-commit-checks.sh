@@ -121,7 +121,7 @@ if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(contents/blog/|data/note/art
 fi
 
 # Canonical metric and content contracts: reject schema, ID and generated-index drift.
-if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|data/business-plan/plan/|data/source-inventory/(policies/|japan-zue/[^/]+\.json$)|data/ranking/hooks/|data/data-quality/allowlists/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
   if ! (cd "$GUARD_ROOT" && npm run build:category-keys --workspace=@stats47/data-configs -- --check && npm run metrics:check && npm run content:check); then
     echo "Metric/content identity contract failed"
     ERROR_COUNT=$((ERROR_COUNT + 1))

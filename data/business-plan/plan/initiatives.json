@@ -1,0 +1,207 @@
+{
+  "initiatives": [
+    {
+      "id": "bp-foundation",
+      "title": "方針・企画・KPIの統合SSOT",
+      "wave": "foundation",
+      "status": "in-progress",
+      "owner": "strategy-advisor",
+      "skills": [
+        "business-plan-operate"
+      ],
+      "deliverables": [
+        "型付き事業計画カタログ",
+        "管理画面の実行ビュー",
+        "CI検証と週次state"
+      ],
+      "readinessGate": "25章・100企画・30 X案・15商品が参照整合を通る",
+      "metricIds": [
+        "data-quality-pass-rate"
+      ]
+    },
+    {
+      "id": "geo-pilot-1",
+      "title": "人口×将来人口シリーズ",
+      "wave": "pilot",
+      "status": "ready",
+      "owner": "article-writer",
+      "skills": [
+        "write-prepared-article",
+        "fetch-estat-data"
+      ],
+      "deliverables": [
+        "一次資料データの確定",
+        "問いベース分析1本",
+        "X/note派生案"
+      ],
+      "readinessGate": "地域コード・年度・単位・provenanceゲートPASS",
+      "metricIds": [
+        "regional-decision-sessions",
+        "x-qualified-posts"
+      ]
+    },
+    {
+      "id": "geo-pilot-2",
+      "title": "人口×地価シリーズ",
+      "wave": "pilot",
+      "status": "gated",
+      "owner": "open-data-curator",
+      "skills": [
+        "business-plan-operate",
+        "fetch-mlit-ksj"
+      ],
+      "deliverables": [
+        "地価データ選定",
+        "商用意図分析",
+        "Affiliate候補接続"
+      ],
+      "readinessGate": "pilot-1品質PASSかつ地価データの利用条件・年度確定",
+      "metricIds": [
+        "regional-decision-sessions",
+        "weekly-revenue"
+      ]
+    },
+    {
+      "id": "geo-pilot-3",
+      "title": "人口×洪水シリーズ",
+      "wave": "pilot",
+      "status": "gated",
+      "owner": "gis-curator",
+      "skills": [
+        "fetch-mlit-ksj",
+        "audit-provenance"
+      ],
+      "deliverables": [
+        "ハザードレイヤー",
+        "人口空間結合",
+        "公式情報・免責導線"
+      ],
+      "readinessGate": "公式データ・空間単位・免責・表示性能PASS",
+      "metricIds": [
+        "map-interaction-rate",
+        "business-inquiries"
+      ]
+    },
+    {
+      "id": "geo-pilot-4",
+      "title": "人口×駅シリーズ",
+      "wave": "pilot",
+      "status": "gated",
+      "owner": "gis-curator",
+      "skills": [
+        "fetch-mlit-ksj",
+        "audit-provenance"
+      ],
+      "deliverables": [
+        "駅アクセス定義",
+        "将来人口結合",
+        "移住/住宅導線"
+      ],
+      "readinessGate": "駅距離の定義・年度差・欠損処理を公開可能",
+      "metricIds": [
+        "regional-decision-sessions",
+        "weekly-revenue"
+      ]
+    },
+    {
+      "id": "geo-route",
+      "title": "地域分析ハブと固定テンプレート",
+      "wave": "scale",
+      "status": "gated",
+      "owner": "site-ux-manager",
+      "skills": [
+        "business-plan-operate",
+        "design-review"
+      ],
+      "deliverables": [
+        "/geoハブ",
+        "問いベース分析テンプレート",
+        "ランキング/テーマ/地域からの導線"
+      ],
+      "readinessGate": "実分析3本以上・計測登録・no thin content監査PASS",
+      "metricIds": [
+        "regional-decision-sessions",
+        "map-interaction-rate"
+      ]
+    },
+    {
+      "id": "owned-lead",
+      "title": "自社リード獲得",
+      "wave": "scale",
+      "status": "gated",
+      "owner": "strategy-advisor",
+      "skills": [
+        "business-plan-operate"
+      ],
+      "deliverables": [
+        "同意設計",
+        "無料DL価値",
+        "配信停止運用"
+      ],
+      "readinessGate": "継続配信価値・プライバシー運用・責任者が確定",
+      "metricIds": [
+        "owned-leads"
+      ]
+    },
+    {
+      "id": "data-products",
+      "title": "再現可能なデータ商品",
+      "wave": "scale",
+      "status": "gated",
+      "owner": "data-pack-manager",
+      "skills": [
+        "build-data-pack"
+      ],
+      "deliverables": [
+        "加工済みデータ",
+        "方法・更新条件",
+        "商品READINESS"
+      ],
+      "readinessGate": "無料分析の需要と購入意図を実測しライセンス確認済み",
+      "metricIds": [
+        "paid-purchases",
+        "weekly-revenue"
+      ]
+    },
+    {
+      "id": "b2b-case",
+      "title": "法人ケースと定型診断",
+      "wave": "demand-gated",
+      "status": "gated",
+      "owner": "strategy-advisor",
+      "skills": [
+        "monetization-strategy"
+      ],
+      "deliverables": [
+        "公開ケース",
+        "診断範囲・価格",
+        "問い合わせ導線"
+      ],
+      "readinessGate": "公開分析から具体相談が発生し提供範囲を固定できる",
+      "metricIds": [
+        "business-inquiries",
+        "weekly-revenue"
+      ]
+    },
+    {
+      "id": "pro-ai",
+      "title": "Pro・AI地域検索",
+      "wave": "demand-gated",
+      "status": "gated",
+      "owner": "strategy-advisor",
+      "skills": [
+        "business-plan-operate"
+      ],
+      "deliverables": [
+        "保存/反復ユースケース",
+        "決定論的検索契約",
+        "課金仮説"
+      ],
+      "readinessGate": "同種依頼の反復・支払意思・運用コストを実測",
+      "metricIds": [
+        "ai-queries",
+        "paid-purchases"
+      ]
+    }
+  ]
+}

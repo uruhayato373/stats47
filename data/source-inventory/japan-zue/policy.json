@@ -1,0 +1,399 @@
+{
+  "policyVersion": 1,
+  "reviewedAt": "2026-08-29",
+  "governmentTermsUrl": "https://www.digital.go.jp/resources/open_data",
+  "sourcePolicies": [
+    {
+      "organization": "総務省統計局",
+      "url": "https://www.stat.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "総務省",
+      "url": "https://www.soumu.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "国土地理院",
+      "url": "https://www.gsi.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "気象庁",
+      "url": "https://www.jma.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "海上保安庁",
+      "url": "https://www.kaiho.mlit.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "国土交通省",
+      "url": "https://www.mlit.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "農林水産省",
+      "url": "https://www.maff.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "経済産業省",
+      "url": "https://www.meti.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "厚生労働省",
+      "url": "https://www.mhlw.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "文部科学省",
+      "url": "https://www.mext.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "内閣府",
+      "url": "https://www.cao.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "財務省",
+      "url": "https://www.mof.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "環境省",
+      "url": "https://www.env.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "法務省",
+      "url": "https://www.moj.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "警察庁",
+      "url": "https://www.npa.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "こども家庭庁",
+      "url": "https://www.cfa.go.jp/",
+      "termsUrl": "https://www.digital.go.jp/resources/open_data",
+      "rights": "allowed"
+    },
+    {
+      "organization": "国立社会保障・人口問題研究所",
+      "url": "https://www.ipss.go.jp/",
+      "rights": "needs-review"
+    },
+    {
+      "organization": "日本銀行",
+      "url": "https://www.boj.or.jp/",
+      "rights": "needs-review"
+    },
+    {
+      "organization": "国際機関",
+      "url": "https://www.un.org/",
+      "rights": "needs-review"
+    }
+  ],
+  "manualOverrides": {
+    "japan-zue-2025-26-p054-table02": {
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "人口動態統計の都道府県別合計特殊出生率として一次資料と既存指標を照合",
+      "metricKeys": [
+        "total-fertility-rate"
+      ],
+      "units": [
+        "人"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態統計",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p071-figure01": {
+      "resolution": "combined-analysis",
+      "resolutionReason": "労働力調査の完全失業率と職業安定業務統計の有効求人倍率を別系列として一次資料へ接続",
+      "metricKeys": [
+        "unemployment-rate",
+        "active-job-opening-ratio"
+      ],
+      "units": [
+        "%",
+        "倍"
+      ],
+      "geoScopes": [
+        "japan"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "労働力調査",
+          "url": "https://www.stat.go.jp/data/roudou/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1972"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        },
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "一般職業紹介状況",
+          "url": "https://www.mhlw.go.jp/toukei/list/114-1.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1972"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p077-table01": {
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "厚生労働省の地域別最低賃金全国一覧と既存指標を照合",
+      "metricKeys": [
+        "minimum-wage-by-region"
+      ],
+      "units": [
+        "円"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "地域別最低賃金の全国一覧",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/minimumichiran/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p131-figure02": {
+      "resolution": "combined-analysis",
+      "resolutionReason": "生産農業所得統計の農業産出額を地域構成の分析材料として一次資料へ接続",
+      "metricKeys": [
+        "agricultural-output"
+      ],
+      "units": [
+        "億円"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "農林水産省",
+          "publicationOrDataset": "生産農業所得統計",
+          "url": "https://www.maff.go.jp/j/tokei/kouhyou/nougyou_sansyutu/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p393-table02": {
+      "resolution": "combined-analysis",
+      "resolutionReason": "宿泊旅行統計調査の延べ宿泊者数と客室稼働率を別系列として一次資料へ接続",
+      "metricKeys": [
+        "total-overnight-guests",
+        "room-utilization-rate"
+      ],
+      "units": [
+        "人泊",
+        "%"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p436-table02": {
+      "resolution": "new-metric",
+      "resolutionReason": "文部科学省の2025年度調査PDFを再取得・47都道府県検算できる新規指標として採択",
+      "metricKeys": [
+        "students-requiring-japanese-instruction"
+      ],
+      "units": [
+        "人"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省",
+          "publicationOrDataset": "日本語指導が必要な児童生徒の受入状況等に関する調査 令和7年度",
+          "url": "https://www.mext.go.jp/content/20260525-mxt_kyokoku-000049811_03.pdf",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p457-table01": {
+      "resolution": "combined-analysis",
+      "resolutionReason": "被保護者調査の実数と世帯千対を別指標として一次資料へ接続",
+      "metricKeys": [
+        "households-on-public-assistance",
+        "households-on-public-assistance-per-1000"
+      ],
+      "units": [
+        "世帯"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "被保護者調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/74-16.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p458-table02": {
+      "resolution": "combined-analysis",
+      "resolutionReason": "人口動態統計の乳児死亡数と出生千対を別指標として一次資料へ接続",
+      "metricKeys": [
+        "infant-deaths",
+        "infant-mortality-rate-per-1000-births"
+      ],
+      "units": [
+        "人"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態統計",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p460-figure01": {
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "医療施設調査の人口10万人当たり一般病院病床数として一次資料と既存指標を照合",
+      "metricKeys": [
+        "general-hospital-bed-count-per-100k"
+      ],
+      "units": [
+        "床"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "医療施設調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/79-1.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    },
+    "japan-zue-2025-26-p467-table01": {
+      "resolution": "combined-analysis",
+      "resolutionReason": "都道府県別生命表の男女・年齢別平均余命を別系列として一次資料へ接続",
+      "metricKeys": [
+        "average-life-expectancy-male",
+        "average-life-expectancy-female-20",
+        "average-life-expectancy-female-65"
+      ],
+      "units": [
+        "年"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "都道府県別生命表",
+          "url": "https://www.mhlw.go.jp/toukei/list/6-17.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-08-29",
+          "rights": "allowed"
+        }
+      ]
+    }
+  }
+}

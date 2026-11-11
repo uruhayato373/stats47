@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Geo 分析の台帳",
-  "description": "data/geo/analyses/analyses.json の形状契約。analyses のキーが分析の slug (GeoAnalysisSlug) で、公開 URL /geo/<slug> と R2 の app/geo/<slug>/ を決める。Geo 公開面に出せるのは、計算入力 2 層以上の空間横断分析 (spatial-cross) だけで、単一指標の入口 (baseline) は含めない。豪雪 (snow-designation) と土砂 (landslide-exposure) は themeSource を持ち、出典に由来する 7 項目 (r2Key・evidenceManifestKey・detailR2KeyPattern・dataVersion・sourceName・sourceUrl・caveats) を書かない。読み込み口 packages/data-configs/src/business-plan/geo-analyses.ts が geo-analysis-theme-sources.ts の結合の関数で埋める。themeSource が無い分析は 7 項目をすべて書く。notes は判断の記録で、キーは analyses の slug。contentId の参照は段 11、themeSource の参照は段 12 で宣言する。",
+  "description": "data/geo/analyses/analyses.json の形状契約。analyses のキーが分析の slug (GeoAnalysisSlug) で、公開 URL /geo/<slug> と R2 の app/geo/<slug>/ を決める。Geo 公開面に出せるのは、計算入力 2 層以上の空間横断分析 (spatial-cross) だけで、単一指標の入口 (baseline) は含めない。豪雪 (snow-designation) と土砂 (landslide-exposure) は themeSource を持ち、出典に由来する 7 項目 (r2Key・evidenceManifestKey・detailR2KeyPattern・dataVersion・sourceName・sourceUrl・caveats) を書かない。読み込み口 packages/data-configs/src/business-plan/geo-analyses.ts が geo-analysis-theme-sources.ts の結合の関数で埋める。themeSource が無い分析は 7 項目をすべて書く。notes は判断の記録で、キーは analyses の slug。contentId は事業計画のコンテンツの機会 (business-plan.content-opportunities) を指す。themeSource の参照は段 12 で宣言する。",
   "type": "object",
   "required": ["analyses"],
   "additionalProperties": false,
@@ -26,7 +26,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "type": "string", "pattern": "^m1-analysis-[a-z][a-z0-9-]*$" },
-        "contentId": { "description": "コンテンツ企画の ID (business-plan/content-opportunities の geo-NNN)", "type": "string", "pattern": "^geo-\\d{3}$" },
+        "contentId": { "description": "コンテンツの機会の ID (business-plan.content-opportunities の geo-NNN)", "type": "string", "pattern": "^geo-\\d{3}$" },
         "themeSource": { "description": "出典を theme-catalog の *-source.ts に持つ分析。値は geo-analysis-theme-sources.ts の結合の関数の名前", "enum": ["snow-designation", "landslide-exposure"] },
         "title": { "type": "string", "minLength": 1 },
         "question": { "type": "string", "minLength": 1 },

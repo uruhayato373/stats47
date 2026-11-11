@@ -332,8 +332,7 @@ function loadNoteGenerationBlockers(root: string) {
 }
 
 function referenceMediaPlans(): ReferenceMediaPlanSource[] {
-  const sourcePath =
-    'packages/data-configs/src/evidence-inventory/japan-zue/pilot.ts';
+  const sourcePath = datasetPath('source-inventory.japan-zue-pilot');
   const pilotPlans = JAPAN_ZUE_PILOT_ITEMS.flatMap((item) =>
     (['youtube', 'instagram', 'x'] as const)
       .filter((channel) => item.placements.includes(channel))

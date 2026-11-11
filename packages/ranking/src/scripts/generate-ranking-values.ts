@@ -273,7 +273,7 @@ async function main(): Promise<void> {
     console.error(
       `[values] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.join(", ")}\n` +
         `        正典 app/stats/<key>/values.json を確認してください。意図した 0 件なら` +
-        ` packages/data-configs/src/expected-empty.ts の EXPECTED_EMPTY に登録します`,
+        ` 台帳 data-quality.expected-empty に登録します`,
     );
     process.exitCode = 1;
   }

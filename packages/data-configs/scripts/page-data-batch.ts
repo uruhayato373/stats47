@@ -1515,7 +1515,7 @@ async function main() {
   if (empty > 0) {
     console.error(
       `[fatal] 観測値が 0 件の metric が ${empty} 件あります: ${emptyKeys.join(", ")}\n` +
-        `        意図した 0 件なら packages/data-configs/src/expected-empty.ts の EXPECTED_EMPTY に` +
+        `        意図した 0 件なら台帳 data-quality.expected-empty に` +
         ` 理由・追跡先・期限を添えて登録してください (一回きりの検証は --allow-empty <keys>)`,
     );
     process.exit(1);
