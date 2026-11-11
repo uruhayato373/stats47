@@ -2108,6 +2108,14 @@ updated: 2026-11-01
 - **Geo の POST を GET に替えた (2026-11-11 実装)**: 分析ページの県の detail と雪の原典を、`/api/geo/analysis/<slug>/<県>?v=&sha=` と `…/snow-source` の GET にした (照合は `features/geo-analysis/lib/resolve-geo-detail.ts`・`resolve-geo-snow-source.ts` に移して route が使う。長期キャッシュのヘッダー)。`robots.ts` で `/api/geo/analysis/` を Allow にした (Google の描画に地図を出すため。オーナー判断)。localhost の実測: `/geo/population-station-access` と `/geo/population-snow-designation` で同じ URL への POST が 0、GET が出て地図が描かれる。呼ばれていなかった `fetchStationAccessDetailAction` は消した。**残り**: レイヤーのページ (`GeoLayerExplorer`) は初回は POST を出さないが、県を切り替えると `fetchGeoLayerAction` の POST が出る。利用者の操作時だけなので今回は変えていない。KML・GeoJSON のダウンロードはリンクからボタンにした (サーバー HTML の `format=kml`・`format=geojson` の href は 0)。
 
 
+
+**2026-11-11 2 回目のデプロイ (PR #1250・03:26Z マージ) の後の実測**
+
+- 本番: `/sitemap/3.xml` 2,596 件、shard 11 本すべて 200。`/robots.txt` の `*` と `Google-Extended` に `/api/geo/analysis/` の Allow。`/ranking/abandoned-cultivated-land-area` の HTML は KML・GeoJSON の href が 0、CSV が 1 (ボタンは 2 個が表示)。`/geo/population-station-access` と `/geo/population-snow-designation` は自分の URL への POST が 0 で地図が出て、`/api/geo/analysis/...` を curl で 3 回 GET すると `cf-cache-status: HIT`。HTML は `/category/population` 991,538 → 959,069 バイト、`/survey/kakei-chousa` 1,983,351 → 1,781,915 バイト。
+- `storage.stats47.jp` の robots.txt: `publish-storage-robots.yml` の dry-run (run 42958007806) は「candidates=1 changed=1 uploaded=0」。本実行 (`gh workflow run publish-storage-robots.yml --ref main -f dry_run=false`) はオーナーの確認待ちで未実行。公開側は 404 のまま。
+- Cloudflare の日次集計 (run 42958312727): `googlebot` の欄は「取得不能」と記録された。理由は CI のトークンにゾーン 4caf2866… の `zone.analytics.read` が無いこと。次: オーナーが Cloudflare のトークン「stats47」に Zone の Analytics 読み取りを足す (`[実行:ユーザー]`)。足すまで 11-12 の POST の数え直しは手元のトークンで行う。
+- economy の 9 件: カテゴリ一覧を作るのは `sync-snapshots.yml` の `only=ranking-items`。dry-run (run 42958309298) は実行するコマンドを表示するだけで、差分は出ない。本実行はオーナーの確認待ちで未実行。完了条件は `/category/economy` のランキングへのリンクが 1,013 → 1,022 本。
+
 ### [R2-VALUES-REUPLOAD-01] ランキングの values.json が生成のたびに全件送り直されるのを止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [領域:データ]
 
