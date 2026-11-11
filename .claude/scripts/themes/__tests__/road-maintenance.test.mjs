@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { extractRoadMaintenance, ROAD_MAINTENANCE_SOURCES } from '../ingest-road-maintenance.mjs';
 
-const prefectures = createRequire(import.meta.url)('../../../../packages/area/src/data/prefectures.json');
+const prefectures = createRequire(import.meta.url)('../../lib/prefectures.cjs').PREFECTURES;
 function fixture(facility = 'bridge') {
   const source = ROAD_MAINTENANCE_SOURCES.find((row) => row.facility === facility);
   const rows = prefectures.map((pref, index) => {

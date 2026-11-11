@@ -13,6 +13,7 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const STATS_DATA_ID = "0003454526";
 const REPO_ROOT = resolve(__dirname, "../../..");
@@ -50,7 +51,7 @@ function asArray<T>(x: T | T[]): T[] {
 // ---- 県マスタ (5桁 → 名称) ----
 function loadPrefNames(): Map<string, string> {
   const raw = JSON.parse(
-    readFileSync(resolve(REPO_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+    readFileSync(resolve(REPO_ROOT, datasetPath("areas.prefectures")), "utf8"),
   ) as Array<{ prefCode: string; prefName: string }>;
   return new Map(raw.map((p) => [p.prefCode, p.prefName]));
 }

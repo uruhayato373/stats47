@@ -534,7 +534,7 @@ async function main() {
       },
     },
   });
-  const prefectures = require('./packages/area/src/data/prefectures.json'),
+  const prefectures = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES,
     names = Object.fromEntries(
       prefectures.map((p) => [p.prefCode, p.prefName])
     );

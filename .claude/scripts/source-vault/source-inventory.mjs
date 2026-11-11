@@ -582,10 +582,10 @@ function resolvePrefectureDeviationOffsets(documents) {
 }
 
 async function editorialSources() {
-  const root = path.join(PROJECT_ROOT, 'packages/data-configs/src/area-databook/editorial');
+  const root = path.join(PROJECT_ROOT, datasetDir('areas.editorial'));
   return Object.fromEntries(await Promise.all(PREFECTURES.map(async ([code]) => {
-    const text = await readFile(path.join(root, `${code}.ts`), 'utf8');
-    const url = text.match(/sourceUrl:\s*["']([^"']+)["']/)?.[1];
+    const record = JSON.parse(await readFile(path.join(root, `${code}.json`), 'utf8'));
+    const url = record.symbols?.sourceUrl;
     if (!url) throw new Error(`Area editorial has no sourceUrl: ${code}`);
     return [code, url];
   })));

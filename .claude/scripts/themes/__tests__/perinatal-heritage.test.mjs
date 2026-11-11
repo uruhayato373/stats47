@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import { extractDesignations, verifySourceBytes } from '../ingest-perinatal-heritage.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 
 test('API envelope dates can change while observations and metadata stay pinned', () => {
   const data = { GET_STATS_DATA: { RESULT: { STATUS: 0, DATE: 'first request' }, STATISTICAL_DATA: { CLASS_INF: { unit: '施設' }, DATA_INF: { VALUE: [{ $: '12' }] } } } };

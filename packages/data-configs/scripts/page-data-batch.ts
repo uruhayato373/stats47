@@ -1,4 +1,4 @@
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 /**
  * page-data-batch — TS-config 駆動の e-Stat → R2 直行バッチ
  *
@@ -811,10 +811,10 @@ let _masters: AreaMasters | null = null;
 function loadAreaMasters(): AreaMasters {
   if (_masters) return _masters;
   const prefRaw = JSON.parse(
-    readFileSync(resolve(REPO_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+    readFileSync(resolve(REPO_ROOT, datasetPath("areas.prefectures")), "utf8"),
   ) as Array<{ prefCode: string; prefName: string }>;
   const cityRaw = JSON.parse(
-    readFileSync(resolve(REPO_ROOT, "packages/area/src/data/cities.json"), "utf8"),
+    readFileSync(resolve(REPO_ROOT, datasetPath("areas.cities")), "utf8"),
   ) as Array<{ cityCode: string; cityName: string }>;
   _masters = {
     pref: new Map(prefRaw.map((p) => [p.prefCode, p.prefName])),

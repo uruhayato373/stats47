@@ -135,9 +135,9 @@ updated: 2026-11-01
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-10] [領域:データ]
 
 2026-11-10 にオーナーが承認した計画に沿って進める。計画の本体は会社の Windows PC の `C:\Users\m004195\.claude\plans\rdb-db-nextjs-spicy-marble.md` (リポジトリには置かない。全段が終わったら消す)。
-- **いまの段**: 段 7 完了 (2026-11-11。全国のテーマ・家計の全国テーマの仕様・派生指標の採否を `data/themes/japan/`、市区町村の公開判断・テーマ・拡充・県別ランキングの対象を `data/municipalities/catalog/` へ移した)。次は段 8 (県)。残りの一覧は `npm run check-datasets -- --er` の末尾に段ごとの件数で出る
+- **いまの段**: 段 8 完了 (2026-11-11。県・市区町村・港湾のマスタを `data/areas/master/`、県データブックのテンプレートを `data/areas/databook/`、県の本文 47 件を `data/areas/editorial/` へ移した)。次は段 9 (商品)。残りの一覧は `npm run check-datasets -- --er` の末尾に段ごとの件数で出る
 - **作業の場所 (2026-11-11 から)**: 段 0〜6 は develop に入っている (並行の作業の push で origin/develop へ出た)。段 7 以降は、会社の Windows PC の別の作業ツリー `C:\tmp\stats47-ledger` のブランチ `ledger-db-unify` に積む (本体の作業ツリーを並行の作業と共有していて、相手の未コミットの変更が pre-commit を止めたため)。push と develop への取り込みはオーナーの指示で行う
-- **段 13 で判断するもの (段 6 で見つけた分)**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める
+- **段 13 で判断するもの (段 6 で見つけた分)**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める。2 桁の県コード (港湾の `prefectureCode`・`open-data.prefecture-statistics` の `resources[].prefectureCode`) を県のマスタ (5 桁の `prefCode`) へ結ぶ手段が無い (`refs` の `parse` は `list` だけ)。検査に桁を直す指定を足すか、台帳の側を 5 桁にするかを決める。県の本文 47 ファイルを 1 ファイルにするか
 - **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(3) `ssds-provenance.generated.json` を作り直すと、`cpi-annual` の名前が調査の一覧の名前 (消費者物価指数) に変わる (43 件)。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる
 - **進め方**: 段ごとに新しいセッションで始め、計画のファイルと段の番号を渡す。段は 1 つずつ順に進め、終わるたびにこの「いまの段」を書き換える
 - **完了条件**: `packages/`・`apps/` の台帳の許可リストが空で、`config/` がシステムの設定だけになり、`npm run check-datasets` が通る
@@ -3412,7 +3412,7 @@ updated: 2026-11-01
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
 - **背景 (2026-09-25 `/areas/13000` 実測)**: 「有効求人倍率の推移」は 2022年度の 1 点、「1人当たり県民所得の推移」は
-  2020〜2021年度の 2 点だけで推移として機能していない (e-Stat をその場で読むグラフ。`template.ts` の
+  2020〜2021年度の 2 点だけで推移として機能していない (e-Stat をその場で読むグラフ。台帳 `areas.databook-template` の
   `area-ov-job-opening` / `area-ov-prefectural-income`、原因は未確認)。390px では高さ 9px 未満のグラフ文字が 80 個あり、
   「高齢化率・年少人口割合の推移」「高齢者世帯の推移」の縦軸に単位が無い。縦軸目盛りの切れは `UI-CHART-TEXT-LOOP-01` の担当。
 - **次**: ① 点数不足の原因 (statsDataId の年範囲・取得パラメータ・キャッシュ) を実測で特定し、年を揃えた系列に直すか、
@@ -3552,7 +3552,7 @@ updated: 2026-11-01
 
 - **owner**: area-curator (対象の確定) / image-prompt-curator (画像)
 - **実測 (2026-09-23)**: 600 URL の試運転で 12 県・21 枚の `app/areas/<code>/specialty/*.webp` が R2 で 404 (例: 07000 nameko / 10000 brix-nine・aka-imo / 12000 tomisato-suika・shiro-takenoko / 22000 midori-mai・kajiki / 24000 ise-hijiki・ao-sanori)。画面は `SpecialtyImage` が頭文字タイルに切り替えるので壊れては見えないが、写真が出ていない。全件の件数は次回の週次監査の `degraded_images` で確定する。
-- **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
+- **次**: 週次結果から欠落の全リストを出し、台帳 `areas.editorial` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 - **決定 (2026-10-26 オーナー)**: 頭文字タイルの正式化はせず、欠けている画像を用意する。次は週次監査の `degraded_images` から欠落の全リストを出し、image-prompt-curator で生成する。
 
@@ -4181,7 +4181,7 @@ updated: 2026-11-01
   1. Windows で別の Playwright profile を読む可能性がある絶対パス直書き: `.claude/skills/sns/publish-x/check-x-scheduled.ts`・`.claude/skills/sns/update-x-profile/update-x-profile.cjs` (publish-x と profile を共有するため見送った)。
   2. 県名の短縮処理: `@stats47/area` の `prefectureShortName` へ寄せた (北海道は落とさない)。残りは単一実装の検査 `packages/area/src/utils/__tests__/prefecture-short-name-single-impl.test.ts` の許可リスト 6 件 (縮小のみ。`packages/svg-builder/src/charts/bar-chart.ts:192` は北海道を「北海」にする) と、TS の正本を import できない `.claude/scripts` の .mjs 18 ファイル。
   3. スクリプトの小さな重複ヘルパー: JST 変換 27、getArg 52、fetchText 20、dotenv 読み込み 27、ブラウザ起動引数 16 (ISO 週は `SCRIPT-ISO-WEEK-UNIFY-01`、Google API の認証は `SCRIPT-GOOGLE-CLIENT-UNIFY-01`)。挙動の差を一覧にしてから共通化するか決める。
-  4. データ表の重複: `apps/ges/scripts/data/ports.json` と `packages/area/src/data/ports.json` (キー形式・精度差)、県庁所在地の座標 3 か所 (精度差)、8・10 区分の地方区分。databook のカテゴリ名と migration-flow の FocusFile 変換は寄せた (配布済みの xlsx は再生成していない)。
+  4. データ表の重複: `apps/ges/scripts/data/ports.json` と `data/areas/master/ports.json` (キー形式・精度差)、県庁所在地の座標 3 か所 (精度差)、8・10 区分の地方区分。databook のカテゴリ名と migration-flow の FocusFile 変換は寄せた (配布済みの xlsx は再生成していない)。
   5. remotion の一部・ges・migration-flow は `@stats47/area` などを依存に持たず県リスト等を再定義している (svg-builder と product-factory は宣言済み)。依存を足すか (package-lock の更新を伴う) を決める。
 - **2026-10-26 の変更で未確認のもの**: 調査名は解決時にマスタ (`surveys.master`) で上書きしているが、`build-estat-provenance.ts` の出力に旧表記が残る。Kindle の単位検査 (`content-invariants.ts`) を `parseUnit` に変えたあと、既存の版の `verify-epub` は再実行していない。remotion の `shared/utils/choropleth.ts` と `features/geo-x/GeoInsightCard.tsx` は 5 桁の市区町村コードを県コードに寄せるようになったので、次にこの 2 つで画像を作るときに前の版と目視で比べる。
 - **trigger**: 上のどれかを触る改修が入るとき、または同じ値の不一致で不具合が出たとき。

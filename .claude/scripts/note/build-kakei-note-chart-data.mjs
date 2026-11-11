@@ -26,6 +26,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const STATS = path.join(ROOT, ".local/r2/app/stats");
@@ -81,7 +82,7 @@ const mean = (nums) => nums.reduce((a, b) => a + b, 0) / nums.length;
 
 async function main() {
   const prefectures = JSON.parse(
-    fs.readFileSync(path.join(ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+    fs.readFileSync(path.join(ROOT, datasetPath("areas.prefectures")), "utf8"),
   );
   const outBase = arg("--out", path.join(ROOT, "docs/31_note記事原稿"));
 

@@ -46,7 +46,7 @@ cat data/ranking/integrity-audit.json | jq '.valueVerification'
 | 疑い | 確かめること | 主な手段 |
 |---|---|---|
 | `zero-suspicion` | ゼロの県に**本当に存在しないのか**。集計軸の取り違えで 0 になっていないか | e-Stat メタ (`/inspect-estat-meta`)・一次情報・施設の実在確認 |
-| `thin-suspicion` | **欠落県を実際に列挙**し、その県が調査対象外である理由があるか | R2 `app/stats/<key>/values.json` と `packages/area/src/data/prefectures.json` を突合 |
+| `thin-suspicion` | **欠落県を実際に列挙**し、その県が調査対象外である理由があるか | R2 `app/stats/<key>/values.json` と 台帳 `areas.prefectures` を突合 |
 | `negative-suspicion` | 指標が**定義上マイナスを取りうるか** (増減率・収支・気温) | config の title / unit / description |
 
 調査そのものは `estat-researcher` に委譲してよい (read-only 調査が本来の責務)。

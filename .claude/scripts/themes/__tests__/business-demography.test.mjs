@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { extractBusinessDemography } from '../ingest-business-demography.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 function sheet(kind, overrides = {}) {
   const annual = kind === 'annual';
   const headers = annual

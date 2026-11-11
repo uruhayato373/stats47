@@ -32,6 +32,7 @@ import {
   splitAreaName,
   toCsv,
 } from './lib/muni-data-product.mjs';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const R2_BASE = 'https://storage.stats47.jp/app/stats';
@@ -193,7 +194,7 @@ async function buildBoundary(areas) {
   return report;
 }
 
-const areasAll = JSON.parse(readFileSync(join(ROOT, 'packages/area/src/data/cities.json'), 'utf8'));
+const areasAll = JSON.parse(readFileSync(join(ROOT, datasetPath('areas.cities')), 'utf8'));
 const municipalities = areasAll.filter((a) => a.level === '2');
 const wards = areasAll.filter((a) => a.level === '3');
 const [cities, prefs] = await Promise.all([

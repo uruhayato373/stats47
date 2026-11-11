@@ -106,7 +106,7 @@ const cities = fetchCities();           // 全市区町村
 src/
 ├── types/          # 型定義
 ├── utils/          # ユーティリティ関数
-├── data/           # 静的JSONデータ
+├── data/           # 台帳 areas.prefectures / areas.cities (data/areas/master) の読み込み口
 ├── repositories/   # データ取得関数
 └── __tests__/      # テスト
 ```

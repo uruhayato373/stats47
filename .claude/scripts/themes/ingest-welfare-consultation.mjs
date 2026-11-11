@@ -585,7 +585,7 @@ export const PROVIDER_ROSTER = [
 ];
 const require = createRequire(import.meta.url);
 const { parse: csvParse } = require('csv-parse/sync');
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { extractTsunamiPrefectures, verifyTsunamiMunicipalities, NON_APPLICABLE } from '../ingest-tsunami-evacuation.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 function fixture() {
   const lines = ['都道府県別（令和5年4月時点）', '都道府県 津波避難ビル（棟） 津波避難タワー等（棟）'];
   for (const [i, p] of prefectures.entries()) {

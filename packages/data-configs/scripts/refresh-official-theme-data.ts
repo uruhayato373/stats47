@@ -16,7 +16,7 @@ import { tmpdir } from "node:os";
 import { isAbsolute, join, relative, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
-import prefectures from "../../area/src/data/prefectures.json";
+import prefectures from "../../../data/areas/master/prefectures.json";
 import { parseStatsValuesPayload } from "../../stats-r2/src/schemas";
 import type { SingleEntityRow, StatsValuesPayload } from "../../stats-r2/src/types";
 import { agriculturalOutput } from "../../../data/metrics/agricultural-output";

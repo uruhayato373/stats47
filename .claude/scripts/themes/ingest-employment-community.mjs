@@ -10,7 +10,7 @@ import { parseArgs } from 'node:util';
 import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const root = process.cwd(),
   requireRepo = createRequire(resolve(root, 'package.json'));
-const prefs = requireRepo('./packages/area/src/data/prefectures.json');
+const prefs = requireRepo('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 const { extractYearCode } = requireRepo(
   './packages/estat-api/src/stats-data/utils/extract-year-code.ts'
 );

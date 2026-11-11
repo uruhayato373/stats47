@@ -30,7 +30,7 @@ export function classifyPrQualityPaths(inputPaths) {
       CODE_EXTENSION.test(path) &&
       !matchesAny(path, [/^docs\//, /^contents\//, /^\.claude\/(?:state|todo)\//])
   );
-  // data/themes・data/ads・data/categories・data/surveys/{master,analysis-units,editorial}・data/site/url-history・data/geo/{ksj,analyses,source-pages}・data/open-data・data/municipalities/catalog は packages が import する定義 (テーマの表示・カテゴリとトピック・調査マスタ・家計の分析単位・調査ハブの本文・URL の転送と 410・国土数値情報の台帳と利用条件・Geo 分析と層と公開計画・原典ページ・公開データの提供元と県の統計ポータル) なので、packages の変更と同じ扱いにする
+  // data/themes・data/ads・data/categories・data/surveys/{master,analysis-units,editorial}・data/site/url-history・data/geo/{ksj,analyses,source-pages}・data/open-data・data/municipalities/catalog・data/areas は packages が import する定義 (テーマの表示・カテゴリとトピック・調査マスタ・家計の分析単位・調査ハブの本文・URL の転送と 410・国土数値情報の台帳と利用条件・Geo 分析と層と公開計画・原典ページ・公開データの提供元と県の統計ポータル・県と市区町村と港湾のマスタ・県データブックのテンプレートと県の本文) なので、packages の変更と同じ扱いにする
   const themeDefinitions = paths.some((path) => /^data\/(?:themes|categories|ads|metrics|metric-sources|surveys\/(?:master|analysis-units|editorial)|site\/url-history|geo\/(?:ksj|analyses|source-pages)|open-data|municipalities\/catalog)\//.test(path));
   const packageSource = themeDefinitions || paths.some((path) => /^packages\/[^/]+\//.test(path));
   const webSource = paths.some((path) => /^apps\/web\//.test(path));

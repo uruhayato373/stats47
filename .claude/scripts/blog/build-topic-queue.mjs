@@ -39,7 +39,7 @@ import {
   spuriousReasons,
 } from "./lib/topic-queue-spurious-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,7 +54,7 @@ const getArg = (flag, fallback) => {
 const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/topic-queue.json`);
 const SEASONALITY_PATH = path.join(__dirname, "data", "seasonality-table.json");
 const METRICS_DIR = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
-const PREFS_PATH = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
+const PREFS_PATH = path.join(PROJECT_ROOT, datasetPath("areas.prefectures"));
 const GEO_CONTENT_PIPELINE_PATH = path.join(
   PROJECT_ROOT,
   ".local/geo-content-pipeline/items.json",

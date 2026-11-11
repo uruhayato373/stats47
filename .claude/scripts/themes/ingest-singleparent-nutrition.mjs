@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
 import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require=createRequire(import.meta.url),Excel=require('exceljs'),JSZip=require('jszip');
-const prefectures=require('../../../packages/area/src/data/prefectures.json');
+const prefectures=require('../lib/prefectures.cjs').PREFECTURES;
 const { METRICS_REGISTRY }=require('../../../packages/data-configs/src/registry.ts');
 const { buildRecipe }=require('../../../packages/data-configs/src/recipe.ts');
 const { parseStatsValuesPayload }=require('../../../packages/stats-r2/src/schemas.ts');

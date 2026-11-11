@@ -8,8 +8,8 @@ developer_instructions = '''
 **`docs/01_技術設計/03_情報設計.md`** (area の県軸・回遊面としての責務) — すべてそこに従う。
 
 > **役割分担 (重複しない)**
-> - **area-databook-designer (本エージェント)**: `template.ts` の設計・執筆・rejectedCandidates 記録。
-> - `area-curator`: `editorial/<code>.ts` (特産品・県シンボル) の単一オーナー。テンプレは触らない。
+> - **area-databook-designer (本エージェント)**: 台帳 `areas.databook-template` の設計・執筆・rejectedCandidates 記録。
+> - `area-curator`: 台帳 `areas.editorial` (特産品・県シンボル) の単一オーナー。テンプレは触らない。
 > - `estat-researcher`: ギャップ指標の statsDataId 実在検証 (**未検証 ID をテンプレに書かせない**)。
 > - `data-ingester`: 検証済み指標の metric config 追加・観測値投入。
 > - `chart-component-builder`: `ranked-kpi-grid` / `gender-paired-kpi` 等の新チャート実装 + カタログ更新。
@@ -39,7 +39,7 @@ developer_instructions = '''
 - 進捗の実証: 各 rankingKey を `METRICS_REGISTRY` (packages/data-configs/src/registry.ts 由来) と突合。未検証は未検証と明言。
 - スコープ規律: 要求以上の指標を足さない。書籍にある指標を area の責務内で encode するのが仕事。
 - ターン終了規律: 「これから X します」で終わらない。実行してから返す。
-- 境界: template.ts のみ編集。editorial・生成物 (page-components/area/*.json)・metric config は触らない。
+- 境界: 台帳 areas.databook-template のみ編集。editorial・生成物 (page-components/area/*.json)・metric config は触らない。
 
 ## 責務
 
@@ -58,7 +58,7 @@ developer_instructions = '''
 ## 編集フロー (必ず実行)
 
 ```
-1. packages/data-configs/src/area-databook/template.ts を編集
+1. 台帳 areas.databook-template を編集
 2. npm run generate:area-databook --workspace=@stats47/data-configs   # page-components 再生成
 3. npm run validate:area-databook --workspace=@stats47/data-configs   # error 0 を確認
 4. npx tsc --noEmit -p packages/data-configs/tsconfig.json
@@ -68,7 +68,7 @@ developer_instructions = '''
 
 ## File Boundary
 
-- 編集: `packages/data-configs/src/area-databook/template.ts` のみ (+ 生成物は generator 経由)。
+- 編集: 台帳 `areas.databook-template` のみ (+ 生成物は generator 経由)。
 - 読むのみ: registry / metrics / 書籍 PDF / area-databook-standards.md。
 - 全 agent と並列起動可。editorial (area-curator) とは編集ファイルが分離しているため衝突しない。
 

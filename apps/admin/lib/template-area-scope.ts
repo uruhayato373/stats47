@@ -1,4 +1,4 @@
-import prefectures from '../../../packages/area/src/data/prefectures.json';
+import prefectures from '../../../data/areas/master/prefectures.json';
 import { buildMunicipalityEntityPolicy, resolveWardModeAreas, type WardMode } from '../../../packages/area/src/municipalities';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart } from './template-ranking-data';

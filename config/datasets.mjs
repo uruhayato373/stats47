@@ -152,9 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/area-databook/template.ts", why: "pending", phase: 8 },
-  { path: "packages/data-configs/src/area-databook/editorial/", why: "pending", phase: 8 },
-  { path: "packages/area/src/data/", why: "pending", phase: 8 },
   { path: "packages/product-factory/src/catalog/products/packs.ts", why: "pending", phase: 9 },
   { path: "packages/product-factory/src/catalog/licenses.ts", why: "pending", phase: 9 },
   { path: "packages/product-factory/src/channels/kindle/book-catalog.ts", why: "pending", phase: 9 },
@@ -781,6 +778,34 @@ export const DATASETS = [
       { field: "notes.$keys", to: "municipalities.prefecture-ranking", key: "keys[]" },
     ],
   }),
+  d("areas.prefectures", "data/areas/master/prefectures.json", "master", "data", "data", "都道府県のマスタ (5 桁の都道府県コード・名前・ローマ字。JIS 順の 47 件)。読み込みは packages/area/src/data/index.ts (PREFECTURES)", {
+    schema: "config/schema/areas.prefectures.schema.json",
+  }),
+  d("areas.cities", "data/areas/master/cities.json", "master", "data", "data", "市区町村のマスタ (e-Stat の地域メタの市区町村と政令指定都市の行政区。level 2 の prefCode は都道府県、level 3 の prefCode は親の政令指定都市)。読み込みは packages/area/src/data/index.ts (CITIES)", {
+    schema: "config/schema/areas.cities.schema.json",
+    refs: [
+      { field: "[].prefCode", to: "areas.prefectures", key: "[].prefCode", where: { level: "2" } },
+      { field: "[].prefCode", to: "areas.cities", key: "[].cityCode", where: { level: "3" } },
+    ],
+  }),
+  d("areas.ports", "data/areas/master/ports.json", "master", "data", "data", "港湾のマスタ (港湾コード・名前・所在の都道府県・位置・港格・管理者。都道府県は 2 桁のコードで持つので refs では結べない)。読み込みは packages/database/src/utils/area-master.ts", {
+    schema: "config/schema/areas.ports.schema.json",
+  }),
+  d("areas.databook-template", "data/areas/databook/template.json", "master", "data", "data", "47 県共通の県データブックのセクション構成 (どの指標をどのブロックでどの順に見せるか。数値は持たず指標のキーで参照する。chart ブロックは page-components の生成物になる)。読み込みは packages/data-configs/src/area-databook/template.ts", {
+    schema: "config/schema/areas.databook-template.schema.json",
+    refs: [
+      { field: "sections[].blocks[].metrics[].rankingKey", to: "registry:metrics" },
+      { field: "sections[].blocks[].pairs[].maleKey", to: "registry:metrics" },
+      { field: "sections[].blocks[].pairs[].femaleKey", to: "registry:metrics" },
+      { field: "sections[].blocks[].chart.relatedRankingKeys[]", to: "registry:metrics" },
+    ],
+  }),
+  d("areas.editorial", "data/areas/editorial/{name}.json", "ledger", "data", "data", "県ごとの本文 (県のシンボルと特産品 5〜9 件。1 県 1 ファイル、ファイル名は areaCode。特産品の slug は R2 のイラストのキー)。読み込みは packages/data-configs/src/area-databook/editorial/index.ts (generate-editorial-index が作る)", {
+    schema: "config/schema/areas.editorial.schema.json",
+    refs: [
+      { field: "areaCode", to: "areas.prefectures", key: "[].prefCode" },
+    ],
+  }),
   d("note.draft-index", "data/note/note-draft-index.json", "state", "product", "data", "note 下書きの索引"),
   d("note.published-urls", "data/note/note-published-urls.json", "state", "product", "data", "note の公開 URL の派生索引 (記事台帳 data/note/articles.json から generate-note-catalog.ts が作る。手編集しない)", { schema: "config/schema/note.published-urls.schema.json" }),
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),
@@ -1094,6 +1119,12 @@ export const RETIRED = [
   { from: "business-plan/geo-source-policy-pages", to: "data/geo/source-pages/pages.json", since: "2026-11-11" },
   { from: "business-plan/geo-source-service-pages", to: "data/geo/source-pages/pages.json", since: "2026-11-11" },
   { from: "open-data-catalog/datasets/", to: "data/open-data/catalog/datasets.json", since: "2026-11-11" },
+  // 県・市区町村・港湾のマスタ (2026-11-11 に packages/area/src/data/ から data/areas/master/ へ)
+  { from: "area/src/data/prefectures.json", to: "data/areas/master/prefectures.json", since: "2026-11-11" },
+  { from: "area/src/data/cities.json", to: "data/areas/master/cities.json", since: "2026-11-11" },
+  { from: "area/src/data/ports.json", to: "data/areas/master/ports.json", since: "2026-11-11" },
+  // 県データブックの県の本文 47 件 (2026-11-11 に editorial/<code>.ts から data/areas/editorial/<code>.json へ。テンプレートは template.ts が JSON を読む)
+  { from: "area-databook/editorial/", to: "data/areas/editorial/", since: "2026-11-11" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

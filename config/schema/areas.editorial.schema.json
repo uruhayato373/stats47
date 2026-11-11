@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "県の本文 (特産品・県シンボル)",
+  "description": "data/areas/editorial/<code>.json の形状契約。県データブック (県ページ /areas/<code>) の県ごとの本文で、1 県 1 ファイル。ファイル名は areaCode と同じ 5 桁 (一致は generate-editorial-index が止める)。品名・産地は事実で、description は書籍の文言を複製せず出典から書き起こす。slug は県内で一意の kebab-case で、R2 のイラストのキー (app/areas/<code>/specialty/<slug>.webp) なので変えない (一意は validate-area-databook が止める)。sourceNote は書籍の出典と使い方の注記で、読み込み口は export に出さない。件数・字数・出典の規約は .claude/rules/area-databook-standards.md §5 で、validate-area-databook (npm run validate:area-databook) が同じ範囲を検査する。読み込みは packages/data-configs/src/area-databook/editorial/index.ts (generate-editorial-index が作る)。",
+  "type": "object",
+  "required": ["areaCode", "sourceNote", "symbols", "specialties"],
+  "additionalProperties": false,
+  "properties": {
+    "areaCode": { "description": "5 桁の都道府県コード (01000〜47000)", "type": "string", "pattern": "^(0[1-9]|[1-3][0-9]|4[0-7])000$" },
+    "sourceNote": { "type": "string", "minLength": 1 },
+    "symbols": {
+      "description": "県のシンボル。値は県公式サイト等で裏取りし出典を付ける",
+      "type": "object",
+      "required": ["tree", "flower", "bird", "sourceUrl", "accessedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "tree": { "type": "string", "minLength": 1 },
+        "flower": { "type": "string", "minLength": 1 },
+        "bird": { "type": "string", "minLength": 1 },
+        "fish": { "type": "string", "minLength": 1 },
+        "animal": { "type": "string", "minLength": 1 },
+        "song": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "description": "裏取りした出典 (県公式ページ)", "type": "string", "pattern": "^https?://" },
+        "accessedAt": { "$ref": "common.schema.json#/$defs/date" }
+      }
+    },
+    "specialties": {
+      "description": "特産品。5〜9 件",
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "municipality", "description", "sourceUrl", "accessedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "slug": { "description": "英小文字 kebab-case。県内で一意", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "name": { "type": "string", "minLength": 1 },
+          "municipality": { "description": "主産地 (市町村名。県内広域なら「県内広域」)", "type": "string", "minLength": 1 },
+          "description": { "description": "独自の解説 60〜160 字。出典に基づき書き起こす", "type": "string", "minLength": 60, "maxLength": 160 },
+          "sourceUrl": { "description": "解説の根拠 (県公式・市町村・JA 等の一次情報)", "type": "string", "pattern": "^https?://" },
+          "accessedAt": { "$ref": "common.schema.json#/$defs/date" }
+        }
+      }
+    }
+  }
+}

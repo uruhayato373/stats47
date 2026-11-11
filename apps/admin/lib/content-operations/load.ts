@@ -441,7 +441,7 @@ export function loadContentOperations(
   ];
   const prefecturesRaw = readOptionalJson(
     root,
-    'packages/area/src/data/prefectures.json'
+    datasetPath('areas.prefectures')
   );
   const prefectures = prefecturesRaw
     ? ContentPrefectures.parse(prefecturesRaw)
@@ -499,7 +499,7 @@ export function loadContentOperations(
     notePublishedMetrics: notePublishedMetrics(external),
     blogTopicQueue: loadBlogTopicQueue(root),
     areas: prefectures.map((prefecture) => {
-      const editorialPath = `packages/data-configs/src/area-databook/editorial/${prefecture.prefCode}.ts`;
+      const editorialPath = `${datasetDir('areas.editorial')}/${prefecture.prefCode}.json`;
       return {
         code: prefecture.prefCode,
         name: prefecture.prefName,

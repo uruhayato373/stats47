@@ -11,7 +11,7 @@ import { parseArgs } from 'node:util';
 const root = process.cwd();
 const requireRepo = createRequire(resolve(root, 'package.json'));
 const ExcelJS = requireRepo('exceljs');
-const prefs = requireRepo('./packages/area/src/data/prefectures.json');
+const prefs = requireRepo('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 const sum = (values) => values.reduce((a, b) => a + b, 0);
 const clean = (v) =>
   String(v ?? '')

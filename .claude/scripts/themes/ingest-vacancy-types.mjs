@@ -8,7 +8,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

@@ -10,7 +10,7 @@ import {parseArgs} from 'node:util';
 import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require=createRequire(import.meta.url);
 const ExcelJS=require('exceljs');
-const prefectures=require('../../../packages/area/src/data/prefectures.json');
+const prefectures=require('../lib/prefectures.cjs').PREFECTURES;
 const {buildRecipe}=require('../../../packages/data-configs/src/recipe.ts');
 const {parseStatsValuesPayload}=require('../../../packages/stats-r2/src/schemas.ts');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
