@@ -1,9 +1,8 @@
 {
-  "hash": "911f1a8e9752e57b3490436dfebb601f88c0a14907a82a7c9ef68a28f07e32a5",
-  "audited_at": "2026-11-11T02:45:08",
+  "hash": "d3936351e49ea69d523975afcfce0db7589383d75a951bd5814874124ad6e942",
+  "audited_at": "2026-11-11T03:02:48",
   "files": [
-    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
-    ".claude/scripts/metrics/build-measurement-cycle.mjs",
-    ".claude/scripts/metrics/lib/measurement-cycle.mjs"
+    ".claude/scripts/gsc/__tests__/test_ingest_gsc_export.py",
+    ".claude/scripts/gsc/ingest-gsc-export.py"
   ]
 }
