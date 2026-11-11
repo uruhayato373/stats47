@@ -157,7 +157,7 @@ function makeMdComponents(
         },
 
         table: ({ children, ...props }: ComponentProps) => (
-            <div className="my-6">
+            <div className="google-anno-skip my-6">
                 <Table {...props}>
                     {children}
                 </Table>
@@ -190,7 +190,7 @@ function makeMdComponents(
         ),
 
         blockquote: ({ children }: ComponentProps) => (
-            <blockquote className="my-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground [quotes:none]">
+            <blockquote className="google-anno-skip my-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground [quotes:none]">
                 {children}
             </blockquote>
         ),
@@ -285,7 +285,7 @@ function makeMdComponents(
             ) : null,
 
         "data-source": ({ url, label, year, note }: ComponentProps & { url?: string; label?: string; year?: string; note?: string }) => (
-            <span className="-mt-1 mb-6 flex justify-end not-prose">
+            <span className="google-anno-skip -mt-1 mb-6 flex justify-end not-prose">
                 <span className="inline-flex items-start gap-1.5 text-xs text-muted-foreground">
                     <BookOpenText className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
                     <span>
@@ -306,7 +306,7 @@ function makeMdComponents(
         // 図に属する導線なので上は詰め (直上の図・出典行との間)、下は次の本文と切り離す。
         "source-link": ({ href, children }: ComponentProps & { href?: string }) =>
             href ? (
-                <span className="mb-8 mt-4 block not-prose">
+                <span className="google-anno-skip mb-8 mt-4 block not-prose">
                     <RankingLinkCard href={href}>{children}</RankingLinkCard>
                 </span>
             ) : null,
@@ -374,7 +374,7 @@ function makeMdComponents(
         },
 
         "related-articles": ({ children }: ComponentProps) => (
-            <SurfaceSection className="my-8 overflow-hidden border-primary/30 p-0">
+            <SurfaceSection className="google-anno-skip my-8 overflow-hidden border-primary/30 p-0">
                 <div className="bg-primary/10 px-4 py-2.5">
                     <span className="text-sm font-bold text-primary">関連記事</span>
                 </div>

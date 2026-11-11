@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
 
+import { useAdIntentAnchorInset } from "@/lib/google-adsense/use-ad-intent-anchor-inset";
+
 const CONSENT_COOKIE_NAME = "stats47_consent";
 const CONSENT_LS_KEY = "stats47_cookie_consent";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
@@ -40,10 +42,13 @@ function syncGtag(value: "granted" | "denied") {
  * 帯に隠れたままにならない (fixed の浮きカードは本文の上に重なり、その分の余白も無かった)。
  * 390px でも文とボタンを 1 行に収める (2026-10-28 3 巡目。2 行の帯が本文の下端を覆っていた):
  * 文を短くし、ボタンは xs にして、折り返さない (flex-nowrap)。
+ * 広告インテントのアンカー (ブログの個別記事で画面下に固定される) が出ているときは、その上へ避ける
+ * (2026-11-11。帯がアンカーの下半分を隠していた。広告の側は動かさない)。
  * z-index は地図 (Leaflet のペインと操作部品 400〜1000) より上、ヘッダー (z-200) の重なりとは独立。
  */
 export function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
+  const anchorInset = useAdIntentAnchorInset();
 
   useEffect(() => {
     const cookieMatch = document.cookie.match(new RegExp(`${CONSENT_COOKIE_NAME}=([^;]+)`));
@@ -78,6 +83,7 @@ export function CookieConsentBanner() {
       role="region"
       aria-label="Cookie の利用について"
       data-slot="cookie-consent"
+      style={anchorInset > 0 ? { bottom: anchorInset } : undefined}
       className="sticky bottom-0 z-[1100] flex flex-nowrap items-center gap-3 border-t border-border bg-background px-4 py-2 pb-[calc(0.5rem+var(--safe-area-bottom))]"
     >
       <p className="min-w-0 flex-1 text-xs text-muted-foreground sm:text-sm">
