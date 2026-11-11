@@ -200,6 +200,8 @@ tags: []
 | search-growth判断 | approve/dismiss N件 | 週次最低1件 | 最大3件を審査 |
 | effect判定 | full/partial/none/adverse/pending | target欠落 N件 | `improvement-triage` またはtarget負債処置 |
 | index coverage | URL Inspection取得日 / remediation週 | fresh/stale | stale sourceを回復 |
+| 送信済み登録率 | 登録済み ÷ (登録済み + 未登録)。`data/gsc/coverage-submitted-history.csv` の最新の取得週 | 前月比。missing の週は未取得 | 下落が続けば重点候補 |
+| 検証の状態 | 開始前 / 開始 / 合格 / 失敗 | 月内の遷移 | 失敗は重点候補 |
 
 ## 今月の重点テーマ（1-2 個）
 
@@ -240,6 +242,7 @@ tags: []
 
 - **毎月初（第 1 週の月曜など）に 1 回実行**する想定。`/monthly-plan` だけで完結。
 - **GSC運用サイクルは重点テーマ数に数えない健康管理の床**。GSCを重点に選ばない月も固定節を省略しない。
+- 送信済みの登録率が 2 か月続けて下がったとき、または検証が「失敗」になったときは、重点に上げるかをその月の計画で判断する。
 - 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.claude/todo/monthly.md` の `focus_themes` と `focus_domains` を読む。
 - **タスクの実体（status / due）は各バックログが真実源。** 月次計画は選定理由と配分だけを持ち、進捗は週次計画とバックログで扱う。
 - 月末の振り返りは **`/monthly-review`** が `data/reviews/monthly/YYYY-MM.md` に書く（2026-10-01 に独立。doboku-note と同じ「振り返り → 計画」の 2 段）。月次計画はそれを読んで重点を決める。期限・必須見出し・申し送りの振り分けは `.claude/config/review-wiring.json` が正本。

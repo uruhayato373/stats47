@@ -110,6 +110,8 @@ node .claude/scripts/management/check-review-cadence.mjs
 
 ### GSC画面監査・技術是正
 | 問題・観測日 | 月内の修正/本番確認 | Google検証の遷移 | 残カードID・owner・次回確認日 | 証拠 |
+| 送信済み登録率（登録済み ÷ (登録済み + 未登録)）・観測日 | 月内の推移。missing の週は未取得と書き、0 と書かない | - | 2 か月続けて下がったときは重点に上げるかを次月計画へ申し送る | `data/gsc/coverage-submitted-history.csv` |
+| 検証の状態・観測日 | 開始前 / 開始 / 合格 / 失敗の月内の遷移 | 同左 | 失敗は重点に上げるかを次月計画へ申し送る | 画面・取得記録 |
 
 ## 点検と Issue
 | Issue / 自動処理 | 状態 | 振り分け |

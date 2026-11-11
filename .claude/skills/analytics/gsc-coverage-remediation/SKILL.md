@@ -162,7 +162,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
   累計は LATEST.md の「URL Inspection で登録を確認して done にした URL」、queue の `summary.indexed_by_inspection`。
 - 人が確定した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
 - `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
-- 改善バックログ `.claude/todo/improvements.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
+- 改善バックログ `.claude/todo/backlog.md` の `GSC-COVERAGE-DEPLOY-01` ほか GSC のカードの status / 期日を更新する。
 - **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
   URL Inspection / totals-history で確認してからでないと effect/full を付けない。
 
@@ -184,11 +184,11 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 | 取り込み済 drilldown | `data/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
 | observe-after-fix 対象 | `data/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
 | agent 用詳細ログ | `data/improvement/gsc-improvement/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
-| TODO 真実源 | `.claude/todo/improvements.md` `COVERAGE-LOOP-01` | improvement-triage |
+| TODO 真実源 | `.claude/todo/backlog.md` の `GSC-COVERAGE-DEPLOY-01` ほか GSC のカード | todo-curator |
 
 ## cadence (週次)
 
-**自動 (CI)**: `fetch-metrics-weekly.yml` (金曜 05:00 JST) が **Phase 2 のキュー再構築を毎週回す**
+**自動 (CI)**: `fetch-metrics-weekly.yml` (土曜 01:00 JST) が **Phase 2 のキュー再構築を毎週回す**
 (`build-coverage-queue.mjs` → `--sync-inspection` → `data/gsc/coverage-remediation/` を develop へ commit-back)。
 **判断が要る是正も CI で回す (2026-09-24〜)**: 週次 `fetch-metrics-weekly.yml` の url-inspection job と週次の最後に
 `sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、対話セッション (2026-09-27 まで `backlog-loop-daily.yml` の日次実行) が

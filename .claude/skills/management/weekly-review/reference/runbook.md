@@ -155,7 +155,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - `data/gsc/coverage-drilldown/LATEST.md` は旧集約なので最新状態の根拠に使わない。GSC UI exportは下記remediation queueで読む
 
    **GSC カバレッジ是正ループ**:
-   ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
+   土曜の `npm run weekly:collect` が GSC UI の「ページ」export を取得して記録している（API では取れない総件数・未把握 URL を含む）。記録があれば是正ループを回し、取得できていない週は「未取得」と書く。
    正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` / 実行: `/gsc-coverage-remediation`。
    - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
    - 構築: `node .claude/scripts/gsc/build-coverage-queue.mjs`（本番 HTTP 実測で A/B 分類）
@@ -493,6 +493,10 @@ snapshot CSV: `data/gsc/snapshots/YYYY-Www/`
 
 | 対象/問題 | 観測日・報告値/例示範囲 | 本番確認 | Google検証 | 残カードID・次回確認日 | 証拠 |
 |---|---|---|---|---|---|
+| 送信済みビューの登録済み・未登録と前週差 | `data/gsc/coverage-submitted-history.csv` の最新週。status が missing の週は「未取得」と書き、0 と書かない | - | - | - | 同CSV |
+| 理由別の件数とGoogleの検証の状態 | 開始前 / 開始 / 合格 / 失敗。記録に無い間は土曜の取得のときに画面から読む | - | 同左 | 残カードID | 画面・取得記録 |
+| 「robots.txt によりブロックされましたが、インデックスに登録しました」の件数 | 0 になった週に、ダウンロード API を Disallow に戻すかを backlog `GSC-ROBOTS-INDEXED-01` で判断する | - | - | `GSC-ROBOTS-INDEXED-01` | 画面・取得記録 |
+| Googlebot の POST と HTML の件数 | `data/cloudflare/snapshots/<日付>.json` の `googlebot`。status が unavailable なら「未取得」 | - | - | - | 同snapshot |
 
 修正をdeployしたこと、Googleがリクエストを受理/検証開始したこと、再クロール後の合格/登録は別の結果として書く。
 
