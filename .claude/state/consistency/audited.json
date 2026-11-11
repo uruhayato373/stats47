@@ -1,26 +1,14 @@
 {
-  "hash": "e996657144dbf478a6b009d2c2f3de86f3ce8837c4f8cfb5e822a4151e75a3f6",
-  "audited_at": "2026-11-11T03:45:15",
+  "hash": "bcf04a385c5e69a978a1aaf0654fc8a81362f39217aa9976a65a5e832482eec0",
+  "audited_at": "2026-11-11T06:06:19",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".agents/skills/management/monthly-plan/SKILL.md",
-    ".agents/skills/management/monthly-review/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/rules/r2-storage-design.md",
-    ".claude/scripts/cloudflare/fetch-usage.mjs",
-    ".claude/scripts/cloudflare/lib/googlebot.mjs",
-    ".claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs",
-    ".claude/scripts/gsc/__tests__/test_ingest_gsc_export.py",
-    ".claude/scripts/gsc/audit-operations-cycle.mjs",
-    ".claude/scripts/gsc/ingest-gsc-export.py",
-    ".claude/scripts/lib/__tests__/cloudflare-googlebot.test.mjs",
-    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
-    ".claude/scripts/metrics/build-measurement-cycle.mjs",
-    ".claude/scripts/metrics/lib/measurement-cycle.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/management/monthly-plan/SKILL.md",
-    ".claude/skills/management/monthly-review/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md",
-    ".claude/skills/management/weekly-review/reference/runbook.md"
+    ".claude/rules/area-databook-standards.md",
+    ".claude/scripts/issues/check-issue-graph.mjs",
+    ".claude/scripts/issues/issue-data-grains.d.mts",
+    ".claude/scripts/issues/issue-data-grains.mjs",
+    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
+    ".claude/scripts/lib/check-datasets.mjs",
+    ".claude/scripts/lib/internal-link-lint.mjs",
+    ".claude/scripts/lib/plan-pr-quality.mjs"
   ]
 }

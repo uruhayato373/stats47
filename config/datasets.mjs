@@ -152,13 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/geo-scope/japan-catalog.ts", why: "pending", phase: 7 },
-  { path: "packages/data-configs/src/geo-scope/kakei-japan-catalog.ts", why: "pending", phase: 7 },
-  { path: "packages/data-configs/src/geo-scope/japan-derived-metrics.ts", why: "pending", phase: 7 },
-  { path: "packages/data-configs/src/geo-scope/municipality-catalog.ts", why: "pending", phase: 7 },
-  { path: "packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts", why: "pending", phase: 7 },
-  { path: "packages/data-configs/src/geo-scope/municipality-housing-survey-expansion.ts", why: "pending", phase: 7 },
-  { path: "packages/data-configs/src/geo-scope/municipality-prefecture-ranking.ts", why: "pending", phase: 7 },
   { path: "packages/data-configs/src/area-databook/template.ts", why: "pending", phase: 8 },
   { path: "packages/data-configs/src/area-databook/editorial/", why: "pending", phase: 8 },
   { path: "packages/area/src/data/", why: "pending", phase: 8 },
@@ -433,6 +426,25 @@ export const DATASETS = [
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "schema", "data", "data", "上の定義の JSON Schema"),
   d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "master", "data", "data", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
   d("themes.evidence-lenses", "data/themes/viewpoints/evidence-lenses.json", "master", "data", "data", "論点レンズ (lenses) と白書・報告書の出典 (sources)。テーマの evidenceTopics が lensKey・sourceKeys で指す。読み込みは packages/data-configs/src/theme-catalog/evidence-lenses.ts", { schema: "config/schema/themes.evidence-lenses.schema.json" }),
+  d("themes.japan-catalogs", "data/themes/japan/catalogs.json", "master", "data", "data", "全国 (/japan/<slug>) の手書きのテーマ (slug をキーにした題・説明・キーワード・指標と短いラベル。家計の分は themes.japan-kakei-catalogs。notes と batches は採否の判断の記録)。読み込みは packages/data-configs/src/geo-scope/japan-catalog.ts", {
+    schema: "config/schema/themes.japan-catalogs.schema.json",
+    refs: [
+      { field: "themes.*.metrics[].metricKey", to: "registry:metrics" },
+      { field: "batches[].themeSlugs[]", to: "themes.japan-catalogs", key: "themes.$keys" },
+      { field: "notes.$keys", to: "themes.japan-catalogs", key: "themes.$keys" },
+    ],
+  }),
+  d("themes.japan-kakei-catalogs", "data/themes/japan/kakei-catalogs.json", "master", "data", "data", "全国 (/japan/<slug>) の家計調査のテーマ (slug をキーにした仕様。ラベルは指標の題から読み込み口が結ぶ)。読み込みは packages/data-configs/src/geo-scope/kakei-japan-catalog.ts", {
+    schema: "config/schema/themes.japan-kakei-catalogs.schema.json",
+    refs: [{ field: "themes.*.metricKeys[]", to: "registry:metrics" }],
+  }),
+  d("themes.japan-derived-metrics", "data/themes/japan/derived-metric-decisions.json", "ledger", "data", "data", "全国値を都道府県の値から導く指標の採否 (採用は加算できるものだけ。却下の理由と根拠を持つ恒久判断)。読み込みは packages/data-configs/src/geo-scope/japan-derived-metrics.ts", {
+    schema: "config/schema/themes.japan-derived-metrics.schema.json",
+    refs: [
+      { field: "decisions[].metricKey", to: "registry:metrics" },
+      { field: "decisions[].sourceMetricKey", to: "registry:metrics" },
+    ],
+  }),
   d("themes.public-dashboards", "data/themes/research/public-dashboards.json", "ledger", "data", "data", "公式ダッシュボードの研究カタログ (調べた公式ダッシュボードと、その問い・指標・可視化・ストーリー構成。調査日と検証日を持つ記録)。検査は check-public-dashboard-catalog.mjs、読み手は管理画面の研究ページ", {
     schema: "config/schema/themes.public-dashboards.schema.json",
     refs: [
@@ -729,6 +741,46 @@ export const DATASETS = [
   d("municipalities.expansion", "data/municipalities/{name}", "state", "data", "data", "市区町村データの拡充調査と棚卸し"),
   d("municipalities.ai-content", "data/municipalities/ai-content/{name}.json", "ledger", "data", "data", "市区町村ランキングの解説の本文 (1 指標 1 ファイル。デプロイ時に配信値で監査して通ったものだけ R2 へ)", { schema: "data/municipalities/schema/ai-content.schema.json" }),
   d("municipalities.ai-content-schema", "data/municipalities/schema/ai-content.schema.json", "schema", "data", "data", "上の解説の JSON Schema"),
+  d("municipalities.metric-availability", "data/municipalities/catalog/metric-availability.json", "ledger", "data", "data", "市区町村の指標を公開するかの人手の判断 (指標のキーをキーにした公開・非公開の別・順位に入れる値の範囲・理由。batches はまとめて判断した共通の根拠、notes は指標ごとの判断の記録)。社会・人口統計体系と住宅・土地統計調査の拡充分は読み込み口が記録から足す。読み込みは packages/data-configs/src/geo-scope/municipality-catalog.ts", {
+    schema: "config/schema/municipalities.metric-availability.schema.json",
+    refs: [
+      { field: "metrics.$keys", to: "registry:metrics" },
+      { field: "batches[].metricKeys[]", to: "municipalities.metric-availability", key: "metrics.$keys" },
+      { field: "notes.$keys", to: "municipalities.metric-availability", key: "metrics.$keys" },
+    ],
+  }),
+  d("municipalities.themes", "data/municipalities/catalog/themes.json", "master", "data", "data", "市区町村のテーマ (slug をキーにした手書きの題・指標の表示順・既定の指標・公開状態。拡充分は municipalities.ssds-expansion と municipalities.housing-survey-expansion が足す)。読み込みは packages/data-configs/src/geo-scope/municipality-catalog.ts", {
+    schema: "config/schema/municipalities.themes.schema.json",
+    refs: [
+      { field: "themes.*.metricKeys[]", to: "registry:metrics" },
+      { field: "themes.*.defaultMetricKey", to: "registry:metrics" },
+      { field: "appendedMetrics.*.[]", to: "registry:metrics" },
+    ],
+  }),
+  d("municipalities.ssds-expansion", "data/municipalities/catalog/ssds-expansion.json", "ledger", "data", "data", "社会・人口統計体系 (SSDS) の市区町村コードのうち未使用だったものの公開判断 (新設テーマ・テーマごとに足す指標・0 を除いて順位を付ける指標・データブックに載せる指標)。読み込みは packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts", {
+    schema: "config/schema/municipalities.ssds-expansion.schema.json",
+    refs: [
+      { field: "newThemes.*.defaultMetricKey", to: "registry:metrics" },
+      { field: "themeMetrics.*.[]", to: "registry:metrics" },
+      { field: "positiveOnlyKeys[]", to: "registry:metrics" },
+      { field: "databookPicks[]", to: "registry:metrics" },
+    ],
+  }),
+  d("municipalities.housing-survey-expansion", "data/municipalities/catalog/housing-survey-expansion.json", "ledger", "data", "data", "住宅・土地統計調査の市区町村表から足す指標 (キー・公開状態・テーマ・指標ごとの判定の記録)。読み込みは packages/data-configs/src/geo-scope/municipality-housing-survey-expansion.ts", {
+    schema: "config/schema/municipalities.housing-survey-expansion.schema.json",
+    refs: [
+      { field: "keys[]", to: "registry:metrics" },
+      { field: "theme.defaultMetricKey", to: "registry:metrics" },
+      { field: "notes.$keys", to: "municipalities.housing-survey-expansion", key: "keys[]" },
+    ],
+  }),
+  d("municipalities.prefecture-ranking", "data/municipalities/catalog/prefecture-ranking.json", "ledger", "data", "data", "県名×市区町村ランキング (/municipalities/ranking/<指標>/<県コード>) を作る指標の選定 (全指標 × 47 県にしない。外した指標の理由を notes に持つ)。読み込みは packages/data-configs/src/geo-scope/municipality-prefecture-ranking.ts", {
+    schema: "config/schema/municipalities.prefecture-ranking.schema.json",
+    refs: [
+      { field: "keys[]", to: "registry:metrics" },
+      { field: "notes.$keys", to: "municipalities.prefecture-ranking", key: "keys[]" },
+    ],
+  }),
   d("note.draft-index", "data/note/note-draft-index.json", "state", "product", "data", "note 下書きの索引"),
   d("note.published-urls", "data/note/note-published-urls.json", "state", "product", "data", "note の公開 URL の派生索引 (記事台帳 data/note/articles.json から generate-note-catalog.ts が作る。手編集しない)", { schema: "config/schema/note.published-urls.schema.json" }),
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),

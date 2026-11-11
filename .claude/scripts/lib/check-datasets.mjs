@@ -570,12 +570,7 @@ export function retiredHits() {
     if (e.status === 1) return []; // 一致なし
     throw e;
   }
-  return out
-    .split("\n")
-    .map((row) => row.match(/^([^:]+):(\d+):(.*)$/))
-    .filter(Boolean)
-    .map((m) => ({ file: m[1], line: Number(m[2]), text: m[3] }))
-    .filter((hit) => hit.file !== "config/datasets.mjs"); // 旧置き場を宣言する台帳自身は除く
+  return parseGrepRows(out).filter((hit) => hit.file !== "config/datasets.mjs"); // 旧置き場を宣言する台帳自身は除く
 }
 
 export const DATA_LITERAL_CODE_GLOBS = ["*.ts", "*.tsx", "*.mjs", "*.cjs", "*.js"];
@@ -624,8 +619,18 @@ export function dataLiteralHits(tops) {
     if (e.status === 1) return [];
     throw e;
   }
+  return parseGrepRows(out);
+}
+
+/**
+ * `git grep -n` の出力を行ごとに { file, line, text } にする。
+ * 作業ツリーが CRLF のファイル (Windows) は行末に \r が残る。`.` は \r に一致しないので、\r を落とさないと
+ * その行が丸ごと読み飛ばされ、CRLF のファイルの違反だけ見逃す (2026-11-11 に develop の CI だけが落ちて分かった)。
+ * @param {string} out
+ */
+export function parseGrepRows(out) {
   return out
-    .split("\n")
+    .split(/\r?\n/)
     .map((row) => row.match(/^([^:]+):(\d+):(.*)$/))
     .filter(Boolean)
     .map((m) => ({ file: m[1], line: Number(m[2]), text: m[3] }));

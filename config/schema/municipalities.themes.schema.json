@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "市区町村のテーマ",
+  "description": "data/municipalities/catalog/themes.json の形状契約。市区町村ページの節とテーマページ (/municipalities/themes/<slug>) になる、手書きの市区町村テーマ。themes のキーがテーマの slug で、記録の中には書かない (読み込み口 packages/data-configs/src/geo-scope/municipality-catalog.ts がキーから slug に戻す)。metricKeys は表示順で、defaultMetricKey は metricKeys に含める。active のテーマの指標はすべて公開済み (municipalities.metric-availability の published) でなければならない。社会・人口統計体系 (municipalities.ssds-expansion) の拡充分の指標と新設テーマ、住宅・土地統計調査 (municipalities.housing-survey-expansion) のテーマは読み込み口が足すので、ここには書かない。",
+  "type": "object",
+  "required": [
+    "themes",
+    "appendedMetrics"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "themes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "title",
+          "metricKeys",
+          "defaultMetricKey",
+          "entityPolicyKey",
+          "status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metricKeys": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            }
+          },
+          "defaultMetricKey": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "entityPolicyKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "active",
+              "draft"
+            ]
+          }
+        }
+      }
+    },
+    "appendedMetrics": {
+      "description": "拡充で新設される市区町村テーマ (municipalities.ssds-expansion の newThemes) にも、手書きの指標を末尾へ足すための記録。キーはテーマの slug、値は拡充分の後ろに足す指標の並び。例: 待機児童率 (こども家庭庁) は保育所の数と同じ福祉施設のテーマに置く (2026-11-01。判断の記録は municipalities.metric-availability の notes)。",
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]*$"
+      },
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        }
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, REGISTRIES, REGISTRY_REFS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS, KDP_LISTINGS } from "../../../../config/paths.mjs";
-import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, refValues, retiredHits, selectPath } from "../check-datasets.mjs";
+import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, parseGrepRows, patternToRegExp, refValues, retiredHits, selectPath } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 import { CONFIG_MOVE_PENDING, DATA_README_PENDING, OUTSIDE_DATA, SYSTEM_CONFIG } from "../../../../config/datasets.mjs";
 import { buildEr, checkDataReadmes, checkOutsideData, checkPlacement } from "../check-datasets.mjs";
@@ -650,6 +650,14 @@ test("ER は refs からテーブル・外部キー・統合の候補 (写し・
   assert.deepEqual(er.tables.map((t) => t.id), ["t.a", "t.b", "t.c"], "series はテーブルに数えない");
   assert.equal(er.edges.length, 2);
   assert.deepEqual(er.candidates.map((c) => `${c.kind}:${c.from}`), ["写しを持つ:t.b", "1 対 1:t.b"], "重複して指す t.c は候補にしない");
+});
+
+test("git grep の出力は CRLF の行も読む (Windows の作業ツリーで違反を見逃さない)", () => {
+  // 作業ツリーが CRLF のファイルは行末に \r が残る。落とさないと行ごと読み飛ばし、Windows でだけ検査が通る
+  const rows = parseGrepRows('a/x.mjs:3:const p = "data/gsc/x.json";\r\nb/y.mjs:7:const q = "data/sns/y.json";\n');
+  assert.deepEqual(rows.map((r) => `${r.file}:${r.line}`), ["a/x.mjs:3", "b/y.mjs:7"]);
+  assert.equal(rows[0].text.endsWith("\r"), false);
+  assert.equal(findDataPathLiterals(["gsc", "sns"], rows).length, 2, "CRLF の行の直書きも数える");
 });
 
 test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の表 ID を書いていない", () => {

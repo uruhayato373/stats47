@@ -67,7 +67,7 @@ const SOURCES = {
   // KNOWN_MUNICIPALITY_RANKING_KEYS は TS で計算される集合なので、sync-content-catalog.ts が
   // それを published に焼き込んだ生成索引を読む (鮮度は npm run content:check が検査する)
   municipalityRankingPages: path.join(datasetDir("content.pages"), "municipality-ranking.json"),
-  municipalityPrefectureRankingKeys: "packages/data-configs/src/geo-scope/municipality-prefecture-ranking.ts",
+  municipalityPrefectureRankingKeys: datasetPath("municipalities.prefecture-ranking"),
 };
 
 /**
@@ -146,13 +146,7 @@ function loadKeySets() {
       .map((page) => page.key),
   );
   if (!municipalityRanking.size) throw new Error("internal-link-lint: 市区町村ランキング集合が空です");
-  const muniPrefBlock = readRequired(SOURCES.municipalityPrefectureRankingKeys).match(
-    /export const MUNICIPALITY_PREFECTURE_RANKING_KEYS[^=]*= new Set\(\[([\s\S]*?)\]\)/,
-  );
-  if (!muniPrefBlock) throw new Error("internal-link-lint: MUNICIPALITY_PREFECTURE_RANKING_KEYS を抽出できません");
-  const municipalityPrefectureRanking = new Set(
-    [...muniPrefBlock[1].matchAll(/['"]([a-z0-9][a-z0-9-]*)['"]/g)].map((m) => m[1]),
-  );
+  const municipalityPrefectureRanking = new Set(JSON.parse(readRequired(SOURCES.municipalityPrefectureRankingKeys)).keys);
   if (!municipalityPrefectureRanking.size) {
     throw new Error("internal-link-lint: MUNICIPALITY_PREFECTURE_RANKING_KEYS が空です");
   }

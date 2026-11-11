@@ -67,7 +67,7 @@ if (flag("--figures")) {
 /** 軸から引いた図と、埋まっていない理由。軸が指すデータの実在と粒度を正本と照らす */
 function axesRows() {
   const { templates } = readJson(datasetPath("content.image-templates"));
-  return resolveAllAxes({ issues, templates, metricGrains: readMetricGrains(PROJECT_ROOT, pages), seriesIds: readSeriesIds(PROJECT_ROOT) });
+  return resolveAllAxes({ issues, templates, metricGrains: readMetricGrains(PROJECT_ROOT), seriesIds: readSeriesIds(PROJECT_ROOT) });
 }
 const axesErrorsOf = (rows) => rows.flatMap((r) => r.gaps.filter((g) => AXES_ERRORS.includes(g)).map((g) => `${r.id}: 軸のデータが${g} (--axes ${r.id} で確認)`));
 

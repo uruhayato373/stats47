@@ -183,22 +183,15 @@ function loadThemeTargets(root: string, metricKeys: string[]) {
 }
 
 function loadJapanTargets(root: string, metricKeys: string[]) {
-  const file = path.join(
-    root,
-    'packages/data-configs/src/geo-scope/japan-catalog.ts'
-  );
+  // 手書きの全国のテーマの台帳 (themes.japan-catalogs)。家計調査のテーマ (themes.japan-kakei-catalogs) は対象に含めない
+  const file = path.join(root, datasetPath('themes.japan-catalogs'));
   if (!fs.existsSync(file)) return [];
-  const body = fs.readFileSync(file, 'utf8');
-  const themes = [...body.matchAll(/themeSlug:\s*["']([^"']+)["']/g)];
-  return themes.map((match, index) => {
-    const section = body.slice(
-      match.index,
-      index + 1 < themes.length ? themes[index + 1].index : body.length
-    );
-    return {
-      slug: match[1],
-      metricKeys: metricKeys.filter((key) => hasQuotedKey(section, key)),
-    };
+  const { themes } = JSON.parse(fs.readFileSync(file, 'utf8')) as {
+    themes: Record<string, { metrics: Array<{ metricKey: string }> }>;
+  };
+  return Object.entries(themes).map(([slug, theme]) => {
+    const themeKeys = new Set(theme.metrics.map((metric) => metric.metricKey));
+    return { slug, metricKeys: metricKeys.filter((key) => themeKeys.has(key)) };
   });
 }
 
