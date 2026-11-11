@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SOURCE_VAULT } from '../../../config/paths.mjs';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
@@ -265,7 +265,7 @@ async function loadMetrics() {
 }
 
 async function loadSurveys() {
-  return readJson(path.join(PROJECT_ROOT, 'packages/ranking/src/data/surveys.json'));
+  return readJson(path.join(PROJECT_ROOT, datasetPath("surveys.master")));
 }
 
 function parseSections(markdown) {

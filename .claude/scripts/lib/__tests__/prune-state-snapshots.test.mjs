@@ -121,7 +121,10 @@ test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / basel
     .map((f) => f.split("\\").join("/"));
   // Authored configuration is permanent SSOT. Numeric cohorts such as
   // per-1000-14-19 in metric IDs must not be treated as dated operational state.
-  const configPatterns = DATASETS.filter((dataset) => dataset.kind === "config").map((dataset) => patternToRegExp(dataset.path));
+  // 2026-11-10 の台帳の整理で、指標の定義などの業務マスタは kind が config から master に変わった。
+  // master も人が判断して変える恒久の正本なので、同じく対象外にする (config だけだと指標 3 件を日付名と誤検出する)。
+  const AUTHORED_KINDS = new Set(["config", "master"]);
+  const configPatterns = DATASETS.filter((dataset) => AUTHORED_KINDS.has(dataset.kind)).map((dataset) => patternToRegExp(dataset.path));
   const dated = tracked.filter((f) => !configPatterns.some((pattern) => pattern.test(f)) && (/\d{4}-(\d{2}-\d{2}|W\d{2})/.test(f.split("/").at(-1)) || /\/\d{4}-W\d{2}\//.test(f)));
   const inPolicy = (f) =>
     Object.values(RETENTION_POLICIES).some((p) => {

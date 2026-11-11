@@ -1,4 +1,5 @@
 import type { AuthoredPresentation, MetricPresentation } from "@stats47/types";
+import type { CategoryKey } from './category-keys.generated';
 /**
  * MetricConfig 型定義 — page ごとの統計データ要件の真実源 (SSOT)
  *
@@ -358,35 +359,14 @@ export interface CalculationOptions {
 }
 
 /**
- * e-Stat 機械分類の category キー (17 軸固定)。表示名・アイコンは
- * `categories.ts` の CATEGORY_DEFS が SSOT。順序はそちらに合わせる
- * (キー集合と順序の一致は `__tests__/categories.test.ts` が固定する)。
+ * e-Stat 機械分類の category キー (17 軸固定)。正本は data/categories/categories.json (カタログの categories.master) で、
+ * 型はそこから生成する (category-keys.generated.ts。`npm run build:category-keys`)。
  *
  * ★ `MetricConfig.category` をこの union で縛ることで、`port` / `uncategorized`
  *   / `labor` / `local-economy` のような無効キーを **コンパイルエラー**にして
  *   再発を防ぐ (lint: validate-metric-config.ts でも runtime 検証)。
  */
-export const CATEGORY_KEYS = [
-  'landweather',
-  'population',
-  'laborwage',
-  'agriculture',
-  'miningindustry',
-  'commercial',
-  'economy',
-  'construction',
-  'energy',
-  'tourism',
-  'educationsports',
-  'administrativefinancial',
-  'safetyenvironment',
-  'socialsecurity',
-  'international',
-  'infrastructure',
-  'ict',
-] as const;
-
-export type CategoryKey = (typeof CATEGORY_KEYS)[number];
+export { CATEGORY_KEYS, type CategoryKey } from './category-keys.generated';
 
 /** Metric 1 つ分の全データ要件 */
 /** 値を割っている分母。none は実数 (キー名が分母を名乗っていても実数の指標に書く) */

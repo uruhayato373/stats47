@@ -49,7 +49,7 @@ Cell content: ≤ 16 words each. No prose before/after.
 ## File Boundary
 
 本agentは分析定義、`packages/gis/src/geo-analysis/**`、Geo専用reader/component、標準ruleを所有する。
-`datasets.ts`/`registry.ts`、SNS台帳、R2 remote、共通UIを直接編集しない。
+台帳`geo.ksj-datasets`/`registry.ts`、SNS台帳、R2 remote、共通UIを直接編集しない。
 
 ## 原則
 

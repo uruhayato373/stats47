@@ -35,10 +35,10 @@ describe("isLinkableSurveyId", () => {
     expect(isLinkableSurveyId("census")).toBe(true);
   });
 
-  it("surveys.json の全 id が判定を通る (マスタ側の id 規約とのドリフト検知)", () => {
+  it("調査マスタの全 id が判定を通る (マスタ側の id 規約とのドリフト検知)", () => {
     const master = path.resolve(
       __dirname,
-      "../../../../../../packages/ranking/src/data/surveys.json",
+      "../../../../../../data/surveys/master/surveys.json",
     );
     const surveys = JSON.parse(fs.readFileSync(master, "utf8")) as { id: string }[];
     expect(surveys.length).toBeGreaterThan(50);

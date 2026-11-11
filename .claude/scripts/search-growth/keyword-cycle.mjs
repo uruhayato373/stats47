@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import ts from 'typescript';
 import { jstDateOf } from '../metrics/lib/periods.mjs';
@@ -18,20 +19,30 @@ export function writeJson(repo, file, value) {
   fs.writeFileSync(target, JSON.stringify(value, null, 2) + '\n');
 }
 export function editableFile(repo, targetPath) {
-  if (/^\/survey\/[a-z0-9-]+$/.test(targetPath)) return 'apps/web/src/features/survey/survey-editorial.ts';
+  if (/^\/survey\/[a-z0-9-]+$/.test(targetPath)) return datasetPath('surveys.editorial');
   const match = /^\/(ranking|themes)\/([a-z0-9-]+)$/.exec(targetPath);
   if (!match) return null;
   const file = match[1] === 'ranking' ? `${METRIC_DEFINITIONS_DIR}/${match[2]}.ts` : `${datasetDir('themes.catalogs')}/${match[2]}.json`;
   return fs.existsSync(path.join(repo, file)) ? file : null;
 }
+/** 調査ハブの本文の台帳 (JSON) の中の、その調査の記録。surveyId は検索の対象を決めるだけなので落とす */
+export function surveyEntry(source, key) {
+  const matches = JSON.parse(source).entries.filter(entry => entry.surveyId === key);
+  assert.equal(matches.length, 1, 'survey target not uniquely found');
+  const { surveyId, ...record } = matches[0]; return record;
+}
+/** 観察中のページが変わっていないかを比べる断片。台帳が JSON になる前の TS の記録も、同じ値なら同じ文字列になる */
 export function pageFragment(source, targetPath) {
   if (!targetPath.startsWith('/survey/')) return source;
-  const key = targetPath.split('/').at(-1), ast = ts.createSourceFile('survey.ts', source, ts.ScriptTarget.Latest, true), matches = [];
+  const key = targetPath.split('/').at(-1);
+  if (source.trimStart().startsWith('{')) return JSON.stringify(surveyEntry(source, key));
+  const ast = ts.createSourceFile('survey.ts', source, ts.ScriptTarget.Latest, true), matches = [];
   const visit = node => {
     if (ts.isPropertyAssignment(node) && node.name.getText(ast).replace(/^['"]|['"]$/g, '') === key && ts.isObjectLiteralExpression(node.initializer)) matches.push(node.initializer.getText(ast));
     ts.forEachChild(node, visit);
   };
-  visit(ast); assert.equal(matches.length, 1, 'survey target not uniquely found'); return matches[0];
+  visit(ast); assert.equal(matches.length, 1, 'survey target not uniquely found');
+  return JSON.stringify(vm.runInNewContext(`(${matches[0]})`, Object.create(null)));
 }
 function proposals(repo) {
   const dir = path.join(repo, datasetDir("seo.proposals"));
@@ -117,7 +128,9 @@ export function checkKeywordState(repo, base = null) {
     if (base) {
       for (const entry of readJson(repo, datasetPath("seo.improvement-log")).entries.filter(e => e.status === 'observing')) {
         const file = editableFile(repo, entry.targetPath) ?? entry.actions.at(-1)?.files?.[0]?.path; if (!file) continue;
-        const before = execFileSync('git', ['show', `${base}:${file}`], { cwd: repo, encoding: 'utf8' });
+        const show = target => execFileSync('git', ['show', `${base}:${target}`], { cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+        // 台帳を JSON へ移した変更の base には新しいファイルが無いので、記録した移す前のファイルと値で比べる
+        let before; try { before = show(file); } catch { before = show(entry.actions.at(-1)?.files?.[0]?.path); }
         assert.equal(pageFragment(fs.readFileSync(path.join(repo, file), 'utf8'), entry.targetPath), pageFragment(before, entry.targetPath), `observing keyword cannot be improved: ${entry.keyword}`);
       }
       const old = execFileSync('git', ['ls-tree', '--name-only', base, datasetPath("seo.rank-history-summary")], { cwd: repo, encoding: 'utf8' }).trim();

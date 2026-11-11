@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)",
-  "description": "config/note-hashtags/{name}.json の形状契約。2026-10-11 に実データ 286 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "data/note/hashtags/{name}.json の形状契約。2026-10-11 に実データ 286 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
   "type": "object",
   "properties": {
     "slug": {

@@ -11,6 +11,8 @@ import {
   externalCard,
   normalizeLegacyStats47Links,
   resolveProductCardText,
+  datasetCardLead,
+  rewriteLegacyDatasetCardWording,
 } from "../lib/navigation-footer.mjs";
 
 // apps/web/src/features/products/storefront.generated.ts の実商品 (kindle-k-s1-01) と
@@ -305,13 +307,14 @@ test("footer adds the magazine's paid dataset card and does not duplicate an exi
     datasets: [{
       noteUrl: "https://note.com/stats47/n/na416c57e461c",
       noteKey: "na416c57e461c",
-      lead: "「教育費は8.7倍違う」で、この記事の元データを配布しています。",
+      lead: datasetCardLead("教育費は8.7倍違う"),
     }],
   };
   const first = applyNavigationFooter("<p>本文</p>", datasetPlan, { idFactory: ids() });
   assert.equal(first.addedDataset, true);
   assert.match(first.body, /data-src="https:\/\/note\.com\/stats47\/n\/na416c57e461c"/);
-  assert.match(first.body, /この記事の元データを手元で使う/);
+  assert.match(first.body, /関連するデータを手元で使う/);
+  assert.doesNotMatch(first.body, /この記事の元データ/);
   assert.equal((first.body.match(/次に読む<\/h2>/g) || []).length, 1);
 
   // 既に next/magazine/site/product のフッターを持つ公開記事へ dataset 枠だけを後から足す
@@ -427,4 +430,38 @@ test("applyNavigationFooter: UTM を付けた本文リンクがあっても、�
     siteTitle: "t", siteDescription: "d" }, { idFactory });
   assert.equal(out.addedSite, false);
   assert.match(out.body, /utm_content=n03e45e40d3a7/);
+});
+
+test("公開済みの本文に残る「この記事の元データ」の文言だけを置き換え、カードの行き先は変えない", () => {
+  // マガジンに 1 本の有料記事を全無料記事へ付けるので、県民所得の記事が「服や靴の価格」を元データと案内していた
+  const card = '<figure data-src="https://note.com/stats47/n/n317c673b1e81" embedded-service="note"></figure>';
+  const legacy = '<p>本文</p><p name="a" id="a"><strong>この記事の元データを手元で使う</strong><br>「服や靴の価格」で、この記事の元データを手元で開ける形で配布しています。</p>' + card;
+  const rewritten = rewriteLegacyDatasetCardWording(legacy);
+  assert.match(rewritten, /<strong>関連するデータを手元で使う<\/strong><br>「服や靴の価格」で、同じテーマのデータを手元で開ける形で配布しています。/);
+  assert.ok(rewritten.includes(card));
+  assert.strictEqual(rewriteLegacyDatasetCardWording(rewritten), rewritten);
+  // フッターの適用が旧文言の記事を「変更あり」として拾う (行き先の URL は既にあるのでカードは足さない)
+  const applied = applyNavigationFooter(legacy, { datasets: [{ noteUrl: "https://note.com/stats47/n/n317c673b1e81", noteKey: "n317c673b1e81", lead: datasetCardLead("服や靴の価格") }] }, { idFactory: ids() });
+  assert.equal(applied.changed, true);
+  assert.equal(applied.addedDataset, false);
+  assert.strictEqual(applied.body, rewritten);
+});
+
+test("空のカード要素の中の空白の有無は、執筆内容の差として扱わない", () => {
+  // 編集画面は <figure ...> </figure>、公開 API は <figure ...></figure> を返し、この 1 文字で公開記事の更新が止まった
+  const published = '<p>本文</p><figure name="a" id="a" data-src="https://note.com/stats47/n/nabc" data-identifier="nabc" embedded-service="note"></figure>';
+  const editor = '<p>本文</p><figure name="b" id="b" data-src="https://note.com/stats47/n/nabc" data-identifier="nabc" embedded-service="note">\n</figure>';
+  assert.strictEqual(canonicalizeNoteEditorBody(editor), canonicalizeNoteEditorBody(published));
+  // 文章が違えば別内容のまま
+  assert.notStrictEqual(canonicalizeNoteEditorBody(editor.replace("本文", "別の本文")), canonicalizeNoteEditorBody(published));
+});
+
+test("説明文の言い回しが違う旧文言 (表計算ソフトで開ける形で) も置き換え、本文の地の文は変えない", () => {
+  // 2026-11-11: ぎょうざの記事で見出しだけが替わり、説明文に「この記事の元データを表計算ソフトで…」が残った
+  const legacy = '<p><strong>この記事の元データを手元で使う</strong><br>「家計データセット」で、この記事の元データを表計算ソフトで開ける形で配布しています。</p>';
+  const rewritten = rewriteLegacyDatasetCardWording(legacy);
+  assert.doesNotMatch(rewritten, /この記事の元データ/);
+  assert.match(rewritten, /「家計データセット」で、同じテーマのデータを表計算ソフトで開ける形で配布しています。/);
+  const prose = "<p>この記事の元データを確かめると、定義が違っていました。</p>";
+  assert.strictEqual(rewriteLegacyDatasetCardWording(prose), prose);
 });

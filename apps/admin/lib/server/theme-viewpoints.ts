@@ -19,7 +19,7 @@ import { cached, fileExists, readJson, readText, TTL } from "./state-io";
 
 /**
  * テーマの指標を選ぶ視点 (読み取り専用)。
- * 視点の定義は config/theme-selection-viewpoints.json、判定は data-configs の selection-viewpoints.ts、
+ * 視点の定義は data/themes/viewpoints/selection.json、判定は data-configs の selection-viewpoints.ts、
  * 対象は ThemeCatalog (data/themes/catalogs/)。ここは三つを突き合わせて並べるだけで、判定を複製しない。
  */
 

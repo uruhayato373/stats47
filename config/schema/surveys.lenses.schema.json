@@ -7,7 +7,7 @@
   "required": ["schemaVersion", "surveyId", "statCode", "lenses"],
   "properties": {
     "schemaVersion": { "const": 1 },
-    "surveyId": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "packages/ranking/src/data/surveys.json の id。ファイル名と一致させる" },
+    "surveyId": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "調査マスタ (surveys.master) の id。ファイル名と一致させる (実在は check-datasets の refs が止める)" },
     "relatedSurveyIds": {
       "type": "array",
       "description": "同じ e-Stat の調査を別のハブで扱う調査 id (家計調査は品目別 kakei-chousa と社会・人口統計体系経由の household-survey)",

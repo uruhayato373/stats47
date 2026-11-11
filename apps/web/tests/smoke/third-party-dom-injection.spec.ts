@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { AD_INTENT_SKIP_CLASS, isAdIntentAllowedPath } from "../../src/lib/google-adsense/ad-intent-scope";
+
 /**
  * 第三者スクリプトによる本文書き換えの検知 (SOURCE-TEXT-LINK-INJECTION-01)
  *
@@ -17,6 +19,9 @@ import { expect, test } from "@playwright/test";
  *   `google-anno-skip` を常設する。これにより管理画面の設定が変わっても、
  *   広告インテントのリンク・アンカー・チップを全ページで拒否する。
  *   このテストは class の存在と、症状が出ていないことの両方を固定する。
+ *   例外はブログの個別記事 (2026-11-11 オーナー決定): 管理画面で「リンクを既存のテキストに挿入」をオフにしたうえで、
+ *   文字を書き換えない形 (アンカー・チップ) を試すため、開いたときだけ body の目印を外す (`ad-intent-scope.ts`)。
+ *   管理画面でリンクが再びオンになると、記事の地の文はこのテストの判定に掛かる (出典・表・引用は要素単位の目印で守る)。
  *
  * ★**AdSense 停止中に症状が出ないことだけでは証拠にならない**。
  *   2026-08-04 に捕捉 → **2026-08-16 に `ADSENSE_DISPLAY_ENABLED=false`** で
@@ -54,7 +59,16 @@ test.describe("第三者スクリプトの本文書き換え", () => {
     test(`${path}: 本文が href="#" のリンクに置換されない`, async ({ page }) => {
       test.setTimeout(60_000);
       await page.goto(path, { waitUntil: "domcontentloaded" });
-      await expect(page.locator("body")).toHaveClass(/google-anno-skip/);
+      if (isAdIntentAllowedPath(path)) {
+        // ブログの個別記事は、広告インテントのうち文字を書き換えない形 (アンカー・チップ) を試している
+        // (2026-11-11 オーナー決定。`ad-intent-scope.ts`)。body の目印は hydration の後に外れるので、
+        // 代わりに、出典の一覧と記事の見出しに要素単位の目印が付いていることを固定する。
+        // 文字の書き換えが起きていないことは、下の判定がこれまでと同じく見る。
+        await expect(page.locator(`header.${AD_INTENT_SKIP_CLASS}`).first()).toBeAttached();
+        await expect(page.locator(`div.${AD_INTENT_SKIP_CLASS}`).first()).toBeAttached();
+      } else {
+        await expect(page.locator("body")).toHaveClass(/google-anno-skip/);
+      }
       await page.waitForTimeout(SETTLE_MS);
 
       const injected = await page.$$eval('a[href="#"]', (as) =>

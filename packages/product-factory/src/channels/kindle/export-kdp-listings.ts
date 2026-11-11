@@ -1,6 +1,6 @@
 /**
  * KINDLE_BOOKS と検証対象の版から、未公開の入稿提案を生成する。
- * 公開台帳 (config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
+ * 公開台帳 (data/products/kdp/listings.json) は参照のみ。過去の公開記録を提案内に保持する。
  *
  * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <版> [--id K-S1-01]
  * .local/kindle-listing-revisions/<版>.json (--id 指定時は <版>.<id>.json) を上書き禁止で作成する。--apply は禁止。

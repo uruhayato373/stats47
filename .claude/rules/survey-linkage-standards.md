@@ -1,6 +1,7 @@
 ---
 paths:
-  - "packages/ranking/src/{data/surveys.json,survey/**}"
+  - "packages/ranking/src/survey/**"
+  - "data/surveys/master/**"
   - "apps/web/src/features/survey/**"
   - ".claude/skills/db/audit-survey-linkage/**"
   - ".claude/config/survey-taxonomy-ratchet.json"
@@ -24,7 +25,7 @@ chart source.json) を共通 resolver が surveys.json へ解決する。
 
 | データ | SSOT | 形 | 備考 |
 |---|---|---|---|
-| **調査マスタ** (id/name/organization/url) | `packages/ranking/src/data/surveys.json` | git JSON (件数は横断監査で照合) | 低頻度更新の reference。追加/削除はここだけ編集 |
+| **調査マスタ** (id/name/organization/url) | `surveys.master` (カタログの ID) | git JSON (件数は横断監査で照合) | 低頻度更新の reference。追加/削除はここだけ編集 |
 | **導出辞書 (SSDS)** cdCat01 → 原典調査 | `packages/data-configs/src/ssds/ssds-provenance.generated.json` | 生成物 (~5,372キー) | `build-ssds-provenance` 系 script で再生成 |
 | **導出辞書 (非SSDS)** statsDataId → 調査 | `packages/data-configs/src/ssds/estat-provenance.generated.json` | 生成物 (件数は生成時に報告) | **未カバー statsDataId の追記 = 未分類 item の回収手段** |
 | **手動オーバーライド** | `MetricConfig.surveyId` (`data/metrics/<key>.ts`) | git TS | 導出不能/誤導出の例外だけ書く。実在 lint (`validate:config` の `survey-id`) が守る |
@@ -124,7 +125,7 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
   県内総生産額のカードを足した分で、指標カードの下限も447→446にした (同じ配列にカードのkeyも記録し、回帰テストが検査する)。
 
 ### 新しい調査を追加する
-1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)
+1. `surveys.master` にエントリ追加 (出典名から解決する調査は `surveys.source-names` にも id を足す) (id は kebab-case)
 2. その調査に属する metric が辞書で解決されるようにする:
    - 非SSDS: `estat-provenance.generated.json` の `statsDataIdToSurvey` に statsDataId を追記
    - 例外的に手動: 対象 metric の TS に `surveyId: "<id>"`

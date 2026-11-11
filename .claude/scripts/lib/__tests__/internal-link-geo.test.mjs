@@ -17,6 +17,14 @@ test('存在しないGeo slug・県・途中段階はblockerにする', () => {
   assert.equal(lintInternalLinks('[検証](/geo/data/population-land-price/13)').blockers.length, 0);
 });
 
+test('M1 の 3 分析の外にある公開中の Geo 分析 (台帳 geo.analyses のキー) も実在として通す', () => {
+  for (const slug of ['population-snow-designation', 'population-landslide-exposure', 'population-low-elevation', 'population-public-facility-access']) {
+    for (const path of [`/geo/${slug}`, `/geo/data/${slug}/13`, `/geo/${slug}/13/overlap`]) {
+      assert.deepEqual(lintInternalLinks(`[分析](${path})`).blockers, [], path);
+    }
+  }
+});
+
 test('市区町村ランキング: 公開中の key と県別対象の県別 URL は通す', () => {
   const text = [
     '[全国](/municipalities/ranking/fiscal-strength-index)',

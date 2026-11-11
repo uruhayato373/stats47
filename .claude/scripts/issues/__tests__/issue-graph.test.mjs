@@ -16,6 +16,8 @@ import {
   classifyDraft,
   computeReach,
   effectiveAxes,
+  figurePurpose,
+  PREFERENCE,
   findQueryCandidates,
   indexPages,
   listFigureDestinations,
@@ -26,6 +28,7 @@ import {
   sumTraffic,
   validateIssueGraph,
 } from "../issue-graph-core.mjs";
+import { grainsOfMetricSource } from "../issue-data-grains.mjs";
 
 const page = (id, extra = {}) => {
   const [kind, key] = id.split(":");
@@ -230,14 +233,14 @@ test("1 つの問いに答えを 2 本結ぶと止まる", () => {
 const TEMPLATES = JSON.parse(
   readFileSync(resolve(fileURLToPath(import.meta.url), "../../../../../data/content-operations/image-templates.json"), "utf8"),
 ).templates;
-const axis = (pattern, metrics) => ({ label: pattern, pattern, ...(metrics ? { metrics } : {}) });
+const axis = (pattern, metrics) => ({ label: pattern, pattern, ...(metrics ? { data: metrics.map((m) => (typeof m === "string" ? { metric: m } : m)) } : {}) });
 const group = () => ({ label: "区分", pattern: "compare", group: true });
-const figure = (unit, explanatory, outcome, metricKeys) =>
-  resolveAxesFigure({ issue: { id: "issue:Z01", unit }, axes: { explanatory, outcome }, templates: TEMPLATES, metricKeys });
+const figure = (unit, explanatory, outcome, metricGrains, seriesIds) =>
+  resolveAxesFigure({ issue: { id: "issue:Z01", unit }, axes: { explanatory, outcome }, templates: TEMPLATES, metricGrains, seriesIds });
 
 test("軸が無い問いは型未定で、図を決めない", () => {
   const r = resolveAxesFigure({ issue: { id: "issue:Z01", unit: "prefecture" }, axes: undefined, templates: TEMPLATES });
-  assert.deepEqual(r, { purpose: null, primary: null, allowed: [], gaps: ["型未定"] });
+  assert.deepEqual(r, { purpose: null, primary: null, allowed: [], gaps: ["型未定"], notes: [] });
 });
 
 test("県の比較は地図が主で、全国の比較は地図を出さない", () => {
@@ -270,7 +273,30 @@ test("群の区分以外の軸に指標が無ければ未検証、書いた指�
   assert.ok(figure("prefecture", null, axis("change")).gaps.includes("未検証"));
   assert.ok(figure("prefecture", null, axis("compare")).gaps.includes("未検証"));
   assert.deepEqual(figure("prefecture", null, axis("compare", ["a"])).gaps, []);
-  assert.ok(figure("prefecture", null, axis("change", ["ghost"]), new Set(["real"])).gaps.includes("指標なし"));
+  assert.ok(figure("prefecture", null, axis("change", ["ghost"]), new Map([["real", new Set(["prefecture"])]])).gaps.includes("指標なし"));
+});
+
+test("指標が問いの粒度の値を持たなければ粒度不一致、別の粒度を明示すれば別粒度として残す", () => {
+  const grains = new Map([["pref-only", new Set(["prefecture"])], ["both", new Set(["prefecture", "municipality"])]]);
+  assert.deepEqual(figure("municipality", null, axis("compare", ["both"]), grains).gaps, []);
+  // 市区町村の問いが、県の値しか無い指標を黙って指すと止める (図が決まると数えない)
+  assert.deepEqual(figure("municipality", null, axis("compare", ["pref-only"]), grains).gaps, ["粒度不一致"]);
+  // 県の値で答えると明示すれば誤りではないが、問いの粒度の図は決まっていない
+  assert.deepEqual(figure("municipality", null, axis("compare", [{ metric: "pref-only", grain: "prefecture" }]), grains).gaps, ["別粒度"]);
+  // 明示した粒度の値が無ければ、明示していても止める
+  assert.deepEqual(figure("prefecture", null, axis("compare", [{ metric: "pref-only", grain: "japan" }]), grains).gaps, ["別粒度", "粒度不一致"]);
+});
+
+test("系列 (家計調査の分析単位) は ID の実在だけを見て、群の区分の軸にも書ける", () => {
+  const series = new Set(["savings-income-quintile"]);
+  const g = { ...group(), data: [{ series: "savings-income-quintile" }] };
+  assert.deepEqual(figure("japan", g, axis("compare", [{ series: "savings-income-quintile" }]), new Map(), series).gaps, []);
+  assert.deepEqual(figure("japan", null, axis("compare", [{ series: "ghost" }]), new Map(), series).gaps, ["指標なし"]);
+});
+
+test("指標の定義の entities を問いの粒度の語彙で読む", () => {
+  assert.deepEqual([...grainsOfMetricSource(`"entities": [\n    "prefecture",\n    "city",\n  ],`)], ["prefecture", "municipality"]);
+  assert.deepEqual([...grainsOfMetricSource('"entities": ["port"],')], []);
 });
 
 test("全国の集計で 2 つの値の関係を問うと、変化の軸が無ければ粒度不足", () => {
@@ -300,4 +326,41 @@ test("指標の無い量の説明側を群の区分と読み替えず、関係�
   const r = figure("prefecture", axis("compare"), axis("compare", ["b"]));
   assert.equal(r.purpose, "relationship");
   assert.ok(r.gaps.includes("未検証"));
+});
+
+test("図の型の優先順は、図の型の台帳にある描画できる型だけを、その型が答える目的の下に並べる", () => {
+  const byId = new Map(TEMPLATES.map((t) => [t.id, t]));
+  for (const [purpose, ids] of Object.entries(PREFERENCE)) {
+    for (const id of ids) {
+      const t = byId.get(id);
+      assert.ok(t, `${purpose}: ${id} が図の型の台帳に無い`);
+      assert.ok((t.purposes ?? []).includes(purpose), `${purpose}: ${id} の purposes に ${purpose} が無い`);
+      assert.ok(t.renderer != null && t.review?.status !== "unused", `${purpose}: ${id} は描画できない型`);
+    }
+  }
+  // 軸の組み合わせから引ける目的は、どれも優先順を持つ (distribution は軸の語彙 比較・構成・変化 から引かない)
+  const sides = [null, ...["compare", "compose", "change"].map((p) => axis(p)), group()];
+  for (const explanatory of sides) for (const p of ["compare", "compose", "change"]) {
+    const purpose = figurePurpose({ explanatory, outcome: axis(p) });
+    assert.ok(PREFERENCE[purpose], `${purpose} に優先順が無い`);
+  }
+});
+
+test("県の問いに県庁所在市の値で答える図は決まり、注記を付ける。市区町村の問いには使えない", () => {
+  const grains = new Map([["kakei", new Set(["capital-city"])]]);
+  const pref = figure("prefecture", null, axis("compare", ["kakei"]), grains);
+  assert.deepEqual(pref.gaps, []);
+  assert.deepEqual(pref.notes, ["県庁所在市の値 (県全体の値ではない)"]);
+  assert.deepEqual(figure("municipality", null, axis("compare", ["kakei"]), grains).gaps, ["粒度不一致"]);
+  // 全国の問いが県庁所在市の値で答えると明示すれば、誤りではないが問いの粒度の図は決まっていない
+  assert.deepEqual(figure("japan", null, axis("compare", [{ metric: "kakei", grain: "capital-city" }]), grains).gaps, ["別粒度"]);
+});
+
+test("家計調査の指標は都道府県と書かれていても県庁所在市の粒度として読む", () => {
+  assert.deepEqual([...grainsOfMetricSource(`"source": {
+    "kind": "kakei-chousa",
+  },
+  "entities": [
+    "prefecture",
+  ],`)], ["capital-city"]);
 });

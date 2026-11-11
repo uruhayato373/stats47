@@ -3,6 +3,21 @@
   "description": "問いの台帳。問いは分類軸ではなく、ページを結ぶ参照関係の起点 (docs/01_技術設計/03_情報設計.md)。意味の検査は .claude/scripts/issues/check-issue-graph.mjs",
   "type": "object",
   "definitions": {
+    "metricRef": {
+      "type": "object",
+      "required": ["metric"],
+      "additionalProperties": false,
+      "properties": {
+        "metric": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "grain": { "description": "問いの unit と違う粒度の値で答えるときだけ書く", "$ref": "common.schema.json#/$defs/grain" }
+      }
+    },
+    "seriesRef": {
+      "type": "object",
+      "required": ["series"],
+      "additionalProperties": false,
+      "properties": { "series": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+    },
     "axis": {
       "type": "object",
       "required": ["label", "pattern"],
@@ -11,7 +26,12 @@
         "label": { "type": "string", "minLength": 1 },
         "pattern": { "enum": ["compare", "compose", "change"] },
         "group": { "description": "説明側が群の区分 (年収五分位・世帯類型・有無・東西など) のとき true。区分ごとの値は関係ではなく比較・推移の図にする", "const": true },
-        "metrics": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+        "data": {
+          "description": "軸が使うデータへの参照。指標 (metric) か系列 (series = 家計調査の分析単位。年収階級など属性別の値)。実在は check-datasets の refs、粒度は issues:check が見る",
+          "type": "array",
+          "minItems": 1,
+          "items": { "oneOf": [{ "$ref": "#/definitions/metricRef" }, { "$ref": "#/definitions/seriesRef" }] }
+        }
       }
     }
   },
@@ -32,7 +52,19 @@
           "unit": { "enum": ["prefecture", "municipality", "japan"] },
           "answerability": { "enum": ["relation", "caveat", "myth"] },
           "primaryTheme": { "type": ["string", "null"], "pattern": "^theme:" },
-          "dataNote": { "type": "string", "minLength": 1 },
+          "dataNote": {
+            "description": "使う統計の説明。e-Stat の表 ID (10 桁) は書かず estatTables に、指標と系列は axes の data に書く (ID を文章に埋めると検査で辿れない)",
+            "type": "string",
+            "minLength": 1,
+            "not": { "pattern": "[0-9]{10}" }
+          },
+          "estatTables": {
+            "description": "答えに使う e-Stat の表 ID (statsDataId)。指標や系列になっていない表を指すときに書く",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[0-9]{10}$" }
+          },
           "pitfall": { "type": "string", "minLength": 1 },
           "queries": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
           "revenue": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["広告", "データ", "ノウハウ", "実務"] } },

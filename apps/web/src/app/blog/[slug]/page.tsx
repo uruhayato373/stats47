@@ -225,7 +225,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
     // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
     const rail = (
-        <>
+        // 右レールは広告インテントの対象外にする (ad-intent-scope.ts)。contents なので右レールの格子の並びは変わらない
+        <div className="google-anno-skip contents">
             {/* 出し分けは ArticleShell の右レールと同じ shell コンテナ 988px 基準 (ビューポートの lg を使わない) */}
             <div className="hidden @min-[988px]/shell:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
 
@@ -293,7 +294,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
 
             <OperatorProfileCard />
-        </>
+        </div>
     );
     // レール末尾: ここまでが右レールの静的範囲 (check-ad-placement.cjs と広告配置の契約テストが範囲の終わりの目印に使う)
 
@@ -327,7 +328,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <PanelGrid>
                     <ArticleCard>
                             {/* 記事ヘッダー */}
-                            <header className="border-b border-border pb-4">
+                            <header className="google-anno-skip border-b border-border pb-4">
                                 {/* 肩書きと PR 表記は別の行の muted テキストにする (区切りの「・」が狭い幅で行末に残らない) */}
                                 <div className="mb-2 text-xs text-muted-foreground">
                                     <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
@@ -372,7 +373,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             />
 
                             {/* データ出典 (chart source.json から派生。本文に手書きしない) */}
-                            <DataSourceList sources={dataSources} surface="blog_source" />
+                            <div className="google-anno-skip"><DataSourceList sources={dataSources} surface="blog_source" /></div>
 
                             {/* 右レールが出ない幅では、データの確認先を本文の後ろに置く (本文より先に出さない) */}
                             <div className="mt-6 @min-[988px]/shell:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>

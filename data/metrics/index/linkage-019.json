@@ -414,6 +414,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:onion-consumption-expenditure",
           "kind": "ranking"
         }
@@ -639,6 +643,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:onion-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
@@ -718,19 +726,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
+          "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -743,14 +743,6 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -803,19 +795,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
+          "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -828,14 +812,6 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {

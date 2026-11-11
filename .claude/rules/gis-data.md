@@ -13,16 +13,16 @@ GIS を扱う agent (`gis-curator` / `gis-pipeline-runner` / `geo-analysis-curat
 
 > 背景: 純メタが永続/ローカル D1 `gis_datasets` に寄せられ「新規は手動 INSERT」だった (旧 plan
 > stateless-stargazing-teapot Phase 2)。これは完全DBレス doctrine と矛盾し SQLite を消すとメタが
-> 失われた。2026-06-21 にメタを git TS (`datasets.ts`) に戻し DBレス化。正典: `docs/01_技術設計/02_データアーキテクチャ.md`。
+> 失われた。2026-06-21 にメタを git TS に戻し DBレス化、2026-11-11 に台帳 `geo.ksj-datasets` (`data/geo/ksj/`) へ移した。正典: `docs/01_技術設計/02_データアーキテクチャ.md`。
 
 ## SSOT 構造 (どのデータがどこにあるか)
 
 | データ | SSOT | 形 | 備考 |
 |---|---|---|---|
-| 登録データセットのメタ + ranking 定義 | **`packages/gis/src/mlit-ksj/datasets.ts`** (git TS) | `GIS_DATASETS: GisDatasetMeta[]` | name/category/geometryType/coverage/license/stats47Category/isRankingTarget/rankingConfig/latestVersion |
+| 登録データセットのメタ + ranking 定義 | **台帳 `geo.ksj-datasets`** (`data/geo/ksj/datasets.json` + Schema。読み込み口 `datasets.ts`) | `GIS_DATASETS: GisDatasetMeta[]` | name/category/geometryType/coverage/license/stats47Category/isRankingTarget/rankingConfig/latestVersion |
 | pipeline 技術設定 | **`packages/gis/src/mlit-ksj/registry.ts`** (git TS) | `KSJ_CODE_CONFIG: Map` | downloadUrlPattern/geojsonDirInZip/propertyMap/simplifyOptions |
 | 候補メタの superset (126 件) | `packages/database/seed/ksj-catalog.json` (git) | JSON snapshot | jpksj-api フォールバック。`seed-ksj-catalog.ts` が status='available' で投入 |
-| 公開可能な GIS 原典 (TopoJSON 等) | **R2** `gis/mlit-ksj/{dataId}/{version}/` | gzip TopoJSON + manifest | `license-policy.ts`が`public-r2-eligible`と判定したものだけ。本番アプリ・Remotion が読む |
+| 公開可能な GIS 原典 (TopoJSON 等) | **R2** `gis/mlit-ksj/{dataId}/{version}/` | gzip TopoJSON + manifest | 台帳 `geo.ksj-license-policy` (読み込み口 `license-policy.ts`) が`public-r2-eligible`と判定したものだけ。本番アプリ・Remotion が読む |
 | 非商用・審査中の GIS 原典 | 公式配布元 + ローカル作業キャッシュ `.local/r2/gis/mlit-ksj/...` | zip / TopoJSON | **public R2へ置かない**。ローカルキャッシュはSSOTではなく再取得可能な作業物 |
 | ランキング観測値 | **R2** `app/stats/<key>/values.json` | JSON | GIS ranking も他 metric と同じR2配信。公開構造化データgateを通す |
 | Geo分析の途中artifact・lineage・集計 | **R2** `app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json}` | JSON | 定義はgit TS。47県coverageと保存則を`geo-analysis-curator`が監査 |
@@ -32,13 +32,13 @@ GIS を扱う agent (`gis-curator` / `gis-pipeline-runner` / `geo-analysis-curat
 
 **「D1 gis_datasets」= 上記ローカル使い捨て SQLite** であり Cloudflare 永続/リモート D1 ではない (廃止済)。
 取得状態はSQLiteの `status='imported'` や単一オブジェクトの存在では判定しない。2026-08-30追加の
-公開取得対象は `official-policy.ts` の公式アーカイブ数と、R2のscope別 `manifest.json` 数が一致した場合だけ
+公開取得対象は台帳 `geo.ksj-official-policy` (読み込み口 `official-policy.ts`) の公式アーカイブ数と、R2のscope別 `manifest.json` 数が一致した場合だけ
 完了とする。既存pipelineデータはR2実体から導出する。
 
 ## データフロー
 
 ```
-datasets.ts (メタ SSOT) + registry.ts (技術設定) + ksj-catalog.json (候補)
+台帳 geo.ksj-datasets (メタ SSOT) + registry.ts (技術設定) + ksj-catalog.json (候補)
   │  run-pipeline.ts <dataId> / acquire-public-ksj.ts
   │  → 公式配布manifest選択 → zip download → TopoJSON + scope別provenance manifest
   ▼
@@ -63,21 +63,21 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 
 ## 新規データセット追加手順 (手動 SQLite INSERT は禁止)
 
-1. `datasets.ts` の `GIS_DATASETS` にエントリ追加 (メタ + ranking 定義)
+1. 台帳 `geo.ksj-datasets` の `datasets` にエントリ追加 (メタ + ranking 定義)
 2. `registry.ts` の `KSJ_CODE_CONFIG` に技術設定 (downloadUrlPattern 等) 追加。
    **属性に県が入っているデータセットは `prefectureSource` を宣言する** (下記 §県の帰属)
-3. 公式詳細URL・`latestVersion`・候補側別ID (`candidateAliases`) を `datasets.ts` に記録
+3. 公式詳細URL・`latestVersion`・候補側別ID (`candidateAliases`) を台帳に記録
 4. `run-pipeline.ts <dataId>` で download→変換。公式ページ探索型は `npm run acquire:public-ksj --workspace packages/gis -- --data-id <ID> --apply`
 5. ranking 対象なら `generate-ksj-stats-values.ts` で観測値を作る (下記 §県別集計)
 6. 公開条件gate後に `r2-publisher` が限定prefixをpushし、`build:data-catalog` → `check:data-catalog`
 
-> ranking 定義 (`rankingConfig`) は datasets.ts に統合済 (旧 `seed-from-registry.ts` の RANKINGS 配列は廃止)。
+> ranking 定義 (`rankingConfig`) は台帳に統合済 (旧 `seed-from-registry.ts` の RANKINGS 配列は廃止)。
 > ranking 対象は `isRankingTarget: true` + `rankingConfig[]` を持たせる。年は 4 桁 (`yearCode`、estat-api.md 準拠)。
 
 ## 商用利用・公開ライセンス境界
 
-判定のコードSSOTは`packages/gis/src/mlit-ksj/license-policy.ts`。公式の個別データページにある利用条件を
-`datasets.ts`へ記録し、元データの公開と商用成果物を同じ「利用可」で済ませない。
+判定表の正本は台帳 `geo.ksj-license-policy`。公式の個別データページにある利用条件を
+台帳 `geo.ksj-datasets` へ記録し、元データの公開と商用成果物を同じ「利用可」で済ませない。
 
 | license | 元TopoJSONのpublic R2 | 広告・販売を伴う成果物 | 公開JSON/CSV |
 |---|---|---|---|
@@ -91,7 +91,7 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は作っていない)。
 
 同じデータでも使い方で条件が変わるもの (N06 高速道路時系列は現況なら CC BY 4.0、時系列なら非商用) は、
-`datasets.ts` の `usageTerms` に使い方ごとの条件と公式ページの文言・確認日を書き、`resolveKsjUsageTerms` で引く。
+台帳の `usageTerms` に使い方ごとの条件と公式ページの文言・確認日を書き、`resolveKsjUsageTerms` で引く。
 利用条件を他の台帳 (交通網の変遷など) に複製しない。
 
 ## 地図の土台 (2026-11-06)
@@ -107,7 +107,7 @@ N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は
 
 ## 台帳の ID と参照整合
 
-`datasets.ts` は `as const satisfies` で書き、dataId から `KsjDataId` 型を導く。gis パッケージ内の台帳は
+`datasets.ts` は台帳のキーから `KsjDataId` 型を導く。gis パッケージ内の台帳は
 `KsjDataId` で参照し、存在しない ID は型検査で落とす。data-configs (GIS 一覧・単体ページ・指標の `ksjDataId`) は
 gis に依存できないので、`packages/gis/src/mlit-ksj/__tests__/dataset-references.test.ts` が R2 なしで参照整合を検査する
 (pre-commit は台帳を積んだときだけ、CI は `test:packages`)。公式ページ URL の既存の欠けは同テストの縮小専用一覧で管理する。
@@ -118,7 +118,7 @@ gis に依存できないので、`packages/gis/src/mlit-ksj/__tests__/dataset-r
 商用可の一次資料へ置換、権利者/事務局の許諾の証跡、または非データベース成果だけに縮退するまで公開更新しない。
 
 生成時だけでなく汎用R2 publisher（diff-push、exact asset、wrangler）も
-`ksj-publication-guard.ts`で全候補をPUT前に検査する。判定は`datasets.ts`、全metricの実source、`license-policy.ts`から導出し、
+`ksj-publication-guard.ts`で全候補をPUT前に検査する。判定は台帳 `geo.ksj-datasets`、全metricの実source、`license-policy.ts`から導出し、
 未登録KSJ、公開不可の原典、同原典由来の観測値を拒否する。旧stagingや同期manifestの一致を許可根拠にしない。
 一次資料へ置換した道の駅・漁港KSJは、現行configのrecipe hash・原典SHA・版日付・47県の一意性・全国合計も照合する。
 sourceを書き換えただけでは同じkeyの旧values.jsonを公開できない。取得カタログは公開禁止原典の撤去を「R2不足」に戻さない。
@@ -157,7 +157,7 @@ A42/A43/A44/18のように同梱GeoJSON自体がUTF-8でない場合は、検証
 ## 県別集計 → `app/stats` (完全DBレス)
 
 `packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts` が
-datasets.ts + R2 の KSJ topojson から `app/stats/<key>/values.json` を決定的に作る。
+台帳 `geo.ksj-datasets` + R2 の KSJ topojson から `app/stats/<key>/values.json` を決定的に作る。
 SQLite を経由しない。集計の純関数は `ksj-stats-core.ts` (テスト 10 件)。
 
 ```bash
@@ -166,7 +166,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
 ```
 
 - **未解決が 1 件でもあれば書かずに終了する** (推測で別の県へ計上しない)
-- 「1 レコード = 1 施設」でないデータセットは `datasets.ts` の `dedupeByProperties` で畳む。
+- 「1 レコード = 1 施設」でないデータセットは台帳の `dedupeByProperties` で畳む。
   P03 は**号機ごと**に 1 レコードなので `unit:"か所"` と一致しない (原発 68 → 21 施設)。
   P12 は同じ資源を点/線/面の 3 系統で持つので資源 ID で畳む
 - **畳むキーは名前だけにしない**。青森の東通原発は東北電力と東京電力の 2 か所が同名で別住所にあり、
@@ -176,14 +176,14 @@ npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
 
 | NG | OK |
 |---|---|
-| ローカル SQLite に手動 INSERT して「真実源」にする | `datasets.ts` を編集して再 seed |
-| 永続/リモート D1 を GIS の SSOT として復活させる | git TS (datasets.ts/registry.ts) + R2 |
+| ローカル SQLite に手動 INSERT して「真実源」にする | 台帳 `geo.ksj-datasets` を編集して再 seed |
+| 永続/リモート D1 を GIS の SSOT として復活させる | 台帳 geo.ksj-datasets + registry.ts + R2 |
 | SQLiteのstatus/file_countや1ファイル存在を取得済み判定に使う | 公式アーカイブ数 = R2完了manifest数で判定 |
 | 本番アプリから gis_datasets を query | R2 `gis/mlit-ksj/...` を fetch |
-| 手編集の生成表を真実源にする | 登録一覧は `datasets.ts` (git TS) が真実源 (旧 doc 04/generate-docs は 2026-07-12 廃止) |
+| 手編集の生成表を真実源にする | 登録一覧は台帳 `geo.ksj-datasets` が真実源 (旧 doc 04/generate-docs は 2026-07-12 廃止) |
 | **座標から最寄りの県庁所在地で県を決める** | `prefecture-assign.ts` の 3 段 (決まらなければ null) |
 | **全プロパティを走査して「それらしい値」を県コードに使う** | `registry.ts` の `prefectureSource` で明示宣言 |
-| **metric config も R2 データも無い ranking を datasets.ts に残す** | 実体が無ければ `isRankingTarget:false` か定義削除 (soft 404 になる) |
+| **metric config も R2 データも無い ranking を台帳に残す** | 実体が無ければ `isRankingTarget:false` か定義削除 (soft 404 になる) |
 | **`non-commercial`を「加工したから自由」とみなしてpublic R2/JSONへ置く** | 元データはlocal-only。非DB空間演算結果以外は許諾の証跡か商用可ソースへ置換 |
 
 ## 検証
@@ -201,7 +201,7 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 
 | agent | 責務 |
 |---|---|
-| `gis-curator` | datasets.ts / registry.ts の SSOT 管理、データセット lifecycle (register/deprecate)、メタ整合、本ルール・`packages/gis/src/mlit-ksj/README.md` (モジュール設計) の維持 |
+| `gis-curator` | 台帳 geo.ksj-datasets / registry.ts の SSOT 管理、データセット lifecycle (register/deprecate)、メタ整合、本ルール・`packages/gis/src/mlit-ksj/README.md` (モジュール設計) の維持 |
 | `gis-pipeline-runner` | run-pipeline (download→TopoJSON+provenance)、全県/全1次メッシュ取得、R2実体監査。R2 push は `r2-publisher` に委譲 |
 | `geo-analysis-curator` | 複数GISレイヤーのrole、決定的空間演算stage、県別途中artifact、lineage、保存則、canonicalサイト接続 |
 
@@ -210,7 +210,7 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 ## 関連
 
 - 型: `packages/gis/src/mlit-ksj/types.ts` (`KsjCategory`/`KsjGeometryType`/`KsjCoverage`/`KsjLicense`/`PrefectureSource`)
-- メタ SSOT: `packages/gis/src/mlit-ksj/datasets.ts`
+- メタ SSOT: 台帳 `geo.ksj-datasets` (読み込み口 `packages/gis/src/mlit-ksj/datasets.ts`)
 - 技術設定: `packages/gis/src/mlit-ksj/registry.ts` (`prefectureSource` を含む)
 - **県の帰属 (純関数)**: `packages/gis/src/mlit-ksj/prefecture-assign.ts`
 - **県別集計 (純関数)**: `packages/gis/src/mlit-ksj/ksj-stats-core.ts`
@@ -221,5 +221,5 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 - スキル: `.claude/skills/db/fetch-mlit-ksj/SKILL.md`
 - Geo分析標準/skill: `.claude/rules/geo-analysis-standards.md` / `.claude/skills/gis/build-geo-analysis/SKILL.md`
 - SNS バズ地図での消費 (KSJ topojson → 点プロット/点→自治体カード): `.claude/rules/buzz-map-standards.md` §4 `ksj`/`mlit-dpf` レーン
-- モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: `datasets.ts`
+- モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: 台帳 `geo.ksj-datasets`
 - データ層: `docs/01_技術設計/02_データアーキテクチャ.md` / `packages/database/README.md`

@@ -2347,6 +2347,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shellfish-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2383,6 +2391,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:shellfish-group-consumption-quantity",
           "kind": "ranking"
@@ -2426,10 +2442,6 @@
         },
         {
           "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2479,10 +2491,6 @@
         },
         {
           "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2768,11 +2776,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -3035,11 +3039,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {

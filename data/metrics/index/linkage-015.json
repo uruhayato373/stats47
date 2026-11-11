@@ -2459,11 +2459,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2472,6 +2472,14 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -2710,11 +2718,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2723,6 +2731,14 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -5046,10 +5062,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
@@ -5313,10 +5325,6 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
         },
         {
           "pageId": "blog:hokkaido-food-culture",
@@ -8409,15 +8417,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -8656,15 +8656,7 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {

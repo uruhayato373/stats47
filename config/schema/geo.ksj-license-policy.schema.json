@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "国土数値情報 (KSJ) の利用条件の判定表",
+  "description": "data/geo/ksj/license-policy.json の形状契約。データセットごとではなく利用条件の区分 (license) ごとの判定表。KSJ の利用条件を、元データの公開と商用成果物の 2 軸へ決定的に展開する。non-commercial でも旧約款は「GIS による空間演算結果 (データベースでないもの)」を出典・加工者表示付きで利用できるとしているが、公開 JSON/CSV や元 TopoJSON はその例外に含めず、許諾の証跡なしでは公開しない。policies のキーが区分 (geo.ksj-datasets の license が指す)。区分が無い・未知のときは unassessed を返す。読み込み口は packages/gis/src/mlit-ksj/license-policy.ts。",
+  "type": "object",
+  "required": ["policies", "unassessed"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "policies": {
+      "type": "object",
+      "required": ["cc-by-4.0", "cc-by-4.0-partial", "commercial-ok", "non-commercial"],
+      "propertyNames": { "enum": ["cc-by-4.0", "cc-by-4.0-partial", "commercial-ok", "non-commercial"] },
+      "additionalProperties": { "$ref": "#/definitions/policy" }
+    },
+    "unassessed": { "$ref": "#/definitions/policy" }
+  },
+  "definitions": {
+    "policy": {
+      "type": "object",
+      "required": ["sourcePublication", "commercialUse", "publicStructuredOutputAllowed", "attributionRequired"],
+      "additionalProperties": false,
+      "properties": {
+        "sourcePublication": { "description": "元データや TopoJSON を public R2 へ複製できるか", "enum": ["unassessed", "local-only", "review-required", "public-r2-eligible"] },
+        "commercialUse": { "description": "広告・販売を伴う成果物で使える範囲", "enum": ["unassessed", "allowed-with-attribution", "manual-review", "spatial-result-only"] },
+        "publicStructuredOutputAllowed": { "description": "公開 JSON や CSV のような構造化された派生データを無審査で配信できるか", "type": "boolean" },
+        "attributionRequired": { "type": "boolean" }
+      }
+    }
+  }
+}

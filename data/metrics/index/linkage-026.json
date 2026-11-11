@@ -2817,6 +2817,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:saitama-food-culture",
           "kind": "blog"
         },
@@ -2826,6 +2830,10 @@
         },
         {
           "pageId": "blog:shochu-expenditure-vs-sake-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -2892,6 +2900,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:saitama-food-culture",
           "kind": "blog"
         },
@@ -2901,6 +2913,10 @@
         },
         {
           "pageId": "blog:shochu-expenditure-vs-sake-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -4649,6 +4665,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
@@ -4703,6 +4723,10 @@
         },
         {
           "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
           "kind": "blog"
         },
         {
@@ -5096,15 +5120,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -5121,10 +5137,6 @@
         },
         {
           "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -5183,15 +5195,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -5208,10 +5212,6 @@
         },
         {
           "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -5264,6 +5264,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
@@ -5273,6 +5281,10 @@
         },
         {
           "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
@@ -5325,6 +5337,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
@@ -5334,6 +5354,10 @@
         },
         {
           "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
@@ -5442,11 +5466,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
+          "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
         {
@@ -5499,11 +5527,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okayama-food-culture",
+          "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
         {
@@ -5569,6 +5601,10 @@
         },
         {
           "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -5814,6 +5850,10 @@
         },
         {
           "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -6658,11 +6698,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kanagawa-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -6675,10 +6715,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -6737,7 +6773,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kanagawa-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -6746,10 +6782,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -7697,11 +7729,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:sea-bream-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -7976,7 +8016,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:saga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {

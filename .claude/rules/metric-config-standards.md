@@ -71,12 +71,8 @@ paths:
 
 ## category キー (17 軸固定)
 
-`landweather` / `population` / `laborwage` / `agriculture` / `miningindustry` / `commercial` /
-`economy` / `construction` / `energy` / `tourism` / `educationsports` / `administrativefinancial` /
-`safetyenvironment` / `socialsecurity` / `international` / `infrastructure` / `ict`
-
-- SSOT は `packages/data-configs/src/types.ts` の `CATEGORY_KEYS` (型 `CategoryKey`)。表示名/アイコンは
-  `categories.ts` の `CATEGORY_DEFS`。
+- SSOT はカテゴリマスタ (カタログ id `categories.master`)。型 `CategoryKey` はそこから生成する
+  (`npm run build:category-keys --workspace=@stats47/data-configs`)。
 - **`category` は `CategoryKey` union 型なので無効キーはコンパイルエラー**になる。新規キーを増やさない。
 - category は「e-Stat 機械分類の内部 backbone」であり、ユーザー向け主要ナビは theme
   (`/themes/*`)。役割分担: `docs/01_技術設計/03_情報設計.md`。
@@ -560,7 +556,7 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 
 ## 関連
 
-- 型: `packages/data-configs/src/types.ts` (`MetricConfig` / `CategoryKey` / `CATEGORY_KEYS`)
+- 型: `packages/data-configs/src/types.ts` (`MetricConfig`)。`CategoryKey` は `category-keys.generated.ts`
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
 - e-Stat 年の正規化: `.claude/rules/estat-api.md`
 - タクソノミー役割分担: `docs/01_技術設計/03_情報設計.md`

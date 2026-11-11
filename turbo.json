@@ -35,7 +35,19 @@
         "$TURBO_DEFAULT$",
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
-        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+        "$TURBO_ROOT$/data/themes/catalogs/*.json",
+        "$TURBO_ROOT$/data/themes/viewpoints/*.json",
+        "$TURBO_ROOT$/data/ads/*.json",
+        "$TURBO_ROOT$/data/site/url-history/*.json",
+        "$TURBO_ROOT$/data/geo/ksj/*.json",
+        "$TURBO_ROOT$/data/geo/analyses/*.json",
+        "$TURBO_ROOT$/data/geo/source-pages/*.json",
+        "$TURBO_ROOT$/data/open-data/**/*.json",
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "lint": {
@@ -43,7 +55,19 @@
         "$TURBO_DEFAULT$",
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
-        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+        "$TURBO_ROOT$/data/themes/catalogs/*.json",
+        "$TURBO_ROOT$/data/themes/viewpoints/*.json",
+        "$TURBO_ROOT$/data/ads/*.json",
+        "$TURBO_ROOT$/data/site/url-history/*.json",
+        "$TURBO_ROOT$/data/geo/ksj/*.json",
+        "$TURBO_ROOT$/data/geo/analyses/*.json",
+        "$TURBO_ROOT$/data/geo/source-pages/*.json",
+        "$TURBO_ROOT$/data/open-data/**/*.json",
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "type-check": {
@@ -51,7 +75,19 @@
         "$TURBO_DEFAULT$",
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
-        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+        "$TURBO_ROOT$/data/themes/catalogs/*.json",
+        "$TURBO_ROOT$/data/themes/viewpoints/*.json",
+        "$TURBO_ROOT$/data/ads/*.json",
+        "$TURBO_ROOT$/data/site/url-history/*.json",
+        "$TURBO_ROOT$/data/geo/ksj/*.json",
+        "$TURBO_ROOT$/data/geo/analyses/*.json",
+        "$TURBO_ROOT$/data/geo/source-pages/*.json",
+        "$TURBO_ROOT$/data/open-data/**/*.json",
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "test": {
@@ -62,7 +98,19 @@
         "$TURBO_DEFAULT$",
         "$TURBO_ROOT$/data/metrics/**/*.ts",
         "$TURBO_ROOT$/data/metric-sources/**/*.ts",
-        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+        "$TURBO_ROOT$/data/themes/catalogs/*.json",
+        "$TURBO_ROOT$/data/themes/viewpoints/*.json",
+        "$TURBO_ROOT$/data/ads/*.json",
+        "$TURBO_ROOT$/data/site/url-history/*.json",
+        "$TURBO_ROOT$/data/geo/ksj/*.json",
+        "$TURBO_ROOT$/data/geo/analyses/*.json",
+        "$TURBO_ROOT$/data/geo/source-pages/*.json",
+        "$TURBO_ROOT$/data/open-data/**/*.json",
+        "$TURBO_ROOT$/data/surveys/master/*.json",
+        "$TURBO_ROOT$/data/surveys/analysis-units/*.json",
+        "$TURBO_ROOT$/data/surveys/editorial/*.json",
+        "$TURBO_ROOT$/data/categories/*.json",
+        "$TURBO_ROOT$/data/categories/topics/*.json"
       ]
     },
     "dev": {

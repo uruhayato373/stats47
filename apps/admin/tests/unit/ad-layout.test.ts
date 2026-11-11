@@ -79,7 +79,7 @@ describe("latestAdLayoutManifest", () => {
 
 describe("placementDefinitions", () => {
   it("AdSense の行は adsenseSlot か marker の定数名からユニットを決め、PR の行にはユニットを付けない", async () => {
-    root = makeFixtureRoot({ stateFiles: { "config/ads/placements.json": LEDGER } });
+    root = makeFixtureRoot({ stateFiles: { "data/ads/placements.json": LEDGER } });
     const defs = (await load(root)).placementDefinitions();
     expect(defs.survey.map((d) => [d.slotName, d.unit, d.condition])).toEqual([
       ["本文の AdSense", "HUB_INCONTENT", null],
@@ -94,7 +94,7 @@ describe("placementDefinitions", () => {
       slotTypes: [{ id: "ad-row", name: "本文の広告の段", provider: "mixed", devices: ["desktop", "mobile"] }],
       pages: { blog: [{ slot: "ad-row", region: "body", position: "上", marker: "x", cells: [{ kind: "adsense" }, { kind: "affiliate" }, { kind: "adsense", adsenseSlot: "HUB_INCONTENT" }] }] },
     });
-    root = makeFixtureRoot({ stateFiles: { "config/ads/placements.json": ledger } });
+    root = makeFixtureRoot({ stateFiles: { "data/ads/placements.json": ledger } });
     expect((await load(root)).placementDefinitions().blog[0].cells).toEqual([
       { kind: "adsense", unit: null },
       { kind: "affiliate", unit: null },

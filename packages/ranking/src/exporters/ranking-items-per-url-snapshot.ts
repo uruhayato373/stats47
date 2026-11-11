@@ -14,7 +14,7 @@ import {
   type CategoryTopicCatalog,
 } from '@stats47/data-configs/topics';
 
-import surveysMaster from '../data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 import { buildSurveyItemsSnapshot } from './survey-items-snapshot';
 
 /** categoryKey は string なので、レジストリ側の Partial<Record<CategoryKey, …>> を安全に引く */

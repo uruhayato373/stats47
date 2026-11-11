@@ -36,6 +36,7 @@ const AUDITS = [
   { id: "survey-taxonomy", label: "調査分類・survey portfolio・調査の台帳と切り口台帳", timeout: 35 },
   { id: "note-circulation", label: "note の公開記事・導線・マガジン・カード", timeout: 60 },
   { id: "note-product-cards", label: "note の商品カード", timeout: 30 },
+  { id: "note-published", label: "note の公開記事の採点 (型でない画像・重複・カードの文言)", timeout: 25 },
   { id: "kdp-search-ranks", label: "KDP の本の Kindle 検索順位", timeout: 10 },
   { id: "blog-remediation", label: "ブログの是正キュー・公開済み原稿の掃除", timeout: 25 },
   { id: "content-type-fit", label: "4 型の検査・型に合っていない記事の案", timeout: 10 },

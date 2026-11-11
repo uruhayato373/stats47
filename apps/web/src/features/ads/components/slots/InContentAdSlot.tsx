@@ -22,7 +22,7 @@ interface InContentAdSlotProps {
  * 本文導線中の記事内 AdSense 枠（エディトリアル罫線 + "広告" ラベル）。
  *
  * fluid / article フォーマット想定。予約の高さと開発中の代わりの表示は、広告の枠の台帳
- * (config/ads/placements.json の adsense-body) の箱を AdSenseAd へ渡して決める。
+ * (data/ads/placements.json の adsense-body) の箱を AdSenseAd へ渡して決める。
  * slot.slotId が空文字（未発行プレースホルダ）なら何も描画しない（graceful degradation）。
  *
  * 配置規約: ハブ / 一覧 / 記事面のセクション区切りに 1 枠まで（fluid はページ 1 枠）。

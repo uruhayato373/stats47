@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-11-10T23:19:28.362Z",
+  "account": "stats47",
+  "mode": "commit",
+  "measurementContract": {
+    "site": "GA4 sessionSource=note.com × landingPagePlusQueryString（計測用UTMは付けず、検証済み画像版s47_ogpだけを付与）",
+    "noteToNote": "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
+    "magazine": "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
+    "product": "有料noteへの直接カードはnote内遷移（記事間clickは取得不可）。サイト商品ページ経由のカードは /products/<slug>/from/note/<noteId> と検証済み画像版s47_ogpを使い、サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送して記事単位で集計"
+  },
+  "articles": [
+    {
+      "key": "recovered-n80e58a01f660",
+      "noteKey": "n80e58a01f660",
+      "noteUrl": "https://note.com/stats47/n/n80e58a01f660",
+      "baselineViews": null,
+      "nextBestArticle": "recovered-n03844512d58a",
+      "nextNoteUrl": "https://note.com/stats47/n/n03844512d58a",
+      "nextBaselineViews": null,
+      "magazine": "s47-economy",
+      "magazineUrl": "https://note.com/stats47/m/m2604e003aac4",
+      "siteUrl": "https://stats47.jp/ranking/per-capita-prefectural-income-h27",
+      "productUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "datasetNoteUrls": [],
+      "linkRepairs": [],
+      "forceNormalizeLegacy": false,
+      "before": {
+        "bodySignature": "eb0ae622",
+        "hashtagCount": 99,
+        "price": 0,
+        "separator": null,
+        "hasDraft": true
+      },
+      "pending": true,
+      "wouldAddNextNote": false,
+      "wouldAddMagazine": false,
+      "wouldAddSite": false,
+      "wouldAddProduct": false,
+      "wouldAddDataset": false,
+      "wouldDedupeFooterHeading": true,
+      "wouldRewriteDatasetWording": true,
+      "wouldNormalizeLegacyLinks": false,
+      "result": {
+        "status": "updated",
+        "beforeBodySignature": "eb0ae622",
+        "afterBodySignature": "615b0628",
+        "hashtagCount": 99,
+        "apiStatus": 200,
+        "identicalDraft": false,
+        "draftCompatibility": "card_metadata_only",
+        "paidBodyPreservedByPayload": false,
+        "changed": true,
+        "normalizedLegacyLinks": false,
+        "addedNextNote": false,
+        "addedMagazine": false,
+        "addedSite": false,
+        "addedProduct": false,
+        "addedDataset": false,
+        "dedupedFooterHeading": true,
+        "rewroteDatasetWording": true,
+        "repairs": []
+      }
+    }
+  ]
+}

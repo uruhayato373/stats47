@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import surveysMaster from '../../../ranking/src/data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 import { METRICS_REGISTRY } from '../registry';
 import estatProvenanceJson from '../ssds/estat-provenance.generated.json';
 import ssdsProvenanceJson from '../ssds/ssds-provenance.generated.json';
@@ -17,7 +17,7 @@ import {
 
 /**
  * 合成 id のラチェット (2026-10-26 実測)。**増えたら fail、減ったら定数を下げる** (縮小専用)。
- * 減らし方: 原典を surveys.json に足し、displayname-to-survey / source-name-to-survey の辞書へ写像する。
+ * 減らし方: 原典を調査マスタ (surveys.master) に足し、対応表 (surveys.source-names) へ写像する。
  */
 const MAX_SYNTHETIC_SURVEY_IDS = 55;
 const MAX_METRICS_WITH_SYNTHETIC_SURVEY = 157;

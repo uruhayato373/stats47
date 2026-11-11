@@ -7,7 +7,7 @@
  * 旧 result.dNN を保存したまま、窓不足等の再観測は result.rechecks.dNN に追記する。
  * baselineScopes / baselineStatuses が不明な旧 baseline は effect 確定に使わない。
  * verdict の確定は本スクリプトの --verdict 経由でのみ行う
- * (手編集禁止)。規律 (schema 正典 data/themes/README.md):
+ * (手編集禁止)。規律 (形の正典: 台帳 themes.experiments の Schema):
  *   - d7 は異常検知のみ (verdict 確定不可)
  *   - d28 = 28 日窓で暫定 (effect 確定不可) / d56 = 公開後 56 日で基本判定
  *   - effect/* 確定は result + evidenceRefs 必須 (validator E3 が enforce)
@@ -19,7 +19,7 @@
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs \
  *     --verdict THEME-EXP-001 effect-partial --evidence <ref> [--note "<季節性等の注記>"]
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'
- *     # 実験を登録する (手編集禁止の書き込み口)。json は README schema のエントリ 1 件。
+ *     # 実験を登録する (手編集禁止の書き込み口)。json は themes.experiments の Schema のエントリ 1 件。
  *     # verdict は "pending" 固定で付与。evaluateAt 未設定 (デプロイ待ち) も許容 (--check は発火しない)。
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --update-baseline <id> '<json>'
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <YYYY-MM-DD>

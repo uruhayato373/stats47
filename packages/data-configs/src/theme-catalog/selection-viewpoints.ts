@@ -1,7 +1,7 @@
 /**
  * テーマの指標を選ぶ視点のうち、カタログから機械で数えられるものの判定 (pure)。
  *
- * 視点の定義 (文言・重さ・確かめ方) の正本は `config/theme-selection-viewpoints.json`。
+ * 視点の定義 (文言・重さ・確かめ方) の正本は `data/themes/viewpoints/selection.json`。
  * ここは check.kind = "machine" の規則と同じ id の関数だけを持ち、管理画面
  * (`/quality/catalog-audit`) が該当件数と該当箇所を表示する。gate ではない (warn も出さない)。
  * 既存テーマの是正候補を見える場所に並べ、提案のたびに確かめるための材料である。

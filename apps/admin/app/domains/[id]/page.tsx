@@ -7,7 +7,7 @@ import { Grid, Stack } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import { domainOverview } from "@/lib/server/domains";
 
-import domainsConfig from "../../../../../config/domains.json";
+import domainsConfig from "../../../../../data/business/domains.json";
 import { DOMAINS } from "../../../../../config/paths.mjs";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 /**
  * /domains/<id> — 領域の概要 (サイドメニューのグループ名から開く)。
  * 判断に使う画面・構えと狙い・やりかけのカード・担当のエージェント/スキル・文書を 1 画面に並べる。
- * 文書はサイドメニューに置かず、ここの「文書」欄から開く (config/domains.json の navRules)。
+ * 文書はサイドメニューに置かず、ここの「文書」欄から開く (data/business/domains.json の navRules)。
  */
 export default async function DomainPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

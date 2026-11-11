@@ -3312,11 +3312,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukushima-food-culture",
+          "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
         {
@@ -3340,15 +3340,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:wakayama-food-culture",
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {
@@ -3577,7 +3581,7 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:fukushima-food-culture",
+          "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
         {
@@ -3601,6 +3605,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
@@ -3609,11 +3617,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:wakayama-food-culture",
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {
@@ -5265,6 +5273,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
@@ -5337,6 +5349,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"

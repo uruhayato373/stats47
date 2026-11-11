@@ -1,6 +1,6 @@
 /**
  * 事業計画 (packages/data-configs/src/business-plan/) の表示部品。
- * 旧 /strategy の1ページ (991 行) を、領域の正本 config/domains.json の割り振りに合わせて部品へ分けた (2026-10-27)。
+ * 旧 /strategy の1ページ (991 行) を、領域の正本 data/business/domains.json の割り振りに合わせて部品へ分けた (2026-10-27)。
  * 方針は /strategy、計画の詳細は /strategy/business-plan、Geo は /data/geo、X は /sns/geo-plan、note 商品は /product/note-plan が組み立てる。
  * 各部品は自分の見出し (Section / PanelCard) を持ち、ページは並べるだけにする (.claude/rules/admin-ui.md「ページの型と並べ方」)。
  */

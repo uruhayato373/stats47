@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "公式ダッシュボードの研究カタログ (問い・指標・可視化・ストーリー構成)",
+  "description": "data/themes/research/public-dashboards.json の形状契約。列挙の値と URL の許可ホストは .claude/scripts/themes/check-public-dashboard-catalog.mjs が検査する。",
+  "type": "object",
+  "required": ["schemaVersion", "researchedAt", "scope", "stats47ThemeKeys", "dashboards", "stories"],
+  "properties": {
+    "schemaVersion": { "type": "number" },
+    "researchedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "scope": {
+      "type": "object",
+      "required": ["purpose", "inclusions", "exclusions"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "inclusions": { "type": "array", "items": { "type": "string" } },
+        "exclusions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "stats47ThemeKeys": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "dashboards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "publisher", "publisherType", "officialUrl", "status", "platform", "notes"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string" },
+          "publisher": { "type": "string" },
+          "publisherType": { "type": "string" },
+          "officialUrl": { "type": "string", "pattern": "^https://" },
+          "status": { "type": "string" },
+          "platform": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "stories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "dashboardId", "category", "title", "question", "storyPattern", "indicatorFamilies", "visualizations", "geographyLevels", "stats47ThemeKeys", "sourceUrl", "evidenceLevel", "verifiedAt"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "dashboardId": { "type": "string" },
+          "category": { "type": "string" },
+          "title": { "type": "string" },
+          "question": { "type": "string" },
+          "storyPattern": { "type": "string" },
+          "indicatorFamilies": { "type": "array", "items": { "type": "string" } },
+          "visualizations": { "type": "array", "items": { "type": "string" } },
+          "geographyLevels": { "type": "array", "items": { "type": "string" } },
+          "stats47ThemeKeys": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "sourceUrl": { "type": "string", "pattern": "^https://" },
+          "evidenceLevel": { "type": "string" },
+          "verifiedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+        }
+      }
+    }
+  }
+}

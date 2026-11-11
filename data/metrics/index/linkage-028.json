@@ -69,11 +69,19 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:furikake-expenditure-ranking",
           "kind": "blog"
         },
         {
           "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -314,11 +322,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:miso-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -1387,6 +1403,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:spinach-consumption-ranking",
           "kind": "blog"
         },
@@ -1624,6 +1644,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
         },
         {
           "pageId": "blog:spinach-consumption-ranking",
@@ -6726,10 +6750,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -6975,10 +6995,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -6992,10 +7008,6 @@
         },
         {
           "pageId": "blog:strawberry-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
         {
@@ -8479,14 +8491,6 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:chicken-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:icecream-consumption-expenditure",
-          "kind": "blog"
         },
         {
           "pageId": "blog:sugar-consumption-prefecture-gap",

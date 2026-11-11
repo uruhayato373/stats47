@@ -82,6 +82,8 @@ export function canonicalizeNoteEditorBody(body) {
     )
     .replace(/\s+(?:name|id|embedded-content-key|target|rel)="[^"]*"/g, "")
     .replace(/\s+/g, " ")
+    // 中身が空のカード (figure) に編集画面は空白を 1 つ入れ、公開 API は入れないことがある (2026-11-11 に県民所得の記事の更新がこの 1 文字で止まった)
+    .replace(/> <\/figure>/g, "></figure>")
     .trim();
   // note の公開APIは同じリンクを隣接a要素へ分割することがある一方、
   // 編集画面は1要素へ再結合する。URLと表示文字列が同一なら執筆内容の差ではない。
@@ -235,6 +237,21 @@ export function collapseDuplicateFooterHeadings(body) {
   return String(body).replace(pattern, (match) => (seen++ === 0 ? match : ""));
 }
 
+/** 同マガジンの有料データ記事へのカードの見出しと説明。マガジン単位で 1 本を付けるので「この記事の元データ」とは書かない */
+export const DATASET_CARD_HEADING = "関連するデータを手元で使う";
+export const datasetCardLead = (title) => `「${title}」で、同じテーマのデータを手元で開ける形で配布しています。`;
+
+/**
+ * 公開済みの本文に残る旧文言「この記事の元データ」を今の文言へ置き換える。カードの行き先は変えない。
+ * 2026-11-11: 県民所得の記事のカードが「服や靴の価格」の有料記事を指すなど、106 本で文言と行き先が合っていなかった。
+ */
+export function rewriteLegacyDatasetCardWording(body) {
+  return String(body)
+    .replaceAll("<strong>この記事の元データを手元で使う</strong>", `<strong>${DATASET_CARD_HEADING}</strong>`)
+    // 説明文は時期で言い回しが違う (「手元で開ける形で」「表計算ソフトで開ける形で」) ので、カードの説明の「この記事の元データを」だけを替える
+    .replace(/(」で、)この記事の元データを([^<。]*配布しています。)/g, "$1同じテーマのデータを$2");
+}
+
 /**
  * 本文のテキストリンク (`<a href="https://stats47.jp/...">`) に note の記事キーの UTM を付ける
  * (`config/inbound-utm.mjs`)。リンクカード (`<figure>` の中) は note がカードを作れなくなるので触らない。
@@ -252,7 +269,7 @@ export function addNoteTextLinkUtm(body, noteKey) {
 
 export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {}) {
   const original = String(body);
-  let output = collapseDuplicateFooterHeadings(normalizeLegacyStats47Links(original));
+  let output = rewriteLegacyDatasetCardWording(collapseDuplicateFooterHeadings(normalizeLegacyStats47Links(original)));
   // 本文のテキストリンクだけに記事キーの UTM を付ける (カードは下で clean URL のまま足す)
   if (plan.sourceNoteKey) output = addNoteTextLinkUtm(output, plan.sourceNoteKey);
   const dedupedFooterHeading = output !== normalizeLegacyStats47Links(original);
@@ -281,7 +298,7 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
   for (const dataset of datasets) {
     if (hasUrl(output, dataset.noteUrl)) continue;
     additions.push(
-      `<p ${attrs(idFactory())}><strong>この記事の元データを手元で使う</strong><br>${escapeHtml(dataset.lead)}</p>`,
+      `<p ${attrs(idFactory())}><strong>${DATASET_CARD_HEADING}</strong><br>${escapeHtml(dataset.lead)}</p>`,
       noteCard(dataset.noteUrl, dataset.noteKey, idFactory),
     );
   }
@@ -329,6 +346,7 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
     addedProduct: Boolean(productUrl) && additions.some((part) => part.includes(`data-src="${productUrl}"`)),
     addedDataset: datasets.some((dataset) => additions.some((part) => part.includes(`data-src="${dataset.noteUrl}"`))),
     dedupedFooterHeading,
+    rewroteDatasetWording: rewriteLegacyDatasetCardWording(original) !== original,
     additionsPreview: additions.map((part) => part.replace(/\s+/g, " ").slice(0, 90)),
   };
 }

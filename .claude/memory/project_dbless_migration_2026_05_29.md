@@ -55,7 +55,7 @@ metadata:
 - **Part B 完了 (2f487f49)**: ranking-value 7ファイルのvestigial getDrizzle除去 + obsolete D1テスト3件削除。
 - **Part A 進行中 (生成器を1本ずつ DBレス化 + cloud baseline 突合)**:
   - ✅ categories (9a7c8344): 基盤2 categories.ts に lucide icon 追加し完全 SSOT 化。17件 cloud 一致。
-  - ✅ surveys (0aab6086): 41件を `packages/ranking/src/data/surveys.json` に git TS 化。cloud 一致。Source 型は type import 維持。
+  - ✅ surveys (0aab6086): 41件を旧パス `packages/ranking/src/data/surveys.json` に git TS 化 (現在は surveys.master)。cloud 一致。Source 型は type import 維持。
   - ✅ ranking-items per-url (67168f54): item.json/home/category/survey-items を基盤1(item.json)から passthrough+regroup でDBレス化(field写像なし=cloud exact一致: home8/cat population118/item aging-index title・areaType・tags・viz一致)。**SSD list 要**(基盤1 fallbackはprefectureのみ)。dead monolith ranking-items-snapshot 削除。→ **export-master-snapshots は D1-free**。
   - **Part A 実質完了**。follow-up(別scope): config→item.json field refresh / 新規metric(item.json未存在)の生成。
   - ai-content (faq/regionalAnalysis/insights): 別系統(R2 app/ai-content/<key>.json 既存が runtime source、生成は別 AI パイプライン)。Part D で D1 exporter/CRUD/generation 削除 + 既存R2凍結 note(再生成は将来DBレス化)。

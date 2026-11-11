@@ -54,26 +54,10 @@ export const PREF_SILHOUETTE_VARIANTS = [
   "169-dark",
 ];
 
-/** 17 category キー (SSOT: packages/data-configs/src/types.ts CATEGORY_KEYS)。 */
-export const CATEGORY_KEYS = [
-  "landweather",
-  "population",
-  "laborwage",
-  "agriculture",
-  "miningindustry",
-  "commercial",
-  "economy",
-  "construction",
-  "energy",
-  "tourism",
-  "educationsports",
-  "administrativefinancial",
-  "safetyenvironment",
-  "socialsecurity",
-  "international",
-  "infrastructure",
-  "ict",
-];
+/** カテゴリのキー (正本はカテゴリマスタ。表示順)。 */
+function readCategoryKeys(projectRoot) {
+  return readJsonSafe(path.join(projectRoot, datasetPath("categories.master"))).categories.map((c) => c.key);
+}
 
 // ─── 汎用ユーティリティ ─────────────────────────────────
 export async function pMap(items, fn, concurrency = DEFAULT_CONCURRENCY) {
@@ -279,7 +263,7 @@ export async function buildTab(tab, opts) {
       };
     }
     case "category-ogp": {
-      let keys = [...CATEGORY_KEYS];
+      let keys = readCategoryKeys(projectRoot);
       if (limit) keys = keys.slice(0, limit);
       return {
         source: "static",

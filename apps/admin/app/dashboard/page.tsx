@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: "現況レビュー — stats47 admin
 
 /**
  * /dashboard — 現況レビュー。今週の判断に要る要約とリンクだけを置き、明細は各画面に任せる
- * (config/domains.json の navRules「1 画面は 1 つの問いに答える」)。
+ * (data/business/domains.json の navRules「1 画面は 1 つの問いに答える」)。
  * 旧ページの進捗キューは /site/queues、効果測定と機能バックログは /todo、STP はマーケティング戦略の文書へ移した。
  */
 export default function DashboardPage() {

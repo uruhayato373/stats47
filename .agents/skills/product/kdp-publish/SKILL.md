@@ -1,7 +1,7 @@
 ---
 name: kdp-publish
 domain: product
-description: stats47 の Kindle 電子書籍 (EPUB) を Amazon KDP へ Playwright で出品・修正する。出品内容 SoT = config/kdp-listings.json を書籍 id で引き、ログイン済みプロファイルで KDP の出品フォーム (Details/Content/Pricing) へ流し込む。Use when user says [KDPに出品, Kindle出版, 電子書籍を公開, /kdp-publish]. ログイン・税務/銀行情報は人間工程、実公開は --commit + オーナー承認。
+description: stats47 の Kindle 電子書籍 (EPUB) を Amazon KDP へ Playwright で出品・修正する。出品内容 SoT = data/products/kdp/listings.json を書籍 id で引き、ログイン済みプロファイルで KDP の出品フォーム (Details/Content/Pricing) へ流し込む。Use when user says [KDPに出品, Kindle出版, 電子書籍を公開, /kdp-publish]. ログイン・税務/銀行情報は人間工程、実公開は --commit + オーナー承認。
 disable-model-invocation: true
 primary_agent: kdp-operator
 co_agents: [kindle-publisher]
@@ -83,7 +83,7 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
    (文言 grep は「出版」がどのページにもあるので使わない)。成功時に `status:listed`+asin を書き戻し。
    ASIN 割当が遅れる本は `kdp-drafts.mjs` (一覧) で後追いする。
 8. **状態同期**: `--phase status`はASINの有無に関係なく`draft|in_review|live|unknown`、生表示、確認日時、販売開始日をlistingsへ保存する。
-8b. **止めている本・取り下げる本 (2026-09-19)**: `kdp-listings.json` の `status: "blocked-design"` (編集設計が無い 10 冊) は KDP に作らない。`withdrawal` を持つ販売中の本 (S2/S3/S4 の 10 冊) は `--update` も再申請もせず、オーナー指示のうえ
+8b. **止めている本・取り下げる本 (2026-09-19)**: `kdp.listings` の `status: "blocked-design"` (編集設計が無い 10 冊) は KDP に作らない。`withdrawal` を持つ販売中の本 (S2/S3/S4 の 10 冊) は `--update` も再申請もせず、オーナー指示のうえ
     `node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --probe` (メニュー・確認ダイアログの採取だけ) →
     `--commit` で KDP 本棚の「電子書籍の出版停止」を実行する。対象は withdrawal かつ kdpStatus=live かつ ASIN あり
     に限り、行は ASIN + 題名で特定、成功判定は本棚 read-back が「下書き」になること (押せた = 成功にしない)。
@@ -107,7 +107,7 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
 - **偽成功を報告しない**: 未充填/公開未確定なら「公開した」と言わない。
 - **公開は verify ゲートの後ろ**: read-back 全項目 PASS の本しか公開経路に乗らない。
 - **計測はこの口座の stats47 ぶんだけ**: 同一口座に doboku-note が同居する。KDP レポートは
-  `kdp-listings.json` の `asin` 集合でフィルタして読む (混ぜると他サイトの実績を誤認する)。
+  `kdp.listings` の `asin` 集合でフィルタして読む (混ぜると他サイトの実績を誤認する)。
 - **KU (KDP Select 独占) は既定 未登録**。判断はオーナー。
 
 ## スコープ外 (委譲)
@@ -119,5 +119,5 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
 ## 関連
 
 - 規約: `.claude/rules/kindle-publishing-standards.md`
-- スクリプト: `.claude/scripts/kdp/` / SoT: `config/kdp-listings.json` / アカウント: `config/kdp-account.json`
+- スクリプト: `.claude/scripts/kdp/` / SoT: `data/products/kdp/listings.json` / アカウント: `config/kdp-account.json`
 - agent: `.claude/agents/kdp-operator.md` / 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

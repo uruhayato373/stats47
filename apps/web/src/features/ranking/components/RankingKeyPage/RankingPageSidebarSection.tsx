@@ -115,7 +115,7 @@ export function RankingPageSidebarSection({
           枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
       {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <RailAdSlot slot={RANKING_SIDEBAR_TOP} />
-      {/* AdSense と PR の間に調査のカードを置き、広告の枠を隣り合わせにしない (広告の枠の台帳 config/ads/placements.json) */}
+      {/* AdSense と PR の間に調査のカードを置き、広告の枠を隣り合わせにしない (広告の枠の台帳 ads.placements) */}
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
         relatedItems={surveyRelatedItems}

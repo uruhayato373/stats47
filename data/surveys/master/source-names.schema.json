@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/surveys.source-names.schema.json",
+  "title": "出典名と調査の対応表",
+  "description": "出典の書き方 (原典名・指標の displayName・e-Stat の統計表 ID) を調査マスタ (surveys.master) の id へ結ぶ。調査の名前・機関・URL は持たず、マスタだけが持つ。解決の規則は packages/data-configs/src/ssds/source-name-to-survey.ts。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["knownSourceToSurvey", "proposedSourceToSurvey", "cdcat01SourceOverride", "displayNameToSurvey", "statsDataIdToSurveyOverride"],
+  "definitions": {
+    "surveyId": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "nameToSurvey": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "minLength": 1 },
+      "additionalProperties": { "$ref": "#/definitions/surveyId" }
+    }
+  },
+  "properties": {
+    "knownSourceToSurvey": {
+      "description": "SSDS の資料源 (原典名) → 調査 id。解決は known が先 (proposed より優先)",
+      "$ref": "#/definitions/nameToSurvey"
+    },
+    "proposedSourceToSurvey": {
+      "description": "known に無いが頻度の高い原典名 → 調査 id。調査の実体 (名前・機関・URL) は調査マスタの行にある",
+      "$ref": "#/definitions/nameToSurvey"
+    },
+    "cdcat01SourceOverride": {
+      "description": "cdCat01 が Excel に資料源を持たない派生項目への原典名の手当て (値は known / proposed で解決される原典名)",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "type": "string", "minLength": 1 }
+      }
+    },
+    "displayNameToSurvey": {
+      "description": "SSDS 以外の estat 指標の source.displayName → 調査 id",
+      "$ref": "#/definitions/nameToSurvey"
+    },
+    "statsDataIdToSurveyOverride": {
+      "description": "指標に同じ統計表が無く displayName の合意を作れない一次統計の、統計表 ID (10 桁) → 調査。name は出力へそのまま焼く表記",
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[0-9]{10}$" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "$ref": "#/definitions/surveyId" },
+          "name": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

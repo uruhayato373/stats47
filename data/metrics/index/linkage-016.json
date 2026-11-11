@@ -2912,10 +2912,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:ibaraki-food-culture",
           "kind": "blog"
         },
@@ -2929,10 +2925,6 @@
         },
         {
           "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
         {
@@ -2985,10 +2977,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:ibaraki-food-culture",
           "kind": "blog"
         },
@@ -2998,10 +2986,6 @@
         },
         {
           "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
         {
@@ -6202,6 +6186,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:miso-consumption-expenditure",
           "kind": "ranking"
         }
@@ -6431,11 +6423,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:konnyaku-expenditure-ranking",
+          "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:miso-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {

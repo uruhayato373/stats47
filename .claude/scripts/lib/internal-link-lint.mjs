@@ -15,7 +15,7 @@
  *   /ranking/<key> … GONE_RANKING_KEYS にあれば 410 / KNOWN_RANKING_KEYS にも metric config にも
  *                    無ければ soft 404 (38 件の live 実測に対し 38/38 一致・誤検知 0)
  *   /blog/<slug>   … GONE_BLOG_SLUGS にあれば 410
- *   /category/<key>… CATEGORY_KEYS (17 軸) 外なら 404
+ *   /category/<key>… カテゴリマスタ (17 軸) 外なら 404
  *   /areas/<code>  … 01000-47000 以外なら 410
  *   /themes/<slug> … ThemeCatalog から生成した IndicatorSet の theme key 外なら 410
  *   /municipalities/ranking/<key>[/<県コード>]
@@ -27,7 +27,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREF_AREA_CODES } from "./prefectures.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 /**
  * リポジトリルートを上方向に探索して決める。
@@ -56,15 +56,14 @@ const ROOT = findRepoRoot();
 
 const SOURCES = {
   knownRankingKeys: "packages/ranking/src/config/known-ranking-keys.ts",
-  // KNOWN と対で packages/ranking 側が実体 (apps/web の同名ファイルは re-export の殻)。
-  // 殻を指すと readQuotedSet が 0 件を返し、lint が「退役キーへのリンク」を全部見逃す。
-  goneRankingKeys: "packages/ranking/src/config/gone-ranking-keys.ts",
-  goneBlogSlugs: "apps/web/src/config/gone-blog-slugs.ts",
-  blogRedirects: "apps/web/src/config/blog-redirects.ts",
-  categoryKeys: "packages/data-configs/src/types.ts",
+  // 410 と 301 の一覧は URL の履歴の台帳 (data/site/url-history/) が正本
+  goneRankingKeys: datasetPath("site.gone-ranking-keys"),
+  goneBlogSlugs: datasetPath("site.gone-blog-slugs"),
+  blogRedirects: datasetPath("site.blog-redirects"),
+  categoryKeys: datasetPath("categories.master"),
   metricsDir: datasetDir("metrics.definitions"),
   themeSets: "packages/types/src/indicator-sets",
-  geoAnalyses: "packages/data-configs/src/business-plan/m1.ts",
+  geoAnalyses: datasetPath("geo.analyses"),
   // KNOWN_MUNICIPALITY_RANKING_KEYS は TS で計算される集合なので、sync-content-catalog.ts が
   // それを published に焼き込んだ生成索引を読む (鮮度は npm run content:check が検査する)
   municipalityRankingPages: path.join(datasetDir("content.pages"), "municipality-ranking.json"),
@@ -82,6 +81,20 @@ function readQuotedSet(relPath) {
   }
   const src = fs.readFileSync(abs, "utf8");
   return new Set([...src.matchAll(/"([a-z0-9][a-z0-9-]*)"/g)].map((m) => m[1]));
+}
+
+/**
+ * 台帳 JSON の配列から ID を集合として取り出す。ファイルが無い・1 件も読めないときは落とす
+ * (空集合 = lint が全リンクを正常と誤認する)。
+ */
+function readLedgerSet(relPath, listField, idField) {
+  const abs = path.join(ROOT, relPath);
+  if (!fs.existsSync(abs)) {
+    throw new Error(`internal-link-lint: 参照元が見つかりません: ${relPath}`);
+  }
+  const ids = new Set(JSON.parse(fs.readFileSync(abs, "utf8"))[listField].map((row) => row[idField]));
+  if (!ids.size) throw new Error(`internal-link-lint: ${relPath} から ${listField}[].${idField} を 1 件も読めません`);
+  return ids;
 }
 
 /** 必須ファイルを読む (無ければ落とす) */
@@ -106,13 +119,7 @@ function loadKeySets() {
     }
   }
 
-  const catBlock = readRequired(SOURCES.categoryKeys).match(
-    /export const CATEGORY_KEYS = \[([\s\S]*?)\]/,
-  );
-  if (!catBlock) throw new Error("internal-link-lint: CATEGORY_KEYS を抽出できません");
-  const categories = new Set(
-    [...catBlock[1].matchAll(/["']([a-z]+)["']/g)].map((m) => m[1]),
-  );
+  const categories = new Set(JSON.parse(readRequired(SOURCES.categoryKeys)).categories.map((c) => c.key));
 
   const areaCodes = new Set(PREF_AREA_CODES);
 
@@ -129,11 +136,8 @@ function loadKeySets() {
   }
   if (!themes.size) throw new Error("internal-link-lint: theme IndicatorSet 集合が空です");
 
-  const geoBlock = readRequired(SOURCES.geoAnalyses).match(
-    /export const BUSINESS_PLAN_M1_GEO_ANALYSES = \[([\s\S]*?)\] as const/,
-  );
-  if (!geoBlock) throw new Error('internal-link-lint: Geo analysis集合を抽出できません');
-  const geoSlugs = new Set([...geoBlock[1].matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]));
+  // Geo 分析の slug は台帳 (geo.analyses) のキー。公開中の 7 分析すべてを実在として扱う
+  const geoSlugs = new Set(Object.keys(JSON.parse(readRequired(SOURCES.geoAnalyses)).analyses));
   if (!geoSlugs.size) throw new Error('internal-link-lint: Geo analysis集合が空です');
 
   const municipalityRanking = new Set(
@@ -157,10 +161,10 @@ function loadKeySets() {
     municipalityPrefectureRanking,
     geoSlugs,
     rankingKnown: known,
-    rankingGone: readQuotedSet(SOURCES.goneRankingKeys),
-    blogGone: readQuotedSet(SOURCES.goneBlogSlugs),
+    rankingGone: readLedgerSet(SOURCES.goneRankingKeys, "keys", "key"),
+    blogGone: readLedgerSet(SOURCES.goneBlogSlugs, "slugs", "slug"),
     // 旧 slug → 現行 slug の 301。live では 200 に着地するのでリンク切れではない
-    blogRedirects: readQuotedSet(SOURCES.blogRedirects),
+    blogRedirects: readLedgerSet(SOURCES.blogRedirects, "redirects", "from"),
     categories,
     areaCodes,
     themes,
@@ -316,7 +320,7 @@ export function lintInternalLinks(content, opts = {}) {
       checked++;
       if (sets.categories.size && !sets.categories.has(key)) {
         broken++;
-        blockers.push(`リンク切れ: ${link.href} — CATEGORY_KEYS 17 軸に存在しない (${where})`);
+        blockers.push(`リンク切れ: ${link.href} — カテゴリマスタ 17 軸に存在しない (${where})`);
       }
     } else if (type === "areas") {
       if (!key) continue;

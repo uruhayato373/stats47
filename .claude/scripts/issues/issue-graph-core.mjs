@@ -337,6 +337,7 @@ export function parseCsv(text) {
  * 軸は「説明側 (explanatory)」と「結果側 (outcome)」で、それぞれ 比較 (compare)・構成 (compose)・変化 (change) のどれか。
  * 説明側が無い問い (記述の問い) は explanatory: null。名前を原因・結果にしないのは、相関を因果と読ませないため。
  * 説明側が群の区分 (年収五分位・世帯類型など) のときは group: true を書く。時間は軸にせず、結果側の変化で表す。
+ * 軸が使うデータは data に参照で書く (指標キーか系列の ID)。実在と粒度は resolveAxesFigure が正本と照らす。
  *
  * 決めるのは図の「目的」だけで、図の型そのものは図の型の台帳 (image-templates.json の purposes・renderer・review)
  * から引く。型の決定表をここに手書きすると台帳とずれるため (2026-11-10 Fable のレビュー)。
@@ -346,9 +347,13 @@ export const AXIS_PATTERNS = ["compare", "compose", "change"];
 /** 1 軸のときの目的。2 軸は figurePurpose が組み合わせで決める */
 const SINGLE_PURPOSE = { compare: "ranking", compose: "composition", change: "trend" };
 
-/** 目的ごとに先に使う型。47 県の全体を見せる図は地図を主にする (2026-11-03 オーナー決定) */
-const PREFERENCE = {
-  ranking: ["tile-map", "bar", "choropleth"],
+/**
+ * 目的ごとに先に使う型。47 県の全体を見せる図は地図を主にする (2026-11-03 オーナー決定)。
+ * 並べるのは図の型の台帳でその目的 (purposes) を持ち、描画できる型だけ (テストが台帳と照合する)。
+ * distribution (箱ひげ図) は軸の語彙 (比較・構成・変化) から引かないので持たない
+ */
+export const PREFERENCE = {
+  ranking: ["tile-map", "bar"],
   comparison: ["bar", "grouped-bar", "radar"],
   composition: ["stacked-bar", "waterfall", "sankey"],
   trend: ["line", "tile-map", "choropleth"],
@@ -380,13 +385,29 @@ export function figurePurpose({ explanatory, outcome }) {
   return "relationship";
 }
 
+/** 台帳の誤りとして検査を止める理由。ほかは埋める作業の残りなので止めない */
+export const AXES_ERRORS = ["指標なし", "粒度不一致"];
+
 /**
- * @param {{ issue: object, axes?: object, templates: object[], metricKeys?: Set<string> }} p
- * @returns {{ purpose: string|null, primary: string|null, allowed: string[], gaps: string[] }}
- *   gaps: 型未定 (軸が無い) / 描画器なし / 粒度不足 (全国の集計で関係を問う) / 未検証 (群の区分以外の軸に指標が無い) / 指標なし (書いた指標が存在しない)
+ * 問いの粒度に、別の粒度の値で答えてよいもの。図は描けるが、図と本文に注記が要る。
+ * 県の問いに県庁所在市の値 (家計調査) で答える図は、タイル地図にも県の並びにも載るが、県全体の値ではない。
  */
-export function resolveAxesFigure({ issue, axes, templates, metricKeys }) {
-  if (!axes) return { purpose: null, primary: null, allowed: [], gaps: ["型未定"] };
+export const GRAIN_STAND_INS = { prefecture: { "capital-city": "県庁所在市の値 (県全体の値ではない)" } };
+
+/**
+ * 軸が指すデータ (data) の参照は 2 通り。
+ *   { metric, grain? } … 指標。grain を省くと問いの unit の粒度で使う。問いと違う粒度の値で答えるときだけ grain を書く
+ *   { series }         … 系列 (家計調査の分析単位。年収階級・世帯類型など属性別の値)
+ *
+ * @param {{ issue: object, axes?: object, templates: object[], metricGrains?: Map<string, Set<string>>, seriesIds?: Set<string> }} p
+ *   metricGrains: 指標キー → 値のある粒度 / seriesIds: 系列の ID。渡さなければ実在と粒度は確かめない
+ * @returns {{ purpose: string|null, primary: string|null, allowed: string[], gaps: string[], notes: string[] }}
+ *   gaps: 型未定 (軸が無い) / 描画器なし / 粒度不足 (全国の集計で関係を問う) / 未検証 (群の区分以外の軸にデータが無い) /
+ *         別粒度 (問いと違う粒度の値で答える) / 指標なし (書いた指標・系列が存在しない) / 粒度不一致 (その粒度の値が指標に無い)
+ *   notes: 図は決まるが図と本文に書く注記 (GRAIN_STAND_INS)
+ */
+export function resolveAxesFigure({ issue, axes, templates, metricGrains, seriesIds }) {
+  if (!axes) return { purpose: null, primary: null, allowed: [], gaps: ["型未定"], notes: [] };
   const gaps = [];
   const purpose = figurePurpose(axes);
   const usable = templates.filter(
@@ -401,16 +422,48 @@ export function resolveAxesFigure({ issue, axes, templates, metricKeys }) {
   const sides = [axes.explanatory, axes.outcome].filter(Boolean);
   // 全国の単年値は 1 点なので、変化の軸が無ければ 2 つの値の関係を描けない
   if (issue.unit === "japan" && purpose === "relationship" && !sides.some((s) => s.pattern === "change")) gaps.push("粒度不足");
-  // 群の区分以外の軸は指標が無いと、データがあるか・描けるかを確かめられない
-  if (sides.some((s) => s.group !== true && !s.metrics?.length)) gaps.push("未検証");
-  if (metricKeys && sides.some((s) => (s.metrics ?? []).some((k) => !metricKeys.has(k)))) gaps.push("指標なし");
+  // 群の区分以外の軸はデータが無いと、データがあるか・描けるかを確かめられない
+  if (sides.some((s) => s.group !== true && !s.data?.length)) gaps.push("未検証");
+
+  const refs = sides.flatMap((s) => s.data ?? []);
+  const metricRefs = refs.filter((r) => r.metric !== undefined);
+  const standIns = GRAIN_STAND_INS[issue.unit] ?? {};
+  // 問いと違う粒度の値で答える図は、問いの粒度の図としては決まっていない (代わりに使ってよい粒度は注記で足りる)
+  if (metricRefs.some((r) => r.grain !== undefined && r.grain !== issue.unit && !standIns[r.grain])) gaps.push("別粒度");
+  const missingMetric = metricGrains && metricRefs.some((r) => !metricGrains.has(r.metric));
+  const missingSeries = seriesIds && refs.some((r) => r.series !== undefined && !seriesIds.has(r.series));
+  if (missingMetric || missingSeries) gaps.push("指標なし");
+  // 指標はあるが、使うと書いた粒度 (省けば問いの粒度か、代わりに使ってよい粒度) の値を持たない
+  const notes = new Set();
+  const fits = (r) => {
+    const has = metricGrains.get(r.metric);
+    if (r.grain !== undefined) return has.has(r.grain);
+    if (has.has(issue.unit)) return true;
+    const standIn = Object.keys(standIns).find((g) => has.has(g));
+    if (standIn) notes.add(standIns[standIn]);
+    return Boolean(standIn);
+  };
+  if (metricGrains && metricRefs.some((r) => metricGrains.has(r.metric) && !fits(r))) gaps.push("粒度不一致");
+  for (const r of metricRefs) if (r.grain && standIns[r.grain]) notes.add(standIns[r.grain]);
 
   // 増減の内訳は滝の図が主 (台帳の waterfall が「全体の増減はどの要素の足し引きか」に答える)
   const primary =
     purpose === "composition" && sides.some((s) => s.pattern === "change") && allowed.includes("waterfall")
       ? "waterfall"
       : allowed[0] ?? null;
-  return { purpose, primary, allowed, gaps };
+  return { purpose, primary, allowed, gaps, notes: [...notes] };
+}
+
+/** 問いの一覧を軸から図へ引く (検査と --axes の一覧が同じ結果を使う) */
+export function resolveAllAxes({ issues, templates, metricGrains, seriesIds }) {
+  const byId = new Map(issues.map((i) => [i.id, i]));
+  return issues
+    .filter((i) => i.status === "active")
+    .map((issue) => ({
+      id: issue.id,
+      question: issue.question,
+      ...resolveAxesFigure({ issue, axes: effectiveAxes(issue, byId), templates, metricGrains, seriesIds }),
+    }));
 }
 
 const rank = (order, id) => {

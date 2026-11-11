@@ -2,7 +2,7 @@
 /**
  * kdp-unpublish.mjs — KDP 本棚で販売中の本を「販売停止」にする (stats47)。
  *
- * 用途 (2026-09-19): 全冊監査で取り下げを決めた S2/S3/S4 の 10 冊 (`kdp-listings.json` の `withdrawal`)。
+ * 用途 (2026-09-19): 全冊監査で取り下げを決めた S2/S3/S4 の 10 冊 (`kdp.listings` の `withdrawal`)。
  * 対象は **withdrawal を持ち kdpStatus=live の listing だけ**。それ以外の id は拒否する。
  *
  *   node .claude/scripts/kdp/kdp-unpublish.mjs --id K-S2-01 --probe        # メニュー・確認ダイアログの構造を採取 (確定しない)

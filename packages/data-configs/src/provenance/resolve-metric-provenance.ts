@@ -18,7 +18,7 @@ import type { MetricConfig, MetricRegistry, SourceConfig } from '../types';
 import { DISPLAYNAME_TO_SURVEY } from '../ssds/displayname-to-survey';
 import estatProvenanceJson from '../ssds/estat-provenance.generated.json';
 import ssdsProvenanceJson from '../ssds/ssds-provenance.generated.json';
-import surveysMasterJson from '../../../ranking/src/data/surveys.json';
+import surveysMasterJson from '../../../../data/surveys/master/surveys.json';
 
 export type ProvenanceSurvey = { id: string; name: string };
 
@@ -49,7 +49,7 @@ const ESTAT_PROVENANCE = estatProvenanceJson as {
 const SSDS_TABLE_IDS = new Set(ESTAT_PROVENANCE.ssdsTableIds);
 
 /**
- * 調査マスタ (packages/ranking/src/data/surveys.json) の id → name。調査名の正本。
+ * 調査マスタ (カタログの surveys.master) の id → name。調査名の正本。
  * 生成 JSON (estat/ssds-provenance.generated.json) は取り込み時の表記 (「人口動態調査」「国勢調査報告」等) を
  * 焼き込んでいるため、マスタに実在する id は必ずマスタの name で返す (/survey/<id> の見出しと出典表記を揃える)。
  */

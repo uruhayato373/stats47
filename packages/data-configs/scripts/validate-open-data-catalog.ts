@@ -8,6 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetPath } from "../../../config/datasets.mjs";
 import {
   OPEN_DATA_SOURCES,
   OPEN_DATASETS,
@@ -26,12 +27,11 @@ import { METRICS_REGISTRY } from "../src/registry";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// KSJ SSOT (packages/gis/src/mlit-ksj/datasets.ts) は型結合せず regex で dataId を読む
+// KSJ 台帳 (カタログ id geo.ksj-datasets) は型結合せず JSON のキーから dataId を読む
 // (open-data catalog は発見・評価層。KSJ 運用メタを import して二重管理しない)
 function loadKsjDataIds(): Set<string> {
-  const file = path.resolve(__dirname, "../../gis/src/mlit-ksj/datasets.ts");
-  const src = fs.readFileSync(file, "utf8");
-  return new Set([...src.matchAll(/dataId:\s*"([^"]+)"/g)].map((m) => m[1]));
+  const doc = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../..", datasetPath("geo.ksj-datasets")), "utf8")) as { datasets: Record<string, unknown> };
+  return new Set(Object.keys(doc.datasets));
 }
 
 const errors: string[] = [];

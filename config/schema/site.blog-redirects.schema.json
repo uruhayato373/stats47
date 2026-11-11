@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ブログ記事の旧 slug の転送",
+  "description": "data/site/url-history/blog-redirects.json の形の契約。slug を変えた記事の旧 slug を新 slug へ 301 で転送する (middleware が読む)。from は旧 slug、to は新 slug (check-datasets がブログ記事の台帳 blog.articles に実在することを検査する)。since は変えた日、reason は経緯。同じ slug を 410 の一覧 (site.gone-blog-slugs) にも載せない・410 の slug を転送先にしない、は apps/web の ranking-key-consistency テストが固定する。",
+  "type": "object",
+  "required": ["redirects"],
+  "additionalProperties": false,
+  "properties": {
+    "redirects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string", "minLength": 1 },
+          "to": { "type": "string", "minLength": 1 },
+          "since": { "$ref": "common.schema.json#/$defs/date" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

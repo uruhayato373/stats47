@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "旧 ranking slug の転送",
+  "description": "data/site/url-history/ranking-redirects.json の形の契約。公開後に置き換えた旧 ranking slug を、同じ統計定義の現行ページへ一段で 301 する (X・外部記事に残る旧 URL のため)。転送先は KNOWN かつ非 GONE であることを apps/web の ranking-key-consistency テストが固定する。from は旧 slug、to は転送先の指標キー (check-datasets が現行の指標に実在することを検査する)。since は置き換えた日、reason は経緯。",
+  "type": "object",
+  "required": ["redirects"],
+  "additionalProperties": false,
+  "properties": {
+    "redirects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "to": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "since": { "$ref": "common.schema.json#/$defs/date" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/surveys.experiments.schema.json",
+  "title": "調査ハブの改善実験台帳",
+  "description": "data/surveys/experiments.json の形の契約。調査ごとの改善 (編集ハブ化・紐付け・題とメタ・構造・統合・廃止) を、baseline・観測の期日・判定とともに 1 実験 1 件で持つ。効果の判定材料と実験の履歴の台帳で、改善バックログ (.claude/todo/improvements.md) へは書かない (effect ラベルの反映は improvement-triage に頼む)。観測 (observations) は evaluate-survey-experiments.mjs --check が期日の到達分に実測を記録し、判定 (verdict) は同スクリプトの --verdict で確定する。手で書かない。判定の規律 (一意・pending の重複・baseline・d7 では確定しない・CTR は表示回数 100 以上・根拠) は validate-survey-portfolio.ts が持つ。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "experiments"],
+  "definitions": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "week": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" },
+    "kpi": { "description": "<計測元>.<指標> (例: gsc.impressions)", "type": "string", "pattern": "^[a-z0-9]+\\.[A-Za-z0-9]+$" },
+    "observation": {
+      "description": "期日の到達時に evaluate-survey-experiments.mjs --check が記録する。window は期間の重複しない 2 つの週次窓。標本不足の比率値は value を null にする",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["observedAt", "window", "values"],
+      "properties": {
+        "observedAt": { "$ref": "#/definitions/date" },
+        "window": { "type": "array", "items": { "$ref": "#/definitions/week" } },
+        "values": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/definitions/kpi" },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "status"],
+            "properties": {
+              "value": { "type": ["number", "null"] },
+              "status": { "enum": ["measured", "measured-low", "insufficient-data", "not-instrumented"] }
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "experimentId", "surveyId", "hypothesis", "changeType", "baselinePeriod", "startedAt", "evaluateAt7d", "evaluateAt28d", "evaluateAt56d",
+          "primaryKpi", "guardrailKpis", "baseline", "observations", "verdict", "notes", "evidenceRefs", "implementationRef"
+        ],
+        "properties": {
+          "experimentId": { "description": "一意", "type": "string", "pattern": "^[A-Z0-9]+(-[A-Z0-9]+)*$" },
+          "surveyId": { "description": "調査マスタ (surveys.master) の id (実在は check-datasets の refs が止める)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "hypothesis": { "type": "string", "minLength": 1 },
+          "changeType": { "enum": ["editorial-hub", "linkage", "title-meta", "structure", "merge", "retire"] },
+          "baselinePeriod": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["from", "to"],
+            "properties": { "from": { "$ref": "#/definitions/date" }, "to": { "$ref": "#/definitions/date" } }
+          },
+          "startedAt": { "description": "本番へ出した日 (デプロイを実測した日)", "$ref": "#/definitions/date" },
+          "evaluateAt7d": { "description": "異常の検知だけ (インデックス・canonical・404・計測の異常)。効果の判定に使わない", "$ref": "#/definitions/date" },
+          "evaluateAt28d": { "description": "暫定の判定", "$ref": "#/definitions/date" },
+          "evaluateAt56d": { "description": "基本の判定", "$ref": "#/definitions/date" },
+          "primaryKpi": { "$ref": "#/definitions/kpi" },
+          "guardrailKpis": { "type": "array", "items": { "$ref": "#/definitions/kpi" } },
+          "baseline": {
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": { "$ref": "#/definitions/kpi" },
+            "additionalProperties": { "type": "number" }
+          },
+          "observations": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["d7", "d28", "d56"],
+            "properties": {
+              "d7": { "$ref": "#/definitions/observation" },
+              "d28": { "$ref": "#/definitions/observation" },
+              "d56": { "$ref": "#/definitions/observation" }
+            }
+          },
+          "verdict": { "enum": ["pending", "effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"] },
+          "notes": { "description": "季節性・順位変動・サイト全体の変動の注記", "type": ["string", "null"] },
+          "evidenceRefs": { "description": "実測 snapshot への参照。verdict の確定には 1 件以上", "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "implementationRef": { "description": "実装の所在 (PR・commit・ファイル)", "type": "string" }
+        }
+      }
+    }
+  }
+}
