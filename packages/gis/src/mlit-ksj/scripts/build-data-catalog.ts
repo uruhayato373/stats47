@@ -428,7 +428,7 @@ export async function buildCatalog() {
     source: {
       candidateCatalog: "packages/database/seed/ksj-catalog.json",
       registeredCatalog: datasetPath("geo.ksj-datasets"),
-      openDataCatalog: "packages/data-configs/src/open-data-catalog/",
+      openDataCatalog: datasetPath("open-data.datasets"),
       r2Prefix: R2_PREFIX,
       inventoryMode: inventorySource.mode,
     },

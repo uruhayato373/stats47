@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Geo 原典ページの読み方の台帳",
+  "description": "data/geo/source-pages/pages.json の形状契約。単体 GIS ページ /geo/datasets/<dataId> の読み方・対象時点・範囲・注意点・属性の単位を、版付きで持つ。配列の並びが公開と監査の順になるので変えない。dataId と relatedIds は geo.ksj-datasets の ID、version は GIS 台帳の版で現在の年ではない。読み込みは packages/data-configs/src/business-plan/geo-source-pages.ts。",
+  "type": "object",
+  "required": ["pages"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["dataId", "version", "summary", "period", "coverage", "reading", "limitations", "fields", "relatedIds", "sourceCheckedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "dataId": { "type": "string", "pattern": "^[A-Za-z0-9-]+$" },
+          "version": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "period": { "type": "string", "minLength": 1 },
+          "coverage": { "type": "string", "minLength": 1 },
+          "reading": { "type": "string", "minLength": 1 },
+          "limitations": { "type": "string", "minLength": 1 },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["key", "label", "description"],
+              "additionalProperties": false,
+              "properties": {
+                "key": { "type": "string", "minLength": 1 },
+                "label": { "type": "string", "minLength": 1 },
+                "description": { "type": "string", "minLength": 1 },
+                "unit": { "type": "string", "minLength": 1 },
+                "alternateUnit": {
+                  "type": "object",
+                  "required": ["property", "value", "unit"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "property": { "type": "string", "minLength": 1 },
+                    "value": { "type": "string", "minLength": 1 },
+                    "unit": { "type": "string", "minLength": 1 }
+                  }
+                },
+                "values": { "description": "コードの意味。コードをキー、表示名を値にする", "type": "object", "additionalProperties": { "type": "string" } },
+                "onlyWhenPresent": { "description": "原典のファイルによって属性の構成が異なる (例: 一次・二次医療圏) ときの印", "const": true },
+                "requiredCodes": {
+                  "description": "原典が、公表しない値や別の地物に記録した値を 0 で持つことがあるときの、コードごとの扱い",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["key", "values", "fallback"],
+                    "additionalProperties": false,
+                    "properties": {
+                      "key": { "type": "string", "minLength": 1 },
+                      "values": { "type": "array", "items": { "type": "string" } },
+                      "fallback": { "type": "string", "minLength": 1 }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "relatedIds": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z0-9-]+$" } },
+          "sourceCheckedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "additionalSources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["label", "url"],
+              "additionalProperties": false,
+              "properties": {
+                "label": { "type": "string", "minLength": 1 },
+                "url": { "type": "string", "pattern": "^https://" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

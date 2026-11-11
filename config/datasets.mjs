@@ -152,12 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/data-configs/src/business-plan/geo-source-pages.ts", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/business-plan/geo-source-policy-pages.ts", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/business-plan/geo-source-service-pages.ts", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/open-data-catalog/", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/prefecture-statistics-catalog/", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/geo-scope/world-types.ts", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/geo-scope/japan-catalog.ts", why: "pending", phase: 7 },
   { path: "packages/data-configs/src/geo-scope/kakei-japan-catalog.ts", why: "pending", phase: 7 },
   { path: "packages/data-configs/src/geo-scope/japan-derived-metrics.ts", why: "pending", phase: 7 },
@@ -702,6 +696,34 @@ export const DATASETS = [
       { field: "contents.*.blogSlug", to: "blog.articles", key: "articles[].slug" },
     ],
   }),
+  d("geo.source-pages", "data/geo/source-pages/pages.json", "ledger", "data", "data", "Geo 原典ページ (単体 GIS /geo/datasets/<dataId>) の読み方の台帳 (版付きの要約・対象時点・範囲・注意点・属性の単位。並びが公開と監査の順)。読み込みは packages/data-configs/src/business-plan/geo-source-pages.ts", {
+    schema: "config/schema/geo.source-pages.schema.json",
+    refs: [
+      { field: "pages[].dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "pages[].relatedIds[]", to: "geo.ksj-datasets", key: "datasets.$keys" },
+    ],
+  }),
+  d("open-data.sources", "data/open-data/catalog/sources.json", "master", "data", "data", "e-Stat 外の政府・自治体オープンデータの提供元 (公式のみ。データセット ID の一覧は持たず読み込み口が導く)。読み込みは packages/data-configs/src/open-data-catalog/sources.ts", {
+    schema: "config/schema/open-data.sources.schema.json",
+  }),
+  d("open-data.datasets", "data/open-data/catalog/datasets.json", "ledger", "data", "data", "e-Stat 外オープンデータのデータセットの台帳 (取得方式・粒度・ライセンス・stats47 での使い道・検証記録。ID は固定)。読み込みは packages/data-configs/src/open-data-catalog/datasets.ts", {
+    schema: "config/schema/open-data.datasets.schema.json",
+    refs: [
+      { field: "datasets[].sourceId", to: "open-data.sources", key: "sources[].id" },
+      { field: "datasets[].existingGisDataIds[]", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "datasets[].existingMetricKeys[]", to: "registry:metrics" },
+      { field: "datasets[].suggestedCategories[]", to: "categories.master", key: "categories[].key" },
+    ],
+  }),
+  d("open-data.prefecture-statistics", "data/open-data/prefecture-statistics/resources.json", "ledger", "data", "data", "都道府県が公式に公開する統計ポータル・ダッシュボード・年鑑のリンク (県名は持たず読み込み口が県のマスタで結ぶ)。読み込みは packages/data-configs/src/prefecture-statistics-catalog/index.ts", {
+    schema: "config/schema/open-data.prefecture-statistics.schema.json",
+  }),
+  d("open-data.world-provider-evaluations", "data/open-data/world/provider-evaluations.json", "ledger", "data", "data", "/world (国際比較) の候補となる国際データ源の机上評価 (ライセンス・カバレッジ・アクセス日)。読み込みは packages/data-configs/src/geo-scope/world-types.ts", {
+    schema: "config/schema/open-data.world-provider-evaluations.schema.json",
+  }),
+  d("open-data.world-catalogs", "data/open-data/world/catalogs.json", "master", "data", "data", "/world (国際比較) のテーマ (意図的に空。足す前に日本の行を値のレベルで確かめる)。読み込みは packages/data-configs/src/geo-scope/world-types.ts", {
+    schema: "config/schema/open-data.world-catalogs.schema.json",
+  }),
   d("business.goals", "data/goals/{**}", "state", "strategy", "data", "/goal の目標とサイクル"),
   d("ai-content.remediation", "data/ai-content/remediation/{name}", "state", "data", "data", "ランキング AI 解説の是正キュー・生成失敗・進捗"),
   d("municipalities.expansion", "data/municipalities/{name}", "state", "data", "data", "市区町村データの拡充調査と棚卸し"),
@@ -1016,6 +1038,10 @@ export const RETIRED = [
   { from: "business-plan/snow-designation-analysis", to: "data/geo/analyses/analyses.json (themeSource)", since: "2026-11-11" },
   { from: "business-plan/landslide-exposure-analysis", to: "data/geo/analyses/analyses.json (themeSource)", since: "2026-11-11" },
   { from: "business-plan/low-elevation-population-analysis", to: "data/geo/analyses/analyses.json", since: "2026-11-11" },
+  // 原典ページ・公開データ (2026-11-11 に data/geo/source-pages/ と data/open-data/ へ)
+  { from: "business-plan/geo-source-policy-pages", to: "data/geo/source-pages/pages.json", since: "2026-11-11" },
+  { from: "business-plan/geo-source-service-pages", to: "data/geo/source-pages/pages.json", since: "2026-11-11" },
+  { from: "open-data-catalog/datasets/", to: "data/open-data/catalog/datasets.json", since: "2026-11-11" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

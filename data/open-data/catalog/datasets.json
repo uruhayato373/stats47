@@ -1,0 +1,4027 @@
+{
+  "datasets": [
+    {
+      "id": "mhlw-medical-hospitals",
+      "sourceId": "mhlw-medical-info",
+      "name": "医療情報ネット 病院 (施設票・診療科診療時間票)",
+      "description": "全国の病院の施設情報 CSV。所在地座標 (緯度経度)・都道府県/市区町村コード・診療科目コードを含む。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+      "downloadUrl": "https://www.mhlw.go.jp/content/11121000/01-1_hospital_facility_info_20260601.csv.zip",
+      "accessMethods": [
+        "bulk-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality",
+        "prefecture"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2024-08〜2026-06 (約6ヶ月おきスナップショット)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-06-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+      },
+      "stats47Uses": [
+        "map",
+        "area",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "診療科別の病院数 (県別集計)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-08-30",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+        ],
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+      }
+    },
+    {
+      "id": "mhlw-medical-clinics",
+      "sourceId": "mhlw-medical-info",
+      "name": "医療情報ネット 診療所 (施設票・診療科票)",
+      "description": "全国の一般診療所の施設情報 CSV。座標・行政コード・診療科目を含む。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+      "downloadUrl": "https://www.mhlw.go.jp/content/11121000/02-1_clinic_facility_info_20260601.csv.zip",
+      "accessMethods": [
+        "bulk-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality",
+        "prefecture"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2024-08〜2026-06 (約6ヶ月おきスナップショット)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-06-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+      },
+      "stats47Uses": [
+        "map",
+        "area",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [
+        "general-clinic-count",
+        "general-clinic-count-per-100k"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "診療科別の診療所数 (県別集計)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-08-30",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+        ],
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+      }
+    },
+    {
+      "id": "mhlw-medical-dental-clinics",
+      "sourceId": "mhlw-medical-info",
+      "name": "医療情報ネット 歯科診療所 (施設票・診療科票)",
+      "description": "全国の歯科診療所の施設情報 CSV。座標・行政コードを含む。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+      "downloadUrl": "https://www.mhlw.go.jp/content/11121000/03-1_dental_facility_info_20260601.csv.zip",
+      "accessMethods": [
+        "bulk-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality",
+        "prefecture"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2024-08〜2026-06 (約6ヶ月おきスナップショット)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-06-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+      },
+      "stats47Uses": [
+        "map",
+        "area",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [
+        "dental-clinic-count",
+        "dental-clinic-count-per-100k"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-08-30",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+        ],
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+      }
+    },
+    {
+      "id": "mhlw-medical-maternity-homes",
+      "sourceId": "mhlw-medical-info",
+      "name": "医療情報ネット 助産所票",
+      "description": "全国の助産所の施設情報 CSV。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+      "downloadUrl": "https://www.mhlw.go.jp/content/11121000/04_maternity_home_20260601.csv.zip",
+      "accessMethods": [
+        "bulk-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality",
+        "prefecture"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2024-08〜2026-06 (約6ヶ月おきスナップショット)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-06-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+      },
+      "stats47Uses": [
+        "map",
+        "area",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "助産所数 (県別集計)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-08-30",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+        ],
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+      }
+    },
+    {
+      "id": "mhlw-medical-pharmacies",
+      "sourceId": "mhlw-medical-info",
+      "name": "医療情報ネット 薬局票",
+      "description": "全国の薬局の施設情報 CSV。座標・行政コード・ホームページアドレス列を含む。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+      "downloadUrl": "https://www.mhlw.go.jp/content/11121000/05_pharmacy_20260601.csv.zip",
+      "accessMethods": [
+        "bulk-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality",
+        "prefecture"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2024-08〜2026-06 (約6ヶ月おきスナップショット)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-06-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+      },
+      "stats47Uses": [
+        "map",
+        "area",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [
+        "pharmacy-count-by-prefecture",
+        "pharmacy-count-per-100k"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-08-30",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+        ],
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+      }
+    },
+    {
+      "id": "reinfolib-transaction-prices",
+      "sourceId": "mlit-reinfolib",
+      "name": "不動産価格 (取引価格・成約価格) 情報 API (XIT001)",
+      "description": "不動産取引価格 (2005Q3〜) と成約価格 (2021Q1〜) を都道府県・市区町村・駅指定で取得する API。gzip JSON。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xit001/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "json"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "municipality",
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "取引価格 2005Q3〜 / 成約価格 2021Q1〜",
+      "updateFrequency": "quarterly",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "ranking",
+        "theme",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction",
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "中古住宅取引価格の県別中央値",
+        "不動産取引件数 (県別)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xit001/",
+          "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+        ],
+        "notes": "endpoint https://www.reinfolib.mlit.go.jp/ex-api/external/XIT001。API キー要・実データ未取得"
+      }
+    },
+    {
+      "id": "reinfolib-municipality-list",
+      "sourceId": "mlit-reinfolib",
+      "name": "都道府県内市区町村一覧 API (XIT002)",
+      "description": "都道府県コードから市区町村コード・名称一覧を返す補助 API。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xit002/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "json"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "static",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xit002/"
+        ],
+        "notes": "補助 API。行政コードマスタは既存 prefectures/cities JSON が SSOT のため research-only"
+      }
+    },
+    {
+      "id": "reinfolib-appraisal-reports",
+      "sourceId": "mlit-reinfolib",
+      "name": "鑑定評価書情報 API (XCT001)",
+      "description": "地価公示の鑑定評価書 (標準地の緯度経度・鑑定評価額) を年・都道府県・区分指定で取得。直近 5 年。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xct001/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "json"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2022-2026 (直近5年)",
+      "updateFrequency": "annual",
+      "latestPublishedAt": "2026-01-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xct001/"
+        ],
+        "notes": "year+area+division 必須。gzip JSON。API キー要"
+      }
+    },
+    {
+      "id": "reinfolib-price-point-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "不動産価格情報ポイント API (XPT001)",
+      "description": "取引価格・成約価格の地点データを XYZ タイル (z11-15) で取得。GeoJSON/PBF。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt001/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "point",
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "timeCoverage": "取引 2005Q3〜 / 成約 2021Q1〜",
+      "updateFrequency": "quarterly",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "map",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt001/"
+        ],
+        "notes": "47 県一括 DL ではなく XYZ タイル走査が必要。API キー要"
+      }
+    },
+    {
+      "id": "reinfolib-land-price-point-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "地価公示・地価調査ポイント API (XPT002)",
+      "description": "地価公示・都道府県地価調査の標準地/基準地ポイントを XYZ タイル (z13-15) で取得。1995-2024 年の単年指定。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt002/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "point",
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "timeCoverage": "1995-2024",
+      "updateFrequency": "annual",
+      "latestPublishedAt": "2024-01-01",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "map",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction"
+      ],
+      "existingMetricKeys": [
+        "residential-land-price-change-rate",
+        "standard-price-change-rate-residential",
+        "standard-price-change-rate-commercial",
+        "industrial-land-price"
+      ],
+      "existingGisDataIds": [
+        "L01",
+        "L02"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt002/",
+          "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+        ],
+        "notes": "県別の地価水準・変動率は e-Stat 由来の既存 metric と KSJ L01/L02 が SSOT。本 API は地点粒度の補完"
+      }
+    },
+    {
+      "id": "reinfolib-urban-planning-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "都市計画区域/区域区分 API (XKT001)",
+      "description": "都市計画区域・区域区分 (市街化区域等) のポリゴンを XYZ タイル (z11-15) で取得。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt001/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "map",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A09",
+        "A55"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt001/"
+        ],
+        "notes": "都道府県名/市区町村コード/区域区分/決定日を属性に含む"
+      }
+    },
+    {
+      "id": "reinfolib-fire-prevention-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "防火・準防火地域 API (XKT014)",
+      "description": "防火地域・準防火地域のポリゴンを XYZ タイル (z11-15) で取得。都市計画決定 GIS データ系。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt014/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "公共データ利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt014/"
+        ]
+      }
+    },
+    {
+      "id": "reinfolib-future-population-mesh-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "将来推計人口 250m メッシュ API (XKT013)",
+      "description": "性別年齢別の将来推計人口 250m メッシュを XYZ タイルで取得。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt013/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "mesh"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (国土数値情報等の別ルール適用の可能性・個別未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "population"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "mesh1000r6"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt013/"
+        ],
+        "notes": "国土数値情報由来。KSJ 側の将来推計人口メッシュ (mesh1000r6) が GIS SSOT"
+      }
+    },
+    {
+      "id": "reinfolib-disaster-risk-area-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "災害危険区域 API (XKT016)",
+      "description": "災害危険区域 (建築基準法 39 条) のポリゴンを XYZ タイル (z11-15) で取得。告示年月日属性あり。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt016/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (国土数値情報等の別ルール適用の可能性・個別未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt016/"
+        ],
+        "notes": "administrativeAreaCode (5桁) で市区町村絞込み可。国土数値情報由来の別ルール要確認"
+      }
+    },
+    {
+      "id": "reinfolib-large-fill-land-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "大規模盛土造成地マップ API (XKT020)",
+      "description": "大規模盛土造成地のポリゴンを XYZ タイル (z11-15) で取得。整備済み自治体のみ。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt020/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (国土数値情報等の別ルール適用の可能性・個別未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt020/"
+        ],
+        "notes": "全国網羅ではない (整備済み自治体のみ) ため 47 県比較不可"
+      }
+    },
+    {
+      "id": "reinfolib-did-tiles",
+      "sourceId": "mlit-reinfolib",
+      "name": "人口集中地区 (DID) API (XKT031)",
+      "description": "国勢調査ベースの人口集中地区ポリゴン (DIDid/人口/面積等 14 項目) を XYZ タイル (z9-15) で取得。",
+      "landingPageUrl": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt031/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "geojson",
+        "vector-tile"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ タイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (国土数値情報等の別ルール適用の可能性・個別未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "population"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A16"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt031/"
+        ],
+        "notes": "KSJ A16 (DID 人口集中地区) が GIS SSOT。本 API は同データのタイル配信"
+      }
+    },
+    {
+      "id": "mlit-dpf-nlni-ksj",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 国土数値情報",
+      "description": "KSJ 本家と同一データのミラー (63 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "shapefile",
+        "other"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "municipality",
+        "polygon",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon",
+        "point",
+        "line"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "重複除外対象: KSJ (packages/gis mlit-ksj) が SSOT"
+      }
+    },
+    {
+      "id": "mlit-dpf-dpf-statistical-data",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 統計データ (人口・世帯)",
+      "description": "令和2年国勢調査の人口・世帯 (メッシュ/市区町村)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "重複除外対象: e-Stat が SSOT"
+      }
+    },
+    {
+      "id": "mlit-dpf-dpf-area-data",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 行政区域データ",
+      "description": "行政区域ポリゴン。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "shapefile"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "N03"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "重複除外対象: KSJ N03 が SSOT"
+      }
+    },
+    {
+      "id": "mlit-dpf-ipf",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 社会資本情報",
+      "description": "空港/公園/ダム/砂防/官庁施設等の点データ (10 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-msil",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 海しる (海洋状況表示)",
+      "description": "港湾/漁港/灯台等の海洋関連点データ (5 DS・海上保安庁)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-dhb",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF ダム便覧",
+      "description": "全国のダム諸元 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "W01"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "ダム点データは KSJ W01 と重複領域あり"
+      }
+    },
+    {
+      "id": "mlit-dpf-hwq",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 水文水質データベース",
+      "description": "雨量観測所・水位流量観測所 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-ffd",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 訪日外国人流動データ",
+      "description": "空港間流動 2014-2019 年・交通手段別 (8 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "tourism",
+        "international"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "OD 流動。buzz-map カバレッジ表の「OD/流動矢印 未実装」素材"
+      }
+    },
+    {
+      "id": "mlit-dpf-qol",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 都市 QOL データ",
+      "description": "都市圏・都道府県の QOL 指標 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "県別指標だが指標定義・ライセンス未確認"
+      }
+    },
+    {
+      "id": "mlit-dpf-gtfs",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF GTFS データリポジトリ",
+      "description": "バス時刻表/運賃/経路 (1 DS)。事業者ごとに公開状況が異なる。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point",
+        "line"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "line"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-rdpf",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 道路データ PF (県間 OD 交通量)",
+      "description": "都道府県間 OD 交通量 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "OD 流動素材"
+      }
+    },
+    {
+      "id": "mlit-dpf-rsdb",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 全国道路施設点検データベース",
+      "description": "橋梁/トンネル/シェッド/大型カルバート等の施設・点検結果 (7 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "老朽化インフラの県別集計候補 (ライセンス確認後)"
+      }
+    },
+    {
+      "id": "mlit-dpf-mlit-plateau",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 3D 都市モデル (PLATEAU)",
+      "description": "年度別 3D 都市モデル (6 DS)。対象都市限定。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "citygml",
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon",
+        "3d"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "対象都市限定 = 47 県比較不可。別途 PLATEAU 規約 (source mlit-plateau 参照)"
+      }
+    },
+    {
+      "id": "mlit-dpf-rtc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 道路交通センサス",
+      "description": "令和3年度・平成27年度の交通量調査 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "point",
+        "line"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "line"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-ngi",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 国土地盤情報データベース",
+      "description": "ボーリング柱状図等 (1 DS・Kunijiban 由来 + 自治体地盤情報、未検定含む)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-ndm",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 自然災害伝承碑",
+      "description": "過去の災害記録の伝承碑 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-sip4d",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF SIP4D (基盤的防災情報)",
+      "description": "MP-PAWR 降雨レーダー等 (4 DS)。ダウンロード不可・タイル表示専用。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "vector-tile",
+        "other"
+      ],
+      "geographicLevels": [
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "mesh"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "realtime",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "DL 不可のため分析用途に使えない"
+      }
+    },
+    {
+      "id": "mlit-dpf-dimaps",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF DiMAPS (災害情報)",
+      "description": "一般被害/河川施設/空港施設/高速道路・鉄道運行状況 (4 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "other"
+      ],
+      "geographicLevels": [
+        "point",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "realtime",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-lpfs",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 全国幹線旅客純流動調査",
+      "description": "県間の幹線旅客流動 (12 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure",
+        "tourism"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ],
+        "notes": "OD 流動素材"
+      }
+    },
+    {
+      "id": "mlit-dpf-crtc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 工事実績情報 (コリンズ)",
+      "description": "工事実績情報 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-alpc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 静岡県航空レーザ点群",
+      "description": "静岡県限定の航空レーザ測量点群 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "mesh",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "mesh"
+      ],
+      "coverage": "prefecture-specific",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-ntrack",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 航空機騒音監視測定",
+      "description": "空港周辺の騒音監視測定 (9 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-psc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 災害緊急撮影 (斜め写真)",
+      "description": "災害時撮影の斜め写真 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-cyport",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF サイバーポート (港湾インフラ)",
+      "description": "係留施設 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-karte",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 事業評価カルテシステム",
+      "description": "事業評価カルテ (2 DS・詳細不明)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-mcc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 地方公共団体の工事データ (MCC)",
+      "description": "地方公共団体発注業務納品物・IFC 3D データ含む (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "3d"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-nvpf",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 歩行空間ナビゲーション",
+      "description": "歩行空間ネットワーク (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "line",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "line",
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-mms",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF MMS 三次元点群データ",
+      "description": "モービルマッピングシステム点群 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "line",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "3d"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-imm",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF インフラみらいマップ",
+      "description": "インフラ事業情報 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-jyubunpc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 重要文化財点群データ",
+      "description": "重要文化財の点群 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "3d"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-kkd",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 熊本県施設管理データベース",
+      "description": "熊本県限定の施設管理 (7 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "prefecture-specific",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-nxc",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 高速道路会社の工事図面データ",
+      "description": "高速道路工事図面 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "line",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "line",
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-tcd",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 東京都 ICT 活用工事データ",
+      "description": "3 次元起工測量/施工管理データ (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "3d"
+      ],
+      "coverage": "prefecture-specific",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-cals-fukushima",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 福島県電子納品保管管理システム",
+      "description": "福島県限定の電子納品 (2 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "prefecture-specific",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-dobox",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF 広島県インフラマネジメント基盤",
+      "description": "広島県限定のインフラ情報 (1 DS)。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "prefecture-specific",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "mlit-dpf-sample",
+      "sourceId": "mlit-dpf",
+      "name": "MLIT DPF サンプルデータ",
+      "description": "要素技術情報の実装例 (1 DS)。実運用データではない。",
+      "landingPageUrl": "https://www.mlit-data.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "static",
+      "license": {
+        "name": "unknown (カタログ/データセット別・DPF 利用規約参照)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data-platform.mlit.go.jp/assets/policy/国土交通データプラットフォーム利用規約.pdf"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.mlit-data.jp/"
+        ]
+      }
+    },
+    {
+      "id": "gsi-hazard-flood-tiles",
+      "sourceId": "gsi-hazard",
+      "name": "洪水浸水想定区域 (想定最大規模) ラスタータイル",
+      "description": "重ねるハザードマップの洪水浸水想定区域 (想定最大規模) PNG タイル。",
+      "landingPageUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ ラスタータイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "ハザードマップポータルサイト利用規約 (出典明記で利用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A31b"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+        ],
+        "notes": "tile: disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png。ベクタは KSJ A31b が SSOT"
+      }
+    },
+    {
+      "id": "gsi-hazard-landslide-tiles",
+      "sourceId": "gsi-hazard",
+      "name": "土砂災害警戒区域 (土石流・急傾斜地・地すべり) ラスタータイル",
+      "description": "重ねるハザードマップの土砂災害警戒区域 3 レイヤー (土石流/急傾斜地崩壊/地すべり) PNG タイル。",
+      "landingPageUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ ラスタータイル)",
+      "coverage": "all-japan",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "ハザードマップポータルサイト利用規約 (出典明記で利用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A33"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+        ],
+        "notes": "tile: raster/05_dosekiryukeikaikuiki・05_kyukeishakeikaikuiki・05_jisuberikeikaikuiki。出典=令和6年度 KSJ A33 (原データそのもの)"
+      }
+    },
+    {
+      "id": "gsi-hazard-tsunami-tiles",
+      "sourceId": "gsi-hazard",
+      "name": "津波浸水想定 ラスタータイル",
+      "description": "重ねるハザードマップの津波浸水想定 PNG タイル。出典は都道府県 (指定済みエリアのみ)。",
+      "landingPageUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ ラスタータイル)",
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "ハザードマップポータルサイト利用規約 (出典明記で利用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A40"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+        ],
+        "notes": "tile: raster/04_tsunami_newlegend_data。指定済み沿岸県のみ = 47 県比較不可"
+      }
+    },
+    {
+      "id": "gsi-hazard-high-tide-tiles",
+      "sourceId": "gsi-hazard",
+      "name": "高潮浸水想定区域 ラスタータイル",
+      "description": "重ねるハザードマップの高潮浸水想定区域 PNG タイル。出典は都道府県 (指定済み沿岸県のみ)。",
+      "landingPageUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coordinateReferenceSystem": "EPSG:3857 (XYZ ラスタータイル)",
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "ハザードマップポータルサイト利用規約 (出典明記で利用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A32"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html"
+        ],
+        "notes": "tile: raster/03_hightide_l2_shinsuishin_data。指定済み沿岸県のみ = 47 県比較不可"
+      }
+    },
+    {
+      "id": "gsi-evacuation-sites",
+      "sourceId": "gsi-hazard",
+      "name": "指定緊急避難場所データ",
+      "description": "市区町村が指定し公開に同意した指定緊急避難場所の CSV/GeoJSON。国土地理院が集約公開。",
+      "landingPageUrl": "https://www.gsi.go.jp/bousaichiri/hinanbasho.html",
+      "downloadUrl": "https://hinanmap.gsi.go.jp/index.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv",
+        "geojson"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "国土地理院コンテンツ利用規約 + 個別確認事項",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.gsi.go.jp/bousaichiri/hinanbasho.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.gsi.go.jp/bousaichiri/hinanbasho.html"
+        ],
+        "notes": "公開同意した市区町村分のみ (partial) = 47 県比較不可。KSJ P20 (避難施設) は 2012 年度版で更新停止のため実質非重複。個別確認事項があり commercialUse は未確定"
+      }
+    },
+    {
+      "id": "ods-public-facilities",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 公共施設一覧",
+      "description": "定義書A-01。自治体の公共施設の位置・属性 CSV。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-cultural-properties",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 文化財一覧",
+      "description": "定義書A-02。ファイル名規約 [団体コード]_cultural_property。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-evacuation-spaces",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 指定緊急避難場所一覧",
+      "description": "定義書A-03。ファイル名規約 [団体コード]_evacuation_space。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "国土地理院の指定緊急避難場所データ (gsi-evacuation-sites) と同種・集約は地理院側。自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-population-by-district-age",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 地域・年齢別人口",
+      "description": "定義書A-04。町丁字等の地域別・年齢別人口。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "district"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "population"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "県別集計は国勢調査 (e-Stat) が SSOT のため research-only。自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-preschools",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 子育て施設一覧",
+      "description": "定義書A-05。ファイル名規約 [団体コード]_preschool。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-open-data-list",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS オープンデータ一覧",
+      "description": "定義書A-06。自治体の公開データ目録 (メタカタログ)。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-public-wireless-lan",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 公衆無線LANアクセスポイント一覧",
+      "description": "定義書A-07。ファイル名規約 [団体コード]_public_wireless_lan。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "ict"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-aed-locations",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS AED設置箇所一覧",
+      "description": "定義書A-08。緯度経度カラム (GIF 地理座標準拠・10 進小数) を実測確認。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-care-services",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 介護サービス事業所一覧",
+      "description": "定義書A-09。ファイル名規約 [団体コード]_care_service。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-hospitals",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 医療機関一覧",
+      "description": "定義書A-10。ファイル名規約 [団体コード]_hospital。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "全国網羅の医療機関 CSV は医療情報ネット (mhlw-medical-*) が優位。自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-tourism-facilities",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 観光施設一覧",
+      "description": "定義書A-11。ファイル名規約 [団体コード]_tourism。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "tourism"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-events",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS イベント一覧",
+      "description": "定義書A-12。ファイル名規約 [団体コード]_event。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "tourism"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-public-toilets",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 公衆トイレ一覧",
+      "description": "定義書A-13。ファイル名規約 [団体コード]_public_toilet。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-fire-hydrants",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 消防水利施設一覧",
+      "description": "定義書A-14。ファイル名規約 [団体コード]_fire_hydrant。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-food-business-permits",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 食品等営業許可・届出一覧",
+      "description": "定義書A-15。全許可一覧 / 新規許可一覧の 2 ファイル構成。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "commercial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-school-lunch-menus",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 学校給食献立情報",
+      "description": "定義書A-16。メタデータ + 本体の 2 ファイル構成。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-school-districts",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 小中学校通学区域情報",
+      "description": "定義書A-17。通学区域の面データ。メタデータ + 本体の 2 ファイル構成。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv",
+        "geojson"
+      ],
+      "geographicLevels": [
+        "polygon",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-benefit-programs",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 支援制度(給付金)情報 (定義書B)",
+      "description": "定義書B。2023-12-06 版で更新停止 (定義書 A より古い)。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/c08bd12b/20231206_resources_open_data_municipal-standard-open-dataset_table_b.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/c08bd12b/20231206_resources_open_data_municipal-standard-open-dataset_table_b.xlsx"
+        ],
+        "notes": "自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-table-c-datasets",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 定義書C 群 (防災行政無線・駐車場・ゴミ分別ほか 8 種)",
+      "description": "定義書C。教育機関/駐車場/駐輪場/ゴミ分別/赤ちゃんの駅/ゴミ集積所/観光ポイント等。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/37cd38b5/20250501_resources_open_data_municipal-standard-open-dataset_table_c.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/37cd38b5/20250501_resources_open_data_municipal-standard-open-dataset_table_c.xlsx"
+        ],
+        "notes": "シート内未精読。自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "ods-table-d-datasets",
+      "sourceId": "digital-agency-municipal-ods",
+      "name": "自治体標準ODS 定義書D 群 (データモデル型)",
+      "description": "定義書D。投票所・ゴミ分別等を含むデータモデル型仕様。",
+      "landingPageUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+      "downloadUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/4652c2fc/20250501_resources_open_data_municipal-standard-open-dataset_table_d.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv",
+        "json"
+      ],
+      "geographicLevels": [
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "自治体ごとに選択 (CC0 / CC BY / CC BY 4.0 等・標準仕様の推奨はいずれも商用可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
+          "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/4652c2fc/20250501_resources_open_data_municipal-standard-open-dataset_table_d.xlsx"
+        ],
+        "notes": "詳細シート未精読。自治体分散公開 (partial) のため 47 県比較不可。downloadUrl は定義書 (仕様) であり実データではない"
+      }
+    },
+    {
+      "id": "maff-shuraku-card",
+      "sourceId": "maff-regional-db",
+      "name": "農業集落カード (地域指標データ)",
+      "description": "農林業センサスの農業集落別集計 (地域指標) xlsx。2005/2010/2015/2020/2025 年次。フォーマット定義は format.xlsx (48 シート)。",
+      "landingPageUrl": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/index.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "district"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "2005 / 2010 / 2015 / 2020 / 2025",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "政府標準利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.maff.go.jp/j/use/link.html"
+      },
+      "stats47Uses": [
+        "area",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "agriculture"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "農業集落指標の県別集計 (集落数・農家率等)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/index.html",
+          "https://www.maff.go.jp/j/tokei/census/shuraku_data/"
+        ],
+        "notes": "47 県網羅は推定 (ページに明記なし)。個別 xlsx の直 URL は年次別ページ内で列挙されず未登録"
+      }
+    },
+    {
+      "id": "maff-fude-polygons",
+      "sourceId": "maff-regional-db",
+      "name": "筆ポリゴンデータ (農地区画 GIS)",
+      "description": "農地の区画 (筆) ポリゴン。都道府県別分割 zip・FlatGeobuf 形式。2025 年版 (2026 年更新)。",
+      "landingPageUrl": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/mb/index.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2025 (2026 年更新版)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "政府標準利用規約 (PDL 1.0・ページ内「利用上の注意」の個別条件は未精読)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/mb/index.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "agriculture"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/mb/index.html"
+        ],
+        "notes": "zip URL は MB0001_2026_2025_[都道府県コード].zip.[001-] のプレースホルダ付きテンプレートのため未登録。FlatGeobuf は DataFormat 列挙外 = other"
+      }
+    },
+    {
+      "id": "maff-shuraku-boundaries",
+      "sourceId": "maff-regional-db",
+      "name": "農業集落境界データ (WebGIS)",
+      "description": "農業集落の境界を表示する WebGIS。2015/2020 年次。ダウンロード機能は未確認。",
+      "landingPageUrl": "https://www.machimura.maff.go.jp/shurakudata/rcom_map/rcom_map.html",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "district",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2015 / 2020",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "unknown",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.maff.go.jp/j/use/link.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "agriculture"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-07-18",
+        "verifiedFromUrls": [
+          "https://www.machimura.maff.go.jp/shurakudata/rcom_map/rcom_map.html"
+        ],
+        "notes": "別サブドメイン (machimura.maff.go.jp)。地図閲覧は確認済みだが境界データの DL 提供有無・規約は未確認"
+      }
+    },
+    {
+      "id": "jflec-financial-literacy-survey-prefecture",
+      "sourceId": "jflec-financial-literacy",
+      "name": "金融リテラシー調査 都道府県別分析",
+      "description": "18歳以上対象の全国調査 (2025年 サンプル3万人)。正誤問題25問の正答率、自己評価と客観評価の差、金融トラブル経験の有無、借入状況 (住宅ローン・消費者ローン等)、行動経済学的設問 (購入前に注意深く考える等) を都道府県別に集計 (順位・都道府県比較表・都道府県別一覧表)。",
+      "landingPageUrl": "https://www.j-flec.go.jp/data/literacy_chosa_2025/",
+      "downloadUrl": "https://j-flec.go.jp/wpimages/uploads/25lite_toukei.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "2016 / 2019 / 2022 / 2025年 (3年周期)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-03-27",
+      "license": {
+        "name": "J-FLEC ウェブサイト運営方針 (著作権法準拠・出所明示で引用転載可)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.j-flec.go.jp/guidelines/"
+      },
+      "stats47Uses": [
+        "ranking",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "金融リテラシー正答率 (都道府県別)",
+        "金融トラブル経験率 (都道府県別)",
+        "金融知識の自己評価と客観評価の差 (都道府県別)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-19",
+        "verifiedFromUrls": [
+          "https://www.j-flec.go.jp/data/literacy_chosa_2025/",
+          "https://j-flec.go.jp/wpimages/uploads/25lite_toukei.xlsx",
+          "https://www.j-flec.go.jp/guidelines/"
+        ],
+        "notes": "xlsx を実ダウンロードしシート構造・セル値を直接解析し47都道府県シート・比較表・一覧表の実在と正答率/トラブル有無/借入/行動バイアス設問の都道府県別数値を確認済み。老後資金計画の設問が同ファイル内にあるかは列範囲を全て読み切っておらず未確認 (partially-verified の理由)。e-Stat には未掲載 (検索で不在確認、2026-07-19)。非e-Stat統計のため取得は data-ingester がxlsx 解析の専用パイプラインを新設する必要がある (既存 e-Stat クライアントは使えない)。"
+      }
+    },
+    {
+      "id": "nier-gakuryoku-achievement",
+      "sourceId": "nier-gakuryoku-chousa",
+      "name": "全国学力・学習状況調査 教科正答率 (都道府県別)",
+      "description": "小学6年・中学3年対象の国語・算数(数学)等の教科別正答率。都道府県・指定都市別に集計した「問題別調査結果」xlsx (例 01p_25q.xlsx=小学校、01m_25qs.xlsx=中学校)。2007年度開始・毎年実施(令和2年度=2020年は新型コロナで中止・欠測)。",
+      "landingPageUrl": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "2007年度〜継続 (毎年、2020年度は中止で欠測)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "文部科学省ウェブサイト利用規約 (政府標準利用規約2.0・CC BY 4.0 互換。NIER著作権ページが同規約に従う旨明記)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm"
+      },
+      "stats47Uses": [
+        "ranking",
+        "theme"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [
+        "academic-achievement-test-average-rate"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "小学生 国語 正答率 (都道府県別)",
+        "小学生 算数 正答率 (都道府県別)",
+        "中学生 国語 正答率 (都道府県別)",
+        "中学生 数学 正答率 (都道府県別)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-20",
+        "verifiedFromUrls": [
+          "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "https://www.nier.go.jp/25chousakekkahoukoku/index.html",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/index.html",
+          "https://www.nier.go.jp/11_copyright/",
+          "https://www.mext.go.jp/b_menu/1351168.htm"
+        ],
+        "notes": "都道府県別ページの URL パターン (/25chousakekkahoukoku/factsheet/{2桁コード}_{ローマ字}/index.html) を北海道(01)・東京都(13)・沖縄県(47)の実ページ取得で確認。北海道ページで教科別正答率を含む「問題別調査結果」xlsx (01p_25q.xlsx 等) のファイル名を実在確認。コード+ローマ字の県別 URL はテンプレートのため downloadUrl は未登録 (landingPageUrl の一覧ページから各県ページへ遷移する)。令和2年度(2020)は NIER 公式ページで「報告書・調査結果資料―該当なし」を確認し中止と判定。最新の令和8年度(2026)は全国平均のみ2026-07-16公表で都道府県別 factsheet は未公開のため、都道府県別全量が揃う最新年は令和7年度(2025)。e-Stat には未掲載 (検索で不在確認、2026-07-20)。47都道府県全件の正答率セル値自体はダウンロードして開いておらず未確認のため partially-verified。非e-Stat統計のため取得は data-ingester が xlsx 解析の専用パイプラインを新設する必要がある。"
+      }
+    },
+    {
+      "id": "nier-gakuryoku-lifestyle",
+      "sourceId": "nier-gakuryoku-chousa",
+      "name": "全国学力・学習状況調査 児童生徒質問紙 (生活習慣・都道府県別)",
+      "description": "小学6年・中学3年対象の児童生徒質問紙調査。朝食摂取・読書・宿題実行・地域行事参加・インターネット利用時間・通塾・学校外学習時間・通学時間等の生活習慣設問を都道府県・指定都市別に集計した「回答結果集計表」xlsx (例 01p_25a.xlsx=小学校、01m_25a.xlsx=中学校)。",
+      "landingPageUrl": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "2007年度〜継続 (毎年、2020年度は中止で欠測)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "文部科学省ウェブサイト利用規約 (政府標準利用規約2.0・CC BY 4.0 互換。NIER著作権ページが同規約に従う旨明記)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm"
+      },
+      "stats47Uses": [
+        "ranking",
+        "theme"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "朝食摂取率 (小学生・都道府県別)",
+        "読書率 (小学生・都道府県別)",
+        "宿題実行率 (小学生・都道府県別)",
+        "地域行事参加率 (小学生・都道府県別)",
+        "長時間インターネット利用率 (小学生・都道府県別)",
+        "通塾率 (小学生・都道府県別)",
+        "学校外学習率 (小学生・都道府県別)",
+        "通学時間 (小学生・都道府県別)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-07-20",
+        "verifiedFromUrls": [
+          "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "https://www.nier.go.jp/25chousakekkahoukoku/index.html",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/index.html",
+          "https://www.nier.go.jp/11_copyright/",
+          "https://www.mext.go.jp/b_menu/1351168.htm"
+        ],
+        "notes": "北海道ページで「児童質問調査回答結果集計表」xlsx (01p_25a.xlsx) のファイル名を実在確認。朝食・読書・宿題・地域行事参加・ネット利用・通塾・学校外学習・通学時間の8設問が同ファイル内のどのシート・列に収録されるかは実ファイルをダウンロードして開いておらず未確認のためpartially-verified。取得は data-ingester が xlsx 解析の専用パイプラインを新設する必要がある(既存 e-Stat クライアントは使えない、jflec-financial-literacy-survey-prefecture と同様の構成)。"
+      }
+    },
+    {
+      "id": "fdma-heatstroke-emergency-transports",
+      "sourceId": "fdma-heatstroke",
+      "name": "熱中症による救急搬送人員（都道府県別）",
+      "description": "消防庁が公表する熱中症による救急搬送人員の都道府県別確定値。2025年は5月1日から9月30日までを集計し、47都道府県の搬送人員を収録する。",
+      "landingPageUrl": "https://www.fdma.go.jp/disaster/heatstroke/post4.html",
+      "downloadUrl": "https://www.fdma.go.jp/disaster/heatstroke/items/heatstroke003_data_r7.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "2008-2025年（2025年は5月1日-9月30日の確定値）",
+      "updateFrequency": "annual",
+      "latestPublishedAt": "2025-10-29",
+      "license": {
+        "name": "公共データ利用規約（第1.0版）",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.fdma.go.jp/about/others/post3.html"
+      },
+      "stats47Uses": [
+        "ranking",
+        "theme"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "人口10万人当たり熱中症救急搬送人員"
+      ],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-08-28",
+        "verifiedFromUrls": [
+          "https://www.fdma.go.jp/disaster/heatstroke/post4.html",
+          "https://www.fdma.go.jp/disaster/heatstroke/items/heatstroke003_data_r7.xlsx",
+          "https://www.fdma.go.jp/pressrelease/houdou/items/kyuuki_20251027_2.pdf",
+          "https://www.fdma.go.jp/about/others/post3.html"
+        ],
+        "notes": "採用定義は、分子=消防庁2025年確定値（5月1日-9月30日）の都道府県別搬送人員、分母=total-populationの2024年値、倍率=100,000、表示年=2025年。分母は対象期間直前の最新年次であることを注記する。公式集計が都道府県単位のため代表観測地点の選定は不要。maximum-temperatureは日最高気温の月平均という曝露指標、本候補は健康被害の結果指標であり重複しない。"
+      }
+    }
+  ]
+}

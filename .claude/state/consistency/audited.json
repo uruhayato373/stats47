@@ -1,23 +1,9 @@
 {
-  "hash": "6f5a5dda1a4f701b629e96d39e58dfac27697882cc9e3d0ddc07e5f0e8d7461d",
-  "audited_at": "2026-11-11T02:55:46",
+  "hash": "ad56c717b5f62287215f51b5834a7c61172824e2380e6ffc7189c6ec3cbc3a0d",
+  "audited_at": "2026-11-11T03:35:29",
   "files": [
-    ".agents/skills/db/fetch-mlit-ksj/SKILL.md",
-    ".agents/skills/gis/publish-geo-portfolio/SKILL.md",
-    ".claude/agents/README.md",
-    ".claude/agents/geo-analysis-curator.md",
-    ".claude/agents/gis-curator.md",
-    ".claude/agents/gis-pipeline-runner.md",
     ".claude/agents/open-data-curator.md",
-    ".claude/rules/buzz-map-standards.md",
     ".claude/rules/geo-analysis-standards.md",
-    ".claude/rules/gis-data.md",
-    ".claude/scripts/lib/__tests__/internal-link-geo.test.mjs",
-    ".claude/scripts/lib/check-datasets.mjs",
-    ".claude/scripts/lib/internal-link-lint.mjs",
-    ".claude/scripts/lib/plan-pr-quality.mjs",
-    ".claude/skills/db/fetch-mlit-ksj/SKILL.md",
-    ".claude/skills/gis/publish-geo-portfolio/SKILL.md",
-    "CLAUDE.md"
+    ".claude/scripts/lib/plan-pr-quality.mjs"
   ]
 }

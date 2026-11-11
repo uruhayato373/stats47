@@ -20,8 +20,8 @@ No prose before/after. No section headers.
 
 ## 担当範囲
 
-- `packages/data-configs/src/open-data-catalog/` のサイト・データセットカタログSSOT管理
-- `packages/data-configs/src/prefecture-statistics-catalog/` の公式統計・オープンデータ入口リンク管理
+- 台帳 `open-data.sources`・`open-data.datasets` のサイト・データセットカタログ管理
+- 台帳 `open-data.prefecture-statistics` の公式統計・オープンデータ入口リンク管理
 - 政府・自治体サイトの公式性、配布URL、API、ファイル形式、粒度、期間、更新頻度、ライセンスの確認
 - 各サイトで取得可能なデータセット一覧の棚卸しと更新
 - `ranking / theme / map / area / research-only` の利用可能性判定
@@ -42,7 +42,7 @@ No prose before/after. No section headers.
 
 ## 必読rules・参照
 
-- `.claude/rules/data-storage.md` — authored configはgit TS、観測値はR2
+- `.claude/rules/data-storage.md` — マスタと台帳は data/ の JSON、観測値はR2
 - `.claude/rules/reference-source-standards.md` — 参考文献の保全・段階処理・昇格条件
 - `.claude/rules/gis-data.md` — KSJ GISとの責務境界
 - `.claude/rules/docs-vs-issues.md` — 記録先
@@ -130,8 +130,8 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 
 ## File Boundary
 
-- 排他write: `packages/data-configs/src/open-data-catalog/**`, `config/source-vault.json`, `data/source-inventory/**`
-- 共有write: `packages/data-configs/src/prefecture-statistics-catalog/**` は本agentのみがカタログ編集する
+- 排他write: 台帳 `open-data.sources`・`open-data.datasets`, `config/source-vault.json`, `data/source-inventory/**`
+- 共有write: 台帳 `open-data.prefecture-statistics` は本agentのみがカタログ編集する
 - read-only: `packages/gis/src/mlit-ksj/**`, `data/metrics/**`, `theme-catalog/**`
 - `.claude/todo/backlog.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す
 

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "国際データ源の机上評価の台帳",
+  "description": "data/open-data/world/provider-evaluations.json の形状契約。/world (国際比較) の候補となる国際機関のデータ源を、一次情報で机上評価した記録 (実データは未取得)。ライセンスやレート制限は変わりうるので、評価をもとに機能を足す前に accessedAt を見て再確認する。provider の列挙は packages/data-configs/src/geo-scope/world-types.ts の WORLD_DATA_PROVIDER_CANDIDATES と同じ。",
+  "type": "object",
+  "required": ["evaluations"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["provider", "displayName", "license", "sourceUrl", "accessedAt", "notes"],
+        "additionalProperties": false,
+        "properties": {
+          "provider": { "enum": ["oecd", "world-bank", "un-data"] },
+          "displayName": { "type": "string", "minLength": 1 },
+          "license": { "type": "string", "minLength": 1 },
+          "sourceUrl": { "description": "評価の根拠にした URL。アクセス日を accessedAt に書く", "type": "string", "pattern": "^https://" },
+          "accessedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "notes": { "description": "カバレッジ・更新頻度・注意点", "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

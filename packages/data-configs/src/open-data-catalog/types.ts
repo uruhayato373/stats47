@@ -1,12 +1,12 @@
 /**
  * open-data-catalog — e-Stat 外の政府・自治体オープンデータの source / dataset カタログ型。
  *
- * SSOT: git TS (本ディレクトリ)。永続 DB を持たない (完全DBレス)。
+ * 記録の正本: 台帳 open-data.sources / open-data.datasets (data/open-data/catalog/ の JSON + Schema)。永続 DB を持たない (完全DBレス)。
  * 正典: .claude/agents/open-data-curator.md (初期実装仕様 doc 37 は 2026-07-18 消化・削除、git 履歴参照)
  * 担当 agent: open-data-curator (排他 write)
  *
  * 責務境界:
- *  - KSJ の稼働メタは packages/gis/src/mlit-ksj/datasets.ts が SSOT。ここは発見・評価層で、複製しない。
+ *  - KSJ の稼働メタは台帳 geo.ksj-datasets が SSOT。ここは発見・評価層で、複製しない。
  *  - metric の SSOT は data/metrics/。existingMetricKeys は参照のみ。
  *  - 不明値を空文字で埋めない。事実と推測は VerificationStatus / "unknown" で区別する。
  */

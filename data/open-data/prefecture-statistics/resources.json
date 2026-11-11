@@ -1,0 +1,662 @@
+{
+  "resources": [
+    {
+      "id": "01-statistics-portal",
+      "prefectureCode": "01",
+      "title": "北海道 公式統計情報",
+      "url": "https://www.pref.hokkaido.lg.jp/ss/tuk/index.htm",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "北海道",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "02-statistics-portal",
+      "prefectureCode": "02",
+      "title": "青森県 公式統計情報",
+      "url": "https://www.pref.aomori.lg.jp/kensei/tokei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "青森県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "03-statistics-portal",
+      "prefectureCode": "03",
+      "title": "岩手県 公式統計情報",
+      "url": "https://www3.pref.iwate.jp/webdb/view/outside/s14Tokei/top.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "岩手県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "04-statistics-portal",
+      "prefectureCode": "04",
+      "title": "宮城県 公式統計情報",
+      "url": "https://www.pref.miyagi.jp/soshiki/toukei/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "宮城県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "05-statistics-portal",
+      "prefectureCode": "05",
+      "title": "秋田県 公式統計情報",
+      "url": "https://www.pref.akita.lg.jp/pages/genre/11706",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "秋田県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "06-statistics-portal",
+      "prefectureCode": "06",
+      "title": "山形県 公式統計情報",
+      "url": "https://www.pref.yamagata.jp/ou/kikakushinko/020052/tokeijoho.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "山形県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "07-statistics-portal",
+      "prefectureCode": "07",
+      "title": "福島県 公式統計情報",
+      "url": "https://www.pref.fukushima.lg.jp/sec/11045b/15832.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "福島県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "08-statistics-portal",
+      "prefectureCode": "08",
+      "title": "茨城県 公式統計情報",
+      "url": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "茨城県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "09-statistics-portal",
+      "prefectureCode": "09",
+      "title": "栃木県 公式統計情報",
+      "url": "https://www.pref.tochigi.lg.jp/c04/pref/toukei/toukei/top.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "栃木県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "10-statistics-portal",
+      "prefectureCode": "10",
+      "title": "群馬県 公式統計情報",
+      "url": "https://toukei.pref.gunma.jp/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "群馬県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "11-statistics-portal",
+      "prefectureCode": "11",
+      "title": "埼玉県 公式統計情報",
+      "url": "https://www.pref.saitama.lg.jp/theme/tokei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "埼玉県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "12-statistics-portal",
+      "prefectureCode": "12",
+      "title": "千葉県 公式統計情報",
+      "url": "https://www.pref.chiba.lg.jp/toukei/toukeidata/hiroba/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "千葉県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "13-statistics-portal",
+      "prefectureCode": "13",
+      "title": "東京都 公式統計情報",
+      "url": "https://www.toukei.metro.tokyo.lg.jp/index.htm",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "東京都",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "14-statistics-portal",
+      "prefectureCode": "14",
+      "title": "神奈川県 公式統計情報",
+      "url": "https://www.pref.kanagawa.jp/menu/6/26/139/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "神奈川県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "15-statistics-portal",
+      "prefectureCode": "15",
+      "title": "新潟県 公式統計情報",
+      "url": "https://www.pref.niigata.lg.jp/tokei.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "新潟県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "16-statistics-portal",
+      "prefectureCode": "16",
+      "title": "富山県 公式統計情報",
+      "url": "https://www.pref.toyama.jp/cms_cat/404060/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "富山県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "17-statistics-portal",
+      "prefectureCode": "17",
+      "title": "石川県 公式統計情報",
+      "url": "https://www.pref.ishikawa.lg.jp/kensei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "石川県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "18-statistics-portal",
+      "prefectureCode": "18",
+      "title": "福井県 公式統計情報",
+      "url": "https://www.pref.fukui.lg.jp/doc/toukei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "福井県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "19-statistics-portal",
+      "prefectureCode": "19",
+      "title": "山梨県 公式統計情報",
+      "url": "https://www.pref.yamanashi.jp/kensei/tokei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "山梨県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "20-statistics-portal",
+      "prefectureCode": "20",
+      "title": "長野県 公式統計情報",
+      "url": "https://tokei.pref.nagano.lg.jp/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "長野県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "21-statistics-portal",
+      "prefectureCode": "21",
+      "title": "岐阜県 公式統計情報",
+      "url": "https://www.pref.gifu.lg.jp/page/13376.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "岐阜県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "22-statistics-portal",
+      "prefectureCode": "22",
+      "title": "静岡県 公式統計情報",
+      "url": "https://www.pref.shizuoka.jp/kensei/information/myshizuoka/1002256/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "静岡県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "23-statistics-portal",
+      "prefectureCode": "23",
+      "title": "愛知県 公式統計情報",
+      "url": "https://www.pref.aichi.jp/soshiki/toukei/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "愛知県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "24-statistics-portal",
+      "prefectureCode": "24",
+      "title": "三重県 公式統計情報",
+      "url": "https://www.pref.mie.lg.jp/DATABOX/index.htm",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "三重県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "25-statistics-portal",
+      "prefectureCode": "25",
+      "title": "滋賀県 公式統計情報",
+      "url": "https://www.pref.shiga.lg.jp/kensei/tokei/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "滋賀県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "26-statistics-portal",
+      "prefectureCode": "26",
+      "title": "京都府 公式統計情報",
+      "url": "https://www.pref.kyoto.jp/t-ptl/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "京都府",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "27-statistics-portal",
+      "prefectureCode": "27",
+      "title": "大阪府 公式統計情報",
+      "url": "https://www.pref.osaka.lg.jp/o040090/toukei/top_portal/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "大阪府",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "28-statistics-portal",
+      "prefectureCode": "28",
+      "title": "兵庫県 公式統計情報",
+      "url": "https://web.pref.hyogo.lg.jp/stat/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "兵庫県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "29-statistics-portal",
+      "prefectureCode": "29",
+      "title": "奈良県 公式統計情報",
+      "url": "https://www.pref.nara.jp/1309.htm",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "奈良県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "30-statistics-portal",
+      "prefectureCode": "30",
+      "title": "和歌山県 公式統計情報",
+      "url": "https://www.pref.wakayama.lg.jp/prefg/020300/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "和歌山県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "31-statistics-portal",
+      "prefectureCode": "31",
+      "title": "鳥取県 公式統計情報",
+      "url": "https://www.pref.tottori.lg.jp/3214.htm",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "鳥取県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "32-statistics-portal",
+      "prefectureCode": "32",
+      "title": "島根県 公式統計情報",
+      "url": "https://pref.shimane-toukei.jp/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "島根県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "33-statistics-portal",
+      "prefectureCode": "33",
+      "title": "岡山県 公式統計情報",
+      "url": "https://www.pref.okayama.jp/soshiki/15/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "岡山県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "34-statistics-portal",
+      "prefectureCode": "34",
+      "title": "広島県 公式統計情報",
+      "url": "https://www.pref.hiroshima.lg.jp/site/toukei/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "広島県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "35-statistics-portal",
+      "prefectureCode": "35",
+      "title": "山口県 公式統計情報",
+      "url": "https://www.pref.yamaguchi.lg.jp/soshiki/22/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "山口県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "36-statistics-portal",
+      "prefectureCode": "36",
+      "title": "徳島県 公式統計情報",
+      "url": "https://www.pref.tokushima.lg.jp/statistics/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "徳島県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "37-statistics-portal",
+      "prefectureCode": "37",
+      "title": "香川県 公式統計情報",
+      "url": "https://www.pref.kagawa.lg.jp/tokei/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "香川県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "38-statistics-portal",
+      "prefectureCode": "38",
+      "title": "愛媛県 公式統計情報",
+      "url": "https://www.pref.ehime.jp/soshiki/17/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "愛媛県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "39-statistics-portal",
+      "prefectureCode": "39",
+      "title": "高知県 公式統計情報",
+      "url": "https://www.pref.kochi.lg.jp/soshiki/120000/121901/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "高知県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "40-statistics-portal",
+      "prefectureCode": "40",
+      "title": "福岡県 公式統計情報",
+      "url": "https://www.pref.fukuoka.lg.jp/dataweb/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "福岡県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "41-statistics-portal",
+      "prefectureCode": "41",
+      "title": "佐賀県 公式統計情報",
+      "url": "https://www.pref.saga.lg.jp/toukei/default.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "佐賀県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "42-statistics-portal",
+      "prefectureCode": "42",
+      "title": "長崎県 公式統計情報",
+      "url": "https://www.pref.nagasaki.jp/bunrui/kenseijoho/toukeijoho/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "長崎県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "43-statistics-portal",
+      "prefectureCode": "43",
+      "title": "熊本県 公式統計情報",
+      "url": "https://www.pref.kumamoto.jp/soshiki/20/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "熊本県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "44-statistics-portal",
+      "prefectureCode": "44",
+      "title": "大分県 公式統計情報",
+      "url": "https://www.pref.oita.jp/site/toukei/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "大分県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "45-statistics-portal",
+      "prefectureCode": "45",
+      "title": "宮崎県 公式統計情報",
+      "url": "https://stat.pref.miyazaki.lg.jp/",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "宮崎県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "46-statistics-portal",
+      "prefectureCode": "46",
+      "title": "鹿児島県 公式統計情報",
+      "url": "https://www.pref.kagoshima.jp/tokei/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "鹿児島県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    },
+    {
+      "id": "47-statistics-portal",
+      "prefectureCode": "47",
+      "title": "沖縄県 公式統計情報",
+      "url": "https://www.pref.okinawa.jp/toukeika/index.html",
+      "type": "statistics-portal",
+      "topics": [
+        "general"
+      ],
+      "publisher": "沖縄県",
+      "isOfficial": true,
+      "discoveredFrom": "https://rcisss.ier.hit-u.ac.jp/Japanese/guide/localstat.html",
+      "lastVerifiedAt": "2026-07-18"
+    }
+  ]
+}
