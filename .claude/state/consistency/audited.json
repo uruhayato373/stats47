@@ -1,8 +1,15 @@
 {
-  "hash": "f258ca1cb03c02dc924bf0f6e841c4834e9614b4a44fffe93bf0ef68fd2100e3",
-  "audited_at": "2026-11-11T08:07:47",
+  "hash": "2efe2de461354f9fbd43ca9b9f79e7c02729672f1958207b22a0e6e2081a794d",
+  "audited_at": "2026-11-11T11:11:16",
   "files": [
-    ".agents/skills/management/monetization-strategy/SKILL.md",
-    ".claude/skills/management/monetization-strategy/SKILL.md"
+    ".agents/skills/product/build-kindle-book/SKILL.md",
+    ".claude/agents/README.md",
+    ".claude/agents/data-pack-manager.md",
+    ".claude/agents/kindle-publisher.md",
+    ".claude/rules/data-pack-standards.md",
+    ".claude/rules/kindle-publishing-standards.md",
+    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
+    ".claude/scripts/lib/plan-pr-quality.mjs",
+    ".claude/skills/product/build-kindle-book/SKILL.md"
   ]
 }

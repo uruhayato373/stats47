@@ -10,7 +10,6 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { GEO_ANALYSES } from "@stats47/data-configs/business-plan";
 import { REGISTRIES } from "../../../config/datasets.mjs";
 import { resolveRegistry } from "../../../.claude/scripts/lib/check-datasets.mjs";
-import { ALL_PRODUCTS } from "../src/catalog/products";
 
 const ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
 const readText = (path: string) => readFileSync(resolve(ROOT, path), "utf8");
@@ -19,12 +18,6 @@ const sorted = (values: Iterable<string>) => [...values].sort();
 describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む", () => {
   it("metrics = METRICS_REGISTRY のキー", () => {
     expect(sorted(resolveRegistry(REGISTRIES.metrics, readText))).toEqual(sorted(Object.keys(METRICS_REGISTRY)));
-  });
-
-  it("product-ids = ALL_PRODUCTS と Geo サービスの ID", () => {
-    expect(sorted(resolveRegistry(REGISTRIES["product-ids"], readText))).toEqual(
-      sorted(ALL_PRODUCTS.map((p) => p.id)),
-    );
   });
 
   it("affiliate-ad-experiment-ids = AFFILIATE_ADS が持つ experimentId", async () => {

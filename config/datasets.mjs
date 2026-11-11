@@ -152,13 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/product-factory/src/catalog/products/packs.ts", why: "pending", phase: 9 },
-  { path: "packages/product-factory/src/catalog/licenses.ts", why: "pending", phase: 9 },
-  { path: "packages/product-factory/src/channels/kindle/book-catalog.ts", why: "pending", phase: 9 },
-  { path: "packages/product-factory/src/channels/kindle/book-ranking-keys.ts", why: "pending", phase: 9 },
-  { path: "packages/product-factory/src/channels/kindle/editorial-corrections.ts", why: "pending", phase: 9 },
-  { path: "packages/product-factory/src/channels/kindle/figure-corrections.ts", why: "pending", phase: 9 },
-  { path: "packages/product-factory/src/channels/note/series.ts", why: "pending", phase: 9 },
   { path: "apps/web/scripts/affiliate-ads-data.ts", why: "pending", phase: 10 },
   { path: "apps/web/scripts/affiliate-offer-profiles-data.ts", why: "pending", phase: 10 },
   { path: "apps/web/scripts/affiliate-direct-placements-data.ts", why: "pending", phase: 10 },
@@ -197,7 +190,6 @@ export const OUTSIDE_DATA = [
   { path: "apps/web/src/features/local-finance-dashboard/data/finance-cards.json", why: "pending", phase: 12 },
   { path: "apps/ges/scripts/data/ports.json", why: "pending", phase: 12 },
   { path: "packages/r2-storage/src/scripts/lib/license-retention-20260905.json", why: "pending", phase: 12 },
-  { path: "packages/product-factory/src/catalog/packs.ts", why: "pending", phase: 9 },
 ];
 
 /**
@@ -249,11 +241,6 @@ export const REGISTRIES = {
     files: ["packages/data-configs/src/registry.ts"],
     between: ["AUTOGEN_REGISTRY_START", "AUTOGEN_REGISTRY_END"],
     pattern: '^\\s*"([a-z0-9][a-z0-9-]*)":',
-  },
-  "product-ids": {
-    description: "商品ファクトリーのテーマパック (ALL_PRODUCTS) の ID",
-    files: ["packages/product-factory/src/catalog/products/packs.ts"],
-    pattern: "^\\s*id:\\s*[\"'](P-\\d{2})[\"']",
   },
   "ranking-slug-redirects": {
     description: "公開後に置き換えた旧 ranking slug (RANKING_SLUG_REDIRECTS のキー。現行ページへ 301 する)",
@@ -315,6 +302,13 @@ export const DATASETS = [
   // ── data/ : 事業の記録 ──
   d("note.kakei-expense-evidence", "data/note/kakei-expense-evidence.json", "ledger", "product", "data", "note 家計シリーズの十大費目→根拠指標の対応表 (build-kakei-note-evidence-data.mjs の入力)", { schema: "data/note/kakei-expense-evidence.schema.json" }),
   d("note.kakei-expense-evidence-schema", "data/note/kakei-expense-evidence.schema.json", "schema", "product", "data", "上の対応表の JSON Schema"),
+  d("note.series", "data/note/series.json", "master", "product", "data", "note のシリーズ (シリーズ ID をキーにした名前・読者・サイトへ戻す既定の遷移先と、パックのテーマ → シリーズの対応。シリーズごとのテーマの一覧は読み込み口が導く)。読み込みは packages/product-factory/src/channels/note/series.ts", {
+    schema: "config/schema/note.series.schema.json",
+    refs: [
+      { field: "seriesByTheme.*", to: "note.series", key: "series.$keys" },
+      { field: "seriesByTheme.$keys", to: "products.packs", key: "packs.*.theme" },
+    ],
+  }),
   d("note.articles", "data/note/articles.json", "ledger", "product", "data", "note 記事の ID 台帳 (編集メタ・本文の所在とマニフェストの SHA)。本文と画像の実体は R2", { schema: "data/note/articles.schema.json" }),
   d("note.articles-schema", "data/note/articles.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.body-figures", "data/note/body-figures.json", "ledger", "product", "data", "note 本文の図の台帳。記事ごとの図・指標・年と今の R2 との照合 (build-note-figure-ledger.mjs の生成物。有料本文は書かない)", { schema: "data/note/body-figures.schema.json" }),
@@ -541,7 +535,43 @@ export const DATASETS = [
   d("products.strategy", "data/products/product-strategy.json", "ledger", "product", "data", "商品戦略の台帳 (商品群の判断・決定の記録・次の論点。価格と実績は持たない)", { schema: "config/schema/products.strategy.schema.json" }),
   d("products.note-pack-deliveries", "data/products/note-pack-deliveries.json", "ledger", "product", "data", "note 有料データパックの納品物の固定値 (置き場・manifest の SHA・指標数)。2026-11-08 にココナラの出品台帳から移した", {
     schema: "config/schema/products.note-pack-deliveries.schema.json",
-    refs: [{ field: "packs.$keys", to: "registry:product-ids" }],
+    refs: [{ field: "packs.$keys", to: "products.packs", key: "packs.$keys" }],
+  }),
+  d("products.packs", "data/products/packs/packs.json", "master", "product", "data", "商品ファクトリーのテーマパック P-01〜P-14 (パック ID をキーにした定義。ID とテーマは 1:1 で、EXPECTED_PACK_IDS と THEME_BY_ID は読み込み口がここから導く。rankingKeys は持たず生成物から注入する。notes は判断の記録)。読み込みは packages/product-factory/src/catalog/products/packs.ts (PACKS)", {
+    schema: "config/schema/products.packs.schema.json",
+    refs: [{ field: "packs.*.licenseId", to: "products.licenses", key: "licenses.$keys" }],
+  }),
+  d("products.licenses", "data/products/packs/licenses.json", "master", "product", "data", "商品のライセンス定義 (ライセンス ID をキーにした利用範囲・クライアントワーク可否。再販売は常に不可)。読み込みは packages/product-factory/src/catalog/licenses.ts (LICENSE_REGISTRY)", {
+    schema: "config/schema/products.licenses.schema.json",
+  }),
+  d("products.kindle-books", "data/products/kindle/books.json", "master", "product", "data", "Kindle 書籍の企画 (書籍 ID をキーにした書名・章立て・編集設計・状態。表紙設計と ranking の章のキーは読み込み口が結合する。notes は書籍ごとの判断の記録)。読み込みは packages/product-factory/src/channels/kindle/book-catalog.ts (KINDLE_BOOKS)", {
+    schema: "config/schema/products.kindle-books.schema.json",
+    refs: [{ field: "books.*.chapters[].blogSlug", to: "blog.articles", key: "articles[].slug" }],
+  }),
+  d("products.kindle-region-codes", "data/products/kindle/region-codes.json", "master", "product", "data", "Kindle S3 (地域別) の 8 地方ブロックの構成県コード (キーは書籍 K-S3-<キー> の接尾辞)。読み込みは packages/product-factory/src/channels/kindle/book-catalog.ts (S3_REGION_CODES)", {
+    schema: "config/schema/products.kindle-region-codes.schema.json",
+  }),
+  d("products.kindle-book-ranking-keys", "data/products/kindle/book-ranking-keys.json", "ledger", "product", "data", "Kindle 書籍の章に載せる指標の採否 (書籍 ID ごとの指標キーと選定理由・『日本国勢図会』の論点の接続結果)。読み込みは packages/product-factory/src/channels/kindle/book-ranking-keys.ts", {
+    schema: "config/schema/products.kindle-book-ranking-keys.schema.json",
+    refs: [
+      { field: "books.*.[]", to: "registry:metrics" },
+      { field: "books.$keys", to: "products.kindle-books", key: "books.$keys" },
+      { field: "japanZueCoverage.included.*.[]", to: "registry:metrics" },
+      { field: "japanZueCoverage.included.$keys", to: "products.kindle-books", key: "books.$keys" },
+      { field: "japanZueCoverage.excluded.$keys", to: "registry:metrics" },
+      { field: "notes.$keys", to: "products.kindle-books", key: "books.$keys" },
+    ],
+  }),
+  d("products.kindle-editorial-corrections", "data/products/kindle/editorial-corrections.json", "ledger", "product", "data", "Kindle 書籍版だけの本文の校訂 (ブログ記事の slug ごとの置換前後と理由。公開ブログは書き換えない)。読み込みは packages/product-factory/src/channels/kindle/editorial-corrections.ts (correctBookArticle)", {
+    schema: "config/schema/products.kindle-editorial-corrections.schema.json",
+    refs: [
+      { field: "corrections.$keys", to: "blog.articles", key: "articles[].slug" },
+      { field: "notes.$keys", to: "products.kindle-editorial-corrections", key: "corrections.$keys" },
+    ],
+  }),
+  d("products.kindle-figure-corrections", "data/products/kindle/figure-corrections.json", "ledger", "product", "data", "Kindle 書籍版だけの図の中の文字の校訂 (<記事 slug>/<図の名前> ごとの置換前後と理由。PNG 化の直前に当てる)。読み込みは packages/product-factory/src/channels/kindle/figure-corrections.ts (correctBookFigure)", {
+    schema: "config/schema/products.kindle-figure-corrections.schema.json",
+    refs: [{ field: "notes.$keys", to: "products.kindle-figure-corrections", key: "corrections.$keys" }],
   }),
   d("products.ledger", "data/products/product-ledger.json", "state", "product", "data", "商品の台帳 (価格・状態・閲覧・売上を既存の記録から集めたもの)"),
   d("products.ledger-summary", "data/products/PRODUCT-LEDGER.md", "report", "product", "data", "商品の台帳の要約 (週次・月次レビューが読む)"),

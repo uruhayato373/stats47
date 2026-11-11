@@ -2,13 +2,13 @@
  * 商品ファクトリー (データパック) — 型定義 (SSOT)
  *
  * 正典: .claude/rules/data-pack-standards.md
- * 商品案の由来: Git履歴上の旧 A-01〜L-07。現行トレースは packs.ts の sourceIds。
+ * 商品案の由来: Git履歴上の旧 A-01〜L-07。現行トレースは台帳 `products.packs` の sourceIds。
  *
  * 2026-07-23: 旧 174 件カタログ (A-01〜L-07・family 別) を、テーマ別 14 パック (P-01〜P-14)
  * へ破壊的に縮約した。同一テーマが family 横断で重複していた (観光 = B-06/C-14/D-08/E-06 等) ため、
  * 出品・実データ接続・管理の単位をテーマパックへ集約する。sourceIds に旧 ID をトレースする。
  *
- * 完全DBレス: 商品定義・テンプレート・生成コードは git TS が SSOT。
+ * 完全DBレス: 商品定義は台帳 `products.packs` (data/products/packs/packs.json)、テンプレート・生成コードは git TS が SSOT。
  * 観測値は既存 R2 が SSOT。Office 等のバイナリは派生物 (手編集を正典にしない・公開R2へ置かない)。
  */
 

@@ -3,45 +3,21 @@
  * 2026-07-23: 旧 families.ts (A〜L・174 件) を、テーマ別 14 パック (P-01〜P-14) へ縮約。
  */
 import type { PackTheme } from "./types";
+import data from "../../../../data/products/packs/packs.json";
 
-/** 期待するパック ID の明示リスト (件数導出ではなく明示リスト一致で検証する)。 */
-export const EXPECTED_PACK_IDS: readonly string[] = [
-  "P-01",
-  "P-02",
-  "P-03",
-  "P-04",
-  "P-05",
-  "P-06",
-  "P-07",
-  "P-08",
-  "P-09",
-  "P-10",
-  "P-11",
-  "P-12",
-  "P-13",
-  "P-14",
-] as const;
+/**
+ * 期待するパック ID の一覧。台帳 `products.packs` (data/products/packs/packs.json) のキーから導く。
+ * 件数 (14) と P-01〜P-14 の並びは tests/catalog.test.ts が固定する。
+ */
+export const EXPECTED_PACK_IDS: readonly string[] = Object.keys(data.packs);
 
 /** パック総数。 */
 export const EXPECTED_TOTAL: number = EXPECTED_PACK_IDS.length;
 
-/** id → theme (1:1)。 */
-export const THEME_BY_ID: Readonly<Record<string, PackTheme>> = {
-  "P-01": "population-household",
-  "P-02": "income-wage-hiring",
-  "P-03": "tourism-lodging",
-  "P-04": "municipal-finance",
-  "P-05": "healthcare-nursing",
-  "P-06": "education-childcare",
-  "P-07": "migration-living",
-  "P-08": "retail-trade-area",
-  "P-09": "industry-economy",
-  "P-10": "disaster-infrastructure",
-  "P-11": "map-chart-assets",
-  "P-12": "all-in-one",
-  "P-13": "free-trial",
-  "P-14": "household-consumption",
-} as const;
+/** id → theme (1:1)。台帳 `products.packs` の theme から導く。 */
+export const THEME_BY_ID: Readonly<Record<string, PackTheme>> = Object.fromEntries(
+  Object.entries(data.packs).map(([id, pack]) => [id, pack.theme as PackTheme]),
+);
 
 /** テーマの表示メタ。 */
 export const PACK_META: Readonly<

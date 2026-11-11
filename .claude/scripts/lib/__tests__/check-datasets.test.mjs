@@ -429,7 +429,7 @@ test("台帳参照が宣言されている (投稿→指標・販売→出品・
   assert.ok(refsOf("sns.posts").some((r) => r.field === "posts[].parent_post_id" && r.to === "sns.posts" && !r.severity));
   assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["kdp.listings"]);
   assert.ok(refsOf("sales.ledger").every((r) => !r.severity));
-  assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "registry:product-ids" && !r.severity));
+  assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "products.packs" && !r.severity));
   assert.ok(REGISTRY_REFS.some((r) => r.to === "affiliate.experiments" && !r.severity));
 });
 

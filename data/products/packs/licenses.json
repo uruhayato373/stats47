@@ -1,0 +1,60 @@
+{
+  "licenses": {
+    "personal": {
+      "name": "個人ライセンス",
+      "scope": "購入者本人のみ利用可",
+      "clientWork": false,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "single-corporate": {
+      "name": "1 法人ライセンス",
+      "scope": "購入した 1 法人内での業務利用可",
+      "clientWork": false,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "client-work": {
+      "name": "クライアントワーク可ライセンス",
+      "scope": "クライアント納品物 (記事・資料・動画) への組み込み可",
+      "clientWork": true,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "education": {
+      "name": "教育機関ライセンス",
+      "scope": "授業・配布範囲を教育機関内に限定",
+      "clientWork": false,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "service-deliverable": {
+      "name": "役務成果物ライセンス",
+      "scope": "依頼者が案件ごとに合意した利用範囲",
+      "clientWork": true,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "free-sample": {
+      "name": "無料サンプルライセンス",
+      "scope": "品質・操作性の確認用途 (無料入口)",
+      "clientWork": false,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "support-included": {
+      "name": "サポート付きライセンス",
+      "scope": "1 法人内利用 + 導入説明・一定期間の質問対応",
+      "clientWork": false,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    },
+    "customization": {
+      "name": "カスタマイズ付きライセンス",
+      "scope": "色・ロゴ・項目を反映した個別成果物の利用",
+      "clientWork": true,
+      "resale": false,
+      "attribution": "出典：政府統計の総合窓口 (e-Stat) を基に stats47 作成。数値の集計・指標化・可視化を独自に実施。"
+    }
+  }
+}
