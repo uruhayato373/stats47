@@ -11,7 +11,8 @@ import type { AdFormat } from "./types";
  * AdSense表示の全体スイッチ。
  *
  * 2026-08-16に一時停止し、2026-10-11に新アカウント (pub-9055416085403520) の
- * 審査承認を受けて再開した (backlog ADSENSE-RESTART-01)。自動広告はオフで手動枠だけ。
+ * 審査承認を受けて再開した (backlog ADSENSE-RESTART-01)。再開時は手動枠だけ。
+ * 自動広告は 2026-11-04 から AdSense の管理画面でオン (2026-11-11 オーナー決定で継続。収益化戦略 §3.1)。
  * falseの間は環境変数がtrueでも、script / preconnect / 手動枠 / AdSense fallbackを
  * 一切描画しない。止めるときはこの1箇所だけをfalseへ戻す。
  */
