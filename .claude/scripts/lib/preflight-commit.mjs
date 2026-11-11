@@ -230,7 +230,7 @@ export const PR_GATES = [
   },
   {
     name: "Category Keys",
-    why: "カテゴリマスタ (data/categories/categories.json) を変えると CategoryKey の型 (category-keys.generated.ts) が古くなる",
+    why: "カテゴリマスタ (categories.json) を変えると CategoryKey の型 (category-keys.generated.ts) が古くなる",
     run: () => tryRun("npm", ["run", "build:category-keys", "--workspace=@stats47/data-configs", "--", "--check"]),
     hint: "npm run build:category-keys --workspace=@stats47/data-configs",
   },
