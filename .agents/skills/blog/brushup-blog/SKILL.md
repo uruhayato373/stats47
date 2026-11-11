@@ -306,6 +306,8 @@ nlm cross query --notebooks "<ノートブック名>" \
    本文の数値) をすべて直す。順位が入れ替わって見出しや結論が成り立たなくなった節は、data に合わせて解釈から書き直す
 5. 共通 Step B / C (lint・quality-gate) → blog-critic (delta) → 公開。done にすると次の snapshot で図の年が最新になり、一覧から消える
 
+**数本以上をまとめて直すときは Agent を使わない (2026-11-09)。** 1〜3 を `node .claude/scripts/blog/prepare-year-refresh-prompts.mjs --slugs a,b` が決定的に行い (取り出し・図の取り直し・暗い版・県庁所在市の数量×価格の作り直し・published:false・照合の食い違いと data の要約を入れた `article.prompt.txt`)、本文の書き直しと審査は `npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --slugs a,b --effort low` (ユーザー端末) が行う。題に旧年の値が残るかは公開前に `find-kakei-stale-title-values.mjs --local` で確かめる。Agent のワークフローで 95 本を書き直したときは入力 約 3 億 2,600 万トークンを使った。
+
 ### focus=CTA強化 のフロー (部分編集)
 
 | focus | 反映先 | 内容 |

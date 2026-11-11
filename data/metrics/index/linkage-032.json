@@ -4403,6 +4403,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kakei-number-one-city-rotation",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
@@ -4636,6 +4640,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:kakei-number-one-city-rotation",
+          "kind": "blog"
         },
         {
           "pageId": "blog:kochi-food-culture",

@@ -2394,6 +2394,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -6972,6 +6976,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:vacant-houses-population-decline",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:vacant-houses-city",
           "kind": "municipality-ranking"
         },
@@ -7990,6 +7998,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:vacant-houses-population-decline",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:vacant-housing-rate-excluding-rental-sale-secondary",
           "kind": "municipality-ranking"
         },
@@ -8047,6 +8059,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:vacant-houses-population-decline",
+          "kind": "blog"
+        },
         {
           "pageId": "municipality-ranking:vacant-housing-rate-for-rent",
           "kind": "municipality-ranking"
@@ -8285,6 +8301,10 @@
         },
         {
           "pageId": "blog:vacant-house-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:vacant-houses-population-decline",
           "kind": "blog"
         },
         {

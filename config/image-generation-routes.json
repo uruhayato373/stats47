@@ -13,7 +13,8 @@
   ],
   "deterministicRoutes": [
     { "id": "sns-stills", "label": "SNS・YouTube の図とサムネイル", "entry": ".claude/skills/sns/render-sns-stills/SKILL.md", "note": "データから Remotion で描く。図の型は data/content-operations/image-templates.json" },
-    { "id": "ogp-cards", "label": "OGP・ランキングのカード", "entry": ".claude/rules/ogp-image-standards.md", "note": "Satori と共通 renderer で描く" }
+    { "id": "ogp-cards", "label": "OGP・ランキングのカード", "entry": ".claude/rules/ogp-image-standards.md", "note": "Satori と共通 renderer で描く" },
+    { "id": "note-product-samples", "label": "note のデータ商品の見本画像", "entry": ".claude/scripts/note/render-product-figures.ts", "note": "記事の figure-specs.json (画像ごとの型と入力) から、型の台帳 data/content-operations/image-templates.json の描画器だけで描く。型の無い画像は build-note-figure-ledger.mjs --check が数える" }
   ],
   "legacy": [
     { "path": "apps/web/scripts/lib/gemini-image-client.ts", "removalCard": "BLOG-BG-PIPELINE-CONSOLIDATE-01", "reason": "公開済みの Gemini 背景が残る間の互換" },

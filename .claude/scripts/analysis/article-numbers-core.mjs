@@ -28,6 +28,8 @@ const UNITS = [
 const COUNTERS = ["段", "つ", "番目", "等分", "分の", "章", "節", "項目", "点目", "位"];
 /** 日付の部品。数値として照合しない */
 const DATE_PARTS = /^(?:月|日|時点)/;
+/** 区分の名前・期間・閾値として書く整数の後ろ。年齢 (18歳未満・30代)、期間 (10年で・2013〜17年)、区切りの値 (150以上) */
+const LABEL_SUFFIXES = /^(?:歳|代|年|か月|カ月|ヶ月|以上|以下|未満|超)/;
 
 const normalize = (text) =>
   text
@@ -93,6 +95,7 @@ function isExcluded(n, text) {
   if (isInteger && !n.hasComma && n.value >= YEAR_MIN && n.value <= YEAR_MAX && (/^年/.test(after) || n.unit === "" || /^[〜~～-]/.test(after) || /^\)/.test(after)))
     return true;
   if (DATE_PARTS.test(after)) return true;
+  if (isInteger && !n.hasComma && (LABEL_SUFFIXES.test(after) || /^(?:歳|代)$/.test(n.unit))) return true;
   if (isInteger && n.value <= SMALL_INTEGER_MAX && !UNITS.some(([u]) => u === n.unit)) return true;
   if (isInteger && COUNTERS.some((c) => after.startsWith(c))) return true;
   // 「人口1万人あたり」「10万人当たり」の分母は結論の数値ではない

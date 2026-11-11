@@ -1,5 +1,6 @@
 export { InfraHistoryPage } from './components/InfraHistoryPage';
 export {
+  infraHistoryIndexablePaths,
   infraHistoryPath,
   infraNetworkNoun,
   resolveInfraScope,

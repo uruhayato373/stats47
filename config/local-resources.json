@@ -184,6 +184,10 @@
       "ageDays": 30
     },
     {
+      "path": ".local/estat-cache",
+      "ageDays": 14
+    },
+    {
       "path": ".local/next-*",
       "ageDays": 7
     },

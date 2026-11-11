@@ -1417,6 +1417,13 @@
       "contexts": [
         "process"
       ]
+    },
+    {
+      "name": "ATTACH_NAME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
     }
   ]
 }

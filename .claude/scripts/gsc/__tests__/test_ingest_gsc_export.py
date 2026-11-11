@@ -79,6 +79,33 @@ class CoverageContract(unittest.TestCase):
         self.assertIsNone(ingest.parse_index_status("日付,該当ページ\n2026-09-14,785\n"))
         self.assertIsNone(ingest.parse_index_status("日付,未登録,登録済み,表示回数\n"))
 
+    def test_submitted_zip_is_separated_by_name(self):
+        self.assertTrue(ingest.is_submitted_zip("/x/インデックス-stats47.jp-Coverage-2026-11-11-概要-送信済みビュー.zip"))
+        self.assertFalse(ingest.is_submitted_zip("/x/インデックス-stats47.jp-Coverage-2026-11-11-概要.zip"))
+
+    def test_submitted_record_and_history(self):
+        import tempfile, os
+        report = {"trend": "日付,未登録,登録済み,表示回数\n2026-11-06,1977,6729,10\n",
+                  "aggregate": {"検出 - インデックス未登録": 1134, "ソフト 404": 0, "noindex タグによって除外されました": 578}}
+        rec = ingest.build_submitted_record(report, "2026-W45", "2026-11-07")
+        self.assertEqual(rec["index_status"]["indexed"], 6729)
+        self.assertEqual(rec["totals"]["soft-404"], 0)
+        self.assertIsNone(ingest.build_submitted_record({"trend": "日付,該当ページ\n2026-11-06,1\n", "aggregate": {}}, "w", "d"))
+        self.assertIsNone(ingest.build_submitted_record(None, "w", "d"))
+        path = os.path.join(tempfile.mkdtemp(), "h.csv")
+        ingest.update_submitted_history(path, "2026-W44", "2026-10-31", None)
+        ingest.update_submitted_history(path, "2026-W45", "2026-11-07", rec)
+        # captured の週は後からの未取得で上書きされない
+        self.assertFalse(ingest.update_submitted_history(path, "2026-W45", "2026-11-07", None))
+        rows = list(csv.DictReader(open(path, encoding="utf-8")))
+        self.assertEqual([r["status"] for r in rows], ["missing", "captured"])
+        self.assertEqual(rows[0]["indexed"], "")  # 0 で埋めない
+        self.assertEqual(rows[1]["indexed"], "6729")
+        self.assertEqual(rows[1]["not-indexed"], "1977")
+        self.assertEqual(rows[1]["discovered-not-indexed"], "1134")
+        self.assertEqual(rows[1]["soft-404"], "0")
+        self.assertEqual(rows[1]["robots-blocked"], "")  # 表に無い理由は空欄
+
 
 if __name__ == "__main__":
     unittest.main()

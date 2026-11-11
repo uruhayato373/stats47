@@ -38,7 +38,7 @@ import {
 import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { ArticleTeaserCard, CardGrid, SurfaceLinkCard } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid, RailCard, RailNavRow, SurfaceLinkCard } from '@/components/surface';
 
 import {
   AdRow,
@@ -519,6 +519,17 @@ export default async function SurveyPage({ params }: PageProps) {
           </p>
         )}
         <CategoryRankingTable items={allItems} topicOptions={topicOptions} trackingSurface="survey_ranking" />
+        {/* 表はページ送りなので、サーバーの HTML に出るリンクは先頭 20 件だけになる。全件のリンクを畳んだ一覧で
+            出し、検索エンジンと JavaScript 無しの閲覧でも全ランキングへ辿れるようにする (GSC-INTERNAL-DISCOVERY-01) */}
+        <RailCard title={`全 ${allItems.length} 件を名前の一覧で見る`} collapsible bodyClassName="p-0">
+          <nav aria-label="すべてのランキング (名前の一覧)" className="grid gap-x-5 px-4 pb-3 sm:grid-cols-2">
+            {allItems.map((item) => (
+              <RailNavRow key={item.rankingKey} href={hrefFor('ranking', { rankingKey: item.rankingKey })} chevron={false}>
+                {item.title}
+              </RailNavRow>
+            ))}
+          </nav>
+        </RailCard>
       </section>
 
       {relatedCategories.length > 0 && (

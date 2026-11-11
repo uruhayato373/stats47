@@ -805,6 +805,451 @@
       "issue": "issue:I09",
       "page": "ranking:national-treasury-disbursement-prefecture",
       "role": "evidence"
+    },
+    {
+      "issue": "issue:K01-3",
+      "page": "blog:frozen-gyoza-spending-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-1",
+      "page": "blog:hokkaido-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-2",
+      "page": "blog:aomori-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-3",
+      "page": "blog:iwate-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-4",
+      "page": "blog:miyagi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-5",
+      "page": "blog:akita-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-6",
+      "page": "blog:yamagata-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-7",
+      "page": "blog:fukushima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-8",
+      "page": "blog:ibaraki-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-9",
+      "page": "blog:tochigi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-10",
+      "page": "blog:gunma-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-11",
+      "page": "blog:saitama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-12",
+      "page": "blog:chiba-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-13",
+      "page": "blog:tokyo-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-14",
+      "page": "blog:kanagawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-15",
+      "page": "blog:niigata-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-16",
+      "page": "blog:toyama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-17",
+      "page": "blog:ishikawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-18",
+      "page": "blog:fukui-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-19",
+      "page": "blog:yamanashi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-20",
+      "page": "blog:nagano-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-21",
+      "page": "blog:gifu-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-22",
+      "page": "blog:shizuoka-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-23",
+      "page": "blog:aichi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-24",
+      "page": "blog:mie-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-25",
+      "page": "blog:shiga-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-26",
+      "page": "blog:kyoto-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-27",
+      "page": "blog:osaka-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-28",
+      "page": "blog:hyogo-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-29",
+      "page": "blog:nara-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-30",
+      "page": "blog:wakayama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-31",
+      "page": "blog:tottori-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-32",
+      "page": "blog:shimane-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-33",
+      "page": "blog:okayama-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-34",
+      "page": "blog:hiroshima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-35",
+      "page": "blog:yamaguchi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-36",
+      "page": "blog:tokushima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-37",
+      "page": "blog:kagawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-38",
+      "page": "blog:ehime-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-39",
+      "page": "blog:kochi-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-40",
+      "page": "blog:fukuoka-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-41",
+      "page": "blog:saga-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-42",
+      "page": "blog:nagasaki-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-43",
+      "page": "blog:kumamoto-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-44",
+      "page": "blog:oita-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-45",
+      "page": "blog:miyazaki-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-46",
+      "page": "blog:kagoshima-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10-47",
+      "page": "blog:okinawa-food-culture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06",
+      "page": "blog:income-quintile-overview",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-5",
+      "page": "blog:income-quintile-overview",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-1",
+      "page": "blog:income-quintile-regressive",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-6",
+      "page": "blog:income-quintile-medical-health",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-7",
+      "page": "blog:income-quintile-food-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-8",
+      "page": "blog:income-quintile-car",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-9",
+      "page": "blog:income-quintile-appliance",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-10",
+      "page": "blog:income-quintile-recreation-services",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-11",
+      "page": "blog:income-quintile-travel",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-12",
+      "page": "blog:income-quintile-clothing",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-13",
+      "page": "blog:income-quintile-luxury-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-14",
+      "page": "blog:income-quintile-dining",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K04",
+      "page": "blog:alcoholic-beverages-group-consumption-expenditure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K04-1",
+      "page": "blog:beer-peak-month-july-to-december",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-3",
+      "page": "blog:engel-coefficient-vs-prefectural-income",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-4",
+      "page": "blog:information-communication-coefficient-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K05",
+      "page": "blog:household-spending-before-after-inflation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K05-1",
+      "page": "blog:rice-spending-quantity-gap-2025",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K05-2",
+      "page": "blog:white-bread-price-up-quantity-up",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K08-1",
+      "page": "blog:necktie-stockings-market-shrink",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K09-1",
+      "page": "blog:winter-coat-bargain-purchase-price",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E01-2",
+      "page": "blog:spinach-consumption-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E01-3",
+      "page": "blog:academic-achievement-test-prefecture-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D04-1",
+      "page": "blog:high-school-advancement-rate",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D04-2",
+      "page": "blog:advancement-plus-employment-rate-prefecture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:E02-1",
+      "page": "blog:tutoring-cost-university-advancement-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-1",
+      "page": "blog:engel-coefficient-rise-hardship-2025",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-4",
+      "page": "blog:kakei-number-one-city-rotation",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D13-1",
+      "page": "japan-theme:household-assets-debt",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K08",
+      "page": "blog:household-spending-25-years-bought-less-bought-more",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K09",
+      "page": "blog:household-spending-seasons-and-tax-hike-swings",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K09-2",
+      "page": "blog:beer-happoshu-liquor-tax-steps-household-response",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-2",
+      "page": "blog:education-spending-income-quintile-decade",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-3",
+      "page": "blog:income-quintile-share-shift",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K06-4",
+      "page": "blog:income-quintile-high-income-sales-check",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:D04-3",
+      "page": "blog:university-advancement-rate-definitions",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K07",
+      "page": "blog:single-household-spending-differences",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-5",
+      "page": "blog:local-production-local-consumption-meat",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-2",
+      "page": "blog:fresh-seafood-east-west-boundary",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-2",
+      "page": "blog:engel-coefficient-living-standard-myth",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K10",
+      "page": "blog:capital-city-buying-patterns-47",
+      "role": "answers"
     }
   ]
 }

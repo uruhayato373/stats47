@@ -45,6 +45,7 @@ import { TITLE_PROMISE_WARNING_RULES, lintTitlePromises } from '../lib/title-pro
 import { lintHypernymMetricNames, lintExtremeBaseYear } from '../lib/metric-name-lint.mjs';
 import { lintBlogContentType } from '../content-types/blog-type-lint.mjs';
 import { checkAnalyses } from '../analysis/check-analysis-cycle.mjs';
+import { checkArticleNumbers } from '../analysis/article-numbers-core.mjs';
 import {
   lintSvgContent,
   lintSvgSize,
@@ -64,7 +65,7 @@ const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 
 const arg = process.argv[2];
 if (!arg) {
-  console.error('usage: node quality-gate.mjs <slug | path/to/article.md>');
+  console.error('usage: node quality-gate.mjs <slug | path/to/article.md | 記事ディレクトリ>');
   process.exit(1);
 }
 
@@ -75,6 +76,8 @@ let articlePath;
 let dataDir;
 if (looksLikePath) {
   articlePath = path.resolve(arg);
+  // 記事ディレクトリを渡されたら article.md を読む (record-critic-findings.mjs と同じ受け方。以前は EISDIR で落ちた)
+  if (fs.existsSync(articlePath) && fs.statSync(articlePath).isDirectory()) articlePath = path.join(articlePath, 'article.md');
   dataDir = path.join(path.dirname(articlePath), 'data');
 } else {
   articlePath = path.join(
@@ -84,6 +87,12 @@ if (looksLikePath) {
     'article.md'
   );
   dataDir = path.join(PROJECT_ROOT, '.local/r2/app/blog', arg, 'data');
+  // staging に無い slug は下書き (contents/blog/<slug>) を読む。審査役が slug で呼ぶと見つからずに止まっていた
+  const draftPath = path.join(PROJECT_ROOT, 'contents/blog', arg, 'article.md');
+  if (!fs.existsSync(articlePath) && fs.existsSync(draftPath)) {
+    articlePath = draftPath;
+    dataDir = path.join(path.dirname(draftPath), 'data');
+  }
 }
 const slug = looksLikePath ? path.basename(path.dirname(articlePath)) : arg;
 if (isGoneBlogSlug(slug)) {
@@ -96,6 +105,21 @@ if (!fs.existsSync(articlePath)) {
 }
 
 const content = fs.readFileSync(articlePath, 'utf8');
+
+/** data/*.json (出典 manifest を除く) の数値をファイル名つきで集める。本文の数値の根拠の候補 */
+function readDataNumbers(dir) {
+  if (!fs.existsSync(dir)) return {};
+  const out = {};
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('.json') || f.endsWith('.source.json')) continue;
+    try {
+      out[f] = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    } catch {
+      // 壊れた JSON は系譜の検査が別に止める
+    }
+  }
+  return out;
+}
 
 // ============================================================================
 // NG パターン (rice-harvest 失敗事例より学習)
@@ -456,6 +480,19 @@ checks.isPerCapitaArticle = factual.isPerCapitaArticle;
 blockers.push(...factual.blockers);
 warnings.push(...factual.warnings);
 
+// 問いへの回答 (archetype Q) は全国の値・派生の比が多く、県名と順位の照合が効かない。
+// 本文の数値はすべて data/*.json (図のデータか appendix-supporting-values.json の補助値) に根拠を置く (2026-11-09)。
+if (/^archetype:\s*Q\s*$/m.test(content.split(/\n---\n/)[0] ?? '')) {
+  const numbers = checkArticleNumbers(content, readDataNumbers(dataDir));
+  checks.articleNumbers = { total: numbers.total, unmatched: numbers.unmatched.length };
+  if (numbers.unmatched.length > 0) {
+    const sample = numbers.unmatched.slice(0, 8).map((u) => `${u.text}「${u.context}」`).join(' / ');
+    blockers.push(
+      `本文の数値 ${numbers.unmatched.length} 件が data/*.json に無い (archetype Q)。比・増減率・差・外部の値は data/appendix-supporting-values.json に式と出典つきで置く: ${sample}`
+    );
+  }
+}
+
 // 地方のくくりと題の約束 (2026-11-04 追加)。critic の指摘の型 region・title-promise のうち機械で判定できる形。
 // 規則ごとの実測は各 lint の冒頭に書いた。
 const claimTruth = buildGroundTruth(dataDir);
@@ -649,8 +686,10 @@ for (const base of svgRefs) {
           `${base}.source.json は再取得不能: ${sourceInspection.detail}`
         );
       }
-      // generatedBy の /tmp は過去の負債 (週次の audit-chart-axes が数える)。改稿の公開は止めない
-      for (const problem of chartSourceShapeErrors(sourceData).filter((p) => !p.includes('generatedBy'))) {
+      // generatedBy の /tmp は過去の負債 (週次の audit-chart-axes が数える)。改稿の公開は止めない。
+      // 送り箱 (contents/blog/) と他の一時領域は 2026-11-09 から止める (公開後の片付けで指す先が消える)
+      const isOldTmpPath = String(sourceData?.generatedBy ?? '').startsWith('/tmp/');
+      for (const problem of chartSourceShapeErrors(sourceData).filter((p) => !(isOldTmpPath && p.includes('generatedBy')))) {
         pairBlockers.push(`${base}.source.json の形が違う: ${problem}`);
       }
     } catch (error) {

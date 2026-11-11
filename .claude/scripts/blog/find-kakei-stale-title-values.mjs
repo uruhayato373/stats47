@@ -5,6 +5,7 @@
  *
  *   node .claude/scripts/blog/find-kakei-stale-title-values.mjs          # 表を出す
  *   node .claude/scripts/blog/find-kakei-stale-title-values.mjs --json   # JSON で出す
+ *   node .claude/scripts/blog/find-kakei-stale-title-values.mjs --local  # contents/blog/<slug>/article.md があれば、その題で照らす (公開前の改稿の確認)
  *
  * 入力: R2 の app/blog/all.json (rankingArticleIndex) と各ランキングの app/ranking/<key>/values.json、
  * 家計調査の指標の集合は台帳 data/estat/kakei-ledger/ledger.json。read-only (公開 URL を読むだけ)。
@@ -31,6 +32,15 @@ async function fetchJson(key) {
 
 const shortPrefName = (name) => name.replace(/(都|府|県)$/, "");
 
+/** 手元の改稿の title / seoTitle。無ければ null (公開版の題を使う) */
+function localTitles(slug) {
+  const file = path.join(PROJECT_ROOT, "contents/blog", slug, "article.md");
+  if (!fs.existsSync(file)) return null;
+  const fm = /^---\n([\s\S]*?)\n---/.exec(fs.readFileSync(file, "utf8"))?.[1] ?? "";
+  const field = (k) => new RegExp(`^${k}:\\s*"?(.*?)"?\\s*$`, "m").exec(fm)?.[1];
+  return { title: field("title") ?? "", seoTitle: field("seoTitle") };
+}
+
 function titleNumbers(title) {
   return [...title.matchAll(/([0-9][0-9,]*(?:\.[0-9]+)?)/g)]
     .map((m) => Number(m[1].replace(/,/g, "")))
@@ -43,7 +53,8 @@ async function main() {
   const kakeiKeys = new Set(ledger.tables.flatMap((t) => t.metrics));
   const blog = await fetchJson("app/blog/all.json");
   if (!blog) throw new Error("app/blog/all.json を読めない");
-  const bySlug = new Map(blog.articles.map((a) => [a.slug, a]));
+  const useLocal = process.argv.includes("--local");
+  const bySlug = new Map(blog.articles.map((a) => [a.slug, useLocal ? { ...a, ...(localTitles(a.slug) ?? {}) } : a]));
 
   const found = new Map();
   for (const [key, slugs] of Object.entries(blog.rankingArticleIndex ?? {})) {

@@ -180,6 +180,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 | **状態付きキュー (SSOT・機械)** | `data/gsc/coverage-remediation/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
 | 人間向け要約 | `data/gsc/coverage-remediation/LATEST.md` | build が書く / 人間が読む |
 | 経過観測 (週次件数) | `data/gsc/coverage-totals-history.csv` | build が追記 |
+| 送信済みビューの週次件数 | `data/gsc/coverage-submitted-history.csv` (+週フォルダの `submitted-totals.json`) | export が `pages=ALL_SUBMITTED_URLS` の概要を足し ingest が追記。取れない週は `status=missing`・空欄 (0 で埋めない) |
 | 取り込み済 drilldown | `data/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
 | observe-after-fix 対象 | `data/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
 | agent 用詳細ログ | `data/improvement/gsc-improvement/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |

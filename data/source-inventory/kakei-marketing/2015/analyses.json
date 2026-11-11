@@ -73,7 +73,10 @@
           "spinach-consumption-ranking"
         ]
       },
-      "nextAction": "学力調査の47県正答率をnew-metric化した後、散布図(型B)で符合と限界を示す記事へ拡張する"
+      "nextAction": "学力調査の47県正答率をnew-metric化した後、散布図(型B)で符合と限界を示す記事へ拡張する",
+      "issueIds": [
+        "issue:E01-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-01",
@@ -116,7 +119,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "open-data-catalog `nier-gakuryoku-achievement` から小6・中3の国語/算数(数学)正答率をmetric化 (data-ingester・provenance 9点セット)"
+      "nextAction": "open-data-catalog `nier-gakuryoku-achievement` から小6・中3の国語/算数(数学)正答率をmetric化 (data-ingester・provenance 9点セット)",
+      "issueIds": [
+        "issue:E01-3"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-02",
@@ -163,7 +169,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "進学率ランキングのai-content/注記に『進学先の選択肢と就職環境の影響』の読み方を追加する"
+      "nextAction": "進学率ランキングのai-content/注記に『進学先の選択肢と就職環境の影響』の読み方を追加する",
+      "issueIds": [
+        "issue:D04-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-03",
@@ -211,7 +220,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "2指標の散布図または合算派生指標(calculated)で型B記事化。合算の妥当性(分母の一致)を先に検証する"
+      "nextAction": "2指標の散布図または合算派生指標(calculated)で型B記事化。合算の妥当性(分母の一致)を先に検証する",
+      "issueIds": [
+        "issue:D04-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-04",
@@ -270,7 +282,10 @@
       "themeSlugs": [
         "education-culture"
       ],
-      "nextAction": "教育投資効率の派生指標(calculated: 国公立大学授業料/教育費)を設計し、education-culture の evidenceTopic と型D記事で展開する。家計調査の教育費は子の有無を混ぜた世帯平均である旨を注記する"
+      "nextAction": "教育投資効率の派生指標(calculated: 国公立大学授業料/教育費)を設計し、education-culture の evidenceTopic と型D記事で展開する。家計調査の教育費は子の有無を混ぜた世帯平均である旨を注記する",
+      "issueIds": [
+        "issue:E02-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-05",
@@ -329,7 +344,10 @@
           "income-quintile-dining"
         ]
       },
-      "nextAction": "五分位×教育費の型D記事 (fetch-quintile-data.ts で2年平均を接地)。都道府県値ではないため/rankingには載せない"
+      "nextAction": "五分位×教育費の型D記事 (fetch-quintile-data.ts で2年平均を接地)。都道府県値ではないため/rankingには載せない",
+      "issueIds": [
+        "issue:K06-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-06",
@@ -370,7 +388,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "教育投資・消費記事の背景注記としてのみ使う"
+      "nextAction": "教育投資・消費記事の背景注記としてのみ使う",
+      "issueIds": [
+        "issue:K06-3"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a01-07",
@@ -406,7 +427,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "進学率系metricのdescription/noteに定義(分母・浪人の扱い)を明記する"
+      "nextAction": "進学率系metricのdescription/noteに定義(分母・浪人の扱い)を明記する",
+      "issueIds": [
+        "issue:D04-3"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-01",
@@ -448,7 +472,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "blog-quality-standards / fetch-quintile-data の記事テンプレに『シェア・数量・価格の分解』を規約化する"
+      "nextAction": "blog-quality-standards / fetch-quintile-data の記事テンプレに『シェア・数量・価格の分解』を規約化する",
+      "issueIds": [
+        "issue:K06-4"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-02",
@@ -499,7 +526,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "五分位×大分類シェアの型D記事 (fetch-quintile-data.ts)"
+      "nextAction": "五分位×大分類シェアの型D記事 (fetch-quintile-data.ts)",
+      "issueIds": [
+        "issue:K06-5"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-03",
@@ -555,7 +585,10 @@
           "air-conditioner-consumption-quantity-prefecture-gap"
         ]
       },
-      "nextAction": "『逆進的な品目』の型D記事 (たばこ・砂糖・暖房機器)"
+      "nextAction": "『逆進的な品目』の型D記事 (たばこ・砂糖・暖房機器)",
+      "issueIds": [
+        "issue:K06-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-04",
@@ -607,7 +640,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "『機能より感情』の型D記事。健康保持用摂取品はmetric化候補として estat-researcher へ"
+      "nextAction": "『機能より感情』の型D記事。健康保持用摂取品はmetric化候補として estat-researcher へ",
+      "issueIds": [
+        "issue:K06-6"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-05",
@@ -676,7 +712,10 @@
           "black-tea-expenditure-ranking"
         ]
       },
-      "nextAction": "紅茶は既存記事あり。れんこん(佐賀・金沢)・さやまめ(新潟)・柑橘(松山・高知)の型D2記事と、五分位の再検証(最新年)"
+      "nextAction": "紅茶は既存記事あり。れんこん(佐賀・金沢)・さやまめ(新潟)・柑橘(松山・高知)の型D2記事と、五分位の再検証(最新年)",
+      "issueIds": [
+        "issue:K06-7"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-06",
@@ -727,7 +766,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "自動車×年収の型D記事 (数量×価格の分解)"
+      "nextAction": "自動車×年収の型D記事 (数量×価格の分解)",
+      "issueIds": [
+        "issue:K06-8"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-07",
@@ -787,7 +829,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "『買い替えサイクル仮説』の型D記事 (数量と価格の分解)。テレビは/japan時系列候補"
+      "nextAction": "『買い替えサイクル仮説』の型D記事 (数量と価格の分解)。テレビは/japan時系列候補",
+      "issueIds": [
+        "issue:K06-9"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-08",
@@ -847,7 +892,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "ゴルフプレー料金(津・名古屋)の型D2記事、教養娯楽サービス×年収の型D記事"
+      "nextAction": "ゴルフプレー料金(津・名古屋)の型D2記事、教養娯楽サービス×年収の型D記事",
+      "issueIds": [
+        "issue:K06-10"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a02-09",
@@ -903,7 +951,10 @@
           "passport-issuance-prefecture-gap"
         ]
       },
-      "nextAction": "国内/外国パック旅行費の対比 型D記事 + tourismテーマの evidenceTopic 候補"
+      "nextAction": "国内/外国パック旅行費の対比 型D記事 + tourismテーマの evidenceTopic 候補",
+      "issueIds": [
+        "issue:K06-11"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a03-01",
@@ -957,7 +1008,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "『外見ほど差がつく』衣料品×年収の型D記事"
+      "nextAction": "『外見ほど差がつく』衣料品×年収の型D記事",
+      "issueIds": [
+        "issue:K06-12"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a03-02",
@@ -1024,7 +1078,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "月次数量×購入価格×CPIの接地器を新設し、最新シーズンで型C記事化 (stats47の月次系列は未整備)"
+      "nextAction": "月次数量×購入価格×CPIの接地器を新設し、最新シーズンで型C記事化 (stats47の月次系列は未整備)",
+      "issueIds": [
+        "issue:K09-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a03-03",
@@ -1079,7 +1136,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "ネクタイ・ストッキングの縮小 型C記事 (/japan 時系列候補)"
+      "nextAction": "ネクタイ・ストッキングの縮小 型C記事 (/japan 時系列候補)",
+      "issueIds": [
+        "issue:K08-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a03-04",
@@ -1131,7 +1191,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "腕時計の型C記事 (資産効果の検証は年次で再確認)"
+      "nextAction": "腕時計の型C記事 (資産効果の検証は年次で再確認)",
+      "issueIds": [
+        "issue:K06-13"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a04-01",
@@ -1206,7 +1269,10 @@
         "real-income",
         "consumer-prices"
       ],
-      "nextAction": "既存記事へ『論理の方向』注記を追加し、real-income/consumer-prices の evidenceTopic で読み方を提示する"
+      "nextAction": "既存記事へ『論理の方向』注記を追加し、real-income/consumer-prices の evidenceTopic で読み方を提示する",
+      "issueIds": [
+        "issue:K03-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a04-02",
@@ -1254,7 +1320,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "年齢階級別の購入価格比較 型D記事 (全国集計)。都道府県値ではないので/rankingには載せない"
+      "nextAction": "年齢階級別の購入価格比較 型D記事 (全国集計)。都道府県値ではないので/rankingには載せない",
+      "issueIds": [
+        "issue:K03-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a04-03",
@@ -1322,7 +1391,10 @@
           "engel-coefficient-prefecture-ranking"
         ]
       },
-      "nextAction": "エンゲル係数×県民所得の散布図(型B)で『指標として使えない』ことを示す"
+      "nextAction": "エンゲル係数×県民所得の散布図(型B)で『指標として使えない』ことを示す",
+      "issueIds": [
+        "issue:K03-3"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a04-04",
@@ -1378,7 +1450,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "『情報通信係数』を calculated metric (分子=5品目合算/分母=消費支出) として設計し、engel-coefficient と並べる"
+      "nextAction": "『情報通信係数』を calculated metric (分子=5品目合算/分母=消費支出) として設計し、engel-coefficient と並べる",
+      "issueIds": [
+        "issue:K03-4"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a05-01",
@@ -1447,7 +1522,10 @@
           "shochu-expenditure-vs-sake-ranking"
         ]
       },
-      "nextAction": "『ビールが特別な酒になった』月次パターンの型C記事 (月次接地器が要る)。都道府県の対比は既存記事を更新"
+      "nextAction": "『ビールが特別な酒になった』月次パターンの型C記事 (月次接地器が要る)。都道府県の対比は既存記事を更新",
+      "issueIds": [
+        "issue:K04-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a05-02",
@@ -1526,7 +1604,10 @@
           "hyogo-food-culture"
         ]
       },
-      "nextAction": "米vsパンの支出額逆転と食パン数量×CPIの型C記事 (/japan 時系列候補)。関西のマーガリン消費は型D2"
+      "nextAction": "米vsパンの支出額逆転と食パン数量×CPIの型C記事 (/japan 時系列候補)。関西のマーガリン消費は型D2",
+      "issueIds": [
+        "issue:K05-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a05-03",
@@ -1566,7 +1647,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "酒類記事の背景注記 (酒税改正の年表は国税庁一次資料で確認)"
+      "nextAction": "酒類記事の背景注記 (酒税改正の年表は国税庁一次資料で確認)",
+      "issueIds": [
+        "issue:K09-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a05-04",
@@ -1632,7 +1716,10 @@
           "soba-udon-dining-consumption-expenditure-prefecture-gap"
         ]
       },
-      "nextAction": "業態別×年収の型D記事 (既存の外食記事に業態分解を追加)"
+      "nextAction": "業態別×年収の型D記事 (既存の外食記事に業態分解を追加)",
+      "issueIds": [
+        "issue:K06-14"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a05-05",
@@ -1696,7 +1783,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "ぎょうざ・納豆の『消費日本一』記事に集計ルール(対象都市・テイクアウト)の注記を必ず付ける。ranking noteにも反映"
+      "nextAction": "ぎょうざ・納豆の『消費日本一』記事に集計ルール(対象都市・テイクアウト)の注記を必ず付ける。ranking noteにも反映",
+      "issueIds": [
+        "issue:K01-3"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a05-06",
@@ -1773,7 +1863,10 @@
       "themeSlugs": [
         "fishery-marine"
       ],
-      "nextAction": "18魚介の1位都市マップ(型E/H相当のタイルマップ)と fishery-marine の evidenceTopic (産地より消費地)"
+      "nextAction": "18魚介の1位都市マップ(型E/H相当のタイルマップ)と fishery-marine の evidenceTopic (産地より消費地)",
+      "issueIds": [
+        "issue:K02-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-00",
@@ -1814,7 +1907,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "<pref>-food-culture 記事シリーズの共通テンプレ(4分類・閾値)として blog-quality-standards に紐づける"
+      "nextAction": "<pref>-food-culture 記事シリーズの共通テンプレ(4分類・閾値)として blog-quality-standards に紐づける",
+      "issueIds": [
+        "issue:K10"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-01",
@@ -1863,7 +1959,10 @@
       "areaCodes": [
         "01000"
       ],
-      "nextAction": "北海道の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "北海道の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-1"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-02",
@@ -1912,7 +2011,10 @@
       "areaCodes": [
         "02000"
       ],
-      "nextAction": "青森県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "青森県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-2"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-03",
@@ -1961,7 +2063,10 @@
       "areaCodes": [
         "03000"
       ],
-      "nextAction": "岩手県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "岩手県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-3"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-04",
@@ -2010,7 +2115,10 @@
       "areaCodes": [
         "04000"
       ],
-      "nextAction": "宮城県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "宮城県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-4"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-05",
@@ -2064,7 +2172,10 @@
           "akita-food-culture"
         ]
       },
-      "nextAction": "既存記事 akita-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 akita-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-5"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-06",
@@ -2113,7 +2224,10 @@
       "areaCodes": [
         "06000"
       ],
-      "nextAction": "山形県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "山形県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-6"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-07",
@@ -2162,7 +2276,10 @@
       "areaCodes": [
         "07000"
       ],
-      "nextAction": "福島県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "福島県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-7"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-08",
@@ -2211,7 +2328,10 @@
       "areaCodes": [
         "08000"
       ],
-      "nextAction": "茨城県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "茨城県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-8"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-09",
@@ -2260,7 +2380,10 @@
       "areaCodes": [
         "09000"
       ],
-      "nextAction": "栃木県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "栃木県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-9"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-10",
@@ -2309,7 +2432,10 @@
       "areaCodes": [
         "10000"
       ],
-      "nextAction": "群馬県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "群馬県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-10"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-11",
@@ -2358,7 +2484,10 @@
       "areaCodes": [
         "11000"
       ],
-      "nextAction": "埼玉県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "埼玉県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-11"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-12",
@@ -2407,7 +2536,10 @@
       "areaCodes": [
         "12000"
       ],
-      "nextAction": "千葉県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "千葉県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-12"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-13",
@@ -2456,7 +2588,10 @@
       "areaCodes": [
         "13000"
       ],
-      "nextAction": "東京都の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "東京都の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-13"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-14",
@@ -2510,7 +2645,10 @@
           "kanagawa-food-culture"
         ]
       },
-      "nextAction": "既存記事 kanagawa-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 kanagawa-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-14"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-19",
@@ -2559,7 +2697,10 @@
       "areaCodes": [
         "19000"
       ],
-      "nextAction": "山梨県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "山梨県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-19"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-20",
@@ -2608,7 +2749,10 @@
       "areaCodes": [
         "20000"
       ],
-      "nextAction": "長野県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "長野県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-20"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-15",
@@ -2657,7 +2801,10 @@
       "areaCodes": [
         "15000"
       ],
-      "nextAction": "新潟県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "新潟県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-15"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-16",
@@ -2706,7 +2853,10 @@
       "areaCodes": [
         "16000"
       ],
-      "nextAction": "富山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "富山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-16"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-17",
@@ -2755,7 +2905,10 @@
       "areaCodes": [
         "17000"
       ],
-      "nextAction": "石川県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "石川県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-17"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-18",
@@ -2804,7 +2957,10 @@
       "areaCodes": [
         "18000"
       ],
-      "nextAction": "福井県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "福井県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-18"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-21",
@@ -2853,7 +3009,10 @@
       "areaCodes": [
         "21000"
       ],
-      "nextAction": "岐阜県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "岐阜県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-21"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-22",
@@ -2902,7 +3061,10 @@
       "areaCodes": [
         "22000"
       ],
-      "nextAction": "静岡県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "静岡県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-22"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-23",
@@ -2951,7 +3113,10 @@
       "areaCodes": [
         "23000"
       ],
-      "nextAction": "愛知県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "愛知県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-23"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-24",
@@ -3000,7 +3165,10 @@
       "areaCodes": [
         "24000"
       ],
-      "nextAction": "三重県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "三重県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-24"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-25",
@@ -3054,7 +3222,10 @@
           "shiga-food-culture"
         ]
       },
-      "nextAction": "既存記事 shiga-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 shiga-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-25"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-26",
@@ -3103,7 +3274,10 @@
       "areaCodes": [
         "26000"
       ],
-      "nextAction": "京都府の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "京都府の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-26"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-27",
@@ -3152,7 +3326,10 @@
       "areaCodes": [
         "27000"
       ],
-      "nextAction": "大阪府の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "大阪府の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-27"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-28",
@@ -3206,7 +3383,10 @@
           "hyogo-food-culture"
         ]
       },
-      "nextAction": "既存記事 hyogo-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 hyogo-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-28"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-29",
@@ -3255,7 +3435,10 @@
       "areaCodes": [
         "29000"
       ],
-      "nextAction": "奈良県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "奈良県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-29"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-30",
@@ -3304,7 +3487,10 @@
       "areaCodes": [
         "30000"
       ],
-      "nextAction": "和歌山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "和歌山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-30"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-31",
@@ -3353,7 +3539,10 @@
       "areaCodes": [
         "31000"
       ],
-      "nextAction": "鳥取県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "鳥取県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-31"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-32",
@@ -3402,7 +3591,10 @@
       "areaCodes": [
         "32000"
       ],
-      "nextAction": "島根県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "島根県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-32"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-33",
@@ -3451,7 +3643,10 @@
       "areaCodes": [
         "33000"
       ],
-      "nextAction": "岡山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "岡山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-33"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-34",
@@ -3505,7 +3700,10 @@
           "hiroshima-food-culture"
         ]
       },
-      "nextAction": "既存記事 hiroshima-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 hiroshima-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-34"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-35",
@@ -3554,7 +3752,10 @@
       "areaCodes": [
         "35000"
       ],
-      "nextAction": "山口県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "山口県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-35"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-36",
@@ -3603,7 +3804,10 @@
       "areaCodes": [
         "36000"
       ],
-      "nextAction": "徳島県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "徳島県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-36"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-37",
@@ -3652,7 +3856,10 @@
       "areaCodes": [
         "37000"
       ],
-      "nextAction": "香川県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "香川県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-37"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-38",
@@ -3701,7 +3908,10 @@
       "areaCodes": [
         "38000"
       ],
-      "nextAction": "愛媛県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "愛媛県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-38"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-39",
@@ -3755,7 +3965,10 @@
           "kochi-food-culture"
         ]
       },
-      "nextAction": "既存記事 kochi-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 kochi-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-39"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-40",
@@ -3804,7 +4017,10 @@
       "areaCodes": [
         "40000"
       ],
-      "nextAction": "福岡県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "福岡県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-40"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-41",
@@ -3853,7 +4069,10 @@
       "areaCodes": [
         "41000"
       ],
-      "nextAction": "佐賀県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "佐賀県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-41"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-42",
@@ -3902,7 +4121,10 @@
       "areaCodes": [
         "42000"
       ],
-      "nextAction": "長崎県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "長崎県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-42"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-43",
@@ -3951,7 +4173,10 @@
       "areaCodes": [
         "43000"
       ],
-      "nextAction": "熊本県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "熊本県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-43"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-44",
@@ -4000,7 +4225,10 @@
       "areaCodes": [
         "44000"
       ],
-      "nextAction": "大分県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+      "nextAction": "大分県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)",
+      "issueIds": [
+        "issue:K10-44"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-45",
@@ -4054,7 +4282,10 @@
           "miyazaki-food-culture"
         ]
       },
-      "nextAction": "既存記事 miyazaki-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 miyazaki-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-45"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-46",
@@ -4108,7 +4339,10 @@
           "kagoshima-food-culture"
         ]
       },
-      "nextAction": "既存記事 kagoshima-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 kagoshima-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-46"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a06-47",
@@ -4162,7 +4396,10 @@
           "okinawa-food-culture"
         ]
       },
-      "nextAction": "既存記事 okinawa-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+      "nextAction": "既存記事 okinawa-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する",
+      "issueIds": [
+        "issue:K10-47"
+      ]
     },
     {
       "id": "kakei-marketing-2015-a07-01",
@@ -4215,7 +4452,10 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "『産地と消費地のギャップ』型B記事 (農業産出額×家計消費量の散布図)"
+      "nextAction": "『産地と消費地のギャップ』型B記事 (農業産出額×家計消費量の散布図)",
+      "issueIds": [
+        "issue:K01-5"
+      ]
     }
   ]
 }

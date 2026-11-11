@@ -9807,10 +9807,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:household-spending-before-after-inflation",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:inflation-rate-prefecture-gap",
           "kind": "blog"
         },
@@ -10245,6 +10241,10 @@
         },
         {
           "pageId": "blog:crab-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
         {

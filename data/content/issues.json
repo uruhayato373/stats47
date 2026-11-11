@@ -16,7 +16,23 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "課税対象所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "per-taxpayer-taxable-income"
+          ]
+        },
+        "outcome": {
+          "label": "30〜34歳男性の未婚者割合",
+          "pattern": "compare",
+          "metrics": [
+            "unmarried-ratio-male-30-34"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A02",
@@ -31,7 +47,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "課税対象所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "per-taxpayer-taxable-income"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A03",
@@ -46,7 +78,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "婚姻率と平均初婚年齢",
+          "pattern": "compare",
+          "metrics": [
+            "marriages-per-total-population",
+            "average-age-of-first-marriage-wife"
+          ]
+        },
+        "outcome": {
+          "label": "粗出生率",
+          "pattern": "compare",
+          "metrics": [
+            "crude-birth-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A04",
@@ -62,7 +111,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "共働き世帯の割合",
+          "pattern": "compare",
+          "metrics": [
+            "dual-income-household-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A05",
@@ -78,7 +143,23 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "保育所の待機児童数",
+          "pattern": "compare",
+          "metrics": [
+            "nursery-waiting-children-count"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A06",
@@ -93,7 +174,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "持ち家の延べ面積",
+          "pattern": "compare",
+          "metrics": [
+            "floor-area-per-dwelling-owner"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A07",
@@ -108,7 +205,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "若年層の転出超過",
+          "pattern": "compare",
+          "metrics": [
+            "interprefecture-net-migration-age15to24"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:A08",
@@ -123,7 +233,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "三世代世帯人員の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "three-generation-household-members"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:A09",
@@ -138,7 +261,25 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "婚姻・出生・人口増減の状況",
+          "pattern": "compare",
+          "metrics": [
+            "marriages-per-total-population",
+            "total-fertility-rate",
+            "population-growth-rate"
+          ]
+        },
+        "outcome": {
+          "label": "離婚率",
+          "pattern": "compare",
+          "metrics": [
+            "divorces-per-total-population"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A10",
@@ -154,7 +295,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "妻の平均初婚年齢",
+          "pattern": "compare",
+          "metrics": [
+            "average-age-of-first-marriage-wife"
+          ]
+        },
+        "outcome": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:A11",
@@ -169,7 +326,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "20〜39歳の男女比",
+          "pattern": "compare",
+          "metrics": [
+            "sex-ratio-age-20-39"
+          ]
+        },
+        "outcome": {
+          "label": "30〜34歳男性の未婚者割合",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:A12",
@@ -185,7 +355,24 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢者の暮らしの状況",
+          "pattern": "compare",
+          "metrics": [
+            "nursing-welfare-facility-count-per-100k-65plus",
+            "single-person-household-old-population-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "高齢者の一人暮らしの割合",
+          "pattern": "change",
+          "metrics": [
+            "elderly-living-alone-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B01",
@@ -201,7 +388,23 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人人口の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-resident-count-per-100k"
+          ]
+        },
+        "outcome": {
+          "label": "刑法犯認知件数の推移",
+          "pattern": "change",
+          "metrics": [
+            "criminal-recognition-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B02",
@@ -218,7 +421,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "外国人人口の多い町",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-population-per-100k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B03",
@@ -235,7 +448,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人人口の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-resident-count-per-100k"
+          ]
+        },
+        "outcome": {
+          "label": "人口の減り方",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:B04",
@@ -250,7 +476,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人労働者数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-worker-count"
+          ]
+        },
+        "outcome": {
+          "label": "人手不足の産業の分布",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:B05",
@@ -265,7 +504,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "外国人の子どもが多い市の学校課題",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:B06",
@@ -280,7 +526,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "15〜24歳の転出超過",
+          "pattern": "compare",
+          "metrics": [
+            "interprefecture-net-migration-age15to24"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B06-1",
@@ -295,7 +551,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "15〜24歳の転出超過",
+          "pattern": "compare",
+          "metrics": [
+            "interprefecture-net-migration-age15to24"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B07",
@@ -310,7 +576,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "転入超過率の推移",
+          "pattern": "change",
+          "metrics": [
+            "moving-in-excess-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B07-1",
@@ -325,7 +601,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "転入超過率の推移",
+          "pattern": "change",
+          "metrics": [
+            "moving-in-excess-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B08",
@@ -340,7 +626,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "転入超過率",
+          "pattern": "compare",
+          "metrics": [
+            "moving-in-excess-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B09",
@@ -355,7 +651,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "昼間人口の多い町",
+          "pattern": "compare",
+          "metrics": [
+            "day-time-population"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B10",
@@ -370,7 +676,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人延べ宿泊者数の多い地域",
+          "pattern": "compare",
+          "metrics": [
+            "total-overnight-guests-foreign"
+          ]
+        },
+        "outcome": {
+          "label": "住民の暮らしの変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:B11",
@@ -386,7 +705,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "20代の地元残留",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "将来の人口の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:B12",
@@ -402,7 +731,20 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人労働者数の多い県",
+          "pattern": "compare",
+          "metrics": [
+            "foreign-worker-count"
+          ]
+        },
+        "outcome": {
+          "label": "日本人の賃金水準",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:B13",
@@ -417,7 +759,17 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "外国人住民の多さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "空き家の少なさ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C01",
@@ -432,7 +784,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "刑法犯認知件数の推移",
+          "pattern": "change",
+          "metrics": [
+            "criminal-recognition-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C02",
@@ -448,7 +810,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "人口の分母の取り方",
+          "pattern": "compare",
+          "metrics": [
+            "day-time-population-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "人口あたり犯罪の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "criminal-recognition-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C03",
@@ -463,7 +841,17 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "所得水準の低さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "犯罪の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C04",
@@ -478,7 +866,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "空き家率の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "vacant-housing-rate"
+          ]
+        },
+        "outcome": {
+          "label": "犯罪の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C05",
@@ -494,7 +895,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "警察官・警察費の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "police-officer-count-per-population",
+            "per-capita-police-expenditure-pref-municipal"
+          ]
+        },
+        "outcome": {
+          "label": "刑法犯認知件数",
+          "pattern": "compare",
+          "metrics": [
+            "penal-code-offenses-recognized-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C06",
@@ -509,7 +927,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "高齢者の交通事故死傷者数",
+          "pattern": "change",
+          "metrics": [
+            "traffic-accident-casualties-elderly-65plus"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C07",
@@ -524,7 +952,25 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "車社会の度合い",
+          "pattern": "compare",
+          "metrics": [
+            "average-road-traffic-volume",
+            "road-length-per-km2",
+            "private-auto-insurance-penetration-rate-vehicle"
+          ]
+        },
+        "outcome": {
+          "label": "交通事故死者数",
+          "pattern": "compare",
+          "metrics": [
+            "traffic-accident-deaths-per-100k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C08",
@@ -539,7 +985,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "自転車通勤・通学の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "commute-by-bicycle"
+          ]
+        },
+        "outcome": {
+          "label": "自転車事故の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C09",
@@ -554,7 +1013,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢化率の高さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "特殊詐欺の被害の多さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:C10",
@@ -569,7 +1038,17 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "児童虐待相談の対応件数",
+          "pattern": "change",
+          "metrics": [
+            "child-abuse-consultation-cases"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C11",
@@ -584,7 +1063,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "防犯カメラの設置数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "犯罪件数の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:C12",
@@ -600,7 +1089,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "火災による死亡者数",
+          "pattern": "compare",
+          "metrics": [
+            "fire-deaths-per-100k",
+            "building-fire-count-per-100-thousand-people"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D01",
@@ -617,7 +1117,23 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "real-disposable-income"
+          ]
+        },
+        "outcome": {
+          "label": "物価を引いた暮らしの豊かさ",
+          "pattern": "compare",
+          "metrics": [
+            "consumer-price-difference-index-overall"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D02",
@@ -634,7 +1150,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "最低賃金の引き上げ",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "雇用の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:D03",
@@ -650,7 +1176,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "男女間賃金格差",
+          "pattern": "compare",
+          "metrics": [
+            "gender-wage-gap"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D04",
@@ -666,7 +1202,102 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大学等進学率の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        },
+        "outcome": {
+          "label": "所得の高さ",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:D04-1",
+      "level": "minor",
+      "question": "高校卒業者の大学等進学率が低い県は、教育水準が低いと言えるか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "学校基本調査 高等学校卒業者の大学等進学率",
+      "pitfall": "進学率は自宅から通える大学の数と地元の就職先に左右され、教育の質の指標ではない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大学等進学率の高低",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:D04-2",
+      "level": "minor",
+      "question": "進学率と就職率を合算すると、堅実な進路選択ができている県はどこか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "学校基本調査 大学等進学率・高卒就職率",
+      "pitfall": "2 つの率を足すのは独自の見方で、公式の指標ではない。浪人の扱いを確かめる",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "進学率と就職率の合算",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate",
+            "high-school-graduates-job-ratio"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:D04-3",
+      "level": "minor",
+      "question": "新聞が独自計算した『大学進学率』はなぜ公表値と食い違うのか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "学校基本調査 (大学等進学率の公表値と計算方法)",
+      "pitfall": "浪人を分子だけに入れると率が高く出る。報道の独自計算は定義を確かめる",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県内大学入学者割合",
+          "pattern": "compare",
+          "metrics": [
+            "in-pref-university-entrance-ratio-by-highschool-origin"
+          ]
+        },
+        "outcome": {
+          "label": "大学等進学率の公表値",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D05",
@@ -682,7 +1313,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "共働き世帯の割合",
+          "pattern": "compare",
+          "metrics": [
+            "dual-income-household-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "世帯の所得",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D06",
@@ -698,7 +1342,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "所得格差の大きさ",
+          "pattern": "compare",
+          "metrics": [
+            "gini-coefficient-disposable-income"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D07",
@@ -714,7 +1368,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公務員給与の水準",
+          "pattern": "compare",
+          "metrics": [
+            "laspeyres-index-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "民間の給与水準",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D07-1",
@@ -730,7 +1397,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公務員給与の水準",
+          "pattern": "compare",
+          "metrics": [
+            "laspeyres-index-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "高校教員の平均年収",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-teacher-annual-income"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D08",
@@ -746,7 +1429,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "非正規雇用率",
+          "pattern": "compare",
+          "metrics": [
+            "non-regular-employment-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D09",
@@ -762,7 +1455,17 @@
         "データ"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "生活保護の被保護世帯数",
+          "pattern": "compare",
+          "metrics": [
+            "households-on-public-assistance-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D10",
@@ -778,7 +1481,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "副業率",
+          "pattern": "compare",
+          "metrics": [
+            "side-job-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D11",
@@ -793,7 +1506,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ひとり親の母親の就業状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D12",
@@ -809,7 +1529,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "物価の変化率",
+          "pattern": "change",
+          "metrics": [
+            "cpi-change-rate-food"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D13",
@@ -825,7 +1555,54 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "貯蓄・資産の保有状況",
+          "pattern": "compare",
+          "metrics": [
+            "household-savings-balance",
+            "current-deposit-balance-ratio-multi-person-households",
+            "current-securities-balance-ratio-multi-person-households",
+            "current-life-insurance-balance-ratio-multi-person-households"
+          ]
+        },
+        "outcome": {
+          "label": "負債の多さ",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:D13-1",
+      "level": "minor",
+      "question": "年収が高い世帯ほど、貯金も借金も多いのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 貯蓄・負債編の年収 18 階級・五分位・十分位 (0002210010/12/14、全国・二人以上の世帯)",
+      "pitfall": "貯蓄・負債編の年間収入は家計収支編の年収と別の系列。負債の多くは住宅ローンで、持ち家と年齢で大きく変わる",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "世帯の年収階級",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "貯蓄残高と負債残高",
+          "pattern": "compare",
+          "metrics": [
+            "financial-assets-balance-multi-person-households",
+            "financial-debt-balance"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D14",
@@ -841,7 +1618,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年収の壁の有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "パートの就業時間",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:D15",
@@ -857,7 +1645,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大卒男性の初任給",
+          "pattern": "compare",
+          "metrics": [
+            "new-graduate-scheduled-salary-university-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E01",
@@ -872,7 +1670,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県民所得の水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "学力テストの平均正答率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E02",
@@ -888,7 +1696,57 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "補習教育への支出",
+          "pattern": "compare",
+          "metrics": [
+            "elementary-tutoring-consumption-expenditure",
+            "high-school-tutoring-consumption-expenditure"
+          ]
+        },
+        "outcome": {
+          "label": "学力と進学の水準",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:E02-1",
+      "level": "minor",
+      "question": "補習教育にお金をかけずに国公立大学へ進学できている県庁所在市はどこか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 教育費の内訳 (国公立・私立の授業料、補習教育、県庁所在市)",
+      "pitfall": "授業料は進学した家庭の支出で、進学率ではない。県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "補習教育への支出",
+          "pattern": "compare",
+          "metrics": [
+            "elementary-tutoring-consumption-expenditure",
+            "high-school-tutoring-consumption-expenditure"
+          ]
+        },
+        "outcome": {
+          "label": "大学等への進学率",
+          "pattern": "compare",
+          "metrics": [
+            "high-school-advancement-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E03",
@@ -903,7 +1761,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "教育費の割合",
+          "pattern": "compare",
+          "metrics": [
+            "education-expenditure-ratio-pref-finance"
+          ]
+        },
+        "outcome": {
+          "label": "学力テストの平均正答率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E04",
@@ -918,7 +1789,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "学級規模の大小",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "学力テストの成績",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E05",
@@ -933,7 +1815,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公立小学校費",
+          "pattern": "compare",
+          "metrics": [
+            "per-child-public-elementary-school-expenditure-pref-municipal"
+          ]
+        },
+        "outcome": {
+          "label": "不登校による長期欠席の比率",
+          "pattern": "compare",
+          "metrics": [
+            "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+            "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E06",
@@ -948,7 +1847,23 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大学収容力の大小",
+          "pattern": "compare",
+          "metrics": [
+            "university-capacity-index"
+          ]
+        },
+        "outcome": {
+          "label": "県内大学入学者の割合",
+          "pattern": "compare",
+          "metrics": [
+            "in-pref-university-entrance-ratio-by-highschool-origin"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E07",
@@ -963,7 +1878,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "小学校数の減少",
+          "pattern": "change",
+          "metrics": [
+            "elementary-school-count"
+          ]
+        },
+        "outcome": {
+          "label": "子育て世帯の転出入",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:E08",
@@ -978,7 +1906,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "母子世帯数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "single-mother-households"
+          ]
+        },
+        "outcome": {
+          "label": "子どもの貧困(就学援助率)",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E09",
@@ -993,7 +1934,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "子ども医療費の無料化範囲",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "子どもの受診の件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:E10",
@@ -1008,7 +1960,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "図書館数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "library-count-per-million"
+          ]
+        },
+        "outcome": {
+          "label": "子どもの読書量",
+          "pattern": "compare",
+          "metrics": [
+            "hobby-participation-rate-reading"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E11",
@@ -1024,7 +1992,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "教員の給与水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "学力調査の結果",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E12",
@@ -1040,7 +2018,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "学校給食の無償化",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "学力と定住の状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:E13",
@@ -1056,7 +2045,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "児童生徒数の変化",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "教員数の変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F01",
@@ -1071,7 +2070,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "課税対象所得の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "per-taxpayer-taxable-income"
+          ]
+        },
+        "outcome": {
+          "label": "平均寿命",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F02",
@@ -1086,7 +2098,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "医師数・病院数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "physicians-in-medical-facilities-per-100k",
+            "general-hospital-count"
+          ]
+        },
+        "outcome": {
+          "label": "健康寿命",
+          "pattern": "compare",
+          "metrics": [
+            "healthy-life-expectancy-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F03",
@@ -1101,7 +2130,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "病院のベッド数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "住民1人あたり医療費",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F04",
@@ -1116,7 +2155,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "食塩摂取量",
+          "pattern": "compare",
+          "metrics": [
+            "salt-intake-male-age-adjusted"
+          ]
+        },
+        "outcome": {
+          "label": "脳血管疾患の死亡者数",
+          "pattern": "compare",
+          "metrics": [
+            "deaths-cerebrovascular-disease-per-100k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F05",
@@ -1131,7 +2186,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "男性の1日の歩数",
+          "pattern": "compare",
+          "metrics": [
+            "daily-steps-male-20to64-age-adjusted"
+          ]
+        },
+        "outcome": {
+          "label": "健康寿命",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F06",
@@ -1146,7 +2214,20 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "自殺者数と近年の推移",
+          "pattern": "change",
+          "metrics": [
+            "suicides-per-100k",
+            "suicide-count",
+            "suicide-count-65plus",
+            "ratio-65-plus"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F07",
@@ -1161,7 +2242,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "特定健診の受診率",
+          "pattern": "compare",
+          "metrics": [
+            "specific-health-checkup-participation-rate"
+          ]
+        },
+        "outcome": {
+          "label": "1人あたり医療費",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F08",
@@ -1177,7 +2271,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "自動車保有台数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "男性の肥満度(BMI)",
+          "pattern": "compare",
+          "metrics": [
+            "bmi-male-20to69-age-adjusted"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F09",
@@ -1192,7 +2299,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "酒類の消費量",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "肝疾患による死亡",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F10",
@@ -1208,7 +2325,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "救急車の病院収容所要時間",
+          "pattern": "compare",
+          "metrics": [
+            "ambulance-hospital-arrival-time"
+          ]
+        },
+        "outcome": {
+          "label": "救命率(生存率)",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F11",
@@ -1223,7 +2353,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "分娩取扱病院数の変化",
+          "pattern": "change",
+          "metrics": [
+            "delivery-hospital-count"
+          ]
+        },
+        "outcome": {
+          "label": "出生数の変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F12",
@@ -1238,7 +2381,20 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "男性の喫煙率の低下",
+          "pattern": "change",
+          "metrics": [
+            "smoking-rate-male-age-adjusted"
+          ]
+        },
+        "outcome": {
+          "label": "肺がん罹患・死亡の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F13",
@@ -1253,7 +2409,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "子どもの身長・体重の地域差",
+          "pattern": "compare",
+          "metrics": [
+            "average-height-primary-school-fifth-grade-male",
+            "average-height-primary-school-fifth-grade-female",
+            "average-height-middle-school-second-grade-male",
+            "average-height-middle-school-second-grade-female",
+            "average-weight-primary-school-fifth-grade-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F13-1",
@@ -1268,7 +2438,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "新潟の子どもの身長",
+          "pattern": "compare",
+          "metrics": [
+            "average-height-primary-school-fifth-grade-male",
+            "average-height-primary-school-fifth-grade-female",
+            "average-height-middle-school-second-grade-male",
+            "average-height-middle-school-second-grade-female",
+            "avg-height-high-school-2nd-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F14",
@@ -1283,7 +2467,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県民の所得水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "特定健診の受診率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F15",
@@ -1298,7 +2492,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "都道府県別の医師数の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:F16",
@@ -1313,7 +2514,14 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "都道府県別の通院率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F17",
@@ -1331,7 +2539,23 @@
       "status": "active",
       "queries": [
         "沖縄 精神科 多い 理由"
-      ]
+      ],
+      "axes": {
+        "explanatory": {
+          "label": "精神病床数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "psychiatric-bed-count"
+          ]
+        },
+        "outcome": {
+          "label": "精神科病院の平均在院日数",
+          "pattern": "compare",
+          "metrics": [
+            "psychiatric-hospital-avg-length-of-stay"
+          ]
+        }
+      }
     },
     {
       "id": "issue:G01",
@@ -1347,7 +2571,20 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "65歳以上の就業率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "要介護認定者の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "long-term-care-certified-persons"
+          ]
+        }
+      }
     },
     {
       "id": "issue:G02",
@@ -1363,7 +2600,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "市別の介護保険料基準額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G03",
@@ -1379,7 +2623,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "通いの場・サロンの数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "要介護認定率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G04",
@@ -1395,7 +2649,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "認知症の人の将来推計",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:G05",
@@ -1411,7 +2672,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "都道府県別の介護離職者数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G06",
@@ -1427,7 +2695,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "老人ホームの定員の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "nursing-home-capacity-per-1000-65plus"
+          ]
+        },
+        "outcome": {
+          "label": "特養の入所申込者数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G07",
@@ -1443,7 +2724,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "免許返納者と店舗・バス停の分布",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G08",
@@ -1459,7 +2747,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢単身世帯の割合",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "孤立死の件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:G09",
@@ -1475,7 +2773,17 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "高齢化率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "生活保護の保護率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G10",
@@ -1491,7 +2799,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "年齢3区分の人口構成比",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:G11",
@@ -1507,7 +2822,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "介護施設の定員数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "要介護認定率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G12",
@@ -1523,7 +2848,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "介護職員の賃金水準",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "介護職員の離職率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:G13",
@@ -1538,7 +2873,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "障害者向け福祉施設の数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H01",
@@ -1555,7 +2897,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "人口の増減率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "空き家率の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H02",
@@ -1571,7 +2923,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "家賃の高さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "平均通勤時間",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H03",
@@ -1587,7 +2949,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "バス路線・駅の増減",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H04",
@@ -1603,7 +2975,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "人口集中地区の人口比率の推移",
+          "pattern": "change",
+          "metrics": [
+            "densely-inhabited-district-population-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H05",
@@ -1619,7 +3001,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "地価の上昇率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H06",
@@ -1635,7 +3024,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "持ち家比率の高さ",
+          "pattern": "compare",
+          "metrics": [
+            "owner-occupied-housing-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "暮らしの満足度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H06-1",
@@ -1652,7 +3054,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "持ち家比率の都道府県差",
+          "pattern": "compare",
+          "metrics": [
+            "owner-occupied-housing-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H07",
@@ -1669,7 +3081,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "最深積雪の多い町",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H08",
@@ -1685,7 +3107,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ふるさと納税の受入額と控除額",
+          "pattern": "compare",
+          "metrics": [
+            "furusato-donation-amount-prefecture",
+            "furusato-tax-deduction-municipal-prefecture"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H08-1",
@@ -1700,7 +3133,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "ふるさと納税の受入額",
+          "pattern": "compare",
+          "metrics": [
+            "furusato-donation-amount-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "住民所得の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H09",
@@ -1716,7 +3162,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大型小売店の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "large-retail-store-count-per-100k"
+          ]
+        },
+        "outcome": {
+          "label": "商店街の小売事業所数の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H10",
@@ -1732,7 +3191,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "新設住宅の着工数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H11",
@@ -1748,7 +3217,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "2050年の人口の維持率",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H12",
@@ -1763,7 +3239,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "集落の高齢化率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "無住化する集落の割合",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H13",
@@ -1779,7 +3265,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "鉄道の少なさ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "自動車への依存度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H14",
@@ -1795,7 +3291,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "2050年の駅近居住人口",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H15",
@@ -1811,7 +3314,18 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "鉄道かバスかの運行形態",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "地域の利用状況と収支",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H16",
@@ -1828,7 +3342,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "公共交通が使いにくい人口",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H17",
@@ -1843,7 +3364,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "コミュニティバスの有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "高齢者の外出頻度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H18",
@@ -1858,7 +3390,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "空き家バンクの実績",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "空き家の流通件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:H19",
@@ -1874,7 +3416,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "持ち家の延べ面積",
+          "pattern": "compare",
+          "metrics": [
+            "floor-area-per-dwelling-owner"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H20",
@@ -1890,7 +3442,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "パソコンの所有数量",
+          "pattern": "compare",
+          "metrics": [
+            "pc-ownership-multi-person-households-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H21",
@@ -1905,7 +3467,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "通信費の支出額",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "仕事や学びでの利用状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:H22",
@@ -1920,7 +3492,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "公衆電話の設置台数",
+          "pattern": "compare",
+          "metrics": [
+            "public-phone-count-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I01",
@@ -1936,7 +3518,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "市の財政力と将来負担",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I02",
@@ -1952,7 +3541,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "職員数の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "municipal-general-administration-staff"
+          ]
+        },
+        "outcome": {
+          "label": "住民サービスの水準",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I03",
@@ -1967,7 +3569,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "合併の有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "合併後の人口の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I04",
@@ -1983,7 +3596,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "投票率の地域差",
+          "pattern": "compare",
+          "metrics": [
+            "voter-turnout-governor"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I05",
@@ -1999,7 +3622,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "若い世代の投票率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "老人福祉費の歳出割合",
+          "pattern": "compare",
+          "metrics": [
+            "elderly-welfare-expenditure-ratio-pref-finance"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I06",
@@ -2015,7 +3651,20 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "女性議員の割合",
+          "pattern": "compare",
+          "metrics": [
+            "prefectural-assembly-female-share"
+          ]
+        },
+        "outcome": {
+          "label": "保育関連の歳出",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I07",
@@ -2031,7 +3680,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "公共施設の老朽化度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I08",
@@ -2048,7 +3704,22 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "水道の供給条件",
+          "pattern": "compare",
+          "metrics": [
+            "water-supply-population",
+            "water-supply-capacity",
+            "water-supply-annual-volume"
+          ]
+        },
+        "outcome": {
+          "label": "水道料金の水準と今後の変化",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I08-1",
@@ -2066,7 +3737,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "水道の整備状況",
+          "pattern": "compare",
+          "metrics": [
+            "water-supply-population-ratio-2012on"
+          ]
+        },
+        "outcome": {
+          "label": "下水道普及率",
+          "pattern": "compare",
+          "metrics": [
+            "sewerage-penetration-rate-2012on"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I09",
@@ -2081,7 +3768,21 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "国からの財源への依存度",
+          "pattern": "compare",
+          "metrics": [
+            "local-allocation-tax-ratio-pref-finance",
+            "national-treasury-disbursement-prefecture"
+          ]
+        },
+        "outcome": {
+          "label": "人口の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I09-1",
@@ -2097,7 +3798,17 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "国庫支出金の額",
+          "pattern": "compare",
+          "metrics": [
+            "national-treasury-disbursement-prefecture"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I10",
@@ -2113,7 +3824,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "公務員の就業者割合",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "民間の就業者割合",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I11",
@@ -2129,7 +3850,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "借金返済の負担",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "新規投資の支出",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:I12",
@@ -2145,7 +3876,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "税収が多い町と交付税に頼る町",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "歳入・歳出の構成",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:I13",
@@ -2160,7 +3902,17 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "生活保護の受給率",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "市町村の財政状況",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I14",
@@ -2176,7 +3928,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "古い橋の数と点検の進み具合",
+          "pattern": "compare",
+          "metrics": [
+            "road-bridge-diagnosed-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:I15",
@@ -2192,7 +3954,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "人口の減少",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "道路・橋の維持費負担",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:I16",
@@ -2208,7 +3980,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "手続きのオンライン化の進度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J01",
@@ -2224,7 +4003,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "猛暑日の日数",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "熱中症の救急搬送人員",
+          "pattern": "change",
+          "metrics": [
+            "heatstroke-emergency-transports"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J02",
@@ -2240,7 +4032,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "桜の開花日の推移",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:J03",
@@ -2256,7 +4055,20 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "災害の被害の大きさ",
+          "pattern": "compare",
+          "metrics": [
+            "disaster-damage-amount-per-person"
+          ]
+        },
+        "outcome": {
+          "label": "人口の転出",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J04",
@@ -2273,7 +4085,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "浸水想定区域の居住人口",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:J05",
@@ -2289,7 +4108,22 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "ごみ処理の取り組み",
+          "pattern": "compare",
+          "metrics": [
+            "waste-recycling-rate",
+            "garbage-landfill-rate",
+            "final-disposal-site-remaining-capacity"
+          ]
+        },
+        "outcome": {
+          "label": "1人あたりごみ排出量",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J06",
@@ -2305,7 +4139,25 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "日照と住宅の条件",
+          "pattern": "compare",
+          "metrics": [
+            "annual-sunshine-duration",
+            "detached-house-ratio",
+            "owner-occupied-housing-ratio"
+          ]
+        },
+        "outcome": {
+          "label": "太陽光発電の普及",
+          "pattern": "compare",
+          "metrics": [
+            "solar-panel-housing-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J07",
@@ -2321,7 +4173,23 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "農業就業人口",
+          "pattern": "compare",
+          "metrics": [
+            "agricultural-employment-population"
+          ]
+        },
+        "outcome": {
+          "label": "耕作放棄地の面積",
+          "pattern": "change",
+          "metrics": [
+            "abandoned-cultivated-land-area"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J08",
@@ -2337,7 +4205,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "クマの出没件数",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:J09",
@@ -2353,7 +4228,14 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "土砂災害警戒区域に住む人口",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J10",
@@ -2369,7 +4251,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "低標高地域に住む人口の割合",
+          "pattern": "compare",
+          "metrics": [
+            "low-elevation-population-ratio-5m"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J11",
@@ -2385,7 +4277,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "津波避難場所の整備数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "津波に対する安全度",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J12",
@@ -2400,7 +4302,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "木造住宅の割合",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "火災・地震の被害の大きさ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J13",
@@ -2416,7 +4328,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "電力消費量の用途別内訳",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:J14",
@@ -2431,7 +4350,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "大規模太陽光発電所の立地",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "地域に残る経済効果",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:J15",
@@ -2447,7 +4377,23 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "工場の集積度",
+          "pattern": "compare",
+          "metrics": [
+            "manufacturing-shipment-amount"
+          ]
+        },
+        "outcome": {
+          "label": "産業部門のCO2排出量",
+          "pattern": "compare",
+          "metrics": [
+            "regional-industry-co2-emissions-estimate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J16",
@@ -2463,7 +4409,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "最終処分場の残余容量",
+          "pattern": "compare",
+          "metrics": [
+            "final-disposal-site-remaining-capacity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J17",
@@ -2478,7 +4434,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "PM2.5の環境基準達成率",
+          "pattern": "compare",
+          "metrics": [
+            "pm25-general-station-compliance-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01",
@@ -2494,7 +4460,21 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "果物の産地かどうか",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "生鮮果物の消費量",
+          "pattern": "compare",
+          "metrics": [
+            "fresh-fruit-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K02",
@@ -2509,7 +4489,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "東西・気候・歴史の区分",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "麺類の消費量と支出額",
+          "pattern": "compare",
+          "metrics": [
+            "fresh-udon-soba-consumption-quantity",
+            "ramen-dining-consumption-expenditure",
+            "soba-udon-dining-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K03",
@@ -2525,7 +4521,146 @@
         "ノウハウ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "県民所得の水準",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27"
+          ]
+        },
+        "outcome": {
+          "label": "エンゲル係数",
+          "pattern": "compare",
+          "metrics": [
+            "engel-coefficient"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K03-1",
+      "level": "minor",
+      "question": "エンゲル係数が 44 年ぶりに高いのは、暮らしが苦しくなったからか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 用途分類 年次の年間収入五分位 (0002070005)・世帯主年齢 (0002070011)。全国・二人以上の世帯",
+      "pitfall": "食料の値上がり、高齢世帯の増加、外食・中食の扱いで係数が動く。暦年と年度の値を混ぜない。五分位は世帯主の年齢と世帯人員も違う",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年収階級・世帯主年齢",
+          "pattern": "compose"
+        },
+        "outcome": {
+          "label": "エンゲル係数の推移",
+          "pattern": "change",
+          "metrics": [
+            "engel-coefficient",
+            "food-expenditure-ratio-multi-person-households"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K03-2",
+      "level": "minor",
+      "question": "エンゲル係数が高いほど生活水準が低い、は本当か",
+      "unit": "japan",
+      "answerability": "myth",
+      "dataNote": "家計調査 エンゲル係数の長期推移と年間収入五分位別の値 (全国)",
+      "pitfall": "所得が上がると係数が下がる向きは言えても、係数が高いから貧しいとは言えない。世帯の年齢・人数・外食の多さでも動く",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "エンゲル係数の長期推移",
+          "pattern": "change",
+          "metrics": [
+            "engel-coefficient"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K03-3",
+      "level": "minor",
+      "question": "エンゲル係数の順に県庁所在市を並べると、生活水準の指標として使えるか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 エンゲル係数・消費支出・食料費 (県庁所在市)、県民経済計算の 1 人あたり県民所得",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい。県民所得は県全体の値で、母集団が違う",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "1人当たり県民所得",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27"
+          ]
+        },
+        "outcome": {
+          "label": "県庁所在市のエンゲル係数",
+          "pattern": "compare",
+          "metrics": [
+            "engel-coefficient"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K03-4",
+      "level": "minor",
+      "question": "エンゲル係数の代わりに、生活水準を映す係数はあるか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 通信関係の支出 (固定電話・携帯電話・受信料など) と消費支出 (県庁所在市・全国)",
+      "pitfall": "独自に作る比率で公式の指標ではない。時系列では通信費の伸びで上がり続ける",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "1人当たり県民所得",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27"
+          ]
+        },
+        "outcome": {
+          "label": "情報通信関係の支出割合",
+          "pattern": "compare",
+          "metrics": [
+            "information-communication-coefficient",
+            "information-communication-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K04",
@@ -2540,7 +4675,43 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "酒類への支出額",
+          "pattern": "compare",
+          "metrics": [
+            "alcoholic-beverages-group-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K04-1",
+      "level": "minor",
+      "question": "家庭で飲む酒はビールから何へ移り、勝ち組の酒は何か",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 酒類 6 品目の支出額・購入数量 (全国の年次・月次、年間収入五分位)",
+      "pitfall": "2025 年の分類改定で酒類の区分が変わっていないかを確かめる。外で飲む酒は入らない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "酒類の支出額の推移",
+          "pattern": "change",
+          "metrics": [
+            "alcoholic-beverages-group-consumption-expenditure",
+            "chuhai-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:L01",
@@ -2556,7 +4727,28 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "子育て環境の指標",
+          "pattern": "compare",
+          "metrics": [
+            "childcare-employment-rate",
+            "nursery-utilization-rate",
+            "per-capita-child-welfare-expenditure-under17-pref-municipal",
+            "physicians-in-medical-facilities-per-100k",
+            "urban-park-area-per-person"
+          ]
+        },
+        "outcome": {
+          "label": "子育て成果の指標",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate",
+            "infant-mortality-rate-per-1000-births"
+          ]
+        }
+      }
     },
     {
       "id": "issue:L02",
@@ -2572,7 +4764,29 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "住環境・医療・治安の指標",
+          "pattern": "compare",
+          "metrics": [
+            "general-hospital-count-per-100k",
+            "owner-occupied-housing-ratio",
+            "private-rental-housing-rent-per-3-3m2",
+            "violent-crime-per-100k",
+            "maximum-temperature"
+          ]
+        },
+        "outcome": {
+          "label": "暮らしの豊かさの指標",
+          "pattern": "compare",
+          "metrics": [
+            "per-capita-prefectural-income-h27",
+            "unemployment-rate",
+            "total-fertility-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:L03",
@@ -2588,7 +4802,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "駅・バス停・施設への近さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M01",
@@ -2603,9 +4824,22 @@
         "データ",
         "実務"
       ],
-      "products": ["note:muni-manufacturing-shipment-data"],
+      "products": [
+        "note:muni-manufacturing-shipment-data"
+      ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "規模と生産性の区分",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "製造業の強さ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M02",
@@ -2621,7 +4855,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "気候と土地の条件",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "農業・漁業の生産量",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M02-1",
@@ -2649,7 +4894,19 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "水稲の作付面積と収穫量",
+          "pattern": "compare",
+          "metrics": [
+            "rice-cultivated-area",
+            "rice-harvest-volume",
+            "rice-yield-per-10a"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M03",
@@ -2665,7 +4922,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "建設業の就業者数",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "公共工事の受注額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M04",
@@ -2681,7 +4948,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "港湾の取扱規模",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "製造業の出荷額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M05",
@@ -2697,7 +4974,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "観光客数の増減",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "地元の収入の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:M06",
@@ -2713,7 +5000,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "観光客の平均宿泊日数",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M07",
@@ -2729,7 +5023,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "宿泊税の有無",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "観光客数の増減",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:M08",
@@ -2744,7 +5049,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "国立公園の面積",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "観光による稼ぎ",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:M09",
@@ -2760,7 +5075,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "農家数の増減",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "担い手への農地集積",
+          "pattern": "change"
+        }
+      }
     },
     {
       "id": "issue:M10",
@@ -2776,7 +5101,14 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "食料自給率の高い県の生産品目",
+          "pattern": "compose"
+        }
+      }
     },
     {
       "id": "issue:M11",
@@ -2792,7 +5124,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "採卵鶏の飼養羽数の県別分布",
+          "pattern": "compare",
+          "metrics": [
+            "layer-hen-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M12",
@@ -2808,7 +5150,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "森林面積の多さ",
+          "pattern": "compare"
+        },
+        "outcome": {
+          "label": "林業産出額",
+          "pattern": "compare"
+        }
+      }
     },
     {
       "id": "issue:F13-2",
@@ -2827,7 +5179,21 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "県別の平均身長",
+          "pattern": "compare",
+          "metrics": [
+            "average-height-middle-school-second-grade-female",
+            "average-height-middle-school-second-grade-male",
+            "average-height-primary-school-fifth-grade-female",
+            "average-height-primary-school-fifth-grade-male",
+            "avg-height-high-school-2nd-male"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M02-2",
@@ -2849,7 +5215,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "県別の食料自給率(カロリー)",
+          "pattern": "compare",
+          "metrics": [
+            "food-self-sufficiency-rate-calorie"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M02-3",
@@ -2866,7 +5242,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "漁業就業者数の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "fishery-workers"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J06-1",
@@ -2885,7 +5271,27 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "日照時間と住宅条件",
+          "pattern": "compare",
+          "metrics": [
+            "annual-sunshine-duration",
+            "detached-house-ratio",
+            "owner-occupied-housing-ratio",
+            "solar-panel-housing-rate"
+          ]
+        },
+        "outcome": {
+          "label": "風力発電の導入量",
+          "pattern": "compare",
+          "metrics": [
+            "wind-power-capacity",
+            "wind-power-turbine-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-1",
@@ -2903,7 +5309,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "カップ麺の消費支出額",
+          "pattern": "compare",
+          "metrics": [
+            "cup-noodles-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-2",
@@ -2921,7 +5337,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "カツオの漁獲量",
+          "pattern": "compare",
+          "metrics": [
+            "fishery-species-catch-bonito"
+          ]
+        },
+        "outcome": {
+          "label": "カツオの消費量",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-quantity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K02-1",
@@ -2939,7 +5371,58 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "チョコレートの消費支出額",
+          "pattern": "change",
+          "metrics": [
+            "chocolate-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K02-2",
+      "level": "minor",
+      "question": "生鮮魚介の好みは日本のどこで東西に分かれるか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "家計調査 生鮮魚介 18 品目の支出額 (県庁所在市)",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "東日本と西日本の区分",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "生鮮魚介の品目別支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "clam-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "freshwater-clam-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "octopus-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "salmon-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "saury-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:E01-1",
@@ -2956,7 +5439,75 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "全国学力テスト平均正答率",
+          "pattern": "compare",
+          "metrics": [
+            "academic-achievement-test-average-rate"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:E01-2",
+      "level": "minor",
+      "question": "学力テスト上位の県と、ほうれんそう・かれいの消費が多い県庁所在市はどこまで重なるか",
+      "unit": "prefecture",
+      "answerability": "myth",
+      "dataNote": "家計調査 (ほうれんそう・かれいの支出額と購入数量、県庁所在市)・全国学力・学習状況調査",
+      "pitfall": "県庁所在市の食品の買い方と県の学力は単位も対象も違う。符合は因果ではない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "ほうれんそうの消費量と支出",
+          "pattern": "compare",
+          "metrics": [
+            "spinach-consumption-expenditure",
+            "spinach-consumption-quantity"
+          ]
+        },
+        "outcome": {
+          "label": "全国学力テスト平均正答率",
+          "pattern": "compare",
+          "metrics": [
+            "academic-achievement-test-average-rate"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:E01-3",
+      "level": "minor",
+      "question": "公立小中学校の学力調査で継続して上位に入る県はどこか",
+      "unit": "prefecture",
+      "answerability": "relation",
+      "dataNote": "全国学力・学習状況調査の都道府県別平均正答率 (国立教育政策研究所)",
+      "pitfall": "年度ごとの問題の難しさが違い、正答率の差は小さい。過去年は未収載",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "学力テスト平均正答率の推移",
+          "pattern": "change",
+          "metrics": [
+            "academic-achievement-test-average-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:M01-1",
@@ -2975,7 +5526,17 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "製造品出荷額等の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "manufacturing-shipment-amount"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D09-1",
@@ -2994,7 +5555,18 @@
         "実務"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "生活保護の被保護者の多さ",
+          "pattern": "compare",
+          "metrics": [
+            "households-on-public-assistance-per-1000",
+            "persons-on-public-assistance-per-1000"
+          ]
+        }
+      }
     },
     {
       "id": "issue:D02-1",
@@ -3012,7 +5584,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "地域別最低賃金",
+          "pattern": "compare",
+          "metrics": [
+            "minimum-wage-by-region"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F01-1",
@@ -3030,7 +5612,22 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "性別",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "出生時の平均余命",
+          "pattern": "compare",
+          "metrics": [
+            "life-expectancy-0-male",
+            "life-expectancy-0-female"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B09-1",
@@ -3047,7 +5644,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "昼間人口の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "day-time-population"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H06-2",
@@ -3064,7 +5671,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "持ち家比率の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "owner-occupied-housing-ratio"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F18",
@@ -3082,7 +5699,23 @@
         "広告"
       ],
       "sensitive": true,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "合計特殊出生率",
+          "pattern": "compare",
+          "metrics": [
+            "total-fertility-rate"
+          ]
+        },
+        "outcome": {
+          "label": "人工妊娠中絶実施率",
+          "pattern": "compare",
+          "metrics": [
+            "abortion-rate"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F19",
@@ -3097,7 +5730,26 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "社会体育施設の整備状況",
+          "pattern": "compare",
+          "metrics": [
+            "community-sports-facility-count-per-million",
+            "public-gymnasium-count-per-million"
+          ]
+        },
+        "outcome": {
+          "label": "スポーツの行動者率",
+          "pattern": "compare",
+          "metrics": [
+            "sports-annual-participation-rate-10plus",
+            "sports-participation-rate-golf",
+            "sports-participation-rate-walking"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H23",
@@ -3113,7 +5765,26 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "小売店の立地密度",
+          "pattern": "compare",
+          "metrics": [
+            "department-supermarket-count-per-100k",
+            "large-retail-store-count-per-100k",
+            "retail-store-count-per-1000"
+          ]
+        },
+        "outcome": {
+          "label": "コンビニエンスストア数",
+          "pattern": "compare",
+          "metrics": [
+            "convenience-store-count-per-100k",
+            "convenience-store-count-commercial"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H24",
@@ -3128,7 +5799,23 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "パチンコの行動者率",
+          "pattern": "compare",
+          "metrics": [
+            "hobby-participation-rate-pachinko"
+          ]
+        },
+        "outcome": {
+          "label": "パチンコ店の人口あたり店舗数",
+          "pattern": "compare",
+          "metrics": [
+            "pachinko-shop-density-per-10k"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J18",
@@ -3148,7 +5835,17 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "年間日照時間の県別比較",
+          "pattern": "compare",
+          "metrics": [
+            "annual-sunshine-duration"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J19",
@@ -3167,7 +5864,24 @@
         "広告"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "降水日数と最深積雪",
+          "pattern": "compare",
+          "metrics": [
+            "annual-precipitation-days",
+            "maximum-snow-depth"
+          ]
+        },
+        "outcome": {
+          "label": "年間降水量",
+          "pattern": "compare",
+          "metrics": [
+            "annual-precipitation"
+          ]
+        }
+      }
     },
     {
       "id": "issue:C13",
@@ -3186,7 +5900,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "労働災害の発生頻度",
+          "pattern": "compare",
+          "metrics": [
+            "frequency-of-occupational-accidents",
+            "work-accident-severity"
+          ]
+        }
+      }
     },
     {
       "id": "issue:J09-1",
@@ -3201,7 +5926,17 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "土砂災害警戒区域数",
+          "pattern": "compare",
+          "metrics": [
+            "landslide-warning-zone-count"
+          ]
+        }
+      }
     },
     {
       "id": "issue:H25",
@@ -3217,7 +5952,22 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "都市と地方の区分",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "自動車関連の消費支出",
+          "pattern": "compare",
+          "metrics": [
+            "automobile-related-group-consumption-expenditure",
+            "gasoline-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:K01-3",
@@ -3233,7 +5983,2478 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "家計調査の都市別順位",
+          "pattern": "compare",
+          "metrics": [
+            "fresh-fruit-consumption-quantity",
+            "gyoza-frozen-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K01-4",
+      "level": "minor",
+      "question": "「消費量日本一」の都市は毎年入れ替わるのか（1 年の値と 3 年平均）",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の年次支出額・購入数量 (0004023605/06)。県庁所在市と政令指定都市、2007〜2025 年",
+      "pitfall": "1 市あたり約 100 世帯の標本で、単年の順位は誤差で動く。総務省の公表は 3 年平均の順位もある。県全体ではなく県庁所在市の値",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額と購入数量の順位",
+          "pattern": "change",
+          "metrics": [
+            "fresh-udon-soba-consumption-expenditure",
+            "gyoza-frozen-consumption-expenditure",
+            "natto-consumption-expenditure",
+            "ramen-dining-consumption-expenditure",
+            "rice-consumption-expenditure",
+            "white-bread-consumption-expenditure",
+            "white-bread-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K01-5",
+      "level": "minor",
+      "question": "『地産地消』は本当に地元の消費者に支持されているか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 牛肉・豚肉・鶏肉の支出額・購入数量 (県庁所在市)、生産農業所得統計",
+      "pitfall": "産地は県全体、消費は県庁所在市の世帯の購入で、単位と対象が違う。もらい物や自家消費は入らない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "肉の地元での生産規模",
+          "pattern": "compare",
+          "metrics": [
+            "total-population"
+          ]
+        },
+        "outcome": {
+          "label": "肉類の消費量",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-quantity",
+            "chicken-consumption-quantity",
+            "pork-consumption-quantity",
+            "pork-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K05",
+      "level": "major",
+      "question": "物価が上がったとき、家庭は食べ物の買い方をどう変えたのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の年次・月次の支出額と購入数量 (0004023601/02/05/06、全国・二人以上の世帯)、消費者物価指数",
+      "pitfall": "家計調査の平均価格は購入した品から出した値で、物価指数ではない。2025 年 1 月の分類改定をまたぐ品目は接続を確かめる",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "物価の上昇",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "食料の支出と購入量の変化",
+          "pattern": "change",
+          "metrics": [
+            "consumption-expenditure-multi-person-households-per-month",
+            "food-expenditure-ratio-multi-person-households",
+            "avg-propensity-to-consume-worker-households"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K05-1",
+      "level": "minor",
+      "question": "米が値上がりした年、家庭は米を買う量を減らしたのか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 米の支出額・購入数量 (年次 0004023605/06・月次 0004023601/02)、全国・二人以上の世帯",
+      "pitfall": "購入数量は世帯が買った量で、もらい物や外食の米は入らない。数量の月次は全国だけ",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "米の価格の上昇",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "米の支出額と購入量",
+          "pattern": "change",
+          "metrics": [
+            "rice-consumption-expenditure",
+            "rice-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K05-2",
+      "level": "minor",
+      "question": "値上がりしても買う量が減らない食べ物は何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (全国・2000〜2025 年)",
+      "pitfall": "値上がりと量の増減を並べても因果は言えない。品質の変化 (高い品への置き換え) でも平均価格は上がる",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "品目別の価格の上昇",
+          "pattern": "change"
+        },
+        "outcome": {
+          "label": "品目別の購入量",
+          "pattern": "change",
+          "metrics": [
+            "rice-consumption-expenditure",
+            "other-bread-consumption-expenditure",
+            "white-bread-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K06",
+      "level": "major",
+      "question": "年収が高い世帯は、何にお金を多く使うのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 年間収入五分位別の品目の年次支出額・購入数量 (0004023607/08)、年収 18 階級の詳細結果表 4-2 (Excel)。全国・二人以上の世帯",
+      "pitfall": "五分位の上の世帯ほど世帯主の年齢と世帯人員が違うので、差を収入だけの効果と書かない。都市×年収の表は無く、地域と掛け合わせられない",
+      "revenue": [
+        "広告",
+        "データ",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入階級",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "品目別の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-1",
+      "level": "minor",
+      "question": "年収が低い世帯ほど多くお金を使う品目は何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の品目の年次支出額 (0004023607)",
+      "pitfall": "低い五分位には高齢の無職世帯が多い。年齢別 (0004023609) と並べて読む",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入階級",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "品目別の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-2",
+      "level": "minor",
+      "question": "年収階級によって、子どもの教育投資の中身と成果は10年でどう変わったか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の教育費・補習教育・授業料 (全国・二人以上の世帯)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入階級",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "教育費の内訳の推移",
+          "pattern": "change"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-3",
+      "level": "minor",
+      "question": "所得五分位の所得シェアは1990年代から2010年代でどう動いたか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 年間収入五分位の年間収入 (用途分類 0002070005、全国)",
+      "pitfall": "五分位は世帯数で 5 等分した区分で、境目の年収は年ごとに変わる",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "所得シェアの年次推移",
+          "pattern": "change"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-4",
+      "level": "minor",
+      "question": "家計調査を年収階級別に読むとき、何を見れば『高所得世帯に売れている』と言えるか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の品目の支出額・購入数量・平均価格 (0004023607/08)",
+      "pitfall": "支出額だけで判断しない。支出の割合・数量・平均価格のどこで差がつくかを分けて見る。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "ノウハウ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "品目の支出額・数量・平均価格",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-5",
+      "level": "minor",
+      "question": "食料・衣料・教育の支出は、年収が上がるとシェアも上がるのか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 年間収入五分位別の費目の支出 (用途分類、全国)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "食料・衣料・教育の支出シェア",
+          "pattern": "compose"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-6",
+      "level": "minor",
+      "question": "高所得世帯は薬や医療の何にお金を払い、何に払わないのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の医薬品・健康食品・マッサージ・眼鏡・歯科の支出",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "医薬品・医療関連の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-7",
+      "level": "minor",
+      "question": "高所得世帯への販売に安定して成功している食料品は何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の食料品目の支出額・数量 (かき・れんこん・もも・紅茶など)",
+      "pitfall": "単年の結果で入れ替わる品目がある。複数年で確かめる。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "食料品目の支出額・数量",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-8",
+      "level": "minor",
+      "question": "自動車関連で高所得世帯に高く売れているものは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の自動車購入・ガソリン・レンタカーの支出",
+      "pitfall": "自動車購入は買った年だけに出るので、世帯ごとの差が大きい。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "自動車関連の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-9",
+      "level": "minor",
+      "question": "家電のうち高所得世帯に高い機種を売れているものと売れていないものは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の家電の支出額・数量・平均価格",
+      "pitfall": "家電は買い替えの周期と出来事 (地デジ化など) で年ごとに大きく動く。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "家電の支出額・数量・平均価格",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-10",
+      "level": "minor",
+      "question": "教養娯楽サービスのうち高所得世帯の消費が伸びているものは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の教養娯楽サービスの支出 (庭の手入れ・映画・ゴルフ・スポーツクラブなど)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "教養娯楽サービスの支出額の推移",
+          "pattern": "change"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-11",
+      "level": "minor",
+      "question": "旅行のうち、高所得世帯に最も売れているのは外国パック旅行か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の宿泊料・国内パック旅行・外国パック旅行の支出",
+      "pitfall": "旅行は感染症や為替で年ごとに大きく動く。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "旅行種別の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-12",
+      "level": "minor",
+      "question": "衣料品の中で、高所得世帯が最も差をつけて買うのは何か",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の衣料品の支出額・数量・平均価格",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "衣料品の支出額・数量・平均価格",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-13",
+      "level": "minor",
+      "question": "腕時計・装身具・ハンドバッグなど外見に関わる品目は高所得世帯にどれだけ売れているか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の腕時計・ハンドバッグ・かばん・傘の支出",
+      "pitfall": "装身具は品目が無い。全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "身の回り品の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K06-14",
+      "level": "minor",
+      "question": "外食のうち高所得世帯にうまく売れている業態はどれか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 年間収入五分位別の外食の業態別支出 (そば・うどん、和食、中華、洋食、すし、ハンバーガーなど)",
+      "pitfall": "全国の集計で都市別の列は無い。五分位の上の世帯ほど世帯主の年齢と世帯人員も違うので、差を収入だけの効果と書かない",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "年間収入五分位",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "外食業態別の支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K07",
+      "level": "major",
+      "question": "一人暮らしの世帯は、二人以上の世帯と何の買い方が違うのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 総世帯・単身世帯の品目別年次支出額 (0004023612/14)、単身世帯の年齢×性別の用途分類 (0002190004)",
+      "pitfall": "単身世帯の標本は約 1,000 世帯で少ない。世帯の人数が違うので、1 人あたりに直すかを明記する",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": {
+          "label": "世帯類型(単身・二人以上)",
+          "pattern": "compare",
+          "group": true
+        },
+        "outcome": {
+          "label": "品目別の年間支出額",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K08",
+      "level": "major",
+      "question": "この 25 年で、家庭が買わなくなったもの・買うようになったものは何か",
+      "unit": "japan",
+      "answerability": "relation",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 年報 6-1/6-2 (品目の支出額・購入数量、全国・二人以上の世帯、2000〜2025 年)",
+      "pitfall": "2025 年の分類改定で分割・統合された品目は接続を確かめる。途中年が欠ける品目がある",
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・購入数量",
+          "pattern": "change"
+        }
+      }
+    },
+    {
+      "id": "issue:K08-1",
+      "level": "minor",
+      "question": "帽子・ネクタイ・婦人用ストッキングの市場はどれだけ縮んだか",
+      "unit": "japan",
+      "answerability": "relation",
+      "dataNote": "家計調査 帽子・ネクタイ・婦人用ストッキングの支出額・購入数量 (全国、2000 年〜)",
+      "pitfall": "2025 年の分類改定でネクタイ・ストッキングは接続できない。改定前の系列で止める",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ネクタイ・ストッキングの支出額",
+          "pattern": "change",
+          "metrics": [
+            "necktie-consumption-expenditure",
+            "womens-stockings-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K09",
+      "level": "major",
+      "question": "季節や増税で、家庭の買い方はどれだけ動くのか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の月次支出額・購入数量 (0004023601/02、1985 年〜)",
+      "pitfall": "月次は標本の誤差が大きい。年の途中の月を年計として扱わない。気温など他の要因と並べても因果は言えない",
+      "revenue": [
+        "広告",
+        "ノウハウ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の月次支出額・購入数量",
+          "pattern": "change"
+        }
+      }
+    },
+    {
+      "id": "issue:K09-1",
+      "level": "minor",
+      "question": "冬物バーゲンが成功したかどうかは、家計調査の何を見れば判定できるか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 婦人用コート・セーターの月次の支出額・購入数量、消費者物価指数",
+      "pitfall": "家計調査の平均価格は買った品の値段で、店頭の値下げ率とは違う。月次は全国だけ",
+      "queries": [],
+      "revenue": [
+        "ノウハウ",
+        "実務"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "婦人用コートの支出額・購入数量",
+          "pattern": "change",
+          "metrics": [
+            "womens-coat-consumption-expenditure",
+            "womens-coat-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K09-2",
+      "level": "minor",
+      "question": "発泡酒・第3のビールの増税は消費者の行動をどう変えるか",
+      "unit": "japan",
+      "answerability": "caveat",
+      "dataNote": "家計調査 ビール・発泡酒・第 3 のビールの月次の支出額・購入数量 (酒税の改正前後)",
+      "pitfall": "税の改正と同じ時期の値上げや天候とは切り分けにくい",
+      "queries": [],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "ビール類の月次支出額・購入数量",
+          "pattern": "change"
+        }
+      }
+    },
+    {
+      "id": "issue:K10",
+      "level": "major",
+      "question": "県庁所在市の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (県庁所在市・二人以上の世帯)。支出額を購入数量と平均価格に分けて全国平均と比べる",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい。平均価格は買った品の値段で、物価ではない。数量と平均価格に分けられるのは年次の数量表にある品目 (金額表の約 3 分の 1) だけで、ほかは支出額でしか比べられない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・購入数量",
+          "pattern": "compare"
+        }
+      }
+    },
+    {
+      "id": "issue:K10-1",
+      "level": "minor",
+      "question": "札幌市（北海道）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (札幌市・二人以上の世帯)",
+      "pitfall": "札幌市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・消費量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "cheese-consumption-expenditure",
+            "cheese-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity",
+            "rice-consumption-expenditure",
+            "rice-consumption-quantity",
+            "salmon-consumption-expenditure",
+            "salmon-consumption-quantity",
+            "saury-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-2",
+      "level": "minor",
+      "question": "青森市（青森県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (青森市・二人以上の世帯)",
+      "pitfall": "青森市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・消費量",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "cup-noodles-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity",
+            "scallop-consumption-expenditure",
+            "scallop-consumption-quantity",
+            "tuna-consumption-expenditure",
+            "tuna-consumption-quantity",
+            "watermelon-consumption-expenditure",
+            "watermelon-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-3",
+      "level": "minor",
+      "question": "盛岡市（岩手県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (盛岡市・二人以上の世帯)",
+      "pitfall": "盛岡市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "品目別の支出額・消費量",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "apple-consumption-quantity",
+            "chinese-noodles-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "persimmon-consumption-expenditure",
+            "persimmon-consumption-quantity",
+            "salted-salmon-consumption-expenditure",
+            "salted-salmon-consumption-quantity",
+            "tofu-consumption-expenditure",
+            "tofu-consumption-quantity",
+            "wakame-consumption-expenditure",
+            "wakame-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-4",
+      "level": "minor",
+      "question": "仙台市（宮城県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (仙台市・二人以上の世帯)",
+      "pitfall": "仙台市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "仙台市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "chuhai-consumption-expenditure",
+            "chuhai-consumption-quantity",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "fish-paste-consumption-expenditure",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "oyster-consumption-expenditure",
+            "oyster-consumption-quantity",
+            "pumpkin-consumption-expenditure",
+            "pumpkin-consumption-quantity",
+            "wakame-consumption-expenditure",
+            "wakame-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-5",
+      "level": "minor",
+      "question": "秋田市（秋田県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (秋田市・二人以上の世帯)",
+      "pitfall": "秋田市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "秋田市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "chinese-noodles-consumption-expenditure",
+            "chinese-noodles-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "miso-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-6",
+      "level": "minor",
+      "question": "山形市（山形県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (山形市・二人以上の世帯)",
+      "pitfall": "山形市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "山形市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "cheese-consumption-expenditure",
+            "cheese-consumption-quantity",
+            "fresh-udon-soba-consumption-expenditure",
+            "fresh-udon-soba-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "katsuobushi-consumption-expenditure",
+            "katsuobushi-consumption-quantity",
+            "konnyaku-consumption-expenditure",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "persimmon-consumption-expenditure",
+            "persimmon-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-7",
+      "level": "minor",
+      "question": "福島市（福島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (福島市・二人以上の世帯)",
+      "pitfall": "福島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "福島市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "cod-roe-consumption-expenditure",
+            "cod-roe-consumption-quantity",
+            "enoki-consumption-expenditure",
+            "enoki-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "konbu-tsukudani-consumption-expenditure",
+            "konbu-tsukudani-consumption-quantity",
+            "natto-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "oyster-consumption-quantity",
+            "peach-consumption-expenditure",
+            "peach-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-8",
+      "level": "minor",
+      "question": "水戸市（茨城県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (水戸市・二人以上の世帯)",
+      "pitfall": "水戸市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "水戸市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "bonito-consumption-expenditure",
+            "bonito-consumption-quantity",
+            "cod-roe-consumption-expenditure",
+            "cod-roe-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "ham-consumption-expenditure",
+            "ham-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "melon-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-9",
+      "level": "minor",
+      "question": "宇都宮市（栃木県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (宇都宮市・二人以上の世帯)",
+      "pitfall": "宇都宮市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "宇都宮市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "chinese-cabbage-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "scallop-consumption-expenditure",
+            "scallop-consumption-quantity",
+            "strawberry-consumption-expenditure",
+            "strawberry-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-10",
+      "level": "minor",
+      "question": "前橋市（群馬県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (前橋市・二人以上の世帯)",
+      "pitfall": "前橋市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "前橋市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "cucumber-consumption-expenditure",
+            "dressing-consumption-expenditure",
+            "dressing-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity",
+            "leek-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "mackerel-consumption-quantity",
+            "miso-consumption-expenditure",
+            "miso-consumption-quantity",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "rice-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-11",
+      "level": "minor",
+      "question": "さいたま市（埼玉県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (さいたま市・二人以上の世帯)",
+      "pitfall": "さいたま市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "さいたま市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "broccoli-consumption-expenditure",
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "cod-roe-consumption-expenditure",
+            "cod-roe-consumption-quantity",
+            "cucumber-consumption-expenditure",
+            "green-pepper-consumption-expenditure",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "octopus-consumption-expenditure",
+            "octopus-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity",
+            "pumpkin-consumption-expenditure",
+            "pumpkin-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-12",
+      "level": "minor",
+      "question": "千葉市（千葉県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (千葉市・二人以上の世帯)",
+      "pitfall": "千葉市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "千葉市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "banana-consumption-expenditure",
+            "butter-consumption-expenditure",
+            "butter-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity",
+            "jelly-consumption-expenditure",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "orange-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-13",
+      "level": "minor",
+      "question": "東京都区部（東京都）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (東京都区部・二人以上の世帯)",
+      "pitfall": "東京都区部の二人以上の世帯の値で、都全体ではない",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "東京都区部の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "cheese-consumption-expenditure",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "green-pepper-consumption-expenditure",
+            "green-pepper-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-14",
+      "level": "minor",
+      "question": "横浜市（神奈川県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (横浜市・二人以上の世帯)",
+      "pitfall": "横浜市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "横浜市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "broccoli-consumption-expenditure",
+            "broccoli-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "grape-consumption-expenditure",
+            "grape-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "ham-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-15",
+      "level": "minor",
+      "question": "新潟市（新潟県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (新潟市・二人以上の世帯)",
+      "pitfall": "新潟市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "新潟市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "curry-roux-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "pear-consumption-expenditure",
+            "pear-consumption-quantity",
+            "pork-consumption-expenditure",
+            "potato-consumption-expenditure",
+            "potato-consumption-quantity",
+            "salted-salmon-consumption-expenditure",
+            "salted-salmon-consumption-quantity",
+            "wakame-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-16",
+      "level": "minor",
+      "question": "富山市（富山県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (富山市・二人以上の世帯)",
+      "pitfall": "富山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "富山市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "cucumber-consumption-expenditure",
+            "cucumber-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "horse-mackerel-consumption-expenditure",
+            "horse-mackerel-consumption-quantity",
+            "konbu-consumption-expenditure",
+            "konbu-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "salmon-consumption-expenditure",
+            "salmon-consumption-quantity",
+            "saury-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-17",
+      "level": "minor",
+      "question": "金沢市（石川県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (金沢市・二人以上の世帯)",
+      "pitfall": "金沢市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "金沢市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "chinese-noodles-consumption-expenditure",
+            "chinese-noodles-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "lotus-root-consumption-expenditure",
+            "lotus-root-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity",
+            "orange-consumption-expenditure",
+            "orange-consumption-quantity",
+            "other-japanese-sweets-consumption-expenditure",
+            "pickled-chinese-cabbage-consumption-expenditure",
+            "pickled-chinese-cabbage-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-18",
+      "level": "minor",
+      "question": "福井市（福井県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (福井市・二人以上の世帯)",
+      "pitfall": "福井市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "福井市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "dried-udon-soba-consumption-expenditure",
+            "dried-udon-soba-consumption-quantity",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "furikake-consumption-expenditure",
+            "konbu-consumption-expenditure",
+            "konbu-consumption-quantity",
+            "konbu-tsukudani-consumption-expenditure",
+            "konbu-tsukudani-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-19",
+      "level": "minor",
+      "question": "甲府市（山梨県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (甲府市・二人以上の世帯)",
+      "pitfall": "甲府市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "甲府市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "dressing-consumption-expenditure",
+            "dressing-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "grape-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "margarine-consumption-expenditure",
+            "margarine-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-20",
+      "level": "minor",
+      "question": "長野市（長野県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (長野市・二人以上の世帯)",
+      "pitfall": "長野市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "長野市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bamboo-shoot-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "grape-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "katsuobushi-consumption-expenditure",
+            "katsuobushi-consumption-quantity",
+            "peach-consumption-expenditure",
+            "peach-consumption-quantity",
+            "pickled-plum-consumption-expenditure",
+            "pickled-plum-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-21",
+      "level": "minor",
+      "question": "岐阜市（岐阜県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (岐阜市・二人以上の世帯)",
+      "pitfall": "岐阜市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "岐阜市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "enoki-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "green-beans-consumption-expenditure",
+            "green-beans-consumption-quantity",
+            "horse-mackerel-consumption-expenditure",
+            "horse-mackerel-consumption-quantity",
+            "persimmon-consumption-expenditure",
+            "persimmon-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-22",
+      "level": "minor",
+      "question": "静岡市（静岡県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (静岡市・二人以上の世帯)",
+      "pitfall": "静岡市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "静岡市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "dried-mackerel-consumption-expenditure",
+            "dried-mackerel-consumption-quantity",
+            "green-tea-consumption-expenditure",
+            "green-tea-consumption-quantity",
+            "horse-mackerel-consumption-expenditure",
+            "horse-mackerel-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity",
+            "leek-consumption-expenditure",
+            "leek-consumption-quantity",
+            "mandarin-consumption-expenditure",
+            "mandarin-consumption-quantity",
+            "mochi-consumption-expenditure",
+            "mochi-consumption-quantity",
+            "pickled-plum-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-23",
+      "level": "minor",
+      "question": "名古屋市（愛知県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (名古屋市・二人以上の世帯)",
+      "pitfall": "名古屋市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "名古屋市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "clam-consumption-expenditure",
+            "clam-consumption-quantity",
+            "dried-shiitake-consumption-expenditure",
+            "dried-shiitake-consumption-quantity",
+            "eggplant-consumption-expenditure",
+            "eggplant-consumption-quantity",
+            "fresh-udon-soba-consumption-expenditure",
+            "fresh-udon-soba-consumption-quantity",
+            "green-pepper-consumption-expenditure",
+            "green-pepper-consumption-quantity",
+            "melon-consumption-expenditure",
+            "melon-consumption-quantity",
+            "miso-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-24",
+      "level": "minor",
+      "question": "津市（三重県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (津市・二人以上の世帯)",
+      "pitfall": "津市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "津市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "beef-consumption-quantity",
+            "crab-consumption-expenditure",
+            "crab-consumption-quantity",
+            "freshwater-clam-consumption-expenditure",
+            "freshwater-clam-consumption-quantity",
+            "katsuobushi-consumption-expenditure",
+            "katsuobushi-consumption-quantity",
+            "other-fish-paste-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "oyster-consumption-quantity",
+            "peach-consumption-expenditure",
+            "peach-consumption-quantity",
+            "tuna-consumption-expenditure",
+            "tuna-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-25",
+      "level": "minor",
+      "question": "大津市（滋賀県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (大津市・二人以上の世帯)",
+      "pitfall": "大津市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大津市の品目別支出額と購入量",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "beef-consumption-quantity",
+            "black-tea-consumption-expenditure",
+            "black-tea-consumption-quantity",
+            "coffee-consumption-expenditure",
+            "coffee-consumption-quantity",
+            "flounder-consumption-expenditure",
+            "flounder-consumption-quantity",
+            "fresh-udon-soba-consumption-expenditure",
+            "green-pepper-consumption-expenditure",
+            "green-pepper-consumption-quantity",
+            "happoshu-consumption-expenditure",
+            "happoshu-consumption-quantity",
+            "jam-consumption-expenditure",
+            "jam-consumption-quantity"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-26",
+      "level": "minor",
+      "question": "京都市（京都府）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (京都市・二人以上の世帯)",
+      "pitfall": "京都市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "京都市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "beef-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "butter-consumption-expenditure",
+            "chinese-food-dining-consumption-expenditure",
+            "eggplant-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "green-beans-consumption-expenditure",
+            "green-pepper-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-27",
+      "level": "minor",
+      "question": "大阪市（大阪府）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (大阪市・二人以上の世帯)",
+      "pitfall": "大阪市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大阪市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "beef-consumption-expenditure",
+            "bread-consumption-expenditure",
+            "chuhai-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "happoshu-consumption-expenditure",
+            "konbu-tsukudani-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-28",
+      "level": "minor",
+      "question": "神戸市（兵庫県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (神戸市・二人以上の世帯)",
+      "pitfall": "神戸市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "神戸市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "bread-consumption-expenditure",
+            "coffee-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "green-beans-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "leek-consumption-expenditure",
+            "lotus-root-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-29",
+      "level": "minor",
+      "question": "奈良市（奈良県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (奈良市・二人以上の世帯)",
+      "pitfall": "奈良市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "奈良市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "green-pepper-consumption-expenditure",
+            "konbu-tsukudani-consumption-expenditure",
+            "lotus-root-consumption-expenditure",
+            "persimmon-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-30",
+      "level": "minor",
+      "question": "和歌山市（和歌山県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (和歌山市・二人以上の世帯)",
+      "pitfall": "和歌山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "和歌山市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "konbu-consumption-expenditure",
+            "mandarin-consumption-expenditure",
+            "margarine-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "peach-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-31",
+      "level": "minor",
+      "question": "鳥取市（鳥取県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (鳥取市・二人以上の世帯)",
+      "pitfall": "鳥取市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "鳥取市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "cod-roe-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "enoki-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "freshwater-clam-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "pear-consumption-expenditure",
+            "sardine-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-32",
+      "level": "minor",
+      "question": "松江市（島根県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (松江市・二人以上の世帯)",
+      "pitfall": "松江市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "松江市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "bean-sprouts-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "freshwater-clam-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "margarine-consumption-expenditure",
+            "orange-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-33",
+      "level": "minor",
+      "question": "岡山市（岡山県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (岡山市・二人以上の世帯)",
+      "pitfall": "岡山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "岡山市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "burdock-consumption-expenditure",
+            "grape-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "other-bread-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "peach-consumption-expenditure",
+            "sauce-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-34",
+      "level": "minor",
+      "question": "広島市（広島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (広島市・二人以上の世帯)",
+      "pitfall": "広島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "広島市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "beef-consumption-expenditure",
+            "beer-consumption-expenditure",
+            "black-tea-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "oyster-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "sauce-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-35",
+      "level": "minor",
+      "question": "山口市（山口県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (山口市・二人以上の世帯)",
+      "pitfall": "山口市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "山口市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "burdock-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "fresh-shiitake-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "leek-consumption-expenditure",
+            "melon-consumption-expenditure",
+            "pear-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-36",
+      "level": "minor",
+      "question": "徳島市（徳島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (徳島市・二人以上の世帯)",
+      "pitfall": "徳島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "徳島市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "chikuwa-consumption-expenditure",
+            "chinese-cabbage-consumption-expenditure",
+            "dried-nori-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "squid-consumption-expenditure",
+            "sweet-potato-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-37",
+      "level": "minor",
+      "question": "高松市（香川県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (高松市・二人以上の世帯)",
+      "pitfall": "高松市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "高松市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "black-tea-consumption-expenditure",
+            "bonito-consumption-expenditure",
+            "clam-consumption-expenditure",
+            "deep-fried-fish-cake-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "fresh-udon-soba-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "leek-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-38",
+      "level": "minor",
+      "question": "松山市（愛媛県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (松山市・二人以上の世帯)",
+      "pitfall": "松山市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "松山市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "chikuwa-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "lotus-root-consumption-expenditure",
+            "mochi-consumption-expenditure",
+            "other-citrus-consumption-expenditure",
+            "sauce-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-39",
+      "level": "minor",
+      "question": "高知市（高知県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (高知市・二人以上の世帯)",
+      "pitfall": "高知市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "高知市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "bonito-consumption-expenditure",
+            "cabbage-consumption-expenditure",
+            "dried-mackerel-consumption-expenditure",
+            "fresh-shiitake-consumption-expenditure",
+            "happoshu-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "mandarin-consumption-expenditure",
+            "octopus-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-40",
+      "level": "minor",
+      "question": "福岡市（福岡県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (福岡市・二人以上の世帯)",
+      "pitfall": "福岡市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "福岡市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "burdock-consumption-expenditure",
+            "cod-roe-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "konbu-consumption-expenditure",
+            "pickled-chinese-cabbage-consumption-expenditure",
+            "ramen-dining-consumption-expenditure",
+            "sashimi-platter-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-41",
+      "level": "minor",
+      "question": "佐賀市（佐賀県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (佐賀市・二人以上の世帯)",
+      "pitfall": "佐賀市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "佐賀市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bamboo-shoot-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-nori-consumption-expenditure",
+            "dried-udon-soba-consumption-expenditure",
+            "flounder-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "instant-noodles-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-42",
+      "level": "minor",
+      "question": "長崎市（長崎県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (長崎市・二人以上の世帯)",
+      "pitfall": "長崎市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "長崎市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "apple-consumption-expenditure",
+            "bean-sprouts-consumption-expenditure",
+            "castella-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "other-fresh-fish-consumption-expenditure",
+            "ramen-dining-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-43",
+      "level": "minor",
+      "question": "熊本市（熊本県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (熊本市・二人以上の世帯)",
+      "pitfall": "熊本市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "熊本市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bean-sprouts-consumption-expenditure",
+            "beef-consumption-expenditure",
+            "chicken-consumption-expenditure",
+            "dressing-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "melon-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-44",
+      "level": "minor",
+      "question": "大分市（大分県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (大分市・二人以上の世帯)",
+      "pitfall": "大分市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "大分市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "dried-shiitake-consumption-expenditure",
+            "grape-consumption-expenditure",
+            "ground-meat-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "orange-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "sashimi-platter-consumption-expenditure",
+            "shochu-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-45",
+      "level": "minor",
+      "question": "宮崎市（宮崎県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (宮崎市・二人以上の世帯)",
+      "pitfall": "宮崎市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "宮崎市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bonito-consumption-expenditure",
+            "cabbage-consumption-expenditure",
+            "chinese-cabbage-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "happoshu-consumption-expenditure",
+            "horse-mackerel-consumption-expenditure",
+            "sardine-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-46",
+      "level": "minor",
+      "question": "鹿児島市（鹿児島県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (鹿児島市・二人以上の世帯)",
+      "pitfall": "鹿児島市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "鹿児島市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bean-sprouts-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "green-tea-consumption-expenditure",
+            "ketchup-consumption-expenditure",
+            "mackerel-consumption-expenditure",
+            "persimmon-consumption-expenditure",
+            "sardine-consumption-expenditure",
+            "shochu-consumption-expenditure"
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K10-47",
+      "level": "minor",
+      "question": "那覇市（沖縄県）の世帯は、全国平均と比べて何を多く・高く買っているのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査 品目別の支出額・購入数量 (那覇市・二人以上の世帯)",
+      "pitfall": "那覇市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で単年の順位は動きやすい",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "那覇市が多く買う品目の支出額",
+          "pattern": "compare",
+          "metrics": [
+            "bean-sprouts-consumption-expenditure",
+            "carrot-consumption-expenditure",
+            "chuhai-consumption-expenditure",
+            "crab-consumption-expenditure",
+            "dried-shiitake-consumption-expenditure",
+            "katsuobushi-consumption-expenditure",
+            "pickled-plum-consumption-expenditure",
+            "shochu-consumption-expenditure"
+          ]
+        }
+      }
     },
     {
       "id": "issue:F03-1",
@@ -3249,7 +8470,18 @@
         "実務"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "平均在院日数",
+          "pattern": "compare",
+          "metrics": [
+            "average-length-of-stay",
+            "general-hospital-avg-length-of-stay"
+          ]
+        }
+      }
     },
     {
       "id": "issue:B10-1",
@@ -3265,7 +8497,18 @@
         "データ"
       ],
       "sensitive": false,
-      "status": "active"
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "延べ宿泊者数の推移",
+          "pattern": "change",
+          "metrics": [
+            "total-overnight-guests",
+            "total-overnight-guests-foreign"
+          ]
+        }
+      }
     }
   ]
 }

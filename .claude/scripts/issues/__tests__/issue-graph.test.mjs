@@ -15,11 +15,13 @@ import {
   classifyCoverage,
   classifyDraft,
   computeReach,
+  effectiveAxes,
   findQueryCandidates,
   indexPages,
   listFigureDestinations,
   parentIdOf,
   parseCsv,
+  resolveAxesFigure,
   pathOfUrl,
   sumTraffic,
   validateIssueGraph,
@@ -222,4 +224,80 @@ test("1 つの問いに答えを 2 本結ぶと止まる", () => {
   const answers = (...keys) => keys.map((key) => ({ issue: "issue:A01", page: `blog:${key}`, role: "answers" }));
   assert.equal(validateIssueGraph({ issues, links: answers("a"), pages }).errors.filter((e) => e.includes("1 本だけ")).length, 0);
   assert.equal(validateIssueGraph({ issues, links: answers("a", "b"), pages }).errors.filter((e) => e.includes("1 本だけ")).length, 1);
+});
+
+// 分析の軸 → 図: 型は図の型の台帳 (実物) から引き、描画器の無い型と地域の要る型を全国の問いに出さない
+const TEMPLATES = JSON.parse(
+  readFileSync(resolve(fileURLToPath(import.meta.url), "../../../../../data/content-operations/image-templates.json"), "utf8"),
+).templates;
+const axis = (pattern, metrics) => ({ label: pattern, pattern, ...(metrics ? { metrics } : {}) });
+const group = () => ({ label: "区分", pattern: "compare", group: true });
+const figure = (unit, explanatory, outcome, metricKeys) =>
+  resolveAxesFigure({ issue: { id: "issue:Z01", unit }, axes: { explanatory, outcome }, templates: TEMPLATES, metricKeys });
+
+test("軸が無い問いは型未定で、図を決めない", () => {
+  const r = resolveAxesFigure({ issue: { id: "issue:Z01", unit: "prefecture" }, axes: undefined, templates: TEMPLATES });
+  assert.deepEqual(r, { purpose: null, primary: null, allowed: [], gaps: ["型未定"] });
+});
+
+test("県の比較は地図が主で、全国の比較は地図を出さない", () => {
+  assert.equal(figure("prefecture", null, axis("compare", ["a"])).primary, "tile-map");
+  const japan = figure("japan", null, axis("compare", ["a"]));
+  assert.equal(japan.primary, "bar");
+  assert.ok(!japan.allowed.includes("tile-map") && !japan.allowed.includes("choropleth"));
+});
+
+test("比較×比較は関係の図 (散布図)、増減の内訳は滝の図", () => {
+  assert.equal(figure("prefecture", axis("compare", ["a"]), axis("compare", ["b"])).primary, "scatter");
+  assert.equal(figure("prefecture", axis("compose", ["a"]), axis("change", ["b"])).primary, "waterfall");
+  assert.equal(figure("prefecture", axis("compare", ["a"]), axis("compose", ["b"])).purpose, "composition");
+});
+
+test("描画器の無い型 (heatmap・pie) と使っていない型は候補に出ない", () => {
+  for (const pattern of ["compare", "compose", "change"]) {
+    const r = figure("prefecture", null, axis(pattern, ["a"]));
+    assert.ok(!r.allowed.some((id) => ["heatmap", "pie", "table"].includes(id)), `${pattern}: ${r.allowed}`);
+  }
+  const none = resolveAxesFigure({
+    issue: { id: "issue:Z01", unit: "prefecture" },
+    axes: { explanatory: null, outcome: axis("compare", ["a"]) },
+    templates: TEMPLATES.map((t) => ({ ...t, renderer: null })),
+  });
+  assert.deepEqual(none.gaps, ["描画器なし"]);
+});
+
+test("群の区分以外の軸に指標が無ければ未検証、書いた指標が無ければ指標なし", () => {
+  assert.ok(figure("prefecture", null, axis("change")).gaps.includes("未検証"));
+  assert.ok(figure("prefecture", null, axis("compare")).gaps.includes("未検証"));
+  assert.deepEqual(figure("prefecture", null, axis("compare", ["a"])).gaps, []);
+  assert.ok(figure("prefecture", null, axis("change", ["ghost"]), new Set(["real"])).gaps.includes("指標なし"));
+});
+
+test("全国の集計で 2 つの値の関係を問うと、変化の軸が無ければ粒度不足", () => {
+  assert.ok(figure("japan", axis("compare", ["a"]), axis("compare", ["b"])).gaps.includes("粒度不足"));
+  assert.ok(!figure("japan", axis("change", ["a"]), axis("change", ["b"])).gaps.includes("粒度不足"));
+});
+
+test("小さな問いは粒度が同じ親の軸だけを継ぐ", () => {
+  const axes = { explanatory: null, outcome: axis("compare") };
+  const byId = new Map([["issue:Z01", { id: "issue:Z01", unit: "prefecture", axes }]]);
+  assert.equal(effectiveAxes({ id: "issue:Z01-1", unit: "prefecture" }, byId), axes);
+  assert.equal(effectiveAxes({ id: "issue:Z01-2", unit: "municipality" }, byId), undefined);
+});
+
+test("群の区分 (group) の説明側は比較の図にし、全国の問いでも粒度不足にしない", () => {
+  const r = figure("japan", group(), axis("compare", ["a"]));
+  assert.equal(r.purpose, "comparison");
+  assert.equal(r.primary, "bar");
+  assert.deepEqual(r.gaps, []);
+});
+
+test("群の区分ごとの推移は、群を系列にした折れ線にする", () => {
+  assert.equal(figure("japan", group(), axis("change", ["a"])).primary, "line");
+});
+
+test("指標の無い量の説明側を群の区分と読み替えず、関係の図のまま未検証にする", () => {
+  const r = figure("prefecture", axis("compare"), axis("compare", ["b"]));
+  assert.equal(r.purpose, "relationship");
+  assert.ok(r.gaps.includes("未検証"));
 });

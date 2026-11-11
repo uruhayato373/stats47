@@ -2871,7 +2871,7 @@
     },
     "muni-manufacturing-shipment-data": {
       "vertical": "product-sales",
-      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年＋業種別 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
       "url": "https://note.com/stats47/n/n5d86476e9c73",
       "is_paid": true,
       "published_at": "2026-11-04",
@@ -2879,7 +2879,7 @@
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",
-      "price_jpy": 980
+      "price_jpy": 1980
     },
     "paid-n0135c75ca76c": {
       "vertical": "stats47-note",

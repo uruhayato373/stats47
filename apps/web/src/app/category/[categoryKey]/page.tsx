@@ -24,7 +24,7 @@ import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { PageSections } from '@/components/layout/PageShell';
 import { RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
-import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
+import { HorizontalCardCarousel, RailCard, RailNavRow, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
@@ -377,6 +377,17 @@ export default async function CategoryPage({ params }: PageProps) {
         >
           <CategoryRankingTable items={allItems} topicOptions={topicOptions} />
         </SectionCard>
+        {/* 表はページ送りなので、サーバーの HTML に出るリンクは先頭 20 件だけになる。全件のリンクを畳んだ一覧で
+            出し、検索エンジンと JavaScript 無しの閲覧でも全ランキングへ辿れるようにする (GSC-INTERNAL-DISCOVERY-01) */}
+        <RailCard title={`全 ${allItems.length} 件を名前の一覧で見る`} collapsible bodyClassName="p-0">
+          <nav aria-label="すべてのランキング (名前の一覧)" className="grid gap-x-5 px-4 pb-3 sm:grid-cols-2">
+            {allItems.map((item) => (
+              <RailNavRow key={item.rankingKey} href={hrefFor('ranking', { rankingKey: item.rankingKey })} chevron={false}>
+                {item.title}
+              </RailNavRow>
+            ))}
+          </nav>
+        </RailCard>
       </PageSections>
 
       {/* 広告の段 (PR が先頭。モバイルは PR) */}

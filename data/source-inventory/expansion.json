@@ -67,11 +67,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a00-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:spinach-consumption-ranking",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a00-01",
       "channel": "note",
       "status": "done",
       "target": "note:b-kakei-academic-food",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:academic-achievement-test-prefecture-ranking",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a01-01",
@@ -91,11 +107,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a01-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:high-school-advancement-rate",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-02",
       "channel": "note",
       "status": "done",
       "target": "note:b-kakei-advancement-employment",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-03",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:advancement-plus-employment-rate-prefecture",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a01-03",
@@ -107,6 +139,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a01-04",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:tutoring-cost-university-advancement-gap",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-04",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a01-04",
@@ -123,6 +163,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a01-05",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:education-spending-income-quintile-decade",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-05",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a01-05",
@@ -136,6 +184,38 @@
       "target": "note:b-ref-kakei-a01-05",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-06",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-share-shift",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-07",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:university-advancement-rate-definitions",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-high-income-sales-check",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-overview",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a02-02",
@@ -155,6 +235,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-03",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-regressive",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-03",
       "channel": "note",
       "status": "done",
       "target": "note:b-rich-spending-patterns",
@@ -163,6 +251,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-04",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-medical-health",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-04",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a02-04",
@@ -179,6 +275,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-05",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-food-gap",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-05",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a02-05",
@@ -195,6 +299,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-06",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-car",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-06",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a02-06",
@@ -211,6 +323,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-07",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-appliance",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-07",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a02-07",
@@ -227,6 +347,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-08",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-recreation-services",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-08",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a02-08",
@@ -243,6 +371,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-09",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-travel",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-09",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a02-09",
@@ -256,6 +392,14 @@
       "target": "note:b-ref-kakei-a02-09",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-clothing",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a03-01",
@@ -275,11 +419,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a03-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:winter-coat-bargain-purchase-price",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-02",
       "channel": "note",
       "status": "done",
       "target": "note:b-kakei-winter-bargain",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-03",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:necktie-stockings-market-shrink",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a03-03",
@@ -291,6 +451,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a03-04",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-luxury-ranking",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-04",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a03-04",
@@ -307,6 +475,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a04-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:engel-coefficient-living-standard-myth",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-01",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a04-01",
@@ -323,6 +499,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a04-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:engel-coefficient-rise-hardship-2025",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-02",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a04-02",
@@ -339,6 +523,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a04-03",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:engel-coefficient-vs-prefectural-income",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-03",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a04-03",
@@ -352,6 +544,14 @@
       "target": "note:b-ref-kakei-a04-03",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a04-04",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:information-communication-coefficient-ranking",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a04-04",
@@ -371,6 +571,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a05-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:beer-peak-month-july-to-december",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-01",
       "channel": "note",
       "status": "done",
       "target": "note:b-kakei-beer-peak-month",
@@ -379,11 +587,35 @@
     },
     {
       "analysis": "kakei-marketing-2015-a05-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:white-bread-price-up-quantity-up",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-02",
       "channel": "note",
       "status": "done",
       "target": "note:b-kakei-bread-giffen",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-03",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:beer-happoshu-liquor-tax-steps-household-response",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-04",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:income-quintile-dining",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a05-04",
@@ -419,6 +651,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a05-06",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:fresh-seafood-east-west-boundary",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-06",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-kakei-a05-06",
@@ -432,6 +672,14 @@
       "target": "note:b-ref-kakei-a05-06",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-00",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:capital-city-buying-patterns-47",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-01",
@@ -1184,6 +1432,14 @@
       "target": "note:a-kakei-okinawa",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a07-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:local-production-local-consumption-meat",
+      "decidedAt": "2026-11-09",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "money-health-ranking-unknown-a04",

@@ -5,7 +5,7 @@ export type ReviewFit = { answers: string; needs: string };
 export type ReviewRow = { id: string; title: string; status: ReviewStatus; summary: string; fit?: ReviewFit; samples: ReviewSample[] };
 
 /** The templates the review script draws. Their ids are those of image-templates.json. */
-export const SAMPLED_TEMPLATES = ['bar', 'tile-map', 'choropleth', 'scatter', 'line', 'stacked-bar', 'grouped-bar', 'chord', 'radar', 'sankey', 'waterfall', 'boxplot', 'table', 'pie', 'heatmap'] as const;
+export const SAMPLED_TEMPLATES = ['bar', 'tile-map', 'choropleth', 'scatter', 'line', 'stacked-bar', 'grouped-bar', 'chord', 'radar', 'sankey', 'waterfall', 'boxplot', 'table', 'pie', 'heatmap', 'treemap', 'file-preview'] as const;
 export type SampledTemplate = (typeof SAMPLED_TEMPLATES)[number];
 
 interface LedgerTemplate {

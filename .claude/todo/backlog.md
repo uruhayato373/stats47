@@ -131,6 +131,136 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [PRODUCT-LP-SHOWCASE-01] 商品の LP (サイトの商品ページと note の記事) を、1 つの画像指定から全商品へ作れる仕組みとゲートにする
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx apps/web/scripts/generate-product-storefront.ts --check] [起票:2026-11-10] [領域:商品]
+
+- **起点 (2026-11-10 オーナー指示)**: 製造品出荷額の商品 (`muni-manufacturing-shipment-data` / サイトの `/products/data-muni-manufacturing`) を LP にした。分析の型 (比べる・構成を見る・変化を見る) ごとに作れる図と、ファイルの中身の見本を見せる形である。オーナーから「ほかの商品にも展開できる仕組みやゲートになっているか」と問われた。答えは「半分だけ」なので、このカードで残りの半分を作る。
+- **今ある部品 (他の商品にもそのまま使える)**:
+  - note の見本画像は、記事の作業ファイル `figure-specs.json` (画像ごとに `file`・型の台帳の `template`・`input`) から `.claude/scripts/note/render-product-figures.ts` が型の台帳 (`data/content-operations/image-templates.json`) の描画器だけで描く。経路は `config/image-generation-routes.json` の `note-product-samples`。spec は記事と一緒に private R2 へ保存する (`note:article save`)。
+  - 型の無い見本画像を持つ商品記事は、`.claude/scripts/note/build-note-figure-ledger.mjs --check` が `product-untyped` として数え、`.claude/config/note-figure-baseline.json` の `maxUntypedProductArticles` (14・縮小専用) を超えると止める。
+  - 公開中の note 有料記事の本文・題名・添付の差し替えは `.claude/scripts/note/publish-product-paid-update.sh` (記事 key・`FREE_PROBE`/`PAID_PROBE` を渡す) で他の商品にも使える。
+  - サイトの商品の型 `StorefrontProduct` (`apps/web/src/features/products/types.ts`) に、任意項目 `showcase` (節 = 見出し・短い説明・図の `file` と `alt`) を足した。商品ページ (`apps/web/src/app/products/[slug]/page.tsx`) は値があれば節を描く。画像の URL は公開 R2 の `app/products/<slug>/showcase/<file>` で、`ogpImageUrl()` で組む。
+- **穴 (展開と品質を妨げているもの)**:
+  1. **サイトの見本の設定がこの 1 商品にしか書けない**: 設定は `apps/web/scripts/generate-product-storefront.ts` の `STANDALONE_NOTE_PRODUCTS` に手で書いた。データ集 (note 有料データ集 14 件のうち P-01〜P-14 由来の 13 件) は `NOTE_PRODUCT_MAPPINGS` の経路、Kindle 13 件は KDP 台帳の経路で作られ、どちらも `showcase` を渡さない。
+  2. **画像の指定が二重管理**: 同じ 11 枚について、ファイル名と説明文を note の `figure-specs.json` とサイトの生成スクリプトの両方に書いている。片方だけ直すとずれる (`feedback_hand_synced_duplication` と同じ型の負債)。どの画像がどの節 (比べる・構成・変化・ファイルの中身) に属するかは、spec には無く、サイトの設定と note 本文にだけある。
+  3. **公開 R2 への配置が手作業で、検査も無い**: 2026-11-10 は `.local/r2/app/products/<slug>/showcase/` へ手でコピーし、`packages/r2-storage/src/scripts/push-exact-r2-assets.ts --prefix … --extension png` で置いた。サイトが指す画像が公開 R2 に無くても、生成の `--check`・型検査・テストのどれも止めない。その場合、本番で画像が切れる。
+  4. **CDN が 404 を覚える罠**: R2 に置く前にページや curl で画像の URL を読むと、`storage.stats47.jp` の Cloudflare が 404 を `max-age=14400` (4 時間) で覚える。2026-11-10 は、置く前の localhost 確認で最初に表示される 5 枚がこれを踏んだ。置いた後に読み戻すと、HEAD は 200 なのに GET は Not Found の HTML が返った (`cf-cache-status: HIT`)。この Mac の `.env.local` には `CLOUDFLARE_ZONE_ID` が無く、ローカルの `purge-cache.ts` は動かない。`gh workflow run purge-cdn.yml -f prefix=app/products/<slug>/showcase` で消した (run 42783049768)。
+  5. **LP の中身の約束を誰も検査していない**: 4 節 (比べる・構成・変化・ファイルの中身) がそろっているか、各図に alt があるか、どの商品に LP が無いかを数える検査は無い。note 側の検査が見ているのは「型で描いたか」だけである。
+  6. **note 本文の LP の節も手書き**: note 記事の「比べる・構成・変化」の見出しと説明文は、記事原稿に手で書いた。サイトの `lead` と同じ事実 (例: 豊田市 20 兆 5,272 億円・倉敷市の約 3.7 倍・輸送用機械 93.4%) を二か所に書いているので、値を直すと片方が古くなる。
+- **作るもの (推奨の設計)**:
+  1. **画像指定を 1 か所にまとめる**: `figure-specs.json` の各画像に `section` (`compare` / `structure` / `change` / `file`) と `alt` を持たせ、節の見出しと説明 (`lead`) も spec の `sections` に置く。spec の形は JSON Schema で固定する (置き場は `config/datasets.mjs` の規約に従い、台帳に 1 行足してから)。
+  2. **サイトの節を spec から導出する**: `generate-product-storefront.ts` が、公開済みの note 商品記事 (`data/note/articles.json`) ごとに spec を読み、`showcase` を作る。単独商品とデータ集の両方の経路で同じ関数を使う。`STANDALONE_NOTE_PRODUCTS` の手書きの `showcase` は消す。spec は private R2 にあるので、生成の入力にするには、公開してよい部分 (節・file・alt・lead・画像の sha256) だけを git の写し (`data/products/` か `data/note/`) に書き出す経路が要る。生成スクリプトが R2 を読む形にはしない (`--check` がネットワークに依存するため)。
+  3. **公開 R2 への配置を決定的にする**: spec から描いた画像を `app/products/<slug>/showcase/` へ置く処理を、sha256 付きの manifest (`push-exact-r2-assets.ts --manifest`) で行う。上の git の写しの sha256 と一致する画像だけを置く。R2 への書き込みは CI か、オーナー承認つきのローカル実行に限る。
+  4. **ゲートを足す**:
+     - 生成の `--check` (pre-commit・PR) で、`showcase` の各図に `alt` があり、4 節のうち `compare`・`file` を必ず含むこと (分析の型に当てはまらない商品は、理由つきで節を外せるようにする)。
+     - 週次 (または release 前) に、`showcase` の全 URL へ GET し、200・`image/png`・sha256 一致を確かめる検査。HEAD ではなく GET で見る (上の穴 4 で HEAD は 200 だった)。
+     - LP の無い公開中の note 商品の数を数え、縮小専用の上限を置く (`maxUntypedProductArticles` と同じ置き場 `.claude/config/` の baseline)。
+  5. **CDN の罠を手順に入れる**: 置く前に画像の公開 URL を読まない。確かめは `.local/` の写しを localhost で差し替えて見る。置いた後に読み戻して不一致なら `purge-cdn.yml` の prefix で消す。この手順を `/build-data-pack` の E2 と `.claude/rules/note-image-assets.md` に書く。
+  6. **note 本文の節も spec から組む** (やるかは実装時にオーナーへ確認): `lead` を spec に置いたら、note の記事原稿の LP の節も同じ値から作る。公開中の有料記事を書き換えるのは外部変更なので、記事ごとに承認を取る。
+- **次 (実行順)**: ① `muni-manufacturing-shipment-data` の spec に `section`・`alt`・`sections` を足し、サイトの `showcase` を spec の写しから導出して、生成物が今と同じになることを確かめる (差分 0 が移行の合格) → ② 画像の GET 検査と alt・節の検査を足し、1 枚消した spec で検査が落ちることを確かめる (検査器の検査) → ③ manifest での R2 配置に切り替える → ④ データ集 13 件に spec を作る。これは `PRODUCT-SAMPLE-TYPED-01` (見本画像を型へ) と同じ差分で行う。
+- **停止条件・禁止**:
+  - データ集 13 件の note の見せ方とサイトの商品ページは、価格実験 `PRICE-DATA-PACK-2026-11` の判定 (仮の期日 2026-12-30) まで変えない。導線の変更が価格の効果と混ざり、判定できなくなる。①〜③ は製造品出荷額の 1 商品だけで進めてよい。
+  - 公開 R2 への書き込み、CDN の消去、note 記事の更新、本番デプロイは、それぞれオーナーの承認を取る。
+  - 型の台帳に無い図を LP に載せない (型が足りなければ先に型を足す)。
+  - Kindle 13 件は対象外。中身の見本は書籍のページで、データの図とは別の話になる。必要になったら別カードにする。
+- **関連**: `PRODUCTS-PAGE-CONTENT-01` (商品ページで中身が分からない。このカードが仕組み、あちらが各商品の中身の是正) / `PRODUCT-SAMPLE-TYPED-01` (note の見本画像を型へ) / `PRODUCT-PACK-CONTENT-MISMATCH-01` (データ集の中身と説明の食い違い)。2026-11-10 の実装は commit `149629f56` (サイト) と `571272640` (note の型の経路)。
+- **完了条件**:
+  - 公開中の note データ商品すべてで、サイトの見本の節と note の見本画像が同じ spec から作られている。
+  - 生成スクリプトに手書きの `showcase` が 0 件。
+  - 見本の全 URL の GET 検査が通る。
+  - LP の無い商品の上限が 0 になっている。
+
+### [VACANCY-TYPES-TEST-NODE-TS-01] 空き家の種類のテストが data-configs の index.ts を node で読めずに落ち、関係の無い push を止める
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs] [起票:2026-11-10] [領域:管理]
+
+- **事象 (2026-11-10)**: `node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs` が `ERR_MODULE_NOT_FOUND: packages/data-configs/src/types` で落ちる (pass 0 / fail 1。Node v22.23.3)。`ingest-vacancy-types.mjs` が `require('…/packages/data-configs/src/registry.ts')` で TS を Node の型除去のまま読み、その先の `packages/data-configs/src/index.ts` の `export * from "./types"` (拡張子なし) を Node が解決できない。
+- **影響**: push 前テスト (`.claude/scripts/lib/pre-push-tests.mjs`) は、変更したファイルと名前が 4 文字以上重なる node のテストを選ぶ。`types.ts` を変えた push では、名前に `types` を含むこのテストが選ばれ、変更と無関係に push が止まる。2026-11-10 の商品 LP の push (`apps/web/src/features/products/types.ts` を変更) がこれで止まり、`--no-verify` で push した。develop の品質ゲート (develop-quality-gate.yml) は同日 success なので、CI では走っていないか別の起動方法で通っている (未確認)。
+- **再発 (2026-11-11)**: `apps/web/src/features/theme-dashboard/types.ts` を変えた push (テーマの初回描画データ `4baf8aad7`) でも同じテストが選ばれて止まった (node のテスト 39 件中この 1 件だけ fail、web の関係するテスト 366 件は pass)。web の vitest 全件 2,826 件と型検査が通っていることを確かめてから `--no-verify` で push した。
+- **次**: ① テストまたは `ingest-vacancy-types.mjs` を tsx 経由で読む形にする (他の `.claude/scripts` の TS 読み込みと同じ方法に合わせる)。`index.ts` の import に拡張子を付ける直し方は、web のビルドへの影響を確かめてからにする。② CI でこのテストが走っているかを確かめ、走っていないなら全件の node テストに載せる。③ 名前の重なりで無関係のテストを選ぶ件は、`selectNodeTests` の stem 判定 (`types` のような一般語) を見直すかを決める。
+- **完了条件**: 上の検証コマンドが pass し、CI の node テストにこのテストが含まれている。
+
+### [PRODUCT-SAMPLE-TYPED-01] note のデータ商品の見本画像を型の画像へ差し替える
+タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-10] [領域:商品]
+
+- **起点 (2026-11-10 オーナー指示)**: 商品の見本画像は型の台帳の型で描く。型 `treemap`・`file-preview` を足し、経路 `note-product-samples` (`render-product-figures.ts` + 記事の `figure-specs.json`) を登録した。本文画像の台帳は型の無い画像を持つ商品記事を `product-untyped` と数え、`--check` が上限 `maxUntypedProductArticles` (15・縮小専用) で止める。
+- **分かっていること**: `muni-manufacturing-shipment-data` は作業コピーに `figure-specs.json` (比較・構成・変化の 6 枚とファイルの中身 1 枚) があり、型の描画器で描けることを確かめた (R2 へは未保存・note は未更新)。データ集 14 本の地図 (`choropleth-map.png`・`sample-map.png`) は商品工場の独自の描画器で、型を通っていない。
+- **済み (2026-11-10)**: `muni-manufacturing-shipment-data` は型の画像 11 枚へ差し替え、上限を 14 にした (`MUNI-INDUSTRY-PRODUCT-01`)。
+- **次**: 週次の `note:figures` で台帳が `product-sample` になったことを確かめる → データ集の見本は価格実験 `PRICE-DATA-PACK-2026-11` の判定 (2026-12-30) の後に、`DATA-PACK-BUNDLE-01` の作り替えと同じ差分で型へ移す。
+- **関連**: サイトの商品ページの見本の節も同じ spec から作る仕組みは `PRODUCT-LP-SHOWCASE-01`。データ集の spec はあちらの ④ と同じ差分で作る。
+- **停止条件・禁止**: 公開中の有料記事の書き換えは note への外部変更なので、記事ごとにオーナーの承認を取る。価格実験の判定前にデータ集 13 本の見せ方を変えない (効果を分けられなくなる)。
+- **完了条件**: 公開中の商品記事の見本画像がすべて型に結ばれ、`maxUntypedProductArticles` が 0 になっている。
+
+### [MUNI-INDUSTRY-PRODUCT-01] 市区町村の製造品出荷額等のデータ商品に、業種別 (産業中分類 24 業種) の内訳を足す
+タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-10] [領域:商品]
+
+- **起点 (2026-11-10 オーナー決定)**: `muni-manufacturing-shipment-data` (¥980) に業種別の内訳を足す。LP の「構成」の見本 (豊田市の業種別のドーナツなど) を、買った人が同じデータで作れるようにするため。
+- **分かっていること**: e-Stat の経済構造実態調査 製造業事業所調査 地域編 (全事業所) が 2021〜2023 年実績で市区町村 × 24 業種の製造品出荷額等【万円】を API で出す (2023 年実績 = `0004035178`。地域と業種は 1 つの軸 `cat02` にまとまり、名前は「年_自治体コード_名前_業種コード_業種名」)。CI の `estat-industry-sample.yml` で豊田市・倉敷市・市原市を取り、製造業計が今の商品の 2023 年の値と一致することを確かめた。政令市の業種別は区単位でしか載らない (大阪市・堺市は市の製造業計だけ)。値の約 3 割が秘匿 (X)。2020 年以前の工業統計・経済センサスは従業者 4 人以上で、全事業所の表とは範囲が違う。業種別の市区町村の値は R2 にまだ無い。
+- **決定 (2026-11-10 オーナー)**: ① 載せる年は 2021〜2023 年実績 (経済構造実態調査・全事業所) だけ。2020 年以前 (従業者 4 人以上) は付けない。表は 2021 年実績 `0004048588`・2022 年実績 `0004028808`・2023 年実績 `0004035178` (2023 年は CI で確認済み、他 2 表は調査 agent の API 照会のみ)。
+  ② 政令市 (20 市) は、市の行は製造業計だけで業種を空欄にし「区の別表を参照」と注記する。区 × 業種は区の別表に載せる (区の合計で市の業種別を作らない。区にも秘匿があり足し上げが実際より小さくなるため)。③ 価格は業種別を足した版の公開と同時に ¥980 → ¥1,980。中身と価格を同時に変えるので、売れ方の変化の原因は分けられない。変更は `update-note-price.mjs` で行い、先に `data/products/price-history.json` へ書く。
+- **オーナーが決めること**: ④ note の差し替え (ZIP・無料部分・価格) の承認。
+- **進み具合 (2026-11-10)**: 取得・組み立て・生成をコミット c0b8ac76f・e65891757 で develop へ入れた。CI run 42777511989 で 3 年分 (2021 年 20,667 行・2022 年 20,666 行・2023 年 20,555 行) を取り、`.local/muni-data-products/_cache/industry/` へ取り込んで生成した。業種別 128,925 行・区 14,550 行、製造業計は本体と比べられる 4,939 件すべてで一致。2023 年は公表されていない業種の合計が製造業計の 17.1% (区の別表の市を除く)、秘匿の業種が無い自治体は 1,626 のうち 865。
+- **本体の説明の誤り (直した・note は未)**: 2021〜2023 年の本体の値は全事業所の値だった (上の 4,939 件一致)。`definition` を「2020 年以前は 4 人以上、2021〜2023 年は全事業所」へ直した。公開中の note の無料部分は「従業者4人以上の事業所が対象です」のままで、差し替えのときに直す。
+- **済み (2026-11-10・オーナー承認)**: note を更新した。`publish-product-paid-update.sh` で本文 (比べる・構成・変化の 11 枚)・題名・添付を ZIP v3 (12 ファイル・8.8MB) に差し替え、公開 API で無料部分の更新・画像 11・タグ 99、非ログイン HTML に有料本文と ZIP 名が無いこと、所有者画面の添付が v3 の 1 件だけであることを確かめた。続けて `price-history.json` の `PRICE-MUNI-INDUSTRY-2026-11` (判定 2027-01-05) で ¥980 → ¥1,980 を適用し読み戻した。`note:article save` で非公開 R2 へ 17 ファイル (manifest c2369672…) を保存し、R2 の原稿と spec で本文画像の判定が `product-sample` (11 枚すべて型) になることを確かめ、`maxUntypedProductArticles` を 14 にした。完了条件を満たしたので、週次レビューで削除してよい。
+- **停止条件・禁止**: e-Stat の appId は CI 専任で、公開リポジトリの CI artifact に販売物 (表全体の CSV) を出さない。秘匿の値を県計や業種計との差から逆算して埋めない。購入者がいる ZIP の差し替えは note への外部変更なので事前に承認を取る。
+- **完了条件**: 商品の ZIP に業種別の CSV と注記が入り、製造業計が既存の CSV と一致する検算を README に書き、note の記事と見本画像が新しい中身に合っている。
+
+### [ESTAT-APPID-LOCAL-01] 手元の設定ファイルから e-Stat の appId が読めて、「CI 専任」と食い違う
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-11-10] [領域:サイト]
+
+- **証拠 (2026-11-10・Mac)**: e-Stat の調査担当 agent が `.claude/scripts/lib/estat-catalog/api.mjs` の `getAppId()` (環境変数 `NEXT_PUBLIC_ESTAT_APP_ID`。`.env.local` と `apps/web/.env.development` を dotenv で読む) で getMetaInfo・getStatsData を呼べた。オーナーの方針は「e-Stat は CI」(`vars.NEXT_PUBLIC_ESTAT_APP_ID`)、既存カードの記録も「appId は CI にあり手元に無い」。どちらのファイルから値が入ったかは、設定ファイルの読み取りが権限で止められ未確認。
+- **次**: オーナーがどちらのファイルに値があるかを確かめ、手元に置かないなら消す。残すなら「CI 専任」の記録と `getAppId()` の読み先を直す。
+- **完了条件**: 手元で e-Stat を呼べるかどうかと規約・カードの記述が一致している。
+
+### [MEDIA-WORKSPACE-ORPHAN-01] 画像のワークスペース検査が「Orphan image」で止まる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-10] [領域:SNS]
+
+- **証拠 (2026-11-10・Mac)**: `node .claude/scripts/media/check-workspace.mjs` が `Orphan image: IMG-94a0f89d6b63cc51fcd8f506` で止まる。型の台帳を変更前の版へ戻しても同じ所で止まるので、型の台帳の変更とは関係が無い。
+- **次**: 在庫索引が古いだけか (`npm run media:state:pull` で取り直して再実行)、品質記録に在庫から消えた画像が残っているかを切り分ける。
+- **完了条件**: 原因を記録し、検査が通るか、残す理由を記録した。
+
+### [BLOG-ENGEL-VALUE-MISMATCH-01] 公開記事「物価高で切り捨てられた品目」のエンゲル係数が家計調査の表と合わない
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-09] [領域:サイト]
+
+- **事象 (2026-11-09)**: `blog:household-spending-before-after-inflation` の本文と図のエンゲル係数は 2019 年 27.0%・2024 年 27.8% だが、家計調査の用途分類 (`0002070003`、全国・二人以上の世帯) は 2019 年 25.7%・2024 年 28.3%。新しい下書き `engel-coefficient-rise-hardship-2025` を作る書き手が照合で見つけた。原因 (対象世帯・集計の違いか、算出の誤りか) は未調査。
+- **次**: ① 記事の data/*.json と source を R2 の記事から読み、どの表・世帯・式で出した値かを確かめる ② 誤りなら `/blog-revise-fix` で本文と図を直し、critic を通す。
+- **完了条件**: 記事の値が出典の表と一致するか、違う理由 (対象世帯など) が本文に書かれている。
+- **進み (2026-11-09)**: 一次資料 (e-Stat 0002070003、二人以上・全国) で確かめ、記事の値は誤りだった (図の折れ線 25 点がほぼ実値と合わない)。正しい値 2019 年 25.7%・2024 年 28.3% で本文と図を直し、品目別の 2 図も 0004023605 の実値で作り直した改稿を `contents/blog/household-spending-before-after-inflation/` に用意 (gate blocker 0・critic PASS)。公開後に R2 の本文と図が改稿と一致することを確かめたら消してよい。残る指摘は `BLOG-KAKEI-PUBLISHED-FACT-FIX-01` の「残り」。
+- **追記 (2026-11-09)**: 書き手の報告では、エンゲル係数の系の記事 (用途分類) とサイト内の食料の構成比 (品目分類) で、同じ年の値が 3 通りある。① の確認で、どの記事がどの分類を使うかを並べ、本文に分類を書く。
+
+### [BLOG-GROUPED-BARS-VALUE-LABELS-01] ブログの縦棒グラフに値のラベルが無く、軸の目盛りで読ませている
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
+
+- **事象 (2026-11-09)**: 下書き `engel-coefficient-rise-hardship-2025` の縦棒グラフ 6 枚と `kakei-number-one-city-rotation` の縦棒グラフは、棒に値が付かず軸の目盛りで読む形になる。原因は棒グラフの部品 `template-grouped-bars.ts` の仕様で、記事の側では直せない。統計画像の文字の規約 `.claude/rules/chart-image-copy.md` との整合を確かめる必要がある。
+- **次**: ① `chart-image-copy.md` が縦棒の値ラベルと軸目盛りをどう定めているかを読む ② 部品に値ラベルを出す設定を足し、既存のブログの図の再生成が要るかを数える。
+- **完了条件**: 縦棒グラフの値の読み方が規約と一致し、既存の図を作り直すかどうかの判断が記録されている。
+
+### [BLOG-GATE-NATIONAL-VALUES-01] 品質ゲートの値照合が全国の値・派生比率に効かない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
+
+- **事象 (2026-11-09)**: `article-factual-check` は県名と順位の組で本文と data を照合するので、県名を含まない全国の家計調査の値 (年収五分位・年齢階級・時系列) や記事で計算した比率は照合されず、exit 0 でも数値の正しさは critic の目視だけが担保する。問いの台帳に粒度「全国」を足した (2026-11-09) ので、全国の記事が増える。
+- **次**: 全国の記事の data/*.json の値と本文の数値の対応を取る検査を設計する (単位・丸めの扱いを含む)。
+- **完了条件**: 全国の値だけの記事で、data に無い数値を本文に書くと検査が止める。
+- **完了の証拠 (2026-11-09)**: `quality-gate.mjs` が archetype Q の記事の本文の数値を `data/*.json` (補助値 `appendix-supporting-values.json` を含む) と `checkArticleNumbers` で照らし、根拠の無い数値を blocker にする。年齢・期間・区切りの整数は除く。テスト `quality-gate.q-numbers.test.mjs` (5 件・PR CI に配線) と `article-numbers.test.mjs` (11 件) が通る。追記の ① slug で下書きを読む ② 記事ディレクトリを受ける も同じ変更で直した。③ 値の直し漏れは、残った古い値が data と合わず同じ検査で止まる。週次レビューでカードを消してよい。
+- **追記 (2026-11-09・下書き 10 本の書き手と審査役の報告)**: ① `quality-gate.mjs` に slug だけを渡すと `.local/r2` の記事を探し、見つからないと factual の突合を飛ばす (article.md のパスを渡すと通る)。② `record-critic-findings.mjs` は記事ディレクトリ、`quality-gate.mjs` は article.md のパスを取り、引数の形が違うので審査役が EISDIR で止まった。③ 値を直したとき同じ値の他の出現箇所に届かない漏れが起きた (`household-spending-seasons-and-tax-hike-swings` の倍率 1.2→1.1 が 3 か所中 1 か所だけ直り、審査で BLOCK)。この 3 点も同じ検査の設計で扱う。
+
+### [BLOG-KAKEI-PUBLISHED-FACT-FIX-01] 公開済みのビール系の記事 2 本に、出典と合わない記述がある
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-09] [領域:サイト]
+
+- **事象 (2026-11-09、下書き `beer-happoshu-liquor-tax-steps-household-response` の書き手が照合で発見)**: ① `blog:beer-vs-happoshu-shift` は「新ジャンルは家計調査で別区分」と書くが、統計局の品目分類では発泡酒の品目 (3X7) に新ジャンルを含む。② `blog:beer-peak-month-july-to-december` の「350ml換算154円」は、国税庁のビールの酒税 (350ml あたり 54.25 円、2026年10月) と合わない。いずれも書き手の照合で、呼び元は公式資料を未取得。
+- **次**: ① 統計局の家計調査の品目分類 (用語の解説・収支項目分類) と国税庁の酒税の資料を取得して、2 本の該当箇所と照らす ② 誤りなら `/blog-revise-fix` で直し、critic を通す。
+- **完了条件**: 2 本の該当箇所が公式資料と一致するか、記事の値の根拠が本文に書かれている。
+- **進み (2026-11-09)**: 2 本とも誤りと確かめ、直した改稿を `contents/blog/<slug>/` に用意した (新ジャンルは品目 3X7 に入る。酒税は 350ml 換算 54.25 円・財務省 d08 と国税庁の手引き。2026 年 10 月の一本化は実施済みの時制へ)。同時に `blog:household-spending-before-after-inflation` (`BLOG-ENGEL-VALUE-MISMATCH-01`) も直した。3 本とも gate blocker 0・factual exit 0・critic PASS。公開 (published のまま develop へ push) で反映する。
+- **残り (審査は通ったが残る指摘)**: ① (2026-11-09 済み・オーナー判断で題を本文の結論に合わせた。critic PASS・develop へ push 済み) ② household のコーヒー豆相場「約2倍」に出典が無い ③ household のビール値 (2019=10,720 / 2024=12,934) が beer-peak (0003343671 の月次合計 10,721 / 12,933) と 1 円ずれる (表の違いか丸めか未確認) ④ beer-vs-happoshu の焼酎との比較が一本化後も成り立つか未確認。
+
+### [BLOG-ANALYSIS-SCRIPT-PLACEMENT-01] 記事の図を作った分析スクリプトの置き場が決まっていない
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
+
+- **事象 (2026-11-09)**: 家計調査の下書き 10 本のうち 3 本は、図の `source.json` の `generatedBy` が `contents/blog/<slug>/analysis/build.mjs` を指す。`contents/blog` は公開後に片付ける送り箱なので、片付けたあとは指す先が無くなる。ほかの 7 本の生成スクリプトは書き手の一時領域にだけあり、リポジトリに入っていない。図の `source.json` は 10 本とも `inspectChartSourceManifest` が valid と判定する (e-Stat の表番号と取得条件で作り直せる) ので、公開は止めていない。並行する書き手が同じ一時領域で同名のファイル (`lib.mjs` など) を上書きし合う事故も報告された。
+- **次**: ① 記事の図を作る使い捨ての分析を、リポジトリに残すか (置き場と寿命) 残さないか (`generatedBy` に何を書くか) を `blog-data-schema.md` で決める ② 書き手の prompt に、作業ディレクトリを記事ごとに分けることを書く。
+- **完了条件**: `blog-data-schema.md` に分析スクリプトの扱いが書かれ、`generatedBy` が存在しない道を指す図を週次の検査が数える。
+- **進み (2026-11-09)**: 決めた。使い捨ての分析は残さず、取得条件を作り直しの正本にする (`blog-data-schema.md`)。`config/schema/blog.chart-source.schema.json` が `contents/blog/`・`/private/tmp/`・`/var/folders/` を指す `generatedBy` を形の違反にし、`quality-gate.mjs` が止める (旧来の `/tmp/` は改稿を止めない)。週次の `audit-chart-axes.ts` も同じ形の検査で `bad-shape` と数える。書き手の作業ディレクトリと e-Stat の保存の共有は `manage-issue-ledger` SKILL.md §5 に書いた。
+- **完了の証拠 (2026-11-09)**: 公開済みの 3 本の R2 の `source.json` 31 件から `generatedBy` を消して書き戻した (オーナー承認済み・`diff-push-r2.ts` で 31 件成功・エラー 0)。書き戻した 31 件を公開 URL から読み直し、手元の修正版と 31 件一致・`generatedBy` 0 件。他の項目は変えていない。上書き前の版は `blog-archive/` に退避済み。週次レビューでカードを消してよい。
+
 ### [MUNI-THEME-INDEX-STAGING-01] 市区町村×テーマのページを、人口の多い市から段階的に検索に出す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
 
@@ -623,6 +753,7 @@ updated: 2026-11-01
 - **② タイルの共通化 (2026-11-02 済)**: 4:5画像はサイトの配置表 `TILE_GRID_LAYOUT` から導出した `IMAGE_TILE_LAYOUT`（`data-cards/tile-layout.ts`）を使い、描画は `all47-svg.ts` の `renderTileMapBody` 1つ、配色は `data-cards/tile-scale.ts` の `resolveTileScale`（サイトの `resolveChoroplethScale` と一致をテストで固定）。増減タイル・IG 表紙・クイズのヒント・地図カルーセルの塗り分けも移行済み（型台帳 tile-map v6）。`svg-builder` の `TILE_GRID` も `TILE_GRID_LAYOUT` から導出。実形状の地図の見本は `buzz-map/geo.ts` の `computeBuzzMapGeo` で描く。
 - **②の残り**: Remotion の本描画は未確認（`REMOTION-RSPACK-WIN-01`）。予約中の IG 素材の再レンダーは未実施。既存の IG 地図カルーセル props（`.local/r2/sns/map-carousel/*/props.json`）は作り直すまで青5段。表紙のフッター（stats47.jp）と `IgSeriesFooter.tsx` の発行元表記は残る。地図カルーセルは塗り分けと上位・下位の2枚がタイル地図で重なる（統合はオーナー判断）。
 - **次・実行順**: ②の残り → ③バズマップ（投稿0件のため投稿開始前に）。各段で予約中の素材を再生成する（予約の本文・日時・ID は保つ）。
+- **③ バズマップ (2026-11-10 済)**: `BuzzMapCard.tsx` の左下の発行元行を外し、spec を作る `build-buzz-map-spec{,-gsi,-ksj}.ts` と `merge-buzz-map-specs.ts` が出典の末尾に `stats47.jp` を足すのをやめ、既存の spec 14 件からも外した。note のデータ商品の見本 (`render-product-figures.ts` の `choropleth`) で描けることを確かめた。予約中のバズマップ素材は投稿 0 件のため再レンダー対象なし。残りは `.claude/scripts/sns/lib/ranking-story-card.ts` などバズマップ以外の経路。
 - **停止条件**: 予約中投稿の差し替えで本文・日時・IDが変わる、公開済み投稿の素材を上書きする場合は止める。動画の終端カード（YouTube のアウトロ）は統計画像ではないので外すかを別途確認する。
 - **完了条件**: 上記の生成経路の可視テキストに発行元が無く、各経路の出力に `assertMinimalChartCopy` 相当の検査が掛かる。
 
@@ -639,7 +770,7 @@ updated: 2026-11-01
 - **読者の課題・HARM**: 家計の負担が収入層や年でどう違うかを理解したい読者には M。品目の地域差を楽しむ読者は HARM 対象外。前者の購入意図は未検証。
 - **根拠**: 2025年の表・地域/世帯/期間/単位・図の候補は `.claude/skills/estat/references/household-expenditure-survey.md`。参考PDFの論点台帳 `data/source-inventory/kakei-marketing/2015/analyses.json` に収入階級と食料・教育費の問いがあるが、書籍の値や図は使わない。GSC W43 の「収入階級」「年収別 消費」の明確な検索需要は 0 件で、まず既存の食テーマやブログへの小さな図として試す。
 - **確認済みの表 (2026-11-01、API実値照合と全126表のメタデータ棚卸し)**: 品目年次・五分位・年齢別・用途分類の五分位、年間収入 (2000〜2025年)、貯蓄・負債編の地域・年収18階級・五分位・十分位の表と単位の区別は `.claude/skills/estat/references/household-expenditure-survey.md` を正典とする。2025年詳細表の年収帯×品目や妻の就業×世帯類型など、Excel限定の交差軸は別の取込検証が必要。
-- **制作状況 (2026-11-01)**: 17件の分析単位を `kakei-analysis-catalog.ts` に台帳化 (各行が切り口台帳の `lensId` を参照)。全国の比較図10枚を R2 staging `app/survey/kakei-chousa/axis-charts.json` にローカル生成済み、米の支出と数量のブログ下書き・SVG は独立criticのPASSまで済み。R2 push・本番公開・効果観測は未実施。残る貯蓄/負債の都市比較1件は地域軸の図契約を要するため引き続きこのカードで扱う。
+- **制作状況 (2026-11-09 本番で確認)**: 17件の分析単位を `kakei-analysis-catalog.ts` に台帳化 (各行が切り口台帳の `lensId` を参照)。全国の比較図 17 枚は R2 `app/survey/kakei-chousa/axis-charts.json` に反映済みで (`kakei-axis-charts.yml` 11-05 成功)、本番の `/japan/household-food-spending` に 13 枚・`/japan/household-assets-debt` に 4 枚が表示される (HTML で図の題を確認)。米の支出と数量のブログ `rice-spending-quantity-gap-2025` は公開済み。問いの台帳では D13-1 を `japan-theme:household-assets-debt` に結んだ。効果観測は未実施。残る貯蓄/負債の都市比較1件は地域軸の図契約を要するため引き続きこのカードで扱う。
 - **実行順**: ①全国時系列と金額/数量が揃う品目を検証 ②年収階級/五分位と世帯別の対象・実値を検証 ③貯蓄/負債の都市値と全国の年収別値を別面で検証 ④既存テーマの図・ブログで答えられない問いを制作し、相互にリンクする。各切り口の検証は並行してよい。
 - **停止条件**: 家計調査の県全体値や都市×収入階級の交差表は存在しない。県別地図に全国の収入階級値を載せない。用途分類の月平均と品目分類の年間合計、2024年以前と2025年改定後の未接続系列を混ぜない。API の軸メタデータと公式値の照合前に図を公開しない。
 - **完了条件**: 上記4系統で取得可能な図/記事の候補をすべて採否判定し、採用したものは一次資料・単位・世帯構成・導線の検査を通して公開後の閲覧/回遊の観測日を置ける。
@@ -1830,6 +1961,7 @@ updated: 2026-11-01
 - **観測 (2026-10-22 GSC通知)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」の検証結果が「修正できませんでした」(一部のページが引き続き影響を受けている) で届いた (Message type WNC-10031170)。残ったURLと件数はGSCのインデックス登録レポートで確かめ、584件のうちどの種類 (公開CSV/JSON・OGP) が残ったか、Googleがnoindex/404/410を取得済みかを切り分けてから、修正か再検証かを決める。
 - **停止条件**: API全体は開放しない。ダウンロード/画像機能を壊さない。Googleがnoindex/404/410を取得する前に解消としない。ローカル実装を本番反映済みとしない。
 - **完了条件**: 本番で意図したHTTP/robotsが配信され、対象URLのGoogle再取得でダウンロードの検索除外・廃止画像の除外が確認できる。正常画像は取得可能。noindex対象増加は意図した除外として評価する。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」は 23 件 (検証は「失敗しました」表示)。一方、許可したダウンロード API がクロールされ、全既知の「クロール済み - 未登録」2,413 件は W44 記録 1,000 件中 959 件が `/api/ranking/*/download?format=…`、32 件が `storage.stats47.jp` の JSON。kml は 1 ファイル 2.5MB。**次**: 23 件が 0 になったらダウンロードの許可を Disallow に戻す案を `GSC-CRAWL-WASTE-01` で判断する (Dataset 構造化データの `contentUrl` が同じ URL を指すので、戻す前に Dataset の検証への影響を確かめる)。
 
 ### [GSC-SOURCE-FRESHNESS-01] GSCのUI監査と既存計測の観測日・取得範囲を揃える
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [領域:サイト]
@@ -1840,6 +1972,8 @@ updated: 2026-11-01
 - **次 / 順序**: ①sourceごとに観測日・取得日・母集団・標本数・欠測を照合する ②既存CSV/manifest gateで最新coverageを取り込むか、部分UI監査を補助証拠として保持するかを決める ③HTTP/sitemap collectorの既存出力との接続を検証し、既存キューの状態を保持して再構築する。集計期間はsearch-growthのObservationと元summaryを照合し、週フォルダ名から推定しない。④修正版のmain週次CIで、新しいqueueとsourceの取得範囲を照合する。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 週次の記録 (`data/gsc/coverage-drilldown/`) は「すべての既知のページ」だけで、404 の 12,116 件に埋もれる。「すべての送信済みページ」は登録 6,729・未登録 1,977 (検出-未登録 1,134 / noindex 578 / クロール済-未登録 127 / robots 58 / 404 48 / リダイレクト 17 / リダイレクトエラー 10 / 5xx 5)、「未送信」は登録 764。GSC の URL は `pages=ALL_SUBMITTED_URLS` / `ALL_NON_SUBMITTED_URLS`。**次**: 週次の取得に送信済みビューの件数と理由別ドリルダウンを足し、追う指標を送信済みの登録率 (11-06 時点 6,729 / 8,706) にする。
+- **送信済みビューの記録 (2026-11-11 実装・画面操作は未検証)**: `export-coverage-playwright.mjs` が最後に `pages=ALL_SUBMITTED_URLS` の概要を export し (補助扱い。失敗しても必須の export の成否は変えない)、`ingest-gsc-export.py` が週フォルダの `submitted-totals.json` と推移 `data/gsc/coverage-submitted-history.csv` (台帳 `gsc.coverage-submitted`) に書く。取れなかった週は `status=missing`・空欄で、0 で埋めない。単体テストは Python 10 件・node 56 件が通過。GSC の画面を操作する部分 (ビューの切り替え・export の zip の形) は実行していない。**次**: 土曜 11-14 の週次取得で `submitted-totals.json` ができ、11-06 の画面の値 (登録 6,729・未登録 1,977) と桁が合うかを確かめる。合わなければ zip の中身を読んで ingest を直す。`~/Downloads` の最後の zip を採るだけなので、古い週の送信済み zip が残っていると別の週の値を記録しうる (週との照合が未実装)。
 
 ### [GSC-INTERNAL-DISCOVERY-01] 未登録候補の孤立ページとHTMLリンクの到達経路を是正する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
@@ -1852,6 +1986,8 @@ updated: 2026-11-01
 - **次**: まとまったデプロイ後に ① 県トップ代表HTMLで53リンク・遷移先200/自己canonicalを確認し、同じ固定401 URLを14/28日後のURL Inspectionで追う ② `/blog/tags`のタグリンクと対象`/tag/生活コスト`への到達を実測する。GSC再認証後の新exportが取れるまでは10-17を最新件数と扱わない。
 - **停止条件**: 全ページリンクの一括追加をしない。未登録理由を孤立と決めつけない。サイト内リンクが既に十分なら修正を作らず証拠を残す。公開は別途指示で行う。
 - **完了条件**: 優先候補ごとに入口・到達経路・修正要否があり、採用した導線がHTMLから辿れる。案13は採否と根拠を残す。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 送信済みの「検出 - 未登録」1,134 件は全件「前回のクロール: 該当なし」。先頭 1,000 件はランキング 397・県×テーマ 239・市区町村 133・市区町村ランキング 133・ブログ 68・japan 18。W44 記録のランキング 472 件のうち 451 件は 7-1 時点でサイトマップに載っていた (新規ではない)。4 月の「表示回数 1 以上」集合 (`indexable-ranking-keys.ts`) に入るのは 1 件。ハブ 394 ページ (トップ・/ranking・カテゴリ・テーマ・県・japan・調査・タグ) のサーバー HTML からリンクされないランキングは全体 293/2,596 (11%)、未クロール群 92/472 (19%)。`/ranking` のランキングへのリンクは 4 本、`/category/population` は 22 本。[仮説] 一覧ページからの入口不足が未クロールの一因。孤立は 19% に留まるので主因とは言えない。**次**: `/ranking` と各カテゴリページのサーバー HTML に全ランキングへの `<a href>` を出す案の採否を決め、採るなら固定の 92 URL を 14/28 日後に URL Inspection で追う。
+- **カテゴリ・調査ページの全件リンク (2026-11-11 実装・未デプロイ)**: カテゴリと調査のランキング表 (`CategoryRankingTable`) はページ送り (20 行) なので、サーバーの HTML に出るランキングへのリンクは先頭 20 件だけだった (本番 `/category/population` は 156 件中 22 本)。表の下に、畳んだ「全 N 件を名前の一覧で見る」(`RailCard` collapsible + `RailNavRow`。家計のテーマの品目一覧と同じ形) を足した。localhost の実測: `/category/population` はサーバー HTML の `<a>` が 156 本、`/survey/kakei-chousa` は 869 本。畳んだ中身は `hidden` の要素として HTML に入る。重さ: 1 リンク約 360 バイトで、`/category/population` は一覧の HTML が 60KB、`/survey/kakei-chousa` は 339KB (同じ内容が RSC の payload にも入るので増分はその約 2 倍)。`/ranking` の索引ページは 2026-10-28 にオーナー合意した構成なので変えていない。**次**: 本番へ出した後、本番 HTML でリンク数を確かめ、未クロールの固定 92 URL (ハブからリンクが無かったランキング) を 14/28 日後に URL Inspection で追う。家計調査の調査ページの重さを減らすかはオーナー判断。
 
 ### [GSC-SITEMAP-LASTMOD-01] サイトマップ掲載条件と実更新日時の整合を検査する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
@@ -1862,6 +1998,9 @@ updated: 2026-11-01
 - **次 / 順序**: ①既存検査が覆う項目を確認する ②変更されたURLと各テンプレ代表で不整合・lastmod根拠を検査し、不足箇所だけ既存gateへ足す ③週次全URL検査へ必要な項目を接続する。
 - **停止条件**: 全URLのlastmodを毎日更新しない。更新日が不明なとき捏造しない。priority/changefreqの変更をGoogle向け改善策にしない。公開反映は別途指示で行う。
 - **完了条件**: 意図しない404/転送/noindex/別canonical掲載を検出でき、lastmodが実更新に一致するか未設定理由を説明できる。既存検査との二重運用を残さない。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: サイトマップは 11 本・9,399 URL。`lastmod` があるのは shard 3 (ランキング 2,596 件が全件 2026-05)・shard 4 (ブログ)・shard 7 (タグ) だけで、県×テーマ 2,491・市区町村 1,741・市区町村ランキング 1,224 など 8 本には無い。`/geo/history/*` は 200・index・自己 canonical で 100 件超が登録済みだがサイトマップに無い (未送信ビューの先頭 500 件中 108 件)。送信済みビューには 404 48・リダイレクト 17・リダイレクトエラー 10・5xx 5 があり、個別 URL は未確認。**次**: ① ランキングの `lastmod` を実更新日にし、無い 8 本は出せる根拠の有無を決める ② `/geo/history/*` を掲載する ③ 送信済みビューの 4 理由 80 件の URL を読み、掲載から外すか直すかを決める。
+- **送信済みビューの 4 理由 80 件の中身 (2026-11-11 実測・GSC 最終更新 11-06)**: 全 URL を読み、Googlebot UA で本番を取得した。① 404 の 48 件 (タグ 26・ブログ 12・ランキング 5・県×観光 3・調査 1・ブログのクイズ 1)、5xx の 5 件 (`/japan/household-health-spending` 11-02、県×テーマ 4 件 9-18)、リダイレクトエラーの 10 件 (全て `/areas/<県>/tourism`・7〜8 月) は、63 件すべて現在 200・`index, follow`・サイトマップ掲載あり。サイト側の修正対象は無く、Google の再クロール待ち。② リダイレクトの 17 件は市区町村テーマの旧 slug 16 件 (`/municipalities/themes/employees` → `local-economy` など) と `/survey/household-survey` → `/survey/kakei-chousa` で、301 は意図どおり。現在のサイトマップには載っていない (クロール日 11-03〜11-08)。処置不要。③ ブログ 12 件の 404 はクロール日が 10-29、その記事がサイトマップの一覧 (`sitemap-blog-entries.ts`) に入ったのも 10-29 (`cbf8a7309` ほか)。クイズ記事は一覧入り・クロールとも 11-02。[仮説] 新しい記事が、サイトマップに載った直後のクロールで 404 を返している (ISR の 404 キャッシュ。memory `feedback_bulk_blog_publish_isr_404`)。当時の応答は残っておらず未確認。検証: 次にブログを公開した直後、新しい記事 URL を Googlebot UA で取得して 200 か 404 かを記録する。404 なら公開手順にキャッシュの解消を足す。①の 63 件は 11-11 に GSC の送信済みビューで 404 (48)・5xx (5)・リダイレクトエラー (10) の「修正を検証」を開始した (3 件とも表示は「検証: 開始・開始日 2026/11/11」)。**次**: 11-25 以降に検証結果の通知と送信済みビューの 3 件数を読む (市区町村ページの 2 件の検証は `GSC-MESSAGE-TRIAGE-01`)。
+- **`/geo/history/*` の掲載 (2026-11-11 実装・未デプロイ)**: `infraHistoryIndexablePaths()` (`features/infra-history/lib/infra-history-scope.ts`) が、ページ側の robots と同じ条件 (公開できるネットワークだけ) で 一覧・全国・地方・47 都道府県のパスを返し、サイトマップの static に載せる (現在 169 件)。検査は `infra-history-indexable-paths.test.ts` と `sitemap-index-parity.test.ts`。**ランキングの `lastmod` は未着手**: 現在は `updatedAt` が無いか古いと一律 `SITEMAP_BASELINE` (2026-05-25) を出していて、2,596 件が同じ日付になる。実更新日の出所 (R2 の値の更新日を `sync-ranking-keys` の生成物へ焼き込む案) は CI の生成工程を変えるので、今回のデプロイには入れていない。**次**: 出所を決めるまでの間、根拠の無い一律の日付を出し続けるか、`lastmod` を出さないかを決める。
 
 ### [GSC-CANONICAL-REDIRECT-01] 正規URLを示す内部リンク・サイトマップ・転送先を揃える
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
@@ -1891,6 +2030,20 @@ updated: 2026-11-01
 - **次 / 順序**: ①重要な未確認通知が残るかを確認する ②各通知に対象種別・現状・対応カード/対応不要理由・次回確認日を対応付ける ③既存週次GSC運用へ分類手順を統合する。単発の運用整備として閉じ、毎週の正常確認をbacklog化しない。
 - **停止条件**: 通知の問題種別数を影響URL数と読み替えない。実績通知で不具合を起票しない。新しい常駐collectorや外部通知送信を自動追加しない。
 - **完了条件**: 対象通知に未分類がなく、現在の問題は既存カードに接続し、既存運用で再利用する手順と保存先が定まる。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 11-09 の通知「サイトマップ内のページが登録されない新しい要因」は robots.txt ブロック (58) とリダイレクト (17)。送信済みビューの noindex 578 件は全件が市区町村ページで、クロール日は 8 月〜10-21 (データブック公開 `436f46b43` より前)。robots ブロックは見えた 10 件が市区町村ページでクロール日は 5 月 (解除 5-23 より前)。サイトマップの市区町村 1,741 件から 70 件を Googlebot UA で取得し全件 200・`index, follow`。両方とも 11-11 に GSC で「修正を検証」を開始した (表示: 検証 開始・開始日 2026/11/11)。**次**: 11-25 以降に検証結果の通知と送信済みビューの 2 件数を読む。合格しなければ残った URL の robots メタと HTTP を読み直す。
+
+### [GSC-CRAWL-WASTE-01] Google のクロールがページ本体以外に使われている分を確かめて止める
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [領域:サイト]
+
+- **起点 (2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)・クロール統計は直近 90 日・最終更新 11-09)**: 34 万リクエストのうち HTML は 36%、「その他のファイル形式」30% (10.3 万件・合計 8.23 億バイト = 平均 8KB・平均応答 891ms)、JavaScript 14%、画像 11%。目的別は更新 79%・検出 21%。ホスト別は stats47.jp 280,193・storage.stats47.jp 59,325。平均応答時間 1,500ms。キャッシュに無い状態の取得は手元で約 2 秒、HTML は 0.5〜1.0MB (圧縮後 36〜93KB)。`storage.stats47.jp/robots.txt` は 404。送信済みの「検出 - 未登録」は 1,134 件 (`GSC-INTERNAL-DISCOVERY-01`)。
+- **「その他のファイル形式」の正体 (2026-11-11 確定)**: GSC のクロール統計の例 500 件 (全 866 件・9-16〜11-10・全件 200) は 2 種類。① `?_rsc=` 付きの URL 182 件 = Next.js のリンク先読み (RSC)。日付は 9 月 98・10 月 84 で、最後は 10-16。同日の `f94a5035f` (先読みを画面内からホバー時へ変更) 以後の例は無い = 解消済み。② クエリの無いページ URL 316 件 = 県×テーマ 264・テーマ 32・Geo 20。11 月の例 45 件はこの種類だけ。本番 `/areas/24000/business-demography` をブラウザで開くと、表示直後に同じ URL への POST が 1 回出る (応答 2,440 バイト・転送 780 バイト・879ms、中身は指標の時系列 `points` の配列)。呼び出し元は指標カード (`SingleMetricCard` / `MetricSwitcherPanel`) の時系列を取る Server Action `fetchMetricTimeseriesBatchAction`。章に図があるテーマ (例 `/areas/13000/aging-society`) は、図の結果を取る `fetchThemeChartResultsAction` の POST (12,788 バイト) も出る。Geo は `GeoLayerExplorer` / `GeoSpatialEvidenceExplorer` が Server Action を呼ぶ。Cloudflare のログでの照合はしていない (ローカルに API トークンが無い)。Googlebot の描画がこの POST を出していることは、GSC の例の URL 型と本番の POST の URL が一致することからの推定で、Googlebot のリクエストのメソッドは未観測。
+- **テーマの POST の是正 (2026-11-11 実装・未デプロイ)**: 表示する地域の時系列と図の結果をサーバーの初回描画で渡し、指標カードと図は渡された分を取りに行かない (`features/theme-dashboard/lib/initial-theme-data.ts`・`components/InitialThemeDataContext.tsx`)。県を切り替えた先は従来どおり取りに行く。localhost の実測: `/areas/24000/business-demography` は同じ URL への fetch が 1 → 0、HTML は 487,991 → 519,569 バイト (転送 65,385 → 67,839)。`/areas/13000/aging-society` は fetch 1 → 0、HTML 1,052,413 → 1,110,372 バイト (転送 125,840 → 129,179)、図 3 枚は ready。`/themes/railway` で大阪府へ切り替えると fetch が 2 回出て図が大阪府になる。検査: web の vitest 全件 2,826 通過・型検査通過。渡す時系列は表示する全指標の分で、カードが使わない指標も含む (HTML が約 6% 増える)。Geo ページ (`GeoLayerExplorer` など) の Server Action は未対応。
+- **次 / 順序**: ① テーマの POST の是正を本番へ出した後、本番の県×テーマ・テーマのページで同じ URL への POST が出ないことを確かめ、GSC のクロール統計「その他のファイル形式」の例に反映日以後の県×テーマ・テーマの URL が出なくなるかを反映から 4 週後に読む (Geo の URL は残る)。Geo ページの Server Action を同じ形にするかは、その結果を見て決める ② `storage.stats47.jp` に robots.txt を置き、画像 (OGP・ブログの図) は許可して `values.json` などの JSON を止める案を作る (R2 への書き込みなので承認後) ③ ダウンロード API を Disallow に戻すかを `GSC-ROBOTS-INDEXED-01` の 23 件が 0 になった後に決める ④ キャッシュに無いときの応答 (約 2 秒) と HTML の大きさ (0.5〜1.0MB) を減らす案を、テンプレート別の実測から 1 つ選ぶ。
+- **根拠の扱い**: Google の「大規模サイトのクロール予算管理」(developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget) を、応答が速いほどクロール上限が上がる・noindex のページもクロールを使う、の根拠に使う。11-11 の調査では再取得しておらず記憶からの引用なので、着手時に本文を読み直してアクセス日を書く。
+- **停止条件・禁止**: 正体を確定する前に prefetch や robots を変えない。画像のクロールを止めない。Dataset 構造化データの検証を壊さない。R2・本番への反映は別途指示で行う。
+- **完了条件**: 「その他のファイル形式」の正体が記録され、止めると決めたものが robots / 実装に入り、効果観測 (反映から 4 週後の送信済み「検出 - 未登録」件数とクロール統計の HTML 比率) が `improvements.md` の別 ID へ引き渡されている。
+- **Geo ページの POST は見送り (2026-11-11)**: `GeoLayerExplorer` / `GeoSpatialEvidenceExplorer` の Server Action は地図の形状データを運ぶ。テーマと同じ「初回描画で渡す」形にすると HTML に形状が入ってページが大きくなるので採らない。キャッシュできる GET (robots で止めている `/api/` の下) へ替える案を別に設計する。GSC の例では 316 件中 20 件。
+
 
 ### [NOTE-LABOR-METRICS-ADD-01] 有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-15] [領域:サイト]
@@ -2691,6 +2844,7 @@ updated: 2026-11-01
 - **観測の判断条件**: 登録済み6,700とsitemap6,574は対象集合が異なるので割り算しない。固定した対象URL群で修正後クロール・登録・検索表示・クリックを追い、未登録総数の減少だけを成功にしない。UI監査と既存coverage入力の鮮度を分け、取り込み時は既存CSV/manifest gateを通す。既存lastmodは実際の本文/データ更新を表すかを確認し、確認できない日時を捏造して一律更新しない。
 - **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
 - **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 送信済みの「クロール済み - 未登録」127 件は県×テーマ 70・ランキング 24・市区町村 21・ブログ 11・調査 1 (クロール日は 6 月〜11 月)。県×テーマはテーマ 35 種に散り、最多は aging-society の 8 件。県×テーマはサイトマップに 2,491 件あり、「検出 - 未登録」にも 239 件ある。**次 (案09・15 の入力)**: 登録済みと未登録の県×テーマを同じテーマで並べ、本文・固有の値・重複の差を比べてから、薄い組み合わせを noindex にするか内容を足すかを決める。
 
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
@@ -3084,6 +3238,7 @@ updated: 2026-11-01
   中: `/products/data-p-01` の「含まれるもの」がファイル形式の列挙だけで、収録指標・年次・見本が無い。低: 表紙画像が無い。
   「14 点の編集可能データ」に「個別分析サービス」が混ざる。
 - **注意**: note・商品販売レーンは「維持」。新作や新チャネルは足さず、既存商品の説明の是正だけを行う。
+- **進み (2026-11-10)**: `/products/data-muni-manufacturing` に、比べる・構成・変化・ファイルの中身の見本 (11 枚) と実際の収録内容を載せた (commit `149629f56`)。全商品へ広げる仕組みとゲートは `PRODUCT-LP-SHOWCASE-01`。
 - **完了条件**: 各商品に固有の内容紹介と収録内容・見本があり、定型文だけのカードが 0 件。
 
 ### [GA4-FULL-MEASUREMENT-01] GA4 を全ページで使い切る (計測の是正 → 文脈・操作・成果 → API 登録 → 週次集計・BigQuery)
@@ -3454,6 +3609,16 @@ updated: 2026-11-01
 - **完了条件**: 生成ステップが `.local/r2/sns/migration-flow` を実際に作り、手動dispatchでR2 pushとIG投稿まで通ることをdry-runで確認したうえで `on.schedule` を復活させる。復活時は `docs/01_技術設計/06_自動化インベントリ.md` のschedule表へ戻す。
 - **停止条件**: 生成が未実装のままscheduleを戻さない (毎月の確定failureに戻るため)。
 
+### [ISSUE-AXES-01] 問いの台帳の分析の軸を全件に付け、テーマ・県・ブログへ展開する
+
+タグ: [種類:改善] [実行:対話] [起票:2026-11-10] [領域:コンテンツ]
+
+- **owner**: Claude Code (`/manage-issue-ledger`)
+- **正典**: 軸の書き方は `docs/01_技術設計/03_情報設計.md`「問いの台帳」、規則は `.claude/scripts/issues/issue-graph-core.mjs` の `resolveAxesFigure`。確認は `npm run issues:check -- --axes`
+- **済み (2026-11-10)**: active な問い 291 件すべてに軸を付けた (headless `label-issue-axes.ts` の下書き、API 換算 計 $0.57)。図の型が 1 つに決まったのは 156 件 (散布図 119・タイル地図 109・折れ線 31・棒 26・積み上げ棒 5・滝の図 1。件数は主図の数え方の都合で重複なし)。下書きの見直しで、時間を説明側にした誤り・県の食卓の書き方の揺れ・内訳を説明側に置いた J13 を手で直した。対応表は Fable 5.1 のレビューで「図の型の台帳 (purposes・renderer) から引く」形にし、群の区分は `group: true` で明示する形にした (指標が無いことを区分と読み替えると、量の指標が棒グラフに回るため)
+- **残り**: ① 「未検証」135 件 (群の区分以外の軸に指標が無い。`npm run issues:check -- --axes` で一覧) に指標を足すか、stats47 に指標が無いことを記録する。家計調査の年収五分位・全国時系列のように指標化していないデータを使う問いが多い ② 変化の軸の検査を足す: 両軸に共通する 2 年以上の値があるか、問いの粒度 (家計調査は県庁所在市 52 市) で値があるか (Fable の指摘・未実装) ③ 分析の図 (`figures.json`) の主図が軸から引いた候補に入るかを照合する ④ テーマ・県のページで 比較・構成・変化 がそろっているかを数える検査 ⑤ 47 都道府県の 3 時点以上の推移を描く図の型が無い (line は 5 系列まで、tile-map の変化は 2 時点)。必要な問いが出たら型の台帳へ足す ⑥ 『イシューからはじめよ』を出典として規約・記事に書くなら、先に参考文献の手順 (`.claude/rules/reference-source-standards.md`) を通す。今は考え方の一般的な枠組みとして使い、本の図・文章は写していない
+- **完了条件**: 未検証が 0 か、残りに指標が無い理由が書かれている。②③④ の検査が PR CI で走る
+
 ### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
 
 タグ: [種類:制作] [実行:ユーザー] [起票:2026-07-10] [領域:データ]
@@ -3461,6 +3626,9 @@ updated: 2026-11-01
 - **owner**: Claude Code
 - **正典**: 切り口台帳 `data/surveys/lenses/kakei-chousa.json` (品目の採否は `data/estat/kakei-ledger/decisions.json`)。2025年次の都市表ID・コードの詳細は `.claude/skills/estat/references/household-expenditure-survey.md`。
 - **到達 (〜2026-11-02)**: 2025年年報の公表を確認し (trigger 充足)、上位5品目と安全に接続できる指標を2025年表 (支出額 `0004023605`・数量 `0004023606`) へ更新して R2 に反映、PR #1205 を main へ統合した。旧表に残っていた 6 指標も新表へ移し、エンゲル係数・情報通信係数も 2025 年へ伸ばした。ネクタイ・ストッキングは 2025 年改定で統合されたので 2024 年が最終と注記。3 年平均は指標にせず、記事の接地器 `.claude/scripts/blog/fetch-kakei-city-average.mjs` (52 市・N 年平均) で扱う。流入上位の記事 (餃子・豆腐・カレールウ・もち・小麦粉) を書き直し、パンの 52 市 3 年平均の新記事を足した。
+- **進み (2026-11-09)**: ① の流入上位 6 本 (チョコレート・すし・緑茶・即席麺・清酒・牛肉) は公開済み。続けて直近 4 週の GSC 表示順の上位 15 本 (京都の食卓・こんにゃく・給食費・豚肉・こんぶ・さつまいも・みそ・小麦粉・ミネラルウォーター・生うどんそば・鶏肉・アイス・福島の食卓・もも・チーズ) を書き直し中。残りは約 109 本で、同じ順で 15 本ずつ進める。書き直しで分かったこと: 本文が他の指標の順位 (外食・乾麺・醤油など) を引いている記事は、`refresh-article-data-years.mjs` が図の指標しか取り直さないので、他指標の順位も 2025 年で数え直す必要がある (福岡の家庭と外食の逆転が成り立たなくなり、醤油は g と ml を取り違えていた)。リンク先の `blog:udon-soba-food-culture-prefecture-map` は 2024 年の値のままで、リンク元の生うどんそばの記事と数値が食い違う。
+残り (2026-11-10): 109 本を headless `claude -p` (`prepare-year-refresh-prompts.mjs` → `write-blog-headless.ts`、sonnet・effort low) で書き直し、合格 43 本。家計調査の問いに答える 13 本 (cup-noodles と 12 県の食卓) は 11-10 に公開した (`63e744a78`)。残りは ① 合格したが未公開の 30 本 (問いに関係しない品目。手元の `contents/blog/<slug>/` に `published: false` と review.md PASS) ② 不合格 66 本 = 県の食卓 31 本 (問いの答え) + 35 本。不合格の主因は上位県を地方で数え間違える・別品目の順位の流用・題の問いへのぼかした答えで、指示文 (RULES) に禁止を足してある。再開は `node .claude/scripts/blog/prepare-year-refresh-prompts.mjs --slugs <...>` で指示文を作り直し、ユーザー端末で `npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --slugs <...> --author claude-sonnet --critic claude-sonnet --effort low --retries 1 --revise-rounds 2 --concurrency 3`。11-10 に 31 本の再実行を数本で止めたので、hokkaido・iwate・miyagi・akita の article.md は途中の版になっている (指示文から作り直せる)。
+書き直しの道具の不足 (2026-11-09 の 15 本で実測): ① `refresh-article-data-years.mjs --apply` は `-dark.svg` を作らず gate が落ちる (`generate-article-charts.ts --slug` を続けて実行して補う) ② ランキング以外の図と派生図 (時系列・数量×価格) は「手作業」に回る ③ `build-kakei-quantity-price.mjs --base-dir` に絶対パスを渡すとリポジトリ直下の `var/` に書く ④ 本文に書く前年の値を data に置く場所が無く、quality-gate の `VALUE_MISMATCH` 警告になる。家計調査の市別の値は単年のぶれが大きい (前年比 50% 超が 846 件中 69 件) ので、単年の順位から構造を断定しない書き方を書き手に渡す。
 - **次**: ① 題に旧年の値が残る記事の流入上位の残り (チョコレート・すし・緑茶・即席麺・清酒・牛肉 など。一覧は `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`) を書き直す。こんにゃくは図 1 枚が手作業 (data JSON が取得器の形でない)。② 合算6件を個別照合し、分類変更5件は新定義に合わせて採否を決める。③ 記事URLの公開判定 (PR #1206) とデプロイ後の全体スモークの失敗 10 件 (変更前と同じ) は別途是正。
 - **停止条件**: 未投入の2025値を公開ページへ書かない。3年平均を年次値の指標として代用しない。既存記事の年・図の更新はランキングの値が確認できてから行う。
 - **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
@@ -4355,6 +4523,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **次 / 順序**: パラメーターごとに内容差・読者用途・検索需要・canonical・内部リンクを表にする→同じ状態を表す組だけ特定→最小の正規化案を選ぶ。信号整合の実装はGSC-CANONICAL-REDIRECT-01へ接続する。
 - **停止条件**: 年度/地域の違いを一律に消さない。共有URLや絞り込み操作を壊さない。問題が見つからなければ変更しない。
 - **完了条件**: 対象パラメーターの維持/統合と根拠が決まり、採用案には対象生成元・保持する機能・回帰条件がある。
+- **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 未送信で登録済みの 764 件 (先頭 500 件) に `/municipalities/ranking/<key>?page=`・`?pref=` 137 件、`/ranking/<key>?s47_ogp=<hash>` 23 件、`/blog?page=` 17 件、`/themes/<slug>?pref=` 3 件 (こちらは 301)。`?page=`・`?pref=`・`?s47_ogp=` の 3 例は 200 で canonical が本体を指す。`?s47_ogp=` 付きのページ URL がどこから張られているかは未確認。**次**: `s47_ogp` をページ URL に付けている生成元を探し、付けない形にできるかを決める。
 
 ### [NOTE-PAID-HISTORY-EXPOSURE-01] 公開リポジトリの git 履歴に残る有料 note 原稿の扱いを決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-13] [領域:商品]

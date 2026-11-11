@@ -56,9 +56,9 @@
     },
     "generatedBy": {
       "type": "string",
-      "description": "作ったスクリプト。リポジトリにある物を書く (一時ファイルは作り直せない)",
+      "description": "作ったスクリプト。リポジトリにある物を書く。一時ファイルと公開後に片付ける送り箱 (contents/blog/) は作り直せないので書かない。使い捨ての分析は書かず、kind と取得条件 (statsDataId・params) を作り直しの正本にする",
       "not": {
-        "pattern": "^/tmp/"
+        "pattern": "^(/tmp/|/private/tmp/|/private/var/folders/|/var/folders/|contents/blog/)"
       }
     },
     "areaScope": {

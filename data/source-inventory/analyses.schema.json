@@ -198,6 +198,14 @@
             "minLength": 1
           }
         },
+        "issueIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^issue:[A-Z][0-9]{2}(-[0-9]+)?$"
+          },
+          "description": "この企画が答える問い (data/content/issues.json の issues[].id)。問いの台帳が展開の起点で、企画から問いへ辿るための参照"
+        },
         "lensIds": {
           "type": "array",
           "items": {

@@ -57,12 +57,13 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 
 | 項目 | 書き方 |
 |---|---|
-| `unit` | 答えが出る粒度。`prefecture` か `municipality` (市区町村まで降りて答えが出る) |
+| `unit` | 答えが出る粒度。`prefecture` か `municipality` (市区町村まで降りて答えが出る) か `japan` (全国の集計でしか答えが出ない。家計調査の年収階級・世帯属性・全国時系列など。答えは blog か japan-theme で、県別地図やランキングに載せない) |
 | `answerability` | `relation` = 関係を示せる / `caveat` = 言える範囲と言えない範囲を並べる / `myth` = 集計では因果を言えないので誤解を解く型で書く |
 | `primaryTheme` | 大きな問いだけが持つ。小さな問いは親から引き継ぐ |
 | `dataNote` / `pitfall` | 使う統計と、読み違えやすい点。生産スキルへの入力になるので分かっている範囲で書く |
 | `revenue` | 答えがつながる収益。`広告` / `データ` / `ノウハウ` / `実務` (行政や業務で使う人) を 1〜3 個。仮置きなので売上の根拠にしない |
 | `products` | 問いから企画した商品の ID (`note:<key>`)。同じ指標を使うだけの商品は書かない。実在は `check-datasets` が見る |
+| `axes` | 説明側 (`explanatory`。記述の問いは `null`) と結果側 (`outcome`) を `{label, pattern, metrics?}` で書く。`pattern` は `compare` / `compose` / `change`、`metrics` は答えや根拠のページが使う指標キーから選ぶ。説明側が群の区分 (年収五分位・有無など) なら `group: true` を書き、指標は書かない。区分以外で指標の無い軸は `--axes` で「未検証」になる。下書きは `npx tsx packages/ai-content/src/scripts/label-issue-axes.ts --prefix issue:K` (端末で実行・headless)、中身を見てから `--apply`。確認は `npm run issues:check -- --axes issue:K` |
 | `sensitive` | 犯罪・自殺・虐待・生活保護など、地域や属性への偏見を招きやすい重い問いを `true` にする |
 
 ## 4. 配線する
@@ -86,6 +87,26 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 渡すものは `question`・`queries`・`dataNote`・`pitfall`・`answerability`・`sensitive`。`myth` と `sensitive` の問いは誤解を解く型で書き、関係を断定する見出しを付けないことも伝える。指標の実在は渡す先が確かめる。
 
 公開のあとで `answers` を足す。順序を逆にすると、ページがまだ索引に無いので `check-datasets` の外部キー検査か `issues:check` の非公開検査で止まる。
+
+### 全国の問いを書き手へまとめて渡すとき
+
+分析の流れ (`analysis:draft`) に乗らない全国の問い (家計調査の年収階級・世帯属性・時系列など) を `article-writer` へ渡すときの決まり。2026-11-09 に 10 本を 3 体で書いたとき、1 本あたり約 24 万トークンかかり、手戻りの多くは次の 5 点から出た。
+
+1. **書く前に分析の計画を審査させる**: 書き手を起動する前に `analysis-critic` の plan を、問いの台帳の行と使う表だけを渡して結論なしで走らせ、確認項目を書き手の prompt に入れる。分析の軸の取り違え (地産地消の記事は水準を引かずに主成分を取り、「量の多さ」の軸を「買い方」と読んだ) が審査での書き直しより前に止まる。
+2. **字数の目標を置かない**: 「問いに答え切ったら止める」を基準にし、2 万字のような目標は書かない。目標を置いても届いたのは 10 本中 0 本で、水増しを足しては審査で削る往復が起きた。下限は品質ゲートの床 (地の文 1,600 字・図あたり 350 字) だけ。
+3. **本文の数値は data に置く**: 型 Q の記事は、本文のすべての数値が `data/*.json` (図のデータか `data/appendix-supporting-values.json` の補助値) に無いと `quality-gate.mjs` が止める。比・増減率・差・外部の値 (税額など) は補助値に式と出典つきで置くよう書き手に伝える。
+4. **e-Stat の表は保存を共有する**: 書き手には `npm run -s estat:fetch -- --id <statsDataId> --param k=v` で取らせる。同じ取得条件なら `.local/estat-cache/` の同じファイルを返すので、並行する書き手が同じ表を取り直さない。作業ファイルは記事ごとの別ディレクトリ (`$TMPDIR/issue-answer/<slug>/`) に置かせる (共有の一時領域で同名の `lib.mjs` を上書きし合った)。使い捨ての分析スクリプトは残さず、図の `source.json` の取得条件を作り直しの正本にする (`blog-data-schema.md`)。
+5. **再審査は差分だけを渡す**: 審査のあとに数か所を直したときは、`blog-critic` に直した行と前の指摘だけを渡し、全文を読み直させない (2 か所の直しの再審査が全文で約 18 万トークンだった)。値を直したら、同じ値を記事の全体から検索して全部の出現箇所を直してから渡す (3 か所中 1 か所しか直らず BLOCK になった)。
+
+公開の前後は次の 2 コマンドで進める。
+
+```bash
+npm run issues:answer -- prepare --map K08=<slug>,K09=<slug>   # 問いの確かめ・4 型の仮の割り当て・gate/factual/審査/背景の表。背景の無い記事は Codex の依頼 JSON を作る
+# 背景を Codex で作り (generate-blog-images)、published: true にして develop へ push。公開の run が成功したら
+npm run issues:answer -- link                                   # 索引の作り直し・answers・仮の割り当ての削除・本の論点の展開記録・検査
+```
+
+`prepare` は `published: true` にする前に走らせる (審査の `articleSha256` は公開の印を付ける前の本文で取るため)。図は `npm run analysis:contact-sheet` か記事ごとの 1 枚の一覧画像で、呼び元が目で確かめる。
 
 ```bash
 npm run content:sync -- --from-r2   # R2 の記事一覧からページ索引を作り直す。引数なしだと新しい記事が載らない

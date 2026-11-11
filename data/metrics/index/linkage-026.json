@@ -300,10 +300,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:road-length-per-km2-vs-residential-building-starts",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:safe-driving-5-features",
           "kind": "blog"
         },
@@ -3457,6 +3453,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
@@ -5092,6 +5092,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
@@ -5545,6 +5549,10 @@
       "consumers": [
         {
           "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
         {
@@ -6638,6 +6646,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
@@ -7646,6 +7658,10 @@
         },
         {
           "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
         {

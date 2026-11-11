@@ -3322,6 +3322,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-seafood-east-west-boundary",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shrimp-consumption-expenditure",
           "kind": "ranking"
         },
@@ -3407,10 +3411,6 @@
       "consumers": [
         {
           "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
           "kind": "blog"
         },
         {

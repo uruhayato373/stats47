@@ -467,19 +467,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "kind": "blog",
-      "key": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "title": "日照時間が長い県は保険金も高い?",
-      "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
-      "published": false,
-      "rankingKeys": [
-        "annual-sunshine-duration",
-        "auto-liability-insurance-amount-received-per-payment"
-      ],
-      "tagIds": []
-    },
-    {
       "id": "blog:aomori-food-culture",
       "kind": "blog",
       "key": "aomori-food-culture",
@@ -847,12 +834,13 @@
       "id": "blog:beef-consumption-prefecture-gap",
       "kind": "blog",
       "key": "beef-consumption-prefecture-gap",
-      "title": "牛肉を最も食べる県は西日本に集中｜兵庫7,899g vs 岩手2,417gで3.3倍、なぜ?",
+      "title": "牛肉消費の西高東低は本当? 2025年の日本一は京都",
       "href": "/blog/beef-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
         "beef-consumption-expenditure",
-        "beef-consumption-quantity"
+        "beef-consumption-quantity",
+        "pork-consumption-quantity"
       ],
       "tagIds": [
         "tag:t-dbae9736c59a",
@@ -923,6 +911,23 @@
         "tag:unmarried",
         "tag:t-69a2d84ae7bb",
         "tag:t-ba8e4beb69bf"
+      ]
+    },
+    {
+      "id": "blog:beer-happoshu-liquor-tax-steps-household-response",
+      "kind": "blog",
+      "key": "beer-happoshu-liquor-tax-steps-household-response",
+      "title": "発泡酒の増税、家計は買い方を変えたか?",
+      "href": "/blog/beer-happoshu-liquor-tax-steps-household-response",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-a94cc75c0b1c",
+        "tag:liquor-tax-reform",
+        "tag:t-446345e93bd5",
+        "tag:t-b92f795d7f0c",
+        "tag:alcohol-consumption"
       ]
     },
     {
@@ -1358,6 +1363,21 @@
         "tag:t-7b96c26b45e8",
         "tag:t-3dfcbdc38d3e",
         "tag:t-0ee5bbcbd761"
+      ]
+    },
+    {
+      "id": "blog:capital-city-buying-patterns-47",
+      "kind": "blog",
+      "key": "capital-city-buying-patterns-47",
+      "title": "買い物の都市差は、量か値段か",
+      "href": "/blog/capital-city-buying-patterns-47",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:consumption-expenditure",
+        "tag:t-7b96c26b45e8",
+        "tag:t-6f414497615e"
       ]
     },
     {
@@ -2084,10 +2104,11 @@
       "id": "blog:chocolate-snack-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "chocolate-snack-consumption-expenditure-prefecture-gap",
-      "title": "チョコレート菓子支出、山形はなぜ全国トップなのか",
+      "title": "チョコ菓子支出、山口が一気に首位へ",
       "href": "/blog/chocolate-snack-consumption-expenditure-prefecture-gap",
       "published": true,
       "rankingKeys": [
+        "chocolate-consumption-expenditure",
         "chocolate-snack-consumption-expenditure"
       ],
       "tagIds": []
@@ -3424,6 +3445,22 @@
       ]
     },
     {
+      "id": "blog:education-spending-income-quintile-decade",
+      "kind": "blog",
+      "key": "education-spending-income-quintile-decade",
+      "title": "教育費の年収差は10年で広がったのか",
+      "href": "/blog/education-spending-income-quintile-decade",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:education-expenditure",
+        "tag:t-14fd9d310d3f",
+        "tag:education-inequality",
+        "tag:t-5b5af3a9d5e1"
+      ]
+    },
+    {
       "id": "blog:ehime-food-culture",
       "kind": "blog",
       "key": "ehime-food-culture",
@@ -3656,6 +3693,22 @@
       ]
     },
     {
+      "id": "blog:engel-coefficient-living-standard-myth",
+      "kind": "blog",
+      "key": "engel-coefficient-living-standard-myth",
+      "title": "エンゲル係数が高いと貧しい?",
+      "href": "/blog/engel-coefficient-living-standard-myth",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:engel-coefficient",
+        "tag:t-ba8e4beb69bf",
+        "tag:t-5b5af3a9d5e1",
+        "tag:consumption-expenditure",
+        "tag:food-expenditure"
+      ]
+    },
+    {
       "id": "blog:engel-coefficient-prefecture-ranking",
       "kind": "blog",
       "key": "engel-coefficient-prefecture-ranking",
@@ -3672,6 +3725,25 @@
         "tag:engel-coefficient",
         "tag:t-7b96c26b45e8",
         "tag:t-25dc8da388f1"
+      ]
+    },
+    {
+      "id": "blog:engel-coefficient-rise-hardship-2025",
+      "kind": "blog",
+      "key": "engel-coefficient-rise-hardship-2025",
+      "title": "エンゲル係数の上昇は苦しさの証拠か",
+      "href": "/blog/engel-coefficient-rise-hardship-2025",
+      "published": true,
+      "rankingKeys": [
+        "engel-coefficient",
+        "food-expenditure-ratio-multi-person-households"
+      ],
+      "tagIds": [
+        "tag:engel-coefficient",
+        "tag:t-ba8e4beb69bf",
+        "tag:t-25dc8da388f1",
+        "tag:food-expenditure",
+        "tag:aging-population"
       ]
     },
     {
@@ -4510,6 +4582,41 @@
       "tagIds": []
     },
     {
+      "id": "blog:fresh-seafood-east-west-boundary",
+      "kind": "blog",
+      "key": "fresh-seafood-east-west-boundary",
+      "title": "魚の東西の境目は1本ではない",
+      "href": "/blog/fresh-seafood-east-west-boundary",
+      "published": true,
+      "rankingKeys": [
+        "bonito-consumption-expenditure",
+        "clam-consumption-expenditure",
+        "crab-consumption-expenditure",
+        "flounder-consumption-expenditure",
+        "freshwater-clam-consumption-expenditure",
+        "horse-mackerel-consumption-expenditure",
+        "mackerel-consumption-expenditure",
+        "octopus-consumption-expenditure",
+        "oyster-consumption-expenditure",
+        "salmon-consumption-expenditure",
+        "sardine-consumption-expenditure",
+        "saury-consumption-expenditure",
+        "scallop-consumption-expenditure",
+        "sea-bream-consumption-expenditure",
+        "shrimp-consumption-expenditure",
+        "squid-consumption-expenditure",
+        "tuna-consumption-expenditure",
+        "yellowtail-consumption-expenditure"
+      ],
+      "tagIds": [
+        "tag:t-6783a59e0136",
+        "tag:t-d92bc91d74b0",
+        "tag:t-4b26cbefa686",
+        "tag:t-9f844f8e448e",
+        "tag:t-ba8e4beb69bf"
+      ]
+    },
+    {
       "id": "blog:fresh-shiitake-consumption-quantity-prefecture-gap",
       "kind": "blog",
       "key": "fresh-shiitake-consumption-quantity-prefecture-gap",
@@ -5281,7 +5388,7 @@
       "id": "blog:green-tea-consumption-quantity",
       "kind": "blog",
       "key": "green-tea-consumption-quantity",
-      "title": "静岡が首位は当然として、なぜ愛媛・福岡が緑茶上位？沖縄が最下位の逆説",
+      "title": "緑茶の首位、静岡が福岡に抜かれた?",
       "href": "/blog/green-tea-consumption-quantity",
       "published": true,
       "rankingKeys": [
@@ -5292,7 +5399,7 @@
         "tag:t-d56d29df4445",
         "tag:t-5f22fa112083",
         "tag:t-3470ac3ef47e",
-        "tag:food-culture"
+        "tag:t-ba8e4beb69bf"
       ]
     },
     {
@@ -5882,17 +5989,31 @@
       ]
     },
     {
+      "id": "blog:household-spending-25-years-bought-less-bought-more",
+      "kind": "blog",
+      "key": "household-spending-25-years-bought-less-bought-more",
+      "title": "25年で家計は何が減り、何が増えた?",
+      "href": "/blog/household-spending-25-years-bought-less-bought-more",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:consumption-expenditure",
+        "tag:t-58861926b5fd",
+        "tag:t-fba278ab9ab4",
+        "tag:living-expenses"
+      ]
+    },
+    {
       "id": "blog:household-spending-before-after-inflation",
       "kind": "blog",
       "key": "household-spending-before-after-inflation",
-      "title": "アイス+32%、ぎょうざだけ-8%──物価高で「切り捨てられた品目」がある",
+      "title": "アイス+27%、ぎょうざだけ-4%──物価高で「切り捨てられた品目」がある",
       "href": "/blog/household-spending-before-after-inflation",
       "published": true,
       "rankingKeys": [
         "avg-propensity-to-consume-worker-households",
         "consumption-expenditure-multi-person-households-per-month",
-        "cpi-change-rate-total",
-        "engel-coefficient",
         "food-expenditure-ratio-multi-person-households"
       ],
       "tagIds": [
@@ -5921,6 +6042,22 @@
         "tag:engel-coefficient",
         "tag:food-expenditure",
         "tag:living-expenses"
+      ]
+    },
+    {
+      "id": "blog:household-spending-seasons-and-tax-hike-swings",
+      "kind": "blog",
+      "key": "household-spending-seasons-and-tax-hike-swings",
+      "title": "季節と増税、家計はどれだけ揺れる?",
+      "href": "/blog/household-spending-seasons-and-tax-hike-swings",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-6a709e7a0043",
+        "tag:t-2bfdf46f050b",
+        "tag:t-fa0b5f18e364",
+        "tag:t-cee9d1d7fa47"
       ]
     },
     {
@@ -6423,6 +6560,22 @@
       ]
     },
     {
+      "id": "blog:income-quintile-high-income-sales-check",
+      "kind": "blog",
+      "key": "income-quintile-high-income-sales-check",
+      "title": "「高所得世帯に売れている」は本当か",
+      "href": "/blog/income-quintile-high-income-sales-check",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-5b5af3a9d5e1",
+        "tag:consumption",
+        "tag:t-638fb535e39e",
+        "tag:household-finance"
+      ]
+    },
+    {
       "id": "blog:income-quintile-lesson",
       "kind": "blog",
       "key": "income-quintile-lesson",
@@ -6516,6 +6669,22 @@
         "tag:t-40e399dbee4c",
         "tag:living-expenses",
         "tag:t-59db5a85c19e"
+      ]
+    },
+    {
+      "id": "blog:income-quintile-share-shift",
+      "kind": "blog",
+      "key": "income-quintile-share-shift",
+      "title": "年収の取り分は1990年代から動いたのか",
+      "href": "/blog/income-quintile-share-shift",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-14fd9d310d3f",
+        "tag:t-40e399dbee4c",
+        "tag:t-5b5af3a9d5e1",
+        "tag:household-finance"
       ]
     },
     {
@@ -6664,7 +6833,7 @@
       "id": "blog:instant-noodles-consumption-prefecture-gap",
       "kind": "blog",
       "key": "instant-noodles-consumption-prefecture-gap",
-      "title": "即席麺をいちばん食べる県は熊本4147g｜なぜ京都が上位で東京が下位? 47都道府県2024",
+      "title": "即席麺の首位は佐賀4378g｜東京は最下位、大阪は上位 47都道府県2025",
       "href": "/blog/instant-noodles-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -7004,6 +7173,30 @@
         "tag:t-f098c8eabb61",
         "tag:t-e192582e0d2f",
         "tag:food-culture"
+      ]
+    },
+    {
+      "id": "blog:kakei-number-one-city-rotation",
+      "kind": "blog",
+      "key": "kakei-number-one-city-rotation",
+      "title": "消費量日本一は毎年入れ替わる?",
+      "href": "/blog/kakei-number-one-city-rotation",
+      "published": true,
+      "rankingKeys": [
+        "fresh-udon-soba-consumption-expenditure",
+        "gyoza-frozen-consumption-expenditure",
+        "natto-consumption-expenditure",
+        "ramen-dining-consumption-expenditure",
+        "rice-consumption-expenditure",
+        "white-bread-consumption-expenditure",
+        "white-bread-consumption-quantity"
+      ],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-5f22fa112083",
+        "tag:t-8c39f0203b51",
+        "tag:t-3dfcbdc38d3e",
+        "tag:t-e7b81a331c2e"
       ]
     },
     {
@@ -7659,6 +7852,28 @@
       ]
     },
     {
+      "id": "blog:local-production-local-consumption-meat",
+      "kind": "blog",
+      "key": "local-production-local-consumption-meat",
+      "title": "肉の産地ほど肉を買うとは限らない",
+      "href": "/blog/local-production-local-consumption-meat",
+      "published": true,
+      "rankingKeys": [
+        "beef-consumption-quantity",
+        "chicken-consumption-quantity",
+        "pork-consumption-expenditure",
+        "pork-consumption-quantity",
+        "total-population"
+      ],
+      "tagIds": [
+        "tag:local-production-consumption",
+        "tag:t-9ec343b2bdd9",
+        "tag:t-70099ea01925",
+        "tag:t-8c6daedbb108",
+        "tag:t-75e3347309d5"
+      ]
+    },
+    {
       "id": "blog:local-tax-prefecture-vs-railway-passengers",
       "kind": "blog",
       "key": "local-tax-prefecture-vs-railway-passengers",
@@ -8022,6 +8237,26 @@
         "tag:manufacturing",
         "tag:economy",
         "tag:t-7055152b9ab6"
+      ]
+    },
+    {
+      "id": "blog:manufacturing-strength-factory-size",
+      "kind": "blog",
+      "key": "manufacturing-strength-factory-size",
+      "title": "製造業が強い町の強さは、規模か、生産性か",
+      "href": "/blog/manufacturing-strength-factory-size",
+      "published": true,
+      "rankingKeys": [
+        "day-time-population",
+        "day-time-population-ratio",
+        "manufacturing-employees",
+        "manufacturing-establishments",
+        "manufacturing-shipment-amount"
+      ],
+      "tagIds": [
+        "tag:manufacturing",
+        "tag:industrial-statistics",
+        "tag:t-0f04bb93e80e"
       ]
     },
     {
@@ -11193,19 +11428,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:road-length-per-km2-vs-residential-building-starts",
-      "kind": "blog",
-      "key": "road-length-per-km2-vs-residential-building-starts",
-      "title": "道路密度が高い県は住宅着工も多いのか",
-      "href": "/blog/road-length-per-km2-vs-residential-building-starts",
-      "published": false,
-      "rankingKeys": [
-        "residential-building-starts",
-        "road-length-per-km2"
-      ],
-      "tagIds": []
-    },
-    {
       "id": "blog:road-total-length-vs-core-agricultural-workers",
       "kind": "blog",
       "key": "road-total-length-vs-core-agricultural-workers",
@@ -11407,7 +11629,7 @@
       "id": "blog:sake-consumption-prefecture-gap",
       "kind": "blog",
       "key": "sake-consumption-prefecture-gap",
-      "title": "清酒消費 なぜ福島が新潟を超えたか — 東北独占と沖縄766mlの謎",
+      "title": "清酒消費の日本一は毎年変わる? 2025年は岩手が首位",
       "href": "/blog/sake-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -11417,9 +11639,9 @@
       "tagIds": [
         "tag:t-e14a955cb93a",
         "tag:t-97e68a64b10a",
-        "tag:t-a2a0c8114315",
+        "tag:t-8d8741ce11ff",
         "tag:t-ba8e4beb69bf",
-        "tag:t-71e69a814d46"
+        "tag:t-cee9d1d7fa47"
       ]
     },
     {
@@ -11924,19 +12146,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "kind": "blog",
-      "key": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
-      "href": "/blog/shumai-consumption-expenditure-vs-jr-freight-shipment",
-      "published": false,
-      "rankingKeys": [
-        "jr-freight-shipment",
-        "shumai-consumption-expenditure"
-      ],
-      "tagIds": []
-    },
-    {
       "id": "blog:shumai-consumption-expenditure-vs-main-household-ratio-main",
       "kind": "blog",
       "key": "shumai-consumption-expenditure-vs-main-household-ratio-main",
@@ -11948,6 +12157,22 @@
         "shumai-consumption-expenditure"
       ],
       "tagIds": []
+    },
+    {
+      "id": "blog:single-household-spending-differences",
+      "kind": "blog",
+      "key": "single-household-spending-differences",
+      "title": "一人暮らしが肉と車に回す割合は小さい",
+      "href": "/blog/single-household-spending-differences",
+      "published": true,
+      "rankingKeys": [],
+      "tagIds": [
+        "tag:t-b27b459fa39a",
+        "tag:t-ba8e4beb69bf",
+        "tag:t-a666ef05afd2",
+        "tag:rent",
+        "tag:household-structure"
+      ]
     },
     {
       "id": "blog:sixth-industry-direct-sales",
@@ -12509,11 +12734,12 @@
       "id": "blog:sushi-dining-consumption-expenditure",
       "kind": "blog",
       "key": "sushi-dining-consumption-expenditure",
-      "title": "すし外食トップは東京でなく富山｜海なし栃木も上位",
+      "title": "すし外食トップは東京でなく山形｜海なし岐阜・長野も上位",
       "href": "/blog/sushi-dining-consumption-expenditure",
       "published": true,
       "rankingKeys": [
-        "sushi-dining-consumption-expenditure"
+        "sushi-dining-consumption-expenditure",
+        "sushi-takeout-consumption-expenditure"
       ],
       "tagIds": [
         "tag:t-e41391686efa",
@@ -13716,6 +13942,25 @@
       ]
     },
     {
+      "id": "blog:university-advancement-rate-definitions",
+      "kind": "blog",
+      "key": "university-advancement-rate-definitions",
+      "title": "大学進学率はなぜ数え方で動くのか",
+      "href": "/blog/university-advancement-rate-definitions",
+      "published": true,
+      "rankingKeys": [
+        "high-school-advancement-rate",
+        "in-pref-university-entrance-ratio-by-highschool-origin"
+      ],
+      "tagIds": [
+        "tag:universities",
+        "tag:advancement-rate",
+        "tag:t-12410b3840aa",
+        "tag:school-education",
+        "tag:t-beb8f56ae090"
+      ]
+    },
+    {
       "id": "blog:university-new-graduates-unemployment-rate-prefecture-gap",
       "kind": "blog",
       "key": "university-new-graduates-unemployment-rate-prefecture-gap",
@@ -13794,6 +14039,28 @@
         "tag:housing",
         "tag:aging-infrastructure",
         "tag:earthquake-resistance"
+      ]
+    },
+    {
+      "id": "blog:vacant-houses-population-decline",
+      "kind": "blog",
+      "key": "vacant-houses-population-decline",
+      "title": "空き家が増えたのは人口が減った町だけか",
+      "href": "/blog/vacant-houses-population-decline",
+      "published": true,
+      "rankingKeys": [
+        "japanese-population",
+        "vacant-houses-city",
+        "vacant-housing-rate-excluding-rental-sale-secondary",
+        "vacant-housing-rate-for-rent",
+        "vacant-housing-ratio"
+      ],
+      "tagIds": [
+        "tag:vacant-houses",
+        "tag:t-96b7af568d8e",
+        "tag:population-decline",
+        "tag:housing",
+        "tag:t-0f04bb93e80e"
       ]
     },
     {

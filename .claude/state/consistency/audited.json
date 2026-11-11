@@ -1,7 +1,20 @@
 {
-  "hash": "79fb99b9a3973ef4dbf96c05f4099278d12f75262e4ae2204c92d6f57f3f8e70",
-  "audited_at": "2026-11-07T23:19:56",
+  "hash": "e57d8a4107d902876d1e6e0d744712529139c2d9190839d27c9d9d507848c202",
+  "audited_at": "2026-11-10T08:15:10",
   "files": [
-    ".claude/scripts/measurement/refresh-session.mjs"
+    ".agents/skills/product/build-data-pack/SKILL.md",
+    ".claude/rules/buzz-map-standards.md",
+    ".claude/rules/note-image-assets.md",
+    ".claude/rules/sns-content-standards.md",
+    ".claude/scripts/note/__tests__/note-figure-ledger.test.mjs",
+    ".claude/scripts/note/build-note-figure-ledger.mjs",
+    ".claude/scripts/note/publish-product-paid-update.sh",
+    ".claude/scripts/note/render-product-figures.ts",
+    ".claude/scripts/sns/build-buzz-map-spec-gsi.ts",
+    ".claude/scripts/sns/build-buzz-map-spec-ksj.ts",
+    ".claude/scripts/sns/build-buzz-map-spec.ts",
+    ".claude/scripts/sns/merge-buzz-map-specs.ts",
+    ".claude/skills/note/publish-note/references/update-mode.md",
+    ".claude/skills/product/build-data-pack/SKILL.md"
   ]
 }

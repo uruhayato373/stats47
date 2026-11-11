@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfBody, rankingKeyOfTargets, titleExtremeIssues, yearOfBody, yearOfTitle } from '../build-note-figure-ledger.mjs';
+import { bodyImagesOf, countChangedValues, figureKindOf, isTieNotation, noteHtmlToMarkdown, rankingKeyOfBody, rankingKeyOfTargets, titleExtremeIssues, typeProductFigures, yearOfBody, yearOfTitle } from '../build-note-figure-ledger.mjs';
 
 test('本文の画像を直前の見出しと結び、./ と外部 URL と重複を除く', () => {
   const md = '## 【コロプレス地図】分布\n![](./images/image-01.png)\n## 上位\n![a](images/image-02.png)\n![](https://x.test/a.png)\n![](images/image-01.png)';
@@ -76,4 +76,23 @@ test('題名の 1 位と最下位を今の値と照らし、同値は同じ順�
   assert.deepEqual(titleExtremeIssues('1位は鹿児島県｜愛知が最下位', rows), []);
   const tied = [{ areaName: '富山県', value: 1.3 }, { areaName: '広島県', value: 1.3 }, { areaName: '沖縄県', value: 0.5 }];
   assert.deepEqual(titleExtremeIssues('茶道 1位は広島県', tied), []);
+});
+
+test('商品の見本画像は figure-specs.json の型に結び、型の無い画像が 1 枚でもあれば product-untyped にする', () => {
+  const figures = [{ file: 'images/a.png', kind: 'diagram' }, { file: 'images/b.png', kind: 'diagram' }];
+  const ids = new Set(['treemap', 'file-preview']);
+  const both = JSON.stringify({ figures: [{ file: 'images/a.png', template: 'treemap' }, { file: 'images/b.png', template: 'file-preview' }] });
+  assert.deepEqual(typeProductFigures(figures, both, ids), {
+    figures: [{ file: 'images/a.png', kind: 'diagram', template: 'treemap' }, { file: 'images/b.png', kind: 'diagram', template: 'file-preview' }],
+    valueCheck: 'product-sample',
+  });
+  // spec が無い・台帳に無い型は、手描きと同じく型の無い画像に数える
+  assert.equal(typeProductFigures(figures, null, ids).untypedFigures, 2);
+  const unknown = JSON.stringify({ figures: [{ file: 'images/a.png', template: 'treemap' }, { file: 'images/b.png', template: 'hand-drawn' }] });
+  assert.deepEqual(typeProductFigures(figures, unknown, ids), {
+    figures: [{ file: 'images/a.png', kind: 'diagram', template: 'treemap' }, { file: 'images/b.png', kind: 'diagram' }],
+    valueCheck: 'product-untyped', untypedFigures: 1,
+  });
+  // 画像の無い商品記事は型を問わない
+  assert.deepEqual(typeProductFigures([], null, ids), { figures: [], valueCheck: 'product-sample' });
 });
