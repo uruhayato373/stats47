@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "テーマの出典の記録",
+  "description": "data/themes/sources/<名前>.json の形状契約。1 ファイルが 1 つのテーマの出典の固定 (原典の URL・SHA-256・R2 のキー・対象の一覧・承認した入力ファイル・注意書き) で、ファイル名は読み込み口 packages/data-configs/src/theme-catalog/<名前>-source.ts の <名前>。出典ごとに項目が違うので、共通の項目だけを縛る。コードから結ぶ値 (公開 R2 の基点 publicBaseUrl など) は書かず、読み込み口が足す。観測値は R2 にだけ置き、ここには書かない。",
+  "type": "object",
+  "minProperties": 1,
+  "anyOf": [{ "required": ["r2Key"] }, { "required": ["r2Root"] }],
+  "not": { "required": ["publicBaseUrl"] },
+  "properties": {
+    "r2Key": {
+      "type": "string",
+      "pattern": "^app/",
+      "description": "テーマの観測値を置く R2 のキー"
+    },
+    "r2Root": {
+      "type": "string",
+      "pattern": "^app/geo/",
+      "description": "Geo 分析の成果物を置く R2 の接頭辞 (item.json・manifest.json・pref/<NN>.json を持つ)"
+    },
+    "restore": {
+      "type": "string",
+      "pattern": "^node ",
+      "description": "原典からこの値を作り直すコマンド (data-provenance-standards の再現性。--write-local を付けたときだけローカル R2 へ書く)"
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "ページに出す注意書き (定義・対象・限界)"
+    }
+  },
+  "patternProperties": {
+    "(^sha256|Sha256)$": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "additionalProperties": { "$ref": "#/definitions/value" },
+  "definitions": {
+    "value": {
+      "description": "入れ子の値。SHA-256 を持つ項目 (名前が sha256 か …Sha256 で終わる) は 64 桁の小文字の 16 進数",
+      "patternProperties": {
+        "(^sha256|Sha256)$": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      },
+      "additionalProperties": { "$ref": "#/definitions/value" },
+      "items": { "$ref": "#/definitions/value" }
+    }
+  }
+}

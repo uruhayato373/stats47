@@ -195,9 +195,9 @@ updated: 2026-11-01
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-10] [領域:データ]
 
 2026-11-10 にオーナーが承認した計画に沿って進める。計画の本体は会社の Windows PC の `C:\Users\m004195\.claude\plans\rdb-db-nextjs-spicy-marble.md` (リポジトリには置かない。全段が終わったら消す)。
-- **いまの段**: 段 11 完了 (2026-11-11。事業計画のカタログ・コンテンツの機会・M1 を `data/business-plan/plan/`、参考文献の方針と japan-zue を `data/source-inventory/`、問いかけコピーを `data/ranking/hooks/`、0 件の許可を `data/data-quality/allowlists/` へ移した)。次は段 12 (残りの判定。判定は計画に書いた)。残りの一覧は `npm run check-datasets -- --er` の末尾に段ごとの件数で出る
+- **いまの段**: 段 12a 完了 (2026-11-11。テーマの出典 19 件を `data/themes/sources/` へ移した)。次は段 12b (交通網・区分・撤去記録・SNS の地図カード・財政のカード・GES の港・商品の実データ。判定は計画に書いた)。
 - **作業の場所 (2026-11-11 から)**: 段 0〜6 は develop に入っている (並行の作業の push で origin/develop へ出た)。段 7 以降は、会社の Windows PC の別の作業ツリー `C:\tmp\stats47-ledger` のブランチ `ledger-db-unify` に積む (本体の作業ツリーを並行の作業と共有していて、相手の未コミットの変更が pre-commit を止めたため)。push と develop への取り込みはオーナーの指示で行う
-- **段 13 で判断するもの (段 6 で見つけた分)**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める。2 桁の県コード (港湾の `prefectureCode`・`open-data.prefecture-statistics` の `resources[].prefectureCode`) を県のマスタ (5 桁の `prefCode`) へ結ぶ手段が無い (`refs` の `parse` は `list` だけ)。検査に桁を直す指定を足すか、台帳の側を 5 桁にするかを決める。県の本文 47 ファイルを 1 ファイルにするか
+- **段 13 で判断するもの (段 6 で見つけた分)**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める。2 桁の県コード (港湾の `prefectureCode`・`open-data.prefecture-statistics` の `resources[].prefectureCode`) を県のマスタ (5 桁の `prefCode`) へ結ぶ手段が無い (`refs` の `parse` は `list` だけ)。検査に桁を直す指定を足すか、台帳の側を 5 桁にするかを決める。県の本文 47 ファイルを 1 ファイルにするか。`--er` の 1 対 1 の候補は、参照先の件数が少ないと偶然 1 回ずつ指すだけで候補に出る (例: `themes.sources` → `geo.ksj-license-policy` の 3 件)。候補の出し方に件数の下限を設けるか
 - **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(3) `ssds-provenance.generated.json` を作り直すと、`cpi-annual` の名前が調査の一覧の名前 (消費者物価指数) に変わる (43 件)。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる。(8) 段 10 で広告の台帳 `data/affiliate/ledger/ads.json` を足し、`publish-affiliate-ads.yml` の起動条件を変えたので、develop へ取り込む push で広告の R2 への反映 (`app/affiliate-ads/all.json` の書き込みと全ゾーンのパージ) が走る。移す前後で snapshot は `generatedAt` 以外がバイト一致だったが、外部への書き込みなので取り込みの前にオーナーへ伝える
 - **進め方**: 段ごとに新しいセッションで始め、計画のファイルと段の番号を渡す。段は 1 つずつ順に進め、終わるたびにこの「いまの段」を書き換える
 - **完了条件**: `packages/`・`apps/` の台帳の許可リストが空で、`config/` がシステムの設定だけになり、`npm run check-datasets` が通る
@@ -261,6 +261,13 @@ updated: 2026-11-01
 `publish-affiliate-ads.yml` は広告の台帳 (`affiliate.ads`) と読み込み口の変更でだけ起動する。案件の台帳 (`affiliate.offer-profiles`) の変更は、配信する `AFFILIATE_ADS` の `isActive` (配信の保留) と `offerProfile` を変えるのに、案件だけを変えた push では R2 の `app/affiliate-ads/all.json` が作り直されない (2026-11-11 に workflow の paths と読み込み口の結合の式を読んで確認。台帳を `data/` へ移す前の TS のころから同じ)。
 - **次**: paths に案件の台帳と、配信の保留を決める `apps/web/src/features/ads/constants/affiliate-delivery-policy.ts` を足すか、オーナーと決める (起動のたびに R2 への書き込みと全ゾーンのパージが走るため)
 - **完了条件**: 案件の台帳だけを変えた push で、R2 の広告の snapshot が作り直される
+
+### [THEME-SOURCE-PROPOSAL-WRITES-TS-01] テーマの出典の提案を作る道具が、移した後も TS を書き・読む
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:データ]
+
+2026-11-11 にテーマの出典 19 件を台帳 `themes.sources` (`data/themes/sources/<名前>.json`) へ移した。提案を作る `prepare-proposal.py:11` は今も `property-price-distribution-source.ts` (as const 付きの TS) を書き、`ingest-bridge-inspection-age.mjs:19` の `--proposal-dir` も提案を TS として読む。新しい提案を取り込むときは、手で JSON の台帳へ写すことになる。
+- **次**: 提案を台帳と同じ JSON の形で書き・読む形に直す (`themes.sources.schema.json` で検査できる)
+- **完了条件**: 提案のファイルを台帳へそのまま置けて、`npm run check-datasets` が通る
 
 ### [GEO-ANALYSIS-CONTENT-ID-DANGLING-01] Geo 分析 3 件の contentId が、事業計画のコンテンツの機会に無い
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-11] [領域:データ]

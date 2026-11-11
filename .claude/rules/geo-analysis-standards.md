@@ -47,7 +47,7 @@ AI/LLMは問い、説明、限界、導線だけを作り、距離・交差・�
 
 `earthquake-population-exposure`は、NIED J-SHIS Y2024 / AVR / TTL_MTTLの
 30年超過確率3%計測震度とKSJ m250r6-24の人口総数を直接結合する。
-承認済み原典URL・版・SHA・bytesは`theme-catalog/earthquake-exposure-source.ts`で固定する。
+承認済み原典URL・版・SHA・bytesはテーマの出典の台帳`themes.sources`の`earthquake-exposure`で固定する。
 J-SHIS利用規約§5により、原典そのまま・形式変換だけの再配布を行わず、原典ZIP/CSV・
 メッシュ別地震動・結合行をpublic R2外に保つ。公開lineageは原典URL、版、SHA、実取得日時、
 決定的処理、47県の震度帯人口と保存則を示す。既存KSJのpublic mirror Gateを緩和しない。
@@ -69,7 +69,7 @@ J-SHIS原図のブラウザ再現、県平均ハザード、安全順位、住�
 ### 津波想定のファイル単位・部分地域契約
 
 `tsunami-scenario-exposure`は`licensed-subset-scenario-exposure`契約に限定する。
-`theme-catalog/tsunami-exposure-source.ts`の明示的な入力allowlistのURL・版・SHA・bytes・公開keyだけを許可し、
+台帳`themes.sources`の`tsunami-exposure`の明示的な入力allowlistのURL・版・SHA・bytes・公開keyだけを許可し、
 hazard入力は`redistributionAllowed: true`と`licenseEvidence[{url,sha256}]`を必須とし、`source.evidence`の原典receiptへ完全一致で接続する。
 A40全体の`cc-by-4.0-partial`判定は変更しない。静岡のA40-16は当該版の公式ページとZIP内条件、
 徳島2025-09-12は県公式個別datasetのCC BY表示に基づく。条件の異なる県・版の追加は再審査する。
@@ -90,7 +90,7 @@ source.scenariosに登録し原典検証した県途中artifactと承認済み�
 ### 土砂災害指定区域の県別許可契約
 
 `population-landslide-exposure`はA33-25の許可済み46県に限定する。
-`theme-catalog/landslide-exposure-source.ts`で県別原典SHA、版、許可一覧XLSXのSHAを固定し、
+台帳`themes.sources`の`landslide-exposure`で県別原典SHA、版、許可一覧XLSXのSHAを固定し、
 `assertLandslideSourcePublication`で一致する原典だけを採用する。京都府は商用利用不可のため
 元データの取得・公開を行わず、県別行と詳細は対象外・nullを保持する。A33全体の
 `cc-by-4.0-partial`規則は変更しない。全国表示の分母は「対象46県計（京都府除外）」とする。
