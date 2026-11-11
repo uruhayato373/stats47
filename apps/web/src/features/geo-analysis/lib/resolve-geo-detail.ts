@@ -1,18 +1,20 @@
-'use server';
-
 import { to5DigitPrefCode } from '@stats47/area';
 import { GEO_PREF_CODES } from '@stats47/data-configs/business-plan';
 
-import { GEO_CROSS_ANALYSIS_SLUGS } from '../lib/geo-cross-analysis';
-import { isTimestamp } from '../lib/geo-runtime-contract';
-import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
+import { GEO_CROSS_ANALYSIS_SLUGS } from './geo-cross-analysis';
+import { isTimestamp } from './geo-runtime-contract';
+import { loadGeoAnalysisPrefBundle } from './load-geo-analysis-evidence';
 
-export async function fetchGeoDetailAction(
+/**
+ * 表示中の manifest (generatedAt + 県の population-mesh SHA) に固定した県 detail を返す。
+ * Server Action (fetchGeoLayerAction) と GET route (/api/geo/analysis/...) が共用する。
+ * 取得先の入力は git 定義の有限集合から選び直し、版が合わなければ null。
+ */
+export async function resolveGeoDetail(
   slug: string,
   prefCode: string,
   expected: { generatedAt: string; sha256: string }
 ) {
-  // 入力文字列を取得先へ引き継がず、git定義の有限集合からキーを選び直す。
   const canonicalSlug = GEO_CROSS_ANALYSIS_SLUGS.find((value) => value === slug);
   const canonicalPrefCode = GEO_PREF_CODES.find((value) => value === prefCode);
   if (

@@ -1,12 +1,9 @@
 {
-  "hash": "e66a118b883fcaf32aa69d3d125c68156e7ec21d7c6dbdc458c7d19ecf9fa271",
-  "audited_at": "2026-11-11T02:31:19",
+  "hash": "911f1a8e9752e57b3490436dfebb601f88c0a14907a82a7c9ef68a28f07e32a5",
+  "audited_at": "2026-11-11T02:45:08",
   "files": [
-    ".claude/rules/r2-storage-design.md",
-    ".claude/scripts/cloudflare/fetch-usage.mjs",
-    ".claude/scripts/cloudflare/lib/googlebot.mjs",
-    ".claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs",
-    ".claude/scripts/gsc/audit-operations-cycle.mjs",
-    ".claude/scripts/lib/__tests__/cloudflare-googlebot.test.mjs"
+    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
+    ".claude/scripts/metrics/build-measurement-cycle.mjs",
+    ".claude/scripts/metrics/lib/measurement-cycle.mjs"
   ]
 }

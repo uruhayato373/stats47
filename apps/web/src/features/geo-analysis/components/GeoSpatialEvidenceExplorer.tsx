@@ -35,7 +35,6 @@ import {
 } from '@/lib/analytics/events';
 
 
-import { fetchGeoDetailAction } from '../actions';
 import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
@@ -107,6 +106,20 @@ export function GeoSpatialEvidenceExplorer(props: Props) {
   return <GeoSpatialEvidenceExplorerState key={key} {...props} />;
 }
 
+// Same-origin GET so the browser and the CDN can cache it (a Server Action POST cannot be cached).
+async function fetchGeoDetail(
+  slug: string,
+  prefCode: string,
+  generatedAt: string,
+  sha256: string
+): Promise<GeoAnalysisPrefDetail | null> {
+  const query = new URLSearchParams({ v: generatedAt, sha: sha256 });
+  const response = await fetch(
+    `/api/geo/analysis/${slug}/${prefCode}?${query}`
+  );
+  return response.ok ? ((await response.json()) as GeoAnalysisPrefDetail) : null;
+}
+
 function GeoSpatialEvidenceExplorerState({
   slug,
   analysisId,
@@ -156,10 +169,7 @@ function GeoSpatialEvidenceExplorerState({
       cached
         ? Promise.resolve(cached)
         : artifact
-          ? fetchGeoDetailAction(slug, prefCode, {
-              generatedAt: manifest.generatedAt,
-              sha256: artifact.sha256,
-            })
+          ? fetchGeoDetail(slug, prefCode, manifest.generatedAt, artifact.sha256)
           : Promise.resolve(null)
     )
       .then((next) => {

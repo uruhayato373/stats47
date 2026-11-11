@@ -619,6 +619,17 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     note: 'Cloudflare・R2・API課金。閾値は budgets-daily.json が正典。',
   },
   {
+    id: 'index-coverage-rate',
+    label: 'インデックス登録率',
+    role: 'guardrail',
+    kpiTier: 'guardrail',
+    cadence: 'weekly',
+    source: 'GSC 送信済みページの週次記録 (gsc.coverage-submitted)',
+    measurementStatus: 'partially-measured',
+    unit: '%',
+    note: 'サイトマップに載せた URL のうち Google に登録済みの割合 (GSC「すべての送信済みページ」ビューの登録済み ÷ (登録済み + 未登録))。直前の取得週より下がったら悪化。閾値は持たない。最初の値は 2026-11-14 の週次取得の後に入る。取得できなかった週は 0 でなく未計測と書く。',
+  },
+  {
     id: 'measurement-freshness',
     label: '計測の鮮度',
     role: 'guardrail',
