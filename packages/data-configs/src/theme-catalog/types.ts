@@ -228,7 +228,7 @@ export interface CatalogSection {
 export interface CatalogEvidenceTopic {
   /** kebab-case。テーマ内で一意。計測 label と section anchor に使う。 */
   key: string;
-  /** 横断的な読み方。evidence-lenses.ts の登録値だけを使う。 */
+  /** 横断的な読み方。台帳 themes.evidence-lenses の登録値だけを使う。 */
   lensKey: EvidenceLensKey;
   /** テーマ固有の論点名。 */
   title: string;

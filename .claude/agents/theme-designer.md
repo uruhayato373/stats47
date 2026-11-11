@@ -186,7 +186,7 @@ CPI→`cpi-profile`・`cpi-heatmap` / 年齢構造→`pyramid-chart` / 単一値
 `npm run generate:catalog` で IndicatorSet TS + page-components JSON を再生成する (**生成物は手編集禁止**、
 pre-commit/CI の Theme Catalog Gate が弾く)。規約: `.claude/rules/theme-catalog-standards.md`。
 
-採択済みの白書論点がある場合は、`theme-catalog/evidence-lenses.ts` の既存 lens/source を再利用し、
+採択済みの白書論点がある場合は、台帳 `themes.evidence-lenses` の既存 lens/source を再利用し、
 `evidenceTopics` に 1 topic = 1 問いで追加する。新しい source は公式 HTTPS URL を確認してから登録する。
 `relatedRankingKeys` は active、`relatedChartKeys` は同じカタログ内、`relatedThemeKeys` は自己参照不可。
 白書名を第四 taxonomy や新規 route にしない。

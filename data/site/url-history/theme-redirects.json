@@ -1,0 +1,110 @@
+{
+  "pathRedirects": [
+    {
+      "pattern": "^/ports/?$",
+      "themeSlug": "ports",
+      "since": "2026-05-28",
+      "reason": "港湾テーマを新設"
+    },
+    {
+      "pattern": "^/fishing-ports/?$",
+      "themeSlug": "fishery-marine",
+      "since": "2026-05-28",
+      "reason": "漁港数を含む漁業テーマへ統合"
+    },
+    {
+      "pattern": "^/station-passengers(?:/.*)?$",
+      "themeSlug": "railway",
+      "since": "2026-05-28",
+      "reason": "駅別乗降客数の県別バブルマップを鉄道テーマへ集約"
+    },
+    {
+      "pattern": "^/maps/highway-timeline(?:/.*)?$",
+      "themeSlug": "roads",
+      "since": "2026-05-28",
+      "reason": "高速道路時系列マップを道路テーマへ集約"
+    },
+    {
+      "pattern": "^/gis-cross/migration-flow(?:/.*)?$",
+      "themeSlug": "population-dynamics",
+      "since": "2026-05-29",
+      "reason": "人口移動フローを人口動態テーマへ埋め込み"
+    },
+    {
+      "pattern": "^/gis-cross/depopulation-medical(?:/.*)?$",
+      "themeSlug": "healthcare",
+      "since": "2026-05-29",
+      "reason": "過疎×医療マップを医療テーマへ埋め込み"
+    },
+    {
+      "pattern": "^/gis-cross/sunshine-map(?:/.*)?$",
+      "themeSlug": "climate",
+      "since": "2026-05-29",
+      "reason": "日照地図を気候テーマへ埋め込み"
+    },
+    {
+      "pattern": "^/gis-cross(?:/.*)?$",
+      "since": "2026-05-29",
+      "reason": "GIS 掛け合わせハブ"
+    }
+  ],
+  "areaCategoryRedirects": [
+    {
+      "categoryKey": "population",
+      "themeSlug": "population-dynamics"
+    },
+    {
+      "categoryKey": "laborwage",
+      "themeSlug": "labor-wages"
+    },
+    {
+      "categoryKey": "economy",
+      "themeSlug": "local-economy"
+    },
+    {
+      "categoryKey": "agriculture",
+      "themeSlug": "local-economy"
+    },
+    {
+      "categoryKey": "miningindustry",
+      "themeSlug": "manufacturing"
+    },
+    {
+      "categoryKey": "construction",
+      "themeSlug": "living-housing"
+    },
+    {
+      "categoryKey": "commercial",
+      "themeSlug": "local-economy"
+    },
+    {
+      "categoryKey": "socialsecurity",
+      "themeSlug": "healthcare"
+    },
+    {
+      "categoryKey": "educationsports",
+      "themeSlug": "education-culture"
+    },
+    {
+      "categoryKey": "safetyenvironment",
+      "themeSlug": "safety"
+    },
+    {
+      "categoryKey": "landweather",
+      "themeSlug": "climate"
+    },
+    {
+      "categoryKey": "international",
+      "themeSlug": "foreign-residents"
+    },
+    {
+      "categoryKey": "energy"
+    },
+    {
+      "categoryKey": "ict"
+    },
+    {
+      "categoryKey": "infrastructure"
+    }
+  ]
+}

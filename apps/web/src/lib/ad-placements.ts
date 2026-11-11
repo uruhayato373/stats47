@@ -1,7 +1,7 @@
-import placements from '../../../../config/ads/placements.json';
+import placements from '../../../../data/ads/placements.json';
 
 /**
- * 広告の枠の台帳 (config/ads/placements.json) の読み口 (2026-10-29)。
+ * 広告の枠の台帳 (data/ads/placements.json) の読み口 (2026-10-29)。
  * 枠の部品は確保する箱の寸法をここから取り、本番の予約の高さとローカルの代わりの表示を同じ値にする。
  */
 

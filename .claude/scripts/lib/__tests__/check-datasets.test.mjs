@@ -14,6 +14,8 @@ import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS,
 import { DOMAINS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, refValues, retiredHits, selectPath } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
+import { CONFIG_MOVE_PENDING, DATA_README_PENDING, OUTSIDE_DATA, SYSTEM_CONFIG } from "../../../../config/datasets.mjs";
+import { buildEr, checkDataReadmes, checkOutsideData, checkPlacement } from "../check-datasets.mjs";
 import { assertDatasetShape } from "../dataset-shape.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
@@ -561,4 +563,96 @@ test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わ�
     else live.publicationStageEvidence = beforeEvidence;
   }
   assert.deepEqual(run(), [], "戻すと通る (赤は書き換えた値が理由)");
+});
+
+// ── DB の置き場 (2026-11-10 オーナー決定) ──
+// マスタと台帳は data/ の 1 つの DB にまとめ、config/ はシステムの設定だけ、packages/・apps/ は型・読み込み・検査だけにする。
+// 文章の規約ではなく、この検査で守る。許可リストは縮小専用で、移したのに行が残っても止まる。
+
+const trackedNow = () =>
+  execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }).split("\0").filter(Boolean);
+
+test("実リポジトリは種類と置き場が一致し、data/ の外の台帳と README は一覧に載ったものだけ", () => {
+  const files = trackedNow();
+  assert.deepEqual(checkPlacement(DATASETS, { systemConfig: SYSTEM_CONFIG, movePending: CONFIG_MOVE_PENDING }), []);
+  assert.deepEqual(checkOutsideData({ entries: OUTSIDE_DATA, files, registries: REGISTRIES }), []);
+  assert.deepEqual(checkDataReadmes({ files, pending: DATA_README_PENDING }), []);
+});
+
+test("[mutation] マスタ・台帳を config/ や packages/ に置く、設定を data/ に置く、schema の種類を取り違える、は落ちる", () => {
+  const row = (id, path, kind) => ({ id, path, kind, domain: "site", target: "data", description: id });
+  const lists = { systemConfig: { "sys.ok": "接続先" }, movePending: { "biz.pending": "段 4" } };
+  const run = (rows) => checkPlacement(rows, lists).map((e) => e.replace(/ \(.*$/, ""));
+  const ok = [
+    row("sys.ok", "config/sys.json", "config"),
+    row("biz.pending", "config/biz.json", "master"),
+    row("biz.master", "data/biz/master.json", "master"),
+    row("biz.schema", "data/biz/master.schema.json", "schema"),
+    row("agent.ledger", ".claude/state/x/ledger.json", "ledger"),
+    row("agent.budget", ".claude/config/budgets/a/budgets.json", "config"),
+  ];
+  assert.deepEqual(run(ok), []);
+  assert.deepEqual(run([...ok, row("biz.new", "config/new.json", "master")]), [
+    "biz.new: マスタ・台帳は data/ に置く",
+    "biz.new: config/ はシステムの設定だけを置く",
+  ]);
+  assert.deepEqual(run([...ok, row("biz.pkg", "packages/x/src/ledger.json", "ledger")]), ["biz.pkg: マスタ・台帳は data/ に置く"]);
+  assert.deepEqual(run([...ok, row("sys.stray", "data/sys/settings.json", "config")]), ["sys.stray: 種類 config"]);
+  assert.deepEqual(run([...ok, row("biz.shape", "data/biz/x.schema.json", "master")]), ["biz.shape: *.schema.json の行の種類は schema"]);
+  assert.deepEqual(run([...ok, row("biz.notschema", "data/biz/x.json", "schema")]), ["biz.notschema: 種類 schema の行は *.schema.json を指す"]);
+  // 移したのに許可リストに残っている・台帳に無い id が載っている、も止める (縮小専用)
+  assert.deepEqual(run(ok.map((r) => (r.id === "biz.pending" ? row("biz.pending", "data/biz/moved.json", "master") : r))), [
+    "biz.pending: data/ へ移したら CONFIG_MOVE_PENDING から消す",
+  ]);
+  assert.deepEqual(run(ok.filter((r) => r.id !== "sys.ok")), ["SYSTEM_CONFIG に台帳に無い id: sys.ok"]);
+});
+
+test("[mutation] packages/・apps/ の JSON は一覧に無ければ落ち、移した後の行と一覧に無い registry の正本も落ちる", () => {
+  const entries = [
+    { path: "apps/web/public/", why: "app" },
+    { path: "packages/x/src/data/", why: "pending", phase: 2 },
+    { path: "packages/x/src/registry.ts", why: "generated" },
+  ];
+  const files = ["apps/web/public/a.json", "packages/x/src/data/master.json", "packages/x/src/registry.ts", "packages/x/package.json", "packages/x/src/__tests__/f.json", "packages/x/src/a.generated.json"];
+  const run = (e, f, registries = {}) => checkOutsideData({ entries: e, files: f, registries });
+  assert.deepEqual(run(entries, files), [], "テスト・生成物・package.json は問わない");
+  assert.match(run(entries, [...files, "packages/y/src/ledger.json"])[0], /^data\/ の外の JSON: packages\/y\/src\/ledger\.json/);
+  assert.match(run(entries, files.filter((f) => !f.startsWith("packages/x/src/data/")))[0], /どのファイルにも当たらない \(移したら行を消す\): packages\/x\/src\/data\//);
+  assert.match(run([...entries, { path: "apps/web/public/", why: "pending" }], files)[0], /pending の行は移す段/);
+  assert.deepEqual(run(entries, files, { ok: { files: ["packages/x/src/registry.ts", "data/y/z.json"] } }), []);
+  assert.match(run(entries, files, { stray: { files: ["packages/z/src/catalog.ts"] } })[0], /REGISTRIES\.stray: data\/ の外の正本 packages\/z\/src\/catalog\.ts/);
+});
+
+test("[mutation] data/ の中の README は一覧に無ければ落ち、消した後の行も落ちる", () => {
+  const pending = { "data/a/README.md": "段 2 で Schema へ移す" };
+  assert.deepEqual(checkDataReadmes({ files: ["data/a/README.md", "data/a/x.json", "docs/README.md", "packages/x/README.md"], pending }), []);
+  assert.match(checkDataReadmes({ files: ["data/a/README.md", "data/b/c/README.md"], pending })[0], /^data\/ の中の README: data\/b\/c\/README\.md/);
+  assert.match(checkDataReadmes({ files: ["data/a/x.json"], pending })[0], /DATA_README_PENDING に無いファイル: data\/a\/README\.md/);
+});
+
+test("ER は refs からテーブル・外部キー・統合の候補 (写し・1 対 1) を出す", () => {
+  const row = (id, path, kind, opts = {}) => ({ id, path, kind, domain: "site", target: "data", description: id, ...opts });
+  const store = {
+    "data/a.json": { items: [{ id: "x", title: "X" }, { id: "y", title: "Y" }] },
+    "data/b.json": { rows: [{ a: "x", title: "X" }, { a: "y", title: "Y" }] },
+    "data/c.json": { rows: [{ a: "x" }, { a: "x" }] },
+  };
+  const er = buildEr({
+    datasets: [
+      row("t.a", "data/a.json", "master"),
+      row("t.b", "data/b.json", "ledger", { refs: [{ field: "rows[].a", to: "t.a", key: "items[].id", copies: ["title"] }] }),
+      row("t.c", "data/c.json", "ledger", { refs: [{ field: "rows[].a", to: "t.a", key: "items[].id" }] }),
+      row("t.log", "data/log.csv", "series"),
+    ],
+    files: Object.keys(store),
+    readJson: (p) => store[p],
+  });
+  assert.deepEqual(er.tables.map((t) => t.id), ["t.a", "t.b", "t.c"], "series はテーブルに数えない");
+  assert.equal(er.edges.length, 2);
+  assert.deepEqual(er.candidates.map((c) => `${c.kind}:${c.from}`), ["写しを持つ:t.b", "1 対 1:t.b"], "重複して指す t.c は候補にしない");
+});
+
+test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の表 ID を書いていない", () => {
+  const issues = JSON.parse(readFileSync(resolve(ROOT, datasetPath("content.issues")), "utf8")).issues;
+  assert.deepEqual(issues.filter((i) => /[0-9]{10}/.test(i.dataNote ?? "")).map((i) => i.id), []);
 });

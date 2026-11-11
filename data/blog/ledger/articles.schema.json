@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stats47 ブログ記事台帳",
+  "description": "data/blog/ledger/articles.json の形の契約。1 記事 1 レコードで、主キーは slug。記事の一覧の正本で、ページの索引 (data/content/pages/blog.json) はこの台帳から作る。本文と図の実体は R2 にだけ置き、ここには所在だけを書く。書き手は apps/web/scripts/sync-content-catalog.ts (R2 の app/blog/all.json を読んだ実行だけが upsert する)。手で編集しない。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "articles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "articles": {
+      "description": "slug の昇順。R2 の一覧から消えた記事の記録は消さず、状態を gone に変えて残す",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/article"
+      }
+    }
+  },
+  "definitions": {
+    "nullableDate": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/date"
+        }
+      ]
+    },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slug",
+        "title",
+        "status",
+        "publishedAt",
+        "updatedAt",
+        "rankingKeys",
+        "tagIds",
+        "r2Path"
+      ],
+      "properties": {
+        "slug": {
+          "description": "記事の ID (URL は /blog/<slug>)。公開後は変えない。変えるときは旧 slug の記録を残し、転送表に足す",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$"
+        },
+        "title": {
+          "description": "記事の題。null は R2 の一覧に載ったことを台帳が見ていない slug (台帳を作る前に削除した記事)",
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "status": {
+          "description": "published = R2 の一覧で公開中 / unpublished = R2 の一覧にあるが未公開 (published: false) / gone = 410 の一覧にある、または R2 の一覧から消えた",
+          "enum": [
+            "published",
+            "unpublished",
+            "gone"
+          ]
+        },
+        "publishedAt": {
+          "description": "公開日 (日本時間の暦日)。null は R2 の一覧に公開日が無い",
+          "$ref": "#/definitions/nullableDate"
+        },
+        "updatedAt": {
+          "description": "最後に改稿した日 (日本時間の暦日)。null は R2 の一覧に更新日が無い",
+          "$ref": "#/definitions/nullableDate"
+        },
+        "rankingKeys": {
+          "description": "記事が使う指標のキー (R2 の一覧の rankingRefs の順)",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        },
+        "tagIds": {
+          "description": "記事のタグの不変 ID (data/content/tags.json の id)",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^tag:[a-z0-9-]+$"
+          }
+        },
+        "r2Path": {
+          "description": "本文の所在 (公開 R2 のキー)。null は R2 の一覧に無い。ページの索引に載るのは、これを持つ記録だけ",
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^blog/[A-Za-z0-9][A-Za-z0-9-]*/article\\.mdx?$"
+        }
+      },
+      "if": {
+        "properties": {
+          "r2Path": {
+            "type": "string"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

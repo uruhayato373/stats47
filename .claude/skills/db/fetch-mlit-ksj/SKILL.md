@@ -8,8 +8,8 @@ primary_agent: gis-pipeline-runner
 
 国土数値情報（MLIT KSJ）のデータセットをダウンロードし、TopoJSON に変換して R2 に保存する。
 
-> **★完全DBレス (2026-06-21)**: 登録データセットのメタ + ranking 定義の SSOT は git TS
-> `packages/gis/src/mlit-ksj/datasets.ts`、技術設定は `registry.ts`。pipelineは両方を直接読み、
+> **★完全DBレス (2026-06-21)**: 登録データセットのメタ + ranking 定義の SSOT は台帳
+> `geo.ksj-datasets`、技術設定は `registry.ts`。pipelineは両方を直接読み、
 > 取得状態は実R2一覧から導出する。SQLiteのstatus/file_countは取得済み判定に使わない。
 > 規約: `.claude/rules/gis-data.md`。
 > 管理 agent: `gis-curator` (SSOT) / `gis-pipeline-runner` (本スキル実行)。
@@ -90,7 +90,7 @@ npm run check:data-catalog --workspace packages/gis
 ```
 
 各公式アーカイブにつき `data.topojson` と `manifest.json` をR2へ保存する。完了判定は
-`official-policy.ts` の期待アーカイブ数とR2 `manifest.json` 数の一致であり、部分アップロードは未完了。
+台帳 `geo.ksj-official-policy` の期待アーカイブ数とR2 `manifest.json` 数の一致であり、部分アップロードは未完了。
 再実行時はmanifest宣言objectを照合し、欠損scopeを全再取得、manifest外objectをexact削除して収束させる。
 
 R2成果物・provenance・原典の再取得手段を検証したら、原典ZIP・展開データを即時削除する。
@@ -123,7 +123,7 @@ MLIT zip ダウンロード → /tmp/ に保存
 
 ## 新規データセット追加
 
-`datasets.ts` にメタ、`registry.ts` に取得設定を追加する。
+台帳 `geo.ksj-datasets` にメタ、`registry.ts` に取得設定を追加する。
 
 必要な情報:
 - `dataId`: KSJ データ ID（例: `N02`）

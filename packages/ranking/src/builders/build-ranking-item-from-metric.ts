@@ -24,7 +24,7 @@ import {
 import { assertKnownColorScheme } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
-import surveysMaster from "../data/surveys.json";
+import surveysMaster from "../../../../data/surveys/master/surveys.json";
 
 import type {
   CalculationConfig,

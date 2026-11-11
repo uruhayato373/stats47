@@ -7450,19 +7450,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -7495,6 +7487,10 @@
         },
         {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -7543,19 +7539,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -7588,6 +7572,10 @@
         },
         {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -7862,10 +7850,6 @@
         },
         {
           "pageId": "blog:banana-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:icecream-consumption-expenditure",
           "kind": "blog"
         },
         {
@@ -10698,15 +10682,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -11177,10 +11157,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:pork-consumption-expenditure",
           "kind": "blog"
         },
@@ -11189,11 +11165,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:wakayama-food-culture",
+          "pageId": "blog:shiga-food-culture",
           "kind": "blog"
         },
         {

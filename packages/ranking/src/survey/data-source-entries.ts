@@ -14,7 +14,7 @@ import { isSsdsStatsDataId, resolveAttribution, resolveProvenanceByParams, resol
 import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
 import type { DataSourceEntry, MetricConfig, MetricRegistry, ProvenanceSurvey, SourceAttribution } from '@stats47/data-configs';
 
-import surveysMaster from '../data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 import type { SourceProvenance } from '../types/ranking-item';
 import {
   extractBlogChartSourceReferences,

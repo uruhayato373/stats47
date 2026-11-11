@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 /**
- * 広告の枠の台帳 (config/ads/placements.json) の行から AdSense のユニット名を決める規則。
+ * 広告の枠の台帳 (data/ads/placements.json) の行から AdSense のユニット名を決める規則。
  * 撮影 (capture-ad-layout.ts) と管理画面 (/affiliate/layout) が同じ関数を使い、画面の「台帳にあり写っていない」が
  * 撮影の当て方と食い違わないようにする。
  */

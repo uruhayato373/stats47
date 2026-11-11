@@ -21,7 +21,7 @@ import {
   KINDLE_SERIES_LABELS,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
-import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 
 import {
   ContentKdpListingsState,

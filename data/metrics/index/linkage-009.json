@@ -3234,11 +3234,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukui-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -3251,6 +3251,10 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -3513,11 +3517,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukui-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -3530,6 +3534,10 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -10709,6 +10717,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-meat-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -10745,6 +10761,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fresh-meat-group-consumption-quantity",
           "kind": "ranking"
@@ -11042,6 +11066,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-seafood-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -11078,6 +11106,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fresh-seafood-group-consumption-quantity",
           "kind": "ranking"
@@ -11406,6 +11438,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
@@ -11464,6 +11500,10 @@
         },
         {
           "pageId": "blog:fresh-udon-soba-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
         {

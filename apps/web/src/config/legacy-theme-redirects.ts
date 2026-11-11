@@ -1,12 +1,14 @@
 /**
  * 廃止したページ・旧カテゴリ URL からテーマページへの恒久転送 (301) 表。
  *
- * middleware.ts の if ブロックに直書きしていた転送を表にまとめ、転送先テーマの実在を
- * `src/config/__tests__/legacy-theme-redirects.test.ts` が ALL_THEMES / AREA_THEME_SLUGS と照合する。
+ * 記録の正本は台帳 `site.theme-redirects` (data/site/url-history/theme-redirects.json)。ここは読み込み口。
+ * 転送先テーマの実在は `src/config/__tests__/legacy-theme-redirects.test.ts` が ALL_THEMES / AREA_THEME_SLUGS と照合する。
  * middleware はこの表を上から順に照合し、最初に一致した行の転送先へクエリを保ったまま 301 を返す。
  */
 
 import { hrefFor } from '@stats47/data-configs/content/href';
+
+import data from '../../../../data/site/url-history/theme-redirects.json';
 
 export interface LegacyThemePathRedirect {
   /** 旧 URL の pathname */
@@ -18,16 +20,13 @@ export interface LegacyThemePathRedirect {
 }
 
 /** 照合順に並べる (具体 path を先、ハブのフォールバックを最後) */
-export const LEGACY_THEME_PATH_REDIRECTS: readonly LegacyThemePathRedirect[] = [
-  { pattern: /^\/ports\/?$/, themeSlug: 'ports', note: '2026-05-28 廃止。港湾テーマを新設' },
-  { pattern: /^\/fishing-ports\/?$/, themeSlug: 'fishery-marine', note: '2026-05-28 廃止。漁港数を含む漁業テーマへ統合' },
-  { pattern: /^\/station-passengers(?:\/.*)?$/, themeSlug: 'railway', note: '2026-05-28 廃止。駅別乗降客数の県別バブルマップを鉄道テーマへ集約' },
-  { pattern: /^\/maps\/highway-timeline(?:\/.*)?$/, themeSlug: 'roads', note: '2026-05-28 廃止。高速道路時系列マップを道路テーマへ集約' },
-  { pattern: /^\/gis-cross\/migration-flow(?:\/.*)?$/, themeSlug: 'population-dynamics', note: '2026-05-29 廃止。人口移動フローを人口動態テーマへ埋め込み' },
-  { pattern: /^\/gis-cross\/depopulation-medical(?:\/.*)?$/, themeSlug: 'healthcare', note: '2026-05-29 廃止。過疎×医療マップを医療テーマへ埋め込み' },
-  { pattern: /^\/gis-cross\/sunshine-map(?:\/.*)?$/, themeSlug: 'climate', note: '2026-05-29 廃止。日照地図を気候テーマへ埋め込み' },
-  { pattern: /^\/gis-cross(?:\/.*)?$/, themeSlug: '', note: '2026-05-29 廃止。GIS 掛け合わせハブ' },
-];
+export const LEGACY_THEME_PATH_REDIRECTS: readonly LegacyThemePathRedirect[] = data.pathRedirects.map(
+  (row) => ({
+    pattern: new RegExp(row.pattern),
+    themeSlug: row.themeSlug ?? '',
+    note: `${row.since} 廃止。${row.reason}`,
+  }),
+);
 
 /** 一致した旧 URL の転送先 pathname (クエリは呼び元が付ける)。一致しなければ undefined */
 export function resolveLegacyThemePathRedirect(pathname: string): string | undefined {
@@ -39,24 +38,8 @@ export function resolveLegacyThemePathRedirect(pathname: string): string | undef
 /**
  * `/areas/{prefCode}/{categoryKey}` (旧カテゴリ別ページ) → `/areas/{prefCode}/{themeSlug}` の対応。
  * 空文字は対応テーマなし → `/areas/{prefCode}` (エリアプロフィール) へ転送する。
- * tourism は旧 categoryKey と現行 themeSlug が同一なので含めない (含めると同一 URL への 301 ループ)。
- * administrativefinancial は middleware の先の規則が `/themes/local-finance?pref={prefCode}` へ転送するので
- * 含めない (含めても照合されない死に行になる。middleware.test.ts が表の全行の着地を固定する)。
+ * 除外する行の理由 (tourism・administrativefinancial) は台帳の Schema に書いてある。middleware.test.ts が表の全行の着地を固定する。
  */
-export const AREA_CATEGORY_TO_THEME: Readonly<Record<string, string>> = {
-  population: 'population-dynamics',
-  laborwage: 'labor-wages',
-  economy: 'local-economy',
-  agriculture: 'local-economy',
-  miningindustry: 'manufacturing',
-  construction: 'living-housing',
-  commercial: 'local-economy',
-  socialsecurity: 'healthcare',
-  educationsports: 'education-culture',
-  safetyenvironment: 'safety',
-  landweather: 'climate',
-  international: 'foreign-residents',
-  energy: '',
-  ict: '',
-  infrastructure: '',
-};
+export const AREA_CATEGORY_TO_THEME: Readonly<Record<string, string>> = Object.fromEntries(
+  data.areaCategoryRedirects.map((row) => [row.categoryKey, row.themeSlug ?? '']),
+);

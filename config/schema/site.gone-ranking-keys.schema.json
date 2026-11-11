@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "退役した ranking キー (410)",
+  "description": "data/site/url-history/gone-ranking-keys.json の形の契約。DB から削除済み・非アクティブになった旧ランキングキーで、middleware が 410 Gone を返し Google にインデックスからの即時除去を促す。同時に一覧・サイドバー・sitemap からリンクを消す必要があるので、リンク生成を担う packages/ranking が読む。追加は必ず「KNOWN 再生成 + 指標の config を isActive:false」とセットで行う (GONE と KNOWN・isActive の交わりが空であることを apps/web の ranking-key-consistency テストが CI で固定する)。誤って退役した (KNOWN 登録済・isActive・R2 に実データあり) キーは消して復帰する。since は退役の日、reason は理由で、旧 TS の日付つきコメントから対応が取れた分だけ持つ。対応が取れなかった過去の追記の要旨: 2026-03-27 に inactive 50 件を追加し active 復帰 3 件を削除 (442 から 489 件)、2026-06-16 は COVERAGE-DEACT-01 で config も R2 データも無いのに stale prerender で 200 を返す空 ranking 32 件を追加 (一覧の真実源は data/gsc/coverage-remediation/coverage-remediation-queue.json の content_verdict=deactivate)、2026-07-03 は誤検知の 3 件と 53 件を active 復帰で削除 (再発防止は同テスト)、2026-08-06 は COVERAGE-SOFT404-01 で GSC が soft404 判定した空 ranking 39 件 (config なし・KNOWN 未登録・R2 values.json なしを機械検証) を追加、2026-09-10 に全国家計構造調査へ切り替えた指標を active 復帰で削除。",
+  "type": "object",
+  "required": ["keys"],
+  "additionalProperties": false,
+  "properties": {
+    "keys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key"],
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "since": { "$ref": "common.schema.json#/$defs/date" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

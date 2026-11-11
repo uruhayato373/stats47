@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "KDP の出品内容と公開・審査状態",
-  "description": "config/kdp-listings.json の形状契約。項目は packages/product-factory/src/channels/kindle/export-kdp-listings.ts の KdpListing と、本棚の read-back を書き戻す .claude/scripts/kdp/lib/kdp-{status,publication-stage,session}.mjs が持つもの。2026-10-26 に推論版 (anyOf の入れ子) から厳格化した (項目の追加は properties に足してから書く)。",
+  "description": "data/products/kdp/listings.json の形状契約。項目は packages/product-factory/src/channels/kindle/export-kdp-listings.ts の KdpListing と、本棚の read-back を書き戻す .claude/scripts/kdp/lib/kdp-{status,publication-stage,session}.mjs が持つもの。2026-10-26 に推論版 (anyOf の入れ子) から厳格化した (項目の追加は properties に足してから書く)。",
   "type": "object",
   "additionalProperties": false,
   "required": ["listings"],

@@ -1,50 +1,55 @@
 /**
  * Topic カタログのレジストリ — カテゴリ内グループ分類の単一入口。
  *
- * 役割・情報設計上の位置づけは `./README.md` と `./types.ts` を参照。
+ * 記録の正本は `data/categories/topics/<categoryKey>.json` (カタログの categories.topics。JSON Schema 付き。
+ * 形と解決の規則は Schema の description)。ここは読み込みと型付けだけを持つ。型は `./types.ts`、解決は `./resolve-topic.ts`。
  *
  * ここに登録されたカテゴリだけが exporter でグループ化される。未登録カテゴリは
  * items.json に topic フィールドが焼かれず、UI は従来の平坦テーブルへフォールバックする。
  */
-import { ADMINISTRATIVEFINANCIAL_TOPICS } from "./catalogs/administrativefinancial";
-import { AGRICULTURE_TOPICS } from "./catalogs/agriculture";
-import { COMMERCIAL_TOPICS } from "./catalogs/commercial";
-import { CONSTRUCTION_TOPICS } from "./catalogs/construction";
-import { ECONOMY_TOPICS } from "./catalogs/economy";
-import { EDUCATIONSPORTS_TOPICS } from "./catalogs/educationsports";
-import { ENERGY_TOPICS } from "./catalogs/energy";
-import { ICT_TOPICS } from "./catalogs/ict";
-import { INFRASTRUCTURE_TOPICS } from "./catalogs/infrastructure";
-import { INTERNATIONAL_TOPICS } from "./catalogs/international";
-import { LABORWAGE_TOPICS } from "./catalogs/laborwage";
-import { LANDWEATHER_TOPICS } from "./catalogs/landweather";
-import { MININGINDUSTRY_TOPICS } from "./catalogs/miningindustry";
-import { POPULATION_TOPICS } from "./catalogs/population";
-import { SAFETYENVIRONMENT_TOPICS } from "./catalogs/safetyenvironment";
-import { SOCIALSECURITY_TOPICS } from "./catalogs/socialsecurity";
-import { TOURISM_TOPICS } from "./catalogs/tourism";
+import administrativefinancial from "../../../../data/categories/topics/administrativefinancial.json";
+import agriculture from "../../../../data/categories/topics/agriculture.json";
+import commercial from "../../../../data/categories/topics/commercial.json";
+import construction from "../../../../data/categories/topics/construction.json";
+import economy from "../../../../data/categories/topics/economy.json";
+import educationsports from "../../../../data/categories/topics/educationsports.json";
+import energy from "../../../../data/categories/topics/energy.json";
+import ict from "../../../../data/categories/topics/ict.json";
+import infrastructure from "../../../../data/categories/topics/infrastructure.json";
+import international from "../../../../data/categories/topics/international.json";
+import laborwage from "../../../../data/categories/topics/laborwage.json";
+import landweather from "../../../../data/categories/topics/landweather.json";
+import miningindustry from "../../../../data/categories/topics/miningindustry.json";
+import population from "../../../../data/categories/topics/population.json";
+import safetyenvironment from "../../../../data/categories/topics/safetyenvironment.json";
+import socialsecurity from "../../../../data/categories/topics/socialsecurity.json";
+import tourism from "../../../../data/categories/topics/tourism.json";
 import type { CategoryTopicCatalog } from "./types";
 import type { CategoryKey } from "../types";
 
+/** JSON の schemaVersion を除いた、カタログの本体 (Schema が形を検査する) */
+const toCatalog = ({ schemaVersion: _schemaVersion, ...catalog }: { schemaVersion: number }): CategoryTopicCatalog =>
+  catalog as unknown as CategoryTopicCatalog;
+
 const CATALOG_LIST: CategoryTopicCatalog[] = [
-  ADMINISTRATIVEFINANCIAL_TOPICS,
-  AGRICULTURE_TOPICS,
-  COMMERCIAL_TOPICS,
-  CONSTRUCTION_TOPICS,
-  ECONOMY_TOPICS,
-  EDUCATIONSPORTS_TOPICS,
-  ENERGY_TOPICS,
-  ICT_TOPICS,
-  INFRASTRUCTURE_TOPICS,
-  INTERNATIONAL_TOPICS,
-  LABORWAGE_TOPICS,
-  LANDWEATHER_TOPICS,
-  MININGINDUSTRY_TOPICS,
-  POPULATION_TOPICS,
-  SAFETYENVIRONMENT_TOPICS,
-  SOCIALSECURITY_TOPICS,
-  TOURISM_TOPICS,
-];
+  administrativefinancial,
+  agriculture,
+  commercial,
+  construction,
+  economy,
+  educationsports,
+  energy,
+  ict,
+  infrastructure,
+  international,
+  laborwage,
+  landweather,
+  miningindustry,
+  population,
+  safetyenvironment,
+  socialsecurity,
+  tourism,
+].map(toCatalog);
 
 export const CATEGORY_TOPIC_CATALOGS: Partial<
   Record<CategoryKey, CategoryTopicCatalog>

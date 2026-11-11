@@ -750,7 +750,7 @@ jobs:
       - name: 🗂️ Theme Portfolio State Guard
         # テーマポートフォリオ state の schema + 判定規律 (根拠なし merge/retire 禁止・
         # 重複実験防止・推測値/標本不足比率の混入防止・THEME_CATALOGS 整合) を検証。
-        # 読み取り専用で破壊的変更なし。正典: data/themes/README.md
+        # 読み取り専用で破壊的変更なし。形の正典: 台帳 themes.portfolio / themes.experiments の Schema
         run: |
           node .claude/scripts/themes/validate-theme-state.mjs
           npm run theme:quality:test
@@ -775,7 +775,7 @@ jobs:
         # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
         # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
-        # (本文生成・R2 push・deploy は行わない)。正典: data/surveys/README.md
+        # (本文生成・R2 push・deploy は行わない)。形: カタログの surveys.portfolio・surveys.experiments (Schema)
         run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
         continue-on-error: false
 
@@ -808,6 +808,8 @@ jobs:
           # 規約: .claude/rules/metric-config-standards.md
           npm run validate:config --workspace=@stats47/data-configs
           npm run build:registry --workspace=@stats47/data-configs -- --check
+          # カテゴリのキーの型 (category-keys.generated.ts) が data/categories/categories.json と一致していること。
+          npm run build:category-keys --workspace=@stats47/data-configs -- --check
           # 図の表示単位の台帳 (data/metrics/display-units/) が規則と一致し、読めない単位の大きい指標が増えていないこと。
           # 規約: .claude/rules/unit-semantics-standards.md §2.6
           npm run check:display-units --workspace=@stats47/data-configs
@@ -927,7 +929,7 @@ jobs:
         run: |
           # カテゴリ内グループ分類 (SSOT) の整合を担保。存在しない metric key への
           # overrides、予約語 other の再定義、不正な正規表現を弾く。
-          # 規約: packages/data-configs/src/topics/README.md
+          # 規約: data/categories/topics.schema.json の description
           npm run validate:topics --workspace=@stats47/data-configs
         continue-on-error: false
 

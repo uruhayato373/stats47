@@ -30,8 +30,8 @@ export function classifyPrQualityPaths(inputPaths) {
       CODE_EXTENSION.test(path) &&
       !matchesAny(path, [/^docs\//, /^contents\//, /^\.claude\/(?:state|todo)\//])
   );
-  // data/themes は @stats47/data-configs が import するテーマ定義 (表示の SSOT) なので、data-configs の変更と同じ扱いにする
-  const themeDefinitions = paths.some((path) => /^data\/(?:themes|metrics|metric-sources)\//.test(path));
+  // data/themes・data/ads・data/categories・data/surveys/{master,analysis-units,editorial}・data/site/url-history・data/geo/{ksj,analyses,source-pages}・data/open-data は packages が import する定義 (テーマの表示・カテゴリとトピック・調査マスタ・家計の分析単位・調査ハブの本文・URL の転送と 410・国土数値情報の台帳と利用条件・Geo 分析と層と公開計画・原典ページ・公開データの提供元と県の統計ポータル) なので、packages の変更と同じ扱いにする
+  const themeDefinitions = paths.some((path) => /^data\/(?:themes|categories|ads|metrics|metric-sources|surveys\/(?:master|analysis-units|editorial)|site\/url-history|geo\/(?:ksj|analyses|source-pages)|open-data)\//.test(path));
   const packageSource = themeDefinitions || paths.some((path) => /^packages\/[^/]+\//.test(path));
   const webSource = paths.some((path) => /^apps\/web\//.test(path));
   const adminSource = paths.some((path) => /^apps\/admin\//.test(path) ||

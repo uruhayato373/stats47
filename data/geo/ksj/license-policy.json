@@ -1,0 +1,34 @@
+{
+  "policies": {
+    "cc-by-4.0": {
+      "sourcePublication": "public-r2-eligible",
+      "commercialUse": "allowed-with-attribution",
+      "publicStructuredOutputAllowed": true,
+      "attributionRequired": true
+    },
+    "cc-by-4.0-partial": {
+      "sourcePublication": "review-required",
+      "commercialUse": "manual-review",
+      "publicStructuredOutputAllowed": false,
+      "attributionRequired": true
+    },
+    "commercial-ok": {
+      "sourcePublication": "public-r2-eligible",
+      "commercialUse": "allowed-with-attribution",
+      "publicStructuredOutputAllowed": true,
+      "attributionRequired": true
+    },
+    "non-commercial": {
+      "sourcePublication": "local-only",
+      "commercialUse": "spatial-result-only",
+      "publicStructuredOutputAllowed": false,
+      "attributionRequired": true
+    }
+  },
+  "unassessed": {
+    "sourcePublication": "unassessed",
+    "commercialUse": "unassessed",
+    "publicStructuredOutputAllowed": false,
+    "attributionRequired": true
+  }
+}

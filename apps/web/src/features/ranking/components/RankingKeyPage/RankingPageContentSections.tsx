@@ -103,7 +103,7 @@ export function RankingPageContentSections({
             {sections.adRowFooter}
 
             {/* 関連ランキングと記事を出典の後の広告の段と PR の列の間に置き、広告の枠を隣り合わせにしない。
-                記事は記事カードの格子で、PR の列はページの最後 (テーマのページと同じ。広告の枠の台帳 config/ads/placements.json) */}
+                記事は記事カードの格子で、PR の列はページの最後 (テーマのページと同じ。広告の枠の台帳 ads.placements) */}
             {sections.relatedRankings}
             {sections.relatedArticles}
             {sections.nativeAffiliate}

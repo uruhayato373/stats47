@@ -20,7 +20,7 @@ const WORKSPACES = ["apps/admin", "apps/web"];
 
 const stemOf = (path) => basename(path).replace(/\.test\.[cm]?[jt]s$/, "").replace(/\.[^.]+$/, "");
 
-/** 変更したファイルと名前が重なる node --test のテストを選ぶ (config/domains.json → check-domains.test.cjs) */
+/** 変更したファイルと名前が重なる node --test のテストを選ぶ (data/business/domains.json → check-domains.test.cjs) */
 export function selectNodeTests(changed, tests) {
   const stems = [...new Set(changed.map(stemOf))].filter((stem) => stem.length >= MIN_STEM);
   return tests.filter((test) => {

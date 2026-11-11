@@ -15,7 +15,7 @@
 # ★公開 (--commit) を含む
 #   2026-08-13 のオーナー指示「32 冊すべてを公開までやり切る」を根拠に publish まで自動化していたが、
 #   8/16 に手動のみへ方針変更した。この行を無人実行に戻すときは規約 §8 を先に読むこと。
-#   対象は kdp-listings.json の status != listed の書籍だけで、それ以外には触れない。
+#   対象は kdp.listings の status != listed の書籍だけで、それ以外には触れない。
 #
 # 安全弁 (スクリプト側): account assert (knownAsin) / verify ゲート (read-back 全項目 PASS のみ公開) /
 #   連続失敗ブレーカ / プロファイル排他 (他の Chromium が使用中なら起動自体を拒否)

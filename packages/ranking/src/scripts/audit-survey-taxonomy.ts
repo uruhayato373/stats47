@@ -23,7 +23,7 @@ import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { canonicalSurveyHubKey } from '@stats47/data-configs/content/href';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
-import surveysMaster from '../data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 import {
   resolveBlogChartSurveyTaxonomy,
   resolveSurveyTaxonomy,

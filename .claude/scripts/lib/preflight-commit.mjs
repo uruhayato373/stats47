@@ -229,6 +229,12 @@ export const PR_GATES = [
     hint: "npm run build:registry --workspace=@stats47/data-configs",
   },
   {
+    name: "Category Keys",
+    why: "カテゴリマスタ (data/categories/categories.json) を変えると CategoryKey の型 (category-keys.generated.ts) が古くなる",
+    run: () => tryRun("npm", ["run", "build:category-keys", "--workspace=@stats47/data-configs", "--", "--check"]),
+    hint: "npm run build:category-keys --workspace=@stats47/data-configs",
+  },
+  {
     name: "Metric Config / Years",
     why: "category・unit・年の 4 桁正規化",
     run: async () => {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * kdp-publish.mjs — KDP 電子書籍を kdp-listings.json の内容から出品する Playwright オペレータ (単発)。
+ * kdp-publish.mjs — KDP 電子書籍を kdp.listings の内容から出品する Playwright オペレータ (単発)。
  * 安全弁 (account assert / draft-first / --commit gate / 偽成功を報告しない)。
  *
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --probe     # 出品フォームの構造を dump (セレクタ調整用・書き込みなし)
@@ -13,7 +13,7 @@
  *   - ensureDraft: verify で欠けた項目だけ埋める (details から全部やり直さない)
  *   - publishDraft: verify PASS → 公開 → **本棚 read-back** で確定
  * ★税務情報 (Tax interview)・銀行口座が未完了だと KDP は公開させない。これは人間が事前に完了させる。
- * ★KU (KDP Select 独占) 登録は kdp-listings.json の kuEnrolled=false を尊重 (当面 未登録=販売のみ)。
+ * ★KU (KDP Select 独占) 登録は kdp.listings の kuEnrolled=false を尊重 (当面 未登録=販売のみ)。
  */
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
@@ -41,7 +41,7 @@ if (!ID) { console.error("--id <K-S1-01> required"); process.exit(1); }
 
 const listings = readListings();
 const lst = listings[ID];
-if (!lst) { console.error(`ABORT: kdp-listings.json に "${ID}" がありません。明示版の入稿提案を作り、独立レビュー・実機確認・保全・承認後に対象IDの公開台帳を確定してください。`); process.exit(1); }
+if (!lst) { console.error(`ABORT: kdp.listings に "${ID}" がありません。明示版の入稿提案を作り、独立レビュー・実機確認・保全・承認後に対象IDの公開台帳を確定してください。`); process.exit(1); }
 if (UPDATE && lst.status !== "listed") { console.error("ABORT: --update は既刊 (status=listed) 専用です"); process.exit(1); }
 if (!UPDATE && lst.status === "listed" && !VERIFY && !PREFLIGHT && !PROBE) {
   console.error("ABORT: 既刊を修正する場合は --update を明示してください");

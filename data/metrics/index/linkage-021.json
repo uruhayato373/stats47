@@ -2492,6 +2492,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -2501,6 +2509,10 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -2569,6 +2581,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -2578,6 +2598,10 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -6069,6 +6093,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
@@ -6126,6 +6154,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
@@ -6175,10 +6207,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
@@ -6219,10 +6247,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "blog:gifu-food-culture",
           "kind": "blog"
@@ -6273,11 +6297,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -6342,11 +6366,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {

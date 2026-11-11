@@ -1,7 +1,7 @@
 ---
 name: manage-survey-portfolio
 domain: data
-description: 75 survey のポートフォリオを評価・更新する。surveys.json × 紐付け監査 × R2 all.json × survey-editorial.ts × GSC/GA4 snapshot を突合して data/surveys/portfolio.json を再構築し、編集ハブ化候補の選別・lifecycle 判定・実験の baseline/効果測定を管理する。survey-curator が実行。Use when user says "surveyポートフォリオ", "survey棚卸し", "survey評価", "manage-survey-portfolio".
+description: 75 survey のポートフォリオを評価・更新する。surveys.json × 紐付け監査 × R2 all.json × 調査ハブの本文の台帳 (`surveys.editorial`) × GSC/GA4 snapshot を突合して data/surveys/portfolio.json を再構築し、編集ハブ化候補の選別・lifecycle 判定・実験の baseline/効果測定を管理する。survey-curator が実行。Use when user says "surveyポートフォリオ", "survey棚卸し", "survey評価", "manage-survey-portfolio".
 allowed-tools: Read, Grep, Glob, Bash
 primary_agent: survey-curator
 ---
@@ -10,7 +10,7 @@ primary_agent: survey-curator
 
 survey ポートフォリオ (`data/surveys/`) の継続評価サイクルを回す。
 運用設計の正典: `.claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md`。
-schema・判定規律の正典: `data/surveys/README.md`。
+形: カタログの surveys.portfolio・surveys.experiments (Schema)。判定規律: validate-survey-portfolio.ts。
 
 > **役割分離 (`/audit-survey-linkage` と重複しない)**: **紐付け層** (未分類回収・辞書追記・orphan
 > 物理削除・config.surveyId 是正) は従来どおり `/audit-survey-linkage` が実行エンジン。本スキルは
@@ -21,7 +21,7 @@ schema・判定規律の正典: `data/surveys/README.md`。
 
 | mode | 内容 |
 |---|---|
-| `audit` (既定) | portfolio.json を surveys.json + 紐付け監査 + R2 all.json + survey-editorial.ts + レビュー文書と突合して再構築 → validator → 差分レポート |
+| `audit` (既定) | portfolio.json を surveys.json + 紐付け監査 + R2 all.json + 調査ハブの本文の台帳 (`surveys.editorial`) + レビュー文書と突合して再構築 → validator → 差分レポート |
 | `evaluate` | lifecycle / editorial 判定の見直し (56d 実測ベース)。判定変更は根拠つきで `--set` 経由 |
 | `experiment` | 実験の登録 (baseline 必須・`--add-experiment`) / 期日到達分の d7/d28/d56 判定 (`evaluate-survey-experiments.mjs`) |
 | `handoff` | 改善候補を improvement-triage へ引き渡し (agent 定義 §引き渡し形式) |
@@ -53,7 +53,7 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <ver
    npx tsx .claude/scripts/surveys/build-survey-portfolio.ts
    # 内部で audit-survey-linkage.ts --json を実行 (itemCount/orphan は監査実測値の転記) +
    # R2 app/survey/all.json fetch (activeItemCount / r2-drift 検知) +
-   # survey-editorial.ts import (editorialContentExists / readerQuestionCount) +
+   # 調査ハブの本文の台帳 (`surveys.editorial`) import (editorialContentExists / readerQuestionCount) +
    # reference/reviews/YYYY-MM-DD-survey-<surveyId>.md 対応付け (lastReviewedAt / evidenceRefs)
    ```
 2. **実測集計**: `npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts` — GSC / GA4 pages.csv
@@ -111,4 +111,4 @@ npx vitest run apps/web/src/features/survey/survey-editorial.test.ts --root apps
 - 紐付けの別ロジック実装 (itemCount は audit-survey-linkage の実測値を転記)
 - 75 survey の一括 AI 長文化 / 未分類の受け皿となる擬似 survey の新設
 - 推測値の保存 (取れない値は insufficient-data / not-instrumented / measured-low)
-- surveys.json / survey-editorial.ts への計測値の書き込み
+- surveys.json / 調査ハブの本文の台帳 (`surveys.editorial`) への計測値の書き込み

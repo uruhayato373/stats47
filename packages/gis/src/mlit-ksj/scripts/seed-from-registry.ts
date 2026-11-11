@@ -1,11 +1,11 @@
 #!/usr/bin/env tsx
 /**
- * git TS SSOT (datasets.ts) → 使い捨て SQLite gis_datasets を決定的に再構築する seed。
+ * 台帳 geo.ksj-datasets (読み込み口 datasets.ts) → 使い捨て SQLite gis_datasets を決定的に再構築する seed。
  *
  * 完全DBレス: 登録済み (status='registered') データセットのメタ + ranking 定義の SSOT は
- * `packages/gis/src/mlit-ksj/datasets.ts` (git TS)。本 seed はそれを使い捨てローカル SQLite
+ * 台帳 `geo.ksj-datasets`。本 seed はそれを使い捨てローカル SQLite
  * (`packages/database/.data/stats47.sqlite` = 再生成可能なビルドキャッシュ) に UPSERT する。
- * これにより SQLite を消しても git TS から完全に再生成できる (旧「手動 INSERT」を廃止)。
+ * これにより SQLite を消しても台帳から完全に再生成できる (旧「手動 INSERT」を廃止)。
  *
  * 挙動 (冪等):
  *   - GIS_DATASETS の各エントリを INSERT (新規) または UPDATE (既存)。

@@ -7,7 +7,7 @@
  * 既存値を保持する (blog remediation-queue と同じ upsert 思想)。
  * 意味項目の変更も本スクリプトの --set 経由で行う (portfolio.json の手編集禁止)。
  *
- * schema・判定規律の正典: data/themes/README.md
+ * 形の正典: 台帳 themes.portfolio の Schema (config/schema/themes.portfolio.schema.json)。判定規律: validate-theme-state.mjs
  * 運用設計: .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md
  *
  * Usage:

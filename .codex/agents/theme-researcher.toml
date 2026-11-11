@@ -38,7 +38,7 @@ developer_instructions = '''
 
 - **書き込み可**: `.claude/todo/backlog.md` (検証済み候補行の追加)、
   NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時)、
-  公式ダッシュボード研究カタログ `reference/public-dashboard-catalog.json` (公式一次資料で差分確認した時) のみ
+  公式ダッシュボード研究カタログ 台帳 `themes.public-dashboards` (公式一次資料で差分確認した時) のみ
 - **書き込み禁止**: カタログ JSON (`data/themes/catalogs/`)・IndicatorSet・page-components JSON・
   metric config。これらは採択後に theme-designer / theme-component-builder / data-ingester が編集する
 - 調査対象 (既存カタログ・競合ページ・白書) は読むだけ
@@ -89,7 +89,7 @@ Stage 3: 統合 — 実在確認済み指標を backlog.md、論点候補を the
 statsDataId、必要なcdCat、都道府県粒度、年次、既存非重複を一次情報で解決できない候補は追加しない。不採用候補と調査経緯はバックログへ蓄積せず、必要ならレビューまたはGit履歴へ残す。
 
 論点レンズ候補は次の列で呼び出し元へ返す。NotebookLM の回答だけでは `採用推奨` にせず、公式 URL と
-内部 route を確認する。候補の永続化はせず、採択時に theme-designer が `evidence-lenses.ts` と
+内部 route を確認する。候補の永続化はせず、採択時に theme-designer が 台帳 `themes.evidence-lenses` と
 `ThemeCatalog.evidenceTopics` へ書く。
 
 ```markdown

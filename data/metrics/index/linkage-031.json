@@ -2398,6 +2398,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -2407,10 +2411,6 @@
         },
         {
           "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2483,6 +2483,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -2492,10 +2496,6 @@
         },
         {
           "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
@@ -9797,11 +9797,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
         {
@@ -9854,11 +9866,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
         {

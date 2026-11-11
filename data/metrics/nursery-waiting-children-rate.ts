@@ -61,7 +61,7 @@ export const nurseryWaitingChildrenRate: MetricConfig = {
           "npx tsx packages/data-configs/scripts/ingest-childcare-waiting-rate.ts --dry-run [--url <新年度のxlsx直リンク> --year <年>]（--dry-run を外すと .local/r2/app/stats/nursery-waiting-children-rate/cities.json へ書く）",
       },
     },
-    // 調査の紐付け辞書 (packages/data-configs/src/ssds/displayname-to-survey.ts) と完全一致させる
+    // 調査の紐付け辞書 (カタログの surveys.source-names の displayNameToSurvey) と完全一致させる
     displayName: "こども家庭庁「保育所等関連状況取りまとめ」",
     url: "https://www.cfa.go.jp/policies/hoiku/torimatome/r7/",
   },

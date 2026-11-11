@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * 既刊の紹介文とキーワードだけを KDP へ反映する。題名・カテゴリ・原稿・表紙・価格には触らない。
- * 値は台帳 (config/kdp-listings.json)。原稿 data/products/kdp-listing-copy.json の approved だけを対象にし、
+ * 値は台帳 (data/products/kdp/listings.json)。原稿 data/products/kdp-listing-copy.json の approved だけを対象にし、
  * 提出すると KDP は「変更事項のレビュー中」になり、その間は詳細画面が開けない (2026-11-06 実測)。
  * 提出の受理は本棚の表示で submitted とし、レビュー後に --verify で画面を読み直して一致したら reflected にする。
  *

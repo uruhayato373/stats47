@@ -1,3 +1,4 @@
+import data from '../../../../data/geo/ksj/license-policy.json';
 import type { KsjLicense } from './types';
 
 export type KsjSourcePublicationPolicy =
@@ -21,6 +22,7 @@ export interface KsjLicensePolicy {
 
 /**
  * KSJの利用条件を、元データ公開と商用成果物の2軸へ決定的に展開する。
+ * 区分ごとの判定表の正本は台帳 `geo.ksj-license-policy` (data/geo/ksj/license-policy.json)。呼ぶたびに写しを返す。
  *
  * `non-commercial`でも、旧約款は「GISによる空間演算結果（データベースでないもの）」を
  * 出典・加工者表示付きで利用できるとしている。ただし公開JSON/CSVや元TopoJSONはその例外に
@@ -29,37 +31,9 @@ export interface KsjLicensePolicy {
 export function getKsjLicensePolicy(
   license: KsjLicense | null | undefined
 ): KsjLicensePolicy {
-  switch (license) {
-    case 'cc-by-4.0':
-    case 'commercial-ok':
-      return {
-        sourcePublication: 'public-r2-eligible',
-        commercialUse: 'allowed-with-attribution',
-        publicStructuredOutputAllowed: true,
-        attributionRequired: true,
-      };
-    case 'cc-by-4.0-partial':
-      return {
-        sourcePublication: 'review-required',
-        commercialUse: 'manual-review',
-        publicStructuredOutputAllowed: false,
-        attributionRequired: true,
-      };
-    case 'non-commercial':
-      return {
-        sourcePublication: 'local-only',
-        commercialUse: 'spatial-result-only',
-        publicStructuredOutputAllowed: false,
-        attributionRequired: true,
-      };
-    default:
-      return {
-        sourcePublication: 'unassessed',
-        commercialUse: 'unassessed',
-        publicStructuredOutputAllowed: false,
-        attributionRequired: true,
-      };
-  }
+  const policies = data.policies as Record<string, KsjLicensePolicy>;
+  const policy = license && Object.prototype.hasOwnProperty.call(policies, license) ? policies[license] : data.unassessed;
+  return { ...policy } as KsjLicensePolicy;
 }
 
 export function assertKsjPublicStructuredOutputAllowed(input: {

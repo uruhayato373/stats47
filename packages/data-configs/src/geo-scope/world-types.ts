@@ -1,3 +1,6 @@
+import evaluationsData from "../../../../data/open-data/world/provider-evaluations.json";
+import catalogsData from "../../../../data/open-data/world/catalogs.json";
+
 /**
  * `/world` (国際比較) の型契約 (GEO-SCOPE-SEPARATION-01 WP7)。
  *
@@ -48,45 +51,14 @@ export interface WorldDataProviderEvaluation {
 }
 
 /**
- * WP7 の read-only 机上評価。実データ未取得のため `hasJapanRow` 等の実測フィールドは
+ * WP7 の read-only 机上評価。記録の正本は台帳 `open-data.world-provider-evaluations` (data/open-data/world/provider-evaluations.json)。
+ * 実データ未取得のため `hasJapanRow` 等の実測フィールドは
  * 持たない (推測しない)。各 provider の実データ取得可否は、実装着手時に metric ごとの
  * getStatsData 相当の実 fetch で確認する (WP0/WP6 と同じ「行の存在だけでなく値レベルで
  * 確認する」規律を踏襲する)。
  */
-export const WORLD_DATA_PROVIDER_EVALUATIONS: readonly WorldDataProviderEvaluation[] = [
-  {
-    provider: "world-bank",
-    displayName: "World Bank Open Data (World Development Indicators)",
-    license: "CC BY 4.0 (商用利用可・要出典表示)",
-    sourceUrl: "https://data.worldbank.org/summary-terms-of-use",
-    accessedAt: "2026-08-20",
-    notes:
-      "3候補中最も許諾が明確 (CC BY 4.0)。World Development Indicators は日本を含む全加盟国を" +
-      "収録。API は無料・レート制限の明記は見当たらないが常識的な利用が前提。第一候補。",
-  },
-  {
-    provider: "oecd",
-    displayName: "OECD Data Explorer",
-    license: "OECD Terms & Conditions に基づく無料 API (再配布条件は要個別確認)",
-    sourceUrl: "https://www.oecd.org/en/about/terms-conditions.html",
-    accessedAt: "2026-08-20",
-    notes:
-      "SDMX ベースの構造化 API (e-Stat と親和性が高い)。60 件/時間のレート制限あり・" +
-      "VPN/匿名トラフィック不可。日本は OECD 加盟国なので収録される可能性が高いが、" +
-      "指標ごとの日本行の有無は個別確認が要る。OECD 加盟国限定のため世界全体比較には不向き。",
-  },
-  {
-    provider: "un-data",
-    displayName: "UNdata (UN Statistics Division)",
-    license: "無料・「UNdata を出典として引用すること」が条件。CC 等の明示ライセンスではない",
-    sourceUrl: "https://data.un.org/Host.aspx?Content=UNdataUse",
-    accessedAt: "2026-08-20",
-    notes:
-      "3候補中カバレッジは最も広い可能性があるが、ライセンス文言が CC BY のような明確な" +
-      "商用利用許諾ではなく「正確性を保証しない」旨の免責が強い。採用する場合は利用規約の" +
-      "再読と、商用サイトでの利用可否の確認が別途要る。",
-  },
-];
+export const WORLD_DATA_PROVIDER_EVALUATIONS: readonly WorldDataProviderEvaluation[] =
+  evaluationsData.evaluations as WorldDataProviderEvaluation[];
 
 export interface WorldCatalogMetric {
   metricKey: string;
@@ -103,12 +75,13 @@ export interface WorldCatalogTheme {
 }
 
 /**
+ * 記録の正本は台帳 `open-data.world-catalogs` (data/open-data/world/catalogs.json)。
  * ★Phase 1 では意図的に空。ここへ 1 件でも追加する前に、対象 metric の日本行を
  * 実 fetch で値レベル確認すること (推測で埋めない。WP0/WP6 と同じ規律)。
  * `/world` route・middleware・sitemap は、このカタログが非空になってから WP8 以降で追加する
  * (空カタログの route を先に公開すると thin content になる)。
  */
-export const WORLD_CATALOGS: Record<string, WorldCatalogTheme> = {};
+export const WORLD_CATALOGS: Record<string, WorldCatalogTheme> = catalogsData.themes;
 
 export function getWorldCatalogTheme(themeSlug: string): WorldCatalogTheme | undefined {
   return WORLD_CATALOGS[themeSlug];

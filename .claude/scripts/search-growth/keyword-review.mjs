@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import ts from 'typescript';
 import { fileURLToPath } from 'node:url';
 import { hash, METHODS } from './lib/keyword-cycle.mjs';
-import { editableFile, readJson, writeJson } from './keyword-cycle.mjs';
+import { editableFile, readJson, writeJson, surveyEntry } from './keyword-cycle.mjs';
 import { validatePageEvidence } from './keyword-page.mjs';
 import { SITE_ORIGIN } from '../lib/site-config.cjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
@@ -49,13 +49,29 @@ export function validateReview(entries, selection, targetEvidence = null) {
   } else assert.equal(report.patches.length, 0, 'unapproved proposals cannot edit');
   return report;
 }
+function assertPatchAllowed(patch) {
+  assert.ok(COPY_PROPERTIES.has(patch.property), 'only existing editorial text can change');
+  assert.ok(typeof patch.oldText === 'string' && meaningful(patch.newText) && patch.newText.length <= 900);
+  assert.notEqual(patch.oldText, patch.newText);
+  assert.ok(!/<\/?[a-z]|noindex|javascript:|\brobots\b/i.test(patch.newText), 'markup/indexing changes require approval');
+}
+/** 調査ハブの本文の台帳 (JSON)。その調査の記録の中の、既存の文字列 1 か所だけを置き換える */
+function applySurveyEditorialPatches(source, patches, key) {
+  const doc = JSON.parse(source); surveyEntry(source, key);
+  const entry = doc.entries.find(e => e.surveyId === key);
+  for (const patch of patches) {
+    assertPatchAllowed(patch);
+    const holders = [entry, ...(entry.readerQuestions ?? [])].filter(h => h[patch.property] === patch.oldText);
+    assert.equal(holders.length, 1, 'patch must address one existing string in the selected page');
+    holders[0][patch.property] = patch.newText;
+  }
+  return JSON.stringify(doc, null, 2) + String.fromCharCode(10);
+}
 export function applyTextPatches(source, patches, targetPath) {
+  if (targetPath.startsWith('/survey/') && source.trimStart().startsWith('{')) return applySurveyEditorialPatches(source, patches, targetPath.split('/').at(-1));
   let output = source;
   for (const patch of patches) {
-    assert.ok(COPY_PROPERTIES.has(patch.property), 'only existing editorial text can change');
-    assert.ok(typeof patch.oldText === 'string' && meaningful(patch.newText) && patch.newText.length <= 900);
-    assert.notEqual(patch.oldText, patch.newText);
-    assert.ok(!/<\/?[a-z]|noindex|javascript:|\brobots\b/i.test(patch.newText), 'markup/indexing changes require approval');
+    assertPatchAllowed(patch);
     const ast = ts.createSourceFile('page.ts', output, ts.ScriptTarget.Latest, true);
     const matches = [];
     const visit = node => {

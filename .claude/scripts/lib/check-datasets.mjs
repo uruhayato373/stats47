@@ -13,7 +13,12 @@
  *   - 画像が IMAGE_ROOTS の外にある (素材の原本は assets/、配信用はアプリの public/ へ)
  *   - コード (ts・tsx・mjs・cjs・js) が台帳の data/ のパスを直書きしている (datasetPath(id) / datasetDir(id) で引く)。
  *     テスト・コメント行・import 行・DATA_LITERAL_EXEMPT に理由を書いたファイルは除く
- *   - kind が config / ledger で path が .json の行に schema (JSON Schema のパス) が無い / schema のファイルが無い /
+ *   - 種類と置き場が合わない (2026-11-10。マスタ・台帳 = DB は data/、システムの設定は config/、形の契約は *.schema.json)。
+ *     config/ を指す行が SYSTEM_CONFIG にも CONFIG_MOVE_PENDING (移行待ち・縮小専用) にも無い
+ *   - packages/・apps/ の JSON が OUTSIDE_DATA (アプリの部品・生成物・移行待ちの台帳の一覧) に無い / 一覧の行がファイルに
+ *     当たらない (移したのに行が残っている) / REGISTRIES が一覧に無い data/ の外の正本を読んでいる
+ *   - data/ の中に README がある (DATA_README_PENDING に載せた移行待ちを除く。形の契約は JSON Schema へ)
+ *   - kind が master / ledger / config で path が .json の行に schema (JSON Schema のパス) が無い / schema のファイルが無い /
  *     当たるファイルが schema に合わない (SCHEMA_REQUIRED_KINDS。台帳の正本が形の契約を持たないと、書き手の差分で黙って壊れる)。
  *     それ以外の種類でも schema を宣言した行は同じく検証する (判断に使う state・series の記録。2026-10-20)
  *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
@@ -25,6 +30,7 @@
  *   npm run check-datasets             # 検査 (error があれば exit 1)
  *   npm run check-datasets -- --moves  # 移行対象の行も一覧する
  *   npm run check-datasets -- --refs   # warn の参照の違反を全件出す
+ *   npm run check-datasets -- --er     # テーブル (マスタ・台帳)・外部キー・統合の候補・data/ の外に残る台帳を出す (ER は文書にしない)
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
@@ -33,7 +39,10 @@ import Ajv from "ajv";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, REGISTRIES, REGISTRY_REFS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
+import {
+  AGENT_STATE, CONFIG_MOVE_PENDING, DATA_README_PENDING, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, OUTSIDE_DATA,
+  REGISTRIES, REGISTRY_REFS, RETIRED, SLOTS, SYSTEM_CONFIG, TARGETS,
+} from "../../../config/datasets.mjs";
 import { DOMAINS } from "../../../config/paths.mjs";
 import { addCommonSchema } from "./dataset-shape.mjs";
 import { RETENTION_POLICIES } from "./prune-state-snapshots.mjs";
@@ -63,8 +72,12 @@ export function fixedPrefix(path) {
 
 const AGENT_STATE_DIR = ".claude/state/";
 
-/** 人やスクリプトが判断して書く台帳・設定は、形の契約 (JSON Schema) を必ず持つ */
-export const SCHEMA_REQUIRED_KINDS = new Set(["config", "ledger"]);
+/** 人やスクリプトが判断して書くマスタ・台帳・設定は、形の契約 (JSON Schema) を必ず持つ */
+export const SCHEMA_REQUIRED_KINDS = new Set(["master", "ledger", "config"]);
+/** DB にあたる種類 (RDB のテーブル)。data/ に置く */
+export const DB_KINDS = new Set(["master", "ledger"]);
+const CONFIG_DIR = "config/";
+const CONFIG_KIND_DIRS = ["config/", ".claude/config/"];
 const SCHEMA_FILE = /\.schema\.json$/;
 
 /** schema が要る行か (JSON Schema 自身は除く) */
@@ -84,7 +97,7 @@ export function checkSchemas({ datasets, files, readJson, exists }) {
     // config / ledger は schema が必須。それ以外の種類も、schema を宣言した行は当たるファイルを検証する
     // (2026-10-20 RECORD-SCHEMA-CONTRACT-01。セッションが判断に使う state・series の記録)
     if (!ds.schema) {
-      if (needsSchema(ds)) errors.push(`${ds.id}: config / ledger の JSON に schema (JSON Schema のパス) が無い (${ds.path})`);
+      if (needsSchema(ds)) errors.push(`${ds.id}: master / ledger / config の JSON に schema (JSON Schema のパス) が無い (${ds.path})`);
       continue;
     }
     if (!exists(ds.schema)) {
@@ -337,6 +350,119 @@ export function checkRefs({ datasets, files, readJson, readText, registries = {}
   return { errors, warnings };
 }
 
+/**
+ * 種類と置き場の一致 (DB は data/、システムの設定は config/)。
+ * @param {any[]} datasets
+ * @param {{ systemConfig: Record<string, string>, movePending: Record<string, string> }} lists
+ */
+export function checkPlacement(datasets, { systemConfig, movePending }) {
+  const errors = [];
+  const ids = new Set(datasets.map((d) => d.id));
+  for (const ds of datasets) {
+    const at = fixedPrefix(ds.path);
+    const inConfig = at.startsWith(CONFIG_DIR);
+    const isSchemaFile = SCHEMA_FILE.test(ds.path);
+    if (ds.kind === "schema" && !isSchemaFile) errors.push(`${ds.id}: 種類 schema の行は *.schema.json を指す (${ds.path})`);
+    if (isSchemaFile && ds.kind !== "schema" && ds.kind !== "state") errors.push(`${ds.id}: *.schema.json の行の種類は schema (生成物なら state) にする (いまは ${ds.kind})`);
+    if (ds.kind === "config" && !CONFIG_KIND_DIRS.some((dir) => at.startsWith(dir))) {
+      errors.push(`${ds.id}: 種類 config (システムの設定) は ${CONFIG_KIND_DIRS.join(" か ")} に置く。マスタ・台帳なら種類を master / ledger にする (${ds.path})`);
+    }
+    if (DB_KINDS.has(ds.kind) && !at.startsWith("data/") && !at.startsWith(AGENT_STATE_DIR) && !movePending[ds.id]) {
+      errors.push(`${ds.id}: マスタ・台帳は data/ に置く (${ds.path})`);
+    }
+    if (inConfig && !systemConfig[ds.id] && !movePending[ds.id]) {
+      errors.push(`${ds.id}: ${CONFIG_DIR} はシステムの設定だけを置く (マスタ・台帳は data/ へ。設定なら SYSTEM_CONFIG に理由付きで足す)`);
+    }
+    if (systemConfig[ds.id] && (!inConfig || DB_KINDS.has(ds.kind))) {
+      errors.push(`${ds.id}: SYSTEM_CONFIG に載る行は ${CONFIG_DIR} にあるシステムの設定 (種類 config / schema) だけ (${ds.kind} ${ds.path})`);
+    }
+    if (movePending[ds.id] && !inConfig) errors.push(`${ds.id}: data/ へ移したら CONFIG_MOVE_PENDING から消す`);
+  }
+  for (const [name, list] of [["SYSTEM_CONFIG", systemConfig], ["CONFIG_MOVE_PENDING", movePending]]) {
+    for (const id of Object.keys(list)) if (!ids.has(id)) errors.push(`${name} に台帳に無い id: ${id}`);
+  }
+  return errors;
+}
+
+/** packages/・apps/ の JSON のうち、台帳かどうかを問わないもの (テスト・生成物・ツールの設定) */
+const OUTSIDE_JSON = /^(?:packages|apps)\/.+\.json$/;
+const OUTSIDE_JSON_SKIP = /(?:^|\/)(?:package|package-lock|tsconfig[^/]*|components)\.json$|\.generated\.json$|\/__tests__\/|\/tests?\/|\/fixtures?\/|\/__fixtures__\//;
+
+/**
+ * packages/・apps/ に置いてよい JSON と、まだそこに残っているマスタ・台帳の一覧 (OUTSIDE_DATA) の検査。
+ *   - packages/・apps/ の JSON がどの行にも当たらない (新しい台帳を data/ の外に作った)
+ *   - 行がどのファイルにも当たらない (移したのに行が残っている)
+ *   - REGISTRIES が読む data/ の外のファイルが行に載っていない
+ * @param {{ entries: { path: string, why: string, phase?: number }[], files: string[], registries?: Record<string, any> }} input
+ */
+export function checkOutsideData({ entries, files, registries = {} }) {
+  const errors = [];
+  const covers = (entry, file) => (entry.path.endsWith("/") ? file.startsWith(entry.path) : file === entry.path);
+  for (const entry of entries) {
+    if (!["app", "generated", "pending"].includes(entry.why)) errors.push(`OUTSIDE_DATA: why は app / generated / pending (${entry.path})`);
+    if (entry.why === "pending" && !Number.isInteger(entry.phase)) errors.push(`OUTSIDE_DATA: pending の行は移す段 (phase) を書く (${entry.path})`);
+    if (!files.some((f) => covers(entry, f))) errors.push(`OUTSIDE_DATA: どのファイルにも当たらない (移したら行を消す): ${entry.path}`);
+  }
+  for (const file of files) {
+    if (OUTSIDE_JSON.test(file) && !OUTSIDE_JSON_SKIP.test(file) && !entries.some((e) => covers(e, file))) {
+      errors.push(`data/ の外の JSON: ${file} (マスタ・台帳は data/ に置く。アプリの部品・生成物なら OUTSIDE_DATA に理由付きで足す)`);
+    }
+  }
+  for (const [name, registry] of Object.entries(registries)) {
+    for (const file of registry.files ?? []) {
+      if (!file.startsWith("data/") && !entries.some((e) => covers(e, file))) {
+        errors.push(`REGISTRIES.${name}: data/ の外の正本 ${file} を読んでいる (data/ へ移して台帳の参照にする。移すまで OUTSIDE_DATA に pending で載せる)`);
+      }
+    }
+  }
+  return errors;
+}
+
+/** data/ はデータの置き場。README は置かない (説明はカタログの説明欄と Schema の description に書く) */
+export function checkDataReadmes({ files, pending }) {
+  const errors = [];
+  const readmes = files.filter((f) => /^data\/(?:.+\/)?README\.md$/i.test(f));
+  for (const file of readmes) if (!pending[file]) errors.push(`data/ の中の README: ${file} (形の契約は JSON Schema へ、説明はカタログの説明欄へ移して消す)`);
+  for (const file of Object.keys(pending)) if (!readmes.includes(file)) errors.push(`DATA_README_PENDING に無いファイル: ${file} (消したら行も消す)`);
+  return errors;
+}
+
+/**
+ * カタログの refs から ER (テーブルと外部キー) を組み立てる。値は読むだけで検査はしない (検査は checkRefs)。
+ * 統合の候補: 写しを持つ参照 (copies)、参照元の値が重複しない参照 (参照元の各記録が参照先の 1 記録に対応 = 列にできる)。
+ */
+export function buildEr({ datasets, files, readJson, registryRefs = [] }) {
+  const byId = new Map(datasets.map((d) => [d.id, d]));
+  const filesOf = (ds) => {
+    const re = patternToRegExp(ds.path);
+    return files.filter((f) => re.test(f));
+  };
+  const tables = datasets.filter((d) => DB_KINDS.has(d.kind)).map((d) => ({ id: d.id, kind: d.kind, path: d.path }));
+  const edges = [];
+  const candidates = [];
+  for (const ds of datasets) {
+    for (const ref of ds.refs ?? []) {
+      edges.push({ from: ds.id, field: ref.field, to: ref.to, key: ref.key ?? null, copies: ref.copies ?? [], severity: ref.severity ?? "error" });
+      if (ref.copies?.length) candidates.push({ kind: "写しを持つ", from: ds.id, to: ref.to, detail: `${ref.field} が ${ref.copies.join("・")} を写している` });
+      // 同じ台帳の中の参照 (注記のキー → 記録のキーなど) は、もとから 1 つのテーブルなので統合の候補にしない
+      if (!byId.has(ref.to) || ref.to === ds.id || ref.where || ref.unless) continue;
+      const values = [];
+      let records = 0;
+      for (const file of filesOf(ds)) {
+        for (const { value } of selectPath(readJson(file), ref.field)) {
+          records += 1;
+          values.push(...refValues(value, ref.parse));
+        }
+      }
+      if (values.length > 1 && values.length === records && new Set(values).size === values.length) {
+        candidates.push({ kind: "1 対 1", from: ds.id, to: ref.to, detail: `${ref.field} の ${values.length} 件が重複なく ${ref.to} を指す (参照先の列にできる)` });
+      }
+    }
+  }
+  for (const ref of registryRefs) edges.push({ from: ref.from, field: "(ID)", to: ref.to, key: ref.key ?? null, copies: [], severity: ref.severity ?? "error" });
+  return { tables, edges, candidates };
+}
+
 export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention, imageRoots = [], imageExt = null, agentState = null }) {
   const errors = [];
   if (imageExt) {
@@ -519,6 +645,21 @@ function contentFiles() {
   return [...trackedFiles(), ...untracked];
 }
 
+/** ER を人が読める形で出す (テーブル・外部キー・統合の候補・data/ の外に残る台帳) */
+function printEr({ tables, edges, candidates }) {
+  console.log(`# テーブル (マスタ ${tables.filter((t) => t.kind === "master").length}・台帳 ${tables.filter((t) => t.kind === "ledger").length})`);
+  for (const t of tables) console.log(`  ${t.kind.padEnd(6)} ${t.id}  ${t.path}`);
+  console.log(`\n# 外部キー (${edges.length})`);
+  for (const e of edges) console.log(`  ${e.from}.${e.field} → ${e.to}${e.key ? `.${e.key}` : ""}${e.severity === "warn" ? " (warn)" : ""}`);
+  console.log(`\n# 統合の候補 (${candidates.length})`);
+  for (const c of candidates) console.log(`  [${c.kind}] ${c.from} → ${c.to}: ${c.detail}`);
+  const pending = OUTSIDE_DATA.filter((e) => e.why === "pending");
+  const byPhase = new Map();
+  for (const e of pending) byPhase.set(e.phase, [...(byPhase.get(e.phase) ?? []), e.path]);
+  console.log(`\n# data/ の外に残るマスタ・台帳 (${pending.length}。config/ に ${Object.keys(CONFIG_MOVE_PENDING).length})`);
+  for (const [phase, paths] of [...byPhase].sort((a, b) => a[0] - b[0])) console.log(`  段 ${phase}: ${paths.length} 件`);
+}
+
 function main() {
   const domainIds = new Set(JSON.parse(readFileSync(resolve(ROOT, DOMAINS), "utf8")).domains.map((x) => x.id));
   const result = checkDatasets({
@@ -534,7 +675,15 @@ function main() {
     imageExt: IMAGE_EXT,
     agentState: AGENT_STATE,
   });
+  const tracked = trackedFiles();
+  result.errors.push(...checkPlacement(DATASETS, { systemConfig: SYSTEM_CONFIG, movePending: CONFIG_MOVE_PENDING }));
+  result.errors.push(...checkOutsideData({ entries: OUTSIDE_DATA, files: tracked, registries: REGISTRIES }));
+  result.errors.push(...checkDataReadmes({ files: tracked, pending: DATA_README_PENDING }));
   const contents = contentFiles();
+  if (process.argv.includes("--er")) {
+    printEr(buildEr({ datasets: DATASETS, files: contents, readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")), registryRefs: REGISTRY_REFS }));
+    return;
+  }
   result.errors.push(...checkSchemas({
     datasets: DATASETS,
     files: contents,

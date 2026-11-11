@@ -1,56 +1,11 @@
 # 都道府県公式統計カタログ
 
 47都道府県が公式公開する統計ポータル、可視化ダッシュボード、
-オープンデータ、統計年鑑をgit TSで管理する内部調査カタログ。
+オープンデータ、統計年鑑を台帳 `open-data.prefecture-statistics` で管理する内部調査カタログ。
 複数自治体で反復して掲載される指標を、stats47のランキング・テーマ拡充候補へつなぐ。
 
 自治体での掲載は需要シグナルの一つだが、自動採用の根拠にはしない。
 複数県での反復、掲載位置、更新性、比較機能、47都道府県データの実在を合わせて判断する。
-
-## 正典と責務
-
-| 対象 | 正典 |
-|---|---|
-| 公式リンクと分類 | `index.ts` |
-| 型・列挙値 | `types.ts` |
-| 構造検証 | `packages/data-configs/scripts/validate-prefecture-statistics-catalog.ts` |
-| 到達性検証 | `packages/data-configs/scripts/check-prefecture-statistics-links.ts` |
-| 未採用の指標候補 | `.claude/todo/backlog.md` |
-| 採用済みテーマ構成 | `packages/data-configs/src/theme-catalog/*.ts` |
-| 観測値 | R2 snapshot |
-
-カタログはauthored referenceとしてgit TSをSSOTにする。永続D1、手編集JSON、
-新しいリンク管理DBは作らない。現段階では内部調査用であり、本番ページは追加しない。
-
-## 現在のカバレッジ
-
-- 都道府県: JIS X 0401順で47/47
-- 初期リソース: 各県の`statistics-portal`を1件、計47件
-- 初期topic: `general`
-- 初期確認日: 2026-07-18
-- 発見元: 一橋大学経済研究所附属社会科学統計情報研究センター
-  「地方統計へのリンク」
-
-分野別ダッシュボード、オープンデータ、統計年鑑、政策ダッシュボードは
-同じ県の`resources`へ追加する。未確認URLを推測で登録しない。
-
-## データモデル
-
-1都道府県を`PrefectureStatisticsCatalogEntry`、1公式資料を
-`PrefectureStatisticsResource`で表す。1県に複数resourceを登録できる。
-
-resourceには次を必須とする。
-
-- 安定ID `<都道府県コード>-<用途>`
-- 公式名称または内容が分かるtitle
-- HTTPSのURL
-- `types.ts`で許可されたtype / topics
-- 発行主体
-- 公式性を確認した発見元URL
-- 実際に確認した`lastVerifiedAt`
-
-resource typeとtopicの追加・変更は`types.ts`だけで行い、呼び出し元へ文字列を
-直書きしない。
 
 ## 公式性ゲート
 

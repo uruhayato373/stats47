@@ -1,0 +1,94 @@
+{
+  "slugs": [
+    {
+      "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "since": "2026-11-06",
+      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み"
+    },
+    {
+      "slug": "road-length-per-km2-vs-residential-building-starts",
+      "since": "2026-11-06",
+      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み"
+    },
+    {
+      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
+      "since": "2026-11-06",
+      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み"
+    },
+    {
+      "slug": "airport-count-vs-wind-power-plant-count-facility",
+      "since": "2026-09-06",
+      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可"
+    },
+    {
+      "slug": "dam-count-prefecture-gap",
+      "since": "2026-09-06",
+      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可"
+    },
+    {
+      "slug": "dam-count-vs-road-expressway-length",
+      "since": "2026-09-06",
+      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可"
+    },
+    {
+      "slug": "BarChartRace",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "cc-estat-12-industry-treemap",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "energy-production-regional-gap",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "fiscal-strength-index-gap",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "food-expenditure-ratio",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "job-salary-39-comparison",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "local-allocation-tax-structure",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "migration-destination-ranking-factors",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "population-decline-regional-gap",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "population-density-land-use-structure",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "population-choropleth",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    },
+    {
+      "slug": "wage-gap-factors-2026",
+      "since": "2026-08-24",
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+    }
+  ]
+}

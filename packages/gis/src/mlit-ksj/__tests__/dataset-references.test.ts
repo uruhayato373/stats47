@@ -2,8 +2,6 @@ import { describe, expect, it } from 'vitest';
 
 import { GEO_LAYERS } from '../../../../data-configs/src/business-plan/geo-layers';
 import { GEO_SOURCE_PAGES } from '../../../../data-configs/src/business-plan/geo-source-pages';
-import { GEO_SOURCE_POLICY_PAGES } from '../../../../data-configs/src/business-plan/geo-source-policy-pages';
-import { GEO_SOURCE_SERVICE_PAGES } from '../../../../data-configs/src/business-plan/geo-source-service-pages';
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
 import { INFRA_PUBLICATION_REQUIRED_SCOPES } from '../../infra-history/types';
 import { INFRA_NETWORKS, infraNetworkPageUrl, infraNetworkTerms, isInfraNetworkAdFree } from '../../infra-history/networks';
@@ -100,8 +98,6 @@ describe('GIS 台帳を参照する表 (子表)', () => {
   it('GIS 一覧と単体 GIS ページは登録データだけを参照する', () => {
     expect(unknownIds(GEO_LAYERS.map((layer) => layer.dataId))).toEqual([]);
     expect(unknownIds(GEO_SOURCE_PAGES.map((page) => page.dataId))).toEqual([]);
-    expect(unknownIds(GEO_SOURCE_POLICY_PAGES.map((page) => page.dataId))).toEqual([]);
-    expect(unknownIds(GEO_SOURCE_SERVICE_PAGES.map((page) => page.dataId))).toEqual([]);
   });
 
   it('国土数値情報を原典にする指標は、登録データか公式利用条件の判定済みデータだけを参照する', () => {

@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 import { CHANNELS, channelsOf } from "@/lib/channel-registry";
 import { NAV_GROUPS, isBranch, isNavItemActive, navHrefs, navTrail } from "@/lib/nav-registry";
 
-import domainsConfig from "../../../../config/domains.json";
+import domainsConfig from "../../../../data/business/domains.json";
 
 const APP_DIR = path.resolve(__dirname, "../../app");
 const params = (query = "") => new URLSearchParams(query);

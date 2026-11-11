@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "categoryKey": "international",
+  "topics": [
+    {
+      "key": "foreign-residents",
+      "label": "在留外国人",
+      "matchers": [
+        {
+          "kind": "title",
+          "pattern": "在留外国人|外国人"
+        }
+      ]
+    }
+  ]
+}

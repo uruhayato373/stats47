@@ -11,7 +11,7 @@
  */
 
 // 販売チャネル (Kindle) の出品台帳・アカウント
-export const KDP_LISTINGS = "config/kdp-listings.json";
+export const KDP_LISTINGS = "data/products/kdp/listings.json";
 export const KDP_LISTING_COPY = "data/products/kdp-listing-copy.json";
 export const KDP_COVER_THUMBNAIL_CHECKS = "data/products/kdp-cover-thumbnail-checks.json";
 export const KDP_ACCOUNT = "config/kdp-account.json";
@@ -21,15 +21,21 @@ export const NOTE_ACCOUNT = "config/note-account.json";
 export const AFFILIATE_ASP = "config/affiliate-asp.json";
 export const A8_REPORT_AUTOMATION = "config/a8-report-automation.json";
 
+// note 記事ごとの承認済みハッシュタグ (1 記事 1 ファイル)
+export const NOTE_HASHTAGS_DIR = "data/note/hashtags";
+
+// 広告の枠の台帳
+export const ADS_PLACEMENTS = "data/ads/placements.json";
+
 // 運用 (管理画面の領域・計測対象・端末資源・参考文献 vault・バッチ)
-export const DOMAINS = "config/domains.json";
+export const DOMAINS = "data/business/domains.json";
 export const PSI_URLS = "config/psi-urls.txt";
 export const LOCAL_RESOURCES = "config/local-resources.json";
 export const SOURCE_VAULT = "config/source-vault.json";
 export const YOY_BATCH = "config/yoy-batch.json";
 
 // テーマページの指標を選ぶ視点 (採用基準・判断規則。管理画面と提案文書が読む)
-export const THEME_SELECTION_VIEWPOINTS = "config/theme-selection-viewpoints.json";
+export const THEME_SELECTION_VIEWPOINTS = "data/themes/viewpoints/selection.json";
 
 // 指標正本と、その型から生成する契約・逆引き索引
 export const METRIC_DEFINITIONS_DIR = "data/metrics";

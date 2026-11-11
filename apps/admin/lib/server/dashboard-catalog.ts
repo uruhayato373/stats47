@@ -9,10 +9,10 @@ import type {
 } from "@/lib/contracts/types";
 import { THEME_INDICATOR_SETS } from "@stats47/types";
 
+import { datasetPath } from "../../../../config/datasets.mjs";
 import { cached, readJson, TTL } from "./state-io";
 
-const CATALOG_PATH =
-  ".claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json";
+const CATALOG_PATH = datasetPath("themes.public-dashboards");
 const STALE_DAYS = 180;
 // ThemeCatalog から生成される軽量な一覧を全件利用する。
 const CURRENT_THEME_METADATA = THEME_INDICATOR_SETS;

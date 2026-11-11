@@ -69,13 +69,13 @@ describe("SURVEY_AFFILIATE_MAP", () => {
   // 調査マスタ (survey-linkage-standards.md の SSOT)。package exports に無いので直接読む
   // vitest は apps/web を cwd に走る (package.json の test script / turbo とも同じ)
   const surveysJson = JSON.parse(
-    readFileSync(path.resolve(process.cwd(), "../../packages/ranking/src/data/surveys.json"), "utf8"),
+    readFileSync(path.resolve(process.cwd(), "../../data/surveys/master/surveys.json"), "utf8"),
   ) as { id: string }[] | { surveys: { id: string }[] };
   const surveyIds = new Set(
     (Array.isArray(surveysJson) ? surveysJson : surveysJson.surveys).map((s) => s.id),
   );
 
-  it("surveys.json に実在する調査 id だけを持つ", () => {
+  it("調査マスタに実在する調査 id だけを持つ", () => {
     for (const id of Object.keys(SURVEY_AFFILIATE_MAP)) {
       expect(surveyIds.has(id), id).toBe(true);
     }

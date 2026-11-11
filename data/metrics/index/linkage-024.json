@@ -6208,7 +6208,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kanagawa-food-culture",
+          "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
         {
@@ -6265,7 +6265,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kanagawa-food-culture",
+          "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
         {

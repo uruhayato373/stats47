@@ -1,19 +1,12 @@
+import data from '../../../../data/site/url-history/ranking-redirects.json';
+
 /**
  * 公開後に置き換えられた旧 ranking slug の恒久転送先。
  *
  * X・外部記事に残る旧 URL を、同じ統計定義の現行ページへ一段で 301 する。
  * 転送先は KNOWN かつ非 GONE であることをテストで固定する。
+ * 記録の正本は台帳 `site.ranking-redirects` (data/site/url-history/ranking-redirects.json)。ここは読み込み口。
  */
-export const RANKING_SLUG_REDIRECTS: Readonly<Record<string, string>> = {
-  // 旧KSJ漁港系列は終了し、水産庁の公式登録総数へ統合。旧年の系列は接続しない。
-  'fishing-port-count': 'fishing-port-count-ksj',
-  'ssdse-c-lb021101': 'tuna-consumption-expenditure',
-  'ssdse-c-lb061001': 'apple-consumption-expenditure',
-  'ssdse-c-lb092007': 'gyoza-frozen-consumption-expenditure',
-  'ssdse-c-lb101001': 'green-tea-consumption-expenditure',
-  'ssdse-c-lb121101': 'soba-udon-dining-consumption-expenditure',
-  'ssdse-d-md22': 'hobby-participation-rate-diy',
-  'per-capita-kenmin-shotoku-h27': 'per-capita-prefectural-income-h27',
-  // 国勢調査 2020 単年の重複キー。2020 年の 47 県の値は社会・人口統計体系の系列と一致し、そちらは 2000〜2020 年と市区町村の値を持つ (METRIC-DAYTIME-RATIO-DUP-01)
-  'daytime-population-ratio': 'day-time-population-ratio',
-};
+export const RANKING_SLUG_REDIRECTS: Readonly<Record<string, string>> = Object.fromEntries(
+  data.redirects.map(({ from, to }) => [from, to]),
+);

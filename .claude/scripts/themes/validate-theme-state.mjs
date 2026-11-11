@@ -3,7 +3,7 @@
  * validate-theme-state.mjs — テーマポートフォリオ state の決定的 lint
  *
  * 対象: data/themes/{portfolio,experiments}.json
- * schema・判定規律の正典: data/themes/README.md
+ * 形の正典: 台帳 themes.portfolio / themes.experiments の Schema (check-datasets が検証)
  * 運用設計: .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md
  *
  * enforce する規律 (根拠なし判定・重複実験を機械的に禁止する):
@@ -12,7 +12,7 @@
  *   P3 merge/split/rename/retire 候補は evidenceRefs >= 2
  *   P4 merge/retire 候補は GSC/GA4 両方が集計済み (measured | measured-low) かつ windowDays >= 56
  *      (データ不足 = 未集計を需要不足と混同した廃止判定の禁止。需要不足の証拠は
- *       measured-low のカウント値で示す — 2026-07-13 改訂、根拠は state README §判定規律 2)
+ *       measured-low のカウント値で示す — 2026-07-13 改訂、根拠は 運用文書「ライフサイクル判定の規律」)
  *   P5 metrics.*.status ごとの許可数値フィールド (推測値・標本不足比率の混入防止):
  *      measured = 制限なし / measured-low = カウント値のみ (gsc: clicks,impressions / ga4: pageViews)
  *      insufficient-data・not-instrumented = windowDays のみ
@@ -49,7 +49,7 @@ const LIFECYCLE = new Set([
 const REVIEW_STATUS = new Set(["reviewed", "review-missing", "stale"]);
 const CATALOG_STATUS = new Set(["catalog", "legacy"]);
 const METRIC_STATUS = new Set(["measured", "measured-low", "insufficient-data", "not-instrumented"]);
-// measured-low で保存を許可するカウント値 (比率値は標本不足でノイズ支配のため禁止 — README §判定規律)
+// measured-low で保存を許可するカウント値 (比率値は標本不足でノイズ支配のため禁止 — 運用文書「ライフサイクル判定の規律」)
 const MEASURED_LOW_COUNT_FIELDS = {
   gsc: new Set(["clicks", "impressions"]),
   ga4: new Set(["pageViews"]),

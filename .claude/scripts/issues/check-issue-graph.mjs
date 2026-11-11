@@ -16,20 +16,20 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { METRIC_DEFINITIONS_DIR } from "../../../config/paths.mjs";
 import {
+  AXES_ERRORS,
   classifyCoverage,
   computeReach,
-  effectiveAxes,
   findQueryCandidates,
   indexPages,
   listFigureDestinations,
   parseCsv,
   READ_THRESHOLD,
-  resolveAxesFigure,
+  resolveAllAxes,
   sumTraffic,
   validateIssueGraph,
 } from "./issue-graph-core.mjs";
+import { readMetricGrains, readSeriesIds } from "./issue-data-grains.mjs";
 import { readDraftStates } from "./issue-draft-state.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
@@ -64,32 +64,34 @@ if (flag("--figures")) {
   process.exit(rows.some((r) => r.drift) ? 1 : 0);
 }
 
-if (flag("--axes")) {
+/** 軸から引いた図と、埋まっていない理由。軸が指すデータの実在と粒度を正本と照らす */
+function axesRows() {
   const { templates } = readJson(datasetPath("content.image-templates"));
-  const metricKeys = new Set(
-    readdirSync(join(PROJECT_ROOT, METRIC_DEFINITIONS_DIR)).filter((f) => f.endsWith(".ts")).map((f) => f.slice(0, -3)),
-  );
-  const byId = new Map(issues.map((i) => [i.id, i]));
+  return resolveAllAxes({ issues, templates, metricGrains: readMetricGrains(PROJECT_ROOT, pages), seriesIds: readSeriesIds(PROJECT_ROOT) });
+}
+const axesErrorsOf = (rows) => rows.flatMap((r) => r.gaps.filter((g) => AXES_ERRORS.includes(g)).map((g) => `${r.id}: 軸のデータが${g} (--axes ${r.id} で確認)`));
+
+if (flag("--axes")) {
   const prefix = args[args.indexOf("--axes") + 1]?.startsWith("issue:") ? args[args.indexOf("--axes") + 1] : "issue:";
-  const rows = issues
-    .filter((i) => i.status === "active" && i.id.startsWith(prefix))
-    .map((issue) => ({ id: issue.id, question: issue.question, ...resolveAxesFigure({ issue, axes: effectiveAxes(issue, byId), templates, metricKeys }) }));
+  const rows = axesRows().filter((r) => r.id.startsWith(prefix));
   if (flag("--json")) {
     // パイプへ大きな出力を書いた直後に process.exit すると途中で切れるので、同期で書く
-    writeSync(1, `${JSON.stringify(rows, null, 2)}\n`);
+    writeSync(1, `${JSON.stringify(rows, null, 2)}
+`);
     process.exit(0);
   }
   const count = (g) => rows.filter((r) => r.gaps.includes(g)).length;
-  for (const r of rows) console.log(`${r.gaps.length ? "!" : " "} ${r.id} ${r.purpose ?? "-"} → ${r.primary ?? "-"} (${r.allowed.join(",")}) ${r.gaps.join(",")}`);
+  for (const r of rows) console.log(`${r.gaps.length ? "!" : " "} ${r.id} ${r.purpose ?? "-"} → ${r.primary ?? "-"} (${r.allowed.join(",")}) ${r.gaps.join(",")}${r.notes.length ? ` 注記: ${r.notes.join("・")}` : ""}`);
   console.log(
-    `軸: 対象 ${rows.length} 件 / 図が決まる ${rows.filter((r) => !r.gaps.length).length} / 型未定 ${count("型未定")} / 未検証 ${count("未検証")} / 粒度不足 ${count("粒度不足")} / 描画器なし ${count("描画器なし")} / 指標なし ${count("指標なし")}`,
+    `軸: 対象 ${rows.length} 件 / 図が決まる ${rows.filter((r) => !r.gaps.length).length} / 型未定 ${count("型未定")} / 未検証 ${count("未検証")} / 別粒度 ${count("別粒度")} / 粒度不足 ${count("粒度不足")} / 描画器なし ${count("描画器なし")} / 指標なし ${count("指標なし")} / 粒度不一致 ${count("粒度不一致")} (注記付きで決まる ${rows.filter((r) => !r.gaps.length && r.notes.length).length})`,
   );
-  // 書いた指標が存在しないのは台帳の誤り。ほかは埋める作業の残りなので止めない
-  process.exit(count("指標なし") ? 1 : 0);
+  // 書いたデータが存在しない・その粒度の値が無いのは台帳の誤り。ほかは埋める作業の残りなので止めない
+  process.exit(axesErrorsOf(rows).length ? 1 : 0);
 }
 
 if (!flag("--coverage") && !flag("--candidates")) {
   const { errors, warnings } = validateIssueGraph({ issues, links, pages });
+  errors.push(...axesErrorsOf(axesRows()));
   for (const w of warnings) console.log(`! ${w}`);
   for (const e of errors) console.error(`✗ ${e}`);
   const major = issues.filter((i) => i.level === "major").length;

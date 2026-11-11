@@ -63,7 +63,7 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 
 ### 1b. 公式ダッシュボード調査 (catalog → WebSearch / WebFetch)
 
-最初に `reference/public-dashboard-catalog.json` を `theme:dashboard-catalog:query -- <theme>` で絞り込み、RESAS、
+最初に 台帳 `themes.public-dashboards` を `theme:dashboard-catalog:query -- <theme>` で絞り込み、RESAS、
 デジタル庁、e-Stat、農林水産省、国土交通省、政府地方創生、都道府県・市区町村が実際に採用している
 **政策上の問い・指標群・可視化形式・地理粒度**を確認する。WebSearch / WebFetch は、カタログに無い公式サイト、
 `status: partial`、180日超の記録、公式メニュー変更の確認に限定する。非公式サイトは補助比較に使えても
@@ -105,7 +105,7 @@ grep -iE "<theme 関連語>" .claude/todo/backlog.md
   - statsDataId は分かるが確信が持てない → `要呼び元検証(statsDataId=X)` (呼び元が最終確定)
   - e-Stat に不在 / statsDataId すら不明 (`❌不在`) → **不採用** (rejectedCandidates 行き)
 
-論点レンズ候補は `theme-catalog/evidence-lenses.ts` の既存 lens/source を先に照合する。新規 source 候補は
+論点レンズ候補は 台帳 `themes.evidence-lenses` の既存 lens/source を先に照合する。新規 source 候補は
 省庁等の公式 HTTPS URL を実際に開いて確認し、関連 ranking / theme / tag はコード上の実在 route だけを残す。
 NotebookLM の引用だけ、または内部導線が 0 件の候補は採用推奨にしない。
 
@@ -157,7 +157,7 @@ npm run generate:catalog --workspace=@stats47/data-configs && npm run validate:c
 
 論点レンズ候補 (chat table)
   → theme-designer が公式 source / route を再確認
-  → evidence-lenses.ts + ThemeCatalog.evidenceTopics
+  → `themes.evidence-lenses` + ThemeCatalog.evidenceTopics
   → validate:catalog → ThemeEvidenceTopicsSection → nav_surface=theme_evidence
 ```
 
@@ -194,5 +194,5 @@ npm run generate:catalog --workspace=@stats47/data-configs && npm run validate:c
 - 規約: `.claude/rules/theme-catalog-standards.md`
 - agent: `.claude/agents/theme-researcher.md`
 - 白書台帳: `reference/notebooks.md`
-- 公式ダッシュボード研究カタログ: `reference/public-dashboard-catalog.json`
+- 公式ダッシュボード研究カタログ: 台帳 `themes.public-dashboards`
 - 後続スキル: `/design-theme-charts` (チャート設計) / `/insert-theme-components` (反映) / `/audit-theme-components` (監査)

@@ -1,9 +1,7 @@
 import "server-only";
 
-import fs from "node:fs";
-import path from "node:path";
-
 import type { Source } from "../types/snapshot";
+import surveysMaster from "../../../../data/surveys/master/surveys.json";
 import { logger } from "@stats47/logger/server";
 import { carryTimestamp, readPublishedSnapshot, writeR2Staging } from "@stats47/r2-storage/server";
 
@@ -22,9 +20,8 @@ export interface ExportSurveysSnapshotResult {
 /**
  * surveys snapshot を R2 に書き出す (完全DBレス: docs/01_技術設計/19)。
  *
- * SSOT は git TS マスタ
- * `packages/ranking/src/data/surveys.json` (配信 app/survey/all.json から抽出した静的 reference,
- * displayOrder 順)。survey は低頻度更新の reference データで git TS を SSOT とする (port master と同方針)。
+ * SSOT は調査マスタ (カタログの surveys.master。配信 app/survey/all.json から抽出した静的 reference,
+ * displayOrder 順)。
  *
  * `validSurveyIds` を渡すと、その集合に含まれる survey だけを書き出す。これは
  * `exportRankingItemsPerUrl` が `app/survey/{id}/items.json` を生成した survey 群
@@ -38,8 +35,7 @@ export async function exportSurveysSnapshot(
 ): Promise<ExportSurveysSnapshotResult> {
   const startedAt = Date.now();
 
-  const dataPath = path.resolve(__dirname, "../data/surveys.json");
-  const allSurveys = JSON.parse(fs.readFileSync(dataPath, "utf-8")) as Source[];
+  const allSurveys = surveysMaster as Source[];
 
   const validSet = validSurveyIds ? new Set(validSurveyIds) : null;
   const surveys = (validSet

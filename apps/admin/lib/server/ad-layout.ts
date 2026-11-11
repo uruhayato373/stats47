@@ -5,12 +5,13 @@ import path from "node:path";
 
 import { adsenseUnitNames, unitOfEntry } from "../../../../.claude/scripts/ads/lib/ad-layout-ledger";
 
+import { ADS_PLACEMENTS } from "../../../../config/paths.mjs";
 import { projectRoot } from "./project-root";
 
 /** 撮影の置き場 (.claude/scripts/ads/capture-ad-layout.ts が日付ごとに書く。git にも R2 にも置かない) */
 export const AD_LAYOUT_ROOT = ".local/ad-layout";
 /** 広告の枠の台帳 (ページの種類ごとの置き方の正本) */
-const PLACEMENTS_FILE = "config/ads/placements.json";
+const PLACEMENTS_FILE = ADS_PLACEMENTS;
 
 const DATE_DIR = /^\d{4}-\d{2}-\d{2}$/;
 

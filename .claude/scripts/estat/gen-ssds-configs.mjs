@@ -10,7 +10,7 @@
  * 実行後: npm run build:registry --workspace=@stats47/data-configs で registry 再生成。
  */
 import fs from "node:fs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import path from "node:path";
 
 const DIR = datasetDir("metrics.definitions");
@@ -27,8 +27,8 @@ for (const f of fs.readdirSync(DIR)) {
 // GONE キー (410対象)。isActive:true で被ると ranking-key-consistency test が fail するので除外。
 const goneKeys = new Set();
 try {
-  const gone = fs.readFileSync("apps/web/src/config/gone-ranking-keys.ts", "utf8");
-  for (const m of gone.matchAll(/"([a-z0-9][a-z0-9-]*)"/g)) goneKeys.add(m[1]);
+  const gone = JSON.parse(fs.readFileSync(datasetPath("site.gone-ranking-keys"), "utf8"));
+  for (const row of gone.keys) goneKeys.add(row.key);
 } catch { /* ファイル無しは無視 */ }
 
 const COLOR = {

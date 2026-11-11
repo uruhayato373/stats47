@@ -8,7 +8,7 @@ type: project
 
 **原因**: 設計status・外部公開state・納品物の品質を同じ欄で表現し、メモが過去の生成件数とコマンドを複製していた。Kindle監査もv1を再生成していた。
 
-**対策**: 商品定義は `packages/product-factory/src/catalog/` とKindle/GeoのTSを読む。外部公開記録は note が `data/note/articles.json`、Kindle が `config/kdp-listings.json`、note の納品版は `data/products/note-pack-deliveries.json` の `_delivery` のmanifest SHAを参照する。横断一覧は `products:report` が同じTSと証跡から生成する `data/products/catalog-status.json`。件数・状態を本メモへ複製しない。人間向けは `.local/product-portfolio/catalog.{html,csv}`。
+**対策**: 商品定義は `packages/product-factory/src/catalog/` とKindle/GeoのTSを読む。外部公開記録は note が `data/note/articles.json`、Kindle が `data/products/kdp/listings.json`、note の納品版は `data/products/note-pack-deliveries.json` の `_delivery` のmanifest SHAを参照する。横断一覧は `products:report` が同じTSと証跡から生成する `data/products/catalog-status.json`。件数・状態を本メモへ複製しない。人間向けは `.local/product-portfolio/catalog.{html,csv}`。
 
 **安全条件**: Kindleは `--version <NEW_VERSION>` で生成し既存版を上書きしない。全予定キーの欠落をmetadataに記録する。内部の書き下ろし比率・本文量、EPUB構造、意味レビュー、Previewer、暗号化版保全、公開承認を別ゲートにする。30%はAmazonの許諾基準ではない。監査の `verify-publishable.mts --apply` は拒否する。
 
