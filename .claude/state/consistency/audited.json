@@ -1,20 +1,14 @@
 {
-  "hash": "e57d8a4107d902876d1e6e0d744712529139c2d9190839d27c9d9d507848c202",
-  "audited_at": "2026-11-10T08:15:10",
+  "hash": "6175f863a01b9f653af6c84251210a87430eaf8705603b8adc8ed3c97417d255",
+  "audited_at": "2026-11-10T23:19:58",
   "files": [
-    ".agents/skills/product/build-data-pack/SKILL.md",
-    ".claude/rules/buzz-map-standards.md",
-    ".claude/rules/note-image-assets.md",
-    ".claude/rules/sns-content-standards.md",
-    ".claude/scripts/note/__tests__/note-figure-ledger.test.mjs",
-    ".claude/scripts/note/build-note-figure-ledger.mjs",
-    ".claude/scripts/note/publish-product-paid-update.sh",
-    ".claude/scripts/note/render-product-figures.ts",
-    ".claude/scripts/sns/build-buzz-map-spec-gsi.ts",
-    ".claude/scripts/sns/build-buzz-map-spec-ksj.ts",
-    ".claude/scripts/sns/build-buzz-map-spec.ts",
-    ".claude/scripts/sns/merge-buzz-map-specs.ts",
-    ".claude/skills/note/publish-note/references/update-mode.md",
-    ".claude/skills/product/build-data-pack/SKILL.md"
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/scripts/note/__tests__/navigation-footer.test.mjs",
+    ".claude/scripts/note/__tests__/published-audit.test.mjs",
+    ".claude/scripts/note/audit-note-published.mjs",
+    ".claude/scripts/note/lib/navigation-footer.mjs",
+    ".claude/scripts/note/lib/published-audit.mjs",
+    ".claude/scripts/note/update-published-navigation.mjs",
+    ".claude/skills/management/weekly-review/SKILL.md"
   ]
 }

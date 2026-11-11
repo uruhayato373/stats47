@@ -1,0 +1,12 @@
+{
+  "maxByCode": {
+    "ranking_image_not_type": 103,
+    "image_duplicate": 111,
+    "source_card_unverifiable": 102,
+    "source_card_unrelated": 0,
+    "image_fetch_failed": 0,
+    "stale_year": 3
+  },
+  "maxLowScore": 20,
+  "note": "note 公開記事の採点 (audit-note-published.mjs --check) で、違反コードごとの記事数と 59 点以下の記事数の上限。縮小専用で、直したら実測値まで下げる。2026-11-11 の初回実測で置いた。カード表示と図の値の不一致は元の監査が自分の上限を持つのでここに載せない"
+}

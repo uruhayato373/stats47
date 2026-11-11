@@ -27,6 +27,7 @@ import {
   canonicalizeNoteEditorBody,
   collapseDuplicateFooterHeadings,
   resolveProductCardText,
+  datasetCardLead,
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
@@ -365,7 +366,7 @@ export function buildPlans(source, views, options) {
               datasets: datasets.map((dataset) => ({
                 noteUrl: dataset.noteUrl,
                 noteKey: noteKeyFromUrl(dataset.noteUrl),
-                lead: `「${dataset.title}」で、この記事の元データを手元で開ける形で配布しています。`,
+                lead: datasetCardLead(dataset.title),
               })),
             }
           : null,
@@ -406,6 +407,7 @@ export function applyPlanBody(body, plan) {
     addedProduct: navigation.addedProduct,
     addedDataset: navigation.addedDataset,
     dedupedFooterHeading: navigation.dedupedFooterHeading,
+    rewroteDatasetWording: navigation.rewroteDatasetWording,
     repairs: repaired.repairs,
   };
 }
@@ -785,6 +787,7 @@ async function main() {
       wouldAddProduct: application.addedProduct,
       wouldAddDataset: application.addedDataset,
       wouldDedupeFooterHeading: application.dedupedFooterHeading,
+      wouldRewriteDatasetWording: Boolean(application.rewroteDatasetWording),
       wouldNormalizeLegacyLinks: application.normalizedLegacyLinks,
     };
     if (application.addedSite) {
@@ -827,7 +830,7 @@ async function main() {
     if (options.check && pendingCount > 0) {
       // CI では report ファイルを読めないので、何が pending なのかをログに出す (環境差の切り分け用)
       for (const article of report.articles.filter((entry) => entry.pending)) {
-        const flags = ["wouldAddNextNote", "wouldAddMagazine", "wouldAddSite", "wouldAddProduct", "wouldAddDataset", "wouldDedupeFooterHeading", "wouldNormalizeLegacyLinks"]
+        const flags = ["wouldAddNextNote", "wouldAddMagazine", "wouldAddSite", "wouldAddProduct", "wouldAddDataset", "wouldDedupeFooterHeading", "wouldRewriteDatasetWording", "wouldNormalizeLegacyLinks"]
           .filter((flag) => article[flag]).map((flag) => flag.replace("would", ""));
         const repairs = article.linkRepairs.map((repair) => `${repair.mode}:${repair.fromUrl}`);
         console.log(`  pending ${article.key}: ${flags.join(",") || "-"} repairs=${repairs.join(" ") || "-"}`);
