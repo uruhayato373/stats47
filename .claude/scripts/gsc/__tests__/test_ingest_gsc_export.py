@@ -3,7 +3,11 @@ import csv
 import importlib.util
 from pathlib import Path
 import sys
+import io
+import os
+import tempfile
 import unittest
+import zipfile
 
 sys.dont_write_bytecode = True
 spec = importlib.util.spec_from_file_location("ingest", Path(__file__).resolve().parents[1] / "ingest-gsc-export.py")
@@ -105,6 +109,76 @@ class CoverageContract(unittest.TestCase):
         self.assertEqual(rows[1]["discovered-not-indexed"], "1134")
         self.assertEqual(rows[1]["soft-404"], "0")
         self.assertEqual(rows[1]["robots-blocked"], "")  # 表に無い理由は空欄
+
+
+def make_overview_zip(path, sitemap, with_confirm=True):
+    """実物と同じ構造 (4 CSV・ヘッダー・cp437 で化けた cp932 ファイル名) の概要 zip を作る。"""
+    head = "理由,ソース,確認,ページ" if with_confirm else "理由,ソース,ページ"
+
+    def row(reason, state, n):
+        return f"{reason},ウェブサイト,{state},{n}" if with_confirm else f"{reason},ウェブサイト,{n}"
+    files = {
+        "重大な問題.csv": "\n".join([head, row("検出 - インデックス未登録", "合格", 1134), row("ソフト 404", "開始前", 0),
+                                  row("未知の理由", "失敗", 3)]) + "\n",
+        "重大ではない問題.csv": "\n".join([head, row("noindex タグによって除外されました", "開始", 578)]) + "\n",
+        "メタデータ.csv": f"プロパティ,値\nサイトマップ,{sitemap}\n",
+        "推移.csv": "日付,未登録,登録済み,表示回数\n2026-11-06,1977,6729,10\n",
+    }
+    with zipfile.ZipFile(path, "w") as z:
+        for name, text in files.items():
+            info = zipfile.ZipInfo(name.encode("cp932").decode("cp437"))  # unzip が化かす名前を再現
+            z.writestr(info, text.encode("utf-8-sig"))
+
+
+class ValidationAndView(unittest.TestCase):
+    def setUp(self):
+        self.dir = tempfile.mkdtemp()
+
+    def zip(self, name, sitemap, **kw):
+        p = os.path.join(self.dir, name)
+        make_overview_zip(p, sitemap, **kw)
+        return p
+
+    def test_validation_per_reason(self):
+        r = ingest.process_zip(self.zip("stats47.jp-Coverage-概要.zip", ingest.SITEMAP_ALL_KNOWN))
+        self.assertEqual(r["validation"]["検出 - インデックス未登録"], "合格")
+        self.assertEqual(r["sitemap"], ingest.SITEMAP_ALL_KNOWN)
+        v = ingest.canonical_validation(r["validation"])
+        self.assertEqual(v["discovered-not-indexed"], "合格")
+        self.assertEqual(v["soft-404"], "開始前")
+        self.assertEqual(v["noindex-excluded"], "開始")
+        self.assertEqual(v["未知の理由"], "失敗")  # 写像できない理由は生のラベル
+
+    def test_no_confirm_column_gives_empty(self):
+        r = ingest.process_zip(self.zip("stats47.jp-Coverage-概要.zip", ingest.SITEMAP_ALL_KNOWN, with_confirm=False))
+        self.assertEqual(r["validation"], {})
+        rec = ingest.build_submitted_record(r, "w", "d")
+        self.assertEqual(rec["validation"], {})
+
+    def test_submitted_by_metadata_without_marker(self):
+        zp = self.zip("stats47.jp-Coverage-概要.zip", ingest.SITEMAP_ALL_SUBMITTED)
+        self.assertEqual(ingest.classify_view(zp, ingest.process_zip(zp))[0], "submitted")
+        zp2 = self.zip("stats47.jp-Coverage-2.zip", ingest.SITEMAP_ALL_KNOWN)
+        self.assertEqual(ingest.classify_view(zp2, ingest.process_zip(zp2))[0], "known")
+        zp3 = self.zip("stats47.jp-Coverage-概要-送信済みビュー.zip", ingest.SITEMAP_ALL_SUBMITTED)
+        self.assertEqual(ingest.classify_view(zp3, ingest.process_zip(zp3))[0], "submitted")
+
+    def test_mismatch_is_missing(self):
+        src, out = tempfile.mkdtemp(), tempfile.mkdtemp()
+        make_overview_zip(os.path.join(src, "stats47.jp-Coverage-概要-送信済みビュー.zip"), ingest.SITEMAP_ALL_KNOWN)
+        self.assertEqual(ingest.classify_view(os.path.join(src, "stats47.jp-Coverage-概要-送信済みビュー.zip"),
+                                              ingest.process_zip(os.path.join(src, "stats47.jp-Coverage-概要-送信済みビュー.zip")))[0], "mismatch")
+        import subprocess
+        hist = os.path.join(out, "h.csv")
+        code = (f"import importlib.util,sys;sys.dont_write_bytecode=True;"
+                f"s=importlib.util.spec_from_file_location('i',{str(Path(ingest.__file__))!r});m=importlib.util.module_from_spec(s);s.loader.exec_module(m);"
+                f"m.DRILLDOWN_DIR={out!r};m.SUBMITTED_HISTORY={hist!r};sys.argv=['x','--src',{src!r},'--week','2026-W46','--date','2026-11-11'];m.main()")
+        res = subprocess.run([sys.executable, "-I", "-c", code], capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, res.stderr)
+        self.assertIn("取り違え", res.stderr)
+        self.assertFalse(os.path.exists(os.path.join(out, "2026-W46", "submitted-totals.json")))
+        self.assertFalse(os.path.exists(os.path.join(out, "2026-W46", "category-totals.json")))
+        self.assertEqual(list(csv.DictReader(open(hist, encoding="utf-8")))[0]["status"], "missing")
 
 
 if __name__ == "__main__":
