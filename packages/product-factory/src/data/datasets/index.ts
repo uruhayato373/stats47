@@ -1,6 +1,6 @@
 /**
- * 実データセット・レジストリ (SSOT)。
- * key = src/data/datasets/<key>.ts のファイル名。R2 由来・基準年固定のスナップショットのみ登録する。
+ * 実データセット・レジストリ。
+ * 記録の正本は台帳 `products.pack-datasets` (1 キー 1 ファイル。key はファイル名と同じ)。R2 由来・基準年固定のスナップショットのみ登録する。
  * validator の「datasets-listed」検査 (approved パックの datasets キーが実在するか) の参照元。
  */
 import type { Dataset } from "../dataset";

@@ -151,14 +151,15 @@ export const OUTSIDE_DATA = [
   { path: "packages/types/src/site.json", why: "app", note: "サイトの識別子" },
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
-  // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  // 段 12 で 1 件ずつ判定する (移す・生成物として残す・アプリの設定として残す)
-  { path: "packages/gis/src/infra-history/networks.ts", why: "pending", phase: 12 },
-  { path: "packages/gis/src/mlit-ksj/classifications.ts", why: "pending", phase: 12 },
-  { path: "apps/remotion/src/features/buzz-map/specs/", why: "pending", phase: 12 },
-  { path: "apps/web/src/features/local-finance-dashboard/data/finance-cards.json", why: "pending", phase: 12 },
-  { path: "apps/ges/scripts/data/ports.json", why: "pending", phase: 12 },
-  { path: "packages/r2-storage/src/scripts/lib/license-retention-20260905.json", why: "pending", phase: 12 },
+  { path: "apps/remotion/src/features/buzz-map/specs/sample-anim.json", why: "app", note: "地図カードの見本 (実際のカードの仕様は sns.buzz-map-specs)" },
+  { path: "apps/remotion/src/features/buzz-map/specs/sample-landlocked.json", why: "app", note: "地図カードの見本 (Studio のプレビューが import する)" },
+  { path: "apps/remotion/src/features/buzz-map/specs/sample-towns-villages.json", why: "app", note: "地図カードの見本" },
+  {
+    path: "apps/web/src/features/local-finance-dashboard/data/finance-cards.json",
+    why: "generated",
+    note: "apps/web/scripts/generate-finance-cards.py が総務省の都道府県決算カード (年度ごとの xlsx) から作る県別・年別の値",
+  },
+  // ── data/ へ移すマスタ・台帳 (縮小専用。why: "pending" と移す段 phase を書く) ──
 ];
 
 /**
@@ -543,7 +544,13 @@ export const DATASETS = [
   }),
   d("products.packs", "data/products/packs/packs.json", "master", "product", "data", "商品ファクトリーのテーマパック P-01〜P-14 (パック ID をキーにした定義。ID とテーマは 1:1 で、EXPECTED_PACK_IDS と THEME_BY_ID は読み込み口がここから導く。rankingKeys は持たず生成物から注入する。notes は判断の記録)。読み込みは packages/product-factory/src/catalog/products/packs.ts (PACKS)", {
     schema: "config/schema/products.packs.schema.json",
-    refs: [{ field: "packs.*.licenseId", to: "products.licenses", key: "licenses.$keys" }],
+    refs: [
+      { field: "packs.*.licenseId", to: "products.licenses", key: "licenses.$keys" },
+      { field: "packs.*.datasets[]", to: "products.pack-datasets", key: "key" },
+    ],
+  }),
+  d("products.pack-datasets", "data/products/packs/datasets/{name}.json", "evidence", "product", "data", "商品に焼く基準年固定の実データ (1 指標 1 ファイル。ファイル名と key は R2 の app/ranking/<key>/values.json の指標キー。47 県の値と手で書いた出典の行。正規化の前の入力)。読み込みは packages/product-factory/src/data/datasets/<key>.ts (正規化と export の組み立て)", {
+    schema: "config/schema/products.pack-datasets.schema.json",
   }),
   d("products.licenses", "data/products/packs/licenses.json", "master", "product", "data", "商品のライセンス定義 (ライセンス ID をキーにした利用範囲・クライアントワーク可否。再販売は常に不可)。読み込みは packages/product-factory/src/catalog/licenses.ts (LICENSE_REGISTRY)", {
     schema: "config/schema/products.licenses.schema.json",
@@ -627,6 +634,9 @@ export const DATASETS = [
   d("sns.scripts-schema", "data/sns/scripts.schema.json", "schema", "sns", "data", "長尺投稿の台本の JSON Schema"),
   d("sns.buzz-map-attribution", "data/sns/buzz-map-attribution-{name}.json", "series", "sns", "data", "バズマップ投稿の流入の計測"),
   d("sns.buzz-map-catalog", "data/sns/buzz-map{name}catalog.json", "state", "sns", "data", "バズマップの作例カタログ"),
+  d("sns.buzz-map-specs", "data/sns/buzz-map/specs/{name}.json", "ledger", "sns", "data", "地図カード (buzz-map) の制作の仕様 (1 枚 1 ファイル。ファイル名は spec.id。題・出典・凡例・使うデータで、そのまま Remotion の --props に渡す)。書き手は .claude/scripts/sns/build-buzz-map-spec*.ts と merge-buzz-map-specs.ts。見本の sample-*.json は Remotion の specs/ に残す", {
+    schema: "config/schema/sns.buzz-map-specs.schema.json",
+  }),
   d("sns.drafts", "data/sns/{name}-drafts.md", "state", "sns", "data", "SNS シリーズの下書き"),
   d("gsc.coverage-queue", "data/gsc/coverage-remediation/coverage-remediation-queue.json", "state", "site", "data", "GSC カバレッジ是正キュー"),
   d("gsc.coverage-queue-latest", "data/gsc/coverage-remediation/LATEST.md", "report", "site", "data", "是正キューの要約"),
@@ -756,6 +766,24 @@ export const DATASETS = [
     refs: [
       { field: "policies.*.license", to: "geo.ksj-license-policy", key: "policies.$keys" },
       { field: "expectedArchiveCounts.$keys", to: "geo.ksj-datasets", key: "datasets.$keys" },
+    ],
+  }),
+  d("geo.ksj-classifications", "data/geo/ksj/classifications.json", "master", "data", "data", "KSJ の属性で地物を色分けする区分 (原典のコード → 表示の区分・色トークンのコード表と、dataId ごとに引く属性とコード表。交通網の変遷と単体 GIS ページの地図・凡例が共有する。notes はコード表ごとの判断の記録)。読み込みは packages/gis/src/mlit-ksj/classifications.ts", {
+    schema: "config/schema/geo.ksj-classifications.schema.json",
+    refs: [
+      { field: "classifications.$keys", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "classifications.*.codeTable", to: "geo.ksj-classifications", key: "codeTables.$keys" },
+      { field: "notes.$keys", to: "geo.ksj-classifications", key: "codeTables.$keys" },
+    ],
+  }),
+  d("geo.ksj-license-retention", "data/geo/ksj/license-retention-20260905.json", "evidence", "data", "data", "利用条件の是正 (2026-09-05) で撤去を承認した R2 の KSJ オブジェクトの記録 (対象ごとの prefix とキー・バイト数・ETag。撤去の前に全件の一致を求める)。読み込みは packages/r2-storage/src/scripts/lib/license-retention.ts"),
+  d("geo.infra-history-networks", "data/geo/infra-history/networks.json", "ledger", "data", "data", "交通網の変遷ページ (/geo/history/<key>) の台帳 (原典の版・SHA-256・使い方・公開の状態と了承の根拠・原典の属性名・年の範囲・注意書き。並びがページの順。利用条件と公式ページの URL は geo.ksj-datasets、種別と色は geo.ksj-classifications から結ぶ。notes は判断の記録)。読み込みは packages/gis/src/infra-history/networks.ts", {
+    schema: "config/schema/geo.infra-history-networks.schema.json",
+    refs: [
+      { field: "networks[].source.dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "networks[].source.dataId", to: "geo.ksj-classifications", key: "classifications.$keys" },
+      { field: "networks[].currentDataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "notes.$keys", to: "geo.infra-history-networks", key: "networks[].key" },
     ],
   }),
   d("geo.analyses", "data/geo/analyses/analyses.json", "master", "data", "data", "Geo 分析の台帳 (slug をキーにした定義。公開 URL /geo/<slug> と R2 の app/geo/<slug>/ を決める。計算入力・空間演算・集計値の名前・出典と限界。豪雪と土砂は themeSource で出典 7 項目を読み込み口が結ぶ。notes は判断の記録)。読み込みは packages/data-configs/src/business-plan/geo-analyses.ts", {
@@ -1229,6 +1257,10 @@ export const RETIRED = [
   { from: "area/src/data/ports.json", to: "data/areas/master/ports.json", since: "2026-11-11" },
   // 県データブックの県の本文 47 件 (2026-11-11 に editorial/<code>.ts から data/areas/editorial/<code>.json へ。テンプレートは template.ts が JSON を読む)
   { from: "area-databook/editorial/", to: "data/areas/editorial/", since: "2026-11-11" },
+  // 段 12b (2026-11-11): 撤去の記録・地図カードの仕様・GES の港の写し
+  { from: "r2-storage/src/scripts/lib/license-retention-20260905.json", to: "data/geo/ksj/license-retention-20260905.json", since: "2026-11-11" },
+  { from: "features/buzz-map/specs/", to: "data/sns/buzz-map/specs/ (見本の sample-*.json だけ Remotion に残す)", since: "2026-11-11" },
+  { from: "ges/scripts/data/ports.json", to: "data/areas/master/ports.json (台帳 areas.ports を読む)", since: "2026-11-11" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

@@ -47,7 +47,7 @@ npm run products:generate --workspace=@stats47/product-factory -- --all --versio
 ```bash
 npx tsx packages/product-factory/src/data/load-ranking-values.ts <rankingKey>   # R2 から最新47県フルを取得
 ```
-出力をスナップショット `src/data/datasets/<key>.ts` に貼り、SOURCES（調査名・statsDataId・URL・年・取得日・加工式）を手記。
+出力 (JSON の配列) を台帳 `products.pack-datasets` の `<key>.json` の `values` に貼り、出典の行 `source`（調査名・statsDataId・URL・年・取得日・加工式）を手記。
 商品→テーマの写像は `src/build/build-all.ts` の `resolveDataset` を拡張する。
 
 ### E. リリース台帳を再生成する

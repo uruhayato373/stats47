@@ -4,7 +4,7 @@
  * spec JSON を決定的に生成する。
  *
  * カタログ (build-buzz-map-catalog.ts) で選んだ metricKey を渡すと、R2 の観測値を指定年で
- * 二値化 (しきい値 or 上位N) し、`apps/remotion/src/features/buzz-map/specs/<id>.json` を書く。
+ * 二値化 (しきい値 or 上位N) し、台帳 `sns.buzz-map-specs` へ `<id>.json` を書く。
  * そのまま `/buzz-map` (npx remotion still) でレンダできる。
  *
  * データ源: R2 公開 URL のみ (認証不要)。
@@ -32,10 +32,11 @@ import { getMetricConfig } from "@stats47/data-configs";
 
 import { toBuzzMapAreaCode } from "./lib/buzz-map-area-code";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
-const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
+const SPECS_DIR = join(PROJECT_ROOT, datasetDir("sns.buzz-map-specs"));
 const MUNI_TOPOJSON = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/municipalities.topojson");
 
 // ─── CLI ───
@@ -227,7 +228,7 @@ function main() {
     console.log(`\nレンダ:`);
     console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
     console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
-    console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
+    console.log(`    --props=../../${datasetDir("sns.buzz-map-specs")}/${opts.id}.json`);
   });
 }
 

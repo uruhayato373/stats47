@@ -116,7 +116,7 @@ export interface ProductDefinition {
    */
   readonly rankingKeys: readonly string[];
   /**
-   * 収録する実データセットの key 群 (= src/data/datasets/<key>.ts)。実データ接続台帳 (後方互換)。
+   * 収録する実データセットの key 群 (台帳 `products.pack-datasets` の key)。実データ接続台帳 (後方互換)。
    * 未接続パックは []。status が approved のパックは全キーが実在する必要がある
    * (validator が誇大表示を防ぐ)。全部入り本体は rankingKeys + pack snapshot を使う。
    */

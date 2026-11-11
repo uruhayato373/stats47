@@ -27,9 +27,10 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
+const SPECS_DIR = join(PROJECT_ROOT, datasetDir("sns.buzz-map-specs"));
 
 interface LegendRow {
   key: string;
@@ -175,7 +176,7 @@ function main() {
   console.log(`\nレンダ:`);
   console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
   console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
-  console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
+  console.log(`    --props=../../${datasetDir("sns.buzz-map-specs")}/${opts.id}.json`);
 }
 
 main();

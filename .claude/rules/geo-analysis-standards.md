@@ -156,14 +156,14 @@ Pythonが書くJSONはJSの`JSON.stringify`とバイトが一致する正準形�
 ### 交通網の変遷（高速道路・鉄道・空港の時系列）
 
 `/geo/history/<expressway|railway|airport>[/<regionCode|NN>]` は国土数値情報 N06・N05・N08 の時系列を年スライダーで描く。
-台帳は `packages/gis/src/infra-history/networks.ts`（原典URL・版・ZIP SHA・公開状態・属性名・種別・線か点か・現況の dataId）。
+台帳は `geo.infra-history-networks`（原典URL・版・ZIP SHA・公開状態・属性名・線か点か・現況の dataId。読み込み口 `packages/gis/src/infra-history/networks.ts` が種別を区分の台帳から結ぶ）。
 利用条件は網ごとに複製せず台帳 `geo.ksj-datasets` の `usageTerms`（時系列）から引く。N06「時系列データとして使用する場合：非商用」、N05「商用利用はできません」、N08「商用可」（2026-10-29 公式ページで確認）。
 広告の有無は台帳から導く（`apps/web/src/lib/google-adsense/ad-free-paths.ts`）。時系列が非商用の網と、出典表示だけで商用利用できない単体 GIS ページ（`/geo/datasets/<id>`）は AdSense の script を読まない。URL を手で列挙しない。
 非商用の網の公開（R2 反映・検索掲載）は、事務局の了承を `publication.permissionEvidence`（方法 official-terms / written / phone・日付・相手・了承の範囲・要旨・記録者）に記録し `public-approved` にしてから行う。電話も認める（2026-10-29 オーナー決定）。公開には範囲に `ad-free-page` と `processed-data-delivery` の両方が要り、判定は `isInfraNetworkPublishable` に集約する（ページの noindex と `ksj-publication-guard.ts` が同じ関数を使う）。
 それまでは `noindex` で、`ksj-publication-guard.ts` が `app/geo/history/` を拒否する。
 空港は点の網で、外周の頂点の平均を代表点にし、県は属性の市区町村コード（`N08_001`）で決める。指標は延長ではなく施設数（関係 ID の重複を除いて数える）。原典の 11 種別は表示の 4 区分へまとめる（`sourceCodes`）。点だけの TopoJSON は簡略化・再量子化しない（点の座標が二重に量子化される）。
 現況の単体ページ（`currentDataId`）と時系列ページは相互にリンクする（`findInfraNetworksForDataset`）。
-種別と色は区分の台帳 `mlit-ksj/classifications.ts` を単体 GIS ページと共有する。凡例 (`ChartLegend`) で種別を切ると、地図・合計・推移・県別の一覧を表示中の種別だけで描く。地図の読み方・利用条件・検算は右から開く Sheet に置き、画面には出典の 1 行を常に出す。
+種別と色は区分の台帳 `geo.ksj-classifications` を単体 GIS ページと共有する。凡例 (`ChartLegend`) で種別を切ると、地図・合計・推移・県別の一覧を表示中の種別だけで描く。地図の読み方・利用条件・検算は右から開く Sheet に置き、画面には出典の 1 行を常に出す。
 区間は頂点間の線分の中点で県を決め（ポリゴン → 海岸線5km、決まらなければ未帰属）、47県＋未帰属＝全国を保存則で検査する。
 原典の「999（年不明）」は推測で年を当てず除外し、manifest と画面に件数・路線名を出す。
 原典は会社名・事業者などの属性が変わると同じ区間でも記録を分けるので、記録の開始年を開通と扱わない。

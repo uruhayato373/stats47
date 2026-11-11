@@ -85,7 +85,7 @@ fi
 # 2.2b GIS 台帳の参照整合 (2026-10-29)。KSJ 台帳 (geo.ksj-datasets) を親表に、技術設定・公式利用条件・GIS 一覧・単体ページ・
 # 指標の ksjDataId・交通網の変遷の台帳が存在しない dataId を指していないかを R2 なしで検査する。
 # geo:check-data-catalog は R2 の在庫まで読むため手動で、台帳どうしのずれを commit 前に止める手段が無かった。
-if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/|data/geo/(ksj|analyses|source-pages)/|data/open-data/)"; then
+if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/)"; then
   echo -e "${GREEN}🗂️  GIS 台帳の参照整合...${NC}"
   if ! (cd "$GUARD_ROOT/packages/gis" && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts > /tmp/gis-dataset-references.log 2>&1); then
     tail -30 /tmp/gis-dataset-references.log
@@ -121,7 +121,7 @@ if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(contents/blog/|data/note/art
 fi
 
 # Canonical metric and content contracts: reject schema, ID and generated-index drift.
-if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|data/business-plan/plan/|data/source-inventory/(policies/|japan-zue/[^/]+\.json$)|data/ranking/hooks/|data/data-quality/allowlists/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|data/business-plan/plan/|data/source-inventory/(policies/|japan-zue/[^/]+\.json$)|data/ranking/hooks/|data/data-quality/allowlists/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
   if ! (cd "$GUARD_ROOT" && npm run build:category-keys --workspace=@stats47/data-configs -- --check && npm run metrics:check && npm run content:check); then
     echo "Metric/content identity contract failed"
     ERROR_COUNT=$((ERROR_COUNT + 1))

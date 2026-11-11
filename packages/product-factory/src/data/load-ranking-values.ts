@@ -1,9 +1,9 @@
 /**
  * R2 (公開 URL) から ranking 観測値を取得するリーダ。
  * `app/ranking/<key>/values.json` の最新フル 47 県 partition を返す。
- * 出典メタ (調査名・statsDataId 等) は values.json に無いため、スナップショット TS 側で手記する。
+ * 出典メタ (調査名・statsDataId 等) は values.json に無いため、台帳 `products.pack-datasets` の JSON 側で手記する。
  *
- * CLI: `npx tsx src/data/load-ranking-values.ts <rankingKey>`
+ * CLI: `npx tsx src/data/load-ranking-values.ts <rankingKey>` (台帳の `values` に貼れる JSON の配列を出す)
  */
 import { PREFECTURE_CODES5, toCode5 } from "./prefectures";
 import { pathToFileURL } from "node:url";
@@ -110,7 +110,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   fetchRankingValues(key)
     .then((r) => {
       console.log(`year=${r.year} unit=${r.unit} count=${r.values.length}`);
-      for (const v of r.values) console.log(`    { code: "${v.code5}", value: ${v.value} },`);
+      console.log(JSON.stringify(r.values.map((v) => ({ code: v.code5, value: v.value })), null, 2));
     })
     .catch((e: unknown) => {
       console.error(e instanceof Error ? e.message : String(e));

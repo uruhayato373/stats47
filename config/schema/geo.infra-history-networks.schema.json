@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "交通網の変遷ページの台帳",
+  "description": "data/geo/infra-history/networks.json の形状契約。交通網 (高速道路・鉄道・空港の時系列 GIS) ごとに、ページの問い・原典の版と SHA-256・使い方・公開の状態と根拠・原典の属性名・年の範囲・注意書きを持つ。並びがページの順。生成スクリプトは原典 ZIP の SHA が一致しなければ止まり、R2 publisher は publication.status が public-approved で、根拠の了承範囲に ad-free-page と processed-data-delivery の両方を含むときだけ app/geo/history/<key>/ を通す。利用条件と公式ページの URL は書かず geo.ksj-datasets から引き、種別の属性名と種別 (区分・色) は書かず geo.ksj-classifications から原典の dataId で結ぶ (読み込み口 packages/gis/src/infra-history/networks.ts)。key・usage・geometry・status・method・scope の列挙は packages/gis/src/infra-history/types.ts の型と同じ。notes は交通網ごとの判断の記録 (key をキーにした文の配列)。",
+  "type": "object",
+  "required": ["networks"],
+  "additionalProperties": false,
+  "properties": {
+    "networks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/network" }
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+    }
+  },
+  "definitions": {
+    "network": {
+      "type": "object",
+      "required": ["key", "label", "question", "description", "source", "usage", "geometry", "measure", "publication", "attributes", "years", "cautions"],
+      "additionalProperties": false,
+      "properties": {
+        "key": { "enum": ["expressway", "railway", "airport"], "description": "URL と R2 key に使う交通網の slug" },
+        "label": { "type": "string", "minLength": 1 },
+        "question": { "type": "string", "minLength": 1, "description": "ページの問い (見出し)" },
+        "description": { "type": "string", "minLength": 1 },
+        "source": {
+          "type": "object",
+          "required": ["dataId", "version", "name", "provider", "archiveUrl", "archiveSha256", "archiveBytes", "entry", "retrievedAt"],
+          "additionalProperties": false,
+          "properties": {
+            "dataId": { "type": "string", "description": "geo.ksj-datasets の dataId" },
+            "version": { "type": "string", "pattern": "^[0-9]{2}$", "description": "この集計に使った国土数値情報の版 (2 桁)" },
+            "name": { "type": "string", "minLength": 1 },
+            "provider": { "type": "string", "minLength": 1 },
+            "archiveUrl": { "type": "string", "pattern": "^https://" },
+            "archiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "archiveBytes": { "type": "integer", "minimum": 1 },
+            "entry": { "type": "string", "minLength": 1, "description": "ZIP 内で使う GeoJSON" },
+            "retrievedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}([.][0-9]{3})?Z$", "description": "実際にダウンロードした日時 (ISO 8601)" }
+          }
+        },
+        "usage": { "enum": ["current", "time-series"], "description": "このページの使い方。利用条件は geo.ksj-datasets の usageTerms[usage]" },
+        "geometry": { "enum": ["line", "point"], "description": "line = 区間の線を県境で分けて延長を集計する / point = 施設の位置を点で描き、関係 ID の数を集計する" },
+        "measure": {
+          "type": "object",
+          "required": ["label", "unit"],
+          "additionalProperties": false,
+          "properties": { "label": { "type": "string", "minLength": 1 }, "unit": { "type": "string", "minLength": 1 } }
+        },
+        "currentDataId": { "type": "string", "description": "同じものの現況を描く単体 GIS ページの dataId (/geo/datasets/<dataId>)" },
+        "publication": {
+          "type": "object",
+          "required": ["status", "permissionEvidence", "blockedReason"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["local-only", "public-approved"] },
+            "permissionEvidence": {
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "required": ["method", "date", "counterpart", "scope", "summary", "recordedBy"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "method": { "enum": ["official-terms", "written", "phone"] },
+                    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+                    "counterpart": { "type": "string", "minLength": 1, "description": "相手 (部署・担当者)。official-terms は確認したページの URL" },
+                    "scope": {
+                      "type": "array",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": { "enum": ["ad-free-page", "processed-data-delivery", "sns", "ad-page"] }
+                    },
+                    "summary": { "type": "string", "minLength": 1, "description": "了承の内容の要旨 (相手の言葉に近い形で)" },
+                    "recordedBy": { "type": "string", "minLength": 1 }
+                  }
+                }
+              ]
+            },
+            "blockedReason": { "type": ["string", "null"] }
+          }
+        },
+        "attributes": {
+          "type": "object",
+          "required": ["start", "end", "name", "relation"],
+          "additionalProperties": false,
+          "properties": {
+            "start": { "type": "string", "minLength": 1, "description": "設置期間の開始年の属性名" },
+            "end": { "type": "string", "minLength": 1, "description": "設置期間の終了年の属性名 (継続中は 9999)" },
+            "name": { "type": "string", "minLength": 1 },
+            "relation": { "type": "string", "minLength": 1, "description": "関係 ID (同じ区間の記録をつなぐ ID)" },
+            "relationNote": { "type": "string", "minLength": 1 },
+            "prefectureSource": {
+              "type": "object",
+              "required": ["kind", "field"],
+              "properties": { "kind": { "type": "string" }, "field": { "type": "string" } },
+              "description": "県を属性から決めるときの宣言 (packages/gis/src/mlit-ksj/prefecture-assign.ts の PrefectureSource)"
+            }
+          }
+        },
+        "years": {
+          "type": "object",
+          "required": ["first", "last"],
+          "additionalProperties": false,
+          "properties": { "first": { "type": "integer" }, "last": { "type": "integer" } }
+        },
+        "cautions": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}
