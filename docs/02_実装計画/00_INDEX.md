@@ -34,6 +34,7 @@ tags: [実装計画]
 | [`46_その他参考文献OCR・クロップ・stats47展開実装仕様.md`](./46_%E3%81%9D%E3%81%AE%E4%BB%96%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AEOCR%E3%83%BB%E3%82%AF%E3%83%AD%E3%83%83%E3%83%97%E3%83%BBstats47%E5%B1%95%E9%96%8B%E5%AE%9F%E8%A3%85%E4%BB%95%E6%A7%98.md) | その他参考文献OCR・クロップ・stats47展開実装仕様 | `active` | `PREFECTURE-DEVIATION-S5-01` |
 | [`47_GeoAI事業M1実装仕様.md`](./47_GeoAI%E4%BA%8B%E6%A5%ADM1%E5%AE%9F%E8%A3%85%E4%BB%95%E6%A7%98.md) | GeoAI事業M1実装仕様 | `active` | `null` |
 | [`48_e-Statカタログ実装仕様.md`](./48_e-Stat%E3%82%AB%E3%82%BF%E3%83%AD%E3%82%B0%E5%AE%9F%E8%A3%85%E4%BB%95%E6%A7%98.md) | e-Statカタログ実装仕様 | `active` | `ESTAT-CATALOG-SSDS-DERIVE-01` |
+| [`49_補助金の根拠データとAIノウハウ展開仕様.md`](./49_%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE%E6%A0%B9%E6%8B%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%A8AI%E3%83%8E%E3%82%A6%E3%83%8F%E3%82%A6%E5%B1%95%E9%96%8B%E4%BB%95%E6%A7%98.md) | 補助金の根拠データとAIノウハウ展開仕様 | `draft` | `SUBSIDY-EVIDENCE-STRATEGY-01` |
 <!-- docs-governance:active-plans:end -->
 
 ## 関連（このフォルダ外の正典）
