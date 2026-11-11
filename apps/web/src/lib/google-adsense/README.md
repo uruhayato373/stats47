@@ -9,15 +9,23 @@ Google AdSense広告を表示するための技術ユーティリティ。設定
 
 ## 広告インテントの恒久オプトアウト
 
-AdSense の「広告インテント」は既存本文を広告リンクへ置換するため、stats47 では使用しない。
+AdSense の「広告インテント」には 3 つの形がある。既存の本文を広告リンクへ置換する「リンク」は使わない
+(2026-08 に本文と出典の語が書き換えられた)。文字を書き換えない「アンカー」「チップ」は、ブログの個別記事でだけ試す
+(2026-11-11 オーナー決定。経過は backlog `ADSENSE-OVERLAY-AB-01`)。
 
 - AdSense 管理画面の `広告 > stats47.jp > 編集 > インテント重視のフォーマット` で
-  **広告インテントをオフ**に保つ。
+  **「広告インテントのリンクをページの既存のテキストに挿入できるようにする」をオフ**に保つ
+  (管理画面の操作は人間のみ。`.claude/scripts/google-admin/README.md`)。
 - `app/layout.tsx` と `app/global-error.tsx` の `<body>` に Google 公式の
-  `google-anno-skip` を付け、管理画面の設定が変わってもリンク・アンカー・チップを
-  全ページで挿入させない。
-- `tests/smoke/third-party-dom-injection.spec.ts` と
-  `src/lib/google-adsense/__tests__/ad-intents-opt-out-contract.test.ts` がこの契約を固定する。
+  `google-anno-skip` を付け、既定では全ページでリンク・アンカー・チップを挿入させない。
+- ブログの個別記事 (`/blog/<slug>`) を開いたときだけ、`AdIntentScope` が body の目印を外す
+  (範囲は `ad-intent-scope.ts` の `isAdIntentAllowedPath`)。サーバーが返す HTML には目印が残るので、
+  外す処理が動かなければ拒否のままになる。
+- 出典の一覧・図の注記 (`ChartFooter`)・表・引用・記事の見出し・右レールには要素単位で `google-anno-skip` を付け、
+  管理画面の設定が変わっても書き換えられないようにする。
+- `tests/smoke/third-party-dom-injection.spec.ts`・
+  `src/lib/google-adsense/__tests__/ad-intents-opt-out-contract.test.ts`・
+  `src/lib/google-adsense/__tests__/ad-intent-scope.test.tsx` がこの契約を固定する。
 
 公式仕様: https://support.google.com/adsense/answer/13844047
 
@@ -122,7 +130,7 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=true
 ## 注意事項
 
 - 全体スイッチが `false` の間は、開発用プレースホルダーを含めて何も描画しない
-- AdSense を再開しても `google-anno-skip` は外さない（出典・本文の改変防止）
+- `<body>` と要素単位の `google-anno-skip` は外さない（出典・本文の改変防止）。範囲を広げるときは `ad-intent-scope.ts` だけを変える
 - 開発環境（`NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=false`）ではプレースホルダーを表示
 - 遅延ロード（Intersection Observer）により、パフォーマンスへの影響を最小化
 - AdBlock で広告がブロックされた場合は何も表示しない

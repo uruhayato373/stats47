@@ -35,6 +35,7 @@ import "./globals.css";
 
 import { AppSidebar } from "@/components/organisms/AppSidebar";
 import {
+  AdIntentScope,
   AdSenseScript,
   SidebarInset,
   SidebarProvider,
@@ -138,6 +139,8 @@ export default function RootLayout({
         {/* Google Analytics 4 スクリプト */}
         <GoogleAnalytics />
         {/* Google AdSense スクリプト（全体停止時はclient component自体を生成しない） */}
+        {/* 広告インテントを出してよいページ (ブログの個別記事) でだけ body の拒否の目印を外す。AdSenseScript より前に置く */}
+        {ADSENSE_DISPLAY_ENABLED && <AdIntentScope />}
         {ADSENSE_DISPLAY_ENABLED && <AdSenseScript adFreePathPrefixes={AD_FREE_PATH_PREFIXES} />}
         {/* A8.net リンクマネージャー（通常リンクをアフィリエイトリンクに自動変換） */}
         <A8LinkManager />

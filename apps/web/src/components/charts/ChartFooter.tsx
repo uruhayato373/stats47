@@ -115,7 +115,7 @@ export function ChartFooter({
   }
 
   return (
-    <div className="space-y-1.5">
+    <div className="google-anno-skip space-y-1.5">
       {annotation && (
         <p className="text-left text-xs leading-relaxed text-muted-foreground">
           {annotation}

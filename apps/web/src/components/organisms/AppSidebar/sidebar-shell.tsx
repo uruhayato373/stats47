@@ -21,4 +21,5 @@ export {
   SidebarMenuSubItem,
   SidebarProvider,
 } from '@stats47/components/atoms/ui/sidebar';
+export { AdIntentScope } from '@/lib/google-adsense/components/AdIntentScope';
 export { AdSenseScript } from '@/lib/google-adsense/components/AdSenseScript';
