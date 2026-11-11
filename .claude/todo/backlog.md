@@ -2163,6 +2163,27 @@ updated: 2026-11-01
 - **完了条件**: 対象通知に未分類がなく、現在の問題は既存カードに接続し、既存運用で再利用する手順と保存先が定まる。
 - **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 11-09 の通知「サイトマップ内のページが登録されない新しい要因」は robots.txt ブロック (58) とリダイレクト (17)。送信済みビューの noindex 578 件は全件が市区町村ページで、クロール日は 8 月〜10-21 (データブック公開 `436f46b43` より前)。robots ブロックは見えた 10 件が市区町村ページでクロール日は 5 月 (解除 5-23 より前)。サイトマップの市区町村 1,741 件から 70 件を Googlebot UA で取得し全件 200・`index, follow`。両方とも 11-11 に GSC で「修正を検証」を開始した (表示: 検証 開始・開始日 2026/11/11)。**次**: 11-25 以降に検証結果の通知と送信済みビューの 2 件数を読む。合格しなければ残った URL の robots メタと HTTP を読み直す。
 
+### [GSC-USER-ACTIONS-01] GSC の記録と Googlebot の集計に要る、オーナーだけの 2 つの作業
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-11] [期日:2026-11-13] [領域:サイト]
+
+2026-11-11 のデプロイ後作業で、Claude には実行できず止まっているものが 2 つある。どちらも 11-14 (土) の週次取得より前に済ませたい。
+
+- **① Google へのログイン**: 送信済みビューの記録 (`data/gsc/coverage-submitted-history.csv`) を取る専用プロファイル `.local/playwright-google-admin-profile` が Google に未ログインで、取得スクリプトが 10 分待って止まる (11-11 に確認)。Mac でこのプロファイルを開いて Search Console の stats47.jp に入れる状態にする。やり方は `docs/01_技術設計/07_Playwright認証プロファイル.md`。
+- **② Cloudflare トークンの権限**: CI の API トークン「stats47」に、ゾーン 4caf2866… の Analytics 読み取り (`zone.analytics.read`) を足す。足すまで日次 snapshot の `googlebot` は「取得不能」になる (11-11 の run 42958312727 で確認)。Cloudflare の API トークン画面で権限を足し、翌日の `data/cloudflare/snapshots/<日付>.json` の `googlebot.status` が `unavailable` でなくなることを確かめる。
+- **停止条件・禁止**: 認証情報を Claude に渡さない。権限付与は Claude が代行しない。
+- **完了条件**: ① は 11-14 の取得で `coverage-submitted-history.csv` に `captured` の行が入る。② は翌日の snapshot で `googlebot` の件数が入る。
+
+### [GSC-POSTDEPLOY-VERIFY-01] 11-11 の GSC 是正で、確認しきれていない 3 点を確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [期日:2026-11-18] [領域:サイト]
+
+2026-11-11 の 2 回のデプロイ後の確認で、本番の HTTP と HTML は確認できたが、次の 3 点は手が届いていない。
+
+- **ダウンロードのボタン**: `/ranking/abandoned-cultivated-land-area` で KML・GeoJSON のボタンを実際に押し、ファイルが保存されることを確かめる (HTML の href が 0 になったことと、URL が 200 を返すことは確認済み)。
+- **storage の robots.txt の副作用**: 反映後 (11-11 04:22Z) に、OGP 画像・ブログの図が 200 のままか、市区町村ランキングの Dataset (`contentUrl` が `app/municipalities/ranking/<key>/values.json`) がリッチリザルトテストで読めるかを確かめる。Allow が効いていなければ `packages/r2-storage/src/storage-host/robots.txt` を直し `publish-storage-robots.yml` を流し直す。
+- **POST の数え直し**: 11-12 以降に Cloudflare で Googlebot の POST を 24 時間数え、基準 262 件 (県×テーマとテーマ) と比べる。結果は `GSC-CRAWL-WASTE-01` に書く。
+- **停止条件・禁止**: 1 点でも想定と違えば、原因を確定するまで robots.txt・prefetch を追加で変えない。
+- **完了条件**: 3 点の実測がこのカードか `GSC-CRAWL-WASTE-01` に残り、このカードを削除する。
+
 ### [GSC-CRAWL-WASTE-01] Google のクロールがページ本体以外に使われている分を確かめて止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [領域:サイト]
 
