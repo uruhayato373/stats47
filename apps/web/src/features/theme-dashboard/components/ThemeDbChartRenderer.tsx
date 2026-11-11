@@ -12,6 +12,7 @@ import { STAT_META_CLASS, STAT_UNIT_CLASS, STAT_VALUE_CLASS } from '@/components
 import { loadThemeChartResultBatched } from '../lib/batched-theme-chart-result';
 import { type ThemeChartLoadResult } from '../lib/theme-chart-result';
 
+import { useInitialThemeChartResult } from './InitialThemeDataContext';
 import { MarkdownSectionRenderer } from './MarkdownSectionRenderer';
 import { ThemeChartResultRenderer } from './ThemeChartResultRenderer';
 
@@ -32,13 +33,21 @@ interface Props {
  * 実際のチャート描画は ThemeChartResultRenderer に委譲する。
  */
 export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }: Props) {
+  const initialChartResult = useInitialThemeChartResult();
+  // サーバーが初回描画で渡した結果 (表示中の地域の分) から始める。県を切り替えたら下の effect が取りに行く
   const [loadResult, setLoadResult] = useState<
     ThemeChartLoadResult | undefined
-  >(undefined);
+  >(() => initialChartResult(chart.componentKey, prefCode));
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     if (chart.componentType === 'markdown-section') return;
+
+    const seeded = initialChartResult(chart.componentKey, prefCode);
+    if (seeded) {
+      setLoadResult(seeded);
+      return;
+    }
 
     let cancelled = false;
     setLoadResult(undefined);

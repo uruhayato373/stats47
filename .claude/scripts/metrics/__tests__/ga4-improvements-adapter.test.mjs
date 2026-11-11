@@ -4,6 +4,11 @@ import {
   createGa4ImprovementsAdapter, extractGa4Pages, spansDiscontinuity, sumPageViews, GA4_MEASUREMENT_DISCONTINUITY_WEEK,
 } from "../lib/ga4-improvements-adapter.mjs";
 import { runAdapter } from "../../lib/effect-verdict/cli.mjs";
+import { DEFAULT_THRESHOLDS } from "../../lib/effect-verdict/thresholds.mjs";
+
+// 鮮度の判定は実行日で変わる。固定の週 (W44) を使うこのテストは、観測日から 10 日を過ぎた 2026-11-11 に
+// stale-source で pending になり落ちた。ここで確かめるのは交絡の扱いなので、鮮度の上限だけを外す。
+const WITHOUT_FRESHNESS_LIMIT = { ...DEFAULT_THRESHOLDS, freshness: { ...DEFAULT_THRESHOLDS.freshness, maxSourceAgeDays: Number.MAX_SAFE_INTEGER } };
 
 const rows = (pv) => [
   { pagePath: "/blog/a", screenPageViews: String(pv) },
@@ -40,7 +45,7 @@ test("目印が揃った施策は判定され、不連続をまたぐと confoun
 
 test("不連続の後だけの窓は交絡なしで判定される (効果あり)", () => {
   const title = "施策 [ga4-page: /blog/a] デプロイ済 2026-10-05 [target: +200 pageviews]";
-  const v = runAdapter(adapter(title, ["2026-W40", "2026-W44"], { "2026-W40": 500, "2026-W44": 900 }));
+  const v = runAdapter(adapter(title, ["2026-W40", "2026-W44"], { "2026-W40": 500, "2026-W44": 900 }), WITHOUT_FRESHNESS_LIMIT);
   assert.equal(v[0].skipped, false);
   assert.ok(!v[0].guards.some((g) => g.code === "confounded"));
   assert.equal(v[0].before.value, 510);

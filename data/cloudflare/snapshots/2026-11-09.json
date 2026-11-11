@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "fetched_at": "2026-11-10T00:49:11.996Z",
+  "fetched_at": "2026-11-10T22:29:20.980Z",
   "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
   "d1": {
     "readQueries": 0,
@@ -60,22 +60,22 @@
     }
   },
   "r2_storage": {
-    "totalBytes": 44837943201,
-    "totalObjects": 143386,
+    "totalBytes": 45077872824,
+    "totalObjects": 143854,
     "byBucket": {
       "stats47-private": {
-        "bytes": 3037252298,
-        "objects": 10090,
+        "bytes": 3048714281,
+        "objects": 10159,
         "uploads": 0
       },
       "stats47": {
-        "bytes": 33491939279,
-        "objects": 115022,
+        "bytes": 33573788165,
+        "objects": 115233,
         "uploads": 0
       },
       "doboku-note": {
-        "bytes": 977958015,
-        "objects": 14041,
+        "bytes": 990020954,
+        "objects": 14201,
         "uploads": 0
       },
       "stats47-cache": {
@@ -84,8 +84,8 @@
         "uploads": 0
       },
       "doboku-note-archive": {
-        "bytes": 7330793609,
-        "objects": 4233,
+        "bytes": 7465349424,
+        "objects": 4261,
         "uploads": 0
       }
     }
