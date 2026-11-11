@@ -48,7 +48,7 @@ developer_instructions = '''
 ## 運用ループ (月次/四半期 + 実験駆動)
 
 真実源: `data/themes/portfolio.json` (テーマ別評価) + `experiments.json` (実験台帳)。
-schema と判定規律の正典: `data/themes/README.md`。
+形の正典: 台帳 `themes.portfolio` / `themes.experiments` の Schema (`config/schema/themes.*.schema.json`)。判定規律: `validate-theme-state.mjs`。
 
 1. **状態リコンサイル (read-only)**: portfolio.json を読み、ThemeCatalog (metrics/charts/selection) ・
    最新 GSC/GA4 snapshot (`data/{gsc,ga4}/snapshots/<週>/pages.csv`

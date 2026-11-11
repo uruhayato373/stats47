@@ -12,7 +12,7 @@ export const BLOG_INDEX_KEY = 'app/blog/all.json';
 const root = resolve(__dirname, '../../../../..');
 const contractFiles = [
   'apps/web/scripts/export-blog-snapshot.ts',
-  'apps/web/src/config/gone-blog-slugs.ts',
+  datasetPath('site.gone-blog-slugs'),
   'apps/web/src/features/blog/services/article-survey-taxonomy.ts',
   'apps/web/src/features/blog/services/article-metric-pairs.ts',
   'packages/ranking/src/survey/survey-taxonomy.ts',

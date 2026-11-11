@@ -1,0 +1,42 @@
+{
+  "redirects": [
+    {
+      "from": "fishing-port-count",
+      "to": "fishing-port-count-ksj",
+      "reason": "旧KSJ漁港系列は終了し、水産庁の公式登録総数へ統合。旧年の系列は接続しない。"
+    },
+    {
+      "from": "ssdse-c-lb021101",
+      "to": "tuna-consumption-expenditure"
+    },
+    {
+      "from": "ssdse-c-lb061001",
+      "to": "apple-consumption-expenditure"
+    },
+    {
+      "from": "ssdse-c-lb092007",
+      "to": "gyoza-frozen-consumption-expenditure"
+    },
+    {
+      "from": "ssdse-c-lb101001",
+      "to": "green-tea-consumption-expenditure"
+    },
+    {
+      "from": "ssdse-c-lb121101",
+      "to": "soba-udon-dining-consumption-expenditure"
+    },
+    {
+      "from": "ssdse-d-md22",
+      "to": "hobby-participation-rate-diy"
+    },
+    {
+      "from": "per-capita-kenmin-shotoku-h27",
+      "to": "per-capita-prefectural-income-h27"
+    },
+    {
+      "from": "daytime-population-ratio",
+      "to": "day-time-population-ratio",
+      "reason": "国勢調査 2020 単年の重複キー。2020 年の 47 県の値は社会・人口統計体系の系列と一致し、そちらは 2000〜2020 年と市区町村の値を持つ (METRIC-DAYTIME-RATIO-DUP-01)"
+    }
+  ]
+}

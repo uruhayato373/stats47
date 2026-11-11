@@ -1,38 +1,9 @@
+import data from '../../../../data/site/url-history/gone-blog-slugs.json';
+
 /**
- * DB から完全削除済みのブログ slug 一覧
+ * 完全削除済みのブログ slug 一覧 (middleware が 410 Gone を返す)
  *
- * articles テーブルから slug ごと削除した記事は Next.js ルートで 404 を返すが、
- * Google に過去インデックスされた URL は長期間クロールされ続ける。middleware で
- * 410 Gone を返すことで「完全削除」シグナルを送りインデックス除去を早める。
- *
- * 対象外:
- * - 一時 unpublished（将来復帰の可能性あり）→ 404 のままでよい
- * - slug rename（301）→ `BLOG_SLUG_REDIRECTS` に追加する
- *
- * 追加ルール:
- * - GSC「見つかりませんでした」レポートに `/blog/{slug}` が出てきたらここに追加
- * - 記事を復活させる場合はここから削除
+ * 記録の正本は台帳 `site.gone-blog-slugs` (data/site/url-history/gone-blog-slugs.json)。ここは読み込み口。
+ * 対象外: 一時 unpublished (404 のまま)・slug rename (301 は `BLOG_SLUG_REDIRECTS`)
  */
-export const GONE_BLOG_SLUGS = new Set<string>([
-  // 読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (2026-11-06・data/content/type-fit-review.json)。本文は private R2 に退避済み
-  "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-  "road-length-per-km2-vs-residential-building-starts",
-  "shumai-consumption-expenditure-vs-jr-freight-shipment",
-  // 非商用KSJ原典に依存する旧記事を承認済み公開終了 (2026-09-06)。再公開不可。
-  "airport-count-vs-wind-power-plant-count-facility",
-  "dam-count-prefecture-gap",
-  "dam-count-vs-road-expressway-length",
-  // GSC soft-404 監査で「記事実体なし + HTTP 200 not-found」を確認 (2026-08-24)
-  "BarChartRace",
-  "cc-estat-12-industry-treemap",
-  "energy-production-regional-gap",
-  "fiscal-strength-index-gap",
-  "food-expenditure-ratio",
-  "job-salary-39-comparison",
-  "local-allocation-tax-structure",
-  "migration-destination-ranking-factors",
-  "population-decline-regional-gap",
-  "population-density-land-use-structure",
-  "population-choropleth",
-  "wage-gap-factors-2026",
-]);
+export const GONE_BLOG_SLUGS = new Set<string>(data.slugs.map(({ slug }) => slug));

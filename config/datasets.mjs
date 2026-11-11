@@ -152,12 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "apps/web/src/config/ranking-redirects.ts", why: "pending", phase: 5 },
-  { path: "apps/web/src/config/blog-redirects.ts", why: "pending", phase: 5 },
-  { path: "apps/web/src/config/legacy-theme-redirects.ts", why: "pending", phase: 5 },
-  { path: "apps/web/src/config/gone-blog-slugs.ts", why: "pending", phase: 5 },
-  { path: "apps/web/src/config/gone-tag-keys.ts", why: "pending", phase: 5 },
-  { path: "packages/ranking/src/config/gone-ranking-keys.ts", why: "pending", phase: 5 },
   { path: "packages/gis/src/mlit-ksj/datasets.ts", why: "pending", phase: 6 },
   { path: "packages/gis/src/mlit-ksj/official-policy.ts", why: "pending", phase: 6 },
   { path: "packages/gis/src/mlit-ksj/license-policy.ts", why: "pending", phase: 6 },
@@ -211,9 +205,7 @@ export const OUTSIDE_DATA = [
  * `data/` の中に置いてよい README (path → 残す理由)。`data/` はデータの置き場で、説明はカタログの説明欄と Schema の
  * description に書く。縮小専用。形の契約を文章で持つ README は、JSON Schema と検査へ移してから消す。
  */
-export const DATA_README_PENDING = {
-  "data/themes/README.md": "portfolio.json・experiments.json の形と、別 PC での再開手順を文章で持つ。段 4 で JSON Schema と skill へ移して消す",
-};
+export const DATA_README_PENDING = {};
 
 export const IGNORED_NAMES = new Set([".gitkeep", ".gitignore"]);
 
@@ -266,8 +258,8 @@ export const REGISTRIES = {
   },
   "ranking-slug-redirects": {
     description: "公開後に置き換えた旧 ranking slug (RANKING_SLUG_REDIRECTS のキー。現行ページへ 301 する)",
-    files: ["apps/web/src/config/ranking-redirects.ts"],
-    pattern: "^\\s*'([a-z0-9][a-z0-9-]*)':\\s*'",
+    files: ["data/site/url-history/ranking-redirects.json"],
+    pattern: '^\\s*"from":\\s*"([a-z0-9][a-z0-9-]*)"',
   },
   "ranking-content-keys": {
     description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
@@ -677,6 +669,31 @@ export const DATASETS = [
   d("ranking.audits", "data/ranking/{name}", "state", "data", "data", "ランキングの整合性監査・拡充 wave の索引"),
   d("ranking.wave-drafts", "data/ranking/wave-r1-drafts/{**}", "evidence", "data", "data", "ランキング拡充 wave の下書き"),
   d("site.link-audit", "data/site/{name}", "state", "site", "data", "サイト内リンクの監査"),
+  d("site.ranking-redirects", "data/site/url-history/ranking-redirects.json", "ledger", "site", "data", "公開後に置き換えた旧 ranking slug の 301 転送 (X・外部記事に残る旧 URL を現行ページへ一段で届ける)。middleware と SNS の投稿台帳の参照 (registry:ranking-slug-redirects) が読む", {
+    schema: "config/schema/site.ranking-redirects.schema.json",
+    refs: [{ field: "redirects[].to", to: "registry:metrics" }],
+  }),
+  d("site.blog-redirects", "data/site/url-history/blog-redirects.json", "ledger", "site", "data", "slug を変えたブログ記事の旧 slug → 新 slug の 301 転送 (middleware が読む)", {
+    schema: "config/schema/site.blog-redirects.schema.json",
+    refs: [{ field: "redirects[].to", to: "blog.articles", key: "articles[].slug" }],
+  }),
+  d("site.theme-redirects", "data/site/url-history/theme-redirects.json", "ledger", "site", "data", "廃止したページ・旧カテゴリ URL からテーマページへの 301 転送 (パスの正規表現の表と、/areas の旧カテゴリ → テーマの対応。middleware が読む)", {
+    schema: "config/schema/site.theme-redirects.schema.json",
+    refs: [
+      { field: "pathRedirects[].themeSlug", to: "themes.catalogs", key: "key" },
+      { field: "areaCategoryRedirects[].themeSlug", to: "themes.catalogs", key: "key" },
+    ],
+  }),
+  d("site.gone-blog-slugs", "data/site/url-history/gone-blog-slugs.json", "ledger", "site", "data", "完全削除したブログ slug (410 Gone を返す。退役の日付と理由を持つ。middleware と公開前の検査が読む)", {
+    schema: "config/schema/site.gone-blog-slugs.schema.json",
+    refs: [{ field: "slugs[].slug", to: "blog.articles", key: "articles[].slug" }],
+  }),
+  d("site.gone-tag-keys", "data/site/url-history/gone-tag-keys.json", "ledger", "site", "data", "削除済みの旧タグ slug (410 Gone を返す。middleware が読む)", {
+    schema: "config/schema/site.gone-tag-keys.schema.json",
+  }),
+  d("site.gone-ranking-keys", "data/site/url-history/gone-ranking-keys.json", "ledger", "site", "data", "退役した ranking キー (410 Gone を返し、一覧・sitemap のリンクからも外す。追加は KNOWN 再生成と指標の isActive:false とセット。middleware と packages/ranking の R2 リーダが読む)", {
+    schema: "config/schema/site.gone-ranking-keys.schema.json",
+  }),
   d("sns.ig-posted-log", "data/sns/ig-posted-log.jsonl", "ledger", "sns", "data", "Instagram の投稿済みログ (二重投稿の防止)"),
   d("sns.instagram-schedules", "data/sns/instagram-w{name}-schedule.json", "state", "sns", "data", "Instagram の週ごとの予約表"),
   d("sns.threads-schedule", "data/sns/threads-schedule.json", "state", "sns", "data", "Threads の予約表"),
@@ -754,7 +771,19 @@ export const DATASETS = [
     ],
   }),
   d("surveys.source-names-schema", "data/surveys/master/source-names.schema.json", "schema", "data", "data", "上の対応表の JSON Schema"),
-  d("themes.portfolio", "data/themes/{name}", "state", "data", "data", "テーマのポートフォリオ・品質・実験・CI レビュー"),
+  d("themes.portfolio", "data/themes/portfolio.json", "ledger", "data", "data", "テーマポートフォリオ (テーマごとの指標数・チャート数・レビューの有無・GSC/GA4 の計測・データ品質・ライフサイクル判定)。機械項目は build-theme-portfolio.ts と aggregate-theme-metrics.ts が再導出し、意味項目は build-theme-portfolio.ts の --set で変える。ThemeCatalog には計測値を書かない。手で編集しない", {
+    schema: "config/schema/themes.portfolio.schema.json",
+    refs: [{ field: "themes[].themeKey", to: "themes.catalogs", key: "key" }],
+  }),
+  d("themes.experiments", "data/themes/experiments.json", "ledger", "data", "data", "テーマの改善実験台帳 (baseline・7/28/56 日の観測・判定。新規 URL の初回公開 launch を含む)。書き込みは evaluate-theme-experiments.mjs だけ", {
+    schema: "config/schema/themes.experiments.schema.json",
+    refs: [{ field: "experiments[].themeKey", to: "themes.catalogs", key: "key" }],
+  }),
+  d("themes.quality", "data/themes/quality.json", "state", "data", "data", "テーマの週次の品質監査 (章・登録・期間・単位・有限値・重複・履歴退行の観測の要約と、下の 3 つの詳細ファイルの件数と SHA-256)。audit-theme-quality.ts が theme-quality-state.mjs 経由で 4 ファイルを一括で書き、読むときに SHA-256 と件数が合わなければ止まる"),
+  d("themes.quality-parts", "data/themes/quality.{name}.json", "state", "data", "data", "上の品質監査の詳細 (definitions・observations・lastGoodObservations。前回の正常値を持ち、異常が続く間に比較の基準をすり替えない)。各 1 MiB 以内"),
+  d("themes.ci-followup", "data/themes/ci-followup.json", "state", "data", "data", "テーマの継続フォローの機械観測 (全テーマの PC/mobile の表示・期日の checkpoint・レビューの入力 hash)。theme-followup.mjs が quality-suite-weekly.yml で毎週書く"),
+  d("themes.ci-review", "data/themes/ci-review.json", "state", "data", "data", "月次の公式資料の確認と改善判断の結果 (CI の Claude の構造化出力を record-theme-review.mjs が検証して保存。月内の sourceReviews を累積する)"),
+  d("themes.viewpoint-history", "data/themes/viewpoint-history.csv", "series", "data", "data", "テーマの指標を選ぶ視点 (themes.selection-viewpoints) の週ごとの該当件数。record-theme-viewpoints.ts が週次監査で追記する"),
   d("themes.role-review", "data/themes/role-review/{name}", "state", "data", "data", "テーマの指標の役割レビューキュー"),
   d("themes.chart-audit", "data/themes/charts/{name}", "state", "data", "data", "テーマのチャートの本番監査"),
 

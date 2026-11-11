@@ -56,11 +56,10 @@ const ROOT = findRepoRoot();
 
 const SOURCES = {
   knownRankingKeys: "packages/ranking/src/config/known-ranking-keys.ts",
-  // KNOWN と対で packages/ranking 側が実体 (apps/web の同名ファイルは re-export の殻)。
-  // 殻を指すと readQuotedSet が 0 件を返し、lint が「退役キーへのリンク」を全部見逃す。
-  goneRankingKeys: "packages/ranking/src/config/gone-ranking-keys.ts",
-  goneBlogSlugs: "apps/web/src/config/gone-blog-slugs.ts",
-  blogRedirects: "apps/web/src/config/blog-redirects.ts",
+  // 410 と 301 の一覧は URL の履歴の台帳 (data/site/url-history/) が正本
+  goneRankingKeys: datasetPath("site.gone-ranking-keys"),
+  goneBlogSlugs: datasetPath("site.gone-blog-slugs"),
+  blogRedirects: datasetPath("site.blog-redirects"),
   categoryKeys: datasetPath("categories.master"),
   metricsDir: datasetDir("metrics.definitions"),
   themeSets: "packages/types/src/indicator-sets",
@@ -82,6 +81,20 @@ function readQuotedSet(relPath) {
   }
   const src = fs.readFileSync(abs, "utf8");
   return new Set([...src.matchAll(/"([a-z0-9][a-z0-9-]*)"/g)].map((m) => m[1]));
+}
+
+/**
+ * 台帳 JSON の配列から ID を集合として取り出す。ファイルが無い・1 件も読めないときは落とす
+ * (空集合 = lint が全リンクを正常と誤認する)。
+ */
+function readLedgerSet(relPath, listField, idField) {
+  const abs = path.join(ROOT, relPath);
+  if (!fs.existsSync(abs)) {
+    throw new Error(`internal-link-lint: 参照元が見つかりません: ${relPath}`);
+  }
+  const ids = new Set(JSON.parse(fs.readFileSync(abs, "utf8"))[listField].map((row) => row[idField]));
+  if (!ids.size) throw new Error(`internal-link-lint: ${relPath} から ${listField}[].${idField} を 1 件も読めません`);
+  return ids;
 }
 
 /** 必須ファイルを読む (無ければ落とす) */
@@ -151,10 +164,10 @@ function loadKeySets() {
     municipalityPrefectureRanking,
     geoSlugs,
     rankingKnown: known,
-    rankingGone: readQuotedSet(SOURCES.goneRankingKeys),
-    blogGone: readQuotedSet(SOURCES.goneBlogSlugs),
+    rankingGone: readLedgerSet(SOURCES.goneRankingKeys, "keys", "key"),
+    blogGone: readLedgerSet(SOURCES.goneBlogSlugs, "slugs", "slug"),
     // 旧 slug → 現行 slug の 301。live では 200 に着地するのでリンク切れではない
-    blogRedirects: readQuotedSet(SOURCES.blogRedirects),
+    blogRedirects: readLedgerSet(SOURCES.blogRedirects, "redirects", "from"),
     categories,
     areaCodes,
     themes,

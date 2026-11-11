@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "削除済みの旧タグ slug (410)",
+  "description": "data/site/url-history/gone-tag-keys.json の形の契約。/tag/[tagKey] ルートは現在有効なタグだけを持つが、Google に過去インデックスされた英語 slug が残り notFound() で 404 を返していた。middleware で 410 Gone を返し、インデックスからの即時除去を促す。日本語の tagKey は middleware が別に 410 を返すので載せない。GSC の「見つかりませんでした」レポートに /tag/{英語slug} が出てきたら足し、タグが復活したら消す (復活したタグと重ならないことを apps/web の ranking-key-consistency テストが固定する)。since は削除を決めた日、reason は理由。",
+  "type": "object",
+  "required": ["keys"],
+  "additionalProperties": false,
+  "properties": {
+    "keys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key"],
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string", "minLength": 1 },
+          "since": { "$ref": "common.schema.json#/$defs/date" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

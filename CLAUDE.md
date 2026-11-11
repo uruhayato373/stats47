@@ -148,7 +148,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | ドメイン境界 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
 | エラーハンドリング | `docs/01_技術設計/05_エラーハンドリング.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/06_自動化インベントリ.md` |
-| URL 構造・301/410・canonical 戦略 ★新規ページ作成時必読 | コード SSOT: `apps/web/src/lib/url-policy.ts` + `config/{blog-redirects,legacy-category-keys,redirect-tag-keys}.ts` + `middleware.ts` / `sitemap.ts`。機械検証: `src/__tests__/middleware.test.ts` / `.github/scripts/smoke-test-routes.sh`。新規ページ手順は `.claude/rules/coding-standards.md` |
+| URL 構造・301/410・canonical 戦略 ★新規ページ作成時必読 | コード SSOT: `apps/web/src/lib/url-policy.ts` + `config/{blog-redirects,legacy-category-keys,redirect-tag-keys}.ts` + `middleware.ts` / `sitemap.ts`。転送・410 の記録の正本は台帳 `data/site/url-history/` (`config/` の同名 TS はその読み込み口)。機械検証: `src/__tests__/middleware.test.ts` / `.github/scripts/smoke-test-routes.sh`。新規ページ手順は `.claude/rules/coding-standards.md` |
 | **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/03_情報設計.md` |
 | **デザインシステム** (横幅/レール/Surface/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/04_デザインシステム.md` |
 | Playwright 認証プロファイル | `docs/01_技術設計/07_Playwright認証プロファイル.md` |
