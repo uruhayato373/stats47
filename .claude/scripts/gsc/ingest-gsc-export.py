@@ -27,6 +27,15 @@ from urllib.parse import urlparse
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 DRILLDOWN_DIR = os.path.join(PROJECT_ROOT, "data/gsc/coverage-drilldown")
+# 「すべての送信済みページ」ビュー (pages=ALL_SUBMITTED_URLS) の週次推移。datasets.mjs の gsc.coverage-submitted。
+SUBMITTED_HISTORY = os.path.join(PROJECT_ROOT, "data/gsc/coverage-submitted-history.csv")
+# export-coverage-playwright.mjs が送信済みビューの概要 zip 名の末尾に埋める識別子。
+SUBMITTED_MARKER = "送信済みビュー"
+SUBMITTED_HISTORY_REASONS = (
+    "discovered-not-indexed", "noindex-excluded", "crawled-not-indexed", "robots-blocked",
+    "not-found-404", "redirect", "redirect-error", "server-error-5xx", "soft-404",
+)
+SUBMITTED_HISTORY_HEADER = ["week", "date", "status", "indexed", "not-indexed", *SUBMITTED_HISTORY_REASONS]
 
 # GSC 「理由」(問題) → 正準 category slug。auto-resubmit.mjs は `*-urls.csv` を全て未INDEXED扱いするので、
 # 意図的カテゴリ(redirect/robots/noindex/alt-canonical/duplicate)も別名で保存し build 側で分類する。
@@ -189,6 +198,54 @@ def is_gsc_zip(zp: str) -> bool:
     return name.endswith(".zip") and ("インデックス" in name or "カバレッジ" in name or "Coverage" in name)
 
 
+def is_submitted_zip(zp: str) -> bool:
+    """送信済みビューの概要 zip か。「すべての既知」の集計へ混ぜると max マージで壊れるので分離する。"""
+    return SUBMITTED_MARKER in unicodedata.normalize("NFC", os.path.basename(zp))
+
+
+def build_submitted_record(report, week, date):
+    """送信済みビューの概要 zip 1 件から記録を作る。登録済み件数が読めなければ None (未取得扱い)。"""
+    if not report or not report.get("trend"):
+        return None
+    status = parse_index_status(report["trend"])
+    if not status:
+        return None
+    raw = dict(report.get("aggregate") or {})
+    totals = {CATEGORY_MAP.get(k, k): v for k, v in raw.items()}
+    return {
+        "week": week, "date": date, "view": "ALL_SUBMITTED_URLS", "status": "captured",
+        "index_status": status, "totals": totals, "raw": raw,
+    }
+
+
+def update_submitted_history(path, week, date, record):
+    """週次推移 CSV を更新する。record=None (未取得) は空欄で status=missing と記録し、0 では埋めない。
+    既に captured の週を missing で上書きしない。"""
+    rows = {}
+    if os.path.exists(path):
+        with open(path, encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                rows[row["week"]] = row
+    if record is None:
+        if rows.get(week, {}).get("status") == "captured":
+            return False
+        new = {"week": week, "date": date, "status": "missing"}
+    else:
+        status = record["index_status"]
+        new = {"week": week, "date": date, "status": "captured", "indexed": status["indexed"],
+               "not-indexed": "" if status["not_indexed"] is None else status["not_indexed"]}
+        for reason in SUBMITTED_HISTORY_REASONS:
+            if reason in record["totals"]:
+                new[reason] = record["totals"][reason]
+    rows[week] = new
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=SUBMITTED_HISTORY_HEADER, lineterminator="\n", restval="")
+        w.writeheader()
+        for key in sorted(rows):
+            w.writerow({k: rows[key].get(k, "") for k in SUBMITTED_HISTORY_HEADER})
+    return True
+
+
 def validate_actionable_reports(reports):
     """Validate this run's ZIP contents, not stale files already in the destination."""
     required = {"not-found-404", "soft-404", "server-error-5xx", "crawled-not-indexed", "discovered-not-indexed"}
@@ -245,6 +302,9 @@ def main():
         print(f"!! {args.src} に GSC zip が見つかりません (ファイル名に 'インデックス'/'カバレッジ'/'Coverage' を含む zip)", file=sys.stderr)
         sys.exit(1)
 
+    submitted_zips = [zp for zp in zips if is_submitted_zip(zp)]
+    zips = [zp for zp in zips if not is_submitted_zip(zp)]
+    submitted_report = process_zip(submitted_zips[-1]) if submitted_zips else None
     reports = [process_zip(zp) for zp in zips]
     if args.require_actionable:
         if any(r is None for r in reports):
@@ -294,6 +354,16 @@ def main():
             json.dump({"week": week, "date": today.isoformat(), "totals": totals, "raw": aggregate,
                        "index_status": index_status}, f, ensure_ascii=False, indent=2)
         written.append(("category-totals.json", len(totals)))
+
+    # 送信済みビュー: 取れた週だけ週フォルダへ記録し、推移 CSV には取れなかった週も missing で残す
+    submitted = build_submitted_record(submitted_report, week, today.isoformat())
+    if submitted:
+        with open(os.path.join(out_dir, "submitted-totals.json"), "w", encoding="utf-8") as f:
+            json.dump(submitted, f, ensure_ascii=False, indent=2)
+        written.append(("submitted-totals.json", len(submitted["totals"])))
+    else:
+        print("  !! 送信済みビューの概要 zip が無い/登録済み件数を読めない — 未取得として記録", file=sys.stderr)
+    update_submitted_history(SUBMITTED_HISTORY, week, today.isoformat(), submitted)
 
     if trend_text:
         with open(os.path.join(out_dir, "coverage-trend.csv"), "w", encoding="utf-8") as f:

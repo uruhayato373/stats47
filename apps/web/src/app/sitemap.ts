@@ -32,6 +32,7 @@ import {
   listLatestArticles,
   listAllTagsWithCount,
 } from '@/features/blog/server';
+import { infraHistoryIndexablePaths } from '@/features/infra-history';
 import { STOREFRONT_PRODUCTS } from '@/features/products';
 import { ALL_THEMES } from '@/features/theme-dashboard/config/all-themes';
 import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
@@ -61,7 +62,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
 /** Type A テーマ（都道府県単位で集計できるもの）— ports/railway/roads は除外 */
 const TYPE_A_THEME_SLUGS = [...AREA_THEME_SLUGS];
 
-const GEO_PAGES: MetadataRoute.Sitemap = [...GEO_INDEXABLE_ROUTES,...GIS_DATASETS.filter(dataset=>getKsjLicensePolicy(dataset.license).sourcePublication==='public-r2-eligible').map(dataset=>`/geo/datasets/${dataset.dataId}`)].map((path) => ({
+// インフラの変遷 (/geo/history) は 2026-11-11 まで掲載が漏れていた (GSC で 100 件超が「未送信で登録済み」)
+const GEO_PAGES: MetadataRoute.Sitemap = [...GEO_INDEXABLE_ROUTES,...infraHistoryIndexablePaths(),...GIS_DATASETS.filter(dataset=>getKsjLicensePolicy(dataset.license).sourcePublication==='public-r2-eligible').map(dataset=>`/geo/datasets/${dataset.dataId}`)].map((path) => ({
   url: BASE_URL + path,
   changeFrequency: 'monthly' as const,
   priority: 0.5,

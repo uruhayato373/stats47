@@ -2,6 +2,8 @@ import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 import { describe, expect, it, vi } from "vitest";
 
+import { infraHistoryIndexablePaths } from "@/features/infra-history";
+
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
 
 // この試験はstatic集合とindexを検証する。R2や全テーマの読み込みは対象外。
@@ -59,7 +61,8 @@ describe("sitemap index ↔ shard の件数整合", () => {
       .filter((dataset) => getKsjLicensePolicy(dataset.license).sourcePublication === 'public-r2-eligible')
       .map((dataset) => `/geo/datasets/${dataset.dataId}`);
     const geoPaths = paths.filter((path) => path === '/geo' || path.startsWith('/geo/'));
-    expect(geoPaths).toEqual([...GEO_INDEXABLE_ROUTES, ...sourcePaths]);
+    // インフラの変遷 (/geo/history) は、ページが index を出す範囲と同じ集合を載せる (2026-11-11)
+    expect(geoPaths).toEqual([...GEO_INDEXABLE_ROUTES, ...infraHistoryIndexablePaths(), ...sourcePaths]);
     expect(new Set(geoPaths).size).toBe(geoPaths.length);
     for (const dataset of GIS_DATASETS.filter((entry) => getKsjLicensePolicy(entry.license).sourcePublication !== 'public-r2-eligible')) {
       expect(paths).not.toContain(`/geo/datasets/${dataset.dataId}`);
