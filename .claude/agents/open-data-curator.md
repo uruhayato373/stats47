@@ -121,7 +121,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 | 工程 | 担当 |
 |---|---|
 | e-Stat統計表の実在・分類コード調査 | `estat-researcher` |
-| KSJ `datasets.ts` / `registry.ts` 登録 | `gis-curator` |
+| KSJ 台帳 `geo.ksj-datasets` / `registry.ts` 登録 | `gis-curator` |
 | KSJ download・TopoJSON変換 | `gis-pipeline-runner` |
 | 非KSJ取得pipeline実装 | 対象packageの実装agent。open-data-curatorは仕様を渡す |
 | metric configと47県観測値投入 | `data-ingester` |

@@ -147,7 +147,7 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 | 型A 面塗り（KSJ polygon-overlay） | A 流用 | 🟡 要 pipeline（R2 未変換） | 34 |
 | 型F メッシュ塗り（KSJ/DPF mesh） | F | 🔴 未実装（標高/将来推計人口/土地利用マップ） | 18 |
 | OD/流動矢印（DPF flow） | — | 🔴 未実装（通勤流動・訪日外国人流動） | 3 |
-| 形状未確定（unknown） | — | ⚪ 属性表/文書で地図化不能 or 要 datasets.ts 登録 | 15 |
+| 形状未確定（unknown） | — | ⚪ 属性表/文書で地図化不能 or 要 KSJ 台帳登録 | 15 |
 
 ### まちの計量舎の分析タイプ → stats47 カバレッジ（差別化の地図）
 

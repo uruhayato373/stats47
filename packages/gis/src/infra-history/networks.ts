@@ -26,7 +26,7 @@ const PHONE_PERMISSION_2026_10_29 = {
  * ここと一致しなければ止まり、R2 publisher は `publication.status` が `public-approved` で
  * なければ `app/geo/history/<key>/` を拒否する (`ksj-publication-guard.ts`)。
  *
- * 利用条件と公式ページの URL はここに書かず、GIS 台帳 (`mlit-ksj/datasets.ts`) の `usageTerms` と
+ * 利用条件と公式ページの URL はここに書かず、GIS 台帳 `geo.ksj-datasets` (読み込み口 `mlit-ksj/datasets.ts`) の `usageTerms` と
  * `sourcePageUrl` から引く (`infraNetworkTerms` / `infraNetworkPageUrl`)。広告の有無もその利用条件から決める
  * (`isInfraNetworkAdFree`)。高速道路・鉄道は時系列として描くと非商用なので広告を出さず、公開は事務局の書面回答を待つ
  * (`.claude/rules/geo-analysis-standards.md`「商用公開Gate」)。空港は商用可。

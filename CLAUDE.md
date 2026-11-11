@@ -106,7 +106,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
 | `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
 | `data-storage.md` | データの置き場の規則 (DB は `data/`・設定は `config/`・カタログと検査・置き場を移す手順) | .claude/skills・state・todo・docs |
-| `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |
+| `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (台帳 geo.ksj-datasets / ライセンス境界) | packages/gis・skills/gis |
 | `recorded-measurement-first.md` | ログインが要る計測は週次 (土曜) に Mac が記録し、セッションではブラウザで取りに行かず記録から判断する (hook が止める) | skills/{ads,analytics,management,product,sns,note}・計測/ASP系 agent・scripts/{measurement,ads,note,gsc,kdp}・計測の data |
 | `geo-analysis-standards.md` | Geo/GIS 掛け合わせコンテンツ (lineage / 保存則 / canonical / X・note 境界) | app/geo・features/geo-analysis・skills/gis |
 | `estat-api.md` | e-Stat API 利用 (年の 4 桁正規化・cdArea 禁止) | packages/estat-api・metrics・skills/estat |

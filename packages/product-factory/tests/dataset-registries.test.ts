@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { describe, expect, it } from "vitest";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
-import { BUSINESS_PLAN_M1_ANALYSES } from "@stats47/data-configs/business-plan";
+import { GEO_ANALYSES } from "@stats47/data-configs/business-plan";
 import { REGISTRIES } from "../../../config/datasets.mjs";
 import { resolveRegistry } from "../../../.claude/scripts/lib/check-datasets.mjs";
 import { ALL_PRODUCTS } from "../src/catalog/products";
@@ -48,20 +48,12 @@ describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む",
     );
   });
 
-  it("geo-campaign-metric-names は M1 Geo 分析の metricKeys の文字列リテラルで、指標と合わせると全 metricKeys を覆う", () => {
-    const names = resolveRegistry(REGISTRIES["geo-campaign-metric-names"], readText);
-    const metricKeys = new Set<string>(BUSINESS_PLAN_M1_ANALYSES.flatMap((a) => [...a.metricKeys]));
+  it("geo-analysis-metric-names = 全 Geo 分析 (GEO_ANALYSES) の metricKeys の和集合で、指標と合わせると全 metricKeys を覆う", () => {
+    const names = resolveRegistry(REGISTRIES["geo-analysis-metric-names"], readText);
+    const metricKeys = new Set<string>(GEO_ANALYSES.flatMap((a) => [...a.metricKeys]));
     for (const name of names) expect(metricKeys.has(name), `${name} は metricKeys に無い`).toBe(true);
     const geoPostKeys = resolveRegistry(REGISTRIES["geo-post-metric-keys"], readText, REGISTRIES);
     for (const key of metricKeys) expect(geoPostKeys.has(key), `${key} が Geo の投稿の参照先に無い`).toBe(true);
-  });
-
-  it("ksj-datasets = GIS 台帳 (GIS_DATASETS) の dataId", async () => {
-    // packages/gis はこの package の依存の外なので、実行時だけ読む
-    const { GIS_DATASETS } = (await import(pathToFileURL(resolve(ROOT, "packages/gis/src/mlit-ksj/datasets.ts")).href)) as {
-      GIS_DATASETS: { dataId: string }[];
-    };
-    expect(sorted(resolveRegistry(REGISTRIES["ksj-datasets"], readText))).toEqual(sorted(GIS_DATASETS.map((d) => d.dataId)));
   });
 
   it("[mutation] 読み方を取り違えると 0 件で例外になり、黙って空集合で照合しない", () => {

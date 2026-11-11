@@ -6,18 +6,18 @@
 - **ソース**: https://nlftp.mlit.go.jp/ksj/index.html
 - **スキル**: `/fetch-mlit-ksj`
 - **規約 (SSOT・追加規約・DBレス integrity)**: `.claude/rules/gis-data.md`（正典）
-- **メタ SSOT (登録データセット一覧の真実源)**: `datasets.ts`（git TS）
+- **メタ SSOT (登録データセット一覧の真実源)**: 台帳 `geo.ksj-datasets`（JSON + Schema。読み込み口 `datasets.ts`）
 - **管理 agent**: `gis-curator`（SSOT 管理）+ `gis-pipeline-runner`（pipeline 実行）
 - **完全DBレス**: `docs/01_技術設計/02_データアーキテクチャ.md`
 
-> **登録データセットの一覧は `datasets.ts` が真実源**。旧 doc 04 の自動生成表（`generate-docs.ts`）は
-> datasets.ts と重複するため 2026-07-12 に廃止。件数・構造の確認は下記で行う:
+> **登録データセットの一覧は台帳 `geo.ksj-datasets` が真実源**。旧 doc 04 の自動生成表（`generate-docs.ts`）は
+> 台帳と重複するため 2026-07-12 に廃止。件数・構造の確認は下記で行う:
 > `npm run geo:check-data-catalog`
 
 ## 使い方
 
 ```bash
-# 登録データセット一覧 (git TS SSOT)
+# 登録データセット一覧 (台帳 geo.ksj-datasets)
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --list
 
 # 単一データセット取得（全国）
@@ -175,9 +175,9 @@ R2成果物・provenanceを検証し、原典の公式URL（洪水は下記R2原
 ```
 packages/gis/src/mlit-ksj/
 ├── types.ts           # KsjCodeConfig, KsjResolvedDataset, KsjPipelineOptions 等の型定義
-├── datasets.ts        # ★メタ SSOT (git TS): 登録データセットのメタ + ranking 定義 (完全DBレス・2026-06-21)
+├── datasets.ts        # 台帳 geo.ksj-datasets の読み込み口 (登録データセットのメタ + ranking 定義)
 ├── registry.ts        # KSJ_CODE_CONFIG: 技術設定のみ (downloadUrlPattern/propertyMap/simplifyOptions)
-├── license-policy.ts  # 元データ公開 / 商用成果物 / 公開構造化データのfail-closed判定
+├── license-policy.ts  # 台帳 geo.ksj-license-policy の読み込み口。元データ公開 / 商用成果物 / 公開構造化データのfail-closed判定
 ├── property-map.ts    # KSJ 属性コード → 人間可読名マッピング（N02_001 → railwayType）
 ├── r2-path.ts         # R2 保存パス構築
 ├── downloader.ts      # zip ダウンロード・GeoJSON/Shapefile 抽出
@@ -191,10 +191,10 @@ packages/gis/src/mlit-ksj/
 ├── adapters/
 │   └── fetch-ksj-from-local.ts  # ローカル R2 から TopoJSON 読み込み
 └── scripts/
-    ├── run-pipeline.ts          # パイプライン CLI。datasets.tsを直接読む
+    ├── run-pipeline.ts          # パイプライン CLI。台帳 geo.ksj-datasets を直接読む
     ├── build-data-catalog.ts    # git TS + 実R2 + open-data-catalog → 取得カタログ
     ├── list-datasets.ts         # gis_datasets (使い捨て SQLite) 一覧 CLI (status 集計付き)
-    ├── seed-from-registry.ts    # ★datasets.ts (git TS SSOT) → 使い捨て SQLite を決定的に UPSERT 再構築
+    ├── seed-from-registry.ts    # ★台帳 geo.ksj-datasets → 使い捨て SQLite を決定的に UPSERT 再構築
     ├── seed-ksj-catalog.ts      # 候補 126 件 (ksj-catalog.json) を status='available' で SQLite に投入
     └── generate-ksj-stats-values.ts # ★KSJ topojson → app/stats/<key>/values.json (配信の正典)
 ```
@@ -205,7 +205,7 @@ packages/gis/src/mlit-ksj/
 > 後継は `generate-ksj-stats-values.ts` で、SQLite を経由せず `app/stats` を直接作る。
 
 > SQLite (`packages/database/.data/stats47.sqlite`) は git TS から再生成可能な**使い捨てビルドキャッシュ**で
-> SSOT ではない。永続/リモート D1 ではない。SSOT は **datasets.ts (メタ) + registry.ts (技術設定) + R2 (配信)**。
+> SSOT ではない。永続/リモート D1 ではない。SSOT は **台帳 geo.ksj-datasets (メタ) + registry.ts (技術設定) + R2 (配信)**。
 
 ## ジオメトリの目視確認
 
@@ -217,16 +217,10 @@ packages/gis/src/mlit-ksj/
 
 ## 新しいデータセットの追加方法
 
-完全DBレス (2026-06-21〜): メタの真実源は **git TS `datasets.ts`**。ローカル SQLite への手動 INSERT は廃止。
+完全DBレス (2026-06-21〜): メタの真実源は **台帳 `geo.ksj-datasets`**。ローカル SQLite への手動 INSERT は廃止。
 新規データセットは以下の順序で追加します（規約の正典: `.claude/rules/gis-data.md` / 担当 agent: `gis-curator`）。
 
-1. **`datasets.ts` の `GIS_DATASETS` にエントリを追加**（メタ + ranking 定義）:
-
-   ```ts
-   { dataId: "X99", name: "新データセット名", category: "land", geometryType: "point",
-     coverage: "national", license: "cc-by-4.0", stats47Category: "population",
-     isRankingTarget: false /* ranking 化するなら true + rankingConfig:[...] */ },
-   ```
+1. **台帳 `geo.ksj-datasets` の `datasets` にエントリを追加**（キーが dataId。メタ + ranking 定義。形は Schema）
    - `name_en` は KSJ API 非提供のため不要（seed が空でセット・display 専用）
    - 取得状態やfile_countは書かない（実R2一覧からカタログ生成時に導出）
 

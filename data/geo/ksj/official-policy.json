@@ -1,0 +1,373 @@
+{
+  "verifiedAt": "2026-08-30",
+  "verifiedFrom": "https://nlftp.mlit.go.jp/ksj/gml/gml_datalist.html",
+  "policies": {
+    "A03": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A09": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A18": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A19": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A23": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A24": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A25": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A30a5": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A31a": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A42": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A43": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A44": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A45": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A51": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A52": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A53": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A54": {
+      "license": "cc-by-4.0",
+      "decision": "acquire"
+    },
+    "A55": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "G04-c": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "G04-d": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "G08": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "L03-b": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "L03-b-c": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "L03-b-u": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "N08": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "S05-d": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "S10a": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "m250r6": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "m500r6": {
+      "license": "commercial-ok",
+      "decision": "acquire"
+    },
+    "A11": {
+      "license": "cc-by-4.0-partial",
+      "decision": "license-review"
+    },
+    "A46": {
+      "license": "cc-by-4.0-partial",
+      "decision": "license-review"
+    },
+    "A47": {
+      "license": "cc-by-4.0-partial",
+      "decision": "license-review"
+    },
+    "A48": {
+      "license": "cc-by-4.0-partial",
+      "decision": "license-review"
+    },
+    "A49": {
+      "license": "cc-by-4.0-partial",
+      "decision": "license-review"
+    },
+    "A50": {
+      "license": "cc-by-4.0-partial",
+      "decision": "license-review"
+    },
+    "A15": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A18s-a": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A19s": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A20": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A20s": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A21": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A21s": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A22-m": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A22s": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A28": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A30b": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A34": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A35a": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A35b": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A35c": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A37": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "A39": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "G02": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "L05": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "N04": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "N05": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "N09": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "N10": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "N11": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "N12": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P02": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P07": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P09": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P15": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P16": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P19": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P20": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P21": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P22": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P23": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P24": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P26": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P27": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P28": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P30": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P31": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P32": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P33": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "P34": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "S05-a": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "S05-b": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "S05-c": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "S10b": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    },
+    "W07": {
+      "license": "non-commercial",
+      "decision": "local-only"
+    }
+  },
+  "expectedArchiveCounts": {
+    "A03": 3,
+    "A09": 46,
+    "A18": 22,
+    "A19": 25,
+    "A23": 14,
+    "A24": 44,
+    "A25": 47,
+    "A30a5": 106,
+    "A31a": 91,
+    "A42": 1,
+    "A43": 1,
+    "A44": 1,
+    "A45": 47,
+    "A51": 9,
+    "A52": 24,
+    "A53": 7,
+    "A54": 1,
+    "A55": 47,
+    "G04-c": 176,
+    "G04-d": 169,
+    "G08": 47,
+    "L03-b": 176,
+    "L03-b-c": 14,
+    "L03-b-u": 123,
+    "N08": 1,
+    "S05-d": 1,
+    "S10a": 1,
+    "m250r6": 47,
+    "m500r6": 47
+  }
+}

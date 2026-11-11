@@ -152,15 +152,9 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "packages/gis/src/mlit-ksj/datasets.ts", why: "pending", phase: 6 },
-  { path: "packages/gis/src/mlit-ksj/official-policy.ts", why: "pending", phase: 6 },
-  { path: "packages/gis/src/mlit-ksj/license-policy.ts", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/business-plan/geo-analyses.ts", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/business-plan/geo-layers.ts", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/business-plan/geo-source-pages.ts", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/business-plan/geo-source-policy-pages.ts", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/business-plan/geo-source-service-pages.ts", why: "pending", phase: 6 },
-  { path: "packages/data-configs/src/business-plan/geo-content-lifecycle.ts", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/open-data-catalog/", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/prefecture-statistics-catalog/", why: "pending", phase: 6 },
   { path: "packages/data-configs/src/geo-scope/world-types.ts", why: "pending", phase: 6 },
@@ -194,6 +188,27 @@ export const OUTSIDE_DATA = [
   { path: "packages/data-configs/src/prominence/ranking-hook-overrides.ts", why: "pending", phase: 11 },
   { path: "packages/data-configs/src/expected-empty.ts", why: "pending", phase: 11 },
   // 段 12 で 1 件ずつ判定する (移す・生成物として残す・アプリの設定として残す)
+  { path: "packages/gis/src/infra-history/networks.ts", why: "pending", phase: 12 },
+  { path: "packages/gis/src/mlit-ksj/classifications.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/airport-traffic-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/bridge-inspection-age-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/cultural-heritage-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/depopulated-settlements-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/earthquake-exposure-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/factory-investment-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/freight-od-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/graduation-paths-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/industry-specialization-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/landslide-exposure-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/medical-workforce-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/nutrition-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/physical-activity-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/property-price-distribution-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/shelter-applicability-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/snow-designation-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/tourism-seasonality-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/tsunami-exposure-source.ts", why: "pending", phase: 12 },
+  { path: "packages/data-configs/src/theme-catalog/water-quality-source.ts", why: "pending", phase: 12 },
   { path: "apps/remotion/src/features/buzz-map/specs/", why: "pending", phase: 12 },
   { path: "apps/web/src/features/local-finance-dashboard/data/finance-cards.json", why: "pending", phase: 12 },
   { path: "apps/ges/scripts/data/ports.json", why: "pending", phase: 12 },
@@ -265,19 +280,14 @@ export const REGISTRIES = {
     description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
     union: ["metrics", "ranking-slug-redirects"],
   },
-  "ksj-datasets": {
-    description: "国土数値情報の GIS 台帳 (GIS_DATASETS) の dataId",
-    files: ["packages/gis/src/mlit-ksj/datasets.ts"],
-    pattern: '^\\s*\\{?\\s*dataId:\\s*"([A-Za-z0-9-]+)"',
-  },
-  "geo-campaign-metric-names": {
-    description: "Geo 分析キャンペーン (BUSINESS_PLAN_M1_ANALYSES) の metricKeys の文字列リテラル (Geo の集計値の名前)",
-    files: ["packages/data-configs/src/business-plan/m1.ts"],
-    pattern: "^      '([a-z][A-Za-z0-9]*)',$",
+  "geo-analysis-metric-names": {
+    description: "Geo 分析の台帳 (geo.analyses) の metricKeys の各行 (Geo の集計値の名前)",
+    files: ["data/geo/analyses/analyses.json"],
+    pattern: "^        \"([a-z][A-Za-z0-9]*)\",?$",
   },
   "geo-post-metric-keys": {
     description: "Geo の投稿が指してよい指標 (都道府県の指標と Geo 分析の集計値の名前)",
-    union: ["metrics", "geo-campaign-metric-names"],
+    union: ["metrics", "geo-analysis-metric-names"],
   },
   "affiliate-ad-experiment-ids": {
     description: "アフィリエイト広告 (AFFILIATE_ADS) が持つ A/B 実験の ID",
@@ -647,11 +657,51 @@ export const DATASETS = [
   d("geo.subjects", "data/geo/subjects/subjects.json", "master", "data", "data", "主題の台帳 (主題 = 原典のデータ 1 つを地図にどう描くかの定義。英語 subject)。交通網の変遷・単体 GIS ページ・重ね合わせ (/geo/map?subjects=) が参照し、表示名・区分のまとめ方・色を揃える (2026-10-29 オーナー決定)", {
     schema: "data/geo/subjects/subjects.schema.json",
     refs: [
-      { field: "subjects[].source.dataId", to: "registry:ksj-datasets" },
+      { field: "subjects[].source.dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
       { field: "subjects[].source.metricKey", to: "registry:metrics" },
     ],
   }),
   d("geo.subjects-schema", "data/geo/subjects/subjects.schema.json", "schema", "data", "data", "上の台帳の JSON Schema"),
+  d("geo.ksj-datasets", "data/geo/ksj/datasets.json", "master", "data", "data", "国土数値情報 (KSJ) の登録データセット (dataId をキーにした純メタと ranking 定義。notes は判断の記録)。技術設定は registry.ts。読み込みは packages/gis/src/mlit-ksj/datasets.ts", {
+    schema: "config/schema/geo.ksj-datasets.schema.json",
+    refs: [
+      { field: "datasets.*.rankingConfig[].rankingKey", to: "registry:metrics" },
+      { field: "datasets.*.stats47Category", to: "categories.master", key: "categories[].key" },
+      { field: "datasets.*.rankingConfig[].categoryKey", to: "categories.master", key: "categories[].key" },
+      { field: "datasets.*.license", to: "geo.ksj-license-policy", key: "policies.$keys" },
+      { field: "notes.$keys", to: "geo.ksj-datasets", key: "datasets.$keys" },
+    ],
+  }),
+  d("geo.ksj-license-policy", "data/geo/ksj/license-policy.json", "master", "data", "data", "KSJ の利用条件の区分 (license) ごとの判定表 (元データの公開と商用成果物の 2 軸)。読み込みは packages/gis/src/mlit-ksj/license-policy.ts", { schema: "config/schema/geo.ksj-license-policy.schema.json" }),
+  d("geo.ksj-official-policy", "data/geo/ksj/official-policy.json", "ledger", "data", "data", "KSJ の公式利用条件の監査 (未登録データセットの利用条件と取得判断・公開取得対象の期待アーカイブ数)。読み込みは packages/gis/src/mlit-ksj/official-policy.ts", {
+    schema: "config/schema/geo.ksj-official-policy.schema.json",
+    refs: [
+      { field: "policies.*.license", to: "geo.ksj-license-policy", key: "policies.$keys" },
+      { field: "expectedArchiveCounts.$keys", to: "geo.ksj-datasets", key: "datasets.$keys" },
+    ],
+  }),
+  d("geo.analyses", "data/geo/analyses/analyses.json", "master", "data", "data", "Geo 分析の台帳 (slug をキーにした定義。公開 URL /geo/<slug> と R2 の app/geo/<slug>/ を決める。計算入力・空間演算・集計値の名前・出典と限界。豪雪と土砂は themeSource で出典 7 項目を読み込み口が結ぶ。notes は判断の記録)。読み込みは packages/data-configs/src/business-plan/geo-analyses.ts", {
+    schema: "config/schema/geo.analyses.schema.json",
+    refs: [
+      { field: "analyses.*.relatedRankingKey", to: "registry:metrics" },
+      { field: "notes.$keys", to: "geo.analyses", key: "analyses.$keys" },
+    ],
+  }),
+  d("geo.layers", "data/geo/analyses/layers.json", "master", "data", "data", "Geo の単一レイヤー表示の台帳 (slug をキーにした定義。公開 URL /geo/layers/<slug>)。読み込みは packages/data-configs/src/business-plan/geo-layers.ts", {
+    schema: "config/schema/geo.layers.schema.json",
+    refs: [
+      { field: "layers.*.dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "layers.*.sourceAnalysis", to: "geo.analyses", key: "analyses.$keys" },
+      { field: "layers.*.related[]", to: "geo.analyses", key: "analyses.$keys" },
+    ],
+  }),
+  d("geo.content-lifecycle", "data/geo/analyses/content-lifecycle.json", "ledger", "data", "data", "Geo コンテンツの公開ライフサイクルの手書き部分 (contentId ごとのテーマ・記事の slug と題案・公開計画。無料面・SNS・有料面の結合は読み込み口)。読み込みは packages/data-configs/src/business-plan/geo-content-lifecycle.ts", {
+    schema: "config/schema/geo.content-lifecycle.schema.json",
+    refs: [
+      { field: "contents.*.themeKeys[]", to: "themes.catalogs", key: "key" },
+      { field: "contents.*.blogSlug", to: "blog.articles", key: "articles[].slug" },
+    ],
+  }),
   d("business.goals", "data/goals/{**}", "state", "strategy", "data", "/goal の目標とサイクル"),
   d("ai-content.remediation", "data/ai-content/remediation/{name}", "state", "data", "data", "ランキング AI 解説の是正キュー・生成失敗・進捗"),
   d("municipalities.expansion", "data/municipalities/{name}", "state", "data", "data", "市区町村データの拡充調査と棚卸し"),
@@ -963,6 +1013,9 @@ export const RETIRED = [
   { from: "config/theme-selection-viewpoints.json", to: "data/themes/viewpoints/selection.json", since: "2026-11-10" },
   { from: "research-theme-catalog/reference/public-dashboard-catalog.json", to: "data/themes/research/public-dashboards.json", since: "2026-11-10" },
   { from: "sync-survey-master", to: "(廃止。対応表は調査の id だけを持つので、調査マスタへ同期するものが無い)", since: "2026-11-10" },
+  { from: "business-plan/snow-designation-analysis", to: "data/geo/analyses/analyses.json (themeSource)", since: "2026-11-11" },
+  { from: "business-plan/landslide-exposure-analysis", to: "data/geo/analyses/analyses.json (themeSource)", since: "2026-11-11" },
+  { from: "business-plan/low-elevation-population-analysis", to: "data/geo/analyses/analyses.json", since: "2026-11-11" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

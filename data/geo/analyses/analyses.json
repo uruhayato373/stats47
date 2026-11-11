@@ -1,0 +1,382 @@
+{
+  "notes": {
+    "population-snow-designation": [
+      "Site Geo analysis only. Do not add this to the M1 publication campaign or create SNS products."
+    ],
+    "population-landslide-exposure": [
+      "Site analysis only; the M1 campaign and SNS catalogs do not change."
+    ],
+    "population-low-elevation": [
+      "Site Geo analysis only. Do not add this to the M1 publication campaign or create SNS products.",
+      "標高・傾斜度3次メッシュ(G04-a 2011年度版)と1kmメッシュ人口(mesh1000r6 2020年)を3次メッシュコードの完全一致で結合する。生成物の検証は packages/gis の low-elevation-population.ts。"
+    ]
+  },
+  "analyses": {
+    "population-land-price": {
+      "id": "m1-analysis-population-land-price",
+      "contentId": "geo-016",
+      "title": "地価が上がる住宅地でも、周囲の人口は減るのか",
+      "question": "2026年の住宅地価上昇地点と、2020→2050年に人口が減る1kmメッシュはどこで重なるか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ipss-population-mesh-1km",
+          "label": "1km将来人口メッシュ",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-l01-residential-land-price",
+          "label": "住宅地の地価公示地点",
+          "geometry": "point",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        }
+      ],
+      "spatialOperations": [
+        "住宅地点座標を同じ県の1km人口メッシュ境界へ包含判定で接続（西・南を含み東・北を含まない）",
+        "地価上昇と包含メッシュの将来人口減少を地点単位で照合。未接続・変動率欠測・基準人口0は比較対象外",
+        "比較可能地点を分母に、地価上昇かつ人口減少地点の割合を県別集計。地点を人口で重み付けしない"
+      ],
+      "primaryMetricKey": "risingDecliningPointShare",
+      "metricKeys": [
+        "risingDecliningPointShare",
+        "risingDecliningPointCount",
+        "comparablePointCount",
+        "matchedPointCount",
+        "unmatchedPointCount",
+        "medianResidentialLandPrice",
+        "medianLandPriceChange",
+        "populationChangeRate",
+        "population2050",
+        "sampleCount"
+      ],
+      "r2Key": "app/geo/population-land-price/item.json",
+      "evidenceManifestKey": "app/geo/population-land-price/manifest.json",
+      "detailR2KeyPattern": "app/geo/population-land-price/pref/{NN}.json",
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "dataVersion": "2020-2050",
+      "evidenceCheckedAt": "2026-08-29",
+      "sourceName": "国土交通省「地価公示」・1kmメッシュ別将来推計人口",
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2026.html",
+      "caveats": [
+        "地価公示は標準地点の観測であり、県内すべての土地価格を代表しない",
+        "人口変化との関係は相関の観察であり、因果関係を示さない",
+        "地価は2025→2026年、人口は2020→2050年の比較で期間が異なる。将来地価を予測しない",
+        "約1kmメッシュの人口を地点の居住人数や徒歩圏と解釈しない。未接続地点は人口0ではない"
+      ]
+    },
+    "population-flood-risk": {
+      "id": "m1-analysis-population-flood-risk",
+      "contentId": "geo-031",
+      "title": "2050年、洪水浸水想定区域に暮らす人口はどれくらいか",
+      "question": "想定最大規模の洪水浸水想定区域と1km将来人口メッシュを重ねると、地域差はどう見えるか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ipss-population-mesh-1km",
+          "label": "1km将来人口メッシュ",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-a31b-flood-polygon",
+          "label": "洪水浸水想定区域",
+          "geometry": "polygon",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        }
+      ],
+      "spatialOperations": [
+        "人口メッシュ中心点のポリゴン包含判定",
+        "区域内人口を都道府県別に集計"
+      ],
+      "primaryMetricKey": "floodExposureShare2050",
+      "metricKeys": [
+        "floodExposureShare2050",
+        "floodExposureShare2020",
+        "exposedPopulation2050",
+        "populationChangeRate",
+        "exposedMeshCount"
+      ],
+      "r2Key": "app/geo/population-flood-risk/item.json",
+      "evidenceManifestKey": "app/geo/population-flood-risk/manifest.json",
+      "detailR2KeyPattern": "app/geo/population-flood-risk/pref/{NN}.json",
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "dataVersion": "2020-2050",
+      "evidenceCheckedAt": "2026-08-29",
+      "sourceName": "国土交通省「洪水浸水想定区域」・1kmメッシュ別将来推計人口",
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html",
+      "caveats": [
+        "避難判断や個別地点の安全確認には使わず、国と自治体の最新ハザードマップを確認する",
+        "区域外で洪水が起きないことを意味しない"
+      ]
+    },
+    "population-station-access": {
+      "id": "m1-analysis-population-station-access",
+      "contentId": "geo-062",
+      "title": "2050年、駅の近くに住む人口はどれくらい残るのか",
+      "question": "鉄道駅から直線800m以内の1kmメッシュ人口は、2020年から2050年にどう変わるか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ipss-population-mesh-1km",
+          "label": "1km将来人口メッシュ",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-s12-station-point",
+          "label": "鉄道駅代表点",
+          "geometry": "point",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-s12-passenger-context",
+          "label": "駅別乗降客数（補助）",
+          "geometry": "point",
+          "role": "context-only",
+          "usedInCalculation": false
+        }
+      ],
+      "spatialOperations": [
+        "駅代表点から直線800mの距離判定",
+        "圏内人口を都道府県別に集計"
+      ],
+      "primaryMetricKey": "stationAccessShare2050",
+      "metricKeys": [
+        "stationAccessShare2050",
+        "stationAccessShare2020",
+        "accessiblePopulation2050",
+        "populationChangeRate",
+        "accessibleMeshCount"
+      ],
+      "r2Key": "app/geo/population-station-access/item.json",
+      "evidenceManifestKey": "app/geo/population-station-access/manifest.json",
+      "detailR2KeyPattern": "app/geo/population-station-access/pref/{NN}.json",
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "dataVersion": "2020-2050",
+      "evidenceCheckedAt": "2026-08-29",
+      "sourceName": "国土交通省「駅別乗降客数」・1kmメッシュ別将来推計人口",
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html",
+      "caveats": [
+        "800mは直線距離で、実際の徒歩経路や高低差を表さない",
+        "1kmメッシュ中心点による近似である"
+      ]
+    },
+    "population-snow-designation": {
+      "id": "m1-analysis-population-snow-designation",
+      "contentId": "geo-096",
+      "themeSource": "snow-designation",
+      "title": "2016年度の豪雪指定区域と2020年人口",
+      "question": "豪雪指定区域に中心がある250mメッシュの人口と指定区域の面積はどのくらいか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ksj-population-mesh-250m",
+          "label": "250mメッシュの2020年基準人口",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-a22-snow-designation",
+          "label": "2016年度の豪雪指定区域",
+          "geometry": "polygon",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        }
+      ],
+      "spatialOperations": [
+        "同県の豪雪/特別豪雪区域の和集合と250mメッシュ中心包含",
+        "人口3区分の整数保存、格子の完全包含/交差、GRS80面積と等積投影面積の検算"
+      ],
+      "primaryMetricKey": "designatedCenterPopulationShare",
+      "metricKeys": [
+        "designatedCenterPopulation",
+        "specialCenterPopulation",
+        "designatedCenterPopulationShare",
+        "designatedAreaKm2",
+        "specialAreaKm2",
+        "boundaryCellPopulation",
+        "population2020"
+      ],
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "evidenceCheckedAt": "2026-09-11"
+    },
+    "population-landslide-exposure": {
+      "id": "m1-analysis-population-landslide-exposure",
+      "contentId": "geo-107",
+      "themeSource": "landslide-exposure",
+      "title": "土砂災害の指定区域と人口・公共施設",
+      "question": "指定済み区域面に中心がある250mメッシュ人口と公共施設地点はどのくらいか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ksj-population-mesh-250m",
+          "label": "250mメッシュの2020年基準人口",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-p05-public-facility-point",
+          "label": "2022年の市町村役場等・公的集会施設",
+          "geometry": "point",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-a33-landslide-polygons",
+          "label": "A33-25指定済み区域面（京都府除外）",
+          "geometry": "polygon",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        }
+      ],
+      "spatialOperations": [
+        "警戒・特別警戒×3現象の面の和集合と全国の点包含、原典県コードへ集計",
+        "人口・施設群の排他的3区分と格子感度を検算。京都府は全曝露値null、総計は対象46県。"
+      ],
+      "primaryMetricKey": "exposedCenterPopulationShare",
+      "metricKeys": [
+        "exposedCenterPopulation",
+        "warningCenterPopulation",
+        "specialCenterPopulation",
+        "exposedCenterPopulationShare",
+        "population2020",
+        "exposedAdministrativeFacilities",
+        "administrativeFacilities",
+        "exposedMeetingFacilities",
+        "meetingFacilities"
+      ],
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "evidenceCheckedAt": "2026-09-11"
+    },
+    "population-low-elevation": {
+      "id": "m1-analysis-population-low-elevation",
+      "contentId": "geo-129",
+      "title": "標高の低い土地に、どれだけの人が住んでいるか",
+      "question": "標高・傾斜度3次メッシュと1kmメッシュ人口(2020年)を重ねると、標高の低い土地に住む人口の割合は県でどう違うか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ipss-population-mesh-1km",
+          "label": "1kmメッシュの2020年人口",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-g04a-elevation-mesh-3rd",
+          "label": "標高・傾斜度3次メッシュ(平均・最高・最低標高)",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        }
+      ],
+      "spatialOperations": [
+        "人口と標高を同じ3次メッシュコードで完全一致結合し、両側の境界がコードの区画と一致することを全メッシュで検査",
+        "平均標高で0m・5m・10m以下に排他的に分類して人口を合計(最低標高基準は上限側の見積りとして別列)。人口の按分はしない"
+      ],
+      "primaryMetricKey": "lowElevationShareMean5m",
+      "metricKeys": [
+        "lowElevationShareMean5m",
+        "lowElevationShareMean0m",
+        "lowElevationShareMean10m",
+        "lowElevationShareMin5m",
+        "population2020",
+        "lowElevationPopulationMean5m"
+      ],
+      "relatedRankingKey": "low-elevation-population-ratio-5m",
+      "r2Key": "app/geo/population-low-elevation/item.json",
+      "evidenceManifestKey": "app/geo/population-low-elevation/manifest.json",
+      "detailR2KeyPattern": "app/geo/population-low-elevation/pref/{NN}.json",
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "dataVersion": "G04-a-11_mesh1000r6-24_2020",
+      "evidenceCheckedAt": "2026-10-08",
+      "sourceName": "国土交通省「国土数値情報 標高・傾斜度3次メッシュデータ」・「1kmメッシュ別将来推計人口」",
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html",
+      "caveats": [
+        "標高は2009年5月時点の約1km単位の平均値で、海抜の低い狭い土地の判定には粗い。都道府県間の相対比較に限る",
+        "平均標高が低いことは浸水・高潮・津波が起きることを意味しない。堤防・排水設備・ハザード想定は含まない",
+        "0m以下の分類は国土交通省のゼロメートル地帯と同じ定義ではない。5mと10mに全国共通の公的な基準は確認できず、複数のしきい値を並べて読む"
+      ]
+    },
+    "population-public-facility-access": {
+      "id": "m1-analysis-population-public-facility-access",
+      "contentId": "geo-128",
+      "title": "行政施設・公的集会施設までの距離と地域人口",
+      "question": "市町村役場等と公的集会施設への距離帯ごとに、2020年人口と2050年推計人口はどう分布するか",
+      "analysisKind": "spatial-cross",
+      "sourceLayers": [
+        {
+          "id": "ipss-population-mesh-1km",
+          "label": "1km将来人口メッシュ",
+          "geometry": "mesh",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        },
+        {
+          "id": "ksj-p05-public-facility-point",
+          "label": "市町村役場等・公的集会施設の原典地点",
+          "geometry": "point",
+          "role": "calculation-input",
+          "usedInCalculation": true
+        }
+      ],
+      "spatialOperations": [
+        "全国2施設群の最近隣検索とメッシュ中心からの大円距離",
+        "5距離帯へ排他的に分類し、2人口年と2施設群を独立集計"
+      ],
+      "primaryMetricKey": "administrativeWithin1000mShare2020",
+      "metricKeys": [
+        "administrativeWithin1000mShare2020",
+        "administrativeWithin1000mShare2050",
+        "meetingWithin1000mShare2020",
+        "meetingWithin1000mShare2050",
+        "population2020",
+        "population2050"
+      ],
+      "r2Key": "app/geo/population-public-facility-access/item.json",
+      "evidenceManifestKey": "app/geo/population-public-facility-access/manifest.json",
+      "detailR2KeyPattern": "app/geo/population-public-facility-access/pref/{NN}.json",
+      "status": "ready",
+      "geography": "prefecture",
+      "comparisonLimit": 3,
+      "expectedObservationCount": 47,
+      "dataVersion": "P05-22_population2020-2050_mesh1000r6-24",
+      "evidenceCheckedAt": "2026-09-10",
+      "sourceName": "国土交通省「市町村役場等・公的集会施設」・1kmメッシュ別将来推計人口",
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P05-v3_0.html",
+      "caveats": [
+        "2022年4月の施設位置を固定し、2020年人口と2050年推計人口を比較する",
+        "1kmメッシュ中心からの大円距離で、500m帯は粗い近似。道路距離や徒歩時間ではない",
+        "県外最寄りを含み、行政窓口の利用資格・開館時間・将来の施設存続を判定しない",
+        "2施設群は同じ人口を別々に分類し、両群の人口を合算しない"
+      ]
+    }
+  }
+}

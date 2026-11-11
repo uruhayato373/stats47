@@ -1,13 +1,23 @@
 {
-  "hash": "f0b84190f6fee216736e2fbe09bf766496dafc57157e40bea09262adb224448b",
-  "audited_at": "2026-11-11T01:23:46",
+  "hash": "6f5a5dda1a4f701b629e96d39e58dfac27697882cc9e3d0ddc07e5f0e8d7461d",
+  "audited_at": "2026-11-11T02:55:46",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/scripts/gsc/__tests__/coverage-submitted-view.test.mjs",
-    ".claude/scripts/gsc/__tests__/test_ingest_gsc_export.py",
-    ".claude/scripts/gsc/export-coverage-playwright.mjs",
-    ".claude/scripts/gsc/ingest-gsc-export.py",
-    ".claude/scripts/metrics/__tests__/ga4-improvements-adapter.test.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md"
+    ".agents/skills/db/fetch-mlit-ksj/SKILL.md",
+    ".agents/skills/gis/publish-geo-portfolio/SKILL.md",
+    ".claude/agents/README.md",
+    ".claude/agents/geo-analysis-curator.md",
+    ".claude/agents/gis-curator.md",
+    ".claude/agents/gis-pipeline-runner.md",
+    ".claude/agents/open-data-curator.md",
+    ".claude/rules/buzz-map-standards.md",
+    ".claude/rules/geo-analysis-standards.md",
+    ".claude/rules/gis-data.md",
+    ".claude/scripts/lib/__tests__/internal-link-geo.test.mjs",
+    ".claude/scripts/lib/check-datasets.mjs",
+    ".claude/scripts/lib/internal-link-lint.mjs",
+    ".claude/scripts/lib/plan-pr-quality.mjs",
+    ".claude/skills/db/fetch-mlit-ksj/SKILL.md",
+    ".claude/skills/gis/publish-geo-portfolio/SKILL.md",
+    "CLAUDE.md"
   ]
 }

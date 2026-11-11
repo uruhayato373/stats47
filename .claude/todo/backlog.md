@@ -192,6 +192,14 @@ updated: 2026-11-01
 
 `pr-quality-check.yml` は `check-metric-contract.ts` だけを動かし、同じ `metrics:check` に入っている `check-kakei-analysis-catalog.ts` (公開ページと指標の実物との照合) を動かしていない (2026-11-10 に workflow を grep して確認)。CI に載っているのは合成の入力で検査する vitest だけで、掲載先のページが非公開になった・指標の絞り込みが変わった、を PR で止められない。2026-11-10 から全国の図の生成 (`generate-kakei-axis-charts.ts`) がこの台帳の絞り込みを読むので、ずれは図の値に直結する。
 - **完了条件**: `packages/data-configs` か `data/content/pages` に触る PR で `check-kakei-analysis-catalog.ts` が走り、失敗で止まる
+
+### [PATHS-CONSTANT-CWD-01] `config/paths.mjs` の定数を、リポジトリのルートと結合せずに読むスクリプトを直す
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run type-check:scripts] [起票:2026-11-11] [領域:管理]
+
+`config/paths.mjs` の定数はリポジトリのルートからの相対パス (例 `KDP_LISTINGS = "data/products/kdp/listings.json"`)。`.claude/scripts/measurement/marketplace-status.mjs:26` は `readFileSync(KDP_LISTINGS, 'utf8')` とそのまま読むので、作業ディレクトリがルートでないと `ENOENT` になる (2026-11-11 にコードを読んで確認。実行しての再現は未確認)。置き場を `config/` から `data/` へ移す前から同じ読み方だった。
+- **次**: `git grep -n "from '.*config/paths.mjs'" -- .claude/scripts scripts apps packages` で定数の読み手を並べ、ルートと結合していないものを直す
+- **完了条件**: 定数を読む全スクリプトが、ルートと結合したパスか `datasetPath()` で読む
+
 ### [PRODUCT-LP-SHOWCASE-01] 商品の LP (サイトの商品ページと note の記事) を、1 つの画像指定から全商品へ作れる仕組みとゲートにする
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx apps/web/scripts/generate-product-storefront.ts --check] [起票:2026-11-10] [領域:商品]
 

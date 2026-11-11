@@ -35,7 +35,7 @@ export type InfraHistoryScope =
   | { readonly kind: "prefecture"; readonly prefCode: string };
 
 /**
- * このページの使い方に適用される原典の利用条件。台帳には書かず、GIS 台帳 (`datasets.ts`) の
+ * このページの使い方に適用される原典の利用条件。台帳には書かず、GIS 台帳 `geo.ksj-datasets` (読み込み口 `datasets.ts`) の
  * `usageTerms` から `infraNetworkTerms` で引く (利用条件の判断を 1 か所に保つ)。manifest には生成時の写しを残す。
  */
 export type InfraSourceTerms = GisDatasetUsageTerms & { readonly usage: GisDatasetUsage };

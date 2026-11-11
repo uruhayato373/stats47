@@ -33,8 +33,8 @@ AI/LLMは問い、説明、限界、導線だけを作り、距離・交差・�
 
 ## 商用公開Gate
 
-- 全`calculation-input`を`datasets.ts`または各providerのライセンスSSOTへ解決する
-- KSJは`license-policy.ts`で、元データpublic mirrorと公開構造化artifactの両方が許可された入力だけを使う
+- 全`calculation-input`を台帳`geo.ksj-datasets`または各providerのライセンスSSOTへ解決する
+- KSJは台帳`geo.ksj-license-policy`で、元データpublic mirrorと公開構造化artifactの両方が許可された入力だけを使う
 - `cc-by-4.0-partial`、`non-commercial`、未判定は、事務局・権利者の許諾の証跡（書面または電話。電話は日付・相手・了承の範囲・要旨を記録）または商用可ソースへの置換が無ければ
   `item.json / manifest.json / pref/*.json`、有料note、広告付きページ、SNS生成を停止する
 - 公開ページと有料成果物にデータ名、提供者、個別ページURL、取得日、加工主体、適用限界を継承する
@@ -109,13 +109,13 @@ source.scenariosに登録し原典検証した県途中artifactと承認済み�
 
 ## 公開ページの責務
 
-原典GISの単体地図は `/geo/datasets/<dataId>`。公開判定は `datasets.ts` + `license-policy.ts` をreaderでも照合する。入口 `app/geo/layers/items.json` は軽量索引、配布ファイル一覧は `app/geo/datasets/<dataId>/item.json` に分離し、ブラウザには選択したファイルだけを渡す。原典の公開条件と実R2一覧から `export-geo-source-catalog.ts` で生成する。描画上限を超える地物は表示を間引いた旨と拡大操作を示し、未描画を不存在と扱わない。A31bの表示分割は `build-flood-view-files.ts` が原典SHA・想定最大規模entry・地物数保存を検証し、形状と属性を変更しない。公開済み元データとローカル生成物の本番反映は別に検証する。
+原典GISの単体地図は `/geo/datasets/<dataId>`。公開判定は台帳 `geo.ksj-datasets` + `geo.ksj-license-policy` をreaderでも照合する。入口 `app/geo/layers/items.json` は軽量索引、配布ファイル一覧は `app/geo/datasets/<dataId>/item.json` に分離し、ブラウザには選択したファイルだけを渡す。原典の公開条件と実R2一覧から `export-geo-source-catalog.ts` で生成する。描画上限を超える地物は表示を間引いた旨と拡大操作を示し、未描画を不存在と扱わない。A31bの表示分割は `build-flood-view-files.ts` が原典SHA・想定最大規模entry・地物数保存を検証し、形状と属性を変更しない。公開済み元データとローカル生成物の本番反映は別に検証する。
 
 GIS一覧と単体ページは `GeoSourceNavigation` を共有する。右レールには公開対象の全データを分野別の連番リストで掲載し、現在のGISと地図準備中を区別する。狭い画面では本文上部の開閉式一覧に置き換え、本文末尾に重複表示しない。データ取得失敗を「準備中」と誤表示しない。個別ページのURLを先に用意し、表示データが検証できたものから同じURLで地図を提供する。
 
 単体GISの読み方・対象時点・範囲・注意点・属性の単位は `packages/data-configs/src/business-plan/geo-source-pages.ts` を版付き正典とする。進捗は `node --import tsx apps/web/scripts/audit-geo-source-pages.ts --ids <カンマ区切りID>` で `data/geo/source-pages.json` に記録し、人向け一覧を `.local/geo-source-pages/progress.html` に生成する。代表ファイルの応答・地物数・文字化け・属性・320/1440pxの描画と横はみ出しを検証し、内容や描画コードの変更後は古い確認済み判定を無効化する。ローカル確認は全区画保証や本番確認と扱わない。次の着手順と未完了条件は backlog の `GEO-SOURCE-PAGES-01` に置き、50件の状態をMarkdownへ複製しない。
 
-`/geo/layers` は単体GISの入口。閲覧可能な表現は `packages/data-configs/src/business-plan/geo-layers.ts` が正典で、`/geo/layers/<layerSlug>` から県・属性・出典を確認し、同じ県の重ね合わせ分析へ進む。人口・住宅地抽出・駅代表点は検証済み県bundleから必要な項目だけを投影し、重ね合わせ判定を混入させない。登録メタ一覧は閲覧可能・商用公開可能を意味しない。洪水メッシュ判定を原典の浸水区域ポリゴンの代用として単体公開しない。
+`/geo/layers` は単体GISの入口。閲覧可能な表現は台帳 `geo.layers` が正典で、`/geo/layers/<layerSlug>` から県・属性・出典を確認し、同じ県の重ね合わせ分析へ進む。人口・住宅地抽出・駅代表点は検証済み県bundleから必要な項目だけを投影し、重ね合わせ判定を混入させない。登録メタ一覧は閲覧可能・商用公開可能を意味しない。洪水メッシュ判定を原典の浸水区域ポリゴンの代用として単体公開しない。
 
 ### 住宅地点×人口の契約
 
@@ -157,7 +157,7 @@ Pythonが書くJSONはJSの`JSON.stringify`とバイトが一致する正準形�
 
 `/geo/history/<expressway|railway|airport>[/<regionCode|NN>]` は国土数値情報 N06・N05・N08 の時系列を年スライダーで描く。
 台帳は `packages/gis/src/infra-history/networks.ts`（原典URL・版・ZIP SHA・公開状態・属性名・種別・線か点か・現況の dataId）。
-利用条件は網ごとに複製せず `datasets.ts` の `usageTerms`（時系列）から引く。N06「時系列データとして使用する場合：非商用」、N05「商用利用はできません」、N08「商用可」（2026-10-29 公式ページで確認）。
+利用条件は網ごとに複製せず台帳 `geo.ksj-datasets` の `usageTerms`（時系列）から引く。N06「時系列データとして使用する場合：非商用」、N05「商用利用はできません」、N08「商用可」（2026-10-29 公式ページで確認）。
 広告の有無は台帳から導く（`apps/web/src/lib/google-adsense/ad-free-paths.ts`）。時系列が非商用の網と、出典表示だけで商用利用できない単体 GIS ページ（`/geo/datasets/<id>`）は AdSense の script を読まない。URL を手で列挙しない。
 非商用の網の公開（R2 反映・検索掲載）は、事務局の了承を `publication.permissionEvidence`（方法 official-terms / written / phone・日付・相手・了承の範囲・要旨・記録者）に記録し `public-approved` にしてから行う。電話も認める（2026-10-29 オーナー決定）。公開には範囲に `ad-free-page` と `processed-data-delivery` の両方が要り、判定は `isInfraNetworkPublishable` に集約する（ページの noindex と `ksj-publication-guard.ts` が同じ関数を使う）。
 それまでは `noindex` で、`ksj-publication-guard.ts` が `app/geo/history/` を拒否する。
@@ -229,7 +229,7 @@ Xは必ず該当stageを示す`/geo/<slug>/<NN>/<stage>`へ着地させる。ペ
 
 ## SSOTとR2
 
-- authored分析定義: `packages/data-configs/src/business-plan/geo-analyses.ts`の`GEO_ANALYSES`。サイトの分析追加と、`m1.ts`のSNS・有料商品キャンペーン対象は独立して管理する。
+- authored分析定義: 台帳 `geo.analyses` (読み込み口の`GEO_ANALYSES`)。サイトの分析追加と、`m1.ts`のSNS・有料商品キャンペーン対象は独立して管理する。
 - 原典GIS: `gis/<provider>/<dataset>/<version>/...`
 - 最終集計: `app/geo/<slug>/item.json`
 - lineage: `app/geo/<slug>/manifest.json`

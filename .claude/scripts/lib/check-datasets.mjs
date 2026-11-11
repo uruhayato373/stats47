@@ -444,7 +444,8 @@ export function buildEr({ datasets, files, readJson, registryRefs = [] }) {
     for (const ref of ds.refs ?? []) {
       edges.push({ from: ds.id, field: ref.field, to: ref.to, key: ref.key ?? null, copies: ref.copies ?? [], severity: ref.severity ?? "error" });
       if (ref.copies?.length) candidates.push({ kind: "写しを持つ", from: ds.id, to: ref.to, detail: `${ref.field} が ${ref.copies.join("・")} を写している` });
-      if (!byId.has(ref.to) || ref.where || ref.unless) continue;
+      // 同じ台帳の中の参照 (注記のキー → 記録のキーなど) は、もとから 1 つのテーブルなので統合の候補にしない
+      if (!byId.has(ref.to) || ref.to === ds.id || ref.where || ref.unless) continue;
       const values = [];
       let records = 0;
       for (const file of filesOf(ds)) {

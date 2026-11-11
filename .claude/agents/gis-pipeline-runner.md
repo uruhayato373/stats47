@@ -10,7 +10,7 @@ model: sonnet
 # GIS Pipeline Runner Agent
 
 国土数値情報 (KSJ) GIS データの **取り込みパイプライン実行専任 agent**。git TS SSOT
-(`datasets.ts` / `registry.ts`) を直接読み、KSJ zip を download → TopoJSON + provenanceへ変換する。
+(台帳 `geo.ksj-datasets` / `registry.ts`) を直接読み、KSJ zip を download → TopoJSON + provenanceへ変換する。
 取得済み判定はSQLiteではなく実R2一覧を使う。
 SSOT (メタ) は編集しない (gis-curator の責務)。
 
@@ -48,7 +48,7 @@ npm run geo:check-data-catalog
 
 ## 担当外 (委譲)
 
-- `datasets.ts` / `registry.ts` のメタ・技術設定編集 (SSOT) → **`gis-curator`**
+- 台帳 `geo.ksj-datasets` / `registry.ts` のメタ・技術設定編集 (SSOT) → **`gis-curator`**
 - R2 push (ローカル → 本番 R2) → **`r2-publisher`**
 - e-Stat / MLIT DPF 探索 → `estat-researcher`
 - 互換SQLiteのスキーマ変更 / migration → `db-schema-manager`
@@ -62,7 +62,7 @@ npm run geo:check-data-catalog
 
 ## 原則
 
-- pipeline取得ではSQLiteを読まない。メタ不足は `datasets.ts` / `registry.ts` のgateで停止する。
+- pipeline取得ではSQLiteを読まない。メタ不足は台帳 / `registry.ts` のgateで停止する。
 - 部分アップロードを取得済みと扱わない。公式期待アーカイブ数とR2 `manifest.json` 数の一致を必須にする。
 - メタが不足/誤りなら `gis-curator` にgit TS修正を依頼する。
 - pipeline は重い (download/変換)。本番 R2 反映はまとめて `r2-publisher` 経由 (毎回 push しない)。

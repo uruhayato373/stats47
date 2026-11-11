@@ -63,7 +63,7 @@ const SOURCES = {
   categoryKeys: datasetPath("categories.master"),
   metricsDir: datasetDir("metrics.definitions"),
   themeSets: "packages/types/src/indicator-sets",
-  geoAnalyses: "packages/data-configs/src/business-plan/m1.ts",
+  geoAnalyses: datasetPath("geo.analyses"),
   // KNOWN_MUNICIPALITY_RANKING_KEYS は TS で計算される集合なので、sync-content-catalog.ts が
   // それを published に焼き込んだ生成索引を読む (鮮度は npm run content:check が検査する)
   municipalityRankingPages: path.join(datasetDir("content.pages"), "municipality-ranking.json"),
@@ -136,11 +136,8 @@ function loadKeySets() {
   }
   if (!themes.size) throw new Error("internal-link-lint: theme IndicatorSet 集合が空です");
 
-  const geoBlock = readRequired(SOURCES.geoAnalyses).match(
-    /export const BUSINESS_PLAN_M1_GEO_ANALYSES = \[([\s\S]*?)\] as const/,
-  );
-  if (!geoBlock) throw new Error('internal-link-lint: Geo analysis集合を抽出できません');
-  const geoSlugs = new Set([...geoBlock[1].matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]));
+  // Geo 分析の slug は台帳 (geo.analyses) のキー。公開中の 7 分析すべてを実在として扱う
+  const geoSlugs = new Set(Object.keys(JSON.parse(readRequired(SOURCES.geoAnalyses)).analyses));
   if (!geoSlugs.size) throw new Error('internal-link-lint: Geo analysis集合が空です');
 
   const municipalityRanking = new Set(

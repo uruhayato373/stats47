@@ -7,6 +7,7 @@ import { OPEN_DATASETS, OPEN_DATA_SOURCES } from "@stats47/data-configs";
 import { listFromR2WithSize, type R2ListedObject } from "@stats47/r2-storage/tooling";
 import { config } from "dotenv";
 
+import { datasetPath } from "../../../../../config/datasets.mjs";
 import { GIS_DATASETS, type GisDatasetMeta } from "../datasets";
 import {
   getKsjLicensePolicy,
@@ -426,7 +427,7 @@ export async function buildCatalog() {
     generatedAt: new Date().toISOString(),
     source: {
       candidateCatalog: "packages/database/seed/ksj-catalog.json",
-      registeredCatalog: "packages/gis/src/mlit-ksj/datasets.ts",
+      registeredCatalog: datasetPath("geo.ksj-datasets"),
       openDataCatalog: "packages/data-configs/src/open-data-catalog/",
       r2Prefix: R2_PREFIX,
       inventoryMode: inventorySource.mode,

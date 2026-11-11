@@ -2,6 +2,7 @@ import {
   BUSINESS_PLAN_CONTENT_OPPORTUNITIES,
   BUSINESS_PLAN_NOTE_PRODUCTS,
 } from './content-opportunities';
+import { getGeoAnalysis } from './geo-analyses';
 import type {
   BusinessPlanM1Analysis,
   BusinessPlanM1ExecutionPlan,
@@ -71,182 +72,11 @@ const POPULATION_ANALYSIS = {
 export const BUSINESS_PLAN_M1_BASELINE_ANALYSIS = POPULATION_ANALYSIS;
 
 /** Geo公開面に出せる、証拠manifest付きの複数レイヤー空間分析だけを保持する。 */
-export const BUSINESS_PLAN_M1_GEO_ANALYSES = [
-  {
-    id: 'm1-analysis-population-land-price',
-    contentId: 'geo-016',
-    slug: 'population-land-price',
-    title: '地価が上がる住宅地でも、周囲の人口は減るのか',
-    question:
-      '2026年の住宅地価上昇地点と、2020→2050年に人口が減る1kmメッシュはどこで重なるか',
-    analysisKind: 'spatial-cross',
-    sourceLayers: [
-      {
-        id: 'ipss-population-mesh-1km',
-        label: '1km将来人口メッシュ',
-        geometry: 'mesh',
-        role: 'calculation-input',
-        usedInCalculation: true,
-      },
-      {
-        id: 'ksj-l01-residential-land-price',
-        label: '住宅地の地価公示地点',
-        geometry: 'point',
-        role: 'calculation-input',
-        usedInCalculation: true,
-      },
-    ],
-    spatialOperations: [
-      '住宅地点座標を同じ県の1km人口メッシュ境界へ包含判定で接続（西・南を含み東・北を含まない）',
-      '地価上昇と包含メッシュの将来人口減少を地点単位で照合。未接続・変動率欠測・基準人口0は比較対象外',
-      '比較可能地点を分母に、地価上昇かつ人口減少地点の割合を県別集計。地点を人口で重み付けしない',
-    ],
-    primaryMetricKey: 'risingDecliningPointShare',
-    metricKeys: [
-      'risingDecliningPointShare',
-      'risingDecliningPointCount',
-      'comparablePointCount',
-      'matchedPointCount',
-      'unmatchedPointCount',
-      'medianResidentialLandPrice',
-      'medianLandPriceChange',
-      'populationChangeRate',
-      'population2050',
-      'sampleCount',
-    ],
-    r2Key: 'app/geo/population-land-price/item.json',
-    evidenceManifestKey: 'app/geo/population-land-price/manifest.json',
-    detailR2KeyPattern: 'app/geo/population-land-price/pref/{NN}.json',
-    status: 'ready',
-    geography: 'prefecture',
-    comparisonLimit: 3,
-    expectedObservationCount: 47,
-    dataVersion: '2020-2050',
-    evidenceCheckedAt: '2026-08-29',
-    sourceName: '国土交通省「地価公示」・1kmメッシュ別将来推計人口',
-    sourceUrl:
-      'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2026.html',
-    caveats: [
-      '地価公示は標準地点の観測であり、県内すべての土地価格を代表しない',
-      '人口変化との関係は相関の観察であり、因果関係を示さない',
-      '地価は2025→2026年、人口は2020→2050年の比較で期間が異なる。将来地価を予測しない',
-      '約1kmメッシュの人口を地点の居住人数や徒歩圏と解釈しない。未接続地点は人口0ではない',
-    ],
-  },
-  {
-    id: 'm1-analysis-population-flood-risk',
-    contentId: 'geo-031',
-    slug: 'population-flood-risk',
-    title: '2050年、洪水浸水想定区域に暮らす人口はどれくらいか',
-    question:
-      '想定最大規模の洪水浸水想定区域と1km将来人口メッシュを重ねると、地域差はどう見えるか',
-    analysisKind: 'spatial-cross',
-    sourceLayers: [
-      {
-        id: 'ipss-population-mesh-1km',
-        label: '1km将来人口メッシュ',
-        geometry: 'mesh',
-        role: 'calculation-input',
-        usedInCalculation: true,
-      },
-      {
-        id: 'ksj-a31b-flood-polygon',
-        label: '洪水浸水想定区域',
-        geometry: 'polygon',
-        role: 'calculation-input',
-        usedInCalculation: true,
-      },
-    ],
-    spatialOperations: [
-      '人口メッシュ中心点のポリゴン包含判定',
-      '区域内人口を都道府県別に集計',
-    ],
-    primaryMetricKey: 'floodExposureShare2050',
-    metricKeys: [
-      'floodExposureShare2050',
-      'floodExposureShare2020',
-      'exposedPopulation2050',
-      'populationChangeRate',
-      'exposedMeshCount',
-    ],
-    r2Key: 'app/geo/population-flood-risk/item.json',
-    evidenceManifestKey: 'app/geo/population-flood-risk/manifest.json',
-    detailR2KeyPattern: 'app/geo/population-flood-risk/pref/{NN}.json',
-    status: 'ready',
-    geography: 'prefecture',
-    comparisonLimit: 3,
-    expectedObservationCount: 47,
-    dataVersion: '2020-2050',
-    evidenceCheckedAt: '2026-08-29',
-    sourceName: '国土交通省「洪水浸水想定区域」・1kmメッシュ別将来推計人口',
-    sourceUrl:
-      'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html',
-    caveats: [
-      '避難判断や個別地点の安全確認には使わず、国と自治体の最新ハザードマップを確認する',
-      '区域外で洪水が起きないことを意味しない',
-    ],
-  },
-  {
-    id: 'm1-analysis-population-station-access',
-    contentId: 'geo-062',
-    slug: 'population-station-access',
-    title: '2050年、駅の近くに住む人口はどれくらい残るのか',
-    question:
-      '鉄道駅から直線800m以内の1kmメッシュ人口は、2020年から2050年にどう変わるか',
-    analysisKind: 'spatial-cross',
-    sourceLayers: [
-      {
-        id: 'ipss-population-mesh-1km',
-        label: '1km将来人口メッシュ',
-        geometry: 'mesh',
-        role: 'calculation-input',
-        usedInCalculation: true,
-      },
-      {
-        id: 'ksj-s12-station-point',
-        label: '鉄道駅代表点',
-        geometry: 'point',
-        role: 'calculation-input',
-        usedInCalculation: true,
-      },
-      {
-        id: 'ksj-s12-passenger-context',
-        label: '駅別乗降客数（補助）',
-        geometry: 'point',
-        role: 'context-only',
-        usedInCalculation: false,
-      },
-    ],
-    spatialOperations: [
-      '駅代表点から直線800mの距離判定',
-      '圏内人口を都道府県別に集計',
-    ],
-    primaryMetricKey: 'stationAccessShare2050',
-    metricKeys: [
-      'stationAccessShare2050',
-      'stationAccessShare2020',
-      'accessiblePopulation2050',
-      'populationChangeRate',
-      'accessibleMeshCount',
-    ],
-    r2Key: 'app/geo/population-station-access/item.json',
-    evidenceManifestKey: 'app/geo/population-station-access/manifest.json',
-    detailR2KeyPattern: 'app/geo/population-station-access/pref/{NN}.json',
-    status: 'ready',
-    geography: 'prefecture',
-    comparisonLimit: 3,
-    expectedObservationCount: 47,
-    dataVersion: '2020-2050',
-    evidenceCheckedAt: '2026-08-29',
-    sourceName: '国土交通省「駅別乗降客数」・1kmメッシュ別将来推計人口',
-    sourceUrl:
-      'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html',
-    caveats: [
-      '800mは直線距離で、実際の徒歩経路や高低差を表さない',
-      '1kmメッシュ中心点による近似である',
-    ],
-  },
-] as const satisfies readonly BusinessPlanM1Analysis[];
+export const BUSINESS_PLAN_M1_GEO_ANALYSES = ([
+  'population-land-price',
+  'population-flood-risk',
+  'population-station-access',
+] as const).map(getGeoAnalysis) satisfies readonly BusinessPlanM1Analysis[];
 
 /** X・note・横断比較では、基準ランキングを含む全4系列を参照する。 */
 export const BUSINESS_PLAN_M1_ANALYSES = [

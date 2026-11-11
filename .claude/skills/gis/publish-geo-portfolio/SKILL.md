@@ -21,8 +21,8 @@ Geo企画を一度きりの作業にせず、git TSカタログから無料閲�
 
 ## 正典と状態
 
-- 企画、順序、読者価値、停止条件: `packages/data-configs/src/business-plan/geo-content-lifecycle.ts`
-- 分析入力、演算、canonical: `packages/data-configs/src/business-plan/m1.ts`
+- 企画、順序、読者価値、停止条件: 台帳 `geo.content-lifecycle`
+- 分析入力、演算、canonical: 台帳 `geo.analyses`
 - Geo証拠: `.local/r2/app/geo/<slug>/{item,manifest,pref/<NN>}.json`
 - ブログoutbox: `contents/blog/<slug>/`
 - X draft台帳: `data/sns/posts.json`
