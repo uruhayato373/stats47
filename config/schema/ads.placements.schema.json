@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "広告の枠の台帳",
-  "description": "data/ads/placements.json の形状契約 (2026-10-29 作成)。広告の大きさの語彙・枠の種類 (確保する箱の寸法・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルールを持つ。広告そのもの (案件・クリエイティブ) の正本は apps/web/scripts/affiliate-ads-data.ts と AdSense の枠の定数で、ここは置き方だけを持つ。",
+  "description": "data/ads/placements.json の形状契約 (2026-10-29 作成)。広告の大きさの語彙・枠の種類 (確保する箱の寸法・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルールを持つ。広告そのもの (案件・クリエイティブ) の正本は台帳 affiliate.ads・affiliate.offer-profiles と AdSense の枠の定数で、ここは置き方だけを持つ。",
   "type": "object",
   "required": [
     "sizes",

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "アフィリエイト広告 (クリエイティブ) の台帳",
+  "description": "data/affiliate/ledger/ads.json の形状契約。手で登録した A8.net / もしも / 楽天などのバナーとテキスト広告 (並びは登録順)。各広告は意図軸 vertical を必ず持ち、配信はページ → vertical → 広告で解決する。同じ案件を categoryKey ごとに複製しない (1 案件 = 1 広告。置き場所 locationCode が違う場合だけ別の広告にする)。計測ピクセルの無い ASP (ValueCommerce・楽天) は trackingPixelUrl を null にする。案件の参照 programRef が無い広告は、affiliate.offer-profiles の programRefByAdId が案件を結ぶ。offerProfile (案件の判断の写し) と配信の保留による isActive の上書きは読み込み口 apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS) が結合するので、ここには書かない。A8 の機械追記は .claude/scripts/ads/append-affiliate-ads.ts が JSON.stringify(doc, null, 2) と末尾の改行で書く。",
+  "type": "object",
+  "required": ["ads"],
+  "additionalProperties": false,
+  "properties": {
+    "ads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "title", "htmlContent", "areaCode", "vertical", "categoryKey", "locationCode", "isActive", "priority",
+          "startDate", "endDate", "targetCategories", "adType", "imageUrl", "trackingPixelUrl", "width", "height", "createdAt", "updatedAt"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "description": "広告 1 件の ID (GA4 の ad_id)", "type": "string", "pattern": "^af_[A-Za-z0-9_-]+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "htmlContent": { "description": "クリック先の URL", "type": "string", "pattern": "^https://" },
+          "programRef": { "description": "ASP の案件単位の安定参照 (<ASP>:<案件 ID>)", "type": "string", "pattern": "^(a8|afb|moshimo|rakuten|valuecommerce):\\S+$" },
+          "areaCode": { "type": ["string", "null"] },
+          "vertical": { "description": "広告の意図軸 (10 軸)", "enum": ["labor", "housing", "population", "economy", "health", "energy", "travel", "furusato", "education", "mobility"] },
+          "categoryKey": { "description": "旧い e-Stat 17 軸のカテゴリ (後方互換で残置。解決は vertical で行う)", "type": ["string", "null"] },
+          "locationCode": { "enum": ["sidebar-top", "sidebar-bottom", "sidebar-sticky", "sidebar-inline", "area-sidebar", "blog-bottom", "footer"] },
+          "isActive": { "type": ["boolean", "null"] },
+          "priority": { "type": ["number", "null"] },
+          "startDate": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}" },
+          "endDate": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}" },
+          "targetCategories": { "type": ["string", "null"] },
+          "targetRankingKeys": { "description": "掲載してよい都道府県ランキングのキー (hard allowlist)。設定すると ranking 以外の文脈には出さない", "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "adType": { "enum": ["banner", "text"] },
+          "imageUrl": { "type": ["string", "null"] },
+          "trackingPixelUrl": { "description": "ASP のインプレッション計測ピクセル。無い ASP は null", "type": ["string", "null"] },
+          "width": { "type": ["number", "null"] },
+          "height": { "type": ["number", "null"] },
+          "createdAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$" },
+          "updatedAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$" },
+          "experimentId": { "description": "A/B 実験の ID (affiliate.experiments に事前登録したもの)。variantId と組で使う", "type": ["string", "null"] },
+          "variantId": { "description": "実験の中で一意なクリエイティブの ID", "type": ["string", "null"] },
+          "weight": { "description": "加重ランダムの重み (既定 1)", "type": ["number", "null"], "minimum": 0 }
+        }
+      }
+    }
+  }
+}

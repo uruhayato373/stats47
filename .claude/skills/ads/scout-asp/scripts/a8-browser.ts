@@ -72,7 +72,7 @@ const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-a8-debug");
 const OFFER_INSPECT_DIR = path.join(PROJECT_ROOT, ".local/a8-offer-inspect");
 const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
 const INVENTORY_PATH = path.join(PROJECT_ROOT, `${datasetDir("affiliate.inventory")}/inventory-latest.json`);
-const ADS_DATA_PATH = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
+const ADS_DATA_PATH = path.join(PROJECT_ROOT, datasetPath("affiliate.ads"));
 
 let IS_DRY_RUN = false;
 
@@ -303,17 +303,14 @@ function loadCoverage(): any {
   }
 }
 
-/** affiliate-ads-data.ts から既存 AffiliateAd の {title, htmlContent} を抽出 (dedup 用)。 */
+/** 広告の台帳 affiliate.ads から既存 AffiliateAd の {title, htmlContent} を抽出 (dedup 用)。 */
 function loadExistingAds(): Array<{ title: string; htmlContent: string }> {
   try {
-    const src = fs.readFileSync(ADS_DATA_PATH, "utf8");
-    const titles = [...src.matchAll(/"title":\s*"([^"]*)"/g)].map((m) => m[1]);
-    const htmls = [...src.matchAll(/"htmlContent":\s*"([^"]*)"/g)].map((m) => m[1]);
-    // 位置対応でなく全件を突き合わせるので、両方を混ぜた擬似配列を返す (isDuplicate は title/a8mat を独立に見る)。
-    const n = Math.max(titles.length, htmls.length);
-    const out = [];
-    for (let i = 0; i < n; i++) out.push({ title: titles[i] ?? "", htmlContent: htmls[i] ?? "" });
-    return out;
+    const doc = JSON.parse(fs.readFileSync(ADS_DATA_PATH, "utf8")) as { ads?: Array<{ title?: unknown; htmlContent?: unknown }> };
+    return (doc.ads ?? []).map((ad) => ({
+      title: typeof ad.title === "string" ? ad.title : "",
+      htmlContent: typeof ad.htmlContent === "string" ? ad.htmlContent : "",
+    }));
   } catch {
     return [];
   }

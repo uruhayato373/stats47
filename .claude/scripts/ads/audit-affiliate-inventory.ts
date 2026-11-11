@@ -1,7 +1,7 @@
 /**
  * アフィリエイト在庫 棚卸し (決定的 audit)。
  *
- * SSOT = apps/web/scripts/affiliate-ads-data.ts の AFFILIATE_ADS[] を読み、
+ * SSOT = 広告の台帳 affiliate.ads (読み込み口 apps/web/scripts/affiliate-ads-data.ts の AFFILIATE_ADS[]) を読み、
  *   - categoryKey 別の枠数 (17 軸の欠落カテゴリ = impression 機会損失) を可視化
  *   - locationCode / adType 別の偏り
  *   - ページ種別 → 描画 location のカバレッジ

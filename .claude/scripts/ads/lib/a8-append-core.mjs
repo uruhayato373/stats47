@@ -1,49 +1,56 @@
 /**
- * a8-append-core.mjs — affiliate-ads-data.ts への機械追記の純ロジック (browser/git 非依存)。
+ * a8-append-core.mjs — 広告の台帳 `affiliate.ads` (data/affiliate/ledger/ads.json) への機械追記の純ロジック (browser/git 非依存)。
  *
- * AST を使わず、AFFILIATE_ADS が「末尾 `];` で閉じる純 JSON リテラル配列」という現行構造を利用して
- * 最終 `];` 直前に 1 エントリを挿入する。末尾パターンが崩れていたら abort (SSOT 破壊防止)。
+ * 台帳は `{ "ads": [ ... ] }` の JSON。読んだ文書の形を確かめ、配列の末尾に 1 件ずつ足し、
+ * 書き手と同じ形 (`JSON.stringify(doc, null, 2) + "\n"`) で書き出す。形が崩れていたら abort (SSOT 破壊防止)。
  *
  * 責務:
- *   - validateTail: 追記可能な構造か検証
- *   - extractIds:   既存 id 一覧 (衝突チェック用)
- *   - uniqueId:     衝突しない id を採番
- *   - renderEntry:  AffiliateAd draft → 既存インデントに一致する TS リテラル文字列
- *   - insertEntry:  最終 `];` 直前に挿入した新ソースを返す
+ *   - parseAdsDoc:     台帳の文字列 → 文書 (JSON として読めて形が合うときだけ)
+ *   - validateAdsDoc:  追記できる形か検証 (`ads` が配列で、各要素が文字列の id を持つ)
+ *   - extractIds:      既存 id 一覧 (衝突チェック用)
+ *   - uniqueId:        衝突しない id を採番
+ *   - renderEntry:     AffiliateAd draft → 台帳の項目の順にそろえた 1 件
+ *   - appendEntry:     配列の末尾に 1 件を足した新しい文書を返す (元の文書は変えない)
+ *   - serializeAdsDoc: 文書 → 台帳の文字列
  */
 
-/** AFFILIATE_ADS 配列が「... },\n];\n」または「...[]」で正しく閉じているか。 */
-export function validateTail(src) {
-  if (typeof src !== "string") return { ok: false, error: "src-not-string" };
-  // authored 配列 AFFILIATE_ADS_BASE の閉じ括弧 `];` が存在すること。
-  if (!/AFFILIATE_ADS_BASE\s*:\s*AffiliateAd\[\]\s*=\s*\[/.test(src)) {
-    return { ok: false, error: "array-decl-not-found" };
+/** 追記できる形か: `{ ads: [ { id: string, ... }, ... ] }`。 */
+export function validateAdsDoc(doc) {
+  if (typeof doc !== "object" || doc === null || Array.isArray(doc)) return { ok: false, error: "doc-not-object" };
+  if (!Array.isArray(doc.ads)) return { ok: false, error: "ads-not-array" };
+  for (const [index, ad] of doc.ads.entries()) {
+    if (typeof ad !== "object" || ad === null || Array.isArray(ad)) return { ok: false, error: `ad-not-object:${index}` };
+    if (typeof ad.id !== "string" || ad.id.length === 0) return { ok: false, error: `ad-id-missing:${index}` };
   }
-  // 宣言後で最初の行頭 `];` を配列の閉じとする。配列の後に続く派生コード
-  // (`AFFILIATE_PROGRAM_REF_BY_AD_ID[ad.id];` 等) の `];` を拾わないため lastIndexOf は使わない。
-  const decl = /AFFILIATE_ADS_BASE\s*:\s*AffiliateAd\[\]\s*=\s*\[/.exec(src);
-  const open = decl.index + decl[0].length;
-  const empty = /^\s*\];/.exec(src.slice(open));
-  const m = empty ? null : /^\];/m.exec(src.slice(open));
-  const idx = empty ? open + empty[0].length - 2 : m ? open + m.index : -1;
-  if (idx < 0) return { ok: false, error: "closing-bracket-not-found" };
-  // `];` の直前 (空白除く) は `,`/`}` (末尾要素・現行は末尾カンマ付き) か `[` (空配列) であること。
-  const before = src.slice(0, idx).replace(/\s+$/, "");
-  const lastChar = before.slice(-1);
-  if (lastChar !== "}" && lastChar !== "," && lastChar !== "[") {
-    return { ok: false, error: `unexpected-char-before-bracket:${lastChar}` };
-  }
-  return { ok: true, closeIndex: idx, isEmpty: lastChar === "[" };
+  return { ok: true, count: doc.ads.length, isEmpty: doc.ads.length === 0 };
 }
 
-/** 既存ソースから "id": "..." を全抽出。 */
-export function extractIds(src) {
-  return [...src.matchAll(/"id":\s*"([^"]*)"/g)].map((m) => m[1]);
+/** 台帳の文字列を読む。JSON として読めない・形が合わないときは { ok: false, error }。 */
+export function parseAdsDoc(text) {
+  if (typeof text !== "string") return { ok: false, error: "text-not-string" };
+  let doc;
+  try {
+    doc = JSON.parse(text);
+  } catch (e) {
+    return { ok: false, error: `invalid-json:${e instanceof Error ? e.message : String(e)}` };
+  }
+  const v = validateAdsDoc(doc);
+  return v.ok ? { ok: true, doc } : v;
 }
 
-/** 既存ソース全文から a8mat トークンを全抽出 (dedup 用。htmlContent / imageUrl / pixel いずれからも拾う)。 */
-export function extractA8mats(src) {
-  return new Set([...src.matchAll(/a8mat=([A-Za-z0-9+._%-]+)/g)].map((m) => m[1]));
+/** 文書 → 台帳の文字列 (書き手の唯一の書き方)。 */
+export function serializeAdsDoc(doc) {
+  return `${JSON.stringify(doc, null, 2)}\n`;
+}
+
+/** 既存の広告の id 一覧。 */
+export function extractIds(doc) {
+  return doc.ads.map((ad) => ad.id);
+}
+
+/** 既存の広告の全項目から a8mat トークンを集合で抽出 (dedup 用。htmlContent / imageUrl / pixel いずれからも拾う)。 */
+export function extractA8mats(doc) {
+  return new Set([...JSON.stringify(doc.ads).matchAll(/a8mat=([A-Za-z0-9+._%-]+)/g)].map((m) => m[1]));
 }
 
 /** AffiliateAd draft の htmlContent から a8mat トークンを取り出す (無ければ null)。 */
@@ -126,8 +133,8 @@ const FIELD_ORDER = [
 ];
 
 /**
- * AffiliateAd draft → 既存インデント (2space) に一致する配列要素リテラル。
- * 末尾カンマ付き。createdAt/updatedAt が null なら現在時刻を入れる (nowStr 経由・テスト固定可)。
+ * AffiliateAd draft → 台帳の項目の順 (FIELD_ORDER) にそろえた 1 件。
+ * createdAt/updatedAt が null なら現在時刻を入れる (nowStr 経由・テスト固定可)。
  */
 export function renderEntry(draft, nowStr) {
   const obj = {};
@@ -141,26 +148,18 @@ export function renderEntry(draft, nowStr) {
       obj[k] = k in draft ? draft[k] : null;
     }
   }
-  // JSON.stringify(obj, null, 2) は先頭要素 "{" から 2space。配列内なので全行 +2space。
-  const body = JSON.stringify(obj, null, 2)
-    .split("\n")
-    .map((line) => `  ${line}`)
-    .join("\n");
-  return `${body},`;
+  return obj;
 }
 
 /**
- * 最終 `];` の直前に entryLiteral を挿入した新ソースを返す。
- * validateTail 済み前提。挿入は「閉じ `];` を含む行の直前」に改行込みで置く。
+ * 配列の末尾に entry を足した新しい文書を返す。元の文書は変えない。
+ * 形が崩れた文書・既にある id の entry は throw (呼び出し側が uniqueId で採番してから渡す)。
  */
-export function insertEntry(src, entryLiteral) {
-  const v = validateTail(src);
-  if (!v.ok) throw new Error(`insertEntry: invalid tail (${v.error})`);
-  const head = src.slice(0, v.closeIndex); // ... },\n  (または [ )
-  const tail = src.slice(v.closeIndex); // ];\n...
-  // head の末尾改行を保ちつつ entry を差し込む。head が改行で終わっていなければ足す。
-  const sep = head.endsWith("\n") ? "" : "\n";
-  return `${head}${sep}${entryLiteral}\n${tail}`;
+export function appendEntry(doc, entry) {
+  const v = validateAdsDoc(doc);
+  if (!v.ok) throw new Error(`appendEntry: invalid doc (${v.error})`);
+  if (doc.ads.some((ad) => ad.id === entry?.id)) throw new Error(`appendEntry: id が重複 (${entry?.id})`);
+  return { ...doc, ads: [...doc.ads, entry] };
 }
 
 /**

@@ -20,16 +20,6 @@ describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む",
     expect(sorted(resolveRegistry(REGISTRIES.metrics, readText))).toEqual(sorted(Object.keys(METRICS_REGISTRY)));
   });
 
-  it("affiliate-ad-experiment-ids = AFFILIATE_ADS が持つ experimentId", async () => {
-    // apps/web の TS はこの package の型検査 (rootDir) の外なので、実行時だけ読む
-    const { AFFILIATE_ADS } = (await import(pathToFileURL(resolve(ROOT, "apps/web/scripts/affiliate-ads-data.ts")).href)) as {
-      AFFILIATE_ADS: { experimentId?: string }[];
-    };
-    const ids = new Set(AFFILIATE_ADS.map((ad) => ad.experimentId).filter((id): id is string => Boolean(id)));
-    expect(ids.size).toBeGreaterThan(0);
-    expect(sorted(resolveRegistry(REGISTRIES["affiliate-ad-experiment-ids"], readText))).toEqual(sorted(ids));
-  });
-
   it("ranking-slug-redirects = RANKING_SLUG_REDIRECTS のキー、ranking-content-keys = 指標 + 旧 slug", async () => {
     // apps/web の TS はこの package の型検査 (rootDir) の外なので、実行時だけ読む
     const { RANKING_SLUG_REDIRECTS } = (await import(pathToFileURL(resolve(ROOT, "apps/web/src/config/ranking-redirects.ts")).href)) as {

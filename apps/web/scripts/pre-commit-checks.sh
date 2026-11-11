@@ -545,8 +545,8 @@ if [ -n "$STAGED_CATALOG_HINT" ]; then
 fi
 
 # 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)
-#     affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
-STAGED_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^apps/web/scripts/affiliate-ads-data\.ts$" || true)
+#     広告の台帳 (affiliate.ads) か読み込み口 affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
+STAGED_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(apps/web/scripts/affiliate-ads-data\.ts|data/affiliate/ledger/ads\.json)$" || true)
 
 if [ -n "$STAGED_AFFILIATE" ]; then
   echo -e "${GREEN}📐 アフィリエイト サイズ規約チェック...${NC}"
@@ -561,9 +561,9 @@ if [ -n "$STAGED_AFFILIATE" ]; then
 fi
 
 # 6.8 直接配置アフィリエイト台帳の構造チェック (/audit-affiliate-compliance)
-#     affiliate-direct-placements-data.ts が staged のとき、ID 重複・URL scheme・配置形式の
-#     構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
-STAGED_DIRECT_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^apps/web/scripts/affiliate-direct-placements-data\.ts$" || true)
+#     直貼りの台帳 (affiliate.direct-placements) か読み込み口 affiliate-direct-placements-data.ts が staged のとき、
+#     ID 重複・URL scheme・配置形式の構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
+STAGED_DIRECT_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(apps/web/scripts/affiliate-direct-placements-data\.ts|data/affiliate/ledger/direct-placements\.json)$" || true)
 
 if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
   echo -e "${GREEN}📐 直接配置アフィリエイト 構造チェック...${NC}"
@@ -572,7 +572,7 @@ if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
   else
     echo -e "${RED}❌ 直接配置台帳に構造 error があります。${NC}"
     grep -E "error|❌" /tmp/affiliate-direct.log | head -5 || true
-    echo -e "${YELLOW}💡 skill: /audit-affiliate-compliance / SSOT: apps/web/scripts/affiliate-direct-placements-data.ts${NC}"
+    echo -e "${YELLOW}💡 skill: /audit-affiliate-compliance / SSOT: 台帳 affiliate.direct-placements${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 fi

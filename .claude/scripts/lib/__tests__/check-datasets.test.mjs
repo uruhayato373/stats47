@@ -430,7 +430,7 @@ test("台帳参照が宣言されている (投稿→指標・販売→出品・
   assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["kdp.listings"]);
   assert.ok(refsOf("sales.ledger").every((r) => !r.severity));
   assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "products.packs" && !r.severity));
-  assert.ok(REGISTRY_REFS.some((r) => r.to === "affiliate.experiments" && !r.severity));
+  assert.ok(refsOf("affiliate.ads").some((r) => r.field === "ads[].experimentId" && r.to === "affiliate.experiments" && !r.severity));
 });
 
 test("[mutation] 厳格化した schema は知らない項目と語彙外の値を落とす", () => {

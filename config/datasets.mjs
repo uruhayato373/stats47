@@ -152,10 +152,6 @@ export const OUTSIDE_DATA = [
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
   // ── data/ へ移すマスタ・台帳 (縮小専用) ──
-  { path: "apps/web/scripts/affiliate-ads-data.ts", why: "pending", phase: 10 },
-  { path: "apps/web/scripts/affiliate-offer-profiles-data.ts", why: "pending", phase: 10 },
-  { path: "apps/web/scripts/affiliate-direct-placements-data.ts", why: "pending", phase: 10 },
-  { path: "apps/web/src/features/ads/constants/affiliate-category.ts", why: "pending", phase: 10 },
   { path: "packages/data-configs/src/business-plan/catalog.ts", why: "pending", phase: 11 },
   { path: "packages/data-configs/src/business-plan/content-opportunities.ts", why: "pending", phase: 11 },
   { path: "packages/data-configs/src/business-plan/m1.ts", why: "pending", phase: 11 },
@@ -260,21 +256,12 @@ export const REGISTRIES = {
     description: "Geo の投稿が指してよい指標 (都道府県の指標と Geo 分析の集計値の名前)",
     union: ["metrics", "geo-analysis-metric-names"],
   },
-  "affiliate-ad-experiment-ids": {
-    description: "アフィリエイト広告 (AFFILIATE_ADS) が持つ A/B 実験の ID",
-    files: ["apps/web/scripts/affiliate-ads-data.ts"],
-    pattern: '"experimentId":\\s*"([^"]+)"',
-  },
 };
 
 /**
  * TS 側の正本から台帳を指す参照 ({ from: "registry:<名前>", to, key, severity?, why? })。from の ID がすべて参照先にあること。
  */
-export const REGISTRY_REFS = [
-  // 広告の実験は実験台帳に停止条件を事前登録してから回す。未登録は R2 反映時 (build-affiliate-operations-state) にしか
-  // 見えなかったので、PR の時点で止める (2026-10-26)
-  { from: "registry:affiliate-ad-experiment-ids", to: "affiliate.experiments", key: "experiments[].experimentId" },
-];
+export const REGISTRY_REFS = [];
 
 const SA = ".claude/skills/analytics";
 const SM = ".claude/state/metrics";
@@ -520,6 +507,42 @@ export const DATASETS = [
   d("affiliate.catalog", "data/affiliate/affiliate-catalog.json", "state", "affiliate", "data", "3 ASP の提携台帳"),
   d("a8.catalog", "data/affiliate/a8-catalog.json", "state", "affiliate", "data", "A8 の提携案件の一覧"),
   d("affiliate.experiments", "data/affiliate/experiments.json", "ledger", "affiliate", "data", "アフィリエイト実験の台帳", { schema: "config/schema/affiliate.experiments.schema.json" }),
+  d("affiliate.ads", "data/affiliate/ledger/ads.json", "ledger", "affiliate", "data", "アフィリエイト広告 (クリエイティブ) の台帳 (登録順。意図軸 vertical・置き場所・案件の参照・A/B 実験)。案件の判断の写しと配信の保留は読み込み口が結合する。R2 の app/affiliate-ads/all.json はここから作る (publish-affiliate-ads)。A8 の機械追記は append-affiliate-ads.ts。読み込みは apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS)", {
+    schema: "config/schema/affiliate.ads.schema.json",
+    refs: [
+      { field: "ads[].programRef", to: "affiliate.offer-profiles", key: "profiles[].programRef" },
+      { field: "ads[].categoryKey", to: "categories.master", key: "categories[].key" },
+      { field: "ads[].targetCategories", to: "categories.master", key: "categories[].key" },
+      { field: "ads[].targetRankingKeys[]", to: "registry:metrics" },
+      // 広告の実験は実験台帳に停止条件を事前登録してから回す。未登録は R2 反映時 (build-affiliate-operations-state) にしか
+      // 見えなかったので、PR の時点で止める (2026-10-26)
+      { field: "ads[].experimentId", to: "affiliate.experiments", key: "experiments[].experimentId" },
+    ],
+  }),
+  d("affiliate.offer-profiles", "data/affiliate/ledger/offer-profiles.json", "ledger", "affiliate", "data", "アフィリエイト案件の台帳 (案件ごとの成果条件・負担・lane・掲載してよいページの種類と、案件の参照を持たない広告 → 案件)。報酬・EPC などの変動値は持たない。読み込みは apps/web/scripts/affiliate-offer-profiles-data.ts (AFFILIATE_OFFER_PROFILES・AFFILIATE_PROGRAM_REF_BY_AD_ID)", {
+    schema: "config/schema/affiliate.offer-profiles.schema.json",
+    refs: [
+      { field: "programRefByAdId.$keys", to: "affiliate.ads", key: "ads[].id" },
+      { field: "programRefByAdId.*", to: "affiliate.offer-profiles", key: "profiles[].programRef" },
+    ],
+  }),
+  d("affiliate.direct-placements", "data/affiliate/ledger/direct-placements.json", "ledger", "affiliate", "data", "記事本文に直書きしたアフィリエイト配置の台帳 (監査用。アプリと R2 の配信は読まない。notes は配置ごとの判断の記録)。読み込みは apps/web/scripts/affiliate-direct-placements-data.ts (AFFILIATE_DIRECT_PLACEMENTS)", {
+    schema: "config/schema/affiliate.direct-placements.schema.json",
+    refs: [
+      { field: "placements[].placements[].slug", where: { channel: "blog" }, to: "blog.articles", key: "articles[].slug" },
+      { field: "placements[].placements[].slug", where: { channel: "note" }, to: "note.articles", key: "articles[].key" },
+      { field: "notes.$keys", to: "affiliate.direct-placements", key: "placements[].id" },
+    ],
+  }),
+  d("affiliate.vertical-map", "data/affiliate/ledger/vertical-map.json", "master", "affiliate", "data", "ページの内容 → 広告の意図軸 (vertical の 10 軸) の対応表 6 つ (カテゴリ・カテゴリ一覧の枠・テーマ・タグ・市区町村テーマ・出典調査)。notes は判断の記録。読み込みは apps/web/src/features/ads/constants/affiliate-category.ts (解決の関数もそこ)", {
+    schema: "config/schema/affiliate.vertical-map.schema.json",
+    refs: [
+      { field: "category.$keys", to: "categories.master", key: "categories[].key" },
+      { field: "categoryPagePolicy.$keys", to: "categories.master", key: "categories[].key" },
+      { field: "theme.$keys", to: "themes.catalogs", key: "key" },
+      { field: "survey.$keys", to: "surveys.master", key: "[].id" },
+    ],
+  }),
   d("affiliate.experiment-history", "data/affiliate/affiliate-experiment-history.csv", "series", "affiliate", "data", "アフィリエイト実験の推移"),
   d("ga4.affiliate-history", "data/affiliate/ga4-affiliate-history.csv", "series", "affiliate", "data", "GA4 のアフィリエイト実測の週次集約"),
   d("ga4.affiliate-snapshots", "data/affiliate/ga4-affiliate-{date}.json", "series", "affiliate", "data", "GA4 のアフィリエイト実測の生 JSON (2026-09-14 以降は R2)"),

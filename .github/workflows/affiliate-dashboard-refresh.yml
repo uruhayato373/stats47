@@ -4,7 +4,7 @@ name: 📊 Refresh Affiliate Inventory & Compliance
 # artifact と job summary に残す (週次運用ループの前半。後半 = GA4 + 集約 state は
 # affiliate-ga4-weekly.yml が 1 時間後に実行)。
 #
-# - SSOT (affiliate-ads-data.ts / affiliate-direct-placements-data.ts) が変わったら自動で state を同期
+# - SSOT (台帳 affiliate.ads・affiliate.offer-profiles・affiliate.direct-placements と読み込み口) が変わったら自動で state を同期
 # - 週次 cron で棚卸し snapshot を artifact として残す
 # - dashboard HTML は /tmp 生成の派生物 (artifact のみ・commit しない。2026-07-15 に commit-back 廃止)
 # - 本番 R2 / アプリ / git には触れない。R2 反映は publish-affiliate-ads.yml が別途担当。
@@ -18,6 +18,10 @@ on:
       - "apps/web/scripts/affiliate-ads-data.ts"
       - "apps/web/scripts/affiliate-offer-profiles-data.ts"
       - "apps/web/scripts/affiliate-direct-placements-data.ts"
+      # 上の 3 つの読み込み口の記録の正本 (台帳 affiliate.ads・affiliate.offer-profiles・affiliate.direct-placements)
+      - "data/affiliate/ledger/ads.json"
+      - "data/affiliate/ledger/offer-profiles.json"
+      - "data/affiliate/ledger/direct-placements.json"
       - ".claude/scripts/ads/build-affiliate-dashboard.ts"
       - ".claude/scripts/ads/audit-affiliate-inventory.ts"
       - ".claude/scripts/ads/build-placement-map.mjs"

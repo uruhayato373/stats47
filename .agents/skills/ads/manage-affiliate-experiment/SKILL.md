@@ -16,7 +16,7 @@ co_agents: [improvement-triage, ga4-analyst]
 
 | kind | variant の実体 | 配分 | 決着のしかた |
 |---|---|---|---|
-| `creative` (従来) | `affiliate-ads-data.ts` の `experimentId`/`variantId`/`weight` | client 加重ランダム + sticky | SSOT の weight 引き上げ / 敗者 `isActive:false` |
+| `creative` (従来) | 台帳 `affiliate.ads` の `experimentId`/`variantId`/`weight` | client 加重ランダム + sticky | SSOT の weight 引き上げ / 敗者 `isActive:false` |
 | **`code`** (新設) | **コード側の分岐** (どの広告を出すかでなく**どう出すか**) | **決定的ハッシュ** (例 slug) | **コード変更 PR**。weight を触っても変わらない |
 
 `code` 実験は「本文にテキストを出すか 300x250 を出すか」のように**配置・フォーマットを比べる**もので、
@@ -47,7 +47,7 @@ co_agents: [improvement-triage, ga4-analyst]
 
 ### start — 実験を開始する
 
-1. `apps/web/scripts/affiliate-ads-data.ts` に同一 `experimentId`・別 `variantId` のエントリを 2〜3 件
+1. 台帳 `affiliate.ads` に同一 `experimentId`・別 `variantId` のエントリを 2〜3 件
    追加 (`/register-affiliate-banner` の Step 4 と同じ形式 + experiment フィールド)。
 2. `data/affiliate/experiments.json` の `experiments[]` に registry エントリを追加:
    ```json
@@ -101,7 +101,7 @@ co_agents: [improvement-triage, ga4-analyst]
 ### close — 実験を終了する
 
 1. ユーザー決定に従い実体を変更する。**kind で手段が違う**:
-   - `creative`: SSOT (`affiliate-ads-data.ts`) の weight 引き上げ / 敗者 `isActive: false`
+   - `creative`: SSOT (台帳 `affiliate.ads`) の weight 引き上げ / 敗者 `isActive: false`
    - `code`: **勝ったフォーマットに寄せるコード変更 PR** (割当関数を撤去するか片方に固定する)。
      weight も `isActive` も効かないので、SSOT をいじろうとしないこと
 2. registry の該当エントリを `"status": "closed"`, `"winnerVariantId": "<id>"`, `"closedAt": "YYYY-MM-DD"` に更新。
@@ -116,5 +116,5 @@ co_agents: [improvement-triage, ga4-analyst]
 | `.claude/scripts/ads/build-affiliate-operations-state.ts` | 決定的判定 + 集約 state 生成 |
 | `.claude/scripts/ads/lib/affiliate-operations-core.mjs` | 判定コア (純粋関数・`node --test` 対象) |
 | `.claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs` | 判定コアの fixture テスト (gate/実験 status/state validate) |
-| `apps/web/scripts/affiliate-ads-data.ts` | variant 実体 (experimentId/variantId/weight) |
+| 台帳 `affiliate.ads` | variant 実体 (experimentId/variantId/weight) |
 | `apps/web/src/features/ads/components/VariantAdSlot.tsx` | 出し分け実装 (client 加重ランダム + sticky) |
