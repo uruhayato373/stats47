@@ -64,12 +64,12 @@ describe("公開ダウンロードの検索除外", () => {
     expect(retired.headers.get("X-Robots-Tag")).toBe("noindex");
   });
 
-  it("noindexを読ませる例外をdownloadに限定し、内部API・管理画面とAI学習botは引き続き禁止する", () => {
+  it("noindexを読ませる例外をdownloadと、Googleの描画に地図を出すための/api/geo/analysis/に限定し、他の内部API・管理画面とAI学習botは引き続き禁止する", () => {
     const rules = robots().rules;
     if (!Array.isArray(rules)) throw new Error("expected crawler groups");
     for (const userAgent of ["*", "Google-Extended"]) {
       const rule = rules.find((r) => r.userAgent === userAgent);
-      expect(rule?.allow).toEqual(["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?"]);
+      expect(rule?.allow).toEqual(["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?", "/api/geo/analysis/"]);
       expect(rule?.disallow).toEqual(["/admin/*", "/api/*", "/profile/edit"]);
     }
     for (const userAgent of ["GPTBot", "CCBot"]) {

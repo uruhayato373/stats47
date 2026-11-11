@@ -103,6 +103,8 @@ export function DataUsageCard({
               type="button"
               variant="link"
               size="xs"
+              // 押せることが分かるよう、文中のリンクと同じく下線を付ける
+              className="underline"
               onClick={() => {
                 trackCsvDownload({ rankingKey, yearCode: "latest", fileExtension: m.format });
                 if (survey === "hidden") setSurvey("asking");

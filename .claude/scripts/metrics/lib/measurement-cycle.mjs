@@ -375,6 +375,43 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
 }
 
 /**
+ * KPI index-coverage-rate: サイトマップに載せた URL のうち Google に登録済みの割合。
+ * 出所は GSC「すべての送信済みページ」ビューの週次記録 (gsc.coverage-submitted)。値 = indexed ÷ (indexed + not-indexed)。
+ * 記録が無い・最新の行が missing・件数が空欄のときは値を作らず status で理由を示す (0 や直前の週で埋めない)。
+ * 直前の captured の週より下がったら degraded (閾値は持たない)。
+ *
+ * @param {Array<object>|null} rows data/gsc/coverage-submitted-history.csv (week,date,status,indexed,not-indexed,…)
+ * @param {{week:string, asOf:string}} ctx
+ * @returns {{status:string, value:string|null, previous:string|null, note?:string}}
+ */
+export function summarizeIndexCoverage(rows, { week, asOf }) {
+  const none = (status, note) => ({ status, value: null, previous: null, note });
+  if (!rows) return none("missing", "gsc/coverage-submitted-history.csv が無い (週次取得の初回待ち)");
+  const sorted = rows.filter((r) => r.week && r.week <= week).sort((a, b) => a.week.localeCompare(b.week));
+  const latest = sorted.at(-1);
+  if (!latest) return none("missing", `coverage-submitted-history.csv に ${week} 以前の行が無い`);
+  if (latest.status !== "captured") return none("missing", `最新の ${latest.week} が ${latest.status || "status 空欄"} (送信済みビューを取得できなかった)`);
+  const rate = (r) => {
+    const indexed = r.indexed === "" || r.indexed == null ? NaN : Number(r.indexed);
+    const notIndexed = r["not-indexed"] === "" || r["not-indexed"] == null ? NaN : Number(r["not-indexed"]);
+    return Number.isFinite(indexed) && Number.isFinite(notIndexed) && indexed + notIndexed > 0 ? indexed / (indexed + notIndexed) : null;
+  };
+  const now = rate(latest);
+  if (now == null) return none("missing", `${latest.week} の登録済み・未登録の件数が空欄または不正`);
+  const prevRow = sorted.slice(0, -1).reverse().find((r) => r.status === "captured" && rate(r) != null) ?? null;
+  const prev = prevRow ? rate(prevRow) : null;
+  const detail = `${latest.week}・登録済み ${Number(latest.indexed).toLocaleString("ja-JP")}・未登録 ${Number(latest["not-indexed"]).toLocaleString("ja-JP")}`;
+  const stale = latest.date && latest.date < addDaysIso(asOf, -OPS_WINDOW_DAYS);
+  const dropped = prev != null && now < prev;
+  return {
+    status: stale ? "stale" : dropped ? "degraded" : "ok",
+    value: pct(now),
+    previous: prev == null ? null : pct(prev),
+    note: `${detail}${dropped ? `・${prevRow.week} (${pct(prev)}) から低下` : ""}${stale ? `・最終取得 ${latest.date}` : ""}`,
+  };
+}
+
+/**
  * KPI ツリー (事業計画 catalog → kpi-tree.json) の各ノードに、今週の値・非重複の比較値・ぶら下がる施策を付ける。
  * 値を出せないノードは 0 にせず status で理由を示す (not-connected = 計測サイクルに未接続、stale / missing = 入力の欠落)。
  *
@@ -385,6 +422,7 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {Array<object>|null} input.gscHistory data/gsc/history.csv
  * @param {Array<object>|null} [input.ga4Finalized] data/ga4/history-finalized7d.csv (Japan-only の確定 7 日。4 行の和 = 28 日 PV)
  * @param {Array<object>|null} [input.adsenseHistory] data/adsense/history.csv (確定 7 日の AdSense 収益。週キーは GA4 確定 7 日と同じ)
+ * @param {Array<object>|null} [input.submittedHistory] data/gsc/coverage-submitted-history.csv (GSC 送信済みビュー。index-coverage-rate の入力)
  * @param {Array<object>|null} input.cycleHistory measurement-cycle/history.csv (今週の行を除く過去分)
  * @param {object|null} input.journey summarizeJourney の結果
  * @param {object|null} input.workContext summarizeWorkContext の結果
@@ -397,7 +435,7 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
  */
-export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized = null, adsenseHistory = null, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
+export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized = null, adsenseHistory = null, submittedHistory = null, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
   if (!nodes) return null;
   const prevWeek = shiftIsoWeek(week, -KPI_COMPARE_WEEKS_BACK);
   const gscNow = gscHistory?.find((r) => r.week === week) ?? null;
@@ -492,6 +530,8 @@ export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized =
         const v = Object.values(cf.violationsBySeverity).reduce((a, b) => a + b, 0);
         return { status: cf.status, value: `閾値違反 ${v} 件・R2 保存 ${cf.r2StorageGb ?? "—"} GB`, previous: null };
       }
+      case "index-coverage-rate":
+        return summarizeIndexCoverage(submittedHistory, { week, asOf });
       case "measurement-freshness": {
         const ok = freshnessChecks.filter((c) => c.ok).length;
         const bad = freshnessChecks.filter((c) => !c.ok).map((c) => c.name);
