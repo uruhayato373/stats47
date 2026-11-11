@@ -45,8 +45,18 @@ done
 # 逆向き: index が載せている shard が実際に生きているか
 dead=""
 for id in $listed; do
-  code="$(curl -s --max-time 20 -o /dev/null -w '%{http_code}' -A "$UA" "${BASE_URL}/sitemap/${id}.xml")"
-  [ "$code" = "200" ] || { echo "❌ index が載せる shard ${id} が HTTP ${code}"; dead="${dead} ${id}"; }
+  shard_file="$(mktemp)"
+  code="$(curl -s --max-time 20 -o "$shard_file" -w '%{http_code}' -A "$UA" "${BASE_URL}/sitemap/${id}.xml")"
+  if [ "$code" != "200" ]; then
+    echo "❌ index が載せる shard ${id} が HTTP ${code}"; dead="${dead} ${id}"
+  else
+    # 200 でも <loc> が 0 件の空 sitemap なら提出漏れ (R2 不達で空になる経路) として失敗にする
+    locs="$(grep -c '<loc>' "$shard_file" || true)"
+    if [ "${locs:-0}" -lt 1 ]; then
+      echo "❌ index が載せる shard ${id} は HTTP 200 だが <loc> が 0 件 (空の sitemap)"; dead="${dead} ${id}"
+    fi
+  fi
+  rm -f "$shard_file"
 done
 
 if [ -n "$missing" ] || [ -n "$dead" ]; then

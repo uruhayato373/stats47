@@ -72,12 +72,8 @@ describe("導線名を付けた部品", () => {
             rankingKey: "bar",
             areaType: "prefecture",
             title: "別の指標",
-            subtitle: null,
             latestYear: "2024",
             unit: "%",
-            description: null,
-            demographicAttr: null,
-            normalizationBasis: null,
           },
         ]}
       />,

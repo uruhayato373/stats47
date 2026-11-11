@@ -15,12 +15,8 @@ export interface CategoryRankingListItem {
   rankingKey: string;
   areaType: string;
   title: string;
-  subtitle: string | null;
   latestYear: string;
   unit: string;
-  description: string | null;
-  demographicAttr: string | null;
-  normalizationBasis: string | null;
   topicLabel?: string | null;
   /** 1 位の地域と値 (「鳥取県 71.5%」。家計調査は県庁所在市の名前)。サーバーで rankingTop1Label から作る */
   top1?: string | null;
