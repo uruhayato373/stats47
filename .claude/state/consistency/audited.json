@@ -1,14 +1,8 @@
 {
-  "hash": "6175f863a01b9f653af6c84251210a87430eaf8705603b8adc8ed3c97417d255",
-  "audited_at": "2026-11-10T23:19:58",
+  "hash": "819c2d504ff639778df1d0678435f9a3a5457fec479f885d6d52392353394280",
+  "audited_at": "2026-11-11T00:24:43",
   "files": [
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/scripts/note/__tests__/navigation-footer.test.mjs",
-    ".claude/scripts/note/__tests__/published-audit.test.mjs",
-    ".claude/scripts/note/audit-note-published.mjs",
-    ".claude/scripts/note/lib/navigation-footer.mjs",
-    ".claude/scripts/note/lib/published-audit.mjs",
-    ".claude/scripts/note/update-published-navigation.mjs",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/scripts/note/__tests__/card-image-refresh.test.mjs",
+    ".claude/scripts/note/lib/card-image-refresh.mjs"
   ]
 }

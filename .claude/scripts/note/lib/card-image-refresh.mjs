@@ -43,6 +43,8 @@ export function createCardImageRefresh(rollout, { fetchImage = fetchCoverSource 
   }
   const revision = createHash('sha256').update(JSON.stringify(['native-image-refresh-v2', verification.version, [...targets]])).digest('hex');
   function targetFor(value) {
+    // 添付ファイルの要素 (embedded-service="attachment") は行き先の URL を持たない。リンクカードではないので対象外
+    if (!URL.canParse(value)) return null;
     const url = new URL(value);
     return targets.get(cleanUrl(value)) ?? (url.origin === SITE_ORIGIN ? { imageUrl: null, sha256: revision, magazine: false } : null);
   }
