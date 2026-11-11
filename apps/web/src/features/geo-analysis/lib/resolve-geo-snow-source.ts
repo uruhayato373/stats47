@@ -1,4 +1,3 @@
-'use server';
 import { PREFECTURE_CODE_2DIGIT_RE, to5DigitPrefCode } from '@stats47/area';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
@@ -6,11 +5,17 @@ import {
   isRecord,
   isTimestamp,
   matchesGeoArtifact,
-} from '../lib/geo-runtime-contract';
-import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
+} from './geo-runtime-contract';
+import { loadGeoAnalysisManifest } from './load-geo-analysis-evidence';
 
 import type { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
-export async function fetchGeoSnowSourceAction(
+
+/**
+ * 表示中の manifest (generatedAt + 県の snow-designation-polygons SHA) に固定した
+ * 豪雪指定区域の原典境界を返す。GET route (/api/geo/analysis/.../snow-source) が使う。
+ * 版・SHA・形が合わない、または R2 が読めないときは null (指定区域ゼロとは区別する)。
+ */
+export async function resolveGeoSnowSource(
   pref: string,
   expected: { generatedAt: string; sha256: string }
 ): Promise<FeatureCollection<Polygon | MultiPolygon> | null> {

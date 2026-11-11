@@ -3,13 +3,12 @@ import type { ReactNode } from 'react';
 import { buildFloodPrefDetail, type GeoAnalysisPrefDetail } from '@stats47/gis';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/lib/analytics/events', () => ({
   trackGeoRegionSelect: vi.fn(),
   trackGeoMapInteraction: vi.fn(),
 }));
-vi.mock('../../actions', () => ({ fetchGeoDetailAction: vi.fn() }));
 vi.mock('next/dynamic', () => ({
   default:
     () =>
@@ -45,7 +44,6 @@ vi.mock('@stats47/components/atoms/ui/select', () => ({
   SelectValue: () => null,
 }));
 
-import { fetchGeoDetailAction } from '../../actions';
 import { manifestFixture } from '../../lib/__tests__/geo-manifest-fixture';
 import { GeoSpatialEvidenceExplorer } from '../GeoSpatialEvidenceExplorer';
 
@@ -81,20 +79,38 @@ function props(generatedAt = versionA) {
   };
 }
 
+const fetchMock = vi.fn<typeof fetch>();
+beforeEach(() => {
+  vi.stubGlobal('fetch', fetchMock);
+});
+const json = (value: unknown) => new Response(JSON.stringify(value));
+// The explorer reads one prefecture from /api/geo/analysis/<slug>/<pref>?v=<generatedAt>&sha=<sha256>.
+function respondWithDetail(url: unknown) {
+  const { pathname, searchParams } = new URL(String(url), 'http://localhost');
+  const pref = pathname.split('/').pop()!;
+  return json(detail(pref, searchParams.get('v')!));
+}
+const detailUrl = (pref: string, generatedAt: string) =>
+  `/api/geo/analysis/population-flood-risk/${pref}?${new URLSearchParams({
+    v: generatedAt,
+    sha: props(generatedAt).manifest.stages[0]!.outputs[Number(pref) - 1]!.sha256,
+  })}`;
+
 describe('Geo表示境界の県・段階・証跡版', () => {
   it('応答が止まったときは再読み込みへ戻り、遅着した旧応答を表示しない', async () => {
     vi.useFakeTimers();
-    let resolveOld!: (value: GeoAnalysisPrefDetail) => void;
-    vi.mocked(fetchGeoDetailAction)
+    let resolveOld!: (value: Response) => void;
+    fetchMock.mockReset();
+    fetchMock
       .mockImplementationOnce(() => new Promise((resolve) => { resolveOld = resolve; }))
-      .mockImplementationOnce(async () => detail('13', versionB));
+      .mockImplementationOnce(async () => json(detail('13', versionB)));
     const view = render(<GeoSpatialEvidenceExplorer {...props()} />);
     try {
       await act(() => vi.advanceTimersByTimeAsync(30_000));
       expect(screen.getByRole('alert')).toHaveTextContent('読み込めませんでした');
       await act(async () => fireEvent.click(screen.getByRole('button', { name: '再読み込み' })));
       expect(screen.getByTestId('map')).toHaveTextContent(versionB);
-      await act(async () => resolveOld(detail('13', versionA)));
+      await act(async () => resolveOld(json(detail('13', versionA))));
       expect(screen.getByTestId('map')).toHaveTextContent(versionB);
     } finally {
       view.unmount();
@@ -103,9 +119,8 @@ describe('Geo表示境界の県・段階・証跡版', () => {
   });
 
   it('同一ページへのNext query遷移のprops更新で、県と段階を同期する', async () => {
-    vi.mocked(fetchGeoDetailAction).mockImplementation(
-      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
-    );
+    fetchMock.mockReset();
+    fetchMock.mockImplementation(async (url) => respondWithDetail(url));
     const view = render(<GeoSpatialEvidenceExplorer {...props()} />);
     await waitFor(() =>
       expect(screen.getByTestId('map')).toHaveTextContent(`13000:${versionA}`)
@@ -127,22 +142,15 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       screen.getByRole('heading', { name: '数値の確かめ方' })
     ).toBeInTheDocument();
     await waitFor(() =>
-      expect(fetchGeoDetailAction).toHaveBeenLastCalledWith(
-        'population-flood-risk',
-        '28',
-        expect.objectContaining({ generatedAt: versionA })
-      )
+      expect(fetchMock).toHaveBeenLastCalledWith(detailUrl('28', versionA))
     );
     expect(
       screen.getByRole('link', { name: 'この県の地点・検算データを見る' })
     ).toHaveAttribute('href', '/geo/data/population-flood-risk/28');
   });
   it('県cacheは同版のみ再利用し、manifest更新後は旧地図を表示しない', async () => {
-    const fetchMock = vi.mocked(fetchGeoDetailAction);
-    fetchMock.mockClear();
-    fetchMock.mockImplementation(async (_slug, pref, expected) =>
-      detail(pref, expected.generatedAt)
-    );
+    fetchMock.mockReset();
+    fetchMock.mockImplementation(async (url) => respondWithDetail(url));
     const view = render(<GeoSpatialEvidenceExplorer {...props()} />);
     await waitFor(() =>
       expect(screen.getByTestId('map')).toHaveTextContent(versionA)
@@ -166,16 +174,12 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       expect(screen.getByTestId('map')).toHaveTextContent(versionB)
     );
     expect(fetchMock).toHaveBeenCalledTimes(3);
-    expect(fetchMock).toHaveBeenLastCalledWith('population-flood-risk', '13', {
-      generatedAt: versionB,
-      sha256: props(versionB).manifest.stages[0]!.outputs[12]!.sha256,
-    });
+    expect(fetchMock).toHaveBeenLastCalledWith(detailUrl('13', versionB));
   });
   it('既定では県と表示段階をGeo canonical URLへ同期する', async () => {
     window.history.replaceState({}, '', '/geo/population-flood-risk');
-    vi.mocked(fetchGeoDetailAction).mockImplementation(
-      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
-    );
+    fetchMock.mockReset();
+    fetchMock.mockImplementation(async (url) => respondWithDetail(url));
     render(<GeoSpatialEvidenceExplorer {...props()} />);
     await screen.findByTestId('map');
     fireEvent.change(screen.getByRole('combobox', { name: '県' }), {
@@ -195,9 +199,8 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       .toHaveAttribute('href', '/geo/population-flood-risk?pref=28&stage=overlap');
   });
   it('タブに手順番号を付けず、検算は表示切替なしで地図の下に出す', async () => {
-    vi.mocked(fetchGeoDetailAction).mockImplementation(
-      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
-    );
+    fetchMock.mockReset();
+    fetchMock.mockImplementation(async (url) => respondWithDetail(url));
     render(
       <GeoSpatialEvidenceExplorer {...props()} initialView="overlap" />
     );
@@ -212,12 +215,23 @@ describe('Geo表示境界の県・段階・証跡版', () => {
     expect(audit.querySelectorAll('p.tabular-nums').length).toBeGreaterThan(0);
   });
 
+  it('GETが失敗（版不一致の404や通信断）したときは地図を出さず再読み込みへ戻る', async () => {
+    fetchMock.mockReset();
+    fetchMock.mockResolvedValueOnce(new Response('Not found', { status: 404 }));
+    const view = render(<GeoSpatialEvidenceExplorer {...props()} />);
+    expect(await screen.findByRole('alert')).toHaveTextContent('読み込めませんでした');
+    expect(screen.queryByTestId('map')).toBeNull();
+    fetchMock.mockRejectedValueOnce(new TypeError('Failed to fetch'));
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: '再読み込み' })));
+    expect(await screen.findByRole('alert')).toHaveTextContent('読み込めませんでした');
+    view.unmount();
+  });
+
   it('テーマ内では段階切替と外部県選択後もテーマURLを維持する', async () => {
     const themeUrl = '/themes/geographic-access?pref=13000#station-access';
     window.history.replaceState({}, '', themeUrl);
-    vi.mocked(fetchGeoDetailAction).mockImplementation(
-      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
-    );
+    fetchMock.mockReset();
+    fetchMock.mockImplementation(async (url) => respondWithDetail(url));
     const view = render(
       <GeoSpatialEvidenceExplorer
         {...props()}

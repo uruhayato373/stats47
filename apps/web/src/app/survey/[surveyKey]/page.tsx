@@ -253,12 +253,8 @@ export default async function SurveyPage({ params }: PageProps) {
       // 名前の組み立ては共通関数に寄せる。補足が題を含む家計調査の指標で「納豆消費支出額（…年間納豆消費支出額）」と
       // 同じ語が 2 回並んでいた (2026-11-02)
       title: metricDisplayName(item),
-      subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
-      description: item.description,
-      demographicAttr: item.demographicAttr,
-      normalizationBasis: item.normalizationBasis,
       top1: rankingTop1Label(item),
       ...(isKakei ? { topicLabel: topicLabels.get(topicKey) ?? OTHER_TOPIC_LABEL } : {}),
     };

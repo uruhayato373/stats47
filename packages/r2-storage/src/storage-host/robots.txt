@@ -1,0 +1,19 @@
+# storage.stats47.jp (R2 の公開バケット) の robots.txt。
+# 原本: packages/r2-storage/src/storage-host/robots.txt (git)。反映は publish-storage-robots.yml。
+#
+# このホストの JSON・地理データは、サイトが同一オリジンの API 経由で読む配信用の部品で、
+# 検索結果に出すページではない。画像 (OGP・ブログの図・サムネイル) は検索とリンクカードが読むので止めない。
+# 経緯: 2026-11-11 の実測で Googlebot が 24 時間に 925 件このホストへ来ていた (backlog GSC-CRAWL-WASTE-01)。
+
+User-agent: *
+# 市区町村ランキングの Dataset 構造化データが contentUrl として指すので読ませる
+Allow: /app/municipalities/ranking/*/values.json
+Disallow: /*.json$
+Disallow: /*.geojson$
+Disallow: /*.topojson$
+Disallow: /state/
+Disallow: /estat-api/
+Disallow: /estat-catalog/
+Disallow: /gis/
+Disallow: /archive/
+Disallow: /incremental-cache/

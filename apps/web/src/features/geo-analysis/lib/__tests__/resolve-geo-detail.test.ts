@@ -4,11 +4,12 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@stats47/r2-storage/server', () => ({ fetchFromR2AsJson: vi.fn() }));
 
+import { resolveGeoDetail } from '../resolve-geo-detail';
+
 import {
   bindFixtureArtifact,
   manifestFixture,
-} from '../../lib/__tests__/geo-manifest-fixture';
-import { fetchGeoDetailAction } from '../fetch-geo-detail';
+} from './geo-manifest-fixture';
 
 function fixture(generatedAt: string) {
   const detail = buildFloodPrefDetail({
@@ -43,7 +44,7 @@ function fixture(generatedAt: string) {
   };
 }
 
-describe('表示中のGeo証跡に固定したserver action', () => {
+describe('表示中のGeo証跡に固定した県detailの照合', () => {
   it.each([
     ['https://example.com', '13'],
     ['//example.com', '13'],
@@ -54,7 +55,7 @@ describe('表示中のGeo証跡に固定したserver action', () => {
     ['population-flood-risk', '13\n'],
   ])('定義外の取得先をR2へ渡さない (%s, %s)', async (slug, pref) => {
     vi.mocked(fetchFromR2AsJson).mockClear();
-    expect(await fetchGeoDetailAction(slug, pref, {
+    expect(await resolveGeoDetail(slug, pref, {
       generatedAt: '2026-09-05T00:00:00.000Z',
       sha256: 'a'.repeat(64),
     })).toBeNull();
@@ -66,11 +67,11 @@ describe('表示中のGeo証跡に固定したserver action', () => {
     const fetchMock = vi.mocked(fetchFromR2AsJson);
     fetchMock.mockResolvedValueOnce(b.detail).mockResolvedValueOnce(b.manifest);
     expect(
-      await fetchGeoDetailAction('population-flood-risk', '13', a.expected)
+      await resolveGeoDetail('population-flood-risk', '13', a.expected)
     ).toBeNull();
     fetchMock.mockResolvedValueOnce(b.detail).mockResolvedValueOnce(b.manifest);
     expect(
-      await fetchGeoDetailAction('population-flood-risk', '13', b.expected)
+      await resolveGeoDetail('population-flood-risk', '13', b.expected)
     ).toEqual(b.detail);
   });
   it('同じ生成時刻でも表示manifestとartifact SHAが異なれば拒否する', async () => {
@@ -79,7 +80,7 @@ describe('表示中のGeo証跡に固定したserver action', () => {
       .mockResolvedValueOnce(a.detail)
       .mockResolvedValueOnce(a.manifest);
     expect(
-      await fetchGeoDetailAction('population-flood-risk', '13', {
+      await resolveGeoDetail('population-flood-risk', '13', {
         ...a.expected,
         sha256: 'b'.repeat(64),
       })
@@ -88,13 +89,13 @@ describe('表示中のGeo証跡に固定したserver action', () => {
   it('不正な期待版・県はR2取得前に拒否する', async () => {
     vi.mocked(fetchFromR2AsJson).mockClear();
     expect(
-      await fetchGeoDetailAction('population-flood-risk', '48', {
+      await resolveGeoDetail('population-flood-risk', '48', {
         generatedAt: 'invalid',
         sha256: 'x',
       })
     ).toBeNull();
     expect(
-      await fetchGeoDetailAction('population-flood-risk', '13', {
+      await resolveGeoDetail('population-flood-risk', '13', {
         generatedAt: 'invalid',
         sha256: 'x',
       })

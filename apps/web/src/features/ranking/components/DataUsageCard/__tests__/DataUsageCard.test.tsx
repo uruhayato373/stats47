@@ -14,14 +14,40 @@ const baseProps = {
 };
 
 describe("DataUsageCard", () => {
-  it("CSV に加えて、表示中の基準で地図用の KML / GeoJSON を出す", () => {
-    render(<DataUsageCard {...baseProps} normalizationType="per_population" hasAllBases />);
-    expect(screen.getByRole("link", { name: "KML" }).getAttribute("href")).toBe(
-      "/api/ranking/financial-strength-index/download?format=kml&basis=per_population"
-    );
-    expect(screen.getByRole("link", { name: "GeoJSON" }).getAttribute("href")).toContain("format=geojson");
+  it("CSV は href のリンク、KML / GeoJSON は href を持たないボタンで押すと同じ URL へ移る (検索エンジンに辿らせない)", () => {
+    const { container } = render(<DataUsageCard {...baseProps} normalizationType="per_population" hasAllBases />);
     // CSV は全基準まとめのまま
     expect(screen.getByRole("link", { name: "ダウンロード" }).getAttribute("href")).toContain("basis=all-bases");
+    expect(container.innerHTML).not.toMatch(/href="[^"]*format=(kml|geojson)/);
+    expect(screen.queryByRole("link", { name: "KML" })).toBeNull();
+
+    const original = window.location;
+    let assigned = "";
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      value: {
+        origin: original.origin,
+        protocol: original.protocol,
+        host: original.host,
+        hostname: original.hostname,
+        pathname: original.pathname,
+        search: original.search,
+        get href() {
+          return original.href;
+        },
+        set href(v: string) {
+          assigned = v;
+        },
+      },
+    });
+    try {
+      fireEvent.click(screen.getByRole("button", { name: "KML" }));
+      expect(assigned).toBe("/api/ranking/financial-strength-index/download?format=kml&basis=per_population");
+      fireEvent.click(screen.getByRole("button", { name: "GeoJSON" }));
+      expect(assigned).toContain("format=geojson");
+    } finally {
+      Object.defineProperty(window, "location", { configurable: true, value: original });
+    }
   });
 
   it("CSV を落とす前から、その分野のデータ集を案内する", () => {

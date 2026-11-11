@@ -1,20 +1,9 @@
 {
-  "hash": "e57d8a4107d902876d1e6e0d744712529139c2d9190839d27c9d9d507848c202",
-  "audited_at": "2026-11-10T08:15:10",
+  "hash": "911f1a8e9752e57b3490436dfebb601f88c0a14907a82a7c9ef68a28f07e32a5",
+  "audited_at": "2026-11-11T02:45:08",
   "files": [
-    ".agents/skills/product/build-data-pack/SKILL.md",
-    ".claude/rules/buzz-map-standards.md",
-    ".claude/rules/note-image-assets.md",
-    ".claude/rules/sns-content-standards.md",
-    ".claude/scripts/note/__tests__/note-figure-ledger.test.mjs",
-    ".claude/scripts/note/build-note-figure-ledger.mjs",
-    ".claude/scripts/note/publish-product-paid-update.sh",
-    ".claude/scripts/note/render-product-figures.ts",
-    ".claude/scripts/sns/build-buzz-map-spec-gsi.ts",
-    ".claude/scripts/sns/build-buzz-map-spec-ksj.ts",
-    ".claude/scripts/sns/build-buzz-map-spec.ts",
-    ".claude/scripts/sns/merge-buzz-map-specs.ts",
-    ".claude/skills/note/publish-note/references/update-mode.md",
-    ".claude/skills/product/build-data-pack/SKILL.md"
+    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
+    ".claude/scripts/metrics/build-measurement-cycle.mjs",
+    ".claude/scripts/metrics/lib/measurement-cycle.mjs"
   ]
 }
