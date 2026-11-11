@@ -190,3 +190,4 @@
 - [snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — 検査の「本番データの欠落」は比較の誤りのことがある。再生成の前に生成側の関数で 1 件確かめる
 - [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree はセッション再開で消える。worktree はリポジトリ内に置き節目ごとにコミット
 - [stat image type ledger first](feedback_stat_image_type_ledger_first.md) — 統計の画像は描く前に image-templates.json で型を引く。商品の見本も例外にしない
+- [sync-snapshots task names](feedback_sync_snapshots_task_names.md) — カテゴリ一覧を作るのは only=master。ranking-items は別物。起動前に SKILL.md の task 表と承認対象を照合

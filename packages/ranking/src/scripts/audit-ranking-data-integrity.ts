@@ -22,6 +22,8 @@ import { datasetDir } from "../../../../config/datasets.mjs";
  *                             HOME_FEATURED_PROMINENCE の定義数以上か
  *   (e) per-URL 件数下限    — `app/survey/all.json` / 17 category の `items.json` が
  *                             極端に少なくないか (絶対フロア + 前回実行比のドリフト検知)
+ *                             加えて all.json で有効な指標が、所属する category の items.json に
+ *                             キー単位で入っているか (件数の検査では 9/1,013 件の欠けを見逃す。lib/category-membership.ts)
  *   (f) 正規化 snapshot 実在 — normalizationOptions を持つキーで
  *                             `values-per-*.json` / `national-trend.json` が 200 か
  *   (g) 正規化 値域         — fixture ゲート (lib/normalized-fixtures.ts) の期待レンジに入るか
@@ -79,6 +81,7 @@ import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominen
 import surveysMaster from "../../../../data/surveys/master/surveys.json";
 
 import { expectedCalculatedYears } from "./lib/calculated-stats-core";
+import { findMissingCategoryMembers } from "./lib/category-membership";
 import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
 import { SITE } from "@stats47/types";
 import { CATEGORY_KEYS } from "@stats47/data-configs/categories";
@@ -355,6 +358,8 @@ interface AuditReport {
       string,
       { count: number; ok: boolean; driftOk: boolean; previous?: number }
     >;
+    /** all.json では有効なのに、そのカテゴリの items.json に入っていない指標 (件数の検査では見えない欠け) */
+    categoryMissing: Array<{ categoryKey: string; rankingKey: string }>;
   };
   normalized: NormalizedChecks;
   stats: StatsChecks;
@@ -851,16 +856,29 @@ async function main() {
     previous === null || previous.survey === 0 ? true : surveyCount >= previous.survey * DRIFT_RATIO_THRESHOLD;
 
   const categoryChecks: AuditReport["countChecks"]["categories"] = {};
+  // 件数が足りていても、入っているはずの指標が欠けていないかをキー単位で見るために一覧のキーも集める
+  const categoryActualKeys = new Map<string, Set<string>>();
   await mapPool([...CATEGORY_KEYS], 10, async (catKey) => {
-    const res = await fetchJson<{ count: number }>(`app/category/${catKey}/items.json`);
+    const res = await fetchJson<{ count: number; items?: Array<{ rankingKey?: string }> }>(
+      `app/category/${catKey}/items.json`,
+    );
     const count = res.body?.count ?? 0;
+    if (res.status === 200 && Array.isArray(res.body?.items)) {
+      categoryActualKeys.set(
+        catKey,
+        new Set(res.body.items.map((i) => i.rankingKey).filter((k): k is string => typeof k === "string")),
+      );
+    }
     const absOk = res.status === 200 && count > 0; // 絶対フロア: 0 件は無条件で異常
     const prevCount = previous?.categories[catKey];
     const driftOk = prevCount === undefined || prevCount === 0 ? true : count >= prevCount * DRIFT_RATIO_THRESHOLD;
     categoryChecks[catKey] = { count, ok: absOk, driftOk, ...(prevCount !== undefined ? { previous: prevCount } : {}) };
   });
 
+  const categoryMissing = findMissingCategoryMembers(r2Active, categoryActualKeys);
+
   const countChecksOk =
+    categoryMissing.length === 0 &&
     homeOk &&
     surveyAbsOk &&
     surveyDriftOk &&
@@ -897,6 +915,7 @@ async function main() {
       home: { count: homeCount, expected: homeExpected, ok: homeOk },
       survey: { count: surveyCount, expectedFloor: surveyFloor, ok: surveyAbsOk, driftOk: surveyDriftOk },
       categories: categoryChecks,
+      categoryMissing,
     },
     normalized,
     stats: { ...stats, rowCounts: statsRowCounts },
@@ -945,6 +964,15 @@ async function main() {
   for (const [key, c] of Object.entries(categoryChecks)) {
     const prevStr = c.previous !== undefined ? ` prev=${c.previous}` : "";
     console.log(`  category/${key}: count=${c.count}${prevStr} ${c.ok && c.driftOk ? "✓" : "✗"}`);
+  }
+  console.log(`  所属漏れ (all.json で有効なのに category の items.json に無い): ${categoryMissing.length} 件 ${categoryMissing.length === 0 ? "✓" : "✗"}`);
+  for (const m of categoryMissing.slice(0, 20)) console.log(`      category/${m.categoryKey}: ${m.rankingKey}`);
+  if (categoryMissing.length > 20) console.log(`      … 他 ${categoryMissing.length - 20} 件`);
+  if (categoryMissing.length > 0) {
+    console.log(
+      `  → 是正: カテゴリ一覧は sync-snapshots の only=master が作る (only=ranking-items ではない)。` +
+        `all.json は新しいのに items.json が古いので master を流す`,
+    );
   }
 
   console.log(`\n## (f)(g)(h) 正規化 snapshot (values-per-*.json / national-trend.json)`);
