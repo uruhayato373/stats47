@@ -5,7 +5,7 @@ import test from 'node:test';
 import { parseSource, SOURCES } from '../ingest-cultural-industry.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 
 function fixture() {
   const source = SOURCES.find(s => s.id === '0004005665');

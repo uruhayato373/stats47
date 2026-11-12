@@ -11,7 +11,7 @@ import { parseArgs } from 'node:util';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const require = createRequire(resolve(root, 'package.json'));
 const ExcelJS = require('exceljs');
-const prefs = require('./packages/area/src/data/prefectures.json');
+const prefs = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 const {
   FACTORY_INVESTMENT_SOURCE: source,
 } = require('./packages/data-configs/src/theme-catalog/factory-investment-source.ts');

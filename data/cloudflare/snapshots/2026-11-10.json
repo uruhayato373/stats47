@@ -1,6 +1,6 @@
 {
   "date": "2026-11-10",
-  "fetched_at": "2026-11-11T04:19:28.126Z",
+  "fetched_at": "2026-11-11T23:37:26.045Z",
   "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
   "d1": {
     "readQueries": 0,
@@ -60,8 +60,8 @@
     }
   },
   "r2_storage": {
-    "totalBytes": 45155832910,
-    "totalObjects": 144000,
+    "totalBytes": 45159934892,
+    "totalObjects": 144001,
     "byBucket": {
       "stats47-private": {
         "bytes": 3048714281,
@@ -74,7 +74,7 @@
         "uploads": 0
       },
       "doboku-note": {
-        "bytes": 990021042,
+        "bytes": 990021282,
         "objects": 14201,
         "uploads": 0
       },
@@ -84,14 +84,14 @@
         "uploads": 0
       },
       "doboku-note-archive": {
-        "bytes": 7465349464,
-        "objects": 4261,
+        "bytes": 7469451206,
+        "objects": 4262,
         "uploads": 0
       }
     }
   },
   "googlebot": {
     "status": "unavailable",
-    "reason": "GraphQL error: [{\"message\":\"Actor 'com.cloudflare.api.token.e2eb322c6ca11a0db09b74ea50a83720' does not have permission 'com.cloudflare.api.account.zone.analytics.read' for zone 4caf2866b609a964805ec6a78298ca24\",\"path\":null,\"extensions\":{\"code\":\"authz\",\"timestamp\":\"2026-11-11T04:19:27.105339408Z\",\"ra"
+    "reason": "GraphQL error: [{\"message\":\"Actor 'com.cloudflare.api.token.e2eb322c6ca11a0db09b74ea50a83720' does not have permission 'com.cloudflare.api.account.zone.analytics.read' for zone 4caf2866b609a964805ec6a78298ca24\",\"path\":null,\"extensions\":{\"code\":\"authz\",\"timestamp\":\"2026-11-11T23:37:25.171027047Z\",\"ra"
   }
 }

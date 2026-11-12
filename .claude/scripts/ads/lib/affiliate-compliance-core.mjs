@@ -2,7 +2,7 @@
  * 直接配置 (direct-attribute) アフィリエイトの決定的 compliance 検証コア。
  *
  * 純粋関数のみ (I/O なし)。CLI (.claude/scripts/ads/audit-affiliate-compliance.ts) が
- * SSOT (apps/web/scripts/affiliate-direct-placements-data.ts) と記事本文 (R2) を渡す。
+ * SSOT (台帳 affiliate.direct-placements) と記事本文 (R2) を渡す。
  * テスト: .claude/scripts/ads/__tests__/affiliate-compliance-core.test.mjs (node --test)。
  *
  * 検証対象 (.claude/rules/affiliate-ads-standards.md §7-8):

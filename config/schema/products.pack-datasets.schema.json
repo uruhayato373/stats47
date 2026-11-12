@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "商品に焼く実データ (基準年固定のスナップショット)",
+  "description": "data/products/packs/datasets/<key>.json の形状契約。1 ファイルが 1 指標・1 基準年の 47 県の値と出典の行で、正規化の前の入力 (DatasetInput) の形。key はファイル名と同じで、R2 の app/ranking/<key>/values.json の最新の 47 県そろいの年を packages/product-factory/src/data/load-ranking-values.ts で取得して固定した版 (パックの datasets が指す)。出典の行 (source) は values.json に無いので手で書く。欠損・秘匿・非該当は 0 埋めせず value を null にし、理由を missing に書く。正規化 (5 桁コードへの結合と、無い県の補完) と export の組み立ては読み込み口 packages/product-factory/src/data/datasets/<key>.ts。",
+  "type": "object",
+  "required": ["key", "indicator", "unit", "year", "source", "values"],
+  "additionalProperties": false,
+  "properties": {
+    "key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "indicator": { "type": "string", "minLength": 1 },
+    "unit": { "type": "string" },
+    "year": { "type": "string", "pattern": "^[0-9]{4}$", "description": "基準年 (4 桁)" },
+    "source": {
+      "type": "object",
+      "required": ["surveyName", "tableName", "statsDataId", "url", "year", "retrievedAt", "unit", "transform", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "surveyName": { "type": "string", "minLength": 1 },
+        "tableName": { "type": "string", "minLength": 1 },
+        "statsDataId": { "type": "string", "minLength": 1, "description": "e-Stat の statsDataId (無ければ \"-\")" },
+        "url": { "type": "string", "pattern": "^https://" },
+        "year": { "type": "string", "pattern": "^[0-9]{4}$" },
+        "retrievedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "unit": { "type": "string" },
+        "transform": { "type": "string", "minLength": 1, "description": "加工式・指標化の方法" },
+        "notes": { "type": "string", "minLength": 1, "description": "欠損・秘匿・年次差などの注意事項" },
+        "origin": { "type": "string" }
+      }
+    },
+    "isSample": { "type": "boolean", "description": "架空サンプルなら true。省略は false (実データ)" },
+    "values": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["code", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": ["string", "integer"], "description": "都道府県コード (2 桁か 5 桁。読み込み口が 5 桁へ直す)" },
+          "value": { "type": ["number", "null"] },
+          "missing": { "enum": ["missing", "confidential", "na"] }
+        }
+      }
+    }
+  }
+}

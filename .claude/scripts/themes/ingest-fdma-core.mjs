@@ -11,7 +11,7 @@ import { parseArgs } from 'node:util';
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
 const { parse: parseCsv } = require('csv-parse/sync');
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

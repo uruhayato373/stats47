@@ -5,10 +5,11 @@ import { geoArea, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import sharp from 'sharp';
 import { COVER_ROOT, coverSha } from './cover-assets.mjs';
+import { datasetPath } from '../../../../config/datasets.mjs';
 import { topologyFeatures, fittedMercator } from '../../../../packages/gis/src/map/geometry.mjs';
 
 const SOURCE = 'apps/remotion/public/prefecture.topojson';
-const PREFECTURES = 'packages/area/src/data/prefectures.json';
+const PREFECTURES = datasetPath('areas.prefectures');
 let cached;
 function sourceData(root) {
   const file = path.join(root, SOURCE), stat = fs.statSync(file), prefFile = path.join(root, PREFECTURES), prefStat = fs.statSync(prefFile);

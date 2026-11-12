@@ -21,9 +21,6 @@ export const NOTE_ACCOUNT = "config/note-account.json";
 export const AFFILIATE_ASP = "config/affiliate-asp.json";
 export const A8_REPORT_AUTOMATION = "config/a8-report-automation.json";
 
-// note 記事ごとの承認済みハッシュタグ (1 記事 1 ファイル)
-export const NOTE_HASHTAGS_DIR = "data/note/hashtags";
-
 // 広告の枠の台帳
 export const ADS_PLACEMENTS = "data/ads/placements.json";
 

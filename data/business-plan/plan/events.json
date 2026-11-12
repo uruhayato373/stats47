@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "id": "geo-view",
+      "label": "地域分析閲覧",
+      "canonicalEvent": "geo_analysis_view",
+      "status": "partially-measured",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "コード実装済み。GA4カスタムディメンション登録と反映確認は未完了。"
+    },
+    {
+      "id": "map-interaction",
+      "label": "地図操作",
+      "canonicalEvent": "geo_map_interaction",
+      "status": "partially-measured",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "操作種別は決定的enum。GA4登録・反映確認までは部分計測。"
+    },
+    {
+      "id": "region-search",
+      "label": "地域検索",
+      "canonicalEvent": "geo_region_select",
+      "status": "partially-measured",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "検索語を送らず地域コードを使う。GA4登録・反映確認までは部分計測。"
+    },
+    {
+      "id": "compare-add",
+      "label": "比較へ追加",
+      "canonicalEvent": null,
+      "status": "not-instrumented",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "比較へ追加する UI がどのページにも無いため、2026-10-28 に送信関数を削除した。比較 UI を作るときにイベントを定義し直す。"
+    },
+    {
+      "id": "data-download",
+      "label": "データDL",
+      "canonicalEvent": "file_download",
+      "status": "measured",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "既存GA4推奨イベントへ適合済み。"
+    },
+    {
+      "id": "email-signup",
+      "label": "メール登録",
+      "canonicalEvent": null,
+      "status": "not-instrumented",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "同意管理を実装するまで追加しない。"
+    },
+    {
+      "id": "note-click",
+      "label": "note遷移",
+      "canonicalEvent": "cta_click",
+      "status": "partially-measured",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "CTA種別の台帳反映を確認する。"
+    },
+    {
+      "id": "affiliate-click",
+      "label": "Affiliateクリック",
+      "canonicalEvent": "affiliate_click",
+      "status": "measured",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "既存在庫・vertical契約を利用する。"
+    },
+    {
+      "id": "product-view",
+      "label": "商品閲覧",
+      "canonicalEvent": null,
+      "status": "not-instrumented",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "自社商品ページ実装時に追加する。"
+    },
+    {
+      "id": "purchase",
+      "label": "購入",
+      "canonicalEvent": null,
+      "status": "manual",
+      "owner": "affiliate-manager",
+      "implementationPath": "data/",
+      "note": "外部販売サービス実績を週次で正規化する。"
+    },
+    {
+      "id": "business-inquiry",
+      "label": "法人問い合わせ",
+      "canonicalEvent": null,
+      "status": "manual",
+      "owner": "strategy-advisor",
+      "implementationPath": "data/",
+      "note": "問い合わせフォーム実装までは手動台帳。"
+    },
+    {
+      "id": "ai-query",
+      "label": "AI地域検索",
+      "canonicalEvent": null,
+      "status": "not-instrumented",
+      "owner": "ga4-analyst",
+      "implementationPath": "apps/web/src/lib/analytics/events.ts",
+      "note": "β開始前はイベントを追加しない。"
+    }
+  ]
+}

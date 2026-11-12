@@ -1,13 +1,15 @@
 /**
  * 事業イシューマップ。台帳 `data/business/issue-map.json` を画面の形にし、判定日と進み具合を
- * 参照先の台帳 (improvements・pilot-board・experiments・backlog) から引く。ファイルは読まない純関数で、
- * 入力の読み取りは lib/server/issue-map.ts。
+ * 参照先の台帳 (improvements・pilot-board・experiments・backlog) から引く。行の題・問い・例はコンテンツの型の台帳
+ * (content.types) から結ぶ。ファイルは読まない純関数で、入力の読み取りは lib/server/issue-map.ts。
  *
  * 社会の問いの台帳 `data/content/issues.json` とは別物。日付や状態を台帳へ写すと参照先とずれるので、
  * ここで毎回解決する (参照先の無い ID は「参照先なし」として画面に出す)。
  */
 
-export type RefKind = "improvement" | "backlog" | "pilot" | "experiment";
+import type { ContentTypeDef } from "./content-coverage";
+
+export type RefKind ="improvement" | "backlog" | "pilot" | "experiment";
 export type StateKind = "seen" | "open" | "unknown" | "undecided";
 export type Rating = "◎" | "○" | "△" | "✕";
 
@@ -42,12 +44,16 @@ export interface IssuePremise {
   evidence: string;
   judgments?: Judgment[];
 }
-export interface IssueRow {
+/** 台帳の行。題・問い・例は写さず、contentType で型の台帳から結ぶ */
+export interface IssueRowSpec {
   id: string;
+  contentType: string;
+  relatedDataset?: string;
+}
+export interface IssueRow extends IssueRowSpec {
   title: string;
   question: string;
   examples: string;
-  relatedDataset?: string;
 }
 export interface IssueColumn {
   id: string;
@@ -70,7 +76,7 @@ export interface IssueMapSpec {
   observedAt: string;
   issue: { id: string; question: string; hypothesis: string; criteria: string[] };
   columns: IssueColumn[];
-  rows: IssueRow[];
+  rows: IssueRowSpec[];
   cells: IssueCell[];
   premises: IssuePremise[];
   storyline: { steps: StorylineStep[]; summary: string };
@@ -128,9 +134,11 @@ export function resolveRef(ref: LedgerRef, index: LedgerIndex): ResolvedRef {
   }
 }
 
-/** 形だけでは見えない崩れ。4 行 × 3 列の全マスが 1 つずつあり、ID の指す先が実在すること */
-export function validateIssueMap(spec: IssueMapSpec): string[] {
+/** 形だけでは見えない崩れ。4 行 × 3 列の全マスが 1 つずつあり、ID の指す先 (型を含む) が実在すること */
+export function validateIssueMap(spec: IssueMapSpec, contentTypes: ContentTypeDef[]): string[] {
   const problems: string[] = [];
+  const typeIds = new Set(contentTypes.map((t) => t.id));
+  for (const row of spec.rows) if (!typeIds.has(row.contentType)) problems.push(`${row.id}: 型 ${row.contentType} が型の台帳に無い`);
   const rows = new Set(spec.rows.map((r) => r.id));
   const columns = new Set(spec.columns.map((c) => c.id));
   const seen = new Set<string>();
@@ -159,8 +167,9 @@ function sortSchedule(rows: ScheduleRow[]) {
   return [...dated, ...rows.filter((r) => !r.date)];
 }
 
-export function buildIssueMap(spec: IssueMapSpec, index: LedgerIndex) {
-  const problems = validateIssueMap(spec);
+export function buildIssueMap(spec: IssueMapSpec, index: LedgerIndex, contentTypes: ContentTypeDef[]) {
+  const problems = validateIssueMap(spec, contentTypes);
+  const typeById = new Map(contentTypes.map((t) => [t.id, t]));
   const resolve = (ref: LedgerRef) => resolveRef(ref, index);
   const schedule: ScheduleRow[] = [];
   const addSchedule = (label: string, judgments: Judgment[] = []) => {
@@ -172,7 +181,11 @@ export function buildIssueMap(spec: IssueMapSpec, index: LedgerIndex) {
   };
 
   const columnTitle = new Map(spec.columns.map((c) => [c.id, c.title]));
-  const rows: RowView[] = spec.rows.map((row) => ({
+  const withType = (row: IssueRowSpec): IssueRow => {
+    const type = typeById.get(row.contentType);
+    return { ...row, title: type?.title ?? "", question: type?.question ?? "", examples: type?.examples ?? "" };
+  };
+  const rows: RowView[] = spec.rows.map(withType).map((row) => ({
     ...row,
     cells: spec.columns.flatMap((column) => {
       const cell = spec.cells.find((c) => c.row === row.id && c.column === column.id);

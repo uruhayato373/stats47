@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "国土数値情報の属性による区分の台帳",
+  "description": "data/geo/ksj/classifications.json の形状契約。原典のコード → 表示の区分・色トークンのコード表 (codeTables) と、データごとにどの属性で引きどのコード表を使うか (classifications。キーは geo.ksj-datasets の dataId) を持つ。コード表は 1 つだけ書き、同じコード表を使うデータ (鉄道の時系列 N05 と現況 N02) はキーで指す。交通網の変遷と単体 GIS ページの地図・凡例が同じ定義を読み、同じものを同じ色・同じ名前で描く。notes はコード表ごとの判断の記録 (コード表のキーをキーにした文の配列)。読み込み口は packages/gis/src/mlit-ksj/classifications.ts。",
+  "type": "object",
+  "required": ["codeTables", "classifications"],
+  "additionalProperties": false,
+  "properties": {
+    "codeTables": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "$ref": "#/definitions/class" }
+      }
+    },
+    "classifications": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[A-Z][0-9A-Z-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["field", "label", "codeTable"],
+        "additionalProperties": false,
+        "properties": {
+          "field": { "type": "string", "minLength": 1, "description": "区分の値を持つ属性名 (原典の版で名前が変わったものは、その版の名前)" },
+          "label": { "type": "string", "minLength": 1, "description": "凡例の題" },
+          "codeTable": { "type": "string", "description": "codeTables のキー" }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+    }
+  },
+  "definitions": {
+    "class": {
+      "type": "object",
+      "required": ["code", "label", "sourceCodes", "color"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string", "minLength": 1, "description": "表示の区分コード (凡例・集計のキー)" },
+        "label": { "type": "string", "minLength": 1 },
+        "sourceCodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "この区分にまとめる原典のコード値 (文字列で比較する)。原典の区分が制度改正で変わったときに、時代をまたいで同じ色で追えるようにまとめる"
+        },
+        "color": {
+          "description": "地図・凡例の色。チャートのトークンだけを使う (Tailwind v4 の --color-chart-N は出力されないので、トークン --chart-N を hsl() で包む)。型 KsjClassColor と同じ列挙",
+          "enum": [
+            "hsl(var(--chart-1))",
+            "hsl(var(--chart-2))",
+            "hsl(var(--chart-3))",
+            "hsl(var(--chart-4))",
+            "hsl(var(--chart-5))",
+            "hsl(var(--muted-foreground))"
+          ]
+        }
+      }
+    }
+  }
+}

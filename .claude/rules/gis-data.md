@@ -100,9 +100,9 @@ N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は
 
 ## 地物の区分 (色分け) の台帳
 
-属性で地物を色分けする区分は `packages/gis/src/mlit-ksj/classifications.ts` だけに書く (公開口 `@stats47/gis/mlit-ksj/classifications`)。
+属性で地物を色分けする区分は台帳 `geo.ksj-classifications` だけに書く (読み込み口 `@stats47/gis/mlit-ksj/classifications`)。
 コード表ごとに区分 (原典コード → 表示の区分・色トークン) を 1 つ持ち、データごとに引く属性名を持つ (鉄道は N05 `N05_001` と N02 `serviceProviderType` が同じコード表)。
-交通網の変遷 (`infra-history/networks.ts`) と単体 GIS ページの地図・凡例はこの台帳をそのまま使い、区分を複製しない。
+交通網の変遷 (台帳 `geo.infra-history-networks`) と単体 GIS ページの地図・凡例はこの台帳をそのまま使い、区分を複製しない。
 区分の属性を持たない地物 (空港の標点など) は推測で区分を当てず「区分のない地物」として描く。検査は `__tests__/classifications.test.ts`。
 
 ## 台帳の ID と参照整合

@@ -24,14 +24,14 @@ Kindle の規約は `kindle-publishing-standards.md` で、データパックと
 
 | データ | SSOT | 形 | 備考 |
 |---|---|---|---|
-| 商品定義（P-01〜P-14・テーマ別 14 パック） | `packages/product-factory/src/catalog/` | git TS | `src/catalog/products/packs.ts` 1 ファイル。`ProductDefinition`（`theme`/`datasets`/`sourceIds`）型。**ここだけ編集**。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
-| ライセンス / テンプレ / family メタ | `src/catalog/{licenses,templates,families}.ts` | git TS | 再販売禁止は `resale: false` で型固定 |
+| 商品定義（P-01〜P-14・テーマ別 14 パック） | 台帳 `products.packs` | JSON + Schema | `ProductDefinition`（`theme`/`datasets`/`sourceIds`）型は `src/catalog/types.ts`。**ここだけ編集**（`rankingKeys` は生成物から読み込み口が注入）。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
+| ライセンス / テンプレ | 台帳 `products.licenses` / `src/catalog/templates.ts` | JSON + Schema / git TS | 再販売禁止は Schema の `resale: const false` |
 | 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
-| 商品に焼く実データ | `src/data/datasets/<key>.ts` | git TS スナップショット | **基準年固定**。R2 から取得して手記の SOURCES を添える |
+| 商品に焼く実データ | 台帳 `products.pack-datasets` | JSON + Schema のスナップショット | **基準年固定**。R2 から取得して手記の出典の行を添える。正規化は読み込み口 `src/data/datasets/<key>.ts` |
 | 生成バイナリ（pptx/xlsx/pdf/png…） | `.local/data-packs/<id>/<version>/` | 派生物・**git 管理外** | 手編集を正典にしない・公開 R2 へ置かない |
 | リリース台帳（生成状況） | `data/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
 
-- **商品定義=git TS が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
+- **商品定義=台帳 `products.packs` が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
 - **実データは R2 → git TS スナップショット（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
 
 ---
@@ -75,7 +75,7 @@ npm run test:run   --workspace=@stats47/product-factory
 | 生成バイナリを git / 公開 R2 に置く | `.local/`（git 管理外）に生成し、配信しない |
 | 生成物 (pptx/xlsx/json) を手編集して真実源化 | git TS を編集 → `generate` で再生成 |
 | 実在しない商品 ID / licenseId / metric を書く | validator（`catalog --check`）が弾く |
-| **実データ未接続パックを status=approved にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。`packs.ts` の status は商品として完成したか (`cataloged`/`approved`) だけを持ち、公開状態は持たない。note の公開状態の正本は記事台帳 `data/note/articles.json` |
+| **実データ未接続パックを status=approved にする** | 実データ接続（`datasets` の全キーが台帳 `products.pack-datasets` に実在）まで `cataloged` 固定。`packs.ts` の status は商品として完成したか (`cataloged`/`approved`) だけを持ち、公開状態は持たない。note の公開状態の正本は記事台帳 `data/note/articles.json` |
 | 架空データを実データと偽る | `Dataset.isSample` で分離・販売文に明記 |
 | 全商品を一括出品して WIP を増やす | 戦略（`docs/02_実装計画/01`）どおり 1 商品ずつ需要実測 |
 | Office 実機未確認で「互換性検証済み」と書く | 構造(OOXML)検証と実機検証を区別して報告 |
@@ -94,7 +94,7 @@ npm run test:run   --workspace=@stats47/product-factory
 
 `packages/product-factory/src/channels/note/` は、商品カタログから note の無料・有料記事候補、
 添付manifest、画像計画、ハッシュタグを生成するチャネルとする。商品定義を複製せず、
-商品側は `src/catalog/products/packs.ts`、note editorial メタは
+商品側は台帳 `products.packs`、note editorial メタは
 記事台帳 `data/note/articles.json`（git の JSON + `articles.schema.json`。規約は `.claude/scripts/note/catalog/README.md`）を SSOT とし、mapping で結合する。
 
 > **現在の実装**: article-planとmappingはP-01〜P-14から導出し、TypeScript/Vitestの対象。
@@ -145,7 +145,7 @@ npm run test:run   --workspace=@stats47/product-factory
 
 ## 関連
 
-- 商品案の由来: `packages/product-factory/src/catalog/products/packs.ts` の `sourceIds`（旧調査はGit履歴）
+- 商品案の由来: 台帳 `products.packs` の `sourceIds`（旧調査はGit履歴）
 - モジュール: `packages/product-factory/`（README + `src/`）
 - 納品版の固定値: `data/products/note-pack-deliveries.json` / 照合: `.claude/scripts/products/lib/pack-evidence.mjs`
 - 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md` / データ保存先: `.claude/rules/data-storage.md`

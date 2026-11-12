@@ -83,7 +83,7 @@ web モードでは下表の MCP ツールだけを使う。
 | 対象 | 反映経路 | 起動 |
 |---|---|---|
 | 新規/更新ブログ記事 (`contents/blog/<slug>/article.md`, `published:true`) | `blog-auto-publish.yml`（**develop checkout**・factual/quality ゲート後 R2 push・MAX_PUBLISH 件） | **develop への article.md push で自動発火** (Phase 2) / 手動は `publish-blog.yml` dispatch |
-| affiliate 広告 (`apps/web/scripts/affiliate-ads-data.ts`) | `publish-affiliate-ads.yml`（develop checkout → `run.sh --only affiliate-ads`） | **develop への affiliate-ads-data.ts push で自動発火** / 手動は `sync-snapshots.yml -f only=affiliate-ads` |
+| affiliate 広告 (台帳 `affiliate.ads`) | `publish-affiliate-ads.yml`（develop checkout → `run.sh --only affiliate-ads`） | **develop への台帳 `affiliate.ads` (と読み込み口) の push で自動発火** / 手動は `sync-snapshots.yml -f only=affiliate-ads` |
 | page_components 等その他 snapshot | `sync-snapshots.yml` | dispatch (`-f only=<task>`) |
 | 固定バナー画像 (コード直書きの `SidebarPromoBanner` 等) | コードデプロイのみで反映 (R2 不要) | main マージで自動 |
 

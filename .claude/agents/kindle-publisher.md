@@ -17,7 +17,7 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 
 - **必ず `.claude/rules/kindle-publishing-standards.md`（Kindle 出版チャネル）に従う**（SSOT・生成/検証フロー・
   著作権/KDP 規律・禁止事項・役割分担）。
-- 書籍定義は **git TS (`src/channels/kindle/book-catalog.ts`) が SSOT**。本文素材は **R2 `app/blog/<slug>/`**。
+- 書籍定義は **台帳 `products.kindle-books` が SSOT**。本文素材は **R2 `app/blog/<slug>/`**。
   長文の書き下ろしは **`src/channels/kindle/manuscripts/<id>/*.md` (freshFile)**。生成物
   `.local/kindle-books/`（**git 管理外・公開 R2 へ置かない**）。永続/リモート D1 は持たない。
 - **主エンジンは EPUB3 リフロー型**。PDF は使わない（KDP 電子は PDF 実質不可・`databook-pdf.ts` は書籍に不向き）。
@@ -32,7 +32,7 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 
 ## 責務（単一所有）
 
-- 書籍カタログ (`book-catalog.ts` = `KINDLE_BOOKS`) の CRUD と検証（`products:kindle:validate`：id `^K-S[1-4]-\d{2}$`・
+- 書籍カタログ (台帳 `products.kindle-books` = `KINDLE_BOOKS`) の CRUD と検証（`products:kindle:validate`：id `^K-S[1-4]-\d{2}$`・
   series 整合・価格・manuscript 以降の fresh 章/blogSlug）。
 - EPUB 生成器 (`src/generators/epub.ts`) と kindle チャネル (`fetch-content` / `md-to-xhtml` / `cover` / `build-book`) の保守。
 - 生成（`products:kindle:generate`）・書き下ろし比率の確認（30% 規定）・台帳（`products:kindle:report` →
@@ -95,6 +95,6 @@ BEHAVIOR CONTRACT（命令）:
 ## 関連
 
 - 規約: `.claude/rules/kindle-publishing-standards.md` / skill: `.claude/skills/product/build-kindle-book/SKILL.md`
-- 企画・市場判断: `.claude/rules/kindle-publishing-standards.md` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
+- 企画・市場判断: `.claude/rules/kindle-publishing-standards.md` / 台帳 `products.kindle-books`
 - 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 品質基準（書き下ろし）: `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`

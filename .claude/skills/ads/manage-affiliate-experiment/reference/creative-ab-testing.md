@@ -22,7 +22,7 @@ stats47 は完全 SSG + Cloudflare CDN キャッシュ。ビルド時に variant
 
 ## SSOT モデル (git TS)
 
-`apps/web/scripts/affiliate-ads-data.ts` の `AffiliateAd` 任意フィールド 3 つ (既存エントリは無変更で動く):
+台帳 `affiliate.ads` の `AffiliateAd` 任意フィールド 3 つ (既存エントリは無変更で動く):
 
 ```ts
 experimentId?: string | null;  // 同一枠で競合する実験 ID 例: "ranking-sidebar-economy"

@@ -17,6 +17,7 @@ import { resolve } from "node:path";
 
 import { buildMigrationFocusFile } from "@stats47/migration-flow/focus-file";
 import { readMigrationFlow } from "@stats47/stats-r2/readers";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const METRIC_KEY = "population-migration-inter-prefecture";
 const REPO_ROOT = resolve(__dirname, "../../..");
@@ -27,7 +28,7 @@ const PREF_NET_SRC = resolve(REPO_ROOT, "apps/remotion/public/migration-flow");
 
 function loadPrefNames(): Map<string, string> {
   const raw = JSON.parse(
-    readFileSync(resolve(REPO_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+    readFileSync(resolve(REPO_ROOT, datasetPath("areas.prefectures")), "utf8"),
   ) as Array<{ prefCode: string; prefName: string }>;
   return new Map(raw.map((p) => [p.prefCode, p.prefName]));
 }

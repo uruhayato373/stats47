@@ -1,0 +1,99 @@
+{
+  "series": {
+    "prefecture-map-powerpoint": {
+      "name": "都道府県地図・PowerPoint 図表",
+      "audience": "企画・営業・広報",
+      "defaultStats47Targets": [
+        "/ranking",
+        "/themes"
+      ]
+    },
+    "prefecture-excel-analysis": {
+      "name": "Excel ランキング・地図・比較分析",
+      "audience": "実務担当",
+      "defaultStats47Targets": [
+        "/ranking",
+        "/compare"
+      ]
+    },
+    "regional-data-packs": {
+      "name": "テーマ別データパックと読み方",
+      "audience": "調査・メディア",
+      "defaultStats47Targets": [
+        "/themes",
+        "/ranking"
+      ]
+    },
+    "business-location-analysis": {
+      "name": "出店・採用・観光の地域分析",
+      "audience": "事業者",
+      "defaultStats47Targets": [
+        "/areas",
+        "/compare"
+      ]
+    },
+    "government-statistics-work": {
+      "name": "自治体統計業務の時短",
+      "audience": "公務員",
+      "defaultStats47Targets": [
+        "/themes/local-finance",
+        "/ranking"
+      ]
+    },
+    "media-data-visuals": {
+      "name": "記事・動画・SNS の統計図版",
+      "audience": "クリエイター",
+      "defaultStats47Targets": [
+        "/ranking",
+        "/blog"
+      ]
+    },
+    "statistics-education": {
+      "name": "探究・授業・研修の統計教材",
+      "audience": "教員・学生",
+      "defaultStats47Targets": [
+        "/ranking",
+        "/themes"
+      ]
+    },
+    "life-area-comparison": {
+      "name": "暮らし・所得・家計の地域比較",
+      "audience": "個人・調査担当",
+      "defaultStats47Targets": [
+        "/areas",
+        "/compare"
+      ]
+    },
+    "license-guide": {
+      "name": "ライセンス・版の違いガイド",
+      "audience": "購入検討者",
+      "defaultStats47Targets": [
+        "/"
+      ]
+    },
+    "free-samples": {
+      "name": "無料サンプルと使い方",
+      "audience": "はじめての購入者",
+      "defaultStats47Targets": [
+        "/ranking",
+        "/themes"
+      ]
+    }
+  },
+  "seriesByTheme": {
+    "population-household": "regional-data-packs",
+    "income-wage-hiring": "life-area-comparison",
+    "tourism-lodging": "business-location-analysis",
+    "municipal-finance": "government-statistics-work",
+    "healthcare-nursing": "life-area-comparison",
+    "education-childcare": "statistics-education",
+    "migration-living": "life-area-comparison",
+    "retail-trade-area": "business-location-analysis",
+    "industry-economy": "business-location-analysis",
+    "disaster-infrastructure": "government-statistics-work",
+    "map-chart-assets": "prefecture-map-powerpoint",
+    "all-in-one": "regional-data-packs",
+    "free-trial": "free-samples",
+    "household-consumption": "life-area-comparison"
+  }
+}

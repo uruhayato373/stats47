@@ -2,7 +2,7 @@ import { LANDSLIDE_EXPOSURE_SOURCE as LANDSLIDE } from '../theme-catalog/landsli
 import { SNOW_DESIGNATION_SOURCE as SNOW } from '../theme-catalog/snow-designation-source';
 
 /**
- * 出典を theme-catalog の *-source.ts に持つ Geo 分析の、出典に由来する 7 項目 (台帳 `geo.analyses` の themeSource)。
+ * 出典をテーマの出典の台帳 `themes.sources` (読み込み口 theme-catalog/*-source.ts) に持つ Geo 分析の、出典に由来する 7 項目 (台帳 `geo.analyses` の themeSource)。
  * 台帳には書かず、読み込み口 (geo-analyses.ts) がここで埋める。slug は台帳のキーと一致しなければ throw する。
  */
 export const GEO_ANALYSIS_THEME_SOURCES = {

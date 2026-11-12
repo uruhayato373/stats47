@@ -123,9 +123,10 @@ describe("台帳の配線", () => {
   });
 
   it("事業イシューマップの 4 行は同じ定義の型を指す", () => {
-    const { rows } = readRoot<{ rows: Array<{ contentType: string; title: string; question: string }> }>("data/business/issue-map.json");
+    const { rows } = readRoot<{ rows: Array<Record<string, string>> }>("data/business/issue-map.json");
     expect(rows.map((r) => r.contentType)).toEqual(ledger.types.map((t) => t.id));
-    expect(rows.map((r) => r.title)).toEqual(ledger.types.map((t) => t.title));
+    // 題・問い・例は型の台帳から結ぶ。写しを戻すと型を直したときにずれる
+    expect(rows.flatMap((r) => ["title", "question", "examples"].filter((k) => k in r))).toEqual([]);
   });
 
   it("展開状況のコードは事業の台帳と収益の判断を読まない", () => {

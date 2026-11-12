@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Kindle S3 地域別の県コード",
+  "description": "data/products/kindle/region-codes.json の形状契約。S3 (地域別) の 8 地方ブロックの構成県。regions のキーは書籍 K-S3-<キー> の接尾辞 (01 北海道・02 東北・03 関東・04 中部・05 近畿・06 中国・07 四国・08 九州・沖縄)、値は県のコード (5 桁)。書籍の ranking の章の highlightCodes を読み込み口 packages/product-factory/src/channels/kindle/book-catalog.ts が注入する。選定スクリプト scripts/select-book-keys.mts も S3_REGION_CODES として読む。",
+  "type": "object",
+  "required": ["regions"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "regions": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^0[1-8]$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^\\d{5}$" } }
+    }
+  }
+}

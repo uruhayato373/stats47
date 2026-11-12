@@ -22,9 +22,10 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
+const SPECS_DIR = join(PROJECT_ROOT, datasetDir("sns.buzz-map-specs"));
 const DEFAULT_INPUT = join(PROJECT_ROOT, ".local/gsi-pni/points.json");
 // ローカル未取得のセッション (クラウド等) でも量産できるよう R2 公開データにフォールバック
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
@@ -212,7 +213,7 @@ async function main() {
   console.log(`\nレンダ:`);
   console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
   console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
-  console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json --browser-executable=$CHROME`);
+  console.log(`    --props=../../${datasetDir("sns.buzz-map-specs")}/${opts.id}.json --browser-executable=$CHROME`);
 }
 
 main();

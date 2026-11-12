@@ -9,7 +9,7 @@ import { execFile } from 'node:child_process';
 
 const require = createRequire(import.meta.url);
 const Excel = require('exceljs');
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const { TOURISM_SEASONALITY_SOURCE: SOURCE } = require('../../../packages/data-configs/src/theme-catalog/tourism-seasonality-source.ts');
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');

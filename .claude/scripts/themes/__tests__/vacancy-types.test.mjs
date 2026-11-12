@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import test from 'node:test';
 import { FIELDS, parseVacancy } from '../ingest-vacancy-types.mjs';
 const require = createRequire(import.meta.url);
-const prefs = require('../../../../packages/area/src/data/prefectures.json');
+const prefs = require('../../lib/prefectures.cjs').PREFECTURES;
 function fixture() {
   const areas = [{ prefCode: '00000', prefName: '全国' }, ...prefs];
   const axis = (id, values) => ({ '@id': id, CLASS: values });

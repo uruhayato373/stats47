@@ -12,7 +12,7 @@ const unzipper = require('unzipper');
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const { parseStatsValuesPayload } = require('../../../packages/stats-r2/src/schemas.ts');
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const SOURCES = [
   { file: '000944043.zip', sha256: 'abfbe65fc0874f7b80932425bd2eac59bf826b21091b1986ddd626aca0978e52', memberSha256: 'eaef92d55e29e00790795606b371767acde4d9496fc38924678ba52a5131c846', firstRow: 9, period: '令和４年度実績' },

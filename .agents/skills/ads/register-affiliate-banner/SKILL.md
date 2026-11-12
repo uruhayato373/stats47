@@ -75,11 +75,11 @@ node .claude/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 ### Step 3: vertical 判定 (ユーザー確認)
 `rules §2 利用プログラム表` でプログラム → vertical を判定し、ユーザーに確認する。10 軸:
 `labor / housing / population / economy / health / energy / travel / furusato / education / mobility`。
-判定できない/新語のタグが要る場合は `affiliate-category.ts` の `TAG_/THEME_AFFILIATE_MAP` に写像を追加する
+判定できない/新語のタグが要る場合は台帳 `affiliate.vertical-map` の `tag` / `theme` に写像を追加する
 (vertical 自体の新設は原則しない。10 軸で足りる)。
 
 ### Step 4: SSOT に 1 エントリ追記
-`apps/web/scripts/affiliate-ads-data.ts` の `AFFILIATE_ADS` に **1 件だけ**追加 (categoryKey 複製しない):
+台帳 `affiliate.ads` の `ads` の末尾に **1 件だけ**追加 (categoryKey 複製しない。台帳は JSON で、下は項目の説明つきの見本):
 
 ```typescript
 {
@@ -136,7 +136,7 @@ vertical 別に `approved` / `applying` を集計して一覧する。**固定�
 
 - 最終照合日は `affiliate-catalog.json` の `verifiedAt`。古ければ `/affiliate-operate status` を促す。
 - 在庫ゼロ/手薄の vertical は `data/affiliate/inventory-latest.json` の `coverage` から読む。
-- **提携済み = 配信中ではない**。配信 SSOT は `apps/web/scripts/affiliate-ads-data.ts` で、
+- **提携済み = 配信中ではない**。配信 SSOT は台帳 `affiliate.ads` で、
   もしも / afb は広告コード取得 (harvest) の経路が無いため提携済みでも未配信のことがある。
   両者を混同して「提携したのに出ていない」と誤診しない。
 
@@ -147,7 +147,7 @@ vertical 別に `approved` / `applying` を集計して一覧する。**固定�
 特定記事の文脈にピンポイント配置する方式 (自動配置と別系統)。**配置と台帳登録は必ずセット**で行う
 (台帳に無い `<affiliate-banner>` は `/audit-affiliate-compliance` が「台帳未登録タグ」として弾く)。
 
-1. **台帳へ追記**: `apps/web/scripts/affiliate-direct-placements-data.ts` の `AFFILIATE_DIRECT_PLACEMENTS`
+1. **台帳へ追記**: 台帳 `affiliate.direct-placements` の `placements`
    に 1 エントリ (id / asp / href / imageUrl / pixel / サイズ / rewardNote / conversionCondition /
    placements[{channel, slug, position}] / addedAt / isActive)。既存配置に記事を足す場合は `placements` に追加。
 2. **記事本文へ配置**: article.md に `<affiliate-banner src= href= tracking= width= height= label=>` を
@@ -162,10 +162,10 @@ vertical 別に `approved` / `applying` を集計して一覧する。**固定�
 | ファイル | 役割 |
 |---|---|
 | `.claude/rules/affiliate-ads-standards.md` | **★正典** (vertical ハブ・プログラム表・サイズ・GA4・登録フロー) |
-| `apps/web/scripts/affiliate-ads-data.ts` | **★自動配置 SSOT** (`AFFILIATE_ADS`、git TS) |
-| `apps/web/scripts/affiliate-direct-placements-data.ts` | **★直接配置 SSOT** (`AFFILIATE_DIRECT_PLACEMENTS`、git TS) |
+| 台帳 `affiliate.ads` | **★自動配置 SSOT** (読み込み口 `AFFILIATE_ADS`) |
+| 台帳 `affiliate.direct-placements` | **★直接配置 SSOT** (読み込み口 `AFFILIATE_DIRECT_PLACEMENTS`) |
 | `.claude/scripts/ads/audit-affiliate-compliance.ts` | 直接配置の compliance 監査 (`/audit-affiliate-compliance`) |
-| `apps/web/src/features/ads/constants/affiliate-category.ts` | 意図ハブ (`AffiliateVertical` / 3 map / `adVertical`) |
+| 台帳 `affiliate.vertical-map` | 意図ハブ (読み込み口と `AffiliateVertical` / `adVertical` は `features/ads/constants/affiliate-category.ts`) |
 | `.claude/scripts/ads/inspect-banner.mjs` | バナー画像を fetch → サイズ実測 + canonical 判定 + 目視用保存 (VC/楽天のサイズ確定・広告主判別) |
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (vertical カバレッジ + `--check-size`) |
 | `apps/web/scripts/export-affiliate-ads-snapshot.ts` | SSOT → R2 (vertical 検証) |

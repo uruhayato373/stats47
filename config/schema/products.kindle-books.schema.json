@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Kindle 書籍の企画",
+  "description": "data/products/kindle/books.json の形状契約。4 シリーズ (S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全) の企画を全登録する。books のキーが書籍 ID (K-S<シリーズ>-<2 桁>)。S2・S3・S4 と S1-02〜12 の章は、書き下ろしの前置き (はじめに・データの読み方) と後置き (終章) を含む展開済みの形で持つ。S1-02〜12 は書き下ろし完成 + EPUB 生成済み (2026-07-23)、Kindle Previewer 検証と公開は人間工程。表紙設計 (coverDesign) は持たず、読み込み口 packages/product-factory/src/channels/kindle/book-catalog.ts が書籍 ID で結合する。ranking の章の rankingKeys は書籍ごとの採否 (products.kindle-book-ranking-keys。無い書籍は S2 なら sourceIdeas の pack:<パック ID> の全キー、それ以外は P-12 の全キー) から、S3 の章の highlightCodes は地域コード (products.kindle-region-codes) から、読み込み口が注入するのでここには書かない。status の意味: idea = 企画のみ / planned = 章立て確定 (blogSlug 割当済・書き下ろし未着手) / manuscript = 原稿収集済 / generated = EPUB 生成済 (Kindle Previewer 検証待ち) / published = KDP 公開済。blogSlug は R2 の app/blog/<slug>/article.md が実在する公開済み記事だけを指す。notes は書籍ごとの判断の記録 (書籍 ID をキーにした文の並び)。",
+  "type": "object",
+  "required": ["books", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "books": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^K-S[1-4]-\\d{2}$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["series", "title", "concept", "author", "chapters", "priceYen", "newContentNote", "keywords", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "series": { "enum": ["S1-issues", "S2-theme-databook", "S3-region", "S4-ranking-compendium"] },
+          "fullTables": { "description": "章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01。K-S1-02・07 の試行のあと S1 全冊へ)", "type": "boolean" },
+          "title": { "description": "書名 (検索キーワードを先頭に・全角 40 字目安)", "type": "string", "minLength": 1 },
+          "subtitle": { "type": "string", "minLength": 1 },
+          "concept": { "description": "1-2 文の企画意図 (データ側の説明)。読者側の設計は design に書く", "type": "string", "minLength": 1 },
+          "design": {
+            "description": "編集設計。共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。generate は design の無い書籍を作らない",
+            "type": "object",
+            "required": ["readerProblem", "harm", "harmReason", "valueAndPayReason", "demandEvidence", "titleCandidates", "bodyPatterns"],
+            "additionalProperties": false,
+            "properties": {
+              "readerProblem": { "type": "string", "minLength": 1 },
+              "harm": { "type": "array", "uniqueItems": true, "items": { "enum": ["H", "A", "R", "M"] } },
+              "harmReason": { "type": "string", "minLength": 1 },
+              "valueAndPayReason": { "type": "string", "minLength": 1 },
+              "demandEvidence": { "type": "string", "minLength": 1 },
+              "titleCandidates": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["type", "title"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": { "enum": ["検索・選択", "数字・チェック", "実証・体験", "問い・気づき", "資料・手順"] },
+                    "title": { "type": "string", "minLength": 1 }
+                  }
+                }
+              },
+              "bodyPatterns": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "enum": ["悩み直撃型", "勘違い破壊型", "Before→After型", "失敗談→教訓型", "ロードマップ型", "チェックリスト型", "比較型", "ケーススタディ型", "販売導線型"] }
+              }
+            }
+          },
+          "author": { "type": "string", "minLength": 1 },
+          "chapters": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["title", "source"],
+              "additionalProperties": false,
+              "properties": {
+                "title": { "type": "string", "minLength": 1 },
+                "source": { "enum": ["blog", "ranking", "fresh"] },
+                "blogSlug": { "description": "source が blog の参照 slug", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+                "highlightRegionLabel": { "description": "source が ranking (S3 地域別) で、この地域の県を考察で強調する", "type": "string", "minLength": 1 },
+                "regionBlockLabel": { "description": "ai-content の regionalAnalysis から抜き出す地方ブロックの見出し語。S3 で「その地域の段落」だけを章に載せる (全冊同一本文の再発防止)。見出し語が一致しないと抽出できない", "type": "string", "minLength": 1 },
+                "freshText": { "description": "source が fresh の書き下ろし本文 (markdown)。freshFile と併用時は freshFile を優先。freshFile が無い書籍は freshText の導入へ degrade する", "type": "string", "minLength": 1 },
+                "freshFile": { "description": "source が fresh の書き下ろし本文の markdown ファイル (product-factory ルート相対。KDP セレクト専用の本は repo の外の .local/kindle-private)", "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "kdpExclusive": {
+            "description": "KDP セレクト専用の本の設定。本文はサイト・note・repo に出さない (リポジトリが公開で、サイトや GitHub で読める本は KDP セレクトの独占に反するため。KDP-ROYALTY-RATE-CHECK-01)",
+            "type": "object",
+            "required": ["description", "aiText", "aiTextTools"],
+            "additionalProperties": false,
+            "properties": {
+              "description": { "type": "string", "minLength": 1 },
+              "aiText": { "type": "string", "minLength": 1 },
+              "aiTextTools": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+            }
+          },
+          "priceYen": { "description": "販売価格 (円)。KDP 電子は 250〜1,250 円が印税 70% 帯", "enum": [0, 500, 800, 1000] },
+          "newContentNote": { "description": "書き下ろし部分の宣言 (30% ルールの根拠)", "type": "string", "minLength": 1 },
+          "sourceIdeas": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "keywords": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "status": { "enum": ["idea", "planned", "manuscript", "generated", "published"] },
+          "asin": { "type": "string", "minLength": 1 },
+          "publishedAt": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^K-S[1-4]-\\d{2}$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

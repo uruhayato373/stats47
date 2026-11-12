@@ -17,6 +17,7 @@ import { fileURLToPath } from "node:url";
 
 import { AREA_DATABOOK_TEMPLATE } from "../src/area-databook/template";
 import { templateToPageComponentsJson } from "../src/area-databook/transform";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
@@ -26,7 +27,7 @@ const PAGE_COMPONENTS_AREA_DIR = resolve(
 );
 const PREFECTURES_JSON = resolve(
   REPO_ROOT,
-  "packages/area/src/data/prefectures.json",
+  datasetPath("areas.prefectures"),
 );
 
 const CHECK = process.argv.includes("--check");

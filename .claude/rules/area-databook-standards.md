@@ -1,6 +1,7 @@
 ---
 paths:
   - "packages/data-configs/src/area-databook/**"
+  - "data/areas/**"
   - "packages/data-configs/src/geo-scope/city-databook-layout.ts"
   - "packages/ranking/src/municipalities/**"
   - "apps/web/src/features/{area-databook,area,area-profile}/**"
@@ -43,21 +44,21 @@ source bundle manifestは
 
 | 層 | 場所 | 役割 |
 |---|---|---|
-| **SSOT: テンプレ** | `packages/data-configs/src/area-databook/template.ts` (`AREA_DATABOOK_TEMPLATE`) | 47 県共通のセクション×ブロック構成。数値は rankingKey 参照で県非依存。**ここだけ編集** |
-| **SSOT: 編集** | `packages/data-configs/src/area-databook/editorial/<code>.ts` + `editorial/index.ts` (`AREA_EDITORIALS`) | 県別の特産品・県シンボル。area-curator が単一オーナー |
+| **SSOT: テンプレ** | 台帳 `areas.databook-template` (`AREA_DATABOOK_TEMPLATE`) | 47 県共通のセクション×ブロック構成。数値は rankingKey 参照で県非依存。**ここだけ編集** |
+| **SSOT: 編集** | 台帳 `areas.editorial` (`AREA_EDITORIALS`。`npm run generate:editorial-index --workspace=@stats47/data-configs` が登録簿を作る) | 県別の特産品・県シンボル。area-curator が単一オーナー |
 | 型 | `packages/data-configs/src/area-databook/types.ts` | `AreaDatabookTemplate` / `DatabookSection` / `DatabookBlock` / `AreaEditorial` 等 |
 | **生成物** (手編集禁止) | `apps/web/scripts/data/page-components/area/<code>.json` | chart ブロックのみを PageComponent 行に codegen (47 県同一・byte 一致) |
 | **派生** (焼き込み) | R2 `app/areas/<code>/databook.json` | ranked-kpi の値+全国順位+全国との対比値+年次、農業 top10。exporter が R2 values.json から生成。対比値は同じ年の公式の全国値 (`app/japan/<key>/series.json`) を使い、無ければ 47 都道府県の単純平均を「47都道府県平均」と表示する (`nationalAvgKind`) |
 | 特産品イラスト | R2 `app/areas/<code>/specialty/<slug>.webp` | **Codex セッション (OpenAI 画像) で生成** (2026-07-18 に Gemini から変更・§5)。欠損時はイニシャル代替タイルに degrade |
 
 ```
-AREA_DATABOOK_TEMPLATE (SSOT, git TS)
+AREA_DATABOOK_TEMPLATE (SSOT, data/ の台帳)
   │  npm run generate:area-databook --workspace=@stats47/data-configs
   └─▶ apps/web/scripts/data/page-components/area/<code>.json  (chart ブロックのみ)
         │  export-page-components-snapshot.ts (無変更)
         └─▶ R2 app/page-components/area/<code>.json → AreaDatabookSection が読む
 
-AREA_EDITORIALS (SSOT, git TS) ──直 import──▶ SpecialtyList / PrefSymbolCard
+AREA_EDITORIALS (SSOT, data/ の台帳) ──直 import──▶ SpecialtyList / PrefSymbolCard
 area-databook-snapshot.ts ── R2 values.json (rank 済) ──▶ R2 app/areas/<code>/databook.json ──▶ RankedKpiGrid
 ```
 
@@ -116,7 +117,7 @@ SNS 地域カルーセルは、**同じ選定関数 `selectAreaHighlights` / `se
 - **対象 = 市区町村の対象集合** (`buildMunicipalityEntityPolicy` の publishable。東京 23 区を含む)。索引・sitemap・
   県内の市区町村一覧も同じ集合 (`PUBLISHABLE_CITIES`)。人口の値が無い対象があれば生成器が止まる。
 - **特徴** は `selectCityHighlights` (率の指標・県内 5 位以内・値 0 除外・2019 年以降)。
-- **載せる指標の上限**: 社会・人口統計体系の拡充分 (2026-10-22・541 件。`municipality-ssds-expansion.ts`) は
+- **載せる指標の上限**: 社会・人口統計体系の拡充分 (2026-10-22・541 件。台帳 `municipalities.ssds-expansion`) は
   `SSDS_EXPANSION_DATABOOK_PICKS` に挙げたものだけを載せる (`isCityDatabookMetric`)。全件を載せると 1 ページの HTML が
   ページの重さの予算 (900KB) を外れるため。残りは市区町村テーマのページから見る。テーマも 1 件 60 指標以下に保つ (契約テスト)。
 - **行政区の内訳** (`wardBreakdown`・政令指定都市 20 市だけ): 見出しの指標の行政区の値を、e-Stat の観測値
@@ -187,8 +188,8 @@ Claude Code の codex MCP (`.claude/rules/codex-mcp.md`) とは別経路。文�
 ## 6. 編集フロー
 
 ```
-1. packages/data-configs/src/area-databook/template.ts を編集 (セクション・ブロック・指標追加)
-   または editorial/<code>.ts を追加 (特産品・シンボル)
+1. 台帳 areas.databook-template を編集 (セクション・ブロック・指標追加)
+   または areas.editorial に県の JSON を足す・直す (特産品・シンボル。足したら generate:editorial-index)
 2. npm run generate:area-databook --workspace=@stats47/data-configs   # page-components 再生成
 3. npm run validate:area-databook --workspace=@stats47/data-configs   # 整合チェック
 4. npx tsc --noEmit -p packages/data-configs/tsconfig.json            # 型
@@ -225,7 +226,7 @@ error = 総数の指標に「10万人比」等のラベル / 「人口当たり�
 
 | NG | OK |
 |---|---|
-| `page-components/area/<code>.json` を手編集 | template.ts を編集 → `generate:area-databook` |
+| `page-components/area/<code>.json` を手編集 | 台帳 `areas.databook-template` を編集 → `generate:area-databook` |
 | R2 `databook.json` を手編集 | exporter で再生成 |
 | 47 県横並び可視化を area に置く | theme へ。area は自県値+順位+回遊リンク |
 | 書籍の解説文・図案・写真を複製 | 品名・産地は事実抽出、解説は独自文+出典 |
@@ -240,7 +241,7 @@ error = 総数の指標に「10万人比」等のラベル / 「人口当たり�
 
 | 工程 | 担当 |
 |---|---|
-| テンプレ設計 (セクション・ブロック・指標採否・rejectedCandidates) | `area-databook-designer` (template.ts) |
+| テンプレ設計 (セクション・ブロック・指標採否・rejectedCandidates) | `area-databook-designer` (`areas.databook-template`) |
 | 編集コンテンツ (特産品・シンボル) + イラスト依頼 | `area-curator` (editorial・単一オーナー) |
 | ギャップ指標の statsDataId 実在検証 | `estat-researcher` (未検証 ID 投入禁止) |
 | metric 投入 (validate:years/config) | `data-ingester` |

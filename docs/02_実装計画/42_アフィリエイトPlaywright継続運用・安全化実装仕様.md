@@ -26,7 +26,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | アフィリエイト運用規約 | `.claude/rules/affiliate-ads-standards.md`                                       |
 | A8 ブラウザ操作        | `.claude/agents/asp-scout.md` + `.claude/skills/ads/scout-asp/`                  |
 | 3 ASP 横断操作         | `.claude/agents/affiliate-operator.md` + `.claude/skills/ads/affiliate-operate/` |
-| 配信 SSOT・配置        | `.claude/agents/affiliate-manager.md` + `apps/web/scripts/affiliate-ads-data.ts` |
+| 配信 SSOT・配置        | `.claude/agents/affiliate-manager.md` + 台帳 `affiliate.ads` |
 | A8 状態機械            | `data/affiliate/a8-catalog.json`                                              |
 | 3 ASP 横断台帳         | `data/affiliate/affiliate-catalog.json`                                       |
 | 配信時の広告データ     | git TS → R2 snapshot                                                             |
@@ -110,7 +110,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 ### 3.3 単一 writer
 
 - ASP UI と catalog の writer は `affiliate-operator` / `asp-scout` の担当範囲に留める。
-- `affiliate-ads-data.ts` の writer は `affiliate-manager` だけにする。
+- 広告の台帳 `affiliate.ads` の writer は `affiliate-manager` だけにする。
 - 同一 working tree で複数 writer agent を動かさない。
 - 分散 lock 用の DB を新設しない。`--commit` を実行する端末を 1 台に固定し、他端末は read-only とする。
 
@@ -354,7 +354,7 @@ type AffiliateEligibility = {
 
 禁止語、risk flag、最低需要などの規則は `.claude/scripts/ads/data/` の versioned policy へ置き、
 catalog の各 entry には判定結果と fingerprint を保存する。アプリ配信に必要な allowlist だけを
-`affiliate-ads-data.ts` の型付きフィールドへ移す。
+広告の台帳 `affiliate.ads` の型付きフィールドへ移す。
 
 ### 7.2 apply gate
 

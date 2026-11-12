@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "アフィリエイト案件の台帳",
+  "description": "data/affiliate/ledger/offer-profiles.json の形状契約。profiles は案件 (programRef) ごとの安定した人手の判断だけを持つ (成果条件・負担・lane・掲載してよいページの種類)。報酬・EPC・確定率などの変動値はここへ保存しない。portfolioStatus の pending-classification は未確認を意味し、配信候補へは流れない。lane・actionType・frictionTier・personalDataLevel・humanContact のどれかが unknown、または conversionCondition・conditionSource・verifiedAt のどれかが null の案件は pending-classification か blocked にする (export-affiliate-ads-snapshot.ts が検査する)。allowedVerticals の先頭は vertical と同じ値にする。programRefByAdId は、programRef を持たない広告 (affiliate.ads の id) → 案件の安定参照 (A8 は mid / a8mat の突合、例外は実機の catalog で確認済み)。読み込み口は apps/web/scripts/affiliate-offer-profiles-data.ts (AFFILIATE_OFFER_PROFILES・AFFILIATE_PROGRAM_REF_BY_AD_ID)。",
+  "type": "object",
+  "required": ["profiles", "programRefByAdId"],
+  "additionalProperties": false,
+  "properties": {
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "programRef", "vertical", "allowedVerticals", "lane", "actionType", "frictionTier", "conversionCondition",
+          "personalDataLevel", "humanContact", "conditionSource", "verifiedAt", "portfolioStatus", "allowedPageTypes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "programRef": { "description": "<ASP>:<案件 ID>", "type": "string", "pattern": "^(a8|afb|moshimo|rakuten|valuecommerce):\\S+$" },
+          "vertical": { "description": "案件の正の意図軸", "enum": ["labor", "housing", "population", "economy", "health", "energy", "travel", "furusato", "education", "mobility"] },
+          "allowedVerticals": {
+            "description": "同じ案件を複数の文脈で使う既存在庫の明示の許可リスト。先頭が vertical",
+            "type": "array",
+            "minItems": 1,
+            "items": { "enum": ["labor", "housing", "population", "economy", "health", "energy", "travel", "furusato", "education", "mobility"] }
+          },
+          "lane": { "enum": ["discovery", "decision", "unknown"] },
+          "actionType": { "enum": ["click", "download", "free-registration", "document-request", "reservation", "consultation", "purchase", "contract", "unknown"] },
+          "frictionTier": { "enum": ["F0", "F1", "F2", "F3", "F4", "unknown"] },
+          "conversionCondition": { "description": "成果の条件", "type": ["string", "null"] },
+          "personalDataLevel": { "enum": ["none", "basic", "sensitive", "unknown"] },
+          "humanContact": { "enum": ["none", "optional", "required", "unknown"] },
+          "conditionSource": { "description": "成果の条件を確かめた出典の URL", "type": ["string", "null"] },
+          "verifiedAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "portfolioStatus": { "enum": ["candidate", "pilot-ready", "active", "paused", "blocked", "pending-classification"] },
+          "allowedPageTypes": { "type": "array", "items": { "enum": ["ranking", "blog", "theme", "area"] } }
+        }
+      }
+    },
+    "programRefByAdId": {
+      "type": "object",
+      "propertyNames": { "pattern": "^af_[A-Za-z0-9_-]+$" },
+      "additionalProperties": { "type": "string", "pattern": "^(a8|afb|moshimo|rakuten|valuecommerce):\\S+$" }
+    }
+  }
+}

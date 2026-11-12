@@ -10,7 +10,6 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { GEO_ANALYSES } from "@stats47/data-configs/business-plan";
 import { REGISTRIES } from "../../../config/datasets.mjs";
 import { resolveRegistry } from "../../../.claude/scripts/lib/check-datasets.mjs";
-import { ALL_PRODUCTS } from "../src/catalog/products";
 
 const ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
 const readText = (path: string) => readFileSync(resolve(ROOT, path), "utf8");
@@ -19,22 +18,6 @@ const sorted = (values: Iterable<string>) => [...values].sort();
 describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む", () => {
   it("metrics = METRICS_REGISTRY のキー", () => {
     expect(sorted(resolveRegistry(REGISTRIES.metrics, readText))).toEqual(sorted(Object.keys(METRICS_REGISTRY)));
-  });
-
-  it("product-ids = ALL_PRODUCTS と Geo サービスの ID", () => {
-    expect(sorted(resolveRegistry(REGISTRIES["product-ids"], readText))).toEqual(
-      sorted(ALL_PRODUCTS.map((p) => p.id)),
-    );
-  });
-
-  it("affiliate-ad-experiment-ids = AFFILIATE_ADS が持つ experimentId", async () => {
-    // apps/web の TS はこの package の型検査 (rootDir) の外なので、実行時だけ読む
-    const { AFFILIATE_ADS } = (await import(pathToFileURL(resolve(ROOT, "apps/web/scripts/affiliate-ads-data.ts")).href)) as {
-      AFFILIATE_ADS: { experimentId?: string }[];
-    };
-    const ids = new Set(AFFILIATE_ADS.map((ad) => ad.experimentId).filter((id): id is string => Boolean(id)));
-    expect(ids.size).toBeGreaterThan(0);
-    expect(sorted(resolveRegistry(REGISTRIES["affiliate-ad-experiment-ids"], readText))).toEqual(sorted(ids));
   });
 
   it("ranking-slug-redirects = RANKING_SLUG_REDIRECTS のキー、ranking-content-keys = 指標 + 旧 slug", async () => {

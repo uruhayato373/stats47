@@ -1,9 +1,8 @@
 /**
- * generate-editorial-index — editorial/<code>.ts 群から editorial/index.ts を再生成する。
+ * generate-editorial-index — 台帳 areas.editorial (県の本文 47 ファイル) から editorial/index.ts を再生成する。
  *
- * 各 editorial/<code>.ts の `export const XXX_EDITORIAL` と `areaCode: "NNNNN"` を抽出し、
- * import + AREA_EDITORIALS 登録簿を areaCode 昇順で機械生成する。県別ファイルを並列 agent が
- * 書いても、登録は本スクリプトで決定的に行う (index.ts の手編集・競合を排除)。
+ * 各 <code>.json の areaCode がファイル名と一致することを確かめ、JSON の静的 import と
+ * AREA_EDITORIALS 登録簿を areaCode 昇順で機械生成する (index.ts の手編集・競合を排除)。
  *
  * 使い方:
  *   npx tsx packages/data-configs/scripts/generate-editorial-index.ts          # 書き込み
@@ -12,61 +11,57 @@
  * 規約: .claude/rules/area-databook-standards.md
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { datasetDir } from "../../../config/datasets.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const EDITORIAL_DIR = resolve(__dirname, "../src/area-databook/editorial");
-const INDEX_PATH = resolve(EDITORIAL_DIR, "index.ts");
+const REPO_ROOT = resolve(__dirname, "../../..");
+const RECORD_DIR = resolve(REPO_ROOT, datasetDir("areas.editorial"));
+const INDEX_PATH = resolve(__dirname, "../src/area-databook/editorial", "index.ts");
 const CHECK = process.argv.includes("--check");
 
 interface Entry {
   areaCode: string;
-  exportName: string;
-  file: string;
+  importPath: string;
 }
 
 function collect(): Entry[] {
   const entries: Entry[] = [];
-  for (const file of readdirSync(EDITORIAL_DIR)) {
-    if (!/^\d{5}\.ts$/.test(file)) continue;
-    const src = readFileSync(resolve(EDITORIAL_DIR, file), "utf8");
-    const exportName = src.match(/export const (\w+_EDITORIAL)\b/)?.[1];
-    const areaCode = src.match(/areaCode:\s*"(\d{5})"/)?.[1];
-    if (!exportName || !areaCode) {
-      throw new Error(`${file}: export const XXX_EDITORIAL または areaCode "NNNNN" が見つからない`);
+  for (const file of readdirSync(RECORD_DIR)) {
+    if (!/^\d{5}\.json$/.test(file)) continue;
+    const record = JSON.parse(readFileSync(resolve(RECORD_DIR, file), "utf8")) as { areaCode?: string };
+    const code = file.replace(".json", "");
+    if (record.areaCode !== code) {
+      throw new Error(`${file}: areaCode "${record.areaCode}" がファイル名と不一致`);
     }
-    if (areaCode !== file.replace(".ts", "")) {
-      throw new Error(`${file}: areaCode "${areaCode}" がファイル名と不一致`);
-    }
-    entries.push({ areaCode, exportName, file: file.replace(".ts", "") });
+    const importPath = relative(dirname(INDEX_PATH), resolve(RECORD_DIR, file)).replace(/\\/g, "/");
+    entries.push({ areaCode: code, importPath });
   }
   entries.sort((a, b) => a.areaCode.localeCompare(b.areaCode));
   return entries;
 }
 
 function render(entries: Entry[]): string {
-  const imports = entries
-    .map((e) => `import { ${e.exportName} } from "./${e.file}";`)
-    .join("\n");
-  const registrations = entries
-    .map((e) => `  "${e.areaCode}": ${e.exportName},`)
-    .join("\n");
+  const imports = entries.map((e) => `import e${e.areaCode} from "${e.importPath}";`).join("\n");
+  const names = entries.map((e) => `  e${e.areaCode},`).join("\n");
   return (
     `/**\n` +
     ` * AREA_EDITORIALS — 県別編集コンテンツ (特産品・県シンボル) の登録簿。\n` +
     ` *\n` +
     ` * ⚠️ AUTO-GENERATED — DO NOT EDIT.\n` +
     ` * 生成: npx tsx packages/data-configs/scripts/generate-editorial-index.ts\n` +
-    ` * 県別ファイル editorial/<code>.ts を追加後に再生成する。\n` +
+    ` * 記録の正本は台帳 areas.editorial (県ごとの JSON + Schema)。ファイルを追加したら再生成する。\n` +
     ` * 規約: .claude/rules/area-databook-standards.md\n` +
     ` */\n` +
     `import type { AreaEditorial } from "../types";\n` +
     `${imports}\n\n` +
-    `/** 県別編集コンテンツの登録簿 (areaCode → editorial)。 */\n` +
-    `export const AREA_EDITORIALS: Record<string, AreaEditorial> = {\n` +
-    `${registrations}\n` +
-    `};\n\n` +
+    `const RECORDS = [\n${names}\n];\n\n` +
+    `/** 県別編集コンテンツの登録簿 (areaCode → editorial)。sourceNote (出典の注記) は記録だけが持ち、ここには出さない。 */\n` +
+    `export const AREA_EDITORIALS: Record<string, AreaEditorial> = Object.fromEntries(\n` +
+    `  RECORDS.map(({ sourceNote: _sourceNote, ...editorial }) => [editorial.areaCode, editorial as AreaEditorial]),\n` +
+    `);\n\n` +
     `/** 登録済み editorial 配列。 */\n` +
     `export function listAreaEditorials(): AreaEditorial[] {\n` +
     `  return Object.values(AREA_EDITORIALS);\n` +

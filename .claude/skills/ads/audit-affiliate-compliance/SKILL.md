@@ -9,8 +9,8 @@ co_agents: [improvement-triage]
 アフィリエイト配置の **compliance (PR 表記 / 孤立配置 / リンク整合 / canonical サイズ) を決定的スクリプトで監査**する。
 判定はすべてスクリプトが行い、結果の解釈と是正の段取りだけを agent が担う。
 
-- **直接配置 SSOT**: `apps/web/scripts/affiliate-direct-placements-data.ts` (`AFFILIATE_DIRECT_PLACEMENTS[]`)
-- **自動配置 SSOT**: `apps/web/scripts/affiliate-ads-data.ts` (サイズ規約は `audit-affiliate-inventory.ts --check-size` が担当)
+- **直接配置 SSOT**: 台帳 `affiliate.direct-placements` (読み込み口 `AFFILIATE_DIRECT_PLACEMENTS[]`)
+- **自動配置 SSOT**: 台帳 `affiliate.ads` (サイズ規約は `audit-affiliate-inventory.ts --check-size` が担当)
 - **判定コア**: `.claude/scripts/ads/lib/affiliate-compliance-core.mjs` (純粋関数・`node --test` 対象)
 - **state 出力**: `data/affiliate/compliance-latest.json` (`--live` 時のみ更新)
 
@@ -34,7 +34,7 @@ npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size
 
 | 検出 | 意味 | 是正 |
 |---|---|---|
-| 構造 error (ID 重複 / URL scheme / サイズ型 / 配置形式) | SSOT の記載ミス | `affiliate-direct-placements-data.ts` を修正 (affiliate-manager) |
+| 構造 error (ID 重複 / URL scheme / サイズ型 / 配置形式) | SSOT の記載ミス | 台帳 `affiliate.direct-placements` を修正 (affiliate-manager) |
 | 孤立 `article-not-found` | 配置先記事が R2 に無い (削除・改名) | 台帳から配置を外すか記事を復元 |
 | 孤立 `tag-not-found-in-body` | 台帳にあるが本文にタグが無い | 記事にタグを再配置するか台帳から外す |
 | PR 表記漏れ | 景表法 (2023-10) の表記が本文に無い。blog は冒頭宣言 + `※PR` の両方、note は `#PR`/`#広告` 等いずれか | **記事本文の修正** (blog-editor / article-writer に委譲。R2 公開が要るためユーザー確認) |
@@ -52,6 +52,6 @@ npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size
 | `.claude/scripts/ads/audit-affiliate-compliance.ts` | 監査 CLI (決定的) |
 | `.claude/scripts/ads/lib/affiliate-compliance-core.mjs` | 判定コア (純粋関数) |
 | `.claude/scripts/ads/__tests__/affiliate-compliance-core.test.mjs` | fixture テスト (`node --test`) |
-| `apps/web/scripts/affiliate-direct-placements-data.ts` | 直接配置 SSOT |
+| 台帳 `affiliate.direct-placements` | 直接配置 SSOT |
 | `data/affiliate/compliance-latest.json` | 最新監査 state (operations state の入力) |
 | `.claude/rules/affiliate-ads-standards.md` | 規約 (PR 表記・サイズの正典) |

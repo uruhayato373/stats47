@@ -12,7 +12,7 @@ const root = process.cwd();
 const requireRepo = createRequire(resolve(root, "package.json"));
 const ExcelJS = requireRepo("exceljs");
 const { parse: parseCsv } = requireRepo("csv-parse/sync");
-const prefs = requireRepo("./packages/area/src/data/prefectures.json");
+const prefs = requireRepo("./.claude/scripts/lib/prefectures.cjs").PREFECTURES;
 const sum = (xs) => xs.reduce((a, b) => a + b, 0);
 export const sha = (body) => createHash("sha256").update(body).digest("hex");
 export const HEADERS = [

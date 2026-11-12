@@ -5,6 +5,7 @@ import { resolve, dirname } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 export async function main(args = process.argv.slice(2)) {
   const root = process.cwd();
@@ -17,7 +18,7 @@ export async function main(args = process.argv.slice(2)) {
   const { tsImport } = require('tsx/esm/api');
   const sourcePath = proposal ? resolve(proposal, 'bridge-inspection-age-source.ts') : resolve(root, 'packages/data-configs/src/theme-catalog/bridge-inspection-age-source.ts');
   const { BRIDGE_INSPECTION_AGE_SOURCE: source } = await tsImport(pathToFileURL(sourcePath).href, import.meta.url);
-  const prefectures = JSON.parse(await readFile(resolve(root, 'packages/area/src/data/prefectures.json'), 'utf8'));
+  const prefectures = JSON.parse(await readFile(resolve(root, datasetPath('areas.prefectures')), 'utf8'));
   const result = spawnSync('python3', [resolve(dirname(fileURLToPath(import.meta.url)), 'extract-bridge-inspection-age.py')], {
     input: JSON.stringify({source, prefectures, sourceDir: resolve(sourceDir), generatedAt: new Date().toISOString()}), encoding: 'utf8', maxBuffer: 32 * 1024 * 1024,
   });

@@ -23,7 +23,7 @@ import { createRequire } from "node:module";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUT_DIR = join(REPO_ROOT, datasetDir("municipalities.expansion"));
@@ -93,7 +93,7 @@ function classifyMetrics() {
 
 function classifyEntities() {
   const cities: Array<{ cityCode: string; cityName: string; level: string; prefCode: string }> = JSON.parse(
-    readFileSync(join(REPO_ROOT, "packages/area/src/data/cities.json"), "utf-8"),
+    readFileSync(join(REPO_ROOT, datasetPath("areas.cities")), "utf-8"),
   );
   const byCode = new Map<string, (typeof cities)[number]>();
   const duplicates: string[] = [];
@@ -176,7 +176,7 @@ async function main() {
 
   // entity code → level / 親市。R2 payload の母集団を機械的に分類するのに使う。
   const cityRows: Array<{ cityCode: string; level: string; prefCode: string }> = JSON.parse(
-    readFileSync(join(REPO_ROOT, "packages/area/src/data/cities.json"), "utf-8"),
+    readFileSync(join(REPO_ROOT, datasetPath("areas.cities")), "utf-8"),
   );
   const entityLevel = new Map(cityRows.map((c) => [c.cityCode, c.level]));
   const wardParent = new Map(cityRows.filter((c) => c.level === "3").map((c) => [c.cityCode, c.prefCode]));
@@ -306,7 +306,7 @@ ${Object.entries(inv.metricCounts)
 
 **\`undetermined\` は「取れなかった」であって「無い」ではない。** 母集団から外さずに再取得する。
 
-## entity 母集団 (\`packages/area/src/data/cities.json\`)
+## entity 母集団 (\`data/areas/master/cities.json\`)
 
 - 総数 ${inv.entities.total} / 自治体 (level 2) **${inv.entities.municipalities}** / 政令市の行政区 (level 3) ${inv.entities.administrativeWards}
 - 政令市本体 ${inv.entities.designatedCityBodies} 件

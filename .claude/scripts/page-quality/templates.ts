@@ -1,3 +1,4 @@
+import { datasetDir } from "../../../config/datasets.mjs";
 import { isoWeekOf } from "../metrics/lib/periods.mjs";
 import type { PageTemplate, PageTemplateKey, SharedPathRule } from "./types";
 
@@ -195,6 +196,7 @@ export const SHARED_PATH_RULES: readonly SharedPathRule[] = [
     changedPathGlobs: [
       "apps/web/src/features/ads/**",
       "apps/web/scripts/affiliate-ads-data.ts",
+      `${datasetDir("affiliate.ads")}/**`,
     ],
   },
   {

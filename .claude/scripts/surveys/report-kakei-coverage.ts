@@ -69,7 +69,7 @@ async function main(): Promise<void> {
     .filter((f) => f.endsWith(".json"))
     .map((f) => readText(`${datasetDir("themes.catalogs")}/${f}`));
   const directory = readText("apps/web/src/features/theme-dashboard/lib/kakei-ranking-directory.generated.ts");
-  const areaTemplate = readText("packages/data-configs/src/area-databook/template.ts");
+  const areaTemplate = readText(datasetPath("areas.databook-template"));
   const [blog, areaTopItems] = await Promise.all([blogLinkedKeys(keys), areaTopItemKeys()]);
 
   const rows = metrics.map((m) => ({

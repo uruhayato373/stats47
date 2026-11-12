@@ -9,7 +9,7 @@
  *
  * 詳細: .claude/skills/db/export-d1-to-remotion-static/SKILL.md
  *
- * 注: prefecture master (packages/area/src/data/prefectures.json) は git TS の SSOT。
+ * 注: prefecture master (台帳 areas.prefectures) は git TS の SSOT。
  * 以前は master feature が D1 から再生成していたが Phase C で廃止 (静的 Reference 化)。
  */
 import { exportMigrationFlow } from "./exporters/migration-flow.js";

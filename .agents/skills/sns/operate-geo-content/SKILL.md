@@ -30,7 +30,7 @@ baseline投稿は分析の入口として15件中3件まで許可する。Geoの
 
 ## 実行フロー
 
-1. `x-strategist` が `packages/data-configs/src/business-plan/m1.ts` の問い・投稿文・役割を管理する。
+1. `x-strategist` が台帳 `business-plan.m1` の問い・投稿文・役割を管理する。
 2. `gis-curator` が各入力データのgeometry、公式出典、版、利用可否を確認する。
 3. `geo-analysis-curator` が`sourceLayers`の計算入力/補助境界、stage、canonical着地を確認する。
 4. `/build-geo-analysis`で数値・空間演算を決定的コードから県別artifactとmanifestへ派生し、保存則を監査する。
@@ -78,7 +78,7 @@ baseline投稿は分析の入口として15件中3件まで許可する。Geoの
 
 ## 書き込み境界
 
-- authored: `packages/data-configs/src/business-plan/m1.ts`
+- authored: 台帳 `business-plan.m1`
 - derived queue: `.local/r2/sns/_queue/business-plan-m1-x.json`
 - derived analysis: `.local/r2/app/geo/**`
 - derived media: `.local/r2/sns/geo/**`

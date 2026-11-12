@@ -73,7 +73,7 @@ paths:
 ## 2. spec（1カード/1動画 = 1 JSON）
 
 - 型定義の正本: `apps/remotion/src/features/buzz-map/types.ts`（`BuzzMapSpec`）
-- 置き場: `apps/remotion/src/features/buzz-map/specs/<id>.json`（**`{"spec": {...}}` の形で保存** ＝ そのまま `--props` に渡せる）
+- 置き場: 台帳 `sns.buzz-map-specs`（1 枚 1 ファイル `<id>.json`。**`{"spec": {...}}` の形で保存** ＝ そのまま `--props` に渡せる。見本の `sample-*` だけは Remotion の `specs/`）
 - コード体系: 都道府県=2桁（"01"〜"47"）/ 市区町村=N03_007 5桁
 - `level`: `pref` / `muni`（全国市区町村）/ `muni:NN`（県トリム）。muni は県境オーバーレイが自動で乗る
 - `theme`: `blue`（既定・省略可）/ `dark` / `paper`（§1 配色規則）。ヘルパーは `--theme` で指定可

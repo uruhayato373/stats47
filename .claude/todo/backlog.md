@@ -194,12 +194,12 @@ updated: 2026-11-01
 ### [LEDGER-DB-UNIFY-01] マスタと台帳を `data/` の 1 つの DB にまとめる (13 段)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-10] [領域:データ]
 
-2026-11-10 にオーナーが承認した計画に沿って進める。計画の本体は会社の Windows PC の `C:\Users\m004195\.claude\plans\rdb-db-nextjs-spicy-marble.md` (リポジトリには置かない。全段が終わったら消す)。
-- **いまの段**: 段 6 完了 (2026-11-11。国土数値情報の台帳・利用条件・公式の監査を `data/geo/ksj/`、Geo 分析・層・配置を `data/geo/analyses/`、原典ページを `data/geo/source-pages/`、公開データ・県の統計ポータル・海外を `data/open-data/` へ移した)。次は段 7 (全国・市区町村)。残りの一覧は `npm run check-datasets -- --er` の末尾に段ごとの件数で出る
-- **段 13 で判断するもの (段 6 で見つけた分)**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める
-- **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(3) `ssds-provenance.generated.json` を作り直すと、`cpi-annual` の名前が調査の一覧の名前 (消費者物価指数) に変わる (43 件)。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる
-- **進め方**: 段ごとに新しいセッションで始め、計画のファイルと段の番号を渡す。段は 1 つずつ順に進め、終わるたびにこの「いまの段」を書き換える
-- **完了条件**: `packages/`・`apps/` の台帳の許可リストが空で、`config/` がシステムの設定だけになり、`npm run check-datasets` が通る
+2026-11-10 にオーナーが承認した計画 (13 段) は 2026-11-12 に全段を終え、計画のファイルは消した。`packages/`・`apps/`・`config/` のマスタと台帳は `data/` の JSON + Schema に移り、`npm run check-datasets -- --er` の「data/ の外に残るマスタ・台帳」と統合の候補はどちらも 0 件。
+- **残り**: 段 0〜13 は 2026-11-12 に develop へ入った (`1ca0cff25`。push で起動した Develop Quality Gate・広告の R2 への反映・広告の在庫の更新は 3 つとも成功し、R2 の広告の snapshot は台帳と同じ 328 件)。残りは main へ入れること (オーナーの指示で行う) と、下の「main へ入れるときの注意」を確かめること
+- **開発サーバーでの確認 (2026-11-12)**: ブランチの作業ツリーで `npm run dev:web` を起動し、Geo (トップ・分析 3・層・データの一覧・交通網の変遷)・県 2・全国 3・市区町村 3・調査 2・カテゴリ・テーマ 3・ランキング・ブログ・商品の 23 ページが 200 でエラーなしだった。転送 (ランキング・ブログ・テーマの旧 URL の 301) と 410 (ブログ・ランキング) も台帳どおりに返った。ランキングのページに広告が出て、県のページの HTML にシンボルと特産品が本番と同じく入っていた。`next build` と Remotion のバンドルは未確認
+- **別の機会に回した判断**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める。2 桁の県コード (港湾の `prefectureCode`・`open-data.prefecture-statistics` の `resources[].prefectureCode`) を県のマスタ (5 桁の `prefCode`) へ結ぶ手段が無い (`refs` の `parse` は `list` だけ)。検査に桁を直す指定を足すか、台帳の側を 5 桁にするかを決める。県の本文 47 ファイルを 1 ファイルにするか
+- **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(3) `ssds-provenance.generated.json` を作り直すと、`cpi-annual` の名前が調査の一覧の名前 (消費者物価指数) に変わる (43 件)。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる。(8) 段 10 で広告の台帳を足し `publish-affiliate-ads.yml` の起動条件を変えた。develop への push で広告の R2 への反映が走り、成功した (2026-11-12)。main へ入っても workflow は develop の push で起動するので、main では走らない
+- **完了条件**: ブランチ `ledger-db-unify` が develop と main に入り、上の注意 (1)〜(8) を確かめた
 
 ### [SKILL-AGENT-RULES-TO-CHECKS-01] skill と agent の定義を、短い規則と機械の検査へ作り替える
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-10] [領域:管理]
@@ -226,6 +226,7 @@ updated: 2026-11-01
 - **証拠 (2026-11-10)**: `apps/admin/tests/unit/agent-models.test.ts` が、期待値 `.claude/agents/broken.md` に対して区切りが逆のパスを返されて落ちる。admin の vitest の 3 件 (`reference-content-read-model`・`draft-caption`・`reference-blog-source`) は 5 秒の時間切れで落ち、時間切れを延ばすと通る
 - **証拠 (2026-11-11)**: テーマの `evaluate-theme-experiments` の CLI テスト 7 件が、`--import` に Windows の絶対パスを渡して `ERR_UNSUPPORTED_ESM_URL_SCHEME` で落ちる (file URL にする必要がある)。`npm run theme:quality:test` は 551 件中 8 件が失敗し、残り 1 件は preview ゲートウェイの 502 のテスト
 - **証拠 (2026-11-11)**: `.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs` が、`spawnSync` で `node_modules/.bin/tsx` を起動できず `status: null` で落ちる
+- **証拠 (2026-11-12)**: `.claude/scripts/note/__tests__/attachment-dom.test.cjs` の「無料説明文の同名言及を無視し、折り返し段落のDOM先頭を選ぶ」が、生成した式に `keys Home|index($0,h)|startsWith` が無いことの検査で落ちる (読むファイルは作業ツリーで CRLF。差分の無い作業ツリーでも落ちることを段 13 の検証で確認)
 - **完了条件**: この PC で `npm run preflight:pr` の該当の 2 ゲートと、`apps/web/scripts`・`apps/admin` の vitest、`npm run theme:quality:test` が通る
 
 ### [SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01] 調査ポートフォリオの検証スクリプトと Schema・refs の二重の検査をなくす
@@ -253,6 +254,34 @@ updated: 2026-11-01
 
 `pr-quality-check.yml` は `check-metric-contract.ts` だけを動かし、同じ `metrics:check` に入っている `check-kakei-analysis-catalog.ts` (公開ページと指標の実物との照合) を動かしていない (2026-11-10 に workflow を grep して確認)。CI に載っているのは合成の入力で検査する vitest だけで、掲載先のページが非公開になった・指標の絞り込みが変わった、を PR で止められない。2026-11-10 から全国の図の生成 (`generate-kakei-axis-charts.ts`) がこの台帳の絞り込みを読むので、ずれは図の値に直結する。
 - **完了条件**: `packages/data-configs` か `data/content/pages` に触る PR で `check-kakei-analysis-catalog.ts` が走り、失敗で止まる
+
+### [AFFILIATE-PUBLISH-PROFILE-TRIGGER-01] 案件の台帳だけを変えた push で、広告の R2 への反映が走らない
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:アフィリエイト]
+
+`publish-affiliate-ads.yml` は広告の台帳 (`affiliate.ads`) と読み込み口の変更でだけ起動する。案件の台帳 (`affiliate.offer-profiles`) の変更は、配信する `AFFILIATE_ADS` の `isActive` (配信の保留) と `offerProfile` を変えるのに、案件だけを変えた push では R2 の `app/affiliate-ads/all.json` が作り直されない (2026-11-11 に workflow の paths と読み込み口の結合の式を読んで確認。台帳を `data/` へ移す前の TS のころから同じ)。
+- **次**: paths に案件の台帳と、配信の保留を決める `apps/web/src/features/ads/constants/affiliate-delivery-policy.ts` を足すか、オーナーと決める (起動のたびに R2 への書き込みと全ゾーンのパージが走るため)
+- **完了条件**: 案件の台帳だけを変えた push で、R2 の広告の snapshot が作り直される
+
+### [THEME-SOURCE-PROPOSAL-WRITES-TS-01] テーマの出典の提案を作る道具が、移した後も TS を書き・読む
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:データ]
+
+2026-11-11 にテーマの出典 19 件を台帳 `themes.sources` (`data/themes/sources/<名前>.json`) へ移した。提案を作る `prepare-proposal.py:11` は今も `property-price-distribution-source.ts` (as const 付きの TS) を書き、`ingest-bridge-inspection-age.mjs:19` の `--proposal-dir` も提案を TS として読む。新しい提案を取り込むときは、手で JSON の台帳へ写すことになる。
+- **次**: 提案を台帳と同じ JSON の形で書き・読む形に直す (`themes.sources.schema.json` で検査できる)
+- **完了条件**: 提案のファイルを台帳へそのまま置けて、`npm run check-datasets` が通る
+
+### [GEO-ANALYSIS-CONTENT-ID-DANGLING-01] Geo 分析 3 件の contentId が、事業計画のコンテンツの機会に無い
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-11] [領域:データ]
+
+台帳 `geo.analyses` の土砂・低標高・公共施設の 3 分析は、contentId に geo-107・geo-129・geo-128 を持つが、台帳 `business-plan.content-opportunities` の機会は geo-001〜geo-100 しか無い (2026-11-11 に段 11 で参照を宣言して判明)。いまは `config/datasets.mjs` の `geo.analyses` の参照を `severity: "warn"` で通している。
+- **次**: 事業計画の担当が、機会を足すか contentId を直すかを決める
+- **完了条件**: 3 件が実在する機会を指し、`geo.analyses` の `contentId` の参照から `severity: "warn"` を外しても `npm run check-datasets` が error 0
+
+### [AFFILIATE-SIZE-CHECK-WRITES-STATE-01] pre-commit の広告のサイズ検査が、在庫の記録を書いて作業ツリーに差分を残す
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-11] [領域:アフィリエイト]
+
+`apps/web/scripts/pre-commit-checks.sh` の「6.7 アフィリエイト広告のサイズ規約チェック」は、広告の台帳がステージされると `audit-affiliate-inventory.ts --json --check-size` を走らせる。このスクリプトは `--json` でも `data/affiliate/inventory-latest.json` と `inventory-<日付>.json` を書く (`audit-affiliate-inventory.ts:160-161`)。コミットのたびに生成日時だけの差分と未追跡の日付のファイルが残り、次のコミットに混ざりうる (2026-11-11 に段 10 のコミットで 2 回起きた)。
+- **次**: 検査の経路では書かない指定 (例 `--check-size` のときは書かない) にする
+- **完了条件**: 広告の台帳を含むコミットの後に `git status --short` が空
 
 ### [PATHS-CONSTANT-CWD-01] `config/paths.mjs` の定数を、リポジトリのルートと結合せずに読むスクリプトを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run type-check:scripts] [起票:2026-11-11] [領域:管理]
@@ -998,7 +1027,7 @@ updated: 2026-11-01
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-27] [期日:2026-11-13] [領域:アフィリエイト]
 
 - **起点 (2026-10-27 オーナー判断)**: vault の 3 面アフィリ方針 (コンテンツ戦略SSOT §4 `affiliate-strategy-3faces`) を採用。stats47 で認める金融は「無料の口座開設」(証券口座など) まで。保険の一括見積もり・保険相談は読者に重い行動を求め、運営者に当事者性も無いので出さない。`AFF-A8-EXPANSION-2026-10` で 10-19 に登録した保険相談 4 件 (ガーデン 3・みんなの生命保険アドバイザー) と、配信中の保険の一括見積もりが対象。10-19 の「提携できるものは提携して展開」より、この判断を優先する。
-- **次**: ① `affiliate-ads-data.ts` と `affiliate-offer-profiles-data.ts` から、保険の見積もり・相談に当たる広告を洗い出してオーナーに一覧を見せる ② 該当を `isActive: false` にする (削除せず履歴の照合に残す) ③ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページから消えたことを確かめる。SBI 証券など無料の口座開設は残す。
+- **次**: ① 台帳 `affiliate.ads` と `affiliate.offer-profiles` から、保険の見積もり・相談に当たる広告を洗い出してオーナーに一覧を見せる ② 該当を `isActive: false` にする (削除せず履歴の照合に残す) ③ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページから消えたことを確かめる。SBI 証券など無料の口座開設は残す。
 - **停止条件**: 無料の口座開設・A8 と楽天のほかの案件に触らない。提携の解除は急がない (配信を止めれば足りる)。`ASP-CONSOLIDATE-A8-RAKUTEN-01` と同じデプロイ不要の経路でまとめてよい。
 - **完了条件**: 本番の `app/affiliate-ads/all.json` で保険の見積もり・相談の広告が配信中 0 件、金融の配信中は無料の口座開設だけになっている。
 
@@ -1006,9 +1035,9 @@ updated: 2026-11-01
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-31] [領域:アフィリエイト]
 
 - **起点 (2026-10-31 オーナー指示「提携できるものは全て提携　利用できるものは全て利用」)**: afb の未提携 32 件は申請ボタンが無く、確かめた 14108・16418 は「提携却下」(画面上部の件数は 却下 41)。`affiliate-status.mjs` は提携中 (`rel=rel`)・申請中 (`rel=1`) しか読まないので台帳 `affiliate-catalog.json` では `none` のまま残り、`affiliate-apply.mjs` の afb 経路も誤った理由を出す。
-- **次**: ① afb の却下の一覧 (画面上部の「却下」のリンク先) を `affiliate-status.mjs` で読み、台帳の語彙に `rejected` を足して取り込む。申請スクリプトの理由文を「申請ボタン無し (却下・解除・申請済みのいずれか)」に直す ② もしも 3 件 (6548・5905・6970) はサイト ID の読み戻しで止まった。詳細ページを見て終了か確かめる ③ もしも・afb の提携済み 119 件のうち在庫に載るのは 4 件だけ。`moshimo-inspect-offer.mjs` で成果条件を確かめ、掲載適格性 (10-31 に書いた `terms-unverified` を外す) → `moshimo-harvest.mjs` / `afb-harvest.mjs` → `affiliate-ads-data.ts` へ登録する。
+- **次**: ① afb の却下の一覧 (画面上部の「却下」のリンク先) を `affiliate-status.mjs` で読み、台帳の語彙に `rejected` を足して取り込む。申請スクリプトの理由文を「申請ボタン無し (却下・解除・申請済みのいずれか)」に直す ② もしも 3 件 (6548・5905・6970) はサイト ID の読み戻しで止まった。詳細ページを見て終了か確かめる ③ もしも・afb の提携済み 119 件のうち在庫に載るのは 4 件だけ。`moshimo-inspect-offer.mjs` で成果条件を確かめ、掲載適格性 (10-31 に書いた `terms-unverified` を外す) → `moshimo-harvest.mjs` / `afb-harvest.mjs` → 台帳 `affiliate.ads` へ登録する。
 - **停止条件**: `AFF-HEAVY-FINANCE-STOP-01` (保険の見積もり・相談を出さない) を優先する。10-31 に A8 で申請した保険の 4 件 (保険クリニック・保険見直しラボ・保険コンパス・マネカフェ) は承認されても在庫に登録しない。afb のログインは毎回オーナーが要る。
-- **完了条件**: 台帳の afb の `none` が実機の未提携だけになり (却下は `rejected`)、もしも・afb の提携済みのうち規約に合う案件が `affiliate-ads-data.ts` に登録されている。
+- **完了条件**: 台帳の afb の `none` が実機の未提携だけになり (却下は `rejected`)、もしも・afb の提携済みのうち規約に合う案件が 台帳 `affiliate.ads` に登録されている。
 
 ### [ADSENSE-FIXED-UNITS-01] ページ末の 2 枠に専用の表示広告ユニットを作り、借りているユニットを返す
 タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-31] [領域:サイト]
@@ -1168,17 +1197,17 @@ updated: 2026-11-01
 
 - **なぜ**: 属性の情報が 5 か所 (`GeoSourceField` in `packages/data-configs/src/business-plan/geo-source-pages.ts`・`packages/gis/src/mlit-ksj/classifications.ts`・`packages/gis/src/infra-history/networks.ts` の `attributes`・`registry.ts` の `prefectureSource` と未使用の `propertyMap`) に分かれ、`npm run check-datasets` の検査から外れている。実物を開いて初めて分かった例: 鉄道の現況 N02 の属性名は `serviceProviderType` (N05 は `N05_001`)、空港 N08 は 1 ファイルに区域 `N08_001〜018` と標点 `N08_019〜025` が混在、標点の `N08_021` は意味が未確認。決まりは memory `feedback_authored_ledgers_in_data`・`.claude/rules/data-storage.md` (前例 `data/themes/catalogs/<key>.json`)。
 - **決定 (2026-10-29 オーナー)**: 台帳を 3 つに分ける。① 原典台帳 `data/geo/attributes/<dataId>.json` = 地物の種類・属性の役割・コード表 (公式の意味)・利用条件と了承の記録 (今は `networks.ts` の `PHONE_PERMISSION_2026_10_29` と `datasets.ts` の `usageTerms`)。② 主題の台帳 `data/geo/subjects/subjects.json` + Schema (作成済み・8 主題) = 表示名・区分のまとめ方・色・年の合わせ方・描いてよい範囲 (区分のまとめ方と色はこちらが正本)。③ 生成物の manifest (人が書かない)。`networks.ts` も最終的に①②から組み立てる。移行期間は `classifications.test.ts` の「移行期間」で一致を固定している。
-- **方針**: 属性の意味は `data/geo/attributes/<dataId>.json` + `config/schema/geo-attributes.schema.json` (人・`gis-curator`)、コード表と区分は `data/geo/classifications.json` + Schema (共有コード表)、観測した属性の一覧は生成物 `data/geo/attribute-inventory.json` (パイプライン)、読み込み・型・判定関数は `packages/gis`。役割は固定の語彙 `name`・`startYear`・`endYear`・`category`・`relation`・`prefecture`・`identifier`・`measure`・`other` にし、読む側はすべて役割から引く。
+- **方針**: 属性の意味は `data/geo/attributes/<dataId>.json` + `config/schema/geo-attributes.schema.json` (人・`gis-curator`)、コード表と区分は `data/geo/ksj/classifications.json` + Schema (共有コード表)、観測した属性の一覧は生成物 `data/geo/attribute-inventory.json` (パイプライン)、読み込み・型・判定関数は `packages/gis`。役割は固定の語彙 `name`・`startYear`・`endYear`・`category`・`relation`・`prefecture`・`identifier`・`measure`・`other` にし、読む側はすべて役割から引く。
 - **手順 (この順で。各段で検証コマンドを通してから次へ)**:
   1. **観測を取る**: 取り込み (`run-pipeline.ts` / `acquire-public-ksj.ts`) が属性の一覧を manifest に書き出す。既存の公開 50 件は R2 の配布ファイルから一度だけ埋める (R2 は読むだけ)。`config/datasets.mjs` に `data/geo/attribute-inventory.json` を Schema 付きで足し、未整理の規模 (データ数 × 属性数) をカードに追記する。
-  2. **区分を移す**: `classifications.ts` の中身 (N06・N05・N02・N08) を `data/geo/classifications.json` + Schema へ移し、TS は読み込みと型と `findKsjClassification` / `ksjClassification` / `classifyKsjFeature` だけにする。読む側の呼び方は変えない。テストを JSON 版に向け、色はチャートのトークン 6 種だけを enum で許す。
+  2. (2026-11-11 済み) **区分を移す**: `classifications.ts` の中身を台帳 `geo.ksj-classifications` (`data/geo/ksj/classifications.json` + Schema) へ移した (LEDGER-DB-UNIFY-01 の段 12b)。区分のまとめ方と色は主題の台帳 `data/geo/subjects/subjects.json` にも写しがあり、`classifications.test.ts` の「移行期間」のテストが一致を固定している。写しの統合は LEDGER-DB-UNIFY-01 の段 13 で判断する
   3. (2026-10-29 済み) GIS の ID を `config/datasets.mjs` の `REGISTRIES["ksj-datasets"]` に登録済み。`classifications.json` と `attributes/*.json` の dataId を `refs` で検査する。
   4. **属性の意味の型を決める**: Schema を作り、使っているデータ (N06・N05・N08・N02・単体ページで項目説明を持つデータ) から埋める。意味は製品仕様書から取り、文書名・版・確認日を残す。分からない属性は `meaning: "未確認"`。
   5. **突き合わせの検査を足す**: R2 なしのテストで、観測にあって台帳にない属性を縮小専用の一覧で固定し (`KNOWN_MISSING_SOURCE_PAGE` と同じ形)、台帳にあって観測に無い属性はエラーにする。pre-commit と CI (`test:packages`) に載せる。
   6. **読む側を役割から引く形に寄せる**: 交通網の `attributes`、`prefectureSource`、`GeoSourceField` を台帳の役割と説明から引く。項目の定義は JSON を data-configs と gis の両方が読み、data-configs には読み物の文章だけを残す。
   7. **既存の TS 台帳の扱いを決める (別の判断)**: `datasets.ts`・`registry.ts`・`networks.ts` を JSON + Schema へ移すかをオーナーが決める。移すなら `KsjDataId` の型の弱まりを Schema 検証と読み込み時の型で補う方法を先に示し、移さないなら data-storage.md に例外と理由を書く。
 - **停止条件・禁止**: 製品仕様書で確かめていない意味を書かない (未確認と書く)。観測の生成物を手で直さない。区分やコードの意味を交通網・単体ページ側に複製しない。R2 へは書かない (観測は読むだけ)。手順 7 はオーナーの判断の前に着手しない。
-- **完了条件**: `npm run check-datasets` が `data/geo/classifications.json`・`data/geo/attributes/*.json`・`data/geo/attribute-inventory.json` を Schema と `refs` で検査して通る。区分と役割を読む側がすべて台帳から引いている (`packages/gis` に区分のデータが残っていない)。突き合わせの検査が CI に載り、未整理の件数が数字で分かる。
+- **完了条件**: `npm run check-datasets` が `data/geo/ksj/classifications.json`・`data/geo/attributes/*.json`・`data/geo/attribute-inventory.json` を Schema と `refs` で検査して通る。区分と役割を読む側がすべて台帳から引いている (`packages/gis` に区分のデータが残っていない)。突き合わせの検査が CI に載り、未整理の件数が数字で分かる。
 
 ### [UI-COMPONENT-CONSOLIDATE-01] 同じ役割の UI 部品を 1 つにまとめ、名前を「対象 + 役割」に揃える (推移・数値タイル・凡例・高速道路の時系列地図)
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-29] [領域:サイト]
@@ -2012,7 +2041,7 @@ updated: 2026-11-01
 - **停止条件**: `targetRankingKeys` なしで decision レーンの案件を登録しない。広告主が求める事前手続きを済ませずに配信しない。
 - **完了条件**: 承認済みの対象案件が本番の対象ページに出て、ほかのページに出ない。効果の観測は improvements の別 ID (`[kpi: affiliate-yield]`) へ引き渡す。
 - **統合 (2026-10-26 オーナー判断): `AFF-SMBC-NL-01`** 三井住友カード（NL）を A8 で提携し、家計・所得のランキングに限って配信する
-  - **次 (実行順)**: ① (済) ② `check-approval` で承認を確かめる ③ `harvest --id` で広告コードを取り、案件プロファイル (`affiliate-offer-profiles-data.ts`、lane=decision・F4・allowedPageTypes=ranking) と広告 (`affiliate-ads-data.ts`、`targetRankingKeys` を提出したページだけに限定) を登録 ④ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページだけにバナーが出て、ほかのページに出ないことを確かめる。
+  - **次 (実行順)**: ① (済) ② `check-approval` で承認を確かめる ③ `harvest --id` で広告コードを取り、案件プロファイル (台帳 `affiliate.offer-profiles`、lane=decision・F4・allowedPageTypes=ranking) と広告 (台帳 `affiliate.ads`、`targetRankingKeys` を提出したページだけに限定) を登録 ④ develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページだけにバナーが出て、ほかのページに出ないことを確かめる。
   - **停止条件**: 提出していないページに出る設定 (`targetRankingKeys` なし) で登録しない。承認前にバナーを置かない。
   - **完了条件**: 提出したページの本番 HTML に広告が出て、それ以外のページに出ない。効果の観測は improvements の別 ID (`[kpi: affiliate-yield]`) へ引き渡す。
 
@@ -3193,7 +3222,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 ### [NOTE-HASHTAG-ROLLOUT-20261003] note公開記事のハッシュタグを承認済みの99個へ置き換える
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-03] [領域:商品]
 
-- **正典**: 記事ごとの承認済みタグは `data/note/hashtags/<slug>.json` (全286件)。作成は `propose-note-hashtags.mjs`、反映は `update-published-hashtags.mjs`、検査は `lib/note-hashtags.mjs`。反映済みかどうかは台帳に持たず、毎回 `--audit-only` で note から取り直す。
+- **正典**: 記事ごとの承認済みタグは台帳 `note.hashtags` (`data/note/hashtags.json`。全286件)。作成は `propose-note-hashtags.mjs`、反映は `update-published-hashtags.mjs`、検査は `lib/note-hashtags.mjs`。反映済みかどうかは台帳に持たず、毎回 `--audit-only` で note から取り直す。
 - **現状 (2026-10-12)**: 承認済みと一致 280/286。残り 6 件はすべて下書きが残って停止 (`draft_blocked`): 有料 `paid-n92b846280d1a`・`paid-nfe2c65e669a8` (以前からの下書き。内容を確認してから扱いを決める) と、無料 4 件 `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f`。無料 4 件はエディタがリンクカードの href を旧ブログURLの転送先に書き換えるため本文一致の安全装置で止まる。**リンク先の書き換えを許すかはオーナー判断** (許すなら比較で href の転送先を正規化する)。下書きは note の編集画面で破棄すれば解消する。`a-late-elderly-medical-expense-per-insured` は `--slugs a-late-elderly-medical-expense-per-insured --allow-free-draft` で片付く。
 - **実行**: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid` (一致する記事は飛ばすので再実行でよい。1 件 約40秒)。Claude デスクトップアプリからは Chrome Profile 5 が macOS のプライバシー保護で読めないので、ログイン済み Playwright プロファイルの Chrome へ `NOTE_BU_CDP` で接続するか、Terminal.app からオーナーが実行する。有料で下書きが残った記事は自動では触らない。
 - **停止条件**: 3 件連続の失敗、本文・価格・有料/試し読み境界の変化、更新後のタグ集合が承認済みと一致しない場合はその記事で止まる。note は大文字小文字を既存タグに合わせて書き換え、ギリシャ文字などは黙って落とす (検査で除外済み)。
@@ -3570,7 +3599,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
 - **背景 (2026-09-25 `/areas/13000` 実測)**: 「有効求人倍率の推移」は 2022年度の 1 点、「1人当たり県民所得の推移」は
-  2020〜2021年度の 2 点だけで推移として機能していない (e-Stat をその場で読むグラフ。`template.ts` の
+  2020〜2021年度の 2 点だけで推移として機能していない (e-Stat をその場で読むグラフ。台帳 `areas.databook-template` の
   `area-ov-job-opening` / `area-ov-prefectural-income`、原因は未確認)。390px では高さ 9px 未満のグラフ文字が 80 個あり、
   「高齢化率・年少人口割合の推移」「高齢者世帯の推移」の縦軸に単位が無い。縦軸目盛りの切れは `UI-CHART-TEXT-LOOP-01` の担当。
 - **次**: ① 点数不足の原因 (statsDataId の年範囲・取得パラメータ・キャッシュ) を実測で特定し、年を揃えた系列に直すか、
@@ -3710,7 +3739,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 
 - **owner**: area-curator (対象の確定) / image-prompt-curator (画像)
 - **実測 (2026-09-23)**: 600 URL の試運転で 12 県・21 枚の `app/areas/<code>/specialty/*.webp` が R2 で 404 (例: 07000 nameko / 10000 brix-nine・aka-imo / 12000 tomisato-suika・shiro-takenoko / 22000 midori-mai・kajiki / 24000 ise-hijiki・ao-sanori)。画面は `SpecialtyImage` が頭文字タイルに切り替えるので壊れては見えないが、写真が出ていない。全件の件数は次回の週次監査の `degraded_images` で確定する。
-- **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
+- **次**: 週次結果から欠落の全リストを出し、台帳 `areas.editorial` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 - **決定 (2026-10-26 オーナー)**: 頭文字タイルの正式化はせず、欠けている画像を用意する。次は週次監査の `degraded_images` から欠落の全リストを出し、image-prompt-curator で生成する。
 
@@ -4343,7 +4372,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
   1. Windows で別の Playwright profile を読む可能性がある絶対パス直書き: `.claude/skills/sns/publish-x/check-x-scheduled.ts`・`.claude/skills/sns/update-x-profile/update-x-profile.cjs` (publish-x と profile を共有するため見送った)。
   2. 県名の短縮処理: `@stats47/area` の `prefectureShortName` へ寄せた (北海道は落とさない)。残りは単一実装の検査 `packages/area/src/utils/__tests__/prefecture-short-name-single-impl.test.ts` の許可リスト 6 件 (縮小のみ。`packages/svg-builder/src/charts/bar-chart.ts:192` は北海道を「北海」にする) と、TS の正本を import できない `.claude/scripts` の .mjs 18 ファイル。
   3. スクリプトの小さな重複ヘルパー: JST 変換 27、getArg 52、fetchText 20、dotenv 読み込み 27、ブラウザ起動引数 16 (ISO 週は `SCRIPT-ISO-WEEK-UNIFY-01`、Google API の認証は `SCRIPT-GOOGLE-CLIENT-UNIFY-01`)。挙動の差を一覧にしてから共通化するか決める。
-  4. データ表の重複: `apps/ges/scripts/data/ports.json` と `packages/area/src/data/ports.json` (キー形式・精度差)、県庁所在地の座標 3 か所 (精度差)、8・10 区分の地方区分。databook のカテゴリ名と migration-flow の FocusFile 変換は寄せた (配布済みの xlsx は再生成していない)。
+  4. データ表の重複: 県庁所在地の座標 3 か所 (精度差)、8・10 区分の地方区分。databook のカテゴリ名と migration-flow の FocusFile 変換は寄せ、港湾は 2026-11-11 に ges の写しを消して台帳 `areas.ports` を読む形にした (配布済みの xlsx は再生成していない)。
   5. remotion の一部・ges・migration-flow は `@stats47/area` などを依存に持たず県リスト等を再定義している (svg-builder と product-factory は宣言済み)。依存を足すか (package-lock の更新を伴う) を決める。
 - **2026-10-26 の変更で未確認のもの**: 調査名は解決時にマスタ (`surveys.master`) で上書きしているが、`build-estat-provenance.ts` の出力に旧表記が残る。Kindle の単位検査 (`content-invariants.ts`) を `parseUnit` に変えたあと、既存の版の `verify-epub` は再実行していない。remotion の `shared/utils/choropleth.ts` と `features/geo-x/GeoInsightCard.tsx` は 5 桁の市区町村コードを県コードに寄せるようになったので、次にこの 2 つで画像を作るときに前の版と目視で比べる。
 - **trigger**: 上のどれかを触る改修が入るとき、または同じ値の不一致で不具合が出たとき。

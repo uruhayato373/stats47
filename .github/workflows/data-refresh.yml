@@ -50,7 +50,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #     - 「既存データを 0 件で上書きしない」保護は metric ごとに常時働く (allowEmpty でも無効化されない)
 #     - allowEmpty が落とすのは「未登録の 0 件があったら全体を止める」という一括ゲートだけ
 #   request file は消費されるので効果はその run 限り。恒久的に 0 件が正しいなら
-#   expected-empty.ts の EXPECTED_EMPTY に理由・追跡先・期限を添えて登録する。
+#   台帳 data-quality.expected-empty に理由・追跡先・期限を添えて登録する。
 #   **0 件の原因調査を省略する口実に使わない** (使うたびに未修正の defect が残っている)。
 
 on:

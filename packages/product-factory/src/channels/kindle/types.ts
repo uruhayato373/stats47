@@ -2,10 +2,10 @@
  * Kindle 出版ファクトリー — 型定義 (SSOT)
  *
  * 正典: .claude/rules/kindle-publishing-standards.md / このファイル
- * 企画の SSOT: book-catalog.ts の sourceIdeas / newContentNote。
+ * 企画の SSOT: 台帳 `products.kindle-books` の sourceIdeas / newContentNote。
  * 初期市場調査・書籍調査は Git 履歴に保持する。
  *
- * 完全DBレス: 書籍カタログ (KINDLE_BOOKS) は git TS が SSOT。本文素材は R2
+ * 完全DBレス: 書籍カタログ (KINDLE_BOOKS) は台帳 `products.kindle-books` (data/products/kindle/books.json) が SSOT。本文素材は R2
  * (`app/blog/<slug>/article.md` + `data/*.svg`) が SSOT。生成物 (.local/kindle-books/<id>/v1/book.epub)
  * は派生物 (手編集を正典にしない・公開 R2 へ置かない)。KDP へのアップロードは人間工程。
  *

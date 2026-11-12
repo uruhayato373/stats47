@@ -1,0 +1,1127 @@
+{
+  "contentOpportunities": [
+    {
+      "id": "geo-001",
+      "category": "人口・未来",
+      "title": "2050年人口維持率マップ",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "ready",
+      "pilotOrder": 1
+    },
+    {
+      "id": "geo-002",
+      "category": "人口・未来",
+      "title": "2050年総人口減少率",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-003",
+      "category": "人口・未来",
+      "title": "若年人口が残る市区町村",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-004",
+      "category": "人口・未来",
+      "title": "高齢化が急速に進む地域",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-005",
+      "category": "人口・未来",
+      "title": "出生数減少の地域差",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-006",
+      "category": "人口・未来",
+      "title": "転入超過が続く自治体",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-007",
+      "category": "人口・未来",
+      "title": "人口減少でも世帯数が残る地域",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-008",
+      "category": "人口・未来",
+      "title": "昼夜間人口差マップ",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-009",
+      "category": "人口・未来",
+      "title": "人口集中地区の変化",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-010",
+      "category": "人口・未来",
+      "title": "単身世帯が増える地域",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-011",
+      "category": "人口・未来",
+      "title": "外国人人口増加地域",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-012",
+      "category": "人口・未来",
+      "title": "共働き世帯が多い地域",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-013",
+      "category": "人口・未来",
+      "title": "大学進学年代人口の将来",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-014",
+      "category": "人口・未来",
+      "title": "労働力人口減少マップ",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-015",
+      "category": "人口・未来",
+      "title": "人口規模別の将来性比較",
+      "geography": "市区町村",
+      "primaryRevenue": "レポート/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-016",
+      "category": "住まい・移住",
+      "title": "地価×将来人口",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "ready",
+      "pilotOrder": 2
+    },
+    {
+      "id": "geo-017",
+      "category": "住まい・移住",
+      "title": "地価が低く人口減少が緩やか",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-018",
+      "category": "住まい・移住",
+      "title": "空き家×人口減少",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-019",
+      "category": "住まい・移住",
+      "title": "持ち家率×所得",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-020",
+      "category": "住まい・移住",
+      "title": "住宅面積×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-021",
+      "category": "住まい・移住",
+      "title": "駅近×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-022",
+      "category": "住まい・移住",
+      "title": "医療アクセス×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-023",
+      "category": "住まい・移住",
+      "title": "子育て指標×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-024",
+      "category": "住まい・移住",
+      "title": "雪の少なさ×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-025",
+      "category": "住まい・移住",
+      "title": "気温×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-026",
+      "category": "住まい・移住",
+      "title": "都市部へのアクセス×地価",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-027",
+      "category": "住まい・移住",
+      "title": "移住候補スコア",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-028",
+      "category": "住まい・移住",
+      "title": "賃金×住宅コスト",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-029",
+      "category": "住まい・移住",
+      "title": "住宅着工×人口増減",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-030",
+      "category": "住まい・移住",
+      "title": "転入超過×住宅供給",
+      "geography": "市区町村/地点",
+      "primaryRevenue": "住宅/引越しAffiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-031",
+      "category": "防災",
+      "title": "洪水浸水×人口",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "ready",
+      "pilotOrder": 3
+    },
+    {
+      "id": "geo-032",
+      "category": "防災",
+      "title": "土砂災害×人口",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-033",
+      "category": "防災",
+      "title": "津波想定×人口",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-034",
+      "category": "防災",
+      "title": "地震リスク×人口",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-035",
+      "category": "防災",
+      "title": "災害リスク×地価",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-036",
+      "category": "防災",
+      "title": "災害リスク×高齢者",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-037",
+      "category": "防災",
+      "title": "避難所アクセス",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-038",
+      "category": "防災",
+      "title": "病院×災害リスク",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-039",
+      "category": "防災",
+      "title": "学校×浸水想定",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-040",
+      "category": "防災",
+      "title": "鉄道駅×浸水想定",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-041",
+      "category": "防災",
+      "title": "工業集積×災害リスク",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-042",
+      "category": "防災",
+      "title": "観光地×災害リスク",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-043",
+      "category": "防災",
+      "title": "複合ハザード相対スコア",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-044",
+      "category": "防災",
+      "title": "標高×人口分布",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-045",
+      "category": "防災",
+      "title": "災害リスクの地域内偏在",
+      "geography": "メッシュ/地点",
+      "primaryRevenue": "レポート/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-046",
+      "category": "医療・生活",
+      "title": "高齢者×病院アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-047",
+      "category": "医療・生活",
+      "title": "人口×診療所不足",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-048",
+      "category": "医療・生活",
+      "title": "薬局アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-049",
+      "category": "医療・生活",
+      "title": "救急医療アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-050",
+      "category": "医療・生活",
+      "title": "小児医療アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-051",
+      "category": "医療・生活",
+      "title": "産科アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-052",
+      "category": "医療・生活",
+      "title": "介護施設×高齢者",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-053",
+      "category": "医療・生活",
+      "title": "スーパー空白地域",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-054",
+      "category": "医療・生活",
+      "title": "コンビニ空白地域",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-055",
+      "category": "医療・生活",
+      "title": "公園アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-056",
+      "category": "医療・生活",
+      "title": "図書館アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-057",
+      "category": "医療・生活",
+      "title": "学校アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-058",
+      "category": "医療・生活",
+      "title": "生活利便性スコア",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-059",
+      "category": "医療・生活",
+      "title": "徒歩生活しやすい地域",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-060",
+      "category": "医療・生活",
+      "title": "高齢者生活圏スコア",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "B2B/移住",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-061",
+      "category": "交通・都市",
+      "title": "駅徒歩圏人口",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-062",
+      "category": "交通・都市",
+      "title": "駅アクセス×将来人口",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "ready",
+      "pilotOrder": 4
+    },
+    {
+      "id": "geo-063",
+      "category": "交通・都市",
+      "title": "鉄道空白地域",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-064",
+      "category": "交通・都市",
+      "title": "公共交通空白×高齢者",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-065",
+      "category": "交通・都市",
+      "title": "道路密度×人口",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-066",
+      "category": "交通・都市",
+      "title": "DID人口密度",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-067",
+      "category": "交通・都市",
+      "title": "中心市街地集中度",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-068",
+      "category": "交通・都市",
+      "title": "都市のコンパクト度",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-069",
+      "category": "交通・都市",
+      "title": "新幹線アクセス×人口",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-070",
+      "category": "交通・都市",
+      "title": "空港アクセス×観光",
+      "geography": "メッシュ/市区町村",
+      "primaryRevenue": "移住/B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-071",
+      "category": "地域経済・商圏",
+      "title": "人口に対する店舗不足",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-072",
+      "category": "地域経済・商圏",
+      "title": "事業所密度×人口",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-073",
+      "category": "地域経済・商圏",
+      "title": "所得×地価",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-074",
+      "category": "地域経済・商圏",
+      "title": "雇用×人口移動",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-075",
+      "category": "地域経済・商圏",
+      "title": "商業販売額×人口",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-076",
+      "category": "地域経済・商圏",
+      "title": "観光需要×宿泊供給",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-077",
+      "category": "地域経済・商圏",
+      "title": "飲食店密度×昼間人口",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-078",
+      "category": "地域経済・商圏",
+      "title": "物流拠点×道路アクセス",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-079",
+      "category": "地域経済・商圏",
+      "title": "工業集積×人口",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-080",
+      "category": "地域経済・商圏",
+      "title": "新規出店候補スコア",
+      "geography": "市区町村/メッシュ",
+      "primaryRevenue": "商圏B2B",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-081",
+      "category": "観光・地域魅力",
+      "title": "宿泊者数×宿泊施設",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-082",
+      "category": "観光・地域魅力",
+      "title": "観光客集中度",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-083",
+      "category": "観光・地域魅力",
+      "title": "外国人宿泊比率",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-084",
+      "category": "観光・地域魅力",
+      "title": "鉄道アクセス×観光",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-085",
+      "category": "観光・地域魅力",
+      "title": "観光×季節性",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-086",
+      "category": "観光・地域魅力",
+      "title": "自然公園アクセス",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-087",
+      "category": "観光・地域魅力",
+      "title": "文化施設密度",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-088",
+      "category": "観光・地域魅力",
+      "title": "温泉地アクセス",
+      "geography": "市区町村",
+      "primaryRevenue": "旅行Affiliate",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-089",
+      "category": "自然・環境",
+      "title": "標高分布×人口",
+      "geography": "メッシュ",
+      "primaryRevenue": "レポート",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-090",
+      "category": "自然・環境",
+      "title": "傾斜×市街地",
+      "geography": "メッシュ",
+      "primaryRevenue": "レポート",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-091",
+      "category": "自然・環境",
+      "title": "日照×人口",
+      "geography": "メッシュ",
+      "primaryRevenue": "レポート",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-092",
+      "category": "自然・環境",
+      "title": "降雪×人口",
+      "geography": "メッシュ",
+      "primaryRevenue": "レポート",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-093",
+      "category": "自然・環境",
+      "title": "暑さ×高齢者",
+      "geography": "メッシュ",
+      "primaryRevenue": "レポート",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-094",
+      "category": "自然・環境",
+      "title": "緑地×人口",
+      "geography": "メッシュ",
+      "primaryRevenue": "レポート",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-095",
+      "category": "データ・AI",
+      "title": "地域指標の相関ネットワーク",
+      "geography": "県/市区町村",
+      "primaryRevenue": "Pro/note",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-096",
+      "category": "データ・AI",
+      "title": "AIに地域を探してもらうβ",
+      "geography": "県/市区町村",
+      "primaryRevenue": "Pro/note",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-097",
+      "category": "データ・AI",
+      "title": "自然言語でランキング絞り込み",
+      "geography": "県/市区町村",
+      "primaryRevenue": "Pro/note",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-098",
+      "category": "データ・AI",
+      "title": "都道府県をデータで似ている順にクラスタリング",
+      "geography": "県/市区町村",
+      "primaryRevenue": "Pro/note",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-099",
+      "category": "データ・AI",
+      "title": "市区町村タイプ分類",
+      "geography": "県/市区町村",
+      "primaryRevenue": "Pro/note",
+      "status": "candidate"
+    },
+    {
+      "id": "geo-100",
+      "category": "データ・AI",
+      "title": "データ更新差分マップ",
+      "geography": "県/市区町村",
+      "primaryRevenue": "Pro/note",
+      "status": "candidate"
+    }
+  ],
+  "xIdeas": [
+    {
+      "id": "x-01",
+      "title": "2050年の人口を市区町村で見ると「県平均」と全く違う",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "ready"
+    },
+    {
+      "id": "x-02",
+      "title": "人口が減る県の中でも人口が残る場所",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "ready"
+    },
+    {
+      "id": "x-03",
+      "title": "2050年人口維持率TOP10",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "ready"
+    },
+    {
+      "id": "x-04",
+      "title": "人口減少率が最も大きい地域を地図化",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "ready"
+    },
+    {
+      "id": "x-05",
+      "title": "若年人口が残る地域",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "ready"
+    },
+    {
+      "id": "x-06",
+      "title": "将来人口データの注意点3つ",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "ready"
+    },
+    {
+      "id": "x-07",
+      "title": "地価が安い＝人口が減る、は本当か",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-08",
+      "title": "地価×将来人口を重ねると見える街",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-09",
+      "title": "地価が高くないのに人口が残る候補",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-10",
+      "title": "空き家率×人口減少",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-11",
+      "title": "洪水浸水想定×人口分布",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-12",
+      "title": "同じ市内でも水害リスクは偏る",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-13",
+      "title": "災害リスクと地価を重ねた地図",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-14",
+      "title": "標高×人口分布",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-15",
+      "title": "洪水データの読み方",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-16",
+      "title": "駅の近くに2050年人口は残るか",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-17",
+      "title": "鉄道空白×高齢者",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-18",
+      "title": "駅アクセスが良く地価が低い地域",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-19",
+      "title": "高齢者人口×病院アクセス",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-20",
+      "title": "医療施設が人口に対して少ない地域",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-21",
+      "title": "スーパー空白地域の考え方",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-22",
+      "title": "生活利便性スコアを作る時の危険",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-23",
+      "title": "子育て世帯×公園/学校",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-24",
+      "title": "人口に対する店舗不足",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-25",
+      "title": "観光客に対して宿泊施設が少ない地域",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-26",
+      "title": "47都道府県をデータで似ている順に分類",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-27",
+      "title": "stats47で相関が高い指標を地図で検証",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-28",
+      "title": "1枚の地図を作るまでのデータ処理",
+      "format": "地図",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-29",
+      "title": "AIにGISを操作させる時にAIに任せない部分",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    },
+    {
+      "id": "x-30",
+      "title": "今月の地域データ5選",
+      "format": "地図/比較/裏側",
+      "linkPolicy": "週6本中2本だけリンク",
+      "status": "candidate"
+    }
+  ],
+  "noteProducts": [
+    {
+      "id": "note-product-01",
+      "month": 2,
+      "title": "IPSS将来人口を都道府県地図データにする",
+      "priceYen": 1980,
+      "status": "ready"
+    },
+    {
+      "id": "note-product-02",
+      "month": 2,
+      "title": "地域コード結合の完全チェックリスト",
+      "priceYen": 980,
+      "status": "ready"
+    },
+    {
+      "id": "note-product-03",
+      "month": 3,
+      "title": "洪水×人口メッシュ分析",
+      "priceYen": 2980,
+      "status": "ready"
+    },
+    {
+      "id": "note-product-04",
+      "month": 3,
+      "title": "国土数値情報をQGISで扱う",
+      "priceYen": 1980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-05",
+      "month": 4,
+      "title": "地価公示×将来人口",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-06",
+      "month": 4,
+      "title": "X/OGP地図カード自動生成",
+      "priceYen": 1980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-07",
+      "month": 5,
+      "title": "医療アクセス分析",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-08",
+      "month": 5,
+      "title": "GeoPackage/Parquet/PMTiles",
+      "priceYen": 1980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-09",
+      "month": 6,
+      "title": "stats47型データ品質管理",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-10",
+      "month": 7,
+      "title": "駅アクセス分析",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-11",
+      "month": 8,
+      "title": "商圏分析の基本",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-12",
+      "month": 9,
+      "title": "POIデータのライセンスと実務",
+      "priceYen": 1980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-13",
+      "month": 10,
+      "title": "自然言語→地域フィルタJSON",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-14",
+      "month": 11,
+      "title": "AIにPyQGISを書かせる検証法",
+      "priceYen": 2980,
+      "status": "gated"
+    },
+    {
+      "id": "note-product-15",
+      "month": 12,
+      "title": "1年分の地域分析テンプレ総集編",
+      "priceYen": 4980,
+      "status": "gated"
+    }
+  ]
+}

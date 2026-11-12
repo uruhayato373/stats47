@@ -130,3 +130,26 @@ describe("resolveContentVertical (出典調査 → タグ → カテゴリ)", ()
     expect(resolveContentVertical({ surveyIds: null, tagKeys: null, categoryKey: null }).source).toBe("none");
   });
 });
+
+describe("vertical の列挙 (コードの AffiliateVertical と台帳の Schema の 2 か所)", () => {
+  // 写像の記録は台帳 affiliate.vertical-map (JSON) に移したので、値の列挙は Schema の enum が縛る。
+  // 型 AffiliateVertical・AFFILIATE_VERTICALS と同じ 10 軸・同じ並びであることを固定する (どちらかだけ足すと落ちる)
+  const readSchema = (name: string) =>
+    JSON.parse(readFileSync(path.resolve(process.cwd(), `../../config/schema/${name}.schema.json`), "utf8"));
+
+  it("意図軸の対応表・広告・案件の Schema の enum が AFFILIATE_VERTICALS と一致する", () => {
+    const verticalMap = readSchema("affiliate.vertical-map");
+    const ads = readSchema("affiliate.ads");
+    const profiles = readSchema("affiliate.offer-profiles");
+    const enums = {
+      "vertical-map": verticalMap.definitions.vertical.enum,
+      "vertical-map (null 可)": verticalMap.definitions.verticalOrNull.enum.filter((v: string | null) => v !== null),
+      ads: ads.properties.ads.items.properties.vertical.enum,
+      "offer-profiles.vertical": profiles.properties.profiles.items.properties.vertical.enum,
+      "offer-profiles.allowedVerticals": profiles.properties.profiles.items.properties.allowedVerticals.items.enum,
+    };
+    for (const [name, values] of Object.entries(enums)) {
+      expect(values, name).toEqual([...AFFILIATE_VERTICALS]);
+    }
+  });
+});

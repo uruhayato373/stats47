@@ -22,14 +22,15 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const CARDS_DIR = path.join(PROJECT_ROOT, "apps/web/public/finance-cards/cities");
 const SIMILAR_JSON = path.join(PROJECT_ROOT, "apps/web/public/finance-cards/similar-averages.json");
-const PREFECTURES_JSON = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
-const CITIES_JSON = path.join(PROJECT_ROOT, "packages/area/src/data/cities.json");
+const PREFECTURES_JSON = path.join(PROJECT_ROOT, datasetPath("areas.prefectures"));
+const CITIES_JSON = path.join(PROJECT_ROOT, datasetPath("areas.cities"));
 
 const args = process.argv.slice(2);
 const getArg = (flag, fallback = null) => {

@@ -11,7 +11,7 @@
  *     由来と同じ `data/affiliate/` に committed SSOT として残す。
  *   - パス解決を `process.cwd()` 相対ではなく `repoRoot()`（asp-browser-base.mjs 由来）に変更し、
  *     実行ディレクトリや OS に依存しないようにした。
- *   - programIdMap は **stats47 の広告 SSOT (apps/web/scripts/affiliate-ads-data.ts) の mid= から
+ *   - programIdMap は **stats47 の広告 SSOT (台帳 affiliate.ads) の mid= から
  *     機械生成**した 72 件（doboku-note 版は手書き 4 件）。他サイト専用プログラムの除外リストは
  *     `_dobokuPrograms` ではなく `_otherSiteProgramIds.ids` を読む。
  *   - ★**両サイトが同じ A8 案件を配信している 3 プログラム**（`_sharedWithDobokuNote`）は

@@ -71,7 +71,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | **city-databook** (municipality-ranking の直後) | `packages/ranking/src/scripts/generate-city-databooks.ts` | `app/areas/{pref}/cities/{city}/databook.json` — 市区町村ランキングの配信値を市区町村ごとに束ねる (`.local/r2` にこの run の版があればそれ、無ければ配信中の版)。公開対象の市区町村に人口の値が無ければ失敗にする。単独実行時は `app/areas` prefix だけを push する | 1,741 files (最大 ~55KB) |
 | blog | `apps/web/scripts/export-blog-snapshot.ts` (article.md) | `app/blog/all.json` | ~150KB |
 | page-components | `apps/web/scripts/export-page-components-snapshot.ts` (git TS `data/page-components/`) | `app/page-components/{pageType}/{key}.json` (per-page, 98 files) | ~150KB |
-| affiliate-ads | `apps/web/scripts/export-affiliate-ads-snapshot.ts` (git TS `affiliate-ads-data.ts`) | `app/affiliate-ads/all.json` | ~15KB |
+| affiliate-ads | `apps/web/scripts/export-affiliate-ads-snapshot.ts` (台帳 `affiliate.ads`) | `app/affiliate-ads/all.json` | ~15KB |
 | ranking-page-cards | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `app/ranking/{key}/page-cards.json` | ~16KB |
 | station-passengers | `apps/web/scripts/export-station-passengers-snapshot.ts` | `app/station-passengers/{NN}/{stations,lines}.json` ・ `app/station-passengers/index.json` | ~10MB (95 files) |
 | correlation (Derived・エフェメラル計算) | `packages/correlation/src/scripts/build-correlation-snapshot.ts` | `app/correlation/top-pairs.json` ・ `stats.json` ・ `by-ranking-key/{key}.json` — R2 観測値を使い捨て `:memory:` SQLite で集計 (Pearson r / 偏相関 / effectiveR)。`/recompute-correlations` の実体 | ~2000+ files |

@@ -1,4 +1,4 @@
-import prefecturesData from "../data/prefectures.json";
+import prefecturesData from "../../../../data/areas/master/prefectures.json";
 
 /** e-Stat の全国行 areaCode。 */
 export const NATIONAL_AREA_CODE = "00000";

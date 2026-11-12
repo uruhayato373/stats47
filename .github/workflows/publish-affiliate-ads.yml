@@ -1,10 +1,10 @@
 name: 💴 Publish Affiliate Ads → R2
 
-# affiliate_ads の git TS SSOT (apps/web/scripts/affiliate-ads-data.ts) を
+# 広告の台帳 affiliate.ads と読み込み口 (apps/web/scripts/affiliate-ads-data.ts) を
 # R2 snapshot (app/affiliate-ads/all.json) に反映する push 駆動 workflow。
 #
 # 背景 (2026-06-02): 外部連携トークン (Claude GitHub App) は actions:write を持たず
-# workflow_dispatch を起動できない (403)。affiliate-ads-data.ts の変更を push イベントで
+# workflow_dispatch を起動できない (403)。広告の台帳の変更を push イベントで
 # 検知して publish することで、クラウド / web 実行環境でも git push だけで広告反映が完結する。
 #
 # 仕組み: sync-snapshots の実績ある run.sh を `--only affiliate-ads` で再利用 (export → R2 push)。
@@ -16,6 +16,8 @@ on:
     branches: [develop]
     paths:
       - "apps/web/scripts/affiliate-ads-data.ts"
+      # 広告の記録の正本 (台帳 affiliate.ads)。上の読み込み口は結合の式だけを持つ
+      - "data/affiliate/ledger/ads.json"
       # この workflow ファイル自身の追加・変更でも発火させ、導入時に一度反映する。
       - ".github/workflows/publish-affiliate-ads.yml"
 

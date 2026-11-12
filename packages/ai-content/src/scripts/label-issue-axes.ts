@@ -119,7 +119,7 @@ const pages = new Map<string, Page>();
 for (const f of fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith(".json"))) {
   for (const p of (readJson(path.join(PAGES_DIR, f)).pages ?? []) as Page[]) pages.set(p.id, p);
 }
-const metricGrains = readMetricGrains(ROOT, pages);
+const metricGrains = readMetricGrains(ROOT);
 const rankingKeysOf = (pageId: string) => {
   const p = pages.get(pageId);
   if (!p) return [];

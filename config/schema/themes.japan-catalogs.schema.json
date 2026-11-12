@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "全国 (/japan) のテーマ",
+  "description": "data/themes/japan/catalogs.json の形状契約。themes のキーがテーマの slug (公開 URL /japan/<slug>) で、記録の中には書かない (読み込み口 packages/data-configs/src/geo-scope/japan-catalog.ts がキーから themeSlug に戻し、家計の全国テーマ themes.japan-kakei-catalogs を後ろへ足す)。採用条件: 公式の全国行 (00000) を持つ指標のうち、生成器 generateOneMetric と同じ値レベルの照合で buildJapanSeriesRows が有効な年を 1 つ以上返したものだけを載せる。派生の全国値は themes.japan-derived-metrics の採用分だけ。unsupported・unknown は載せない。極端な不連続がある指標は照合を通っても外す。テーマに全国の値を持つ指標が 3 件未満なら薄いページになるので足さない。kakei-chousa と external は生成器が公式値として扱えないので載せず、経済センサスの事業所数は製造業事業所数と意味が重なるので載せない。/themes/* の本文・47 県ランキング・チャート定義は複製しない (全国時系列と出典だけを主役にする)。ThemeCatalog とは意図的に別の薄い形を持ち、description と keywords も /themes/* と重複させず「日本」「全国」「時系列」を軸にする。shortLabel はカードのタイル見出しで、そのテーマの ThemeCatalog の shortLabel。metrics[].metricKey は指標のキー (config/datasets.mjs の refs が検査する)。",
+  "type": "object",
+  "required": ["themes", "batches", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "themes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["title", "description", "keywords", "metrics"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "keywords": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "metrics": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["metricKey", "shortLabel"],
+              "additionalProperties": false,
+              "properties": {
+                "metricKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+                "shortLabel": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "batches": {
+      "description": "まとめて足したテーマの共通の根拠 (themes のキーの並びで連続する範囲)。コードは読まない。",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "note", "themeSlugs"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "note": { "type": "string", "minLength": 1 },
+          "themeSlugs": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } }
+        }
+      }
+    },
+    "notes": {
+      "description": "テーマごとの判断の記録 (キーは themes のキー。指標を意図して外した経緯など)。コードは読まない。",
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

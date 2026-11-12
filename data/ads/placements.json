@@ -1,5 +1,5 @@
 {
-  "_doc": "広告の枠の台帳 (2026-10-29)。大きさの語彙・枠の種類 (確保する箱・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルール。形は config/schema/ads.placements.schema.json。広告そのものの正本は apps/web/scripts/affiliate-ads-data.ts と AdSense の枠の定数。ページの置き方は apps/web の ad-placements テストがコードと照合する。台帳の枠の部品を置いたページは全て載せる (2026-10-30。載せていないファイルはテストが止める)。置き方は source のファイルの marker の位置と順で照合する。",
+  "_doc": "広告の枠の台帳 (2026-10-29)。大きさの語彙・枠の種類 (確保する箱・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルール。形は config/schema/ads.placements.schema.json。広告そのものの正本は台帳 affiliate.ads・affiliate.offer-profiles と AdSense の枠の定数。ページの置き方は apps/web の ad-placements テストがコードと照合する。台帳の枠の部品を置いたページは全て載せる (2026-10-30。載せていないファイルはテストが止める)。置き方は source のファイルの marker の位置と順で照合する。",
   "sizes": [
     {
       "size": "300x250",
