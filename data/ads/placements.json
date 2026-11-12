@@ -771,6 +771,28 @@
     ],
     "search": [
       {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "結果の一覧の 5 件目・30 件目・60 件目の後 (段の後に結果が 3 件以上続くときだけ。結果は全件を 1 ページに並べ、「人口」で 314 件)",
+        "source": "apps/web/src/features/search/components/SearchResults.tsx",
+        "marker": "position={`search-row-${rowIndex + 1}`}",
+        "condition": "段ごとに AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定)。cells は上から 1・2・3 つ目の段のユニット (横の並びではない)。結果が少ない検索語では段が減る。AdSense を止めているときは出さない",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "SEARCH_ROW_1"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "SEARCH_ROW_2"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "SEARCH_ROW_3"
+          }
+        ]
+      },
+      {
         "slot": "adsense-footer",
         "region": "body",
         "position": "ページの最後",

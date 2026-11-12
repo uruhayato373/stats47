@@ -219,6 +219,11 @@ export const HOME_RAIL_STICKY: AdSlotConfig = { slotId: "3704063320", format: "r
  */
 export const HUB_ROW_2: AdSlotConfig = { slotId: "6020069625", format: "rectangle" }; // stats47-hub-row-2 (ディスプレイ / レスポンシブ)
 
+/** 検索のページ: 結果の一覧の 5 件目・30 件目・60 件目の後の段 (2026-11-12 オーナー決定・同日作成)。本文の幅いっぱいで、形は rectangle に絞る */
+export const SEARCH_ROW_1: AdSlotConfig = { slotId: "4024103858", format: "rectangle" }; // stats47-search-row-1
+export const SEARCH_ROW_2: AdSlotConfig = { slotId: "9112779000", format: "rectangle" }; // stats47-search-row-2
+export const SEARCH_ROW_3: AdSlotConfig = { slotId: "5121563102", format: "rectangle" }; // stats47-search-row-3
+
 /**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）
  * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
