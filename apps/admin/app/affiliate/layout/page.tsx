@@ -51,6 +51,14 @@ function expectedAdsense(shot: AdLayoutShot, defs: PlacementDefinition[]): Expec
   return defs
     .filter((d) => d.devices.includes(deviceOf(shot.width)) && (d.region !== "rail" || shot.width >= RAIL_MIN_WIDTH))
     .flatMap((d): ExpectedUnit[] => {
+      // 幅いっぱいの段を縦に複数持つ行 (ブログの本文の段) は、cells が上から順の段のユニット。2 つ目以降は見出しの数で出る
+      if (d.provider === "adsense" && d.cells)
+        return d.cells.map((c, i) => ({
+          unit: c.unit,
+          slot: d.slot,
+          slotName: d.slotName,
+          condition: i === 0 ? d.condition : "見出しの数で出る段 (見出しが足りない記事では出ない)",
+        }));
       if (d.provider === "adsense") return [{ unit: d.unit, slot: d.slot, slotName: d.slotName, condition: d.condition }];
       if (!d.cells) return [];
       return d.cells.flatMap((c, i) =>

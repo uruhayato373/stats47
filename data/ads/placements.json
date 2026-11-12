@@ -414,7 +414,21 @@
         "position": "本文の h2 の前 (段の数は h2 が 2 本で 1・4 本で 2・6 本以上で 3。位置は 2026-11-12 から、広告の間の最大がいちばん小さくなる h2 を adRowTargets が選ぶ。1 番目の h2 の前には置かない)",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "position={`blog-row-${Number(index) + 1}`}",
-        "condition": "段ごとに AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR は出さない (2026-11-12 オーナー決定)。ユニットは上から BLOG_ARTICLE_INLINE (stats47-blog-inarticle) → BLOG_ROW_2 (stats47-blog-row-2) → BLOG_ROW_3 (stats47-blog-row-3) に固定 (apps/web/src/app/blog/[slug]/page.tsx の BLOG_BODY_AD_ROW_SLOTS)。見出しが足りない記事は段が減る"
+        "condition": "段ごとに AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR は出さない (2026-11-12 オーナー決定)。cells は上から 1・2・3 つ目の段のユニット (横の並びではない)。見出しが足りない記事は段が減る",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "BLOG_ARTICLE_INLINE"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "BLOG_ROW_2"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "BLOG_ROW_3"
+          }
+        ]
       },
       {
         "slot": "adsense-body",
@@ -423,7 +437,8 @@
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "slotBox={adSlotBox(\"adsense-body\")}",
         "condition": "手で <ad-slot> を置いた記事だけ",
-        "knownAdjacentReason": "自動の広告の段と手で置いた <ad-slot> は同じ記事に同時には出ない (手で広告を置いた記事には段を差し込まない) 描き分けが、ファイルの中で並んでいるだけ"
+        "knownAdjacentReason": "自動の広告の段と手で置いた <ad-slot> は同じ記事に同時には出ない (手で広告を置いた記事には段を差し込まない) 描き分けが、ファイルの中で並んでいるだけ",
+        "manualOnly": true
       },
       {
         "slot": "affiliate-text",
@@ -439,7 +454,8 @@
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "width={b.width ?? null}",
         "condition": "手置きのタグがある記事だけ",
-        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
+        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ",
+        "manualOnly": true
       },
       {
         "slot": "affiliate-rect",
@@ -448,7 +464,8 @@
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "href={href ?? \"#\"}",
         "condition": "直接配置の台帳に載せた記事だけ",
-        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
+        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ",
+        "manualOnly": true
       },
       {
         "slot": "adsense-body-responsive",

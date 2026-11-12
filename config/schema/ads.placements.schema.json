@@ -267,7 +267,7 @@
               "type": "array",
               "minItems": 1,
               "maxItems": 3,
-              "description": "広告の段 (ad-row) の左から順の枠。幅に入る数だけ出る (モバイルは先頭の 1 枠)",
+              "description": "広告の段 (ad-row) の左から順の枠。幅に入る数だけ出る (モバイルは先頭の 1 枠)。幅いっぱいの AdSense の行 (adsense-body-responsive) では、上から順の段のユニット (2026-11-12・ブログの本文の段)",
               "items": {
                 "type": "object",
                 "required": [
@@ -287,6 +287,10 @@
                   }
                 }
               }
+            },
+            "manualOnly": {
+              "type": "boolean",
+              "description": "記事に手で置いたときだけ出る枠。手で置いた記事には自動の広告の段を差し込まないので (apps/web/src/features/blog/lib/ad-row-positions.ts の MANUAL_AD_TAG)、自動の段と同時には出ない。本文の AdSense の上限は、自動の場合と手置きの場合を別に数える (2026-11-12)"
             }
           }
         }

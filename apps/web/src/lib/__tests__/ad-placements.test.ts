@@ -107,11 +107,24 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
     }
   });
 
+  // 行ごとに数える: cells を持つ行は cells の AdSense の数 (広告の段の横の枠・ブログの本文の縦の段)、持たない行は 1 枠。
+  // 手で置いた記事にだけ出る枠 (manualOnly) は自動の段と同時に出ないので、自動の場合と手置きの場合を別に数える (2026-11-12)
   it.each(Object.keys(PAGES))('%s: 本文の AdSense は上限まで (広告の段の AdSense の枠も数える)', (page) => {
-    const bodyAdsense =
-      PAGES[page].filter((p) => p.slot === 'adsense-body' || p.slot === 'adsense-body-responsive').length +
-      PAGES[page].flatMap((p) => p.cells ?? []).filter((cell) => cell.kind === 'adsense').length;
-    expect(bodyAdsense).toBeLessThanOrEqual(placements.rules.maxAdsenseBodyPerPage);
+    const bodyAdsenseOf = (p: Placement) =>
+      p.cells
+        ? p.cells.filter((cell) => cell.kind === 'adsense').length
+        : p.slot === 'adsense-body' || p.slot === 'adsense-body-responsive'
+          ? 1
+          : 0;
+    const isManual = (p: Placement) => (p as { manualOnly?: boolean }).manualOnly === true;
+    const autoRows = PAGES[page].filter((p) => !isManual(p));
+    const automatic = autoRows.reduce((sum, p) => sum + bodyAdsenseOf(p), 0);
+    // 手で置いた記事: 手置きの枠 + 自動の段のうち「本文の見出しの前の段」以外 (記事の末尾など)
+    const manual =
+      PAGES[page].filter(isManual).reduce((sum, p) => sum + bodyAdsenseOf(p), 0) +
+      autoRows.filter((p) => !p.marker.startsWith('position={`blog-row-')).reduce((sum, p) => sum + bodyAdsenseOf(p), 0);
+    expect(automatic).toBeLessThanOrEqual(placements.rules.maxAdsenseBodyPerPage);
+    expect(manual).toBeLessThanOrEqual(placements.rules.maxAdsenseBodyPerPage);
   });
 
   it('登録されている広告の大きさは、すべて台帳の大きさの語彙に載っている', () => {
