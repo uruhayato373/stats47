@@ -7,6 +7,7 @@
  * (「ランキング」「1位」「最も少ない」などを含む検索語が全表示の 44%)。効果は 4 週間後の表示回数で確かめる。
  */
 import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
+import { formatUnitForDisplay, parseUnit } from "@stats47/data-configs/unit";
 import { filterOutNationalArea, getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { readRankingItemFromR2, readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -90,6 +91,12 @@ function formatValue(value: number): string {
   return value.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
 }
 
+/** 文章で値の後ろに付ける単位。「指数」のような次元の無い値には付けない (「1.06指数」と書かない) */
+function displayUnit(unit: string): string {
+  if (!unit) return "";
+  return parseUnit(unit).dimension === "index" ? "" : formatUnitForDisplay(unit);
+}
+
 /** 指標の項目と最新年の値から 1 位・最下位を作る。値が 2 県未満なら null */
 export function leadFactFromValues(item: RankingItem, values: RankingValue[]): ThemeLeadFact | null {
   const prefValues = filterOutNationalArea(values).filter(
@@ -102,7 +109,7 @@ export function leadFactFromValues(item: RankingItem, values: RankingValue[]): T
   const ratio = top.value > 0 && bottom.value > 0 ? (top.value / bottom.value).toFixed(1) : null;
   return {
     itemName: getRankingTitle(item),
-    unit: item.unit ?? "",
+    unit: displayUnit(item.unit ?? ""),
     yearName: item.latestYear?.yearName ?? "",
     top: { areaName: top.areaName, value: top.value },
     bottom: { areaName: bottom.areaName, value: bottom.value },
@@ -174,7 +181,7 @@ export function buildAreaThemeFaqItems(
 ): { q: string; a: string }[] {
   return rows.map((r) => ({
     q: `${areaName}の${r.itemName}は全国何位ですか？`,
-    a: `${r.yearName ? `${r.yearName}の` : ""}${areaName}の${r.itemName}は${formatValue(r.value)}${r.unit}で、${r.total}都道府県中${r.rank}位です。`,
+    a: `${r.yearName ? `${r.yearName}の` : ""}${areaName}の${r.itemName}は${formatValue(r.value)}${displayUnit(r.unit)}で、${r.total}都道府県中${r.rank}位です。`,
   }));
 }
 

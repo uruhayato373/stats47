@@ -233,13 +233,6 @@
       "title": "新幹線の駅ができた町は、どう変わったか"
     },
     {
-      "id": "theme:local-finance",
-      "kind": "theme",
-      "pattern": "/themes/local-finance",
-      "parameters": [],
-      "title": "地方財政"
-    },
-    {
       "id": "route:area:areaCode",
       "kind": "area",
       "pattern": "/areas/[areaCode]",

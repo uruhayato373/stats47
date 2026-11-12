@@ -54,7 +54,6 @@ const PAGE_URLS: Record<string, { label: string; path: string }> = {
   ranking: { label: "ランキング", path: "/ranking/total-population" },
   "ranking-index": { label: "ランキング一覧", path: "/ranking" },
   theme: { label: "テーマ", path: "/themes/labor-wages" },
-  "theme-local-finance": { label: "テーマ (地方財政)", path: "/themes/local-finance" },
   "themes-index": { label: "テーマ一覧", path: "/themes" },
   blog: { label: "ブログ記事", path: "/blog/beer-peak-month-july-to-december" },
   "blog-tags": { label: "ブログのタグ一覧", path: "/blog/tags" },

@@ -768,42 +768,6 @@
         "marker": "slotBox={adSlotBox(\"adsense-footer\")}"
       }
     ],
-    "theme-local-finance": [
-      {
-        "slot": "ad-row",
-        "region": "body",
-        "position": "ダッシュボードの後・全指標の前",
-        "source": "apps/web/src/app/themes/local-finance/page.tsx",
-        "marker": "position=\"local-finance-row-1\"",
-        "trackingPosition": "local-finance-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
-      },
-      {
-        "slot": "ad-row",
-        "region": "body",
-        "position": "全指標の後 (ページの最後)",
-        "source": "apps/web/src/app/themes/local-finance/page.tsx",
-        "marker": "position=\"local-finance-row-2\"",
-        "trackingPosition": "local-finance-row-2",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "THEMES_CONTENT"
-          }
-        ]
-      }
-    ],
     "ranking-index": [
       {
         "slot": "ad-row",
