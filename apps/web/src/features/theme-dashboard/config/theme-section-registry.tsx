@@ -106,6 +106,16 @@ export const HALF_WIDTH_SECTIONS = new Set<string>([
  * 全国のページ (`/themes/<テーマ>`) だけで描く章。全国の値の図なので、県のページ (`/areas/<県>/<テーマ>`) では組み立てず、
  * 章ごと出さない (テーマ・地域のページは 1 つの地域を見せる。theme-catalog-standards §3.0。2026-11-12)
  */
+/**
+ * 県を選んでいるときだけ描く章 (選んでいないと何も描かない)。県のページを持つテーマの全国のページでは県を選べない
+ * (選ぶと県のページへ移る) ので組み立てず、章ごと出さない。見出しだけの章を残さない (2026-11-12。全国の地方財政で
+ * 「財政の規模と収支」「財政運営の余裕と負担」が見出しだけになっていた)
+ */
+export const PREFECTURE_ONLY_SECTIONS = new Set<string>([
+  'finance-overview',
+  'finance-sustainability',
+]);
+
 export const NATIONAL_ONLY_SECTIONS = new Set<string>([
   'kakei-axis-household-food-spending',
   'kakei-axis-household-assets-debt',

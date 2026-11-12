@@ -438,7 +438,8 @@
       ],
       "defaultCheckedKeys": [
         "regional-industry-final-energy-consumption"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "renewable-energy-adoption-1",
@@ -469,7 +470,8 @@
       ],
       "defaultCheckedKeys": [
         "fit-fip-new-approved-installed-capacity"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "regional-co2-emissions-1",
@@ -493,7 +495,8 @@
       ],
       "defaultCheckedKeys": [
         "regional-industry-co2-emissions-estimate"
-      ]
+      ],
+      "view": "table"
     }
   ],
   "sections": [

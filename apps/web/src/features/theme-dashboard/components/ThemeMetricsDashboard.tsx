@@ -668,7 +668,7 @@ export function ThemeMetricsDashboard({
         </PanelGrid>
       )}
       {chapter.embedded.map((key) => (
-        <div key={key}>{embeddedSections[key]}</div>
+        <div key={key} data-embedded-section={key}>{embeddedSections[key]}</div>
       ))}
     </PanelGrid>
     );
@@ -707,7 +707,7 @@ export function ThemeMetricsDashboard({
         </PanelGrid>
       )}
       {remainingEmbedded.map((key) => (
-        <div key={key}>{embeddedSections[key]}</div>
+        <div key={key} data-embedded-section={key}>{embeddedSections[key]}</div>
       ))}
       {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (

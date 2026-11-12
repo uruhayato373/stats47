@@ -1355,7 +1355,8 @@
       ],
       "defaultCheckedKeys": [
         "medical-physicians-under-40"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "emergency-medical-care-1",
@@ -1389,7 +1390,8 @@
       ],
       "defaultCheckedKeys": [
         "ambulance-transported-deaths"
-      ]
+      ],
+      "view": "table"
     },
     {
       "key": "perinatal-and-pediatric-care-1",

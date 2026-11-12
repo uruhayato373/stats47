@@ -283,7 +283,8 @@
       ],
       "defaultCheckedKeys": [
         "construction-employed-under30"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "workforce-demographics-2",

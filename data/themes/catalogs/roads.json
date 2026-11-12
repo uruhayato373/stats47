@@ -502,7 +502,8 @@
       ],
       "defaultCheckedKeys": [
         "road-bridge-condition-iii-count"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "road-tunnel-maintenance-1",
@@ -523,7 +524,8 @@
       ],
       "defaultCheckedKeys": [
         "road-tunnel-condition-iii-count"
-      ]
+      ],
+      "view": "tiles"
     }
   ]
 }

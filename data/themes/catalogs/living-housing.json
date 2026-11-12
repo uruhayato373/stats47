@@ -1025,7 +1025,8 @@
       ],
       "defaultCheckedKeys": [
         "vacant-housing-excluding-rental-sale-secondary"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "vacant-housing-and-safety-2",

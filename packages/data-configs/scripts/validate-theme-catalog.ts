@@ -281,6 +281,20 @@ export function validateMetricGroups(
       }
     }
 
+    // 推移の切り替えカード (view 無し・2 件以上) に、どの指標も 1 年分しかない組を入れない。図の枠に
+    // 「単年データのため、推移グラフはありません」とだけ出る空の図になる (2026-11-12 に 14 枚を tiles / table へ直した)。
+    // 単年の組は数値タイルの格子 (tiles) か、5 件以上なら表 (table) にする (theme-catalog-standards §3.0)
+    if (!g.view && g.rankingKeys.length > 1) {
+      const counts = g.rankingKeys.map((k) =>
+        metricYearCount((METRICS_REGISTRY[k] as { years?: unknown } | undefined)?.years)
+      );
+      if (counts.every((n) => n !== null && n <= 1)) {
+        errors.push(
+          `[group-single-year] ${c.key}/${g.key}: どの指標も 1 年分しかない — 推移の切り替えカードにせず view を "tiles" (5 件以上は "table") にする`
+        );
+      }
+    }
+
     // 単位は 2 種まで (Y 軸が左右 2 本)。
     // 判定は UI の軸割当と同じ normalizeUnitForAxis を通す (% と ％ を別物にしない)
     const units = new Set(

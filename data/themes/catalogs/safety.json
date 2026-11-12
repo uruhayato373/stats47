@@ -1242,7 +1242,8 @@
       ],
       "defaultCheckedKeys": [
         "natural-disaster-deaths"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "natural-disaster-impact-2",
@@ -1254,7 +1255,8 @@
       ],
       "defaultCheckedKeys": [
         "natural-disaster-destroyed-houses"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "natural-disaster-impact-3",
