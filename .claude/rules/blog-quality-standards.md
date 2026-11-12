@@ -495,7 +495,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 | 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
 | 出典 | **ページ側 `DataSourceList`** (図の `source.json` から自動表示。調査名 → `/survey/<id>`、統計表 → e-Stat) | ❌ 本文に `## データ出典` を書かない (★2026-09-25〜 `quality-gate.mjs` が blocker)。出典は図の `source.json` に記録し、GIS 派生などは `displaySources` で明示する。計算方法・定義の説明が要るときだけ `## データについて` 節を書く |
 | ランキング詳細への誘導 | `<source-link href="/ranking/{key}">` | ✅ **各図の直下にインライン**配置 (末尾集約禁止) |
-| AdSense 枠 | 2026-10-11 に再開。本文中段 (h2 の 2 番目と中盤) と記事末尾の枠は `md-content.tsx` の `injectAdSlots` が自動で入れるので、`<ad-slot></ad-slot>` を手で書かない (手で書くと自動挿入が止まり、記事ごとに枠の数がばらつく) | ❌ 書かない |
+| AdSense 枠 | 本文の段 (AdSense 1 つ・幅いっぱい) と記事末尾の段は `md-content.tsx` の `injectAdRows` が見出しの位置から自動で入れる。記事に手で書いた `<ad-slot>` と `<affiliate-banner>` は 2026-11-12 から何も描かない (手置きのある記事も段が入る) | ❌ 書かない |
 
 **決定的検査 (`quality-gate.mjs` が blocker)**: `<chart-placeholder>` 残存 / インライン `<svg>` / 記事内 `関連(ランキング\|記事)` 見出し。これらは公開前に弾かれる。バッチ是正の対象でもある (2026-06-02 棚卸し: 記事内関連229・インラインsvg76・chart-placeholder54)。
 

@@ -449,38 +449,11 @@
         ]
       },
       {
-        "slot": "adsense-body",
-        "region": "body",
-        "position": "記事に手で置いた <ad-slot> (自動の差し込みは 2026-11-03 に広告の段へ移した)",
-        "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "slotBox={adSlotBox(\"adsense-body\")}",
-        "condition": "手で <ad-slot> を置いた記事だけ",
-        "knownAdjacentReason": "自動の広告の段と手で置いた <ad-slot> は同じ記事に同時には出ない (手で広告を置いた記事には段を差し込まない) 描き分けが、ファイルの中で並んでいるだけ"
-      },
-      {
         "slot": "affiliate-text",
         "region": "body",
         "position": "本文の h2 の 2/4/6 番目の直前 (テキスト版の記事)",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "<AffiliateTextAdList"
-      },
-      {
-        "slot": "affiliate-rect",
-        "region": "body",
-        "position": "記事の中で手置きした分類のバナー (<affiliate-banner category>)",
-        "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "width={b.width ?? null}",
-        "condition": "手置きのタグがある記事だけ",
-        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
-      },
-      {
-        "slot": "affiliate-rect",
-        "region": "body",
-        "position": "記事の中で手置きした直接配置のバナー (<affiliate-banner src>)",
-        "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "href={href ?? \"#\"}",
-        "condition": "直接配置の台帳に載せた記事だけ",
-        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
       },
       {
         "slot": "adsense-body-responsive",

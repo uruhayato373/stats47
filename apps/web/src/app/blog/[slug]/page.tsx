@@ -32,7 +32,7 @@ import {
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { resolveAffiliateBannersByCategory, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
+import { resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
@@ -139,12 +139,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         .filter((s) => s !== slug);
     const uniqueSlugs = [...new Set(blogLinkSlugs)];
 
-    // tagKeys / 本文リンクのタイトル / アフィバナーは互いに独立 → 並列取得 (waterfall 解消)
-    const [articleTagData, relatedArticleTitles, affiliateBannersByCategory, articleSurveys] =
+    // tagKeys / 本文リンクのタイトル / 出典調査は互いに独立 → 並列取得 (waterfall 解消)
+    const [articleTagData, relatedArticleTitles, articleSurveys] =
         await Promise.all([
             getTagKeysForArticle(slug),
             findArticleTitlesBySlugs(uniqueSlugs),
-            resolveAffiliateBannersByCategory(),
             resolveArticleSurveyTaxonomy({
                 slug,
                 content: article.content,
@@ -384,7 +383,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 article={renderedArticle}
                                 slug={slug}
                                 relatedArticleTitles={relatedArticleTitles}
-                                affiliateBannersByCategory={affiliateBannersByCategory}
                                 affiliateTextAds={affiliateTextAds}
                                 affiliateVertical={bannerVertical}
                                 adRows={adRows}

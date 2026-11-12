@@ -67,10 +67,12 @@ describe("injectAdRows", () => {
   });
 
   it.each(["<ad-slot></ad-slot>", '<affiliate-banner src="x"></affiliate-banner>', '<affiliate-text index="0"></affiliate-text>'])(
-    "手で広告を置いた記事は触らない: %s",
+    // 2026-11-12: 手置きの広告がある記事 (公開 97 本) は段が入らず、手置きの枠はスマホで出ないので、スマホの本文に広告が無かった。
+    // 手置きの <ad-slot>・<affiliate-banner> は描かなくなったので、どの記事にも段を入れる
+    "手で広告を置いた記事にも段を入れる: %s",
     (tag) => {
       const md = `${uniform(6)}\n\n${tag}`;
-      expect(injectAdRows(md, 3)).toBe(md);
+      expect(injectAdRows(md, 3).split("<ad-row").length - 1).toBe(3);
     },
   );
 

@@ -1,6 +1,3 @@
-/** 記事に手で広告を置いた印。この記事には広告の段を自動で差し込まない (手で置いた位置を尊重する) */
-const MANUAL_AD_TAG = /<(ad-slot|affiliate-text|affiliate-banner)\b/;
-
 /** 段の数を決める h2 の番号 (0 始まり)。h2 が 2 本で 1 段・4 本で 2 段・6 本で 3 段 (2026-11-03 の数のルールのまま) */
 const ROW_COUNT_BY_H2 = [1, 3, 5];
 
@@ -34,7 +31,8 @@ function estimateLineHeight(line: string): number {
  * 1 番目の h2 の前には置かない (冒頭の読み始めに広告を挟まない)。
  */
 export function adRowTargets(md: string, max: number): number[] {
-  if (max <= 0 || MANUAL_AD_TAG.test(md)) return [];
+  // 手で広告を置いた記事も段を入れる (2026-11-12。手置きの <ad-slot>・<affiliate-banner> は描かなくなった)
+  if (max <= 0) return [];
   const lines = md.split("\n");
   const h2: { line: number; y: number }[] = [];
   let inFence = false;
