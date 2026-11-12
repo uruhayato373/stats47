@@ -18,7 +18,9 @@
         "areaCode",
         "cityCode",
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "city"
     },
     {
       "id": "route:city:areaCode:cityCode",
@@ -128,7 +130,9 @@
       "pattern": "/municipalities/themes/[themeSlug]",
       "parameters": [
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "municipalities"
     },
     {
       "id": "route:area-theme:areaCode:themeSlug",
@@ -137,7 +141,9 @@
       "parameters": [
         "areaCode",
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "area"
     },
     {
       "id": "route:area-theme-cities:areaCode:themeSlug",
@@ -146,7 +152,9 @@
       "parameters": [
         "areaCode",
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "area-cities"
     },
     {
       "id": "page:blog-tags",
@@ -270,7 +278,9 @@
       "pattern": "/japan/[themeSlug]",
       "parameters": [
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "japan"
     },
     {
       "id": "route:product:slug",
@@ -310,7 +320,9 @@
       "pattern": "/themes/[themeSlug]",
       "parameters": [
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "national"
     },
     {
       "id": "page:home",

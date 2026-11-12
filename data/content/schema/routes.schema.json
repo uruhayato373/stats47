@@ -44,6 +44,23 @@
           "title": {
             "type": "string",
             "minLength": 1
+          },
+          "pageType": {
+            "enum": [
+              "theme"
+            ],
+            "description": "ページの種類。地域の単位が違っても同じ種類のページを 1 つにまとめて数える (2026-11-12 オーナー決定: テーマは 1 つのページの種類で、地域の単位は横串の分類。URL と kind は地域の単位ごとのまま)"
+          },
+          "scope": {
+            "enum": [
+              "national",
+              "area",
+              "area-cities",
+              "city",
+              "japan",
+              "municipalities"
+            ],
+            "description": "pageType の中の地域の単位。national = /themes/<テーマ>・area = /areas/<県>/<テーマ>・area-cities = その県の市区町村の一覧・city = 市区町村×テーマ・japan = /japan/<テーマ>・municipalities = /municipalities/themes/<テーマ>"
           }
         }
       }
