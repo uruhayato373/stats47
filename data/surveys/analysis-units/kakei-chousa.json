@@ -140,7 +140,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "line-chart",
         "state": "published"
       }
@@ -163,7 +163,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "line-chart",
         "state": "published"
       }
@@ -186,7 +186,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -209,7 +209,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -232,7 +232,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -255,7 +255,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -278,7 +278,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -301,7 +301,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -324,7 +324,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -365,7 +365,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-assets-debt",
+        "pageId": "theme:household-assets-debt",
         "form": "bar-chart",
         "state": "published"
       }
@@ -388,7 +388,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-assets-debt",
+        "pageId": "theme:household-assets-debt",
         "form": "bar-chart",
         "state": "published"
       }
@@ -433,7 +433,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -456,7 +456,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -479,7 +479,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -502,7 +502,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -525,7 +525,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }
@@ -548,7 +548,7 @@
       },
       "evidence": "value-checked",
       "placement": {
-        "pageId": "japan-theme:household-food-spending",
+        "pageId": "theme:household-food-spending",
         "form": "bar-chart",
         "state": "published"
       }

@@ -43,12 +43,12 @@ export const CONSTRUCTION_INDUSTRY_SET: IndicatorSet = {
     {
       "rankingKey": "construction-employed-age30to54",
       "shortLabel": "30〜54歳の建設業就業者",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "construction-employed-age55plus",
       "shortLabel": "55歳以上の建設業就業者",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "construction-employed-female",

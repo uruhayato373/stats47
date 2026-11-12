@@ -414,19 +414,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:tobacco-expenditure-ranking",
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-other-purchases",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:tobacco-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "tofu-consumption-expenditure",
@@ -3390,10 +3580,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "product:data-p-03",
           "kind": "product"
         },
@@ -4025,14 +4211,6 @@
         {
           "pageId": "blog:overnight-guests-inbound-recovery",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
         },
         {
           "pageId": "product:data-p-03",
@@ -4755,10 +4933,6 @@
         {
           "pageId": "blog:welfare-expenses-squeeze",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:total-population",
@@ -5823,10 +5997,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:innovation-patents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:trademark-application-count",
           "kind": "ranking"
         },
@@ -6051,10 +6221,6 @@
         {
           "pageId": "area-theme:47000:innovation-patents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:innovation-patents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:trademark-registration-count",
@@ -6284,10 +6450,6 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:traffic-accident-casualties-elderly-65plus",
@@ -6777,10 +6939,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:traffic-accident-count",
           "kind": "municipality-ranking"
         },
@@ -7062,10 +7220,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:traffic-accident-count-per-population",
           "kind": "municipality-ranking"
         },
@@ -7338,10 +7492,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:traffic-accident-deaths-per-100-accidents",
           "kind": "ranking"
         },
@@ -7570,10 +7720,6 @@
         {
           "pageId": "blog:traffic-accident-deaths-regional-risk",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:traffic-accident-deaths-per-100k",
@@ -8029,10 +8175,6 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:traffic-accident-injuries-per-100k",
@@ -9430,10 +9572,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:travel-participation-rate-day-trip",
           "kind": "ranking"
         },
@@ -9706,10 +9844,6 @@
         {
           "pageId": "area-theme:47000:tourism",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:travel-participation-rate-domestic-tourism",
@@ -9986,10 +10120,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:travel-participation-rate-overnight",
           "kind": "ranking"
         },
@@ -10218,10 +10348,6 @@
         {
           "pageId": "area-theme:47000:tourism",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:travel-participation-rate-overseas",

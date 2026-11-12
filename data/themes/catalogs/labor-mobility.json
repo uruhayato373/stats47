@@ -201,7 +201,7 @@
     {
       "rankingKey": "nonregular-employees-count",
       "shortLabel": "非正規の職員・従業員数（15歳以上）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和4年版男女共同参画白書 第1部第2節「就業」（内閣府男女共同参画局）",
         "sourceUrl": "https://www.gender.go.jp/about_danjo/whitepaper/r04/zentai/html/honpen/b1_s02_01.html",

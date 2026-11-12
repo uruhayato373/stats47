@@ -193,14 +193,23 @@ export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {
 };
 
 /**
- * テーマダッシュボードページ: ダッシュボード下のディスプレイ広告
- * 17 テーマページ共通（ThemePageLayout）。
- * AdSense ユニット名: stats47-themes-content（ディスプレイ広告 / auto）
+ * テーマのページ (全国・県別): 本文の広告の段 3 つ (2 章目の後・4 章目の後・ページの最後)。
+ * 2026-11-12 オーナー決定: アフィリエイトを止め、3 段とも AdSense 1 つを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。1 段目は既存のテーマ専用 stats47-themes-content。2 段目と最後はそれまでハブ・一覧と
+ * 共用 (HUB_INCONTENT・CONTENT_FOOTER・RAIL_RECT) でテーマの分を測れなかったので、同日に専用のユニットを作った。
  */
-export const THEMES_CONTENT: AdSlotConfig = {
-  slotId: "8298138821",
-  format: "rectangle",
-};
+export const THEMES_CONTENT: AdSlotConfig = { slotId: "8298138821", format: "rectangle" }; // stats47-themes-content
+export const THEME_ROW_2: AdSlotConfig = { slotId: "9630518288", format: "rectangle" }; // stats47-theme-row-2 (ディスプレイ / レスポンシブ)
+export const THEME_END: AdSlotConfig = { slotId: "2430685118", format: "rectangle" }; // stats47-theme-end (ディスプレイ / レスポンシブ)
+
+/**
+ * ホーム: 本文の広告の段 2 つ (「知りたいことから探す」の後・ページの最後)。
+ * 2026-11-12 オーナー決定: アフィリエイトを止め、2 段とも AdSense 1 つを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。それまでの HUB_INCONTENT / CONTENT_FOOTER は一覧ページと共用で、ホームの分を
+ * 測れなかったので、同日に専用のユニットを作った。
+ */
+export const HOME_ROW_1: AdSlotConfig = { slotId: "6019089689", format: "rectangle" }; // stats47-home-row-1 (ディスプレイ / レスポンシブ)
+export const HOME_ROW_2: AdSlotConfig = { slotId: "3189892156", format: "rectangle" }; // stats47-home-row-2 (ディスプレイ / レスポンシブ)
 
 /**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）

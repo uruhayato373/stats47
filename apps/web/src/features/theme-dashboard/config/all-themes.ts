@@ -25,6 +25,9 @@ const EMBEDDED_SECTIONS: Record<string, string[]> = {
   railway: ['station-passengers'],
   healthcare: ['depopulation-medical', 'medical-workforce'],
   'aging-society': ['depopulation-medical', 'depopulated-settlements'],
+  // 家計調査の分類軸別の全国の値 (2026-11-12 に日本全体のテーマのページから移した)
+  'household-food-spending': ['kakei-axis-household-food-spending'],
+  'household-assets-debt': ['kakei-axis-household-assets-debt'],
   climate: ['sunshine-map', 'snow-designation-population'],
   tourism: ['tourism-seasonality', 'airport-traffic'],
   'freight-logistics': ['freight-od'],

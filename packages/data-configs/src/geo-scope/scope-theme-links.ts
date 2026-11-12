@@ -1,4 +1,4 @@
-import { JAPAN_CATALOGS } from './japan-catalog';
+import { isJapanThemeMovedToTheme, JAPAN_CATALOGS } from './japan-catalog';
 import { THEME_CATALOGS } from '../theme-catalog';
 import { KNOWN_MUNICIPALITY_THEME_SLUGS, MUNICIPALITY_THEME_CATALOGS } from './municipality-catalog';
 import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, PREFECTURE_THEME_FOR_MUNICIPALITY_THEME } from './scope-theme-map';
@@ -50,7 +50,7 @@ export function scopeHrefsForPrefectureTheme(themeKey: string): StatisticsScopeH
     ...(municipalityTheme && KNOWN_MUNICIPALITY_THEME_SLUGS.has(municipalityTheme)
       ? { municipalities: `/municipalities/themes/${themeKey}` }
       : {}),
-    ...(JAPAN_CATALOGS[themeKey] ? { japan: `/japan/${themeKey}` } : {}),
+    ...(JAPAN_CATALOGS[themeKey] && !isJapanThemeMovedToTheme(themeKey) ? { japan: `/japan/${themeKey}` } : {}),
   };
 }
 
@@ -60,7 +60,7 @@ export function scopeHrefsForMunicipalityTheme(themeSlug: string): StatisticsSco
   if (!prefectureTheme) return {};
   return {
     prefectures: `/themes/${prefectureTheme}`,
-    ...(JAPAN_CATALOGS[prefectureTheme] ? { japan: `/japan/${prefectureTheme}` } : {}),
+    ...(JAPAN_CATALOGS[prefectureTheme] && !isJapanThemeMovedToTheme(prefectureTheme) ? { japan: `/japan/${prefectureTheme}` } : {}),
   };
 }
 

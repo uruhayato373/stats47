@@ -3499,10 +3499,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:national-medical-expense-per-person",
           "kind": "ranking"
         },
@@ -4276,10 +4272,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:national-treasury-disbursement-ratio-pref-finance",
           "kind": "ranking"
         },
@@ -4613,10 +4605,6 @@
         {
           "pageId": "blog:natto-production-vs-consumption",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:natto-consumption-expenditure",
@@ -6156,10 +6144,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:natural-environment-conservation-area",
           "kind": "ranking"
         },
@@ -6586,14 +6570,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:natural-increase-rate",
           "kind": "ranking"
         },
@@ -6861,10 +6837,6 @@
         {
           "pageId": "area-theme:47000:natural-environment",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nature-park-area",

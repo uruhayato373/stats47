@@ -11,7 +11,6 @@ import { PanelGrid } from '@stats47/components';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { canonicalSurveyHubKey, hrefFor, surveyHubSourceIds } from "@stats47/data-configs/content/href";
-import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   CATEGORY_TOPIC_CATALOGS,
@@ -182,30 +181,15 @@ export default async function SurveyPage({ params }: PageProps) {
       )
     )
     .map((catalog) => ({ key: catalog.key, title: catalog.title, metricCount: catalog.metrics.length }));
-  const relatedJapanThemes = surveyKey === 'kakei-chousa'
-    ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
-    : [];
-  // 全国の時系列 (/japan/<slug>) は同じテーマの比較の単位違い (slug が同じ)。テーマは 1 枚のカードにまとめ、
-  // 県で比べられるテーマはテーマのページへ、全国版しか無いテーマは全国のページへつなぐ (2026-11-03)
-  const japanThemeSlugs = new Set(relatedJapanThemes.map((theme) => theme.themeSlug));
-  const prefectureThemeKeys = new Set(relatedThemes.map((theme) => theme.key));
+  // 日本全体のテーマ (/japan/<テーマ>) は 2026-11-12 に全国のテーマへまとめた (家計の品目は「食卓と家計の支出」の章)。カードはテーマだけ
   const themeCards = [
     ...relatedThemes.map((theme) => ({
       key: theme.key,
       title: theme.title,
       href: themeHref(theme.key),
       groupKey: theme.key,
-      meta: `${theme.metricCount} 指標${japanThemeSlugs.has(theme.key) ? '・全国の推移もあり' : ''}`,
+      meta: `${theme.metricCount} 指標`,
     })),
-    ...relatedJapanThemes
-      .filter((theme) => !prefectureThemeKeys.has(theme.themeSlug))
-      .map((theme) => ({
-        key: theme.themeSlug,
-        title: theme.title,
-        href: hrefFor('japan-theme', { themeSlug: theme.themeSlug }),
-        groupKey: null,
-        meta: `全国の推移・${theme.metrics.length} 指標`,
-      })),
   ];
   const relatedArticles = await listArticleSummariesBySurveyId(
     sourceIds,

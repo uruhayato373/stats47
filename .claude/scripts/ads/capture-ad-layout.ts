@@ -67,7 +67,6 @@ const PAGE_URLS: Record<string, { label: string; path: string; scopes?: PageScop
     scopes: [
       { id: "national", label: "全国", path: "/themes/labor-wages" },
       { id: "area", label: "県別", path: "/areas/13000/labor-wages" },
-      { id: "japan", label: "日本全体", path: "/japan/education-culture" },
       { id: "municipalities", label: "市区町村", path: "/municipalities/themes/aging-society" },
     ],
   },

@@ -246,8 +246,8 @@
               "type": "array",
               "minItems": 1,
               "uniqueItems": true,
-              "items": { "enum": ["national", "area", "japan", "municipalities"] },
-              "description": "この枠が出る地域の単位 (テーマ: national = /themes/<テーマ>・area = /areas/<県>/<テーマ>・japan = /japan/<テーマ>・municipalities = /municipalities/themes/<テーマ>)。テーマは 1 つのページの種類で、地域の単位は横串の分類 (2026-11-12 オーナー決定)。無ければ全ての単位"
+              "items": { "enum": ["national", "area", "municipalities"] },
+              "description": "この枠が出る地域の単位 (テーマ: national = /themes/<テーマ>・area = /areas/<県>/<テーマ>・municipalities = /municipalities/themes/<テーマ>)。テーマは 1 つのページの種類で、地域の単位は横串の分類 (2026-11-12 オーナー決定)。日本全体 (/japan/<テーマ>) は 2026-11-12 に全国へまとめた。無ければ全ての単位"
             },
             "devices": {
               "type": "array",

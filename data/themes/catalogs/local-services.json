@@ -25,7 +25,7 @@
     {
       "rankingKey": "number-of-hotel-facilities",
       "shortLabel": "ホテル営業施設数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "衛生行政報告例（抜粋）厚生労働省医薬・生活衛生局生活衛生課 公表資料",
         "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/seikatsu-eisei/seikatsu-eisei21/index.html",
@@ -42,7 +42,7 @@
     {
       "rankingKey": "number-of-hotel-rooms",
       "shortLabel": "ホテル営業施設客室数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "衛生行政報告例（抜粋）厚生労働省医薬・生活衛生局生活衛生課 公表資料",
         "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/seikatsu-eisei/seikatsu-eisei21/index.html",

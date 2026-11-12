@@ -61,13 +61,7 @@
     ]
   },
   "links": [
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-food-spending", "relation": "themeContext" },
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-appliances", "relation": "themeContext" },
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-clothing", "relation": "themeContext" },
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-health-spending", "relation": "themeContext" },
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-transport-spending", "relation": "themeContext" },
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-education-leisure", "relation": "themeContext" },
-    { "from": "survey:kakei-chousa", "to": "japan-theme:household-other-purchases", "relation": "themeContext" },
+    { "from": "survey:kakei-chousa", "to": "theme:household-food-spending", "relation": "themeContext" },
     {
       "from": "municipality-ranking:public-hall-count-city",
       "to": "ranking:public-hall-count",

@@ -183,7 +183,7 @@
     {
       "rankingKey": "movers-in",
       "shortLabel": "外国人転入者数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "住民基本台帳人口移動報告 参考表「移動前の住所地別転入者数－都道府県，市区町村（移動者，日本人移動者，外国人移動者）」（総務省統計局／政府統計の総合窓口）",
         "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004014382",
@@ -441,7 +441,7 @@
     {
       "rankingKey": "future-population-change-rate-2050",
       "shortLabel": "2020～2050年の人口増減率（推計）",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "「日本の地域別将来推計人口（令和5年推計）」の概要（国立社会保障・人口問題研究所, 日本地理学会2024年秋季学術大会発表要旨）",
         "sourceUrl": "https://www.jstage.jst.go.jp/article/ajg/2024s/0/2024s_92/_article/-char/ja/",

@@ -267,11 +267,6 @@
       "count": 7
     },
     {
-      "key": "japan-theme",
-      "kind": "japan-theme",
-      "count": 50
-    },
-    {
       "key": "municipality-ranking",
       "kind": "municipality-ranking",
       "count": 763
@@ -419,6 +414,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:active-job-opening-ratio",
+      "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:actual-income-worker-households-per-month",
       "to": "theme:real-income",
       "relation": "contains"
@@ -461,6 +461,16 @@
     {
       "from": "ranking:air-cargo-transport",
       "to": "theme:freight-logistics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:air-conditioner-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:air-conditioner-consumption-quantity",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -939,8 +949,23 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:camera-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:car-ownership-multi-person-households-per-1000",
       "to": "theme:regional-transport",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:car-purchase-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:car-purchase-consumption-quantity",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -999,6 +1024,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:childrens-clothing-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:chinese-cabbage-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -1045,6 +1075,11 @@
     },
     {
       "from": "ranking:coffee-shop-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:cold-medicine-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
     },
@@ -1214,13 +1249,28 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:consumption-expenditure-multi-person-households-per-month",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:consumption-expenditure-total",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:contact-lens-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
       "from": "ranking:cook-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:cooking-appliance-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -1301,6 +1351,11 @@
     {
       "from": "ranking:current-liabilities-balance-multi-person-households-per-household",
       "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:current-liabilities-balance-multi-person-households-per-household",
+      "to": "theme:real-income",
       "relation": "contains"
     },
     {
@@ -1431,6 +1486,11 @@
     {
       "from": "ranking:dental-checkup-persons-per-1000",
       "to": "theme:health-checkups",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:dental-fee-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -1566,6 +1626,11 @@
     {
       "from": "ranking:education-budget-share-kakei",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:education-cost-all-households",
+      "to": "theme:education-culture",
       "relation": "contains"
     },
     {
@@ -1731,6 +1796,11 @@
     {
       "from": "ranking:enterprise-net-value-added-all-industries",
       "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:eyeglasses-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -2174,6 +2244,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:gasoline-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:gasoline-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:gender-wage-gap",
       "to": "theme:gender-participation",
       "relation": "contains"
@@ -2201,6 +2281,11 @@
     {
       "from": "ranking:general-hospital-count-per-100k",
       "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:general-households",
+      "to": "theme:living-housing",
       "relation": "contains"
     },
     {
@@ -2269,6 +2354,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:handbag-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:handbag-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:happoshu-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -2319,6 +2414,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:heater-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:heatstroke-deaths",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -2361,6 +2461,11 @@
     {
       "from": "ranking:high-school-teacher-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:high-school-tutoring-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -2834,6 +2939,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:jr-passenger-transport",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:junior-college-count",
       "to": "theme:education-culture",
       "relation": "contains"
@@ -2996,6 +3106,11 @@
     {
       "from": "ranking:landslip-warning-zone-count",
       "to": "theme:landslide-exposure",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:language-lesson-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -3219,6 +3334,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:massage-fee-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:maximum-snow-depth",
       "to": "theme:climate",
       "relation": "contains"
@@ -3259,6 +3379,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:medical-fee-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:medical-physicians-age-40-59",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -3289,8 +3414,33 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:mens-clothing-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:mens-coat-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:mens-sweater-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:mens-underwear-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:metabolic-syndrome-prevalence-among-checkup-recipients",
       "to": "theme:health-checkups",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:microwave-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -3311,6 +3461,11 @@
     {
       "from": "ranking:minimum-wage-by-region",
       "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:minimum-wage-by-region",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {
@@ -3719,6 +3874,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:other-womens-underwear-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:outpatient-rate-per-100k",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -3791,6 +3951,11 @@
     {
       "from": "ranking:per-taxpayer-taxable-income",
       "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:personal-computer-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -3920,6 +4085,11 @@
     },
     {
       "from": "ranking:port-container-count",
+      "to": "theme:ports",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:port-count",
       "to": "theme:ports",
       "relation": "contains"
     },
@@ -4054,6 +4224,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:private-university-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:psychiatric-hospital-count-per-100k",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -4101,6 +4276,11 @@
     {
       "from": "ranking:public-swimming-pool-count-per-million",
       "to": "theme:sports-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:public-university-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -4189,6 +4369,21 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:recorded-media-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:refrigerator-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:refrigerator-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:regional-business-co2-emissions-estimate",
       "to": "theme:regional-energy",
       "relation": "contains"
@@ -4271,6 +4466,11 @@
     {
       "from": "ranking:renovation-rate",
       "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:rental-car-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -4834,6 +5034,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:supplement-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:sushi-dining-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -4861,6 +5066,16 @@
     {
       "from": "ranking:taxpayer-ratio-per-pref-resident",
       "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:television-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:television-consumption-quantity",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -5089,6 +5304,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:tobacco-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:tomato-consumption-quantity",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -5269,6 +5489,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:umbrella-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:umbrella-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:unemployment-rate",
       "to": "theme:labor-mobility",
       "relation": "contains"
@@ -5276,6 +5506,11 @@
     {
       "from": "ranking:unemployment-rate",
       "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:unemployment-rate",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {
@@ -5349,6 +5584,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:vacuum-cleaner-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:vegetable-intake-female-age-adjusted",
       "to": "theme:health-checkups",
       "relation": "contains"
@@ -5371,6 +5611,11 @@
     {
       "from": "ranking:voter-turnout-governor",
       "to": "theme:community-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:washing-machine-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {
@@ -5429,6 +5674,31 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:womens-clothing-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:womens-coat-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:womens-coat-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:womens-sweater-consumption-expenditure",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:womens-sweater-consumption-quantity",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:woodland-area",
       "to": "theme:forestry-timber",
       "relation": "contains"
@@ -5446,6 +5716,11 @@
     {
       "from": "ranking:work-avg-time-employed-male",
       "to": "theme:daily-time-use",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:wristwatch-consumption-expenditure",
+      "to": "theme:household-food-spending",
       "relation": "contains"
     },
     {

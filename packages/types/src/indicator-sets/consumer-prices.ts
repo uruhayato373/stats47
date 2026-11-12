@@ -28,7 +28,7 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
     {
       "rankingKey": "consumer-price-difference-index-housing",
       "shortLabel": "住居",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "consumer-price-difference-index-utilities",
@@ -73,12 +73,12 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
     {
       "rankingKey": "household-survey-utilities-expenditure",
       "shortLabel": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "household-survey-food-expenditure",
       "shortLabel": "食料支出（二人以上世帯・10〜11月の月平均）",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "keywords": [

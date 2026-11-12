@@ -657,7 +657,7 @@
     {
       "rankingKey": "life-expectancy-0-male",
       "shortLabel": "男性平均寿命（2020年）",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -667,7 +667,7 @@
     {
       "rankingKey": "life-expectancy-0-female",
       "shortLabel": "女性平均寿命（2020年）",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
