@@ -64,6 +64,8 @@ const RAIL_SLOT_ALLOWLIST = new Set([
   "apps/web/src/app/category/[categoryKey]/page.tsx",
   // blog 詳細の ArticleShell 右レール (316px)。
   "apps/web/src/app/blog/[slug]/page.tsx",
+  // 市区町村ランキングの ArticleShell 右レール (316px)。2026-11-12 に右レール付きの枠にした。
+  "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
 ]);
 
 const errors = [];

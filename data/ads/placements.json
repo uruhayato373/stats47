@@ -958,6 +958,27 @@
     ],
     "municipality-ranking": [
       {
+        "slot": "adsense-rail-rect",
+        "region": "rail",
+        "position": "右レールの関連の一覧の後",
+        "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
+        "marker": "<RailAdSlot slot={MUNICIPALITY_RAIL} />",
+        "adsenseSlot": "MUNICIPALITY_RAIL",
+        "condition": "2026-11-12 オーナー決定で右レール付きの枠にした。右レールが本文の横にあるとき (PC) だけ出る。右レールは一番上から始まるので、PC では最初の画面に入る (都道府県のランキングの右レールの上段と同じ扱い・共通のルール noFirstView の例外。オーナー確認待ち)"
+      },
+      {
+        "slot": "adsense-rail-sticky",
+        "region": "rail",
+        "position": "右レールの最後 (都道府県のカードの後)",
+        "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
+        "marker": "<RailAdSlot slot={MUNICIPALITY_RAIL_STICKY} sticky />",
+        "adsenseSlot": "MUNICIPALITY_RAIL_STICKY",
+        "devices": [
+          "desktop"
+        ],
+        "condition": "300×600 をヘッダーの下 (80px) に追従させる (2026-11-12 オーナー決定)。右レールが本文の横にあるとき (PC) だけ出る"
+      },
+      {
         "slot": "adsense-body-responsive",
         "region": "body",
         "position": "全国・県の分布地図の後 (絞り込みの前)",
@@ -973,15 +994,6 @@
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
         "marker": "position=\"municipality-row-2\"",
         "adsenseSlot": "MUNICIPALITY_AFTER_TABLE",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
-      },
-      {
-        "slot": "adsense-body-responsive",
-        "region": "body",
-        "position": "ページの最後 (同じ指標のランキング・記事・テーマの後・出典の前)",
-        "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
-        "marker": "position=\"municipality-row-end\"",
-        "adsenseSlot": "MUNICIPALITY_END",
         "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       }
     ],

@@ -157,13 +157,19 @@ export const AREA_END: AdSlotConfig = { slotId: "4738330430", format: "rectangle
 export const AREA_INFEED: AdSlotConfig = { slotId: "9371196667", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-area-infeed
 
 /**
- * 市区町村のランキング: 地図の後・順位の表とページ送りの後・ページの最後 (関連の後・出典の前)。
+ * 市区町村のランキング: 地図の後・順位の表とページ送りの後。ページの最後の段 (stats47-municipality-end・1042114655) は、同日に右レールを
+ * 付けて表の後の段と近づいたので外した (ユニットは AdSense に残っている)。
  * 2026-11-12 オーナー決定: どれも AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR を外した。それまでは解説の後の 1 段だけで
  * (AdSense・PR・AdSense の横並び。スマホでは先頭の 1 枠だけ)、ユニットはハブ・一覧と共用の HUB_INCONTENT / CONTENT_FOOTER だった。同日に専用のユニットを作った。
  */
 export const MUNICIPALITY_AFTER_MAP: AdSlotConfig = { slotId: "7607523006", format: "rectangle" }; // stats47-municipality-after-map
 export const MUNICIPALITY_AFTER_TABLE: AdSlotConfig = { slotId: "4981359660", format: "rectangle" }; // stats47-municipality-after-table
-export const MUNICIPALITY_END: AdSlotConfig = { slotId: "1042114655", format: "rectangle" }; // stats47-municipality-end
+/**
+ * 市区町村のランキング: 右レール (PC だけ)。2026-11-12 オーナー決定 (推奨案) で、本文が 1,131px に広がっていたページを都道府県の
+ * ランキングと同じ右レール付きの枠にし、関連の一覧の後に 300×250、右レールの最後に追従する 300×600 を置いた。同日に作成
+ */
+export const MUNICIPALITY_RAIL: AdSlotConfig = { slotId: "3309698695", format: "rectangle" }; // stats47-municipality-rail
+export const MUNICIPALITY_RAIL_STICKY: AdSlotConfig = { slotId: "5716370187", format: "rectangle" }; // stats47-municipality-rail-sticky (追従する 300×600)
 
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
