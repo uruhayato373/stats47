@@ -155,7 +155,9 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   // 最大 1200×600・積まれた右レールで 928×280・モバイルの関連コンテンツ型で 308×1503 まで広がっていた。
   // 2026-11-12 オーナー決定の例外: ランキングの解説の後の 1 枠だけ幅いっぱい。広がりすぎないよう幅の上限を必ず持つ
   const RESPONSIVE_ADSENSE_SLOT_IDS = new Set(['adsense-body-responsive']);
-  it('AdSense の枠は、例外の幅いっぱいの枠を除いて 300×250 の固定の大きさ', () => {
+  // 2026-11-12 オーナー決定の例外: 右レールの最後の追従する縦長。Google の追従広告の条件 (幅 300px 以下・PC だけ) に収める
+  const STICKY_RAIL_ADSENSE_SLOT_IDS = new Set(['adsense-rail-sticky']);
+  it('AdSense の枠は、例外の幅いっぱいの枠と追従する縦長を除いて 300×250 の固定の大きさ', () => {
     const adsense = placements.slotTypes.filter((slot) => slot.provider === 'adsense');
     expect(adsense.length).toBeGreaterThan(0);
     for (const slot of adsense) {
@@ -163,6 +165,11 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
       if (RESPONSIVE_ADSENSE_SLOT_IDS.has(slot.id)) {
         expect(box.width, slot.id).toBe('full');
         expect(box.maxWidth, `${slot.id} は幅の上限を持つ`).toBeGreaterThan(0);
+        continue;
+      }
+      if (STICKY_RAIL_ADSENSE_SLOT_IDS.has(slot.id)) {
+        expect(box, slot.id).toEqual({ width: 300, height: 600 });
+        expect(adSlotType(slot.id).devices, `${slot.id} は PC だけ`).toEqual(['desktop']);
         continue;
       }
       expect(box, slot.id).toEqual({ width: 300, height: 250 });

@@ -166,6 +166,23 @@
       "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった / 2026-11-03 オーナー決定: 右レールが本文の横にあるとき (Shell のコンテナ 988px 以上) だけ出す。本文の下に回るとページの最後に積まれて見られないため (2026-W43 に右レールの 5 ユニットで表示の約 40%・収益の約 16%、1,000 表示あたり ¥6〜10)"
     },
     {
+      "id": "adsense-rail-sticky",
+      "name": "右レールの最後の AdSense (追従する縦長)",
+      "provider": "adsense",
+      "box": {
+        "width": 300,
+        "height": 600
+      },
+      "devices": [
+        "desktop"
+      ],
+      "accepts": [
+        "adsense:rectangle"
+      ],
+      "component": "AdSenseAd",
+      "measured": "2026-11-12 オーナー決定: 右レールの中身が本文より短く、PC で下に約 840px 空いていた (総人口のランキング・1440px)。最後の 1 枠を 300×600 にし、ヘッダーの下 (80px) に追従させる。Google の条件 (幅 300px 以下・縦だけ・同時に見える追従広告は 1 つ・重ならない・PC だけ。support.google.com/adsense/answer/10734935・11-12 確認) に収める。右レールは本文の横にあるとき (Shell 988px 以上) だけ出るので、タブレット・スマホでは出ない"
+    },
+    {
       "id": "adsense-footer",
       "name": "ページ末の AdSense",
       "provider": "adsense",
@@ -378,7 +395,7 @@
         "condition": "2026-11-12 オーナー決定でアフィリエイトの PR の枠 (労働系の固定のバナーと文脈のバナー) から替えた。ユニットは使っていなかった stats47-ranking-rail-bottom を流用"
       },
       {
-        "slot": "adsense-rail-rect",
+        "slot": "adsense-rail-sticky",
         "region": "rail",
         "position": "右レールの最後 (分野のランキング一覧の後)",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx",
@@ -386,7 +403,8 @@
         "adsenseSlot": "RANKING_PAGE_TABLE_SIDE",
         "devices": [
           "desktop"
-        ]
+        ],
+        "condition": "300×600 をヘッダーの下 (80px) に追従させる (2026-11-12 オーナー決定)。右レールが本文の横にあるとき (PC) だけ出る"
       }
     ],
     "blog": [

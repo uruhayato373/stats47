@@ -39,7 +39,11 @@ export interface AdSlotConfig {
   format: AdFormat;
 }
 
-/** ランキングページ: データテーブル横（PC）/ テーブル下（モバイル）。AdSense ユニット名: stats47-ranking-table-side */
+/**
+ * ランキングページ: 右レールの最後 (PC だけ)。名前は旧の位置 (表の横) のまま。
+ * 2026-11-12 オーナー決定: 300×600 をヘッダーの下に追従させる (台帳の adsense-rail-sticky)。変更前 W42〜W44 は
+ * 300×250 で 1,000 表示あたり ¥8〜10・視認率 32〜33%。AdSense ユニット名: stats47-ranking-table-side
+ */
 export const RANKING_PAGE_TABLE_SIDE: AdSlotConfig = {
   slotId: "5182030050",
   format: "rectangle",

@@ -197,15 +197,18 @@ export function RankingKeyPageClient({
     // ArticleShell の右レールは shell コンテナ 988px 以上で表示する (本文 656px を保つ境界)。
     // ラッパーもブログと同じ非 sticky の <aside> に揃える。
     // サイド AdSense はレール表示時に合わせて hidden @min-[988px]/shell:block。
+    // 最後の 1 枠は 300×600 をヘッダー (56px) の下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
+    // PC で下が約 840px 空いていた)。右レールは flex の列なので、sticky は右レールの終わり = 本文の終わりで止まり、フッターに重ならない。
+    // Google の条件 (幅 300px 以下・縦だけ・同時に見える追従広告は 1 つ・PC だけ) は台帳の adsense-rail-sticky に書いた
     const rail = sections.sidebar ? (
         <>
             {sections.sidebar}
             {ADSENSE_DISPLAY_ENABLED && (
-                <div className="hidden @min-[988px]/shell:block">
+                <div className="sticky top-20 hidden @min-[988px]/shell:block">
                     <AdSenseAd
                         format={RANKING_PAGE_TABLE_SIDE.format}
                         slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                        slotBox={adSlotBox("adsense-rail-rect")}
+                        slotBox={adSlotBox("adsense-rail-sticky")}
                     />
                 </div>
             )}
