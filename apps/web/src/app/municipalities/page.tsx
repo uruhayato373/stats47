@@ -29,7 +29,6 @@ import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
 
 import { AdRow, composeAdRows } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
@@ -90,13 +89,8 @@ export default async function MunicipalitiesHubPage() {
   });
   const draftThemes = themes.filter((theme) => theme.status === 'draft');
   const prefectures = fetchPrefectures();
-  // 広告の段 (2026-11-03 オーナー決定): 公開中のテーマの後。旧: 広告は右レールの AdSense だけで、モバイルでは 0 枠だった。
-  // 本文 (右レールの横で約 810px) では 2 枠、モバイルは AdSense。読者の意図が決まらないので PR は共通の案件
-  const [hubRow] = composeAdRows(
-    [['adsense', 'affiliate']],
-    [HUB_INCONTENT],
-    await resolveGenericAffiliateBanners(1).catch(() => []),
-  );
+  // 広告の段: 公開中のテーマの後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+  const [hubRow] = composeAdRows([['adsense']], [HUB_INCONTENT], []);
   const activeThemeBySlug = new Map(
     activeThemes.map((theme) => [theme.slug, theme])
   );
@@ -239,7 +233,7 @@ export default async function MunicipalitiesHubPage() {
 
       {hubRow.length > 0 && (
         <div className="mt-8">
-          <AdRow cells={hubRow} position="municipalities-row-1" trackingCategory="municipalities" />
+          <AdRow cells={hubRow} position="municipalities-row-1" trackingCategory="municipalities" wide />
         </div>
       )}
 

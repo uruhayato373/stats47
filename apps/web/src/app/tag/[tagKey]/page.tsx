@@ -7,14 +7,13 @@ import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
-import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
-import { resolveAffiliateBanners } from '@/features/ads/server';
+import { AdRow, composeAdRows } from '@/features/ads';
 import {
   listAllUniqueTags,
   listArticleSummariesByTagKey,
 } from '@/features/blog/server';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { MIN_INDEXABLE_TAG_ARTICLES } from '@/lib/url-policy';
 
 import type { Metadata } from 'next';
@@ -86,18 +85,14 @@ export async function generateMetadata({
 export default async function TagArticlesPage({ params }: PageProps) {
   const { tagKey } = await params;
   const tag = decodeTagKey(tagKey);
-  const [articles, nativeBanners] = await Promise.all([
-    listArticleSummariesByTagKey(tag, 50),
-    // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
-    resolveAffiliateBanners([tag], 8).catch(() => []),
-  ]);
+  const articles = await listArticleSummariesByTagKey(tag, 50);
 
   if (articles.length === 0) {
     notFound();
   }
 
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
-  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
+  // 広告の段: AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+  const [rowCells] = composeAdRows([['adsense']], [HUB_INCONTENT], []);
   return (
     <PageShell>
       <Breadcrumbs
@@ -149,7 +144,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
       {/* ネイティブアフィリエイト (D Phase 4) */}
       {rowCells.length > 0 && (
         <div className="mt-10">
-          <AdRow cells={rowCells} position="tag-row-1" trackingCategory={`tag-${tagKey}`} />
+          <AdRow cells={rowCells} position="tag-row-1" trackingCategory={`tag-${tagKey}`} wide />
         </div>
       )}
 

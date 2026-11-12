@@ -14,12 +14,12 @@ import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 
-import { OperatorProfileCard } from '@/features/ads';
-import { AffiliateAdSlot } from '@/features/ads/server';
+import { AdRow, composeAdRows, OperatorProfileCard, RailAdSlot } from '@/features/ads';
 import { BlogArticleGrid, BlogNavigationCards } from '@/features/blog/listing';
 import { readBlogIndexPageFromR2 } from '@/features/blog/listing.server';
 import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
+import { ADSENSE_DISPLAY_ENABLED, CONTENT_FOOTER, RAIL_RECT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { formatOgpTitle } from "@/lib/metadata/site-title";
 
@@ -91,6 +91,10 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
   const hasPrevPage = currentPage > 1;
   const blogTags = meta?.tagMeta ?? [];
 
+  // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。ほかの一覧ページと同じ形
+  // (2026-11-12。アフィリエイトを止めたとき、モバイルの本文に AdSense が 1 つも無かったので足した)
+  const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
+
   return (
     // doboku-note スタイル: 左=記事カード一覧 / 右=共通サイドバー (運営者プロフィール + promo/広告)。
     // 運営者は上部の共通 OperatorProfileCard が担う。
@@ -114,14 +118,8 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
             </>
           }
           bottomWidgets={
-            <AffiliateAdSlot
-              categoryKey="administrativefinancial"
-              vertical="furusato"
-              position="sidebar"
-              bannerOnly
-              bannerLimit={1}
-              trackingPosition="blog-sidebar"
-            />
+            // 右レールの最後の AdSense (2026-11-12 オーナー決定でアフィリエイトを止め、ふるさと納税のバナーから替えた)。PC だけ
+            ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />
           }
           showTopAd={false}
         />
@@ -143,7 +141,6 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
       <BlogNavigationCards variant="toolbar" tags={blogTags} />
       <BlogArticleGrid articles={articles} />
 
-      {/* 一覧本文の広告は置かず、地域文脈の画像バナー 1 枠をレール末尾だけに置く。 */}
       {(hasPrevPage || hasNextPage) && (
         <Pagination className="mt-8" aria-label="ページネーション">
           <PaginationContent>
@@ -173,6 +170,8 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
           </PaginationContent>
         </Pagination>
       )}
+
+      {indexRow.length > 0 && <AdRow cells={indexRow} position="blog-index-row" trackingCategory="blog-index" wide />}
     </PageShell>
   );
 }

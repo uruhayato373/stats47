@@ -32,7 +32,6 @@ import {
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
@@ -168,13 +167,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         { surveyIds: article.surveyIds, tagKeys },
         { title: article.title, subtitle: article.frontmatter.subtitle },
     );
-    const affiliateTextAds = await resolveAffiliateTextAdsForContent(
-        bannerInput,
-        "sidebar-bottom",
-        4,
-    );
-    // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
-    //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
     // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。
     // どの段も AdSense 1 つを本文の幅いっぱいに出し、PR は出さない (2026-11-12 オーナー決定。アフィリエイトは戦略を決め直すまで止める)。
     // 見出しの数で本文の段が減るので、差し込める段だけに割り当て、末尾の段は常に BLOG_END にする
@@ -383,7 +375,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 article={renderedArticle}
                                 slug={slug}
                                 relatedArticleTitles={relatedArticleTitles}
-                                affiliateTextAds={affiliateTextAds}
                                 affiliateVertical={bannerVertical}
                                 adRows={adRows}
                             />

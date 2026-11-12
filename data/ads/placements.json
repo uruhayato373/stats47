@@ -443,13 +443,6 @@
         ]
       },
       {
-        "slot": "affiliate-text",
-        "region": "body",
-        "position": "本文の h2 の 2/4/6 番目の直前 (テキスト版の記事)",
-        "source": "apps/web/src/features/blog/components/md-content.tsx",
-        "marker": "<AffiliateTextAdList"
-      },
-      {
         "slot": "adsense-body-responsive",
         "region": "body",
         "position": "記事の末尾",
@@ -539,155 +532,90 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "新着ブログの後・全ランキングの前",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "position=\"category-row-1\"",
         "trackingPosition": "category-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
+        "adsenseSlot": "HUB_INCONTENT",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "全ランキングの後・47都道府県から探すの前",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "position=\"category-row-2\"",
         "trackingPosition": "category-row-2",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "THEMES_CONTENT"
-          }
-        ]
+        "adsenseSlot": "HUB_ROW_2",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "position=\"category-row-3\"",
         "trackingPosition": "category-row-3",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       }
     ],
     "category-compare": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "比較の後 (ページの最後)",
         "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
         "marker": "position=\"compare-row-1\"",
         "trackingPosition": "compare-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
+        "adsenseSlot": "HUB_INCONTENT",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       }
     ],
     "survey": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "全ランキングの前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-row-1\"",
         "trackingPosition": "survey-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
+        "adsenseSlot": "HUB_INCONTENT",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "全ランキングの後・注意の前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-row-2\"",
         "trackingPosition": "survey-row-2",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "THEMES_CONTENT"
-          }
-        ]
+        "adsenseSlot": "HUB_ROW_2",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "この調査についての後 (ページの最後)",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-row-3\"",
         "trackingPosition": "survey-row-3",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ],
-        "condition": "「この調査について」がある調査だけ (PR の段と隣り合わせにしない)"
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない 「この調査について」がある調査だけ (PR の段と隣り合わせにしない)"
       }
     ],
     "tag": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "記事の一覧の後 (ページの最後)",
         "source": "apps/web/src/app/tag/[tagKey]/page.tsx",
         "marker": "position=\"tag-row-1\"",
         "trackingPosition": "tag-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
+        "adsenseSlot": "HUB_INCONTENT",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       }
     ],
     "area": [
@@ -762,122 +690,83 @@
     ],
     "ranking-index": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/ranking/page.tsx",
         "marker": "position=\"ranking-index-row\"",
         "trackingPosition": "ranking-index-row",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          }
-        ],
-        "condition": "PR は共通の案件"
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
       }
     ],
     "themes-index": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/themes/page.tsx",
         "marker": "position=\"themes-index-row\"",
         "trackingPosition": "themes-index-row",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          }
-        ],
-        "condition": "PR は共通の案件"
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
       }
     ],
     "areas-index": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/areas/page.tsx",
         "marker": "position=\"areas-index-row\"",
         "trackingPosition": "areas-index-row",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          }
-        ],
-        "condition": "PR は共通の案件"
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
       }
     ],
     "survey-index": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/survey/page.tsx",
         "marker": "position=\"survey-index-row\"",
         "trackingPosition": "survey-index-row",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          }
-        ],
-        "condition": "PR は共通の案件"
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
+      }
+    ],
+    "blog-index": [
+      {
+        "slot": "adsense-rail-rect",
+        "region": "rail",
+        "position": "右レールの最後 (探索の導線・運営者のプロフィールの後)",
+        "source": "apps/web/src/app/blog/page.tsx",
+        "marker": "<RailAdSlot slot={RAIL_RECT} />",
+        "adsenseSlot": "RAIL_RECT",
+        "condition": "2026-11-12 オーナー決定でアフィリエイトのふるさと納税のバナーから替えた。右レールが本文の横にあるとき (PC) だけ出る"
+      },
+      {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "ページの最後 (ページ送りの後)",
+        "source": "apps/web/src/app/blog/page.tsx",
+        "marker": "position=\"blog-index-row\"",
+        "trackingPosition": "blog-index-row",
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12。アフィリエイトを止めたとき、モバイルの本文に AdSense が無かったので足した)。AdSense を止めているときは出さない"
       }
     ],
     "blog-tags": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/blog/tags/page.tsx",
         "marker": "position=\"blog-tags-row\"",
         "trackingPosition": "blog-tags-row",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          }
-        ],
-        "condition": "PR は共通の案件"
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
       }
     ],
     "search": [
@@ -932,22 +821,14 @@
     ],
     "municipalities-index": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "公開中のテーマの後・データ品質への取り組みの前",
         "source": "apps/web/src/app/municipalities/page.tsx",
         "marker": "position=\"municipalities-row-1\"",
         "trackingPosition": "municipalities-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ],
-        "condition": "PR は共通の案件"
+        "adsenseSlot": "HUB_INCONTENT",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
       },
       {
         "slot": "adsense-rail-rect",

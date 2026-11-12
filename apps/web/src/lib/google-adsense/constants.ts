@@ -214,6 +214,12 @@ export const HOME_ROW_2: AdSlotConfig = { slotId: "3189892156", format: "rectang
 export const HOME_RAIL_STICKY: AdSlotConfig = { slotId: "3704063320", format: "rectangle" }; // stats47-home-rail-sticky (追従する 300×600)
 
 /**
+ * ハブ (分野・調査) の本文の 2 段目 (全ランキングの後)。2026-11-12 オーナー決定でアフィリエイトを止め、段を AdSense 1 つの幅いっぱいに
+ * したときに作った。それまでの 2 段目は THEMES_CONTENT で、同日からテーマの段に使うので、テーマの分と混ざらないよう分けた。
+ */
+export const HUB_ROW_2: AdSlotConfig = { slotId: "6020069625", format: "rectangle" }; // stats47-hub-row-2 (ディスプレイ / レスポンシブ)
+
+/**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）
  * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
  * ADSENSE-HUB-INCONTENT-01: モバイル imp/PV（W26 実測 0.37）改善のためハブ面に in-content を新設。

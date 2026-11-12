@@ -72,6 +72,7 @@ const PAGE_URLS: Record<string, { label: string; path: string; scopes?: PageScop
   },
   "themes-index": { label: "テーマ一覧", path: "/themes" },
   blog: { label: "ブログ記事", path: "/blog/beer-peak-month-july-to-december" },
+  "blog-index": { label: "ブログ一覧", path: "/blog" },
   "blog-tags": { label: "ブログのタグ一覧", path: "/blog/tags" },
   category: { label: "カテゴリ", path: "/category/population" },
   "category-compare": { label: "カテゴリの比較", path: "/category/population/compare" },

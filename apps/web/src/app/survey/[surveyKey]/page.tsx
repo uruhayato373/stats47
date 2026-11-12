@@ -43,7 +43,6 @@ import {
   AdRow,
   composeAdRows,
 } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { listArticleSummariesBySurveyId } from '@/features/blog/server';
 import {
   FeaturedRankingCard,
@@ -63,7 +62,7 @@ import {
   themeNavGroupOf,
 } from "@/features/theme-dashboard/config/theme-navigation";
 
-import { CONTENT_FOOTER, HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER, HUB_INCONTENT, HUB_ROW_2 } from '@/lib/google-adsense';
 import { getIcon } from '@/lib/icons';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
@@ -196,18 +195,12 @@ export default async function SurveyPage({ params }: PageProps) {
     6,
     getSurveyEditorialContent(surveyKey)?.relatedArticleSlugs ?? []
   ).catch(() => []);
-  // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
-  //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
-  //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
-  // 2026-11-03 (オーナー決定・収益化戦略 §3.2): 調査ごとの文脈の案件 (家計調査 → ふるさと納税など) をやめ、
-  // 共通の案件 (対象者が広く気軽に始められる商品) を本文の広告の段に横 3 枠で出す。狭い幅では入る数だけ (モバイルは 1 枠)
-  const nativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
-  // 全ランキングの前・全ランキングの後・ページの最後 (旧: デスクトップだけの本文とページ末の AdSense と PR の列)
+  // 広告の段: 全ランキングの前・全ランキングの後・ページの最後に、AdSense 1 つを本文の幅いっぱい (上限 580px) に出す
+  // (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)。2 段目はハブ用の HUB_ROW_2 (THEMES_CONTENT はテーマの段に使う)
   const [surveyRow1, surveyRow2, surveyRow3] = composeAdRows(
-    [['adsense', 'affiliate'], ['affiliate', 'adsense'], ['adsense', 'affiliate']],
-    [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER],
-    nativeBanners,
+    [['adsense'], ['adsense'], ['adsense']],
+    [HUB_INCONTENT, HUB_ROW_2, CONTENT_FOOTER],
+    [],
   );
   const editorial = getSurveyEditorialContent(surveyKey);
   const isKakei = surveyKey === 'kakei-chousa';
@@ -486,7 +479,7 @@ export default async function SurveyPage({ params }: PageProps) {
         ランキング表は無条件で必ず描画されるので、ここに置けば必ず両枠が離れる (2026-07-29 是正)。
       */}
       {surveyRow1.length > 0 && (
-        <AdRow cells={surveyRow1} position="survey-row-1" trackingCategory={`survey-${surveyKey}`} />
+        <AdRow cells={surveyRow1} position="survey-row-1" trackingCategory={`survey-${surveyKey}`} wide />
       )}
 
       <section id="all-rankings" className="mb-4 scroll-mt-24">
@@ -544,7 +537,7 @@ export default async function SurveyPage({ params }: PageProps) {
           全ランキングの表の後・注意の前に置き、ページ末の関連コンテンツ型と隣り合わせにしない (2026-10-30) */}
       {surveyRow2.length > 0 && (
         <section className="mb-4">
-          <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} />
+          <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} wide />
         </section>
       )}
 
@@ -560,7 +553,7 @@ export default async function SurveyPage({ params }: PageProps) {
       {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「この調査について」を挟めるときだけ出す
           (注意の無い調査で PR の列と隣り合わせにしない。2026-10-30) */}
       {editorial && surveyRow3.length > 0 && (
-        <AdRow cells={surveyRow3} position="survey-row-3" trackingCategory={`survey-${surveyKey}`} />
+        <AdRow cells={surveyRow3} position="survey-row-3" trackingCategory={`survey-${surveyKey}`} wide />
       )}
     </ArticleShell>
   );
