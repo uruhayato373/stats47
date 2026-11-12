@@ -106,7 +106,8 @@ test.describe("breakpoint 別レイアウト", () => {
       if (product.coverImageUrl) {
         const cover = bottom.getByRole('img');
         await expect(cover).toBeVisible();
-        await expect.poll(() => cover.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+        // 外部配信の遅延読み込み画像は、レイアウト表示後の通信完了まで待つ。
+        await expect.poll(() => cover.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0), { timeout: 15_000 }).toBe(true);
       } else {
         await expect(bottom.getByRole('img')).toHaveCount(0);
       }
