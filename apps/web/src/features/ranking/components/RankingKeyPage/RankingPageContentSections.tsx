@@ -20,12 +20,12 @@ export interface RankingPageSections {
     dataSources?: ReactNode;
     /** 統計→公務員AI ファネル CTA — 出典カードの直後・footer 広告の前に表示 */
     funnelCta?: ReactNode;
-    /** 解説の後の広告の段 (AdRow。AdSense と PR) */
+    /** 解説の後の広告の段 (AdRow。幅いっぱいの AdSense 1 つ) */
     adRowMid?: ReactNode;
-    /** 出典の後の広告の段 (AdRow。AdSense と PR) */
+    /** 出典の後の広告の段 (AdRow。幅いっぱいの AdSense 1 つ) */
     adRowFooter?: ReactNode;
-    /** ネイティブアフィリエイト枠 (D Phase 2) — AI考察カードの直前に表示 */
-    nativeAffiliate?: ReactNode;
+    /** ページの最後の広告の段 (AdRow。幅いっぱいの AdSense 1 つ。2026-11-12 に PR の列から替えた) */
+    adRowEnd?: ReactNode;
     /** 同カテゴリ関連ランキング grid (内部リンク密度↑、GSC indexation 改善) */
     relatedRankings?: ReactNode;
     /** 右サイドバーに表示するコンテンツ（Server Component を注入） */
@@ -102,11 +102,11 @@ export function RankingPageContentSections({
 
             {sections.adRowFooter}
 
-            {/* 関連ランキングと記事を出典の後の広告の段と PR の列の間に置き、広告の枠を隣り合わせにしない。
-                記事は記事カードの格子で、PR の列はページの最後 (テーマのページと同じ。広告の枠の台帳 ads.placements) */}
+            {/* 関連ランキングと記事を出典の後の広告の段とページの最後の広告の段の間に置き、広告の枠を隣り合わせにしない
+                (広告の枠の台帳 ads.placements) */}
             {sections.relatedRankings}
             {sections.relatedArticles}
-            {sections.nativeAffiliate}
+            {sections.adRowEnd}
         </>
     );
 }

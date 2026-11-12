@@ -130,10 +130,9 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   it('台帳の枠の部品を置いたファイルは、どれも台帳のページの置き方に載っている', () => {
     const sources = new Set(Object.values(PAGES).flat().map((p) => p.source));
     const componentFiles = /^apps\/web\/src\/(features\/ads\/components\/|lib\/google-adsense\/)/;
-    // 節を組み立てるだけのファイル。置き場所は台帳の {sections.inContentAffiliate} / {sections.nativeAffiliate} (RankingPageContentSections)
+    // 節を組み立てるだけのファイル。置き場所は台帳の {sections.adRowMid} / {sections.adRowFooter} / {sections.adRowEnd} (RankingPageContentSections)
     const sectionBuilders = new Set([
       'apps/web/src/features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx',
-      'apps/web/src/features/ranking/components/RankingKeyPage/RankingPageNativeAffiliateSection.tsx',
     ]);
     const unlisted: string[] = [];
     const walk = (dir: string) => {

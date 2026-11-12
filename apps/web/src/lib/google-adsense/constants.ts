@@ -91,6 +91,17 @@ export const RANKING_PAGE_FOOTER: AdSlotConfig = {
   format: "rectangle",
 };
 
+/**
+ * ランキングページ: ページの最後 (関連ランキング・記事の後)
+ * 2026-11-12 オーナー決定: アフィリエイトの PR の列から替えた。ほかの枠と実績が混ざらないよう専用のユニットを作った
+ * (同日に AdSense の管理画面で作成)。本文の幅いっぱい (上限 580px。台帳の adsense-body-responsive) で、形は rectangle に絞る。
+ * AdSense ユニット: stats47-ranking-end（ディスプレイ / レスポンシブ）
+ */
+export const RANKING_PAGE_END: AdSlotConfig = {
+  slotId: "3452480564",
+  format: "rectangle",
+};
+
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
   slotId: "6809797335",
