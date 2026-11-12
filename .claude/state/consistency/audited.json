@@ -1,7 +1,7 @@
 {
-  "hash": "79a723e1b763492ff5e59c25da7a22a7f7f9ca2651be93b9a9071e8b3b2f2a38",
-  "audited_at": "2026-11-12T03:45:12",
+  "hash": "530ab7279c05ff255b769f16f0fbec94ad3d6843771103e25559334a75a58e80",
+  "audited_at": "2026-11-12T09:03:53",
   "files": [
-    ".claude/scripts/lib/pre-push-tests.mjs"
+    ".claude/scripts/surveys/build-survey-portfolio.ts"
   ]
 }
