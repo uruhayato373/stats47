@@ -15,8 +15,6 @@ interface Props {
   frame?: 'card' | 'inline';
   /** 見出しの左のアイコン。省略時は RailLinksCard の既定。 */
   icon?: ReactNode;
-  /** index 件目の後に 1 つだけ差し込む要素 (記事の一覧のインフィード広告) */
-  insertAfter?: { index: number; node: ReactNode; className?: string };
 }
 
 /**
@@ -35,7 +33,6 @@ export function ContentNavigation({
   columns = 1,
   frame = 'card',
   icon,
-  insertAfter,
 }: Props) {
   if (!items.length) return null;
   const showReason = new Set(items.map((item) => item.reason)).size > 1;
@@ -49,7 +46,6 @@ export function ContentNavigation({
       layout={layout}
       columns={columns}
       frame={frame}
-      insertAfter={insertAfter}
       trackingSurface={surface}
       items={items.map((item) => ({
         id: item.id,

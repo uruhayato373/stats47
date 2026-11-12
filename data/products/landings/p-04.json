@@ -1,0 +1,47 @@
+{
+  "productId": "P-04",
+  "articleKey": "prefecture-municipal-finance-pack",
+  "displayTitle": "都道府県別 自治体財政・職員給与データ",
+  "description": "財政力、借入返済の負担、歳入の規模を分けて比べ、財政説明の資料を作れます。",
+  "useCases": [
+    {
+      "title": "予算・決算の説明資料に",
+      "description": "自県と比較対象の県の財政指標を並べ、数字の位置づけを説明する図表を作れます。"
+    },
+    {
+      "title": "近隣県との財政比較に",
+      "description": "歳入額の大きさと財政力指数などの比率を分け、規模だけでは捉えにくい違いを整理できます。"
+    },
+    {
+      "title": "財政を学ぶ研修や授業に",
+      "description": "財政力指数と実質公債費比率を別々の図で扱い、それぞれ何を表す指標なのかを説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "fiscal-strength-comparison",
+      "heading": "財政力指数で自県の位置を確かめる",
+      "lead": "財政力指数を棒グラフで比較し、自県と他県の違いを説明できます。歳入総額の多さとは別の指標として示すことで、財政の特徴を整理できます。",
+      "metricKeys": ["fiscal-strength-index-prefecture"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "debt-service-distribution",
+      "heading": "借入返済の負担を地図で比べる",
+      "lead": "実質公債費比率で地図を色分けし、公債費などの負担が地域ごとにどう異なるかを示せます。財政力指数とは意味が異なるため、別の図として読み比べます。",
+      "metricKeys": ["real-public-debt-service-ratio"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "revenue-scale",
+      "heading": "歳入の規模を比べる",
+      "lead": "歳入総額を並べ、比較対象の県の財政規模を確認できます。人口や行政の役割も異なるため、金額の大小だけで財政の良し悪しは判断しません。",
+      "metricKeys": ["total-revenue-prefecture"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "作成例は都道府県財政の比較です。個々の市区町村の財政状況を直接示す図ではありません。",
+    "収録版の値を固定した商品です。決算年度と各指標の定義を確認し、単独の指標で財政の健全性を断定しないでください。"
+  ]
+}

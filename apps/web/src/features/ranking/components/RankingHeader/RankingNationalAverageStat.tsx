@@ -2,21 +2,21 @@
 
 import { cn, ChartPanel } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { PREFECTURE_COUNT, simpleMeanLabel, type NationalFigure } from "@stats47/ranking";
 import { TrendingUp } from "lucide-react";
 
+import { getMetricChartColor } from "@/components/charts/ChartPalette";
 import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
 import { STAT_UNIT_CLASS, STAT_VALUE_CLASS } from "@/components/surface";
 
-import {
-  computeNationalAveragePeriodChange,
-  type NationalAveragePoint,
-} from "../../lib/build-national-average-series";
 import { formatRankingValue } from "../../utils/compute-ranking-header-stats";
 
-import type { NationalFigure } from "@stats47/ranking";
-import type { NumericDomainPolicy } from "@stats47/types";
+import type { NationalAveragePoint } from "../../lib/build-national-average-series";
+import type { MetricPresentation } from "@stats47/types";
 
 interface RankingNationalAverageStatProps {
+  /** ランキング表記などを除いた、表示中の指標名 */
+  metricTitle: string;
   /** 選択年の全国の基準値 (resolveNationalFigure で解決済み) */
   figure: NationalFigure | null;
   unit: string;
@@ -29,65 +29,102 @@ interface RankingNationalAverageStatProps {
    * 平均だけ別の桁数で出すと表と食い違うため、ここで独自に決めない。
    */
   precision: number;
-  domainPolicy: NumericDomainPolicy;
+  presentation: Pick<MetricPresentation, "colorScheme" | "trendDomain">;
 }
 
 
-/**
- * 全国の基準値と、その推移。
- *
- * 大きい数値は「選択年」、線は「全期間」で意味が違うため、両方にラベルを付けて
- * 取り違えを防ぐ。公表の全国値 (00000) があれば「全国値」(総数なら「全国計」)、
- * 無ければ「47都道府県の単純平均」と明記する (lib/resolve-national-figure.ts)。
- */
+/** 指標の推移。選択年の数値を並べ、年ごとの値は図の操作時に表示する。 */
 export function RankingNationalAverageStat({
+  metricTitle,
   figure,
   unit,
   series,
   yearName,
   precision,
-  domainPolicy,
+  presentation,
 }: RankingNationalAverageStatProps) {
   if (figure === null) return null;
-  const label = figure.label;
 
   const hasTrend = series.length >= 2;
-  const periodChange = computeNationalAveragePeriodChange(series, unit);
+  const hasTotal = series.some((point) => point.total != null);
+  const selectedYear = yearName ? Number(yearName.slice(0, 4)) : undefined;
+  const selectedPoint = series.find((point) => point.year === selectedYear);
+  const displayUnit = formatUnitForDisplay(unit);
+  const meanLabel = (count: number) =>
+    `${metricTitle}（${count === PREFECTURE_COUNT ? "" : count}都道府県平均）`;
+  const totalLabel = `${metricTitle}（全国）`;
+  const lineLabel = hasTotal || figure.kind === "simple-mean"
+    ? meanLabel(selectedPoint?.count ?? figure.prefectureCount ?? PREFECTURE_COUNT)
+    : totalLabel;
+  const lineColor = getMetricChartColor(presentation);
+  const linePoints = hasTotal
+    ? series.map((point) => ({ year: point.year, value: point.mean ?? Number.NaN }))
+    : series;
+  const areaSeries = hasTotal ? {
+    label: totalLabel,
+    points: series.map((point) => ({ year: point.year, value: point.total ?? Number.NaN })),
+    color: lineColor,
+    domainPolicy: { mode: "zero" } as const,
+  } : undefined;
+  const summaryValues = hasTotal ? [
+    { label: "合計", value: selectedPoint?.total ?? null, description: "47都道府県の合計" },
+    { label: "平均", value: selectedPoint?.mean ?? null, description: simpleMeanLabel(selectedPoint?.count ?? 0) },
+  ] : [{
+    label: figure.kind === "simple-mean" ? "平均" : figure.kind === "national-total" ? "合計" : "全国値",
+    value: figure.value,
+    description: figure.label,
+  }];
 
-  // 見出し行は題だけにして隣の「上位3件」と高さをそろえる。大きな数値と年は本文の先頭に置く。
+  // 年は見出しの右、数値は横並び。幅や桁数が足りない場合は項目ごと折り返す。
   // 推移の図は本文の残りの高さいっぱいに伸ばし、カードの下に空白を残さない。
   return (
     <ChartPanel
-      title={label}
+      title={`${metricTitle}の推移`}
       icon={<TrendingUp />}
+      action={yearName && <span className="whitespace-nowrap text-xs text-muted-foreground">{yearName}</span>}
       contentClassName="flex flex-1 flex-col gap-2"
     >
-      <p className="flex items-baseline gap-2">
-        <span className={cn(STAT_VALUE_CLASS, "whitespace-nowrap")}>
-          {formatRankingValue(figure.value, precision)}
-          <span className={STAT_UNIT_CLASS}>{formatUnitForDisplay(unit)}</span>
-        </span>
-        {yearName && <span className="text-xs text-muted-foreground">（{yearName}）</span>}
-      </p>
+      <dl className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        {summaryValues.map((summary) => (
+          <div key={summary.label} className="flex items-baseline whitespace-nowrap" title={summary.description}>
+            <dt className="text-xs text-muted-foreground">{summary.label}：</dt>
+            <dd className={cn(STAT_VALUE_CLASS, hasTotal && "text-base leading-6")}>
+              {summary.value == null ? "—" : formatRankingValue(summary.value, precision)}
+              {summary.value != null && <span className={STAT_UNIT_CLASS}>{displayUnit}</span>}
+            </dd>
+          </div>
+        ))}
+      </dl>
       {hasTrend ? (
         <NumericTrendChart
-          points={series}
-          policy={domainPolicy}
-          selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined}
-          label={label}
-          unit={unit}
+          points={linePoints}
+          policy={presentation.trendDomain}
+          label={lineLabel}
+          unit={displayUnit}
           formatValue={(value) => formatRankingValue(value, precision)}
           fillHeight
+          showAxes={false}
+          areaSeries={areaSeries}
+          lineColor={lineColor}
+          formatYear={(year) => series.find((point) => point.year === year)?.yearName ?? `${year}年`}
+          tooltipItems={(point) => {
+            const observation = series.find((entry) => entry.year === point.year);
+            return [
+              ...(observation?.total != null
+                ? [{ name: totalLabel, value: observation.total, color: lineColor }]
+                : []),
+              {
+                name: observation && (hasTotal || observation.kind === "simple-mean")
+                  ? meanLabel(observation.count) : totalLabel,
+                value: point.value,
+                color: lineColor,
+              },
+            ];
+          }}
         />
       ) : (
         <p className="text-xs text-muted-foreground">
           {series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}
-        </p>
-      )}
-      {periodChange && (
-        <p className="text-xs text-muted-foreground">
-          {periodChange.fromYear}→{periodChange.toYear}{" "}
-          <span className="font-medium text-foreground">{periodChange.text}</span>
         </p>
       )}
     </ChartPanel>

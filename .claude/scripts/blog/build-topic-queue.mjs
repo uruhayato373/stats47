@@ -275,9 +275,13 @@ async function fetchCorrelationPairs(keys) {
     const results = await Promise.all(
       batch.map(async (key) => {
         try {
-          const res = await fetch(`${R2_BASE}/app/correlation/by-ranking-key/${key}.json`);
+          const res = await fetch(`${R2_BASE}/app/correlation/by-ranking-key-v2/${key}.json`);
           if (!res.ok) return null;
-          return { key, json: await res.json() };
+          const snapshot = await res.json();
+          const pairs = Object.values(snapshot.groups ?? {}).flat().sort((a, b) =>
+            Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR) ||
+            (a.rankingKey < b.rankingKey ? -1 : a.rankingKey > b.rankingKey ? 1 : 0));
+          return { key, json: { ...snapshot, pairs } };
         } catch {
           return null;
         }

@@ -1,0 +1,47 @@
+{
+  "productId": "P-12",
+  "articleKey": "prefecture-all-in-one-pack",
+  "displayTitle": "都道府県 統計データ総合集",
+  "description": "人口・観光・産業などの統計をまとめて使い、複数の視点から地域を紹介する資料を作れるデータ集です。",
+  "useCases": [
+    {
+      "title": "県勢紹介の資料作りに",
+      "description": "人口、観光、産業の図を組み合わせ、地域の全体像を伝える説明資料を作れます。"
+    },
+    {
+      "title": "テーマの異なる調査案件に",
+      "description": "収録指標から案件に合う項目を選び、地域比較の表やグラフを作成できます。"
+    },
+    {
+      "title": "地域比較の授業や研修に",
+      "description": "同じ県でも指標によって順位や特徴が変わることを、複数の図で説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "population-overview",
+      "heading": "人口の規模から地域を紹介する",
+      "lead": "総人口の棒グラフを使い、紹介する県が全国の中でどの程度の規模かを示せます。地域比較資料の最初の一枚として使えます。",
+      "metricKeys": ["total-population"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "tourism-overview",
+      "heading": "宿泊の分布を加えて観光を説明する",
+      "lead": "従業者10人以上の宿泊施設の延べ宿泊者数を地図にできます。人口とは違う分布を確認し、観光という視点から地域を紹介できます。",
+      "metricKeys": ["total-overnight-guests"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "industry-overview",
+      "heading": "製造業の規模も合わせて紹介する",
+      "lead": "製造品出荷額等を県別に並べ、地域の産業を金額から説明できます。人口や観光の図と組み合わせて、多面的な地域紹介を作れます。",
+      "metricKeys": ["manufacturing-shipment-amount"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録指標には対象年・単位・調査範囲が異なるものがあります。複数の図を並べる際も、それぞれの基準年と出典を記載してください。",
+    "家計調査など県庁所在市を対象とする指標もあります。地域名だけで集計範囲を判断せず、指標ごとの説明を確認してください。"
+  ]
+}

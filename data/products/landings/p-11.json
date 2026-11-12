@@ -1,0 +1,40 @@
+{
+  "productId": "P-11",
+  "articleKey": "prefecture-map-chart-assets-pack",
+  "displayTitle": "都道府県の地図・ランキング素材",
+  "description": "地域の特徴を伝える地図とランキング図を、資料や記事に取り入れるための図版素材集です。",
+  "useCases": [
+    {
+      "title": "プレゼン資料の導入に",
+      "description": "人口や世帯の分布を示す図を添え、説明する地域の規模をひと目で伝えられます。"
+    },
+    {
+      "title": "記事の比較図に",
+      "description": "県別の地図やランキング図を使い、本文で取り上げる地域の位置づけを紹介できます。"
+    },
+    {
+      "title": "社内資料の図版づくりに",
+      "description": "用途に合わせてPNG・SVG・PowerPointの素材を選び、資料に組み込めます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "population-map",
+      "heading": "人口の分布を地図で伝える",
+      "lead": "都道府県別の総人口を色分けした地図です。全国の分布を示してから担当する地域の説明へ進む、資料の導入に使えます。",
+      "metricKeys": ["total-population"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "household-ranking",
+      "heading": "世帯数の違いを図で伝える",
+      "lead": "都道府県別の一般世帯数を並べたランキング図です。数表だけではつかみにくい地域間の規模の違いを紹介できます。",
+      "metricKeys": ["general-households"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "PNG・SVGの地図素材、PowerPoint、PDF、元データのCSVを収録しています。Excelファイルは含みません。",
+    "素材を利用する際は、図に記載した基準年・単位・出典を残し、同梱の利用条件に従ってください。"
+  ]
+}

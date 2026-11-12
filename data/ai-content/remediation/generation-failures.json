@@ -86,10 +86,22 @@
       "firstFailedAt": "2026-11-09"
     },
     "inbound-visitors-by-destination": {
-      "failCount": 2,
+      "failCount": 3,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-11",
+      "lastFailedAt": "2026-11-12",
       "firstFailedAt": "2026-11-10"
+    },
+    "raw-milk-production": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-12",
+      "firstFailedAt": "2026-11-12"
+    },
+    "convenience-store-count-commercial": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-12",
+      "firstFailedAt": "2026-11-12"
     }
   }
 }

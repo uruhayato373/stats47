@@ -212,7 +212,7 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
       expect(read(rel), rel).toContain('RAIL_AD_BESIDE_BODY_ONLY_CLASS');
     }
     expect(read('apps/web/src/features/ads/constants/manual-ad-policy.ts')).toContain(
-      'export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden @min-[988px]/shell:block"',
+      'export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden rail:block"',
     );
   });
 

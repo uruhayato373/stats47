@@ -1,0 +1,40 @@
+{
+  "productId": "P-02",
+  "articleKey": "prefecture-income-wage-hiring-pack",
+  "displayTitle": "都道府県別 賃金・求人・働き方データ",
+  "description": "地域の求人状況や賃金水準を整理し、採用計画や人事向けの比較資料を作れます。",
+  "useCases": [
+    {
+      "title": "採用エリアの比較に",
+      "description": "有効求人倍率を県別に並べ、採用を検討する地域の求人・求職の状況を把握できます。"
+    },
+    {
+      "title": "給与水準の説明資料に",
+      "description": "調査対象や給与の定義をそろえて地域差を示し、自社の募集条件を検討するための参考資料にできます。"
+    },
+    {
+      "title": "人事提案の根拠整理に",
+      "description": "求人と賃金の指標を別々の図で示し、地域の雇用環境を社内や支援先へ説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "job-opening-comparison",
+      "heading": "求人と求職のバランスを比べる",
+      "lead": "有効求人倍率を棒グラフにし、地域の求人状況を比較できます。倍率だけで自社の採用難易度は決まりませんが、募集地域を検討する際の背景資料になります。",
+      "metricKeys": ["active-job-opening-ratio"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "scheduled-pay-distribution",
+      "heading": "給与水準の地域差を地図にする",
+      "lead": "男性の所定内給与額で地図を色分けし、地域ごとの給与水準を俯瞰できます。男女合計の平均年収や手取り額とは区別して、調査対象を明記した資料に使います。",
+      "metricKeys": ["scheduled-salary-male"],
+      "preferredTemplate": "choropleth"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。現在の求人状況や募集相場を示すものではなく、指標ごとの基準年を確認して利用します。",
+    "給与の指標は対象者、月額・年額、所定内・手当込みなどの定義が異なります。異なる指標を同じ給与として合算しないでください。"
+  ]
+}

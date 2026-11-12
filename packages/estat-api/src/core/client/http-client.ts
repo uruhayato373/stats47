@@ -24,7 +24,7 @@ async function getProxyDispatcher(): Promise<unknown | null> {
   try {
     const { ProxyAgent } = await import("undici");
     _proxyDispatcher = new ProxyAgent(proxyUrl);
-    logger.debug({ proxyUrl }, "HTTP Client: ProxyAgent 初期化");
+    logger.debug({ proxyConfigured: true }, "HTTP Client: ProxyAgent 初期化");
     return _proxyDispatcher;
   } catch {
     // undici が利用できない環境 (Cloudflare Workers 等)
@@ -47,6 +47,19 @@ function composeApiUrl(
   return `${baseUrl}${endpoint}?${searchParams.toString()}`;
 }
 
+function redactRequestSecrets(text: string, params: Record<string, unknown>): string {
+  let redacted = text;
+  for (const [key, value] of Object.entries(params)) {
+    if (!/(appid|token|secret|api[_-]?key|password|credential|signature)/i.test(key) || value == null || value === "") continue;
+    const secret = String(value);
+    const encoded = new URLSearchParams({ value: secret }).toString().slice("value=".length);
+    for (const form of new Set([secret, encodeURIComponent(secret), encoded])) {
+      redacted = redacted.replaceAll(form, "[REDACTED]");
+    }
+  }
+  return redacted;
+}
+
 async function validateResponseStatus(response: Response): Promise<void> {
   if (!response.ok) {
     throw new APIResponseError(
@@ -64,6 +77,7 @@ export async function executeHttpRequest<T>(
   cacheOptions?: HttpRequestCacheOptions
 ): Promise<T> {
   const url = composeApiUrl(baseUrl, endpoint, params);
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   try {
     await estatRateLimiter.acquire();
@@ -83,18 +97,25 @@ export async function executeHttpRequest<T>(
     }
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    timeoutId = setTimeout(() => controller.abort(), timeout);
     fetchOptions.signal = controller.signal;
 
     // @ts-ignore dispatcher は Node.js undici 拡張
     const response = await fetch(url, fetchOptions);
-    clearTimeout(timeoutId);
-    
     await validateResponseStatus(response);
     const data = await response.json();
     return data as T;
   } catch (error) {
-    logger.error({ url, error: error instanceof Error ? error.message : String(error) }, "HTTP Client: リクエスト失敗");
+    const message = error instanceof Error ? error.message : String(error);
+    const safeMessage = redactRequestSecrets(message, params);
+    logger.error({ url: redactRequestSecrets(url, params), error: safeMessage }, "HTTP Client: リクエスト失敗");
+    if (safeMessage !== message) {
+      const safeError = new Error(safeMessage);
+      if (error instanceof Error) safeError.name = error.name;
+      throw safeError;
+    }
     throw error;
+  } finally {
+    if (timeoutId !== undefined) clearTimeout(timeoutId);
   }
 }

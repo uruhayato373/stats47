@@ -1,5 +1,8 @@
 export { BlogProductCta } from "./components/BlogProductCta";
 export { ProductItem } from "./components/ProductItem";
+export { ProductOverview } from "./components/ProductOverview";
+export { ProductPurchase } from "./components/ProductPurchase";
+export { ProductShowcase } from "./components/ProductShowcase";
 export {
   TrackedProductLink,
   TrackedProductOutboundLink,

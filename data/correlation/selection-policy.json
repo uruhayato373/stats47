@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "score": "populationAdjustedR",
+  "minimumPairedAreas": 30,
+  "order": "absolute-desc-key-asc",
+  "excludeZero": true,
+  "groups": {
+    "positive": { "label": "正の相関", "limit": 10 },
+    "negative": { "label": "負の相関", "limit": 10 }
+  }
+}

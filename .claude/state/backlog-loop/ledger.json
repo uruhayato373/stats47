@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-28T11:51:29.344Z",
+  "updatedAt": "2026-11-11T07:04:06.383Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -9205,6 +9205,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-28T11:51:29.344Z"
+    },
+    "ARTICLE-RAIL-WIDTH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "共通レールの幅と表示境界を統一し全利用テンプレートを検証",
+      "attempts": [
+        {
+          "at": "2026-11-11T07:04:06.383Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node ../../node_modules/@playwright/test/cli.js test --config playwright.smoke.config.ts tests/smoke/rail-layout.spec.ts --project smoke-chromium --workers 2 --retries 0 --reporter line --output C:/tmp/stats47-rail-test-results",
+              "npm.cmd run design-system:check -w apps/web",
+              "node node_modules/typescript/bin/tsc -p apps/web/tsconfig.json --noEmit --skipLibCheck --incremental"
+            ],
+            "pass": true
+          },
+          "evidence": "localhost:3000: 13 pages x 55 layouts = 715 PASS; 160 related unit tests PASS; shared grid/rail variant removes content-dependent card shrinkage and GIS/municipality breakpoint drift. Type-check and design-system PASS. No deployment.",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-11T07:04:06.383Z"
     }
   }
 }

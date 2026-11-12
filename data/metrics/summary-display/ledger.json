@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "metricKey": "annual-sunshine-duration",
+      "showTotal": false,
+      "reason": "各県の日照時間を足しても全国の日照時間にはならないため、単純平均のみ表示する。"
+    },
+    {
+      "metricKey": "total-population",
+      "showTotal": true,
+      "reason": "都道府県別の人口総数は地域を重複なく足し合わせられる。47県がそろう年の原数値だけを合計する。"
+    },
+    {
+      "metricKey": "port-count",
+      "showTotal": true,
+      "reason": "共同港の帰属を一意にした港湾数。既存の全国値の採用判断で加算可能性を確認済み。"
+    }
+  ]
+}

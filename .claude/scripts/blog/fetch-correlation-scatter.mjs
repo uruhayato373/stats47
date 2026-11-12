@@ -2,7 +2,7 @@
 /**
  * fetch-correlation-scatter.mjs — B型(相関・真因)記事の散布図 data JSON を R2 相関 snapshot から生成する。
  *
- * 相関 snapshot (`app/correlation/by-ranking-key/<base>.json`) には各ペアの scatterData
+ * 相関 snapshot (`app/correlation/by-ranking-key-v2/<base>.json`) には各ペアの scatterData
  * ({areaCode,areaName,x,y}) が埋め込み済み。これを generate-article-charts.ts が読める
  * scatter スキーマ ({title,xLabel,xUnit,yLabel,yUnit,points:[{x,y,label}]}) に変換する。
  * 3点セット (§blog-data-schema §1.5) の source.json も併せて出力し復元可能にする。
@@ -58,16 +58,17 @@ function metricMeta(key) {
 }
 
 async function main() {
-  const url = `${R2_BASE}/app/correlation/by-ranking-key/${BASE}.json`;
+  const url = `${R2_BASE}/app/correlation/by-ranking-key-v2/${BASE}.json`;
   const res = await fetch(url);
   if (!res.ok) {
     console.error(`[error] 相関 snapshot が無い: ${url} (HTTP ${res.status})`);
     process.exit(1);
   }
   const json = await res.json();
-  const pair = (json.pairs || []).find((p) => p.rankingKey === PAIR);
+  const pairs = Object.values(json.groups ?? {}).flat();
+  const pair = pairs.find((p) => p.rankingKey === PAIR);
   if (!pair) {
-    console.error(`[error] ペアが無い: base=${BASE} pair=${PAIR}。利用可能: ${(json.pairs || []).map((p) => p.rankingKey).slice(0, 10).join(", ")}`);
+    console.error(`[error] ペアが無い: base=${BASE} pair=${PAIR}。利用可能: ${pairs.map((p) => p.rankingKey).slice(0, 10).join(", ")}`);
     process.exit(1);
   }
   if (!pair.scatterData || pair.scatterData.length < 30) {
@@ -115,7 +116,7 @@ async function main() {
     partialRPopulation: pair.partialRPopulation ?? null,
     unit: `${baseMeta.unit} × ${pair.unit || ""}`,
     label: scatter.title,
-    source: `r2:app/correlation/by-ranking-key/${BASE}.json`,
+    source: `r2:app/correlation/by-ranking-key-v2/${BASE}.json`,
     restore: `node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug ${SLUG} --base ${BASE} --pair ${PAIR} --data-name ${DATA_NAME}${EXCLUSION_REASON ? ` --exclusion-reason ${JSON.stringify(EXCLUSION_REASON)}` : ""}`,
     ...(excludedAreas.length > 0
       ? { excludedAreas, exclusionReason: EXCLUSION_REASON, expectedPointCount: points.length }

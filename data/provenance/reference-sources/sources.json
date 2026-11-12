@@ -1,0 +1,12 @@
+{
+  "ssds": {
+    "name": "社会・人口統計体系",
+    "organization": "総務省統計局",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  },
+  "codh-historical-boundaries": {
+    "name": "『歴史的行政区域データセットβ版』（CODH作成）",
+    "url": "https://geoshape.ex.nii.ac.jp/city/",
+    "note": "地図データ"
+  }
+}

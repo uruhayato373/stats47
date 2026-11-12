@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { LayoutGrid, MapPin } from "lucide-react";
+import { LayoutGrid } from "lucide-react";
 
 
 import { RailAdSlot } from "@/features/ads";
@@ -55,16 +55,6 @@ export function RankingPageSidebarSection({
           kinds={['theme']}
           limit={3}
           surface="ranking_theme"
-        />
-      )}
-      {areaType === "prefecture" && (
-        <RelatedContentNavigation
-          title="この指標を市区町村で見る"
-          icon={<MapPin />}
-          sourceId={`ranking:${rankingKey}`}
-          kinds={['municipality-ranking']}
-          limit={1}
-          surface="ranking_municipality"
         />
       )}
       {areaType === "prefecture" && (

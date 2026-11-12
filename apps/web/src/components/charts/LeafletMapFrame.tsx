@@ -2,8 +2,9 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState, type ReactNode } from 'react';
 
-import { Button } from '@stats47/components/atoms/ui/button';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+
+import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 
 import { GEO_BASEMAP } from './leaflet-basemap';
 import { createGeoCanvasRenderer } from './leaflet-canvas-renderer';
@@ -62,14 +63,15 @@ export function LeafletMapFrame({ ariaLabel, bounds, focus, whole: wholeProp, to
       {hasToolbar && (
         <div className="mb-2 flex flex-wrap items-center gap-2">
           {focus && showToggle && (
-            <>
-              <Button size="sm" variant={whole ? 'outline' : 'default'} aria-pressed={!whole} onClick={() => setWhole(false)}>
-                {focus.label}
-              </Button>
-              <Button size="sm" variant={whole ? 'default' : 'outline'} aria-pressed={whole} onClick={() => setWhole(true)}>
-                {focus.wholeLabel ?? '離島を含む全県'}
-              </Button>
-            </>
+            <SingleSelectToggleGroup
+              aria-label="地図の範囲"
+              value={whole ? 'whole' : 'focus'}
+              onValueChange={value => setWhole(value === 'whole')}
+              options={[
+                { value: 'focus', label: focus.label },
+                { value: 'whole', label: focus.wholeLabel ?? '離島を含む全県' },
+              ]}
+            />
           )}
           {toolbar}
         </div>

@@ -82,6 +82,14 @@
       "published": true
     },
     {
+      "id": "survey:broadcast-reception-contract-statistics",
+      "kind": "survey",
+      "key": "broadcast-reception-contract-statistics",
+      "title": "放送受信契約数統計要覧",
+      "href": "/survey/broadcast-reception-contract-statistics",
+      "published": true
+    },
+    {
       "id": "survey:buried-cultural-property-statistics",
       "kind": "survey",
       "key": "buried-cultural-property-statistics",

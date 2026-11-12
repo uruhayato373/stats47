@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODE_RE, PREFECTURE_CODE_2DIGIT_RE } from "@stats47/area";
 import {
   PREFECTURE_COUNT,
   resolveNationalFigure,
@@ -13,8 +14,12 @@ export interface NationalAveragePoint {
   yearName: string;
   /** その年の全国の基準値 (公表の全国値、無ければ都道府県の単純平均) */
   value: number;
-  /** 単純平均の母数。公表値の年は 47 とみなす (変化率の算出から外さない) */
+  /** 有効な都道府県値の数 */
   count: number;
+  /** 公表の全国行を含めない都道府県の単純平均 */
+  mean?: number | null;
+  /** 台帳で許可され、重複なく47県がそろう年だけの合計 */
+  total?: number | null;
   /** 公表値 (全国計 / 全国値) か単純平均か */
   kind: NationalFigureKind;
 }
@@ -25,9 +30,11 @@ export interface NationalAveragePoint {
  * 各年を resolveNationalFigure に通し、公表の全国値 (00000) があればそれ、
  * 無ければ都道府県の単純平均を使う。公表値の年が 1 つでもあれば公表値の年だけを
  * 残す — 単純平均と全国値は別の量なので、1 本の線につなぐと偽の段差が出る。
+ * 合計表示が許可される場合は、別途算出した平均・合計の系列として全ての年を残す。
  */
 export function buildNationalAverageSeries(
   allYears: RankingValue[],
+  { showTotal = false }: { showTotal?: boolean } = {},
 ): NationalAveragePoint[] {
   const byYear = new Map<
     number,
@@ -46,72 +53,30 @@ export function buildNationalAverageSeries(
   for (const [year, b] of byYear) {
     const figure = resolveNationalFigure(b.rows);
     if (!figure) continue;
+    const prefectures = b.rows.filter((row): row is RankingValue & { value: number } =>
+      (PREFECTURE_AREA_CODE_RE.test(row.areaCode) || PREFECTURE_CODE_2DIGIT_RE.test(row.areaCode)) &&
+      typeof row.value === "number" && Number.isFinite(row.value),
+    );
+    const count = prefectures.length;
+    const sum = prefectures.reduce((total, row) => total + row.value, 0);
+    const hasAllPrefectures = count === PREFECTURE_COUNT &&
+      new Set(prefectures.map((row) => row.areaCode.slice(0, 2))).size === PREFECTURE_COUNT;
     points.push({
       year,
       yearCode: b.yearCode,
       yearName: b.yearName,
       value: figure.value,
-      count: figure.prefectureCount ?? PREFECTURE_COUNT,
+      count,
+      mean: count > 0 ? sum / count : null,
+      total: showTotal && hasAllPrefectures && Number.isFinite(sum) ? sum : null,
       kind: figure.kind,
     });
   }
 
   const hasOfficial = points.some((p) => p.kind !== "simple-mean");
+  // 合計と単純平均を別々に描ける場合は、公表の全国行が無い年も同じ系列として使える。
+  const hasTotals = points.some((p) => p.total != null);
   return points
-    .filter((p) => !hasOfficial || p.kind !== "simple-mean")
+    .filter((p) => hasTotals || !hasOfficial || p.kind !== "simple-mean")
     .sort((a, b) => a.year - b.year);
-}
-
-/** 期間変化。始点年は指標ごとに違うため固定窓 (「10年変化」) は作らない */
-export interface NationalAveragePeriodChange {
-  fromYear: number;
-  toYear: number;
-  /** 符号付きの表示文字列 (例: "+8.4%" / "-2.3pt") */
-  text: string;
-}
-
-/**
- * 系列の実測両端から期間変化を求める。
- *
- * 「10年変化」のような固定窓は使わない。指標ごとに開始年が違い、存在しない
- * 基準年を暗黙に作ってしまうため (.claude/rules/evidence-based-judgment.md)。
- * 母数が 47 に満たない年を端点に含む場合は、平均どうしが比較できないので null を返す。
- */
-export function computeNationalAveragePeriodChange(
-  series: NationalAveragePoint[],
-  unit: string,
-): NationalAveragePeriodChange | null {
-  if (series.length < 2) return null;
-
-  const first = series[0];
-  const last = series[series.length - 1];
-  if (first.count !== PREFECTURE_COUNT || last.count !== PREFECTURE_COUNT) {
-    return null;
-  }
-
-  // 単位が % の指標は「率の率変化」が誤読を招くのでポイント差で出す
-  if (unit.trim() === "%") {
-    const diff = last.value - first.value;
-    return {
-      fromYear: first.year,
-      toYear: last.year,
-      text: `${formatSigned(diff)}pt`,
-    };
-  }
-
-  if (first.value <= 0) return null;
-  const rate = ((last.value - first.value) / first.value) * 100;
-  return {
-    fromYear: first.year,
-    toYear: last.year,
-    text: `${formatSigned(rate)}%`,
-  };
-}
-
-function formatSigned(value: number): string {
-  const rounded = Math.round(value * 10) / 10;
-  const sign = rounded > 0 ? "+" : rounded < 0 ? "−" : "±";
-  return `${sign}${Math.abs(rounded).toLocaleString("ja-JP", {
-    maximumFractionDigits: 1,
-  })}`;
 }

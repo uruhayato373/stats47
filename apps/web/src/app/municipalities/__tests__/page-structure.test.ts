@@ -18,7 +18,7 @@ describe('municipalities hub page structure', () => {
   });
 
   it('狭幅では入口テーマを本文上部に表示する', () => {
-    expect(PAGE_SOURCE).toContain('className="mb-6 xl:hidden"');
+    expect(PAGE_SOURCE).toContain('className="mb-6 rail:hidden"');
     expect(PAGE_SOURCE).toContain('horizontalOnMobile');
   });
 

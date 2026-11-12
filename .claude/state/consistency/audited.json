@@ -1,6 +1,6 @@
 {
-  "hash": "6114a974a6dbac18181a8af795f133e3dd79abd162fe93b9cdc5bc3458f2de4d",
-  "audited_at": "2026-11-12T00:13:34",
+  "hash": "79a723e1b763492ff5e59c25da7a22a7f7f9ca2651be93b9a9071e8b3b2f2a38",
+  "audited_at": "2026-11-12T03:45:12",
   "files": [
     ".claude/scripts/lib/pre-push-tests.mjs"
   ]

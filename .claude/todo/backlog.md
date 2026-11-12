@@ -215,10 +215,10 @@ updated: 2026-11-01
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-10] [領域:データ]
 
 2026-11-10 にオーナーが承認した計画 (13 段) は 2026-11-12 に全段を終え、計画のファイルは消した。`packages/`・`apps/`・`config/` のマスタと台帳は `data/` の JSON + Schema に移り、`npm run check-datasets -- --er` の「data/ の外に残るマスタ・台帳」と統合の候補はどちらも 0 件。
-- **残り**: 段 0〜6 は develop に入っている (並行の作業の push で origin/develop へ出た)。段 7〜13 は、会社の Windows PC の別の作業ツリー `C:\tmp\stats47-ledger` のブランチ `ledger-db-unify` にあり、push していない。develop への取り込みと push はオーナーの指示で行い、そのあと下の「main へ入れるときの注意」を確かめる
+- **残り**: 段 0〜13 は 2026-11-12 に develop へ入った (`1ca0cff25`。push で起動した Develop Quality Gate・広告の R2 への反映・広告の在庫の更新は 3 つとも成功し、R2 の広告の snapshot は台帳と同じ 328 件)。残りは main へ入れること (オーナーの指示で行う) と、下の「main へ入れるときの注意」を確かめること
 - **開発サーバーでの確認 (2026-11-12)**: ブランチの作業ツリーで `npm run dev:web` を起動し、Geo (トップ・分析 3・層・データの一覧・交通網の変遷)・県 2・全国 3・市区町村 3・調査 2・カテゴリ・テーマ 3・ランキング・ブログ・商品の 23 ページが 200 でエラーなしだった。転送 (ランキング・ブログ・テーマの旧 URL の 301) と 410 (ブログ・ランキング) も台帳どおりに返った。ランキングのページに広告が出て、県のページの HTML にシンボルと特産品が本番と同じく入っていた。`next build` と Remotion のバンドルは未確認
 - **別の機会に回した判断**: 列挙が読み込み口の TS と Schema の `enum` の 2 か所に書かれている (`geo.layers` の `sourceAnalysis`、`open-data-catalog/types.ts` の `OPEN_DATA_SOURCE_KINDS` など)。型を Schema から導くかを決める。2 桁の県コード (港湾の `prefectureCode`・`open-data.prefecture-statistics` の `resources[].prefectureCode`) を県のマスタ (5 桁の `prefCode`) へ結ぶ手段が無い (`refs` の `parse` は `list` だけ)。検査に桁を直す指定を足すか、台帳の側を 5 桁にするかを決める。県の本文 47 ファイルを 1 ファイルにするか
-- **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(3) `ssds-provenance.generated.json` を作り直すと、`cpi-annual` の名前が調査の一覧の名前 (消費者物価指数) に変わる (43 件)。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる。(8) 段 10 で広告の台帳 `data/affiliate/ledger/ads.json` を足し、`publish-affiliate-ads.yml` の起動条件を変えたので、develop へ取り込む push で広告の R2 への反映 (`app/affiliate-ads/all.json` の書き込みと全ゾーンのパージ) が走る。移す前後で snapshot は `generatedAt` 以外がバイト一致だったが、外部への書き込みなので取り込みの前にオーナーへ伝える
+- **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる。(8) 段 10 で広告の台帳を足し `publish-affiliate-ads.yml` の起動条件を変えた。develop への push で広告の R2 への反映が走り、成功した (2026-11-12)。main へ入っても workflow は develop の push で起動するので、main では走らない
 - **完了条件**: ブランチ `ledger-db-unify` が develop と main に入り、上の注意 (1)〜(8) を確かめた
 
 ### [SKILL-AGENT-RULES-TO-CHECKS-01] skill と agent の定義を、短い規則と機械の検査へ作り替える
@@ -313,6 +313,10 @@ updated: 2026-11-01
 ### [PRODUCT-LP-SHOWCASE-01] 商品の LP (サイトの商品ページと note の記事) を、1 つの画像指定から全商品へ作れる仕組みとゲートにする
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx apps/web/scripts/generate-product-storefront.ts --check] [起票:2026-11-10] [領域:商品]
 
+- **目視確認**: 共通 `ProductShowcase` の1列／2列表示を全14商品のローカルLPでオーナーと確認する。画像幅・作成例の並び方の契約はデザインシステム、回帰検査は `responsive-layout.spec.ts` を参照。目視確認まで外部公開しない。
+
+- **現在の判断 (2026-11-12 オーナー指示)**: 価格実験 PRICE-DATA-PACK-2026-11 による13パックの表示変更保留を解除する。製造品出荷額を含む既存の有料データ商品14件のサイトLPとnote無料部分の初稿を先に並行整備し、ブラウザのタブで1件ずつ目視確認してから外部公開へ進む。実験のstatusや価格は変更せず、公開時には表示変更日を記録して価格効果だけの比較と混同しない。
+
 - **起点 (2026-11-10 オーナー指示)**: 製造品出荷額の商品 (`muni-manufacturing-shipment-data` / サイトの `/products/data-muni-manufacturing`) を LP にした。分析の型 (比べる・構成を見る・変化を見る) ごとに作れる図と、ファイルの中身の見本を見せる形である。オーナーから「ほかの商品にも展開できる仕組みやゲートになっているか」と問われた。答えは「半分だけ」なので、このカードで残りの半分を作る。
 - **今ある部品 (他の商品にもそのまま使える)**:
   - note の見本画像は、記事の作業ファイル `figure-specs.json` (画像ごとに `file`・型の台帳の `template`・`input`) から `.claude/scripts/note/render-product-figures.ts` が型の台帳 (`data/content-operations/image-templates.json`) の描画器だけで描く。経路は `config/image-generation-routes.json` の `note-product-samples`。spec は記事と一緒に private R2 へ保存する (`note:article save`)。
@@ -331,14 +335,16 @@ updated: 2026-11-01
   2. **サイトの節を spec から導出する**: `generate-product-storefront.ts` が、公開済みの note 商品記事 (`data/note/articles.json`) ごとに spec を読み、`showcase` を作る。単独商品とデータ集の両方の経路で同じ関数を使う。`STANDALONE_NOTE_PRODUCTS` の手書きの `showcase` は消す。spec は private R2 にあるので、生成の入力にするには、公開してよい部分 (節・file・alt・lead・画像の sha256) だけを git の写し (`data/products/` か `data/note/`) に書き出す経路が要る。生成スクリプトが R2 を読む形にはしない (`--check` がネットワークに依存するため)。
   3. **公開 R2 への配置を決定的にする**: spec から描いた画像を `app/products/<slug>/showcase/` へ置く処理を、sha256 付きの manifest (`push-exact-r2-assets.ts --manifest`) で行う。上の git の写しの sha256 と一致する画像だけを置く。R2 への書き込みは CI か、オーナー承認つきのローカル実行に限る。
   4. **ゲートを足す**:
-     - 生成の `--check` (pre-commit・PR) で、`showcase` の各図に `alt` があり、4 節のうち `compare`・`file` を必ず含むこと (分析の型に当てはまらない商品は、理由つきで節を外せるようにする)。
+     - 生成の `--check` (pre-commit・PR) で、商品固有の用途・作成例・収録内容があり、各図のalt・共通型・固定納品への参照がそろうこと。図の種類や枚数は商品内容に合わせ、固定年のパックに長期推移を約束しない。ファイル見本も実際の納品物から作る。
      - 週次 (または release 前) に、`showcase` の全 URL へ GET し、200・`image/png`・sha256 一致を確かめる検査。HEAD ではなく GET で見る (上の穴 4 で HEAD は 200 だった)。
      - LP の無い公開中の note 商品の数を数え、縮小専用の上限を置く (`maxUntypedProductArticles` と同じ置き場 `.claude/config/` の baseline)。
   5. **CDN の罠を手順に入れる**: 置く前に画像の公開 URL を読まない。確かめは `.local/` の写しを localhost で差し替えて見る。置いた後に読み戻して不一致なら `purge-cdn.yml` の prefix で消す。この手順を `/build-data-pack` の E2 と `.claude/rules/note-image-assets.md` に書く。
-  6. **note 本文の節も spec から組む** (やるかは実装時にオーナーへ確認): `lead` を spec に置いたら、note の記事原稿の LP の節も同じ値から作る。公開中の有料記事を書き換えるのは外部変更なので、記事ごとに承認を取る。
-- **次 (実行順)**: ① `muni-manufacturing-shipment-data` の spec に `section`・`alt`・`sections` を足し、サイトの `showcase` を spec の写しから導出して、生成物が今と同じになることを確かめる (差分 0 が移行の合格) → ② 画像の GET 検査と alt・節の検査を足し、1 枚消した spec で検査が落ちることを確かめる (検査器の検査) → ③ manifest での R2 配置に切り替える → ④ データ集 13 件に spec を作る。これは `PRODUCT-SAMPLE-TYPED-01` (見本画像を型へ) と同じ差分で行う。
+  6. **note 本文の無料部分も同じ台帳から組む**: サイトとnoteで用途・見出し・説明・画像を二重管理しない。初稿作成は今回の指示範囲。有料境界・価格・添付ZIPを保持した差分を目視確認してから、記事ごとに公開する。
+- **ローカル初稿・検証 (2026-11-12)**: 全14商品のコピー・根拠JSONを共通generatorへ接続し、サイトLP14件・note無料部分の初稿14件、新規共通型画像48枚＋既存11枚の計59枚を整備した（全14件desktopで画像切れ0・横はみ出し0、代表3商品を375/768/1024pxで横はみ出し0、商品・クリック計測20テストPASS、接続不整合・未定義型の検出3テストPASS、データSchema検査error0、型検査PASS）。
+- **残る確認と公開**: [目視用一覧](http://127.0.0.1:4792/)からオーナーが1商品ずつ確認して公開順序を決める工程が残り、R2への画像push・note本文改訂・本番公開は未実施のため、カードと実験statusを保持する。
+- **次 (実行順)**: ① 全14商品の用途・作成例を共通台帳で整え、固定納品ZIPのSHA・指標・年・単位・粒度・収録形式を照合 → ② 共通型で画像とファイル見本を生成し、サイトLPとnote無料部分の初稿へ接続 → ③ 全件をローカルのタブで1件ずつ目視し、各画面幅・画像・上下購入導線・計測を検証 → ④ 確認済み商品から画像manifestの配置、GET検査、note更新、本番反映。初稿整備・検証は進行中で、画像の外部配置・note更新・本番公開は未実施。初稿生成だけでこのカードを完了にしない。
 - **停止条件・禁止**:
-  - データ集 13 件の note の見せ方とサイトの商品ページは、価格実験 `PRICE-DATA-PACK-2026-11` の判定 (仮の期日 2026-12-30) まで変えない。導線の変更が価格の効果と混ざり、判定できなくなる。①〜③ は製造品出荷額の 1 商品だけで進めてよい。
+  - 納品実物と説明・作成例が一致しない商品は PRODUCT-PACK-CONTENT-MISMATCH-01 で解消するまで公開しない。価格実験の判定待ちは初稿整備の停止条件にしない。
   - 公開 R2 への書き込み、CDN の消去、note 記事の更新、本番デプロイは、それぞれオーナーの承認を取る。
   - 型の台帳に無い図を LP に載せない (型が足りなければ先に型を足す)。
   - Kindle 13 件は対象外。中身の見本は書籍のページで、データの図とは別の話になる。必要になったら別カードにする。
@@ -365,9 +371,9 @@ updated: 2026-11-01
 - **起点 (2026-11-10 オーナー指示)**: 商品の見本画像は型の台帳の型で描く。型 `treemap`・`file-preview` を足し、経路 `note-product-samples` (`render-product-figures.ts` + 記事の `figure-specs.json`) を登録した。本文画像の台帳は型の無い画像を持つ商品記事を `product-untyped` と数え、`--check` が上限 `maxUntypedProductArticles` (15・縮小専用) で止める。
 - **分かっていること**: `muni-manufacturing-shipment-data` は作業コピーに `figure-specs.json` (比較・構成・変化の 6 枚とファイルの中身 1 枚) があり、型の描画器で描けることを確かめた (R2 へは未保存・note は未更新)。データ集 14 本の地図 (`choropleth-map.png`・`sample-map.png`) は商品工場の独自の描画器で、型を通っていない。
 - **済み (2026-11-10)**: `muni-manufacturing-shipment-data` は型の画像 11 枚へ差し替え、上限を 14 にした (`MUNI-INDUSTRY-PRODUCT-01`)。
-- **次**: 週次の `note:figures` で台帳が `product-sample` になったことを確かめる → データ集の見本は価格実験 `PRICE-DATA-PACK-2026-11` の判定 (2026-12-30) の後に、`DATA-PACK-BUNDLE-01` の作り替えと同じ差分で型へ移す。
+- **次**: PRODUCT-LP-SHOWCASE-01 の2026-11-12判断に従い、価格実験の判定を待たず13パックの見本を共通型で作る。固定納品の値から生成した画像をサイトとnote無料部分の初稿で共用し、タブで目視確認する。確認後の画像配置・note更新と note:figures の product-sample 判定までを残作業とする。
 - **関連**: サイトの商品ページの見本の節も同じ spec から作る仕組みは `PRODUCT-LP-SHOWCASE-01`。データ集の spec はあちらの ④ と同じ差分で作る。
-- **停止条件・禁止**: 公開中の有料記事の書き換えは note への外部変更なので、記事ごとにオーナーの承認を取る。価格実験の判定前にデータ集 13 本の見せ方を変えない (効果を分けられなくなる)。
+- **停止条件・禁止**: 共通型に未登録の画像や固定納品で再現できない例を載せない。公開中の有料記事の書き換えはローカル初稿の目視後に記事単位で行い、有料境界・価格・添付を変更しない。初稿の型検査合格を公開済み記事の差し替え完了と扱わない。
 - **完了条件**: 公開中の商品記事の見本画像がすべて型に結ばれ、`maxUntypedProductArticles` が 0 になっている。
 
 ### [MUNI-INDUSTRY-PRODUCT-01] 市区町村の製造品出荷額等のデータ商品に、業種別 (産業中分類 24 業種) の内訳を足す
@@ -2568,6 +2574,8 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 
 - **事象 (2026-10-12、v3-20261012-mac-r2 の実物と照合)**: パックの目的文 (`packs.ts`)・listing.md・LICENSE-ja.txt・見本画像・SOURCES.csv が中身と食い違っていた。目的文の収録外表現・PDF納品表記・見本の代表指標選択・長題名の折返しは 2026-10-24 に修正済み。ココナラは 2026-10-19 に撤退 (出品文は直さない)、note版13商品は公開済みなので、現在の添付版の品質を照合する。
 - **残り**: ① SOURCES.csv の調査名欄に指標名が入る行 (職種別平均年収 `0003445758` の行で URL が社会・人口統計体系の案内ページを指す、P-01「腎不全による死亡者数」・P-05「患者調査 第37表…」など)、P-07「家賃差引の参考額（月額）」の加工式が「R2 から抽出」だけ (§3 の加工式要件)、P-04・P-11 の LICENSE が地方公務員給与実態調査の URL を 1 件しか載せない ② P-06 (教育機関限定)・P-07 (購入者本人のみ) の許諾範囲が想定購入者 (自治体・移住支援) と合わない ③ Office 実機確認。
+- **追加の照合対象 (2026-11-12、固定ZIPのSHAと実物を確認)**: P-14は記事台帳 data/note/articles.json の題名が832指標・本文保存日が2026-11-04なのに対し、納品版台帳 data/products/note-pack-deliveries.json の固定ZIPは v4-20261024-mac-r2・685指標。現在の販売添付がどちらかを確定し、記事・台帳・LPの説明を一致させる。P-11の固定ZIPはCSVを含みXLSXは含まないが、商品定義の形式一覧にはCSVが無い。独立したPNG/SVGは地図各1枚であり、28指標すべてに独立画像が付くという説明にしない。
+- **次 / 停止条件**: 現在の販売添付と固定納品台帳を照合し、LPの収録形式・指標数・作成例を実物から導出する。版を確定できない箇所は推測で更新せず、該当商品の外部公開を止める。ローカル初稿の整備と目視は PRODUCT-LP-SHOWCASE-01 で進める。
 - **完了条件**: 14 パックの目的文・listing・LICENSE・見本画像が実物と一致し、note 販売記事の「収録外」の断り書きが不要になる。
 
 ### [SNS-SOURCE-METADATA-01] SNS素材の仕上げで確認した期間・分母・単位の差異を指標定義と配信snapshotへ反映する
@@ -3614,6 +3622,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
   「14 点の編集可能データ」に「個別分析サービス」が混ざる。
 - **注意**: note・商品販売レーンは「維持」。新作や新チャネルは足さず、既存商品の説明の是正だけを行う。
 - **進み (2026-11-10)**: `/products/data-muni-manufacturing` に、比べる・構成・変化・ファイルの中身の見本 (11 枚) と実際の収録内容を載せた (commit `149629f56`)。全商品へ広げる仕組みとゲートは `PRODUCT-LP-SHOWCASE-01`。
+- **次 (2026-11-12 オーナー指示)**: 既存の有料データ商品14件で、仕事や作業に即した用途・共通型の画像付き作成例・実納品に沿う収録内容・上下の購入案内を整える。サイトLPとnote無料部分の初稿をタブで1件ずつ目視し、画像の読みやすさ・見出し階層・余白・画面幅ごとの表示を直す。公開順と価格実験の保留解除は PRODUCT-LP-SHOWCASE-01、実物との不一致は PRODUCT-PACK-CONTENT-MISMATCH-01 を正本とする。今回のデータ商品初稿の確認だけで、Kindleの説明是正も完了したとしない。
 - **完了条件**: 各商品に固有の内容紹介と収録内容・見本があり、定型文だけのカードが 0 件。
 
 ### [GA4-FULL-MEASUREMENT-01] GA4 を全ページで使い切る (計測の是正 → 文脈・操作・成果 → API 登録 → 週次集計・BigQuery)
@@ -4170,12 +4179,16 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **[仮説]** D2 は 09-01〜09-02 に 23 本を一度に出したため、Google が発見したまま巡回を後回しにしている。**検証**: `node .claude/scripts/gsc/url-inspection-daily.cjs` の日次が D2 の 23 本を含む回で状態を数え直す。**期日 2026-10-25 (超過)**: D2 の過半が「検出 - インデックス未登録」のままなら、sitemap の lastmod と内部リンク (ランキングページから記事への導線) を調べる。
 - **統合 (2026-10-26 オーナー判断): `BLOG-SEO-QUEUE-01`** topic queue 起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する。done 各記事の表示が 0 か 1 以上かを同じ比較で数える。
 
-### [FUNNEL-CTA-01] ranking 末尾 CTA の click と遷移後行動を判定する
+### [FUNNEL-CTA-01] 非表示にした ranking 末尾の商品案内を、商品・導線・計測を整えて再評価する
 
-タグ: [UI・UX] [種類:改善] [実行:ユーザー] [起票:2026-10-05] [領域:サイト]
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
 
-- 2026-10 月次計画で improvements から降格。再開条件: オーナーが 4 項目を登録し、登録後 4 週で標本が蓄積した時 (`[kpi: site-circulation-rate]`)。
-- ブロッカー: GA4 カスタムディメンション `cta_id`/`content_id`/`target_type`/`target_key` が未登録 (2026-09-24 `npm run google-admin:audit-api`: confirmed-absent)。cta_click 自体が 28 日で 3 件 (insufficient-sample)。
+- **判断 (2026-11-12 オーナー指示)**: 「e-Stat × Claude Code 完全ガイド」の案内をランキング共通レイアウトから外す。商品展開と導線を整えてから再評価し、自動では再表示しない。
+- **根拠と限界**: 保存済み GA4 `data/ga4/snapshots/2026-W44/` (2026-10-04〜10-31) は `cta_click` 全体 11 件、ランキングページ 3 件。ただし、この商品案内へのクリックとは特定できない。`product-referrals` は 0 行だが商品計測追加 (11-03) より前の期間で、クリック率 0 と判断しない。旧カードのカスタムディメンション未登録は 09-24 時点の記録であり、再開時に最新の保存済み計測で確認する。
+- **再開条件**: 想定購入者・解決する業務・無料情報との差・販売内容を説明でき、関連するランキング面からの導線を定義できること。計測が有効な期間と判定基準をそろえ、オーナーが限定的な再表示を判断する。
+- **実行順**: ① 商品と対象読者、案内するページ、購入先を整理する ② `data/note/magazines.json` の `koumuin-estat-claude-code` と ID で結び、表示可否・対象面・リンクを既存の商品台帳へ統合する (専用 TS の URL やカテゴリ列挙に戻さない) ③ `PRODUCT-REFERRAL-MEASURE-01` と連携し、商品 ID・配置別の表示→クリックと販売実績を確認する。遷移先の購入まで追跡できない場合は限界を明記する ④ 期間・継続/停止条件を先に決め、関連性の高い面だけで試す。
+- **停止条件**: 購入理由・対象面が未確定、表示数の分母や商品別クリックが取れない、または試行の停止条件に該当した場合は非表示を維持する。
+- **完了条件**: 台帳からの配線と計測を確認し、限定試行の結果から継続・修正・撤去を判断して記録する。全ランキングへの一律再表示を完了扱いにしない。
 
 ### [STP-AI-WATCH-01] AI Overviews による雑学系流入の侵食を四半期で定点観測する
 
@@ -4662,6 +4675,17 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: 機械の検査が全冊を毎週記録し、2 冊で 3 段の試行の結果 (指摘・トークン・直した箇所) が残り、残りの冊へ広げるかをオーナーが決めた。
 
 ## 🟢 低 — 再開条件を満たしたら着手する
+
+### [RELATED-ARTICLES-BASELINE-01] 共通化した大画像の関連記事を計測し、画像サイズの次の比較を判断する
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-12] [領域:サイト]
+
+- **実装記録 (2026-11-12)**: 県・ランキング・テーマの本文を `features/content-navigation/RelatedArticles` に統一。見出し「関連記事」、大画像の `ArticleTeaserCard` と共通 `CardGrid`、表示形式 `related-articles-large-v1`。選定条件は従来どおり。ローカル確認段階で、本番の計測開始日は未確定。
+- **計測契約**: `nav_impression` はカードの 50% 以上が前面タブで連続 1 秒見えたら、ページ表示中のカードごとに 1 回。`nav_click` は共通クリック監視で送り、`nav_label=blog:<slug>`、`nav_surface=area_blog/ranking_blog/theme_blog`、`card_variant` を突合する。ランキング・テーマの旧ラベルは題名だったため、そのまま前後比較しない。短時間のクリックや同じカードの複数クリックは分子に入るので、クリック数/有効表示数はユニーク利用者のクリック確率ではない。
+- **記録先**: 既存の週次 GA4 取得が `data/ga4/snapshots/<週>/related-articles.csv` と `.meta.json` に Japan-only・28 日の記録を保存する。日付・ページ・端末・記事・表示形式ごとの eventCount。重複する週の 28 日値を足さない。新しい認証・管理画面操作は不要。
+- **再開条件・実行順**: ① 通常の本番反映時に反映日をここへ記録 ② 最初の週次取得で metadata 成功と表示/クリックの識別を確認 ③ 反映後だけの 28 日間について、記事別・ページ種別・端末別に表示数とクリック数/有効表示数を記録 ④ 小画像を試す必要があるか判断し、試す場合は共通部品だけを変更して表示形式の版を更新する。
+- **停止条件**: metadata の失敗・分母欠損・標本不足は効果不明とし、0% や大画像の勝利と扱わない。県とランキングは掲載記事・読者が異なるため、単純な差を画像サイズの効果にしない。
+- **完了条件**: 大画像の基準値と限界を記録し、維持または条件をそろえた次の比較を判断する。遷移後の閲読は既存 `read-progress` / `internal-transitions` を補助情報とし、関連記事経由だけの因果効果とは断定しない。
 
 ### [WAGE-RULE-PAGE-01] 補助金の賃上げの要件に使う「都道府県別の最低賃金と物価」のページを作るかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-11-11] [領域:サイト]

@@ -1,0 +1,85 @@
+{
+  "productId": "P-05",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "b58829a1f35296867d63ed386087e59e2ff07c9182713e4c6959e12c6d511946",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-05/v4-20261024-mac-r2/530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0.zip",
+    "sha256": "530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0"
+  },
+  "selectedMetrics": [
+    {
+      "key": "physicians-in-medical-facilities-per-100k",
+      "title": "医療施設に従事する医師数（人口10万人当たり）",
+      "year": "2022",
+      "unit": "人"
+    },
+    {
+      "key": "general-hospital-bed-count-per-100k",
+      "title": "一般病院病床数（人口10万人当たり）",
+      "year": "2023",
+      "unit": "床"
+    },
+    {
+      "key": "nursing-welfare-facility-count-per-100k-65plus",
+      "title": "介護老人福祉施設数（65歳以上人口10万人当たり）",
+      "year": "2023",
+      "unit": "所"
+    }
+  ],
+  "included": [
+    "CSV（47地域・237指標、基準年は指標ごとに固定）",
+    "Excel（237指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "physicians-per-population",
+      "figures": [
+        {
+          "file": "physicians-per-population.png",
+          "alt": "医療施設に従事する医師数（人口10万人当たり）（2022年度・地域別比較）",
+          "template": "bar",
+          "sha256": "d9473a7a4c75766ac6dc22133b555c89cea0041f18cd616b9317d655cfc97ea7"
+        }
+      ]
+    },
+    {
+      "id": "beds-per-population",
+      "figures": [
+        {
+          "file": "beds-per-population.png",
+          "alt": "一般病院病床数（人口10万人当たり）（2023年・地図）",
+          "template": "choropleth",
+          "sha256": "f07fe6c2721f9c6868416ccef26d8a239449ae24b9b7c608a7e6353bb6b9e33d"
+        }
+      ]
+    },
+    {
+      "id": "nursing-facilities-per-elderly",
+      "figures": [
+        {
+          "file": "nursing-facilities-per-elderly.png",
+          "alt": "介護老人福祉施設数（65歳以上人口10万人当たり）（2023年・地域別比較）",
+          "template": "bar",
+          "sha256": "95db28776e4e5ba22f6a6eab24d8d01498ddebe36699d6698a3a5bbbaffac28b"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全237指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-05のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "2faf2af77d86a620698c19aa3725870d9b30c86909d7dc2b5869bcefce1dbb2a"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は1991〜2024年で指標ごとに異なり、時系列データではありません。"
+}

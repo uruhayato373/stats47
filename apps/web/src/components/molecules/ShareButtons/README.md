@@ -21,6 +21,9 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
   title="統計データのページ" 
   variant="prominent" 
 />
+
+// ページ見出し付近では「共有」1ボタンのメニューにまとめる
+<ShareButtons title="統計データのページ" variant="menu" />
 ```
 
 ## ディレクトリ構造
@@ -59,7 +62,8 @@ ShareButtons/
 
 - **SNSシェア**: X (Twitter)、Facebook、LINE、はてなブックマークへのシェアリンクを生成
 - **URLコピー**: クリップボードにURLをコピーする機能（コピー成功時に視覚的フィードバックを表示）
-- **バリアント**: `simple`と`prominent`の2つの表示スタイル
+- **バリアント**: 共通のURL生成・コピー・計測を使う3つの表示スタイル
+  - `menu`: shadcn系の Button と DropdownMenu。「共有」からSNSとリンクコピーを選ぶ
   - `simple`: 控えめなアイコンボタンスタイル（デフォルト）
   - `prominent`: 目立つ色付きボタンスタイル
 
@@ -69,6 +73,6 @@ ShareButtons/
   - 各SNSのシェアリンクに含まれるテキスト
 - `url?: string` - シェアするURL（オプション）
   - 指定しない場合、現在のページのURL（`window.location.href`）が使用されます
-- `variant?: "simple" | "prominent"` - 表示スタイル（デフォルト: `"simple"`）
+- `variant?: "simple" | "prominent" | "menu"` - 表示スタイル（デフォルト: `"simple"`）
   - `simple`: 小さなアイコンボタン、ホバー時に色が変わる
   - `prominent`: 大きな色付きボタン、各SNSのブランドカラーが適用される

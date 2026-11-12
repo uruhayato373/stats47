@@ -1,7 +1,10 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
+import ts from "typescript";
 import { describe, expect, it } from "vitest";
+
+import referenceSources from "../../../../data/provenance/reference-sources/sources.json";
 
 /**
  * 出典表示の統一契約を source レベルで固定する。
@@ -40,6 +43,27 @@ const FILES = listSourceFiles(SRC).map((abs) => ({
 const DATA_SOURCE_LIST = "src/components/molecules/DataSourceList.tsx";
 
 describe("data source contract", () => {
+  it("共通出典の名称・URLを画面に直書きせず、JSON台帳のIDで参照する", () => {
+    const literals = new Set(Object.values(referenceSources).flatMap(({ name, url }) => [name, url]));
+    const offenders = FILES.filter(({ file, source }) => {
+      if (![...literals].some((value) => source.includes(value))) return false;
+      let found = false;
+      const visit = (node: ts.Node) => {
+        if (ts.isStringLiteralLike(node) && literals.has(node.text)) found = true;
+        ts.forEachChild(node, visit);
+      };
+      visit(ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true));
+      return found;
+    }).map(({ file }) => file);
+    expect(offenders).toEqual([]);
+  });
+
+  it("ランキングの可視化直下でページ出典を重複描画しない", () => {
+    const client = FILES.find(({ file }) => file.endsWith("/RankingKeyPageClient.tsx"))!.source;
+    expect(client).not.toMatch(/SourceAttribution|\bsourceConfig\b|出典:/);
+    expect(client).toContain("<RankingVisualizationDetails");
+  });
+
   it("「データ出典」見出しを描画するのは DataSourceList だけ", () => {
     const offenders = FILES.filter(
       ({ file, source }) => file !== DATA_SOURCE_LIST && />\s*データ出典\s*</.test(source),

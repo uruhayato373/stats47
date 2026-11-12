@@ -165,7 +165,8 @@
     "自動車保有車両数": "vehicle-registration-statistics",
     "経済構造実態調査": "economic-structure-survey",
     "生産農業所得統計": "agricultural-income-statistics",
-    "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査結果": "student-guidance-issues-survey"
+    "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査結果": "student-guidance-issues-survey",
+    "放送受信契約数統計要覧": "broadcast-reception-contract-statistics"
   },
   "cdcat01SourceOverride": {
     "D2201": [

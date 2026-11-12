@@ -1,0 +1,47 @@
+{
+  "productId": "P-07",
+  "articleKey": "prefecture-migration-living-pack",
+  "displayTitle": "都道府県別 住居費・物価・気候データ",
+  "description": "物価や住居費、気候の違いを比べ、移住候補地を調べるための比較資料を作れます。",
+  "useCases": [
+    {
+      "title": "移住候補地の絞り込みに",
+      "description": "生活に関わる物価と気候を並べ、詳しく調べたい地域を選ぶための比較表にできます。"
+    },
+    {
+      "title": "移住相談の説明資料に",
+      "description": "全国平均に対する物価水準を示し、『何がどの程度違うのか』を数字で説明できます。"
+    },
+    {
+      "title": "生活費の下調べに",
+      "description": "総合の物価と住居費目を分けて比べ、実際の家賃や家計を調べる前の基礎資料にできます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "overall-price-comparison",
+      "heading": "全国平均に対する物価水準を比べる",
+      "lead": "消費者物価地域差指数を並べ、全国平均を100とした物価水準の違いを示せます。物価の上昇率ではなく、地域間の水準を比べるための図です。",
+      "metricKeys": ["consumer-price-difference-index-overall"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "housing-price-distribution",
+      "heading": "住居に関わる物価の地域差を見る",
+      "lead": "住居費目の地域差指数を地図にし、総合の物価と違う傾向があるかを確認できます。家賃の金額や住宅の購入価格そのものを表す図ではありません。",
+      "metricKeys": ["consumer-price-difference-index-housing"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "temperature-comparison",
+      "heading": "各地の気温を比較する",
+      "lead": "年平均気温を棒グラフで比較し、候補地の気候を調べる入口にできます。各地の観測地点の値なので、県内全域の平均や移住先の町の気温とは区別して読みます。",
+      "metricKeys": ["average-temperature"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。個別の物件賃料や現在の生活費を見積もる際は、最新の現地情報も確認してください。",
+    "物価地域差指数は全国平均を100とする指数で、総合・住居とも持家の帰属家賃を含みません。気候指標は各地の観測地点の値です。"
+  ]
+}

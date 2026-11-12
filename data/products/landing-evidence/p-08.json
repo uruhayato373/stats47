@@ -1,0 +1,85 @@
+{
+  "productId": "P-08",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "13f37aef2327ffb85ce6fb9189f7f6c1a4b7b8773e60b7ff612ff741fa309dcd",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-08/v4-20261024-mac-r2/c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb.zip",
+    "sha256": "c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb"
+  },
+  "selectedMetrics": [
+    {
+      "key": "annual-sales-amount",
+      "title": "商業年間商品販売額（卸売業＋小売業）",
+      "year": "2022",
+      "unit": "百万円"
+    },
+    {
+      "key": "annual-sales-amount-per-establishment",
+      "title": "商業年間商品販売額（卸売業＋小売業）（1事業所当たり）",
+      "year": "2022",
+      "unit": "百万円"
+    },
+    {
+      "key": "convenience-store-count-per-100k",
+      "title": "コンビニエンスストア数（人口10万人当たり）",
+      "year": "2014",
+      "unit": "所"
+    }
+  ],
+  "included": [
+    "CSV（47地域・69指標、基準年は指標ごとに固定）",
+    "Excel（69指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "commercial-sales",
+      "figures": [
+        {
+          "file": "commercial-sales.png",
+          "alt": "商業年間商品販売額（卸売業＋小売業）（2022年・地域別比較）",
+          "template": "bar",
+          "sha256": "eae4942c80ce618b035c4d9de7aab6a6e288201302a8ec0c9ae637bb183a60b1"
+        }
+      ]
+    },
+    {
+      "id": "sales-per-establishment",
+      "figures": [
+        {
+          "file": "sales-per-establishment.png",
+          "alt": "商業年間商品販売額（卸売業＋小売業）（1事業所当たり）（2022年・地図）",
+          "template": "choropleth",
+          "sha256": "05f23cee7c1c7e2400e121912b2124ae5765197eed32a20b5eeb16c069f1f7cb"
+        }
+      ]
+    },
+    {
+      "id": "convenience-store-density",
+      "figures": [
+        {
+          "file": "convenience-store-density.png",
+          "alt": "コンビニエンスストア数（人口10万人当たり）（2014年・地域別比較）",
+          "template": "bar",
+          "sha256": "7e4276a56baf4499a46e3d60ca6a7aef8654b42f5dd81d05e6c243f6ba9b3d3d"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全69指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-08のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "ef26618e930226be79141be5b8e23cabc351bab7a3905f37a4a484b734e62bf7"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。"
+}

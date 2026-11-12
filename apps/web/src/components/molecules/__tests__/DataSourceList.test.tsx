@@ -23,6 +23,8 @@ describe("DataSourceList", () => {
     );
 
     const section = screen.getByTestId("data-source-section");
+    // 区画の間隔は親レイアウトが持つ。共通部品に区切り線や上余白を重ねない。
+    expect(section.className).not.toMatch(/\b(?:mt|pt|border-t)-/);
     expect(within(section).getByRole("heading", { name: "データ出典" })).toBeInTheDocument();
     const surveyLink = within(section).getByRole("link", { name: /^家計調査（品目別）/ });
     expect(surveyLink).toHaveAttribute("href", "/survey/kakei-chousa");

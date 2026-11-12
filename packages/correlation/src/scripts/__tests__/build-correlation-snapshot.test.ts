@@ -1,10 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { compareCorrelation } from '../../selection-policy';
 import type {
   CorrelationByKeySnapshot,
   CorrelationStatsSnapshot,
   CorrelationTopPairsSnapshot,
 } from '../../types/snapshot';
+
+function flatPairs(snapshot: CorrelationByKeySnapshot) {
+  return [...snapshot.groups.positive, ...snapshot.groups.negative].sort(compareCorrelation);
+}
 
 // ── server-only / logger は no-op ──────────────────────────────────────────────
 vi.mock('server-only', () => ({}));
@@ -129,6 +134,22 @@ vi.mock('@stats47/stats-r2/readers', () => ({
   }),
 }));
 
+describe('候補保持の段階で正負の枠を確保する', () => {
+  it('絶対値上位を正が占めても負の候補10件を残す', async () => {
+    const { TopByPopulationAdjusted } = await import('../build-correlation-snapshot');
+    const top = new TopByPopulationAdjusted('self');
+    for (let i = 0; i < 30; i++) {
+      for (const sign of [1, -1]) {
+        top.add({ keyX: 'self', keyY: `${sign}-${i}`, pearsonR: 0.8,
+          populationAdjustedRankR: sign * ((sign > 0 ? 0.99 : 0.6) - i / 1000),
+          effectiveAbsR: 0.5, partialRPopulation: null, partialRArea: null, partialRAging: null, partialRDensity: null });
+      }
+    }
+    expect(top.values().filter(item => item.populationAdjustedRankR > 0)).toHaveLength(10);
+    expect(top.values().filter(item => item.populationAdjustedRankR < 0)).toHaveLength(10);
+  });
+});
+
 describe('buildCorrelationSnapshot shape', () => {
   beforeEach(() => {
     saved.clear();
@@ -195,12 +216,12 @@ describe('buildCorrelationSnapshot shape', () => {
     expect(stats.total).toBeGreaterThanOrEqual(stats.strong);
 
     // per-key snapshot (metric-a)
-    const byKeyRaw = saved.get('app/correlation/by-ranking-key/metric-a.json');
+    const byKeyRaw = saved.get('app/correlation/by-ranking-key-v2/metric-a.json');
     expect(byKeyRaw).toBeTruthy();
     const byKey = JSON.parse(byKeyRaw!) as CorrelationByKeySnapshot;
     expect(byKey.rankingKey).toBe('metric-a');
-    expect(Array.isArray(byKey.pairs)).toBe(true);
-    const item = byKey.pairs[0];
+    expect(Array.isArray(flatPairs(byKey))).toBe(true);
+    const item = flatPairs(byKey)[0];
     for (const f of [
       'rankingKey',
       'title',
@@ -217,8 +238,8 @@ describe('buildCorrelationSnapshot shape', () => {
 
     // by-key は人口補正後の順位相関 (絶対値) の降順。この合成データでは metric-a と metric-b (r≈0.9) の
     // 連動は人口では説明されないので、補正後も先頭に残る。
-    expect(byKey.pairs[0].rankingKey).toBe('metric-b');
-    expect(Math.abs(byKey.pairs[0].pearsonR)).toBeGreaterThan(0.7);
+    expect(flatPairs(byKey)[0].rankingKey).toBe('metric-b');
+    expect(Math.abs(flatPairs(byKey)[0].pearsonR)).toBeGreaterThan(0.7);
   });
 });
 
@@ -244,20 +265,20 @@ describe('buildCorrelationSnapshot by-key order', () => {
       const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
       await buildCorrelationSnapshot({ dryRun: false });
       const byKey = JSON.parse(
-        saved.get('app/correlation/by-ranking-key/metric-a.json')!
+        saved.get('app/correlation/by-ranking-key-v2/metric-a.json')!
       ) as CorrelationByKeySnapshot;
-      const b = byKey.pairs.find((p) => p.rankingKey === 'metric-b')!;
-      const c = byKey.pairs.find((p) => p.rankingKey === 'metric-c')!;
+      const b = flatPairs(byKey).find((p) => p.rankingKey === 'metric-b')!;
+      const c = flatPairs(byKey).find((p) => p.rankingKey === 'metric-c')!;
 
       // 前提: 生の r なら人口の代理 (b) が上に来る
       expect(Math.abs(b.pearsonR)).toBeGreaterThan(Math.abs(c.pearsonR));
       expect(Math.abs(b.partialRPopulation!)).toBeLessThan(0.3);
 
-      const order = byKey.pairs.map((p) => p.rankingKey);
+      const order = flatPairs(byKey).map((p) => p.rankingKey);
       expect(order.indexOf('metric-c')).toBeLessThan(order.indexOf('metric-b'));
       expect(Math.abs(c.populationAdjustedR)).toBeGreaterThan(Math.abs(b.populationAdjustedR));
       // 画面は先頭から出すので、並びは表示値 (populationAdjustedR) の絶対値の降順でなければならない
-      const shown = byKey.pairs.map((p) => Math.abs(p.populationAdjustedR));
+      const shown = flatPairs(byKey).map((p) => Math.abs(p.populationAdjustedR));
       expect(shown).toEqual([...shown].sort((x, y) => y - x));
     } finally {
       STATS['metric-a'] = original.a;
@@ -325,7 +346,7 @@ describe('buildCorrelationSnapshot --skip-if-unchanged', () => {
 
       expect(result.skipped).toBe(false);
       expect(result.inputFingerprint).not.toBe(stats.inputFingerprint);
-      expect(saved.has('app/correlation/by-ranking-key/metric-a.json')).toBe(true);
+      expect(saved.has('app/correlation/by-ranking-key-v2/metric-a.json')).toBe(true);
       const next = JSON.parse(publishedStats()!) as CorrelationStatsSnapshot;
       expect(next.inputFingerprint).toBe(result.inputFingerprint);
     } finally {
@@ -391,7 +412,7 @@ describe('buildCorrelationSnapshot の対象年と空ファイル', () => {
   });
 
   const byKey = (key: string) => {
-    const raw = saved.get(`app/correlation/by-ranking-key/${key}.json`);
+    const raw = saved.get(`app/correlation/by-ranking-key-v2/${key}.json`);
     return raw ? (JSON.parse(raw) as CorrelationByKeySnapshot) : null;
   };
 
@@ -407,7 +428,7 @@ describe('buildCorrelationSnapshot の対象年と空ファイル', () => {
       const result = await buildCorrelationSnapshot({ dryRun: false });
 
       expect(result.consideredMetrics).toBe(6);
-      expect(byKey('metric-a')?.pairs.length).toBeGreaterThan(0);
+      expect(flatPairs(byKey('metric-a')!).length).toBeGreaterThan(0);
     } finally {
       target.years = original;
     }
@@ -421,10 +442,10 @@ describe('buildCorrelationSnapshot の対象年と空ファイル', () => {
       const result = await buildCorrelationSnapshot({ dryRun: false });
 
       // 30 県未満の metric-c と、相関除外キーの total-population
-      expect(byKey('metric-c')?.pairs).toEqual([]);
-      expect(byKey('total-population')?.pairs).toEqual([]);
+      expect(flatPairs(byKey('metric-c')!)).toEqual([]);
+      expect(flatPairs(byKey('total-population')!)).toEqual([]);
       expect(result.emptyKeyFiles).toBe(2);
-      expect(byKey('metric-a')?.pairs.length).toBeGreaterThan(0);
+      expect(flatPairs(byKey('metric-a')!).length).toBeGreaterThan(0);
 
       saved.clear();
       await buildCorrelationSnapshot({ dryRun: false, limitMetrics: 3 });
@@ -486,13 +507,13 @@ describe('buildCorrelationSnapshot の順位相関', () => {
     try {
       const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
       await buildCorrelationSnapshot({ dryRun: false });
-      const byKey = JSON.parse(saved.get('app/correlation/by-ranking-key/metric-b.json')!) as CorrelationByKeySnapshot;
-      const c = byKey.pairs.find((pair) => pair.rankingKey === 'metric-c')!;
+      const byKey = JSON.parse(saved.get('app/correlation/by-ranking-key-v2/metric-b.json')!) as CorrelationByKeySnapshot;
+      const c = flatPairs(byKey).find((pair) => pair.rankingKey === 'metric-c')!;
 
       // 前提: Pearson は 1 に近い
       expect(c.pearsonR).toBeGreaterThan(0.99);
       expect(Math.abs(c.populationAdjustedR)).toBeLessThan(0.4);
-      expect(byKey.pairs[0].rankingKey).not.toBe('metric-c');
+      expect(flatPairs(byKey)[0].rankingKey).not.toBe('metric-c');
     } finally {
       STATS['metric-b'] = original.b;
       STATS['metric-c'] = original.c;

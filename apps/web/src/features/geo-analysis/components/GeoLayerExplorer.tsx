@@ -19,6 +19,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 import Link from '@/components/atoms/SiteLink';
 import { ChartLegend } from '@/components/charts/ChartLegend';
 import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
+import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 import { SurfaceCard, ValueTable, type ValueTableColumn, type ValueTableRow } from '@/components/surface';
 
 import { fetchGeoLayerAction } from '../actions';
@@ -169,19 +170,12 @@ export function GeoLayerExplorer({
           </SelectContent>
         </Select>
         {layer.kind === 'population' && (
-          <div className="flex gap-2" aria-label="表示年">
-            {(['2020', '2050'] as const).map((value) => (
-              <Button
-                key={value}
-                variant={year === value ? 'default' : 'outline'}
-                aria-pressed={year === value}
-                onClick={() => setYear(value)}
-                className="min-h-11"
-              >
-                {value}年
-              </Button>
-            ))}
-          </div>
+          <SingleSelectToggleGroup
+            aria-label="表示年"
+            value={year}
+            onValueChange={setYear}
+            options={(['2020', '2050'] as const).map(value => ({ value, label: `${value}年` }))}
+          />
         )}
       </div>
       <p className="mb-3 text-sm leading-relaxed">
@@ -204,24 +198,16 @@ export function GeoLayerExplorer({
           ].map((item) => ({ key: String(item.value), label: item.label, color: populationLayerColor(item.value) }))}
         />
       )}
-      <div className="mb-3 flex flex-wrap gap-2">
-        <Button
-          variant={!fullExtent ? 'default' : 'outline'}
-          aria-pressed={!fullExtent}
-          onClick={() => setFullExtent(false)}
-          className="min-h-11"
-        >
-          分布の中心
-        </Button>
-        <Button
-          variant={fullExtent ? 'default' : 'outline'}
-          aria-pressed={fullExtent}
-          onClick={() => setFullExtent(true)}
-          className="min-h-11"
-        >
-          離島を含む全体
-        </Button>
-      </div>
+      <SingleSelectToggleGroup
+        aria-label="地図の範囲"
+        className="mb-3"
+        value={fullExtent ? 'whole' : 'focus'}
+        onValueChange={value => setFullExtent(value === 'whole')}
+        options={[
+          { value: 'focus', label: '分布の中心' },
+          { value: 'whole', label: '離島を含む全体' },
+        ]}
+      />
       <div aria-busy={loading} className="relative z-0 overflow-hidden">
         {loading ? (
           <p

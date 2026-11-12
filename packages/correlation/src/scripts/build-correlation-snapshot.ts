@@ -9,18 +9,18 @@
  *
  *   入力 : R2 `app/stats/<metric>/values.json` (公開 URL read) + git TS (data-configs)
  *   集計 : 使い捨て :memory: better-sqlite3 (旧 correlations schema 同等の temp table)
- *   出力 : R2 `app/correlation/top-pairs.json` / `stats.json` / `by-ranking-key/<key>.json`
+ *   出力 : R2 `app/correlation/top-pairs.json` / `stats.json` / `by-ranking-key-v2/<key>.json`
  *
  * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
  * allocationとGCでheapを圧迫するため、valueMapからPearson集計値だけを直接計算し、JS側で
- *   - per-key top-20 (人口補正後の順位相関の絶対値降順。populationAdjustedRankR)
+ *   - per-key 正負各10件 (人口補正後の順位相関の絶対値降順。populationAdjustedRankR)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
  * だけを保持する。scatterは候補集合が確定してから候補分だけ作り、
  * 最終的に「候補行のみ」を :memory: correlations に INSERT して
  * 旧 exporter SQL (effectiveR / ORDER BY / strong 集計) を厳密に再現する。
  *
- * R2 書き込みは assertR2WriteAllowed で CI / クラウド専用 (ローカルは .local/r2 へ生成のみ)。
+ * 生成先は R2 staging。remote への反映は既存 publisher が行う。
  *
  * Usage (CI / sync-snapshots):
  *   R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' \
@@ -51,6 +51,7 @@ import {
   writeR2Staging,
 } from '@stats47/r2-storage/server';
 import { readStatsValues } from '@stats47/stats-r2/readers';
+import { CORRELATION_SELECTION_POLICY, compareCorrelation, correlationDirection, selectCorrelationGroups, type CorrelationGroups } from '../selection-policy';
 
 import {
   isExcludedCorrelationKey,
@@ -64,7 +65,6 @@ import {
   type RankValueWithArea,
 } from '../utils/calculate-pearson';
 import {
-  CORRELATION_BY_KEY_LIMIT,
   CORRELATION_STATS_KEY,
   CORRELATION_TOP_PAIRS_KEY,
   CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT,
@@ -77,12 +77,13 @@ import {
   type CorrelationTopPairsSnapshot,
   type ThemeCorrelatedMetric,
   type TopCorrelation,
+  parseCorrelationByKeySnapshot,
 } from '../types/snapshot';
 
 // ─── 旧 run-batch-correlation.ts の定数 (git show 70758ac0^ で確認) ───────────
 
 /** 散布図の最小データ点数。これ未満のペアは採用しない。 */
-const MIN_DATA_POINTS = 30;
+const MIN_DATA_POINTS = CORRELATION_SELECTION_POLICY.minimumPairedAreas;
 
 
 /** R2 values.json の並列 fetch 上限 (API rate / メモリ保護)。 */
@@ -457,22 +458,27 @@ function effectiveAbsROf(p: {
 
 
 /**
- * 候補集合を作るために per-key top-N (|populationAdjustedRankR| 降順) を保持する小ヒープ代替。
+ * 候補段階から正負別に台帳の件数を保持し、片方の相関だけで枠が埋まるのを防ぐ。
  * 2026-09-23 まで ABS(pearsonR) 順で、件数系指標の top-20 が「人口の多い県ほど両方大きい」
  * だけの r≈0.99 のペアで埋まっていた (例: 救急搬送人員 → K6 推計人数 r=0.99, 人口補正後 0.42)。
  */
-class TopByPopulationAdjusted {
-  private items: CandidateScore[] = [];
-  constructor(private readonly limit: number) {}
+export class TopByPopulationAdjusted {
+  private groups: CorrelationGroups<CandidateScore> = { positive: [], negative: [] };
+  constructor(private readonly rankingKey: string) {}
   add(p: CandidateScore) {
-    this.items.push(p);
-    this.items.sort(
-      (a, b) => Math.abs(b.populationAdjustedRankR) - Math.abs(a.populationAdjustedRankR)
-    );
-    if (this.items.length > this.limit) this.items.length = this.limit;
+    const direction = correlationDirection(p.populationAdjustedRankR);
+    if (!direction) return;
+    const items = this.groups[direction];
+    items.push(p);
+    items.sort((a, b) => compareCorrelation(
+      { rankingKey: a.keyX === this.rankingKey ? a.keyY : a.keyX, populationAdjustedR: a.populationAdjustedRankR },
+      { rankingKey: b.keyX === this.rankingKey ? b.keyY : b.keyX, populationAdjustedR: b.populationAdjustedRankR },
+    ));
+    const limit = CORRELATION_SELECTION_POLICY.groups[direction].limit;
+    if (items.length > limit) items.length = limit;
   }
   values(): CandidateScore[] {
-    return this.items;
+    return [...this.groups.positive, ...this.groups.negative];
   }
 }
 
@@ -739,20 +745,18 @@ const counterpartOf = (row: ByKeyRawRow, rankingKey: string): string =>
   row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
 
 /**
- * 対象 key を含む候補ペアを人口補正後の順位相関の絶対値降順 (同値は counterpart key 昇順) で並べ、
- * counterpart で dedup → limit。行数は候補集合 (per-key top-N ∪ global top) で上限がある。
+ * 対象 key を含む候補ペアを共通の選定規則で正負別に絞る。
+ * 行数は候補集合 (per-key top-N ∪ global top) で上限がある。
  * scatter は X=自身になるよう必要なら x/y を swap。title/subtitle/unit を join。
  */
 function queryByKey(
   db: DatabaseConstructor.Database,
   rankingKey: string,
-  limit: number,
   metaMap: Map<string, MetricDisplayMeta>
-): CorrelatedItem[] {
-  const rawRows = (
-    db
-      .prepare(
-        `
+): CorrelationGroups<CorrelatedItem> {
+  const rows = db
+    .prepare(
+      `
       SELECT
         metric_key_x AS rankingKeyX,
         metric_key_y AS rankingKeyY,
@@ -766,28 +770,11 @@ function queryByKey(
       FROM correlations
       WHERE metric_key_x = ? OR metric_key_y = ?
     `
-      )
-      .all(rankingKey, rankingKey) as ByKeyRawRow[]
-  )
-    .map((row) => ({ row, populationAdjustedR: row.populationAdjustedRankR }))
-    .sort(
-      (a, b) =>
-        Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR) ||
-        counterpartOf(a.row, rankingKey).localeCompare(counterpartOf(b.row, rankingKey))
-    );
-
-  const seen = new Set<string>();
-  const rows = rawRows
-    .filter(({ row }) => {
-      const counterpart = counterpartOf(row, rankingKey);
-      if (seen.has(counterpart)) return false;
-      seen.add(counterpart);
-      return true;
-    })
-    .slice(0, limit);
+    )
+    .all(rankingKey, rankingKey) as ByKeyRawRow[];
 
   const results: CorrelatedItem[] = [];
-  for (const { row, populationAdjustedR } of rows) {
+  for (const row of rows) {
     const counterpartKey = counterpartOf(row, rankingKey);
     const meta = displayMetaFor(counterpartKey, metaMap);
     if (meta.title === null) continue;
@@ -816,7 +803,7 @@ function queryByKey(
       subtitle: meta.subtitle,
       unit: meta.unit,
       pearsonR: row.pearsonR,
-      populationAdjustedR,
+      populationAdjustedR: row.populationAdjustedRankR,
       partialRPopulation: row.partialRPopulation,
       partialRArea: row.partialRArea,
       partialRAging: row.partialRAging,
@@ -824,7 +811,7 @@ function queryByKey(
       scatterData: scatter,
     });
   }
-  return results;
+  return selectCorrelationGroups(results);
 }
 
 // ─── main ─────────────────────────────────────────────────────────────────────
@@ -909,7 +896,7 @@ export async function buildCorrelationSnapshot(
     loaded,
     pairKeys,
     metaMap,
-    `${hashCorrelationSource()}:${createHash('sha256').update(JSON.stringify(themeMembers)).digest('hex')}`
+    `${hashCorrelationSource()}:${createHash('sha256').update(JSON.stringify({ themeMembers, selectionPolicy: CORRELATION_SELECTION_POLICY })).digest('hex')}`
   );
   if (opts.skipIfUnchanged) {
     const previous = await fetchFromR2AsJson<Partial<CorrelationStatsSnapshot>>(
@@ -936,10 +923,10 @@ export async function buildCorrelationSnapshot(
 
   const getCv = makeCvCorrelationGetter(loaded);
 
-  // 3. ペア走査 (i<j)。per-key top-20 と global top-200 候補のみ JS で保持し bound。
+  // 3. ペア走査 (i<j)。per-key 正負各10件 と global top-200 候補のみ JS で保持し bound。
   const perKeyTop = new Map<string, TopByPopulationAdjusted>();
   for (const k of pairKeys)
-    perKeyTop.set(k, new TopByPopulationAdjusted(CORRELATION_BY_KEY_LIMIT));
+    perKeyTop.set(k, new TopByPopulationAdjusted(k));
   const globalTop = new GlobalTopByEffective(
     CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT
   );
@@ -967,7 +954,7 @@ export async function buildCorrelationSnapshot(
     for (let j = i + 1; j < pairKeys.length; j++) {
       const keyY = pairKeys[j];
       const titleY = displayMetaFor(keyY, metaMap).title;
-      if (isTrivialPair(keyX, keyY, titleX, titleY)) {
+      if (titleX === null || titleY === null || isTrivialPair(keyX, keyY, titleX, titleY)) {
         trivialSkipped++;
         continue;
       }
@@ -1071,39 +1058,43 @@ export async function buildCorrelationSnapshot(
     );
     await writeR2Staging(CORRELATION_STATS_KEY, JSON.stringify(statsSnapshot));
 
-    for (const key of pairKeys) {
-      const snapshot: CorrelationByKeySnapshot = {
-        generatedAt,
-        rankingKey: key,
-        pairs: queryByKey(db, key, CORRELATION_BY_KEY_LIMIT, metaMap),
-      };
+  }
+  // dry-run でも全指標の候補・参照・形状を検査する。
+  for (const key of pairKeys) {
+    const snapshot: CorrelationByKeySnapshot = {
+      generatedAt,
+      rankingKey: key,
+      selectionPolicyVersion: CORRELATION_SELECTION_POLICY.version,
+      groups: queryByKey(db, key, metaMap),
+    };
+    parseCorrelationByKeySnapshot(snapshot);
+    for (const item of [...snapshot.groups.positive, ...snapshot.groups.negative]) {
+      if (!allKeys.has(item.rankingKey)) throw new Error(`Unknown correlation metric: ${item.rankingKey}`);
+    }
+    if (!opts.dryRun) await writeR2Staging(correlationByKeyPath(key), JSON.stringify(snapshot));
+    perKeyFiles++;
+  }
+  // 計算できない有効指標 (除外キー・観測値なし・最新年が 30 県未満) にも空の by-key を書く。
+  // 書かないと以前に計算した相関がランキングページに残り続ける (2026-09-23 実測 54 ページ)。
+  // --limit-metrics は先頭 N 件だけの検証用なので、残り全件を空で上書きしない。
+  if (!opts.dryRun && !opts.limitMetrics) {
+    const computed = new Set(pairKeys);
+    for (const key of activePrefectureKeys) {
+      if (computed.has(key)) continue;
+      const snapshot: CorrelationByKeySnapshot = { generatedAt, rankingKey: key, selectionPolicyVersion: CORRELATION_SELECTION_POLICY.version, groups: { positive: [], negative: [] } };
       await writeR2Staging(correlationByKeyPath(key), JSON.stringify(snapshot));
-      perKeyFiles++;
+      emptyKeyFiles++;
     }
-    // 計算できない有効指標 (除外キー・観測値なし・最新年が 30 県未満) にも空の by-key を書く。
-    // 書かないと以前に計算した相関がランキングページに残り続ける (2026-09-23 実測 54 ページ)。
-    // --limit-metrics は先頭 N 件だけの検証用なので、残り全件を空で上書きしない。
-    if (!opts.limitMetrics) {
-      const computed = new Set(pairKeys);
-      for (const key of activePrefectureKeys) {
-        if (computed.has(key)) continue;
-        const snapshot: CorrelationByKeySnapshot = { generatedAt, rankingKey: key, pairs: [] };
-        await writeR2Staging(correlationByKeyPath(key), JSON.stringify(snapshot));
-        emptyKeyFiles++;
-      }
-      // テーマ単位の関連指標。該当なしのテーマも空で書き、古い一覧を残さない
-      for (const [themeKey, members] of themeMembers) {
-        const snapshot: CorrelationByThemeSnapshot = {
-          generatedAt,
-          themeKey,
-          items: buildThemeLinks(members, perKeyTop, metaMap),
-        };
-        await writeR2Staging(correlationByThemePath(themeKey), JSON.stringify(snapshot));
-        themeFiles++;
-      }
+    // テーマ単位の関連指標。該当なしのテーマも空で書き、古い一覧を残さない
+    for (const [themeKey, members] of themeMembers) {
+      const snapshot: CorrelationByThemeSnapshot = {
+        generatedAt,
+        themeKey,
+        items: buildThemeLinks(members, perKeyTop, metaMap),
+      };
+      await writeR2Staging(correlationByThemePath(themeKey), JSON.stringify(snapshot));
+      themeFiles++;
     }
-  } else {
-    perKeyFiles = pairKeys.length;
   }
 
   db.close();

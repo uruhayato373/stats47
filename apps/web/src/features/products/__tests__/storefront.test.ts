@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+
 import { describe, expect, it } from "vitest";
 
 import { generateMetadata as generateNoteReferralMetadata } from "../../../app/products/[slug]/from/note/[noteKey]/page";
@@ -14,6 +17,26 @@ import {
 } from "../storefront";
 
 describe("product storefront", () => {
+  it("全データ商品の用途・作成例・実納品の収録内容を共通台帳から引き継ぐ", () => {
+    const ledgerRoot = path.resolve(__dirname, "../../../../../../data/products");
+    const notes = STOREFRONT_PRODUCTS.filter((product) => product.channel === "note");
+    const files = fs.readdirSync(path.join(ledgerRoot, "landings")).filter((file) => file.endsWith(".json"));
+    expect(notes.map((p) => `${p.id.toLowerCase()}.json`).sort()).toEqual(files.sort());
+    for (const product of notes) {
+      const source = JSON.parse(fs.readFileSync(path.join(ledgerRoot, "landings", `${product.id.toLowerCase()}.json`), "utf8"));
+      const evidence = JSON.parse(fs.readFileSync(path.join(ledgerRoot, "landing-evidence", `${product.id.toLowerCase()}.json`), "utf8"));
+      expect(product).toMatchObject({
+        useCases: source.useCases,
+        purchaseNotes: source.purchaseNotes,
+        included: evidence.included,
+        showcaseNote: evidence.showcaseNote,
+      });
+      expect(product.showcase?.filter((section) => section.kind === "chart").map((section) => section.heading))
+        .toEqual(source.examples.map((example: { heading: string }) => example.heading));
+      expect(product.showcase?.some((section) => section.kind === "file")).toBe(true);
+    }
+  });
+
   it("財政記事だけに既存P-04を案内し、書籍とデータ集を混同しない", () => {
     expect(
       findDataProductForBlog("local-government-debt-burden")

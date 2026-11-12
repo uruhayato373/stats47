@@ -178,7 +178,7 @@ export default async function MunicipalitiesHubPage() {
         stats={`${entityCount.toLocaleString('ja-JP')} 自治体を比較`}
       />
 
-      <div className="mb-6 xl:hidden">
+      <div className="mb-6 rail:hidden">
         <RailLinksCard
           title="はじめに見るテーマ"
           items={starterThemeItems}

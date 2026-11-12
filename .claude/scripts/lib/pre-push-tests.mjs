@@ -63,7 +63,8 @@ function main() {
   const nodeTests = selectNodeTests(changed, listNodeTests());
   let ok = true;
   if (nodeTests.length > MAX_NODE_TESTS) console.log(`関係するテストが ${nodeTests.length} 件あるので CI に任せる`);
-  else if (nodeTests.length) ok = run(`スクリプトのテスト ${nodeTests.length} 件`, "node", ["--test", ...nodeTests]) && ok;
+  // .ts を require するスクリプトがある。型を外せない Node (22.14 など) でも CI と同じ結果になるよう tsx を通す (2026-11-12)
+  else if (nodeTests.length) ok = run(`スクリプトのテスト ${nodeTests.length} 件`, "node", ["--import", "tsx", "--test", ...nodeTests]) && ok;
   for (const workspace of WORKSPACES) {
     const sources = selectVitestSources(changed, workspace);
     if (sources.length === 0) continue;

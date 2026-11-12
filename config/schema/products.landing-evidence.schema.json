@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "productId",
+    "included",
+    "examples",
+    "filePreview",
+    "showcaseNote"
+  ],
+  "properties": {
+    "productId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "deliveryVersion": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "manifestSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourceArchive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bucket",
+        "key",
+        "sha256"
+      ],
+      "properties": {
+        "bucket": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "sourceArticle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "articleKey",
+        "store"
+      ],
+      "properties": {
+        "articleKey": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "store": {
+          "const": "r2-private"
+        }
+      }
+    },
+    "selectedMetrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "title",
+          "year",
+          "unit"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "year": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "included": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "figures"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "figures": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file",
+                "alt",
+                "template",
+                "sha256"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9-]+\\.png$"
+                },
+                "alt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "template": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "filePreview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "lead",
+        "figures"
+      ],
+      "properties": {
+        "heading": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "lead": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "figures": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "file",
+              "alt",
+              "template",
+              "sha256"
+            ],
+            "properties": {
+              "file": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+\\.png$"
+              },
+              "alt": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "template": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "showcaseNote": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "sourceArchive",
+        "deliveryVersion",
+        "manifestSha256",
+        "selectedMetrics"
+      ]
+    },
+    {
+      "required": [
+        "sourceArticle"
+      ]
+    }
+  ]
+}

@@ -17,7 +17,7 @@ interface PageHeaderProps {
    * KPI タイルではなくテキストで表現する（ミニマル方針）。
    */
   stats?: ReactNode;
-  /** 任意 CTA（検索 / 比較ボタン等）。h1 の右に配置 */
+  /** 題名に添える操作・補助情報（検索 / 比較ボタン・最終更新等）。PC は h1 の右、モバイルは下 */
   actions?: ReactNode;
   /** title/description 直下の細いメタ行（出典・データ年度・最終更新など）。 */
   meta?: ReactNode;

@@ -25,6 +25,8 @@ import { renderDonutChart, type DonutChart } from '../../../apps/admin/lib/templ
 import { renderFilePreview, type FilePreview } from '../../../apps/admin/lib/template-file-preview';
 import { renderLineChart, type LineChart } from '../../../apps/admin/lib/template-trend-line';
 import { renderAreaMapChart } from '../../../apps/admin/lib/template-area-map';
+import { renderDistributionMapChart } from '../../../apps/admin/lib/template-distribution-map';
+import { chartValueLabels, type RankingChartRow } from '../../../apps/admin/lib/template-ranking-data';
 import { resolveAreaChart, type AreaChartInput } from '../../../apps/admin/lib/template-area-scope';
 import { fetchMunicipalityTopologyForWardMode } from '../../../packages/gis/src/mlit/fetch-ward-mode-topology';
 import type { Topology } from 'topojson-specification';
@@ -79,6 +81,12 @@ function renderBuzzMap(spec: unknown, outPath: string) {
 
 type FigureSpec = { file: string; template: string; input: unknown };
 
+type PrefectureMapInput = { metricKey: string; grain: Grain; title: string; yearLabel: string; unit: string; source: string; note?: string; rows: RankingChartRow[] };
+function renderPrefectureMap(input: PrefectureMapInput) {
+  return renderDistributionMapChart({ ...input, presentation: presentationOf(input.metricKey, input.grain),
+    ...chartValueLabels(input.unit, input.rows.map((row) => row.value), getMetricConfig(input.metricKey)?.display?.decimalPlaces) });
+}
+
 export async function renderProductFigures(specPath: string, outDir = path.dirname(specPath)) {
   const { figures } = JSON.parse(fs.readFileSync(specPath, 'utf8')) as { figures: FigureSpec[] };
   const ledger = new Set((JSON.parse(fs.readFileSync(path.join(ROOT, datasetPath('content.image-templates')), 'utf8')).templates as { id: string }[]).map((t) => t.id));
@@ -87,15 +95,15 @@ export async function renderProductFigures(specPath: string, outDir = path.dirna
     if (!ledger.has(figure.template) || figure.template === 'unclassified') throw Error(`${figure.file}: 型の台帳に無い型 ${figure.template}`);
     const out = path.join(outDir, figure.file);
     fs.mkdirSync(path.dirname(out), { recursive: true });
-    // 地図の型は 1 つ。全国はバズマップ (input.buzzMap)、1 つの県の中は管理画面の型 (input.area) が描く
-    const map = figure.template === 'choropleth' ? (figure.input as { buzzMap?: unknown; area?: Parameters<typeof renderAreaMap>[0] }) : null;
-    if (map && !map.buzzMap && !map.area) throw Error(`${figure.file}: 地図の入力は buzzMap か area のどちらか`);
+    // 地図の型は1つ。全国の市区町村=buzzMap、県内の市区町村=area、47都道府県=prefecture。
+    const map = figure.template === 'choropleth' ? (figure.input as { buzzMap?: unknown; area?: Parameters<typeof renderAreaMap>[0]; prefecture?: PrefectureMapInput }) : null;
+    if (map && [map.buzzMap, map.area, map.prefecture].filter(Boolean).length !== 1) throw Error(`${figure.file}: 地図の入力は buzzMap / area / prefecture の1つ`);
     if (map?.buzzMap) {
       renderBuzzMap(map.buzzMap, out);
     } else {
-      const render = map?.area ? null : SVG_RENDERERS[figure.template];
-      if (!map?.area && !render) throw Error(`${figure.file}: 型 ${figure.template} はこの経路ではまだ描けない`);
-      const svg = map?.area ? await renderAreaMap(map.area) : render!(figure.input as never);
+      const render = map?.area || map?.prefecture ? null : SVG_RENDERERS[figure.template];
+      if (!map?.area && !map?.prefecture && !render) throw Error(`${figure.file}: 型 ${figure.template} はこの経路ではまだ描けない`);
+      const svg = map?.area ? await renderAreaMap(map.area) : map?.prefecture ? renderPrefectureMap(map.prefecture) : render!(figure.input as never);
       assertMinimalChartCopy(svg);
       await sharp(Buffer.from(svg), { density: 144 }).resize(FRAME.width, FRAME.height).png().toFile(out);
     }

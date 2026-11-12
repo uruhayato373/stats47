@@ -2867,5 +2867,24 @@
     "isActive": true,
     "createdAt": "2026-10-08 00:00:00",
     "updatedAt": "2026-10-08 00:00:00"
+  },
+  {
+    "id": "broadcast-reception-contract-statistics",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": null,
+    "name": "放送受信契約数統計要覧",
+    "organization": "日本放送協会",
+    "url": null,
+    "description": "日本放送協会の放送受信契約数の統計。社会・人口統計体系の市区町村の表が、テレビ・衛星放送の受信契約数の原典として挙げる。",
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 999,
+    "isActive": true,
+    "createdAt": "2026-11-12 00:00:00",
+    "updatedAt": "2026-11-12 00:00:00"
   }
 ]

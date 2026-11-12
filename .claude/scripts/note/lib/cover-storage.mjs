@@ -119,7 +119,7 @@ export async function retryCoverRead(read, method = 'GET', wait = (ms) => new Pr
 function request(url, options = {}) {
   return retryCoverRead(() => requestOnce(url, options), options.method ?? 'GET');
 }
-function requestOnce(url, { method = 'GET', body, headers = {} } = {}) {
+function requestOnce(url, { method = 'GET', body, headers = {}, maxBytes = LIMIT } = {}) {
   return new Promise((resolve, reject) => {
     const proxy = process.env.HTTPS_PROXY ?? process.env.https_proxy;
     const req = https.request(url, { method, headers, rejectUnauthorized: true, ca: windowsTrustedAuthorities(), agent: proxy ? new HttpsProxyAgent(proxy) : undefined }, (res) => {
@@ -127,7 +127,7 @@ function requestOnce(url, { method = 'GET', body, headers = {} } = {}) {
       let size = 0;
       res.on('data', (chunk) => {
         size += chunk.length;
-        if (size > LIMIT) req.destroy(Error('cover response exceeds size limit'));
+        if (size > maxBytes) req.destroy(Error('cover response exceeds size limit'));
         else chunks.push(chunk);
       });
       res.on('end', () => resolve({ status: res.statusCode, body: Buffer.concat(chunks) }));
@@ -180,7 +180,8 @@ export const r2ContentType = (key) => CONTENT_TYPES[path.extname(key).toLowerCas
  * One R2 bucket. writeOnce refuses to replace an existing object (covers and archives are immutable).
  * Listing needs S3 credentials; the Wrangler fallback can read, write and delete single objects only.
  */
-export function createR2Store({ bucket, writeOnce = false }) {
+export function createR2Store({ bucket, writeOnce = false, maxBytes = LIMIT }) {
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 1) throw Error('R2 read size limit must be a positive integer');
   const endpoint = process.env.R2_S3_ENDPOINT;
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
@@ -192,7 +193,7 @@ export function createR2Store({ bucket, writeOnce = false }) {
         try {
           const out = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
           const bytes = Buffer.from(await out.Body.transformToByteArray());
-          if (bytes.length > LIMIT) throw Error('R2 object exceeds size limit');
+          if (bytes.length > maxBytes) throw Error('R2 object exceeds size limit');
           return bytes;
         } catch (error) {
           if (error.$metadata?.httpStatusCode === 404 || error.name === 'NoSuchKey') return null;
@@ -226,7 +227,7 @@ export function createR2Store({ bucket, writeOnce = false }) {
   let account = process.env.CLOUDFLARE_ACCOUNT_ID;
   async function api(resource, options = {}) {
     return request(`https://api.cloudflare.com/client/v4${resource}`, {
-      ...options, headers: { ...options.headers, authorization: `Bearer ${await token()}` },
+      maxBytes, ...options, headers: { ...options.headers, authorization: `Bearer ${await token()}` },
     });
   }
   async function objectPath(key) {
