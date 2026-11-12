@@ -437,8 +437,7 @@
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "slotBox={adSlotBox(\"adsense-body\")}",
         "condition": "手で <ad-slot> を置いた記事だけ",
-        "knownAdjacentReason": "自動の広告の段と手で置いた <ad-slot> は同じ記事に同時には出ない (手で広告を置いた記事には段を差し込まない) 描き分けが、ファイルの中で並んでいるだけ",
-        "manualOnly": true
+        "knownAdjacentReason": "自動の広告の段と手で置いた <ad-slot> は同じ記事に同時には出ない (手で広告を置いた記事には段を差し込まない) 描き分けが、ファイルの中で並んでいるだけ"
       },
       {
         "slot": "affiliate-text",
@@ -454,8 +453,7 @@
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "width={b.width ?? null}",
         "condition": "手置きのタグがある記事だけ",
-        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ",
-        "manualOnly": true
+        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
       },
       {
         "slot": "affiliate-rect",
@@ -464,8 +462,7 @@
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "href={href ?? \"#\"}",
         "condition": "直接配置の台帳に載せた記事だけ",
-        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ",
-        "manualOnly": true
+        "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
       },
       {
         "slot": "adsense-body-responsive",
@@ -1012,7 +1009,6 @@
   },
   "rules": {
     "noAdjacentSlots": true,
-    "noFirstView": true,
-    "maxAdsenseBodyPerPage": 4
+    "noFirstView": true
   }
 }

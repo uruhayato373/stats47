@@ -287,10 +287,6 @@
                   }
                 }
               }
-            },
-            "manualOnly": {
-              "type": "boolean",
-              "description": "記事に手で置いたときだけ出る枠。手で置いた記事には自動の広告の段を差し込まないので (apps/web/src/features/blog/lib/ad-row-positions.ts の MANUAL_AD_TAG)、自動の段と同時には出ない。本文の AdSense の上限は、自動の場合と手置きの場合を別に数える (2026-11-12)"
             }
           }
         }
@@ -300,8 +296,7 @@
       "type": "object",
       "required": [
         "noAdjacentSlots",
-        "noFirstView",
-        "maxAdsenseBodyPerPage"
+        "noFirstView"
       ],
       "additionalProperties": false,
       "properties": {
@@ -312,11 +307,6 @@
         "noFirstView": {
           "type": "boolean",
           "description": "最初の画面 (h1 と操作の行・最初の章) には置かない"
-        },
-        "maxAdsenseBodyPerPage": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "本文の AdSense の枠の上限 (広告の段の AdSense の枠も数える)。2026-11-03 オーナー決定で 2 → 4"
         }
       }
     }
