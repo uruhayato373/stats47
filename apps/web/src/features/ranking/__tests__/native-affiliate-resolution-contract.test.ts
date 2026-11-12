@@ -29,7 +29,6 @@ import type { ReactElement } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { resolveContentVerticalChain } from "@/features/ads/constants/affiliate-category";
-import type { ResolvedAffiliateBanner } from "@/features/ads/types";
 
 import { RankingPageClientShell } from "../components/RankingKeyPage/RankingPageClientShell";
 
@@ -60,10 +59,6 @@ vi.mock("@/components/layout/Breadcrumbs", () => ({ Breadcrumbs: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageRelatedRankingsSection", () => ({ RankingPageRelatedRankingsSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageSidebarSection", () => ({ RankingPageSidebarSection: () => null }));
 
-const MODEL_SRC = readFileSync(
-  resolve(import.meta.dirname, "../services/load-ranking-page-model.ts"),
-  "utf8",
-);
 const SHELL_SRC = readFileSync(
   resolve(import.meta.dirname, "../components/RankingKeyPage/RankingPageClientShell.tsx"),
   "utf8",
@@ -74,19 +69,6 @@ const CONTENT_SRC = readFileSync(
 );
 
 describe("ranking native アフィリエイトの解決契約", () => {
-  it("categoryKey を解決入力に必ず渡す (tags は全 config 未記入のため必須)", () => {
-    // 2026-09-03: 解決は resolveContentVertical(Chain) に一本化された。model 側の契約は
-    // 「categoryKey を入力に含めること」で、鎖の順序と在庫フォールバックは下の純関数テストが持つ。
-    expect(MODEL_SRC).toContain("resolveAffiliateBannersForContent");
-    expect(MODEL_SRC).toMatch(/categoryKey:\s*rankingItem\.categoryKey/);
-  });
-
-  it("tagKeys が空でも解決を打ち切らない", () => {
-    // 旧実装は `affiliateTagKeys.length > 0 ? resolve(...) : Promise.resolve([])` で、
-    // tags が空の全 ranking (= 全件) を無条件に空へ倒していた。この三項の復活を禁じる。
-    expect(MODEL_SRC).not.toMatch(/affiliateTagKeys\.length\s*>\s*0\s*\n?\s*\?/);
-  });
-
   it("tagKeys 解決が 0 件だったときも categoryKey を試す", () => {
     // 「tags があるが在庫が無い」ケースでも枠を落とさない。鎖に category 段が残ることを要求する。
     const chain = resolveContentVerticalChain({
@@ -129,14 +111,8 @@ describe("ranking native アフィリエイトの解決契約", () => {
     { adsense: false, survey: "other-survey", rows: [[], [], []] },
   ])("本文の段に PR を出さない: 出典調査=$survey / AdSense=$adsense", ({ adsense, survey, rows }) => {
     display.adsense = adsense;
-    const nativeBanners: ResolvedAffiliateBanner[] = ["ad1", "ad2"].map((id) => ({
-      id, title: id, href: `https://example.com/${id}`, imageUrl: `https://example.com/${id}.png`,
-      width: 300, height: 250, trackingPixelUrl: null, vertical: null,
-    }));
     const model = {
-      nativeBanners,
       rankingItem: { categoryKey: "economy" },
-      affiliateVertical: "furusato" as const,
       originalSurveys: [{ id: survey, name: survey }],
     } as RankingPageModel;
     // 子コンポーネントの描画ではなく、shell が各配置へ渡す実データを検証する。
@@ -144,10 +120,7 @@ describe("ranking native アフィリエイトの解決契約", () => {
       adRowMid: ReactElement<{ cells: Cell[] }> | null;
       adRowFooter: ReactElement<{ cells: Cell[] }> | null;
       adRowEnd: ReactElement<{ cells: Cell[] }> | null;
-      sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
     expect([sections.adRowMid, sections.adRowFooter, sections.adRowEnd].map(cellIds)).toEqual(rows);
-    // 本文で使わなくなったバナーを右レールへ流さない (外すだけだと右レールの PR が増えた)
-    expect(sections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(["ad1", "ad2"]);
   });
 });

@@ -53,19 +53,15 @@ describe("right rail banner contract", () => {
     expect(rightRail).not.toContain("FurusatoNozeiCard");
   });
 
-  it("ranking right rails reject text affiliate fallbacks", () => {
+  // 2026-11-12 オーナー決定: ランキングの右レールの PR の枠は AdSense (中段) に替えた。テキスト広告・宣伝カードも置かない
+  it("ranking right rails show the middle AdSense instead of affiliate banners", () => {
     const rankingRail = source(
       "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
     );
 
-    expect(rankingRail).toContain("<SidebarPromoBanner");
-    expect(rankingRail).toContain("bannerOnly");
-    expect(rankingRail).toContain(
-      "!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners",
-    );
-    expect(
-      rankingRail.indexOf("!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners"),
-    ).toBeLessThan(rankingRail.indexOf("<SidebarPromoBanner"));
+    expect(rankingRail).toContain("<RailAdSlot slot={RANKING_RAIL_MIDDLE} />");
+    expect(rankingRail).not.toContain("<SidebarPromoBanner");
+    expect(rankingRail).not.toContain("<AffiliateAdSlot");
     expect(rankingRail).not.toContain("FurusatoNozeiCard");
   });
 

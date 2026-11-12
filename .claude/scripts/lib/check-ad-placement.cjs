@@ -254,10 +254,9 @@ checkAllowedPromotionalTags(
   new Set(["SidebarPromoBanner"]),
 );
 
-if (!/<SidebarPromoBanner\b/.test(rankingRail)) {
-  errors.push(`${RIGHT_RAIL_FILES.ranking}\n   ranking 右レールに画像バナーがない。`);
-}
-if (!/<AffiliateAdSlot[\s\S]*?\bbannerOnly\b[\s\S]*?\/>/.test(rankingRail)) {
+// ランキングの右レールの PR は 2026-11-12 オーナー決定で AdSense に替えた (アフィリエイトは戦略を練り直すまで止める)。
+// PR の画像バナーを必須にする検査は外し、戻すときの制約 (画像バナーだけ・テキスト広告にしない) は残す
+if (/<AffiliateAdSlot\b/.test(rankingRail) && !/<AffiliateAdSlot[\s\S]*?\bbannerOnly\b[\s\S]*?\/>/.test(rankingRail)) {
   errors.push(
     `${RIGHT_RAIL_FILES.ranking}\n   AffiliateAdSlot に bannerOnly がない。テキスト広告へ戻さないこと。`,
   );

@@ -90,17 +90,12 @@ export function RankingPageClientShell({
         relatedArticles: <RelatedArticlesCard rankingKey={rankingKey} areaType={model.areaType} />,
         sidebar: (
           <RankingPageSidebarSection
-            affiliateVertical={model.affiliateVertical}
             key="sidebar"
             rankingKey={rankingKey}
             areaType={model.areaType}
             rankingItem={model.rankingItem}
             surveys={model.originalSurveys}
             surveyRelatedItems={model.surveyRelatedItems}
-            rankingName={model.rankingName}
-            // 本文が PR を出していた頃と同じバナーを右レールから除く。本文から PR を外しただけでは、本文で使っていた
-            // バナーが右レールへ流れ込み、PR がかえって増える (2026-11-12 に撮影で確認)。右レールの PR は次に AdSense へ替える
-            excludeAffiliateAds={model.nativeBanners}
           />
         ),
         correlation: (

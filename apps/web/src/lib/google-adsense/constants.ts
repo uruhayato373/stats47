@@ -92,6 +92,18 @@ export const RANKING_PAGE_FOOTER: AdSlotConfig = {
 };
 
 /**
+ * ランキングページ: 右レールの中段 (調査のカードと分野のランキング一覧の間)
+ * 2026-11-12 オーナー決定: アフィリエイトの PR の枠 (固定のバナーと文脈のバナー) から替えた。
+ * ユニットは 2026-10-30 まで一覧の右レールで縦長に使い、外してから使っていなかった stats47-ranking-rail-bottom を流用する
+ * (ランキングの右レール専用のまま実績が混ざらない)。右レールの AdSense と同じ 300×250 の固定のコードで出す。
+ * AdSense ユニット名: stats47-ranking-rail-bottom（名前は旧の位置のまま）
+ */
+export const RANKING_RAIL_MIDDLE: AdSlotConfig = {
+  slotId: "2308454706",
+  format: "rectangle",
+};
+
+/**
  * ランキングページ: ページの最後 (関連ランキング・記事の後)
  * 2026-11-12 オーナー決定: アフィリエイトの PR の列から替えた。ほかの枠と実績が混ざらないよう専用のユニットを作った
  * (同日に AdSense の管理画面で作成)。本文の幅いっぱい (上限 580px。台帳の adsense-body-responsive) で、形は rectangle に絞る。

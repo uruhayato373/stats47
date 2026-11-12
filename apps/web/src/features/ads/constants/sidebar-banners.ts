@@ -52,22 +52,3 @@ export const SIDEBAR_PROMO_BANNERS: SidebarBannerConfig[] = [
     label: "A8 sidebar banner (recruit)",
   },
 ];
-
-/**
- * ranking ページ向けに、文脈一致する固定バナーの index を選ぶ。
- * - rankingKey が banner の targetRankingKeys に一致 → そのバナー (例: IT 職 → STRATEGY CAREER)。
- * - 一致なし → targetRankingKeys を持たない汎用バナー (該当 ranking 以外でターゲット広告を出さない)。
- * - 汎用が無ければ index 0 にフォールバック。
- */
-export function selectPromoBannerIndexForRanking(rankingKey?: string): number {
-  if (rankingKey) {
-    const targeted = SIDEBAR_PROMO_BANNERS.findIndex((b) =>
-      b.targetRankingKeys?.includes(rankingKey),
-    );
-    if (targeted >= 0) return targeted;
-  }
-  const general = SIDEBAR_PROMO_BANNERS.findIndex(
-    (b) => !b.targetRankingKeys || b.targetRankingKeys.length === 0,
-  );
-  return general >= 0 ? general : 0;
-}

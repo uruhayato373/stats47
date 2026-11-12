@@ -6,11 +6,8 @@
 export { BannerAd } from "./components/BannerAd";
 export { AffiliateTextAdList } from "./components/AffiliateTextAdList";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
-export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
-export { NativeAffiliateRow } from "./components/NativeAffiliateRow";
 export { RelatedAmazonBook } from "./components/RelatedAmazonBook";
 export { isLandscapeBanner } from "./utils";
-export type { ResolvedAffiliateBanner } from "./types";
 
 // 標準広告スロット部品（エディトリアル文法の統一枠）
 export {
@@ -24,4 +21,3 @@ export {
 export { composeAdRows, type AdRowPattern } from "./lib/ad-row";
 
 // Constants & Types
-export { selectPromoBannerIndexForRanking } from "./constants/sidebar-banners";

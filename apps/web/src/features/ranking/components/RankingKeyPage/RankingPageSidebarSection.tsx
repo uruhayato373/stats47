@@ -3,20 +3,12 @@ import { Suspense } from "react";
 import { LayoutGrid, MapPin } from "lucide-react";
 
 
-import {
-  RailAdSlot,
-  SidebarPromoBanner,
-  selectPromoBannerIndexForRanking,
-} from "@/features/ads";
-import type { AffiliateVertical } from "@/features/ads/constants/affiliate-category";
-import type { AffiliateDestination } from "@/features/ads/constants/affiliate-delivery-policy";
-import { SIDEBAR_PROMO_BANNERS } from "@/features/ads/constants/sidebar-banners";
-import { AffiliateAdSlot } from "@/features/ads/server";
+import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
 
 import {
-  ADSENSE_DISPLAY_ENABLED,
+  RANKING_RAIL_MIDDLE,
   RANKING_SIDEBAR_TOP,
 } from "@/lib/google-adsense";
 
@@ -31,16 +23,10 @@ interface RankingPageSidebarSectionProps {
   rankingKey: string;
   areaType: AreaType;
   rankingItem: Pick<RankingItem, "categoryKey" | "groupKey">;
-  /** ページ内容 (出典調査 → タグ → カテゴリ) から解決した意図軸。null = 意図軸の広告を出さない */
-  affiliateVertical?: AffiliateVertical | null;
   /** この統計の出典調査 (originalSurveys 焼き込み、1-2 件) */
   surveys: { id: string; name: string }[];
   /** 同じ調査の関連ランキング (上位 5 件) */
   surveyRelatedItems?: { rankingKey: string; title: string }[];
-  /** ランキング名。楽天商品カードの品目検出に使う。 */
-  rankingName: string;
-  /** 本文で既に使うリンクを除外し、レールで同じ案件を繰り返さない。 */
-  excludeAffiliateAds?: readonly AffiliateDestination[];
 }
 
 function RankingPageSidebarSkeleton() {
@@ -56,30 +42,9 @@ export function RankingPageSidebarSection({
   rankingKey,
   areaType,
   rankingItem,
-  affiliateVertical,
   surveys,
   surveyRelatedItems,
-  rankingName,
-  excludeAffiliateAds = [],
 }: RankingPageSidebarSectionProps) {
-  const promoBannerIndex = selectPromoBannerIndexForRanking(rankingKey);
-  const reservedPromo = affiliateVertical === "labor" ? SIDEBAR_PROMO_BANNERS[promoBannerIndex] : undefined;
-  const contextualAffiliateBanners = (
-    <AffiliateAdSlot
-      categoryKey={rankingItem.categoryKey ?? ""}
-      vertical={affiliateVertical}
-      position="sidebar"
-      rankingKey={rankingKey}
-      bannerOnly
-      // 右レールの PR は固定のバナーと合わせて 2 枚まで (2026-10-29。広告の枠の台帳の「PR のバナー」1 枠にまとめた)
-      bannerLimit={reservedPromo ? 1 : 2}
-      excludeAds={reservedPromo ? [...excludeAffiliateAds, reservedPromo] : excludeAffiliateAds}
-      // 右レールの AdSense は上段と表の横の 2 枠まで。PR の在庫が無くても AdSense で埋めない
-      // (2026-11-03 オーナー決定。代わりの AdSense は 2026-W43 に 906 表示・¥6・1,000 表示あたり ¥7)
-      adsenseFallback={false}
-    />
-  );
-
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
       {areaType === "prefecture" && (
@@ -111,26 +76,15 @@ export function RankingPageSidebarSection({
           surface="ranking_geo"
         />
       )}
-      {/* AdSense停止中は、空いた上段へ既存の文脈一致バナーを移す。
-          枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
-      {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <RailAdSlot slot={RANKING_SIDEBAR_TOP} />
-      {/* AdSense と PR の間に調査のカードを置き、広告の枠を隣り合わせにしない (広告の枠の台帳 ads.placements) */}
+      {/* 上段と中段の AdSense の間に調査のカードを置き、広告の枠を隣り合わせにしない (広告の枠の台帳 ads.placements) */}
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
         relatedItems={surveyRelatedItems}
       />
-      {/* PR の枠: 固定のバナー (労働系だけ) と文脈のバナーを合わせて 2 枚まで、続けて 1 か所に置く。
-          ランキング名が品目 (牛肉・うどん等) のときは楽天市場の商品カードも同じ枠に入る (品目でなければ描画しない)。
-          AdSense 再開時は従来の上段から戻し、同一バナーを二重描画しない。 */}
-      <SidebarPromoBanner
-        index={promoBannerIndex}
-        rankingKey={rankingKey}
-        vertical={affiliateVertical}
-        excludeAds={excludeAffiliateAds}
-      />
-      {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
-      {/* 分野のランキング一覧を PR の枠と右レールの最後の AdSense の間に置き、広告の枠を隣り合わせにしない
+      {/* 中段の AdSense (2026-11-12 オーナー決定: アフィリエイトを止め、PR の枠 (労働系の固定のバナーと文脈のバナー) から替えた) */}
+      <RailAdSlot slot={RANKING_RAIL_MIDDLE} />
+      {/* 分野のランキング一覧を中段と右レールの最後の AdSense の間に置き、広告の枠を隣り合わせにしない
           (2026-10-29 オーナー判断。AdSense 上段が上に上がり、デスクトップでは最初の画面に入ることがある) */}
       <RankingItemsSidebar
         rankingKey={rankingKey}
