@@ -964,7 +964,7 @@
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
         "marker": "<RailAdSlot slot={MUNICIPALITY_RAIL} />",
         "adsenseSlot": "MUNICIPALITY_RAIL",
-        "condition": "2026-11-12 オーナー決定で右レール付きの枠にした。右レールが本文の横にあるとき (PC) だけ出る。右レールは一番上から始まるので、PC では最初の画面に入る (都道府県のランキングの右レールの上段と同じ扱い・共通のルール noFirstView の例外。オーナー確認待ち)"
+        "condition": "2026-11-12 オーナー決定で右レール付きの枠にした。右レールが本文の横にあるとき (PC) だけ出る。右レールは一番上から始まるので、PC では最初の画面に入る (都道府県のランキングの右レールの上段と同じ扱い・共通のルール noFirstView の例外。2026-11-12 オーナー判断で認めた)"
       },
       {
         "slot": "adsense-rail-sticky",
