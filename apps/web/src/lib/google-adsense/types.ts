@@ -74,6 +74,9 @@ export interface AdSlotProps {
    */
   slotBox?: AdSlotBoxProp;
 
+  /** インフィード広告の data-ad-layout-key (AdSense がユニットごとに発行する) */
+  layoutKey?: string;
+
   /**
    * data-full-width-responsive属性を強制的に設定するか
    */

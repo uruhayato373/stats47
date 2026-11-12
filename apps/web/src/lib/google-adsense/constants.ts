@@ -37,6 +37,8 @@ export interface AdSlotConfig {
   slotId: string;
   /** 広告フォーマット */
   format: AdFormat;
+  /** インフィード広告の data-ad-layout-key (AdSense がユニットごとに発行する) */
+  layoutKey?: string;
 }
 
 /**
@@ -136,6 +138,23 @@ export const BLOG_RAIL: AdSlotConfig = { slotId: "1595814272", format: "rectangl
 export const BLOG_RAIL_STICKY: AdSlotConfig = { slotId: "6270069803", format: "rectangle" }; // stats47-blog-rail-sticky (追従する 300×600)
 /** 右レールの中段 (運営者のプロフィールの後・追従しない 300×250)。2026-11-12 オーナー決定で足し、同日に作成 */
 export const BLOG_RAIL_MIDDLE: AdSlotConfig = { slotId: "4422635661", format: "rectangle" }; // stats47-blog-rail-middle
+
+/**
+ * 都道府県のページ: データブックの中の 3 段 (暮らし・気候・消費の節の前)・データブックの後・ページの最後。
+ * 2026-11-12 オーナー決定 (推奨案): どれも AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR を外した。それまでの
+ * HUB_INCONTENT / CONTENT_FOOTER はハブ・一覧と共用で、県のページの分を測れなかったので、同日に専用のユニットを作った。
+ */
+export const AREA_DATABOOK_ROW_1: AdSlotConfig = { slotId: "3776748345", format: "rectangle" }; // stats47-area-databook-1
+export const AREA_DATABOOK_ROW_2: AdSlotConfig = { slotId: "3704450369", format: "rectangle" }; // stats47-area-databook-2
+export const AREA_DATABOOK_ROW_3: AdSlotConfig = { slotId: "3540944628", format: "rectangle" }; // stats47-area-databook-3
+export const AREA_AFTER_DATABOOK: AdSlotConfig = { slotId: "4929902121", format: "rectangle" }; // stats47-area-after-databook
+export const AREA_END: AdSlotConfig = { slotId: "4738330430", format: "rectangle" }; // stats47-area-end
+/**
+ * 都道府県のページ: 「この県の特徴を読み解く記事」の一覧の 3 件目の後に入れるインフィード広告 (2026-11-12 オーナー決定・同日作成)。
+ * テンプレートは「横の画像」(一覧の行と同じ、左に画像・右に題名)。layoutKey は AdSense がユニットごとに発行する値で、変えると配信されない。
+ * 「選択したディスプレイ広告を許可する」はオン (AdSense の既定) のまま。
+ */
+export const AREA_INFEED: AdSlotConfig = { slotId: "9371196667", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-area-infeed
 
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {

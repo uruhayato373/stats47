@@ -173,7 +173,7 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "pattern": "^(\\d+x\\d+|text|adsense:(rectangle|article|multiplex|skyscraper))$"
+              "pattern": "^(\\d+x\\d+|text|adsense:(rectangle|article|multiplex|skyscraper|infeed))$"
             },
             "description": "受け入れる広告 (アフィリエイトは sizes の大きさ、AdSense は adsense:<形式>)"
           },

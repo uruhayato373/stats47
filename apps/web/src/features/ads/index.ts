@@ -14,6 +14,7 @@ export {
   InContentAdSlot,
   FooterAdSlot,
   RailAdSlot,
+  InFeedAdSlot,
   AdCell,
   AdRow,
   type AdRowCell,

@@ -164,6 +164,12 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
         expect(box.maxWidth, `${slot.id} は幅の上限を持つ`).toBeGreaterThan(0);
         continue;
       }
+      // 2026-11-12 オーナー決定の例外: 記事の一覧の中のインフィード広告。一覧の行の幅いっぱいで、大きさは AdSense が行に合わせて決める
+      if (slot.id === 'adsense-infeed') {
+        expect(box.width, slot.id).toBe('full');
+        expect(slot.accepts, slot.id).toEqual(['adsense:infeed']);
+        continue;
+      }
       if (STICKY_RAIL_ADSENSE_SLOT_IDS.has(slot.id)) {
         expect(box, slot.id).toEqual({ width: 300, height: 600 });
         expect(adSlotType(slot.id).devices, `${slot.id} は PC だけ`).toEqual(['desktop']);

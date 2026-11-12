@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
 import {
@@ -74,6 +74,8 @@ interface RailLinksCardProps {
    */
   columns?: 1 | 3;
   frame?: 'card' | 'inline';
+  /** media の一覧で、index 件目の後に 1 つだけ差し込む要素 (記事の一覧のインフィード広告)。件数が足りなければ出さない */
+  insertAfter?: { index: number; node: ReactNode; className?: string };
 }
 
 /**
@@ -111,9 +113,10 @@ function RailLinks({
   trackingSurface,
   horizontalOnMobile,
   columns = 1,
+  insertAfter,
 }: Pick<
   RailLinksCardProps,
-  'items' | 'layout' | 'trackingSurface' | 'horizontalOnMobile' | 'columns'
+  'items' | 'layout' | 'trackingSurface' | 'horizontalOnMobile' | 'columns' | 'insertAfter'
 >) {
   if (layout === 'media') {
     return (
@@ -128,9 +131,9 @@ function RailLinks({
         }
         aria-label="カード内リンク"
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
+          <Fragment key={item.id}>
           <Link
-            key={item.id}
             href={item.href}
             data-content-id={item.contentId}
             {...trackingProps(item, trackingSurface)}
@@ -166,6 +169,11 @@ function RailLinks({
               className="size-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
             />
           </Link>
+          {insertAfter && index === insertAfter.index - 1 && index < items.length - 1 && (
+            // 差し込んだ要素も行と同じ区切り線で並べる (一覧の最後には置かない)
+            <div className={cn('border-b border-border py-2', insertAfter.className)}>{insertAfter.node}</div>
+          )}
+          </Fragment>
         ))}
       </nav>
     );
@@ -285,6 +293,7 @@ export function RailLinksCard({
   horizontalOnMobile = false,
   columns = 1,
   frame = 'card',
+  insertAfter,
 }: RailLinksCardProps) {
   const content = (
     <>
@@ -294,6 +303,7 @@ export function RailLinksCard({
         trackingSurface={trackingSurface}
         horizontalOnMobile={horizontalOnMobile}
         columns={columns}
+        insertAfter={insertAfter}
       />
       {/* 一覧への導線も他の行と同じリンク行 (同じ行高と行末の ChevronRight) にする */}
       {moreLink && (

@@ -51,6 +51,7 @@ export function AdSenseAd({
   lazyLoad = true,
   rootMargin,
   slotBox,
+  layoutKey,
 }: AdSlotProps & { slotBox: NonNullable<AdSlotProps["slotBox"]> }) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
@@ -166,7 +167,17 @@ export function AdSenseAd({
         </div>
       )}
       {isVisible ? (
-        isArticleFormat ? (
+        format === "infeed" && layoutKey ? (
+          // インフィード広告 (2026-11-12): AdSense が出したコードの形 (fluid + data-ad-layout-key)。幅は一覧の行の幅に合わせる
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block", width: "100%" }}
+            data-ad-format="fluid"
+            data-ad-layout-key={layoutKey}
+            data-ad-client={clientId}
+            data-ad-slot={slotId}
+          />
+        ) : isArticleFormat ? (
           // 記事内広告（fluid / in-article）: Google 推奨の属性構成。
           // 外枠 (AD_CONTAINER_CLASS) は flex-col + items-center なので、幅を明示しないと ins が
           // 内容幅 0 に縮み「No slot size for availableWidth=0」で配信されない (2026-10-11 本番で実測)。
