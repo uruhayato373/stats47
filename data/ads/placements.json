@@ -409,21 +409,12 @@
     ],
     "blog": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "本文の h2 の 2・4・6 番目の直前 (injectAdRows が <ad-row> を差し込む。見出しが足りなければ減らす)",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "position={`blog-row-${Number(index) + 1}`}",
-        "trackingPosition": "blog-row-1",
-        "cells": [
-          {
-            "kind": "adsense"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ],
-        "condition": "3 段の並びは左から [AdSense, PR] / [PR, AdSense] / [AdSense, PR]。AdSense のユニットは記事の段に上から順に BLOG_ARTICLE_INLINE → HUB_INCONTENT → CONTENT_FOOTER → THEMES_CONTENT を配る (apps/web/src/app/blog/[slug]/page.tsx の composeAdRows)。手で広告を置いた記事には差し込まない"
+        "condition": "段ごとに AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR は出さない (2026-11-12 オーナー決定)。ユニットは上から BLOG_ARTICLE_INLINE (stats47-blog-inarticle) → BLOG_ROW_2 (stats47-blog-row-2) → BLOG_ROW_3 (stats47-blog-row-3) に固定 (apps/web/src/app/blog/[slug]/page.tsx の BLOG_BODY_AD_ROW_SLOTS)。見出しが足りない記事は段が減る"
       },
       {
         "slot": "adsense-body",
@@ -460,20 +451,13 @@
         "knownAdjacentReason": "<affiliate-banner> の描き分け (index / category / src) の分岐で、同時には出ない枠がファイルの中で並んでいるだけ"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "記事の末尾 (AdSense のユニットは本文の段で配った次のもの。本文の段 3 つなら THEMES_CONTENT)",
+        "position": "記事の末尾",
         "source": "apps/web/src/features/blog/components/md-content.tsx",
         "marker": "position=\"blog-row-end\"",
-        "trackingPosition": "blog-row-end",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense"
-          }
-        ]
+        "adsenseSlot": "BLOG_END",
+        "condition": "AdSense 1 つ (専用ユニット stats47-blog-end) を本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)"
       },
       {
         "slot": "affiliate-rect",

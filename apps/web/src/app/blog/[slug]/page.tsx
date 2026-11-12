@@ -50,7 +50,7 @@ import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { BLOG_ARTICLE_INLINE, CONTENT_FOOTER, HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
+import { BLOG_ARTICLE_INLINE, BLOG_END, BLOG_ROW_2, BLOG_ROW_3 } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -73,8 +73,12 @@ const BLOG_RAIL_CATEGORIES = CATEGORIES.slice(0, 6).map((category) => ({
 const BLOG_RAIL_PREFECTURES = fetchPrefectures();
 
 
-/** ブログの本文の広告の段の中身 (上から。モバイルは各段の先頭の 1 枠) */
-const BLOG_BODY_AD_ROW_PATTERNS: AdRowPattern[] = [["adsense", "affiliate"], ["affiliate", "adsense"], ["adsense", "affiliate"]];
+/**
+ * ブログの本文の広告の段 (h2 の 2・4・6 番目の前) の AdSense のユニット。段ごとに 1 つ・本文の幅いっぱい (2026-11-12 オーナー決定)。
+ * 位置とユニットを固定する (見出しが少ない記事で段が減っても、末尾の段に本文の段のユニットが回らないようにする)
+ */
+const BLOG_BODY_AD_ROW_SLOTS = [BLOG_ARTICLE_INLINE, BLOG_ROW_2, BLOG_ROW_3];
+const BLOG_AD_ROW_PATTERN: AdRowPattern = ["adsense"];
 export async function generateStaticParams() {
     const articles = await listLatestArticles(1000).catch(() => []);
     return articles.map((a) => ({ slug: a.slug }));
@@ -171,17 +175,17 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
     const affiliateBannerPool = await resolveAffiliateBannersForContent(bannerInput, BLOG_IN_BODY_BANNER_COUNT + 2);
-    const articleBanners = affiliateBannerPool.slice(0, BLOG_IN_BODY_BANNER_COUNT);
-    // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。本文の幅 (約 780px) では 2 枠、
-    // モバイルは先頭の 1 枠で上から AdSense → PR → AdSense → PR。AdSense は段ごとに別のユニット。
-    // 見出しの数で本文の段が減るので、差し込める段だけに広告を割り当てる (使わない段にバナーを取られない)
-    const bodyRowCount = adRowTargets(article.content, BLOG_BODY_AD_ROW_PATTERNS.length).length;
+    // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。
+    // どの段も AdSense 1 つを本文の幅いっぱいに出し、PR は出さない (2026-11-12 オーナー決定。アフィリエイトは戦略を決め直すまで止める)。
+    // 見出しの数で本文の段が減るので、差し込める段だけに割り当て、末尾の段は常に BLOG_END にする
+    const bodyRowCount = adRowTargets(article.content, BLOG_BODY_AD_ROW_SLOTS.length).length;
     const adRows = composeAdRows(
-        [...BLOG_BODY_AD_ROW_PATTERNS.slice(0, bodyRowCount), ["affiliate", "adsense"]],
-        [BLOG_ARTICLE_INLINE, HUB_INCONTENT, CONTENT_FOOTER, THEMES_CONTENT],
-        articleBanners,
+        Array.from({ length: bodyRowCount + 1 }, () => BLOG_AD_ROW_PATTERN),
+        [...BLOG_BODY_AD_ROW_SLOTS.slice(0, bodyRowCount), BLOG_END],
+        [],
     );
-    // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
+    // 右レールは「バナーだけ」。本文が PR を出していた頃と同じく、先頭の BLOG_IN_BODY_BANNER_COUNT 件より後ろを回す
+    // (本文から PR を外しただけで右レールのバナーが替わらないようにする。右レールは次に AdSense へ替える)。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const bannerVertical = resolveContentVertical(bannerInput).vertical;
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。

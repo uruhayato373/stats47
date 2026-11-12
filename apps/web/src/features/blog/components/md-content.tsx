@@ -264,7 +264,7 @@ function makeMdComponents(
             if (!cells || cells.length === 0) return null;
             return (
                 <div className="my-8 not-prose">
-                    <AdRow cells={cells} position={`blog-row-${Number(index) + 1}`} trackingCategory={affiliateVertical ?? "other"} />
+                    <AdRow cells={cells} position={`blog-row-${Number(index) + 1}`} trackingCategory={affiliateVertical ?? "other"} wide />
                 </div>
             );
         },
@@ -452,7 +452,7 @@ export function MDContent({
             {/* 記事の末尾の広告の段 (手で広告を置いた記事にも出す) */}
             {endRow && endRow.length > 0 && (
                 <div className="my-8 not-prose">
-                    <AdRow cells={endRow} position="blog-row-end" trackingCategory={affiliateVertical ?? "other"} />
+                    <AdRow cells={endRow} position="blog-row-end" trackingCategory={affiliateVertical ?? "other"} wide />
                 </div>
             )}
         </article>

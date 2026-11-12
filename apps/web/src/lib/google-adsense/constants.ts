@@ -118,6 +118,16 @@ export const RANKING_PAGE_END: AdSlotConfig = {
   format: "rectangle",
 };
 
+/**
+ * ブログ記事: 本文の 2 つ目・3 つ目の広告の段 (h2 の 4・6 番目の前) と記事の末尾。
+ * 2026-11-12 オーナー決定: 本文の段を AdSense 1 つ・幅いっぱい (上限 580px) にし、PR を外した。それまでハブ・一覧と共用の
+ * HUB_INCONTENT / CONTENT_FOOTER / THEMES_CONTENT を使っていて、ブログの実績を分けて測れなかったので、同日に専用のユニットを作った。
+ * 1 つ目の段は従来どおり BLOG_ARTICLE_INLINE。どれも本文の幅いっぱいの箱 (台帳の adsense-body-responsive) で、形は rectangle に絞る。
+ */
+export const BLOG_ROW_2: AdSlotConfig = { slotId: "9307296688", format: "rectangle" }; // stats47-blog-row-2
+export const BLOG_ROW_3: AdSlotConfig = { slotId: "4897424179", format: "rectangle" }; // stats47-blog-row-3
+export const BLOG_END: AdSlotConfig = { slotId: "2394403971", format: "rectangle" }; // stats47-blog-end
+
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
   slotId: "6809797335",
