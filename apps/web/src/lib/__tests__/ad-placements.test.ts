@@ -109,7 +109,7 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
 
   it.each(Object.keys(PAGES))('%s: 本文の AdSense は上限まで (広告の段の AdSense の枠も数える)', (page) => {
     const bodyAdsense =
-      PAGES[page].filter((p) => p.slot === 'adsense-body').length +
+      PAGES[page].filter((p) => p.slot === 'adsense-body' || p.slot === 'adsense-body-responsive').length +
       PAGES[page].flatMap((p) => p.cells ?? []).filter((cell) => cell.kind === 'adsense').length;
     expect(bodyAdsense).toBeLessThanOrEqual(placements.rules.maxAdsenseBodyPerPage);
   });
@@ -153,11 +153,21 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   });
 
   // 2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさ。幅に合わせて伸びる広告は、同日の本番の実測で
-  // 最大 1200×600・積まれた右レールで 928×280・モバイルの関連コンテンツ型で 308×1503 まで広がっていた
-  it('AdSense の枠は全て 300×250 の固定の大きさ', () => {
+  // 最大 1200×600・積まれた右レールで 928×280・モバイルの関連コンテンツ型で 308×1503 まで広がっていた。
+  // 2026-11-12 オーナー決定の例外: ランキングの解説の後の 1 枠だけ幅いっぱい。広がりすぎないよう幅の上限を必ず持つ
+  const RESPONSIVE_ADSENSE_SLOT_IDS = new Set(['adsense-body-responsive']);
+  it('AdSense の枠は、例外の幅いっぱいの枠を除いて 300×250 の固定の大きさ', () => {
     const adsense = placements.slotTypes.filter((slot) => slot.provider === 'adsense');
     expect(adsense.length).toBeGreaterThan(0);
-    for (const slot of adsense) expect(adSlotType(slot.id).box, slot.id).toEqual({ width: 300, height: 250 });
+    for (const slot of adsense) {
+      const box = adSlotType(slot.id).box;
+      if (RESPONSIVE_ADSENSE_SLOT_IDS.has(slot.id)) {
+        expect(box.width, slot.id).toBe('full');
+        expect(box.maxWidth, `${slot.id} は幅の上限を持つ`).toBeGreaterThan(0);
+        continue;
+      }
+      expect(box, slot.id).toEqual({ width: 300, height: 250 });
+    }
   });
 
   // 2026-11-03 オーナー決定: 全ページのモバイルの本文に AdSense を 1 枠以上出す (自動広告なしで再開したので、手置きが無いと 0 枠になる)。

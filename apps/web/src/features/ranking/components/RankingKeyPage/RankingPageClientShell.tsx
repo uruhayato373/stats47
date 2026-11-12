@@ -7,7 +7,6 @@ import { DataSourceList } from "@/components/molecules/DataSourceList";
 import { AdRow, composeAdRows, isLandscapeBanner } from "@/features/ads";
 
 import {
-  HUB_INCONTENT,
   RANKING_INCONTENT_MOBILE,
   RANKING_PAGE_FOOTER,
 } from "@/lib/google-adsense";
@@ -17,7 +16,6 @@ import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
 import { computeRankingHeaderStats } from "../../utils/compute-ranking-header-stats";
 import { RelatedArticlesCard } from '../RankingSidebar/RelatedArticlesCard';
 
-import { shouldShowRankingInContentAffiliate } from "./ranking-incontent-affiliate-policy";
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
 import { RankingMakingOfLink } from "./RankingMakingOfLink";
 import { RankingPageFaqSection, RankingPageInsightsSection } from "./RankingPageAiSections";
@@ -49,18 +47,13 @@ export function RankingPageClientShell({
   model,
 }: RankingPageClientShellProps) {
   const affiliateBanners = model.nativeBanners.filter(isLandscapeBanner);
-  // 広告の段 (2026-11-03 オーナー決定): 解説の後と出典の後の 2 段。本文の幅に入る数だけ左から出す
-  // (右レールのある本文 810px では 2 枠、モバイルは先頭の 1 枠 = 上から AdSense → PR)。
-  // 解説の後に PR を出さない指標 (ranking-incontent-affiliate-policy) は、その段を AdSense だけにする。
-  // AdSense を止めているときは AdSense の枠が落ち、PR だけの段になる
+  // 広告の段 (2026-11-03 オーナー決定): 解説の後と出典の後の 2 段。
+  // 解説の後は AdSense 1 つを本文の幅いっぱいに出す (2026-11-12 オーナー決定。300×250 を横に並べると本文の中で
+  // 広告が島のように浮いて見えるため。PR は出さない)。AdSense を止めているときは解説の後の段を出さない。
+  // 出典の後は本文の幅に入る数だけ左から出す (右レールのある本文 810px では 2 枠、モバイルは先頭の 1 枠 = PR)
   const [midRow, footerRow] = composeAdRows(
-    [
-      shouldShowRankingInContentAffiliate(rankingKey)
-        ? ["adsense", "affiliate", "adsense"]
-        : ["adsense", "adsense"],
-      ["affiliate", "adsense", "affiliate"],
-    ],
-    [RANKING_INCONTENT_MOBILE, HUB_INCONTENT, RANKING_PAGE_FOOTER],
+    [["adsense"], ["affiliate", "adsense", "affiliate"]],
+    [RANKING_INCONTENT_MOBILE, RANKING_PAGE_FOOTER],
     affiliateBanners,
   );
   const rowBanners = [...midRow, ...footerRow].flatMap((cell) => (cell.kind === "affiliate" ? [cell.banner] : []));
@@ -146,7 +139,7 @@ export function RankingPageClientShell({
           <RankingFunnelCta key="funnel-cta" rankingKey={rankingKey} />
         ) : null,
         adRowMid: bodyCells(midRow).length > 0 ? (
-          <AdRow key="ad-row-mid" cells={bodyCells(midRow)} position="ranking-row-1" trackingCategory={trackingCategory} />
+          <AdRow key="ad-row-mid" cells={bodyCells(midRow)} position="ranking-row-1" trackingCategory={trackingCategory} wide />
         ) : null,
         adRowFooter: bodyCells(footerRow).length > 0 ? (
           <AdRow key="ad-row-footer" cells={bodyCells(footerRow)} position="ranking-row-2" trackingCategory={trackingCategory} />

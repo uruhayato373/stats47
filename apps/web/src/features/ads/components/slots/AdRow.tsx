@@ -23,6 +23,11 @@ interface AdRowProps {
   position: string;
   /** アフィリエイトの計測の category の代わり (バナーに vertical が無いとき) */
   trackingCategory: string;
+  /**
+   * 先頭の AdSense 1 枠だけを本文の幅いっぱい (台帳の adsense-body-responsive) で出す。
+   * 2026-11-12 オーナー決定: ランキングの解説の後は、300×250 を横に並べず、幅に合わせて伸びる広告 1 つにする
+   */
+  wide?: boolean;
 }
 
 /**
@@ -34,12 +39,12 @@ interface AdRowProps {
  * 出していない枠の AdSense は display:none なので遅延読み込みが発火せず、広告のリクエストも飛ばない
  * (manual-ad-policy.ts と同じ仕組み)。AdSense は自動広告なしで再開しているので (2026-10-11)、モバイルの先頭の枠にも出す。
  */
-export function AdRow({ cells, position, trackingCategory }: AdRowProps) {
-  const visible = cells.slice(0, 3);
+export function AdRow({ cells, position, trackingCategory, wide = false }: AdRowProps) {
+  const visible = wide ? cells.filter((cell) => cell.kind === "adsense").slice(0, 1) : cells.slice(0, 3);
   if (visible.length === 0) return null;
   return (
     <div data-ad-row={position} className="@container w-full p-4">
-      <div className={`grid items-start justify-center gap-2 ${COLUMN_CLASS[visible.length]}`}>
+      <div className={`grid items-start justify-center gap-2 ${wide ? "grid-cols-1" : COLUMN_CLASS[visible.length]}`}>
         {visible.map((cell, index) => {
           const label = cell.kind === "adsense" ? "広告" : "PR";
           return (
@@ -57,7 +62,7 @@ export function AdRow({ cells, position, trackingCategory }: AdRowProps) {
                     slotId={cell.slot.slotId}
                     format={cell.slot.format}
                     showLabel={false}
-                    slotBox={adSlotBox("adsense-body")}
+                    slotBox={adSlotBox(wide ? "adsense-body-responsive" : "adsense-body")}
                   />
                 </div>
               ) : (

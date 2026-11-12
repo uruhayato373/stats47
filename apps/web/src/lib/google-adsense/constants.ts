@@ -100,6 +100,8 @@ export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
  * モバイルはサイドバー広告が非表示で、収益のあるユニットが実質テーブル直後の
  * フッター 1 枠のみだった（W21 実測: Mobile Impressions/PV 0.32 / RPM ¥20）。
  * 解析セクションを読み進める層に中盤で 1 枠出すための専用スロット。
+ * 2026-11-12 オーナー決定: 解説の後の段はこのユニット 1 つだけを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。ユニットは替えず、units.csv で変更前後を比べられるようにした。
  * AdSense ユニット名: stats47-ranking-incontent-mobile（記事内 / fluid）
  */
 export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {

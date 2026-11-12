@@ -115,10 +115,9 @@ describe("ranking native アフィリエイトの解決契約", () => {
     expect(chain.steps).toEqual([]);
   });
 
-  it("解説の後と出典の後に広告の段を置き、中段の PR を出さない指標を守る (2026-11-03)", () => {
+  it("解説の後と出典の後に広告の段を置き、解説の後は幅いっぱいの AdSense 1 つにする (2026-11-03・11-12)", () => {
     expect(SHELL_SRC).toContain("model.nativeBanners.filter(isLandscapeBanner)");
-    expect(SHELL_SRC).toMatch(/shouldShowRankingInContentAffiliate\(\s*rankingKey\s*\)/);
-    expect(SHELL_SRC).toContain('position="ranking-row-1"');
+    expect(SHELL_SRC).toMatch(/position="ranking-row-1"[^/]*\bwide\b/);
     expect(SHELL_SRC).toContain('position="ranking-row-2"');
     expect(CONTENT_SRC).toContain("{sections.adRowMid}");
     expect(CONTENT_SRC).toContain("{sections.adRowFooter}");
@@ -131,15 +130,12 @@ describe("ranking native アフィリエイトの解決契約", () => {
   it.each([
     {
       adsense: true, rankingKey: "library-count",
-      mid: ["adsense:mid", "ad1", "adsense:hub"], footer: ["ad2", "adsense:footer", "ad3"], end: ["ad4", "ad5"],
+      mid: ["adsense:mid"], footer: ["ad1", "adsense:footer", "ad2"], end: ["ad3", "ad4", "ad5"],
     },
     {
-      adsense: true, rankingKey: "psychiatric-bed-count",
-      mid: ["adsense:mid", "adsense:hub"], footer: ["ad1", "adsense:footer", "ad2"], end: ["ad3", "ad4", "ad5"],
-    },
-    {
+      // AdSense を止めているときは解説の後の段を出さない (PR で埋めない)
       adsense: false, rankingKey: "library-count",
-      mid: ["ad1"], footer: ["ad2", "ad3"], end: ["ad4", "ad5"],
+      mid: [], footer: ["ad1", "ad2"], end: ["ad3", "ad4", "ad5"],
     },
   ])("段で使った広告を読了・レールから除く: $rankingKey / AdSense=$adsense", ({ adsense, rankingKey, mid, footer, end }) => {
     display.adsense = adsense;
@@ -204,14 +200,14 @@ describe("ranking native アフィリエイトの解決契約", () => {
     // 楽天の商品カードは 2026-11-06 に撤去した。A8 も戻さず、下段の PR は出さない
     expect(kakeiSections.nativeAffiliate).toBeNull();
     // 広告の段の A8 も家計調査系では描画しない (2026-09-16 オーナー判断)。AdSense の枠だけが残る
-    expect(cellIds(kakeiSections.adRowMid)).toEqual(["adsense:mid", "adsense:hub"]);
+    expect(cellIds(kakeiSections.adRowMid)).toEqual(["adsense:mid"]);
 
     const nonKakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: nonKakeiModel });
     const nonKakeiSections = nonKakeiRendered.props.sections as {
       adRowMid: ReactElement<{ cells: Cell[] }> | null;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
-    expect(cellIds(nonKakeiSections.adRowMid)).toEqual(["adsense:mid", "b1", "adsense:hub"]);
+    expect(cellIds(nonKakeiSections.adRowMid)).toEqual(["adsense:mid"]);
     // 描画しなかった A8 も右レール除外 (usedAffiliateAds) には残す = レールへ流れ込ませない。
     expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(["b1"]);
     expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(
