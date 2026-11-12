@@ -31,6 +31,8 @@ export type AdLayoutAd = {
 
 export type AdLayoutShot = {
   pageType: string;
+  /** ページの種類の中の地域の単位 (テーマの全国・県別・日本・市区町村)。単位を持たない種類は null */
+  scope?: string | null;
   label: string;
   url: string;
   viewport: string;
@@ -50,7 +52,7 @@ export type AdLayoutManifest = {
   date: string;
   baseUrl: string;
   widths: number[];
-  pageTypes: { id: string; label: string; url: string }[];
+  pageTypes: { id: string; label: string; url: string; scopes?: { id: string; label: string; url: string }[] }[];
   shots: AdLayoutShot[];
 };
 
@@ -65,6 +67,8 @@ export type PlacementDefinition = {
   /** 広告の段の枠 (左から順)。段でない行は null */
   cells: { kind: "adsense" | "affiliate"; unit: string | null }[] | null;
   condition: string | null;
+  /** この枠が出る地域の単位 (台帳の scopes)。全ての単位で出る枠は null */
+  scopes: string[] | null;
 };
 
 type RawPlacement = {
@@ -75,6 +79,7 @@ type RawPlacement = {
   adsenseSlot?: string;
   condition?: string;
   cells?: { kind: "adsense" | "affiliate"; adsenseSlot?: string }[];
+  scopes?: string[];
 };
 type RawLedger = {
   slotTypes: { id: string; name: string; provider: string; devices: string[] }[];
@@ -124,6 +129,7 @@ export function placementDefinitions(): Record<string, PlacementDefinition[]> {
           unit: type?.provider === "adsense" ? unitOfEntry(e) : null,
           cells: e.cells?.map((c) => ({ kind: c.kind, unit: c.adsenseSlot ?? null })) ?? null,
           condition: e.condition ?? null,
+          scopes: e.scopes ?? null,
         };
       }),
     ]),

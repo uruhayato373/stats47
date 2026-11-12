@@ -26,11 +26,15 @@ paths:
 > ページで共通の案件を上回ると実測できた場合だけ残す。下の vertical の解決は切り替えが済むまでの現行の実装で、切り替えの実装と
 > 本文の広告の段の試験は backlog `AFFILIATE-COMMON-PRODUCTS-01`。案件の条件記録・評価指標・同時入れ替えの禁止は変えない。
 
+> **アフィリエイトの停止 (2026-11-12 オーナー決定・収益化戦略 §3.1)**: 成約 0 件が続くため、戦略を練り直すまでアフィリエイトを止める。
+> 枠は消さず、ページ・枠ごとに 1 つずつ AdSense のレスポンシブへ替える (11-12 にランキングのページの PR の枠をすべて替えた。進み具合は backlog `ADSENSE-FORMAT-EXPERIMENT-01`)。替えていない枠の PR は
+> 替えるまで残る。下の記述は止める前の配置である。
+
 > **広告の段 (2026-11-03 オーナー決定)**: テーマ・ランキング・ブログの本文の広告は、AdSense と PR を 1 行に並べる広告の段
 > (`AdRow`・`features/ads/components/slots/AdRow.tsx`) にした。本文の幅に原寸 300px のまま入る数だけ左から出す
 > (608px 未満 1 枠・608px 以上 2 枠・916px 以上 3 枠)。段の中身は `composeAdRows` が上の段から割り当て、AdSense は段ごとに別の
-> ユニットを使う。置き場所と段の中身の正本は `data/ads/placements.json` (`ad-row`)。本文の AdSense の上限は 4 枠 (広告の段の
-> AdSense も数える)。ブログの本文の自動の `<ad-slot>`・バナーの差し込みは段に置き換えた (手で広告を置いた記事は手の位置のまま)。
+> ユニットを使う。置き場所と段の中身の正本は `data/ads/placements.json` (`ad-row`)。本文の AdSense の数の上限 (4 枠) は 2026-11-12 オーナー決定で撤廃し、
+> 量は本番のスマホの広告密度 (自動広告込み・30%) で判断する。ブログの本文の自動の `<ad-slot>`・バナーの差し込みは段に置き換えた (記事に手で置いた `<ad-slot>`・`<affiliate-banner>` は 2026-11-12 から描かず、その記事にも段を入れる)。
 > 下の §4・§12 にある本文のバナー・テキストの自動挿入の記述は、この日より前の配置である。
 
 ## 0. 意図軸 (10 vertical) — 広告解決の実軸
@@ -613,7 +617,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 「どのページにどう出すか」の正典。2026-07-28 の全ページ棚卸しで確定した現状を固定する。
 
 **広告の枠の台帳 (2026-10-29)**: 大きさの語彙・枠の種類 (確保する箱の寸法・受け入れる大きさ・表示する画面幅)・
-ページごとの置き方・共通のルール (枠同士を隣り合わせにしない・最初の画面に置かない・本文の AdSense の上限) の正本は
+ページごとの置き方・共通のルール (枠同士を隣り合わせにしない・最初の画面に置かない。本文の AdSense の数の上限は 2026-11-12 に撤廃) の正本は
 `data/ads/placements.json` (schema `config/schema/ads.placements.schema.json`)。台帳に載せたページの種類 (2026-10-30 から全ページ) は、
 下の表よりも台帳が正で、`apps/web/src/lib/__tests__/ad-placements.test.ts` がコードの枠の並び・隣接・登録の大きさを照合する。
 新しい大きさを登録する前に台帳の `sizes` に載せて判断する (一点物 7 件は `undecided` としてオーナー判断待ち)。
@@ -684,7 +688,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |
 | ranking 記事下 | ネイティブ 4 件の直後に **300x250 を 1 枚** (`position=ranking-end`) | tagKeys → vertical で 5 件解決し 5 件目を使う |
 | themes 末尾 | **300x250 を 1 枚** (`position=theme-end`) | relatedArticleTagKeys → 無ければ THEME_AFFILIATE_MAP |
-| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ。検索意図との一致を確認できない個別ページは `ranking-incontent-affiliate-policy.ts` で抑止する | tagKeys → 無ければ categoryKey → vertical |
+| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ。2026-11-12 から解説の後の段は AdSense 1 つ (幅いっぱい) だけで PR を出さないので、個別ページの抑止リストは削除した | tagKeys → 無ければ categoryKey → vertical |
 | ranking 右レール (AdSense停止中) | 従来の最大2枚を、停止した上段 AdSense 枠へ**移設**。枚数は増やさず初期 viewability を改善する | categoryKey → vertical |
 | areas 県 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=area-content`)。在庫が無ければ空枠を作らない | `furusato` vertical |
 

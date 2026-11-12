@@ -19,6 +19,7 @@ export {
   readAllTagsWithCountFromR2 as listAllTagsWithCount,
   readAllUniqueTagsFromR2 as listAllUniqueTags,
   readArticleTitlesBySlugsFromR2 as findArticleTitlesBySlugs,
+  readPopularArticlesFromR2,
   readLatestArticlesFromR2 as listLatestArticles,
   readArticleSummariesByTagKeyFromR2 as listArticleSummariesByTagKey,
   readArticleSummariesBySurveyIdFromR2 as listArticleSummariesBySurveyId,

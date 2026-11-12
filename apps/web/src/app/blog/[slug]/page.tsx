@@ -24,21 +24,22 @@ import { ContentNavigation } from '@/components/rail/ContentNavigation';
 import { ArticleCard } from "@/components/surface";
 
 import {
-    BannerAd,
     composeAdRows,
     OperatorProfileCard,
+    RailAdSlot,
     type AdRowPattern,
     RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
-import { adRowTargets, BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
+import { resolveAffiliateTextAdsForContent } from "@/features/ads/server";
+import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
     listLatestArticles,
     findArticleBySlug,
     findArticleTitlesBySlugs,
+    readPopularArticlesFromR2,
     getTagKeysForArticle,
     getRankingKeysForArticle,
     articleService,
@@ -50,7 +51,8 @@ import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { BLOG_ARTICLE_INLINE, CONTENT_FOOTER, HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
+import { BLOG_ARTICLE_INLINE, BLOG_END, BLOG_RAIL, BLOG_RAIL_MIDDLE, BLOG_RAIL_STICKY, BLOG_ROW_2, BLOG_ROW_3 } from "@/lib/google-adsense";
+import { blogThumbnailUrl } from "@/lib/metadata/ogp-image";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -73,8 +75,12 @@ const BLOG_RAIL_CATEGORIES = CATEGORIES.slice(0, 6).map((category) => ({
 const BLOG_RAIL_PREFECTURES = fetchPrefectures();
 
 
-/** ブログの本文の広告の段の中身 (上から。モバイルは各段の先頭の 1 枠) */
-const BLOG_BODY_AD_ROW_PATTERNS: AdRowPattern[] = [["adsense", "affiliate"], ["affiliate", "adsense"], ["adsense", "affiliate"]];
+/**
+ * ブログの本文の広告の段 (h2 の 2・4・6 番目の前) の AdSense のユニット。段ごとに 1 つ・本文の幅いっぱい (2026-11-12 オーナー決定)。
+ * 位置とユニットを固定する (見出しが少ない記事で段が減っても、末尾の段に本文の段のユニットが回らないようにする)
+ */
+const BLOG_BODY_AD_ROW_SLOTS = [BLOG_ARTICLE_INLINE, BLOG_ROW_2, BLOG_ROW_3];
+const BLOG_AD_ROW_PATTERN: AdRowPattern = ["adsense"];
 export async function generateStaticParams() {
     const articles = await listLatestArticles(1000).catch(() => []);
     return articles.map((a) => ({ slug: a.slug }));
@@ -133,12 +139,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         .filter((s) => s !== slug);
     const uniqueSlugs = [...new Set(blogLinkSlugs)];
 
-    // tagKeys / 本文リンクのタイトル / アフィバナーは互いに独立 → 並列取得 (waterfall 解消)
-    const [articleTagData, relatedArticleTitles, affiliateBannersByCategory, articleSurveys] =
+    // tagKeys / 本文リンクのタイトル / 出典調査は互いに独立 → 並列取得 (waterfall 解消)
+    const [articleTagData, relatedArticleTitles, articleSurveys] =
         await Promise.all([
             getTagKeysForArticle(slug),
             findArticleTitlesBySlugs(uniqueSlugs),
-            resolveAffiliateBannersByCategory(),
             resolveArticleSurveyTaxonomy({
                 slug,
                 content: article.content,
@@ -170,23 +175,24 @@ export default async function BlogPostPage({ params }: PageProps) {
     );
     // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
-    const affiliateBannerPool = await resolveAffiliateBannersForContent(bannerInput, BLOG_IN_BODY_BANNER_COUNT + 2);
-    const articleBanners = affiliateBannerPool.slice(0, BLOG_IN_BODY_BANNER_COUNT);
-    // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。本文の幅 (約 780px) では 2 枠、
-    // モバイルは先頭の 1 枠で上から AdSense → PR → AdSense → PR。AdSense は段ごとに別のユニット。
-    // 見出しの数で本文の段が減るので、差し込める段だけに広告を割り当てる (使わない段にバナーを取られない)
-    const bodyRowCount = adRowTargets(article.content, BLOG_BODY_AD_ROW_PATTERNS.length).length;
+    // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。
+    // どの段も AdSense 1 つを本文の幅いっぱいに出し、PR は出さない (2026-11-12 オーナー決定。アフィリエイトは戦略を決め直すまで止める)。
+    // 見出しの数で本文の段が減るので、差し込める段だけに割り当て、末尾の段は常に BLOG_END にする
+    const bodyRowCount = adRowTargets(article.content, BLOG_BODY_AD_ROW_SLOTS.length).length;
     const adRows = composeAdRows(
-        [...BLOG_BODY_AD_ROW_PATTERNS.slice(0, bodyRowCount), ["affiliate", "adsense"]],
-        [BLOG_ARTICLE_INLINE, HUB_INCONTENT, CONTENT_FOOTER, THEMES_CONTENT],
-        articleBanners,
+        Array.from({ length: bodyRowCount + 1 }, () => BLOG_AD_ROW_PATTERN),
+        [...BLOG_BODY_AD_ROW_SLOTS.slice(0, bodyRowCount), BLOG_END],
+        [],
     );
-    // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
-    const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const bannerVertical = resolveContentVertical(bannerInput).vertical;
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const articleRankingKeys = await getRankingKeysForArticle(slug);
-    const relatedArticles = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['blog'], rankingKeys: articleRankingKeys, tagIds: contentTagIds(tagKeys), limit: 3});
+    // 関連記事は 5 件 (2026-11-12 オーナー決定。PC の右レールの下が空いていたため 3 件から増やした)
+    const relatedArticles = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['blog'], rankingKeys: articleRankingKeys, tagIds: contentTagIds(tagKeys), limit: 5});
+    // よく読まれている記事 (GA4 の直近 28 日の閲覧数・週次。自分と関連記事に出した記事を除いて 5 件)
+    const popularArticles = (await readPopularArticlesFromR2(slug, 10))
+        .filter((article) => !relatedArticles.some((item) => item.id === `blog:${article.slug}`))
+        .slice(0, 5);
     const dataNavigation = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['ranking', 'municipality-ranking', 'geo', 'theme'], rankingKeys: articleRankingKeys, limit: 3});
     const railThemes = (await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['theme'], rankingKeys: articleRankingKeys, limit: 3}))
         .filter(theme => !dataNavigation.some(item => item.id === theme.id))
@@ -223,7 +229,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: buildPublisherOrganization(baseUrl),
     };
 
-    // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
+    // レール通常領域: 関連コンテンツ → AdSense (上段) → 探索導線 → 運営者 → 追従する AdSense の順。
     const rail = (
         // 右レールは広告インテントの対象外にする (ad-intent-scope.ts)。contents なので右レールの格子の並びは変わらない
         <div className="google-anno-skip contents">
@@ -238,24 +244,27 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <ContentNavigation title="関連記事" items={relatedArticles} surface="blog_sidebar" />
 
-            {/* ★ 2026-08-04: 右レールに記事 vertical で解決した 300x250 を追加。
-                右レールは**バナーのみ**とし、テキストリンクは本文 inline に寄せる方針は不変。
-                在庫が無い vertical では空配列になり何も描画しない。 */}
-            {sidebarBanners.map((b) => (
-                <BannerAd
-                    key={b.id}
-                    href={b.href}
-                    imageUrl={b.imageUrl}
-                    trackingPixelUrl={b.trackingPixelUrl}
-                    width={b.width}
-                    height={b.height}
-                    label={b.title}
-                    category={b.vertical ?? bannerVertical ?? "other"}
-                    position="blog-sidebar"
-                    adId={b.id}
-                    creativeSize={`${b.width}x${b.height}`}
-                />
-            ))}
+            {/* 右レールの上段の AdSense (2026-11-12 オーナー決定: アフィリエイトを止め、PR のバナー (最大 2 枚) から替えた)。
+                右レールが本文の横にあるとき (PC) だけ出る (RailAdSlot) */}
+            <RailAdSlot slot={BLOG_RAIL} />
+
+            {/* よく読まれている記事 (2026-11-12 オーナー決定。GA4 の閲覧数で週次に選ぶ。ブログ一覧と同じ見せ方) */}
+            <RailLinksCard
+                title="よく読まれている記事"
+                items={popularArticles.map((article) => ({
+                    id: article.slug,
+                    label: article.title,
+                    href: hrefFor("blog", { slug: article.slug }),
+                    trackingLabel: `popular:${article.slug}`,
+                    thumbnail: {
+                        lightSrc: blogThumbnailUrl(article.slug, "light"),
+                        darkSrc: blogThumbnailUrl(article.slug, "dark"),
+                        alt: "",
+                    },
+                }))}
+                layout="ranked"
+                trackingSurface="blog_sidebar"
+            />
 
             {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
                 品目を検出できない記事では何も描画しない。 */}
@@ -293,7 +302,15 @@ export default async function BlogPostPage({ params }: PageProps) {
                 />
             </div>
 
+            {/* 右レールの中段の AdSense (2026-11-12 オーナー決定。追従しない 300×250)。運営者のプロフィールを挟んで
+                最後の追従する枠と隣り合わせにしない (広告の枠の台帳の noAdjacentSlots) */}
+            <RailAdSlot slot={BLOG_RAIL_MIDDLE} />
+
             <OperatorProfileCard />
+
+            {/* 右レールの最後: 300×600 をヘッダーの下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
+                PC で下が約 5,000px 空いていた)。PC だけ。仕組みと Google の条件は RailAdSlot の sticky */}
+            <RailAdSlot slot={BLOG_RAIL_STICKY} sticky />
         </div>
     );
     // レール末尾: ここまでが右レールの静的範囲 (check-ad-placement.cjs と広告配置の契約テストが範囲の終わりの目印に使う)
@@ -366,7 +383,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 article={renderedArticle}
                                 slug={slug}
                                 relatedArticleTitles={relatedArticleTitles}
-                                affiliateBannersByCategory={affiliateBannersByCategory}
                                 affiliateTextAds={affiliateTextAds}
                                 affiliateVertical={bannerVertical}
                                 adRows={adRows}

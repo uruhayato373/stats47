@@ -51,6 +51,12 @@ import {
   adsenseUnitRow,
   resolveUnitMatch,
 } from "./lib/adsense-report-contract.mjs";
+import {
+  PAGE_TYPES_SNAPSHOT_FILE,
+  PAGE_TYPES_HISTORY_FILE,
+  PAGE_TYPE_HISTORY_FIELDS,
+  markdownPageTypeSection,
+} from "./lib/adsense-page-types.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
 import { pathToFileURL } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
@@ -408,7 +414,20 @@ function writeAdsenseBreakdownHistories(stateDir, snapDir, week) {
   return written;
 }
 
-function markdownAdsense(history, latest, deviceHistory, stateDir = null) {
+/** ページ種別の履歴 (GA4 の AdSense 連携・fetch-adsense-page-types.mjs の出力) を upsert し、全履歴を返す。snapshot に無ければ null */
+function writeAdsensePageTypeHistory(stateDir, snapDir, week) {
+  const snap = readCsv(join(snapDir, PAGE_TYPES_SNAPSHOT_FILE));
+  if (!snap || snap.rows.length === 0) return null;
+  const path = join(stateDir, PAGE_TYPES_HISTORY_FILE);
+  let rows = existsSync(path) ? (readCsv(path)?.rows ?? []) : [];
+  rows = rows.filter((r) => r.week !== week);
+  rows.push(...snap.rows.map((r) => ({ week, ...r })));
+  rows.sort((a, b) => (a.week !== b.week ? (a.week < b.week ? -1 : 1) : Number(b.revenue_yen) - Number(a.revenue_yen)));
+  writeFileSync(path, toCsv(rows, [...PAGE_TYPE_HISTORY_FIELDS]), "utf-8");
+  return rows;
+}
+
+function markdownAdsense(history, latest, deviceHistory, stateDir = null, pageTypeHistory = null) {
   const prev = history.length >= 2 ? history[history.length - 2] : null;
   const arrow = (cur, prv, betterLow) => {
     if (!prv) return "";
@@ -504,6 +523,8 @@ function markdownAdsense(history, latest, deviceHistory, stateDir = null) {
     }
   }
 
+  if (pageTypeHistory) lines.push(...markdownPageTypeSection(pageTypeHistory, latest.week));
+
   // 履歴リンクは実在するファイルだけ出す (docs のリンク検査に壊れ参照を残さない)。
   // stateDir 未指定 (テスト等) では従来どおり全件出す。
   const linkIfExists = (file, label) => {
@@ -517,6 +538,7 @@ function markdownAdsense(history, latest, deviceHistory, stateDir = null) {
     linkIfExists("history-formats.csv", "フォーマット別"),
     linkIfExists("history-placements.csv", "配置別"),
     linkIfExists("history-bid-types.csv", "入札型別"),
+    linkIfExists(PAGE_TYPES_HISTORY_FILE, "ページ種別"),
   ].filter(Boolean);
   if (historyLinks.length > 0) lines.push(`履歴: ${historyLinks.join(" / ")}`);
   lines.push("");
@@ -558,12 +580,14 @@ function updateAdsense(week) {
   }
   const breakdowns = writeAdsenseBreakdownHistories(stateDir, snapDir, week);
   const units = writeAdsenseUnitHistory(stateDir, snapDir, week);
-  writeFileSync(join(stateDir, "LATEST.md"), markdownAdsense(history, row, deviceHistory, stateDir), "utf-8");
+  const pageTypeHistory = writeAdsensePageTypeHistory(stateDir, snapDir, week);
+  writeFileSync(join(stateDir, "LATEST.md"), markdownAdsense(history, row, deviceHistory, stateDir, pageTypeHistory), "utf-8");
   console.log(
     `[adsense] updated history.csv (${history.length} weeks) and LATEST.md` +
       (deviceHistory ? ` + history-devices.csv (${deviceHistory.length} rows)` : "") +
       (breakdowns.length ? ` + ${breakdowns.join(" / ")}` : "") +
-      (units ? ` + ${ADSENSE_UNIT_HISTORY_FILE} (${units.rows} rows)` : "")
+      (units ? ` + ${ADSENSE_UNIT_HISTORY_FILE} (${units.rows} rows)` : "") +
+      (pageTypeHistory ? ` + ${PAGE_TYPES_HISTORY_FILE} (${pageTypeHistory.length} rows)` : "")
   );
   if (units) {
     // 突き合わせ結果を必ず出す (unmanaged/orphan が増えたら unit 単位の効果測定が壊れている)

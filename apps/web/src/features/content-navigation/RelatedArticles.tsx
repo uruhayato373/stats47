@@ -14,10 +14,12 @@ interface RelatedArticlesProps {
   items: readonly Pick<ContentRecommendation, 'id' | 'key' | 'href' | 'title'>[];
   surface: 'area_blog' | 'ranking_blog' | 'theme_blog';
   children?: ReactNode;
+  /** index 件目の後に、記事の格子が 1 列のときだけ出す要素 (県のページのインフィード広告。CardGrid の insertAfter) */
+  insertAfter?: { index: number; node: ReactNode };
 }
 
 /** 本文の関連記事はここで描く。表示形式を変えるときは計測の版も更新する。 */
-export function RelatedArticles({ items, surface, children }: RelatedArticlesProps) {
+export function RelatedArticles({ items, surface, children, insertAfter }: RelatedArticlesProps) {
   const id = useId();
   if (!items.length) return null;
   return (
@@ -26,7 +28,7 @@ export function RelatedArticles({ items, surface, children }: RelatedArticlesPro
         <Newspaper aria-hidden="true" className="size-4 text-muted-foreground" />
         関連記事
       </h2>
-      <CardGrid>
+      <CardGrid insertAfter={insertAfter}>
         {items.map((item) => (
           <ArticleTeaserCard
             key={item.id}

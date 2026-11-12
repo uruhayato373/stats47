@@ -228,6 +228,11 @@
           "prop": "children",
           "required": true,
           "what": "記事カード (ArticleTeaserCard) またはランキングカード (FeaturedRankingCard)"
+        },
+        {
+          "prop": "insertAfter",
+          "required": false,
+          "what": "index 件目の後に、格子が 1 列のときだけ出す要素 (記事の一覧の中のインフィード広告。2026-11-12)。子の数 (列の数・埋め草) には数えない"
         }
       ],
       "spec": {

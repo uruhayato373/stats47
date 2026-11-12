@@ -10,10 +10,15 @@
  *   - PREF_NAMES       正式名 47 件 ("北海道" "青森県" … "沖縄県")
  * 短縮名 (「東京」等) や独自順序が必要な箇所はこの一覧を使わず、各スクリプト側で定義する。
  */
+const fs = require("node:fs");
 const path = require("node:path");
 const { datasetPath } = require("../../../config/datasets.mjs");
 
-const PREFECTURES = require(path.resolve(__dirname, "../../..", datasetPath("areas.prefectures")));
+// require() ではなくファイルとして読む。管理画面 (apps/admin) の bundler は、組み立てたパスの require を解決できず
+// 画面全体が 500 になる (2026-11-12。台帳を data/areas へ移したとき require の引数が組み立て式になった)
+const PREFECTURES = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "../../..", datasetPath("areas.prefectures")), "utf8"),
+);
 
 const PREF_AREA_CODES = PREFECTURES.map((p) => p.prefCode);
 const PREF_NAMES = PREFECTURES.map((p) => p.prefName);

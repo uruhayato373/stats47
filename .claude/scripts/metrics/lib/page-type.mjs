@@ -8,6 +8,56 @@
  * テスト: __tests__/adsense-diagnostics.test.mjs 内
  */
 
+import { readdirSync, readFileSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+
+const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "../../../../..");
+
+/**
+ * テーマのページ (地域の単位に関係なく 1 つの種類。2026-11-12 オーナー決定) の URL の照合。ルートの台帳
+ * (content.routes) で pageType = "theme" のルートの pattern を正規表現にし、[themeSlug] はテーマの名前の一覧に
+ * 載っているときだけ当てる (/areas/<県>/cities のような同じ形の別のページをテーマに数えない)。
+ * 旧: /themes/<テーマ> だけをテーマに数え、表示の 92% を占める /areas/<県>/<テーマ> を「地域」に、/japan と
+ * /municipalities/themes を「その他」に数えていた (GSC 2026-W44)
+ */
+function loadThemeRouteMatchers() {
+  const routes = JSON.parse(readFileSync(join(PROJECT_ROOT, datasetPath("content.routes")), "utf8")).routes;
+  const themeSlugs = new Set(
+    readdirSync(join(PROJECT_ROOT, datasetDir("themes.catalogs")))
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => f.slice(0, -".json".length)),
+  );
+  const japanSlugs = new Set(
+    ["themes.japan-catalogs", "themes.japan-kakei-catalogs"].flatMap((id) =>
+      Object.keys(JSON.parse(readFileSync(join(PROJECT_ROOT, datasetPath(id)), "utf8")).themes ?? {}),
+    ),
+  );
+  return routes
+    .filter((r) => r.pageType === "theme")
+    .map((r) => {
+      const params = [];
+      const source = r.pattern.replace(/\[([A-Za-z]+)\]/g, (_, name) => {
+        params.push(name);
+        return "([^/]+)";
+      });
+      return { regex: new RegExp(`^${source}/?$`), params, slugs: r.scope === "japan" ? japanSlugs : themeSlugs };
+    });
+}
+
+let themeRouteMatchers;
+function isThemePath(path) {
+  themeRouteMatchers ??= loadThemeRouteMatchers();
+  return themeRouteMatchers.some(({ regex, params, slugs }) => {
+    const m = path.match(regex);
+    if (!m) return false;
+    const slug = m[params.indexOf("themeSlug") + 1];
+    return slug !== undefined && slugs.has(decodeURIComponent(slug));
+  });
+}
+
 export const PAGE_TYPES = Object.freeze([
   "ranking-detail",
   "blog-detail",
@@ -27,8 +77,8 @@ export function classifyPageType(pagePath) {
   if (path === "/search" || path.startsWith("/search/")) return "search";
   if (/^\/ranking\/[^/]+\/?$/.test(path)) return "ranking-detail";
   if (/^\/blog\/[^/]+\/?$/.test(path)) return "blog-detail";
+  if (isThemePath(path)) return "theme-detail";
   if (/^\/areas\/[^/]+/.test(path)) return "area-detail";
-  if (/^\/themes\/[^/]+\/?$/.test(path)) return "theme-detail";
   if (/^\/category\/[^/]+\/?$/.test(path)) return "category";
   return "other";
 }

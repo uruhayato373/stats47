@@ -115,15 +115,29 @@ export function cardGridFillers(count: number): string[] {
 interface CardGridProps {
   /** 記事カード (ArticleTeaserCard) */
   children: ReactNode;
+  /**
+   * index 件目の後に、格子が 1 列のときだけ出す要素 (記事の一覧の中のインフィード広告。2026-11-12)。2 列以上では隠れるので、
+   * 子の数 (列の数と最後の行の埋め草) には数えない。index が子の数以上なら出さない (一覧の最後には置かない)
+   */
+  insertAfter?: { index: number; node: ReactNode };
 }
 
-export function CardGrid({ children }: CardGridProps) {
-  const count = Children.toArray(children).length;
+export function CardGrid({ children, insertAfter }: CardGridProps) {
+  const items = Children.toArray(children);
+  const count = items.length;
   if (count === 0) return null;
+  const inserted =
+    insertAfter && insertAfter.index > 0 && insertAfter.index < count
+      ? [
+          ...items.slice(0, insertAfter.index),
+          <div key="card-grid-insert" className="@sm:hidden">{insertAfter.node}</div>,
+          ...items.slice(insertAfter.index),
+        ]
+      : items;
   return (
     <div data-slot-kind="card-grid" className="@container">
       <PanelGrid className={COLUMN_CLASS[cardGridColumns(count)]}>
-        {children}
+        {inserted}
         {cardGridFillers(count).map((className, i) => (
           <div key={`filler-${i}`} aria-hidden="true" data-cell="flush" className={className} />
         ))}

@@ -569,17 +569,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W44/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W44/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data"
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W40",
+            "2026-W44"
+          ],
+          "impressions": 0,
+          "clicks": 0
         },
         "ga4": {
-          "status": "insufficient-data"
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W40",
+            "2026-W44"
+          ],
+          "landingPageViews": 0
         },
         "internalNav": {
-          "status": "insufficient-data"
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W40",
+            "2026-W44"
+          ],
+          "rankingOutboundClicks": 0
         }
       },
       "currentHypothesis": null,

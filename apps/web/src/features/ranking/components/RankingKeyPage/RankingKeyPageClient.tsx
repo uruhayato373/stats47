@@ -12,14 +12,10 @@ import { ArticleShell, PanelGrid } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
 
+import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 
-import { adSlotBox } from "@/lib/ad-placements";
-import {
-    ADSENSE_DISPLAY_ENABLED,
-    AdSenseAd,
-    RANKING_PAGE_TABLE_SIDE,
-} from "@/lib/google-adsense";
+import { RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
 
 import { classifyRankingSubtitle } from "../../utils/classify-subtitle";
 import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
@@ -162,19 +158,14 @@ export function RankingKeyPageClient({
     // 右レール: ブログ詳細ページ (/blog/[slug]) と同じ構成に統一。
     // ArticleShell の右レールは shell コンテナ 988px 以上で表示する (本文 656px を保つ境界)。
     // ラッパーもブログと同じ非 sticky の <aside> に揃える。
-    // サイド AdSense はレール表示時に合わせて hidden rail:block。
+    // サイド AdSense は右レールが本文の横にあるときだけ出す (RailAdSlot。hidden rail:block)。
+    // 最後の 1 枠は 300×600 をヘッダー (56px) の下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
+    // PC で下が約 840px 空いていた)。右レールは flex の列なので、sticky は右レールの終わり = 本文の終わりで止まり、フッターに重ならない。
+    // Google の条件 (幅 300px 以下・縦だけ・同時に見える追従広告は 1 つ・PC だけ) は台帳の adsense-rail-sticky に書いた
     const rail = sections.sidebar ? (
         <>
             {sections.sidebar}
-            {ADSENSE_DISPLAY_ENABLED && (
-                <div className="hidden rail:block">
-                    <AdSenseAd
-                        format={RANKING_PAGE_TABLE_SIDE.format}
-                        slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                        slotBox={adSlotBox("adsense-rail-rect")}
-                    />
-                </div>
-            )}
+            <RailAdSlot slot={RANKING_PAGE_TABLE_SIDE} sticky />
         </>
     ) : undefined;
 

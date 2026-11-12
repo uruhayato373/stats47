@@ -9,15 +9,6 @@ interface ArticleRendererProps {
     article: Article;
     slug: string;
     relatedArticleTitles?: Record<string, string>;
-    affiliateBannersByCategory?: Record<string, {
-        id?: string;
-        href: string;
-        imageUrl: string;
-        trackingPixelUrl?: string | null;
-        width?: number | null;
-        height?: number | null;
-        title?: string;
-    }>;
     /** 本文中に自動挿入するテキストリンク広告 (記事の tagKeys から解決済み)。 */
     affiliateTextAds?: Array<{
         id: string;
@@ -37,7 +28,6 @@ export function ArticleRenderer({
     article,
     slug,
     relatedArticleTitles,
-    affiliateBannersByCategory,
     affiliateTextAds,
     affiliateVertical,
     adRows,
@@ -47,7 +37,6 @@ export function ArticleRenderer({
             source={article.content}
             slug={slug}
             relatedArticleTitles={relatedArticleTitles}
-            affiliateBannersByCategory={affiliateBannersByCategory}
             affiliateTextAds={affiliateTextAds}
             affiliateVertical={affiliateVertical}
             adRows={adRows}

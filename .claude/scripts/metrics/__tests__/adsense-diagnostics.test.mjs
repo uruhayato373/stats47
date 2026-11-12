@@ -170,6 +170,16 @@ test("classifyPageType: 決定的分類・高カーディナリティ dimension 
   assert.equal(classifyPageType("/areas/13000"), "area-detail");
   assert.equal(classifyPageType("/areas/13000/cities/13201"), "area-detail");
   assert.equal(classifyPageType("/themes/tourism"), "theme-detail");
+  // テーマは地域の単位に関係なく 1 つの種類 (2026-11-12 オーナー決定)。県別・日本全体・市区町村・市区町村×テーマもテーマに数える
+  assert.equal(classifyPageType("/areas/13000/aging-society"), "theme-detail");
+  assert.equal(classifyPageType("/areas/13000/aging-society/cities"), "theme-detail");
+  assert.equal(classifyPageType("/areas/13000/cities/13101/aging-society"), "theme-detail");
+  assert.equal(classifyPageType("/japan/aging-society"), "theme-detail");
+  assert.equal(classifyPageType("/japan/household-appliances"), "theme-detail");
+  assert.equal(classifyPageType("/municipalities/themes/aging-society"), "theme-detail");
+  // 同じ形でもテーマの名前でない段はテーマに数えない
+  assert.equal(classifyPageType("/areas/13000/cities"), "area-detail");
+  assert.equal(classifyPageType("/japan"), "other");
   assert.equal(classifyPageType("/category/population"), "category");
   assert.equal(classifyPageType("/search?q=x"), "search");
   assert.equal(classifyPageType("/survey/census"), "other");

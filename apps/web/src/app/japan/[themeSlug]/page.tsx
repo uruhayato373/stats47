@@ -20,7 +20,13 @@ import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { ThemeRegionNav } from '@/features/theme-dashboard';
-import { isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
+import {
+  buildThemeDescription,
+  buildThemeTitle,
+  themeLeadLabels,
+  isAreaTheme,
+  THEME_SWITCHER_THEMES,
+} from '@/features/theme-dashboard/server';
 
 import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -48,15 +54,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!theme) return {};
   // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)
   // テーマのページ (/themes/テーマ) が「全国の〇〇」なので、日本全体の変化を見せるこのページは「〜の推移」で区別する (2026-10-31)
-  const title = `全国の${theme.title}の推移`;
+  // 題と説明文は単位に関係なく theme-seo.ts で作る (2026-11-12 オーナー決定)。指標名は日本のカタログの短い名前、無ければ都道府県のテーマの主な指標
+  const japanLabels = theme.metrics.map((m) => m.shortLabel).filter((l): l is string => Boolean(l)).slice(0, 2);
+  const labels = japanLabels.length > 0 ? japanLabels : themeLeadLabels(theme.themeSlug);
+  const title = buildThemeTitle({ scope: 'japan', themeTitle: theme.title, labels });
+  const description = buildThemeDescription({ scope: 'japan', base: theme.description, labels });
   return {
     title,
-    description: theme.description,
+    description,
     keywords: theme.keywords,
     alternates: { canonical: hrefFor('japan-theme', { themeSlug: theme.themeSlug }) },
     ...generateOGMetadata({
       title,
-      description: theme.description,
+      description,
       imageUrl: DEFAULT_OGP_IMAGE_PATH,
     }),
   };

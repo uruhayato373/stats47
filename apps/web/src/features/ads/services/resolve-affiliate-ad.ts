@@ -240,35 +240,7 @@ export async function resolveAffiliateTextAdsByVertical(
 }
 
 /**
- * ページ内容 (出典調査 → タグ → カテゴリ) から意図軸を決めてバナーを解決する。
- * ranking / blog / 市区町村 など「内容を持つページ」の共通入口 (2026-09-03)。
- * 解決順の正典は `resolveContentVertical`。調査が null を返した場合は空 (広告を出さない)。
- */
-export async function resolveAffiliateBannersForContent(
-  input: ContentVerticalInput,
-  limit = 8,
-  rankingKey?: string
-): Promise<ResolvedAffiliateBanner[]> {
-  const chain = resolveContentVerticalChain(input);
-  // 意図が「無し」(調査の null・記事の明示 policy) でも、汎用の案件を出す (2026-10-31 オーナー決定)
-  if (chain.blocked) return resolveGenericAffiliateBanners(limit);
-  // 上位段の在庫がゼロのときだけ次段へ落とす (旧 ranking の tags → categoryKey と同じ)。
-  for (const step of chain.steps) {
-    const rows = await findActiveBannersByVerticals(
-      step.verticals,
-      limit,
-      rankingKey
-    );
-    const banners = rows
-      .map(toBanner)
-      .filter((b): b is ResolvedAffiliateBanner => b !== null);
-    if (banners.length > 0) return banners;
-  }
-  return resolveGenericAffiliateBanners(limit);
-}
-
-/**
- * ページ内容から意図軸を決めてテキスト広告を解決する (`resolveAffiliateBannersForContent` の text 版)。
+ * ページ内容から意図軸を決めてテキスト広告を解決する。
  * 同一広告が複数 vertical に重複しうるため title で dedupe する。
  */
 export async function resolveAffiliateTextAdsForContent(

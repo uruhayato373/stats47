@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-11-12T03:33:54.630Z",
+  "source": "ga4",
+  "windowDays": 28,
+  "period": {
+    "start": "2026-10-15",
+    "end": "2026-11-11"
+  },
+  "articles": [
+    {
+      "slug": "automotive-industry-transformation-map",
+      "pageViews": 667
+    },
+    {
+      "slug": "livable-prefecture-composite-ranking",
+      "pageViews": 430
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "pageViews": 425
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "pageViews": 344
+    },
+    {
+      "slug": "alcohol-prefecture-map",
+      "pageViews": 263
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "pageViews": 229
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "pageViews": 221
+    },
+    {
+      "slug": "academic-achievement-test-prefecture-ranking",
+      "pageViews": 210
+    },
+    {
+      "slug": "rice-harvest-volume-prefecture-gap",
+      "pageViews": 185
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "pageViews": 174
+    }
+  ]
+}

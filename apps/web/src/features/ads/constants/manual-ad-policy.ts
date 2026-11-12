@@ -3,7 +3,7 @@
  *
  * ★ 2026-11-03 (オーナー決定): 本文の広告は広告の段 (`slots/AdRow.tsx`) に移し、モバイルにも AdSense を出す。
  *   下の 2026-08-04 の判断は自動広告がある前提で、自動広告なしで再開した今は当てはまらない。
- *   `MANUAL_AD_DESKTOP_ONLY_CLASS` を使うのは記事内の単独の枠 (`InContentAdSlot` と手置きの `<ad-slot>`) だけ。
+ *   `MANUAL_AD_DESKTOP_ONLY_CLASS` を使うのは記事内の単独の枠 (`InContentAdSlot`) だけ (手置きの `<ad-slot>` は 2026-11-12 から描かない)。
  *
  * ## 決定 (2026-08-04・W31 実測)
  *

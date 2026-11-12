@@ -9,4 +9,4 @@ metadata:
 
 **Why:** 価格が 3 か所に分かれ判断の記録が無く、note のデータ集はココナラの価格を移しただけだった。
 
-**How to apply:** 実験 PRICE-DATA-PACK-2026-11 (テーマ別 ¥1,980・総合集 ¥4,980) は 2026-12-30 に判定するまで価格を重ねて変えない。戦略文書への質問は NotebookLM「stats47 商品戦略」へ `notebooklm ask` で行う。「stats47の戦略検討」は他人のブログが混ざっていて使えない。KDP の 35% は KDP セレクト未登録が原因で、登録は 1 冊ずつオーナーが決める。関連: [[project_monetization_contract]]
+**How to apply:** 実験 PRICE-DATA-PACK-2026-11 の価格・判定日は `data/products/price-history.json` から読み、ここに金額を複製しない。LPの表示変更後の実績は価格だけの効果と読まない。戦略文書への質問は NotebookLM「stats47 商品戦略」へ `notebooklm ask` で行う。「stats47の戦略検討」は他人のブログが混ざっていて使えない。KDP の 35% は KDP セレクト未登録が原因で、登録は 1 冊ずつオーナーが決める。関連: [[project_monetization_contract]]

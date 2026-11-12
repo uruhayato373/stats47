@@ -23,13 +23,12 @@ import {
 import { StatTile, StatTileGrid } from '@/components/surface';
 
 import {
-  FinanceSankey,
   LOCAL_FINANCE_SOURCE_LINKS,
-  type FinanceFlowData,
 } from '@/features/finance-flow/client';
+import { useThemePrefecture } from '@/features/theme-dashboard';
+
 
 import {
-  validateLocalFinanceSections,
   type LocalFinanceEmbeddedKey,
 } from '../lib/finance-sections';
 import {
@@ -37,14 +36,13 @@ import {
   type YearRecord,
 } from '../lib/load-finance-cards';
 
-import type { CatalogSection } from '@stats47/data-configs/theme-catalog/types';
+
+/** 決算カードの章のうち、テーマの共通の部品 (埋め込みの章の登録簿) が描く 2 つ。財政の流れは finance-flow の章が描く */
+export type FinanceCardsPart = Exclude<LocalFinanceEmbeddedKey, 'finance-flow'>;
 
 interface Props {
   cards: FinanceCardsData;
-  sections: CatalogSection[];
-  initialFinanceFlow?: FinanceFlowData;
-  /** Controlled by the same regional selection as every theme. */
-  prefCode: string | null;
+  part: FinanceCardsPart;
 }
 
 const OKU = 1 / 100000; // 千円 → 億円
@@ -71,14 +69,13 @@ interface RatioMeta {
 }
 const RATIO_METRICS = LOCAL_FINANCE_RATIO_METRICS satisfies readonly RatioMeta[];
 
-export function LocalFinanceDashboard({
-  cards,
-  sections,
-  initialFinanceFlow,
-  prefCode,
-}: Props) {
-  const sectionErrors = validateLocalFinanceSections(sections);
-  if (sectionErrors.length) throw new Error(sectionErrors.join("; "));
+/**
+ * 地方財政のテーマの決算カードの章 (2026-11-12 オーナー決定で専用ページをやめ、テーマの共通の部品の埋め込みの章にした)。
+ * 県は共通の地域の選択 (useThemePrefecture) から読む。県を選んでいないときは何も描かない (47 都道府県の比較はランキングのページ)
+ */
+export function FinanceCardsSectionClient({ cards, part }: Props) {
+  const { selectedPrefectureCode } = useThemePrefecture();
+  const prefCode = selectedPrefectureCode?.slice(0, 2) ?? null;
   const { years, latestYear } = cards;
   const prefCard = prefCode ? cards.cards[prefCode] : undefined;
   const prefName =
@@ -115,7 +112,7 @@ export function LocalFinanceDashboard({
     : 0;
 
   // 県を選んでいないときに 47 都道府県を並べていた比較の表は外した (2026-10-31。比較はランキングのページ)
-  const embedded: Record<LocalFinanceEmbeddedKey, ReactNode> = {
+  const embedded: Record<FinanceCardsPart, ReactNode> = {
     'finance-overview': prefCode ? (
         <StatTileGrid>
           <KeyMetricsTableCard
@@ -186,56 +183,19 @@ export function LocalFinanceDashboard({
           })}
         </StatTileGrid>
     ) : null,
-    'finance-flow': prefCode ? (
-      <>
-        <p className="mb-3 text-sm text-muted-foreground">
-          歳入の財源（地方税・地方交付税・国庫支出金・地方債など）が一般会計を通じて
-          目的別歳出（民生費・教育費・土木費など）へ流れる様子をフロー図で表します。
-        </p>
-        <p className="mb-3 text-sm text-muted-foreground">
-          決算カードは{latestYear}
-          年度の決算です。フローは図に記した年度の構成で、決算カードと年度が異なる場合があります。
-        </p>
-        <FinanceSankey
-          code={prefCode}
-          initialData={
-            initialFinanceFlow?.focusCode === prefCode
-              ? initialFinanceFlow
-              : undefined
-          }
-        />
-      </>
-    ) : (
-      <p className="text-sm text-muted-foreground">
-        都道府県を選ぶと、その県の歳入・歳出のフローを表示します。年度は図に記載します。
-      </p>
-    ),
   };
 
+  if (!prefCode) return null;
   return (
-    <div className="space-y-8 py-2">
-      <div className="border-b border-border pb-3">
-        <p className="font-semibold text-foreground">
-          {prefCode ? `${prefName}の地方財政` : '全国の地方財政'}
-          <span className="ml-2 text-base font-normal text-muted-foreground">{latestYear}年度</span>
-        </p>
+    <div className="space-y-3">
+      {embedded[part]}
+      {part === 'finance-overview' && (
         <ChartFooter
           source="地方財政状況調査（決算カード）"
           sourceLinks={LOCAL_FINANCE_SOURCE_LINKS}
-          sourceDetail={prefCode && years.length > 1 ? `${years[0]}〜${latestYear}年度` : `${latestYear}年度`}
+          sourceDetail={years.length > 1 ? `${years[0]}〜${latestYear}年度` : `${latestYear}年度`}
         />
-      </div>
-      {sections.map((section) => (
-        <section key={section.key} id={`theme-section-${section.key}`} className="scroll-mt-24">
-          <h2 className="mb-2 text-lg font-semibold">{section.title}</h2>
-          {section.description && <p className="mb-3 text-sm text-muted-foreground">{section.description}</p>}
-          {section.embeddedSectionKeys?.map((key) => (
-            <div key={key} data-theme-embedded-key={key}>
-              {embedded[key as LocalFinanceEmbeddedKey]}
-            </div>
-          ))}
-        </section>
-      ))}
+      )}
     </div>
   );
 }
