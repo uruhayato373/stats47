@@ -87,7 +87,7 @@
     {
       "rankingKey": "road-length-per-km2",
       "shortLabel": "道路実延長（総面積1km²当たり）",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "社会・人口統計体系 都道府県データ 社会生活統計指標「#H06401_道路実延長（総面積1km2当たり）」（総務省統計局）",
         "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010208",

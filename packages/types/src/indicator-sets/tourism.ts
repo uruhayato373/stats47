@@ -23,7 +23,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人延べ宿泊者数",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "actual-overnight-guests",
@@ -53,7 +53,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "air-passenger-transport",
       "shortLabel": "航空旅客",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "number-of-simple-lodging-facilities",

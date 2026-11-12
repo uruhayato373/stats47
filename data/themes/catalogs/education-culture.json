@@ -421,7 +421,7 @@
     {
       "rankingKey": "art-museum-count",
       "shortLabel": "美術博物館数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",

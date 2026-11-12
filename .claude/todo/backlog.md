@@ -3855,14 +3855,21 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 
 - **owner**: theme-designer (採否判断・`data/themes/catalogs/<theme>.json` 編集) / 最終承認はユーザー
 - **背景**: `THEME-SELECTION-BACKFILL-01` の調査は selection の裏付けだけでなく、副産物として
-  「今の role (primary/secondary/context) は適切か」の判定も出す。これは selection と違い
-  **採用すればサイト表示 (指標カードの並び) が変わる**唯一の出力。ただし夜間バッチは role を
+  「今の role (primary/secondary/context) は適切か」の判定も出す。夜間バッチは role を
   書き換えない (禁止事項) ので、人の採否判断とカタログ編集を挟まないとサイトに届かない。
+- **role が画面に効く範囲 (2026-11-12 実測で訂正)**: 10/31 の章立て以降、指標カードは metricGroups の並びで出るので
+  role を変えてもカードの指標は消えない (`ThemeMetricsDashboard.tsx` の「role に関わらず値を出す」)。
+  primary は先頭 2 件がページの題・説明文・FAQ の数字に入り (`theme-seo.ts` の `LEAD_LABEL_COUNT`)、
+  先頭が `defaultRankingKey` になる。context は関連テーマの重みが 0 になる。**例外: 追加章 (`candidate-*` の
+  metricGroup) の指標を context にするとカードから届かなくなる** (`metric-groups-reachability.test.ts` が落ちる)。
+  判断の軸は「primary = 題に入れて検索に効くか・1〜3 件に収まるか」「context = 読み違いの実際の理由があるか」
 - **進捗管理 (2026-09-17 新設)**: `.claude/scripts/themes/build-role-review-queue.mjs` が
   全 `reference/audits/*-selection-backfill.md` の「role の推奨」を横断集約し
   `data/themes/role-review/{role-review-queue.json,LATEST.md}` へ書く。夜間 run が自動で再構築する
   (driver に配線済み)。**「反映済み」は手動フラグでなく `THEME_CATALOGS` の実際の role と
-  recommended の一致で自動判定する** (手動フラグはドリフトする)。現在: 45 件 pending (2026-09-16 run 分)
+  recommended の一致で自動判定する** (手動フラグはドリフトする)。判断は `role-review-decisions.json`。
+  2026-11-12 にオーナー承認で 48 件を処理 (applied 23 / rejected 27、pending 0)。カタログ反映と検査は済み、
+  develop push と本番デプロイ (下の 6・7) を待つ。以後は夜間 run が足した分を同じ手順で捌く
 - **サイトへの展開経路 (実行順)**:
   1. `data/themes/role-review/LATEST.md` で pending 一覧を確認
   2. 1 件ずつ採否判断し記録: `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide --theme <theme> --key <rankingKey> --decision accept|reject --note "..."`

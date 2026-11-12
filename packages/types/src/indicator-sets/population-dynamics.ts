@@ -83,7 +83,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     {
       "rankingKey": "movers-in",
       "shortLabel": "外国人転入者数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "movers-out",
@@ -173,7 +173,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     {
       "rankingKey": "future-population-change-rate-2050",
       "shortLabel": "2020～2050年の人口増減率（推計）",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "sex-ratio-age-20-39",

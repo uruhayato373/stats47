@@ -138,7 +138,7 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
     {
       "rankingKey": "art-museum-count",
       "shortLabel": "美術博物館数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "prefecture-designated-cultural-property-count",

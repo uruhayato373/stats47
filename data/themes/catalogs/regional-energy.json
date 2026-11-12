@@ -256,7 +256,7 @@
     {
       "rankingKey": "regional-waste-co2-emissions-estimate",
       "shortLabel": "一般廃棄物焼却のCO₂推計",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "都道府県別・部門別CO2排出量の現況推計（2023年度版）（環境省 脱炭素地域づくり支援サイト）",
         "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html",

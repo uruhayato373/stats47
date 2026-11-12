@@ -97,7 +97,7 @@
     {
       "rankingKey": "construction-employed-age30to54",
       "shortLabel": "30〜54歳の建設業就業者",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -107,7 +107,7 @@
     {
       "rankingKey": "construction-employed-age55plus",
       "shortLabel": "55歳以上の建設業就業者",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "令和7年版 国土交通白書 第1部第1章第1節「直面する課題」③国土交通分野における担い手不足（国土交通省）",
         "sourceUrl": "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1111000.html",

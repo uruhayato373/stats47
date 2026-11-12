@@ -485,7 +485,7 @@
     {
       "rankingKey": "disaster-recovery-expenses-prefecture",
       "shortLabel": "災害復旧費（都道府県財政）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "国土交通省水管理・国土保全局「災害復旧事業の概要」（防災）",
         "sourceUrl": "https://www.mlit.go.jp/mizukokudo/river/hukkyu_jigyou.html",
@@ -588,7 +588,7 @@
     {
       "rankingKey": "individual-evacuation-plan-listed-persons",
       "shortLabel": "避難行動要支援者名簿の掲載人数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "内閣府・消防庁「避難行動要支援者名簿及び個別避難計画の作成等に係る取組状況」（令和8年調査、令和8年4月1日現在）",
         "sourceUrl": "https://www.bousai.go.jp/taisaku/hisaisyagyousei/pdf/r8chosa1.pdf",

@@ -42,7 +42,7 @@
     {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人延べ宿泊者数",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "観光立国推進基本計画（第5次）本文 第2「観光立国の実現に関する目標」2.「観光立国の推進に関する目標」（観光庁、2026年3月27日閣議決定）",
         "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001991698.pdf",
@@ -120,7 +120,7 @@
     {
       "rankingKey": "air-passenger-transport",
       "shortLabel": "航空旅客",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "観光立国推進基本計画（第5次）本文 第3 1.（2）⑤「地方部への交通ネットワークの機能強化」イ「航空ネットワークの強化」（観光庁、2026年3月27日閣議決定）",
         "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001991698.pdf",

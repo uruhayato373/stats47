@@ -28,7 +28,7 @@ export const SPORTS_PARTICIPATION_SET: IndicatorSet = {
     {
       "rankingKey": "sports-park-count",
       "shortLabel": "運動公園数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "daily-steps-male-20to64-age-adjusted",

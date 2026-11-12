@@ -68,7 +68,7 @@ export const FORESTRY_TIMBER_SET: IndicatorSet = {
     {
       "rankingKey": "forestry-internal-workers",
       "shortLabel": "林業経営体の内部労働者数（2025年調査）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "forestry-output-value",

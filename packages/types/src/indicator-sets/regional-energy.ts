@@ -93,7 +93,7 @@ export const REGIONAL_ENERGY_SET: IndicatorSet = {
     {
       "rankingKey": "regional-waste-co2-emissions-estimate",
       "shortLabel": "一般廃棄物焼却のCO₂推計",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "keywords": [
