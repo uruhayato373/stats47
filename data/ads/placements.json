@@ -498,38 +498,24 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "「知りたいことから探す」と「都道府県から探す」の間",
         "source": "apps/web/src/app/page.tsx",
         "marker": "position=\"home-row-1\"",
         "trackingPosition": "home-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
+        "adsenseSlot": "HOME_ROW_1",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "「都道府県から探す」の後 (ページの最後)",
         "source": "apps/web/src/app/page.tsx",
         "marker": "position=\"home-row-2\"",
         "trackingPosition": "home-row-2",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
+        "adsenseSlot": "HOME_ROW_2",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       }
     ],
     "category": [

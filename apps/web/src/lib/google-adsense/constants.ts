@@ -203,6 +203,15 @@ export const THEME_ROW_2: AdSlotConfig = { slotId: "9630518288", format: "rectan
 export const THEME_END: AdSlotConfig = { slotId: "2430685118", format: "rectangle" }; // stats47-theme-end (ディスプレイ / レスポンシブ)
 
 /**
+ * ホーム: 本文の広告の段 2 つ (「知りたいことから探す」の後・ページの最後)。
+ * 2026-11-12 オーナー決定: アフィリエイトを止め、2 段とも AdSense 1 つを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。それまでの HUB_INCONTENT / CONTENT_FOOTER は一覧ページと共用で、ホームの分を
+ * 測れなかったので、同日に専用のユニットを作った。
+ */
+export const HOME_ROW_1: AdSlotConfig = { slotId: "6019089689", format: "rectangle" }; // stats47-home-row-1 (ディスプレイ / レスポンシブ)
+export const HOME_ROW_2: AdSlotConfig = { slotId: "3189892156", format: "rectangle" }; // stats47-home-row-2 (ディスプレイ / レスポンシブ)
+
+/**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）
  * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
  * ADSENSE-HUB-INCONTENT-01: モバイル imp/PV（W26 実測 0.37）改善のためハブ面に in-content を新設。

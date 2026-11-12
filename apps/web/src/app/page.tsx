@@ -16,13 +16,12 @@ import {
   OperatorProfileCard,
   RailAdSlot,
 } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listLatestArticles } from '@/features/blog/server';
 import { PortalBlogCard, PortalUseCaseGrid } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
-import { ADSENSE_DISPLAY_ENABLED, CONTENT_FOOTER, HUB_INCONTENT, RAIL_RECT } from '@/lib/google-adsense';
+import { ADSENSE_DISPLAY_ENABLED, HOME_ROW_1, HOME_ROW_2, RAIL_RECT } from '@/lib/google-adsense';
 
 import { DEFAULT_OGP_IMAGE_PATH, SITE_ALTERNATE_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_ORIGIN } from '@/config/site';
 
@@ -110,15 +109,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(8).catch(() => []);
   const prefectures = fetchPrefectures();
-  // トップは読者の意図が決まらないので、共通の案件 (楽天カード・TOSSY) を出す (2026-11-03。旧: economy 軸で FP 相談等が出ていた)
-  const homeNativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
-  // 広告の段 (2026-11-03 オーナー決定): 用途から探す節の後とページの最後。本文 (右レールの横で約 810px) では 2 枠、
-  // モバイルは先頭の 1 枠で上から AdSense、PR の順。右レールの AdSense (RAIL_RECT) とは別のユニット
-  const [homeRow1, homeRow2] = composeAdRows(
-    [['adsense', 'affiliate'], ['affiliate', 'adsense']],
-    [HUB_INCONTENT, CONTENT_FOOTER],
-    homeNativeBanners,
-  );
+  // 広告の段 (2026-11-12 オーナー決定): アフィリエイトを止め、用途から探す節の後とページの最後に AdSense 1 つを本文の幅いっぱい
+  // (上限 580px) に出す。ユニットはホーム専用 (同日に作成。それまでは一覧ページと共用で、ホームの分を測れなかった)。
+  // 右レールの AdSense (RAIL_RECT) とは別のユニット
+  const [homeRow1, homeRow2] = composeAdRows([['adsense'], ['adsense']], [HOME_ROW_1, HOME_ROW_2], []);
   // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
   // 右レールは AdSense と運営者プロフィール (2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった。
   // 固定の PR (SidebarPromoBanner) はランキングの指標が労働のときだけ出る部品で、ここでは描かれていなかったので外した)
@@ -184,10 +178,10 @@ export default async function HomePage() {
             <PortalUseCaseGrid />
           </HorizontalCardCarouselFrame>
 
-          {/* PR の列は本文の最後に置かない。右レールが本文の下に回る幅で、レール先頭の AdSense と隣り合うため (2026-11-03) */}
+          {/* 広告の段 1 つ目 (用途から探す節の後) */}
           {homeRow1.length > 0 && (
             <section>
-              <AdRow cells={homeRow1} position="home-row-1" trackingCategory="home" />
+              <AdRow cells={homeRow1} position="home-row-1" trackingCategory="home" wide />
             </section>
           )}
 
@@ -206,7 +200,7 @@ export default async function HomePage() {
 
           {homeRow2.length > 0 && (
             <section>
-              <AdRow cells={homeRow2} position="home-row-2" trackingCategory="home" />
+              <AdRow cells={homeRow2} position="home-row-2" trackingCategory="home" wide />
             </section>
           )}
         </PageSections>
