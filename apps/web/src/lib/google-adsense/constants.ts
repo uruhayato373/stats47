@@ -156,6 +156,15 @@ export const AREA_END: AdSlotConfig = { slotId: "4738330430", format: "rectangle
  */
 export const AREA_INFEED: AdSlotConfig = { slotId: "9371196667", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-area-infeed
 
+/**
+ * 市区町村のランキング: 地図の後・順位の表とページ送りの後・ページの最後 (関連の後・出典の前)。
+ * 2026-11-12 オーナー決定: どれも AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR を外した。それまでは解説の後の 1 段だけで
+ * (AdSense・PR・AdSense の横並び。スマホでは先頭の 1 枠だけ)、ユニットはハブ・一覧と共用の HUB_INCONTENT / CONTENT_FOOTER だった。同日に専用のユニットを作った。
+ */
+export const MUNICIPALITY_AFTER_MAP: AdSlotConfig = { slotId: "7607523006", format: "rectangle" }; // stats47-municipality-after-map
+export const MUNICIPALITY_AFTER_TABLE: AdSlotConfig = { slotId: "4981359660", format: "rectangle" }; // stats47-municipality-after-table
+export const MUNICIPALITY_END: AdSlotConfig = { slotId: "1042114655", format: "rectangle" }; // stats47-municipality-end
+
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
   slotId: "6809797335",

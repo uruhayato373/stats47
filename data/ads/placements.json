@@ -958,25 +958,31 @@
     ],
     "municipality-ranking": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "ページの最後",
+        "position": "全国・県の分布地図の後 (絞り込みの前)",
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
         "marker": "position=\"municipality-row-1\"",
-        "trackingPosition": "municipality-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
+        "adsenseSlot": "MUNICIPALITY_AFTER_MAP",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
+      },
+      {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "順位の表とページ送りの後",
+        "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
+        "marker": "position=\"municipality-row-2\"",
+        "adsenseSlot": "MUNICIPALITY_AFTER_TABLE",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
+      },
+      {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "ページの最後 (同じ指標のランキング・記事・テーマの後・出典の前)",
+        "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
+        "marker": "position=\"municipality-row-end\"",
+        "adsenseSlot": "MUNICIPALITY_END",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       }
     ],
     "municipality-theme": [

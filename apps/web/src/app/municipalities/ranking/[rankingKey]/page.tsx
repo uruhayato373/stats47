@@ -31,9 +31,7 @@ import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
 import { STAT_VALUE_CLASS, ValueTable } from '@/components/surface';
 
-import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
-import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
-import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { AdRow, composeAdRows } from '@/features/ads';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 import {
   MunicipalityPrefectureLinks,
@@ -53,7 +51,7 @@ import {
 } from '@/features/municipalities/server';
 import { findDataProductForMunicipalityRanking, TrackedProductLink } from '@/features/products';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import { MUNICIPALITY_AFTER_MAP, MUNICIPALITY_AFTER_TABLE, MUNICIPALITY_END } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
@@ -117,15 +115,8 @@ export default async function MunicipalityRankingPage({
     searchParams,
   ]);
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) notFound();
-  // 広告の意図軸は metric config (git TS SSOT) の category → vertical。都道府県ランキングと同じ写像
-  const affiliateVertical = (() => {
-    const category = getMetricConfig(rankingKey)?.category;
-    return category ? CATEGORY_AFFILIATE_MAP[category] : undefined;
-  })();
-  const [{ item, values: snapshot }, nativeBanners, aiContent] = await Promise.all([
+  const [{ item, values: snapshot }, aiContent] = await Promise.all([
     readMunicipalityRanking(rankingKey),
-    // 意図軸が無い指標は汎用の案件 (2026-10-31)
-    resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
     readMunicipalityRankingCommentary(rankingKey),
   ]);
   if (!item || !snapshot) {
@@ -187,9 +178,13 @@ export default async function MunicipalityRankingPage({
     snapshot,
   });
 
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
   const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
-  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
+  // 広告の段 (2026-11-12 オーナー決定): 地図の後・順位の表の後・ページの最後に、AdSense 1 つを本文の幅いっぱいで出す (PR は出さない)
+  const [rowAfterMap, rowAfterTable, rowEnd] = composeAdRows(
+    [['adsense'], ['adsense'], ['adsense']],
+    [MUNICIPALITY_AFTER_MAP, MUNICIPALITY_AFTER_TABLE, MUNICIPALITY_END],
+    [],
+  );
   return (
     <PageShell>
       <MunicipalityRankingViewTracker
@@ -292,6 +287,12 @@ export default async function MunicipalityRankingPage({
             values={snapshot.values}
           />
         </Suspense>
+      )}
+
+      {rowAfterMap.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
       )}
 
       {dataProduct && (
@@ -438,6 +439,12 @@ export default async function MunicipalityRankingPage({
         </nav>
       )}
 
+      {rowAfterTable.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
+      )}
+
       {isMunicipalityPrefectureRankingKey(item.rankingKey) && (
         <MunicipalityPrefectureLinks
           rankingKey={item.rankingKey}
@@ -446,13 +453,6 @@ export default async function MunicipalityRankingPage({
       )}
 
       {commentary && <MunicipalityRankingCommentary content={commentary} />}
-
-      {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
-      {rowCells.length > 0 && (
-        <div className="mt-8">
-          <AdRow cells={rowCells} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} />
-        </div>
-      )}
 
       <div className="mt-8">
         <RelatedContentNavigation
@@ -463,6 +463,12 @@ export default async function MunicipalityRankingPage({
           surface="municipality_related"
         />
       </div>
+
+      {rowEnd.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowEnd} position="municipality-row-end" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
+      )}
 
       {/* 市区町村 snapshot に焼き込まれた出典 (都道府県 metric の統計表とは別の表を使う指標がある) */}
       <DataSourceList
