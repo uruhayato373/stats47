@@ -100,6 +100,9 @@
     "note:article": "node .claude/scripts/note/note-article.mjs",
     "note:price": "node .claude/scripts/note/update-note-price.mjs",
     "products:ledger": "node .claude/scripts/products/build-product-ledger.mjs",
+    "products:landing:assets": "tsx .claude/scripts/note/build-product-landing-assets.ts",
+    "products:landing:preview": "npm run generate:product-storefront --workspace=apps/web && tsx .claude/scripts/note/build-product-landing-preview.ts",
+    "products:landing:check": "npm run check:product-storefront --workspace=apps/web && tsx .claude/scripts/note/build-product-landing-preview.ts --check",
     "products:ledger:test": "node --test .claude/scripts/products/__tests__/*.test.mjs .claude/scripts/note/__tests__/price-change.test.mjs",
     "note:article:test": "node --test .claude/scripts/note/__tests__/article-store.test.mjs .claude/scripts/note/__tests__/article-ledger.test.mjs",
     "note:reference:test": "node --import tsx --test .claude/scripts/note/reference/__tests__/reference-note.test.ts",
@@ -176,6 +179,8 @@
     "fetch-gsc-snapshot": "node .claude/scripts/metrics/fetch-gsc-snapshot.mjs",
     "fetch-ga4-snapshot": "node .claude/scripts/metrics/fetch-ga4-snapshot.mjs",
     "fetch-adsense-snapshot": "node .claude/scripts/metrics/fetch-adsense-snapshot.mjs",
+    "fetch-adsense-page-types": "node .claude/scripts/metrics/fetch-adsense-page-types.mjs",
+    "fetch-popular-blog-articles": "node .claude/scripts/metrics/fetch-popular-blog-articles.mjs",
     "metrics:digest": "node .claude/scripts/metrics/update-history-csv.mjs",
     "metrics:adsense-impact": "node .claude/scripts/metrics/measure-adsense-impact.mjs",
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
@@ -284,7 +289,10 @@
     "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push",
     "weekly:audits": "node .claude/scripts/management/run-weekly-audits.mjs",
     "weekly:collect": "bash scripts/scheduled/weekly-saturday.sh",
-    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs"
+    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs",
+    "products:analysis:build": "tsx .claude/scripts/products/build-analysis-pack.ts",
+    "products:analysis:check": "tsx .claude/scripts/products/build-analysis-pack.ts --check",
+    "products:analysis:catalog": "tsx .claude/scripts/products/check-analysis-catalog.ts"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.517",

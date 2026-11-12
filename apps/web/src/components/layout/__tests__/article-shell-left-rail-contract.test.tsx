@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { ArticleShell } from '../ArticleShell';
+import { RIGHT_RAIL_GRID_CLASS } from '../PageShell';
 
 const MAIN = <p>article-content</p>;
 const LEFT = <nav aria-label="article-left-rail">left</nav>;
@@ -65,7 +66,9 @@ describe('ArticleShell — leftRail', () => {
     const rails = column?.parentElement?.querySelectorAll(':scope > aside') ?? [];
     expect(rails).toHaveLength(1);
     expect(rails[0]).not.toHaveClass('hidden');
-    expect(rails[0]).toHaveClass('mt-4', '@min-[988px]/shell:mt-0', '@min-[988px]/shell:w-[316px]');
+    expect(rails[0]).toHaveAttribute('data-slot', 'shell-rail');
+    expect(rails[0]).toHaveClass('grid', 'grid-cols-1', '@min-[640px]/shell:grid-cols-2', 'rail:grid-cols-1');
+    expect(column?.parentElement).toHaveClass(RIGHT_RAIL_GRID_CLASS);
     expect(column?.nextElementSibling).toBe(rails[0]);
   });
 

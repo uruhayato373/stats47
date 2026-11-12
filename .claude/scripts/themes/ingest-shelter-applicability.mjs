@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 /** Only the two symbols explicitly documented for this snapshot are accepted. */
 export function parseApplicabilityMarker(value) {
@@ -61,7 +62,7 @@ export async function main() {
   );
   const prefList = JSON.parse(
     fs.readFileSync(
-      path.join(repo, 'packages/area/src/data/prefectures.json'),
+      path.join(repo, datasetPath('areas.prefectures')),
       'utf8'
     )
   );

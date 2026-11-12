@@ -33,12 +33,16 @@ function runPlacementGuard(blogPage: string) {
 }
 
 describe("right rail banner contract", () => {
-  it("placement guard accepts contextual image banners and detects their removal", () => {
+  // 2026-11-12: blog の右レールの PR のバナーは AdSense に替えた。画像バナーは必須でなくなり、
+  // 宣伝カードやテキスト広告を右レールに置くと止まることを確かめる
+  it("placement guard accepts the blog rail and detects non-banner PR components", () => {
     const blogPage = source("apps/web/src/app/blog/[slug]/page.tsx");
     expect(runPlacementGuard(blogPage).status).toBe(0);
-    const missing = runPlacementGuard(blogPage.replace(/<BannerAd\b/g, "<UnregisteredImage"));
-    expect(missing.status).toBe(1);
-    expect(missing.messages).toContain("blog 右レールに画像バナーがない");
+    const withCard = runPlacementGuard(
+      blogPage.replace("<OperatorProfileCard />", "<OperatorProfileCard />\n            <FurusatoNozeiCard />"),
+    );
+    expect(withCard.status).toBe(1);
+    expect(withCard.messages).toContain("右レールに画像バナー契約外の PR component がある: FurusatoNozeiCard");
     // 配置ガードを 2 回実行する。Windows では 1 回 9〜20 秒かかり既定の 10 秒を超える (2026-10-27 実測)
   }, 60_000);
 
@@ -53,19 +57,15 @@ describe("right rail banner contract", () => {
     expect(rightRail).not.toContain("FurusatoNozeiCard");
   });
 
-  it("ranking right rails reject text affiliate fallbacks", () => {
+  // 2026-11-12 オーナー決定: ランキングの右レールの PR の枠は AdSense (中段) に替えた。テキスト広告・宣伝カードも置かない
+  it("ranking right rails show the middle AdSense instead of affiliate banners", () => {
     const rankingRail = source(
       "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
     );
 
-    expect(rankingRail).toContain("<SidebarPromoBanner");
-    expect(rankingRail).toContain("bannerOnly");
-    expect(rankingRail).toContain(
-      "!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners",
-    );
-    expect(
-      rankingRail.indexOf("!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners"),
-    ).toBeLessThan(rankingRail.indexOf("<SidebarPromoBanner"));
+    expect(rankingRail).toContain("<RailAdSlot slot={RANKING_RAIL_MIDDLE} />");
+    expect(rankingRail).not.toContain("<SidebarPromoBanner");
+    expect(rankingRail).not.toContain("<AffiliateAdSlot");
     expect(rankingRail).not.toContain("FurusatoNozeiCard");
   });
 
@@ -86,7 +86,8 @@ describe("right rail banner contract", () => {
     expect(bannerBranch).not.toContain("<SurfaceCard");
   });
 
-  it("blog right rails contain image promo banners but no text affiliate cards", () => {
+  // 2026-11-12 オーナー決定: blog の右レールは上段の AdSense と、最後の追従する 300×600。PR のバナー・テキスト広告は置かない
+  it("blog right rails show the top AdSense and the sticky 300x600 instead of affiliate banners", () => {
     const blogPage = source("apps/web/src/app/blog/[slug]/page.tsx");
     const railStart = blogPage.indexOf("const rail = (");
     const railEnd = blogPage.indexOf("// レール末尾", railStart);
@@ -94,8 +95,11 @@ describe("right rail banner contract", () => {
 
     expect(railStart).toBeGreaterThan(-1);
     expect(railEnd).toBeGreaterThan(railStart);
-    expect(railSource).toContain("sidebarBanners.map");
-    expect(railSource).toContain("<BannerAd");
+    expect(railSource).toContain("<RailAdSlot slot={BLOG_RAIL} />");
+    expect(railSource).toContain("<RailAdSlot slot={BLOG_RAIL_STICKY} sticky />");
+    // 追従は右レールの最後の 1 つだけ (Google: 同時に見える追従広告は 1 つ)
+    expect(railSource.match(/<RailAdSlot[^>]*\bsticky\b/g)).toHaveLength(1);
+    expect(railSource).not.toContain("<BannerAd");
     expect(railSource).not.toContain("BlogSidebarTextAds");
     expect(railSource).not.toContain("FurusatoNozeiCard");
   });

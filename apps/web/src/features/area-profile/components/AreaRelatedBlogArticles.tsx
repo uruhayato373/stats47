@@ -1,7 +1,6 @@
-import { Newspaper } from 'lucide-react';
+import type { ReactNode } from 'react';
 
-import { ContentNavigation } from '@/components/rail/ContentNavigation';
-
+import { RelatedArticles } from '@/features/content-navigation/RelatedArticles';
 import { readContentRecommendations } from '@/features/content-navigation/server';
 
 import type { AreaHighlights } from '@stats47/area-profile';
@@ -10,17 +9,22 @@ interface AreaRelatedBlogArticlesProps {
   highlights: AreaHighlights;
   areaCode?: string;
   limit?: number;
+  /** 一覧の 3 件目の後に入れる広告 (県のページのインフィード広告。置き場は台帳の area) */
+  inFeedAd?: ReactNode;
 }
 
+/** 広告の前に置く記事の数 (Google の推奨: 広告と広告の間にコンテンツを 3 件以上。support.google.com/adsense/answer/9189037) */
+const IN_FEED_AD_AFTER = 3;
+
 /**
- * 県の特徴 (上位・下位のランキング) を読み解くブログ記事。県ページ本文の見出し付きカード 1 枚で、
- * 行はサムネイル (16:9・幅 96px) + 題名 + 矢印のリンク行 (RailLinksCard の media 行) を区切り線で並べる。
- * 列数はカードの幅で決める (1 列 20rem 以上を保てる数だけ)。
+ * 県の上位・下位の指標から選んだ記事を共通の関連記事欄へ渡す。inFeedAd は、記事の格子が 1 列のとき (スマホ) だけ 3 件目の後に出す。
+ * 2 列以上では一覧がページの上の方にあり、広告が最初の画面に入るので出さない (2026-11-12。台帳の noFirstView)
  */
 export async function AreaRelatedBlogArticles({
   highlights,
   areaCode,
   limit = 3,
+  inFeedAd,
 }: AreaRelatedBlogArticlesProps) {
   const rankingKeys = [...highlights.top, ...highlights.bottom].map(
     (row) => row.rankingKey
@@ -31,15 +35,11 @@ export async function AreaRelatedBlogArticles({
     rankingKeys,
     limit,
   });
-  // 関係の補助ラベル (「同じデータを読み解く記事」) は見出しと同じことを繰り返すだけなので渡さない
-  const withoutReason = items.map((item) => ({ ...item, reason: '' }));
   return (
-    <ContentNavigation
-      title="この県の特徴を読み解く記事"
-      icon={<Newspaper />}
-      items={withoutReason}
+    <RelatedArticles
+      items={items}
       surface="area_blog"
-      columns={3}
+      insertAfter={inFeedAd ? { index: IN_FEED_AD_AFTER, node: inFeedAd } : undefined}
     />
   );
 }

@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, REGISTRIES, REGISTRY_REFS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS, KDP_LISTINGS } from "../../../../config/paths.mjs";
-import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, refValues, retiredHits, selectPath } from "../check-datasets.mjs";
+import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, parseGrepRows, patternToRegExp, refValues, retiredHits, selectPath } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 import { CONFIG_MOVE_PENDING, DATA_README_PENDING, OUTSIDE_DATA, SYSTEM_CONFIG } from "../../../../config/datasets.mjs";
 import { buildEr, checkDataReadmes, checkOutsideData, checkPlacement } from "../check-datasets.mjs";
@@ -429,8 +429,11 @@ test("台帳参照が宣言されている (投稿→指標・販売→出品・
   assert.ok(refsOf("sns.posts").some((r) => r.field === "posts[].parent_post_id" && r.to === "sns.posts" && !r.severity));
   assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["kdp.listings"]);
   assert.ok(refsOf("sales.ledger").every((r) => !r.severity));
-  assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "registry:product-ids" && !r.severity));
-  assert.ok(REGISTRY_REFS.some((r) => r.to === "affiliate.experiments" && !r.severity));
+  assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "products.packs" && !r.severity));
+  assert.ok(refsOf("affiliate.ads").some((r) => r.field === "ads[].experimentId" && r.to === "affiliate.experiments" && !r.severity));
+  // Geo のコンテンツは事業計画のコンテンツの機会を ID で指す (位置から作っていた ID を 2026-11-11 に台帳へ固定した)
+  assert.ok(refsOf("geo.content-lifecycle").some((r) => r.field === "contents.$keys" && r.to === "business-plan.content-opportunities" && !r.severity));
+  assert.ok(refsOf("geo.analyses").some((r) => r.field === "analyses.*.contentId" && r.to === "business-plan.content-opportunities"));
 });
 
 test("[mutation] 厳格化した schema は知らない項目と語彙外の値を落とす", () => {
@@ -630,26 +633,29 @@ test("[mutation] data/ の中の README は一覧に無ければ落ち、消し�
   assert.match(checkDataReadmes({ files: ["data/a/x.json"], pending })[0], /DATA_README_PENDING に無いファイル: data\/a\/README\.md/);
 });
 
-test("ER は refs からテーブル・外部キー・統合の候補 (写し・1 対 1) を出す", () => {
+test("ER は refs からテーブル・外部キーを出し、統合の候補は写しを持つ参照だけにする", () => {
   const row = (id, path, kind, opts = {}) => ({ id, path, kind, domain: "site", target: "data", description: id, ...opts });
-  const store = {
-    "data/a.json": { items: [{ id: "x", title: "X" }, { id: "y", title: "Y" }] },
-    "data/b.json": { rows: [{ a: "x", title: "X" }, { a: "y", title: "Y" }] },
-    "data/c.json": { rows: [{ a: "x" }, { a: "x" }] },
-  };
   const er = buildEr({
     datasets: [
       row("t.a", "data/a.json", "master"),
       row("t.b", "data/b.json", "ledger", { refs: [{ field: "rows[].a", to: "t.a", key: "items[].id", copies: ["title"] }] }),
+      // 値が重複なく参照先を 1 件ずつ指すだけ (1 対 1) の参照。書き手や生成の記録が別の台帳もこの形になるので候補にしない
       row("t.c", "data/c.json", "ledger", { refs: [{ field: "rows[].a", to: "t.a", key: "items[].id" }] }),
       row("t.log", "data/log.csv", "series"),
     ],
-    files: Object.keys(store),
-    readJson: (p) => store[p],
   });
   assert.deepEqual(er.tables.map((t) => t.id), ["t.a", "t.b", "t.c"], "series はテーブルに数えない");
   assert.equal(er.edges.length, 2);
-  assert.deepEqual(er.candidates.map((c) => `${c.kind}:${c.from}`), ["写しを持つ:t.b", "1 対 1:t.b"], "重複して指す t.c は候補にしない");
+  assert.deepEqual(er.candidates.map((c) => `${c.kind}:${c.from}`), ["写しを持つ:t.b"], "写しを持たない t.c は候補にしない");
+  assert.match(er.candidates[0].detail, /rows\[\]\.a が title を写している/);
+});
+
+test("git grep の出力は CRLF の行も読む (Windows の作業ツリーで違反を見逃さない)", () => {
+  // 作業ツリーが CRLF のファイルは行末に \r が残る。落とさないと行ごと読み飛ばし、Windows でだけ検査が通る
+  const rows = parseGrepRows('a/x.mjs:3:const p = "data/gsc/x.json";\r\nb/y.mjs:7:const q = "data/sns/y.json";\n');
+  assert.deepEqual(rows.map((r) => `${r.file}:${r.line}`), ["a/x.mjs:3", "b/y.mjs:7"]);
+  assert.equal(rows[0].text.endsWith("\r"), false);
+  assert.equal(findDataPathLiterals(["gsc", "sns"], rows).length, 2, "CRLF の行の直書きも数える");
 });
 
 test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の表 ID を書いていない", () => {

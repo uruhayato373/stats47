@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, it, expect } from "vitest";
 import { ALL_PRODUCTS } from "../src/catalog/products";
 import { validateCatalog } from "../src/validators/catalog-validator";
@@ -49,6 +51,17 @@ describe("pack catalog", () => {
         }
       }
     }
+  });
+
+  it("実データの台帳 (products.pack-datasets) の 55 件は key がファイル名と同じで、登録簿と同じ集合", () => {
+    const dir = resolve(__dirname, "../../../data/products/packs/datasets");
+    const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
+    expect(files).toHaveLength(55);
+    for (const file of files) {
+      const { key } = JSON.parse(readFileSync(resolve(dir, file), "utf8")) as { key: string };
+      expect(`${key}.json`).toBe(file);
+    }
+    expect([...DATASET_KEYS].sort()).toEqual(files.map((f) => f.replace(/\.json$/, "")).sort());
   });
 
   it("権利確認前の非商用データを有償パックへ収録しない", () => {

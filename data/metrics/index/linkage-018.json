@@ -9138,6 +9138,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-05",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:nursing-welfare-facility-count-per-100k-65plus",
           "kind": "ranking"
         }

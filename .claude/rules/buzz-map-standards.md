@@ -73,7 +73,7 @@ paths:
 ## 2. spec（1カード/1動画 = 1 JSON）
 
 - 型定義の正本: `apps/remotion/src/features/buzz-map/types.ts`（`BuzzMapSpec`）
-- 置き場: `apps/remotion/src/features/buzz-map/specs/<id>.json`（**`{"spec": {...}}` の形で保存** ＝ そのまま `--props` に渡せる）
+- 置き場: 台帳 `sns.buzz-map-specs`（1 枚 1 ファイル `<id>.json`。**`{"spec": {...}}` の形で保存** ＝ そのまま `--props` に渡せる。見本の `sample-*` だけは Remotion の `specs/`）
 - コード体系: 都道府県=2桁（"01"〜"47"）/ 市区町村=N03_007 5桁
 - `level`: `pref` / `muni`（全国市区町村）/ `muni:NN`（県トリム）。muni は県境オーバーレイが自動で乗る
 - `theme`: `blue`（既定・省略可）/ `dark` / `paper`（§1 配色規則）。ヘルパーは `--theme` で指定可
@@ -88,6 +88,7 @@ paths:
 | 地名点（gsi レーン） | R2 `gis/gsi-pni/points.json`（`fetch-gsi-place-names.ts` が生成） | 国土地理院 電子国土基本図（地名情報）ベクトルタイル z15（居住地名=`experimental_nrpt`・admCode あり / 自然地名=`experimental_nnfpt`・峠/山/川 等）。全国点データ `[{name,kana,kind:admin\|nature,featureType,lon,lat,pref}]`。**PDL1.0 準拠・出典明記で商用/SNS 可**（`gsi.go.jp/kikakuchousei/kikakuchousei40182.html`）。取得は一度きり、以後は R2 を読む分析基盤 |
 
 - 本土は固定フレーム（`MAINLAND_BBOX`）に投影。**小笠原・大東諸島等の外れ島は v1 では非描画**（沖縄・先島はインセットに集約。大東諸島はインセットの fit からも除外 = `inInsetDomain`）
+- 全自治体を比較する共通画像型では `computeBuzzMapGeo` の `includeOffshore` を使い、南方の離島を別位置・別縮尺にして残す。投影前に地域台帳の対象集合へ絞り、描画後も欠測を含め全コードの境界を検査する。この指定は塗り地図用で、点・線の合成には使わない。
 - 市区町村の合併・境界改定でデータ年次と地図年次がずれる場合は topojson の年次を明記して差し替える（gis-curator 相談）
 - **地名点は居住地名に `admCode`（県コード）が入る**ため県別集計が空間 join なしで可能（「◯◯地名が多い県」等のブログ/ランキング素材化）。自然地名は行政コードを持たない（県別集計は空間 join が要る＝将来拡張）
 

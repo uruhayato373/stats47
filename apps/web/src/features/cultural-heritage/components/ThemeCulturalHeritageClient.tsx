@@ -10,6 +10,7 @@ import { CULTURAL_HERITAGE_SOURCE as source } from '@stats47/data-configs/theme-
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
@@ -154,28 +155,18 @@ function HeritageView({
             .join('、')}
           。同じ文化財が複数の種類に含まれる場合があります。
         </p>
-        <div
-          className="flex flex-wrap gap-2"
-          role="group"
+        <SingleSelectToggleGroup
           aria-label="文化財の種類で絞り込み"
-        >
-          {[{ key: 'all' as const, label: 'すべて' }, ...source.categories].map(
-            (category) => (
-              <Button
-                key={category.key}
-                size="sm"
-                variant={kind === category.key ? 'default' : 'outline'}
-                aria-pressed={kind === category.key}
-                onClick={() => {
-                  setKind(category.key);
-                  setPage(0);
-                }}
-              >
-                {category.label}
-              </Button>
-            )
-          )}
-        </div>
+          value={kind}
+          onValueChange={value => {
+            setKind(value);
+            setPage(0);
+          }}
+          options={[
+            { value: 'all', label: 'すべて' },
+            ...source.categories.map(category => ({ value: category.key, label: category.label })),
+          ]}
+        />
         {located.length > 0 ? (
           <>
             <LocationsTable

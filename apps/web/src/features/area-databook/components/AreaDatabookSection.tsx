@@ -1,3 +1,5 @@
+import { Fragment, type ReactNode } from "react";
+
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { BookOpen } from "lucide-react";
 
@@ -25,6 +27,8 @@ import type {
 interface Props {
   areaCode: string;
   areaName: string;
+  /** 節の前に差し込むもの (節キー → 要素)。県のページの広告の段に使う。節が無い県では出ない */
+  insertBefore?: Readonly<Record<string, ReactNode>>;
 }
 
 /** editorial 依存ブロック (symbol/specialty) しか無く editorial が無いセクションは隠す。 */
@@ -152,7 +156,7 @@ function renderBlock(
  * - databook 未生成 (本番で exporter 未反映) の県は従来チャート表示にフォールバックする
  *   (段階展開の安全弁)。正典: .claude/rules/area-databook-standards.md
  */
-export async function AreaDatabookSection({ areaCode, areaName }: Props) {
+export async function AreaDatabookSection({ areaCode, areaName, insertBefore }: Props) {
   const data = await getAreaDatabook(areaCode);
 
   // databook 未生成 → 従来のチャートセクションにフォールバック (無挙動変化)
@@ -177,8 +181,9 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
       {sections.map((section) => {
         const useHalfWidthCharts = hasMultipleHalfWidthCharts(section);
         return (
+          <Fragment key={section.sectionKey}>
+          {insertBefore?.[section.sectionKey]}
           <PanelGrid as="section"
-            key={section.sectionKey}
             id={`databook-${section.sectionKey}`}
             aria-labelledby={`databook-${section.sectionKey}-title`}
             className="scroll-mt-24"
@@ -224,6 +229,7 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
               )}
             </PanelGrid>
           </PanelGrid>
+          </Fragment>
         );
       })}
     </PanelGrid>

@@ -13,6 +13,7 @@
  */
 import * as fs from "fs";
 import * as path from "path";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 interface Port {
   port_code: string;
@@ -44,9 +45,18 @@ const PROJECT_ROOT = path.join(APP_ROOT, "..", "..");
 const TEMPLATES_DIR = path.join(APP_ROOT, "templates");
 const OUTPUT_BASE_DIR = path.join(PROJECT_ROOT, ".local", "r2", "ges", "ports");
 
-// 完全DBレス (docs/01_技術設計/02_データアーキテクチャ.md): ports master は git TS の静的
-// Reference。D1 ではなく同梱 JSON (D1 ports テーブル 699 件と同一・port_code 順) を読む。
-const PORTS_JSON = path.join(__dirname, "data", "ports.json");
+// 港湾のマスタ (台帳 areas.ports。port_code 順) を読む。
+const PORTS_JSON = path.join(PROJECT_ROOT, datasetPath("areas.ports"));
+
+/** 港湾のマスタの 1 件 (使う項目だけ) */
+interface PortMasterRecord {
+  portCode: string;
+  portName: string;
+  prefectureName: string;
+  portGrade?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+}
 
 // テンプレート基準座標（神戸港 — 港湾用テンプレートがない場合は既存の兵庫県テンプレートを使用）
 const TEMPLATE_LAT = 34.691269;
@@ -141,7 +151,14 @@ function parseArgs(): {
 }
 
 function fetchPorts(grades: string[], portCode?: string, limit?: number): Port[] {
-  const all = JSON.parse(fs.readFileSync(PORTS_JSON, "utf8")) as PortRow[];
+  const all: PortRow[] = (JSON.parse(fs.readFileSync(PORTS_JSON, "utf8")) as PortMasterRecord[]).map((p) => ({
+    port_code: p.portCode,
+    port_name: p.portName,
+    prefecture_name: p.prefectureName,
+    port_grade: p.portGrade ?? null,
+    latitude: p.latitude ?? null,
+    longitude: p.longitude ?? null,
+  }));
   const hasCoords = (p: PortRow): boolean =>
     p.latitude != null && p.longitude != null;
 

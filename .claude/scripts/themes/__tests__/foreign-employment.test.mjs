@@ -5,7 +5,7 @@ import { extractForeignEmployment } from '../ingest-foreign-employment.mjs';
 
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 function fixture() {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet('別表２');

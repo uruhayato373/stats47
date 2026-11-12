@@ -1,0 +1,1907 @@
+{
+  "metrics": {
+    "elderly-population-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minExclusive": 0,
+        "maxInclusive": 100
+      }
+    },
+    "total-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "population-density-per-km2-inhabitable-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minInclusive": 0
+      }
+    },
+    "young-population-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minInclusive": 0,
+        "maxInclusive": 100
+      }
+    },
+    "production-age-population-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minInclusive": 0,
+        "maxInclusive": 100
+      }
+    },
+    "households": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moving-in-excess-rate": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "census-population-change-rate-5y": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "census-population-change-5y": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "census-household-change-rate-5y": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "abandoned-cultivated-land-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "agricultural-output": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "annual-sales-amount": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "annual-sales-amount-per-employee": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "annual-sales-amount-per-establishment": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "births": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "civil-engineering-expense-municipal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commute-by-bicycle": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commute-by-bus": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commute-by-car": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commute-by-motorcycle": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commute-by-train": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commute-on-foot": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commuter-ratio-from-other-municipalities": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commuter-ratio-to-other-municipalities": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "commuters-total": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "crime-rate-per-1k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "criminal-recognition-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "cultivated-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "current-balance-ratio-city": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "day-time-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "day-time-population-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "death-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "densely-inhabited-district-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "densely-inhabited-district-population-density": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "densely-populated-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "densely-populated-area-change-rate": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "dental-clinic-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "dentists-in-medical-facilities": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "department-store-count-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "department-supermarket-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "department-supermarket-count-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "divorces": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "earthquake-retrofit-housing": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "education-expense-municipal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "elderly-couple-only-household-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "elderly-workers-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "elementary-school-children-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "elementary-school-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "elementary-school-count-per-100km2-habitable": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "elementary-school-teachers": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "employed-people-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "employed-people-ratio-primary": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "employed-people-ratio-secondary": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "employed-people-ratio-tertiary": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "fiscal-strength-index": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minExclusive": 0
+      }
+    },
+    "foreign-population-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "foreign-resident-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "foreign-resident-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "forest-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "future-burden-ratio-city": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "garbage-collection-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "garbage-final-disposal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "garbage-total-output": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "general-clinic-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "general-clinic-count-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "general-clinic-count-per-100km2": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "general-hospital-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "general-hospital-count-per-100km2": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "general-hospital-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "habitable-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "habitable-area-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "high-school-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "high-school-count-per-100km2-habitable": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "housing-floor-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "integrated-kindergarten-enrollment": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "intellectual-disability-support-facility-capacity": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "intellectual-disability-support-facility-residents": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "japanese-movers-in": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "japanese-movers-out": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "japanese-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "junior-high-school-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "junior-high-school-count-per-100km2-habitable": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "junior-high-school-students-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "junior-high-school-teachers": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "kei-car-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "large-retail-store-count-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "library-count-per-million": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "manufacturing-employees": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "manufacturing-establishments": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "manufacturing-net-value-added-private": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "manufacturing-sales-private": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "manufacturing-shipment": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "manufacturing-shipment-amount": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "marriages": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moped-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "motorcycle-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "movers-in": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "movers-out": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moving-in-excess-rate-japanese": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moving-in-rate": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moving-in-rate-japanese": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moving-out-rate": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "moving-out-rate-japanese": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "municipal-bonds-outstanding": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "municipal-general-administration-staff": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "municipal-resident-tax": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "national-health-insurance-benefits": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "new-condo-starts": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "new-housing-floor-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "new-housing-starts": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "new-owner-occupied-starts": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "new-rental-starts": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "nuclear-family-household-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "nuclear-family-households-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-commercial-employees-wholesale-retail": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-agriculture-forestry": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-agriculture-forestry-fisheries": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-construction": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-economic-census-basic-survey": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-education-learning-support": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-establishment-corporate-statistics": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-finance-insurance": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-fisheries": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-information-communication": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-manufacturing": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-medical-welfare": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-mining-quarrying-gravel-extraction": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-real-estate-leasing": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-transport-post": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "number-of-establishments-wholesale-retail": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "nursing-welfare-facility-count-per-100k-65plus": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "outflow-commuter-student-population": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "owner-occupied-housing-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "per-taxpayer-income": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "per-taxpayer-taxable-income": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "pharmacist-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "physical-disability-rehabilitation-facility-capacity": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "physical-disability-rehabilitation-facility-residents": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "physicians-in-medical-facilities": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "psychiatric-hospital-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "public-assistance-expense-municipal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "public-hall-count-per-million": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "ratio-never-married-15-plus": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "real-balance-ratio-city": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "real-public-debt-service-ratio-city": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "restaurant-count-per-1000": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "retail-store-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "retail-store-count-per-1000": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "retail-stores-per": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "sales-amount-private": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "sanitation-expense-municipal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "secondary-employed-people-ratio-tertiary": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "single-father-households": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "single-mother-households": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "single-person-household-old-population-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "single-person-households": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "solar-power-housing": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "standard-fiscal-demand-municipality": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "standard-fiscal-revenue-municipality": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "taxpayer-count-equal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "taxpayer-count-income": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "total-area-excluding-northern-territories-and-takeshima": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "total-area-prefecture-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "total-assessed-land-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "traffic-accident-count": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "traffic-accident-per-100k": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "unemployment-rate": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "urban-planning-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "vacant-housing-ratio": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "welfare-expense-municipal": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "wholesale-annual-sales-amount": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "woodland-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "workers-agriculture-forestry-fishery": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ]
+    },
+    "penal-code-offenses-recognized-per-1000": {
+      "status": "unsupported",
+      "reason": "crime-rate-per-1k と観測値が完全一致 (同一系列の別名)。限定子付き title の側を公開"
+    },
+    "foreign-resident-count-per-100k": {
+      "status": "unsupported",
+      "reason": "foreign-population-per-100k と観測値が完全一致。限定子付き title の側を公開"
+    },
+    "general-hospital-count-per-100k": {
+      "status": "unsupported",
+      "reason": "general-hospital-per-100k と観測値が完全一致。限定子付き title の側を公開"
+    },
+    "population-density-habitable": {
+      "status": "unsupported",
+      "reason": "population-density-per-km2-inhabitable-area と観測値が完全一致の重複"
+    },
+    "retail-store-count-alt": {
+      "status": "unsupported",
+      "reason": "retail-store-count と観測値が完全一致の重複 (alt)"
+    },
+    "traffic-accident-count-per-population": {
+      "status": "unsupported",
+      "reason": "traffic-accident-per-100k と観測値が完全一致。限定子付き title の側を公開"
+    },
+    "ratio-65-plus": {
+      "status": "unsupported",
+      "reason": "elderly-population-ratio (公開済み) と同一指標。二重公開しない"
+    },
+    "industrial-land-price": {
+      "status": "unsupported",
+      "reason": "2005年のみ・値ありは1,912行中426 (22%)。古く欠損が多く順位として成立しない"
+    },
+    "major-lake-area": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minExclusive": 0
+      }
+    },
+    "culture-recreation-cost-all-households": {
+      "status": "unsupported",
+      "reason": "e-Stat に市区町村の表が無い (2026-11-01 data-refresh run 41266516833 の dry_run で city=skip(no-city-table))。都道府県の指標"
+    },
+    "education-cost-all-households": {
+      "status": "unsupported",
+      "reason": "e-Stat に市区町村の表が無い (2026-11-01 data-refresh run 41266516833 の dry_run で city=skip(no-city-table))。都道府県の指標"
+    },
+    "healthcare-cost-all-households": {
+      "status": "unsupported",
+      "reason": "e-Stat に市区町村の表が無い (2026-11-01 data-refresh run 41266516833 の dry_run で city=skip(no-city-table))。都道府県の指標"
+    },
+    "housing-cost-all-households": {
+      "status": "unsupported",
+      "reason": "e-Stat に市区町村の表が無い (2026-11-01 data-refresh run 41266516833 の dry_run で city=skip(no-city-table))。都道府県の指標"
+    },
+    "nursery-waiting-children-rate": {
+      "status": "published",
+      "entityPolicyKey": "standard-municipality-v1",
+      "comparisonModes": [
+        "ranking",
+        "prefecture-filter",
+        "municipality-search"
+      ],
+      "valuePolicy": {
+        "minExclusive": 0
+      }
+    }
+  },
+  "batches": [
+    {
+      "title": "第1拡充バッチ (2026-09-01 公開・人手品質判断の根拠は各コメント)",
+      "note": "共通根拠: expansion-survey (2026-09-01) で machine-clean (1,913 entity・重複0・unknownCode 0)。公開R2 cities.json の最新年 top/bottom 5 を常識照合済み (特別区部9,733,276人・豊島区23,182人/km²等)。双葉町 (07546・2020国勢調査人口0) は count系=実値0を保持 / 比率系=元データが null で既に除外済み。",
+      "metricKeys": [
+        "total-population",
+        "population-density-per-km2-inhabitable-area",
+        "young-population-ratio",
+        "production-age-population-ratio",
+        "households",
+        "moving-in-excess-rate"
+      ]
+    },
+    {
+      "title": "令和7年国勢調査の5年間の増減 (2026-10-21 MUNI-PAGE-QUALITY-01)",
+      "note": "2025年確定値 (2026-09-29公表) と、2025年の境域に組み替えた2020年の比較。R2 cities.json を監査: 1,913 区域 (政令市の区・特別区部の集約行を含み、entity policy が除く)。双葉町は2020年の人口が0で率を定義できず欠測 (除外される)。負の極値は珠洲市 -34.6%・輪島市 -28.3% (能登半島地震)、正の極値は大熊町 +81.0% (帰還) でいずれも実値のため上下限を設けない。「◯◯市 人口」の検索 (W41 1,840 imp) が知りたい人口の推移を出す。",
+      "metricKeys": [
+        "census-population-change-rate-5y",
+        "census-population-change-5y",
+        "census-household-change-rate-5y"
+      ]
+    },
+    {
+      "title": "第2バッチ: 全量公開 (2026-09-01 オーナー指示「公開できるものは全て公開したい」)",
+      "note": "根拠: expansion-survey (値分布まで機械監査済み)。除外は下の unsupported/unknown 群に理由付きで記録。同名 title の系列 (事業所数×業種、日本人/総数系など) は generator が subtitle を焼き込みページ title で区別する (衝突が残ると generator が throw する fail-closed)。",
+      "metricKeys": [
+        "abandoned-cultivated-land-area",
+        "agricultural-output",
+        "annual-sales-amount",
+        "annual-sales-amount-per-employee",
+        "annual-sales-amount-per-establishment",
+        "births",
+        "civil-engineering-expense-municipal",
+        "commute-by-bicycle",
+        "commute-by-bus",
+        "commute-by-car",
+        "commute-by-motorcycle",
+        "commute-by-train",
+        "commute-on-foot",
+        "commuter-ratio-from-other-municipalities",
+        "commuter-ratio-to-other-municipalities",
+        "commuters-total",
+        "crime-rate-per-1k",
+        "criminal-recognition-count",
+        "cultivated-area",
+        "current-balance-ratio-city",
+        "day-time-population",
+        "day-time-population-ratio",
+        "death-count",
+        "densely-inhabited-district-population",
+        "densely-inhabited-district-population-density",
+        "densely-populated-area",
+        "densely-populated-area-change-rate",
+        "dental-clinic-count",
+        "dentists-in-medical-facilities",
+        "department-store-count-per-100k",
+        "department-supermarket-count",
+        "department-supermarket-count-per-100k",
+        "divorces",
+        "earthquake-retrofit-housing",
+        "education-expense-municipal",
+        "elderly-couple-only-household-ratio",
+        "elderly-workers-ratio",
+        "elementary-school-children-count",
+        "elementary-school-count",
+        "elementary-school-count-per-100km2-habitable",
+        "elementary-school-teachers",
+        "employed-people-ratio",
+        "employed-people-ratio-primary",
+        "employed-people-ratio-secondary",
+        "employed-people-ratio-tertiary",
+        "fiscal-strength-index",
+        "foreign-population-per-100k",
+        "foreign-resident-count",
+        "foreign-resident-population",
+        "forest-area",
+        "future-burden-ratio-city",
+        "garbage-collection-population",
+        "garbage-final-disposal",
+        "garbage-total-output",
+        "general-clinic-count",
+        "general-clinic-count-per-100k",
+        "general-clinic-count-per-100km2",
+        "general-hospital-count",
+        "general-hospital-count-per-100km2",
+        "general-hospital-per-100k",
+        "habitable-area",
+        "habitable-area-ratio",
+        "high-school-count",
+        "high-school-count-per-100km2-habitable",
+        "housing-floor-area",
+        "integrated-kindergarten-enrollment",
+        "intellectual-disability-support-facility-capacity",
+        "intellectual-disability-support-facility-residents",
+        "japanese-movers-in",
+        "japanese-movers-out",
+        "japanese-population",
+        "junior-high-school-count",
+        "junior-high-school-count-per-100km2-habitable",
+        "junior-high-school-students-count",
+        "junior-high-school-teachers",
+        "kei-car-count",
+        "large-retail-store-count-per-100k",
+        "library-count-per-million",
+        "manufacturing-employees",
+        "manufacturing-establishments",
+        "manufacturing-net-value-added-private",
+        "manufacturing-sales-private",
+        "manufacturing-shipment",
+        "manufacturing-shipment-amount",
+        "marriages",
+        "moped-count",
+        "motorcycle-count",
+        "movers-in",
+        "movers-out",
+        "moving-in-excess-rate-japanese",
+        "moving-in-rate",
+        "moving-in-rate-japanese",
+        "moving-out-rate",
+        "moving-out-rate-japanese",
+        "municipal-bonds-outstanding",
+        "municipal-general-administration-staff",
+        "municipal-resident-tax",
+        "national-health-insurance-benefits",
+        "new-condo-starts",
+        "new-housing-floor-area",
+        "new-housing-starts",
+        "new-owner-occupied-starts",
+        "new-rental-starts",
+        "nuclear-family-household-count",
+        "nuclear-family-households-ratio",
+        "number-of-commercial-employees-wholesale-retail",
+        "number-of-establishments-agriculture-forestry",
+        "number-of-establishments-agriculture-forestry-fisheries",
+        "number-of-establishments-construction",
+        "number-of-establishments-economic-census-basic-survey",
+        "number-of-establishments-education-learning-support",
+        "number-of-establishments-establishment-corporate-statistics",
+        "number-of-establishments-finance-insurance",
+        "number-of-establishments-fisheries",
+        "number-of-establishments-information-communication",
+        "number-of-establishments-manufacturing",
+        "number-of-establishments-medical-welfare",
+        "number-of-establishments-mining-quarrying-gravel-extraction",
+        "number-of-establishments-real-estate-leasing",
+        "number-of-establishments-transport-post",
+        "number-of-establishments-wholesale-retail",
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "outflow-commuter-student-population",
+        "owner-occupied-housing-ratio",
+        "per-taxpayer-income",
+        "per-taxpayer-taxable-income",
+        "pharmacist-count",
+        "physical-disability-rehabilitation-facility-capacity",
+        "physical-disability-rehabilitation-facility-residents",
+        "physicians-in-medical-facilities",
+        "psychiatric-hospital-count",
+        "public-assistance-expense-municipal",
+        "public-hall-count-per-million",
+        "ratio-never-married-15-plus",
+        "real-balance-ratio-city",
+        "real-public-debt-service-ratio-city",
+        "restaurant-count-per-1000",
+        "retail-store-count",
+        "retail-store-count-per-1000",
+        "retail-stores-per",
+        "sales-amount-private",
+        "sanitation-expense-municipal",
+        "secondary-employed-people-ratio-tertiary",
+        "single-father-households",
+        "single-mother-households",
+        "single-person-household-old-population-ratio",
+        "single-person-households",
+        "solar-power-housing",
+        "standard-fiscal-demand-municipality",
+        "standard-fiscal-revenue-municipality",
+        "taxpayer-count-equal",
+        "taxpayer-count-income",
+        "total-area-excluding-northern-territories-and-takeshima",
+        "total-area-prefecture-ratio",
+        "total-assessed-land-area",
+        "traffic-accident-count",
+        "traffic-accident-per-100k",
+        "unemployment-rate",
+        "urban-planning-area",
+        "vacant-housing-ratio",
+        "welfare-expense-municipal",
+        "wholesale-annual-sales-amount",
+        "woodland-area",
+        "workers-agriculture-forestry-fishery"
+      ]
+    },
+    {
+      "title": "公開しないと判断したもの (理由の記録。値重複 = 同一データの二重公開防止)",
+      "metricKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "foreign-resident-count-per-100k",
+        "general-hospital-count-per-100k",
+        "population-density-habitable",
+        "retail-store-count-alt",
+        "traffic-accident-count-per-population",
+        "ratio-65-plus",
+        "industrial-land-price",
+        "major-lake-area",
+        "culture-recreation-cost-all-households",
+        "education-cost-all-households",
+        "healthcare-cost-all-households",
+        "housing-cost-all-households",
+        "nursery-waiting-children-rate"
+      ]
+    }
+  ],
+  "notes": {
+    "elderly-population-ratio": [
+      "双葉町は2020年国勢調査人口が0で比率を定義できない。取得値0を欠測相当として除外する。"
+    ],
+    "total-population": [
+      "双葉町の0人は2020国勢調査の実値 (避難指示)。除外しない。"
+    ],
+    "population-density-per-km2-inhabitable-area": [
+      "人口0の団体は密度0が定義どおり成立するため除外しない。類似キー population-density-habitable は同一値 (min/max 完全一致) の重複のため公開しない。"
+    ],
+    "young-population-ratio": [
+      "0%は「子どもが1人もいない団体」として実在しうるため包含下限。0/0 (双葉町) は元データ null。"
+    ],
+    "moving-in-excess-rate": [
+      "e-Stat #A05307 (無印=外国人含む総数) を実メタで確認済み。負値は転出超過の実値(2020最小 浪江町 -14.98%) のため下限は設けない。"
+    ],
+    "commuter-ratio-from-other-municipalities": [
+      "1000%超は都心区・飛島村級で正当 (昼夜間比/流入比の実態)。上限は設けない"
+    ],
+    "day-time-population-ratio": [
+      "1000%超は都心区・飛島村級で正当 (昼夜間比/流入比の実態)。上限は設けない"
+    ],
+    "fiscal-strength-index": [
+      "unknown を 2026-09-01 に解消: cities.json の 0 は 194 行政区 + 特別区部の 195 件のみで、すべて entity policy が除外する対象。市町村本体に 0 は無い (実測)。minExclusive はそのガード。"
+    ],
+    "industrial-land-price": [
+      "2026-10-22 監査 (R2 cities.json 実測): 年は 2005 のみ、1,912 行中 値ありは 426 (22%)。20 年前の値を 2 割の自治体だけで順位にしても読者の答えにならないため公開しない。"
+    ],
+    "major-lake-area": [
+      "2026-10-22 監査 (R2 cities.json 実測): 2024 年は 1,913 行中 0 が 1,793、正の値が 120。0 は「主要湖沼が無い」で欠損ではない。湖のある自治体だけの順位 (琵琶湖の高島市・長浜市、宍道湖の松江市、摩周湖の弟子屈町など) は成立するので、0 を除いて公開する。"
+    ],
+    "nursery-waiting-children-rate": [
+      "2026-11-01 保育所等利用待機児童率 (こども家庭庁の参考 Excel から年 1 回の手動取り込み・MUNI-KOSODATE-METRICS-01)。1,741 市区町村のうち待機児童がいるのは 211 で、残りの 1,530 は値 0 (うち申込者 0 の 8 は値なし)。0 は「待機児童がいない」であって順位の対象ではないため、valuePolicy {minExclusive: 0} で 0 を除く。R2 の cities.json は 2026-11-01 に取り込んで読み戻しで確かめた (オーナー承認)。テーマは福祉施設 (保育所の数と並べる)。"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "note のシリーズ",
+  "description": "data/note/series.json の形状契約。note シリーズ (投稿系統の中の商品テーマ束) は、商品 family ではなく現行 14 パックのテーマ (products.packs の theme) を複数の読者用途へまとめたもの。series のキーがシリーズ ID (NoteProductSeries)、seriesByTheme はパックのテーマ → シリーズ。シリーズごとのテーマの一覧 (themes) は持たず、読み込み口 packages/product-factory/src/channels/note/series.ts が seriesByTheme から導く (NOTE_SERIES_REGISTRY)。defaultStats47Targets は記事からサイトへ戻す既定の遷移先 (パス)。",
+  "type": "object",
+  "required": ["series", "seriesByTheme"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "series": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "enum": ["prefecture-map-powerpoint","prefecture-excel-analysis","regional-data-packs","business-location-analysis","government-statistics-work","media-data-visuals","statistics-education","life-area-comparison","license-guide","free-samples"] },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "audience", "defaultStats47Targets"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "audience": { "type": "string", "minLength": 1 },
+          "defaultStats47Targets": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^/" } }
+        }
+      }
+    },
+    "seriesByTheme": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": { "enum": ["prefecture-map-powerpoint","prefecture-excel-analysis","regional-data-packs","business-location-analysis","government-statistics-work","media-data-visuals","statistics-education","life-area-comparison","license-guide","free-samples"] }
+    }
+  }
+}

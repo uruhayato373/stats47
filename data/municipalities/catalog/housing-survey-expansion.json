@@ -1,0 +1,65 @@
+{
+  "keys": [
+    "nursery-within-500m-young-child-household-ratio",
+    "elementary-school-within-1km-household-ratio",
+    "junior-high-school-within-1km-household-ratio",
+    "station-within-1km-household-ratio",
+    "medical-facility-within-500m-household-ratio",
+    "park-within-500m-household-ratio",
+    "evacuation-site-within-500m-household-ratio",
+    "post-office-bank-within-500m-household-ratio",
+    "elderly-day-service-within-500m-household-ratio",
+    "public-sewer-housing-ratio",
+    "vacant-housing-rate-excluding-rental-sale-secondary",
+    "vacant-housing-rate-for-rent",
+    "damaged-vacant-housing-ratio"
+  ],
+  "status": "published",
+  "candidateReason": "e-Stat の実測で値のある市区町村を確認済み。R2 の cities.json が未取り込み (data-refresh の承認待ち) のため公開集合に入れない",
+  "theme": {
+    "slug": "living-environment",
+    "title": "市区町村の住環境",
+    "defaultMetricKey": "station-within-1km-household-ratio"
+  },
+  "notes": {
+    "nursery-within-500m-young-child-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025628 cat01=R1・値のある地域 1,178・全国 47.4%。推計値の丸めで距離の割合が 100% をわずかに超える地域が 1 件ある。"
+    ],
+    "elementary-school-within-1km-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025630・値のある地域 1,235・全国 61.6%。"
+    ],
+    "junior-high-school-within-1km-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025631・値のある地域 1,210・全国 37.2%。"
+    ],
+    "station-within-1km-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025593・値のある地域 1,127・全国 43.6%。推計値の丸めで距離の割合が 100% をわずかに超える地域が 1 件ある。"
+    ],
+    "medical-facility-within-500m-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025621・値のある地域 1,231・全国 58.1%。推計値の丸めで距離の割合が 100% をわずかに超える地域が 1 件ある。"
+    ],
+    "park-within-500m-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025595・値のある地域 1,228・全国 69.8%。推計値の丸めで距離の割合が 100% をわずかに超える地域が 3 件ある。"
+    ],
+    "evacuation-site-within-500m-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025597・値のある地域 1,235・全国 58.9%。推計値の丸めで距離の割合が 100% をわずかに超える地域が 3 件ある。"
+    ],
+    "post-office-bank-within-500m-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025627・値のある地域 1,233・全国 48.7%。"
+    ],
+    "elderly-day-service-within-500m-household-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025626・値のある地域 1,220・全国 46.2%。"
+    ],
+    "public-sewer-housing-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004025576・値のある地域 1,191・全国 87.5%。"
+    ],
+    "vacant-housing-rate-excluding-rental-sale-secondary": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004021421・値のある地域 1,235・全国 5.9% (公表値と一致)。"
+    ],
+    "vacant-housing-rate-for-rent": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004021421・値のある地域 1,233・全国 6.8% (公表値と一致)。"
+    ],
+    "damaged-vacant-housing-ratio": [
+      "2026-10-28 の e-Stat getStatsData の実測: 表 0004021631・値のある地域 1,232・全国 17.6%。"
+    ]
+  }
+}

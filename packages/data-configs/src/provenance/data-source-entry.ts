@@ -6,6 +6,8 @@
  * 出典の文字列を画面側で組み立てない。正典: `.claude/rules/survey-linkage-standards.md` §2
  */
 
+import referenceSources from '../../../../data/provenance/reference-sources/sources.json';
+
 const ESTAT_TABLE_URL_BASE = 'https://www.e-stat.go.jp/dbview?sid=';
 
 /** e-Stat の統計表 (DB 表示) URL。statsDataId から URL を作る箇所はここだけにする。 */
@@ -33,6 +35,12 @@ export interface DataSourceEntry {
   license?: string;
   /** 値の出典ではない補助データの役割 (例: "地図データ")。行頭に小さく出す */
   note?: string;
+}
+
+/** 調査以外の共通出典。ID は JSON のキーに限定し、存在しない出典の参照を型検査で止める。 */
+export function getReferenceDataSource(id: keyof typeof referenceSources): DataSourceEntry {
+  const { name, ...metadata } = referenceSources[id];
+  return { label: name, ...metadata, tables: [] };
 }
 
 function entryKey(entry: DataSourceEntry): string {

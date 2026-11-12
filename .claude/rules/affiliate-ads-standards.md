@@ -8,7 +8,7 @@ paths:
 ---
 # アフィリエイト広告 標準 (SSOT + 意図ハブ + 共通ルール)
 
-`apps/web/scripts/affiliate-ads-data.ts` (`AFFILIATE_ADS: AffiliateAd[]`) を SSOT とする、
+広告の台帳 `affiliate.ads` (読み込み口は `AFFILIATE_ADS: AffiliateAd[]`) を SSOT とする、
 アフィリエイト広告の **意図軸 (vertical)・利用プログラム・サイズ・配置/priority・計測** の**単一ソース**。
 `affiliate-manager` agent / `/register-affiliate-banner` / `/affiliate-improvement` / 人間はこれに従う。
 
@@ -17,8 +17,8 @@ paths:
 > 旅行ページに旅行広告が出ない、(4) GA4 custom dimension 未登録で枠別 CTR が取れない、という不統一があった。
 > **「意図ハブ」設計**でこれを是正する: コンテンツ分類 (category 17 / theme 20 / tag) は SEO/UX 用として
 > 統合せず、**広告意図軸 `AffiliateVertical` (10 軸) を単一ハブ**とし、全分類 → vertical の写像を
-> `affiliate-category.ts` に集約する。広告は `vertical` を正として持ち、解決は **ページ → vertical → 広告**。
-> 完全DBレス: SSOT は git TS、配信は R2 (永続 DB を持たない)。
+> 台帳 `affiliate.vertical-map` に集約する。広告は `vertical` を正として持ち、解決は **ページ → vertical → 広告**。
+> 完全DBレス: SSOT は `data/` の台帳、配信は R2 (永続 DB を持たない)。
 
 > **方針の変更 (2026-11-03 オーナー・収益化戦略 §3.2)**: アフィリエイトは、ページ → vertical の文脈一致で分野ごとの案件を出す方式から、
 > **多くの読者に共通し、報酬単価か成約率が高い商品**を本文の中段・下段に出す方式へ切り替える。案件は 1,000 表示あたりの見込み収益
@@ -26,20 +26,24 @@ paths:
 > ページで共通の案件を上回ると実測できた場合だけ残す。下の vertical の解決は切り替えが済むまでの現行の実装で、切り替えの実装と
 > 本文の広告の段の試験は backlog `AFFILIATE-COMMON-PRODUCTS-01`。案件の条件記録・評価指標・同時入れ替えの禁止は変えない。
 
+> **アフィリエイトの停止 (2026-11-12 オーナー決定・収益化戦略 §3.1)**: 成約 0 件が続くため、戦略を練り直すまでアフィリエイトを止める。
+> 枠は消さず、ページ・枠ごとに 1 つずつ AdSense のレスポンシブへ替える (11-12 にランキングのページの PR の枠をすべて替えた。進み具合は backlog `ADSENSE-FORMAT-EXPERIMENT-01`)。替えていない枠の PR は
+> 替えるまで残る。下の記述は止める前の配置である。
+
 > **広告の段 (2026-11-03 オーナー決定)**: テーマ・ランキング・ブログの本文の広告は、AdSense と PR を 1 行に並べる広告の段
 > (`AdRow`・`features/ads/components/slots/AdRow.tsx`) にした。本文の幅に原寸 300px のまま入る数だけ左から出す
 > (608px 未満 1 枠・608px 以上 2 枠・916px 以上 3 枠)。段の中身は `composeAdRows` が上の段から割り当て、AdSense は段ごとに別の
-> ユニットを使う。置き場所と段の中身の正本は `data/ads/placements.json` (`ad-row`)。本文の AdSense の上限は 4 枠 (広告の段の
-> AdSense も数える)。ブログの本文の自動の `<ad-slot>`・バナーの差し込みは段に置き換えた (手で広告を置いた記事は手の位置のまま)。
+> ユニットを使う。置き場所と段の中身の正本は `data/ads/placements.json` (`ad-row`)。本文の AdSense の数の上限 (4 枠) は 2026-11-12 オーナー決定で撤廃し、
+> 量は本番のスマホの広告密度 (自動広告込み・30%) で判断する。ブログの本文の自動の `<ad-slot>`・バナーの差し込みは段に置き換えた (記事に手で置いた `<ad-slot>`・`<affiliate-banner>` は 2026-11-12 から描かず、その記事にも段を入れる)。
 > 下の §4・§12 にある本文のバナー・テキストの自動挿入の記述は、この日より前の配置である。
 
 ## 0. 意図軸 (10 vertical) — 広告解決の実軸
 
-`AffiliateVertical` (`apps/web/src/features/ads/constants/affiliate-category.ts`):
+`AffiliateVertical` (型と解決の関数は `apps/web/src/features/ads/constants/affiliate-category.ts`。値の列挙は台帳 `affiliate.vertical-map` の Schema にもあり、テストが一致を固定する):
 
 `labor` / `housing` / `population` / `economy` / `health` / `energy` / `travel` / `furusato` / `education` / `mobility`
 
-全コンテンツ分類はこの 10 軸へ写像する (ハブは `affiliate-category.ts` の 3 map):
+全コンテンツ分類はこの 10 軸へ写像する (ハブは台帳 `affiliate.vertical-map` の対応表。主なものは次の 3 つ):
 
 | 写像 | 定義 | 用途 |
 |---|---|---|
@@ -47,13 +51,13 @@ paths:
 | `THEME_AFFILIATE_MAP` | theme 20 スラッグ → vertical | テーマページ (`/themes/*`) |
 | `TAG_AFFILIATE_MAP` | blog tagKey (英/日) → vertical | blog 記事サイドバー / ネイティブ |
 
-- vertical の追加・写像変更は **`affiliate-category.ts` だけ**で行う (skill/agent は参照のみ)。
+- 写像の変更は **台帳 `affiliate.vertical-map` だけ**で行う (skill/agent は参照のみ)。vertical の追加は型 `AffiliateVertical`・`AFFILIATE_VERTICALS` と台帳の Schema の enum をそろえる。
 - `AffiliateCategory` は `AffiliateVertical` の `@deprecated` 型 alias (段階移行の互換)。
 
 ## 1. SSOT とデータフロー
 
 ```
-apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は vertical を持つ)
+台帳 affiliate.ads (SSOT・広告は vertical を持つ) → 読み込み口 AFFILIATE_ADS (案件の判断を結合)
   → export-affiliate-ads-snapshot.ts (vertical∈10軸 を検証) → R2 app/affiliate-ads/all.json
   → resolve-affiliate-ad.ts (配信時に ページ→vertical→広告 で解決・priority 降順)
   → apps/web/src/features/ads/ コンポーネントが描画
@@ -119,8 +123,8 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 
 | 責務 | 正典 |
 |---|---|
-| authored成果条件・lane・friction | `apps/web/scripts/affiliate-offer-profiles-data.ts`（affiliate-manager排他writer） |
-| creative / placement | `apps/web/scripts/affiliate-ads-data.ts`（`programRef`でprofile参照） |
+| authored成果条件・lane・friction | 台帳 `affiliate.offer-profiles`（affiliate-manager排他writer） |
+| creative / placement | 台帳 `affiliate.ads`（`programRef`でprofile参照） |
 | 変動するGA4・ASP成果・候補 | `data/affiliate/affiliate-portfolio-latest.json`（派生・手編集禁止） |
 | pilot開始可否・必要母数・verdict | `data/affiliate/affiliate-pilot-readiness-latest.json`（派生・勝者を持たない） |
 
@@ -233,7 +237,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 17 軸のカテゴリは「納豆消費量」と「県民所得」を同じ economy に落とす。実測 (GSC 2026-W35) では
 **ランキング流入の 38% (28,867 imp/週) が家計調査の食品品目**で、そこに FP 相談・ファクタリング・NISA が
 出ていた。出典調査 (`survey-linkage-standards.md` の surveyIds 焼き込み) はカテゴリより細かい主題を持つので、
-`affiliate-category.ts` の `SURVEY_AFFILIATE_MAP` を **最上位の写像**にし、全ページ共通の解決順を
+台帳 `affiliate.vertical-map` の `survey` (`SURVEY_AFFILIATE_MAP`) を **最上位の写像**にし、全ページ共通の解決順を
 `resolveContentVertical` に一本化した:
 
 ```
@@ -278,7 +282,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 | NG | OK |
 |---|---|
-| `affiliate-ads-data.ts` 以外 (R2 JSON 等) を手編集して真実源化 | git TS を編集 → CI が R2 生成 |
+| 台帳 `affiliate.ads` 以外 (R2 JSON 等) を手編集して真実源化 | 台帳を編集 → CI が R2 生成 |
 | 同一プログラムを categoryKey ごとに 8-9 件複製 | vertical を 1 つ持たせ 1 エントリ (ページ→vertical で解決) |
 | canonical 4 種以外のサイズで新規登録 | 300×250 / 250×250 / 320×100 / text |
 | 意図不一致の汎用広告を特化ページ上位に置く | ページ意図適合プログラムを上位 priority |
@@ -353,7 +357,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
   → `AFFILIATE_ADS[]` に **1 エントリ**追記 (categoryKey 複製しない) → tsc + audit + export dry-run
   → commit 準備 (push はユーザー判断・develop push で R2 反映) → 次の `propose` へループ。
 - **`direct`**: 直接属性方式 (記事本文へのピンポイント配置) の台帳登録。**配置と台帳
-  (`apps/web/scripts/affiliate-direct-placements-data.ts`) の追記は必ずセット** — 台帳に無い本文タグは
+  (台帳 `affiliate.direct-placements`) の追記は必ずセット** — 台帳に無い本文タグは
   `/audit-affiliate-compliance` が「台帳未登録タグ」として弾く。PR 表記 (景表法 2023-10): blog は
   記事冒頭の PR 宣言 + リンク直前 `※PR：` の両方、note は `#PR`/`#広告` を含める。
 
@@ -361,7 +365,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 | 工程 | 担当 |
 |---|---|
-| vertical ハブ (`affiliate-category.ts` の 3 map) の保守 | `affiliate-manager` (本ルール) |
+| vertical ハブ (台帳 `affiliate.vertical-map`) の保守 | `affiliate-manager` (本ルール) |
 | バナー / テキスト登録 (propose/register/direct) | `affiliate-manager` (skill `/register-affiliate-banner`) |
 | 在庫整理・監査・dashboard (`/tmp` 生成・git 管理しない) | `affiliate-manager` (skill `/affiliate-improvement`) |
 | compliance 監査 (孤立配置 / PR 表記 / 台帳未登録タグ) | `affiliate-manager` (skill `/audit-affiliate-compliance`、週次 CI `affiliate-dashboard-refresh.yml`) |
@@ -446,7 +450,7 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
   ため: 提携済みで軸解決済みの 49 件のうち**配信中トップを確定EPC で上回るものは 0 件**、かつ GA4 は 28 日で
   clicks 9 件・CTR 0.079%。在庫を週 10 件増やしても収益は動かず A8 への申請リスクだけが増える。
   **再開条件** = GA4 の `affiliate_vertical` dimension が登録され軸別 CTR が読めること (§6)。再開は `APPLY_NEW=1`。
-- **cron は SSOT (`affiliate-ads-data.ts`) を書き換えない / develop に push しない**。アプリコードの無人書き換えは
+- **cron は SSOT (台帳 `affiliate.ads`) を書き換えない / develop に push しない**。台帳の無人書き換えは
   並行セッションとの git 競合を招き、push は R2 公開 = outward-facing になる。cron は catalog (機械 state) を
   進めるところまでで、実追記と push は `affiliate-manager` + 人間承認。
 
@@ -558,7 +562,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 3 ASP 横断の提携台帳 | `data/affiliate/affiliate-catalog.json` |
 
 **`a8-catalog.json` とはマージしない。** あちらは A8 scout の状態機械、こちらは ASP 横断の運用判断。
-広告そのものの SSOT は `apps/web/scripts/affiliate-ads-data.ts` (git TS) で、いずれも配信データではない。
+広告そのものの SSOT は台帳 `affiliate.ads` で、いずれも配信データではない。
 
 ### 掲載適格性 gate
 
@@ -613,7 +617,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 「どのページにどう出すか」の正典。2026-07-28 の全ページ棚卸しで確定した現状を固定する。
 
 **広告の枠の台帳 (2026-10-29)**: 大きさの語彙・枠の種類 (確保する箱の寸法・受け入れる大きさ・表示する画面幅)・
-ページごとの置き方・共通のルール (枠同士を隣り合わせにしない・最初の画面に置かない・本文の AdSense の上限) の正本は
+ページごとの置き方・共通のルール (枠同士を隣り合わせにしない・最初の画面に置かない。本文の AdSense の数の上限は 2026-11-12 に撤廃) の正本は
 `data/ads/placements.json` (schema `config/schema/ads.placements.schema.json`)。台帳に載せたページの種類 (2026-10-30 から全ページ) は、
 下の表よりも台帳が正で、`apps/web/src/lib/__tests__/ad-placements.test.ts` がコードの枠の並び・隣接・登録の大きさを照合する。
 新しい大きさを登録する前に台帳の `sizes` に載せて判断する (一点物 7 件は `undecided` としてオーナー判断待ち)。
@@ -684,7 +688,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |
 | ranking 記事下 | ネイティブ 4 件の直後に **300x250 を 1 枚** (`position=ranking-end`) | tagKeys → vertical で 5 件解決し 5 件目を使う |
 | themes 末尾 | **300x250 を 1 枚** (`position=theme-end`) | relatedArticleTagKeys → 無ければ THEME_AFFILIATE_MAP |
-| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ。検索意図との一致を確認できない個別ページは `ranking-incontent-affiliate-policy.ts` で抑止する | tagKeys → 無ければ categoryKey → vertical |
+| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ。2026-11-12 から解説の後の段は AdSense 1 つ (幅いっぱい) だけで PR を出さないので、個別ページの抑止リストは削除した | tagKeys → 無ければ categoryKey → vertical |
 | ranking 右レール (AdSense停止中) | 従来の最大2枚を、停止した上段 AdSense 枠へ**移設**。枚数は増やさず初期 viewability を改善する | categoryKey → vertical |
 | areas 県 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=area-content`)。在庫が無ければ空枠を作らない | `furusato` vertical |
 
@@ -723,10 +727,10 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 
 | チャネル | 役割 | 使いどころ | SSOT |
 |---|---|---|---|
-| `AFFILIATE_ADS` (vertical 解決) | 汎用の自動配置。**基本はこれ** | ページ意図に自動追従させたいとき | `affiliate-ads-data.ts` |
+| `AFFILIATE_ADS` (vertical 解決) | 汎用の自動配置。**基本はこれ** | ページ意図に自動追従させたいとき | 台帳 `affiliate.ads` |
 | `targetRankingKeys` | **ページ限定配置** | 高EPC 案件を特定ランキングだけに当てる | 同上 (フィールド) |
 | `SIDEBAR_PROMO_BANNERS` | 対象ランキング限定の固定案件枠 | labor の対象keyのみ。本文・通常レールとの同一案件重複は禁止 | `constants/sidebar-banners.ts` |
-| 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | `affiliate-direct-placements-data.ts` |
+| 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | 台帳 `affiliate.direct-placements` |
 
 > **楽天市場の商品カードと返礼品カードは 2026-11-06 に撤去した (オーナー判断)。** 2 か月で 40 クリック・注文 0 件で、共通の案件を上回る実測が無いため。
 > 日次同期 (`sync-rakuten-catalog.yml`)・楽天 API の取得・品目語の生成物も一緒に撤去した。楽天アフィリエイトの案件 (楽天カード) と成果の記録は残す。
@@ -759,8 +763,8 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
   コア `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`) /
   実行 `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` /
   移植元 doboku-note `scripts/{lib/asp-*.mjs,affiliate-status.mjs,affiliate-apply.mjs,afb-scan.mjs}` (2026-07-28 移植)
-- SSOT データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置台帳)
-- 意図ハブ: `apps/web/src/features/ads/constants/affiliate-category.ts` (`AffiliateVertical` / 3 map / `adVertical`)
+- SSOT データ: 台帳 `affiliate.ads` (自動配置)・`affiliate.offer-profiles` (案件)・`affiliate.direct-placements` (直接配置)・`affiliate.vertical-map` (意図軸の対応表)
+- 意図ハブの読み込み口と解決の関数: `apps/web/src/features/ads/constants/affiliate-category.ts` (`AffiliateVertical` / 対応表 6 つ / `adVertical`)
 - 型ソース: `apps/web/src/features/ads/types/index.ts` (`AffiliateAd.vertical` / `AffiliateDirectPlacement`)
 - 配信解決: `apps/web/src/features/ads/services/resolve-affiliate-ad.ts` / `repositories/affiliate-ad-snapshot.ts`
 - 生成/検証: `apps/web/scripts/export-affiliate-ads-snapshot.ts` (vertical validation) → R2 `app/affiliate-ads/all.json`

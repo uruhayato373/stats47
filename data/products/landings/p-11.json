@@ -1,0 +1,69 @@
+{
+  "productId": "P-11",
+  "articleKey": "prefecture-map-chart-assets-pack",
+  "displayTitle": "都道府県の地図・ランキング素材",
+  "description": "人口や世帯の地域差を伝える地図・ランキング図を、プレゼン資料や記事の図版として使えます。",
+  "useCases": [
+    {
+      "title": "プレゼンの導入に",
+      "description": "人口分布の地図を添え、説明する地域が全国のどこに位置するかを伝えられます。"
+    },
+    {
+      "title": "記事や報告書の比較図に",
+      "description": "世帯数などのランキング図を使い、取り上げる県と他県の規模の違いを示せます。"
+    },
+    {
+      "title": "資料に使う図版の準備に",
+      "description": "PNG・SVG・PowerPointの収録形式から、貼り付けや図版編集の用途に合う素材を選べます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "population-map",
+      "heading": "人口の分布を一枚の地図で伝える",
+      "lead": "全国の人口分布を示してから、担当する地域の説明へ進む導入スライドを作れます。",
+      "metricKeys": [
+        "total-population"
+      ],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "household-ranking",
+      "heading": "世帯数の違いをランキング図で伝える",
+      "lead": "一般世帯数を並べた図で、本文や数表だけでは伝えにくい県ごとの規模の違いを示せます。",
+      "metricKeys": [
+        "general-households"
+      ],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "PNG・SVGの地図素材、PowerPoint、PDF、元データのCSVを収録しています。Excelファイルは含みません。",
+    "素材を利用する際は、図に記載した基準年・単位・出典を残し、同梱の利用条件に従ってください。"
+  ],
+  "analysisPlan": {
+    "objective": "人口・世帯の検証済み分析から地図・棒・推移の共通画像を再利用し、独自の計算経路を増やさない。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "total-population",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "general-households",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [
+      "P-01"
+    ],
+    "limitations": [
+      "再利用元の基準年・地域・単位・欠測の条件を引き継ぐ。元商品が未承認の改訂案なら素材集でも公開済みの内容として扱わない。"
+    ]
+  }
+}

@@ -22,6 +22,7 @@ import type { NationalAveragePoint } from "../../lib/build-national-average-seri
 import type { MetricPresentation } from "@stats47/types";
 
 interface RankingHeaderStatsProps {
+  metricTitle: string;
   rankingValues: RankingValue[];
   unit: string;
   presentation: MetricPresentation;
@@ -32,12 +33,13 @@ interface RankingHeaderStatsProps {
 }
 
 /**
- * ヘッダー直下の統計ブロック (上位3県+最下位 / 全国平均+推移)。
+ * ヘッダー直下の統計ブロック (上位3件+下位3件 / 全国平均+推移)。
  *
  * 右レールの有無で本文カラム幅が変わるため、ビューポートではなくコンテナクエリで
  * 2 カラム化する (.claude/rules/ui-components.md)。
  */
 export function RankingHeaderStats({
+  metricTitle,
   rankingValues,
   unit,
   presentation,
@@ -77,10 +79,11 @@ export function RankingHeaderStats({
       {/* 2 枚は線の格子で並べ、隣り合う線を共有する (見本の grid gap-px bg-border)。
           本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。 */}
       <PanelGrid className={cn("grid-cols-1", showNationalAverage && "@min-[40rem]:grid-cols-2")}>
-        <RankingTopThreeList stats={stats} unit={unit} precision={precision} domainPolicy={presentation.comparisonDomain} />
+        <RankingTopThreeList stats={stats} unit={unit} precision={precision} presentation={presentation} />
         {showNationalAverage && (
           <RankingNationalAverageStat
-            domainPolicy={presentation.trendDomain}
+            metricTitle={metricTitle}
+            presentation={presentation}
             figure={nationalFigure}
             unit={unit}
             series={nationalAverageSeries}

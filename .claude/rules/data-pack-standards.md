@@ -1,6 +1,6 @@
 ---
 paths:
-  - "packages/product-factory/src/{catalog,build,data,generators,channels/note}/**"
+  - "packages/product-factory/src/{catalog,build,data,generators,channels/note,analysis}/**"
   - "packages/product-factory/tests/**"
   - ".claude/{scripts/products,skills/product/build-data-pack}/**"
   - "data/products/**"
@@ -24,15 +24,15 @@ Kindle の規約は `kindle-publishing-standards.md` で、データパックと
 
 | データ | SSOT | 形 | 備考 |
 |---|---|---|---|
-| 商品定義（P-01〜P-14・テーマ別 14 パック） | `packages/product-factory/src/catalog/` | git TS | `src/catalog/products/packs.ts` 1 ファイル。`ProductDefinition`（`theme`/`datasets`/`sourceIds`）型。**ここだけ編集**。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
-| ライセンス / テンプレ / family メタ | `src/catalog/{licenses,templates,families}.ts` | git TS | 再販売禁止は `resale: false` で型固定 |
+| 商品定義（P-01〜P-14・テーマ別 14 パック） | 台帳 `products.packs` | JSON + Schema | `ProductDefinition`（`theme`/`datasets`/`sourceIds`）型は `src/catalog/types.ts`。**ここだけ編集**（`rankingKeys` は生成物から読み込み口が注入）。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
+| ライセンス / テンプレ | 台帳 `products.licenses` / `src/catalog/templates.ts` | JSON + Schema / git TS | 再販売禁止は Schema の `resale: const false` |
 | 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
-| 商品に焼く実データ | `src/data/datasets/<key>.ts` | git TS スナップショット | **基準年固定**。R2 から取得して手記の SOURCES を添える |
+| 商品に焼く実データ | 台帳 `products.pack-datasets` | JSON + Schema のスナップショット | **基準年固定**。R2 から取得して手記の出典の行を添える。正規化は読み込み口 `src/data/datasets/<key>.ts` |
 | 生成バイナリ（pptx/xlsx/pdf/png…） | `.local/data-packs/<id>/<version>/` | 派生物・**git 管理外** | 手編集を正典にしない・公開 R2 へ置かない |
 | リリース台帳（生成状況） | `data/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
 
-- **商品定義=git TS が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
-- **実データは R2 → git TS スナップショット（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
+- **商品定義=台帳 `products.packs` が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
+- **既存固定版の実データは R2 → `products.pack-datasets` の JSON（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
 
 ---
 
@@ -75,7 +75,7 @@ npm run test:run   --workspace=@stats47/product-factory
 | 生成バイナリを git / 公開 R2 に置く | `.local/`（git 管理外）に生成し、配信しない |
 | 生成物 (pptx/xlsx/json) を手編集して真実源化 | git TS を編集 → `generate` で再生成 |
 | 実在しない商品 ID / licenseId / metric を書く | validator（`catalog --check`）が弾く |
-| **実データ未接続パックを status=approved にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。`packs.ts` の status は商品として完成したか (`cataloged`/`approved`) だけを持ち、公開状態は持たない。note の公開状態の正本は記事台帳 `data/note/articles.json` |
+| **実データ未接続パックを status=approved にする** | 実データ接続（`datasets` の全キーが台帳 `products.pack-datasets` に実在）まで `cataloged` 固定。`packs.ts` の status は商品として完成したか (`cataloged`/`approved`) だけを持ち、公開状態は持たない。note の公開状態の正本は記事台帳 `data/note/articles.json` |
 | 架空データを実データと偽る | `Dataset.isSample` で分離・販売文に明記 |
 | 全商品を一括出品して WIP を増やす | 戦略（`docs/02_実装計画/01`）どおり 1 商品ずつ需要実測 |
 | Office 実機未確認で「互換性検証済み」と書く | 構造(OOXML)検証と実機検証を区別して報告 |
@@ -94,7 +94,7 @@ npm run test:run   --workspace=@stats47/product-factory
 
 `packages/product-factory/src/channels/note/` は、商品カタログから note の無料・有料記事候補、
 添付manifest、画像計画、ハッシュタグを生成するチャネルとする。商品定義を複製せず、
-商品側は `src/catalog/products/packs.ts`、note editorial メタは
+商品側は台帳 `products.packs`、note editorial メタは
 記事台帳 `data/note/articles.json`（git の JSON + `articles.schema.json`。規約は `.claude/scripts/note/catalog/README.md`）を SSOT とし、mapping で結合する。
 
 > **現在の実装**: article-planとmappingはP-01〜P-14から導出し、TypeScript/Vitestの対象。
@@ -103,6 +103,31 @@ npm run test:run   --workspace=@stats47/product-factory
 > 商品別の公開記録・品質・人間確認待ちは `products:report` の派生カタログで分離する。
 
 ### SSOTと生成物
+
+- 全有料商品の `products.landings.analysisPlan` に目的、指標と統計対象、採用・調査中・除外の理由、既存の分析・図・再利用商品のIDを持つ。
+  `npm run products:analysis:catalog` が参照・粒度・採否・循環を検査する。指標逆引きは現行の作成例を `product`、追加の分析候補を `product-analysis` と区別する。
+- 新しい時系列・市区町村分析は、同台帳の `analysisRevision` に指標キー・年・地域・分析式・参考資料・共通画像型を宣言する。
+  表・項目コード・単位・暦年／年度は指標台帳から解決する。一般世帯の原数など既存指標と精度・対象が異なる原典だけ `metrics.analysis-source-variants` に定義し、商品からIDで参照する。
+  `npm run products:analysis:build -- --all` で原典を取得し、CSV/Excel・分析結果・出典・利用条件・画像・ZIPを登録済み `.local/data-packs/<id>/<version>/` へ生成する。
+  取得済み入力は指定のハッシュが一致するときだけ再利用し、取り直す場合は `--refresh`。同梱する原票から資格情報を除く。
+  検査記録は `products.landing-evidence.analysisRevision` に派生生成し、公開済みの固定納品版は置き換えない。
+  `npm run products:analysis:check -- --all` は同梱値からの再計算、ZIP/Excel構造、全ファイルSHA、LPの派生値・画像・note原稿を照合する。
+  共通の自治体集合・年度・単位・原典の全座標を検査し、既存 `analysis-frame` のカバレッジ検査結果も記録する。秘匿・欠測・分母0を0件へ補完しない。
+  市区町村地図の範囲は分析レシピの `within`（`nation` / `prefecture` + `prefCode`）で宣言し、共通の地域集合・画像型で描く。全国版は政令市を統合し特別区を残す境界を使い、欠測・離島も含む全対象コードの値と形を照合する。商品別の描画分岐や一部自治体だけの全国図を作らない。
+  CIは実台帳のcatalogテストと `product-analysis-ledger.test.ts` で台帳・解決後の原典・検査記録・LPのハッシュ/参照/対象範囲を突合し、通信なしで生成漏れを検出する。
+  Webは開発時に通常の商品URLも商品IDで改訂案へ接続し、`/products/preview/<slug>` と `ProductDetail` を共有する。
+  改訂案はnoindex・未公開表示・Product Offerなし。上下の購入案内は固定販売版の台帳を使い、「現在販売中の版」と改訂案との違いを明記する。
+  `--check --serve <port>` の一覧は、改訂案がある商品と固定版の商品を合わせた全有料データ商品のnote初稿を表示する。
+  ローカルGISから地図を再生成する場合は `NEXT_PUBLIC_R2_GEOSHAPE_URL` にゲートウェイを指定する（GIS取得は `R2_PUBLIC_FETCH_URL` を参照しない）。
+  原稿・データ・価格・図の確認と非公開保全を終えてから通常の公開工程へ渡す。改訂案を現在の販売内容として表示しない。
+
+- サイトLPとnote無料部分のコピーは `data/products/landings/<id>.json`、固定納品由来の収録形式・画像の型とSHAは
+  `data/products/landing-evidence/<id>.json` に持つ。商品IDと記事キーで結合し、商品別のUI分岐や別媒体のコピーを作らない。
+  作成例は両媒体とも見出し→共通型の画像→短い説明→必要な制約の順。サイトの商品名はLP台帳の表示名を使い、販売先の原題は `listingTitle` として照合に残す。
+  `npm run products:landing:assets` は納品版台帳の `archive` から共通画像型で見本を再生成する。
+  `npm run generate:product-storefront -w apps/web` の後、`npm run products:landing:preview -- --serve 4792` で
+  全商品のサイトLPとnote無料部分を順に目視できる。Markdown/HTMLは登録済み `.local/product-portfolio/` の派生物。
+  `npm run products:landing:check` は台帳との不一致・未整備の商品・媒体間の取りこぼしを止める。公開note・有料本文・添付はこの生成で変更しない。
 
 - mapping・記事計画・生成コードは git TS、`.local/note-products/` の生成物は派生物とする。
 - 承認前の生成物を note.com、R2、公開用カタログへ自動反映しない。
@@ -138,7 +163,7 @@ npm run test:run   --workspace=@stats47/product-factory
 
 ## 関連
 
-- 商品案の由来: `packages/product-factory/src/catalog/products/packs.ts` の `sourceIds`（旧調査はGit履歴）
+- 商品案の由来: 台帳 `products.packs` の `sourceIds`（旧調査はGit履歴）
 - モジュール: `packages/product-factory/`（README + `src/`）
 - 納品版の固定値: `data/products/note-pack-deliveries.json` / 照合: `.claude/scripts/products/lib/pack-evidence.mjs`
 - 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md` / データ保存先: `.claude/rules/data-storage.md`

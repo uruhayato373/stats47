@@ -64,6 +64,8 @@ const RAIL_SLOT_ALLOWLIST = new Set([
   "apps/web/src/app/category/[categoryKey]/page.tsx",
   // blog 詳細の ArticleShell 右レール (316px)。
   "apps/web/src/app/blog/[slug]/page.tsx",
+  // 市区町村ランキングの ArticleShell 右レール (316px)。2026-11-12 に右レール付きの枠にした。
+  "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
 ]);
 
 const errors = [];
@@ -114,7 +116,8 @@ function checkForbiddenPatterns(rel, src, patterns) {
 function findPromotionalTags(src) {
   return [
     ...src.matchAll(
-      /<([A-Z][A-Za-z0-9]*(?:Promo|Affiliate|Furusato|TextAd)[A-Za-z0-9]*)\b/g,
+      // 名前が語で始まる部品 (FurusatoNozeiCard・AffiliateAdSlot) も拾う。2026-11-12 まで先頭に 1 文字を要求していて拾えなかった
+      /<((?:[A-Z][A-Za-z0-9]*?)?(?:Promo|Affiliate|Furusato|TextAd)[A-Za-z0-9]*)\b/g,
     ),
   ].map((match) => match[1]);
 }
@@ -254,10 +257,9 @@ checkAllowedPromotionalTags(
   new Set(["SidebarPromoBanner"]),
 );
 
-if (!/<SidebarPromoBanner\b/.test(rankingRail)) {
-  errors.push(`${RIGHT_RAIL_FILES.ranking}\n   ranking 右レールに画像バナーがない。`);
-}
-if (!/<AffiliateAdSlot[\s\S]*?\bbannerOnly\b[\s\S]*?\/>/.test(rankingRail)) {
+// ランキングの右レールの PR は 2026-11-12 オーナー決定で AdSense に替えた (アフィリエイトは戦略を練り直すまで止める)。
+// PR の画像バナーを必須にする検査は外し、戻すときの制約 (画像バナーだけ・テキスト広告にしない) は残す
+if (/<AffiliateAdSlot\b/.test(rankingRail) && !/<AffiliateAdSlot[\s\S]*?\bbannerOnly\b[\s\S]*?\/>/.test(rankingRail)) {
   errors.push(
     `${RIGHT_RAIL_FILES.ranking}\n   AffiliateAdSlot に bannerOnly がない。テキスト広告へ戻さないこと。`,
   );
@@ -276,10 +278,8 @@ if (blogRailStart < 0 || blogRailEnd <= blogRailStart) {
   );
 } else {
   const blogRail = stripComments(blogPage.slice(blogRailStart, blogRailEnd));
-  // blog は記事 vertical の BannerAd を直接描画する。固定ハウスバナーを必須にしない。
-  if (!/<(?:SidebarPromoBanner|BannerAd)\b/.test(blogRail)) {
-    errors.push(`${RIGHT_RAIL_FILES.blog}\n   blog 右レールに画像バナーがない。`);
-  }
+  // blog の右レールの PR のバナーは 2026-11-12 オーナー決定で AdSense に替えた (アフィリエイトは戦略を練り直すまで止める)。
+  // 画像バナーを必須にする検査は外し、PR を戻すときの制約 (画像バナーだけ・テキスト広告や宣伝カードにしない) は残す
   checkAllowedPromotionalTags(
     RIGHT_RAIL_FILES.blog,
     blogRail,

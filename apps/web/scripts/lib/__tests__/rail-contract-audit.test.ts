@@ -10,6 +10,26 @@ const ids = (violations: Array<{ ruleId: string }>) =>
  * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
  */
 describe('findRailContractViolations', () => {
+  it('右レールの表示境界は共通 variant を使い、別の閾値を直書きしない', () => {
+    for (const width of [988, 1024]) {
+      expect(ids(findRailContractViolations(
+        `<div className="hidden @min-[${width}px]/shell:block" />`, 'src/features/x/Nav.tsx'
+      ))).toEqual(['rail-shared-breakpoint']);
+    }
+    expect(findRailContractViolations('<div className="hidden rail:block" />', 'src/features/x/Nav.tsx')).toEqual([]);
+    expect(findRailContractViolations('<div className="@min-[640px]/shell:grid-cols-2" />', 'src/components/layout/ArticleShell.tsx')).toEqual([]);
+  });
+
+  it('カードごとの幅補正を検出し、全幅指定と広告の原寸は許す', () => {
+    for (const width of ['w-[316px]', 'max-w-[20rem]', 'w-fit']) {
+      expect(ids(findRailContractViolations(
+        `<RailCard title="x" className="${width}" />`, 'src/features/x/Nav.tsx'
+      ))).toEqual(['rail-card-width-owned-by-shell']);
+    }
+    expect(findRailContractViolations('<RailCard title="x" className="w-full min-w-0" />', 'src/features/x/Nav.tsx')).toEqual([]);
+    expect(findRailContractViolations('<img width="300" height="250" />', 'src/features/ads/Banner.tsx')).toEqual([]);
+  });
+
   it('page.tsx の生 <aside> を検出し、RailStack を使う page は通す', () => {
     expect(
       ids(

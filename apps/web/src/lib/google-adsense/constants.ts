@@ -37,9 +37,15 @@ export interface AdSlotConfig {
   slotId: string;
   /** 広告フォーマット */
   format: AdFormat;
+  /** インフィード広告の data-ad-layout-key (AdSense がユニットごとに発行する) */
+  layoutKey?: string;
 }
 
-/** ランキングページ: データテーブル横（PC）/ テーブル下（モバイル）。AdSense ユニット名: stats47-ranking-table-side */
+/**
+ * ランキングページ: 右レールの最後 (PC だけ)。名前は旧の位置 (表の横) のまま。
+ * 2026-11-12 オーナー決定: 300×600 をヘッダーの下に追従させる (台帳の adsense-rail-sticky)。変更前 W42〜W44 は
+ * 300×250 で 1,000 表示あたり ¥8〜10・視認率 32〜33%。AdSense ユニット名: stats47-ranking-table-side
+ */
 export const RANKING_PAGE_TABLE_SIDE: AdSlotConfig = {
   slotId: "5182030050",
   format: "rectangle",
@@ -81,12 +87,89 @@ export const RAIL_RECT: AdSlotConfig = {
  * Multiplex (関連コンテンツ型グリッド・横長) に差し替え。読了後の全幅フッターに適した形式。
  * 2026-10-31 (オーナー決定 AdSense は全て 300×250): 関連コンテンツ型 (2439393208) は固定の大きさにできず、
  * モバイルで 308×1503 まで伸びていた。2026-11-03 にこの配置専用の表示広告ユニットを作った。
- * AdSense ユニット: stats47-ranking-footer-rect（ディスプレイ / 固定 300×250）
+ * 2026-11-12 オーナー決定: 出典の後の段はこのユニット 1 つだけを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。管理画面の設定は固定のままでも、広告コードを書き換えればレスポンシブにできる
+ * (support.google.com/adsense/answer/10734935・2026-11-12 確認)。形は rectangle に絞る。
+ * AdSense ユニット: stats47-ranking-footer-rect（ディスプレイ / 管理画面では固定 300×250 で作成）
  */
 export const RANKING_PAGE_FOOTER: AdSlotConfig = {
   slotId: "3686603642",
   format: "rectangle",
 };
+
+/**
+ * ランキングページ: 右レールの中段 (調査のカードと分野のランキング一覧の間)
+ * 2026-11-12 オーナー決定: アフィリエイトの PR の枠 (固定のバナーと文脈のバナー) から替えた。
+ * ユニットは 2026-10-30 まで一覧の右レールで縦長に使い、外してから使っていなかった stats47-ranking-rail-bottom を流用する
+ * (ランキングの右レール専用のまま実績が混ざらない)。右レールの AdSense と同じ 300×250 の固定のコードで出す。
+ * AdSense ユニット名: stats47-ranking-rail-bottom（名前は旧の位置のまま）
+ */
+export const RANKING_RAIL_MIDDLE: AdSlotConfig = {
+  slotId: "2308454706",
+  format: "rectangle",
+};
+
+/**
+ * ランキングページ: ページの最後 (関連ランキング・記事の後)
+ * 2026-11-12 オーナー決定: アフィリエイトの PR の列から替えた。ほかの枠と実績が混ざらないよう専用のユニットを作った
+ * (同日に AdSense の管理画面で作成)。本文の幅いっぱい (上限 580px。台帳の adsense-body-responsive) で、形は rectangle に絞る。
+ * AdSense ユニット: stats47-ranking-end（ディスプレイ / レスポンシブ）
+ */
+export const RANKING_PAGE_END: AdSlotConfig = {
+  slotId: "3452480564",
+  format: "rectangle",
+};
+
+/**
+ * ブログ記事: 本文の 2 つ目・3 つ目の広告の段 (h2 の 4・6 番目の前) と記事の末尾。
+ * 2026-11-12 オーナー決定: 本文の段を AdSense 1 つ・幅いっぱい (上限 580px) にし、PR を外した。それまでハブ・一覧と共用の
+ * HUB_INCONTENT / CONTENT_FOOTER / THEMES_CONTENT を使っていて、ブログの実績を分けて測れなかったので、同日に専用のユニットを作った。
+ * 1 つ目の段は従来どおり BLOG_ARTICLE_INLINE。どれも本文の幅いっぱいの箱 (台帳の adsense-body-responsive) で、形は rectangle に絞る。
+ */
+export const BLOG_ROW_2: AdSlotConfig = { slotId: "9307296688", format: "rectangle" }; // stats47-blog-row-2
+export const BLOG_ROW_3: AdSlotConfig = { slotId: "4897424179", format: "rectangle" }; // stats47-blog-row-3
+export const BLOG_END: AdSlotConfig = { slotId: "2394403971", format: "rectangle" }; // stats47-blog-end
+
+/**
+ * ブログ記事: 右レール (PC だけ)。2026-11-12 オーナー決定で、右レールの PR のバナー (最大 2 枚) を上段の AdSense に替え、
+ * 右レールの最後に追従する 300×600 を足した (中身が本文より短く、PC で下が約 5,000px 空いていた)。同日に専用のユニットを作った。
+ */
+export const BLOG_RAIL: AdSlotConfig = { slotId: "1595814272", format: "rectangle" }; // stats47-blog-rail (300×250)
+export const BLOG_RAIL_STICKY: AdSlotConfig = { slotId: "6270069803", format: "rectangle" }; // stats47-blog-rail-sticky (追従する 300×600)
+/** 右レールの中段 (運営者のプロフィールの後・追従しない 300×250)。2026-11-12 オーナー決定で足し、同日に作成 */
+export const BLOG_RAIL_MIDDLE: AdSlotConfig = { slotId: "4422635661", format: "rectangle" }; // stats47-blog-rail-middle
+
+/**
+ * 都道府県のページ: データブックの中の 3 段 (暮らし・気候・消費の節の前)・データブックの後・ページの最後。
+ * 2026-11-12 オーナー決定 (推奨案): どれも AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR を外した。それまでの
+ * HUB_INCONTENT / CONTENT_FOOTER はハブ・一覧と共用で、県のページの分を測れなかったので、同日に専用のユニットを作った。
+ */
+export const AREA_DATABOOK_ROW_1: AdSlotConfig = { slotId: "3776748345", format: "rectangle" }; // stats47-area-databook-1
+export const AREA_DATABOOK_ROW_2: AdSlotConfig = { slotId: "3704450369", format: "rectangle" }; // stats47-area-databook-2
+export const AREA_DATABOOK_ROW_3: AdSlotConfig = { slotId: "3540944628", format: "rectangle" }; // stats47-area-databook-3
+export const AREA_AFTER_DATABOOK: AdSlotConfig = { slotId: "4929902121", format: "rectangle" }; // stats47-area-after-databook
+export const AREA_END: AdSlotConfig = { slotId: "4738330430", format: "rectangle" }; // stats47-area-end
+/**
+ * 都道府県のページ: 「この県の特徴を読み解く記事」の一覧の 3 件目の後に入れるインフィード広告 (2026-11-12 オーナー決定・同日作成)。
+ * テンプレートは「横の画像」(一覧の行と同じ、左に画像・右に題名)。layoutKey は AdSense がユニットごとに発行する値で、変えると配信されない。
+ * 「選択したディスプレイ広告を許可する」はオン (AdSense の既定) のまま。
+ */
+export const AREA_INFEED: AdSlotConfig = { slotId: "9371196667", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-area-infeed
+
+/**
+ * 市区町村のランキング: 地図の後・順位の表とページ送りの後。ページの最後の段 (stats47-municipality-end・1042114655) は、同日に右レールを
+ * 付けて表の後の段と近づいたので外した (ユニットは AdSense に残っている)。
+ * 2026-11-12 オーナー決定: どれも AdSense 1 つを本文の幅いっぱい (上限 580px) に出し、PR を外した。それまでは解説の後の 1 段だけで
+ * (AdSense・PR・AdSense の横並び。スマホでは先頭の 1 枠だけ)、ユニットはハブ・一覧と共用の HUB_INCONTENT / CONTENT_FOOTER だった。同日に専用のユニットを作った。
+ */
+export const MUNICIPALITY_AFTER_MAP: AdSlotConfig = { slotId: "7607523006", format: "rectangle" }; // stats47-municipality-after-map
+export const MUNICIPALITY_AFTER_TABLE: AdSlotConfig = { slotId: "4981359660", format: "rectangle" }; // stats47-municipality-after-table
+/**
+ * 市区町村のランキング: 右レール (PC だけ)。2026-11-12 オーナー決定 (推奨案) で、本文が 1,131px に広がっていたページを都道府県の
+ * ランキングと同じ右レール付きの枠にし、関連の一覧の後に 300×250、右レールの最後に追従する 300×600 を置いた。同日に作成
+ */
+export const MUNICIPALITY_RAIL: AdSlotConfig = { slotId: "3309698695", format: "rectangle" }; // stats47-municipality-rail
+export const MUNICIPALITY_RAIL_STICKY: AdSlotConfig = { slotId: "5716370187", format: "rectangle" }; // stats47-municipality-rail-sticky (追従する 300×600)
 
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
@@ -100,6 +183,8 @@ export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
  * モバイルはサイドバー広告が非表示で、収益のあるユニットが実質テーブル直後の
  * フッター 1 枠のみだった（W21 実測: Mobile Impressions/PV 0.32 / RPM ¥20）。
  * 解析セクションを読み進める層に中盤で 1 枠出すための専用スロット。
+ * 2026-11-12 オーナー決定: 解説の後の段はこのユニット 1 つだけを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。ユニットは替えず、units.csv で変更前後を比べられるようにした。
  * AdSense ユニット名: stats47-ranking-incontent-mobile（記事内 / fluid）
  */
 export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {

@@ -25,18 +25,16 @@ import { ChevronDown } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
-import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { ArticleShell, Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
+import { RailLinksCard } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { STAT_VALUE_CLASS, ValueTable } from '@/components/surface';
 
-import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
-import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
-import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { AdRow, composeAdRows, RailAdSlot } from '@/features/ads';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 import {
-  MunicipalityPrefectureLinks,
   MunicipalityNationalMap,
   MunicipalityRankingCommentary,
   MunicipalityRankingViewTracker,
@@ -53,7 +51,12 @@ import {
 } from '@/features/municipalities/server';
 import { findDataProductForMunicipalityRanking, TrackedProductLink } from '@/features/products';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import {
+  MUNICIPALITY_AFTER_MAP,
+  MUNICIPALITY_AFTER_TABLE,
+  MUNICIPALITY_RAIL,
+  MUNICIPALITY_RAIL_STICKY,
+} from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
@@ -117,15 +120,8 @@ export default async function MunicipalityRankingPage({
     searchParams,
   ]);
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) notFound();
-  // 広告の意図軸は metric config (git TS SSOT) の category → vertical。都道府県ランキングと同じ写像
-  const affiliateVertical = (() => {
-    const category = getMetricConfig(rankingKey)?.category;
-    return category ? CATEGORY_AFFILIATE_MAP[category] : undefined;
-  })();
-  const [{ item, values: snapshot }, nativeBanners, aiContent] = await Promise.all([
+  const [{ item, values: snapshot }, aiContent] = await Promise.all([
     readMunicipalityRanking(rankingKey),
-    // 意図軸が無い指標は汎用の案件 (2026-10-31)
-    resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
     readMunicipalityRankingCommentary(rankingKey),
   ]);
   if (!item || !snapshot) {
@@ -187,11 +183,80 @@ export default async function MunicipalityRankingPage({
     snapshot,
   });
 
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
   const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
-  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
+  // 広告の段 (2026-11-12 オーナー決定): 地図の後・順位の表の後に、AdSense 1 つを本文の幅いっぱいで出す (PR は出さない)。
+  // ページの最後の段は、同日に右レールを付けて関連の一覧が右レールへ移った結果、表の後の段と出典・注記だけを挟んで
+  // 約 240〜280px で続いたので外した (PC は右レールの 2 枠が加わる)
+  const [rowAfterMap, rowAfterTable] = composeAdRows(
+    [['adsense'], ['adsense']],
+    [MUNICIPALITY_AFTER_MAP, MUNICIPALITY_AFTER_TABLE],
+    [],
+  );
+  // 右レール (2026-11-12 オーナー決定): 都道府県のランキングと同じ右レール付きの枠にする。1440px で本文が 1,131px に広がり、
+  // 3 列の順位の表が間延びしていた。並びは都道府県のランキングに合わせ「関連 → AdSense → 都道府県のカード → 追従する 300×600」。
+  // 都道府県のカードは全指標で出す (県別のページがある指標はそのページへ、無い指標はこのページの県の絞り込みへ)。
+  // 2 つの広告の間に必ず内容が入る。狭い幅では右レールは本文の下に積まれ、右レールの AdSense は出ない (RailAdSlot は本文の横にあるときだけ)
+  const hasPrefectureRankings = isMunicipalityPrefectureRankingKey(item.rankingKey);
+  const rail = (
+    <>
+      <RelatedContentNavigation
+        title="同じ指標のランキング・記事・テーマ"
+        sourceId={`municipality-ranking:${item.rankingKey}`}
+        kinds={['ranking', 'blog', 'municipality-theme']}
+        limit={4}
+        surface="municipality_related"
+      />
+      <RailAdSlot slot={MUNICIPALITY_RAIL} />
+      <RailLinksCard
+        title={
+          hasPrefectureRankings
+            ? `都道府県別の${municipalityRankingDisplayTitle(item)}ランキング`
+            : '都道府県で絞り込む'
+        }
+        layout="chips"
+        items={fetchPrefectures().map((prefecture) => ({
+          id: prefecture.prefCode,
+          label: prefecture.prefName,
+          active: prefecture.prefCode === prefectureCode,
+          href: hasPrefectureRankings
+            ? hrefFor('municipality-pref-ranking', {
+                rankingKey: item.rankingKey,
+                prefCode: prefecture.prefCode,
+              })
+            : pageHref(item.rankingKey, '', prefecture.prefCode, 1),
+        }))}
+        trackingSurface="municipality_prefecture"
+      />
+      <RailAdSlot slot={MUNICIPALITY_RAIL_STICKY} sticky />
+    </>
+  );
   return (
-    <PageShell>
+    <ArticleShell
+      rail={rail}
+      breadcrumb={
+        <Breadcrumbs
+          items={[
+            { label: 'ホーム', href: '/' },
+            { label: '市区町村', href: '/municipalities' },
+            { label: municipalityRankingDisplayTitle(item) },
+          ]}
+        />
+      }
+      header={
+        <>
+          <StatisticsScopeNav
+            current="municipalities"
+            hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
+          />
+          <PageHeader
+            eyebrow="市区町村ランキング"
+            title={municipalityRankingDisplayTitle(item)}
+            description={item.description}
+            stats={`${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
+          />
+        </>
+      }
+    >
       <MunicipalityRankingViewTracker
         rankingKey={item.rankingKey}
         title={item.title}
@@ -203,24 +268,6 @@ export default async function MunicipalityRankingPage({
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
-      <Breadcrumbs
-        items={[
-          { label: 'ホーム', href: '/' },
-          { label: '市区町村', href: '/municipalities' },
-          { label: municipalityRankingDisplayTitle(item) },
-        ]}
-      />
-      <StatisticsScopeNav
-        current="municipalities"
-        hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
-      />
-      <PageHeader
-        eyebrow="市区町村ランキング"
-        title={municipalityRankingDisplayTitle(item)}
-        description={item.description}
-        stats={`${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
-      />
-
       <section
         aria-label="分布の要点"
         className="grid grid-cols-3 border border-border"
@@ -292,6 +339,12 @@ export default async function MunicipalityRankingPage({
             values={snapshot.values}
           />
         </Suspense>
+      )}
+
+      {rowAfterMap.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
       )}
 
       {dataProduct && (
@@ -438,31 +491,13 @@ export default async function MunicipalityRankingPage({
         </nav>
       )}
 
-      {isMunicipalityPrefectureRankingKey(item.rankingKey) && (
-        <MunicipalityPrefectureLinks
-          rankingKey={item.rankingKey}
-          title={`都道府県別の${municipalityRankingDisplayTitle(item)}ランキング`}
-        />
-      )}
-
-      {commentary && <MunicipalityRankingCommentary content={commentary} />}
-
-      {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
-      {rowCells.length > 0 && (
+      {rowAfterTable.length > 0 && (
         <div className="mt-8">
-          <AdRow cells={rowCells} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} />
+          <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
         </div>
       )}
 
-      <div className="mt-8">
-        <RelatedContentNavigation
-          title="同じ指標のランキング・記事・テーマ"
-          sourceId={`municipality-ranking:${item.rankingKey}`}
-          kinds={['ranking', 'blog', 'municipality-theme']}
-          limit={4}
-          surface="municipality_related"
-        />
-      </div>
+      {commentary && <MunicipalityRankingCommentary content={commentary} />}
 
       {/* 市区町村 snapshot に焼き込まれた出典 (都道府県 metric の統計表とは別の表を使う指標がある) */}
       <DataSourceList
@@ -475,6 +510,6 @@ export default async function MunicipalityRankingPage({
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>
       </footer>
-    </PageShell>
+    </ArticleShell>
   );
 }

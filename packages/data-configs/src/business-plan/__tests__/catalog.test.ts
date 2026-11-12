@@ -4,6 +4,7 @@ import { BUSINESS_PLAN_2026 } from '../catalog';
 import {
   BUSINESS_PLAN_M1_BASELINE_ANALYSIS,
   BUSINESS_PLAN_M1_GEO_ANALYSES,
+  buildM1XCanonicalUrl,
 } from '../m1';
 
 describe('stats47 2.0事業計画カタログ', () => {
@@ -134,5 +135,63 @@ describe('stats47 2.0事業計画カタログ', () => {
       status: 'measured',
       canonicalEvent: 'file_download',
     });
+  });
+});
+
+describe('事業計画の台帳 (data/business-plan/plan) と読み込み口の結合', () => {
+  const pad = (n: number, width: number) => String(n).padStart(width, '0');
+
+  it('位置から作っていた ID を台帳に固定した並びのまま出す', () => {
+    expect(BUSINESS_PLAN_2026.contentOpportunities.map((item) => item.id)).toEqual(
+      Array.from({ length: 100 }, (_, i) => `geo-${pad(i + 1, 3)}`)
+    );
+    expect(BUSINESS_PLAN_2026.xIdeas.map((item) => item.id)).toEqual(
+      Array.from({ length: 30 }, (_, i) => `x-${pad(i + 1, 2)}`)
+    );
+    expect(BUSINESS_PLAN_2026.noteProducts.map((item) => item.id)).toEqual(
+      Array.from({ length: 15 }, (_, i) => `note-product-${pad(i + 1, 2)}`)
+    );
+  });
+
+  it('M1 の X 投稿の URL・campaign・素材のキーが主分析から作る値と一致する', () => {
+    const { m1 } = BUSINESS_PLAN_2026;
+    expect(m1.xPosts).toHaveLength(15);
+    m1.xPosts.forEach((post, index) => {
+      const primary = m1.analyses.find((analysis) => analysis.id === post.analysisIds[0]);
+      expect(primary).toBeDefined();
+      if (!primary) return;
+      expect(post.id).toBe(`m1-x-${pad(index + 1, 2)}`);
+      expect(post.contentKey).toBe(`geo-001-x-${pad(index + 1, 2)}`);
+      expect(post.campaign).toBe(primary.contentId);
+      expect(post.mediaKey).toBe(primary.slug);
+      expect(post.mediaPath).toBe(
+        `.local/r2/sns/geo/${post.contentKey}/x/stills/${post.contentKey}.png`
+      );
+      expect(post.canonicalUrl).toBe(
+        buildM1XCanonicalUrl({
+          analysisCount: post.analysisIds.length,
+          geoRole: post.geoRole,
+          analysisKind: primary.analysisKind,
+          analysisSlug: primary.slug,
+          rankingKey: primary.rankingKey,
+          highlightAreaCodes: post.visual.highlightAreaCodes,
+        })
+      );
+    });
+  });
+
+  it('M1 の note 商品は事業計画の商品と同じ並びで、題と価格を結合する', () => {
+    expect(BUSINESS_PLAN_2026.m1.noteProducts.map((p) => [p.id, p.title, p.priceYen])).toEqual(
+      BUSINESS_PLAN_2026.noteProducts.map((p) => [p.id, p.title, p.priceYen])
+    );
+  });
+
+  it('M1 の経路は固定の 3 経路に Geo 分析ごとの経路を続ける', () => {
+    expect(BUSINESS_PLAN_2026.m1.routes.map((route) => route.path)).toEqual([
+      '/geo',
+      '/geo/compare',
+      '/geo/method',
+      ...BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => `/geo/${analysis.slug}`),
+    ]);
   });
 });

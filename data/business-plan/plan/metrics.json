@@ -1,0 +1,231 @@
+{
+  "metrics": [
+    {
+      "id": "weekly-revenue",
+      "label": "週次収益",
+      "role": "north-star",
+      "kpiTier": "nsm",
+      "cadence": "weekly",
+      "source": "data/",
+      "measurementStatus": "partially-measured",
+      "targetM3": 30000,
+      "targetM6": 187000,
+      "targetM12": 1030000,
+      "unit": "円/月換算",
+      "note": "現行の収益化NSM。目標値は増分の仮説で、予測ではない。"
+    },
+    {
+      "id": "regional-decision-sessions",
+      "label": "地域意思決定セッション",
+      "role": "input",
+      "cadence": "monthly",
+      "source": "GA4",
+      "measurementStatus": "not-instrumented",
+      "targetM3": 5000,
+      "targetM6": 20000,
+      "unit": "セッション/月",
+      "note": "地域比較・地図操作・DL等の意思決定行動を含む先行指標。"
+    },
+    {
+      "id": "map-interaction-rate",
+      "label": "地図操作率",
+      "role": "input",
+      "cadence": "weekly",
+      "source": "GA4",
+      "measurementStatus": "not-instrumented",
+      "targetM3": 25,
+      "unit": "%",
+      "note": "地域分析ページ公開後にイベント登録・反映確認して計測する。"
+    },
+    {
+      "id": "owned-leads",
+      "label": "自社リード累計",
+      "role": "input",
+      "cadence": "monthly",
+      "source": "lead ledger",
+      "measurementStatus": "not-instrumented",
+      "targetM3": 150,
+      "targetM6": 700,
+      "targetM12": 2500,
+      "unit": "件",
+      "note": "同意・配信停止・個人情報運用の設計後に開始。"
+    },
+    {
+      "id": "paid-purchases",
+      "label": "有料購入",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "note / product ledger",
+      "measurementStatus": "partially-measured",
+      "targetM3": 10,
+      "unit": "件/累計",
+      "note": "有料noteとデータ商品の実購入。"
+    },
+    {
+      "id": "business-inquiries",
+      "label": "法人問い合わせ",
+      "role": "input",
+      "cadence": "monthly",
+      "source": "inquiry ledger",
+      "measurementStatus": "manual",
+      "targetM3": 1,
+      "targetM6": 3,
+      "targetM12": 6,
+      "unit": "件/累計",
+      "note": "プラットフォーム投資判断は月3件以上等の需要ゲートを優先。"
+    },
+    {
+      "id": "x-qualified-posts",
+      "label": "X有資格投稿",
+      "role": "input",
+      "cadence": "weekly",
+      "source": "data/sns/metric-snapshots/",
+      "measurementStatus": "measured",
+      "targetM3": 3,
+      "unit": "1万表示以上の投稿数",
+      "note": "X直収益ではなく分析テーマの需要信号。"
+    },
+    {
+      "id": "ai-queries",
+      "label": "AI地域検索クエリ",
+      "role": "hypothesis",
+      "cadence": "monthly",
+      "source": "future query ledger",
+      "measurementStatus": "not-instrumented",
+      "unit": "件",
+      "note": "AI検索βを開始するまでは未計測。"
+    },
+    {
+      "id": "data-quality-pass-rate",
+      "label": "データ品質ゲート通過率",
+      "role": "guardrail",
+      "kpiTier": "guardrail",
+      "cadence": "weekly",
+      "source": "data/ranking/integrity-audit.json",
+      "measurementStatus": "partially-measured",
+      "unit": "%",
+      "note": "週次のランキング整合性監査で、どの検査 (項目・値の欠落、年のずれ、形状、計算式、値の検証など) にも引っかからなかった公開指標の割合。年表記・単位・定義の「意味の誤り」(DATA-VALUE-ERRORS-01) はこの監査に含まれないので、通過率が高くても誤りが無いとは言えない。provenance・分布・GISライセンスの監査も未接続。"
+    },
+    {
+      "id": "search-clicks",
+      "label": "検索クリック (GSC rolling28d)",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "data/gsc/history.csv",
+      "measurementStatus": "measured",
+      "unit": "クリック/28日",
+      "kpiTarget": {
+        "value": 20000,
+        "dueWeek": "2026-W52",
+        "basis": "gsc/history.csv の W31→W39 の増分 (3,424→9,947) ÷ 8 週 = 週 +815。W39 の 9,947 + 13 週 × 815 ≈ 20,500 を切り下げ (2026-09-30 設定)"
+      },
+      "note": "集客の駆動KPI。rolling28d の隣接週差は重複期間なので WoW と呼ばず、4週前 (非重複) と比べる。"
+    },
+    {
+      "id": "site-pageviews",
+      "label": "ページビュー (GA4 Japan 確定7日×4週)",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "data/ga4/history-finalized7d.csv",
+      "measurementStatus": "measured",
+      "unit": "PV/28日",
+      "kpiTarget": {
+        "value": 79000,
+        "dueWeek": "2026-W52",
+        "basis": "search-clicks の目標 20,000 (2026-W52) × PV/検索クリック 3.98 (W37〜W40 の GA4 Japan PV 43,907 ÷ GSC rolling28d 11,023) ≈ 79,600 を切り下げ (2026-10-07 設定)"
+      },
+      "note": "AdSense の月額 = PV × ad-yield ÷ 1,000 の PV 側。月¥1万に要る PV は ad-yield で決まる (W30〜W33 の ¥22 なら 28日 約42万 PV、手動枠だけの ¥6.7 なら約140万 PV)。段階目標はマーケティング戦略の T1〜T4。"
+    },
+    {
+      "id": "ad-yield",
+      "label": "広告収益効率 (AdSense)",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "data/adsense/history.csv + data/ga4/history-finalized7d.csv",
+      "measurementStatus": "measured",
+      "unit": "円/1,000 GA4 Japan PV",
+      "note": "AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000 (.claude/scripts/metrics/lib/adsense-revenue.mjs)。分母を AdSense 自身の PV にしない (W30〜W33 は GA4 の 54〜78% しか数えていない)。停止前 W30〜W33 は ¥22 (自動広告込み)、W31 の手動枠分だけなら ¥6.7。2026-10-11 に手動枠で再開し、再開前の週を含む窓は値にしない (最初の値は W42〜W45 がそろう 2026-W45)。目標値は再開後 4 週の実測が出るまで置かない。"
+    },
+    {
+      "id": "site-circulation-rate",
+      "label": "サイト内回遊率 (代表値: ブログ→ランキング)",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "GA4 internal-transitions.csv (referrer 集計)",
+      "measurementStatus": "measured",
+      "unit": "%",
+      "note": "目標値は未設定: 同じ定義の週次履歴が 2 週 (W38-W39) しかなく根拠にならない。8 週そろう 2026-W45 に置く。流入を広告・商品のある面へ運ぶ率。週次の代表値は分母=ブログPV、分子=blog→ranking の page_view (referrer 集計)。ranking 末尾 CTA 等の他の導線施策もこの KPI にぶら下げる。"
+    },
+    {
+      "id": "affiliate-yield",
+      "label": "アフィリエイト収益効率",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "GA4 ga4-affiliate-history.csv + ASP 確定成果",
+      "measurementStatus": "partially-measured",
+      "unit": "円/1,000 viewable imp",
+      "note": "確定収益 ÷ 1,000 viewable impression (収益化戦略 §3)。ASP 成果が認証切れの間は GA4 の表示・クリックだけを出し、収益効率は判定不能とする。"
+    },
+    {
+      "id": "work-context-sessions",
+      "label": "業務文脈の着地セッション",
+      "role": "input",
+      "kpiTier": "driver",
+      "cadence": "weekly",
+      "source": "GA4 landing-context.csv",
+      "measurementStatus": "measured",
+      "unit": "セッション/28日",
+      "note": "PC比率と平日9–18時比率がともにサイト平均を超え、25セッション以上の着地ページのセッション合計。行政実務者である証明ではなく、行政資料レーンの先行指標。"
+    },
+    {
+      "id": "site-health",
+      "label": "サイト健全性",
+      "role": "guardrail",
+      "kpiTier": "guardrail",
+      "cadence": "weekly",
+      "source": "data/{psi,cloudflare}/history.csv",
+      "measurementStatus": "measured",
+      "unit": "PSIモバイル中央値 / Workersエラー率",
+      "note": "性能・可用性・依存の脆弱性。閾値は既存の PSI budgets と Cloudflare threshold-check を使い、ここで持たない。"
+    },
+    {
+      "id": "operating-cost",
+      "label": "運用コスト",
+      "role": "guardrail",
+      "kpiTier": "guardrail",
+      "cadence": "weekly",
+      "source": "data/cloudflare/ + claude-usage/history.csv",
+      "measurementStatus": "partially-measured",
+      "unit": "閾値違反数 / R2保存GB",
+      "note": "Cloudflare・R2・API課金。閾値は budgets-daily.json が正典。"
+    },
+    {
+      "id": "index-coverage-rate",
+      "label": "インデックス登録率",
+      "role": "guardrail",
+      "kpiTier": "guardrail",
+      "cadence": "weekly",
+      "source": "GSC 送信済みページの週次記録 (gsc.coverage-submitted)",
+      "measurementStatus": "partially-measured",
+      "unit": "%",
+      "note": "サイトマップに載せた URL のうち Google に登録済みの割合 (GSC「すべての送信済みページ」ビューの登録済み ÷ (登録済み + 未登録))。直前の取得週より下がったら悪化。閾値は持たない。最初の値は 2026-11-14 の週次取得の後に入る。取得できなかった週は 0 でなく未計測と書く。"
+    },
+    {
+      "id": "measurement-freshness",
+      "label": "計測の鮮度",
+      "role": "guardrail",
+      "kpiTier": "guardrail",
+      "cadence": "weekly",
+      "source": "data/measurement-cycle/latest.json",
+      "measurementStatus": "measured",
+      "unit": "鮮度okの計測源 / 全計測源",
+      "note": "計測源ごとの最終観測日。欠測を0と読まない前提を守るための守りの指標 (アフィリエイト観測が cron 緑のまま3週間止まった 2026-08-28 の再発防止)。"
+    }
+  ]
+}

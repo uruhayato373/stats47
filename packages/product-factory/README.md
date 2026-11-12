@@ -4,11 +4,11 @@ stats47 の地図・チャート・公的統計から、note で売る Office・
 決定的に生成・検証するワークスペース。note と Kindle は互いの台帳を読まずに回る（ココナラは 2026-10-19 撤退、2026-11-08 に経路を削除）。
 
 - 恒久仕様: データパックと note は `.claude/rules/data-pack-standards.md`、Kindle は `.claude/rules/kindle-publishing-standards.md`
-- 商品カタログ SSOT: `src/catalog/products/packs.ts`（P-01〜P-14 の14テーマパック）
-- 旧商品案の由来: Git履歴上の旧 A-01〜L-07。現行の由来情報は `packs.ts` の `sourceIds`
+- 商品カタログ SSOT: 台帳 `products.packs`（P-01〜P-14 の14テーマパック）
+- 旧商品案の由来: Git履歴上の旧 A-01〜L-07。現行の由来情報は台帳 `products.packs` の `sourceIds`
 - 残タスク: `.claude/todo/backlog.md`
 
-商品定義・テンプレート・生成コードは git TS、観測値は既存 R2 が SSOT。生成した Office、
+商品定義は `data/products/` のJSON台帳、テンプレート・生成コードは git TS、観測値は既存 R2 が SSOT。生成した Office、
 PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2 へ保存しない。
 
 ## 現在の実装
@@ -84,7 +84,7 @@ Kindle改訂版は全予定指標を処理し、旧24件打切りを使わない
 Amazonの許諾・審査合格を保証する閾値ではない。旧公開版と新しい改訂候補を削除・上書きしない。
 
 Kindleの`metadata.authoredSha256`は書誌・章定義・fresh原稿・入稿専用校訂を固定し、変更後に旧EPUBを現行版と表示しない。
-`editorial-corrections.ts`は原文完全一致の校訂だけを入稿版へ適用し、原文が変われば生成を停止する。
+台帳`products.kindle-editorial-corrections`は原文完全一致の校訂だけを入稿版へ適用し、原文が変われば生成を停止する。
 公開ブログ自体は変更しない。部分校訂済みでも、図・他段落を含む章全体の独立レビューは省略しない。
 ランキング章は未レビューのサイトAI解説を転載せず、観測値からの決定的集計・同順位処理・全県の数値表を採用する。
 数値の範囲検査だけでは分母の誤解や無根拠の因果説明を保証できないためであり、書き下ろし章の意味レビューとは別に扱う。

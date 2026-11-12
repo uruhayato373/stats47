@@ -10,13 +10,17 @@
  * 実データ: 2026-07-31 に e-Stat getMetaInfo で実測した SSDS 人口・世帯の cat01。
  */
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   prefToCityStatsDataId,
+  fetchCityData,
   resolveCat01ByName,
+  shapeForCity,
   stripCatCodePrefix,
 } from "../../scripts/page-data-batch";
+import { buildRecipe } from "../recipe";
+import type { MetricConfig, SourceConfig } from "../types";
 
 /** 都道府県表 0000010201 (実測値) */
 const PREF = [
@@ -101,5 +105,79 @@ describe("prefToCityStatsDataId", () => {
     expect(prefToCityStatsDataId("0000010112")).toBeNull();
     expect(prefToCityStatsDataId("0000010213")).toBeNull();
     expect(prefToCityStatsDataId("0004065882")).toBeNull();
+  });
+});
+
+describe("市区町村の取得座標を観測値のrecipeへ保存", () => {
+  const original: Extract<SourceConfig, { kind: "estat" }> = {
+    kind: "estat", statsDataId: "0000010201", cdCat01: "#A03503",
+  };
+  const fixture = (extra: Partial<MetricConfig> = {}): MetricConfig => ({
+    key: "city-provenance-test", title: "指標", unit: "人", category: "population",
+    source: { ...original }, entities: ["prefecture", "city"], years: "all",
+    visualization: { domain: { mode: "extent" }, colorScheme: "interpolateBlues", colorSchemeType: "sequential",
+      trendDomain: { mode: "extent", padding: 0.08 }, comparisonDomain: { mode: "extent", padding: 0.05 } },
+    ...extra,
+  });
+  const values = [{ "@area": "13101", "@time": "2020100000", $: "150" }];
+  const response = { values, raw: { totalNumber: 1, toNumber: 1 } };
+
+  it("県表から対応する市区町村表へ変えた座標を残し、configHashは正準configと照合できる", async () => {
+    const config = fixture();
+    const fetcher = vi.fn(async () => response), resolver = vi.fn(async () => null);
+    const fetched = await fetchCityData("unused", config, original, fetcher, resolver);
+    expect(fetcher).toHaveBeenCalledWith("unused", { ...original, statsDataId: "0000020301" });
+    expect(resolver).not.toHaveBeenCalled();
+    const payload = shapeForCity(config, fetched!.values, fetched!.source);
+    expect(payload.meta.recipe.estatParams).toEqual({ statsDataId: "0000020301", cdCat01: "#A03503" });
+    expect(payload.meta.recipe.configHash).toBe(buildRecipe(config).configHash);
+    expect(payload.rows[0]).toMatchObject({ areaCode: "13101", value: 150 });
+    expect(config.source).toEqual(original);
+  });
+
+  it("0件から指標名で再解決したcity cat01を実際の取得・recipeの双方に使う", async () => {
+    const config = fixture();
+    const fetcher = vi.fn(async () => response).mockResolvedValueOnce({ values: [], raw: { totalNumber: 0, toNumber: 0 } });
+    const resolver = vi.fn(async () => "#A03506");
+    const fetched = await fetchCityData("unused", config, original, fetcher, resolver);
+    expect(resolver).toHaveBeenCalledWith("unused", "0000010201", "0000020301", "#A03503");
+    expect(fetcher).toHaveBeenLastCalledWith("unused", { ...original, statsDataId: "0000020301", cdCat01: "#A03506" });
+    expect(shapeForCity(config, fetched!.values, fetched!.source).meta.recipe).toMatchObject({
+      estatParams: { statsDataId: "0000020301", cdCat01: "#A03506" }, configHash: buildRecipe(config).configHash,
+    });
+  });
+
+  it("明示citySourceの表・軸・換算を使い、0件でも別コードを推測しない", async () => {
+    const citySource = { kind: "estat" as const, statsDataId: "0004065882", cdCat01: "city-value", cdCat02: "total", valueScale: 0.1 };
+    const config = fixture({ citySource, unit: "万円" });
+    const fetcher = vi.fn(async () => response), resolver = vi.fn(async () => "not-used");
+    const fetched = await fetchCityData("unused", config, original, fetcher, resolver);
+    const payload = shapeForCity(config, fetched!.values, fetched!.source);
+    expect(payload.meta.recipe).toMatchObject({ estatParams: { statsDataId: citySource.statsDataId, cdCat01: "city-value", cdCat02: "total" },
+      ops: { valueScale: 0.1 }, configHash: buildRecipe(config).configHash });
+    expect(payload.rows[0].value).toBe(15);
+    fetcher.mockResolvedValueOnce({ values: [], raw: { totalNumber: 0, toNumber: 0 } });
+    await fetchCityData("unused", config, original, fetcher, resolver);
+    expect(resolver).not.toHaveBeenCalled();
+  });
+
+  it("正準configの取得条件を変更するとhashのdriftは残り、市区町村の取得座標とは分離される", () => {
+    const config = fixture();
+    const actual = { ...original, statsDataId: "0000020301", cdCat01: "#A03506" };
+    const oldPayload = shapeForCity(config, values, actual);
+    const changed = { ...config, source: { ...original, cdCat01: "#A03501" } };
+    const newPayload = shapeForCity(changed, values, actual);
+    expect(newPayload.meta.recipe.estatParams).toEqual(oldPayload.meta.recipe.estatParams);
+    expect(newPayload.meta.recipe.configHash).not.toBe(oldPayload.meta.recipe.configHash);
+    expect(newPayload.meta.recipe.configHash).toBe(buildRecipe(changed).configHash);
+  });
+
+  it("県がexternalでも市の実取得recipeと元configのhashを別々に保持する", () => {
+    const citySource = { ...original, statsDataId: "0000020301" };
+    const config = fixture({ source: { kind: "external", fetcherKey: "manual", config: {} }, citySource });
+    const payload = shapeForCity(config, values, citySource);
+    expect(payload.meta.recipe.kind).toBe("estat");
+    expect(payload.meta.recipe.estatParams?.statsDataId).toBe(citySource.statsDataId);
+    expect(payload.meta.recipe.configHash).toBe(buildRecipe(config).configHash);
   });
 });

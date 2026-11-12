@@ -2,7 +2,7 @@ name: Infra history publish
 
 # 交通網の変遷 (高速道路 N06・鉄道 N05・空港 N08) と高速道路の接合部 (IC・JCT) を
 # 台帳の公式 ZIP から CI で作り直し、明示した網の prefix だけを R2 へ反映する (INFRA-HISTORY-R2-PUBLISH-01)。
-# - 原典 ZIP は台帳 (packages/gis/src/infra-history/networks.ts) の公式 URL から取り、bytes と SHA-256 で照合する。
+# - 原典 ZIP は台帳 geo.infra-history-networks (読み込み口 packages/gis/src/infra-history/networks.ts) の公式 URL から取り、bytes と SHA-256 で照合する。
 #   原典は R2 に置かない (N05・N06 の時系列は非商用。.claude/rules/gis-data.md)
 # - 生成は保存則 (県の合計 + 未帰属 = 全国) が通らなければ止まる
 # - 反映は push-exact-r2-assets.ts の網ごとの prefix + 拡張子だけ。ksj-publication-guard が

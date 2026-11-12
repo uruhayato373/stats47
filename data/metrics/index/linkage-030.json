@@ -3394,6 +3394,14 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-03",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-12",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:total-overnight-guests",
           "kind": "ranking"
         },
@@ -4025,6 +4033,10 @@
         {
           "pageId": "japan-theme:tourism",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "product:data-p-03",
+          "kind": "product"
         },
         {
           "pageId": "ranking:total-overnight-guests-foreign",
@@ -4757,6 +4769,46 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-02",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-05",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-07",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-08",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-10",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-11",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-12",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:total-population",
           "kind": "ranking"
         },
@@ -5442,6 +5494,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product"
+        },
         {
           "pageId": "ranking:total-revenue-prefecture",
           "kind": "ranking"

@@ -37,6 +37,7 @@ export interface ResolvedNavClick {
   label: string;
   href: string;
   surface: string;
+  cardVariant?: string;
 }
 
 /** クリックされた要素から、送るべき nav_click を決める。送らないなら null */
@@ -66,7 +67,8 @@ export function resolveNavClick(
   const label =
     anchor.closest<HTMLElement>("[data-nav-label]")?.dataset.navLabel ??
     pageTypeOf(url.pathname);
-  return { label, href, surface: surface ?? "unlabeled" };
+  const cardVariant = anchor.closest<HTMLElement>("[data-card-variant]")?.dataset.cardVariant;
+  return { label, href, surface: surface ?? "unlabeled", ...(cardVariant ? { cardVariant } : {}) };
 }
 
 /** 行き先のページ種別 (パスの 1 段目)。トップは "home" */

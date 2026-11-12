@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { ChartPanel } from '@stats47/components';
-import { Button } from '@stats47/components/atoms/ui/button';
 import { INFRA_SCOPE_REGIONS } from '@stats47/gis/infra-history';
 import { geoPath } from 'd3-geo';
 import { Map as MapIcon } from 'lucide-react';
 
 import { ChartLegend } from '@/components/charts/ChartLegend';
 import { fetchTopology, fitGeoSvgMercator, GEO_SVG_MAP, topologyFeatures, withoutFarIslands } from '@/components/charts/geo-topology';
+import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 
 import type { Feature, Geometry } from 'geojson';
 
@@ -87,20 +87,12 @@ export function QuestionMap({ title, unitOfArea, groups, areas, names, points }:
     >
       <div className="space-y-3">
         {unitOfArea === 'municipality' && (
-          <div className="flex flex-wrap gap-1" role="group" aria-label="地図の範囲">
-            {INFRA_SCOPE_REGIONS.map((item) => (
-              <Button
-                key={item.code}
-                type="button"
-                size="sm"
-                variant={item.code === regionCode ? 'outline' : 'ghost'}
-                aria-pressed={item.code === regionCode}
-                onClick={() => setRegionCode(item.code)}
-              >
-                {item.name}
-              </Button>
-            ))}
-          </div>
+          <SingleSelectToggleGroup
+            aria-label="地図の範囲"
+            value={regionCode}
+            onValueChange={setRegionCode}
+            options={INFRA_SCOPE_REGIONS.map(item => ({ value: item.code, label: item.name }))}
+          />
         )}
         <div className="relative">
           <svg viewBox={`0 0 ${GEO_SVG_MAP.width} ${GEO_SVG_MAP.height}`} className="h-auto w-full" role="img" aria-label={title}>

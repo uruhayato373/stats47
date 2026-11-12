@@ -15,6 +15,9 @@
 @custom-variant @md (@container (width >= 48rem));
 @custom-variant @lg (@container (width >= 64rem));
 
+/* 右レールの出現境界。Shell・探索ナビ・広告の出し分けはすべて rail: を使う。 */
+@custom-variant rail (@container shell (width >= 988px));
+
 /* v3 の safelist の置き換え。DashboardGridLayout が col-span-N を動的に組み立てる */
 @source inline("{,sm:,md:,lg:,xl:,@sm:,@md:,@lg:}col-span-{1,2,3,4,5,6,7,8,9,10,11,12}");
 

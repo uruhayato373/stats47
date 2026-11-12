@@ -1,0 +1,506 @@
+{
+  "decisions": [
+    {
+      "chapter": 1,
+      "title": "現在資産",
+      "status": "adopted",
+      "summary": "2.1k+ランキング、テーマ、地域、CSVを複合分析の入口に再利用する。",
+      "rationale": "新規ブランドより既存検索・データ資産の再利用が速い。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/01_プロジェクト定義.md"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "business-plan-operate"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 2,
+      "title": "ビジョンと位置付け",
+      "status": "adopted",
+      "summary": "stats47を地域データの意思決定プラットフォームへ拡張する。",
+      "rationale": "GIS/AIを前面に出さずユーザーの問いを主語にする。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/01_プロジェクト定義.md"
+      ],
+      "owners": [
+        "strategy-advisor",
+        "site-ux-manager"
+      ],
+      "skills": [
+        "business-plan-operate"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 3,
+      "title": "顧客とJTBD",
+      "status": "adapted",
+      "summary": "一般・実務者・企業・公共の4層を、既存の生活意思決定セグメント中心に接続する。",
+      "rationale": "現行のS2重点を維持し、企業・公共は需要が見えた後に広げる。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/04_ターゲットペルソナ.md"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "business-plan-operate"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 4,
+      "title": "収益アーキテクチャ",
+      "status": "adapted",
+      "summary": "集客・商用意図・商品・継続課金・法人の5層で評価する。",
+      "rationale": "現行の週次収益NSMを維持し、重い課金基盤は需要ゲート後に限定する。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md"
+      ],
+      "owners": [
+        "strategy-advisor",
+        "affiliate-manager"
+      ],
+      "skills": [
+        "monetization-strategy",
+        "manage-affiliate-experiment"
+      ],
+      "metricIds": [
+        "weekly-revenue"
+      ]
+    },
+    {
+      "chapter": 5,
+      "title": "サイト情報設計",
+      "status": "adapted",
+      "summary": "ランキング→テーマ/地域→問いベース分析→行動の導線を段階導入する。",
+      "rationale": "/geo等は品質を満たす実分析ができるまでindex・ナビ露出しない。",
+      "canonicalPaths": [
+        "docs/01_技術設計/03_情報設計.md"
+      ],
+      "owners": [
+        "site-ux-manager"
+      ],
+      "skills": [
+        "business-plan-operate"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 6,
+      "title": "GISコンテンツ",
+      "status": "adopted",
+      "summary": "人口・住まい・防災・医療生活・交通・地域経済の6テーマを優先する。",
+      "rationale": "単一指標の複製ではなく複数条件の説明価値に集中する。",
+      "canonicalPaths": [
+        ".claude/rules/gis-data.md",
+        "packages/data-configs/src/business-plan/content-opportunities.ts"
+      ],
+      "owners": [
+        "gis-curator",
+        "open-data-curator"
+      ],
+      "skills": [
+        "fetch-mlit-ksj",
+        "business-plan-operate"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 7,
+      "title": "初期20企画",
+      "status": "adapted",
+      "summary": "全100候補を保持し、人口・地価・洪水・駅の4系列から需要検証する。",
+      "rationale": "20件一括制作ではなくデータ健全性と反応で逐次Goする。",
+      "canonicalPaths": [
+        "packages/data-configs/src/business-plan/content-opportunities.ts"
+      ],
+      "owners": [
+        "strategy-advisor",
+        "article-writer"
+      ],
+      "skills": [
+        "business-plan-operate",
+        "write-prepared-article"
+      ],
+      "metricIds": [
+        "regional-decision-sessions"
+      ]
+    },
+    {
+      "chapter": 8,
+      "title": "X集客",
+      "status": "adapted",
+      "summary": "1分析から地図・比較・裏側投稿を作り、X直収益は計画に含めない。",
+      "rationale": "既存SNS規約の頻度上限と投稿台帳を優先する。",
+      "canonicalPaths": [
+        ".claude/rules/sns-content-standards.md",
+        "packages/data-configs/src/business-plan/content-opportunities.ts"
+      ],
+      "owners": [
+        "x-strategist",
+        "sns-metrics-sync"
+      ],
+      "skills": [
+        "post-x",
+        "sns-weekly-report"
+      ],
+      "metricIds": [
+        "x-qualified-posts"
+      ]
+    },
+    {
+      "chapter": 9,
+      "title": "note販売",
+      "status": "adapted",
+      "summary": "結論は無料、再現手順・加工データ・時短価値を有料にする。",
+      "rationale": "note本文SSOT・品質ゲート・公開承認の既存運用へ接続する。",
+      "canonicalPaths": [
+        "packages/data-configs/src/business-plan/content-opportunities.ts",
+        ".claude/rules/sns-content-standards.md"
+      ],
+      "owners": [
+        "note-manager",
+        "note-critic"
+      ],
+      "skills": [
+        "design-note-structure",
+        "publish-note"
+      ],
+      "metricIds": [
+        "paid-purchases"
+      ]
+    },
+    {
+      "chapter": 10,
+      "title": "高意図Affiliate",
+      "status": "adapted",
+      "summary": "移住・住宅・旅行・仕事を意思決定後の次行動として配置する。",
+      "rationale": "既存在庫SSOT・compliance・実験ゲートを通し、地図に広告を直接混在させない。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md"
+      ],
+      "owners": [
+        "affiliate-manager"
+      ],
+      "skills": [
+        "audit-affiliate-compliance",
+        "manage-affiliate-experiment"
+      ],
+      "metricIds": [
+        "weekly-revenue"
+      ]
+    },
+    {
+      "chapter": 11,
+      "title": "データ商品・レポート",
+      "status": "adapted",
+      "summary": "無料の結論と出典に対し、再現性・高解像度・更新差分を商品化する。",
+      "rationale": "既存product-factoryへ需要確認済みの企画だけ登録する。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md"
+      ],
+      "owners": [
+        "data-pack-manager",
+        "kindle-publisher"
+      ],
+      "skills": [
+        "build-data-pack",
+        "build-kindle-book"
+      ],
+      "metricIds": [
+        "paid-purchases"
+      ]
+    },
+    {
+      "chapter": 12,
+      "title": "Pro/Membership",
+      "status": "deferred",
+      "summary": "保存・高度DL・更新通知の反復需要が出た場合だけ継続課金を設計する。",
+      "rationale": "最初の90日はSaaSを作らず、同じ依頼の反復を開始条件にする。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "business-plan-operate"
+      ],
+      "metricIds": [
+        "paid-purchases"
+      ]
+    },
+    {
+      "chapter": 13,
+      "title": "B2B",
+      "status": "adapted",
+      "summary": "公開ケースから診断・PoCへ上げる。",
+      "rationale": "プラットフォーム先行を避け、月3件以上の問い合わせ等の需要ゲートを守る。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "monetization-strategy"
+      ],
+      "metricIds": [
+        "business-inquiries"
+      ]
+    },
+    {
+      "chapter": 14,
+      "title": "AI地域検索",
+      "status": "deferred",
+      "summary": "AIは質問理解と説明に限定し、計算・空間交差・順位は決定論的にする。",
+      "rationale": "自由SQLや本番更新権限を与えず、検索ログと反復需要の後にβ化する。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/01_プロジェクト定義.md",
+        "docs/01_技術設計/02_データアーキテクチャ.md"
+      ],
+      "owners": [
+        "strategy-advisor",
+        "data-ingester"
+      ],
+      "skills": [
+        "business-plan-operate"
+      ],
+      "metricIds": [
+        "ai-queries"
+      ]
+    },
+    {
+      "chapter": 15,
+      "title": "技術アーキテクチャ",
+      "status": "adapted",
+      "summary": "Next.js + git TS + R2 + エフェメラルDuckDBを継続する。",
+      "rationale": "原案の常設D1/PostGISは完全DBレス正典と競合するため採用しない。",
+      "canonicalPaths": [
+        "docs/01_技術設計/02_データアーキテクチャ.md"
+      ],
+      "owners": [
+        "data-ingester",
+        "snapshot-exporter",
+        "r2-publisher"
+      ],
+      "skills": [
+        "page-data-batch",
+        "sync-snapshots",
+        "push-r2"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 16,
+      "title": "ETL・品質",
+      "status": "adopted",
+      "summary": "出典・年度・地域コード・単位・欠損・ライセンスを機械検証する。",
+      "rationale": "既存provenance/unit/value分布ゲートを複合分析にも適用する。",
+      "canonicalPaths": [
+        ".claude/rules/data-provenance-standards.md",
+        ".claude/rules/unit-semantics-standards.md"
+      ],
+      "owners": [
+        "data-ingester",
+        "gis-pipeline-runner"
+      ],
+      "skills": [
+        "audit-provenance",
+        "audit-units",
+        "verify-value-distribution"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 17,
+      "title": "SEO・内部導線",
+      "status": "adapted",
+      "summary": "単一指標から複合分析、方法、次行動へ意図別に接続する。",
+      "rationale": "薄い市区町村ページの量産はせず、index条件とcanonical規約を優先する。",
+      "canonicalPaths": [
+        "docs/01_技術設計/03_情報設計.md",
+        "apps/web/src/lib/url-policy.ts"
+      ],
+      "owners": [
+        "site-ux-manager",
+        "gsc-analyst"
+      ],
+      "skills": [
+        "seo-audit",
+        "gsc-improvement"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 18,
+      "title": "OGP・X画像",
+      "status": "adapted",
+      "summary": "同一分析から一貫した地図カードを派生する。",
+      "rationale": "既存画像カタログ・OGP監査・SNS配色規約を再利用する。",
+      "canonicalPaths": [
+        ".claude/rules/sns-content-standards.md"
+      ],
+      "owners": [
+        "image-prompt-curator",
+        "chart-author"
+      ],
+      "skills": [
+        "audit-ogp-images",
+        "image-prompt"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 19,
+      "title": "KPI・計測",
+      "status": "adapted",
+      "summary": "週次収益NSMに地域意思決定セッション等の先行指標を接続する。",
+      "rationale": "未実装イベントを0として扱わず、登録・反映状態を明示する。",
+      "canonicalPaths": [
+        ".claude/rules/analytics-event-standards.md",
+        "packages/data-configs/src/business-plan/catalog.ts"
+      ],
+      "owners": [
+        "ga4-analyst",
+        "strategy-advisor"
+      ],
+      "skills": [
+        "fetch-ga4-data",
+        "business-plan-operate"
+      ],
+      "metricIds": [
+        "weekly-revenue",
+        "regional-decision-sessions"
+      ]
+    },
+    {
+      "chapter": 20,
+      "title": "財務計画",
+      "status": "adapted",
+      "summary": "M3/M6/M12値は予測ではなく投資・撤退判断用の仮説として扱う。",
+      "rationale": "既存売上を混ぜず、計測不能値を実績表示しない。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md"
+      ],
+      "owners": [
+        "strategy-advisor",
+        "affiliate-manager"
+      ],
+      "skills": [
+        "weekly-review",
+        "adsense-improvement"
+      ],
+      "metricIds": [
+        "weekly-revenue"
+      ]
+    },
+    {
+      "chapter": 21,
+      "title": "12か月ロードマップ",
+      "status": "adapted",
+      "summary": "foundation→pilot→scale→demand-gatedの順に進める。",
+      "rationale": "暦月で自動着手せず、前段の品質・需要ゲートを満たした時だけ進める。",
+      "canonicalPaths": [
+        "packages/data-configs/src/business-plan/catalog.ts"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "business-plan-operate",
+        "monthly-plan"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 22,
+      "title": "90日実行計画",
+      "status": "adapted",
+      "summary": "4系列・X・note・商品・法人ケースを小さく検証する。",
+      "rationale": "公開数ではなくデータ健全性、読了/操作、購入・問い合わせを停止条件にする。",
+      "canonicalPaths": [
+        "packages/data-configs/src/business-plan/catalog.ts"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "business-plan-operate",
+        "weekly-plan"
+      ],
+      "metricIds": [
+        "regional-decision-sessions",
+        "paid-purchases",
+        "business-inquiries"
+      ]
+    },
+    {
+      "chapter": 23,
+      "title": "運用",
+      "status": "adapted",
+      "summary": "週次レビューで状態を再生成し、上位企画だけを次週へ送る。",
+      "rationale": "日次で意味判断を繰り返さず、決定的収集と週次判断を分離する。",
+      "canonicalPaths": [
+        ".claude/skills/management/weekly-plan/SKILL.md",
+        ".claude/skills/management/weekly-review/SKILL.md"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "weekly-plan",
+        "weekly-review",
+        "business-plan-operate"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 24,
+      "title": "法務・信頼",
+      "status": "adopted",
+      "summary": "一次資料・ライセンス・広告表示・AI利用・防災免責を成果物単位で記録する。",
+      "rationale": "公開データでも利用条件と第三者権利は別に確認する。",
+      "canonicalPaths": [
+        ".claude/rules/data-provenance-standards.md",
+        ".claude/rules/affiliate-ads-standards.md"
+      ],
+      "owners": [
+        "open-data-curator",
+        "affiliate-manager"
+      ],
+      "skills": [
+        "audit-provenance",
+        "audit-affiliate-compliance"
+      ],
+      "metricIds": []
+    },
+    {
+      "chapter": 25,
+      "title": "Go/Pivot/Stop",
+      "status": "adopted",
+      "summary": "90日・6か月・12か月で需要と制作負荷を判定する。",
+      "rationale": "機能完成ではなくユーザー価値・売上・反復利用で投資を増減する。",
+      "canonicalPaths": [
+        "docs/00_プロジェクト管理/02_収益化戦略.md",
+        "packages/data-configs/src/business-plan/catalog.ts"
+      ],
+      "owners": [
+        "strategy-advisor"
+      ],
+      "skills": [
+        "business-plan-operate",
+        "weekly-review"
+      ],
+      "metricIds": [
+        "weekly-revenue",
+        "regional-decision-sessions"
+      ]
+    }
+  ]
+}

@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 
 import { ChartPanel } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { colorViewOf, colorViewsFor, withColorView, type StatsSchema, type TopoJSONTopology } from "@stats47/types";
 import { Map as MapIcon } from "lucide-react";
@@ -20,6 +19,7 @@ import { Map as MapIcon } from "lucide-react";
 
 import { ChartEmptyState } from "@/components/charts/ChartState";
 import { fetchTopology } from "@/components/charts/geo-topology";
+import { SingleSelectToggleGroup } from "@/components/molecules/SingleSelectToggleGroup";
 
 import type { AreaType } from "@/features/area";
 import {
@@ -235,29 +235,16 @@ export function RankingMapChartClient({
               )}
             </div>
             {colorViews.length > 0 && (
-              <ToggleGroup
+              <SingleSelectToggleGroup
                 aria-label="地図の塗り方"
-                value={[colorViewOf(mapConfig)?.id ?? ""]}
-                onValueChange={(selected) => {
-                  // 押し直しで空になったときは選択を保つ
-                  const next = selected[0];
-                  if (!next) return;
+                value={colorViewOf(mapConfig)?.id ?? ""}
+                options={colorViews.map(view => ({ value: view.id, label: view.label, title: view.description }))}
+                onValueChange={(next) => {
                   setChosenView(next);
                   trackUiInteraction({ action: "color_view_change", target: "map" });
                 }}
-                className="absolute left-2 top-2 z-500 h-7 bg-background/90 p-0.5 shadow-xs backdrop-blur-xs"
-              >
-                {colorViews.map((view) => (
-                  <ToggleGroupItem
-                    key={view.id}
-                    value={view.id}
-                    title={view.description}
-                    className="h-6 px-2 text-xs data-pressed:bg-primary data-pressed:text-primary-foreground"
-                  >
-                    {view.label}
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
+                className="absolute left-2 top-2 z-500 bg-background/90 backdrop-blur-xs"
+              />
             )}
           </>
         )}

@@ -5,7 +5,7 @@ import { extractDx } from '../ingest-local-government-dx.mjs';
 import { extractFurusato, extractDeductions } from '../ingest-furusato-donations.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 const starts = [...Array.from({ length: 22 }, (_, i) => 7 + 6 * i), ...Array.from({ length: 8 }, (_, i) => 295 + 6 * i)];
 function sheet(edition, override = () => undefined) {
   return { getRow: (r) => ({ getCell: (c) => ({ value: (() => {

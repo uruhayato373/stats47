@@ -1,8 +1,20 @@
 /**
  * Web app chart palette.
  *
- * Use CSS variables so charts follow light/dark theme tokens.
+ * Metric colours follow the same presentation metadata as their maps.
+ * Generic series colours use CSS variables for light/dark theme tokens.
  */
+import { resolveSchemeInterpolator } from "@stats47/visualization/d3";
+
+import type { MetricPresentation } from "@stats47/types";
+
+/** 指標の代表色は地図と同じ配色から取る。位置は全指標共通で、年度や値によって変えない。 */
+const METRIC_COLOR_POSITION = 0.75;
+
+export function getMetricChartColor(presentation: Pick<MetricPresentation, "colorScheme">): string {
+  return resolveSchemeInterpolator(presentation.colorScheme)(METRIC_COLOR_POSITION);
+}
+
 export const CHART_COLORS = [
   "hsl(var(--chart-1))",
   "hsl(var(--chart-2))",

@@ -61,7 +61,7 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 - 永続 DB なし (使い捨てビルドキャッシュ SQLite の read のみ)
 - `.local/r2/app/` — snapshot JSON write (排他、 後で r2-publisher が push)
 - `apps/remotion/public/<feature>/*.json` — 動画用 static JSON write
-- `packages/area/src/data/{prefectures,cities}.json` — area npm パッケージ static export
+- 台帳 `areas.prefectures`・`areas.cities` — area npm パッケージ static export
 
 ## File Boundary (並行衝突回避)
 

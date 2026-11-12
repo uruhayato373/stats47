@@ -6023,6 +6023,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-14",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:coffee-consumption-expenditure",
           "kind": "ranking"
         },
@@ -9068,6 +9072,10 @@
         {
           "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-02",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:commuters-to-other-municipalities",

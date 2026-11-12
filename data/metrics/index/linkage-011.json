@@ -7445,6 +7445,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-06",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:high-school-advancement-rate",
           "kind": "ranking"
         },

@@ -1,0 +1,339 @@
+{
+  "themes": {
+    "aging-society": {
+      "title": "市区町村の高齢化",
+      "metricKeys": [
+        "elderly-population-ratio"
+      ],
+      "defaultMetricKey": "elderly-population-ratio",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "population": {
+      "title": "市区町村の人口",
+      "metricKeys": [
+        "total-population",
+        "japanese-population",
+        "population-density-per-km2-inhabitable-area",
+        "young-population-ratio",
+        "production-age-population-ratio",
+        "elderly-population-ratio",
+        "day-time-population",
+        "day-time-population-ratio",
+        "ratio-never-married-15-plus",
+        "households",
+        "moving-in-excess-rate",
+        "census-population-change-rate-5y",
+        "census-population-change-5y"
+      ],
+      "defaultMetricKey": "total-population",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "households": {
+      "title": "市区町村の世帯構成",
+      "metricKeys": [
+        "households",
+        "census-household-change-rate-5y",
+        "single-person-households",
+        "nuclear-family-household-count",
+        "nuclear-family-households-ratio",
+        "single-mother-households",
+        "single-father-households",
+        "elderly-couple-only-household-ratio",
+        "single-person-household-old-population-ratio"
+      ],
+      "defaultMetricKey": "households",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "migration": {
+      "title": "市区町村の人口移動",
+      "metricKeys": [
+        "moving-in-excess-rate",
+        "moving-in-excess-rate-japanese",
+        "movers-in",
+        "movers-out",
+        "japanese-movers-in",
+        "japanese-movers-out",
+        "moving-in-rate",
+        "moving-in-rate-japanese",
+        "moving-out-rate",
+        "moving-out-rate-japanese",
+        "outflow-commuter-student-population"
+      ],
+      "defaultMetricKey": "moving-in-excess-rate",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "vital-statistics": {
+      "title": "市区町村の出生・婚姻・死亡",
+      "metricKeys": [
+        "births",
+        "death-count",
+        "marriages",
+        "divorces"
+      ],
+      "defaultMetricKey": "births",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "foreign-residents": {
+      "title": "市区町村の外国人住民",
+      "metricKeys": [
+        "foreign-resident-count",
+        "foreign-resident-population",
+        "foreign-population-per-100k"
+      ],
+      "defaultMetricKey": "foreign-resident-count",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "urban-structure": {
+      "title": "市区町村の人口集中・都市構造",
+      "metricKeys": [
+        "densely-inhabited-district-population",
+        "densely-inhabited-district-population-density",
+        "densely-populated-area",
+        "densely-populated-area-change-rate",
+        "urban-planning-area"
+      ],
+      "defaultMetricKey": "densely-inhabited-district-population",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "local-finance": {
+      "title": "市区町村の地方財政",
+      "metricKeys": [
+        "fiscal-strength-index",
+        "current-balance-ratio-city",
+        "real-public-debt-service-ratio-city",
+        "future-burden-ratio-city",
+        "real-balance-ratio-city",
+        "municipal-bonds-outstanding",
+        "municipal-resident-tax",
+        "standard-fiscal-demand-municipality",
+        "standard-fiscal-revenue-municipality",
+        "per-taxpayer-taxable-income",
+        "per-taxpayer-income",
+        "taxpayer-count-equal",
+        "taxpayer-count-income",
+        "municipal-general-administration-staff",
+        "civil-engineering-expense-municipal",
+        "education-expense-municipal",
+        "public-assistance-expense-municipal",
+        "sanitation-expense-municipal",
+        "welfare-expense-municipal"
+      ],
+      "defaultMetricKey": "fiscal-strength-index",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "commerce": {
+      "title": "市区町村の商業",
+      "metricKeys": [
+        "annual-sales-amount",
+        "annual-sales-amount-per-employee",
+        "annual-sales-amount-per-establishment",
+        "wholesale-annual-sales-amount",
+        "sales-amount-private",
+        "retail-store-count",
+        "retail-store-count-per-1000",
+        "retail-stores-per",
+        "department-supermarket-count",
+        "department-supermarket-count-per-100k",
+        "department-store-count-per-100k",
+        "large-retail-store-count-per-100k",
+        "number-of-commercial-employees-wholesale-retail",
+        "restaurant-count-per-1000"
+      ],
+      "defaultMetricKey": "annual-sales-amount",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "establishments": {
+      "title": "市区町村の事業所",
+      "metricKeys": [
+        "number-of-establishments-economic-census-basic-survey",
+        "number-of-establishments-establishment-corporate-statistics",
+        "number-of-establishments-agriculture-forestry",
+        "number-of-establishments-agriculture-forestry-fisheries",
+        "number-of-establishments-fisheries",
+        "number-of-establishments-mining-quarrying-gravel-extraction",
+        "number-of-establishments-construction",
+        "number-of-establishments-manufacturing",
+        "number-of-establishments-information-communication",
+        "number-of-establishments-transport-post",
+        "number-of-establishments-wholesale-retail",
+        "number-of-establishments-finance-insurance",
+        "number-of-establishments-real-estate-leasing",
+        "number-of-establishments-education-learning-support",
+        "number-of-establishments-medical-welfare"
+      ],
+      "defaultMetricKey": "number-of-establishments-economic-census-basic-survey",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "manufacturing": {
+      "title": "市区町村の製造業",
+      "metricKeys": [
+        "manufacturing-shipment-amount",
+        "manufacturing-shipment",
+        "manufacturing-establishments",
+        "manufacturing-employees",
+        "manufacturing-sales-private",
+        "manufacturing-net-value-added-private"
+      ],
+      "defaultMetricKey": "manufacturing-shipment-amount",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "medical-welfare": {
+      "title": "市区町村の医療・福祉",
+      "metricKeys": [
+        "general-hospital-count",
+        "general-hospital-per-100k",
+        "general-hospital-count-per-100km2",
+        "general-clinic-count",
+        "general-clinic-count-per-100k",
+        "general-clinic-count-per-100km2",
+        "dental-clinic-count",
+        "psychiatric-hospital-count",
+        "physicians-in-medical-facilities",
+        "dentists-in-medical-facilities",
+        "pharmacist-count",
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "intellectual-disability-support-facility-capacity",
+        "intellectual-disability-support-facility-residents",
+        "physical-disability-rehabilitation-facility-capacity",
+        "physical-disability-rehabilitation-facility-residents",
+        "national-health-insurance-benefits"
+      ],
+      "defaultMetricKey": "general-hospital-count",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "education": {
+      "title": "市区町村の教育・文化施設",
+      "metricKeys": [
+        "elementary-school-count",
+        "elementary-school-count-per-100km2-habitable",
+        "elementary-school-children-count",
+        "elementary-school-teachers",
+        "junior-high-school-count",
+        "junior-high-school-count-per-100km2-habitable",
+        "junior-high-school-students-count",
+        "junior-high-school-teachers",
+        "high-school-count",
+        "high-school-count-per-100km2-habitable",
+        "integrated-kindergarten-enrollment",
+        "library-count-per-million",
+        "public-hall-count-per-million"
+      ],
+      "defaultMetricKey": "elementary-school-count",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "housing": {
+      "title": "市区町村の住宅・建設",
+      "metricKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio",
+        "housing-floor-area",
+        "new-housing-starts",
+        "new-housing-floor-area",
+        "new-owner-occupied-starts",
+        "new-rental-starts",
+        "new-condo-starts",
+        "earthquake-retrofit-housing",
+        "solar-power-housing"
+      ],
+      "defaultMetricKey": "vacant-housing-ratio",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "commuting": {
+      "title": "市区町村の通勤・通学と乗り物",
+      "metricKeys": [
+        "commuters-total",
+        "commute-by-train",
+        "commute-by-bus",
+        "commute-by-car",
+        "commute-by-motorcycle",
+        "commute-by-bicycle",
+        "commute-on-foot",
+        "kei-car-count",
+        "motorcycle-count",
+        "moped-count"
+      ],
+      "defaultMetricKey": "commuters-total",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "labor": {
+      "title": "市区町村の労働・就業",
+      "metricKeys": [
+        "employed-people-ratio",
+        "employed-people-ratio-primary",
+        "employed-people-ratio-secondary",
+        "employed-people-ratio-tertiary",
+        "secondary-employed-people-ratio-tertiary",
+        "unemployment-rate",
+        "elderly-workers-ratio",
+        "commuter-ratio-to-other-municipalities",
+        "commuter-ratio-from-other-municipalities"
+      ],
+      "defaultMetricKey": "employed-people-ratio",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "safety-environment": {
+      "title": "市区町村の安全・環境",
+      "metricKeys": [
+        "criminal-recognition-count",
+        "crime-rate-per-1k",
+        "traffic-accident-count",
+        "traffic-accident-per-100k",
+        "garbage-total-output",
+        "garbage-final-disposal",
+        "garbage-collection-population"
+      ],
+      "defaultMetricKey": "criminal-recognition-count",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "agriculture-forestry": {
+      "title": "市区町村の農林業",
+      "metricKeys": [
+        "agricultural-output",
+        "cultivated-area",
+        "abandoned-cultivated-land-area",
+        "woodland-area",
+        "forest-area",
+        "workers-agriculture-forestry-fishery"
+      ],
+      "defaultMetricKey": "agricultural-output",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    },
+    "land-area": {
+      "title": "市区町村の土地・面積",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "total-area-prefecture-ratio",
+        "habitable-area",
+        "habitable-area-ratio",
+        "total-assessed-land-area",
+        "major-lake-area"
+      ],
+      "defaultMetricKey": "habitable-area-ratio",
+      "entityPolicyKey": "standard-municipality-v1",
+      "status": "active"
+    }
+  },
+  "appendedMetrics": {
+    "welfare-facilities": [
+      "nursery-waiting-children-rate"
+    ]
+  }
+}

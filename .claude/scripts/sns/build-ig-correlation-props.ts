@@ -49,6 +49,7 @@ import {
 } from "../../../packages/correlation/src/utils/calculate-pearson.ts";
 import {
   correlationByKeyPath,
+  parseCorrelationByKeySnapshot,
   type CorrelationByKeySnapshot,
 } from "../../../packages/correlation/src/types/snapshot.ts";
 import {
@@ -394,7 +395,7 @@ async function gatherByKeyCandidates(limitKeys = BY_KEY_SOURCE_LIMIT): Promise<C
     if (!configK) continue;
     const snapshot = await fetchJsonOrNull<CorrelationByKeySnapshot>(correlationByKeyPath(key));
     if (!snapshot) continue;
-    for (const item of snapshot.pairs) {
+    for (const item of Object.values(parseCorrelationByKeySnapshot(snapshot).groups).flat()) {
       const configOther = getMetricConfig(item.rankingKey);
       if (!configOther || configK.category === configOther.category) continue;
       out.push({

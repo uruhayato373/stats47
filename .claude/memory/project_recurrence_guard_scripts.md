@@ -21,6 +21,40 @@ originSessionId: dfec608a-a637-4fdf-b949-56d68f37fcb8
 | `check-published-drafts.cjs` | contents/blog/<slug> が存在し公開 SSOT `.local/r2/app/blog/<slug>/article.md` も存在 = 公開済み下書きの取り残しを exit 1（SSD 非接続時は skip） | 「publish-article 手順6（公開後の下書き削除）の skip で公開済み 6 件が contents/blog に残存し live(R2) と drift・退行リスク (2026-05-30)」 | `/deploy` Step 2、`/publish-article` 手順6 |
 | `check-ad-placement.cjs` | 広告 7 検査: ①生 `AdSenseAd` 直叩き ②広告どうしの隣接（**条件付きブロックは隔てるものに数えない**）③`RailAdSlot` の rail 外使用 ④fluid はページ 1 枠 ⑤右レールの独立 scroll 禁止 ⑥右レール PR は登録済み画像バナーのみ ⑦参照ゼロの slot 定数 | 「2026-07-29 全 23 ルート広告棚卸し」+「2026-08-02 右レールに独立 scroll / 独自テキストPRが混在」 | `apps/web/scripts/pre-commit-checks.sh` §2.2.1、`pr-quality-check.yml` static-gates |
 
+## レールの幅を外枠だけで検査しない (2026-11-11)
+
+**問題**: 総人口・日照時間・ブログの右レールは外枠 316px のまま、通常カードが内容依存で 84〜294px に縮んだ。既存の本文/外枠の幅比テストは通っていた。
+
+**原因**: shell 988px で grid から flex-col に変えると、残った `items-start` が縦の上揃えから横の左揃えに変わる。見出しの inline-size containment と truncate もカードを広げない。親の align-items だけを stretch にする A/B 操作で全カード 316px に戻ることを確認した。
+
+**対策・証拠**: 列幅は `PageShell.tsx` の共通グリッド、表示境界は `globals.css` の `rail:` に一本化し、ArticleShell のレール内も grid のままにする。`apps/web/tests/smoke/rail-layout.spec.ts` は内側カードの実幅・広告原寸・横 overflow を、全レール利用テンプレートと各境界の前後、左メニュー開閉で測る。`rail-contract-audit.mjs` は個別の表示境界と RailCard の固定幅を検出する。正典は `docs/01_技術設計/04_デザインシステム.md` のレール UI 契約。
+
+## 単一選択の切り替えが別の見た目になる (2026-11-11)
+
+**問題**: 計算方法と地図の塗り方が同じ ToggleGroup を使っていても、選択背景・寸法が異なっていた。
+
+**原因**: `RankingMapChartClient` の `data-pressed:bg-primary` など呼び出し側の上書きと、Button を並べる別実装が併存していた。プリミティブの共用だけでは使い方を統一できない。
+
+**対策・証拠**: `SingleSelectToggleGroup` が標準の見た目と必須単一選択を所有する。既存 `design-system:check` から `selection-control-audit.mjs` を呼び、直接の組み立て・通常 Button の選択式・見た目の上書きを検出する。意図的な違反 fixture、操作テスト、`ranking-controls.spec.ts` の画面幅ごとの計算後スタイル比較で逆戻りを検査する。仕様はデザインシステムの「表示条件の単一選択」を参照。
+
+## ページ出典と図の補足を重複させない (2026-11-11)
+
+**問題**: ランキングの地図直下と本文末に同じ出典が出て、共通の出典一覧が上の線と余白も重ねていた。
+
+**原因**: 旧 `SourceAttribution` の表示経路がページの `DataSourceList` 導入後も残り、編成統計と地図の出典メタもコードに直書きされていた。
+
+**対策**: 図の下は条件・更新日、ページ出典は `DataSourceList` に集約する。調査は `surveys.master`、編成統計・地図は `provenance.reference-sources` のJSONをID参照する。既存 `data-source-contract.test.ts` に直書き・重複表示の検知、`ranking-controls.spec.ts` に境界幅での出典一意性・余白検査を追加した。指標→調査の配線は新しい対応表を作らず既存辞書・共通resolverを使う。
+
+**補助出典の漏れ**: 主出典の紐付け監査が100%でも、年別 `supplementalSources` は保証されない。出典辞書の生成器が `metric.source` だけを読んでいたため、総人口の2025年分などが調査名に解決されなかった。生成入力に補助出典も含め、既存 `data-source-entries.test.ts` で全補助出典のIDが実在調査に解決することを検査する。
+
+## カードの gap と子の margin を重ねない (2026-11-12)
+
+**問題**: 商品詳細で導入文は左右余白なし、ヘッダーは16px、見本は20px、購入案内は24pxになり、本文・図・購入ボタンの間も24〜48pxへ膨らんだ。
+
+**原因**: `SurfaceSection` は標準で16pxの内側余白と `gap-4` を持つ。ページ側の `p-5/p-6` と子の `mt-*` が重なっていた。また、説明文と複数カードを包む `space-y-6` の div は、`PanelGrid` の「カードを含むセルにはpaddingを付けない」条件に該当し、説明文だけ余白がなくなっていた。
+
+**対策・証拠**: 商品共通ページから外側divと余白上書きを除き、文章とカードを共通格子の直接のセルにする。実寸は `responsive-layout.spec.ts` の商品3種 (見本あり/財政補足あり/書籍) × 4画面幅で、見出しとの左端一致と、子同士の距離が共通gapに一致することを検査する。`apps/web/src/app/products/[slug]/page.tsx` / `packages/components/src/surface/surface.tsx` / デザインシステムの Surface が正典。
+
 ## guard を書かない領域 (CodeQL が担う)
 
 **正規表現の ReDoS は guard スクリプトにしない。** 2026-07-29 に掲載価値スコアで

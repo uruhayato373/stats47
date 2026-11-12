@@ -1,0 +1,170 @@
+{
+  "codeTables": {
+    "expressway-road": [
+      {
+        "code": "1",
+        "label": "高速自動車国道",
+        "sourceCodes": [
+          "1"
+        ],
+        "color": "hsl(var(--chart-3))"
+      },
+      {
+        "code": "2",
+        "label": "並行する自動車専用道路",
+        "sourceCodes": [
+          "2"
+        ],
+        "color": "hsl(var(--chart-2))"
+      },
+      {
+        "code": "3",
+        "label": "一般国道の自動車専用道路",
+        "sourceCodes": [
+          "3"
+        ],
+        "color": "hsl(var(--chart-4))"
+      },
+      {
+        "code": "4",
+        "label": "本州四国連絡高速道路",
+        "sourceCodes": [
+          "4"
+        ],
+        "color": "hsl(var(--chart-1))"
+      },
+      {
+        "code": "5",
+        "label": "指定都市高速道路",
+        "sourceCodes": [
+          "5"
+        ],
+        "color": "hsl(var(--muted-foreground))"
+      },
+      {
+        "code": "6",
+        "label": "その他の道路",
+        "sourceCodes": [
+          "6"
+        ],
+        "color": "hsl(var(--muted-foreground))"
+      }
+    ],
+    "railway-operator": [
+      {
+        "code": "1",
+        "label": "JR新幹線",
+        "sourceCodes": [
+          "1"
+        ],
+        "color": "hsl(var(--chart-3))"
+      },
+      {
+        "code": "2",
+        "label": "JR在来線",
+        "sourceCodes": [
+          "2"
+        ],
+        "color": "hsl(var(--chart-2))"
+      },
+      {
+        "code": "3",
+        "label": "公営鉄道",
+        "sourceCodes": [
+          "3"
+        ],
+        "color": "hsl(var(--chart-4))"
+      },
+      {
+        "code": "4",
+        "label": "民営鉄道",
+        "sourceCodes": [
+          "4"
+        ],
+        "color": "hsl(var(--chart-1))"
+      },
+      {
+        "code": "5",
+        "label": "第三セクター",
+        "sourceCodes": [
+          "5"
+        ],
+        "color": "hsl(var(--muted-foreground))"
+      }
+    ],
+    "airport-type": [
+      {
+        "code": "hub",
+        "label": "拠点空港 (旧第一種・会社管理)",
+        "sourceCodes": [
+          "1",
+          "6"
+        ],
+        "color": "hsl(var(--chart-3))"
+      },
+      {
+        "code": "national",
+        "label": "国管理空港 (旧第二種・国管理)",
+        "sourceCodes": [
+          "2",
+          "7"
+        ],
+        "color": "hsl(var(--chart-2))"
+      },
+      {
+        "code": "local",
+        "label": "地方管理空港 (旧第三種・特定地方管理)",
+        "sourceCodes": [
+          "3",
+          "8",
+          "9"
+        ],
+        "color": "hsl(var(--chart-4))"
+      },
+      {
+        "code": "other",
+        "label": "共用・その他の空港",
+        "sourceCodes": [
+          "4",
+          "5",
+          "10",
+          "11"
+        ],
+        "color": "hsl(var(--muted-foreground))"
+      }
+    ]
+  },
+  "classifications": {
+    "N06": {
+      "field": "N06_008",
+      "label": "道路の種別",
+      "codeTable": "expressway-road"
+    },
+    "N05": {
+      "field": "N05_001",
+      "label": "事業者の種別",
+      "codeTable": "railway-operator"
+    },
+    "N02": {
+      "field": "serviceProviderType",
+      "label": "事業者の種別",
+      "codeTable": "railway-operator"
+    },
+    "N08": {
+      "field": "N08_002",
+      "label": "空港の種別",
+      "codeTable": "airport-type"
+    }
+  },
+  "notes": {
+    "expressway-road": [
+      "高速道路の道路種別 (N06 高速道路時系列データ)。"
+    ],
+    "railway-operator": [
+      "鉄道の事業者種別コード。時系列 N05 と現況 N02 で属性名は違うがコード表は同じなので 1 つだけ書く。"
+    ],
+    "airport-type": [
+      "空港の種別 (N08 空港時系列データ。原典のコード表 AirportCatCd)。2008 年の空港法改正の前後で区分が変わったので、時代をまたいで同じ色で追えるよう近いものどうしを 4 つにまとめる。"
+    ]
+  }
+}

@@ -91,7 +91,7 @@ describe('PageShell — rightRail', () => {
     expect(rail).toHaveLength(1);
     expect(rail[0].parentElement).toHaveClass(
       'mt-4',
-      '@min-[988px]/shell:mt-0'
+      'rail:mt-0'
     );
   });
 
@@ -101,9 +101,9 @@ describe('PageShell — rightRail', () => {
     );
     const grid = container.firstElementChild?.firstElementChild;
     expect(grid).toHaveClass(
-      '@min-[988px]/shell:grid',
-      '@min-[988px]/shell:grid-cols-[minmax(0,1fr)_316px]',
-      '@min-[988px]/shell:gap-4'
+      'rail:grid',
+      'rail:grid-cols-[minmax(0,1fr)_316px]',
+      'rail:gap-4'
     );
     expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
   });

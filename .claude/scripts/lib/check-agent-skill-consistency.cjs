@@ -703,8 +703,9 @@ function checkOrphanScripts(findings) {
     // metric config の provenance.restore に「このデータの再取得コマンド」が書かれている
     // (data-provenance-standards.md §2)。手動投入データの取得スクリプトはここからしか参照されない。
     datasetDir("metrics.definitions"),
-    // テーマ専用データ (水質・豪雪地帯・橋梁点検・貨物/空港 など) は metric ではなく theme-catalog の
-    // *-source.ts が出典を持ち、同じ restore 欄に再取得コマンドを書く (2026-10-02)
+    // テーマ専用データ (水質・豪雪地帯・橋梁点検・貨物/空港 など) は metric ではなくテーマの出典の台帳
+    // (themes.sources) が出典を持ち、同じ restore 欄に再取得コマンドを書く (2026-10-02)
+    datasetDir("themes.sources"),
     "packages/data-configs/src/theme-catalog",
     // 管理画面と Remotion は .claude/scripts の部品を相対 import で使う (2026-10-02 に
     // note/catalog/cover-categories.ts が apps/admin から import されているのに orphan と誤報した)

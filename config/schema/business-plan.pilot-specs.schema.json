@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "事業計画のパイロットの仕様",
+  "description": "data/business-plan/plan/pilot-specs.json の形状契約。最初に実行するコンテンツの機会 (contentId = business-plan.content-opportunities の id) ごとの問い・地理粒度・使うデータ・方法・出し先・品質ゲート (並びがパイロットの順)。dataRefs の id は kind ごとに、metric = 都道府県の指標の key、gis = 国土数値情報の dataId (geo.ksj-datasets)、open-data = 公開データのデータセット (open-data.datasets) を指す。読み込み口は packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_PILOT_SPECS)。",
+  "type": "object",
+  "required": ["pilotSpecs"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "pilotSpecs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "contentId", "question", "geography", "dataRefs", "existingAssets", "method", "outputChannels", "qualityGates", "owner", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^pilot-[a-z0-9-]+$" },
+          "contentId": { "type": "string", "pattern": "^geo-\\d{3}$" },
+          "question": { "type": "string", "minLength": 1 },
+          "geography": { "type": "string", "minLength": 1 },
+          "dataRefs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["kind", "id", "role"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "enum": ["metric", "gis", "open-data"] },
+                "id": { "type": "string", "minLength": 1 },
+                "role": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "existingAssets": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "method": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "outputChannels": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "qualityGates": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "owner": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "status": { "enum": ["ready", "in-progress", "blocked", "gated", "candidate"] }
+        }
+      }
+    }
+  }
+}

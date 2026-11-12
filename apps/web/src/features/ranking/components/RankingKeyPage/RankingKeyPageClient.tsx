@@ -2,27 +2,20 @@
 
 import { useMemo } from "react";
 
-import { hrefFor } from "@stats47/data-configs/content/href";
 import {
     type RankingItem,
     type RankingValue,
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
 
-import Link from "@/components/atoms/SiteLink";
 import { ArticleShell, PanelGrid } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
-import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 
+import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 
-import { adSlotBox } from "@/lib/ad-placements";
-import {
-    ADSENSE_DISPLAY_ENABLED,
-    AdSenseAd,
-    RANKING_PAGE_TABLE_SIDE,
-} from "@/lib/google-adsense";
+import { RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
 
 import { classifyRankingSubtitle } from "../../utils/classify-subtitle";
 import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
@@ -59,12 +52,12 @@ interface RankingKeyPageClientProps {
     parentAreaCode?: string;
     /** 市区町村ランキング定義（存在する場合にトグルを表示） */
     cityRankingItem?: RankingItem;
-    /** 調査名（surveys テーブルから取得） */
-    surveyName?: string;
     /** グループメンバー（normalization_basis トグル用） */
     groupMembers?: RankingBasisMember[];
     /** ArticleShell の breadcrumb slot に描画するパンくず */
     breadcrumb?: React.ReactNode;
+    /** 同じ指標の市区町村ページへのリンク (既存の関連付けからサーバーで解決) */
+    municipalityLink?: React.ReactNode;
 }
 
 export function RankingKeyPageClient({
@@ -77,9 +70,9 @@ export function RankingKeyPageClient({
     sections = {},
     parentAreaCode,
     cityRankingItem,
-    surveyName,
     groupMembers = [],
     breadcrumb,
+    municipalityLink,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -115,27 +108,6 @@ export function RankingKeyPageClient({
         return `${displayInfo.title}、1位は${top.areaName}！ あなたの県は何位？ #stats47`;
     }, [rankingValues, displayInfo.title]);
 
-    // カードタイトル・サブタイトル・出典を構築
-    // attribution (2 階層: 編成統計 + 原典調査) が焼き込まれていれば統一表示。
-    // 未再生成の item.json には無いため、その場合は従来の sourceConfig.source / surveyId 表示にフォールバック。
-    const sourceObj = rankingItem.sourceConfig?.source;
-    const cardFooter = rankingItem?.attribution ? (
-        <SourceAttribution attribution={rankingItem.attribution} />
-    ) : (sourceObj?.name || surveyName) ? (
-        <span>
-            {sourceObj?.name && (
-                <>出典: {sourceObj.url
-                    ? <a href={sourceObj.url} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">{sourceObj.name}</a>
-                    : sourceObj.name
-                }</>
-            )}
-            {sourceObj?.name && surveyName && "　"}
-            {surveyName && rankingItem?.surveyId && (
-                <>調査: <Link href={hrefFor("survey", { surveyKey: rankingItem.surveyId })} className="hover:text-primary hover:underline">{surveyName}</Link></>
-            )}
-        </span>
-    ) : undefined;
-
     // ヒーローカードのメタ操作行: 年度 select + 都道府県/市区町村 seg
     const metaControls = (
         <>
@@ -156,24 +128,14 @@ export function RankingKeyPageClient({
         </>
     );
 
-    // 地図・テーブルカードヘッダー右側の操作（年度 + エリア切替のみ）
+    // 地図・表に関係する操作と地域単位のリンクを見出しのそばに置く。
     const headerActions = (
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-col items-end gap-1.5 @sm:flex-row @sm:items-center">
             {metaControls}
+            {currentAreaType === "prefecture" && municipalityLink}
         </div>
     );
 
-    // 最終更新日は可視化直下、年度はカードヘッダーと統計サマリに表示する。
-    const formattedUpdated = (() => {
-        if (!rankingItem.updatedAt) return null;
-        try {
-            const d = new Date(rankingItem.updatedAt);
-            if (Number.isNaN(d.getTime())) return null;
-            return d.toISOString().slice(0, 10);
-        } catch {
-            return null;
-        }
-    })();
     const latestYearName =
         rankingItem.availableYears?.find((y) => y.yearCode === currentYear)?.yearName ??
         rankingItem.latestYear?.yearName ??
@@ -196,19 +158,14 @@ export function RankingKeyPageClient({
     // 右レール: ブログ詳細ページ (/blog/[slug]) と同じ構成に統一。
     // ArticleShell の右レールは shell コンテナ 988px 以上で表示する (本文 656px を保つ境界)。
     // ラッパーもブログと同じ非 sticky の <aside> に揃える。
-    // サイド AdSense はレール表示時に合わせて hidden @min-[988px]/shell:block。
+    // サイド AdSense は右レールが本文の横にあるときだけ出す (RailAdSlot。hidden rail:block)。
+    // 最後の 1 枠は 300×600 をヘッダー (56px) の下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
+    // PC で下が約 840px 空いていた)。右レールは flex の列なので、sticky は右レールの終わり = 本文の終わりで止まり、フッターに重ならない。
+    // Google の条件 (幅 300px 以下・縦だけ・同時に見える追従広告は 1 つ・PC だけ) は台帳の adsense-rail-sticky に書いた
     const rail = sections.sidebar ? (
         <>
             {sections.sidebar}
-            {ADSENSE_DISPLAY_ENABLED && (
-                <div className="hidden @min-[988px]/shell:block">
-                    <AdSenseAd
-                        format={RANKING_PAGE_TABLE_SIDE.format}
-                        slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                        slotBox={adSlotBox("adsense-rail-rect")}
-                    />
-                </div>
-            )}
+            <RailAdSlot slot={RANKING_PAGE_TABLE_SIDE} sticky />
         </>
     ) : undefined;
 
@@ -216,14 +173,18 @@ export function RankingKeyPageClient({
     // 本文に入れると右レールが h1 の横から始まり、右レールの最初のカードが本文の最初のカードより上にずれていた。
     const pageHeader = (
         <div className="mb-4 flex min-w-0 flex-col gap-4">
-            <RankingHeaderPanel title={displayInfo.title} />
+            <RankingHeaderPanel
+                metricTitle={displayInfo.title}
+                areaType={currentAreaType}
+                updatedAt={activeRankingItem.updatedAt}
+            />
             <RankingHeaderControls
                 normalizationOptions={rankingItem.calculation?.normalizationOptions}
                 normalizationValue={normalizationType ?? "original"}
                 onNormalizationChange={handleNormalizationChange}
                 normalizationDisabled={isPending}
                 shareButton={
-                    <ShareButtons title={displayInfo.title} shareText={shareText} />
+                    <ShareButtons title={displayInfo.title} shareText={shareText} variant="menu" />
                 }
             />
             <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
@@ -242,6 +203,7 @@ export function RankingKeyPageClient({
                     ここから下の本文・導線も同じ列の格子のセルとして続く。 */}
                 <PanelGrid className="order-3">
                     <RankingHeaderStats
+                        metricTitle={displayInfo.title}
                         presentation={presentedItem.visualization}
                         rankingValues={rankingValues}
                         unit={displayInfo.unit}
@@ -256,13 +218,7 @@ export function RankingKeyPageClient({
                         areaType={currentAreaType}
                         headerActions={headerActions}
                         cardFooter={
-                            <>
-                                <RankingVisualizationDetails
-                                    description={definitionDetail}
-                                    updatedAt={formattedUpdated}
-                                />
-                                {cardFooter}
-                            </>
+                            definitionDetail && <RankingVisualizationDetails description={definitionDetail} />
                         }
                         isPending={isPending}
                     />

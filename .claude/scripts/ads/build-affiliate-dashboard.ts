@@ -1,7 +1,7 @@
 /**
  * アフィリエイト在庫 管理画面 (単体 HTML 生成)。
  *
- * SSOT = apps/web/scripts/affiliate-ads-data.ts の AFFILIATE_ADS[] を読み、
+ * SSOT = 広告の台帳 affiliate.ads (読み込み口 apps/web/scripts/affiliate-ads-data.ts の AFFILIATE_ADS[]) を読み、
  * 依存なしの自己完結 HTML (インライン CSS/JS + データ埋め込み) を 1 ファイル出力する。
  * 本番アプリには触れない。ブラウザで開けばバナー画像プレビュー付きで在庫を確認・絞り込みできる。
  *

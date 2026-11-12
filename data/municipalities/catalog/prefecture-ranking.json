@@ -1,0 +1,51 @@
+{
+  "keys": [
+    "manufacturing-shipment-amount",
+    "annual-sales-amount",
+    "fiscal-strength-index",
+    "per-taxpayer-income",
+    "real-public-debt-service-ratio-city",
+    "births",
+    "young-population-ratio",
+    "elderly-population-ratio",
+    "elementary-school-children-count",
+    "junior-high-school-students-count"
+  ],
+  "notes": {
+    "manufacturing-shipment-amount": [
+      "GSC 2026-W42 で表示のある市区町村ランキング (製造品出荷額 1,687 表示)。"
+    ],
+    "annual-sales-amount": [
+      "GSC 2026-W42 で表示のある市区町村ランキング。"
+    ],
+    "real-public-debt-service-ratio-city": [
+      "GSC 2026-W42 で表示のある市区町村ランキング。"
+    ],
+    "junior-high-school-students-count": [
+      "GSC 2026-W42 で表示のある市区町村ランキング。"
+    ],
+    "births": [
+      "GSC 2026-W42 で表示のある市区町村ランキング。"
+    ],
+    "fiscal-strength-index": [
+      "県名つきの検索語。"
+    ],
+    "elementary-school-children-count": [
+      "県名つきの検索語。"
+    ],
+    "young-population-ratio": [
+      "子育て系。"
+    ],
+    "elderly-population-ratio": [
+      "子育て系。"
+    ],
+    "per-taxpayer-income": [
+      "所得。"
+    ]
+  },
+  "excluded": [
+    { "label": "将来負担比率", "reason": "県内 6 自治体の県がある" },
+    { "label": "持ち家比率", "reason": "県内 8 自治体の県がある" },
+    { "label": "農業産出額", "reason": "年が 2006 年" }
+  ]
+}

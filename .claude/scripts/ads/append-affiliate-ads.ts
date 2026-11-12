@@ -1,6 +1,8 @@
 /**
- * append-affiliate-ads.ts — a8-catalog の harvested エントリを affiliate-ads-data.ts (SSOT) へ
- * 機械追記し、多段ゲートを通してから catalog を registered に昇格させる。
+ * append-affiliate-ads.ts — a8-catalog の harvested エントリを広告の台帳 `affiliate.ads`
+ * (data/affiliate/ledger/ads.json) の末尾へ機械追記し、多段ゲートを通してから catalog を registered に昇格させる。
+ * 台帳は JSON.stringify(doc, null, 2) + 改行で書く (台帳の形と同じなので、追記した件数の行だけが差分になる)。
+ * 書く前に台帳の Schema で形を確かめ、一時ファイルに書いてから置き換える。
  *
  * ゲート順 (1 つでも fail → 実行前に保持した byte 列で SSOT を復元し中止。git checkout は使わない):
  *   1. tsc         : npx tsc --noEmit -p apps/web/tsconfig.json
@@ -23,13 +25,14 @@ import { createRequire } from "module";
 
 import { AFFILIATE_OFFER_PROFILES } from "../../../apps/web/scripts/affiliate-offer-profiles-data";
 import { datasetPath } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/a8-scout-core.mjs");
 const appendCore = require("./lib/a8-append-core.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const ADS_DATA = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
+const ADS_DATA = path.join(PROJECT_ROOT, datasetPath("affiliate.ads"));
 const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
 
 const APPLY = process.argv.includes("--apply");
@@ -93,7 +96,14 @@ function restoreSsot(originalBytes: Buffer): void {
   const tmp = `${ADS_DATA}.rollback-tmp`;
   fs.writeFileSync(tmp, originalBytes);
   fs.renameSync(tmp, ADS_DATA);
-  console.log("↩️  affiliate-ads-data.ts を実行前の内容 (byte 列) に復元しました。");
+  console.log(`↩️  ${path.relative(PROJECT_ROOT, ADS_DATA)} を実行前の内容 (byte 列) に復元しました。`);
+}
+
+/** 追記後の台帳を一時ファイルに書いてから置き換える (途中で止まっても台帳が半端な JSON にならない)。 */
+function writeSsotAtomic(text: string): void {
+  const tmp = `${ADS_DATA}.append-tmp`;
+  fs.writeFileSync(tmp, text, "utf8");
+  fs.renameSync(tmp, ADS_DATA);
 }
 
 function nowStr(): string {
@@ -158,7 +168,7 @@ function main(): void {
   }
   if (profileErrors.length > 0) {
     console.error(
-      "🚨 active広告の登録前に affiliate-offer-profiles-data.ts で成果条件・負担・lane を確認してください:\n" +
+      "🚨 active広告の登録前に案件の台帳 affiliate.offer-profiles で成果条件・負担・lane を確認してください:\n" +
         [...new Set(profileErrors)].map((error) => `  - ${error}`).join("\n"),
     );
     process.exit(1);
@@ -166,15 +176,14 @@ function main(): void {
 
   // ★ 実行前 byte 列を保持 (ゲート失敗時の巻き戻しはこれを書き戻す。git checkout は使わない)
   const originalBytes = fs.readFileSync(ADS_DATA);
-  let src = originalBytes.toString("utf8");
-  const v = appendCore.validateTail(src);
-  if (!v.ok) {
-    console.error(`🚨 SSOT の末尾構造が不正 (${v.error})。追記を中止します。`);
+  const parsed = appendCore.parseAdsDoc(originalBytes.toString("utf8"));
+  if (!parsed.ok) {
+    console.error(`🚨 SSOT (${path.relative(PROJECT_ROOT, ADS_DATA)}) の形が不正 (${parsed.error})。追記を中止します。`);
     process.exit(1);
   }
   if (APPLY && isSsotDirty()) {
     console.error(
-      "🚨 affiliate-ads-data.ts に未コミットの差分があります。--apply は clean な状態でだけ実行できます\n" +
+      `🚨 ${path.relative(PROJECT_ROOT, ADS_DATA)} に未コミットの差分があります。--apply は clean な状態でだけ実行できます\n` +
         "   (ゲート失敗時の巻き戻しで未コミット変更の帰属が曖昧になるため。先に commit してから再実行)。",
     );
     process.exit(1);
@@ -183,7 +192,8 @@ function main(): void {
   // 追記 (メモリ上)。id 衝突は逐次 uniqueId で解消。a8mat 一致は既登録として skip (二重登録防止=第5ゲート)。
   const registered: Array<{ programId: string; id: string; name: string }> = [];
   const skippedDup: Array<{ programId: string; name: string; a8mat: string }> = [];
-  const existingA8mats: Set<string> = appendCore.extractA8mats(src);
+  let doc = parsed.doc;
+  const existingA8mats: Set<string> = appendCore.extractA8mats(doc);
   const stamp = nowStr();
   for (const { entry, draft: baseDraft } of targets) {
     const a8mat = appendCore.draftA8mat(baseDraft);
@@ -192,15 +202,14 @@ function main(): void {
       skippedDup.push({ programId: entry.programId, name: entry.name, a8mat });
       continue;
     }
-    const ids = appendCore.extractIds(src);
+    const ids = appendCore.extractIds(doc);
     const id = appendCore.uniqueId(baseDraft.id, ids);
     // priority は catalog entry の確定EPC (EPC×確定率) からバンド式で決定的に算出 (buildAdDraft の
     // 既定値 50 を上書き)。targetRankingKeys があれば +bonus。高EPC案件を上位に出すための要。
     const priority = core.computePriority(entry, curated);
     const targetRankingKeys = entry.targetRankingKeys ?? baseDraft.targetRankingKeys;
     const draft = { ...baseDraft, id, priority, targetRankingKeys, createdAt: stamp, updatedAt: stamp };
-    const literal = appendCore.renderEntry(draft, stamp);
-    src = appendCore.insertEntry(src, literal);
+    doc = appendCore.appendEntry(doc, appendCore.renderEntry(draft, stamp));
     if (a8mat) existingA8mats.add(a8mat); // 同一バッチ内の重複も弾く
     registered.push({ programId: entry.programId, id, name: `${entry.name} [${baseDraft.adType}]` });
   }
@@ -209,18 +218,27 @@ function main(): void {
   for (const r of registered) console.log(`  + ${r.id} (${r.name})`);
   for (const s of skippedDup) console.log(`  ⏭ 既登録 skip: ${s.name} (a8mat=${s.a8mat})`);
 
+  // 追記後の台帳が Schema に合わなければ書かない (dry-run でも確かめる)。
+  try {
+    assertDatasetShape("affiliate.ads", doc);
+  } catch (e) {
+    console.error(`🚨 追記後の台帳が Schema に合わない。追記を中止します: ${(e as Error).message}`);
+    process.exit(1);
+  }
+  const text = appendCore.serializeAdsDoc(doc);
+
   if (!APPLY) {
     // dry-run: 一時ファイルに書いてゲートは実行しない (SSOT を触らない)。
-    const tmp = path.join(PROJECT_ROOT, ".local/a8-append-preview.ts");
+    const tmp = path.join(PROJECT_ROOT, ".local/a8-append-preview.json");
     fs.mkdirSync(path.dirname(tmp), { recursive: true });
-    fs.writeFileSync(tmp, src, "utf8");
+    fs.writeFileSync(tmp, text, "utf8");
     console.log(`🧪 dry-run: プレビューを ${path.relative(PROJECT_ROOT, tmp)} に出力 (SSOT 未変更)。--apply で実追記。`);
     return;
   }
 
   // --apply: SSOT に追記があればゲート実行。全て a8mat 重複 skip なら SSOT 無変更 → ゲート省略。
   if (registered.length > 0) {
-    fs.writeFileSync(ADS_DATA, src, "utf8");
+    writeSsotAtomic(text);
     try {
       runAllGates();
     } catch (e) {

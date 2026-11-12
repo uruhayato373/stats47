@@ -46,6 +46,12 @@ npm run test:e2e:headed # ブラウザ表示あり
 - サーバー未起動時は `npm run build` と `next start` を自動実行
 - R2 snapshot を読む重いページの安定性を優先し、1 worker で直列実行
 
+右レールの幅検査は `tests/smoke/rail-layout.spec.ts`。`playwright.smoke.config.ts` の `smoke-chromium` で実行され、既存 Post-Deploy Smoke に含まれる。各 URL を一度読み込み、viewport と shell の境界前後・左メニュー開閉でリサイズし、カード実幅・広告原寸・横はみ出しを検査する。従来の本文幅の比率だけの検査は置き換えた。起動済み localhost を使う場合は `PLAYWRIGHT_TEST_BASE_URL` を指定して次を実行する。
+
+```bash
+npx playwright test rail-layout --config=playwright.smoke.config.ts --project=smoke-chromium --workers=1
+```
+
 ```
 tests/e2e/
 ├── areas/           # 都道府県一覧・詳細ページ
@@ -62,6 +68,8 @@ tests/e2e/
 ```
 
 ## テスト追加の指針
+
+表示条件の単一選択は `SingleSelectToggleGroup.test.tsx` が押し直し・キーボード・無効状態を、`selection-control-audit.test.ts` が再実装と個別装飾の違反 fixture を検査する。実画面は `ranking-controls.spec.ts` で各表示境界前後の計算後スタイルを比較し、`selection-controls.spec.ts` で選択肢の多い地方・貨物・文化財の折り返しと操作を検査する。
 
 | 対象 | 適切なテスト層 |
 |------|---------------|

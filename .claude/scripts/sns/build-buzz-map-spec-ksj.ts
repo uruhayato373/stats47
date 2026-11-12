@@ -44,10 +44,11 @@ import { feature } from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
 import { assertKsjPublicKeysAllowed } from "../../../packages/r2-storage/src/scripts/lib/ksj-publication-guard";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
-const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
+const SPECS_DIR = join(PROJECT_ROOT, datasetDir("sns.buzz-map-specs"));
 const ASSETS_DIR = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/assets");
 const MUNI_TOPOJSON = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/municipalities.topojson");
 
@@ -299,7 +300,7 @@ async function main() {
     console.log(`\nレンダ (静止画=最新年の全網図):`);
     console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
     console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
-    console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
+    console.log(`    --props=../../${datasetDir("sns.buzz-map-specs")}/${opts.id}.json`);
     return;
   }
 
@@ -382,7 +383,7 @@ async function main() {
   console.log(`\nレンダ:`);
   console.log(`  cd apps/remotion && npx remotion still src/index.ts ${comp} \\`);
   console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
-  console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
+  console.log(`    --props=../../${datasetDir("sns.buzz-map-specs")}/${opts.id}.json`);
 }
 
 main();

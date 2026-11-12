@@ -1,7 +1,7 @@
 /**
  * 交通網の変遷 (高速道路・鉄道の時系列 GIS) の型。
  *
- * 台帳 (`networks.ts`) が「どの原典を・どの条件で・どこまで公開してよいか」を持ち、
+ * 台帳 `geo.infra-history-networks` (読み込み口 `networks.ts`) が「どの原典を・どの条件で・どこまで公開してよいか」を持ち、
  * 生成スクリプトが原典から R2 artifact (`app/geo/history/<network>/...`) を作る。
  * Web は artifact を `parse.ts` の厳格 parser で読む。
  */
@@ -120,7 +120,7 @@ export interface InfraAttributeMap {
   readonly prefectureSource?: PrefectureSource;
 }
 
-/** 表示の種別。区分の台帳 (`mlit-ksj/classifications.ts`) の区分をそのまま使う */
+/** 表示の種別。区分の台帳 `geo.ksj-classifications` (読み込み口 `mlit-ksj/classifications.ts`) の区分をそのまま使う */
 export type InfraCategory = KsjAttributeClass;
 
 export interface InfraNetworkDefinition {

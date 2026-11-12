@@ -85,7 +85,7 @@ export interface BuzzMapAssetStatus {
   hasLocalAssets: boolean;
   /** ローカルに見つかった rel の一覧 */
   localRels: string[];
-  /** apps/remotion/src/features/buzz-map/specs/<ideaId>.json が存在するか */
+  /** 台帳 sns.buzz-map-specs に <ideaId>.json が存在するか */
   hasSpec: boolean;
 }
 
@@ -100,7 +100,7 @@ function scanIdeaAssets(ideaId: string): BuzzMapAssetStatus {
   }
   const specPath = path.join(
     projectRoot(),
-    "apps/remotion/src/features/buzz-map/specs",
+    datasetDir("sns.buzz-map-specs"),
     `${ideaId}.json`,
   );
   return {

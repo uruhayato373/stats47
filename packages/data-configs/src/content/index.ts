@@ -18,6 +18,8 @@ export interface ContentRoute {
   pattern: string;
   parameters: string[];
   title?: string;
+  pageType?: string;
+  scope?: string;
 }
 export interface ContentPage {
   id: string;

@@ -446,6 +446,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:births",
           "kind": "ranking"
         },
@@ -12022,6 +12026,10 @@
         {
           "pageId": "japan-theme:childcare-services",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "product:data-p-06",
+          "kind": "product"
         },
         {
           "pageId": "ranking:certified-childcare-center-count-per-100k-0-5",

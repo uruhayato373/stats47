@@ -1,7 +1,7 @@
 import { ListObjectsV2Command } from '@aws-sdk/client-s3';
 
 import { getS3Client } from '../../lib/clients/get-s3-client';
-import inventory from './license-retention-20260905.json';
+import inventory from '../../../../../data/geo/ksj/license-retention-20260905.json';
 import { SITE } from '@stats47/types';
 
 export interface RetentionObject {

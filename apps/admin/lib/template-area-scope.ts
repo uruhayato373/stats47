@@ -1,4 +1,4 @@
-import prefectures from '../../../packages/area/src/data/prefectures.json';
+import prefectures from '../../../data/areas/master/prefectures.json';
 import { buildMunicipalityEntityPolicy, resolveWardModeAreas, type WardMode } from '../../../packages/area/src/municipalities';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart } from './template-ranking-data';
@@ -57,7 +57,7 @@ export function areasOf(scope: AreaScope): Map<string, string> {
   for (const entity of policy().entities) {
     if (!codes.has(entity.code)) continue;
     if (within.kind === 'prefecture' && !entity.code.startsWith(within.prefCode)) continue;
-    areas.set(entity.code, municipalityLabel(entity.name));
+    areas.set(entity.code, within.kind === 'nation' ? entity.name : municipalityLabel(entity.name));
   }
   return areas;
 }

@@ -678,6 +678,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:real-public-debt-service-ratio",
           "kind": "ranking"
         },

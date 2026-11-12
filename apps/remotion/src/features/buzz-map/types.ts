@@ -1,7 +1,7 @@
 /**
  * buzz-map spec（1カード/1動画 = 1 spec JSON）
  *
- * spec ファイルは `apps/remotion/src/features/buzz-map/specs/*.json` に置き、
+ * spec ファイルは台帳 `sns.buzz-map-specs` に置き (見本の sample-*.json だけはこのフォルダの specs/)、
  * `npx remotion still/render <compId> --props=<specパス>` でそのまま inputProps になる。
  * 規約・テーマカタログは `.claude/rules/buzz-map-standards.md`。
  */

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "地図カード (buzz-map) の制作の仕様",
+  "description": "data/sns/buzz-map/specs/<id>.json の形状契約。1 枚のカード・1 本の動画が 1 ファイルで、{\"spec\": {...}} の形のまま Remotion の --props に渡せる。spec.id はファイル名と同じ。項目の意味の正本は apps/remotion/src/features/buzz-map/types.ts の BuzzMapSpec (型の列挙と同じ)。書き手は .claude/scripts/sns/build-buzz-map-spec*.ts と merge-buzz-map-specs.ts。見本 (sample-*.json) はここに置かず Remotion の specs/ に残す。",
+  "type": "object",
+  "required": ["spec"],
+  "additionalProperties": false,
+  "properties": {
+    "spec": {
+      "type": "object",
+      "required": ["id", "type", "level", "title", "subtitle", "source", "legend", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "type": { "enum": ["A", "B", "C", "D", "E"] },
+        "level": { "type": "string", "pattern": "^(pref|muni|muni:[0-9]{2})$" },
+        "title": { "type": "string", "minLength": 1 },
+        "titleLines": { "type": "array", "maxItems": 2, "items": { "type": "string", "minLength": 1 } },
+        "subtitle": { "type": "string" },
+        "source": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "accent": { "enum": ["social", "infra"] },
+        "theme": { "enum": ["blue", "dark", "paper"] },
+        "legend": {
+          "type": "object",
+          "required": ["title"],
+          "properties": {
+            "title": { "type": "string" },
+            "rows": { "type": "array", "items": { "type": "object", "required": ["key", "label", "fill"] } }
+          }
+        },
+        "data": { "type": "object" },
+        "pointRadius": { "type": "number" },
+        "lineYearProp": { "type": "string" },
+        "lineWidth": { "type": "number" },
+        "pointFill": { "type": "string" },
+        "lineStroke": { "type": "string" },
+        "years": { "type": "object", "required": ["from", "to"] },
+        "speed": { "type": "array" },
+        "ramp": { "type": "object" },
+        "summary": { "type": "object" },
+        "holdSeconds": { "type": "number" }
+      }
+    }
+  }
+}

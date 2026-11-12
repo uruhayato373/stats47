@@ -1,0 +1,225 @@
+{
+  "productId": "P-05",
+  "articleKey": "prefecture-healthcare-nursing-pack",
+  "displayTitle": "都道府県別 医療・介護データ",
+  "description": "人口当たりの医師・病床・介護施設を比較し、地域の医療・介護資源を整理できます。",
+  "useCases": [
+    {
+      "title": "地域医療の現状説明に",
+      "description": "医師数や病床数を人口当たりで比較し、県ごとの医療資源の違いを会議資料にまとめられます。"
+    },
+    {
+      "title": "介護サービスの調査に",
+      "description": "高齢者人口当たりの施設数を比べ、介護資源の地域差を調べる入口に使えます。"
+    },
+    {
+      "title": "医療・福祉分野の研修に",
+      "description": "施設や従事者の総数と人口当たりの値を区別し、地域統計の読み方を説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "physicians-per-population",
+      "heading": "人口当たりの医師数を比べる",
+      "lead": "医療施設に従事する医師数を人口10万人当たりで並べ、人口規模の異なる県を比較できます。総数のランキングでは捉えにくい医療資源の違いを示す図です。",
+      "metricKeys": [
+        "physicians-in-medical-facilities-per-100k"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "beds-per-population",
+      "heading": "一般病院の病床を地域で見比べる",
+      "lead": "人口10万人当たりの一般病院病床数を地図にし、病床の分布を俯瞰できます。医師数の図と併せて、地域の医療体制を整理する資料に使えます。",
+      "metricKeys": [
+        "general-hospital-bed-count-per-100k"
+      ],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "nursing-facilities-per-elderly",
+      "heading": "高齢者人口に対する介護施設数を比べる",
+      "lead": "65歳以上人口10万人当たりの介護老人福祉施設数を比較できます。人口全体を分母にした値と区別して、介護資源の違いを説明できます。",
+      "metricKeys": [
+        "nursing-welfare-facility-count-per-100k-65plus"
+      ],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。医師・病床・介護施設では調査年や分母が異なるため、各表の定義を確認してください。",
+    "県全体の資源量を示す統計です。受診のしやすさ、診療の質、施設の空き状況や待機者数を直接示すものではありません。"
+  ],
+  "analysisPlan": {
+    "objective": "医療資源の規模と高齢化を市区町村で分けて比較し、地域医療の現状整理に使う。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "physicians-in-medical-facilities-per-100k",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "general-hospital-bed-count-per-100k",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "nursing-welfare-facility-count-per-100k-65plus",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "general-clinic-count",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で同じ2020年の市区町村値を確認済み。人口10万人あたり一般診療所数と65歳以上人口割合を別図で作る。"
+      },
+      {
+        "metricKey": "population-aged-65-plus",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で同じ2020年の市区町村値を確認済み。人口10万人あたり一般診療所数と65歳以上人口割合を別図で作る。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で同じ2020年の市区町村値を確認済み。人口10万人あたり一般診療所数と65歳以上人口割合を別図で作る。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "診療所数は医師数・診療科・診療能力を示さない。住所のある自治体を越える受診行動は含めない。",
+      "一般診療所は医療施設調査時点、人口は国勢調査時点。人口0・欠測の比率は算出しない。"
+    ]
+  },
+  "analysisRevision": {
+    "version": "analysis-20261112",
+    "title": "市区町村の診療所と高齢化を比べるデータ集",
+    "description": "一般診療所数を人口規模で調整した値と、高齢人口の割合を別々に比較し、地域医療の現状整理に使えます。",
+    "useCases": [
+      {
+        "title": "地域医療の基礎資料に",
+        "description": "人口10万人あたり一般診療所数を並べ、施設数の規模を人口との関係で確認できます。"
+      },
+      {
+        "title": "高齢化の地域差を説明するときに",
+        "description": "同じ年の総人口と65歳以上人口から割合を作り、近隣自治体の違いを確認できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "municipal-health",
+        "title": "一般診療所と人口構成",
+        "grain": "municipality",
+        "years": [
+          2020
+        ],
+        "inputs": [
+          {
+            "metricKey": "general-clinic-count"
+          },
+          {
+            "metricKey": "population-aged-65-plus"
+          },
+          {
+            "metricKey": "total-population"
+          }
+        ],
+        "definition": "一般診療所数と国勢調査の総人口・65歳以上人口を2020年で揃える。診療所数と年齢構成の異なる意味を別々の比率で示す。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      }
+    ],
+    "research": {
+      "method": "社会・人口統計体系の原典表と項目定義を確認し、地域単位・年・分母・欠測を揃えられる範囲で比較する。",
+      "references": [
+        {
+          "id": "ssds-health",
+          "title": "社会・人口統計体系の項目定義 I",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/I",
+          "section": "I5102 一般診療所数",
+          "finding": "施設の数であり、医師数・診療能力・患者数や受診しやすさを直接示す指標ではない。",
+          "checkedAt": "2026-11-12"
+        },
+        {
+          "id": "ssds-population",
+          "title": "社会・人口統計体系の項目定義 A",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/A",
+          "section": "A1101 総人口、A1303 65歳以上人口",
+          "finding": "同じ国勢調査年の総人口を分母にする。人口0・欠測では比率を作らず、年齢不詳を含む総人口に対する割合と明記する。",
+          "checkedAt": "2026-11-12"
+        }
+      ]
+    },
+    "recipes": [
+      {
+        "id": "clinics-per-population",
+        "heading": "人口あたりの診療所数を地図で見る",
+        "lead": "高知県内の全市町村について、2020年の一般診療所数を人口10万人あたりに換算します。人口規模を揃えて、施設数の地域差を確認できます。",
+        "sourceId": "municipal-health",
+        "metricIds": [
+          "general-clinic-count"
+        ],
+        "method": "ratio",
+        "year": 2020,
+        "template": "choropleth",
+        "references": [
+          "ssds-health",
+          "ssds-population"
+        ],
+        "limitation": "施設の規模・診療科・自治体を越える受診は含まれず、医療アクセスの順位ではありません。",
+        "denominatorId": "total-population",
+        "scale": 100000,
+        "unit": "施設/10万人",
+        "presentationMetricKey": "general-clinic-count",
+        "chartTitle": "人口10万人あたりの一般診療所数",
+        "scopeLabel": "高知県内の市町村",
+        "within": {
+          "kind": "prefecture",
+          "prefCode": "39"
+        }
+      },
+      {
+        "id": "elderly-population-share",
+        "heading": "高齢人口の割合を比べる",
+        "lead": "同じ自治体の総人口に占める65歳以上人口の割合を確認します。",
+        "sourceId": "municipal-health",
+        "metricIds": [
+          "population-aged-65-plus"
+        ],
+        "method": "share",
+        "year": 2020,
+        "areaCodes": [
+          "39201",
+          "39202",
+          "39203",
+          "39204",
+          "39205",
+          "39206",
+          "39208",
+          "39209",
+          "39210",
+          "39211",
+          "39212",
+          "39386"
+        ],
+        "template": "bar",
+        "references": [
+          "ssds-population"
+        ],
+        "limitation": "総人口には年齢不詳を含みます。年齢不詳を除く人口を分母とする公表割合とは一致しない場合があります。",
+        "denominatorId": "total-population",
+        "presentationMetricKey": "population-aged-65-plus"
+      }
+    ],
+    "notes": [
+      "医療施設数と人口構成を別図にし、診療所数だけで医療の充足や不足を断定しません。",
+      "人口0または欠測の自治体は比率を算出しません。診療所の実値0は欠測と区別して保持します。"
+    ]
+  }
+}

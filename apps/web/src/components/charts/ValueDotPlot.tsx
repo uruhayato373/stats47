@@ -1,3 +1,4 @@
+import { cn } from '@stats47/components';
 import { resolveNumericDomain, type NumericDomainPolicy } from '@stats47/types';
 
 interface DotPlotItem {
@@ -7,19 +8,33 @@ interface DotPlotItem {
   value: number;
 }
 
-/** Position encodes the value; a cropped axis is explicit and never resembles a length-encoded bar. */
+/** Points share a numerical scale; exact values remain in every row. */
 export function ValueDotPlot({
   items,
   values,
   reference,
   policy,
   formatValue,
+  color,
+  unit = '',
+  showAxes = true,
+  fillHeight = false,
+  showReferenceLine = true,
 }: {
   items: DotPlotItem[];
   values: number[];
   reference: number | null;
   policy: NumericDomainPolicy;
   formatValue: (value: number) => string;
+  /** 指標の地図と共通の配色から解決した代表色。省略時はテーマ色。 */
+  color?: string;
+  unit?: string;
+  /** 行末の正確な値が主になる小さなカードでは軸の数字を省略する。 */
+  showAxes?: boolean;
+  /** 親の余白を行に均等配分する。親が自然高なら各行の最小高だけを使う。 */
+  fillHeight?: boolean;
+  /** 平均をツールチップだけで読ませる場合は縦の基準線を省く。 */
+  showReferenceLine?: boolean;
 }) {
   const resolved = resolveNumericDomain(values, policy);
   if (!resolved) return null;
@@ -35,7 +50,10 @@ export function ValueDotPlot({
   return (
     // 行ごとに grid を作ると右端の値の桁数で軸の幅が行ごとにずれる。全行で 1 つの grid を共有する。
     <div
-      className="grid grid-cols-[6rem_minmax(0,1fr)_max-content] items-center gap-x-2 gap-y-2 text-xs"
+      className={cn(
+        'grid grid-cols-[6rem_minmax(0,1fr)_max-content] items-center gap-x-2 gap-y-2 text-xs',
+        fillHeight && 'flex-1 auto-rows-[minmax(1.5rem,1fr)]',
+      )}
       data-chart="value-dot-plot"
       data-domain-min={domain[0]}
       data-domain-max={domain[1]}
@@ -54,24 +72,29 @@ export function ValueDotPlot({
           </span>
           <div className="relative h-6" aria-hidden="true">
             <span className="absolute inset-x-0 top-1/2 border-t border-border" />
-            {reference !== null && (
+            {reference !== null && showReferenceLine && (
               <span
-                className="absolute inset-y-0 border-l border-dashed border-muted-foreground/60"
+                className="absolute inset-y-0 w-3 -translate-x-1/2"
                 style={{ left: `${position(reference)}%` }}
-              />
+                data-reference={reference}
+                title={`単純平均: ${formatValue(reference)}${unit}`}
+              >
+                <span className="absolute inset-y-0 left-1/2 border-l border-dashed border-muted-foreground/60" />
+              </span>
             )}
             {item.value < domain[0] || item.value > domain[1] ? (
               <span
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 text-primary"
-                style={{ left: `${position(item.value)}%` }}
-                title="表示範囲外"
+                style={{ left: `${position(item.value)}%`, color }}
+                title={`${item.label}: ${formatValue(item.value)}${unit}（表示範囲外）${reference !== null ? `\n単純平均: ${formatValue(reference)}${unit}` : ''}`}
               >
                 {item.value < domain[0] ? '◀' : '▶'}
               </span>
             ) : (
               <span
                 className="absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary ring-2 ring-background"
-                style={{ left: `${position(item.value)}%` }}
+                style={{ left: `${position(item.value)}%`, backgroundColor: color }}
+                title={`${item.label}: ${formatValue(item.value)}${unit}${reference !== null ? `\n単純平均: ${formatValue(reference)}${unit}` : ''}`}
               />
             )}
           </div>
@@ -80,20 +103,20 @@ export function ValueDotPlot({
           </span>
         </div>
       ))}
-      {/* 端の目盛りは軸の端に揃える: 左端の値は左寄せ、右端の値は右寄せ */}
-      <span aria-hidden="true" />
-      <span
-        aria-hidden="true"
-        className="-mt-1 flex justify-between gap-2 text-xs text-muted-foreground tabular-nums"
-      >
-        <span>{formatValue(domain[0])}</span>
-        <span>{formatValue(domain[1])}</span>
-      </span>
-      <span aria-hidden="true" />
+      {showAxes && <>
+        {/* 端の目盛りは全行で共通の軸の端にそろえる。 */}
+        <span aria-hidden="true" />
+        <span
+          aria-hidden="true"
+          className="-mt-1 flex justify-between gap-2 text-xs text-muted-foreground tabular-nums"
+        >
+          <span>{formatValue(domain[0])}</span>
+          <span>{formatValue(domain[1])}</span>
+        </span>
+        <span aria-hidden="true" />
+      </>}
       {reference !== null && (
-        <p className="col-span-3 text-xs text-muted-foreground">
-          破線: 単純平均 {formatValue(reference)}
-        </p>
+        <span className="sr-only">単純平均: {formatValue(reference)}{unit}</span>
       )}
     </div>
   );

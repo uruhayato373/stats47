@@ -9,8 +9,8 @@
  * `resolveSourceProvenance` / source-name 辞書) を使い、別の対応表を持たない。
  * 正典: `.claude/rules/survey-linkage-standards.md` §2
  */
-import { buildEstatTableUrl, mergeDataSourceEntries } from '@stats47/data-configs/data-source';
-import { isSsdsStatsDataId, resolveAttribution, resolveProvenanceByParams, resolveSourceProvenance } from '@stats47/data-configs/provenance';
+import { buildEstatTableUrl, getReferenceDataSource, mergeDataSourceEntries } from '@stats47/data-configs/data-source';
+import { isSsdsStatsDataId, resolveProvenanceByParams, resolveSourceProvenance } from '@stats47/data-configs/provenance';
 import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
 import type { DataSourceEntry, MetricConfig, MetricRegistry, ProvenanceSurvey, SourceAttribution } from '@stats47/data-configs';
 
@@ -34,7 +34,6 @@ const MASTER_BY_ID = new Map(
   (surveysMaster as SurveyMasterRow[]).map((row) => [row.id, row])
 );
 
-const SSDS_ORGANIZATION = '総務省統計局';
 const MAX_DEPTH = 4;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -82,15 +81,12 @@ function estatEntries(
     url: buildEstatTableUrl(statsDataId),
   };
   if (isSsdsStatsDataId(statsDataId)) {
-    const compilation = resolveAttribution(statsDataId, cdCat01).compilation;
     const originals = resolveProvenanceByParams(statsDataId, cdCat01)
       .map((survey) => surveyEntry(survey, []))
       .filter((entry): entry is DataSourceEntry => Boolean(entry));
     return [
       {
-        label: compilation?.name ?? '社会・人口統計体系',
-        organization: SSDS_ORGANIZATION,
-        ...(compilation?.url ? { url: compilation.url } : {}),
+        ...getReferenceDataSource('ssds'),
         tables: [table],
       },
       ...originals,

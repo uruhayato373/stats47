@@ -1955,6 +1955,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-05",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:population-aged-65-plus",
           "kind": "ranking"
         }

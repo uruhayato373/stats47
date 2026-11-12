@@ -112,9 +112,9 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     });
   }
 
-  // /areas/{prefCode}/administrativefinancial → /themes/local-finance?pref={prefCode}
-  // areas/categoryKey の 47 × N ページを作らない方針 (2026-05-26) との両立。
-  // 旧 URL アクセスを themes 側の 1 県深掘りに集約する 301。
+  // /areas/{prefCode}/administrativefinancial → /areas/{prefCode}/local-finance (県別の地方財政のテーマ)
+  // areas/categoryKey の 47 × N ページを作らない方針 (2026-05-26) との両立。2026-11-12 に地方財政の専用ページをやめ、
+  // 県×テーマの共通のページへ直接 301 する (旧: /themes/local-finance?pref= を経由)。
   if (
     segments.length === 3 &&
     segments[0] === 'areas' &&
@@ -123,7 +123,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(
-      new URL(`/themes/local-finance?pref=${segments[1]}`, baseUrl),
+      new URL(hrefFor('area-theme', { areaCode: segments[1], themeSlug: 'local-finance' }), baseUrl),
       { status: 301 }
     );
   }
@@ -552,10 +552,11 @@ export default function middleware(req: NextRequest) {
 
   // 県ごとのページを持つテーマの「県だけの絞り込み」(`/themes/<テーマ>?pref=16000`) は、同じ内容の
   // `/areas/<県>/<テーマ>` へ恒久転送する (県×テーマの交点を 1 つの URL にする。2026-10-30 オーナー決定)。
-  // 地方財政 (local-finance) は専用ページが ?pref で市区町村まで切り替えるので対象外。
+  // 2026-11-12: 地方財政の専用ページをやめたので特例は無い。専用ページが受けていた 2 桁の県コード (?pref=13) は全テーマで受ける
   const themeMatch = pathname.match(/^\/themes\/([^/]+)$/);
-  if (themeMatch && TYPE_A_THEME_SLUGS.has(themeMatch[1]) && themeMatch[1] !== 'local-finance') {
-    const prefCode = req.nextUrl.searchParams.get('pref') ?? '';
+  if (themeMatch && TYPE_A_THEME_SLUGS.has(themeMatch[1])) {
+    const rawPref = req.nextUrl.searchParams.get('pref') ?? '';
+    const prefCode = /^\d{2}$/.test(rawPref) ? `${rawPref}000` : rawPref;
     if (UrlPolicy.area.isValidPrefCode(prefCode)) {
       const url = new URL(hrefFor('area-theme', { areaCode: prefCode, themeSlug: themeMatch[1] }), req.url);
       url.search = req.nextUrl.search;

@@ -135,7 +135,7 @@ git で運ばれるもの / 運ばれないものを取り違えると、重複�
 | 提携台帳 `data/affiliate/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
 | A8 カタログ `data/affiliate/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
 | 接続設定 `config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
-| 広告 SSOT `apps/web/scripts/affiliate-ads-data.ts` | — |
+| 広告の台帳 `affiliate.ads` | — |
 
 - **初回は各 ASP へ人間が手動ログインする**。認証情報は config にも env にも置かない規約なので、
   新しい PC では必ずログインし直しになる (`status` 実行でブラウザが開き、その場で人がログインする)。

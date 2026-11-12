@@ -14,7 +14,7 @@ if [ "$rc" != 0 ]; then
 - 記事本文: .claude/scripts/blog/data/broken-link-remap.json に置換先 (無ければ to: null) を足し、
   node .claude/scripts/blog/fix-broken-internal-links.mjs --apply → npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply (改稿は再デプロイで反映)
 - ページ側の生成リンク: 参照元 route から生成元を直す。/tag/* は cd apps/web && npx tsx scripts/generate-known-tag-keys.ts、
-  県ページ由来は packages/data-configs/src/area-databook/template.ts、テーマ由来は data/themes/catalogs/*.json
+  県ページ由来は台帳 areas.databook-template、テーマ由来は data/themes/catalogs/*.json
 HINT
 fi
 exit "$rc"

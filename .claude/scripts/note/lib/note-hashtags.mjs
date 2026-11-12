@@ -1,13 +1,13 @@
-/** Approved note hashtags: one git file per article, validated before it can reach note. */
+/** Approved note hashtags: one git table keyed by article key (ledger note.hashtags), validated before it can reach note. */
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { NOTE_HASHTAGS_DIR } from '../../../../config/paths.mjs';
+import { datasetPath } from '../../../../config/datasets.mjs';
 import { PREF_NAMES } from '../../lib/prefectures.cjs';
 
 export const HASHTAG_COUNT = 99;
 export const HASHTAG_MODEL = 'claude-sonnet-5-5';
-export const HASHTAG_DIR = NOTE_HASHTAGS_DIR;
+export const HASHTAG_FILE = datasetPath('note.hashtags');
 const MAX_LENGTH = 25;
 // note silently drops tags with other scripts (2026-10-03: #αモデル vanished after a successful update).
 const ACCEPTED = /^#[0-9A-Za-z\u3041-\u3096\u30A1-\u30FA\u30FC\u30FB\u4E00-\u9FFF\u3005\uFF10-\uFF19\uFF21-\uFF3A\uFF41-\uFF5A_]+$/u;
@@ -58,18 +58,35 @@ export function validateHashtags(tags, { title, text }) {
   return { ok: errors.length === 0, errors };
 }
 
-export function hashtagFile(root, slug) {
+function checkSlug(slug) {
   if (!/^[\w-]+$/.test(slug)) throw Error(`invalid slug: ${slug}`);
-  return path.join(root, HASHTAG_DIR, `${slug}.json`);
 }
 
-/** Only a file whose tags still pass the gate for the recorded article may be published. */
+/** The whole table `{ hashtags: { <article key>: { tags, sourceSha256, model, generatedAt } } }`. */
+export function readHashtagTable(root) {
+  const file = path.join(root, HASHTAG_FILE);
+  if (!fs.existsSync(file)) throw Error(`hashtag table missing: ${HASHTAG_FILE}`);
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+/** Replace one article's record and rewrite the whole table, keys sorted by article key. */
+export function writeHashtagRecord(root, slug, { tags, sourceSha256, model, generatedAt }) {
+  checkSlug(slug);
+  const table = readHashtagTable(root);
+  const hashtags = { ...table.hashtags, [slug]: { tags, sourceSha256, model, generatedAt } };
+  const sorted = Object.fromEntries(Object.keys(hashtags).sort().map((key) => [key, hashtags[key]]));
+  fs.writeFileSync(path.join(root, HASHTAG_FILE), `${JSON.stringify({ ...table, hashtags: sorted }, null, 2)}\n`);
+}
+
+/** Only tags that still pass the gate for the article in the article ledger (title joined from there) may be published. */
 export function readApprovedHashtags(root, slug, { noteUrl }) {
-  const file = hashtagFile(root, slug);
-  if (!fs.existsSync(file)) throw Error(`hashtag file missing: ${path.relative(root, file)}`);
-  const record = JSON.parse(fs.readFileSync(file, 'utf8'));
-  if (record.slug !== slug || record.noteUrl !== noteUrl) throw Error(`hashtag file identity mismatch: ${slug}`);
-  const check = validateHashtags(record.tags, { title: record.title, text: null });
-  if (!check.ok) throw Error(`hashtag file invalid: ${slug}: ${check.errors.join('; ')}`);
+  checkSlug(slug);
+  const record = readHashtagTable(root).hashtags[slug];
+  if (!record) throw Error(`hashtags missing: ${slug} (${HASHTAG_FILE})`);
+  const { articles } = JSON.parse(fs.readFileSync(path.join(root, datasetPath('note.articles')), 'utf8'));
+  const article = articles.find((a) => a.key === slug);
+  if (!article || article.noteUrl !== noteUrl) throw Error(`hashtag article identity mismatch: ${slug}`);
+  const check = validateHashtags(record.tags, { title: article.title, text: null });
+  if (!check.ok) throw Error(`hashtags invalid: ${slug}: ${check.errors.join('; ')}`);
   return record.tags;
 }

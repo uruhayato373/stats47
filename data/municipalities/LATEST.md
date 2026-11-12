@@ -24,7 +24,7 @@
 
 **`undetermined` は「取れなかった」であって「無い」ではない。** 母集団から外さずに再取得する。
 
-## entity 母集団 (`packages/area/src/data/cities.json`)
+## entity 母集団 (`data/areas/master/cities.json`)
 
 - 総数 1913 / 自治体 (level 2) **1719** / 政令市の行政区 (level 3) 194
 - 政令市本体 21 件

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   isMunicipalityThemePageSlug,
@@ -17,7 +18,13 @@ import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { TrackedMunicipalityThemeLink } from '@/features/municipalities';
 import { ThemeRegionNav } from '@/features/theme-dashboard';
-import { ALL_THEMES, isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
+import {
+  buildThemeDescription,
+  buildThemeTitle,
+  ALL_THEMES,
+  isAreaTheme,
+  THEME_SWITCHER_THEMES,
+} from '@/features/theme-dashboard/server';
 
 import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -50,8 +57,17 @@ export async function generateMetadata({
   const theme = resolveTheme(themeSlug);
   if (!theme) return {};
   // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)
-  const title = `市区町村別の${theme.title}`;
-  const description = `${theme.title}を市・町・村のランキングで比較します。`;
+  // 題と説明文は単位に関係なく theme-seo.ts で作る (2026-11-12 オーナー決定)。指標名はこのページが実際に出す市区町村の指標の先頭 2 つ
+  // (台帳から引くので R2 は読まない)。都道府県のテーマの指標名を使うと、ページに無い指標 (出生率など) を題がうたってしまう
+  const labels = [
+    ...new Set(
+      municipalityMetricKeysForPrefectureTheme(theme.themeKey)
+        .map((key) => getMetricConfig(key)?.title?.replace(/[（(].*$/, '').trim())
+        .filter((title): title is string => Boolean(title)),
+    ),
+  ].slice(0, 2);
+  const title = buildThemeTitle({ scope: 'municipalities', themeTitle: theme.title, labels });
+  const description = buildThemeDescription({ scope: 'municipalities', base: theme.description, labels });
   return {
     title,
     description,

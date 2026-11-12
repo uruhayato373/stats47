@@ -8,12 +8,7 @@ import { RankingPageSidebarSection } from "../RankingPageSidebarSection";
 
 import type { ContentRecommendation } from "@stats47/data-configs/content/navigation";
 
-vi.mock("@/features/ads", () => ({
-  RailAdSlot: () => null,
-  SidebarPromoBanner: () => null,
-  selectPromoBannerIndexForRanking: () => 0,
-}));
-vi.mock("@/features/ads/server", () => ({ AffiliateAdSlot: () => null }));
+vi.mock("@/features/ads", () => ({ RailAdSlot: () => null }));
 vi.mock("@/features/theme-dashboard/server", () => ({ listRelatedThemesForRankingKeys: () => [] }));
 vi.mock("@/features/blog/server", () => ({ readNavigationArticlesFromR2: async () => [] }));
 vi.mock("../../RankingSidebar", () => ({ RankingItemsSidebar: () => null }));
@@ -27,16 +22,14 @@ async function geoLinks(rankingKey: string, areaType: "prefecture" | "city" = "p
     rankingKey,
     areaType,
     rankingItem: { categoryKey: "landweather" },
-    affiliateVertical: null,
     surveys: [],
-    rankingName: "テスト",
   });
   const sections = Children.toArray(tree.props.children).filter(
     (child): child is ReactElement<NavigationProps> =>
       isValidElement<NavigationProps>(child) && child.type === RelatedContentNavigation && child.props.surface === "ranking_geo"
   );
   const resolved = await Promise.all(sections.map((section) => RelatedContentNavigation(section.props)));
-  return resolved.flatMap((section) => section.props.items);
+  return resolved.flatMap((section) => section?.props.items ?? []);
 }
 
 describe("ランキングページから地域分析の着地ページへ辿れる", () => {

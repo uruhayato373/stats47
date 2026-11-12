@@ -11,7 +11,7 @@ const ExcelJS = require('exceljs');
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const { parseStatsValuesPayload } = require('../../../packages/stats-r2/src/schemas.ts');
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const SOURCES = [
   { key: 'receipts', file: '001084989.xlsx', sha256: 'e6299d05a172f00472971f1684f250cb38da4fd596408f03f333a0c1bc5452e2' },

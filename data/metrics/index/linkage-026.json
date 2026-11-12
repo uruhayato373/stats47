@@ -1184,6 +1184,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-03",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:room-utilization-rate",
           "kind": "ranking"
         },
@@ -7055,6 +7059,10 @@
         {
           "pageId": "japan-theme:labor-wages",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "product:data-p-02",
+          "kind": "product"
         },
         {
           "pageId": "ranking:scheduled-salary-male",

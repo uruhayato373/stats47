@@ -20,6 +20,6 @@ describe('AdSense pause affiliate routing contract', () => {
   // 2026-11-03: 県の本文の AdSense は広告の段 (AdRow) に入れた。AdSense を止めると composeAdRows が AdSense の枠を落とす
   it('preserves the AdSense branch for a one-switch rollback', () => {
     expect(AREA_PAGE).toContain('composeAdRows(');
-    expect(AREA_PAGE).toContain('[HUB_INCONTENT, CONTENT_FOOTER]');
+    expect(AREA_PAGE).toContain('[AREA_DATABOOK_ROW_1, AREA_DATABOOK_ROW_2, AREA_DATABOOK_ROW_3, AREA_AFTER_DATABOOK, AREA_END]');
   });
 });

@@ -1018,7 +1018,7 @@ async function main() {
   if (stats.empty.length > 0 || stats.missing.length > 0) {
     console.log(
       `  → 是正: config の statsDataId / cdCat01 を e-Stat メタで再確認し再取り込み。` +
-        `意図した 0 件なら packages/data-configs/src/expected-empty.ts に理由・追跡先・期限を添えて登録`,
+        `意図した 0 件なら台帳 data-quality.expected-empty に理由・追跡先・期限を添えて登録`,
     );
   }
 

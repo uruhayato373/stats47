@@ -531,8 +531,8 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
     ['/gis-cross/unknown', '/themes'],
     ['/gis-cross', '/themes'],
     ['/areas/13000/laborwage', '/areas/13000/labor-wages'],
-    // 地方財政は県別テーマを持たず、先の規則で /themes/local-finance?pref= へ転送される
-    ['/areas/13000/administrativefinancial', '/themes/local-finance?pref=13000'],
+    // 地方財政も 2026-11-12 から県×テーマの共通のページ (専用ページの特例をやめた)
+    ['/areas/13000/administrativefinancial', '/areas/13000/local-finance'],
     ['/areas/13000/energy', '/areas/13000'],
   ])('%s を %s へ301する', (source, destination) => {
     const response = middleware(legacyRequest(source));
@@ -596,8 +596,17 @@ describe('テーマの県の絞り込み (?pref=) は県ごとのページへ', 
     expect(middleware(request('/themes/living-housing?pref=all')).status).not.toBe(301);
   });
 
-  test('県ごとのページを持たないテーマ (港湾) と専用ページの地方財政は転送しない', () => {
+  test('県ごとのページを持たないテーマ (港湾) は転送しない', () => {
     expect(middleware(request('/themes/ports?pref=16000')).status).not.toBe(301);
-    expect(middleware(request('/themes/local-finance?pref=16000')).status).not.toBe(301);
+  });
+
+  // 2026-11-12: 地方財政も他のテーマと同じ (専用ページの特例をやめた)。専用ページが受けていた 2 桁の県コードも全テーマで受ける
+  test('地方財政も県×テーマのページへ転送し、2 桁の県コードも受ける', () => {
+    const fiveDigit = middleware(request('/themes/local-finance?pref=16000'));
+    expect(fiveDigit.status).toBe(301);
+    expect(fiveDigit.headers.get('location')).toContain('/areas/16000/local-finance');
+    const twoDigit = middleware(request('/themes/living-housing?pref=13'));
+    expect(twoDigit.status).toBe(301);
+    expect(twoDigit.headers.get('location')).toContain('/areas/13000/living-housing');
   });
 });

@@ -2,6 +2,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { ProductPurchase } from "../ProductPurchase";
 import {
   TrackedProductLink,
   TrackedProductOutboundLink,
@@ -14,12 +15,15 @@ describe("product links", () => {
   const mockGtag = vi.fn();
 
   beforeEach(() => {
-    vi.stubGlobal("window", { gtag: mockGtag });
+    vi.stubGlobal("gtag", mockGtag);
     mockGtag.mockClear();
     sessionStorage.clear();
   });
 
-  afterEach(() => vi.unstubAllGlobals());
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
 
   it("商品一覧から詳細へのクリックを登録済みnavパラメータで送る", () => {
     render(
@@ -148,7 +152,7 @@ describe("product links", () => {
 
   it("商品案内が半分以上・1 秒見えたら product_impression を 1 回だけ送る", () => {
     vi.useFakeTimers();
-    let notify: (entries: { isIntersecting: boolean }[]) => void = () => {};
+    let notify: (entries: { isIntersecting: boolean; intersectionRatio: number }[]) => void = () => {};
     vi.stubGlobal(
       "IntersectionObserver",
       class {
@@ -165,10 +169,19 @@ describe("product links", () => {
       </TrackedProductLink>,
     );
 
-    act(() => notify([{ isIntersecting: true }]));
+    // 画面に少し入っただけでは数えず、途中で半分未満になれば連続時間をリセットする。
+    act(() => notify([{ isIntersecting: true, intersectionRatio: 0.1 }]));
     act(() => vi.advanceTimersByTime(1000));
-    act(() => notify([{ isIntersecting: false }]));
-    act(() => notify([{ isIntersecting: true }]));
+    expect(mockGtag).not.toHaveBeenCalled();
+    act(() => notify([{ isIntersecting: true, intersectionRatio: 0.5 }]));
+    act(() => vi.advanceTimersByTime(600));
+    act(() => notify([{ isIntersecting: true, intersectionRatio: 0.4 }]));
+    act(() => vi.advanceTimersByTime(1000));
+    expect(mockGtag).not.toHaveBeenCalled();
+    act(() => notify([{ isIntersecting: true, intersectionRatio: 0.5 }]));
+    act(() => vi.advanceTimersByTime(1000));
+    act(() => notify([{ isIntersecting: false, intersectionRatio: 0 }]));
+    act(() => notify([{ isIntersecting: true, intersectionRatio: 1 }]));
     act(() => vi.advanceTimersByTime(1000));
     vi.useRealTimers();
 
@@ -176,5 +189,53 @@ describe("product links", () => {
     expect(impressions).toEqual([
       ["event", "product_impression", { product_destination: "note", product_id: "n1234abcd", link_position: "ranking_csv_product" }],
     ]);
+  });
+
+  it("上部と表紙付きの末尾を各1回計測し、画像・ボタンのクリックも流入元を保って区別する", () => {
+    vi.useFakeTimers();
+    sessionStorage.setItem("stats47:product-placement", JSON.stringify({ [FISCAL_NOTE.slug]: "blog_product" }));
+    const observers: { notify: (entries: { isIntersecting: boolean; intersectionRatio: number }[]) => void; element?: Element }[] = [];
+    vi.stubGlobal("IntersectionObserver", class {
+      record: (typeof observers)[number];
+      constructor(notify: (typeof observers)[number]["notify"]) {
+        this.record = { notify };
+        observers.push(this.record);
+      }
+      observe(element: Element) { this.record.element = element; }
+      disconnect() {}
+    });
+    const product = {
+      ...FISCAL_NOTE, id: "P-04", title: "自治体財政", channel: "note" as const, channelLabel: "note",
+      priceYen: 1980, description: "財政を比較するデータ", included: ["CSV"], audience: [], sourceBlogSlugs: [],
+      coverImageUrl: "https://assets.st-note.com/cover.png",
+    };
+    const view = render(<>
+      <ProductPurchase product={product} placement="product_detail_top" />
+      <ProductPurchase product={product} placement="product_detail_bottom" />
+    </>);
+    // 3つのリンク（上ボタン・下画像・下ボタン）を別々の表示として水増ししない。
+    expect(observers).toHaveLength(2);
+    expect(screen.getAllByRole("link")).toHaveLength(3);
+    for (const { notify } of observers) {
+      act(() => notify([{ isIntersecting: true, intersectionRatio: 1 }]));
+    }
+    act(() => vi.advanceTimersByTime(1000));
+    for (const { notify } of observers) {
+      act(() => notify([{ isIntersecting: false, intersectionRatio: 0 }]));
+      act(() => notify([{ isIntersecting: true, intersectionRatio: 1 }]));
+    }
+    act(() => vi.advanceTimersByTime(1000));
+    const payload = { product_destination: "note", product_id: "n1234abcd", link_position: "blog_product" };
+    expect(mockGtag.mock.calls.filter(([, name]) => name === "product_impression")).toEqual([
+      ["event", "product_impression", { ...payload, cta_id: "product_detail_top" }],
+      ["event", "product_impression", { ...payload, cta_id: "product_detail_bottom" }],
+    ]);
+    for (const link of screen.getAllByRole("link")) fireEvent.click(link);
+    expect(mockGtag.mock.calls.filter(([, name]) => name === "product_click")).toEqual([
+      ["event", "product_click", { ...payload, cta_id: "product_detail_top" }],
+      ["event", "product_click", { ...payload, cta_id: "product_detail_bottom" }],
+      ["event", "product_click", { ...payload, cta_id: "product_detail_bottom" }],
+    ]);
+    view.unmount();
   });
 });

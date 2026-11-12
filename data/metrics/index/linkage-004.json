@@ -5923,6 +5923,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-07",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:consumer-price-difference-index-housing",
           "kind": "ranking"
         },
@@ -6828,6 +6832,10 @@
         {
           "pageId": "blog:real-disposable-income-reversal",
           "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-07",
+          "kind": "product"
         },
         {
           "pageId": "ranking:consumer-price-difference-index-overall",
@@ -8505,6 +8513,10 @@
         {
           "pageId": "blog:convenience-store-density-map",
           "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-08",
+          "kind": "product"
         },
         {
           "pageId": "ranking:convenience-store-count-per-100k",

@@ -3,7 +3,7 @@
  *
  * ★ 2026-11-03 (オーナー決定): 本文の広告は広告の段 (`slots/AdRow.tsx`) に移し、モバイルにも AdSense を出す。
  *   下の 2026-08-04 の判断は自動広告がある前提で、自動広告なしで再開した今は当てはまらない。
- *   `MANUAL_AD_DESKTOP_ONLY_CLASS` を使うのは記事内の単独の枠 (`InContentAdSlot` と手置きの `<ad-slot>`) だけ。
+ *   `MANUAL_AD_DESKTOP_ONLY_CLASS` を使うのは記事内の単独の枠 (`InContentAdSlot`) だけ (手置きの `<ad-slot>` は 2026-11-12 から描かない)。
  *
  * ## 決定 (2026-08-04・W31 実測)
  *
@@ -63,4 +63,4 @@ export const MANUAL_AD_DESKTOP_ONLY_CLASS = "hidden md:block";
  * 2026-W43 の実測で右レールの 5 ユニットは表示の約 40%・収益の約 16%、1,000 表示あたり ¥6〜10 (本文は ¥29〜45)。
  * display:none なので遅延読み込みが発火せず、広告のリクエストも飛ばない。境界は PageShell / ArticleShell の右レールと同じ
  */
-export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden @min-[988px]/shell:block";
+export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden rail:block";

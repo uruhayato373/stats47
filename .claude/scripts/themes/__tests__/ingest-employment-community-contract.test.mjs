@@ -14,7 +14,7 @@ import {
   EXPECTED_CONFIGS,
 } from '../ingest-employment-community.mjs';
 const require = createRequire(resolve(process.cwd(), 'package.json'));
-const prefs = require('./packages/area/src/data/prefectures.json').map(
+const prefs = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES.map(
     (p) => p.prefCode
   ),
   areas = ['00000', ...prefs];

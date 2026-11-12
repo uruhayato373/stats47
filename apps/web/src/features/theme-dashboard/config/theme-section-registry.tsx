@@ -19,6 +19,7 @@ import {
 import { ThemeGraduationPathsSection } from '@/features/graduation-paths';
 import { ThemeHighwayTimelineSection } from '@/features/highway-history';
 import { ThemeIndustrySpecializationSection } from '@/features/industry-specialization';
+import { ThemeFinanceOverviewSection, ThemeFinanceSustainabilitySection } from '@/features/local-finance-dashboard';
 import { ThemeMedicalWorkforceSection } from '@/features/medical-workforce';
 import { ThemeMigrationFlowSection } from '@/features/migration-flow';
 import { ThemeNutritionSection } from '@/features/nutrition';
@@ -72,6 +73,8 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
   'five-year-residence': ThemeFiveYearResidenceSection,
   'young-migration-link': ThemeYoungMigrationLink,
   'commute-flow': ThemeCommuteFlowSection,
+  'finance-overview': ThemeFinanceOverviewSection,
+  'finance-sustainability': ThemeFinanceSustainabilitySection,
   'finance-flow': ThemeFinanceFlowSection,
   'geo-station-access': ThemeGeoStationAccessSection,
   'geo-public-facility-access': ThemeGeoPublicFacilityAccessSection,

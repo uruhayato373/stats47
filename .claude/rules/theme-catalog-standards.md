@@ -472,9 +472,10 @@ harmRelevance: [
 
 > テーマ専用の地図のタブ (コロプレス/指標タブ/年度セレクタ) は 2026-10-30 に撤去した (2026-06-20 から全テーマで隠していた `hideMap`)。
 > 都道府県の地図と表はテーマに置かず、ランキングのページが受け持つ (2026-10-31 オーナー決定)。テーマ専用の地図・表を作らない。
-> カタログ無しテーマ (climate / local-finance) は
-> IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
-> (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
+> カタログ無しテーマ (climate) は IndicatorSet.metrics にフォールバック (selection なしで動く)。
+> local-finance の専用ページ (`app/themes/local-finance/page.tsx`) は 2026-11-12 オーナー決定でやめた。決算カードの 2 章と
+> 財政の流れは埋め込みの章 (`finance-overview` / `finance-sustainability` / `finance-flow`) として共通の部品が描く。
+> テーマに専用ページを作らない (`metric-groups-reachability.test.ts` が `app/themes/<slug>/page.tsx` を拒否する)。
 
 ## 8.1 管理画面 (`/quality/catalog-audit`) — 2026-09-15 新設
 

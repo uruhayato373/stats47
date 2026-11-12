@@ -23,23 +23,6 @@ const navSource = readFileSync(
   'utf8'
 );
 
-const localFinanceSource = readFileSync(
-  resolve(import.meta.dirname, '../../../../app/themes/local-finance/page.tsx'),
-  'utf8'
-);
-
-describe('地方財政 (bespoke ページ) — ページ内ナビの位置', () => {
-  it('ページ内ナビは h1 (header) の後に置き、幅で隠す代替 UI を持たない', () => {
-    const shellIndex = localFinanceSource.indexOf('<PageShell');
-    const headerIndex = localFinanceSource.indexOf('header={<ThemeAreaHeader', shellIndex);
-    const leftRailIndex = localFinanceSource.indexOf('leftRail={', shellIndex);
-    expect(headerIndex).toBeGreaterThan(shellIndex);
-    expect(leftRailIndex).toBeGreaterThan(headerIndex);
-    expect(localFinanceSource).not.toContain('NarrowBehavior');
-    expect(localFinanceSource).not.toContain('NARROW_ONLY');
-  });
-});
-
 describe('ThemePageLayout — 狭幅の読む順序', () => {
   // 2026-10-31 (IA-REGION-THEME-01): 地域単位のリンク・テーマのボタン・県の Select を並べた帯をやめ、パンくずの各段と
   // 右端のアイコンから Sheet で選ぶ形にした。読む順は「パンくず (今いる地域とテーマ) → 題名 → 章のリンク」

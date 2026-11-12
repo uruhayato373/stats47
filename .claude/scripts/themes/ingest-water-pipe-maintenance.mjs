@@ -12,7 +12,7 @@ import { parseArgs } from 'node:util';
 const root = process.cwd();
 const require = createRequire(resolve(root, 'package.json'));
 const { parse } = require('csv-parse/sync');
-const prefectures = require('./packages/area/src/data/prefectures.json');
+const prefectures = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 export const SOURCE = {
   file: 'water-digital-long.zip',
   member: '2024.csv',

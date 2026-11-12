@@ -1,0 +1,68 @@
+{
+  "productId": "P-02",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "01183307be6a2537e812c902140906d69cf6c1cc41301700846e27db0acd8726",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-02/v4-20261024-mac-r2/c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974.zip",
+    "sha256": "c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974"
+  },
+  "selectedMetrics": [
+    {
+      "key": "active-job-opening-ratio",
+      "title": "有効求人倍率",
+      "year": "2022",
+      "unit": "倍"
+    },
+    {
+      "key": "scheduled-salary-male",
+      "title": "所定内給与額（男）",
+      "year": "2024",
+      "unit": "千円"
+    }
+  ],
+  "included": [
+    "CSV（47地域・107指標、基準年は指標ごとに固定）",
+    "Excel（107指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "job-opening-comparison",
+      "figures": [
+        {
+          "file": "job-opening-comparison.png",
+          "alt": "有効求人倍率（2022年度・地域別比較）",
+          "template": "bar",
+          "sha256": "d9c012bfdb7d8b04e48789cf011fa9b92f20c939f4d880f8a3778b419268a252"
+        }
+      ]
+    },
+    {
+      "id": "scheduled-pay-distribution",
+      "figures": [
+        {
+          "file": "scheduled-pay-distribution.png",
+          "alt": "所定内給与額（男）（2024年・地図）",
+          "template": "choropleth",
+          "sha256": "20ad9387207413d98a78583bac6292308b55c1ab4e633771066993acc33d46b4"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全107指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-02のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "9d484940291fe3708292aef7eb6575ee6c883e65d81ea364c11f82ce1dec9a8d"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2024年で指標ごとに異なり、時系列データではありません。"
+}

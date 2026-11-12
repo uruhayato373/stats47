@@ -1,0 +1,96 @@
+{
+  "productId": "P-09",
+  "articleKey": "prefecture-industry-economy-pack",
+  "displayTitle": "都道府県別 産業・経済データ",
+  "description": "出荷額や従業者数などの産業指標を並べ、地域の経済活動を金額と人の両面から紹介できます。",
+  "useCases": [
+    {
+      "title": "産業振興の現状整理に",
+      "description": "製造品出荷額を比較し、自県と近隣県の製造業の規模を説明できます。"
+    },
+    {
+      "title": "法人営業の事前調査に",
+      "description": "製造業の従業者が集まる県を確認し、詳しく調べる営業エリアを選べます。"
+    },
+    {
+      "title": "地域経済のレポートに",
+      "description": "出荷額と従業者数の図を添え、金額と雇用の両面から地域の製造業を紹介できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "manufacturing-shipments",
+      "heading": "出荷額で製造業の規模を比べる",
+      "lead": "県別の製造品出荷額等を並べ、自県の位置や近隣県との規模の違いを示せます。",
+      "metricKeys": [
+        "manufacturing-shipment-amount"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "manufacturing-employment",
+      "heading": "製造業の働き手が集まる地域を見る",
+      "lead": "製造業従業者数を地図にし、金額だけでは伝わらない働き手の分布を紹介できます。",
+      "metricKeys": [
+        "manufacturing-employees"
+      ],
+      "preferredTemplate": "choropleth"
+    }
+  ],
+  "purchaseNotes": [
+    "県単位で産業を比較するデータ集です。市区町村別の製造品出荷額データ商品とは集計範囲が異なります。",
+    "収録値の対象年は指標ごとに異なります。出荷額を生産性や利益と読み替えず、調査対象と単位を確認して利用してください。"
+  ],
+  "analysisPlan": {
+    "objective": "製造業の規模、従業者の集積、従業者あたり出荷額を分け、既存分析と市区町村商品の知見を再利用する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "manufacturing-shipment-amount",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "manufacturing-employees",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "manufacturing-shipment-amount",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "既存M01分析を参照し、出荷額の対象年と事業所・従業者の調査時点、調査対象範囲が揃う組み合わせを確認する。"
+      },
+      {
+        "metricKey": "manufacturing-employees",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "既存M01分析を参照し、出荷額の対象年と事業所・従業者の調査時点、調査対象範囲が揃う組み合わせを確認する。"
+      },
+      {
+        "metricKey": "manufacturing-establishments",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "既存M01分析を参照し、出荷額の対象年と事業所・従業者の調査時点、調査対象範囲が揃う組み合わせを確認する。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "既存M01分析を参照し、出荷額の対象年と事業所・従業者の調査時点、調査対象範囲が揃う組み合わせを確認する。"
+      }
+    ],
+    "analysisRefs": [
+      "analysis:M01-factory-size"
+    ],
+    "figureRefs": [
+      "figure:M01-workforce-productivity-scatter",
+      "figure:M01-gap-steps-bars"
+    ],
+    "reuseProducts": [],
+    "limitations": [
+      "従業者あたり出荷額は付加価値や利益ではない。M01の対象抽出条件・異年次の扱いを省略して全自治体へ結論を広げない。"
+    ]
+  }
+}

@@ -1,26 +1,9 @@
 import Image from "next/image";
 
-import { isLandscapeBanner } from "../utils";
-
 import { AdImpressionTracker } from "./AdImpressionTracker";
-import { AdCell } from "./slots/AdCell";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 import type { ResolvedAffiliateBanner } from "../types";
-
-interface NativeAffiliateRowProps {
-  /** バナー配列。縦長を除き、variantの上限（3件または4件）まで描画する */
-  banners: ResolvedAffiliateBanner[];
-  /** AffiliateLink の position 追跡用 */
-  position?: string;
-  /** AffiliateLink の category 追跡用 */
-  trackingCategory?: string;
-  /**
-   * `standard`: 最大 4 件（一覧・ハブ用）。`three-up`: 最大 3 件（読了位置用）。
-   * どちらも列の数は本文の幅で決め、1 行に入る数だけ見せる (COLUMN_CLASS)。
-   */
-  variant?: "standard" | "three-up";
-}
 
 /**
  * 本文の幅 (コンテナ) で列の数を決める。バナーは原寸 (300px) より縮めず、入る数だけ横に並べる (2026-10-29 オーナー決定)。
@@ -44,64 +27,12 @@ export const ITEM_VISIBILITY_CLASS = [
 ];
 
 /**
- * ネイティブアフィリエイト枠。リンク付きバナー画像を、本文の広告のセル (左上に「PR」) の中にグリッド表示する。
+ * 本文の横並びの 1 枚 (リンク付きのバナー画像と計測)。広告の段 (AdRow) の PR のセルが使う。
+ * 2026-11-12: PR の列の部品 (NativeAffiliateRow) は、使っていたランキングの読了位置を AdSense に替えたので削除した。
  *
- * ★ 2026-08-14: PR ラベル・見出し・商品名・もっと見る導線・カード装飾を廃止した。
- *   ASP 提供バナーの意匠をそのまま表示し、サイト側の可視テキストや装飾を重ねない。
- * ★ 2026-10-08: PR 表記だけをオーナー判断で戻した (PrLabel)。見出し・商品名・装飾は引き続き足さない。
- *
- * ★ 縦長 (height > width) クリエイティブはここで除外する。本文の横並びグリッドに
- *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長を出す枠は無い
- *   (ホームの縦長バナーは 2026-10-30 に外した)。呼び出し元は除外分を見込んで
- *   解決 limit を 8 程度にする (正典: .claude/rules/affiliate-ads-standards.md §3)。
- *
- * ★ 2026-08-04: impression 計装を追加した。それまで **クリックだけ送って impression を
- *   送っていなかった**ため、GA4 の impression 内訳に native 枠が 1 つも現れず、CTR の
- *   分母が系統的に欠けていた (この枠は blog / ranking / category / survey / tag / themes /
- *   home / compare / 市区町村と主要ページ種別のほぼ全てに出る)。
- *   正典: .claude/rules/analytics-event-standards.md
- *
- * ★ 計測の `category` には **banner の vertical (10 軸)** を渡す。`trackingCategory`
- *   (例 "category-landweather") は 10 軸外なので affiliate_vertical に流すと内訳が壊れる。
- *   ページ文脈は `position` (例 "category-native") が担うため情報は失われない。
- */
-export function NativeAffiliateRow({
-  banners,
-  position = "native-row",
-  trackingCategory = "native-affiliate",
-  variant = "standard",
-}: NativeAffiliateRowProps) {
-  // 呼び出し元がフィルタ済みでも冪等 (防御的フィルタ)
-  const itemLimit = variant === "three-up" ? 3 : 4;
-  const visible = banners.filter(isLandscapeBanner).slice(0, itemLimit);
-  if (visible.length === 0) return null;
-
-  // 本文の広告のセル (左上に「PR」1 つ・バナーは原寸 300px の列を中央にまとめる。2026-10-30 オーナー決定 案 A。
-  // 旧: バナーごとに「PR」を置き、列を本文の幅いっぱいに割って各バナーを列の中央に置いていた)
-  return (
-    <AdCell label="PR">
-      <div className="@container w-full">
-        <div
-          className={`grid items-start justify-center gap-2 ${COLUMN_CLASS[visible.length]}`}
-        >
-          {visible.map((b, index) => (
-            <NativeBannerTile
-              key={b.href + b.imageUrl}
-              banner={b}
-              position={position}
-              trackingCategory={trackingCategory}
-              className={ITEM_VISIBILITY_CLASS[index]}
-            />
-          ))}
-        </div>
-      </div>
-    </AdCell>
-  );
-}
-
-/**
- * 本文の横並びの 1 枚 (リンク付きのバナー画像と計測)。PR の列と広告の段 (AdRow) が共有する。
- * 計測の `category` には banner の vertical (10 軸) を渡す (理由は NativeAffiliateRow の説明)。
+ * 計測の `category` には **banner の vertical (10 軸)** を渡す。`trackingCategory` (例 "category-landweather") は
+ * 10 軸外なので affiliate_vertical に流すと内訳が壊れる。ページ文脈は `position` が担うため情報は失われない。
+ * impression の計装は 2026-08-04 に足した (それまでクリックだけ送り、CTR の分母が欠けていた。正典 analytics-event-standards.md)。
  */
 export function NativeBannerTile({
   banner: b,

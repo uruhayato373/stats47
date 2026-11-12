@@ -8903,6 +8903,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:japanese-movers-in",
           "kind": "ranking"
         }
@@ -8944,6 +8948,10 @@
         {
           "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:japanese-movers-out",

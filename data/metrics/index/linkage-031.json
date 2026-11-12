@@ -6988,6 +6988,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-07",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:vacant-houses-city",
           "kind": "ranking"
         }

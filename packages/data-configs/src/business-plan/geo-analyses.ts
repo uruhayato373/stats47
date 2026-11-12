@@ -7,7 +7,7 @@ import type { BusinessPlanM1Analysis } from './types';
 
 /**
  * Geo 分析の読み込み口。記録の正本は台帳 `geo.analyses` (data/geo/analyses/analyses.json + Schema)。
- * ここは型を付けて export するだけで、記録を持たない。出典を theme-catalog に持つ分析 (themeSource) の
+ * ここは型を付けて export するだけで、記録を持たない。出典をテーマの出典の台帳 `themes.sources` に持つ分析 (themeSource) の
  * 7 項目だけ geo-analysis-theme-sources.ts の結合の関数で埋める。
  */
 export type GeoAnalysisSlug = keyof typeof data.analyses;

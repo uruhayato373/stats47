@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 import { ChartPanel } from '@stats47/components';
-import { Button } from '@stats47/components/atoms/ui/button';
 import { FREIGHT_OD_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
@@ -69,48 +69,21 @@ export function ThemeFreightOdClient({
           />
         }
       >
-        <div
-          className="flex flex-wrap gap-2"
-          role="group"
+        <SingleSelectToggleGroup
           aria-label="輸送機関"
-        >
-          {snapshot.modes.map((item) => (
-            <Button
-              key={item.mode}
-              type="button"
-              variant={item.mode === modeKey ? 'default' : 'outline'}
-              size="sm"
-              aria-pressed={item.mode === modeKey}
-              onClick={() => setModeKey(item.mode)}
-            >
-              {item.label}
-            </Button>
-          ))}
-        </div>
-        <div
-          className="flex flex-wrap gap-2"
-          role="group"
+          value={modeKey}
+          onValueChange={setModeKey}
+          options={snapshot.modes.map(item => ({ value: item.mode, label: item.label }))}
+        />
+        <SingleSelectToggleGroup
           aria-label="貨物の方向"
-        >
-          <Button
-            type="button"
-            size="sm"
-            variant={direction === 'outbound' ? 'default' : 'outline'}
-            aria-pressed={direction === 'outbound'}
-            onClick={() => setDirection('outbound')}
-          >
-            発送先を見る
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant={direction === 'inbound' ? 'default' : 'outline'}
-            aria-pressed={direction === 'inbound'}
-            onClick={() => setDirection('inbound')}
-          >
-            到着元を見る
-          </Button>
-        </div>
+          value={direction}
+          onValueChange={setDirection}
+          options={[
+            { value: 'outbound', label: '発送先を見る' },
+            { value: 'inbound', label: '到着元を見る' },
+          ]}
+        />
         <p className="text-sm text-muted-foreground">
           {selectedPrefectureCode
             ? `${selectedAreaName}${direction === 'outbound' ? 'から発送された貨物の到着先' : 'へ到着した貨物の発送元'}です。自県内の輸送も含みます。`

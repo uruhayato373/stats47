@@ -4,8 +4,6 @@ import path from "node:path";
 import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { describe, expect, it } from "vitest";
 
-import { splitLocalFinanceSections, validateLocalFinanceSections } from '@/features/local-finance-dashboard/lib/finance-sections';
-
 import { ALL_THEMES } from '../config/all-themes';
 
 /**
@@ -39,7 +37,6 @@ describe("metricGroups の到達性", () => {
   it('汎用ページの章に指定した埋め込みがサーバー生成対象へ届く', () => {
     const missing: string[] = [];
     for (const theme of ALL_THEMES) {
-      if (theme.themeKey === 'local-finance') continue;
       for (const section of THEME_CATALOGS[theme.themeKey]?.sections ?? []) {
         for (const key of section.embeddedSectionKeys ?? []) {
           if (!theme.embeddedSections?.includes(key)) missing.push(`${theme.themeKey}/${section.key}/${key}`);
@@ -67,53 +64,16 @@ describe("metricGroups の到達性", () => {
       .toEqual(expect.arrayContaining([expect.objectContaining({ rankingKey: 'per-capita-total-expenditure-pref-municipal' })]));
   });
 
-  it("補足ダッシュボードを持たない bespoke ページに metricGroups を定義しない", () => {
-    const bespoke = new Set(bespokeThemeSlugs());
-    // 検査そのものが空振りしていないことを確かめる (bespoke が 0 件なら意味がない)
-    expect(bespoke.size).toBeGreaterThan(0);
-
-    const dead = Object.entries(THEME_CATALOGS)
-      .filter(([key, c]) => bespoke.has(key) && key !== 'local-finance' && (c.metricGroups?.length ?? 0) > 0)
-      .map(([key]) => key);
-
-    expect(dead).toEqual([]);
+  // 2026-11-12 オーナー決定: テーマは 1 つのページの種類。地方財政の専用ページという特例をやめ、全テーマを
+  // [themeSlug] → ThemePageLayout で描く。専用ページを足すと、カタログの設定が読まれない dead config が再び生まれる
+  it("テーマに専用ページ (app/themes/<slug>/page.tsx) を作らない", () => {
+    expect(bespokeThemeSlugs()).toEqual([]);
   });
 
-  it("local-finance が bespoke ページとして検出できている (検査の前提の固定)", () => {
-    expect(bespokeThemeSlugs()).toContain("local-finance");
-  });
-
-  it('地方財政に未使用の図を数えず、実際の専用ブロックと章が一致する', () => {
-    const catalog = THEME_CATALOGS['local-finance'];
-    expect(catalog.charts).toEqual([]);
-    const { dedicated, supplementary } = splitLocalFinanceSections(catalog.sections ?? []);
-    expect(validateLocalFinanceSections(dedicated)).toEqual([]);
-    expect(supplementary.flatMap((section) => section.metricGroupKeys).sort())
-      .toEqual(catalog.metricGroups!.map((group) => group.key).sort());
-    expect(supplementary).toHaveLength(5);
-    expect(dedicated).toHaveLength(3);
-    const donations = supplementary.find((section) => section.key === 'candidate-125');
-    expect(donations?.metricGroupKeys).toHaveLength(7);
-    expect(donations?.description).toContain('県内市区町村の課税分');
-  });
-
-  it('専用章と補足指標を混ぜた定義や空の補足章を拒否する', () => {
-    const sections = structuredClone(THEME_CATALOGS['local-finance'].sections!);
-    sections[0].metricGroupKeys = ['supplement'];
-    expect(() => splitLocalFinanceSections(sections)).toThrow('metricGroupKeys');
-    sections[0].metricGroupKeys = [];
-    sections.push({ key: 'empty', title: '空', metricGroupKeys: [] });
-    expect(() => splitLocalFinanceSections(sections)).toThrow('補足章');
-  });
-
-  it('専用ブロックの配置漏れ・未知キー・未使用の汎用図を検出する', () => {
-    const sections = structuredClone(THEME_CATALOGS['local-finance'].sections!);
-    sections[0].embeddedSectionKeys = ['unknown'];
-    sections[0].chartKeys = ['unused-chart'];
-    expect(validateLocalFinanceSections(sections)).toEqual(expect.arrayContaining([
-      expect.stringContaining('finance-overview'),
-      expect.stringContaining('unknown'),
-      expect.stringContaining('chartKeys'),
-    ]));
+  it("地方財政の決算カードと財政の流れの章が、共通の埋め込みの章として届く", () => {
+    const theme = ALL_THEMES.find((t) => t.themeKey === "local-finance");
+    expect(theme?.embeddedSections).toEqual(["finance-overview", "finance-sustainability", "finance-flow"]);
+    const placed = (THEME_CATALOGS["local-finance"].sections ?? []).flatMap((section) => section.embeddedSectionKeys ?? []);
+    expect(placed.sort()).toEqual(["finance-flow", "finance-overview", "finance-sustainability"]);
   });
 });

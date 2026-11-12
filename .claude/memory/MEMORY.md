@@ -90,7 +90,7 @@
 - [note publish flow 2026 06](project_note_publish_flow_2026_06.md) — note.comエディタの公開手順(editor-helpers.sh)とgotchas。保存場所は台帳+R2
 - [port ranking 2023](project_port_ranking_2023.md) — 入港船舶総トン数ランキング(40県、1位神奈川・124倍格差)
 - [note cover overlap validator](project_note_cover_overlap_validator.md) — note cover SVGのCJKテキスト重なり検証スクリプト(生成・編集後は必ず通す)
-- [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来guardスクリプト一覧(.claude/scripts/lib/check-*.cjs、refactor前に索引参照)
+- [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来guard一覧。レールは内側カード幅も全境界で測る。単一選択は共通化し個別実装をAST検査で止める。カードのgapと子marginの重複・左右余白の不一致は実寸で検査する
 - [publish x ui 2026 04](project_publish_x_ui_2026_04.md) — publish-xの2026-04 UI対応(24時間制select、DOM click必須、posted_at JST変換)
 - [youtube shadowban recovery 2026 04](project_youtube_shadowban_recovery_2026_04.md) — Issue#88 2026-05-16 CLOSED。17本public復元済、daily audit verdictはlikely-shadowban継続、SUGGESTED_VIDEO 0
 - [instagram paused 2026 10 27](project_instagram_paused_2026_10_27.md) — 2026-10-27 Instagram 自動投稿を停止。投稿 workflow 5 本を disabled_manually (yml は残置)、計測とトークン延長は継続。勝手に enable しない
@@ -175,6 +175,7 @@
 - [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI の URL を渡されたら実物デモの computed style (角丸・余白・フォント・色) を測ってから設計。似た公式テンプレで代用しない (2026-10-27 管理画面で 2 度指摘)
 - [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古いコミットから切られ node_modules も無い。prompt に起点 SHA の付け替えと @stats47 だけ張る手順を書き、取り込みは cherry-pick
 - [batch production builds](feedback_batch_production_builds.md) — 本番ビルド (10 分) を修正ごとに回さない。dev で確かめ、本番は節目に 1 回でまとめて検査。dev が壊れていたら先に dev を直す
+- [bundled CJS dataset paths](feedback_bundled_cjs_dataset_paths.md) — 管理画面の CJS は __dirname が /ROOT になる。台帳の実体解決を仮想パスとアプリ cwd で検査し、対象アプリのビルドも確認する
 - [local r2 overlay for generated snapshots](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成の R2 snapshot を localhost で見るときは .github/scripts/r2-overlay-server.mjs を使う (自作しない)。R2_S3_ENDPOINT を空に
 - [check ci job scope before launch](feedback_check_ci_job_scope_before_launch.md) — 長い CI ジョブは起動前に作り直す範囲と前回の所要時間を確かめる。data-refresh は snapshot_scope=auto (all を明示しない)。2026-10-28 に 8 指標で 75 分浪費
 - [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は vitest related で触った範囲だけ。web 全件 (約10分) は develop 直前の 1 回。CI は push 後に待たずに次へ進む

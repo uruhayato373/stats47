@@ -26,8 +26,8 @@ import { RailLinksCard } from '@/components/rail';
 import {
   AdRow,
   composeAdRows,
+  InFeedAdSlot,
 } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { AreaDatabookSection } from '@/features/area-databook';
 import { getAreaDatabook } from '@/features/area-databook/server';
 import {
@@ -43,7 +43,14 @@ import {
 import { AreaGeoInsightsSection } from '@/features/geo-analysis/area';
 import { AREA_THEMES } from '@/features/theme-dashboard/listing.server';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import {
+  AREA_AFTER_DATABOOK,
+  AREA_DATABOOK_ROW_1,
+  AREA_DATABOOK_ROW_2,
+  AREA_DATABOOK_ROW_3,
+  AREA_END,
+  AREA_INFEED,
+} from '@/lib/google-adsense';
 
 import type { Metadata } from 'next';
 
@@ -146,13 +153,24 @@ export default async function AreaProfilePage({ params }: PageProps) {
   });
   const structuredData = generateAreaProfileStructuredData({ profile, highlights });
   const breadcrumbStructuredData = generateAreaProfileBreadcrumbStructuredData({ profile });
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
-  // 旧: デスクトップだけの本文とページ末の AdSense。PR は共通の案件 (県の返礼品のカードは別に残る)
-  const [areaRow1, areaRow2] = composeAdRows(
-    [['adsense', 'affiliate'], ['affiliate', 'adsense']],
-    [HUB_INCONTENT, CONTENT_FOOTER],
-    await resolveGenericAffiliateBanners(2).catch(() => []),
+  // 広告の段 (2026-11-12 提案): どれも AdSense 1 つを本文の幅いっぱいに出し、PR を外す。データブックはスマホで約 15,800px
+  // 続くので、節の前に 3 段を差し込む (暮らし・気候・消費の前。スマホで広告の間が約 4,500px にそろう位置。どの県も同じ節の前)
+  const [databookRow1, databookRow2, databookRow3, areaRow1, areaRow2] = composeAdRows(
+    [['adsense'], ['adsense'], ['adsense'], ['adsense'], ['adsense']],
+    [AREA_DATABOOK_ROW_1, AREA_DATABOOK_ROW_2, AREA_DATABOOK_ROW_3, AREA_AFTER_DATABOOK, AREA_END],
+    [],
   );
+  const databookAdRows = {
+    'civic-living': databookRow1.length > 0 && (
+      <AdRow cells={databookRow1} position="area-databook-row-1" trackingCategory={`area-${areaCode}`} wide />
+    ),
+    climate: databookRow2.length > 0 && (
+      <AdRow cells={databookRow2} position="area-databook-row-2" trackingCategory={`area-${areaCode}`} wide />
+    ),
+    consumption: databookRow3.length > 0 && (
+      <AdRow cells={databookRow3} position="area-databook-row-3" trackingCategory={`area-${areaCode}`} wide />
+    ),
+  };
   return (
     <>
       {/* 構造化データ */}
@@ -198,7 +216,13 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
           {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
           <Suspense fallback={null}>
-            <AreaRelatedBlogArticles areaCode={areaCode} highlights={highlights} limit={3} />
+            {/* 2026-11-12 オーナー決定: 記事を 6 件 (PC は 3 列 × 2 行) にし、一覧が 1 列の幅だけ 3 件目の後にインフィード広告を 1 つ入れる */}
+            <AreaRelatedBlogArticles
+              areaCode={areaCode}
+              highlights={highlights}
+              limit={6}
+              inFeedAd={<InFeedAdSlot slot={AREA_INFEED} />}
+            />
           </Suspense>
 
           {/* 県データブック (値+全国順位 + 特産品 + 推移チャート)。
@@ -214,6 +238,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
             <AreaDatabookSection
               areaCode={areaCode}
               areaName={profile.areaName}
+              insertBefore={databookAdRows}
             />
           </Suspense>
 
@@ -226,7 +251,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
           {/* AdSense再開時にだけ共通枠を戻す。県別の収益導線は上の返礼品リンクへ集約する。 */}
           {areaRow1.length > 0 && (
-            <AdRow cells={areaRow1} position="area-row-1" trackingCategory={`area-${areaCode}`} />
+            <AdRow cells={areaRow1} position="area-row-1" trackingCategory={`area-${areaCode}`} wide />
           )}
 
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
@@ -282,7 +307,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                       home の左レールが引き続き使う。
                     */}
           {areaRow2.length > 0 && (
-            <AdRow cells={areaRow2} position="area-row-2" trackingCategory={`area-${areaCode}`} />
+            <AdRow cells={areaRow2} position="area-row-2" trackingCategory={`area-${areaCode}`} wide />
           )}
         </PanelGrid>
       </PageShell>

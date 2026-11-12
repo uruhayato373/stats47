@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "都道府県のマスタ",
+  "description": "data/areas/master/prefectures.json の形状契約。47 都道府県を JIS 順に並べた配列。prefCode は 5 桁の都道府県コード (01000〜47000)。romaji は小文字ローマ字で、楽天のエリア slug・IPSS のファイル名と同じ表記。読み込みは packages/area/src/data/index.ts (PREFECTURES)。",
+  "type": "array",
+  "minItems": 47,
+  "maxItems": 47,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": ["prefCode", "prefName", "romaji"],
+    "additionalProperties": false,
+    "properties": {
+      "prefCode": { "type": "string", "pattern": "^(0[1-9]|[1-3][0-9]|4[0-7])000$" },
+      "prefName": { "type": "string", "minLength": 1 },
+      "romaji": { "type": "string", "pattern": "^[a-z]+$" }
+    }
+  }
+}

@@ -15,7 +15,7 @@ EPUB3 を生成・検証して、**オーナーの Kindle Previewer 検証・KDP
 ## 大原則
 
 - **必ず `.claude/rules/kindle-publishing-standards.md`（Kindle 出版チャネル）に従う**。
-- 書籍定義は git TS (`src/channels/kindle/book-catalog.ts` = `KINDLE_BOOKS`) が SSOT。本文素材は
+- 書籍定義は台帳 `products.kindle-books` (`KINDLE_BOOKS`) が SSOT。本文素材は
   **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/` は
   **git 管理外・公開 R2 へ平文で置かない**。KDP送信版は`kindle:archive --push`で暗号化R2保全する。長文の書き下ろしは `src/channels/kindle/manuscripts/<id>/*.md` (freshFile)。
 - **主エンジンは EPUB3 リフロー型**（PDF は使わない＝KDP 電子は PDF 実質不可）。図表は SVG→PNG で章内同梱。
@@ -41,7 +41,7 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    (`npm run surveys:lenses:status -- --survey kakei-chousa`)。1 冊は 1 つの切り口 (または組み合わせ) を体系的に読む本として設計し、
    教材の企画を章にしたら `npm run reference:expansion -- record --channel kindle --status planned --target kindle:<書籍ID> --by kindle-publisher` で記録する
    (規約 `.claude/rules/survey-content-standards.md`「調査の切り口台帳」)。
-1. **企画を manuscript へ昇格**: `book-catalog.ts` の対象書籍に fresh 章（はじめに/読み方/終章 横断分析）を
+1. **企画を manuscript へ昇格**: 台帳 `products.kindle-books` の対象書籍に fresh 章（はじめに/読み方/終章 横断分析）を
    `freshFile` で割り当て、blog 章の `blogSlug` が R2 実在することを確認して `status: "manuscript"` にする。
 2. **書き下ろしを執筆・レビュー**: fresh 章の本文は `article-writer` が起草 → `blog-critic` が別コンテキストで
    review.md（verdict:PASS）を出すまで直させる（author/critic 分離）。**書き下ろし比率 30% 以上**を満たす分量にする。
@@ -50,8 +50,8 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    (a) 章テキスト (EPUB を展開したもの) (b) 図の数値 JSON (R2 `app/blog/<slug>/data/<name>.json`)
    (c) **指標定義シート** `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <blogSlug…>` を渡し、
    `blog-quality-standards.md`「定義整合」を BLOCK 基準にする。findings の before は章本文の逐語で受け取り、
-   ブログ由来章は `editorial-corrections.ts` (書籍版のみの校訂・公開ブログは変えない)、書き下ろし章は
-   `manuscripts/<id>/*.md`、**図の中の文字 (図題・年の型・軸ラベル) は `figure-corrections.ts`** (PNG 化の直前に
+   ブログ由来章は台帳 `products.kindle-editorial-corrections` (書籍版のみの校訂・公開ブログは変えない)、書き下ろし章は
+   `manuscripts/<id>/*.md`、**図の中の文字 (図題・年の型・軸ラベル) は台帳 `products.kindle-figure-corrections`** (PNG 化の直前に
    SVG の文字列だけを置換。数値・点は触らない。ブログ側で図データを直したら before が消えるので生成が止まり、
    エントリを外す) へ反映して再生成 → verify-epub (3 層) → critic の delta 再審査で PASS を取る。
    図データそのもの (別年の指標への差し替え・小数桁) はブログ側の chart-author 工程で、書籍側では直せない。
@@ -114,9 +114,9 @@ Amazon の変換そのものを見るには、Send to Kindle (Web) で EPUB を�
 ## 関連
 
 - 規約: `.claude/rules/kindle-publishing-standards.md`
-- SSOT: `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts`
+- SSOT: 台帳 `products.kindle-books` / EPUB 生成器 `src/generators/epub.ts`
 - 台帳: `data/products/kindle-status.json`
-- 企画・市場判断: `.claude/rules/kindle-publishing-standards.md` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
+- 企画・市場判断: `.claude/rules/kindle-publishing-standards.md` / 台帳 `products.kindle-books`
 - agent: `.claude/agents/kindle-publisher.md`
 - 品質ゲート（書き下ろし）: `.claude/rules/blog-quality-standards.md`（ですます調・critic PASS）
 - note・KDP・Brain 横断の商品ポートフォリオと需要ゲート:

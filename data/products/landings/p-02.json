@@ -1,0 +1,79 @@
+{
+  "productId": "P-02",
+  "articleKey": "prefecture-income-wage-hiring-pack",
+  "displayTitle": "都道府県別 賃金・求人・働き方データ",
+  "description": "求人と給与の地域差を整理し、募集する地域や条件を検討するための比較資料を作れます。",
+  "useCases": [
+    {
+      "title": "募集する地域の比較に",
+      "description": "有効求人倍率を県別に並べ、候補地域の求人・求職の状況を確認できます。"
+    },
+    {
+      "title": "給与条件の検討資料に",
+      "description": "所定内給与額の地域差を示し、募集条件を話し合うための参考表を作れます。"
+    },
+    {
+      "title": "人事・採用会議の説明に",
+      "description": "求人の状況と給与水準を別々の図で示し、地域の雇用環境を共有できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "job-opening-comparison",
+      "heading": "求人と求職のバランスを比べる",
+      "lead": "県別の有効求人倍率を並べ、募集候補の地域が全国のどの位置にあるかを確認できます。",
+      "metricKeys": [
+        "active-job-opening-ratio"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "scheduled-pay-distribution",
+      "heading": "給与水準の地域差を地図で見る",
+      "lead": "男性の所定内給与額で色分けし、給与水準の高い地域や近隣県との違いを俯瞰できます。",
+      "metricKeys": [
+        "scheduled-salary-male"
+      ],
+      "preferredTemplate": "choropleth"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。求人・給与の指標は基準年が異なる場合があります。求人倍率だけで個々の企業の採用難易度は判断できません。",
+    "給与は対象者と月額・年額、所定内・手当込みなどの定義を確認してください。作成例の男性の所定内給与額は、男女合計の平均年収や手取り額ではありません。"
+  ],
+  "analysisPlan": {
+    "objective": "賃金・求人の県別比較に、地域内外への通勤と就業構成を組み合わせ、採用圏の基礎資料を作る。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "active-job-opening-ratio",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "scheduled-salary-male",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "commuters-to-other-municipalities",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "通勤先の広がりを補う候補。国勢調査年、就業者の対象、利用可能自治体を確認してから採用する。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "採用対象となる地域規模の補助候補。総人口をそのまま労働供給とみなさず、年齢・就業との整合を調べる。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "求人倍率・賃金の都道府県値を市区町村へ割り振らない。通勤人口と居住人口は対象が異なる。"
+    ]
+  }
+}

@@ -6516,6 +6516,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:fiscal-strength-index",
           "kind": "ranking"
         }
@@ -6778,6 +6782,10 @@
         {
           "pageId": "blog:toyama-municipal-finance",
           "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product"
         },
         {
           "pageId": "ranking:fiscal-strength-index-prefecture",

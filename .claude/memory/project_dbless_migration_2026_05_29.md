@@ -36,7 +36,7 @@ metadata:
   - 柱1 (c738f4fc): `packages/r2-storage/.../fetch.ts` に公開URL fetch tier (localFS→binding→S3→公開URL)。`R2_PUBLIC_FETCH_URL` 設定で binding 試行を skip (Node の getCloudflareContext 失敗ノイズ回避)。Worker は本変数未設定&binding 段優先で不変。listFromR2 には付けない。
   - 柱2 (7a3fd844): known-ranking-keys を `packages/ranking/src/config/` へ移設 (`@stats47/ranking/config`, apps/web は re-export)。基盤1 と export-blog に「list 不可なら committed key (known-keys / articles.json seed) から列挙」フォールバック追加。
   - 2.2b city (141e656c): 削除済 run-batch-city を R2 から再構築。rankPref=prefectureCode group→全国rank昇順連番。6 spot city が cloud baseline 完全一致。
-  - 2.5 port (f02e358a): port master git TS化 `packages/area/src/data/ports.json` (699, administrator込み) + R2 stats。baseline 完全一致。
+  - 2.5 port (f02e358a): port master git TS化 `data/areas/master/ports.json` (699, administrator込み) + R2 stats。baseline 完全一致。
   - 2.1 recompute (b2324f2e): `packages/ranking/scripts/verify-calculated-rankings.ts`。計算可能な全計算型 ranking で rank 完全一致確認 (ratio の ×100 は snapshot display スケール=既存, non-regular は config 欠落=別件)。
   - 柱3 (5ca45fed): `push-r2-wrangler.ts` (wrangler CLI で S3鍵不要 push, dry-run既定)。SSD非接続書込は既存 `local-r2-mode.sh cloud` + 柱1 で対応済。
 

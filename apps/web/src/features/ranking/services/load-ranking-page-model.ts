@@ -1,6 +1,7 @@
 import "server-only";
 
 import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
+import { shouldShowMetricTotal } from "@stats47/data-configs/metric-summary-display";
 import { getRankingTitle, type RankingValue } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesFromR2,
@@ -10,9 +11,6 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
-import { applyRankingAffiliatePolicy } from "@/features/ads/constants/ranking-affiliate-policy";
-import { resolveAffiliateBannersForContent } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingFAQStructuredData,
@@ -80,7 +78,6 @@ export async function loadRankingPageModel(rankingKey: string) {
   // 並ぶ + surveyName を別 fetch していた。焼き込み済みデータで追加 fetch ゼロにする。
   // 正典: .claude/rules/survey-linkage-standards.md
   const originalSurveys = rankingItem.originalSurveys ?? [];
-  const surveyName = originalSurveys[0]?.name ?? null;
 
   // 同じ調査の関連ランキング (先頭 survey の items.json、自分自身を除く)。調査の編集設定の
   // 「読者の問い」が指すランキングを先頭にする (items.json の順だと家計調査はエアコン消費量・情報通信係数が先に出た)
@@ -113,37 +110,6 @@ export async function loadRankingPageModel(rankingKey: string) {
         .catch(() => null)
     : Promise.resolve(null);
 
-  // ネイティブ枠のバナー解決。
-  // ★ 2026-08-04: 4 → 5。先頭 4 件がネイティブ枠、5 件目を読了位置の 300x250 に回す
-  //   (RankingPageNativeAffiliateSection)。在庫が 4 件以下なら末尾バナーは出ない。
-  // ★ 2026-08-06: 5 → 8。縦長 (スカイスクレイパー) を描画側で除外するようになったため、
-  //   除外後も native 4 + 末尾 1 が埋まる余裕を持たせる。
-  // ★ 2026-08-06: **categoryKey フォールバックを追加**。tagKeys 単独では ranking の
-  //   native 枠が一度も描画されていなかった — `RankingItem.tags` の SSOT である
-  //   `MetricConfig.tags` が 2026-06-03 の型追加以来 2,295 config すべてで未記入で、
-  //   常に空配列だったため。規約 §12 は ranking の解決キーを「categoryKey → vertical
-  //   + tagKeys」と定めており、実装が tagKeys しか見ていないのがドリフトだった。
-  //   themes が relatedArticleTagKeys → THEME_AFFILIATE_MAP でフォールバックするのと同型。
-  // ★ 2026-09-03: 解決順を **出典調査 → タグ → カテゴリ** に統一 (`resolveContentVertical`)。
-  //   カテゴリ 17 軸では「納豆消費量」と「県民所得」が同じ economy に落ち、家計調査の
-  //   食品品目 (ランキング流入の 38%) に金融広告が出ていた。出典調査 (item.json の surveyIds
-  //   焼き込み) で家計調査 → furusato、学校保健統計 → 広告なし、のように主題単位で決める。
-  //   サイドバー (AffiliateAdSlot) も同じ解決結果 `affiliateVertical` を使う。
-  const affiliateInput = applyRankingAffiliatePolicy(rankingKey, {
-    surveyIds: rankingItem.surveyIds ?? (rankingItem.surveyId ? [rankingItem.surveyId] : []),
-    tagKeys: (rankingItem.tags ?? []).map((tag) => tag.tagKey),
-    categoryKey: rankingItem.categoryKey,
-  });
-  const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
-  const nativeBannersPromise = (async () => {
-    try {
-      return await resolveAffiliateBannersForContent(affiliateInput, 8, rankingKey);
-    } catch (error) {
-      logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
-      return [];
-    }
-  })();
-
   const [
     allYearsValues,
     aiContent,
@@ -151,7 +117,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     surveyRelatedItems,
     groupMembers,
     category,
-    nativeBanners,
   ] = await Promise.all([
     allYearsValuesPromise,
     aiContentPromise,
@@ -159,7 +124,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     surveyRelatedItemsPromise,
     groupMembersPromise,
     categoryPromise,
-    nativeBannersPromise,
   ]);
   // 観測値の年を更新した直後に旧年の考察を表示すると、順位・数値の説明が誤る。
   // 新年の審査済み解説が R2 に入るまでは考察を隠す。
@@ -171,7 +135,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     : [];
   // 全国平均の推移。全年から畳むので client には ≤50 点しか渡らない
   const nationalAverageSeries: NationalAveragePoint[] =
-    buildNationalAverageSeries(allYearsValues);
+    buildNationalAverageSeries(allYearsValues, { showTotal: shouldShowMetricTotal(rankingKey) });
 
   const breadcrumbCategory = category
     ? { key: category.categoryKey, name: category.categoryName }
@@ -197,13 +161,10 @@ export async function loadRankingPageModel(rankingKey: string) {
     nationalAverageSeries,
     aiContent: currentAiContent,
     cityRankingItem,
-    surveyName,
     originalSurveys,
     surveyRelatedItems,
     groupMembers,
     category,
-    nativeBanners,
-    affiliateVertical,
     breadcrumbCategory,
     structuredData,
     faqStructuredData,

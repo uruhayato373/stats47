@@ -1941,6 +1941,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-10",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:disaster-damage-amount-per-person",
           "kind": "ranking"
         },

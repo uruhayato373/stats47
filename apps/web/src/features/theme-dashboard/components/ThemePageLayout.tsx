@@ -1,13 +1,16 @@
 import { Suspense, type ReactNode } from 'react';
 
 
+
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
+import { getRankingTitle } from '@stats47/ranking';
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
+import { FaqSection } from '@/components/content/FaqSection';
 import { PageShell, PanelGrid } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import {
@@ -30,6 +33,13 @@ import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-
 import { loadInitialThemeData } from '../lib/initial-theme-data';
 import { KAKEI_RANKING_DIRECTORY } from '../lib/kakei-ranking-directory.generated';
 import { prefectureCityOptions } from '../lib/prefecture-city-options';
+import {
+  buildAreaThemeFaqItems,
+  buildFaqStructuredData,
+  buildThemeFaqItems,
+  leadFactFromValues,
+  themeLeadRankingKeys,
+} from '../lib/theme-seo';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -101,6 +111,35 @@ export async function ThemePageLayout({
       }
     : undefined;
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme, structuredArea);
+  // 主な指標の順位の Q&A (2026-11-12 オーナー決定・theme-seo.ts)。画面に出す Q&A と構造化データを同じデータから作る
+  // (Google は FAQ の構造化データに画面と同じ内容を求める)。全国のページは 1 位・最下位、県のページはその県の全国順位
+  const leadData = themeLeadRankingKeys(theme.themeKey)
+    .map((key) => data.indicatorDataMap[key])
+    .filter((d): d is NonNullable<typeof d> => d != null);
+  const faqItems = areaContext
+    ? buildAreaThemeFaqItems(
+        areaContext.areaName,
+        leadData.flatMap((d) => {
+          const finite = d.rankingValues.filter((v) => v.areaCode !== '00000' && typeof v.value === 'number' && Number.isFinite(v.value));
+          const row = finite.find((v) => v.areaCode === areaContext.areaCode);
+          if (!row || typeof row.value !== 'number' || row.rank == null) return [];
+          return [{
+            itemName: getRankingTitle(d.rankingItem),
+            unit: d.rankingItem.unit ?? '',
+            yearName: d.rankingItem.latestYear?.yearName ?? '',
+            value: row.value,
+            rank: row.rank,
+            total: finite.length,
+          }];
+        }),
+      )
+    : buildThemeFaqItems(
+        leadData.flatMap((d) => {
+          const fact = leadFactFromValues(d.rankingItem, d.rankingValues);
+          return fact ? [fact] : [];
+        }),
+      );
+  const faqData = buildFaqStructuredData(faqItems);
   const pageData = generateThemePageStructuredData(theme, structuredArea);
   const catalog = THEME_CATALOGS[theme.themeKey];
   const catalogTaxonomy = catalog
@@ -195,6 +234,12 @@ export async function ThemePageLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(pageData) }}
           />
+          {faqData && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+            />
+          )}
           {/* パンくずの各段と右端のアイコンから、地域・テーマを Sheet で選ぶ (2026-10-31 IA-REGION-THEME-01)。
           旧: パンくずとは別に、地域単位のリンク・テーマのボタン・県の Select を並べた帯を置いていた */}
           <div className="mb-4">
@@ -344,6 +389,17 @@ export async function ThemePageLayout({
           <Suspense fallback={null}>
             <ThemeCorrelatedMetrics themeKey={theme.themeKey} />
           </Suspense>
+
+          {/* 主な指標の順位の Q&A。上の構造化データ (FAQPage) と同じ内容 */}
+          {faqItems.length > 0 && (
+            <div className="mt-8">
+              <FaqSection
+                title={`${theme.title}の順位についてのよくある質問`}
+                subtitle={areaContext ? undefined : '都道府県の並びは、各指標のランキングのページで見られます。'}
+                items={faqItems.map(({ q, a }) => ({ question: q, answer: a }))}
+              />
+            </div>
+          )}
 
           {/* このテーマを読み解く記事はページの最後 (ダッシュボードを読み終えた位置) に置く (2026-10-29) */}
           {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (

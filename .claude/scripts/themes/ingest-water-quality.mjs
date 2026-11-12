@@ -15,7 +15,7 @@ const {
 const {
   waterQualitySnapshotSchema,
 } = require('./apps/web/src/features/water-quality/lib/water-quality-snapshot.ts');
-const prefs = require('./packages/area/src/data/prefectures.json');
+const prefs = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 export function buildWaterQualitySnapshot(extracted) {
   assert.equal(extracted.rows.length, 3427, 'all original rows');

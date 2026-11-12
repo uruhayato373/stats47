@@ -10,7 +10,7 @@ co_agents: [blog-editor]
 限らないため、survey と tag の競合を候補化し、意味判断を自動適用しない。
 
 - **明示policy SSOT**: `apps/web/src/features/ads/constants/blog-affiliate-policy.ts`
-- **自動解決 SSOT**: `apps/web/src/features/ads/constants/affiliate-category.ts`
+- **自動解決 SSOT**: 台帳 `affiliate.vertical-map` (解決の関数は `apps/web/src/features/ads/constants/affiliate-category.ts`)
 - **判定コア**: `.claude/scripts/ads/lib/affiliate-relevance-core.mjs`
 - **state**: `data/affiliate/relevance-latest.json`（派生物・手編集禁止）
 

@@ -4,8 +4,8 @@
  * 規約の正典: `.claude/rules/area-databook-standards.md`
  *
  * 47 県共通のセクション構成 (どの指標を・どのブロックで・どの順に見せるか) を
- * `template.ts` の 1 本で持ち、県ごとに変わる編集コンテンツ (特産品・県シンボル) は
- * `editorial/<code>.ts` に分離する。数値はすべて rankingKey 参照で県非依存。
+ * 台帳 `areas.databook-template` の 1 本で持ち、県ごとに変わる編集コンテンツ (特産品・県シンボル) は
+ * 台帳 `areas.editorial` (県ごとの JSON) に分離する。数値はすべて rankingKey 参照で県非依存。
  *
  * 生成物 (手編集禁止):
  *   - page-components JSON (`apps/web/scripts/data/page-components/area/<code>.json`)
@@ -130,12 +130,12 @@ export type DatabookBlock =
       blockKey: string;
     }
   | {
-      /** 特産品リスト (editorial/<code>.ts を描画) */
+      /** 特産品リスト (areas.editorial を描画) */
       blockType: "specialty-list";
       blockKey: string;
     }
   | {
-      /** 県シンボルカード (editorial/<code>.ts の symbols を描画) */
+      /** 県シンボルカード (areas.editorial の symbols を描画) */
       blockType: "symbol-card";
       blockKey: string;
     };

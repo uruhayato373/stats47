@@ -3330,6 +3330,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:current-balance-ratio-city",
           "kind": "ranking"
         }
@@ -7631,6 +7635,10 @@
         {
           "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:death-count",

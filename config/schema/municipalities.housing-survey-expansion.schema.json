@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "住宅・土地統計調査の市区町村指標の拡充",
+  "description": "data/municipalities/catalog/housing-survey-expansion.json の形状契約。社会・人口統計体系 (SSDS) 以外の e-Stat 表から足す市区町村指標: 令和5年住宅・土地統計調査 (2026-10-28)。SSDS の市区町村表で公開済みの住宅の基本項目 (空き家比率・持ち家比率・延べ面積など) に無い「最寄り施設までの距離」と空き家の内訳を、住宅・土地統計調査の市区町村表 (表章地域は市区と人口 1 万 5 千人以上の町村) から率にして足す。どれも cat 軸の axisRatio で、分母は同じ軸の総数コード。距離の割合は推計値の丸めで 100% をわずかに超える地域があり、公開時は valuePolicy で 0〜100 に限る。status が candidate の間は R2 の cities.json が未取り込みで空のページが sitemap に載るので公開集合に入れず、テーマも draft にする。取り込み後に cities.json の件数と値を確かめて published にする (MUNI-RANKING-EXPANSION-01)。notes は指標ごとの判定 (表・値のある地域・全国値) の記録でコードは読まない。読み込み口 packages/data-configs/src/geo-scope/municipality-housing-survey-expansion.ts。",
+  "type": "object",
+  "required": ["keys", "status", "candidateReason", "theme", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "keys": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } },
+    "status": { "enum": ["candidate", "published"] },
+    "candidateReason": { "description": "status が candidate のときに公開判断へ書く理由", "type": "string", "minLength": 1 },
+    "theme": {
+      "type": "object",
+      "required": ["slug", "title", "defaultMetricKey"],
+      "additionalProperties": false,
+      "properties": {
+        "slug": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "defaultMetricKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

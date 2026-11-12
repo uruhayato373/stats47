@@ -11,7 +11,7 @@ co_agents: [improvement-triage]
 「在庫 (どこに何枠あるか)」と「実績 (GA4 で imp / click)」を突き合わせ、impression を取りこぼしている
 カテゴリ / ページと、impression はあるが click されない (低 CTR) 枠を特定し、具体施策に落として記録する。
 
-- **在庫 (SSOT)**: `apps/web/scripts/affiliate-ads-data.ts` (`AFFILIATE_ADS[]`, git TS / 完全DBレス)
+- **在庫 (SSOT)**: 台帳 `affiliate.ads` (読み込み口 `AFFILIATE_ADS[]` / 完全DBレス)
 - **配信**: `export-affiliate-ads-snapshot.ts` → R2 `app/affiliate-ads/all.json`
 - **計測**: GA4 `affiliate_impression` (`AdImpressionTracker`, 50%+ 表示 1s) / `affiliate_click` (`TrackedAffiliateLink`)
 - **棚卸し (決定的)**: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts`
@@ -195,7 +195,7 @@ TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよ�
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (決定的) |
 | `.claude/todo/improvements.md` | 人間向けactive施策一覧 (AFF-NN) |
 | `data/improvement/affiliate-improvement/improvement-log.md` | agent 用詳細ログ |
-| `apps/web/scripts/affiliate-ads-data.ts` | 在庫 SSOT |
+| 台帳 `affiliate.ads` | 在庫 SSOT |
 | `apps/web/src/lib/analytics/events.ts` | GA4 計測イベント定義 |
 | `apps/web/src/features/ads/` | 描画コンポーネント |
 | `.claude/skills/ads/register-affiliate-banner/SKILL.md` | バナー登録 (実行委譲先) |
