@@ -33,10 +33,11 @@ interface ArticleShellProps {
  *
  * 本文の横にあるときは本文と同じ高さまで伸ばした flex の列にする (2026-11-12)。最後に追従する広告 (RailAdSlot の sticky) は
  * 親の高さの中でしか動けないので、中身の高さで終わる格子のままでは追従しなかった (ブログ・ランキング・市区町村のランキング)。
- * flex の列の子は幅いっぱい (align-items: stretch) で、格子の 1 列と同じ見た目になる
+ * flex の列の子は幅いっぱい (`rail:items-stretch`) にする。狭い幅の格子の `items-start` が flex の列では「横に伸ばさない」になり、
+ * カードが中身の幅に縮んだ (2026-11-13 の本番のスモークテストで「この指標を使うテーマ」が 126px / 列 316px)
  */
 export const ARTICLE_RAIL_CLASS =
-  'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 rail:mt-0 rail:flex rail:flex-col rail:gap-3 rail:self-stretch';
+  'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 rail:mt-0 rail:flex rail:flex-col rail:items-stretch rail:gap-3 rail:self-stretch';
 
 /**
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。

@@ -67,7 +67,7 @@ describe('ArticleShell — leftRail', () => {
     expect(rails).toHaveLength(1);
     expect(rails[0]).not.toHaveClass('hidden');
     expect(rails[0]).toHaveAttribute('data-slot', 'shell-rail');
-    expect(rails[0]).toHaveClass('grid', 'grid-cols-1', '@min-[640px]/shell:grid-cols-2', 'rail:flex', 'rail:flex-col', 'rail:self-stretch');
+    expect(rails[0]).toHaveClass('grid', 'grid-cols-1', '@min-[640px]/shell:grid-cols-2', 'rail:flex', 'rail:flex-col', 'rail:items-stretch', 'rail:self-stretch');
     expect(column?.parentElement).toHaveClass(RIGHT_RAIL_GRID_CLASS);
     expect(column?.nextElementSibling).toBe(rails[0]);
   });

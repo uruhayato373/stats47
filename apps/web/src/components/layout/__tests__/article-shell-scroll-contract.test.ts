@@ -29,6 +29,8 @@ describe("right rail scroll contract", () => {
     // 動けず、中身の高さで終わる格子のままでは追従しなかった (2026-11-12 にブログ・ランキング・市区町村のランキングで実測)
     expect(classSource).toContain("rail:self-stretch");
     expect(classSource).toContain("rail:flex-col");
+    // flex の列では items-start が横幅を縮めるので、本文の横では子を幅いっぱいに伸ばす (2026-11-13 本番のスモークテストで検出)
+    expect(classSource).toContain("rail:items-stretch");
   });
 
   it("RightRailWidgets cannot opt into an independent rail scroll", () => {
