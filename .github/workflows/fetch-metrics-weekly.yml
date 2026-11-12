@@ -356,21 +356,20 @@ jobs:
 
       # AdSense の収益をページ種別ごとに記録する (2026-11-12)。AdSense のページ別レポートは閾値で 0 行なので、
       # リンク済みの GA4 から pagePath × 広告の値を読む。次の digest が history-page-types.csv と LATEST.md の節を作る
+      # continue-on-error は使わない (例外の台帳 quality-exceptions.json の許容数は減らすだけ)。取れなかった週は記録を書かず、警告を出して次へ進む
       - name: 💰 Fetch AdSense by page type (GA4)
-        continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
-        run: npm run fetch-adsense-page-types -- ${{ steps.week.outputs.week }}
+        run: npm run fetch-adsense-page-types -- ${{ steps.week.outputs.week }} || echo "::warning title=AdSense by page type::GA4 から取れなかった。この週のページの種類ごとの記録は無い"
 
       # ブログの「よく読まれている記事」を GA4 の直近 28 日の閲覧数で選び直す (2026-11-12)。data/blog/popular-articles.json に書き、
       # ブログ一覧と記事ページの右レールが次のデプロイで読む。取れなかった週は前回の記録を残す
       - name: 📚 Update popular blog articles (GA4)
-        continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
-        run: npm run fetch-popular-blog-articles
+        run: npm run fetch-popular-blog-articles || echo "::warning title=Popular blog articles::GA4 から取れなかった。前回の data/blog/popular-articles.json を残す"
 
       - name: 📝 Update history.csv and LATEST.md
         run: npm run metrics:digest -- ${{ steps.week.outputs.week }}
