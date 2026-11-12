@@ -20,7 +20,7 @@ import remarkGfm from "remark-gfm";
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
-import { AdRow, type AdRowCell, AffiliateTextAdList } from "@/features/ads";
+import { AdRow, type AdRowCell } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 
 import { R2_PUBLIC_BASE_URL } from "@/config/site";
@@ -47,23 +47,11 @@ function extractTextFromChildren(children: ReactNode): string {
   return "";
 }
 
-/** 本文インラインのテキストリンク広告 1 件 (サーバー側で vertical 解決済み)。 */
-interface AffiliateTextAdData {
-    id: string;
-    title: string;
-    href: string;
-    trackingPixelUrl?: string | null;
-    /** GA4 `affiliate_vertical` に送る広告自身の意図軸。解決層 (`toTextAd`) が確定させる。 */
-    vertical: AffiliateCategory | null;
-}
-
 interface MDContentProps {
     source: string;
     slug?: string;
     relatedArticleTitles?: Record<string, string>;
-    /** 本文中に差し込むテキストリンク。記事の tagKeys から解決済みで、順に 1 件ずつ消費する。 */
-    affiliateTextAds?: AffiliateTextAdData[];
-    /** テキストリンクのテーマ色に使う vertical。 */
+    /** 広告の段の計測に送る記事の意図軸 (GA4 の trackingCategory)。 */
     affiliateVertical?: AffiliateCategory | null;
     /**
      * 広告の段 (AdSense と PR。2026-11-03 オーナー決定)。最後の 1 段を記事の末尾に、残りを本文の h2 の
@@ -79,7 +67,6 @@ interface ComponentProps {
 
 function makeMdComponents(
     slug?: string,
-    affiliateTextAds?: AffiliateTextAdData[],
     affiliateVertical?: AffiliateCategory | null,
     adRows?: AdRowCell[][],
 ): Record<string, React.ComponentType<ComponentProps>> {
@@ -280,27 +267,10 @@ function makeMdComponents(
                 </span>
             ) : null,
 
-        // 本文インラインのテキストリンク広告。index 属性 (0 始まり) で解決済み配列から 1 件消費する。
-        // 描画は既存 AffiliateTextAdList を再利用 (PR ラベル / rel="sponsored" / GA4 計装が入っている)。
-        // 在庫が index に足りなければ何も出さない (空枠を残さない)。
-        "affiliate-text": ({ index }: ComponentProps & { index?: string }) => {
-            const i = Number(index);
-            const ad = affiliateTextAds?.[Number.isFinite(i) ? i : 0];
-            if (!ad) return null;
-            return (
-                <div className="my-8 not-prose">
-                    <AffiliateTextAdList
-                        ads={[ad]}
-                        affiliateCategory={affiliateVertical ?? null}
-                        position="article-inline"
-                    />
-                </div>
-            );
-        },
-
-        // 記事に手で置いた PR のバナーは描かない (2026-11-12 オーナー決定でアフィリエイトを止めた。公開中は 3 記事)。
-        // 直接配置の台帳 (affiliate.direct-placements) は戦略を練り直すときのために残す
+        // 記事に手で置いた PR のバナーとテキストリンクは描かない (2026-11-12 オーナー決定でアフィリエイトを止めた)。
+        // 直接配置の台帳 (affiliate.direct-placements) と記事の原稿のタグは、戦略を練り直すときのために残す
         "affiliate-banner": () => null,
+        "affiliate-text": () => null,
 
         // `> [!NOTE]` 等 (md-preprocessor が <callout type="note"> に変換)。見た目は Callout が持つ。
         callout: ({ type, children }: ComponentProps & { type?: string }) => {
@@ -349,7 +319,6 @@ export function MDContent({
     source,
     slug,
     relatedArticleTitles,
-    affiliateTextAds,
     affiliateVertical,
     adRows,
 }: MDContentProps) {
@@ -357,11 +326,10 @@ export function MDContent({
         () =>
             makeMdComponents(
                 slug,
-                affiliateTextAds,
                 affiliateVertical,
                 adRows,
             ),
-        [slug, affiliateTextAds, affiliateVertical, adRows],
+        [slug, affiliateVertical, adRows],
     );
     const endRow = adRows?.[adRows.length - 1];
     const processed = useMemo(

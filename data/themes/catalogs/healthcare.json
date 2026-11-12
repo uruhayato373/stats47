@@ -657,7 +657,7 @@
     {
       "rankingKey": "life-expectancy-0-male",
       "shortLabel": "男性平均寿命（2020年）",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -667,7 +667,7 @@
     {
       "rankingKey": "life-expectancy-0-female",
       "shortLabel": "女性平均寿命（2020年）",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -1355,7 +1355,8 @@
       ],
       "defaultCheckedKeys": [
         "medical-physicians-under-40"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "emergency-medical-care-1",
@@ -1389,7 +1390,8 @@
       ],
       "defaultCheckedKeys": [
         "ambulance-transported-deaths"
-      ]
+      ],
+      "view": "table"
     },
     {
       "key": "perinatal-and-pediatric-care-1",

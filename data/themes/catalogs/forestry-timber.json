@@ -188,7 +188,7 @@
     {
       "rankingKey": "forestry-internal-workers",
       "shortLabel": "林業経営体の内部労働者数（2025年調査）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",

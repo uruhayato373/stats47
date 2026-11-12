@@ -112,7 +112,8 @@ export function PageShell({
       {hasRight ? (
         <div className={RIGHT_RAIL_GRID_CLASS}>
           {column}
-          <div data-slot="shell-rail" className="mt-4 space-y-4 rail:mt-0">
+          {/* 本文の横にあるときは本文と同じ高さまで伸ばす (追従する広告が動ける範囲。2026-11-12) */}
+          <div data-slot="shell-rail" className="mt-4 space-y-4 rail:mt-0 rail:self-stretch">
             {rightRail}
           </div>
         </div>

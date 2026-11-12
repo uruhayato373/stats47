@@ -1,0 +1,388 @@
+{
+  "entries": [
+    {
+      "theme": "consumer-prices",
+      "rankingKey": "consumer-price-difference-index-housing",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 題に「住居」が入る。GSC W44で物価618・家賃44表示",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "healthcare",
+      "rankingKey": "life-expectancy-0-male",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): GSC W44で平均寿命114表示。primary3件",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "healthcare",
+      "rankingKey": "life-expectancy-0-female",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 男性と対で採用。primary3件",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "population-dynamics",
+      "rankingKey": "future-population-change-rate-2050",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): GSC W44で2050の表示126",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "construction-industry",
+      "rankingKey": "construction-employed-age55plus",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 国土交通白書の担い手不足の中心指標",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "tourism",
+      "rankingKey": "total-overnight-guests-foreign",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 観光立国推進基本計画の政策目標。primary3件",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "roads",
+      "rankingKey": "road-length-per-km2",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 県比較は密度が読みやすい。題は不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "healthcare",
+      "rankingKey": "general-perinatal-center-count",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 需要が小さく(W44で9)primaryが過多になる",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "healthcare",
+      "rankingKey": "new-cancer-incidence-count",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 需要が小さく(W44で3)primaryが過多になる",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "population-dynamics",
+      "rankingKey": "future-population",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 2050増減率と重複",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "population-dynamics",
+      "rankingKey": "five-year-residence-other-prefecture",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 名前が長く題に向かない",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "construction-industry",
+      "rankingKey": "construction-employed-under30",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 題は2件まで。55歳以上を優先",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "construction-industry",
+      "rankingKey": "public-construction-contract-amount",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): GSC W44で表示0",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "agriculture-production",
+      "rankingKey": "beef-cattle-count",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 題が畜産に寄りテーマの範囲を誤認させる",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "agriculture-production",
+      "rankingKey": "dairy-cattle-count",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 題が畜産に寄りテーマの範囲を誤認させる",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "forestry-timber",
+      "rankingKey": "forestry-management-entities",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 題から林業産出額が押し出される",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "regional-energy",
+      "rankingKey": "fit-fip-installed-capacity",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): GSC W44で表示0",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "regional-energy",
+      "rankingKey": "regional-co2-emissions-estimate",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): GSC W44で表示0",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "labor-mobility",
+      "rankingKey": "commuter-ratio-to-other-municipalities",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に2件・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "labor-mobility",
+      "rankingKey": "employees-weekly-hours-60plus-rate",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に2件・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "labor-mobility",
+      "rankingKey": "employment-mobility-rate",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に2件・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "labor-mobility",
+      "rankingKey": "non-regular-employment-rate",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に2件・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-finance",
+      "rankingKey": "future-burden-ratio",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に2件・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-finance",
+      "rankingKey": "maintenance-repair-expenses-prefecture",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に2件・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-economy",
+      "rankingKey": "private-establishment-net-value-added",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 根拠が余地止まり・題不変",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "education-culture",
+      "rankingKey": "total-museum-count",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に3件",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "safety",
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): primaryが既に3件",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "consumer-prices",
+      "rankingKey": "household-survey-food-expenditure",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 10〜11月だけの集計",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "consumer-prices",
+      "rankingKey": "household-survey-utilities-expenditure",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 10〜11月だけの集計",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "forestry-timber",
+      "rankingKey": "forestry-internal-workers",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 定義変更で時系列比較不可",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "construction-industry",
+      "rankingKey": "construction-employed-age30to54",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 対比の残りの年齢帯",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "labor-mobility",
+      "rankingKey": "nonregular-employees-count",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 率指標の規模の参考値",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "safety",
+      "rankingKey": "individual-evacuation-plan-listed-persons",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 作成率の母数",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "education-culture",
+      "rankingKey": "art-museum-count",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 博物館総数の内訳",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "sports-participation",
+      "rankingKey": "sports-park-count",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 単年・総数で社会体育施設と重複",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "regional-energy",
+      "rankingKey": "regional-waste-co2-emissions-estimate",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 限定的な発生源",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-services",
+      "rankingKey": "number-of-hotel-facilities",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): テーマの軸から外れる",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-services",
+      "rankingKey": "number-of-hotel-rooms",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): テーマの軸から外れる",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "population-dynamics",
+      "rankingKey": "movers-in",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 外国人に限った実数",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "tourism",
+      "rankingKey": "air-passenger-transport",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 国内定期航空のみで訪日客の空路を表さない",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "safety",
+      "rankingKey": "disaster-recovery-expenses-prefecture",
+      "decision": "accept",
+      "note": "オーナー承認(2026-11-12): 被害を読むための背景",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "sports-participation",
+      "rankingKey": "daily-steps-female-20to64-age-adjusted",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 出典未確認は降格理由にならない",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "sports-participation",
+      "rankingKey": "daily-steps-male-20to64-age-adjusted",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 出典未確認は降格理由にならない",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "education-culture",
+      "rankingKey": "study-participation-rate-business",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 単年は多くの指標に共通し理由として弱い",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-finance",
+      "rankingKey": "prefectural-public-building-floor-area",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 単年は多くの指標に共通し理由として弱い",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "population-dynamics",
+      "rankingKey": "births-mother-age40plus",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 高齢出産は読者の関心が高い論点",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "population-dynamics",
+      "rankingKey": "births-third-child-plus",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12): 多子は読者の関心が高い論点",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    },
+    {
+      "theme": "local-finance",
+      "rankingKey": "avg-age-admin-prefecture",
+      "decision": "reject",
+      "note": "オーナー承認(2026-11-12)の推奨はaccept。追加章(candidate-123-3)の唯一の指標で、contextにするとカードから届かなくなる(metric-groups-reachability.test)ため却下",
+      "decidedAt": "2026-11-12",
+      "decidedBy": "minamidaisuke"
+    }
+  ]
+}

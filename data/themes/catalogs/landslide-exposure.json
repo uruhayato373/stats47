@@ -193,7 +193,8 @@
       ],
       "defaultCheckedKeys": [
         "debris-flow-warning-zone-count"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "special-hazard-breakdown-1",
@@ -205,7 +206,8 @@
       ],
       "defaultCheckedKeys": [
         "debris-flow-special-warning-zone-count"
-      ]
+      ],
+      "view": "tiles"
     }
   ],
   "sections": [

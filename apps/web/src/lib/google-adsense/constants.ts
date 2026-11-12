@@ -193,14 +193,36 @@ export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {
 };
 
 /**
- * テーマダッシュボードページ: ダッシュボード下のディスプレイ広告
- * 17 テーマページ共通（ThemePageLayout）。
- * AdSense ユニット名: stats47-themes-content（ディスプレイ広告 / auto）
+ * テーマのページ (全国・県別): 本文の広告の段 3 つ (2 章目の後・4 章目の後・ページの最後)。
+ * 2026-11-12 オーナー決定: アフィリエイトを止め、3 段とも AdSense 1 つを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。1 段目は既存のテーマ専用 stats47-themes-content。2 段目と最後はそれまでハブ・一覧と
+ * 共用 (HUB_INCONTENT・CONTENT_FOOTER・RAIL_RECT) でテーマの分を測れなかったので、同日に専用のユニットを作った。
  */
-export const THEMES_CONTENT: AdSlotConfig = {
-  slotId: "8298138821",
-  format: "rectangle",
-};
+export const THEMES_CONTENT: AdSlotConfig = { slotId: "8298138821", format: "rectangle" }; // stats47-themes-content
+export const THEME_ROW_2: AdSlotConfig = { slotId: "9630518288", format: "rectangle" }; // stats47-theme-row-2 (ディスプレイ / レスポンシブ)
+export const THEME_END: AdSlotConfig = { slotId: "2430685118", format: "rectangle" }; // stats47-theme-end (ディスプレイ / レスポンシブ)
+
+/**
+ * ホーム: 本文の広告の段 2 つ (「知りたいことから探す」の後・ページの最後)。
+ * 2026-11-12 オーナー決定: アフィリエイトを止め、2 段とも AdSense 1 つを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。それまでの HUB_INCONTENT / CONTENT_FOOTER は一覧ページと共用で、ホームの分を
+ * 測れなかったので、同日に専用のユニットを作った。
+ */
+export const HOME_ROW_1: AdSlotConfig = { slotId: "6019089689", format: "rectangle" }; // stats47-home-row-1 (ディスプレイ / レスポンシブ)
+export const HOME_ROW_2: AdSlotConfig = { slotId: "3189892156", format: "rectangle" }; // stats47-home-row-2 (ディスプレイ / レスポンシブ)
+/** ホーム: 右レールの最後に追従する 300×600 (PC だけ)。2026-11-12 オーナー決定 (推奨案)。右レールの中身が本文より短く、PC で下が約 2,200px 空いていた。同日に作成 */
+export const HOME_RAIL_STICKY: AdSlotConfig = { slotId: "3704063320", format: "rectangle" }; // stats47-home-rail-sticky (追従する 300×600)
+
+/**
+ * ハブ (分野・調査) の本文の 2 段目 (全ランキングの後)。2026-11-12 オーナー決定でアフィリエイトを止め、段を AdSense 1 つの幅いっぱいに
+ * したときに作った。それまでの 2 段目は THEMES_CONTENT で、同日からテーマの段に使うので、テーマの分と混ざらないよう分けた。
+ */
+export const HUB_ROW_2: AdSlotConfig = { slotId: "6020069625", format: "rectangle" }; // stats47-hub-row-2 (ディスプレイ / レスポンシブ)
+
+/** 検索のページ: 結果の一覧の 5 件目・30 件目・60 件目の後の段 (2026-11-12 オーナー決定・同日作成)。本文の幅いっぱいで、形は rectangle に絞る */
+export const SEARCH_ROW_1: AdSlotConfig = { slotId: "4024103858", format: "rectangle" }; // stats47-search-row-1
+export const SEARCH_ROW_2: AdSlotConfig = { slotId: "9112779000", format: "rectangle" }; // stats47-search-row-2
+export const SEARCH_ROW_3: AdSlotConfig = { slotId: "5121563102", format: "rectangle" }; // stats47-search-row-3
 
 /**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）

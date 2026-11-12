@@ -3,11 +3,10 @@ import { StatisticsScopeNav } from '@/components/navigation';
 import { SurfaceLinkCard } from '@/components/surface';
 
 import { AdRow, composeAdRows } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
 import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
@@ -32,8 +31,8 @@ export default async function ThemesPage() {
     0
   );
 
-  // 広告の段 (2026-11-03 オーナー決定): ページの最後に AdSense と PR を並べる (旧: デスクトップだけのページ末の AdSense。モバイルは 0 枠だった)
-  const [indexRow] = composeAdRows([['adsense', 'affiliate', 'adsense']], [CONTENT_FOOTER, HUB_INCONTENT], await resolveGenericAffiliateBanners(1).catch(() => []));
+  // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+  const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
   return (
     <PageShell>
       <Breadcrumbs
@@ -73,7 +72,7 @@ export default async function ThemesPage() {
         広告 2 連になる (2026-07-29 是正)。末尾の Multiplex 1 枠に統一する。
       */}
       {/* コンテンツ末尾の全幅フッター広告 */}
-      {indexRow.length > 0 && <AdRow cells={indexRow} position="themes-index-row" trackingCategory="themes-index" />}
+      {indexRow.length > 0 && <AdRow cells={indexRow} position="themes-index-row" trackingCategory="themes-index" wide />}
     </PageShell>
   );
 }

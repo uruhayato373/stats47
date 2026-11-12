@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T23:16:51.854Z",
+  "generatedAt": "2026-11-12T21:44:00.975Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
     "observedAt": "2026-10-02"
   },
   "scan": {
-    "dirs": 9,
-    "transcripts": 42,
+    "dirs": 7,
+    "transcripts": 44,
     "skipped": 0,
     "weeks": [
       "2026-W29",
@@ -23,7 +23,8 @@
       "2026-W40",
       "2026-W41",
       "2026-W44",
-      "2026-W45"
+      "2026-W45",
+      "2026-W46"
     ]
   },
   "rows": [
@@ -747,16 +748,67 @@
       "agentType": "(main)",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 2,
-      "calls": 363,
+      "runs": 1,
+      "calls": 8,
       "tokens": {
-        "input": 726,
-        "output": 223841,
+        "input": 16,
+        "output": 21081,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 891748,
-        "cacheRead": 158673872
+        "cacheWrite1h": 171706,
+        "cacheRead": 1240001
       },
-      "costUsd": 43.3485
+      "costUsd": 2.0433
+    },
+    {
+      "week": "2026-W46",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "runs": 0,
+      "calls": 51,
+      "tokens": {
+        "input": 102,
+        "output": 26362,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 517222,
+        "cacheRead": 21708691
+      },
+      "costUsd": 9.0072
+    },
+    {
+      "week": "2026-W46",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 2,
+      "calls": 1381,
+      "tokens": {
+        "input": 2762,
+        "output": 880325,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 3700309,
+        "cacheRead": 686567853
+      },
+      "costUsd": 184.5336
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "Explore",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 33,
+      "tokens": {
+        "input": 66,
+        "output": 17445,
+        "cacheWrite5m": 105568,
+        "cacheWrite1h": 0,
+        "cacheRead": 2560249
+      },
+      "costUsd": 1.3891
     }
   ]
 }

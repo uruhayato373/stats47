@@ -30,11 +30,8 @@ import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCard
 import {
   AdRow,
   composeAdRows,
-  isLandscapeBanner,
   RailAdSlot,
 } from '@/features/ads';
-import { CATEGORY_PAGE_AFFILIATE_POLICY } from '@/features/ads/constants/affiliate-category';
-import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listArticlesByTagKey } from '@/features/blog/server';
 import { findCategoryByKey } from '@/features/category/server';
@@ -56,8 +53,8 @@ import {
   ADSENSE_DISPLAY_ENABLED,
   CONTENT_FOOTER,
   HUB_INCONTENT,
+  HUB_ROW_2,
   RAIL_RECT,
-  THEMES_CONTENT,
 } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -147,7 +144,6 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  const affiliateVertical = CATEGORY_PAGE_AFFILIATE_POLICY[categoryKey];
   const blogTagKey = CATEGORY_BLOG_TAG_KEYS[categoryKey];
 
   const [
@@ -155,7 +151,6 @@ export default async function CategoryPage({ params }: PageProps) {
     categoryArticles,
     sourceSurveys,
     categoryTopics,
-    nativeBanners,
   ] = await Promise.all([
     readRankingItemsByCategory(categoryKey),
     blogTagKey
@@ -171,16 +166,14 @@ export default async function CategoryPage({ params }: PageProps) {
     readCategoryTopicsFromR2(categoryKey)
       .then((r) => (isOk(r) ? r.data : []))
       .catch(() => []),
-    // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕。意図軸が null のカテゴリは汎用の案件 (2026-10-31)
-    resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
-  // 広告の段 (2026-11-03 オーナー決定): 新着ブログの後・全ランキングの後・ページの最後。本文 (右レールの横で約 810px) では
-  // 2 枠、モバイルは先頭の 1 枠で上から AdSense → PR → AdSense。旧: 本文の AdSense とページ末の AdSense はデスクトップだけだった
+  // 広告の段: 新着ブログの後・全ランキングの後・ページの最後に、AdSense 1 つを本文の幅いっぱい (上限 580px) に出す
+  // (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)。2 段目はハブ用の HUB_ROW_2 (THEMES_CONTENT はテーマの段に使う)
   const [categoryRow1, categoryRow2, categoryRow3] = composeAdRows(
-    [['adsense', 'affiliate'], ['affiliate', 'adsense'], ['adsense', 'affiliate']],
-    [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER],
-    nativeBanners.filter(isLandscapeBanner),
+    [['adsense'], ['adsense'], ['adsense']],
+    [HUB_INCONTENT, HUB_ROW_2, CONTENT_FOOTER],
+    [],
   );
 
   const topicLabelByKey = new Map(categoryTopics.map((topic) => [topic.key, topic.label]));
@@ -361,7 +354,7 @@ export default async function CategoryPage({ params }: PageProps) {
           新着ブログの後・全ランキングの前に置き、後ろの PR の列と隣り合わせにしない (2026-10-30)。
           無効のときは何も描かないので、格子の帯が余らない */}
       {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      {categoryRow1.length > 0 && <AdRow cells={categoryRow1} position="category-row-1" trackingCategory={`category-${categoryKey}`} />}
+      {categoryRow1.length > 0 && <AdRow cells={categoryRow1} position="category-row-1" trackingCategory={`category-${categoryKey}`} wide />}
 
       <PageSections className="mt-4">
         {/* 全件テーブル */}
@@ -389,7 +382,7 @@ export default async function CategoryPage({ params }: PageProps) {
       {/* 広告の段 (PR が先頭。モバイルは PR) */}
       {categoryRow2.length > 0 && (
         <section className="mt-4">
-          <AdRow cells={categoryRow2} position="category-row-2" trackingCategory={`category-${categoryKey}`} />
+          <AdRow cells={categoryRow2} position="category-row-2" trackingCategory={`category-${categoryKey}`} wide />
         </section>
       )}
 
@@ -415,7 +408,7 @@ export default async function CategoryPage({ params }: PageProps) {
       {/* ページ末の広告の段 */}
       {categoryRow3.length > 0 && (
         <div className="mt-4">
-          <AdRow cells={categoryRow3} position="category-row-3" trackingCategory={`category-${categoryKey}`} />
+          <AdRow cells={categoryRow3} position="category-row-3" trackingCategory={`category-${categoryKey}`} wide />
         </div>
       )}
     </PageShell>

@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-11-12",
+  "generatedAt": "2026-11-12T13:18:49.590Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-11-03",
+      "periodEnd": "2026-11-09",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2634,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 5.669260700389105,
+        "impressions": 514,
+        "clicks": 12
+      },
+      {
+        "keyword": "中2男子 平均身長",
+        "targetPath": "/blog/middle-school-height-east-west-puzzle",
+        "rank": 8.365930599369086,
+        "impressions": 317,
+        "clicks": 1
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 3.3333333333333335,
+        "impressions": 3,
+        "clicks": 1
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.576158940397351,
+        "impressions": 151,
+        "clicks": 1
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 10.5,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 6,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "漁港が多い県",
+        "targetPath": "/ranking/fishing-port-count-by-type",
+        "rank": 5.666666666666667,
+        "impressions": 9,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 8.392857142857142,
+        "impressions": 28,
+        "clicks": 0
+      },
+      {
+        "keyword": "金沢市 人口",
+        "targetPath": "/areas/17000/cities/17201",
+        "rank": 7.009592326139089,
+        "impressions": 417,
+        "clicks": 0
+      },
+      {
+        "keyword": "高崎市 人口",
+        "targetPath": "/areas/10000/cities/10202",
+        "rank": 7.068452380952381,
+        "impressions": 336,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.72636815920398,
+        "impressions": 201,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 27,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 24,
+        "impressions": 7,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-10-27",
+      "periodEnd": "2026-11-02",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2624,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 5.933174224343675,
+        "impressions": 419,
+        "clicks": 10
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.8792270531400965,
+        "impressions": 414,
+        "clicks": 6
+      },
+      {
+        "keyword": "中2男子 平均身長",
+        "targetPath": "/blog/middle-school-height-east-west-puzzle",
+        "rank": 9.3,
+        "impressions": 340,
+        "clicks": 1
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 5,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "漁港が多い県",
+        "targetPath": "/ranking/fishing-port-count-by-type",
+        "rank": 5.4,
+        "impressions": 10,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 5,
+        "impressions": 3,
+        "clicks": 0
+      },
+      {
+        "keyword": "酷暑日の都道府県数",
+        "targetPath": "/blog/extreme-heat-days-prefecture",
+        "rank": 9.074973600844773,
+        "impressions": 947,
+        "clicks": 0
+      },
+      {
+        "keyword": "酷暑日の都道府県数",
+        "targetPath": "/blog/temperature-extremes-map",
+        "rank": 9.560975609756097,
+        "impressions": 41,
+        "clicks": 0
+      },
+      {
+        "keyword": "金沢市 人口",
+        "targetPath": "/areas/17000/cities/17201",
+        "rank": 7.403345724907063,
+        "impressions": 538,
+        "clicks": 0
+      },
+      {
+        "keyword": "高崎市 人口",
+        "targetPath": "/areas/10000/cities/10202",
+        "rank": 7.384868421052632,
+        "impressions": 304,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.755980861244019,
+        "impressions": 209,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-annual-income-vs-new-graduate-starting",
+        "rank": 49,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 21.4,
+        "impressions": 5,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 16.375,
+        "impressions": 8,
+        "clicks": 0
+      }
+    ]
+  }
+}

@@ -1,13 +1,29 @@
 "use client";
 
+import { Fragment } from "react";
+
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { BarChart3, FileText } from "lucide-react";
 
 import { SurfaceLinkCard } from "@/components/surface";
 
+import { AdRow, composeAdRows } from "@/features/ads";
+
 import { trackSearchResultClick } from "@/lib/analytics/events";
+import { SEARCH_ROW_1, SEARCH_ROW_2, SEARCH_ROW_3 } from "@/lib/google-adsense";
+
 
 import type { ContentType, SearchResult } from "../types";
+
+/**
+ * 結果の一覧の広告の段 (2026-11-12 オーナー決定)。結果を全件 1 ページに並べるので (「人口」で 314 件・スマホで約 58,000px)、
+ * 5 件目・30 件目・60 件目の後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。スマホで間は約 4,500px。
+ * 段の後に結果が MIN_RESULTS_AFTER_AD_ROW 件以上続くときだけ出し、ページの最後の広告 (FooterAdSlot) と隣り合わせない。
+ * ユニットは段ごとに検索専用 (同日に作成)
+ */
+const SEARCH_AD_ROW_AFTER = [5, 30, 60] as const;
+const MIN_RESULTS_AFTER_AD_ROW = 3;
+const SEARCH_AD_ROWS = composeAdRows([['adsense'], ['adsense'], ['adsense']], [SEARCH_ROW_1, SEARCH_ROW_2, SEARCH_ROW_3], []);
 
 interface SearchResultsProps {
     results: SearchResult[];
@@ -61,20 +77,30 @@ export function SearchResults({ results, query }: SearchResultsProps) {
                 「{query}」の検索結果: {results.length}件
             </p>
 
-            {results.map((result, index) => (
-                <div
-                    key={result.id}
-                    onClickCapture={() =>
-                        trackSearchResultClick({ resultType: result.type, resultPosition: index + 1 })
-                    }
-                >
-                    {result.type !== "blog" ? (
-                        <RankingResultCard result={result} />
-                    ) : (
-                        <BlogResultCard result={result} />
-                    )}
-                </div>
-            ))}
+            {results.map((result, index) => {
+                const rowIndex = SEARCH_AD_ROW_AFTER.indexOf(index + 1 as (typeof SEARCH_AD_ROW_AFTER)[number]);
+                const adRow = rowIndex >= 0 && results.length - (index + 1) >= MIN_RESULTS_AFTER_AD_ROW
+                    ? SEARCH_AD_ROWS[rowIndex]
+                    : undefined;
+                return (
+                    <Fragment key={result.id}>
+                        <div
+                            onClickCapture={() =>
+                                trackSearchResultClick({ resultType: result.type, resultPosition: index + 1 })
+                            }
+                        >
+                            {result.type !== "blog" ? (
+                                <RankingResultCard result={result} />
+                            ) : (
+                                <BlogResultCard result={result} />
+                            )}
+                        </div>
+                        {adRow && adRow.length > 0 && (
+                            <AdRow cells={adRow} position={`search-row-${rowIndex + 1}`} trackingCategory="search" wide />
+                        )}
+                    </Fragment>
+                );
+            })}
         </>
     );
 }

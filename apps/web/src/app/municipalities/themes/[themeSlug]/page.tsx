@@ -13,9 +13,7 @@ import { ChartNoAxesColumnIncreasing } from 'lucide-react';
 import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 import { PageHeader, PageShell } from '@/components/layout';
 
-import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
-import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
-import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { AdRow, composeAdRows } from '@/features/ads';
 import { TrackedMunicipalityThemeLink } from '@/features/municipalities';
 import { ThemeRegionNav } from '@/features/theme-dashboard';
 import {
@@ -26,7 +24,7 @@ import {
   THEME_SWITCHER_THEMES,
 } from '@/features/theme-dashboard/server';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import { THEME_END } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
@@ -85,16 +83,13 @@ export default async function MunicipalityThemePage({
   const theme = resolveTheme(themeSlug);
   if (!theme) notFound();
 
-  const themeVertical = THEME_AFFILIATE_MAP[theme.themeKey];
-  const [itemsOrNull, nativeBanners] = await Promise.all([
-    Promise.all(municipalityMetricKeysForPrefectureTheme(theme.themeKey).map((key) => readMunicipalityRankingItem(key))),
-    // 写像が無い slug は汎用の案件 (2026-10-31)
-    resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => []),
-  ]);
-  const items = itemsOrNull.filter((item) => item !== null);
+  const items = (
+    await Promise.all(municipalityMetricKeysForPrefectureTheme(theme.themeKey).map((key) => readMunicipalityRankingItem(key)))
+  ).filter((item) => item !== null);
 
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
-  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
+  // 広告の段 (2026-11-12 オーナー決定): アフィリエイトを止め、AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。
+  // ユニットは都道府県のテーマのページの最後と同じテーマ専用の stats47-theme-end (1 ページに 1 回だけ使う)
+  const [rowCells] = composeAdRows([['adsense']], [THEME_END], []);
   return (
     <PageShell>
       {/* パンくずの各段と右端のアイコンから地域・テーマを Sheet で選ぶ (テーマのページと同じ部品・2026-10-31) */}
@@ -158,7 +153,7 @@ export default async function MunicipalityThemePage({
       {/* ネイティブアフィリエイト枠 (テーマ slug → vertical。写像が無ければ描画しない) */}
       {rowCells.length > 0 && (
         <div className="mt-8">
-          <AdRow cells={rowCells} position="municipality-theme-row-1" trackingCategory={`municipality-theme-${theme.themeKey}`} />
+          <AdRow cells={rowCells} position="municipality-theme-row-1" trackingCategory={`municipality-theme-${theme.themeKey}`} wide />
         </div>
       )}
 

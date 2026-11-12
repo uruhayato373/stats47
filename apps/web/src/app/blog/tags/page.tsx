@@ -11,11 +11,10 @@ import Link from "@/components/atoms/SiteLink";
 import { PageShell, PageHeader } from "@/components/layout";
 
 import { AdRow, composeAdRows } from "@/features/ads";
-import { resolveGenericAffiliateBanners } from "@/features/ads/server";
 import { TagCloud } from "@/features/blog";
 import { listAllTagsWithCount } from "@/features/blog/server";
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from "@/lib/google-adsense";
+import { CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { formatOgpTitle } from "@/lib/metadata/site-title";
 
@@ -47,8 +46,8 @@ export const metadata: Metadata = {
 export default async function TagsIndexPage() {
     const tags = await listAllTagsWithCount().catch(() => []);
 
-    // 広告の段 (2026-11-03 オーナー決定): ページの最後に AdSense と PR を並べる (旧: デスクトップだけのページ末の AdSense。モバイルは 0 枠だった)
-    const [indexRow] = composeAdRows([['adsense', 'affiliate', 'adsense']], [CONTENT_FOOTER, HUB_INCONTENT], await resolveGenericAffiliateBanners(1).catch(() => []));
+    // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+    const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
     return (
         <PageShell>
             <Breadcrumb className="mb-4">
@@ -77,7 +76,7 @@ export default async function TagsIndexPage() {
                 <TagCloud tags={tags} />
             )}
 
-            {indexRow.length > 0 && <AdRow cells={indexRow} position="blog-tags-row" trackingCategory="blog-tags" />}
+            {indexRow.length > 0 && <AdRow cells={indexRow} position="blog-tags-row" trackingCategory="blog-tags" wide />}
         </PageShell>
     );
 }

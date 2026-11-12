@@ -258,6 +258,15 @@
         "financial-debt-and-housing-loans-1",
         "financial-debt-and-housing-loans-2"
       ]
+    },
+    {
+      "key": "household-assets-debt-household-types",
+      "title": "収入や世帯の形で貯蓄と負債はどう違うか",
+      "description": "全国の年間収入などの分類別の値です。各図の世帯区分を確かめてください。県庁所在市の値や全国の推移とは集計の軸が違います。県のページでは出しません。",
+      "metricGroupKeys": [],
+      "embeddedSectionKeys": [
+        "kakei-axis-household-assets-debt"
+      ]
     }
   ],
   "keywords": [

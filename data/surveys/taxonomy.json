@@ -261,9 +261,9 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 455,
+      "total": 467,
       "byStatus": {
-        "resolved": 400,
+        "resolved": 412,
         "unresolved": 0,
         "not-applicable": 55,
         "missing-lineage": 0
@@ -435,6 +435,7 @@
         "tourism"
       ],
       "household-survey": [
+        "education-culture",
         "household-assets-debt",
         "real-income"
       ],
@@ -455,7 +456,8 @@
       "job-placement-statistics": [
         "disability-support",
         "labor-mobility",
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ],
       "junior-high-athletics-membership-survey": [
         "sports-participation"
@@ -470,7 +472,8 @@
       ],
       "labor-market-annual": [
         "labor-mobility",
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ],
       "late-elderly-medical-annual-report": [
         "aging-society"
@@ -525,7 +528,8 @@
         "agriculture-production"
       ],
       "minimum-wage": [
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ],
       "mlit-ksj": [
         "geographic-access",
@@ -3160,6 +3164,7 @@
       "surveyId": "household-survey",
       "rankingCount": 25,
       "themeKeys": [
+        "education-culture",
         "household-assets-debt",
         "real-income"
       ],
@@ -3294,7 +3299,8 @@
       "themeKeys": [
         "disability-support",
         "labor-mobility",
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ],
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
@@ -3701,7 +3707,8 @@
       "rankingCount": 9,
       "themeKeys": [
         "labor-mobility",
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ],
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
@@ -3955,7 +3962,8 @@
       "surveyId": "minimum-wage",
       "rankingCount": 1,
       "themeKeys": [
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ],
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",

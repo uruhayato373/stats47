@@ -61,7 +61,7 @@
     {
       "rankingKey": "sports-park-count",
       "shortLabel": "運動公園数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "公園とみどり：都市公園の種類（国土交通省都市局）",
         "sourceUrl": "https://www.mlit.go.jp/toshi/park/toshi_parkgreen_tk_000138.html",

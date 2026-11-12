@@ -160,7 +160,7 @@ export function RankingKeyPageClient({
     // ラッパーもブログと同じ非 sticky の <aside> に揃える。
     // サイド AdSense は右レールが本文の横にあるときだけ出す (RailAdSlot。hidden rail:block)。
     // 最後の 1 枠は 300×600 をヘッダー (56px) の下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
-    // PC で下が約 840px 空いていた)。右レールは flex の列なので、sticky は右レールの終わり = 本文の終わりで止まり、フッターに重ならない。
+    // PC で下が約 840px 空いていた)。右レールは本文と同じ高さの flex の列 (ArticleShell) なので、sticky は本文の終わりで止まり、フッターに重ならない。
     // Google の条件 (幅 300px 以下・縦だけ・同時に見える追従広告は 1 つ・PC だけ) は台帳の adsense-rail-sticky に書いた
     const rail = sections.sidebar ? (
         <>

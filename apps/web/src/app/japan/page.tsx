@@ -1,5 +1,6 @@
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
+import { japanThemeDestination, listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
+import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
@@ -12,7 +13,9 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 import type { Metadata } from 'next';
 
 /**
- * `/japan` ハブ (GEO-SCOPE-SEPARATION-01 WP4)。
+ * `/japan` ハブ (GEO-SCOPE-SEPARATION-01 WP4)。地域の段 (全国・都道府県・市区町村) の「全国」の入口。
+ * 2026-11-12 オーナー決定で日本全体のテーマ (/japan/<テーマ>) を全国のテーマへまとめたので、一覧は転送先の全国のテーマ
+ * (`/themes/<テーマ>`。県を選んでいないときは公式の全国の値を見せる) へつなぐ。転送先は転送表 site.theme-redirects が正本。
  *
  * ★このページは「日本」を主語にする唯一の面。`/themes/*` (47都道府県比較) とは
  * 別のデータ契約 (`app/japan/<metric>/series.json`、公式全国値のみ) を持つ。
@@ -31,7 +34,13 @@ export function generateMetadata(): Metadata {
 }
 
 export default function JapanHubPage() {
-  const themes = listJapanCatalogThemes();
+  // 転送先の全国のテーマを、日本全体のテーマの並び順で重ねずに並べる (家計の品目の 6 件は「食卓と家計の支出」1 件にまとまる)
+  const themes = [
+    ...new Set(listJapanCatalogThemes().map((theme) => japanThemeDestination(theme.themeSlug) ?? theme.themeSlug)),
+  ].flatMap((key) => {
+    const catalog = THEME_CATALOGS[key];
+    return catalog ? [{ themeSlug: key, title: catalog.title, description: catalog.description, metricCount: catalog.metrics.length }] : [];
+  });
 
   return (
     <PageShell>
@@ -55,7 +64,7 @@ export default function JapanHubPage() {
           {themes.map((theme) => (
             <SurfaceLinkCard
               key={theme.themeSlug}
-              href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
+              href={hrefFor('theme', { themeSlug: theme.themeSlug })}
               className="block"
             >
               <h3 className="text-base font-semibold text-foreground">
@@ -65,7 +74,7 @@ export default function JapanHubPage() {
                 {theme.description}
               </p>
               <p className="mt-2 text-xs text-muted-foreground">
-                {theme.metrics.length} 指標
+                {theme.metricCount} 指標
               </p>
             </SurfaceLinkCard>
           ))}

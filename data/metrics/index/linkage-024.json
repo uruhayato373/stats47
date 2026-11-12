@@ -727,10 +727,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:psychiatric-hospital-count-per-100k",
           "kind": "ranking"
         },
@@ -1175,10 +1171,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:public-assistance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:public-assistance-expenses-prefecture",
           "kind": "ranking"
         },
@@ -1406,10 +1398,6 @@
         {
           "pageId": "area-theme:47000:public-assistance",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:public-assistance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:public-assistance-facility-capacity-per-1000",
@@ -2012,10 +2000,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:construction-industry",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:public-construction-contract-amount",
           "kind": "ranking"
         },
@@ -2244,10 +2228,6 @@
         {
           "pageId": "blog:public-construction-contract-count-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:construction-industry",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:public-construction-contract-count",
@@ -2687,10 +2667,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:public-gymnasium-count-per-million",
           "kind": "ranking"
         },
@@ -2990,10 +2966,6 @@
         {
           "pageId": "area-theme:47000:education-culture",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:public-hall-count-per-million",
@@ -4640,10 +4612,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:public-swimming-pool-count-per-million",
           "kind": "ranking"
         },
@@ -4687,19 +4655,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:income-quintile-education",
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-education-leisure",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:public-university-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "public-university-student-ratio",
@@ -6081,10 +6239,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:public-works-expenditure-ratio-pref-finance",
           "kind": "ranking"
         },
@@ -6507,10 +6661,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:railway",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:railway-passengers",
           "kind": "ranking"
         },
@@ -6743,10 +6893,6 @@
         {
           "pageId": "blog:railway-theme-overview",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:railway",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:railway-station-count",
@@ -7680,14 +7826,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:ratio-65-plus",
           "kind": "municipality-ranking"
         },
@@ -7925,10 +8063,6 @@
         {
           "pageId": "area-theme:47000:living-housing",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:ratio-never-married-15-plus",
@@ -8453,10 +8587,6 @@
         {
           "pageId": "area-theme:47000:local-finance",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:real-balance-ratio",

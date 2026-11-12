@@ -66,6 +66,8 @@ const RAIL_SLOT_ALLOWLIST = new Set([
   "apps/web/src/app/blog/[slug]/page.tsx",
   // 市区町村ランキングの ArticleShell 右レール (316px)。2026-11-12 に右レール付きの枠にした。
   "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
+  // ブログ一覧の PageShell 右レール (RightRailWidgets の bottomWidgets)。2026-11-12 にふるさと納税のバナーから替えた。
+  "apps/web/src/app/blog/page.tsx",
 ]);
 
 const errors = [];

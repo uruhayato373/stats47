@@ -791,10 +791,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:elderly-couple-only-household-ratio",
           "kind": "municipality-ranking"
         },
@@ -3392,10 +3388,6 @@
         {
           "pageId": "area-theme:47000:education-culture",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:elementary-school-count-per-100km2-habitable",
@@ -6022,10 +6014,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:employed-people-ratio",
@@ -9847,14 +9835,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-mobility",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:employment-rate",

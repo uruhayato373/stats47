@@ -1441,10 +1441,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:disability-support",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:disabled-employment-rate",
           "kind": "ranking"
         },
@@ -1935,10 +1931,6 @@
         {
           "pageId": "blog:earthquake-insurance-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "product:data-p-10",
@@ -3131,10 +3123,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:real-income",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:disposable-income-worker-households",
           "kind": "ranking"
         },
@@ -3366,10 +3354,6 @@
         {
           "pageId": "blog:divorces-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:divorces",
@@ -4442,10 +4426,6 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:household-other-purchases",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:domestic-student-remittance-consumption-expenditure",
@@ -6078,10 +6058,6 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:drug-enforcement-arrest-count-per-population",
@@ -8176,8 +8152,192 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
         },
         {
           "pageId": "municipality-ranking:education-cost-all-households",
@@ -8186,9 +8346,15 @@
         {
           "pageId": "ranking:education-cost-all-households",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "education-culture"
+      ]
     },
     {
       "metricKey": "education-department-staff",
@@ -8661,10 +8827,6 @@
         {
           "pageId": "blog:education-cost-per-child",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:education-expenditure-ratio-pref-finance",

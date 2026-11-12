@@ -17,13 +17,13 @@ export const ISSUE_ID = /^issue:([A-Z]\d{2})(?:-(\d+))?$/;
 /** 役割ごとに、指してよいページ種別 */
 export const ROLE_KINDS = {
   // 問いに答える読み物。本文で問いを主語にするページ
-  answers: new Set(["blog", "geo", "japan-theme"]),
+  answers: new Set(["blog", "geo"]),
   // 答えの根拠になるデータのページ
-  evidence: new Set(["ranking", "municipality-ranking", "theme", "municipality-theme", "japan-theme", "survey", "geo-layer"]),
+  evidence: new Set(["ranking", "municipality-ranking", "theme", "municipality-theme", "survey", "geo-layer"]),
 };
 
 /** 棚卸しの対象。地域・索引・タグ・固定ページは「場所や一覧で探す人」の入口なので問いに紐づけない */
-export const COVERAGE_KINDS = ["blog", "geo", "ranking", "municipality-ranking", "theme", "municipality-theme", "japan-theme", "survey"];
+export const COVERAGE_KINDS = ["blog", "geo", "ranking", "municipality-ranking", "theme", "municipality-theme", "survey"];
 
 /** 「読まれている」の閾値。集計期間 (既定 4 週) の合計で、どちらかを満たせば読まれているとみなす */
 export const READ_THRESHOLD = { clicks: 1, impressions: 10 };
@@ -176,7 +176,6 @@ export function computeReach({ issues, links, pages }) {
     add(theme, "theme");
     const key = theme.slice("theme:".length);
     add(`municipality-theme:${key}`, "via-theme");
-    add(`japan-theme:${key}`, "via-theme");
     for (const k of pages.get(theme)?.rankingKeys ?? []) add(`ranking:${k}`, "via-theme");
   }
   return reach;

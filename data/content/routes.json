@@ -273,16 +273,6 @@
       ]
     },
     {
-      "id": "route:japan-theme:themeSlug",
-      "kind": "japan-theme",
-      "pattern": "/japan/[themeSlug]",
-      "parameters": [
-        "themeSlug"
-      ],
-      "pageType": "theme",
-      "scope": "japan"
-    },
-    {
       "id": "route:products-preview:slug",
       "kind": "products-preview",
       "pattern": "/products/preview/[slug]",

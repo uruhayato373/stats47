@@ -244,6 +244,21 @@
         "readerQuestion": "自分の地域に実際にある事業所は、どれだけの付加価値を生み出しているか。",
         "targetReaderOrDecision": "地域産業の実際の稼ぐ力を把握したい住民や地域経済分析の実務者。"
       }
+    },
+    {
+      "rankingKey": "minimum-wage-by-region",
+      "shortLabel": "地域別最低賃金",
+      "role": "context"
+    },
+    {
+      "rankingKey": "active-job-opening-ratio",
+      "shortLabel": "有効求人倍率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "unemployment-rate",
+      "shortLabel": "完全失業率",
+      "role": "context"
     }
   ],
   "charts": [

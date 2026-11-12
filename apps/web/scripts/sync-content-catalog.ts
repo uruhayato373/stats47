@@ -23,7 +23,6 @@ import {
 import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
-  JAPAN_CATALOGS,
   MUNICIPALITY_THEME_PAGE_SLUGS,
   buildMunicipalityRankingSubtitles,
   municipalityMetricKeysForPrefectureTheme,
@@ -37,10 +36,10 @@ import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 import cities from '../../../data/areas/master/cities.json';
 import prefectures from '../../../data/areas/master/prefectures.json';
+import surveys from '../../../data/surveys/master/surveys.json';
 import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
 import { CATEGORIES } from '../../../packages/data-configs/src/categories';
 import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
-import surveys from '../../../data/surveys/master/surveys.json';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { KNOWN_TAG_KEYS } from '../src/config/known-tag-keys';
@@ -187,16 +186,7 @@ async function run() {
       published: publishableCityCodes.has(city.cityCode),
     });
   }
-  for (const theme of Object.values(JAPAN_CATALOGS))
-    add({
-      id: `japan-theme:${theme.themeSlug}`,
-      kind: 'japan-theme',
-      key: theme.themeSlug,
-      title: `日本の${theme.title}`,
-      href: `/japan/${theme.themeSlug}`,
-      rankingKeys: theme.metrics.map(metric => metric.metricKey),
-      published: true,
-    });
+  // 日本全体のテーマ (/japan/<テーマ>) は 2026-11-12 にすべて全国のテーマへ 301 したので、ページとして数えない
   // 「全国の市区町村を比べる」ページ。slug は都道府県のテーマ名にそろえ、対応する市区町村テーマの指標をまとめる
   // (2026-10-31 IA-REGION-THEME-01。旧: 市区町村テーマ 29 個ごと。旧 URL は middleware が 301)
   for (const slug of MUNICIPALITY_THEME_PAGE_SLUGS) {

@@ -7,8 +7,7 @@ import { type Metadata } from "next";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
-import { AdRow, composeAdRows, isLandscapeBanner } from "@/features/ads";
-import { resolveAffiliateBannersByCategoryKey } from "@/features/ads/server";
+import { AdRow, composeAdRows } from "@/features/ads";
 import { listCategories } from "@/features/category/server";
 import {
     CompareGridLayout,
@@ -19,7 +18,7 @@ import {
 } from "@/features/region-comparison";
 import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { formatOgpTitle } from "@/lib/metadata/site-title";
 
@@ -139,14 +138,8 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
         : [];
 
     const currentCategory = categories.find((c) => c.categoryKey === categoryKey);
-    // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
-    const compareNativeBanners = await resolveAffiliateBannersByCategoryKey(
-        categoryKey,
-        8,
-    ).catch(() => []);
-
-    // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
-    const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], compareNativeBanners.filter(isLandscapeBanner));
+    // 広告の段: AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+    const [rowCells] = composeAdRows([['adsense']], [HUB_INCONTENT], []);
     return (
         <PageShell>
             <Breadcrumbs
@@ -192,7 +185,7 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                 確定しているページなので、その軸の native 行を 1 つだけ置く。 */}
             {rowCells.length > 0 && (
                 <div className="mt-8">
-                  <AdRow cells={rowCells} position="compare-row-1" trackingCategory={`compare-${categoryKey}`} />
+                  <AdRow cells={rowCells} position="compare-row-1" trackingCategory={`compare-${categoryKey}`} wide />
                 </div>
               )}
         </PageShell>

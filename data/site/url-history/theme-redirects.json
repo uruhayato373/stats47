@@ -1,6 +1,306 @@
 {
   "pathRedirects": [
     {
+      "pattern": "^/japan/household-assets-debt/?$",
+      "themeSlug": "household-assets-debt",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた。日本全体のページにしか無かった家計調査の分類軸別の図はテーマの章に移した (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-food-spending/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた。日本全体のページにしか無かった家計調査の分類軸別の図はテーマの章に移した (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-appliances/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-clothing/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-health-spending/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-transport-spending/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-education-leisure/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-other-purchases/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/aging-society/?$",
+      "themeSlug": "aging-society",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/agriculture-production/?$",
+      "themeSlug": "agriculture-production",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/business-demography/?$",
+      "themeSlug": "business-demography",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/childcare-services/?$",
+      "themeSlug": "childcare-services",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/communication-access/?$",
+      "themeSlug": "communication-access",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/community-participation/?$",
+      "themeSlug": "community-participation",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/construction-industry/?$",
+      "themeSlug": "construction-industry",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/cultural-participation/?$",
+      "themeSlug": "cultural-participation",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/daily-time-use/?$",
+      "themeSlug": "daily-time-use",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/disability-support/?$",
+      "themeSlug": "disability-support",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/education-culture/?$",
+      "themeSlug": "education-culture",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/fishery-marine/?$",
+      "themeSlug": "fishery-marine",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/foreign-residents/?$",
+      "themeSlug": "foreign-residents",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/forestry-timber/?$",
+      "themeSlug": "forestry-timber",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/freight-logistics/?$",
+      "themeSlug": "freight-logistics",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/gender-participation/?$",
+      "themeSlug": "gender-participation",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/healthcare/?$",
+      "themeSlug": "healthcare",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/information-industry/?$",
+      "themeSlug": "information-industry",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/innovation-patents/?$",
+      "themeSlug": "innovation-patents",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/labor-mobility/?$",
+      "themeSlug": "labor-mobility",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/labor-wages/?$",
+      "themeSlug": "labor-wages",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/living-housing/?$",
+      "themeSlug": "living-housing",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/local-economy/?$",
+      "themeSlug": "local-economy",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/local-finance/?$",
+      "themeSlug": "local-finance",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/local-services/?$",
+      "themeSlug": "local-services",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/long-term-care/?$",
+      "themeSlug": "long-term-care",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/manufacturing/?$",
+      "themeSlug": "manufacturing",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/natural-environment/?$",
+      "themeSlug": "natural-environment",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/population-dynamics/?$",
+      "themeSlug": "population-dynamics",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/ports/?$",
+      "themeSlug": "ports",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/public-assistance/?$",
+      "themeSlug": "public-assistance",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/railway/?$",
+      "themeSlug": "railway",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/real-income/?$",
+      "themeSlug": "real-income",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/regional-transport/?$",
+      "themeSlug": "regional-transport",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/retail-commerce/?$",
+      "themeSlug": "retail-commerce",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/roads/?$",
+      "themeSlug": "roads",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/safety/?$",
+      "themeSlug": "safety",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/single-parent-households/?$",
+      "themeSlug": "single-parent-households",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/sports-participation/?$",
+      "themeSlug": "sports-participation",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/tourism/?$",
+      "themeSlug": "tourism",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/waste-recycling/?$",
+      "themeSlug": "waste-recycling",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/water-services/?$",
+      "themeSlug": "water-services",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた (全国のテーマが公式の全国の値と同じ指標を持つ。オーナー決定)"
+    },
+    {
       "pattern": "^/ports/?$",
       "themeSlug": "ports",
       "since": "2026-05-28",

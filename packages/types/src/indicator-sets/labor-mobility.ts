@@ -73,7 +73,7 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
     {
       "rankingKey": "nonregular-employees-count",
       "shortLabel": "非正規の職員・従業員数（15歳以上）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "nonregular-continuation-wish-rate",

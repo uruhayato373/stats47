@@ -207,10 +207,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:road-expressway-length",
           "kind": "ranking"
         },
@@ -308,10 +304,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:road-length-per-km2",
           "kind": "ranking"
         },
@@ -352,10 +344,6 @@
         "total-population"
       ],
       "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
         {
           "pageId": "ranking:road-municipal-length",
           "kind": "ranking"
@@ -398,10 +386,6 @@
       ],
       "consumers": [
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:road-national-route-length",
           "kind": "ranking"
         },
@@ -442,10 +426,6 @@
         "total-population"
       ],
       "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
         {
           "pageId": "ranking:road-prefectural-route-length",
           "kind": "ranking"
@@ -496,10 +476,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:road-total-length",
           "kind": "ranking"
         },
@@ -540,10 +516,6 @@
         "total-population"
       ],
       "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
         {
           "pageId": "ranking:road-total-length-with-expressway",
           "kind": "ranking"
@@ -717,10 +689,6 @@
         {
           "pageId": "blog:roadside-station-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:roadside-station-count",
@@ -1178,10 +1146,6 @@
         {
           "pageId": "blog:ryokan-vs-hotel-overnight-shift",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
         },
         {
           "pageId": "product:data-p-03",
@@ -7057,10 +7021,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "product:data-p-02",
           "kind": "product"
         },
@@ -8922,10 +8882,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:household-assets-debt",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:securities-balance",
           "kind": "ranking"
         },
@@ -9750,10 +9706,6 @@
         {
           "pageId": "blog:self-financing-ratio-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:self-financing-ratio",
