@@ -14,10 +14,23 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { datasetPath } = require("../../../config/datasets.mjs");
 
-// require() ではなくファイルとして読む。管理画面 (apps/admin) の bundler は、組み立てたパスの require を解決できず
-// 画面全体が 500 になる (2026-11-12。台帳を data/areas へ移したとき require の引数が組み立て式になった)
+// CLI はモジュールの場所から読む。Turbopack は __dirname を /ROOT に置き換えるため、
+// その場所に実体が無い場合は起動ディレクトリから上へ探す。台帳の置き場は常にカタログで解決する。
+function prefecturesPath() {
+  const relativePath = datasetPath("areas.prefectures");
+  const modulePath = path.resolve(__dirname, "../../..", relativePath);
+  if (fs.existsSync(modulePath)) return modulePath;
+  let directory = process.cwd();
+  while (true) {
+    const candidate = path.join(directory, relativePath);
+    if (fs.existsSync(candidate)) return candidate;
+    const parent = path.dirname(directory);
+    if (parent === directory) throw new Error("areas.prefectures の台帳を解決できません");
+    directory = parent;
+  }
+}
 const PREFECTURES = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, "../../..", datasetPath("areas.prefectures")), "utf8"),
+  fs.readFileSync(prefecturesPath(), "utf8"),
 );
 
 const PREF_AREA_CODES = PREFECTURES.map((p) => p.prefCode);
