@@ -306,6 +306,10 @@
     "theme": [
       {
         "slot": "ad-row",
+        "scopes": [
+          "national",
+          "area"
+        ],
         "region": "body",
         "position": "2 章目の後 (3 章以上あるとき。1 章目の後はモバイルの最初の画面に入る)",
         "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
@@ -327,6 +331,10 @@
       },
       {
         "slot": "ad-row",
+        "scopes": [
+          "national",
+          "area"
+        ],
         "region": "body",
         "position": "4 章目の後 (4 章以上あるとき)",
         "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
@@ -347,6 +355,10 @@
       },
       {
         "slot": "ad-row",
+        "scopes": [
+          "national",
+          "area"
+        ],
         "region": "body",
         "position": "このテーマを読み解く記事の後 (ページの最後)",
         "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
@@ -362,6 +374,54 @@
           },
           {
             "kind": "affiliate"
+          }
+        ]
+      },
+      {
+        "slot": "ad-row",
+        "scopes": [
+          "japan"
+        ],
+        "region": "body",
+        "position": "ページの最後",
+        "source": "apps/web/src/app/japan/[themeSlug]/page.tsx",
+        "marker": "position=\"japan-row-1\"",
+        "trackingPosition": "japan-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
+      },
+      {
+        "slot": "ad-row",
+        "scopes": [
+          "municipalities"
+        ],
+        "region": "body",
+        "position": "ページの最後",
+        "source": "apps/web/src/app/municipalities/themes/[themeSlug]/page.tsx",
+        "marker": "position=\"municipality-theme-row-1\"",
+        "trackingPosition": "municipality-theme-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
           }
         ]
       }
@@ -897,29 +957,6 @@
         "marker": "<FooterAdSlot"
       }
     ],
-    "japan-theme": [
-      {
-        "slot": "ad-row",
-        "region": "body",
-        "position": "ページの最後",
-        "source": "apps/web/src/app/japan/[themeSlug]/page.tsx",
-        "marker": "position=\"japan-row-1\"",
-        "trackingPosition": "japan-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
-      }
-    ],
     "municipality-ranking": [
       {
         "slot": "adsense-rail-rect",
@@ -959,29 +996,6 @@
         "marker": "position=\"municipality-row-2\"",
         "adsenseSlot": "MUNICIPALITY_AFTER_TABLE",
         "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
-      }
-    ],
-    "municipality-theme": [
-      {
-        "slot": "ad-row",
-        "region": "body",
-        "position": "ページの最後",
-        "source": "apps/web/src/app/municipalities/themes/[themeSlug]/page.tsx",
-        "marker": "position=\"municipality-theme-row-1\"",
-        "trackingPosition": "municipality-theme-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
       }
     ],
     "municipalities-index": [

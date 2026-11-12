@@ -23,9 +23,21 @@ const read = (rel: string) => readFileSync(path.join(ROOT, rel), 'utf8');
 type Placement = (typeof placements.pages)[keyof typeof placements.pages][number] & {
   knownAdjacentReason?: string;
   adsenseSlot?: string;
+  scopes?: string[];
   cells?: { kind: string; adsenseSlot?: string }[];
 };
 const PAGES = placements.pages as Record<string, Placement[]>;
+/**
+ * 1 つの実際のページとして見る単位。地域の単位 (scopes) を持つページの種類 (テーマ: 全国・県別・日本・市区町村。2026-11-12 オーナー決定で
+ * 1 つの種類にまとめた) は、単位ごとに別のページなので「種類@単位」に分ける。その単位で出る枠 (scopes が無いか、単位を含む) だけを入れる
+ */
+const SCOPED_PAGES: Record<string, Placement[]> = Object.fromEntries(
+  Object.entries(PAGES).flatMap(([page, entries]) => {
+    const scopes = [...new Set(entries.flatMap((e) => e.scopes ?? []))];
+    if (scopes.length === 0) return [[page, entries]];
+    return scopes.map((scope) => [`${page}@${scope}`, entries.filter((e) => !e.scopes || e.scopes.includes(scope))]);
+  }),
+);
 const SLOT_COMPONENTS = new Set(placements.slotTypes.map((slot) => slot.component));
 /** 広告を描く部品 (隣り合わせの判定で「内容」に数えない) */
 const AD_COMPONENTS = new Set([
@@ -81,8 +93,8 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
     }
   });
 
-  it.each(Object.keys(PAGES))('%s: 続く枠の間に内容がある (隣り合わせは理由付きの例外だけ)', (page) => {
-    const located = locate(PAGES[page]);
+  it.each(Object.keys(SCOPED_PAGES))('%s: 続く枠の間に内容がある (隣り合わせは理由付きの例外だけ)', (page) => {
+    const located = locate(SCOPED_PAGES[page]);
     for (let i = 1; i < located.length; i++) {
       const prev = located[i - 1];
       const cur = located[i];
@@ -181,8 +193,8 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
 
   // 2026-11-03 オーナー決定: 全ページのモバイルの本文に AdSense を 1 枠以上出す (自動広告なしで再開したので、手置きが無いと 0 枠になる)。
   // 広告の段はモバイルで先頭の 1 枠だけが出るので、先頭が AdSense の段か、モバイルにも出す AdSense の枠を数える
-  it.each(Object.keys(PAGES))('%s: モバイルの本文に AdSense が 1 枠以上出る', (page) => {
-    const mobileAdsense = PAGES[page].filter((p) => {
+  it.each(Object.keys(SCOPED_PAGES))('%s: モバイルの本文に AdSense が 1 枠以上出る', (page) => {
+    const mobileAdsense = SCOPED_PAGES[page].filter((p) => {
       if (p.region !== 'body') return false;
       const type = adSlotType(p.slot);
       const devices = (p as { devices?: readonly string[] }).devices ?? type.devices;
@@ -205,8 +217,8 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   });
 
   // 2026-11-03: 広告の段は枠ごとに別の AdSense ユニットを使う (同じユニットを 1 ページで重ねない。ADSENSE-SLOT-DEDUPE-01)
-  it.each(Object.keys(PAGES))('%s: 同じ AdSense のユニットを 1 ページで重ねない', (page) => {
-    const units = PAGES[page].flatMap((p) => [p.adsenseSlot, ...(p.cells ?? []).map((cell) => cell.adsenseSlot)]).filter(Boolean);
+  it.each(Object.keys(SCOPED_PAGES))('%s: 同じ AdSense のユニットを 1 ページで重ねない', (page) => {
+    const units = SCOPED_PAGES[page].flatMap((p) => [p.adsenseSlot, ...(p.cells ?? []).map((cell) => cell.adsenseSlot)]).filter(Boolean);
     expect(new Set(units).size, units.join(', ')).toBe(units.length);
   });
 });
