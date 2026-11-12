@@ -1,6 +1,6 @@
 name: 🔗 Correlation Refresh → R2
 
-# 相関 snapshot (app/correlation/{top-pairs,stats}.json と by-ranking-key/<key>.json) を
+# 相関 snapshot (app/correlation/{top-pairs,stats}.json と by-ranking-key-v2/<key>.json) を
 # R2 観測値から再計算して公開する。ランキングページの「相関が高い指標」とブログの
 # 相関記事 (topic-queue / fetch-correlation-scatter) がこれを読む。
 #
@@ -30,6 +30,8 @@ on:
     branches: [main]
     paths:
       - "data/themes/catalogs/**"
+      - "data/correlation/**"
+      - "packages/correlation/src/**"
   schedule:
     - cron: "45 18 * * 5" # 土曜 03:45 JST (金 18:45 UTC)。週 1 回 (2026-10-26 に日次から変更)
   workflow_dispatch:
@@ -95,6 +97,9 @@ jobs:
           [ "$FORCE" = "true" ] || [ "$UPSTREAM_CONCLUSION" = "failure" ] || ARGS+=(--skip-if-unchanged)
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
             packages/correlation/src/scripts/build-correlation-snapshot.ts "${ARGS[@]}"
+          if [ -d .local/r2/app/correlation/by-ranking-key-v2 ]; then
+            npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/correlation/src/scripts/verify-correlation-by-key.ts
+          fi
 
       # ★stats.json (fingerprint を持つ) は最後に push する。diff-push-r2 は 1 件失敗しても
       #   残りを上げ続けるため、同時に push すると by-key が欠けたまま fingerprint だけ公開され、

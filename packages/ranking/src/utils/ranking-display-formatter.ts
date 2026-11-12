@@ -1,3 +1,16 @@
+import type { AreaType } from "@stats47/types";
+
+/** 短い指標名と表示中の地域粒度からページ見出しを作る。図表の短い題名とは分ける。 */
+export function buildRankingPageTitle(metricTitle: string, areaType: AreaType): string {
+  const scope = {
+    national: "全国",
+    prefecture: "都道府県別",
+    city: "市区町村別",
+    port: "港湾別",
+  } satisfies Record<AreaType, string>;
+  return `${scope[areaType]} ${metricTitle}ランキング`;
+}
+
 /**
  * ランキング表示情報の型定義
  */

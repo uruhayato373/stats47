@@ -36,7 +36,7 @@ export default defineConfig({
       testIgnore: /responsive-layout/,
     },
     // breakpoint 別レイアウト検証 (2026-07-03 運営総点検で追加)。
-    // PageShell の契約: lg=1024px で右レール表示。375/768 は 1 カラム。
+    // 右レールは shell の利用可能幅で切り替わる。全境界は rail-layout.spec.ts を 1 project だけで実行。
     // 対象 spec は tests/smoke/responsive-layout.spec.ts のみ (smoke 全体は 4x しない)。
     {
       name: "responsive-mobile-375",

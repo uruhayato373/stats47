@@ -1,0 +1,47 @@
+{
+  "productId": "P-05",
+  "articleKey": "prefecture-healthcare-nursing-pack",
+  "displayTitle": "都道府県別 医療・介護データ",
+  "description": "人口当たりの医師・病床・介護施設を比較し、地域の医療・介護資源を整理できます。",
+  "useCases": [
+    {
+      "title": "地域医療の現状説明に",
+      "description": "医師数や病床数を人口当たりで比較し、県ごとの医療資源の違いを会議資料にまとめられます。"
+    },
+    {
+      "title": "介護サービスの調査に",
+      "description": "高齢者人口当たりの施設数を比べ、介護資源の地域差を調べる入口に使えます。"
+    },
+    {
+      "title": "医療・福祉分野の研修に",
+      "description": "施設や従事者の総数と人口当たりの値を区別し、地域統計の読み方を説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "physicians-per-population",
+      "heading": "人口当たりの医師数を比べる",
+      "lead": "医療施設に従事する医師数を人口10万人当たりで並べ、人口規模の異なる県を比較できます。総数のランキングでは捉えにくい医療資源の違いを示す図です。",
+      "metricKeys": ["physicians-in-medical-facilities-per-100k"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "beds-per-population",
+      "heading": "一般病院の病床を地域で見比べる",
+      "lead": "人口10万人当たりの一般病院病床数を地図にし、病床の分布を俯瞰できます。医師数の図と併せて、地域の医療体制を整理する資料に使えます。",
+      "metricKeys": ["general-hospital-bed-count-per-100k"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "nursing-facilities-per-elderly",
+      "heading": "高齢者人口に対する介護施設数を比べる",
+      "lead": "65歳以上人口10万人当たりの介護老人福祉施設数を比較できます。人口全体を分母にした値と区別して、介護資源の違いを説明できます。",
+      "metricKeys": ["nursing-welfare-facility-count-per-100k-65plus"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。医師・病床・介護施設では調査年や分母が異なるため、各表の定義を確認してください。",
+    "県全体の資源量を示す統計です。受診のしやすさ、診療の質、施設の空き状況や待機者数を直接示すものではありません。"
+  ]
+}

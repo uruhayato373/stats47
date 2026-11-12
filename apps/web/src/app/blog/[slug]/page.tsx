@@ -228,7 +228,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         // 右レールは広告インテントの対象外にする (ad-intent-scope.ts)。contents なので右レールの格子の並びは変わらない
         <div className="google-anno-skip contents">
             {/* 出し分けは ArticleShell の右レールと同じ shell コンテナ 988px 基準 (ビューポートの lg を使わない) */}
-            <div className="hidden @min-[988px]/shell:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
+            <div className="hidden rail:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
 
             <SurveyTaxonomyCard
                 surveys={articleSurveys}
@@ -261,7 +261,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 品目を検出できない記事では何も描画しない。 */}
 
             {/* 個別記事では本文後へ積まれるモバイルを長くしないため、追加探索カードは右レールだけに置く。 */}
-            <div className="hidden @min-[988px]/shell:contents">
+            <div className="hidden rail:contents">
                 <RailSearchCard
                     title="記事検索"
                     action="/search"
@@ -376,7 +376,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <div className="google-anno-skip"><DataSourceList sources={dataSources} surface="blog_source" /></div>
 
                             {/* 右レールが出ない幅では、データの確認先を本文の後ろに置く (本文より先に出さない) */}
-                            <div className="mt-6 @min-[988px]/shell:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>
+                            <div className="mt-6 rail:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

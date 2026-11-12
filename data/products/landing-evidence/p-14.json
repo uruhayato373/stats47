@@ -1,0 +1,85 @@
+{
+  "productId": "P-14",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "6030641163fb584f65d8577af882f064e45e124aad0fefe3e24a413b34255f1c",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
+    "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d"
+  },
+  "selectedMetrics": [
+    {
+      "key": "beef-consumption-expenditure",
+      "title": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）",
+      "year": "2024",
+      "unit": "円"
+    },
+    {
+      "key": "beef-consumption-quantity",
+      "title": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）",
+      "year": "2024",
+      "unit": "g"
+    },
+    {
+      "key": "coffee-consumption-expenditure",
+      "title": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）",
+      "year": "2024",
+      "unit": "円"
+    }
+  ],
+  "included": [
+    "CSV（47県庁所在市・二人以上世帯・685指標、基準年は指標ごとに固定）",
+    "Excel（685指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "beef-expenditure",
+      "figures": [
+        {
+          "file": "beef-expenditure.png",
+          "alt": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）（2024年・地域別比較）",
+          "template": "bar",
+          "sha256": "302bd1407cc2875eaadfe844aae77ffcce8a1508413b8eaedf7a7faf8f8a7fb1"
+        }
+      ]
+    },
+    {
+      "id": "beef-quantity",
+      "figures": [
+        {
+          "file": "beef-quantity.png",
+          "alt": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）（2024年・地域別比較）",
+          "template": "bar",
+          "sha256": "d3d045c9bb7486eeb9dea4e1b51f70c00b13dfb80f6156564b7ddac54d88ef5d"
+        }
+      ]
+    },
+    {
+      "id": "coffee-expenditure",
+      "figures": [
+        {
+          "file": "coffee-expenditure.png",
+          "alt": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）（2024年・地域別比較）",
+          "template": "bar",
+          "sha256": "327c2777ccc17a1906a8a9a487309d38c715dc402d84846871353dd5a3dff900"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。納品CSVでは県のコード・県名で記録していますが、家計調査の値は県庁所在市の二人以上世帯が対象です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全685指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-14のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "98bd3989d16cfb8436c42bde19e4f66512735a734e54782d5d831f042e856e88"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2024〜2024年で指標ごとに異なり、時系列データではありません。"
+}

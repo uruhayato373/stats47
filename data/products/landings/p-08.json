@@ -1,0 +1,47 @@
+{
+  "productId": "P-08",
+  "articleKey": "prefecture-retail-trade-area-pack",
+  "displayTitle": "都道府県別 商業・小売データ",
+  "description": "商業の販売額や店舗数を比べ、出店候補エリアの一次調査や営業資料に使えるデータ集です。",
+  "useCases": [
+    {
+      "title": "出店候補エリアの絞り込みに",
+      "description": "都道府県ごとの商業規模や店舗数を比べ、現地調査を進める地域を検討できます。"
+    },
+    {
+      "title": "営業先の地域別資料に",
+      "description": "担当エリアと周辺県の販売額を並べ、商業の特徴を伝える提案資料を作れます。"
+    },
+    {
+      "title": "商業振興の基礎資料に",
+      "description": "販売額の総額と事業所当たりの値を分けて比較し、地域の商業規模を説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "commercial-sales",
+      "heading": "地域の商業規模を比べる",
+      "lead": "卸売業と小売業を合わせた年間商品販売額を棒グラフにできます。担当エリアの位置づけや、比較したい県との規模の違いを伝える資料に使えます。",
+      "metricKeys": ["annual-sales-amount"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "sales-per-establishment",
+      "heading": "事業所当たりの販売額を見る",
+      "lead": "販売額を事業所当たりで比べると、総額とは異なる地域差が見えます。事業所の数と販売額の大きさを区別して説明できます。",
+      "metricKeys": ["annual-sales-amount-per-establishment"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "convenience-store-density",
+      "heading": "人口当たりの店舗数を比べる",
+      "lead": "人口10万人当たりのコンビニエンスストア数を並べ、人口規模をそろえた比較を示せます。図に記載した調査時点の店舗分布を確認する資料になります。",
+      "metricKeys": ["convenience-store-count-per-100k"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "都道府県単位の比較用データです。個別店舗の商圏や売上予測には、人口動態・通行量などの追加調査が必要です。",
+    "指標ごとに対象年と調査範囲が異なります。比較には各図と収録ファイルに記載した年・単位・出典を使ってください。"
+  ]
+}

@@ -6,7 +6,7 @@
  *     - statsDataId ∈ SSDS テーブル → cdCat01 で ssds-provenance を引く (二次統計)
  *     - それ以外               → statsDataId で survey を引く (一次統計)
  *
- * 本スクリプトは registry から 2 つの索引を生成する:
+ * 本スクリプトは registry の主出典・年別の補助出典から 2 つの索引を生成する:
  *   - ssdsTableIds:        SSDS displayName を持つ estat metric の distinct statsDataId
  *   - statsDataIdToSurvey: 非SSDS estat を statsDataId でグループ化し survey を確定
  *       (displayName→survey を建設時の入力に使うが、同一 statsDataId に正しく解決できる兄弟が
@@ -21,6 +21,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { METRICS_REGISTRY } from "../../src/registry";
+import { getReferenceDataSource } from "../../src/provenance/data-source-entry";
 import {
   DISPLAYNAME_TO_SURVEY,
   STATS_DATA_ID_TO_SURVEY_OVERRIDE,
@@ -28,15 +29,18 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, "../../src/ssds/estat-provenance.generated.json");
-const SSDS = "社会・人口統計体系";
+const SSDS = getReferenceDataSource('ssds').label;
 
 function main(): void {
   const ssdsTableIds = new Set<string>();
   // statsDataId → (survey id → {count, name}) (consensus 用)
   const tally = new Map<string, Map<string, { count: number; name: string }>>();
 
-  for (const metric of Object.values(METRICS_REGISTRY)) {
-    const s = metric.source;
+  const sources = Object.values(METRICS_REGISTRY).flatMap((metric) => [
+    metric.source,
+    ...(metric.supplementalSources ?? []).map(({ source }) => source),
+  ]);
+  for (const s of sources) {
     if (s.kind !== "estat" || !s.statsDataId) continue;
     if (s.displayName?.startsWith(SSDS)) {
       ssdsTableIds.add(s.statsDataId);

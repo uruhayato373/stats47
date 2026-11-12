@@ -1,0 +1,47 @@
+{
+  "productId": "P-03",
+  "articleKey": "prefecture-tourism-lodging-pack",
+  "displayTitle": "都道府県別 宿泊・交通・旅行データ",
+  "description": "宿泊の規模、外国人の宿泊、客室の稼働状況を比較し、観光の現状を説明できます。",
+  "useCases": [
+    {
+      "title": "観光計画の比較資料に",
+      "description": "延べ宿泊者数を近隣県や比較対象の県と並べ、観光需要の規模を整理できます。"
+    },
+    {
+      "title": "訪日客向け施策の現状把握に",
+      "description": "外国人の延べ宿泊者数を地図で示し、どの地域に宿泊が集中しているかを共有できます。"
+    },
+    {
+      "title": "宿泊事業の調査資料に",
+      "description": "宿泊者数と客室稼働率を分けて比較し、需要の大きさと施設の稼働状況を整理できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "overnight-demand",
+      "heading": "宿泊需要の規模を比べる",
+      "lead": "延べ宿泊者数を棒グラフにし、宿泊需要がどの県に集まっているかを示せます。単位は人数ではなく、宿泊数を積み上げた「人泊」です。",
+      "metricKeys": ["total-overnight-guests"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "foreign-overnight-distribution",
+      "heading": "外国人の宿泊が集まる地域を見る",
+      "lead": "外国人の延べ宿泊者数で地図を色分けし、訪日客の宿泊の地域差を示せます。総宿泊者数の図と見比べることで、地域の特徴を説明できます。",
+      "metricKeys": ["total-overnight-guests-foreign"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "room-utilization",
+      "heading": "宿泊者数とは別に、客室の稼働を比べる",
+      "lead": "客室稼働率を並べると、宿泊者数の多さとは異なる面から地域を比較できます。観光計画や宿泊事業の調査で、規模と稼働を分けて説明する図に使えます。",
+      "metricKeys": ["room-utilization-rate"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "作成例の宿泊指標は、従業者数10人以上の宿泊施設が対象です。小規模施設を含む観光庁の全体推計とは対象が異なります。",
+    "収録版の値を固定した商品です。月別の繁閑や将来の宿泊需要を予測するデータではありません。"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "productId": "P-01",
+  "articleKey": "prefecture-population-household-pack",
+  "displayTitle": "都道府県別 人口・世帯データ",
+  "description": "人口の規模、年齢構成、世帯の違いを比較し、地域の現状を説明する資料を作れます。",
+  "useCases": [
+    {
+      "title": "地域計画の現状整理に",
+      "description": "自県と近隣県の人口や高齢化の状況を並べ、計画の冒頭で地域の特徴を説明できます。"
+    },
+    {
+      "title": "営業エリアの基礎資料に",
+      "description": "人口と世帯数を比べ、地域ごとの市場規模を検討するための基礎表を作れます。"
+    },
+    {
+      "title": "会議や研修の説明資料に",
+      "description": "表だけでは伝わりにくい人口の集中や年齢構成の違いを、地図とランキングで示せます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "population-scale",
+      "heading": "人口の規模を比べる",
+      "lead": "総人口を棒グラフで比較すると、自県が全国の中でどの程度の規模かを説明できます。営業エリアや行政サービスの対象規模を整理する資料に使えます。",
+      "metricKeys": ["total-population"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "aging-distribution",
+      "heading": "高齢化の地域差を地図で見る",
+      "lead": "65歳以上人口の割合で地図を色分けし、高齢化の進み方が似ている地域を探せます。人数の多さと割合の高さを分けて説明するための図です。",
+      "metricKeys": ["ratio-65-plus"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "household-scale",
+      "heading": "世帯を単位に地域を比べる",
+      "lead": "一般世帯数を並べ、住宅や世帯向けサービスの対象規模を整理できます。人口と世帯数では比較の単位が異なることも、資料で示せます。",
+      "metricKeys": ["general-households"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。人口・世帯などの指標は基準年が異なる場合があるため、比較前に各表の年次を確認してください。",
+    "都道府県単位の比較用です。市区町村別・町丁目別の商圏や世帯を直接調べるデータではありません。"
+  ]
+}

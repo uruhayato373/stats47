@@ -5,6 +5,7 @@ import { findNestedCardSurfaces } from './lib/card-nesting-audit.mjs';
 import { findChartContractViolations } from './lib/chart-contract-audit.mjs';
 import { addWrappers, buildLyraMap, findLyraDeadCallerClasses } from './lib/lyra-dead-class-audit.mjs';
 import { findRailContractViolations } from './lib/rail-contract-audit.mjs';
+import { findSelectionControlViolations } from './lib/selection-control-audit.mjs';
 
 const cwd = process.cwd();
 // Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
@@ -452,7 +453,10 @@ for (const relativePath of cardAuditFiles) {
 for (const relativePath of scanRoots.flatMap((root) => listFiles(root))) {
   if (!relativePath.endsWith('.tsx')) continue;
   const source = readFileSync(path.join(cwd, relativePath), 'utf8');
-  for (const found of findRailContractViolations(source, relativePath)) {
+  for (const found of [
+    ...findRailContractViolations(source, relativePath),
+    ...findSelectionControlViolations(source, relativePath),
+  ]) {
     violations.push({
       ruleId: found.ruleId,
       message: found.message,

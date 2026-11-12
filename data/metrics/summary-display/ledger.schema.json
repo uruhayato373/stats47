@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "指標の合計表示台帳",
+  "description": "showTotal が true の指標だけ合計を表示する。未登録・false・正規化後・47県未充足の年は合計を表示しない。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["metricKey", "showTotal", "reason"],
+        "properties": {
+          "metricKey": { "type": "string", "minLength": 1 },
+          "showTotal": { "type": "boolean" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

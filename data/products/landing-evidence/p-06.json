@@ -1,0 +1,85 @@
+{
+  "productId": "P-06",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "db1ed7d884209d55e039274cac26e96adb3231eba866848c3f5adbf771453869",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-06/v4-20261024-mac-r2/fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114.zip",
+    "sha256": "fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114"
+  },
+  "selectedMetrics": [
+    {
+      "key": "elementary-school-students-per-teacher",
+      "title": "小学校児童数（教員1人当たり）",
+      "year": "2024",
+      "unit": "人"
+    },
+    {
+      "key": "certified-childcare-center-count-per-100k-0-5",
+      "title": "認定こども園数（0～5歳人口10万人当たり）",
+      "year": "2024",
+      "unit": "園"
+    },
+    {
+      "key": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "year": "2023",
+      "unit": "％"
+    }
+  ],
+  "included": [
+    "CSV（47地域・244指標、基準年は指標ごとに固定）",
+    "Excel（244指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "students-per-teacher",
+      "figures": [
+        {
+          "file": "students-per-teacher.png",
+          "alt": "小学校児童数（教員1人当たり）（2024年度・地域別比較）",
+          "template": "bar",
+          "sha256": "7f1d4ec3a89521bed9d414879b91fc7840a80496d7a06f89ea5b3ece245e070b"
+        }
+      ]
+    },
+    {
+      "id": "childcare-center-distribution",
+      "figures": [
+        {
+          "file": "childcare-center-distribution.png",
+          "alt": "認定こども園数（0～5歳人口10万人当たり）（2024年・地図）",
+          "template": "choropleth",
+          "sha256": "5d4c12c593762dd059ce0cf839ad5d98624199e7fc07cb06a82858d74153bf1d"
+        }
+      ]
+    },
+    {
+      "id": "graduate-advancement",
+      "figures": [
+        {
+          "file": "graduate-advancement.png",
+          "alt": "高等学校卒業者の進学率（2023年度・地域別比較）",
+          "template": "bar",
+          "sha256": "73e771929127199238183439e83a47f3f01336577305f6b18b2418254c56631b"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全244指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-06のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "8157b9978d69e637e12265c873a050aa8f1793aaa3cc7c69ebe27dccbcfd5ce7"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2024年で指標ごとに異なり、時系列データではありません。"
+}

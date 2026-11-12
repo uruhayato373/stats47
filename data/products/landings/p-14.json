@@ -1,0 +1,47 @@
+{
+  "productId": "P-14",
+  "articleKey": "prefecture-household-consumption-pack",
+  "displayTitle": "県庁所在市別 家計・消費データ",
+  "description": "県庁所在市の二人以上世帯について、品目別の支出額や購入量を比較するためのデータ集です。",
+  "useCases": [
+    {
+      "title": "食品・日用品の企画資料に",
+      "description": "品目別の支出額を都市ごとに比べ、調査対象の世帯にどのような消費の違いがあるかを整理できます。"
+    },
+    {
+      "title": "地域の食文化を紹介する記事に",
+      "description": "牛肉やコーヒーなど身近な品目を図にして、都市ごとの支出の特徴を紹介できます。"
+    },
+    {
+      "title": "消費の比較レポートに",
+      "description": "支出額と購入量を分けて比較し、「多く買っている」と「多く支出している」の違いを説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "beef-expenditure",
+      "heading": "牛肉への支出を都市ごとに比べる",
+      "lead": "二人以上世帯の1世帯当たりの牛肉支出額を棒グラフにできます。食品に関する企画資料で、都市ごとの支出の違いを示せます。",
+      "metricKeys": ["beef-consumption-expenditure"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "beef-quantity",
+      "heading": "金額に加えて、買う量を比べる",
+      "lead": "牛肉の購入量を都市別に並べ、支出額の図と見比べられます。同じ品目でも、金額と量では順位が変わることを調べる資料に使えます。",
+      "metricKeys": ["beef-consumption-quantity"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "coffee-expenditure",
+      "heading": "飲料への支出の特徴を紹介する",
+      "lead": "コーヒーへの支出額を都市別に比べた図を作れます。身近な一品目から消費の地域差を紹介する、記事やレポートの図に使えます。",
+      "metricKeys": ["coffee-consumption-expenditure"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "対象は県庁所在市（東京都は区部）の二人以上世帯です。県全体や単身世帯を含む値ではありません。",
+    "品目によって支出額・購入量の収録状況や単位が異なります。支出額の大きさを、そのまま購入量や地域全体の市場規模と読み替えないでください。"
+  ]
+}

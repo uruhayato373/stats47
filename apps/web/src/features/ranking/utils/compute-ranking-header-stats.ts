@@ -3,7 +3,7 @@ import { formatValueWithPrecision } from "@stats47/utils";
 
 import type { RankingValue } from "@stats47/ranking";
 
-/** ヘッダーに出す 1 件分 (上位 3 件 / 最下位) */
+/** ヘッダーに出す 1 件分 (上位 3 件 / 下位 3 件) */
 export interface RankingHeaderEntry {
   areaCode: string;
   areaName: string;
@@ -14,8 +14,8 @@ export interface RankingHeaderEntry {
 export interface RankingHeaderStats {
   /** 上位 3 件 (rank 昇順)。欠損値の県は含まない */
   top3: RankingHeaderEntry[];
-  /** 最下位 1 件。全県欠損なら null */
-  last: RankingHeaderEntry | null;
+  /** 下位 3 件 (rank 昇順)。小件数での上位との重複は表示側で除く */
+  bottom3: RankingHeaderEntry[];
   /** 都道府県の単純平均。母数 0 なら null */
   average: number | null;
   /** 平均の母数 */
@@ -48,7 +48,7 @@ export function computeRankingHeaderStats(
   }
 
   if (entries.length === 0) {
-    return { top3: [], last: null, average: null, count: 0 };
+    return { top3: [], bottom3: [], average: null, count: 0 };
   }
 
   const byRank = [...entries].sort((a, b) => a.rank - b.rank);
@@ -56,7 +56,7 @@ export function computeRankingHeaderStats(
 
   return {
     top3: byRank.slice(0, TOP_COUNT),
-    last: byRank[byRank.length - 1],
+    bottom3: byRank.slice(-TOP_COUNT),
     average: sum / entries.length,
     count: entries.length,
   };

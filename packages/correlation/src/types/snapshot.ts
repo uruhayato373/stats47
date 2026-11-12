@@ -1,9 +1,10 @@
-import { calculatePopulationAdjustedR } from "../utils/calculate-pearson";
+import { CORRELATION_DIRECTIONS, CORRELATION_SELECTION_POLICY, compareCorrelation, correlationDirection, type CorrelationGroups } from "../selection-policy";
 
 export const CORRELATION_SNAPSHOT_PREFIX = "app/correlation";
 export const CORRELATION_TOP_PAIRS_KEY = `${CORRELATION_SNAPSHOT_PREFIX}/top-pairs.json`;
 export const CORRELATION_STATS_KEY = `${CORRELATION_SNAPSHOT_PREFIX}/stats.json`;
-export const CORRELATION_BY_KEY_PREFIX = `${CORRELATION_SNAPSHOT_PREFIX}/by-ranking-key`;
+// 正負別の契約は別キーへ出し、旧本番の単一リストを上書きしない。
+export const CORRELATION_BY_KEY_PREFIX = `${CORRELATION_SNAPSHOT_PREFIX}/by-ranking-key-v2`;
 
 export function correlationByKeyPath(rankingKey: string): string {
   return `${CORRELATION_BY_KEY_PREFIX}/${rankingKey}.json`;
@@ -18,10 +19,6 @@ export function correlationByThemePath(themeKey: string): string {
 // 上位 200 ペア snapshot 生成時の上限。Web 想定 limit (20) × 10 倍バッファ。
 export const CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT = 200;
 
-// per-ranking-key snapshot に保存するペア数。CorrelationSection が 10 件描画するため
-// 余裕を持って 20 件保存し、Web 側で limit 切替を許容する。
-export const CORRELATION_BY_KEY_LIMIT = 20;
-
 /**
  * 旧 `find-highly-correlated.ts` の export 型。Phase 7 で同ファイルを削除したため
  * ここに inline 移動。R2 reader (`read-correlation-by-key.ts`) が import する。
@@ -34,8 +31,7 @@ export interface CorrelatedItem {
   pearsonR: number;
   /**
    * 並び順と画面表示の基準。人口規模の影響を除いた順位相関 (x・y・総人口を県ごとの順位に
-   * してから人口を制御した偏相関)。1 県の極端な値に左右されない。旧 snapshot は
-   * calculatePopulationAdjustedR (Pearson) で補う。
+   * してから人口を制御した偏相関)。1 県の極端な値に左右されない。
    */
   populationAdjustedR: number;
   partialRPopulation: number | null;
@@ -85,7 +81,8 @@ export interface CorrelationStatsSnapshot {
 export interface CorrelationByKeySnapshot {
   generatedAt: string;
   rankingKey: string;
-  pairs: CorrelatedItem[];
+  selectionPolicyVersion: number;
+  groups: CorrelationGroups<CorrelatedItem>;
 }
 
 /** テーマ外の指標のうち、テーマ内のどれかの指標と人口補正後の順位相関が高いもの。 */
@@ -187,11 +184,7 @@ function parseCorrelatedItem(value: unknown, index: number): CorrelatedItem {
     subtitle: assertNullableString(value.subtitle, `pairs[${index}].subtitle`),
     unit: assertString(value.unit, `pairs[${index}].unit`),
     ...correlations,
-    // 2026-09-23 以前の snapshot と、以後再生成されない除外指標の snapshot は持たない
-    populationAdjustedR:
-      value.populationAdjustedR === undefined
-        ? calculatePopulationAdjustedR(correlations)
-        : assertNumber(value.populationAdjustedR, `pairs[${index}].populationAdjustedR`),
+    populationAdjustedR: assertNumber(value.populationAdjustedR, `pairs[${index}].populationAdjustedR`),
     scatterData: value.scatterData.map((point, pointIndex) => {
       if (!isRecord(point)) throw new Error(`pairs[${index}].scatterData[${pointIndex}] must be an object`);
       return {
@@ -205,13 +198,28 @@ function parseCorrelatedItem(value: unknown, index: number): CorrelatedItem {
 }
 
 export function parseCorrelationByKeySnapshot(value: unknown): CorrelationByKeySnapshot {
-  if (!isRecord(value) || !Array.isArray(value.pairs)) {
+  if (!isRecord(value) || !isRecord(value.groups) || value.selectionPolicyVersion !== CORRELATION_SELECTION_POLICY.version) {
     throw new Error("correlation by-key snapshot is schema-invalid");
+  }
+  const rankingKey = assertString(value.rankingKey, "rankingKey");
+  const groups: CorrelationGroups<CorrelatedItem> = { positive: [], negative: [] };
+  const seen = new Set<string>([rankingKey]);
+  for (const direction of CORRELATION_DIRECTIONS) {
+    const raw = value.groups[direction];
+    if (!Array.isArray(raw) || raw.length > CORRELATION_SELECTION_POLICY.groups[direction].limit) throw new Error(`Invalid group size: ${direction}`);
+    const items = raw.map(parseCorrelatedItem);
+    items.forEach((item, index) => {
+      if (correlationDirection(item.populationAdjustedR) !== direction || seen.has(item.rankingKey)) throw new Error(`Invalid correlation member: ${item.rankingKey}`);
+      if (index > 0 && compareCorrelation(items[index - 1], item) > 0) throw new Error(`Invalid correlation order: ${direction}`);
+      seen.add(item.rankingKey);
+    });
+    groups[direction] = items;
   }
   return {
     generatedAt: assertGeneratedAt(value.generatedAt),
-    rankingKey: assertString(value.rankingKey, "rankingKey"),
-    pairs: value.pairs.map(parseCorrelatedItem),
+    rankingKey,
+    selectionPolicyVersion: CORRELATION_SELECTION_POLICY.version,
+    groups,
   };
 }
 

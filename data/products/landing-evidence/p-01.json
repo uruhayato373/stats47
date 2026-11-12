@@ -1,0 +1,85 @@
+{
+  "productId": "P-01",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "44fa48318299172b8bca042365382d1b90a90fd0875d2ba73e3ea060b8e52b9a",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-01/v4-20261024-mac-r2/d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933.zip",
+    "sha256": "d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933"
+  },
+  "selectedMetrics": [
+    {
+      "key": "total-population",
+      "title": "総人口",
+      "year": "2025",
+      "unit": "人"
+    },
+    {
+      "key": "ratio-65-plus",
+      "title": "65歳以上人口割合",
+      "year": "2025",
+      "unit": "％"
+    },
+    {
+      "key": "general-households",
+      "title": "一般世帯数",
+      "year": "2020",
+      "unit": "万世帯"
+    }
+  ],
+  "included": [
+    "CSV（47地域・134指標、基準年は指標ごとに固定）",
+    "Excel（134指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "population-scale",
+      "figures": [
+        {
+          "file": "population-scale.png",
+          "alt": "総人口（2025年・地域別比較）",
+          "template": "bar",
+          "sha256": "b75c87108887af8dd8b29fb9e5fd5ce595981b2ef342468512c1a1ddd00564e1"
+        }
+      ]
+    },
+    {
+      "id": "aging-distribution",
+      "figures": [
+        {
+          "file": "aging-distribution.png",
+          "alt": "65歳以上人口割合（2025年・地図）",
+          "template": "choropleth",
+          "sha256": "69fc9d3d463d259dba9116f58e76d8156167ec66e10b6d65bc062b1b7bae9d24"
+        }
+      ]
+    },
+    {
+      "id": "household-scale",
+      "figures": [
+        {
+          "file": "household-scale.png",
+          "alt": "一般世帯数（2020年・地域別比較）",
+          "template": "bar",
+          "sha256": "299770e9fba3b5cb653eaa18dddd5f263e8f858d7c0dca131877bd71996382f0"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全134指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-01のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "aa30da274dbc85d1442f0033c1493260c4c6bb8f9903a6a8f4eb47693f67b91d"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2003〜2050年で指標ごとに異なり、時系列データではありません。"
+}

@@ -1,0 +1,40 @@
+{
+  "productId": "P-10",
+  "articleKey": "prefecture-disaster-infrastructure-pack",
+  "displayTitle": "都道府県別 防災・交通・インフラデータ",
+  "description": "生活インフラの整備状況や災害被害の実績を、都道府県ごとに比較するためのデータ集です。",
+  "useCases": [
+    {
+      "title": "地域の基礎資料作りに",
+      "description": "下水道などの生活インフラの指標をそろえ、他県との違いを説明する図表を作れます。"
+    },
+    {
+      "title": "防災学習の説明資料に",
+      "description": "過去の災害被害額を県別に比較し、対象年にどの地域で被害が大きかったかを示せます。"
+    },
+    {
+      "title": "インフラ調査の事前整理に",
+      "description": "収録指標を使って県ごとの特徴を整理し、追加で確認したい地域や項目を洗い出せます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "sewerage-coverage",
+      "heading": "生活インフラの整備状況を見比べる",
+      "lead": "下水道普及率を地図にして、地域ごとの違いを示せます。都市や地域を紹介する資料で、生活インフラの一つの側面を説明できます。",
+      "metricKeys": ["sewerage-penetration-rate-2012on"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "disaster-losses",
+      "heading": "過去の災害被害を人口当たりで比べる",
+      "lead": "人口1人当たりの災害被害額を棒グラフにし、人口規模をそろえて実績を比較できます。対象年の被害を振り返る資料として使えます。",
+      "metricKeys": ["disaster-damage-amount-per-person"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "災害被害額は過去の実績です。将来の災害発生確率や、個別の住所・施設の安全性を示すものではありません。",
+    "指標ごとに対象年・単位・集計範囲が異なります。下水道普及率だけで生活インフラ全体を評価せず、各指標の説明と併せて確認してください。"
+  ]
+}

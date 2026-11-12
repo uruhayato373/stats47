@@ -7,6 +7,23 @@ import {
 
 const period = { periodStart: '2026-08-24', periodEnd: '2026-09-20' };
 
+test('related-articles: 分子・分母を同じ記事・ページ・端末・形式・日付で記録する', async () => {
+  const { MEASUREMENT_REPORTS, measurementRow } = await import('../lib/journey-ga4-reports.mjs');
+  const report = MEASUREMENT_REPORTS['related-articles'];
+  const request = report.request(period);
+  const [country, events, surfaces, variant] = request.dimensionFilter.andGroup.expressions;
+  assert.equal(country.filter.stringFilter.value, 'Japan');
+  assert.deepEqual(events.filter.inListFilter.values, ['nav_impression', 'nav_click']);
+  assert.deepEqual(surfaces.filter.inListFilter.values, ['area_blog', 'ranking_blog', 'theme_blog']);
+  assert.deepEqual(variant.filter.stringFilter, { matchType: 'BEGINS_WITH', value: 'related-articles-' });
+  assert.deepEqual(request.dimensions.map((d) => d.name), report.dims);
+  const row = Object.fromEntries(report.dims.map((d, i) => [d, String(i)]));
+  const mapped = measurementRow({ ...row, eventCount: '7' }, report);
+  assert.deepEqual(Object.keys(mapped), report.columns);
+  assert.equal(mapped.card_variant, row['customEvent:card_variant']);
+  assert.equal(mapped.eventCount, '7');
+});
+
 test('transitions request reads same-site page_view referrers in the Japan 28-day slice', () => {
   const request = buildInternalTransitionsRequest(period);
   assert.deepEqual(request.dateRanges, [{ startDate: period.periodStart, endDate: period.periodEnd }]);
@@ -100,7 +117,7 @@ test("product-referrals / product-inbound: 商品の送客を両向きで取る 
   const { MEASUREMENT_REPORTS } = await import("../lib/journey-ga4-reports.mjs");
   const out = MEASUREMENT_REPORTS["product-referrals"].request(period);
   assert.deepEqual(out.dimensionFilter.andGroup.expressions[1].filter.inListFilter.values, ["product_impression", "product_click"]);
-  assert.deepEqual(out.dimensions.map((d) => d.name).slice(1), ["customEvent:product_destination", "customEvent:product_id", "customEvent:link_position"]);
+  assert.deepEqual(out.dimensions.map((d) => d.name).slice(1), ["customEvent:product_destination", "customEvent:product_id", "customEvent:link_position", "customEvent:cta_id"]);
   const back = MEASUREMENT_REPORTS["product-inbound"].request(period);
   // config/inbound-utm.mjs の utm_source と同じ語彙
   assert.deepEqual(back.dimensionFilter.andGroup.expressions[1].filter.inListFilter.values, ["kindle", "note"]);

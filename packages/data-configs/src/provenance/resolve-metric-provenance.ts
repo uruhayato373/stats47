@@ -19,6 +19,7 @@ import { DISPLAYNAME_TO_SURVEY } from '../ssds/displayname-to-survey';
 import estatProvenanceJson from '../ssds/estat-provenance.generated.json';
 import ssdsProvenanceJson from '../ssds/ssds-provenance.generated.json';
 import surveysMasterJson from '../../../../data/surveys/master/surveys.json';
+import { getReferenceDataSource } from './data-source-entry';
 
 export type ProvenanceSurvey = { id: string; name: string };
 
@@ -34,10 +35,8 @@ export type SourceAttribution = {
 };
 
 /** SSDS の編成統計メタ (社会・人口統計体系)。 */
-const SSDS_COMPILATION = {
-  name: '社会・人口統計体系',
-  url: 'https://www.stat.go.jp/data/ssds/index.htm',
-} as const;
+const ssdsSource = getReferenceDataSource('ssds');
+const SSDS_COMPILATION = { name: ssdsSource.label, url: ssdsSource.url };
 
 type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[] };
 const SSDS_PROVENANCE = ssdsProvenanceJson as Record<string, SsdsEntry>;

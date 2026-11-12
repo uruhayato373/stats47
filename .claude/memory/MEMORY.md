@@ -90,7 +90,7 @@
 - [note publish flow 2026 06](project_note_publish_flow_2026_06.md) — note.comエディタの公開手順(editor-helpers.sh)とgotchas。保存場所は台帳+R2
 - [port ranking 2023](project_port_ranking_2023.md) — 入港船舶総トン数ランキング(40県、1位神奈川・124倍格差)
 - [note cover overlap validator](project_note_cover_overlap_validator.md) — note cover SVGのCJKテキスト重なり検証スクリプト(生成・編集後は必ず通す)
-- [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来guardスクリプト一覧(.claude/scripts/lib/check-*.cjs、refactor前に索引参照)
+- [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来guard一覧。レールは内側カード幅も全境界で測る。単一選択は共通化し個別実装をAST検査で止める。カードのgapと子marginの重複・左右余白の不一致は実寸で検査する
 - [publish x ui 2026 04](project_publish_x_ui_2026_04.md) — publish-xの2026-04 UI対応(24時間制select、DOM click必須、posted_at JST変換)
 - [youtube shadowban recovery 2026 04](project_youtube_shadowban_recovery_2026_04.md) — Issue#88 2026-05-16 CLOSED。17本public復元済、daily audit verdictはlikely-shadowban継続、SUGGESTED_VIDEO 0
 - [instagram paused 2026 10 27](project_instagram_paused_2026_10_27.md) — 2026-10-27 Instagram 自動投稿を停止。投稿 workflow 5 本を disabled_manually (yml は残置)、計測とトークン延長は継続。勝手に enable しない

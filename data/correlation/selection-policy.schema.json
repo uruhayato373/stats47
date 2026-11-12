@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "score", "minimumPairedAreas", "order", "excludeZero", "groups"],
+  "properties": {
+    "version": { "const": 1 },
+    "score": { "const": "populationAdjustedR" },
+    "minimumPairedAreas": { "type": "integer", "minimum": 3, "maximum": 47 },
+    "order": { "const": "absolute-desc-key-asc" },
+    "excludeZero": { "const": true },
+    "groups": {
+      "type": "object", "additionalProperties": false,
+      "required": ["positive", "negative"],
+      "properties": {
+        "positive": { "$ref": "#/$defs/group" },
+        "negative": { "$ref": "#/$defs/group" }
+      }
+    }
+  },
+  "$defs": {
+    "group": {
+      "type": "object", "additionalProperties": false,
+      "required": ["label", "limit"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "limit": { "type": "integer", "minimum": 1, "maximum": 50 }
+      }
+    }
+  }
+}

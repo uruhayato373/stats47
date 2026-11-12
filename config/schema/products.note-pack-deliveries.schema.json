@@ -24,7 +24,7 @@
       "description": "販売する納品版の固定 (成果物のディレクトリと manifest の SHA)",
       "type": "object",
       "additionalProperties": false,
-      "required": ["artifactDirectory", "manifestSha256"],
+      "required": ["artifactDirectory", "manifestSha256", "archive"],
       "properties": {
         "artifactDirectory": { "type": "string", "pattern": "^\\.local/data-packs/P-\\d{2}/[A-Za-z0-9][A-Za-z0-9._-]*$" },
         "indicatorCount": { "type": "integer", "minimum": 0 },
@@ -33,6 +33,18 @@
         "officeValidation": { "enum": ["owner-pending", "verified"] },
         "verifiedAt": { "$ref": "common.schema.json#/$defs/date" },
         "manifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+        "archive": {
+          "description": "note添付ZIPの不変参照。manifestと違い実ZIP bytesをSHA照合する。",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["bucket", "key", "sha256", "bytes"],
+          "properties": {
+            "bucket": { "const": "stats47-private" },
+            "key": { "type": "string", "pattern": "^note/product-archives/P-\\d{2}/[A-Za-z0-9._-]+/[a-f0-9]{64}\\.zip$" },
+            "sha256": { "$ref": "common.schema.json#/$defs/sha256" },
+            "bytes": { "type": "integer", "minimum": 1 }
+          }
+        },
         "originalManifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
         "previewHeader": { "type": "string" },
         "labelRevision": { "type": "string" },

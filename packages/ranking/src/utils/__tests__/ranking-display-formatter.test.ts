@@ -1,5 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { buildRankingDisplayContext } from "../ranking-display-formatter";
+import { buildRankingDisplayContext, buildRankingPageTitle } from "../ranking-display-formatter";
+
+describe("buildRankingPageTitle", () => {
+  it.each([
+    ["年間日照時間", "prefecture", "都道府県別 年間日照時間ランキング"],
+    ["総人口", "city", "市区町村別 総人口ランキング"],
+    ["総人口（面積100km²あたり）", "prefecture", "都道府県別 総人口（面積100km²あたり）ランキング"],
+    ["輸出額", "port", "港湾別 輸出額ランキング"],
+    ["消費支出", "national", "全国 消費支出ランキング"],
+  ] as const)("指標 %s と地域粒度 %s から生成する", (metric, scope, expected) => {
+    expect(buildRankingPageTitle(metric, scope)).toBe(expected);
+  });
+});
 
 describe("buildRankingDisplayContext", () => {
   it("should format title correctly by removing patterns", () => {

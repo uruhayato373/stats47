@@ -30,6 +30,8 @@ interface ArticleTeaserCardProps {
   meta?: ReactNode;
   /** クリック計測の導線名 (共通のクリック監視が data-nav-surface を読む) */
   navSurface?: NavSurface;
+  /** タイトル変更に左右されない記事 ID (表示・クリックの突合に使う) */
+  contentId?: string;
   /** 最初の画面に入るカードは先に読み込む */
   eager?: boolean;
 }
@@ -42,6 +44,7 @@ export function ArticleTeaserCard({
   description,
   meta,
   navSurface,
+  contentId,
   eager = false,
 }: ArticleTeaserCardProps) {
   return (
@@ -50,7 +53,8 @@ export function ArticleTeaserCard({
       // 線の格子はカード (data-slot="card") を余白なしのセルとして扱う。付けないと文章のセルと同じ 16px の余白が入る
       data-slot="card"
       data-slot-kind="article-teaser-card"
-      {...(navSurface ? { ...navSurfaceProps(navSurface), 'data-nav-label': title } : {})}
+      data-content-id={contentId}
+      {...(navSurface ? { ...navSurfaceProps(navSurface), 'data-nav-label': contentId ?? title } : {})}
       className="group flex h-full flex-col overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
     >
       {/* 縦横比の枠を縮ませない (shrink-0)。縮むと object-cover が上下を切り、絵の端が欠ける */}

@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { findStorefrontProduct } from "../../src/features/products/storefront";
+
 /**
  * breakpoint 別レイアウト検証（本番スモーク）
  *
@@ -8,10 +10,7 @@ import { expect, test } from "@playwright/test";
  *
  *   1. 横スクロールが発生しない（breakpoint 崩れの最頻出症状）
  *   2. h1 が表示される
- *   3. 右レール契約: ranking / blog 詳細は shell コンテナ (@container/shell) の幅が
- *      988px 以上で本文カラムが縮む（レール 316px + gap 16px）。988px 未満は 1 カラム。
- *      境界はビューポートではなくコンテナ幅なので、サイドバーの開閉 (lg 以上で 256px)
- *      を含めた実測のコンテナ幅で判定する (2026-10-27 にサイドバー型の骨組みへ移行)。
+ * 右レールの実幅・切替境界・左メニュー開閉は rail-layout.spec.ts が検証する。
  *
  * 背景 (2026-07-03 運営総点検): 従来の Playwright は Desktop Chrome 単一で
  * breakpoint 別の表示検証がゼロだった。ranking と blog のサイドバー breakpoint
@@ -19,17 +18,9 @@ import { expect, test } from "@playwright/test";
  * 正典: docs/01_技術設計/04_デザインシステム.md / PageShell.tsx
  */
 
-/** 右レールが出る shell コンテナの幅 (PageShell.tsx の RIGHT_RAIL_GRID_CLASS と同値) */
-const RIGHT_RAIL_CONTAINER_WIDTH = 988;
-
-/** 右レールを持つ代表ページ（右レール契約の検証対象） */
-const RAIL_PAGES = [
+const LAYOUT_PAGES = [
   { name: "ranking詳細", path: "/ranking/total-population" },
   { name: "blog詳細", path: "/blog/noodle-consumption-prefecture-character" },
-];
-
-/** レール契約は問わないが「崩れない」ことを検証する代表ページ */
-const LAYOUT_PAGES = [
   { name: "ホーム", path: "/" },
   { name: "カテゴリ", path: "/category/population" },
   { name: "都道府県詳細", path: "/areas/01000" },
@@ -47,7 +38,80 @@ async function assertNoHorizontalScroll(page: import("@playwright/test").Page) {
 }
 
 test.describe("breakpoint 別レイアウト", () => {
-  for (const target of [...RAIL_PAGES, ...LAYOUT_PAGES]) {
+  for (const slug of ['data-muni-manufacturing', 'data-p-04', 'kindle-k-s1-02']) {
+    test(`商品詳細 (${slug}) は商品内容を先に表示し、共通の余白を保つ`, async ({ page }) => {
+      await page.goto(`/products/${slug}`, { waitUntil: 'domcontentloaded' });
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      await assertNoHorizontalScroll(page);
+      const overview = page.getByRole('region', { name: '商品内容と購入' });
+      await expect(overview.getByRole('heading', { name: '含まれるもの' })).toBeVisible();
+      const product = findStorefrontProduct(slug)!;
+      const useCases = product.useCases;
+      await expect(overview.getByRole('heading', { name: useCases?.length ? 'こんな用途に' : 'こんな方へ' })).toBeVisible();
+      for (const item of useCases ?? []) {
+        await expect(overview.getByText(item.title, { exact: true })).toBeVisible();
+        await expect(overview.getByText(item.description, { exact: true })).toBeVisible();
+      }
+      await expect(overview.getByText('販売価格', { exact: true })).toBeVisible();
+      await expect(overview.getByRole('link', { name: /で内容を確認する/ })).toHaveCount(1);
+      // 価格・購入先・対象読者を見本図より前に把握でき、狭い幅でもラベルが欠けない。
+      const overviewLayout = await overview.evaluate((section) => {
+        const main = section.closest('main')!;
+        const firstFigure = main.querySelector('figure');
+        return {
+          isFirstSection: main.querySelector('section[data-slot="card"]')?.firstElementChild === section,
+          beforeFigures: !firstFigure || !!(section.compareDocumentPosition(firstFigure) & Node.DOCUMENT_POSITION_FOLLOWING),
+          clipped: Array.from(section.querySelectorAll<HTMLElement>('a, dt, dd, [data-slot="badge"]'))
+            .filter((element) => element.scrollWidth > element.clientWidth + 1).length,
+        };
+      });
+      expect(overviewLayout).toEqual({ isFirstSection: true, beforeFigures: true, clipped: 0 });
+      // LP 本文は1つの Surface。見出し・説明を別々の枠にして横線を増やさない。
+      await expect(page.locator('main section[data-slot="card"]')).toHaveCount(1);
+      const bottom = page.locator('[data-product-placement="product_detail_bottom"]');
+      await expect(bottom.getByRole('link', { name: /で内容を確認する/ })).toHaveAttribute('href', new RegExp(product.externalUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+      await bottom.scrollIntoViewIfNeeded();
+      await expect(bottom.getByText(product.displayTitle ?? product.title, { exact: true })).toBeVisible();
+      if (product.coverImageUrl) {
+        const cover = bottom.getByRole('img');
+        await expect(cover).toBeVisible();
+        await expect.poll(() => cover.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+      } else {
+        await expect(bottom.getByRole('img')).toHaveCount(0);
+      }
+      expect(await bottom.evaluate((element) => {
+        const main = element.closest('main')!;
+        const lastFigure = Array.from(main.querySelectorAll('figure')).at(-1);
+        return (!lastFigure || !!(lastFigure.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING))
+          && element.scrollWidth <= element.clientWidth + 1;
+      })).toBe(true);
+      await assertNoHorizontalScroll(page);
+      const spacing = await page.locator('main').evaluate((main) => {
+        const title = main.querySelector('h1')!;
+        const headerStyle = getComputedStyle(title.closest('header')!);
+        const titleLeft = title.getBoundingClientRect().left;
+        return Array.from(main.querySelectorAll('section[data-slot="card"]'), (section) => {
+          const style = getComputedStyle(section);
+          const children = Array.from(section.children).filter((child) => child.getBoundingClientRect().height > 0);
+          return {
+            inset: style.paddingLeft,
+            headerInset: headerStyle.paddingLeft,
+            leftOffset: children[0].getBoundingClientRect().left - titleLeft,
+            gap: parseFloat(style.rowGap),
+            gaps: children.slice(1).map((child, i) => child.getBoundingClientRect().top - children[i].getBoundingClientRect().bottom),
+          };
+        });
+      });
+      expect(spacing.length).toBeGreaterThan(0);
+      for (const section of spacing) {
+        expect(section.inset).toBe(section.headerInset);
+        expect(Math.abs(section.leftOffset)).toBeLessThanOrEqual(1);
+        for (const gap of section.gaps) expect(Math.abs(gap - section.gap)).toBeLessThanOrEqual(1);
+      }
+    });
+  }
+
+  for (const target of LAYOUT_PAGES) {
     test(`${target.name} (${target.path}) が崩れず表示される`, async ({ page }) => {
       await page.goto(target.path, { waitUntil: "domcontentloaded" });
       await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible({
@@ -57,40 +121,4 @@ test.describe("breakpoint 別レイアウト", () => {
     });
   }
 
-  for (const target of RAIL_PAGES) {
-    test(`${target.name} の右レール契約 (shell 988px で本文カラムが縮む)`, async ({ page }) => {
-      await page.goto(target.path, { waitUntil: "domcontentloaded" });
-      // ページで唯一の <main> はルートレイアウトが持ち、Shell の本文列は
-      // div[data-slot=shell-main] で描く。本文列と、それを囲む shell コンテナの幅を比べる。
-      // 開発中の配信は main の外に隠れた写しを持つので、main の中の本文列を見る
-      const shellMain = page.locator('main [data-slot="shell-main"]').first();
-      await expect(shellMain).toBeVisible({ timeout: 15_000 });
-      await expect(page.locator("main")).toHaveCount(1);
-      // shell-main は display: contents で箱を持たないので、本文列の幅は親の格子で測る
-      const widths = await shellMain.evaluate((el) => {
-        const shell = el.closest('[class*="@container/shell"]');
-        return {
-          main: el.parentElement?.getBoundingClientRect().width ?? 0,
-          shell: shell?.getBoundingClientRect().width ?? 0,
-        };
-      });
-      expect(widths.shell, "shell コンテナが見つからない").toBeGreaterThan(0);
-      const ratio = widths.main / widths.shell;
-
-      if (widths.shell >= RIGHT_RAIL_CONTAINER_WIDTH) {
-        // 右レール (316px + gap 16px) が表示され本文カラムが縮むこと。
-        // shell 988px 時: 本文 656/988 ≈ 0.66、1280px 時: 948/1280 ≈ 0.74
-        expect(
-          ratio,
-          `shell ${Math.round(widths.shell)}px なのに本文カラムが全幅 (${Math.round(ratio * 100)}%) = 右レール未表示`,
-        ).toBeLessThan(0.8);
-      } else {
-        // 988px 未満は 1 カラム (本文がコンテナの全幅)
-        expect(
-          ratio,
-          `shell ${Math.round(widths.shell)}px なのに本文カラムが縮んでいる (${Math.round(ratio * 100)}%)`,
-        ).toBeGreaterThan(0.95);
-      }
-    });
-  }
 });

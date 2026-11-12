@@ -72,9 +72,9 @@ export function assertKsjPublicKeysAllowed(keys: readonly string[]): void {
     }
 
     if (key.startsWith('app/stats/') || key.startsWith('app/ranking/') ||
-      key.startsWith('app/japan/') || key.startsWith('app/correlation/by-ranking-key/')) {
-      const rankingKey = key.startsWith('app/correlation/by-ranking-key/')
-        ? key.slice('app/correlation/by-ranking-key/'.length).replace(/\.json$/, '')
+      key.startsWith('app/japan/') || /^app\/correlation\/by-ranking-key(?:-v2)?\//.test(key)) {
+      const rankingKey = key.startsWith('app/correlation/')
+        ? key.split('/')[3].replace(/\.json$/, '')
         : key.split('/')[2];
       const blocked = findKsjPublicStructuredOutputBlock(rankingKey);
       if (blocked) {

@@ -18,7 +18,7 @@ interface SectionHeaderProps {
    * 一覧への導線は SectionIndexLink (Button outline sm + ArrowRight) を使い、文字の矢印 (→) を書かない。
    */
   action?: ReactNode;
-  /** 見出しの HTML タグ（既定 "h2"）。階層上 h3 にしたい場合に指定 */
+  /** 見出しの階層（既定 h2: text-base、小見出し h3: text-sm）。 */
   as?: "h2" | "h3";
   /** 下の区切り線 (Separator) を出さない場合 true */
   hideRule?: boolean;
@@ -30,7 +30,7 @@ interface SectionHeaderProps {
  * セクション見出し（サイト全ページ共通）。
  *
  * テンプレートの CardHeader と同じ並び (アイコン + 見出し + 説明を左、操作を右) を、カードの外で使う。
- * 見出しは text-base font-semibold に統一する (home / ranking / category / city / area / theme で共通)。
+ * h2 は text-base、h3 は text-sm。太さは font-semibold (全ページ共通)。
  * eyebrow（任意・番号付き）→ 見出し → description（任意）→ 区切り線 (テンプレートの Separator)。
  * 独自の border / padding は持たない。
  *
@@ -60,7 +60,10 @@ export function SectionHeader({
               {eyebrow}
             </p>
           )}
-          <Heading className="flex items-center gap-2 text-base font-semibold leading-snug text-foreground [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground">
+          <Heading className={cn(
+            "flex items-center gap-2 font-semibold leading-snug text-foreground [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+            Heading === "h3" ? "text-sm" : "text-base",
+          )}>
             {icon}
             {/* 文節で折り返し、行の長さを揃える (語中で折れない) */}
             <span className="min-w-0 text-balance [word-break:auto-phrase]">

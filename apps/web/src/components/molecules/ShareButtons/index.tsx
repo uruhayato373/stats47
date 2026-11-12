@@ -1,8 +1,15 @@
 "use client";
 
 import { Button } from "@stats47/components/atoms/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@stats47/components/atoms/ui/dropdown-menu";
 import { LazyTooltip } from "@stats47/components/molecules/lazy-select";
-import { Check, Facebook, Link as LinkIcon } from "lucide-react";
+import { Check, Facebook, Link as LinkIcon, Share2 } from "lucide-react";
 
 import { trackShare } from "@/lib/analytics/events";
 
@@ -13,7 +20,7 @@ import { generateShareLinks } from "./utils/generate-share-links";
 interface ShareButtonsProps {
   title: string;
   url?: string;
-  variant?: "simple" | "prominent";
+  variant?: "simple" | "prominent" | "menu";
   /** X用のカスタムシェア文（省略時はtitle + #stats47） */
   shareText?: string;
   /** 表示するプラットフォーム名でフィルタ（省略時は全表示） */
@@ -92,6 +99,32 @@ export function ShareButtons({
   if (!shareUrl) return null;
 
   const size = isProminent ? "icon-lg" : "icon";
+  const share = (link: (typeof shareLinks)[number]) => {
+    trackShare({ method: link.name, contentType: "page" });
+    window.open(link.href, "_blank", "width=600,height=400");
+  };
+
+  if (variant === "menu") {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline" />}>
+          {copied ? <Check aria-hidden="true" /> : <Share2 aria-hidden="true" />}
+          {copied ? "コピーしました" : "共有"}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48">
+          {shareLinks.map((link) => (
+            <DropdownMenuItem key={link.name} onClick={() => share(link)}>
+              {link.name}
+            </DropdownMenuItem>
+          ))}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={copy}>
+            リンクをコピー
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
 
   return (
     <div className={`flex items-center ${isProminent ? "gap-3" : "gap-1"}`}>
@@ -106,10 +139,7 @@ export function ShareButtons({
               variant={isProminent ? "default" : "outline"}
               size={size}
               className={isProminent ? link.prominentClass : undefined}
-              onClick={() => {
-                trackShare({ method: link.name, contentType: "page" });
-                window.open(link.href, "_blank", "width=600,height=400");
-              }}
+              onClick={() => share(link)}
             />
           }
         >

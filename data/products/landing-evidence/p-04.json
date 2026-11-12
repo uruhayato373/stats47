@@ -1,0 +1,85 @@
+{
+  "productId": "P-04",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "dd196bd7bdd3600060c0450ecbffb5bd5113aa4a82c3dc0d29d13f8810598392",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-04/v4-20261024-mac-r2/d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3.zip",
+    "sha256": "d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3"
+  },
+  "selectedMetrics": [
+    {
+      "key": "fiscal-strength-index-prefecture",
+      "title": "財政力指数（都道府県財政）",
+      "year": "2022",
+      "unit": "指数"
+    },
+    {
+      "key": "real-public-debt-service-ratio",
+      "title": "実質公債費比率（都道府県財政）",
+      "year": "2022",
+      "unit": "％"
+    },
+    {
+      "key": "total-revenue-prefecture",
+      "title": "歳入決算総額（都道府県財政）",
+      "year": "2022",
+      "unit": "千円"
+    }
+  ],
+  "included": [
+    "CSV（47地域・119指標、基準年は指標ごとに固定）",
+    "Excel（119指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "fiscal-strength-comparison",
+      "figures": [
+        {
+          "file": "fiscal-strength-comparison.png",
+          "alt": "財政力指数（都道府県財政）（2022年度・地域別比較）",
+          "template": "bar",
+          "sha256": "563b961c113c904936109c1298bda96c607cf63190d737ea51da2f1491f58b5a"
+        }
+      ]
+    },
+    {
+      "id": "debt-service-distribution",
+      "figures": [
+        {
+          "file": "debt-service-distribution.png",
+          "alt": "実質公債費比率（都道府県財政）（2022年度・地図）",
+          "template": "choropleth",
+          "sha256": "19ba2ef3539ef05eb049acd1091a01f80059e1e9346934b5b0dbb5fe4f46e0fb"
+        }
+      ]
+    },
+    {
+      "id": "revenue-scale",
+      "figures": [
+        {
+          "file": "revenue-scale.png",
+          "alt": "歳入決算総額（都道府県財政）（2022年度・地域別比較）",
+          "template": "bar",
+          "sha256": "843f1df70917ba416e48e3fde942ae698390deee0993beffea29c7199ef2384a"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全119指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-04のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "bc1b88dbba0bb145c453182aa07bcb59e9788632d40c10cab6a89062cc368a95"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。"
+}

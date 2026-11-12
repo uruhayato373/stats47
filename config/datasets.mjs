@@ -353,6 +353,13 @@ export const DATASETS = [
   d("metrics.index", `${P.METRIC_DEFINITIONS_DIR}/index/{name}.json`, "state", "data", "data", "指標の出典座標と利用先の逆引き索引"),
   d("metrics.display-units", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.json`, "state", "data", "data", "公開中の都道府県ランキングごとの図の表示単位・倍率・小数桁と最新年の最大・最小 (build-chart-display-units.ts が R2 の値と規則から生成。手で編集しない)", { schema: `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json` }),
   d("metrics.display-units-schema", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json`, "schema", "data", "data", "上の台帳の JSON Schema"),
+  d("metrics.summary-display", `${P.METRIC_DEFINITIONS_DIR}/summary-display/ledger.json`, "ledger", "data", "data", "指標ごとの合計表示の可否。未登録は非表示。単位や名前から加算可否を推測しない", {
+    schema: `${P.METRIC_DEFINITIONS_DIR}/summary-display/ledger.schema.json`,
+    refs: [{ field: "entries[].metricKey", to: "registry:metrics" }],
+  }),
+  d("metrics.summary-display-schema", `${P.METRIC_DEFINITIONS_DIR}/summary-display/ledger.schema.json`, "schema", "data", "data", "合計表示台帳の JSON Schema"),
+  d("correlation.selection-policy", "data/correlation/selection-policy.json", "ledger", "data", "data", "相関の選定基準・正負別の件数・表示名。生成と読み込みとUIが共有", { schema: "data/correlation/selection-policy.schema.json" }),
+  d("correlation.selection-policy-schema", "data/correlation/selection-policy.schema.json", "schema", "data", "data", "相関選定方針の JSON Schema"),
   d("themes.catalogs", "data/themes/catalogs/{name}.json", "master", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", {
     schema: "data/themes/schema/theme-catalog.schema.json",
     refs: [
@@ -537,6 +544,18 @@ export const DATASETS = [
   d("products.ledger", "data/products/product-ledger.json", "state", "product", "data", "商品の台帳 (価格・状態・閲覧・売上を既存の記録から集めたもの)"),
   d("products.ledger-summary", "data/products/PRODUCT-LEDGER.md", "report", "product", "data", "商品の台帳の要約 (週次・月次レビューが読む)"),
   d("products.note-cover-urls", "data/products/note-cover-urls.json", "state", "product", "data", "note の販売記事の表紙画像の URL。サイトの商品カードが使う"),
+  d("products.landings", "data/products/landings/{name}.json", "master", "product", "data", "データ商品の共通LPコピー。サイトとnote無料部分の入力", {
+    schema: "config/schema/products.landings.schema.json",
+    refs: [{ field: "articleKey", to: "note.articles", key: "articles[].key" }],
+  }),
+  d("products.landing-evidence", "data/products/landing-evidence/{name}.json", "evidence", "product", "data", "固定納品由来の作成例・共通画像型・画像SHA・収録形式。観測値は保存しない", {
+    schema: "config/schema/products.landing-evidence.schema.json",
+    refs: [{ field: "sourceArticle.articleKey", to: "note.articles", key: "articles[].key" }],
+  }),
+  d("products.standalone-note", "data/products/standalone-note-products.json", "master", "product", "data", "商品ファクトリー外の商品IDとnote記事の対応。説明は共通LP台帳、公開状態・正式名・価格は記事台帳", {
+    schema: "config/schema/products.standalone-note.schema.json",
+    refs: [{ field: "products[].articleKey", to: "note.articles", key: "articles[].key" }],
+  }),
   d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する)"),
   d("products.price-history", "data/products/price-history.json", "ledger", "product", "data", "商品の価格実験と価格変更の履歴", { schema: "config/schema/products.price-history.schema.json" }),
   d("products.free-sample-delivery", "data/products/free-sample-delivery.json", "ledger", "product", "data", "無料見本の配布の記録", { schema: "config/schema/products.free-sample-delivery.schema.json" }),
@@ -733,6 +752,8 @@ export const DATASETS = [
   d("note.published-urls", "data/note/note-published-urls.json", "state", "product", "data", "note の公開 URL の派生索引 (記事台帳 data/note/articles.json から generate-note-catalog.ts が作る。手編集しない)", { schema: "config/schema/note.published-urls.schema.json" }),
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),
   d("ogp.inventory", "data/ogp/{name}", "state", "site", "data", "OGP・カード画像の棚卸し"),
+  d("provenance.reference-sources", "data/provenance/reference-sources/sources.json", "master", "data", "data", "調査以外の共通出典 (編成統計・地図データ) の名前・機関・URL。指標の原典調査は surveys.master と既存の導出辞書を使い、このマスタには重複登録しない", { schema: "data/provenance/reference-sources/sources.schema.json" }),
+  d("provenance.reference-sources-schema", "data/provenance/reference-sources/sources.schema.json", "schema", "data", "data", "調査以外の共通出典の JSON Schema"),
   d("provenance.queue", "data/provenance/{name}", "state", "data", "data", "出典・再現性の是正キュー"),
   d("ranking.color-policies", "data/ranking/color-policies/policies.json", "state", "data", "data", "指標 × 粒度の配色 (連続か 5 段階か・一方向か発散か)。R2 の値から作る生成物 (build-color-policies.ts)。結合は metricPresentation", {
     schema: "data/ranking/color-policies/policies.schema.json",

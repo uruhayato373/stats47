@@ -104,6 +104,13 @@ npm run test:run   --workspace=@stats47/product-factory
 
 ### SSOTと生成物
 
+- サイトLPとnote無料部分のコピーは `data/products/landings/<id>.json`、固定納品由来の収録形式・画像の型とSHAは
+  `data/products/landing-evidence/<id>.json` に持つ。商品IDと記事キーで結合し、商品別のUI分岐や別媒体のコピーを作らない。
+  `npm run products:landing:assets` は納品版台帳の `archive` から共通画像型で見本を再生成する。
+  `npm run generate:product-storefront -w apps/web` の後、`npm run products:landing:preview -- --serve 4792` で
+  全商品のサイトLPとnote無料部分を順に目視できる。Markdown/HTMLは登録済み `.local/product-portfolio/` の派生物。
+  `npm run products:landing:check` は台帳との不一致・未整備の商品・媒体間の取りこぼしを止める。公開note・有料本文・添付はこの生成で変更しない。
+
 - mapping・記事計画・生成コードは git TS、`.local/note-products/` の生成物は派生物とする。
 - 承認前の生成物を note.com、R2、公開用カタログへ自動反映しない。
 - 添付は `.local/data-packs/<id>/<version>/manifest.json` を参照し、商品ファイルを複製して

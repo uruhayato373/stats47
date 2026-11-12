@@ -36,7 +36,7 @@ async function geoLinks(rankingKey: string, areaType: "prefecture" | "city" = "p
       isValidElement<NavigationProps>(child) && child.type === RelatedContentNavigation && child.props.surface === "ranking_geo"
   );
   const resolved = await Promise.all(sections.map((section) => RelatedContentNavigation(section.props)));
-  return resolved.flatMap((section) => section.props.items);
+  return resolved.flatMap((section) => section?.props.items ?? []);
 }
 
 describe("ランキングページから地域分析の着地ページへ辿れる", () => {

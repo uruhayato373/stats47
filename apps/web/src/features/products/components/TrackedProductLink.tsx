@@ -15,7 +15,7 @@ import {
 } from "@/lib/analytics/events";
 import { createImpressionWatcher } from "@/lib/analytics/impression-watcher";
 
-import type { StorefrontChannel } from "../types";
+import type { ProductDetailPlacement, StorefrontChannel } from "../types";
 
 /** 商品詳細へ来る前の案内の置き場所を、販売先クリックまで持ち越す (同じタブの間だけ)。 */
 const PLACEMENT_STORAGE_KEY = "stats47:product-placement";
@@ -39,15 +39,25 @@ function recallPlacement(productSlug: string): string | null {
 }
 
 /** 商品案内が 50% 以上・1 秒続けて見えたら 1 回だけ product_impression を送る。 */
-export function useProductImpression<T extends Element>(externalUrl: string, placement: string) {
+export function useProductImpression<T extends Element>(
+  externalUrl: string,
+  placement: string,
+  detail?: { readonly productSlug: string; readonly ctaId: ProductDetailPlacement },
+) {
   const ref = useRef<T>(null);
+  const productSlug = detail?.productSlug;
+  const ctaId = detail?.ctaId;
   useEffect(() => {
     const el = ref.current;
     const referral = productReferralOf(externalUrl);
     if (!el || !referral || typeof IntersectionObserver === "undefined") return;
-    const watcher = createImpressionWatcher(() => trackProductImpression({ ...referral, placement }));
+    const watcher = createImpressionWatcher(() => trackProductImpression({
+      ...referral,
+      placement: (productSlug && recallPlacement(productSlug)) || placement,
+      ctaId,
+    }));
     const observer = new IntersectionObserver(
-      ([entry]) => watcher.handleIntersection(entry.isIntersecting),
+      ([entry]) => watcher.handleIntersection(entry.isIntersecting && entry.intersectionRatio >= 0.5),
       { threshold: 0.5 },
     );
     observer.observe(el);
@@ -55,7 +65,7 @@ export function useProductImpression<T extends Element>(externalUrl: string, pla
       observer.disconnect();
       watcher.cleanup();
     };
-  }, [externalUrl, placement]);
+  }, [externalUrl, placement, productSlug, ctaId]);
   return ref;
 }
 
@@ -103,13 +113,13 @@ interface TrackedProductOutboundLinkProps {
   readonly productSlug: string;
   readonly productTitle: string;
   readonly channel: StorefrontChannel;
+  readonly detailPlacement?: ProductDetailPlacement;
   readonly className?: string;
   readonly children: React.ReactNode;
 }
 
 /**
- * 販売先クリック。商品IDは詳細ページの page path、販売先は登録済み link_position で判別する。
- * 新しい GA4 custom dimension に依存しないため、デプロイ直後から集計可能。
+ * 販売先クリック。商品詳細内の位置は登録済み cta_id に入れ、流入元の link_position は保つ。
  * Kindle は Amazon アソシエイトのタグを付ける (自社本でも第三者の購入は紹介料の対象) ため sponsored にする。
  *
  * 加えて product_click (キーイベント) を送る。link_position は詳細へ来る前の案内の置き場所
@@ -121,6 +131,7 @@ export function TrackedProductOutboundLink({
   productSlug,
   productTitle,
   channel,
+  detailPlacement,
   className,
   children,
 }: TrackedProductOutboundLinkProps) {
@@ -139,7 +150,11 @@ export function TrackedProductOutboundLink({
         });
         const referral = productReferralOf(href);
         if (referral) {
-          trackProductClick({ ...referral, placement: recallPlacement(productSlug) ?? "product_detail" });
+          trackProductClick({
+            ...referral,
+            placement: recallPlacement(productSlug) ?? "product_detail",
+            ctaId: detailPlacement,
+          });
         }
       }}
     >

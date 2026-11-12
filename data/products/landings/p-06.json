@@ -1,0 +1,47 @@
+{
+  "productId": "P-06",
+  "articleKey": "prefecture-education-childcare-pack",
+  "displayTitle": "都道府県別 学校・保育・社会教育データ",
+  "description": "学校の規模、保育施設、進学の状況を比較し、教育・子育てに関する説明資料を作れます。",
+  "useCases": [
+    {
+      "title": "教育計画の基礎資料に",
+      "description": "教員1人当たりの児童数などを比較し、自県の学校教育の状況を整理できます。"
+    },
+    {
+      "title": "子育て環境の地域比較に",
+      "description": "子どもの人口に対する認定こども園の数を並べ、施設整備の違いを説明できます。"
+    },
+    {
+      "title": "進路や地域を学ぶ授業に",
+      "description": "高校卒業後の進学率を地図やグラフで示し、地域の違いを考える教材にできます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "students-per-teacher",
+      "heading": "教員1人当たりの児童数を比べる",
+      "lead": "小学校の教員1人当たり児童数を比較し、県全体の児童と教員の規模の関係を説明できます。1学級の人数とは異なる指標です。",
+      "metricKeys": ["elementary-school-students-per-teacher"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "childcare-center-distribution",
+      "heading": "子どもの人口に対する施設数を見る",
+      "lead": "0〜5歳人口10万人当たりの認定こども園数を地図で示せます。施設の総数だけでは分かりにくい、子どもの人口に対する地域差を見比べられます。",
+      "metricKeys": ["certified-childcare-center-count-per-100k-0-5"],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "graduate-advancement",
+      "heading": "高校卒業後の進学状況を比べる",
+      "lead": "高等学校卒業者の進学率を並べ、卒業後の進路の地域差を説明できます。高校への進学率と混同せず、対象となる卒業者を明記して利用します。",
+      "metricKeys": ["high-school-advancement-rate"],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。学校年度や調査時点、対象年齢は指標ごとに確認してください。",
+    "施設数や進学率だけで教育の質や入園のしやすさは判断できません。定員、地域内の距離、個別施設の情報は別途確認が必要です。"
+  ]
+}

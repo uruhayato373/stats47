@@ -18,8 +18,6 @@ export interface RankingPageSections {
     faq?: ReactNode;
     /** ページ末尾「データ出典」(server で item.json の lineage から解決した DataSourceList) */
     dataSources?: ReactNode;
-    /** 統計→公務員AI ファネル CTA — 出典カードの直後・footer 広告の前に表示 */
-    funnelCta?: ReactNode;
     /** 解説の後の広告の段 (AdRow。AdSense と PR) */
     adRowMid?: ReactNode;
     /** 出典の後の広告の段 (AdRow。AdSense と PR) */
@@ -97,8 +95,6 @@ export function RankingPageContentSections({
             )}
 
             {sections.dataSources}
-
-            {sections.funnelCta}
 
             {sections.adRowFooter}
 

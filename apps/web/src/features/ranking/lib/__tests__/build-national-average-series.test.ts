@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 
 import {
   buildNationalAverageSeries,
-  computeNationalAveragePeriodChange,
 } from "../build-national-average-series";
 
 import type { RankingValue } from "@stats47/ranking";
@@ -116,54 +115,35 @@ describe("buildNationalAverageSeries", () => {
   });
 });
 
-describe("computeNationalAveragePeriodChange", () => {
-  it("実測の両端年と変化率を返す (固定窓を使わない)", () => {
-    const series = buildNationalAverageSeries([
-      ...makeFullYear("2007", 1000),
-      ...makeFullYear("2024", 1084),
-    ]);
-    expect(computeNationalAveragePeriodChange(series, "時間")).toEqual({
-      fromYear: 2007,
-      toYear: 2024,
-      text: "+8.4%",
-    });
+describe("台帳で許可した合計と単純平均", () => {
+  it("未指定では47県がそろっていても合計を公開しない", () => {
+    expect(buildNationalAverageSeries(makeFullYear("2024", 10))[0]).toMatchObject({ mean: 10, total: null });
   });
-
-  it("減少はマイナス符号で返す", () => {
+  it("許可された合計にも平均にも全国行・市区町村行を二重計上しない", () => {
     const series = buildNationalAverageSeries([
-      ...makeFullYear("2015", 200),
-      ...makeFullYear("2024", 180),
-    ]);
-    expect(computeNationalAveragePeriodChange(series, "人")?.text).toBe("−10%");
+      ...makeFullYear("2024", 10),
+      makeValue("00000", "2024", 470),
+      makeValue("13101", "2024", 9999),
+    ], { showTotal: true });
+    expect(series[0]).toMatchObject({ value: 470, kind: "national-total", mean: 10, total: 470, count: 47 });
   });
-
-  it("単位が % の指標は率ではなくポイント差で返す", () => {
+  it("欠測年と重複で47件になった年を全国合計として出さない", () => {
+    const incomplete = makeFullYear("2024", 10).slice(1);
+    expect(buildNationalAverageSeries(incomplete, { showTotal: true })[0].total).toBeNull();
+    const duplicated = [...incomplete, incomplete[0]];
+    expect(buildNationalAverageSeries(duplicated, { showTotal: true })[0].total).toBeNull();
+  });
+  it("実測のゼロを欠測にせず合計0と平均0を保持する", () => {
+    expect(buildNationalAverageSeries(makeFullYear("2024", 0), { showTotal: true })[0]).toMatchObject({ total: 0, mean: 0 });
+  });
+  it("合計と平均を分けて描くときは、公表の全国行が無い年も残す", () => {
     const series = buildNationalAverageSeries([
-      ...makeFullYear("2015", 20),
-      ...makeFullYear("2024", 22.3),
-    ]);
-    expect(computeNationalAveragePeriodChange(series, "%")?.text).toBe("+2.3pt");
-  });
-
-  it("端点の母数が 47 未満なら null (平均どうしを比較できない)", () => {
-    const series = buildNationalAverageSeries([
-      makeValue("13000", "2015", 100),
-      ...makeFullYear("2024", 120),
-    ]);
-    expect(computeNationalAveragePeriodChange(series, "人")).toBeNull();
-  });
-
-  it("系列が 1 点以下なら null", () => {
-    const series = buildNationalAverageSeries(makeFullYear("2024", 10));
-    expect(computeNationalAveragePeriodChange(series, "人")).toBeNull();
-    expect(computeNationalAveragePeriodChange([], "人")).toBeNull();
-  });
-
-  it("始点が 0 以下なら変化率を出さない", () => {
-    const series = buildNationalAverageSeries([
-      ...makeFullYear("2015", 0),
-      ...makeFullYear("2024", 120),
-    ]);
-    expect(computeNationalAveragePeriodChange(series, "人")).toBeNull();
+      ...makeFullYear("2020", 10), ...makeFullYear("2024", 12),
+      makeValue("00000", "2022", 550),
+      makeValue("00000", "2024", 564),
+    ], { showTotal: true });
+    expect(series.map((point) => point.year)).toEqual([2020, 2022, 2024]);
+    expect(series.map((point) => point.mean)).toEqual([10, null, 12]);
+    expect(series.map((point) => point.total)).toEqual([470, null, 564]);
   });
 });

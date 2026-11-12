@@ -1,0 +1,40 @@
+{
+  "productId": "P-09",
+  "articleKey": "prefecture-industry-economy-pack",
+  "displayTitle": "都道府県別 産業・経済データ",
+  "description": "製造業などの産業データをまとめて比較し、地域の経済活動を説明する資料に使えるデータ集です。",
+  "useCases": [
+    {
+      "title": "産業振興の比較資料に",
+      "description": "製造品出荷額や従業者数を県別に並べ、地域の製造業の規模を説明できます。"
+    },
+    {
+      "title": "法人営業の事前調査に",
+      "description": "製造業の集積を県単位で確認し、訪問先や提案テーマを検討するための基礎資料を作れます。"
+    },
+    {
+      "title": "地域経済のレポートに",
+      "description": "金額と従業者数をそれぞれ図表にして、一つの指標だけでは伝わらない産業の特徴を紹介できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "manufacturing-shipments",
+      "heading": "製造業の規模を金額で比べる",
+      "lead": "製造品出荷額等を棒グラフにし、比較したい県の位置づけを示せます。県別の産業紹介や、地域経済レポートの導入に使えます。",
+      "metricKeys": ["manufacturing-shipment-amount"],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "manufacturing-employment",
+      "heading": "製造業の働き手が多い地域を見る",
+      "lead": "製造業従業者数を地図にして、どの地域に多く集まっているかを示せます。出荷額の図と並べる場合は、対象年と調査範囲を確認して使えます。",
+      "metricKeys": ["manufacturing-employees"],
+      "preferredTemplate": "choropleth"
+    }
+  ],
+  "purchaseNotes": [
+    "県単位で産業を比較するデータ集です。市区町村別の製造品出荷額データ商品とは集計範囲が異なります。",
+    "収録値の対象年は指標ごとに異なります。出荷額を生産性や利益と読み替えず、調査対象と単位を確認して利用してください。"
+  ]
+}

@@ -10,24 +10,18 @@ import {
   correlationByKeyPath,
   parseCorrelationByKeySnapshot,
 } from "../types/snapshot";
+import type { CorrelationGroups } from "../selection-policy";
 
 /**
- * R2 上の per-ranking-key snapshot から、対象キーの相関上位 N ペアを返す。
- *
- * findHighlyCorrelated (D1) のドロップイン代替。Web の CorrelationSection から呼ぶことで
- * D1 read を完全に消す。fetch 失敗時は ok([]) でフォールバック (UI 側で空表示)。
- *
- * Result 型を返すのは findHighlyCorrelated のシグネチャに合わせるため (差し替え簡素化)。
+ * 台帳に従って生成・検証された正負別の相関一覧を R2 から返す。
+ * 未生成なら空の組、取得・形式エラーなら err を返す。
  */
 export async function readHighlyCorrelatedFromR2(
   rankingKey: string,
-  limit = 10,
-): Promise<Result<CorrelatedItem[], Error>> {
-  // build 時 (NEXT_PHASE=phase-production-build): 1,920 ranking_key 各々に R2 fetch すると
-  // build が 30 分超 に伸びる。ここで空配列を返し、ISR (revalidate=86400) で初回リクエスト時に
-  // 生 fetch する。CorrelationSection は空のとき非表示なので first request の品質低下のみ。
+): Promise<Result<CorrelationGroups<CorrelatedItem>, Error>> {
+  // build 時の全指標 fetch を避け、ISR の初回リクエスト時に取得する。
   if (process.env.NEXT_PHASE === "phase-production-build") {
-    return ok([]);
+    return ok({ positive: [], negative: [] });
   }
 
   try {
@@ -42,19 +36,15 @@ export async function readHighlyCorrelatedFromR2(
     if (result.status === "no-data") {
       logger.warn(
         { rankingKey, path },
-        "per-key correlation snapshot が R2 に存在しません。空配列を返します",
+        "per-key correlation snapshot が R2 に存在しません。空の組を返します",
       );
-      return ok([]);
+      return ok({ positive: [], negative: [] });
     }
     if (result.status === "source-unavailable" || result.status === "schema-invalid") {
       return err(result.error);
     }
-    // 画面は populationAdjustedR を上から出す。新しい snapshot は既にこの順だが、
-    // 2026-09-23 以前の snapshot と再生成されない除外指標の snapshot は生の |r| 順のまま残る。
-    const pairs = [...result.data.pairs].sort(
-      (a, b) => Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR),
-    );
-    return ok(pairs.slice(0, limit));
+    if (result.data.rankingKey !== rankingKey) return err(new Error('correlation rankingKey mismatch'));
+    return ok(result.data.groups);
   } catch (error) {
     logger.error(
       {

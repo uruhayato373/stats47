@@ -47,6 +47,7 @@ function makePair(otherKey: string, pearsonR: number) {
     subtitle: null,
     unit: "件",
     pearsonR,
+    populationAdjustedR: pearsonR,
     partialRPopulation: null,
     partialRArea: null,
     partialRAging: null,
@@ -55,73 +56,39 @@ function makePair(otherKey: string, pearsonR: number) {
   };
 }
 
+function snapshot(groups = { positive: [makePair("p", 0.8)], negative: [makePair("n", -0.7)] }) {
+  return { generatedAt: "2026-11-12T00:00:00Z", rankingKey: "x", selectionPolicyVersion: 1, groups };
+}
 describe("readHighlyCorrelatedFromR2", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("snapshot 取得 → 上位 N 件を slice して ok で返す", async () => {
-    const pairs = Array.from({ length: 20 }, (_, i) =>
-      makePair(`other-${i}`, 0.9 - i * 0.01),
-    );
-    fetchFromR2AsJsonMock.mockResolvedValueOnce({
-      generatedAt: "2026-04-29T00:00:00Z",
-      rankingKey: "x",
-      pairs,
-    });
-
-    const result = await readHighlyCorrelatedFromR2("x", 10);
-
+  beforeEach(() => vi.clearAllMocks());
+  it("正負の2群を保存された件数のまま返す", async () => {
+    const value = snapshot();
+    fetchFromR2AsJsonMock.mockResolvedValueOnce(value);
+    const result = await readHighlyCorrelatedFromR2("x");
     expect(fetchFromR2AsJsonMock).toHaveBeenCalledWith(correlationByKeyPath("x"));
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data).toHaveLength(10);
-      expect(result.data[0].rankingKey).toBe("other-0");
-    }
+    expect(result.success && result.data).toEqual(value.groups);
   });
-
-  it("snapshot 不在時は ok([]) を返す（500 を防ぐ）", async () => {
+  it("snapshotがなければ空の2群を返す", async () => {
     fetchFromR2AsJsonMock.mockResolvedValueOnce(null);
-
-    const result = await readHighlyCorrelatedFromR2("missing-key");
-
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data).toEqual([]);
-    }
+    const result = await readHighlyCorrelatedFromR2("missing");
+    expect(result.success && result.data).toEqual({ positive: [], negative: [] });
   });
-
-  // 画面は populationAdjustedR を表示する。旧形式 (2026-09-23 以前・再生成されない除外指標) の
-  // snapshot を schema-invalid にするとセクションごと消えるため、人口の偏相関から補う。
-  it("populationAdjustedR を持たない旧 snapshot は人口の偏相関から補って返す", async () => {
-    fetchFromR2AsJsonMock.mockResolvedValueOnce({
-      generatedAt: "2026-09-05T00:00:00Z",
-      rankingKey: "x",
-      pairs: [
-        { ...makePair("proxy", 0.99), partialRPopulation: 0.2, partialRArea: 0.95 },
-        makePair("no-partial", 0.5),
-        { ...makePair("new", -0.6), populationAdjustedR: -0.4 },
-      ],
-    });
-
-    const result = await readHighlyCorrelatedFromR2("x");
-
-    expect(result.success).toBe(true);
-    if (result.success) {
-      // 旧 snapshot は生の |r| 順 (0.99, 0.5, -0.6) で並ぶが、表示値の絶対値順に並べ直す
-      expect(result.data.map((p) => [p.rankingKey, p.populationAdjustedR])).toEqual([
-        ["no-partial", 0.5],
-        ["new", -0.4],
-        ["proxy", 0.2],
-      ]);
-    }
+  it.each([
+    snapshot({ positive: [makePair("p", -0.8)], negative: [] }),
+    snapshot({ positive: [makePair("p", 0.8), makePair("p", 0.7)], negative: [] }),
+    snapshot({ positive: [makePair("x", 0.8)], negative: [] }),
+    snapshot({ positive: [makePair("a", 0.6), makePair("b", 0.8)], negative: [] }),
+    snapshot({ positive: [makePair("p", 0)], negative: [] }),
+    snapshot({ positive: [makePair("p", 1.1)], negative: [] }),
+    snapshot({ positive: Array.from({ length: 11 }, (_, i) => makePair("p" + i, 0.8)), negative: [] }),
+    { ...snapshot(), rankingKey: "wrong" },
+    { ...snapshot(), selectionPolicyVersion: 999 },
+  ])("契約違反を表示前に拒否する", async (value) => {
+    fetchFromR2AsJsonMock.mockResolvedValueOnce(value);
+    expect((await readHighlyCorrelatedFromR2("x")).success).toBe(false);
   });
-
-  it("fetch が throw した場合は err を返す", async () => {
+  it("取得失敗を隠さずerrにする", async () => {
     fetchFromR2AsJsonMock.mockRejectedValueOnce(new Error("R2 down"));
-
-    const result = await readHighlyCorrelatedFromR2("x");
-
-    expect(result.success).toBe(false);
+    expect((await readHighlyCorrelatedFromR2("x")).success).toBe(false);
   });
 });

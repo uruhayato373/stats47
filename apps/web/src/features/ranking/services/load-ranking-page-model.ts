@@ -1,6 +1,7 @@
 import "server-only";
 
 import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
+import { shouldShowMetricTotal } from "@stats47/data-configs/metric-summary-display";
 import { getRankingTitle, type RankingValue } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesFromR2,
@@ -80,7 +81,6 @@ export async function loadRankingPageModel(rankingKey: string) {
   // 並ぶ + surveyName を別 fetch していた。焼き込み済みデータで追加 fetch ゼロにする。
   // 正典: .claude/rules/survey-linkage-standards.md
   const originalSurveys = rankingItem.originalSurveys ?? [];
-  const surveyName = originalSurveys[0]?.name ?? null;
 
   // 同じ調査の関連ランキング (先頭 survey の items.json、自分自身を除く)。調査の編集設定の
   // 「読者の問い」が指すランキングを先頭にする (items.json の順だと家計調査はエアコン消費量・情報通信係数が先に出た)
@@ -171,7 +171,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     : [];
   // 全国平均の推移。全年から畳むので client には ≤50 点しか渡らない
   const nationalAverageSeries: NationalAveragePoint[] =
-    buildNationalAverageSeries(allYearsValues);
+    buildNationalAverageSeries(allYearsValues, { showTotal: shouldShowMetricTotal(rankingKey) });
 
   const breadcrumbCategory = category
     ? { key: category.categoryKey, name: category.categoryName }
@@ -197,7 +197,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     nationalAverageSeries,
     aiContent: currentAiContent,
     cityRankingItem,
-    surveyName,
     originalSurveys,
     surveyRelatedItems,
     groupMembers,
