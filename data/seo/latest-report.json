@@ -1,30 +1,48 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "period": {
-    "periodStart": "2026-11-03",
-    "periodEnd": "2026-11-09",
+    "periodStart": "2026-11-04",
+    "periodEnd": "2026-11-10",
     "windowDays": 7
   },
-  "inputHash": "4012e0adf8df7be52d67110de1e4ed842f14c4c72644557c8489b230705736c4",
+  "inputHash": "3a196085fd33b8d011426eaf1e320e77c575de73a4dddedef3f2a7e350f4db66",
   "movements": [
     {
-      "keyword": "自治体 数",
-      "targetPath": "/blog/municipality-count-prefecture-gap",
-      "before": 8,
-      "after": 77.33333333333333,
+      "keyword": "福島 市 人口",
+      "targetPath": "/areas/07000/cities/07201",
+      "before": 9,
+      "after": 96,
       "beforeImpressions": 1,
-      "impressions": 3,
-      "change": -69.33333333333333
+      "impressions": 1,
+      "change": -87
     },
     {
-      "keyword": "明石 市 人口",
-      "targetPath": "/areas/28000/cities/28203",
-      "before": 9,
-      "after": 67,
-      "beforeImpressions": 4,
+      "keyword": "佐賀 市 人口",
+      "targetPath": "/areas/41000/cities/41201",
+      "before": 10,
+      "after": 77,
+      "beforeImpressions": 1,
       "impressions": 1,
-      "change": -58
+      "change": -67
+    },
+    {
+      "keyword": "宮古島人口",
+      "targetPath": "/areas/47000/cities/47214",
+      "before": 6,
+      "after": 70,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -64
+    },
+    {
+      "keyword": "離婚率 日本",
+      "targetPath": "/blog/divorces-per-total-population",
+      "before": 21.333333333333332,
+      "after": 83,
+      "beforeImpressions": 3,
+      "impressions": 2,
+      "change": -61.66666666666667
     },
     {
       "keyword": "松本 市 人口",
@@ -54,15 +72,6 @@
       "change": 54
     },
     {
-      "keyword": "品川 区 人口",
-      "targetPath": "/areas/13000/cities/13109",
-      "before": 10,
-      "after": 59,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -49
-    },
-    {
       "keyword": "離婚 率 日本",
       "targetPath": "/blog/divorces-per-total-population",
       "before": 34.5,
@@ -72,24 +81,6 @@
       "change": -48.5
     },
     {
-      "keyword": "豊田市 人口",
-      "targetPath": "/areas/23000/cities/23211",
-      "before": 4,
-      "after": 51.333333333333336,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": -47.333333333333336
-    },
-    {
-      "keyword": "富山市 人口",
-      "targetPath": "/areas/16000/cities/16201",
-      "before": 9,
-      "after": 56,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": -47
-    },
-    {
       "keyword": "四国の高速道路",
       "targetPath": "/geo/history/expressway/shikoku",
       "before": 83,
@@ -97,6 +88,15 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 45
+    },
+    {
+      "keyword": "兵庫県津波",
+      "targetPath": "/areas/28000/tsunami-exposure",
+      "before": 54,
+      "after": 10,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 44
     }
   ],
   "verdicts": [
@@ -107,10 +107,10 @@
     }
   ],
   "selected": {
-    "keyword": "高崎市 人口",
-    "targetPath": "/areas/10000/cities/10202",
-    "rank": 7.068452380952381,
-    "impressions": 336,
+    "keyword": "阿波市 人口",
+    "targetPath": "/areas/36000/cities/36206",
+    "rank": 6.940711462450593,
+    "impressions": 759,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
