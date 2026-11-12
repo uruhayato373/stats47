@@ -48,11 +48,11 @@ export function RankingPageClientShell({
 }: RankingPageClientShellProps) {
   const affiliateBanners = model.nativeBanners.filter(isLandscapeBanner);
   // 広告の段 (2026-11-03 オーナー決定): 解説の後と出典の後の 2 段。
-  // 解説の後は AdSense 1 つを本文の幅いっぱいに出す (2026-11-12 オーナー決定。300×250 を横に並べると本文の中で
-  // 広告が島のように浮いて見えるため。PR は出さない)。AdSense を止めているときは解説の後の段を出さない。
-  // 出典の後は本文の幅に入る数だけ左から出す (右レールのある本文 810px では 2 枠、モバイルは先頭の 1 枠 = PR)
+  // どちらも AdSense 1 つを本文の幅いっぱいに出し、PR は出さない (2026-11-12 オーナー決定。300×250 を横に並べると
+  // 本文の中で広告が島のように浮いて見えるため。アフィリエイトは戦略を決め直すまで止め、枠は AdSense へ 1 つずつ替える)。
+  // AdSense を止めているときは段を出さない
   const [midRow, footerRow] = composeAdRows(
-    [["adsense"], ["affiliate", "adsense", "affiliate"]],
+    [["adsense"], ["adsense"]],
     [RANKING_INCONTENT_MOBILE, RANKING_PAGE_FOOTER],
     affiliateBanners,
   );
@@ -142,7 +142,7 @@ export function RankingPageClientShell({
           <AdRow key="ad-row-mid" cells={bodyCells(midRow)} position="ranking-row-1" trackingCategory={trackingCategory} wide />
         ) : null,
         adRowFooter: bodyCells(footerRow).length > 0 ? (
-          <AdRow key="ad-row-footer" cells={bodyCells(footerRow)} position="ranking-row-2" trackingCategory={trackingCategory} />
+          <AdRow key="ad-row-footer" cells={bodyCells(footerRow)} position="ranking-row-2" trackingCategory={trackingCategory} wide />
         ) : null,
         nativeAffiliate: hideAffiliateOnKakei ? null : (
           <RankingPageNativeAffiliateSection

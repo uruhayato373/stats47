@@ -214,7 +214,9 @@ export function AdSenseAd({
             data-ad-client={clientId}
             data-ad-slot={slotId}
             data-ad-format={getResponsiveAdFormat(format)}
-            data-full-width-responsive="true"
+            // 幅の上限を持つ台帳の箱 (adsense-body-responsive) では、スマホで親の幅を超えて画面いっぱいに広げない
+            // (Google: 書き換えたレスポンシブのコードはこの行を外す。support.google.com/adsense/answer/9183363・2026-11-12 確認)
+            data-full-width-responsive={slotBox?.maxWidth ? "false" : "true"}
           />
         )
       ) : (

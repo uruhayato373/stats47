@@ -142,10 +142,11 @@
         "mobile"
       ],
       "accepts": [
-        "adsense:article"
+        "adsense:article",
+        "adsense:rectangle"
       ],
       "component": "AdRow",
-      "measured": "2026-11-12 オーナー決定: ランキングの解説の後は 300×250 を横に並べず、幅に合わせて伸びる広告 1 つにする (本文の中で広告が島のように浮いて見えるため)。2026-10-31 の「AdSense は全て 300×250」の例外はこの枠だけ。幅の上限 580px と予約の高さ 280px は本番の実測ではない仮の値 (同日の 10-31 の実測では、上限の無い幅に合わせた広告が本文で 1200×600 まで広がった)。反映後に本番で大きさを測って直す"
+      "measured": "2026-11-12 オーナー決定: ランキングの解説の後と出典の後は 300×250 を横に並べず、幅に合わせて伸びる広告 1 つにする (本文の中で広告が島のように浮いて見えるため)。2026-10-31 の「AdSense は全て 300×250」の例外はこの枠だけ。幅の上限 580px と予約の高さ 280px は本番の実測ではない仮の値 (同日の 10-31 の実測では、上限の無い幅に合わせた広告が本文で 1200×600 まで広がった)。反映後に本番で大きさを測って直す"
     },
     {
       "id": "adsense-rail-rect",
@@ -341,25 +342,13 @@
         "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "出典・導線の後",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
         "marker": "{sections.adRowFooter}",
-        "trackingPosition": "ranking-row-2",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "RANKING_PAGE_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ],
-        "condition": "家計調査の品目は A8 を出さず AdSense だけ"
+        "adsenseSlot": "RANKING_PAGE_FOOTER",
+        "condition": "AdSense 1 つ (表示広告を長方形に絞ったレスポンシブ) を本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
         "slot": "affiliate-row",

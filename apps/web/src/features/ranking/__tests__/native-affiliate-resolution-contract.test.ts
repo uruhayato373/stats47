@@ -115,10 +115,10 @@ describe("ranking native アフィリエイトの解決契約", () => {
     expect(chain.steps).toEqual([]);
   });
 
-  it("解説の後と出典の後に広告の段を置き、解説の後は幅いっぱいの AdSense 1 つにする (2026-11-03・11-12)", () => {
+  it("解説の後と出典の後に広告の段を置き、どちらも幅いっぱいの AdSense 1 つにする (2026-11-03・11-12)", () => {
     expect(SHELL_SRC).toContain("model.nativeBanners.filter(isLandscapeBanner)");
     expect(SHELL_SRC).toMatch(/position="ranking-row-1"[^/]*\bwide\b/);
-    expect(SHELL_SRC).toContain('position="ranking-row-2"');
+    expect(SHELL_SRC).toMatch(/position="ranking-row-2"[^/]*\bwide\b/);
     expect(CONTENT_SRC).toContain("{sections.adRowMid}");
     expect(CONTENT_SRC).toContain("{sections.adRowFooter}");
   });
@@ -130,12 +130,12 @@ describe("ranking native アフィリエイトの解決契約", () => {
   it.each([
     {
       adsense: true, rankingKey: "library-count",
-      mid: ["adsense:mid"], footer: ["ad1", "adsense:footer", "ad2"], end: ["ad3", "ad4", "ad5"],
+      mid: ["adsense:mid"], footer: ["adsense:footer"], end: ["ad1", "ad2", "ad3"],
     },
     {
-      // AdSense を止めているときは解説の後の段を出さない (PR で埋めない)
+      // AdSense を止めているときは段を出さない (PR で埋めない)
       adsense: false, rankingKey: "library-count",
-      mid: [], footer: ["ad1", "ad2"], end: ["ad3", "ad4", "ad5"],
+      mid: [], footer: [], end: ["ad1", "ad2", "ad3"],
     },
   ])("段で使った広告を読了・レールから除く: $rankingKey / AdSense=$adsense", ({ adsense, rankingKey, mid, footer, end }) => {
     display.adsense = adsense;

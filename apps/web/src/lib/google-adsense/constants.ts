@@ -81,7 +81,10 @@ export const RAIL_RECT: AdSlotConfig = {
  * Multiplex (関連コンテンツ型グリッド・横長) に差し替え。読了後の全幅フッターに適した形式。
  * 2026-10-31 (オーナー決定 AdSense は全て 300×250): 関連コンテンツ型 (2439393208) は固定の大きさにできず、
  * モバイルで 308×1503 まで伸びていた。2026-11-03 にこの配置専用の表示広告ユニットを作った。
- * AdSense ユニット: stats47-ranking-footer-rect（ディスプレイ / 固定 300×250）
+ * 2026-11-12 オーナー決定: 出典の後の段はこのユニット 1 つだけを本文の幅いっぱい (上限 580px。台帳の
+ * adsense-body-responsive) で出す。管理画面の設定は固定のままでも、広告コードを書き換えればレスポンシブにできる
+ * (support.google.com/adsense/answer/10734935・2026-11-12 確認)。形は rectangle に絞る。
+ * AdSense ユニット: stats47-ranking-footer-rect（ディスプレイ / 管理画面では固定 300×250 で作成）
  */
 export const RANKING_PAGE_FOOTER: AdSlotConfig = {
   slotId: "3686603642",
