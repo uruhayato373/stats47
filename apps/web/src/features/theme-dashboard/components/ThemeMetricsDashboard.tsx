@@ -690,11 +690,11 @@ export function ThemeMetricsDashboard({
         renderChapter(chapter, index === 0 ? profileLink : undefined)
       )}
       {leadingChapters.length >= 3 && chapterAdRows?.[0] && (
-        <AdRow cells={chapterAdRows[0]} position="theme-row-1" trackingCategory={`theme-${themeConfig.themeKey}`} />
+        <AdRow cells={chapterAdRows[0]} position="theme-row-1" trackingCategory={`theme-${themeConfig.themeKey}`} wide />
       )}
       {leadingChapters.slice(2, 4).map((chapter) => renderChapter(chapter))}
       {leadingChapters.length >= 4 && chapterAdRows?.[1] && (
-        <AdRow cells={chapterAdRows[1]} position="theme-row-2" trackingCategory={`theme-${themeConfig.themeKey}`} />
+        <AdRow cells={chapterAdRows[1]} position="theme-row-2" trackingCategory={`theme-${themeConfig.themeKey}`} wide />
       )}
       {leadingChapters.slice(4).map((chapter) => renderChapter(chapter))}
       {renderPanelRuns(remainingPanels)}

@@ -305,7 +305,7 @@
   "pages": {
     "theme": [
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "scopes": [
           "national",
           "area"
@@ -315,22 +315,11 @@
         "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
         "marker": "position=\"theme-row-1\"",
         "trackingPosition": "theme-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "THEMES_CONTENT"
-          }
-        ]
+        "adsenseSlot": "THEMES_CONTENT",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない 非商用データの節を埋め込むテーマでは出ない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "scopes": [
           "national",
           "area"
@@ -340,21 +329,11 @@
         "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
         "marker": "position=\"theme-row-2\"",
         "trackingPosition": "theme-row-2",
-        "cells": [
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
+        "adsenseSlot": "THEME_ROW_2",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "scopes": [
           "national",
           "area"
@@ -364,21 +343,11 @@
         "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
         "marker": "position=\"theme-row-end\"",
         "trackingPosition": "theme-row-end",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "RAIL_RECT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "affiliate"
-          }
-        ]
+        "adsenseSlot": "THEME_END",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
       },
       {
-        "slot": "ad-row",
+        "slot": "adsense-body-responsive",
         "scopes": [
           "municipalities"
         ],
@@ -387,19 +356,8 @@
         "source": "apps/web/src/app/municipalities/themes/[themeSlug]/page.tsx",
         "marker": "position=\"municipality-theme-row-1\"",
         "trackingPosition": "municipality-theme-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
+        "adsenseSlot": "THEME_END",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない 都道府県のテーマのページの最後と同じユニット (1 ページに 1 回)"
       }
     ],
     "ranking": [

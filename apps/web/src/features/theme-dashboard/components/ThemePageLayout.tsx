@@ -20,10 +20,9 @@ import {
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { RailCard, RailNavRow } from '@/components/surface';
 
-import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
+import { AdRow, composeAdRows } from '@/features/ads';
 
-import { CONTENT_FOOTER, HUB_INCONTENT, RAIL_RECT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { THEME_END, THEME_ROW_2, THEMES_CONTENT } from '@/lib/google-adsense';
 import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
@@ -192,27 +191,13 @@ export async function ThemePageLayout({
     })
   );
 
-  // 本文の広告の段 (PR の列)。2026-11-03 (オーナー決定・収益化戦略 §3.2) からテーマごとの文脈の案件をやめ、
-  // 共通の案件 (対象者が広く気軽に始められる商品) を横 3 枠で出す。
-  // 非商用データの節を埋め込むテーマは広告・アフィリエイトを出さない (ad-free-paths.ts。AdSense の script も止まる)
+  // 本文の広告の段 (2026-11-12 オーナー決定): アフィリエイトを止め、3 段とも AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。
+  // ユニットは段ごとにテーマ専用 (2 段目と最後は同日に作成。それまではハブ・一覧と共用で、テーマの分を測れなかった)。
+  // 非商用データの節を埋め込むテーマは広告を出さない (ad-free-paths.ts。AdSense の script も止まる)
   const isAdFree = AD_FREE_THEME_KEYS.includes(theme.themeKey);
-  const nativeBanners = isAdFree
-    ? []
-    : (await resolveGenericAffiliateBanners(5).catch(() => [])).filter(isLandscapeBanner);
-  // 広告の段 (2026-11-03 オーナー決定): 1 章目の後・3 章目の後・ページの最後の 3 段。幅に入る数だけ左から出す
-  // (モバイル 1 枠・本文 608px 以上 2 枠・916px 以上 3 枠)。モバイルで上から AdSense → PR → AdSense になるよう先頭の種類を変える。
-  // AdSense は段ごとに別のユニット (同じユニットを 1 ページで重ねない)。テーマには右レールが無いので RAIL_RECT も使う
   const [chapterRow1, chapterRow2, endRow] = isAdFree
     ? [[], [], []]
-    : composeAdRows(
-        [
-          ['adsense', 'affiliate', 'adsense'],
-          ['affiliate', 'adsense', 'affiliate'],
-          ['adsense', 'affiliate', 'affiliate'],
-        ],
-        [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER, RAIL_RECT],
-        nativeBanners,
-      );
+    : composeAdRows([['adsense'], ['adsense'], ['adsense']], [THEMES_CONTENT, THEME_ROW_2, THEME_END], []);
   const providerPrefecture = areaContext ?? initialPrefecture;
   // 指標カードの時系列と章の図の結果を初回描画で渡す (表示直後の POST を出さない。GSC-CRAWL-WASTE-01)
   const initialThemeData = await loadInitialThemeData({
@@ -418,7 +403,7 @@ export async function ThemePageLayout({
 
           {/* ページの最後の広告の段 (このテーマを読み解く記事の後) */}
           {endRow.length > 0 && (
-            <AdRow cells={endRow} position="theme-row-end" trackingCategory={`theme-${theme.themeKey}`} />
+            <AdRow cells={endRow} position="theme-row-end" trackingCategory={`theme-${theme.themeKey}`} wide />
           )}
 
         </PanelGrid>
