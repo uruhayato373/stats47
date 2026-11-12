@@ -51,7 +51,9 @@ function changedSinceRemote() {
 
 function run(label, command, args, cwd = ROOT) {
   console.log(`▶ ${label}`);
-  const { status } = spawnSync(command, args, { cwd, stdio: "inherit" });
+  // Windows の npx は npx.cmd で、shell なしでは起動できず status が null になる (出力なしで失敗扱いになっていた。2026-11-12)
+  const { status, error } = spawnSync(command, args, { cwd, stdio: "inherit", shell: process.platform === "win32" });
+  if (error) console.error(`起動に失敗: ${command} (${error.message})`);
   return status === 0;
 }
 

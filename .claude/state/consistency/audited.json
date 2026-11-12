@@ -1,14 +1,7 @@
 {
-  "hash": "7f120909e9784c0c6ebfa28eb44cf85943ec2de51e4b858f9028712bfa65742f",
-  "audited_at": "2026-11-11T22:27:31",
+  "hash": "6114a974a6dbac18181a8af795f133e3dd79abd162fe93b9cdc5bc3458f2de4d",
+  "audited_at": "2026-11-12T00:13:34",
   "files": [
-    ".agents/skills/note/publish-note/SKILL.md",
-    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
-    ".claude/scripts/lib/check-datasets.mjs",
-    ".claude/scripts/note/__tests__/note-hashtags.test.mjs",
-    ".claude/scripts/note/lib/note-hashtags.mjs",
-    ".claude/scripts/note/propose-note-hashtags.mjs",
-    ".claude/scripts/note/update-published-hashtags.mjs",
-    ".claude/skills/note/publish-note/SKILL.md"
+    ".claude/scripts/lib/pre-push-tests.mjs"
   ]
 }
