@@ -38,6 +38,37 @@ async function assertNoHorizontalScroll(page: import("@playwright/test").Page) {
 }
 
 test.describe("breakpoint 別レイアウト", () => {
+  test("商品画像は節の枚数や商品によらず同じ掲載幅を保つ", async ({ page }) => {
+    let referenceWidth: number | undefined;
+    let referenceColumnStep: number | undefined;
+    // 複数枚/節と1枚/節を比較する。幅が収まるだけでは、1枚だけ全幅に拡大される退行を検知できない。
+    for (const slug of ['data-muni-manufacturing', 'data-p-01']) {
+      await page.goto(`/products/${slug}`, { waitUntil: 'domcontentloaded' });
+      const images = page.getByRole('region', { name: '商品詳細', exact: true }).locator('figure img');
+      const product = findStorefrontProduct(slug)!;
+      await expect(images).toHaveCount(product.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
+      await images.evaluateAll((elements) => elements.forEach((element) => { (element as HTMLImageElement).loading = 'eager'; }));
+      await expect.poll(() => images.evaluateAll((elements) => elements.every((element) => {
+        const image = element as HTMLImageElement;
+        return image.complete && image.naturalWidth > 0;
+      }))).toBe(true);
+      const dimensions = await images.evaluateAll((elements) => elements.map((element) => {
+        const image = element as HTMLImageElement;
+        const { width, height, x } = image.getBoundingClientRect();
+        return { width, height, x, naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight };
+      }));
+      referenceWidth ??= dimensions[0].width;
+      referenceColumnStep ??= dimensions[1].x - dimensions[0].x;
+      expect(referenceWidth).toBeGreaterThan(0);
+      expect(Math.abs(dimensions[1].x - dimensions[0].x - referenceColumnStep), `${slug}: 作成例を同じ列間隔で並べる`).toBeLessThanOrEqual(1);
+      for (const image of dimensions) {
+        expect(Math.abs(image.width - referenceWidth), `${slug}: 作成例・ファイル見本の掲載幅`).toBeLessThanOrEqual(1);
+        expect(Math.abs(image.height - image.width * image.naturalHeight / image.naturalWidth), `${slug}: 元画像の縦横比`).toBeLessThanOrEqual(1);
+      }
+      await assertNoHorizontalScroll(page);
+    }
+  });
+
   for (const slug of ['data-muni-manufacturing', 'data-p-04', 'kindle-k-s1-02']) {
     test(`商品詳細 (${slug}) は商品内容を先に表示し、共通の余白を保つ`, async ({ page }) => {
       await page.goto(`/products/${slug}`, { waitUntil: 'domcontentloaded' });

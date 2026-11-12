@@ -10,10 +10,10 @@ function ShowcaseSection({ section, slug }: {
   readonly slug: string;
 }) {
   return (
-    <section aria-label={section.heading} className="flex min-w-0 flex-col gap-3">
+    <section aria-label={section.heading} className={`@container flex min-w-0 flex-col gap-3${section.figures.length > 1 ? " @sm:col-span-2" : ""}`}>
       <SectionHeader title={section.heading} as={section.kind === "chart" ? "h3" : "h2"} hideRule className="mb-0" />
       <p className="text-sm leading-relaxed text-pretty">{section.lead}</p>
-      <ul className={`grid gap-4${section.figures.length > 1 ? " @sm:grid-cols-2" : ""}`}>
+      <ul className="grid gap-4 @sm:grid-cols-2">
         {section.figures.map((figure) => (
           <li key={figure.file}>
             <figure>
@@ -44,11 +44,17 @@ export function ProductShowcase({ product }: { readonly product: StorefrontProdu
       {charts.length > 0 && (
         <section aria-label="作成例" className="flex flex-col gap-6">
           <SectionHeader title="作成例" hideRule className="mb-0" />
-          {charts.map((section) => <ShowcaseSection key={section.heading} section={section} slug={product.slug} />)}
+          <div className="grid gap-x-4 gap-y-6 @sm:grid-cols-2">
+            {charts.map((section) => <ShowcaseSection key={section.heading} section={section} slug={product.slug} />)}
+          </div>
           {product.showcaseNote && <p className="text-xs leading-relaxed text-muted-foreground">{product.showcaseNote}</p>}
         </section>
       )}
-      {files.map((section) => <ShowcaseSection key={section.heading} section={section} slug={product.slug} />)}
+      {files.length > 0 && (
+        <div className="grid gap-4 @sm:grid-cols-2">
+          {files.map((section) => <ShowcaseSection key={section.heading} section={section} slug={product.slug} />)}
+        </div>
+      )}
     </>
   );
 }
