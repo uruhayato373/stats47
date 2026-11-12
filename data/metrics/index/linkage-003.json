@@ -1009,10 +1009,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:child-rearing-allowance-recipients",
           "kind": "ranking"
         },
@@ -7240,10 +7236,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:community-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:community-building-volunteer-participation-rate-10plus",
           "kind": "ranking"
         },
@@ -7483,10 +7475,6 @@
         {
           "pageId": "blog:sports-urban-paradox",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:community-sports-facility-count-per-million",
@@ -7767,10 +7755,6 @@
         {
           "pageId": "area-theme:47000:regional-transport",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:commute-by-bus",
@@ -8206,10 +8190,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:commute-by-car",
           "kind": "municipality-ranking"
         },
@@ -8505,10 +8485,6 @@
         {
           "pageId": "blog:train-commuters-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:commute-by-train",

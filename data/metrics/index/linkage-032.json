@@ -418,10 +418,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:community-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:voter-turnout-governor",
           "kind": "ranking"
         },
@@ -1303,10 +1299,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:waste-recycling",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:waste-recycling-rate",
           "kind": "municipality-ranking"
         },
@@ -1676,10 +1668,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:water-services",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:water-supply-annual-volume",
           "kind": "ranking"
         },
@@ -1911,10 +1899,6 @@
         {
           "pageId": "blog:water-infrastructure-crisis",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:water-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:water-supply-capacity",
@@ -2376,10 +2360,6 @@
         {
           "pageId": "blog:sewerage-water-supply-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:water-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:water-supply-population-ratio-2012on",
@@ -3144,10 +3124,6 @@
         {
           "pageId": "blog:welfare-expenses-squeeze",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:welfare-expenditure-ratio-pref-finance",
@@ -7063,14 +7039,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:woodland-area",
           "kind": "municipality-ranking"
         },
@@ -7350,10 +7318,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:work-avg-time-employed-female",
           "kind": "ranking"
         },
@@ -7578,10 +7542,6 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:work-avg-time-employed-male",

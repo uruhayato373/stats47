@@ -1550,10 +1550,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:young-population-ratio",
           "kind": "municipality-ranking"
         },

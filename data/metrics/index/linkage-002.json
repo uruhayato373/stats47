@@ -5085,10 +5085,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:communication-access",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:broadband-contract-count-excluding-39-4g",
           "kind": "ranking"
         },
@@ -5313,10 +5309,6 @@
         {
           "pageId": "area-theme:47000:communication-access",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:communication-access",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:broadband-service-contract-count",
@@ -5551,10 +5543,6 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:broadcast-media-time-all",
@@ -5979,10 +5967,6 @@
         {
           "pageId": "blog:firefighting-capacity-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:building-fire-count-per-100-thousand-people",
@@ -7136,10 +7120,6 @@
         {
           "pageId": "area-theme:47000:regional-transport",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:bus-operators",
@@ -9695,10 +9675,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:car-ownership-multi-person-households-per-1000",
           "kind": "ranking"
         },
@@ -12018,10 +11994,6 @@
         {
           "pageId": "area:47000",
           "kind": "area"
-        },
-        {
-          "pageId": "japan-theme:childcare-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:certified-childcare-center-count-per-100k-0-5",

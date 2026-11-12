@@ -1719,10 +1719,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:information-industry",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:gross-prefectural-product-information-communication-h27",
           "kind": "ranking"
         },
@@ -2694,10 +2690,6 @@
         {
           "pageId": "blog:habitable-area-land-use",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:habitable-area-ratio",
@@ -8166,10 +8158,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:high-school-count-per-100km2-habitable",
           "kind": "municipality-ranking"
         },
@@ -9570,14 +9558,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-leisure-avg-time-employed-female",
           "kind": "ranking"
         },
@@ -9995,14 +9975,6 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-leisure-avg-time-employed-male",

@@ -1,4 +1,5 @@
 import data from '../../../../data/themes/japan/catalogs.json';
+import themeRedirects from '../../../../data/site/url-history/theme-redirects.json';
 import { KAKEI_JAPAN_CATALOGS } from './kakei-japan-catalog';
 
 /**
@@ -37,4 +38,14 @@ export function getJapanCatalogTheme(themeSlug: string): JapanCatalogTheme | und
 
 export function listJapanCatalogThemes(): JapanCatalogTheme[] {
   return Object.values(JAPAN_CATALOGS);
+}
+
+/**
+ * 全国のテーマ (`/themes/<テーマ>`) へ 301 した日本全体のテーマか (2026-11-12 オーナー決定で、日本全体のテーマを全国のテーマへまとめた)。
+ * 記録の正本は転送表 `site.theme-redirects` (data/site/url-history/theme-redirects.json)。サイトマップ・地域の切り替え・
+ * ハブの一覧・内容の台帳はこれで転送済みのページを外す (転送する一覧を別に持たない)
+ */
+export function isJapanThemeMovedToTheme(themeSlug: string): boolean {
+  const path = `/japan/${themeSlug}`;
+  return themeRedirects.pathRedirects.some((row) => row.themeSlug === themeSlug && new RegExp(row.pattern).test(path));
 }

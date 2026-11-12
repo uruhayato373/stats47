@@ -649,7 +649,7 @@ export default function middleware(req: NextRequest) {
   if (legacyThemeDestination) {
     return NextResponse.redirect(
       new URL(`${legacyThemeDestination}${req.nextUrl.search}`, req.url),
-      { status: 301 }
+      301
     );
   }
 

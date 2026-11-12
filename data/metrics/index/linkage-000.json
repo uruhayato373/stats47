@@ -604,10 +604,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:accidental-deaths-per-100k",
           "kind": "ranking"
         },
@@ -1297,11 +1293,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:02000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1313,11 +1317,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:04000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1329,11 +1341,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:06000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1345,11 +1365,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:08000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1361,11 +1389,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:10000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1377,11 +1413,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:12000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1393,11 +1437,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:14000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1409,11 +1461,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:16000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1425,11 +1485,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:18000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1441,11 +1509,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:20000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1457,11 +1533,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:22000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1473,11 +1557,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:24000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1489,11 +1581,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:26000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1505,11 +1605,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:28000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1521,11 +1629,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:30000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1537,11 +1653,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:32000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1553,11 +1677,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:34000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1569,11 +1701,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:36000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1585,11 +1725,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:38000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1601,11 +1749,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:40000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1617,11 +1773,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:42000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1633,11 +1797,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:44000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1649,6 +1821,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:labor-mobility",
           "kind": "area-theme"
         },
@@ -1657,11 +1833,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:local-economy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:labor-mobility",
           "kind": "area-theme"
         },
         {
           "pageId": "area-theme:47000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-economy",
           "kind": "area-theme"
         },
         {
@@ -1869,18 +2053,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:labor-mobility",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:local-economy",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:active-job-opening-ratio",
           "kind": "ranking"
         },
@@ -1891,11 +2063,16 @@
         {
           "pageId": "theme:labor-wages",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:local-economy",
+          "kind": "theme"
         }
       ],
       "themes": [
         "labor-mobility",
-        "labor-wages"
+        "labor-wages",
+        "local-economy"
       ]
     },
     {
@@ -2118,10 +2295,6 @@
         {
           "pageId": "blog:household-income-tokyo-okinawa",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:real-income",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:actual-income-worker-households-per-month",
@@ -3528,10 +3701,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:agriculture-production",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:agricultural-farm-count",
           "kind": "ranking"
         },
@@ -4479,10 +4648,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:agriculture-production",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:agricultural-output-per-employed-person",
           "kind": "ranking"
         },
@@ -5103,10 +5268,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:freight-logistics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:air-cargo-transport",
           "kind": "ranking"
         },
@@ -5494,10 +5655,6 @@
         {
           "pageId": "area-theme:47000:tourism",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:air-passenger-transport",
@@ -9047,10 +9204,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:amusement-industry-employees",
           "kind": "ranking"
         },
@@ -9279,10 +9432,6 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:amusement-industry-establishments",
@@ -10666,10 +10815,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:annual-emergency-dispatches-per-1000",
           "kind": "ranking"
         },
@@ -11091,10 +11236,6 @@
         {
           "pageId": "blog:black-tea-income-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:real-income",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:annual-income-per-household",
@@ -13518,10 +13659,6 @@
         {
           "pageId": "blog:aquaculture-harvest-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:aquaculture-harvest",

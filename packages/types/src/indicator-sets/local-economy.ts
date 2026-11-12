@@ -84,6 +84,21 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "rankingKey": "private-establishment-net-value-added",
       "shortLabel": "民営事業所の純付加価値（所在地へ按分）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "minimum-wage-by-region",
+      "shortLabel": "地域別最低賃金",
+      "role": "context"
+    },
+    {
+      "rankingKey": "active-job-opening-ratio",
+      "shortLabel": "有効求人倍率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "unemployment-rate",
+      "shortLabel": "完全失業率",
+      "role": "context"
     }
   ],
   "keywords": [

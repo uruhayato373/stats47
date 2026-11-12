@@ -559,10 +559,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:serious-crime-per-100k",
           "kind": "ranking"
         },
@@ -1058,10 +1054,6 @@
         {
           "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:water-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sewerage-coverage-rate",
@@ -4433,10 +4425,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:single-father-households",
           "kind": "municipality-ranking"
         },
@@ -5525,10 +5513,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:single-mother-households",
           "kind": "municipality-ranking"
         },
@@ -5901,10 +5885,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-100to199",
           "kind": "ranking"
         },
@@ -6131,10 +6111,6 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-200to299",
@@ -6365,10 +6341,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-300to399",
           "kind": "ranking"
         },
@@ -6595,10 +6567,6 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-400to499",
@@ -6829,10 +6797,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-500plus",
           "kind": "ranking"
         },
@@ -7061,10 +7025,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-under100",
           "kind": "ranking"
         },
@@ -7291,10 +7251,6 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-public-assistance-households",
@@ -7901,10 +7857,6 @@
         {
           "pageId": "blog:aging-solo-living-crisis",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:single-person-household-old-population-ratio",
@@ -8924,10 +8876,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:sleep-avg-time-female",
           "kind": "ranking"
         },
@@ -9156,10 +9104,6 @@
         {
           "pageId": "blog:sleep-avg-time-male-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sleep-avg-time-male",
@@ -10547,14 +10491,6 @@
         {
           "pageId": "blog:population-migration-tokyo-concentration",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:social-increase-rate",

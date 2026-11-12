@@ -352,7 +352,8 @@
         "national-assessment-elementary-reading-like-rate",
         "national-assessment-elementary-study-1h-plus-rate",
         "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
-        "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000"
+        "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "education-cost-all-households"
       ]
     },
     {
@@ -939,7 +940,8 @@
         "urbanization-control-area-ratio",
         "urban-parks",
         "urban-parks-area",
-        "three-generation-household-members"
+        "three-generation-household-members",
+        "general-households"
       ]
     },
     {
@@ -964,7 +966,10 @@
         "employment-location-quotient-information-communication",
         "employment-location-quotient-health-welfare",
         "enterprise-net-value-added-all-industries",
-        "private-establishment-net-value-added"
+        "private-establishment-net-value-added",
+        "minimum-wage-by-region",
+        "active-job-opening-ratio",
+        "unemployment-rate"
       ]
     },
     {
@@ -1226,7 +1231,8 @@
         "maritime-import-export-cargo",
         "port-inbound-ships",
         "port-ships-tonnage",
-        "passenger-ship-transport"
+        "passenger-ship-transport",
+        "port-count"
       ]
     },
     {
@@ -1292,7 +1298,9 @@
         "avg-propensity-to-consume-worker-households",
         "household-survey-consumption-expenditure",
         "gini-coefficient-disposable-income",
-        "gini-coefficient-financial-assets"
+        "gini-coefficient-financial-assets",
+        "consumption-expenditure-multi-person-households-per-month",
+        "current-liabilities-balance-multi-person-households-per-household"
       ]
     },
     {
@@ -1527,7 +1535,8 @@
         "inbound-visit-sample-by-destination",
         "domestic-travel-consumption-by-destination",
         "inbound-travel-consumption-by-destination",
-        "airport-count"
+        "airport-count",
+        "jr-passenger-transport"
       ]
     },
     {

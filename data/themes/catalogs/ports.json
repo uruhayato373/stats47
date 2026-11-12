@@ -92,6 +92,11 @@
         "surveyedAt": "2026-09-08",
         "rationale": "旅客船輸送人員は「船舶と旅客の利用」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
       }
+    },
+    {
+      "rankingKey": "port-count",
+      "shortLabel": "港湾調査の対象港数（甲種・乙種）",
+      "role": "context"
     }
   ],
   "charts": [

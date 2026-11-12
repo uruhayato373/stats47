@@ -2311,10 +2311,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:industrial-land-price-change-rate",
           "kind": "ranking"
         },
@@ -2551,10 +2547,6 @@
         {
           "pageId": "blog:industrial-water-manufacturing-nexus",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:industrial-water-usage",
@@ -3665,10 +3657,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:information-industry",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:information-private-employees",
           "kind": "municipality-ranking"
         },
@@ -3901,10 +3889,6 @@
         {
           "pageId": "area-theme:47000:information-industry",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:information-industry",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:information-private-establishments",
@@ -4148,10 +4132,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:inland-aquaculture-harvest",
           "kind": "ranking"
         },
@@ -4379,10 +4359,6 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:inland-fishery-catch",
@@ -5485,10 +5461,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:intellectual-crime-per-100k",
           "kind": "ranking"
         },
@@ -5831,10 +5803,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:disability-support",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:intellectual-disability-support-facility-capacity-per-100k",
           "kind": "ranking"
         },
@@ -6062,10 +6030,6 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:disability-support",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:intellectual-disability-support-facility-count-per-1m",
@@ -6338,10 +6302,6 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:disability-support",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:intellectual-disability-support-facility-residents-per-100k",
@@ -7146,10 +7106,6 @@
         {
           "pageId": "area-theme:47000:communication-access",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:communication-access",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:internet-usage-rate-10plus",
@@ -9350,10 +9306,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:labor-mobility",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:job-change-rate",
           "kind": "ranking"
         },
@@ -9583,14 +9535,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:freight-logistics",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:railway",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:jr-freight-shipment",
           "kind": "ranking"
         },
@@ -9637,16 +9581,196 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:tourism",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:railway-theme-overview",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:railway",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:jr-passenger-transport",
@@ -9655,10 +9779,15 @@
         {
           "pageId": "theme:railway",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:tourism",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "railway"
+        "railway",
+        "tourism"
       ]
     },
     {

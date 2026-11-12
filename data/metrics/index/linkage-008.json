@@ -1534,14 +1534,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:gender-participation",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:female-part-time-hourly-wage",
           "kind": "ranking"
         },
@@ -2447,10 +2439,6 @@
         {
           "pageId": "blog:university-advancement-capacity",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:final-education-university-graduate-school-ratio",
@@ -4481,10 +4469,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:fire-damage-casualties-per-population",
           "kind": "ranking"
         },
@@ -4751,10 +4735,6 @@
         {
           "pageId": "blog:fire-deaths-per-100k-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:fire-deaths-per-100k",
@@ -7054,10 +7034,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:fish-catch",
           "kind": "ranking"
         },
@@ -7595,10 +7571,6 @@
         {
           "pageId": "blog:fishery-catch-aquaculture-shift",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:fishery-output-value",
@@ -11720,10 +11692,6 @@
         {
           "pageId": "blog:fishery-workers-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:fishery-workers",

@@ -1170,10 +1170,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:local-allocation-tax-ratio-pref-finance",
           "kind": "ranking"
         },
@@ -1821,10 +1817,6 @@
         {
           "pageId": "blog:local-tax-revenue-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:local-tax-ratio-pref-finance",
@@ -3885,10 +3877,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:main-road-paving-rate",
           "kind": "ranking"
         },
@@ -4429,10 +4417,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:male-part-time-hourly-wage",
@@ -5653,10 +5637,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:manufacturing-employees",
           "kind": "municipality-ranking"
         },
@@ -5896,10 +5876,6 @@
         {
           "pageId": "blog:manufacturing-shipment-amount-vs-manufacturing",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:manufacturing-establishment-site-area",
@@ -6321,10 +6297,6 @@
         {
           "pageId": "blog:manufacturing-strength-factory-size",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:manufacturing-establishments",
@@ -6766,10 +6738,6 @@
         {
           "pageId": "blog:manufacturing-productivity",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:manufacturing-industry-added-value",
@@ -7506,10 +7474,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:manufacturing-shipment-amount",
           "kind": "municipality-ranking"
         },
@@ -7944,10 +7908,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:manufacturing-shipment-amount-per-employee",
           "kind": "ranking"
         },
@@ -8176,10 +8136,6 @@
         {
           "pageId": "blog:manufacturing-productivity",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:manufacturing-shipment-amount-per-establishment",
@@ -9085,10 +9041,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:marine-aquaculture-harvest",
           "kind": "ranking"
         },
@@ -9348,10 +9300,6 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:marine-fishery-aquaculture-output-value",
@@ -9771,10 +9719,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:marine-fishery-catch",
           "kind": "ranking"
         },
@@ -10004,10 +9948,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:marine-fishery-output-value",
           "kind": "ranking"
         },
@@ -10048,10 +9988,6 @@
         "total-population"
       ],
       "consumers": [
-        {
-          "pageId": "japan-theme:ports",
-          "kind": "japan-theme"
-        },
         {
           "pageId": "ranking:maritime-import-export-cargo",
           "kind": "ranking"
@@ -10280,10 +10216,6 @@
         {
           "pageId": "area-theme:47000:living-housing",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:marriages",
@@ -11539,10 +11471,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:meal-avg-time-female",
           "kind": "ranking"
         },
@@ -11767,10 +11695,6 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:meal-avg-time-male",

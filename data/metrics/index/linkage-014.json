@@ -1212,10 +1212,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:junior-high-school-count-per-100km2-habitable",
           "kind": "municipality-ranking"
         },
@@ -2319,10 +2315,6 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:juvenile-criminal-arrest-person-per-population",
@@ -6118,10 +6110,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:gender-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:labor-force-population-ratio-man",
           "kind": "ranking"
         },
@@ -6534,10 +6522,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:gender-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:labor-force-population-ratio-woman",
@@ -8448,10 +8432,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:late-elderly-medical-expense-per-insured",
           "kind": "ranking"
         },
@@ -8682,10 +8662,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:laundry-beauty-bath-industry-employees",
           "kind": "ranking"
         },
@@ -8914,10 +8890,6 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:laundry-beauty-bath-industry-establishments",
@@ -11020,10 +10992,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:library-count-per-million",
           "kind": "municipality-ranking"
         },
@@ -11457,10 +11425,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:library-lending-books",
           "kind": "ranking"
         },
@@ -11730,10 +11694,6 @@
         {
           "pageId": "area-theme:47000:community-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:community-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:library-registered-users",

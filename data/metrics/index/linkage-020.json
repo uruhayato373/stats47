@@ -3253,10 +3253,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:owner-occupied-housing-ratio",
           "kind": "municipality-ranking"
         },
@@ -4163,10 +4159,6 @@
       ],
       "consumers": [
         {
-          "pageId": "japan-theme:ports",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:passenger-ship-transport",
           "kind": "ranking"
         },
@@ -4528,10 +4520,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:innovation-patents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:patent-application-count",
           "kind": "ranking"
         },
@@ -4758,10 +4746,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:innovation-patents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:patent-inventor-count",
           "kind": "ranking"
         },
@@ -4986,10 +4970,6 @@
         {
           "pageId": "area-theme:47000:innovation-patents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:innovation-patents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:patent-registration-count",
@@ -5954,10 +5934,6 @@
         {
           "pageId": "blog:police-officer-density-vs-crime-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:penal-code-offenses-recognized-per-1000",

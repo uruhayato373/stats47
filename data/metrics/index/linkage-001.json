@@ -674,14 +674,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:artificial-forest-area",
           "kind": "ranking"
         },
@@ -2853,10 +2845,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:average-age-of-first-marriage-wife",
           "kind": "ranking"
         },
@@ -4452,10 +4440,6 @@
         {
           "pageId": "blog:traffic-accident-deaths-regional-risk",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:average-road-traffic-volume",
@@ -6303,10 +6287,6 @@
         {
           "pageId": "blog:household-spending-before-after-inflation",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:real-income",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:avg-propensity-to-consume-worker-households",
@@ -9053,10 +9033,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:baseball-field-public",
           "kind": "ranking"
         },
@@ -9819,10 +9795,6 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:beauty-salon-count",

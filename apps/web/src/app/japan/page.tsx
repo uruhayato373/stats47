@@ -1,5 +1,5 @@
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
+import { isJapanThemeMovedToTheme, listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
@@ -55,7 +55,12 @@ export default function JapanHubPage() {
           {themes.map((theme) => (
             <SurfaceLinkCard
               key={theme.themeSlug}
-              href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
+              // 全国のテーマへまとめたテーマは、転送先の全国のテーマへ直接つなぐ (2026-11-12)
+              href={
+                isJapanThemeMovedToTheme(theme.themeSlug)
+                  ? hrefFor('theme', { themeSlug: theme.themeSlug })
+                  : hrefFor('japan-theme', { themeSlug: theme.themeSlug })
+              }
               className="block"
             >
               <h3 className="text-base font-semibold text-foreground">

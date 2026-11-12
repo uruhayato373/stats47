@@ -269,7 +269,7 @@
     {
       "key": "japan-theme",
       "kind": "japan-theme",
-      "count": 50
+      "count": 8
     },
     {
       "key": "municipality-ranking",
@@ -416,6 +416,11 @@
     {
       "from": "ranking:active-job-opening-ratio",
       "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:active-job-opening-ratio",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {
@@ -1214,6 +1219,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:consumption-expenditure-multi-person-households-per-month",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:consumption-expenditure-total",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -1301,6 +1311,11 @@
     {
       "from": "ranking:current-liabilities-balance-multi-person-households-per-household",
       "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:current-liabilities-balance-multi-person-households-per-household",
+      "to": "theme:real-income",
       "relation": "contains"
     },
     {
@@ -1566,6 +1581,11 @@
     {
       "from": "ranking:education-budget-share-kakei",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:education-cost-all-households",
+      "to": "theme:education-culture",
       "relation": "contains"
     },
     {
@@ -2204,6 +2224,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:general-households",
+      "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:general-perinatal-center-count",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -2834,6 +2859,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:jr-passenger-transport",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:junior-college-count",
       "to": "theme:education-culture",
       "relation": "contains"
@@ -3311,6 +3341,11 @@
     {
       "from": "ranking:minimum-wage-by-region",
       "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:minimum-wage-by-region",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {
@@ -3920,6 +3955,11 @@
     },
     {
       "from": "ranking:port-container-count",
+      "to": "theme:ports",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:port-count",
       "to": "theme:ports",
       "relation": "contains"
     },
@@ -5276,6 +5316,11 @@
     {
       "from": "ranking:unemployment-rate",
       "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:unemployment-rate",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {

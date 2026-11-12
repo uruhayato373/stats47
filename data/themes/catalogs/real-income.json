@@ -287,6 +287,16 @@
         "surveyedAt": "2026-09-09",
         "rationale": "等価金融資産残高ジニ係数（総世帯）を既存テーマの独立章へ追加する。"
       }
+    },
+    {
+      "rankingKey": "consumption-expenditure-multi-person-households-per-month",
+      "shortLabel": "消費支出（二人以上の世帯・月平均）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+      "shortLabel": "負債現在高（二人以上の世帯）",
+      "role": "context"
     }
   ],
   "charts": [

@@ -210,10 +210,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:fishing-port-count-ksj",
           "kind": "ranking"
         },
@@ -5821,10 +5817,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:foreign-resident-count",
           "kind": "municipality-ranking"
         },
@@ -6066,10 +6058,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:foreign-resident-count-china",
           "kind": "ranking"
         },
@@ -6294,10 +6282,6 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:foreign-resident-count-china-per-100k",
@@ -6533,10 +6517,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:foreign-resident-count-korea",
           "kind": "ranking"
         },
@@ -6761,10 +6741,6 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:foreign-resident-count-korea-per-100k",
@@ -7193,10 +7169,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:foreign-resident-count-per-100k",
           "kind": "municipality-ranking"
         },
@@ -7434,10 +7406,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:foreign-resident-count-usa",
           "kind": "ranking"
         },
@@ -7662,10 +7630,6 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:foreign-resident-count-usa-per-100k",
@@ -8598,14 +8562,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:forest-area-ratio",
           "kind": "ranking"
         },
@@ -8846,10 +8802,6 @@
         {
           "pageId": "blog:roadside-station-count-vs-forest-road-length",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:forest-road-length",

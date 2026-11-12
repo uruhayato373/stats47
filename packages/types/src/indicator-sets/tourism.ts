@@ -94,6 +94,11 @@ export const TOURISM_SET: IndicatorSet = {
       "rankingKey": "airport-count",
       "shortLabel": "空港数",
       "role": "context"
+    },
+    {
+      "rankingKey": "jr-passenger-transport",
+      "shortLabel": "JR輸送人員",
+      "role": "context"
     }
   ],
   "keywords": [

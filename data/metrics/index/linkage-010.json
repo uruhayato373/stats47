@@ -1395,10 +1395,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:future-burden-ratio",
           "kind": "ranking"
         },
@@ -2487,10 +2483,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:waste-recycling",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:garbage-final-disposal",
           "kind": "municipality-ranking"
         },
@@ -2770,10 +2762,6 @@
         {
           "pageId": "blog:garbage-total-output",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:waste-recycling",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:garbage-total-output",
@@ -4853,10 +4841,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:general-hospital-avg-length-of-stay",
           "kind": "ranking"
         },
@@ -5306,10 +5290,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:general-hospital-bed-count-per-100k",
           "kind": "ranking"
         },
@@ -5542,10 +5522,6 @@
         {
           "pageId": "blog:hospital-bed-utilization-map",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:general-hospital-bed-occupancy-rate",
@@ -6013,10 +5989,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:general-hospital-count-per-100k",
           "kind": "municipality-ranking"
         },
@@ -6263,19 +6235,209 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:living-housing",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:general-households-prefecture-gap",
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:general-households",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:living-housing",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "living-housing"
+      ]
     },
     {
       "metricKey": "general-households-in-dwellings",

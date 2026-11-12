@@ -139,6 +139,16 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "rankingKey": "gini-coefficient-financial-assets",
       "shortLabel": "等価金融資産残高ジニ係数（総世帯）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "consumption-expenditure-multi-person-households-per-month",
+      "shortLabel": "消費支出（二人以上の世帯・月平均）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+      "shortLabel": "負債現在高（二人以上の世帯）",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -23,6 +23,7 @@ import {
 import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
+  isJapanThemeMovedToTheme,
   JAPAN_CATALOGS,
   MUNICIPALITY_THEME_PAGE_SLUGS,
   buildMunicipalityRankingSubtitles,
@@ -37,10 +38,10 @@ import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 import cities from '../../../data/areas/master/cities.json';
 import prefectures from '../../../data/areas/master/prefectures.json';
+import surveys from '../../../data/surveys/master/surveys.json';
 import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
 import { CATEGORIES } from '../../../packages/data-configs/src/categories';
 import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
-import surveys from '../../../data/surveys/master/surveys.json';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { KNOWN_TAG_KEYS } from '../src/config/known-tag-keys';
@@ -187,7 +188,8 @@ async function run() {
       published: publishableCityCodes.has(city.cityCode),
     });
   }
-  for (const theme of Object.values(JAPAN_CATALOGS))
+  // 全国のテーマへ 301 した日本全体のテーマは公開ページとして数えない (2026-11-12。転送表 site.theme-redirects が正本)
+  for (const theme of Object.values(JAPAN_CATALOGS).filter((t) => !isJapanThemeMovedToTheme(t.themeSlug)))
     add({
       id: `japan-theme:${theme.themeSlug}`,
       kind: 'japan-theme',

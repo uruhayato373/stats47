@@ -199,6 +199,11 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "rankingKey": "three-generation-household-members",
       "shortLabel": "3世代世帯人員",
       "role": "context"
+    },
+    {
+      "rankingKey": "general-households",
+      "shortLabel": "一般世帯数",
+      "role": "context"
     }
   ],
   "keywords": [

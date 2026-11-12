@@ -199,6 +199,11 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
       "shortLabel": "中学校の不登校長期欠席生徒比率",
       "role": "context"
+    },
+    {
+      "rankingKey": "education-cost-all-households",
+      "shortLabel": "教育費（全世帯・月平均）",
+      "role": "context"
     }
   ],
   "keywords": [

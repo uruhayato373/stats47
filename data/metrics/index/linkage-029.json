@@ -672,10 +672,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:suicides-per-100k",
           "kind": "ranking"
         },
@@ -1423,10 +1419,6 @@
         {
           "pageId": "blog:swimming-pool-public-vs-total-general-project-investment",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:swimming-pool-public",
@@ -3589,10 +3581,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:taxpayer-ratio-per-pref-resident",
           "kind": "ranking"
         },
@@ -5056,10 +5044,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:theft-criminal-arrest-rate",
           "kind": "ranking"
         },
@@ -5329,10 +5313,6 @@
         {
           "pageId": "blog:crime-rate-regional-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:theft-offenses-recognized-per-1000",

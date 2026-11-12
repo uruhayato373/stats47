@@ -237,6 +237,11 @@
         "surveyedAt": "2026-09-09",
         "rationale": "空港数を既存テーマの独立章へ追加する。"
       }
+    },
+    {
+      "rankingKey": "jr-passenger-transport",
+      "shortLabel": "JR輸送人員",
+      "role": "context"
     }
   ],
   "charts": [

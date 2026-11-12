@@ -49,6 +49,11 @@ export const PORTS_SET: IndicatorSet = {
       "rankingKey": "passenger-ship-transport",
       "shortLabel": "旅客船輸送人員",
       "role": "context"
+    },
+    {
+      "rankingKey": "port-count",
+      "shortLabel": "港湾調査の対象港数（甲種・乙種）",
+      "role": "context"
     }
   ],
   "keywords": [
