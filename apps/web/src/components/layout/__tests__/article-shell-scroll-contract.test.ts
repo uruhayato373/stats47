@@ -18,13 +18,17 @@ describe("right rail scroll contract", () => {
     expect(source).not.toContain("max-h-[calc(100vh");
     // 列幅は PageShell の共通グリッドが所有。カードの実幅・全境界は rail-layout.spec.ts が検査する。
     expect(source).toContain('className={RIGHT_RAIL_GRID_CLASS}');
-    expect(source).not.toMatch(/w-\[316px\]|shrink-0|rail:flex/);
+    expect(source).not.toMatch(/w-\[316px\]|shrink-0/);
 
     // レールはページと一緒に流れる。追従する領域 (旧 railSticky) を戻さない (2026-09-25)。
     const classStart = source.indexOf("export const ARTICLE_RAIL_CLASS");
     const classSource = source.slice(classStart, source.indexOf(";", classStart));
     expect(classSource).not.toContain("sticky");
     expect(source).not.toContain("railSticky");
+    // 右レールは本文の横で本文と同じ高さまで伸びる flex の列。最後に追従する広告 (RailAdSlot の sticky) は親の高さの中でしか
+    // 動けず、中身の高さで終わる格子のままでは追従しなかった (2026-11-12 にブログ・ランキング・市区町村のランキングで実測)
+    expect(classSource).toContain("rail:self-stretch");
+    expect(classSource).toContain("rail:flex-col");
   });
 
   it("RightRailWidgets cannot opt into an independent rail scroll", () => {

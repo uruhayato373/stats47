@@ -112,7 +112,7 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toContain('leftRail');
     expect(PAGE).not.toContain('RailCategoryList');
     expect(PAGE).not.toContain('カテゴリから探す');
-    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack>/);
+    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack[\s>]/);
     expect(PAGE).toContain('<PageShell rightRail={rightRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
     expect(PAGE).not.toContain('<PortalCategoryGrid');

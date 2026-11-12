@@ -1,11 +1,13 @@
 
 import { fetchPrefectures } from '@stats47/area';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { Lightbulb, MapPin, Newspaper, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
 
+
 import { PageShell, PageHeader } from '@/components/layout';
 import { PageSections } from '@/components/layout/PageShell';
-import { RailStack } from '@/components/rail';
+import { RailLinksCard, RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
 import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
@@ -17,11 +19,12 @@ import {
   RailAdSlot,
 } from '@/features/ads';
 import { PrefectureNavigator } from '@/features/area-profile';
-import { listLatestArticles } from '@/features/blog/server';
+import { listLatestArticles, readPopularArticlesFromR2 } from '@/features/blog/server';
 import { PortalBlogCard, PortalUseCaseGrid } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
-import { ADSENSE_DISPLAY_ENABLED, HOME_ROW_1, HOME_ROW_2, RAIL_RECT } from '@/lib/google-adsense';
+import { ADSENSE_DISPLAY_ENABLED, HOME_RAIL_STICKY, HOME_ROW_1, HOME_ROW_2, RAIL_RECT } from '@/lib/google-adsense';
+import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
 import { DEFAULT_OGP_IMAGE_PATH, SITE_ALTERNATE_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_ORIGIN } from '@/config/site';
 
@@ -113,13 +116,35 @@ export default async function HomePage() {
   // (上限 580px) に出す。ユニットはホーム専用 (同日に作成。それまでは一覧ページと共用で、ホームの分を測れなかった)。
   // 右レールの AdSense (RAIL_RECT) とは別のユニット
   const [homeRow1, homeRow2] = composeAdRows([['adsense'], ['adsense']], [HOME_ROW_1, HOME_ROW_2], []);
+  // よく読まれている記事 (GA4 の直近 28 日の閲覧数・週次。ブログの右レールと同じ台帳)。本文の新着の記事の一覧に出した記事は除く
+  const popularArticles = (await readPopularArticlesFromR2('', 13).catch(() => []))
+    .filter((article) => !latestArticles.some((latest) => latest.slug === article.slug))
+    .slice(0, 5);
   // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
-  // 右レールは AdSense と運営者プロフィール (2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった。
-  // 固定の PR (SidebarPromoBanner) はランキングの指標が労働のときだけ出る部品で、ここでは描かれていなかったので外した)
+  // 右レール (2026-11-12 オーナー決定・推奨案): PC で中身が約 500px しかなく本文 (約 2,800px) の下が約 2,200px 空いていたので、
+  // ブログの右レールと同じく「よく読まれている記事」と、最後に追従する 300×600 を足した。上の AdSense と追従する枠の間には
+  // 記事の一覧と運営者のプロフィールが入る (広告の枠の台帳の noAdjacentSlots)。追従する枠は PC だけ (RailAdSlot の sticky)
   const rightRail = (
-    <RailStack>
+    <RailStack className="rail:h-full">
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
+      <RailLinksCard
+        title="よく読まれている記事"
+        items={popularArticles.map((article) => ({
+          id: article.slug,
+          label: article.title,
+          href: hrefFor('blog', { slug: article.slug }),
+          trackingLabel: `popular:${article.slug}`,
+          thumbnail: {
+            lightSrc: blogThumbnailUrl(article.slug, 'light'),
+            darkSrc: blogThumbnailUrl(article.slug, 'dark'),
+            alt: '',
+          },
+        }))}
+        layout="ranked"
+        trackingSurface="home_blog"
+      />
       <OperatorProfileCard />
+      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={HOME_RAIL_STICKY} sticky />}
     </RailStack>
   );
 

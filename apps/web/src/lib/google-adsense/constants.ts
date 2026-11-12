@@ -210,6 +210,8 @@ export const THEME_END: AdSlotConfig = { slotId: "2430685118", format: "rectangl
  */
 export const HOME_ROW_1: AdSlotConfig = { slotId: "6019089689", format: "rectangle" }; // stats47-home-row-1 (ディスプレイ / レスポンシブ)
 export const HOME_ROW_2: AdSlotConfig = { slotId: "3189892156", format: "rectangle" }; // stats47-home-row-2 (ディスプレイ / レスポンシブ)
+/** ホーム: 右レールの最後に追従する 300×600 (PC だけ)。2026-11-12 オーナー決定 (推奨案)。右レールの中身が本文より短く、PC で下が約 2,200px 空いていた。同日に作成 */
+export const HOME_RAIL_STICKY: AdSlotConfig = { slotId: "3704063320", format: "rectangle" }; // stats47-home-rail-sticky (追従する 300×600)
 
 /**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）

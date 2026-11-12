@@ -30,9 +30,13 @@ interface ArticleShellProps {
  * 右レール。狭い幅は本文の下 (mt-4・間隔 16px) に積み、988px 以上は幅 316px の列 (間隔 12px)。
  * 本文の下に積んだときは、2 つ入る幅 (640px 以上) で 2 列の格子にする (2026-10-29 オーナー決定。旧: 1 列のままで、
  * 300×250 の広告や PR が 1 枚ずつ縦に並び、右に 400〜500px の空きができていた)
+ *
+ * 本文の横にあるときは本文と同じ高さまで伸ばした flex の列にする (2026-11-12)。最後に追従する広告 (RailAdSlot の sticky) は
+ * 親の高さの中でしか動けないので、中身の高さで終わる格子のままでは追従しなかった (ブログ・ランキング・市区町村のランキング)。
+ * flex の列の子は幅いっぱい (align-items: stretch) で、格子の 1 列と同じ見た目になる
  */
 export const ARTICLE_RAIL_CLASS =
-  'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 rail:mt-0 rail:grid-cols-1 rail:gap-3';
+  'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 rail:mt-0 rail:flex rail:flex-col rail:gap-3 rail:self-stretch';
 
 /**
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。
