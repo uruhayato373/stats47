@@ -30,12 +30,7 @@ function loadThemeRouteMatchers() {
       .filter((f) => f.endsWith(".json"))
       .map((f) => f.slice(0, -".json".length)),
   );
-  const japanSlugs = new Set(
-    ["themes.japan-catalogs", "themes.japan-kakei-catalogs"].flatMap((id) =>
-      Object.keys(JSON.parse(readFileSync(join(PROJECT_ROOT, datasetPath(id)), "utf8")).themes ?? {}),
-    ),
-  );
-  return routes
+  const routeMatchers = routes
     .filter((r) => r.pageType === "theme")
     .map((r) => {
       const params = [];
@@ -43,8 +38,13 @@ function loadThemeRouteMatchers() {
         params.push(name);
         return "([^/]+)";
       });
-      return { regex: new RegExp(`^${source}/?$`), params, slugs: r.scope === "japan" ? japanSlugs : themeSlugs };
+      return { regex: new RegExp(`^${source}/?$`), params, slugs: themeSlugs };
     });
+  // テーマへ 301 した旧 URL (日本全体のテーマ /japan/<テーマ> など。2026-11-12 に全国のテーマへまとめた) もテーマに数える。
+  // 転送の前の週の GA4・GSC の記録にはこの URL が残るので、前後の週でテーマの数が切れないようにする。正本は転送表
+  const redirects = JSON.parse(readFileSync(join(PROJECT_ROOT, datasetPath("site.theme-redirects")), "utf8")).pathRedirects ?? [];
+  const redirectMatchers = redirects.map((row) => ({ regex: new RegExp(row.pattern) }));
+  return [...routeMatchers, ...redirectMatchers];
 }
 
 let themeRouteMatchers;
@@ -53,6 +53,7 @@ function isThemePath(path) {
   return themeRouteMatchers.some(({ regex, params, slugs }) => {
     const m = path.match(regex);
     if (!m) return false;
+    if (!params) return true;
     const slug = m[params.indexOf("themeSlug") + 1];
     return slug !== undefined && slugs.has(decodeURIComponent(slug));
   });
