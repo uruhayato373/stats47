@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "period": {
-    "periodStart": "2026-11-02",
-    "periodEnd": "2026-11-08",
+    "periodStart": "2026-11-03",
+    "periodEnd": "2026-11-09",
     "windowDays": 7
   },
-  "inputHash": "a9db01c805f532411609fab174ebc4bdc5b9dd779f0985c155de7f93d2cfe3fa",
+  "inputHash": "4012e0adf8df7be52d67110de1e4ed842f14c4c72644557c8489b230705736c4",
   "movements": [
     {
       "keyword": "自治体 数",
@@ -18,22 +18,13 @@
       "change": -69.33333333333333
     },
     {
-      "keyword": "埼玉 県 人口",
-      "targetPath": "/areas/11000/cities/11100",
-      "before": 26,
-      "after": 87,
-      "beforeImpressions": 1,
+      "keyword": "明石 市 人口",
+      "targetPath": "/areas/28000/cities/28203",
+      "before": 9,
+      "after": 67,
+      "beforeImpressions": 4,
       "impressions": 1,
-      "change": -61
-    },
-    {
-      "keyword": "高松市の人口",
-      "targetPath": "/areas/37000/cities/37201",
-      "before": 8,
-      "after": 68,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -60
+      "change": -58
     },
     {
       "keyword": "松本 市 人口",
@@ -54,13 +45,13 @@
       "change": -57.9
     },
     {
-      "keyword": "明石 市 人口",
-      "targetPath": "/areas/28000/cities/28203",
-      "before": 9.166666666666666,
-      "after": 67,
-      "beforeImpressions": 6,
+      "keyword": "富士 市 人口",
+      "targetPath": "/areas/22000/cities/22210",
+      "before": 61,
+      "after": 7,
+      "beforeImpressions": 1,
       "impressions": 1,
-      "change": -57.833333333333336
+      "change": 54
     },
     {
       "keyword": "品川 区 人口",
@@ -79,6 +70,15 @@
       "beforeImpressions": 2,
       "impressions": 1,
       "change": -48.5
+    },
+    {
+      "keyword": "豊田市 人口",
+      "targetPath": "/areas/23000/cities/23211",
+      "before": 4,
+      "after": 51.333333333333336,
+      "beforeImpressions": 1,
+      "impressions": 3,
+      "change": -47.333333333333336
     },
     {
       "keyword": "富山市 人口",
@@ -106,7 +106,16 @@
       "reason": "query-page-not-reported"
     }
   ],
-  "selected": null,
+  "selected": {
+    "keyword": "高崎市 人口",
+    "targetPath": "/areas/10000/cities/10202",
+    "rank": 7.068452380952381,
+    "impressions": 336,
+    "clicks": 0,
+    "group": 5,
+    "previousMethod": null,
+    "editableFile": null
+  },
   "observing": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
