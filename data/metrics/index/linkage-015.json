@@ -5665,6 +5665,14 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:manufacturing-employees",
           "kind": "ranking"
         },
@@ -6333,6 +6341,14 @@
         {
           "pageId": "municipality-theme:manufacturing",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:manufacturing-establishments",
@@ -7516,6 +7532,18 @@
         {
           "pageId": "municipality-theme:manufacturing",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-12",
+          "kind": "product"
         },
         {
           "pageId": "ranking:manufacturing-shipment-amount",

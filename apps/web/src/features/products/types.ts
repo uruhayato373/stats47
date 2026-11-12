@@ -8,6 +8,8 @@ export interface StorefrontProduct {
   readonly channel: StorefrontChannel;
   readonly channelLabel: string;
   readonly title: string;
+  /** 販売先に現在掲示されている名称。サイトの説明・件数とは分けて照合する。 */
+  readonly listingTitle?: string;
   /** サイト内の短い商品名。販売先の正式な title はメタデータ・計測に保つ。 */
   readonly displayTitle?: string;
   readonly description: string;
@@ -34,5 +36,7 @@ export interface StorefrontShowcaseSection {
   readonly kind: "chart" | "file";
   readonly heading: string;
   readonly lead: string;
+  /** 図の読み方に関わる条件。用途の説明とは分けて表示する。 */
+  readonly note?: string;
   readonly figures: readonly { readonly file: string; readonly alt: string }[];
 }

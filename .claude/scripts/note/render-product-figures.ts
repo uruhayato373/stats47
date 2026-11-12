@@ -2,8 +2,8 @@
  * render-product-figures.ts — note のデータ商品の見本画像を、型の台帳の型だけで描く。
  *
  * 入力は記事の作業コピーにある figure-specs.json (画像ごとに file・template・input)。template は
- * 型の台帳 data/content-operations/image-templates.json の id で、描画は台帳の描画器 (apps/admin/lib/template-*、
- * 全国の市区町村の地図はバズマップ) だけが行う。台帳に無い型・ここで描けない型は描かずに止める。
+ * 型の台帳 data/content-operations/image-templates.json の id で、描画は台帳の共通描画器だけが行う。
+ * 市区町村の全国図・県内図も同じ template-area-map を使う。台帳に無い型は描かずに止める。
  * figure-specs.json は記事と一緒に R2 へ保存し (note:article save)、build-note-figure-ledger.mjs が画像ごとの型を読む。
  * 経路の登録は config/image-generation-routes.json の note-product-samples。
  *
@@ -60,16 +60,16 @@ const SVG_RENDERERS: Record<string, (input: never) => string> = {
   'file-preview': (input: FilePreview) => renderFilePreview(input),
 };
 
-/** 1 つの県の中の市区町村の地図は管理画面の型 (renderAreaMapChart) が描く。境界は県と政令市の扱いから公開 R2 で引く */
+/** 全国・県内の市区町村地図は同じ型。範囲と政令市の扱いを境界の取得にも渡す。 */
 async function renderAreaMap(input: Omit<AreaChartInput, 'presentation'> & { metricKey: string; grain: Grain }) {
   const { scope } = input;
-  if (scope.level !== 'municipality' || scope.within.kind !== 'prefecture') throw Error('県の地図は 1 つの県の中の市区町村だけを描く');
+  if (scope.level !== 'municipality') throw Error('市区町村の表示範囲が必要です');
   const chart = resolveAreaChart({ ...input, presentation: presentationOf(input.metricKey, input.grain) });
-  const topology = await fetchMunicipalityTopologyForWardMode(scope.within.prefCode, scope.wardMode) as unknown as Topology;
+  const topology = await fetchMunicipalityTopologyForWardMode(scope.within.kind === 'prefecture' ? scope.within.prefCode : undefined, scope.wardMode) as unknown as Topology;
   return renderAreaMapChart(chart, topology);
 }
 
-/** 全国の市区町村の地図は管理画面の型が描かない (県の中だけ) ので、台帳の choropleth の描画器であるバズマップで描く */
+/** 点・線等を重ねる既存のバズ地図specも同じ型台帳から描く。 */
 function renderBuzzMap(spec: unknown, outPath: string) {
   const props = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'product-figure-')), 'props.json');
   fs.writeFileSync(props, JSON.stringify({ spec }));
@@ -95,7 +95,7 @@ export async function renderProductFigures(specPath: string, outDir = path.dirna
     if (!ledger.has(figure.template) || figure.template === 'unclassified') throw Error(`${figure.file}: 型の台帳に無い型 ${figure.template}`);
     const out = path.join(outDir, figure.file);
     fs.mkdirSync(path.dirname(out), { recursive: true });
-    // 地図の型は1つ。全国の市区町村=buzzMap、県内の市区町村=area、47都道府県=prefecture。
+    // 地図の型は1つ。市区町村=area、47都道府県=prefecture、複合レイヤー=buzzMap。
     const map = figure.template === 'choropleth' ? (figure.input as { buzzMap?: unknown; area?: Parameters<typeof renderAreaMap>[0]; prefecture?: PrefectureMapInput }) : null;
     if (map && [map.buzzMap, map.area, map.prefecture].filter(Boolean).length !== 1) throw Error(`${figure.file}: 地図の入力は buzzMap / area / prefecture の1つ`);
     if (map?.buzzMap) {

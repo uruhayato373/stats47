@@ -1153,6 +1153,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-10",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:sewerage-penetration-rate-2012on",
           "kind": "ranking"
         }
@@ -8405,6 +8409,10 @@
         {
           "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:single-person-households",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedAt": "2026-11-07T23:56:49.443Z",
-  "masterSurveyCount": 151,
+  "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2740,
     "activeMetrics": 2596,
@@ -2517,6 +2517,12 @@
     {
       "surveyId": "boj-statistics",
       "rankingCount": 5,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "broadcast-reception-contract-statistics",
+      "rankingCount": 0,
       "themeKeys": [],
       "blogSlugs": []
     },

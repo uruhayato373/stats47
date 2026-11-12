@@ -7692,6 +7692,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "product:data-p-01",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:ratio-65-plus",
           "kind": "ranking"
         },

@@ -81,5 +81,131 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-08",
+    "version": "analysis-20261112",
+    "planSha256": "50058e9377fad98e2c2b8cc481d6443787e46b589f9162197252b03eaf4592ee",
+    "resolvedPlanSha256": "2f5f255ec38ea48652ce094e6582606b8cd40c728759d637a9d9e44f9d9e2117",
+    "sources": [
+      {
+        "id": "municipal-commerce",
+        "inputs": [
+          {
+            "metricKey": "annual-sales-amount",
+            "statsDataId": "0000020203",
+            "code": "C3501",
+            "unit": "百万円"
+          },
+          {
+            "metricKey": "total-population",
+            "statsDataId": "0000020201",
+            "code": "A1101",
+            "unit": "人"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2020
+        ],
+        "retrievedAt": "2026-11-12T06:05:43.700Z",
+        "tableTitle": "Ｃ　経済基盤 / Ａ　人口・世帯",
+        "rows": 3482,
+        "areas": 1741,
+        "missing": 15,
+        "coverage": [
+          {
+            "year": 2020,
+            "total": 1741,
+            "kept": 1726,
+            "dropped": 15,
+            "share": 0.9913842619184376,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "908bafa581c4d9f955898c1319e8e2c0ed6fd6b15d562ce5c35283b8f2fd46fb"
+      }
+    ],
+    "results": 46,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "33addd82082e78e82cdc0bdd62ec82dbf550d34e25f0b10554e1a34b74f2170f",
+        "bytes": 349563
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "fcd5e5ca308a3f5c825c05672750e55c4f7b8cf1d75354816df09f28b3edccd8",
+        "bytes": 7255
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "15b102c3ff1061ab9ab9258821039f30bea669053cfea8d1fd7a53166fc3b187",
+        "bytes": 144014
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "5e3b9094e387fdb080d106172fb710edc6a5e0b8f61f413bf0f7f9e53b3dbeec",
+        "bytes": 1393
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "23ae9192d5428402bb59f67f5ab9166ba1a576c2b85138ae46ff98e83f2c6049",
+        "bytes": 5968
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "7c3712f4b8005077f48c1ec6356ad7bad3e9f4b7555cd5dd278bcbf535238ccf",
+        "bytes": 7730
+      },
+      {
+        "file": "README.md",
+        "sha256": "bdd47edc131b459717cfb90694cef7e7311ca9bd78596485171ed789db12c4ff",
+        "bytes": 2642
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
+        "bytes": 272
+      },
+      {
+        "file": "images/municipal-sales-scale.png",
+        "sha256": "c20d5258076fc25e0b58f5241669f471d3d8681f9d998484fa1d6d187b5594c0",
+        "bytes": 169607
+      },
+      {
+        "file": "images/municipal-sales-per-resident.png",
+        "sha256": "69d39a9e1ec60505123fe18d1dbffe7da6ade0db0c5d040663b102b394dde18c",
+        "bytes": 154555
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "f5120e8dcd5f8c7265e7d17abd180b2fb2962fe4ff3a6c2e390a9c83bf9d7141",
+        "bytes": 124405
+      },
+      {
+        "file": "inputs/municipal-commerce.json",
+        "sha256": "908bafa581c4d9f955898c1319e8e2c0ed6fd6b15d562ce5c35283b8f2fd46fb",
+        "bytes": 14391044
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "e21c6e87e54145ca8cc3baa1b7ad2b9313a719f121930cf900485f271856a9b3",
+        "bytes": 3679
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "5bcf71b79a29921677a2165568327ec9b6a416458491fb8df8e79b960986ee8a",
+        "bytes": 1032515
+      }
+    ]
+  }
 }

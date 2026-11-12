@@ -4876,6 +4876,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-07",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:average-temperature",
           "kind": "ranking"
         },
@@ -10690,6 +10694,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-14",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:beef-consumption-expenditure",
           "kind": "ranking"
         },
@@ -11175,6 +11183,10 @@
         {
           "pageId": "japan-theme:household-food-spending",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "product:data-p-14",
+          "kind": "product"
         },
         {
           "pageId": "ranking:beef-consumption-quantity",

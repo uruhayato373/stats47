@@ -1,3 +1,4 @@
+import { prefToCityStatsDataId } from "../src/ssds/entity-source";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 /**
  * page-data-batch — TS-config 駆動の e-Stat → R2 直行バッチ
@@ -731,6 +732,28 @@ export function cityEstatSource(
   return cityStatsDataId ? { ...src, statsDataId: cityStatsDataId } : null;
 }
 
+/** 取得に成功した市区町村の表・項目を値と一緒に返す。実在年調査と本取り込みが同じ経路を使う。 */
+export async function fetchCityData(
+  appId: string,
+  config: MetricConfig,
+  src: Extract<SourceConfig, { kind: "estat" }>,
+  fetchSource = fetchEstatData,
+  resolveCategory = resolveCityCat01,
+): Promise<(EstatFetchResult & { source: Extract<SourceConfig, { kind: "estat" }> }) | null> {
+  let source = cityEstatSource(config, src);
+  if (!source) return null;
+  let fetched = await fetchSource(appId, source);
+  // 指標名の完全一致による再解決は、明示citySourceがなく最初の取得が0件の場合だけ。
+  if (!config.citySource && fetched.values.length === 0 && src.cdCat01) {
+    const alt = await resolveCategory(appId, src.statsDataId, source.statsDataId, src.cdCat01);
+    if (alt) {
+      source = { ...source, cdCat01: alt };
+      fetched = await fetchSource(appId, source);
+    }
+  }
+  return { ...fetched, source };
+}
+
 /**
  * 取り込みが cities.json に書く行を、`years` で絞らずに返す (e-Stat の実在年の台帳用)。
  * 表の選び方・cdCat01 の引き直し・現行の市区町村マスタにあるコードだけを採る判定は processOne と同じ。
@@ -741,15 +764,9 @@ export async function fetchCityRowsAllYears(
   config: MetricConfig,
   src: Extract<SourceConfig, { kind: "estat" }>,
 ): Promise<{ rows: ReadonlyArray<{ areaCode: string; yearCode: string; value: number | null }>; raw: EstatFetchResult["raw"] } | null> {
-  const citySource = cityEstatSource(config, src);
-  if (!citySource) return null;
-  let fetched = await fetchEstatData(appId, citySource);
-  if (!config.citySource && fetched.values.length === 0 && src.cdCat01) {
-    const alt = await resolveCityCat01(appId, src.statsDataId, citySource.statsDataId, src.cdCat01);
-    if (alt) fetched = await fetchEstatData(appId, { ...src, statsDataId: citySource.statsDataId, cdCat01: alt });
-  }
-  const shapeConfig = config.citySource ? { ...config, source: config.citySource } : config;
-  return { rows: shapeForCity({ ...shapeConfig, years: "all" }, fetched.values).rows, raw: fetched.raw };
+  const fetched = await fetchCityData(appId, config, src);
+  if (!fetched) return null;
+  return { rows: shapeForCity({ ...config, years: "all" }, fetched.values, fetched.source).rows, raw: fetched.raw };
 }
 
 /** 5 桁エリアコード判定 (都道府県集計行 NN000) */
@@ -791,16 +808,7 @@ export function isIngestableCityCode(code: string, currentCities: ReadonlyMap<st
  *   - source が初めから市区町村表 (00000202CC / 00000203CC) の市区町村専用 metric はその表を使う
  *     (以前は null を返し、current-balance-ratio-city 等が取り込みで city=skip になっていた)
  */
-export function prefToCityStatsDataId(prefId: string): string | null {
-  if (/^000002(02|03)\d{2}$/.test(prefId)) return prefId;
-  const m = /^0000010([12])(\d{2})$/.exec(prefId);
-  if (!m) return null;
-  const series = m[1]; // "1"=基礎データ, "2"=社会生活統計指標
-  const catStr = m[2]; // "01".."13"
-  const cat = Number(catStr);
-  if (cat < 1 || cat > 11) return null; // 12,13 は city 表なし
-  return series === "1" ? `0000020${"2"}${catStr}` : `0000020${"3"}${catStr}`;
-}
+export { prefToCityStatsDataId } from "../src/ssds/entity-source";
 
 // ---- area マスタ (areaName 付与用) -------------------------------------
 interface AreaMasters {
@@ -896,9 +904,10 @@ interface WrittenStatsMeta {
 }
 
 /** meta を組み立てる共通処理 */
-function buildMeta(config: MetricConfig, rows: ShapedRow[]): WrittenStatsMeta {
+function buildMeta(config: MetricConfig, rows: ShapedRow[], actualSource?: Extract<SourceConfig, { kind: "estat" }>): WrittenStatsMeta {
   const years = Array.from(new Set(rows.map((r) => r.yearCode))).sort();
   const areas = new Set(rows.map((r) => r.areaCode));
+  const canonical = buildRecipe(config);
   return {
     rowCount: rows.length,
     yearRange: (years.length > 0 ? [years[0], years[years.length - 1]] : null) as
@@ -906,8 +915,8 @@ function buildMeta(config: MetricConfig, rows: ShapedRow[]): WrittenStatsMeta {
       | null,
     areaCount: areas.size,
     generatedAt: new Date().toISOString(),
-    // 値の隣にレシピを焼く。監査 (検査 k) がこの configHash と現在の config を突き合わせる
-    recipe: buildRecipe(config),
+    // 取得座標は実際の市区町村表、drift監査のconfigHashは元の正準configとの比較を維持する。
+    recipe: actualSource ? { ...buildRecipe({ ...config, source: actualSource }), configHash: canonical.configHash } : canonical,
   };
 }
 
@@ -947,9 +956,9 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
 }
 
 /** 取得 raw values → StatsValues 構造 (city)。areaName(市区町村マスタ join)/unit/yearName/rank を付与。 */
-function shapeForCity(config: MetricConfig, values: EstatValue[]) {
+export function shapeForCity(config: MetricConfig, values: EstatValue[], actualSource: Extract<SourceConfig, { kind: "estat" }>) {
   const masters = loadAreaMasters();
-  const scale = valueScaleOf(config);
+  const scale = actualSource.valueScale;
   const rawRows: ShapedRow[] = values
     .filter((v) => isIngestableCityCode(v["@area"], masters.city) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
@@ -972,7 +981,7 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
     );
   const rows = applyValueCorrections(config.key, rawRows, config.cityValueCorrections ?? []);
   assignRanks(rows);
-  return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(config, rows) };
+  return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(config, rows, actualSource) };
 }
 
 type ProcessStatus =
@@ -1137,16 +1146,13 @@ export async function processOne(
   allowEmpty: ReadonlySet<string> = new Set(),
   allowShape: ReadonlySet<string> = new Set(),
 ): Promise<ProcessResult> {
-  // 県が手動公表表でも、市区町村の独立したe-Stat系列は更新できる。
-  // entitiesをcityだけにして再入するため、県values.jsonへ市の値を書かない。
-  if ((config.source.kind === "external" || config.source.kind === "mlit")
-      && config.entities.includes("city") && config.citySource) {
-    return processOne({ ...config, source: config.citySource, entities: ["city"] }, appId, dryRun, allowEmpty, allowShape);
-  }
+  // 県が外部資料でも独立したcitySourceは更新する。正準configはhash照合のため保持する。
+  const independentCity = (config.source.kind === "external" || config.source.kind === "mlit")
+    && config.entities.includes("city") && Boolean(config.citySource);
   if (config.source.kind === "calculated") {
     return { key: config.key, ok: false, status: "skip", message: "calculated metric skipped (deps required)" };
   }
-  if (config.source.kind === "external" || config.source.kind === "mlit") {
+  if (!independentCity && (config.source.kind === "external" || config.source.kind === "mlit")) {
     const relabeled = dryRun ? 0 : await relabelPublishedYearNames(config);
     return { key: config.key, ok: false, status: "skip", message: `${config.source.kind} source skipped (fetcher not implemented yet)${relabeled ? ` yearName=${relabeled}` : ""}` };
   }
@@ -1157,10 +1163,12 @@ export async function processOne(
       return { key: config.key, ok: false, status: "skip", message: "kakei-chousa missing filter.statsDataId skipped" };
     }
     src = mapped;
-  } else {
+  } else if (config.source.kind === "estat") {
     src = config.source;
+  } else {
+    src = config.citySource!;
   }
-  const wantPref = config.entities.includes("prefecture");
+  const wantPref = !independentCity && config.entities.includes("prefecture");
   const wantCity = config.entities.includes("city");
   if (!wantPref && !wantCity) {
     return { key: config.key, ok: false, status: "skip", message: "no prefecture/city entity skipped (port/migration not in scope)" };
@@ -1320,29 +1328,15 @@ export async function processOne(
     }
 
     if (wantCity) {
-      const cityStatsDataId = config.citySource?.statsDataId ?? prefToCityStatsDataId(src.statsDataId);
-      if (!cityStatsDataId) {
+      const city = await fetchCityData(appId, config, src);
+      if (!city) {
         notes.push("city=skip(no-city-table)");
       } else {
-        const citySource = config.citySource ?? { ...src, statsDataId: cityStatsDataId };
-        let fetched = await fetchEstatData(appId, citySource);
-        // ★city 表はコードを振り直していることがある (2026-07-31 実測)。
-        //   コードで 0 行だったときだけ、指標名の完全一致で cdCat01 を引き直す。
-        //   取得できている metric の経路は通らないので、既存の挙動は変わらない。
-        if (!config.citySource && fetched.values.length === 0 && src.cdCat01) {
-          const alt = await resolveCityCat01(appId, src.statsDataId, cityStatsDataId, src.cdCat01);
-          if (alt) {
-            notes.push(`city-cat01=${src.cdCat01}->${alt}`);
-            fetched = await fetchEstatData(appId, {
-              ...src,
-              statsDataId: cityStatsDataId,
-              cdCat01: alt,
-            });
-          }
-        }
-        fetched = await applySupplements(appId, config, fetched, supplementCache, notes, "city");
+        if (!config.citySource && city.source.cdCat01 !== src.cdCat01)
+          notes.push(`city-cat01=${src.cdCat01}->${city.source.cdCat01}`);
+        const fetched = await applySupplements(appId, config, city, supplementCache, notes, "city");
         const values = fetched.values;
-        const payload = shapeForCity(config.citySource ? { ...config, source: config.citySource } : config, values);
+        const payload = shapeForCity(config, values, city.source);
         const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
         const shapeOk = notEmpty
           ? await gateShape("city", payload, fetched.raw, "cities.json")

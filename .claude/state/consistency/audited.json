@@ -1,7 +1,11 @@
 {
-  "hash": "79a723e1b763492ff5e59c25da7a22a7f7f9ca2651be93b9a9071e8b3b2f2a38",
-  "audited_at": "2026-11-12T03:45:12",
+  "hash": "cb84826fe499536684c2bd3e0cf9f8243c5d5a747685643c7f6b0c7959c91a6e",
+  "audited_at": "2026-11-12T05:43:35",
   "files": [
-    ".claude/scripts/lib/pre-push-tests.mjs"
+    ".claude/rules/data-pack-standards.md",
+    ".claude/scripts/note/__tests__/build-product-landing-preview.test.ts",
+    ".claude/scripts/note/build-product-landing-preview.ts",
+    ".claude/scripts/products/build-analysis-pack.ts",
+    ".claude/scripts/surveys/build-survey-portfolio.ts"
   ]
 }

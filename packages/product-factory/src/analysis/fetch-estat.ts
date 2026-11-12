@@ -1,8 +1,5 @@
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_AREA_CODES } from "@stats47/area";
-import type { ClassItem, ClassObject } from "../../../estat-api/src/meta-info/types";
-import type { EstatStatsDataResponse, EstatValue } from "../../../estat-api/src/stats-data/types";
-import { extractYearCode } from "../../../estat-api/src/stats-data/utils/extract-year-code";
-import { parseEstatValue } from "../../../estat-api/src/stats-data/utils/parse-estat-value";
+import type { ClassItem, ClassObject, EstatStatsDataResponse, EstatValue } from "@stats47/estat-api/api";
 
 export interface AnalysisSource {
   id: string;
@@ -26,12 +23,10 @@ export interface AnalysisObservation {
 const PAGE_SIZE = 100_000;
 const asArray = <T>(value: T | T[]): T[] => Array.isArray(value) ? value : [value];
 
-function yearOf(code: string): number {
-  // 月・四半期を年へ潰さない。対象は年次とSSDSの年度コードのみ。
-  if (!/^\d{4}(?:[01]00000)?$/.test(code)) throw new Error(`Unsupported annual time code: ${code}`);
-  const year = Number(extractYearCode(code));
-  if (year < 1900 || year > 2100) throw new Error(`Invalid year: ${code}`);
-  return year;
+function withoutCredentials<T extends { PARAMETER?: object }>(envelope: T): T {
+  if (!envelope.PARAMETER) return envelope;
+  return { ...envelope, PARAMETER: Object.fromEntries(Object.entries(envelope.PARAMETER)
+    .filter(([key]) => !/^(app[_-]?id|.*token|.*secret|api[_-]?key|password)$/i.test(key))) };
 }
 
 function classMap(axis: ClassObject | undefined, label: string): Map<string, ClassItem> {
@@ -47,8 +42,9 @@ function assertSource(source: AnalysisSource): void {
     throw new Error("Analysis source requires id, table, metrics and years");
   }
   if (new Set(source.years).size !== source.years.length) throw new Error("Duplicate source years");
+  if (!["prefecture", "municipality"].includes(source.grain)) throw new Error(`Invalid source grain: ${source.grain}`);
   for (const year of source.years) {
-    if (!Number.isInteger(year) || yearOf(String(year)) !== year) throw new Error(`Invalid source year: ${year}`);
+    if (!Number.isInteger(year) || year < 1900 || year > 2100) throw new Error(`Invalid source year: ${year}`);
   }
   for (const field of ["id", "code"] as const) {
     if (new Set(source.metrics.map((metric) => metric[field])).size !== source.metrics.length) {
@@ -69,10 +65,14 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
 }> {
   assertSource(source);
   // CLI callers load environment before calling; the API package captures appId on import.
-  const [{ fetchMetaInfoFromApi }, { fetchStatsDataFromApi }] = await Promise.all([
-    import("../../../estat-api/src/meta-info/repositories/api/fetch-from-api"),
-    import("../../../estat-api/src/stats-data/repositories/api/fetch-from-api"),
-  ]);
+  const { fetchMetaInfoFromApi, fetchStatsDataFromApi, extractYearCode, parseEstatValue } = await import("@stats47/estat-api/api");
+  function yearOf(code: string): number {
+    // 月・四半期を年へ潰さない。対象は年次とSSDSの年度コードのみ。
+    if (!/^\d{4}(?:[01]00000)?$/.test(code)) throw new Error(`Unsupported annual time code: ${code}`);
+    const year = Number(extractYearCode(code));
+    if (year < 1900 || year > 2100) throw new Error(`Invalid year: ${code}`);
+    return year;
+  }
   const metadata = await fetchMetaInfoFromApi(source.statsDataId);
   const meta = metadata.GET_META_INFO;
   if (meta.RESULT.STATUS !== 0 || meta.METADATA_INF.TABLE_INF["@id"] !== source.statsDataId) {
@@ -108,7 +108,7 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
   const pages: EstatStatsDataResponse[] = [];
   const rows: AnalysisObservation[] = [];
   const coordinates = new Set<string>();
-  let startRecord = 1;
+  let startPosition = 1;
   let total: number | undefined;
   let received = 0;
 
@@ -116,7 +116,7 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
     const response = await fetchStatsDataFromApi({
       statsDataId: source.statsDataId,
       [`cd${metricAxis["@id"][0]!.toUpperCase()}${metricAxis["@id"].slice(1)}`]: source.metrics.map((metric) => metric.code).join(","),
-      startRecord,
+      startPosition,
       limit: PAGE_SIZE,
       metaGetFlg: "N",
       annotationGetFlg: "Y",
@@ -133,8 +133,8 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
     const values = data.DATA_INF.VALUE ? asArray(data.DATA_INF.VALUE) : [];
     const pageTotal = Number(pageInfo?.TOTAL_NUMBER);
     if (!Number.isInteger(pageTotal) || pageTotal < 1 || (total !== undefined && total !== pageTotal) ||
-      Number(pageInfo?.FROM_NUMBER) !== startRecord || Number(pageInfo?.TO_NUMBER) !== startRecord + values.length - 1 || !values.length) {
-      throw new Error(`Invalid pagination or changed total: ${source.id} at ${startRecord}`);
+      Number(pageInfo?.FROM_NUMBER) !== startPosition || Number(pageInfo?.TO_NUMBER) !== startPosition + values.length - 1 || !values.length) {
+      throw new Error(`Invalid pagination or changed total: ${source.id} at ${startPosition}`);
     }
     total = pageTotal;
     received += values.length;
@@ -167,13 +167,16 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
       break;
     }
     if (next !== received + 1 || next > total) throw new Error(`Invalid NEXT_KEY: ${source.id}`);
-    startRecord = next;
+    startPosition = next;
   }
   if (!rows.length) throw new Error(`No observations match source: ${source.id}`);
   rows.sort((a, b) => a.metricId.localeCompare(b.metricId) || a.areaCode.localeCompare(b.areaCode) || a.year - b.year);
   return {
     rows,
-    raw: { metadata, pages },
+    raw: {
+      metadata: { ...metadata, GET_META_INFO: withoutCredentials(metadata.GET_META_INFO) },
+      pages: pages.map((page) => ({ ...page, GET_STATS_DATA: withoutCredentials(page.GET_STATS_DATA) })),
+    },
     retrievedAt: new Date().toISOString(),
     tableTitle: meta.METADATA_INF.TABLE_INF.TITLE?.$ ?? "",
   };

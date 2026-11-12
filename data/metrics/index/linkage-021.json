@@ -5967,6 +5967,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-05",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:physicians-in-medical-facilities-per-100k",
           "kind": "ranking"
         },

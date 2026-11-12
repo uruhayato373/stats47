@@ -2,46 +2,93 @@
   "productId": "P-12",
   "articleKey": "prefecture-all-in-one-pack",
   "displayTitle": "都道府県 統計データ総合集",
-  "description": "人口・観光・産業などの統計をまとめて使い、複数の視点から地域を紹介する資料を作れるデータ集です。",
+  "description": "人口・観光・産業などの統計を一つにまとめ、複数の視点で地域を紹介する資料を作れます。",
   "useCases": [
     {
-      "title": "県勢紹介の資料作りに",
-      "description": "人口、観光、産業の図を組み合わせ、地域の全体像を伝える説明資料を作れます。"
+      "title": "県勢紹介のスライドに",
+      "description": "人口、宿泊、製造業の図を組み合わせ、地域の規模と特徴を説明できます。"
     },
     {
-      "title": "テーマの異なる調査案件に",
-      "description": "収録指標から案件に合う項目を選び、地域比較の表やグラフを作成できます。"
+      "title": "分野をまたぐ調査資料に",
+      "description": "案件に合わせて収録指標を選び、同じ県を異なる視点で比較する表や図を作れます。"
     },
     {
       "title": "地域比較の授業や研修に",
-      "description": "同じ県でも指標によって順位や特徴が変わることを、複数の図で説明できます。"
+      "description": "指標を変えると県の順位や特徴がどう変わるかを、複数の図で読み比べられます。"
     }
   ],
   "examples": [
     {
       "id": "population-overview",
-      "heading": "人口の規模から地域を紹介する",
-      "lead": "総人口の棒グラフを使い、紹介する県が全国の中でどの程度の規模かを示せます。地域比較資料の最初の一枚として使えます。",
-      "metricKeys": ["total-population"],
+      "heading": "まず人口の規模を伝える",
+      "lead": "総人口を県別に並べ、紹介する県が全国の中でどの程度の規模かを示す導入図を作れます。",
+      "metricKeys": [
+        "total-population"
+      ],
       "preferredTemplate": "bar"
     },
     {
       "id": "tourism-overview",
-      "heading": "宿泊の分布を加えて観光を説明する",
-      "lead": "従業者10人以上の宿泊施設の延べ宿泊者数を地図にできます。人口とは違う分布を確認し、観光という視点から地域を紹介できます。",
-      "metricKeys": ["total-overnight-guests"],
+      "heading": "宿泊の分布から地域を見る",
+      "lead": "延べ宿泊者数を地図にし、人口の図とは異なる宿泊需要の分布を確認できます。",
+      "metricKeys": [
+        "total-overnight-guests"
+      ],
       "preferredTemplate": "choropleth"
     },
     {
       "id": "industry-overview",
-      "heading": "製造業の規模も合わせて紹介する",
-      "lead": "製造品出荷額等を県別に並べ、地域の産業を金額から説明できます。人口や観光の図と組み合わせて、多面的な地域紹介を作れます。",
-      "metricKeys": ["manufacturing-shipment-amount"],
+      "heading": "製造業の規模を加えて紹介する",
+      "lead": "製造品出荷額等を並べ、人口・宿泊に続いて産業の面から地域の特徴を説明できます。",
+      "metricKeys": [
+        "manufacturing-shipment-amount"
+      ],
       "preferredTemplate": "bar"
     }
   ],
   "purchaseNotes": [
-    "収録指標には対象年・単位・調査範囲が異なるものがあります。複数の図を並べる際も、それぞれの基準年と出典を記載してください。",
-    "家計調査など県庁所在市を対象とする指標もあります。地域名だけで集計範囲を判断せず、指標ごとの説明を確認してください。"
-  ]
+    "指標ごとに対象年・単位・調査範囲が異なります。複数の図を並べる際も、それぞれの基準年と出典を記載してください。",
+    "宿泊の作成例は従業者10人以上の宿泊施設が対象です。家計調査など県庁所在市を対象とする指標もあるため、県名だけで統計の対象範囲を判断しないでください。"
+  ],
+  "analysisPlan": {
+    "objective": "分野別商品の検証済み分析を組み合わせ、共通指標と計算結果を重複生成しない。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "total-population",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "total-overnight-guests",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "manufacturing-shipment-amount",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [
+      "P-01",
+      "P-02",
+      "P-03",
+      "P-04",
+      "P-05",
+      "P-06",
+      "P-07",
+      "P-08",
+      "P-09",
+      "P-10",
+      "P-14"
+    ],
+    "limitations": [
+      "分野間で基準年・地域単位・分母が一致するとは限らない。採用元の分析条件を保持し、改訂案の存在と販売中の収録内容を分ける。"
+    ]
+  }
 }

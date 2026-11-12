@@ -10,7 +10,10 @@ beforeEach(() => {
   vi.stubEnv("HTTPS_PROXY", "");
   vi.stubEnv("HTTP_PROXY", "");
 });
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.unstubAllEnvs();
+});
 
 describe("e-Stat HTTP errors", () => {
   it("keeps the table and HTTP failure visible without logging query credentials", async () => {

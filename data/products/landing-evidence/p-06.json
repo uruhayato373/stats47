@@ -81,5 +81,137 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2024年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2024年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-06",
+    "version": "analysis-20261112",
+    "planSha256": "29acbb1f217bea01f730e9eb4d24bf1bf83563fa8b974dc64d9ebfa1590986d6",
+    "resolvedPlanSha256": "cec48bf3031574e551c536349758dd0ef0620b2d0ce8f4e4c5f8eb4d13f43278",
+    "sources": [
+      {
+        "id": "municipal-schools",
+        "inputs": [
+          {
+            "metricKey": "elementary-school-count",
+            "statsDataId": "0000020205",
+            "code": "E2101",
+            "unit": "校"
+          },
+          {
+            "metricKey": "elementary-school-children-count",
+            "statsDataId": "0000020205",
+            "code": "E2501",
+            "unit": "人"
+          },
+          {
+            "metricKey": "elementary-school-teachers",
+            "statsDataId": "0000020205",
+            "code": "E2401",
+            "unit": "人"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2024
+        ],
+        "retrievedAt": "2026-11-12T06:05:32.396Z",
+        "tableTitle": "Ｅ　教育",
+        "rows": 5223,
+        "areas": 1741,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2024,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "7dac83538db9cc0d9fef0b95d4071e132a9e32453a3f50e97923e0ef5cc1f3f9"
+      }
+    ],
+    "results": 46,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "6c4ee84da3c6326e3d3bd52b1f9fcf878ae1fe31fb526be20ab4c140637f364a",
+        "bytes": 540197
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "21bdd23ba62792b11900189fdd7951112c55e158885a9e95a930a2f2248f24e8",
+        "bytes": 6698
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "1125a6f8ebacd26e8a1e560696906b7166cd4eff46595423d9f4045e1c8ab5db",
+        "bytes": 192635
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "7828a011c93f01d20865b27fd3b2bb1eb45041897f8b05d703f02aadb251945d",
+        "bytes": 1920
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "c589640218b52c9748c3e88f8d19ec7bbde84abffe443970c1665c324b1fda1d",
+        "bytes": 1275
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "22fc79dea0cbacfbf8a78c6aba8f851765b84d6527312392b70e50a4322f3a5d",
+        "bytes": 6404
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "089a3db972077a6001a4cb84f587412544285da9423c7bc3ff5c94cedcedd584",
+        "bytes": 7497
+      },
+      {
+        "file": "README.md",
+        "sha256": "cf0efa406a5c5a3087c2e0a213faa02b99ce0de34765e9456d94b987d5799ff6",
+        "bytes": 2439
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
+        "bytes": 272
+      },
+      {
+        "file": "images/pupils-per-teacher.png",
+        "sha256": "a76457a262b00758d864fe3f447baafe74a4f1f588d234c60eb761259d185e1c",
+        "bytes": 182005
+      },
+      {
+        "file": "images/pupils-per-school.png",
+        "sha256": "8c55dba402200e03e2d5fc307678e81a32f42014a238e186463f74baba58b112",
+        "bytes": 157429
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "9ef19cfe7057df12b401c6dce4f93a41f2033255028bb2e6a9d46c6246cdc133",
+        "bytes": 114986
+      },
+      {
+        "file": "inputs/municipal-schools.json",
+        "sha256": "7dac83538db9cc0d9fef0b95d4071e132a9e32453a3f50e97923e0ef5cc1f3f9",
+        "bytes": 74038873
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "a854f4aafe4b4685865ac3a2e92db6583051bffae3c910dc7d6b9e1d67599744",
+        "bytes": 3789
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "6feda9d19876ba4082c5ab8e4e8a936abd800a5a3f34344a8a7b93a10e134ac7",
+        "bytes": 2272812
+      }
+    ]
+  }
 }

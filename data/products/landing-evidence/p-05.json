@@ -81,5 +81,137 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は1991〜2024年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は1991〜2024年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-05",
+    "version": "analysis-20261112",
+    "planSha256": "982d6c18dc8fb672eb17974b2b0dd1cd99b7e4b32be776d0bc985c7c3bb988d7",
+    "resolvedPlanSha256": "1431576dfc379c62af507c0ccad042b18521948f4a79b1161be85d770e4c3641",
+    "sources": [
+      {
+        "id": "municipal-health",
+        "inputs": [
+          {
+            "metricKey": "general-clinic-count",
+            "statsDataId": "0000020209",
+            "code": "I5102",
+            "unit": "施設"
+          },
+          {
+            "metricKey": "population-aged-65-plus",
+            "statsDataId": "0000020201",
+            "code": "A1303",
+            "unit": "人"
+          },
+          {
+            "metricKey": "total-population",
+            "statsDataId": "0000020201",
+            "code": "A1101",
+            "unit": "人"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2020
+        ],
+        "retrievedAt": "2026-11-12T06:04:51.856Z",
+        "tableTitle": "Ｉ　健康・医療 / Ａ　人口・世帯",
+        "rows": 5223,
+        "areas": 1741,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2020,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "f7f2632791991daea4872d76f8e9ebf9339942d26c8cdb7c341f2bca596687bb"
+      }
+    ],
+    "results": 46,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "16cf2af162b5b5416cd9167cb0f554cca239667a3a0ce1078b39a2bb59f7f7ff",
+        "bytes": 508340
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "aea22dc3a900c123be83c289d567d8f8fb42a0c809eb85ac0e4af3b5f4e91a69",
+        "bytes": 6837
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "321768588fe3dd1a955267fead8c5818e7dd3b4889f3dbb9ca27ead55b053694",
+        "bytes": 196810
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "a17cec9d4a8113e63626eb0398101ee4363fe6967c59eff48bf37d0868f205b6",
+        "bytes": 2294
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "99f0bffb688da2582d79845a3f13ea3cccadc379e27964e6f573c341873ba10f",
+        "bytes": 6584
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "6ff7ab11f85421eb73ad6f1a9846d8d5dfd87c274d0dfe6bbc33f35dc09792ae",
+        "bytes": 8057
+      },
+      {
+        "file": "README.md",
+        "sha256": "155335fc13566b006043d248e65a53cc47da371d2a9abcd103ba8951fb31cb20",
+        "bytes": 2592
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
+        "bytes": 272
+      },
+      {
+        "file": "images/clinics-per-population.png",
+        "sha256": "ebaa599df9748a767185b0fdbaa841ec50b753d1c99286b59dd4d90d9e8dbdb2",
+        "bytes": 173164
+      },
+      {
+        "file": "images/elderly-population-share.png",
+        "sha256": "3e7f59a86d2edd0e651c9122ca12c520672d4658ef0301254a97ad9ffb60eb42",
+        "bytes": 162652
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "87c70976d6095443bb771a521ae0af98e919954b785510b09947e69693071239",
+        "bytes": 124196
+      },
+      {
+        "file": "inputs/municipal-health.json",
+        "sha256": "f7f2632791991daea4872d76f8e9ebf9339942d26c8cdb7c341f2bca596687bb",
+        "bytes": 35613413
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "1f0fca3a9ae96e71398201434d1d73a8cf6f9fec58f9401faf5d29b2ee806f97",
+        "bytes": 3619
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "3bd9952b3bdc7d02e1d8ee28c9c8dc1459425156e99fc192a79888ce7e7a590d",
+        "bytes": 1484204
+      }
+    ]
+  }
 }

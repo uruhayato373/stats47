@@ -8,7 +8,7 @@ stats47 の地図・チャート・公的統計から、note で売る Office・
 - 旧商品案の由来: Git履歴上の旧 A-01〜L-07。現行の由来情報は台帳 `products.packs` の `sourceIds`
 - 残タスク: `.claude/todo/backlog.md`
 
-商品定義・テンプレート・生成コードは git TS、観測値は既存 R2 が SSOT。生成した Office、
+商品定義は `data/products/` のJSON台帳、テンプレート・生成コードは git TS、観測値は既存 R2 が SSOT。生成した Office、
 PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2 へ保存しない。
 
 ## 現在の実装

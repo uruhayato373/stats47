@@ -8,7 +8,11 @@ import { ProductPurchase } from "./ProductPurchase";
 import type { StorefrontProduct } from "../types";
 
 /** 全商品の内容と購入導線。見本より先に置き、商品情報はカタログから受け取る。 */
-export function ProductOverview({ product }: { readonly product: StorefrontProduct }) {
+export function ProductOverview({ product, purchaseProduct, preview = false }: {
+  readonly product: StorefrontProduct;
+  readonly purchaseProduct: StorefrontProduct;
+  readonly preview?: boolean;
+}) {
   const Icon = product.channel === "kindle" ? BookOpen : Database;
 
   return (
@@ -26,7 +30,7 @@ export function ProductOverview({ product }: { readonly product: StorefrontProdu
           </ul>
         </div>
 
-        <ProductPurchase product={product} placement="product_detail_top" />
+        <ProductPurchase product={purchaseProduct} placement="product_detail_top" currentVersion={preview} />
       </div>
 
       <div className="flex flex-col gap-2">

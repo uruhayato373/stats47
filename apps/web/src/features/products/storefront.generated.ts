@@ -10,13 +10,14 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-muni-manufacturing",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "市区町村別 製造品出荷額等 1980〜2023年＋業種別 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+    "listingTitle": "市区町村別 製造品出荷額等 1980〜2023年＋業種別 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
     "priceYen": 1980,
     "externalUrl": "https://note.com/stats47/n/n5d86476e9c73",
     "audience": [],
     "sourceBlogSlugs": [],
+    "title": "市区町村別 製造品出荷額等",
     "displayTitle": "市区町村別 製造品出荷額等",
-    "description": "市区町村の製造業を、時系列・業種別・地図で比較できるデータセットです。",
+    "description": "市区町村の製造業を、出荷額の規模・業種構成・長期推移の3つの視点で比較できるデータセットです。",
     "included": [
       "CSV (時系列 1980〜2023 年・1,719 自治体)",
       "CSV (業種別 2021〜2023 年・24 業種)",
@@ -25,16 +26,16 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "産業振興の資料作りに",
-        "description": "近隣の自治体と、製造業の規模や業種構成を比較できます。"
+        "title": "産業振興の説明資料に",
+        "description": "近隣自治体の出荷額と業種構成を比べ、地域の製造業の特徴を地図やグラフで説明できます。"
       },
       {
-        "title": "立地候補の調査に",
-        "description": "候補地域の出荷額や業種別の内訳を比べ、製造業の特徴を把握できます。"
+        "title": "立地候補の下調べに",
+        "description": "製造業が集まる自治体と主な業種を確認し、詳しく調べる候補地を選べます。"
       },
       {
-        "title": "地域経済の研究に",
-        "description": "出荷額の長期推移を分析し、地図で地域差を可視化できます。"
+        "title": "地域経済の変化を調べるときに",
+        "description": "同じ境域の出荷額を時系列で比べ、県内や近隣自治体でどのように変化したかを確認できます。"
       }
     ],
     "purchaseNotes": [
@@ -44,8 +45,8 @@ export const STOREFRONT_PRODUCTS = [
     "showcase": [
       {
         "kind": "chart",
-        "heading": "地域ごとの製造業の規模を比べる",
-        "lead": "出荷額を棒グラフで比べ、地図で集積する地域を確認できます。全国の分布から県内の比較まで、調べたい範囲に合わせた資料を作れます。",
+        "heading": "出荷額の規模と、集まる場所を比べる",
+        "lead": "棒グラフで自治体間の規模を比較し、全国地図から県内の地図へ範囲を絞って製造業の集積を確認できます。",
         "figures": [
           {
             "file": "compare-bars-2023.png",
@@ -63,8 +64,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "地域を支える業種と、その割合を読み取る",
-        "lead": "業種別の内訳を円グラフや積み上げ棒グラフで比較できます。自治体ごとの産業構成や、県全体に占める各市町村の割合を説明する資料に使えます。",
+        "heading": "地域を支える業種と内訳を見る",
+        "lead": "自治体ごとの業種構成を比べ、どの業種の比重が大きいかを確認できます。県内の合計に占める市町村の割合も図にできます。",
         "figures": [
           {
             "file": "industry-donut-toyota-2023.png",
@@ -86,8 +87,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "1980〜2023 年の変化をたどる",
-        "lead": "折れ線グラフで長期の推移を比べ、増減の倍率を地図にできます。地域経済の変化を振り返る分析に使えます。金額は物価調整をしていない名目値です。",
+        "heading": "出荷額の長期的な変化をたどる",
+        "lead": "同じ自治体の推移を折れ線で比べ、増減の倍率を地図にして、変化の大きい地域を確認できます。",
         "figures": [
           {
             "file": "change-trend-1980-2023.png",
@@ -115,7 +116,7 @@ export const STOREFRONT_PRODUCTS = [
         ]
       }
     ],
-    "showcaseNote": "図は収録ファイルの値から作成しています。地図は国土数値情報の行政区域データと自治体コードで結合しています。",
+    "showcaseNote": "図は収録CSVの値から作成し、地図の描画には国土数値情報の行政区域データを使用しています。同梱GeoJSONは、令和2年国勢調査の境界データを自治体単位にまとめたものです（2020年10月1日時点）。",
     "coverImageUrl": "https://assets.st-note.com/production/uploads/images/332041499/rectangle_large_type_2_ed3faeff21eb6e6a34de3f45686521e9.png?fit=bounds&quality=85&width=480"
   },
   {
@@ -123,7 +124,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-01",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 人口・世帯データ 134指標｜CSV・Excel",
+    "listingTitle": "都道府県別 人口・世帯データ 134指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/ne47eb45f8a15",
     "audience": [
@@ -132,6 +133,7 @@ export const STOREFRONT_PRODUCTS = [
       "研究者"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 人口・世帯データ",
     "displayTitle": "都道府県別 人口・世帯データ",
     "description": "人口の規模、年齢構成、世帯の違いを比較し、地域の現状を説明する資料を作れます。",
     "included": [
@@ -213,7 +215,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-02",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 賃金・求人・働き方データ 107指標｜CSV・Excel",
+    "listingTitle": "都道府県別 賃金・求人・働き方データ 107指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n46d68c153502",
     "audience": [
@@ -221,8 +223,9 @@ export const STOREFRONT_PRODUCTS = [
       "事業企画"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 賃金・求人・働き方データ",
     "displayTitle": "都道府県別 賃金・求人・働き方データ",
-    "description": "地域の求人状況や賃金水準を整理し、採用計画や人事向けの比較資料を作れます。",
+    "description": "求人と給与の地域差を整理し、募集する地域や条件を検討するための比較資料を作れます。",
     "included": [
       "CSV（47地域・107指標、基準年は指標ごとに固定）",
       "Excel（107指標）",
@@ -232,27 +235,27 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "採用エリアの比較に",
-        "description": "有効求人倍率を県別に並べ、採用を検討する地域の求人・求職の状況を把握できます。"
+        "title": "募集する地域の比較に",
+        "description": "有効求人倍率を県別に並べ、候補地域の求人・求職の状況を確認できます。"
       },
       {
-        "title": "給与水準の説明資料に",
-        "description": "調査対象や給与の定義をそろえて地域差を示し、自社の募集条件を検討するための参考資料にできます。"
+        "title": "給与条件の検討資料に",
+        "description": "所定内給与額の地域差を示し、募集条件を話し合うための参考表を作れます。"
       },
       {
-        "title": "人事提案の根拠整理に",
-        "description": "求人と賃金の指標を別々の図で示し、地域の雇用環境を社内や支援先へ説明できます。"
+        "title": "人事・採用会議の説明に",
+        "description": "求人の状況と給与水準を別々の図で示し、地域の雇用環境を共有できます。"
       }
     ],
     "purchaseNotes": [
-      "収録版の値を固定した商品です。現在の求人状況や募集相場を示すものではなく、指標ごとの基準年を確認して利用します。",
-      "給与の指標は対象者、月額・年額、所定内・手当込みなどの定義が異なります。異なる指標を同じ給与として合算しないでください。"
+      "収録版の値を固定した商品です。求人・給与の指標は基準年が異なる場合があります。求人倍率だけで個々の企業の採用難易度は判断できません。",
+      "給与は対象者と月額・年額、所定内・手当込みなどの定義を確認してください。作成例の男性の所定内給与額は、男女合計の平均年収や手取り額ではありません。"
     ],
     "showcase": [
       {
         "kind": "chart",
         "heading": "求人と求職のバランスを比べる",
-        "lead": "有効求人倍率を棒グラフにし、地域の求人状況を比較できます。倍率だけで自社の採用難易度は決まりませんが、募集地域を検討する際の背景資料になります。",
+        "lead": "県別の有効求人倍率を並べ、募集候補の地域が全国のどの位置にあるかを確認できます。",
         "figures": [
           {
             "file": "job-opening-comparison.png",
@@ -262,8 +265,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "給与水準の地域差を地図にする",
-        "lead": "男性の所定内給与額で地図を色分けし、地域ごとの給与水準を俯瞰できます。男女合計の平均年収や手取り額とは区別して、調査対象を明記した資料に使います。",
+        "heading": "給与水準の地域差を地図で見る",
+        "lead": "男性の所定内給与額で色分けし、給与水準の高い地域や近隣県との違いを俯瞰できます。",
         "figures": [
           {
             "file": "scheduled-pay-distribution.png",
@@ -291,7 +294,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-03",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 宿泊・交通・旅行データ 44指標｜CSV・Excel",
+    "listingTitle": "都道府県別 宿泊・交通・旅行データ 44指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
     "audience": [
@@ -299,8 +302,9 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 宿泊・交通・旅行データ",
     "displayTitle": "都道府県別 宿泊・交通・旅行データ",
-    "description": "宿泊の規模、外国人の宿泊、客室の稼働状況を比較し、観光の現状を説明できます。",
+    "description": "宿泊者数、外国人の宿泊、客室稼働率を比べ、地域の宿泊需要を説明する図表を作れます。",
     "included": [
       "CSV（47地域・44指標、基準年は指標ごとに固定）",
       "Excel（44指標）",
@@ -310,16 +314,16 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "観光計画の比較資料に",
-        "description": "延べ宿泊者数を近隣県や比較対象の県と並べ、観光需要の規模を整理できます。"
+        "title": "観光計画の現状整理に",
+        "description": "近隣県や比較対象の県の宿泊者数を並べ、宿泊需要の規模を説明できます。"
       },
       {
-        "title": "訪日客向け施策の現状把握に",
-        "description": "外国人の延べ宿泊者数を地図で示し、どの地域に宿泊が集中しているかを共有できます。"
+        "title": "訪日客向け施策の検討に",
+        "description": "外国人の宿泊が集まる地域を地図で確かめ、重点的に調べる地域を選べます。"
       },
       {
         "title": "宿泊事業の調査資料に",
-        "description": "宿泊者数と客室稼働率を分けて比較し、需要の大きさと施設の稼働状況を整理できます。"
+        "description": "宿泊者数と客室稼働率を見比べ、需要の大きさと客室の利用状況を整理できます。"
       }
     ],
     "purchaseNotes": [
@@ -330,7 +334,7 @@ export const STOREFRONT_PRODUCTS = [
       {
         "kind": "chart",
         "heading": "宿泊需要の規模を比べる",
-        "lead": "延べ宿泊者数を棒グラフにし、宿泊需要がどの県に集まっているかを示せます。単位は人数ではなく、宿泊数を積み上げた「人泊」です。",
+        "lead": "延べ宿泊者数を並べ、宿泊がどの県に集まるかを確認できます。泊数を積み上げた「人泊」で規模を比べる図です。",
         "figures": [
           {
             "file": "overnight-demand.png",
@@ -341,7 +345,7 @@ export const STOREFRONT_PRODUCTS = [
       {
         "kind": "chart",
         "heading": "外国人の宿泊が集まる地域を見る",
-        "lead": "外国人の延べ宿泊者数で地図を色分けし、訪日客の宿泊の地域差を示せます。総宿泊者数の図と見比べることで、地域の特徴を説明できます。",
+        "lead": "外国人の延べ宿泊者数を地図にし、総宿泊者数の図と見比べて地域ごとの特徴を確認できます。",
         "figures": [
           {
             "file": "foreign-overnight-distribution.png",
@@ -351,8 +355,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "宿泊者数とは別に、客室の稼働を比べる",
-        "lead": "客室稼働率を並べると、宿泊者数の多さとは異なる面から地域を比較できます。観光計画や宿泊事業の調査で、規模と稼働を分けて説明する図に使えます。",
+        "heading": "客室の利用状況を比べる",
+        "lead": "客室稼働率を並べ、宿泊者数の多さとは別に、客室がどの程度使われているかを比較できます。",
         "figures": [
           {
             "file": "room-utilization.png",
@@ -380,7 +384,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-04",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 自治体財政・職員給与データ 119指標｜CSV・Excel",
+    "listingTitle": "都道府県別 自治体財政・職員給与データ 119指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n5da8a99b3506",
     "audience": [
@@ -388,6 +392,7 @@ export const STOREFRONT_PRODUCTS = [
       "研究者"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 自治体財政・職員給与データ",
     "displayTitle": "都道府県別 自治体財政・職員給与データ",
     "description": "財政力、借入返済の負担、歳入の規模を分けて比べ、財政説明の資料を作れます。",
     "included": [
@@ -469,7 +474,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-05",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 医療・介護データ 237指標｜CSV・Excel",
+    "listingTitle": "都道府県別 医療・介護データ 237指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
     "audience": [
@@ -477,6 +482,7 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 医療・介護データ",
     "displayTitle": "都道府県別 医療・介護データ",
     "description": "人口当たりの医師・病床・介護施設を比較し、地域の医療・介護資源を整理できます。",
     "included": [
@@ -558,7 +564,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-06",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 学校・保育・社会教育データ 244指標｜CSV・Excel",
+    "listingTitle": "都道府県別 学校・保育・社会教育データ 244指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
     "audience": [
@@ -567,6 +573,7 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 学校・保育・社会教育データ",
     "displayTitle": "都道府県別 学校・保育・社会教育データ",
     "description": "学校の規模、保育施設、進学の状況を比較し、教育・子育てに関する説明資料を作れます。",
     "included": [
@@ -648,7 +655,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-07",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 住居費・物価・気候データ 76指標｜CSV・Excel",
+    "listingTitle": "都道府県別 住居費・物価・気候データ 76指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n323af74c09cc",
     "audience": [
@@ -657,8 +664,9 @@ export const STOREFRONT_PRODUCTS = [
       "自治体・公務員"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 住居費・物価・気候データ",
     "displayTitle": "都道府県別 住居費・物価・気候データ",
-    "description": "物価や住居費、気候の違いを比べ、移住候補地を調べるための比較資料を作れます。",
+    "description": "物価水準、住居に関わる費用、気温の違いを並べ、移住候補地を下調べする比較資料を作れます。",
     "included": [
       "CSV（47地域・76指標、基準年は指標ごとに固定）",
       "Excel（76指標）",
@@ -668,27 +676,27 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "移住候補地の絞り込みに",
-        "description": "生活に関わる物価と気候を並べ、詳しく調べたい地域を選ぶための比較表にできます。"
+        "title": "移住候補地の下調べに",
+        "description": "物価と気候を見比べ、詳しく調べたい県を絞り込むための比較表を作れます。"
       },
       {
         "title": "移住相談の説明資料に",
-        "description": "全国平均に対する物価水準を示し、『何がどの程度違うのか』を数字で説明できます。"
+        "description": "全国平均に対する物価水準を図にし、候補地ごとの違いを説明できます。"
       },
       {
-        "title": "生活費の下調べに",
-        "description": "総合の物価と住居費目を分けて比べ、実際の家賃や家計を調べる前の基礎資料にできます。"
+        "title": "生活費の違いを確認するときに",
+        "description": "総合の物価と住居費目を分け、生活費のどの項目を詳しく調べるかを整理できます。"
       }
     ],
     "purchaseNotes": [
-      "収録版の値を固定した商品です。個別の物件賃料や現在の生活費を見積もる際は、最新の現地情報も確認してください。",
-      "物価地域差指数は全国平均を100とする指数で、総合・住居とも持家の帰属家賃を含みません。気候指標は各地の観測地点の値です。"
+      "収録版の値を固定した商品です。物価の地域差指数は家賃の金額や物価上昇率ではありません。実際の生活費は、最新の物件情報や現地の価格も確認してください。",
+      "物価地域差指数は全国平均を100とし、持家の帰属家賃を含みません。気候指標は観測地点の値で、県内全域や個々の移住先の平均ではありません。"
     ],
     "showcase": [
       {
         "kind": "chart",
         "heading": "全国平均に対する物価水準を比べる",
-        "lead": "消費者物価地域差指数を並べ、全国平均を100とした物価水準の違いを示せます。物価の上昇率ではなく、地域間の水準を比べるための図です。",
+        "lead": "全国平均を100とした指数を並べ、候補となる県の物価水準を比較できます。",
         "figures": [
           {
             "file": "overall-price-comparison.png",
@@ -699,7 +707,7 @@ export const STOREFRONT_PRODUCTS = [
       {
         "kind": "chart",
         "heading": "住居に関わる物価の地域差を見る",
-        "lead": "住居費目の地域差指数を地図にし、総合の物価と違う傾向があるかを確認できます。家賃の金額や住宅の購入価格そのものを表す図ではありません。",
+        "lead": "住居費目の地域差指数を色分けし、総合の物価と同じ傾向か、異なる傾向かを見比べられます。",
         "figures": [
           {
             "file": "housing-price-distribution.png",
@@ -709,8 +717,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "各地の気温を比較する",
-        "lead": "年平均気温を棒グラフで比較し、候補地の気候を調べる入口にできます。各地の観測地点の値なので、県内全域の平均や移住先の町の気温とは区別して読みます。",
+        "heading": "各地の気温を比べる",
+        "lead": "各地の観測地点の年平均気温を並べ、候補地の気候を調べる入口にできます。",
         "figures": [
           {
             "file": "temperature-comparison.png",
@@ -738,7 +746,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-08",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 商業・小売データ 69指標｜CSV・Excel",
+    "listingTitle": "都道府県別 商業・小売データ 69指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n973c3f8478f5",
     "audience": [
@@ -746,6 +754,7 @@ export const STOREFRONT_PRODUCTS = [
       "事業企画"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 商業・小売データ",
     "displayTitle": "都道府県別 商業・小売データ",
     "description": "商業の販売額や店舗数を比べ、出店候補エリアの一次調査や営業資料に使えるデータ集です。",
     "included": [
@@ -827,7 +836,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-09",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 産業・農業・家計データ 132指標｜CSV・Excel",
+    "listingTitle": "都道府県別 産業・農業・家計データ 132指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n2ced199ed715",
     "audience": [
@@ -836,8 +845,9 @@ export const STOREFRONT_PRODUCTS = [
       "研究者"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 産業・経済データ",
     "displayTitle": "都道府県別 産業・経済データ",
-    "description": "製造業などの産業データをまとめて比較し、地域の経済活動を説明する資料に使えるデータ集です。",
+    "description": "出荷額や従業者数などの産業指標を並べ、地域の経済活動を金額と人の両面から紹介できます。",
     "included": [
       "CSV（47地域・132指標、基準年は指標ごとに固定）",
       "Excel（132指標）",
@@ -847,16 +857,16 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "産業振興の比較資料に",
-        "description": "製造品出荷額や従業者数を県別に並べ、地域の製造業の規模を説明できます。"
+        "title": "産業振興の現状整理に",
+        "description": "製造品出荷額を比較し、自県と近隣県の製造業の規模を説明できます。"
       },
       {
         "title": "法人営業の事前調査に",
-        "description": "製造業の集積を県単位で確認し、訪問先や提案テーマを検討するための基礎資料を作れます。"
+        "description": "製造業の従業者が集まる県を確認し、詳しく調べる営業エリアを選べます。"
       },
       {
         "title": "地域経済のレポートに",
-        "description": "金額と従業者数をそれぞれ図表にして、一つの指標だけでは伝わらない産業の特徴を紹介できます。"
+        "description": "出荷額と従業者数の図を添え、金額と雇用の両面から地域の製造業を紹介できます。"
       }
     ],
     "purchaseNotes": [
@@ -866,8 +876,8 @@ export const STOREFRONT_PRODUCTS = [
     "showcase": [
       {
         "kind": "chart",
-        "heading": "製造業の規模を金額で比べる",
-        "lead": "製造品出荷額等を棒グラフにし、比較したい県の位置づけを示せます。県別の産業紹介や、地域経済レポートの導入に使えます。",
+        "heading": "出荷額で製造業の規模を比べる",
+        "lead": "県別の製造品出荷額等を並べ、自県の位置や近隣県との規模の違いを示せます。",
         "figures": [
           {
             "file": "manufacturing-shipments.png",
@@ -877,8 +887,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "製造業の働き手が多い地域を見る",
-        "lead": "製造業従業者数を地図にして、どの地域に多く集まっているかを示せます。出荷額の図と並べる場合は、対象年と調査範囲を確認して使えます。",
+        "heading": "製造業の働き手が集まる地域を見る",
+        "lead": "製造業従業者数を地図にし、金額だけでは伝わらない働き手の分布を紹介できます。",
         "figures": [
           {
             "file": "manufacturing-employment.png",
@@ -906,7 +916,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-10",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県別 防災・交通・インフラデータ 230指標｜CSV・Excel",
+    "listingTitle": "都道府県別 防災・交通・インフラデータ 230指標｜CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
     "audience": [
@@ -914,8 +924,9 @@ export const STOREFRONT_PRODUCTS = [
       "事業企画"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県別 防災・交通・インフラデータ",
     "displayTitle": "都道府県別 防災・交通・インフラデータ",
-    "description": "生活インフラの整備状況や災害被害の実績を、都道府県ごとに比較するためのデータ集です。",
+    "description": "生活インフラの整備状況と過去の災害被害を県別に整理し、地域の特徴を説明する資料を作れます。",
     "included": [
       "CSV（47地域・230指標、基準年は指標ごとに固定）",
       "Excel（230指標）",
@@ -925,16 +936,16 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "地域の基礎資料作りに",
-        "description": "下水道などの生活インフラの指標をそろえ、他県との違いを説明する図表を作れます。"
+        "title": "インフラ整備の説明資料に",
+        "description": "下水道普及率を他県と比較し、整備状況の違いを地図で示せます。"
       },
       {
-        "title": "防災学習の説明資料に",
-        "description": "過去の災害被害額を県別に比較し、対象年にどの地域で被害が大きかったかを示せます。"
+        "title": "災害被害の振り返りに",
+        "description": "対象年の被害額を人口あたりで比べ、被害の大きかった地域を確認できます。"
       },
       {
-        "title": "インフラ調査の事前整理に",
-        "description": "収録指標を使って県ごとの特徴を整理し、追加で確認したい地域や項目を洗い出せます。"
+        "title": "地域調査の項目整理に",
+        "description": "収録指標を並べ、整備状況や被害実績から詳しく確認する項目を選べます。"
       }
     ],
     "purchaseNotes": [
@@ -944,8 +955,8 @@ export const STOREFRONT_PRODUCTS = [
     "showcase": [
       {
         "kind": "chart",
-        "heading": "生活インフラの整備状況を見比べる",
-        "lead": "下水道普及率を地図にして、地域ごとの違いを示せます。都市や地域を紹介する資料で、生活インフラの一つの側面を説明できます。",
+        "heading": "下水道の整備状況を地図で見る",
+        "lead": "下水道普及率で色分けし、自県と近隣県の違いや全国の分布を確認できます。",
         "figures": [
           {
             "file": "sewerage-coverage.png",
@@ -955,8 +966,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "過去の災害被害を人口当たりで比べる",
-        "lead": "人口1人当たりの災害被害額を棒グラフにし、人口規模をそろえて実績を比較できます。対象年の被害を振り返る資料として使えます。",
+        "heading": "災害被害を人口あたりで比べる",
+        "lead": "人口1人あたりの災害被害額を並べ、人口規模を揃えて対象年の被害実績を振り返れます。",
         "figures": [
           {
             "file": "disaster-losses.png",
@@ -984,7 +995,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-11",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "都道府県の地図・ランキング素材 28指標｜PNG・SVG・PowerPoint",
+    "listingTitle": "都道府県の地図・ランキング素材 28指標｜PNG・SVG・PowerPoint",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
     "audience": [
@@ -993,8 +1004,9 @@ export const STOREFRONT_PRODUCTS = [
       "クリエイター"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県の地図・ランキング素材",
     "displayTitle": "都道府県の地図・ランキング素材",
-    "description": "地域の特徴を伝える地図とランキング図を、資料や記事に取り入れるための図版素材集です。",
+    "description": "人口や世帯の地域差を伝える地図・ランキング図を、プレゼン資料や記事の図版として使えます。",
     "included": [
       "CSV（47地域・28指標、基準年は指標ごとに固定）",
       "PowerPoint（28指標の図表）",
@@ -1004,16 +1016,16 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "プレゼン資料の導入に",
-        "description": "人口や世帯の分布を示す図を添え、説明する地域の規模をひと目で伝えられます。"
+        "title": "プレゼンの導入に",
+        "description": "人口分布の地図を添え、説明する地域が全国のどこに位置するかを伝えられます。"
       },
       {
-        "title": "記事の比較図に",
-        "description": "県別の地図やランキング図を使い、本文で取り上げる地域の位置づけを紹介できます。"
+        "title": "記事や報告書の比較図に",
+        "description": "世帯数などのランキング図を使い、取り上げる県と他県の規模の違いを示せます。"
       },
       {
-        "title": "社内資料の図版づくりに",
-        "description": "用途に合わせてPNG・SVG・PowerPointの素材を選び、資料に組み込めます。"
+        "title": "資料に使う図版の準備に",
+        "description": "PNG・SVG・PowerPointの収録形式から、貼り付けや図版編集の用途に合う素材を選べます。"
       }
     ],
     "purchaseNotes": [
@@ -1023,8 +1035,8 @@ export const STOREFRONT_PRODUCTS = [
     "showcase": [
       {
         "kind": "chart",
-        "heading": "人口の分布を地図で伝える",
-        "lead": "都道府県別の総人口を色分けした地図です。全国の分布を示してから担当する地域の説明へ進む、資料の導入に使えます。",
+        "heading": "人口の分布を一枚の地図で伝える",
+        "lead": "全国の人口分布を示してから、担当する地域の説明へ進む導入スライドを作れます。",
         "figures": [
           {
             "file": "population-map.png",
@@ -1034,8 +1046,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "世帯数の違いを図で伝える",
-        "lead": "都道府県別の一般世帯数を並べたランキング図です。数表だけではつかみにくい地域間の規模の違いを紹介できます。",
+        "heading": "世帯数の違いをランキング図で伝える",
+        "lead": "一般世帯数を並べた図で、本文や数表だけでは伝えにくい県ごとの規模の違いを示せます。",
         "figures": [
           {
             "file": "household-ranking.png",
@@ -1063,7 +1075,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-12",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "47都道府県 統計データ総合集 2,073指標｜CSV・Excel",
+    "listingTitle": "47都道府県 統計データ総合集 2,073指標｜CSV・Excel",
     "priceYen": 2980,
     "externalUrl": "https://note.com/stats47/n/nfa7d235eba85",
     "audience": [
@@ -1072,8 +1084,9 @@ export const STOREFRONT_PRODUCTS = [
       "編集者・ライター"
     ],
     "sourceBlogSlugs": [],
+    "title": "都道府県 統計データ総合集",
     "displayTitle": "都道府県 統計データ総合集",
-    "description": "人口・観光・産業などの統計をまとめて使い、複数の視点から地域を紹介する資料を作れるデータ集です。",
+    "description": "人口・観光・産業などの統計を一つにまとめ、複数の視点で地域を紹介する資料を作れます。",
     "included": [
       "CSV（47地域・2,073指標、基準年は指標ごとに固定）",
       "Excel（2,073指標）",
@@ -1084,27 +1097,27 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "useCases": [
       {
-        "title": "県勢紹介の資料作りに",
-        "description": "人口、観光、産業の図を組み合わせ、地域の全体像を伝える説明資料を作れます。"
+        "title": "県勢紹介のスライドに",
+        "description": "人口、宿泊、製造業の図を組み合わせ、地域の規模と特徴を説明できます。"
       },
       {
-        "title": "テーマの異なる調査案件に",
-        "description": "収録指標から案件に合う項目を選び、地域比較の表やグラフを作成できます。"
+        "title": "分野をまたぐ調査資料に",
+        "description": "案件に合わせて収録指標を選び、同じ県を異なる視点で比較する表や図を作れます。"
       },
       {
         "title": "地域比較の授業や研修に",
-        "description": "同じ県でも指標によって順位や特徴が変わることを、複数の図で説明できます。"
+        "description": "指標を変えると県の順位や特徴がどう変わるかを、複数の図で読み比べられます。"
       }
     ],
     "purchaseNotes": [
-      "収録指標には対象年・単位・調査範囲が異なるものがあります。複数の図を並べる際も、それぞれの基準年と出典を記載してください。",
-      "家計調査など県庁所在市を対象とする指標もあります。地域名だけで集計範囲を判断せず、指標ごとの説明を確認してください。"
+      "指標ごとに対象年・単位・調査範囲が異なります。複数の図を並べる際も、それぞれの基準年と出典を記載してください。",
+      "宿泊の作成例は従業者10人以上の宿泊施設が対象です。家計調査など県庁所在市を対象とする指標もあるため、県名だけで統計の対象範囲を判断しないでください。"
     ],
     "showcase": [
       {
         "kind": "chart",
-        "heading": "人口の規模から地域を紹介する",
-        "lead": "総人口の棒グラフを使い、紹介する県が全国の中でどの程度の規模かを示せます。地域比較資料の最初の一枚として使えます。",
+        "heading": "まず人口の規模を伝える",
+        "lead": "総人口を県別に並べ、紹介する県が全国の中でどの程度の規模かを示す導入図を作れます。",
         "figures": [
           {
             "file": "population-overview.png",
@@ -1114,8 +1127,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "宿泊の分布を加えて観光を説明する",
-        "lead": "従業者10人以上の宿泊施設の延べ宿泊者数を地図にできます。人口とは違う分布を確認し、観光という視点から地域を紹介できます。",
+        "heading": "宿泊の分布から地域を見る",
+        "lead": "延べ宿泊者数を地図にし、人口の図とは異なる宿泊需要の分布を確認できます。",
         "figures": [
           {
             "file": "tourism-overview.png",
@@ -1125,8 +1138,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "製造業の規模も合わせて紹介する",
-        "lead": "製造品出荷額等を県別に並べ、地域の産業を金額から説明できます。人口や観光の図と組み合わせて、多面的な地域紹介を作れます。",
+        "heading": "製造業の規模を加えて紹介する",
+        "lead": "製造品出荷額等を並べ、人口・宿泊に続いて産業の面から地域の特徴を説明できます。",
         "figures": [
           {
             "file": "industry-overview.png",
@@ -1154,7 +1167,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-14",
     "channel": "note",
     "channelLabel": "note有料データ集",
-    "title": "県庁所在市別 家計調査データ 832指標｜品目別 CSV・Excel",
+    "listingTitle": "県庁所在市別 家計調査データ 832指標｜品目別 CSV・Excel",
     "priceYen": 980,
     "externalUrl": "https://note.com/stats47/n/n554a047cf5be",
     "audience": [
@@ -1163,8 +1176,9 @@ export const STOREFRONT_PRODUCTS = [
       "研究者"
     ],
     "sourceBlogSlugs": [],
+    "title": "県庁所在市別 家計・消費データ",
     "displayTitle": "県庁所在市別 家計・消費データ",
-    "description": "県庁所在市の二人以上世帯について、品目別の支出額や購入量を比較するためのデータ集です。",
+    "description": "県庁所在市の二人以上世帯について、食品や飲料などの支出額と購入量を図にして比較できます。",
     "included": [
       "CSV（47県庁所在市・二人以上世帯・685指標、基準年は指標ごとに固定）",
       "Excel（685指標）",
@@ -1175,15 +1189,15 @@ export const STOREFRONT_PRODUCTS = [
     "useCases": [
       {
         "title": "食品・日用品の企画資料に",
-        "description": "品目別の支出額を都市ごとに比べ、調査対象の世帯にどのような消費の違いがあるかを整理できます。"
+        "description": "品目別の支出を都市ごとに並べ、調査対象の世帯でどのような違いがあるかを整理できます。"
       },
       {
-        "title": "地域の食文化を紹介する記事に",
-        "description": "牛肉やコーヒーなど身近な品目を図にして、都市ごとの支出の特徴を紹介できます。"
+        "title": "食や暮らしを紹介する記事に",
+        "description": "牛肉やコーヒーなど身近な品目を図にし、都市ごとの支出の特徴を伝えられます。"
       },
       {
         "title": "消費の比較レポートに",
-        "description": "支出額と購入量を分けて比較し、「多く買っている」と「多く支出している」の違いを説明できます。"
+        "description": "支出額と購入量を別々に示し、お金を多く使う地域と、多く買う地域を見比べられます。"
       }
     ],
     "purchaseNotes": [
@@ -1193,8 +1207,8 @@ export const STOREFRONT_PRODUCTS = [
     "showcase": [
       {
         "kind": "chart",
-        "heading": "牛肉への支出を都市ごとに比べる",
-        "lead": "二人以上世帯の1世帯当たりの牛肉支出額を棒グラフにできます。食品に関する企画資料で、都市ごとの支出の違いを示せます。",
+        "heading": "牛肉に使う金額を比べる",
+        "lead": "二人以上世帯の1世帯あたり牛肉支出額を並べ、都市ごとの支出の違いを確認できます。",
         "figures": [
           {
             "file": "beef-expenditure.png",
@@ -1204,8 +1218,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "金額に加えて、買う量を比べる",
-        "lead": "牛肉の購入量を都市別に並べ、支出額の図と見比べられます。同じ品目でも、金額と量では順位が変わることを調べる資料に使えます。",
+        "heading": "牛肉を買う量も確認する",
+        "lead": "牛肉の購入量を並べ、支出額の図と見比べることで、金額と量のどちらに違いがあるかを確認できます。",
         "figures": [
           {
             "file": "beef-quantity.png",
@@ -1215,8 +1229,8 @@ export const STOREFRONT_PRODUCTS = [
       },
       {
         "kind": "chart",
-        "heading": "飲料への支出の特徴を紹介する",
-        "lead": "コーヒーへの支出額を都市別に比べた図を作れます。身近な一品目から消費の地域差を紹介する、記事やレポートの図に使えます。",
+        "heading": "別の品目で消費の特徴を見る",
+        "lead": "コーヒー支出額を都市別に比較できます。品目を変えて、地域の消費を複数の視点から紹介する図を作れます。",
         "figures": [
           {
             "file": "coffee-expenditure.png",

@@ -191,6 +191,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:elderly-couple-households",
           "kind": "ranking"
         }
@@ -1407,6 +1411,10 @@
         {
           "pageId": "municipality-theme:aging-society",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:elderly-single-households",
@@ -2843,6 +2851,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-06",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:elementary-school-children-count",
           "kind": "ranking"
         }
@@ -3115,6 +3127,10 @@
         {
           "pageId": "municipality-theme:education-culture",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-06",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:elementary-school-count",
@@ -4416,6 +4432,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-06",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:elementary-school-students-per-teacher",
           "kind": "ranking"
         },
@@ -4471,6 +4491,10 @@
         {
           "pageId": "municipality-theme:education-culture",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-06",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:elementary-school-teachers",

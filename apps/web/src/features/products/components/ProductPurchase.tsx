@@ -12,9 +12,10 @@ import { TrackedProductOutboundLink, useProductImpression } from "./TrackedProdu
 import type { ProductDetailPlacement, StorefrontProduct } from "../types";
 
 /** 上部・末尾で共用する購入案内。画像とボタンを含む案内全体で表示を一度だけ数える。 */
-export function ProductPurchase({ product, placement }: {
+export function ProductPurchase({ product, placement, currentVersion = false }: {
   readonly product: StorefrontProduct;
   readonly placement: ProductDetailPlacement;
+  readonly currentVersion?: boolean;
 }) {
   const ref = useProductImpression<HTMLDivElement>(product.externalUrl, "product_detail", {
     productSlug: product.slug,
@@ -52,7 +53,9 @@ export function ProductPurchase({ product, placement }: {
         </TrackedProductOutboundLink>
       )}
       <div className={cn("flex min-w-0 flex-col gap-3", showCover && "@sm:col-span-2")}>
-        {isBottom && <p className="text-base font-semibold text-pretty">{displayTitle}</p>}
+        {currentVersion && <p className="text-sm font-semibold">現在販売中の版</p>}
+        {(isBottom || currentVersion) && <p className="text-base font-semibold text-pretty">{displayTitle}</p>}
+        {currentVersion && <p className="text-xs leading-relaxed text-muted-foreground">表示中の改訂案とは収録内容が異なります。改訂案のデータ・図は、現在販売中の版には含まれていません。</p>}
         <dl>
           <dt className="text-xs font-medium text-info">販売価格</dt>
           <dd className={STAT_VALUE_CLASS}>
@@ -61,7 +64,7 @@ export function ProductPurchase({ product, placement }: {
           </dd>
         </dl>
         <TrackedProductOutboundLink {...linkProps} className={buttonVariants({ size: "lg", className: "w-full" })}>
-          {destinationLabel}で内容を確認する
+          {destinationLabel}で{currentVersion ? "現在販売中の内容" : "内容"}を確認する
           <ExternalLink aria-hidden="true" />
         </TrackedProductOutboundLink>
         <p className="text-xs leading-relaxed text-muted-foreground">

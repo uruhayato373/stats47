@@ -1,6 +1,6 @@
 ---
 paths:
-  - "packages/product-factory/src/{catalog,build,data,generators,channels/note}/**"
+  - "packages/product-factory/src/{catalog,build,data,generators,channels/note,analysis}/**"
   - "packages/product-factory/tests/**"
   - ".claude/{scripts/products,skills/product/build-data-pack}/**"
   - "data/products/**"
@@ -32,7 +32,7 @@ Kindle の規約は `kindle-publishing-standards.md` で、データパックと
 | リリース台帳（生成状況） | `data/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
 
 - **商品定義=台帳 `products.packs` が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
-- **実データは R2 → git TS スナップショット（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
+- **既存固定版の実データは R2 → `products.pack-datasets` の JSON（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
 
 ---
 
@@ -104,8 +104,26 @@ npm run test:run   --workspace=@stats47/product-factory
 
 ### SSOTと生成物
 
+- 全有料商品の `products.landings.analysisPlan` に目的、指標と統計対象、採用・調査中・除外の理由、既存の分析・図・再利用商品のIDを持つ。
+  `npm run products:analysis:catalog` が参照・粒度・採否・循環を検査する。指標逆引きは現行の作成例を `product`、追加の分析候補を `product-analysis` と区別する。
+- 新しい時系列・市区町村分析は、同台帳の `analysisRevision` に指標キー・年・地域・分析式・参考資料・共通画像型を宣言する。
+  表・項目コード・単位・暦年／年度は指標台帳から解決する。一般世帯の原数など既存指標と精度・対象が異なる原典だけ `metrics.analysis-source-variants` に定義し、商品からIDで参照する。
+  `npm run products:analysis:build -- --all` で原典を取得し、CSV/Excel・分析結果・出典・利用条件・画像・ZIPを登録済み `.local/data-packs/<id>/<version>/` へ生成する。
+  取得済み入力は指定のハッシュが一致するときだけ再利用し、取り直す場合は `--refresh`。同梱する原票から資格情報を除く。
+  検査記録は `products.landing-evidence.analysisRevision` に派生生成し、公開済みの固定納品版は置き換えない。
+  `npm run products:analysis:check -- --all` は同梱値からの再計算、ZIP/Excel構造、全ファイルSHA、LPの派生値・画像・note原稿を照合する。
+  共通の自治体集合・年度・単位・原典の全座標を検査し、既存 `analysis-frame` のカバレッジ検査結果も記録する。秘匿・欠測・分母0を0件へ補完しない。
+  市区町村地図の範囲は分析レシピの `within`（`nation` / `prefecture` + `prefCode`）で宣言し、共通の地域集合・画像型で描く。全国版は政令市を統合し特別区を残す境界を使い、欠測・離島も含む全対象コードの値と形を照合する。商品別の描画分岐や一部自治体だけの全国図を作らない。
+  CIは実台帳のcatalogテストと `product-analysis-ledger.test.ts` で台帳・解決後の原典・検査記録・LPのハッシュ/参照/対象範囲を突合し、通信なしで生成漏れを検出する。
+  Webは開発時に通常の商品URLも商品IDで改訂案へ接続し、`/products/preview/<slug>` と `ProductDetail` を共有する。
+  改訂案はnoindex・未公開表示・Product Offerなし。上下の購入案内は固定販売版の台帳を使い、「現在販売中の版」と改訂案との違いを明記する。
+  `--check --serve <port>` の一覧は、改訂案がある商品と固定版の商品を合わせた全有料データ商品のnote初稿を表示する。
+  ローカルGISから地図を再生成する場合は `NEXT_PUBLIC_R2_GEOSHAPE_URL` にゲートウェイを指定する（GIS取得は `R2_PUBLIC_FETCH_URL` を参照しない）。
+  原稿・データ・価格・図の確認と非公開保全を終えてから通常の公開工程へ渡す。改訂案を現在の販売内容として表示しない。
+
 - サイトLPとnote無料部分のコピーは `data/products/landings/<id>.json`、固定納品由来の収録形式・画像の型とSHAは
   `data/products/landing-evidence/<id>.json` に持つ。商品IDと記事キーで結合し、商品別のUI分岐や別媒体のコピーを作らない。
+  作成例は両媒体とも見出し→共通型の画像→短い説明→必要な制約の順。サイトの商品名はLP台帳の表示名を使い、販売先の原題は `listingTitle` として照合に残す。
   `npm run products:landing:assets` は納品版台帳の `archive` から共通画像型で見本を再生成する。
   `npm run generate:product-storefront -w apps/web` の後、`npm run products:landing:preview -- --serve 4792` で
   全商品のサイトLPとnote無料部分を順に目視できる。Markdown/HTMLは登録済み `.local/product-portfolio/` の派生物。

@@ -46,6 +46,39 @@ test("note 商品だけを商品 ID 順に並べ、前後の商品とサイト L
   assert.ok(index.includes("http://127.0.0.1:3000/products/data-first"));
 });
 
+test("改訂候補を現在販売中と案内せず、未公開の図はローカルから表示する", () => {
+  const files = buildPreviewFiles([product], { revision: true });
+  for (const content of files.values()) {
+    assert.ok(!content.includes('980円'));
+    assert.ok(content.includes('未公開の改訂候補'));
+  }
+  assert.ok(!files.get('data-first.md')!.includes(product.externalUrl));
+  assert.ok(files.get('data-first.html')!.includes('現在販売中のnote（改訂案とは別内容）'));
+  assert.ok(files.get('data-first.html')!.includes(product.externalUrl));
+  assert.ok(files.get('data-first.md')!.includes('http://127.0.0.1:4777/app/products/data-first/showcase/population.png'));
+  assert.ok(files.get('data-first.html')!.includes('/products/preview/data-first'));
+  assert.ok(buildPreviewFiles([product]).get('data-first.html')!.includes('980円'));
+});
+
+test("通常版と改訂候補を同じ一覧に載せ、価格と未公開表示を商品ごとに分ける", () => {
+  const revised = { ...product, id: 'P-02', slug: 'data-revised', priceYen: 1980 };
+  const files = buildPreviewFiles([product, revised], { revisionIds: [revised.id] });
+  assert.ok(files.get('data-first.md')!.includes('980円'));
+  assert.ok(!files.get('data-revised.md')!.includes('1,980円'));
+  assert.ok(files.get('data-revised.md')!.includes('未公開の改訂候補'));
+  assert.ok(files.get('index.html')!.includes('2 商品'));
+});
+
+test("図を用途説明より先に見せ、条件を両形式へ引き継ぐ", () => {
+  const section = { ...product.showcase![0], note: '同じ調査年を比較してください。' };
+  const files = buildPreviewFiles([{ ...product, showcase: [section] }]);
+  for (const file of ['data-first.md', 'data-first.html']) {
+    const content = files.get(file)!;
+    assert.ok(content.indexOf('population.png') < content.indexOf(section.lead));
+    assert.ok(content.includes(section.note));
+  }
+});
+
 test("用途・図・購入前確認の不足、重複、画像パス逸脱を拒否する", () => {
   for (const changed of [{ useCases: [] }, { showcase: [] }, { purchaseNotes: [] }, { slug: "../escape" }]) {
     assert.throws(() => buildPreviewFiles([{ ...product, ...changed }]));

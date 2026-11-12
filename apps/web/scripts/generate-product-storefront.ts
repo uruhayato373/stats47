@@ -87,7 +87,7 @@ function buildStorefrontProducts(): StorefrontProduct[] {
     const product = productsById.get(mapping.productId);
     if (!product) throw Error(`Unknown note product: ${mapping.productId}`);
     return [{ id: product.id, slug: `data-${product.id.toLowerCase()}`, channel: 'note', channelLabel: 'note有料データ集',
-      title: article.title, priceYen: article.priceJpy, externalUrl: article.noteUrl,
+      listingTitle: article.title, priceYen: article.priceJpy, externalUrl: article.noteUrl,
       audience: [...product.audience], sourceBlogSlugs: [],
       ...readProductLanding(ROOT, product.id, article.key) }];
   });
@@ -99,7 +99,7 @@ function buildStorefrontProducts(): StorefrontProduct[] {
       slug: `data-${content.id.toLowerCase()}`,
       channel: "note",
       channelLabel: "note有料データ集",
-      title: article.title,
+      listingTitle: article.title,
       priceYen: article.priceJpy,
       externalUrl: article.noteUrl,
       audience: [],

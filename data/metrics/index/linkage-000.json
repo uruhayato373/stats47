@@ -1881,6 +1881,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-02",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:active-job-opening-ratio",
           "kind": "ranking"
         },
@@ -11980,6 +11984,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-08",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:annual-sales-amount",
           "kind": "ranking"
         }
@@ -12072,6 +12080,10 @@
         {
           "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-08",
+          "kind": "product"
         },
         {
           "pageId": "ranking:annual-sales-amount-per-establishment",

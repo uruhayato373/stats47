@@ -94,5 +94,5 @@ export type GetStatsDataParams = {
   // === 言語 ===
   readonly lang?: 'J' | 'E';
   readonly limit?: number;
-  readonly startRecord?: number;
+  readonly startPosition?: number;
 };

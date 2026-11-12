@@ -2,7 +2,13 @@
   "productId": "MUNI-MANUFACTURING",
   "sourceArticle": {
     "articleKey": "muni-manufacturing-shipment-data",
-    "store": "r2-private"
+    "store": "r2-private",
+    "manifestSha256": "c2369672e10b58447b764ea5070177e058f38b2b6f44c5d363b11da0fec65a0a"
+  },
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-sales/muni-manufacturing-shipment-data/product/muni-manufacturing-shipment-data-v3.zip",
+    "sha256": "fbda8a7af06a8927b305cc89a161b8fd63eeda065e09b8734cb6359dd4ee92f8"
   },
   "included": [
     "CSV (時系列 1980〜2023 年・1,719 自治体)",
@@ -99,5 +105,5 @@
       }
     ]
   },
-  "showcaseNote": "図は収録ファイルの値から作成しています。地図は国土数値情報の行政区域データと自治体コードで結合しています。"
+  "showcaseNote": "図は収録CSVの値から作成し、地図の描画には国土数値情報の行政区域データを使用しています。同梱GeoJSONは、令和2年国勢調査の境界データを自治体単位にまとめたものです（2020年10月1日時点）。"
 }

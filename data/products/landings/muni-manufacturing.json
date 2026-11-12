@@ -2,26 +2,26 @@
   "productId": "MUNI-MANUFACTURING",
   "articleKey": "muni-manufacturing-shipment-data",
   "displayTitle": "市区町村別 製造品出荷額等",
-  "description": "市区町村の製造業を、時系列・業種別・地図で比較できるデータセットです。",
+  "description": "市区町村の製造業を、出荷額の規模・業種構成・長期推移の3つの視点で比較できるデータセットです。",
   "useCases": [
     {
-      "title": "産業振興の資料作りに",
-      "description": "近隣の自治体と、製造業の規模や業種構成を比較できます。"
+      "title": "産業振興の説明資料に",
+      "description": "近隣自治体の出荷額と業種構成を比べ、地域の製造業の特徴を地図やグラフで説明できます。"
     },
     {
-      "title": "立地候補の調査に",
-      "description": "候補地域の出荷額や業種別の内訳を比べ、製造業の特徴を把握できます。"
+      "title": "立地候補の下調べに",
+      "description": "製造業が集まる自治体と主な業種を確認し、詳しく調べる候補地を選べます。"
     },
     {
-      "title": "地域経済の研究に",
-      "description": "出荷額の長期推移を分析し、地図で地域差を可視化できます。"
+      "title": "地域経済の変化を調べるときに",
+      "description": "同じ境域の出荷額を時系列で比べ、県内や近隣自治体でどのように変化したかを確認できます。"
     }
   ],
   "examples": [
     {
       "id": "regional-comparison",
-      "heading": "地域ごとの製造業の規模を比べる",
-      "lead": "出荷額を棒グラフで比べ、地図で集積する地域を確認できます。全国の分布から県内の比較まで、調べたい範囲に合わせた資料を作れます。",
+      "heading": "出荷額の規模と、集まる場所を比べる",
+      "lead": "棒グラフで自治体間の規模を比較し、全国地図から県内の地図へ範囲を絞って製造業の集積を確認できます。",
       "metricKeys": [
         "manufacturing-shipment-amount"
       ],
@@ -29,8 +29,8 @@
     },
     {
       "id": "industry-composition",
-      "heading": "地域を支える業種と、その割合を読み取る",
-      "lead": "業種別の内訳を円グラフや積み上げ棒グラフで比較できます。自治体ごとの産業構成や、県全体に占める各市町村の割合を説明する資料に使えます。",
+      "heading": "地域を支える業種と内訳を見る",
+      "lead": "自治体ごとの業種構成を比べ、どの業種の比重が大きいかを確認できます。県内の合計に占める市町村の割合も図にできます。",
       "metricKeys": [
         "manufacturing-shipment-amount"
       ],
@@ -38,8 +38,8 @@
     },
     {
       "id": "long-term-change",
-      "heading": "1980〜2023 年の変化をたどる",
-      "lead": "折れ線グラフで長期の推移を比べ、増減の倍率を地図にできます。地域経済の変化を振り返る分析に使えます。金額は物価調整をしていない名目値です。",
+      "heading": "出荷額の長期的な変化をたどる",
+      "lead": "同じ自治体の推移を折れ線で比べ、増減の倍率を地図にして、変化の大きい地域を確認できます。",
       "metricKeys": [
         "manufacturing-shipment-amount"
       ],
@@ -49,5 +49,46 @@
   "purchaseNotes": [
     "金額は物価調整をしていない名目値です。長期比較では調査方法や収録範囲の変更も確認してください。",
     "秘匿などにより値が空の行があります。空欄をゼロとして扱わず、同梱の注記・READMEと検算表を確認してください。"
-  ]
+  ],
+  "analysisPlan": {
+    "objective": "既存の市区町村別時系列・業種構成に、規模と従業者あたり出荷額を分ける分析を接続する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "manufacturing-shipment-amount",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "manufacturing-employees",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "M01分析を参照し、納品データと同じ調査対象範囲・時点へ接続できるか検証する。"
+      },
+      {
+        "metricKey": "manufacturing-establishments",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "M01分析を参照し、納品データと同じ調査対象範囲・時点へ接続できるか検証する。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "M01分析を参照し、納品データと同じ調査対象範囲・時点へ接続できるか検証する。"
+      }
+    ],
+    "analysisRefs": [
+      "analysis:M01-factory-size"
+    ],
+    "figureRefs": [
+      "figure:M01-workforce-productivity-scatter",
+      "figure:M01-gap-steps-bars"
+    ],
+    "reuseProducts": [],
+    "limitations": [
+      "長期の金額は名目値。調査対象・調査時点の変更、秘匿・欠測を明示し、同じ境域で比較する。",
+      "M01の従業者あたり出荷額や寄与の分解は生産性の目安であり、因果関係を示さない。"
+    ]
+  }
 }

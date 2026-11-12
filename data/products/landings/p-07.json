@@ -2,46 +2,98 @@
   "productId": "P-07",
   "articleKey": "prefecture-migration-living-pack",
   "displayTitle": "都道府県別 住居費・物価・気候データ",
-  "description": "物価や住居費、気候の違いを比べ、移住候補地を調べるための比較資料を作れます。",
+  "description": "物価水準、住居に関わる費用、気温の違いを並べ、移住候補地を下調べする比較資料を作れます。",
   "useCases": [
     {
-      "title": "移住候補地の絞り込みに",
-      "description": "生活に関わる物価と気候を並べ、詳しく調べたい地域を選ぶための比較表にできます。"
+      "title": "移住候補地の下調べに",
+      "description": "物価と気候を見比べ、詳しく調べたい県を絞り込むための比較表を作れます。"
     },
     {
       "title": "移住相談の説明資料に",
-      "description": "全国平均に対する物価水準を示し、『何がどの程度違うのか』を数字で説明できます。"
+      "description": "全国平均に対する物価水準を図にし、候補地ごとの違いを説明できます。"
     },
     {
-      "title": "生活費の下調べに",
-      "description": "総合の物価と住居費目を分けて比べ、実際の家賃や家計を調べる前の基礎資料にできます。"
+      "title": "生活費の違いを確認するときに",
+      "description": "総合の物価と住居費目を分け、生活費のどの項目を詳しく調べるかを整理できます。"
     }
   ],
   "examples": [
     {
       "id": "overall-price-comparison",
       "heading": "全国平均に対する物価水準を比べる",
-      "lead": "消費者物価地域差指数を並べ、全国平均を100とした物価水準の違いを示せます。物価の上昇率ではなく、地域間の水準を比べるための図です。",
-      "metricKeys": ["consumer-price-difference-index-overall"],
+      "lead": "全国平均を100とした指数を並べ、候補となる県の物価水準を比較できます。",
+      "metricKeys": [
+        "consumer-price-difference-index-overall"
+      ],
       "preferredTemplate": "bar"
     },
     {
       "id": "housing-price-distribution",
       "heading": "住居に関わる物価の地域差を見る",
-      "lead": "住居費目の地域差指数を地図にし、総合の物価と違う傾向があるかを確認できます。家賃の金額や住宅の購入価格そのものを表す図ではありません。",
-      "metricKeys": ["consumer-price-difference-index-housing"],
+      "lead": "住居費目の地域差指数を色分けし、総合の物価と同じ傾向か、異なる傾向かを見比べられます。",
+      "metricKeys": [
+        "consumer-price-difference-index-housing"
+      ],
       "preferredTemplate": "choropleth"
     },
     {
       "id": "temperature-comparison",
-      "heading": "各地の気温を比較する",
-      "lead": "年平均気温を棒グラフで比較し、候補地の気候を調べる入口にできます。各地の観測地点の値なので、県内全域の平均や移住先の町の気温とは区別して読みます。",
-      "metricKeys": ["average-temperature"],
+      "heading": "各地の気温を比べる",
+      "lead": "各地の観測地点の年平均気温を並べ、候補地の気候を調べる入口にできます。",
+      "metricKeys": [
+        "average-temperature"
+      ],
       "preferredTemplate": "bar"
     }
   ],
   "purchaseNotes": [
-    "収録版の値を固定した商品です。個別の物件賃料や現在の生活費を見積もる際は、最新の現地情報も確認してください。",
-    "物価地域差指数は全国平均を100とする指数で、総合・住居とも持家の帰属家賃を含みません。気候指標は各地の観測地点の値です。"
-  ]
+    "収録版の値を固定した商品です。物価の地域差指数は家賃の金額や物価上昇率ではありません。実際の生活費は、最新の物件情報や現地の価格も確認してください。",
+    "物価地域差指数は全国平均を100とし、持家の帰属家賃を含みません。気候指標は観測地点の値で、県内全域や個々の移住先の平均ではありません。"
+  ],
+  "analysisPlan": {
+    "objective": "生活費・気象の県別比較に、住宅ストックと人口変化の市区町村分析を接続できるか検証する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "consumer-price-difference-index-overall",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "consumer-price-difference-index-housing",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "average-temperature",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "vacant-houses-city",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "既存の空き家分析を参照し、住宅・土地統計調査の対象自治体、標本誤差、調査年と人口年を合わせられる範囲を確認する。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "住宅の変化と人口の変化を比較する候補。実在する共通年と境域を確認してから採用する。"
+      }
+    ],
+    "analysisRefs": [
+      "analysis:H01-vacancy-population"
+    ],
+    "figureRefs": [
+      "figure:H01-vacancy-rate-trend"
+    ],
+    "reuseProducts": [],
+    "limitations": [
+      "気象値の観測地点、物価指標の対象範囲、住宅調査の対象自治体を区別する。県の代表値を市区町村へ割り振らない。",
+      "空き家と人口減少の関係から、因果関係や個別物件の需要を断定しない。"
+    ]
+  }
 }

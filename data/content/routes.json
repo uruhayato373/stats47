@@ -280,6 +280,14 @@
       ]
     },
     {
+      "id": "route:products-preview:slug",
+      "kind": "products-preview",
+      "pattern": "/products/preview/[slug]",
+      "parameters": [
+        "slug"
+      ]
+    },
+    {
       "id": "route:product:slug",
       "kind": "product",
       "pattern": "/products/[slug]",

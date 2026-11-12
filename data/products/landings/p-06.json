@@ -22,26 +22,197 @@
       "id": "students-per-teacher",
       "heading": "教員1人当たりの児童数を比べる",
       "lead": "小学校の教員1人当たり児童数を比較し、県全体の児童と教員の規模の関係を説明できます。1学級の人数とは異なる指標です。",
-      "metricKeys": ["elementary-school-students-per-teacher"],
+      "metricKeys": [
+        "elementary-school-students-per-teacher"
+      ],
       "preferredTemplate": "bar"
     },
     {
       "id": "childcare-center-distribution",
       "heading": "子どもの人口に対する施設数を見る",
       "lead": "0〜5歳人口10万人当たりの認定こども園数を地図で示せます。施設の総数だけでは分かりにくい、子どもの人口に対する地域差を見比べられます。",
-      "metricKeys": ["certified-childcare-center-count-per-100k-0-5"],
+      "metricKeys": [
+        "certified-childcare-center-count-per-100k-0-5"
+      ],
       "preferredTemplate": "choropleth"
     },
     {
       "id": "graduate-advancement",
       "heading": "高校卒業後の進学状況を比べる",
       "lead": "高等学校卒業者の進学率を並べ、卒業後の進路の地域差を説明できます。高校への進学率と混同せず、対象となる卒業者を明記して利用します。",
-      "metricKeys": ["high-school-advancement-rate"],
+      "metricKeys": [
+        "high-school-advancement-rate"
+      ],
       "preferredTemplate": "bar"
     }
   ],
   "purchaseNotes": [
     "収録版の値を固定した商品です。学校年度や調査時点、対象年齢は指標ごとに確認してください。",
     "施設数や進学率だけで教育の質や入園のしやすさは判断できません。定員、地域内の距離、個別施設の情報は別途確認が必要です。"
-  ]
+  ],
+  "analysisPlan": {
+    "objective": "児童数・本務教員数・小学校数を同じ年度で揃え、市町村の学校規模と教員配置の目安を分けて比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "elementary-school-students-per-teacher",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "certified-childcare-center-count-per-100k-0-5",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "high-school-advancement-rate",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "elementary-school-count",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で確認した2024年度の小学校データ。児童数を本務教員数または学校数で割り、集計単位を区別する。"
+      },
+      {
+        "metricKey": "elementary-school-children-count",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で確認した2024年度の小学校データ。児童数を本務教員数または学校数で割り、集計単位を区別する。"
+      },
+      {
+        "metricKey": "elementary-school-teachers",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で確認した2024年度の小学校データ。児童数を本務教員数または学校数で割り、集計単位を区別する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "児童/本務教員は学級人数ではなく、教育の質の順位でもない。",
+      "小学校の指標であり、別区分の義務教育学校等は含めない。学校・教員が0または欠測の場合、比率は算出しない。"
+    ]
+  },
+  "analysisRevision": {
+    "version": "analysis-20261112",
+    "title": "市区町村の小学校規模と教員配置を比べるデータ集",
+    "description": "同じ年度の小学校児童数・本務教員数・学校数を揃え、教員1人あたりと学校1校あたりの児童数を比較できます。",
+    "useCases": [
+      {
+        "title": "教育計画の現状整理に",
+        "description": "学校数と児童数から1校あたりの規模を比べ、自治体の学校配置を考える基礎資料を作れます。"
+      },
+      {
+        "title": "教員配置の説明資料に",
+        "description": "児童数と本務教員数の比率を近隣自治体と比較し、集計上の特徴を確認できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "municipal-schools",
+        "title": "小学校の学校数・児童数・本務教員数",
+        "grain": "municipality",
+        "years": [
+          2024
+        ],
+        "inputs": [
+          {
+            "metricKey": "elementary-school-count"
+          },
+          {
+            "metricKey": "elementary-school-children-count"
+          },
+          {
+            "metricKey": "elementary-school-teachers"
+          }
+        ],
+        "definition": "学校基本調査に基づく2024年度の小学校数・児童数・本務教員数。同じ学校種・年度の値から比率を計算する。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      }
+    ],
+    "research": {
+      "method": "社会・人口統計体系の原典表と項目定義を確認し、地域単位・年・分母・欠測を揃えられる範囲で比較する。",
+      "references": [
+        {
+          "id": "ssds-education",
+          "title": "社会・人口統計体系の項目定義 E",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/E",
+          "section": "E2101 小学校数、E2401 小学校教員数、E2501 小学校児童数",
+          "finding": "教員は本務教員。児童/教員と児童/学校は異なる集計指標で、学級規模ではない。義務教育学校は別区分として扱う。",
+          "checkedAt": "2026-11-12"
+        }
+      ]
+    },
+    "recipes": [
+      {
+        "id": "pupils-per-teacher",
+        "heading": "本務教員1人あたりの児童数を比べる",
+        "lead": "高知県の市といの町を例に、小学校児童数と本務教員数の比率を比較します。",
+        "sourceId": "municipal-schools",
+        "metricIds": [
+          "elementary-school-children-count"
+        ],
+        "method": "ratio",
+        "year": 2024,
+        "areaCodes": [
+          "39201",
+          "39202",
+          "39203",
+          "39204",
+          "39205",
+          "39206",
+          "39208",
+          "39209",
+          "39210",
+          "39211",
+          "39212",
+          "39386"
+        ],
+        "template": "bar",
+        "references": [
+          "ssds-education"
+        ],
+        "limitation": "学級の人数や個々の教員の担当人数ではありません。教育の質を直接評価する指標には使えません。",
+        "denominatorId": "elementary-school-teachers",
+        "scale": 1,
+        "unit": "人/本務教員",
+        "presentationMetricKey": "elementary-school-children-count"
+      },
+      {
+        "id": "pupils-per-school",
+        "heading": "小学校の平均的な規模を地図で見る",
+        "lead": "2024年度の児童数を小学校数で割り、高知県内の市町村ごとに比較します。1校あたりの規模が異なる地域を、学校配置を考えるための基礎資料にできます。",
+        "sourceId": "municipal-schools",
+        "metricIds": [
+          "elementary-school-children-count"
+        ],
+        "method": "ratio",
+        "year": 2024,
+        "template": "choropleth",
+        "references": [
+          "ssds-education"
+        ],
+        "limitation": "学校間の規模差や通学距離は示しません。義務教育学校など別区分の学校を含めません。",
+        "denominatorId": "elementary-school-count",
+        "scale": 1,
+        "unit": "人/校",
+        "presentationMetricKey": "elementary-school-children-count",
+        "chartTitle": "小学校1校あたりの児童数",
+        "scopeLabel": "高知県内の市町村",
+        "within": {
+          "kind": "prefecture",
+          "prefCode": "39"
+        }
+      }
+    ],
+    "notes": [
+      "小学校の指標であり、義務教育学校など別区分の学校は含めません。",
+      "学校数・本務教員数が0または欠測の自治体は比率を算出しません。分母が小さい地域では比率が大きく動くため、元の人数・学校数も確認してください。"
+    ]
+  }
 }

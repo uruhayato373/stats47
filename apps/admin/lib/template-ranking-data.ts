@@ -130,7 +130,7 @@ export function chartValueLabels(unit: string, values: number[], decimalPlaces?:
       formatValue: (value: number) => formatChartValue(value, scale),
     };
   }
-  if (decimalPlaces === undefined) return { unit: scale.unit, display: undefined, formatValue: datasetFormatter(values) };
+  if (decimalPlaces === undefined) return { unit: scale.unit, display: { decimalPlaces: resolveValuePrecision(values) }, formatValue: datasetFormatter(values) };
   return { unit: scale.unit, display: { decimalPlaces } as TileValueDisplay, formatValue: (value: number) => formatChartValue(value, { factor: 1, decimals: decimalPlaces }) };
 }
 

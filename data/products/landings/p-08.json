@@ -22,26 +22,194 @@
       "id": "commercial-sales",
       "heading": "地域の商業規模を比べる",
       "lead": "卸売業と小売業を合わせた年間商品販売額を棒グラフにできます。担当エリアの位置づけや、比較したい県との規模の違いを伝える資料に使えます。",
-      "metricKeys": ["annual-sales-amount"],
+      "metricKeys": [
+        "annual-sales-amount"
+      ],
       "preferredTemplate": "bar"
     },
     {
       "id": "sales-per-establishment",
       "heading": "事業所当たりの販売額を見る",
       "lead": "販売額を事業所当たりで比べると、総額とは異なる地域差が見えます。事業所の数と販売額の大きさを区別して説明できます。",
-      "metricKeys": ["annual-sales-amount-per-establishment"],
+      "metricKeys": [
+        "annual-sales-amount-per-establishment"
+      ],
       "preferredTemplate": "choropleth"
     },
     {
       "id": "convenience-store-density",
       "heading": "人口当たりの店舗数を比べる",
       "lead": "人口10万人当たりのコンビニエンスストア数を並べ、人口規模をそろえた比較を示せます。図に記載した調査時点の店舗分布を確認する資料になります。",
-      "metricKeys": ["convenience-store-count-per-100k"],
+      "metricKeys": [
+        "convenience-store-count-per-100k"
+      ],
       "preferredTemplate": "bar"
     }
   ],
   "purchaseNotes": [
     "都道府県単位の比較用データです。個別店舗の商圏や売上予測には、人口動態・通行量などの追加調査が必要です。",
     "指標ごとに対象年と調査範囲が異なります。比較には各図と収録ファイルに記載した年・単位・出典を使ってください。"
-  ]
+  ],
+  "analysisPlan": {
+    "objective": "卸売業・小売業の販売額を人口規模と並べ、自治体ごとの商業集積を説明する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "annual-sales-amount",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "annual-sales-amount-per-establishment",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "convenience-store-count-per-100k",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "annual-sales-amount",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で確認した2020年の値を使用し、販売額の規模と住民1人あたり販売額を分けて比較する。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "原典で確認した2020年の値を使用し、販売額の規模と住民1人あたり販売額を分けて比較する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "販売額には卸売業を含み、地域住民の消費額・店舗の集客力・商圏の大きさを直接示さない。",
+      "販売額の欠測・秘匿と実値0を区別する。人口0または欠測の自治体は人口あたり比率を算出しない。"
+    ]
+  },
+  "analysisRevision": {
+    "version": "analysis-20261112",
+    "title": "市区町村の商業規模を人口と比べるデータ集",
+    "description": "卸売業・小売業の年間商品販売額と同じ年の人口を揃え、商業の規模と人口あたりの規模を分けて比較できます。",
+    "useCases": [
+      {
+        "title": "商業集積の比較資料に",
+        "description": "自治体ごとの年間商品販売額を並べ、商業の規模を確認できます。"
+      },
+      {
+        "title": "立地検討の基礎調査に",
+        "description": "人口あたり販売額を補助指標に、人口規模だけでは説明しにくい商業集積の違いを確認できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "municipal-commerce",
+        "title": "年間商品販売額と総人口",
+        "grain": "municipality",
+        "years": [
+          2020
+        ],
+        "inputs": [
+          {
+            "metricKey": "annual-sales-amount"
+          },
+          {
+            "metricKey": "total-population"
+          }
+        ],
+        "definition": "2020年の卸売業・小売業の年間商品販売額と国勢調査人口。販売額の規模と住民1人あたり販売額を別々に示す。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      }
+    ],
+    "research": {
+      "method": "社会・人口統計体系の原典表と項目定義を確認し、地域単位・年・分母・欠測を揃えられる範囲で比較する。",
+      "references": [
+        {
+          "id": "ssds-commerce",
+          "title": "社会・人口統計体系の項目定義 C",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+          "section": "C3501 年間商品販売額",
+          "finding": "卸売業・小売業の事業所の販売額であり、住民の消費支出ではない。販売額の対象年と原典の調査年を区別し、秘匿と実値0を分ける。",
+          "checkedAt": "2026-11-12"
+        },
+        {
+          "id": "ssds-population",
+          "title": "社会・人口統計体系の項目定義 A",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/A",
+          "section": "A1101 総人口",
+          "finding": "販売額の対象年に合わせた国勢調査人口を分母にし、人口0・欠測では比率を計算しない。",
+          "checkedAt": "2026-11-12"
+        }
+      ]
+    },
+    "recipes": [
+      {
+        "id": "municipal-sales-scale",
+        "heading": "市町村の商業規模を比べる",
+        "lead": "高知県の市といの町を例に、卸売業・小売業の年間商品販売額を比較します。",
+        "sourceId": "municipal-commerce",
+        "metricIds": [
+          "annual-sales-amount"
+        ],
+        "method": "compare",
+        "year": 2020,
+        "areaCodes": [
+          "39201",
+          "39202",
+          "39203",
+          "39204",
+          "39205",
+          "39206",
+          "39208",
+          "39209",
+          "39210",
+          "39211",
+          "39212",
+          "39386"
+        ],
+        "template": "bar",
+        "references": [
+          "ssds-commerce"
+        ],
+        "limitation": "卸売業を含むため、地域住民の買い物額や小売店の集客力を直接示すものではありません。",
+        "presentationMetricKey": "annual-sales-amount"
+      },
+      {
+        "id": "municipal-sales-per-resident",
+        "heading": "人口あたりの商業規模を地図で見る",
+        "lead": "2020年の年間商品販売額を住民人口で割り、高知県内の市町村を塗り分けます。販売額の総額だけでは見えない、人口規模に対する商業集積の違いを整理できます。",
+        "sourceId": "municipal-commerce",
+        "metricIds": [
+          "annual-sales-amount"
+        ],
+        "method": "ratio",
+        "year": 2020,
+        "template": "choropleth",
+        "references": [
+          "ssds-commerce",
+          "ssds-population"
+        ],
+        "limitation": "住民1人の消費額ではありません。法人間取引や自治体外からの需要なども含みます。",
+        "denominatorId": "total-population",
+        "scale": 1,
+        "unit": "百万円/人",
+        "presentationMetricKey": "annual-sales-amount",
+        "chartTitle": "住民1人あたりの年間商品販売額",
+        "scopeLabel": "高知県内の市町村",
+        "within": {
+          "kind": "prefecture",
+          "prefCode": "39"
+        }
+      }
+    ],
+    "notes": [
+      "卸売業を含む年間商品販売額であり、小売だけの市場規模や住民の消費額として解釈しません。",
+      "販売額の欠測・秘匿を0に変換しません。実値0は保持し、人口0または欠測の場合は人口あたり比率を算出しません。"
+    ]
+  }
 }

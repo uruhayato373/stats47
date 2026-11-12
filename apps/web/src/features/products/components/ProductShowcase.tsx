@@ -12,8 +12,7 @@ function ShowcaseSection({ section, slug }: {
   return (
     <section aria-label={section.heading} className={`@container flex min-w-0 flex-col gap-3${section.figures.length > 1 ? " @sm:col-span-2" : ""}`}>
       <SectionHeader title={section.heading} as={section.kind === "chart" ? "h3" : "h2"} hideRule className="mb-0" />
-      <p className="text-sm leading-relaxed text-pretty">{section.lead}</p>
-      <ul className="grid gap-4 @sm:grid-cols-2">
+      <ul className={`grid gap-4${section.figures.length > 1 ? " @sm:grid-cols-2" : ""}`}>
         {section.figures.map((figure) => (
           <li key={figure.file}>
             <figure>
@@ -27,11 +26,12 @@ function ShowcaseSection({ section, slug }: {
                 decoding="async"
                 className="h-auto w-full"
               />
-              <figcaption className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{figure.alt}</figcaption>
             </figure>
           </li>
         ))}
       </ul>
+      <p className="text-sm leading-relaxed text-pretty">{section.lead}</p>
+      {section.note && <p className="text-xs leading-relaxed text-muted-foreground">{section.note}</p>}
     </section>
   );
 }

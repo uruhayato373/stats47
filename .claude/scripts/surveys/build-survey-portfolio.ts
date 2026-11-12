@@ -124,6 +124,8 @@ function runAudit(auditFile?: string): AuditJson {
     cwd: PROJECT_ROOT,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
+    // Node は .cmd を shell なしで起動しない (EINVAL)。Windows では shell を通す (2026-11-12)
+    shell: process.platform === "win32",
   });
   return JSON.parse(out) as AuditJson;
 }
@@ -217,11 +219,11 @@ function defaults(mech: Partial<SurveyEntry>, reviewRef: string | null): SurveyE
     gscSnapshotRef: null, // PR-3 で埋める
     ga4SnapshotRef: null,
     metrics: {
-      // PR-3 の集計前は「判定に使える標本なし」= insufficient-data (数値は持たない)
-      gsc: { status: "insufficient-data", windowDays: 0 },
-      ga4: { status: "insufficient-data", windowDays: 0 },
+      // PR-3 の集計前は「判定に使える標本なし」= insufficient-data (数値は持たない。windowDays は Schema が 1 以上を求めるので書かない)
+      gsc: { status: "insufficient-data" },
+      ga4: { status: "insufficient-data" },
       // 初回 build 時点では snapshot が無い。aggregate-survey-metrics が実測へ置換する。
-      internalNav: { status: "insufficient-data", windowDays: 0 },
+      internalNav: { status: "insufficient-data" },
     },
     currentHypothesis: null,
     evidenceRefs: reviewRef ? [reviewRef] : [],

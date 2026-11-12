@@ -595,7 +595,23 @@ export const DATASETS = [
   d("products.note-cover-urls", "data/products/note-cover-urls.json", "state", "product", "data", "note の販売記事の表紙画像の URL。サイトの商品カードが使う"),
   d("products.landings", "data/products/landings/{name}.json", "master", "product", "data", "データ商品の共通LPコピー。サイトとnote無料部分の入力", {
     schema: "config/schema/products.landings.schema.json",
-    refs: [{ field: "articleKey", to: "note.articles", key: "articles[].key" }],
+    refs: [
+      { field: "articleKey", to: "note.articles", key: "articles[].key" },
+      { field: "examples[].metricKeys[]", to: "registry:metrics" },
+      { field: "analysisPlan.inputs[].metricKey", to: "registry:metrics" },
+      { field: "analysisPlan.inputs[].variantId", to: "metrics.analysis-source-variants", key: "variants[].id" },
+      { field: "analysisPlan.analysisRefs[]", to: "content.analyses", key: "analyses[].id" },
+      { field: "analysisPlan.figureRefs[]", to: "content.figures", key: "figures[].id" },
+      { field: "analysisPlan.reuseProducts[]", to: "products.landings", key: "productId" },
+      { field: "analysisRevision.sources[].inputs[].metricKey", to: "registry:metrics" },
+      { field: "analysisRevision.sources[].inputs[].variantId", to: "metrics.analysis-source-variants", key: "variants[].id" },
+      { field: "analysisRevision.recipes[].metricIds[]", to: "registry:metrics" },
+      { field: "analysisRevision.recipes[].denominatorId", to: "registry:metrics" },
+    ],
+  }),
+  d("metrics.analysis-source-variants", "data/metrics/analysis-source-variants.json", "master", "data", "data", "既存指標と粒度・精度が異なる原典の明示定義。通常の指標の出典は複製せず、指標IDで接続する", {
+    schema: "data/metrics/schema/analysis-source-variants.schema.json",
+    refs: [{ field: "variants[].metricKey", to: "registry:metrics" }],
   }),
   d("products.landing-evidence", "data/products/landing-evidence/{name}.json", "evidence", "product", "data", "固定納品由来の作成例・共通画像型・画像SHA・収録形式。観測値は保存しない", {
     schema: "config/schema/products.landing-evidence.schema.json",

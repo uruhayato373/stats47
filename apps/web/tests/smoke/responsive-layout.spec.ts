@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
+import { ANALYSIS_PREVIEWS } from "../../src/features/products/analysis-previews.generated";
 import { findStorefrontProduct } from "../../src/features/products/storefront";
+import { STOREFRONT_PRODUCTS } from "../../src/features/products/storefront.generated";
 
 /**
  * breakpoint 別レイアウト検証（本番スモーク）
@@ -39,14 +41,24 @@ async function assertNoHorizontalScroll(page: import("@playwright/test").Page) {
 
 test.describe("breakpoint 別レイアウト", () => {
   test("商品画像は節の枚数や商品によらず同じ掲載幅を保つ", async ({ page }) => {
+    test.setTimeout(120_000);
     let referenceWidth: number | undefined;
     let referenceColumnStep: number | undefined;
     // 複数枚/節と1枚/節を比較する。幅が収まるだけでは、1枚だけ全幅に拡大される退行を検知できない。
-    for (const slug of ['data-muni-manufacturing', 'data-p-01']) {
+    for (const product of STOREFRONT_PRODUCTS.filter(item => item.showcase?.length)) {
+      const { slug } = product;
       await page.goto(`/products/${slug}`, { waitUntil: 'domcontentloaded' });
       const images = page.getByRole('region', { name: '商品詳細', exact: true }).locator('figure img');
-      const product = findStorefrontProduct(slug)!;
-      await expect(images).toHaveCount(product.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
+      const displayed = await page.locator('[data-product-preview]').count()
+        ? ANALYSIS_PREVIEWS.find(revision => revision.id === product.id)!
+        : product;
+      // 全データ商品の上部・末尾の販売導線を実際の通常URLで確認する。
+      for (const placement of ['product_detail_top', 'product_detail_bottom']) {
+        const purchase = page.locator(`[data-product-placement="${placement}"]`);
+        await expect(purchase).toHaveCount(1);
+        await expect(purchase.getByRole('link', { name: /noteで.*内容.*確認する/ })).toHaveAttribute('href', product.externalUrl);
+      }
+      await expect(images).toHaveCount(displayed.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
       await images.evaluateAll((elements) => elements.forEach((element) => { (element as HTMLImageElement).loading = 'eager'; }));
       await expect.poll(() => images.evaluateAll((elements) => elements.every((element) => {
         const image = element as HTMLImageElement;
@@ -69,7 +81,38 @@ test.describe("breakpoint 別レイアウト", () => {
     }
   });
 
-  for (const slug of ['data-muni-manufacturing', 'data-p-04', 'kindle-k-s1-02']) {
+  test("開発中の通常商品LPでも台帳の改訂案が表示され、noteの販売版と区別できる", async ({ page }) => {
+    test.setTimeout(120_000);
+    // 本番サーバーでは改訂ルートが404になる。開発中の通常URLの配線漏れを検知する。
+    const probe = await page.goto(`/products/preview/${ANALYSIS_PREVIEWS[0].slug}`, { waitUntil: 'domcontentloaded' });
+    test.skip(probe?.status() === 404, '改訂案は開発サーバー専用');
+    expect(probe?.status()).toBe(200);
+    for (const revision of ANALYSIS_PREVIEWS) {
+      const published = STOREFRONT_PRODUCTS.find(product => product.id === revision.id)!;
+      const path = `/products/${published.slug}`;
+      await page.goto(path, { waitUntil: 'domcontentloaded' });
+      expect(new URL(page.url()).pathname).toBe(path);
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText(revision.displayTitle ?? revision.title);
+      await expect(page.locator('[data-product-preview]')).toHaveCount(1);
+      for (const included of revision.included) await expect(page.getByText(included, { exact: true })).toBeVisible();
+      await expect(page.locator('[data-product-placement]')).toHaveCount(2);
+      for (const purchase of await page.locator('[data-product-placement]').all()) {
+        await expect(purchase.getByText('現在販売中の版', { exact: true })).toBeVisible();
+        await expect(purchase.getByText(published.displayTitle ?? published.title, { exact: true })).toBeVisible();
+        await expect(purchase.getByText(/改訂案のデータ・図は、現在販売中の版には含まれていません/)).toBeVisible();
+        await expect(purchase.getByRole('link', { name: /noteで現在販売中の内容/ })).toHaveAttribute('href', published.externalUrl);
+      }
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+      const structuredData = await page.locator('script[type="application/ld+json"]').allTextContents();
+      expect(structuredData.some(value => JSON.parse(value)['@type'] === 'Product')).toBe(false);
+      const images = page.locator('[data-product-preview] figure img');
+      await expect(images).toHaveCount(revision.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
+      for (const image of await images.all()) await expect(image).toHaveAttribute('src', new RegExp(`/${revision.slug}/showcase/`));
+      await assertNoHorizontalScroll(page);
+    }
+  });
+
+  for (const slug of ['data-muni-manufacturing', 'data-p-02', 'kindle-k-s1-02']) {
     test(`商品詳細 (${slug}) は商品内容を先に表示し、共通の余白を保つ`, async ({ page }) => {
       await page.goto(`/products/${slug}`, { waitUntil: 'domcontentloaded' });
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();

@@ -57,7 +57,7 @@ export function areasOf(scope: AreaScope): Map<string, string> {
   for (const entity of policy().entities) {
     if (!codes.has(entity.code)) continue;
     if (within.kind === 'prefecture' && !entity.code.startsWith(within.prefCode)) continue;
-    areas.set(entity.code, municipalityLabel(entity.name));
+    areas.set(entity.code, within.kind === 'nation' ? entity.name : municipalityLabel(entity.name));
   }
   return areas;
 }

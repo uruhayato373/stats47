@@ -159,6 +159,16 @@
       "types": "./src/content/external.ts",
       "import": "./src/content/external.ts",
       "require": "./src/content/external.ts"
+    },
+    "./ssds/entity-source": {
+      "types": "./src/ssds/entity-source.ts",
+      "import": "./src/ssds/entity-source.ts",
+      "require": "./src/ssds/entity-source.ts"
+    },
+    "./product-metric-keys": {
+      "types": "./src/product-metric-keys.ts",
+      "import": "./src/product-metric-keys.ts",
+      "require": "./src/product-metric-keys.ts"
     }
   },
   "scripts": {

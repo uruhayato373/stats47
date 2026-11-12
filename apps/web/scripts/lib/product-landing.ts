@@ -65,6 +65,7 @@ export function readProductLanding(root: string, productId: string, articleKey: 
   }));
   showcase.push({ kind: "file", ...evidence.filePreview, figures: figures(evidence.filePreview.figures) });
   return {
+    title: content.displayTitle,
     displayTitle: content.displayTitle,
     description: content.description,
     included: evidence.included,

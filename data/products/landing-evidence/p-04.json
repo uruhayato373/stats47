@@ -81,5 +81,133 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-04",
+    "version": "analysis-20261112",
+    "planSha256": "26649e3d0385ca577a81acfc70ff017b1bbc4f577c38f88bc7c32e08a14d02bf",
+    "resolvedPlanSha256": "cf08eaebcfe4395aec66ae2c7cba22cad05a14054b83a611b16ed6fa86bf7a1d",
+    "sources": [
+      {
+        "id": "municipal-finance",
+        "inputs": [
+          {
+            "metricKey": "fiscal-strength-index",
+            "variantId": "fiscal-strength-index-municipality",
+            "statsDataId": "0000020204",
+            "code": "D2201",
+            "unit": "指数",
+            "rawUnit": "‐"
+          },
+          {
+            "metricKey": "current-balance-ratio-city",
+            "statsDataId": "0000020204",
+            "code": "D2203",
+            "unit": "％"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2022
+        ],
+        "retrievedAt": "2026-11-12T06:04:33.047Z",
+        "tableTitle": "Ｄ　行政基盤",
+        "rows": 3482,
+        "areas": 1741,
+        "missing": 23,
+        "coverage": [
+          {
+            "year": 2022,
+            "total": 1741,
+            "kept": 1718,
+            "dropped": 23,
+            "share": 0.9867892016082711,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "2cb68602e990cf7cdec7be30105796379797a476d3c926ff8edf30d78efc4285"
+      }
+    ],
+    "results": 46,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "86abb116b7bffa20268478af21209b468750b40f22fe5bb9c9ae89e7f6a3faf3",
+        "bytes": 358155
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "a595db9d098c31df0ee11770c540d675c4cc44cd7751c2b1bf45d444fc1db424",
+        "bytes": 6286
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "2b4a181c0afbae582ecc5c62f948d60effb795687f142c3c6a95bda0c714e3b4",
+        "bytes": 138410
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "9667d091ae114f511229e3c54b6b88fa6e8272f149e1f3db43affa4ec8b6c721",
+        "bytes": 1590
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "9ccb2a76aad5fa19041896170c0e2de205ef1b4f68df57a14cc9a31723de5c88",
+        "bytes": 5775
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "b9dbf30fa71f7dd97bb7f4b1afeb9b86207505fab2b2a07883dc16bb00a7fa37",
+        "bytes": 7467
+      },
+      {
+        "file": "README.md",
+        "sha256": "3674f3b7468ce59a8e66d11c499648b7e30a05209fe1903e55f74fd230fe5551",
+        "bytes": 2387
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
+        "bytes": 272
+      },
+      {
+        "file": "images/municipal-fiscal-strength.png",
+        "sha256": "61accad8f920b590eaadaea3ef87df2715479514125256a2f387fe8f8de60b00",
+        "bytes": 162413
+      },
+      {
+        "file": "images/municipal-current-balance.png",
+        "sha256": "c799c5ad0f359351e4051e327186a8f9ffd25c9919ebb4f89ab0eb9fe909c26f",
+        "bytes": 162737
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "befe5000ef3c3b9c01b2e4a3e14cae2a763088eb1a7298f5ba5b4e35a4f5a03c",
+        "bytes": 124203
+      },
+      {
+        "file": "inputs/municipal-finance.json",
+        "sha256": "2cb68602e990cf7cdec7be30105796379797a476d3c926ff8edf30d78efc4285",
+        "bytes": 36771088
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "08f3966b0f0be309ee6466993ede7ef2e7b17c16780aca35dce75dd2a912bbb7",
+        "bytes": 3593
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "787a965f78680b0c27deb2525f95038f54cf0d9ca016bc6234c05195b75ffe74",
+        "bytes": 1326541
+      }
+    ]
+  }
 }

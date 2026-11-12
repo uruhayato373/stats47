@@ -287,7 +287,10 @@
     "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push",
     "weekly:audits": "node .claude/scripts/management/run-weekly-audits.mjs",
     "weekly:collect": "bash scripts/scheduled/weekly-saturday.sh",
-    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs"
+    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs",
+    "products:analysis:build": "tsx .claude/scripts/products/build-analysis-pack.ts",
+    "products:analysis:check": "tsx .claude/scripts/products/build-analysis-pack.ts --check",
+    "products:analysis:catalog": "tsx .claude/scripts/products/check-analysis-catalog.ts"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.517",

@@ -2256,6 +2256,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-10",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:garbage-collection-population",
           "kind": "ranking"
         }
@@ -4211,6 +4215,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-05",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:general-clinic-count",
           "kind": "ranking"
         }
@@ -5310,6 +5318,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "product:data-p-05",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:general-hospital-bed-count-per-100k",
           "kind": "ranking"
         },
@@ -6148,6 +6160,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:general-household-members",
           "kind": "ranking"
         }
@@ -6269,6 +6285,14 @@
         {
           "pageId": "japan-theme:living-housing",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-11",
+          "kind": "product"
         },
         {
           "pageId": "ranking:general-households",

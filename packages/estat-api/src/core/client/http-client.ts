@@ -54,7 +54,7 @@ function redactRequestSecrets(text: string, params: Record<string, unknown>): st
     const secret = String(value);
     const encoded = new URLSearchParams({ value: secret }).toString().slice("value=".length);
     for (const form of new Set([secret, encodeURIComponent(secret), encoded])) {
-      redacted = redacted.replaceAll(form, "[REDACTED]");
+      redacted = redacted.split(form).join("[REDACTED]");
     }
   }
   return redacted;
