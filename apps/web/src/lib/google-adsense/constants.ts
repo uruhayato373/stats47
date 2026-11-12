@@ -134,6 +134,8 @@ export const BLOG_END: AdSlotConfig = { slotId: "2394403971", format: "rectangle
  */
 export const BLOG_RAIL: AdSlotConfig = { slotId: "1595814272", format: "rectangle" }; // stats47-blog-rail (300×250)
 export const BLOG_RAIL_STICKY: AdSlotConfig = { slotId: "6270069803", format: "rectangle" }; // stats47-blog-rail-sticky (追従する 300×600)
+/** 右レールの中段 (運営者のプロフィールの後・追従しない 300×250)。2026-11-12 オーナー決定で足し、同日に作成 */
+export const BLOG_RAIL_MIDDLE: AdSlotConfig = { slotId: "4422635661", format: "rectangle" }; // stats47-blog-rail-middle
 
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {

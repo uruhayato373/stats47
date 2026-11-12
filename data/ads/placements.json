@@ -483,6 +483,15 @@
         "condition": "2026-11-12 オーナー決定でアフィリエイトの PR のバナー (最大 2 枚) から替えた。専用ユニット stats47-blog-rail"
       },
       {
+        "slot": "adsense-rail-rect",
+        "region": "rail",
+        "position": "データを探すカードの後・運営者のプロフィールの前 (右レールの中段)",
+        "source": "apps/web/src/app/blog/[slug]/page.tsx",
+        "marker": "<RailAdSlot slot={BLOG_RAIL_MIDDLE} />",
+        "adsenseSlot": "BLOG_RAIL_MIDDLE",
+        "condition": "2026-11-12 オーナー決定で足した追従しない 300×250。専用ユニット stats47-blog-rail-middle"
+      },
+      {
         "slot": "adsense-rail-sticky",
         "region": "rail",
         "position": "右レールの最後 (運営者のプロフィールの後)",

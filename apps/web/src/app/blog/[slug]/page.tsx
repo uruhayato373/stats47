@@ -39,6 +39,7 @@ import {
     listLatestArticles,
     findArticleBySlug,
     findArticleTitlesBySlugs,
+    readPopularArticlesFromR2,
     getTagKeysForArticle,
     getRankingKeysForArticle,
     articleService,
@@ -50,7 +51,8 @@ import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { BLOG_ARTICLE_INLINE, BLOG_END, BLOG_RAIL, BLOG_RAIL_STICKY, BLOG_ROW_2, BLOG_ROW_3 } from "@/lib/google-adsense";
+import { BLOG_ARTICLE_INLINE, BLOG_END, BLOG_RAIL, BLOG_RAIL_MIDDLE, BLOG_RAIL_STICKY, BLOG_ROW_2, BLOG_ROW_3 } from "@/lib/google-adsense";
+import { blogThumbnailUrl } from "@/lib/metadata/ogp-image";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -186,7 +188,12 @@ export default async function BlogPostPage({ params }: PageProps) {
     const bannerVertical = resolveContentVertical(bannerInput).vertical;
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const articleRankingKeys = await getRankingKeysForArticle(slug);
-    const relatedArticles = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['blog'], rankingKeys: articleRankingKeys, tagIds: contentTagIds(tagKeys), limit: 3});
+    // 関連記事は 5 件 (2026-11-12 オーナー決定。PC の右レールの下が空いていたため 3 件から増やした)
+    const relatedArticles = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['blog'], rankingKeys: articleRankingKeys, tagIds: contentTagIds(tagKeys), limit: 5});
+    // よく読まれている記事 (GA4 の直近 28 日の閲覧数・週次。自分と関連記事に出した記事を除いて 5 件)
+    const popularArticles = (await readPopularArticlesFromR2(slug, 10))
+        .filter((article) => !relatedArticles.some((item) => item.id === `blog:${article.slug}`))
+        .slice(0, 5);
     const dataNavigation = await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['ranking', 'municipality-ranking', 'geo', 'theme'], rankingKeys: articleRankingKeys, limit: 3});
     const railThemes = (await readContentRecommendations({sourceId: 'blog:' + slug, kinds: ['theme'], rankingKeys: articleRankingKeys, limit: 3}))
         .filter(theme => !dataNavigation.some(item => item.id === theme.id))
@@ -242,6 +249,24 @@ export default async function BlogPostPage({ params }: PageProps) {
                 右レールが本文の横にあるとき (PC) だけ出る (RailAdSlot) */}
             <RailAdSlot slot={BLOG_RAIL} />
 
+            {/* よく読まれている記事 (2026-11-12 オーナー決定。GA4 の閲覧数で週次に選ぶ。ブログ一覧と同じ見せ方) */}
+            <RailLinksCard
+                title="よく読まれている記事"
+                items={popularArticles.map((article) => ({
+                    id: article.slug,
+                    label: article.title,
+                    href: hrefFor("blog", { slug: article.slug }),
+                    trackingLabel: `popular:${article.slug}`,
+                    thumbnail: {
+                        lightSrc: blogThumbnailUrl(article.slug, "light"),
+                        darkSrc: blogThumbnailUrl(article.slug, "dark"),
+                        alt: "",
+                    },
+                }))}
+                layout="ranked"
+                trackingSurface="blog_sidebar"
+            />
+
             {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
                 品目を検出できない記事では何も描画しない。 */}
 
@@ -277,6 +302,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                     trackingSurface="blog_sidebar"
                 />
             </div>
+
+            {/* 右レールの中段の AdSense (2026-11-12 オーナー決定。追従しない 300×250)。運営者のプロフィールを挟んで
+                最後の追従する枠と隣り合わせにしない (広告の枠の台帳の noAdjacentSlots) */}
+            <RailAdSlot slot={BLOG_RAIL_MIDDLE} />
 
             <OperatorProfileCard />
 

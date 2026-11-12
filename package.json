@@ -177,6 +177,7 @@
     "fetch-ga4-snapshot": "node .claude/scripts/metrics/fetch-ga4-snapshot.mjs",
     "fetch-adsense-snapshot": "node .claude/scripts/metrics/fetch-adsense-snapshot.mjs",
     "fetch-adsense-page-types": "node .claude/scripts/metrics/fetch-adsense-page-types.mjs",
+    "fetch-popular-blog-articles": "node .claude/scripts/metrics/fetch-popular-blog-articles.mjs",
     "metrics:digest": "node .claude/scripts/metrics/update-history-csv.mjs",
     "metrics:adsense-impact": "node .claude/scripts/metrics/measure-adsense-impact.mjs",
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
