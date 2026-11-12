@@ -128,6 +128,13 @@ export const BLOG_ROW_2: AdSlotConfig = { slotId: "9307296688", format: "rectang
 export const BLOG_ROW_3: AdSlotConfig = { slotId: "4897424179", format: "rectangle" }; // stats47-blog-row-3
 export const BLOG_END: AdSlotConfig = { slotId: "2394403971", format: "rectangle" }; // stats47-blog-end
 
+/**
+ * ブログ記事: 右レール (PC だけ)。2026-11-12 オーナー決定で、右レールの PR のバナー (最大 2 枚) を上段の AdSense に替え、
+ * 右レールの最後に追従する 300×600 を足した (中身が本文より短く、PC で下が約 5,000px 空いていた)。同日に専用のユニットを作った。
+ */
+export const BLOG_RAIL: AdSlotConfig = { slotId: "1595814272", format: "rectangle" }; // stats47-blog-rail (300×250)
+export const BLOG_RAIL_STICKY: AdSlotConfig = { slotId: "6270069803", format: "rectangle" }; // stats47-blog-rail-sticky (追従する 300×600)
+
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
 export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
   slotId: "6809797335",

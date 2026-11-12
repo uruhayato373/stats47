@@ -21,7 +21,4 @@ export { ArticleTableOfContents } from './components/ArticleTableOfContents';
 
 // ユーティリティ
 export { generateBlogMetadata } from './utils/generate-blog-metadata';
-export {
-  BLOG_IN_BODY_BANNER_COUNT,
-} from './utils/inline-affiliate-banner';
 export { adRowTargets } from './lib/ad-row-positions';

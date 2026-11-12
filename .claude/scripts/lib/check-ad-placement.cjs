@@ -114,7 +114,8 @@ function checkForbiddenPatterns(rel, src, patterns) {
 function findPromotionalTags(src) {
   return [
     ...src.matchAll(
-      /<([A-Z][A-Za-z0-9]*(?:Promo|Affiliate|Furusato|TextAd)[A-Za-z0-9]*)\b/g,
+      // 名前が語で始まる部品 (FurusatoNozeiCard・AffiliateAdSlot) も拾う。2026-11-12 まで先頭に 1 文字を要求していて拾えなかった
+      /<((?:[A-Z][A-Za-z0-9]*?)?(?:Promo|Affiliate|Furusato|TextAd)[A-Za-z0-9]*)\b/g,
     ),
   ].map((match) => match[1]);
 }
@@ -275,10 +276,8 @@ if (blogRailStart < 0 || blogRailEnd <= blogRailStart) {
   );
 } else {
   const blogRail = stripComments(blogPage.slice(blogRailStart, blogRailEnd));
-  // blog は記事 vertical の BannerAd を直接描画する。固定ハウスバナーを必須にしない。
-  if (!/<(?:SidebarPromoBanner|BannerAd)\b/.test(blogRail)) {
-    errors.push(`${RIGHT_RAIL_FILES.blog}\n   blog 右レールに画像バナーがない。`);
-  }
+  // blog の右レールの PR のバナーは 2026-11-12 オーナー決定で AdSense に替えた (アフィリエイトは戦略を練り直すまで止める)。
+  // 画像バナーを必須にする検査は外し、PR を戻すときの制約 (画像バナーだけ・テキスト広告や宣伝カードにしない) は残す
   checkAllowedPromotionalTags(
     RIGHT_RAIL_FILES.blog,
     blogRail,

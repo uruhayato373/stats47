@@ -179,7 +179,7 @@
       "accepts": [
         "adsense:rectangle"
       ],
-      "component": "AdSenseAd",
+      "component": "RailAdSlot",
       "measured": "2026-11-12 オーナー決定: 右レールの中身が本文より短く、PC で下に約 840px 空いていた (総人口のランキング・1440px)。最後の 1 枠を 300×600 にし、ヘッダーの下 (80px) に追従させる。Google の条件 (幅 300px 以下・縦だけ・同時に見える追従広告は 1 つ・重ならない・PC だけ。support.google.com/adsense/answer/10734935・11-12 確認) に収める。右レールは本文の横にあるとき (Shell 988px 以上) だけ出るので、タブレット・スマホでは出ない"
     },
     {
@@ -399,7 +399,7 @@
         "region": "rail",
         "position": "右レールの最後 (分野のランキング一覧の後)",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx",
-        "marker": "slotId={RANKING_PAGE_TABLE_SIDE.slotId}",
+        "marker": "<RailAdSlot slot={RANKING_PAGE_TABLE_SIDE} sticky />",
         "adsenseSlot": "RANKING_PAGE_TABLE_SIDE",
         "devices": [
           "desktop"
@@ -460,11 +460,25 @@
         "condition": "AdSense 1 つ (専用ユニット stats47-blog-end) を本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)"
       },
       {
-        "slot": "affiliate-rect",
+        "slot": "adsense-rail-rect",
         "region": "rail",
-        "position": "右レール (最大 2 枚)",
+        "position": "関連記事の後 (右レールの上段)",
         "source": "apps/web/src/app/blog/[slug]/page.tsx",
-        "marker": "position=\"blog-sidebar\""
+        "marker": "<RailAdSlot slot={BLOG_RAIL} />",
+        "adsenseSlot": "BLOG_RAIL",
+        "condition": "2026-11-12 オーナー決定でアフィリエイトの PR のバナー (最大 2 枚) から替えた。専用ユニット stats47-blog-rail"
+      },
+      {
+        "slot": "adsense-rail-sticky",
+        "region": "rail",
+        "position": "右レールの最後 (運営者のプロフィールの後)",
+        "source": "apps/web/src/app/blog/[slug]/page.tsx",
+        "marker": "<RailAdSlot slot={BLOG_RAIL_STICKY} sticky />",
+        "adsenseSlot": "BLOG_RAIL_STICKY",
+        "devices": [
+          "desktop"
+        ],
+        "condition": "300×600 をヘッダーの下 (80px) に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、PC で下が約 5,000px 空いていた)。専用ユニット stats47-blog-rail-sticky"
       }
     ],
     "home": [

@@ -15,14 +15,10 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 
+import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 
-import { adSlotBox } from "@/lib/ad-placements";
-import {
-    ADSENSE_DISPLAY_ENABLED,
-    AdSenseAd,
-    RANKING_PAGE_TABLE_SIDE,
-} from "@/lib/google-adsense";
+import { RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
 
 import { classifyRankingSubtitle } from "../../utils/classify-subtitle";
 import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
@@ -203,15 +199,7 @@ export function RankingKeyPageClient({
     const rail = sections.sidebar ? (
         <>
             {sections.sidebar}
-            {ADSENSE_DISPLAY_ENABLED && (
-                <div className="sticky top-20 hidden @min-[988px]/shell:block">
-                    <AdSenseAd
-                        format={RANKING_PAGE_TABLE_SIDE.format}
-                        slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                        slotBox={adSlotBox("adsense-rail-sticky")}
-                    />
-                </div>
-            )}
+            <RailAdSlot slot={RANKING_PAGE_TABLE_SIDE} sticky />
         </>
     ) : undefined;
 

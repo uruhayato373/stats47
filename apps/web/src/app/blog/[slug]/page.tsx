@@ -24,16 +24,16 @@ import { ContentNavigation } from '@/components/rail/ContentNavigation';
 import { ArticleCard } from "@/components/surface";
 
 import {
-    BannerAd,
     composeAdRows,
     OperatorProfileCard,
+    RailAdSlot,
     type AdRowPattern,
     RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
-import { adRowTargets, BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
+import { resolveAffiliateBannersByCategory, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
+import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
     listLatestArticles,
@@ -50,7 +50,7 @@ import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { BLOG_ARTICLE_INLINE, BLOG_END, BLOG_ROW_2, BLOG_ROW_3 } from "@/lib/google-adsense";
+import { BLOG_ARTICLE_INLINE, BLOG_END, BLOG_RAIL, BLOG_RAIL_STICKY, BLOG_ROW_2, BLOG_ROW_3 } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -174,7 +174,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     );
     // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
-    const affiliateBannerPool = await resolveAffiliateBannersForContent(bannerInput, BLOG_IN_BODY_BANNER_COUNT + 2);
     // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。
     // どの段も AdSense 1 つを本文の幅いっぱいに出し、PR は出さない (2026-11-12 オーナー決定。アフィリエイトは戦略を決め直すまで止める)。
     // 見出しの数で本文の段が減るので、差し込める段だけに割り当て、末尾の段は常に BLOG_END にする
@@ -184,9 +183,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         [...BLOG_BODY_AD_ROW_SLOTS.slice(0, bodyRowCount), BLOG_END],
         [],
     );
-    // 右レールは「バナーだけ」。本文が PR を出していた頃と同じく、先頭の BLOG_IN_BODY_BANNER_COUNT 件より後ろを回す
-    // (本文から PR を外しただけで右レールのバナーが替わらないようにする。右レールは次に AdSense へ替える)。
-    const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const bannerVertical = resolveContentVertical(bannerInput).vertical;
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const articleRankingKeys = await getRankingKeysForArticle(slug);
@@ -227,7 +223,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: buildPublisherOrganization(baseUrl),
     };
 
-    // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
+    // レール通常領域: 関連コンテンツ → AdSense (上段) → 探索導線 → 運営者 → 追従する AdSense の順。
     const rail = (
         // 右レールは広告インテントの対象外にする (ad-intent-scope.ts)。contents なので右レールの格子の並びは変わらない
         <div className="google-anno-skip contents">
@@ -242,24 +238,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <ContentNavigation title="関連記事" items={relatedArticles} surface="blog_sidebar" />
 
-            {/* ★ 2026-08-04: 右レールに記事 vertical で解決した 300x250 を追加。
-                右レールは**バナーのみ**とし、テキストリンクは本文 inline に寄せる方針は不変。
-                在庫が無い vertical では空配列になり何も描画しない。 */}
-            {sidebarBanners.map((b) => (
-                <BannerAd
-                    key={b.id}
-                    href={b.href}
-                    imageUrl={b.imageUrl}
-                    trackingPixelUrl={b.trackingPixelUrl}
-                    width={b.width}
-                    height={b.height}
-                    label={b.title}
-                    category={b.vertical ?? bannerVertical ?? "other"}
-                    position="blog-sidebar"
-                    adId={b.id}
-                    creativeSize={`${b.width}x${b.height}`}
-                />
-            ))}
+            {/* 右レールの上段の AdSense (2026-11-12 オーナー決定: アフィリエイトを止め、PR のバナー (最大 2 枚) から替えた)。
+                右レールが本文の横にあるとき (PC) だけ出る (RailAdSlot) */}
+            <RailAdSlot slot={BLOG_RAIL} />
 
             {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
                 品目を検出できない記事では何も描画しない。 */}
@@ -298,6 +279,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
 
             <OperatorProfileCard />
+
+            {/* 右レールの最後: 300×600 をヘッダーの下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
+                PC で下が約 5,000px 空いていた)。PC だけ。仕組みと Google の条件は RailAdSlot の sticky */}
+            <RailAdSlot slot={BLOG_RAIL_STICKY} sticky />
         </div>
     );
     // レール末尾: ここまでが右レールの静的範囲 (check-ad-placement.cjs と広告配置の契約テストが範囲の終わりの目印に使う)

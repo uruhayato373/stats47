@@ -6,7 +6,6 @@ export {
   resolveAffiliateBannersByCategory,
   resolveAffiliateBannersByCategoryKey,
   resolveAffiliateBannersByVertical,
-  resolveAffiliateBannersForContent,
   resolveAffiliateTextAdsByTagKeys,
   resolveAffiliateTextAdsByVertical,
   resolveAffiliateTextAdsForContent,
