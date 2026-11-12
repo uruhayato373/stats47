@@ -8224,10 +8224,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:sugar-consumption-expenditure",
           "kind": "ranking"
         }
@@ -8459,10 +8455,6 @@
         {
           "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sugar-consumption-quantity",

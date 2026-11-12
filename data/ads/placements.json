@@ -380,30 +380,6 @@
       {
         "slot": "ad-row",
         "scopes": [
-          "japan"
-        ],
-        "region": "body",
-        "position": "ページの最後",
-        "source": "apps/web/src/app/japan/[themeSlug]/page.tsx",
-        "marker": "position=\"japan-row-1\"",
-        "trackingPosition": "japan-row-1",
-        "cells": [
-          {
-            "kind": "adsense",
-            "adsenseSlot": "HUB_INCONTENT"
-          },
-          {
-            "kind": "affiliate"
-          },
-          {
-            "kind": "adsense",
-            "adsenseSlot": "CONTENT_FOOTER"
-          }
-        ]
-      },
-      {
-        "slot": "ad-row",
-        "scopes": [
           "municipalities"
         ],
         "region": "body",

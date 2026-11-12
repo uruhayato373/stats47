@@ -22,7 +22,8 @@ const TARGET_KINDS = {
   survey: ['survey'],
   theme: ['theme', 'municipality-theme'],
   area: ['area', 'area-theme', 'city'],
-  japan: ['japan-theme'],
+  // 日本全体のテーマ (japan-theme) は 2026-11-12 に全国のテーマへまとめた。全国の時系列は全国のテーマが持つ
+  japan: ['theme'],
   blog: ['blog'],
   note: ['note'],
   kindle: ['kindle'],
@@ -149,7 +150,7 @@ export function expansionStatus(analyses, ledger, index) {
     records.set(key, [...(records.get(key) ?? []), r]);
   }
   const themeKeys = publishedKeys(index, ['theme', 'municipality-theme']);
-  const japanKeys = publishedKeys(index, ['japan-theme']);
+  const japanKeys = publishedKeys(index, ['theme']);
   const rows = [];
   for (const analysis of analyses) {
     if (!ADOPTED.has(analysis.resolution)) continue;

@@ -4424,10 +4424,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:household-other-purchases",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:domestic-student-remittance-consumption-expenditure",
           "kind": "ranking"
         },

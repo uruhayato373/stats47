@@ -4206,10 +4206,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:food-expenditure-total",
           "kind": "ranking"
         },

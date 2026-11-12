@@ -47,5 +47,12 @@ export function listJapanCatalogThemes(): JapanCatalogTheme[] {
  */
 export function isJapanThemeMovedToTheme(themeSlug: string): boolean {
   const path = `/japan/${themeSlug}`;
-  return themeRedirects.pathRedirects.some((row) => row.themeSlug === themeSlug && new RegExp(row.pattern).test(path));
+  // 家計の品目のテーマは別の名前のテーマ (食卓と家計の支出) の章へまとめたので、転送先の名前ではなく旧 URL が表にあるかで決める
+  return themeRedirects.pathRedirects.some((row) => new RegExp(row.pattern).test(path));
+}
+
+/** 日本全体のテーマの転送先の全国のテーマの名前 (転送表の行の themeSlug)。転送していなければ undefined */
+export function japanThemeDestination(themeSlug: string): string | undefined {
+  const path = `/japan/${themeSlug}`;
+  return themeRedirects.pathRedirects.find((row) => new RegExp(row.pattern).test(path))?.themeSlug;
 }

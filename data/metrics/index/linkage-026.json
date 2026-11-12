@@ -8874,10 +8874,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:household-assets-debt",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:securities-balance",
           "kind": "ranking"
         },

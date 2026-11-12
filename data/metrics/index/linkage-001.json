@@ -7229,10 +7229,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-assets-debt",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:avg-savings-rate-worker-households",
           "kind": "ranking"
         },
@@ -11143,10 +11139,6 @@
         {
           "pageId": "blog:shiga-food-culture",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:beef-consumption-quantity",

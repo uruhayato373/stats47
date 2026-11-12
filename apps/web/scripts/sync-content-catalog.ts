@@ -23,8 +23,6 @@ import {
 import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
-  isJapanThemeMovedToTheme,
-  JAPAN_CATALOGS,
   MUNICIPALITY_THEME_PAGE_SLUGS,
   buildMunicipalityRankingSubtitles,
   municipalityMetricKeysForPrefectureTheme,
@@ -188,17 +186,7 @@ async function run() {
       published: publishableCityCodes.has(city.cityCode),
     });
   }
-  // 全国のテーマへ 301 した日本全体のテーマは公開ページとして数えない (2026-11-12。転送表 site.theme-redirects が正本)
-  for (const theme of Object.values(JAPAN_CATALOGS).filter((t) => !isJapanThemeMovedToTheme(t.themeSlug)))
-    add({
-      id: `japan-theme:${theme.themeSlug}`,
-      kind: 'japan-theme',
-      key: theme.themeSlug,
-      title: `日本の${theme.title}`,
-      href: `/japan/${theme.themeSlug}`,
-      rankingKeys: theme.metrics.map(metric => metric.metricKey),
-      published: true,
-    });
+  // 日本全体のテーマ (/japan/<テーマ>) は 2026-11-12 にすべて全国のテーマへ 301 したので、ページとして数えない
   // 「全国の市区町村を比べる」ページ。slug は都道府県のテーマ名にそろえ、対応する市区町村テーマの指標をまとめる
   // (2026-10-31 IA-REGION-THEME-01。旧: 市区町村テーマ 29 個ごと。旧 URL は middleware が 301)
   for (const slug of MUNICIPALITY_THEME_PAGE_SLUGS) {

@@ -18,7 +18,6 @@ import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   MUNICIPALITY_THEME_PAGE_SLUGS,
   MUNICIPALITY_PREFECTURE_RANKING_KEYS,
-  isJapanThemeMovedToTheme, listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
 import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
@@ -124,13 +123,8 @@ const THEME_PAGES: MetadataRoute.Sitemap = ALL_THEMES.map((theme) => ({
  * priority は `/survey` (0.6/0.5) と同水準 (pilot段階の新規面のため /themes より低め)。
  */
 const JAPAN_PAGES: MetadataRoute.Sitemap = [
+  // 日本全体のテーマ (/japan/<テーマ>) は 2026-11-12 に全国のテーマへ 301 した。地域のハブ (全国) だけを載せる
   { url: `${BASE_URL}/japan`, changeFrequency: 'weekly', priority: 0.6 },
-  // 全国のテーマへ 301 した日本全体のテーマは載せない (2026-11-12。転送表 site.theme-redirects が正本)
-  ...listJapanCatalogThemes().filter((theme) => !isJapanThemeMovedToTheme(theme.themeSlug)).map((theme) => ({
-    url: `${BASE_URL}${hrefFor('japan-theme', { themeSlug: theme.themeSlug })}`,
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  })),
 ];
 
 const MUNICIPALITY_PAGES: MetadataRoute.Sitemap = [

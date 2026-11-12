@@ -76,9 +76,8 @@ describe("sitemap: NEXT_PHASE=phase-production-build (実 reader)", () => {
     expect(japanId).toBeGreaterThanOrEqual(0);
     const entries = await sitemap({ id: japanId });
     expect(entries.some((e) => e.url.endsWith("/japan"))).toBe(true);
-    // 手書きのテーマは 2026-11-12 に全国のテーマへ 301 したので載せない。家計のテーマは残る
-    expect(entries.some((e) => e.url.endsWith("/japan/education-culture"))).toBe(false);
-    expect(entries.some((e) => e.url.endsWith("/japan/household-appliances"))).toBe(true);
+    // 日本全体のテーマは 2026-11-12 にすべて全国のテーマへ 301 したので載せない (地域のハブ /japan だけ)
+    expect(entries.some((e) => e.url.includes("/japan/"))).toBe(false);
   });
 
   it("Xで公開するGeo県別stageをstatic sitemapへ含める", async () => {

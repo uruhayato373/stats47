@@ -30,6 +30,7 @@ export {
   JAPAN_CATALOGS,
   getJapanCatalogTheme,
   isJapanThemeMovedToTheme,
+  japanThemeDestination,
   listJapanCatalogThemes,
 } from './japan-catalog';
 export type { JapanCatalogMetric, JapanCatalogTheme } from './japan-catalog';

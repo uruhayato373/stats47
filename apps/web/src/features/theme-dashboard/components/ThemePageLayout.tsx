@@ -27,7 +27,7 @@ import { CONTENT_FOOTER, HUB_INCONTENT, RAIL_RECT, THEMES_CONTENT } from '@/lib/
 import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
-import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
+import { NATIONAL_ONLY_SECTIONS, THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
 import { loadInitialThemeData } from '../lib/initial-theme-data';
@@ -183,6 +183,8 @@ export async function ThemePageLayout({
   ];
   const embeddedSections = Object.fromEntries(
     (theme.embeddedSections ?? []).flatMap((key) => {
+      // 全国の値の図の章は、県のページでは組み立てない (章ごと出さない)
+      if (areaContext && NATIONAL_ONLY_SECTIONS.has(key)) return [];
       const Section = THEME_SECTION_REGISTRY[key];
       return Section
         ? [[key, <Suspense key={key} fallback={null}><Section /></Suspense>]]

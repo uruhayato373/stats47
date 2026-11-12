@@ -1,6 +1,54 @@
 {
   "pathRedirects": [
     {
+      "pattern": "^/japan/household-assets-debt/?$",
+      "themeSlug": "household-assets-debt",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた。日本全体のページにしか無かった家計調査の分類軸別の図はテーマの章に移した (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-food-spending/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体のテーマを全国のテーマへまとめた。日本全体のページにしか無かった家計調査の分類軸別の図はテーマの章に移した (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-appliances/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-clothing/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-health-spending/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-transport-spending/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-education-leisure/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
+      "pattern": "^/japan/household-other-purchases/?$",
+      "themeSlug": "household-food-spending",
+      "since": "2026-11-12",
+      "reason": "日本全体にしか無かった家計の品目のテーマを、全国のテーマ「食卓と家計の支出」の章にまとめた (オーナー決定)"
+    },
+    {
       "pattern": "^/japan/aging-society/?$",
       "themeSlug": "aging-society",
       "since": "2026-11-12",

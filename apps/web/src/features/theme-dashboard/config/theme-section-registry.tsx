@@ -38,6 +38,8 @@ import { ThemeTourismSeasonalitySection } from '@/features/tourism-seasonality';
 import { ThemeTsunamiExposureSection } from '@/features/tsunami-exposure';
 import { ThemeWaterQualitySection } from '@/features/water-quality';
 
+import { ThemeKakeiAxisAssetsDebtSection, ThemeKakeiAxisFoodSpendingSection } from '../components/kakei-axis/ThemeKakeiAxisSection';
+
 /**
  * テーマダッシュボードに埋め込む GIS マップ section の registry。
  *
@@ -76,6 +78,9 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
   'finance-overview': ThemeFinanceOverviewSection,
   'finance-sustainability': ThemeFinanceSustainabilitySection,
   'finance-flow': ThemeFinanceFlowSection,
+  // 家計調査の分類軸別の全国の値 (2026-11-12 に日本全体のテーマのページから移した。県のページでは描かない)
+  'kakei-axis-household-food-spending': ThemeKakeiAxisFoodSpendingSection,
+  'kakei-axis-household-assets-debt': ThemeKakeiAxisAssetsDebtSection,
   'geo-station-access': ThemeGeoStationAccessSection,
   'geo-public-facility-access': ThemeGeoPublicFacilityAccessSection,
   highway: ThemeHighwayTimelineSection,
@@ -95,4 +100,13 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
 export const HALF_WIDTH_SECTIONS = new Set<string>([
   'migration-flow',
   'commute-flow',
+]);
+
+/**
+ * 全国のページ (`/themes/<テーマ>`) だけで描く章。全国の値の図なので、県のページ (`/areas/<県>/<テーマ>`) では組み立てず、
+ * 章ごと出さない (テーマ・地域のページは 1 つの地域を見せる。theme-catalog-standards §3.0。2026-11-12)
+ */
+export const NATIONAL_ONLY_SECTIONS = new Set<string>([
+  'kakei-axis-household-food-spending',
+  'kakei-axis-household-assets-debt',
 ]);

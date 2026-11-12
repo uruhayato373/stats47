@@ -36,7 +36,6 @@
       "city": "type:reference",
       "survey": "type:textbook",
       "theme": "type:textbook",
-      "japan-theme": "type:textbook",
       "municipality-theme": "type:textbook",
       "geo": "type:paper",
       "geo-layer": "type:reference"

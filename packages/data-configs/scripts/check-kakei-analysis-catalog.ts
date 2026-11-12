@@ -15,7 +15,8 @@ const root = path.resolve(
   '../../..'
 );
 const pages = new Map<string, { published: boolean }>();
-for (const kind of ['ranking', 'theme', 'survey', 'japan-theme']) {
+// 日本全体のテーマ (japan-theme) は 2026-11-12 に全国のテーマへまとめた。分析の置き場は theme:<テーマ> を指す
+for (const kind of ['ranking', 'theme', 'survey']) {
   const file = path.join(root, datasetDir('content.pages'), `${kind}.json`);
   const data = JSON.parse(fs.readFileSync(file, 'utf8')) as {
     pages: { id: string; published: boolean }[];

@@ -719,6 +719,241 @@ export const HOUSEHOLD_FOOD_SPENDING_SET: IndicatorSet = {
       "rankingKey": "other-consumption-budget-share-kakei",
       "shortLabel": "その他の消費支出の割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "air-conditioner-consumption-expenditure",
+      "shortLabel": "エアコンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "air-conditioner-consumption-quantity",
+      "shortLabel": "エアコンの購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "heater-consumption-expenditure",
+      "shortLabel": "ストーブ・温風ヒーターの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cooking-appliance-consumption-expenditure",
+      "shortLabel": "炊事用電気器具の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "washing-machine-consumption-expenditure",
+      "shortLabel": "電気洗濯機の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "vacuum-cleaner-consumption-expenditure",
+      "shortLabel": "電気掃除機の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "refrigerator-consumption-expenditure",
+      "shortLabel": "電気冷蔵庫の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "refrigerator-consumption-quantity",
+      "shortLabel": "電気冷蔵庫の購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "microwave-consumption-expenditure",
+      "shortLabel": "電子レンジの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "childrens-clothing-consumption-expenditure",
+      "shortLabel": "子供用洋服の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-womens-underwear-consumption-expenditure",
+      "shortLabel": "他の婦人用下着の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mens-coat-consumption-expenditure",
+      "shortLabel": "男子用コートの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mens-sweater-consumption-expenditure",
+      "shortLabel": "男子用セーターの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mens-underwear-consumption-expenditure",
+      "shortLabel": "男子用下着の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mens-clothing-consumption-expenditure",
+      "shortLabel": "男子用洋服の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-coat-consumption-expenditure",
+      "shortLabel": "婦人用コートの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-coat-consumption-quantity",
+      "shortLabel": "婦人用コートの購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-sweater-consumption-expenditure",
+      "shortLabel": "婦人用セーターの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-sweater-consumption-quantity",
+      "shortLabel": "婦人用セーターの購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-clothing-consumption-expenditure",
+      "shortLabel": "婦人用洋服の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "contact-lens-consumption-expenditure",
+      "shortLabel": "コンタクトレンズの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "massage-fee-consumption-expenditure",
+      "shortLabel": "マッサージ料金等(診療外)の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "medical-fee-consumption-expenditure",
+      "shortLabel": "医科診療代の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "supplement-consumption-expenditure",
+      "shortLabel": "栄養剤の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cold-medicine-consumption-expenditure",
+      "shortLabel": "感冒薬の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "eyeglasses-consumption-expenditure",
+      "shortLabel": "眼鏡の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "dental-fee-consumption-expenditure",
+      "shortLabel": "歯科診療代の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "gasoline-consumption-expenditure",
+      "shortLabel": "ガソリンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "gasoline-consumption-quantity",
+      "shortLabel": "ガソリン消費量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "rental-car-consumption-expenditure",
+      "shortLabel": "レンタカー・カーシェアリング料金の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "car-purchase-consumption-expenditure",
+      "shortLabel": "自動車購入の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "car-purchase-consumption-quantity",
+      "shortLabel": "自動車購入の購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "camera-consumption-expenditure",
+      "shortLabel": "カメラ・ビデオカメラの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "television-consumption-expenditure",
+      "shortLabel": "テレビの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "television-consumption-quantity",
+      "shortLabel": "テレビの購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "personal-computer-consumption-expenditure",
+      "shortLabel": "パソコンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "recorded-media-consumption-expenditure",
+      "shortLabel": "音楽・映像収録済メディアの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "language-lesson-consumption-expenditure",
+      "shortLabel": "語学月謝の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "high-school-tutoring-consumption-expenditure",
+      "shortLabel": "高校補習教育・予備校の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "public-university-consumption-expenditure",
+      "shortLabel": "国公立大学の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "private-university-consumption-expenditure",
+      "shortLabel": "私立大学の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "tobacco-consumption-expenditure",
+      "shortLabel": "たばこの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "handbag-consumption-expenditure",
+      "shortLabel": "ハンドバッグの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "handbag-consumption-quantity",
+      "shortLabel": "ハンドバッグの購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "umbrella-consumption-expenditure",
+      "shortLabel": "傘の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "umbrella-consumption-quantity",
+      "shortLabel": "傘の購入数量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "wristwatch-consumption-expenditure",
+      "shortLabel": "腕時計の支出額",
+      "role": "context"
     }
   ],
   "keywords": [

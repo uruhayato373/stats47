@@ -7203,7 +7203,8 @@
         "categoryKey": "laborwage",
         "themeSlugs": [
           "labor-mobility",
-          "labor-wages"
+          "labor-wages",
+          "local-economy"
         ],
         "geoScopes": [
           "japan"
@@ -7979,7 +7980,8 @@
         ],
         "categoryKey": "laborwage",
         "themeSlugs": [
-          "labor-wages"
+          "labor-wages",
+          "local-economy"
         ],
         "geoScopes": [
           "prefecture-set"

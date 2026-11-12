@@ -552,10 +552,10 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
   test('廃止ページ表の全行が末尾スラッシュの有無にかかわらず 1 回の 301 で着地する', () => {
     // 日本全体のテーマの行 (2026-11-12) は /japan/<テーマ> を転送表から作る。それ以外の行は手で並べる
     const japanSources = LEGACY_THEME_PATH_REDIRECTS.filter(({ pattern }) => pattern.source.startsWith('^\\/japan\\/') || pattern.source.startsWith('^/japan/'))
-      .map(({ themeSlug }) => `/japan/${themeSlug}`);
+      .map(({ pattern }) => pattern.source.replace(/^\^/, '').replace(/\\\//g, '/').replace(/\/\?\$$/, ''));
     const sources = ['/ports', '/fishing-ports', '/station-passengers', '/maps/highway-timeline', '/gis-cross/migration-flow', '/gis-cross/depopulation-medical', '/gis-cross/sunshine-map', '/gis-cross', ...japanSources];
     // 表に行を足したら sources にも足す (行と source の数が食い違うと落ちる)
-    expect(japanSources.length).toBe(42);
+    expect(japanSources.length).toBe(50);
     expect(sources.length).toBe(LEGACY_THEME_PATH_REDIRECTS.length);
     for (const source of sources) {
       expectSingleHop(source);
@@ -600,15 +600,14 @@ describe('テーマの県の絞り込み (?pref=) は県ごとのページへ', 
     expect(middleware(request('/themes/living-housing?pref=all')).status).not.toBe(301);
   });
 
-  // 2026-11-12 オーナー決定: 日本全体のテーマを全国のテーマへまとめる。前半は手書きの 42 件 (転送表 site.theme-redirects)。
-  // 家計の軸の図を持つ 2 件 (家計の食費・家計の資産・負債) と家計だけの 6 件は、図を全国のテーマへ移すまで日本全体のページに残す
-  test('日本全体の手書きのテーマは全国のテーマへ 301 し、家計の図を持つテーマは残す', () => {
+  // 2026-11-12 オーナー決定: 日本全体のテーマ (/japan/<テーマ>) をすべて全国のテーマへまとめた (転送表 site.theme-redirects)。
+  // 家計だけの品目のテーマは「食卓と家計の支出」(household-food-spending) の章へ
+  test('日本全体のテーマは全国のテーマへ 301 し、家計の品目は食卓と家計の支出へ', () => {
     const moved = middleware(request('/japan/aging-society'));
     expect(moved.status).toBe(301);
     expect(moved.headers.get('location')).toMatch(/\/themes\/aging-society$/);
-    expect(middleware(request('/japan/household-assets-debt')).status).not.toBe(301);
-    expect(middleware(request('/japan/household-food-spending')).status).not.toBe(301);
-    expect(middleware(request('/japan/household-appliances')).status).not.toBe(301);
+    expect(middleware(request('/japan/household-assets-debt')).headers.get('location')).toMatch(/\/themes\/household-assets-debt$/);
+    expect(middleware(request('/japan/household-appliances')).headers.get('location')).toMatch(/\/themes\/household-food-spending$/);
   });
 
   test('県ごとのページを持たないテーマ (港湾) は転送しない', () => {
