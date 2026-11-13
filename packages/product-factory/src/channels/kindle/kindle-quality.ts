@@ -5,7 +5,7 @@
  *
  * 数え方は epub-inspect.ts (管理画面の本文画面と共通)。ここは判定と集計だけを持つ純関数。
  */
-import type { EpubChapter } from "./epub-inspect";
+import type { EpubChapter, FullTableIndicator } from "./epub-inspect";
 
 /** 図の無い章を「長い」とみなす文字数。序章・あとがきの短いページは対象にしない。 */
 export const LONG_CHAPTER_CHARS = 1000;
@@ -45,6 +45,10 @@ export interface BookQuality {
   readonly figuresPer10kChars: number | null;
   readonly figuresWithoutText: number | null;
   readonly fullTables: number | null;
+  /** 全県表の見出しから読んだ指標・年・単位 (KDP の紹介文の【全県の値を表で収録している指標】に入れる) */
+  readonly fullTableIndicators: readonly FullTableIndicator[] | null;
+  /** 家計調査の値が県庁所在市のものだという注記が本にあるか (紹介文の【データの範囲】に入れる) */
+  readonly householdCityValues: boolean | null;
   readonly siteLinks: number | null;
   readonly siteLinksWithUtm: number | null;
   readonly flags: readonly QualityFlag[];
@@ -78,6 +82,7 @@ export function bookQuality(input: {
     return {
       id: input.id, status: "epub-missing", title: null, epubPath: input.epubPath, epubSha256: null, modified: null,
       chars: null, figures: null, figuresPer10kChars: null, figuresWithoutText: null, fullTables: null,
+      fullTableIndicators: null, householdCityValues: null,
       siteLinks: null, siteLinksWithUtm: null, flags: [], chapters: [],
     };
   }
@@ -103,6 +108,8 @@ export function bookQuality(input: {
     figuresPer10kChars: chars ? Math.round((figures / chars) * 100000) / 10 : null,
     figuresWithoutText: sum("figuresWithoutText"),
     fullTables: sum("fullTables"),
+    fullTableIndicators: chapters.flatMap((chapter) => chapter.fullTableIndicators),
+    householdCityValues: chapters.some((chapter) => chapter.householdCityNotes > 0),
     siteLinks,
     siteLinksWithUtm,
     flags,

@@ -16,6 +16,7 @@
         "年収ランキングの数字をうのみにしたくない方",
         "家計の統計の読み方を身につけたい方"
       ],
+      "scopeNote": "消費者物価地域差指数も、県庁所在市などの値を都道府県の値として使っています。",
       "keywords": [
         "県民所得",
         "可処分所得",
@@ -32,12 +33,12 @@
         "家計調査"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "389d79939c58720eecac99e14fc4315a71b87e5431473cf78e839caf83417549"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-02": {
       "status": "submitted",
@@ -68,12 +69,12 @@
         "県民性"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "afd2c8a492f5c5a9a9c2b493db267cdd66cd302e1c67ef2b25191dbd6a7caa53"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-03": {
       "status": "submitted",
@@ -104,12 +105,12 @@
         "東京一極集中"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "84728e24ce6353c984a294387606540133f0081986219277274e33e56de2131a"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-04": {
       "status": "submitted",
@@ -140,12 +141,12 @@
         "介護 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "82794aa03415aad5475470ad0e67e548fe743c5236d8406e26971bb1ee1a8c60"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-05": {
       "status": "submitted",
@@ -176,12 +177,12 @@
         "子育て 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "8eb3e2b9153272e4a9cbce972ba9f14973f4154d0f0dc386490197e91a155615"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-06": {
       "status": "submitted",
@@ -212,12 +213,12 @@
         "財政力指数"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "637fa4156697c5ca13e58eee7f87e4a764939e0a3b69fd501f6d3401ab0e6b5b"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-07": {
       "status": "submitted",
@@ -248,12 +249,12 @@
         "宿泊 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "7eea5d4093c5454aa68976c54b140519a7caa8964fd5941919c601197339d601"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-08": {
       "status": "submitted",
@@ -284,12 +285,12 @@
         "電気代 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "fafe1eb85f6f9dd31e2564eac34e9fd0688eb33eda5e4bbf8f560178e003efd8"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-09": {
       "status": "submitted",
@@ -320,12 +321,12 @@
         "地域経済"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "9483931532bfa8ee74c22f0c10937f33b103593159c7e7e1f73e0a92ede049d0"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-10": {
       "status": "submitted",
@@ -356,12 +357,12 @@
         "治安 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "87f14cbf98ab0bdfc3485c19673f6402ce4eb97b929d29b5f263d9c1b27d8c8a"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-11": {
       "status": "submitted",
@@ -392,12 +393,12 @@
         "文化 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "21e9102aa2565e78a3aa9b4dbe4b0b409a025376efecbc4443e9ffc587541eb9"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-12": {
       "status": "submitted",
@@ -428,12 +429,12 @@
         "デジタル 都道府県"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "f968798808d14b3e3396f49f99bdf64a3bee2b23d7cf5d305a067f60b3b7ea6c"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
     },
     "K-S1-13": {
       "status": "submitted",
@@ -449,6 +450,7 @@
         "老後の住まいを考えている方",
         "総合ランキングでは決められない方"
       ],
+      "scopeNote": "家賃は県庁所在市等（東京都は区部）で調べた値、気温は各都道府県の代表的な観測地点の値で、どちらも県全体の値ではありません。",
       "keywords": [
         "都道府県",
         "転職",
@@ -464,12 +466,51 @@
         "移住 ランキング"
       ],
       "review": {
-        "reviewer": "general-purpose (独立照合 2 回)",
-        "reviewedAt": "2026-11-06",
+        "reviewer": "general-purpose (独立照合。データの範囲と指標の一覧を EPUB と照合し、指摘を反映して再照合)",
+        "reviewedAt": "2026-11-13",
         "epubSha256": "c211114ee6b1f4e90e927b402195385243e7c22b01d196b54f0d0163503fc413"
       },
-      "approvedAt": "2026-11-06",
-      "submittedAt": "2026-11-06"
+      "approvedAt": "2026-11-13",
+      "submittedAt": "2026-11-13"
+    },
+    "K-S1-14": {
+      "status": "submitted",
+      "hook": "都市ごとの食卓の違いは、昔より小さくなったと言われます。出身地や住む街の「ご当地の食卓」は本当に残っているのだろうか。印象ではなく数字で確かめたい方のための本です。",
+      "points": [
+        "違いが特に縮んだ品目と、反対に広がった主な品目が分かる",
+        "47の県庁所在市のそれぞれで、2007〜09年と2023〜25年のどちらでも上位だった品目と、確かに順位が動いた品目が分かる",
+        "2023〜25年でもほかの都市と違う食卓を保つ都市と、平均に近づいた都市を比べられる",
+        "標本の揺れと本当の変化を見分ける読み方が分かる"
+      ],
+      "forWhom": [
+        "出身地や住む街の食卓の違いを、数字で人に説明したい方",
+        "家計調査の数字を都市の比較に使ってみたい方"
+      ],
+      "scopeLead": "比べているのは47の県庁所在市（東京都は区部）に住む二人以上の世帯の値で、県全体の値ではありません。市区町村ごとの一覧は収録していません。",
+      "dataSourceLine": "家計調査の2007〜2025年の品目別支出を使い、出典と計算方法は巻末にまとめています。",
+      "keywords": [
+        "県庁所在市",
+        "食料費",
+        "品目",
+        "二人以上の世帯",
+        "ご当地",
+        "さけ",
+        "かまぼこ"
+      ],
+      "targetQueries": [
+        "家計調査 県庁所在市",
+        "食卓 地域差",
+        "ご当地 食卓",
+        "県民性 食べ物",
+        "消費量 ランキング 都道府県"
+      ],
+      "review": {
+        "reviewer": "general-purpose (独立照合。EPUB の原稿と照合し、指摘 3 件を直して再照合)。r3 は本文の章が r2 と同一 (content.opf だけ違う) なので照合を引き継いだ",
+        "reviewedAt": "2026-11-14",
+        "epubSha256": "769cf9c2e59f495d1451e7267e29d404a6403653e782657779514a6bb920dcb0"
+      },
+      "approvedAt": "2026-11-14",
+      "submittedAt": "2026-11-14"
     }
   }
 }

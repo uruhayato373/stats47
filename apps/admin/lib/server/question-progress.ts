@@ -144,6 +144,8 @@ export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
     const pageById = new Map<string, { id: string; title: string; href: string; published?: boolean }>(inputs.pages.map((p: { id: string; title: string; href: string; published?: boolean }) => [p.id, p]));
     const postIds = new Set(figures.flatMap((f) => f.destinations.flatMap((d) => (d.postId === undefined ? [] : [d.postId]))));
     const noteOf = new Map<string, { key: string; title: string; noteUrl?: string; priceJpy?: number; status: string }>(inputs.notes.map((n: { key: string; title: string; noteUrl?: string; priceJpy?: number; status: string }) => [`note:${n.key}`, n]));
+    const kindleBooks = readJson<{ books: Record<string, { title: string; priceYen: number; status: string }> }>(datasetPath("products.kindle-books")).books;
+    const kdpListings = readJson<{ listings: Record<string, { asin?: string | null; kdpStatusLabel?: string }> }>(datasetPath("kdp.listings")).listings;
     const own = links.filter((l) => l.issue === id);
     const external = readJson<{ links: ExternalLink[] }>(datasetPath("content.external")).links.filter((l) => own.some((o) => o.page === l.to));
     const viaOf = (to: string) => pageById.get(to)?.title ?? to;
@@ -171,10 +173,24 @@ export function questionDetail(id: string): Wrapped<QuestionDetail | null> {
       posts: inputs.posts.filter((p: { id: number }) => postIds.has(p.id)).map((p: { id: number; status: string; platform: string; caption?: string; approval?: { state?: string } }) => ({
         id: p.id, status: p.status, platform: p.platform, caption: p.caption ?? "", approval: p.approval?.state ?? "未設定",
       })),
-      products: (issue.products ?? []).map((productId) => {
-        const note = noteOf.get(productId);
-        return { id: productId, title: note?.title ?? productId, href: note?.noteUrl ?? null, priceJpy: note?.priceJpy ?? null, status: note?.status ?? "不明" };
-      }),
+      products: [
+        ...(issue.products ?? []).map((productId) => {
+          const note = noteOf.get(productId);
+          return { id: productId, title: note?.title ?? productId, href: note?.noteUrl ?? null, priceJpy: note?.priceJpy ?? null, status: note?.status ?? "不明" };
+        }),
+        // Kindle の本はカタログが正本。販売中は ASIN から商品ページを引き、企画中は「企画」と出す
+        ...(issue.books ?? []).map((bookId) => {
+          const book = kindleBooks[bookId];
+          const listing = kdpListings[bookId];
+          return {
+            id: bookId,
+            title: book?.title ?? bookId,
+            href: listing?.asin ? `https://www.amazon.co.jp/dp/${listing.asin}` : null,
+            priceJpy: book?.priceYen ?? null,
+            status: listing?.kdpStatusLabel ? `Kindle ${listing.kdpStatusLabel}` : `Kindle 企画 (${book?.status ?? "不明"})`,
+          };
+        }),
+      ],
     };
   } catch (e) {
     return { error: e instanceof Error ? e.message : String(e) };

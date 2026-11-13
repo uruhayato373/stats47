@@ -166,4 +166,16 @@ describe("KDP weekly publication gate", () => {
     expect(result.status).toBe("observe");
     expect(result.cohortMeasurement?.cohort).toBe("latest-pilot");
   });
+
+  it("counts a pilot named by the plan even when its id is in S1 (K-S1-14)", () => {
+    const result = buildKdpWeeklyDecision({
+      week: "2026-W46",
+      generatedAt: "2026-11-14T00:00:00.000Z",
+      listings: { ...listings(), "K-S1-14": { id: "K-S1-14", title: "pilot", status: "listed", kdpStatus: "in_review", lastSubmittedAt: "2026-11-13" } as KdpWeeklyListing },
+      observations: [],
+    });
+    expect(result.portfolio.pilotInReview).toBe(1);
+    expect(result.portfolio.s1InReview).toBe(0);
+    expect(result.status).toBe("observe");
+  });
 });

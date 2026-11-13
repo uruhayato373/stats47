@@ -1,121 +1,34 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T21:39:30.856Z",
+  "generatedAt": "2026-11-13T23:32:51.828Z",
   "week": "2026-W46",
   "scheduledAction": "4週実測で需要が確認できた場合だけ第2パイロットを最大1冊出版",
   "portfolio": {
-    "registeredCatalogCount": 33,
+    "registeredCatalogCount": 38,
     "activePublicationTargetCount": 15,
     "maxNewPublicationsPerWeek": 1,
     "cohortMeasurementWeeks": 4,
     "s1Live": 13,
     "s1InReview": 0,
     "pilotLive": 0,
-    "pilotInReview": 0
+    "pilotInReview": 1
   },
   "nextPilot": {
     "ordinal": 1,
-    "concept": "47県庁所在市の食卓・家計ガイド",
-    "format": "1県1章",
+    "bookId": "K-S1-14",
+    "concept": "47都市の食卓は似てきたのか (県庁所在市の19年の変化)",
+    "format": "問いに答える読み物 + 47都市の事実票",
     "plannedPreparationWeek": "2026-W40",
     "earliestPublicationWeek": "2026-W41"
   },
   "eligibleCandidateIds": [],
-  "cohortMeasurement": {
-    "cohort": "s1-baseline",
-    "requiredBookIds": [
-      "K-S1-01",
-      "K-S1-02",
-      "K-S1-03",
-      "K-S1-04",
-      "K-S1-05",
-      "K-S1-06",
-      "K-S1-07",
-      "K-S1-08",
-      "K-S1-09",
-      "K-S1-10",
-      "K-S1-11",
-      "K-S1-12"
-    ],
-    "requiredPeriodByBook": {
-      "K-S1-01": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-02": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-03": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-04": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-05": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-06": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-07": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-08": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-09": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-10": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-11": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      },
-      "K-S1-12": {
-        "start": "2026-08-30",
-        "end": "2026-09-26"
-      }
-    },
-    "measuredBookIds": [
-      "K-S1-01",
-      "K-S1-02",
-      "K-S1-03",
-      "K-S1-04",
-      "K-S1-05",
-      "K-S1-06",
-      "K-S1-07",
-      "K-S1-08",
-      "K-S1-09",
-      "K-S1-10",
-      "K-S1-11",
-      "K-S1-12"
-    ],
-    "missingBookIds": [],
-    "windowStillOpenBookIds": [],
-    "positiveEvidenceBookIds": [],
-    "ambiguousEvidenceBookIds": [
-      "K-S1-02"
-    ],
-    "complete": true,
-    "hasDemandSignal": false
-  },
+  "cohortMeasurement": null,
   "approvalRequired": true,
-  "status": "measure",
+  "status": "observe",
   "blockers": [
-    "4週窓をはみ出す月次の販売があり、窓の中の需要か判定不能: K-S1-02"
+    "K-S1-14:in_review"
   ],
-  "nextAction": "需要あり・需要なしのどちらとも判定しない。日次の販売記録で窓の中を確かめるか、判定の扱いをオーナーが決める",
+  "nextAction": "審査中パイロットのlive read-backまで新規出版を止める",
   "candidate": null,
   "publishCommand": null
 }

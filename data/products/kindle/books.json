@@ -1147,6 +1147,241 @@
       ],
       "status": "generated"
     },
+    "K-S1-14": {
+      "series": "S1-issues",
+      "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
+      "concept": "家計調査の県庁所在市・二人以上の世帯の品目別支出を、食料費に占める割合に直して 2007〜09 年と 2023〜25 年で比べ、47 都市の食卓が似てきたかを確かめる本。数字はすべて .local/kindle-private/K-S1-14/facts.json から取る。",
+      "design": {
+        "readerProblem": "出身地や住む街の食卓は、ほかの街と本当に違うのか。全国どこでも同じ店と商品が並ぶいま、ご当地らしい食卓が残っているのかを数字で確かめたい。",
+        "harm": [],
+        "harmReason": "食卓の地域差への好奇心が主で、健康・目標・関係・お金の悩みの解決を約束しない (K-S1-02 と同じ扱い)",
+        "valueAndPayReason": "無料のサイトと note は、ある年の品目別の順位と県別の家計の構成まで。本書は 47 の県庁所在市を 19 年の幅で同じ物差しで並べ、食卓が似てきたか、どの品目と都市で違いが残ったかを標本の揺れと区別して示す。支払う理由は、47 都市の 19 年の変化を通読できること。",
+        "demandEvidence": "未検証: 家計調査の既刊 K-S1-02 の販売は 2026-08 の 1 冊だけ。検索の「◯◯ 消費量 ランキング」型は 28 日で 733 クリック (2026-W44) あるが、単発の事実確認の検索で本の需要の証拠ではない。次の検証 = セレクト登録の K-S1-13・K-S1-05 の 2026-11 の既読ページ。",
+        "titleCandidates": [
+          {
+            "type": "問い・気づき",
+            "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化"
+          },
+          {
+            "type": "資料・手順",
+            "title": "家計調査で読む47都市の食卓 — 19年の変化と残った違い"
+          }
+        ],
+        "bodyPatterns": [
+          "勘違い破壊型",
+          "比較型"
+        ]
+      },
+      "author": "stats47",
+      "chapters": [
+        {
+          "title": "はじめに — 「ご当地の食卓」は残っているのか",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/00-intro.md"
+        },
+        {
+          "title": "第1章 この本の数字の読み方",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/10-how-to-read.md"
+        },
+        {
+          "title": "第2章 47都市の食卓は似てきた",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/20-converged.md"
+        },
+        {
+          "title": "第3章 違いが縮んだ品目、広がった品目",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/30-items.md"
+        },
+        {
+          "title": "第4章 個性が残った都市、薄れた都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/40-distinct.md"
+        },
+        {
+          "title": "第5章 北海道・東北の7都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/50-hokkaido-tohoku.md"
+        },
+        {
+          "title": "第6章 関東の7都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/60-kanto.md"
+        },
+        {
+          "title": "第7章 中部の9都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/70-chubu.md"
+        },
+        {
+          "title": "第8章 近畿の7都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/80-kinki.md"
+        },
+        {
+          "title": "第9章 中国・四国の9都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/90-chugoku-shikoku.md"
+        },
+        {
+          "title": "第10章 九州・沖縄の8都市",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/100-kyushu-okinawa.md"
+        },
+        {
+          "title": "終章 — 似てきた食卓に、まだ残っている違い",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/110-ending.md"
+        },
+        {
+          "title": "出典と方法",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/120-sources-method.md"
+        },
+        {
+          "title": "付録 47都市の事実票",
+          "source": "fresh",
+          "freshFile": ".local/kindle-private/K-S1-14/manuscript/130-appendix.md"
+        }
+      ],
+      "priceYen": 500,
+      "newContentNote": "全章を書き下ろした KDP 専用の本。サイト・note に同じ文章はない。",
+      "kdpExclusive": {
+        "description": "全国どこでも同じ店と商品が並ぶいま、「ご当地の食卓」は残っているのでしょうか。出身地や住む街の食卓が、ほかの街と本当に違うのかを数字で確かめたい方のための本です。\n\n本書は、家計調査の47の県庁所在市の値を、2007年から2025年までの19年の幅で読み比べます。品目ごとの支出を「その都市の食料費に占める割合」に直し、2007〜09年と2023〜25年を比べて、食卓が似てきたのか、どの品目とどの都市で違いが残ったのかを確かめます。\n\n【この本で分かること】\n・141品目のうち、都市の間の違いが縮んだ品目と広がった品目\n・47都市のそれぞれで、19年を通して上位を保った品目と、確かに順位が動いた品目\n・2023〜25年でもほかの都市と違う食卓を保っている都市と、平均に近づいた都市\n・標本の揺れと本当の変化を見分けるための読み方\n\n【データの範囲】\n比較の単位は県庁所在市（東京都は区部）で、県全体の値ではありません。対象は二人以上の世帯です。市区町村ごとの一覧や、県全体の値は収録していません。\n\n【データについて】\n総務省統計局の家計調査をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。本書は食卓が似てきた理由を説明する本ではなく、数字で言える範囲にとどめています。年と定義は巻末の「出典と方法」に載せています。",
+        "aiText": "作品全体 (最小限の編集あり、または編集なし)",
+        "aiTextTools": [
+          "Claude"
+        ]
+      },
+      "keywords": [
+        "家計調査",
+        "県庁所在市",
+        "食卓",
+        "地域差",
+        "食文化",
+        "統計"
+      ],
+      "status": "generated"
+    },
+    "K-S1-15": {
+      "series": "S1-issues",
+      "title": "年収で食卓はどう変わるのか — 家計調査で読む世帯の買い方",
+      "concept": "家計調査の全国の年収階級別 (五分位・十分位) の品目別支出で、年収が上がると増える品目・変わらない品目・減る品目を読む本の候補。切り口台帳 kakei-income-class。都道府県別の値ではない。",
+      "design": {
+        "readerProblem": "自分の年収の世帯は、ほかの年収の世帯と比べて何に多く使い、何を削っているのか。家計を見直すときの物差しがほしい。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "家計の見直し (お金) に関わる。ただし個別の家計の診断はしない。",
+        "valueAndPayReason": "無料のサイトと note は年収階級ごとの個別の品目の記事まで。本書は年収階級を通して食料の品目を並べ、自分の階級の位置を一冊で確かめられる。",
+        "demandEvidence": "未検証: 自社の検索で年収・階級を含む語のクリックは 28 日で 3 件 (2026-W44)。同じ切り口のブログ 12 本と note 12 本が公開済みで、重ならない書き下ろしが要る。次の検証 = K-S1-14 とセレクト 2 冊の 2026-12 の既読ページ。",
+        "titleCandidates": [
+          {
+            "type": "問い・気づき",
+            "title": "年収で食卓はどう変わるのか — 家計調査で読む世帯の買い方"
+          },
+          {
+            "type": "資料・手順",
+            "title": "年収別に見る食卓 — 家計調査の年収階級の読み方"
+          }
+        ],
+        "bodyPatterns": [
+          "比較型",
+          "悩み直撃型"
+        ]
+      },
+      "author": "stats47",
+      "chapters": [
+        {
+          "title": "はじめに",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "年収階級で比べる読み方",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "終章",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        }
+      ],
+      "priceYen": 500,
+      "newContentNote": "企画の段階。作るときは全章を書き下ろす (サイト・note と同じ文を使わない)。",
+      "sourceIdeas": [
+        "lens:kakei-income-class"
+      ],
+      "keywords": [
+        "家計調査",
+        "年収階級",
+        "食料費",
+        "世帯",
+        "家計",
+        "統計"
+      ],
+      "status": "idea"
+    },
+    "K-S1-16": {
+      "series": "S1-issues",
+      "title": "食卓から消えた品、増えた品 — 家計調査で読む品目の盛衰",
+      "concept": "家計調査の全国の年次の系列で、品目の支出と数量が伸びた・縮んだ・置き換わった流れを読む本の候補。切り口台帳 kakei-long-term-trend。都道府県別の値ではない。",
+      "design": {
+        "readerProblem": "昔よく買っていたものを最近見かけない、という実感は数字でも確かめられるのか。食品や日用品の市場の移り変わりを一冊で知りたい。",
+        "harm": [],
+        "harmReason": "市場の移り変わりへの好奇心が主で、悩みの解決を約束しない。",
+        "valueAndPayReason": "無料のサイトと note は品目ごとの盛衰の記事 (各 5 本) まで。本書は品目を横に並べ、伸びた・縮んだ・置き換わったを同じ物差しで通読できる。",
+        "demandEvidence": "未検証: 自社の検索で「推移」を含む語のクリックは 28 日で 8 件 (2026-W44)。本の需要の証拠は無い。次の検証 = K-S1-14 とセレクト 2 冊の 2026-12 の既読ページ。",
+        "titleCandidates": [
+          {
+            "type": "問い・気づき",
+            "title": "食卓から消えた品、増えた品 — 家計調査で読む品目の盛衰"
+          },
+          {
+            "type": "資料・手順",
+            "title": "家計調査で読む品目の盛衰 — 伸びた市場と縮んだ市場"
+          }
+        ],
+        "bodyPatterns": [
+          "比較型",
+          "勘違い破壊型"
+        ]
+      },
+      "author": "stats47",
+      "chapters": [
+        {
+          "title": "はじめに",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "長い系列の読み方",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "終章",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        }
+      ],
+      "priceYen": 500,
+      "newContentNote": "企画の段階。作るときは全章を書き下ろす (サイト・note と同じ文を使わない)。",
+      "sourceIdeas": [
+        "lens:kakei-long-term-trend"
+      ],
+      "keywords": [
+        "家計調査",
+        "品目",
+        "推移",
+        "市場",
+        "消費",
+        "統計"
+      ],
+      "status": "idea"
+    },
     "K-S2-01": {
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 人口・世帯",
@@ -1818,6 +2053,65 @@
       ],
       "status": "generated"
     },
+    "K-S2-12": {
+      "series": "S2-theme-databook",
+      "title": "47都道府県の総合スコア — 指標を束ねて県の姿を読む",
+      "concept": "分野をまたぐ指標を合成したスコアで 47 都道府県を並べる本の候補 (公開計画の第 3 パイロット)。合成の方法と限界を先に示す。参考文献 prefecture-deviation は型の参照だけに使い、文言・構成は写さない。",
+      "design": {
+        "readerProblem": "県ごとの強みと弱みを、分野をまたいで一目で比べたい。指標が多すぎて、どれを見ればその県の姿が分かるのか決められない。",
+        "harm": [],
+        "harmReason": "県の比較への関心が主で、個人の悩みの解決を約束しない。",
+        "valueAndPayReason": "無料のサイトは指標ごとの順位まで。本書は分野ごとに指標を束ねたスコアと、その作り方・読み違えやすい点を一冊で示す。",
+        "demandEvidence": "未検証: 出版社の類書 (県別の偏差値・合成スコアの本) が参考文献にあるが、販売数は未計測。次の検証 = 第 1・第 2 パイロットの 4 週の既読ページと販売。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "47都道府県の総合スコア — 指標を束ねて県の姿を読む"
+          },
+          {
+            "type": "資料・手順",
+            "title": "47都道府県の総合スコアの読み方 — 合成した数字の使い道と限界"
+          }
+        ],
+        "bodyPatterns": [
+          "比較型",
+          "チェックリスト型"
+        ]
+      },
+      "author": "stats47",
+      "chapters": [
+        {
+          "title": "はじめに",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "スコアの作り方と限界",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "終章",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        }
+      ],
+      "priceYen": 500,
+      "newContentNote": "企画の段階。作るときは全章を書き下ろす (サイト・note と同じ文を使わない)。",
+      "sourceIdeas": [
+        "pilot:3",
+        "source:prefecture-deviation"
+      ],
+      "keywords": [
+        "都道府県",
+        "ランキング",
+        "比較",
+        "指標",
+        "地域差",
+        "統計"
+      ],
+      "status": "idea"
+    },
     "K-S3-01": {
       "series": "S3-region",
       "title": "北海道データブック — 統計で読む県の横顔",
@@ -2382,6 +2676,65 @@
         "日本一"
       ],
       "status": "generated"
+    },
+    "K-S4-02": {
+      "series": "S4-ranking-compendium",
+      "title": "意外な1位の県 — 数字で読む47都道府県の県民性",
+      "concept": "指標ごとの意外な 1 位・最下位を、1 テーマ 1 話の読み物にする本の候補 (公開計画の第 2 パイロット。取り下げた K-S4-01 の置き換え)。順位の理由を断定せず、定義と読み違えを添える。",
+      "design": {
+        "readerProblem": "自分の県や話題の県の意外な 1 位を、すきま時間に読んで話のたねにしたい。ランキングの数字が何を数えたものかも知っておきたい。",
+        "harm": [],
+        "harmReason": "娯楽 (地域の話題) が主で、悩みの解決を約束しない (収益化戦略 §3.5 の KDP の経路)。",
+        "valueAndPayReason": "無料のサイトは指標ごとの順位と解説まで。本書は意外な 1 位を話として束ね、何を数えた数字かを添えて通読できる。読み放題なら追加の支払い判断がない。",
+        "demandEvidence": "未検証: 自社の検索で消費量・支出を含む語は 28 日で 733 クリック (2026-W44) あるが、単発の事実確認で本の需要の証拠ではない。取り下げた K-S4-01 は販売の記録なし。次の検証 = 第 1 パイロット K-S1-14 の 4 週の既読ページと販売。",
+        "titleCandidates": [
+          {
+            "type": "問い・気づき",
+            "title": "意外な1位の県 — 数字で読む47都道府県の県民性"
+          },
+          {
+            "type": "資料・手順",
+            "title": "47都道府県 意外な1位の読み方 — 県民性の数字を確かめる"
+          }
+        ],
+        "bodyPatterns": [
+          "勘違い破壊型",
+          "比較型"
+        ]
+      },
+      "author": "stats47",
+      "chapters": [
+        {
+          "title": "はじめに",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "ランキングの読み方",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        },
+        {
+          "title": "終章",
+          "source": "fresh",
+          "freshText": "(企画の段階。本文は未着手)"
+        }
+      ],
+      "priceYen": 500,
+      "newContentNote": "企画の段階。作るときは全章を書き下ろす (サイト・note と同じ文を使わない)。",
+      "sourceIdeas": [
+        "pilot:2",
+        "replaces:K-S4-01"
+      ],
+      "keywords": [
+        "都道府県",
+        "ランキング",
+        "県民性",
+        "雑学",
+        "地域差",
+        "統計"
+      ],
+      "status": "idea"
     }
   },
   "notes": {

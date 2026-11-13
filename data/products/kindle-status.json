@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-11-04T02:05:19.254Z",
-  "total": 33,
+  "generatedAt": "2026-11-13T23:32:53.500Z",
+  "total": 38,
   "bySeries": {
-    "S1-issues": 13,
-    "S2-theme-databook": 11,
+    "S1-issues": 16,
+    "S2-theme-databook": 12,
     "S3-region": 8,
-    "S4-ranking-compendium": 1
+    "S4-ranking-compendium": 2
   },
   "byStatus": {
-    "generated": 33
+    "generated": 34,
+    "idea": 4
   },
   "books": [
     {
@@ -116,6 +117,30 @@
       "chapters": 12
     },
     {
+      "id": "K-S1-14",
+      "series": "S1-issues",
+      "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
+      "status": "generated",
+      "priceYen": 500,
+      "chapters": 14
+    },
+    {
+      "id": "K-S1-15",
+      "series": "S1-issues",
+      "title": "年収で食卓はどう変わるのか — 家計調査で読む世帯の買い方",
+      "status": "idea",
+      "priceYen": 500,
+      "chapters": 3
+    },
+    {
+      "id": "K-S1-16",
+      "series": "S1-issues",
+      "title": "食卓から消えた品、増えた品 — 家計調査で読む品目の盛衰",
+      "status": "idea",
+      "priceYen": 500,
+      "chapters": 3
+    },
+    {
       "id": "K-S2-01",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 人口・世帯",
@@ -204,6 +229,14 @@
       "chapters": 8
     },
     {
+      "id": "K-S2-12",
+      "series": "S2-theme-databook",
+      "title": "47都道府県の総合スコア — 指標を束ねて県の姿を読む",
+      "status": "idea",
+      "priceYen": 500,
+      "chapters": 3
+    },
+    {
       "id": "K-S3-01",
       "series": "S3-region",
       "title": "北海道データブック — 統計で読む県の横顔",
@@ -274,6 +307,14 @@
       "status": "generated",
       "priceYen": 1000,
       "chapters": 8
+    },
+    {
+      "id": "K-S4-02",
+      "series": "S4-ranking-compendium",
+      "title": "意外な1位の県 — 数字で読む47都道府県の県民性",
+      "status": "idea",
+      "priceYen": 500,
+      "chapters": 3
     }
   ]
 }

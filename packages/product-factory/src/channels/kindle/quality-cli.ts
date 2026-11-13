@@ -4,7 +4,7 @@
  *   npm run kindle:quality              # 要約を表示する
  *   npm run kindle:quality -- --write   # data/products/kindle-quality.json に記録する
  *
- * 対象は出品台帳で販売中 (kdpStatus=live) の本。読むのは台帳の epubPath が指す入稿版で、EPUB は .local にしか無い
+ * 対象は出品台帳で販売中 (kdpStatus=live) の本と、出品の準備中 (status=draft) の本 (紹介文の実測と公開前の照合に使う)。読むのは台帳の epubPath が指す入稿版で、EPUB は .local にしか無い
  * (Mac でだけ動く。CI では EPUB が無いので epub-missing になる)。
  */
 import { createHash } from "node:crypto";
@@ -23,11 +23,11 @@ const OUT_PATH = resolve(REPO_ROOT, datasetPath("kindle.quality"));
 const BASELINE_BOOK_ID = "K-S1-02";
 
 const listings = (JSON.parse(readFileSync(resolve(REPO_ROOT, KDP_LISTINGS), "utf8")) as {
-  listings: Record<string, { kdpStatus?: string; epubPath?: string | null }>;
+  listings: Record<string, { kdpStatus?: string; status?: string; epubPath?: string | null }>;
 }).listings;
 
 const books = Object.entries(listings)
-  .filter(([, listing]) => listing.kdpStatus === "live")
+  .filter(([, listing]) => listing.kdpStatus === "live" || listing.status === "draft")
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([id, listing]) => {
     const epubPath = listing.epubPath ? listing.epubPath.replace(/\\/g, "/") : null;
