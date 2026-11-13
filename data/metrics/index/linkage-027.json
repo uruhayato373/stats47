@@ -3487,11 +3487,35 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -3532,11 +3556,35 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -3589,6 +3637,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shimeji-consumption-expenditure",
           "kind": "ranking"
         }
@@ -3630,7 +3682,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -3904,6 +3960,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
@@ -3925,6 +3989,10 @@
         },
         {
           "pageId": "blog:shochu-expenditure-vs-sake-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wine-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -4167,15 +4235,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:miyazaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
           "kind": "blog"
         },
         {
@@ -4466,6 +4538,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shrimp-consumption-expenditure",
           "kind": "ranking"
         },
@@ -4508,6 +4584,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:shrimp-consumption-quantity-prefecture-gap",
           "kind": "blog"

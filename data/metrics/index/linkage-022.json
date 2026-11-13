@@ -4289,14 +4289,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:pasta-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:water-sewer-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:population-density-per-km2-total-area",
           "kind": "ranking"
         }

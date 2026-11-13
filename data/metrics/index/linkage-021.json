@@ -119,11 +119,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:ibaraki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
@@ -140,6 +144,10 @@
         },
         {
           "pageId": "blog:peach-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -196,11 +204,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:ibaraki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
@@ -213,6 +225,10 @@
         },
         {
           "pageId": "blog:peach-consumption-quantity-vs-disaster-relief-expenses",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -265,7 +281,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
@@ -289,11 +317,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -342,7 +366,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
@@ -366,11 +402,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -3363,15 +3395,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -3383,6 +3415,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyagi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -3391,19 +3431,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -3452,15 +3484,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -3472,6 +3504,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyagi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -3480,15 +3520,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tokyo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -7118,15 +7150,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
@@ -7179,15 +7203,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
@@ -7236,7 +7252,19 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -7277,7 +7305,19 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -7318,11 +7358,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aomori-food-culture",
+          "pageId": "blog:akita-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:hokkaido-food-culture",
+          "pageId": "blog:aomori-food-culture",
           "kind": "blog"
         },
         {
@@ -7330,19 +7370,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:pickled-plum-consumption-expenditure-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -7387,11 +7415,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aomori-food-culture",
+          "pageId": "blog:akita-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:hokkaido-food-culture",
+          "pageId": "blog:aomori-food-culture",
           "kind": "blog"
         },
         {
@@ -7399,19 +7427,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:pickled-plum-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {

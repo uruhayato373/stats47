@@ -648,6 +648,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:mayonnaise-consumption-expenditure",
           "kind": "blog"
         },
@@ -692,6 +696,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mayonnaise-consumption-expenditure",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:mayonnaise-consumption-quantity",
           "kind": "ranking"
@@ -4236,11 +4248,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:akita-food-culture",
+          "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
         {
@@ -4248,7 +4256,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -4256,11 +4264,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:watermelon-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -4301,11 +4313,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:akita-food-culture",
+          "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
         {
@@ -4313,15 +4321,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {
@@ -8637,11 +8645,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:soy-sauce-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -8874,7 +8894,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -9669,7 +9697,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:aichi-food-culture",
           "kind": "blog"
         },
         {
@@ -9677,7 +9705,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
@@ -9685,7 +9713,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {
@@ -9730,7 +9762,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:aichi-food-culture",
           "kind": "blog"
         },
         {
@@ -9738,7 +9770,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
@@ -9750,7 +9782,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {

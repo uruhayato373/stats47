@@ -32,6 +32,18 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:lettuce-consumption-expenditure",
           "kind": "ranking"
         }
@@ -255,6 +267,18 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
         },
         {
           "pageId": "blog:lettuce-consumption-quantity-prefecture-gap",
@@ -4591,7 +4615,7 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:akita-food-culture",
           "kind": "blog"
         },
         {
@@ -4604,10 +4628,6 @@
         },
         {
           "pageId": "blog:lotus-root-green-beans-mandarin-consumption",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -4850,7 +4870,7 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:akita-food-culture",
           "kind": "blog"
         },
         {
@@ -4863,10 +4883,6 @@
         },
         {
           "pageId": "blog:lotus-root-green-beans-mandarin-consumption",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -5407,6 +5423,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kumamoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -5415,11 +5435,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -5656,15 +5672,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kumamoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -7187,11 +7203,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:ehime-food-culture",
           "kind": "blog"
         },
         {
@@ -7211,10 +7223,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
@@ -7223,7 +7231,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -7452,14 +7468,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ibaraki-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:lotus-root-green-beans-mandarin-consumption",
           "kind": "blog"
         },
@@ -7468,15 +7476,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -10542,11 +10550,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamanashi-food-culture",
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:oita-food-culture",
           "kind": "blog"
         },
         {
@@ -10781,11 +10793,15 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamanashi-food-culture",
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:oita-food-culture",
           "kind": "blog"
         },
         {

@@ -7229,6 +7229,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:nagasaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fish-paste-consumption-expenditure",
           "kind": "ranking"
         }

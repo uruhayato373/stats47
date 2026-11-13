@@ -1031,10 +1031,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:banana-consumption-quantity",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:food-consumption-prefecture-battle",
           "kind": "blog"
         },
@@ -5781,6 +5777,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kumamoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
@@ -6011,6 +6011,10 @@
         },
         {
           "pageId": "blog:instant-noodles-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -9203,11 +9207,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -9270,11 +9270,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {

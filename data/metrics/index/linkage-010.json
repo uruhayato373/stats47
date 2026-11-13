@@ -9322,15 +9322,27 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:oita-food-culture",
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -9379,15 +9391,35 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:oita-food-culture",
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -9973,14 +10005,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "blog:saitama-food-culture",
           "kind": "blog"

@@ -10099,6 +10099,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
