@@ -7,3 +7,13 @@ import data from '../../../../data/site/url-history/gone-blog-slugs.json';
  * 対象外: 一時 unpublished (404 のまま)・slug rename (301 は `BLOG_SLUG_REDIRECTS`)
  */
 export const GONE_BLOG_SLUGS = new Set<string>(data.slugs.map(({ slug }) => slug));
+
+/**
+ * 削除した記事の題 (410 の一覧に題を書いてある slug だけ)。
+ * ブログの記事台帳 (blog.articles) が、R2 の一覧で題を見たことが無い slug の題に使う。
+ */
+export const GONE_BLOG_TITLES: ReadonlyMap<string, string> = new Map(
+  data.slugs.flatMap((entry) =>
+    'title' in entry && entry.title ? [[entry.slug, entry.title] as const] : []
+  )
+);
