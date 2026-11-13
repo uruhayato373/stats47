@@ -18,13 +18,13 @@ test("辞書順で古い snapshot だけを選び、LATEST/history は触らな�
   const files = [
     "LATEST.md",
     "history.csv",
-    "psi-batch-2026-08-02T00-00-00.json",
-    "psi-batch-2026-08-01T00-00-00.json",
-    "psi-batch-invalid.json",
+    "2026-08-02.json",
+    "2026-08-01.json",
+    "invalid.json",
   ];
   assert.deepEqual(
-    selectSnapshotsToPrune(files, RETENTION_POLICIES.psi.pattern, 1),
-    ["psi-batch-2026-08-01T00-00-00.json"],
+    selectSnapshotsToPrune(files, RETENTION_POLICIES.cloudflare.pattern, 1),
+    ["2026-08-01.json"],
   );
 });
 
@@ -155,4 +155,9 @@ test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / basel
     (f) => !inPolicy(f) && !baselined.has(f) && !PERMANENT_DATED_DIRS.some((d) => f.startsWith(`${d}/`)) && !PERMANENT_DATED_FILE_PREFIXES.some((d) => f.startsWith(d)),
   );
   assert.deepEqual(undeclared, [], `寿命未宣言の日付名 state: ${undeclared.slice(0, 10).join(", ")}`);
+});
+
+test("R2 state/ へ移した生 snapshot (psi) は git の寿命の対象にしない", () => {
+  assert.equal(Object.hasOwn(RETENTION_POLICIES, "psi"), false);
+  assert.equal(DATASETS.find((d) => d.id === "psi.batch")?.r2State, "state/psi/");
 });

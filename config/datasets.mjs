@@ -463,7 +463,7 @@ export const DATASETS = [
   d("ga4.history-finalized", "data/ga4/history-finalized7d.csv", "series", "site", "data", "GA4 の確定 7 日集約"),
   d("ga4.reconciliations", "data/ga4/reconciliations/{date}-{week}.json", "ledger", "site", "data", "GA4 の週次集計定義の照合証拠", { schema: "config/schema/ga4.reconciliations.schema.json", retain: "ga4-reconciliations" }),
   d("ga4.latest", "data/ga4/LATEST.md", "report", "site", "data", "GA4 の前週比の要約"),
-  d("psi.batch", "data/psi/psi-batch-{ts}.json", "series", "site", "data", "PSI 日次計測の生 JSON", { retain: "psi" }),
+  d("psi.batch", "data/psi/live/psi-batch-{ts}.json", "series", "site", "data", "PSI 週次計測の生 JSON (正本は R2。手元は npm run state:pull -- psi)", { r2State: "state/psi/" }),
   d("psi.history", "data/psi/history.csv", "series", "site", "data", "PSI の長期履歴"),
   d("psi.latest", "data/psi/LATEST.md", "report", "site", "data", "PSI の最新要約"),
   d("cloudflare.snapshots", "data/cloudflare/snapshots/{date}.json", "series", "ops", "data", "Cloudflare 日次 usage", { retain: "cloudflare" }),
