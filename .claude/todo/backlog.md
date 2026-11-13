@@ -131,6 +131,29 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [OPENDATA-RANKING-PILOT-01] 外部データ台帳で実ファイル確認済みの指標候補 81 件から、NDB 特定健診の 10 本前後を試しに公開する
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run validate:config -w @stats47/data-configs] [起票:2026-11-13] [領域:データ]
+
+- **背景 (2026-11-13)**: 外部データ台帳の 5 出典について統計ファイルを実際に落とし、47 都道府県の行を数えて確かめた。確認できた指標候補は 81 件で、台帳 `open-data.datasets` の `candidateMetricConcepts` に出典ファイルの URL とハッシュ付きで書いてある (管理画面 `/data/open-data`)。内訳は NDB オープンデータ 34、金融リテラシー調査 14、学力調査の質問紙 14、医療情報ネット 9、交通事故 7、道路交通センサス 3。うち 3 件 (NDB の喫煙・交通事故の自転車関与・金融トラブル経験) はメインが原典から再計算して一致を確かめた。
+- **最初の対象**: NDB の特定健診質問票と検査値。理由は 3 つ。既存の取り込み `.claude/scripts/themes/ingest-singleparent-nutrition.mjs` が同じ zip (第 11 回・質問項目 15 と 17) を読んでいて対象の設問を広げるだけで済む、1 列を読むだけで率になる、喫煙・飲酒・運動・睡眠・BMI・血圧・血糖は検索される題材である。
+- **次・実行順**: ① 10 本前後を選ぶ (喫煙・毎日飲酒・運動習慣・歩行・睡眠・BMI 25 以上・収縮期血圧 140 以上・HbA1c 6.5 以上を軸に、`.claude/scripts/estat/build-expansion-queue.mjs` の需要語の加点で並べる) ② `data/metrics/<key>.ts` を `kind: "external"`・`fetcherKey: "manual"`・provenance 付きで作る (手本 `data/metrics/health-checkup-breakfast-skipping-rate.ts`) ③ 取り込みスクリプトの対象設問を広げ、原典の SHA・47 県の一意性を assert する ④ `npm run metrics:regen-derived` → `npm run preflight:pr` ⑤ R2 への投入は EXTERNAL-METRIC-R2-INGEST-01 の経路で行う ⑥ 台帳の `existingMetricKeys` に書き、管理画面で「公開中」になることを確かめる。
+- **停止条件**: 質問項目 13・21 (回答コードの凡例が未確認) と 19 (分母が飲酒者だけかが未確認) は、NDB の解説編で定義を確かめるまで指標にしない。母数は特定健診の受診者 (40〜74 歳) で県民全体ではなく、年齢調整もしていないことを、指標の題か注記に必ず書く。一度に 10 本前後を超えて公開しない (公開の 4 週後に流入を測ってから広げる。`.claude/agents/ranking-expander.md`)。
+- **完了条件**: 選んだ指標が本番で 200 を返し、Googlebot UA で実測できる。台帳の反映状況が「公開中」になる。4 週後の流入を測る施策を `improvements.md` へ別 ID で引き渡す。
+- **次の候補 (この順)**: 金融リテラシー調査 2025 年版 (既存の `financial-literacy-correct-rate` は 2022 年版なので更新も兼ねる。2025 年版の利用条件と、県別の標本が 130〜3,381 人と小さい県があることを先に確かめる) → 学力調査の質問紙 (選択肢の文言を質問紙 PDF で確定し、残り 44 県の設問位置を確かめる) → 交通事故の属性別 (当事者 A が第 1 当事者かを定義書で確かめる。長崎の自転車 3.9% など極端な値が記録実務の差かも見る) → 医療情報ネットの診療科別 (休診フラグの定義と、医療施設調査との定義差を確かめる)。
+- **保留**: 不動産情報ライブラリの中古マンション価格は、公式のダウンロードが認証付きで実ファイルを確認できていない。既存の `ingest-property-prices.mjs` は画面から落とした zip を使っている。
+- **台帳の記述の訂正**: `open-data.sources` の `nier-gakuryoku-chousa` の notes にある「宿題・地域行事参加・ネット利用・通学時間」は、令和 7 年度の児童質問紙に設問が無かった。指標化のときに notes を直す。
+
+### [EXTERNAL-METRIC-R2-INGEST-01] e-Stat 以外の指標の観測値を R2 へ上げる CI の経路が無く、手順の文書も食い違っている
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13・読み取り調査)**: external 指標は 244 本 (公開中 233) あるが、取り込みスクリプトが手元に書いた `app/stats/<key>/values.json` を R2 へ上げる workflow が見つからなかった。`data-refresh.yml` は e-Stat 以外を「No e-Stat fetch path」で拒否し (:251・:265)、`deploy-workers.yml` の exact publish は `app/stats` を対象にしていない。外部データを CI で取り込む例は `ksj-aggregate-ingest.yml` (対象は `tourism-resource-count` だけ) の 1 本。`correlation-refresh.yml:7-9` のコメントから、既存の 244 本は workflow の外で push されたと読める。
+- **文書の食い違い**: `.claude/rules/r2-storage-design.md:31` は「2026-09-14 以降ローカルから push しない」、`.claude/skills/db/push-r2/SKILL.md` と `.claude/rules/local-environment.md:41-56` は手元からの push を可としている。R2 の認証情報は手元から撤去済みなので、実際には手元から上げられない。
+- **もう 1 つの穴**: R2 に値が無い公開中の external 指標でも `generate-ranking-items` は止まらず、`latestYear=null` の item が作られて空のページが既知キーに載りうる (`packages/ranking/src/scripts/generate-ranking-items.ts:94-97`)。
+- **次**: `ksj-aggregate-ingest.yml` を手本に、登録した取り込みスクリプトを CI で走らせて `diff-push-r2.ts --prefix app/stats/<key>/` で上げる workflow を 1 本作る (入力は取り込みスクリプトの id と `dry_run`)。あわせて、値の無い external 指標を item 生成の前に止める検査を足し、上の 3 文書を 1 つの手順にそろえる。
+- **停止条件**: 新しい workflow と R2 への書き込みなので、作る前にオーナーへ確認する。`dry_run` を既定にする。
+- **完了条件**: 取り込みスクリプト 1 本を workflow から `dry_run` で走らせ、上げる対象の key と bytes が出る。3 文書の記述が一致する。
+- **関連**: OPENDATA-RANKING-PILOT-01 の ⑤ はこの経路が前提。
+
 ### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
 
@@ -4757,6 +4780,14 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **停止条件**: 規約ページを開けないものを推測で `allowed` にしない。`unknown` のまま残すほうが、誤った商用可の記録より安全。
 - **完了条件**: `commercialUse: "unknown"` の件数が減り、採用候補に上げたものが validator を通る。確定できなかったものは `verification.notes` に「どの規約ページに到達できなかったか」が書かれている。
 - **関連**: 公式ページを開けず台帳に入れられなかった 11 件 (記事番号 2・13・30・32・37・44・45・46・70・77・78) も、現行 URL が見つかれば同じ手順で追加できる。44 郵便番号 (日本郵便は株式会社) と 78 ODPT (協議会) は台帳の定義「政府・自治体の公式の提供元」に当たるかの判断が先。
+
+### [RANKING-PUBLISH-DOC-DRIFT-01] 公開手順の文書 2 か所が実体とずれている (INDEXABLE の再生成・出典監査のスクリプト名)
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-11-13] [領域:データ]
+
+- **観測 (2026-11-13)**: ① `.claude/agents/ranking-publisher.md:64` は INDEXABLE の再生成を公開工程に含めているが、生成スクリプトは見つからず、`indexable-ranking-keys.ts` は固定のまま更新されていない (同ファイルの冒頭コメント)。② `.claude/rules/data-provenance-standards.md:117` は出典監査を `.mjs` と書いているが、実体は `.claude/scripts/provenance/audit-provenance-queue.ts`。
+- **次**: ① は工程から外すか、生成スクリプトを作るかを決めて定義を直す。② は拡張子を直す。
+- **完了条件**: 2 か所の記述が実体と一致する。
 
 ### [OPENDATA-CURATOR-DOC-01] open-data-curator の定義が「git TS カタログ」のままで、台帳の現在地とずれている
 

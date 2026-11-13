@@ -103,16 +103,25 @@
       ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "診療科別の診療所数 (県別集計)"
+        "人口10万人当たりの小児科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの皮膚科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの眼科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの耳鼻咽喉科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの整形外科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの心療内科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの日曜に診療する診療所数 (施設/10万人（または％）・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの平日19時以降も診療する診療所数 (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-08-30",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
-          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx",
+          "https://www.mhlw.go.jp/content/11121000/02-2_clinic_speciality_hours_20260601.csv.zip + https://www.mhlw.go.jp/content/11121000/01-2_hospital_speciality_hours_20260601.csv.zip",
+          "https://www.mhlw.go.jp/content/11121000/02-2_clinic_speciality_hours_20260601.csv.zip"
         ],
-        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認 2026-11-13 実ファイル確認: 指標候補 8 件について統計ファイルを開き、47 都道府県の行を数えて確認した (02-2_clinic_speciality_hours_20260601.csv.zip sha256=9b873f66f9450cf2…)。"
       }
     },
     {
@@ -274,15 +283,18 @@
         "pharmacy-count-per-100k"
       ],
       "existingGisDataIds": [],
-      "candidateMetricConcepts": [],
+      "candidateMetricConcepts": [
+        "人口10万人当たりの日曜に開く薬局数 (所/10万人（または％）・2026年6月1日時点・47県を実ファイルで確認)"
+      ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-08-30",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
-          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx",
+          "https://www.mhlw.go.jp/content/11121000/05_pharmacy_20260601.csv.zip"
         ],
-        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認 2026-11-13 実ファイル確認: 指標候補 1 件について統計ファイルを開き、47 都道府県の行を数えて確認した (05_pharmacy_20260601.csv.zip sha256=e53eacdbd9b4a115…)。"
       }
     },
     {
@@ -322,7 +334,10 @@
         "construction",
         "economy"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "residential-land-transaction-median-price",
+        "residential-land-transaction-sample-count"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
         "中古住宅取引価格の県別中央値",
@@ -524,7 +539,9 @@
         "residential-land-price-change-rate",
         "standard-price-change-rate-residential",
         "standard-price-change-rate-commercial",
-        "industrial-land-price"
+        "industrial-land-price",
+        "residential-official-land-median-price",
+        "residential-official-land-point-count"
       ],
       "existingGisDataIds": [
         "L01",
@@ -3837,22 +3854,35 @@
       "suggestedCategories": [
         "economy"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "financial-literacy-correct-rate"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "金融リテラシー正答率 (都道府県別)",
-        "金融トラブル経験率 (都道府県別)",
-        "金融知識の自己評価と客観評価の差 (都道府県別)"
+        "正誤問題25問の正答率(2025年版・既存の2022年版の更新) (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "金融トラブルの経験者の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "緊急時に備えた資金(3か月分の生活費)を確保している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "1か月の支出を把握している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "老後の生活費について資金計画をたてている人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "消費者ローンを利用している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "お金を借り過ぎていると感じている人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "株式を購入したことがある人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "投資信託を購入したことがある人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "金融知識に自信を持っている人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "学校等で金融経済教育を受けた人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "資産・負債の現状に満足している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "損失回避傾向が強い人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "金融トラブル発生時の相談窓口を認識している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-19",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.j-flec.go.jp/data/literacy_chosa_2025/",
           "https://j-flec.go.jp/wpimages/uploads/25lite_toukei.xlsx",
           "https://www.j-flec.go.jp/guidelines/"
         ],
-        "notes": "xlsx を実ダウンロードしシート構造・セル値を直接解析し47都道府県シート・比較表・一覧表の実在と正答率/トラブル有無/借入/行動バイアス設問の都道府県別数値を確認済み。老後資金計画の設問が同ファイル内にあるかは列範囲を全て読み切っておらず未確認 (partially-verified の理由)。e-Stat には未掲載 (検索で不在確認、2026-07-19)。非e-Stat統計のため取得は data-ingester がxlsx 解析の専用パイプラインを新設する必要がある (既存 e-Stat クライアントは使えない)。"
+        "notes": "xlsx を実ダウンロードしシート構造・セル値を直接解析し47都道府県シート・比較表・一覧表の実在と正答率/トラブル有無/借入/行動バイアス設問の都道府県別数値を確認済み。老後資金計画の設問が同ファイル内にあるかは列範囲を全て読み切っておらず未確認 (partially-verified の理由)。e-Stat には未掲載 (検索で不在確認、2026-07-19)。非e-Stat統計のため取得は data-ingester がxlsx 解析の専用パイプラインを新設する必要がある (既存 e-Stat クライアントは使えない)。 2026-11-13 実ファイル確認: 指標候補 14 件について統計ファイルを開き、47 都道府県の行を数えて確認した (25lite_toukei.xlsx sha256=101fbb425a23a6a6…)。メインが統計表のシート「86 都道府県比較表 (2)」を開き、金融トラブル経験の 47 県の値と順位を確認 (岩手県 10.1%〜佐賀県 4.3%)。"
       }
     },
     {
@@ -3945,30 +3975,42 @@
       "suggestedCategories": [
         "educationsports"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-reading-like-rate",
+        "national-assessment-elementary-study-1h-plus-rate",
+        "national-assessment-elementary-tutoring-rate"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "朝食摂取率 (小学生・都道府県別)",
-        "読書率 (小学生・都道府県別)",
-        "宿題実行率 (小学生・都道府県別)",
-        "地域行事参加率 (小学生・都道府県別)",
-        "長時間インターネット利用率 (小学生・都道府県別)",
-        "通塾率 (小学生・都道府県別)",
-        "学校外学習率 (小学生・都道府県別)",
-        "通学時間 (小学生・都道府県別)"
+        "自分によいところがあると思う児童生徒の割合(自己肯定感) (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "将来の夢や目標を持っている児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "学校に行くのは楽しいと思う児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "いじめはどんな理由があってもいけないと思う児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "先生や学校の大人にいつでも相談できる児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "友達関係に満足している児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "普段の生活で幸せな気持ちになることがある児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "家に本が多い(蔵書数が多い)児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "地域の大人に勉強・スポーツ・体験活動で関わってもらった経験のある児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "地域や社会をよくするために何かしてみたい児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "これまでに自然の中で遊ぶ・自然観察をした経験のある児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "平日にPC・タブレットを勉強に1時間以上使う児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "新聞を読んでいる児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "毎日同じくらいの時刻に寝ている児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-20",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
           "https://www.nier.go.jp/25chousakekkahoukoku/index.html",
           "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
           "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/index.html",
           "https://www.nier.go.jp/11_copyright/",
-          "https://www.mext.go.jp/b_menu/1351168.htm"
+          "https://www.mext.go.jp/b_menu/1351168.htm",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/{NN}_{romaji}/{NN}p_25a.xlsx (小) / {NN}m_25a.xlsx (中)"
         ],
-        "notes": "北海道ページで「児童質問調査回答結果集計表」xlsx (01p_25a.xlsx) のファイル名を実在確認。朝食・読書・宿題・地域行事参加・ネット利用・通塾・学校外学習・通学時間の8設問が同ファイル内のどのシート・列に収録されるかは実ファイルをダウンロードして開いておらず未確認のためpartially-verified。取得は data-ingester が xlsx 解析の専用パイプラインを新設する必要がある(既存 e-Stat クライアントは使えない、jflec-financial-literacy-survey-prefecture と同様の構成)。"
+        "notes": "北海道ページで「児童質問調査回答結果集計表」xlsx (01p_25a.xlsx) のファイル名を実在確認。朝食・読書・宿題・地域行事参加・ネット利用・通塾・学校外学習・通学時間の8設問が同ファイル内のどのシート・列に収録されるかは実ファイルをダウンロードして開いておらず未確認のためpartially-verified。取得は data-ingester が xlsx 解析の専用パイプラインを新設する必要がある(既存 e-Stat クライアントは使えない、jflec-financial-literacy-survey-prefecture と同様の構成)。 2026-11-13 実ファイル確認: 指標候補 14 件について統計ファイルを開き、47 都道府県の行を数えて確認した。"
       }
     },
     {
@@ -4006,7 +4048,9 @@
       "suggestedCategories": [
         "safetyenvironment"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "heatstroke-emergency-transports"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
         "人口10万人当たり熱中症救急搬送人員"
@@ -5631,12 +5675,46 @@
       "suggestedCategories": [
         "socialsecurity"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "health-checkup-breakfast-skipping-rate",
+        "health-checkup-late-dinner-rate"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "特定健診の検査値の都道府県別集計",
-        "医薬品の処方数量の都道府県別集計",
-        "診療行為の算定回数の都道府県別集計"
+        "血圧を下げる薬を使用している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "血糖を下げる薬又はインスリン注射を使用している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "コレステロールや中性脂肪を下げる薬を使用している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "脳卒中の既往・治療がある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "心臓病(狭心症・心筋梗塞等)の既往・治療がある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "慢性腎臓病・腎不全(透析含む)の既往・治療がある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "貧血といわれたことがある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "習慣的に喫煙している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "20歳時から体重が10kg以上増加している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "週2日以上・1回30分以上の運動を1年以上続けている人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "歩行又は同等の身体活動を1日1時間以上している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "同年齢・同性と比べて歩く速度が速い人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "食事をかんで食べる時に「かみにくい・ほとんどかめない」人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "人と比較して食べる速度が速い人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "朝昼夕の3食以外に間食や甘い飲み物を毎日摂取している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "お酒を毎日飲む人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "睡眠で休養が十分とれている人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "BMI 25以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "腹囲が基準を超える人(男85cm以上・女90cm以上)の割合 (％・2023年度・47県を実ファイルで確認)",
+        "収縮期血圧140mmHg以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "拡張期血圧90mmHg以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "HbA1c 6.5%以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "空腹時血糖126mg/dl以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "中性脂肪150mg/dl以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "LDLコレステロール140mg/dl以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "HDLコレステロール40mg/dl未満の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "ALT(GPT) 31U/l以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "γ-GTP 51U/l以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "尿蛋白(+)以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "尿糖(+)以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "特定健診 検査値の都道府県別平均値(BMI・腹囲・HbA1c・血圧・脂質など16項目) (項目ごと(kg/m²・cm・％・mmHgなど)・2023年度・47県を実ファイルで確認)",
+        "歯周病(傷病グループ)の傷病件数 ÷ 人口 (件/人口1000人・2024年4月〜2025年3月診療分・47県を実ファイルで確認)",
+        "歯科初診料の算定患者数(外来) ÷ 人口 (人/人口1000人・2024年4月〜2025年3月診療分・47県を実ファイルで確認)",
+        "調剤基本料の算定回数(処方箋受付回数の目安) ÷ 人口 (回/人口1人・2024年4月〜2025年3月診療分・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
@@ -5645,9 +5723,14 @@
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html",
           "https://www.mhlw.go.jp/ndb/opendatasite/",
           "https://www.mhlw.go.jp/chosakuken/index.html",
-          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0",
+          "https://www.mhlw.go.jp/content/12400000/001711941.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711940.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711925.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711916.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711927.zip"
         ],
-        "notes": "最新回(第12回)と都道府県別の存在(分析サイト、第1〜10回分の記述)を確認し、厚労省の規約が PDL1.0 であることも確認した。ファイル形式、第11・12回の都道府県別の有無、収録開始年度は未確認。"
+        "notes": "最新回(第12回)と都道府県別の存在(分析サイト、第1〜10回分の記述)を確認し、厚労省の規約が PDL1.0 であることも確認した。ファイル形式、第11・12回の都道府県別の有無、収録開始年度は未確認。 2026-11-13 実ファイル確認: 指標候補 34 件について統計ファイルを開き、47 都道府県の行を数えて確認した (001711941.zip sha256=95efcf4dc8500954…、001711940.zip sha256=1b25ff94d1682297…、001711925.zip sha256=7ed380e045086f21…、001711916.zip sha256=a391bb69f7d5430f…、001711927.zip sha256=e147167850cab938…)。メインが質問項目8 (喫煙) を原典 xlsx から再計算し、probe の値と一致 (奈良県 18.41%〜北海道 27.84%)。"
       }
     },
     {
@@ -6040,7 +6123,13 @@
       ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "都道府県別 交通事故発生件数 (本票を集計。都道府県の列は未確認)"
+        "夜間に起きた交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "自転車が関係する交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "高齢運転者(第1当事者65歳以上)が起こした交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "歩行者が関係する交通事故(人対車両)の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "二輪車(自動二輪・原付)が関係する交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "雪の日に起きた交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "車両単独事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "verified",
@@ -6048,9 +6137,10 @@
         "verifiedFromUrls": [
           "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html",
           "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html",
-          "https://www.npa.go.jp/rules/index.html"
+          "https://www.npa.go.jp/rules/index.html",
+          "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/honhyo_2025.csv"
         ],
-        "notes": "規約ページを確認: PDL1.0、出典表示と加工の明記が必要、商用利用の明示はない。2025年分のCSV3種とファイル定義書・コード表の存在を確認。本票に都道府県コードと緯度経度の列があるかは未確認(ファイル定義書は未読)。ranking 化はこの確認が前提。 既存との重なり: 社会・人口統計体系の交通事故指標は警察庁の統計が元。"
+        "notes": "規約ページを確認: PDL1.0、出典表示と加工の明記が必要、商用利用の明示はない。2025年分のCSV3種とファイル定義書・コード表の存在を確認。本票に都道府県コードと緯度経度の列があるかは未確認(ファイル定義書は未読)。ranking 化はこの確認が前提。 既存との重なり: 社会・人口統計体系の交通事故指標は警察庁の統計が元。 2026-11-13 実ファイル確認: 指標候補 7 件について統計ファイルを開き、47 都道府県の行を数えて確認した (honhyo_2025.csv sha256=aad9afb4e6f9dac6…)。メインが本票 287,023 行から自転車関与の割合を再計算し、probe の値と一致 (全国 23.51%・東京 45.9%)。都道府県コードは 51 種で、北海道は方面別の 10〜14 を合算する。"
       }
     },
     {
@@ -6094,17 +6184,20 @@
       ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "都道府県別 道路延長 (集計結果整理表)",
-        "都道府県別 道路の交通量 (集計結果整理表。指標の定義は説明資料で要確認)"
+        "道路の混雑度(一般道路計) ((比)・令和3年(2021)秋季・47県を実ファイルで確認)",
+        "大型車混入率(12時間・一般道路計) (％・令和3年(2021)秋季・47県を実ファイルで確認)",
+        "混雑時旅行速度(朝夕・一般道路計) (km/h・令和3年(2021)秋季・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
         "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.mlit.go.jp/road/census/r3/",
-          "https://www.mlit.go.jp/links/terms-of-use.html"
+          "https://www.mlit.go.jp/links/terms-of-use.html",
+          "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei04.csv",
+          "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei05.csv"
         ],
-        "notes": "令和3年度ページで都道府県別の集計表と47県別の表の存在を確認。規約は国土交通省サイトの規約(PDL1.0、商用利用の明示なし)。latestPublishedAt は検索結果の報道発表日(2023-06-30)で、ページ自体では未確認。表の項目の定義は説明PDFを読んでいない。 既存との重なり: 社会・人口統計体系の道路平均交通量は道路交通センサスが元。"
+        "notes": "令和3年度ページで都道府県別の集計表と47県別の表の存在を確認。規約は国土交通省サイトの規約(PDL1.0、商用利用の明示なし)。latestPublishedAt は検索結果の報道発表日(2023-06-30)で、ページ自体では未確認。表の項目の定義は説明PDFを読んでいない。 既存との重なり: 社会・人口統計体系の道路平均交通量は道路交通センサスが元。 2026-11-13 実ファイル確認: 指標候補 3 件について統計ファイルを開き、47 都道府県の行を数えて確認した (syuukei04.csv sha256=7758cdbed18e630c…、syuukei05.csv sha256=1c65294bf84febd0…)。"
       }
     },
     {
