@@ -664,6 +664,13 @@ export const DATASETS = [
       },
     ],
   }),
+  d("sns.x-catalog", "data/sns/x-catalog.json", "master", "sns", "data", "X の量産カタログ (投稿上限 quota・キャプションの型 templates・カテゴリと切り口の相性 affinity・添付できる画像種 imageKinds)。頻度ガード・候補選定・lint・下書き登録が読む。改訂は .claude/rules/sns-content-standards.md §2-10 の承認を経る。読み込みは .claude/scripts/lib/x-catalog.cjs", {
+    schema: "config/schema/sns.x-catalog.schema.json",
+    refs: [
+      { field: "templates[].imageKind", to: "sns.x-catalog", key: "imageKinds[].id" },
+      { field: "affinity.$keys", to: "categories.master", key: "categories[].key" },
+    ],
+  }),
   d("sns.post-log", "data/sns/post-log.md", "report", "sns", "data", "SNS 投稿の人が読む記録"),
   d("sns.image-replacements", "data/sns/image-replacements/{name}.json", "evidence", "sns", "data", "予約済み投稿の画像差し替えの記録 (決定・対象 ID・差し替え前後)"),
   d("sns.material-reconciliation", "data/sns/material-reconciliation-{date}.json", "series", "sns", "data", "素材キーから投稿IDへの照合証跡。候補の正本はposts.json"),

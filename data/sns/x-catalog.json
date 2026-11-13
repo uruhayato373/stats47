@@ -1,0 +1,226 @@
+{
+  "quota": {
+    "dailyMax": 3,
+    "weeklyTargetMin": 21,
+    "weeklyTargetMax": 21
+  },
+  "templates": [
+    {
+      "id": "shock",
+      "structure": "衝撃の1事実→数値対比2行→サイト誘導",
+      "imageKind": "ranking-card",
+      "charMax": 140,
+      "bestTime": "weekday-07-09",
+      "use": "意外な1位/最下位。スクロールを止める"
+    },
+    {
+      "id": "versus",
+      "structure": "2者対決→数値→どっち派?問いかけ",
+      "imageKind": "ranking-card",
+      "charMax": 140,
+      "bestTime": "weekday-12-13",
+      "use": "東京 vs 地方等。賛否で引用RT誘発"
+    },
+    {
+      "id": "question",
+      "structure": "なぜ〇〇なのか?→答えを一部先出し→続きはサイト",
+      "imageKind": "ranking-card",
+      "charMax": 140,
+      "bestTime": "weekday-18-20",
+      "use": "好奇心ギャップ。保存誘発"
+    },
+    {
+      "id": "paradox",
+      "structure": "通説提示→データは逆→驚いたら保存",
+      "imageKind": "tile-map",
+      "charMax": 150,
+      "bestTime": "weekday-10-12",
+      "use": "逆説。知的刺激でブックマーク"
+    },
+    {
+      "id": "number",
+      "structure": "数値3つ以上を冒頭列挙→最大格差強調→ランキングURL",
+      "imageKind": "ranking-card",
+      "charMax": 150,
+      "bestTime": "weekday-07-09",
+      "use": "数字の羅列で驚かせる。通勤帯で保存"
+    },
+    {
+      "id": "angle-experience",
+      "structure": "もし〇〇県に住んでいたら→感情描写→あなたの県は?",
+      "imageKind": "ranking-card",
+      "charMax": 150,
+      "bestTime": "weekday-21-23",
+      "use": "個人化・感情移入。返信誘発"
+    },
+    {
+      "id": "angle-howto",
+      "structure": "このデータを使う3ステップ→試して",
+      "imageKind": "ranking-card",
+      "charMax": 160,
+      "bestTime": "weekend-09-11",
+      "use": "実用価値。週末に保存・試行"
+    },
+    {
+      "id": "theme-lens",
+      "structure": "1順位では見えない論点→複数指標を横断→テーマページ誘導",
+      "imageKind": "theme-overview-card",
+      "charMax": 150,
+      "bestTime": "weekday-18-20",
+      "use": "複数指標を同じ主題で読む。テーマ集客専用"
+    },
+    {
+      "id": "area-profile",
+      "structure": "県名→固有のシンボル/特産→県データブック誘導",
+      "imageKind": "area-profile-card",
+      "charMax": 150,
+      "bestTime": "weekday-12-13",
+      "use": "1県を多面的に読む。エリア集客専用"
+    },
+    {
+      "id": "household-receipt",
+      "structure": "県の家計総額→内訳の特徴→対象期間→県データブック誘導",
+      "imageKind": "household-receipt",
+      "charMax": 140,
+      "bestTime": "weekday-12-13",
+      "use": "全国家計構造調査の10費目。県を指定して生成"
+    },
+    {
+      "id": "area-atlas",
+      "structure": "県名→4つの代表指標→対象年の違い→県データブック誘導",
+      "imageKind": "area-atlas",
+      "charMax": 140,
+      "bestTime": "weekday-12-13",
+      "use": "人口・面積・世帯数・森林割合で県を読む"
+    },
+    {
+      "id": "rank-routes",
+      "structure": "品目と2時点→都市の順位変化→年間支出額の比較→ランキング誘導",
+      "imageKind": "rank-routes",
+      "charMax": 140,
+      "bestTime": "weekday-18-20",
+      "use": "家計調査の品目別年間支出額。2〜4都市を抜粋"
+    },
+    {
+      "id": "tile-change",
+      "structure": "指標と2時点→増減した県数→全47県の増減率→指標ページ誘導",
+      "imageKind": "tile-change",
+      "charMax": 140,
+      "bestTime": "weekday-18-20",
+      "use": "人口・世帯数・出生数の長期変化。47県・定義・単位を固定"
+    },
+    {
+      "id": "quote-rt",
+      "structure": "引用元の主張を統計で肯定/否定/深掘り1-2文",
+      "imageKind": "none",
+      "charMax": 140,
+      "bestTime": "any",
+      "use": "引用RT (find-quote-rt 経由。バッチ対象外)"
+    }
+  ],
+  "affinity": {
+    "laborwage": { "結論": "◎", "理由": "○", "体験": "○", "反論": "◎", "数字": "◎", "ハウツー": "○" },
+    "economy": { "結論": "◎", "理由": "○", "体験": "○", "反論": "◎", "数字": "◎", "ハウツー": "○" },
+    "population": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "○", "数字": "◎", "ハウツー": "○" },
+    "socialsecurity": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "◎", "数字": "◎", "ハウツー": "◎" },
+    "educationsports": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "○", "数字": "◎", "ハウツー": "◎" },
+    "tourism": { "結論": "◎", "理由": "○", "体験": "◎", "反論": "◎", "数字": "◎", "ハウツー": "△" },
+    "agriculture": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "◎", "数字": "◎", "ハウツー": "◎" },
+    "landweather": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "○", "数字": "◎", "ハウツー": "△" },
+    "safetyenvironment": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "○", "数字": "◎", "ハウツー": "◎" },
+    "commercial": { "結論": "◎", "理由": "○", "体験": "◎", "反論": "◎", "数字": "◎", "ハウツー": "○" },
+    "miningindustry": { "結論": "○", "理由": "◎", "体験": "△", "反論": "◎", "数字": "◎", "ハウツー": "○" },
+    "construction": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "○", "数字": "◎", "ハウツー": "◎" },
+    "infrastructure": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "○", "数字": "◎", "ハウツー": "◎" },
+    "administrativefinancial": { "結論": "◎", "理由": "◎", "体験": "△", "反論": "◎", "数字": "◎", "ハウツー": "○" },
+    "international": { "結論": "○", "理由": "◎", "体験": "◎", "反論": "◎", "数字": "◎", "ハウツー": "△" },
+    "energy": { "結論": "○", "理由": "◎", "体験": "△", "反論": "◎", "数字": "◎", "ハウツー": "◎" },
+    "ict": { "結論": "○", "理由": "◎", "体験": "△", "反論": "◎", "数字": "◎", "ハウツー": "◎" }
+  },
+  "imageKinds": [
+    {
+      "id": "ranking-card",
+      "size": "1080x1350",
+      "generator": "`.claude/scripts/sns/quick-still.ts --key <key>`",
+      "outPath": ".local/r2/sns/ranking/<key>/x/stills/<key>.png",
+      "note": "全47県タイル図。X / Threads の単年指標の既定"
+    },
+    {
+      "id": "tile-map",
+      "size": "1080x1080",
+      "generator": "Remotion `RankingX-ChoroplethMap` (render-sns-stills)",
+      "outPath": ".local/r2/sns/ranking/<key>/x/stills/choropleth-map-1200x630.png",
+      "note": "★既知の不整合: ラベルは 1200x630 だが実 canvas 1080x1080。修正は別タスク"
+    },
+    {
+      "id": "scatter",
+      "size": "1200x630",
+      "generator": "Remotion `CorrelationX-Scatter` (render-sns-stills)",
+      "outPath": ".local/r2/sns/correlation/<x>--<y>/x/stills/scatter-1200x630.png",
+      "note": "相関散布図 (correlation domain のみ)"
+    },
+    {
+      "id": "compare",
+      "size": "1200x630",
+      "generator": "Remotion `CompareX-Post` (render-sns-stills)",
+      "outPath": ".local/r2/sns/compare/<a>-vs-<b>/x/stills/comparison-1200x630.png",
+      "note": "2地域比較 (compare domain のみ)"
+    },
+    {
+      "id": "geo-insight-card",
+      "size": "1080x1350",
+      "generator": "Remotion `GeoX-InsightCard` (`/operate-geo-content`)",
+      "outPath": ".local/r2/sns/geo/<key>/x/stills/<key>.png",
+      "note": "Geo空間分析専用。地図主役・layer×operation・出典SHA必須"
+    },
+    {
+      "id": "theme-overview-card",
+      "size": "1200x630",
+      "generator": "theme Open Graph route (`/themes/<key>/opengraph-image`)",
+      "outPath": ".local/r2/sns/theme/<key>/x/stills/<key>.png",
+      "note": "テーマ専用。複数指標を束ねる着地ページの画像"
+    },
+    {
+      "id": "area-profile-card",
+      "size": "1200x630",
+      "generator": "area Open Graph asset (`app/areas/<code>/ogp/ogp.png`)",
+      "outPath": ".local/r2/sns/area/<key>/x/stills/<key>.png",
+      "note": "エリア専用。1県のデータブック着地画像"
+    },
+    {
+      "id": "household-receipt",
+      "size": "1080x1350",
+      "generator": "`.claude/scripts/sns/render-data-card.ts --kind household-receipt --area <prefCode> --platform x`",
+      "outPath": ".local/r2/sns/household-receipt/<key>/x/stills/<key>.png",
+      "note": "keyは県5桁-年。2024年10〜11月の月平均・県全域・二人以上世帯"
+    },
+    {
+      "id": "area-atlas",
+      "size": "1080x1350",
+      "generator": "`.claude/scripts/sns/render-data-card.ts --kind area-atlas --area <prefCode> --platform x`",
+      "outPath": ".local/r2/sns/area-atlas/<key>/x/stills/<key>.png",
+      "note": "keyは県5桁。4指標それぞれの最新年・正確な県境"
+    },
+    {
+      "id": "rank-routes",
+      "size": "1080x1350",
+      "generator": "`.claude/scripts/sns/render-data-card.ts --kind rank-routes --key <rankingKey> --from <year> --to <year> --platform x`",
+      "outPath": ".local/r2/sns/rank-routes/<key>/x/stills/<key>.png",
+      "note": "keyは指標-始年-終年-抽出県コード列。家計調査の年間支出額専用"
+    },
+    {
+      "id": "tile-change",
+      "size": "1080x1350",
+      "generator": "`.claude/scripts/sns/render-data-card.ts --kind tile-change --key <key> --from <year> --to <year>`",
+      "outPath": ".local/r2/sns/tile-change/<key>/x/stills/<key>.png",
+      "note": "47県の2時点増減率。keyは指標-始年-終年"
+    },
+    {
+      "id": "none",
+      "size": null,
+      "generator": null,
+      "outPath": null,
+      "note": "画像なし (quote-rt 等テキスト投稿)"
+    }
+  ]
+}

@@ -76,17 +76,10 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 > sns-weekly-report でリーチ・保存率を計測し、**悪化が確認されたら w29 の残エントリ削除で即時停止**する。
 > 期間終了後は既定に戻った。2026-09-23 以降の既定は §2-3c の曜日ローテーション。
 
-> **機械参照 (★SSOT)**: 上表の `X_DAILY_MAX` / `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` は
-> `<!-- x-catalog:quota -->` ブロック (本節末) に構造化データとして持たせ、`.claude/scripts/lib/x-catalog.cjs`
-> がパースする。**値を変えるときは下記ブロックだけを編集**すれば guard / 候補選定数 / schedule 割付の全系に波及する。
-
-<!-- x-catalog:quota:start -->
-```
-X_DAILY_MAX=3
-X_WEEKLY_TARGET_MIN=21
-X_WEEKLY_TARGET_MAX=21
-```
-<!-- x-catalog:quota:end -->
+> **機械が読む値の正本は台帳 `sns.x-catalog`** (`data/sns/x-catalog.json` の `quota`)。上表の `X_DAILY_MAX` は `quota.dailyMax`、
+> `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` は `quota.weeklyTargetMin` / `quota.weeklyTargetMax` にあたり、
+> `.claude/scripts/lib/x-catalog.cjs` が読む。**値を変えるときは台帳を編集する** (guard / 候補選定数 / schedule 割付の全系に波及する)。
+> 上表は判断と理由の記録で、この文書の数字を書き換えても機械の挙動は変わらない。
 
 ---
 
@@ -98,39 +91,20 @@ X_WEEKLY_TARGET_MAX=21
 
 ### 2-0. X テンプレ機械カタログ (SSOT・template id)
 
-X 投稿の「型」は下表を単一ソースとする。各投稿は `template` id を 1 つ持ち、posts.json の
-`template` 列に**必ず記録する** (勝ちパターン分析 `analyze-x-winning-patterns.mjs` の前提)。
-`.claude/scripts/lib/x-catalog.cjs` が下記アンカー内のテーブルをパースして
-`getTemplates()` / `getImageKinds()` を返す。文言・画像割当を変えるときは本表だけを編集する。
+X 投稿の「型」は台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) の `templates` を単一ソースとする。各投稿は `template` id を
+1 つ持ち、posts.json の `template` 列に**必ず記録する** (勝ちパターン分析 `analyze-x-winning-patterns.mjs` の前提)。
+`.claude/scripts/lib/x-catalog.cjs` が台帳を読んで `getTemplates()` / `getImageKinds()` を返す。文言・画像割当を変えるときは
+台帳だけを編集する。型の一覧は `node .claude/scripts/lib/x-catalog.cjs --json` で読む (この文書に写しを置かない)。
 
 - `structure` = キャプションの型 (LLM がこの枠で文章を書く)
-- `image_kind` = §2-9 の画像種 id (投稿添付画像)
-- `char_max` = URL・改行を除く本文の上限文字数。これとは別に、X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23・絵文字 2。`.claude/scripts/lib/x-weighted-length.cjs`) を lint が検査する。char_max を満たしても日本語が多いと X に弾かれるため (2026-09-23 に重み 284 で実際に弾かれた)
-- `best_time` = 推奨投稿時間帯 (scheduled_at 割付の既定。§2-8 の時間帯表と整合)
-
-<!-- x-catalog:templates:start -->
-| template | structure | image_kind | char_max | best_time | 用途 |
-|---|---|---|---|---|---|
-| `shock` | 衝撃の1事実→数値対比2行→サイト誘導 | ranking-card | 140 | weekday-07-09 | 意外な1位/最下位。スクロールを止める |
-| `versus` | 2者対決→数値→どっち派?問いかけ | ranking-card | 140 | weekday-12-13 | 東京 vs 地方等。賛否で引用RT誘発 |
-| `question` | なぜ〇〇なのか?→答えを一部先出し→続きはサイト | ranking-card | 140 | weekday-18-20 | 好奇心ギャップ。保存誘発 |
-| `paradox` | 通説提示→データは逆→驚いたら保存 | tile-map | 150 | weekday-10-12 | 逆説。知的刺激でブックマーク |
-| `number` | 数値3つ以上を冒頭列挙→最大格差強調→ランキングURL | ranking-card | 150 | weekday-07-09 | 数字の羅列で驚かせる。通勤帯で保存 |
-| `angle-experience` | もし〇〇県に住んでいたら→感情描写→あなたの県は? | ranking-card | 150 | weekday-21-23 | 個人化・感情移入。返信誘発 |
-| `angle-howto` | このデータを使う3ステップ→試して | ranking-card | 160 | weekend-09-11 | 実用価値。週末に保存・試行 |
-| `theme-lens` | 1順位では見えない論点→複数指標を横断→テーマページ誘導 | theme-overview-card | 150 | weekday-18-20 | 複数指標を同じ主題で読む。テーマ集客専用 |
-| `area-profile` | 県名→固有のシンボル/特産→県データブック誘導 | area-profile-card | 150 | weekday-12-13 | 1県を多面的に読む。エリア集客専用 |
-| `household-receipt` | 県の家計総額→内訳の特徴→対象期間→県データブック誘導 | household-receipt | 140 | weekday-12-13 | 全国家計構造調査の10費目。県を指定して生成 |
-| `area-atlas` | 県名→4つの代表指標→対象年の違い→県データブック誘導 | area-atlas | 140 | weekday-12-13 | 人口・面積・世帯数・森林割合で県を読む |
-| `rank-routes` | 品目と2時点→都市の順位変化→年間支出額の比較→ランキング誘導 | rank-routes | 140 | weekday-18-20 | 家計調査の品目別年間支出額。2〜4都市を抜粋 |
-| `tile-change` | 指標と2時点→増減した県数→全47県の増減率→指標ページ誘導 | tile-change | 140 | weekday-18-20 | 人口・世帯数・出生数の長期変化。47県・定義・単位を固定 |
-| `quote-rt` | 引用元の主張を統計で肯定/否定/深掘り1-2文 | none | 140 | any | 引用RT (find-quote-rt 経由。バッチ対象外) |
-<!-- x-catalog:templates:end -->
+- `imageKind` = §2-9 の画像種 id (投稿添付画像)
+- `charMax` = URL・改行を除く本文の上限文字数。これとは別に、X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23・絵文字 2。`.claude/scripts/lib/x-weighted-length.cjs`) を lint が検査する。charMax を満たしても日本語が多いと X に弾かれるため (2026-09-23 に重み 284 で実際に弾かれた)
+- `bestTime` = 推奨投稿時間帯 (scheduled_at 割付の既定。§2-8 の時間帯表と整合)
 
 - ハッシュタグは全 template 共通で **3-5 個**。URL は 1 本のみ (§4 の UTM 規則)。
 - `quote-rt` は瞬発系のため `/post-x-batch` の量産対象外 (find-quote-rt → publish-x で個別運用)。
 - template id と 6 角度 (§2-8) の対応: `angle-conclusion≈shock` / `angle-number≈number` /
-  `angle-rebuttal≈paradox` / `angle-reason≈question`。バッチは上表 id を使う (6 角度は相性判定の語彙)。
+  `angle-rebuttal≈paradox` / `angle-reason≈question`。バッチは台帳の id を使う (6 角度は相性判定の語彙)。
 
 ### 2-1. X ランキング投稿
 
@@ -299,61 +273,23 @@ node .claude/scripts/note/patch-note-paid-landing.mjs --all --commit          # 
 
 ### 2-8. 角度 × カテゴリ相性表 (SSOT・旧 post-x-6angles/reference から吸収)
 
-ランキングの categoryKey (17 軸) ごとに、どの切り口が効くかの早見表。`select-candidates.cjs` が
-`.claude/scripts/lib/x-catalog.cjs` の `getAffinity()` 経由でこれを読み、§2-0 の template を割り付ける。
+ランキングの categoryKey (17 軸) ごとに、どの切り口が効くかの早見表。正本は台帳 `sns.x-catalog` の `affinity`
+(キーはカテゴリマスタの key) で、`select-candidates.cjs` が `.claude/scripts/lib/x-catalog.cjs` の `getAffinity()` 経由で読み、
+§2-0 の template を割り付ける。
 `◎`=高相性 (ファーストピック) / `○`=第二候補 / `△`=弱い / `—`=不適。6 切り口 (結論/理由/体験/反論/数字/ハウツー)
 は §2-0 の template と対応する (結論≈shock, 理由≈question, 反論≈paradox, 数字≈number, 体験≈angle-experience,
 ハウツー≈angle-howto)。
 
-<!-- x-catalog:affinity:start -->
-| category | 結論 | 理由 | 体験 | 反論 | 数字 | ハウツー |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| laborwage | ◎ | ○ | ○ | ◎ | ◎ | ○ |
-| economy | ◎ | ○ | ○ | ◎ | ◎ | ○ |
-| population | ○ | ◎ | ◎ | ○ | ◎ | ○ |
-| socialsecurity | ○ | ◎ | ◎ | ◎ | ◎ | ◎ |
-| educationsports | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
-| tourism | ◎ | ○ | ◎ | ◎ | ◎ | △ |
-| agriculture | ○ | ◎ | ◎ | ◎ | ◎ | ◎ |
-| landweather | ○ | ◎ | ◎ | ○ | ◎ | △ |
-| safetyenvironment | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
-| commercial | ◎ | ○ | ◎ | ◎ | ◎ | ○ |
-| miningindustry | ○ | ◎ | △ | ◎ | ◎ | ○ |
-| construction | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
-| infrastructure | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
-| administrativefinancial | ◎ | ◎ | △ | ◎ | ◎ | ○ |
-| international | ○ | ◎ | ◎ | ◎ | ◎ | △ |
-| energy | ○ | ◎ | △ | ◎ | ◎ | ◎ |
-| ict | ○ | ◎ | △ | ◎ | ◎ | ◎ |
-<!-- x-catalog:affinity:end -->
-
 - ranking_key の特徴による微調整: 格差 2 倍以上→数字 ◎ 必須 / 通説と逆の順位→反論優先 /
   生活直結→体験優先 / 政策含意→ハウツー / 「なぜ」が生じやすい→理由優先。
-- 文例集は旧 `post-x-6angles/reference/angle-templates.md` を本表の下位資料として保持しない
+- 文例集は旧 `post-x-6angles/reference/angle-templates.md` を相性表の下位資料として保持しない
   (LLM が §2-0 structure + §2-8 相性 + 勝ちパターンから執筆する)。
 
 ### 2-9. X 画像カタログ (SSOT・添付画像の種類)
 
-X 投稿に添付できる画像種を単一ソース化する。`.claude/scripts/lib/x-catalog.cjs` の `getImageKinds()`
-が下記アンカーをパースする。§2-0 の `image_kind` 列がここを参照する。**出力パスは publish-x が読む
+X 投稿に添付できる画像種の正本は台帳 `sns.x-catalog` の `imageKinds` (id・size・generator・outPath・note)。
+`.claude/scripts/lib/x-catalog.cjs` の `getImageKinds()` が読み、§2-0 の `imageKind` がこの id を指す。**出力パスは publish-x が読む
 `.local/r2/sns/<domain>/<key>/x/stills/` に統一**する (旧 quick-still の `.local/sns-quick/` は使わない)。
-
-<!-- x-catalog:imagekinds:start -->
-| image_kind | size | generator | out_path | 備考 |
-|---|---|---|---|---|
-| ranking-card | 1080x1350 | `.claude/scripts/sns/quick-still.ts --key <key>` | `.local/r2/sns/ranking/<key>/x/stills/<key>.png` | 全47県タイル図。X / Threads の単年指標の既定 |
-| tile-map | 1080x1080 | Remotion `RankingX-ChoroplethMap` (render-sns-stills) | `.local/r2/sns/ranking/<key>/x/stills/choropleth-map-1200x630.png` | ★既知の不整合: ラベルは 1200x630 だが実 canvas 1080x1080。修正は別タスク |
-| scatter | 1200x630 | Remotion `CorrelationX-Scatter` (render-sns-stills) | `.local/r2/sns/correlation/<x>--<y>/x/stills/scatter-1200x630.png` | 相関散布図 (correlation domain のみ) |
-| compare | 1200x630 | Remotion `CompareX-Post` (render-sns-stills) | `.local/r2/sns/compare/<a>-vs-<b>/x/stills/comparison-1200x630.png` | 2地域比較 (compare domain のみ) |
-| geo-insight-card | 1080x1350 | Remotion `GeoX-InsightCard` (`/operate-geo-content`) | `.local/r2/sns/geo/<key>/x/stills/<key>.png` | Geo空間分析専用。地図主役・layer×operation・出典SHA必須 |
-| theme-overview-card | 1200x630 | theme Open Graph route (`/themes/<key>/opengraph-image`) | `.local/r2/sns/theme/<key>/x/stills/<key>.png` | テーマ専用。複数指標を束ねる着地ページの画像 |
-| area-profile-card | 1200x630 | area Open Graph asset (`app/areas/<code>/ogp/ogp.png`) | `.local/r2/sns/area/<key>/x/stills/<key>.png` | エリア専用。1県のデータブック着地画像 |
-| household-receipt | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind household-receipt --area <prefCode> --platform x` | `.local/r2/sns/household-receipt/<key>/x/stills/<key>.png` | keyは県5桁-年。2024年10〜11月の月平均・県全域・二人以上世帯 |
-| area-atlas | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind area-atlas --area <prefCode> --platform x` | `.local/r2/sns/area-atlas/<key>/x/stills/<key>.png` | keyは県5桁。4指標それぞれの最新年・正確な県境 |
-| rank-routes | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind rank-routes --key <rankingKey> --from <year> --to <year> --platform x` | `.local/r2/sns/rank-routes/<key>/x/stills/<key>.png` | keyは指標-始年-終年-抽出県コード列。家計調査の年間支出額専用 |
-| tile-change | 1080x1350 | `.claude/scripts/sns/render-data-card.ts --kind tile-change --key <key> --from <year> --to <year>` | `.local/r2/sns/tile-change/<key>/x/stills/<key>.png` | 47県の2時点増減率。keyは指標-始年-終年 |
-| none | — | — | — | 画像なし (quote-rt 等テキスト投稿) |
-<!-- x-catalog:imagekinds:end -->
 
 - **量産の既定は `ranking-card`** (quick-still.ts で決定的・数秒生成)。tile-map/scatter/compare は
   Remotion レンダが要るため瞬発量産には重い (バッチは ranking-card を主軸に、多様性のため一部 tile-map)。
@@ -410,7 +346,8 @@ Instagramは同じ入力から表紙・データ本体・出典/案内の3枚を
    (`.claude/skills/sns/x-viral-research/reference/reports/<date>.md`) か
    `/competitor-scan` の月次レビューを起点にする (思いつきで変えない)。
 2. x-strategist が「どの行をどう変えるか」の diff を提案として提示する。
-3. **人間が承認してから**本ファイルを編集する。編集後は `node .claude/scripts/lib/x-catalog.cjs --check` を通す。
+3. **人間が承認してから**台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) を編集する。編集後は
+   `node .claude/scripts/lib/x-catalog.cjs --check` と `npm run check-datasets` を通す。
 
 ---
 
@@ -610,7 +547,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 
 - 人間向け戦略: `docs/10_SNS戦略/01_SNSコンテンツ設計.md` / `05_SNSプロフィール.md`
 - 投稿台帳ストア: `.claude/scripts/lib/sns-posts-store.cjs`
-- **X 量産カタログ API**: `.claude/scripts/lib/x-catalog.cjs` (§1 quota / §2-0 templates / §2-8 affinity / §2-9 imagekinds をパース)
+- **X 量産カタログ API**: `.claude/scripts/lib/x-catalog.cjs` (台帳 `sns.x-catalog` の quota / templates / affinity / imageKinds を読む)
 - **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
 - **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`

@@ -74,13 +74,13 @@ tags: [competitor]
 
 ## カタログ (§2) への反映 (★人間承認ゲート)
 
-競合の示唆を X 投稿カタログ (`sns-content-standards.md` §2-0 template / §2-8 相性 / §2-9 画像) に
-反映するときは、**§2-10 の承認手順に従う** (思いつきで rules を書き換えない):
+競合の示唆を X 投稿カタログ (台帳 `sns.x-catalog` の templates / affinity / imageKinds。意味は `sns-content-standards.md` §2-0 / §2-8 / §2-9) に
+反映するときは、**§2-10 の承認手順に従う** (思いつきで台帳を書き換えない):
 
 1. 本スキルのレポート「stats47 への示唆」から、カタログのどの行をどう変えるかを具体化する
    (例:「competitor が『◯◯県あるある』で伸びている → §2-8 で population×体験を ○→◎ に上げる」)。
-2. x-strategist が **diff 提案**として提示する (どのテーブルのどのセルを変えるか)。
-3. **ユーザーが承認してから** rules を編集し、`node .claude/scripts/lib/x-catalog.cjs --check` を通す。
+2. x-strategist が **diff 提案**として提示する (台帳のどの項目のどの値を変えるか)。
+3. **ユーザーが承認してから**台帳 `data/sns/x-catalog.json` を編集し、`node .claude/scripts/lib/x-catalog.cjs --check` と `npm run check-datasets` を通す。
 4. 反映後は `analyze-x-winning-patterns` の実測で効果を検証する (`evidence-based-judgment.md`)。
 
 ## やらないこと (意図的)

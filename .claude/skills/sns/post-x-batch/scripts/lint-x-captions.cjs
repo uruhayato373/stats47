@@ -4,8 +4,8 @@
  * ③執筆フェーズ (LLM) が書いた captions.json を検査する。PASS したものだけ
  * register-drafts.cjs が台帳に登録できる (自己採点での登録を構造的に不能にする)。
  *
- * 冒頭で必ず x-catalog --check 相当 (catalog.selfCheck) を実行し、カタログ md の
- * ドリフト・アンカー欠落を先に検出する。
+ * 冒頭で必ず x-catalog --check 相当 (catalog.selfCheck) を実行し、台帳 sns.x-catalog の
+ * 形の崩れ・テンプレが指す画像種の欠落を先に検出する。
  *
  * 入力 captions.json (select-candidates の各要素に `caption` を足したもの):
  *   [{ key, template, category, caption, ... }]
