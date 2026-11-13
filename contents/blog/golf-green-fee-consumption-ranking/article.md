@@ -14,7 +14,7 @@ tags:
   - スポーツ
 publishedAt: 2026-09-05
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/golf-green-fee-consumption-ranking/og.png
 ---
 

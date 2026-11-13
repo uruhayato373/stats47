@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "water-sewer-consumption-expenditure",
+  "year": "2021-2025",
+  "unit": "円",
+  "label": "上下水道料消費支出額 順位の推移",
+  "source": "r2:app/ranking/water-sewer-consumption-expenditure/values.json",
+  "transform": "2021〜2025年の各年の順位・値を抜粋 (記事で引用する県のみ)",
+  "fetchedAt": "2026-11-13T00:00:00.000Z"
+}
