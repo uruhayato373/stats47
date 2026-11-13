@@ -7,7 +7,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { resolve, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { KindleBook, BookChapter } from "./types";
-import { fetchBlogArticle, fetchPublishedSlugSet, type FetchedImage } from "./fetch-content";
+import { fetchBlogArticle, fetchBlogSourcesBySlug, fetchPublishedSlugSet, type FetchedImage } from "./fetch-content";
 import { mdToXhtml } from "./md-to-xhtml";
 import { buildCoverPng } from "./cover";
 import { loadCoverBackground } from "./cover-background";
@@ -240,6 +240,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   const missingSlugs: string[] = [];
   const sources: { slug: string; title: string; published: boolean }[] = [];
   const publishedSlugs = await fetchPublishedSlugSet();
+  const blogSources = await fetchBlogSourcesBySlug();
   const rankingSources: RankingSource[] = [];
   const missingInputs: { key: string; reason: string }[] = [];
   const rankingRequested = book.chapters.reduce(
@@ -306,7 +307,11 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
         continue;
       }
       try {
-        const art = await fetchBlogArticle(slug, { fullTables: book.fullTables === true, seenTables });
+        const art = await fetchBlogArticle(slug, {
+          fullTables: book.fullTables === true,
+          seenTables,
+          dataSources: blogSources.get(slug),
+        });
         for (const img of art.images) {
           if (!imageSeen.has(img.fileName)) {
             imageSeen.add(img.fileName);

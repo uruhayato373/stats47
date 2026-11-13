@@ -588,10 +588,11 @@ export const DATASETS = [
       { field: "notes.$keys", to: "products.kindle-books", key: "books.$keys" },
     ],
   }),
-  d("products.kindle-editorial-corrections", "data/products/kindle/editorial-corrections.json", "ledger", "product", "data", "Kindle 書籍版だけの本文の校訂 (ブログ記事の slug ごとの置換前後と理由。公開ブログは書き換えない)。読み込みは packages/product-factory/src/channels/kindle/editorial-corrections.ts (correctBookArticle)", {
+  d("products.kindle-editorial-corrections", "data/products/kindle/editorial-corrections.json", "ledger", "product", "data", "Kindle 書籍版だけの本文の校訂 (ブログ記事の slug ごとの置換前後と理由。公開ブログは書き換えない) と、書籍版で持つ章末の旧「データ出典」節 (sourceSections)。読み込みは packages/product-factory/src/channels/kindle/editorial-corrections.ts (correctBookArticle)", {
     schema: "config/schema/products.kindle-editorial-corrections.schema.json",
     refs: [
       { field: "corrections.$keys", to: "blog.articles", key: "articles[].slug" },
+      { field: "sourceSections.$keys", to: "blog.articles", key: "articles[].slug" },
       { field: "notes.$keys", to: "products.kindle-editorial-corrections", key: "corrections.$keys" },
     ],
   }),
