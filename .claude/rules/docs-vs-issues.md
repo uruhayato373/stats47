@@ -122,7 +122,7 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
 | 場所 | 内容 |
 |---|---|
 | `.claude/todo/improvements.md` | active 施策の一覧 (6列の簡易表)。pending / in-progress / effect-pending と Tier + 期日を管理し、効果判定後は行を削除する。**TODO 真実源** |
-| `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・期日・URL inspection 結果など、agent が深掘り参照する詳細 |
+| `data/improvement/<metric>-improvement/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・期日・URL inspection 結果など、agent が深掘り参照する詳細 |
 
 人間は `.claude/todo/improvements.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
 
