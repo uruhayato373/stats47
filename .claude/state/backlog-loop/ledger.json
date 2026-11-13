@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T22:03:19.173Z",
+  "updatedAt": "2026-11-13T22:13:00.707Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12025,6 +12025,72 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-13T22:03:19.173Z"
+    },
+    "MIGRATION-FLOW-PHASE23-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "人口移動 月次/年次 workflowの生成ステップ未実装",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:13:00.595Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git show --stat 294d88f433"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-14 オーナー決定「人の移動の動画は一旦やめる」。生成元の MigrationFlow-Reel と render-migration-flow.ts は 294d88f433 で撤去済み。migration-flow の workflow 3 本と npm script の片付けは同じ日に別コミットで行う。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:13:00.595Z"
+    },
+    "AFF-INTENT-FALLBACK-STOP-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "意図が解決しない面への配信を止め、priority を期待収益順にする",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:13:00.707Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/ads/check-revenue-guards.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-14 オーナー決定でカードを閉じる。2026-11-12 からアフィリエイトの配信を止めており、features/ads/server を読むページは 0 件なので、priority の振り直しは読者に見える広告を変えない。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:13:00.707Z"
     }
   }
 }

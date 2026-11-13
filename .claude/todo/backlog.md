@@ -3055,14 +3055,6 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
-### [AFF-INTENT-FALLBACK-STOP-01] 意図が解決しない面への配信を止め、priority を期待収益順にする
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-20] [領域:アフィリエイト]
-
-- **済み (2026-11-13・37cf41e12)**: アフィリエイトを止める 2026-11-12 のオーナー決定で、全ページの広告の段が AdSense だけになり、意図軸で解決した広告はどのページにも描かれなくなった (`composeAdRows` の 20 か所すべてが PR の引数に空の配列を渡し、`features/ads/server` を読むページは 0 件、ブログ本文の `affiliate-banner`・`affiliate-text` は何も描かない)。意図が解決しない面への配信と、population・health・education 軸の主題に合わない広告の表示は、広告そのものが出ないことで止まっている。`node .claude/scripts/metrics/check-revenue-guards.mjs` は exit 0 (2026-11-14 に実行)。
-- **残り (判断・オーナー)**: priority を期待収益順 (`epcYen × confirmRatePct / 100`) に振り直す作業と、3 軸の上位在庫の入れ替えは行っていない。台帳 `affiliate.ads` の priority を読む画面が無いので、今変えても読者に見える広告は変わらず、目標の CTR +0.10pt を観測する表示も発生しない。選択肢は 2 つある。(a) このカードを閉じ、意図軸ごとの配信を再開すると決めたときに、新しいカードで priority を決め直す。(b) 再開に備えて、今のうちに台帳の priority だけを振り直す。推奨は (a) である。根拠は 3 つあり、2026-11-03 の決定で分野ごとの出し分けをやめる方針になったこと、収益化戦略 §3.2 が複数案件の同時入れ替えを禁じていること、A8 カタログの EPC は取得した時点の値で再開のときには古くなることである。
-- **残り (再開する場合に直す箇所)**: 台帳には手で付けた高い priority が残り、期待収益の順と逆になっている。education は AI Agent Camp (priority 90・EPC × 確定率 0 円) と LEC (90・1.94 円) が、トウコベ (25・68.81 円) とエデュスタ (20・63.57 円) より上にある。mobility は保険スクエア bang! (90・10.56 円) がカーリース (20・67.38 円) より上にある。travel のじゃらん (priority 100) は A8 カタログの EPC が 0 円なので、期待収益だけで並べると最下位になり、規約 §4 の「旅行はじゃらんを最上位」と衝突する。この扱いも再開のときに決める。
-- **完了条件**: オーナーが (a) か (b) を決めている。(b) の場合は、vertical ごとに配信中の広告の priority が EPC × 確定率の降順と矛盾しないことをテストで確かめ、`AFFILIATE_DELIVERY_HOLDS` の案件と保険・FP 相談 (`AFF-HEAVY-FINANCE-STOP-01`) の案件が上位に出ないことを同じテストで確かめる。
-
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-30] [領域:サイト]
@@ -3637,16 +3629,6 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
   - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
   - **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
   - **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。人手ログイン + オーナー承認を経てから。SSOT は catalog git TS、note.com は反映先。
-
-### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
-タグ: [種類:不具合] [実行:対話] [起票:2026-08-01] [領域:データ]
-
-- **止まっている理由**: このカードが実装を求める生成ステップ (月次の MigrationHighlight の render と、年次の 47 県リールの render) は、2026-11-06 のオーナー決定「動画はランキングのショートとバーチャートレースの 2 種類だけ」(`.claude/rules/sns-content-standards.md` §2-4、コミット 294d88f43) で撤去された人口移動の動画を描く処理である。Remotion の構成 `MigrationFlow-Reel` と `apps/remotion/scripts/pipeline/render-migration-flow.ts` は同じコミットで削除済みで、`apps/remotion/src/Root.tsx` に移動の構成は無い。加えて 2026-10-27 に Instagram の自動投稿が停止され、`migration-flow-monthly.yml` と `migration-flow-annual.yml` は GitHub 側で無効化されている。
-- **残り (判断)**: オーナーが次のどちらかを選ぶ。選択肢 A は、`migration-flow-monthly.yml` と `migration-flow-annual.yml` を削除し、`docs/01_技術設計/06_自動化インベントリ.md` の 157〜158 行と、このカードを消す案である。選択肢 B は、人口移動の動画を 3 種類目として戻すと決めたうえで、git の履歴 (294d88f43 の 1 つ前) から構成と描画スクリプトを復元し、月次の抽出・年次の取得と 47 県 render・caption 生成・staging へのコピーを実装する案である。推奨は A である。根拠は、動画の種類と投稿先の両方が既にオーナー決定で止まっていること、`sns-content-standards.md` §2-4 が動画を増やす前に実績の提示を求めていること、月次の「先月の変動県」に使える月次データが R2 の snapshot (年次の `migration-flow-<year>.json` のみ) に無く e-Stat の月次取得から作る必要があること、の 3 点である。週次の `migration-flow-weekly.yml` は既存の R2 素材を再投稿するだけなので、この判断とは別に MIGRATION-FLOW-IG-01 で扱う。
-- **残り (A を選んだ場合)**: 2 本の workflow ファイルを削除し、自動化インベントリの 2 行を削除し、`npm run docs:fix` と `npm run docs:check` を通す。
-- **残り (B を選んだ場合)**: `sns-content-standards.md` §2-4 に人口移動の動画を戻す決定と実績の根拠を書き、構成・描画スクリプト・月次データの取得・caption 生成・staging コピーを実装してテストを付け、手動 dispatch の dry-run で `.local/r2/sns/migration-flow` が作られることを確かめる。schedule の復活は Instagram の再開判断の後に行う。
-- **完了条件**: A の場合は、2 本の workflow とインベントリの行が無くなり `npm run docs:check` が通ること。B の場合は、生成ステップが `.local/r2/sns/migration-flow` を実際に作り、手動 dispatch の dry-run で R2 push と Instagram 投稿の手前まで通り、`on.schedule` と自動化インベントリの schedule 表を戻していること。
-- **停止条件**: オーナーの判断が出るまで、撤去された動画の構成を復元しない。生成が未実装のまま schedule を戻さない。無効化された workflow を enable しない。
 
 ### [ISSUE-AXES-01] 問いの台帳の分析の軸を全件に付け、テーマ・県・ブログへ展開する
 
