@@ -481,6 +481,13 @@
       ]
     },
     {
+      "name": "BACKLOG_LEDGER_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "ENV_REGISTRY_PATH",
       "visibility": "server",
       "contexts": [

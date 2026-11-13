@@ -93,6 +93,9 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 6. 完了したバックログカードを消す (2026-10-26 オーナー決定)。本文に完了の証拠 (検証コマンドの結果・PR / commit・読み戻しの確認) があり、
    その後ろに残作業 (「残り」「未完了」) が無いカードだけ。境界は `.claude/scripts/lib/backlog-lib.cjs` の `parseBacklog` の開始行・終了行で取り、
    残したカードの本文が変わっていないことを照合する。消した ID はレビュー本文の「計測→記録→改善サイクル」節に書く。
+   消す前に、1 枚ずつ `node .claude/scripts/backlog-loop/record-backlog-outcome.mjs --id <ID> --class <割当表の class> --outcome completed --gate-commands "<本文にある検証コマンド>" --gate-pass --evidence "<完了の証拠の要約>" --title "<題>" --source-file .claude/todo/backlog.md` で実行台帳に記録する
+   (統合・前提の消えたカードは class `stale`)。記録が無いまま消すと、どのカードをどの証拠で閉じたかが git の差分にしか残らない
+   (2026-10-26〜11-13 に消えた 134 枚のうち 105 枚に記録が無かった)。
 
 ## Phase 1: 実績収集
 
