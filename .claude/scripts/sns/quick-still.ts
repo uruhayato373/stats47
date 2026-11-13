@@ -107,7 +107,7 @@ interface RankingItemPayload {
     categoryKey?: string;
     latestYear?: { yearCode: string; yearName?: string };
     // ★出典名は sourceConfig.source.name (sourceConfig.name というキーは存在しない)
-    sourceConfig?: { source?: { name?: string } };
+    sourceConfig?: { source?: { name?: string }; recipe?: { kind?: string } };
     source?: { name?: string };
     /** The metric's authored colour encoding, baked by the ranking builder. */
     visualization?: Parameters<typeof resolveTileScale>[0];
@@ -188,7 +188,8 @@ async function main() {
   const top = sorted.slice(0, N);
   const bottom = sorted.slice(-N);
 
-  const capitalCities = /県庁所在市/.test(item?.subtitle || "");
+  // 家計調査の品目は調査方法を note へ移したので、subtitle ではなく取得レシピの出典で県庁所在市の値と判定する
+  const capitalCities = item?.sourceConfig?.recipe?.kind === "kakei-chousa" || /県庁所在市/.test(item?.subtitle || "");
   const tileRows = capitalCities ? sorted.map(r => ({ ...r, areaName: r.areaCode === "13000" ? "東京区部" : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name })) : sorted;
   // Same colours as the ranking page; without an authored encoding the renderer falls back to brand blue.
   const scale = item?.visualization ? resolveTileScale(item.visualization, sorted.map((r) => r.value), item.valueDisplay) : undefined;

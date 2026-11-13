@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const privateRentConsumptionQuantity: MetricConfig = {
   "key": "private-rent-consumption-quantity",
   "title": "民営家賃消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間民営家賃消費量",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "畳",
   "category": "economy",
   "source": {

@@ -322,42 +322,37 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "natto-consumption-expenditure",
         "title": "納豆消費支出額",
         "readerLabel": "納豆への支出",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
         "hook": "納豆への支出が最も多い都市は？"
       },
       {
         "rankingKey": "beef-consumption-quantity",
         "title": "牛肉消費量",
         "readerLabel": "牛肉消費量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間牛肉消費量",
         "hook": "牛肉消費量が最も多い都市は？"
       },
       {
         "rankingKey": "pork-consumption-quantity",
         "title": "豚肉消費量",
         "readerLabel": "豚肉消費量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間豚肉消費量",
         "hook": "豚肉消費量が最も多い都市は？"
       },
       {
         "rankingKey": "rice-consumption-quantity",
         "title": "米消費量",
         "readerLabel": "米消費量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間米消費量",
         "hook": "米消費量が最も多い都市は？"
       },
       {
         "rankingKey": "bacon-consumption-expenditure",
         "title": "ベーコン消費支出額",
         "readerLabel": "ベーコンへの支出",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間ベーコン消費支出額",
         "hook": "ベーコンへの支出が最も多い都市は？"
       },
       {
         "rankingKey": "bread-consumption-expenditure",
         "title": "パン消費支出額",
         "readerLabel": "パンへの支出",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間パン消費支出額（合計）",
+        "subtitle": "合計",
         "hook": "パンへの支出が最も多い都市は？"
       }
     ]
@@ -765,7 +760,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "information-communication-expenditure",
         "title": "情報通信関係費",
         "readerLabel": "情報通信関係費",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間支出額（固定電話通信料・移動電話通信料・NHK放送受信料・ケーブルテレビ受信料・他の受信料の合計）",
+        "subtitle": "固定電話通信料・移動電話通信料・NHK放送受信料・ケーブルテレビ受信料・他の受信料の合計",
         "hook": "情報通信関係費が最も多い都市は？"
       },
       {
@@ -841,7 +836,6 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "rankingKey": "natto-consumption-expenditure",
     "title": "納豆消費支出額",
     "readerLabel": "納豆への支出",
-    "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
     "hook": "納豆への支出が最も多い都市は？",
     "categoryKey": "economy",
     "order": 6

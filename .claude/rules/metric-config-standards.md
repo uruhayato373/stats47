@@ -22,7 +22,7 @@ paths:
 | field                           | 役割                                          | 入れてよい                                 | 入れてはいけない                                              |
 | ------------------------------- | --------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------- |
 | `title` (必須)                  | 正準なランキング名 (h1)                       | 指標の名前                                 | **年** (2018年)・**注釈** (※/調査対象外)・subtitle の繰り返し |
-| `subtitle?`                     | 同名指標を区別する短い定義補足                | 「乳用牛(めす)の飼養頭数合計」等の区別子   | title と同一/包含 (冗長)・注釈(※)                             |
+| `subtitle?`                     | 同名指標を区別する短い定義補足                | 「乳用牛(めす)の飼養頭数合計」等の区別子   | title と同一/包含 (冗長)・注釈(※)・調査方法 (対象の都市・世帯・期間) |
 | `note?`                         | データの注意書き / methodology                | 「内陸県は漁港がなく調査対象外 (0で表示)」 | 定義・名前                                                    |
 | `description?`                  | 指標の定義・説明 (散文。「統計の定義」カード) | 出典・定義文                               | 注釈(※)・SEO 文                                               |
 | `category` (必須)               | e-Stat 機械分類 (17 軸)                       | `CategoryKey` の 17 キーのいずれか         | 17 軸外のキー (型 union でブロック)                           |
@@ -142,7 +142,7 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 
 | レベル                               | 対象                                                                                                                                                                                                                                          | 挙動   |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) / seoTitle・seoDescription の数字の直後の「‐」(`seo-unit-dash`) / 換算単位の「‐/…」= 割合・指数への人口・面積換算 (`normalization-unit-dash`) | exit 1 |
+| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / subtitle が調査方法の定型文「都道府県庁所在市の二人以上世帯の年間…」で始まる (`subtitle-survey-method`。調査方法は `note` へ) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) / seoTitle・seoDescription の数字の直後の「‐」(`seo-unit-dash`) / 換算単位の「‐/…」= 割合・指数への人口・面積換算 (`normalization-unit-dash`) | exit 1 |
 | **warn** (表示のみ)                  | 現在は該当チェックなし (将来の段階的 cleanup 用に tier を温存)                                                                                                                                                                                | exit 0 |
 
 > **2026-06 昇格済**: 旧 warn だった 5 系統 (title-year/title-note・subtitle-note/redundant・unit・dup-title) は Phase 3 のデータ是正で warn=0 を達成 → **error に昇格**。量産時の再混入を CI/pre-commit でブロックする。新規 cleanup を warn から始めたい場合のみ warn tier を再利用する。

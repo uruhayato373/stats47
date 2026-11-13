@@ -94,6 +94,17 @@ describe('blog scatter as the shared type', () => {
     if ('skip' in chart) throw Error(chart.skip);
     expect(chart).toMatchObject({ title: '年間降水量と単独世帯割合', xLabel: '年間降水量（mm）', yLabel: '単独世帯割合（施設・県庁所在市）' });
   });
+  it('keeps the capital-city scope of a household-survey item whose subtitle no longer states it', () => {
+    // 家計調査の品目は調査方法を note へ移し、subtitle は同名の区別子だけになった (無いことが多い)
+    const chart = scatterChartFromArticleData({ ...articleData(), xLabel: '年間降水量 (mm) →', xUnit: 'mm', yLabel: '納豆消費支出額（円）', yUnit: '円' }, {
+      x: { metric: { title: '年間降水量', unit: 'mm' }, year: '2024年' },
+      y: { metric: { title: '納豆消費支出額', unit: '円', source: { kind: 'kakei-chousa' } }, year: '2024年' },
+      prefCodeOf, unitLabel, sourceNames: ['調査'],
+    });
+    if ('skip' in chart) throw Error(chart.skip);
+    expect(chart.yLabel).toBe('納豆消費支出額（円・県庁所在市）');
+    expect(chart.xLabel).toBe('年間降水量（mm）');
+  });
   it('takes the denominator from the subtitle without a bracket or a leading particle', () => {
     // 持家率の説明文は「家計調査（二人以上世帯）の調査世帯に占める…」で、括弧の途中から切り出すと軸名の括弧が壊れる
     const chart = scatterChartFromArticleData({ ...articleData(), xLabel: '持家率', xUnit: '％' }, {

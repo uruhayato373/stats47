@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const freshSeafoodGroupConsumptionQuantity: MetricConfig = {
   "key": "fresh-seafood-group-consumption-quantity",
   "title": "生鮮魚介消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間生鮮魚介消費量",
+  "subtitle": "分類計の公表値",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "g",
   "category": "economy",
   "source": {

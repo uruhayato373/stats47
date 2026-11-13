@@ -26,10 +26,18 @@ export interface ArticleMetric {
   visualization?: unknown;
   category?: string;
   display?: { conversionFactor?: number; decimalPlaces?: number };
+  source?: { kind?: string };
 }
 type Row = { value?: unknown; areaCode?: unknown; area_code?: unknown; pref?: unknown; areaName?: unknown; label?: unknown; name?: unknown };
 
 const MIGRATION_METRIC_KEY = 'population-migration-inter-prefecture';
+const CAPITAL_CITY_SCOPE = '県庁所在市';
+/**
+ * Values of the household survey (家計調査) are those of each prefecture's capital city. The metric states
+ * that in its note; its subtitle only tells same-named metrics apart, so the scope is read from the source.
+ */
+const isCapitalCityScope = (metric?: ArticleMetric) =>
+  metric?.source?.kind === 'kakei-chousa' || (typeof metric?.subtitle === 'string' && metric.subtitle.includes(CAPITAL_CITY_SCOPE));
 const SEQUENTIAL_DEFAULTS = {
   domain: { mode: 'extent' }, classification: { method: 'continuous' },
   trendDomain: { mode: 'extent' }, comparisonDomain: { mode: 'extent' },
@@ -87,11 +95,14 @@ export function rankingChartFromArticleData(
   // Without a year the subtitle is the only condition the data states, and it takes the year's place.
   const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle));
   if (!title) return { skip: '図の名前がデータに無い' };
+  const subtitle = text(opts.metric?.subtitle);
+  // A subtitle that already names the capital cities is enough; otherwise the scope is added in one word.
+  const scope = isCapitalCityScope(opts.metric) && !subtitle.includes(CAPITAL_CITY_SCOPE) ? CAPITAL_CITY_SCOPE : '';
   return {
     title,
     yearLabel,
     source: text(data.source),
-    note: text(opts.metric?.subtitle) || undefined,
+    note: [subtitle, scope].filter(Boolean).join('・') || undefined,
     presentation: presentationOf(data, opts.metric),
     rows,
     baseAreaCode: baseCode ? `${baseCode}000` : undefined,
@@ -276,7 +287,7 @@ export function stackedChartFromArticleData(parsed: unknown): StackedChart | { s
   };
 }
 
-type ScatterMetric = ArticleMetric & { source?: { displayName?: string } };
+type ScatterMetric = ArticleMetric & { source?: { kind?: string; displayName?: string } };
 type ValuesRow = { areaCode: string; yearCode: string; yearName?: string; value: number | null };
 
 const decimalsOf = (v: number) => (String(v).split('.')[1] ?? '').length;
@@ -431,7 +442,7 @@ export function scatterChartFromArticleData(
   // Only what changes the reading of the number: the denominator, the capital-city scope, a school grade or sex.
   const basis = (m: ScatterMetric | undefined, label: string) => {
     const subtitle = text(m?.subtitle);
-    if (subtitle.includes('県庁所在市')) return '県庁所在市';
+    if (isCapitalCityScope(m)) return CAPITAL_CITY_SCOPE;
     // Inside the label's brackets only: 一人当たり in the metric's own name is not a separate basis.
     // A bracket closed before the phrase (家計調査（二人以上世帯）の調査世帯に占める…) is not part of the denominator.
     const per = /[^（(）)・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label.replace(/^[^（(]*/, '')}`)?.[0].replace(/^の/, '');

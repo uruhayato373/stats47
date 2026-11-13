@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const mineralWaterConsumptionExpenditure: MetricConfig = {
   "key": "mineral-water-consumption-expenditure",
   "title": "ミネラルウォーター消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間ミネラルウォーター消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間にミネラルウォーターに支出した1世帯当たりの金額。県全体の値ではない。",
   "unit": "円",
   "category": "economy",

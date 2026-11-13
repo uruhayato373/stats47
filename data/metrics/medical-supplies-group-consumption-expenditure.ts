@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const medicalSuppliesGroupConsumptionExpenditure: MetricConfig = {
   "key": "medical-supplies-group-consumption-expenditure",
   "title": "保健医療用品・器具消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間保健医療用品・器具消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

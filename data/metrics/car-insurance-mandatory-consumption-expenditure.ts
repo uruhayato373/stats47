@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const carInsuranceMandatoryConsumptionExpenditure: MetricConfig = {
   "key": "car-insurance-mandatory-consumption-expenditure",
   "title": "自動車保険料(自賠責)消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間自動車保険料(自賠責)消費支出額",
+  "subtitle": "自賠責保険の保険料",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {
