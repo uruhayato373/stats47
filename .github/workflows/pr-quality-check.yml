@@ -302,6 +302,14 @@ jobs:
         run: node .claude/scripts/lib/check-repo-hygiene.cjs --baseline
         continue-on-error: false
 
+      - name: 🧠 Memory Index Size Guard
+        # 記憶の索引 MEMORY.md が起動時の読み込み上限 (24,400 バイト・200 行) を超えると、
+        # 末尾 (新しい記憶) から読み込まれなくなる。上限の数値は検査スクリプトの定数が唯一の置き場。
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-memory-index-size.test.cjs
+          node .claude/scripts/lib/check-memory-index-size.cjs
+        continue-on-error: false
+
       - name: 🧩 Checker Wiring Regression Guard
         # check/audit/validate/verify/lint/guard 系scriptの新規未配線を検出。
         # 既存の未配線候補はbaselineで許容し、新規悪化だけを止める。
