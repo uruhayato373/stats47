@@ -38,7 +38,7 @@ export const securitiesBalance: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.1,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
     "displayUnit": "万円",
   },
   "calculation": {

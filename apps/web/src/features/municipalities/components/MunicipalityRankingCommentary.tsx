@@ -1,3 +1,4 @@
+import { normalizeUnitsInText } from '@stats47/data-configs/unit';
 import { Sparkles } from 'lucide-react';
 
 import { ContentDisclosure, FaqSection } from '@/components/content';
@@ -11,6 +12,7 @@ interface MunicipalityRankingCommentaryProps {
 /**
  * 市区町村ランキングの解説 (MUNI-AI-CONTENT-01)。都道府県ランキングの「データの考察」と同じ開閉カードとFAQで見せる。
  * 中身はデプロイ時に配信値と照合して通った ai-content.json だけ。FAQPage は見える Q&A と同じ内容を出す。
+ * 数字の直後の全角の単位 (「81.0％」) は、表と同じ半角へ表示時にそろえる (配信した文は書き換えない)。
  */
 export function MunicipalityRankingCommentary({ content }: MunicipalityRankingCommentaryProps) {
   const faqStructuredData = {
@@ -18,8 +20,8 @@ export function MunicipalityRankingCommentary({ content }: MunicipalityRankingCo
     '@type': 'FAQPage',
     mainEntity: content.faq.map((entry) => ({
       '@type': 'Question',
-      name: entry.question,
-      acceptedAnswer: { '@type': 'Answer', text: entry.answer },
+      name: normalizeUnitsInText(entry.question),
+      acceptedAnswer: { '@type': 'Answer', text: normalizeUnitsInText(entry.answer) },
     })),
   };
   return (
@@ -30,11 +32,11 @@ export function MunicipalityRankingCommentary({ content }: MunicipalityRankingCo
         meta={<span className="text-xs font-normal text-muted-foreground">AI生成</span>}
         contentClassName="space-y-2"
       >
-        <p>{content.summary}</p>
+        <p>{normalizeUnitsInText(content.summary)}</p>
         <h3 className="pt-2 font-semibold text-foreground">都道府県ごとの分布</h3>
-        <p>{content.prefectureDistribution}</p>
+        <p>{normalizeUnitsInText(content.prefectureDistribution)}</p>
         <h3 className="pt-2 font-semibold text-foreground">比べている自治体</h3>
-        <p>{content.population}</p>
+        <p>{normalizeUnitsInText(content.population)}</p>
       </ContentDisclosure>
       <FaqSection title="よくある質問" items={content.faq} />
       <script

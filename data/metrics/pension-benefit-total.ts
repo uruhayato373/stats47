@@ -30,9 +30,9 @@ export const pensionBenefitTotal: MetricConfig = {
     domain: { mode: "zero" },
   },
   "display": {
-    "conversionFactor": 0.1,
+    "conversionFactor": 0.00001,
     "decimalPlaces": 0,
-    "displayUnit": "万円",
+    "displayUnit": "億円",
   },
   "calculation": {
     "isCalculated": false,

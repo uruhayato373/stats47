@@ -46,6 +46,21 @@ describe('Ranking summary meaning', () => {
     expect(screen.getAllByText('81.9')).toHaveLength(1);
     expect(screen.getAllByText('73.2')).toHaveLength(1);
   });
+  it('shows converted values when the page resolved a display unit (千円 → 億円)', () => {
+    const tax: RankingHeaderStats = {
+      top3: [{ areaCode: '13000', areaName: '東京都', rank: 1, value: 1_544_976_077 }],
+      bottom3: [{ areaCode: '31000', areaName: '鳥取県', rank: 47, value: 14_040_236 }],
+      average: 117_028_009,
+      count: 47,
+    };
+    const { container } = render(
+      <RankingTopThreeList stats={tax} unit="億円" precision={0} factor={0.00001} presentation={presentation} />
+    );
+    expect(screen.getByText('15,450', { selector: '.font-medium.tabular-nums' })).toBeTruthy();
+    expect(screen.getByText('140', { selector: '.font-medium.tabular-nums' })).toBeTruthy();
+    expect(container.textContent).toContain('単位: 億円');
+    expect(container.textContent).not.toContain('1,544,976,077');
+  });
   it('shows tied ranks without adding a gap caption', () => {
     const tied = {
       ...stats,

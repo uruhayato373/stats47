@@ -11,6 +11,8 @@ import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ValueTable } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import type { GeoAnalysisSnapshot } from '@stats47/gis';
 export function snowNationalValues(
   snapshot: GeoAnalysisSnapshot
@@ -125,6 +127,7 @@ export function GeoSnowDesignationSummary({
         <Link
           className="underline underline-offset-2"
           href={`/geo/population-snow-designation${selected ? `?pref=${to2DigitPrefCode(selected.areaCode)}` : ''}`}
+          {...navSurfaceProps('geo_evidence')}
         >
           指定区域・人口メッシュ・計算の根拠を見る
         </Link>

@@ -15,13 +15,21 @@ import {
 } from "d3";
 import { useEffect, useRef } from "react";
 import {
+  axisUnitBaseline,
+  bottomMarginForTickLabels,
   computeChartLayout,
   computeFontSize,
   computeMarginsByRatio,
+  fitCategoryAxis,
   leftMarginForTickLabels,
+  rightMarginForTickLabels,
+  topMarginForAxisUnit,
+  xTickLabelDy,
+  yTickCount,
 } from "../../../shared/layout";
 import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { useReadableFontSize } from "../../hooks/useReadableFontSize";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { MixedChartProps } from "./types";
 import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
@@ -53,6 +61,7 @@ export function MixedChart({
   title,
 }: MixedChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const plotRef = useRef<HTMLDivElement>(null);
   const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.dualAxis);
@@ -64,8 +73,20 @@ export function MixedChart({
     marginLeft: propsMarginLeft ?? marginsByRatio.marginLeft,
   });
 
-  const { innerWidth, innerHeight, marginTop, marginLeft, marginRight, marginBottom } = layout;
-  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
+  const { innerWidth, innerHeight, marginLeft, marginRight } = layout;
+  // 縮小表示でも画面上で読める文字サイズ (viewBox 単位)。等倍以上なら従来の大きさのまま
+  const baseFontSize = useReadableFontSize(
+    plotRef,
+    width,
+    computeFontSize(width, height, CHART_STYLES.font.sizeRatio),
+  );
+  const leftAxisUnit = leftUnit || unit;
+  const rightAxisUnit = rightUnit || unit;
+  // 文字を大きくした分だけ上下の余白を足し、その分 viewBox を縦に伸ばす (プロット領域の高さは変えない)
+  const marginTop =
+    leftAxisUnit || rightAxisUnit ? topMarginForAxisUnit(baseFontSize, layout.marginTop) : layout.marginTop;
+  const marginBottom = bottomMarginForTickLabels(baseFontSize, layout.marginBottom);
+  const drawHeight = height + (marginTop - layout.marginTop) + (marginBottom - layout.marginBottom);
 
   const allSeries = [...columns, ...lines];
   const legendItems = [
@@ -125,7 +146,7 @@ export function MixedChart({
     if (!leftDomain) return;
     const yLeft = scaleLinear()
       .domain(leftDomain)
-      .range([height - marginBottom, marginTop]);
+      .range([drawHeight - marginBottom, marginTop]);
 
     // 右Y軸: 折れ線用
     const lineKeys = lines.map((l) => l.dataKey);
@@ -136,25 +157,54 @@ export function MixedChart({
     if (!rightDomain) return;
     const yRight = scaleLinear()
       .domain(rightDomain)
-      .range([height - marginBottom, marginTop]);
+      .range([drawHeight - marginBottom, marginTop]);
 
 
 
 
     // 左軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     // (StackedAreaChart / LineChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
-    const leftTicks = yLeft.ticks(innerHeight / 40);
-    const plotLeft = leftMarginForTickLabels(
+    const tickCount = yTickCount(innerHeight, baseFontSize);
+    const leftTicks = yLeft.ticks(tickCount);
+    const axisLeftEdge = leftMarginForTickLabels(
       leftTicks.map((v) => leftAxisFormatter(Number(v))),
       baseFontSize,
       marginLeft,
     );
+    // 右軸の目盛りも実際の文字列から右余白を決める (文字を大きくしたときに右端で切れないように)
+    const rightTicks = yRight.ticks(tickCount);
+    const axisRightEdge =
+      width -
+      rightMarginForTickLabels(
+        rightTicks.map((v) => rightAxisFormatter(Number(v))),
+        baseFontSize,
+        marginRight,
+      );
 
-    // X軸: バンドスケール（棒の幅用）
-    const x = scaleBand()
-      .domain(catValues)
-      .range([plotLeft, width - marginRight])
-      .padding(0.2);
+    // X軸: バンドスケール（棒の幅用）。横軸の目盛りは 5 年ごと。ラベルの幅と位置から、重なる
+    // (縮小表示で文字を大きくした) ときは 10 年・20 年と広げ、両端の年ラベルがはみ出すときは描画領域を詰める。
+    const scaleForRange = (left: number, right: number) =>
+      scaleBand().domain(catValues).range([left, right]).padding(0.2);
+    const { plotLeft, plotRight, tickValues } = fitCategoryAxis(
+      width,
+      axisLeftEdge,
+      axisRightEdge,
+      baseFontSize,
+      (left, right) => {
+        const scale = scaleForRange(left, right);
+        return data.map((d) => {
+          const value = String(d[categoryKey] ?? "");
+          return {
+            value,
+            label: String(d.label ?? value),
+            position: (scale(value) ?? 0) + scale.bandwidth() / 2,
+            yearCode: d.yearCode,
+          };
+        });
+      },
+      { fallback: "none" },
+    );
+    const x = scaleForRange(plotLeft, plotRight);
 
     const baseline = Math.max(leftDomain[0], Math.min(0, leftDomain[1]));
     // --- 棒グラフ描画 ---
@@ -229,18 +279,10 @@ export function MixedChart({
         .on("mouseleave", () => hideTooltip());
     });
 
-    // --- X軸（5年ごとに間引き） ---
-    const tickInterval = 5;
-    const tickValues = catValues.filter((val) => {
-      const row = data.find((d) => String(d[categoryKey]) === val);
-      const code = String(row?.yearCode ?? val);
-      const num = parseInt(code, 10);
-      return !isNaN(num) && num % tickInterval === 0;
-    });
-
+    // --- X軸 ---
     svg
       .append("g")
-      .attr("transform", `translate(0,${height - marginBottom})`)
+      .attr("transform", `translate(0,${drawHeight - marginBottom})`)
       .call(
         axisBottom(x)
           .tickValues(tickValues)
@@ -252,7 +294,7 @@ export function MixedChart({
       )
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", xTickLabelDy(baseFontSize)));
 
     // --- 左Y軸 ---
     svg
@@ -265,7 +307,7 @@ export function MixedChart({
       )
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
-          .attr("x2", width - plotLeft - marginRight)
+          .attr("x2", plotRight - plotLeft)
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
           .attr("stroke-dasharray", CHART_STYLES.grid.dashArray)
       )
@@ -274,21 +316,45 @@ export function MixedChart({
     // --- 右Y軸 ---
     svg
       .append("g")
-      .attr("transform", `translate(${width - marginRight},0)`)
+      .attr("transform", `translate(${plotRight},0)`)
       .call(
         axisRight(yRight)
-          .ticks(innerHeight / 40)
+          .tickValues(rightTicks)
           .tickFormat((v) => rightAxisFormatter(Number(v)))
       )
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", lines[0]?.color ?? "#666"));
 
-    fitSvgViewBox(svgRef.current, width, height);
+    // --- 軸の頭の単位 (左 = 棒、右 = 折れ線。目盛りと同じ色で左右を見分ける) ---
+    if (leftAxisUnit) {
+      svg
+        .append("text")
+        .attr("class", "axis-unit")
+        .attr("x", plotLeft)
+        .attr("y", axisUnitBaseline(marginTop))
+        .attr("text-anchor", "start")
+        .attr("font-size", baseFontSize)
+        .attr("fill", columns[0]?.color ?? "#666")
+        .text(leftAxisUnit);
+    }
+    if (rightAxisUnit) {
+      svg
+        .append("text")
+        .attr("class", "axis-unit")
+        .attr("x", plotRight)
+        .attr("y", axisUnitBaseline(marginTop))
+        .attr("text-anchor", "end")
+        .attr("font-size", baseFontSize)
+        .attr("fill", lines[0]?.color ?? "#666")
+        .text(rightAxisUnit);
+    }
+
+    fitSvgViewBox(svgRef.current, width, drawHeight);
   }, [
-    data, leftYDomain, rightYDomain, categoryKey, columns, lines, width, height,
+    data, leftYDomain, rightYDomain, categoryKey, columns, lines, width, drawHeight,
     marginTop, marginRight, marginBottom, marginLeft,
-    baseFontSize, innerHeight, innerWidth, leftUnit, rightUnit, unit,
+    baseFontSize, innerHeight, innerWidth, leftUnit, rightUnit, unit, leftAxisUnit, rightAxisUnit,
     leftAxisFormatter, rightAxisFormatter, colors,
     showTooltip, hideTooltip, updateTooltipPosition,
   ]);
@@ -298,10 +364,10 @@ export function MixedChart({
       {allSeries.length > 1 && (
         <D3ChartLegend items={legendItems} />
       )}
-      <div className="relative w-full overflow-hidden">
+      <div ref={plotRef} className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${width} ${drawHeight}`}
           className="h-auto w-full"
           role="img"
           aria-label={accessibleLabel}

@@ -144,7 +144,7 @@ export function publicFacilityNationalValues(
 
 export function publicFacilityAuditRows(
   detail: GeoPublicFacilityPrefDetail
-): { label: string; value: string }[] {
+): { label: string; value: string; meta?: string }[] {
   const people = (value: number) =>
     `${Math.round(value).toLocaleString('ja-JP')}人`;
   return (['administrative', 'meeting'] as const).flatMap((group) => {
@@ -152,7 +152,9 @@ export function publicFacilityAuditRows(
     return [
       ...([2020, 2050] as const).map((year) => ({
         label: `${PUBLIC_FACILITY_GROUPS[group]}・${year}年：5帯の合計 = 入力人口`,
-        value: `${people(bands.reduce((sum, band) => sum + band[`population${year}`], 0))} = ${people(detail.meshes.reduce((sum, mesh) => sum + mesh[year === 2020 ? 3 : 4], 0))}`,
+        // 値は入力人口、補足は 5 帯の合計 (検算の行は結果を値に、内訳を補足に分ける。geo-spatial-evidence.ts の SpatialAuditRow)
+        value: people(detail.meshes.reduce((sum, mesh) => sum + mesh[year === 2020 ? 3 : 4], 0)),
+        meta: `5帯の合計 ${people(bands.reduce((sum, band) => sum + band[`population${year}`], 0))}`,
       })),
       {
         label: `${PUBLIC_FACILITY_GROUPS[group]}：5帯メッシュ合計 / 県外最寄り`,

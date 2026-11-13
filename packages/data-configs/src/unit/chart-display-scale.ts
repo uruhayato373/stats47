@@ -37,9 +37,9 @@ const CHART_PREFIXES = ["", "万", "億", "兆"] as const;
 const MAN_SERIES = new Set(["万", "億", "兆"]);
 /** 表示の最大値の上限 (5 桁)。0 に見える県が出るときだけ 6 桁まで。 */
 const MAX_SHOWN = 100_000;
-const MAX_SHOWN_FALLBACK = 1_000_000;
+export const MAX_SHOWN_FALLBACK = 1_000_000;
 /** 表示の最大値がこれ以上なら整数、未満なら小数 1 桁。 */
-const INTEGER_FROM = 1_000;
+export const INTEGER_FROM = 1_000;
 
 /** 単位の先頭の数の接頭辞と、残りの語。「千円」→ 千 / 円。接頭辞を外すと次元が変わる語は外さない。 */
 function splitNumericPrefix(unit: string): { prefix: string; word: string; multiplier: number } {

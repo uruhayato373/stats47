@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { normalizePercentInText } from "@stats47/data-configs/unit";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layout';
@@ -122,11 +122,11 @@ export default async function TagArticlesPage({ params }: PageProps) {
               {/* カード下部に続く情報が無いので区切り線は引かない (2026-10-04 週次 UI 検査) */}
               <div className="flex flex-col items-start gap-2 px-4 py-3">
                 <h3 className="text-lg font-semibold leading-snug transition-colors group-hover:text-primary">
-                  {article.title}
+                  {normalizeUnitsInText(article.title)}
                 </h3>
                 {article.description && (
                   <p className="text-sm text-muted-foreground line-clamp-2">
-                    {normalizePercentInText(article.description)}
+                    {normalizeUnitsInText(article.description)}
                   </p>
                 )}
               </div>

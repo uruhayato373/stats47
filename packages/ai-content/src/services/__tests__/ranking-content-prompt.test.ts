@@ -53,6 +53,20 @@ function extractJsonTemplate(prompt: string): string {
   return m[1];
 }
 
+// 画面の表やカードは単位を半角で書く。プロンプトに全角の単位 (「％」「ｈａ」) を渡すと生成文も全角になり、
+// 同じページに ％ と % が並ぶ (UNIT-NOTATION-FORMAT-01。2026-10-31 の週次で 424 ページ)
+describe("単位は半角で渡す", () => {
+  it("全角の単位を半角にしてからプロンプトへ書く", () => {
+    const rate = buildRankingContentPrompt({ ...input, unit: "％" });
+    expect(rate).toContain("- 単位: %");
+    expect(rate).toContain("43,047%");
+    expect(rate).not.toMatch(/\d％/);
+    const area = buildRankingContentPrompt({ ...input, unit: "ｈａ" });
+    expect(area).toContain("- 単位: ha");
+    expect(area).not.toContain("ｈａ");
+  });
+});
+
 describe("出力テンプレートが禁止パターンを実演しない", () => {
   it("プレースホルダに全角括弧を使わない (paren-number を誘発する原因だった)", () => {
     const template = extractJsonTemplate(buildRankingContentPrompt(input));

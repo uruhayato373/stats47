@@ -43,6 +43,7 @@ import {
 } from '../src/theme-catalog';
 import { findDigitDashPlaceholders } from '../src/seo-meta-facts';
 import { isSurveyMethodSubtitle } from '../src/survey-method-subtitle';
+import { displayUnitKeepsDenominator } from '../src/unit/metric-display-scale';
 import { conversionFactor, parseUnit, scalePrefixMultiplier } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -370,6 +371,10 @@ function main() {
     if (!display.displayUnit) {
       if (factor !== 1) errors.push(`[display-factor] ${r.file}: display.conversionFactor ${factor} に displayUnit が無い。何の単位に直すのかを書く`);
       continue;
+    }
+    // 表示単位が「何あたり」を落とすと、1 日あたりの量がためた量として読まれる (2026-11-14 の監査: m³/日→m³・台/12h→台 の 3 件)
+    if (!displayUnitKeepsDenominator(r.unit, display.displayUnit)) {
+      errors.push(`[display-denominator] ${r.file}: 「${r.unit}→${display.displayUnit}」は「/」より後ろ (何あたり) が元の単位と違う。分母を残すか displayUnit を消す`);
     }
     // 解釈できない単位でも、表示単位が「万」「億」を前に付けただけ (TEU→万TEU) なら接頭辞の倍率で検算できる
     const unit = (r.unit ?? '').normalize('NFKC').trim(), shown = display.displayUnit.normalize('NFKC').trim();

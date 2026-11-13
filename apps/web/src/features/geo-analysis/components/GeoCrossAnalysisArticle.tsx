@@ -15,6 +15,8 @@ import { SurfaceSection, ValueTable } from '@/components/surface';
 
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import {
   formatGeoValue,
   GEO_CROSS_ANALYSIS_CONFIGS,
@@ -139,6 +141,7 @@ export async function GeoCrossAnalysisArticle({
       <nav
         aria-label="入力データを単体で見る"
         className="mb-5 flex flex-wrap items-center gap-x-4 text-sm"
+        {...navSurfaceProps('geo_layer_list')}
       >
         <span className="font-semibold">まず単体で見る：</span>
         {GEO_LAYERS.filter((layer) =>
@@ -199,6 +202,7 @@ export async function GeoCrossAnalysisArticle({
                       key="area"
                       className="text-primary underline"
                       href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
+                      {...navSurfaceProps('geo_pref_table')}
                     >
                       {row.areaName}の地図
                     </Link>,
@@ -330,7 +334,7 @@ export async function GeoCrossAnalysisArticle({
 
       <SurfaceSection className="mt-6">
         <SectionHeader title="関連する地域分析" hideRule />
-        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm" {...navSurfaceProps('geo_analysis_list')}>
           {GEO_ANALYSES.filter((analysis) => analysis.slug !== slug).map(
             (analysis) => (
               <Link

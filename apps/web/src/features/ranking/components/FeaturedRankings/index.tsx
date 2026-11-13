@@ -142,6 +142,7 @@ export async function FeaturedRankings({
           rankingKey: item.rankingKey,
           latestYear,
           unit: displayInfo.unit,
+          valueDisplay: item.valueDisplay,
           model,
         }];
       });

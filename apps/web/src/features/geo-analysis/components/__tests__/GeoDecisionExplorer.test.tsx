@@ -3,7 +3,10 @@ import type { ReactNode } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('@/lib/analytics/events', () => ({ trackGeoRegionSelect: vi.fn() }));
+vi.mock('@/lib/analytics/events', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/lib/analytics/events')>()),
+  trackGeoRegionSelect: vi.fn(),
+}));
 vi.mock('@stats47/components/atoms/ui/select', () => ({
   Select: ({
     value,

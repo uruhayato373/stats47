@@ -5,7 +5,8 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('@/lib/analytics/events', () => ({
+vi.mock('@/lib/analytics/events', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/lib/analytics/events')>()),
   trackGeoRegionSelect: vi.fn(),
   trackGeoMapInteraction: vi.fn(),
 }));
@@ -220,9 +221,15 @@ describe('Geo表示境界の県・段階・証跡版', () => {
     expect(
       tiles.map((tile) => ({
         label: tile.querySelector('dt')?.textContent,
-        value: tile.querySelector('dd')?.textContent,
+        value: tile.querySelectorAll('dd')[0]?.textContent,
+        // 式の結果を値に、内訳の式を値の下の補足に出す (UI-FOLLOWUP-01)
+        meta: tile.querySelectorAll('dd')[1]?.textContent,
       }))
     ).toEqual(spatialAuditRows(detail('13', versionA)));
+    expect(tiles.map((tile) => tile.querySelectorAll('dd')[1]?.textContent)).toContain(
+      spatialAuditRows(detail('13', versionA))[0]!.meta
+    );
+    for (const tile of tiles) expect(tile).not.toHaveClass('wrap-anywhere');
     expect(audit.querySelectorAll('p.tabular-nums')).toHaveLength(0);
   });
 

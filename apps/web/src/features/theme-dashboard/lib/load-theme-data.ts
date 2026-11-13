@@ -2,16 +2,13 @@ import "server-only";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { THEME_CATALOGS, type CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
-import {
-  readAllYearsRankingValuesFromR2,
-  readRankingItemFromR2,
-  readRankingValuesFromR2,
-} from "@stats47/ranking/server";
+import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { readJapanSeries } from "@stats47/stats-r2/readers";
-import { isOk, type AreaType, type Result } from "@stats47/types";
+import { isOk, type AreaType } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
 
+import { readThemePrefectureValues, readThemeRankingItem, readWithOneRetry } from "./theme-ranking-readers";
 import { themeYearLabel } from "./theme-year-label";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -79,25 +76,13 @@ function createLimiter(max: number) {
 }
 
 /**
- * 失敗した取得 (失敗の結果、または例外) を 1 回だけ取り直す。
- * R2 に無い指標は成功 (null や空の配列) で返るので取り直さない。2 回目の結果はそのまま返す。
- */
-async function readWithOneRetry<T>(read: () => Promise<Result<T, Error>>): Promise<Result<T, Error>> {
-  try {
-    const first = await read();
-    if (isOk(first)) return first;
-  } catch {
-    // 下で取り直す
-  }
-  return read();
-}
-
-/**
  * テーマダッシュボード用のデータを一括取得
  *
  * 全指標の RankingItem 定義 + R2 ranking values + TopoJSON を並列取得し、
  * indicatorDataMap として返す。tabIndicators がある場合はそのキーもマージして取得する。
  * R2 への取得は同時に R2_FETCH_CONCURRENCY 本までに絞り、失敗した定義と値は 1 回だけ取り直す。
+ * 定義と都道府県の値は theme-ranking-readers.ts の読み取りを通し、題を作る段 (readThemeLeadFact) が同じリクエストで
+ * 読んだ指標を読み直さない。
  *
  * ★データ source は R2 の `app/ranking/<key>/values.json` のみ (e-Stat ライブ取得はしない)。
  *   e-Stat ライブ取得は Cloudflare Workers ランタイムで失敗し本番で error fallback を招いたため、
@@ -123,7 +108,7 @@ export async function loadThemeData(
   // 1. 全指標の RankingItem 定義を並列取得
   const rankingItemResults = await Promise.all(
     allKeys.map((key) =>
-      limit(() => readWithOneRetry(() => readRankingItemFromR2(key, areaType))).catch((error) => {
+      limit(() => readThemeRankingItem(key, areaType)).catch((error) => {
         logger.error({ error, key, areaType }, "テーマダッシュボード: RankingItem取得失敗");
         return null;
       })
@@ -169,7 +154,7 @@ export async function loadThemeData(
     // prefecture: R2 から全年度を 1 read (e-Stat ライブ取得しない。/ranking/* と同一 source)。
     // current 年の values + 全国(県平均)トレンドを構築。全国行は無いため nationalValue は undefined
     // (ThemeMetricsDashboard が未選択時に県平均へフォールバックする)。
-    return limit(() => readWithOneRetry(() => readAllYearsRankingValuesFromR2(key, "prefecture")))
+    return limit(() => readThemePrefectureValues(key))
       .then((result) => {
         const all = isOk(result) ? result.data : [];
         const ny = yearCode.slice(0, 4);

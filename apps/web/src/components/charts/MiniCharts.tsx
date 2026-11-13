@@ -29,6 +29,13 @@ const MINI_CHART_PAD_X = 10;
 const MINI_CHART_PAD_TOP = 8;
 const MINI_CHART_PAD_BOTTOM = 18;
 const MAX_BAR_WIDTH = 26;
+/**
+ * 年のラベルの文字サイズ (px)。ミニチャートは viewBox を表示幅に合わせて等倍で描くので、
+ * この値がそのまま画面上の大きさになる。8 では読めなかった (2026-09-25 CHART-AXIS-READABILITY-01)。
+ */
+const YEAR_LABEL_FONT_SIZE = 10;
+/** 棒ごとの年 (西暦の下 2 桁) のラベルの幅。半角 2 文字 + 隣との余白 */
+const COMPACT_YEAR_LABEL_WIDTH = YEAR_LABEL_FONT_SIZE * 1.2 + 2;
 const DEFAULT_STACK_SEGMENT_NAMES = ["財政調整基金", "減債基金", "その他特定目的基金"];
 
 /**
@@ -83,6 +90,15 @@ function getBarGeometry(count: number, layout: ReturnType<typeof getMiniChartLay
   return { slot, barWidth };
 }
 
+/**
+ * 棒ごとの年のラベルを何本おきに出すか。棒の間隔がラベルの幅より狭いときは等間隔に間引く。
+ * 最新の年 (右端の棒) を必ず残す。
+ */
+function shouldLabelYear(index: number, count: number, slot: number): boolean {
+  const step = Math.max(1, Math.ceil(COMPACT_YEAR_LABEL_WIDTH / slot));
+  return (count - 1 - index) % step === 0;
+}
+
 function getSlotIndex(mouseX: number, count: number, slot: number, padX: number, width: number) {
   const bounded = Math.max(padX, Math.min(width - padX, mouseX));
   return Math.max(0, Math.min(count - 1, Math.floor((bounded - padX) / slot)));
@@ -100,7 +116,7 @@ function appendEdgeYearLabels(
     .append("text")
     .attr("x", xForIndex(0))
     .attr("y", height - 4)
-    .attr("font-size", 8)
+    .attr("font-size", YEAR_LABEL_FONT_SIZE)
     .attr("fill", MUTED)
     .attr("text-anchor", "start")
     .text(points[0].year);
@@ -109,7 +125,7 @@ function appendEdgeYearLabels(
     .append("text")
     .attr("x", xForIndex(points.length - 1))
     .attr("y", height - 4)
-    .attr("font-size", 8)
+    .attr("font-size", YEAR_LABEL_FONT_SIZE)
     .attr("fill", MUTED)
     .attr("text-anchor", "end")
     .text(points[points.length - 1].year);
@@ -124,7 +140,7 @@ function appendCompactYearLabels(
     .append("text")
     .attr("x", 0)
     .attr("y", height - 4)
-    .attr("font-size", 8)
+    .attr("font-size", YEAR_LABEL_FONT_SIZE)
     .attr("fill", MUTED)
     .attr("text-anchor", "middle")
     .text(String(point.year).slice(2));
@@ -357,7 +373,7 @@ export function MiniStackedBarChart({
           .attr("opacity", i === n - 1 ? 1 : 0.6);
       });
 
-      appendCompactYearLabels(group, point, layout.height);
+      if (shouldLabelYear(i, n, slot)) appendCompactYearLabels(group, point, layout.height);
     });
 
     const highlight = svg
@@ -464,7 +480,7 @@ export function MiniBarChart({
           .attr("fill", PRIMARY)
           .attr("opacity", i === n - 1 ? 1 : 0.55);
 
-        appendCompactYearLabels(group, point, layout.height);
+        if (shouldLabelYear(i, n, slot)) appendCompactYearLabels(group, point, layout.height);
       });
 
     const highlight = svg

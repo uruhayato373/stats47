@@ -14,6 +14,8 @@ import { NumericTrendChart } from '@/components/charts/NumericTrendChart';
 import { useYearPlayback, YearPlayer } from '@/components/charts/YearPlayer';
 import { STAT_VALUE_CLASS, StatTile, ValueTable } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import type {
   InfraCategory,
   InfraEventProperties,
@@ -436,7 +438,7 @@ export function InfraHistoryExplorer({
               key: row.code,
               cells: [
                 i + 1,
-                <Link key="link" href={row.href}>
+                <Link key="link" href={row.href} {...navSurfaceProps('geo_pref_table')}>
                   {row.name}
                 </Link>,
                 <>

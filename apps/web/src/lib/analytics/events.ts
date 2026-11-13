@@ -508,7 +508,17 @@ export type NavSurface =
   // 登録済み dimension の値追加なので GA4 側の作業は不要)
   | 'municipality_prefecture'
   // ランキングの地図・表から開く県の詳細パネルの中のリンク (2026-10-28 値追加・Flowly の試行。登録済み dimension の値追加)
-  | 'ranking_detail_sheet';
+  | 'ranking_detail_sheet'
+  // Geo への導線 (2026-11-14 値追加・NAV-CLICK-COVERAGE-01。登録済み dimension の値追加なので GA4 側の作業は不要):
+  // 分析ページへの入口 (/geo のカード・関連する地域分析・方法や使用データの一覧・県別比較のカード) /
+  // 県別の表 (県の地図・検算データへ) / 検算・途中データ・方法への導線 /
+  // 単体 GIS への入口 (レイヤーのカード・原典データのカード・入力データを単体で見る) /
+  // 地図の表示の切り替え (/geo/map の範囲・背景・重ねるもの、交通網の変遷の範囲)
+  | 'geo_analysis_list'
+  | 'geo_pref_table'
+  | 'geo_evidence'
+  | 'geo_layer_list'
+  | 'geo_map_control';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。

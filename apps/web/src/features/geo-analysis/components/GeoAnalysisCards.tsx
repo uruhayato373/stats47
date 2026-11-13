@@ -7,6 +7,8 @@ import { ArrowRight } from 'lucide-react';
 import { SectionHeader } from '@/components/section';
 import { ArticleTeaserCard, CardGrid, SurfaceLinkCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import {
   getPrefectureCardGeography,
   geoCardLandmarks,
@@ -85,6 +87,7 @@ export async function GeoAnalysisCards({ previewFootnote }: GeoAnalysisCardsProp
             <ArticleTeaserCard
               key={slug}
               href={hrefFor('geo', { analysisSlug: slug })}
+              navSurface="geo_analysis_list"
               media={
                 preview ? (
                   <GeoCardPreviewSvg
@@ -116,6 +119,7 @@ export async function GeoAnalysisCards({ previewFootnote }: GeoAnalysisCardsProp
               <SurfaceLinkCard
                 key={analysis.slug}
                 href={hrefFor('geo', { analysisSlug: analysis.slug })}
+                {...navSurfaceProps('geo_analysis_list')}
                 className="group flex min-w-0 items-center gap-3 p-4"
               >
                 <div className="min-w-0 flex-1">

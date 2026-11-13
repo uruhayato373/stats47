@@ -76,6 +76,39 @@ describe("buildDeterministicRankingContent", () => {
     expect(prose).not.toMatch(/\d(?:100|千|万ＭＪ|万通)/);
   });
 
+  // e-Stat 由来の単位は全角 (「％」「ｈａ」)。画面の表やカードは半角で書くので、生成文も半角にそろえる (UNIT-NOTATION-FORMAT-01)
+  it("全角の単位を半角で書き、構成比も半角の % で書く", () => {
+    const build = (unit: string) => {
+      const allPrefectures = fetchPrefectures().map((prefecture, index) => ({
+        rank: index + 1,
+        areaName: prefecture.prefName,
+        value: 9_000 - index * 100,
+      }));
+      const values = allPrefectures.map((row) => row.value);
+      return JSON.stringify(
+        buildDeterministicRankingContent({
+          rankingName: "テスト指標",
+          unit,
+          yearCode: "2025",
+          yearName: "2025年",
+          top10: allPrefectures.slice(0, 10),
+          bottom10: allPrefectures.slice(-10),
+          allPrefectures,
+          average: values.reduce((sum, value) => sum + value, 0) / values.length,
+          min: Math.min(...values),
+          max: Math.max(...values),
+          totalCount: allPrefectures.length,
+        }),
+      );
+    };
+    const area = build("ｈａ");
+    expect(area).toContain("9,000ha");
+    expect(area).not.toMatch(/[ａ-ｚ％]/);
+    const rate = build("％");
+    expect(rate).toContain("9,000%");
+    expect(rate).not.toContain("％");
+  });
+
   describe("比較基準の呼び名 (2026-09-27 オーナー判断: 単純平均を「全国平均」と呼ばない)", () => {
     const build = (averageLabel?: string) => {
       const allPrefectures = fetchPrefectures().map((prefecture, index) => ({
