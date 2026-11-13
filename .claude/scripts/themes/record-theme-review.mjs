@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 /** The workflow writes the report; the model only returns a structured result. */
 export function extractReview(entries, input, themeKeys, priorReview = null) {
@@ -52,8 +52,8 @@ if (
     '../../..'
   );
   const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-  const previousPath = `${datasetDir("themes.portfolio")}/ci-review.json`;
-  const input = read(`${datasetDir("themes.portfolio")}/ci-followup.json`);
+  const previousPath = datasetPath("themes.ci-review");
+  const input = read(datasetPath("themes.ci-followup"));
   let report;
   if (process.argv[2] === '--replay') {
     report = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
@@ -63,13 +63,13 @@ if (
     report = extractReview(
       JSON.parse(fs.readFileSync(process.argv[2], 'utf8')),
       input,
-      read(`${datasetDir("themes.portfolio")}/experiments.json`).experiments.map(e => e.themeKey),
+      read(datasetPath("themes.experiments")).experiments.map(e => e.themeKey),
       fs.existsSync(path.join(root, previousPath)) ? read(previousPath) : null
     );
   }
   // The following check-theme-review step enforces schema, evidence, changed paths and immutable observations.
   fs.writeFileSync(
-    path.join(root, `${datasetDir("themes.portfolio")}/ci-review.json`),
+    path.join(root, previousPath),
     JSON.stringify(report, null, 2) + '\n'
   );
 }
