@@ -204,6 +204,64 @@ describe('blog scatter as the shared type', () => {
   });
 });
 
+// The published university-advancement-capacity chart: 京都府 sits beside 東京都 at the right edge and 香川県 inside the
+// left cluster, so the side facing the middle is taken for both.
+const CAPACITY: [string, number, number][] = [
+  ['北海道', 109.1, 52.7], ['青森県', 72.1, 54.2], ['岩手県', 58.9, 49.9], ['宮城県', 131.7, 55.6], ['秋田県', 68.5, 49.4], ['山形県', 73.4, 51], ['福島県', 47.8, 50.9], ['茨城県', 51.7, 57.4],
+  ['栃木県', 58.6, 56.9], ['群馬県', 84.1, 57.4], ['埼玉県', 84.3, 65.8], ['千葉県', 100.3, 64.7], ['東京都', 226.5, 74.1], ['神奈川県', 116.1, 69.4], ['新潟県', 80.7, 53.7], ['富山県', 62.3, 58.4],
+  ['石川県', 127.6, 62.7], ['福井県', 61.2, 61.2], ['山梨県', 105.9, 62.4], ['長野県', 50.2, 55.3], ['岐阜県', 50.7, 61.1], ['静岡県', 51.9, 58.1], ['愛知県', 121.3, 64], ['三重県', 46.7, 55.4],
+  ['滋賀県', 116.4, 61.7], ['京都府', 238.3, 74], ['大阪府', 139.6, 68.9], ['兵庫県', 105.1, 68.5], ['奈良県', 70.5, 65.2], ['和歌山県', 54.4, 57.1], ['鳥取県', 80.7, 51.4], ['島根県', 71.5, 50.1],
+  ['岡山県', 107.4, 56.8], ['広島県', 93.9, 65.7], ['山口県', 112.6, 48.5], ['徳島県', 83.6, 59.7], ['香川県', 49.2, 58.4], ['愛媛県', 72.8, 57.7], ['高知県', 86.5, 57.7], ['福岡県', 131.7, 58.7],
+  ['佐賀県', 59.4, 48.4], ['長崎県', 80.1, 49.7], ['熊本県', 92.5, 50.4], ['大分県', 85.2, 52.1], ['宮崎県', 56.4, 48], ['鹿児島県', 71.6, 48.1], ['沖縄県', 77, 46.7],
+];
+const scatterOf = (rows: [string, number, number][], labelNames: string[]) => renderRelationshipScatterChart({
+  title: '大学収容力指数と進学率', meta: '2024年度', source: '学校基本調査', xLabel: '大学収容力指数', yLabel: '進学率（%）', labelNames,
+  points: rows.map(([name, x, y], i) => ({ code: String(i + 1).padStart(2, '0') + '000', name, x, y })),
+});
+/** Each prefecture name drawn in the plot, as the box its 32px glyphs cover. */
+const nameBoxes = (svg: string) => [...svg.matchAll(/<text x="([\d.-]+)" y="([\d.-]+)" text-anchor="(start|end|middle)" font-size="32" font-weight="700">([^<]+)<\/text>/g)].map((m) => {
+  const width = m[4].length * 32, x = Number(m[1]);
+  const x0 = m[3] === 'start' ? x : m[3] === 'end' ? x - width : x - width / 2;
+  return { name: m[4], x0, x1: x0 + width, top: Number(m[2]) - 11 - 16, bottom: Number(m[2]) - 11 + 16 };
+});
+const dotsOf = (svg: string) => [...svg.matchAll(/<circle data-pref="[^"]+" cx="([\d.-]+)" cy="([\d.-]+)" r="([\d.]+)"/g)].map((m) => ({ cx: Number(m[1]), cy: Number(m[2]), r: Number(m[3]) }));
+const plotOf = (svg: string) => {
+  const [x, y, width, height] = svg.match(/<clipPath id="scatter-plot"><rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/)!.slice(1).map(Number);
+  return { left: x, right: x + width, top: y, bottom: y + height };
+};
+
+describe('scatter names try every side of the dot', () => {
+  const asked = ['京都府', '奈良県', '山口県', '香川県'];
+  it('draws each prefecture the data asked for when the side facing the middle is taken', () => {
+    const names = nameBoxes(scatterOf(CAPACITY, asked)).map((box) => box.name);
+    expect(names).toEqual(asked);
+  });
+  it('keeps every name inside the plot, clear of the dots and of the other names', () => {
+    const svg = scatterOf(CAPACITY, asked);
+    const boxes = nameBoxes(svg), plot = plotOf(svg);
+    expect(boxes).toHaveLength(4);
+    for (const box of boxes) {
+      expect(box.x0).toBeGreaterThanOrEqual(plot.left);
+      expect(box.x1).toBeLessThanOrEqual(plot.right);
+      expect(box.top).toBeGreaterThanOrEqual(plot.top);
+      expect(box.bottom).toBeLessThanOrEqual(plot.bottom);
+      // 10 is the radius of an unnamed dot: a name may not touch any dot, its own included.
+      expect(dotsOf(svg).filter((dot) => dot.cx + 10 > box.x0 && dot.cx - 10 < box.x1 && dot.cy + 10 > box.top && dot.cy - 10 < box.bottom)).toEqual([]);
+      expect(boxes.filter((other) => other !== box && other.x0 < box.x1 && other.x1 > box.x0 && other.top < box.bottom && other.bottom > box.top)).toEqual([]);
+    }
+  });
+  it('leaves out a name that has a dot on every side', () => {
+    // 県24 has neighbours 4 units away on all four sides; the other 42 run along the diagonal, far from it.
+    const ring: [string, number, number][] = [['県24', 50, 50], ['県44', 46, 50], ['県45', 54, 50], ['県46', 50, 46], ['県47', 50, 54]];
+    const rest = Array.from({ length: 42 }, (_, i): [string, number, number] => {
+      const at = i < 21 ? i * 1.5 : 70 + (i - 21) * 1.5;
+      return [`他${i + 1}`, at, 100 - at];
+    });
+    const names = nameBoxes(scatterOf([...ring, ...rest], ['県24'])).map((box) => box.name);
+    expect(names).not.toContain('県24');
+  });
+});
+
 // The prototype's H01 needed about a thousand municipalities; the prefecture rule must not loosen with it.
 describe('relationship scatter across municipalities', () => {
   const town = (i: number) => ({ code: String(10000 + i), name: `町${i}`, x: i, y: i * 2 + (i % 7) });
