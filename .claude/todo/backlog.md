@@ -634,6 +634,7 @@ updated: 2026-11-01
 
 - **起点**: `apps/web/src/__tests__/region-page-no-comparison.test.ts` の 3 件が Windows で失敗する。実際は `app\areas\page.tsx`、期待は `app/areas/page.tsx` で、`relative` の結果を `/` にそろえていない。
 - **次**: 検査の中でパスを `/` 区切りへそろえる。
+- **2026-11-13 修正済み**: PR #1258で相対パスを共通の`sourcePath`で正規化し、Windowsで対象6テスト（既存4件と追加2件）が通過。生成台帳と表示コードの誤判定も是正。CIの最終確認後にbacklog-processorが完了行を回収する。
 - **完了条件**: Windows で `npm run test -w web` のこの 3 件が通る。
 
 ### [STRATEGY-ISSUE-MAP-PV-CHART-01] 広告の効率が出たら、事業イシューマップに月 ¥1 万へ要る PV のグラフを足す
