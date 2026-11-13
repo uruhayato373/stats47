@@ -32,6 +32,6 @@
     { "type": "test-exclude", "path": "packages/gis/vitest.config.mts", "detail": "**/integration.test.ts", "count": 1, "owner": "gis-pipeline-runner", "reason": "live GIS adapter needs network and output directory", "expiresAt": "2026-11-30" },
     { "type": "test-exclude", "path": "packages/product-factory/vitest.config.mts", "detail": "tests/note-channel.test.ts", "count": 1, "owner": "data-pack-manager", "reason": "frozen note catalog awaits fourteen-pack migration", "expiresAt": "2026-11-30" },
     { "type": "test-exclude", "path": "vitest.config.mts", "detail": "**/*manual-download*", "count": 1, "owner": "estat-researcher", "reason": "root suite excludes secret-dependent manual e-Stat download", "expiresAt": "2026-11-30" },
-    { "type": "test-exclude", "path": "packages/visualization/src/shared/__tests__/helpers/render-test-contract.ts", "detail": "OPT_IN_RENDER_TEST_FILES", "count": 9, "owner": "chart-component-builder", "reason": "pixel suite runs in required dedicated and weekly jobs", "expiresAt": "2026-11-30" }
+    { "type": "test-exclude", "path": "packages/visualization/src/shared/__tests__/helpers/render-test-contract.mts", "detail": "OPT_IN_RENDER_TEST_FILES", "count": 9, "owner": "chart-component-builder", "reason": "pixel suite runs in required dedicated and weekly jobs", "expiresAt": "2026-11-30" }
   ]
 }
