@@ -195,7 +195,8 @@ export default async function SurveyPage({ params }: PageProps) {
     6,
     getSurveyEditorialContent(surveyKey)?.relatedArticleSlugs ?? []
   ).catch(() => []);
-  // 広告の段: 全ランキングの前・全ランキングの後・ページの最後に、AdSense 1 つを本文の幅いっぱい (上限 580px) に出す
+  // 広告の段: 地図付きのランキングのカードの後・全ランキングの前・ページの最後に、AdSense 1 つを本文の幅いっぱい (上限 580px) に出す
+  // (位置は 2026-11-13 オーナー決定で並べ替えた)
   // (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)。2 段目はハブ用の HUB_ROW_2 (THEMES_CONTENT はテーマの段に使う)
   const [surveyRow1, surveyRow2, surveyRow3] = composeAdRows(
     [['adsense'], ['adsense'], ['adsense']],
@@ -417,6 +418,13 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* 1 段目: 地図付きのランキングのカードの後 (ブログ記事・テーマの前)。2026-11-13 オーナー決定で、最初の約 4,400px (スマホ)
+          に広告が無く最後の 2 段が約 600px で並んでいた配置を、上から下まで約 2,400px おきに並べ替えた。カードが無い調査では
+          最初の画面に入るので出さず、後ろにブログ記事かテーマがあるときだけ出す (次の 2 段目と隣り合わせにしない) */}
+      {featuredItems.length > 0 && (relatedArticles.length > 0 || themeCards.length > 0) && surveyRow1.length > 0 && (
+        <AdRow cells={surveyRow1} position="survey-row-1" trackingCategory={`survey-${surveyKey}`} wide />
+      )}
+
       {relatedArticles.length > 0 && (
         // 記事カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
         <PanelGrid as="section" id="related-articles" className="scroll-mt-24">
@@ -472,14 +480,9 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/*
-        記事内広告はランキング表の「前」に置く。表より後ろに置くと、そこから
-        フッター広告までの間は「数字を読むときの注意」(editorial 定義は 75 調査中 1 件)と
-        ネイティブアフィリ(在庫ゼロで消える)しか無く、どちらも欠けた調査で広告 2 連になる。
-        ランキング表は無条件で必ず描画されるので、ここに置けば必ず両枠が離れる (2026-07-29 是正)。
-      */}
-      {surveyRow1.length > 0 && (
-        <AdRow cells={surveyRow1} position="survey-row-1" trackingCategory={`survey-${surveyKey}`} wide />
+      {/* 2 段目: 全ランキングの表の前。表は必ず描かれるので、ページの最後の段と隣り合わない (2026-07-29 是正の考え方) */}
+      {surveyRow2.length > 0 && (
+        <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} wide />
       )}
 
       <section id="all-rankings" className="mb-4 scroll-mt-24">
@@ -533,14 +536,6 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。
-          全ランキングの表の後・注意の前に置き、ページ末の関連コンテンツ型と隣り合わせにしない (2026-10-30) */}
-      {surveyRow2.length > 0 && (
-        <section className="mb-4">
-          <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} wide />
-        </section>
-      )}
-
       {/* 調査の要約はページに残す。シートの中身は押すまで読み込まないので、ページの説明文がゼロにならないようにし、
           PR の列とページ末の広告の間も空ける (2026-11-03) */}
       {editorial && (
@@ -550,9 +545,8 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「この調査について」を挟めるときだけ出す
-          (注意の無い調査で PR の列と隣り合わせにしない。2026-10-30) */}
-      {editorial && surveyRow3.length > 0 && (
+      {/* 3 段目: ページの最後。2 段目との間には全ランキングの表が必ず入る */}
+      {surveyRow3.length > 0 && (
         <AdRow cells={surveyRow3} position="survey-row-3" trackingCategory={`survey-${surveyKey}`} wide />
       )}
     </ArticleShell>

@@ -590,17 +590,17 @@
       {
         "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "全ランキングの前",
+        "position": "地図付きのランキングのカードの後・ブログ記事とテーマの前 (2026-11-13 に並べ替え)",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-row-1\"",
         "trackingPosition": "survey-row-1",
         "adsenseSlot": "HUB_INCONTENT",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない ランキングのカードがあり、後ろにブログ記事かテーマがある調査だけ (カードが無いと最初の画面に入り、後ろが無いと 2 段目と隣り合う)"
       },
       {
         "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "全ランキングの後・注意の前",
+        "position": "全ランキングの表の前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-row-2\"",
         "trackingPosition": "survey-row-2",
@@ -610,12 +610,12 @@
       {
         "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "この調査についての後 (ページの最後)",
+        "position": "ページの最後 (「この調査について」がある調査はその後)",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-row-3\"",
         "trackingPosition": "survey-row-3",
         "adsenseSlot": "CONTENT_FOOTER",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない 「この調査について」がある調査だけ (PR の段と隣り合わせにしない)"
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない 2 段目との間に全ランキングの表が必ず入る"
       }
     ],
     "tag": [
