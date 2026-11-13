@@ -658,3 +658,27 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
 - **残る大きい項目 (別途)**: テーマ詳細が全テーマの Client 部品 (tsunami-exposure など) を先読みしている構成 (dynamic import で route ごとに分ける案)・`packages/area` が全ページで 145KB・`@base-ui/react` が全ページで 239KB。いずれも効果を route 別に数えてから着手する。
 - **検証コマンド**: 上記の `ANALYZE=true ... next build --webpack` を `packages/data-configs/package.json` の `sideEffects` の有無で 2 回実行し、`.next/analyze/client.html` の `window.chartData` の `/geo` 系 chunk の `packages/data-configs` の parsedSize を比べる。
 - **判定**: 実測のみ (想定値は事前に置いていないため effect ラベルは付けない)。
+
+### [PERF-RANKING-LCP-03] ranking/total-population mobile の LCP がベースラインを下回った要因 (調査結果)
+
+- **記録日**: 2026-11-14
+- **結論**: 完了条件の数値は満たしている。ただし下がった理由はタイルの取得が速くなったことではなく、2026-10-09 のリリースで地図が mobile の先頭から下がり、LCP に選ばれる要素が地図タイルからほかの要素に入れ替わったことである。topology fetch の分離 (`4ee6b5641`、2026-09-07) もタイル配信元の切り替え (`871096e46`、2026-09-25) も、LCP の要素を地図タイルのまま 9,000〜11,000ms 台に残した。
+- **数値の根拠**: `data/psi/history.csv` の `ranking/total-population,mobile` は、2026-10-09〜11-06 の 19 点が最小 4,051ms・最大 7,545ms (10-20 の 1 点だけが 7,000ms 台) で、ベースライン 9,347ms (2026-08-04) を 4 週間にわたり全点で下回っている。直前の 10-05〜10-08 は 9,066〜11,315ms で、ベースラインを下回っていない。
+- **LCP 要素と日付の対応 (各日の `psi-batch-*.json` の `lcp_element`)**:
+
+| PSI 取得日 (UTC) | LCP | LCP 要素 |
+|---|---:|---|
+| 2026-08-01〜2026-10-08 (結果が取れた日) | 5,738〜17,187ms (10-05〜10-08 は 9,066〜11,315ms) | 08-02 の 2 点 (見出し直下の `p`) と 09-01 (バナー) を除き Leaflet タイル `img.leaflet-tile` |
+| 2026-10-09〜2026-10-25 | 4,801〜7,545ms | Cookie 同意バナーの `p` (`body > div.fixed > div.mx-auto > p`) |
+| 2026-10-30〜2026-11-06 | 5,321ms / 4,051ms | 「47都道府県の単純平均」カードの見出し `h3` (`div.cn-card-title`) |
+
+- **切り替わりの日付と変更**: 10-08 の PSI (取得 2026-10-08T22:12Z = 10-09 07:12 JST) はタイルが LCP、10-09 の PSI (取得 2026-10-09T21:50Z = 10-10 06:50 JST) はバナーが LCP である。この間に main へ入った PR は #1113〜#1118 (2026-10-09 07:40〜20:17 JST)。`git diff 93bb41dfb1 8bff690216` の範囲で、`RankingKeyPageClient.tsx` を変えた commit は `212d2611d4` (2026-10-09 14:39 JST「centralize metric identity and visualization contracts」) で、地図の `RankingVisualizationSection` を囲む div を `order-2 min-w-0 lg:order-4` から `order-4 min-w-0` に変え、その前に操作部 (order-2) と数値の帯 `RankingHeaderStats` (order-3、「47都道府県の単純平均」を含む) を並べた。mobile では地図が、見出しの直後 (旧コードのコメントに「モバイルは h1 の直後に地図を出す」とある並び) から、見出し・操作部・数値の帯の下 (4 番目) へ下がったことになる。
+- **この結論の確かさ**: LCP 要素の入れ替わり (10-08 はタイル、10-09 はバナー) と、同じリリースに地図の並び順の変更が入っていることは、上記のコマンドで再現できる。地図が mobile の初期表示の外へ出たことが入れ替わりの原因であることは、PSI の要素情報とコードの差分から導いた推定であり、リリース前後の同じ画面幅でのスクリーンショット比較までは取っていない。
+- **見落としてはいけないこと**: 現在の lab の LCP (4,051〜5,321ms) は、地図タイルの取得速度を測っていない。タイルの発見遅延 (`resourceLoadDelay`) が解消したことは確認できていない。また 2026-11-06 の `field_data` では、この URL の実ユーザー LCP の p75 は mobile 4,943ms・desktop 4,577ms で、どちらも `SLOW` 判定 (2,500ms 超) のままである。lab の数値がベースラインを下回ったことは、実ユーザーの体感が良くなったことの証拠ではない。
+- **検証コマンド (コピペ可)**:
+  - 数値: `grep "ranking/total-population,mobile" data/psi/history.csv | awk -F, '$1>="2026-10-09" && $1<="2026-11-06"{n++; if($6>m)m=$6; if(min==""||$6<min)min=$6} END{print n,min,m}'` (出力 `19 4051 7545`)
+  - 切り替え前: `git show fe2de93ee9:data/psi/psi-batch-2026-10-08T22-12-37.json | jq -r '.results[]|select(.url=="https://stats47.jp/ranking/total-population" and .strategy=="mobile")|[.lab_data.LCP_ms,.lcp_element.selector]|@tsv'`
+  - 切り替え後: 同じコマンドの対象を `5cd51235a5:data/psi/psi-batch-2026-10-09T21-50-41.json` にする
+  - 並び順の変更: `git show 212d2611d4 -- apps/web/src/features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx`
+- **判定**: カードの完了条件 (3 週連続でベースライン 9,347ms 未満) は満たした。ベースライン値は更新していない。effect ラベルは付けない (実測は LCP 要素の入れ替わりを示し、地図タイル自体の改善を示さないため)。
+- **未確定 / 仮説**: **[仮説]** 地図は依然として mobile の LCP 候補になり得るが、初期表示の外にあるため lab の LCP に選ばれなくなっただけで、タイルの発見遅延は残っている。検証コマンド: 地図が初期表示に入る幅・高さ (412x915 など) で `ranking/total-population` を実ブラウザで開き、`largest-contentful-paint-element` と `resourceLoadDelay` を取り直す。検証期日: 次回 PERF 系の監査。期日後の判定: 地図が初期表示の外で、LCP がバナー・見出しのままなら仮説支持 (地図の LCP 改善は不要と判断できる)。
