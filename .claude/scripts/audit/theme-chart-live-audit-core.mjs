@@ -77,6 +77,66 @@ export function parseDependencyMirror(value) {
   return { metrics, distinctExpected: seenMetrics.size };
 }
 
+/**
+ * 依存ミラーの「推移」と題した図の一覧と最低点数を読む。
+ * 一覧が無いミラーを黙って受け入れると、推移の点数の検査が空になるので、無ければ落とす。
+ * 最低点数の正典は packages/data-configs の MIN_TREND_YEARS (ミラー生成時に写す)。
+ */
+export function parseTrendChartMirror(value) {
+  if (!isPlainObject(value)) throw new Error("dependency mirror must be an object");
+  const minTrendYears = value.minTrendYears;
+  if (!Number.isSafeInteger(minTrendYears) || minTrendYears < 1) {
+    throw new Error("dependency mirror minTrendYears must be a positive integer");
+  }
+  if (!Array.isArray(value.trendCharts)) {
+    throw new Error("dependency mirror trendCharts must be an array");
+  }
+  const trendCharts = value.trendCharts.map((candidate, index) => {
+    if (!isPlainObject(candidate)) throw new Error(`trendCharts[${index}] must be an object`);
+    if (!Array.isArray(candidate.metricKeys) || candidate.metricKeys.length === 0) {
+      throw new Error(`trendCharts[${index}].metricKeys must be a non-empty array`);
+    }
+    return {
+      themeKey: requireNonEmptyString(candidate.themeKey, `trendCharts[${index}].themeKey`),
+      componentKey: requireNonEmptyString(candidate.componentKey, `trendCharts[${index}].componentKey`),
+      title: requireNonEmptyString(candidate.title, `trendCharts[${index}].title`),
+      metricKeys: candidate.metricKeys.map((key, i) =>
+        requireNonEmptyString(key, `trendCharts[${index}].metricKeys[${i}]`),
+      ),
+    };
+  });
+  return { minTrendYears, trendCharts };
+}
+
+/**
+ * 「推移」と題した図が描く指標のうち、観測年が最低点数に満たないものを返す。
+ * 取得に失敗した指標や検査していない指標は年数を知らないので、ここでは数えない
+ * (取得の失敗は別の status として報告される)。
+ */
+export function inspectTrendYears({ trendCharts, minTrendYears, results }) {
+  const yearCounts = new Map();
+  for (const result of results) {
+    if (result.status === "ok" && Number.isFinite(result.yearCount)) {
+      yearCounts.set(result.metricKey, result.yearCount);
+    }
+  }
+  const violations = [];
+  for (const chart of trendCharts) {
+    for (const metricKey of chart.metricKeys) {
+      const yearCount = yearCounts.get(metricKey);
+      if (yearCount === undefined || yearCount >= minTrendYears) continue;
+      violations.push({
+        where: `${chart.themeKey}/${chart.componentKey}`,
+        title: chart.title,
+        metricKey,
+        yearCount,
+        minTrendYears,
+      });
+    }
+  }
+  return violations;
+}
+
 /** R2 `app/stats/<metric>/values.json` の表示契約を検査する。 */
 export function inspectStatsPayload(payload, metric) {
   if (!isPlainObject(payload)) return { status: "malformed-json", detail: "root is not an object" };

@@ -1,3 +1,5 @@
+import { MIN_TREND_YEARS } from '@stats47/data-configs/display-semantics';
+
 import type { MetricTimeseriesResult } from '@/lib/aggregate-metric-timeseries';
 
 /**
@@ -12,8 +14,11 @@ import type { MetricTimeseriesResult } from '@/lib/aggregate-metric-timeseries';
  * 出さないときは何も置かない (理由の案内も出さない)。部品 (StatTile) は渡されたチャートを描くだけで判断しない。
  */
 
-/** 推移の小さなチャートを描く最小の年の数 (異なる年の数) */
-export const MIN_TREND_YEARS = 5;
+/**
+ * 推移の小さなチャートを描く最小の年の数 (異なる年の数)。正典は data-configs の MIN_TREND_YEARS で、
+ * 「推移」と題したテーマの図の観測年数も同じ値で live 監査が検査する (theme-chart-live-audit)。
+ */
+export { MIN_TREND_YEARS };
 
 export interface MetricTrendContext {
   /** 選択中の都道府県コード (null = 47都道府県・未選択) */

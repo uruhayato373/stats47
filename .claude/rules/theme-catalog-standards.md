@@ -411,6 +411,7 @@ harmRelevance: [
 | **error (adoptionCriteria)**   | `[adoption-criteria]` ADOPTION_CRITERIA 外の値                                                                                                                                                                                                                                        |
 | **error (selection evidence)** | `[selection-code-mismatch]` 統計指標コードが metric config の cdCat01 と不一致 / `[selection-boilerplate]` adoptionCriteria 付きなのに定型文が残る / `[selection-source-required]` https sourceUrl・ISO surveyedAt が無い / `[selection-criteria-all]` 5 基準全部列挙 (§4「機械検査」・2026-09-16 新設) |
 | **warn (chart-temporal-fit)**  | `[chart-temporal-fit]` line-chart が参照する指標の `years` が1年しかない (推移を描けない・チャート型の再検討候補。2026-09-15新設・実測13件・誤検知の余地が無い確実な不整合のみ検出するため warn のまま運用する)                                                                          |
+| **live 監査 (trend-years-short)** | 週次の `theme-chart-live-audit.mjs` が、タイトルに「推移」を含む図が描く指標の R2 観測年数を `MIN_TREND_YEARS` (5・正典は `display-semantics/index.ts`・依存ミラーへ写す) と比べ、満たない指標を error にする (2026-11-14 新設。実測は全 27 図が 9 年以上で 0 件。年数が足りない指標は図の題を「比較」等にするか、数値タイルに替える) |
 
 ---
 

@@ -105,6 +105,14 @@ export function sectionClaimsPerPopulation(description: string | null | undefine
   return /(人口[\d十百千万\s]*人?\s*(当たり|あたり)|人口比|\d+\s*万人比)/.test((description ?? "").normalize("NFKC"));
 }
 
+/**
+ * 「推移」の図を描く最小の年の数 (異なる年の数)。2〜4 年では線が 1〜3 本の直線にしかならず、値と年を読めば足りる
+ * (2026-10-30 オーナー指摘)。数値タイルの小さな推移 (apps/web の metric-trend.ts) はこの値で出し分け、
+ * 「推移」と題したテーマの図は live 監査 (theme-chart-live-audit) が観測年数をこの値と比べる。
+ * 監査は素の node で走るので、依存ミラー (theme-chart-dependencies.generated.json) へ写して渡す。
+ */
+export const MIN_TREND_YEARS = 5;
+
 export type SemanticRule =
   | "label-rate-on-total"
   | "section-per-population-on-total"
