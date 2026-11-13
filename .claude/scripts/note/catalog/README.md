@@ -60,7 +60,7 @@ npm run note:article -- adopt <key>                # 台帳の外で R2 に置�
 | 派生インデックスが台帳と一致 | `npm run note:catalog:check` | PR・pre-commit |
 | docs/31 に追跡ファイルが無い | `npm run note:images:audit` | PR・pre-commit |
 | 公開 R2 の本文・生成 AI 背景の実在 | `npm run note:images:audit -- --verify-r2` | 週次 (週次レビューの `npm run weekly:audits` の note-circulation) |
-| 台帳と R2 (private を含む) の照合 | `npm run note:article -- verify` | ローカル (R2 の S3 認証が要る) |
+| 台帳と R2 (private を含む) の照合 | `npm run note:article -- verify` | 週次 (note-circulation の `ledger-r2-verify`・Mac の `.env.local` の S3 認証)。`--deep` は手で回す |
 | 保存・衝突・退避の仕組み | `npm run note:article:test` | PR |
 
 `validate-note-catalog.ts` の規則: **error** は key 重複 / 未登録マガジンキー / マガジンの vertical 不一致 / published なのに noteUrl 無し、

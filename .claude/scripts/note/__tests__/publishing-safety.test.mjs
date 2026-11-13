@@ -80,6 +80,11 @@ test("new publication and paid-landing patches stop on unverified disclaimers in
   assert.match(weekly, /note:unverified:audit/);
 });
 
+test("weekly note audit verifies the article ledger against R2 including private objects", () => {
+  const weekly = readFileSync(join(NOTE_DIR, "../management/weekly-audits/note-circulation.sh"), "utf8");
+  assert.match(weekly, /^run ledger-r2-verify npm run --silent note:article -- verify$/m);
+});
+
 // --- NOTE-PLAYWRIGHT-DIALOG-CRASH-01 ---
 // Playwright が開いたブラウザを browser-use が CDP で同時に操作すると、ダイアログを browser-use が先に閉じたとき
 // Playwright 側の Page.handleJavaScriptDialog が失敗し、未処理の rejection で起動スクリプトごとブラウザが落ちる。

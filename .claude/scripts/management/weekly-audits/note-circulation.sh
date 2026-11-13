@@ -2,12 +2,15 @@
 # note の公開記事・タグ・導線・マガジン・カバー・カードの週次全量監査 (2026-10-26 に note-circulation-audit-weekly.yml から週次レビューへ移した)。
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。note への書き込みはしない (公開ページと公開 API の読み取りだけ)。
 # どれかの検査が落ちる・circulation の gate (errors / warnings / タグ / マガジン / 有料記事の無料部分) を満たさないと exit 1。
+# 台帳と R2 の照合 (private を含む) も run ledger-r2-verify で行う。
 # 出力: data/note/evidence/note-circulation-audit-*.json・note-unverified-audit-latest.json・note-cover-audit-latest.json・data/note/card-visibility-latest.json・data/note/cover-assets.json
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
 failed=()
 run() { local name="$1"; shift; echo "=== $name ==="; "$@" || failed+=("$name"); }
 run catalog npm run --silent note:catalog:validate
+# 台帳と R2 (private を含む) の照合。S3 認証は Mac の .env.local (note-article.mjs が読む)。--deep と --record は付けない (全件の SHA 照合は控えの削除前に手で回す)
+run ledger-r2-verify npm run --silent note:article -- verify
 run circulation-tests npm run --silent note:circulation:test
 run cover-tests npm run --silent note:covers:test
 run asset-tests npm run --silent note:assets:test
