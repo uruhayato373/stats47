@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+
 import { describe, expect, it } from 'vitest';
 
 import ksj from '../../../../../data/geo/ksj/datasets.json';
@@ -6,7 +8,7 @@ import { GEO_ANALYSIS_THEME_SOURCES } from '../geo-analysis-theme-sources';
 import { GEO_ANALYSES } from '../geo-analyses';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '../geo-content-lifecycle';
 import { findGeoLayer, GEO_LAYERS } from '../geo-layers';
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '../m1';
+import { BUSINESS_PLAN_M1_ANALYSES, BUSINESS_PLAN_M1_GEO_ANALYSES } from '../m1';
 
 const SLUGS = [
   'population-land-price',
@@ -79,5 +81,22 @@ describe('Geoコンテンツ公開ライフサイクルの台帳 (geo.content-li
       'geo-031',
       'geo-062',
     ]);
+  });
+
+  it('公開ゲートの文言は台帳の publicationGates から組み、分析の種類で中段だけを替える', () => {
+    const ledger = JSON.parse(
+      readFileSync(new URL('../../../../../data/geo/analyses/content-lifecycle.json', import.meta.url), 'utf8')
+    );
+    const gates = ledger.publicationGates;
+    expect(gates?.common?.length).toBe(3);
+    for (const content of BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE) {
+      const analysis = BUSINESS_PLAN_M1_ANALYSES.find((item) => item.id === content.analysisId);
+      const middle = analysis?.analysisKind === 'spatial-cross' ? gates.spatialCross : gates.baseline;
+      expect(content.publicationGates).toEqual([...gates.common, ...middle, ...gates.closing]);
+    }
+    const loader = readFileSync(new URL('../geo-content-lifecycle.ts', import.meta.url), 'utf8');
+    for (const text of [...gates.common, ...gates.spatialCross, ...gates.baseline, ...gates.closing]) {
+      expect(loader).not.toContain(text);
+    }
   });
 });

@@ -720,6 +720,7 @@ export const DATASETS = [
   d("page-quality.backlog-batches", "data/page-quality/backlog-batches/{**}", "state", "site", "data", "UI 指摘を backlog カードへ束ねた記録"),
   d("business-plan.state", "data/business-plan/{name}.json", "state", "strategy", "data", "事業計画 SSOT から派生した最新状態と KPI ツリー"),
   d("business-plan.history", "data/business-plan/history/{date}.json", "series", "strategy", "data", "事業計画の派生状態の履歴", { retain: "business-plan" }),
+  d("business-plan.catalog", "data/business-plan/plan/catalog.json", "master", "strategy", "data", "事業計画の見出し (ID・版・取り込んだ原本の記録・ビジョン・標語・原則・収益の層・重点テーマ)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_2026)", { schema: "config/schema/business-plan.catalog.schema.json" }),
   d("business-plan.documents", "data/business-plan/plan/documents.json", "master", "strategy", "data", "事業計画が拠り所にする正典文書の一覧。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DOCUMENTS)", { schema: "config/schema/business-plan.documents.schema.json" }),
   d("business-plan.decisions", "data/business-plan/plan/decisions.json", "ledger", "strategy", "data", "外部の事業計画書 25 章の章ごとの採否 (採用・適合変更・保留・不採用と理由・正典・担当)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DECISIONS)", {
     schema: "config/schema/business-plan.decisions.schema.json",
@@ -884,7 +885,7 @@ export const DATASETS = [
       { field: "layers.*.related[]", to: "geo.analyses", key: "analyses.$keys" },
     ],
   }),
-  d("geo.content-lifecycle", "data/geo/analyses/content-lifecycle.json", "ledger", "data", "data", "Geo コンテンツの公開ライフサイクルの手書き部分 (contentId ごとのテーマ・記事の slug と題案・公開計画。無料面・SNS・有料面の結合は読み込み口)。読み込みは packages/data-configs/src/business-plan/geo-content-lifecycle.ts", {
+  d("geo.content-lifecycle", "data/geo/analyses/content-lifecycle.json", "ledger", "data", "data", "Geo コンテンツの公開ライフサイクルの手書き部分 (contentId ごとのテーマ・記事の slug と題案・公開計画と、公開ゲートの文言。無料面・SNS・有料面の結合とゲートの並びは読み込み口)。読み込みは packages/data-configs/src/business-plan/geo-content-lifecycle.ts", {
     schema: "config/schema/geo.content-lifecycle.schema.json",
     refs: [
       { field: "contents.$keys", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },

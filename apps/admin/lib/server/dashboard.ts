@@ -7,7 +7,6 @@ import { projectRoot } from "./project-root";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import {
   cached,
-  mdTableAfter,
   TTL,
   wrap,
   type Wrapped as StateWrapped,
@@ -360,38 +359,6 @@ export function parseFeatureBacklogMd(root: string) {
   });
 }
 
-// ─── 戦略 (マーケティング戦略 SSOT をパース) ─────────────
-export function parseStrategyDocs(root: string) {
-  return wrap(() => {
-    const mkPath = "docs/00_プロジェクト管理/03_マーケティング戦略.md";
-    const mk = fs.readFileSync(path.join(root, mkPath), "utf8");
-
-    const statement = mk.match(/^> \*\*「(.+?)」\*\*/m)?.[1] ?? null;
-
-    const targeting = mdTableAfter(mk, /^### セグメント評価/);
-    const segments = (targeting?.rows ?? []).map(([seg, verdict, role]) => ({ seg, verdict, role }));
-
-    const teigenTable = mdTableAfter(mk, /^### STP実行状況/);
-    const teigen = (teigenTable?.rows ?? []).map(([n, title, target, state]) => ({
-      n,
-      title,
-      target,
-      state,
-    }));
-
-    return {
-      statement,
-      segments,
-      teigen,
-      sources: [
-        mkPath,
-        "docs/00_プロジェクト管理/04_ターゲットペルソナ.md",
-        ".claude/todo/improvements.md",
-      ],
-    };
-  });
-}
-
 // ─── 集約 (60 秒 TTL・globalThis) ─────────────────────
 export interface DashboardData {
   generatedAt: string;
@@ -406,7 +373,6 @@ export interface DashboardData {
   coverage: unknown;
   backlog: unknown;
   featureBacklog: unknown;
-  strategy: unknown;
 }
 
 export function collectDashboard(root: string): DashboardData {
@@ -423,7 +389,6 @@ export function collectDashboard(root: string): DashboardData {
     coverage: readGscCoverage(root),
     backlog: parseBacklogMd(root),
     featureBacklog: parseFeatureBacklogMd(root),
-    strategy: parseStrategyDocs(root),
   };
 }
 
