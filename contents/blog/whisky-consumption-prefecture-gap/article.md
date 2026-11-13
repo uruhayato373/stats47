@@ -14,7 +14,7 @@ tags:
   - 総務省
 publishedAt: 2026-05-17
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/whisky-consumption-prefecture-gap/og.png
 ---
 
