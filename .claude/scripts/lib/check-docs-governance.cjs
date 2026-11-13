@@ -24,7 +24,7 @@ const strategyLanes = require("./strategy-lanes.cjs");
 
 const DEFAULT_ROOT =
   process.env.DOCS_GOVERNANCE_ROOT ||
-  process.env.CLAUDE_PROJECT_DIR ||
+  process.env.STATS47_SCAN_ROOT ||
   path.resolve(__dirname, "..", "..", "..");
 const DEFAULT_CONFIG =
   process.env.DOCS_GOVERNANCE_CONFIG ||

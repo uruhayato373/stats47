@@ -6,7 +6,7 @@ const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 const { performance } = require("node:perf_hooks");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const CONFIG = process.env.CHECK_RUNTIME_CONFIG || path.join(ROOT, ".claude/config/check-runtime-budgets.json");
 
 function percentile(values, ratio) {

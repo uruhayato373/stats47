@@ -41,7 +41,7 @@ const crypto = require("crypto");
 const { execFileSync } = require("child_process");
 const { datasetDir } = require("../../../config/datasets.mjs");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const AUDIT_MARKER = path.join(ROOT, ".claude/state/consistency/audited.json");
 
 // 組み込み/プラグイン agent 型 (ファイル .claude/agents/*.md を持たない)。E1 で誤検知しない。

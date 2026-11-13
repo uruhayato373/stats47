@@ -18,7 +18,7 @@ async function fixture() {
   return { root, checker };
 }
 function run(f, args = ["--json"]) {
-  return spawnSync(process.execPath, [f.checker, ...args], { cwd: f.root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: f.root } });
+  return spawnSync(process.execPath, [f.checker, ...args], { cwd: f.root, encoding: "utf8", env: { ...process.env, STATS47_SCAN_ROOT: f.root } });
 }
 
 test("有効な本文画像参照を受理する", async (t) => {

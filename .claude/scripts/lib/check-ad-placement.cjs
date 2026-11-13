@@ -27,7 +27,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const PROJECT_ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "../../..");
+const PROJECT_ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "../../..");
 const APP_DIR = path.join(PROJECT_ROOT, "apps/web/src/app");
 const SRC_DIR = path.join(PROJECT_ROOT, "apps/web/src");
 const CONSTANTS_FILE = path.join(SRC_DIR, "lib/google-adsense/constants.ts");

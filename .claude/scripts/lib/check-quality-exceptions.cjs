@@ -6,7 +6,7 @@ const path = require('node:path');
 const childProcess = require('node:child_process');
 const YAML = require('yaml');
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, '../../..');
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, '../../..');
 const REGISTRY = '.claude/config/quality-exceptions.json';
 const TEXT_EXT = /\.(?:[cm]?[jt]sx?)$/;
 const EXCLUDED_DIRS = new Set(['node_modules', 'dist', '.next', '.local', 'coverage']);

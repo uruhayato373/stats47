@@ -1320,6 +1320,14 @@
       ]
     },
     {
+      "name": "STATS47_SCAN_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "検査スクリプト (.claude/scripts/lib の check-*.cjs と preflight-commit.mjs) が検査するルートの上書き。テストの fixture 用で、既定はスクリプト自身の作業ツリー。CLAUDE_PROJECT_DIR は読まない"
+    },
+    {
       "name": "SURVEYS_JSON",
       "visibility": "server",
       "contexts": [

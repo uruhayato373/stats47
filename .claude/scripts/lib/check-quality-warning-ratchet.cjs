@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const childProcess = require('node:child_process');
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, '../../..');
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, '../../..');
 const BASELINE = '.claude/config/quality-warning-baseline.json';
 const COMMANDS = {
   'theme-catalog': ['validate:catalog'],

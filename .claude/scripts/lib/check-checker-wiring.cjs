@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const args = process.argv.slice(2);
 const has = (value) => args.includes(value);
 // --staged: pre-commit 用。index に入っているファイルだけを見て、staged の検査スクリプトと
