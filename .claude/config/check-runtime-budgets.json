@@ -13,5 +13,14 @@
     { "name": "github-script-await", "budgetMs": 3000, "command": ["node", ".claude/scripts/lib/check-github-script-await.cjs"] },
     { "name": "ad-placement", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-ad-placement.cjs"] },
     { "name": "value-format", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-value-format.cjs", "--baseline"] }
-  ]
+  ],
+  "ciSteps": {
+    "suiteBudgetMs": 100000,
+    "steps": [
+      { "name": "workflow-commit-back", "budgetMs": 5000, "workflow": ".github/workflows/pr-quality-check.yml" },
+      { "name": "seo-meta-factual", "budgetMs": 18000, "workflow": ".github/workflows/pr-quality-check.yml" },
+      { "name": "image-generation-pipeline", "budgetMs": 38000, "workflow": ".github/workflows/pr-quality-check.yml" },
+      { "name": "theme-portfolio-state", "budgetMs": 39000, "workflow": ".github/workflows/pr-quality-check.yml" }
+    ]
+  }
 }

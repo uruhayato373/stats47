@@ -462,7 +462,8 @@ jobs:
     name: Contract Tests
     needs: changes
     # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates 65 step 直列 (実測 486 秒) から分離。
-    # tooling 自身の `node --test` 自己検査群。最重は Workflow Commit-back Contract Gate (115 秒)。
+    # tooling 自身の `node --test` 自己検査群。旧最重の Workflow Commit-back Contract Gate (115 秒) は
+    # 重い契約を差分連動の step へ分けて 1 秒になった (2026-11-13 の 5 run 実測)。現在の最重は Image Generation Pipeline (30〜41 秒)。
     # job を分けるのは並列化と「1 run で複数の失敗を報告する」ため (PR #974 は fail-fast で 1 件ずつ露出し 6 回目で通った)。
     # step 単位の continue-on-error は使わない: check-checker-wiring.cjs が fail-open と分類し registry の blocking と矛盾する。
     # git 履歴を使う step は無いので shallow checkout。
@@ -522,7 +523,10 @@ jobs:
         # ラチェット 1 つの赤で無関係な queue まで commit されない型 (是正ループが 17 日停止)。
         # sync-snapshots は同じ「成果を落とす」型を 2 つ抱えていた (2026-08-17):
         # 1 task の失敗で末尾 push に到達しない型と、timeout で push が途中打ち切られる型。
-        run: npm run test:workflow-commit-back
+        # 末尾の行は step の経過秒を予算 (.claude/config/check-runtime-budgets.json の ciSteps) と突き合わせる。
+        run: |
+          npm run test:workflow-commit-back
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step workflow-commit-back --elapsed-sec "$SECONDS"
 
       - name: 🔁 Scoped Workflow Contract Gate (差分連動)
         # ranking-scoped-workflow.test.mjs は sync-snapshots / generate-ogp-images の bash step を
@@ -595,6 +599,7 @@ jobs:
         run: |
           npm run type-check:image-pipeline
           npm run test:image-pipeline
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step image-generation-pipeline --elapsed-sec "$SECONDS"
         continue-on-error: false
 
       - name: 🗾 Japan Zue Evidence Inventory Gate
@@ -731,7 +736,8 @@ jobs:
   catalog-gates:
     name: Catalog Gates
     # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates から分離した data-configs SSOT 検証と portfolio state。
-    # `npx tsx` が 2,000 件超の metric registry を読む step 群 (SEO Meta Factual 46 秒 / Theme Portfolio State 23 秒)。
+    # `npx tsx` が 2,000 件超の metric registry を読む step 群
+    # (2026-11-13 の 5 run 実測: SEO Meta Factual 19〜24 秒 / Theme Portfolio State 27〜41 秒)。
     # git 履歴を使う step は無いので shallow checkout。
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -772,6 +778,7 @@ jobs:
           npm run theme:quality:test
           # 原典抽出の Python 部品 (文化財の検索結果・橋梁点検の年差)。property-prices は原典が無いと skip を明示する
           npm run theme:py:test
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step theme-portfolio-state --elapsed-sec "$SECONDS"
         continue-on-error: false
 
       - name: 📊 Affiliate Compliance / Operations Guard
@@ -916,6 +923,7 @@ jobs:
           # R2 の公開 URL を読むだけ (認証不要・書き込みなし)。
           # 規約: .claude/todo/backlog.md SEO-META-FACTUAL-GATE-01
           npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step seo-meta-factual --elapsed-sec "$SECONDS"
         continue-on-error: false
 
       - name: 🔗 Survey Master Coverage Gate

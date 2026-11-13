@@ -47,7 +47,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
 const BASELINE = resolve(REPO_ROOT, `${datasetDir("data-quality.state")}/seo-meta-facts-baseline.json`);
 const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
-const CONCURRENCY = 16;
+// 所要時間は R2 の往復待ちでほぼ決まる (約 1,240 件を読む)。手元の実測は 16 並列で 8.9〜10.2 秒、48 並列で 4.9〜5.0 秒、
+// どちらも判定不能 0 件 (2026-11-14・CI-SPEED-STATIC-GATES-HEAVY-STEPS-01)。
+const CONCURRENCY = 48;
 // cities.json also holds administrative wards, which the published municipality ranking leaves out.
 const MUNICIPALITY_RANKING_AREAS = resolveWardModeAreas(buildMunicipalityEntityPolicy(), "merged").codes;
 
