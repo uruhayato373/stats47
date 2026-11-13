@@ -178,6 +178,7 @@ updated: 2026-MM-DD
 - 月次・週次計画はカードのIDを参照し、タグや詳細を複製しない。
 - 領域と構え: 優先順位の正典は領域の台帳 `data/business/domain-stances.json` (構えの考え方は `docs/00_プロジェクト管理/02_収益化戦略.md` §5)。backlog の `[領域:]`・月次 `focus_domains`・週次 Must の整合は `strategy-lanes.cjs` が DG073〜078 で検査する (管理画面 `/strategy/lanes`)。
 - 完了・撤退・supersededはカードまたは行を削除し、Git履歴へ委ねる。
+- カードには未完了の行動だけを書く。済んだ作業の経緯 (何日に何をした・どのコミットで入れた) は書かず、「済み」は 1 行の要約に留める。backlog.md が 1 ファイルの上限 (1 MiB) の 9 割を超えると DG085、1 枚が 8KB を超えると DG086 が警告する (`docs-governance.json` の `todo.sizeBudget`)。上限を超えると、起票した人だけでなく作業ツリー全体のコミットが止まる。
 
 ## 整理・削除契約
 
