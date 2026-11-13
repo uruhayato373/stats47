@@ -176,6 +176,24 @@ test('実リポジトリの収益化戦略の領域表は壊れていない', ()
   assert.ok(board.lanes.length >= 3);
 });
 
+// 意図: 領域表の正本を Markdown から台帳へ移す途中 (STRATEGY-LEDGER-JSON-01 の段 1) で、2 つがずれたまま
+// 読み手を切り替えると、構えや KPI が黙って変わる。切り替えるまで同じ内容であることを固定する。
+test('台帳 business.domain-stances は収益化戦略の領域表と同じ内容を持つ', () => {
+  const root = path.resolve(__dirname, '..', '..', '..', '..');
+  const { datasetPath } = require('../../../../config/datasets.mjs');
+  const { DOMAINS } = require('../../../../config/paths.mjs');
+  const { parseLanes, STRATEGY_DOC } = require('../strategy-lanes.cjs');
+  const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
+  const labelOf = new Map(readJson(DOMAINS).domains.map((d) => [d.id, d.label]));
+  const fromLedger = readJson(datasetPath('business.domain-stances'))
+    .lanes.map(({ domain, ...rest }) => ({ name: labelOf.get(domain), ...rest }))
+    .sort((a, b) => a.order - b.order);
+  const fromDoc = parseLanes(fs.readFileSync(path.join(root, STRATEGY_DOC), 'utf8'));
+  assert.deepStrictEqual(fromDoc.errors, []);
+  const sameKeys = ({ order, name, stance, aim, gate, improvementMetrics, kpis }) => ({ order, name, stance, aim, gate, improvementMetrics, kpis });
+  assert.deepStrictEqual(fromLedger.map(sameKeys), fromDoc.lanes.map(sameKeys));
+});
+
 // ── KPI 配線 (DG079 / DG080)。意図: どの KPI を動かすか言えない施策を台帳に置かせない。
 // 登録経路は人の直接編集と CI の無人 run の 2 つあり、docs:check はその両方に掛かる。
 
