@@ -5,6 +5,7 @@ import { rankingRows } from './template-ranking-bars';
 import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
 
 export const RANKING_TILE_MAP_SAMPLE_ID = 'maximum-temperature-tile-map';
+const CAPITAL_CITY_SCOPE = /県庁所在市/;
 
 export async function renderRankingTileMap(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
   return renderTileMapChart(sampleRankingChart({ data: rankingRows(raw) }), theme);
@@ -20,6 +21,10 @@ export function renderTileMapChart(chart: RankingChart, theme: ChartTheme = LIGH
   if (!scale) throw Error('タイルマップの配色を解決できません。');
   return renderAll47TileSvg(
     rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value })),
-    { title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, formatValue: chart.formatValue, theme, baseAreaCode: chart.baseAreaCode }
+    {
+      title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, formatValue: chart.formatValue, theme, baseAreaCode: chart.baseAreaCode,
+      // Values of the prefectural capitals (the condition line says so) read by city: heading, tiles and legend counts.
+      capitalCities: CAPITAL_CITY_SCOPE.test(chart.note ?? ''),
+    }
   );
 }

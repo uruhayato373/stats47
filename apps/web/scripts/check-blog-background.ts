@@ -1,5 +1,4 @@
 #!/usr/bin/env tsx
-import { resolvePreferredArticleBackgroundSource } from './lib/blog-fullbleed-background';
 /**
  * 送り箱の記事に、今の内容に合う背景があるかを判定して JSON を 1 行出す (読み取り専用)。
  * quality-gate.mjs が push 前に呼ぶ。判定の規則は lib/blog-background-status.ts。
@@ -12,13 +11,10 @@ import { readFileSync } from 'node:fs';
 import { basename, dirname, join, relative } from 'node:path';
 import { SITE } from '@stats47/types';
 import {
-  parseBlogArticleImageContext,
-} from './lib/blog-article-background';
-import {
   backgroundRecord,
   decideBlogBackgroundStatus,
+  resolveGitBackgroundSource,
 } from './lib/blog-background-status';
-import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   computeLegacyPromptHashV1,
   computePromptHash,
@@ -72,18 +68,14 @@ async function main(): Promise<void> {
   const visual = resolveOgpVisual(parseOgpVisualFrontmatter(markdown));
   const promptArgs = { ...visual, title: derived.title };
   // 公開時と同じく、記事固有背景と旧カタログは画像の形式・寸法まで検証して使う。壊れていれば例外になる
-  const articleSource = await resolvePreferredArticleBackgroundSource(
-    PROJECT_ROOT, parseBlogArticleImageContext(slug, markdown)
-  );
-  const codexSource = articleSource ? null : await resolveCodexBackgroundSource(PROJECT_ROOT, slug);
-  const publishedBackground =
-    articleSource || codexSource ? null : await readPublishedBackground(slug);
+  const gitSource = await resolveGitBackgroundSource(PROJECT_ROOT, slug, markdown);
+  const publishedBackground = gitSource ? null : await readPublishedBackground(slug);
   const status = decideBlogBackgroundStatus({
     slug,
     articlePath,
-    hasFullbleedAsset: articleSource?.promptVersion === 'blog-fullbleed-v1',
-    hasArticleAsset: articleSource !== null,
-    hasCodexCatalog: codexSource !== null,
+    hasFullbleedAsset: gitSource?.kind === 'fullbleed-asset',
+    hasArticleAsset: gitSource?.kind === 'article-asset',
+    hasCodexCatalog: gitSource?.kind === 'codex-catalog',
     publishedBackground,
     currentPromptHashes: [computePromptHash(promptArgs), computeLegacyPromptHashV1(promptArgs)].filter(
       (hash): hash is string => typeof hash === 'string'

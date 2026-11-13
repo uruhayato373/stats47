@@ -1,6 +1,5 @@
 #!/usr/bin/env tsx
 import { blogRendererSourcesForBackground, renderBlogImageBundleForBackground } from './lib/blog-fullbleed-render';
-import { hasLocalArticleBackground, resolvePreferredArticleBackgroundSource } from './lib/blog-fullbleed-background';
 /**
  * R2 上の公開記事を入力に、変更された blog image bundle だけを生成する。
  *
@@ -23,7 +22,6 @@ import {
 } from '@stats47/r2-storage/image-pipeline';
 import dotenv from 'dotenv';
 
-import { BLOG_CODEX_BACKGROUND_BY_SLUG } from './data/blog-codex-background-catalog';
 import {
   BLOG_AI_BACKGROUND_NORMALIZER_SOURCES,
   BLOG_IMAGE_GENERATOR_SPEC,
@@ -39,9 +37,10 @@ import {
 } from './lib/blog-ai-background-cache';
 import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
 import {
-  parseBlogArticleImageContext,
-} from './lib/blog-article-background';
-import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
+  blogBackgroundBlockMessage,
+  hasGitBackground,
+  resolveGitBackgroundSource,
+} from './lib/blog-background-status';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
   BLOG_IMAGE_STAGE_ROOT,
@@ -337,9 +336,7 @@ async function main(): Promise<void> {
   const isCodexPilot =
     Boolean(options.outDir) &&
     Boolean(options.slugs) &&
-    options.slugs!.every(
-      (slug) => hasLocalArticleBackground(PROJECT_ROOT, slug) || BLOG_CODEX_BACKGROUND_BY_SLUG[slug] !== undefined
-    );
+    options.slugs!.every((slug) => hasGitBackground(PROJECT_ROOT, slug));
   if (!store && !isCodexPilot) {
     throw new Error(
       'blog画像の既存背景検証にはR2 S3資格情報が必要です。' +
@@ -411,15 +408,12 @@ async function main(): Promise<void> {
         ? { ogpVisualType: options.visualTypeOverride }
         : {}),
     });
-    const articleSource = await resolvePreferredArticleBackgroundSource(
+    // 背景の選択順 (git の背景 > 公開済み AI 背景の再利用) と案内文は lib/blog-background-status.ts が持つ
+    const codexSource = await resolveGitBackgroundSource(
       PROJECT_ROOT,
-      parseBlogArticleImageContext(slug, markdown)
+      slug,
+      markdown
     );
-    const legacyCodexSource = articleSource ? null : await resolveCodexBackgroundSource(
-      PROJECT_ROOT,
-      slug
-    );
-    const codexSource = articleSource ?? legacyCodexSource;
     const ai: AiDescriptor = codexSource
       ? {
           prompt: codexSource.prompt,
@@ -504,9 +498,7 @@ async function main(): Promise<void> {
 
     if (!options.aiBackground && remoteWasAi && !reusableSha) {
       throw new BlogImageBlockedError(
-        `${slug}: AI背景のpromptまたは画像が陳腐化しています。` +
-          '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください ' +
-          '(npm run blog-images:codex -- request-article --slug <slug>)'
+        `${slug}: ${blogBackgroundBlockMessage('stale-ai', slug)}`
       );
     }
     const needsAiGeneration = options.aiBackground && !reusableSha;
@@ -520,8 +512,7 @@ async function main(): Promise<void> {
         : null;
     if (!background && !needsAiGeneration) {
       throw new BlogImageBlockedError(
-        `${slug}: 記事固有背景がありません。` +
-          'blog-images:codex request-article で生成してください'
+        `${slug}: ${blogBackgroundBlockMessage('missing', slug)}`
       );
     }
     const plan = needsAiGeneration
@@ -686,7 +677,7 @@ async function main(): Promise<void> {
         throw new Error('generation plan が確定していません');
       }
       if (!item.background) {
-        throw new Error(`${item.slug}: 記事固有背景がありません`);
+        throw new Error(`${item.slug}: ${blogBackgroundBlockMessage('missing', item.slug)}`);
       }
       const files = assetFiles(item.plan, pilotRoot, item.slug);
       const keys = blogImageKeys(item.slug);

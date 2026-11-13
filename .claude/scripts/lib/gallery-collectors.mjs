@@ -29,7 +29,6 @@ export const OGP_TABS = [
   "category-ogp",
   "areas-ogp",
   "blog-card",
-  "ranking-card",
   "note-cover",
   "pref-silhouette",
 ];
@@ -303,25 +302,6 @@ export async function buildTab(tab, opts) {
           images: [
             { variant: "light", url: `${r2}/app/blog/${s}/thumbnail-light.webp` },
             { variant: "dark", url: `${r2}/app/blog/${s}/thumbnail-dark.webp` },
-          ],
-        })),
-      };
-    }
-    case "ranking-card": {
-      let keys = await enumerateFromSitemap(site, /stats47\.jp\/ranking\/([a-z0-9-]+)$/);
-      if (limit) keys = keys.slice(0, limit);
-      else if (!all) keys = sample(keys, rankingSample);
-      return {
-        source: "r2-static",
-        aspect: "16:9",
-        r2KeyPattern: `app/ranking/<key>/thumbnail-{light,dark}.webp`,
-        entries: keys.map((k) => ({
-          key: k,
-          label: k,
-          pageUrl: `${site}/ranking/${k}`,
-          images: [
-            { variant: "light", url: `${r2}/app/ranking/${k}/thumbnail-light.webp` },
-            { variant: "dark", url: `${r2}/app/ranking/${k}/thumbnail-dark.webp` },
           ],
         })),
       };

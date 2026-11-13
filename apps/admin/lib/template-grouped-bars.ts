@@ -27,6 +27,11 @@ const VALUE_GAP = 8;
 const VALUE_SIDE_ROOM = 4;
 // The height of a digit as a share of the font size.
 const DIGIT_HEIGHT = 0.72;
+const LEGEND_LINE = 48;
+// Below each row of bars: the line of group names.
+const GROUP_NAME_ROOM = 56;
+// Clear space between a row's group names and the values of the row under it.
+const ROW_GAP = 28;
 
 /**
  * How a value sits on its bar: level when the longest value fits the bar's width, turned upward when only
@@ -43,38 +48,49 @@ function valueLabelPlan(barWidth: number, longest: string) {
 /**
  * For categories that are not a timeline, such as the twelve months of a year's cycle. A line would read
  * as a trend across them. The value axis starts at zero, each bar carries its value, and one legend sits
- * above the plot. Ticks and grid lines are drawn only when the bars are too thin to carry a value
- * (chart-image-copy.md: values go on the bars, ticks are off by default).
+ * above the plot, wrapped to the frame's width. Groups whose bars are too thin for a value in one row are
+ * drawn in two rows of half the groups, on one scale. Ticks and grid lines are drawn only when the bars
+ * are too thin even then (chart-image-copy.md: values go on the bars, ticks are off by default).
  */
 export function renderGroupedBarsChart(chart: GroupedBarChart, theme: ChartTheme = LIGHT_THEME) {
   const { groups, series } = chart;
   const values = series.flatMap((s) => s.values.flatMap((v) => (v === null ? [] : [v])));
   if (!values.length || series.some((s) => s.values.length !== groups.length)) throw Error('棒の値と区分の数を確認してください。');
-  const legendY = sampleBodyTop(Boolean(chart.note)) + 26;
-  let legendX: number = SAMPLE_FRAME.left;
+  let legendX: number = SAMPLE_FRAME.left, legendY = sampleBodyTop(Boolean(chart.note)) + 26;
   const legend = series.map((s, i) => {
+    const width = 38 + textWidth(s.label, 30);
+    if (legendX + width > SAMPLE_FRAME.right && legendX > SAMPLE_FRAME.left) { legendX = SAMPLE_FRAME.left; legendY += LEGEND_LINE; }
     const item = `<rect x="${legendX}" y="${legendY - 22}" width="${SWATCH}" height="${SWATCH}" rx="4" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/><text x="${legendX + 38}" y="${legendY}" font-size="30" fill="${theme.ink}">${escapeXml(s.label)}</text>`;
-    legendX += 38 + textWidth(s.label, 30) + 36;
+    legendX += width + 36;
     return item;
   }).join('');
-  const top = legendY + 40, bottom = SAMPLE_FRAME.bodyBottom - 56;
+  const top = legendY + 40;
   const decimals = Math.min(2, Math.max(0, ...values.map((v) => (String(v).split('.')[1] ?? '').length)));
   const format = (v: number) => v.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-  const slotWidth = (left: number) => ((SAMPLE_FRAME.right - left) / groups.length - GROUP_GAP) / series.length;
+  const slotWidth = (left: number, perRow: number) => ((SAMPLE_FRAME.right - left) / perRow - GROUP_GAP) / series.length;
   const longest = values.map(format).reduce((a, b) => (textWidth(b, VALUE_SIZE) > textWidth(a, VALUE_SIZE) ? b : a));
-  const label = valueLabelPlan(slotWidth(SAMPLE_FRAME.left), longest);
+  // One row when its bars can carry a value; otherwise two rows of half the groups, whose bars are twice as wide.
+  const layouts = [1, 2].map((rows) => {
+    const perRow = Math.ceil(groups.length / rows);
+    return { rows, perRow, label: valueLabelPlan(slotWidth(SAMPLE_FRAME.left, perRow), longest) };
+  });
+  const { rows, perRow, label } = layouts.find((layout) => layout.label) ?? layouts[0];
+  // Every row has the same height and domain, so a bar's length means the same value in each.
+  const rowHeight = (SAMPLE_FRAME.bodyBottom - top - (rows - 1) * ROW_GAP) / rows;
+  const rowTop = (row: number) => top + row * (rowHeight + ROW_GAP);
+  const rowBottom = (row: number) => rowTop(row) + rowHeight - GROUP_NAME_ROOM;
   const extent = [Math.min(0, ...values), Math.max(0, ...values)];
-  const y = label
-    ? scaleLinear().domain(extent).range([bottom - (extent[0] < 0 ? label.room : 0), top + (extent[1] > 0 ? label.room : 0)])
-    : scaleLinear().domain(extent).nice().range([bottom, top]);
-  const ticks = label ? [] : y.ticks(5);
+  const yOf = (row: number) => (label
+    ? scaleLinear().domain(extent).range([rowBottom(row) - (extent[0] < 0 ? label.room : 0), rowTop(row) + (extent[1] > 0 ? label.room : 0)])
+    : scaleLinear().domain(extent).nice().range([rowBottom(row), rowTop(row)]));
+  const ticks = label ? [] : yOf(0).ticks(5);
   const left = SAMPLE_FRAME.left + (label ? 0 : Math.max(...ticks.map((t) => textWidth(t.toLocaleString('en-US'), TICK_SIZE))) + 20);
-  const groupWidth = (SAMPLE_FRAME.right - left) / groups.length;
-  const barWidth = slotWidth(left);
+  const groupWidth = (SAMPLE_FRAME.right - left) / perRow;
+  const barWidth = slotWidth(left, perRow);
   if (barWidth < MIN_BAR_WIDTH) throw Error(`棒が細すぎます (${groups.length} 区分 × ${series.length} 系列)。系列を減らしてください。`);
   const grid = label
-    ? `<line x1="${left}" y1="${y(0).toFixed(1)}" x2="${SAMPLE_FRAME.right}" y2="${y(0).toFixed(1)}" stroke="${theme.line}" stroke-width="2.5"/>`
-    : ticks.map((tick) => `<line x1="${left}" y1="${y(tick)}" x2="${SAMPLE_FRAME.right}" y2="${y(tick)}" stroke="${theme.line}" stroke-width="${tick === 0 ? 2.5 : 1.5}"/><text x="${left - 16}" y="${y(tick) + 10}" text-anchor="end" font-size="${TICK_SIZE}" fill="${theme.muted}">${tick.toLocaleString('en-US')}</text>`).join('');
+    ? Array.from({ length: rows }, (_, row) => `<line x1="${left}" y1="${yOf(row)(0).toFixed(1)}" x2="${SAMPLE_FRAME.right}" y2="${yOf(row)(0).toFixed(1)}" stroke="${theme.line}" stroke-width="2.5"/>`).join('')
+    : ticks.map((tick) => `<line x1="${left}" y1="${yOf(0)(tick)}" x2="${SAMPLE_FRAME.right}" y2="${yOf(0)(tick)}" stroke="${theme.line}" stroke-width="${tick === 0 ? 2.5 : 1.5}"/><text x="${left - 16}" y="${yOf(0)(tick) + 10}" text-anchor="end" font-size="${TICK_SIZE}" fill="${theme.muted}">${tick.toLocaleString('en-US')}</text>`).join('');
   const valueLabel = (value: number, centerX: number, end: number) => {
     if (!label) return '';
     const up = value >= 0;
@@ -84,7 +100,8 @@ export function renderGroupedBarsChart(chart: GroupedBarChart, theme: ChartTheme
     return `<text data-label="value" x="${x}" y="${anchorY}" text-anchor="${up ? 'start' : 'end'}" transform="rotate(-90 ${x} ${anchorY})" font-size="${label.size}" fill="${theme.ink}">${format(value)}</text>`;
   };
   const bars = groups.map((group, g) => {
-    const x0 = left + g * groupWidth + GROUP_GAP / 2;
+    const row = Math.floor(g / perRow), y = yOf(row);
+    const x0 = left + (g % perRow) * groupWidth + GROUP_GAP / 2;
     const rects = series.map((s, i) => {
       const value = s.values[g];
       if (value === null) return '';
@@ -92,7 +109,7 @@ export function renderGroupedBarsChart(chart: GroupedBarChart, theme: ChartTheme
       const x = x0 + i * barWidth;
       return `<rect data-value="${value}" x="${x.toFixed(1)}" y="${Math.min(start, end).toFixed(1)}" width="${(barWidth - 1).toFixed(1)}" height="${Math.abs(start - end).toFixed(1)}" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/>${valueLabel(value, x + (barWidth - 1) / 2, end)}`;
     }).join('');
-    return `<g data-group="${escapeXml(group)}">${rects}<text x="${(x0 + (groupWidth - GROUP_GAP) / 2).toFixed(1)}" y="${bottom + 44}" text-anchor="middle" font-size="${AXIS_LABEL_SIZE}" fill="${theme.muted}">${escapeXml(group.replace(/月$/, ''))}</text></g>`;
+    return `<g data-group="${escapeXml(group)}">${rects}<text x="${(x0 + (groupWidth - GROUP_GAP) / 2).toFixed(1)}" y="${rowBottom(row) + 44}" text-anchor="middle" font-size="${AXIS_LABEL_SIZE}" fill="${theme.muted}">${escapeXml(group.replace(/月$/, ''))}</text></g>`;
   }).join('');
   return sampleFrame({
     title: chart.title, titleSize: fitTitleSize(chart.title), meta: chart.meta, note: chart.note, source: chart.source,

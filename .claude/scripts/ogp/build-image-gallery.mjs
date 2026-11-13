@@ -14,13 +14,13 @@
  *
  * ## タブ (--tabs で絞り込み)
  *   blog-ogp ranking-ogp theme-ogp category-ogp areas-ogp  … Satori 動的 OGP
- *   blog-card ranking-card                                   … リンクカード (light/dark)
+ *   blog-card                                                … リンクカード (light/dark)
  *   note-cover                                               … note カバー
  *
  * ## 使い方
  *   node .claude/scripts/ogp/build-image-gallery.mjs                       # 全タブ (ranking はサンプル 30)
  *   node .claude/scripts/ogp/build-image-gallery.mjs --tabs blog-ogp,blog-card --limit 20
- *   node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check   # 欠落を GET で確定
+ *   node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-ogp --check   # 欠落を GET で確定
  *   node .claude/scripts/ogp/build-image-gallery.mjs --all                 # ranking も全量
  *   node .claude/scripts/ogp/build-image-gallery.mjs --audit               # 棚卸し → state/ogp/inventory.json
  *   node .claude/scripts/ogp/build-image-gallery.mjs --out /tmp/g.html

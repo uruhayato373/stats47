@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { buildTab } from '../gallery-collectors.mjs';
+import { OGP_TABS, buildTab } from '../gallery-collectors.mjs';
 
 test('noteカバーは有料・専用デザインも共通台帳から列挙し、本文用の公開R2除外を引き継がない', async () => {
   const { mkdtempSync, mkdirSync, writeFileSync } = await import('node:fs');
@@ -79,4 +79,10 @@ test('note 本文画像の監査対象は有料記事と専用デザインのシ
   const generatorSet = [...literal.matchAll(/'([^']+)'/g)].map((m) => m[1]).sort();
   assert.deepEqual(generatorSet, [...BESPOKE_COVER_VERTICALS].sort());
   assert.match(generator, /!n\.isPrivate/, '生成側も有料記事を除外する');
+});
+
+// RANKING-CARD-WEBP-UNUSED-01: ranking カード WebP は読み手が無く生成を止めた。タブに残すと週次監査が「欠落」を数え続ける
+test('ranking カード WebP のタブは持たない (生成を止めたので監査が欠落を数えない)', () => {
+  assert.ok(!OGP_TABS.includes('ranking-card'));
+  assert.ok(OGP_TABS.includes('ranking-ogp'));
 });

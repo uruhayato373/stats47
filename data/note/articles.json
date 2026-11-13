@@ -337,46 +337,6 @@
       ]
     },
     {
-      "key": "A-laborwage-paid-leave-utilization-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】有給休暇取得率ランキング｜休める県・休めない県",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-paid-leave-utilization-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "fc33f97762237e6b29c3045de846f97ab319c5a60cf3599c42f2d5e1dcad545a",
-          "files": 5,
-          "bytes": 100549,
-          "savedAt": "2026-10-12T22:05:55.248Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "A-laborwage-wages-by-industry-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】産業別平均賃金ランキング｜稼げる業界の地域差",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "ad32b27d6df64329c668e0fd80589c141089fe9c7859cc1a118dcdca95653664",
-          "files": 5,
-          "bytes": 100273,
-          "savedAt": "2026-10-24T11:59:24.493Z"
-        },
-        "verifiedAt": "2026-10-24T11:59:24.493Z"
-      }
-    },
-    {
       "key": "a-agricultural-employment-population",
       "vertical": "stats47-note",
       "series": "A",

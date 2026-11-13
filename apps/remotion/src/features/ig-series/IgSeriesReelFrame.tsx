@@ -29,7 +29,7 @@ interface IgSeriesReelFrameProps {
   children: React.ReactNode;
 }
 
-/** IG シリーズ共通のリール用フレーム（安全余白・タグ・ブランド行・出典） */
+/** IG シリーズ共通のリール用フレーム（安全余白・タグ・出典） */
 export const IgSeriesReelFrame: React.FC<IgSeriesReelFrameProps> = ({
   series,
   tag,

@@ -21,6 +21,10 @@ import {
   BLOG_AI_BACKGROUND_WIDTH,
 } from './blog-ai-background-normalizer';
 import {
+  backgroundRecord,
+  classifyPublishedBackground,
+} from './blog-background-status';
+import {
   adoptLegacyAiBackgroundSha256,
   blogImageKeys,
 } from './blog-image-generation';
@@ -412,21 +416,6 @@ function parseJsonObject(
   }
 }
 
-function backgroundRecord(value: Record<string, unknown>) {
-  const metadata =
-    value.metadata &&
-    typeof value.metadata === 'object' &&
-    !Array.isArray(value.metadata)
-      ? (value.metadata as Record<string, unknown>)
-      : value;
-  const background = metadata.background;
-  return background &&
-    typeof background === 'object' &&
-    !Array.isArray(background)
-    ? (background as Record<string, unknown>)
-    : null;
-}
-
 /**
  * 1 記事だけの画像契約の不一致 (manifest・背景の SHA・metadata が食い違う)。通信や資格情報の失敗とは違い、
  * その記事を直すまで画像を作れないだけなので、週次の自己修復はこの記事を保留して他の記事の生成を続ける。
@@ -506,9 +495,12 @@ export async function readPublishedBackgroundState(options: {
       `${options.slug}: AI背景SHAが共通manifestのasset契約と一致しません`
     );
   }
+  // 再利用できる条件 (promptHash の照合) は blog-background-status.ts の 1 か所に置く
   if (
-    background.promptHash !== options.descriptor.promptHash &&
-    background.promptHash !== options.descriptor.legacyPromptHash
+    classifyPublishedBackground(background, [
+      options.descriptor.promptHash,
+      options.descriptor.legacyPromptHash,
+    ]) !== 'published-ai'
   ) {
     return { source: 'ai', reusable: null };
   }

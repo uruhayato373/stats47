@@ -107,6 +107,34 @@ describe("buildJapanSeriesRows", () => {
     }
   });
 
+  it("★大文字小文字だけ違う同じ単位 (MWh と全角の Ｍｗｈ) は同じ単位として受ける (METRIC-GATE-FOLLOWUP-02)", () => {
+    // 指標定義は MWh、e-Stat の項目定義 H5104 の単位は全角の「Ｍｗｈ」(NFKC 後は Mwh)。
+    const result = buildJapanSeriesRows(
+      [{ yearCode: "2023", yearName: "2023年度", value: 1000, unit: "Ｍｗｈ" }],
+      "MWh",
+    );
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.rows).toEqual([{ yearCode: "2023", yearName: "2023年度", value: 1000, unit: "MWh" }]);
+    }
+  });
+
+  it("電力の mW と MW は大文字小文字で別倍率なので、同じ単位として受けない", () => {
+    const result = buildJapanSeriesRows(
+      [{ yearCode: "2023", yearName: "2023年度", value: 1, unit: "mW" }],
+      "MW",
+    );
+    expect(result.ok).toBe(false);
+  });
+
+  it("倍率の違う単位 (kWh と MWh) は同じ単位として受けない", () => {
+    const result = buildJapanSeriesRows(
+      [{ yearCode: "2023", yearName: "2023年度", value: 1, unit: "ｋＷｈ" }],
+      "MWh",
+    );
+    expect(result.ok).toBe(false);
+  });
+
   it("NFKC 正規化しても異なる単位 (プレースホルダ '‐' 等) は引き続き不一致として停止する", () => {
     const result = buildJapanSeriesRows(
       [{ yearCode: "1980", yearName: "1980年", value: null, unit: "‐" }],

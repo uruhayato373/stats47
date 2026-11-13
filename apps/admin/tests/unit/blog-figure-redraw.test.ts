@@ -72,4 +72,26 @@ describe('ブログの図の描き直しの型', () => {
     const items = itemBarChartFromArticleData({ ...article(), data: article().data.slice(0, 5) }, { metric: { key: 'x', yearFormat: 'fiscal' } });
     expect(items).toMatchObject({ yearLabel: '2022年度' });
   });
+
+  it('県庁所在市の値のタイル地図は、見出しもタイルも凡例も市で書く', () => {
+    const kakei = { key: 'x', subtitle: '都道府県庁所在市の二人以上世帯の年間支出額', source: { kind: 'kakei-chousa', displayName: '家計調査' } };
+    // 1 県だけ離れた値は配色を段階にし、凡例が段ごとの数を持つ
+    const data = names.map((name, i) => ({ areaName: name, value: i ? 100 - i : 500 }));
+    const svg = renderTileMapChart(ranking(article({ title: '大人用サンダル消費支出額', unit: '円', data }), kakei));
+    expect(svg).toContain('>上位3市</text>');
+    expect(svg).not.toContain('上位3県');
+    expect(svg).toContain('>札幌市</text>');
+    expect(svg).toContain('>東京区部</text>');
+    expect(svg).not.toMatch(/>(北海道|東京)<\/text>/);
+    expect(svg).toMatch(/>\d+市<\/text>/);
+    expect(svg).not.toMatch(/>\d+県<\/text>/);
+    // 範囲は 1 回だけ書く (定義の行が県庁所在市と書いていれば、単位の行に重ねない)
+    expect(svg.match(/県庁所在市/g)).toHaveLength(1);
+    // 副題が範囲を書かない家計調査の指標も、条件の行が範囲を持つので市で書く
+    expect(renderTileMapChart(ranking(article(), { ...kakei, subtitle: '二人以上の世帯' }))).toContain('>上位3市</text>');
+    // 県の値の指標は県のまま
+    const pref = renderTileMapChart(ranking(article(), { key: 'x', source: { displayName: '地方財政状況調査' } }));
+    expect(pref).toContain('>上位3県</text>');
+    expect(pref).toContain('>北海道</text>');
+  });
 });

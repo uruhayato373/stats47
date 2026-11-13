@@ -651,9 +651,8 @@ export const DATASETS = [
     refs: [
       { field: "posts[].parent_post_id", to: "sns.posts", key: "posts[].id" },
       // X・Threads の投稿のキャプションの型は X カタログの templates[].id。Instagram・YouTube の template (ranking・area-carousel・bcr など) は別の体系なので対象にしない。
-      // 素材の取り込み (planning.origin=material-import) が draft に domain 名 (ranking・buzz-map) を仮の template として入れる 10 件 (2026-11-14 時点) があるので、
-      // 下書きは対象にしない。キャプションを書いて予約・投稿へ進めた投稿 (draft 以外) はカタログの id でなければ止める
-      { field: "posts[].template", where: { platform: ["x", "threads"] }, unless: { status: "draft" }, to: "sns.x-catalog", key: "templates[].id" },
+      // 下書きも対象にする。素材の取り込み (planning.origin=material-import) は型が無い素材の template を空にし、domain 名 (ranking・buzz-map) を入れない
+      { field: "posts[].template", where: { platform: ["x", "threads"] }, to: "sns.x-catalog", key: "templates[].id" },
       // 投稿が使った指標。外部公開物の索引 (data/content/external.json) が指標へ関係を張る入力。参照先は domain で分ける
       // (2026-10-27。それまでは全 domain を指標の registry と照合し、Geo の集計値名などで 92 件を warn にしていた)。
       //   geo         Geo 分析の集計値の名前 (floodExposureShare2050 など) か都道府県の指標
@@ -667,13 +666,13 @@ export const DATASETS = [
       },
       // ranking の domain は、これから出す投稿 (draft・scheduled) を現行の指標と照合する
       { field: "posts[].content_key", where: { domain: "ranking" }, unless: { status: ["posted", "deleted"] }, to: "registry:metrics" },
-      // 外に出た記録 (posted・deleted) は書き換えないので、旧 slug (301 で現行の指標へ届く) も許す。残る warn は参照先の正本が無いもの:
-      // YouTube の棒グラフレース動画の key (bcr-<指標>-<始年>-<終年>。指標は metric_keys 側で照合する) 31 件と、
-      // note の記事 key・YouTube の動画 key を ranking として記録した 2 件 (2026-10-27 時点)
+      // 外に出た記録 (posted・deleted) は書き換えないので、旧 slug (301 で現行の指標へ届く) も許す。
+      // YouTube の動画 key (棒グラフレースの bcr-<指標>-<始年>-<終年>は指標を metric_keys 側で照合する) と note の記事 key は、指標の key ではないので照合しない
       {
-        field: "posts[].content_key", where: { domain: "ranking", status: ["posted", "deleted"] }, to: "registry:ranking-content-keys",
+        field: "posts[].content_key", where: { domain: "ranking", status: ["posted", "deleted"] }, unless: { platform: ["youtube", "note"] },
+        to: "registry:ranking-content-keys",
         severity: "warn",
-        why: "投稿済みの記録は書き換えない。棒グラフレース動画の key など、参照先の正本が無い過去の記録だけが残る",
+        why: "投稿済みの記録は書き換えない。YouTube の動画 key (bcr-<指標>-<始年>-<終年>・yoy-landscape-v2) と note の記事 key は別の体系で、ranking の key と照合しない。X などの投稿は照合する",
       },
     ],
   }),

@@ -103,7 +103,12 @@ describe("ブラウザ向け・埋め込み用の入口", () => {
  * middleware は Edge ランタイムで動き、リクエストごとに全指標 registry (3,000 件超) を抱えてはいけない
  * (`legacy-category-keys.ts` が軽い subpath を使う理由)。url-policy → known-japan-slugs → geo-scope の経路で
  * registry へ入っていたのを、全国テーマの slug の一覧を台帳の JSON から直接引く形に変えた (MIDDLEWARE-REGISTRY-BUNDLE-01)。
- * all-themes は別の既存の経路 (AREA_THEME_SLUGS) で入っており、この検査の対象は registry だけ。
+ * all-themes は別の既存の経路 (AREA_THEME_SLUGS) で入っているが、検査の対象には足さない (METRIC-GATE-FOLLOWUP-02・2026-11-14 の実測)。
+ * middleware.ts を esbuild (platform=neutral・minify・next は external) で束ねると 1,233,313 バイトで、area-theme-slugs を空の stub に
+ * 替えて束ね直しても 1,233,169 バイトだった。all-themes 経由で増えるのは 144 バイトで、all-themes.ts 自体は 1,404 バイトしかない
+ * (テーマの指標定義は theme-catalog 側にあり、all-themes は題と key だけを持つ)。サイズの大半は cities.json (188KB)・tags.json (97KB)・
+ * sitemap-ranking-keys.ts (95KB)・known-ranking-keys.ts (95KB) などの一覧で、all-themes 由来ではない。
+ * 検査の対象は registry だけ。all-themes を足すと、144 バイトのために AREA_THEME_SLUGS の経路の組み替えが要る。
  */
 describe("middleware (Edge)", () => {
   it("middleware.ts から全指標 registry へ値の import がつながらない", () => {

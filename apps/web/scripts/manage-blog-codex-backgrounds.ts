@@ -11,8 +11,8 @@ import {
 import {
   parseBlogArticleImageContext,
 } from './lib/blog-article-background';
-import { createFullbleedImagegenRequest, ingestFullbleedBackgroundAsset, hasLocalArticleBackground } from './lib/blog-fullbleed-background';
-import { BLOG_CODEX_BACKGROUND_BY_SLUG } from './data/blog-codex-background-catalog';
+import { hasGitBackground } from './lib/blog-background-status';
+import { createFullbleedImagegenRequest, ingestFullbleedBackgroundAsset } from './lib/blog-fullbleed-background';
 import { SITE } from '@stats47/types';
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
@@ -102,7 +102,7 @@ async function createArticleQueue(force: boolean): Promise<void> {
     })
   );
   const targets = states.filter((state) => {
-    const localExists = hasLocalArticleBackground(PROJECT_ROOT, state.slug) || Boolean(BLOG_CODEX_BACKGROUND_BY_SLUG[state.slug]);
+    const localExists = hasGitBackground(PROJECT_ROOT, state.slug);
     // Even --force must not replace an existing article illustration.
     return !localExists && !(state.source === 'ai' && state.sha256) &&
       (force || state.source === 'shared' || !state.sha256);
