@@ -38,3 +38,17 @@ test("大学収容力指数・年間日照時間・共働き世帯割合・高�
   // 計算式は大学入学者数 ÷ 前年度の大学進学者数
   assert.match(byKey("university-capacity-index"), /大学入学者/);
 });
+
+// METRIC-GATE-FOLLOWUP-01: 「読み違い注意」は題名に「指数」があるだけで「指数 (基準=100)」と出していた。
+// 大学収容力指数は入学者数 ÷ 前年度進学者数 × 100 で、全国=100 の指数ではない。基準は単位・副題が宣言するときだけ書く。
+test("読み違い注意は、単位や副題が基準を宣言する指数にだけ「基準=100」を出す", async () => {
+  const { buildSheet } = await import("../build-metric-definition-sheet.ts");
+  const rowOf = (key: string) => buildSheet([key]).split("\n").find((l) => l.startsWith("| `")) ?? "";
+  // 算式で決まる指数 (全国=100 ではない) には基準を言わない
+  for (const key of ["university-capacity-index", "aging-index", "fiscal-strength-index"]) {
+    assert.doesNotMatch(rowOf(key), /基準=100/, key);
+  }
+  // 単位が基準を宣言する指数は、その基準をそのまま出す
+  assert.match(rowOf("consumer-price-difference-index-overall"), /指数 \(全国=100\): 実額に換算しない/);
+  assert.match(rowOf("cpi-regional-difference-index-total-tokyo100"), /指数 \(東京=100\): 実額に換算しない/);
+});

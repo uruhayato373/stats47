@@ -134,7 +134,12 @@ function cautions(c: MetricConfig): string {
   const out: string[] = [];
   if (/[%％]/.test(c.unit)) out.push("構成比・割合: 分母が減れば上がる。合計 100% の費目は他費目と負の相関が計算上出る");
   if (c.calculation?.isCalculated && c.calculation.type === "ratio") out.push("分子と分母の対象・年・価格基準 (名目/実質) が同じかを確認");
-  if (/指数/.test(c.title)) out.push("指数 (基準=100): 実額に換算しない");
+  if (/指数/.test(c.title)) {
+    // 基準 (全国=100 等) は単位・副題が宣言するときだけ書く。題名に「指数」があるだけでは基準を決められない
+    // (大学収容力指数は入学者数 ÷ 前年度進学者数 × 100 で、全国=100 の指数ではない。METRIC-GATE-FOLLOWUP-01)
+    const base = `${c.unit} ${c.subtitle ?? ""}`.normalize("NFKC").match(/[^\s()（）:：]+\s*=\s*100/)?.[0].replace(/\s/g, "");
+    out.push(base ? `指数 (${base}): 実額に換算しない` : "指数: 実額に換算しない。基準は定義の算式で確認する");
+  }
   if (/相関|係数/.test(c.title)) out.push("相関係数 r は説明割合ではない (r² が寄与)");
   if (/世帯/.test(scope(c))) out.push("世帯平均を個人の手取り・県民全体に置き換えない");
   if (c.note) out.push(c.note);

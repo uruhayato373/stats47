@@ -3,6 +3,7 @@
  * SSDS クリーン候補 → metric config .ts を生成 (バッチ拡充)。
  * 各 spec: {statsDataId, cdCat01, key, title, unit, category, decimals, norm}
  * norm: "count"(人/世帯 → per_population+per_area) | "money"(→per_population) | "none"(率)
+ *   公式の項目名が「…当たり」の # 項目は norm の指定に関わらず換算を付けない (lib/ssds-rate-name.mjs)。
  *
  * 安全弁: 既存 title と重複する spec は自動スキップ (validate:config の dup-title 回避)。
  * seoTitle/seoDescription は投入後にデータから生成するため出さない。
@@ -21,6 +22,7 @@ import fs from "node:fs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isOfficialRate } from "./lib/ssds-rate-name.mjs";
 import { buildRules, decideYearFormat, indexDefinitions } from "./lib/ssds-year-format.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -81,9 +83,12 @@ function splitTitle(full) {
   return { title: full, subtitle: null };
 }
 
+const rateNameCache = new Map();
+
 function emit(s, title, subtitle, yearFormat) {
   const ident = camel(s.key);
-  const norm = normOptions(s.norm, s.unit);
+  // 公式の項目名が「…当たり」の率は算式で割り終えている。spec が count / money でも換算を重ねない
+  const norm = isOfficialRate(PROJECT_ROOT, s, rateNameCache) ? [] : normOptions(s.norm, s.unit);
   const cfg = {
     isActive: true,
     key: s.key, title, ...(subtitle ? { subtitle } : {}), unit: s.unit, category: s.category,

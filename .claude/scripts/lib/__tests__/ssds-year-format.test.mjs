@@ -274,3 +274,23 @@ test("生成器: 年の区切りが決まらない指標は書かずに止まる
   // 決まる指標まで巻き添えで止めない
   assert.equal(yearFormatOf(result.stdout, "zz-year-format-probe-census"), "calendar");
 });
+
+/** --dry-run の標準出力から、key の指標の定義 (export const x: MetricConfig = {...};) を読んで normalizationOptions を返す */
+const normalizationOf = (stdout, key) => {
+  const file = stdout.split("--- ").find((chunk) => chunk.startsWith(`${key}.ts ---`));
+  if (!file) return null;
+  const body = file.slice(file.indexOf("= {") + 2, file.lastIndexOf("};") + 1).replace(/\.\.\.DEFAULT_METRIC_PRESENTATION,/, "");
+  return JSON.parse(body).calculation.normalizationOptions;
+};
+
+test("生成器: 公式の項目名が「…当たり」の率には、spec が count でも換算の選択肢を付けない", () => {
+  const result = runGenerator([
+    // #I0910105 の公式の項目名は「一般診療所数（人口10万人当たり）」。算式で割り終えた率
+    spec({ statsDataId: "0000010209", cdCat01: "#I0910105", key: "zz-rate-probe-clinic", title: "率の検査用の指標その一", norm: "count" }),
+    // A1700 は外国人人口の実数。名前が分母を名乗らないので換算を保つ
+    spec({ statsDataId: "0000010101", cdCat01: "A1700", key: "zz-rate-probe-foreign", title: "率の検査用の指標その二", norm: "count" }),
+  ]);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(normalizationOf(result.stdout, "zz-rate-probe-clinic"), []);
+  assert.deepEqual(normalizationOf(result.stdout, "zz-rate-probe-foreign")?.map((option) => option.type), ["per_population", "per_area"]);
+});
