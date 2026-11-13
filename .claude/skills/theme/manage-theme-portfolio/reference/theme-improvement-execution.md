@@ -62,8 +62,8 @@ selection / caveat` を揃える。一つでも不明なら採用しない。
 
 ## proposalと採択ゲート
 
-proposalは `.claude/skills/theme/manage-theme-portfolio/reference/reviews/` または
-`reference/audits/` の対象テーマ文書へ保存し、次の3表を含める。
+proposalは `data/themes/reviews/` または
+`data/themes/audits/` の対象テーマ文書へ保存し、次の3表を含める。
 
 1. 現行指標: `keep / change-role / replace / remove`
 2. 現行チャート: `keep / revise-props / replace / remove / new-component`
@@ -75,7 +75,7 @@ ThemeCatalogを編集しない。実装へ進める時は `experiments.json` に
 ### 入力源: 夜間 selection backfill の role 推奨 (2026-09-17 追記)
 
 `run-selection-backfill.sh` (`.claude/rules/theme-catalog-standards.md` §4「selection」) は
-selection の裏付け調査の副産物として `change-role` 相当の提案を `reference/audits/<日付>-
+selection の裏付け調査の副産物として `change-role` 相当の提案を `data/themes/audits/<日付>-
 selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自身は role を書き換えない)。
 これは本契約の proposal と同じ採択ゲートに入る**追加の入力源**であり、別フローではない。
 

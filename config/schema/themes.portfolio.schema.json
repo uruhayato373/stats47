@@ -100,7 +100,7 @@
             "enum": ["reviewed", "review-missing", "stale"]
           },
           "reviewGate": { "description": "レビュー文書の frontmatter の status をそのまま転記する (自由な文字列)。次の作業の優先度の判断に使う", "type": ["string", "null"] },
-          "reviewDocRef": { "description": "レビュー文書 (.claude/skills/theme/manage-theme-portfolio/reference/reviews/) のうち最新の日付のものへのパス", "type": ["string", "null"] },
+          "reviewDocRef": { "description": "レビュー文書 (台帳 themes.reviews。data/themes/reviews/) のうち最新の日付のものへのパス", "type": ["string", "null"] },
           "latestDataYear": { "description": "公開データ (R2 の app/ranking/<key>/values.json) の実測から。未集計は null", "type": ["string", "null"] },
           "primaryMetricCount": { "description": "ThemeCatalog から導出", "$ref": "#/definitions/count" },
           "secondaryMetricCount": { "$ref": "#/definitions/count" },

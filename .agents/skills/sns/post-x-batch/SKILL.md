@@ -14,9 +14,9 @@ primary_agent: x-strategist
 `scheduled_at` 付き) で積む。**このスキルは投稿しない** — 投稿は別途ローカルで
 `publish-x --from-queue` が消化する (クラウド生成 → ローカル投稿の受け渡しは posts.json のみ)。
 
-> **型・画像・頻度の SSOT は `.claude/rules/sns-content-standards.md`** (§1 quota / §2-0 templates /
-> §2-8 相性 / §2-9 画像)。本スキルはテンプレ本文を持たず、必ずそこを参照する。カタログは
-> `.claude/scripts/lib/x-catalog.cjs` が機械参照する。
+> **型・画像・頻度の値の正本は台帳 `sns.x-catalog`** (`data/sns/x-catalog.json` の quota / templates / affinity / imageKinds)。
+> 項目の意味と改訂の手順は `.claude/rules/sns-content-standards.md` (§1 / §2-0 / §2-8 / §2-9 / §2-10)。本スキルはテンプレ本文を
+> 持たず、台帳を `.claude/scripts/lib/x-catalog.cjs` 経由で読む (一覧は `node .claude/scripts/lib/x-catalog.cjs --json`)。
 
 ## 引数
 
@@ -40,7 +40,7 @@ node .claude/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [
 # → .local/r2/sns/_queue/candidates.json
 ```
 
-- 冒頭で `x-catalog.selfCheck()` が走り、カタログ md のドリフト・アンカー欠落を検出する (失敗で停止)。
+- 冒頭で `x-catalog.selfCheck()` が走り、台帳 `sns.x-catalog` の形の崩れ・テンプレが指す画像種の欠落を検出する (失敗で停止)。
 - 公開済み ranking キー ∩ metric 索引を母集団に、季節性 (当月テーマ語)・category ローテ・
   dedup (同 key 30日 / 同 key×template 90日) で決定的にスコア → 上位 N 件を選定。
 - 各候補に §2-8 相性表で `template` (§2-0) を割付、§1 quota (1 日上限) を守って `scheduledAt` を割付。
@@ -75,7 +75,7 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
   | while read k; do npx tsx .claude/scripts/sns/quick-still.ts --key "$k"; done
 ```
 
-- 出力は §2-9 の out_path (`.local/r2/sns/ranking/<key>/x/stills/<key>.png`)。publish-x が読む正典パス。
+- 出力は §2-9 の outPath (`.local/r2/sns/ranking/<key>/x/stills/<key>.png`)。publish-x が読む正典パス。
 - `tile-map` / `scatter` / `compare` を割り当てた候補は Remotion (`/render-sns-stills`) が必要 (重いので
   量産の主軸は ranking-card。多様性で一部だけ tile-map を混ぜる場合に使う)。
 - **画像はローカル R2 ミラーに出るだけで git に載らない**。publish 時に `--from-queue` が media 不在を
@@ -97,7 +97,7 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 `candidates.json` を読み、各要素に `caption` を足した `captions.json` を書く
 (`.local/r2/sns/_queue/captions.json`)。**執筆の唯一のフェーズ**。以下を厳守:
 
-- **型は §2-0 の該当 `template` の `structure` に従う** (本スキルに型本文は無い。rules を読む)。
+- **型は §2-0 の該当 `template` の `structure` に従う** (本スキルに型本文は無い。`candidates.json` の各要素の `structure` が台帳の値)。
 - **数値は R2 の実データのみ** (quick-still の出力 `caption.txt` / `source.json` に上位5・下位5・倍率がある)。
   推測値を書かない (`evidence-based-judgment.md`)。
 - **指標の呼び方は `readerLabel` / `hook`**。「牛肉消費支出額」ではなく「牛肉への支出」と書く。
@@ -159,7 +159,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予
 
 ## 関連
 
-- 型・画像・頻度 SSOT: `.claude/rules/sns-content-standards.md` §1/§2
+- 型・画像・頻度の値: 台帳 `sns.x-catalog` (意味と改訂の手順は `.claude/rules/sns-content-standards.md` §1/§2)
 - カタログ API: `.claude/scripts/lib/x-catalog.cjs`
 - 画像最短経路: `.claude/scripts/sns/quick-still.ts`
 - 投稿 (ローカル): `.claude/skills/sns/publish-x/`

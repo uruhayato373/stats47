@@ -36,7 +36,7 @@ fishery-marine・local-economy の 3 テーマをこの形で提案し、承認�
 
 ## 置き場と状態
 
-- 置き場: `reference/reviews/YYYY-MM-DD-theme-<key>.md` (1 テーマ 1 文書)。前の版があれば frontmatter の `supersedes` に書く。
+- 置き場: `data/themes/reviews/YYYY-MM-DD-theme-<key>.md` (1 テーマ 1 文書)。前の版があれば frontmatter の `supersedes` に書く。
 - frontmatter: `type: theme-catalog-review` / `date` / `status` / `theme` / `supersedes` / `tags`。
 - `status` は `proposal-ready` (承認待ち) → `implemented-pending-release` (実装済み・未公開) と進める。
   公開後の効果は `data/themes/experiments.json` の実験が持つので、文書の状態はそこで止める。

@@ -28,7 +28,7 @@ import { datasetDir } from "../../../config/datasets.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
-const REVIEW_DIR = path.join(PROJECT_ROOT, ".claude/skills/theme/manage-theme-portfolio/reference/reviews");
+const REVIEW_DIR = path.join(PROJECT_ROOT, datasetDir("themes.reviews"));
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
@@ -70,7 +70,7 @@ function findReviewDoc(themeKey: string): { ref: string; date: string | null; ga
   const src = fs.readFileSync(path.join(REVIEW_DIR, f), "utf8");
   const date = src.match(/^date:\s*(\S+)/m)?.[1] ?? null;
   const gate = src.match(/^status:\s*(\S+)/m)?.[1] ?? null;
-  return { ref: `.claude/skills/theme/manage-theme-portfolio/reference/reviews/${f}`, date, gate };
+  return { ref: `${datasetDir("themes.reviews")}/${f}`, date, gate };
 }
 
 function deriveMechanical(themeKey: string): Partial<ThemeEntry> {

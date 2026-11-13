@@ -64,6 +64,9 @@ export const GOVERNED = [
   /^\.claude\/skills\/analytics\/[^/]+\/snapshots\//,
   /^\.claude\/skills\/management\/nsm-experiment\/reference\/weekly-snapshots\//,
   /^\.claude\/skills\/management\/(weekly|monthly)-review\/reference\/reviews\//,
+  // 監査・レビューの全文は skill の reference/ に置かない (2026-11-14。置き場は data/<領域>/{reviews,audits}/)。
+  // 行が無い置き場なので、ここへ置いた追跡ファイルは「未宣言」で落ちる
+  /^\.claude\/skills\/(?:[^/]+\/)+reference\/(reviews|audits)\//,
   /^\.claude\/config\/budgets\//,
 ];
 /**
@@ -428,6 +431,7 @@ export const DATASETS = [
   d("seo.latest-report", "data/seo/latest-report.json", "report", "site", "data", "キーワード改善サイクルの最新報告"),
   d("seo.latest-review", "data/seo/latest-review.json", "report", "site", "data", "キーワード改善サイクルの最新レビュー"),
   d("seo.automation-rollout", "data/seo/automation-rollout.json", "state", "site", "data", "キーワード改善の自動化の展開状況"),
+  d("seo.area-theme-audits", "data/seo/audits/{date}-area-theme-audit.md", "report", "site", "data", "area と theme の責務分離の棚卸しの報告 (page-components-audit.cjs が書く。手動・不定期)", { retain: "seo-audit-area-theme" }),
   d("ai-content.staging", "data/ai-content-staging/{**}", "state", "data", "data", "ランキング AI 解説の公開待ち (develop への push で publish-ai-content が監査して R2 へ公開し、ファイルを消す outbox。正本は R2 で、普段は空)", { planned: true }),
 
   // ── data/<取得元> : 計測 ──
@@ -662,6 +666,13 @@ export const DATASETS = [
         severity: "warn",
         why: "投稿済みの記録は書き換えない。棒グラフレース動画の key など、参照先の正本が無い過去の記録だけが残る",
       },
+    ],
+  }),
+  d("sns.x-catalog", "data/sns/x-catalog.json", "master", "sns", "data", "X の量産カタログ (投稿上限 quota・キャプションの型 templates・カテゴリと切り口の相性 affinity・添付できる画像種 imageKinds)。頻度ガード・候補選定・lint・下書き登録が読む。改訂は .claude/rules/sns-content-standards.md §2-10 の承認を経る。読み込みは .claude/scripts/lib/x-catalog.cjs", {
+    schema: "config/schema/sns.x-catalog.schema.json",
+    refs: [
+      { field: "templates[].imageKind", to: "sns.x-catalog", key: "imageKinds[].id" },
+      { field: "affinity.$keys", to: "categories.master", key: "categories[].key" },
     ],
   }),
   d("sns.post-log", "data/sns/post-log.md", "report", "sns", "data", "SNS 投稿の人が読む記録"),
@@ -1064,6 +1075,8 @@ export const DATASETS = [
     refs: [{ field: "categoryKey", to: "categories.master", key: "categories[].key" }, { field: "overrides.$keys", to: "registry:metrics" }],
   }),
   d("categories.topics-schema", "data/categories/topics.schema.json", "schema", "data", "data", "上のトピックの JSON Schema"),
+  d("surveys.reviews", "data/surveys/reviews/{date}-survey-{name}.md", "evidence", "data", "data", "調査ハブを編集する前の事前監査 (query の実測・在庫の構造・一次資料の確認)。build-survey-portfolio.ts が最新の日付のものを lastReviewedAt と evidenceRefs に結ぶ"),
+  d("surveys.audits", "data/surveys/audits/{date}-survey-portfolio-audit.md", "report", "data", "data", "調査ポートフォリオの四半期の監査の報告 (survey-curator が書く)"),
   d("surveys.taxonomy", "data/surveys/taxonomy.json", "state", "data", "data", "ranking・テーマ・ブログの全量から調査への紐付けを横断監査した結果と、調査から各面への逆引き (audit-survey-taxonomy.ts が作る。手で編集しない)"),
   d("surveys.kakei-coverage", "data/surveys/kakei-coverage.json", "state", "data", "data", "家計調査の表・品目の展開の到達状況 (report-kakei-coverage.ts が作る。未到達があっても監査は失敗にしない)"),
   d("surveys.lenses", "data/surveys/lenses/{name}.json", "master", "data", "data", "統計調査の切り口台帳 (調査ごとの分析の切り口・使う表と軸・粒度・誤読の注意・チャネルの役割。資料の問いと分析単位はここを参照する。展開の状況は持たない)", {
@@ -1118,6 +1131,8 @@ export const DATASETS = [
   d("themes.ci-review", "data/themes/ci-review.json", "state", "data", "data", "月次の公式資料の確認と改善判断の結果 (CI の Claude の構造化出力を record-theme-review.mjs が検証して保存。月内の sourceReviews を累積する)"),
   d("themes.viewpoint-history", "data/themes/viewpoint-history.csv", "series", "data", "data", "テーマの指標を選ぶ視点 (themes.selection-viewpoints) の週ごとの該当件数。record-theme-viewpoints.ts が週次監査で追記する"),
   d("themes.role-review", "data/themes/role-review/{name}", "state", "data", "data", "テーマの指標の役割レビューキュー"),
+  d("themes.reviews", "data/themes/reviews/{date}-theme-{name}.md", "evidence", "data", "data", "テーマごとのレビュー (公式資料の根拠・構成の確認・リリース gate の結論)。build-theme-portfolio.ts が最新の日付のものを reviewDocRef に結び、管理画面の視点の一覧が読む。未完了の対策は本文に溜めず backlog のカードにする"),
+  d("themes.audits", "data/themes/audits/{date}-{name}.md", "report", "data", "data", "テーマポートフォリオの監査の報告 (四半期の監査・月次の確認・テーマの深掘り・selection の夜間 backfill の報告)。selection-backfill.mjs と theme-portfolio-manager が書き、build-role-review-queue.mjs が backfill の報告を読む"),
   d("themes.chart-audit", "data/themes/charts/{name}", "state", "data", "data", "テーマのチャートの本番監査"),
 
   // ── .claude/state : エージェント運用の状態 (エージェントの運用をやめたら不要になるものだけ) ──
@@ -1243,6 +1258,12 @@ export const RETIRED = [
   { from: ".claude/skills/analytics/performance-improvement/snapshots", to: "data/psi/metric-snapshots", since: "2026-10-06" },
   { from: ".claude/skills/analytics/sns-metrics-improvement/reference", to: "data/improvement/sns-metrics-improvement", since: "2026-10-06" },
   { from: ".claude/skills/analytics/sns-metrics-improvement/snapshots", to: "data/sns/metric-snapshots", since: "2026-10-06" },
+  // 監査・レビューの全文 (2026-11-14 に skill の reference/ から data/<領域>/ へ。GOVERNED が同じ置き場への新規を止める)
+  { from: ".claude/skills/analytics/seo-audit/reference/audits", to: "data/seo/audits", since: "2026-11-14" },
+  { from: ".claude/skills/survey/manage-survey-portfolio/reference/audits", to: "data/surveys/audits", since: "2026-11-14" },
+  { from: ".claude/skills/survey/manage-survey-portfolio/reference/reviews", to: "data/surveys/reviews", since: "2026-11-14" },
+  { from: ".claude/skills/theme/manage-theme-portfolio/reference/audits", to: "data/themes/audits", since: "2026-11-14" },
+  { from: ".claude/skills/theme/manage-theme-portfolio/reference/reviews", to: "data/themes/reviews", since: "2026-11-14" },
   { from: ".claude/skills/management/monthly-review/reference/reviews", to: "data/reviews/monthly", since: "2026-10-06" },
   { from: ".claude/skills/management/nsm-experiment/reference/weekly-snapshots", to: "data/nsm/weekly-snapshots", since: "2026-10-06" },
   { from: ".claude/skills/management/weekly-review/reference/reviews", to: "data/reviews/weekly", since: "2026-10-06" },

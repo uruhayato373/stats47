@@ -46,5 +46,5 @@ tags: [実装計画]
 - デザインシステム（統一レイアウトを含む）: `docs/01_技術設計/04_デザインシステム.md`
 - theme-dashboard feature README: `apps/web/src/features/theme-dashboard/README.md`
 - 現在計画: `.claude/todo/{monthly,weekly}.md` / agent用週次レビュー: `data/reviews/weekly/`
-- レビュー由来の未完了策: `.claude/todo/` / 定期レポート履歴: 各skillの `reference/`
+- レビュー由来の未完了策: `.claude/todo/` / 定期レポート・監査・レビューの記録: `data/<取得元>/`
 - 白書チャート逆引き inventory（ドーマント・skill 専用に移設）: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/`

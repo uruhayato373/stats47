@@ -575,7 +575,7 @@ guidance: {
 
 ### PR-0: real-income 派生指標監査
 
-1. `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md` の P0 を先に解消
+1. `data/themes/reviews/2026-07-11-theme-real-income.md` の P0 を先に解消
 2. `real-disposable-income` の計算結果、R2 snapshot、SEO値が同じ式・単位か照合
 3. `disposable-income-after-rent` の月額/年額、世帯区分、地域粒度、調査年を照合
 4. 整合しない指標は公開対象から外すか、同一条件の入力へ差し替える
@@ -638,13 +638,13 @@ npm run design-system:check --workspace apps/web
 
 ## 関連レビュー
 
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-consumer-prices.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md`
-- `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-local-economy.md`
+- `data/themes/reviews/2026-07-11-theme-population-dynamics.md`
+- `data/themes/reviews/2026-07-11-theme-aging-society.md`
+- `data/themes/reviews/2026-07-11-theme-healthcare.md`
+- `data/themes/reviews/2026-07-11-theme-living-housing.md`
+- `data/themes/reviews/2026-07-11-theme-real-income.md`
+- `data/themes/reviews/2026-07-11-theme-consumer-prices.md`
+- `data/themes/reviews/2026-07-11-theme-labor-wages.md`
+- `data/themes/reviews/2026-07-11-theme-labor-mobility.md`
+- `data/themes/reviews/2026-07-11-theme-occupation-salary.md`
+- `data/themes/reviews/2026-07-11-theme-local-economy.md`

@@ -765,7 +765,7 @@
       },
       "currentHypothesis": "調査固有の編集ハブ (分かること/問い5件/注意) で指名系 query の表示と CTR が改善する",
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
+        "data/surveys/reviews/2026-07-11-survey-census.md"
       ],
       "lastReviewedAt": "2026-07-11",
       "nextReviewAt": "2026-08-09",
@@ -3297,7 +3297,7 @@
       },
       "currentHypothesis": null,
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
+        "data/surveys/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
@@ -3886,7 +3886,7 @@
       },
       "currentHypothesis": null,
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
+        "data/surveys/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
@@ -5665,7 +5665,7 @@
       },
       "currentHypothesis": "7指標 (projected-population-2020..2050) すべて isActive:false = 未公開在庫。R2 不在は正常 (inactive-only)。公開判断は ranking-expander の需要ファーストキュー",
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-13-survey-portfolio-audit.md"
+        "data/surveys/audits/2026-07-13-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
@@ -6792,7 +6792,7 @@
       },
       "currentHypothesis": null,
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
+        "data/surveys/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
@@ -7603,8 +7603,8 @@
       },
       "currentHypothesis": "職種別年収の指名検索意図 (大工/SW作成者/理学療法士等) に編集ハブで応えると CTR 0.22% が改善する",
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-wage-structure-survey.md",
-        ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
+        "data/surveys/reviews/2026-07-11-survey-wage-structure-survey.md",
+        "data/surveys/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": "2026-07-11",
       "nextReviewAt": "2026-10-01",

@@ -113,6 +113,28 @@ test("__tests__内のchecker fixtureは対象外", (t) => {
   assert.deepEqual(result.output.findings, []);
 });
 
+test("root の scripts/ にある検査も探索する", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  add(item.root, "scripts/ui-theme/check-orphan.mjs");
+  const result = run(item);
+  assert.equal(result.status, 1);
+  assert.ok(result.output.findings.some((finding) => finding.file === "scripts/ui-theme/check-orphan.mjs"));
+});
+
+test("台帳に宣言された検査は、名前が check 等でなくても root の scripts/ から探索範囲に入り例外なしで通る", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const checker = "scripts/ui-theme/inline-lyra.mjs";
+  add(item.root, checker);
+  add(item.root, ".github/workflows/lyra.yml", `name: lyra\non:\n  pull_request:\njobs:\n  lyra:\n    steps:\n      - run: node ${checker} --check\n`);
+  writeRegistry(item.root, [gate("lyra-inline", checker)]);
+  const result = run(item);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.output.findings, []);
+  assert.ok(result.output.classifications.some((entry) => entry.file === checker && entry.declared && entry.blocking));
+});
+
 test("未配線checkerをdeclared-onlyとして分類する", (t) => {
   const item = fixture();
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));

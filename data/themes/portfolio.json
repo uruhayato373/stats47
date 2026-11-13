@@ -8,7 +8,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-aging-society.md",
+      "reviewDocRef": "data/themes/reviews/2026-10-06-theme-aging-society.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 9,
@@ -69,7 +69,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md"
+        "data/themes/reviews/2026-07-11-theme-aging-society.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -469,7 +469,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-station-normal-and-observation-method-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-13-theme-climate.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 5,
@@ -519,7 +519,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md"
+        "data/themes/reviews/2026-07-13-theme-climate.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -778,7 +778,7 @@
       "lifecycleStatus": "keep",
       "reviewStatus": "reviewed",
       "reviewGate": "local-verified",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-09-09-theme-construction-industry.md",
+      "reviewDocRef": "data/themes/reviews/2026-09-09-theme-construction-industry.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 10,
@@ -886,7 +886,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-07-theme-consumer-prices.md",
+      "reviewDocRef": "data/themes/reviews/2026-10-07-theme-consumer-prices.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 6,
@@ -944,7 +944,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-consumer-prices.md"
+        "data/themes/reviews/2026-07-11-theme-consumer-prices.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -1419,7 +1419,7 @@
       "lifecycleStatus": "split-candidate",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-source-and-denominator-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-education-culture.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-12-theme-education-culture.md",
       "latestDataYear": null,
       "primaryMetricCount": 3,
       "secondaryMetricCount": 20,
@@ -1475,7 +1475,7 @@
       "currentHypothesis": "学校教育/高等教育/社会教育の主問が複数同居。分割 + parent-hub 化 (theme-taxonomy-reorganization)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-education-culture.md",
+        "data/themes/reviews/2026-07-12-theme-education-culture.md",
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
@@ -1636,7 +1636,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-fishery-marine.md",
+      "reviewDocRef": "data/themes/reviews/2026-10-06-theme-fishery-marine.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 11,
@@ -1694,7 +1694,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-fishery-marine.md"
+        "data/themes/reviews/2026-07-13-theme-fishery-marine.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -1760,7 +1760,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-and-source-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-13-theme-foreign-residents.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
@@ -1810,7 +1810,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md"
+        "data/themes/reviews/2026-07-13-theme-foreign-residents.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -2421,7 +2421,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-healthcare.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 36,
@@ -2477,7 +2477,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md"
+        "data/themes/reviews/2026-07-11-theme-healthcare.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -2745,7 +2745,7 @@
       "lifecycleStatus": "keep",
       "reviewStatus": "reviewed",
       "reviewGate": "local-verified",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-09-09-theme-information-industry.md",
+      "reviewDocRef": "data/themes/reviews/2026-09-09-theme-information-industry.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,
@@ -2941,7 +2941,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-labor-mobility.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 14,
@@ -2991,7 +2991,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md"
+        "data/themes/reviews/2026-07-11-theme-labor-mobility.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -3057,7 +3057,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-labor-wages.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 9,
@@ -3113,7 +3113,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md"
+        "data/themes/reviews/2026-07-11-theme-labor-wages.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -3384,7 +3384,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-living-housing.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 27,
@@ -3434,7 +3434,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md"
+        "data/themes/reviews/2026-07-11-theme-living-housing.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -3500,7 +3500,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-local-economy.md",
+      "reviewDocRef": "data/themes/reviews/2026-10-06-theme-local-economy.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 10,
@@ -3558,7 +3558,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-local-economy.md"
+        "data/themes/reviews/2026-07-11-theme-local-economy.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -3624,7 +3624,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-scope-composition-and-threshold-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-local-finance.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-13-theme-local-finance.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 25,
@@ -3680,7 +3680,7 @@
       "currentHypothesis": "流入増はOrganic Search起因ではない。56d GSC(W27-31)はclicks0/imp32で横ばい。週次GA4はW27→W28でpv92→183(+99%)、engagementRate0.615→0.165に急落。同週の site-wide channels は Direct sessions+55%(Organic Search+5%)・Direct bounceRate0.81(Organic Search0.376)。ページ単位のsource/medium実測はGA4 API未接続(GA4_PROPERTY_ID/GOOGLE_SERVICE_ACCOUNT_KEY_JSON 未設定)のためこの環境では取得不能。次回はpagePath×sessionDefaultChannelGroupのlive GA4クエリで/themes/local-financeを直接確認する。",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-local-finance.md",
+        "data/themes/reviews/2026-07-13-theme-local-finance.md",
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/channels.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv"
@@ -4074,7 +4074,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-series-and-definition-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-12-theme-manufacturing.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 8,
@@ -4124,7 +4124,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md"
+        "data/themes/reviews/2026-07-12-theme-manufacturing.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -4294,7 +4294,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-series-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-occupation-salary.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 7,
@@ -4350,7 +4350,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md"
+        "data/themes/reviews/2026-07-11-theme-occupation-salary.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -4416,7 +4416,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-population-dynamics.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 22,
@@ -4477,7 +4477,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md"
+        "data/themes/reviews/2026-07-11-theme-population-dynamics.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -4543,7 +4543,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-table-dimension-scope-and-unit-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-13-theme-ports.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
@@ -4593,7 +4593,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md"
+        "data/themes/reviews/2026-07-13-theme-ports.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -4756,7 +4756,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-geography-coverage-and-series-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-13-theme-railway.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 3,
@@ -4806,7 +4806,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md"
+        "data/themes/reviews/2026-07-13-theme-railway.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -4867,7 +4867,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-derived-metric-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-11-theme-real-income.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 5,
@@ -4926,7 +4926,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md"
+        "data/themes/reviews/2026-07-11-theme-real-income.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -5326,7 +5326,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-additivity-and-survey-year-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-13-theme-roads.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 10,
@@ -5382,7 +5382,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md"
+        "data/themes/reviews/2026-07-13-theme-roads.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -5448,7 +5448,7 @@
       "lifecycleStatus": "split-candidate",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-denominator-and-provenance-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-safety.md",
+      "reviewDocRef": "data/themes/reviews/2026-07-12-theme-safety.md",
       "latestDataYear": null,
       "primaryMetricCount": 3,
       "secondaryMetricCount": 26,
@@ -5498,7 +5498,7 @@
       "currentHypothesis": "治安/交通/火災の主問が複数同居。crime-safety/traffic-safety/fire-emergency への分割 + parent-hub 化 (theme-taxonomy-reorganization)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-safety.md",
+        "data/themes/reviews/2026-07-12-theme-safety.md",
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
@@ -5788,7 +5788,7 @@
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-07-theme-tourism.md",
+      "reviewDocRef": "data/themes/reviews/2026-10-07-theme-tourism.md",
       "latestDataYear": null,
       "primaryMetricCount": 2,
       "secondaryMetricCount": 6,
@@ -5840,7 +5840,7 @@
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-tourism.md"
+        "data/themes/reviews/2026-07-12-theme-tourism.md"
       ],
       "dataQuality": {
         "observedAt": "2026-10-05T04:27:30.324Z",
@@ -6007,7 +6007,7 @@
       "lifecycleStatus": "keep",
       "reviewStatus": "reviewed",
       "reviewGate": "local-verified",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-09-09-theme-waste-recycling.md",
+      "reviewDocRef": "data/themes/reviews/2026-09-09-theme-waste-recycling.md",
       "latestDataYear": null,
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,

@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "X の量産カタログ (投稿上限・テンプレ・相性・画像種)",
+  "description": "data/sns/x-catalog.json の形状契約。X の投稿の上限 (quota)・キャプションの型 (templates)・カテゴリと切り口の相性 (affinity)・添付できる画像種 (imageKinds) を持つ。読み込み口は .claude/scripts/lib/x-catalog.cjs で、頻度ガード・候補選定・lint・下書き登録がそこから読む。項目の意味と改訂の手順は .claude/rules/sns-content-standards.md の §1・§2-0・§2-8・§2-9・§2-10。",
+  "type": "object",
+  "required": ["quota", "templates", "affinity", "imageKinds"],
+  "additionalProperties": false,
+  "properties": {
+    "quota": {
+      "description": "X の投稿の上限。dailyMax は 1 日の合算の上限、weeklyTargetMin〜Max は定型ストックの週の本数",
+      "type": "object",
+      "required": ["dailyMax", "weeklyTargetMin", "weeklyTargetMax"],
+      "additionalProperties": false,
+      "properties": {
+        "dailyMax": { "type": "integer", "minimum": 1 },
+        "weeklyTargetMin": { "type": "integer", "minimum": 1 },
+        "weeklyTargetMax": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "templates": {
+      "description": "キャプションの型。投稿台帳の template 列がこの id を記録する",
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "structure", "imageKind", "charMax", "bestTime", "use"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "structure": { "description": "キャプションの枠 (この順で文章を書く)", "type": "string", "minLength": 1 },
+          "imageKind": { "description": "添付する画像種 (imageKinds の id)", "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "charMax": { "description": "URL・改行を除く本文の上限文字数", "type": "integer", "minimum": 1 },
+          "bestTime": { "description": "推奨の投稿時間帯 (予約の日時を割り付ける既定)", "type": "string", "pattern": "^(any|(weekday|weekend)-[0-9]{2}-[0-9]{2})$" },
+          "use": { "description": "使いどころ", "type": "string" }
+        }
+      }
+    },
+    "affinity": {
+      "description": "カテゴリ (categories.master の key) ごとの 6 つの切り口の相性。◎ = 高相性 / ○ = 第二候補 / △ = 弱い / — = 不適",
+      "type": "object",
+      "minProperties": 10,
+      "propertyNames": { "pattern": "^[a-z]+$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["結論", "理由", "体験", "反論", "数字", "ハウツー"],
+        "additionalProperties": false,
+        "properties": {
+          "結論": { "$ref": "#/definitions/fit" },
+          "理由": { "$ref": "#/definitions/fit" },
+          "体験": { "$ref": "#/definitions/fit" },
+          "反論": { "$ref": "#/definitions/fit" },
+          "数字": { "$ref": "#/definitions/fit" },
+          "ハウツー": { "$ref": "#/definitions/fit" }
+        }
+      }
+    },
+    "imageKinds": {
+      "description": "X の投稿に添付できる画像種。画像を持たない種類 (none) は size・generator・outPath が null",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "size", "generator", "outPath", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "size": { "description": "画像の幅x高さ (px)", "type": ["string", "null"], "pattern": "^[0-9]+x[0-9]+$" },
+          "generator": { "description": "生成する手段 (スクリプトと引数・Remotion の composition など)", "type": ["string", "null"], "minLength": 1 },
+          "outPath": { "description": "出力先。<key> などの山括弧は投稿ごとに置き換える", "type": ["string", "null"], "minLength": 1 },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "fit": { "enum": ["◎", "○", "△", "—"] }
+  }
+}

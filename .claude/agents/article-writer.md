@@ -259,6 +259,10 @@ data ファイルを使った場合は `contents/blog/<slug>/data/*.json` も同
       (推測でキー名を書かない。存在しないと 404 ではなく soft 404 で 200 が返り目視で気づけない。
       `quality-gate.mjs` が blocker で検出する)
 - [ ] 仮説には `[仮説]` 表記 + 検証必要の明記
+- [ ] 書き直しで critic が繰り返し止めた 5 つの型を避けた (`.claude/rules/blog-quality-standards.md`「書き直しで critic が繰り返し止めた 5 つの型」):
+      関連記事の紹介の表示名がリンク先の**現在の題**と合っている (同時に書き直す姉妹記事は新しい題を確かめてから書く) /
+      「近畿・関東」など地方を束ねた主張を地方別の値で確かめた / 相関係数に**向き** (正・負) を文で書き前後と揃えた /
+      図を貼った節の本文の年と図の年が同じ (違うなら図の年を書いて理由を添える) / 料金・製品仕様に出典 URL と確認日を付けた (無ければ断定しない)
 - [ ] 既存記事と slug が重複していない (`/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` で確認)
 - [ ] ドラフトを `contents/blog/<slug>/article.md` に書き出した (`.local/r2` ではない)
 - [ ] factual gate (`node .claude/scripts/lib/article-factual-check.mjs ".../article.md" ".../data"`) が pass

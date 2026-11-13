@@ -107,6 +107,12 @@ const PERMANENT_DATED_DIRS = [
   "data/seo/rank-history", // キーワード改善サイクルの日次観測。保持期間は未決 (SEO サイクル側で決める)
   "data/seo/selections", // 同上の週ごとの対象選定。保持期間は未決
   "data/google-admin/audits", // GA4 の設定がいつ変わったかを追う履歴。週 25 KB なので削除しない (2026-11-04 オーナー判断)
+  // 2026-11-14 に skill の reference/ から移した監査・レビューの記録。portfolio と実験台帳の evidenceRefs が個々のファイルを指すので
+  // 件数では消さない。保持期間は未決 (未完了の対策をカードへ拾ってから全文を減らす判断が残っている)
+  "data/themes/reviews",
+  "data/themes/audits",
+  "data/surveys/reviews",
+  "data/surveys/audits",
 ];
 
 test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / baseline) を持つ", () => {

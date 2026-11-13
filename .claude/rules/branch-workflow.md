@@ -301,6 +301,15 @@ Derived (area_profiles/相関)          : R2 観測値をエフェメラル計�
 
 指標の表示契約を変更する場合は `deploy-workers.yml` が同じ main の指標・市区町村・home/master・page-componentsを生成して検証し、SHAを固定したexact manifestでR2へ反映してからアプリをbuild/deployする。旧形式を新しいreaderへ渡さないための順序であり、別のsyncを後追いで起動する必要はない。観測値取得の通信エラー・生成・検証・反映の失敗はアプリ公開を止める。生の観測値・記事・画像はこの反映に含めない。
 
+**反映と公開は二相で、反映の後にアプリの公開が止まる場合を許している。** Build が新しいスナップショットを読むので (prebuild の `generate-search-index.ts` が `app/ranking-items/all.json` を読み、Build の env の注記どおり generateStaticParams・sitemap も R2 を読む)、反映を Build の後へ移すと、Build が旧形式を読んで作ったアプリを公開することになる。そのため反映の後で Build・prerender の検査・wrangler deploy が落ちると、次のデプロイが通るまで旧版のアプリが新しいスナップショットを読む (2026-10-21・run 39589689158 で約 1 時間。このときは互換で、主要 9 ページが 200 だった)。戻すときは、この節の末尾にあるとおり旧スナップショットを上書きする。
+
+この窓を狭めるため、**スナップショットの中身と関係なく後の段を落とす条件は、反映より前に検査する** (DEPLOY-R2-AHEAD-OF-APP-01)。
+
+- `.github/scripts/check-build-preconditions.mjs`: OpenNext の Next.js サポート期限の判定。Next.js の版と実行日だけで決まり、通らないと Build は始まる前に exit 1 で終わる (`@opennextjs/aws` 4.1.12 の `dist/build/helper.js` `checkNextVersionSupport`。2026-11-14 に手元の node_modules で確認)。判定は写さず同じ関数を呼ぶ。PR の Build Check は `next build` で OpenNext を通らないので、この条件は PR では見つからない。
+- Cloudflare の認証の検査 (`wrangler whoami`)。
+
+前の段が落ちたら後の段は走らない、という既定に頼る (`if` に状態の関数を書かない step には `success()` が付く。[Expressions — Status check functions](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions)、2026-11-14 確認)。反映の段に `if:` を足すか、反映より前の段に `continue-on-error` を足すと、検査が落ちても反映が走る。順序とこの 2 点は `.claude/scripts/lib/__tests__/metric-release-order.test.mjs` が固定する。Build を落とす「中身と関係ない条件」を新しく見つけたら、同じ検査へ足す。
+
 `sync-snapshots.yml` の sync job は **`ref: main` を checkout する**。`workflow_dispatch` の
 `ref` にも proxy の `ref` にも従わない (`ref: develop` を指定しても main で動く)。
 
