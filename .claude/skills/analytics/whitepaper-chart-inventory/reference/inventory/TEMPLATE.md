@@ -25,7 +25,7 @@ tags: [whitepaper, chart-inventory]
 mkdir -p .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/<wp-slug>
 
 # 章 1
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "<ノートブック名>" --json \
   '「<章 1 名>」の章に登場するチャート・図表をすべて列挙してください。各チャートについて以下を JSON 配列で返してください:
 [

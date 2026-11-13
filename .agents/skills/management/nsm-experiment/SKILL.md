@@ -181,7 +181,7 @@ abandoned  abandoned  running (re-measure)
 |---|---|
 | **`.claude/scripts/lib/experiments-state.mjs`** | state I/O 本体 |
 | **`.claude/scripts/lib/metrics-reader.mjs`** | baseline と current の計測 |
-| **`.claude/scripts/snapshot-weekly-metrics.mjs`** | 週次スナップショット（propose 時の背景データ） |
+| **`.claude/scripts/metrics/snapshot-weekly-metrics.mjs`** | 週次スナップショット（propose 時の背景データ） |
 | **`.claude/skills/management/weekly-plan/SKILL.md`** | Phase で実験提案を自動化 |
 | **`.claude/skills/management/weekly-review/SKILL.md`** | 実験進捗セクションで running を自動表示 |
 | **`reference/playbook.md`** | 実験パターンカタログ |

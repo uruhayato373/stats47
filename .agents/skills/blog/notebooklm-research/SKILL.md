@@ -4,7 +4,7 @@ domain: site
 description: >
   NotebookLM CLI (notebooklm Python v0.3.4) を使って既存ブログ記事を深掘り調査し、
   e-Stat 白書・政府統計・過去ブログ記事などを横断クエリした引用根拠をもとに
-  内容を補強する Orchestrator スキル。.claude/scripts/notebooklm-cross-query.mjs
+  内容を補強する Orchestrator スキル。.claude/scripts/notebooklm/notebooklm-cross-query.mjs
   ラッパーで根拠収集 → 記事に反映する。Use when user says
   "NotebookLM で調べて", "深掘り調査", "引用根拠で記事補強", "白書で補強",
   "/notebooklm-research".
@@ -13,7 +13,7 @@ primary_agent: trend-scout
 
 # /notebooklm-research — NotebookLM 起点のブログ記事内容補強
 
-`.claude/scripts/notebooklm-cross-query.mjs` でノートブックを横断クエリし、根拠付きで stats47 のブログ記事 (`.local/r2/app/blog/<slug>/article.md`) を補強する。
+`.claude/scripts/notebooklm/notebooklm-cross-query.mjs` でノートブックを横断クエリし、根拠付きで stats47 のブログ記事 (`.local/r2/app/blog/<slug>/article.md`) を補強する。
 
 **構造・書式の修正** (frontmatter / chart placeholder / 出典) は `/proofread-article` で別途対応。本スキルは **白書・政府統計由来の概念・背景・事例を内容として追加すること** だけに集中する。
 
@@ -61,7 +61,7 @@ chmod +x ~/bin/notebooklm
 
 参考: https://github.com/teng-lin/notebooklm-py
 
-`nlm cross query` 相当のサブコマンドが現行 CLI にないため、本プロジェクトでは決定論的ラッパー `.claude/scripts/notebooklm-cross-query.mjs` を経由する。実態は `notebooklm list --json` で ID 解決 + `notebooklm ask -n <id> --json "..."` を逐次実行する形。
+`nlm cross query` 相当のサブコマンドが現行 CLI にないため、本プロジェクトでは決定論的ラッパー `.claude/scripts/notebooklm/notebooklm-cross-query.mjs` を経由する。実態は `notebooklm list --json` で ID 解決 + `notebooklm ask -n <id> --json "..."` を逐次実行する形。
 
 ### stats47 用ノートブック (要事前作成)
 
@@ -88,7 +88,7 @@ chmod +x ~/bin/notebooklm
 
 新規ノートブック追加時は `~/bin/notebooklm list --json | jq '.notebooks[] | {title, id}'` で ID 取得して本表に追記する。
 
-> 初回 ID 登録時は `.claude/scripts/notebooklm-notebook-builder.mjs` でも自動構築可能。
+> 初回 ID 登録時は `.claude/scripts/notebooklm/notebooklm-notebook-builder.mjs` でも自動構築可能。
 
 ## 引数
 
@@ -124,21 +124,21 @@ chmod +x ~/bin/notebooklm
 エージェントの Bash ツールから決定論的ラッパーを呼ぶ:
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "stats47 e-Stat 白書" \
   "「{title}」に関連して、{補強したい観点} を白書の記述から教えてください。"
 ```
 
 複数ノートブック横断:
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "stats47 e-Stat 白書,stats47 過去ブログ記事" \
   "「製造品出荷額の都道府県格差」について、歴史的背景・上位県の産業集積・過去記事での扱いをまとめてください。"
 ```
 
 `--json` を付けると構造化出力 (answer + references) を返す:
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
   --notebooks "stats47 e-Stat 白書" "..."
 ```
 
@@ -208,7 +208,7 @@ Claude トークンは 0 である。
 ~/bin/notebooklm list --json > /dev/null
 
 # 1. 指標の背景を聞き、回答をそのまま research.md に保存する (1 クエリ ~30 秒)
-node .claude/scripts/notebooklm-cross-query.mjs --notebooks "最新の白書" \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --notebooks "最新の白書" \
   "「<指標A の平易な名前>」と「<指標B>」について、都道府県差の背景・関連する制度・白書での扱いを、資料名と章を添えて箇条書きで教えてください。数値は不要です。" \
   > contents/blog/<slug>/research.md
 ```
@@ -242,8 +242,8 @@ node .claude/scripts/notebooklm-cross-query.mjs --notebooks "最新の白書" \
 - `/proofread-article` (構造・出典・リンク検証、本スキルと組合せ推奨)
 - `/md-syntax` (`<data-source>` `<source-link>` 記法)
 - 参考: `/Users/minamidaisuke/doboku-note/.claude/skills/authoring/notebooklm-research/SKILL.md` (原型)
-- ラッパー: `.claude/scripts/notebooklm-cross-query.mjs`
-- ノートブック構築 (高度): `.claude/scripts/notebooklm-notebook-builder.mjs`
+- ラッパー: `.claude/scripts/notebooklm/notebooklm-cross-query.mjs`
+- ノートブック構築 (高度): `.claude/scripts/notebooklm/notebooklm-notebook-builder.mjs`
 
 ## 完了条件
 

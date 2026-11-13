@@ -15,21 +15,21 @@
  *       .claude/skills/management/weekly-review/SKILL.md (Phase 0)
  *
  * Usage:
- *   node .claude/scripts/snapshot-weekly-metrics.mjs              # 現在の週
- *   node .claude/scripts/snapshot-weekly-metrics.mjs 2026-W16     # 指定週
- *   node .claude/scripts/snapshot-weekly-metrics.mjs --force      # 既存を上書き
- *   node .claude/scripts/snapshot-weekly-metrics.mjs --dry-run    # 書き込まず表示
+ *   node .claude/scripts/metrics/snapshot-weekly-metrics.mjs              # 現在の週
+ *   node .claude/scripts/metrics/snapshot-weekly-metrics.mjs 2026-W16     # 指定週
+ *   node .claude/scripts/metrics/snapshot-weekly-metrics.mjs --force      # 既存を上書き
+ *   node .claude/scripts/metrics/snapshot-weekly-metrics.mjs --dry-run    # 書き込まず表示
  */
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { assertDatasetShape } from "./lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 import { join } from "node:path";
 import {
   fetchWeeklyNsmMetrics,
   formatNsmSection,
-} from "./lib/metrics-reader.mjs";
-import { jstDateOf, isoWeekOf } from "./metrics/lib/periods.mjs";
-import { datasetDir } from "../../config/datasets.mjs";
+} from "../lib/metrics-reader.mjs";
+import { jstDateOf, isoWeekOf } from "./lib/periods.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const OUT_DIR =
   datasetDir("business.nsm-weekly");

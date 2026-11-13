@@ -100,7 +100,7 @@ question:
 
 ```bash
 mkdir -p .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/<wp-slug>
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "<ノートブック名>" --json \
   "<上記 query>" \
   > .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/<wp-slug>/<chapter>.json
@@ -148,5 +148,5 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 - mirror 元フォーマット: `./reference/inventory/TEMPLATE.md`
 - 白書 SSOT: `.claude/skills/blog/brushup-blog --target article/SKILL.md`
 - e-Stat 照合 (Phase C): `.claude/skills/estat/search-estat/SKILL.md`
-- nlm CLI wrapper: `.claude/scripts/notebooklm-cross-query.mjs`
+- nlm CLI wrapper: `.claude/scripts/notebooklm/notebooklm-cross-query.mjs`
 - 出力先判定: `.claude/rules/data-storage.md`

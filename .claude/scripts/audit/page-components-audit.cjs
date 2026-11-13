@@ -211,8 +211,8 @@ lines.push("");
 lines.push("## next action");
 lines.push("");
 lines.push("1. 上記「違反候補」テーブルを目視確認し、本当に theme へ移すべきものを確定");
-lines.push("2. 確定した component に対し `page_components` の `page_type` を `theme` に UPDATE (or 新規 INSERT + 旧 row DELETE)");
-lines.push("3. ローカル D1 で反映後、`/sync-snapshots --only page-components` で R2 に push");
+lines.push("2. 確定した component の定義を `apps/web/scripts/data/page-components/area/<pageKey>.json` から外し、`apps/web/scripts/data/page-components/theme/<pageKey>.json` へ移す (git のこの JSON が正本。DB は無い)");
+lines.push("3. 変更が main に入った後、`gh workflow run sync-snapshots.yml -f only=page-components` で R2 の `app/page-components/` へ反映する");
 lines.push("4. 該当 area ページ・theme ページの表示を browser で確認");
 lines.push("");
 

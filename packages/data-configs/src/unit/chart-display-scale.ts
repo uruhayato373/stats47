@@ -8,7 +8,7 @@ import { formatUnitForDisplay } from "./unit-display";
  * すべて同じ単位で並べたいので、値ごとではなく**図ごとに 1 つ**の単位を選ぶ (値ごとに寄せる
  * `formatReadableMagnitude` は見出しや文中の 1 つの値用)。
  *
- * 決め方 (全 2,425 指標の最新年で実測して決めた。`data/metrics/chart-display-units.json`):
+ * 決め方 (全 2,425 指標の最新年で実測して決めた。`data/metrics/display-units/ledger.json`):
  * 1. 量の次元 (金額・人数・世帯・件数・戸数・重さ・面積・体積・電力・エネルギー・船の総トン数) だけを寄せる。
  *    割合・指数・分母つき・時間・長さ・温度は寄せない。単位を解釈できないものも寄せない
  *    (1 倍で済ませず、そのままの単位で出す)。

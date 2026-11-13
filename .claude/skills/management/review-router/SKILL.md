@@ -98,5 +98,5 @@ primary_agent: strategy-advisor
 
 ### 過去分の参照
 
-戦略の変遷はGit、定期レポートは各skill reference、未完了策は `.claude/todo/` を参照する。
+戦略の変遷はGit、週次・月次レビューは `data/reviews/`、そのほかの定期レポートは上の表の出力先、未完了策は `.claude/todo/` を参照する。
 詳細は [`../../rules/docs-vs-issues.md`](../../../rules/docs-vs-issues.md)。

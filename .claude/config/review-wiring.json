@@ -33,7 +33,7 @@
       "inputs": [
         {
           "label": "NSM 週次 snapshot",
-          "run": "node .claude/scripts/snapshot-weekly-metrics.mjs"
+          "run": "node .claude/scripts/metrics/snapshot-weekly-metrics.mjs"
         },
         {
           "label": "事業計画の検証",

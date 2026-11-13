@@ -41,7 +41,7 @@ PROJECT_ROOT="$(pwd)"
 # 投稿台帳は完全DBレス: 読み書きは `.claude/scripts/lib/sns-posts-store.cjs`（posts.json）経由。旧 D1/SQLite は使わない
 
 # 開始時: 残存プロセスをクリーンアップ
-bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
+bash .claude/scripts/lib/cleanup-browser.sh --force 2>/dev/null
 ```
 
 **重要ルール:**
@@ -130,7 +130,7 @@ console.log(snsStore.countAll(), "最新 fetched_at:", snsStore.maxFetchedAt());
 全プラットフォームの処理完了後、結果報告の後に必ず実行:
 
 ```bash
-bash .claude/scripts/cleanup-browser.sh 2>/dev/null
+bash .claude/scripts/lib/cleanup-browser.sh 2>/dev/null
 ```
 
 ## 参照

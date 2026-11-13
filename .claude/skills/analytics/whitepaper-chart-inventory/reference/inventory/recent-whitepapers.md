@@ -33,7 +33,7 @@ mkdir -p .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/r
 ### Query 0: 章構成の確認 (まず実行)
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "最新の白書" --json \
   '本白書の章構成 (大章のみ) を JSON 配列で列挙してください。例: ["第1章 人口減少", "第2章 AI", ...]。最大 10 章まで。' \
   > .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/recent-whitepapers/chapters.json
@@ -44,7 +44,7 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 ### Query 1: 人口減少 章
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "最新の白書" --json \
   '「人口減少」に関する章に登場するチャート・図表をすべて列挙してください。各チャートについて以下を JSON 配列で返してください:
 [
@@ -64,7 +64,7 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 ### Query 2: AI / Society 5.0 章
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "最新の白書" --json \
   '「AI / Society 5.0 / デジタル」に関する章に登場するチャート・図表を列挙。JSON 配列の各要素は {title, chart_type, chart_target, source_stats_name, years_covered, key_insight}。最大 15 件、定量データの可視化のみ。' \
   > .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/recent-whitepapers/02-ai.json
@@ -73,7 +73,7 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 ### Query 3: GX / カーボンニュートラル 章
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "最新の白書" --json \
   '「GX / カーボンニュートラル / 脱炭素」に関する章のチャート・図表を列挙。JSON 配列 {title, chart_type, chart_target, source_stats_name, years_covered, key_insight}。最大 15 件、定量データのみ。' \
   > .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/recent-whitepapers/03-gx.json
@@ -82,7 +82,7 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 ### Query 4: その他横断トピック
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "最新の白書" --json \
   '上記 3 章 (人口減少/AI/GX) 以外の章 (例: 経済、地域活性化、安全保障 等) に登場するチャート・図表を列挙。JSON 配列 {title, chart_type, chart_target, source_stats_name, years_covered, key_insight}。最大 15 件、定量データのみ。' \
   > .claude/skills/analytics/whitepaper-chart-inventory/reference/queries/recent-whitepapers/04-other.json
