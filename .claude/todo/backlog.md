@@ -129,6 +129,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-BRIDGE-INGEST-TSIMPORT-01] 橋梁点検の取り込みが、提案なしの経路で TS の読み込みに失敗して止まる
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-13] [領域:データ]
+
+- **証拠 (2026-11-13)**: `.claude/scripts/themes/ingest-bridge-inspection-age.mjs` を `--proposal-dir` なしで動かすと、tsx 4.23.12 の `tsImport` が Node v22.23.3 で入れ子の TS import を解決できず、`parseBridgeInspectionAgeSnapshot` の読み込みが `ERR_MODULE_NOT_FOUND` (`packages/area/src/index.ts?namespace=…`) で止まる。台帳 `bridge-inspection-age.json` の restore コマンドが最後まで走らない (`fdc398dc5` の作業中に観測)。
+- **次**: 検査の読み込みを `ingest-vacancy-types.mjs` (`5e84633aa`) と同じ tsx 経由の形に直し、提案なしの経路が出典の検査まで進むことをテストで固定する。
+- **完了条件**: 原典のフォルダを渡した実行が `ERR_MODULE_NOT_FOUND` で止まらず、追加したテストが直す前は落ちて直した後は通る。
+
 ### [OPENDATA-RANKING-PILOT-01] NDB 特定健診の 10 指標を R2 へ上げて公開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-13] [領域:データ]
 
@@ -205,6 +212,7 @@ updated: 2026-11-01
 - **次**: ① 監査とレビューの全文は、未完了の対策だけをこの台帳へ移して消す。事業として見返すものだけ `data/<領域>/` へ移す。2 つの rule を `data/` に揃えて書き直す ② 設計文書をコード近傍の README か既存の設計文書へ統合して消す ③ memory の戦略重複を正本への参照に縮める ④ 古い実装計画は `/maintain-docs` の手順で統合か削除を決める ⑤ `config/datasets.mjs` の `GOVERNED` に `skills/**/reference/{reviews,audits}/` を足し、`docs:check` に「`docs/` の Markdown が文書の台帳に無い」「`apps/*/.claude/` と `.claude/scripts/` 直下のファイル」の検査を足す。
 - **禁止**: 検査を足さずに文書だけを消さない。未完了の対策を拾わずに監査の全文を消さない。
 - **完了条件**: 上の全文と散った文書が無くなり、同じ置き場へ新しく置くと検査が落ちる。検査を足したら `docs/01_技術設計/06_自動化インベントリ.md` を更新している。
+- **追加 (2026-11-13)**: `.claude/skills/dev/review-feature/scopes/ui-consistency.md` が指す `reference/panelists.md` は存在しない (`b1db8993a` で「未作成」と明記しただけ)。定義ファイルを作るか参照を消す。
 
 ### [DIR-PLACEMENT-CLEANUP-01] 置き場の規則から外れたスクリプト・データ・設定を正しい置き場へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:管理]
@@ -213,13 +221,6 @@ updated: 2026-11-01
 - **次**: スクリプトの移動 (呼び出し元の package.json・workflow・SKILL.md を同じ差分で直す) と、データと設定の移動 (`data-storage.md`「置き場を移す手順」に従い `RETIRED` に宣言する) を別の PR に分ける。
 - **禁止**: `data/` の大きなフォルダ (`business`・`business-plan`・`nsm`・`seo`・`gsc`・`search-growth`・`adsense`・`affiliate`) を改名・統合しない (置き場がずれると CI の書き戻しが記録を落とす。2026-10-06 に 3 run が落とした)。skills (単数形) と scripts・data (複数形) の名前を揃えない。
 - **完了条件**: 上の置き場が無くなり、移した workflow を手動で起動して新しい置き場へ書くことを確かめている。
-
-### [DOCS-LINKS-RELATIVE-01] 文書のリンク検査が相対リンクの切れを見逃す
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run docs:check] [起票:2026-11-13] [領域:管理]
-
-- **観測 (2026-11-13)**: `docs/INDEX.md` の `[todo/](todo/todo-standards.md)` は実在しないファイルを指していたが、`npm run docs:check` は error 0 件だった。`.claude/scripts/lib/check-docs-links.cjs` が拾うのは `docs/…md` という文字列で、文書からの相対パスで書いたリンクは解決していない。
-- **次**: Markdown のリンク先を、書かれた文書の場所を基準に解決して実在を確かめる。
-- **完了条件**: 実在しない相対リンクを 1 つ足すと検査が落ちるテストがある。
 
 ### [GOAL-PSI-LCP-STALE-01] 性能目標 `psi-mobile-lcp-2500` の記録が ACTIVE のまま 2026-05-15 から止まっている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
@@ -234,13 +235,6 @@ updated: 2026-11-01
 - **観測 (2026-11-13)**: `.claude/scripts/lib/x-catalog.cjs` が `.claude/rules/sns-content-standards.md` の §1・§2-0・§2-8・§2-9 の表をパースし、X の投稿上限・テンプレ・画像種として使っている。マスタは `data/<領域>/` の JSON + Schema に置く決定 (2026-11-10) と同じ型の違反である。
 - **次**: 表を `data/sns/` の台帳へ移してカタログに登録し、`x-catalog.cjs` を台帳読みに替える。rule には台帳 id への参照を残す。`STRATEGY-LEDGER-JSON-01` の段 8 と同じ PR にまとめてよい。
 - **完了条件**: rule の表を書き換えても X の投稿の挙動が変わらず、台帳を書き換えると変わる。
-
-### [CATALOG-FULLBLEED-PLANNED-01] ブログ背景の原本 861 件があるのに、カタログの行が「まだ 1 件も無い」のままになっている
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run check-datasets] [起票:2026-11-13] [領域:管理]
-
-- **観測 (2026-11-13)**: `config/datasets.mjs` の `blog.fullbleed-backgrounds` は `planned: true` だが、`git ls-files assets/blog/fullbleed-backgrounds` は 861 件を返す。
-- **次**: `planned` を外す。件数があるのに `planned: true` の行を `check-datasets` が落とすかを確かめ、落とさないなら検査を足す。
-- **完了条件**: 行が実態と一致し、同じ食い違いを検査が止める。
 
 ### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
@@ -402,6 +396,8 @@ updated: 2026-11-01
 - **証拠 (2026-11-13)**: `apps/web/src/__tests__/region-page-no-comparison.test.ts` の 3 件が、列挙したパス (`appareaspage.tsx`) を `/` 区切りの期待値と比べて落ちる (CF-CPU-URL-01 の作業中の vitest で観測。触っていないファイル)
 - **完了条件**: この PC で `npm run preflight:pr` の該当の 2 ゲートと、`apps/web/scripts`・`apps/admin` の vitest、`npm run theme:quality:test` が通る
 - **統合 (2026-11-13)**: `ADMIN-AGENT-MODELS-WIN-PATH-01` をこのカードへ統合した。完了条件に含める: この PC で preflight:pr の該当 2 ゲート・apps/web/scripts と apps/admin の vitest・npm run theme:quality:test が通る。吸収分: (1) region-page-no-comparison.test.ts の 3 件は PR #1258 で修正済みなので Windows で通ることの確認だけ残す (2) apps/admin/tests/unit/agent-models.test.ts は agentModelCatalog が返す file を / 区切りにそろえ、npm run test -w apps/admin が通ること。
+- **確認の追加 (2026-11-13・消した `ADMIN-VITEST-TIMEOUT-01` から)**: `apps/admin/vitest.config.mts` の testTimeout と hookTimeout を 120 秒にした (`ce725a765`)。この PC で tsc や dev サーバーと並行して `npm run test --workspace apps/admin` を流し、タイムアウトが 0 件かを確かめる。
+- **確認の追加 (2026-11-13・消した `ROOT-TSX-NODE-PIN-01` から)**: この PC の Node は 22.14.0 で、`.mjs` が `.ts` を直接 import すると `ERR_UNKNOWN_FILE_EXTENSION` で落ちる (型の除去が既定で有効なのは 22.18 から)。`.claude/scripts` に約 10 本ある (`ads/build-placement-map.mjs`・`estat/gen-ssds-configs.mjs`・`lib/internal-link-lint.mjs` など)。22.14 を支えるなら tsx 経由にし、支えないなら Node を上げる (オーナーが決める)。ルートの devDependencies への tsx の追加は `7f6f18db0` で済み。
 
 ### [SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01] 調査ポートフォリオの検証スクリプトと Schema・refs の二重の検査をなくす
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-10] [領域:データ]
@@ -436,33 +432,12 @@ updated: 2026-11-01
 - **次**: paths に案件の台帳と、配信の保留を決める `apps/web/src/features/ads/constants/affiliate-delivery-policy.ts` を足すか、オーナーと決める (起動のたびに R2 への書き込みと全ゾーンのパージが走るため)
 - **完了条件**: 案件の台帳だけを変えた push で、R2 の広告の snapshot が作り直される
 
-### [THEME-SOURCE-PROPOSAL-WRITES-TS-01] テーマの出典の提案を作る道具が、移した後も TS を書き・読む
-タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:データ]
-
-2026-11-11 にテーマの出典 19 件を台帳 `themes.sources` (`data/themes/sources/<名前>.json`) へ移した。提案を作る `prepare-proposal.py:11` は今も `property-price-distribution-source.ts` (as const 付きの TS) を書き、`ingest-bridge-inspection-age.mjs:19` の `--proposal-dir` も提案を TS として読む。新しい提案を取り込むときは、手で JSON の台帳へ写すことになる。
-- **次**: 提案を台帳と同じ JSON の形で書き・読む形に直す (`themes.sources.schema.json` で検査できる)
-- **完了条件**: 提案のファイルを台帳へそのまま置けて、`npm run check-datasets` が通る
-
 ### [GEO-ANALYSIS-CONTENT-ID-DANGLING-01] Geo 分析 3 件の contentId が、事業計画のコンテンツの機会に無い
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-11] [領域:データ]
 
 台帳 `geo.analyses` の土砂・低標高・公共施設の 3 分析は、contentId に geo-107・geo-129・geo-128 を持つが、台帳 `business-plan.content-opportunities` の機会は geo-001〜geo-100 しか無い (2026-11-11 に段 11 で参照を宣言して判明)。いまは `config/datasets.mjs` の `geo.analyses` の参照を `severity: "warn"` で通している。
 - **次**: 事業計画の担当が、機会を足すか contentId を直すかを決める
 - **完了条件**: 3 件が実在する機会を指し、`geo.analyses` の `contentId` の参照から `severity: "warn"` を外しても `npm run check-datasets` が error 0
-
-### [AFFILIATE-SIZE-CHECK-WRITES-STATE-01] pre-commit の広告のサイズ検査が、在庫の記録を書いて作業ツリーに差分を残す
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-11] [領域:アフィリエイト]
-
-`apps/web/scripts/pre-commit-checks.sh` の「6.7 アフィリエイト広告のサイズ規約チェック」は、広告の台帳がステージされると `audit-affiliate-inventory.ts --json --check-size` を走らせる。このスクリプトは `--json` でも `data/affiliate/inventory-latest.json` と `inventory-<日付>.json` を書く (`audit-affiliate-inventory.ts:160-161`)。コミットのたびに生成日時だけの差分と未追跡の日付のファイルが残り、次のコミットに混ざりうる (2026-11-11 に段 10 のコミットで 2 回起きた)。
-- **次**: 検査の経路では書かない指定 (例 `--check-size` のときは書かない) にする
-- **完了条件**: 広告の台帳を含むコミットの後に `git status --short` が空
-
-### [PATHS-CONSTANT-CWD-01] `config/paths.mjs` の定数を、リポジトリのルートと結合せずに読むスクリプトを直す
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run type-check:scripts] [起票:2026-11-11] [領域:管理]
-
-`config/paths.mjs` の定数はリポジトリのルートからの相対パス (例 `KDP_LISTINGS = "data/products/kdp/listings.json"`)。`.claude/scripts/measurement/marketplace-status.mjs:26` は `readFileSync(KDP_LISTINGS, 'utf8')` とそのまま読むので、作業ディレクトリがルートでないと `ENOENT` になる (2026-11-11 にコードを読んで確認。実行しての再現は未確認)。置き場を `config/` から `data/` へ移す前から同じ読み方だった。
-- **次**: `git grep -n "from '.*config/paths.mjs'" -- .claude/scripts scripts apps packages` で定数の読み手を並べ、ルートと結合していないものを直す
-- **完了条件**: 定数を読む全スクリプトが、ルートと結合したパスか `datasetPath()` で読む
 
 ### [PRODUCT-LP-SHOWCASE-01] 商品の LP (サイトの商品ページと note の記事) を、1 つの画像指定から全商品へ作れる仕組みとゲートにする
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx apps/web/scripts/generate-product-storefront.ts --check] [起票:2026-11-10] [領域:商品]
@@ -518,16 +493,6 @@ updated: 2026-11-01
   - 見本の全 URL の GET 検査が通る。
   - LP の無い商品の上限が 0 になっている。
 - **統合 (2026-11-13)**: `PRODUCT-SAMPLE-TYPED-01` をこのカードへ統合した。完了条件に含める: LP カードの完了条件 (14 商品の LP と note 確認・画像の SHA 照合) に加え、13 パックの見本画像を共通の型 (進行中の 型 treemap・file-preview 含む) で作り、固定納品の値から生成した画像をサイトと note 無料部分の初稿で共用して目視確認する。確認後の画像配置・note 更新と note:figures の product-sample 判定が通り、本文画像台帳の product-untyped 上限 maxUntypedProductArticles (縮小専用) を下げる。
-
-### [VACANCY-TYPES-TEST-NODE-TS-01] 空き家の種類のテストが data-configs の index.ts を node で読めずに落ち、関係の無い push を止める
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs] [起票:2026-11-10] [領域:管理]
-
-- **事象 (2026-11-10)**: `node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs` が `ERR_MODULE_NOT_FOUND: packages/data-configs/src/types` で落ちる (pass 0 / fail 1。Node v22.23.3)。`ingest-vacancy-types.mjs` が `require('…/packages/data-configs/src/registry.ts')` で TS を Node の型除去のまま読み、その先の `packages/data-configs/src/index.ts` の `export * from "./types"` (拡張子なし) を Node が解決できない。
-- **影響**: push 前テスト (`.claude/scripts/lib/pre-push-tests.mjs`) は、変更したファイルと名前が 4 文字以上重なる node のテストを選ぶ。`types.ts` を変えた push では、名前に `types` を含むこのテストが選ばれ、変更と無関係に push が止まる。2026-11-10 の商品 LP の push (`apps/web/src/features/products/types.ts` を変更) がこれで止まり、`--no-verify` で push した。develop の品質ゲート (develop-quality-gate.yml) は同日 success なので、CI では走っていないか別の起動方法で通っている (未確認)。
-- **再発 (2026-11-11)**: `apps/web/src/features/theme-dashboard/types.ts` を変えた push (テーマの初回描画データ `4baf8aad7`) でも同じテストが選ばれて止まった (node のテスト 39 件中この 1 件だけ fail、web の関係するテスト 366 件は pass)。web の vitest 全件 2,826 件と型検査が通っていることを確かめてから `--no-verify` で push した。
-- **次**: ① テストまたは `ingest-vacancy-types.mjs` を tsx 経由で読む形にする (他の `.claude/scripts` の TS 読み込みと同じ方法に合わせる)。`index.ts` の import に拡張子を付ける直し方は、web のビルドへの影響を確かめてからにする。② CI でこのテストが走っているかを確かめ、走っていないなら全件の node テストに載せる。③ 名前の重なりで無関係のテストを選ぶ件は、`selectNodeTests` の stem 判定 (`types` のような一般語) を見直すかを決める。
-- **完了条件**: 上の検証コマンドが pass し、CI の node テストにこのテストが含まれている。
-- **同じ型の別のテスト (2026-11-11)**: `node --test .claude/scripts/themes/__tests__/record-theme-viewpoints.test.mjs` も手元で `ERR_MODULE_NOT_FOUND` で落ちる (pass 0 / fail 1)。PR の Contract Tests のログにこのファイル名は出てこないので、CI では走っていない。原因が同じかは未確認。
 
 ### [ESTAT-APPID-LOCAL-01] 手元の設定ファイルから e-Stat の appId が読めて、「CI 専任」と食い違う
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-11-10] [領域:サイト]
@@ -681,29 +646,12 @@ updated: 2026-11-01
 - **止まる場面**: 設計の確認 / 公開の判断。
 - **完了の判定**: 新しい問いが、人の指示なしで下書きと審査まで進み、`published: false` で止まる。M01 の失敗を再現した入力で、書く前に止まる。
 
-### [PRE-PUSH-WORKTREE-01] pre-push フックが develop から切った worktree で落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:git push --dry-run] [起票:2026-11-07] [領域:サイト]
-
-- **起点**: `core.hooksPath` が本体の絶対パスなので、本体が `.husky/pre-push` を持つブランチにいると、スクリプトの無い develop の worktree の push が `MODULE_NOT_FOUND` で落ちる (2026-11-07)。
-- **次**: フックがスクリプトの有無を確かめるか、hooksPath を相対にする。
-- **完了条件**: develop から切った worktree で push できる。
-- **追記 (2026-11-07)**: フックが選ぶテストのうち、`generate-article-charts-ranks.test.mjs` の「入力が昇順でも値の降順を維持し」は統合前の develop でも落ちる (ランキングの図が型の画像へ移ってラベルの形が変わったためとみられる。原因は未確認)。`page-quality/__tests__/ui-review.test.mjs` はフックが tsx なしで動かすので `ERR_MODULE_NOT_FOUND` になる。どちらも直すまで、フックは関係の無い push を止める。
-- **追記 (2026-11-13)**: `generate-article-charts-ranks.test.mjs` は直した (`b6afb734e`。`25be2d4d9` で順位が数字と県名の 2 要素になったのに期待が旧書式だった)。`ui-review.test.mjs` は依存を張った worktree では通る。残りは hooksPath だけ。
-
 ### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
 - **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。背景画像は 2026-11-06 に Codex で生成して取り込み済み。M01 は既存記事 `manufacturing-productivity` の更新をやめて新しい記事にした (既存記事は図データの欠落など過去の負債を直さないと再公開できない)。
 - **次**: ① オーナーが下書き全文を確認する ② `published: true` にして develop へ push する ③ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ④ X の下書き 1195・1196 をオーナーの承認へ回す。
 - **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
-
-### [BLOG-AD-ROW-HYDRATION-01] ブログの本文の広告の段が段落の中に入り、hydration に失敗する
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run test -w web] [起票:2026-11-06] [領域:サイト]
-
-- **起点**: 開発サーバーで公開済みの `/blog/vacant-house-crisis` を開くと、`<ad-row>` の `<div>` が `<p>` の中に入り `In HTML, <div> cannot be a descendant of <p>` が出る。2026-11-03 の広告の段の導入以降、段を差し込む全記事に当てはまる見込み (確認したのは公開済み 1 本と下書き 1 本)。
-- **原因**: `apps/web/src/features/blog/components/md-content.tsx` の `p` の判定 `hasBlockElement` の一覧に `ad-row` が無い。
-- **次**: 一覧に `ad-row` を足し、本文の広告の段で hydration エラーが出ないことをテストで固定する。
-- **完了条件**: 広告の段がある記事で hydration エラーが出ず、段の表示位置が変わらない。
 
 ### [STRATEGY-ISSUE-MAP-PV-CHART-01] 広告の効率が出たら、事業イシューマップに月 ¥1 万へ要る PV のグラフを足す
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run test -w apps/admin] [起票:2026-11-05] [領域:戦略]
@@ -875,13 +823,6 @@ updated: 2026-11-01
 - **次**: 描き直しの型 (地図・ランキング) で ① 出典名を指標の定義から入れる ② 題を幅に合わせて縮めるか折り返す ③ 副題の年に `yearFormat` を使う。直したら Kindle の対応する校訂を外す (置換元が消えると生成が止まるので同じ PR で)。
 - **完了条件**: 全ブログの SVG で「出典：」だけの行 0・72px の題の推定幅超え 0・年度の指標の副題が「年度」。
 
-### [METRIC-LIBRARY-PER-MILLION-LABEL-01] library-count-per-million の副題「人口100万人当たり」が値 (人口 10 万人当たり) と合わない
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
-
-- **事象**: 山梨県 6.58 館。山梨の図書館は約 54 館・人口約 81 万人なので 10 万人当たりの値。METRICS_REGISTRY と `verified-product-labels` は「人口100万人当たり」、ブログの図の単位は「館/10万人」。サイトのランキングの見出しも誤っている可能性がある。
-- **本の対処**: `full-tables.ts` の `TABLE_OVERRIDES` で見出しを「人口10万人当たり」にした。
-- **次**: e-Stat の元の表で分母を確かめ、定義 (と key 名) を直す。直したら `TABLE_OVERRIDES` の該当行を外す。同じ系列の `community-sports-facility-count-per-million`・`public-gymnasium-count-per-million` (秋田 906.9 施設) も分母を確かめる。
-
 ### [NOTE-TO-KINDLE-GUIDE-01] note の記事から同じテーマの Kindle 本へ 1 行の案内を置き、UTM と販売台帳で 6 週測る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-04] [領域:商品]
 
@@ -911,9 +852,10 @@ updated: 2026-11-01
 ### [CONVENIENCE-STORE-SALES-SCALE-CHECK-01] コンビニ販売額の値の桁 (東京都 155,869百万円) が年間か月間かを確かめる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
 
-- **起点**: 2026-11-03 に表示換算の係数を「百万円→億円 0.0001」から 0.01 に直した (単位どおり)。直すと東京都は 1,559 億円になるが、商業動態統計の年間販売額としては小さく見える。値が月間か、単位が違う可能性がある (未確認)。百貨店・スーパー販売額 (`department-supermarket-sales`) も同じ係数だった。
-- **やること**: e-Stat の元の表 (`data/metrics/convenience-store-sales.ts` の statsDataId) で期間と単位を確かめ、値か単位か説明文を直す。
-- **完了条件**: 期間と単位を出典で確かめた記録があり、値・単位・説明が一致する。
+- **済み (2026-11-13・`3d5c87fd9`)**: e-Stat `0004032502` は年計・四半期・月次を 1 つの表に持ち、`timeScope` 未指定のため 2025 年 1 月の月間値 (東京都 155,869 百万円) を年の値として採っていた。単位と換算 0.01 は正しい。`source.timeScope` を `annual`、年を台帳の年計の範囲 2022〜2024 に直した。
+- **残り (R2 への書き込みが要る)**: main へ入った後に CI で再取り込みする。配信中の値はそれまで月間値のまま。再取り込み後に、表示単位の台帳 (`data/metrics/display-units/ledger.json`・週次生成) と、値を含む SEO 文字列を作り直す (`seo-meta-facts` のゲートは R2 の配信値と照合するので、それまで値を載せられない)。
+- **あわせて確かめる**: 百貨店・スーパー販売額 (`department-supermarket-sales`・`0004032493`) は台帳で 2025 年が 20 県分しか無い。同じ取り出し条件の問題かは未確認。
+- **完了条件**: 配信中の値が年計になり、値・単位・説明・SEO 文字列が一致している。
 
 ### [GEO-STAT-BOX-STATTILE-01] Geo の検算の大きな数値を手組みの箱から共通の数値タイル (StatTile) にする
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
@@ -935,13 +877,6 @@ updated: 2026-11-01
 - **観測 (2026-11-03 午後)**: テーマだけでなく県・市区町村・全国のテーマのページでも、開発サーバーの R2 の取得が `ECONNRESET` で切られ (`fetch failed`、3 回取り直し)、1 ページの描画に 30〜87 秒かかった。描画の途中のエラーで Next の開発サーバーが「Fast Refresh had to perform a full reload due to a runtime error」で読み込み直しを繰り返し、ブラウザでページを開けない状態が続いた。開いたままの別タブ (テーマ・全国のページ) も同時に読み込んでいた。
 完了条件: ローカルで同じページを 5 回続けて開き、133 指標が毎回そろう。本番の結果を記録した。
 
-### [ADMIN-DISTMAP-TEST-STACK-01] 管理画面の地図の見本のテストが Mac の手元でだけスタックあふれで落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/admin && npx vitest run tests/unit/template-distribution-map.test.ts] [起票:2026-11-03]
-
-2026-11-03 に Mac (Node v22.23.3) の本体と origin/develop の作業ツリーの両方で、`template-distribution-map.test.ts` の「keeps far islands out…」が `RangeError: Maximum call stack size exceeded` で落ちた。同じコミットの CI (PR #1213 の Unit Tests) では通っている。push 前に admin の vitest 全件を回すと毎回 1 件赤になり、本物の失敗と見分けにくい。
-次: スタックの深さを使う処理 (地図の境界の再帰・巨大な配列の展開 `push(...arr)` など) をスタックトレースで特定し、Node の版の差か入力の差かを切り分ける。
-完了条件: Mac の手元で同テストが通り、原因をコードで直したか、版の差なら CI と手元の Node を揃えた。
-
 ### [R2-WRITE-PENDING-DISPLACE-01] R2 書き込みの待ち枠を後続の実行が奪い、新規ランキングの OGP 生成が始まる前に取り消される
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
 
@@ -949,13 +884,6 @@ updated: 2026-11-01
 - **なぜ構造で直すか**: 取り消しは無言で、気づくのはデプロイ後スモークか本番の 404 になってから。手で再実行する運用では毎回同じ順に踏む。
 - **次 (案)**: ① `r2-write` の workflow のうち、取りこぼすと困るもの (OGP の新規キー・ブログ公開) を、取り消されても後で拾う形にする。例: sync-snapshots の最後で「新規キーの OGP 欠落」を検査して足りない分を作る、または取り消し済みでジョブ未開始の r2-write run を一定間隔で再実行する見張りを置く ② main へのマージ前に、増えた既知キーの og:image が R2 にあるかを確かめる。
 - **完了条件**: 待ち枠を奪われた OGP 生成が人手を介さず作り直され、デプロイ後スモークが新規キーの og:image で落ちない。
-
-### [IG-AREA-PROPS-SCHEMA-VERSION-01] Instagram の県カードの台本が、県データブックの snapshot の版を上げるたびに止まる
-タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-11-02] [領域:SNS]
-
-- **証拠 (2026-11-02)**: `.claude/scripts/sns/build-ig-area-props.ts` は `schemaVersion` が現行より古い `databook.json` を拒否する。県ページに家計調査の上位品目を足して版を 2 から 3 に上げたので、R2 の snapshot が再生成されるまでこの台本は「旧版」で止まる (Instagram の自動投稿は 2026-10-27 から停止中なので実害はまだ無い)。
-- **次**: 足した項目は任意 (optional) なので、版の比較を「読めるかどうか」(parseAreaDatabookSnapshot) に寄せ、版の数字の完全一致を求めない。
-- **完了条件**: 任意の項目を足した snapshot の版上げで台本が止まらないことをテストで固定する。
 
 ### [METRIC-DISPLAY-UNIT-WIRING-01] 指標の定義の表示単位 (display) を全画面で効かせる前に、71 指標の換算を監査する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:サイト]
@@ -1052,9 +980,9 @@ updated: 2026-11-01
 ### [XLSX-FURIGANA-INGEST-01] ingest-nier-achievement.ts の xlsx 読み取りが、共有文字列のふりがなを本文に混ぜる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-01] [領域:データ]
 
-- **事象 (2026-11-01)**: 待機児童率の取り込みを作る途中で、`packages/data-configs/scripts/ingest-nier-achievement.ts` と同じ xlsx の読み方 (共有文字列の `<rPh>` を除かない) では市区町村名にふりがなが混ざり、結合が 0 件になった。新しく作った `packages/data-configs/scripts/lib/read-xlsx-sheet.ts` は `<rPh>` を除く。`ingest-nier-achievement.ts` は複製の読み方のまま。
-- **次**: ① `ingest-nier-achievement.ts` の読み取りを `lib/read-xlsx-sheet.ts` に差し替える ② 既存の取り込み結果 (学力調査) にふりがな混入による結合漏れが無かったかを、同じ入力で新旧の出力を比べて確かめる。
-- **完了条件**: 2 本の取り込みが同じ読み取りの部品を使い、新旧の出力の差が 0 件か、差の理由が記録されている。
+- **済み (2026-11-13・`2c28508cd`)**: `ingest-nier-achievement.ts` の独自の xlsx 読み取りを消し、`lib/read-xlsx-sheet.ts` の `readXlsxSheet` に差し替えた。複製を持たないことをテストで固定した。
+- **残り (NIER の xlsx 94 個の取得が要る)**: `npx tsx packages/data-configs/scripts/ingest-nier-achievement.ts --year 25 --dry-run` の出力を、差し替え前のコミットと比べる。コード上、この取り込みが読むのは「全体」の見出しと数値セルだけで市区町村名は読まないが、実データでの差は未実測。
+- **完了条件**: 新旧の出力の差が 0 件か、差の理由が記録されている。
 
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
@@ -1153,11 +1081,12 @@ updated: 2026-11-01
 - **完了条件**: 全ての slotId がそれぞれ 1 つの配置だけで使われ、`BORROWED` の例外が無い。
 
 ### [AFF-PLACEMENT-MAP-SIZE-01] 配置マップ (placement-map-latest.json) を 1MB 以下に分け、週次の更新を戻す
-タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-31] [領域:アフィリエイト]
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-31] [領域:アフィリエイト]
 
-- **起点 (2026-10-31)**: git の `data/affiliate/placement-map-latest.json` は 2026-08-27 生成のまま。手元で `node .claude/scripts/ads/build-placement-map.mjs` を回すと 9,087,495 バイトになり、リポジトリ衛生の上限 1MB (`check-repo-hygiene.cjs` の LARGE_FILE) を超えてコミットできない。ページごとの明細 (`pages`) が膨らんだと見られる (未確認)。`/register-affiliate-banner propose` と週次の判断が 2 か月前の需要を読んでいる。
-- **次**: ① 週次 workflow (`affiliate-dashboard-refresh.yml`) の直近の実行で、生成・コミットのどちらで止まっているかをログで確かめる ② git には要約 (需要・不足・未解決の理由・逆引き候補) だけを置き、ページごとの明細は R2 の `state/` か `.local/` に分ける (page-quality の `latest.json` と同じ形)。
-- **完了条件**: 週次で `placement-map-latest.json` が 1MB 以下で更新され、`generatedAt` が 8 日以内。
+- **済み (2026-11-13・`0add28e1b`)**: 肥大の原因はページ別明細 `pages` (6,000 ページ超 × 適格広告の一覧で約 6.7MB) だった。git には要約だけを置き、明細は `.local/affiliate-placement-map/pages-latest.json` に分けた。2026-11-13 生成の `placement-map-latest.json` は 62,756 バイト。
+- **分かったこと**: 週次 workflow `affiliate-dashboard-refresh.yml` は `contents: read` で、生成物を artifact に上げるだけで git へ書き戻さない。git の記録は、もともと週次では更新されない。
+- **決めること (オーナー)**: git の `placement-map-latest.json` を週次で自動更新するか (workflow に書き戻しを許す)、手元で生成してコミットする運用にするか、読み手を artifact か R2 に向けるか。
+- **完了条件**: 決めた方法で `placement-map-latest.json` が 1MB 以下のまま更新され、`generatedAt` が 8 日以内。
 
 ### [MUNI-DATA-DEDUP-01] 製造品出荷額の 2 指標 (manufacturing-shipment と -amount) が R2 で同じ値になっている件を正す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-01] [領域:データ]
@@ -1431,15 +1360,6 @@ updated: 2026-11-01
 - **禁止**: テストを消して速くしない。並列数を上げてメモリ上限の再起動を起こさない (2 並列は `config/local-resources.json` の予算)。
 - **完了条件**: 同じ Mac で全件の所要が測定前より短くなり、前後の所要と上位ファイルの一覧を本カードか PR に書いてある。
 
-### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: ルートの `package.json` は `tsx` を devDependencies に持たないのに、`ui-theme:lyra`・`ui-theme:lyra:test`・`page-quality:test` が `node --import tsx` で動く (workspace からの巻き上げで偶然解決)。`apps/web` の `design-system:check` は `--experimental-strip-types` を付けて `.ts` を読む。`engines` は `"node": ">=22"` だけで、`.nvmrc` の版と型の除去が既定で有効な版 (22.18 以降) の関係が書かれていない。
-- **次**: ルートの devDependencies に `tsx` を足して lockfile を更新する。`engines` を `.nvmrc` と合わせる (22.14 を支える必要があるかは会社の Windows PC の版で決める)。
-- **観測 (2026-11-10)**: 会社の Windows PC の Node は 22.14.0 で、`.mjs` が `.ts` を直接 import すると `ERR_UNKNOWN_FILE_EXTENSION` で落ちる (型の除去が既定で有効になるのは 22.18 から)。`analysis:check` は pre-commit が呼ぶので `node --import tsx` に変えた。`.claude/scripts` には `.ts` を直接 import する `.mjs` がほかに約 10 本ある (`ads/build-placement-map.mjs`・`estat/gen-ssds-configs.mjs`・`lib/internal-link-lint.mjs` など)。22.14 を支えるなら同じく tsx 経由にする。
-- **観測 (2026-11-10)**: `apps/web` の `gone-blog-publication.test.ts` の 3 件も、`quality-gate.mjs` が `responsive-chart.ts` を直接 import するため Node 22.14 で落ちる。
-- **完了条件**: ルートの `package.json` に `tsx` があり、`npm run ui-theme:lyra:test` と `npm run design-system:check -w apps/web` が `.nvmrc` の版で通る。
-
 ### [DESIGN-CHECK-CLASSNAME-EXPR-01] design-system:check の上書き禁止の規則が、cn() やテンプレート文字列で書いた className を見ない
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
 
@@ -1519,21 +1439,20 @@ updated: 2026-11-01
 - **確認が要る (11-03 の棚卸し)**: 「`_city_dc` を読むコードは 0 件」とあるが、`git grep -l _city_dc` で `apps/web/src/app/api/mf-topo/[code]/route.ts` と `apps/remotion/src/features/population-choropleth/usePopulationData.ts` が出る。コメントだけか実際に読むかを確かめる
 
 ### [METRIC-CLINIC-PER-100K-UNIT-01] 人口10万人当たりの一般診療所数・病院数が、題名と単位では実数に見え、さらに人口換算を重ねられる
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
-
-- **証拠 (2026-10-28)**: `data/metrics/general-clinic-count-per-100k.ts` は SSDS `0000010209` `#I0910105` (人口10万人当たり) を取るが、title は「一般診療所数」・unit は「施設」で、`normalizationOptions` に「人口10万人あたり」(施設/10万人) がある。R2 の市区町村 values.json は最大が三島村 987.7 で、実数ではなく率の値。換算を選ぶと二重に割る (memory `feedback_ssds_denominator_evidence` と同じ型)。`general-hospital-count-per-100k` も同じ形かは未確認。
-- **次**: 2 指標の SSDS 項目名を e-Stat のメタで確かめ、title・unit を「人口10万人当たり」の形に直し、人口・面積の換算を外す。同じ形の SSDS `#` 項目を `validate:config` で検出できるか検討する。
-- **完了条件**: 2 指標の title・unit が値の意味と一致し、二重の換算を選べない。
-- **影響の追記 (2026-10-28)**: topic-queue の型B の件数×件数の除外 (`isPopulationCountMetric`・`topic-queue-spurious-core.mjs`) は unit と subtitle・title の「当たり」で判定するので、この 2 指標は率なのに件数と判定されうる。直せば除外の精度も上がる。
-- **影響の追記 2 (2026-10-28)**: 規模×規模の除外 (`size-pair`・`isSizeMetric`) も同じ判定に頼るので、同じ誤判定が及ぶ。
-
-### [METRIC-HOUSEHOLD-ASSET-SUBTITLE-01] 家計の金融資産と農家総所得の指標に「1世帯当たり」の印が無く、総額と判定される
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:データ]
 
-- **証拠 (2026-10-28)**: 金融負債残高・預貯金・有価証券保有額 (statsDataId `0000010112`) と農家総所得は unit が素の「千円」で、title にも subtitle にも世帯あたりの印が無い。topic-queue の型B の規模×規模の除外 (`isMoneyTotalMetric`・`topic-queue-spurious-core.mjs`) はこれを総額と判定する。今のキューには出ていないが、型B の候補になると誤って外れる。読者にも世帯あたりか総額かが分からない。
-- **次**: e-Stat のメタで各指標の値が 1 世帯当たりか (農家総所得は 1 農家当たりか) を確かめ、metric config の subtitle に分母を書く。単位を変えるときは `.claude/rules/unit-semantics-standards.md` に従う。
-- **完了条件**: 該当指標の subtitle が分母を持ち、`isMoneyTotalMetric` が総額と判定しないことをテストで固定している。
-- **統合 (2026-11-13)**: `METRIC-FARM-INCOME-DEFS-01` をこのカードへ統合した。完了条件に含める: 対象指標 (金融負債残高・預貯金・有価証券保有額・農家総所得) の subtitle/note が分母を持ち、isMoneyTotalMetric が総額と判定しないことをテストで固定している。吸収分: 農業所得割合・農外所得割合の 2 指標の分母 (北海道 2003 年度で 46%+15.1%=61.1%) を確認、e-Stat の「年計」に対する yearFormat: fiscal と seoTitle の「年度」化のどちらが正しいかを出典の年区切りで決め、正規化の選択肢が無いこと、seoTitle が「2003年度」になること。確認できない間は note に未確認と書く。
+- **済み (2026-11-13・`536a76380`)**: e-Stat 公式の算式表で `#I0910105` が「一般診療所数（人口10万人当たり）」であることを確かめ、`general-clinic-count-per-100k` から人口・面積の換算を外して description に分母を書いた。`ssds-denominator-contract` のテストに追加した。一般病院数は既に直っていた。title と unit は、リポジトリの設計 (unit は素の単位、分母は subtitle と description) に合わせて変えていない。
+- **残り**: subtitle が「人口10万人当たり」の 62 指標のうち 48 指標が `normalizationOptions` を持ち、同じ二重の換算を選べる (2026-11-13 の実行役の集計。指標の一覧は未作成)。SSDS の `#` 項目で分母を持つ指標が換算の選択肢を持つと落ちる検査を `validate:config` か `ssds-denominator-contract` に足し、48 指標を直す。分母は公式の算式表で確かめる (memory `feedback_ssds_denominator_evidence`)。
+- **未確認**: topic-queue の `isPopulationCountMetric` と `size-pair` の誤判定が、今回の修正で消えたかは実測していない。
+- **完了条件**: 分母を持つ指標が換算の選択肢を持つと検査が落ち、現物で通る。
+
+### [METRIC-HOUSEHOLD-ASSET-SUBTITLE-01] 家計の金融資産と農家総所得の指標に「1世帯当たり」の印が無く、総額と判定される
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
+
+- **済み (2026-11-13・`fb22ef468`)**: 金融負債残高・預貯金・有価証券保有額・農家総所得の subtitle に分母を足し、`isMoneyTotalMetric` が総額と判定しないことをテストで固定した。
+- **残り 1 (手元で済む)**: 金融負債残高・預貯金・有価証券保有額 (`data/metrics/financial-debt-balance.ts` ほか) は 1 世帯当たりの値なのに、`normalizationOptions` に人口・面積あたりの換算が残っている。農家総所得と同じく空にする。
+- **残り 2 (旧 `METRIC-FARM-INCOME-DEFS-01`・一次資料の確認が要る)**: 農業所得割合・農外所得割合の分母を確かめる (北海道 2003 年度で 46%+15.1%=61.1%)。e-Stat の「年計」に対して `yearFormat: fiscal` と seoTitle の「年度」のどちらが正しいかを、農林水産省の調査の年区切りで決める。農家総所得の「1 戸当たり」も e-Stat の項目定義に明記が無く、値の桁からの読みなので、同じ資料で確かめる。確認できるまで note の「未確認」を残す。
+- **完了条件**: 3 指標に二重の換算の選択肢が無く、2 指標の分母と年区切りが一次資料で確かめられ、seoTitle の年表記がそれと一致している。
 
 ### [BLOG-STACKED-MOBILE-WEB-01] 積み上げ棒のスマホ用 SVG がサイトで使われない
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
@@ -1819,20 +1738,14 @@ updated: 2026-11-01
 - **完了条件**: 13 パックの PowerPoint で 1 位が一番上に並び、note の添付が新しい版に替わっている。
 
 
-### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/admin] [起票:2026-10-27] [領域:管理]
-
-- **実測 (2026-10-27・会社 Windows PC)**: 別の作業 (tsc・dev サーバー) と並行して `apps/admin` の vitest を流すと、`lib/server` 系のテスト約 23 件が既定の 5 秒でタイムアウトした。`--testTimeout=120000` では 311 件が通り、落ちたのは既知の agent-models の 1 件 (Windows のパス区切り) だけだった。
-- **次**: タイムアウトするテストの共通点 (重いファイル読み取り・初回 import の変換時間) を特定し、`vitest.config.mts` の testTimeout を上げるか、読み取りを小さな fixture にする。
-- **完了条件**: 並行作業中でも `npm run test --workspace apps/admin` がタイムアウト 0 件。
-
 ### [MEDIA-CODE-IMAGE-REFERENCE-01] 画像台帳でコード例の画像記法を配信画像として数えない
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-27] [領域:サイト]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]
 
-- **証拠**: imageReferences はコード領域も正規表現で拾い、公開記事 /blog/cc-estat-03-population-bar の記法例 /charts/population.svg を missing とする。本番HTMLは200で、このURLをsrcとするimg要素はなくコード表示だけだった（2026-10-27確認）。OGPの実配信画像とは別件。
-- **次**: .claude/scripts/media/lib/web-inventory.mjs でMarkdownのコード例を除き、通常の画像・HTML img・出現行番号を維持する。インライン/フェンス付きコードと実画像を同時に含む回帰テストを足す。
+- **済み (2026-11-13・`0ec7f25f2`)**: `imageReferences` がフェンス付きコードとインラインコードを除いて照合するようにし、コード例と実画像を同時に含む回帰テストを足した。
+- **残り 1 (手元で済む)**: `inlineSvgReferences` も本文のコード例の中の svg を埋込 SVG として数える。同じ除外を当て、回帰テストを足す。
+- **残り 2 (R2 の読み取りと認証が要る)**: 対象記事 `/blog/cc-estat-03-population-bar` の台帳を `sync-web-image-inventory.mjs` で再生成し、本番 HTML の img 集合と照合する。
 - **停止条件**: 正常な本文画像の参照を落とす場合は採用しない。
-- **完了条件**: 記法例がmissing件数に入らず、実画像の欠落を引き続き検知する。対象記事の台帳を再生成し、本番HTMLのimg集合と照合する。
+- **完了条件**: 記法例が missing 件数に入らず、実画像の欠落を引き続き検知し、対象記事の台帳が本番 HTML の img 集合と一致する。
 
 ### [NOTE-CIRCULATION-RECHECK-01] note→ランキング回遊の着地 session を note.com 経由で取り直す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:管理]
@@ -1912,27 +1825,6 @@ updated: 2026-11-01
 - **停止条件**: 出典の書き換えが 1 件でも出たら即終了してオリジナルに戻す。1 セッションあたりページ数が -5% を超えて落ちたら止める (回遊が PV の主レバーなので、単価と引き換えにしない)。
 - **読者の課題 / HARM**: 読者の課題は変わらない。読みやすさを損なわない範囲で、AdSense を Cloudflare の維持費の相殺に近づける (M・運営側)。
 - **完了条件**: アンカーと全画面の 2 テストの結果 (1,000 PV あたり収益・ページ数・CWV) が記録され、適用するかの判断が収益化戦略 §3.1 に書かれている。
-
-### [DEPS-PLATFORM-OPTIONAL-LOCK-01] 依存の検査が、他 OS 向けバイナリの lock 記録の取り残しを捕まえない
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/check-dependency-overrides.test.cjs] [起票:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-26)**: Next 16 移行 (`89ef74c19`) の push で develop の品質ゲートが 4 job とも `npm ci` で落ちた。workerd 本体は 1.20261019.1 なのに、lock の他 OS 向け任意依存 (`@cloudflare/workerd-linux-64` ほか 3 件) が 1.20260825.1 のまま残り、Linux の CI で取り出したバイナリの版が合わず workerd の install.js が止めた。Mac では Mac 用だけを入れ直すので気づけない (memory `feedback_windows_npm_install_rolldown_binding` と同じ型)。`check-dependency-overrides.cjs` は override の名前でしか照合しないので通っていた。
-- **次**: lock の各パッケージの optionalDependencies の完全一致の版と、npm の解決順で当たる記録の版を照合する検査を足す (2026-10-26 に手で流した照合で 0 件になることを確認済みの方式)。
-- **完了条件**: 親の要求と食い違う他 OS 向けの記録を持つ fixture で検査が落ち、現在の lock で通るテストがある。
-
-### [PRECOMMIT-WIRING-STAGED-SCOPE-01] pre-commit の配線検査が、他の作業者の作りかけの検査スクリプトで自分の commit まで止める
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-26)**: `CHECKER-WIRING-PRECOMMIT-01` で pre-commit に足した段は、検査スクリプトか workflow を staged にした commit で `check-checker-wiring.cjs --baseline` を走らせる。この検査は作業ツリー全体を見るため、同じ作業ツリーで並行する作業者の未配線の作りかけ (`metric-name-lint.mjs`・`title-year-lint.mjs`) で、無関係な自分の commit が 2 回止まった。
-- **次**: 検査に `--staged` (または対象ファイルの指定) を足し、pre-commit では staged の検査スクリプトと staged の workflow から辿れる範囲だけを判定する。追跡されていない作りかけは数えない。
-- **完了条件**: 未追跡の未配線スクリプトがある作業ツリーで、無関係な staged 変更の commit が通り、staged にした未配線スクリプトでは止まるテストがある。
-
-### [UTILS-DIST-PROJECT-REFERENCE-01] packages/ranking の型検査が、git で追跡しているビルド成果物 packages/utils/dist に依存している
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:cd packages/ranking && npx tsc --noEmit -p .] [起票:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-26・GITIGNORE-AUDIT-01 の点検)**: `packages/utils/dist` (38 本) が追跡されている。utils の exports と ranking の paths は `src` を指すが、ranking の tsconfig が utils を project reference (`composite`) で参照するため、`dist` を外すと ranking の型検査が TS6305 (`Output file … dist/index.d.ts has not been built`) で 10 件落ちる (実測)。`dist` は手で作った古い成果物で、utils の src を変えても更新されない。
-- **次**: ranking の `references` から utils を外して paths だけで解決するか、型検査の前に `tsc -b packages/utils` を走らせる。どちらかにしたら `dist` を追跡から外し ignore する。
-- **完了条件**: `dist` を追跡から外した状態で `npm run type-check` が通る。
 
 ### [TRACKED-SECRET-FILE-CHECK-01] 秘密情報らしい名前の追跡ファイル 2 本に、本物の秘密が入っていないかを確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-26] [領域:管理]
@@ -2434,16 +2326,6 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **次 (実行順)**: ① 週次の実行で失敗したら、`--json` の出力のどの項目の `ok` が false かを記録する ② 取得の失敗 (タイムアウト・一時的な 5xx) を違反と数えている箇所が無いかを `fetchJson` の呼び出し元で確かめる ③ 取得の失敗と中身の違反を分けて出す。
 - **停止条件・禁止**: 原因を特定する前に、再試行で揺れを隠さない。
 - **完了条件**: 失敗の理由がログから分かり、取得の失敗だけで違反にならない。
-
-### [MEMORY-INDEX-OVERSIZE-01] 記憶の索引 MEMORY.md が上限を超え、起動時に末尾が読み込まれない
-タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-11]
-
-`.claude/memory/MEMORY.md` は 2026-11-11 時点で 41,542 バイト。Claude Code が起動時に読み込む上限 (約 24.4 KB) を超えており、このセッションの開始時は 192 行のうち末尾の 21 行が読み込まれなかった (起動時の警告で確認)。索引の 1 行が長く、本文に書くべき内容が索引に入っている。新しい記憶ほど末尾に足されるので、直近の教訓から読まれなくなる。
-
-- **次 (実行順)**: ① 索引の各行を 1 行・約 200 字以内に縮め、詳細は各記憶のファイルへ移す ② 重複と、もう成り立たない記憶をまとめるか消す (skill `consolidate-memory`) ③ 上限を超えたら止める検査を足す (バイト数の上限を 1 か所に置く)。
-- **停止条件・禁止**: 記憶の本文を消すときは、コードや文書に同じ内容が残っているかを確かめてから。
-- **完了条件**: MEMORY.md が上限以内で、起動時の警告が出ない。
-- **統合 (2026-11-13)**: `MEMORY-INDEX-TRIM-01` をこのカードへ統合した。完了条件に含める: MEMORY.md が上限以内で起動時の警告が出ず全行が読み込まれる。OVERSIZE 側の項目を維持: (1) 各行を約 200 字以内に縮め詳細を各記憶ファイルへ移す (2) 重複と成り立たない記憶をまとめるか消す (skill consolidate-memory) (3) 上限超過を止める検査を足す (バイト数上限は 1 か所)。記憶の本文を消すときはコードや文書に同内容が残るか確認してから。
 
 ### [GSC-USER-ACTIONS-01] GSC の記録と Googlebot の集計に要る、オーナーだけの 2 つの作業
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-11] [期日:2026-11-13] [領域:サイト]
@@ -3829,13 +3711,6 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **統合 (2026-10-26 オーナー判断): `DOCS-CHECK-CI-SPEED-01`** docs のチェック CI に時間がかかっているのを短くする
   - `docs:check` のどこに時間がかかっているかを測ってから直す。（出典: 2026-10-07 の手書きメモ・vault dairy/2026-10-07）
 
-### [HOOK-UNPUSHED-CWD-01] push 確認の Stop フックが、作業場所を基準に記録を書き、apps/web/.claude/ のような置き場の外にファイルを作る
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:git status --short apps/web/.claude] [起票:2026-10-29] [領域:管理]
-
-- **現状 (2026-10-29)**: `.claude/hooks/check-unpushed-on-stop.js` は「同じ HEAD では 1 回だけ止める」記録を `path.join(cwd, ".claude", "state", "session-locks")` に書く。セッションの作業場所が `apps/web` に移っていたため、`apps/web/.claude/state/session-locks/unpushed-<session>.txt` ができた (未追跡のファイルとして残っている)。同じ不具合で、作業場所が変わると「1 回だけ」の記録が見つからず、同じ HEAD で何度も止まり得る。
-- **次**: 置き場の基準を `process.env.CLAUDE_PROJECT_DIR`、無ければ `git rev-parse --show-toplevel` にする (他の Stop フック `check-docs-on-stop.js` は `CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..")` の形)。直したら `apps/web/.claude/` を消す。
-- **完了条件**: 作業場所を `apps/web` に移したセッションで Stop しても、記録がリポジトリ直下の `.claude/state/session-locks/` にだけ書かれる。`apps/web/.claude/` が無い。
-
 ### [CI-SPEED-PRECOMMIT-TRIM-01] pre-commit を「秒単位のもの」だけに削り、metric config 時の `npx tsx` 直列 6 本と image pipeline 検査を preflight:pr / CI へ寄せる
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs] [起票:2026-09-18] [期日:2026-11-30] [領域:管理]
@@ -4603,11 +4478,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-local-data] [起票:2026-10-19] [領域:管理]
 
 方針は `.claude/shared-policy/LOCAL-DATA.md`。2026-10-19 の `npm run check-local-data` で staging の上限超えが 13 件（`.local/` の作業出力。Kindle 表紙の生成物 460MB・note の参照図など採用済みかもしれないものも混ざる）。採用済みは R2 か Google Drive へ移し、使い捨ては消す。完了条件は上限超えが 0 件。（出典: obsidian の TODO マスタ ^t-0016 を3リポへ展開・2026-10-19）
-
-### [TEST-NO-PREEXISTING-PASS-01] 「以前から失敗している」を理由にテストを通さない規約を入れる
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:管理]
-
-「以前から落ちている」「今回の変更とは無関係」を理由に、失敗したテスト・検査を素通りさせない規約を CLAUDE.md と AGENTS.md に書く。既存の失敗は直すかカードにして担当を決める。完了条件は、規約が両方にあり、いま落ちているテスト・検査がすべて直っているかカードになっていること。（出典: obsidian の TODO マスタ ^t-0020・2026-10-07 の手書きメモを3リポへ展開・2026-10-19）
 
 ### [BLOG-MUNI-SERIES-01] 市区町村データの解説記事を連載にする (国勢調査 2025 の人口増減から)
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-21] [領域:データ]
