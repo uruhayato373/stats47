@@ -315,6 +315,16 @@ export function chartFixGuide(findings: readonly UiFinding[], batchFile: string)
   return lines;
 }
 
+/** 線の格子の指摘 (LINE-GRID-COLUMN-01)。ページごとの余白ではなく、パネルの並べ方 (部品) を直すことをカード本文に書く。 */
+export function lineGridFixGuide(findings: readonly UiFinding[]): string[] {
+  if (!hasMetric(findings, "line_grid_issues")) return [];
+  return [
+    "- **線の格子 (パネルの並べ方を直す)**: 指摘の `outside-grid` はパネルが格子の外にある (`gap-*`・`space-y-*` で空けて並べている等)、`mixed-cell` はパネルを含むセルが文章・見出しも直に持つ。" +
+      "パネルを並べる所は `PanelGrid` / `PageSections` (`@/components/layout`) にし、文章・見出しはパネルと別のセルにする。右レールは格子の外で対象外。" +
+      "規約は `.claude/rules/ui-components.md` の「本文の列は 1 本の線の格子」。直したあと `npm run ui-theme:line-grid -- <baseUrl>` で描いた結果を確かめる。",
+  ];
+}
+
 /** 表示の意味の指摘 (SITE-DISPLAY-SEMANTICS-AUDIT-01)。定義単位で直すことをカード本文に書く。 */
 const SEMANTIC_METRICS = [...TEMPLATE_LEVEL_METRICS, "small_text_count", "mobile_page_height"] as const;
 
@@ -351,6 +361,7 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
     "- **対象**:",
     ...findings.flatMap(target),
     ...chartFixGuide(findings, file),
+    ...lineGridFixGuide(findings),
     ...semanticFixGuide(findings),
     "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。",
     `- **記録**: 直した指摘は \`${CLI} --mark-fixed <key> --note "<何を変えたか>"\`、直さないと判断した指摘は \`--mark-by-design <key> --note "<理由>"\`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた \`[実行:対話]\` のカードを backlog に起票してから \`--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"\` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは \`@${file}\`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。`,

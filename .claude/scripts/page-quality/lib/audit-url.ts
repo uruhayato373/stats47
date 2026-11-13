@@ -95,6 +95,7 @@ export async function auditUrl(
     metrics.clipped_text = browserMetrics.clipped_text;
     metrics.overlapping_tap_targets = browserMetrics.overlapping_tap_targets;
     metrics.chart_text_issues = browserMetrics.chart_text_issues;
+    metrics.line_grid_issues = browserMetrics.line_grid_issues;
     metrics.a11y_violations = browserMetrics.a11y_violations;
     metrics.small_text_count = browserMetrics.small_text_count;
     metrics.mobile_page_height = browserMetrics.mobile_page_height;
