@@ -134,10 +134,10 @@ updated: 2026-11-01
 ### [STRATEGY-LEDGER-JSON-01] 戦略文書の表・値・決定を `data/` の JSON 台帳へ移し、管理画面が台帳を描く形にする (8 段)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:戦略]
 
-- **背景 (2026-11-13 オーナー決定)**: 戦略の中身は JSON 台帳にし、管理画面は閲覧だけにする。`/strategy/lanes` は `docs/00_プロジェクト管理/02_収益化戦略.md` §5 の表を `strategy-lanes.cjs` が文字列で読んで描いており、競合・ペルソナ・KPI・決定は docs/00 の 4 本、`data/business-plan/`、`packages/data-configs/src/business-plan/catalog.ts` のリテラルに重複している。
+- **背景 (2026-11-13 オーナー決定)**: 戦略の中身は JSON 台帳にし、管理画面は閲覧だけにする。着手前は `/strategy/lanes` が `docs/00_プロジェクト管理/02_収益化戦略.md` §5 の表を文字列で読んで描いていた (段 1・2 で台帳読みに替えた)。競合・ペルソナ・KPI・決定は docs/00 の 4 本、`data/business-plan/`、`packages/data-configs/src/business-plan/catalog.ts` のリテラルに重複している。
 - **実行順 (1 段 = 1 PR。各段は台帳・Schema・カタログの行・管理画面の表示・Markdown の表の削除を 1 組にする)**:
-  1. `data/business/domain-stances.json` を足し、現行の Markdown 表のパース結果と一致することをテストで固定する (読み手は替えない)
-  2. `strategy-lanes.cjs` と `build-measurement-cycle.mjs` を台帳読みに替え、02 §5 の領域表を消す。Stop hook (`check-docs-on-stop.js`) と pre-commit (`pre-commit-checks.sh`) の発火条件に台帳を足す
+  1. (済み 2026-11-13) `data/business/domain-stances.json` を足した
+  2. (済み 2026-11-13) `strategy-lanes.cjs` と `build-measurement-cycle.mjs` を台帳読みに替え、02 §5 の領域表を消した。Stop hook と pre-commit の発火条件に台帳を足した。残り: `.claude/rules/todo-standards.md` の `[領域:X]` の行は「§5 の領域表」のままで、doboku-note と同文の規約なので両リポへ同じ差分を当てて直す。`.claude/todo/monthly.md` の参照は次の `/monthly-plan` の上書きで直す
   3. `catalog.ts` のリテラルを `data/business-plan/plan/catalog.json` へ、`geo-content-lifecycle.ts` の `COMMON_GATES` を `data/geo/analyses/content-lifecycle.json` へ移す。どの画面も使っていない `apps/admin/lib/server/dashboard.ts` の `parseStrategyDocs` を消す
   4. 文書の台帳を `data/business-plan/plan/documents.json` の 1 本にし、02 §9 と各文書の「関連ドキュメント」を寄せる。`/strategy/doc/[id]` を `/docs/[...path]` に寄せ、`/docs` と `/strategy/policy` をナビに載せる。改善ログ 7 本と週次・月次レビューの全文を管理画面で開けるようにする (`domains.ts` の `readDocument` の基点を引数にする)
   5. `data/business/monetization.json` (収益モデル・ページ種別の責務・ゲート・チャネル配分) と `data/business/decisions.json` (02 §3.1 の日付つきオーナー決定) を足す
@@ -3160,7 +3160,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **次**: ② 月次レビューで、媒体ごとの送客セッションと投稿数を並べる ③ 2 か月分がそろったら、SNS 領域を「維持」のままにするか、送客の多い媒体だけ投稿を増やすかを決める。
 - **統合 (2026-10-26 オーナー判断): `SNS-SITE-FUNNEL-01`** 投稿からサイトへの流入の経路 (プロフィールのリンク・投稿の誘導・UTM) を見直し、既存の計測 (GA4 の参照元・`nav_click`) で前後を比べられる形にする。
 - **停止条件**: 送客が測れないうちに投稿を増やさない。インプレッションやいいねを送客の代わりにしない。
-- **完了条件**: 媒体別の送客が 2 か月分記録され、SNS 領域の構えの判断が収益化戦略 §5 の領域表に反映されている。
+- **完了条件**: 媒体別の送客が 2 か月分記録され、SNS 領域の構えの判断が領域の台帳 `data/business/domain-stances.json` に反映されている。
 
 ### [NOTE-FREE-DEFAULT-01] note の雑学・ランキングの有料記事を無料に戻し、送客の変化を前後で測る
 タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:商品]

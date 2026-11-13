@@ -154,7 +154,7 @@ function scanOwners(): (DomainOwner & { domainId: string | string[] | null })[] 
   return out;
 }
 
-/** 領域の概要: 構えと狙い (収益化戦略 §5)・バックログのカード ([領域:])・担当 (frontmatter domain)・文書 (documents)。 */
+/** 領域の概要: 構えと狙い (台帳 business.domain-stances)・バックログのカード ([領域:])・担当 (frontmatter domain)・文書 (documents)。 */
 export function domainOverview(id: string): DomainOverview | null {
   const domain = domainList().find((d) => d.id === id);
   if (!domain) return null;

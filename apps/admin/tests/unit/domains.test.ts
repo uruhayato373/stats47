@@ -25,7 +25,7 @@ describe("domains (領域の概要と文書)", () => {
     expect([...listed].sort()).toEqual(docs.map((d) => d.path));
   }, 60_000);
 
-  it("戦略の概要に収益化戦略の文書・§5 の構え・[領域:戦略] のカードが出る", () => {
+  it("戦略の概要に収益化戦略の文書・台帳の構え・[領域:戦略] のカードが出る", () => {
     process.env.STATS47_PROJECT_ROOT = REPO;
     const o = domainOverview("strategy");
     expect(o?.documents.map((d) => d.path)).toContain("docs/00_プロジェクト管理/02_収益化戦略.md");

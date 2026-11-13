@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {
   STANCES,
-  parseLanes,
+  lanesFromLedger,
   resolveImprovementLane,
   parseFocusLanes,
   parseWeeklyItems,
@@ -24,17 +24,19 @@ const {
  * 各規則について「発火する側」と「発火しない側」を両方固定する。
  */
 
-const STRATEGY = [
-  '# 収益化戦略',
-  '<!-- strategy-lanes:start -->',
-  '| 順 | 領域 | 構え | 今の狙い | 構えを変える条件 | 改善Metric | KPI |',
-  '|---|---|---|---|---|---|---|',
-  '| 1 | 計測 | 攻める | 計器を戻す | 4週取得 | ga4 | measurement-freshness |',
-  '| 2 | 行政資料 | 攻める | pilot | Stop | — | — |',
-  '| 3 | SEO・ブログ | 維持 | 上限内 | 変換率 | gsc, content | search-clicks |',
-  '| 4 | SNS | 凍結 | 止める | 送客 | note | — |',
-  '<!-- strategy-lanes:end -->',
-].join('\n');
+// 台帳 business.domain-stances の fixture。領域のマスタを渡さない検査では、領域の id がそのまま名前になる
+const lane = (order, domain, stance, aim, gate, improvementMetrics = [], kpis = []) => ({ domain, order, stance, aim, gate, improvementMetrics, kpis });
+const STANCES_DOC = {
+  schemaVersion: 1,
+  lanes: [
+    lane(1, '計測', '攻める', '計器を戻す', '4週取得', ['ga4'], ['measurement-freshness']),
+    lane(2, '行政資料', '攻める', 'pilot', 'Stop'),
+    lane(3, 'SEO・ブログ', '維持', '上限内', '変換率', ['gsc', 'content'], ['search-clicks']),
+    lane(4, 'SNS', '凍結', '止める', '送客', ['note']),
+  ],
+};
+/** fixture の 1 行だけを書き換えた台帳を作る */
+const withLane = (domain, patch) => ({ ...STANCES_DOC, lanes: STANCES_DOC.lanes.map((l) => (l.domain === domain ? { ...l, ...patch } : l)) });
 
 const BACKLOG = [
   '## 🔴 高',
@@ -73,9 +75,9 @@ const KPI_NODES = [
 const monthly = (lanes) => ['---', 'title: 今月', lanes, '---', '', '# 本文'].join('\n');
 const weekly = (must, should = []) => ['## 今週のタスク', '', '### Must（3件）', '', ...must, '', '### Should', '', ...should, ''].join('\n');
 
-function run({ focus = 'focus_domains: [計測]', must = ['- [ ] **計器** — `MEASURE-A-01`'], should = [], strategy = STRATEGY } = {}) {
+function run({ focus = 'focus_domains: [計測]', must = ['- [ ] **計器** — `MEASURE-A-01`'], should = [], stances = STANCES_DOC } = {}) {
   return auditLaneAlignment({
-    strategyText: strategy,
+    stances,
     backlogText: BACKLOG,
     improvementsText: IMPROVEMENTS,
     monthlyText: monthly(focus),
@@ -85,8 +87,8 @@ function run({ focus = 'focus_domains: [計測]', must = ['- [ ] **計器** — 
 }
 const codes = (r) => r.issues.map((i) => `${i.level}:${i.code}`);
 
-test('領域表を順・構え・改善Metric込みで読む', () => {
-  const { lanes, errors } = parseLanes(STRATEGY);
+test('領域の台帳を順・構え・改善Metric込みで読む', () => {
+  const { lanes, errors } = lanesFromLedger(STANCES_DOC);
   assert.deepStrictEqual(errors, []);
   assert.deepStrictEqual(lanes.map((l) => l.name), ['計測', '行政資料', 'SEO・ブログ', 'SNS']);
   assert.deepStrictEqual(lanes[2].improvementMetrics, ['gsc', 'content']);
@@ -94,15 +96,15 @@ test('領域表を順・構え・改善Metric込みで読む', () => {
   assert.ok(STANCES.includes(lanes[3].stance));
 });
 
-test('表の破損 (語彙外の構え・重複・マーカー欠落) は DG073', () => {
-  assert.match(parseLanes(STRATEGY.replace('| 維持 |', '| 様子見 |')).errors[0], /構えが語彙外/);
-  assert.match(parseLanes(STRATEGY.replace('| SNS |', '| 計測 |')).errors.join(), /領域名が重複/);
-  assert.match(parseLanes('# 表なし').errors[0], /マーカー/);
-  assert.ok(codes(run({ strategy: '# 表なし' })).includes('error:DG073'));
+test('台帳の破損 (語彙外の構え・領域の重複・lanes の欠落) は DG073', () => {
+  assert.match(lanesFromLedger(withLane('SEO・ブログ', { stance: '様子見' })).errors[0], /構えが語彙外/);
+  assert.match(lanesFromLedger(withLane('SNS', { domain: '計測' })).errors.join(), /領域が重複/);
+  assert.match(lanesFromLedger(null).errors[0], /lanes が無い/);
+  assert.ok(codes(run({ stances: null })).includes('error:DG073'));
 });
 
 test('改善Metric は対応のある最後の語で領域を引く', () => {
-  const { lanes } = parseLanes(STRATEGY);
+  const { lanes } = lanesFromLedger(STANCES_DOC);
   assert.strictEqual(resolveImprovementLane('ga4', lanes), '計測');
   assert.strictEqual(resolveImprovementLane('ga4/note', lanes), 'SNS');
   assert.strictEqual(resolveImprovementLane('ga4/unknown', lanes), '計測');
@@ -148,7 +150,7 @@ test('凍結領域の作業は Must 以外の節にあっても DG078 error', ()
 
 test('backlog の語彙外領域は DG074 error', () => {
   const r = auditLaneAlignment({
-    strategyText: STRATEGY,
+    stances: STANCES_DOC,
     backlogText: '## 🔴 高\n\n### [X-01] x\nタグ: [UI・UX] [種類:改善] [実行:対話] [領域:存在しない]\n',
     improvementsText: '',
     monthlyText: monthly('focus_domains: [計測]'),
@@ -168,30 +170,16 @@ test('週次の項目から節・ID・完了状態を取る', () => {
   });
 });
 
-test('実リポジトリの収益化戦略の領域表は壊れていない', () => {
+// 意図: 領域の正本は台帳 business.domain-stances。実物が壊れているか、領域のマスタと過不足があれば
+// 月次の重点・週次 Must・backlog の領域タグの検査が全部止まるので、実物で確かめる。
+test('実リポジトリの領域の台帳は壊れておらず、領域のマスタの全領域を 1 行ずつ持つ', () => {
   const root = path.resolve(__dirname, '..', '..', '..', '..');
-  assert.ok(fs.existsSync(path.join(root, 'docs/00_プロジェクト管理/02_収益化戦略.md')));
-  const board = laneBoard(root);
-  assert.deepStrictEqual(board.issues.filter((i) => i.level === 'error'), []);
-  assert.ok(board.lanes.length >= 3);
-});
-
-// 意図: 領域表の正本を Markdown から台帳へ移す途中 (STRATEGY-LEDGER-JSON-01 の段 1) で、2 つがずれたまま
-// 読み手を切り替えると、構えや KPI が黙って変わる。切り替えるまで同じ内容であることを固定する。
-test('台帳 business.domain-stances は収益化戦略の領域表と同じ内容を持つ', () => {
-  const root = path.resolve(__dirname, '..', '..', '..', '..');
-  const { datasetPath } = require('../../../../config/datasets.mjs');
   const { DOMAINS } = require('../../../../config/paths.mjs');
-  const { parseLanes, STRATEGY_DOC } = require('../strategy-lanes.cjs');
-  const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
-  const labelOf = new Map(readJson(DOMAINS).domains.map((d) => [d.id, d.label]));
-  const fromLedger = readJson(datasetPath('business.domain-stances'))
-    .lanes.map(({ domain, ...rest }) => ({ name: labelOf.get(domain), ...rest }))
-    .sort((a, b) => a.order - b.order);
-  const fromDoc = parseLanes(fs.readFileSync(path.join(root, STRATEGY_DOC), 'utf8'));
-  assert.deepStrictEqual(fromDoc.errors, []);
-  const sameKeys = ({ order, name, stance, aim, gate, improvementMetrics, kpis }) => ({ order, name, stance, aim, gate, improvementMetrics, kpis });
-  assert.deepStrictEqual(fromLedger.map(sameKeys), fromDoc.lanes.map(sameKeys));
+  const board = laneBoard(root);
+  assert.notStrictEqual(board.skipped, true, '領域の台帳が無いと検査が黙って飛ぶ');
+  assert.deepStrictEqual(board.issues.filter((i) => i.level === 'error'), []);
+  const labels = JSON.parse(fs.readFileSync(path.join(root, DOMAINS), 'utf8')).domains.map((d) => d.label);
+  assert.deepStrictEqual(board.lanes.map((l) => l.name).sort(), [...labels].sort());
 });
 
 // ── KPI 配線 (DG079 / DG080)。意図: どの KPI を動かすか言えない施策を台帳に置かせない。
@@ -210,12 +198,12 @@ test('配線済みの台帳と領域表は DG079 / DG080 を出さない', () =>
 });
 
 test('[kpi:] の無い施策・ツリーに無い id・領域表の未知 KPI は DG079 error', () => {
-  const lanes = parseLanes(STRATEGY.replace('| search-clicks |', '| pv |')).lanes;
+  const lanes = lanesFromLedger(withLane('SEO・ブログ', { kpis: ['pv'] })).lanes;
   const rows = [
     { id: 'A-01', kpis: null, hasTarget: true },
     { id: 'B-01', kpis: ['pv'], hasTarget: true },
   ];
-  const { issues } = auditKpiLinkage({ lanes, improvementRows: rows, kpiNodes: KPI_NODES, files: { strategy: 's', improvements: 'i' } });
+  const { issues } = auditKpiLinkage({ lanes, improvementRows: rows, kpiNodes: KPI_NODES, files: { lanes: 's', improvements: 'i' } });
   const msgs = issues.filter((i) => i.code === 'DG079' && i.level === 'error').map((i) => i.message).join('\n');
   assert.match(msgs, /A-01 に \[kpi: <id>\] が無い/);
   assert.match(msgs, /B-01 の \[kpi: pv\] が KPI ツリーに無い/);
@@ -317,15 +305,20 @@ test('Must が 🔴 上位 (オーナー作業を除く) をどれも参照し�
   assert.deepStrictEqual(audit(['- [ ] **不具合** — `BUG-01`']).issues.filter((i) => i.code === 'DG083'), []);
 });
 
-test('領域表の名前が domains.json の領域と食い違えば DG073、一致していれば出さない', () => {
-  const base = { strategyText: STRATEGY, backlogText: BACKLOG, improvementsText: IMPROVEMENTS, monthlyText: monthly('focus_domains: [計測]'), weeklyText: weekly(['- [ ] **計器** — `MEASURE-A-01`'], []), kpiNodes: KPI_NODES };
-  const names = parseLanes(STRATEGY).lanes.map((l) => l.name);
-  const same = auditLaneAlignment({ ...base, domainLabels: names });
+test('台帳の領域が領域のマスタと食い違えば DG073、一致していれば出さず、id を表示名へ引く', () => {
+  const base = { stances: STANCES_DOC, backlogText: BACKLOG, improvementsText: IMPROVEMENTS, monthlyText: monthly('focus_domains: [計測]'), weeklyText: weekly(['- [ ] **計器** — `MEASURE-A-01`'], []), kpiNodes: KPI_NODES };
+  const domains = STANCES_DOC.lanes.map((l) => ({ id: l.domain, label: l.domain }));
+  const same = auditLaneAlignment({ ...base, domains });
   assert.ok(!same.issues.some((i) => i.code === 'DG073'));
-  const drift = auditLaneAlignment({ ...base, domainLabels: [...names.slice(1), '存在しない領域'] });
+  const drift = auditLaneAlignment({ ...base, domains: [...domains.slice(1), { id: 'missing', label: '存在しない領域' }] });
   const msgs = drift.issues.filter((i) => i.code === 'DG073').map((i) => i.message).join('\n');
-  assert.match(msgs, /domains\.json の領域が領域表に無い: 存在しない領域/);
-  assert.match(msgs, /領域表の領域が domains\.json に無い/);
+  assert.match(msgs, /domains\.json の領域が台帳に無い: 存在しない領域/);
+  assert.match(msgs, /台帳の領域が domains\.json に無い: 計測/);
+  // 台帳は id、月次の重点と backlog のタグは表示名。マスタを渡すと表示名で照合できる
+  const byId = { ...STANCES_DOC, lanes: STANCES_DOC.lanes.map((l, i) => ({ ...l, domain: `d${i}` })) };
+  const labelled = auditLaneAlignment({ ...base, stances: byId, domains: STANCES_DOC.lanes.map((l, i) => ({ id: `d${i}`, label: l.domain })) });
+  assert.deepStrictEqual(labelled.lanes.map((l) => l.name), ['計測', '行政資料', 'SEO・ブログ', 'SNS']);
+  assert.deepStrictEqual(codes(labelled), codes(same));
 });
 
 
