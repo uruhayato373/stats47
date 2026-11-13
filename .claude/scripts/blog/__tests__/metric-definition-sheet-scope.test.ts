@@ -70,3 +70,38 @@ test("電力需要量の定義シートは単位が半角の MWh で、対象と
   const shown = [c.unit, ...(c.calculation?.normalizationOptions ?? []).map((o) => o.unit), c.seoTitle ?? "", c.seoDescription ?? ""];
   for (const s of shown) assert.doesNotMatch(s, /[Ａ-Ｚａ-ｚ]/, s);
 });
+
+// METRIC-DEFINITION-GAPS-BOOK-01: 書籍の執筆で「観測地点」「施設の種別」「分母」が読めなかった指標。
+// e-Stat の項目定義 (B 自然環境・J 福祉・F 労働・H 居住) が書く対象を description / note に持ち、
+// 定義シートの「対象・分母」欄が空 (対象の記述なし) にならない。
+test("雪日数・年平均気温・老人ホーム定員・完全失業率・民営家賃の定義シートに対象の記述がある", async () => {
+  const { buildSheet } = await import("../build-metric-definition-sheet.ts");
+  const keys = ["annual-snow-days", "average-temperature", "nursing-home-capacity-per-1000-65plus", "unemployment-rate", "private-rental-housing-rent-per-3-3m2"];
+  const rows = buildSheet(keys).split("\n").filter((l) => l.startsWith("| `"));
+  assert.equal(rows.length, keys.length);
+  for (const row of rows) assert.ok(!row.includes("対象の記述なし"), row);
+  const byKey = (k: string) => rows.find((r) => r.startsWith(`| \`${k}\``)) ?? "";
+  // 観測地点は県庁所在地の気象台 (県全体の平均ではない)
+  assert.match(byKey("annual-snow-days"), /都道府県庁所在地/);
+  assert.match(byKey("average-temperature"), /都道府県庁所在地/);
+  // 施設の種別 (J042011 の算式 J230112+J230124+J230132+J230222) が読める
+  for (const kind of ["養護老人ホーム", "介護老人福祉施設", "軽費老人ホーム", "有料老人ホーム"]) {
+    assert.match(byKey("nursing-home-capacity-per-1000-65plus"), new RegExp(kind));
+  }
+  // 分母は労働力人口 (総人口や15歳以上人口ではない)
+  assert.match(byKey("unemployment-rate"), /労働力人口/);
+});
+
+test("雪日数と年平均気温の観測地点の例外 (埼玉・千葉・東京・滋賀・山口) を config が書く", async () => {
+  const { METRICS_REGISTRY } = await import("../../../../packages/data-configs/src/registry.ts");
+  const text = (k: string) => { const c = METRICS_REGISTRY[k]; return `${c.description ?? ""} ${c.note ?? ""}`; };
+  for (const place of ["熊谷市", "千代田区", "彦根市"]) {
+    assert.match(text("annual-snow-days"), new RegExp(place));
+    assert.match(text("average-temperature"), new RegExp(place));
+  }
+  for (const place of ["銚子市", "下関市"]) assert.match(text("annual-snow-days"), new RegExp(place));
+  // 雪日数の 2020 年は 20 都道府県だけ (観測方法の変更で前後を比べられない) ことを書く
+  assert.match(text("annual-snow-days"), /20都道府県/);
+  // 民営家賃は県庁所在都市の値で、東京都の対象範囲は項目定義に明記が無いことを書く
+  assert.match(text("private-rental-housing-rent-per-3-3m2"), /東京都/);
+});
