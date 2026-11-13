@@ -1,8 +1,10 @@
-import { expect, test } from "@playwright/test";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { ANALYSIS_PREVIEWS } from "../../src/features/products/analysis-previews.generated";
 import { findStorefrontProduct } from "../../src/features/products/storefront";
 import { STOREFRONT_PRODUCTS } from "../../src/features/products/storefront.generated";
+
+import { expect, test } from "./fixtures";
 
 /**
  * breakpoint 別レイアウト検証（本番スモーク）
@@ -40,6 +42,40 @@ async function assertNoHorizontalScroll(page: import("@playwright/test").Page) {
 }
 
 test.describe("breakpoint 別レイアウト", () => {
+  test("テーマの該当章と商品LPの作成例を同じ表示版で往復できる", async ({ page }) => {
+    test.setTimeout(120_000);
+    const published = findStorefrontProduct('data-p-01')!;
+    const productPath = hrefFor('product', { slug: published.slug });
+    await page.goto(productPath, { waitUntil: 'domcontentloaded' });
+    const preview = await page.locator('[data-product-preview]').count() > 0;
+    const displayed = preview ? ANALYSIS_PREVIEWS.find(item => item.id === published.id)! : published;
+    const example = displayed.showcase!.find(item => item.kind === 'chart' && item.themeRefs?.length)!;
+    const ref = example.themeRefs![0];
+    const examplePath = `${productPath}#example-${example.id}`;
+    const themeLink = page.locator(`#example-${example.id}`).getByRole('link', { name: `${ref.title}：${ref.sectionTitle} →`, exact: true });
+    await expect(themeLink).toHaveAttribute('href', ref.href);
+    await themeLink.click();
+    await expect(page).toHaveURL(new RegExp(`${ref.href}$`), { timeout: 45_000 });
+    const chapter = page.locator(`#theme-section-${ref.sectionKey}`);
+    // Streaming may retain hidden markup while attaching the visible chapter.
+    // Require exactly one visible link; do not pick the first duplicate.
+    const productLink = chapter.locator(`[data-theme-product-links] a[href="${examplePath}"]:visible`);
+    await expect(productLink).toHaveCount(1);
+    await expect(productLink).toBeVisible();
+    await expect(productLink.locator('..')).toContainText(preview ? '未公開の改訂案' : example.heading);
+    await assertNoHorizontalScroll(page);
+    await productLink.click();
+    await expect(page).toHaveURL(new RegExp(`${examplePath}$`), { timeout: 45_000 });
+    await expect(page.locator(`#example-${example.id}`)).toBeVisible();
+    await assertNoHorizontalScroll(page);
+    // 全国版と県別版は同じテーマレイアウトで同じ作成例へ案内する。
+    await page.goto(`${hrefFor('area-theme', { areaCode: '39000', themeSlug: ref.themeKey })}#theme-section-${ref.sectionKey}`, { waitUntil: 'domcontentloaded' });
+    await expect(productLink).toHaveCount(1);
+    await expect(productLink).toBeVisible();
+    expect(await productLink.evaluate(element => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
+    await assertNoHorizontalScroll(page);
+  });
+
   test("商品画像は節の枚数や商品によらず同じ掲載幅を保つ", async ({ page }) => {
     test.setTimeout(120_000);
     let referenceWidth: number | undefined;
@@ -49,16 +85,16 @@ test.describe("breakpoint 別レイアウト", () => {
       const { slug } = product;
       await page.goto(`/products/${slug}`, { waitUntil: 'domcontentloaded' });
       const images = page.getByRole('region', { name: '商品詳細', exact: true }).locator('figure img');
-      const displayed = await page.locator('[data-product-preview]').count()
-        ? ANALYSIS_PREVIEWS.find(revision => revision.id === product.id)!
-        : product;
+      const revision = await page.locator('[data-product-preview]').count()
+        ? ANALYSIS_PREVIEWS.find(revision => revision.id === product.id)
+        : undefined;
       // 全データ商品の上部・末尾の販売導線を実際の通常URLで確認する。
       for (const placement of ['product_detail_top', 'product_detail_bottom']) {
         const purchase = page.locator(`[data-product-placement="${placement}"]`);
         await expect(purchase).toHaveCount(1);
         await expect(purchase.getByRole('link', { name: /noteで.*内容.*確認する/ })).toHaveAttribute('href', product.externalUrl);
       }
-      await expect(images).toHaveCount(displayed.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
+      await expect(images).toHaveCount([product, ...(revision ? [revision] : [])].reduce((sum, edition) => sum + edition.showcase!.reduce((total, section) => total + section.figures.length, 0), 0));
       await images.evaluateAll((elements) => elements.forEach((element) => { (element as HTMLImageElement).loading = 'eager'; }));
       await expect.poll(() => images.evaluateAll((elements) => elements.every((element) => {
         const image = element as HTMLImageElement;
@@ -81,7 +117,7 @@ test.describe("breakpoint 別レイアウト", () => {
     }
   });
 
-  test("開発中の通常商品LPでも台帳の改訂案が表示され、noteの販売版と区別できる", async ({ page }) => {
+  test("開発中の通常商品LPは販売版を残して改訂案も表示し、収録内容を混同しない", async ({ page }) => {
     test.setTimeout(120_000);
     // 本番サーバーでは改訂ルートが404になる。開発中の通常URLの配線漏れを検知する。
     const probe = await page.goto(`/products/preview/${ANALYSIS_PREVIEWS[0].slug}`, { waitUntil: 'domcontentloaded' });
@@ -92,9 +128,17 @@ test.describe("breakpoint 別レイアウト", () => {
       const path = `/products/${published.slug}`;
       await page.goto(path, { waitUntil: 'domcontentloaded' });
       expect(new URL(page.url()).pathname).toBe(path);
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText(revision.displayTitle ?? revision.title);
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText(published.displayTitle ?? published.title);
       await expect(page.locator('[data-product-preview]')).toHaveCount(1);
-      for (const included of revision.included) await expect(page.getByText(included, { exact: true })).toBeVisible();
+      for (const [key, edition] of [['published', published], ['revision', revision]] as const) {
+        const region = page.locator(`[data-product-edition="${key}"]`);
+        await expect(region).toHaveCount(1);
+        for (const included of edition.included) await expect(region.getByText(included, { exact: true })).toBeVisible();
+        const images = region.locator('figure img');
+        await expect(images).toHaveCount(edition.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
+        for (const image of await images.all()) await expect(image).toHaveAttribute('src', new RegExp(`/${edition.slug}/showcase/`));
+        for (const example of edition.showcase ?? []) if (example.id) await expect(region.locator(`#example-${example.id}`)).toHaveCount(1);
+      }
       await expect(page.locator('[data-product-placement]')).toHaveCount(2);
       for (const purchase of await page.locator('[data-product-placement]').all()) {
         await expect(purchase.getByText('現在販売中の版', { exact: true })).toBeVisible();
@@ -105,9 +149,6 @@ test.describe("breakpoint 別レイアウト", () => {
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
       const structuredData = await page.locator('script[type="application/ld+json"]').allTextContents();
       expect(structuredData.some(value => JSON.parse(value)['@type'] === 'Product')).toBe(false);
-      const images = page.locator('[data-product-preview] figure img');
-      await expect(images).toHaveCount(revision.showcase!.reduce((sum, section) => sum + section.figures.length, 0));
-      for (const image of await images.all()) await expect(image).toHaveAttribute('src', new RegExp(`/${revision.slug}/showcase/`));
       await assertNoHorizontalScroll(page);
     }
   });
@@ -126,14 +167,13 @@ test.describe("breakpoint 別レイアウト", () => {
         await expect(overview.getByText(item.title, { exact: true })).toBeVisible();
         await expect(overview.getByText(item.description, { exact: true })).toBeVisible();
       }
-      await expect(overview.getByText('販売価格', { exact: true })).toBeVisible();
-      await expect(overview.getByRole('link', { name: /で内容を確認する/ })).toHaveCount(1);
+      await expect(overview.getByRole('link', { name: /で.*内容を確認する/ })).toHaveCount(1);
       // 価格・購入先・対象読者を見本図より前に把握でき、狭い幅でもラベルが欠けない。
       const overviewLayout = await overview.evaluate((section) => {
         const main = section.closest('main')!;
         const firstFigure = main.querySelector('figure');
         return {
-          isFirstSection: main.querySelector('section[data-slot="card"]')?.firstElementChild === section,
+          isFirstSection: main.querySelector('[aria-label="商品内容と購入"]') === section,
           beforeFigures: !firstFigure || !!(section.compareDocumentPosition(firstFigure) & Node.DOCUMENT_POSITION_FOLLOWING),
           clipped: Array.from(section.querySelectorAll<HTMLElement>('a, dt, dd, [data-slot="badge"]'))
             .filter((element) => element.scrollWidth > element.clientWidth + 1).length,
@@ -143,7 +183,7 @@ test.describe("breakpoint 別レイアウト", () => {
       // LP 本文は1つの Surface。見出し・説明を別々の枠にして横線を増やさない。
       await expect(page.locator('main section[data-slot="card"]')).toHaveCount(1);
       const bottom = page.locator('[data-product-placement="product_detail_bottom"]');
-      await expect(bottom.getByRole('link', { name: /で内容を確認する/ })).toHaveAttribute('href', new RegExp(product.externalUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+      await expect(bottom.getByRole('link', { name: /で.*内容を確認する/ })).toHaveAttribute('href', new RegExp(product.externalUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
       await bottom.scrollIntoViewIfNeeded();
       await expect(bottom.getByText(product.displayTitle ?? product.title, { exact: true })).toBeVisible();
       if (product.coverImageUrl) {

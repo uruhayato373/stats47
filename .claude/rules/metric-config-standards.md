@@ -548,6 +548,12 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 > D1→R2 移行時に writer 不在のまま 2 ヶ月間欠落し、既存ランキングは stale 配信・新規 67 metric は
 > 空ページのまま sitemap 掲載されていた。「isActive:true + item.json だけで公開完了」とも思い込まないこと。
 >
+> **手動投入 metric (`fetcherKey:"manual"`) の値を R2 へ上げる経路 (2026-11-13)**: `data-refresh.yml` は e-Stat の指標しか扱わない。
+> 省庁の xlsx / CSV / PDF から作る指標は、取り込みスクリプト (`.claude/scripts/themes/ingest-*.mjs`) を
+> `external-metric-ingest.yml` に登録し、CI の中で原典から取り直して `app/stats/<key>/values.json` へ上げる (既定は dry run)。
+> 順序は「指標定義を `isActive: false` で main へ入れる → workflow で値を上げる → `isActive: true` にする」。
+> 先に公開にすると、値の無いランキングページが配信される。
+>
 > **手動投入 metric (`fetcherKey:"manual"`) の追加落とし穴**: rank を計算するのは `page-data-batch` だが、
 > 手動投入はこの経路を通らないため **`app/stats` の行が rank を持たない**。values writer 側で正典と
 > 同一規則 (値の降順・同値は同順位) で導出しているので投入自体は成立するが、**手動で `app/stats` に

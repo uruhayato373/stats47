@@ -40,6 +40,14 @@ function variant(overrides: Partial<SourceVariant> = {}): SourceVariant {
 }
 
 describe('指標台帳から分析の原典を解決する', () => {
+  it('別の粒度を示すmetricの表示名を図へ流用せず、取得表から共通出典を解決する', () => {
+    const { plan, registry, households } = fixture();
+    registry[households.key].source = { kind: 'estat', statsDataId: '0000020201', cdCat01: 'A710101', displayName: '市区町村の別名' };
+    plan.sources[0].inputs[1].variantId = 'original';
+    const resolved = resolveAnalysisRevision(plan, [variant({ scope: 'prefecture', statsDataId: '0000010101' })], registry);
+    expect(resolved.sources[0].label).toBe('社会・人口統計体系');
+    expect(resolved.sources[0].inputs[1].statsDataId).toBe('0000010101');
+  });
   it('県庁所在市の家計調査を都道府県全体や市区町村全国値へ読み替えない', () => {
     const registry = { [beefConsumptionExpenditure.key]: beefConsumptionExpenditure };
     expect(describeMetricCapability(beefConsumptionExpenditure.key, registry).scopes).toEqual(['capital-city']);

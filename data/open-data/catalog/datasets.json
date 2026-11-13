@@ -103,16 +103,25 @@
       ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "診療科別の診療所数 (県別集計)"
+        "人口10万人当たりの小児科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの皮膚科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの眼科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの耳鼻咽喉科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの整形外科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの心療内科を標榜する医療施設数（病院＋一般診療所） (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの日曜に診療する診療所数 (施設/10万人（または％）・2026年6月1日時点・47県を実ファイルで確認)",
+        "人口10万人当たりの平日19時以降も診療する診療所数 (施設/10万人・2026年6月1日時点・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-08-30",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
-          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx",
+          "https://www.mhlw.go.jp/content/11121000/02-2_clinic_speciality_hours_20260601.csv.zip + https://www.mhlw.go.jp/content/11121000/01-2_hospital_speciality_hours_20260601.csv.zip",
+          "https://www.mhlw.go.jp/content/11121000/02-2_clinic_speciality_hours_20260601.csv.zip"
         ],
-        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認 2026-11-13 実ファイル確認: 指標候補 8 件について統計ファイルを開き、47 都道府県の行を数えて確認した (02-2_clinic_speciality_hours_20260601.csv.zip sha256=9b873f66f9450cf2…)。"
       }
     },
     {
@@ -274,15 +283,18 @@
         "pharmacy-count-per-100k"
       ],
       "existingGisDataIds": [],
-      "candidateMetricConcepts": [],
+      "candidateMetricConcepts": [
+        "人口10万人当たりの日曜に開く薬局数 (所/10万人（または％）・2026年6月1日時点・47県を実ファイルで確認)"
+      ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-08-30",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
-          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx"
+          "https://www.mhlw.go.jp/content/11121000/001306376.xlsx",
+          "https://www.mhlw.go.jp/content/11121000/05_pharmacy_20260601.csv.zip"
         ],
-        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認"
+        "notes": "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認 2026-11-13 実ファイル確認: 指標候補 1 件について統計ファイルを開き、47 都道府県の行を数えて確認した (05_pharmacy_20260601.csv.zip sha256=e53eacdbd9b4a115…)。"
       }
     },
     {
@@ -322,7 +334,10 @@
         "construction",
         "economy"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "residential-land-transaction-median-price",
+        "residential-land-transaction-sample-count"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
         "中古住宅取引価格の県別中央値",
@@ -524,7 +539,9 @@
         "residential-land-price-change-rate",
         "standard-price-change-rate-residential",
         "standard-price-change-rate-commercial",
-        "industrial-land-price"
+        "industrial-land-price",
+        "residential-official-land-median-price",
+        "residential-official-land-point-count"
       ],
       "existingGisDataIds": [
         "L01",
@@ -3837,22 +3854,35 @@
       "suggestedCategories": [
         "economy"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "financial-literacy-correct-rate"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "金融リテラシー正答率 (都道府県別)",
-        "金融トラブル経験率 (都道府県別)",
-        "金融知識の自己評価と客観評価の差 (都道府県別)"
+        "正誤問題25問の正答率(2025年版・既存の2022年版の更新) (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "金融トラブルの経験者の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "緊急時に備えた資金(3か月分の生活費)を確保している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "1か月の支出を把握している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "老後の生活費について資金計画をたてている人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "消費者ローンを利用している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "お金を借り過ぎていると感じている人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "株式を購入したことがある人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "投資信託を購入したことがある人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "金融知識に自信を持っている人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "学校等で金融経済教育を受けた人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "資産・負債の現状に満足している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "損失回避傾向が強い人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)",
+        "金融トラブル発生時の相談窓口を認識している人の割合 (％・2025年(令和7年9月26日〜のインターネット調査)・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-19",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.j-flec.go.jp/data/literacy_chosa_2025/",
           "https://j-flec.go.jp/wpimages/uploads/25lite_toukei.xlsx",
           "https://www.j-flec.go.jp/guidelines/"
         ],
-        "notes": "xlsx を実ダウンロードしシート構造・セル値を直接解析し47都道府県シート・比較表・一覧表の実在と正答率/トラブル有無/借入/行動バイアス設問の都道府県別数値を確認済み。老後資金計画の設問が同ファイル内にあるかは列範囲を全て読み切っておらず未確認 (partially-verified の理由)。e-Stat には未掲載 (検索で不在確認、2026-07-19)。非e-Stat統計のため取得は data-ingester がxlsx 解析の専用パイプラインを新設する必要がある (既存 e-Stat クライアントは使えない)。"
+        "notes": "xlsx を実ダウンロードしシート構造・セル値を直接解析し47都道府県シート・比較表・一覧表の実在と正答率/トラブル有無/借入/行動バイアス設問の都道府県別数値を確認済み。老後資金計画の設問が同ファイル内にあるかは列範囲を全て読み切っておらず未確認 (partially-verified の理由)。e-Stat には未掲載 (検索で不在確認、2026-07-19)。非e-Stat統計のため取得は data-ingester がxlsx 解析の専用パイプラインを新設する必要がある (既存 e-Stat クライアントは使えない)。 2026-11-13 実ファイル確認: 指標候補 14 件について統計ファイルを開き、47 都道府県の行を数えて確認した (25lite_toukei.xlsx sha256=101fbb425a23a6a6…)。メインが統計表のシート「86 都道府県比較表 (2)」を開き、金融トラブル経験の 47 県の値と順位を確認 (岩手県 10.1%〜佐賀県 4.3%)。"
       }
     },
     {
@@ -3945,30 +3975,42 @@
       "suggestedCategories": [
         "educationsports"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-reading-like-rate",
+        "national-assessment-elementary-study-1h-plus-rate",
+        "national-assessment-elementary-tutoring-rate"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
-        "朝食摂取率 (小学生・都道府県別)",
-        "読書率 (小学生・都道府県別)",
-        "宿題実行率 (小学生・都道府県別)",
-        "地域行事参加率 (小学生・都道府県別)",
-        "長時間インターネット利用率 (小学生・都道府県別)",
-        "通塾率 (小学生・都道府県別)",
-        "学校外学習率 (小学生・都道府県別)",
-        "通学時間 (小学生・都道府県別)"
+        "自分によいところがあると思う児童生徒の割合(自己肯定感) (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "将来の夢や目標を持っている児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "学校に行くのは楽しいと思う児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "いじめはどんな理由があってもいけないと思う児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "先生や学校の大人にいつでも相談できる児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "友達関係に満足している児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "普段の生活で幸せな気持ちになることがある児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "家に本が多い(蔵書数が多い)児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "地域の大人に勉強・スポーツ・体験活動で関わってもらった経験のある児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "地域や社会をよくするために何かしてみたい児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "これまでに自然の中で遊ぶ・自然観察をした経験のある児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "平日にPC・タブレットを勉強に1時間以上使う児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "新聞を読んでいる児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)",
+        "毎日同じくらいの時刻に寝ている児童生徒の割合 (％・2025年度(令和7年度)・47県を実ファイルで確認)"
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-20",
+        "verifiedAt": "2026-11-13",
         "verifiedFromUrls": [
           "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
           "https://www.nier.go.jp/25chousakekkahoukoku/index.html",
           "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
           "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/index.html",
           "https://www.nier.go.jp/11_copyright/",
-          "https://www.mext.go.jp/b_menu/1351168.htm"
+          "https://www.mext.go.jp/b_menu/1351168.htm",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/{NN}_{romaji}/{NN}p_25a.xlsx (小) / {NN}m_25a.xlsx (中)"
         ],
-        "notes": "北海道ページで「児童質問調査回答結果集計表」xlsx (01p_25a.xlsx) のファイル名を実在確認。朝食・読書・宿題・地域行事参加・ネット利用・通塾・学校外学習・通学時間の8設問が同ファイル内のどのシート・列に収録されるかは実ファイルをダウンロードして開いておらず未確認のためpartially-verified。取得は data-ingester が xlsx 解析の専用パイプラインを新設する必要がある(既存 e-Stat クライアントは使えない、jflec-financial-literacy-survey-prefecture と同様の構成)。"
+        "notes": "北海道ページで「児童質問調査回答結果集計表」xlsx (01p_25a.xlsx) のファイル名を実在確認。朝食・読書・宿題・地域行事参加・ネット利用・通塾・学校外学習・通学時間の8設問が同ファイル内のどのシート・列に収録されるかは実ファイルをダウンロードして開いておらず未確認のためpartially-verified。取得は data-ingester が xlsx 解析の専用パイプラインを新設する必要がある(既存 e-Stat クライアントは使えない、jflec-financial-literacy-survey-prefecture と同様の構成)。 2026-11-13 実ファイル確認: 指標候補 14 件について統計ファイルを開き、47 都道府県の行を数えて確認した。"
       }
     },
     {
@@ -4006,7 +4048,9 @@
       "suggestedCategories": [
         "safetyenvironment"
       ],
-      "existingMetricKeys": [],
+      "existingMetricKeys": [
+        "heatstroke-emergency-transports"
+      ],
       "existingGisDataIds": [],
       "candidateMetricConcepts": [
         "人口10万人当たり熱中症救急搬送人員"
@@ -4021,6 +4065,2486 @@
           "https://www.fdma.go.jp/about/others/post3.html"
         ],
         "notes": "採用定義は、分子=消防庁2025年確定値（5月1日-9月30日）の都道府県別搬送人員、分母=total-populationの2024年値、倍率=100,000、表示年=2025年。分母は対象期間直前の最新年次であることを注記する。公式集計が都道府県単位のため代表観測地点の選定は不要。maximum-temperatureは日最高気温の月平均という曝露指標、本候補は健康被害の結果指標であり重複しない。"
+      }
+    },
+    {
+      "id": "jma-past-weather-observations",
+      "sourceId": "jma-weather",
+      "name": "過去の気象データ・ダウンロード",
+      "description": "気象庁の観測地点ごとの気温・降水量・風速などの過去観測値を選択してダウンロードできる。観測地点単位で、都道府県別の値は代表地点の選択などで別途定義が必要。",
+      "landingPageUrl": "https://www.data.jma.go.jp/risk/obsdl/index.php",
+      "accessMethods": [
+        "web-only",
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "daily",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather"
+      ],
+      "existingMetricKeys": [
+        "average-temperature",
+        "maximum-temperature",
+        "lowest-temperature",
+        "annual-precipitation",
+        "annual-precipitation-days",
+        "annual-sunshine-duration",
+        "maximum-snow-depth",
+        "annual-snow-days",
+        "average-relative-humidity"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.data.jma.go.jp/risk/obsdl/index.php",
+          "https://www.jma.go.jp/jma/kishou/info/coment.html"
+        ],
+        "notes": "ページ本文(形式・期間)は取得できずタイトルのみ確認。csvは未確認の推定ではなく既知の仕様だが本回では未検証。 既存との重なり: 社会・人口統計体系の気象指標は気象庁の観測値が元。同じ観測の別経路。"
+      }
+    },
+    {
+      "id": "jma-normals-1991-2020",
+      "sourceId": "jma-weather",
+      "name": "平年値 (1991〜2020年)",
+      "description": "1991〜2020年の30年平均による平年値を観測地点ごとに提供。年・月・旬・半旬・日別などがあり、都道府県別には代表地点(県庁所在地の気象台など)を決めれば比較できる。",
+      "landingPageUrl": "https://www.data.jma.go.jp/stats/etrn/index.php",
+      "accessMethods": [
+        "web-only",
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "1991〜2020年平均",
+      "updateFrequency": "static",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "stats47Uses": [
+        "ranking",
+        "area"
+      ],
+      "suggestedCategories": [
+        "landweather"
+      ],
+      "existingMetricKeys": [
+        "average-temperature",
+        "maximum-temperature",
+        "lowest-temperature",
+        "annual-precipitation",
+        "annual-sunshine-duration",
+        "maximum-snow-depth"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "年平均気温(県庁所在地の平年値)",
+        "年降水量(県庁所在地の平年値)",
+        "年間日照時間(県庁所在地の平年値)",
+        "年間降雪の深さ合計(積雪地域の代表地点)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.data.jma.go.jp/stats/etrn/index.php",
+          "https://www.jma.go.jp/jma/kishou/info/coment.html"
+        ],
+        "notes": "地点単位で平年値ダウンロードページが存在することを確認。ファイル形式と代表地点の定義は未確認。 既存との重なり: 平年値は上と同じ観測地点の長期平均。既存の気象指標と同じ現象。"
+      }
+    },
+    {
+      "id": "jma-bousai-xml-feed",
+      "sourceId": "jma-bousai-xml",
+      "name": "気象庁防災情報XML",
+      "description": "気象庁が発表する防災気象情報のXML電文。2011-05-12から運用、PULL型のみ(PUSH型は2020-09-01終了、代替は気象業務支援センター配信)。電文単位で、都道府県別の集計はされていない。",
+      "landingPageUrl": "https://xml.kishou.go.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national",
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "2011年5月〜継続",
+      "updateFrequency": "realtime",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)(気象庁サイト規約。XMLページでは再利用条件の明記なし)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment",
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://xml.kishou.go.jp/"
+        ],
+        "notes": "提供方式(PULL型のみ)は確認。XMLデータへの規約適用は未確認。"
+      }
+    },
+    {
+      "id": "nied-jshis-seismic-hazard",
+      "sourceId": "nied-bosai",
+      "name": "J-SHIS 地震ハザードステーション",
+      "description": "確率論的地震動予測地図(震度の超過確率など)、表層地盤・深部地盤データを250mメッシュ等で提供。API・WMS・ダウンロードあり。メッシュ単位で、県別集計は別途必要。",
+      "landingPageUrl": "https://www.j-shis.bosai.go.jp/",
+      "downloadUrl": "https://www.j-shis.bosai.go.jp/download",
+      "accessMethods": [
+        "api",
+        "bulk-download",
+        "tile-service"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "mesh"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "J-SHIS利用規約 (加工・成果物の頒布は可、販売は事前連絡、生データの複製頒布は禁止)",
+        "commercialUse": "restricted",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.j-shis.bosai.go.jp/agreement"
+      },
+      "stats47Uses": [
+        "map"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment",
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.j-shis.bosai.go.jp/",
+          "https://www.j-shis.bosai.go.jp/agreement"
+        ],
+        "notes": "規約の要旨を確認。データ形式・メッシュサイズ・座標系は未確認。商用販売は事前連絡が必要とされるため地図表示以外の再配布は不可。"
+      }
+    },
+    {
+      "id": "nied-knet-kik-net",
+      "sourceId": "nied-bosai",
+      "name": "K-NET・KiK-net 強震波形データ",
+      "description": "全国約1,700観測点の強震波形。ユーザー登録が必要。観測点単位の波形データで都道府県別指標にはならない。",
+      "landingPageUrl": "https://www.kyoshin.bosai.go.jp/",
+      "accessMethods": [
+        "file-download",
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "realtime",
+      "license": {
+        "name": "防災科研 強震観測網 利用条件 (再配布・販売・改ざん禁止、DOI引用)",
+        "commercialUse": "restricted",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.kyoshin.bosai.go.jp/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.kyoshin.bosai.go.jp/"
+        ],
+        "notes": "登録制・再配布禁止・DOI引用を確認。規約の独立ページURLは未確認でtermsUrlはトップ。"
+      }
+    },
+    {
+      "id": "mlit-kunijiban-boring",
+      "sourceId": "mlit-kunijiban",
+      "name": "KuniJiban ボーリング柱状図・土質試験結果",
+      "description": "国土交通省の道路・河川・港湾事業の地質・土質調査成果(ボーリング柱状図約19万件など)を検索・閲覧。地点単位。国土地盤情報センター未検定データのみ公開。",
+      "landingPageUrl": "https://www.kunijiban.pwri.go.jp/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2008年運用開始〜",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "未確認 (利用規約本文を確認できていない)",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.kunijiban.pwri.go.jp/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure",
+        "construction"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.kunijiban.pwri.go.jp/"
+        ],
+        "notes": "内容・件数を確認。ダウンロード可否・形式・規約本文は未確認。 2巡目: 規約ページの現行URLを特定できず(推測URLは404)、商用可否は未確認のまま。"
+      }
+    },
+    {
+      "id": "aist-active-fault-db",
+      "sourceId": "aist-gsj",
+      "name": "活断層データベース",
+      "description": "産総研による活断層の位置・性状データベース。調査時にメンテナンス中で内容・提供方式・規約は確認できていない。",
+      "landingPageUrl": "https://gbank.gsj.jp/activefault/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "line"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "line"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://gbank.gsj.jp/seamless/agreement.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment",
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unavailable",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "2026-11-13時点でメンテナンス中。内容は未確認。termsUrlはシームレス地質図の規約で、本DBに適用されるかは未確認。"
+      }
+    },
+    {
+      "id": "aist-seamless-geology-v2",
+      "sourceId": "aist-gsj",
+      "name": "20万分の1日本シームレス地質図V2",
+      "description": "全国の地質図。シェープファイル・KMLの全国一括ダウンロードとWeb API、ビューアあり。ポリゴンで都道府県単位の集計はしていない。",
+      "landingPageUrl": "https://gbank.gsj.jp/seamless/",
+      "accessMethods": [
+        "api",
+        "file-download",
+        "web-only"
+      ],
+      "formats": [
+        "shapefile",
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "政府標準利用規約 (第2.0版) 互換、出典表示必須",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://gbank.gsj.jp/seamless/agreement.html"
+      },
+      "stats47Uses": [
+        "map"
+      ],
+      "suggestedCategories": [
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://gbank.gsj.jp/seamless/",
+          "https://gbank.gsj.jp/seamless/agreement.html"
+        ],
+        "notes": "ダウンロード形式と規約(申請不要・出典表示・加工可)を確認。座標系は未確認。標高値は国土地理院タイルの規約に従う。シームレス地質図は登録商標。トップに All Rights Reserved 表記があり、規約ページとの関係は未確認。"
+      }
+    },
+    {
+      "id": "mlit-water-info-hydrology",
+      "sourceId": "mlit-water-info",
+      "name": "水文水質データベース",
+      "description": "河川の水位・雨量・流量・水質を観測所単位で提供。一括ダウンロードあり、大量の自動取得は控えるよう要請。観測所単位で県別集計は別途必要。",
+      "landingPageUrl": "https://www1.river.go.jp/",
+      "accessMethods": [
+        "web-only",
+        "bulk-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "daily",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www1.river.go.jp/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather",
+        "energy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www1.river.go.jp/"
+        ],
+        "notes": "トップで規約適用を確認。出典表示・加工表示の義務はPDL1.0の一般的条件としての記載で、サイト個別の規約ページは未確認。ファイル形式は未確認。"
+      }
+    },
+    {
+      "id": "env-ikimono-map",
+      "sourceId": "env-biodiversity-gis",
+      "name": "いきもの地図",
+      "description": "環境省生物多様性センターの生物分布Web-GIS。現行URLはArcGIS Experience Builder版。提供データ種別と規約は未確認。",
+      "landingPageUrl": "https://www.biodic.go.jp/ikimonomap.html",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "mesh"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "生物多様性センター利用規約 (権利表記なしは公共データ利用規約 第1.0版に準拠)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.biodic.go.jp/copyright/terms_of_service.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.biodic.go.jp/",
+          "https://www.biodic.go.jp/copyright/terms_of_service.html"
+        ],
+        "notes": "現行の紹介ページとExperience Builder版を確認。規約を確認(PDL1.0準拠、出典・加工表示が必要。いきものログ投稿等と国土地理院地図は対象外または別承認)。提供データ種別・メッシュ粒度は未確認のためresearch-onlyのまま。"
+      }
+    },
+    {
+      "id": "nies-air-monitoring",
+      "sourceId": "nies-kankyo-tenbo",
+      "name": "大気汚染常時監視データ (環境展望台)",
+      "description": "二酸化硫黄・二酸化窒素・一酸化炭素・光化学オキシダント・非メタン炭化水素・浮遊粒子状物質の測定局データ。全国の年平均や環境基準達成状況を地図・グラフで提供。測定局単位で、県別平均は定義すれば作れるが未確認。",
+      "landingPageUrl": "https://tenbou.nies.go.jp/gis/",
+      "downloadUrl": "https://tenbou.nies.go.jp/download/",
+      "accessMethods": [
+        "web-only",
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "〜2024年度(2026-09-08に追加)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "国立環境研究所 サイトポリシー (商用可否は未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://tenbou.nies.go.jp/copyright/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [
+        "pm25-general-station-count",
+        "pm25-valid-general-station-count",
+        "pm25-compliant-general-station-count",
+        "pm25-general-station-compliance-rate"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://tenbou.nies.go.jp/gis/",
+          "https://tenbou.nies.go.jp/copyright/"
+        ],
+        "notes": "対象物質と年度を確認。著作権ページは国立環境研究所に帰属とのみ記載。サイトポリシーとダウンロードのファイル形式は未確認。県別ranking化は規約確認後に再判定。 2巡目: 国立環境研究所サイトポリシー本文に到達できず、unknownのまま。 既存との重なり: 既存の PM2.5 指標は環境省「大気汚染状況」が出典で、同じ常時監視データ。"
+      }
+    },
+    {
+      "id": "env-eadas-assessment",
+      "sourceId": "env-eadas",
+      "name": "環境アセスメントデータベース EADAS",
+      "description": "環境省の環境影響評価情報支援ネットワーク。環境影響評価の事業情報・環境情報を提供するとされるが、トップが動的読込で内容は未確認。",
+      "landingPageUrl": "https://assess.env.go.jp/index.html",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://assess.env.go.jp/index.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "旧URLからassess.env.go.jpへの301移転のみ確認。ページ本文は取得できず、データ内容・規約は未確認。"
+      }
+    },
+    {
+      "id": "mext-food-composition-db",
+      "sourceId": "mext-fooddb",
+      "name": "食品成分データベース",
+      "description": "日本食品標準成分表(八訂)増補2023年の食品別成分値を検索できる。地域別データではなく都道府県比較には使えない。",
+      "landingPageUrl": "https://fooddb.mext.go.jp/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://fooddb.mext.go.jp/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitableと判断。着地ページの実在のみ確認。引用は文部科学省の成分表から行うよう案内されている。"
+      }
+    },
+    {
+      "accessMethods": [
+        "file-download",
+        "web-only"
+      ],
+      "formats": [
+        "csv",
+        "shapefile",
+        "other"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "id": "jma-weather-data-portal",
+      "sourceId": "jma-weather",
+      "name": "気象データ高度利用ポータルサイト",
+      "description": "産業利用向けに気象庁データの入口を集めたサイト。アメダス最新・過去観測CSV、確率予測CSV、観測地点位置CSV、予報区GISなどへ誘導する。データは観測地点・予報区単位で都道府県別集計は別途必要。",
+      "landingPageUrl": "https://www.data.jma.go.jp/developer/index.html",
+      "geographicLevels": [
+        "point",
+        "district"
+      ],
+      "updateFrequency": "daily",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.data.jma.go.jp/developer/index.html",
+          "https://www.jma.go.jp/jma/kishou/info/coment.html"
+        ],
+        "notes": "提供データ一覧を確認。個別ファイルの仕様と、サイト固有の利用上の留意事項PDF(ryuui.pdf)は未確認。"
+      }
+    },
+    {
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "id": "jma-typhoon-position-table",
+      "sourceId": "jma-weather",
+      "name": "台風位置表",
+      "description": "台風ごとの位置・中心気圧・風速などを年別に提供。PDFは台風単位、CSVは事後解析済みを年ごとにまとめたもの。台風は全国単位の事象で都道府県別の値ではない。",
+      "landingPageUrl": "https://www.data.jma.go.jp/typhoon/position_table/table2026.html",
+      "geographicLevels": [
+        "national",
+        "point"
+      ],
+      "updateFrequency": "irregular",
+      "timeCoverage": "年別ページ(2026年版は台風2601号〜2631号を確認)",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather",
+        "safetyenvironment"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.data.jma.go.jp/typhoon/position_table/table2026.html",
+          "https://www.jma.go.jp/jma/kishou/info/coment.html"
+        ],
+        "notes": "2026年版ページでPDF/CSV提供と速報値・確定値の区別を確認。過去年の範囲とCSV列は未確認。"
+      }
+    },
+    {
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "id": "jma-volcano-monthly-bulletin",
+      "sourceId": "jma-weather",
+      "name": "火山月報(カタログ編) 火山観測データ",
+      "description": "火山ごとの月別観測データ概要(PDF)と震動・傾斜・GNSS・遠望観測などのデータ。概要ページは2008年1月〜2016年8月分。火山単位で都道府県別集計はされていない。",
+      "landingPageUrl": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/summary.html",
+      "geographicLevels": [
+        "point"
+      ],
+      "updateFrequency": "monthly",
+      "timeCoverage": "概要ページ: 2008年1月〜2016年8月",
+      "license": {
+        "name": "気象庁ホームページ利用規約 (公共データ利用規約 第1.0版。火山月報ページ自体に条件の記載なし)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather",
+        "safetyenvironment"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/summary.html"
+        ],
+        "notes": "概要ページのみ確認。震動・傾斜等の各ページと現行の火山観測データ一覧ページは未確認。"
+      }
+    },
+    {
+      "id": "egov-data-portal-datasets",
+      "sourceId": "egov-data-portal",
+      "name": "e-Gov データポータル 登録データセット",
+      "description": "中央行政のオープンデータを府省横断で掲載するポータル(13カテゴリ・23組織)。データセット単位の掲載で、都道府県別に集計できるかは個別データセットによる。",
+      "landingPageUrl": "https://data.e-gov.go.jp/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data.e-gov.go.jp/info/ja/terms"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://data.e-gov.go.jp/",
+          "https://data.e-gov.go.jp/info/ja/terms",
+          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+        ],
+        "notes": "トップと利用規約を確認。規約は特記なき限り PDL1.0 としているが商用可否の条項は本文で読めず unknown とした。データセット数・API は未確認。 [2巡目] 規約は特記なき限り PDL1.0 と確認、PDL1.0 本文で商用利用可を確認。データセットごとに別条件がありうるため全体は research-only のまま。"
+      }
+    },
+    {
+      "id": "nta-houjin-bangou-webapi",
+      "sourceId": "nta-houjin-bangou",
+      "name": "法人番号公表サイト Web-API",
+      "description": "法人番号・期間・名称で法人情報を引ける REST API。所在地での絞り込みはできるが、全件取得は不可(全件はダウンロード提供)で、都道府県別法人数の集計には全件ファイルが必要。",
+      "landingPageUrl": "https://www.houjin-bangou.nta.go.jp/webapi/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.houjin-bangou.nta.go.jp/riyokiyaku/"
+      },
+      "stats47Uses": [
+        "ranking",
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.houjin-bangou.nta.go.jp/webapi/",
+          "https://www.houjin-bangou.nta.go.jp/riyokiyaku/",
+          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+        ],
+        "notes": "アプリケーションID必須(無料、発行に約2週間〜1か月)。出典表示義務あり(利用サービスに明記)。期間指定は最大50日。更新頻度・応答形式の詳細・規約本文は未確認。 [2巡目] サイト利用規約(コンテンツは PDL1.0、出典表示と加工の明示が必要)と PDL1.0 本文(商用利用可)を確認。Web-API機能利用規約の本文は未確認。都道府県別法人数の ranking は API でなく全件ダウンロード(基本3情報)を所在地で集計する前提で、全件ファイルの形式・規模は未確認。"
+      }
+    },
+    {
+      "id": "nta-invoice-webapi",
+      "sourceId": "nta-houjin-bangou",
+      "name": "適格請求書発行事業者公表システム Web-API",
+      "description": "登録番号・更新差分期間・登録番号+日付で事業者情報を取得する REST API。事業者単位で、都道府県別集計は全件データを別途加工する必要がある。",
+      "landingPageUrl": "https://www.invoice-kohyo.nta.go.jp/web-api/index.html",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "国税庁 Web-API機能利用規約 (インボイス)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.invoice-kohyo.nta.go.jp/web-api/index.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.invoice-kohyo.nta.go.jp/web-api/index.html"
+        ],
+        "notes": "ID は利用目的の書類審査あり。出典表示の掲載が必要。更新頻度・規約本文は未確認。"
+      }
+    },
+    {
+      "id": "gbizinfo-corporate-data",
+      "sourceId": "meti-gbizinfo",
+      "name": "gBizINFO 法人情報",
+      "description": "政府保有の法人データ(500万社超)を検索・REST API・CSV/JSON ダウンロードで提供。法人単位で所在地を持つが、都道府県別集計の可否は未確認。",
+      "landingPageUrl": "https://info.gbiz.go.jp/",
+      "accessMethods": [
+        "api",
+        "bulk-download",
+        "web-only"
+      ],
+      "formats": [
+        "csv",
+        "json",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "gBizINFO 利用規約",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://info.gbiz.go.jp/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://info.gbiz.go.jp/"
+        ],
+        "notes": "トップのみ確認。規約・トークン申請・ライセンスは未確認。"
+      }
+    },
+    {
+      "id": "edinet-disclosure-api",
+      "sourceId": "fsa-edinet",
+      "name": "EDINET API (有価証券報告書等の開示書類)",
+      "description": "上場企業等の開示書類を取得する API。個別企業の開示書類が中心で、都道府県別の統計としては使えない。",
+      "landingPageUrl": "https://disclosure2dl.edinet-fsa.go.jp/guide/static/disclosure/WZEK0110.html",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "json",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "EDINET 利用規約",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://disclosure2dl.edinet-fsa.go.jp/guide/static/disclosure/WZEK0110.html"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://disclosure2dl.edinet-fsa.go.jp/guide/static/disclosure/WZEK0110.html"
+        ],
+        "notes": "API仕様書 Version 2 (2026-06-03 更新)の存在のみ確認。更新頻度はページ上で未確認。規約・API キー条件も未確認。"
+      }
+    },
+    {
+      "id": "stat-dashboard-data",
+      "sourceId": "stat-dashboard",
+      "name": "統計ダッシュボード",
+      "description": "国・民間の主要統計を 18 分野でグラフ化し、国・都道府県・市区町村別の閲覧と API を提供。都道府県別データを含むが、指標の多くは e-Stat 由来で重複の可能性がある。",
+      "landingPageUrl": "https://dashboard.e-stat.go.jp/",
+      "accessMethods": [
+        "api",
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national",
+        "prefecture",
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "統計ダッシュボード サイトポリシー",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://dashboard.e-stat.go.jp/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "population",
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://dashboard.e-stat.go.jp/"
+        ],
+        "notes": "トップのみ確認。RESAS 後継との記載は確認できず。API 利用条件・サイトポリシー本文は未確認。"
+      }
+    },
+    {
+      "id": "p-portal-award-results",
+      "sourceId": "digital-p-portal",
+      "name": "調達ポータル 落札実績オープンデータ",
+      "description": "政府調達の落札実績情報の一覧をダウンロード提供。機関単位で、都道府県別の集計可否は未確認。",
+      "landingPageUrl": "https://www.p-portal.go.jp/pps-web-biz/UZA01/OZA0101",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "調達ポータル ご利用にあたって",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.p-portal.go.jp/pps-web-biz/UZA01/OZA0101"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.p-portal.go.jp/pps-web-biz/UZA01/OZA0101"
+        ],
+        "notes": "落札実績情報の存在のみ確認。形式・更新頻度・規約は未確認。"
+      }
+    },
+    {
+      "id": "cao-keiki-watcher-survey",
+      "sourceId": "cao-keiki-watcher",
+      "name": "景気ウォッチャー調査",
+      "description": "景気動向を現場の観測者へのアンケートで集計する調査。公表表は全国および地域別だが、地域が都道府県単位か地域ブロックかは未確認。",
+      "landingPageUrl": "https://www5.cao.go.jp/keizai3/watcher/watcher_menu.html",
+      "accessMethods": [
+        "file-download",
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "monthly",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.cao.go.jp/notice/rule.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www5.cao.go.jp/keizai3/watcher/watcher_menu.html",
+          "https://www.cao.go.jp/notice/rule.html",
+          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0",
+          "https://www5.cao.go.jp/keizai3/watcher_index.html"
+        ],
+        "notes": "メニューのみ確認。更新頻度(公表予定ページあり)・地域粒度・形式は本文で未確認。 [2巡目] 内閣府の利用ルールで PDL1.0 適用を確認。月別の公表一覧(最新は令和8年10月)から monthly とした。統計表は Excel。地域区分が都道府県か地域ブロックかは未確認のため research-only のまま。"
+      }
+    },
+    {
+      "id": "boj-time-series-stat",
+      "sourceId": "boj-stat-search",
+      "name": "日本銀行 時系列統計データ",
+      "description": "金融・物価・預金貸出など日銀の統計をカテゴリ別に検索・一括ダウンロードでき API もある。都道府県別の預金・貸出データを含む。",
+      "landingPageUrl": "https://www.stat-search.boj.or.jp/index.html",
+      "accessMethods": [
+        "api",
+        "bulk-download",
+        "web-only"
+      ],
+      "formats": [
+        "csv",
+        "other"
+      ],
+      "geographicLevels": [
+        "national",
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "日本銀行 時系列統計データ検索サイト 利用上の注意",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.stat-search.boj.or.jp/index.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "economy",
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.stat-search.boj.or.jp/index.html"
+        ],
+        "notes": "トップのみ確認(文字化けあり)。都道府県別預金・貸出の網羅範囲、利用条件、更新頻度は未確認。"
+      }
+    },
+    {
+      "id": "jihs-idwr-provisional",
+      "sourceId": "jihs-idwr",
+      "name": "IDWR 速報データ",
+      "description": "感染症法に基づく届出感染症の発生動向を週次で集計した速報。2012〜2026 年の年別一覧と速報データ検索が存在する。都道府県別の数値の有無は検索ページで未確認。",
+      "landingPageUrl": "https://id-info.jihs.go.jp/surveillance/idwr/index.html",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "JIHS 利用規約 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://id-info.jihs.go.jp/surveillance/idwr/index.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://id-info.jihs.go.jp/surveillance/idwr/index.html",
+          "https://id-info.jihs.go.jp/surveillance/idwr/provisional/sokuhou.html"
+        ],
+        "notes": "トップと速報一覧のみ確認。2026年第44週分の掲載を確認。形式・更新頻度・都道府県別・規約は未確認。"
+      }
+    },
+    {
+      "id": "mhlw-covid19-open-data",
+      "sourceId": "mhlw-covid19-open",
+      "name": "新型コロナウイルス感染症 オープンデータ",
+      "description": "新規陽性者数・入院治療等を要する者・死亡者累積・重症者数・PCR検査などの CSV 8 本。都道府県別の列を持つかは未確認。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/covid-19/open-data.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "national",
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mhlw.go.jp/chosakuken/index.html"
+      },
+      "stats47Uses": [
+        "ranking"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "都道府県別の新規陽性者数 (期間集計)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/covid-19/open-data.html",
+          "https://www.mhlw.go.jp/chosakuken/index.html",
+          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0",
+          "https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv"
+        ],
+        "notes": "CSV一覧のみ確認。最終更新日・更新停止の有無・都道府県別・規約は未確認。 [2巡目] 厚労省の利用規約で PDL1.0 適用を確認。新規陽性者数日別 CSV のヘッダーが ALL と 47 都道府県の列を持つことを確認。取得時の出力が途中で切れており最終日付(2022-01-24 を表示)は確定できないため、データ終了時期と更新停止の有無は未確認。ranking は過去期間の累計・期間集計に限る。"
+      },
+      "downloadUrl": "https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv"
+    },
+    {
+      "id": "mext-school-code-list",
+      "sourceId": "mext-school-code",
+      "name": "学校コード",
+      "description": "全国の学校に付番された一意の学校コード。毎年 5 月 1 日現在を暫定版(5 月末)と確定版(12 月末)で公開。東西日本・学校種別のリスト。名称・住所を含み、都道府県別の学校数への集計は可能とみられるが未確認。",
+      "landingPageUrl": "https://www.mext.go.jp/b_menu/toukei/mext_01087.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx",
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "学校コードの取り扱いについて (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.mext.go.jp/b_menu/toukei/mext_01087.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.mext.go.jp/b_menu/toukei/mext_01087.html"
+        ],
+        "notes": "暫定版 2026-05-29、確定版 2025-12-26 公開を確認。ファイル形式・規約本文は未確認。学校数は学校基本調査(e-Stat)で取れるため重複の可能性が高い。"
+      },
+      "latestPublishedAt": "2026-05-29"
+    },
+    {
+      "id": "yokohama-opendata-portal",
+      "sourceId": "yokohama-opendata",
+      "name": "横浜市オープンデータポータル",
+      "description": "横浜市のデータカタログ・ダッシュボード・API。市内の区単位などの自治体データで、47都道府県の比較には使えない。",
+      "landingPageUrl": "https://www.city.yokohama.lg.jp/city-info/seisaku/torikumi/data/opendata/opendata.html",
+      "accessMethods": [
+        "api",
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "district"
+      ],
+      "hasGeometry": false,
+      "coverage": "partial",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "クリエイティブ・コモンズ 表示 4.0 (西区ページの記載。ポータル全体は未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.city.yokohama.lg.jp/city-info/seisaku/torikumi/data/opendata/opendata.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.city.yokohama.lg.jp/city-info/seisaku/torikumi/data/opendata/opendata.html",
+          "https://data.city.yokohama.lg.jp/"
+        ],
+        "notes": "公式ページを開けておらず、検索結果の記述のみ。ライセンスは区ページ単位の記載で全体は未確認。 [2巡目] 市の案内ページとポータルのトップを開いた。市はオープンデータを商用利用可と定義しているが、ポータルの利用規約ページ(data.city.yokohama.lg.jp/terms)は 404 で、個別ライセンスを読めず unknown のまま。"
+      }
+    },
+    {
+      "id": "osaka-odpo-catalog",
+      "sourceId": "osaka-odpo",
+      "name": "大阪府オープンデータカタログ (ODPO)",
+      "description": "大阪府と府内市町村のオープンデータを掲載するカタログで、API 連携に対応。府内限定のデータで、都道府県比較には使えない。",
+      "landingPageUrl": "https://odcs.bodik.jp/270008/",
+      "accessMethods": [
+        "api",
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "prefecture-specific",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "クリエイティブ・コモンズ 表示 4.0 国際 (CC BY 4.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://odcs.bodik.jp/270008/tos/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.pref.osaka.lg.jp/kikaku_keikaku/opendata/index.html",
+          "https://odcs.bodik.jp/270008/",
+          "https://odcs.bodik.jp/270008/tos/"
+        ],
+        "notes": "公式ページを開けておらず、検索結果の記述のみ(ページ更新 2026-03-17、ODPO は独自利用規約あり)。 [2巡目] カタログ(BODIK ホスト、81 データセット)と利用規約を開き、第1条で CC BY 4.0 を確認(リソース個別のライセンスが優先)。CC BY は商用可として allowed とした。API は未確認。府内限定のため research-only。"
+      }
+    },
+    {
+      "id": "tokyo-open-data-api-catalog",
+      "sourceId": "tokyo-open-data-api",
+      "name": "東京都オープンデータAPIカタログ",
+      "description": "東京都のオープンデータを API で探せるカタログ。東京都内のデータで、都道府県比較には使えない。",
+      "landingPageUrl": "https://portal.data.metro.tokyo.lg.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "municipality"
+      ],
+      "hasGeometry": false,
+      "coverage": "prefecture-specific",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "東京都オープンデータ 利用規約 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://portal.data.metro.tokyo.lg.jp/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://portal.data.metro.tokyo.lg.jp/"
+        ],
+        "notes": "トップのみ確認(「APIを探す」と利用規約リンクの存在)。API仕様・規約本文は未確認。"
+      }
+    },
+    {
+      "id": "egov-laws-api-v2",
+      "sourceId": "e-gov-law-api",
+      "name": "e-Gov 法令API (Version 2)",
+      "description": "法令検索サービスの法令データ API。法令テキストで統計ではない。",
+      "landingPageUrl": "https://laws.e-gov.go.jp/apidoc/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "json",
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "e-Gov 法令検索 利用規約 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://laws.e-gov.go.jp/apidoc/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "着地ページの実在のみ確認。判断理由: 法令であり統計データではない。"
+      }
+    },
+    {
+      "id": "ndl-search-api",
+      "sourceId": "ndl-search",
+      "name": "国立国会図書館サーチ API",
+      "description": "書誌情報の検索 API。書誌で統計ではない。",
+      "landingPageUrl": "https://ndlsearch.ndl.go.jp/help/api",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "NDLサーチ API 利用条件 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://ndlsearch.ndl.go.jp/help/api"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "着地ページの実在のみ確認。判断理由: 書誌検索で統計ではない。"
+      }
+    },
+    {
+      "id": "japansearch-archive",
+      "sourceId": "japansearch",
+      "name": "ジャパンサーチ",
+      "description": "国内のデジタルアーカイブ横断検索(326 データベース・約3,293万件)。文化資料で統計ではない。",
+      "landingPageUrl": "https://jpsearch.go.jp/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "ジャパンサーチ 利用規約 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://jpsearch.go.jp/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "着地ページの実在のみ確認。判断理由: 文化資料アーカイブで統計ではない。"
+      }
+    },
+    {
+      "id": "ndb-open-data",
+      "sourceId": "mhlw-ndb-open",
+      "name": "NDB オープンデータ (レセプト情報・特定健診等情報)",
+      "description": "レセプトと特定健診等の情報から作る集計表で、都道府県別の集計を多数含む(一部は二次医療圏別)。第12回が最新で令和7年度のレセプトを集計。",
+      "landingPageUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html",
+      "accessMethods": [
+        "file-download",
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national",
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2026-10-16",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mhlw.go.jp/chosakuken/index.html"
+      },
+      "stats47Uses": [
+        "ranking",
+        "theme"
+      ],
+      "suggestedCategories": [
+        "socialsecurity"
+      ],
+      "existingMetricKeys": [
+        "health-checkup-breakfast-skipping-rate",
+        "health-checkup-late-dinner-rate",
+        "health-checkup-blood-pressure-medication-rate",
+        "health-checkup-smoking-rate",
+        "health-checkup-weight-gain-10kg-rate",
+        "health-checkup-exercise-habit-rate",
+        "health-checkup-daily-activity-rate",
+        "health-checkup-fast-walking-rate",
+        "health-checkup-fast-eating-rate",
+        "health-checkup-daily-snacking-rate",
+        "health-checkup-daily-drinking-rate",
+        "health-checkup-sufficient-sleep-rate"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "血糖を下げる薬又はインスリン注射を使用している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "コレステロールや中性脂肪を下げる薬を使用している人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "脳卒中の既往・治療がある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "心臓病(狭心症・心筋梗塞等)の既往・治療がある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "慢性腎臓病・腎不全(透析含む)の既往・治療がある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "貧血といわれたことがある人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "食事をかんで食べる時に「かみにくい・ほとんどかめない」人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "BMI 25以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "腹囲が基準を超える人(男85cm以上・女90cm以上)の割合 (％・2023年度・47県を実ファイルで確認)",
+        "収縮期血圧140mmHg以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "拡張期血圧90mmHg以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "HbA1c 6.5%以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "空腹時血糖126mg/dl以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "中性脂肪150mg/dl以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "LDLコレステロール140mg/dl以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "HDLコレステロール40mg/dl未満の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "ALT(GPT) 31U/l以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "γ-GTP 51U/l以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "尿蛋白(+)以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "尿糖(+)以上の人の割合 (％・2023年度・47県を実ファイルで確認)",
+        "特定健診 検査値の都道府県別平均値(BMI・腹囲・HbA1c・血圧・脂質など16項目) (項目ごと(kg/m²・cm・％・mmHgなど)・2023年度・47県を実ファイルで確認)",
+        "歯周病(傷病グループ)の傷病件数 ÷ 人口 (件/人口1000人・2024年4月〜2025年3月診療分・47県を実ファイルで確認)",
+        "歯科初診料の算定患者数(外来) ÷ 人口 (人/人口1000人・2024年4月〜2025年3月診療分・47県を実ファイルで確認)",
+        "調剤基本料の算定回数(処方箋受付回数の目安) ÷ 人口 (回/人口1人・2024年4月〜2025年3月診療分・47県を実ファイルで確認)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html",
+          "https://www.mhlw.go.jp/ndb/opendatasite/",
+          "https://www.mhlw.go.jp/chosakuken/index.html",
+          "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0",
+          "https://www.mhlw.go.jp/content/12400000/001711941.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711940.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711925.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711916.zip",
+          "https://www.mhlw.go.jp/content/12400000/001711927.zip"
+        ],
+        "notes": "最新回(第12回)と都道府県別の存在(分析サイト、第1〜10回分の記述)を確認し、厚労省の規約が PDL1.0 であることも確認した。ファイル形式、第11・12回の都道府県別の有無、収録開始年度は未確認。 2026-11-13 実ファイル確認: 指標候補 34 件について統計ファイルを開き、47 都道府県の行を数えて確認した (001711941.zip sha256=95efcf4dc8500954…、001711940.zip sha256=1b25ff94d1682297…、001711925.zip sha256=7ed380e045086f21…、001711916.zip sha256=a391bb69f7d5430f…、001711927.zip sha256=e147167850cab938…)。メインが質問項目8 (喫煙) を原典 xlsx から再計算し、probe の値と一致 (奈良県 18.41%〜北海道 27.84%)。 2026-11-13 指標化: 質問票の10設問 (質問1・8・9・10・11・12・14・16・18・20) を指標定義にし、.claude/scripts/themes/ingest-ndb-questionnaire.mjs で手元に取り込んだ。R2 へ上げるまで isActive: false。"
+      }
+    },
+    {
+      "id": "niad-university-portrait-api",
+      "sourceId": "niad-university-portrait",
+      "name": "大学ポートレート 大学基本情報 Web-API",
+      "description": "国公立大学の大学基本情報を機械可読形式で提供する Web-API。大学ごとのデータで、キャンパス所在地での都道府県別集計の可否は未確認。",
+      "landingPageUrl": "https://api-portal.portraits.niad.ac.jp/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "大学ポートレート Web-API 利用規約",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://api-portal.portraits.niad.ac.jp/agreement.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://portraits.niad.ac.jp/",
+          "https://api-portal.portraits.niad.ac.jp/",
+          "https://api-portal.portraits.niad.ac.jp/agreement.html"
+        ],
+        "notes": "API 規約は、登録利用者のみ・アクセスキー付与・クレジット表示・短時間の大量リクエスト禁止を定める。商用利用はサイトポリシー(第6条)に委ねられ本文は未確認。データ項目一覧も未確認。"
+      }
+    },
+    {
+      "id": "mlit-isj-location-reference",
+      "sourceId": "mlit-isj",
+      "name": "位置参照情報 (街区レベル・大字町丁目レベル)",
+      "description": "街区または大字・町丁目の代表点の緯度経度を収めた住所の座標対応表。街区レベルは都市計画区域内で年1回更新、大字・町丁目レベルは全国。行は住所単位で、都道府県コードを含めば県別に集計できるが、地域の指標そのものではない。",
+      "landingPageUrl": "https://nlftp.mlit.go.jp/isj/index.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "point",
+        "municipality"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2003年度〜 (街区レベル)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "位置参照情報利用約款",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://nlftp.mlit.go.jp/isj/index.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "construction",
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://nlftp.mlit.go.jp/isj/index.html"
+        ],
+        "notes": "提供ページを確認。位置参照情報利用約款の本文は開いておらず商用可否は unknown。ファイル形式と最新年度も未確認。"
+      }
+    },
+    {
+      "id": "gsi-fgd-basic-items",
+      "sourceId": "gsi-fgd",
+      "name": "基盤地図情報 (基本項目・数値標高モデル)",
+      "description": "国土地理院が整備する道路縁・建築物外周・行政区画などの基本項目と数値標高モデル。ダウンロードにユーザー登録とログインが必要。全国を対象とし、地図レイヤーとして使うデータで、都道府県別の指標ではない。",
+      "landingPageUrl": "https://www.gsi.go.jp/kiban/index.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "shapefile",
+        "other"
+      ],
+      "geographicLevels": [
+        "polygon",
+        "line",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point",
+        "line",
+        "polygon"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "国土地理院コンテンツ利用規約 (PDL1.0。基本測量成果は別途申請)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "infrastructure",
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.gsi.go.jp/kiban/index.html",
+          "https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
+        ],
+        "notes": "規約ページでは基本測量成果の複製・使用に測量法の申請が必要とある。基盤地図情報がこれに当たるかを個別に述べたページは未確認のため unknown のまま。形式と更新頻度も未確認。"
+      }
+    },
+    {
+      "id": "gsi-tiles-map-tiles",
+      "sourceId": "gsi-maps",
+      "name": "地理院タイル",
+      "description": "標準地図・写真などをXYZ形式のタイルで配信する。ほとんどPNG、写真系はJPG。全国を対象とする背景地図で、県別の数値は含まない。",
+      "landingPageUrl": "https://maps.gsi.go.jp/development/ichiran.html",
+      "accessMethods": [
+        "tile-service"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "国土地理院コンテンツ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
+      },
+      "stats47Uses": [
+        "map"
+      ],
+      "suggestedCategories": [
+        "landweather",
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://maps.gsi.go.jp/development/ichiran.html",
+          "https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
+        ],
+        "notes": "規約ページを確認: PDL1.0、出典表示と加工した旨の表示が必要。規約ページに商用利用の明示はないが、国土交通省の規約ページに「CC BY 4.0と互換」とあるPDL1.0が適用される。基本測量成果に当たるタイルは測量法の申請が要る場合があるが、サイト・アプリへのリアルタイム読込は出典表示のみで可(一覧ページの記載)。住居表示の記載は一覧の前半では見つからず、後半は未読。"
+      }
+    },
+    {
+      "id": "digital-abr-address-dataset",
+      "sourceId": "digital-abr",
+      "name": "アドレス・ベース・レジストリ (住所データ)",
+      "description": "都道府県・市区町村・町字の階層で整備された住所の基盤データ。町字(文字情報)まで整備済みで、地番・住居表示は試験公開版。住所正規化の基盤であり、都道府県別の指標ではない。",
+      "landingPageUrl": "https://www.digital.go.jp/policies/base_registry_address",
+      "downloadUrl": "https://dataset.address-br.digital.go.jp/",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "municipality",
+        "district"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0) (デジタル庁サイト)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.digital.go.jp/policies/base_registry_address_tos"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "administrativefinancial",
+        "ict"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.digital.go.jp/policies/base_registry_address",
+          "https://www.digital.go.jp/policies/base_registry_address_tos"
+        ],
+        "notes": "規約ページを確認: PDL1.0、出典表示と加工の明記が必要。商用利用の明示はない。地番マスター系は登記所備付地図データ利用規約にも同意したものとみなされるため、その部分は別条件。ダウンロードサイトは未確認。"
+      }
+    },
+    {
+      "id": "mlit-city-planning-gis-data",
+      "sourceId": "mlit-city-planning-gis",
+      "name": "都市計画決定GISデータ",
+      "description": "全国の自治体が決定した都市計画区域・用途地域・都市計画道路などのGISデータ。自治体が未提供の場合は国土数値情報から作成される。掲載されていない自治体があり、公表自治体は別のExcel一覧で示される。",
+      "landingPageUrl": "https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000087.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "shapefile",
+        "geojson",
+        "citygml"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "polygon",
+        "line"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "polygon",
+        "line"
+      ],
+      "coverage": "partial",
+      "timeCoverage": "令和7年度整備",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0) (国土交通省サイト)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mlit.go.jp/links/terms-of-use.html"
+      },
+      "stats47Uses": [
+        "map"
+      ],
+      "suggestedCategories": [
+        "construction",
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [
+        "A09",
+        "A55"
+      ],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000087.html",
+          "https://www.mlit.go.jp/links/terms-of-use.html"
+        ],
+        "notes": "国土交通省の規約ページ(PDL1.0、CC BY 4.0互換、出典表示と加工の明記が必要)を確認。ただし配布案内ページ自体は権利表記も商用利用の記載もなく、自治体データの再利用条件は個別に異なりうる。配布サイト本体と掲載自治体一覧は未確認。 既存との重なり: KSJ の都市地域・都市計画決定情報と同じ都市計画の区域データ。"
+      }
+    },
+    {
+      "id": "jartic-traffic-volume-api",
+      "sourceId": "jartic-open-traffic",
+      "name": "交通量API (直轄国道の方向別交通量)",
+      "description": "全国の直轄国道の常設トラフィックカウンターとCCTVのAI型カウンターによる5分値・1時間値。WFSでGeoJSONまたはCSV。観測地点はオープン化された一部のみで、取得期間は5分値が過去約1か月、1時間値が約3か月。蓄積は自分で行う必要がある。",
+      "landingPageUrl": "https://www.jartic-open-traffic.org/",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "geojson",
+        "csv"
+      ],
+      "geographicLevels": [
+        "line",
+        "point"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "line"
+      ],
+      "coverage": "partial",
+      "timeCoverage": "直近約1か月(5分値)・約3か月(1時間値)",
+      "updateFrequency": "realtime",
+      "license": {
+        "name": "交通量API利用規約 (v3)",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.jartic-open-traffic.org/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "tourism",
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.jartic-open-traffic.org/"
+        ],
+        "notes": "ガイダンスサイトを確認。交通量API利用規約(v3 PDF)は開いていないため商用可否は unknown のまま。"
+      }
+    },
+    {
+      "id": "npa-traffic-accident-opendata",
+      "sourceId": "npa-statistics",
+      "name": "交通事故統計情報のオープンデータ",
+      "description": "警察庁が年ごとに公開する交通事故の個票CSV。2019年から2025年分があり、2025年分は本票(約60MB)・補充票・高速票の3ファイル。事故1件単位のため、都道府県を識別する列があれば県別の事故件数に集計できる見込み。列の内容はファイル定義書で確認するまで未確認。",
+      "landingPageUrl": "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv"
+      ],
+      "geographicLevels": [
+        "point",
+        "prefecture"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "point"
+      ],
+      "coverage": "all-japan",
+      "timeCoverage": "2019年〜2025年 (年ごと)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0) (警察庁サイト)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.npa.go.jp/rules/index.html"
+      },
+      "stats47Uses": [
+        "ranking"
+      ],
+      "suggestedCategories": [
+        "safetyenvironment"
+      ],
+      "existingMetricKeys": [
+        "traffic-accident-count",
+        "traffic-accident-count-per-population",
+        "traffic-accident-casualties-per-population"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "夜間に起きた交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "自転車が関係する交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "高齢運転者(第1当事者65歳以上)が起こした交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "歩行者が関係する交通事故(人対車両)の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "二輪車(自動二輪・原付)が関係する交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "雪の日に起きた交通事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)",
+        "車両単独事故の割合 (％・2025年(1-12月)・47県を実ファイルで確認)"
+      ],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html",
+          "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html",
+          "https://www.npa.go.jp/rules/index.html",
+          "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/honhyo_2025.csv"
+        ],
+        "notes": "規約ページを確認: PDL1.0、出典表示と加工の明記が必要、商用利用の明示はない。2025年分のCSV3種とファイル定義書・コード表の存在を確認。本票に都道府県コードと緯度経度の列があるかは未確認(ファイル定義書は未読)。ranking 化はこの確認が前提。 既存との重なり: 社会・人口統計体系の交通事故指標は警察庁の統計が元。 2026-11-13 実ファイル確認: 指標候補 7 件について統計ファイルを開き、47 都道府県の行を数えて確認した (honhyo_2025.csv sha256=aad9afb4e6f9dac6…)。メインが本票 287,023 行から自転車関与の割合を再計算し、probe の値と一致 (全国 23.51%・東京 45.9%)。都道府県コードは 51 種で、北海道は方面別の 10〜14 を合算する。"
+      }
+    },
+    {
+      "id": "mlit-road-census-r3",
+      "sourceId": "mlit-road-census",
+      "name": "令和3年度 全国道路・街路交通情勢調査 一般交通量調査 集計表",
+      "description": "令和3年度の一般交通量調査の集計。区間数・延長・道路施設延長・交通量・旅行速度を都道府県別・道路種別に整理した表と、47都道府県それぞれの箇所別基本表・時間帯別交通量表がPDF・Excel・CSVで公開されている。おおむね5年ごとの調査。",
+      "landingPageUrl": "https://www.mlit.go.jp/road/census/r3/",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "csv",
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "prefecture",
+        "point"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "令和3年度 (前回は平成27年度)",
+      "updateFrequency": "irregular",
+      "latestPublishedAt": "2023-06-30",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0) (国土交通省サイト)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mlit.go.jp/links/terms-of-use.html"
+      },
+      "stats47Uses": [
+        "ranking"
+      ],
+      "suggestedCategories": [
+        "infrastructure",
+        "tourism"
+      ],
+      "existingMetricKeys": [
+        "average-road-traffic-volume"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "道路の混雑度(一般道路計) ((比)・令和3年(2021)秋季・47県を実ファイルで確認)",
+        "大型車混入率(12時間・一般道路計) (％・令和3年(2021)秋季・47県を実ファイルで確認)",
+        "混雑時旅行速度(朝夕・一般道路計) (km/h・令和3年(2021)秋季・47県を実ファイルで確認)"
+      ],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.mlit.go.jp/road/census/r3/",
+          "https://www.mlit.go.jp/links/terms-of-use.html",
+          "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei04.csv",
+          "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei05.csv"
+        ],
+        "notes": "令和3年度ページで都道府県別の集計表と47県別の表の存在を確認。規約は国土交通省サイトの規約(PDL1.0、商用利用の明示なし)。latestPublishedAt は検索結果の報道発表日(2023-06-30)で、ページ自体では未確認。表の項目の定義は説明PDFを読んでいない。 既存との重なり: 社会・人口統計体系の道路平均交通量は道路交通センサスが元。 2026-11-13 実ファイル確認: 指標候補 3 件について統計ファイルを開き、47 都道府県の行を数えて確認した (syuukei04.csv sha256=7758cdbed18e630c…、syuukei05.csv sha256=1c65294bf84febd0…)。"
+      }
+    },
+    {
+      "id": "mlit-plateau-3d-city-model",
+      "sourceId": "mlit-plateau",
+      "name": "PLATEAU 3D都市モデル",
+      "description": "全国の都市の3D都市モデル。標準形式はCityGML。一部地域ではFBX・OBJ・FGDBも試行提供。整備都市は拡大中で、2027年度に約500都市が目標。都市(市区町村)単位で整備されるため、全都道府県を同じ条件で比較する指標には向かない。",
+      "landingPageUrl": "https://www.mlit.go.jp/plateau/faq/",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "citygml"
+      ],
+      "geographicLevels": [
+        "municipality",
+        "polygon"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "3d",
+        "polygon"
+      ],
+      "coverage": "partial",
+      "updateFrequency": "irregular",
+      "license": {
+        "name": "PDL1.0 / CC BY 4.0 / ODC BY / ODbL のいずれか (データごと)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mlit.go.jp/plateau/faq/"
+      },
+      "stats47Uses": [
+        "map"
+      ],
+      "suggestedCategories": [
+        "construction",
+        "infrastructure"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://www.mlit.go.jp/plateau/faq/"
+        ],
+        "notes": "FAQページで商用利用可、手続き不要、各ライセンスの併記、CityGMLが標準形式であることを確認。出典表示の詳細は PLATEAU サイトポリシーにあるとされ未確認(CC BY系のため表示義務ありとした)。ダウンロード先URLは未確認。"
+      }
+    },
+    {
+      "id": "jaxa-earth-api-datasets",
+      "sourceId": "jaxa-earth-api",
+      "name": "JAXA Earth API (地球観測データ)",
+      "description": "GCOM-Cの海面水温・クロロフィルa・地表面温度・NDVI、GCOM-Wの海面水温、ALOSの陸域データ、GSMaP降水などの衛星データを、COG(GeoTIFF)とSTACカタログで配信する。ほとんど全球のメッシュデータで、都道府県別の値は含まず、県別にするには自前で領域集計が要る。",
+      "landingPageUrl": "https://data.earth.jaxa.jp/en",
+      "accessMethods": [
+        "api",
+        "file-download"
+      ],
+      "formats": [
+        "geotiff",
+        "json"
+      ],
+      "geographicLevels": [
+        "mesh"
+      ],
+      "hasGeometry": true,
+      "geometryTypes": [
+        "mesh"
+      ],
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "データごとにSTACで指定 (研究データ利用規約の対象は商用利用も可)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://earth.jaxa.jp/policy/"
+      },
+      "stats47Uses": [
+        "research-only"
+      ],
+      "suggestedCategories": [
+        "landweather"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "partially-verified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [
+          "https://data.earth.jaxa.jp/en"
+        ],
+        "notes": "トップページで登録・APIキー不要、データごとのライセンスはSTAC記載、出典の例示文があることを確認。商用可否はデータごとに異なるため unknown。更新頻度は記載なし。coverage は全球データを含むため all-japan とした(全球のうち日本を含む意)。"
+      }
+    },
+    {
+      "id": "nii-cinii-research-api",
+      "sourceId": "nii-scholarly",
+      "name": "CiNii Research API",
+      "description": "論文・研究データ・大学図書館の蔵書・博士論文・研究プロジェクト・研究者を横断検索する学術情報のAPI。書誌・研究者情報で、都道府県別に集計する対象ではない。",
+      "landingPageUrl": "https://support.nii.ac.jp/en/cinii/api/api_outline",
+      "accessMethods": [
+        "api"
+      ],
+      "formats": [
+        "json",
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://support.nii.ac.jp/en/cinii/api/api_outline"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitable: 書誌検索。サポートサイトのAPI案内(OpenURL・OpenSearch・RDF・JSON-LD、appid登録が必要)と cir.nii.ac.jp の実在のみ確認。規約・商用可否は未確認。"
+      }
+    },
+    {
+      "id": "bunka-madb-lab",
+      "sourceId": "bunka-madb",
+      "name": "メディア芸術データベース MADB Lab",
+      "description": "マンガ・アニメ・ゲーム・メディアアートの作品情報のデータセットとSPARQLエンドポイント。作品の書誌情報で、都道府県比較には向かない。",
+      "landingPageUrl": "https://mediag.bunka.go.jp/madb_lab/",
+      "accessMethods": [
+        "api",
+        "file-download"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://mediag.bunka.go.jp/madb_lab/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitable: 作品書誌。文化庁のページ経由で URL を得て、301で現行パスへ移るのを確認した。内容と規約は未確認。"
+      }
+    },
+    {
+      "id": "bunka-heritage-online-search-api",
+      "sourceId": "bunka-heritage-online",
+      "name": "文化遺産オンライン 検索用API",
+      "description": "国指定等の文化財と参加館の所蔵品の検索サイトと、その検索用API。文化財・作品の個別情報で、都道府県別の統計ではない。サイトは無許可の複製・改変を禁じる旨を掲げる。",
+      "landingPageUrl": "https://online.bunka.go.jp/about",
+      "accessMethods": [
+        "api",
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://online.bunka.go.jp/about"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitable: 文化財アーカイブ。サイト概要ページの実在のみ確認。API仕様ページは開いていない。"
+      }
+    },
+    {
+      "id": "jpn-archives-digital-archive",
+      "sourceId": "jpn-archives-da",
+      "name": "国立公文書館デジタルアーカイブ",
+      "description": "国立公文書館の所蔵公文書の目録検索とデジタル画像の閲覧。公文書の検索サービスで、統計データではない。",
+      "landingPageUrl": "https://www.digital.archives.go.jp/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.digital.archives.go.jp/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitable: 公文書アーカイブ。トップページの実在のみ確認(データの二次利用の案内あり)。規約は未確認。"
+      }
+    },
+    {
+      "id": "artmuseums-union-catalog",
+      "sourceId": "artmuseums-union-catalog",
+      "name": "国立美術館 所蔵作品総合目録検索システム",
+      "description": "国立美術館5館の所蔵作品を横断検索する目録。2026年5月からパブリックドメイン作品の画像をダウンロードできる。作品書誌で、統計データではない。",
+      "landingPageUrl": "https://search.artmuseums.go.jp/",
+      "accessMethods": [
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://search.artmuseums.go.jp/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitable: 美術作品目録。トップページの実在のみ確認(掲載の文章と画像の権利は国立美術館等に帰属)。"
+      }
+    },
+    {
+      "id": "ndl-digital-collections-iiif",
+      "sourceId": "ndl-digital-collections",
+      "name": "国立国会図書館デジタルコレクション (IIIF)",
+      "description": "国立国会図書館のデジタル化資料の公開サイトで、公開資料はIIIFでも提供される(検索結果の2018年の発表による)。蔵書のデジタル画像で、統計データではない。",
+      "landingPageUrl": "https://dl.ndl.go.jp/",
+      "accessMethods": [
+        "api",
+        "web-only"
+      ],
+      "formats": [
+        "other"
+      ],
+      "geographicLevels": [
+        "national"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "updateFrequency": "unknown",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://dl.ndl.go.jp/"
+      },
+      "stats47Uses": [
+        "not-suitable"
+      ],
+      "suggestedCategories": [
+        "educationsports"
+      ],
+      "existingMetricKeys": [],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [],
+      "verification": {
+        "status": "unverified",
+        "verifiedAt": "2026-11-13",
+        "verifiedFromUrls": [],
+        "notes": "not-suitable: 書誌・画像アーカイブ。dl.ndl.go.jp の実在のみ確認。IIIFの仕様は公式文書を開いておらず未確認。"
       }
     }
   ]

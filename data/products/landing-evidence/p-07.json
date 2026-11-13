@@ -81,5 +81,255 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2005〜2025年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2005〜2025年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-07",
+    "version": "analysis-20261113",
+    "planSha256": "f7c3491134c529821d640a4075dcddfc25ad89e1b459cf9b0543e2f83ae7e972",
+    "resolvedPlanSha256": "d93e668f86ef09c46e9f780dff1c55ec36c1f2cce1a2232cee08f331da24b322",
+    "sources": [
+      {
+        "id": "municipal-housing-stock",
+        "inputs": [
+          {
+            "metricKey": "vacant-houses-city",
+            "statsDataId": "0000020208",
+            "code": "H110202",
+            "unit": "戸"
+          },
+          {
+            "metricKey": "total-dwellings",
+            "statsDataId": "0000020208",
+            "code": "H1100",
+            "unit": "戸"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2013,
+          2018,
+          2023
+        ],
+        "retrievedAt": "2026-11-13T01:27:27.928Z",
+        "tableTitle": "Ｈ　居住",
+        "rows": 10446,
+        "areas": 1741,
+        "missing": 3926,
+        "coverage": [
+          {
+            "year": 2013,
+            "total": 1741,
+            "kept": 1115,
+            "dropped": 626,
+            "share": 0.6404365307294658,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "warn"
+          },
+          {
+            "year": 2018,
+            "total": 1741,
+            "kept": 1086,
+            "dropped": 655,
+            "share": 0.623779437105112,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "warn"
+          },
+          {
+            "year": 2023,
+            "total": 1741,
+            "kept": 1059,
+            "dropped": 682,
+            "share": 0.6082711085582998,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "warn"
+          }
+        ],
+        "inputSha256": "61a159c989278ea48ee75c6ed7138d1c2448eccb1db4d6a07518bb2de139746c"
+      }
+    ],
+    "results": 8,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "32bf396f0f7e829bb24c6fd19cee3816dcad408fe1d05d24949b85a00c2ca716",
+        "bytes": 1041416
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "76b7aaec818030fa76ec5a76a508ddcf1e0eadf6dc32bd853dc4637d90a39ecd",
+        "bytes": 1203
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "5b7d69f89fd05d1870637ef31698154d317a4dc3fd26f8783ffc53e49e53db61",
+        "bytes": 335441
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "824c704d01c03914bd4163db77c1fd11f2401a8f146b6256bf9e733974d41e5a",
+        "bytes": 1459
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "e629830d1370dff4298e4e5a90e14312fcd5b87647450d6ca972fefa6dc7d93a",
+        "bytes": 1233
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "239903045eb8c4f2e39cf14bbaf4bde5ea654cda53142d44a1661d90e08c9947",
+        "bytes": 6186
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "45447c690e1bcc91595dae2452e2fbcd2c9822c4e24707edc9f07efa2960bbe4",
+        "bytes": 3756
+      },
+      {
+        "file": "README.md",
+        "sha256": "70687e2a1d28e3c1a4159d4f250ca1b78d6432d8fb6c107005674e0bd65617d5",
+        "bytes": 3194
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/municipal-vacancy-share-trend.png",
+        "sha256": "1f3ac3b6df5bf1ab338154067664e6b9d9e6fd571023671c08a69ae4be7bf895",
+        "bytes": 102187
+      },
+      {
+        "file": "images/municipal-vacancy-share-2023.png",
+        "sha256": "879c080c5274829ae9665c3719c7aecc644cfd9e959099646fac192c46ed8ec6",
+        "bytes": 75536
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "f6102173c3eedcd6550c8998f4129bf59c66138c4a1f6dcac4702dfd21f4ff1b",
+        "bytes": 121718
+      },
+      {
+        "file": "inputs/municipal-housing-stock.json",
+        "sha256": "61a159c989278ea48ee75c6ed7138d1c2448eccb1db4d6a07518bb2de139746c",
+        "bytes": 8403248
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "e8b26a1b17ba879285cabdc414ea7b29a7921a2119cf78694e50c19617eb9d36",
+        "bytes": 4879
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "4d616799840a6489cec5320e0d41842e53feebb81a0deffc042e92fd104e97f8",
+        "bytes": 830528
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-07",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "e563ba60ffb75859ed6f69db2d08e581cb146fd984b6563e97e8d26bca717541",
+    "planSha256": "f7c3491134c529821d640a4075dcddfc25ad89e1b459cf9b0543e2f83ae7e972",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-07/analysis-20261113/4d616799840a6489cec5320e0d41842e53feebb81a0deffc042e92fd104e97f8.zip",
+      "sha256": "4d616799840a6489cec5320e0d41842e53feebb81a0deffc042e92fd104e97f8",
+      "bytes": 830528
+    },
+    "attachmentName": "P-07-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "住宅・土地統計調査の総住宅数と空き家数から、八王子市・京都市の空き家割合の推移と直近の違いを確認できます。",
+      "included": [
+        "総住宅数・空き家数（1,741地域・2013〜2023年・10,446行、うち欠測3,926行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "住宅施策の現状整理に",
+          "description": "同じ住宅調査年の総住宅数を分母にし、空き家割合の推移を自治体間で比較できます。"
+        },
+        {
+          "title": "統計研修の比較資料に",
+          "description": "割合の時系列と2023年の比較図を使い、標本調査の対象や欠測を確認しながら住宅ストックを読めます。"
+        }
+      ],
+      "purchaseNotes": [
+        "八王子市・京都市は利用可能な値を確認した作成例です。小規模自治体等には欠測が多いため全国地図は作成していません。",
+        "標本調査の推計値であり、個別住宅の状態・売買需要や人口減少との因果関係は示しません。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "municipal-vacancy-share-trend",
+          "kind": "chart",
+          "heading": "空き家の割合の推移を比べる",
+          "lead": "八王子市と京都市について、2013・2018・2023年の空き家数を総住宅数で割り、割合の推移を比較します。自治体の住宅ストックの現状整理に使えます。",
+          "note": "標本調査による推計値であり標本誤差があります。空き家には種類の違いがあり、割合だけから人口減少との因果関係や個別物件の不動産需要を判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "living-housing",
+              "sectionKey": "housing-stock",
+              "title": "暮らし・住まい",
+              "sectionTitle": "住宅ストックは余っているか",
+              "href": "/themes/living-housing#theme-section-housing-stock"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-municipal-vacancy-share-trend.png",
+              "alt": "総住宅数に占める空き家の割合（八王子市・京都市・2013〜2023年）",
+              "template": "line",
+              "sha256": "1f3ac3b6df5bf1ab338154067664e6b9d9e6fd571023671c08a69ae4be7bf895"
+            }
+          ]
+        },
+        {
+          "id": "municipal-vacancy-share-2023",
+          "kind": "chart",
+          "heading": "同じ2023年の空き家割合を並べる",
+          "lead": "八王子市と京都市の2023年の空き家割合を棒グラフで比較します。推移の図と同じ分母を用い、直近の水準の違いを説明できます。",
+          "note": "全国の全自治体を同じ精度で比べる図ではありません。総住宅数が0・欠測の場合は割合を算出せず、秘匿・欠測を0に置き換えません。不動産投資や売買需要の指標にはしません。",
+          "themeRefs": [
+            {
+              "themeKey": "living-housing",
+              "sectionKey": "housing-stock",
+              "title": "暮らし・住まい",
+              "sectionTitle": "住宅ストックは余っているか",
+              "href": "/themes/living-housing#theme-section-housing-stock"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-municipal-vacancy-share-2023.png",
+              "alt": "2023年の空き家割合（2023年）",
+              "template": "bar",
+              "sha256": "879c080c5274829ae9665c3719c7aecc644cfd9e959099646fac192c46ed8ec6"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "市区町村の住宅ストックと空き家割合を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "f6102173c3eedcd6550c8998f4129bf59c66138c4a1f6dcac4702dfd21f4ff1b"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

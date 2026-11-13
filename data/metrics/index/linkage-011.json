@@ -4729,6 +4729,30 @@
       "themes": []
     },
     {
+      "metricKey": "health-checkup-blood-pressure-medication-rate",
+      "pageId": null,
+      "title": "血圧を下げる薬を使っている人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-blood-pressure-medication-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "health-checkup-breakfast-skipping-rate",
       "pageId": "ranking:health-checkup-breakfast-skipping-rate",
       "title": "朝食欠食が週3回以上の割合",
@@ -4978,6 +5002,150 @@
       "consumers": [
         {
           "pageId": "ranking:health-checkup-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-daily-activity-rate",
+      "pageId": null,
+      "title": "歩行などの身体活動を1日1時間以上している人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-daily-activity-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-daily-drinking-rate",
+      "pageId": null,
+      "title": "お酒を毎日飲む人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-daily-drinking-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-daily-snacking-rate",
+      "pageId": null,
+      "title": "間食や甘い飲み物を毎日とる人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-daily-snacking-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-exercise-habit-rate",
+      "pageId": null,
+      "title": "1回30分以上の運動を週2日以上続けている人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-exercise-habit-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-fast-eating-rate",
+      "pageId": null,
+      "title": "食べる速度が速い人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-fast-eating-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-fast-walking-rate",
+      "pageId": null,
+      "title": "同年代の同性より歩く速度が速い人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-fast-walking-rate",
           "kind": "ranking"
         }
       ],
@@ -5460,6 +5628,78 @@
       "themes": [
         "health-checkups"
       ]
+    },
+    {
+      "metricKey": "health-checkup-smoking-rate",
+      "pageId": null,
+      "title": "習慣的に喫煙している人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-smoking-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-sufficient-sleep-rate",
+      "pageId": null,
+      "title": "睡眠で休養が十分とれている人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-sufficient-sleep-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "health-checkup-weight-gain-10kg-rate",
+      "pageId": null,
+      "title": "20歳の時から体重が10kg以上増えた人の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001711941.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "442123256f8d169e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:health-checkup-weight-gain-10kg-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
     },
     {
       "metricKey": "health-consumables-consumption-expenditure",
@@ -9227,1560 +9467,6 @@
         },
         {
           "pageId": "ranking:high-school-students",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "high-school-students-per-teacher",
-      "pageId": "ranking:high-school-students-per-teacher",
-      "title": "高等学校生徒数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E0510303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E0510303"
-        },
-        "derived": false,
-        "configHash": "743ec2bb8a34c794"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:high-school-students-per-teacher",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "high-school-teacher-annual-income",
-      "pageId": "ranking:high-school-teacher-annual-income",
-      "title": "高等学校教員の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1194"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1194"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "81c9f9c2a5fed5e1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:high-school-teacher-annual-income-vs-new-graduate-starting",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:high-school-teacher-salary-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:high-school-teacher-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "high-school-tutoring-consumption-expenditure",
-      "pageId": "ranking:high-school-tutoring-consumption-expenditure",
-      "title": "高校補習教育・予備校消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "080300030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "080300030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "68d77da64df8b881"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:income-quintile-education",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tuition-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tutoring-cost-university-advancement-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:high-school-tutoring-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "hire-taxi-operators",
-      "pageId": "ranking:hire-taxi-operators",
-      "title": "ハイヤー・タクシー事業者",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C3710"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C3710"
-        },
-        "derived": false,
-        "configHash": "b9becec06a3e95fb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:hire-taxi-operators",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "history-museum-count",
-      "pageId": "ranking:history-museum-count",
-      "title": "歴史博物館数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348770",
-          "filters": {
-            "cdCat01": "00000400",
-            "cdCat02": "182"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003348770",
-          "cdCat01": "00000400",
-          "cdCat02": "182"
-        },
-        "derived": false,
-        "configHash": "7d8a9b2f2458f476"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:history-museum-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "hobby-activity-by-couple",
-      "pageId": "ranking:hobby-activity-by-couple",
-      "title": "共働き世帯の夫の趣味・娯楽行動者推定人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003455918",
-          "filters": {
-            "cdTab": "202101A02",
-            "cdCat01": "1",
-            "cdCat02": "1",
-            "cdCat03": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003455918",
-          "cdCat01": "1",
-          "cdCat02": "1",
-          "cdCat03": "0",
-          "cdTab": "202101A02"
-        },
-        "derived": false,
-        "configHash": "fa768920367d2f5b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:hobby-activity-by-couple",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "hobby-activity-singleperson",
-      "pageId": "ranking:hobby-activity-singleperson",
-      "title": "趣味・娯楽の行動者数（単身世帯主・男女計・総数・全年齢）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003455926",
-          "filters": {
-            "cdTab": "202101A02",
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "0",
-            "cdCat04": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003455926",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "0",
-          "cdCat04": "0",
-          "cdTab": "202101A02"
-        },
-        "derived": false,
-        "configHash": "e89169bcfa409dff"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:hobby-activity-singleperson-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:hobby-activity-singleperson",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "hobby-leisure-avg-time-employed-female",
-      "pageId": "ranking:hobby-leisure-avg-time-employed-female",
-      "title": "趣味・娯楽の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0310201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0310201"
-        },
-        "derived": false,
-        "configHash": "7bfb01311a2aa232"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:hobby-leisure-avg-time-employed-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:cultural-participation",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:daily-time-use",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "cultural-participation",
-        "daily-time-use"
-      ]
-    },
-    {
-      "metricKey": "hobby-leisure-avg-time-employed-male",
-      "pageId": "ranking:hobby-leisure-avg-time-employed-male",
-      "title": "趣味・娯楽の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0310101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0310101"
-        },
-        "derived": false,
-        "configHash": "87a87e02c04232fd"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:cultural-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:daily-time-use",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:hobby-leisure-avg-time-employed-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:cultural-participation",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:daily-time-use",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "cultural-participation",
-        "daily-time-use"
-      ]
-    },
-    {
-      "metricKey": "hobby-leisure-avg-time-unemployed-female",
-      "pageId": "ranking:hobby-leisure-avg-time-unemployed-female",
-      "title": "趣味・娯楽の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0310202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0310202"
-        },
-        "derived": false,
-        "configHash": "706ffb2a4a006145"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:hobby-leisure-avg-time-unemployed-female",
           "kind": "ranking"
         }
       ],

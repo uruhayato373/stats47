@@ -115,7 +115,7 @@ npm run test:run   --workspace=@stats47/product-factory
   共通の自治体集合・年度・単位・原典の全座標を検査し、既存 `analysis-frame` のカバレッジ検査結果も記録する。秘匿・欠測・分母0を0件へ補完しない。
   市区町村地図の範囲は分析レシピの `within`（`nation` / `prefecture` + `prefCode`）で宣言し、共通の地域集合・画像型で描く。全国版は政令市を統合し特別区を残す境界を使い、欠測・離島も含む全対象コードの値と形を照合する。商品別の描画分岐や一部自治体だけの全国図を作らない。
   CIは実台帳のcatalogテストと `product-analysis-ledger.test.ts` で台帳・解決後の原典・検査記録・LPのハッシュ/参照/対象範囲を突合し、通信なしで生成漏れを検出する。
-  Webは開発時に通常の商品URLも商品IDで改訂案へ接続し、`/products/preview/<slug>` と `ProductDetail` を共有する。
+  Webは開発時に通常の商品URLも商品IDで改訂案へ接続し、`/products/preview/<slug>` と `ProductDetail` を共有する。`productEditions` が販売版を先頭に残して改訂案を別節に添える。分析の追加案で販売版の収録範囲を丸ごと置換しない。LP・note初稿・テーマの逆引きはこの共通関数を使い、各版の収録内容・画像パス・作成例IDを保持する。
   改訂案はnoindex・未公開表示・Product Offerなし。上下の購入案内は固定販売版の台帳を使い、「現在販売中の版」と改訂案との違いを明記する。
   `--check --serve <port>` の一覧は、改訂案がある商品と固定版の商品を合わせた全有料データ商品のnote初稿を表示する。
   ローカルGISから地図を再生成する場合は `NEXT_PUBLIC_R2_GEOSHAPE_URL` にゲートウェイを指定する（GIS取得は `R2_PUBLIC_FETCH_URL` を参照しない）。
@@ -127,6 +127,9 @@ npm run test:run   --workspace=@stats47/product-factory
   `npm run products:landing:assets` は納品版台帳の `archive` から共通画像型で見本を再生成する。
   `npm run generate:product-storefront -w apps/web` の後、`npm run products:landing:preview -- --serve 4792` で
   全商品のサイトLPとnote無料部分を順に目視できる。Markdown/HTMLは登録済み `.local/product-portfolio/` の派生物。
+- 分析追加版の配信は `products:analysis:release prepare --all`（既定dry-run）で検査し、`--commit` でprivate R2へZIPをSHA固定して `products.landing-evidence.analysisDelivery` をpreparedにする。既存販売ZIPは保持する。
+  noteの価格・既存有料本文・添付・非ログイン時の非露出を確認した商品だけ、`publish --id <ID> --verification <JSON> --commit` でpublishedへ進める。LPはpublishedだけを固定版へ合成する。確認JSONは商品・版・manifest・ZIP・価格・note URLを照合し、公開後の同版変更を止める。
+  追加版の図は共通型から作った版付きPNGだけを既存商品slugへ配置する。非公開ZIPを公開R2へ置かない。公開済み分析を開発プレビューに二重掲載せず、テーマの逆引きもLPと同じ版を使う。
   `npm run products:landing:check` は台帳との不一致・未整備の商品・媒体間の取りこぼしを止める。公開note・有料本文・添付はこの生成で変更しない。
 
 - mapping・記事計画・生成コードは git TS、`.local/note-products/` の生成物は派生物とする。
@@ -136,6 +139,14 @@ npm run test:run   --workspace=@stats47/product-factory
 - 有料境界は `<!-- paid:start -->` を唯一のマーカーとし、有料ラインと添付物を境界より後ろに置く。
 
 ### 決定的検証
+
+- 全有料商品の `analysisPlan.axes` に推移・構成・地域比較の採否、理由、採用recipe参照を持つ。採用は計算方法・年・地域・分母と照合し、生成/再検査時に非欠測の実結果まで確認する。単年図を推移、一般の比率を構成と数えない。保留は追加取得・定義確認の理由を記録し、完了フラグを手入力しない。素材集は選択図、総合集は同梱元の分析と制約を継承する。
+- 構成図は `composition` と共通 `stacked-bar` 型を使う。同じ会計・年度・地域の総額と、重複しない一つの分類の内訳を指定し、残差を「その他」にする。欠測・負値・0以下の総額・内訳の総額超過は停止する。目的別と性質別を混ぜない。部分/全体の割合だけを示す図は既存の `share` を使う。
+- 素材集・総合集の改訂は `products.landings.analysisReuse` が正本。`analysisPlan.reuseProducts` の採用元から商品ID・版・recipe IDを参照し、元の図・説明・テーマ・出典を共通生成器で継承する。元納品のmanifest SHAと全ファイルを照合し、再利用先のZIP・LP/noteも検査する。コピーされたPNGは派生物で、独立した数値・説明の正本にしない。
+- 家計調査の対象都市は `areas.capital-cities` の名称・原地域コードを使う。商品分析は `capital-city` のまま保持し、県全体や全国の市区町村と混同しない。世帯区分など固定分類軸も取得・原票・検査記録の座標に含める。
+
+- LPとテーマの関係は `products.landings.examples[].themeRefs` と `analysisRevision.recipes[].themeRefs` が正本。`themeKey` と `sectionKey` でテーマの章を参照し、見出し・URL・逆引き一覧を生成する。テーマ側へ商品IDの対応表を複製しない。販売版と改訂案はそれぞれの作成例だけから解決し、LPとテーマで同じ版選択を使う。
+- テーマの章を変更するときは、商品台帳・共通図・LP・note初稿も同じ作業で生成・照合する。`products:analysis:catalog` が章の存在と入力の地域・年・分母を検査し、`products:landing:check` と `products:analysis:check -- --all` が見出しや生成物のずれを検出する。章との関係は分析観点の参照であり、異なる統計の値・対象・分母が同一という保証には使わない。
 
 - 14パックすべてのmapping coverage、productId・slug・seriesの一意性と参照整合を検査する。
 - canonical記事間の重複、同一商品の重複割当、添付循環参照、無料記事への有料添付混入を拒否する。

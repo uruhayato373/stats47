@@ -1,10 +1,14 @@
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_AREA_CODES } from "@stats47/area";
 import type { ClassItem, ClassObject, EstatStatsDataResponse, EstatValue } from "@stats47/estat-api/api";
 
+import { conversionFactor } from '@stats47/data-configs/unit';
+import { assertCapitalCityMetadata, listCapitalCityAreas } from './capital-city';
+
 export interface AnalysisSource {
   id: string;
   statsDataId: string;
-  grain: "prefecture" | "municipality";
+  grain: "prefecture" | "municipality" | "capital-city";
+  filters?: Record<string, string>;
   years: number[];
   metrics: { id: string; code: string; label: string; unit: string }[];
 }
@@ -42,7 +46,11 @@ function assertSource(source: AnalysisSource): void {
     throw new Error("Analysis source requires id, table, metrics and years");
   }
   if (new Set(source.years).size !== source.years.length) throw new Error("Duplicate source years");
-  if (!["prefecture", "municipality"].includes(source.grain)) throw new Error(`Invalid source grain: ${source.grain}`);
+  if (!["prefecture", "municipality", "capital-city"].includes(source.grain)) throw new Error(`Invalid source grain: ${source.grain}`);
+  for (const [axis, code] of Object.entries(source.filters ?? {})) {
+    if (!/^cd(?:Cat0[2-5]|Tab)$/.test(axis) || !code || code.includes(','))
+      throw Error(`Unsupported fixed source dimension: ${axis}`);
+  }
   for (const year of source.years) {
     if (!Number.isInteger(year) || year < 1900 || year > 2100) throw new Error(`Invalid source year: ${year}`);
   }
@@ -86,12 +94,18 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
   const metricClasses = classMap(metricAxis, "metrics");
   for (const metric of source.metrics) {
     const unit = metricClasses.get(metric.code)!["@unit"];
-    if (unit && unit !== metric.unit) throw new Error(`Unit mismatch for ${metric.id}: ${unit} != ${metric.unit}`);
+    if (unit && unit !== metric.unit && conversionFactor(unit, metric.unit) !== 1) throw new Error(`Unit mismatch for ${metric.id}: ${unit} != ${metric.unit}`);
   }
   for (const axis of axes) {
-    if (![metricAxis["@id"], "time", "area"].includes(axis["@id"]) && asArray(axis.CLASS).length !== 1) {
+    if ([metricAxis["@id"], "time", "area"].includes(axis["@id"])) continue;
+    const parameter = `cd${axis["@id"][0]!.toUpperCase()}${axis["@id"].slice(1)}`;
+    const selected = source.filters?.[parameter];
+    if (selected ? !asArray(axis.CLASS).some(item => item["@code"] === selected) : asArray(axis.CLASS).length !== 1)
       throw new Error(`Unselected metadata dimension: ${axis["@id"]}`);
-    }
+  }
+  for (const parameter of Object.keys(source.filters ?? {})) {
+    if (!axes.some(axis => `cd${axis["@id"][0]!.toUpperCase()}${axis["@id"].slice(1)}` === parameter))
+      throw Error(`Fixed source dimension is missing: ${parameter}`);
   }
   const times = classMap(axes.find((axis) => axis["@id"] === "time"), "time");
   const yearsByTime = new Map([...times.keys()].map((code) => [code, yearOf(code)]));
@@ -101,7 +115,9 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
     }
   }
   const areas = classMap(axes.find((axis) => axis["@id"] === "area"), "area");
-  const allowedAreas = new Set<string>(source.grain === "prefecture" ? PREFECTURE_AREA_CODES :
+  const capitalAreas = new Map(listCapitalCityAreas().map(area => [area.code, area]));
+  if (source.grain === 'capital-city') assertCapitalCityMetadata([...areas.values()]);
+  const allowedAreas = new Set<string>(source.grain === 'capital-city' ? [...capitalAreas.keys()] : source.grain === "prefecture" ? PREFECTURE_AREA_CODES :
     listPublishableMunicipalities(buildMunicipalityEntityPolicy()).map((area) => area.code));
   const metricsByCode = new Map(source.metrics.map((metric) => [metric.code, metric]));
   const requestedYears = new Set(source.years);
@@ -115,6 +131,7 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
   while (true) {
     const response = await fetchStatsDataFromApi({
       statsDataId: source.statsDataId,
+      ...source.filters,
       [`cd${metricAxis["@id"][0]!.toUpperCase()}${metricAxis["@id"].slice(1)}`]: source.metrics.map((metric) => metric.code).join(","),
       startPosition,
       limit: PAGE_SIZE,
@@ -142,6 +159,10 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
     for (const value of values) {
       const metric = metricsByCode.get(value[`@${metricAxis["@id"]}` as keyof EstatValue] ?? "");
       if (!metric) throw new Error(`Unexpected metric in response: ${source.id}`);
+      for (const [parameter, selected] of Object.entries(source.filters ?? {})) {
+        const axis = `@${parameter[2]!.toLowerCase()}${parameter.slice(3)}` as keyof EstatValue;
+        if (value[axis] !== selected) throw Error(`Unexpected fixed source coordinate: ${parameter}`);
+      }
       const year = yearsByTime.get(value["@time"] ?? "");
       if (year === undefined) throw new Error(`Unknown time code in response: ${value["@time"]}`);
       const areaCode = value["@area"] ?? "";
@@ -152,12 +173,12 @@ export async function fetchAnalysisSource(source: AnalysisSource): Promise<{
       coordinates.add(key);
       const metadataUnit = metricClasses.get(metric.code)!["@unit"];
       const unit = value["@unit"] ?? metadataUnit;
-      if (unit !== metric.unit) throw new Error(`Unit mismatch for ${key}: ${unit} != ${metric.unit}`);
+      if (unit !== metric.unit && conversionFactor(unit, metric.unit) !== 1) throw new Error(`Unit mismatch for ${key}: ${unit} != ${metric.unit}`);
       const parsed = parseEstatValue(value.$);
       if (parsed !== null && !Number.isFinite(parsed)) throw new Error(`Non-finite value: ${key}`);
       rows.push({
-        sourceId: source.id, metricId: metric.id, areaCode, areaName: areas.get(areaCode)!["@name"],
-        year, value: parsed, unit,
+        sourceId: source.id, metricId: metric.id, areaCode, areaName: source.grain === 'capital-city' ? capitalAreas.get(areaCode)!.name : areas.get(areaCode)!["@name"],
+        year, value: parsed, unit: metric.unit,
         ...(parsed === null ? { missingReason: value.$.trim() || "blank" } : {}),
       });
     }

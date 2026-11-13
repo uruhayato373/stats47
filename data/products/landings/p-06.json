@@ -25,7 +25,13 @@
       "metricKeys": [
         "elementary-school-students-per-teacher"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "education-culture",
+          "sectionKey": "schools"
+        }
+      ]
     },
     {
       "id": "childcare-center-distribution",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "certified-childcare-center-count-per-100k-0-5"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "childcare-services",
+          "sectionKey": "facility-capacity-and-utilization"
+        }
+      ]
     },
     {
       "id": "graduate-advancement",
@@ -43,7 +55,13 @@
       "metricKeys": [
         "high-school-advancement-rate"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "education-culture",
+          "sectionKey": "higher-education-and-advancement"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -96,20 +114,45 @@
     "limitations": [
       "児童/本務教員は学級人数ではなく、教育の質の順位でもない。",
       "小学校の指標であり、別区分の義務教育学校等は含めない。学校・教員が0または欠測の場合、比率は算出しない。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "deferred",
+        "reason": "現在の原票は2024年のみ。児童・教員・学校の推移を同じ地域と定義で追加取得する。",
+        "recipeRefs": []
+      },
+      {
+        "axis": "composition",
+        "decision": "deferred",
+        "reason": "児童/教員・児童/学校は部分/全体の構成ではない。学校種別等の内訳を扱うには別入力が必要。",
+        "recipeRefs": []
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "national-pupils-per-teacher",
+          "pupils-per-teacher",
+          "municipal-pupil-count",
+          "pupils-per-school"
+        ]
+      }
     ]
   },
   "analysisRevision": {
     "version": "analysis-20261112",
     "title": "市区町村の小学校規模と教員配置を比べるデータ集",
-    "description": "同じ年度の小学校児童数・本務教員数・学校数を揃え、教員1人あたりと学校1校あたりの児童数を比較できます。",
+    "description": "全国の市町村の教員1人あたり児童数を見渡し、県内の児童総数と1校あたりの規模を別々の図で比較できます。",
     "useCases": [
       {
-        "title": "教育計画の現状整理に",
-        "description": "学校数と児童数から1校あたりの規模を比べ、自治体の学校配置を考える基礎資料を作れます。"
+        "title": "教育委員会の現状説明に",
+        "description": "全国の教員1人あたり児童数の地図から県内の棒グラフへ絞り、具体的な自治体の値を説明できます。"
       },
       {
-        "title": "教員配置の説明資料に",
-        "description": "児童数と本務教員数の比率を近隣自治体と比較し、集計上の特徴を確認できます。"
+        "title": "学校配置を考える基礎資料に",
+        "description": "児童総数と1校あたりの規模を分けて比較し、総数だけでは見えない学校規模の違いを整理できます。"
       }
     ],
     "sources": [
@@ -150,9 +193,40 @@
     },
     "recipes": [
       {
+        "id": "national-pupils-per-teacher",
+        "heading": "教員1人あたりの児童数を全国で見る",
+        "lead": "2024年度の小学校児童数を本務教員数で割り、全国の市町村・特別区を地図で比較します。学校の規模とは異なる教員配置の目安を、地域の位置関係とともに確認できます。",
+        "sourceId": "municipal-schools",
+        "metricIds": [
+          "elementary-school-children-count"
+        ],
+        "method": "ratio",
+        "year": 2024,
+        "template": "choropleth",
+        "references": [
+          "ssds-education"
+        ],
+        "limitation": "学級の人数や個々の教員の担当人数ではありません。教育の質を直接評価する指標には使えません。",
+        "denominatorId": "elementary-school-teachers",
+        "scale": 1,
+        "unit": "人/本務教員",
+        "presentationMetricKey": "elementary-school-children-count",
+        "themeRefs": [
+          {
+            "themeKey": "education-culture",
+            "sectionKey": "schools"
+          }
+        ],
+        "within": {
+          "kind": "nation"
+        },
+        "chartTitle": "全国の本務教員1人あたり小学校児童数",
+        "scopeLabel": "全国の市町村・特別区"
+      },
+      {
         "id": "pupils-per-teacher",
-        "heading": "本務教員1人あたりの児童数を比べる",
-        "lead": "高知県の市といの町を例に、小学校児童数と本務教員数の比率を比較します。",
+        "heading": "県内の教員1人あたり児童数を比べる",
+        "lead": "高知県の市といの町を例に、2024年度の本務教員1人あたり小学校児童数を棒グラフで比較します。全国地図で確認した地域差を、具体的な値で説明できます。",
         "sourceId": "municipal-schools",
         "metricIds": [
           "elementary-school-children-count"
@@ -181,12 +255,59 @@
         "denominatorId": "elementary-school-teachers",
         "scale": 1,
         "unit": "人/本務教員",
-        "presentationMetricKey": "elementary-school-children-count"
+        "presentationMetricKey": "elementary-school-children-count",
+        "themeRefs": [
+          {
+            "themeKey": "education-culture",
+            "sectionKey": "schools"
+          }
+        ],
+        "chartTitle": "本務教員1人あたりの小学校児童数",
+        "scopeLabel": "高知県の市といの町"
+      },
+      {
+        "id": "municipal-pupil-count",
+        "heading": "児童総数と教員あたりの値を分けて見る",
+        "lead": "同じ高知県の市といの町について、2024年度の小学校児童数そのものを並べます。教員1人あたりのグラフと見比べ、児童の総数と配置の目安を分けて説明できます。",
+        "sourceId": "municipal-schools",
+        "metricIds": [
+          "elementary-school-children-count"
+        ],
+        "method": "compare",
+        "year": 2024,
+        "areaCodes": [
+          "39201",
+          "39202",
+          "39203",
+          "39204",
+          "39205",
+          "39206",
+          "39208",
+          "39209",
+          "39210",
+          "39211",
+          "39212",
+          "39386"
+        ],
+        "template": "bar",
+        "references": [
+          "ssds-education"
+        ],
+        "limitation": "小学校児童の総数です。別区分の義務教育学校等を含めず、個々の学校の規模や教育の質を直接示しません。",
+        "presentationMetricKey": "elementary-school-children-count",
+        "themeRefs": [
+          {
+            "themeKey": "education-culture",
+            "sectionKey": "schools"
+          }
+        ],
+        "chartTitle": "2024年度の小学校児童数",
+        "scopeLabel": "高知県の市といの町"
       },
       {
         "id": "pupils-per-school",
         "heading": "小学校の平均的な規模を地図で見る",
-        "lead": "2024年度の児童数を小学校数で割り、高知県内の市町村ごとに比較します。1校あたりの規模が異なる地域を、学校配置を考えるための基礎資料にできます。",
+        "lead": "2024年度の児童数を小学校数で割り、高知県内の市町村ごとに比較します。児童総数や教員1人あたりの値とは分けて、学校配置を検討するための平均的な学校規模を説明できます。",
         "sourceId": "municipal-schools",
         "metricIds": [
           "elementary-school-children-count"
@@ -207,12 +328,19 @@
         "within": {
           "kind": "prefecture",
           "prefCode": "39"
-        }
+        },
+        "themeRefs": [
+          {
+            "themeKey": "education-culture",
+            "sectionKey": "schools"
+          }
+        ]
       }
     ],
     "notes": [
       "小学校の指標であり、義務教育学校など別区分の学校は含めません。",
-      "学校数・本務教員数が0または欠測の自治体は比率を算出しません。分母が小さい地域では比率が大きく動くため、元の人数・学校数も確認してください。"
+      "学校数・本務教員数が0または欠測の自治体は比率を算出しません。分母が小さい地域では比率が大きく動くため、元の人数・学校数も確認してください。",
+      "改訂データの対象は全国の市町村・特別区です。高知県内の地図・グラフは比較方法を示す作成例です。"
     ]
   }
 }

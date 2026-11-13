@@ -2,6 +2,386 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "theme-population-pyramid-60-64-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121301"
+        },
+        "derived": false,
+        "configHash": "6bbb7a61c63944f2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-60-64-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-65-69-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121402"
+        },
+        "derived": false,
+        "configHash": "3cd3e4edfad116de"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-65-69-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-65-69-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121401"
+        },
+        "derived": false,
+        "configHash": "be8d275e22d06945"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-65-69-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-70-74-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121502"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121502"
+        },
+        "derived": false,
+        "configHash": "9ee4761c27b48e2f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-70-74-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-70-74-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121501"
+        },
+        "derived": false,
+        "configHash": "6023bc1fb2b1f8d4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-70-74-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-75-79-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121602"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121602"
+        },
+        "derived": false,
+        "configHash": "9d61767769727b2c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-75-79-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-75-79-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121601"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121601"
+        },
+        "derived": false,
+        "configHash": "7636b1b44e3a5717"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-75-79-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-80-plus-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A141802"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A141802"
+        },
+        "derived": false,
+        "configHash": "c6051b0342365458"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-80-plus-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-80-plus-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A141801"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A141801"
+        },
+        "derived": false,
+        "configHash": "9c2592e0cfc92f8b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-80-plus-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-prostitution-crime-recognition-count",
+      "pageId": null,
+      "title": "風俗犯認知件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K420105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K420105"
+        },
+        "derived": false,
+        "configHash": "c3df864847c5623b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-prostitution-crime-recognition-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
       "metricKey": "thermal-power-plant-count",
       "pageId": null,
       "title": "火力発電所数",
@@ -1746,6 +2126,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-07",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:total-dwellings",
           "kind": "ranking"
         }
@@ -1786,6 +2170,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:total-expenditure-municipal",
           "kind": "ranking"
         }
@@ -1820,6 +2208,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
         {
           "pageId": "ranking:total-expenditure-prefecture",
           "kind": "ranking"
@@ -5632,6 +6024,10 @@
         {
           "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:total-revenue-municipal",
@@ -10486,638 +10882,6 @@
       "consumers": [
         {
           "pageId": "ranking:treatment-rate-asthma-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-asthma-outpatient",
-      "pageId": "ranking:treatment-rate-asthma-outpatient",
-      "title": "喘息の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "34",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "34",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "0c90d6d24b354de5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-asthma-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-cancer-inpatient",
-      "pageId": "ranking:treatment-rate-cancer-inpatient",
-      "title": "がん（悪性新生物）の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "8",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "8",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "41e563c0e61f22a3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-cancer-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-cancer-outpatient",
-      "pageId": "ranking:treatment-rate-cancer-outpatient",
-      "title": "がん（悪性新生物）の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "8",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "8",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "011138c5543ab8c8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-cancer-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-cerebrovascular-inpatient",
-      "pageId": "ranking:treatment-rate-cerebrovascular-inpatient",
-      "title": "脳血管疾患の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "28",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "28",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "c5d26a984bb7989b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-cerebrovascular-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-cerebrovascular-outpatient",
-      "pageId": "ranking:treatment-rate-cerebrovascular-outpatient",
-      "title": "脳血管疾患の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "28",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "28",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "8245b43d0f008e4e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:treatment-rate-cerebrovascular-outpatient-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:treatment-rate-cerebrovascular-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-circulatory-inpatient",
-      "pageId": "ranking:treatment-rate-circulatory-inpatient",
-      "title": "循環器系の疾患の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "24",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "24",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "fbda79cc100285cf"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-circulatory-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-circulatory-outpatient",
-      "pageId": "ranking:treatment-rate-circulatory-outpatient",
-      "title": "循環器系の疾患の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "24",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "24",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "12e1d949979483a2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-circulatory-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-diabetes-inpatient",
-      "pageId": "ranking:treatment-rate-diabetes-inpatient",
-      "title": "糖尿病の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "15",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "15",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "fc664638d0e0854b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-diabetes-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-diabetes-outpatient",
-      "pageId": "ranking:treatment-rate-diabetes-outpatient",
-      "title": "糖尿病の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "15",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "15",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "291d665d0a64c406"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:treatment-rate-diabetes-outpatient-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:treatment-rate-diabetes-outpatient",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:healthcare",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "healthcare"
-      ]
-    },
-    {
-      "metricKey": "treatment-rate-hypertension-inpatient",
-      "pageId": "ranking:treatment-rate-hypertension-inpatient",
-      "title": "高血圧性疾患の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "25",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "25",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "50d2ce917944df8a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-hypertension-inpatient",
           "kind": "ranking"
         }
       ],

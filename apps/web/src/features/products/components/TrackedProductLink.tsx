@@ -72,7 +72,7 @@ export function useProductImpression<T extends Element>(
 interface TrackedProductLinkProps {
   readonly href: string;
   readonly label: string;
-  readonly surface: "product_catalog" | "blog_product" | "ranking_product";
+  readonly surface: "product_catalog" | "blog_product" | "ranking_product" | "theme_product";
   /** 案内する商品。表示 (product_impression) と、詳細から販売先へ出たときの置き場所の持ち越しに使う */
   readonly product: { readonly slug: string; readonly externalUrl: string };
   /** link_position に入れる置き場所。省略時は surface と同じ */

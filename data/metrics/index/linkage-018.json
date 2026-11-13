@@ -2,6 +2,574 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "new-rented-housing-ratio",
+      "pageId": "ranking:new-rented-housing-ratio",
+      "title": "着工新設貸家比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H01603"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01603"
+        },
+        "derived": false,
+        "configHash": "51a75d6792830000"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:new-rented-housing-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "newspaper-consumption-expenditure",
+      "pageId": "ranking:newspaper-consumption-expenditure",
+      "title": "新聞消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "090300010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "090300010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ed5832f51758d096"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:newspaper-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "nhi-insured-persons",
+      "pageId": null,
+      "title": "国民健康保険被保険者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020210",
+          "filters": {
+            "cdCat01": "J4101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020210",
+          "cdCat01": "J4101"
+        },
+        "derived": false,
+        "configHash": "3095b22ca9bd4147"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:nhi-insured-persons",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:healthcare",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:nhi-insured-persons",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "nhk-fee-consumption-expenditure",
+      "pageId": "ranking:nhk-fee-consumption-expenditure",
+      "title": "NHK放送受信料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "090441010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "090441010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "5288e63f93b42318"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:nhk-fee-consumption-expenditure",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "night-soil-treatment-population-ratio",
+      "pageId": "ranking:night-soil-treatment-population-ratio",
+      "title": "し尿処理人口比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0540102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0540102"
+        },
+        "derived": false,
+        "configHash": "c21a8829ff6026f2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:night-soil-treatment-population-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "night-soil-treatment-volume",
+      "pageId": null,
+      "title": "し尿処理量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H5509"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H5509"
+        },
+        "derived": false,
+        "configHash": "5e0a9614657d4417"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:night-soil-treatment-volume",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:night-soil-treatment-volume",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "noise-regulation-rate",
+      "pageId": null,
+      "title": "騒音規制法地域指定率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003368792",
+          "filters": {
+            "cdCat01": "90100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003368792",
+          "cdCat01": "90100"
+        },
+        "derived": false,
+        "configHash": "dd96873d08667ba2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:noise-regulation-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "non-agricultural-income-ratio",
+      "pageId": "ranking:non-agricultural-income-ratio",
+      "title": "農外所得割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L0110102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L0110102"
+        },
+        "derived": false,
+        "configHash": "f5ea8b87d8def7a4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:sixth-industry-direct-sales",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:non-agricultural-income-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "non-agriculture-excl-public-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220834"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220834"
+        },
+        "derived": false,
+        "configHash": "c3ea3cb4b9990b2f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:non-agriculture-excl-public-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:non-agriculture-excl-public-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "non-agriculture-excl-public-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210834"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210834"
+        },
+        "derived": false,
+        "configHash": "27a0f8b7b7172e78"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:non-agriculture-excl-public-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:non-agriculture-excl-public-private-establishments",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "non-agriculture-excl-public-private-sales",
       "pageId": null,
       "title": "売上金額",
@@ -9547,627 +10115,6 @@
         },
         {
           "pageId": "ranking:occupation-sales-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-security-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1317"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1317"
-        },
-        "derived": false,
-        "configHash": "456d64d3510abc9c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-security-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-security-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-service-business-owner-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1306"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1306"
-        },
-        "derived": false,
-        "configHash": "4e1f0ff1d31f00d6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-service-business-owner-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-service-business-owner-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-shop-owner-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1304"
-        },
-        "derived": false,
-        "configHash": "0668ef1ff863d840"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-shop-owner-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-shop-owner-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-skilled-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1314"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1314"
-        },
-        "derived": false,
-        "configHash": "5285998c0fdea507"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-skilled-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-skilled-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-teacher-clergy-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1309"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1309"
-        },
-        "derived": false,
-        "configHash": "b564ab1afcb5a4c9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-teacher-clergy-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-teacher-clergy-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-writer-artist-entertainer-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1310"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1310"
-        },
-        "derived": false,
-        "configHash": "24810740e413719b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-writer-artist-entertainer-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-writer-artist-entertainer-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupational-accident-frequency-rate",
-      "pageId": "ranking:occupational-accident-frequency-rate",
-      "title": "労働災害度数率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003385946",
-          "filters": {
-            "cdCat01": "100",
-            "cdCat02": "S100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003385946",
-          "cdCat01": "100",
-          "cdCat02": "S100"
-        },
-        "derived": false,
-        "configHash": "f10f8d93bd158876"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:occupational-accident-frequency-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupied-dwellings",
-      "pageId": null,
-      "title": "居住世帯あり住宅数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H1101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H1101"
-        },
-        "derived": false,
-        "configHash": "8c1250e44ba0a4d7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupied-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupied-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "octopus-consumption-expenditure",
-      "pageId": "ranking:octopus-consumption-expenditure",
-      "title": "たこ消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010211120",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010211120",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "817d8c9277054575"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:fresh-seafood-east-west-boundary",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:osaka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:octopus-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "octopus-consumption-quantity",
-      "pageId": "ranking:octopus-consumption-quantity",
-      "title": "たこ消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010211120",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010211120",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "77d3155f9a80e4e4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:osaka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:octopus-consumption-quantity",
           "kind": "ranking"
         }
       ],

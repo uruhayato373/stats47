@@ -146,6 +146,7 @@ export interface ThemeDashboardClientProps {
   sections?: import("@stats47/data-configs/theme-catalog").CatalogSection[];
   /** Server-rendered visualizations, inserted into their editorial chapter. */
   embeddedSections?: Record<string, import("react").ReactNode>;
+  sectionFooters?: Record<string, import("react").ReactNode>;
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** DB 管理チャート（page_components + page_component_assignments） */

@@ -10,6 +10,7 @@ import path from "node:path";
 import { parseArgs } from "node:util";
 
 import { STOREFRONT_PRODUCTS } from "../../../apps/web/src/features/products/storefront.generated";
+import { productEditions } from "../../../apps/web/src/features/products/editions";
 import type { StorefrontProduct } from "../../../apps/web/src/features/products/types";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
@@ -18,7 +19,7 @@ const OUTPUT_DIRECTORY = path.join(PROJECT_ROOT, ".local/product-portfolio/note-
 const LOCAL_SITE_ORIGIN = "http://127.0.0.1:3000";
 const LOCAL_IMAGE_ORIGIN = "http://127.0.0.1:4777";
 
-type Block =
+export type Block =
   | { kind: "heading"; level: 1 | 2 | 3; text: string }
   | { kind: "paragraph"; text: string }
   | { kind: "list"; items: readonly { title?: string; text: string }[] }
@@ -46,11 +47,24 @@ function indicatorCountReview(product: StorefrontProduct): string {
 }
 
 /** 見出し・本文・画像の並びは一度だけ組み、Markdown と HTML の両方が使う。 */
-function articleBlocks(product: StorefrontProduct, revision: boolean): Block[] {
+export function articleBlocks(product: StorefrontProduct, revision?: StorefrontProduct): Block[] {
   const blocks: Block[] = [
     { kind: "heading", level: 1, text: titleOf(product) },
     { kind: "paragraph", text: product.description },
-    { kind: "paragraph", text: revision ? "未公開の改訂候補です。公開中の商品にはまだ含まれていません。" : `販売価格：${priceOf(product)}` },
+  ];
+  if (revision) blocks.push({ kind: "paragraph", text: "販売中の内容と未公開の改訂候補を掲載しています。改訂案は現在販売中の商品には含まれていません。" });
+  for (const edition of productEditions(product, revision)) {
+    if (revision) blocks.push({ kind: "paragraph", text: `${edition.label}：${titleOf(edition.product)}` });
+    if (edition.preview) blocks.push({ kind: "paragraph", text: edition.product.description });
+    else blocks.push({ kind: "paragraph", text: `販売価格：${priceOf(product)}` });
+    blocks.push(...editionBlocks(edition.product, edition.preview));
+  }
+  blocks.push({ kind: "link", text: "サイトで商品内容・作成例を見る", href: `${revision ? LOCAL_SITE_ORIGIN : SITE_ORIGIN}/products/${product.slug}` });
+  return blocks;
+}
+
+function editionBlocks(product: StorefrontProduct, revision: boolean): Block[] {
+  const blocks: Block[] = [
     { kind: "heading", level: 2, text: "含まれるもの" },
     { kind: "list", items: product.included.map((text) => ({ text })) },
     { kind: "heading", level: 2, text: "こんな用途に" },
@@ -66,12 +80,13 @@ function articleBlocks(product: StorefrontProduct, revision: boolean): Block[] {
     }
     blocks.push({ kind: "paragraph", text: section.lead });
     if (section.note) blocks.push({ kind: "paragraph", text: section.note });
+    for (const ref of section.themeRefs ?? []) blocks.push({ kind: "link",
+      text: `${ref.title}：${ref.sectionTitle}`, href: `${SITE_ORIGIN}${ref.href}` });
   }
   if (product.showcaseNote) blocks.push({ kind: "paragraph", text: product.showcaseNote });
   blocks.push(
     { kind: "heading", level: 2, text: revision ? "データの範囲と注意点" : "購入前にご確認ください" },
     { kind: "list", items: (product.purchaseNotes ?? []).map((text) => ({ text })) },
-    { kind: "link", text: "サイトで商品内容・作成例を見る", href: `${revision ? LOCAL_SITE_ORIGIN : SITE_ORIGIN}/products/${revision ? 'preview/' : ''}${product.slug}` },
   );
   return blocks;
 }
@@ -125,17 +140,22 @@ ${next ? `<a href="${next.slug}.html">次：${escapeHtml(titleOf(next))}</a>` : 
 </nav>`;
 }
 
-export function buildPreviewFiles(input: readonly StorefrontProduct[], { revision = false, revisionIds = [] }: {
-  revision?: boolean; revisionIds?: readonly string[];
+export function buildPreviewFiles(input: readonly StorefrontProduct[], { revisions = [] }: {
+  revisions?: readonly StorefrontProduct[];
 } = {}): ReadonlyMap<string, string> {
-  const isRevision = (product: StorefrontProduct) => revision || revisionIds.includes(product.id);
+  const revisionOf = (product: StorefrontProduct) => revisions.find(item => item.id === product.id);
+  const isRevision = (product: StorefrontProduct) => Boolean(revisionOf(product));
   const products = input.filter((product) => product.channel === "note")
     .sort((left, right) => left.id.localeCompare(right.id, "en", { numeric: true }));
   if (!products.length) throw new Error("note 商品がありません");
-  const ids = new Set<string>();
+  if (new Set(products.map(product => product.id)).size !== products.length ||
+    new Set(revisions.map(product => product.id)).size !== revisions.length) throw Error('商品IDの重複');
+  for (const revision of revisions) {
+    if (!products.some(product => product.id === revision.id)) throw Error(`改訂案の販売版がありません: ${revision.id}`);
+  }
   const slugs = new Set<string>();
-  for (const product of products) {
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(product.slug) || ids.has(product.id) || slugs.has(product.slug)) {
+  for (const product of [...products, ...revisions]) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(product.slug) || slugs.has(product.slug)) {
       throw new Error(`${product.id}: 商品 ID・slug の重複または不正な slug`);
     }
     if (!product.description.trim() || !product.included.length || !product.useCases?.length ||
@@ -151,16 +171,17 @@ export function buildPreviewFiles(input: readonly StorefrontProduct[], { revisio
         throw new Error(`${product.id}: 作成例の見出し・説明・PNG・代替文が必要です`);
       }
     }
-    ids.add(product.id);
     slugs.add(product.slug);
   }
   const files = new Map<string, string>();
+  const navigationProducts = products.map(product => ({ ...product, slug: revisionOf(product)?.slug ?? product.slug }));
   for (const [index, product] of products.entries()) {
     const revised = isRevision(product);
-    const blocks = articleBlocks(product, revised);
-    const nav = navigation(products, index, revised);
-    files.set(`${product.slug}.md`, renderMarkdown(blocks, revised));
-    files.set(`${product.slug}.html`, htmlDocument(titleOf(product), `${nav}
+    const blocks = articleBlocks(product, revisionOf(product));
+    const nav = navigation(navigationProducts, index, revised);
+    const slug = navigationProducts[index].slug;
+    files.set(`${slug}.md`, renderMarkdown(blocks, revised));
+    files.set(`${slug}.html`, htmlDocument(titleOf(product), `${nav}
 <aside>note 無料部分の初稿です。公開中の記事・有料部分・添付ファイルには反映していません。</aside>
 ${indicatorCountReview(product)}
 <main><article>${renderHtml(blocks)}</article></main>${nav}`));
@@ -169,7 +190,7 @@ ${indicatorCountReview(product)}
 <h1>データ商品のLP・note初稿</h1>
 <p>${products.length} 商品の説明・用途・作成例を、同じ商品台帳から作成しています。</p>
 <p>この画面は目視確認用です。note の無料部分のみを表示し、有料本文・添付ファイルは変更しません。</p>
-<ol>${products.map((product) => `<li><strong>${escapeHtml(product.id)} ${escapeHtml(titleOf(product))}</strong>（${isRevision(product) ? '未公開の改訂候補' : priceOf(product)}）
+<ol>${navigationProducts.map((product) => `<li><strong>${escapeHtml(product.id)} ${escapeHtml(titleOf(product))}</strong>（${isRevision(product) ? '販売版＋未公開の改訂候補' : priceOf(product)}）
 ${indicatorCountReview(product)}
 <nav><a href="${LOCAL_SITE_ORIGIN}/products/${isRevision(product) ? 'preview/' : ''}${product.slug}" target="_blank" rel="noopener">サイトのLP</a><a href="${product.slug}.html">note初稿</a><a href="${product.slug}.md" download>Markdown</a></nav></li>`).join("\n")}</ol>
 </main>`));

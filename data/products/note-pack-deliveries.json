@@ -244,22 +244,21 @@
     },
     "P-14": {
       "_delivery": {
-        "artifactDirectory": ".local/data-packs/P-14/v4-20261024-mac-r2",
-        "indicatorCount": 685,
+        "artifactDirectory": ".local/data-packs/P-14/v5-20261104-mac-r1",
+        "indicatorCount": 832,
         "pptxIndicatorCount": 30,
         "hasXlsx": true,
-        "manifestSha256": "6030641163fb584f65d8577af882f064e45e124aad0fefe3e24a413b34255f1c",
-        "officeValidation": "verified",
-        "verifiedAt": "2026-10-28",
-        "previewHeader": "アクセサリー消費支出額（都道府県庁所在市の二人以上世帯の年間アクセサリー消費支出額）（円・2024）",
-        "labelRevision": "2026-10-12",
-        "_note": "note に添付した v4 (2026-10-24 に Mac で再生成)。添付 ZIP の正本は private R2 note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip (data/products/note-pack-regeneration-2026-10-24.json)。Office は 2026-10-28 に Windows の Microsoft 365 実機で確認 (data/products/note-pack-office-verification-2026-10-28.json)。Mac 版 Office は未確認。",
+        "manifestSha256": "d6517bcc80f3422d552ae6f3b7b8eeae78c15f09cbd00227397095913dce1195",
+        "officeValidation": "owner-pending",
+        "previewHeader": "アクセサリー消費支出額（都道府県庁所在市の二人以上世帯の年間アクセサリー消費支出額）（円・2025）",
+        "labelRevision": "2026-11-13",
         "archive": {
           "bucket": "stats47-private",
-          "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
-          "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
-          "bytes": 13129305
-        }
+          "key": "note/product-archives/P-14/v5-20261104-mac-r1/404ba562cb62f6da033fdb8715aa0a018524f3730ce3356f51c5d16afc30a08d.zip",
+          "sha256": "404ba562cb62f6da033fdb8715aa0a018524f3730ce3356f51c5d16afc30a08d",
+          "bytes": 13928692
+        },
+        "_note": "2026-11-13に公開noteの所有者ダウンロードからv5 ZIPを復元し、832指標・47行・添付SHAを照合。manifestはその実ファイルから再構成。v4のOffice確認はこのv5へ引き継がない。既存販売添付を置換せず、台帳を実公開版へ同期。"
       }
     }
   }

@@ -8918,6 +8918,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:education-expense-municipal",
           "kind": "ranking"
         }
@@ -8952,6 +8956,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
         {
           "pageId": "ranking:education-expenses-prefecture",
           "kind": "ranking"

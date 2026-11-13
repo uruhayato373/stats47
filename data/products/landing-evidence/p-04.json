@@ -85,8 +85,8 @@
   "analysisRevision": {
     "productId": "P-04",
     "version": "analysis-20261112",
-    "planSha256": "26649e3d0385ca577a81acfc70ff017b1bbc4f577c38f88bc7c32e08a14d02bf",
-    "resolvedPlanSha256": "cf08eaebcfe4395aec66ae2c7cba22cad05a14054b83a611b16ed6fa86bf7a1d",
+    "planSha256": "92c841d0346d43e58cd00bee6189a588a86d8380f443ac55014dbe82f4b89c66",
+    "resolvedPlanSha256": "55f116518132b7fd171f6efa940094a3bd2fbbd1977314c2d986b3aa81c38fe1",
     "sources": [
       {
         "id": "municipal-finance",
@@ -128,30 +128,326 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "2cb68602e990cf7cdec7be30105796379797a476d3c926ff8edf30d78efc4285"
+        "inputSha256": "4854c70e8ceb3bbe210d3d166181e55c9ffb300eb5b14b5a17157bcf5b684595"
+      },
+      {
+        "id": "prefecture-budget",
+        "inputs": [
+          {
+            "metricKey": "total-revenue-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D3101",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "total-expenditure-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D3103",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "local-tax-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310101",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "local-allocation-tax-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310103",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "national-treasury-disbursement-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310108",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "local-bonds-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310115",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "welfare-expenses-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310303",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "education-expenses-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310311",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "public-works-expenses-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310308",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "personnel-expenses-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310401",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "assistance-expenses-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310404",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "public-bond-expenses-nature-prefecture",
+            "statsDataId": "0000010104",
+            "code": "D310409",
+            "unit": "千円"
+          }
+        ],
+        "grain": "prefecture",
+        "years": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "retrievedAt": "2026-11-13T03:03:16.372Z",
+        "tableTitle": "Ｄ　行政基盤",
+        "rows": 2820,
+        "areas": 47,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2018,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2019,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2021,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2022,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "9a95f06b36309d085ffc01488f842cd78df0cddce2bee2c0ad3c31296f1fcfaf"
+      },
+      {
+        "id": "municipal-budget",
+        "inputs": [
+          {
+            "metricKey": "total-revenue-municipal",
+            "statsDataId": "0000020204",
+            "code": "D3201",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "total-expenditure-municipal",
+            "statsDataId": "0000020204",
+            "code": "D3203",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "local-tax-revenue-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320101",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "local-allocation-tax-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320108",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "national-treasury-disbursements-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320113",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "municipal-bonds-outstanding",
+            "statsDataId": "0000020204",
+            "code": "D320121",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "welfare-expense-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320303",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "education-expense-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320310",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "civil-engineering-expense-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320308",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "personnel-expense-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320401",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "public-assistance-expense-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320404",
+            "unit": "千円"
+          },
+          {
+            "metricKey": "debt-service-by-nature-municipal",
+            "statsDataId": "0000020204",
+            "code": "D320409",
+            "unit": "千円"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "retrievedAt": "2026-11-13T03:04:28.447Z",
+        "tableTitle": "Ｄ　行政基盤",
+        "rows": 104460,
+        "areas": 1741,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2018,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2019,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2021,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2022,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "920f724cf0b76b0f80b889d49787bb23d94b31f3e55912f7f82e39fd2f9679c9"
       }
     ],
-    "results": 46,
+    "results": 1937,
     "files": [
       {
         "file": "data.csv",
-        "sha256": "86abb116b7bffa20268478af21209b468750b40f22fe5bb9c9ae89e7f6a3faf3",
-        "bytes": 358155
+        "sha256": "bd5c5c5c660b85e97fccb46a88c603904c675a6ef58512eb693a4b969fb67372",
+        "bytes": 12413522
       },
       {
         "file": "analysis.csv",
-        "sha256": "a595db9d098c31df0ee11770c540d675c4cc44cd7751c2b1bf45d444fc1db424",
-        "bytes": 6286
+        "sha256": "8f3c566a1d546e732de8d04c97d4968c7790136d619aa20e01aaccf4bfd228be",
+        "bytes": 264665
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "2b4a181c0afbae582ecc5c62f948d60effb795687f142c3c6a95bda0c714e3b4",
-        "bytes": 138410
+        "sha256": "98542da6db28455d7dda38803d76a54f7007a0e8c8cc39daa7a61bc80f88ff1c",
+        "bytes": 3595992
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "9667d091ae114f511229e3c54b6b88fa6e8272f149e1f3db43affa4ec8b6c721",
-        "bytes": 1590
+        "sha256": "8310384a8ff665b4557e3f0f72e71444fc00a35511765ec487946e6cf569ef6e",
+        "bytes": 16286
       },
       {
         "file": "LICENSE-ja.txt",
@@ -160,54 +456,435 @@
       },
       {
         "file": "analysis-plan.json",
-        "sha256": "9ccb2a76aad5fa19041896170c0e2de205ef1b4f68df57a14cc9a31723de5c88",
-        "bytes": 5775
+        "sha256": "4dd19755354ad8c61127cfbb52db5c8923cbbb997f80b8fcf71d490e0f54fa81",
+        "bytes": 34679
       },
       {
         "file": "figure-specs.json",
-        "sha256": "b9dbf30fa71f7dd97bb7f4b1afeb9b86207505fab2b2a07883dc16bb00a7fa37",
-        "bytes": 7467
+        "sha256": "b49dd972a2accb004499f5c964f3261d720a5ff07a0bfa35252dd3d37ae87ff9",
+        "bytes": 180882
       },
       {
         "file": "README.md",
-        "sha256": "3674f3b7468ce59a8e66d11c499648b7e30a05209fe1903e55f74fd230fe5551",
-        "bytes": 2387
+        "sha256": "8817b86b4e0a1ea618ac188ac26445fe4abcc85804d38a4e9e97c95a91732f72",
+        "bytes": 10019
       },
       {
         "file": "READINESS.md",
-        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
-        "bytes": 272
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/prefecture-budget-trend.png",
+        "sha256": "4e25584b4961aa0214a597e09cd43eb25ae01dbf34cf696b459c521d18fc1813",
+        "bytes": 131536
+      },
+      {
+        "file": "images/prefecture-budget-revenue.png",
+        "sha256": "28224f36ac5e08475f45f11d7c392f998f1541ef6415fcfc6e8b4cc34b1a0d82",
+        "bytes": 133802
+      },
+      {
+        "file": "images/prefecture-budget-purpose.png",
+        "sha256": "4950ca5cd29f8fc31ae2c9d63934c3f083e429ff4ad61d38160e28652983e902",
+        "bytes": 129371
+      },
+      {
+        "file": "images/prefecture-budget-nature.png",
+        "sha256": "90d3e29a40e18419c4d967fac1ed5f057b1b62c83d6bd8adcc49ad7a2f73f073",
+        "bytes": 120370
+      },
+      {
+        "file": "images/municipal-budget-trend.png",
+        "sha256": "4d010d3e95385758e27059c8c42f100fef2e576238b15bfe628961ea50ed6d9a",
+        "bytes": 122558
+      },
+      {
+        "file": "images/municipal-budget-revenue.png",
+        "sha256": "7593ab7e348875b5d6fcc78874dfe1a545edb9af271502e8106b4f8fb1ea4e82",
+        "bytes": 140212
+      },
+      {
+        "file": "images/municipal-budget-purpose.png",
+        "sha256": "4f4807a74ecb2f5ceac09c524be4c9db71fc4b086af47580d673cfee537a5516",
+        "bytes": 115934
+      },
+      {
+        "file": "images/municipal-budget-nature.png",
+        "sha256": "5999b4e3d52f96a6d0cef82763cc1a77f18a33a6b05b42b096eff21fedf43d36",
+        "bytes": 124153
+      },
+      {
+        "file": "images/national-municipal-fiscal-strength.png",
+        "sha256": "51efcee6d167d84760a84585bfc0d782a2f7bf5ad7cf2c84a3db70034074916f",
+        "bytes": 209013
       },
       {
         "file": "images/municipal-fiscal-strength.png",
-        "sha256": "61accad8f920b590eaadaea3ef87df2715479514125256a2f387fe8f8de60b00",
-        "bytes": 162413
+        "sha256": "dec0e4815b7d6a71b1e782761dee4fad6d08eaabac7980bba0801834179b130b",
+        "bytes": 157111
       },
       {
         "file": "images/municipal-current-balance.png",
-        "sha256": "c799c5ad0f359351e4051e327186a8f9ffd25c9919ebb4f89ab0eb9fe909c26f",
-        "bytes": 162737
+        "sha256": "967ef076de839038e316b594a04a7dc0ca34fdc8b3088497a6033e7c602ea7cc",
+        "bytes": 160555
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "befe5000ef3c3b9c01b2e4a3e14cae2a763088eb1a7298f5ba5b4e35a4f5a03c",
-        "bytes": 124203
+        "sha256": "01fdb9f9487787ce6197481e08f63836ebd92a17aed9e4693ac3c2c3823b8b89",
+        "bytes": 118563
       },
       {
         "file": "inputs/municipal-finance.json",
-        "sha256": "2cb68602e990cf7cdec7be30105796379797a476d3c926ff8edf30d78efc4285",
-        "bytes": 36771088
+        "sha256": "4854c70e8ceb3bbe210d3d166181e55c9ffb300eb5b14b5a17157bcf5b684595",
+        "bytes": 36771007
+      },
+      {
+        "file": "inputs/prefecture-budget.json",
+        "sha256": "9a95f06b36309d085ffc01488f842cd78df0cddce2bee2c0ad3c31296f1fcfaf",
+        "bytes": 8367617
+      },
+      {
+        "file": "inputs/municipal-budget.json",
+        "sha256": "920f724cf0b76b0f80b889d49787bb23d94b31f3e55912f7f82e39fd2f9679c9",
+        "bytes": 211023462
       },
       {
         "file": "preview-product.json",
-        "sha256": "08f3966b0f0be309ee6466993ede7ef2e7b17c16780aca35dce75dd2a912bbb7",
-        "bytes": 3593
+        "sha256": "940a7ee982d63f179aa24cab5c19c5e48a03fa92fea5e72c79ad8b0363f19274",
+        "bytes": 16208
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "787a965f78680b0c27deb2525f95038f54cf0d9ca016bc6234c05195b75ffe74",
-        "bytes": 1326541
+        "sha256": "3dde4b3b80f3b79507019f895c169eccc95cd5d3ddc3a690ea4fd53e2313c6ad",
+        "bytes": 13320844
       }
     ]
+  },
+  "analysisDelivery": {
+    "productId": "P-04",
+    "status": "prepared",
+    "version": "analysis-20261112",
+    "sourceManifestSha256": "1855b9e8ecee5936e0a3ee62203b75b0841dd1b789449c2e95a761a0127eea83",
+    "planSha256": "92c841d0346d43e58cd00bee6189a588a86d8380f443ac55014dbe82f4b89c66",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-04/analysis-20261112/3dde4b3b80f3b79507019f895c169eccc95cd5d3ddc3a690ea4fd53e2313c6ad.zip",
+      "sha256": "3dde4b3b80f3b79507019f895c169eccc95cd5d3ddc3a690ea4fd53e2313c6ad",
+      "bytes": 13320844
+    },
+    "attachmentName": "P-04-analysis-20261112-analysis.zip",
+    "snapshot": {
+      "description": "47都道府県と全国の市区町村のデータから、歳入・歳出の推移、財源の内訳、目的別・性質別の支出を図にできます。県と市町村は分けて比較します。",
+      "included": [
+        "市町村財政の指標（1,741地域・2022年度・3,482行、うち欠測23行）",
+        "都道府県の普通会計決算（47地域・2018〜2022年度・2,820行）",
+        "市区町村の普通会計決算（1,741地域・2018〜2022年度・104,460行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "予算・決算の説明資料に",
+          "description": "歳入・歳出が何年でどう変わったかを折れ線で示し、財源と支出の構成を別の図で説明できます。"
+        },
+        {
+          "title": "財源や支出の見直しに",
+          "description": "地方税・地方交付税・国庫支出金・地方債の割合と、福祉・教育・土木などの支出の割合を年度別に比べられます。"
+        },
+        {
+          "title": "他自治体との比較や研修に",
+          "description": "47都道府県と全国の市区町村をそれぞれ選べるCSV・Excelを使い、地域と年度を揃えた比較資料を作れます。"
+        }
+      ],
+      "purchaseNotes": [
+        "都道府県と市区町村を分けて収録します。互いの財政を同じ順位表に混ぜず、重複する移転額を全国の純額として合計しません。",
+        "普通会計の歳入・歳出と内訳は2018〜2022年度、財政力指数・経常収支比率の地域比較は2022年度です。最新年度への自動更新商品ではありません。",
+        "高知県・高知市は作成例です。分析データ追加分の原票には47都道府県と全国の市区町村の値・欠測理由を収録します。",
+        "目的別と性質別は同じ歳出を異なる切り口で分類します。両者の内訳を足し合わせません。",
+        "財政力指数は過去3年平均です。単年度の歳入規模や経常収支比率と区別してください。",
+        "東京特別区などの欠測を0に置き換えません。比較できる地域・年度を確認して利用します。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "prefecture-budget-trend",
+          "kind": "chart",
+          "heading": "都道府県の歳入・歳出の推移を見る",
+          "lead": "高知県を例に、2018〜2022年度の歳入・歳出の動きを同じ図に示します。期間を通じた規模の変化を確認し、次の構成図と読み比べられます。",
+          "note": "普通会計の名目金額です。物価の影響を除いた実質増減や、差額だけで財政の健全性を判断する図ではありません。県と市区町村は別々に比較します。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "balance",
+              "title": "地方財政",
+              "sectionTitle": "財政の規模と収支",
+              "href": "/themes/local-finance#theme-section-balance"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-prefecture-budget-trend.png",
+              "alt": "歳入・歳出の推移（高知県・2018〜2022年度）",
+              "template": "line",
+              "sha256": "4e25584b4961aa0214a597e09cd43eb25ae01dbf34cf696b459c521d18fc1813"
+            }
+          ]
+        },
+        {
+          "id": "prefecture-budget-revenue",
+          "kind": "chart",
+          "heading": "都道府県の歳入の構成を比べる",
+          "lead": "高知県を例に、地方税・地方交付税・国庫支出金・地方債とその他の財源が、歳入総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+          "note": "地方債は当年度の収入で、年度末の地方債残高ではありません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "finance-flow",
+              "title": "地方財政",
+              "sectionTitle": "どこから調達し何に使うか",
+              "href": "/themes/local-finance#theme-section-finance-flow"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-prefecture-budget-revenue.png",
+              "alt": "歳入の構成（高知県・2018〜2022年度）",
+              "template": "stacked-bar",
+              "sha256": "28224f36ac5e08475f45f11d7c392f998f1541ef6415fcfc6e8b4cc34b1a0d82"
+            }
+          ]
+        },
+        {
+          "id": "prefecture-budget-purpose",
+          "kind": "chart",
+          "heading": "都道府県の目的別の歳出構成を比べる",
+          "lead": "高知県を例に、民生費・教育費・土木費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+          "note": "行政の何の目的に使ったかを示します。人件費や扶助費などの性質別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "candidate-122",
+              "title": "地方財政",
+              "sectionTitle": "目的別と性質別の歳出を分けて見る",
+              "href": "/themes/local-finance#theme-section-candidate-122"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-prefecture-budget-purpose.png",
+              "alt": "目的別の歳出構成（高知県・2018〜2022年度）",
+              "template": "stacked-bar",
+              "sha256": "4950ca5cd29f8fc31ae2c9d63934c3f083e429ff4ad61d38160e28652983e902"
+            }
+          ]
+        },
+        {
+          "id": "prefecture-budget-nature",
+          "kind": "chart",
+          "heading": "都道府県の性質別の歳出構成を比べる",
+          "lead": "高知県を例に、人件費・扶助費・公債費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+          "note": "経費の性質で分類します。民生費や教育費などの目的別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "candidate-122",
+              "title": "地方財政",
+              "sectionTitle": "目的別と性質別の歳出を分けて見る",
+              "href": "/themes/local-finance#theme-section-candidate-122"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-prefecture-budget-nature.png",
+              "alt": "性質別の歳出構成（高知県・2018〜2022年度）",
+              "template": "stacked-bar",
+              "sha256": "90d3e29a40e18419c4d967fac1ed5f057b1b62c83d6bd8adcc49ad7a2f73f073"
+            }
+          ]
+        },
+        {
+          "id": "municipal-budget-trend",
+          "kind": "chart",
+          "heading": "市区町村の歳入・歳出の推移を見る",
+          "lead": "高知市を例に、2018〜2022年度の歳入・歳出の動きを同じ図に示します。期間を通じた規模の変化を確認し、次の構成図と読み比べられます。",
+          "note": "普通会計の名目金額です。物価の影響を除いた実質増減や、差額だけで財政の健全性を判断する図ではありません。県と市区町村は別々に比較します。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "balance",
+              "title": "地方財政",
+              "sectionTitle": "財政の規模と収支",
+              "href": "/themes/local-finance#theme-section-balance"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-budget-trend.png",
+              "alt": "歳入・歳出の推移（高知県 高知市・2018〜2022年度）",
+              "template": "line",
+              "sha256": "4d010d3e95385758e27059c8c42f100fef2e576238b15bfe628961ea50ed6d9a"
+            }
+          ]
+        },
+        {
+          "id": "municipal-budget-revenue",
+          "kind": "chart",
+          "heading": "市区町村の歳入の構成を比べる",
+          "lead": "高知市を例に、地方税・地方交付税・国庫支出金・地方債とその他の財源が、歳入総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+          "note": "地方債は当年度の収入で、年度末の地方債残高ではありません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "finance-flow",
+              "title": "地方財政",
+              "sectionTitle": "どこから調達し何に使うか",
+              "href": "/themes/local-finance#theme-section-finance-flow"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-budget-revenue.png",
+              "alt": "歳入の構成（高知県 高知市・2018〜2022年度）",
+              "template": "stacked-bar",
+              "sha256": "7593ab7e348875b5d6fcc78874dfe1a545edb9af271502e8106b4f8fb1ea4e82"
+            }
+          ]
+        },
+        {
+          "id": "municipal-budget-purpose",
+          "kind": "chart",
+          "heading": "市区町村の目的別の歳出構成を比べる",
+          "lead": "高知市を例に、民生費・教育費・土木費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+          "note": "行政の何の目的に使ったかを示します。人件費や扶助費などの性質別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "candidate-122",
+              "title": "地方財政",
+              "sectionTitle": "目的別と性質別の歳出を分けて見る",
+              "href": "/themes/local-finance#theme-section-candidate-122"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-budget-purpose.png",
+              "alt": "目的別の歳出構成（高知県 高知市・2018〜2022年度）",
+              "template": "stacked-bar",
+              "sha256": "4f4807a74ecb2f5ceac09c524be4c9db71fc4b086af47580d673cfee537a5516"
+            }
+          ]
+        },
+        {
+          "id": "municipal-budget-nature",
+          "kind": "chart",
+          "heading": "市区町村の性質別の歳出構成を比べる",
+          "lead": "高知市を例に、人件費・扶助費・公債費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+          "note": "経費の性質で分類します。民生費や教育費などの目的別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "candidate-122",
+              "title": "地方財政",
+              "sectionTitle": "目的別と性質別の歳出を分けて見る",
+              "href": "/themes/local-finance#theme-section-candidate-122"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-budget-nature.png",
+              "alt": "性質別の歳出構成（高知県 高知市・2018〜2022年度）",
+              "template": "stacked-bar",
+              "sha256": "5999b4e3d52f96a6d0cef82763cc1a77f18a33a6b05b42b096eff21fedf43d36"
+            }
+          ]
+        },
+        {
+          "id": "national-municipal-fiscal-strength",
+          "kind": "chart",
+          "heading": "市町村の財政力を全国地図で見る",
+          "lead": "2022年度の財政力指数を全国の市町村・特別区で表示します。都道府県の平均では見えない地域差を確認し、詳しく比較する地域を選ぶための基礎資料にできます。",
+          "note": "2022年度の財政力指数は基準財政収入額を基準財政需要額で除した値の過去3年平均です。県の財政と同じ順位表に混ぜず、欠測は0に置き換えません。指数だけでは財政の健全性や住民サービスの水準は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "fiscal-capacity",
+              "title": "地方財政",
+              "sectionTitle": "財政運営の余裕と負担",
+              "href": "/themes/local-finance#theme-section-fiscal-capacity"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-national-municipal-fiscal-strength.png",
+              "alt": "全国の市町村別 財政力指数（全国の市町村・特別区・2022年度）",
+              "template": "choropleth",
+              "sha256": "51efcee6d167d84760a84585bfc0d782a2f7bf5ad7cf2c84a3db70034074916f"
+            }
+          ]
+        },
+        {
+          "id": "municipal-fiscal-strength",
+          "kind": "chart",
+          "heading": "県内の財政力を詳しく見る",
+          "lead": "全国地図から高知県内へ範囲を絞り、同じ2022年度の財政力指数を市町村ごとに確認します。近隣自治体との位置関係を示し、決算説明や財政研修の比較資料に使えます。",
+          "note": "2022年度の財政力指数は基準財政収入額を基準財政需要額で除した値の過去3年平均です。県の財政と同じ順位表に混ぜず、欠測は0に置き換えません。指数だけでは財政の健全性や住民サービスの水準は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "fiscal-capacity",
+              "title": "地方財政",
+              "sectionTitle": "財政運営の余裕と負担",
+              "href": "/themes/local-finance#theme-section-fiscal-capacity"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-fiscal-strength.png",
+              "alt": "市町村別の財政力指数（高知県内の市町村・2022年度）",
+              "template": "choropleth",
+              "sha256": "dec0e4815b7d6a71b1e782761dee4fad6d08eaabac7980bba0801834179b130b"
+            }
+          ]
+        },
+        {
+          "id": "municipal-current-balance",
+          "kind": "chart",
+          "heading": "経常的な財政負担を比べる",
+          "lead": "高知県の市といの町を例に、2022年度の経常収支比率を並べます。財政力指数とは別の図で確認し、経常的な経費に充てる一般財源の割合を説明できます。",
+          "note": "値の大小を単独で財政の良し悪しに読み替えません。歳入の構成や行政の役割も確認してください。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "fiscal-capacity",
+              "title": "地方財政",
+              "sectionTitle": "財政運営の余裕と負担",
+              "href": "/themes/local-finance#theme-section-fiscal-capacity"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-current-balance.png",
+              "alt": "2022年度の経常収支比率（2022年度）",
+              "template": "bar",
+              "sha256": "967ef076de839038e316b594a04a7dc0ca34fdc8b3088497a6033e7c602ea7cc"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261112-analysis-file-preview.png",
+              "alt": "都道府県・市区町村の財政を推移と内訳で比べるデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "01fdb9f9487787ce6197481e08f63836ebd92a17aed9e4693ac3c2c3823b8b89"
+            }
+          ],
+          "id": "analysis-file-11"
+        }
+      ]
+    }
   }
 }

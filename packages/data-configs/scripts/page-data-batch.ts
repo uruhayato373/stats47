@@ -1,4 +1,5 @@
 import { prefToCityStatsDataId } from "../src/ssds/entity-source";
+import { PREFECTURE_CAPITAL_CITIES } from "@stats47/area";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 /**
  * page-data-batch — TS-config 駆動の e-Stat → R2 直行バッチ
@@ -662,11 +663,7 @@ function parseEstatValue(raw: string): number | null {
  * サイトの慣行 (既存 675 metric) に合わせ、県庁所在市の値を都道府県コード NN000 に写像する。
  * 全国 (00000) と県庁所在市以外の大都市 (川崎/相模原/浜松/堺/北九州) は対象外として捨てる。
  */
-const KAKEI_CITY_TO_PREF = new Map<string, string>();
-for (let i = 1; i <= 47; i++) {
-  const nn = String(i).padStart(2, "0");
-  KAKEI_CITY_TO_PREF.set(i === 40 ? "40004" : `${nn}003`, `${nn}000`);
-}
+const KAKEI_CITY_TO_PREF = new Map(PREFECTURE_CAPITAL_CITIES.map(area => [area.estatAreaCode, area.prefectureCode]));
 function remapKakeiAreas(values: EstatValue[]): EstatValue[] {
   const out: EstatValue[] = [];
   for (const v of values) {

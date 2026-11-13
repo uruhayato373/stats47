@@ -6,9 +6,10 @@ import { readAnalysisCatalog } from '../src/analysis/catalog-files';
 
 function fixture() {
   const product: AnalysisCatalogProduct = {
-    productId: 'test', articleKey: 'paid-test', examples: [{ metricKeys: ['total-population'] }],
+    productId: 'test', articleKey: 'paid-test', examples: [{ metricKeys: ['total-population'], themeRefs: [{ themeKey: 'population-dynamics', sectionKey: 'population-change' }] }],
     analysisPlan: {
       objective: '同年の市区町村人口を比較する',
+      axes: ['trend', 'composition', 'comparison'].map(axis => ({ axis: axis as 'trend' | 'composition' | 'comparison', decision: 'deferred', reason: '採用可否を調査中', recipeRefs: [] })),
       inputs: [{ metricKey: 'total-population', scope: 'municipality', decision: 'use', reason: '国勢調査人口' }],
       analysisRefs: ['analysis:test'], figureRefs: ['figure:test'], reuseProducts: [], limitations: ['固定年の比較'],
     },
@@ -18,19 +19,28 @@ function fixture() {
         inputs: [{ metricKey: 'total-population' }], definition: '国勢調査', boundary: '市単位' }],
       research: { method: '原典', references: [{ id: 'source', title: '原典', url: 'https://www.e-stat.go.jp/', section: '人口', finding: '同年', checkedAt: '2026-11-12' }] },
       recipes: [{ id: 'compare', heading: '比較', lead: '人口', sourceId: 'population', metricIds: ['total-population'],
-        method: 'compare', year: 2020, areaCodes: ['39201'], template: 'bar', references: ['source'], limitation: '同年', presentationMetricKey: 'total-population' }],
+        method: 'compare', year: 2020, areaCodes: ['39201'], template: 'bar', references: ['source'], limitation: '同年', presentationMetricKey: 'total-population',
+        themeRefs: [{ themeKey: 'population-dynamics', sectionKey: 'population-change' }] }],
     },
   };
   const context: AnalysisCatalogContext = {
     registry: METRICS_REGISTRY, variants: [], paidProductIds: ['test'], paidArticleKeys: new Set(['paid-test']),
     articleKeysByProduct: new Map([['test', 'paid-test']]),
     analysisIds: new Set(['analysis:test']), figures: new Map([['figure:test', { analysis: 'analysis:test' }]]),
-    areaCodes: { prefecture: new Set(['39000']), municipality: new Set(['39201']) },
+    areaCodes: { prefecture: new Set(['39000']), municipality: new Set(['39201']), 'capital-city': new Set(['01003']) },
   };
   return { product, context };
 }
 
 describe('商品分析の配線ゲート', () => {
+  it('テーマの章の削除・誤接続と、作成例の紐づけ忘れを止める', () => {
+    const { product, context } = fixture();
+    product.examples[0].themeRefs = [];
+    product.analysisRevision!.recipes[0].themeRefs = [{ themeKey: 'aging-society', sectionKey: 'population-change' }];
+    const errors = validateAnalysisCatalog([product], context).join('\n');
+    expect(errors).toContain('テーマ参照がありません');
+    expect(errors).toContain('テーマの章がありません');
+  });
   it('全有料商品の実台帳を読み、追加商品の計画漏れと配線の破損をCIで検出する', () => {
     const { products, context } = readAnalysisCatalog(path.resolve(__dirname, '../../..'));
     expect(products.length).toBe(context.paidProductIds.length);

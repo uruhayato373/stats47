@@ -1,4 +1,5 @@
 import { assertAnalysisFigureShape, type AnalysisResult, type AnalysisRevision } from './compute';
+import { resolveProductThemeReferences } from './theme-references';
 
 interface LineFigureInput {
   title: string; meta: string; source: string; decimals: number;
@@ -14,10 +15,14 @@ interface MunicipalityMapInput extends Omit<BarFigureInput, 'rows'> {
   values: { areaCode: string; value: number | null }[];
 }
 export type AnalysisFigure =
+  | { file: string; template: 'stacked-bar'; input: { title: string; meta: string; source: string; groups: string[];
+      categories: { label: string; values: number[] }[]; normalized: boolean; unit: string; decimals: number } }
   | { file: string; template: 'line'; input: LineFigureInput }
   | { file: string; template: 'bar'; input: BarFigureInput }
   | { file: string; template: 'choropleth'; input: { area: MunicipalityMapInput } };
 export interface AnalysisShowcase {
+  id: string;
+  themeRefs?: ReturnType<typeof resolveProductThemeReferences>;
   kind: 'chart'; heading: string; lead: string; note?: string; figures: { file: string; alt: string }[];
 }
 type FigureRevision = Omit<AnalysisRevision, 'sources'> & {
@@ -59,10 +64,21 @@ export function buildAnalysisFigures(plan: FigureRevision, results: AnalysisResu
         values: rows.map(row => ({ areaCode: row.areaCode, value: row.value })),
       } } });
     } else if (recipe.template === 'bar') {
+      if (source.grain === 'capital-city') throw Error('県庁所在市の改訂図は折れ線を使用してください');
       figures.push({ file, template: 'bar', input: {
         metricKey: recipe.presentationMetricKey!, grain: source.grain, title, yearLabel: period,
         unit: rows[0].unit, note: recipe.scopeLabel, source: source.label,
         rows: rows.filter(row => row.value !== null).map(row => ({ name: row.areaName, value: row.value! })),
+      } });
+    } else if (recipe.template === 'stacked-bar') {
+      const groups = [...new Map(rows.map(row => [`${row.areaCode}/${row.year}`, row])).values()]
+        .sort((a, b) => a.areaCode.localeCompare(b.areaCode) || a.year - b.year);
+      figures.push({ file, template: 'stacked-bar', input: {
+        title, meta: `${scope}・${period}`, source: source.label, normalized: true, unit: '％', decimals: 1,
+        groups: groups.map(row => areas.length === 1 ? `${row.year}${suffix}` : `${row.areaName} ${row.year}${suffix}`),
+        categories: [...new Map(rows.map(row => [row.seriesId, row.seriesLabel]))].map(([id, label]) => ({ label,
+          values: groups.map(group => rows.find(row => row.areaCode === group.areaCode && row.year === group.year && row.seriesId === id)!.value!),
+        })),
       } });
     } else {
       const seriesIds = [...new Set(rows.map(row => `${row.areaCode}/${row.seriesId}`))];
@@ -76,7 +92,8 @@ export function buildAnalysisFigures(plan: FigureRevision, results: AnalysisResu
         }),
       } });
     }
-    return { kind: 'chart', heading: recipe.heading, lead: recipe.lead, note: recipe.limitation,
+    return { id: recipe.id, kind: 'chart', heading: recipe.heading, lead: recipe.lead, note: recipe.limitation,
+      ...(recipe.themeRefs ? { themeRefs: resolveProductThemeReferences(recipe.themeRefs) } : {}),
       figures: [{ file, alt: `${title}（${recipe.template === 'bar' ? period : `${scope}・${period}`}）` }] };
   });
   return { figures, showcase };

@@ -2,6 +2,921 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "paved-road-total-length",
+      "pageId": "ranking:paved-road-total-length",
+      "title": "舗装道路実延長",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7120"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7120"
+        },
+        "derived": false,
+        "configHash": "53b3ddc1532b6d1a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:paved-road-total-length",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:paved-road-total-length",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pc-ownership-multi-person-households-per-1000",
+      "pageId": "ranking:pc-ownership-multi-person-households-per-1000",
+      "title": "パソコン所有数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L03613"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L03613"
+        },
+        "derived": false,
+        "configHash": "52f2108dd8313e32"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:ict-digital-divide-composite-analysis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pc-ownership-multi-person-households-per-1000-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pc-ownership-multi-person-households-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "peach-consumption-expenditure",
+      "pageId": "ranking:peach-consumption-expenditure",
+      "title": "桃消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010610090",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010610090",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6c7f5bc7744e39c0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:peach-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:peach-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:peach-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "peach-consumption-quantity",
+      "pageId": "ranking:peach-consumption-quantity",
+      "title": "桃消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010610090",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010610090",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "dcb90bfa69401ea5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:peach-consumption-quantity-vs-disaster-relief-expenses",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:peach-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pear-consumption-expenditure",
+      "pageId": "ranking:pear-consumption-expenditure",
+      "title": "梨消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010610060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010610060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a8569a785955acc3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pear-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pear-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pear-consumption-quantity",
+      "pageId": "ranking:pear-consumption-quantity",
+      "title": "梨消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010610060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010610060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8d8957098eddf906"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pear-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pear-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "penal-code-offenses-recognized-per-1000",
+      "pageId": "ranking:penal-code-offenses-recognized-per-1000",
+      "title": "刑法犯認知件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K06101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06101"
+        },
+        "derived": false,
+        "configHash": "ed9ae5b81200b973"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:cc-estat-09-radar-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:cc-estat-15-crime-small-multiple",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:police-officer-density-vs-crime-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:penal-code-offenses-recognized-per-1000",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:penal-code-offenses-recognized-per-1000",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "pension-benefit-total",
+      "pageId": "ranking:pension-benefit-total",
+      "title": "厚生年金受給権者年金総額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J5104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J5104"
+        },
+        "derived": false,
+        "configHash": "0a1d2fbae26e3ae1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pension-benefit-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "title": "児童福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0330503"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0330503"
+        },
+        "derived": false,
+        "configHash": "94f64329fddb1e9e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-disaster-recovery-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+      "title": "災害復旧費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0332103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0332103"
+        },
+        "derived": false,
+        "configHash": "37cb1037e8d04490"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "per-capita-education-expenditure-pref-municipal",
       "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
       "title": "教育費",
@@ -3522,6 +4437,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:personnel-expense-municipal",
           "kind": "ranking"
         }
@@ -3556,6 +4475,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
         {
           "pageId": "ranking:personnel-expenses-prefecture",
           "kind": "ranking"
@@ -8262,955 +9185,6 @@
         },
         {
           "pageId": "ranking:pneumonia-death-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "pocket-money-group-consumption-expenditure",
-      "pageId": "ranking:pocket-money-group-consumption-expenditure",
-      "title": "こづかい(使途不明)消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "100200001",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "100200001",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "1275ebc8ace5d84b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:pocket-money-group-consumption-expenditure-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pocket-money-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "police-department-staff",
-      "pageId": "ranking:police-department-staff",
-      "title": "警察部門職員数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D1205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D1205"
-        },
-        "derived": false,
-        "configHash": "3f514ee3fad3db80"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:police-department-staff",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-finance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-finance"
-      ]
-    },
-    {
-      "metricKey": "police-expenditure-ratio-pref-finance",
-      "pageId": "ranking:police-expenditure-ratio-pref-finance",
-      "title": "警察費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D03113"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D03113"
-        },
-        "derived": false,
-        "configHash": "bb5b4675d00d5976"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:police-expenditure-ratio-pref-finance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "police-expenses-prefecture",
-      "pageId": "ranking:police-expenses-prefecture",
-      "title": "警察費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310309"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310309"
-        },
-        "derived": false,
-        "configHash": "d7d0329941763b4e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:police-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "police-officer-count",
-      "pageId": "ranking:police-officer-count",
-      "title": "警察官数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K4102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K4102"
-        },
-        "derived": false,
-        "configHash": "ac4da38ddea14ff6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:police-officer-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "police-officer-count-per-population",
-      "pageId": "ranking:police-officer-count-per-population",
-      "title": "警察官数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010211",
-          "filters": {
-            "cdCat01": "#K05103"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010211",
-          "cdCat01": "#K05103"
-        },
-        "derived": false,
-        "configHash": "acd82b8722b266dc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "blog:police-officer-density-vs-crime-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:police-officer-count-per-population",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:safety",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "safety"
-      ]
-    },
-    {
-      "metricKey": "pollution-complaints-received-per-100k",
-      "pageId": "ranking:pollution-complaints-received-per-100k",
-      "title": "公害苦情受付件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010211",
-          "filters": {
-            "cdCat01": "#K09201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010211",
-          "cdCat01": "#K09201"
-        },
-        "derived": false,
-        "configHash": "5a920d92492b2b65"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:pollution-complaints-regional-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pollution-complaints-received-per-100k",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-15",
-      "pageId": null,
-      "title": "0～15歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A1406"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A1406"
-        },
-        "derived": false,
-        "configHash": "ded1ed50a93645bb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-15",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-15",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-15-female",
-      "pageId": null,
-      "title": "0～15歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140602"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140602"
-        },
-        "derived": false,
-        "configHash": "7da309ca9aa20225"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-15-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-15-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-15-male",
-      "pageId": null,
-      "title": "0～15歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140601"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140601"
-        },
-        "derived": false,
-        "configHash": "ee5fccf9bbe01126"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-15-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-15-male",
           "kind": "ranking"
         }
       ],

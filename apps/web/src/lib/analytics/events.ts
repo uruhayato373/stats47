@@ -441,6 +441,8 @@ export type NavSurface =
   | 'product_catalog'
   | 'blog_product'
   | 'ranking_product'
+  | 'theme_product'
+  | 'product_theme'
   | 'blog_sidebar'
   | 'blog_discovery_mobile'
   | 'ranking_survey'

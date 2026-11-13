@@ -47,6 +47,14 @@ describe("product links", () => {
     });
   });
 
+  it("テーマの作成例から来たことを販売先への計測まで保持する", () => {
+    render(<TrackedProductLink href="/products/data-p-04#example-revenue-scale" label="P-04:収入の比較"
+      surface="theme_product" product={FISCAL_NOTE}>テーマから商品</TrackedProductLink>);
+    fireEvent.click(screen.getByRole('link', { name: 'テーマから商品' }));
+    expect(mockGtag).toHaveBeenCalledWith('event', 'nav_click', expect.objectContaining({ nav_surface: 'theme_product' }));
+    expect(JSON.parse(sessionStorage.getItem('stats47:product-placement')!)[FISCAL_NOTE.slug]).toBe('theme_product');
+  });
+
   it("販売先クリックを商品ページpathとlink_positionで集計できる", () => {
     render(
       <TrackedProductOutboundLink

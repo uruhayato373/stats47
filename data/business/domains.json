@@ -109,6 +109,7 @@
         { "label": "Geo 分析", "href": "/data/geo", "kind": "inventory" },
         { "label": "月次データの台帳", "href": "/data/monthly", "kind": "inventory" },
         { "label": "内訳の台帳", "href": "/data/compositions", "kind": "inventory" },
+        { "label": "外部データの台帳", "href": "/data/open-data", "kind": "inventory" },
         { "label": "調査カタログ", "href": "/research", "kind": "inventory" },
         { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" },
         { "label": "指標を選ぶ視点", "href": "/quality/theme-viewpoints", "kind": "results" }

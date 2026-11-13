@@ -25,7 +25,13 @@
       "metricKeys": [
         "beef-consumption-expenditure"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "household-food-spending",
+          "sectionKey": "household-food-spending-meat-dairy"
+        }
+      ]
     },
     {
       "id": "beef-quantity",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "beef-consumption-quantity"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "household-food-spending",
+          "sectionKey": "household-food-spending-meat-dairy"
+        }
+      ]
     },
     {
       "id": "coffee-expenditure",
@@ -43,7 +55,13 @@
       "metricKeys": [
         "coffee-consumption-expenditure"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "household-food-spending",
+          "sectionKey": "household-food-spending-drinks"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -51,7 +69,7 @@
     "品目によって支出額・購入量の収録状況や単位が異なります。支出額の大きさを、そのまま購入量や地域全体の市場規模と読み替えないでください。"
   ],
   "analysisPlan": {
-    "objective": "対象都市の家計について、支出額と購入量、品目構成、複数年の変化を分けて比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "objective": "二人以上世帯の県庁所在市データを使い、牛肉の支出額と購入数量を別々に推移・都市間比較する。品目構成は入力不足のため保留。販売中の固定納品への追加を示すものではない。",
     "inputs": [
       {
         "metricKey": "beef-consumption-expenditure",
@@ -90,6 +108,145 @@
     "limitations": [
       "対象都市と調査対象世帯の範囲を明記する。県全体・全市区町村の消費行動へ一般化しない。",
       "支出額の増減を購入量の増減と同一視せず、単年の標本変動と複数年平均を区別する。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "beef-expenditure-trend",
+          "beef-quantity-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "deferred",
+        "reason": "取得済み原票は牛肉の支出額と購入数量のみ。品目構成には食料・肉類等の全体と重複しない品目内訳を追加取得する。現版で品目構成が分析できるとは表示しない。",
+        "recipeRefs": []
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "beef-expenditure-trend",
+          "beef-quantity-trend"
+        ]
+      }
+    ]
+  },
+  "analysisRevision": {
+    "version": "analysis-20261113",
+    "title": "県庁所在市の牛肉支出と購入量の変化",
+    "description": "札幌市と京都市の二人以上世帯について、牛肉への年間支出額と購入量を2022〜2024年で比較します。",
+    "useCases": [
+      {
+        "title": "金額と量の動きを分けて説明する",
+        "description": "同じ都市・年・品目で支出額と購入量を別々の図にし、金額だけでは分からない違いを確認できます。"
+      }
+    ],
+    "notes": [
+      "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+      "各年の値を示し、複数年平均や将来予測とは区別します。"
+    ],
+    "sources": [
+      {
+        "id": "capital-city-beef",
+        "title": "県庁所在市の牛肉支出額・購入量",
+        "grain": "capital-city",
+        "years": [
+          2022,
+          2023,
+          2024
+        ],
+        "inputs": [
+          {
+            "metricKey": "beef-consumption-expenditure"
+          },
+          {
+            "metricKey": "beef-consumption-quantity"
+          }
+        ],
+        "definition": "家計調査の二人以上の世帯（cat02=03）。1世帯当たり年間の牛肉支出額・購入数量。",
+        "boundary": "県庁所在市47都市（東京都は区部）。原典の都市コードを保持し、県全体や未調査自治体へ拡張しない。"
+      }
+    ],
+    "research": {
+      "method": "家計調査の原典メタデータと実観測を照合。47都市×2022〜2024年の両指標を確認。",
+      "references": [
+        {
+          "id": "kakei-beef-money",
+          "title": "家計調査 品目分類（総数：金額）",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0004023605",
+          "section": "品目010310010 牛肉・世帯区分03・2022〜2024年",
+          "finding": "県庁所在市の二人以上世帯の年間支出額を都市の原コードで比較する。支出を県全体の市場規模へ拡大解釈しない。",
+          "checkedAt": "2026-11-13"
+        },
+        {
+          "id": "kakei-beef-quantity",
+          "title": "家計調査 品目分類（総数：数量）",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0004023606",
+          "section": "品目010310010 牛肉・世帯区分03・2022〜2024年",
+          "finding": "同じ品目・世帯区分の購入量を支出額と別図にする。原単位1gと表示gは同じ数量で、金額と数量を同じ軸へ載せない。",
+          "checkedAt": "2026-11-13"
+        }
+      ]
+    },
+    "recipes": [
+      {
+        "id": "beef-expenditure-trend",
+        "heading": "牛肉に使う金額はどう変わったか",
+        "lead": "札幌市と京都市の年間支出額を同じ期間で比べます。",
+        "sourceId": "capital-city-beef",
+        "metricIds": [
+          "beef-consumption-expenditure"
+        ],
+        "method": "series",
+        "areaCodes": [
+          "01003",
+          "26003"
+        ],
+        "template": "line",
+        "references": [
+          "kakei-beef-money"
+        ],
+        "limitation": "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+        "scopeLabel": "札幌市・京都市の二人以上世帯",
+        "themeRefs": [
+          {
+            "themeKey": "household-food-spending",
+            "sectionKey": "household-food-spending-meat-dairy"
+          }
+        ]
+      },
+      {
+        "id": "beef-quantity-trend",
+        "heading": "牛肉を買う量はどう変わったか",
+        "lead": "同じ2都市の購入量を示し、支出額の図と見比べます。",
+        "sourceId": "capital-city-beef",
+        "metricIds": [
+          "beef-consumption-quantity"
+        ],
+        "method": "series",
+        "areaCodes": [
+          "01003",
+          "26003"
+        ],
+        "template": "line",
+        "references": [
+          "kakei-beef-money",
+          "kakei-beef-quantity"
+        ],
+        "limitation": "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+        "scopeLabel": "札幌市・京都市の二人以上世帯",
+        "themeRefs": [
+          {
+            "themeKey": "household-food-spending",
+            "sectionKey": "household-food-spending-meat-dairy"
+          }
+        ]
+      }
     ]
   }
 }

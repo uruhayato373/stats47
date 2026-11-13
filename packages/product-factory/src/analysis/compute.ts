@@ -1,4 +1,5 @@
 import type { AnalysisObservation } from './fetch-estat';
+import type { ProductThemeReference } from './theme-references';
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from '@stats47/area';
 
 export interface ResearchReference {
@@ -6,22 +7,25 @@ export interface ResearchReference {
 }
 export interface AnalysisRecipe {
   id: string; heading: string; lead: string; sourceId: string; metricIds: string[];
-  method: 'index' | 'share' | 'series' | 'balance' | 'change' | 'compare' | 'ratio';
+  method: 'index' | 'share' | 'series' | 'balance' | 'change' | 'compare' | 'ratio' | 'composition';
+  /** 重複しない内訳を全体から引いた残差。親項目と子項目は同時に指定しない。 */
+  remainder?: { id: string; label: string };
   balances?: { id: string; label: string; positiveId: string; negativeId: string }[];
   areaCode?: string; areaCodes?: string[];
   within?: { kind: 'nation' } | { kind: 'prefecture'; prefCode: string };
   denominatorId?: string; from?: number; to?: number; year?: number;
   /** 分子 / 分母 × scale。率の単位を推測せず台帳に明記する。 */
   scale?: number; unit?: string;
-  template: 'line' | 'bar' | 'choropleth'; references: string[]; limitation: string;
+  template: 'line' | 'bar' | 'choropleth' | 'stacked-bar'; references: string[]; limitation: string;
   presentationMetricKey?: string; chartTitle?: string; scopeLabel?: string;
+  themeRefs?: ProductThemeReference[];
 }
 export interface AnalysisRevision {
   version: string; title: string; description: string;
   useCases: { title: string; description: string }[]; notes: string[];
   /** 原典取得と分離した論理的な入力。異なる表も、地域・年・定義を照合したloaderが結合する。 */
   sources: {
-    id: string; statsDataId?: string; grain: 'prefecture' | 'municipality'; years: number[];
+    id: string; statsDataId?: string; grain: 'prefecture' | 'municipality' | 'capital-city'; years: number[];
     metrics: { id: string; code: string; label: string; unit: string }[];
     title: string; label: string; url: string; definition: string; boundary: string;
   }[];
@@ -41,6 +45,24 @@ export function assertAnalysisFigureShape(recipe: AnalysisRecipe, rows: Analysis
   const coordinates = new Set(rows.map(row => `${row.areaCode}/${row.seriesId}/${row.year}`));
   if (coordinates.size !== rows.length) throw Error('分析結果の座標が重複しています');
   if (rows.some(row => row.value !== null && !Number.isFinite(row.value))) throw Error('有限でない分析結果です');
+  if (recipe.template === 'stacked-bar') {
+    if (recipe.method !== 'composition' || !recipe.remainder) throw Error('積み上げ図には構成分析が必要です');
+    const expected = [...recipe.metricIds, recipe.remainder.id];
+    const groups = new Map<string, AnalysisResult[]>();
+    for (const row of rows) {
+      const key = `${row.areaCode}/${row.year}`;
+      groups.set(key, [...(groups.get(key) ?? []), row]);
+    }
+    for (const group of groups.values()) {
+      if (group.length !== expected.length || group.some(row => !expected.includes(row.seriesId)))
+        throw Error('構成の内訳が揃っていません');
+      // 共通描画型が欠測を0に置換・再正規化しないよう、描画前に止める。
+      if (group.some(row => row.value === null)) throw Error('構成図に欠測または0以下の分母があります');
+      if (group.some(row => row.unit !== '％' || row.value! < 0) || Math.abs(group.reduce((sum, row) => sum + row.value!, 0) - 100) > 1e-8)
+        throw Error('構成の合計が100％になりません');
+    }
+    return;
+  }
   if (recipe.template === 'bar' || recipe.template === 'choropleth') {
     if (new Set(rows.map(row => row.year)).size !== 1 || new Set(rows.map(row => row.seriesId)).size !== 1)
       throw Error('棒グラフ・地図は1時点・1指標の地域比較に使います');
@@ -108,7 +130,7 @@ export function computeAnalyses(plan: AnalysisRevision, rows: AnalysisObservatio
       throw Error(`分析の取得元または参考資料がありません: ${recipe.id}`);
     if (recipe.template === 'choropleth' && source.grain !== 'municipality')
       throw Error('市区町村地図の取得元の地域単位が一致しません');
-    if (!['index', 'share', 'series', 'balance', 'change', 'compare', 'ratio'].includes(recipe.method)) throw Error('未対応の分析方法です');
+    if (!['index', 'share', 'series', 'balance', 'change', 'compare', 'ratio', 'composition'].includes(recipe.method)) throw Error('未対応の分析方法です');
     if (!recipe.metricIds.length || new Set(recipe.metricIds).size !== recipe.metricIds.length) throw Error('分析の指標が空または重複しています');
     const metrics = recipe.metricIds.map(id => {
       const metric = source.metrics.find(item => item.id === id);
@@ -149,14 +171,32 @@ export function computeAnalyses(plan: AnalysisRevision, rows: AnalysisObservatio
       }));
     }
     const denominator = source.metrics.find(metric => metric.id === recipe.denominatorId);
-    const divides = recipe.method === 'share' || recipe.method === 'ratio';
+    const divides = recipe.method === 'share' || recipe.method === 'ratio' || recipe.method === 'composition';
     if (divides && !denominator) throw Error('割合・比率の分母が未収録です');
     if (recipe.method === 'ratio' && (!Number.isFinite(recipe.scale) || recipe.scale! <= 0 || !recipe.unit?.trim()))
       throw Error('比率には正の倍率と出力単位が必要です');
     if (recipe.method !== 'index' && new Set(metrics.map(metric => metric.unit)).size !== 1)
       throw Error('分析する指標の単位が異なります');
-    if (recipe.method === 'share' && metrics.some(metric => metric.unit !== denominator!.unit))
+    if ((recipe.method === 'share' || recipe.method === 'composition') && metrics.some(metric => metric.unit !== denominator!.unit))
       throw Error('割合の分子・分母の単位が異なります');
+    if (recipe.method === 'share' && recipe.metricIds.includes(recipe.denominatorId!))
+      throw Error('部分の割合に全体自身を指定できません');
+    if (recipe.method === 'composition') {
+      if (recipe.template !== 'stacked-bar' || !recipe.remainder?.id || !recipe.remainder.label?.trim() ||
+          source.metrics.some(metric => metric.id === recipe.remainder!.id) || recipe.metricIds.includes(denominator!.id))
+        throw Error('構成には独立した内訳・全体・残差と積み上げ図が必要です');
+      return finish(selectedAreas.flatMap(areaCode => years.flatMap(year => {
+        const values = metrics.map(metric => lookup(source.id, metric.id, areaCode, year)!.value);
+        const total = lookup(source.id, denominator!.id, areaCode, year)!.value;
+        if (total === null || total <= 0 || values.some(value => value === null))
+          throw Error(`構成図に欠測または0以下の分母があります: ${recipe.id}/${areaCode}/${year}`);
+        const sum = values.reduce<number>((sum, value) => sum + value!, 0);
+        if (values.some(value => value! < 0) || sum > total) throw Error('構成の部分が全体を超えるか負値です');
+        return [...metrics.map((metric, i) => ({ id: metric.id, label: metric.label, value: values[i]! })),
+          { ...recipe.remainder!, value: total - sum }].map(item => ({ analysisId: recipe.id, areaCode,
+          areaName: areas.get(areaCode)!, year, seriesId: item.id, seriesLabel: item.label, value: item.value / total * 100, unit: '％' }));
+      })));
+    }
     if (recipe.method === 'balance') {
       if (!recipe.balances?.length || new Set(recipe.balances.map(balance => balance.id)).size !== recipe.balances.length)
         throw Error('増減の組が空または重複しています');
@@ -196,6 +236,10 @@ export function describeAnalysis(recipe: AnalysisRecipe, rows: AnalysisResult[],
   const valid = rows.filter(row => row.value !== null);
   if (!valid.length) throw Error(`分析結果がありません: ${recipe.id}`);
   const format = (value: number) => value.toLocaleString('ja-JP', { maximumFractionDigits: 1 });
+  if (recipe.method === 'composition') {
+    const latest = Math.max(...rows.map(row => row.year));
+    return rows.filter(row => row.year === latest).map(row => `${row.areaName}・${row.seriesLabel} ${format(row.value!)}％`).join('、') + `（${latest}${yearSuffix}）。`;
+  }
   if (recipe.method === 'change') {
     const plus = valid.filter(row => row.value! > 0).length;
     const minus = valid.filter(row => row.value! < 0).length;
