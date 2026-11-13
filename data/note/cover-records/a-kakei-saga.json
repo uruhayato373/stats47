@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-saga",
+  "production": {
+    "id": "NCI-00093",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "佐賀県の家計\n住まいに注目",
+      "subline": "佐賀市・2024年\n二人以上の世帯",
+      "subject": "添付は佐賀県の主域輪郭を示す検証済みの参照画像で、編集対象ではない。1280×670相当の横長の完成カバーを新たに作る。右側に参照の県形を大きく、同じ北向き・縦横比・凹凸を忠実に維持して、濃紺または淡黄色の一枚の面と太い縁取りで主役にする。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けを一切加えない。生活の小物は輪郭と文字に重ならない右下に住人のいない小さな家の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影・頭・顔のような黒い形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、各行とも1280px換算で文字高65px以上を目安に大きくする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。 新版は輪郭の周囲と補足欄に余白を設け、背景の筆塗りを淡くし、県形・見出し・都市名を読み取りやすく配置する。",
+      "evidence": "https://note.com/stats47/n/n1972caf5203d 2026-10-15公開本文確認。佐賀市の2024年・二人以上の世帯。十大費目の住居は47市単純平均比0.55倍で最大の乖離。自動車購入は2.25倍だが住居を見出しに選ぶ。 比較の分母は家計調査の全国平均ではなく47県庁所在市の単純平均。カバーに倍率・順位・因果は載せず、費目への着目だけを示す。地図は佐賀県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は佐賀市であり県全域の観測図ではない。人物・キャラクターなし。 2026-10-23に公開APIの状態と都市名・対象年・世帯区分を照合。",
+      "dataScope": {
+        "place": "佐賀市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "177b07a81acebdd34b23c3f041f1a6a80022a7bf32d78e1631cd9ace5945bf7d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saga/revisions/177b07a81acebdd34b23c3f041f1a6a80022a7bf32d78e1631cd9ace5945bf7d.png"
+      },
+      "bytes": 72222,
+      "id": "177b07a81acebdd34b23c3f041f1a6a80022a7bf32d78e1631cd9ace5945bf7d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:13.897Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771678/rectangle_large_type_2_30358f64b03bfc366269671bb1223b90.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "177b07a81acebdd34b23c3f041f1a6a80022a7bf32d78e1631cd9ace5945bf7d"
+      }
+    },
+    {
+      "sha256": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saga/revisions/5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e.png"
+      },
+      "bytes": 115554,
+      "id": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:43.095Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6e280dc74a848fbdc840c65a3f53abd0676d29ef6575dcd069c73386dc2be3c0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/housing-expenditure-total/values.json",
+        "sourceSha256": "5d5e5bf90081c0d39a47f286cb71c2134fdff0c4142931100f0756859e788672"
+      }
+    },
+    {
+      "sha256": "9419ead2a80e18eef589bf17eed3e5ba7f5dcc6720f4c7e72088d503b1cd4fd3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saga/revisions/9419ead2a80e18eef589bf17eed3e5ba7f5dcc6720f4c7e72088d503b1cd4fd3.png"
+      },
+      "bytes": 104513,
+      "id": "9419ead2a80e18eef589bf17eed3e5ba7f5dcc6720f4c7e72088d503b1cd4fd3",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:21.022Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-saga/images/cover-1280x670.png",
+        "sourceSha256": "9419ead2a80e18eef589bf17eed3e5ba7f5dcc6720f4c7e72088d503b1cd4fd3"
+      }
+    },
+    {
+      "sha256": "3cc59c0f178a2d8fabb14d1eb29318bc5ed5e9784902d7fb00a31f603be65c8a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saga/revisions/3cc59c0f178a2d8fabb14d1eb29318bc5ed5e9784902d7fb00a31f603be65c8a.png"
+      },
+      "bytes": 73376,
+      "id": "3cc59c0f178a2d8fabb14d1eb29318bc5ed5e9784902d7fb00a31f603be65c8a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T06:11:55.294Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911247/rectangle_large_type_2_8c7579b0b3b860ad96b1fa5b9398abfb.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3cc59c0f178a2d8fabb14d1eb29318bc5ed5e9784902d7fb00a31f603be65c8a"
+      }
+    },
+    {
+      "sha256": "d477ffc1bc7668373f0181e3f3d2ff2855773bc7008c1b5f3cba57242d7748be",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saga/revisions/d477ffc1bc7668373f0181e3f3d2ff2855773bc7008c1b5f3cba57242d7748be.png"
+      },
+      "bytes": 1559045,
+      "id": "d477ffc1bc7668373f0181e3f3d2ff2855773bc7008c1b5f3cba57242d7748be",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T06:21:43.397Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "79699f292466c7b972f84775c989a914108ee6fa6b726cc61828f19cdec59a01"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00093: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T06:37:25.587Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "79699f292466c7b972f84775c989a914108ee6fa6b726cc61828f19cdec59a01",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-saga/inputs/79699f292466c7b972f84775c989a914108ee6fa6b726cc61828f19cdec59a01.json"
+          },
+          "bytes": 13173
+        },
+        "production": {
+          "id": "NCI-00093",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "76cdf43410c4196d3a63912d322e2743e121989ba02a98fa783e90c356bc813a"
+        }
+      }
+    },
+    {
+      "sha256": "36e69546f1491b500905235550f563ab2fd6ad9e5198fb46cf4ce2f5b7ef3e25",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saga/revisions/36e69546f1491b500905235550f563ab2fd6ad9e5198fb46cf4ce2f5b7ef3e25.png"
+      },
+      "bytes": 1526483,
+      "id": "36e69546f1491b500905235550f563ab2fd6ad9e5198fb46cf4ce2f5b7ef3e25",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-5400b7c7bdb9",
+      "createdAt": "2026-10-23T08:01:35.457Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "afaec0584551bdd414e952b02ea33a8b99b0c830b7913c4df5815feb4da3be07"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "佐賀県の輪郭、佐賀市・2024年・二人以上の世帯、住まいの題材を新旧比較。原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T08:04:50.623Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "afaec0584551bdd414e952b02ea33a8b99b0c830b7913c4df5815feb4da3be07",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-saga/inputs/afaec0584551bdd414e952b02ea33a8b99b0c830b7913c4df5815feb4da3be07.json"
+          },
+          "bytes": 13416
+        },
+        "production": {
+          "id": "NCI-00093",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "5400b7c7bdb9c90851c12021a1455dade3dbd4d2faafb95d9c4804e94b35b047"
+        }
+      }
+    }
+  ]
+}

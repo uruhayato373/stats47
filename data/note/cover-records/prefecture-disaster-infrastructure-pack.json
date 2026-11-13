@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "prefecture-disaster-infrastructure-pack",
+  "production": {
+    "id": "NCI-00363",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "防災・交通・インフラデータ集",
+      "subline": "47都道府県・230指標",
+      "subject": "防災・交通・インフラを調べる用途を、無地の資料ファイル、道路を示すシンプルな道、橋と水道管の抽象的なアイコンで表す。実際の危険区域や災害被害の地図、数値、グラフ、人物、実在UIは描かない。",
+      "evidence": "P-10 v4-20261024-mac-r2は47都道府県230指標のデータ集。実在するZIP7ファイルとprivate R2読み戻しSHAを確認。Office実機確認は未了。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f5a8d6aeb67da261ab7d460f37ff18ee526aee2e5a3b27175416644e3d9df26c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-disaster-infrastructure-pack/revisions/f5a8d6aeb67da261ab7d460f37ff18ee526aee2e5a3b27175416644e3d9df26c.png"
+      },
+      "bytes": 33543,
+      "id": "f5a8d6aeb67da261ab7d460f37ff18ee526aee2e5a3b27175416644e3d9df26c",
+      "kind": "candidate",
+      "version": "2026-10-12-packs",
+      "createdAt": "2026-10-12T07:11:14.880Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f30a72f8088efd3f97cef191ff10d977ae67708f70ee354f2d51d80686f2a557"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・指標数・パック実データの県別地図が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:11:43.154Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f30a72f8088efd3f97cef191ff10d977ae67708f70ee354f2d51d80686f2a557",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-disaster-infrastructure-pack/inputs/f30a72f8088efd3f97cef191ff10d977ae67708f70ee354f2d51d80686f2a557.json"
+          },
+          "bytes": 1200
+        }
+      }
+    },
+    {
+      "sha256": "0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-disaster-infrastructure-pack/revisions/0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821.png"
+      },
+      "bytes": 33509,
+      "id": "0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821",
+      "kind": "candidate",
+      "version": "2026-10-12-packs-r4",
+      "createdAt": "2026-10-12T07:46:32.498Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "26916e1625eb4f3af29580d47ef7d4fcc9c4071778b9d7b7edadb153319bbba0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "r4の指標数で作り直し。320px相当で見出し・指標数・パック実データの県別地図が読める。確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:46:58.465Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "26916e1625eb4f3af29580d47ef7d4fcc9c4071778b9d7b7edadb153319bbba0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-disaster-infrastructure-pack/inputs/26916e1625eb4f3af29580d47ef7d4fcc9c4071778b9d7b7edadb153319bbba0.json"
+          },
+          "bytes": 1200
+        }
+      }
+    },
+    {
+      "sha256": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-disaster-infrastructure-pack/revisions/6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36.png"
+      },
+      "bytes": 1965716,
+      "id": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-ffa3cf906f0d",
+      "createdAt": "2026-10-24T07:32:10.645Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1cfd1e9899ef672e056e10516d34ed8fb1a1ddc3f42b622cf99d7607583a7a5f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。道・橋・管と資料は本文の対象に整合し、危険区域地図・人物・実在UIなし。",
+        "reviewedAt": "2026-10-24T07:32:21.571Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1cfd1e9899ef672e056e10516d34ed8fb1a1ddc3f42b622cf99d7607583a7a5f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-disaster-infrastructure-pack/inputs/1cfd1e9899ef672e056e10516d34ed8fb1a1ddc3f42b622cf99d7607583a7a5f.json"
+          },
+          "bytes": 7155
+        },
+        "production": {
+          "id": "NCI-00363",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "ffa3cf906f0d6c90918cbab9d0ee16aed740821f891bbf19c958e192f4611385"
+        }
+      }
+    },
+    {
+      "sha256": "6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-disaster-infrastructure-pack/revisions/6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8.png"
+      },
+      "bytes": 451274,
+      "id": "6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-24T07:46:34.108Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/327904763/rectangle_large_type_2_9fee30f49a8956331f44c2f3ccfcf7ff.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8"
+      }
+    }
+  ]
+}

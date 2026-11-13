@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nded2d34fc978",
+  "production": {
+    "id": "NCI-00471",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "財政力と借金\n一緒に読み解く",
+      "subline": "2022年度・都道府県比較\n財政力指数と地方債現在高比率",
+      "subject": "統計解説の濃い緑とクリーム、少量の黄色。右側に同じ大きさの無文字の資料冊子2冊、片方は緑、片方はクリームを並べて描く。どちらかだけ大きくしたり高く積まない。書類は財政の異なる指標を合わせて読むための挿絵。表紙に字・数字・棒グラフ・円グラフ・通貨・印章・役所マークなし。天秤や紙幣を足さず、健全・破綻などの優劣を図示しない。横長1280×670相当、約1.91:1。濃紺の極太見出しを左から中央へ大きく2行で置く。補足の全行は画面下部の全幅の独立した太い帯へ置く。複数行の補足は横並びにせず同じ大きさで縦に積む。補足の文字は幅320pxで16px程度、1280pxで64px程度以上を目安に大きくする。補足は淡い色の帯に濃紺文字で高いコントラストを確保する。主見出しを少し小さくしてでも補足を読める大きさにする。カテゴリ名とstats47署名にも読める大きさの専用スペースを用意し、全ての文字を四辺から離す。指定外の文字・数字・URL・ロゴ・図表・地図を足さない。人物・顔・手・足・動物・キャラクター・マスコット・擬人化は一切禁止。余計な小物や植物を足さず背景は単純な紙の色面。",
+      "evidence": "https://note.com/stats47/n/nded2d34fc978 2026-10-15公開本文確認。2022年度の財政力指数と地方債現在高比率を都道府県別に比較する解説。借金総額と比率を混同せず、本文にある順位・数値・投資の原因や自治体の健全性の評価をカバーに追加しない。2冊は二つの指標を読む概念の挿絵。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6a4b12b060fff268bbe82c56058079b9d5881d919902aefec52375324b3e143d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/6a4b12b060fff268bbe82c56058079b9d5881d919902aefec52375324b3e143d.png"
+      },
+      "bytes": 55468,
+      "id": "6a4b12b060fff268bbe82c56058079b9d5881d919902aefec52375324b3e143d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:37.767Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/258719855/rectangle_large_type_2_8c546cf9990279564f0571a10bce093d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6a4b12b060fff268bbe82c56058079b9d5881d919902aefec52375324b3e143d"
+      }
+    },
+    {
+      "sha256": "ec1894d862ecfa3b96d2ea01f40de480ac9b7671dce9132e6d208b28dc41b71b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/ec1894d862ecfa3b96d2ea01f40de480ac9b7671dce9132e6d208b28dc41b71b.png"
+      },
+      "bytes": 121688,
+      "id": "ec1894d862ecfa3b96d2ea01f40de480ac9b7671dce9132e6d208b28dc41b71b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:08.285Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5811d162c1e4bd7ac9bd2c986052a48a891b1b5d962f8b1e8d30bf7e9e9472ed"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:36.849Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5811d162c1e4bd7ac9bd2c986052a48a891b1b5d962f8b1e8d30bf7e9e9472ed",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nded2d34fc978/inputs/5811d162c1e4bd7ac9bd2c986052a48a891b1b5d962f8b1e8d30bf7e9e9472ed.json"
+          },
+          "bytes": 1332
+        }
+      }
+    },
+    {
+      "sha256": "5f1a8d0fe37dd44a1c745538446eb0027181d8cafe2d8b8a3d8b08584b088110",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/5f1a8d0fe37dd44a1c745538446eb0027181d8cafe2d8b8a3d8b08584b088110.png"
+      },
+      "bytes": 89884,
+      "id": "5f1a8d0fe37dd44a1c745538446eb0027181d8cafe2d8b8a3d8b08584b088110",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:45.325Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302565/rectangle_large_type_2_4b50ca825a7a1fa08ab6deac9b84e225.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5f1a8d0fe37dd44a1c745538446eb0027181d8cafe2d8b8a3d8b08584b088110"
+      }
+    },
+    {
+      "sha256": "736467a0e365a8d9bd42c372dbee603afb190e9ebc5dfa59af94af0e6d8ced5e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/736467a0e365a8d9bd42c372dbee603afb190e9ebc5dfa59af94af0e6d8ced5e.png"
+      },
+      "bytes": 54564,
+      "id": "736467a0e365a8d9bd42c372dbee603afb190e9ebc5dfa59af94af0e6d8ced5e",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:09:46.011Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e704a9b7a514c2145a2dff17e4281792dad79d4deb743d747e9023e920b1213a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.035/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:11.521Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e704a9b7a514c2145a2dff17e4281792dad79d4deb743d747e9023e920b1213a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nded2d34fc978/inputs/e704a9b7a514c2145a2dff17e4281792dad79d4deb743d747e9023e920b1213a.json"
+          },
+          "bytes": 1332
+        }
+      }
+    },
+    {
+      "sha256": "b18cc24a9a6e79322ac321ef4fc926ef291c98e9cbcb8ff1f38e08b77eaeba41",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/b18cc24a9a6e79322ac321ef4fc926ef291c98e9cbcb8ff1f38e08b77eaeba41.png"
+      },
+      "bytes": 115637,
+      "id": "b18cc24a9a6e79322ac321ef4fc926ef291c98e9cbcb8ff1f38e08b77eaeba41",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:34:04.813Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2998cb5e48e66fd2eedbe218303b7729796203c23ea68244068b1af1b33c7c0f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.035/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:37:42.443Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2998cb5e48e66fd2eedbe218303b7729796203c23ea68244068b1af1b33c7c0f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nded2d34fc978/inputs/2998cb5e48e66fd2eedbe218303b7729796203c23ea68244068b1af1b33c7c0f.json"
+          },
+          "bytes": 1332
+        }
+      }
+    },
+    {
+      "sha256": "52c72b3e7551aca7f3640b5940a929fd1e64e4b175614a6bf57003824a57268f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/52c72b3e7551aca7f3640b5940a929fd1e64e4b175614a6bf57003824a57268f.png"
+      },
+      "bytes": 82894,
+      "id": "52c72b3e7551aca7f3640b5940a929fd1e64e4b175614a6bf57003824a57268f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T08:01:15.963Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323286850/rectangle_large_type_2_61b7455d19d609ed24f455c6bcf6d74c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "52c72b3e7551aca7f3640b5940a929fd1e64e4b175614a6bf57003824a57268f"
+      }
+    },
+    {
+      "sha256": "3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nded2d34fc978/revisions/3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519.png"
+      },
+      "bytes": 1596459,
+      "id": "3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519",
+      "kind": "candidate",
+      "version": "imagegen-explainer-palette-20261015",
+      "createdAt": "2026-10-15T08:02:15.187Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "050100a050a8e4fe39864db08d4b7fe29d8a9f61927e311f2824426f7f89b074"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00471: 統計解説4・配色5・データ整備1の原寸/320pxの指定全文・補足・人物なし・本文との一致とカテゴリ固有条件を個別確認済み。explainer。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 3441edded104e19d309d22bb4eff2da45f3a18d2c5e2d84f4d5d22cf6498d519。",
+        "reviewedAt": "2026-10-15T08:10:32.374Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "050100a050a8e4fe39864db08d4b7fe29d8a9f61927e311f2824426f7f89b074",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nded2d34fc978/inputs/050100a050a8e4fe39864db08d4b7fe29d8a9f61927e311f2824426f7f89b074.json"
+          },
+          "bytes": 12046
+        },
+        "production": {
+          "id": "NCI-00471",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "f27c18bf8cde1d889c63c08e60194c0e24ddd9cbe18da4dc54b098a18a713c67"
+        }
+      }
+    }
+  ]
+}

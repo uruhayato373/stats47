@@ -5,7 +5,7 @@ import { configDefaults, defineConfig } from 'vitest/config';
 import {
   DETERMINISTIC_RENDER_ENV,
   renderTestExcludes,
-} from './src/shared/__tests__/helpers/render-test-contract';
+} from './src/shared/__tests__/helpers/render-test-contract.mts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a34",
+  "production": {
+    "id": "NCI-00216",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "魚介類の購入量\n1位は青森市",
+      "subline": "47市を比較",
+      "subject": "氷を敷いた木箱に、魚の切り身と貝だけを盛って大きく描く。えび・かに・魚の頭や目など、生き物の顔が分かるものは描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n019faad2cc71 本文確認2026-11-04。生鮮魚介の購入量は青森市が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a34/revisions/c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f.png"
+      },
+      "bytes": 39609,
+      "id": "c903988a3d234e767181dd220dd0366df5c74b5679b21ef82815f5f538c3249f",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:21.787Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3e60f94640d554eb3f35b7813e43f958cbcb3d9cf2ab17865351a607dbf41636"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:45.544Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3e60f94640d554eb3f35b7813e43f958cbcb3d9cf2ab17865351a607dbf41636",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a34/inputs/3e60f94640d554eb3f35b7813e43f958cbcb3d9cf2ab17865351a607dbf41636.json"
+          },
+          "bytes": 1322
+        }
+      }
+    },
+    {
+      "sha256": "0b34a06a696bb2bf6eb53c9ec489983c709ea512cda79e349d2e3c592a95c0e5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a34/revisions/0b34a06a696bb2bf6eb53c9ec489983c709ea512cda79e349d2e3c592a95c0e5.png"
+      },
+      "bytes": 67441,
+      "id": "0b34a06a696bb2bf6eb53c9ec489983c709ea512cda79e349d2e3c592a95c0e5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:04.407Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324177797/rectangle_large_type_2_9518772cb1e74acd270dcba5c32451cd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0b34a06a696bb2bf6eb53c9ec489983c709ea512cda79e349d2e3c592a95c0e5"
+      }
+    },
+    {
+      "sha256": "f4b6ddb8af3f401dc6d8317e732e736351d934c01533bfddc636896440f36b72",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a34/revisions/f4b6ddb8af3f401dc6d8317e732e736351d934c01533bfddc636896440f36b72.png"
+      },
+      "bytes": 1971826,
+      "id": "f4b6ddb8af3f401dc6d8317e732e736351d934c01533bfddc636896440f36b72",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-2400d5e244d3",
+      "createdAt": "2026-11-04T02:23:31.122Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ae9e2a60d90fbc375b40fe0085f1836d6ed2e9167d0c9548396a59de20c09141"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:24:04.845Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ae9e2a60d90fbc375b40fe0085f1836d6ed2e9167d0c9548396a59de20c09141",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a34/inputs/ae9e2a60d90fbc375b40fe0085f1836d6ed2e9167d0c9548396a59de20c09141.json"
+          },
+          "bytes": 8169
+        },
+        "production": {
+          "id": "NCI-00216",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "2400d5e244d348ed7e3476e2789548b01eeea90c9fb95725504cfc280441476f"
+        }
+      }
+    }
+  ]
+}

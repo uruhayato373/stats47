@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * GA4 `affiliate_vertical` に **広告自身の意図軸** を送ることを機械強制する契約テスト。
  *

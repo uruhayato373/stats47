@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "excel-gap-timeseries-analysis",
+  "production": {
+    "id": "NCI-00272",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

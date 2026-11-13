@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-health",
+  "production": {
+    "id": "NCI-00512",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "歯医者の多い県は\n歯科にお金を使う？",
+      "subline": "5年平均で確かめる",
+      "subject": "白い歯の模型と歯ブラシ、小さな手鏡を並べる。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。道具や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。歯科診療所の数と歯科診療代の相関は0.28、東京都を除くと0.13で関係はほとんど見えない。1年の順位は振れが大きいので5年平均で比べる記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-health/revisions/bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7.png"
+      },
+      "bytes": 2012712,
+      "id": "bd7d6622b494f1284ba53ce9959e9fb665498a1bf1871f3712da543fe880b4b7",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-203a0d286444",
+      "createdAt": "2026-11-04T23:08:51.892Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "dca58414377b7c86e514c75377f13ebc1931d9ced0d33e7c83b77ccfc7ceddc7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:08:55.852Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "dca58414377b7c86e514c75377f13ebc1931d9ced0d33e7c83b77ccfc7ceddc7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-health/inputs/dca58414377b7c86e514c75377f13ebc1931d9ced0d33e7c83b77ccfc7ceddc7.json"
+          },
+          "bytes": 8512
+        },
+        "production": {
+          "id": "NCI-00512",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "203a0d286444cd464c81061ba3c17ed3fc74759c14720f848d1ed1069e7674ae"
+        }
+      }
+    },
+    {
+      "sha256": "0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-health/revisions/0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2.png"
+      },
+      "bytes": 543753,
+      "id": "0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T00:40:42.010Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332371857/rectangle_large_type_2_6bbfb967fbdd04d21545d59016220bcf.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0813d15b63a07c747136a394a93bd0229ef7e5a88227bdba587f51fc507793a2"
+      }
+    }
+  ]
+}

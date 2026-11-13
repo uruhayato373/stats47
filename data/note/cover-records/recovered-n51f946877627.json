@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n51f946877627",
+  "production": {
+    "id": "NCI-00417",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "遊園地などの訪問\n1位は愛知県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の観覧車と水族館の外観を小さく組み合わせる。施設名やロゴは描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n51f946877627 2026-10-23公開API本文照合。記事題名「【2021年版】遊園地・動植物園・水族館をした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「10歳以上」「2021」を確認。カバーは主題、対象年齢、掲載順位のみ示し、因果・実績・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "9739b6cce9ae707fea2a0bea139f811b22e004a34f4afb6217d7ad5451e652a8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n51f946877627/revisions/9739b6cce9ae707fea2a0bea139f811b22e004a34f4afb6217d7ad5451e652a8.png"
+      },
+      "bytes": 31449,
+      "id": "9739b6cce9ae707fea2a0bea139f811b22e004a34f4afb6217d7ad5451e652a8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:07.343Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774016/rectangle_large_type_2_9a2e69d85bd172915da055a0abfbce14.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9739b6cce9ae707fea2a0bea139f811b22e004a34f4afb6217d7ad5451e652a8"
+      }
+    },
+    {
+      "sha256": "0537fd1d131e32d7d5c3339552c5e4c508e7ffadb04405eacf4792b54e8d62ca",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n51f946877627/revisions/0537fd1d131e32d7d5c3339552c5e4c508e7ffadb04405eacf4792b54e8d62ca.png"
+      },
+      "bytes": 127510,
+      "id": "0537fd1d131e32d7d5c3339552c5e4c508e7ffadb04405eacf4792b54e8d62ca",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:17.410Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5ae852cfd3d7053e5c1dc88f86219906bb8924e4c735ff892910527e2772b4a1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-theme-parks/values.json",
+        "sourceSha256": "a612dcbe35b975e40716349d3aaf3ad910d77f193249f990cc5758d7c679cd68",
+        "input": {
+          "sha256": "5ae852cfd3d7053e5c1dc88f86219906bb8924e4c735ff892910527e2772b4a1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n51f946877627/inputs/5ae852cfd3d7053e5c1dc88f86219906bb8924e4c735ff892910527e2772b4a1.json"
+          },
+          "bytes": 6692
+        }
+      }
+    },
+    {
+      "sha256": "fcc3981f13c8d617cb99f4c6893db0d7afd5a3395267dd01374c56bf821acb22",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n51f946877627/revisions/fcc3981f13c8d617cb99f4c6893db0d7afd5a3395267dd01374c56bf821acb22.png"
+      },
+      "bytes": 1844029,
+      "id": "fcc3981f13c8d617cb99f4c6893db0d7afd5a3395267dd01374c56bf821acb22",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-c6b6a086c618",
+      "createdAt": "2026-10-23T12:08:20.557Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c65b863de5c8b229f89155e86610adc9525c9a9d547a3bbaac5f25fedee6aa80"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:12:10.164Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c65b863de5c8b229f89155e86610adc9525c9a9d547a3bbaac5f25fedee6aa80",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n51f946877627/inputs/c65b863de5c8b229f89155e86610adc9525c9a9d547a3bbaac5f25fedee6aa80.json"
+          },
+          "bytes": 8844
+        },
+        "production": {
+          "id": "NCI-00417",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "c6b6a086c61830839096b332f23a97fae8e95af5b480a1bcf8d58f00e77c1dbc"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-tokushima",
+  "production": {
+    "id": "NCI-00099",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "徳島県の家計\n教育費に注目",
+      "subline": "徳島市・2024年\n二人以上の世帯",
+      "subject": "添付は徳島県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。小物は無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/ne2abc0fc7530 2026-10-23公開API本文照合。徳島市の2024年・二人以上の世帯の家計調査。教育1.47倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は徳島県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は徳島市であり県全域の観測図ではない。",
+      "dataScope": {
+        "place": "徳島市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "fa931b7ba34117f77ca1a9c18042beaa0fe3270a4450ff7b253672c17ef88ace",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/fa931b7ba34117f77ca1a9c18042beaa0fe3270a4450ff7b253672c17ef88ace.png"
+      },
+      "bytes": 43312,
+      "id": "fa931b7ba34117f77ca1a9c18042beaa0fe3270a4450ff7b253672c17ef88ace",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:16.966Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771883/rectangle_large_type_2_66607b56a57dcb850e19d8bb5fed1c9f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fa931b7ba34117f77ca1a9c18042beaa0fe3270a4450ff7b253672c17ef88ace"
+      }
+    },
+    {
+      "sha256": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3.png"
+      },
+      "bytes": 102753,
+      "id": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:58.210Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c017d136ab5781bf9aeabb7269709ef811c2d7393db4da594cb0bb93a586b2e4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "6383790a59112f22b8f631e1f38bbc53df4cc4ffd29ff1c0de579c0e4e161ded",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/6383790a59112f22b8f631e1f38bbc53df4cc4ffd29ff1c0de579c0e4e161ded.png"
+      },
+      "bytes": 97147,
+      "id": "6383790a59112f22b8f631e1f38bbc53df4cc4ffd29ff1c0de579c0e4e161ded",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:35.283Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-tokushima/images/cover-1280x670.png",
+        "sourceSha256": "6383790a59112f22b8f631e1f38bbc53df4cc4ffd29ff1c0de579c0e4e161ded"
+      }
+    },
+    {
+      "sha256": "8e15f53fbeae522ec77a722d620bf0bdb822b5def7c53a11b28ee2ab09cc0fd5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/8e15f53fbeae522ec77a722d620bf0bdb822b5def7c53a11b28ee2ab09cc0fd5.png"
+      },
+      "bytes": 38090,
+      "id": "8e15f53fbeae522ec77a722d620bf0bdb822b5def7c53a11b28ee2ab09cc0fd5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:03.954Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911398/rectangle_large_type_2_6300531524e8f1c1b929f3b986739b12.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8e15f53fbeae522ec77a722d620bf0bdb822b5def7c53a11b28ee2ab09cc0fd5"
+      }
+    },
+    {
+      "sha256": "89a9768d696cdf0b376c64b13a2e705c9ed3b77837dcced5d39ed97d76eb0ad4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/89a9768d696cdf0b376c64b13a2e705c9ed3b77837dcced5d39ed97d76eb0ad4.png"
+      },
+      "bytes": 1792069,
+      "id": "89a9768d696cdf0b376c64b13a2e705c9ed3b77837dcced5d39ed97d76eb0ad4",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:11:17.547Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "016ae23e693d6bb95be5b6ff939e8caa7f24a60788fbf95d26efd0f89da0d6f7"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "016ae23e693d6bb95be5b6ff939e8caa7f24a60788fbf95d26efd0f89da0d6f7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokushima/inputs/016ae23e693d6bb95be5b6ff939e8caa7f24a60788fbf95d26efd0f89da0d6f7.json"
+          },
+          "bytes": 9765
+        },
+        "production": {
+          "id": "NCI-00099",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "6c61de25a662e47b711445d2c63c477c4e0aa8a25d380c54367fb8b678f72a83"
+        }
+      }
+    },
+    {
+      "sha256": "c9a18919795d049541f5a41953f95a8bbe45d40cd03df0b4b617ae9e2a35e79b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/c9a18919795d049541f5a41953f95a8bbe45d40cd03df0b4b617ae9e2a35e79b.png"
+      },
+      "bytes": 1401820,
+      "id": "c9a18919795d049541f5a41953f95a8bbe45d40cd03df0b4b617ae9e2a35e79b",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:46:28.474Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "10b3e5464f7b32097c871f0a7ca79e491a667649c96b9a4f023a0673374757a2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00099: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:56:17.882Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "10b3e5464f7b32097c871f0a7ca79e491a667649c96b9a4f023a0673374757a2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokushima/inputs/10b3e5464f7b32097c871f0a7ca79e491a667649c96b9a4f023a0673374757a2.json"
+          },
+          "bytes": 12174
+        },
+        "production": {
+          "id": "NCI-00099",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "14c9b0154d4ce33974f4647c84eda331776c02cd29b1825ec23feda5692da1fe"
+        }
+      }
+    },
+    {
+      "sha256": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokushima/revisions/24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0.png"
+      },
+      "bytes": 1549005,
+      "id": "24e8324d1d40eafe2c28f6259d0e5d08b78953ea464da1652352168f54466db0",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-3559935f2419",
+      "createdAt": "2026-10-23T10:41:15.453Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3d590194b6fc1a638ae43f3c10f200e5acbfaa67ddb0acb6b6bfe7537b0e1c3b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の徳島市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:43:42.343Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3d590194b6fc1a638ae43f3c10f200e5acbfaa67ddb0acb6b6bfe7537b0e1c3b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokushima/inputs/3d590194b6fc1a638ae43f3c10f200e5acbfaa67ddb0acb6b6bfe7537b0e1c3b.json"
+          },
+          "bytes": 12484
+        },
+        "production": {
+          "id": "NCI-00099",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "3559935f24199ac5db4fcb908ada52b6a1084b18c6b622889c10ec8079e6268a"
+        }
+      }
+    }
+  ]
+}

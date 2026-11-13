@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-kochi",
+  "production": {
+    "id": "NCI-00079",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "高知県の家計\n住まいに注目",
+      "subline": "高知市・2024年\n二人以上の世帯",
+      "subject": "添付は高知県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n29417de32c83 2026-10-23公開API本文照合。高知市の2024年・二人以上の世帯の家計調査。住居1.39倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は高知県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は高知市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "高知市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "fb223fddf481b0f73d27fab9e9faaedca77d8d81e6cbf932b32e1157fb2b80c8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kochi/revisions/fb223fddf481b0f73d27fab9e9faaedca77d8d81e6cbf932b32e1157fb2b80c8.png"
+      },
+      "bytes": 86776,
+      "id": "fb223fddf481b0f73d27fab9e9faaedca77d8d81e6cbf932b32e1157fb2b80c8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:05.826Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771432/rectangle_large_type_2_f00e8c59055bebdd55cd6be352681040.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fb223fddf481b0f73d27fab9e9faaedca77d8d81e6cbf932b32e1157fb2b80c8"
+      }
+    },
+    {
+      "sha256": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kochi/revisions/477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9.png"
+      },
+      "bytes": 101459,
+      "id": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:17.667Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a6ae292353b84b4d25198b0c88d6e56da32ed8db40e0a58d40c0edeb49a83366"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/housing-expenditure-total/values.json",
+        "sourceSha256": "5d5e5bf90081c0d39a47f286cb71c2134fdff0c4142931100f0756859e788672"
+      }
+    },
+    {
+      "sha256": "7fe3363ffba47c22d61fdc35894a3def88189d88225e564bbc26e623e44171fc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kochi/revisions/7fe3363ffba47c22d61fdc35894a3def88189d88225e564bbc26e623e44171fc.png"
+      },
+      "bytes": 98227,
+      "id": "7fe3363ffba47c22d61fdc35894a3def88189d88225e564bbc26e623e44171fc",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:49.170Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-kochi/images/cover-1280x670.png",
+        "sourceSha256": "7fe3363ffba47c22d61fdc35894a3def88189d88225e564bbc26e623e44171fc"
+      }
+    },
+    {
+      "sha256": "7860835edcac0cbef42c5d87cd7dd4af62719576ab1c699144c5a0ab0c6411fb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kochi/revisions/7860835edcac0cbef42c5d87cd7dd4af62719576ab1c699144c5a0ab0c6411fb.png"
+      },
+      "bytes": 64983,
+      "id": "7860835edcac0cbef42c5d87cd7dd4af62719576ab1c699144c5a0ab0c6411fb",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:13.128Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319910128/rectangle_large_type_2_6a0fb7d57f4be391935e9e641e5ba2b3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7860835edcac0cbef42c5d87cd7dd4af62719576ab1c699144c5a0ab0c6411fb"
+      }
+    },
+    {
+      "sha256": "9ab9065916db5a02a89f765496f4aaafde05070c8ea33e970e7126acb298c26f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kochi/revisions/9ab9065916db5a02a89f765496f4aaafde05070c8ea33e970e7126acb298c26f.png"
+      },
+      "bytes": 1881260,
+      "id": "9ab9065916db5a02a89f765496f4aaafde05070c8ea33e970e7126acb298c26f",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:13:32.982Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "71d0b00c6922a63843fae5d9471789845167fb8dc37e8f3edf03763896fd9ffe"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:28:40.374Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "71d0b00c6922a63843fae5d9471789845167fb8dc37e8f3edf03763896fd9ffe",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kochi/inputs/71d0b00c6922a63843fae5d9471789845167fb8dc37e8f3edf03763896fd9ffe.json"
+          },
+          "bytes": 9484
+        },
+        "production": {
+          "id": "NCI-00079",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "05ee4f6d5c52a43c48143dc9b9fbeeef0c595c18cb942fa6b0ef8f10a03dc0df"
+        }
+      }
+    },
+    {
+      "sha256": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kochi/revisions/dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5.png"
+      },
+      "bytes": 1475435,
+      "id": "dfe2542cd580224258f017ba76128c6c4915f2597c49a3252630b5ebe9f5b5b5",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-906d7e1f4664",
+      "createdAt": "2026-10-23T09:01:52.832Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5d3bce018f51bce45447d717fc85e97843e47734d6451e1f3f434a922a2fcf16"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "高知県の主域輪郭と高知市・2024年・二人以上の世帯、住まいと無人の家を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+        "reviewedAt": "2026-10-23T09:04:46.731Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5d3bce018f51bce45447d717fc85e97843e47734d6451e1f3f434a922a2fcf16",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kochi/inputs/5d3bce018f51bce45447d717fc85e97843e47734d6451e1f3f434a922a2fcf16.json"
+          },
+          "bytes": 12894
+        },
+        "production": {
+          "id": "NCI-00079",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "906d7e1f466485730fbfe7164143b23545927eb7328e70923fb5d0944616bd40"
+        }
+      }
+    }
+  ]
+}

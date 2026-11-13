@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { expect, it } from 'vitest';
 
 import { buildGeoSnowMapModel } from '../build-geo-snow-map-model';

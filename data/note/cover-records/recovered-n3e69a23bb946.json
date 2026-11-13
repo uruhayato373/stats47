@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n3e69a23bb946",
+  "production": {
+    "id": "NCI-00409",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "バスケットボール\n1位は秋田県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の体育館のコートと無地のバスケットボール・ゴールを描く。選手・人・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n3e69a23bb946 2026-10-23公開API本文照合。記事題名「【2021年版】バスケットボールをした人が多い県は？ 1位は秋田県｜都道府県ランキング」。本文中の「秋田県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a61a57e2e2863ed2cb23cadd2227b51bcb8ae21903731f15cad8184ae419ec19",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3e69a23bb946/revisions/a61a57e2e2863ed2cb23cadd2227b51bcb8ae21903731f15cad8184ae419ec19.png"
+      },
+      "bytes": 94452,
+      "id": "a61a57e2e2863ed2cb23cadd2227b51bcb8ae21903731f15cad8184ae419ec19",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:02.672Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773927/rectangle_large_type_2_0ba0107d0b72e5a2d5d7d3a1194347d3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a61a57e2e2863ed2cb23cadd2227b51bcb8ae21903731f15cad8184ae419ec19"
+      }
+    },
+    {
+      "sha256": "a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3e69a23bb946/revisions/a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e.png"
+      },
+      "bytes": 117813,
+      "id": "a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:03.589Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e70f25f6c5afd35422d8203238b79f648369b1d7d98c34c28e4fe3f2f634c3d6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-basketball/values.json",
+        "sourceSha256": "6e06ad622beac50addff1ce4b06d57528614f16ad612c8f63699acf0db8affe6",
+        "input": {
+          "sha256": "e70f25f6c5afd35422d8203238b79f648369b1d7d98c34c28e4fe3f2f634c3d6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n3e69a23bb946/inputs/e70f25f6c5afd35422d8203238b79f648369b1d7d98c34c28e4fe3f2f634c3d6.json"
+          },
+          "bytes": 6587
+        }
+      }
+    },
+    {
+      "sha256": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3e69a23bb946/revisions/771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7.png"
+      },
+      "bytes": 1908479,
+      "id": "771ae32e6241c194b0d20353e71ca76616a8249961bb97d7dbfad305866b21e7",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-e6dbdb177a9c",
+      "createdAt": "2026-10-23T14:38:15.120Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e77182b2131aff49d838ba25d45b1a2e718a13fd4fbe82ede722c2047ee80f9a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:40:18.321Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e77182b2131aff49d838ba25d45b1a2e718a13fd4fbe82ede722c2047ee80f9a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n3e69a23bb946/inputs/e77182b2131aff49d838ba25d45b1a2e718a13fd4fbe82ede722c2047ee80f9a.json"
+          },
+          "bytes": 8830
+        },
+        "production": {
+          "id": "NCI-00409",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "e6dbdb177a9ccd4d0daaad6a9af50942bd70cf501500b29e284b82368df2599c"
+        }
+      }
+    }
+  ]
+}

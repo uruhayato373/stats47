@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a05",
+  "production": {
+    "id": "NCI-00145",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "世帯年収1位は\n神奈川県",
+      "subline": "47都道府県を比較\n2019年の統計",
+      "subject": "無文字の家計簿ノート、がま口財布、ペンを机に置いて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n461e0a05a314 本文確認2026-11-04。2019年の1世帯当たり年間収入。神奈川県が1位の6,220千円、沖縄県が最下位。子育て世帯に限らない世帯の平均。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a05/revisions/881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a.png"
+      },
+      "bytes": 36322,
+      "id": "881f16a47346942e6165e1dd666a3fbd0e861e9212860894b99689c033dfcf5a",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:20.946Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e9326706ae067df3b4e90493459f58e7e0326eab9f5198b1c4a95adc75788de2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:01.505Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e9326706ae067df3b4e90493459f58e7e0326eab9f5198b1c4a95adc75788de2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a05/inputs/e9326706ae067df3b4e90493459f58e7e0326eab9f5198b1c4a95adc75788de2.json"
+          },
+          "bytes": 1318
+        }
+      }
+    },
+    {
+      "sha256": "b2bbf8d84b6bdda386e9a0bb05e8d8337ef418b9beef398e5aad35c94f1d72d6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a05/revisions/b2bbf8d84b6bdda386e9a0bb05e8d8337ef418b9beef398e5aad35c94f1d72d6.png"
+      },
+      "bytes": 63730,
+      "id": "b2bbf8d84b6bdda386e9a0bb05e8d8337ef418b9beef398e5aad35c94f1d72d6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:33.439Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324042790/rectangle_large_type_2_926fdef0142dd0ae844bee0010b31603.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b2bbf8d84b6bdda386e9a0bb05e8d8337ef418b9beef398e5aad35c94f1d72d6"
+      }
+    },
+    {
+      "sha256": "fac39cd0caf30af8489af8baf728d00c5627dde695b2af8e0a03023c87050c44",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a05/revisions/fac39cd0caf30af8489af8baf728d00c5627dde695b2af8e0a03023c87050c44.png"
+      },
+      "bytes": 1871633,
+      "id": "fac39cd0caf30af8489af8baf728d00c5627dde695b2af8e0a03023c87050c44",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-cf244ffc0fdd",
+      "createdAt": "2026-11-03T23:14:07.081Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2c081b4d48417bbcd02e4a5d2fec2de50b6450b3e680331103991693049d9661"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:07.129Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2c081b4d48417bbcd02e4a5d2fec2de50b6450b3e680331103991693049d9661",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a05/inputs/2c081b4d48417bbcd02e4a5d2fec2de50b6450b3e680331103991693049d9661.json"
+          },
+          "bytes": 8178
+        },
+        "production": {
+          "id": "NCI-00145",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "cf244ffc0fddab84712c03a3536c4485ab453e115d81a63a27ff20bed72eb328"
+        }
+      }
+    }
+  ]
+}

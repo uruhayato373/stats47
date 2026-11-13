@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "c-engel-food-gap",
+  "production": {
+    "id": "NCI-00235",
+    "policyId": "NCP-004",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "食費の割合\n地域でどう違う？",
+      "subline": "エンゲル係数を比較\n2024年・二人以上の世帯",
+      "subject": "紫と明るい黄色。大きな料理の載った食卓の皿と、買い物レシートを挟んだ無文字の財布を右側に二つの題材として描く。食材はパンと野菜など身近な少数。レシートは完全な白紙で、数字や文字やグラフを描かない。地域による貧富や料理の豪華さを比較しない。人物、地図、データ図は描かない。",
+      "evidence": "https://note.com/stats47/n/n28d03969fa6d 2026-10-15公開本文確認。2024年家計調査の二人以上世帯の食料費割合の地域差を扱う。本文に混在する2025年全国速報値や28.6%を2024年地域比較と混同しないため、カバーは数値を載せず年と世帯範囲を明記する。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "cb33b1f5b11ab59bd59616fc5537a7287923c2d29c941ef02222c4230410a9df",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-engel-food-gap/revisions/cb33b1f5b11ab59bd59616fc5537a7287923c2d29c941ef02222c4230410a9df.png"
+      },
+      "bytes": 46438,
+      "id": "cb33b1f5b11ab59bd59616fc5537a7287923c2d29c941ef02222c4230410a9df",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:15.770Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9a6dbc7f151d283fc7388d1e53ebbb0220b4b23b68b4e93b09c3b757cbb7555d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:27.873Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9a6dbc7f151d283fc7388d1e53ebbb0220b4b23b68b4e93b09c3b757cbb7555d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/c-engel-food-gap/inputs/9a6dbc7f151d283fc7388d1e53ebbb0220b4b23b68b4e93b09c3b757cbb7555d.json"
+          },
+          "bytes": 1243
+        }
+      }
+    },
+    {
+      "sha256": "e3320fefb33e3907a19504bcd89da4f628eff698c07c5160bfede559441a704a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-engel-food-gap/revisions/e3320fefb33e3907a19504bcd89da4f628eff698c07c5160bfede559441a704a.png"
+      },
+      "bytes": 85302,
+      "id": "e3320fefb33e3907a19504bcd89da4f628eff698c07c5160bfede559441a704a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T01:14:36.770Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323542726/rectangle_large_type_2_7db5762e7e30be8aa71c6735ca77a249.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e3320fefb33e3907a19504bcd89da4f628eff698c07c5160bfede559441a704a"
+      }
+    },
+    {
+      "sha256": "672af409274f23b706eb0d55e0857a9037fc2b814250ac19c4814bc90ead6193",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-engel-food-gap/revisions/672af409274f23b706eb0d55e0857a9037fc2b814250ac19c4814bc90ead6193.png"
+      },
+      "bytes": 1990140,
+      "id": "672af409274f23b706eb0d55e0857a9037fc2b814250ac19c4814bc90ead6193",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-third-six-20261015",
+      "createdAt": "2026-10-15T01:24:30.028Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "02caf82713d5c6920203b96bbe5c69984d9772491ecc53f2b93534491fa951cb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・320pxで掲載全文と補足文の可読性、切れ・重なり・追加文字を確認済み。管理画面の修正前後比較を提示し、2026-10-15にユーザーがこの6件の反映を指示。",
+        "reviewedAt": "2026-10-15T01:44:42.331Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "02caf82713d5c6920203b96bbe5c69984d9772491ecc53f2b93534491fa951cb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/c-engel-food-gap/inputs/02caf82713d5c6920203b96bbe5c69984d9772491ecc53f2b93534491fa951cb.json"
+          },
+          "bytes": 8083
+        },
+        "production": {
+          "id": "NCI-00235",
+          "policyId": "NCP-004",
+          "policyVersion": 2,
+          "planSha256": "eef84f7fed7f94084aeb25d599fde16a9d55d7f33e4b4f0ec6dd5178caa9bb1f"
+        }
+      }
+    }
+  ]
+}

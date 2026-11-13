@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n5ddcfb6bf233",
+  "production": {
+    "id": "NCI-00427",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "書道をした人\n1位は佐賀県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の白紙と筆、墨のすずりを描く。人・手・書かれた漢字は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n5ddcfb6bf233 2026-10-23公開API本文照合。記事題名「【2021年版】書道をした人が多い県は？ 1位は佐賀県｜都道府県ランキング」。本文中の「佐賀県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d55a4d31fa0a9a0140e5907bcdb6dae5d94cc1398c86ab77b4a7caafc51d442b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n5ddcfb6bf233/revisions/d55a4d31fa0a9a0140e5907bcdb6dae5d94cc1398c86ab77b4a7caafc51d442b.png"
+      },
+      "bytes": 36595,
+      "id": "d55a4d31fa0a9a0140e5907bcdb6dae5d94cc1398c86ab77b4a7caafc51d442b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:13.501Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774202/rectangle_large_type_2_918d90c5f4124078f8b9804b20ec52e3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d55a4d31fa0a9a0140e5907bcdb6dae5d94cc1398c86ab77b4a7caafc51d442b"
+      }
+    },
+    {
+      "sha256": "c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n5ddcfb6bf233/revisions/c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1.png"
+      },
+      "bytes": 110839,
+      "id": "c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:47.626Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "af828a0c39b85b3c7af1b8a510e4433b23c4e2fc7d0bb1c88a51f7cfcc07f1bb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-calligraphy/values.json",
+        "sourceSha256": "52ab7efd809e60051d0b68c281cc893c0fa7c76c23baaf8efcf19a1c77700ce6",
+        "input": {
+          "sha256": "af828a0c39b85b3c7af1b8a510e4433b23c4e2fc7d0bb1c88a51f7cfcc07f1bb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n5ddcfb6bf233/inputs/af828a0c39b85b3c7af1b8a510e4433b23c4e2fc7d0bb1c88a51f7cfcc07f1bb.json"
+          },
+          "bytes": 6491
+        }
+      }
+    },
+    {
+      "sha256": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n5ddcfb6bf233/revisions/b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a.png"
+      },
+      "bytes": 1799482,
+      "id": "b7f2474cf6abaf3e58bac880e595c2f4c35bbd2155d41fcd7153798a7468b85a",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-bc3d12873c84",
+      "createdAt": "2026-10-23T14:08:18.502Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "677e38288206450f3654522c0ae879e6b27e7e752f6b253921b0a120539ecebf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:09:59.146Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "677e38288206450f3654522c0ae879e6b27e7e752f6b253921b0a120539ecebf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n5ddcfb6bf233/inputs/677e38288206450f3654522c0ae879e6b27e7e752f6b253921b0a120539ecebf.json"
+          },
+          "bytes": 8668
+        },
+        "production": {
+          "id": "NCI-00427",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "bc3d12873c8402573780abf80bb9bf5814cbf59914a6e2d4f8e0ca3f0408ddf6"
+        }
+      }
+    }
+  ]
+}

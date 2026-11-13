@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-neecba2a1752d",
+  "production": {
+    "id": "NCI-00342",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "有効求人倍率\n福井県と神奈川県",
+      "subline": "2022年度・求人と求職の比",
+      "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の求人票ファイル2冊と無地の事務用トレー。人物・就職率や失業率の数値・架空グラフを描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/neecba2a1752d 2026-10-24公開API本文照合。記事題名「有効求人倍率、1位福井県と最下位神奈川県で2.2倍の格差！偏差値で見る雇用環境の地域差」。本文中の 2022年度、有効求人倍率、福井県、神奈川県、1.94倍、0.88倍 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d43a16f58e03e8c2ab29c091cf05103fde54933e30da86858d6d14de589f5519",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/d43a16f58e03e8c2ab29c091cf05103fde54933e30da86858d6d14de589f5519.png"
+      },
+      "bytes": 32551,
+      "id": "d43a16f58e03e8c2ab29c091cf05103fde54933e30da86858d6d14de589f5519",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:40.442Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773405/rectangle_large_type_2_9f9388a569210593478336683c765a99.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d43a16f58e03e8c2ab29c091cf05103fde54933e30da86858d6d14de589f5519"
+      }
+    },
+    {
+      "sha256": "ea5d277bb41a3ee1d77c4a6059814d23ee0484adb242f06e14e76dec5ea28234",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/ea5d277bb41a3ee1d77c4a6059814d23ee0484adb242f06e14e76dec5ea28234.png"
+      },
+      "bytes": 96873,
+      "id": "ea5d277bb41a3ee1d77c4a6059814d23ee0484adb242f06e14e76dec5ea28234",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:41:27.019Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c8ccc26c8b05a86fd2102272b843d6da2056fdfdcdddbeac45daf1531d1085b0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:49:30.096Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c8ccc26c8b05a86fd2102272b843d6da2056fdfdcdddbeac45daf1531d1085b0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-neecba2a1752d/inputs/c8ccc26c8b05a86fd2102272b843d6da2056fdfdcdddbeac45daf1531d1085b0.json"
+          },
+          "bytes": 1335
+        }
+      }
+    },
+    {
+      "sha256": "027f0ce3e99886a97391d0a5dcaf231f203a58b8401c63b45fedbd135e24a737",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/027f0ce3e99886a97391d0a5dcaf231f203a58b8401c63b45fedbd135e24a737.png"
+      },
+      "bytes": 70806,
+      "id": "027f0ce3e99886a97391d0a5dcaf231f203a58b8401c63b45fedbd135e24a737",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:23.875Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320256685/rectangle_large_type_2_238ff9e68ee9d6e75798de1f05ae7539.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "027f0ce3e99886a97391d0a5dcaf231f203a58b8401c63b45fedbd135e24a737"
+      }
+    },
+    {
+      "sha256": "0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89.png"
+      },
+      "bytes": 42774,
+      "id": "0bccd5be815c62e7b634dfed748ae0a59839ba0c52c043376e087a51e0e8ef89",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:06:59.778Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a9d85e7bacc5c973ad78582faf3e8341c538cdfac2fdcd90cf9992a215430a09"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "note保存時の破損による再発行版(palette)。目視合格した版との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:42:33.336Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a9d85e7bacc5c973ad78582faf3e8341c538cdfac2fdcd90cf9992a215430a09",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-neecba2a1752d/inputs/a9d85e7bacc5c973ad78582faf3e8341c538cdfac2fdcd90cf9992a215430a09.json"
+          },
+          "bytes": 1335
+        }
+      }
+    },
+    {
+      "sha256": "662fba51834971b442586cf976c87c412417f777841c5d51db133d358882108a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/662fba51834971b442586cf976c87c412417f777841c5d51db133d358882108a.png"
+      },
+      "bytes": 90826,
+      "id": "662fba51834971b442586cf976c87c412417f777841c5d51db133d358882108a",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:29:54.809Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a79401b257f1fdfb1be09ab0034d690605cc214925a76ece1df5b104ba74c0bb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:36:43.906Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a79401b257f1fdfb1be09ab0034d690605cc214925a76ece1df5b104ba74c0bb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-neecba2a1752d/inputs/a79401b257f1fdfb1be09ab0034d690605cc214925a76ece1df5b104ba74c0bb.json"
+          },
+          "bytes": 1335
+        }
+      }
+    },
+    {
+      "sha256": "da4353c78b3f343d853369f02bc432219e5766c2255c0dd65ea2ffebdcb29753",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/da4353c78b3f343d853369f02bc432219e5766c2255c0dd65ea2ffebdcb29753.png"
+      },
+      "bytes": 54173,
+      "id": "da4353c78b3f343d853369f02bc432219e5766c2255c0dd65ea2ffebdcb29753",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T12:42:34.040Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323284981/rectangle_large_type_2_3cb8dc4e6a8030db582263a2328d5dea.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "da4353c78b3f343d853369f02bc432219e5766c2255c0dd65ea2ffebdcb29753"
+      }
+    },
+    {
+      "sha256": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-neecba2a1752d/revisions/12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0.png"
+      },
+      "bytes": 1798575,
+      "id": "12d70f92a7e10e8c703683242c31d94a3af13c2ef379f301ea0abeb838a0fab0",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-1db79b9fcc5d",
+      "createdAt": "2026-10-23T18:06:57.589Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b09b0eab3ee12ed13fcaf95701038e94aae87b3ab5865285cac94065fea6c48a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+        "reviewedAt": "2026-10-23T18:09:35.162Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b09b0eab3ee12ed13fcaf95701038e94aae87b3ab5865285cac94065fea6c48a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-neecba2a1752d/inputs/b09b0eab3ee12ed13fcaf95701038e94aae87b3ab5865285cac94065fea6c48a.json"
+          },
+          "bytes": 9037
+        },
+        "production": {
+          "id": "NCI-00342",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "1db79b9fcc5d641296d1fae40b09b44bb4c89bef1c6c9ac8187be2e1da0dae23"
+        }
+      }
+    }
+  ]
+}

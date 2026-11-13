@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n66ffb10aa41b",
+  "production": {
+    "id": "NCI-00313",
+    "policyId": "NCP-008",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "色だけに頼らず\n伝わる図へ",
+      "subline": "凡例とアクセシビリティ",
+      "subject": "配色カテゴリの余白を活かした紙のコラージュ構図。白とクリームを基調にピンクの差し色、濃紺の極太文字。左に見出し2行、右にピンクと濃紺の大きな折り紙2枚だけを立体的に重ねる。紙は不規則な折り目のある画材として描き、整列したカラーパレットや色見本辞書、凡例の完成形として見せない。色紙に文字・数値・模様・図表・地図なし。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n66ffb10aa41b 2026-10-15公開無料部分と掲載タイトル確認。第5章は凡例の自動生成、アクセシビリティ、ダークモードへの適応を解説。カバーは凡例とアクセシビリティという主題を示す。配色評価PASS・全色覚対応・完成カラーパレットや収録数など、未確認の品質や商品範囲は表現しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "313e17e6882008bd64f7597292bf8e3009a619f80abe5b425abec8f1cc4a738e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/revisions/313e17e6882008bd64f7597292bf8e3009a619f80abe5b425abec8f1cc4a738e.png"
+      },
+      "bytes": 447558,
+      "id": "313e17e6882008bd64f7597292bf8e3009a619f80abe5b425abec8f1cc4a738e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:23.750Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/236924715/rectangle_large_type_2_3747afda2ec8dc5467abacea1fa1b070.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "313e17e6882008bd64f7597292bf8e3009a619f80abe5b425abec8f1cc4a738e"
+      }
+    },
+    {
+      "sha256": "7b3ea68a73536a044b46b58a15c56113b81369b4c47fcccb4a087545a4a85b23",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/revisions/7b3ea68a73536a044b46b58a15c56113b81369b4c47fcccb4a087545a4a85b23.png"
+      },
+      "bytes": 59565,
+      "id": "7b3ea68a73536a044b46b58a15c56113b81369b4c47fcccb4a087545a4a85b23",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:39:40.869Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "28a0a702377157245a341364b90a3e4f8b9d8c2a264f76cb6d7eb1f04fb7d40a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で章題と章の扱うD3配色の色見本が確認できる",
+        "reviewedAt": "2026-10-11T11:48:55.402Z"
+      },
+      "provenance": {
+        "renderer": "palette-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "28a0a702377157245a341364b90a3e4f8b9d8c2a264f76cb6d7eb1f04fb7d40a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n66ffb10aa41b/inputs/28a0a702377157245a341364b90a3e4f8b9d8c2a264f76cb6d7eb1f04fb7d40a.json"
+          },
+          "bytes": 1243
+        }
+      }
+    },
+    {
+      "sha256": "b8f39355b15b54c105b7e91656ac16f24cab6c38a692791dea920b14d085a1dd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/revisions/b8f39355b15b54c105b7e91656ac16f24cab6c38a692791dea920b14d085a1dd.png"
+      },
+      "bytes": 21022,
+      "id": "b8f39355b15b54c105b7e91656ac16f24cab6c38a692791dea920b14d085a1dd",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:05:04.775Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5560569f32434449879f1765a63bd47aef09b06bd6fc9e307702e5c4995cdb9c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.053/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:42.082Z"
+      },
+      "provenance": {
+        "renderer": "palette-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5560569f32434449879f1765a63bd47aef09b06bd6fc9e307702e5c4995cdb9c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n66ffb10aa41b/inputs/5560569f32434449879f1765a63bd47aef09b06bd6fc9e307702e5c4995cdb9c.json"
+          },
+          "bytes": 1243
+        }
+      }
+    },
+    {
+      "sha256": "88a29d2854dc4571fa2ee9dd5ad169021f18202508e42283bf9c7bd1ac18cf6f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/revisions/88a29d2854dc4571fa2ee9dd5ad169021f18202508e42283bf9c7bd1ac18cf6f.png"
+      },
+      "bytes": 51535,
+      "id": "88a29d2854dc4571fa2ee9dd5ad169021f18202508e42283bf9c7bd1ac18cf6f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:20.565Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323277681/rectangle_large_type_2_57fe7b2826fa45116b87f980337c278f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "88a29d2854dc4571fa2ee9dd5ad169021f18202508e42283bf9c7bd1ac18cf6f"
+      }
+    },
+    {
+      "sha256": "d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n66ffb10aa41b/revisions/d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837.png"
+      },
+      "bytes": 1608680,
+      "id": "d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:10:45.110Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "03bb34a546759ea367b3ce7b31d627ccc859bf3224c9a6c4585af44732355e5f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00313: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。palette。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA d905880e66b3456b9679a7d77f7b2ed4aa0724a1d72ce1eb7cff718d0c5c4837。",
+        "reviewedAt": "2026-10-15T07:23:24.704Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "03bb34a546759ea367b3ce7b31d627ccc859bf3224c9a6c4585af44732355e5f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n66ffb10aa41b/inputs/03bb34a546759ea367b3ce7b31d627ccc859bf3224c9a6c4585af44732355e5f.json"
+          },
+          "bytes": 10485
+        },
+        "production": {
+          "id": "NCI-00313",
+          "policyId": "NCP-008",
+          "policyVersion": 3,
+          "planSha256": "a78825598c3e88a3ce55708551297151b87071c1d0a45465fe056414e3923b3d"
+        }
+      }
+    }
+  ]
+}

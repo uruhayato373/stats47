@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "data-packs-advanced",
+  "production": {
+    "id": "NCI-00258",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

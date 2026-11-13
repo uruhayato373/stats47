@@ -1,3 +1,4 @@
+// @vitest-environment node
 import MiniSearch from "minisearch";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 

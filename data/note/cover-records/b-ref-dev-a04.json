@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a04",
+  "production": {
+    "id": "NCI-00144",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "出生率は沖縄1.60人\n東京0.99人",
+      "subline": "2023年・合計特殊出生率",
+      "subject": "小さなベビーシューズ一足と公的統計の白紙レポートを主役に置く。沖縄と東京を架空の地図や順位図で描かず、色紙で対比を示す。人物・顔・手・キャラクターなし。",
+      "evidence": "公開本文の合計特殊出生率（2023年）は沖縄県1.60人で47都道府県中最高、東京都0.99人で最低。婚姻件数と離婚件数は件数であり出生率と単位が異なる。公開記事 https://note.com/stats47/n/nbd056e7589d0 の見出しと本文を確認。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a04/revisions/5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917.png"
+      },
+      "bytes": 37965,
+      "id": "5a7c7af5b197510abfbe8bc940fb122e09484889c9f0cdeea9f1b4ad0f4ad917",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:17.181Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ab4bc2584c45fcddf3afdd1976bbcd20753796025fb61199a3c3ba9bc67a34ef"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:11:59.938Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ab4bc2584c45fcddf3afdd1976bbcd20753796025fb61199a3c3ba9bc67a34ef",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a04/inputs/ab4bc2584c45fcddf3afdd1976bbcd20753796025fb61199a3c3ba9bc67a34ef.json"
+          },
+          "bytes": 1266
+        }
+      }
+    },
+    {
+      "sha256": "1e532e17f4f16e860db59e66cd01db62494a78e7a51382393e8ed57cc0cb1e07",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a04/revisions/1e532e17f4f16e860db59e66cd01db62494a78e7a51382393e8ed57cc0cb1e07.png"
+      },
+      "bytes": 1934351,
+      "id": "1e532e17f4f16e860db59e66cd01db62494a78e7a51382393e8ed57cc0cb1e07",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-e0ac98b43b28",
+      "createdAt": "2026-10-23T23:55:26.626Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "eec35a84aa00c93170c427822d24f680e34373a32a97bbf541b26eb04a1d59c5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧図は婚姻件数で出生率と単位が違った。新画像の沖縄1.60人・東京0.99人、2023年の合計特殊出生率を原寸／320pxで確認。地図や架空図表なし。",
+        "reviewedAt": "2026-10-23T23:57:07.256Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "eec35a84aa00c93170c427822d24f680e34373a32a97bbf541b26eb04a1d59c5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a04/inputs/eec35a84aa00c93170c427822d24f680e34373a32a97bbf541b26eb04a1d59c5.json"
+          },
+          "bytes": 8463
+        },
+        "production": {
+          "id": "NCI-00144",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "e0ac98b43b283b4d8c5b9b44f26dd2b31532f8bce7ab34c870b095572815c283"
+        }
+      }
+    }
+  ]
+}

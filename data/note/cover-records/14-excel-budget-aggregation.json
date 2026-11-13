@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "14-excel-budget-aggregation",
+  "production": {
+    "id": "NCI-00029",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "Excel予算ファイルを\n集計する",
+      "subline": "pandasとDuckDBで処理",
+      "subject": "無文字の表が並ぶ紙の束をクリップで3つに分け、そろばんを添えて大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/nc6e02fbe6073 本文確認2026-11-04。各課の様式が違うExcel予算ファイルをpandasとDuckDBで集計する手順。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4f71536a67b06f01604c5963ea70650973ec3c17656f51c9198408f2263ca6ea",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/14-excel-budget-aggregation/revisions/4f71536a67b06f01604c5963ea70650973ec3c17656f51c9198408f2263ca6ea.png"
+      },
+      "bytes": 123156,
+      "id": "4f71536a67b06f01604c5963ea70650973ec3c17656f51c9198408f2263ca6ea",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:35.138Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292994154/rectangle_large_type_2_eb396acacc53a5249d46d1ce070207b6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4f71536a67b06f01604c5963ea70650973ec3c17656f51c9198408f2263ca6ea"
+      }
+    },
+    {
+      "sha256": "14c0fff05f058fa48152e46363de5e26c3986abf505d61f65956cf9fcca2f121",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/14-excel-budget-aggregation/revisions/14c0fff05f058fa48152e46363de5e26c3986abf505d61f65956cf9fcca2f121.png"
+      },
+      "bytes": 61266,
+      "id": "14c0fff05f058fa48152e46363de5e26c3986abf505d61f65956cf9fcca2f121",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:45:51.715Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a6caf4226c8f5e083e83b18fc02ad3ee57007243474f6e1b5e435d8a652b9652"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:19.695Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a6caf4226c8f5e083e83b18fc02ad3ee57007243474f6e1b5e435d8a652b9652",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/14-excel-budget-aggregation/inputs/a6caf4226c8f5e083e83b18fc02ad3ee57007243474f6e1b5e435d8a652b9652.json"
+          },
+          "bytes": 1103
+        }
+      }
+    },
+    {
+      "sha256": "cd317c48354f4081601fed3f933cc5909e65ce095787f757c1610699d717f525",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/14-excel-budget-aggregation/revisions/cd317c48354f4081601fed3f933cc5909e65ce095787f757c1610699d717f525.png"
+      },
+      "bytes": 59384,
+      "id": "cd317c48354f4081601fed3f933cc5909e65ce095787f757c1610699d717f525",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:58.834Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331390/rectangle_large_type_2_a347e78104212a7c428ae434b8e56b15.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "cd317c48354f4081601fed3f933cc5909e65ce095787f757c1610699d717f525"
+      }
+    },
+    {
+      "sha256": "7b6bc5ab2560ba987d75bcaa1771a71de6f521a3aab2cc53d1a5cad9dccee516",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/14-excel-budget-aggregation/revisions/7b6bc5ab2560ba987d75bcaa1771a71de6f521a3aab2cc53d1a5cad9dccee516.png"
+      },
+      "bytes": 25669,
+      "id": "7b6bc5ab2560ba987d75bcaa1771a71de6f521a3aab2cc53d1a5cad9dccee516",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:26.086Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "aa29558b49b205f58d9ffb903c912589eebf31571bdb53863584a7f81f5571ae"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:38.819Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "aa29558b49b205f58d9ffb903c912589eebf31571bdb53863584a7f81f5571ae",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/14-excel-budget-aggregation/inputs/aa29558b49b205f58d9ffb903c912589eebf31571bdb53863584a7f81f5571ae.json"
+          },
+          "bytes": 1103
+        }
+      }
+    },
+    {
+      "sha256": "c6be3460a618a08a47e161cbb8ae3fc0f30ad9ba86184afbd751f73a3043ed89",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/14-excel-budget-aggregation/revisions/c6be3460a618a08a47e161cbb8ae3fc0f30ad9ba86184afbd751f73a3043ed89.png"
+      },
+      "bytes": 1929466,
+      "id": "c6be3460a618a08a47e161cbb8ae3fc0f30ad9ba86184afbd751f73a3043ed89",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-32ade9bb7537",
+      "createdAt": "2026-11-04T00:41:58.425Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c94177629f400b000fa466396457a0eabfa208525e0aa36242c1784137dc5ee0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:43:32.430Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c94177629f400b000fa466396457a0eabfa208525e0aa36242c1784137dc5ee0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/14-excel-budget-aggregation/inputs/c94177629f400b000fa466396457a0eabfa208525e0aa36242c1784137dc5ee0.json"
+          },
+          "bytes": 8670
+        },
+        "production": {
+          "id": "NCI-00029",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "32ade9bb75379f699f569c600c70a5a6afb3d1c56e56676759467b0068512945"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nead586305cdb",
+  "production": {
+    "id": "NCI-00480",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "パチンコをした人\n佐賀県・鹿児島県が同率1位",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のパチンコ台の上部と無地の銀色玉を描く。金銭、景品、勝利演出、人物、文字や数字は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nead586305cdb 2026-10-23公開API本文照合。記事題名「【2021年版】パチンコをした人が多い県は？ 1位は鹿児島県｜都道府県ランキング」。本文中の「佐賀県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a7f5ecb43c8f970708cc278bee47a01a2c485192243ecf373adebfbbe98b2f3b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nead586305cdb/revisions/a7f5ecb43c8f970708cc278bee47a01a2c485192243ecf373adebfbbe98b2f3b.png"
+      },
+      "bytes": 36175,
+      "id": "a7f5ecb43c8f970708cc278bee47a01a2c485192243ecf373adebfbbe98b2f3b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:42.389Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775122/rectangle_large_type_2_0857c9d7ae4ce8e4f58b4a3c6c011aca.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a7f5ecb43c8f970708cc278bee47a01a2c485192243ecf373adebfbbe98b2f3b"
+      }
+    },
+    {
+      "sha256": "d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nead586305cdb/revisions/d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1.png"
+      },
+      "bytes": 118294,
+      "id": "d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:09.191Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "04b57c2e5d2d627e2a0a2c0459d0240b9141cd1c2a89515ddb89c987cefa2c6d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-pachinko/values.json",
+        "sourceSha256": "dadae2673afcce80f2dd91e9183c520db40c1454d0bc07774174622859698518",
+        "input": {
+          "sha256": "04b57c2e5d2d627e2a0a2c0459d0240b9141cd1c2a89515ddb89c987cefa2c6d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nead586305cdb/inputs/04b57c2e5d2d627e2a0a2c0459d0240b9141cd1c2a89515ddb89c987cefa2c6d.json"
+          },
+          "bytes": 6574
+        }
+      }
+    },
+    {
+      "sha256": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nead586305cdb/revisions/ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18.png"
+      },
+      "bytes": 1888992,
+      "id": "ff61395552bd56aa0ff38b886db7ffa237dd603e717e703269d0a84ed89e9f18",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-124974849d8c",
+      "createdAt": "2026-10-23T12:37:12.458Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7beedf43bad3c26d07b0e1688211902ea406a2e793c178cfdb964e14ce2c0f84"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:40:21.164Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7beedf43bad3c26d07b0e1688211902ea406a2e793c178cfdb964e14ce2c0f84",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nead586305cdb/inputs/7beedf43bad3c26d07b0e1688211902ea406a2e793c178cfdb964e14ce2c0f84.json"
+          },
+          "bytes": 8843
+        },
+        "production": {
+          "id": "NCI-00480",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "124974849d8cec97b7d0d1c0f6fa1099a741b6a11c79e4386cf58e684fd8b234"
+        }
+      }
+    }
+  ]
+}

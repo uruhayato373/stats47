@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n88d2a55a9e36",
+  "production": {
+    "id": "NCI-00441",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "柔道をした人\n1位は山口県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の柔道場の畳と畳の上に丁寧に畳んだ無地の柔道着を描く。柔道家・人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n88d2a55a9e36 2026-10-23公開API本文照合。記事題名「【2021年版】柔道をした人が多い県は？ 1位は山口県｜都道府県ランキング」。本文中の「山口県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "03016f162bab0a501876007376a3fa6a7c256e8e1f8f179a174ce928c7280b00",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n88d2a55a9e36/revisions/03016f162bab0a501876007376a3fa6a7c256e8e1f8f179a174ce928c7280b00.png"
+      },
+      "bytes": 55089,
+      "id": "03016f162bab0a501876007376a3fa6a7c256e8e1f8f179a174ce928c7280b00",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:21.467Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774361/rectangle_large_type_2_e7d18304f9a1d6edc3c8dee119106b0c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "03016f162bab0a501876007376a3fa6a7c256e8e1f8f179a174ce928c7280b00"
+      }
+    },
+    {
+      "sha256": "0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n88d2a55a9e36/revisions/0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c.png"
+      },
+      "bytes": 108926,
+      "id": "0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:26.505Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6fa47eea676923b8f4b250d0664972a67d190b23a374ac6fd085b2096681c148"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-judo/values.json",
+        "sourceSha256": "9ca12e5904af0d3c46b8dbc1b731c31a7e29fdbec8b0622a2913b2fdb627758e",
+        "input": {
+          "sha256": "6fa47eea676923b8f4b250d0664972a67d190b23a374ac6fd085b2096681c148",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n88d2a55a9e36/inputs/6fa47eea676923b8f4b250d0664972a67d190b23a374ac6fd085b2096681c148.json"
+          },
+          "bytes": 6465
+        }
+      }
+    },
+    {
+      "sha256": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n88d2a55a9e36/revisions/05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1.png"
+      },
+      "bytes": 1656092,
+      "id": "05b6324d7fbc00a3cad96c619bf2479eeebfd2bee5b84e53e58587ea47b9cfb1",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-d618d8ec37e0",
+      "createdAt": "2026-10-23T14:08:37.549Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0c7465ed22f41556159d150e66e5646cf0ae5e499459df22fe7c77e930939d49"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:10:19.879Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0c7465ed22f41556159d150e66e5646cf0ae5e499459df22fe7c77e930939d49",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n88d2a55a9e36/inputs/0c7465ed22f41556159d150e66e5646cf0ae5e499459df22fe7c77e930939d49.json"
+          },
+          "bytes": 8710
+        },
+        "production": {
+          "id": "NCI-00441",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "d618d8ec37e00fa2b9d5efaf32ca6769cf648d8bddf2fcbc6cdd3ae2c0f3de16"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n82a4168eaa19",
+  "production": {
+    "id": "NCI-00320",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "中学2年女子の平均体重\n青森県と愛知県",
+      "subline": "2022年・学校保健統計",
+      "subject": "横長1280×670相当の完成カバー。紫と黄色。右に無文字の学校保健資料ファイル2冊と無地の体重計模型。子ども・人物・体型・健康や発育の優劣を表す絵を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n82a4168eaa19 2026-10-24公開API本文照合。記事題名「中学2年女子の平均体重、地域差は3.1kg！2022年都道府県ランキング」。本文中の 2022年、中学2年女子、平均体重、青森県、愛知県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d0e87db8da99d1b844003ee232bdeb366504c7c53c42e754f08a31be5ac79604",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n82a4168eaa19/revisions/d0e87db8da99d1b844003ee232bdeb366504c7c53c42e754f08a31be5ac79604.png"
+      },
+      "bytes": 35134,
+      "id": "d0e87db8da99d1b844003ee232bdeb366504c7c53c42e754f08a31be5ac79604",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:28.524Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772965/rectangle_large_type_2_f9c5a5f840fc2285cb90ee47e5de8266.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d0e87db8da99d1b844003ee232bdeb366504c7c53c42e754f08a31be5ac79604"
+      }
+    },
+    {
+      "sha256": "4aef66420d44873a207926aa9bdca0b625660826c516135303fd78bf52278067",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n82a4168eaa19/revisions/4aef66420d44873a207926aa9bdca0b625660826c516135303fd78bf52278067.png"
+      },
+      "bytes": 102596,
+      "id": "4aef66420d44873a207926aa9bdca0b625660826c516135303fd78bf52278067",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:40:15.165Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5353b98ab6d78b0a727dfdca01af309ff3bfce4c7c17be79f8ca55d492cde19c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:49:04.372Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5353b98ab6d78b0a727dfdca01af309ff3bfce4c7c17be79f8ca55d492cde19c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n82a4168eaa19/inputs/5353b98ab6d78b0a727dfdca01af309ff3bfce4c7c17be79f8ca55d492cde19c.json"
+          },
+          "bytes": 1307
+        }
+      }
+    },
+    {
+      "sha256": "47439129ea8d53d936cb8ec499bd56a72edef9b9b1a2c12483be629dcca36fd6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n82a4168eaa19/revisions/47439129ea8d53d936cb8ec499bd56a72edef9b9b1a2c12483be629dcca36fd6.png"
+      },
+      "bytes": 47915,
+      "id": "47439129ea8d53d936cb8ec499bd56a72edef9b9b1a2c12483be629dcca36fd6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:13.827Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320256364/rectangle_large_type_2_ab7669406f4f29cb13cf40a724270dcd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "47439129ea8d53d936cb8ec499bd56a72edef9b9b1a2c12483be629dcca36fd6"
+      }
+    },
+    {
+      "sha256": "447eb49ae14d7dca64cd5f3a1419c84c69931e8cf4efa90b45515caa9fb14004",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n82a4168eaa19/revisions/447eb49ae14d7dca64cd5f3a1419c84c69931e8cf4efa90b45515caa9fb14004.png"
+      },
+      "bytes": 45539,
+      "id": "447eb49ae14d7dca64cd5f3a1419c84c69931e8cf4efa90b45515caa9fb14004",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:05:38.641Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e15f595673af1b9ab337d38be19162169203fcbea3f33e8a93ca7026d0df47bd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.010/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:51.469Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e15f595673af1b9ab337d38be19162169203fcbea3f33e8a93ca7026d0df47bd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n82a4168eaa19/inputs/e15f595673af1b9ab337d38be19162169203fcbea3f33e8a93ca7026d0df47bd.json"
+          },
+          "bytes": 1307
+        }
+      }
+    },
+    {
+      "sha256": "447be8705e85d825984cee8ceed0fc682e537b8453b2f1dacc41b844b74d5bab",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n82a4168eaa19/revisions/447be8705e85d825984cee8ceed0fc682e537b8453b2f1dacc41b844b74d5bab.png"
+      },
+      "bytes": 1736009,
+      "id": "447be8705e85d825984cee8ceed0fc682e537b8453b2f1dacc41b844b74d5bab",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-edb016821595",
+      "createdAt": "2026-10-23T17:08:26.374Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3c50c48f8a6b735b7b11a8bd3297ba3428d957878a022e7998b3036cfe189087"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+        "reviewedAt": "2026-10-23T17:11:40.141Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3c50c48f8a6b735b7b11a8bd3297ba3428d957878a022e7998b3036cfe189087",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n82a4168eaa19/inputs/3c50c48f8a6b735b7b11a8bd3297ba3428d957878a022e7998b3036cfe189087.json"
+          },
+          "bytes": 9154
+        },
+        "production": {
+          "id": "NCI-00320",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "edb0168215958ad2384c38d339aef423c73ffe5d808517def79b2084fd5cf315"
+        }
+      }
+    }
+  ]
+}

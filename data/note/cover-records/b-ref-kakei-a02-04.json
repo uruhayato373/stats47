@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-04",
+  "production": {
+    "id": "NCI-00173",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "コンタクトレンズ12.99倍\n医科診療代1.12倍",
+      "subline": "2024年・年収5階級の年間支出",
+      "subject": "コンタクトレンズのケースと診療費の明細を左右に並べる。金額・架空の数表・棒グラフは描かない。人物・手・顔・キャラクターなし。",
+      "evidence": "公開本文では2024年の年収第Ⅴ階級/第Ⅰ階級の年間支出倍率がコンタクトレンズ12.99倍、医科診療代1.12倍。全国の二人以上の世帯の家計調査。医科診療代は第Ⅰ階級44,017円、第Ⅴ階級49,363円。年齢と世帯人数の差があるため年収だけが原因とはいえない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-04/revisions/3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd.png"
+      },
+      "bytes": 43308,
+      "id": "3c95104e50f55d347774dd073a60ec4d1b639c5c76cf20573d3cdb178409d0dd",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:00.034Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5b670af30e517787aad04f61816ce68d719bd9cf191199cc8250f1d44e837091"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:44.819Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5b670af30e517787aad04f61816ce68d719bd9cf191199cc8250f1d44e837091",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-04/inputs/5b670af30e517787aad04f61816ce68d719bd9cf191199cc8250f1d44e837091.json"
+          },
+          "bytes": 1291
+        }
+      }
+    },
+    {
+      "sha256": "148a98f3b029785fe94b3ccaec91de47c551cc49cb103c1f42ec1ba6ee241967",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-04/revisions/148a98f3b029785fe94b3ccaec91de47c551cc49cb103c1f42ec1ba6ee241967.png"
+      },
+      "bytes": 1846327,
+      "id": "148a98f3b029785fe94b3ccaec91de47c551cc49cb103c1f42ec1ba6ee241967",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-b68fd9d9967a",
+      "createdAt": "2026-10-23T23:55:43.382Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "88c5fb7ee99c5393f23ffc7fff8d05084ce1583037c634baed06e7c170a90b1b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧図は感冒薬で主題からずれていた。新画像はコンタクトレンズ12.99倍・医科診療代1.12倍と2024年の対象を原寸／320pxで確認。余計な文字や図なし。",
+        "reviewedAt": "2026-10-23T23:56:39.272Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "88c5fb7ee99c5393f23ffc7fff8d05084ce1583037c634baed06e7c170a90b1b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-04/inputs/88c5fb7ee99c5393f23ffc7fff8d05084ce1583037c634baed06e7c170a90b1b.json"
+          },
+          "bytes": 8534
+        },
+        "production": {
+          "id": "NCI-00173",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "b68fd9d9967a5e2659a5e172ed4d9bd92e4a542653b46877b1efe95fb2887cbc"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "05-pandas-duckdb-derived-metrics",
+  "production": {
+    "id": "NCI-00012",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "人口当たり・順位を\n計算する",
+      "subline": "pandasとDuckDBで派生指標",
+      "subject": "ノートPCと、方眼紙、定規を大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n0477d544669b 本文確認2026-11-04。pandasとDuckDBで人口当たり指標・順位・偏差を計算する記事。数式やグラフは描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "412fc1ff5878d7934df85b5c3d2ec73fc804dae35804d74b6cc869279aebeac3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/05-pandas-duckdb-derived-metrics/revisions/412fc1ff5878d7934df85b5c3d2ec73fc804dae35804d74b6cc869279aebeac3.png"
+      },
+      "bytes": 114061,
+      "id": "412fc1ff5878d7934df85b5c3d2ec73fc804dae35804d74b6cc869279aebeac3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:44.050Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293009371/rectangle_large_type_2_823c31fd49414a32e32804eee99c67ca.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "412fc1ff5878d7934df85b5c3d2ec73fc804dae35804d74b6cc869279aebeac3"
+      }
+    },
+    {
+      "sha256": "626bd8e2fec94c581606d8e6bab810b7e4d3ba9811b7ef66149bb649c2e90b5b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/05-pandas-duckdb-derived-metrics/revisions/626bd8e2fec94c581606d8e6bab810b7e4d3ba9811b7ef66149bb649c2e90b5b.png"
+      },
+      "bytes": 56098,
+      "id": "626bd8e2fec94c581606d8e6bab810b7e4d3ba9811b7ef66149bb649c2e90b5b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:55.930Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "838d7a4d3e6a5c8afd6da6950cdfcd152d1f7c5be78a58eba5eb8cc2560ca785"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:40.065Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "838d7a4d3e6a5c8afd6da6950cdfcd152d1f7c5be78a58eba5eb8cc2560ca785",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/05-pandas-duckdb-derived-metrics/inputs/838d7a4d3e6a5c8afd6da6950cdfcd152d1f7c5be78a58eba5eb8cc2560ca785.json"
+          },
+          "bytes": 1101
+        }
+      }
+    },
+    {
+      "sha256": "5c8746d509195379bbea33d69cebf467b30ee42531ce9e194e43f72b8643f0af",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/05-pandas-duckdb-derived-metrics/revisions/5c8746d509195379bbea33d69cebf467b30ee42531ce9e194e43f72b8643f0af.png"
+      },
+      "bytes": 73982,
+      "id": "5c8746d509195379bbea33d69cebf467b30ee42531ce9e194e43f72b8643f0af",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:07.142Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329342/rectangle_large_type_2_d9c297fb394426a153a5816d3829a80b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5c8746d509195379bbea33d69cebf467b30ee42531ce9e194e43f72b8643f0af"
+      }
+    },
+    {
+      "sha256": "9786ee677fd4614da421f8e884c51136a7e6fe570ec16f861ad1d976ccd94aec",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/05-pandas-duckdb-derived-metrics/revisions/9786ee677fd4614da421f8e884c51136a7e6fe570ec16f861ad1d976ccd94aec.png"
+      },
+      "bytes": 22479,
+      "id": "9786ee677fd4614da421f8e884c51136a7e6fe570ec16f861ad1d976ccd94aec",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:12:09.882Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5682c6d18bff53267cf8457dd2cec84c64c8b7b15030d3447bfa26f95f8400ce"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.005/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:53.067Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5682c6d18bff53267cf8457dd2cec84c64c8b7b15030d3447bfa26f95f8400ce",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/05-pandas-duckdb-derived-metrics/inputs/5682c6d18bff53267cf8457dd2cec84c64c8b7b15030d3447bfa26f95f8400ce.json"
+          },
+          "bytes": 1101
+        }
+      }
+    },
+    {
+      "sha256": "7aab7f7cc7abe9e1e1ce6ff0b56465359b9269255283356a454ddd44c278c08a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/05-pandas-duckdb-derived-metrics/revisions/7aab7f7cc7abe9e1e1ce6ff0b56465359b9269255283356a454ddd44c278c08a.png"
+      },
+      "bytes": 30850,
+      "id": "7aab7f7cc7abe9e1e1ce6ff0b56465359b9269255283356a454ddd44c278c08a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T12:18:26.881Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323267524/rectangle_large_type_2_8c0a8e42c331420d27b69aee36afc3a3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7aab7f7cc7abe9e1e1ce6ff0b56465359b9269255283356a454ddd44c278c08a"
+      }
+    },
+    {
+      "sha256": "13b9407e485296a9ff2cd561f511f25d19597560a3f7ed3365e836c5aa0adfa4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/05-pandas-duckdb-derived-metrics/revisions/13b9407e485296a9ff2cd561f511f25d19597560a3f7ed3365e836c5aa0adfa4.png"
+      },
+      "bytes": 1814244,
+      "id": "13b9407e485296a9ff2cd561f511f25d19597560a3f7ed3365e836c5aa0adfa4",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-830ae1a984dc",
+      "createdAt": "2026-11-04T00:17:48.804Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "344ff6acd245f6a1efcdbc3702b3cad08488821012e33275cc38e0b61c86f383"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:32.287Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "344ff6acd245f6a1efcdbc3702b3cad08488821012e33275cc38e0b61c86f383",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/05-pandas-duckdb-derived-metrics/inputs/344ff6acd245f6a1efcdbc3702b3cad08488821012e33275cc38e0b61c86f383.json"
+          },
+          "bytes": 8666
+        },
+        "production": {
+          "id": "NCI-00012",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "830ae1a984dcdd8328424ccd4d269f25749d0023a3357ca5a81801837388de12"
+        }
+      }
+    }
+  ]
+}

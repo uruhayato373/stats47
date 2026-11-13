@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "01-claude-code-setup-complete",
+  "production": {
+    "id": "NCI-00003",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "Claude Code\n環境構築の完全版",
+      "subline": "Windows・Mac・WSL別の手順",
+      "subject": "ノートPCと、スパナなどの小さな工具セットを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/nc5126820c00d 本文確認2026-11-04。Windows・Mac・WSL2の環境別に管理者権限やプロキシの制約を踏まえて導入する手順。カバーで所要時間を保証しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "bead4b9735b7f0f926d4774898837e2b8931681c47d8d14f0dffd008578dcb06",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-claude-code-setup-complete/revisions/bead4b9735b7f0f926d4774898837e2b8931681c47d8d14f0dffd008578dcb06.png"
+      },
+      "bytes": 121034,
+      "id": "bead4b9735b7f0f926d4774898837e2b8931681c47d8d14f0dffd008578dcb06",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:27.896Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292996566/rectangle_large_type_2_5170ab7de759bba645f7477d43bf73e0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bead4b9735b7f0f926d4774898837e2b8931681c47d8d14f0dffd008578dcb06"
+      }
+    },
+    {
+      "sha256": "cba3d8f5eff9b2e199ab83c83f18b88adbad93ee2ae3a5bfbb769bd9ac6c74d7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-claude-code-setup-complete/revisions/cba3d8f5eff9b2e199ab83c83f18b88adbad93ee2ae3a5bfbb769bd9ac6c74d7.png"
+      },
+      "bytes": 64503,
+      "id": "cba3d8f5eff9b2e199ab83c83f18b88adbad93ee2ae3a5bfbb769bd9ac6c74d7",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:59.405Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "99a1e3fb41d47209090b0244af43050f5f7673e225cdd7c8eabe00f90a159658"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:50:59.318Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "99a1e3fb41d47209090b0244af43050f5f7673e225cdd7c8eabe00f90a159658",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/01-claude-code-setup-complete/inputs/99a1e3fb41d47209090b0244af43050f5f7673e225cdd7c8eabe00f90a159658.json"
+          },
+          "bytes": 1117
+        }
+      }
+    },
+    {
+      "sha256": "21f1b4d8c4bbed49a4ceb994cdada258286f7e2860dab6dc04ac96ad45bb5e38",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-claude-code-setup-complete/revisions/21f1b4d8c4bbed49a4ceb994cdada258286f7e2860dab6dc04ac96ad45bb5e38.png"
+      },
+      "bytes": 70342,
+      "id": "21f1b4d8c4bbed49a4ceb994cdada258286f7e2860dab6dc04ac96ad45bb5e38",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:52.855Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329023/rectangle_large_type_2_39242b64ced1f555039d355f023b88f1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "21f1b4d8c4bbed49a4ceb994cdada258286f7e2860dab6dc04ac96ad45bb5e38"
+      }
+    },
+    {
+      "sha256": "79e66d2966dc863740103370566ec0fc05391f8817b362904562dbae8bffbd21",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-claude-code-setup-complete/revisions/79e66d2966dc863740103370566ec0fc05391f8817b362904562dbae8bffbd21.png"
+      },
+      "bytes": 1857679,
+      "id": "79e66d2966dc863740103370566ec0fc05391f8817b362904562dbae8bffbd21",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-e235b6e9d770",
+      "createdAt": "2026-11-04T00:16:15.264Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cd436b04c336ddb85ac583b6a7214e6d7d255ffc1ad3914557b610e299c5e262"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:01.426Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cd436b04c336ddb85ac583b6a7214e6d7d255ffc1ad3914557b610e299c5e262",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/01-claude-code-setup-complete/inputs/cd436b04c336ddb85ac583b6a7214e6d7d255ffc1ad3914557b610e299c5e262.json"
+          },
+          "bytes": 8706
+        },
+        "production": {
+          "id": "NCI-00003",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "e235b6e9d77008f142eeb59129162f066045dc063b187be1cd7d62939574b2b1"
+        }
+      }
+    }
+  ]
+}

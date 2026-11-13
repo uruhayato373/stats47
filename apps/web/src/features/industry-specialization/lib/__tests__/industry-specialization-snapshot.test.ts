@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { lookupArea } from '@stats47/area';
 import { INDUSTRY_SPECIALIZATION_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 import { describe, expect, it } from 'vitest';

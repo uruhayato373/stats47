@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a01-01",
+  "production": {
+    "id": "NCI-00169",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "学力テストの上位は\n東京・石川・福井",
+      "subline": "2025年の平均正答率",
+      "subject": "開いた無文字の問題用紙と鉛筆、消しゴムを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/ncba36d395bd7 本文確認2026-11-04。2025年の全国学力調査の都道府県別平均正答率。1位東京都、2位石川県、3位福井県。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-01/revisions/dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257.png"
+      },
+      "bytes": 36730,
+      "id": "dad58f49ffa551dbcbba9771a0020bfe4ef1da9bb300655d17662e2936aeb257",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:43.408Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3170f5c915bacdfe7e1146f70f34ff68b8ce5f747893e68395af3fd376729c56"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:37.771Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3170f5c915bacdfe7e1146f70f34ff68b8ce5f747893e68395af3fd376729c56",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-01/inputs/3170f5c915bacdfe7e1146f70f34ff68b8ce5f747893e68395af3fd376729c56.json"
+          },
+          "bytes": 1322
+        }
+      }
+    },
+    {
+      "sha256": "b0500c0d7907ed712a76bd1c6a6ea6c7806881beb4854a5a58f29e5806e65e51",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-01/revisions/b0500c0d7907ed712a76bd1c6a6ea6c7806881beb4854a5a58f29e5806e65e51.png"
+      },
+      "bytes": 58609,
+      "id": "b0500c0d7907ed712a76bd1c6a6ea6c7806881beb4854a5a58f29e5806e65e51",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:24.525Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324078790/rectangle_large_type_2_29c7c8e5821055c791bde60fa75007fb.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b0500c0d7907ed712a76bd1c6a6ea6c7806881beb4854a5a58f29e5806e65e51"
+      }
+    },
+    {
+      "sha256": "cf141decb59cfed532e68b24c3b383a7defbef942aadd3c666a5253283e395fd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-01/revisions/cf141decb59cfed532e68b24c3b383a7defbef942aadd3c666a5253283e395fd.png"
+      },
+      "bytes": 1803770,
+      "id": "cf141decb59cfed532e68b24c3b383a7defbef942aadd3c666a5253283e395fd",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-e53b9190ab02",
+      "createdAt": "2026-11-04T01:09:07.401Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7ad9d8d600e51cb03435556c0473e81a5934c03f2fa41378bf0bd7a6b3f6753c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:41.041Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7ad9d8d600e51cb03435556c0473e81a5934c03f2fa41378bf0bd7a6b3f6753c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-01/inputs/7ad9d8d600e51cb03435556c0473e81a5934c03f2fa41378bf0bd7a6b3f6753c.json"
+          },
+          "bytes": 8155
+        },
+        "production": {
+          "id": "NCI-00169",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "e53b9190ab021b9353a4bac2fb7063c983e5f32b7a62c7e505ba28a9ea52ae27"
+        }
+      }
+    }
+  ]
+}

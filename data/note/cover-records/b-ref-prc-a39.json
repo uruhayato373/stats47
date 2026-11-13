@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a39",
+  "production": {
+    "id": "NCI-00221",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "飲み物の支出\n47市を比較",
+      "subline": "炭酸飲料とミネラルウォーター",
+      "subject": "無文字のガラス瓶の炭酸飲料と、ラベルのない水のボトルを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n7813c753c4c8 本文確認2026-11-04。炭酸飲料は福島市、ミネラルウォーターは那覇市が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a39/revisions/ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b.png"
+      },
+      "bytes": 36786,
+      "id": "ae4812af2d19b711baadf59fc924c0ef0ef8c38b0c718be648b061ed8266c55b",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:37.700Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d20b6c4aaf2bc42ae035d6619178a8f228205d0a9cee93e001d2b5ab3f42bcbb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:51.269Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d20b6c4aaf2bc42ae035d6619178a8f228205d0a9cee93e001d2b5ab3f42bcbb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a39/inputs/d20b6c4aaf2bc42ae035d6619178a8f228205d0a9cee93e001d2b5ab3f42bcbb.json"
+          },
+          "bytes": 1293
+        }
+      }
+    },
+    {
+      "sha256": "2059443aa7d4bc11cd65174ede911e44a0f0a050d4da549e334bfbe27aee425e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a39/revisions/2059443aa7d4bc11cd65174ede911e44a0f0a050d4da549e334bfbe27aee425e.png"
+      },
+      "bytes": 103305,
+      "id": "2059443aa7d4bc11cd65174ede911e44a0f0a050d4da549e334bfbe27aee425e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:07.404Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324182846/rectangle_large_type_2_3b791c80fb7e80444879f614227cbed8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2059443aa7d4bc11cd65174ede911e44a0f0a050d4da549e334bfbe27aee425e"
+      }
+    },
+    {
+      "sha256": "136bce346fe6949446becfeb9f5d702f035fc714d9cb790a61f575cb7c61904e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a39/revisions/136bce346fe6949446becfeb9f5d702f035fc714d9cb790a61f575cb7c61904e.png"
+      },
+      "bytes": 1921705,
+      "id": "136bce346fe6949446becfeb9f5d702f035fc714d9cb790a61f575cb7c61904e",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-a8b76e15d360",
+      "createdAt": "2026-11-04T02:20:29.280Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2f34c01e45e4221c6fbe8ad265fe96529ce747aa484718b96c0229c37021bf86"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:23:35.201Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2f34c01e45e4221c6fbe8ad265fe96529ce747aa484718b96c0229c37021bf86",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a39/inputs/2f34c01e45e4221c6fbe8ad265fe96529ce747aa484718b96c0229c37021bf86.json"
+          },
+          "bytes": 8120
+        },
+        "production": {
+          "id": "NCI-00221",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "a8b76e15d3602b3035633e2c5596ef0ba4b781617d348d15ebbcbaa07624da6c"
+        }
+      }
+    }
+  ]
+}

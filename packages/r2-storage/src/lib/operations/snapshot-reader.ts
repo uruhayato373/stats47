@@ -9,8 +9,17 @@ const DEFAULT_TIMEOUT_MS = 10_000;
 // R2 自体は 0.1 秒で返すのに 10 秒を超えて「取得失敗」と扱われていた (2026-10-21 実測)。
 const DEVELOPMENT_TIMEOUT_MS = 60_000;
 
+// next build の静的生成 (1,600 ページ超) は、各ページが同じ snapshot を module-level キャッシュ無しで
+// 並行して読む。ローカルの build は公開 R2 URL を読むため、同時に積み上がった読み込みが 10 秒を
+// 超え、1 回目だけ `/tag/*` で落ちることがあった (2026-10-21・8GB の Mac)。
+// 本番の実行時の 10 秒は変えず、ビルド中だけ延ばす。ページ全体の上限
+// (next.config の staticPageGenerationTimeout = 180 秒) より短く保つ。
+const BUILD_TIMEOUT_MS = 60_000;
+
 function defaultTimeoutMs(): number {
-  return process.env.NODE_ENV === "development" ? DEVELOPMENT_TIMEOUT_MS : DEFAULT_TIMEOUT_MS;
+  if (process.env.NODE_ENV === "development") return DEVELOPMENT_TIMEOUT_MS;
+  if (process.env.NEXT_PHASE === "phase-production-build") return BUILD_TIMEOUT_MS;
+  return DEFAULT_TIMEOUT_MS;
 }
 const DEFAULT_MAX_ATTEMPTS = 1;
 
@@ -61,7 +70,7 @@ export interface SnapshotReaderOptions<TSnapshot, TData> {
   readonly generatedAt?: (snapshot: TSnapshot) => string | undefined;
   /** stale 警告の閾値日数（既定 30） */
   readonly staleAfterDays?: number;
-  /** 1回の取得上限（既定10秒。next dev では60秒） */
+  /** 1回の取得上限（既定10秒。next dev と next build の静的生成中は60秒） */
   readonly timeoutMs?: number;
   /** transport error / timeoutだけを再試行する回数（既定1回） */
   readonly maxAttempts?: number;

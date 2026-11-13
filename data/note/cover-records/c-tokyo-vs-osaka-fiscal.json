@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "c-tokyo-vs-osaka-fiscal",
+  "production": {
+    "id": "NCI-00237",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "東京と大阪\n財政はどう違う？",
+      "subline": "税収と歳出の構造を比べる\n2022年度のデータ",
+      "subject": "緑とクリームと黄色。東京を思わせる塔を含む街並みと、大阪を思わせる城とビルの街並みを右側の二つの挿絵として同じ大きさに並べる。精密な建物再現は不要。前景に無文字の予算資料を小さく。勝ち負け、札束の量差、グラフ、行政界、人物を描かない。",
+      "evidence": "https://note.com/stats47/n/n0eb7e589b1ba 公開本文を2026-10-14確認。2022年度の東京都と大阪府の財政力、地方税、交付税、商工費等の割合と歳入歳出構造を比較。東京23区と大阪市の比較ではなく都府の比較。カバーで自立・依存の優劣や支出総額の大小を断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "590529706949b5fd7ecf1716bc461f69b53b3edae4e72effd823743f8358f74e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-tokyo-vs-osaka-fiscal/revisions/590529706949b5fd7ecf1716bc461f69b53b3edae4e72effd823743f8358f74e.png"
+      },
+      "bytes": 45414,
+      "id": "590529706949b5fd7ecf1716bc461f69b53b3edae4e72effd823743f8358f74e",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:24.455Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4aa69608fd16e2f6ade64d1de97ea63c71fe5e2c3c53aef2c5fd8796aca0ec10"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:30.589Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4aa69608fd16e2f6ade64d1de97ea63c71fe5e2c3c53aef2c5fd8796aca0ec10",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/c-tokyo-vs-osaka-fiscal/inputs/4aa69608fd16e2f6ade64d1de97ea63c71fe5e2c3c53aef2c5fd8796aca0ec10.json"
+          },
+          "bytes": 1217
+        }
+      }
+    },
+    {
+      "sha256": "ca95e9b07cde8338e147d3121806f625112783ec79f32bf5df4beaff414b35e4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-tokyo-vs-osaka-fiscal/revisions/ca95e9b07cde8338e147d3121806f625112783ec79f32bf5df4beaff414b35e4.png"
+      },
+      "bytes": 84897,
+      "id": "ca95e9b07cde8338e147d3121806f625112783ec79f32bf5df4beaff414b35e4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T08:41:26.134Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323545390/rectangle_large_type_2_6d4f10a0c9302e05d4d927c1a92e7e3f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ca95e9b07cde8338e147d3121806f625112783ec79f32bf5df4beaff414b35e4"
+      }
+    },
+    {
+      "sha256": "dbf7b68dd687f5a89b426bf8f3bdf99fc1bd7b4674081f024db54d3b47cc1259",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-tokyo-vs-osaka-fiscal/revisions/dbf7b68dd687f5a89b426bf8f3bdf99fc1bd7b4674081f024db54d3b47cc1259.png"
+      },
+      "bytes": 2011472,
+      "id": "dbf7b68dd687f5a89b426bf8f3bdf99fc1bd7b4674081f024db54d3b47cc1259",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-next-six-20261014",
+      "createdAt": "2026-10-14T08:59:26.148Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "724787a12f8a1f5759c922e9772811fa5f435467602502552c9de02d278fee08"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "2026-10-14に原寸と幅320px、管理画面の修正前後で確認済み。2026-10-15ユーザーがこの6件の公開反映を指示。",
+        "reviewedAt": "2026-10-15T00:44:07.838Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "724787a12f8a1f5759c922e9772811fa5f435467602502552c9de02d278fee08",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/c-tokyo-vs-osaka-fiscal/inputs/724787a12f8a1f5759c922e9772811fa5f435467602502552c9de02d278fee08.json"
+          },
+          "bytes": 8174
+        },
+        "production": {
+          "id": "NCI-00237",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "2488216d5611389aa5c3b2e5415509a6959ecee32559c873ac2b6acc3a5a0fd3"
+        }
+      }
+    }
+  ]
+}

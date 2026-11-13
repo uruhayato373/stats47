@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-maximum-temperature",
+  "production": {
+    "id": "NCI-00113",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "最高気温\n熊本と北海道",
+      "subline": "2024年・県庁所在地",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に強い日差しを受けた街並みと涼しい街並みを対で見せる。温度計や数値、順位表は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n91e96edf3950 2026-10-23公開API本文照合。記事題名「【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海」。熊本と2024年を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1ab8e8bb76f9b97bc83d211b953d3662dfb883f346ee9c1bf91ced43f1f1128f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/1ab8e8bb76f9b97bc83d211b953d3662dfb883f346ee9c1bf91ced43f1f1128f.png"
+      },
+      "bytes": 36353,
+      "id": "1ab8e8bb76f9b97bc83d211b953d3662dfb883f346ee9c1bf91ced43f1f1128f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:14.338Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772027/rectangle_large_type_2_e872750525c2c78390f105ade98c7a6b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1ab8e8bb76f9b97bc83d211b953d3662dfb883f346ee9c1bf91ced43f1f1128f"
+      }
+    },
+    {
+      "sha256": "81d491fa4d113510cd8be35f145fc174f231172d494e41cc0de05b3a2060d15c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/81d491fa4d113510cd8be35f145fc174f231172d494e41cc0de05b3a2060d15c.png"
+      },
+      "bytes": 93904,
+      "id": "81d491fa4d113510cd8be35f145fc174f231172d494e41cc0de05b3a2060d15c",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:39:03.519Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5d967c097d87498bf7678986777d2f4afda290c0c211d83b93a05391e49a4c37"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:48:37.701Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5d967c097d87498bf7678986777d2f4afda290c0c211d83b93a05391e49a4c37",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-maximum-temperature/inputs/5d967c097d87498bf7678986777d2f4afda290c0c211d83b93a05391e49a4c37.json"
+          },
+          "bytes": 1314
+        }
+      }
+    },
+    {
+      "sha256": "80264d8409f8b1887196af82b4ce9f87c7d5aea0344b680cd6df4231bb29d64d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/80264d8409f8b1887196af82b4ce9f87c7d5aea0344b680cd6df4231bb29d64d.png"
+      },
+      "bytes": 124559,
+      "id": "80264d8409f8b1887196af82b4ce9f87c7d5aea0344b680cd6df4231bb29d64d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:54:58.486Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320255894/rectangle_large_type_2_0ca937e0b29211c032e6757d6dea13f4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "80264d8409f8b1887196af82b4ce9f87c7d5aea0344b680cd6df4231bb29d64d"
+      }
+    },
+    {
+      "sha256": "0d31578be2890ddc1f5a52d0e185607ad7cbb8825cf45098c1470d6e03384832",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/0d31578be2890ddc1f5a52d0e185607ad7cbb8825cf45098c1470d6e03384832.png"
+      },
+      "bytes": 40937,
+      "id": "0d31578be2890ddc1f5a52d0e185607ad7cbb8825cf45098c1470d6e03384832",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:04:08.322Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f91ab65f74fd30b23ab86bfe5e1abfa7937a26d7c75fdb91793b282fb02b40c0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.008/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:24.076Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f91ab65f74fd30b23ab86bfe5e1abfa7937a26d7c75fdb91793b282fb02b40c0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-maximum-temperature/inputs/f91ab65f74fd30b23ab86bfe5e1abfa7937a26d7c75fdb91793b282fb02b40c0.json"
+          },
+          "bytes": 1314
+        }
+      }
+    },
+    {
+      "sha256": "4174741a26a2896b4ea45d7734fc7effac330bb16ae49f3f878c359fcf06b5bf",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/4174741a26a2896b4ea45d7734fc7effac330bb16ae49f3f878c359fcf06b5bf.png"
+      },
+      "bytes": 69567,
+      "id": "4174741a26a2896b4ea45d7734fc7effac330bb16ae49f3f878c359fcf06b5bf",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:20.711Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276757/rectangle_large_type_2_56ff909052b7c51bc078ee1bfe8aceb9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4174741a26a2896b4ea45d7734fc7effac330bb16ae49f3f878c359fcf06b5bf"
+      }
+    },
+    {
+      "sha256": "60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb.png"
+      },
+      "bytes": 1809447,
+      "id": "60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:09:37.218Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4be0177fbbe6b93dfc9293613bcef1744e934e0c83a20e4d190d132fbe39b287"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00113: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。ranking-story。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 60e6c059580bf2fdd33768b252d61fb2f5fa8caa1f4b8f42336f72191babdcfb。",
+        "reviewedAt": "2026-10-15T07:22:20.053Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4be0177fbbe6b93dfc9293613bcef1744e934e0c83a20e4d190d132fbe39b287",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-maximum-temperature/inputs/4be0177fbbe6b93dfc9293613bcef1744e934e0c83a20e4d190d132fbe39b287.json"
+          },
+          "bytes": 9716
+        },
+        "production": {
+          "id": "NCI-00113",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "fdd12ce883d054e094ac26070e5c81143b4ca9695eb713b1d332dd5cb07aba8d"
+        }
+      }
+    },
+    {
+      "sha256": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-maximum-temperature/revisions/dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27.png"
+      },
+      "bytes": 1768425,
+      "id": "dc7a679016683106731a8d023fa1e419105268368e470bd00c81edc35a51aa27",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-334c98e3c4cd",
+      "createdAt": "2026-10-23T11:11:57.550Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8e548aff09d28843eb7c7091314fa8180d68c775f9deb0957b4d0155fc788cd6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:14:26.635Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8e548aff09d28843eb7c7091314fa8180d68c775f9deb0957b4d0155fc788cd6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-maximum-temperature/inputs/8e548aff09d28843eb7c7091314fa8180d68c775f9deb0957b4d0155fc788cd6.json"
+          },
+          "bytes": 8765
+        },
+        "production": {
+          "id": "NCI-00113",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "334c98e3c4cd4c9bea18fff65c11d927b85de79f03841e3fcc00929f8b74d259"
+        }
+      }
+    }
+  ]
+}

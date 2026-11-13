@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-07",
+  "production": {
+    "id": "NCI-00176",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "パソコンは5.24倍\nテレビは1.39倍",
+      "subline": "家電と映像の10品目を年収で比較",
+      "subject": "閉じたノートPCと小型テレビ、冷蔵庫の模型を大きく描く。画面は無文字。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n5c964549ec30 本文確認2026-11-04。家電と映像関連10品目の支出を年収5階級で比較。パソコン5.24倍、テレビ1.39倍。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-07/revisions/e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473.png"
+      },
+      "bytes": 45664,
+      "id": "e4b574156bcab6927fe6cbb5c4311bd54dd27e99619812745c9ff757fc394473",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:13.967Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cc531f81a98e04f722b6efd8e0f2d301050e6fde8860631b25581018cfd985a0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:48.982Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cc531f81a98e04f722b6efd8e0f2d301050e6fde8860631b25581018cfd985a0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-07/inputs/cc531f81a98e04f722b6efd8e0f2d301050e6fde8860631b25581018cfd985a0.json"
+          },
+          "bytes": 1299
+        }
+      }
+    },
+    {
+      "sha256": "898d1c704a6b5e5f573e9d414199dd0740d278004e0bc6d10a56a5c78d038260",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-07/revisions/898d1c704a6b5e5f573e9d414199dd0740d278004e0bc6d10a56a5c78d038260.png"
+      },
+      "bytes": 109544,
+      "id": "898d1c704a6b5e5f573e9d414199dd0740d278004e0bc6d10a56a5c78d038260",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:20.343Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324129753/rectangle_large_type_2_b8013b41b9378ca37b227cd88caa4eb4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "898d1c704a6b5e5f573e9d414199dd0740d278004e0bc6d10a56a5c78d038260"
+      }
+    },
+    {
+      "sha256": "0e1e0032b48a6c5eb51656cea1f8e03f72c1d4952d6348b9acd9d7ce958994eb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-07/revisions/0e1e0032b48a6c5eb51656cea1f8e03f72c1d4952d6348b9acd9d7ce958994eb.png"
+      },
+      "bytes": 1849245,
+      "id": "0e1e0032b48a6c5eb51656cea1f8e03f72c1d4952d6348b9acd9d7ce958994eb",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-73039a2766c2",
+      "createdAt": "2026-11-04T01:22:31.346Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "83c4501386291f48b7653d3a44354f05886149891ffb824e2962be98953b20c1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:40.247Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "83c4501386291f48b7653d3a44354f05886149891ffb824e2962be98953b20c1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-07/inputs/83c4501386291f48b7653d3a44354f05886149891ffb824e2962be98953b20c1.json"
+          },
+          "bytes": 8219
+        },
+        "production": {
+          "id": "NCI-00176",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "73039a2766c2d0e468c503c14b46fa539be2f2c213cf066aacb0941cd60cda58"
+        }
+      }
+    }
+  ]
+}

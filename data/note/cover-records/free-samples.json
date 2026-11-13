@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "free-samples",
+  "production": {
+    "id": "NCI-00276",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

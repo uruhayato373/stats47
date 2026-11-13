@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n08eb33492a93",
+  "production": {
+    "id": "NCI-00383",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "コーラス・声楽\n1位は神奈川県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の合唱ホールと無文字の楽譜用白紙を描く。歌手・人物・顔は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n08eb33492a93 2026-10-23公開API本文照合。記事題名「【2021年版】コーラス・声楽をした人が多い県は？ 1位は神奈川県｜都道府県ランキング」。本文中の「神奈川県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a28bc6eedaa555272b7684121e25c7eaf4b970ee881f8a383523f377fe6744c0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n08eb33492a93/revisions/a28bc6eedaa555272b7684121e25c7eaf4b970ee881f8a383523f377fe6744c0.png"
+      },
+      "bytes": 82154,
+      "id": "a28bc6eedaa555272b7684121e25c7eaf4b970ee881f8a383523f377fe6744c0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:48.232Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773574/rectangle_large_type_2_ce78c04ef3f2f9a0777972d569288dc5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a28bc6eedaa555272b7684121e25c7eaf4b970ee881f8a383523f377fe6744c0"
+      }
+    },
+    {
+      "sha256": "ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n08eb33492a93/revisions/ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e.png"
+      },
+      "bytes": 113958,
+      "id": "ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:08.844Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ae2e9dd1a338f8a858a22098ff791ef4d4ced9c0b3fb4525b566d175011ffb98"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-chorus/values.json",
+        "sourceSha256": "ad5ad0963cc894db49726b28c9d9a096da0d1118093cdbb838d77f5c44c38590",
+        "input": {
+          "sha256": "ae2e9dd1a338f8a858a22098ff791ef4d4ced9c0b3fb4525b566d175011ffb98",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n08eb33492a93/inputs/ae2e9dd1a338f8a858a22098ff791ef4d4ced9c0b3fb4525b566d175011ffb98.json"
+          },
+          "bytes": 6571
+        }
+      }
+    },
+    {
+      "sha256": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n08eb33492a93/revisions/43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae.png"
+      },
+      "bytes": 1867432,
+      "id": "43e0a2ad0da3aca7bcffb29307cc1fe9ba02d2c350aa8ad131eb21a1847392ae",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-9e924449d919",
+      "createdAt": "2026-10-23T14:07:16.494Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4c1f22f3e5b192a5da828aad602d62cbcd5c5b870bea240006c3f98d2b68cecf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:09:20.071Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4c1f22f3e5b192a5da828aad602d62cbcd5c5b870bea240006c3f98d2b68cecf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n08eb33492a93/inputs/4c1f22f3e5b192a5da828aad602d62cbcd5c5b870bea240006c3f98d2b68cecf.json"
+          },
+          "bytes": 8749
+        },
+        "production": {
+          "id": "NCI-00383",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "9e924449d919a6768445f17f7c4813f69858e982c39df34659bcc4e2e3187810"
+        }
+      }
+    }
+  ]
+}

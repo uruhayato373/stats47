@@ -11,6 +11,7 @@ import { snsImageTemplate } from '../lib/catalog.mjs';
 import { roleForTemplate } from '../lib/classification.mjs';
 import { saveImagePolicy, assessImage } from '../lib/workspace.mjs';
 import { saveImageComparison } from '../lib/workspace.mjs';
+import { COVER_RECORDS_DIR } from '../../note/lib/cover-assets.mjs';
 
 test('SNS classification uses asset evidence and excludes non-chart carousel slides',()=>{
  assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'unclassified');
@@ -51,6 +52,8 @@ function fixture(t){
   if(rel===FILES.inventory&&!fs.existsSync(path.join(ROOT,rel))){fs.writeFileSync(path.join(root,rel),JSON.stringify({schemaVersion:1,articles:{}}));continue;}
   fs.copyFileSync(path.join(ROOT,rel),path.join(root,rel));
  }
+ // カバーの台帳は正本 (cover-assets.json) と記事ごとの記録に分かれている。両方そろえて写す
+ fs.cpSync(path.join(ROOT,COVER_RECORDS_DIR),path.join(root,COVER_RECORDS_DIR),{recursive:true});
  fs.writeFileSync(path.join(root,FILES.quality),JSON.stringify({schemaVersion:1,reviews:{},images:{}}));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;
 }
@@ -229,6 +232,17 @@ test('image references skip code examples but keep real images, headings and lin
  assert.deepEqual(refs.map(r=>r.line),[12,13]);
  assert.deepEqual(refs.map(r=>r.heading),['実例','実例']);
  assert.equal(refs[0].alt,'実画像');
+});
+
+test('inline SVG references skip code examples but keep real SVG offsets and lines',()=>{
+ const real='<svg viewBox="0 0 10 10"><text>実</text></svg>';
+ const md=['# 記法','例は `<svg><text>inline</text></svg>` と書く。','```html','<svg><text>fence</text></svg>','```','~~~','<svg><text>tilde</text></svg>','~~~','## 実例',real].join('\n');
+ const refs=inlineSvgReferences(md);
+ assert.equal(refs.length,1);
+ assert.equal(refs[0].line,10);
+ assert.equal(md.slice(refs[0].start,refs[0].end),real);
+ assert.equal(refs[0].sha256,sha(Buffer.from(real)));
+ assert.equal(refs[0].bytes,Buffer.byteLength(real));
 });
 
 test('SVG candidates reject executable and externally loaded resources before rendering',()=>{

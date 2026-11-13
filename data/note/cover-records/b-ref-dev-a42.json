@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a42",
+  "production": {
+    "id": "NCI-00161",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "第1子を産む母の年齢\n47都道府県を比較",
+      "subline": "2024年の人口動態調査",
+      "subject": "小さなベビーシューズと、無文字の母子手帳風のノートを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nda788ad0528b 本文確認2026-11-04。2024年の第1子出生時の母の平均年齢。東京都が最も高く32.5歳、宮崎県が最も低い。出産の時期に価値判断をしない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a42/revisions/5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c.png"
+      },
+      "bytes": 34011,
+      "id": "5aa649feca45eba0faa5f44c5138bfb263e324a5cab3515036a2c97ddf62db0c",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:27.041Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "446eafea78e6d3a1568553f49c719679ae281d0fe1dc04f7954a9fd26ae895bb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:27.473Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "446eafea78e6d3a1568553f49c719679ae281d0fe1dc04f7954a9fd26ae895bb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a42/inputs/446eafea78e6d3a1568553f49c719679ae281d0fe1dc04f7954a9fd26ae895bb.json"
+          },
+          "bytes": 1269
+        }
+      }
+    },
+    {
+      "sha256": "6b1f0702372c6b09a25be9531ec719269dc4bf888c721876384e142dbe54a1aa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a42/revisions/6b1f0702372c6b09a25be9531ec719269dc4bf888c721876384e142dbe54a1aa.png"
+      },
+      "bytes": 86436,
+      "id": "6b1f0702372c6b09a25be9531ec719269dc4bf888c721876384e142dbe54a1aa",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:43.213Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324070154/rectangle_large_type_2_7c98c518ba05f54e08965e21bfe78e23.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6b1f0702372c6b09a25be9531ec719269dc4bf888c721876384e142dbe54a1aa"
+      }
+    },
+    {
+      "sha256": "a1f3e0c557543e325489e1b3b9f106df2b06ff10c32c7c2522aa849f17840a3c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a42/revisions/a1f3e0c557543e325489e1b3b9f106df2b06ff10c32c7c2522aa849f17840a3c.png"
+      },
+      "bytes": 1907797,
+      "id": "a1f3e0c557543e325489e1b3b9f106df2b06ff10c32c7c2522aa849f17840a3c",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-929770afe2eb",
+      "createdAt": "2026-11-04T01:08:00.314Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0cd72133c1274faba95e2f936561988d8623dff60d79eac9b5c3a16964781772"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:14.862Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0cd72133c1274faba95e2f936561988d8623dff60d79eac9b5c3a16964781772",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a42/inputs/0cd72133c1274faba95e2f936561988d8623dff60d79eac9b5c3a16964781772.json"
+          },
+          "bytes": 8228
+        },
+        "production": {
+          "id": "NCI-00161",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "929770afe2eb1de7278bfceacf6ee3047e8a8d67b4cf57ee9f3d5153bba76e72"
+        }
+      }
+    }
+  ]
+}

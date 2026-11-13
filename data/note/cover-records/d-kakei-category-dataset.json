@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-kakei-category-dataset",
+  "production": {
+    "id": "NCI-00255",
+    "policyId": "NCP-006",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "家計データを\n比べて使う",
+      "subline": "47県庁所在市・十大費目\n2007〜2024年",
+      "subject": "青緑と明るい黄色、クリーム色の手描きの質感。整理された机の右側に青緑色の資料フォルダーと開いた白紙のノートを大きく描く。データファイルを扱う題材としての挿絵にとどめ、実際の商品収録表・図・架空のCSVやUIを創作しない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/na416c57e461c 2026-10-15公開本文確認。公開無料部分に、47都道府県庁所在市・十大費目・2007〜2024年の18年分の配布データと検算/更新手順の説明を確認。県全体の観測値と混同せず、未検証の8.7倍やファイル数・行数はカバーへ載せない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2297c27715f1529a08b74e0f60dcdeb283df23b405d90e72e1187d6d621932d6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-category-dataset/revisions/2297c27715f1529a08b74e0f60dcdeb283df23b405d90e72e1187d6d621932d6.png"
+      },
+      "bytes": 79222,
+      "id": "2297c27715f1529a08b74e0f60dcdeb283df23b405d90e72e1187d6d621932d6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:26.514Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772525/rectangle_large_type_2_e32ff61375adbd95c63534736322572e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2297c27715f1529a08b74e0f60dcdeb283df23b405d90e72e1187d6d621932d6"
+      }
+    },
+    {
+      "sha256": "232e8e0e00cfa31f41cb202da1b1c8797e98f7d42ab8cac05da8fb5401ccd41b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-category-dataset/revisions/232e8e0e00cfa31f41cb202da1b1c8797e98f7d42ab8cac05da8fb5401ccd41b.png"
+      },
+      "bytes": 42652,
+      "id": "232e8e0e00cfa31f41cb202da1b1c8797e98f7d42ab8cac05da8fb5401ccd41b",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:48.578Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cf383855fa14c2e991e59c1b4e8372defa2eebda8a8856ab93ab6586df2d468c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の分析結果の県別地図または記事図が確認できる(平均画素差0.024/255で確認版と同一)",
+        "reviewedAt": "2026-10-11T12:18:12.138Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cf383855fa14c2e991e59c1b4e8372defa2eebda8a8856ab93ab6586df2d468c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-kakei-category-dataset/inputs/cf383855fa14c2e991e59c1b4e8372defa2eebda8a8856ab93ab6586df2d468c.json"
+          },
+          "bytes": 1355
+        }
+      }
+    },
+    {
+      "sha256": "14af0c1d3d2b1851564f21b75daeb586567d54543e02b840f48158f2caac5343",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-category-dataset/revisions/14af0c1d3d2b1851564f21b75daeb586567d54543e02b840f48158f2caac5343.png"
+      },
+      "bytes": 73342,
+      "id": "14af0c1d3d2b1851564f21b75daeb586567d54543e02b840f48158f2caac5343",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:21.042Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323277127/rectangle_large_type_2_45c6670b612515a9369b51117e86cfc9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "14af0c1d3d2b1851564f21b75daeb586567d54543e02b840f48158f2caac5343"
+      }
+    },
+    {
+      "sha256": "f9cffd1cd48bb05148ab82529ea8cd5098ab51383014fdf5479e23e4aaaaf983",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-category-dataset/revisions/f9cffd1cd48bb05148ab82529ea8cd5098ab51383014fdf5479e23e4aaaaf983.png"
+      },
+      "bytes": 1755653,
+      "id": "f9cffd1cd48bb05148ab82529ea8cd5098ab51383014fdf5479e23e4aaaaf983",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:13:15.954Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "453ce324cbb8780e8fef6b8d8eecf2ca37d3ed74282c3c55305c65598cb4cfa5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:28:24.988Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "453ce324cbb8780e8fef6b8d8eecf2ca37d3ed74282c3c55305c65598cb4cfa5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-kakei-category-dataset/inputs/453ce324cbb8780e8fef6b8d8eecf2ca37d3ed74282c3c55305c65598cb4cfa5.json"
+          },
+          "bytes": 8989
+        },
+        "production": {
+          "id": "NCI-00255",
+          "policyId": "NCP-006",
+          "policyVersion": 2,
+          "planSha256": "168f0f87e9eb26c61933aacd445a47d863d6d4944565d097a3a35b2ddcdbd7a4"
+        }
+      }
+    }
+  ]
+}

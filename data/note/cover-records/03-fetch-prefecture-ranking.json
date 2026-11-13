@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "03-fetch-prefecture-ranking",
+  "production": {
+    "id": "NCI-00007",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "47都道府県データを\n1コマンドで取得",
+      "subline": "fetch-estat-dataスキルの使い方",
+      "subject": "ノートPCと、きれいにそろえた紙束を大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n914ee28ff773 本文確認2026-11-04。fetch-estat-dataスキルで47都道府県のデータを取得する手順。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "09c2e00633850d7899f55b793c27f28a29c12eec91d92ad8d0ea3cf31b04795e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-fetch-prefecture-ranking/revisions/09c2e00633850d7899f55b793c27f28a29c12eec91d92ad8d0ea3cf31b04795e.png"
+      },
+      "bytes": 112677,
+      "id": "09c2e00633850d7899f55b793c27f28a29c12eec91d92ad8d0ea3cf31b04795e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:42.950Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292994711/rectangle_large_type_2_699a124bf40bb0c52441b53a0e6def38.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "09c2e00633850d7899f55b793c27f28a29c12eec91d92ad8d0ea3cf31b04795e"
+      }
+    },
+    {
+      "sha256": "676bf9d0eecfd9060b52d28050d48c2422d0ff04b3eb7ceab52b5b6901fee236",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-fetch-prefecture-ranking/revisions/676bf9d0eecfd9060b52d28050d48c2422d0ff04b3eb7ceab52b5b6901fee236.png"
+      },
+      "bytes": 57887,
+      "id": "676bf9d0eecfd9060b52d28050d48c2422d0ff04b3eb7ceab52b5b6901fee236",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:44.850Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "234ddca3e0e9b4efd382f976cb1555859556d1270c6045cd0131780b9b3e292a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:37.730Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "234ddca3e0e9b4efd382f976cb1555859556d1270c6045cd0131780b9b3e292a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/03-fetch-prefecture-ranking/inputs/234ddca3e0e9b4efd382f976cb1555859556d1270c6045cd0131780b9b3e292a.json"
+          },
+          "bytes": 1099
+        }
+      }
+    },
+    {
+      "sha256": "040acc31aa514b49c7bf466a7d5cc0038f5dfc41cefa1081af5df2db023acb1c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-fetch-prefecture-ranking/revisions/040acc31aa514b49c7bf466a7d5cc0038f5dfc41cefa1081af5df2db023acb1c.png"
+      },
+      "bytes": 44839,
+      "id": "040acc31aa514b49c7bf466a7d5cc0038f5dfc41cefa1081af5df2db023acb1c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:06.469Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329115/rectangle_large_type_2_704ec2fd418276cfda70635bf1ef792c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "040acc31aa514b49c7bf466a7d5cc0038f5dfc41cefa1081af5df2db023acb1c"
+      }
+    },
+    {
+      "sha256": "8a10042eef4e0d0250af873edff85d2382f77b1ffda5341b3f075e88129e2b3a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-fetch-prefecture-ranking/revisions/8a10042eef4e0d0250af873edff85d2382f77b1ffda5341b3f075e88129e2b3a.png"
+      },
+      "bytes": 1905704,
+      "id": "8a10042eef4e0d0250af873edff85d2382f77b1ffda5341b3f075e88129e2b3a",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-1f2540ba4ca2",
+      "createdAt": "2026-11-04T00:16:49.944Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "585c40b1197b50c6b96f5a9245f88ed0d7fcd7d4065af7d4d0da1226fb59f1c9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:12.954Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "585c40b1197b50c6b96f5a9245f88ed0d7fcd7d4065af7d4d0da1226fb59f1c9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/03-fetch-prefecture-ranking/inputs/585c40b1197b50c6b96f5a9245f88ed0d7fcd7d4065af7d4d0da1226fb59f1c9.json"
+          },
+          "bytes": 8715
+        },
+        "production": {
+          "id": "NCI-00007",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "1f2540ba4ca224c49ae0d75d43eb28b7e4f195c1e9b1ae9793e9444ecaa2f78d"
+        }
+      }
+    }
+  ]
+}

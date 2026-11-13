@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-utilities",
+  "production": {
+    "id": "NCI-00517",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "光熱費の県差は\nどの燃料が作るのか",
+      "subline": "電気代1.7倍、灯油56.5倍",
+      "subject": "赤い灯油用ポリタンクと大きな電球を並べて置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。容器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。題名どおり電気代の差は1.7倍、灯油は56.5倍(青森市と大阪市)。答えは比べる相手で変わる記事なので、見出しは問いのまま断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-utilities/revisions/89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912.png"
+      },
+      "bytes": 1835930,
+      "id": "89e768be8af258fc9c13cf5790c2b5e31eef344eabb710984f12c452c2e54912",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-f457e8a079a9",
+      "createdAt": "2026-11-04T23:09:55.643Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d2fa6b5842997aaf2077c6fa60551a055f419eb867c36991629c542bf7cb4599"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:09:59.759Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d2fa6b5842997aaf2077c6fa60551a055f419eb867c36991629c542bf7cb4599",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-utilities/inputs/d2fa6b5842997aaf2077c6fa60551a055f419eb867c36991629c542bf7cb4599.json"
+          },
+          "bytes": 8514
+        },
+        "production": {
+          "id": "NCI-00517",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "f457e8a079a9bd70bb590f827ab48b1ec8151fdeb8ce4a00ec758fba453c79d6"
+        }
+      }
+    },
+    {
+      "sha256": "768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-utilities/revisions/768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed.png"
+      },
+      "bytes": 445328,
+      "id": "768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T12:50:02.926Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332617343/rectangle_large_type_2_39e20fc5be949411cc1b39368c97c0ee.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "768d7a7abcc54c04d428050fb919598dac2b576fe413a12224a7db85d9c451ed"
+      }
+    }
+  ]
+}

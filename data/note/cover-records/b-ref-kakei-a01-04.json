@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a01-04",
+  "production": {
+    "id": "NCI-00170",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "教育費の内訳を\n47市で比較",
+      "subline": "塾代と国公立大学への支出",
+      "subject": "角帽ではなく、無文字の参考書と大学ノート、封筒を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n324be1cc99a6 本文確認2026-11-04。教育費の内訳の比較。長崎市・盛岡市などは高校補習教育・予備校への支出が少なく、国公立大学への支出が多い上位に入る。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-04/revisions/15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c.png"
+      },
+      "bytes": 38171,
+      "id": "15d49d1fe30682d61d2364230c7e05be2d34297b9ff723d9b73d33977026b59c",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:42.664Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9fe7a6759e9fc500a2b201ae6627dedb0eb4362a91ab1b80e431379e1694092a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:39.138Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9fe7a6759e9fc500a2b201ae6627dedb0eb4362a91ab1b80e431379e1694092a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-04/inputs/9fe7a6759e9fc500a2b201ae6627dedb0eb4362a91ab1b80e431379e1694092a.json"
+          },
+          "bytes": 1329
+        }
+      }
+    },
+    {
+      "sha256": "3fcfbb42a8bdb9fe32d51f4ba0b1e8c46ec4114a17f0a68e2b10c4f46e2af59e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-04/revisions/3fcfbb42a8bdb9fe32d51f4ba0b1e8c46ec4114a17f0a68e2b10c4f46e2af59e.png"
+      },
+      "bytes": 61536,
+      "id": "3fcfbb42a8bdb9fe32d51f4ba0b1e8c46ec4114a17f0a68e2b10c4f46e2af59e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:26.824Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324079805/rectangle_large_type_2_09f81c7ac71f6857ea5b62c5e5e8970c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3fcfbb42a8bdb9fe32d51f4ba0b1e8c46ec4114a17f0a68e2b10c4f46e2af59e"
+      }
+    },
+    {
+      "sha256": "83a9358f3f30862be12e5f07b9f31e68e37583c984bf1ea24a7c4411bf3a56a6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-04/revisions/83a9358f3f30862be12e5f07b9f31e68e37583c984bf1ea24a7c4411bf3a56a6.png"
+      },
+      "bytes": 1961176,
+      "id": "83a9358f3f30862be12e5f07b9f31e68e37583c984bf1ea24a7c4411bf3a56a6",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-91bf42d4b948",
+      "createdAt": "2026-11-04T01:09:16.007Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e0c4c94002b8fef4d0b6a4b8da4e1857ad12fccc587fa720c22dca6e32b9009b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:44.815Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e0c4c94002b8fef4d0b6a4b8da4e1857ad12fccc587fa720c22dca6e32b9009b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-04/inputs/e0c4c94002b8fef4d0b6a4b8da4e1857ad12fccc587fa720c22dca6e32b9009b.json"
+          },
+          "bytes": 8214
+        },
+        "production": {
+          "id": "NCI-00170",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "91bf42d4b948ccb46a4b40b0898ece7cbf5df84c5aa0ad3a9613cf472b5209e3"
+        }
+      }
+    }
+  ]
+}

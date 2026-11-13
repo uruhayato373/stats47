@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "32-claude-skills-getting-started",
+  "production": {
+    "id": "NCI-00047",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": ".claude/skills\n入門",
+      "subline": "うまくいった頼み方を職場の資産に",
+      "subject": "無文字の手順書のバインダーと、小さな鍵付きでない宝箱型の書類箱を大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/nac5e44284865 本文確認2026-11-04。一度うまくいった頼み方をスキルとして保存する入門。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "9a5a7b4967739a191958f2832d59319c74076f96e27a19cadbb7d0825ec1e062",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/32-claude-skills-getting-started/revisions/9a5a7b4967739a191958f2832d59319c74076f96e27a19cadbb7d0825ec1e062.png"
+      },
+      "bytes": 112521,
+      "id": "9a5a7b4967739a191958f2832d59319c74076f96e27a19cadbb7d0825ec1e062",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:40.001Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292994504/rectangle_large_type_2_0f933da67fa9cf0d3d44daab9ad4b96b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9a5a7b4967739a191958f2832d59319c74076f96e27a19cadbb7d0825ec1e062"
+      }
+    },
+    {
+      "sha256": "3665bb5be144317f53b4b73c06d84d814ad3358cd480c5c22f7d570ab688088b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/32-claude-skills-getting-started/revisions/3665bb5be144317f53b4b73c06d84d814ad3358cd480c5c22f7d570ab688088b.png"
+      },
+      "bytes": 63789,
+      "id": "3665bb5be144317f53b4b73c06d84d814ad3358cd480c5c22f7d570ab688088b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:25.563Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2f9a1d0e27a78406929da9bfe75204d324cd3768b6352a201f0902f8706b6705"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:30.545Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2f9a1d0e27a78406929da9bfe75204d324cd3768b6352a201f0902f8706b6705",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/32-claude-skills-getting-started/inputs/2f9a1d0e27a78406929da9bfe75204d324cd3768b6352a201f0902f8706b6705.json"
+          },
+          "bytes": 1111
+        }
+      }
+    },
+    {
+      "sha256": "c23a90b332caf10bda0612278b9ba30e56b8c14cb2be4ca9540ec2b9905fa6ef",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/32-claude-skills-getting-started/revisions/c23a90b332caf10bda0612278b9ba30e56b8c14cb2be4ca9540ec2b9905fa6ef.png"
+      },
+      "bytes": 76748,
+      "id": "c23a90b332caf10bda0612278b9ba30e56b8c14cb2be4ca9540ec2b9905fa6ef",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:03.268Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331842/rectangle_large_type_2_82637eeea8437012c1128df5ce2b35f5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c23a90b332caf10bda0612278b9ba30e56b8c14cb2be4ca9540ec2b9905fa6ef"
+      }
+    },
+    {
+      "sha256": "4cdd7e641bac1d040e7f229c723c579ffe5bd2a3294c34d7778e6a4f7a692615",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/32-claude-skills-getting-started/revisions/4cdd7e641bac1d040e7f229c723c579ffe5bd2a3294c34d7778e6a4f7a692615.png"
+      },
+      "bytes": 27111,
+      "id": "4cdd7e641bac1d040e7f229c723c579ffe5bd2a3294c34d7778e6a4f7a692615",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:58.620Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d8fd582d3dccb3f14fdb190c0be25db765362a1f2e6101b5b491abb48b5c6a67"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:49.650Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d8fd582d3dccb3f14fdb190c0be25db765362a1f2e6101b5b491abb48b5c6a67",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/32-claude-skills-getting-started/inputs/d8fd582d3dccb3f14fdb190c0be25db765362a1f2e6101b5b491abb48b5c6a67.json"
+          },
+          "bytes": 1111
+        }
+      }
+    },
+    {
+      "sha256": "75c16a6d26ff2afd125989b4ee38c83983b094205f7b9647df40d6b483c8bb29",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/32-claude-skills-getting-started/revisions/75c16a6d26ff2afd125989b4ee38c83983b094205f7b9647df40d6b483c8bb29.png"
+      },
+      "bytes": 1828106,
+      "id": "75c16a6d26ff2afd125989b4ee38c83983b094205f7b9647df40d6b483c8bb29",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-e92a90efe620",
+      "createdAt": "2026-11-04T00:55:34.241Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e8ba1759e7f3dee250736ca33f0c3d21f8860d5425eb9a4cad2a3a73ce230fe2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:56:59.326Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e8ba1759e7f3dee250736ca33f0c3d21f8860d5425eb9a4cad2a3a73ce230fe2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/32-claude-skills-getting-started/inputs/e8ba1759e7f3dee250736ca33f0c3d21f8860d5425eb9a4cad2a3a73ce230fe2.json"
+          },
+          "bytes": 8676
+        },
+        "production": {
+          "id": "NCI-00047",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "e92a90efe620b330056d5017a44bafeed260f5e065834394d76534c506414f5f"
+        }
+      }
+    }
+  ]
+}

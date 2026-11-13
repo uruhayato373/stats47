@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a32",
+  "production": {
+    "id": "NCI-00158",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "所得と失業率を\n47都道府県で比較",
+      "subline": "県民所得と完全失業率の関係",
+      "subject": "無文字の給与袋と、硬貨の小さな山、ノートを大きく描く。硬貨に文字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n48f662d1b14e 本文確認2026-11-04。1人当たり県民所得と完全失業率の比較。所得が高い県ほど失業率が低いとは限らない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a32/revisions/2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd.png"
+      },
+      "bytes": 39600,
+      "id": "2365d61958ae7716421ea20405a1f97a7452f2b18d0a99f611fac900643829fd",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:15.288Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "82defeaa48994193146c7ba8cc72d0f3e9ca8754be859bcdc9e171adf6172396"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:23.122Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "82defeaa48994193146c7ba8cc72d0f3e9ca8754be859bcdc9e171adf6172396",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a32/inputs/82defeaa48994193146c7ba8cc72d0f3e9ca8754be859bcdc9e171adf6172396.json"
+          },
+          "bytes": 1324
+        }
+      }
+    },
+    {
+      "sha256": "d37f6d23acfc5b52871310cb0b6e05636829f31fe488b4b72789c6f0dc2501d7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a32/revisions/d37f6d23acfc5b52871310cb0b6e05636829f31fe488b4b72789c6f0dc2501d7.png"
+      },
+      "bytes": 62705,
+      "id": "d37f6d23acfc5b52871310cb0b6e05636829f31fe488b4b72789c6f0dc2501d7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:12.611Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324066340/rectangle_large_type_2_86f6e8e1d5e6ba734f251e446bd30a75.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d37f6d23acfc5b52871310cb0b6e05636829f31fe488b4b72789c6f0dc2501d7"
+      }
+    },
+    {
+      "sha256": "3dcc46c91f4dd93fb0ee5c90749c24ef756e97d9845c0b6a93be1a95c0041022",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a32/revisions/3dcc46c91f4dd93fb0ee5c90749c24ef756e97d9845c0b6a93be1a95c0041022.png"
+      },
+      "bytes": 1902764,
+      "id": "3dcc46c91f4dd93fb0ee5c90749c24ef756e97d9845c0b6a93be1a95c0041022",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-1341926cb5c7",
+      "createdAt": "2026-11-04T00:56:23.460Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "89c28a0321ac3ff44660a50ac9b71adf70c970ac9cd8861305add10fba311707"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:18.035Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "89c28a0321ac3ff44660a50ac9b71adf70c970ac9cd8861305add10fba311707",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a32/inputs/89c28a0321ac3ff44660a50ac9b71adf70c970ac9cd8861305add10fba311707.json"
+          },
+          "bytes": 8253
+        },
+        "production": {
+          "id": "NCI-00158",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "1341926cb5c7086be7f1a39eeb9bf821007b05957308b846ed3e444e3725e28b"
+        }
+      }
+    }
+  ]
+}

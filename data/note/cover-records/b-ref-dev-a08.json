@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a08",
+  "production": {
+    "id": "NCI-00148",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "不登校の割合\n47都道府県を比較",
+      "subline": "中学と小学校で最多の県が違う",
+      "subject": "朝の光が入る静かな教室の木の机と椅子、窓辺の植物を大きく描く。黒板は無文字。深刻すぎない穏やかな雰囲気にする。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n2a1a5b93cacb 本文確認2026-11-04。2023年の不登校長期欠席の割合。中学校は宮城県、小学校は沖縄県が最多、福井県はどちらも最少。割合の差を県の良し悪しとして書かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a08/revisions/27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3.png"
+      },
+      "bytes": 34912,
+      "id": "27787a9c0d4fff846f1f93011187db0c60c1f16e8a6986b6265d10759e6710a3",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:33.063Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e0c45ba39c8be1a8120c4ef01063ed51ae25273bebba42d5e3edd455d6ea7546"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:07.804Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e0c45ba39c8be1a8120c4ef01063ed51ae25273bebba42d5e3edd455d6ea7546",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a08/inputs/e0c45ba39c8be1a8120c4ef01063ed51ae25273bebba42d5e3edd455d6ea7546.json"
+          },
+          "bytes": 1346
+        }
+      }
+    },
+    {
+      "sha256": "205c6a14e29e131985ed5d082cbc39e7834de07e340df84fe2346d2e1e5b3a8a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a08/revisions/205c6a14e29e131985ed5d082cbc39e7834de07e340df84fe2346d2e1e5b3a8a.png"
+      },
+      "bytes": 45720,
+      "id": "205c6a14e29e131985ed5d082cbc39e7834de07e340df84fe2346d2e1e5b3a8a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:35.138Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324049677/rectangle_large_type_2_4359b582a58a72b372fe4999eb0d7122.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "205c6a14e29e131985ed5d082cbc39e7834de07e340df84fe2346d2e1e5b3a8a"
+      }
+    },
+    {
+      "sha256": "508832b6950132afb1e115407fc7cd0fc2df11baeb3e530b384ea433eff389a7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a08/revisions/508832b6950132afb1e115407fc7cd0fc2df11baeb3e530b384ea433eff389a7.png"
+      },
+      "bytes": 1986092,
+      "id": "508832b6950132afb1e115407fc7cd0fc2df11baeb3e530b384ea433eff389a7",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-da709a307c0c",
+      "createdAt": "2026-11-03T23:14:32.859Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "892942c217105300bfaba5f27c7d7105a9cf939d22b9a202b0d2082b21c1cfd3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:20.596Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "892942c217105300bfaba5f27c7d7105a9cf939d22b9a202b0d2082b21c1cfd3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a08/inputs/892942c217105300bfaba5f27c7d7105a9cf939d22b9a202b0d2082b21c1cfd3.json"
+          },
+          "bytes": 8424
+        },
+        "production": {
+          "id": "NCI-00148",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "da709a307c0c24e626a2551eedcc7f0893161d6cba99b33b3cd3035dba6d6535"
+        }
+      }
+    }
+  ]
+}

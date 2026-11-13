@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 import { describe, expect, it, vi } from "vitest";

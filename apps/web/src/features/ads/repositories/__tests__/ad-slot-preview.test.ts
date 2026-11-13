@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { AFFILIATE_VERTICALS } from '../../constants/affiliate-category';

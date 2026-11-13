@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n9dcb0680cea6",
+  "production": {
+    "id": "NCI-00449",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "絵画・彫刻の制作\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のキャンバスと絵筆、抽象的な形の木彫り用素材を描く。人物像・動物像は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n9dcb0680cea6 2026-10-23公開API本文照合。記事題名「【2021年版】絵画・彫刻の制作をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "02a3382d878c58ac5e54c1a3984e9526f767800f40be2a59b0d782fbd92af612",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n9dcb0680cea6/revisions/02a3382d878c58ac5e54c1a3984e9526f767800f40be2a59b0d782fbd92af612.png"
+      },
+      "bytes": 63086,
+      "id": "02a3382d878c58ac5e54c1a3984e9526f767800f40be2a59b0d782fbd92af612",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:26.178Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774541/rectangle_large_type_2_a24b4394cb4341b07e43d958c55af7e5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "02a3382d878c58ac5e54c1a3984e9526f767800f40be2a59b0d782fbd92af612"
+      }
+    },
+    {
+      "sha256": "fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n9dcb0680cea6/revisions/fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66.png"
+      },
+      "bytes": 120303,
+      "id": "fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:42.748Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b8785bc989c4883ff52dd83452a29a799a41c06e3963efe9f45475efcbf3cf1c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-painting/values.json",
+        "sourceSha256": "93c23e7961836d3740500c5f6ef80a0749ccbd530d0aaf58b064fa4fb3886b34",
+        "input": {
+          "sha256": "b8785bc989c4883ff52dd83452a29a799a41c06e3963efe9f45475efcbf3cf1c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n9dcb0680cea6/inputs/b8785bc989c4883ff52dd83452a29a799a41c06e3963efe9f45475efcbf3cf1c.json"
+          },
+          "bytes": 6571
+        }
+      }
+    },
+    {
+      "sha256": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n9dcb0680cea6/revisions/8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc.png"
+      },
+      "bytes": 1762793,
+      "id": "8b5011208c3ad513621dc63b46813af1a804bdb5fb0539936a47903f36f3ecdc",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-986479f6c8fb",
+      "createdAt": "2026-10-23T12:37:04.266Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8899ee23e1e221698cbc6b77fb2b5d790fab7a9d4fc517238c21be96abd28db1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:40:14.982Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8899ee23e1e221698cbc6b77fb2b5d790fab7a9d4fc517238c21be96abd28db1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n9dcb0680cea6/inputs/8899ee23e1e221698cbc6b77fb2b5d790fab7a9d4fc517238c21be96abd28db1.json"
+          },
+          "bytes": 8671
+        },
+        "production": {
+          "id": "NCI-00449",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "986479f6c8fb4e0006b93896232d3b3e06aa178a2dc0d3b25046eba9e5318ce4"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-minimum-wage-by-region",
+  "production": {
+    "id": "NCI-00114",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "地域別最低賃金\n高い県は東京都",
+      "subline": "2024年・時給で比較",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字・無数字のシンプルな時計と無地の硬貨を小さく描く。現行の額と誤認させない。人物や職業の優劣を表す絵は描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n2a465fecbdec 2026-10-23公開API本文照合。東京都は1,163円で1位。2024年改定の地域別最低賃金、労働者1時間あたり。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "0f7feb3385414405cd71f59450fb35915720b744d6bb63283db7bbb4c7751bd9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-minimum-wage-by-region/revisions/0f7feb3385414405cd71f59450fb35915720b744d6bb63283db7bbb4c7751bd9.png"
+      },
+      "bytes": 75655,
+      "id": "0f7feb3385414405cd71f59450fb35915720b744d6bb63283db7bbb4c7751bd9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:11.834Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772039/rectangle_large_type_2_d1b6cd8dd7a7e52311cb343c46097af1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0f7feb3385414405cd71f59450fb35915720b744d6bb63283db7bbb4c7751bd9"
+      }
+    },
+    {
+      "sha256": "c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-minimum-wage-by-region/revisions/c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036.png"
+      },
+      "bytes": 113347,
+      "id": "c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:42.575Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d2ad4a3f4486f37d4f1c12ff586c36c74496c1860d576a7bf7f0b569573f21c6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/minimum-wage-by-region/values.json",
+        "sourceSha256": "3f9d86426c8624825ec171dd2653ee6a82aa3ff7c28918b7189b2659cd557aa7",
+        "input": {
+          "sha256": "d2ad4a3f4486f37d4f1c12ff586c36c74496c1860d576a7bf7f0b569573f21c6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-minimum-wage-by-region/inputs/d2ad4a3f4486f37d4f1c12ff586c36c74496c1860d576a7bf7f0b569573f21c6.json"
+          },
+          "bytes": 7402
+        }
+      }
+    },
+    {
+      "sha256": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-minimum-wage-by-region/revisions/af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62.png"
+      },
+      "bytes": 1698740,
+      "id": "af6d987bd350de054b153033f1c6165c011823d865814c31c98e1c244b710e62",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-d7bea093d836",
+      "createdAt": "2026-10-23T10:42:06.559Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "883ab204a042d90107d1f89fd1e680bf92017d98ff93324421c2ad4523f922d8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:44:09.848Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "883ab204a042d90107d1f89fd1e680bf92017d98ff93324421c2ad4523f922d8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-minimum-wage-by-region/inputs/883ab204a042d90107d1f89fd1e680bf92017d98ff93324421c2ad4523f922d8.json"
+          },
+          "bytes": 8555
+        },
+        "production": {
+          "id": "NCI-00114",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "d7bea093d83629f18a2a43c33474e01cd0c04c1522ab4418486ee1f9be5fa04f"
+        }
+      }
+    }
+  ]
+}

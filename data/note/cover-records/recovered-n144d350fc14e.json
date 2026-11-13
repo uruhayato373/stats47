@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n144d350fc14e",
+  "production": {
+    "id": "NCI-00386",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "出生率の差を\nどう読む？",
+      "subline": "2023年・沖縄県と東京都\n合計特殊出生率で比較",
+      "subject": "統計解説の柔らかな緑とクリーム色。右側に、中が完全に空の無地の小さなベビーシューズ1足だけを大きく描く。靴は2個で1足、柔らかい布地の紙模型のような静物。赤ちゃん・人の足・手・足跡・動物・顔・目・口の飾り・人形・ハートなし。空の靴は出生という主題の記号で、地域の出生数や暮らしの優劣を示さない。補足2行には十分な面積を確保する。横長1280×670相当、約1.91:1。濃紺の極太見出しを左から中央へ大きく2行で置く。補足の全行は画面下部の全幅の独立した太い帯へ置く。複数行の補足は横並びにせず同じ大きさで縦に積む。補足の文字は幅320pxで16px程度、1280pxで64px程度以上を目安に大きくする。補足は淡い色の帯に濃紺文字で高いコントラストを確保する。主見出しを少し小さくしてでも補足を読める大きさにする。カテゴリ名とstats47署名にも読める大きさの専用スペースを用意し、全ての文字を四辺から離す。指定外の文字・数字・URL・ロゴ・図表・地図を足さない。人物・顔・手・足・動物・キャラクター・マスコット・擬人化は一切禁止。余計な小物や植物を足さず背景は単純な紙の色面。",
+      "evidence": "https://note.com/stats47/n/n144d350fc14e 2026-10-15公開本文確認。2023年合計特殊出生率の沖縄県と東京都の差を扱う。本文は相関と因果の区別や出生数・人口移動も読む必要を説明。カバーは比較対象・年・指標だけを示し、出生率の差の原因、地域の子育て優劣、個人の選択を断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f1199a0929dea5b609728166c8bb5a02d2000c3a5776201aabbff6dea1fd5ab6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/f1199a0929dea5b609728166c8bb5a02d2000c3a5776201aabbff6dea1fd5ab6.png"
+      },
+      "bytes": 32151,
+      "id": "f1199a0929dea5b609728166c8bb5a02d2000c3a5776201aabbff6dea1fd5ab6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:50.434Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/260023226/rectangle_large_type_2_d3e938d2c57362d63703a70f3e386547.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f1199a0929dea5b609728166c8bb5a02d2000c3a5776201aabbff6dea1fd5ab6"
+      }
+    },
+    {
+      "sha256": "35c3221d894a7bbbe0ebb976290150e6c916820ebea2330770dfbec512bdb212",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/35c3221d894a7bbbe0ebb976290150e6c916820ebea2330770dfbec512bdb212.png"
+      },
+      "bytes": 102407,
+      "id": "35c3221d894a7bbbe0ebb976290150e6c916820ebea2330770dfbec512bdb212",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:42:09.154Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f4d938a2cfdf8b59f962c78c006e3edb4163d8522d299af27d1a9e7d327c6712"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:49:44.330Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f4d938a2cfdf8b59f962c78c006e3edb4163d8522d299af27d1a9e7d327c6712",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n144d350fc14e/inputs/f4d938a2cfdf8b59f962c78c006e3edb4163d8522d299af27d1a9e7d327c6712.json"
+          },
+          "bytes": 1334
+        }
+      }
+    },
+    {
+      "sha256": "8bf5aa6e807f10f7d055e0f10ec5f1bb61f51df950eabe106c224ad11f59a8aa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/8bf5aa6e807f10f7d055e0f10ec5f1bb61f51df950eabe106c224ad11f59a8aa.png"
+      },
+      "bytes": 98273,
+      "id": "8bf5aa6e807f10f7d055e0f10ec5f1bb61f51df950eabe106c224ad11f59a8aa",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:29.498Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302449/rectangle_large_type_2_7e3ea5fd14b72c7baa20a8eaa664abc5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8bf5aa6e807f10f7d055e0f10ec5f1bb61f51df950eabe106c224ad11f59a8aa"
+      }
+    },
+    {
+      "sha256": "3eee0a518f5b8866c30b13f0073b000bab3d8e6f4aeb556bcdd10d007a54e144",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/3eee0a518f5b8866c30b13f0073b000bab3d8e6f4aeb556bcdd10d007a54e144.png"
+      },
+      "bytes": 43750,
+      "id": "3eee0a518f5b8866c30b13f0073b000bab3d8e6f4aeb556bcdd10d007a54e144",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:07:46.867Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "74b513da17f7670d4afbbc6574e60fbfc1fc0892614603d55f8fb6c51241d736"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.022/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:16:31.508Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "74b513da17f7670d4afbbc6574e60fbfc1fc0892614603d55f8fb6c51241d736",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n144d350fc14e/inputs/74b513da17f7670d4afbbc6574e60fbfc1fc0892614603d55f8fb6c51241d736.json"
+          },
+          "bytes": 1334
+        }
+      }
+    },
+    {
+      "sha256": "a9d80c7dacde6cf5d6a36ef962f1021236fd76620c03888e6b0801bd9837795b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/a9d80c7dacde6cf5d6a36ef962f1021236fd76620c03888e6b0801bd9837795b.png"
+      },
+      "bytes": 97592,
+      "id": "a9d80c7dacde6cf5d6a36ef962f1021236fd76620c03888e6b0801bd9837795b",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:31:01.039Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "775b45cdc03df098d3f5009320556550f45429862a02a26818451363962f66fe"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.022/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:37:00.306Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "775b45cdc03df098d3f5009320556550f45429862a02a26818451363962f66fe",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n144d350fc14e/inputs/775b45cdc03df098d3f5009320556550f45429862a02a26818451363962f66fe.json"
+          },
+          "bytes": 1334
+        }
+      }
+    },
+    {
+      "sha256": "4c44ed04108cebb16f0c9a9bcb0b0134e0264bad2e36531e9b9e572bc81a27b2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/4c44ed04108cebb16f0c9a9bcb0b0134e0264bad2e36531e9b9e572bc81a27b2.png"
+      },
+      "bytes": 77660,
+      "id": "4c44ed04108cebb16f0c9a9bcb0b0134e0264bad2e36531e9b9e572bc81a27b2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T08:01:13.967Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323285627/rectangle_large_type_2_07ecf212372b34564bae3049f827dc9e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4c44ed04108cebb16f0c9a9bcb0b0134e0264bad2e36531e9b9e572bc81a27b2"
+      }
+    },
+    {
+      "sha256": "5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n144d350fc14e/revisions/5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3.png"
+      },
+      "bytes": 1691201,
+      "id": "5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3",
+      "kind": "candidate",
+      "version": "imagegen-explainer-palette-20261015",
+      "createdAt": "2026-10-15T08:01:55.342Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d1a32de322fd989dcc47e166c981aeb53a7f2613b83c54ad54ffc78bce8d7ff1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00386: 統計解説4・配色5・データ整備1の原寸/320pxの指定全文・補足・人物なし・本文との一致とカテゴリ固有条件を個別確認済み。explainer。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 5b8a6094e24f7575866b69c39cb4b6d4c5f3c94b7b5f2ad07671af633a5172a3。",
+        "reviewedAt": "2026-10-15T08:10:12.275Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d1a32de322fd989dcc47e166c981aeb53a7f2613b83c54ad54ffc78bce8d7ff1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n144d350fc14e/inputs/d1a32de322fd989dcc47e166c981aeb53a7f2613b83c54ad54ffc78bce8d7ff1.json"
+          },
+          "bytes": 10954
+        },
+        "production": {
+          "id": "NCI-00386",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "9c56075aac38fa72d73e2aed743ad9f9ca8c3183f7cd8ddab9537226591d4c28"
+        }
+      }
+    }
+  ]
+}

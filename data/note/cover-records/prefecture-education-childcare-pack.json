@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "prefecture-education-childcare-pack",
+  "production": {
+    "id": "NCI-00364",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "学校・保育データ集",
+      "subline": "47都道府県・244指標",
+      "subject": "学校・保育・社会教育を調べる用途を、無地の教材資料ファイル、ノートPC、鉛筆で大きく描く。紙や画面に文字・数字・グラフ・地図を描かず、実在資料やUIを再現しない。人物・ロゴなし。",
+      "evidence": "P-06 v4-20261024-mac-r2 のデータ集は47都道府県244指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので完成画面を描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1eb309e71e6846ddf11454b5dbbfd2da63309f108f6b11006571ec09bd72c55a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-education-childcare-pack/revisions/1eb309e71e6846ddf11454b5dbbfd2da63309f108f6b11006571ec09bd72c55a.png"
+      },
+      "bytes": 33536,
+      "id": "1eb309e71e6846ddf11454b5dbbfd2da63309f108f6b11006571ec09bd72c55a",
+      "kind": "candidate",
+      "version": "2026-10-12-packs",
+      "createdAt": "2026-10-12T07:10:58.947Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6d08a893713d269fbc616c4b43e4442d5e3bfea84457a4ad6b0aca4f5b52f6f8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・指標数・パック実データの県別地図が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:11:38.083Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6d08a893713d269fbc616c4b43e4442d5e3bfea84457a4ad6b0aca4f5b52f6f8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-education-childcare-pack/inputs/6d08a893713d269fbc616c4b43e4442d5e3bfea84457a4ad6b0aca4f5b52f6f8.json"
+          },
+          "bytes": 1198
+        }
+      }
+    },
+    {
+      "sha256": "5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-education-childcare-pack/revisions/5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d.png"
+      },
+      "bytes": 33390,
+      "id": "5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d",
+      "kind": "candidate",
+      "version": "2026-10-12-packs-r4",
+      "createdAt": "2026-10-12T07:46:18.815Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "79fe59d7829212c2e0098e7fb4ec1e3ea36d22cdcb304f7d2cd2d145cdb2bccf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "r4の指標数で作り直し。320px相当で見出し・指標数・パック実データの県別地図が読める。確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:46:53.256Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "79fe59d7829212c2e0098e7fb4ec1e3ea36d22cdcb304f7d2cd2d145cdb2bccf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-education-childcare-pack/inputs/79fe59d7829212c2e0098e7fb4ec1e3ea36d22cdcb304f7d2cd2d145cdb2bccf.json"
+          },
+          "bytes": 1198
+        }
+      }
+    },
+    {
+      "sha256": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-education-childcare-pack/revisions/3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c.png"
+      },
+      "bytes": 1852718,
+      "id": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-c3704d136113",
+      "createdAt": "2026-10-24T06:46:09.080Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "78810b6090087c711090eee47434af52adce2fe859c38fdf3189ebe519fc02f2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。資料・PC・鉛筆は学校保育の用途と一致し、人物・地図・架空の画面なし。",
+        "reviewedAt": "2026-10-24T06:46:21.911Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "78810b6090087c711090eee47434af52adce2fe859c38fdf3189ebe519fc02f2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-education-childcare-pack/inputs/78810b6090087c711090eee47434af52adce2fe859c38fdf3189ebe519fc02f2.json"
+          },
+          "bytes": 7049
+        },
+        "production": {
+          "id": "NCI-00364",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "c3704d13611396b2395c680426cdad5015b555e9e96aa4db6b12f30ed2072595"
+        }
+      }
+    },
+    {
+      "sha256": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-education-childcare-pack/revisions/72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5.png"
+      },
+      "bytes": 391675,
+      "id": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-24T06:54:58.722Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5"
+      }
+    }
+  ]
+}

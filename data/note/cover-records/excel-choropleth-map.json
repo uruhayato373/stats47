@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "excel-choropleth-map",
+  "production": {
+    "id": "NCI-00269",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

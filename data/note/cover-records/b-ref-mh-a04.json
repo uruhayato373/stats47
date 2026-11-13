@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-mh-a04",
+  "production": {
+    "id": "NCI-00187",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "所得と寿命の関係\n47都道府県を比較",
+      "subline": "お金と健康の9指標",
+      "subject": "無文字のがま口財布と聴診器を並べて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n9358aa3d39f1 本文確認2026-11-04。お金と健康の9指標の比較。所得の高い県は男性の寿命も長めで、女性では関係が薄い。因果と断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a04/revisions/591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d.png"
+      },
+      "bytes": 37587,
+      "id": "591a22f664d758b88fa7a2310622e8b63d942bb53bbd4ad21fef55c0b3658a7d",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:54.564Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7b2ca1bdd72579ac7d099b35b9ce51bfaef4f7529a0deea5fbb81965b9b78977"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:04.416Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7b2ca1bdd72579ac7d099b35b9ce51bfaef4f7529a0deea5fbb81965b9b78977",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a04/inputs/7b2ca1bdd72579ac7d099b35b9ce51bfaef4f7529a0deea5fbb81965b9b78977.json"
+          },
+          "bytes": 1331
+        }
+      }
+    },
+    {
+      "sha256": "23b9d5dc0d72e55e592898eced5347b6b019b3d5f83a8525e1ddff8dad98802e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a04/revisions/23b9d5dc0d72e55e592898eced5347b6b019b3d5f83a8525e1ddff8dad98802e.png"
+      },
+      "bytes": 96316,
+      "id": "23b9d5dc0d72e55e592898eced5347b6b019b3d5f83a8525e1ddff8dad98802e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:29.832Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324147078/rectangle_large_type_2_7a467eb5785104bf959acaf4e96e030c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "23b9d5dc0d72e55e592898eced5347b6b019b3d5f83a8525e1ddff8dad98802e"
+      }
+    },
+    {
+      "sha256": "78cb1fce58a7876cfe4c05d84533d20a3505868c6bd73f2b167727f506f9133a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a04/revisions/78cb1fce58a7876cfe4c05d84533d20a3505868c6bd73f2b167727f506f9133a.png"
+      },
+      "bytes": 1760138,
+      "id": "78cb1fce58a7876cfe4c05d84533d20a3505868c6bd73f2b167727f506f9133a",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-af86e32de202",
+      "createdAt": "2026-11-04T01:41:20.640Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8d7fd8cb09a0c23a9cbbce2129972be8f5cd0e12f0c8997949a4fc39c1318ac0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:42:03.937Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8d7fd8cb09a0c23a9cbbce2129972be8f5cd0e12f0c8997949a4fc39c1318ac0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a04/inputs/8d7fd8cb09a0c23a9cbbce2129972be8f5cd0e12f0c8997949a4fc39c1318ac0.json"
+          },
+          "bytes": 8160
+        },
+        "production": {
+          "id": "NCI-00187",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "af86e32de202ceba38453eb3311bb290c5ee7183f45544504c63ba723902bc85"
+        }
+      }
+    }
+  ]
+}

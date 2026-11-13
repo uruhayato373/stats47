@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-kumamoto",
+  "production": {
+    "id": "NCI-00080",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "熊本県の家計\n教育費に注目",
+      "subline": "熊本市・2024年\n二人以上の世帯",
+      "subject": "添付は熊本県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の青い通学かばんを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n7e98a46bf791 2026-10-23公開API本文照合。熊本市の2024年・二人以上の世帯の家計調査。教育1.44倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は熊本県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は熊本市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "熊本市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "7655b909f3cd9747f321ecb4673cc505bbb0c063f8f9e886c8030e7c9a840337",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kumamoto/revisions/7655b909f3cd9747f321ecb4673cc505bbb0c063f8f9e886c8030e7c9a840337.png"
+      },
+      "bytes": 56926,
+      "id": "7655b909f3cd9747f321ecb4673cc505bbb0c063f8f9e886c8030e7c9a840337",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:06.368Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771446/rectangle_large_type_2_260ccaf4dfa666d5308641dfab6ea8a6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7655b909f3cd9747f321ecb4673cc505bbb0c063f8f9e886c8030e7c9a840337"
+      }
+    },
+    {
+      "sha256": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kumamoto/revisions/dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9.png"
+      },
+      "bytes": 129600,
+      "id": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:21.671Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "51700640945031ee13cb3b0cc606c6cac4602712b035218bdec1823cca30b335"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "936ad73bd9655714ea3f6781a144a602f4eb072765049f7bf062a6f135e79098",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kumamoto/revisions/936ad73bd9655714ea3f6781a144a602f4eb072765049f7bf062a6f135e79098.png"
+      },
+      "bytes": 101964,
+      "id": "936ad73bd9655714ea3f6781a144a602f4eb072765049f7bf062a6f135e79098",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:51.199Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-kumamoto/images/cover-1280x670.png",
+        "sourceSha256": "936ad73bd9655714ea3f6781a144a602f4eb072765049f7bf062a6f135e79098"
+      }
+    },
+    {
+      "sha256": "ceac0aff1912664758816568dd1d1413d72966c600a688d973068f45edae6b84",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kumamoto/revisions/ceac0aff1912664758816568dd1d1413d72966c600a688d973068f45edae6b84.png"
+      },
+      "bytes": 55595,
+      "id": "ceac0aff1912664758816568dd1d1413d72966c600a688d973068f45edae6b84",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:13.114Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319910152/rectangle_large_type_2_d3e08ed36828fc833f220cfe84f13f4a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ceac0aff1912664758816568dd1d1413d72966c600a688d973068f45edae6b84"
+      }
+    },
+    {
+      "sha256": "a70181bbd7d2bbd772598b3f3cb97326e7f9341ae81f2c61e49d18b2630024f0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kumamoto/revisions/a70181bbd7d2bbd772598b3f3cb97326e7f9341ae81f2c61e49d18b2630024f0.png"
+      },
+      "bytes": 1891494,
+      "id": "a70181bbd7d2bbd772598b3f3cb97326e7f9341ae81f2c61e49d18b2630024f0",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:13:24.415Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e442dfca155236b985f18af292f18da583d2abee3a12621c433817306158ea0d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:28:32.173Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e442dfca155236b985f18af292f18da583d2abee3a12621c433817306158ea0d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kumamoto/inputs/e442dfca155236b985f18af292f18da583d2abee3a12621c433817306158ea0d.json"
+          },
+          "bytes": 8977
+        },
+        "production": {
+          "id": "NCI-00080",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "074ae24f26e3117b44a62958b64d1e7a9f9e1be66cb3b97402d1aaa6b3af7ffc"
+        }
+      }
+    },
+    {
+      "sha256": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kumamoto/revisions/6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765.png"
+      },
+      "bytes": 1601973,
+      "id": "6f4c9235f1a9a832b9b06af98cd7f789770fea65c127a6714e4bbc6948c2e765",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-14418c0640c5",
+      "createdAt": "2026-10-23T09:02:03.825Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f51af61fead765c5975f01d5a2f149e6ac1617557474ddbb02308425f6f0771b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "熊本県の主域輪郭と熊本市・2024年・二人以上の世帯、教育費とかばんを新旧比較。原寸と幅320pxで全掲載文字を確認。",
+        "reviewedAt": "2026-10-23T09:04:50.995Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f51af61fead765c5975f01d5a2f149e6ac1617557474ddbb02308425f6f0771b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kumamoto/inputs/f51af61fead765c5975f01d5a2f149e6ac1617557474ddbb02308425f6f0771b.json"
+          },
+          "bytes": 12909
+        },
+        "production": {
+          "id": "NCI-00080",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "14418c0640c599723eb842dd59aebff909aec37f40580940d3a4f0eacb028bc8"
+        }
+      }
+    }
+  ]
+}

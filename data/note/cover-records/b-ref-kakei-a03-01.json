@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a03-01",
+  "production": {
+    "id": "NCI-00179",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "男子用コートは\n14.48倍",
+      "subline": "衣料品の支出を年収で比較",
+      "subject": "ハンガーに掛けた紺のコートと、畳んだ白い肌着を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n037f42ea22fc 本文確認2026-11-04。衣料品の支出の第Ⅴ階級と第Ⅰ階級の差。男子用コート14.48倍、下着1.76倍。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a03-01/revisions/b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30.png"
+      },
+      "bytes": 42996,
+      "id": "b51508ff0ffcaa4a78b9ab4b3881c4f86aaaf2bf97ff6b8d0a08e467a598be30",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:22.792Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5bbbbf5a7533f7d2078c97eb3373cf8f0a22c7d3f1ec32a403159d88e83288ba"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:52.196Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5bbbbf5a7533f7d2078c97eb3373cf8f0a22c7d3f1ec32a403159d88e83288ba",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a03-01/inputs/5bbbbf5a7533f7d2078c97eb3373cf8f0a22c7d3f1ec32a403159d88e83288ba.json"
+          },
+          "bytes": 1288
+        }
+      }
+    },
+    {
+      "sha256": "1945579679ad339e5675380f977b5f3c7b6941178493b502ed90be720f3cf1c4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a03-01/revisions/1945579679ad339e5675380f977b5f3c7b6941178493b502ed90be720f3cf1c4.png"
+      },
+      "bytes": 102695,
+      "id": "1945579679ad339e5675380f977b5f3c7b6941178493b502ed90be720f3cf1c4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:21.466Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324136848/rectangle_large_type_2_6270e72a8f762a779e61e7f879e4690c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1945579679ad339e5675380f977b5f3c7b6941178493b502ed90be720f3cf1c4"
+      }
+    },
+    {
+      "sha256": "7e913bd32575f256b94dd028616045a829427daec63034f63f4eebc1c33015bc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a03-01/revisions/7e913bd32575f256b94dd028616045a829427daec63034f63f4eebc1c33015bc.png"
+      },
+      "bytes": 1845908,
+      "id": "7e913bd32575f256b94dd028616045a829427daec63034f63f4eebc1c33015bc",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-c364f5ed62bc",
+      "createdAt": "2026-11-04T01:22:47.640Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "915cd4626a35aadd889e6ab6974b2c83dfe17ecd93def72285cde6e131d618c4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:47.749Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "915cd4626a35aadd889e6ab6974b2c83dfe17ecd93def72285cde6e131d618c4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a03-01/inputs/915cd4626a35aadd889e6ab6974b2c83dfe17ecd93def72285cde6e131d618c4.json"
+          },
+          "bytes": 8074
+        },
+        "production": {
+          "id": "NCI-00179",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "c364f5ed62bc00ee9921bdfd25eb9eb8bf1756b6d1bb6f6739de4554edf54f8c"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n03844512d58a",
+  "production": {
+    "id": "NCI-00378",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "食費の割合で\n何がわかる？",
+      "subline": "2024年・二人以上の世帯\n年間収入五分位で比較",
+      "subject": "統計解説の身近な物の静物構図。クリームと柔らかな緑。右に白いご飯を盛った茶碗と、表紙が無文字の家計簿ノートの2点だけを大きく並べる。見出しは左に2行。ご飯や道具に顔・人影なし。皿やノートの面積を割合や格差を示す統計図にせず、円グラフ・天秤・お札・数式・地図なし。補足は2本の太い帯で大きく。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n03844512d58a 2026-10-15公開本文確認。家計調査2024年・二人以上の世帯の年間収入五分位別エンゲル係数の読み方。食費が消費支出に占める割合を扱う。豊かさを一指標で断定できないという本文の限界も踏まえ、数字や因果の主張を足さない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "7b167a2b5a17b9828bea7f9f194bd9286b328dd3d97ae3027e248b5763fbf429",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/7b167a2b5a17b9828bea7f9f194bd9286b328dd3d97ae3027e248b5763fbf429.png"
+      },
+      "bytes": 83480,
+      "id": "7b167a2b5a17b9828bea7f9f194bd9286b328dd3d97ae3027e248b5763fbf429",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:45.858Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/260039736/rectangle_large_type_2_e1faa72ed25da32415611332e10cf87b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7b167a2b5a17b9828bea7f9f194bd9286b328dd3d97ae3027e248b5763fbf429"
+      }
+    },
+    {
+      "sha256": "d6a3909a44593f910b52af6057df57a5e788e4ef0291d96d2edb9bead907e3ba",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/d6a3909a44593f910b52af6057df57a5e788e4ef0291d96d2edb9bead907e3ba.png"
+      },
+      "bytes": 106849,
+      "id": "d6a3909a44593f910b52af6057df57a5e788e4ef0291d96d2edb9bead907e3ba",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:41:58.383Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "877ec33993524f078f35b8fa62c1b3003a3cb57e627a7e012d44526976a7a4fd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:49:39.663Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "877ec33993524f078f35b8fa62c1b3003a3cb57e627a7e012d44526976a7a4fd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n03844512d58a/inputs/877ec33993524f078f35b8fa62c1b3003a3cb57e627a7e012d44526976a7a4fd.json"
+          },
+          "bytes": 1350
+        }
+      }
+    },
+    {
+      "sha256": "754ad6c2acb11853792c65e04c2a966cf5b0cab6efbacd1c5b02d42d2d90e4b8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/754ad6c2acb11853792c65e04c2a966cf5b0cab6efbacd1c5b02d42d2d90e4b8.png"
+      },
+      "bytes": 71696,
+      "id": "754ad6c2acb11853792c65e04c2a966cf5b0cab6efbacd1c5b02d42d2d90e4b8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:27.384Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302428/rectangle_large_type_2_a10f4f8fd7b8ab0a12783457298480c9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "754ad6c2acb11853792c65e04c2a966cf5b0cab6efbacd1c5b02d42d2d90e4b8"
+      }
+    },
+    {
+      "sha256": "848314102bf116117bf5888445afa179d2a6f06ad4db3c0cabc88b532b5bc943",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/848314102bf116117bf5888445afa179d2a6f06ad4db3c0cabc88b532b5bc943.png"
+      },
+      "bytes": 53624,
+      "id": "848314102bf116117bf5888445afa179d2a6f06ad4db3c0cabc88b532b5bc943",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:07:30.637Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f50f926bbde2db1cfc9cf82decb8c9b0d4b2de23d6f8959332aebe0ce6424445"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.023/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:16:26.527Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f50f926bbde2db1cfc9cf82decb8c9b0d4b2de23d6f8959332aebe0ce6424445",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n03844512d58a/inputs/f50f926bbde2db1cfc9cf82decb8c9b0d4b2de23d6f8959332aebe0ce6424445.json"
+          },
+          "bytes": 1350
+        }
+      }
+    },
+    {
+      "sha256": "55588271aa6deea9286972f8f7b10a522b0e8dbf68ce0d8f570c644f565c76b3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/55588271aa6deea9286972f8f7b10a522b0e8dbf68ce0d8f570c644f565c76b3.png"
+      },
+      "bytes": 103462,
+      "id": "55588271aa6deea9286972f8f7b10a522b0e8dbf68ce0d8f570c644f565c76b3",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:30:38.131Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1e5516ba3a4e0a43bd92854bf2acf93b6742bb1fe848ac03de85fdc4f5333206"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.023/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:36:55.499Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1e5516ba3a4e0a43bd92854bf2acf93b6742bb1fe848ac03de85fdc4f5333206",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n03844512d58a/inputs/1e5516ba3a4e0a43bd92854bf2acf93b6742bb1fe848ac03de85fdc4f5333206.json"
+          },
+          "bytes": 1350
+        }
+      }
+    },
+    {
+      "sha256": "7930bed3368f2766216d2db0e7462bfbd903c11d804e88340b26d951ab4cffd7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/7930bed3368f2766216d2db0e7462bfbd903c11d804e88340b26d951ab4cffd7.png"
+      },
+      "bytes": 55533,
+      "id": "7930bed3368f2766216d2db0e7462bfbd903c11d804e88340b26d951ab4cffd7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:20.763Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323285504/rectangle_large_type_2_f95547127cdf4f8c3993bc012d43112d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7930bed3368f2766216d2db0e7462bfbd903c11d804e88340b26d951ab4cffd7"
+      }
+    },
+    {
+      "sha256": "c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n03844512d58a/revisions/c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07.png"
+      },
+      "bytes": 1793900,
+      "id": "c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:09:53.568Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "35ab9ff0b10c62534d27b05476875e839bff2e92ed4fb5a2a3efa00ba1c549ac"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00378: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。explainer。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA c837c75e284d9bfdf2dad5ef1cff8448251e36ce03c6a11dfd7f2469dbd51c07。",
+        "reviewedAt": "2026-10-15T07:22:39.237Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "35ab9ff0b10c62534d27b05476875e839bff2e92ed4fb5a2a3efa00ba1c549ac",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n03844512d58a/inputs/35ab9ff0b10c62534d27b05476875e839bff2e92ed4fb5a2a3efa00ba1c549ac.json"
+          },
+          "bytes": 9970
+        },
+        "production": {
+          "id": "NCI-00378",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "45b747c37a2d4211918df406f32d4784d007b93eb601e2440192e1b99b406f57"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-09",
+  "production": {
+    "id": "NCI-00178",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "旅行の支出を\n年収5階級で比較",
+      "subline": "宿泊料は5.29倍",
+      "subject": "取っ手付きのスーツケースと、麦わら帽子、無文字の封筒を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/ne8cba9b99137 本文確認2026-11-04。旅行の支出の比較。宿泊料5.29倍、外国パック旅行5.01倍。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "385abb7858bed74436f6fbf387f8077c79faba6ea8ecb3a484971179838c83ea",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-09/revisions/385abb7858bed74436f6fbf387f8077c79faba6ea8ecb3a484971179838c83ea.png"
+      },
+      "bytes": 31943,
+      "id": "385abb7858bed74436f6fbf387f8077c79faba6ea8ecb3a484971179838c83ea",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T02:57:30.834Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "310b2d300836381fe51e4f163114eec756008a4de1172b5349b0f75568651f0c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・出典が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T02:57:56.520Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "310b2d300836381fe51e4f163114eec756008a4de1172b5349b0f75568651f0c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-09/inputs/310b2d300836381fe51e4f163114eec756008a4de1172b5349b0f75568651f0c.json"
+          },
+          "bytes": 1265
+        }
+      }
+    },
+    {
+      "sha256": "cee8cf4cf7bb7976c99105cf2f8567ec83010dde874a6c49409844f42ef9d7a2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-09/revisions/cee8cf4cf7bb7976c99105cf2f8567ec83010dde874a6c49409844f42ef9d7a2.png"
+      },
+      "bytes": 110912,
+      "id": "cee8cf4cf7bb7976c99105cf2f8567ec83010dde874a6c49409844f42ef9d7a2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:20.453Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324034877/rectangle_large_type_2_f30fe29dbcd85eeec770cfa1ab88dd40.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "cee8cf4cf7bb7976c99105cf2f8567ec83010dde874a6c49409844f42ef9d7a2"
+      }
+    },
+    {
+      "sha256": "d0ff804ebad3a96b4778420842204ebbe1f49c60437af3c369bd2bdfbc31c483",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-09/revisions/d0ff804ebad3a96b4778420842204ebbe1f49c60437af3c369bd2bdfbc31c483.png"
+      },
+      "bytes": 1910213,
+      "id": "d0ff804ebad3a96b4778420842204ebbe1f49c60437af3c369bd2bdfbc31c483",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-712f4537bb16",
+      "createdAt": "2026-11-04T01:22:39.913Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "63450fc8eaa5f12aa44ffd59aa14e951a1156f21eed4301889d6ac0a048b0ef8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:44.427Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "63450fc8eaa5f12aa44ffd59aa14e951a1156f21eed4301889d6ac0a048b0ef8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-09/inputs/63450fc8eaa5f12aa44ffd59aa14e951a1156f21eed4301889d6ac0a048b0ef8.json"
+          },
+          "bytes": 8065
+        },
+        "production": {
+          "id": "NCI-00178",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "712f4537bb16db11a361a8826c9f1617dda18bddab0762550c0bff7203f582c8"
+        }
+      }
+    }
+  ]
+}

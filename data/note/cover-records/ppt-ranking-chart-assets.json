@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "ppt-ranking-chart-assets",
+  "production": {
+    "id": "NCI-00357",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

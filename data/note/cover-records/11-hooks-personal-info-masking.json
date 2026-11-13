@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "11-hooks-personal-info-masking",
+  "production": {
+    "id": "NCI-00023",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "個人情報の\nマスキングを自動化",
+      "subline": "Claude Code Hooksの設定",
+      "subject": "無文字の紙の一部を黒い帯で隠した書類と、小さな歯車を大きく描く。隠す帯の下に文字を描かない。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/ne54920337944 本文確認2026-11-04。Claude Code Hooksで個人情報のマスキングを自動化する記事。完全な防止を保証しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e491d013554e391f0eefd8e4d1decfab418ac6fe4d9e8904aedb27b8eeb4fded",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-hooks-personal-info-masking/revisions/e491d013554e391f0eefd8e4d1decfab418ac6fe4d9e8904aedb27b8eeb4fded.png"
+      },
+      "bytes": 123997,
+      "id": "e491d013554e391f0eefd8e4d1decfab418ac6fe4d9e8904aedb27b8eeb4fded",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:33.658Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293003315/rectangle_large_type_2_de5f667d59e082a1309938c3f9a76fd8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e491d013554e391f0eefd8e4d1decfab418ac6fe4d9e8904aedb27b8eeb4fded"
+      }
+    },
+    {
+      "sha256": "743308548312b00e5847df241e2c6b59a0497bff703b822f7d009e5b739525ce",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-hooks-personal-info-masking/revisions/743308548312b00e5847df241e2c6b59a0497bff703b822f7d009e5b739525ce.png"
+      },
+      "bytes": 59797,
+      "id": "743308548312b00e5847df241e2c6b59a0497bff703b822f7d009e5b739525ce",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:45:45.003Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0f8eef06a2e9acc4174e851c39d2d9d8890e4b71a320067bb587eea90dd37ba0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:15.804Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0f8eef06a2e9acc4174e851c39d2d9d8890e4b71a320067bb587eea90dd37ba0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/11-hooks-personal-info-masking/inputs/0f8eef06a2e9acc4174e851c39d2d9d8890e4b71a320067bb587eea90dd37ba0.json"
+          },
+          "bytes": 1091
+        }
+      }
+    },
+    {
+      "sha256": "9346b877e6296b2be49a503136e879e2159157ef9c4c9dfdf369b7296b5e9062",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-hooks-personal-info-masking/revisions/9346b877e6296b2be49a503136e879e2159157ef9c4c9dfdf369b7296b5e9062.png"
+      },
+      "bytes": 70564,
+      "id": "9346b877e6296b2be49a503136e879e2159157ef9c4c9dfdf369b7296b5e9062",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:57.675Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329682/rectangle_large_type_2_d8e908519559da6377605e41f5e6f871.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9346b877e6296b2be49a503136e879e2159157ef9c4c9dfdf369b7296b5e9062"
+      }
+    },
+    {
+      "sha256": "a63eb48b39a1fdfc60bb5ed743bede254d98995a50ee70ab8e9ca2af926fa9af",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-hooks-personal-info-masking/revisions/a63eb48b39a1fdfc60bb5ed743bede254d98995a50ee70ab8e9ca2af926fa9af.png"
+      },
+      "bytes": 24113,
+      "id": "a63eb48b39a1fdfc60bb5ed743bede254d98995a50ee70ab8e9ca2af926fa9af",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:14.587Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ec269bae189ab4912670c447ae3cf9db242e027b6e75b24cefff59ca47da8f79"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.005/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:35.150Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ec269bae189ab4912670c447ae3cf9db242e027b6e75b24cefff59ca47da8f79",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/11-hooks-personal-info-masking/inputs/ec269bae189ab4912670c447ae3cf9db242e027b6e75b24cefff59ca47da8f79.json"
+          },
+          "bytes": 1091
+        }
+      }
+    },
+    {
+      "sha256": "6cf9eda395a0e017c9ba59f169a797a7ecbd6530a6f1ed8fef59cd7f5e7bff1e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-hooks-personal-info-masking/revisions/6cf9eda395a0e017c9ba59f169a797a7ecbd6530a6f1ed8fef59cd7f5e7bff1e.png"
+      },
+      "bytes": 1828893,
+      "id": "6cf9eda395a0e017c9ba59f169a797a7ecbd6530a6f1ed8fef59cd7f5e7bff1e",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-6dba8b87f4a7",
+      "createdAt": "2026-11-04T00:41:24.959Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5822b11c214d236e1d8a7263106e9dd3e9c9c76b443c9f3bc861d4880120d0bf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:43:18.178Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5822b11c214d236e1d8a7263106e9dd3e9c9c76b443c9f3bc861d4880120d0bf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/11-hooks-personal-info-masking/inputs/5822b11c214d236e1d8a7263106e9dd3e9c9c76b443c9f3bc861d4880120d0bf.json"
+          },
+          "bytes": 8782
+        },
+        "production": {
+          "id": "NCI-00023",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "6dba8b87f4a79272e9f375e6bc17c49bd8dc4777a7d3496110f7f1d11e427ec3"
+        }
+      }
+    }
+  ]
+}

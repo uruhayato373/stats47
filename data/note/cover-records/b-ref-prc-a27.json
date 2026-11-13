@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a27",
+  "production": {
+    "id": "NCI-00209",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "小6の朝食と\n勉強の習慣",
+      "subline": "47都道府県を比較",
+      "subject": "おにぎりと牛乳の朝食と、開いた無文字のノート、鉛筆を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nd6efea2ea009 本文確認2026-11-04。全国学力調査の生活習慣。平日に1時間以上勉強する小6は岩手県64.7％が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a27/revisions/c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04.png"
+      },
+      "bytes": 39034,
+      "id": "c6f03a315832cc922118a1875486f0eee573b80951d64043a980cdda9f0ddc04",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:56.927Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "be1572a4fdf539c8a1a661a9cdf486aee13d9420625cfeddc0bbcf458255438b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:36.371Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "be1572a4fdf539c8a1a661a9cdf486aee13d9420625cfeddc0bbcf458255438b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a27/inputs/be1572a4fdf539c8a1a661a9cdf486aee13d9420625cfeddc0bbcf458255438b.json"
+          },
+          "bytes": 1362
+        }
+      }
+    },
+    {
+      "sha256": "bf4e768532f1188990a63e8e7462b4d6c27cc692bf20ce34bc409fee8a45cef9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a27/revisions/bf4e768532f1188990a63e8e7462b4d6c27cc692bf20ce34bc409fee8a45cef9.png"
+      },
+      "bytes": 80504,
+      "id": "bf4e768532f1188990a63e8e7462b4d6c27cc692bf20ce34bc409fee8a45cef9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:59.179Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324170872/rectangle_large_type_2_6b53dbd5376b699ee6507336ad5de99e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bf4e768532f1188990a63e8e7462b4d6c27cc692bf20ce34bc409fee8a45cef9"
+      }
+    },
+    {
+      "sha256": "72bfc905132cf6e201c4c198536d6bc9114e3acb07b7b3a973e1dd9a782b3618",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a27/revisions/72bfc905132cf6e201c4c198536d6bc9114e3acb07b7b3a973e1dd9a782b3618.png"
+      },
+      "bytes": 1862196,
+      "id": "72bfc905132cf6e201c4c198536d6bc9114e3acb07b7b3a973e1dd9a782b3618",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-22db2c2d7784",
+      "createdAt": "2026-11-04T01:54:57.235Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "693c3eaf15577b9eced79c7f297491dd37c64546fd61f0641f2c8e45c2c150e7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:45.644Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "693c3eaf15577b9eced79c7f297491dd37c64546fd61f0641f2c8e45c2c150e7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a27/inputs/693c3eaf15577b9eced79c7f297491dd37c64546fd61f0641f2c8e45c2c150e7.json"
+          },
+          "bytes": 8062
+        },
+        "production": {
+          "id": "NCI-00209",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "22db2c2d7784312c21006ded515e6303c06b2a501250d0eed47596e15357853e"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-inc-a06",
+  "production": {
+    "id": "NCI-00167",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "給料と\n手元に残る額",
+      "subline": "物価で割り戻して47市を比較",
+      "subject": "無文字の給与袋と、買い物かごに入った野菜を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nede8ff7a9eaa 本文確認2026-11-04。実質可処分所得は埼玉県(さいたま市)が1位、東京都(東京都区部)が2位。賃金の順位と比べる記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "dec13891e60a4b6b56274400afe034451742e3e797aadb8c5743ff003261b314",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a06/revisions/dec13891e60a4b6b56274400afe034451742e3e797aadb8c5743ff003261b314.png"
+      },
+      "bytes": 55264,
+      "id": "dec13891e60a4b6b56274400afe034451742e3e797aadb8c5743ff003261b314",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T02:57:19.260Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "83c955b7ec9938a1de88fc790722682fe338b859fdf295668de854c59930ecd3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・出典が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T02:57:59.317Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "83c955b7ec9938a1de88fc790722682fe338b859fdf295668de854c59930ecd3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a06/inputs/83c955b7ec9938a1de88fc790722682fe338b859fdf295668de854c59930ecd3.json"
+          },
+          "bytes": 1371
+        }
+      }
+    },
+    {
+      "sha256": "f9cb01408b1f3aef7ed5e1bc90783bc8cdd0d14b49c92b367bd3bc3459ef6b5e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a06/revisions/f9cb01408b1f3aef7ed5e1bc90783bc8cdd0d14b49c92b367bd3bc3459ef6b5e.png"
+      },
+      "bytes": 67404,
+      "id": "f9cb01408b1f3aef7ed5e1bc90783bc8cdd0d14b49c92b367bd3bc3459ef6b5e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:25.130Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324031235/rectangle_large_type_2_f669c36db4ca3d0bbf905548dd77baf8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f9cb01408b1f3aef7ed5e1bc90783bc8cdd0d14b49c92b367bd3bc3459ef6b5e"
+      }
+    },
+    {
+      "sha256": "eebb6f32340be751fc9d1de9cdb32ff4d9ab7972626371af6bc9f8f09903a762",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a06/revisions/eebb6f32340be751fc9d1de9cdb32ff4d9ab7972626371af6bc9f8f09903a762.png"
+      },
+      "bytes": 1848034,
+      "id": "eebb6f32340be751fc9d1de9cdb32ff4d9ab7972626371af6bc9f8f09903a762",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-87dab03a4692",
+      "createdAt": "2026-11-04T01:08:45.641Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e90a59301466461616e11deacd3db9a741ffeb22ca092c214e29e14869fb2d2c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:33.362Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e90a59301466461616e11deacd3db9a741ffeb22ca092c214e29e14869fb2d2c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a06/inputs/e90a59301466461616e11deacd3db9a741ffeb22ca092c214e29e14869fb2d2c.json"
+          },
+          "bytes": 8121
+        },
+        "production": {
+          "id": "NCI-00167",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "87dab03a469221119dfdf0b73988cb1842369f8985cadc4a137fed00271b6099"
+        }
+      }
+    }
+  ]
+}

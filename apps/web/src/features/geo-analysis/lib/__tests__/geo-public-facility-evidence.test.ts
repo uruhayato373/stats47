@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { validatePublicFacilityDetail } from '@stats47/gis';
 import { describe, expect, it } from 'vitest';
 

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a13",
+  "production": {
+    "id": "NCI-00196",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "6つの娯楽を\n47都道府県で比較",
+      "subline": "観戦・楽器・ゲームなど",
+      "subject": "メガホン、小さなギター、マイクを大きく描く。パチンコ台は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n1015730f50b2 本文確認2026-11-04。スポーツ観戦・楽器・写真・ゲーム・パチンコ・カラオケの6つの娯楽の比較。賭け事を勧める表現にしない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a13/revisions/be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d.png"
+      },
+      "bytes": 37696,
+      "id": "be986895491019e3d74be8722e4423170564513e88d3c9e2a8d98ec73c70dc9d",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:02.218Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "aac53f02cff3751e0a63da883c115a3c44c14e958ddfd3a7c36363b8c537cf52"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:17.158Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "aac53f02cff3751e0a63da883c115a3c44c14e958ddfd3a7c36363b8c537cf52",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a13/inputs/aac53f02cff3751e0a63da883c115a3c44c14e958ddfd3a7c36363b8c537cf52.json"
+          },
+          "bytes": 1379
+        }
+      }
+    },
+    {
+      "sha256": "01f332ea06f704718e2a196cc3f9d53d9a5d8549efc125a33d101930b4d49d0e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a13/revisions/01f332ea06f704718e2a196cc3f9d53d9a5d8549efc125a33d101930b4d49d0e.png"
+      },
+      "bytes": 56725,
+      "id": "01f332ea06f704718e2a196cc3f9d53d9a5d8549efc125a33d101930b4d49d0e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:49.099Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324156760/rectangle_large_type_2_50129d41e715c02dddd25f3903be8bb0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "01f332ea06f704718e2a196cc3f9d53d9a5d8549efc125a33d101930b4d49d0e"
+      }
+    },
+    {
+      "sha256": "da7f23faed7a387eb51b8973aa08085f9671611f2e17f37945372c262ae9176b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a13/revisions/da7f23faed7a387eb51b8973aa08085f9671611f2e17f37945372c262ae9176b.png"
+      },
+      "bytes": 1912064,
+      "id": "da7f23faed7a387eb51b8973aa08085f9671611f2e17f37945372c262ae9176b",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-a85c60f5ecb2",
+      "createdAt": "2026-11-04T01:40:59.825Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "38da27b1a6f15236f859709ae90945232ce9cc794e3640086f740678cef6da07"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:57.010Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "38da27b1a6f15236f859709ae90945232ce9cc794e3640086f740678cef6da07",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a13/inputs/38da27b1a6f15236f859709ae90945232ce9cc794e3640086f740678cef6da07.json"
+          },
+          "bytes": 8222
+        },
+        "production": {
+          "id": "NCI-00196",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "a85c60f5ecb20468d84900c55c27a392030d67d138bca8b89c4f3447821dde3a"
+        }
+      }
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const { readItem, readValues } = vi.hoisted(() => ({ readItem: vi.fn(), readValues: vi.fn() }));

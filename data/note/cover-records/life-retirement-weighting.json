@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "life-retirement-weighting",
+  "production": {
+    "id": "NCI-00295",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

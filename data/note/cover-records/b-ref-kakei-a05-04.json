@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a05-04",
+  "production": {
+    "id": "NCI-00185",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "外食のどの業態に\n差がつく？",
+      "subline": "飲酒代は7.03倍・洋食は5.18倍",
+      "subject": "ビールジョッキとナイフとフォークを添えた洋食の皿を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n7cde5e1423f4 本文確認2026-11-04。外食の業態別の年収差。飲酒代7.03倍、洋食5.18倍。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a05-04/revisions/265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74.png"
+      },
+      "bytes": 47602,
+      "id": "265f5a4ccd489f41d141265e4e9c266ed17a3dbe5e77c3ff0d94f37e7eb94e74",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:38.968Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a74e82fc8772ed41703999a175d370f7e2dafdb12b0c98d1959df5043dc6d44b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:59.852Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a74e82fc8772ed41703999a175d370f7e2dafdb12b0c98d1959df5043dc6d44b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a05-04/inputs/a74e82fc8772ed41703999a175d370f7e2dafdb12b0c98d1959df5043dc6d44b.json"
+          },
+          "bytes": 1287
+        }
+      }
+    },
+    {
+      "sha256": "ea84a224cb57e458003d52c72c78a0463b9b33bbe85c63167faa57a4ae48510b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a05-04/revisions/ea84a224cb57e458003d52c72c78a0463b9b33bbe85c63167faa57a4ae48510b.png"
+      },
+      "bytes": 116140,
+      "id": "ea84a224cb57e458003d52c72c78a0463b9b33bbe85c63167faa57a4ae48510b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:23.723Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324142531/rectangle_large_type_2_f94c85b2b8e7bba29c3508f5329760b2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ea84a224cb57e458003d52c72c78a0463b9b33bbe85c63167faa57a4ae48510b"
+      }
+    },
+    {
+      "sha256": "d4ccbdc1ca66ed6a78857e9a41562116621ff7e7d1f886b676b407f9b0ad1279",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a05-04/revisions/d4ccbdc1ca66ed6a78857e9a41562116621ff7e7d1f886b676b407f9b0ad1279.png"
+      },
+      "bytes": 2033668,
+      "id": "d4ccbdc1ca66ed6a78857e9a41562116621ff7e7d1f886b676b407f9b0ad1279",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-912362d881a0",
+      "createdAt": "2026-11-04T01:23:23.294Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8cd872460847385a95fb6b82fab919d4f2e3573127b597a78c9426c7ba869713"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:24:01.792Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8cd872460847385a95fb6b82fab919d4f2e3573127b597a78c9426c7ba869713",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a05-04/inputs/8cd872460847385a95fb6b82fab919d4f2e3573127b597a78c9426c7ba869713.json"
+          },
+          "bytes": 8122
+        },
+        "production": {
+          "id": "NCI-00185",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "912362d881a076951b85ccd835d8e2306d51fae90ef2aae84fd2cf89a8ea81e7"
+        }
+      }
+    }
+  ]
+}

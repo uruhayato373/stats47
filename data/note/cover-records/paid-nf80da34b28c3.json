@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-nf80da34b28c3",
+  "production": {
+    "id": "NCI-00346",
+    "policyId": "NCP-008",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "伝わる配色\n選び方の基本",
+      "subline": "D3.jsでデータを可視化",
+      "subject": "配色の白と淡いピンク、濃紺。右に大きなピンクの折り紙1枚と、筆先にピンクの絵の具を含んだ画筆1本の静物。紙の温かな質感と十分な余白。実際の地図・UI・コード・色名・完成パレットは描かず、配色を考える入口の挿絵にする。画筆は人の手なしで机上に置く。横長1280×670相当、約1.91:1。濃紺の極太見出しを左から中央へ大きく2行で置く。補足の全行は画面下部の全幅の独立した太い帯へ置く。複数行の補足は横並びにせず同じ大きさで縦に積む。補足の文字は幅320pxで16px程度、1280pxで64px程度以上を目安に大きくする。補足は淡い色の帯に濃紺文字で高いコントラストを確保する。主見出しを少し小さくしてでも補足を読める大きさにする。カテゴリ名とstats47署名にも読める大きさの専用スペースを用意し、全ての文字を四辺から離す。指定外の文字・数字・URL・ロゴ・図表・地図を足さない。人物・顔・手・足・動物・キャラクター・マスコット・擬人化は一切禁止。余計な小物や植物を足さず背景は単純な紙の色面。",
+      "evidence": "https://note.com/stats47/n/nf80da34b28c3 2026-10-15公開無料部分と掲載タイトル確認。D3.jsを使う地図可視化の配色理論、順序・発散・カテゴリの使い分けを説明する入口記事。カバーは配色の選び方という主題を示し、全98種の収録内容の実物、AIへの指示の確実性、実装コードの保証等は追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5c3ff0017029900c95ca9ed6c7b09792070aea0f370671065473fbe47e4358db",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/5c3ff0017029900c95ca9ed6c7b09792070aea0f370671065473fbe47e4358db.png"
+      },
+      "bytes": 467331,
+      "id": "5c3ff0017029900c95ca9ed6c7b09792070aea0f370671065473fbe47e4358db",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:49.424Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/236917060/rectangle_large_type_2_db908e8d66149b7f4d08afb25c21ce5a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5c3ff0017029900c95ca9ed6c7b09792070aea0f370671065473fbe47e4358db"
+      }
+    },
+    {
+      "sha256": "833b17eb712cd8c3231fb580de7c5dfc604bd9b5be9554113feb0d4f013c6317",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/833b17eb712cd8c3231fb580de7c5dfc604bd9b5be9554113feb0d4f013c6317.png"
+      },
+      "bytes": 67610,
+      "id": "833b17eb712cd8c3231fb580de7c5dfc604bd9b5be9554113feb0d4f013c6317",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:47:26.555Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ee399d1df8e18c5e2df99c2fc2e3b2715119d49b59705578f3a2be237b5e8326"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で章題と章の扱うD3配色の色見本が確認できる",
+        "reviewedAt": "2026-10-11T11:51:52.841Z"
+      },
+      "provenance": {
+        "renderer": "palette-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ee399d1df8e18c5e2df99c2fc2e3b2715119d49b59705578f3a2be237b5e8326",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nf80da34b28c3/inputs/ee399d1df8e18c5e2df99c2fc2e3b2715119d49b59705578f3a2be237b5e8326.json"
+          },
+          "bytes": 1345
+        }
+      }
+    },
+    {
+      "sha256": "b6dffce32abaeb7e1bc5648ffd4a268d03db5e5b3fce5e86efc028ecb9607f69",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/b6dffce32abaeb7e1bc5648ffd4a268d03db5e5b3fce5e86efc028ecb9607f69.png"
+      },
+      "bytes": 23985,
+      "id": "b6dffce32abaeb7e1bc5648ffd4a268d03db5e5b3fce5e86efc028ecb9607f69",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:12:44.701Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3923381e2e707daf7fe193ce1def6a8ab36b61f10ce179af813a67fad57e4afb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.061/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:18:05.031Z"
+      },
+      "provenance": {
+        "renderer": "palette-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3923381e2e707daf7fe193ce1def6a8ab36b61f10ce179af813a67fad57e4afb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nf80da34b28c3/inputs/3923381e2e707daf7fe193ce1def6a8ab36b61f10ce179af813a67fad57e4afb.json"
+          },
+          "bytes": 1345
+        }
+      }
+    },
+    {
+      "sha256": "851f0941736df0f900ee6029fcb428df17cbf5eb44b7f98d73dc66eae5c045eb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/851f0941736df0f900ee6029fcb428df17cbf5eb44b7f98d73dc66eae5c045eb.png"
+      },
+      "bytes": 62719,
+      "id": "851f0941736df0f900ee6029fcb428df17cbf5eb44b7f98d73dc66eae5c045eb",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:34:44.795Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2188f48adb3d99d73fb07af48c5bf94ed8a2b14e5c3baccea5be1fb903960aa6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.061/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:36:49.289Z"
+      },
+      "provenance": {
+        "renderer": "palette-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2188f48adb3d99d73fb07af48c5bf94ed8a2b14e5c3baccea5be1fb903960aa6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nf80da34b28c3/inputs/2188f48adb3d99d73fb07af48c5bf94ed8a2b14e5c3baccea5be1fb903960aa6.json"
+          },
+          "bytes": 1345
+        }
+      }
+    },
+    {
+      "sha256": "50e3d0a850aea5e8ef8f9c5428ec5ae46251fd9927c91581bba955c29ce5c156",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/50e3d0a850aea5e8ef8f9c5428ec5ae46251fd9927c91581bba955c29ce5c156.png"
+      },
+      "bytes": 38886,
+      "id": "50e3d0a850aea5e8ef8f9c5428ec5ae46251fd9927c91581bba955c29ce5c156",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T08:01:17.035Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323285349/rectangle_large_type_2_3ea1f4e6cd4a5911c15b9c6900cb836b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "50e3d0a850aea5e8ef8f9c5428ec5ae46251fd9927c91581bba955c29ce5c156"
+      }
+    },
+    {
+      "sha256": "b215ee01636ae084f6162b01787562a4c29cf225c56659efc55aed27dd1dfbc7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nf80da34b28c3/revisions/b215ee01636ae084f6162b01787562a4c29cf225c56659efc55aed27dd1dfbc7.png"
+      },
+      "bytes": 1376015,
+      "id": "b215ee01636ae084f6162b01787562a4c29cf225c56659efc55aed27dd1dfbc7",
+      "kind": "candidate",
+      "version": "imagegen-explainer-palette-20261015",
+      "createdAt": "2026-10-15T08:03:04.161Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "674854656be4f41189c87f1335252b11f3c9065d17064bcf0870874ca77c82bc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00346: 統計解説4・配色5・データ整備1の原寸/320pxの指定全文・補足・人物なし・本文との一致とカテゴリ固有条件を個別確認済み。palette。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA b215ee01636ae084f6162b01787562a4c29cf225c56659efc55aed27dd1dfbc7。",
+        "reviewedAt": "2026-10-15T08:11:12.220Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "674854656be4f41189c87f1335252b11f3c9065d17064bcf0870874ca77c82bc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nf80da34b28c3/inputs/674854656be4f41189c87f1335252b11f3c9065d17064bcf0870874ca77c82bc.json"
+          },
+          "bytes": 10549
+        },
+        "production": {
+          "id": "NCI-00346",
+          "policyId": "NCP-008",
+          "policyVersion": 3,
+          "planSha256": "ea421ad9a27371483e8d25a852d6d7bd01767f5a7038588a5de6f6c730a5d5e6"
+        }
+      }
+    }
+  ]
+}

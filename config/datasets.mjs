@@ -283,8 +283,13 @@ export const DATASETS = [
   d("note.magazines-schema", "data/note/magazines.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.paid-landing", "data/note/paid-landing/{name}.json", "ledger", "product", "data", "公開済み有料記事の無料部分の文言 (patch-note-paid-landing.mjs の入力)", { schema: "data/note/paid-landing.schema.json" }),
   d("note.paid-landing-schema", "data/note/paid-landing.schema.json", "schema", "product", "data", "上の文言の JSON Schema"),
-  d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの生成版・採用版・公開版の台帳", { schema: "data/note/cover-assets.schema.json" }),
+  d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの台帳の正本 (記事ごとに、どの版が候補・採用・公開かの参照と公開の観測)。制作内容と版の記録は note.cover-records に分けて持ち、読み書きは .claude/scripts/note/lib/cover-assets.mjs だけが 2 つを結ぶ", { schema: "data/note/cover-assets.schema.json" }),
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
+  d("note.cover-records", "data/note/cover-records/{name}.json", "ledger", "product", "data", "note カバーの記事ごとの記録 (1 記事 1 ファイル。ファイル名は記事 key。制作 ID・方針・コピー・題材・根拠と、版の保存先・SHA・レビュー・生成元を登録順に持つ。正本 note.cover-assets の候補版・採用版・公開版の参照が指す先)", {
+    schema: "data/note/cover-records.schema.json",
+    refs: [{ field: "articleKey", to: "note.cover-assets", key: "articles[].articleKey" }],
+  }),
+  d("note.cover-records-schema", "data/note/cover-records.schema.json", "schema", "product", "data", "上の記録の JSON Schema"),
   d("note.cover-policies", "data/note/cover-policies.json", "master", "product", "data", "noteカバーのカテゴリ別方針ID・版・プロンプト", { schema: "data/note/cover-policies.schema.json" }),
   d("note.cover-policies-schema", "data/note/cover-policies.schema.json", "schema", "product", "data", "カバー方針のJSON Schema"),
   d("note.hashtags", "data/note/hashtags.json", "ledger", "product", "data", "note 記事ごとの承認済みハッシュタグ (記事の ID → タグ・本文の SHA・モデル・生成日時)。題・URL・系統は記事台帳から結ぶ。生成の記録を持ち書き手も別なので、記事台帳の列にはしない", {

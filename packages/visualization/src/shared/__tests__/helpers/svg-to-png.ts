@@ -2,7 +2,7 @@ import { Resvg } from "@resvg/resvg-js";
 import {
   deterministicRenderFontFiles,
   prepareSvgForDeterministicRender,
-} from "./render-test-contract";
+} from "./render-test-contract.mts";
 
 /**
  * SVG 文字列を PNG バッファに変換する

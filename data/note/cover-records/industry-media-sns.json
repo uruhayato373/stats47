@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "industry-media-sns",
+  "production": {
+    "id": "NCI-00286",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

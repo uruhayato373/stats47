@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a17",
+  "production": {
+    "id": "NCI-00153",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "持ち家比率1位は\n秋田県",
+      "subline": "47都道府県を比較\n2023年の住宅統計",
+      "subject": "小さな家の木の模型と、玄関の鍵、無文字の郵便受けを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nb24b2deeb25d 本文確認2026-11-04。住宅・土地統計調査2023年の持ち家比率。秋田県が1位の77.1％、沖縄県が最下位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a17/revisions/e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155.png"
+      },
+      "bytes": 35669,
+      "id": "e0b44584457cccb69b531c32a7eb76172dfa2d29589d58499da187f1e999f155",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:55.502Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4b374c47cad60ee3b82c3a38a86b15aa49b66e19ab377f522a148067b351c3f2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:15.659Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4b374c47cad60ee3b82c3a38a86b15aa49b66e19ab377f522a148067b351c3f2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a17/inputs/4b374c47cad60ee3b82c3a38a86b15aa49b66e19ab377f522a148067b351c3f2.json"
+          },
+          "bytes": 1255
+        }
+      }
+    },
+    {
+      "sha256": "4f0772d42d13b4ddecaa2d6914e3f9b3b3d08177951d4ee78379beb9fb2bd59a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a17/revisions/4f0772d42d13b4ddecaa2d6914e3f9b3b3d08177951d4ee78379beb9fb2bd59a.png"
+      },
+      "bytes": 44629,
+      "id": "4f0772d42d13b4ddecaa2d6914e3f9b3b3d08177951d4ee78379beb9fb2bd59a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:39.016Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324058020/rectangle_large_type_2_d320c77a003f683423458bf39e236a5b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4f0772d42d13b4ddecaa2d6914e3f9b3b3d08177951d4ee78379beb9fb2bd59a"
+      }
+    },
+    {
+      "sha256": "2cf3926685a86b556fbf5951b2080696d6362da1368987f4a4d5773f94ff5bae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a17/revisions/2cf3926685a86b556fbf5951b2080696d6362da1368987f4a4d5773f94ff5bae.png"
+      },
+      "bytes": 1967040,
+      "id": "2cf3926685a86b556fbf5951b2080696d6362da1368987f4a4d5773f94ff5bae",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-0d193d99d77a",
+      "createdAt": "2026-11-03T23:15:27.646Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "dc3b3d4b464769c291deb592c7f89cf4752e9fe54c6988fdb898a4c1966056ef"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:39.781Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "dc3b3d4b464769c291deb592c7f89cf4752e9fe54c6988fdb898a4c1966056ef",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a17/inputs/dc3b3d4b464769c291deb592c7f89cf4752e9fe54c6988fdb898a4c1966056ef.json"
+          },
+          "bytes": 8148
+        },
+        "production": {
+          "id": "NCI-00153",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "0d193d99d77a8cc37d3150240186a4720219fe2e0a6286dc2b1498fab7ca31bd"
+        }
+      }
+    }
+  ]
+}

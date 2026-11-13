@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-hottest-prefecture",
+  "production": {
+    "id": "NCI-00131",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "暑い県は\nどう比べる？",
+      "subline": "気温と日照時間を比べる\n2024年のデータ",
+      "subject": "緑とクリームと明るい黄色。大きな輝く太陽と、日陰のある家と木を右側の主役として描く。夏の明るさと生活の涼しい日陰を、雑誌の挿絵のように親しみやすく描く。温度計、温度の数字、目盛り、グラフ、精密な気象図、県境地図、人物は描かない。",
+      "evidence": "https://note.com/stats47/n/n995a5b3d3e87 2026-10-15公開本文確認。2024年の最高気温・年平均気温・年間日照時間という異なる指標を比較する記事。本文の最高気温を全国の歴代観測最高や特定日の猛暑記録と同一視しない。カバーに特定県の日本一や気温値を追加せず、指標の比較を主題にする。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5292b7d6788c5d87fa28a3fa876852575b7b7499066fa2743311fe4e8109678d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hottest-prefecture/revisions/5292b7d6788c5d87fa28a3fa876852575b7b7499066fa2743311fe4e8109678d.png"
+      },
+      "bytes": 48639,
+      "id": "5292b7d6788c5d87fa28a3fa876852575b7b7499066fa2743311fe4e8109678d",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:52:59.262Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d221e6d34bc2c4808b1eeeda6b238fbb99d2d5e778ced398d4a7b2d1c55557a0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:17.625Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d221e6d34bc2c4808b1eeeda6b238fbb99d2d5e778ced398d4a7b2d1c55557a0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-hottest-prefecture/inputs/d221e6d34bc2c4808b1eeeda6b238fbb99d2d5e778ced398d4a7b2d1c55557a0.json"
+          },
+          "bytes": 1191
+        }
+      }
+    },
+    {
+      "sha256": "83296a7d796aeb6ca1a5a4e187f487eb8c7e91160a7745a3f99b99678f66e940",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hottest-prefecture/revisions/83296a7d796aeb6ca1a5a4e187f487eb8c7e91160a7745a3f99b99678f66e940.png"
+      },
+      "bytes": 87333,
+      "id": "83296a7d796aeb6ca1a5a4e187f487eb8c7e91160a7745a3f99b99678f66e940",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T01:14:33.220Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323447119/rectangle_large_type_2_5d94029a2eb26ecd4baa4dad5f2a3724.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "83296a7d796aeb6ca1a5a4e187f487eb8c7e91160a7745a3f99b99678f66e940"
+      }
+    },
+    {
+      "sha256": "fb4b0732f286595ebcc13061e949733304ccc87daf086e1c4ff2ce9e7164e26b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hottest-prefecture/revisions/fb4b0732f286595ebcc13061e949733304ccc87daf086e1c4ff2ce9e7164e26b.png"
+      },
+      "bytes": 2195913,
+      "id": "fb4b0732f286595ebcc13061e949733304ccc87daf086e1c4ff2ce9e7164e26b",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-third-six-20261015",
+      "createdAt": "2026-10-15T01:25:15.866Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8f18f3036b794be5d90487005674ee2142f29940503b66b3d893de47b9657b7c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・320pxで掲載全文と補足文の可読性、切れ・重なり・追加文字を確認済み。管理画面の修正前後比較を提示し、2026-10-15にユーザーがこの6件の反映を指示。",
+        "reviewedAt": "2026-10-15T01:45:14.756Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8f18f3036b794be5d90487005674ee2142f29940503b66b3d893de47b9657b7c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-hottest-prefecture/inputs/8f18f3036b794be5d90487005674ee2142f29940503b66b3d893de47b9657b7c.json"
+          },
+          "bytes": 8081
+        },
+        "production": {
+          "id": "NCI-00131",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "4eaeab07a33427640e449b541c42517c0a8bde3321986849397877f9942d134d"
+        }
+      }
+    }
+  ]
+}

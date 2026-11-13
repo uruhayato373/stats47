@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-08",
+  "production": {
+    "id": "NCI-00177",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "遊園地は22.63倍\nゴルフ用具は15.48倍",
+      "subline": "2024年・年収5階級の年間支出",
+      "subject": "遊園地の入場券とゴルフクラブを左右に大きく配置。券面に文字や金額は入れず、二つの余暇支出を明快に対比する。人物・手・キャラクター・棒グラフ・数表は描かない。",
+      "evidence": "公開本文の結論: 2024年に年収の最も高い第Ⅴ階級の支出が最も低い第Ⅰ階級を大きく上回るのは、遊園地入場・乗物代22.63倍、ゴルフ用具15.48倍。対象は全国の二人以上の世帯、2014年と2024年の年間支出を比較。公開記事 https://note.com/stats47/n/nde5f16a081f9 を確認。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-08/revisions/f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a.png"
+      },
+      "bytes": 48012,
+      "id": "f2e52552d1eb47f817ab92e58597dd4fb9acce7c7d2ba5ca8fa5cc46985ab97a",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:17.955Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1a81966c9ce994b045363c8ddbe7072e027a43dcf575b9d5cde0bbd510720336"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:50.532Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1a81966c9ce994b045363c8ddbe7072e027a43dcf575b9d5cde0bbd510720336",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-08/inputs/1a81966c9ce994b045363c8ddbe7072e027a43dcf575b9d5cde0bbd510720336.json"
+          },
+          "bytes": 1346
+        }
+      }
+    },
+    {
+      "sha256": "2f59af2cc71afc978e354a80a0090431516eea9705a90daa8b6747b4f19c18db",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-08/revisions/2f59af2cc71afc978e354a80a0090431516eea9705a90daa8b6747b4f19c18db.png"
+      },
+      "bytes": 2015801,
+      "id": "2f59af2cc71afc978e354a80a0090431516eea9705a90daa8b6747b4f19c18db",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-63b4b5670cf8",
+      "createdAt": "2026-10-23T23:26:27.540Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "801fecf5ba274d0e428b3b9b98a938ead48d30b6537039395062fb7627de9d4d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の結論（遊園地22.63倍、ゴルフ用具15.48倍）・2024年・年収5階級と一致。原寸と幅320pxで全掲載文字、遊園地とゴルフの絵、余白を確認。旧版の植木・庭手入れ代の図による主題ずれを解消。",
+        "reviewedAt": "2026-10-23T23:27:59.254Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "801fecf5ba274d0e428b3b9b98a938ead48d30b6537039395062fb7627de9d4d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-08/inputs/801fecf5ba274d0e428b3b9b98a938ead48d30b6537039395062fb7627de9d4d.json"
+          },
+          "bytes": 7637
+        },
+        "production": {
+          "id": "NCI-00177",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "63b4b5670cf87ed3f551437f6bfa7d8cdce487bd715e0e7a82bb7e31512ea423"
+        }
+      }
+    }
+  ]
+}

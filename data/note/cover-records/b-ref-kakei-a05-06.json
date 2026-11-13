@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a05-06",
+  "production": {
+    "id": "NCI-00186",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "魚の支出1位で見る\n東西の好み",
+      "subline": "魚介18品目を比較",
+      "subject": "まぐろの切り身、ぶりの切り身、かつおのたたきを木の皿に盛って大きく描く。魚の頭や動物の顔は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n25b0a46485dc 本文確認2026-11-04。魚介18品目の支出1位。まぐろは静岡市、ぶりは富山市、かつおは高知市。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a05-06/revisions/74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc.png"
+      },
+      "bytes": 37767,
+      "id": "74b8a3cecc27e7ddc9e5c9b17406ebf5ffc76313bce8a84eb5f9961447a2d0cc",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:50.404Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ee0f2b3240d11a2b8224b412f0a2960847bf3a542afb8028aad8ec8a3a323591"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:02.206Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ee0f2b3240d11a2b8224b412f0a2960847bf3a542afb8028aad8ec8a3a323591",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a05-06/inputs/ee0f2b3240d11a2b8224b412f0a2960847bf3a542afb8028aad8ec8a3a323591.json"
+          },
+          "bytes": 1306
+        }
+      }
+    },
+    {
+      "sha256": "989721fb2233c182c3b0d2f344aa97ac63a3c10c92ff1d150017bd03aa5e6c2a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a05-06/revisions/989721fb2233c182c3b0d2f344aa97ac63a3c10c92ff1d150017bd03aa5e6c2a.png"
+      },
+      "bytes": 69371,
+      "id": "989721fb2233c182c3b0d2f344aa97ac63a3c10c92ff1d150017bd03aa5e6c2a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:27.571Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324144771/rectangle_large_type_2_59f0456c385dc6dbd1acc48192fd1c97.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "989721fb2233c182c3b0d2f344aa97ac63a3c10c92ff1d150017bd03aa5e6c2a"
+      }
+    },
+    {
+      "sha256": "1ac605e6d20098efb48d1aeedc90cdda978c4375497b448296966c0db3b3d4c3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a05-06/revisions/1ac605e6d20098efb48d1aeedc90cdda978c4375497b448296966c0db3b3d4c3.png"
+      },
+      "bytes": 2039015,
+      "id": "1ac605e6d20098efb48d1aeedc90cdda978c4375497b448296966c0db3b3d4c3",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-ccc73b64edf8",
+      "createdAt": "2026-11-04T01:29:28.909Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d51c6345033099796bb1875e13292b2e498756abf3bd12cb4e1ae0ea8a9cc555"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:29:43.392Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d51c6345033099796bb1875e13292b2e498756abf3bd12cb4e1ae0ea8a9cc555",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a05-06/inputs/d51c6345033099796bb1875e13292b2e498756abf3bd12cb4e1ae0ea8a9cc555.json"
+          },
+          "bytes": 8229
+        },
+        "production": {
+          "id": "NCI-00186",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "ccc73b64edf883c3253c32ea4158b97db015c53baf042f3bf59e45b356039134"
+        }
+      }
+    }
+  ]
+}

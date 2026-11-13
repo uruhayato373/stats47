@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { createHash } from 'node:crypto';
 
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';

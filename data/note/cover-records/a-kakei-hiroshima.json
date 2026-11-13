@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-hiroshima",
+  "production": {
+    "id": "NCI-00070",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "広島県の家計\n教育費に注目",
+      "subline": "広島市・2024年\n二人以上の世帯",
+      "subject": "添付は広島県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n0be24c40b88d 2026-10-23公開API本文照合。広島市の2024年・二人以上の世帯の家計調査。教育0.83倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は広島県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は広島市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "広島市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f5218f1ad1b86b1adf380a0dd505d2948b6d2f97883f7654a9da3ebde5e18204",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hiroshima/revisions/f5218f1ad1b86b1adf380a0dd505d2948b6d2f97883f7654a9da3ebde5e18204.png"
+      },
+      "bytes": 82848,
+      "id": "f5218f1ad1b86b1adf380a0dd505d2948b6d2f97883f7654a9da3ebde5e18204",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:55.752Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771217/rectangle_large_type_2_5d9a06cdc3f81390b91267b93b48b2a6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f5218f1ad1b86b1adf380a0dd505d2948b6d2f97883f7654a9da3ebde5e18204"
+      }
+    },
+    {
+      "sha256": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hiroshima/revisions/71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c.png"
+      },
+      "bytes": 136036,
+      "id": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:17:40.035Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0317f336b0948f2b842abf7d234d4908aeca843a9c8d93f3d9b60cd30f8ed424"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "4fd650e1d80a32b72613c637695d29ff770a570d8a1ccb1f1b96943fe3ddb8df",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hiroshima/revisions/4fd650e1d80a32b72613c637695d29ff770a570d8a1ccb1f1b96943fe3ddb8df.png"
+      },
+      "bytes": 103629,
+      "id": "4fd650e1d80a32b72613c637695d29ff770a570d8a1ccb1f1b96943fe3ddb8df",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:12.352Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-hiroshima/images/cover-1280x670.png",
+        "sourceSha256": "4fd650e1d80a32b72613c637695d29ff770a570d8a1ccb1f1b96943fe3ddb8df"
+      }
+    },
+    {
+      "sha256": "1c18702f3ea9deffa6571c62e30714bb0deaf52d1be58528c2bb4da348a24a78",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hiroshima/revisions/1c18702f3ea9deffa6571c62e30714bb0deaf52d1be58528c2bb4da348a24a78.png"
+      },
+      "bytes": 1543722,
+      "id": "1c18702f3ea9deffa6571c62e30714bb0deaf52d1be58528c2bb4da348a24a78",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-38d75725cead",
+      "createdAt": "2026-10-23T09:32:21.650Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "98fa0a1be293ba4366337ae2320bbe6a7b79fc473a98d94b4a2345fc6fb27c6d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の広島市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T09:46:57.167Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "98fa0a1be293ba4366337ae2320bbe6a7b79fc473a98d94b4a2345fc6fb27c6d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-hiroshima/inputs/98fa0a1be293ba4366337ae2320bbe6a7b79fc473a98d94b4a2345fc6fb27c6d.json"
+          },
+          "bytes": 12915
+        },
+        "production": {
+          "id": "NCI-00070",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "38d75725ceada4315ef269d985100373fe9c86d624aaf7461a9b6fb47e96a928"
+        }
+      }
+    }
+  ]
+}

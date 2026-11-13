@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a06",
+  "production": {
+    "id": "NCI-00146",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "夫の育児と保育所\n47都道府県を比較",
+      "subline": "2つの指標の関係は弱い",
+      "subject": "小さな子ども靴、哺乳瓶、木の積み木を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nc4fb51684d49 本文確認2026-11-04。夫の育児参加率(2022年)と保育所等の数(2020年)。順位相関係数0.30で本文は関係がほとんど見られないと記述。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a06/revisions/e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b.png"
+      },
+      "bytes": 37341,
+      "id": "e0ef9d52b1d3e731329811a48a95c27d4f4d0043e280cd18ca03a4415b2bab0b",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:25.075Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3596c3ef6f575697484018b89971e60d2bfa893e17aa55f135dfe68a9aff0d19"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:03.108Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3596c3ef6f575697484018b89971e60d2bfa893e17aa55f135dfe68a9aff0d19",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a06/inputs/3596c3ef6f575697484018b89971e60d2bfa893e17aa55f135dfe68a9aff0d19.json"
+          },
+          "bytes": 1297
+        }
+      }
+    },
+    {
+      "sha256": "a314541df1aa7c1a573a4219079d97f19b1d66a6a004d612cc608037bc1efadc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a06/revisions/a314541df1aa7c1a573a4219079d97f19b1d66a6a004d612cc608037bc1efadc.png"
+      },
+      "bytes": 68625,
+      "id": "a314541df1aa7c1a573a4219079d97f19b1d66a6a004d612cc608037bc1efadc",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:34.496Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324044494/rectangle_large_type_2_bbe5a1715589fd60a495137b0dea4e42.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a314541df1aa7c1a573a4219079d97f19b1d66a6a004d612cc608037bc1efadc"
+      }
+    },
+    {
+      "sha256": "e767b891dd49da3d0a587605be1d9011dafbb7510346436fde024bc68296bb03",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a06/revisions/e767b891dd49da3d0a587605be1d9011dafbb7510346436fde024bc68296bb03.png"
+      },
+      "bytes": 1980477,
+      "id": "e767b891dd49da3d0a587605be1d9011dafbb7510346436fde024bc68296bb03",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-83602c791a4b",
+      "createdAt": "2026-11-03T23:14:15.739Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bbada68e7add60e4d7ea730c6c531fd15ace127a65dc45d05b8f47e96eb6be40"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:12.017Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bbada68e7add60e4d7ea730c6c531fd15ace127a65dc45d05b8f47e96eb6be40",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a06/inputs/bbada68e7add60e4d7ea730c6c531fd15ace127a65dc45d05b8f47e96eb6be40.json"
+          },
+          "bytes": 8188
+        },
+        "production": {
+          "id": "NCI-00146",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "83602c791a4be8c2bec958db8d0a3bfbca82ae63fd6daf2b26c373bf1eb27892"
+        }
+      }
+    }
+  ]
+}

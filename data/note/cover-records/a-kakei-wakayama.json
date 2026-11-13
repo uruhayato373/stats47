@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-wakayama",
+  "production": {
+    "id": "NCI-00103",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "和歌山県の家計\n教育費に注目",
+      "subline": "和歌山市・2024年\n二人以上の世帯",
+      "subject": "添付画像は編集対象ではなく、和歌山県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな白紙の学習ノート一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+      "evidence": "https://note.com/stats47/n/ncc56ff8990d0 2026-10-15公開本文確認。公開本文は和歌山市の2024年・二人以上の世帯。教育支出は47市単純平均比0.52倍で最大の乖離。カバーは費目への注目に留め、教育水準の低さや県全体の性質を示さない。しらすの大倍率や未検証の順位は載せない。 人物・キャラクターは使わない。 新方針: 地図は和歌山県の主域（遠隔離島省略）の地域識別用。家計の観測対象は和歌山市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
+      "dataScope": {
+        "place": "和歌山市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "473584208f60a5e8621d7cedbb87db7039bb0655eb29cb1cf18a9dc9815469d9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/473584208f60a5e8621d7cedbb87db7039bb0655eb29cb1cf18a9dc9815469d9.png"
+      },
+      "bytes": 56383,
+      "id": "473584208f60a5e8621d7cedbb87db7039bb0655eb29cb1cf18a9dc9815469d9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:19.200Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771935/rectangle_large_type_2_e6b86878ebb40dff5d461f46c5ec4e5e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "473584208f60a5e8621d7cedbb87db7039bb0655eb29cb1cf18a9dc9815469d9"
+      }
+    },
+    {
+      "sha256": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f.png"
+      },
+      "bytes": 115126,
+      "id": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:19:05.981Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "978b38e52a8715a914ee06f82709c9fdd125b9a50b7c8443f5c2a41c7ad64062"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "fdb725596694643edb2179b842c20c30ed5cccd6c9f98d422b398a989c1e9caf",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/fdb725596694643edb2179b842c20c30ed5cccd6c9f98d422b398a989c1e9caf.png"
+      },
+      "bytes": 101891,
+      "id": "fdb725596694643edb2179b842c20c30ed5cccd6c9f98d422b398a989c1e9caf",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:44.866Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-wakayama/images/cover-1280x670.png",
+        "sourceSha256": "fdb725596694643edb2179b842c20c30ed5cccd6c9f98d422b398a989c1e9caf"
+      }
+    },
+    {
+      "sha256": "098135765822e444ae56bb47c6fb6e7034b3a104e3fa122f8a62dc8ea0194a86",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/098135765822e444ae56bb47c6fb6e7034b3a104e3fa122f8a62dc8ea0194a86.png"
+      },
+      "bytes": 54046,
+      "id": "098135765822e444ae56bb47c6fb6e7034b3a104e3fa122f8a62dc8ea0194a86",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:16.744Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911517/rectangle_large_type_2_29b86c14575405153bfee6514131b8b9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "098135765822e444ae56bb47c6fb6e7034b3a104e3fa122f8a62dc8ea0194a86"
+      }
+    },
+    {
+      "sha256": "1e2eb5dc13abc8a54182225bab962f8e30bd68acf94aff19f63f5a23abe351a1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/1e2eb5dc13abc8a54182225bab962f8e30bd68acf94aff19f63f5a23abe351a1.png"
+      },
+      "bytes": 1868061,
+      "id": "1e2eb5dc13abc8a54182225bab962f8e30bd68acf94aff19f63f5a23abe351a1",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:10:37.104Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "195518242e2cc5fdccb491f202752c2a020260d3fe19907f2b6bb88c4f58d2b6"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "195518242e2cc5fdccb491f202752c2a020260d3fe19907f2b6bb88c4f58d2b6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-wakayama/inputs/195518242e2cc5fdccb491f202752c2a020260d3fe19907f2b6bb88c4f58d2b6.json"
+          },
+          "bytes": 9002
+        },
+        "production": {
+          "id": "NCI-00103",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "e2ab6ce87109d31f8cbd56b961335ec1695a509b72e1c781228b72a30940fb5b"
+        }
+      }
+    },
+    {
+      "sha256": "b8136e41ebfec3cbffc45decbf126f4eefe64cd397ac12e6ec31372afe61278a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/b8136e41ebfec3cbffc45decbf126f4eefe64cd397ac12e6ec31372afe61278a.png"
+      },
+      "bytes": 1454816,
+      "id": "b8136e41ebfec3cbffc45decbf126f4eefe64cd397ac12e6ec31372afe61278a",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:45:45.975Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8ac868071fc724ac744f57ba434174fc19b0a284c0ffeb90c50b85eeb5986010"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00103: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:55:46.482Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8ac868071fc724ac744f57ba434174fc19b0a284c0ffeb90c50b85eeb5986010",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-wakayama/inputs/8ac868071fc724ac744f57ba434174fc19b0a284c0ffeb90c50b85eeb5986010.json"
+          },
+          "bytes": 12318
+        },
+        "production": {
+          "id": "NCI-00103",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "c610817226b9702459fe85d7189be3ed8b807e44f863555353f0a51103af1880"
+        }
+      }
+    },
+    {
+      "sha256": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-wakayama/revisions/9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717.png"
+      },
+      "bytes": 1239674,
+      "id": "9f2c7fd050051e24d4a7b16bcc577e315448c67c7778884007fb5a85e7640717",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-c0f838528a07",
+      "createdAt": "2026-10-23T07:07:05.952Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "72dadba0e4f02a5b3bee16a62d15de87ab3593644495a45eab002b3e9ee06e64"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "和歌山県主域の輪郭、和歌山市・2024年・二人以上の世帯、教育費の題材を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+        "reviewedAt": "2026-10-23T07:14:22.048Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "72dadba0e4f02a5b3bee16a62d15de87ab3593644495a45eab002b3e9ee06e64",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-wakayama/inputs/72dadba0e4f02a5b3bee16a62d15de87ab3593644495a45eab002b3e9ee06e64.json"
+          },
+          "bytes": 12825
+        },
+        "production": {
+          "id": "NCI-00103",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "c0f838528a07517c2b419198820dee34b6560673a4b266046e4dd0bcdfa07873"
+        }
+      }
+    }
+  ]
+}

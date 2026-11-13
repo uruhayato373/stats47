@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-gis-a33",
+  "production": {
+    "id": "NCI-00165",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "標高5m以下に住む\n人の割合",
+      "subline": "47都道府県を比較",
+      "subject": "海辺の低い土地に並ぶ小さな家の模型と、波打ち際の砂を大きく描く。地図・災害の場面は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n835484ded3ef 本文確認2026-11-04。標高5m以下の土地に住む人の割合。徳島県が40.9%で1位、大阪府が2位。災害の危険度の評価ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-gis-a33/revisions/33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9.png"
+      },
+      "bytes": 37526,
+      "id": "33292877a7de0853eab66968ba18fec68d1de39511a3b013ea02477cf4cdb3c9",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:37.759Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b1f38c6bed90ba180b445d2cd16a2560ddd66f674f278f678992934e60df05ef"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:33.256Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b1f38c6bed90ba180b445d2cd16a2560ddd66f674f278f678992934e60df05ef",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-gis-a33/inputs/b1f38c6bed90ba180b445d2cd16a2560ddd66f674f278f678992934e60df05ef.json"
+          },
+          "bytes": 1362
+        }
+      }
+    },
+    {
+      "sha256": "46b25c05bf7408450f5d195c80c58f0d01823284090ee925bdc348ce352dbe8c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-gis-a33/revisions/46b25c05bf7408450f5d195c80c58f0d01823284090ee925bdc348ce352dbe8c.png"
+      },
+      "bytes": 44772,
+      "id": "46b25c05bf7408450f5d195c80c58f0d01823284090ee925bdc348ce352dbe8c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:26.652Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324074737/rectangle_large_type_2_00da1ca08eb7ac3dbae3958564545b2e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "46b25c05bf7408450f5d195c80c58f0d01823284090ee925bdc348ce352dbe8c"
+      }
+    },
+    {
+      "sha256": "7a7b5b827acb8f19654f30cf9764aa0b4753c5174b85f6ded395f43db49b1bb2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-gis-a33/revisions/7a7b5b827acb8f19654f30cf9764aa0b4753c5174b85f6ded395f43db49b1bb2.png"
+      },
+      "bytes": 1853257,
+      "id": "7a7b5b827acb8f19654f30cf9764aa0b4753c5174b85f6ded395f43db49b1bb2",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-68d324ecdcfb",
+      "createdAt": "2026-11-04T01:08:27.200Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "077a147693943c9c94d5042bd108afd54f9ee5ea1cd835fe41d4a7eade2efb60"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:25.259Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "077a147693943c9c94d5042bd108afd54f9ee5ea1cd835fe41d4a7eade2efb60",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-gis-a33/inputs/077a147693943c9c94d5042bd108afd54f9ee5ea1cd835fe41d4a7eade2efb60.json"
+          },
+          "bytes": 8224
+        },
+        "production": {
+          "id": "NCI-00165",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "68d324ecdcfb414a6103c948d039a86c1880a6d6fd79f35aaaf13928d8c032dc"
+        }
+      }
+    }
+  ]
+}

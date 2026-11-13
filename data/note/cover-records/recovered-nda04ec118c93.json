@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nda04ec118c93",
+  "production": {
+    "id": "NCI-00468",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "日帰りの行楽\n1位は愛知県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に日帰りの行楽を連想する無人の公園と無地の小さなデイバッグを描く。宿泊施設、人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nda04ec118c93 2026-10-23公開API本文照合。記事題名「【2021年版】行楽（日帰り）をした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "0e67e43af2648fae98b89666f1dfa7183b12bbc10829825f7a924ea8e6a36a51",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nda04ec118c93/revisions/0e67e43af2648fae98b89666f1dfa7183b12bbc10829825f7a924ea8e6a36a51.png"
+      },
+      "bytes": 72453,
+      "id": "0e67e43af2648fae98b89666f1dfa7183b12bbc10829825f7a924ea8e6a36a51",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:35.630Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774940/rectangle_large_type_2_d0681c8df4f4692069dbcb55a43ac4c6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0e67e43af2648fae98b89666f1dfa7183b12bbc10829825f7a924ea8e6a36a51"
+      }
+    },
+    {
+      "sha256": "368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nda04ec118c93/revisions/368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1.png"
+      },
+      "bytes": 118061,
+      "id": "368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:17:42.862Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5130f3abd4fe55c18a845e75c7dbbcc40ba941b98079bf094c8e84d38b76e33a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/travel-participation-rate-day-trip/values.json",
+        "sourceSha256": "d263752b1ee198f27966be447e7ba4154761b32956a1ad19b82ed0fee6dec59c",
+        "input": {
+          "sha256": "5130f3abd4fe55c18a845e75c7dbbcc40ba941b98079bf094c8e84d38b76e33a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nda04ec118c93/inputs/5130f3abd4fe55c18a845e75c7dbbcc40ba941b98079bf094c8e84d38b76e33a.json"
+          },
+          "bytes": 6614
+        }
+      }
+    },
+    {
+      "sha256": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nda04ec118c93/revisions/bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea.png"
+      },
+      "bytes": 1804469,
+      "id": "bf40bec65fc946c7221ac2b20a865440231d447b8a9f609436f2bb70babb0eea",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-cc26bcb935cf",
+      "createdAt": "2026-10-23T14:07:34.881Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "80f79be2d5803fdaea5da297860d3c9ddeb472bae0bc9e0ab83eae06d561e442"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:09:31.337Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "80f79be2d5803fdaea5da297860d3c9ddeb472bae0bc9e0ab83eae06d561e442",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nda04ec118c93/inputs/80f79be2d5803fdaea5da297860d3c9ddeb472bae0bc9e0ab83eae06d561e442.json"
+          },
+          "bytes": 8764
+        },
+        "production": {
+          "id": "NCI-00468",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "cc26bcb935cf946014dc75b324970ac1aa8566db44ef01802710f64aebebc92c"
+        }
+      }
+    }
+  ]
+}

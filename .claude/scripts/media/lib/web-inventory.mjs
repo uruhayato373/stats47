@@ -82,7 +82,9 @@ export function imageReferences(markdown, base) {
   return refs;
 }
 export function inlineSvgReferences(markdown){
-  return [...markdown.matchAll(/<svg\b[\s\S]*?<\/svg\s*>/gi)].map(m=>({start:m.index,end:m.index+m[0].length,sha256:digest(Buffer.from(m[0])),bytes:Buffer.byteLength(m[0]),line:markdown.slice(0,m.index).split('\n').length}));
+  // Match on a copy with code examples blanked (same length), so offsets and hashes still refer to the original text.
+  const searchable=maskInlineCode(maskFences(markdown));
+  return [...searchable.matchAll(/<svg\b[\s\S]*?<\/svg\s*>/gi)].map(m=>{const text=markdown.slice(m.index,m.index+m[0].length);return {start:m.index,end:m.index+text.length,sha256:digest(Buffer.from(text)),bytes:Buffer.byteLength(text),line:markdown.slice(0,m.index).split('\n').length};});
 }
 export function sourceReferences(value) {
   const refs=new Set();

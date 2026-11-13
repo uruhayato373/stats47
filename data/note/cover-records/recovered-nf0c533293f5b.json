@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nf0c533293f5b",
+  "production": {
+    "id": "NCI-00483",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "クラシック音楽鑑賞\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のコンサートホールに置かれたチェロと譜面台を描く。CD、スマートフォン、人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nf0c533293f5b 2026-10-23公開API本文照合。記事題名「【2021年版】クラシック音楽鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "380c8f3467893489d06ebce159294c95e3ed09e53d5f5503ac09cc8232d337f9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nf0c533293f5b/revisions/380c8f3467893489d06ebce159294c95e3ed09e53d5f5503ac09cc8232d337f9.png"
+      },
+      "bytes": 63312,
+      "id": "380c8f3467893489d06ebce159294c95e3ed09e53d5f5503ac09cc8232d337f9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:44.401Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775268/rectangle_large_type_2_fb3413db4874bc3b75c037639f274469.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "380c8f3467893489d06ebce159294c95e3ed09e53d5f5503ac09cc8232d337f9"
+      }
+    },
+    {
+      "sha256": "f49914aec7de15e7e703f136a40c180aae0aea08a3bbff3346a20253fea9c09d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nf0c533293f5b/revisions/f49914aec7de15e7e703f136a40c180aae0aea08a3bbff3346a20253fea9c09d.png"
+      },
+      "bytes": 120031,
+      "id": "f49914aec7de15e7e703f136a40c180aae0aea08a3bbff3346a20253fea9c09d",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:16.988Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7b8faf6f161a191cfeca9d3a83dc97ce592f943c20e0d928edd3308742330450"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-classical-music/values.json",
+        "sourceSha256": "9ed31e25682daaa707a002ebf6c0da9c6711982900887e66e6ef8eaa191142da",
+        "input": {
+          "sha256": "7b8faf6f161a191cfeca9d3a83dc97ce592f943c20e0d928edd3308742330450",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf0c533293f5b/inputs/7b8faf6f161a191cfeca9d3a83dc97ce592f943c20e0d928edd3308742330450.json"
+          },
+          "bytes": 6627
+        }
+      }
+    },
+    {
+      "sha256": "abe08b0d99589ce75a398df393bedd6f85e2d87b340145f5af1cb50d36d1284f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nf0c533293f5b/revisions/abe08b0d99589ce75a398df393bedd6f85e2d87b340145f5af1cb50d36d1284f.png"
+      },
+      "bytes": 1883365,
+      "id": "abe08b0d99589ce75a398df393bedd6f85e2d87b340145f5af1cb50d36d1284f",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-724e49e1a6c4",
+      "createdAt": "2026-10-23T13:37:58.945Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1a44e1cd2b7b262d33f3499df300e94abb179600c12280e6df3cac5fa485901d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:40:24.187Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1a44e1cd2b7b262d33f3499df300e94abb179600c12280e6df3cac5fa485901d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf0c533293f5b/inputs/1a44e1cd2b7b262d33f3499df300e94abb179600c12280e6df3cac5fa485901d.json"
+          },
+          "bytes": 8786
+        },
+        "production": {
+          "id": "NCI-00483",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "724e49e1a6c42506250542dfa06316f076bf2d54e8e71f54457122a4eb5047d9"
+        }
+      }
+    }
+  ]
+}

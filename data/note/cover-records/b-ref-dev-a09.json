@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a09",
+  "production": {
+    "id": "NCI-00149",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "教育費が多い市\n少ない市",
+      "subline": "47市を比較・2007年の値",
+      "subject": "無文字の参考書の束、鉛筆立て、そろばんを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n56515e90282e 本文確認2026-11-04。全世帯の1か月当たり教育費。最新で取り出せた年が2007年なので年を明記する。さいたま市が最多、福井市が最少。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a09/revisions/db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102.png"
+      },
+      "bytes": 35955,
+      "id": "db0b325a0b6563710a0e1986e95d48fd02e5f6d4f8906dc68a8b99a0c30be102",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:37.203Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "67638f51208033ae12975fcefba61a7bf082e8913540594c63cf5e72d6724607"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:09.758Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "67638f51208033ae12975fcefba61a7bf082e8913540594c63cf5e72d6724607",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a09/inputs/67638f51208033ae12975fcefba61a7bf082e8913540594c63cf5e72d6724607.json"
+          },
+          "bytes": 1242
+        }
+      }
+    },
+    {
+      "sha256": "ca5fbb76cac1b0fe95507d2f4872eb0556cc759e6b296e7f2b81f5c15efbc8e9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a09/revisions/ca5fbb76cac1b0fe95507d2f4872eb0556cc759e6b296e7f2b81f5c15efbc8e9.png"
+      },
+      "bytes": 65739,
+      "id": "ca5fbb76cac1b0fe95507d2f4872eb0556cc759e6b296e7f2b81f5c15efbc8e9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:35.885Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324051476/rectangle_large_type_2_222bfd259265aec51f6deaadb62c0a0c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ca5fbb76cac1b0fe95507d2f4872eb0556cc759e6b296e7f2b81f5c15efbc8e9"
+      }
+    },
+    {
+      "sha256": "9976cb04a39e5d045628b1b62f04f99a4e2745c401b506ebbe81dd864db1ff0a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a09/revisions/9976cb04a39e5d045628b1b62f04f99a4e2745c401b506ebbe81dd864db1ff0a.png"
+      },
+      "bytes": 1982408,
+      "id": "9976cb04a39e5d045628b1b62f04f99a4e2745c401b506ebbe81dd864db1ff0a",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-2110c784324d",
+      "createdAt": "2026-11-03T23:14:42.773Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "90b9b01bbd03d7f89ff79cfdf14fa33c4aba047110f702027b93fe1042820212"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:24.775Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "90b9b01bbd03d7f89ff79cfdf14fa33c4aba047110f702027b93fe1042820212",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a09/inputs/90b9b01bbd03d7f89ff79cfdf14fa33c4aba047110f702027b93fe1042820212.json"
+          },
+          "bytes": 8101
+        },
+        "production": {
+          "id": "NCI-00149",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "2110c784324de456048e92b6e98d42c4cef91edcb56a98cdad6d878686c0234c"
+        }
+      }
+    }
+  ]
+}

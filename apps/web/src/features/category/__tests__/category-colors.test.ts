@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 
 import { getCategoryColor } from "../utils/category-colors.palette";

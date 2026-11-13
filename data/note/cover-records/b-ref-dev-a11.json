@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a11",
+  "production": {
+    "id": "NCI-00150",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "進学した子への\n仕送りの地域差",
+      "subline": "47市を比較\n2024年の家計調査",
+      "subject": "段ボール箱に詰めた米袋、缶詰、タオルと無文字の封筒を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nbc4bbe4ef1d8 本文確認2026-11-04。国内遊学仕送り金。長野市が最多の139,600円、大阪市が最少。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a11/revisions/a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0.png"
+      },
+      "bytes": 35933,
+      "id": "a49798f1f9bd50c58eca3ac858d933ed3456c6262fe2a73a9d2fcd991129e1e0",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:41.986Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "66767539aca24cb56962b4c86cde37d7d2366961480655d86248e9295baef72e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:11.247Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "66767539aca24cb56962b4c86cde37d7d2366961480655d86248e9295baef72e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a11/inputs/66767539aca24cb56962b4c86cde37d7d2366961480655d86248e9295baef72e.json"
+          },
+          "bytes": 1313
+        }
+      }
+    },
+    {
+      "sha256": "65d40319687fa9c55039562e173dfd737628cec738e595cefc29390b8c0a3e70",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a11/revisions/65d40319687fa9c55039562e173dfd737628cec738e595cefc29390b8c0a3e70.png"
+      },
+      "bytes": 82235,
+      "id": "65d40319687fa9c55039562e173dfd737628cec738e595cefc29390b8c0a3e70",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:36.850Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324052995/rectangle_large_type_2_b1d002b4c4a869a0a818116cb63e0b94.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "65d40319687fa9c55039562e173dfd737628cec738e595cefc29390b8c0a3e70"
+      }
+    },
+    {
+      "sha256": "1d48ecfc5155b76b2306b3bb638446faf44dc041496d99ddf86ac708dbe1bd01",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a11/revisions/1d48ecfc5155b76b2306b3bb638446faf44dc041496d99ddf86ac708dbe1bd01.png"
+      },
+      "bytes": 1961621,
+      "id": "1d48ecfc5155b76b2306b3bb638446faf44dc041496d99ddf86ac708dbe1bd01",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-a219c706ddc3",
+      "createdAt": "2026-11-03T23:14:54.203Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f347f1407af0282d30c59daa1f774c0d8b625579907ee75b2ddfe16ad3acf2e8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:28.649Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f347f1407af0282d30c59daa1f774c0d8b625579907ee75b2ddfe16ad3acf2e8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a11/inputs/f347f1407af0282d30c59daa1f774c0d8b625579907ee75b2ddfe16ad3acf2e8.json"
+          },
+          "bytes": 8166
+        },
+        "production": {
+          "id": "NCI-00150",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "a219c706ddc3618cd1321a9d505f314aaeb82ea3ea2ad096e3cd114a6ee048d1"
+        }
+      }
+    }
+  ]
+}

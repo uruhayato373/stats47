@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-mh-a08",
+  "production": {
+    "id": "NCI-00189",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "貯蓄の置き方と\n収入の関係",
+      "subline": "預貯金と生命保険を比較",
+      "subject": "無文字の通帳風の冊子と、傘の形の小さな置物を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n105ed996a3a3 本文確認2026-11-04。預貯金の割合は新潟県73.1％、生命保険は鹿児島県29.9％。年間収入との関係を見る記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a08/revisions/309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e.png"
+      },
+      "bytes": 38235,
+      "id": "309b6bc0382e1259145954d46313b708fd0856c281d38625c3b3dc4df3b6997e",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:03.587Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "14d9e597f2a84b27940b0150a54982697125489f89625e5e7d15f8a9d07e7e9f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:07.456Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "14d9e597f2a84b27940b0150a54982697125489f89625e5e7d15f8a9d07e7e9f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a08/inputs/14d9e597f2a84b27940b0150a54982697125489f89625e5e7d15f8a9d07e7e9f.json"
+          },
+          "bytes": 1352
+        }
+      }
+    },
+    {
+      "sha256": "aebedd7f302b1beccb17ec5d8740d1aaafe8236132763794f36919b635a1cf66",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a08/revisions/aebedd7f302b1beccb17ec5d8740d1aaafe8236132763794f36919b635a1cf66.png"
+      },
+      "bytes": 93670,
+      "id": "aebedd7f302b1beccb17ec5d8740d1aaafe8236132763794f36919b635a1cf66",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:30.396Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324149516/rectangle_large_type_2_fb8e9cd93428a42a154e375ac20fefe2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "aebedd7f302b1beccb17ec5d8740d1aaafe8236132763794f36919b635a1cf66"
+      }
+    },
+    {
+      "sha256": "0733fecac3ebfc0fcc5da0c65baea9c2f2325870fbb6d67eced534597be06a6a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a08/revisions/0733fecac3ebfc0fcc5da0c65baea9c2f2325870fbb6d67eced534597be06a6a.png"
+      },
+      "bytes": 1972024,
+      "id": "0733fecac3ebfc0fcc5da0c65baea9c2f2325870fbb6d67eced534597be06a6a",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-916a632833c8",
+      "createdAt": "2026-11-04T01:39:50.748Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f415b058a444f701b23e7bb543ebb32e9c2923c209d1ca13fbdb51317998093f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:31.371Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f415b058a444f701b23e7bb543ebb32e9c2923c209d1ca13fbdb51317998093f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a08/inputs/f415b058a444f701b23e7bb543ebb32e9c2923c209d1ca13fbdb51317998093f.json"
+          },
+          "bytes": 8137
+        },
+        "production": {
+          "id": "NCI-00189",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "916a632833c8ae360cda877c9dc2476614f8d5a3c6533f75ba1c5e60233b5a54"
+        }
+      }
+    }
+  ]
+}

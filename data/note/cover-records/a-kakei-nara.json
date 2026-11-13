@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-nara",
+  "production": {
+    "id": "NCI-00087",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "奈良県の家計\n教育費に注目",
+      "subline": "奈良市・2024年\n二人以上の世帯",
+      "subject": "添付は奈良県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n366d898d8107 2026-10-23公開API本文照合。奈良市の2024年・二人以上の世帯の家計調査。教育1.74倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は奈良県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は奈良市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "奈良市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "04f85bd0d9bd527d84203cd776289755a2cf2710329eacbacf45541f9825484f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nara/revisions/04f85bd0d9bd527d84203cd776289755a2cf2710329eacbacf45541f9825484f.png"
+      },
+      "bytes": 50145,
+      "id": "04f85bd0d9bd527d84203cd776289755a2cf2710329eacbacf45541f9825484f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:10.276Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771600/rectangle_large_type_2_e066c55ba4966a904e61d1a9a282c0b2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "04f85bd0d9bd527d84203cd776289755a2cf2710329eacbacf45541f9825484f"
+      }
+    },
+    {
+      "sha256": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nara/revisions/34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3.png"
+      },
+      "bytes": 102355,
+      "id": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:33.098Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ae5d534e1c7488868d4cc3f86dc6bc1dd6b0cd90ccbc217dd6fea9dccaeaea72"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "d93c50b1d34fad23558ed71eac5ad32b38abd4db1b1896b6099115f192834813",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nara/revisions/d93c50b1d34fad23558ed71eac5ad32b38abd4db1b1896b6099115f192834813.png"
+      },
+      "bytes": 104237,
+      "id": "d93c50b1d34fad23558ed71eac5ad32b38abd4db1b1896b6099115f192834813",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:07.837Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-nara/images/cover-1280x670.png",
+        "sourceSha256": "d93c50b1d34fad23558ed71eac5ad32b38abd4db1b1896b6099115f192834813"
+      }
+    },
+    {
+      "sha256": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nara/revisions/ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253.png"
+      },
+      "bytes": 1471422,
+      "id": "ba96d458c4ebe2a72692c10ed7d6cf71b864363ca07dd5f00f82ed7e7afce253",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-b3c445c7e8f5",
+      "createdAt": "2026-10-23T09:03:15.142Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ba4d05047ef17c84ae3be125d23232ad56e353e014604b4c1edf0a71fb17bfb3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "奈良県の主域輪郭と奈良市・2024年・二人以上の世帯、教育費と無文字ノートを新旧比較。初稿の署名欠けを破棄し、修正版の原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T09:07:16.016Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ba4d05047ef17c84ae3be125d23232ad56e353e014604b4c1edf0a71fb17bfb3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-nara/inputs/ba4d05047ef17c84ae3be125d23232ad56e353e014604b4c1edf0a71fb17bfb3.json"
+          },
+          "bytes": 13068
+        },
+        "production": {
+          "id": "NCI-00087",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "b3c445c7e8f5374b07249e5467188373d16d6609fcf25c427dcb39716211f95d"
+        }
+      }
+    }
+  ]
+}

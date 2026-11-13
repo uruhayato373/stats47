@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 import { describe, expect, it } from 'vitest';
 

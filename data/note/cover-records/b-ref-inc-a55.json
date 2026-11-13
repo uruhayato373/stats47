@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-inc-a55",
+  "production": {
+    "id": "NCI-00168",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "賃金・家賃・灯油で\n暮らしを見る",
+      "subline": "47都道府県の組み合わせ",
+      "subject": "小さな家の模型と、赤い灯油缶、無文字の封筒を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/ne243cd01a29a 本文確認2026-11-04。賃金・家賃・暖房費の組み合わせで都道府県の暮らしを見る記事。賃金と家賃は大都市圏、灯油は青森が上位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a55/revisions/14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b.png"
+      },
+      "bytes": 38280,
+      "id": "14c6991248cf605dfd24d05e59ff0dc7d498e502658bb9a5e82279c81fd2fd7b",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:33.659Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2879868cc54745e60942f5a4a189751f74693c92222a78193e6136b11cbc00e7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:36.120Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2879868cc54745e60942f5a4a189751f74693c92222a78193e6136b11cbc00e7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a55/inputs/2879868cc54745e60942f5a4a189751f74693c92222a78193e6136b11cbc00e7.json"
+          },
+          "bytes": 1342
+        }
+      }
+    },
+    {
+      "sha256": "c9e5e3295872de24a47d30524b22f278ab04b320478f2cba343045da1352f089",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a55/revisions/c9e5e3295872de24a47d30524b22f278ab04b320478f2cba343045da1352f089.png"
+      },
+      "bytes": 62542,
+      "id": "c9e5e3295872de24a47d30524b22f278ab04b320478f2cba343045da1352f089",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:25.281Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324077345/rectangle_large_type_2_7261c40c23e2b5807c8854f78af8c016.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c9e5e3295872de24a47d30524b22f278ab04b320478f2cba343045da1352f089"
+      }
+    },
+    {
+      "sha256": "a6521e3702d5946697d39eab65cd227cfe907650bcae3866d94cb38e29fe33da",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a55/revisions/a6521e3702d5946697d39eab65cd227cfe907650bcae3866d94cb38e29fe33da.png"
+      },
+      "bytes": 2055480,
+      "id": "a6521e3702d5946697d39eab65cd227cfe907650bcae3866d94cb38e29fe33da",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-09fbb776db5a",
+      "createdAt": "2026-11-04T01:08:56.042Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2721c077294097679be5e7330aa0a5f911e7f0610126462cb4ef57fdaf41b470"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:37.764Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2721c077294097679be5e7330aa0a5f911e7f0610126462cb4ef57fdaf41b470",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a55/inputs/2721c077294097679be5e7330aa0a5f911e7f0610126462cb4ef57fdaf41b470.json"
+          },
+          "bytes": 8212
+        },
+        "production": {
+          "id": "NCI-00168",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "09fbb776db5af55591cd8fb8cd9c7be2a62b086a103af9fd068f79c6395f1dc0"
+        }
+      }
+    }
+  ]
+}

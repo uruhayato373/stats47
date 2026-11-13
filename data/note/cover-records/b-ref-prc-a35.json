@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a35",
+  "production": {
+    "id": "NCI-00217",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "さんま・さば・たい\n1位の市は？",
+      "subline": "3つの魚の購入量を比較",
+      "subject": "焼き網の上のさんまの切り身と、さばの切り身、たいの切り身を皿に盛って大きく描く。魚の頭や目は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nb25821eb9ef6 本文確認2026-11-04。さんまは秋田市、さばは鹿児島市、たいは佐賀市が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a35/revisions/8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc.png"
+      },
+      "bytes": 34901,
+      "id": "8b43c3501527a044c6b5f91d857179fbc789c7bdf403b2fd909683defcd6e4dc",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:25.623Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2c63543c4d967e350abbb883d144a94fc6287ab3d6f4254dfab8f7c31a86cc7e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:47.053Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2c63543c4d967e350abbb883d144a94fc6287ab3d6f4254dfab8f7c31a86cc7e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a35/inputs/2c63543c4d967e350abbb883d144a94fc6287ab3d6f4254dfab8f7c31a86cc7e.json"
+          },
+          "bytes": 1278
+        }
+      }
+    },
+    {
+      "sha256": "f106021044662b510b4ad91707641069bb9e95d2c7e7a671211eba406902a976",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a35/revisions/f106021044662b510b4ad91707641069bb9e95d2c7e7a671211eba406902a976.png"
+      },
+      "bytes": 45580,
+      "id": "f106021044662b510b4ad91707641069bb9e95d2c7e7a671211eba406902a976",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:04.646Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324179014/rectangle_large_type_2_97a294d4a6f5506d42efe04a372d122d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f106021044662b510b4ad91707641069bb9e95d2c7e7a671211eba406902a976"
+      }
+    },
+    {
+      "sha256": "637a6125de0ce59e1a8bcb955a6fb9e2593ba2098884db8059fa755fd8a41e70",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a35/revisions/637a6125de0ce59e1a8bcb955a6fb9e2593ba2098884db8059fa755fd8a41e70.png"
+      },
+      "bytes": 1951092,
+      "id": "637a6125de0ce59e1a8bcb955a6fb9e2593ba2098884db8059fa755fd8a41e70",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-5b8a6709e054",
+      "createdAt": "2026-11-04T02:09:07.301Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "184c858cd821743ed0aa0fbe4dce94fcae557156d83bbb20715677e548fddd2f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:10:10.816Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "184c858cd821743ed0aa0fbe4dce94fcae557156d83bbb20715677e548fddd2f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a35/inputs/184c858cd821743ed0aa0fbe4dce94fcae557156d83bbb20715677e548fddd2f.json"
+          },
+          "bytes": 8251
+        },
+        "production": {
+          "id": "NCI-00217",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "5b8a6709e0542e72e1a419c2e93f243f7f3f1d8e0c23c989c4bdcc0b38c7029c"
+        }
+      }
+    }
+  ]
+}

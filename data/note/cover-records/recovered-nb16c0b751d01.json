@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nb16c0b751d01",
+  "production": {
+    "id": "NCI-00456",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ウォーキング・体操\n多い県は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に歩行用の無地のスニーカーとストレッチ用マットを対で置く。人の足や体、健康結果は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nb16c0b751d01 2026-10-23公開API本文照合。記事題名「【2021年版】ウォーキング・軽い体操をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「10歳以上」を確認。カバーは本文の主題と年・対象だけを示し、因果・実績・保証・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "c84289f88df1d79ed2bc44978dc6aaeadc8a8b70dd53a17d61741c98aecbdbb9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nb16c0b751d01/revisions/c84289f88df1d79ed2bc44978dc6aaeadc8a8b70dd53a17d61741c98aecbdbb9.png"
+      },
+      "bytes": 62192,
+      "id": "c84289f88df1d79ed2bc44978dc6aaeadc8a8b70dd53a17d61741c98aecbdbb9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:28.866Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774776/rectangle_large_type_2_d0aa9011e3922d4ac861b1c997b14336.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c84289f88df1d79ed2bc44978dc6aaeadc8a8b70dd53a17d61741c98aecbdbb9"
+      }
+    },
+    {
+      "sha256": "09958c797c520cc3bf28d62b4095ef7cb10c991f9e7b92c2426f6bb8af5ebbc5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nb16c0b751d01/revisions/09958c797c520cc3bf28d62b4095ef7cb10c991f9e7b92c2426f6bb8af5ebbc5.png"
+      },
+      "bytes": 121521,
+      "id": "09958c797c520cc3bf28d62b4095ef7cb10c991f9e7b92c2426f6bb8af5ebbc5",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:17:07.826Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "db0b59e6c4199e401fede9cb8f438ab07d84bcdd50246378019ab50ec2606441"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-walking/values.json",
+        "sourceSha256": "050937610ca1b3b5a0e3c697733ffbeb4916a87eea122cac5f546697959d1aff",
+        "input": {
+          "sha256": "db0b59e6c4199e401fede9cb8f438ab07d84bcdd50246378019ab50ec2606441",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nb16c0b751d01/inputs/db0b59e6c4199e401fede9cb8f438ab07d84bcdd50246378019ab50ec2606441.json"
+          },
+          "bytes": 6661
+        }
+      }
+    },
+    {
+      "sha256": "5714e00c681799cc8de38a4401a3c3a7496732ee9a50832145bea2e9829e8814",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nb16c0b751d01/revisions/5714e00c681799cc8de38a4401a3c3a7496732ee9a50832145bea2e9829e8814.png"
+      },
+      "bytes": 1854796,
+      "id": "5714e00c681799cc8de38a4401a3c3a7496732ee9a50832145bea2e9829e8814",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-c44d0ca2302b",
+      "createdAt": "2026-10-23T11:42:08.548Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8458302be30c9bd63157fa949eb520d5c2882f1e9be0ac4596eafa09097fb8f3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:43:34.183Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8458302be30c9bd63157fa949eb520d5c2882f1e9be0ac4596eafa09097fb8f3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nb16c0b751d01/inputs/8458302be30c9bd63157fa949eb520d5c2882f1e9be0ac4596eafa09097fb8f3.json"
+          },
+          "bytes": 8721
+        },
+        "production": {
+          "id": "NCI-00456",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "c44d0ca2302b108e93bf96989eaa2a4d1415705a431ee7b49871730a0c0eac95"
+        }
+      }
+    }
+  ]
+}

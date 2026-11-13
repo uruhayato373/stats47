@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "13-ollama-offline-local-llm",
+  "production": {
+    "id": "NCI-00028",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "ローカルLLMで\nオフライン業務",
+      "subline": "OllamaとClaude Codeの構成",
+      "subject": "LANケーブルを抜いて脇に束ねたノートPCと、小型の黒い箱型コンピューターを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n1e72ba0b4a43 本文確認2026-11-04。Ollamaを使いオフライン環境で文書業務を行う構成の記事。個別の環境での利用可否を断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "0da6091b821ec9f10de36332955664affb81ffac83cb3335e79bb2a617dd1370",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-ollama-offline-local-llm/revisions/0da6091b821ec9f10de36332955664affb81ffac83cb3335e79bb2a617dd1370.png"
+      },
+      "bytes": 115439,
+      "id": "0da6091b821ec9f10de36332955664affb81ffac83cb3335e79bb2a617dd1370",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:34.582Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293004276/rectangle_large_type_2_05e9316de3a6f34659cb66b1303a958d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0da6091b821ec9f10de36332955664affb81ffac83cb3335e79bb2a617dd1370"
+      }
+    },
+    {
+      "sha256": "b9abaacfc46acb607532f695ff1db5aef790ef6bd115c70e43cf65d749c08683",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-ollama-offline-local-llm/revisions/b9abaacfc46acb607532f695ff1db5aef790ef6bd115c70e43cf65d749c08683.png"
+      },
+      "bytes": 58734,
+      "id": "b9abaacfc46acb607532f695ff1db5aef790ef6bd115c70e43cf65d749c08683",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:45:48.505Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "63d289ba529d4facc4c3c43a224ed1f0ab066949456d13da24885e4ba7575a65"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:18.480Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "63d289ba529d4facc4c3c43a224ed1f0ab066949456d13da24885e4ba7575a65",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/13-ollama-offline-local-llm/inputs/63d289ba529d4facc4c3c43a224ed1f0ab066949456d13da24885e4ba7575a65.json"
+          },
+          "bytes": 1094
+        }
+      }
+    },
+    {
+      "sha256": "784b5c360d5ec40381854ed1f678e66884d0ceb4d05153607b53a6138c644a29",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-ollama-offline-local-llm/revisions/784b5c360d5ec40381854ed1f678e66884d0ceb4d05153607b53a6138c644a29.png"
+      },
+      "bytes": 68012,
+      "id": "784b5c360d5ec40381854ed1f678e66884d0ceb4d05153607b53a6138c644a29",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:58.644Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331363/rectangle_large_type_2_a5df55ef879cd90d6ef8d5422b4cb810.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "784b5c360d5ec40381854ed1f678e66884d0ceb4d05153607b53a6138c644a29"
+      }
+    },
+    {
+      "sha256": "fe3790683614e4e06dd349373c901fc092833af318dd543348e09afb03e870fc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-ollama-offline-local-llm/revisions/fe3790683614e4e06dd349373c901fc092833af318dd543348e09afb03e870fc.png"
+      },
+      "bytes": 24103,
+      "id": "fe3790683614e4e06dd349373c901fc092833af318dd543348e09afb03e870fc",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:18.239Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e8288c4b2d5933618512a388027c3f8e41d4638841be8fa43f6294ffeeed0e08"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:37.557Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e8288c4b2d5933618512a388027c3f8e41d4638841be8fa43f6294ffeeed0e08",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/13-ollama-offline-local-llm/inputs/e8288c4b2d5933618512a388027c3f8e41d4638841be8fa43f6294ffeeed0e08.json"
+          },
+          "bytes": 1094
+        }
+      }
+    },
+    {
+      "sha256": "eb6fbbdbf971a7d3e7a2ff1ef51fcbea9e57d7f3ffacd95c7982ca77dc28211b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-ollama-offline-local-llm/revisions/eb6fbbdbf971a7d3e7a2ff1ef51fcbea9e57d7f3ffacd95c7982ca77dc28211b.png"
+      },
+      "bytes": 1918567,
+      "id": "eb6fbbdbf971a7d3e7a2ff1ef51fcbea9e57d7f3ffacd95c7982ca77dc28211b",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-99a5b77b009f",
+      "createdAt": "2026-11-04T00:41:50.427Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "05e53c9b085f9954e1106e6082787833afc05f190e3e7a31545ea989a8e5986a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:43:28.998Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "05e53c9b085f9954e1106e6082787833afc05f190e3e7a31545ea989a8e5986a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/13-ollama-offline-local-llm/inputs/05e53c9b085f9954e1106e6082787833afc05f190e3e7a31545ea989a8e5986a.json"
+          },
+          "bytes": 8762
+        },
+        "production": {
+          "id": "NCI-00028",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "99a5b77b009f6f64e4bc72e1d5235838aa220cb45aea88e305cb31102ce9cf0c"
+        }
+      }
+    }
+  ]
+}

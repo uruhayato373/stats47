@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { findNestedCardSurfaces } from './lib/card-nesting-audit.mjs';
 import { findChartContractViolations } from './lib/chart-contract-audit.mjs';
+import { findClassOverrideViolations, jsxOpeningTag, PANEL_COMPONENTS, topLevelMask } from './lib/class-override-audit.mjs';
 import { addWrappers, buildLyraMap, findLyraDeadCallerClasses } from './lib/lyra-dead-class-audit.mjs';
 import { findRailContractViolations } from './lib/rail-contract-audit.mjs';
 import { findSelectionControlViolations } from './lib/selection-control-audit.mjs';
@@ -845,31 +846,20 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
 // - panel-no-text-size-override: パネルの className・contentClassName・bodyClassName に文字の大きさ・行の高さを書かない
 // - panel-parts-only-in-panel-components: CardHeader・CardTitle・CardFooter を組み立てるのはパネルの実装だけ
 //   (補足は CardFooter の帯にせず、ChartPanel の footer でパネルの中の 1 行にする)
-const PANEL_COMPONENTS = ['ChartPanel', 'SurfaceCard', 'SurfaceSection', 'SectionCard', 'RailCard', 'ArticleCard'];
+const CLASS_OVERRIDE_MESSAGES = {
+  'panel-no-text-size-override':
+    'Panels keep the reference sizes (body 14px/relaxed, title 16px/22px). Do not set text size or line height on the panel; set it on the specific child element instead.',
+  'disclosure-no-look-override':
+    'Disclosures keep the reference look (question 14px/500, 10px vertical padding, divider lines). Use className / contentClassName only for placement (margin, visibility) and child spacing (space-y-*).',
+  'empty-state-no-look-override':
+    'Empty / error states keep the reference look (24px padding, 16px gap, dashed frame). Use className only for placement (margin, aspect ratio, min height); do not add background, border, padding or text styles.',
+  'link-row-no-size-override':
+    'Link rows keep the reference size (LINK_ROW_SIZE_CLASS: 14px, padding 8px, min-height 40px / 44px on mobile). Do not set text size, line height, padding, margin or height on RailNavRow / railNavRowClassName, nor row spacing or horizontal padding on RailLinkList.',
+};
 const PANEL_IMPLEMENTATION_FILES = new Set([
   // ChartPanel・SurfaceCard 系は 2026-10-28 に @stats47/components へ移した (packages は走査しない)
   'src/components/charts/ChartState.tsx',
 ]);
-const PANEL_CLASS_PROPS = /\b(className|contentClassName|bodyClassName)=(?:"([^"]*)"|\{\s*["'`]([^"'`]*)["'`]\s*\})/g;
-const PANEL_TEXT_SIZE = /(?<![\w-])(?:[\w-]+:)*(?:text-(?:xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])(?:\/[\w.]+)?|leading-[\w.[\]-]+)!?(?![\w-])/;
-const PANEL_TAG = new RegExp(`<(${PANEL_COMPONENTS.join('|')})\\b`, 'g');
-// 見た目を部品が持ち、呼び出し側で変えない部品 (開閉・空の状態)
-const LOOK_LOCKED_TAG = /<(FaqSection|ContentDisclosure|ChartEmptyState|ChartErrorState)\b/g;
-const LOOK_OVERRIDE_TOKEN =
-  /^(?:[\w-]+:)*!?(?:p[xytrbl]?-|gap-|border|bg-|rounded|shadow|ring|text-|font-|leading-|tracking-|divide-)[^\s]*$/;
-
-/** text[start] から JSX の開始タグの終わり (> または />) までを返す。{…} の中の > は数えない */
-function jsxOpeningTag(text, start) {
-  let depth = 0;
-  for (let i = start; i < text.length; i += 1) {
-    const ch = text[i];
-    if (ch === '{') depth += 1;
-    else if (ch === '}') depth -= 1;
-    else if (ch === '>' && depth === 0) return text.slice(start, i + 1);
-  }
-  return text.slice(start);
-}
-
 /**
  * 隙間を空けて子を並べる <div> (gap-N・space-y-N。gap-0 / gap-px は線の格子なので除く)。
  * className は "…"・{`…`}・{cn(…)} の形を見る (テーマのチャートの並びはテンプレート文字列で組んでいた)。
@@ -905,18 +895,6 @@ function directPanelChildren(text, openStart) {
   return panels;
 }
 
-/** 文字ごとの {…} の深さ (0 = 開始タグの属性の並び) */
-function topLevelMask(tag) {
-  const depths = [];
-  let depth = 0;
-  for (const ch of tag) {
-    if (ch === '}') depth -= 1;
-    depths.push(depth);
-    if (ch === '{') depth += 1;
-  }
-  return depths;
-}
-
 for (const file of scanRoots.flatMap((root) => listFiles(root))) {
   if (!file.endsWith('.tsx')) continue;
   const text = readFileSync(path.join(cwd, file), 'utf8');
@@ -933,48 +911,16 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       });
     }
   }
-  for (const match of text.matchAll(PANEL_TAG)) {
-    const tag = jsxOpeningTag(text, match.index);
-    const depthAt = topLevelMask(tag);
-    for (const prop of tag.matchAll(PANEL_CLASS_PROPS)) {
-      // action={<Link className=…>} のような属性の中の JSX はパネル自身の属性ではない
-      if (depthAt[prop.index] !== 0) continue;
-      const value = prop[2] ?? prop[3] ?? '';
-      const size = value.match(PANEL_TEXT_SIZE);
-      if (!size) continue;
-      violations.push({
-        ruleId: 'panel-no-text-size-override',
-        message:
-          'Panels keep the reference sizes (body 14px/relaxed, title 16px/22px). Do not set text size or line height on the panel; set it on the specific child element instead.',
-        file,
-        lineNumber: lineOf(match.index + prop.index),
-        line: `<${match[1]} ${prop[1]}="${size[0]}">`,
-      });
-    }
-  }
-  // 開閉 (FaqSection・ContentDisclosure) と空の状態 (ChartEmptyState・ChartErrorState) の見た目は部品が持つ
-  // (開閉 = 質問 14px・500・上下 10px・項目の間に線、空の状態 = 余白 24px・間隔 16px・破線の枠)。
-  // 2026-10-28 まではページの側が地の色・線・行の高さ・文字色を足し、空の状態に 3 種類の地の色が混在していた。
-  // 呼び出し側の className・contentClassName は置き場所 (外の余白・表示切替・縦横比・最小の高さ・子の間隔) だけに使う。
-  for (const match of text.matchAll(LOOK_LOCKED_TAG)) {
-    const tag = jsxOpeningTag(text, match.index);
-    const depthAt = topLevelMask(tag);
-    for (const prop of tag.matchAll(PANEL_CLASS_PROPS)) {
-      if (depthAt[prop.index] !== 0) continue;
-      const value = prop[2] ?? prop[3] ?? '';
-      const override = value.split(/\s+/).find((t) => LOOK_OVERRIDE_TOKEN.test(t));
-      if (!override) continue;
-      const isDisclosure = match[1] === 'FaqSection' || match[1] === 'ContentDisclosure';
-      violations.push({
-        ruleId: isDisclosure ? 'disclosure-no-look-override' : 'empty-state-no-look-override',
-        message: isDisclosure
-          ? 'Disclosures keep the reference look (question 14px/500, 10px vertical padding, divider lines). Use className / contentClassName only for placement (margin, visibility) and child spacing (space-y-*).'
-          : 'Empty / error states keep the reference look (24px padding, 16px gap, dashed frame). Use className only for placement (margin, aspect ratio, min height); do not add background, border, padding or text styles.',
-        file,
-        lineNumber: lineOf(match.index + prop.index),
-        line: `<${match[1]} ${prop[1]}="${override}">`,
-      });
-    }
+  // パネル・開閉・空の状態・リンクの行の className の上書き。className の書き方 ("…"・{"…"}・{cn(…)}・テンプレート文字列) に
+  // よらず同じ取り出し関数で読む (lib/class-override-audit.mjs。DESIGN-CHECK-CLASSNAME-EXPR-01)。
+  for (const found of findClassOverrideViolations(text)) {
+    violations.push({
+      ruleId: found.ruleId,
+      message: CLASS_OVERRIDE_MESSAGES[found.ruleId],
+      file,
+      lineNumber: lineOf(found.index),
+      line: found.line,
+    });
   }
   // ボタンの大きさ・文字・角丸は部品 (見本の値を書き込んだ button.tsx) が持つ。ページの側で ! を付けて上書きしない。
   // 大きさを変えたいときは size (default / sm / xs / icon …) を選ぶ。押しやすさの min-h-* は上書きではないので対象外
@@ -993,33 +939,6 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
         ruleId: 'button-no-forced-size',
         message:
           'Buttons keep the reference size (14px, h-36, rounded-8). Pick a size variant (default / sm / xs / icon) instead of forcing height, text, padding or radius with !.',
-        file,
-        lineNumber: lineOf(match.index + prop.index),
-        line: forced,
-      });
-    }
-  }
-  // リンクの行 (RailNavRow・RailNavRowButton・railNavRowClassName・RailLinkList) の寸法は部品 (LINK_ROW_SIZE_CLASS =
-  // 14px・余白 8px・最小の高さ 40px / モバイル 44px) が持つ。2026-10-28 までは呼び出し側が px-0・-mx-2・15px の密度で
-  // 行ごとに違う寸法にしていた。行には文字の大きさ・行の高さ・余白・高さを、一覧には行の間隔・左右の余白を書かない
-  // (一覧の上下の位置 mt-* / mb-* は一覧の外側なので対象外)。太さ・色は上書きではないので対象外
-  for (const match of text.matchAll(/<(RailNavRow|RailNavRowButton|RailLinkList)\b|railNavRowClassName\(\{/g)) {
-    const isList = match[1] === 'RailLinkList';
-    const tag = match[0].startsWith('<')
-      ? jsxOpeningTag(text, match.index)
-      : text.slice(match.index, text.indexOf('})', match.index) + 2);
-    const depthAt = topLevelMask(tag);
-    for (const prop of tag.matchAll(/className(?:=|:\s*)(?:["'`]([^"'`]*)["'`]|\{\s*["'`]([^"'`]*)["'`]\s*\})/g)) {
-      if (match[0].startsWith('<') && depthAt[prop.index] !== 0) continue;
-      const sizeToken = isList
-        ? /^!?(?:[\w-]+:)*!?(?:-?(?:mx|px|ms|me|ps|pe)-|gap-|space-y-|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[)|leading-)/
-        : /^!?(?:[\w-]+:)*!?(?:-?(?:p|px|py|pt|pb|pl|pr|ps|pe|m|mx|my|ms|me)-|(?:min-|max-)?h-|size-|w-|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[)|leading-)/;
-      const forced = (prop[1] ?? prop[2] ?? '').split(/\s+/).find((t) => sizeToken.test(t));
-      if (!forced) continue;
-      violations.push({
-        ruleId: 'link-row-no-size-override',
-        message:
-          'Link rows keep the reference size (LINK_ROW_SIZE_CLASS: 14px, padding 8px, min-height 40px / 44px on mobile). Do not set text size, line height, padding, margin or height on RailNavRow / railNavRowClassName, nor row spacing or horizontal padding on RailLinkList.',
         file,
         lineNumber: lineOf(match.index + prop.index),
         line: forced,
@@ -1147,6 +1066,21 @@ for (const file of STATIC_PANEL_PAGE_FILES) {
       ruleId: 'static-panel-heading-uses-section-card',
       message:
         'Static pages title their panels with SectionCard (title + headingAs="h2"): 16px/22px, 500, line below. Sub-headings inside a panel stay at 14px (text-sm).',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
+  }
+  // 本文の文字はパネルの既定 (14px / relaxed) に任せる。2026-11-13 まではプライバシーポリシーと運営者情報の本文が
+  // 「text-xs … md:text-sm」で、768px 未満では 12px だった (STATIC-PAGE-BODY-TEXT-SIZE-01)。
+  // 補足・ラベルの 12px (text-xs だけ) は対象外。幅で 12px から 14px に変わる書き方だけを止める。
+  for (const match of text.matchAll(/["'`]([^"'`\n]*)["'`]/g)) {
+    const tokens = match[1].split(/\s+/);
+    if (!tokens.includes('text-xs') || !tokens.some((t) => /^(?:sm|md|lg|xl|2xl):text-sm$/.test(t))) continue;
+    violations.push({
+      ruleId: 'static-panel-body-inherits-panel-text',
+      message:
+        'Static pages leave body text to the panel default (14px / relaxed). Do not start at text-xs and grow to text-sm at a breakpoint; drop the size classes.',
       file,
       lineNumber: lineOf(match.index),
       line: match[0],

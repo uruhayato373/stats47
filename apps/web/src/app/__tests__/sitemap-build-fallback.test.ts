@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * sitemap のビルド時フォールバック回帰テスト。
  *

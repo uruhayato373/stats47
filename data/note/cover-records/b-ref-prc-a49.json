@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a49",
+  "production": {
+    "id": "NCI-00230",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "中部9県の\n1位と47位",
+      "subline": "全国で上位・下位に入る指標",
+      "subject": "色違いの無文字のノート9冊を立てて並べ、手前に歯車と稲穂を描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nbbd5bd83d5fd 本文確認2026-11-04。中部9県の指標。愛知県は製造品出荷額、新潟県は水稲収穫量で1位。順位は良し悪しではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a49/revisions/69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32.png"
+      },
+      "bytes": 39166,
+      "id": "69a2a663bb59f5bbee9f0ae9fbb3fe4b61a8025de5fcb74c3ed71f6f31d27f32",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:34.214Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d0463541bd7201dc37bf4c3882573e87af44be6cf64fe348fca83ede150d83d0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:14:05.102Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d0463541bd7201dc37bf4c3882573e87af44be6cf64fe348fca83ede150d83d0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a49/inputs/d0463541bd7201dc37bf4c3882573e87af44be6cf64fe348fca83ede150d83d0.json"
+          },
+          "bytes": 1174
+        }
+      }
+    },
+    {
+      "sha256": "b3bdeecc87bdf3a6d3776045a83dfce37d948bb013553b020ec1f95c7ad20b96",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a49/revisions/b3bdeecc87bdf3a6d3776045a83dfce37d948bb013553b020ec1f95c7ad20b96.png"
+      },
+      "bytes": 49689,
+      "id": "b3bdeecc87bdf3a6d3776045a83dfce37d948bb013553b020ec1f95c7ad20b96",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:15.411Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324193564/rectangle_large_type_2_7bdc406b3000b1a68f09ce406254b1b8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b3bdeecc87bdf3a6d3776045a83dfce37d948bb013553b020ec1f95c7ad20b96"
+      }
+    },
+    {
+      "sha256": "0a3e55c2050f9f72e7048200da1f0e251c564af8735ac536477070e40c6afb2d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a49/revisions/0a3e55c2050f9f72e7048200da1f0e251c564af8735ac536477070e40c6afb2d.png"
+      },
+      "bytes": 1885386,
+      "id": "0a3e55c2050f9f72e7048200da1f0e251c564af8735ac536477070e40c6afb2d",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-1e988bc391c0",
+      "createdAt": "2026-11-04T02:21:35.713Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0dd6ed7a9b0b35e63efcb9971e4370cca8754de7aeaf8078fbee6f6e38721fa0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:23:57.697Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0dd6ed7a9b0b35e63efcb9971e4370cca8754de7aeaf8078fbee6f6e38721fa0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a49/inputs/0dd6ed7a9b0b35e63efcb9971e4370cca8754de7aeaf8078fbee6f6e38721fa0.json"
+          },
+          "bytes": 8119
+        },
+        "production": {
+          "id": "NCI-00230",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "1e988bc391c04d102e512e7ea45c32cc7cf9a0bd9922441be6167be062287b2e"
+        }
+      }
+    }
+  ]
+}

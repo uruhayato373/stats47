@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a04-04",
+  "production": {
+    "id": "NCI-00184",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "通信費の割合は\n生活水準の物差し？",
+      "subline": "固定電話代は低年収ほど重い",
+      "subject": "コードの付いた受話器だけを横向きに置き、無文字の封筒を添えて大きく描く。数字やボタンのある電話本体は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n9777ed7f52b5 本文確認2026-11-04。固定電話通信料の負担は年収の低い世帯ほど重い。通信費の割合が物差しになるかを検討する記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-04/revisions/259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8.png"
+      },
+      "bytes": 46690,
+      "id": "259b04ab622f66345b213ef9fef8747515b747f0f76afe5d131ecb860d30ebb8",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:34.835Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f7c6fce93a76e76cdb28aab65da9077b9b9acbdc127bf642b843da981c13cc50"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:58.373Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f7c6fce93a76e76cdb28aab65da9077b9b9acbdc127bf642b843da981c13cc50",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-04/inputs/f7c6fce93a76e76cdb28aab65da9077b9b9acbdc127bf642b843da981c13cc50.json"
+          },
+          "bytes": 1327
+        }
+      }
+    },
+    {
+      "sha256": "e485d193399f6e1c10b31e6d209032aa38e4808445e8f8a55b06bd8151518ae9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-04/revisions/e485d193399f6e1c10b31e6d209032aa38e4808445e8f8a55b06bd8151518ae9.png"
+      },
+      "bytes": 110258,
+      "id": "e485d193399f6e1c10b31e6d209032aa38e4808445e8f8a55b06bd8151518ae9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:22.788Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324141294/rectangle_large_type_2_716e5a71b9d16cae05b43e94ccadfbbe.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e485d193399f6e1c10b31e6d209032aa38e4808445e8f8a55b06bd8151518ae9"
+      }
+    },
+    {
+      "sha256": "2107e810e0a3ce372e90af2c07a3a3eedb6cc9b2be41d644b5f220660c2b38d2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-04/revisions/2107e810e0a3ce372e90af2c07a3a3eedb6cc9b2be41d644b5f220660c2b38d2.png"
+      },
+      "bytes": 2063552,
+      "id": "2107e810e0a3ce372e90af2c07a3a3eedb6cc9b2be41d644b5f220660c2b38d2",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-2ae9b9a1fcbd",
+      "createdAt": "2026-11-04T01:29:39.721Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "63e9f99bb249bb6bf8065b99e7244592b2abd471c85b4e05a86dd4659f70ba52"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:29:47.026Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "63e9f99bb249bb6bf8065b99e7244592b2abd471c85b4e05a86dd4659f70ba52",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-04/inputs/63e9f99bb249bb6bf8065b99e7244592b2abd471c85b4e05a86dd4659f70ba52.json"
+          },
+          "bytes": 8404
+        },
+        "production": {
+          "id": "NCI-00184",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "2ae9b9a1fcbd53aef11c1e64451971f645f84ddde0e763628f786102e846ef7f"
+        }
+      }
+    }
+  ]
+}

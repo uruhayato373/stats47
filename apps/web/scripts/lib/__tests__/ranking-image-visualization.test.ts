@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { getMetricConfig } from '@stats47/data-configs';
 import { describe, expect, it } from 'vitest';
 

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "muni-manufacturing-shipment-data",
+  "production": {
+    "id": "NCI-00507",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "製造品出荷額\n市区町村 44年分",
+      "subline": "1,719自治体 CSV＋境界GeoJSON",
+      "subject": "整然とした紙のデータ表の束と、ノートPC、定規、付箋を並べた作業机。工場を思わせる小さな歯車の飾りを 1 つだけ置く。地図・グラフ・数値は描かず、紙の表にも文字や数字を入れない。青緑と黄色の編集的な構図。",
+      "evidence": "原稿の冒頭に 1,719 自治体・1980〜2023 年の 44 年分の CSV、結合用の境界 GeoJSON、検算表が収録物として書かれている。統計値や地図は表紙に載せない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/muni-manufacturing-shipment-data/revisions/0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54.png"
+      },
+      "bytes": 1807508,
+      "id": "0183c4026feed55c28420665a3d47001ced84a218930aeede317c272bef6df54",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-1201c3a1d2de",
+      "createdAt": "2026-11-04T02:48:39.644Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ad1062be598f06668b9143e1ada29803518c03d3a472abdacc3e4eebae79f1b2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文を確認。誤字・文字切れなし、人物なし、架空の図なし",
+        "reviewedAt": "2026-11-04T02:48:51.163Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ad1062be598f06668b9143e1ada29803518c03d3a472abdacc3e4eebae79f1b2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/muni-manufacturing-shipment-data/inputs/ad1062be598f06668b9143e1ada29803518c03d3a472abdacc3e4eebae79f1b2.json"
+          },
+          "bytes": 8141
+        },
+        "production": {
+          "id": "NCI-00507",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "1201c3a1d2de4db7c22df7439f81e0a22daff1ac3c4329275d8ec2ea403fb02f"
+        }
+      }
+    },
+    {
+      "sha256": "0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/muni-manufacturing-shipment-data/revisions/0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b.png"
+      },
+      "bytes": 414056,
+      "id": "0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-04T02:59:04.684Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332041499/rectangle_large_type_2_ed3faeff21eb6e6a34de3f45686521e9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0da96f871d1ea7d2f916736ea796aea54fb18af8d9817b298e780aaf0c466e7b"
+      }
+    }
+  ]
+}

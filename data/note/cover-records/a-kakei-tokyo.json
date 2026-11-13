@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-tokyo",
+  "production": {
+    "id": "NCI-00100",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "東京都の家計\n教育費に注目",
+      "subline": "東京都区部・2024年\n二人以上の世帯",
+      "subject": "添付画像は編集対象ではなく、東京都の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の通学かばん一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+      "evidence": "https://note.com/stats47/n/n9d384a674462 2026-10-15公開本文確認。公開本文は東京の2024年・二人以上の世帯の家計調査。教育は47市単純平均比2.09倍。対象は東京都全体でなく東京都区部（統計センターのデータ利用上の留意点 https://www.nstac.go.jp/files/kaisetsu-E-2024.pdf も確認）。カバーの補足に東京都区部を明記し、倍率・家賃地代の大倍率・県全体への一般化を避ける。 人物・キャラクターは使わない。 新方針: 地図は東京都の主域（遠隔離島省略）の地域識別用。家計の観測対象は東京都区部であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
+      "dataScope": {
+        "place": "東京都区部",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "880439d8b39772b3491b98f02f1d38e13254d9cb903e837e0864deffd9add204",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/880439d8b39772b3491b98f02f1d38e13254d9cb903e837e0864deffd9add204.png"
+      },
+      "bytes": 57846,
+      "id": "880439d8b39772b3491b98f02f1d38e13254d9cb903e837e0864deffd9add204",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:17.945Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771892/rectangle_large_type_2_05d638ab2b9f05767bacf847c4f6d2fc.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "880439d8b39772b3491b98f02f1d38e13254d9cb903e837e0864deffd9add204"
+      }
+    },
+    {
+      "sha256": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195.png"
+      },
+      "bytes": 115619,
+      "id": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:19:01.996Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "90f47c0461623e08edc84b8ea7aefbaf4ea824e87ad5d8b4c8d687108cfd4bd5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "dbf70c2a844a3db4e74a12b9a06dc78fdc2af90658bdda43cc80034831bb7815",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/dbf70c2a844a3db4e74a12b9a06dc78fdc2af90658bdda43cc80034831bb7815.png"
+      },
+      "bytes": 104731,
+      "id": "dbf70c2a844a3db4e74a12b9a06dc78fdc2af90658bdda43cc80034831bb7815",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:38.044Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-tokyo/images/cover-1280x670.png",
+        "sourceSha256": "dbf70c2a844a3db4e74a12b9a06dc78fdc2af90658bdda43cc80034831bb7815"
+      }
+    },
+    {
+      "sha256": "2ce2930d89c2abefe11c1ec6a4272ccd2dd6206d402d95c94609454a41fc7a56",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/2ce2930d89c2abefe11c1ec6a4272ccd2dd6206d402d95c94609454a41fc7a56.png"
+      },
+      "bytes": 49841,
+      "id": "2ce2930d89c2abefe11c1ec6a4272ccd2dd6206d402d95c94609454a41fc7a56",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:03.934Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911439/rectangle_large_type_2_0924dbf9f92ff8bd4292763199dd174b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2ce2930d89c2abefe11c1ec6a4272ccd2dd6206d402d95c94609454a41fc7a56"
+      }
+    },
+    {
+      "sha256": "cb78ca22a9b2877a95c3ab2113137d4cebf4e05867db327bfb91847a6133f460",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/cb78ca22a9b2877a95c3ab2113137d4cebf4e05867db327bfb91847a6133f460.png"
+      },
+      "bytes": 1868561,
+      "id": "cb78ca22a9b2877a95c3ab2113137d4cebf4e05867db327bfb91847a6133f460",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:11:07.617Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4d7163acf45bab11707a9483864b572fd73979e1a8b7bc9ecac739ddf2d87f0a"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4d7163acf45bab11707a9483864b572fd73979e1a8b7bc9ecac739ddf2d87f0a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokyo/inputs/4d7163acf45bab11707a9483864b572fd73979e1a8b7bc9ecac739ddf2d87f0a.json"
+          },
+          "bytes": 9051
+        },
+        "production": {
+          "id": "NCI-00100",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "93ebb02237277461033f7c866b832935f39191a4053fd5513d29e3f885d2578f"
+        }
+      }
+    },
+    {
+      "sha256": "cfdc54e0d18d5404d32479b4aa6d33fb499a4ef4347807fb6879ae69220f7e51",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/cfdc54e0d18d5404d32479b4aa6d33fb499a4ef4347807fb6879ae69220f7e51.png"
+      },
+      "bytes": 1527954,
+      "id": "cfdc54e0d18d5404d32479b4aa6d33fb499a4ef4347807fb6879ae69220f7e51",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:46:17.030Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "dd3e778c935131af4864b863ce0226b7b5ed92d934542ca2e1a44c8380c9c507"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00100: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:56:08.738Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "dd3e778c935131af4864b863ce0226b7b5ed92d934542ca2e1a44c8380c9c507",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokyo/inputs/dd3e778c935131af4864b863ce0226b7b5ed92d934542ca2e1a44c8380c9c507.json"
+          },
+          "bytes": 12406
+        },
+        "production": {
+          "id": "NCI-00100",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "b29324f3b26810458b215247c6173beb34faade79b36cf25fac609504c3a7418"
+        }
+      }
+    },
+    {
+      "sha256": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tokyo/revisions/35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561.png"
+      },
+      "bytes": 1347469,
+      "id": "35b9998efea1213962536b10d98db2f5a54183fd12df0d390dfb5f7981305561",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-e152ec65bac0",
+      "createdAt": "2026-10-23T07:07:37.711Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "32b724cebedf50cff0bc39f5a6e824d2c1f13646bdd24051b409ca5e316e2652"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "東京都主域の輪郭、東京都区部・2024年・二人以上の世帯、教育費と通学鞄の題材を新旧比較。原寸と幅320pxで文字を確認。",
+        "reviewedAt": "2026-10-23T07:15:43.674Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "32b724cebedf50cff0bc39f5a6e824d2c1f13646bdd24051b409ca5e316e2652",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tokyo/inputs/32b724cebedf50cff0bc39f5a6e824d2c1f13646bdd24051b409ca5e316e2652.json"
+          },
+          "bytes": 12913
+        },
+        "production": {
+          "id": "NCI-00100",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "e152ec65bac0648d449e8a8f1035c42f977d5627901f4e84f20c658a8df07998"
+        }
+      }
+    }
+  ]
+}

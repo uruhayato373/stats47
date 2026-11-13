@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "industry-tourism-realestate",
+  "production": {
+    "id": "NCI-00289",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

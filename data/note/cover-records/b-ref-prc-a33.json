@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a33",
+  "production": {
+    "id": "NCI-00215",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "りんごは盛岡\nみかんは和歌山",
+      "subline": "果物5品目・47市の購入量\n2024年・二人以上の世帯",
+      "subject": "赤いりんごと少し皮をむいたみかんを右側に大きく。緑・クリーム・明るい黄色、果物名は赤と橙。上部は緑の帯、補足は黄色の帯。太い縁取り文字と果物が一体化した、明るい雑誌の特集表紙。人物は不要。",
+      "evidence": "https://note.com/stats47/n/nb16d150ee313 本文確認2026-10-14。2024年家計調査、県庁所在市47市（東京都区部を含む）の二人以上の世帯の購入量。りんごは盛岡市、みかんは和歌山市が最多。生産量ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f899d75daa4ed01d281c243ea642f9a9498937c0188f2520765c8836e447899c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a33/revisions/f899d75daa4ed01d281c243ea642f9a9498937c0188f2520765c8836e447899c.png"
+      },
+      "bytes": 51441,
+      "id": "f899d75daa4ed01d281c243ea642f9a9498937c0188f2520765c8836e447899c",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T02:57:23.128Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a148e4809487fdb211361df335892a3ed21215a32875100b166621a66912578d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・出典が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T02:57:54.000Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a148e4809487fdb211361df335892a3ed21215a32875100b166621a66912578d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a33/inputs/a148e4809487fdb211361df335892a3ed21215a32875100b166621a66912578d.json"
+          },
+          "bytes": 1279
+        }
+      }
+    },
+    {
+      "sha256": "6da29bd89fcf26d05e0e546b0d2d2bd6c0a29068899ce7022a377508ab74cae0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a33/revisions/6da29bd89fcf26d05e0e546b0d2d2bd6c0a29068899ce7022a377508ab74cae0.png"
+      },
+      "bytes": 1152594,
+      "id": "6da29bd89fcf26d05e0e546b0d2d2bd6c0a29068899ce7022a377508ab74cae0",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v1-9bbb46d339fd",
+      "createdAt": "2026-10-14T00:42:45.593Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "72028a8dc450b25aae24ffb696340d7609235f0715c434797265c38cb8e78da4"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-pop-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "72028a8dc450b25aae24ffb696340d7609235f0715c434797265c38cb8e78da4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a33/inputs/72028a8dc450b25aae24ffb696340d7609235f0715c434797265c38cb8e78da4.json"
+          },
+          "bytes": 4980
+        },
+        "production": {
+          "id": "NCI-00215",
+          "policyId": "NCP-005",
+          "policyVersion": 1,
+          "planSha256": "9bbb46d339fdd5e9ada41ff49774b38b0932c6a2f72357a05c55a2c05a4392b5"
+        }
+      }
+    },
+    {
+      "sha256": "c63e0c099b798edc0ee8628674f795f96f7abb95b50b0975480c3e2ffbd6fadb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a33/revisions/c63e0c099b798edc0ee8628674f795f96f7abb95b50b0975480c3e2ffbd6fadb.png"
+      },
+      "bytes": 1153973,
+      "id": "c63e0c099b798edc0ee8628674f795f96f7abb95b50b0975480c3e2ffbd6fadb",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v1-8aca884c6f07",
+      "createdAt": "2026-10-14T00:49:23.766Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1c09c27984d668839b54a3b71cc4673ef62ec44988e1195a6df32a462b15bdf0"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-pop-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1c09c27984d668839b54a3b71cc4673ef62ec44988e1195a6df32a462b15bdf0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a33/inputs/1c09c27984d668839b54a3b71cc4673ef62ec44988e1195a6df32a462b15bdf0.json"
+          },
+          "bytes": 4964
+        },
+        "production": {
+          "id": "NCI-00215",
+          "policyId": "NCP-005",
+          "policyVersion": 1,
+          "planSha256": "8aca884c6f077c277aac1d0a0f016e2d9a6c16f25df3d680d53a1a9ec1bbf06f"
+        }
+      }
+    },
+    {
+      "sha256": "f068d7a722ccfae366e8772e94cc643955f8c0d57b6319d0e618ec94f4d8c864",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a33/revisions/f068d7a722ccfae366e8772e94cc643955f8c0d57b6319d0e618ec94f4d8c864.png"
+      },
+      "bytes": 99828,
+      "id": "f068d7a722ccfae366e8772e94cc643955f8c0d57b6319d0e618ec94f4d8c864",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T01:08:36.973Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323859556/rectangle_large_type_2_9daedd18b50cae9197e5e689760ed192.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f068d7a722ccfae366e8772e94cc643955f8c0d57b6319d0e618ec94f4d8c864"
+      }
+    },
+    {
+      "sha256": "b694a001625e63ff0b0d1350d5d1850c89c49a892c35ca599852b070e35f3979",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a33/revisions/b694a001625e63ff0b0d1350d5d1850c89c49a892c35ca599852b070e35f3979.png"
+      },
+      "bytes": 1990872,
+      "id": "b694a001625e63ff0b0d1350d5d1850c89c49a892c35ca599852b070e35f3979",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-recent-six-20261014",
+      "createdAt": "2026-10-14T01:09:16.102Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "968cf581646440c0f98a1b2b0078ae30f674a43343b9e8567a95b7861078d44c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・幅320pxの目視と転記・文字切れ・重なりを確認済み。2026-10-14ユーザーがこの6件の公開カバー更新を指示。",
+        "reviewedAt": "2026-10-14T01:43:09.861Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "968cf581646440c0f98a1b2b0078ae30f674a43343b9e8567a95b7861078d44c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a33/inputs/968cf581646440c0f98a1b2b0078ae30f674a43343b9e8567a95b7861078d44c.json"
+          },
+          "bytes": 8283
+        },
+        "production": {
+          "id": "NCI-00215",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "27393780809a62d9b9f452b2854308bdbe8bd4a0b0df4ff302d7c0997bbfcfa2"
+        }
+      }
+    }
+  ]
+}

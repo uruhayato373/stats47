@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-current-liabilities-balance-multi-person-households-per-household",
+  "production": {
+    "id": "NCI-00054",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "1世帯あたり負債\n多い県は神奈川県",
+      "subline": "2019年・二人以上世帯",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に文字・数字のない閉じた家計書類を1点。住宅ローンだけを示す家や住宅模型、現金の山、困窮する人物を描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nbdbde1672cc0 2026-10-23公開API本文照合。神奈川県は9,304千円で1位。二人以上世帯の1世帯あたりの借入金等の残高。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "56f4f7e4642d100219fb87098847a5d74d5a047a2f88dc7de178fd0c962e11cd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/revisions/56f4f7e4642d100219fb87098847a5d74d5a047a2f88dc7de178fd0c962e11cd.png"
+      },
+      "bytes": 65895,
+      "id": "56f4f7e4642d100219fb87098847a5d74d5a047a2f88dc7de178fd0c962e11cd",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:09.479Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770832/rectangle_large_type_2_0946a602acb636c189922f097a774af5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "56f4f7e4642d100219fb87098847a5d74d5a047a2f88dc7de178fd0c962e11cd"
+      }
+    },
+    {
+      "sha256": "68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/revisions/68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36.png"
+      },
+      "bytes": 113742,
+      "id": "68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:15.591Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4a638feb9171e989595102762585f4083b4eae74d4d5fdccc102ebc036002bec"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/current-liabilities-balance-multi-person-households-per-household/values.json",
+        "sourceSha256": "5bca760785463762b1cf2401c3175ecd83dd6d3c9d6aba55ebf656148f2abcc0",
+        "input": {
+          "sha256": "4a638feb9171e989595102762585f4083b4eae74d4d5fdccc102ebc036002bec",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/inputs/4a638feb9171e989595102762585f4083b4eae74d4d5fdccc102ebc036002bec.json"
+          },
+          "bytes": 7631
+        }
+      }
+    },
+    {
+      "sha256": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/revisions/ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2.png"
+      },
+      "bytes": 1848653,
+      "id": "ab8dbff8df3bc3ed4a0d84735a85ed28a3c5dab1f318cbf81fc1e5407baed3c2",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-afbc1f200d06",
+      "createdAt": "2026-10-23T10:41:48.249Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cf1c535a76b36d263f19d20fd0d3e5a277b3be49aa38c505ed25f9b82d46104b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:43:58.765Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cf1c535a76b36d263f19d20fd0d3e5a277b3be49aa38c505ed25f9b82d46104b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/inputs/cf1c535a76b36d263f19d20fd0d3e5a277b3be49aa38c505ed25f9b82d46104b.json"
+          },
+          "bytes": 8642
+        },
+        "production": {
+          "id": "NCI-00054",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "afbc1f200d06a575666a2cf6379dd4f67731e69bc2034fd1cd1086c1336ed961"
+        }
+      }
+    }
+  ]
+}

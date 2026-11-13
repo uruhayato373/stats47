@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a13",
+  "production": {
+    "id": "NCI-00151",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "美容室が多い県\n少ない県",
+      "subline": "47都道府県の施設数を比較",
+      "subject": "はさみ、くし、ドライヤーと丸い鏡を大きく描く。鏡に人影を映さない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n5c3b0dfd46cc 本文確認2026-11-04。美容所数(2020年)と理容・美容所数(2023年)。東京都が最多、鳥取県が最少。実数の比較で人口当たりではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a13/revisions/6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579.png"
+      },
+      "bytes": 36472,
+      "id": "6883f1da1138076346affe41941b7d5ce2abb6fd1b0d63db9b323f7b2e143579",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:46.318Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "01fa249bd44bd9d7b6838f3f300fc351e843f29cd26d3c1693fad9ddd2f14687"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:12.735Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "01fa249bd44bd9d7b6838f3f300fc351e843f29cd26d3c1693fad9ddd2f14687",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a13/inputs/01fa249bd44bd9d7b6838f3f300fc351e843f29cd26d3c1693fad9ddd2f14687.json"
+          },
+          "bytes": 1292
+        }
+      }
+    },
+    {
+      "sha256": "b493100b21aab53d4d1acbaed6411119122106e7e85beafef7ddb17049de0ba5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a13/revisions/b493100b21aab53d4d1acbaed6411119122106e7e85beafef7ddb17049de0ba5.png"
+      },
+      "bytes": 62275,
+      "id": "b493100b21aab53d4d1acbaed6411119122106e7e85beafef7ddb17049de0ba5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:37.528Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324054558/rectangle_large_type_2_bd461ec5455373b3af6abe894cde02d5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b493100b21aab53d4d1acbaed6411119122106e7e85beafef7ddb17049de0ba5"
+      }
+    },
+    {
+      "sha256": "48f61454c978f08120748fd25104485011caac88f6a54e150ef79fe48c9c6b52",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a13/revisions/48f61454c978f08120748fd25104485011caac88f6a54e150ef79fe48c9c6b52.png"
+      },
+      "bytes": 1951993,
+      "id": "48f61454c978f08120748fd25104485011caac88f6a54e150ef79fe48c9c6b52",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-fbeb3114409e",
+      "createdAt": "2026-11-03T23:15:05.233Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a1f20085f32d4e1dd03261e8fa276fb7b1f63be20e62b2792edad888ff06dc9e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:32.031Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a1f20085f32d4e1dd03261e8fa276fb7b1f63be20e62b2792edad888ff06dc9e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a13/inputs/a1f20085f32d4e1dd03261e8fa276fb7b1f63be20e62b2792edad888ff06dc9e.json"
+          },
+          "bytes": 8182
+        },
+        "production": {
+          "id": "NCI-00151",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "fbeb3114409ec42c8b4e8556861afeff9ce7c14ea8b40923ec9d7debe837a08d"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "data-packs-population-economy",
+  "production": {
+    "id": "NCI-00264",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

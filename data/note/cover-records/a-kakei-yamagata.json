@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-yamagata",
+  "production": {
+    "id": "NCI-00104",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "山形県の家計\n光熱費に注目",
+      "subline": "山形市・2024年\n二人以上の世帯",
+      "subject": "添付画像は編集対象ではなく、山形県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の家庭用暖房器具一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+      "evidence": "https://note.com/stats47/n/na3d645a7d50c 2026-10-15公開本文確認。公開本文は山形市の2024年・二人以上の世帯。光熱・水道は47市単純平均比1.30倍で最大の乖離。個別品目に灯油・カーテンを挙げる。特定の暖房方法や気象条件による因果を断定せず、倍率・順位・県全体の値は示さない。 人物・キャラクターは使わない。 新方針: 地図は山形県の主域（遠隔離島省略）の地域識別用。家計の観測対象は山形市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
+      "dataScope": {
+        "place": "山形市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "15c8f5c3a6fb0f1df303da4b410d39d5725bf5235688bb733d1c8386193ea8d1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/15c8f5c3a6fb0f1df303da4b410d39d5725bf5235688bb733d1c8386193ea8d1.png"
+      },
+      "bytes": 54719,
+      "id": "15c8f5c3a6fb0f1df303da4b410d39d5725bf5235688bb733d1c8386193ea8d1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:20.000Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771954/rectangle_large_type_2_53eab77acc016568751a144b64c5387f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "15c8f5c3a6fb0f1df303da4b410d39d5725bf5235688bb733d1c8386193ea8d1"
+      }
+    },
+    {
+      "sha256": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8.png"
+      },
+      "bytes": 96353,
+      "id": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:19:07.826Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2d051e40901b6fb9be596cd64a0753a047224172903427d0eaff78a3ce27f5d8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/utilities-expenditure-total/values.json",
+        "sourceSha256": "5977d6979e4a28932e8b893f0bfb498926bba7c883ea23f4e46679a537918908"
+      }
+    },
+    {
+      "sha256": "401f0638e80196e45516f5a3ef0fe3eec96f85c5c64d625a1de864f525ec050e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/401f0638e80196e45516f5a3ef0fe3eec96f85c5c64d625a1de864f525ec050e.png"
+      },
+      "bytes": 97737,
+      "id": "401f0638e80196e45516f5a3ef0fe3eec96f85c5c64d625a1de864f525ec050e",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:47.304Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-yamagata/images/cover-1280x670.png",
+        "sourceSha256": "401f0638e80196e45516f5a3ef0fe3eec96f85c5c64d625a1de864f525ec050e"
+      }
+    },
+    {
+      "sha256": "f8388b916c9f65292be599fbd668dd35eb1f144ee902554760fc6154ab87f161",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/f8388b916c9f65292be599fbd668dd35eb1f144ee902554760fc6154ab87f161.png"
+      },
+      "bytes": 40753,
+      "id": "f8388b916c9f65292be599fbd668dd35eb1f144ee902554760fc6154ab87f161",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:16.746Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911888/rectangle_large_type_2_08e8d202db12635afa27411f00bb19ac.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f8388b916c9f65292be599fbd668dd35eb1f144ee902554760fc6154ab87f161"
+      }
+    },
+    {
+      "sha256": "67218acd53efa9794f3cda8ff3f603ba7f37c570cf2aeb8b8bef5be0588b25d1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/67218acd53efa9794f3cda8ff3f603ba7f37c570cf2aeb8b8bef5be0588b25d1.png"
+      },
+      "bytes": 1895211,
+      "id": "67218acd53efa9794f3cda8ff3f603ba7f37c570cf2aeb8b8bef5be0588b25d1",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:10:26.759Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ee70a0838ca922fb0592cc75c7ebf599df91cb6ae0b03d145540482b2f7388d4"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ee70a0838ca922fb0592cc75c7ebf599df91cb6ae0b03d145540482b2f7388d4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamagata/inputs/ee70a0838ca922fb0592cc75c7ebf599df91cb6ae0b03d145540482b2f7388d4.json"
+          },
+          "bytes": 9067
+        },
+        "production": {
+          "id": "NCI-00104",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "ea590c390598236dee78bb3f14e9727021ee16d7c4aa7ed85d902bd625050052"
+        }
+      }
+    },
+    {
+      "sha256": "8fa72b504612fb087cb1730b82c900ef9ea70d67091033feb3170c3315681eb9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/8fa72b504612fb087cb1730b82c900ef9ea70d67091033feb3170c3315681eb9.png"
+      },
+      "bytes": 1535490,
+      "id": "8fa72b504612fb087cb1730b82c900ef9ea70d67091033feb3170c3315681eb9",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:45:33.844Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e0dfaedc00b2ed6539c12b578b2dfe6473de42703ea0e82e9b34c2b6b7473dc5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00104: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:55:38.962Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e0dfaedc00b2ed6539c12b578b2dfe6473de42703ea0e82e9b34c2b6b7473dc5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamagata/inputs/e0dfaedc00b2ed6539c12b578b2dfe6473de42703ea0e82e9b34c2b6b7473dc5.json"
+          },
+          "bytes": 12257
+        },
+        "production": {
+          "id": "NCI-00104",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "aec17216db7ff6470225f211ebfd6907a2374fe68e38e43856483822b144e57d"
+        }
+      }
+    },
+    {
+      "sha256": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamagata/revisions/e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b.png"
+      },
+      "bytes": 1130997,
+      "id": "e2cd21688f9022a2361ba286c793901c60429e71c0a7456b76fadd3e20ed913b",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-6f58a188778e",
+      "createdAt": "2026-10-23T07:06:56.606Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1d2680f0b802d81ff115e086c131cef77676c9755b3ef32e39cbbc4086abed9a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "山形県主域の輪郭と山形市・2024年・二人以上の世帯を新旧比較。光熱費と暖房の題材が本文に一致し、原寸・幅320pxの文字を確認。",
+        "reviewedAt": "2026-10-23T07:13:06.593Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1d2680f0b802d81ff115e086c131cef77676c9755b3ef32e39cbbc4086abed9a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamagata/inputs/1d2680f0b802d81ff115e086c131cef77676c9755b3ef32e39cbbc4086abed9a.json"
+          },
+          "bytes": 12764
+        },
+        "production": {
+          "id": "NCI-00104",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "6f58a188778e16a860162bf74252123e2c5da0ee29ee7258bf356afb0f868d0c"
+        }
+      }
+    }
+  ]
+}

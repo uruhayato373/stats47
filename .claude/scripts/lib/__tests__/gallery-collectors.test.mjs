@@ -8,13 +8,14 @@ test('noteカバーは有料・専用デザインも共通台帳から列挙し�
   const { tmpdir } = await import('node:os');
   const { join } = await import('node:path');
   const { enumerateNoteCovers } = await import('../gallery-collectors.mjs');
-  const { emptyCoverArticle } = await import('../../note/lib/cover-assets.mjs');
+  const { emptyCoverArticle, coverLedgerFiles } = await import('../../note/lib/cover-assets.mjs');
   const root = mkdtempSync(join(tmpdir(), 'note-cover-ledger-'));
   mkdirSync(join(root, 'data/note'), { recursive: true });
   const articles = ['pub', 'paid', 'bespoke', 'draft'].map((key, i) =>
     emptyCoverArticle({ key, noteUrl: key === 'draft' ? undefined : `https://note.com/stats47/n/nabc${i}` }));
-  writeFileSync(join(root, 'data/note/cover-assets.json'), JSON.stringify({ schemaVersion: 1,
-    account: 'stats47', updatedAt: '2026-10-02T00:00:00.000Z', articles }));
+  // 版の無い記事だけなので、置かれるのは正本の 1 ファイル
+  for (const [relative, text] of Object.entries(coverLedgerFiles({ schemaVersion: 1,
+    account: 'stats47', updatedAt: '2026-10-02T00:00:00.000Z', articles }))) writeFileSync(join(root, relative), text);
   const entries = enumerateNoteCovers(root);
   assert.deepEqual(entries.map(e => e.slug), ['pub', 'paid', 'bespoke', 'draft']);
   assert.equal(entries.find(e => e.slug === 'draft').status, 'draft');

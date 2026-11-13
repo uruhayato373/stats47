@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-shimane",
+  "production": {
+    "id": "NCI-00096",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "島根県の家計\n教育費に注目",
+      "subline": "松江市・2024年\n二人以上の世帯",
+      "subject": "添付は島根県の主域輪郭を示す検証済みの参照画像で、編集対象ではない。1280×670相当の横長の完成カバーを新たに作る。右側に参照の県形を大きく、同じ北向き・縦横比・凹凸を忠実に維持して、濃紺または淡黄色の一枚の面と太い縁取りで主役にする。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けを一切加えない。生活の小物は輪郭と文字に重ならない右下に文字のない閉じたオレンジ色の本を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影・頭・顔のような黒い形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、各行とも1280px換算で文字高65px以上を目安に大きくする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。 新版は輪郭の周囲と補足欄に余白を設け、背景の筆塗りを淡くし、県形・見出し・都市名を読み取りやすく配置する。",
+      "evidence": "https://note.com/stats47/n/n75d68c2bb7e9 2026-10-15公開本文確認。松江市の2024年・二人以上の世帯。十大費目の教育は47市単純平均比0.48倍で最大の乖離。高校補習教育・予備校や通学用かばんの個別支出も本文に記載。 比較の分母は家計調査の全国平均ではなく47県庁所在市の単純平均。カバーに倍率・順位・因果は載せず、費目への着目だけを示す。地図は島根県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は松江市であり県全域の観測図ではない。人物・キャラクターなし。 2026-10-23に公開APIの状態と都市名・対象年・世帯区分を照合。",
+      "dataScope": {
+        "place": "松江市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4747ec0d02d7c209849ecfd0714a7bd6c2612b4b2b92ab653ff7d5d6d752a0a5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shimane/revisions/4747ec0d02d7c209849ecfd0714a7bd6c2612b4b2b92ab653ff7d5d6d752a0a5.png"
+      },
+      "bytes": 67246,
+      "id": "4747ec0d02d7c209849ecfd0714a7bd6c2612b4b2b92ab653ff7d5d6d752a0a5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:15.682Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771726/rectangle_large_type_2_b2feeb2af6f68f17e9c0ad9a80d4331d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4747ec0d02d7c209849ecfd0714a7bd6c2612b4b2b92ab653ff7d5d6d752a0a5"
+      }
+    },
+    {
+      "sha256": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shimane/revisions/f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e.png"
+      },
+      "bytes": 87453,
+      "id": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:53.497Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c697a4135677db8efb6b30fe5f6358e23979de5036c404b8eeee48b92fd29c81"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "c50e62f9463ad37a1fa33356d5e5d343b608985b3f2c9c2b340b3e9a82bf10ef",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shimane/revisions/c50e62f9463ad37a1fa33356d5e5d343b608985b3f2c9c2b340b3e9a82bf10ef.png"
+      },
+      "bytes": 108540,
+      "id": "c50e62f9463ad37a1fa33356d5e5d343b608985b3f2c9c2b340b3e9a82bf10ef",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:27.311Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-shimane/images/cover-1280x670.png",
+        "sourceSha256": "c50e62f9463ad37a1fa33356d5e5d343b608985b3f2c9c2b340b3e9a82bf10ef"
+      }
+    },
+    {
+      "sha256": "b7fa82a5cf9033923284b609917a80eb6f4942d2210e4918ae15d3082ae8f7af",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shimane/revisions/b7fa82a5cf9033923284b609917a80eb6f4942d2210e4918ae15d3082ae8f7af.png"
+      },
+      "bytes": 34533,
+      "id": "b7fa82a5cf9033923284b609917a80eb6f4942d2210e4918ae15d3082ae8f7af",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T06:11:56.391Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911292/rectangle_large_type_2_c465e2b8c63183d749edc2f39ad393d5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b7fa82a5cf9033923284b609917a80eb6f4942d2210e4918ae15d3082ae8f7af"
+      }
+    },
+    {
+      "sha256": "f49110de8d8b1daf7e450d8accc2ff39dc35dd23f3de5deb09c14c2b69b7c289",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shimane/revisions/f49110de8d8b1daf7e450d8accc2ff39dc35dd23f3de5deb09c14c2b69b7c289.png"
+      },
+      "bytes": 1547186,
+      "id": "f49110de8d8b1daf7e450d8accc2ff39dc35dd23f3de5deb09c14c2b69b7c289",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T06:21:07.935Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ed9226142becf9bd57ce0e073cd3751c94965d944ced5d39a44b25305a565785"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00096: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T06:36:51.711Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ed9226142becf9bd57ce0e073cd3751c94965d944ced5d39a44b25305a565785",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-shimane/inputs/ed9226142becf9bd57ce0e073cd3751c94965d944ced5d39a44b25305a565785.json"
+          },
+          "bytes": 13228
+        },
+        "production": {
+          "id": "NCI-00096",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "808818b8f67e2cce803d4a331603b1aa679077d2fbb196c5f340a34e8f3238f5"
+        }
+      }
+    },
+    {
+      "sha256": "02acf53d0990b625be2581efca5d7b854c0fc8b2adf031ab9e1c0c295dda51c0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shimane/revisions/02acf53d0990b625be2581efca5d7b854c0fc8b2adf031ab9e1c0c295dda51c0.png"
+      },
+      "bytes": 1574004,
+      "id": "02acf53d0990b625be2581efca5d7b854c0fc8b2adf031ab9e1c0c295dda51c0",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-38ceeadab1e4",
+      "createdAt": "2026-10-23T08:02:11.007Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ec848b2c448f5bdea45555703a744d2ff21f79a05b7b7f0d9381f95b5dffae73"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "島根県の輪郭、松江市・2024年・二人以上の世帯、教育費と本の題材を新旧比較。原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T08:05:25.266Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ec848b2c448f5bdea45555703a744d2ff21f79a05b7b7f0d9381f95b5dffae73",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-shimane/inputs/ec848b2c448f5bdea45555703a744d2ff21f79a05b7b7f0d9381f95b5dffae73.json"
+          },
+          "bytes": 13471
+        },
+        "production": {
+          "id": "NCI-00096",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "38ceeadab1e43f18e8cdf3dce3efca562579ca32db8b9826c96829dbb8afc3f7"
+        }
+      }
+    }
+  ]
+}

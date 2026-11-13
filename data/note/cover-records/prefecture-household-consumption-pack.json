@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "prefecture-household-consumption-pack",
+  "production": {
+    "id": "NCI-00367",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "685指標の\n家計データ集",
+      "subline": "47地域・2024年固定",
+      "subject": "家計調査のデータ集を示す。机上の整理された調査票、食料品と日用品の控えめなイラスト、表計算シートのタブを描く。架空の統計値、県別地図、読めない細字、人物は描かない。",
+      "evidence": "P-14 v4-20261024-mac-r2 の READINESS と private R2 ZIP 読み戻しで、685指標、47地域、家計調査2024年、CSV・Excel・PowerPoint・PDF・地図PNG・出典/許諾文を確認。原稿の収録内容と一致。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-household-consumption-pack/revisions/ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f.png"
+      },
+      "bytes": 34352,
+      "id": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
+      "kind": "candidate",
+      "version": "2026-10-12-packs",
+      "createdAt": "2026-10-12T07:11:30.811Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7cfbca909f065bfd7f0d1fbc48b21141a6710e5c2011cbb5a7f8fda8ac23c737"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "r4の指標数で作り直し。320px相当で見出し・指標数・パック実データの県別地図が読める。確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:47:03.687Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7cfbca909f065bfd7f0d1fbc48b21141a6710e5c2011cbb5a7f8fda8ac23c737",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-household-consumption-pack/inputs/7cfbca909f065bfd7f0d1fbc48b21141a6710e5c2011cbb5a7f8fda8ac23c737.json"
+          },
+          "bytes": 1212
+        }
+      }
+    },
+    {
+      "sha256": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-household-consumption-pack/revisions/888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7.png"
+      },
+      "bytes": 1795781,
+      "id": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-317776e48ea9",
+      "createdAt": "2026-10-24T12:02:01.116Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5cfe3f95e312e71d41b8c22b0f35982fae21eb5611488b1cc04e6c08b251abe8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで指定5文言を確認。誤字・欠字・文字切れ・重なりなし。家計の食料品・日用品と調査票・汎用表計算画面は題材に一致し、人物・地図・架空の統計値なし。",
+        "reviewedAt": "2026-10-24T12:04:40.034Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5cfe3f95e312e71d41b8c22b0f35982fae21eb5611488b1cc04e6c08b251abe8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-household-consumption-pack/inputs/5cfe3f95e312e71d41b8c22b0f35982fae21eb5611488b1cc04e6c08b251abe8.json"
+          },
+          "bytes": 8012
+        },
+        "production": {
+          "id": "NCI-00367",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "317776e48ea928689741ef29beefd477aa7819a01dbc4d119e487936ee9620c0"
+        }
+      }
+    },
+    {
+      "sha256": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-household-consumption-pack/revisions/42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572.png"
+      },
+      "bytes": 413087,
+      "id": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-24T16:24:15.828Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/328108845/rectangle_large_type_2_e231b5f9102ba62bd93dfa364986ce9d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "42399279a9dcf4c223d8d6469f86d3e2f054d547f0856b234e8475c950a4b572"
+      }
+    },
+    {
+      "sha256": "5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-household-consumption-pack/revisions/5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b.png"
+      },
+      "bytes": 427793,
+      "id": "5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-04T10:55:20.378Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5708ec2c0a2f8428a3db49b230ca35b12129fc8bf7cc86b1ad11d508a442518b"
+      }
+    }
+  ]
+}

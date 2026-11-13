@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-beer-peak-month",
+  "production": {
+    "id": "NCI-00134",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "ビールの支出\n多い月は？",
+      "subline": "2024年は12月が最多\n全国・二人以上の世帯",
+      "subject": "緑と明るいクリーム、黄色のアクセント。右側に泡のあるビールグラスと無地のビール瓶を一点ずつ、大きく落ち着いた食卓の静物として描く。銘柄・ラベルの文字は無し。人物、飲酒する手、カレンダー、数字付きの時計、販売額や月別グラフを描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/n5b11edb996f3 2026-10-15公開本文確認。本文は全国・二人以上の世帯の家計調査の月別ビール支出。2024年の最大月は12月1549円。2024年の支出の順位として限定し、市場の売上ピークや将来の季節性に一般化しない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8cd9337b1eed9ef055f615de315385b569803fbb2355159fd6a7faa046cc0d31",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-beer-peak-month/revisions/8cd9337b1eed9ef055f615de315385b569803fbb2355159fd6a7faa046cc0d31.png"
+      },
+      "bytes": 44993,
+      "id": "8cd9337b1eed9ef055f615de315385b569803fbb2355159fd6a7faa046cc0d31",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:22.801Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772339/rectangle_large_type_2_4a287e32717dd562e79a031b4a317d3d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8cd9337b1eed9ef055f615de315385b569803fbb2355159fd6a7faa046cc0d31"
+      }
+    },
+    {
+      "sha256": "1afc01767b1dd8c5015e55ea0c47233534027c83333683de4e34303b1be8ee67",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-beer-peak-month/revisions/1afc01767b1dd8c5015e55ea0c47233534027c83333683de4e34303b1be8ee67.png"
+      },
+      "bytes": 85842,
+      "id": "1afc01767b1dd8c5015e55ea0c47233534027c83333683de4e34303b1be8ee67",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:39.732Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4958db5983d9ab609b510117ff53ea4a2d0cb5cb024ab3bb7c21f40aba77b5b9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:49.786Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4958db5983d9ab609b510117ff53ea4a2d0cb5cb024ab3bb7c21f40aba77b5b9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-beer-peak-month/inputs/4958db5983d9ab609b510117ff53ea4a2d0cb5cb024ab3bb7c21f40aba77b5b9.json"
+          },
+          "bytes": 1336
+        }
+      }
+    },
+    {
+      "sha256": "ecef16d3cb6794848f60fdbb1ba42c8ef047d6d69333b47b9c2148db0deff57e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-beer-peak-month/revisions/ecef16d3cb6794848f60fdbb1ba42c8ef047d6d69333b47b9c2148db0deff57e.png"
+      },
+      "bytes": 86908,
+      "id": "ecef16d3cb6794848f60fdbb1ba42c8ef047d6d69333b47b9c2148db0deff57e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:49.547Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302140/rectangle_large_type_2_80d431aeee723efe007cbe8b72592cac.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ecef16d3cb6794848f60fdbb1ba42c8ef047d6d69333b47b9c2148db0deff57e"
+      }
+    },
+    {
+      "sha256": "4c99254389faddce60ea6bd9fc61f401171e77d03d9c328bdbf09fba53b355b1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-beer-peak-month/revisions/4c99254389faddce60ea6bd9fc61f401171e77d03d9c328bdbf09fba53b355b1.png"
+      },
+      "bytes": 33717,
+      "id": "4c99254389faddce60ea6bd9fc61f401171e77d03d9c328bdbf09fba53b355b1",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:33.236Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9841b862baa037bdd1749e13f8ca1dd90b4da253455aae983714dd0cc2213bd6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.024/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:22.393Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9841b862baa037bdd1749e13f8ca1dd90b4da253455aae983714dd0cc2213bd6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-beer-peak-month/inputs/9841b862baa037bdd1749e13f8ca1dd90b4da253455aae983714dd0cc2213bd6.json"
+          },
+          "bytes": 1336
+        }
+      }
+    },
+    {
+      "sha256": "18c4e9909b639963c04903611619edeb46d59c542647297c1e37cbe2d4c0d14c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-beer-peak-month/revisions/18c4e9909b639963c04903611619edeb46d59c542647297c1e37cbe2d4c0d14c.png"
+      },
+      "bytes": 88192,
+      "id": "18c4e9909b639963c04903611619edeb46d59c542647297c1e37cbe2d4c0d14c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:13.277Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276846/rectangle_large_type_2_3b43906c24c45623abb6aa1217bb7771.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "18c4e9909b639963c04903611619edeb46d59c542647297c1e37cbe2d4c0d14c"
+      }
+    },
+    {
+      "sha256": "c01efd532edd52b5b1caf4cc48f0e1984260d7f603a2e61d51725a75367a8290",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-beer-peak-month/revisions/c01efd532edd52b5b1caf4cc48f0e1984260d7f603a2e61d51725a75367a8290.png"
+      },
+      "bytes": 1977649,
+      "id": "c01efd532edd52b5b1caf4cc48f0e1984260d7f603a2e61d51725a75367a8290",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:14:31.111Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3eb45a870af9e9617dc814d6ef8b8ff2a2db09d3b59ee738ca24b6f5bc02a9c0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:29:27.561Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3eb45a870af9e9617dc814d6ef8b8ff2a2db09d3b59ee738ca24b6f5bc02a9c0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-beer-peak-month/inputs/3eb45a870af9e9617dc814d6ef8b8ff2a2db09d3b59ee738ca24b6f5bc02a9c0.json"
+          },
+          "bytes": 9095
+        },
+        "production": {
+          "id": "NCI-00134",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "b4dda85baebe6a8336079507f8c3fd5ed1d337e9b99a66cd38ba54670a220bf1"
+        }
+      }
+    }
+  ]
+}
