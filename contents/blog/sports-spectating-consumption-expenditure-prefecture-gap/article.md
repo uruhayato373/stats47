@@ -5,7 +5,7 @@ description: スポーツ観覧料の支出は山形県が5,348円で1位、鳥�
 slug: sports-spectating-consumption-expenditure-prefecture-gap
 publishedAt: 2026-09-01
 updatedAt: 2026-11-09
-published: false
+published: true
 tags: []
 ---
 

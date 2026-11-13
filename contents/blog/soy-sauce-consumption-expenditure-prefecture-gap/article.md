@@ -5,7 +5,7 @@ description: しょう油への支出は1位の山形県が2,484円、最下位�
 slug: soy-sauce-consumption-expenditure-prefecture-gap
 archetype: D2
 publishedAt: 2026-09-01
-published: false
+published: true
 updatedAt: 2026-11-13
 tags:
   - 家計調査

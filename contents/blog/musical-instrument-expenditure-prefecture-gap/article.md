@@ -14,7 +14,7 @@ tags:
   - 福島県
 publishedAt: 2026-05-17
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/musical-instrument-expenditure-prefecture-gap/og.png
 ---
 

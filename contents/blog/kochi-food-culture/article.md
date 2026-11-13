@@ -14,7 +14,7 @@ tags:
   - みかん
 publishedAt: 2026-07-10
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/kochi-food-culture/og.png
 ---
 

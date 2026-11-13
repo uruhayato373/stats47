@@ -14,7 +14,7 @@ tags:
   - マーケティング
 publishedAt: 2026-07-19
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/natto-production-vs-consumption/og.png
 ---
 
