@@ -54,14 +54,29 @@ export const publicRef = (key,bytes) => ({provider:'r2-public',bucket:R2_BUCKET,
 export function publicUrlAllowed(url) {
   try { const u=new URL(url);return !u.username&&!u.password&&[new URL(R2_PUBLIC_BASE_URL).origin,new URL(SITE_ORIGIN).origin].includes(u.origin); } catch {return false;}
 }
+const blank=text=>text.replace(/[^\n]/g,' ');
+// Code examples show image syntax without serving the image. Blank them out with same-length spaces so offsets and line numbers stay valid.
+function maskFences(markdown){
+  const lines=markdown.split('\n');let fence=null;
+  return lines.map(line=>{
+    const m=line.match(/^ {0,3}(`{3,}|~{3,})/);
+    if(fence){if(m&&m[1][0]===fence[0]&&m[1].length>=fence.length&&!line.slice(m[0].length).trim())fence=null;return blank(line);}
+    if(m&&!(m[1][0]==='`'&&line.slice(m[0].length).includes('`'))){fence=m[1];return blank(line);}
+    return line;
+  }).join('\n');
+}
+function maskInlineCode(text){
+  return text.replace(/(`+)([\s\S]*?[^`])\1(?!`)/g,m=>blank(m));
+}
 export function imageReferences(markdown, base) {
   const refs=[];
   // Preserve occurrence, alt text and the nearest heading: these are actual uses, not a guessed filename mapping.
   const pattern=/!\[([^\]]*)\]\(<?([^\s)>]+)>?(?:\s+[^)]*)?\)|<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi;
-  for(const m of markdown.matchAll(pattern)) {
+  const outsideFences=maskFences(markdown),searchable=maskInlineCode(outsideFences);
+  for(const m of searchable.matchAll(pattern)) {
     let url;try{url=new URL(m[2]??m[3],base).href;}catch{continue;}
     if(!/^https?:/i.test(url))continue;
-    const prior=markdown.slice(0,m.index),headings=[...prior.matchAll(/^#{1,6}\s+(.+)$/gm)];
+    const prior=outsideFences.slice(0,m.index),headings=[...prior.matchAll(/^#{1,6}\s+(.+)$/gm)];
     refs.push({url,alt:m[1]??'',heading:headings.at(-1)?.[1]??'',line:prior.split('\n').length});
   }
   return refs;

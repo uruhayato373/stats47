@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * build-placement-map.mjs — 「検索需要 (GSC検索表示/クリック) × 供給 (広告在庫/EPC)」を突合して
- * `data/affiliate/placement-map-latest.json` を生成する (決定的・ネットワーク任意)。
+ * `data/affiliate/placement-map-latest.json` (要約・1MB 未満) を生成する (決定的・ネットワーク任意)。
+ *   ページ別の明細は git に置けない大きさ (約 6.7MB) なので `.local/affiliate-placement-map/pages-latest.json` へ分ける。
  *
  * ★ なぜ要るか: これまで「次にどの案件を仕入れ、どのページに当てるか」を決める propose は
  *   手順書レベルで、GSC のページ別実測と在庫・EPC を突き合わせる機械が存在しなかった
@@ -20,7 +21,7 @@
  * usage:
  *   node .claude/scripts/ads/build-placement-map.mjs [--week 2026-W30] [--ranking-json <path>] [--blog-json <path>] [--r2-dir <dir>] [--dry-run]
  */
-import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRequire } from "node:module";
@@ -264,14 +265,21 @@ async function main() {
     reverseCandidates: reverse,
   };
 
+  // git には要約だけ。ページ別明細 (約 6.7MB) は .local/ へ分ける (1MB 上限のため)。
+  const { summary, pagesDetail } = core.splitPlacementMapOutput(out);
+
   if (DRY) {
-    console.log(JSON.stringify({ ...out, unmapped: { ...out.unmapped, top: out.unmapped.top.slice(0, 5) } }, null, 2));
+    console.log(JSON.stringify({ ...summary, unmapped: { ...out.unmapped, top: out.unmapped.top.slice(0, 5) } }, null, 2));
     console.log("\n🧪 dry-run: ファイルは書いていません。");
     return;
   }
-  writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n", "utf8");
+  const detailPath = join(ROOT, core.PLACEMENT_MAP_PAGES_DETAIL_PATH);
+  mkdirSync(dirname(detailPath), { recursive: true });
+  writeFileSync(detailPath, JSON.stringify(pagesDetail) + "\n", "utf8");
+  writeFileSync(OUT, JSON.stringify(summary, null, 2) + "\n", "utf8");
 
   console.log(`placement-map → ${OUT.replace(ROOT, ".")}  (GSC ${week} / ${rows.length} ページ)`);
+  console.log(`  ページ別明細 (git 管理外) → ${core.PLACEMENT_MAP_PAGES_DETAIL_PATH}`);
   if (!blog.data) console.log(`  ⚠️ 記事メタを取得できず blog は未解決に計上 (${blog.error})`);
   if (!ranking.data) console.log(`  ⚠️ 指標メタを取得できず ranking は未解決に計上 (${ranking.error})`);
   console.log("\n検索需要 × 供給 (検索表示回数順・広告表示回数ではない):");

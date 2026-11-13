@@ -406,3 +406,21 @@ function ngramSet(text) {
   }
   return out;
 }
+
+/**
+ * ページ別の明細を置く場所 (リポジトリ root からの相対パス・git 管理外)。
+ * 明細は 6,000 ページ超 × 適格広告の一覧で 6.7MB になり、リポジトリ衛生の上限 1MB (LARGE_FILE) を超える。
+ * git には要約 (需要・供給・不足・未解決の理由・逆引き候補) だけを置き、明細は `.local/` に分ける。
+ */
+export const PLACEMENT_MAP_PAGES_DETAIL_PATH = ".local/affiliate-placement-map/pages-latest.json";
+
+/** 出力を git に置く要約と、git に置かないページ別明細へ分ける (純関数)。 */
+export function splitPlacementMapOutput(out) {
+  const { pages, ...rest } = out;
+  const summary = {
+    ...rest,
+    pagesDetail: { path: PLACEMENT_MAP_PAGES_DETAIL_PATH, count: pages.length, storedIn: "local-only" },
+  };
+  const pagesDetail = { generatedAt: out.generatedAt, gscWeek: out.gscWeek, pages };
+  return { summary, pagesDetail };
+}

@@ -8,7 +8,8 @@
  * を Markdown でレポートし、JSON snapshot を data/affiliate/ に書き出す。
  *
  * 実行: npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts
- *   (JSON のみ: --json / 特定日付スナップショット名: --date YYYY-MM-DD)
+ *   (JSON のみ: --json / 特定日付スナップショット名: --date YYYY-MM-DD /
+ *    サイズ規約の検査のみ・記録は書かない: --check-size)
  *
  * これは「最適化ループ」(/affiliate-improvement) の入力。GA4 計測 (affiliate_click /
  * ad_impression) と突き合わせて弱い枠を特定するための在庫側の真実源。
@@ -154,11 +155,15 @@ function main(): void {
     sizeViolations,
   };
 
-  // JSON snapshot を data/affiliate/ に書き出す (機械向け / ループの入力)
-  const stateDir = resolve(PROJECT_ROOT, datasetDir("affiliate.audits"));
-  mkdirSync(stateDir, { recursive: true });
-  for (const name of [`inventory-${date}.json`, "inventory-latest.json"]) {
-    writeFileSync(resolve(stateDir, name), JSON.stringify(snapshot, null, 2));
+  // JSON snapshot を data/affiliate/ に書き出す (機械向け / ループの入力)。
+  // --check-size は pre-commit から呼ばれる検査の経路なので書かない。書くとコミットのたびに
+  // 生成日時だけの差分と未追跡の日付付きファイルが作業ツリーに残る。
+  if (!checkSize) {
+    const stateDir = resolve(PROJECT_ROOT, datasetDir("affiliate.audits"));
+    mkdirSync(stateDir, { recursive: true });
+    for (const name of [`inventory-${date}.json`, "inventory-latest.json"]) {
+      writeFileSync(resolve(stateDir, name), JSON.stringify(snapshot, null, 2));
+    }
   }
 
   if (jsonOnly) {
