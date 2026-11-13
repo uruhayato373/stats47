@@ -50,3 +50,8 @@ type: project
 **原因**: 作成例から章への参照契約がなく、出典名は取得表ではなく元指標の表示名を使っていた。
 **対策**: `products.landings` の作成例に `themeRefs` を持たせ、章名・URL・テーマ側の逆引きを共通解決する。テーマ側もLPと同じ版選択を使い、関連章だけに案内する。出典は解決後の表・項目コードから既存の出典台帳を引く。改訂時はLP・note初稿・図を同時に生成し、存在しない章・古い生成見出し・販売版と改訂案の混在をCIで止める。
 **証拠**: `analysis-source-contract.test.ts`、`analysis-catalog.test.ts`、`theme-products.test.ts`、`.claude/scripts/products/check-analysis-catalog.ts`。表示の往復と幅別検査は既存の `responsive-layout.spec.ts` に統合する。
+
+**表示境界の検査 (2026-11-13)**: テーマから商品へのリンクを足すと、県比較を禁じる検査が商品カタログ内のLP用説明文まで表示文とみなしてCIを止めた。
+**原因**: import先の全文を検索し、JSON相当の生成台帳と描画コードを区別していなかった。Windowsでは相対パスの区切りも既存の許可一覧と一致しなかった。
+**対策**: `region-page-no-comparison.test.ts` はASTで型importとリテラル定数だけの生成台帳を判別し、値import・関数・呼出し・JSXを含む場合は除外しない。商品別の許可は増やさず、全商品の販売版・改訂案からテーマへ渡る実際の案内文を検査し、説明文・図が混入しないことを確認する。相対パスはOSに依存しない形へ揃える。
+**証拠**: PR #1258の初回CIは2973件中この1件だけ失敗。修正後の対象6テストPASS（Windows）。
