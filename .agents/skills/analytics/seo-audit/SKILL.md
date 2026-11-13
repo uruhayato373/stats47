@@ -470,7 +470,7 @@ node .claude/scripts/audit/page-components-audit.cjs
 
 git TS SSOT (`apps/web/scripts/data/page-components/<pageType>/<pageKey>.json`) を読み、
 area / theme / area-category / city-category の配置を棚卸しして
-`reference/audits/YYYY-MM-DD-area-theme-audit.md` に出す。ネットワーク不要・数秒。
+`data/seo/audits/YYYY-MM-DD-area-theme-audit.md` に出す。ネットワーク不要・数秒。
 寿命は `prune-state-snapshots.mjs` の `seo-audit-area-theme` (直近 8 回)。
 
 **gate ではなく棚卸し**。「違反候補」は責務の混在を疑うシグナルであって自動確定ではなく、

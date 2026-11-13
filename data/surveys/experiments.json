@@ -93,7 +93,7 @@
       "verdict": "pending",
       "notes": "baseline は GSC W27 snapshot (last-28d 窓 ≒ 2026-06-12〜2026-07-09)。impressions 23 (<100) のため CTR 効果は確定不可になり得る (insufficient-data を許容)。開示 query は 7 impressions 分のみで『国勢調査を使った都道府県人口』の一般探索が中心 (非開示分を推測補完しない)。d7 はインデックス/canonical/404/計測異常の検知のみ。判定時はサイト全体の imp 変動を併記する",
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
+        "data/surveys/reviews/2026-07-11-survey-census.md"
       ],
       "implementationRef": "apps/web/src/features/survey/survey-editorial.ts (commit fc1fbb49 / develop→main PR #567 merge 2026-07-12・本番 live を 2026-07-13 curl 実測)"
     },
@@ -202,7 +202,7 @@
       "verdict": "pending",
       "notes": "baseline は 56d 非重複 2 窓 (2026-W24: 05-16〜06-12 + 2026-W28: 06-13〜07-10、daily.csv で日付実測)。impressions 809 >= 100 のため CTR 判定可。ローカル実装済み (2026-07-14)・未デプロイ — startedAt/evaluateAt はデプロイ確定時に記入する。転職・就活の季節性 (年度替わり・賞与後) を判定時に注記すること",
       "evidenceRefs": [
-        ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-wage-structure-survey.md"
+        "data/surveys/reviews/2026-07-11-survey-wage-structure-survey.md"
       ],
       "implementationRef": "apps/web/src/features/survey/survey-editorial.ts (wage-structure-survey エントリ・2026-07-14 ローカル実装)"
     }

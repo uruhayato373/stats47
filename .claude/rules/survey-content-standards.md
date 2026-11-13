@@ -160,7 +160,7 @@ R2 app/survey/<id>/items.json
 
 - 75 調査を一括で長文化せず、**1 survey (census) で実証 → GSC 実測が基準を満たした場合だけ横展開**する。
 - 横展開順は推測で固定せず、`data/surveys/portfolio.json` (editorial-candidate の優先順位) の GSC 実測を使う
-  (初回監査の証跡: `.claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md`)。
+  (初回監査の証跡: `data/surveys/audits/2026-07-11-survey-portfolio-audit.md`)。
 - 判定 (デプロイ4〜8週後・baseline 比): CTR +30% 以上かつ impressions 100 以上 / クラスター clicks +20% 以上 /
   平均順位 2 以上改善 or 11-20位→Top10 / 内部遷移 GA4 で発生 / 品質 (誤出典・数値不一致・soft404・重複canonical) 0。
   母数不足なら `effect/none` と断定せず計測期間を延長する。

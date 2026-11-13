@@ -42,7 +42,6 @@
     "UNBOUNDED_LEGACY:.claude/skills/blog/brushup-blog/SKILL.md:argument-hint: --target queue [--next 5] | --target article <slug> [--focus CTR-reframe|エキスパート視点追加|最新データ更新|CTA強化] | --target batch [--count 5] [--dry-run] | --target priority (legacy)": 1,
     "UNBOUNDED_LEGACY:.claude/skills/blog/brushup-blog/SKILL.md:候補が 0 件なら終了。(注: 旧 30 日 plan `auto-brushup-plan.json` / `generate-brushup-plan.mjs` は cron 廃止に伴い**参照しない** — deprecated)": 1,
     "UNBOUNDED_LEGACY:.claude/skills/management/expand-rankings/SKILL.md:流入が付いたカテゴリの pending を優先、で回す。旧 expand-indicators (Phase 7 で deprecated) の再構築。": 1,
-    "UNBOUNDED_LEGACY:.claude/skills/theme/manage-theme-portfolio/reference/audits/2026-07-13-theme-portfolio-audit.md:| climate | **legacy** | improve | ready-after-station-normal-and-observation-method-audit | 2/3/3 | — | — |": 1,
     "UNBOUNDED_LEGACY:apps/web/scripts/export-migration-flow-r2.ts:* - municipalities: R2 に観測値が無い legacy snapshot のため、既存": 1,
     "UNBOUNDED_LEGACY:apps/web/scripts/export-migration-flow-r2.ts:// municipalities: legacy snapshot を seed": 1,
     "UNBOUNDED_LEGACY:apps/web/src/config/__tests__/legacy-category-keys.test.ts:// middleware の legacy URL 判定キーは現行カテゴリと一致している必要がある。": 1,

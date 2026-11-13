@@ -75,7 +75,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 ### B. 編集コンテンツ (従来・変更なし)
 
 7. **調査ハブの本文の台帳 (`surveys.editorial`) の設計・編集**: `survey-content-standards.md` の編集文法に従い、1 survey ずつ
-   実証 (一括長文化禁止)。実装前に事前監査 (`reference/reviews/YYYY-MM-DD-survey-<surveyId>.md`) を書く。
+   実証 (一括長文化禁止)。実装前に事前監査 (`data/surveys/reviews/YYYY-MM-DD-survey-<surveyId>.md`) を書く。
 
 ### C. ポートフォリオ管理 (2026-07-13 拡張・skill `/manage-survey-portfolio`)
 
@@ -90,8 +90,8 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 11. **実験管理**: 編集ハブ等の本番反映前後で `--add-experiment` により baseline を登録。デプロイ確定時に
     `evaluate-survey-experiments.mjs --schedule <id> <デプロイ日>` で startedAt + d7/d28/d56 期日を機械算出。
     期日到達で実測を突合し verdict を記録。同一 surveyId × changeType の pending 重複は登録不可。
-12. **四半期監査レポート**: `reference/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存
-    (履歴はskill reference、最新状態はstate、未完了策はTODO)。
+12. **四半期監査レポート**: `data/surveys/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存
+    (履歴は `data/surveys/{reviews,audits}/`、最新状態は `data/surveys/portfolio.json`、未完了策はTODO)。
 
 ## improvement-triage への引き渡し形式
 

@@ -97,7 +97,7 @@ npm run generate:catalog --workspace=@stats47/data-configs -- --check
 ### Step 4: 記録
 
 - `skippedDetail` (資料が見つからなかった指標) と `roleRecommendations` は、そのまま
-  `.claude/skills/theme/manage-theme-portfolio/reference/audits/<日付>-selection-backfill.md` の該当節へ足す
+  `data/themes/audits/<日付>-selection-backfill.md` の該当節へ足す
   (夜間 run は自動で書く)。role を変える判断は theme-designer が別途行う
 - warning ratchet の baseline (`.claude/config/quality-warning-baseline.json` の
   `theme-catalog:no-adoption-criteria`) を実測へ縮める (夜間 run は自動)

@@ -33,7 +33,7 @@ tags: [survey, portfolio, agent, governance]
 | GSC・GA4 の /survey/* 別集計 | なし (週次 snapshot に行はあるが survey 集計なし) | none | PR-3 で集計スクリプト新設 (取得は gsc/ga4-analyst の既存 cron を read) |
 | 改善実験の baseline・期日・verdict 管理 | なし (handoff 文書に census baseline が手書きされていた) | none | **新設の中核** = experiments.json |
 | effect/* ラベル・改善バックログ | improvement-triage (排他 writer) | full | 引き渡しのみ (直接書かない) |
-| 四半期監査レポート | なし | none | 新設 (reference/audits/) |
+| 四半期監査レポート | なし | none | 新設 (data/surveys/audits/) |
 
 **結論: 新規 agent は作らない。** theme で新 agent を切った理由は「設計者 (theme-designer) に自己評価
 させない」分離だったが、survey では (a) 編集ハブの効果判定は決定的 validator + GSC/GA4 実測 snapshot
@@ -84,9 +84,9 @@ tags: [survey, portfolio, agent, governance]
 
 | 旧ファイル | 処置 | 継続利用箇所 |
 |---|---|---|
-| `2026-07-11-survey-portfolio-audit.md` | → `reference/audits/` へ移設 | 優先順位表 → portfolio.json の lifecycleStatus/editorialStatus 初期値の根拠 (evidenceRefs) |
-| `2026-07-11-survey-census-cluster-audit.md` | → `reference/reviews/2026-07-11-survey-census.md` へ移設・改名 | census baseline (W27: 23imp/0clicks/pos25.43) → experiments.json SURVEY-EXP-001 |
-| `2026-07-11-survey-wage-structure-audit.md` | → `reference/reviews/2026-07-11-survey-wage-structure-survey.md` へ移設・改名 | 実装時の受入条件・代表 5 ranking (audit-ready の根拠) |
+| `2026-07-11-survey-portfolio-audit.md` | → `data/surveys/audits/` へ移設 | 優先順位表 → portfolio.json の lifecycleStatus/editorialStatus 初期値の根拠 (evidenceRefs) |
+| `2026-07-11-survey-census-cluster-audit.md` | → `data/surveys/reviews/2026-07-11-survey-census.md` へ移設・改名 | census baseline (W27: 23imp/0clicks/pos25.43) → experiments.json SURVEY-EXP-001 |
+| `2026-07-11-survey-wage-structure-audit.md` | → `data/surveys/reviews/2026-07-11-survey-wage-structure-survey.md` へ移設・改名 | 実装時の受入条件・代表 5 ranking (audit-ready の根拠) |
 
 - reviews/ の命名規則 = `YYYY-MM-DD-survey-<surveyId>.md` (builder が surveyId へ機械対応付けするため)。
 - GSC/GA4 の過去 snapshot 値は運用ルール本文へ固定値として複製しない。skill referenceとstateの
@@ -172,7 +172,7 @@ orphan survey / linkage 未解決が多い / ranking 在庫がほぼない (item
 |---|---|---|
 | PR-0 | 既存監査・重複判定・全 survey 機械取得・docs/04 棚卸し・本設計書 | ✅ 本書 (2026-07-13) |
 | PR-1 | survey-curator 拡張 / skill `manage-survey-portfolio` / state README + schema / builder + validator / agents README・自動化インベントリ更新 / audit-survey-linkage との役割分離明記 | ✅ 2026-07-13 |
-| PR-2 | 75 survey の初期 portfolio.json 生成 (surveys.json × 監査 × R2 × editorial の決定的突合)・census 実験の experiments.json 登録・handoff 消化・初回監査 (reference/audits/2026-07-13) | ✅ 2026-07-13 |
+| PR-2 | 75 survey の初期 portfolio.json 生成 (surveys.json × 監査 × R2 × editorial の決定的突合)・census 実験の experiments.json 登録・handoff 消化・初回監査 (data/surveys/audits/2026-07-13) | ✅ 2026-07-13 |
 | PR-3 | GSC/GA4 snapshot の /survey/* 集計 → baseline 保存 (非重複窓・不足は insufficient-data)・editorial 候補の根拠付き選定 | ✅ 2026-07-14 (`aggregate-survey-metrics.ts`。★56d = 非重複 2 窓 W24+W28。結果: 表示/流入あり 47/75。GSC measured 3/75 = wage-structure-survey 809imp / kakei-chousa 142 / natural-park-area 112、GA4 measured 0/75 (最大 kakei 90pv)。survey は現状ロングテールの入口面であることが実測で裏付き。natural-park-area は 2026-07-11 監査に無かった新シグナル → query 実測 (gsc-analyst) 後に candidate 判断) |
 | PR-4 | 月次監査コマンド・実験 7/28/56 日判定・四半期ポートフォリオ監査・triage 引き渡し・CI (schema/drift/orphan/linkage のみ検証。本文生成・R2 push・deploy はしない) | ✅ 2026-07-14 (`run-survey-portfolio-audit.sh` = build→aggregate→validate→実験期日→drift / `evaluate-survey-experiments.mjs` (--check で期日到達分に 56d 実測を記録・--verdict で確定。d7 は異常検知のみ) / CI: pr-quality-check.yml **Survey Portfolio State Guard** = validator のみ実行) |
 

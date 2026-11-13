@@ -36,10 +36,7 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
-const REVIEW_DIR = path.join(
-  PROJECT_ROOT,
-  ".claude/skills/survey/manage-survey-portfolio/reference/reviews",
-);
+const REVIEW_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.reviews"));
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 const SURVEYS_JSON = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
@@ -112,7 +109,7 @@ function findReviewDoc(surveyId: string): { ref: string; date: string | null } |
   const src = fs.readFileSync(path.join(REVIEW_DIR, f), "utf8");
   const date = src.match(/^date:\s*(\S+)/m)?.[1] ?? f.slice(0, 10);
   return {
-    ref: `.claude/skills/survey/manage-survey-portfolio/reference/reviews/${f}`,
+    ref: `${datasetDir("surveys.reviews")}/${f}`,
     date,
   };
 }

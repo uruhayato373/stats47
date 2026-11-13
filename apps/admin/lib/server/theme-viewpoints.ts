@@ -96,7 +96,7 @@ export interface ThemeViewpointSummary {
   trend: ViewpointTrend;
 }
 
-const REVIEWS_DIR = ".claude/skills/theme/manage-theme-portfolio/reference/reviews";
+const REVIEWS_DIR = datasetDir("themes.reviews");
 const TREND_WEEKS = 8;
 /** 承認待ちとみなす提案の新しさ。これより古い proposal-ready は放置された提案として、候補に戻す */
 const PROPOSAL_FRESH_DAYS = 30;

@@ -52,6 +52,31 @@ test("実リポジトリの追跡ファイルは台帳と矛盾しない", () =>
   assert.deepEqual(result.errors, []);
 });
 
+test("[mutation] skill の reference/{reviews,audits}/ に監査・レビューの全文を置くと未宣言で落ちる (置き場は data/<領域>/)", () => {
+  // 2026-11-14 DOCS-GOVERNANCE-GAPS-01。テーマ 36 件・調査 4 件・SEO 監査 1 件の全文が検査の外に溜まっていた。
+  // 旧置き場と、まだ無い skill の同じ名前の置き場の両方が、台帳に行が無いので落ちることを固定する
+  // 旧置き場は RETIRED の宣言から組み立てる (このファイルに直書きすると、旧置き場の参照の検査に自分が掛かる)
+  const moved = RETIRED.filter((r) => r.since === "2026-11-14" && /\/reference\/(reviews|audits)$/.test(r.from)).map((r) => r.from);
+  assert.equal(moved.length, 5, "テーマ・調査の reviews / audits と SEO 監査の audits の 5 か所");
+  const planted = [...moved.map((dir) => `${dir}/2026-11-14-planted.md`), ".claude/skills/dev/some-new-skill/reference/reviews/first-review.md"];
+  const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+    .split("\0")
+    .filter(Boolean);
+  const result = checkDatasets({
+    datasets: DATASETS,
+    files: [...files.filter((f) => !planted.includes(f)), ...planted],
+    governed: GOVERNED,
+    ignoredNames: IGNORED_NAMES,
+    kinds: KINDS,
+    targets: TARGETS,
+    domainIds,
+    retention: RETENTION_POLICIES,
+  });
+  for (const file of planted) assert.ok(result.errors.includes(`未宣言: ${file}`), `未宣言で落ちない: ${file}`);
+  // skill の reference/ のほかのファイル (手順・契約) は範囲に入れない
+  assert.ok(!GOVERNED.some((re) => re.test(".claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md")));
+});
+
 test("可変部分は決めた形だけに当たる", () => {
   assert.ok(patternToRegExp("a/{date}.json").test("a/2026-10-06.json"));
   assert.ok(!patternToRegExp("a/{date}.json").test("a/2026-W41.json"));

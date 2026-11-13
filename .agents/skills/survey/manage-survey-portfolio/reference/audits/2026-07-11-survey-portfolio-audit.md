@@ -1,1 +1,0 @@
-../../../../../../.claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md

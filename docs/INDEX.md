@@ -99,7 +99,7 @@ Issues: PR で close
 ```
 
 - 復元・振り返りは `git log --diff-filter=D -- docs/<path>` から。
-- レビュー履歴が必要な定期処理は各skillの `reference/` に置き、完了履歴はGitから復元する。
+- レビュー・監査の記録が必要な定期処理は `data/<取得元>/` に置き（カタログ `config/datasets.mjs` に行を足す）、完了履歴はGitから復元する。
 
 ### docs 外のドキュメント
 

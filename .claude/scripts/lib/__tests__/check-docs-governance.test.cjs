@@ -12,6 +12,7 @@ const {
   inspectRepository,
   isIsoDate,
   isoWeek,
+  loadConfig,
   parseFrontmatter,
 } = require("../check-docs-governance.cjs");
 
@@ -489,4 +490,69 @@ test("経緯を溜めて大きくなったカードを DG086 で名指しし、�
   assert.match(warning.message, /カード 1 枚/);
   assert.match(warning.message, /DOCS-FEATURE-01/);
   assert.doesNotMatch(warning.message, /DOCS-INDICATOR-01/);
+});
+
+// ── 検査の外に溜まる置き場 (DG087〜089。2026-11-14 DOCS-GOVERNANCE-GAPS-01) ──
+const PLACEMENT = {
+  nestedAgentDirectories: { parents: ["apps", "packages"], name: ".claude" },
+  scriptsRoot: { directory: ".claude/scripts", allowedFiles: ["tsconfig.json"] },
+  codeAdjacentDocs: { roots: ["apps", "packages"], allowedUppercaseNames: ["README.md", "AGENTS.md", "CLAUDE.md"] },
+};
+
+function placementFixture(t) {
+  const { root, config } = fixture(t);
+  write(root, ".claude/scripts/tsconfig.json", "{}\n");
+  write(root, ".claude/scripts/lib/tool.cjs", "// 領域のディレクトリの中は問わない\n");
+  write(root, "apps/web/README.md", "# web\n");
+  write(root, "apps/web/AGENTS.md", "# agents\n");
+  write(root, "packages/kindle/manuscripts/00-intro.md", "# 原稿は設計文書ではない\n");
+  return { root, config: { ...config, placement: PLACEMENT } };
+}
+
+test("置き場の契約どおりのリポジトリは DG087〜089 を出さず、契約が無いリポジトリでは検査しない", (t) => {
+  const { root, config } = placementFixture(t);
+  const codes = (report) => report.findings.map((item) => item.code).filter((code) => /^DG08[789]$/.test(code));
+  assert.deepEqual(codes(inspectRepository({ root, config, now: "2026-07-30" })), []);
+
+  write(root, "apps/web/.claude/notes.md", "# 契約が無ければ見ない\n");
+  const { placement: _placement, ...withoutPlacement } = config;
+  assert.deepEqual(codes(inspectRepository({ root, config: withoutPlacement, now: "2026-07-30" })), []);
+});
+
+test("[mutation] apps/*/.claude/ にファイルを置くと DG087 で落ちる", (t) => {
+  const { root, config } = placementFixture(t);
+  write(root, "apps/web/.claude/skills/local/SKILL.md", "# アプリの下に置いた手順\n");
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const hit = report.errors.filter((item) => item.code === "DG087");
+  assert.deepEqual(hit.map((item) => item.file), ["apps/web/.claude/skills/local/SKILL.md"]);
+});
+
+test("[mutation] .claude/scripts/ の直下に新しいファイルを置くと DG088 で落ち、消したファイルの行が残っても落ちる", (t) => {
+  const { root, config } = placementFixture(t);
+  write(root, ".claude/scripts/one-off.mjs", "// 領域のディレクトリに入れていない\n");
+  const added = inspectRepository({ root, config, now: "2026-07-30" }).errors.filter((item) => item.code === "DG088");
+  assert.deepEqual(added.map((item) => item.file), [".claude/scripts/one-off.mjs"]);
+
+  fs.rmSync(path.join(root, ".claude/scripts/one-off.mjs"));
+  fs.rmSync(path.join(root, ".claude/scripts/tsconfig.json"));
+  const stale = inspectRepository({ root, config, now: "2026-07-30" }).errors.filter((item) => item.code === "DG088");
+  assert.deepEqual(stale.map((item) => item.file), [".claude/scripts/tsconfig.json"]);
+  assert.match(stale[0].message, /行も消す/);
+});
+
+test("[mutation] apps/・packages/ に README 以外の大文字名の Markdown (設計文書・計画・修正メモ) を置くと DG089 で落ちる", (t) => {
+  const { root, config } = placementFixture(t);
+  write(root, "packages/database/SCHEMA.md", "# 型の写し\n");
+  write(root, "apps/web/src/features/ranking/DARK_MODE_FIX.md", "# 済んだ修正の記録\n");
+  write(root, "apps/web/node_modules/dep/CHANGELOG.md", "# 依存の中は見ない\n");
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const hit = report.errors.filter((item) => item.code === "DG089").map((item) => item.file).sort();
+  assert.deepEqual(hit, ["apps/web/src/features/ranking/DARK_MODE_FIX.md", "packages/database/SCHEMA.md"]);
+});
+
+test("実リポジトリの機械契約が置き場の 3 検査を宣言している", () => {
+  const real = loadConfig(path.resolve(__dirname, "..", "..", "..", ".."));
+  assert.deepEqual(real.placement.nestedAgentDirectories, { parents: ["apps", "packages"], name: ".claude" });
+  assert.equal(real.placement.scriptsRoot.directory, ".claude/scripts");
+  assert.deepEqual(real.placement.codeAdjacentDocs.roots, ["apps", "packages"]);
 });
