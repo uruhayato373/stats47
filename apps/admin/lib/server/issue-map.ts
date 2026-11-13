@@ -2,9 +2,10 @@ import "server-only";
 
 import { datasetPath } from "../../../../config/datasets.mjs";
 import type { ContentTypeDef } from "../content-coverage";
-import { buildIssueMap, type IssueMapBuilt, type IssueMapSpec } from "../issue-map";
+import { buildIssueMap, buildRequiredPv, type IssueMapBuilt, type IssueMapSpec, type RequiredPv } from "../issue-map";
+import { readKpiSummary } from "./kpi";
 import { pilotBoard } from "./pilot-board";
-import { fileExists, readJson } from "./state-io";
+import { fileExists, hasError, readJson } from "./state-io";
 import { jstDateStr } from "./time";
 import { todoBoard } from "./todo";
 
@@ -20,7 +21,22 @@ interface ExperimentRecord {
   next_check_date?: string | null;
 }
 
-export type IssueMapView = { today: string; map: IssueMapBuilt | null; relatedPaths: Record<string, string>; error: string | null };
+export type IssueMapView = {
+  today: string;
+  map: IssueMapBuilt | null;
+  relatedPaths: Record<string, string>;
+  /** 月 ¥1 万に要る PV。KPI `ad-yield`・`site-pageviews` に値がある週だけ入る (week は KPI の週) */
+  requiredPv: (RequiredPv & { week: string }) | null;
+  error: string | null;
+};
+
+/** 効率と PV はマップに写さず、週次の KPI ツリーから読む。KPI が読めない・値が無いときはグラフを出さない */
+function requiredPvFromKpi(): IssueMapView["requiredPv"] {
+  const kpi = readKpiSummary();
+  if (hasError(kpi)) return null;
+  const built = buildRequiredPv(kpi.nodes);
+  return built ? { ...built, week: kpi.week } : null;
+}
 
 export function issueMap(): IssueMapView {
   const today = jstDateStr();
@@ -40,8 +56,8 @@ export function issueMap(): IssueMapView {
     const relatedPaths = Object.fromEntries(
       spec.rows.flatMap((r) => (r.relatedDataset ? [[r.relatedDataset, datasetPath(r.relatedDataset)]] : [])),
     );
-    return { today, map, relatedPaths, error: null };
+    return { today, map, relatedPaths, requiredPv: requiredPvFromKpi(), error: null };
   } catch (e) {
-    return { today, map: null, relatedPaths: {}, error: e instanceof Error ? e.message : String(e) };
+    return { today, map: null, relatedPaths: {}, requiredPv: null, error: e instanceof Error ? e.message : String(e) };
   }
 }

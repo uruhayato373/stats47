@@ -1,9 +1,9 @@
 import { Card, CardContent, cn } from "@stats47/components";
 
-import { Cell, DataTable, PanelCard, Row, StatusBadge } from "@/components/admin-ui";
+import { Cell, DataTable, PanelCard, Row, StatusBadge, TrendChart } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import type { CellView, ResolvedRef, RowView, StateKind } from "@/lib/issue-map";
+import { MONTHLY_AD_REVENUE_TARGET_YEN, type CellView, type ResolvedRef, type RowView, type StateKind } from "@/lib/issue-map";
 import { ISSUE_MAP_PATH, issueMap } from "@/lib/server/issue-map";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +13,7 @@ export const metadata = { title: "事業イシューマップ — stats47 admin"
  * 事業イシューマップ: コンテンツの 4 型 × 3 収益源のマスごとに「ここで回収できるか」を置く。読み取り専用で、
  * 入力は data/business/issue-map.json。判定日と進み具合は参照先の台帳から引く。評価の更新は /weekly-review、
  * 主イシューと仮説の見直しは /monthly-plan が行う。社会の問いの台帳 (data/content/issues.json) とは別物。
+ * 月 ¥1 万に要る PV のグラフは、週次の KPI ツリーの site-pageviews・ad-yield に値がある週だけ出す (効率はマップに写さない)。
  */
 
 const stateTone: Record<StateKind, "good" | "info" | "bad" | "warn"> = {
@@ -21,6 +22,11 @@ const stateTone: Record<StateKind, "good" | "info" | "bad" | "warn"> = {
   unknown: "bad",
   undecided: "info",
 };
+
+/** 要る PV は今の PV と 1〜2 桁違うので、軸の目盛りが切れないよう万 PV で描く */
+const PV_PER_MAN = 10_000;
+const manPv = (pv: number) => Math.round((pv / PV_PER_MAN) * 10) / 10;
+const count = new Intl.NumberFormat("ja-JP");
 
 function RefLine({ refItem }: { refItem: ResolvedRef }) {
   return (
@@ -89,7 +95,7 @@ function MatrixRow({ row, relatedPaths }: { row: RowView; relatedPaths: Record<s
 
 /** 事業イシューマップ (型 C: 読み物)。問い → 分解 → 前提 → 判定日 → ストーリーライン */
 export default function IssueMapPage() {
-  const { today, map, relatedPaths, error } = issueMap();
+  const { today, map, relatedPaths, requiredPv, error } = issueMap();
 
   return (
     <>
@@ -138,6 +144,25 @@ export default function IssueMapPage() {
               ))}
             </div>
           </Section>
+
+          {requiredPv ? (
+            <TrendChart
+              title={`月 ¥${count.format(MONTHLY_AD_REVENUE_TARGET_YEN)} の広告収益に要る PV`}
+              description={`28 日の GA4 Japan PV (万)。KPI site-pageviews・ad-yield の ${requiredPv.week} の値から計算`}
+              data={requiredPv.bars.map((b) => ({ label: b.label, pv: manPv(b.pv) }))}
+              xKey="label"
+              series={[{ key: "pv", label: "28 日の PV (万)" }]}
+              kind="bar"
+              valueFormat="decimal"
+              footer={
+                <p className="m-0">
+                  広告収益効率 ¥{requiredPv.adYield} / 1,000 PV のとき、月 ¥{count.format(MONTHLY_AD_REVENUE_TARGET_YEN)} (28 日に直すと 28/30) には 28 日{" "}
+                  {count.format(requiredPv.requiredPv)} PV が要る。実績 {count.format(requiredPv.currentPv)} PV の {requiredPv.multiple} 倍。
+                  {requiredPv.target ? ` 目標は ${requiredPv.target.dueWeek} の ${count.format(requiredPv.target.value)} PV。` : null}
+                </p>
+              }
+            />
+          ) : null}
 
           <Section title="前提" count={map.premises.length} note="どのマスの判定にも要る。欠けると判定日が来ても判定不能になる。">
             <Grid lines={false} gap="sm">
