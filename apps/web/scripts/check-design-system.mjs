@@ -1152,6 +1152,21 @@ for (const file of STATIC_PANEL_PAGE_FILES) {
       line: match[0],
     });
   }
+  // 本文の文字はパネルの既定 (14px / relaxed) に任せる。2026-11-13 まではプライバシーポリシーと運営者情報の本文が
+  // 「text-xs … md:text-sm」で、768px 未満では 12px だった (STATIC-PAGE-BODY-TEXT-SIZE-01)。
+  // 補足・ラベルの 12px (text-xs だけ) は対象外。幅で 12px から 14px に変わる書き方だけを止める。
+  for (const match of text.matchAll(/["'`]([^"'`\n]*)["'`]/g)) {
+    const tokens = match[1].split(/\s+/);
+    if (!tokens.includes('text-xs') || !tokens.some((t) => /^(?:sm|md|lg|xl|2xl):text-sm$/.test(t))) continue;
+    violations.push({
+      ruleId: 'static-panel-body-inherits-panel-text',
+      message:
+        'Static pages leave body text to the panel default (14px / relaxed). Do not start at text-xs and grow to text-sm at a breakpoint; drop the size classes.',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
+  }
 }
 
 if (violations.length > 0) {
