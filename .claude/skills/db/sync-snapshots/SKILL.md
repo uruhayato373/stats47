@@ -148,7 +148,7 @@ run 32006827498 では push が `Progress: 9,416 / 14,033 (errors: 0)` で cance
 
 **「差分 push」という名前だが CI ではフル push になる。** manifest (`.local/r2-manifest/`) は
 runner ローカルなので毎回空 (`マニフェスト記録済み: 0`) で、アップロード対象は常に全件になる。
-manifest を持ち越して push 件数を減らす案は未着手 (`SYNC-SNAPSHOTS-MANIFEST-CARRY-01`)。
+manifest を持ち越して push 件数を減らす案は未着手 (`R2-VALUES-REUPLOAD-01`)。
 
 ## 使い方 (ローカル = 生成のみ / push は CI)
 

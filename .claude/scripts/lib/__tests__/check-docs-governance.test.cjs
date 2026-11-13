@@ -448,3 +448,45 @@ test("related_backlog はカードの見出しで判定し、本文の言及だ�
   fs.writeFileSync(backlogPath, original);
   assert.ok(!inspectRepository({ root, config, now: "2026-07-30" }).errors.some((item) => item.code === "DG042"), "見出しがあれば通る");
 });
+
+test("backlog が 1 ファイルの上限に近づいたら DG085 で知らせ、余裕があるうちは出さない", (t) => {
+  const { root, config } = fixture(t);
+  const backlogBytes = Buffer.byteLength(fs.readFileSync(path.join(root, ".claude/todo/backlog.md"), "utf8"));
+  const withBudget = (maxFileBytes) => ({
+    ...config,
+    todo: { ...config.todo, sizeBudget: { maxFileBytes, warnFileRatio: 0.9, maxCardBytes: 100000 } },
+  });
+
+  // 上限の 9 割を超えている (上限をファイルの大きさちょうどにする)
+  const near = inspectRepository({ root, config: withBudget(backlogBytes), now: "2026-07-30" });
+  const warning = near.warnings.find((item) => item.code === "DG085");
+  assert.ok(warning, "上限に近いのに警告が出ない");
+  assert.match(warning.message, new RegExp(`${backlogBytes} バイト`));
+
+  // 上限がじゅうぶん大きければ出ない
+  const far = inspectRepository({ root, config: withBudget(backlogBytes * 10), now: "2026-07-30" });
+  assert.ok(!far.warnings.some((item) => item.code === "DG085"), "余裕があるのに警告が出た");
+
+  // 契約に大きさの予算が無いリポジトリでは検査しない
+  const none = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(!none.warnings.some((item) => item.code === "DG085" || item.code === "DG086"));
+});
+
+test("経緯を溜めて大きくなったカードを DG086 で名指しし、小さいカードは数えない", (t) => {
+  const { root, config } = fixture(t);
+  const backlogPath = path.join(root, ".claude/todo/backlog.md");
+  const original = fs.readFileSync(backlogPath, "utf8");
+  const budget = { ...config, todo: { ...config.todo, sizeBudget: { maxFileBytes: 10 ** 9, warnFileRatio: 0.9, maxCardBytes: 400 } } };
+
+  assert.ok(!inspectRepository({ root, config: budget, now: "2026-07-30" }).warnings.some((item) => item.code === "DG086"));
+
+  // DOCS-FEATURE-01 にだけ長い経緯を足す
+  const log = Array.from({ length: 12 }, (_, i) => `- **進み (2026-07-${String(i + 1).padStart(2, "0")})**: 経緯の記録を本文に書き足した。`).join("\n");
+  fs.writeFileSync(backlogPath, original.replace("- **完了条件**: testが通る。", `- **完了条件**: testが通る。\n${log}`));
+  const report = inspectRepository({ root, config: budget, now: "2026-07-30" });
+  const warning = report.warnings.find((item) => item.code === "DG086");
+  assert.ok(warning, "大きいカードがあるのに警告が出ない");
+  assert.match(warning.message, /カード 1 枚/);
+  assert.match(warning.message, /DOCS-FEATURE-01/);
+  assert.doesNotMatch(warning.message, /DOCS-INDICATOR-01/);
+});

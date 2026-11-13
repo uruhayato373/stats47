@@ -738,6 +738,41 @@ function inspectRepository({
     if (noKind > 0) {
       add("warning", "DG059", todoFile, `種類なし ${noKind} 件 / 全 ${cards.length} カード`);
     }
+
+    // 大きさ。リポジトリは 1 ファイルの上限 (check-repo-hygiene) を超えると作業ツリー全体のコミットが止まる。
+    // 超えてから気づくと、起票した人でなく次にコミットする全員が止まるので、近づいた時点で知らせる
+    // (2026-11-13 に backlog.md が上限に達し、別のセッションのコミットが 3 回止まった)。
+    const budget = config.todo.sizeBudget;
+    if (budget) {
+      const fileBytes = Buffer.byteLength(text);
+      if (fileBytes >= budget.maxFileBytes * budget.warnFileRatio) {
+        add(
+          "warning",
+          "DG085",
+          todoFile,
+          `${fileBytes} バイトで、1 ファイルの上限 ${budget.maxFileBytes} バイトの ${Math.floor((fileBytes / budget.maxFileBytes) * 100)}%。超えると全コミットが止まる。完了済みのカードを消すか、済んだ作業の経緯を本文から削る`,
+        );
+      }
+      const lines = text.split("\n");
+      const large = cards
+        .map((card) => ({
+          label: card.id ?? `L${card.line}`,
+          bytes: Buffer.byteLength(lines.slice(card.startLine - 1, card.endLine).join("\n")),
+        }))
+        .filter((card) => card.bytes > budget.maxCardBytes)
+        .sort((a, b) => b.bytes - a.bytes);
+      if (large.length > 0) {
+        add(
+          "warning",
+          "DG086",
+          todoFile,
+          `${budget.maxCardBytes} バイトを超えるカード ${large.length} 枚 (大きい順: ${large
+            .slice(0, 3)
+            .map((card) => `${card.label} ${card.bytes}`)
+            .join(" / ")})。カードには未完了の行動だけを書き、経緯は git に任せる`,
+        );
+      }
+    }
   }
 
   // 月次・週次は TODO のコピー先ではなく、既存 ID を選ぶ計画ビュー。

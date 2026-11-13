@@ -181,6 +181,11 @@
       "pending",
       "in-progress",
       "effect/pending"
-    ]
+    ],
+    "sizeBudget": {
+      "maxFileBytes": 1048576,
+      "warnFileRatio": 0.9,
+      "maxCardBytes": 8192
+    }
   }
 }
