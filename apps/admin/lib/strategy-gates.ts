@@ -5,7 +5,11 @@
  * ★ここで判定を作らない。既存の判定 (アフィリエイト運用の measurementGate・pilot readiness・売上の計測範囲) の
  *   値を写すだけにする。判定する関数や state が無い行は「判定元なし」と出し、推測で通過・未達にしない。
  *   表の行が増減したら issues に出し、tests/unit/strategy-gates.test.ts が現物の表で止める。
+ *   B2B基盤 の行には、行政向け商品の検証の進み具合 (lib/admin-stat-pilot.ts) を並べる。聞き取り台帳は
+ *   通過・未達を決める記録を持たないので、状態は「判定元なし」のままにする。
  */
+
+import type { AdminStatPilotProgress } from "./admin-stat-pilot";
 
 export type GateState = "pass" | "fail" | "no-source";
 
@@ -33,6 +37,8 @@ export interface GateInputs {
   pilotReadiness: GateStatus | null;
   /** 売上の計測範囲 (lib/server/revenue.ts の coverage) の AdSense の行。読めなければ null */
   adsenseCoverage: { state: "measured" | "unmeasured"; note: string } | null;
+  /** data/products/admin-stat-interviews.json から導いた、行政向け商品の検証の進み具合 */
+  adminStatPilot: AdminStatPilotProgress;
 }
 
 export interface GateView extends GateRow {
@@ -42,6 +48,8 @@ export interface GateView extends GateRow {
   /** 判定元の明細を見る画面。無ければ null */
   href: string | null;
   note: string;
+  /** note の下に 1 行ずつ並べる明細 (行政向け商品の検証の件数・段階・次の判断点)。無ければ空 */
+  details: string[];
 }
 
 export interface GateBoard {
@@ -50,7 +58,7 @@ export interface GateBoard {
   issues: string[];
 }
 
-type Judgment = Pick<GateView, "state" | "source" | "href" | "note">;
+type Judgment = Pick<GateView, "state" | "source" | "href" | "note"> & { details?: string[] };
 
 const EXPECTED_HEADER = ["Gate", "通過条件", "未達時"];
 const READY = "ready";
@@ -96,8 +104,20 @@ const SOURCES: Record<GateName, (inp: GateInputs) => Judgment> = {
   },
   アフィ横展開: (inp) => fromGate(inp.pilotReadiness, "アフィリエイト pilot の readiness", "/affiliate"),
   トラフィック拡大: () => noSource("T1〜T4 のどの段階にいるかを決める判定関数・state が無い (マーケティング戦略の表は文書だけ)"),
-  商品横展開: () => noSource("pilot 判定ボードは指標と判定日だけを持ち、停止条件を持たない。判定元は STRATEGY-GATE-ADMIN-PILOT-01 で作る"),
-  B2B基盤: () => noSource("支払者・購入条件・有償取引の需要を記録する state が無い。判定元は STRATEGY-GATE-ADMIN-PILOT-01 で作る"),
+  商品横展開: () => noSource("pilot 判定ボードは指標と判定日だけを持ち、停止条件を持たない"),
+  B2B基盤: ({ adminStatPilot: p }) => ({
+    state: "no-source",
+    source: "行政向け商品の聞き取り台帳 (進み具合だけ)",
+    href: null,
+    note: "通過・未達を決める記録 (支払者・購入条件の確定、有償取引の需要) を置く欄が台帳に無い",
+    details: [
+      `聞き取り: ${p.interviewCount}`,
+      `段階: ${p.stage}`,
+      `次の判断点: ${p.nextDecision}`,
+      `有料 pilot の初回判断点 (開始から 30 日): ${p.paidPilotDecision}`,
+      ...p.gaps.map((gap) => `台帳の欠け: ${gap}`),
+    ],
+  }),
 };
 
 const isGateName = (name: string): name is GateName => (GATE_NAMES as readonly string[]).includes(name);
@@ -105,7 +125,7 @@ const isGateName = (name: string): name is GateName => (GATE_NAMES as readonly s
 export function buildGateBoard(rows: GateRow[], inputs: GateInputs): GateBoard {
   const views = rows.map((row): GateView => {
     const judgment = isGateName(row.name) ? SOURCES[row.name](inputs) : noSource("表に増えた行。判定元の対応が未定義");
-    return { ...row, ...judgment };
+    return { ...row, details: [], ...judgment };
   });
   const names = rows.map((r) => r.name);
   const added = names.filter((n) => !isGateName(n));

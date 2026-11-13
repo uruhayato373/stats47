@@ -2,6 +2,7 @@ import path from "node:path";
 
 import { afterEach, describe, expect, it } from "vitest";
 
+import { adminStatPilotProgress } from "@/lib/admin-stat-pilot";
 import { buildGateBoard, GATE_NAMES, gateRowsFromTable, type GateInputs } from "@/lib/strategy-gates";
 import { strategyGateBoard } from "@/lib/server/strategy-gates";
 
@@ -14,7 +15,8 @@ const REPO = path.resolve(__dirname, "../../../..");
 
 const HEADER = ["Gate", "通過条件", "未達時"];
 const TABLE_ROWS = GATE_NAMES.map((name) => [name, `${name} の通過条件`, `${name} の未達時`]);
-const NO_INPUTS: GateInputs = { measurementGate: null, pilotReadiness: null, adsenseCoverage: null };
+const NO_PILOT = adminStatPilotProgress(null, []);
+const NO_INPUTS: GateInputs = { measurementGate: null, pilotReadiness: null, adsenseCoverage: null, adminStatPilot: NO_PILOT };
 
 describe("収益化戦略 §5 のゲート表", () => {
   afterEach(() => {
@@ -76,6 +78,7 @@ describe("収益化戦略 §5 のゲート表", () => {
       measurementGate: { status: "ready", reasons: [], generatedAt: "2026-11-09T22:56:13.652Z" },
       pilotReadiness: { status: "blocked", reasons: ["a8-results-month-missing"], generatedAt: "2026-11-09T22:56:14.472Z" },
       adsenseCoverage: { state: "measured", note: "週次 CSV" },
+      adminStatPilot: NO_PILOT,
     });
     const by = Object.fromEntries(board.rows.map((r) => [r.name, r]));
     expect(by["計測"]).toMatchObject({ state: "pass", href: "/affiliate" });
@@ -99,11 +102,39 @@ describe("収益化戦略 §5 のゲート表", () => {
       measurementGate: { status: "unknown", reasons: [], generatedAt: null },
       pilotReadiness: null,
       adsenseCoverage: null,
+      adminStatPilot: NO_PILOT,
     });
     for (const name of ["計測", "AdSense", "アフィ横展開"]) {
       const row = board.rows.find((r) => r.name === name);
       expect(row?.state).toBe("no-source");
       expect(row?.note).toMatch(/読めない|status が無い/);
     }
+  });
+
+  it("B2B基盤 の行は聞き取り台帳の件数・段階・次の判断点を並べ、通過・未達は作らず判定元なしのままにする", () => {
+    const rows = gateRowsFromTable({ header: HEADER, rows: TABLE_ROWS });
+    const ledger = { gate: { targetInterviewCount: 3 }, interviews: [{ interviewId: "I-001", interviewedAt: "2026-11-20" }] };
+    const board = buildGateBoard(rows, { ...NO_INPUTS, adminStatPilot: adminStatPilotProgress(ledger, ["1. 業務を選ぶ", "2. 無料試用"]) });
+    const b2b = board.rows.find((r) => r.name === "B2B基盤");
+    expect(b2b).toMatchObject({ state: "no-source", href: null });
+    expect(b2b?.details).toEqual([
+      "聞き取り: 1/3 件",
+      "段階: 1. 業務を選ぶ (全 2 段階・聞き取り中)",
+      "次の判断点: 聞き取りが 3 件に達した時点で段階 1 の進む・止めるを決める (残り 2 件)",
+      "有料 pilot の初回判断点 (開始から 30 日): 未記録",
+    ]);
+    expect(board.rows.filter((r) => r.name !== "B2B基盤").every((r) => r.details.length === 0)).toBe(true);
+  });
+
+  it("聞き取り台帳を読めないとき、B2B基盤 の行の件数・段階・次の判断点はすべて未記録になり、欠けを 1 行出す", () => {
+    const rows = gateRowsFromTable({ header: HEADER, rows: TABLE_ROWS });
+    const b2b = buildGateBoard(rows, NO_INPUTS).rows.find((r) => r.name === "B2B基盤");
+    expect(b2b?.details).toEqual([
+      "聞き取り: 未記録",
+      "段階: 未記録",
+      "次の判断点: 未記録",
+      "有料 pilot の初回判断点 (開始から 30 日): 未記録",
+      "台帳の欠け: 聞き取り台帳を読めない",
+    ]);
   });
 });

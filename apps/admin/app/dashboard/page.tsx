@@ -5,7 +5,7 @@ import { DashboardView } from "@/components/dashboard/dashboard-view";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { pilotBoard } from "@/lib/server/pilot-board";
-import { strategyGateBoard } from "@/lib/server/strategy-gates";
+import { ADMIN_STAT_INTERVIEWS_PATH, strategyGateBoard } from "@/lib/server/strategy-gates";
 import { strategyLaneBoard } from "@/lib/server/strategy-lanes";
 import type { GateState } from "@/lib/strategy-gates";
 import { todoBoard } from "@/lib/server/todo";
@@ -63,7 +63,7 @@ export default function DashboardPage() {
       <PageHeading title="現況レビュー" source="pilot-board.json + improvements.md + 収益化戦略 §5 + data/ の週次記録" />
       <Section
         title="今週の判断"
-        note={`判断ゲートの表は ${gates.source} の §5。状態は既存の判定 (アフィリエイト運用の measurementGate・pilot の readiness・売上の計測範囲) を写したもので、判定する関数や記録が無い行は「判定元なし」と出す。`}
+        note={`判断ゲートの表は ${gates.source} の §5。状態は既存の判定 (アフィリエイト運用の measurementGate・pilot の readiness・売上の計測範囲) を写したもので、判定する関数や記録が無い行は「判定元なし」と出す。B2B基盤 の行には、行政向け商品の検証 (§5 の 4 段階) の進み具合を聞き取り台帳 ${ADMIN_STAT_INTERVIEWS_PATH} から導いて並べ、台帳から導けない値は「未記録」と出す。`}
       >
         <Grid min="sm">
           {cards.map((c) => (
@@ -99,6 +99,11 @@ export default function DashboardPage() {
                     )}
                   </div>
                   <div className="text-xs text-muted-foreground">{gate.note}</div>
+                  {gate.details.map((detail) => (
+                    <div key={detail} className="text-xs">
+                      {detail}
+                    </div>
+                  ))}
                 </div>
               </Cell>
               <Cell>
