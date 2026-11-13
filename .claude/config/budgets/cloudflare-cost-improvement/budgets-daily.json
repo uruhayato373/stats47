@@ -45,6 +45,26 @@
       "note": "通常 < 0.1%。1% 超は障害の可能性"
     },
     {
+      "rule_id": "workers-cpu-warning",
+      "metric_key": "workers_cpu_ms",
+      "required": true,
+      "operator": ">",
+      "threshold": 45000000,
+      "severity": "warning",
+      "title": "Workers CPU 時間が 4,500 万 ms/日を超過",
+      "note": "込み分 3,000 万 ms/月、超過 $0.02/100 万 ms。4,500 万 ms/日は 2026-10-15〜11-11 の日次の中央値付近、8,000 万 ms/日は月約 $48 相当。対策の効果確認後に引き下げる"
+    },
+    {
+      "rule_id": "workers-cpu-critical",
+      "metric_key": "workers_cpu_ms",
+      "required": true,
+      "operator": ">",
+      "threshold": 80000000,
+      "severity": "critical",
+      "title": "Workers CPU 時間が 8,000 万 ms/日を超過",
+      "note": "込み分 3,000 万 ms/月、超過 $0.02/100 万 ms。4,500 万 ms/日は 2026-10-15〜11-11 の日次の中央値付近、8,000 万 ms/日は月約 $48 相当。対策の効果確認後に引き下げる"
+    },
+    {
       "rule_id": "r2-class-a-spike",
       "metric_key": "r2_class_a_ops",
       "operator": ">",
@@ -67,9 +87,9 @@
       "metric_key": "r2_storage_gb",
       "operator": ">",
       "threshold": 18,
-      "severity": "warning",
+      "severity": "info",
       "title": "R2 account storage > 18GB",
-      "note": "siteScope=account。Standard storageは10GB-month/月まで無料、超過は$0.015/GB-month。stats47以外のbucket増加も検知するアカウント予算alertで、原因判定はbucket別metricで行う。2026-07-27 に incremental-cache 未GC (8.85GB) を削除しアカウント合計 15.2GB実測。旧50GBは緩すぎて9GBの不要cacheを検知できなかった"
+      "note": "siteScope=account。Standard storageは10GB-month/月まで無料、超過は$0.015/GB-month。stats47以外のbucket増加も検知するアカウント予算alertで、原因判定はbucket別metricで行う。2026-07-27 に incremental-cache 未GC (8.85GB) を削除しアカウント合計 15.2GB実測。旧50GBは緩すぎて9GBの不要cacheを検知できなかった。2026-11-13: 請求書で R2 の課金が $0 のため info に変更。警告は課金項目に絞る"
     },
     {
       "rule_id": "r2-stats47-storage-growth",
@@ -77,9 +97,9 @@
       "required": true,
       "operator": ">",
       "threshold": 12.5,
-      "severity": "warning",
+      "severity": "info",
       "title": "stats47 bucket storage > 12.5GB",
-      "note": "siteScope=stats47。2026-08-22 GraphQL実測11.59GBに0.91GBの調査余白を加えた閾値。8/19→8/22のstats47純増0.21GBの4倍超で、超過時はr2-duのprefix集計とincremental-cache世代監査を行う。ISRは別途4世代上限でもfail-closedに検査する"
+      "note": "siteScope=stats47。2026-08-22 GraphQL実測11.59GBに0.91GBの調査余白を加えた閾値。8/19→8/22のstats47純増0.21GBの4倍超で、超過時はr2-duのprefix集計とincremental-cache世代監査を行う。ISRは別途4世代上限でもfail-closedに検査する。2026-11-13: 請求書で R2 の課金が $0 のため info に変更。警告は課金項目に絞る"
     },
     {
       "rule_id": "r2-egress-spike",

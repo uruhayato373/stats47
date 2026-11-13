@@ -82,3 +82,37 @@ test("CPU 合計は全日分そろったときだけ数値にし、欠ければ�
   const body = buildIssueBody("2026-09", range, partial, [], { source: "none", reason: "x" }, coverage);
   assert.match(body, /Workers CPU ms: 日次 snapshot の CPU 合計が 1\/29 日分/);
 });
+
+
+// ---- Workers CPU 合計と推定月額 (2026-11-13) ----
+test("CPU 値のある日がサイクルの 8 割以上なら合計を出し、未満なら unknown", () => {
+  const cpu = (n) => Array.from({ length: n }, () => daily(10, 40_000_000_000)); // 4,000 万 ms/日
+  const ok = aggregateSnapshots(cpu(25), { daysExpected: 30 }); // 25/30 = 83%
+  assert.equal(ok.workers.totalCpuTimeUs, 1_000_000_000_000);
+  const ng = aggregateSnapshots(cpu(23), { daysExpected: 30 }); // 23/30 = 77%
+  assert.equal(ng.workers.totalCpuTimeUs, null);
+  assert.equal(ng.workers.cpuDaysCovered, 23);
+
+  const budgets = [{ metric_key: "workers_cpu_ms", warning_threshold: 1, error_threshold: 2 },
+    { metric_key: "total_cost_usd_monthly", warning_threshold: 10, error_threshold: 15 }];
+  assert.deepEqual(evaluateBudgets(budgets, ng).map((c) => c.status), ["unknown", "unknown"]);
+});
+
+test("total_cost_usd_monthly は請求書の実額が無ければ推定額 (cost_basis=estimate)、あれば実額を優先", () => {
+  const budgets = [{ metric_key: "total_cost_usd_monthly", warning_threshold: 10, error_threshold: 15 }];
+  // 15 億 ms → 5 + 1470*0.02 = 34.4
+  const agg = aggregateSnapshots([daily(1, 1_500_000_000_000)]);
+  const [est] = evaluateBudgets(budgets, agg);
+  assert.equal(est.cost_basis, "estimate");
+  assert.ok(Math.abs(est.actual - 34.4) < 1e-9);
+  assert.equal(est.status, "error");
+
+  const [inv] = evaluateBudgets(budgets, agg, { invoiceUsd: 9 });
+  assert.equal(inv.cost_basis, "invoice");
+  assert.equal(inv.actual, 9);
+  assert.equal(inv.status, "ok");
+
+  const body = buildIssueBody("2026-10", range, agg, [est], { source: "none", reason: "x" }, coverage);
+  assert.match(body, /推定 \(日次 CPU 合計から算出・税別\)/);
+  assert.match(body, /\$34\.40/);
+});

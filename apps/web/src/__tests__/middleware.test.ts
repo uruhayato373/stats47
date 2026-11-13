@@ -368,15 +368,57 @@ describe('市区町村URLのknown集合と旧query移行', () => {
     expect(middleware(request(pathname)).status).toBe(410);
   });
 
-  test.each([
-    // 自治体名の検索・ページ送りを伴う絞り込みは全国版に残す
-    '/municipalities/ranking/manufacturing-shipment-amount?pref=23000&q=豊田',
-    '/municipalities/ranking/manufacturing-shipment-amount?pref=23000&page=2',
-    // 県別ページを作らない指標・不正な県コードは転送しない
-    '/municipalities/ranking/future-burden-ratio-city?pref=23000',
-    '/municipalities/ranking/manufacturing-shipment-amount?pref=99000',
-  ])('%s は県別ページへ転送しない', (pathname) => {
-    expect(middleware(request(pathname)).status).not.toBe(301);
+  describe('旧クエリ (pref / q / page) は必ず 301 で畳む (2026-11-13 URL 原則)', () => {
+    const base = 'https://stats47.jp/municipalities/ranking';
+    // 県別ページあり: manufacturing-shipment-amount / 県別ページなし: future-burden-ratio-city
+    test.each([
+      ['県別ページあり + pref → 県別パス', '/manufacturing-shipment-amount?pref=23000', '/manufacturing-shipment-amount/23000'],
+      ['県別ページなし + pref → 全国版', '/future-burden-ratio-city?pref=23000', '/future-burden-ratio-city'],
+      ['page だけ → 全国版', '/manufacturing-shipment-amount?page=2', '/manufacturing-shipment-amount'],
+      ['q だけ → 全国版', '/manufacturing-shipment-amount?q=%E8%B1%8A%E7%94%B0', '/manufacturing-shipment-amount'],
+      ['pref + q → 県別パス (q は落とす)', '/manufacturing-shipment-amount?pref=23000&q=%E8%B1%8A%E7%94%B0', '/manufacturing-shipment-amount/23000'],
+      ['pref + page + utm_source → 県別パス (utm は残る)', '/manufacturing-shipment-amount?pref=23000&page=2&utm_source=x', '/manufacturing-shipment-amount/23000?utm_source=x'],
+      ['無効な pref → 全国版 (県別パスにしない)', '/manufacturing-shipment-amount?pref=99000', '/manufacturing-shipment-amount'],
+      ['空の pref → 全国版', '/manufacturing-shipment-amount?pref=', '/manufacturing-shipment-amount'],
+      ['県別パス + page → 県別パス', '/manufacturing-shipment-amount/23000?page=3', '/manufacturing-shipment-amount/23000'],
+      ['県別パス + q + page + utm → 県別パス (utm は残る)', '/manufacturing-shipment-amount/23000?q=a&page=2&utm_medium=m', '/manufacturing-shipment-amount/23000?utm_medium=m'],
+      ['県別パス + pref → 県別パス', '/manufacturing-shipment-amount/23000?pref=13000', '/manufacturing-shipment-amount/23000'],
+    ])('%s', (_name, source, expected) => {
+      const response = middleware(request(`/municipalities/ranking${source}`));
+      expect(response.status).toBe(301);
+      expect(response.headers.get('location')).toBe(`${base}${expected}`);
+    });
+
+    test('転送先を再度投げても転送しない (ループしない)', () => {
+      const sources = [
+        '/manufacturing-shipment-amount?pref=23000&page=2&utm_source=x',
+        '/future-burden-ratio-city?pref=23000&q=a',
+        '/manufacturing-shipment-amount/23000?q=a&page=2&pref=1',
+        '/manufacturing-shipment-amount?pref=99000&page=9',
+      ];
+      for (const source of sources) {
+        const first = middleware(request(`/municipalities/ranking${source}`));
+        expect(first.status).toBe(301);
+        const location = new URL(first.headers.get('location') as string);
+        const second = middleware(request(`${location.pathname}${location.search}`));
+        expect(second.status).not.toBe(301);
+      }
+    });
+
+    test.each([
+      '/municipalities/ranking/manufacturing-shipment-amount',
+      '/municipalities/ranking/manufacturing-shipment-amount?utm_source=x',
+      '/municipalities/ranking/manufacturing-shipment-amount/23000',
+      '/municipalities/ranking/manufacturing-shipment-amount/23000?utm_source=x',
+    ])('%s は転送しない', (pathname) => {
+      expect(middleware(request(pathname)).status).not.toBe(301);
+    });
+
+    test('未登録の指標・県別ページの無い指標の県別パスは、クエリが付いても 301 でなく 410', () => {
+      expect(middleware(request('/municipalities/ranking/not-real?page=2')).status).toBe(410);
+      expect(middleware(request('/municipalities/ranking/future-burden-ratio-city/23000?page=2')).status).toBe(410);
+      expect(middleware(request('/municipalities/ranking/manufacturing-shipment-amount/99000?page=2')).status).toBe(410);
+    });
   });
 
   test('旧市区町村テーマは市区町村ハブへ恒久転送する', () => {

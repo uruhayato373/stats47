@@ -119,10 +119,11 @@ export default async function AreaThemeCitiesPage({ params }: { params: Promise<
             {metrics.map(({ rankingKey, item, values, ranking }) => {
               const areaLabel = municipalityPrefectureAreaLabel(ranking.hasSpecialWards);
               const unit = formatUnitForDisplay(values.unit);
-              // 県別の独立ページがある指標はそこへ、無い指標は全国の市区町村ランキングを県で絞って開く
-              const href = isMunicipalityPrefectureRankingKey(rankingKey)
+              // 県別の独立ページがある指標はそこへ、無い指標はクエリなしの全国の市区町村ランキングへ (?pref= は付けない)
+              const hasPrefectureRanking = isMunicipalityPrefectureRankingKey(rankingKey);
+              const href = hasPrefectureRanking
                 ? hrefFor('municipality-pref-ranking', { rankingKey, prefCode: prefecture.prefCode })
-                : `${hrefFor('municipality-ranking', { rankingKey })}?pref=${prefecture.prefCode}`;
+                : hrefFor('municipality-ranking', { rankingKey });
               return (
                 <ChartPanel
                   key={rankingKey}
@@ -130,7 +131,7 @@ export default async function AreaThemeCitiesPage({ params }: { params: Promise<
                   description={`${values.yearName}・県内 ${ranking.rows.length.toLocaleString('ja-JP')} ${areaLabel}`}
                   footer={
                     <Link href={href} className="text-sm font-medium text-primary underline-offset-4 hover:underline">
-                      {prefecture.prefName}の{areaLabel}ランキングを見る
+                      {hasPrefectureRanking ? `${prefecture.prefName}の${areaLabel}ランキングを見る` : `全国の${areaLabel}ランキングを見る`}
                     </Link>
                   }
                 >
