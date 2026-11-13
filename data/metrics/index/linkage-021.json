@@ -4437,6 +4437,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:personnel-expense-municipal",
           "kind": "ranking"
         }
@@ -4471,6 +4475,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
         {
           "pageId": "ranking:personnel-expenses-prefecture",
           "kind": "ranking"

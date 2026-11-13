@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { computeAnalyses, describeAnalysis, type AnalysisRevision } from '../src/analysis/compute';
 import type { AnalysisObservation } from '../src/analysis/fetch-estat';
+import { buildAnalysisFigures } from '../src/analysis/figures';
 
 function fixture() {
   const plan: AnalysisRevision = {
@@ -19,6 +20,30 @@ function fixture() {
 }
 
 describe('分析と図表・説明が使う値の契約', () => {
+  it('構成は全体から残差を求め、納品値と共通積み上げ図を100％で一致させる', () => {
+    const { plan, rows } = fixture();
+    Object.assign(plan.recipes[0], { method: 'composition', template: 'stacked-bar', denominatorId: 'all',
+      metricIds: ['part'], remainder: { id: 'other', label: 'その他の世帯' } });
+    const result = computeAnalyses(plan, rows);
+    expect(result.map(row => row.value)).toEqual([20, 80, 50, 50]);
+    expect(buildAnalysisFigures(plan, result).figures[0]).toMatchObject({ template: 'stacked-bar', input: {
+      groups: ['2000年', '2020年'], categories: [{ label: '単身世帯', values: [20, 50] }, { label: 'その他の世帯', values: [80, 50] }],
+    } });
+    expect(describeAnalysis(plan.recipes[0], result)).toContain('高知県・単身世帯 50％');
+  });
+  it.each(['欠測', '0分母', '過大', '負値', '異単位', '親子重複', '残差重複'])('構成の不正入力を0や再正規化で隠さない: %s', mode => {
+    const { plan, rows } = fixture();
+    Object.assign(plan.recipes[0], { method: 'composition', template: 'stacked-bar', denominatorId: 'all',
+      metricIds: ['part'], remainder: { id: 'other', label: 'その他' } });
+    if (mode === '欠測') { rows[2].value = null; rows[2].missingReason = '秘匿'; }
+    if (mode === '0分母') rows[0].value = 0;
+    if (mode === '過大') rows[2].value = 101;
+    if (mode === '負値') rows[2].value = -1;
+    if (mode === '異単位') { plan.sources[0].metrics[0].unit = '人'; rows.filter(row => row.metricId === 'all').forEach(row => { row.unit = '人'; }); }
+    if (mode === '親子重複') plan.recipes[0].metricIds.push('all');
+    if (mode === '残差重複') plan.recipes[0].remainder!.id = 'part';
+    expect(() => computeAnalyses(plan, rows)).toThrow();
+  });
   it('単位の異なる規模を基準年100で比較し、入力順に依存しない', () => {
     const { plan, rows } = fixture();
     plan.sources[0].metrics[0].unit = '人';
@@ -34,6 +59,11 @@ describe('分析と図表・説明が使う値の契約', () => {
     expect(computeAnalyses(plan, rows).map(row => row.value)).toEqual([20, 50]);
     rows[3].value = 81;
     expect(() => computeAnalyses(plan, rows)).toThrow('全体を超え');
+  });
+  it('全体を全体で割った100％を部分の割合として扱わない', () => {
+    const { plan, rows } = fixture();
+    Object.assign(plan.recipes[0], { method: 'share', denominatorId: 'all', metricIds: ['all'] });
+    expect(() => computeAnalyses(plan, rows)).toThrow('全体自身');
   });
   it('欠測は0にせず伝播、0の分母は理由付きnullにする', () => {
     const { plan, rows } = fixture();

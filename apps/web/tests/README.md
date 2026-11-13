@@ -67,6 +67,8 @@ tests/e2e/
 └── helpers/         # テストユーティリティ
 ```
 
+本番スモークは `tests/smoke/fixtures.ts` の共通 fixture を使い、GA4 通信と広告通信を遮断する。自動操作の計測混入と全画面広告による遷移の割り込みを防ぐ。広告の本文書き換えを監視する `third-party-dom-injection.spec.ts` だけは `allowAds: true` で実際の広告を読み込む。アプリのデータ・画像取得と遷移の検証は省略しない。
+
 ## テスト追加の指針
 
 表示条件の単一選択は `SingleSelectToggleGroup.test.tsx` が押し直し・キーボード・無効状態を、`selection-control-audit.test.ts` が再実装と個別装飾の違反 fixture を検査する。実画面は `ranking-controls.spec.ts` で各表示境界前後の計算後スタイルを比較し、`selection-controls.spec.ts` で選択肢の多い地方・貨物・文化財の折り返しと操作を検査する。

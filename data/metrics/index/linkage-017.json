@@ -2145,6 +2145,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:municipal-bonds-outstanding",
           "kind": "ranking"
         }
@@ -5234,6 +5238,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:national-treasury-disbursement-prefecture",
           "kind": "ranking"
         }
@@ -5502,6 +5510,10 @@
         {
           "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:national-treasury-disbursements-municipal",

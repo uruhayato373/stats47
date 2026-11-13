@@ -44,9 +44,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "regional-comparison",
         "kind": "chart",
         "heading": "出荷額の規模と、集まる場所を比べる",
         "lead": "棒グラフで自治体間の規模を比較し、全国地図から県内の地図へ範囲を絞って製造業の集積を確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production",
+            "title": "製造業",
+            "sectionTitle": "生産規模",
+            "href": "/themes/manufacturing#theme-section-production"
+          }
+        ],
         "figures": [
           {
             "file": "compare-bars-2023.png",
@@ -63,9 +73,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "industry-composition",
         "kind": "chart",
         "heading": "地域を支える業種と内訳を見る",
         "lead": "自治体ごとの業種構成を比べ、どの業種の比重が大きいかを確認できます。県内の合計に占める市町村の割合も図にできます。",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production",
+            "title": "製造業",
+            "sectionTitle": "生産規模",
+            "href": "/themes/manufacturing#theme-section-production"
+          }
+        ],
         "figures": [
           {
             "file": "industry-donut-toyota-2023.png",
@@ -86,9 +106,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "long-term-change",
         "kind": "chart",
         "heading": "出荷額の長期的な変化をたどる",
         "lead": "同じ自治体の推移を折れ線で比べ、増減の倍率を地図にして、変化の大きい地域を確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production",
+            "title": "製造業",
+            "sectionTitle": "生産規模",
+            "href": "/themes/manufacturing#theme-section-production"
+          }
+        ],
         "figures": [
           {
             "file": "change-trend-1980-2023.png",
@@ -159,13 +189,23 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "purchaseNotes": [
       "収録版の値を固定した商品です。人口・世帯などの指標は基準年が異なる場合があるため、比較前に各表の年次を確認してください。",
-      "都道府県単位の比較用です。市区町村別・町丁目別の商圏や世帯を直接調べるデータではありません。"
+      "基本の指標セットは都道府県単位の比較用です。町丁目別の商圏や世帯を直接調べるデータではありません。"
     ],
     "showcase": [
       {
+        "id": "population-scale",
         "kind": "chart",
         "heading": "人口の規模を比べる",
         "lead": "総人口を棒グラフで比較すると、自県が全国の中でどの程度の規模かを説明できます。営業エリアや行政サービスの対象規模を整理する資料に使えます。",
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "population-change",
+            "title": "人口動態",
+            "sectionTitle": "人口は増えているか",
+            "href": "/themes/population-dynamics#theme-section-population-change"
+          }
+        ],
         "figures": [
           {
             "file": "population-scale.png",
@@ -174,9 +214,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "aging-distribution",
         "kind": "chart",
         "heading": "高齢化の地域差を地図で見る",
         "lead": "65歳以上人口の割合で地図を色分けし、高齢化の進み方が似ている地域を探せます。人数の多さと割合の高さを分けて説明するための図です。",
+        "themeRefs": [
+          {
+            "themeKey": "aging-society",
+            "sectionKey": "birth-aging",
+            "title": "少子高齢化",
+            "sectionTitle": "出生と高齢化の現在地",
+            "href": "/themes/aging-society#theme-section-birth-aging"
+          }
+        ],
         "figures": [
           {
             "file": "aging-distribution.png",
@@ -185,9 +235,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "household-scale",
         "kind": "chart",
         "heading": "世帯を単位に地域を比べる",
         "lead": "一般世帯数を並べ、住宅や世帯向けサービスの対象規模を整理できます。人口と世帯数では比較の単位が異なることも、資料で示せます。",
+        "themeRefs": [
+          {
+            "themeKey": "living-housing",
+            "sectionKey": "household-structure-and-elderly",
+            "title": "暮らし・住まい",
+            "sectionTitle": "世帯の少人数化や高齢者の単身化は進んでいるか",
+            "href": "/themes/living-housing#theme-section-household-structure-and-elderly"
+          }
+        ],
         "figures": [
           {
             "file": "household-scale.png",
@@ -253,9 +313,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "job-opening-comparison",
         "kind": "chart",
         "heading": "求人と求職のバランスを比べる",
         "lead": "県別の有効求人倍率を並べ、募集候補の地域が全国のどの位置にあるかを確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "labor-mobility",
+            "sectionKey": "job-market",
+            "title": "人材流動性・雇用環境",
+            "sectionTitle": "求人・求職と職業紹介",
+            "href": "/themes/labor-mobility#theme-section-job-market"
+          }
+        ],
         "figures": [
           {
             "file": "job-opening-comparison.png",
@@ -264,9 +334,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "scheduled-pay-distribution",
         "kind": "chart",
         "heading": "給与水準の地域差を地図で見る",
         "lead": "男性の所定内給与額で色分けし、給与水準の高い地域や近隣県との違いを俯瞰できます。",
+        "themeRefs": [
+          {
+            "themeKey": "labor-wages",
+            "sectionKey": "wage-differences",
+            "title": "労働・賃金",
+            "sectionTitle": "属性別の賃金差",
+            "href": "/themes/labor-wages#theme-section-wage-differences"
+          }
+        ],
         "figures": [
           {
             "file": "scheduled-pay-distribution.png",
@@ -332,9 +412,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "overnight-demand",
         "kind": "chart",
         "heading": "宿泊需要の規模を比べる",
         "lead": "延べ宿泊者数を並べ、宿泊がどの県に集まるかを確認できます。泊数を積み上げた「人泊」で規模を比べる図です。",
+        "themeRefs": [
+          {
+            "themeKey": "tourism",
+            "sectionKey": "stays",
+            "title": "観光",
+            "sectionTitle": "宿泊需要はどれくらいか",
+            "href": "/themes/tourism#theme-section-stays"
+          }
+        ],
         "figures": [
           {
             "file": "overnight-demand.png",
@@ -343,9 +433,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "foreign-overnight-distribution",
         "kind": "chart",
         "heading": "外国人の宿泊が集まる地域を見る",
         "lead": "外国人の延べ宿泊者数を地図にし、総宿泊者数の図と見比べて地域ごとの特徴を確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "tourism",
+            "sectionKey": "stays",
+            "title": "観光",
+            "sectionTitle": "宿泊需要はどれくらいか",
+            "href": "/themes/tourism#theme-section-stays"
+          }
+        ],
         "figures": [
           {
             "file": "foreign-overnight-distribution.png",
@@ -354,9 +454,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "room-utilization",
         "kind": "chart",
         "heading": "客室の利用状況を比べる",
         "lead": "客室稼働率を並べ、宿泊者数の多さとは別に、客室がどの程度使われているかを比較できます。",
+        "themeRefs": [
+          {
+            "themeKey": "tourism",
+            "sectionKey": "accommodation",
+            "title": "観光",
+            "sectionTitle": "客室稼働率と宿泊供給の参考",
+            "href": "/themes/tourism#theme-section-accommodation"
+          }
+        ],
         "figures": [
           {
             "file": "room-utilization.png",
@@ -417,14 +527,24 @@ export const STOREFRONT_PRODUCTS = [
       }
     ],
     "purchaseNotes": [
-      "作成例は都道府県財政の比較です。個々の市区町村の財政状況を直接示す図ではありません。",
+      "基本の指標セットの作成例は都道府県財政の比較です。県と市区町村の図は集計範囲を確認して読み分けてください。",
       "収録版の値を固定した商品です。決算年度と各指標の定義を確認し、単独の指標で財政の健全性を断定しないでください。"
     ],
     "showcase": [
       {
+        "id": "fiscal-strength-comparison",
         "kind": "chart",
         "heading": "財政力指数で自県の位置を確かめる",
         "lead": "財政力指数を棒グラフで比較し、自県と他県の違いを説明できます。歳入総額の多さとは別の指標として示すことで、財政の特徴を整理できます。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "fiscal-capacity",
+            "title": "地方財政",
+            "sectionTitle": "財政運営の余裕と負担",
+            "href": "/themes/local-finance#theme-section-fiscal-capacity"
+          }
+        ],
         "figures": [
           {
             "file": "fiscal-strength-comparison.png",
@@ -433,9 +553,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "debt-service-distribution",
         "kind": "chart",
         "heading": "借入返済の負担を地図で比べる",
         "lead": "実質公債費比率で地図を色分けし、公債費などの負担が地域ごとにどう異なるかを示せます。財政力指数とは意味が異なるため、別の図として読み比べます。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "fiscal-capacity",
+            "title": "地方財政",
+            "sectionTitle": "財政運営の余裕と負担",
+            "href": "/themes/local-finance#theme-section-fiscal-capacity"
+          }
+        ],
         "figures": [
           {
             "file": "debt-service-distribution.png",
@@ -444,9 +574,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "revenue-scale",
         "kind": "chart",
         "heading": "歳入の規模を比べる",
         "lead": "歳入総額を並べ、比較対象の県の財政規模を確認できます。人口や行政の役割も異なるため、金額の大小だけで財政の良し悪しは判断しません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "balance",
+            "title": "地方財政",
+            "sectionTitle": "財政の規模と収支",
+            "href": "/themes/local-finance#theme-section-balance"
+          }
+        ],
         "figures": [
           {
             "file": "revenue-scale.png",
@@ -508,13 +648,23 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "purchaseNotes": [
       "収録版の値を固定した商品です。医師・病床・介護施設では調査年や分母が異なるため、各表の定義を確認してください。",
-      "県全体の資源量を示す統計です。受診のしやすさ、診療の質、施設の空き状況や待機者数を直接示すものではありません。"
+      "基本の指標セットは県全体の資源量を示します。受診のしやすさ、診療の質、施設の空き状況や待機者数を直接示すものではありません。"
     ],
     "showcase": [
       {
+        "id": "physicians-per-population",
         "kind": "chart",
         "heading": "人口当たりの医師数を比べる",
         "lead": "医療施設に従事する医師数を人口10万人当たりで並べ、人口規模の異なる県を比較できます。総数のランキングでは捉えにくい医療資源の違いを示す図です。",
+        "themeRefs": [
+          {
+            "themeKey": "healthcare",
+            "sectionKey": "supply",
+            "title": "医療・健康",
+            "sectionTitle": "医療人材と施設",
+            "href": "/themes/healthcare#theme-section-supply"
+          }
+        ],
         "figures": [
           {
             "file": "physicians-per-population.png",
@@ -523,9 +673,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "beds-per-population",
         "kind": "chart",
         "heading": "一般病院の病床を地域で見比べる",
         "lead": "人口10万人当たりの一般病院病床数を地図にし、病床の分布を俯瞰できます。医師数の図と併せて、地域の医療体制を整理する資料に使えます。",
+        "themeRefs": [
+          {
+            "themeKey": "healthcare",
+            "sectionKey": "hospital-use",
+            "title": "医療・健康",
+            "sectionTitle": "入院の供給と利用",
+            "href": "/themes/healthcare#theme-section-hospital-use"
+          }
+        ],
         "figures": [
           {
             "file": "beds-per-population.png",
@@ -534,9 +694,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "nursing-facilities-per-elderly",
         "kind": "chart",
         "heading": "高齢者人口に対する介護施設数を比べる",
         "lead": "65歳以上人口10万人当たりの介護老人福祉施設数を比較できます。人口全体を分母にした値と区別して、介護資源の違いを説明できます。",
+        "themeRefs": [
+          {
+            "themeKey": "long-term-care",
+            "sectionKey": "nursing-home-capacity",
+            "title": "介護認定とサービスの需給",
+            "sectionTitle": "高齢者施設数や定員など入所受け入れ基盤は整っているか",
+            "href": "/themes/long-term-care#theme-section-nursing-home-capacity"
+          }
+        ],
         "figures": [
           {
             "file": "nursing-facilities-per-elderly.png",
@@ -603,9 +773,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "students-per-teacher",
         "kind": "chart",
         "heading": "教員1人当たりの児童数を比べる",
         "lead": "小学校の教員1人当たり児童数を比較し、県全体の児童と教員の規模の関係を説明できます。1学級の人数とは異なる指標です。",
+        "themeRefs": [
+          {
+            "themeKey": "education-culture",
+            "sectionKey": "schools",
+            "title": "教育・文化",
+            "sectionTitle": "学校の配置と規模",
+            "href": "/themes/education-culture#theme-section-schools"
+          }
+        ],
         "figures": [
           {
             "file": "students-per-teacher.png",
@@ -614,9 +794,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "childcare-center-distribution",
         "kind": "chart",
         "heading": "子どもの人口に対する施設数を見る",
         "lead": "0〜5歳人口10万人当たりの認定こども園数を地図で示せます。施設の総数だけでは分かりにくい、子どもの人口に対する地域差を見比べられます。",
+        "themeRefs": [
+          {
+            "themeKey": "childcare-services",
+            "sectionKey": "facility-capacity-and-utilization",
+            "title": "保育の需給",
+            "sectionTitle": "保育施設や定員の確保状況は十分か",
+            "href": "/themes/childcare-services#theme-section-facility-capacity-and-utilization"
+          }
+        ],
         "figures": [
           {
             "file": "childcare-center-distribution.png",
@@ -625,9 +815,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "graduate-advancement",
         "kind": "chart",
         "heading": "高校卒業後の進学状況を比べる",
         "lead": "高等学校卒業者の進学率を並べ、卒業後の進路の地域差を説明できます。高校への進学率と混同せず、対象となる卒業者を明記して利用します。",
+        "themeRefs": [
+          {
+            "themeKey": "education-culture",
+            "sectionKey": "higher-education-and-advancement",
+            "title": "教育・文化",
+            "sectionTitle": "地元での進学機会や大学の選択肢は十分にあるか",
+            "href": "/themes/education-culture#theme-section-higher-education-and-advancement"
+          }
+        ],
         "figures": [
           {
             "file": "graduate-advancement.png",
@@ -694,9 +894,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "overall-price-comparison",
         "kind": "chart",
         "heading": "全国平均に対する物価水準を比べる",
         "lead": "全国平均を100とした指数を並べ、候補となる県の物価水準を比較できます。",
+        "themeRefs": [
+          {
+            "themeKey": "consumer-prices",
+            "sectionKey": "overall",
+            "title": "物価・消費",
+            "sectionTitle": "総合水準と家賃の影響",
+            "href": "/themes/consumer-prices#theme-section-overall"
+          }
+        ],
         "figures": [
           {
             "file": "overall-price-comparison.png",
@@ -705,9 +915,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "housing-price-distribution",
         "kind": "chart",
         "heading": "住居に関わる物価の地域差を見る",
         "lead": "住居費目の地域差指数を色分けし、総合の物価と同じ傾向か、異なる傾向かを見比べられます。",
+        "themeRefs": [
+          {
+            "themeKey": "consumer-prices",
+            "sectionKey": "expenses",
+            "title": "物価・消費",
+            "sectionTitle": "何の費目が高いか",
+            "href": "/themes/consumer-prices#theme-section-expenses"
+          }
+        ],
         "figures": [
           {
             "file": "housing-price-distribution.png",
@@ -716,9 +936,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "temperature-comparison",
         "kind": "chart",
         "heading": "各地の気温を比べる",
         "lead": "各地の観測地点の年平均気温を並べ、候補地の気候を調べる入口にできます。",
+        "themeRefs": [
+          {
+            "themeKey": "climate",
+            "sectionKey": "temperature",
+            "title": "気候",
+            "sectionTitle": "気温",
+            "href": "/themes/climate#theme-section-temperature"
+          }
+        ],
         "figures": [
           {
             "file": "temperature-comparison.png",
@@ -779,14 +1009,24 @@ export const STOREFRONT_PRODUCTS = [
       }
     ],
     "purchaseNotes": [
-      "都道府県単位の比較用データです。個別店舗の商圏や売上予測には、人口動態・通行量などの追加調査が必要です。",
+      "基本の指標セットは都道府県単位の比較用です。個別店舗の商圏や売上予測には、人口動態・通行量などの追加調査が必要です。",
       "指標ごとに対象年と調査範囲が異なります。比較には各図と収録ファイルに記載した年・単位・出典を使ってください。"
     ],
     "showcase": [
       {
+        "id": "commercial-sales",
         "kind": "chart",
         "heading": "地域の商業規模を比べる",
         "lead": "卸売業と小売業を合わせた年間商品販売額を棒グラフにできます。担当エリアの位置づけや、比較したい県との規模の違いを伝える資料に使えます。",
+        "themeRefs": [
+          {
+            "themeKey": "retail-commerce",
+            "sectionKey": "retail-market-scale",
+            "title": "商業と小売",
+            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "href": "/themes/retail-commerce#theme-section-retail-market-scale"
+          }
+        ],
         "figures": [
           {
             "file": "commercial-sales.png",
@@ -795,9 +1035,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "sales-per-establishment",
         "kind": "chart",
         "heading": "事業所当たりの販売額を見る",
         "lead": "販売額を事業所当たりで比べると、総額とは異なる地域差が見えます。事業所の数と販売額の大きさを区別して説明できます。",
+        "themeRefs": [
+          {
+            "themeKey": "retail-commerce",
+            "sectionKey": "retail-market-scale",
+            "title": "商業と小売",
+            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "href": "/themes/retail-commerce#theme-section-retail-market-scale"
+          }
+        ],
         "figures": [
           {
             "file": "sales-per-establishment.png",
@@ -806,9 +1056,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "convenience-store-density",
         "kind": "chart",
         "heading": "人口当たりの店舗数を比べる",
         "lead": "人口10万人当たりのコンビニエンスストア数を並べ、人口規模をそろえた比較を示せます。図に記載した調査時点の店舗分布を確認する資料になります。",
+        "themeRefs": [
+          {
+            "themeKey": "retail-commerce",
+            "sectionKey": "retail-store-convenience",
+            "title": "商業と小売",
+            "sectionTitle": "日常生活で買い物がしやすい店舗数は確保されているか",
+            "href": "/themes/retail-commerce#theme-section-retail-store-convenience"
+          }
+        ],
         "figures": [
           {
             "file": "convenience-store-density.png",
@@ -875,9 +1135,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "manufacturing-shipments",
         "kind": "chart",
         "heading": "出荷額で製造業の規模を比べる",
         "lead": "県別の製造品出荷額等を並べ、自県の位置や近隣県との規模の違いを示せます。",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production",
+            "title": "製造業",
+            "sectionTitle": "生産規模",
+            "href": "/themes/manufacturing#theme-section-production"
+          }
+        ],
         "figures": [
           {
             "file": "manufacturing-shipments.png",
@@ -886,9 +1156,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "manufacturing-employment",
         "kind": "chart",
         "heading": "製造業の働き手が集まる地域を見る",
         "lead": "製造業従業者数を地図にし、金額だけでは伝わらない働き手の分布を紹介できます。",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "sites-employment",
+            "title": "製造業",
+            "sectionTitle": "拠点と雇用",
+            "href": "/themes/manufacturing#theme-section-sites-employment"
+          }
+        ],
         "figures": [
           {
             "file": "manufacturing-employment.png",
@@ -954,9 +1234,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "sewerage-coverage",
         "kind": "chart",
         "heading": "下水道の整備状況を地図で見る",
         "lead": "下水道普及率で色分けし、自県と近隣県の違いや全国の分布を確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "water-services",
+            "sectionKey": "water-sewerage-coverage",
+            "title": "水道の持続性",
+            "sectionTitle": "上水道や下水道は生活圏にどれくらい普及しているか",
+            "href": "/themes/water-services#theme-section-water-sewerage-coverage"
+          }
+        ],
         "figures": [
           {
             "file": "sewerage-coverage.png",
@@ -965,9 +1255,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "disaster-losses",
         "kind": "chart",
         "heading": "災害被害を人口あたりで比べる",
         "lead": "人口1人あたりの災害被害額を並べ、人口規模を揃えて対象年の被害実績を振り返れます。",
+        "themeRefs": [
+          {
+            "themeKey": "safety",
+            "sectionKey": "natural-disaster-impact",
+            "title": "安全",
+            "sectionTitle": "自然災害による人的・物的被害や復旧費用はどれくらいか",
+            "href": "/themes/safety#theme-section-natural-disaster-impact"
+          }
+        ],
         "figures": [
           {
             "file": "disaster-losses.png",
@@ -1034,9 +1334,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "population-map",
         "kind": "chart",
         "heading": "人口の分布を一枚の地図で伝える",
         "lead": "全国の人口分布を示してから、担当する地域の説明へ進む導入スライドを作れます。",
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "population-change",
+            "title": "人口動態",
+            "sectionTitle": "人口は増えているか",
+            "href": "/themes/population-dynamics#theme-section-population-change"
+          }
+        ],
         "figures": [
           {
             "file": "population-map.png",
@@ -1045,9 +1355,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "household-ranking",
         "kind": "chart",
         "heading": "世帯数の違いをランキング図で伝える",
         "lead": "一般世帯数を並べた図で、本文や数表だけでは伝えにくい県ごとの規模の違いを示せます。",
+        "themeRefs": [
+          {
+            "themeKey": "living-housing",
+            "sectionKey": "household-structure-and-elderly",
+            "title": "暮らし・住まい",
+            "sectionTitle": "世帯の少人数化や高齢者の単身化は進んでいるか",
+            "href": "/themes/living-housing#theme-section-household-structure-and-elderly"
+          }
+        ],
         "figures": [
           {
             "file": "household-ranking.png",
@@ -1115,9 +1435,19 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "population-overview",
         "kind": "chart",
         "heading": "まず人口の規模を伝える",
         "lead": "総人口を県別に並べ、紹介する県が全国の中でどの程度の規模かを示す導入図を作れます。",
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "population-change",
+            "title": "人口動態",
+            "sectionTitle": "人口は増えているか",
+            "href": "/themes/population-dynamics#theme-section-population-change"
+          }
+        ],
         "figures": [
           {
             "file": "population-overview.png",
@@ -1126,9 +1456,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "tourism-overview",
         "kind": "chart",
         "heading": "宿泊の分布から地域を見る",
         "lead": "延べ宿泊者数を地図にし、人口の図とは異なる宿泊需要の分布を確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "tourism",
+            "sectionKey": "stays",
+            "title": "観光",
+            "sectionTitle": "宿泊需要はどれくらいか",
+            "href": "/themes/tourism#theme-section-stays"
+          }
+        ],
         "figures": [
           {
             "file": "tourism-overview.png",
@@ -1137,9 +1477,19 @@ export const STOREFRONT_PRODUCTS = [
         ]
       },
       {
+        "id": "industry-overview",
         "kind": "chart",
         "heading": "製造業の規模を加えて紹介する",
         "lead": "製造品出荷額等を並べ、人口・宿泊に続いて産業の面から地域の特徴を説明できます。",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production",
+            "title": "製造業",
+            "sectionTitle": "生産規模",
+            "href": "/themes/manufacturing#theme-section-production"
+          }
+        ],
         "figures": [
           {
             "file": "industry-overview.png",
@@ -1180,8 +1530,8 @@ export const STOREFRONT_PRODUCTS = [
     "displayTitle": "県庁所在市別 家計・消費データ",
     "description": "県庁所在市の二人以上世帯について、食品や飲料などの支出額と購入量を図にして比較できます。",
     "included": [
-      "CSV（47県庁所在市・二人以上世帯・685指標、基準年は指標ごとに固定）",
-      "Excel（685指標）",
+      "CSV（47県庁所在市・二人以上世帯・832指標、基準年は指標ごとに固定）",
+      "Excel（832指標）",
       "PowerPoint（30指標の図表）",
       "PDFデータブック・地図PNG",
       "出典一覧（SOURCES.csv）・利用条件"
@@ -1206,42 +1556,72 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "showcase": [
       {
+        "id": "beef-expenditure",
         "kind": "chart",
         "heading": "牛肉に使う金額を比べる",
         "lead": "二人以上世帯の1世帯あたり牛肉支出額を並べ、都市ごとの支出の違いを確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "household-food-spending",
+            "sectionKey": "household-food-spending-meat-dairy",
+            "title": "食卓と家計の支出",
+            "sectionTitle": "肉や乳製品をよく買う地域か",
+            "href": "/themes/household-food-spending#theme-section-household-food-spending-meat-dairy"
+          }
+        ],
         "figures": [
           {
             "file": "beef-expenditure.png",
-            "alt": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）（2024年・地域別比較）"
+            "alt": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）（2025年・地域別比較）"
           }
         ]
       },
       {
+        "id": "beef-quantity",
         "kind": "chart",
         "heading": "牛肉を買う量も確認する",
         "lead": "牛肉の購入量を並べ、支出額の図と見比べることで、金額と量のどちらに違いがあるかを確認できます。",
+        "themeRefs": [
+          {
+            "themeKey": "household-food-spending",
+            "sectionKey": "household-food-spending-meat-dairy",
+            "title": "食卓と家計の支出",
+            "sectionTitle": "肉や乳製品をよく買う地域か",
+            "href": "/themes/household-food-spending#theme-section-household-food-spending-meat-dairy"
+          }
+        ],
         "figures": [
           {
             "file": "beef-quantity.png",
-            "alt": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）（2024年・地域別比較）"
+            "alt": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）（2025年・地域別比較）"
           }
         ]
       },
       {
+        "id": "coffee-expenditure",
         "kind": "chart",
         "heading": "別の品目で消費の特徴を見る",
         "lead": "コーヒー支出額を都市別に比較できます。品目を変えて、地域の消費を複数の視点から紹介する図を作れます。",
+        "themeRefs": [
+          {
+            "themeKey": "household-food-spending",
+            "sectionKey": "household-food-spending-drinks",
+            "title": "食卓と家計の支出",
+            "sectionTitle": "どんなお茶やお酒をよく飲むか",
+            "href": "/themes/household-food-spending#theme-section-household-food-spending-drinks"
+          }
+        ],
         "figures": [
           {
             "file": "coffee-expenditure.png",
-            "alt": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）（2024年・地域別比較）"
+            "alt": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）（2025年・地域別比較）"
           }
         ]
       },
       {
         "kind": "file",
         "heading": "ファイルの中身",
-        "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。納品CSVでは県のコード・県名で記録していますが、家計調査の値は県庁所在市の二人以上世帯が対象です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全685指標の出典と基準年はSOURCES.csvで確認できます。",
+        "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。納品CSVでは県のコード・県名で記録していますが、家計調査の値は県庁所在市の二人以上世帯が対象です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全832指標の出典と基準年はSOURCES.csvで確認できます。",
         "figures": [
           {
             "file": "file-preview.png",
@@ -1250,7 +1630,7 @@ export const STOREFRONT_PRODUCTS = [
         ]
       }
     ],
-    "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2024〜2024年で指標ごとに異なり、時系列データではありません。",
+    "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2024〜2025年で指標ごとに異なり、時系列データではありません。",
     "coverImageUrl": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=480"
   },
   {

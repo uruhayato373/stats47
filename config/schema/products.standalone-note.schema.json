@@ -14,7 +14,8 @@
         "additionalProperties": false,
         "required": [
           "id",
-          "articleKey"
+          "articleKey",
+          "licenseId"
         ],
         "properties": {
           "id": {
@@ -26,6 +27,10 @@
             "type": "string",
             "minLength": 1,
             "pattern": "\\S"
+          },
+          "licenseId": {
+            "type": "string",
+            "minLength": 1
           }
         }
       }

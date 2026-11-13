@@ -25,7 +25,13 @@
       "metricKeys": [
         "total-population"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "population-dynamics",
+          "sectionKey": "population-change"
+        }
+      ]
     },
     {
       "id": "aging-distribution",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "ratio-65-plus"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "aging-society",
+          "sectionKey": "birth-aging"
+        }
+      ]
     },
     {
       "id": "household-scale",
@@ -43,12 +55,18 @@
       "metricKeys": [
         "general-households"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "living-housing",
+          "sectionKey": "household-structure-and-elderly"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
     "収録版の値を固定した商品です。人口・世帯などの指標は基準年が異なる場合があるため、比較前に各表の年次を確認してください。",
-    "都道府県単位の比較用です。市区町村別・町丁目別の商圏や世帯を直接調べるデータではありません。"
+    "基本の指標セットは都道府県単位の比較用です。町丁目別の商圏や世帯を直接調べるデータではありません。"
   ],
   "analysisRevision": {
     "version": "analysis-20261112",
@@ -235,7 +253,13 @@
         "scopeLabel": "全国の市町村・特別区",
         "within": {
           "kind": "nation"
-        }
+        },
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "population-change"
+          }
+        ]
       },
       {
         "id": "municipality-change",
@@ -260,7 +284,13 @@
         "within": {
           "kind": "prefecture",
           "prefCode": "39"
-        }
+        },
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "population-change"
+          }
+        ]
       },
       {
         "id": "population-household-trend",
@@ -278,7 +308,13 @@
           "household-projections",
           "ssds-definitions"
         ],
-        "limitation": "指数は規模の大小を示しません。世帯数だけから住宅需要の増減を断定できません。"
+        "limitation": "指数は規模の大小を示しません。世帯数だけから住宅需要の増減を断定できません。",
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "population-change"
+          }
+        ]
       },
       {
         "id": "municipal-household-size-trend",
@@ -305,16 +341,21 @@
         ],
         "limitation": "一般世帯の平均です。施設等の世帯は含まず、個別の世帯構成や必要な住宅戸数を直接示しません。",
         "chartTitle": "一般世帯の1世帯あたり人員",
-        "scopeLabel": "高知市・いの町・黒潮町"
+        "scopeLabel": "高知市・いの町・黒潮町",
+        "themeRefs": [
+          {
+            "themeKey": "living-housing",
+            "sectionKey": "household-structure-and-elderly"
+          }
+        ]
       },
       {
         "id": "single-household-trend",
         "heading": "単身世帯の変化を確認する",
-        "lead": "一般世帯数を分母に、単独世帯と65歳以上の単独世帯の割合を比較します。見本は高知県です。",
+        "lead": "一般世帯数を分母に、単独世帯の割合の変化を確認します。見本は高知県です。",
         "sourceId": "prefecture-census",
         "metricIds": [
-          "single-person-households",
-          "elderly-single-households"
+          "single-person-households"
         ],
         "denominatorId": "general-households",
         "method": "share",
@@ -324,7 +365,101 @@
           "aging-households",
           "ssds-definitions"
         ],
-        "limitation": "高齢単独世帯は単独世帯の内数です。2つの割合を合計しません。"
+        "limitation": "単独世帯は全年齢の1人世帯です。高齢者の一人暮らしの割合とは区別します。",
+        "themeRefs": [
+          {
+            "themeKey": "living-housing",
+            "sectionKey": "households"
+          }
+        ]
+      },
+      {
+        "id": "elderly-household-trend",
+        "heading": "高齢単独世帯と高齢夫婦世帯の変化を見る",
+        "lead": "一般世帯に占める高齢単独世帯と高齢夫婦のみの世帯の割合を、同じ分母で比較します。見本は高知県です。",
+        "sourceId": "prefecture-census",
+        "metricIds": [
+          "elderly-single-households",
+          "elderly-couple-households"
+        ],
+        "denominatorId": "general-households",
+        "method": "share",
+        "areaCode": "39000",
+        "template": "line",
+        "references": [
+          "aging-households",
+          "ssds-definitions"
+        ],
+        "limitation": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。",
+        "themeRefs": [
+          {
+            "themeKey": "aging-society",
+            "sectionKey": "elderly-households"
+          }
+        ],
+        "chartTitle": "一般世帯に占める高齢世帯の割合"
+      },
+      {
+        "id": "elderly-single-household-map",
+        "heading": "高齢単独世帯の割合を全国の市区町村で比べる",
+        "lead": "2020年の一般世帯に占める高齢単独世帯の割合を全国地図で確認できます。地域の世帯構成を比較する基礎資料として使えます。",
+        "sourceId": "municipality-census",
+        "metricIds": [
+          "elderly-single-households"
+        ],
+        "denominatorId": "general-households",
+        "method": "share",
+        "year": 2020,
+        "template": "choropleth",
+        "references": [
+          "aging-households",
+          "ssds-definitions",
+          "municipal-boundaries"
+        ],
+        "limitation": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。 世帯構成だけでは、見守りや介護の必要性は判断できません。",
+        "presentationMetricKey": "single-person-household-old-population-ratio",
+        "chartTitle": "一般世帯に占める高齢単独世帯の割合",
+        "scopeLabel": "全国の市町村・特別区",
+        "within": {
+          "kind": "nation"
+        },
+        "themeRefs": [
+          {
+            "themeKey": "aging-society",
+            "sectionKey": "elderly-households"
+          }
+        ]
+      },
+      {
+        "id": "elderly-couple-household-map",
+        "heading": "高齢夫婦のみの世帯の割合を全国の市区町村で比べる",
+        "lead": "2020年の一般世帯に占める高齢夫婦のみの世帯の割合を全国地図で確認できます。地域の世帯構成を比較する基礎資料として使えます。",
+        "sourceId": "municipality-census",
+        "metricIds": [
+          "elderly-couple-households"
+        ],
+        "denominatorId": "general-households",
+        "method": "share",
+        "year": 2020,
+        "template": "choropleth",
+        "references": [
+          "aging-households",
+          "ssds-definitions",
+          "municipal-boundaries"
+        ],
+        "limitation": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。 世帯構成だけでは、見守りや介護の必要性は判断できません。",
+        "presentationMetricKey": "elderly-couple-only-household-ratio",
+        "chartTitle": "一般世帯に占める高齢夫婦のみの世帯の割合",
+        "scopeLabel": "全国の市町村・特別区",
+        "within": {
+          "kind": "nation"
+        },
+        "themeRefs": [
+          {
+            "themeKey": "aging-society",
+            "sectionKey": "elderly-households"
+          }
+        ]
       },
       {
         "id": "municipal-single-household-map",
@@ -350,7 +485,13 @@
         "within": {
           "kind": "prefecture",
           "prefCode": "39"
-        }
+        },
+        "themeRefs": [
+          {
+            "themeKey": "living-housing",
+            "sectionKey": "households"
+          }
+        ]
       },
       {
         "id": "population-flow-trend",
@@ -383,7 +524,13 @@
         "references": [
           "ssds-definitions"
         ],
-        "limitation": "国外移動・外国人を含まず、社会増減全体や国勢調査人口の増減を説明する分解ではありません。"
+        "limitation": "国外移動・外国人を含まず、社会増減全体や国勢調査人口の増減を説明する分解ではありません。",
+        "themeRefs": [
+          {
+            "themeKey": "population-dynamics",
+            "sectionKey": "natural-social-change"
+          }
+        ]
       }
     ],
     "notes": [
@@ -508,6 +655,47 @@
     "limitations": [
       "人口・一般世帯・日本人の人口動態は対象と時点が異なる。国勢調査人口差を日本人の国内移動だけで分解しない。",
       "市町村合併を調整した同じ境域を使い、指定都市と行政区を重複集計しない。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "national-municipality-change",
+          "municipality-change",
+          "population-household-trend",
+          "municipal-household-size-trend",
+          "single-household-trend",
+          "elderly-household-trend",
+          "population-flow-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "required",
+        "reason": "同じ地域・年度・母集団の全体と部分を使い、構成割合を示す。",
+        "recipeRefs": [
+          "single-household-trend",
+          "elderly-household-trend",
+          "elderly-single-household-map",
+          "elderly-couple-household-map",
+          "municipal-single-household-map"
+        ]
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "national-municipality-change",
+          "municipality-change",
+          "municipal-household-size-trend",
+          "elderly-single-household-map",
+          "elderly-couple-household-map",
+          "municipal-single-household-map"
+        ]
+      }
     ]
   }
 }

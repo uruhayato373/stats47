@@ -85,8 +85,8 @@
   "analysisRevision": {
     "productId": "P-06",
     "version": "analysis-20261112",
-    "planSha256": "29acbb1f217bea01f730e9eb4d24bf1bf83563fa8b974dc64d9ebfa1590986d6",
-    "resolvedPlanSha256": "cec48bf3031574e551c536349758dd0ef0620b2d0ce8f4e4c5f8eb4d13f43278",
+    "planSha256": "c01a49be523863f4d796f42b767e6527e4b3156780d050090c78c49052a18881",
+    "resolvedPlanSha256": "eeb693c171a584a7aa2b47e936a6c8fe7ff360f4e6b0f02a3059519c1efe02af",
     "sources": [
       {
         "id": "municipal-schools",
@@ -135,7 +135,7 @@
         "inputSha256": "7dac83538db9cc0d9fef0b95d4071e132a9e32453a3f50e97923e0ef5cc1f3f9"
       }
     ],
-    "results": 46,
+    "results": 1799,
     "files": [
       {
         "file": "data.csv",
@@ -144,13 +144,13 @@
       },
       {
         "file": "analysis.csv",
-        "sha256": "21bdd23ba62792b11900189fdd7951112c55e158885a9e95a930a2f2248f24e8",
-        "bytes": 6698
+        "sha256": "4084aea284de61fa07ef20ed0bc455d47d5d4f73265c2c3e06981cc03c2e6d86",
+        "bytes": 296937
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "1125a6f8ebacd26e8a1e560696906b7166cd4eff46595423d9f4045e1c8ab5db",
-        "bytes": 192635
+        "sha256": "88713c86570a9f0452b5bd4083f8559630ae9bdd0808cd135f922732fe82e0c2",
+        "bytes": 264158
       },
       {
         "file": "SOURCES.csv",
@@ -164,28 +164,38 @@
       },
       {
         "file": "analysis-plan.json",
-        "sha256": "22fc79dea0cbacfbf8a78c6aba8f851765b84d6527312392b70e50a4322f3a5d",
-        "bytes": 6404
+        "sha256": "7ace2df650dc98a60e4f73872c6c38035ede941ec7484aed17f2c980b1454727",
+        "bytes": 9678
       },
       {
         "file": "figure-specs.json",
-        "sha256": "089a3db972077a6001a4cb84f587412544285da9423c7bc3ff5c94cedcedd584",
-        "bytes": 7497
+        "sha256": "80de0da7ba763cae64e6d05e824c381f3fa6df6329e1e97a9be0b3d481920e85",
+        "bytes": 190006
       },
       {
         "file": "README.md",
-        "sha256": "cf0efa406a5c5a3087c2e0a213faa02b99ce0de34765e9456d94b987d5799ff6",
-        "bytes": 2439
+        "sha256": "4e2fb5ccecf34cad1e467b65d0d5cc834aa67d2c11a7377b126a90a3e4cbe49d",
+        "bytes": 4053
       },
       {
         "file": "READINESS.md",
-        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
-        "bytes": 272
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/national-pupils-per-teacher.png",
+        "sha256": "eaf13706a1eccefc3ba42ed7da5db3b7fc58bcc87ddf6bfb58f484c95901c7a0",
+        "bytes": 243089
       },
       {
         "file": "images/pupils-per-teacher.png",
-        "sha256": "a76457a262b00758d864fe3f447baafe74a4f1f588d234c60eb761259d185e1c",
-        "bytes": 182005
+        "sha256": "e09add56a50341d721fcbcf7ea7b0af54904e518f9a42faf219788baa070ef3c",
+        "bytes": 186060
+      },
+      {
+        "file": "images/municipal-pupil-count.png",
+        "sha256": "5d2a467be87f9589dd1d54b15d4e6260badafdf75a4db20f2e11fd6f95ba523a",
+        "bytes": 156924
       },
       {
         "file": "images/pupils-per-school.png",
@@ -204,14 +214,163 @@
       },
       {
         "file": "preview-product.json",
-        "sha256": "a854f4aafe4b4685865ac3a2e92db6583051bffae3c910dc7d6b9e1d67599744",
-        "bytes": 3789
+        "sha256": "e324cb83bec2716ee2e0f46e784f532cfd480aa887fbd6ae4f72da37b165dbbf",
+        "bytes": 6916
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "6feda9d19876ba4082c5ab8e4e8a936abd800a5a3f34344a8a7b93a10e134ac7",
-        "bytes": 2272812
+        "sha256": "27d751a52c9ffdb7e39d8a573b9ec8696928eba7a1f07292b66b55d1ed72e9af",
+        "bytes": 2747791
       }
     ]
+  },
+  "analysisDelivery": {
+    "productId": "P-06",
+    "status": "prepared",
+    "version": "analysis-20261112",
+    "sourceManifestSha256": "74e6a8c990fc57acb5898c606e292bfe2426a62652911fda76c28e90a9cd60f6",
+    "planSha256": "c01a49be523863f4d796f42b767e6527e4b3156780d050090c78c49052a18881",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-06/analysis-20261112/27d751a52c9ffdb7e39d8a573b9ec8696928eba7a1f07292b66b55d1ed72e9af.zip",
+      "sha256": "27d751a52c9ffdb7e39d8a573b9ec8696928eba7a1f07292b66b55d1ed72e9af",
+      "bytes": 2747791
+    },
+    "attachmentName": "P-06-analysis-20261112-analysis.zip",
+    "snapshot": {
+      "description": "全国の市町村の教員1人あたり児童数を見渡し、県内の児童総数と1校あたりの規模を別々の図で比較できます。",
+      "included": [
+        "小学校の学校数・児童数・本務教員数（1,741地域・2024年度・5,223行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "教育委員会の現状説明に",
+          "description": "全国の教員1人あたり児童数の地図から県内の棒グラフへ絞り、具体的な自治体の値を説明できます。"
+        },
+        {
+          "title": "学校配置を考える基礎資料に",
+          "description": "児童総数と1校あたりの規模を分けて比較し、総数だけでは見えない学校規模の違いを整理できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "小学校の指標であり、義務教育学校など別区分の学校は含めません。",
+        "学校数・本務教員数が0または欠測の自治体は比率を算出しません。分母が小さい地域では比率が大きく動くため、元の人数・学校数も確認してください。",
+        "改訂データの対象は全国の市町村・特別区です。高知県内の地図・グラフは比較方法を示す作成例です。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-pupils-per-teacher",
+          "kind": "chart",
+          "heading": "教員1人あたりの児童数を全国で見る",
+          "lead": "2024年度の小学校児童数を本務教員数で割り、全国の市町村・特別区を地図で比較します。学校の規模とは異なる教員配置の目安を、地域の位置関係とともに確認できます。",
+          "note": "学級の人数や個々の教員の担当人数ではありません。教育の質を直接評価する指標には使えません。",
+          "themeRefs": [
+            {
+              "themeKey": "education-culture",
+              "sectionKey": "schools",
+              "title": "教育・文化",
+              "sectionTitle": "学校の配置と規模",
+              "href": "/themes/education-culture#theme-section-schools"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-national-pupils-per-teacher.png",
+              "alt": "全国の本務教員1人あたり小学校児童数（全国の市町村・特別区・2024年度）",
+              "template": "choropleth",
+              "sha256": "eaf13706a1eccefc3ba42ed7da5db3b7fc58bcc87ddf6bfb58f484c95901c7a0"
+            }
+          ]
+        },
+        {
+          "id": "pupils-per-teacher",
+          "kind": "chart",
+          "heading": "県内の教員1人あたり児童数を比べる",
+          "lead": "高知県の市といの町を例に、2024年度の本務教員1人あたり小学校児童数を棒グラフで比較します。全国地図で確認した地域差を、具体的な値で説明できます。",
+          "note": "学級の人数や個々の教員の担当人数ではありません。教育の質を直接評価する指標には使えません。",
+          "themeRefs": [
+            {
+              "themeKey": "education-culture",
+              "sectionKey": "schools",
+              "title": "教育・文化",
+              "sectionTitle": "学校の配置と規模",
+              "href": "/themes/education-culture#theme-section-schools"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-pupils-per-teacher.png",
+              "alt": "本務教員1人あたりの小学校児童数（2024年度）",
+              "template": "bar",
+              "sha256": "e09add56a50341d721fcbcf7ea7b0af54904e518f9a42faf219788baa070ef3c"
+            }
+          ]
+        },
+        {
+          "id": "municipal-pupil-count",
+          "kind": "chart",
+          "heading": "児童総数と教員あたりの値を分けて見る",
+          "lead": "同じ高知県の市といの町について、2024年度の小学校児童数そのものを並べます。教員1人あたりのグラフと見比べ、児童の総数と配置の目安を分けて説明できます。",
+          "note": "小学校児童の総数です。別区分の義務教育学校等を含めず、個々の学校の規模や教育の質を直接示しません。",
+          "themeRefs": [
+            {
+              "themeKey": "education-culture",
+              "sectionKey": "schools",
+              "title": "教育・文化",
+              "sectionTitle": "学校の配置と規模",
+              "href": "/themes/education-culture#theme-section-schools"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-pupil-count.png",
+              "alt": "2024年度の小学校児童数（2024年度）",
+              "template": "bar",
+              "sha256": "5d2a467be87f9589dd1d54b15d4e6260badafdf75a4db20f2e11fd6f95ba523a"
+            }
+          ]
+        },
+        {
+          "id": "pupils-per-school",
+          "kind": "chart",
+          "heading": "小学校の平均的な規模を地図で見る",
+          "lead": "2024年度の児童数を小学校数で割り、高知県内の市町村ごとに比較します。児童総数や教員1人あたりの値とは分けて、学校配置を検討するための平均的な学校規模を説明できます。",
+          "note": "学校間の規模差や通学距離は示しません。義務教育学校など別区分の学校を含めません。",
+          "themeRefs": [
+            {
+              "themeKey": "education-culture",
+              "sectionKey": "schools",
+              "title": "教育・文化",
+              "sectionTitle": "学校の配置と規模",
+              "href": "/themes/education-culture#theme-section-schools"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-pupils-per-school.png",
+              "alt": "小学校1校あたりの児童数（高知県内の市町村・2024年度）",
+              "template": "choropleth",
+              "sha256": "8c55dba402200e03e2d5fc307678e81a32f42014a238e186463f74baba58b112"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261112-analysis-file-preview.png",
+              "alt": "市区町村の小学校規模と教員配置を比べるデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "9ef19cfe7057df12b401c6dce4f93a41f2033255028bb2e6a9d46c6246cdc133"
+            }
+          ],
+          "id": "analysis-file-4"
+        }
+      ]
+    }
   }
 }

@@ -85,8 +85,8 @@
   "analysisRevision": {
     "productId": "P-01",
     "version": "analysis-20261112",
-    "planSha256": "2bd414c3d1cf6b87d71937305ea84b30c5449895abf49eb0c3de5f669a98f629",
-    "resolvedPlanSha256": "37ac62e8bd3c478664044d5b4e4734c8ae00ccca469d594639bc08268f83146e",
+    "planSha256": "9482f867f91a407581fd89e26858a9a40ecd022c0085b0c77322c9a6cca0c515",
+    "resolvedPlanSha256": "8c070664f6b4c5e682a6a53fd46fe388504ccf44d53e51ac15e2b8247e3412f2",
     "sources": [
       {
         "id": "prefecture-census",
@@ -202,7 +202,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "d8f37d74bd63517a3274ec07cc5e2511c72b2ab4370296d84858230a21ecdf07"
+        "inputSha256": "dd5ce605b52c94681cfc3d41c1193a065c15a56411426633237c3b162ecf4ff8"
       },
       {
         "id": "municipality-census",
@@ -315,7 +315,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "a652278d01d136d1087303ee1180541b80fec64ffddda09756c3faf32c04bca4"
+        "inputSha256": "bf5ba8723ccadb3b66202424242dca1a570591566c7e38897d2824308f50bd22"
       },
       {
         "id": "prefecture-flows",
@@ -463,10 +463,10 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "9e3fb3b5f5a561baadb237b2765a73b966e58db6ab6d4724c9ed671e1ca67714"
+        "inputSha256": "b62374057b960a1a479fdd929c89eeb7ec210c61c4a6118ca0c8476df2e0ce92"
       }
     ],
-    "results": 1862,
+    "results": 5349,
     "files": [
       {
         "file": "data.csv",
@@ -475,18 +475,18 @@
       },
       {
         "file": "analysis.csv",
-        "sha256": "b829548a8c63427ca6b78e13d522d1e22a71312e4d91332f882e445e2b0b1376",
-        "bytes": 244702
+        "sha256": "36a6a7df3a6c2832e4f027818f4c442bb8547930b2ffb5a8b1d018433fbbfc0d",
+        "bytes": 818326
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "c02793f75305a2841c03d079e7e49706631e252b9353c942c3cfb27b1bf94618",
-        "bytes": 1793058
+        "sha256": "6d1ae722200cf1fab68361cc1bc56c567de7f93725044a012e9fd765d1591e89",
+        "bytes": 1946948
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "655e7e1f5656534e8ded0a13b9b5546f5ce9761bb69793ec8f229d74c8ed13d7",
-        "bytes": 10660
+        "sha256": "d97c5f1b99ca2d734d4ed55b8f899dfac8262b4aad7c51b602c04d81ff40d413",
+        "bytes": 9604
       },
       {
         "file": "LICENSE-ja.txt",
@@ -495,89 +495,402 @@
       },
       {
         "file": "analysis-plan.json",
-        "sha256": "7adf82802de406754b1c7c9ee26f28b7aaa2699fa9cd4822faf434300144a8e2",
-        "bytes": 22835
+        "sha256": "901b50acd8cae2fcdb030115acfe88e52717aaf6dfc46eb94b9995b646b90e5f",
+        "bytes": 27275
       },
       {
         "file": "figure-specs.json",
-        "sha256": "9d4a3a853047a85f73c4372ddea243269ca34039bc21503e383e1e14f7e7ac28",
-        "bytes": 204330
+        "sha256": "43abe6063aff0ec2808db4f19e5d5dc4f118de22b56c6fa52e622f8e083ac5fb",
+        "bytes": 573635
       },
       {
         "file": "README.md",
-        "sha256": "77ec6ac6e880d48ea422db4d6540359dc6b47cf371af0418c69754846e4e9217",
-        "bytes": 6148
+        "sha256": "39099f2bd2648a8e2810c10e0d3b146070c908c71752857ef03cee9a3dc28eee",
+        "bytes": 8189
       },
       {
         "file": "READINESS.md",
-        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
-        "bytes": 272
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
       },
       {
         "file": "images/national-municipality-change.png",
-        "sha256": "386849830325b70f144940c8fd91bd121eab379a8fc8de3cd869f0fcae537f17",
-        "bytes": 224163
+        "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3",
+        "bytes": 218802
       },
       {
         "file": "images/municipality-change.png",
-        "sha256": "6ebc70e7accf3ae991a8e2d2cc440ed08ca39f25f713f164bcc5634419473680",
-        "bytes": 175246
+        "sha256": "f4d22c1eb0e1f97e15e4b4fd854584f53f459b08aa1d066130c62c353952624c",
+        "bytes": 169871
       },
       {
         "file": "images/population-household-trend.png",
-        "sha256": "1b2a075e0a7ca47d42d60c20b52e8c3da90e4f400180f95730d0db3970c5e53d",
-        "bytes": 106695
+        "sha256": "99a6810a6ec1f6e9a868066ccc072f6e004a1feac0577bbf5c1c0a54a2dc3890",
+        "bytes": 101455
       },
       {
         "file": "images/municipal-household-size-trend.png",
-        "sha256": "8eb4eed67a8b8e5c5647d724ceee6100a714ea2c1c08c670bcf1ec90c21185d8",
-        "bytes": 131071
+        "sha256": "1e9d93d4235c75fbd1ca073d12efb15ba3fa62d8e54c8bfa7e156b503edd5ca2",
+        "bytes": 125928
       },
       {
         "file": "images/single-household-trend.png",
-        "sha256": "ca0989ed43b4ac7b361f01d9e9a4bf19f5f68704cc6de4ba959c4faf0021582d",
-        "bytes": 97899
+        "sha256": "0a61b0603daa2d5e11bf6cc53d25339a336d7ef10d305f42f4d8402b540153a4",
+        "bytes": 91309
+      },
+      {
+        "file": "images/elderly-household-trend.png",
+        "sha256": "44c4a09d2c57de7aa027069d345870e5906c5e26b06be3ed66408d3c4ccc866b",
+        "bytes": 99735
+      },
+      {
+        "file": "images/elderly-single-household-map.png",
+        "sha256": "873e96c5f696fadbd9c97114aea8bce790c59379c9b8551ebcdae86d47a472a0",
+        "bytes": 219866
+      },
+      {
+        "file": "images/elderly-couple-household-map.png",
+        "sha256": "0ae0d836bc01d7a0d12c180f6a22414b3e8576c02529b4ce52d094e17908da0a",
+        "bytes": 225777
       },
       {
         "file": "images/municipal-single-household-map.png",
-        "sha256": "da802bd399c0b210b37ca24f9d2fc4c6b9228079218ae577c300f6475859f6c7",
-        "bytes": 163104
+        "sha256": "ec229bf7784cf206a8329d8b027c56e467451b836eb9055b370db88a0dc0db06",
+        "bytes": 157714
       },
       {
         "file": "images/population-flow-trend.png",
-        "sha256": "91e67935090fec9cb24815597ab1902a47667b38da1748f19ce7d573a52507d4",
-        "bytes": 108650
+        "sha256": "e7386b6f7bd2f738441de1a72cbfb7ea9e03d665891276ad26fffb35e9262fc4",
+        "bytes": 107226
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "ab58110616d5338398f74439457c2a3d26cd06f4cff39b6e19af7e9c2554ec9c",
-        "bytes": 118628
+        "sha256": "7c6da1f3d9c60b41b6a670735f4e244d954e0e119db3c338099b25f63ea6cd99",
+        "bytes": 112960
       },
       {
         "file": "inputs/prefecture-census.json",
-        "sha256": "d8f37d74bd63517a3274ec07cc5e2511c72b2ab4370296d84858230a21ecdf07",
-        "bytes": 1626334
+        "sha256": "dd5ce605b52c94681cfc3d41c1193a065c15a56411426633237c3b162ecf4ff8",
+        "bytes": 1626253
       },
       {
         "file": "inputs/municipality-census.json",
-        "sha256": "a652278d01d136d1087303ee1180541b80fec64ffddda09756c3faf32c04bca4",
-        "bytes": 35209334
+        "sha256": "bf5ba8723ccadb3b66202424242dca1a570591566c7e38897d2824308f50bd22",
+        "bytes": 35209253
       },
       {
         "file": "inputs/prefecture-flows.json",
-        "sha256": "9e3fb3b5f5a561baadb237b2765a73b966e58db6ab6d4724c9ed671e1ca67714",
-        "bytes": 2855011
+        "sha256": "b62374057b960a1a479fdd929c89eeb7ec210c61c4a6118ca0c8476df2e0ce92",
+        "bytes": 2854990
       },
       {
         "file": "preview-product.json",
-        "sha256": "eb98c599bb991c795835c3b670fbdb7f737135b8a6f472f0ab1613245da5a566",
-        "bytes": 7547
+        "sha256": "e5846fe93a2fe01c2557be4481330eabd8c03e6043e9eea7bb184d5c9183b7af",
+        "bytes": 13488
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "87496a260e1c1b1380cb6f015643a1d33694c33a26d76d83f5d68bd790a93131",
-        "bytes": 4194935
+        "sha256": "39d5044c22af86278d4d18b0a7c7af6a93fef7179600bfc41e08c39ac53d9417",
+        "bytes": 4879395
       }
     ]
+  },
+  "analysisDelivery": {
+    "productId": "P-01",
+    "status": "prepared",
+    "version": "analysis-20261112",
+    "sourceManifestSha256": "c0bdad82937505b5955605e380ddcf88d5aa7a62be89b93300ac35cb48bc1b5b",
+    "planSha256": "9482f867f91a407581fd89e26858a9a40ecd022c0085b0c77322c9a6cca0c515",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-01/analysis-20261112/39d5044c22af86278d4d18b0a7c7af6a93fef7179600bfc41e08c39ac53d9417.zip",
+      "sha256": "39d5044c22af86278d4d18b0a7c7af6a93fef7179600bfc41e08c39ac53d9417",
+      "bytes": 4879395
+    },
+    "attachmentName": "P-01-analysis-20261112-analysis.zip",
+    "snapshot": {
+      "description": "人口と世帯数の推移、1世帯あたりの人数、単身世帯の割合を組み合わせ、全国の市区町村の分布と身近な地域の変化を地図・グラフで説明できます。",
+      "included": [
+        "人口・世帯（都道府県）（47地域・2000〜2020年・1,410行）",
+        "人口・世帯（市区町村）（1,741地域・2000〜2020年・52,230行）",
+        "出生・死亡・国内移動（都道府県、日本人）（47地域・2015〜2023年・1,692行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "人口ビジョンの現状整理に",
+          "description": "人口と一般世帯数の推移を同じ基準年で比較し、地域の変化を説明できます。"
+        },
+        {
+          "title": "福祉・住宅計画の基礎資料に",
+          "description": "単独世帯と高齢単独世帯の割合を、同じ分母・同じ国勢調査年で比較できます。"
+        },
+        {
+          "title": "県内の地域差を調べるときに",
+          "description": "市町村合併を調整した人口増減率と単身世帯の割合を地図にし、県全体の平均では見えない違いを説明できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "国勢調査の人口・世帯と、日本人の暦年動態を別系列で収録しています。外国人を含む人口差の完全な分解には使えません。",
+        "市区町村は2025年3月31日の境域に揃えた原典表を使用しています。欠測・秘匿・実値0を区別してください。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-municipality-change",
+          "kind": "chart",
+          "heading": "人口が増えた地域・減った地域を全国で見る",
+          "lead": "2000〜2020年の人口増減率を全国の市区町村で塗り分けます。都道府県の平均では見えない、都市周辺とそれ以外の地域の違いを確認できます。",
+          "note": "市町村合併を調整した系列を使用し、政令指定都市は市単位、東京都の特別区は区単位で比較します。基準年が0・欠測の場合は算出せず、離島は別位置に表示します。",
+          "themeRefs": [
+            {
+              "themeKey": "population-dynamics",
+              "sectionKey": "population-change",
+              "title": "人口動態",
+              "sectionTitle": "人口は増えているか",
+              "href": "/themes/population-dynamics#theme-section-population-change"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-national-municipality-change.png",
+              "alt": "全国の市区町村別 人口増減率（全国の市町村・特別区・2000〜2020年）",
+              "template": "choropleth",
+              "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3"
+            }
+          ]
+        },
+        {
+          "id": "municipality-change",
+          "kind": "chart",
+          "heading": "県内の人口変化を詳しく見る",
+          "lead": "2000〜2020年の人口増減率を、高知県内の市町村ごとに塗り分けます。減少の大きい地域がどこにあるかを、位置関係とともに確認できます。",
+          "note": "市町村の境界は取得表に合わせて調整されています。基準年が0・欠測の自治体は増減率を算出しません。",
+          "themeRefs": [
+            {
+              "themeKey": "population-dynamics",
+              "sectionKey": "population-change",
+              "title": "人口動態",
+              "sectionTitle": "人口は増えているか",
+              "href": "/themes/population-dynamics#theme-section-population-change"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipality-change.png",
+              "alt": "高知県の市町村別 人口増減率（高知県内の市町村・2000〜2020年）",
+              "template": "choropleth",
+              "sha256": "f4d22c1eb0e1f97e15e4b4fd854584f53f459b08aa1d066130c62c353952624c"
+            }
+          ]
+        },
+        {
+          "id": "population-household-trend",
+          "kind": "chart",
+          "heading": "人口と世帯数の動きの違いを見る",
+          "lead": "2000年を100とした指数で、人数と世帯数の増減の方向を比較します。見本は高知県です。",
+          "note": "指数は規模の大小を示しません。世帯数だけから住宅需要の増減を断定できません。",
+          "themeRefs": [
+            {
+              "themeKey": "population-dynamics",
+              "sectionKey": "population-change",
+              "title": "人口動態",
+              "sectionTitle": "人口は増えているか",
+              "href": "/themes/population-dynamics#theme-section-population-change"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-population-household-trend.png",
+              "alt": "人口と世帯数の動きの違いを見る（高知県・2000〜2020年）",
+              "template": "line",
+              "sha256": "99a6810a6ec1f6e9a868066ccc072f6e004a1feac0577bbf5c1c0a54a2dc3890"
+            }
+          ]
+        },
+        {
+          "id": "municipal-household-size-trend",
+          "kind": "chart",
+          "heading": "1世帯あたりの人数がどう変わったかを見る",
+          "lead": "高知市・いの町・黒潮町を例に、一般世帯人員を一般世帯数で割った値を比較します。人口の減少と世帯の小規模化を分けて、住宅・福祉計画の基礎資料にできます。",
+          "note": "一般世帯の平均です。施設等の世帯は含まず、個別の世帯構成や必要な住宅戸数を直接示しません。",
+          "themeRefs": [
+            {
+              "themeKey": "living-housing",
+              "sectionKey": "household-structure-and-elderly",
+              "title": "暮らし・住まい",
+              "sectionTitle": "世帯の少人数化や高齢者の単身化は進んでいるか",
+              "href": "/themes/living-housing#theme-section-household-structure-and-elderly"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-household-size-trend.png",
+              "alt": "一般世帯の1世帯あたり人員（高知市・いの町・黒潮町・2000〜2020年）",
+              "template": "line",
+              "sha256": "1e9d93d4235c75fbd1ca073d12efb15ba3fa62d8e54c8bfa7e156b503edd5ca2"
+            }
+          ]
+        },
+        {
+          "id": "single-household-trend",
+          "kind": "chart",
+          "heading": "単身世帯の変化を確認する",
+          "lead": "一般世帯数を分母に、単独世帯の割合の変化を確認します。見本は高知県です。",
+          "note": "単独世帯は全年齢の1人世帯です。高齢者の一人暮らしの割合とは区別します。",
+          "themeRefs": [
+            {
+              "themeKey": "living-housing",
+              "sectionKey": "households",
+              "title": "暮らし・住まい",
+              "sectionTitle": "住む世帯はどう変わるか",
+              "href": "/themes/living-housing#theme-section-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-single-household-trend.png",
+              "alt": "単身世帯の変化を確認する（高知県・2000〜2020年）",
+              "template": "line",
+              "sha256": "0a61b0603daa2d5e11bf6cc53d25339a336d7ef10d305f42f4d8402b540153a4"
+            }
+          ]
+        },
+        {
+          "id": "elderly-household-trend",
+          "kind": "chart",
+          "heading": "高齢単独世帯と高齢夫婦世帯の変化を見る",
+          "lead": "一般世帯に占める高齢単独世帯と高齢夫婦のみの世帯の割合を、同じ分母で比較します。見本は高知県です。",
+          "note": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "elderly-households",
+              "title": "少子高齢化",
+              "sectionTitle": "高齢者はどの世帯で暮らすか",
+              "href": "/themes/aging-society#theme-section-elderly-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-elderly-household-trend.png",
+              "alt": "一般世帯に占める高齢世帯の割合（高知県・2000〜2020年）",
+              "template": "line",
+              "sha256": "44c4a09d2c57de7aa027069d345870e5906c5e26b06be3ed66408d3c4ccc866b"
+            }
+          ]
+        },
+        {
+          "id": "elderly-single-household-map",
+          "kind": "chart",
+          "heading": "高齢単独世帯の割合を全国の市区町村で比べる",
+          "lead": "2020年の一般世帯に占める高齢単独世帯の割合を全国地図で確認できます。地域の世帯構成を比較する基礎資料として使えます。",
+          "note": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。 世帯構成だけでは、見守りや介護の必要性は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "elderly-households",
+              "title": "少子高齢化",
+              "sectionTitle": "高齢者はどの世帯で暮らすか",
+              "href": "/themes/aging-society#theme-section-elderly-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-elderly-single-household-map.png",
+              "alt": "一般世帯に占める高齢単独世帯の割合（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "873e96c5f696fadbd9c97114aea8bce790c59379c9b8551ebcdae86d47a472a0"
+            }
+          ]
+        },
+        {
+          "id": "elderly-couple-household-map",
+          "kind": "chart",
+          "heading": "高齢夫婦のみの世帯の割合を全国の市区町村で比べる",
+          "lead": "2020年の一般世帯に占める高齢夫婦のみの世帯の割合を全国地図で確認できます。地域の世帯構成を比較する基礎資料として使えます。",
+          "note": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。 世帯構成だけでは、見守りや介護の必要性は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "elderly-households",
+              "title": "少子高齢化",
+              "sectionTitle": "高齢者はどの世帯で暮らすか",
+              "href": "/themes/aging-society#theme-section-elderly-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-elderly-couple-household-map.png",
+              "alt": "一般世帯に占める高齢夫婦のみの世帯の割合（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "0ae0d836bc01d7a0d12c180f6a22414b3e8576c02529b4ce52d094e17908da0a"
+            }
+          ]
+        },
+        {
+          "id": "municipal-single-household-map",
+          "kind": "chart",
+          "heading": "単身世帯の割合を地図で比べる",
+          "lead": "同じ2020年の一般世帯数を分母に、単独世帯の割合を市町村ごとに比較します。人口増減率の地図と見比べることで、人口規模と世帯構成の違いを整理できます。",
+          "note": "単独世帯は1人で暮らす一般世帯です。高齢者だけの割合ではなく、単身であることから支援の必要性は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "living-housing",
+              "sectionKey": "households",
+              "title": "暮らし・住まい",
+              "sectionTitle": "住む世帯はどう変わるか",
+              "href": "/themes/living-housing#theme-section-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-single-household-map.png",
+              "alt": "一般世帯に占める単独世帯の割合（高知県内の市町村・2020年）",
+              "template": "choropleth",
+              "sha256": "ec229bf7784cf206a8329d8b027c56e467451b836eb9055b370db88a0dc0db06"
+            }
+          ]
+        },
+        {
+          "id": "population-flow-trend",
+          "kind": "chart",
+          "heading": "自然増減と国内移動を分けて見る",
+          "lead": "日本人について、出生数と死亡数の差、国内の転入者と転出者の差を比べます。見本は高知県です。",
+          "note": "国外移動・外国人を含まず、社会増減全体や国勢調査人口の増減を説明する分解ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "population-dynamics",
+              "sectionKey": "natural-social-change",
+              "title": "人口動態",
+              "sectionTitle": "出生と死亡・転入と転出の内訳",
+              "href": "/themes/population-dynamics#theme-section-natural-social-change"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-population-flow-trend.png",
+              "alt": "自然増減と国内移動を分けて見る（高知県・2015〜2023年）",
+              "template": "line",
+              "sha256": "e7386b6f7bd2f738441de1a72cbfb7ea9e03d665891276ad26fffb35e9262fc4"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261112-analysis-file-preview.png",
+              "alt": "人口・世帯の変化を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "7c6da1f3d9c60b41b6a670735f4e244d954e0e119db3c338099b25f63ea6cd99"
+            }
+          ],
+          "id": "analysis-file-10"
+        }
+      ]
+    }
   }
 }

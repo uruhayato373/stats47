@@ -19,6 +19,8 @@ paths:
 
 ## 0. 二層 SSOT (どこが真実源か)
 
+商品とテーマの往復導線 (2026-11-13、未デプロイ) は既存 `nav_click` の `nav_surface` に `theme_product` / `product_theme` を追加する。テーマからは共通の `TrackedProductLink` が送信し、LPからテーマへは `NavClickTracker` が送信する。販売先へのクリックは既存 `product_click` に `link_position=theme_product` を持ち越す。新しいカスタムディメンションは不要。未公開の改訂案のローカル確認を販売実績や公開後の計測と混同しない。
+
 | 層 | 場所 | 役割 |
 |---|---|---|
 | **イベント定義 (コード SSOT)** | `apps/web/src/lib/analytics/events.ts` | 送信するイベント名・パラメータ名の実装。**ここだけがイベントを送る** |

@@ -21,6 +21,7 @@ import { loadPageComponents } from '@/components/stat-charts/server';
 import { RailCard, RailNavRow } from '@/components/surface';
 
 import { AdRow, composeAdRows } from '@/features/ads';
+import { loadThemeProducts, ThemeProductLinks } from '@/features/products/server';
 
 import { THEME_END, THEME_ROW_2, THEMES_CONTENT } from '@/lib/google-adsense';
 import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
@@ -145,6 +146,9 @@ export async function ThemePageLayout({
   const faqData = buildFaqStructuredData(faqItems);
   const pageData = generateThemePageStructuredData(theme, structuredArea);
   const catalog = THEME_CATALOGS[theme.themeKey];
+  const productLinks = await loadThemeProducts(theme.themeKey);
+  const sectionFooters = Object.fromEntries(Object.entries(productLinks).map(([key, entries]) =>
+    [key, <ThemeProductLinks key={key} entries={entries} />]));
   const catalogTaxonomy = catalog
     ? resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY)
     : null;
@@ -286,6 +290,7 @@ export async function ThemePageLayout({
             metricGroups={data.metricGroups}
             sections={catalog?.sections}
             embeddedSections={embeddedSections}
+            sectionFooters={sectionFooters}
             indicatorDataMap={data.indicatorDataMap}
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}

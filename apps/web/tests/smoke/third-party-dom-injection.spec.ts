@@ -1,6 +1,9 @@
-import { expect, test } from "@playwright/test";
-
 import { AD_INTENT_SKIP_CLASS, isAdIntentAllowedPath } from "../../src/lib/google-adsense/ad-intent-scope";
+
+import { expect, test } from "./fixtures";
+
+// This test observes real ad-script effects; disabling ads would hide regressions.
+test.use({ allowAds: true });
 
 /**
  * 第三者スクリプトによる本文書き換えの検知 (SOURCE-TEXT-LINK-INJECTION-01)

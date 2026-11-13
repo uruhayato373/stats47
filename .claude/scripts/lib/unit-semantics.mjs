@@ -203,6 +203,12 @@ export function parseUnit(raw) {
   };
   if (normalized === "") return empty;
 
+  // 家計調査の「1g」等は単位1個の表記。10g・100gや未知単位を倍率1とみなさない。
+  if (/^1[^\d\s.]/.test(normalized)) {
+    const single = parseUnit(normalized.slice(1));
+    if (single.dimension !== null) return { ...single, normalized };
+  }
+
   const denominator = parseDenominator(normalized);
   const hasDenominator = denominator !== null;
 

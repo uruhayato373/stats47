@@ -81,5 +81,291 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2001〜2026年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2001〜2026年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-03",
+    "version": "analysis-20261113",
+    "planSha256": "fb2f8d8703a25798f690d85411db713116b519b82299ff733edbd430f04d2e2c",
+    "resolvedPlanSha256": "da4c222d83e8bb3bfebd904dc47fe63542da5a5b1aa27e8e402564ce09982f70",
+    "sources": [
+      {
+        "id": "prefecture-overnight-stays",
+        "inputs": [
+          {
+            "metricKey": "total-overnight-guests",
+            "statsDataId": "0000010107",
+            "code": "G7101",
+            "unit": "人泊"
+          },
+          {
+            "metricKey": "total-overnight-guests-foreign",
+            "statsDataId": "0000010107",
+            "code": "G7102",
+            "unit": "人泊"
+          }
+        ],
+        "grain": "prefecture",
+        "years": [
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "retrievedAt": "2026-11-13T01:26:28.659Z",
+        "tableTitle": "Ｇ　文化・スポーツ",
+        "rows": 564,
+        "areas": 47,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2019,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2021,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2022,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2023,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2024,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "8183fb9b0245a3da47ad2aaf34ce190cae719c2d587b863bde1dc45c6353e8a8"
+      }
+    ],
+    "results": 12,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "8936e1ad59622f7e9811d042d641183db93cd2df25909ebad345360cb6bb2614",
+        "bytes": 60821
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "ed2084731288ac2f0d13294c97ba08d7f66f0d1bc2d2143764f192b24e3c1c88",
+        "bytes": 1782
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "519c870e2704e1d9d567bae66658374a637680df8b53002c299dbd623c308ccc",
+        "bytes": 26499
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "e8aec077df5e016ddd156b27d7dff8f23ab8d7cc51c42fe28d39db7d6cd3e393",
+        "bytes": 1494
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "4c711eeb351a7bb08e3b57ac4d28e33687f22d30c7f54c9c78e28b6dfc717c7a",
+        "bytes": 6065
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "6412e25f6e3badfa0e1a5d4b250bdec7dd389e4fab7aedd9059f0ace155cd966",
+        "bytes": 3930
+      },
+      {
+        "file": "README.md",
+        "sha256": "1eca95048247ed59365a2e454000cf6ba25f19aa437821ccda6774e943e62b17",
+        "bytes": 2899
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/tokyo-overnight-stays-trend.png",
+        "sha256": "9d8d7f90f519f65b7dcd4e2d0a65718818dc82708f4cd630f68a152e5de2336c",
+        "bytes": 109004
+      },
+      {
+        "file": "images/tokyo-foreign-overnight-share.png",
+        "sha256": "464d8e5fb9b66c9f02040a7316209d48015c31531b5830e8bac636940c041267",
+        "bytes": 99022
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "1bd3ca39057803dfdc1a3077425e78c0d867458185891bd469bf6e323056a133",
+        "bytes": 117596
+      },
+      {
+        "file": "inputs/prefecture-overnight-stays.json",
+        "sha256": "8183fb9b0245a3da47ad2aaf34ce190cae719c2d587b863bde1dc45c6353e8a8",
+        "bytes": 666261
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "0857e3e0a498a395e9f76814318d4e117e95a597364efb0e8a0dc4f23a8eae96",
+        "bytes": 4582
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "fd47aa27575d01872cd59cb04e1caa913a32647c889a72d66946f941033adf84",
+        "bytes": 311347
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-03",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "d25f7a209e5ac9b04d073e076886cbe8237cfd584cea5df85bc131357f9b241b",
+    "planSha256": "fb2f8d8703a25798f690d85411db713116b519b82299ff733edbd430f04d2e2c",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-03/analysis-20261113/fd47aa27575d01872cd59cb04e1caa913a32647c889a72d66946f941033adf84.zip",
+      "sha256": "fd47aa27575d01872cd59cb04e1caa913a32647c889a72d66946f941033adf84",
+      "bytes": 311347
+    },
+    "attachmentName": "P-03-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "2019〜2024年の延べ宿泊者数と外国人延べ宿泊者数の割合を別々の図で確認し、宿泊の規模と構成を整理できます。",
+      "included": [
+        "延べ宿泊者数・外国人延べ宿泊者数（47地域・2019〜2024年・564行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "観光施策の現状説明に",
+          "description": "延べ宿泊者数の推移と外国人割合を分け、東京都の例から宿泊の規模と構成の変化を説明できます。"
+        },
+        {
+          "title": "宿泊統計の読み方を学ぶ研修に",
+          "description": "人数の合計と割合を別図で比較し、対象施設の範囲を揃えて時系列を読む練習ができます。"
+        }
+      ],
+      "purchaseNotes": [
+        "都道府県47地域のデータを対象とし、東京都は作成例です。市区町村の宿泊需要へ値を割り振りません。",
+        "従業者数10人以上の施設の結果です。全施設を含む観光庁の推計値と区別してください。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "tokyo-overnight-stays-trend",
+          "kind": "chart",
+          "heading": "延べ宿泊者数の変化を見る",
+          "lead": "東京都について2019〜2024年の延べ宿泊者数を確認します。人泊の合計を折れ線で示し、宿泊需要の規模の変化を説明できます。",
+          "note": "延べ人数であり、実際に訪れた人の数ではありません。観光目的と業務目的は識別できず、従業者数10人未満の施設を含みません。",
+          "themeRefs": [
+            {
+              "themeKey": "tourism",
+              "sectionKey": "stays",
+              "title": "観光",
+              "sectionTitle": "宿泊需要はどれくらいか",
+              "href": "/themes/tourism#theme-section-stays"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-tokyo-overnight-stays-trend.png",
+              "alt": "東京都の延べ宿泊者数（東京都・2019〜2024年）",
+              "template": "line",
+              "sha256": "9d8d7f90f519f65b7dcd4e2d0a65718818dc82708f4cd630f68a152e5de2336c"
+            }
+          ]
+        },
+        {
+          "id": "tokyo-foreign-overnight-share",
+          "kind": "chart",
+          "heading": "外国人宿泊の割合を別の図で見る",
+          "lead": "東京都の外国人延べ宿泊者数を延べ宿泊者総数で割り、2019〜2024年の割合を比較します。宿泊総数の図と見比べ、規模と構成の違いを説明できます。",
+          "note": "分母・分子とも従業者数10人以上の施設の人泊です。外国人旅行者の実人数割合や、全宿泊施設の外国人割合とは異なります。",
+          "themeRefs": [
+            {
+              "themeKey": "tourism",
+              "sectionKey": "stays",
+              "title": "観光",
+              "sectionTitle": "宿泊需要はどれくらいか",
+              "href": "/themes/tourism#theme-section-stays"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-tokyo-foreign-overnight-share.png",
+              "alt": "東京都の外国人延べ宿泊者数の割合（東京都・2019〜2024年）",
+              "template": "line",
+              "sha256": "464d8e5fb9b66c9f02040a7316209d48015c31531b5830e8bac636940c041267"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "宿泊需要の規模と外国人割合を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "1bd3ca39057803dfdc1a3077425e78c0d867458185891bd469bf6e323056a133"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

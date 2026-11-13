@@ -17,6 +17,17 @@ import {
   unitScaleMultiplier,
 } from "../unit-semantics";
 
+describe("原典の単位1個の表記", () => {
+  it('既知の1gをgと同じ倍率で扱い、kgとの桁を保持する', () => {
+    expect(conversionFactor('1g', 'g')).toBe(1);
+    expect(conversionFactor('1kg', 'g')).toBe(1000);
+    expect(parseUnit('1g')).toMatchObject({ normalized: '1g', dimension: 'mass', baseUnit: 'g' });
+  });
+  it.each(['10g', '100g', '1.0g', '11g', '1unknown'])('未対応表記%sを倍率1へ補完しない', raw => {
+    expect(conversionFactor(raw, 'g')).toBeNull();
+  });
+});
+
 describe("parseUnit — 金額族", () => {
   it("スケール接頭辞を指数にする", () => {
     expect(parseUnit("円")).toMatchObject({ dimension: "currency", scaleExponent: 0 });

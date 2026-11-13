@@ -46,25 +46,33 @@ test("note 商品だけを商品 ID 順に並べ、前後の商品とサイト L
   assert.ok(index.includes("http://127.0.0.1:3000/products/data-first"));
 });
 
-test("改訂候補を現在販売中と案内せず、未公開の図はローカルから表示する", () => {
-  const files = buildPreviewFiles([product], { revision: true });
-  for (const content of files.values()) {
-    assert.ok(!content.includes('980円'));
-    assert.ok(content.includes('未公開の改訂候補'));
+test("販売版と改訂候補の内容・図を両方残し、改訂案に販売価格を付けない", () => {
+  const revision = { ...product, slug: 'data-revision', priceYen: 1980, included: ['市区町村の追加CSV'] };
+  const files = buildPreviewFiles([product], { revisions: [revision] });
+  const markdown = files.get('data-revision.md')!;
+  const html = files.get('data-revision.html')!;
+  for (const content of [markdown, html]) {
+    assert.ok(content.includes('現在販売中の内容'));
+    assert.ok(content.includes('改訂案（未公開）'));
+    assert.ok(content.includes(product.included[0]));
+    assert.ok(content.includes(revision.included[0]));
+    assert.ok(content.includes('980円'));
+    assert.ok(!content.includes('1,980円'));
+    for (const slug of [product.slug, revision.slug]) assert.ok(content.includes(`http://127.0.0.1:4777/app/products/${slug}/showcase/population.png`));
   }
-  assert.ok(!files.get('data-first.md')!.includes(product.externalUrl));
-  assert.ok(files.get('data-first.html')!.includes('現在販売中のnote（改訂案とは別内容）'));
-  assert.ok(files.get('data-first.html')!.includes(product.externalUrl));
-  assert.ok(files.get('data-first.md')!.includes('http://127.0.0.1:4777/app/products/data-first/showcase/population.png'));
-  assert.ok(files.get('data-first.html')!.includes('/products/preview/data-first'));
-  assert.ok(buildPreviewFiles([product]).get('data-first.html')!.includes('980円'));
+  assert.equal((markdown.match(/^# /gm) ?? []).length, 1);
+  assert.ok(html.includes('現在販売中のnote（改訂案とは別内容）'));
+  assert.ok(html.includes(product.externalUrl));
+  assert.ok(html.includes('/products/preview/data-revision'));
+  assert.throws(() => buildPreviewFiles([product], { revisions: [{ ...revision, id: 'unknown' }] }), /販売版/);
 });
 
 test("通常版と改訂候補を同じ一覧に載せ、価格と未公開表示を商品ごとに分ける", () => {
-  const revised = { ...product, id: 'P-02', slug: 'data-revised', priceYen: 1980 };
-  const files = buildPreviewFiles([product, revised], { revisionIds: [revised.id] });
+  const second = { ...product, id: 'P-02', slug: 'data-second', priceYen: 1980 };
+  const revised = { ...second, slug: 'data-revised' };
+  const files = buildPreviewFiles([product, second], { revisions: [revised] });
   assert.ok(files.get('data-first.md')!.includes('980円'));
-  assert.ok(!files.get('data-revised.md')!.includes('1,980円'));
+  assert.ok(files.get('data-revised.md')!.includes('1,980円'));
   assert.ok(files.get('data-revised.md')!.includes('未公開の改訂候補'));
   assert.ok(files.get('index.html')!.includes('2 商品'));
 });

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /**
  * テーマページのチャートがカード枠を守っているか（本番スモーク）

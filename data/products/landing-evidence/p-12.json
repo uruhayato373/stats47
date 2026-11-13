@@ -82,5 +82,732 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は1991〜2050年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は1991〜2050年で指標ごとに異なり、時系列データではありません。",
+  "reuseRevision": {
+    "productId": "P-12",
+    "version": "analysis-20261113",
+    "planSha256": "a57cc977fc7981ea7178c1f5e08858240de25b2b11d041cc436abc23f1054109",
+    "dependencies": [
+      {
+        "productId": "P-01",
+        "version": "analysis-20261112",
+        "manifestSha256": "c0bdad82937505b5955605e380ddcf88d5aa7a62be89b93300ac35cb48bc1b5b"
+      },
+      {
+        "productId": "P-02",
+        "version": "analysis-20261113",
+        "manifestSha256": "b96934f39129abedff48ee0bf6be9068f5bbc03bd4c04e3176977fcb798867e3"
+      },
+      {
+        "productId": "P-03",
+        "version": "analysis-20261113",
+        "manifestSha256": "d25f7a209e5ac9b04d073e076886cbe8237cfd584cea5df85bc131357f9b241b"
+      },
+      {
+        "productId": "P-04",
+        "version": "analysis-20261112",
+        "manifestSha256": "1855b9e8ecee5936e0a3ee62203b75b0841dd1b789449c2e95a761a0127eea83"
+      },
+      {
+        "productId": "P-05",
+        "version": "analysis-20261112",
+        "manifestSha256": "62d1fe45d851b195e9ce5063fc522924efb9e91c5b738aca155167f7e2e2eaca"
+      },
+      {
+        "productId": "P-06",
+        "version": "analysis-20261112",
+        "manifestSha256": "74e6a8c990fc57acb5898c606e292bfe2426a62652911fda76c28e90a9cd60f6"
+      },
+      {
+        "productId": "P-07",
+        "version": "analysis-20261113",
+        "manifestSha256": "e563ba60ffb75859ed6f69db2d08e581cb146fd984b6563e97e8d26bca717541"
+      },
+      {
+        "productId": "P-08",
+        "version": "analysis-20261112",
+        "manifestSha256": "c53adc0934228b981e8545b46fda8e7fd863f5b092f58f65b0029686344336a1"
+      },
+      {
+        "productId": "P-09",
+        "version": "analysis-20261113",
+        "manifestSha256": "1a39089f490fb5031309583f6cc4061ae63171bbcdd9179990c2b397fb4b6905"
+      },
+      {
+        "productId": "P-10",
+        "version": "analysis-20261113",
+        "manifestSha256": "2a391f9f29f754609a74f379abf6900520dd1b30fa85898e718bc6265e2c8d44"
+      },
+      {
+        "productId": "P-14",
+        "version": "analysis-20261113",
+        "manifestSha256": "2270013ce4971aae5d0ea1e0c964df0ef909b794568e635d57e163503005ae81"
+      }
+    ],
+    "files": [
+      {
+        "file": "images/p-01-national-municipality-change.png",
+        "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3",
+        "bytes": 218802
+      },
+      {
+        "file": "images/p-02-national-municipal-outcommuters.png",
+        "sha256": "2ee15e54a77a3535a73801faa4a5c4651a2212580699e540ccec08594c3d9ed9",
+        "bytes": 184167
+      },
+      {
+        "file": "images/p-03-tokyo-overnight-stays-trend.png",
+        "sha256": "9d8d7f90f519f65b7dcd4e2d0a65718818dc82708f4cd630f68a152e5de2336c",
+        "bytes": 109004
+      },
+      {
+        "file": "images/p-04-national-municipal-fiscal-strength.png",
+        "sha256": "51efcee6d167d84760a84585bfc0d782a2f7bf5ad7cf2c84a3db70034074916f",
+        "bytes": 209013
+      },
+      {
+        "file": "images/p-05-national-clinics-per-population.png",
+        "sha256": "2f870ae1b11f43915f47e4f6a03a54487f9bb99f3a87cc8dae30173bc6dd9219",
+        "bytes": 196374
+      },
+      {
+        "file": "images/p-06-national-pupils-per-teacher.png",
+        "sha256": "eaf13706a1eccefc3ba42ed7da5db3b7fc58bcc87ddf6bfb58f484c95901c7a0",
+        "bytes": 243089
+      },
+      {
+        "file": "images/p-07-municipal-vacancy-share-trend.png",
+        "sha256": "1f3ac3b6df5bf1ab338154067664e6b9d9e6fd571023671c08a69ae4be7bf895",
+        "bytes": 102187
+      },
+      {
+        "file": "images/p-08-national-municipal-sales-scale.png",
+        "sha256": "cebda4fa57d15ec78e1c55543b2ee3d42e8b0e111c859dbdd8d709ed2f66c37f",
+        "bytes": 159567
+      },
+      {
+        "file": "images/p-09-prefecture-manufacturing-scale-2023.png",
+        "sha256": "9230751f3ba0df420bda956707930e8cff8df590bca214435c869282a8147926",
+        "bytes": 167810
+      },
+      {
+        "file": "images/p-10-national-garbage-collection-population.png",
+        "sha256": "da4b6a3fdfc8add975dc0c23a7233196013e93f0afa4515732f4b50caf899b89",
+        "bytes": 173518
+      },
+      {
+        "file": "images/p-14-beef-expenditure-trend.png",
+        "sha256": "430eb225cc74941054b375bae3bfb022085507a3808ee39f14382e8f270acf83",
+        "bytes": 96457
+      },
+      {
+        "file": "packs/P-01.zip",
+        "sha256": "39d5044c22af86278d4d18b0a7c7af6a93fef7179600bfc41e08c39ac53d9417",
+        "bytes": 4879395
+      },
+      {
+        "file": "sources/P-01/SOURCES.csv",
+        "sha256": "d97c5f1b99ca2d734d4ed55b8f899dfac8262b4aad7c51b602c04d81ff40d413",
+        "bytes": 9604
+      },
+      {
+        "file": "sources/P-01/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-01/analysis-plan.json",
+        "sha256": "901b50acd8cae2fcdb030115acfe88e52717aaf6dfc46eb94b9995b646b90e5f",
+        "bytes": 27275
+      },
+      {
+        "file": "sources/P-01/README.md",
+        "sha256": "39099f2bd2648a8e2810c10e0d3b146070c908c71752857ef03cee9a3dc28eee",
+        "bytes": 8189
+      },
+      {
+        "file": "packs/P-02.zip",
+        "sha256": "06b15c949ca62f6be760f6b397597a3032a11d788539ea68dd08d46e79eea643",
+        "bytes": 837458
+      },
+      {
+        "file": "sources/P-02/SOURCES.csv",
+        "sha256": "f3e58331438c71c5de3a430cbe605a647fe9dec3ca41fffdaa482b6533849c16",
+        "bytes": 721
+      },
+      {
+        "file": "sources/P-02/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-02/analysis-plan.json",
+        "sha256": "e13bfe30bc51470c496185d13f6869f1f107346c87611f12ba718e4381af2093",
+        "bytes": 5531
+      },
+      {
+        "file": "sources/P-02/README.md",
+        "sha256": "d99ba5ff0efd7073cedebed7c069f772d9441ab2b90e368906e5fe11f0451946",
+        "bytes": 3178
+      },
+      {
+        "file": "packs/P-03.zip",
+        "sha256": "fd47aa27575d01872cd59cb04e1caa913a32647c889a72d66946f941033adf84",
+        "bytes": 311347
+      },
+      {
+        "file": "sources/P-03/SOURCES.csv",
+        "sha256": "e8aec077df5e016ddd156b27d7dff8f23ab8d7cc51c42fe28d39db7d6cd3e393",
+        "bytes": 1494
+      },
+      {
+        "file": "sources/P-03/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-03/analysis-plan.json",
+        "sha256": "4c711eeb351a7bb08e3b57ac4d28e33687f22d30c7f54c9c78e28b6dfc717c7a",
+        "bytes": 6065
+      },
+      {
+        "file": "sources/P-03/README.md",
+        "sha256": "1eca95048247ed59365a2e454000cf6ba25f19aa437821ccda6774e943e62b17",
+        "bytes": 2899
+      },
+      {
+        "file": "packs/P-04.zip",
+        "sha256": "3dde4b3b80f3b79507019f895c169eccc95cd5d3ddc3a690ea4fd53e2313c6ad",
+        "bytes": 13320844
+      },
+      {
+        "file": "sources/P-04/SOURCES.csv",
+        "sha256": "8310384a8ff665b4557e3f0f72e71444fc00a35511765ec487946e6cf569ef6e",
+        "bytes": 16286
+      },
+      {
+        "file": "sources/P-04/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-04/analysis-plan.json",
+        "sha256": "4dd19755354ad8c61127cfbb52db5c8923cbbb997f80b8fcf71d490e0f54fa81",
+        "bytes": 34679
+      },
+      {
+        "file": "sources/P-04/README.md",
+        "sha256": "8817b86b4e0a1ea618ac188ac26445fe4abcc85804d38a4e9e97c95a91732f72",
+        "bytes": 10019
+      },
+      {
+        "file": "packs/P-05.zip",
+        "sha256": "eeb5c54467d793ab3dc5743b86e3023bb9d3fb40d2be5afc7b0acf698bf3d224",
+        "bytes": 1913734
+      },
+      {
+        "file": "sources/P-05/SOURCES.csv",
+        "sha256": "724597fae9a976affe3fcece7839c3d43368242b7a3c39dc51fc0f57b5cee469",
+        "bytes": 2051
+      },
+      {
+        "file": "sources/P-05/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-05/analysis-plan.json",
+        "sha256": "d6bd87b8cf635693bfbe4696b65234f209a92f511fd28bab27d4211e8b119a55",
+        "bytes": 9848
+      },
+      {
+        "file": "sources/P-05/README.md",
+        "sha256": "a4462f4ca6b81683ace23e0e1b88ce6ee05d48439875d7220d1d9457e533ac45",
+        "bytes": 4339
+      },
+      {
+        "file": "packs/P-06.zip",
+        "sha256": "27d751a52c9ffdb7e39d8a573b9ec8696928eba7a1f07292b66b55d1ed72e9af",
+        "bytes": 2747791
+      },
+      {
+        "file": "sources/P-06/SOURCES.csv",
+        "sha256": "7828a011c93f01d20865b27fd3b2bb1eb45041897f8b05d703f02aadb251945d",
+        "bytes": 1920
+      },
+      {
+        "file": "sources/P-06/LICENSE-ja.txt",
+        "sha256": "c589640218b52c9748c3e88f8d19ec7bbde84abffe443970c1665c324b1fda1d",
+        "bytes": 1275
+      },
+      {
+        "file": "sources/P-06/analysis-plan.json",
+        "sha256": "7ace2df650dc98a60e4f73872c6c38035ede941ec7484aed17f2c980b1454727",
+        "bytes": 9678
+      },
+      {
+        "file": "sources/P-06/README.md",
+        "sha256": "4e2fb5ccecf34cad1e467b65d0d5cc834aa67d2c11a7377b126a90a3e4cbe49d",
+        "bytes": 4053
+      },
+      {
+        "file": "packs/P-07.zip",
+        "sha256": "4d616799840a6489cec5320e0d41842e53feebb81a0deffc042e92fd104e97f8",
+        "bytes": 830528
+      },
+      {
+        "file": "sources/P-07/SOURCES.csv",
+        "sha256": "824c704d01c03914bd4163db77c1fd11f2401a8f146b6256bf9e733974d41e5a",
+        "bytes": 1459
+      },
+      {
+        "file": "sources/P-07/LICENSE-ja.txt",
+        "sha256": "e629830d1370dff4298e4e5a90e14312fcd5b87647450d6ca972fefa6dc7d93a",
+        "bytes": 1233
+      },
+      {
+        "file": "sources/P-07/analysis-plan.json",
+        "sha256": "239903045eb8c4f2e39cf14bbaf4bde5ea654cda53142d44a1661d90e08c9947",
+        "bytes": 6186
+      },
+      {
+        "file": "sources/P-07/README.md",
+        "sha256": "70687e2a1d28e3c1a4159d4f250ca1b78d6432d8fb6c107005674e0bd65617d5",
+        "bytes": 3194
+      },
+      {
+        "file": "packs/P-08.zip",
+        "sha256": "5a6d1c7546168abf73d965fcad2cf6bf65dd3e6b1760a91487f38b374039e119",
+        "bytes": 1266010
+      },
+      {
+        "file": "sources/P-08/SOURCES.csv",
+        "sha256": "5e3b9094e387fdb080d106172fb710edc6a5e0b8f61f413bf0f7f9e53b3dbeec",
+        "bytes": 1393
+      },
+      {
+        "file": "sources/P-08/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-08/analysis-plan.json",
+        "sha256": "3fed7878638377ae943c13b2dfeb358f3f8cb89b4afa0ebdebbab6c65c778d49",
+        "bytes": 8216
+      },
+      {
+        "file": "sources/P-08/README.md",
+        "sha256": "af934c305ce522089ecaf0476edfae17c29e35b37b2707e6e0d43674ab383e7c",
+        "bytes": 3901
+      },
+      {
+        "file": "packs/P-09.zip",
+        "sha256": "e22c21688a6c1a961f2ef0a8f307aeea7e9261539eb898ca6be3aafa04ffaa74",
+        "bytes": 365494
+      },
+      {
+        "file": "sources/P-09/SOURCES.csv",
+        "sha256": "e5d1a71141e12c6d3ca741fbe447e02a1db8ab341251239a6d82cb9a18ec2638",
+        "bytes": 759
+      },
+      {
+        "file": "sources/P-09/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-09/analysis-plan.json",
+        "sha256": "ba6416e25c41329e274f0ddd61b96107515442b602786b8c62160059fe69e05b",
+        "bytes": 5181
+      },
+      {
+        "file": "sources/P-09/README.md",
+        "sha256": "032bdeb2f919f4936f57dd2ea9e155e7b276132c1b45b390e7ced4d4889b533f",
+        "bytes": 3035
+      },
+      {
+        "file": "packs/P-10.zip",
+        "sha256": "063a89c256b737f543a4ce5b88b90b768ce515141cd3dac8445860e96d556f3f",
+        "bytes": 1088841
+      },
+      {
+        "file": "sources/P-10/SOURCES.csv",
+        "sha256": "7f8aee75e0e615dceb7de982c0726bc1e046d1409b24e69ac2af0b336c213dab",
+        "bytes": 829
+      },
+      {
+        "file": "sources/P-10/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-10/analysis-plan.json",
+        "sha256": "d86e3a9fe90563639c71bab01e83527cba86134182b99454bb4749dab1c68fa8",
+        "bytes": 5760
+      },
+      {
+        "file": "sources/P-10/README.md",
+        "sha256": "7d0e4d751fe5cd71b8c7379571823919822fdfc6af685cb9c28a26375971dc27",
+        "bytes": 3242
+      },
+      {
+        "file": "packs/P-14.zip",
+        "sha256": "5dd7a31dc53e7690b64894f9b0300a4d3b029d5c69a0f1c0ba305a348d54ba85",
+        "bytes": 298817
+      },
+      {
+        "file": "sources/P-14/SOURCES.csv",
+        "sha256": "3a66aca4ab7c4c2bd0dade31edef2d7317ed4e6b6fe2ae27f759962e95a8a262",
+        "bytes": 1457
+      },
+      {
+        "file": "sources/P-14/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-14/analysis-plan.json",
+        "sha256": "695848e42545dded52e55f5ac044cca41d1c095eaee1eb3b1f8ba0c5b75e1800",
+        "bytes": 6049
+      },
+      {
+        "file": "sources/P-14/README.md",
+        "sha256": "4f0f1170739706950026035f9068776db66532aff351059fb8ad67d6ae03b964",
+        "bytes": 3296
+      },
+      {
+        "file": "reuse-plan.json",
+        "sha256": "d3b4bfc889170bd00aaf18d182ba1f212f3b882594be4790ba40bca672842de5",
+        "bytes": 2710
+      },
+      {
+        "file": "dependencies.json",
+        "sha256": "139199b479cb2fe463a0bab88d33566778ebedee062308540a912d3803ae3527",
+        "bytes": 1752
+      },
+      {
+        "file": "README.md",
+        "sha256": "c231474b5cc521ca357f8b1b40a7ce6a155fb07ceb42b452838f0b7858bb44af",
+        "bytes": 1246
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "578a2088b7c01d7860e8d66b8c8553c817184999bddf39f16b5adfcf1261c079",
+        "bytes": 193
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "fcc43eb30ccc978255dc662ebb43a9562d48c14cc938df0525aee3d6d1a7238c",
+        "bytes": 28004005
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "d3be1484a503dac1d64e0272485f91387df62900b1ba8500d8cf5ded4809678f",
+        "bytes": 14428
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-12",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "8b3e9c5de8f61ff1a44ff6a1fabd6deb120d0c14c67e9a65e1c3d5c28a6a0c7c",
+    "planSha256": "a57cc977fc7981ea7178c1f5e08858240de25b2b11d041cc436abc23f1054109",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-12/analysis-20261113/fcc43eb30ccc978255dc662ebb43a9562d48c14cc938df0525aee3d6d1a7238c.zip",
+      "sha256": "fcc43eb30ccc978255dc662ebb43a9562d48c14cc938df0525aee3d6d1a7238c",
+      "bytes": 28004005
+    },
+    "attachmentName": "P-12-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "人口、財政、医療、教育、商業などの分析データを、検証済みの商品別ZIPでまとめます。分野に合う地域・年・単位を保ち、必要なデータと図を選んで利用できます。",
+      "included": [
+        "分析データ 11商品分（各商品のCSV・Excel・図表・原票をZIPで同梱）",
+        "元商品の版・出典・計算方法・利用条件"
+      ],
+      "useCases": [
+        {
+          "title": "複数分野の地域資料を作る",
+          "description": "市区町村の人口・公共サービス・産業の図を、共通のサイズで資料に並べられます。"
+        },
+        {
+          "title": "必要な分野から分析を始める",
+          "description": "各商品のCSV・Excelと計算方法を使い、出典と条件をたどりながら比較できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "分析の追加ファイルは、列挙した版の分析データをまとめたものです。販売中の固定版の収録内容とは異なります。",
+        "対象地域・基準年・調査定義は分野ごとに異なります。異なる年や対象の値を無条件に結合しないでください。",
+        "元商品の利用条件を引き継ぎます。図の対象・年・単位・欠測条件と利用条件を確認してご利用ください。"
+      ],
+      "showcaseNote": "分析の追加ファイルは元商品の同じ版の図・出典・計算条件を引き継ぎます。既存の固定版とは別ファイルです。",
+      "showcase": [
+        {
+          "id": "p-01-national-municipality-change",
+          "kind": "chart",
+          "heading": "人口が増えた地域・減った地域を全国で見る",
+          "lead": "2000〜2020年の人口増減率を全国の市区町村で塗り分けます。都道府県の平均では見えない、都市周辺とそれ以外の地域の違いを確認できます。",
+          "note": "市町村合併を調整した系列を使用し、政令指定都市は市単位、東京都の特別区は区単位で比較します。基準年が0・欠測の場合は算出せず、離島は別位置に表示します。",
+          "themeRefs": [
+            {
+              "themeKey": "population-dynamics",
+              "sectionKey": "population-change",
+              "title": "人口動態",
+              "sectionTitle": "人口は増えているか",
+              "href": "/themes/population-dynamics#theme-section-population-change"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-01-national-municipality-change.png",
+              "alt": "全国の市区町村別 人口増減率（全国の市町村・特別区・2000〜2020年）",
+              "template": "choropleth",
+              "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3"
+            }
+          ]
+        },
+        {
+          "id": "p-02-national-municipal-outcommuters",
+          "kind": "chart",
+          "heading": "他市区町村へ通勤する人数を全国で見る",
+          "lead": "2020年に他市区町村へ通勤した人数を全国地図で確認します。人数の大きい地域を位置関係とともに示し、詳しく比較する地域を選べます。",
+          "note": "通勤者の実人数であり、域外通勤の割合や移動距離は示しません。総人口を労働供給とみなしたり、県別求人倍率を自治体へ割り振ったりしません。",
+          "themeRefs": [
+            {
+              "themeKey": "labor-mobility",
+              "sectionKey": "regional-commute-and-daytime-population",
+              "title": "人材流動性・雇用環境",
+              "sectionTitle": "職住近接や他市区町村への通勤など就業者の移動実態はどうなっているか",
+              "href": "/themes/labor-mobility#theme-section-regional-commute-and-daytime-population"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-02-national-municipal-outcommuters.png",
+              "alt": "全国の他市区町村への通勤者数（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "2ee15e54a77a3535a73801faa4a5c4651a2212580699e540ccec08594c3d9ed9"
+            }
+          ]
+        },
+        {
+          "id": "p-03-tokyo-overnight-stays-trend",
+          "kind": "chart",
+          "heading": "延べ宿泊者数の変化を見る",
+          "lead": "東京都について2019〜2024年の延べ宿泊者数を確認します。人泊の合計を折れ線で示し、宿泊需要の規模の変化を説明できます。",
+          "note": "延べ人数であり、実際に訪れた人の数ではありません。観光目的と業務目的は識別できず、従業者数10人未満の施設を含みません。",
+          "themeRefs": [
+            {
+              "themeKey": "tourism",
+              "sectionKey": "stays",
+              "title": "観光",
+              "sectionTitle": "宿泊需要はどれくらいか",
+              "href": "/themes/tourism#theme-section-stays"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-03-tokyo-overnight-stays-trend.png",
+              "alt": "東京都の延べ宿泊者数（東京都・2019〜2024年）",
+              "template": "line",
+              "sha256": "9d8d7f90f519f65b7dcd4e2d0a65718818dc82708f4cd630f68a152e5de2336c"
+            }
+          ]
+        },
+        {
+          "id": "p-04-national-municipal-fiscal-strength",
+          "kind": "chart",
+          "heading": "市町村の財政力を全国地図で見る",
+          "lead": "2022年度の財政力指数を全国の市町村・特別区で表示します。都道府県の平均では見えない地域差を確認し、詳しく比較する地域を選ぶための基礎資料にできます。",
+          "note": "2022年度の財政力指数は基準財政収入額を基準財政需要額で除した値の過去3年平均です。県の財政と同じ順位表に混ぜず、欠測は0に置き換えません。指数だけでは財政の健全性や住民サービスの水準は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "local-finance",
+              "sectionKey": "fiscal-capacity",
+              "title": "地方財政",
+              "sectionTitle": "財政運営の余裕と負担",
+              "href": "/themes/local-finance#theme-section-fiscal-capacity"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-04-national-municipal-fiscal-strength.png",
+              "alt": "全国の市町村別 財政力指数（全国の市町村・特別区・2022年度）",
+              "template": "choropleth",
+              "sha256": "51efcee6d167d84760a84585bfc0d782a2f7bf5ad7cf2c84a3db70034074916f"
+            }
+          ]
+        },
+        {
+          "id": "p-05-national-clinics-per-population",
+          "kind": "chart",
+          "heading": "人口あたりの診療所数を全国で見る",
+          "lead": "2020年の一般診療所数を人口10万人あたりに換算し、全国の市町村・特別区を地図で比較します。人口規模の違いを揃え、地域医療の現状を整理するための基礎資料にできます。",
+          "note": "施設の規模・診療科・自治体を越える受診は含まれず、医療アクセスの順位ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "healthcare",
+              "sectionKey": "supply",
+              "title": "医療・健康",
+              "sectionTitle": "医療人材と施設",
+              "href": "/themes/healthcare#theme-section-supply"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-05-national-clinics-per-population.png",
+              "alt": "全国の人口10万人あたり一般診療所数（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "2f870ae1b11f43915f47e4f6a03a54487f9bb99f3a87cc8dae30173bc6dd9219"
+            }
+          ]
+        },
+        {
+          "id": "p-06-national-pupils-per-teacher",
+          "kind": "chart",
+          "heading": "教員1人あたりの児童数を全国で見る",
+          "lead": "2024年度の小学校児童数を本務教員数で割り、全国の市町村・特別区を地図で比較します。学校の規模とは異なる教員配置の目安を、地域の位置関係とともに確認できます。",
+          "note": "学級の人数や個々の教員の担当人数ではありません。教育の質を直接評価する指標には使えません。",
+          "themeRefs": [
+            {
+              "themeKey": "education-culture",
+              "sectionKey": "schools",
+              "title": "教育・文化",
+              "sectionTitle": "学校の配置と規模",
+              "href": "/themes/education-culture#theme-section-schools"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-06-national-pupils-per-teacher.png",
+              "alt": "全国の本務教員1人あたり小学校児童数（全国の市町村・特別区・2024年度）",
+              "template": "choropleth",
+              "sha256": "eaf13706a1eccefc3ba42ed7da5db3b7fc58bcc87ddf6bfb58f484c95901c7a0"
+            }
+          ]
+        },
+        {
+          "id": "p-07-municipal-vacancy-share-trend",
+          "kind": "chart",
+          "heading": "空き家の割合の推移を比べる",
+          "lead": "八王子市と京都市について、2013・2018・2023年の空き家数を総住宅数で割り、割合の推移を比較します。自治体の住宅ストックの現状整理に使えます。",
+          "note": "標本調査による推計値であり標本誤差があります。空き家には種類の違いがあり、割合だけから人口減少との因果関係や個別物件の不動産需要を判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "living-housing",
+              "sectionKey": "housing-stock",
+              "title": "暮らし・住まい",
+              "sectionTitle": "住宅ストックは余っているか",
+              "href": "/themes/living-housing#theme-section-housing-stock"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-07-municipal-vacancy-share-trend.png",
+              "alt": "総住宅数に占める空き家の割合（八王子市・京都市・2013〜2023年）",
+              "template": "line",
+              "sha256": "1f3ac3b6df5bf1ab338154067664e6b9d9e6fd571023671c08a69ae4be7bf895"
+            }
+          ]
+        },
+        {
+          "id": "p-08-national-municipal-sales-scale",
+          "kind": "chart",
+          "heading": "卸売・小売の販売額を全国地図で見る",
+          "lead": "2020年の卸売業・小売業の年間商品販売額を、全国の市町村・特別区で塗り分けます。総額の大きい地域がどこにあるかを確認し、商業の現状説明で比較する地域を選べます。",
+          "note": "卸売業を含むため、地域住民の買い物額や小売店の集客力を直接示すものではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "retail-commerce",
+              "sectionKey": "retail-market-scale",
+              "title": "商業と小売",
+              "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+              "href": "/themes/retail-commerce#theme-section-retail-market-scale"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-08-national-municipal-sales-scale.png",
+              "alt": "全国の卸売業・小売業の年間商品販売額（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "cebda4fa57d15ec78e1c55543b2ee3d42e8b0e111c859dbdd8d709ed2f66c37f"
+            }
+          ]
+        },
+        {
+          "id": "p-09-prefecture-manufacturing-scale-2023",
+          "kind": "chart",
+          "heading": "2023年の製造品出荷額等の規模を比べる",
+          "lead": "2023年の製造品出荷額等を47都道府県の棒グラフで比較します。名目金額の規模の違いを、産業振興の説明資料にできます。",
+          "note": "従業者4人以上の事業所の名目金額です。付加価値・利益や生産性ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "manufacturing",
+              "sectionKey": "production",
+              "title": "製造業",
+              "sectionTitle": "生産規模",
+              "href": "/themes/manufacturing#theme-section-production"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-09-prefecture-manufacturing-scale-2023.png",
+              "alt": "2023年の製造品出荷額等（2023年）",
+              "template": "bar",
+              "sha256": "9230751f3ba0df420bda956707930e8cff8df590bca214435c869282a8147926"
+            }
+          ]
+        },
+        {
+          "id": "p-10-national-garbage-collection-population",
+          "kind": "chart",
+          "heading": "ごみ収集区域の人口を全国で見る",
+          "lead": "2023年度のごみ計画収集人口を全国の市町村・特別区の地図で確認します。収集区域の対象人数の規模を示し、廃棄物行政の現状説明に使えます。",
+          "note": "収集区域内の人口であり、ごみ排出量や収集頻度・サービスの質は示しません。国勢調査人口とは定義・時点が異なるため、人口比の普及率は算出しません。",
+          "themeRefs": [
+            {
+              "themeKey": "waste-recycling",
+              "sectionKey": "waste-disposal",
+              "title": "ごみ・リサイクル",
+              "sectionTitle": "ごみの排出・処分量はどこで多いか",
+              "href": "/themes/waste-recycling#theme-section-waste-disposal"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-10-national-garbage-collection-population.png",
+              "alt": "2023年度のごみ計画収集人口（全国の市町村・特別区・2023年度）",
+              "template": "choropleth",
+              "sha256": "da4b6a3fdfc8add975dc0c23a7233196013e93f0afa4515732f4b50caf899b89"
+            }
+          ]
+        },
+        {
+          "id": "p-14-beef-expenditure-trend",
+          "kind": "chart",
+          "heading": "牛肉に使う金額はどう変わったか",
+          "lead": "札幌市と京都市の年間支出額を同じ期間で比べます。",
+          "note": "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+          "themeRefs": [
+            {
+              "themeKey": "household-food-spending",
+              "sectionKey": "household-food-spending-meat-dairy",
+              "title": "食卓と家計の支出",
+              "sectionTitle": "肉や乳製品をよく買う地域か",
+              "href": "/themes/household-food-spending#theme-section-household-food-spending-meat-dairy"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-14-beef-expenditure-trend.png",
+              "alt": "牛肉に使う金額はどう変わったか（札幌市・京都市の二人以上世帯・2022〜2024年）",
+              "template": "line",
+              "sha256": "430eb225cc74941054b375bae3bfb022085507a3808ee39f14382e8f270acf83"
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

@@ -3,6 +3,7 @@ import path from 'node:path';
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_AREA_CODES } from '@stats47/area';
 import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
 import { datasetDir, datasetPath } from '../../../../config/datasets.mjs';
+import { listCapitalCityAreas } from './capital-city';
 import type { SourceVariant } from './catalog';
 import type { AnalysisCatalogContext, AnalysisCatalogProduct } from './validate-catalog';
 import { NOTE_PRODUCT_MAPPINGS } from '../channels/note/product-note-mapping';
@@ -28,6 +29,7 @@ export function readAnalysisCatalog(root: string): { products: AnalysisCatalogPr
     figures: new Map(figures.map(figure => [figure.id, figure])),
     areaCodes: {
       prefecture: new Set(PREFECTURE_AREA_CODES),
+      'capital-city': new Set(listCapitalCityAreas().map(area => area.code)),
       municipality: new Set(listPublishableMunicipalities(buildMunicipalityEntityPolicy()).map(area => area.code)),
     },
   } };
