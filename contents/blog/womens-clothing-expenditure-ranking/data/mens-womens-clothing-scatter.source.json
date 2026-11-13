@@ -5,18 +5,16 @@
     {
       "kind": "ranking",
       "rankingKey": "womens-clothing-consumption-expenditure",
-      "year": "2024",
-      "file": "womens-clothing-expenditure-ranking-prefecture-rankings.json"
+      "year": "2024"
     },
     {
       "kind": "ranking",
       "rankingKey": "mens-clothing-consumption-expenditure",
-      "year": "2024",
-      "file": "mens-clothing-ranking.json"
+      "year": "2024"
     }
   ],
   "transform": "areaCode で JOIN、x=男性用洋服支出額、y=婦人用洋服支出額",
-  "restore": "両 source ranking の data/*.json を areaCode で join し points を再構築",
+  "restore": "R2 app/ranking/womens-clothing-consumption-expenditure/values.json と app/ranking/mens-clothing-consumption-expenditure/values.json の2024年の値を areaCode で join し points を再構築 (data/ の womens-clothing-expenditure-ranking-prefecture-rankings.json は2025年値に更新済みのため参照しない)",
   "axes": {
     "x": {
       "metricKey": "mens-clothing-consumption-expenditure",

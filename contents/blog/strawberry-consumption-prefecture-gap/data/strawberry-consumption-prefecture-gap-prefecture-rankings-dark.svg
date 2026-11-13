@@ -1,4 +1,4 @@
-<!-- data-source: strawberry-consumption-prefecture-gap-prefecture-rankings.json | generated: 2026-11-09T11:50:14.351Z -->
+<!-- data-source: strawberry-consumption-prefecture-gap-prefecture-rankings.json | generated: 2026-11-13T12:31:55.044Z -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="いちご消費量ランキング" data-theme="dark" data-image-template="bar" data-domain-min="917" data-domain-max="3362">
     <rect width="1080" height="1350" fill="#262626"/>
     <g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif" fill="#F5F5F5">

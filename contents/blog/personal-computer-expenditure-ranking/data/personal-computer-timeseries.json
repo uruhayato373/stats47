@@ -1,0 +1,395 @@
+{
+  "chartType": "line",
+  "title": "北海道・各年の1位・中央値の推移",
+  "subtitle": "2007〜2025年",
+  "label": "パソコン消費支出額",
+  "unit": "円",
+  "source": "家計調査（e-Stat）",
+  "series": [
+    {
+      "label": "北海道",
+      "data": [
+        {
+          "year": 2007,
+          "value": 15637
+        },
+        {
+          "year": 2008,
+          "value": 5301
+        },
+        {
+          "year": 2009,
+          "value": 9115
+        },
+        {
+          "year": 2010,
+          "value": 9974
+        },
+        {
+          "year": 2011,
+          "value": 5118
+        },
+        {
+          "year": 2012,
+          "value": 13762
+        },
+        {
+          "year": 2013,
+          "value": 11188
+        },
+        {
+          "year": 2014,
+          "value": 13766
+        },
+        {
+          "year": 2015,
+          "value": 5478
+        },
+        {
+          "year": 2016,
+          "value": 5753
+        },
+        {
+          "year": 2017,
+          "value": 4086
+        },
+        {
+          "year": 2018,
+          "value": 1544
+        },
+        {
+          "year": 2019,
+          "value": 8217
+        },
+        {
+          "year": 2020,
+          "value": 15936
+        },
+        {
+          "year": 2021,
+          "value": 11598
+        },
+        {
+          "year": 2022,
+          "value": 6912
+        },
+        {
+          "year": 2023,
+          "value": 10987
+        },
+        {
+          "year": 2024,
+          "value": 24007
+        },
+        {
+          "year": 2025,
+          "value": 5642
+        }
+      ]
+    },
+    {
+      "label": "各年の1位",
+      "data": [
+        {
+          "year": 2007,
+          "value": 20511
+        },
+        {
+          "year": 2008,
+          "value": 20635
+        },
+        {
+          "year": 2009,
+          "value": 17913
+        },
+        {
+          "year": 2010,
+          "value": 19418
+        },
+        {
+          "year": 2011,
+          "value": 16462
+        },
+        {
+          "year": 2012,
+          "value": 13829
+        },
+        {
+          "year": 2013,
+          "value": 14643
+        },
+        {
+          "year": 2014,
+          "value": 23828
+        },
+        {
+          "year": 2015,
+          "value": 13900
+        },
+        {
+          "year": 2016,
+          "value": 15191
+        },
+        {
+          "year": 2017,
+          "value": 19097
+        },
+        {
+          "year": 2018,
+          "value": 16642
+        },
+        {
+          "year": 2019,
+          "value": 24658
+        },
+        {
+          "year": 2020,
+          "value": 34912
+        },
+        {
+          "year": 2021,
+          "value": 21268
+        },
+        {
+          "year": 2022,
+          "value": 24505
+        },
+        {
+          "year": 2023,
+          "value": 22828
+        },
+        {
+          "year": 2024,
+          "value": 24007
+        },
+        {
+          "year": 2025,
+          "value": 33720
+        }
+      ]
+    },
+    {
+      "label": "47都道府県の中央値",
+      "data": [
+        {
+          "year": 2007,
+          "value": 11546
+        },
+        {
+          "year": 2008,
+          "value": 8693
+        },
+        {
+          "year": 2009,
+          "value": 8602
+        },
+        {
+          "year": 2010,
+          "value": 10616
+        },
+        {
+          "year": 2011,
+          "value": 7294
+        },
+        {
+          "year": 2012,
+          "value": 7558
+        },
+        {
+          "year": 2013,
+          "value": 8705
+        },
+        {
+          "year": 2014,
+          "value": 10645
+        },
+        {
+          "year": 2015,
+          "value": 6553
+        },
+        {
+          "year": 2016,
+          "value": 6225
+        },
+        {
+          "year": 2017,
+          "value": 6728
+        },
+        {
+          "year": 2018,
+          "value": 7330
+        },
+        {
+          "year": 2019,
+          "value": 9127
+        },
+        {
+          "year": 2020,
+          "value": 10299
+        },
+        {
+          "year": 2021,
+          "value": 9164
+        },
+        {
+          "year": 2022,
+          "value": 11893
+        },
+        {
+          "year": 2023,
+          "value": 9888
+        },
+        {
+          "year": 2024,
+          "value": 9700
+        },
+        {
+          "year": 2025,
+          "value": 11837
+        }
+      ]
+    }
+  ],
+  "hokkaidoRankByYear": [
+    {
+      "year": 2007,
+      "rank": 10,
+      "firstPlace": "富山県"
+    },
+    {
+      "year": 2008,
+      "rank": 42,
+      "firstPlace": "奈良県"
+    },
+    {
+      "year": 2009,
+      "rank": 22,
+      "firstPlace": "熊本県"
+    },
+    {
+      "year": 2010,
+      "rank": 27,
+      "firstPlace": "徳島県"
+    },
+    {
+      "year": 2011,
+      "rank": 42,
+      "firstPlace": "島根県"
+    },
+    {
+      "year": 2012,
+      "rank": 2,
+      "firstPlace": "栃木県"
+    },
+    {
+      "year": 2013,
+      "rank": 10,
+      "firstPlace": "埼玉県"
+    },
+    {
+      "year": 2014,
+      "rank": 12,
+      "firstPlace": "埼玉県"
+    },
+    {
+      "year": 2015,
+      "rank": 31,
+      "firstPlace": "高知県"
+    },
+    {
+      "year": 2016,
+      "rank": 27,
+      "firstPlace": "埼玉県"
+    },
+    {
+      "year": 2017,
+      "rank": 39,
+      "firstPlace": "福岡県"
+    },
+    {
+      "year": 2018,
+      "rank": 47,
+      "firstPlace": "兵庫県"
+    },
+    {
+      "year": 2019,
+      "rank": 27,
+      "firstPlace": "奈良県"
+    },
+    {
+      "year": 2020,
+      "rank": 10,
+      "firstPlace": "埼玉県"
+    },
+    {
+      "year": 2021,
+      "rank": 18,
+      "firstPlace": "石川県"
+    },
+    {
+      "year": 2022,
+      "rank": 40,
+      "firstPlace": "群馬県"
+    },
+    {
+      "year": 2023,
+      "rank": 16,
+      "firstPlace": "東京都"
+    },
+    {
+      "year": 2024,
+      "rank": 1,
+      "firstPlace": "北海道"
+    },
+    {
+      "year": 2025,
+      "rank": 45,
+      "firstPlace": "埼玉県"
+    }
+  ],
+  "nineteenYearAverage": {
+    "note": "2007〜2025年の19年分の単純平均(円)。47都道府県を平均の高い順に並べた順位。値は本文で言及する4都道府県のみ掲載",
+    "items": [
+      {
+        "rank": 1,
+        "areaName": "埼玉県",
+        "average": 15176
+      },
+      {
+        "rank": 2,
+        "areaName": "東京都",
+        "average": 14380
+      },
+      {
+        "rank": 16,
+        "areaName": "兵庫県",
+        "average": 10433
+      },
+      {
+        "rank": 23,
+        "areaName": "北海道",
+        "average": 9685
+      }
+    ]
+  },
+  "top3In2024": {
+    "year": 2024,
+    "items": [
+      {
+        "rank": 1,
+        "areaName": "北海道",
+        "value": 24007
+      },
+      {
+        "rank": 2,
+        "areaName": "東京都",
+        "value": 20735
+      },
+      {
+        "rank": 3,
+        "areaName": "埼玉県",
+        "value": 19596
+      }
+    ]
+  }
+}
