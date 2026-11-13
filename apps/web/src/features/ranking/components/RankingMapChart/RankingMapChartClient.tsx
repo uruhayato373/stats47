@@ -228,7 +228,9 @@ export function RankingMapChartClient({
                   data={filteredData}
                   colorConfig={mapConfig}
                   unit={valueDisplay?.unit ?? formatUnitForDisplay(rankingItem.unit)}
-                  decimalPlaces={valueDisplay?.precision ?? rankingItem.valueDisplay?.decimalPlaces}
+                  // 表示単位が無ければ表 (RankingDataTable) と同じく観測値の桁で書く (RankingSvgMap が resolveValuePrecision で決める)。
+                  // 定義の decimalPlaces を使うと、同じ県の値の桁が地図と表で食い違う (UI-FOLLOWUP-02)
+                  decimalPlaces={valueDisplay?.precision}
                   conversionFactor={valueDisplay?.factor}
                   borderColor={getLeafletBorderColor(theme)}
                   selectedCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}

@@ -74,6 +74,13 @@ describe('LinkRowNav', () => {
     for (const link of screen.getAllByRole('link')) expect(link).toHaveClass('max-sm:min-h-11');
   });
 
+  // UI-FOLLOWUP-02: 幅 640px 以上のタッチ端末 (タブレット) では高さ 28px のままで、タップ領域が 44px を下回っていた。
+  // 幅ではなく指で押す端末 (pointer: coarse) かどうかでも 44px にする
+  it('幅 640px 以上でも、指で押す端末ではリンクの高さを 44px 以上にする', () => {
+    render(<LinkRowNav label="このページの内容" items={items} />);
+    for (const link of screen.getAllByRole('link')) expect(link).toHaveClass('pointer-coarse:min-h-11');
+  });
+
   // AREA-TOC-MOBILE-01: 幅 375px で 1 行の横スクロールだと県の目次 18 件のうち 3 件しか表示領域に入らない。
   // 項目の多い目次は折り返して全件を出す。スクロールしないので、続きを示すフェードも置かない
   it('wrap を渡すと折り返すリンクの並びにし、横スクロールの容器とフェードを持たない', () => {

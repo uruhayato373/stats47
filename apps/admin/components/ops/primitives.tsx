@@ -47,6 +47,13 @@ export function Unmeasured() {
 }
 
 /** 鮮度バッジ。古い数字を「現在値」と読ませないため */
+const JST_DATE = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" });
+
+/** 時刻を日本時間の YYYY-MM-DD にする (sv-SE の書式は YYYY-MM-DD) */
+function jstDate(iso: string): string {
+  return JST_DATE.format(new Date(iso));
+}
+
 export function Freshness({ iso }: { iso: string | null }) {
   if (!iso) return <StatusBadge>鮮度不明</StatusBadge>;
   const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
@@ -54,7 +61,8 @@ export function Freshness({ iso }: { iso: string | null }) {
   const tone = days <= 2 ? "good" : days <= 14 ? "neutral" : "warn";
   return (
     <StatusBadge tone={tone}>
-      {iso.slice(0, 10)}
+      {/* ISO 文字列の先頭 10 文字は UTC の日付で、日本時間の朝は前日になる。日本時間の暦日で書く (UI-FOLLOWUP-02) */}
+      {jstDate(iso)}
       {days > 2 ? ` (${days}日前)` : ""}
     </StatusBadge>
   );
