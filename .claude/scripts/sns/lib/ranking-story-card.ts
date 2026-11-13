@@ -63,8 +63,8 @@ export function renderRankingStoryCard(entries: StoryEntry[], opts: StoryOptions
     text(opts.year, 760, 31, 13, secondary, 168),
     text(opts.title, 32, 79, 34, foreground, 896),
     rect(32, 365, 896, 1, isDark ? "#48615b" : "#ccd8cf"),
-    text("stats47.jp", 32, 389, 14, foreground, 130),
-    text(`出典：${opts.source}`, 200, 389, 11, secondary, 728, 400),
+    // 発行元は投稿文で示し、画像には入れない (chart-image-copy.md)。
+    text(`出典：${opts.source}`, 32, 389, 11, secondary, 896, 400),
   ];
   const bar = (e: StoryEntry, x: number, y: number, width: number, color: string) => {
     const g = barGeometry(e.value, low.value, high.value, x, width);

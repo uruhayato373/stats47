@@ -24,7 +24,7 @@ interface IgSeriesFrameProps {
 
 /**
  * IG シリーズ共通の静止画/カルーセル用フレーム（4:5 等）。
- * シリーズの地色を全面に敷き、左上にタグ、下部にスワイプ誘導とブランド行を固定配置する。
+ * シリーズの地色を全面に敷き、左上にタグ、下部にスワイプ誘導と出典行を固定配置する。
  * リール (9:16・IG セーフゾーン付き) は `IgSeriesReelFrame` を使う。
  */
 export const IgSeriesFrame: React.FC<IgSeriesFrameProps> = ({
