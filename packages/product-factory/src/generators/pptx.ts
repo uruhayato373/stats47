@@ -119,11 +119,17 @@ function highlightColorMap(ds: Dataset, target: string): Map<string, string> {
   return m;
 }
 
+// 横棒は先頭の項目を一番下に描く。1 位から順に渡しているので、カテゴリ軸を反転して 1 位を一番上にする。
+// 反転すると値軸が上へ移るため、catAxisCrossesAt: "max" で値軸を一番下に残す。
+// pptxgenjs は実行時に両方を受け付けるが、型定義が 'minMax' / 'autoZero' だけなので型を広げて渡す。
+const TOP_RANK_FIRST_AXES = { catAxisOrientation: "maxMin", catAxisCrossesAt: "max" } as unknown as Pick<PptxGenJS.IChartOpts, "catAxisOrientation" | "catAxisCrossesAt">;
+
 function addBarChartSlide(pptx: PptxGenJS, ds: Dataset, title: string, subtitle: string, items: { code5: string; value: number }[]): void {
   const slide = pptx.addSlide();
   addTitle(slide, title, subtitle);
   slide.addChart("bar", [{ name: ds.indicator, labels: items.map((i) => nameOf(i.code5)), values: items.map((i) => i.value) }], {
     x: 0.6, y: 1.4, w: 12.1, h: 5.4, barDir: "bar", showValue: true,
+    ...TOP_RANK_FIRST_AXES,
     chartColors: [hex(SEMANTIC_COLORS.population)], catAxisLabelFontFace: JP_FONT, valAxisLabelFontFace: JP_FONT,
     dataLabelFontFace: JP_FONT, showLegend: false,
   });
