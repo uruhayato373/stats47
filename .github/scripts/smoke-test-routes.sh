@@ -204,6 +204,28 @@ for url in "${URLS[@]}" "${STRICT_URLS[@]}"; do
   echo "  ✅ ${title:0:60}"
 done
 
+# 市区町村ランキングの旧クエリ (?pref= / ?q= / ?page=) は 301 で畳む (2026-11-13 URL 原則。middleware.ts)。
+#   県別ページあり + pref → 県別パス、page / q → クエリなしの全国版。utm_* は残る。
+#   Location を実測する (200 で返ると、クローラーがクエリの組み合わせごとに描画を起こす)。
+echo ""
+echo "↪️  municipality ranking query 301 check"
+check_redirect() {
+  local from="$1" want="$2" headers code loc
+  headers="$(curl -s -o /dev/null -D - -A "$UA" --max-time 30 "${BASE_URL}${from}" 2>/dev/null | tr -d '\r')"
+  code="$(echo "$headers" | sed -n '1s/^HTTP[^ ]* \([0-9]*\).*/\1/p')"
+  loc="$(echo "$headers" | sed -n 's/^[Ll]ocation: *//p' | head -1)"
+  loc="${loc#"${BASE_URL}"}"
+  checked=$((checked + 1))
+  if [ "$code" = "301" ] && [ "$loc" = "$want" ]; then
+    echo "  ✅ [301] ${from} → ${loc}"
+  else
+    echo "  ❌ [${code:-000}] ${from} (expected 301 → ${want}, got: ${loc:-<none>})"
+    fail=$((fail + 1))
+  fi
+}
+check_redirect "/municipalities/ranking/manufacturing-shipment-amount?pref=23000&page=2&utm_source=smoke" "/municipalities/ranking/manufacturing-shipment-amount/23000?utm_source=smoke"
+check_redirect "/municipalities/ranking/manufacturing-shipment-amount?page=2" "/municipalities/ranking/manufacturing-shipment-amount"
+
 # home/featured.json の件数検査 (2026-07-27 障害の再発防止):
 #   master export (exportRankingItemsPerUrl) が R2 item.json を部分列挙して「全件」と
 #   誤認し、トップページの注目ランキングが count:0 で消えた。title/HTTPステータスは

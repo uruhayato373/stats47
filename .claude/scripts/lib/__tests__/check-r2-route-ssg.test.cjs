@@ -16,7 +16,8 @@ function checkCatalog(source) {
     vm.runInNewContext(guard, {
       __dirname: path.dirname(guardPath),
       require: (name) => name === "fs" ? {
-        existsSync: (file) => file.endsWith(catalogRoute),
+        // path.join は Windows で \ 区切りを返すので / にそろえてから比べる
+        existsSync: (file) => file.split(path.sep).join("/").endsWith(catalogRoute),
         readFileSync: () => source,
       } : require(name),
       console: { log: () => {}, error: (message) => errors.push(message) },

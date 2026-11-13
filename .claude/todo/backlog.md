@@ -131,30 +131,63 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [OPENDATA-RANKING-PILOT-01] 外部データ台帳で実ファイル確認済みの指標候補 81 件から、NDB 特定健診の 10 本前後を試しに公開する
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run validate:config -w @stats47/data-configs] [起票:2026-11-13] [領域:データ]
+### [OPENDATA-RANKING-PILOT-01] NDB 特定健診の 10 指標を R2 へ上げて公開する
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-13] [領域:データ]
 
-- **背景 (2026-11-13)**: 外部データ台帳の 5 出典の統計ファイルを落とし、47 都道府県の行を数えて指標候補 81 件を確かめた。一覧と出典ファイルのハッシュは台帳 `open-data.datasets` の `candidateMetricConcepts` と `verification` にある (管理画面 `/data/open-data`)。
-- **最初の対象**: NDB の特定健診質問票。既存の取り込みと同じ zip で、1 列を読むだけで率になる。
-- **済み (2026-11-13・手元まで)**: 質問票の 10 設問 (質問 1・8・9・10・11・12・14・16・18・20) を非公開の指標定義にし、`.claude/scripts/themes/ingest-ndb-questionnaire.mjs` で手元に 470 行の値を作った。検査値 (BMI・血圧・HbA1c) は別の zip なので未着手。
-- **残り・実行順**: ① R2 の `app/stats/<key>/` へ値を上げる (EXTERNAL-METRIC-R2-INGEST-01 の経路。オーナーの承認が要る) ② 10 本を `isActive: true` にして `npm run metrics:regen-derived` → `npm run preflight:pr` ③ `sync-snapshots.yml` (`only=ranking-items` → `ranking-values`) → 既知キーの同期 → OGP → develop→main ④ 本番を Googlebot UA で実測し、管理画面 `/data/open-data` で「公開中」になることを確かめる。
-- **停止条件**: R2 に値を上げる前に `isActive: true` にしない (値の無いランキングページが配信される)。質問項目 13・21 (選択肢が番号だけで凡例が未確認) と 19 (秘匿のセルが 4 つあり、分母が飲酒者だけかも未確認) は、NDB の解説編で定義を確かめるまで指標にしない。母数は特定健診の受診者 (40〜74 歳) で県民全体ではなく、年齢調整もしていないことを、指標の題か注記に必ず書く。一度に 10 本前後を超えて公開しない (公開の 4 週後に流入を測ってから広げる。`.claude/agents/ranking-expander.md`)。
-- **完了条件**: 選んだ指標が本番で 200 を返し、Googlebot UA で実測できる。台帳の反映状況が「公開中」になる。4 週後の流入を測る施策を `improvements.md` へ別 ID で引き渡す。
-- **次の候補 (この順)**: 金融リテラシー調査 2025 年版 (既存の `financial-literacy-correct-rate` は 2022 年版なので更新も兼ねる。2025 年版の利用条件と、県別の標本が 130〜3,381 人と小さい県があることを先に確かめる) → 学力調査の質問紙 (選択肢の文言を質問紙 PDF で確定し、残り 44 県の設問位置を確かめる) → 交通事故の属性別 (当事者 A が第 1 当事者かを定義書で確かめる。長崎の自転車 3.9% など極端な値が記録実務の差かも見る) → 医療情報ネットの診療科別 (休診フラグの定義と、医療施設調査との定義差を確かめる)。
-- **保留**: 不動産情報ライブラリの中古マンション価格 (公式のダウンロードが認証付きで、実ファイルを未確認)。
-- **台帳の訂正**: `open-data.sources` の `nier-gakuryoku-chousa` の notes にある「宿題・地域行事参加・ネット利用・通学時間」は令和 7 年度の質問紙に無い。指標化のときに直す。
+- **次**: main に入ったら `external-metric-ingest.yml` を dry run で確認 → 承認を得て値を上げる → 10 本を `isActive: true` → `sync-snapshots` → 本番を実測。手順は `metric-config-standards.md`。
+- **停止条件**: 値を上げる前に公開にしない。R2 への書き込みは都度承認。
+- **完了条件**: 10 本が本番で 200。4 週後の流入の計測を improvements へ引き渡す。
+- **関連の未着手**: 台帳で商用可否が不明な 31 件の規約確定 / 値の無い公開中の external 指標を止める検査 / R2 push の 3 文書と `open-data-curator.md`・`ranking-publisher.md:64`・`data-provenance-standards.md:117` の記述ずれ。次の候補は管理画面 `/data/open-data`。
 
-### [EXTERNAL-METRIC-R2-INGEST-01] e-Stat 以外の指標の観測値を R2 へ上げる CI の経路が無く、手順の文書も食い違っている
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
+### [MUNI-PREF-RANKING-EXPAND-01] 県×指標の市区町村ランキングを (指標, 県) の組単位で広げる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
-- **観測 (2026-11-13・読み取り調査)**: external 指標は 244 本 (公開中 233) あるが、取り込みスクリプトが手元に書いた `app/stats/<key>/values.json` を R2 へ上げる workflow が見つからなかった。`data-refresh.yml` は e-Stat 以外を「No e-Stat fetch path」で拒否し (:251・:265)、`deploy-workers.yml` の exact publish は `app/stats` を対象にしていない。外部データを CI で取り込む例は `ksj-aggregate-ingest.yml` (対象は `tourism-resource-count` だけ) の 1 本。`correlation-refresh.yml:7-9` のコメントから、既存の 244 本は workflow の外で push されたと読める。
-- **文書の食い違い**: `.claude/rules/r2-storage-design.md:31` は「2026-09-14 以降ローカルから push しない」、`.claude/skills/db/push-r2/SKILL.md` と `.claude/rules/local-environment.md:41-56` は手元からの push を可としている。R2 の認証情報は手元から撤去済みなので、実際には手元から上げられない。
-- **もう 1 つの穴**: R2 に値が無い公開中の external 指標でも `generate-ranking-items` は止まらず、`latestYear=null` の item が作られて空のページが既知キーに載りうる (`packages/ranking/src/scripts/generate-ranking-items.ts:94-97`)。
-- **済み (2026-11-13)**: `.github/workflows/external-metric-ingest.yml` (手動・既定は dry run・`r2-write`)。取り込み → `.claude/scripts/themes/verify-external-ingest.mjs` の検査 → `push-exact-r2-assets.ts --key` で報告のキーだけを上げる (R2 から何も消さない)。登録済みは `ndb-questionnaire`。手元では検査と exact publish の dry run (候補 10・アップロード 0) まで確認した。手順は `.claude/rules/metric-config-standards.md`。
-- **残り・実行順**: ① develop→main のマージ後に、workflow を `dry_run` のまま 1 回走らせて結果を確かめる (workflow は main に入るまで起動できない。CI での実行は未確認) ② オーナーの承認を得て `dry_run: false` で上げ、R2 の `app/stats/<key>/values.json` を公開 URL から読み戻す ③ 値の無い公開中の external 指標を item 生成の前に止める検査を足す ④ `r2-storage-design.md`・`push-r2/SKILL.md`・`local-environment.md` の手元からの push の記述をそろえる。
-- **停止条件**: `dry_run: false` での実行は R2 への書き込みなので、その都度オーナーへ確認する。
-- **完了条件**: workflow の dry run が CI で通り、上げる対象の key が出る。実際に上げた値を公開 URL から読み戻せる。3 文書の記述が一致する。
-- **関連**: OPENDATA-RANKING-PILOT-01 の ⑤ はこの経路が前提。
+- **背景 (2026-11-13 オーナー方針)**: 市区町村のページは SEO を踏まえてできるだけ検索に出す。今は台帳 `data/municipalities/catalog/prefecture-ranking.json` の 10 指標 × 47 県 = 470 ページだけで、「全 47 県で 10 自治体以上」を満たさない指標は指標ごと外している。CF-CPU-URL-01 で全国版の県の絞り込み (`?pref=`) をやめたので、台帳に無い指標は県内の順位を見る入口が自治体名・県の絞り込み (ブラウザ側) だけになった。
+- **費用の見立て**: 1 描画 約 1.5 秒 = $0.00003 (Workers CPU $0.02/100 万 ms)。8,037 ページ (171 × 47) が毎日 1 回描画されても月 約 $7。根拠の実測は `data/improvement/cloudflare-cost-improvement/improvement-log.md` の CF-CPU-URL-01。
+- **次**: (1) 採否を (指標, 県) の組単位に変える。値のある自治体が `MIN_MUNICIPALITIES_PER_PREFECTURE_RANKING` 以上の組だけを、R2 の values から生成スクリプトで git 定数にし、ページ・sitemap・内部リンク・`url-policy.ts` が同じ集合を読む。(2) 第 1 波は GSC で表示のある市区町村ランキングの指標を全県へ。以降は 1 波 約 2,000 ページ。(3) 県別ページの HTML の edge 保持を 7 日にする (`CF-EDGE-TTL-01`)。波ごとの検査は同じ形の繰り返しなので Workflow を使う。
+- **停止条件**: 各波の 14 日後に、日次の `workers_cpu_ms` と請求サイクルの累計ペース検査が warning のまま増えている、または GSC の県別ページで「クロール済み - インデックス未登録」が登録数を上回るなら次の波へ進まず、本文テンプレートを見直す。第 1 波は `MUNI-PREF-RANKING-OBS-01` (既存 470 ページの 4 週観測) の結果を読んでから始める。
+- **あわせて確かめる (2026-11-13 レビュー)**: 全国版は HTML に上位 50 件だけを出すので、51 位以下の市区町村ページ (`/areas/<県>/cities/<市>`) への静的なリンクが全国版から無くなった (以前は `?page=N` から辿れた)。sitemap には全件が載っているが、内部リンクの他の経路 (県のページの市区町村一覧・県別ランキング) で全市区町村に届くかは数えていない。県別ランキングを広げると各県の全自治体へのリンクが戻る。
+- **完了条件**: 成立する (指標, 県) の組がすべて県別パスで表示され、sitemap に載り、波ごとの CPU と登録数が改善ログに記録された。
+
+### [CF-EDGE-TTL-01] HTML の edge 保持を 1 日から 7 日に延ばし、パージの呼び出しを配線する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
+
+- **観測 (2026-11-13)**: `apps/web/src/lib/cache-policy.ts` の `PAGE_EDGE_CACHE_CONTROL` は `max-age=86400`。Workers Observability では同じ URL (`/ranking/vacant-housing-ratio`) が 3 日間に WAW・MIA・EWR・KIX の 4 拠点で描画され、`/ranking/*` はクエリなしの 714 URL が 24 時間に 4,845 回、平均 1.5 秒で描画されていた。
+- **次**: デプロイとデータ更新のときに `/api/internal/worker-cache/purge` (Cache-Tag) が呼ばれているかを確かめる (`.github` の grep では呼び出しが見つからなかった。見つからなかっただけで、無いとは確かめていない)。呼ばれていなければ `deploy-workers.yml` に足し、そのうえで保持を 7 日にする。
+- **停止条件**: パージの配線を確かめる前に保持だけを延ばさない (更新が 7 日出なくなる)。
+- **あわせて確かめる (2026-11-13 レビュー・未実測)**: 全国版の市区町村ランキングを `revalidate = 86400` にしたので、Workers Cache を tag で消しても OpenNext の incremental cache (R2) に前の HTML が残りうる (`/ranking/[rankingKey]` と同じ形。コードに revalidatePath / revalidateTag の呼び出しは見つからなかった)。R2 が一時的に読めないときの「配信用データを準備しています」(200) が保存される可能性もある。本番でデータ更新後の応答を読んで確かめる。
+- **同じ形の疑い (未実測)**: `apps/web/src/app/api/flow/[feature]/[code]/route.ts` は `revalidate = 86400` のまま no-store の 404 を返す。route handler が 404 も保存するなら、R2 の一時失敗が 1 日残る (市区町村の全行 JSON の route は同じ理由で force-dynamic にした)。
+- **完了条件**: 保持 7 日とパージの配線が本番に入り、`/ranking/*` の 1 URL あたりの 1 日の描画回数を前後で比べた値が改善ログに記録された。
+
+### [CF-RENDER-CPU-01] 1 描画あたりの CPU (約 1.5 秒) を、重複読みの解消で下げる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
+
+- **観測 (2026-11-13)**: `/ranking/*`・`/municipalities/ranking/*`・`/areas/*` の 1 リクエスト平均 CPU は 1.4〜1.8 秒 (Workers Observability)。コードを読んだ範囲では、`features/blog/repositories/blog-snapshot-reader.ts` の `loadSnapshot` が React `cache()` 無しで約 18 関数から呼ばれ、`features/theme-dashboard/lib/load-theme-data.ts` と `theme-seo.ts` の `readThemeLeadFact` が同じ item・values を別々に読み、ランキングの Sidebar・RankingChart・RadarChart が `readRankingItemFromR2` を直接呼んでいる。どれが CPU の何割かは測っていない。
+- **次**: 代表 3 route (ranking・themes・areas) の平均 CPU を取り、重複読みを `cache()` で消して前後を比べる。`_rsc=` 付きの画面遷移 (24 時間の CPU の 10.6%) も同じ計測に入れる。
+- **完了条件**: 3 route の平均 CPU の前後の値が改善ログに記録され、下がらなかった箇所は元に戻した。
+
+### [URL-QUERY-INVENTORY-01] `searchParams` を読むページを棚卸しし、パスへ移すか URL から外す
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
+
+- **背景**: URL の原則 (2026-11-13 オーナー決定) は「サーバーが描き分ける違いはパス。`?` はサイト内検索だけ」。契約テストが `searchParams` を読むページを許可リストで固定した。許可リストは縮小専用。
+- **対象**: 許可リスト (`apps/web/src/__tests__/search-params-contract.test.ts`) の 9 ページのうち移行判断待ちの 7 ページ — `/blog` (?page=)・`/themes/[themeSlug]` (県別ページを持たないテーマの ?pref=)・`/category/[categoryKey]/compare` (?areas=)・`/geo/compare`・`/geo/layers/[layerSlug]`・`/geo/[analysisSlug]`・`/geo/[analysisSlug]/[prefCode]/[stage]` と、検索に出している `/ranking/<指標>?norm=` (robots.ts が明示的に許可している。パスへ移すなら 301 と評価の引き継ぎを伴う)。
+- **次**: ページごとに、クエリ違いの URL が Workers Observability で何秒の CPU を使っているかと、GSC で表示があるかを読み、パスへ移す・ブラウザ側の状態にする・そのまま残すを決める。
+- **検査の穴 (2026-11-13 レビュー)**: 契約テストは `page.tsx` だけを見る。route handler が `request.nextUrl.searchParams` を読む場合と、クライアントの `useSearchParams` は対象外。棚卸しのときに `app/**/route.ts` も数える。
+- **完了条件**: 許可リストの各行に、残す理由か移行先が書かれている。
+
+### [MEMORY-INDEX-TRIM-01] auto memory の索引 MEMORY.md が上限を超え、後半が読み込まれていない
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: セッション開始時の警告で、MEMORY.md は 27.7KB (上限 24.4KB)、194 行のうち 172 行目以降の 23 行が読み込まれていなかった。
+- **次**: 1 行を約 200 字以内に縮め、詳細は各 memory ファイルへ移す。古くなった行は消す。
+- **完了条件**: 警告が出ず、全行が読み込まれる。
+
+### [CF-CPU-ROUTE-WEEKLY-01] route 別・UA 別の CPU 上位を週次で記録する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:管理]
+
+- **背景**: 日次の記録は Worker 全体の CPU 合計だけで、どの URL とどのクローラーが使ったかは Cloudflare の画面でしか分からない。2026-11-13 の調査は内部ブラウザの手作業だった。
+- **次**: Workers Observability の telemetry query を API トークンで呼べるかを公式文書で確かめる (未確認)。呼べるなら `fetch-usage.mjs` に route 先頭 2 階層別と UA 別の上位 20 を足し、`data/cloudflare/` に週次で残す。
+- **完了条件**: 週次の記録に route 別と UA 別の CPU 上位が載り、週次レビューが読む。呼べないと分かった場合は理由を書いてこのカードを閉じる。
 
 ### [STRATEGY-LEDGER-JSON-01] 戦略文書の表・値・決定を `data/` の JSON 台帳へ移し、管理画面が台帳を描く形にする (8 段)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:戦略]
@@ -372,6 +405,8 @@ updated: 2026-11-01
 - **証拠 (2026-11-11)**: テーマの `evaluate-theme-experiments` の CLI テスト 7 件が、`--import` に Windows の絶対パスを渡して `ERR_UNSUPPORTED_ESM_URL_SCHEME` で落ちる (file URL にする必要がある)。`npm run theme:quality:test` は 551 件中 8 件が失敗し、残り 1 件は preview ゲートウェイの 502 のテスト
 - **証拠 (2026-11-11)**: `.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs` が、`spawnSync` で `node_modules/.bin/tsx` を起動できず `status: null` で落ちる
 - **証拠 (2026-11-12)**: `.claude/scripts/note/__tests__/attachment-dom.test.cjs` の「無料説明文の同名言及を無視し、折り返し段落のDOM先頭を選ぶ」が、生成した式に `keys Home|index($0,h)|startsWith` が無いことの検査で落ちる (読むファイルは作業ツリーで CRLF。差分の無い作業ツリーでも落ちることを段 13 の検証で確認)
+- **証拠 (2026-11-13)**: `apps/web/src/config/__tests__/gone-blog-publication.test.ts` の 3 件 (「…はslug指定でも旧原稿path指定でも再公開を拒否する」) が、変更の無い本体ツリーでも落ちる (原因は読んでいない)
+- **証拠 (2026-11-13)**: `apps/web/src/__tests__/region-page-no-comparison.test.ts` の 3 件が、列挙したパス (`appareaspage.tsx`) を `/` 区切りの期待値と比べて落ちる (CF-CPU-URL-01 の作業中の vitest で観測。触っていないファイル)
 - **完了条件**: この PC で `npm run preflight:pr` の該当の 2 ゲートと、`apps/web/scripts`・`apps/admin` の vitest、`npm run theme:quality:test` が通る
 
 ### [SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01] 調査ポートフォリオの検証スクリプトと Schema・refs の二重の検査をなくす
@@ -4838,38 +4873,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: 機械の検査が全冊を毎週記録し、2 冊で 3 段の試行の結果 (指摘・トークン・直した箇所) が残り、残りの冊へ広げるかをオーナーが決めた。
 
 ## 🟢 低 — 再開条件を満たしたら着手する
-
-### [OPENDATA-LICENSE-VERIFY-01] 外部データ台帳で商用可否が未確定の 31 件の規約を確定し、採用候補へ上げる
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run validate:open-data-catalog --workspace packages/data-configs] [起票:2026-11-13] [領域:データ]
-
-- **背景 (2026-11-13)**: Qiita の「公共データ100選」から 52 データセット・40 提供元を `open-data.datasets` へ追加した。公式ページは全件開いて確認したが、規約ページに到達できなかった 31 件が `license.commercialUse: "unknown"` のままで、validator の規則により `research-only` 止まりになっている。商用可否が決まれば `ranking` / `theme` / `map` に上げられる。
-- **対象**: 管理画面 `/data/open-data` でライセンス「不明」かつ使い道「調査」の行。特に次が都道府県別の指標になり得る。
-  - `nies-air-monitoring` (大気汚染常時監視。既存の PM2.5 指標と同じ出典)
-  - `mlit-kunijiban-boring` (国土地盤情報)
-  - `idwr-*` (感染症週報の定点当たり報告数)
-  - `boj-*` (日銀時系列)、`mext-school-code` (学校コード)
-  - `cao-watcher-survey` (景気ウォッチャー。地域区分が都道府県かブロックかも未確認)
-- **次**: ① 各府省の「利用規約」ページを開き、政府標準利用規約 2.0 / PDL1.0 / CC BY のどれかを特定して `license` を確定する ② 確定したものは `stats47Uses` を見直し、`verification.verifiedFromUrls` に規約 URL を足す ③ `npm run validate:open-data-catalog` を通す。
-- **停止条件**: 規約ページを開けないものを推測で `allowed` にしない。`unknown` のまま残すほうが、誤った商用可の記録より安全。
-- **完了条件**: `commercialUse: "unknown"` の件数が減り、採用候補に上げたものが validator を通る。確定できなかったものは `verification.notes` に「どの規約ページに到達できなかったか」が書かれている。
-- **関連**: 公式ページを開けず台帳に入れられなかった 11 件 (記事番号 2・13・30・32・37・44・45・46・70・77・78) も、現行 URL が見つかれば同じ手順で追加できる。44 郵便番号 (日本郵便は株式会社) と 78 ODPT (協議会) は台帳の定義「政府・自治体の公式の提供元」に当たるかの判断が先。
-
-### [RANKING-PUBLISH-DOC-DRIFT-01] 公開手順の文書 2 か所が実体とずれている (INDEXABLE の再生成・出典監査のスクリプト名)
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-11-13] [領域:データ]
-
-- **観測 (2026-11-13)**: ① `.claude/agents/ranking-publisher.md:64` は INDEXABLE の再生成を公開工程に含めているが、生成スクリプトは見つからず、`indexable-ranking-keys.ts` は固定のまま更新されていない (同ファイルの冒頭コメント)。② `.claude/rules/data-provenance-standards.md:117` は出典監査を `.mjs` と書いているが、実体は `.claude/scripts/provenance/audit-provenance-queue.ts`。
-- **次**: ① は工程から外すか、生成スクリプトを作るかを決めて定義を直す。② は拡張子を直す。
-- **完了条件**: 2 か所の記述が実体と一致する。
-
-### [OPENDATA-CURATOR-DOC-01] open-data-curator の定義が「git TS カタログ」のままで、台帳の現在地とずれている
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-11-13] [領域:データ]
-
-- **観測 (2026-11-13)**: `.claude/agents/open-data-curator.md` は外部データ源のカタログを「git TS カタログ」と書いているが、正本は 2026-11-11 に `data/open-data/catalog/{sources,datasets}.json` + Schema へ移っている (`config/datasets.mjs` の RETIRED に記録あり)。この定義を読んだエージェントが旧い置き場を探す。
-- **次**: agent 定義の置き場の記述を台帳 `open-data.sources` / `open-data.datasets` に直し、読み込み口が `packages/data-configs/src/open-data-catalog/` であることと、管理画面の表示が `/data/open-data` であることを 1 行ずつ足す。
-- **完了条件**: 定義中に「git TS カタログ」の記述が残っていない。
 
 ### [RELATED-ARTICLES-BASELINE-01] 共通化した大画像の関連記事を計測し、画像サイズの次の比較を判断する
 

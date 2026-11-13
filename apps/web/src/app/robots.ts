@@ -9,6 +9,7 @@
  * - Google-Extended (Google Gemini): 全ページを明示的に許可
  * - GPTBot (ChatGPT): 全ページを禁止（AI学習用のクロール禁止）
  * - CCBot (Common Crawl): 全ページを禁止
+ * - MJ12bot / SemrushBot / DotBot / AhrefsBot / YandexBot: 検索流入の送客が無く Workers CPU 課金だけを生むため全ページを禁止
  * - サイトマップのURLを指定
  *
  * アーキテクチャ:
@@ -71,6 +72,11 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "CCBot", // Common Crawl
+        disallow: ["/"],
+      },
+      {
+        // 送客の無い SEO 解析・検索ボット (2026-11-13 実測: UA 別で Workers CPU 課金の約 12%)
+        userAgent: ["MJ12bot", "SemrushBot", "DotBot", "AhrefsBot", "YandexBot"],
         disallow: ["/"],
       },
     ],
