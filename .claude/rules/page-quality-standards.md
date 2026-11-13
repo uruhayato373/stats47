@@ -132,7 +132,7 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 2. **全URL (静的・週次)**: `internal_jargon_terms` (内部用語の辞書 `INTERNAL_JARGON_TERMS`)・`unit_symbol_mixing` (同じページの `%` と `％`)・
    `abnormal_value_strings` (`NaN`/`undefined`/`Infinity`/`[object Object]`)・`same_shop_ad_duplicates` (同じ ASP 案件の別リンク。
    同じ href は従来の `ad_duplicate_count`)・`title_changed` (前回の週次 `latest.json` の `page_title` と比較。前回に無い URL は測らない)。
-   画面に見える文字だけを見る (script・RSC payload は除く)。場所は `ui_findings` に出る。
+   画面に見える文字だけを見る (script・RSC payload と、Next.js が body の途中へ流すページの `<title>` は除く)。場所は `ui_findings` に出る。
 3. **代表URL・variants (ブラウザ・412px)**: `small_text_count` (11px 未満の見える文字。SVG チャート内は `chart_text_issues` の担当なので除く)・
    `mobile_page_height` (ページ全体の高さ)。予算はテンプレート別。
 

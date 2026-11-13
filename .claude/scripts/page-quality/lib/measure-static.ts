@@ -63,7 +63,9 @@ function visibleText($: cheerio.CheerioAPI): string {
   const body = $("body").clone();
   // code / pre は記事が説明のために示すコード (「NaN を返さず throw」等)。2026-09-27 の全 URL 実測で
   // abnormal_value の該当 7 件がすべてこれだった
-  body.find("script, style, noscript, template, svg title, code, pre").remove();
+  // title は SVG の説明と、Next.js が検索エンジン以外の UA に body の途中へ流すページの <title>。どちらも画面には出ない
+  // (ページの題は「1位北海道（46％）」のように定義の表記のままなので、数えると画面が半角でも混在になる。2026-11-14)
+  body.find("script, style, noscript, template, title, code, pre").remove();
   // 要素の境目で文字がつながると語の境界判定が崩れる (「[object Object]Nanaimo」) ので空白を挟む
   body.find("*").append(" ");
   return body.text().replace(/\s+/g, " ");

@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { formatChartValue, formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { RankBadge, type RankBadgeTone } from "@/components/atoms/RankBadge";
 import Link from "@/components/atoms/SiteLink";
 import { StatTile, StatTileGrid } from "@/components/surface";
 
 import { navSurfaceProps, type NavSurface } from "@/lib/analytics/events";
+
+import type { RankingValueDisplay } from "@stats47/ranking";
 
 
 export interface RankedValueGridItem {
@@ -17,6 +19,11 @@ export interface RankedValueGridItem {
   value?: {
     value: number;
     unit: string;
+    /**
+     * 表示単位 (`resolveRankingValueDisplay` が決めた単位・倍率・小数桁)。渡せば値をその単位で書く
+     * (「113,685,917百万円」でなく「113.7兆円」)。市区町村の値は元の単位のまま書くので渡さない。
+     */
+    display?: RankingValueDisplay | null;
     year?: string;
     /** 順位チップ。無ければチップを出さない。 */
     badge?: { rank: number; tone: RankBadgeTone };
@@ -66,8 +73,8 @@ export function RankedValueGrid({ items, navSurface, footnote }: Props) {
                   {item.label}
                 </Link>
               }
-              value={v ? formatValue(v.value) : null}
-              unit={v ? formatUnitForDisplay(v.unit) : undefined}
+              value={v ? (v.display ? formatChartValue(v.value, { factor: v.display.factor, decimals: v.display.precision }) : formatValue(v.value)) : null}
+              unit={v ? (v.display?.unit ?? formatUnitForDisplay(v.unit)) : undefined}
               badge={v?.badge && <RankBadge rank={v.badge.rank} tone={v.badge.tone} />}
               // 値だけではいつの値か分からないので年を必ず添える (2026-09-25)
               meta={

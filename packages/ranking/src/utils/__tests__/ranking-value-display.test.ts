@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { deriveFeaturedTopList } from "../../exporters/home-featured";
-import { applyRankingValueDisplay, resolveRankingValueDisplay } from "../ranking-value-display";
+import { applyRankingValueDisplay, formatFeaturedValueDisplay, resolveRankingValueDisplay } from "../ranking-value-display";
 
 const INCOME = [639_356, 528_073, 396_090];
 const BUSINESS_TAX = [1_544_976_077, 117_028_009, 14_040_236];
@@ -48,5 +48,27 @@ describe("cards that carry formatted values use the same display unit as the pag
 
   it("leaves rows alone when no display unit applies", () => {
     expect(applyRankingValueDisplay(rows, null)).toEqual(rows);
+  });
+});
+
+// 注目カードと一覧の「1 位」の列は、R2 に焼いた整形済みの値 (「656,171,677」) を持つ。2026-11-14 までは
+// 「656,171,677千円」「59,314,388百万円」とそのまま書いていた (UNIT-NOTATION-FORMAT-01)
+describe("a baked top value is written in the display unit", () => {
+  it("rescales a long amount with the chart rule (千円 → 億円, 百万円 → 兆円)", () => {
+    expect(formatFeaturedValueDisplay({ unit: "千円", valueDisplay: null }, "656,171,677")).toEqual({ value: "6,562", unit: "億円" });
+    expect(formatFeaturedValueDisplay({ unit: "百万円", valueDisplay: null }, "59,314,388")).toEqual({ value: "59.3", unit: "兆円" });
+  });
+
+  it("uses the metric's own display unit when the definition names one", () => {
+    expect(formatFeaturedValueDisplay({ unit: "円", valueDisplay: AUTHORED_MAN_YEN }, "639,356")).toEqual({ value: "63.9", unit: "万円" });
+  });
+
+  it("keeps values that already read well and only tidies the unit", () => {
+    expect(formatFeaturedValueDisplay({ unit: "％", valueDisplay: null }, "71.5")).toEqual({ value: "71.5", unit: "%" });
+    expect(formatFeaturedValueDisplay({ unit: "時間", valueDisplay: null }, "2,309")).toEqual({ value: "2,309", unit: "時間" });
+  });
+
+  it("does not guess when the text is not a number", () => {
+    expect(formatFeaturedValueDisplay({ unit: "千円", valueDisplay: null }, "—")).toEqual({ value: "—", unit: "千円" });
   });
 });

@@ -144,6 +144,8 @@ Instagram の型の画像) は、**図ごとに 1 つ**の表示単位を選び�
 | 入口 | `packages/data-configs/src/unit/metric-display-scale.ts` の `resolveMetricDisplayScale`。定義が `displayUnit` を書いていれば定義の単位・係数・小数桁、書いていなければ図の規則。**どちらか 1 つだけ**を元の値に掛ける |
 | ランキング | `@stats47/ranking` の `resolveRankingValueDisplay` が 1 回決め、上位と下位・推移・地図のホバー・表・県の詳細・ブログ本文のランキングカード (`/api/ranking-card`) が同じ単位・倍率・小数桁で書く。値は元の単位のまま持ち回り、書くときに `formatRankingValue(value, precision, factor)` で掛ける (順位・偏差値・地図の色は元の値で決まる)。0 でないのに 0 に丸まる値は「0.1未満」 |
 | 換算しない場合 | 人口あたり・面積あたりの表示 (選んだ計算方法の単位で配信される) と市区町村の表示は元の単位のまま。単位を変えない指標は今までどおり観測値の桁で書く |
+| カード・数値タイル | 値を 1 つ (と比較の値) だけ持つ面も同じ入口で決める。R2 に焼いた整形済みの 1 位の値 (注目カード・一覧の「1 位」の列・サイドバー・関連ランキング) は `formatFeaturedValueDisplay` (web は `rankingTop1Value`)、県のページの数値タイルと「特徴」の表は `resolveRankingValueDisplay` に、そのタイルに並ぶ値 (県の値と全国の値) を渡す。値が少ないので、県の小さい値まで見て単位を選ぶランキングのページと単位が 1 段ずれることがある (UNIT-NOTATION-FORMAT-01) |
+| 文章の中の単位 | 生成文・記事の本文と題・注記は R2 と原稿を書き換えず、表示時に `normalizeUnitsInText` (`unit-display.ts`) で数字の直後の「％」「ｈａ」「km2」を「%」「ha」「km²」にそろえる。生成処理 (`packages/ai-content`) は単位を `formatUnitForDisplay` で半角にしてから書く |
 | 定義の検査 | `validate:config` の `[display-denominator]`: 表示単位が「/日」「/12h」を落とさない。`check:display-units` の `checkAuthoredDisplays`: 台帳の最新年の最大・最小に照らし、7 桁以上 (`[display-digits]`)・図の規則と違う小数桁 (`[display-decimals]`)・図の規則なら丸まらない最小の県が 0 に丸まる (`[display-hides-min]`) を止める |
 | 台帳を作り直したとき | 値が動いて表示の最大が 1,000 をまたぐと `[display-decimals]` が落ちる。指標の定義の `decimalPlaces` を 1 行直す。計算型 (`fetcherKey:"calculated"`) は `decimalPlaces` が配信値の丸め桁でもあるので、直したら作り直す |
 

@@ -9,7 +9,7 @@ import { notFound, permanentRedirect } from 'next/navigation';
 
 import { PanelGrid } from '@stats47/components';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
-import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
+import { getMetricConfig, listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { canonicalSurveyHubKey, hrefFor, surveyHubSourceIds } from "@stats47/data-configs/content/href";
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
@@ -292,6 +292,7 @@ export default async function SurveyPage({ params }: PageProps) {
           title,
           latestYear,
           unit: item.unit,
+          valueDisplay: getMetricConfig(item.rankingKey)?.display,
           model,
         },
       ];
@@ -383,6 +384,7 @@ export default async function SurveyPage({ params }: PageProps) {
                   rankingKey={item.rankingKey}
                   year={item.latestYear}
                   unit={item.unit}
+                  valueDisplay={item.valueDisplay}
                   model={item.model}
                 />
               ))}

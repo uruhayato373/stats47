@@ -1,6 +1,7 @@
 import { Children, type ReactNode } from 'react';
 
 import { PanelGrid, cn } from '@stats47/components';
+import { normalizeUnitsInText } from '@stats47/data-configs/unit';
 
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 
@@ -74,10 +75,13 @@ export function ArticleTeaserCard({
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="line-clamp-2 text-base leading-snug font-semibold text-foreground group-hover:text-primary">
-          {title}
+          {/* 題と説明は原稿のまま届く。数字の直後の全角の単位を、同じページの表と同じ半角にそろえる */}
+          {normalizeUnitsInText(title)}
         </h3>
         {description ? (
-          <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
+          <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            {typeof description === 'string' ? normalizeUnitsInText(description) : description}
+          </p>
         ) : null}
         {meta ? <p className="mt-auto pt-2 text-xs text-muted-foreground">{meta}</p> : null}
       </div>

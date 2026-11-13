@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
+
 import { SurfaceSection } from "@/components/surface";
 
 import { DisclosureIcon } from "./ContentDisclosure";
@@ -24,7 +26,11 @@ interface FaqSectionProps {
   headingLevel?: 2 | 3;
 }
 
-/** 複数の質問を同じ密度・操作契約で表示するFAQ専用セクション。 */
+/**
+ * 複数の質問を同じ密度・操作契約で表示するFAQ専用セクション。
+ * 質問と回答は生成文や原稿のまま届くので、数字の直後の全角の単位 (「46％」「8,569ｈａ」) を表示時に半角へそろえる
+ * (同じページの表・カードは半角で書く。UNIT-NOTATION-FORMAT-01)。
+ */
 export function FaqSection({
   title,
   items,
@@ -50,26 +56,29 @@ export function FaqSection({
       </header>
 
       <div className="border-t border-border">
-        {items.map((item, index) => (
+        {items.map((item, index) => {
+          const answer = normalizeUnitsInText(item.answer);
+          return (
           <details
             key={`${item.question}-${index}`}
             className="border-b border-border last:border-b-0 [&[open]>summary_.disclosure-vertical]:scale-y-0"
           >
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 py-2.5 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
               <span className="text-sm font-medium leading-5 text-foreground">
-                Q. {item.question}
+                Q. {normalizeUnitsInText(item.question)}
               </span>
               <DisclosureIcon />
             </summary>
             <div className="pb-3 pr-7 text-sm leading-relaxed text-muted-foreground">
               {renderAnswer ? (
-                renderAnswer(item.answer, item)
+                renderAnswer(answer, item)
               ) : (
-                <p>A. {item.answer}</p>
+                <p>A. {answer}</p>
               )}
             </div>
           </details>
-        ))}
+          );
+        })}
       </div>
 
       {sources && sources.length > 0 ? (

@@ -1,3 +1,5 @@
+import { getMetricConfig } from '@stats47/data-configs';
+import { resolveRankingValueDisplay } from '@stats47/ranking';
 import { TrendingDown, TrendingUp } from 'lucide-react';
 
 import { PanelGrid } from '@/components/layout/PageShell';
@@ -14,7 +16,10 @@ interface AreaRelatedRankingsCardProps {
   highlights: AreaHighlights;
 }
 
-/** 家計調査は県庁所在市 (東京都は区部) の値なので注記する (SNS の中立規約と同じ)。 */
+/**
+ * 家計調査は県庁所在市 (東京都は区部) の値なので注記する (SNS の中立規約と同じ)。
+ * 値はランキングのページと同じ決め方 (定義の表示単位、無ければ図の規則) で表示単位に寄せる (2026-11-14)。
+ */
 export function toHighlightListItem(item: AreaHighlight): AreaHighlightListItem {
   return {
     rankingKey: item.rankingKey,
@@ -22,6 +27,10 @@ export function toHighlightListItem(item: AreaHighlight): AreaHighlightListItem 
     rank: item.rank,
     value: item.value,
     unit: item.unit,
+    display: resolveRankingValueDisplay(
+      { unit: item.unit, valueDisplay: getMetricConfig(item.rankingKey)?.display },
+      [item.value],
+    ),
     year: item.year,
     tone: item.tone,
     ...(item.isKakei ? { note: '県庁所在市の値' } : {}),

@@ -1,4 +1,4 @@
-import { resolveMetricDisplayScale } from "@stats47/data-configs/unit";
+import { formatChartValue, formatUnitForDisplay, resolveMetricDisplayScale } from "@stats47/data-configs/unit";
 
 import type { RankingItem } from "../types/ranking-item";
 
@@ -38,4 +38,24 @@ export function resolveRankingValueDisplay(
 export function applyRankingValueDisplay<T extends { value: number | null }>(rows: readonly T[], display: RankingValueDisplay | null): T[] {
   if (!display) return [...rows];
   return rows.map((row) => (row.value === null ? row : { ...row, value: Number((row.value * display.factor).toFixed(display.precision)) }));
+}
+
+/**
+ * 整形済みの文字で届く 1 つの値 (R2 に焼いた 1 位の値「656,171,677」) を、表示単位で書き直す
+ * (注目カードと一覧の「1 位」の列。UNIT-NOTATION-FORMAT-01)。「656,171,677千円」を「6,562億円」と書く。
+ * 決め方はランキングのページと同じ `resolveRankingValueDisplay` で、定義の表示単位があればそれ、無ければ図の規則。
+ * 値は 1 位 (最大) の 1 つしか無いので、図の規則はその値が 5 桁に収まる単位を選ぶ。
+ * 数として読めない文字と、単位を変えない指標は値をそのまま返す (単位の表記だけ半角にそろえる)。
+ */
+export function formatFeaturedValueDisplay(
+  item: Pick<RankingItem, "unit" | "valueDisplay">,
+  value: string,
+): { value: string; unit: string } {
+  const unchanged = { value, unit: formatUnitForDisplay(item.unit) };
+  const text = value.replace(/,/g, "").trim();
+  if (!/^-?\d+(\.\d+)?$/.test(text)) return unchanged;
+  const number = Number(text);
+  const display = resolveRankingValueDisplay(item, [number]);
+  if (!display) return unchanged;
+  return { value: formatChartValue(number, { factor: display.factor, decimals: display.precision }), unit: display.unit };
 }

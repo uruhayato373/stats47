@@ -1,5 +1,5 @@
 
-import { normalizePercentInText } from "@stats47/data-configs/unit";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
@@ -56,7 +56,7 @@ export function AiMarkdownContent({ content }: { content: string }) {
           },
         }}
       >
-        {addLineBreaksAfterPeriod(normalizePercentInText(content))}
+        {addLineBreaksAfterPeriod(normalizeUnitsInText(content))}
       </ReactMarkdown>
     </div>
   );

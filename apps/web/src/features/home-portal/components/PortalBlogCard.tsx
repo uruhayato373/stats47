@@ -1,6 +1,7 @@
 "use client";
 
 import { hrefFor } from "@stats47/data-configs/content/href";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { PORTAL_CARD_ASPECT_CLASS, PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from "@/components/surface";
@@ -54,7 +55,7 @@ export function PortalBlogCard({
           className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.01]"
         />
       </span>
-      <p className={PORTAL_CARD_TITLE_CLASS}>{title}</p>
+      <p className={PORTAL_CARD_TITLE_CLASS}>{normalizeUnitsInText(title)}</p>
     </SurfaceLinkCard>
   );
 }

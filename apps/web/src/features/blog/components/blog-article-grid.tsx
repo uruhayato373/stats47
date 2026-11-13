@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { normalizePercentInText } from "@stats47/data-configs/unit";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 
 import { ArticleTeaserCard, CardGrid } from '@/components/surface';
 
@@ -48,7 +48,7 @@ export function BlogArticleGrid({ articles, insertAfter }: BlogArticleGridProps)
               lightSrc: blogThumbnailUrl(article.slug, 'light'),
               darkSrc: blogThumbnailUrl(article.slug, 'dark'),
             }}
-            description={article.description ? normalizePercentInText(article.description) : undefined}
+            description={article.description ? normalizeUnitsInText(article.description) : undefined}
             meta={
               cardDate ? (
                 <time dateTime={article.updatedAt ?? article.publishedAt ?? undefined}>更新 {cardDate}</time>

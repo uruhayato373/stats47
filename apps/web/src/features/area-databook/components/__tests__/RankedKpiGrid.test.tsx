@@ -25,12 +25,54 @@ describe("RankedKpiGrid", () => {
 
     expect(html).toContain("<dl");
     expect(html).toContain("人口");
-    expect(html).toContain("1,157,000");
+    // 6 桁以上の値はランキングのページと同じ表示単位に寄せる (2026-11-14。旧: 1,157,000人)
+    expect(html).toContain("115.7");
+    expect(html).toContain("万人");
+    expect(html).not.toContain("1,157,000");
     expect(html).toContain("31位");
     expect(html.match(/border-card-outline/g)).toHaveLength(1);
     expect(html).toContain("grid-cols-1");
     // 1 枚でも 4 列の 1 マスの幅にそろえる (2026-10-29「幅を 4 列にそろえる」)
     expect(html).toContain("@md:grid-cols-4");
+  });
+
+  // 2026-09-25 UI 全面点検: 県のページの数値タイルが「113,685,917百万円」と書いていた (UNIT-NOTATION-FORMAT-01)。
+  // 値と比較の値 (全国の値・47 都道府県平均) は同じタイルの中で 1 つの単位にそろえる
+  it("桁の多い金額を表示単位に寄せ、比較の値も同じ単位で書く", () => {
+    const html = renderToStaticMarkup(
+      <RankedKpiGrid
+        metrics={[{ rankingKey: "gdp-test", shortLabel: "県内総生産", compareNationalAvg: true }]}
+        databook={
+          {
+            metrics: {
+              "gdp-test": { value: 113_685_917, rank: 1, unit: "百万円", year: "2021年度", nationalAvg: 12_345_678, nationalAvgKind: "prefecture-mean" },
+            },
+          } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"]
+        }
+      />,
+    );
+    expect(html).toContain("113.7");
+    expect(html).toContain("兆円");
+    expect(html).toContain("47都道府県平均 12.3兆円");
+    expect(html).not.toContain("百万円");
+  });
+
+  it("割合や小さい値は今までどおりの桁で書き、単位の表記だけ半角にする", () => {
+    const html = renderToStaticMarkup(
+      <RankedKpiGrid
+        metrics={[{ rankingKey: "rate-test", shortLabel: "高齢化率", compareNationalAvg: true }]}
+        databook={
+          {
+            metrics: {
+              "rate-test": { value: 29.12, rank: 20, unit: "％", year: "2024年", nationalAvg: 28.6, nationalAvgKind: "national" },
+            },
+          } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"]
+        }
+      />,
+    );
+    expect(html).toContain("29.1");
+    expect(html).toContain("全国 28.6%");
+    expect(html).not.toContain("％");
   });
 
   it("本文幅844pxで4列指定が発動する", () => {
@@ -103,7 +145,7 @@ describe("RankedKpiGrid", () => {
       />,
     );
     // 何の平均かを書く。欄の無い旧版は 47 都道府県の単純平均として表示する (AREA-NATIONAL-AVG-SIMPLE-MEAN-01)
-    expect(withAvg).toMatch(/2023年 ・ 47都道府県平均 2,600,000/);
+    expect(withAvg).toMatch(/2023年 ・ 47都道府県平均 260\.0万人/);
     const official = {
       metrics: {
         population: { value: 1_157_000, rank: 31, year: "2023年", unit: "人", nationalAvg: 2_660_000, nationalAvgKind: "national" },
@@ -112,7 +154,7 @@ describe("RankedKpiGrid", () => {
     const withNational = renderToStaticMarkup(
       <RankedKpiGrid metrics={[{ ...metric("population", "人口"), compareNationalAvg: true }]} databook={official} />,
     );
-    expect(withNational).toMatch(/2023年 ・ 全国 2,660,000/);
+    expect(withNational).toMatch(/2023年 ・ 全国 266\.0万人/);
   });
 });
 
