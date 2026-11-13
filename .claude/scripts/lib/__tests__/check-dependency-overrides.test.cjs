@@ -57,6 +57,42 @@ test("\"$name\" 参照はルートの依存指定に解決し、file: の差し�
   assert.deepEqual(inspectDependencies(input).map((item) => `${item.code}:${item.package}`), ["OVERRIDE_UNRESOLVED:missing"]);
 });
 
+test("他 OS 向け任意依存の lock 記録が親の要求とずれたら OPTIONAL_LOCK_MISMATCH (2026-10-26 の workerd)", () => {
+  const input = {
+    rootPackage: {},
+    workspacePackages: { ".": {} },
+    lockPackages: {
+      "node_modules/workerd": {
+        version: "1.20261019.1",
+        optionalDependencies: { "@cloudflare/workerd-linux-64": "1.20261019.1", "@cloudflare/workerd-darwin-arm64": "1.20261019.1" },
+      },
+      "node_modules/@cloudflare/workerd-linux-64": { version: "1.20260825.1", optional: true },
+      "node_modules/@cloudflare/workerd-darwin-arm64": { version: "1.20261019.1", optional: true },
+    },
+  };
+  const findings = inspectDependencies(input);
+  assert.deepEqual(findings.map((item) => `${item.code}:${item.package}`), ["OPTIONAL_LOCK_MISMATCH:@cloudflare/workerd-linux-64"]);
+  assert.match(findings[0].message, /1\.20260825\.1/);
+  input.lockPackages["node_modules/@cloudflare/workerd-linux-64"].version = "1.20261019.1";
+  assert.deepEqual(inspectDependencies(input), []);
+});
+
+test("任意依存の記録は npm の解決順 (入れ子 → 親 → ルート) で当たるものと照合し、範囲指定と記録なしは対象外", () => {
+  const input = {
+    rootPackage: {},
+    workspacePackages: { ".": {} },
+    lockPackages: {
+      "node_modules/host": { version: "1.0.0", optionalDependencies: { bin: "2.0.0", ranged: "^1.0.0", absent: "3.0.0" } },
+      "node_modules/host/node_modules/bin": { version: "2.0.0", optional: true },
+      "node_modules/bin": { version: "1.0.0", optional: true },
+      "node_modules/ranged": { version: "1.5.0" },
+    },
+  };
+  assert.deepEqual(inspectDependencies(input), []);
+  input.lockPackages["node_modules/host/node_modules/bin"].version = "2.0.1";
+  assert.deepEqual(inspectDependencies(input).map((item) => item.code), ["OPTIONAL_LOCK_MISMATCH"]);
+});
+
 test("現在のリポジトリは通る", () => {
   const result = spawnSync(process.execPath, [CHECKER], { cwd: ROOT, encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr || result.stdout);
