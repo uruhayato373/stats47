@@ -30,7 +30,7 @@ skill、agent、prompt、READMEへ複製しない。
 3. コードに密結合する仕様なら対象コード近傍の`README.md`へ置く。
 4. agentの実行規約・手順なら`.claude/rules/`または`.claude/skills/`へ置く。
 5. 計測・監査・レビュー・是正キュー・比較用の定期履歴など、事業として見返す記録なら`data/<取得元>/`へ置き、カタログ (`config/datasets.mjs`) に行を足す。エージェント運用の状態なら`.claude/state/`へ置く (判断は`data-storage.md`)。
-6. skillの`reference/`には手順・契約・テンプレだけを置く。`reference/{reviews,audits}/`は作らない (`npm run check-datasets`が未宣言として止める)。
+6. skillの`reference/`には手順・契約・テンプレだけを置く。`reference/{reviews,audits,reports}/`は作らない (`npm run check-datasets`が未宣言として止める)。
 7. 上記に統合できず、人が継続的に意思決定へ使う独立した責務がある場合だけ新規作成する。
 
 新規作成時は「既存SSOTへ統合できない理由」「owner」「削除または見直し条件」を差分から説明できなければならない。
@@ -60,7 +60,7 @@ skill、agent、prompt、READMEへ複製しない。
 | agent用週次レビュー | `data/reviews/weekly/YYYY-Www.md` |
 | 週次メトリクス | `data/<取得元>/`（機械が書く記録。人手Markdownを複製しない） |
 | 批判的レビュー・事前検死・監査の未完了策 | `.claude/todo/{improvements,backlog}.md`。優先度・実行順・停止条件・完了条件を付ける |
-| 定期レポート・比較用履歴 | `data/<取得元>/` (カタログに行を足す)。skill の `reference/` には手順・契約・テンプレだけを置く。人間向け全文をdocsへ複製しない |
+| 定期レポート・比較用履歴 | `data/<取得元>/` (カタログに行を足す。例: `data/sns/{weekly-reports,competitor-scans,x-winning-pattern-reports}/`・`data/blog/winning-pattern-reports/`)。skill の `reference/` には手順・契約・テンプレだけを置く。人間向け全文をdocsへ複製しない |
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `.claude/todo/improvements.md` |
 | 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (タグ無し = 分類待ちとして検査が集計 → `.claude/rules/todo-standards.md`) |
 | セッション残タスク | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md。2026-07-22 に一時ハンドオフ文書を廃止) |
@@ -243,3 +243,4 @@ PR で機能改修を行う場合、関連する docs/ ファイル (改善ロ�
 - 2026-07-30: レビュー保存ディレクトリを廃止。未完了策は `.claude/todo/`、恒久判断は既存SSOT、定期履歴はskill referenceへ統合
 - 2026-07-30: 文書ガバナンスを機械契約・checker・pre-commit・PR・週次監査へ配線
 - 2026-11-14: skill の `reference/{reviews,audits}/` にあったテーマ・調査・SEO の監査とレビューの全文 41 件を `data/{themes,surveys,seo}/` へ移し、カタログの `GOVERNED` で同じ置き場への新規を止めた。`packages/`・`apps/` に残っていた済みの計画と修正の記録 4 件を消し、DG087〜089 を足した
+- 2026-11-14: skill の `reference/reports/` にあった定期レポート 17 件 (SNS の週次 15・競合の定点観測 1・ブログの勝ち要因 1) を `data/{sns,blog}/` へ移し、`GOVERNED` に `reference/reports/` を足した。SNS の週次レポートの workflow は `data/sns/weekly-reports/` だけを書き戻す

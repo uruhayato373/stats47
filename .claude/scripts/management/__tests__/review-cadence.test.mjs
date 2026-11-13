@@ -271,6 +271,16 @@ test("回ごとの判定: 期限前・未実施・不足あり・実施できた
   assert.ok(w40.options.some((o) => o.key === "2026-W41"));
 });
 
+// 意図: 競合の定点観測のレポートは data/sns/competitor-scans/ (台帳 sns.competitor-scans) に置く。skill の reference/ を
+// 読んだままだと、/competitor-scan が新しい置き場へ書いても月次の実施状況が「レポートなし」のままになる
+test("月次の定点観測は台帳の置き場から対象月のレポートを読む", () => {
+  const root = fixture();
+  const scanStep = () => reviewRun(root, "monthly", "2026-09", at("2026-10-05")).steps.find((x) => x.label === "月次の定点観測");
+  assert.equal(scanStep().state, "missing");
+  write(root, "data/sns/competitor-scans/2026-09-01.md", "# 競合の定点観測\n");
+  assert.deepEqual({ state: scanStep().state, note: scanStep().note }, { state: "done", note: "data/sns/competitor-scans/2026-09-01.md" });
+});
+
 // 意図: 月次 workflow は結果を Workflow Summary にしか残さなかった。記録は月ごとに 1 件 (再実行は上書き) で、
 // 今月分が failed・実行日 + 猶予を過ぎても無いときだけ毎朝のガードが error にする
 test("月次ジョブの記録: 同じ月は上書き・新しい順", () => {

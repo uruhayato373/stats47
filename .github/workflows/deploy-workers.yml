@@ -134,9 +134,9 @@ jobs:
             echo "      - Account - Workers Scripts - Read"
             echo "      - Account - Workers Scripts - Edit"
             echo "      - Account - Account - Read"
-            echo "      - Account - D1 - Edit"
             echo "      - Account - R2 - Edit"
             echo "   3. GitHub Secrets で CLOUDFLARE_API_TOKEN を更新"
+            echo "   デプロイは D1 を使わないので D1 の編集権限は要らない。同じトークンを使う監視の権限は .github/workflows/README.md"
             exit 1
           fi
 

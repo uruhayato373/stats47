@@ -113,6 +113,9 @@ const PERMANENT_DATED_DIRS = [
   "data/themes/audits",
   "data/surveys/reviews",
   "data/surveys/audits",
+  // 2026-11-14 に skill の reference/reports/ から移した定期レポート。SNS の 3 つ (週次・競合の定点観測・X の勝ち要因) は
+  // 上の data/sns が覆う。週次レビューが最新を読み、前回との比較に過去分を使うので件数では消さない。保持期間は未決
+  "data/blog/winning-pattern-reports",
   // カタログが「一回きりの作業の記録」(kind: evidence) と宣言している置き場。定期的に増える置き場ではないので件数では消さない。
   // 2026-11-14 までは repo-hygiene の baseline (DATED_STATE_ARTIFACT) が寿命の宣言を兼ねていたが、
   // 衛生検査の対象から外れて「解消済み」になった行を baseline から外したので、ここで宣言する。

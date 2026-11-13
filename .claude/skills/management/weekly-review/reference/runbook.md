@@ -536,7 +536,7 @@ node -e 'const q=require("./data/blog/remediation-queue.json");console.log(q.sum
 node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→featureSignals + 順位交絡統制
 ```
 
-- 最新 `.claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md` の
+- 最新 `data/blog/winning-pattern-reports/<date>.md` の
   **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
 - **robust な勝ちパターンのみ** `.claude/rules/blog-quality-standards.md` への書き戻しを検討 (定性裏取り後、`evidence-based-judgment.md` 準拠)。weakened/confounded は書き戻さない。
 

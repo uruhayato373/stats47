@@ -78,6 +78,38 @@ test("[mutation] skill の reference/{reviews,audits}/ に監査・レビュー�
   assert.ok(!GOVERNED.some((re) => re.test(".claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md")));
 });
 
+test("[mutation] skill の reference/reports/ に定期レポートを置くと未宣言で落ちる (置き場は data/<取得元>/)", () => {
+  // 2026-11-14 DOCS-GOVERNANCE-GAPS-01。SNS の週次レポート・競合の定点観測・X とブログの勝ち要因のレポートを
+  // skill の reference/reports/ に書いていて、docs-vs-issues.md (定期レポートは data/<取得元>/) と食い違っていた。
+  // 旧置き場は RETIRED の宣言から組み立てる (このファイルに直書きすると、旧置き場の参照の検査に自分が掛かる)
+  const moved = RETIRED.filter((r) => r.since === "2026-11-14" && /\/reference\/reports$/.test(r.from));
+  assert.equal(moved.length, 4, "SNS の週次・競合の定点観測・X の勝ち要因・ブログの勝ち要因の 4 か所");
+  const planted = [...moved.map((r) => `${r.from}/2026-11-14.md`), ".claude/skills/dev/some-new-skill/reference/reports/2026-W46.md"];
+  const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+    .split("\0")
+    .filter(Boolean);
+  const result = checkDatasets({
+    datasets: DATASETS,
+    files: [...files.filter((f) => !planted.includes(f)), ...planted],
+    governed: GOVERNED,
+    ignoredNames: IGNORED_NAMES,
+    kinds: KINDS,
+    targets: TARGETS,
+    domainIds,
+    retention: RETENTION_POLICIES,
+  });
+  for (const file of planted) assert.ok(result.errors.includes(`未宣言: ${file}`), `未宣言で落ちない: ${file}`);
+  // 移した先はカタログの行で、書き手と読み手が id で引ける
+  const destinations = {
+    "sns.weekly-reports": "data/sns/weekly-reports",
+    "sns.competitor-scans": "data/sns/competitor-scans",
+    "sns.x-winning-pattern-reports": "data/sns/x-winning-pattern-reports",
+    "blog.winning-pattern-reports": "data/blog/winning-pattern-reports",
+  };
+  assert.deepEqual(moved.map((r) => r.to).sort(), Object.values(destinations).sort());
+  for (const [id, dir] of Object.entries(destinations)) assert.equal(datasetDir(id), dir);
+});
+
 test("可変部分は決めた形だけに当たる", () => {
   assert.ok(patternToRegExp("a/{date}.json").test("a/2026-10-06.json"));
   assert.ok(!patternToRegExp("a/{date}.json").test("a/2026-W41.json"));

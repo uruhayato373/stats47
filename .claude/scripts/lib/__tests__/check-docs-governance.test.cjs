@@ -554,5 +554,7 @@ test("実リポジトリの機械契約が置き場の 3 検査を宣言して�
   const real = loadConfig(path.resolve(__dirname, "..", "..", "..", ".."));
   assert.deepEqual(real.placement.nestedAgentDirectories, { parents: ["apps", "packages"], name: ".claude" });
   assert.equal(real.placement.scriptsRoot.directory, ".claude/scripts");
+  // 直下に残してよいのは型検査の設定だけ。スクリプトは <領域>/ に置く (2026-11-14 に setup-memory-symlink.mjs を lib/ へ移した)
+  assert.deepEqual(real.placement.scriptsRoot.allowedFiles, ["tsconfig.checkjs.json", "tsconfig.json"]);
   assert.deepEqual(real.placement.codeAdjacentDocs.roots, ["apps", "packages"]);
 });
