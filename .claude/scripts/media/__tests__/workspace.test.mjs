@@ -231,6 +231,17 @@ test('image references skip code examples but keep real images, headings and lin
  assert.equal(refs[0].alt,'実画像');
 });
 
+test('inline SVG references skip code examples but keep real SVG offsets and lines',()=>{
+ const real='<svg viewBox="0 0 10 10"><text>実</text></svg>';
+ const md=['# 記法','例は `<svg><text>inline</text></svg>` と書く。','```html','<svg><text>fence</text></svg>','```','~~~','<svg><text>tilde</text></svg>','~~~','## 実例',real].join('\n');
+ const refs=inlineSvgReferences(md);
+ assert.equal(refs.length,1);
+ assert.equal(refs[0].line,10);
+ assert.equal(md.slice(refs[0].start,refs[0].end),real);
+ assert.equal(refs[0].sha256,sha(Buffer.from(real)));
+ assert.equal(refs[0].bytes,Buffer.byteLength(real));
+});
+
 test('SVG candidates reject executable and externally loaded resources before rendering',()=>{
  assert.doesNotThrow(()=>assertStaticSvg(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>')));
  for(const child of ['<script>alert(1)</script>','<image href="https://example.com/a"/>','<rect onload="run()"/>','<style>@import "https://example.com/a";</style>','<foreignObject/>']){
