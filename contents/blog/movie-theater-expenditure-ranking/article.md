@@ -14,7 +14,7 @@ tags:
   - 地域格差
 publishedAt: 2026-07-10
 updatedAt: "2026-11-09"
-published: false
+published: true
 ogImage: /blog/movie-theater-expenditure-ranking/og.png
 ---
 

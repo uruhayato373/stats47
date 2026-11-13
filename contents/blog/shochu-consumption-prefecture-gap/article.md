@@ -9,7 +9,7 @@ archetype: A
 tags: ["焼酎", "家計調査", "消費量", "都道府県格差", "九州", "経済"]
 publishedAt: 2026-06-07
 updatedAt: "2026-11-09"
-published: false
+published: true
 ogImage: "/blog/shochu-consumption-prefecture-gap/og.png"
 ---
 

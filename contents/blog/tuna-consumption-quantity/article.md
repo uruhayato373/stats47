@@ -14,7 +14,7 @@ tags:
   - 地域差
 publishedAt: 2026-06-21
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/tuna-consumption-quantity/og.png
 ---
 

@@ -5,7 +5,7 @@ description: 同じ日本国内でも、化粧品への支出額はこれほど�
 slug: other-cosmetics-consumption-expenditure-prefecture-gap
 publishedAt: 2026-09-02
 updatedAt: 2026-11-09
-published: false
+published: true
 tags: []
 ---
 

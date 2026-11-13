@@ -1,8 +1,8 @@
-<!-- data-source: castella-ranking.json | generated: 2026-11-03T08:45:12.133Z -->
+<!-- data-source: castella-ranking.json | generated: 2026-11-13T11:58:15.054Z -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="カステラ消費支出額ランキング" data-theme="light" data-image-template="bar" data-domain-min="388" data-domain-max="6611">
     <rect width="1080" height="1350" fill="#F8FAFC"/>
     <g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif" fill="#18283C">
-      <text x="64" y="120" font-size="72" font-weight="700">カステラ消費支出額ランキング</text>
+      <text x="64" y="120" font-size="68" font-weight="700">カステラ消費支出額ランキング</text>
       <text x="64" y="184" font-size="32" fill="#475569">2024年 · 単位：円 · 範囲：388–6,611</text>
       <text x="64" y="230" font-size="28" fill="#475569">都道府県庁所在市の二人以上世帯の年間カステラ消費支出額</text>
       

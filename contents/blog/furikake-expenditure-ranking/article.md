@@ -14,7 +14,7 @@ tags:
   - 都道府県ランキング
 publishedAt: 2026-07-10
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/furikake-expenditure-ranking/og.png
 ---
 

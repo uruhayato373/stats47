@@ -14,7 +14,7 @@ tags:
   - コーヒー
 publishedAt: 2026-07-20
 updatedAt: 2026-11-09
-published: false
+published: true
 ogImage: /blog/black-tea-income-gap/og.png
 ---
 
