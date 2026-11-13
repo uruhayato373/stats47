@@ -11,8 +11,8 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "領域と構え — stats47 admin" };
 
 /**
- * 領域と構え: 収益化戦略 §5 の優先順位表と、月次 focus_domains → 週次 Must → backlog [領域:] の配線。
- * 読み取り専用。構えの変更は収益化戦略の表を編集し、計画は /monthly-plan・/weekly-plan が書く。
+ * 領域と構え: 台帳 business.domain-stances と、月次 focus_domains → 週次 Must → backlog [領域:] の配線。
+ * 読み取り専用。構えの変更は台帳を編集し、計画は /monthly-plan・/weekly-plan が書く。
  */
 
 const stanceTone: Record<Stance, "good" | "neutral" | "bad"> = {
@@ -34,7 +34,7 @@ const weeklyLabel = {
 } as const;
 const tierLabel = { high: "高", mid: "中", low: "低", hold: "判断待ち" } as const;
 
-/** 収益化戦略の表セルは Markdown。`ID` だけを code として描き、他は素のテキストにする */
+/** 台帳の狙い・条件の文は Markdown の書き方を含む。`ID` だけを code として描き、他は素のテキストにする */
 function InlineText({ text }: { text: string }) {
   return (
     <>
@@ -62,11 +62,11 @@ export default function StrategyLanesPage() {
 
   return (
     <>
-      <PageHeading title="領域と構え" source={`${board.strategyDoc} §5「領域と優先順位」`}>
+      <PageHeading title="領域と構え" source={board.source}>
         <p className="max-w-4xl text-sm text-muted-foreground">
           施策を収益までの流れの上の領域に分け、どこに投資を増やすか（攻める）・現状維持か・止めるかを示す。
           月次の重点は「攻める」領域から選び、週次の Must は重点領域のタスクか不具合から選ぶ。
-          構えを変えるときは収益化戦略の表を編集する。判定は <code className="rounded bg-muted px-1 font-mono text-xs">npm run docs:check</code>（DG073〜080）と同じ。KPI 列は領域の構えを変える判断に使う KPI ツリーの id。
+          構えを変えるときは台帳を編集し、理由を収益化戦略 §5 に書く。判定は <code className="rounded bg-muted px-1 font-mono text-xs">npm run docs:check</code>（DG073〜080）と同じ。KPI 列は領域の構えを変える判断に使う KPI ツリーの id。
         </p>
       </PageHeading>
 
