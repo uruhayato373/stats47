@@ -16,8 +16,10 @@ import {
   findWrongFilterRows,
   inspectEstatPayload,
   inspectStatsPayload,
+  inspectTrendYears,
   parseAuditLimit,
   parseDependencyMirror,
+  parseTrendChartMirror,
   requestKey,
   summarizeAudit,
 } from "../theme-chart-live-audit-core.mjs";
@@ -270,4 +272,60 @@ test("partialと件数不一致はcoverage成功へ化けない", () => {
     }),
     { status: "complete", coverageOk: true, errorCount: 0, audited: 2 },
   );
+});
+
+// DISPLAY-SEMANTICS-FOLLOWUP-01: 「推移」と題した図は、描く指標の観測年が最低点数に満たなければ落とす。
+const trendMirror = {
+  minTrendYears: 5,
+  trendCharts: [
+    { themeKey: "t", componentKey: "c-trend", title: "人口の推移", metricKeys: ["a", "b"] },
+  ],
+};
+const okResult = (metricKey, yearCount) => ({ metricKey, status: "ok", yearCount });
+
+test("推移の図の指標が最低点数に満たなければ、図と指標と年数を指して落とす", () => {
+  const { trendCharts, minTrendYears } = parseTrendChartMirror(trendMirror);
+  const violations = inspectTrendYears({
+    trendCharts,
+    minTrendYears,
+    results: [okResult("a", 9), okResult("b", 4)],
+  });
+  assert.equal(violations.length, 1);
+  assert.equal(violations[0].metricKey, "b");
+  assert.equal(violations[0].yearCount, 4);
+  assert.match(violations[0].where, /t\/c-trend/);
+});
+
+test("最低点数ちょうどは通り、全指標が満たせば違反は 0 件", () => {
+  const { trendCharts, minTrendYears } = parseTrendChartMirror(trendMirror);
+  assert.deepEqual(
+    inspectTrendYears({ trendCharts, minTrendYears, results: [okResult("a", 5), okResult("b", 50)] }),
+    [],
+  );
+});
+
+test("取得に失敗した指標・検査していない指標は年数不足と決めつけない (別の失敗として報告される)", () => {
+  const { trendCharts, minTrendYears } = parseTrendChartMirror(trendMirror);
+  assert.deepEqual(
+    inspectTrendYears({
+      trendCharts,
+      minTrendYears,
+      results: [{ metricKey: "a", status: "no-rows" }],
+    }),
+    [],
+  );
+});
+
+test("推移の図の一覧が無い・最低点数が不正な依存ミラーは読み込みで落とす (検査が黙って空になるのを防ぐ)", () => {
+  assert.throws(() => parseTrendChartMirror({ minTrendYears: 5 }), /trendCharts/);
+  assert.throws(() => parseTrendChartMirror({ trendCharts: [] }), /minTrendYears/);
+  assert.throws(() => parseTrendChartMirror({ minTrendYears: 0, trendCharts: [] }), /minTrendYears/);
+});
+
+test("コミット済みの依存ミラーは推移の図を持ち、最低点数は 5 以上 (現物)", () => {
+  const mirror = JSON.parse(readFileSync(new URL("../theme-chart-dependencies.generated.json", import.meta.url), "utf8"));
+  const { trendCharts, minTrendYears } = parseTrendChartMirror(mirror);
+  assert.ok(trendCharts.length >= 20, `推移の図が ${trendCharts.length} 件しかない`);
+  assert.ok(minTrendYears >= 5);
+  assert.ok(trendCharts.every((c) => /推移/.test(c.title) && c.metricKeys.length > 0));
 });

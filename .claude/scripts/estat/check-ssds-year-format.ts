@@ -9,6 +9,7 @@
  * 落ちたときの直し方:
  *   MISMATCH              指標の定義 (data/metrics/<key>.ts) の yearFormat を、表示された区切りに直す
  *   UNDETERMINED_UNLISTED 調査の年の呼び方を一次資料で確かめて decisions.json の surveyNaming に足す。
+ *                         市区町村の指標 (00000203xx) は、表の項目名が同じ符号の都道府県の指標と同じ定義かを確かめて cityIndicators に足す。
  *                         確かめられなければ理由を書いて undetermined に足す (上限 UNDETERMINED_CEILING は上げない)
  *   STALE_UNDETERMINED / UNKNOWN_KEY  decisions.json の undetermined からその行を消す
  *

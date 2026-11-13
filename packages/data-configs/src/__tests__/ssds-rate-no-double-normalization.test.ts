@@ -1,35 +1,14 @@
-import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+// 率の判定は指標の生成器と同じ部品を使う (手で同期する二重管理にしない)
+// @ts-expect-error — 素の node 用の JS (型定義なし)。mirror-parity.test.ts と同じ形で意図的に import する
+import { isOfficialRate } from "../../../../.claude/scripts/estat/lib/ssds-rate-name.mjs";
 import { METRICS_REGISTRY } from "../registry";
 
 const REPO_ROOT = resolve(__dirname, "../../../..");
-
-/** e-Stat の項目名の末尾の括弧が「…当たり」なら、その項目は SSDS が算式で割り終えた率である */
-const RATE_NAME = /[（(][^（）()]*(?:当たり|あたり)[^（）()]*[）)]\s*$/;
-
-type Cat01Name = { code: string; name: string };
-const cat01Names = new Map<string, Map<string, string>>();
-
-/** data/estat/meta の控えから、統計表の cat01 コードと公式の項目名の対応を読む。控えが欠けていれば空 */
-function officialNames(statsDataId: string): Map<string, string> {
-  const hit = cat01Names.get(statsDataId);
-  if (hit) return hit;
-  const names = new Map<string, string>();
-  const file = resolve(REPO_ROOT, "data/estat/meta", `${statsDataId}.json`);
-  if (existsSync(file)) {
-    const meta = JSON.parse(readFileSync(file, "utf8"));
-    const dim = meta.dimensions?.find((d: { id: string }) => d.id === "cat01");
-    // 一部だけの標本では「無い」を証拠にできないので、全件が揃った控えだけ使う
-    if (dim && dim.sampleValues?.length === dim.valueCount) {
-      for (const { code, name } of dim.sampleValues as Cat01Name[]) names.set(code, name);
-    }
-  }
-  cat01Names.set(statsDataId, names);
-  return names;
-}
+const rateNameCache = new Map<string, Map<string, string>>();
 
 /**
  * 社会・人口統計体系 (SSDS) の `#` 項目のうち、公式の項目名が分母 (人口10万人当たり・1事業所当たり等) を
@@ -45,12 +24,11 @@ function ssdsRatesWithNormalization() {
     if (source.kind !== "estat") continue;
     const code = (source as { cdCat01?: unknown }).cdCat01;
     const statsDataId = (source as { statsDataId?: unknown }).statsDataId;
-    if (typeof code !== "string" || !code.startsWith("#") || typeof statsDataId !== "string") continue;
-    const name = officialNames(statsDataId).get(code);
-    if (!name || !RATE_NAME.test(name)) continue;
+    if (typeof code !== "string" || typeof statsDataId !== "string") continue;
+    if (!isOfficialRate(REPO_ROOT, { statsDataId, cdCat01: code }, rateNameCache)) continue;
     checked.push(key);
     const options = config.calculation?.normalizationOptions ?? [];
-    if (options.length > 0) violations.push(`${key} (${code} ${name}): ${options.map(({ type }) => type).join(",")}`);
+    if (options.length > 0) violations.push(`${key} (${statsDataId} ${code}): ${options.map(({ type }) => type).join(",")}`);
   }
   return { checked, violations };
 }

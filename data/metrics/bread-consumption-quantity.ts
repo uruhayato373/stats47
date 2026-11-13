@@ -4,8 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const breadConsumptionQuantity: MetricConfig = {
   "key": "bread-consumption-quantity",
   "title": "パン消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間パン消費量（食パンと他のパンの合計）",
-  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。調理パン（サンドウィッチ・ハンバーガー等）は含まない。",
+  "subtitle": "食パンと他のパンの合計",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。調理パン（サンドウィッチ・ハンバーガー等）は含まない。",
   "description": "家計調査（二人以上の世帯）の食パンと他のパンの年間購入数量を合算した値。",
   "unit": "g",
   "category": "economy",

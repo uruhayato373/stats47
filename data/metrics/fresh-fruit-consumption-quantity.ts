@@ -4,8 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const freshFruitConsumptionQuantity: MetricConfig = {
   "key": "fresh-fruit-consumption-quantity",
   "title": "生鮮果物消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間生鮮果物消費量（合計）",
-  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。果物加工品は含まない。",
+  "subtitle": "合計",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。果物加工品は含まない。",
   "description": "家計調査（二人以上の世帯）の生鮮果物 14 品目（りんご・みかん・オレンジ・他の柑きつ類・梨・ぶどう・柿・桃・すいか・メロン・いちご・バナナ・キウイフルーツ・他の果物）の年間購入数量を合算した値。",
   "unit": "g",
   "category": "economy",

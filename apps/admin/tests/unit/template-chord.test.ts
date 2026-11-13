@@ -58,6 +58,16 @@ describe('基準の県のあるタイル地図', () => {
   it('移動でない指標の 46 県は欠測のままで、基準の県にしない', () => {
     expect(rankingChartFromArticleData(article('other-metric'), opts)).toHaveProperty('skip');
   });
+  it('家計調査の品目は subtitle が無くても、図の注記に県庁所在市の値であることを残す', () => {
+    const full = { ...article('natto-consumption-expenditure'), data: names.map((name, i) => ({ areaName: name, value: i + 1 })) };
+    const kakei = { source: { kind: 'kakei-chousa' } };
+    expect(rankingChartFromArticleData(full, { ...opts, metric: { title: '納豆消費支出額', ...kakei } })).toMatchObject({ note: '県庁所在市' });
+    expect(rankingChartFromArticleData(full, { ...opts, metric: { title: 'ぎょうざ消費支出額', subtitle: '冷凍品を除く', ...kakei } })).toMatchObject({ note: '冷凍品を除く・県庁所在市' });
+    // 県全体の値の指標は、これまでどおり subtitle だけを注記にする
+    expect(rankingChartFromArticleData(full, { ...opts, metric: { title: '総人口' } })).toMatchObject({ note: undefined });
+    expect(rankingChartFromArticleData(full, { ...opts, metric: { title: '消費支出', subtitle: '都道府県庁所在市の二人以上世帯の1世帯当たり年間消費支出総額' } }))
+      .toMatchObject({ note: '都道府県庁所在市の二人以上世帯の1世帯当たり年間消費支出総額' });
+  });
   it('allowBaseArea が無ければ棒の経路は 46 県を 47 県にしない', () => {
     expect(rankingChartFromArticleData(article('population-migration-inter-prefecture'), { ...opts, allowBaseArea: false })).toHaveProperty('skip');
   });

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const averageTemperature: MetricConfig = {
   "key": "average-temperature",
   "title": "年平均気温",
+  "description": "1日24回の観測値から日平均気温を、その月平均を、12か月分の月平均の算術平均を年平均気温とした値。観測地点は都道府県庁所在地の気象台で、埼玉県は熊谷市、東京都は千代田区、滋賀県は彦根市の観測値を使う。県全体の平均ではなく、その地点の値である。出典は気象庁の「過去の気象データ」(e-Stat「統計項目の定義 B 自然環境」の項目 B4101、2026-11-14 確認)。",
   "unit": "℃",
   "category": "landweather",
   "source": {

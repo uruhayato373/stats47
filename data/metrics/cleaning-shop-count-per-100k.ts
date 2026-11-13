@@ -3,7 +3,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const cleaningShopCountPer100k: MetricConfig = {
   "key": "cleaning-shop-count-per-100k",
-  "title": "クリーニング所数",
+  "title": "クリーニング業数",
   "subtitle": "人口10万人当たり",
   "unit": "所",
   "category": "commercial",
@@ -34,7 +34,7 @@ export const cleaningShopCountPer100k: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "クリーニング所数ランキング都道府県【2023年】｜1位福井県（115.6所）",
-  "seoDescription": "2023年のクリーニング所数の都道府県別ランキング。1位福井県（115.6所）、最下位神奈川県（37.9所）で3.1倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "クリーニング業数ランキング都道府県【2023年】｜1位福井県（115.6所）",
+  "seoDescription": "2023年のクリーニング業数の都道府県別ランキング。1位福井県（115.6所）、最下位神奈川県（37.9所）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

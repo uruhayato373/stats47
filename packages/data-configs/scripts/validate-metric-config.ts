@@ -11,7 +11,8 @@ import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
  * 2 段階の重大度:
  *   - error (exit 1 / CI・pre-commit をブロック):
  *       無効 category キー / title への年混入・注釈(※)混入 /
- *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし /
+ *       subtitle が注釈(※)・title と冗長・調査方法の定型文 (subtitle-survey-method) /
+ *       unit が空・"‐" / 重複 title に区別子なし /
  *       seoTitle・seoDescription の数字の直後の "‐" (seo-unit-dash)。
  *       換算単位 normalizationOptions[].unit の「‐/…」(normalization-unit-dash)。
  *       家計調査 (kakei-chousa) の指標の normalizationOptions (kakei-normalization)。
@@ -41,6 +42,7 @@ import {
   validateThemeMetricContentCoverage,
 } from '../src/theme-catalog';
 import { findDigitDashPlaceholders } from '../src/seo-meta-facts';
+import { isSurveyMethodSubtitle } from '../src/survey-method-subtitle';
 import { conversionFactor, parseUnit, scalePrefixMultiplier } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -260,6 +262,11 @@ function main() {
       // 冗長ではない (例: title「乳用牛飼養頭数」/ subtitle「乳用牛(めす)の飼養頭数合計」)。
       errors.push(
         `[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`
+      );
+    } else if (isSurveyMethodSubtitle(s)) {
+      // 上の包含の許容をすり抜ける形: 調査方法の書き出し + title など。家計調査の 825 件がこの形だった。
+      errors.push(
+        `[subtitle-survey-method] ${r.file}: subtitle が調査方法の定型文 「${s.slice(0, 30)}」 (調査方法は note へ。subtitle は区別子だけ)`
       );
     }
   }

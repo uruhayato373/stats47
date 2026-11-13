@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const sushiTakeoutConsumptionExpenditure: MetricConfig = {
   "key": "sushi-takeout-consumption-expenditure",
   "title": "すし(弁当)消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間すし(弁当)消費支出額",
+  "subtitle": "調理食品の弁当",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

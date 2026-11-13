@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const misoConsumptionQuantity: MetricConfig = {
   "key": "miso-consumption-quantity",
   "title": "みそ消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間みそ消費量",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に購入したみその1世帯当たりの数量（g）。県全体の値ではない。",
   "unit": "g",
   "category": "economy",

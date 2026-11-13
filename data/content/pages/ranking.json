@@ -2845,7 +2845,7 @@
       "id": "ranking:cleaning-shop-count-per-100k",
       "kind": "ranking",
       "key": "cleaning-shop-count-per-100k",
-      "title": "クリーニング所数",
+      "title": "クリーニング業数",
       "href": "/ranking/cleaning-shop-count-per-100k",
       "published": true
     },

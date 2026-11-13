@@ -121,6 +121,11 @@
       "import": "./src/geo-scope/index.ts",
       "require": "./src/geo-scope/index.ts"
     },
+    "./geo-scope/edge-keys": {
+      "types": "./src/geo-scope/edge-keys.ts",
+      "import": "./src/geo-scope/edge-keys.ts",
+      "require": "./src/geo-scope/edge-keys.ts"
+    },
     "./geo-scope/scope-theme-map": {
       "types": "./src/geo-scope/scope-theme-map.ts",
       "import": "./src/geo-scope/scope-theme-map.ts",

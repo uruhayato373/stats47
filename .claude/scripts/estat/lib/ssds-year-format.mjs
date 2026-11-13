@@ -20,6 +20,7 @@
  *
  * 人の判断は data/estat/ssds-year-format/decisions.json に置く:
  *   surveyNaming  期間では決まらない調査の、表題での年の呼び方 / itemOverrides  定義ページの期間が誤っている項目 /
+ *   cityIndicators  市区町村の指標のうち、同じ符号の都道府県の指標と同じ定義だと項目名で確かめたもの /
  *   undetermined  判定できない指標の一覧 (理由付き・縮小専用)
  */
 
@@ -216,13 +217,16 @@ export function indexDefinitions(definitions) {
 /**
  * 人の判断 (decisions.json) を引ける形にする。
  * @param {{ surveyNaming?: { survey: string, yearFormat: "calendar" | "fiscal" }[],
- *           itemOverrides?: { code: string, yearFormat: "calendar" | "fiscal", reason: string }[] }} [decisions]
+ *           itemOverrides?: { code: string, yearFormat: "calendar" | "fiscal", reason: string }[],
+ *           cityIndicators?: { code: string }[] }} [decisions]
  */
 export function buildRules(decisions = {}) {
   return {
     /** @type {Map<string, "calendar" | "fiscal">} */
     surveyNaming: new Map((decisions.surveyNaming ?? []).map((row) => [splitSurveys(row.survey)[0], row.yearFormat])),
     itemOverrides: new Map((decisions.itemOverrides ?? []).map((row) => [row.code, row])),
+    /** 同じ符号の都道府県の指標と同じ定義だと確かめた、市区町村の指標の符号 */
+    cityIndicators: new Set((decisions.cityIndicators ?? []).map((row) => row.code)),
   };
 }
 
@@ -285,8 +289,11 @@ export function decideYearFormat(source, index, rules = buildRules()) {
       continue;
     }
     // 指標計算式のページは都道府県の指標のもの。市区町村の指標の表は同じコードでも式が違うことがある
-    // (#B01101 は都道府県が「全国面積に占める割合」、市区町村が「都道府県面積に占める割合」) ので当てはめない
-    if (kind === "city-indicator") return { yearFormat: null, reason: `市区町村の指標 ${code} の計算式は公開されていない (指標計算式のページは都道府県の指標)`, basis: [] };
+    // (#B01101 は都道府県が「全国面積に占める割合」、市区町村が「都道府県面積に占める割合」) ので、
+    // 市区町村の表の項目名が都道府県の指標と同じ定義だと確かめた符号 (cityIndicators) にだけ当てはめる
+    if (kind === "city-indicator" && !rules.cityIndicators.has(code)) {
+      return { yearFormat: null, reason: `市区町村の指標 ${code} の計算式は公開されていない (指標計算式のページは都道府県の指標)。市区町村の表の項目名が同じ符号の都道府県の指標と同じ定義なら、確かめた記録を decisions.json の cityIndicators に足す`, basis: [] };
+    }
     const indicator = index.indicators.get(code);
     if (!indicator) return { yearFormat: null, reason: `指標 ${code} が指標計算式のページに無い`, basis: [] };
     if (indicator.baseItems.length === 0) return { yearFormat: null, reason: `指標 ${code} の計算式に基礎項目が無い`, basis: [] };
@@ -306,7 +313,7 @@ export function decideYearFormat(source, index, rules = buildRules()) {
  * 生成器は判定できない指標を書かないので、増えるのは人が手で指標を足したときだけ。そのときは一覧へ足す前に、
  * 調査の呼び方 (surveyNaming) を一次資料で確かめて決められないかを先に調べる。
  */
-export const UNDETERMINED_CEILING = 247;
+export const UNDETERMINED_CEILING = 136;
 
 /**
  * 指標の定義の yearFormat を、定義から決めた区切りと突き合わせる (pure)。
