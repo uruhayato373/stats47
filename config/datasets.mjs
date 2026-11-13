@@ -1132,6 +1132,7 @@ export const DATASETS = [
     ],
   }),
   d("surveys.source-names-schema", "data/surveys/master/source-names.schema.json", "schema", "data", "data", "上の対応表の JSON Schema"),
+  d("themes.ui-weight", "data/themes/ui-weight/{date}.json", "state", "site", "data", "テーマページの重さの計測 (見える文字数・高さ・図や表やカードの数・最初の画面に入るもの。県別と全国版・スマホ幅とデスクトップ幅)。共通の UI を直す前後を同じ測り方で比べる (measure-theme-weight.mjs)"),
   d("themes.portfolio", "data/themes/portfolio.json", "ledger", "data", "data", "テーマポートフォリオ (テーマごとの指標数・チャート数・レビューの有無・GSC/GA4 の計測・データ品質・ライフサイクル判定)。機械項目は build-theme-portfolio.ts と aggregate-theme-metrics.ts が再導出し、意味項目は build-theme-portfolio.ts の --set で変える。ThemeCatalog には計測値を書かない。手で編集しない", {
     schema: "config/schema/themes.portfolio.schema.json",
     refs: [{ field: "themes[].themeKey", to: "themes.catalogs", key: "key" }],
