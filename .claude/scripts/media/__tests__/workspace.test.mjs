@@ -222,6 +222,15 @@ test('actual references include extensionless images and exact inline SVG ranges
  for(const url of ['http://127.0.0.1/file','https://storage.stats47.jp.evil.test/file','https://x:y@storage.stats47.jp/file'])assert.equal(publicUrlAllowed(url),false);
 });
 
+test('image references skip code examples but keep real images, headings and line numbers',()=>{
+ const md=['# 記法','インラインの例は `![例](/charts/inline.svg)` のように書く。','```md','## コード内の見出し','![例](/charts/population.svg)','<img src="/charts/fence-img.svg">','```','~~~','![チルダ](/charts/tilde.svg)','~~~','## 実例','![実画像](real.svg)','<img src="real-html.png" alt="x">'].join('\n');
+ const refs=imageReferences(md,'https://storage.stats47.jp/app/blog/test/');
+ assert.deepEqual(refs.map(r=>r.url),['https://storage.stats47.jp/app/blog/test/real.svg','https://storage.stats47.jp/app/blog/test/real-html.png']);
+ assert.deepEqual(refs.map(r=>r.line),[12,13]);
+ assert.deepEqual(refs.map(r=>r.heading),['実例','実例']);
+ assert.equal(refs[0].alt,'実画像');
+});
+
 test('SVG candidates reject executable and externally loaded resources before rendering',()=>{
  assert.doesNotThrow(()=>assertStaticSvg(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>')));
  for(const child of ['<script>alert(1)</script>','<image href="https://example.com/a"/>','<rect onload="run()"/>','<style>@import "https://example.com/a";</style>','<foreignObject/>']){
