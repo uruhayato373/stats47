@@ -19,11 +19,15 @@
  *   ファイル全体を整形し直さないよう、programIdMap の節だけを差し替える。
  */
 import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
-const CONFIG = A8_REPORT_AUTOMATION;
+// 定数は repo root からの相対パスなので、cwd に依らないよう root と結合する
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const CONFIG = resolve(ROOT, A8_REPORT_AUTOMATION);
 const MID = /mid=(s\d{14})/g;
 const A8_REF = /^a8:(s\d{14})$/;
 

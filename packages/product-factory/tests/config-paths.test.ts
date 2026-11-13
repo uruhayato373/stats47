@@ -49,4 +49,26 @@ describe("config-paths", () => {
     );
     expect(offenders).toEqual([]);
   }, 60_000);
+  // 定数は repo root からの相対パス。fs に素のまま渡すと、cwd が root でないとき ENOENT になる
+  // (marketplace-status.mjs / build-a8-program-id-map.ts がこの形だった)。root と結合するか datasetPath() 経由で読む。
+  // .sh は先頭で cd "$PROJECT_DIR" して root を cwd にするので対象外。
+  it("定数を fs 関数へ root と結合せずに渡さない (cwd がルートでないと ENOENT になる)", () => {
+    const constants = Object.keys(CONFIG_PATHS).filter((n) => /^[A-Z][A-Z0-9_]*$/.test(n));
+    const FS_FUNCTIONS = "(?:readFileSync|writeFileSync|appendFileSync|existsSync|readdirSync|statSync|mkdirSync|readFile|writeFile)";
+    const files = execFileSync("git", ["-C", root, "grep", "--untracked", "-l", "-E", escape(MODULE), "--", "*.ts", "*.tsx", "*.mts", "*.cts", "*.js", "*.mjs", "*.cjs"], { encoding: "utf8" })
+      .split("\n")
+      .filter((f) => f && f !== MODULE);
+    const offenders = files.flatMap((file) => {
+      const text = readFileSync(join(root, file), "utf8");
+      // `const CONFIG = A8_REPORT_AUTOMATION;` のような別名も、素のまま渡されれば同じ事故になる
+      const names = new Set(constants.filter((c) => new RegExp(`\\b${c}\\b`).test(text)));
+      for (const c of [...names]) {
+        for (const m of text.matchAll(new RegExp(`(?:const|let)\\s+(\\w+)\\s*=\\s*${c}\\s*;`, "g"))) names.add(m[1]);
+      }
+      if (names.size === 0) return [];
+      const call = new RegExp(`\\b${FS_FUNCTIONS}\\(\\s*(?:${[...names].join("|")})\\s*[,)]`);
+      return text.split(/\r?\n/).flatMap((line, i) => (call.test(line) ? [`${file}:${i + 1}: ${line.trim()}`] : []));
+    });
+    expect(offenders).toEqual([]);
+  }, 60_000);
 });

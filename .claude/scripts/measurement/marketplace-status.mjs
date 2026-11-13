@@ -1,9 +1,13 @@
 import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { measurementContext, markMeasurementAuthenticated } from './browser-session.mjs';
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
 import { collectKdpMonthlyReport } from './kdp-monthly-reports.mjs';
 import { KDP_LISTINGS } from '../../../config/paths.mjs';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const source = process.argv[2];
 const output = process.argv[3];
@@ -23,7 +27,7 @@ try {
     const identity = await readBookshelfState(page, '__identity__', expected);
     if (/signin|\/ap\//.test(page.url())) throw new Error('auth_required');
     if (!identity.found || identity.asin !== expected.asin) throw new Error('account_mismatch');
-    const { listings } = JSON.parse(readFileSync(KDP_LISTINGS, 'utf8'));
+    const { listings } = JSON.parse(readFileSync(resolve(ROOT, KDP_LISTINGS), 'utf8'));
     // Collect the short-lived Reports session before the slow catalog scan.
     // Keep Reports open instead of navigating its page back to the bookshelf.
     const reportsPage = await context.newPage();
