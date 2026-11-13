@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 /**
  * 調査名一覧ページ（Server Component）
  *
@@ -14,9 +16,9 @@ import { isOk } from "@stats47/types";
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { AdRow, composeAdRows } from "@/features/ads";
+import { AdRow, composeAdRows, InFeedAdSlot } from "@/features/ads";
 
-import { CONTENT_FOOTER } from "@/lib/google-adsense";
+import { CONTENT_FOOTER, SURVEY_INDEX_INFEED } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
@@ -44,6 +46,13 @@ export function generateMetadata(): Metadata {
     ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
+
+/**
+ * インフィード広告を入れる位置。25 件目の後から 30 件ごと (25・55・85 … 件目の後) に、同じユニットを繰り返す
+ * (インフィード広告は同じフィードで同じコードを繰り返してよい。2026-11-13 オーナー決定。25 件目の後から最後まで約 12,000px 空いていた)
+ */
+const SURVEY_INDEX_INFEED_START = 25;
+const SURVEY_INDEX_INFEED_EVERY = 30;
 
 export default async function SurveyIndexPage() {
   const surveysResult = await readSurveysFromR2();
@@ -88,11 +97,11 @@ export default async function SurveyIndexPage() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sortedSurveys.map((survey) => {
+        {sortedSurveys.map((survey, index) => {
           const count = countMap.get(survey.id) ?? 0;
           return (
+            <Fragment key={survey.id}>
             <SurfaceLinkCard
-              key={survey.id}
               href={hrefFor("survey", { surveyKey: survey.id })}
               className="block"
             >
@@ -115,14 +124,17 @@ export default async function SurveyIndexPage() {
                 </p>
               )}
             </SurfaceLinkCard>
+            {/* 一覧が 1 列のとき (スマホ) 25 件目の後から 30 件ごとにインフィード広告 (2026-11-13 オーナー決定。一覧は約 15,000px 続く) */}
+            {index + 1 >= SURVEY_INDEX_INFEED_START &&
+              (index + 1 - SURVEY_INDEX_INFEED_START) % SURVEY_INDEX_INFEED_EVERY === 0 &&
+              sortedSurveys.length - (index + 1) >= 3 && (
+              <div className="md:hidden"><InFeedAdSlot slot={SURVEY_INDEX_INFEED} /></div>
+            )}
+            </Fragment>
           );
         })}
       </div>
 
-      {/*
-        記事内広告は置かない。この面は単一の調査グリッドしか無く、置ける場所が
-        フッター広告の直前しか無いため、置くと必ず広告 2 連になる (2026-07-29 是正)。
-      */}
       {/* コンテンツ末尾の全幅フッター広告 */}
       {indexRow.length > 0 && <AdRow cells={indexRow} position="survey-index-row" trackingCategory="survey-index" wide />}
     </PageShell>

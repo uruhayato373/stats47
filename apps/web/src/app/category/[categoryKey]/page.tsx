@@ -22,7 +22,7 @@ import { ListOrdered, MapPin, Newspaper, TrendingUp } from 'lucide-react';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { PageSections } from '@/components/layout/PageShell';
-import { RailStack } from '@/components/rail';
+import { RailLinksCard, RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
 import { HorizontalCardCarousel, RailCard, RailNavRow, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
@@ -30,10 +30,11 @@ import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCard
 import {
   AdRow,
   composeAdRows,
+  OperatorProfileCard,
   RailAdSlot,
 } from '@/features/ads';
 import { PrefectureNavigator } from '@/features/area-profile';
-import { listArticlesByTagKey } from '@/features/blog/server';
+import { listArticlesByTagKey, readPopularArticlesFromR2 } from '@/features/blog/server';
 import { findCategoryByKey } from '@/features/category/server';
 import { PortalBlogCard } from '@/features/home-portal';
 import {
@@ -53,10 +54,12 @@ import {
   ADSENSE_DISPLAY_ENABLED,
   CONTENT_FOOTER,
   HUB_INCONTENT,
+  CATEGORY_RAIL_STICKY,
   HUB_ROW_2,
   RAIL_RECT,
 } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
+import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
 import { CATEGORY_BLOG_TAG_KEYS } from '@/config/category-blog-tag-keys';
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
@@ -263,10 +266,17 @@ export default async function CategoryPage({ params }: PageProps) {
   if (rankingItems.length === 0) {
     notFound();
   }
+  // よく読まれている記事 (GA4 の直近 28 日の閲覧数・週次。ブログ・ホームの右レールと同じ台帳)。本文の新着の記事に出したものは除く
+  const popularArticles = (await readPopularArticlesFromR2('', 13).catch(() => []))
+    .filter((article) => !categoryArticles.some((latest) => latest.slug === article.slug))
+    .slice(0, 5);
   // カテゴリ一覧と現在地はサイドバー (AppSidebar) が持つので、ここでは重複させない。
-  // 残る出典調査と広告を右レールに置く (左右レールは併存させない契約)。
+  // 右レール (2026-11-13 オーナー決定・ホームと同じ形): PC で中身が約 600px しかなく本文 (約 3,550px) の下が約 2,900px 空いていたので、
+  // 「よく読まれている記事」・運営者のプロフィール・最後に追従する 300×600 を足した。上の AdSense と追従する枠の間には記事の一覧と
+  // プロフィールが入る (広告の枠の台帳の noAdjacentSlots)。追従する枠は PC だけ (RailAdSlot の sticky)
   const rightRail = (
-    <RailStack>
+    // rail:h-full: 右レールの列 (本文と同じ高さ) まで伸ばし、最後の追従する広告が本文の終わりまで動けるようにする (ホームと同じ)
+    <RailStack className="rail:h-full">
       {sourceSurveys.length > 0 && (
         <SurveyCard
           surveys={sourceSurveys.map((survey) => ({
@@ -281,6 +291,24 @@ export default async function CategoryPage({ params }: PageProps) {
       {/* AdSense は調査のカードの後 (最初の画面に置かない)。固定の PR (SidebarPromoBanner) はランキングの指標が
           労働のときだけ出る部品で、ここでは描かれていなかったので外した (2026-10-30) */}
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
+      <RailLinksCard
+        title="よく読まれている記事"
+        items={popularArticles.map((article) => ({
+          id: article.slug,
+          label: article.title,
+          href: hrefFor('blog', { slug: article.slug }),
+          trackingLabel: `popular:${article.slug}`,
+          thumbnail: {
+            lightSrc: blogThumbnailUrl(article.slug, 'light'),
+            darkSrc: blogThumbnailUrl(article.slug, 'dark'),
+            alt: '',
+          },
+        }))}
+        layout="ranked"
+        trackingSurface="category_blog"
+      />
+      <OperatorProfileCard />
+      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={CATEGORY_RAIL_STICKY} sticky />}
     </RailStack>
   );
 

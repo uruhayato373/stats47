@@ -92,16 +92,22 @@
       "firstFailedAt": "2026-11-10"
     },
     "raw-milk-production": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-12",
+      "lastFailedAt": "2026-11-13",
       "firstFailedAt": "2026-11-12"
     },
     "convenience-store-count-commercial": {
+      "failCount": 2,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-13",
+      "firstFailedAt": "2026-11-12"
+    },
+    "rice-consumption-quantity": {
       "failCount": 1,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-12",
-      "firstFailedAt": "2026-11-12"
+      "lastFailedAt": "2026-11-13",
+      "firstFailedAt": "2026-11-13"
     }
   }
 }

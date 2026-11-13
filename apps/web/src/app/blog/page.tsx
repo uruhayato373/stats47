@@ -14,12 +14,12 @@ import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 
-import { AdRow, composeAdRows, OperatorProfileCard, RailAdSlot } from '@/features/ads';
+import { AdRow, composeAdRows, InFeedAdSlot, OperatorProfileCard, RailAdSlot } from '@/features/ads';
 import { BlogArticleGrid, BlogNavigationCards } from '@/features/blog/listing';
 import { readBlogIndexPageFromR2 } from '@/features/blog/listing.server';
 import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
-import { ADSENSE_DISPLAY_ENABLED, CONTENT_FOOTER, RAIL_RECT } from '@/lib/google-adsense';
+import { ADSENSE_DISPLAY_ENABLED, BLOG_INDEX_INFEED_1, BLOG_INDEX_INFEED_2, CONTENT_FOOTER, RAIL_RECT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { formatOgpTitle } from "@/lib/metadata/site-title";
 
@@ -139,7 +139,14 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
       />
       {/* 記事検索と人気のタグは一覧の上に 1 回だけ置く (狭い幅でレールが一覧の後ろへ積まれても届く) */}
       <BlogNavigationCards variant="toolbar" tags={blogTags} />
-      <BlogArticleGrid articles={articles} />
+      {/* 一覧が 1 列のとき (スマホ) 6 件目と 14 件目の後にインフィード広告 (2026-11-13 オーナー決定)。一覧は約 8,000px 続き、広告が最後にしか無かった */}
+      <BlogArticleGrid
+        articles={articles}
+        insertAfter={[
+          { index: 6, node: <InFeedAdSlot slot={BLOG_INDEX_INFEED_1} /> },
+          { index: 14, node: <InFeedAdSlot slot={BLOG_INDEX_INFEED_2} /> },
+        ]}
+      />
 
       {(hasPrevPage || hasNextPage) && (
         <Pagination className="mt-8" aria-label="ページネーション">

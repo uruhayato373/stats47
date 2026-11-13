@@ -117,23 +117,31 @@ interface CardGridProps {
   children: ReactNode;
   /**
    * index 件目の後に、格子が 1 列のときだけ出す要素 (記事の一覧の中のインフィード広告。2026-11-12)。2 列以上では隠れるので、
-   * 子の数 (列の数と最後の行の埋め草) には数えない。index が子の数以上なら出さない (一覧の最後には置かない)
+   * 子の数 (列の数と最後の行の埋め草) には数えない。index が子の数以上なら出さない (一覧の最後には置かない)。
+   * 長い一覧では複数を渡せる (ブログ一覧の 2 か所。2026-11-13)
    */
-  insertAfter?: { index: number; node: ReactNode };
+  insertAfter?: CardGridInsert | readonly CardGridInsert[];
+}
+
+interface CardGridInsert {
+  index: number;
+  node: ReactNode;
 }
 
 export function CardGrid({ children, insertAfter }: CardGridProps) {
   const items = Children.toArray(children);
   const count = items.length;
   if (count === 0) return null;
-  const inserted =
-    insertAfter && insertAfter.index > 0 && insertAfter.index < count
-      ? [
-          ...items.slice(0, insertAfter.index),
-          <div key="card-grid-insert" className="@sm:hidden">{insertAfter.node}</div>,
-          ...items.slice(insertAfter.index),
-        ]
-      : items;
+  const inserts = (Array.isArray(insertAfter) ? insertAfter : insertAfter ? [insertAfter] : []) as readonly CardGridInsert[];
+  const inserted = items.flatMap((item, i) => {
+    const after = inserts.filter((insert) => insert.index === i + 1 && insert.index < count);
+    return [
+      item,
+      ...after.map((insert) => (
+        <div key={`card-grid-insert-${insert.index}`} className="@sm:hidden">{insert.node}</div>
+      )),
+    ];
+  });
   return (
     <div data-slot-kind="card-grid" className="@container">
       <PanelGrid className={COLUMN_CLASS[cardGridColumns(count)]}>

@@ -212,6 +212,8 @@ export const HOME_ROW_1: AdSlotConfig = { slotId: "6019089689", format: "rectang
 export const HOME_ROW_2: AdSlotConfig = { slotId: "3189892156", format: "rectangle" }; // stats47-home-row-2 (ディスプレイ / レスポンシブ)
 /** ホーム: 右レールの最後に追従する 300×600 (PC だけ)。2026-11-12 オーナー決定 (推奨案)。右レールの中身が本文より短く、PC で下が約 2,200px 空いていた。同日に作成 */
 export const HOME_RAIL_STICKY: AdSlotConfig = { slotId: "3704063320", format: "rectangle" }; // stats47-home-rail-sticky (追従する 300×600)
+/** 分野のページ: 右レールの最後に追従する 300×600 (PC だけ)。2026-11-13 オーナー決定。右レールの中身が本文より短く、PC で下が約 2,900px 空いていた。同日に作成 */
+export const CATEGORY_RAIL_STICKY: AdSlotConfig = { slotId: "5537009425", format: "rectangle" }; // stats47-category-rail-sticky (追従する 300×600)
 
 /**
  * ハブ (分野・調査) の本文の 2 段目 (全ランキングの後)。2026-11-12 オーナー決定でアフィリエイトを止め、段を AdSense 1 つの幅いっぱいに
@@ -223,6 +225,35 @@ export const HUB_ROW_2: AdSlotConfig = { slotId: "6020069625", format: "rectangl
 export const SEARCH_ROW_1: AdSlotConfig = { slotId: "4024103858", format: "rectangle" }; // stats47-search-row-1
 export const SEARCH_ROW_2: AdSlotConfig = { slotId: "9112779000", format: "rectangle" }; // stats47-search-row-2
 export const SEARCH_ROW_3: AdSlotConfig = { slotId: "5121563102", format: "rectangle" }; // stats47-search-row-3
+
+/**
+ * 市区町村のページ (2026-11-13 オーナー決定・同日作成)。データブックを 5 つの章に分け、「分野別のデータ」の前・財政の章の前・
+ * 医療・福祉と教育の章の前に記事内広告 (W44 で本文の記事内広告は 1,000 表示あたり ¥29〜38、表示広告より高い) を本文の幅いっぱいに出す。
+ * 関連記事は 6 件にし、一覧が 1 列のとき 3 件目の後にインフィード広告を入れる (都道府県のページと同じ「横の画像」のテンプレート)。
+ */
+export const CITY_INARTICLE_1: AdSlotConfig = { slotId: "8714817044", format: "article" }; // stats47-city-inarticle-1 (記事内)
+export const CITY_INARTICLE_2: AdSlotConfig = { slotId: "6088653702", format: "article" }; // stats47-city-inarticle-2 (記事内)
+export const CITY_INARTICLE_3: AdSlotConfig = { slotId: "9836327027", format: "article" }; // stats47-city-inarticle-3 (記事内)
+export const CITY_INFEED: AdSlotConfig = { slotId: "1957837004", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-city-infeed
+
+/**
+ * 一覧ページの中のインフィード広告 (2026-11-13 オーナー決定・同日作成)。カードが長く並ぶのに広告がページの最後の 1 つだけだった。
+ * 一覧が 1 列のとき (スマホ) だけ出す。テンプレートは文字だけのカードには「テキストのみ」、画像が上のブログのカードには「上部の画像」
+ */
+const LIST_INFEED_TEXT_LAYOUT_KEY = "-gw-3+1f-3d+2z";
+const LIST_INFEED_IMAGE_TOP_LAYOUT_KEY = "-6t+ed+2i-1n-4w";
+export const THEMES_INDEX_INFEED_1: AdSlotConfig = { slotId: "2956058055", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-themes-index-infeed-1
+export const THEMES_INDEX_INFEED_2: AdSlotConfig = { slotId: "6929982144", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-themes-index-infeed-2
+export const MUNICIPALITIES_INDEX_INFEED: AdSlotConfig = { slotId: "7257285208", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-municipalities-index-infeed
+export const SURVEY_INDEX_INFEED: AdSlotConfig = { slotId: "9691876858", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-survey-index-infeed
+export const BLOG_INDEX_INFEED_1: AdSlotConfig = { slotId: "6024415380", format: "infeed", layoutKey: LIST_INFEED_IMAGE_TOP_LAYOUT_KEY }; // stats47-blog-index-infeed-1
+export const BLOG_INDEX_INFEED_2: AdSlotConfig = { slotId: "4247978485", format: "infeed", layoutKey: LIST_INFEED_IMAGE_TOP_LAYOUT_KEY }; // stats47-blog-index-infeed-2
+/**
+ * 検索の結果の一覧の 60 件目より後に、30 件ごとに繰り返すインフィード広告 (2026-11-13 オーナー決定・同日作成)。
+ * インフィード広告は同じフィードの中で同じコードを何度置いてもよい (AdSense のコード生成画面の案内)。サイトの「1 ページで同じユニットを
+ * 重ねない」の例外で、広告の枠の台帳の行は 1 つ
+ */
+export const SEARCH_INFEED: AdSlotConfig = { slotId: "7824582218", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-search-infeed
 
 /**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）

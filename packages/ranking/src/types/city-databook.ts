@@ -25,6 +25,11 @@ export interface CityDatabookMetric {
   /** 同じ都道府県の市区町村の中の順位と数。同じ値は同じ順位。 */
   prefectureRank: number;
   prefectureCount: number;
+  /**
+   * 同じ県内順位を分け合う市区町村の数 (自分を含む。2026-11-13)。東京 23 区の「可住地面積割合 100%」のように多くが同じ値で
+   * 並ぶ指標を「特徴」や章の 1 文に選ばないために使う。この欄より前に作ったデータブックには無い
+   */
+  prefectureTies?: number;
   basis: CityDatabookMetricBasis;
 }
 

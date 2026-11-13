@@ -14,7 +14,7 @@ test('related-articles: 分子・分母を同じ記事・ページ・端末・�
   const [country, events, surfaces, variant] = request.dimensionFilter.andGroup.expressions;
   assert.equal(country.filter.stringFilter.value, 'Japan');
   assert.deepEqual(events.filter.inListFilter.values, ['nav_impression', 'nav_click']);
-  assert.deepEqual(surfaces.filter.inListFilter.values, ['area_blog', 'ranking_blog', 'theme_blog']);
+  assert.deepEqual(surfaces.filter.inListFilter.values, ['area_blog', 'ranking_blog', 'theme_blog', 'municipality_related']);
   assert.deepEqual(variant.filter.stringFilter, { matchType: 'BEGINS_WITH', value: 'related-articles-' });
   assert.deepEqual(request.dimensions.map((d) => d.name), report.dims);
   const row = Object.fromEntries(report.dims.map((d, i) => [d, String(i)]));

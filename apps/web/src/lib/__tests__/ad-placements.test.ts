@@ -191,6 +191,18 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
     }
   });
 
+  // 2026-11-13: 追従する広告は親の高さの中でしか動けない。PageShell の右レールに置く RailStack は、レールの列 (本文と同じ高さ) まで
+  // 伸ばさないと追従しない (分野のページで実測。ArticleShell は右レール自身が flex の列なので対象外)
+  it('PageShell の右レールで追従する広告を置くページは、RailStack を rail:h-full で伸ばす', () => {
+    const sources = [...new Set(Object.values(PAGES).flat().filter((p) => p.slot === 'adsense-rail-sticky').map((p) => p.source))];
+    expect(sources.length).toBeGreaterThan(0);
+    for (const source of sources) {
+      const code = read(source);
+      if (!/<PageShell[^>]*rightRail=/.test(code)) continue;
+      expect(code, source).toMatch(/<RailStack className="[^"]*rail:h-full/);
+    }
+  });
+
   // 2026-11-03 オーナー決定: 全ページのモバイルの本文に AdSense を 1 枠以上出す (自動広告なしで再開したので、手置きが無いと 0 枠になる)。
   // 広告の段はモバイルで先頭の 1 枠だけが出るので、先頭が AdSense の段か、モバイルにも出す AdSense の枠を数える
   it.each(Object.keys(SCOPED_PAGES))('%s: モバイルの本文に AdSense が 1 枠以上出る', (page) => {

@@ -12,7 +12,8 @@ import type { ContentRecommendation } from '@stats47/data-configs/content/naviga
 
 interface RelatedArticlesProps {
   items: readonly Pick<ContentRecommendation, 'id' | 'key' | 'href' | 'title'>[];
-  surface: 'area_blog' | 'ranking_blog' | 'theme_blog';
+  /** 市区町村のページは従来の値 municipality_related のまま (2026-11-13 にこの部品へ移した。計測の値を変えない) */
+  surface: 'area_blog' | 'ranking_blog' | 'theme_blog' | 'municipality_related';
   children?: ReactNode;
   /** index 件目の後に、記事の格子が 1 列のときだけ出す要素 (県のページのインフィード広告。CardGrid の insertAfter) */
   insertAfter?: { index: number; node: ReactNode };

@@ -10,15 +10,18 @@ import Link from "@/components/atoms/SiteLink";
 import { PageHeader, PageShell, PanelGrid } from "@/components/layout";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
+import { AdRow, composeAdRows, InFeedAdSlot } from "@/features/ads";
 import {
   CityDatabookView,
   CityPageFooter,
   getCityRouteContext,
 } from "@/features/area-profile";
 import { readCityDatabook } from "@/features/area-profile/server";
-import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
+import { RelatedArticles } from "@/features/content-navigation/RelatedArticles";
+import { readContentRecommendations } from "@/features/content-navigation/server";
 import { MunicipalityWardBreakdownSection } from "@/features/municipalities/server";
 
+import { CITY_INARTICLE_1, CITY_INARTICLE_2, CITY_INARTICLE_3, CITY_INFEED } from "@/lib/google-adsense";
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 import { UrlPolicy } from "@/lib/url-policy";
 
@@ -104,6 +107,18 @@ export default async function CityPage({ params }: PageProps) {
         RELATED_METRIC_LIMIT,
       )
     : [];
+  // 関連記事は 6 件 (都道府県のページと同じ)。一覧が 1 列のとき 3 件目の後にインフィード広告を入れる
+  const relatedArticles = databook
+    ? await readContentRecommendations({ sourceId: `city:${areaCode}:${cityCode}`, kinds: ["blog"], rankingKeys: relatedMetricKeys, limit: 6 })
+    : [];
+  // 広告の段 (2026-11-13 オーナー決定): 「分野別のデータ」の前・財政の章の前・医療・福祉と教育の章の前に記事内広告を本文の幅いっぱいに出す。
+  // スマホで広告の間が約 3,300〜4,700px (千代田区の実測)。章が無い市区町村ではその章の前の段は出ない
+  const [rowSections, rowFinance, rowWelfare] = composeAdRows(
+    [["adsense"], ["adsense"], ["adsense"]],
+    [CITY_INARTICLE_1, CITY_INARTICLE_2, CITY_INARTICLE_3],
+    [],
+  );
+  const tracking = `city-${cityCode}`;
 
   return (
     <PageShell>
@@ -132,6 +147,11 @@ export default async function CityPage({ params }: PageProps) {
             databook={databook}
             cityShortName={context.cityShortName}
             prefName={context.pref.areaName}
+            adBeforeSections={rowSections.length > 0 && <AdRow cells={rowSections} position="city-row-1" trackingCategory={tracking} wide />}
+            adBeforeChapter={{
+              "chapter-finance": rowFinance.length > 0 && <AdRow cells={rowFinance} position="city-row-2" trackingCategory={tracking} wide />,
+              "chapter-welfare-education": rowWelfare.length > 0 && <AdRow cells={rowWelfare} position="city-row-3" trackingCategory={tracking} wide />,
+            }}
           />
         ) : (
           <p role="status" className="border border-border bg-muted/20 p-5 text-sm text-muted-foreground">
@@ -151,16 +171,11 @@ export default async function CityPage({ params }: PageProps) {
           </Suspense>
         )}
 
-        {databook && (
-          <RelatedContentNavigation
-            title="この市区町村のデータを読み解く記事"
-            sourceId={`city:${areaCode}:${cityCode}`}
-            kinds={["blog"]}
-            rankingKeys={relatedMetricKeys}
-            limit={3}
-            surface="municipality_related"
-          />
-        )}
+        <RelatedArticles
+          items={relatedArticles}
+          surface="municipality_related"
+          insertAfter={{ index: 3, node: <InFeedAdSlot slot={CITY_INFEED} /> }}
+        />
 
         <CityPageFooter
           areaCode={areaCode}

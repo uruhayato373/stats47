@@ -171,7 +171,7 @@ describe("焼き込み・市区町村の補助関数", () => {
   const cityMetric = (
     rankingKey: string,
     prefectureRank: number,
-    overrides: Partial<{ label: string; value: number; yearCode: string; nationalRank: number; basis: "rate" | "total" | "unknown" }> = {},
+    overrides: Partial<{ label: string; value: number; yearCode: string; nationalRank: number; basis: "rate" | "total" | "unknown"; prefectureTies: number }> = {},
   ) => ({
     rankingKey,
     label: rankingKey,
@@ -200,6 +200,15 @@ describe("焼き込み・市区町村の補助関数", () => {
   it("selectCityHighlights は値が 0 の指標 (同率 0 で付いた上位順位) を特徴に出さない", () => {
     const picked = selectCityHighlights([cityMetric("zero", 1, { value: 0 }), cityMetric("real", 2)], { limit: 5 });
     expect(picked.map((p) => p.rankingKey)).toEqual(["real"]);
+  });
+
+  // 2026-11-13: 東京 23 区の「可住地面積割合 100%」が全区で 1 位になり、どの区の特徴にも見えた
+  it("selectCityHighlights は同じ県内順位を分け合う指標を特徴に出さず、分け合う数の無い古いデータは従来どおり選ぶ", () => {
+    const picked = selectCityHighlights(
+      [cityMetric("tied", 1, { prefectureTies: 23 }), cityMetric("alone", 2, { prefectureTies: 1 }), cityMetric("legacy", 3)],
+      { limit: 5 },
+    );
+    expect(picked.map((p) => p.rankingKey)).toEqual(["alone", "legacy"]);
   });
 
   it("selectCityHighlights は総数の指標・古い年・看板に見える指標を特徴に出さない", () => {

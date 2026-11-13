@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 
 import {
   buildMunicipalityEntityPolicy,
@@ -28,10 +30,10 @@ import {
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
 
-import { AdRow, composeAdRows } from '@/features/ads';
+import { AdRow, composeAdRows, InFeedAdSlot } from '@/features/ads';
 import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
-import { HUB_INCONTENT } from '@/lib/google-adsense';
+import { HUB_INCONTENT, MUNICIPALITIES_INDEX_INFEED } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 
@@ -194,13 +196,13 @@ export default async function MunicipalitiesHubPage() {
           </p>
         </div>
         <PanelGrid className="sm:grid-cols-2">
-          {activeThemes.map((theme) => {
+          {activeThemes.map((theme, index) => {
             const metricTitles = getMetricTitles(theme.metricKeys);
             const visibleMetricTitles = metricTitles.slice(0, 3);
 
             return (
+              <Fragment key={theme.slug}>
               <SurfaceLinkCard
-                key={theme.slug}
                 href={hrefFor("municipality-theme", { themeSlug: theme.slug })}
                 className="group flex min-h-36 flex-col justify-between"
                 aria-label={`${theme.title}、${metricTitles.length}指標を見る`}
@@ -226,6 +228,11 @@ export default async function MunicipalitiesHubPage() {
                   />
                 </span>
               </SurfaceLinkCard>
+              {/* 一覧が 1 列のとき (スマホ) 真ん中あたりにインフィード広告 (2026-11-13 オーナー決定。広告が一覧の後にしか無かった) */}
+              {index + 1 === Math.floor(activeThemes.length / 2) && (
+                <div className="sm:hidden"><InFeedAdSlot slot={MUNICIPALITIES_INDEX_INFEED} /></div>
+              )}
+              </Fragment>
             );
           })}
         </PanelGrid>

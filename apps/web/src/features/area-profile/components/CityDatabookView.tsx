@@ -1,6 +1,8 @@
+import { Fragment, type ReactNode } from "react";
+
 import { CITY_TOP_BAND, selectCityHighlights } from "@stats47/area-profile";
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { listCityDatabookThemes, municipalityThemePageSlugFor } from "@stats47/data-configs/geo-scope";
+import { groupCityDatabookSectionsByChapter, listCityDatabookThemes, municipalityThemePageSlugFor } from "@stats47/data-configs/geo-scope";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   prefectureInsideLabel,
@@ -24,6 +26,10 @@ interface Props {
   databook: CityDatabookSnapshot;
   cityShortName: string;
   prefName: string;
+  /** 「分野別のデータ」の前に置く広告 (ページが組み立てる。広告の枠の台帳の city) */
+  adBeforeSections?: ReactNode;
+  /** 章 (CITY_DATABOOK_LAYOUT.chapters の key) の前に置く広告。章が無い市区町村では出ない */
+  adBeforeChapter?: Readonly<Record<string, ReactNode>>;
 }
 
 /** 「特徴」一覧の件数。 */
@@ -48,6 +54,16 @@ function formatValue(value: number): string {
   return value.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
 }
 
+/**
+ * 章の頭の 1 文 (2026-11-13)。章の指標から「特徴」と同じ選定 (率の指標・県内 5 位以内・値 0 を除く・2019 年以降) で 1 件を選び、
+ * 値・年つきで書く。選べない章は文を出さない (中身の薄い文を足さない)。順位の向きは指標ごとに違うので「多い」「高い」とは書かない。
+ */
+function chapterLead(metrics: readonly CityDatabookMetric[], cityShortName: string, inside: string): string | undefined {
+  const [best] = selectCityHighlights(metrics, { limit: 1 });
+  if (!best) return undefined;
+  return `${cityShortName}は「${best.label}」が${inside}${best.prefectureRank}位 (${formatValue(best.value)}${formatUnitForDisplay(best.unit)}・${best.yearName}) です。`;
+}
+
 function nationalRankText(metric: CityDatabookMetric): string {
   return `全国 ${metric.nationalRank.toLocaleString("ja-JP")}位/${metric.nationalCount.toLocaleString("ja-JP")}`;
 }
@@ -56,7 +72,7 @@ function nationalRankText(metric: CityDatabookMetric): string {
  * 市区町村ページの本文 (見出しの指標・特徴・分野別の全指標)。値と順位はデータブックの焼き込みだけを使う。
  * 分野は市区町村テーマ、並びと見出しの指標は CITY_DATABOOK_LAYOUT (生成時に決まる)。
  */
-export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
+export function CityDatabookView({ databook, cityShortName, prefName, adBeforeSections, adBeforeChapter }: Props) {
   const metrics = databook.metrics;
   const headline = databook.headlineKeys.flatMap((key) => (metrics[key] ? [metrics[key]] : []));
   const highlights = selectCityHighlights(Object.values(metrics), { limit: CITY_HIGHLIGHTS_LIMIT });
@@ -126,6 +142,8 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
         </PanelGrid>
       )}
 
+      {adBeforeSections}
+
       <section aria-labelledby="city-sections">
         <SectionHeader
           title={<span id="city-sections">分野別のデータ</span>}
@@ -138,60 +156,77 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             </a>
           ))}
         </nav>
-        <div className="mt-6 space-y-6" {...navSurfaceProps("area_databook")}>
-          {databook.sections.map((section) => (
-            <section key={section.themeSlug} id={section.themeSlug} className="scroll-mt-20">
-              <SectionHeader
-                as="h3"
-                title={section.title}
-                action={
-                  <Link
-                    href={hrefFor("municipality-theme", { themeSlug: municipalityThemePageSlugFor(section.themeSlug) ?? section.themeSlug })}
-                    data-nav-label={`theme:${section.themeSlug}`}
-                    className="text-xs text-primary hover:underline"
-                  >
-                    市区町村を比べる ›
-                  </Link>
-                }
-              />
-              <div className="overflow-x-auto border border-border">
-                <ValueTable
-                  ariaLabel={section.title}
-                  columns={[
-                    { key: 'metric', header: '指標', rowHeader: true, className: 'min-w-40' },
-                    { key: 'value', header: '値' },
-                    { key: 'inside', header: inside },
-                    { key: 'national', header: '全国' },
-                  ]}
-                  rows={section.metricKeys.map((key) => {
-                    const metric = metrics[key]!;
-                    return {
-                      key,
-                      cells: [
-                        <>
-                          <Link href={metricHref(metric)} data-nav-label={key}>
-                            {metric.label}
-                          </Link>
-                          <small className="block">{metric.yearName}</small>
-                        </>,
-                        <>
-                          {formatValue(metric.value)}
-                          <small className="ml-0.5">{formatUnitForDisplay(metric.unit)}</small>
-                        </>,
-                        <>
-                          {`${metric.prefectureRank}位`}
-                          <small>{`/${metric.prefectureCount}`}</small>
-                        </>,
-                        <>
-                          {`${metric.nationalRank.toLocaleString("ja-JP")}位`}
-                          <small>{`/${metric.nationalCount.toLocaleString("ja-JP")}`}</small>
-                        </>,
-                      ],
-                    };
-                  })}
+        {/* 26 個の表を 5 つの章にまとめ、章の頭に値から作る 1 文を置く。章の前に広告を入れる (2026-11-13 オーナー決定)。
+            章の見出しは「分野別のデータ」と同じ h2 (text-base)、節は h3 (text-sm) にして大きさで区切る */}
+        <div className="mt-6 space-y-8" {...navSurfaceProps("area_databook")}>
+          {groupCityDatabookSectionsByChapter(databook.sections).map(({ chapter, sections }) => (
+            <Fragment key={chapter.key}>
+              {adBeforeChapter?.[chapter.key]}
+              <section id={chapter.key} aria-labelledby={`${chapter.key}-title`} className="scroll-mt-20 space-y-6">
+                <SectionHeader
+                  title={<span id={`${chapter.key}-title`}>{chapter.title}</span>}
+                  description={chapterLead(
+                    sections.flatMap((section) => section.metricKeys.flatMap((key) => (metrics[key] ? [metrics[key]] : []))),
+                    cityShortName,
+                    inside,
+                  )}
                 />
-              </div>
-            </section>
+                {sections.map((section) => (
+                  <section key={section.themeSlug} id={section.themeSlug} className="scroll-mt-20">
+                    <SectionHeader
+                      as="h3"
+                      title={section.title}
+                      action={
+                        <Link
+                          href={hrefFor("municipality-theme", { themeSlug: municipalityThemePageSlugFor(section.themeSlug) ?? section.themeSlug })}
+                          data-nav-label={`theme:${section.themeSlug}`}
+                          className="text-xs text-primary hover:underline"
+                        >
+                          市区町村を比べる ›
+                        </Link>
+                      }
+                    />
+                    <div className="overflow-x-auto border border-border">
+                      <ValueTable
+                        ariaLabel={section.title}
+                        columns={[
+                          { key: 'metric', header: '指標', rowHeader: true, className: 'min-w-40' },
+                          { key: 'value', header: '値' },
+                          { key: 'inside', header: inside },
+                          { key: 'national', header: '全国' },
+                        ]}
+                        rows={section.metricKeys.map((key) => {
+                          const metric = metrics[key]!;
+                          return {
+                            key,
+                            cells: [
+                              <>
+                                <Link href={metricHref(metric)} data-nav-label={key}>
+                                  {metric.label}
+                                </Link>
+                                <small className="block">{metric.yearName}</small>
+                              </>,
+                              <>
+                                {formatValue(metric.value)}
+                                <small className="ml-0.5">{formatUnitForDisplay(metric.unit)}</small>
+                              </>,
+                              <>
+                                {`${metric.prefectureRank}位`}
+                                <small>{`/${metric.prefectureCount}`}</small>
+                              </>,
+                              <>
+                                {`${metric.nationalRank.toLocaleString("ja-JP")}位`}
+                                <small>{`/${metric.nationalCount.toLocaleString("ja-JP")}`}</small>
+                              </>,
+                            ],
+                          };
+                        })}
+                      />
+                    </div>
+                  </section>
+                ))}
+              </section>
+            </Fragment>
           ))}
         </div>
         {otherThemes.length > 0 && (

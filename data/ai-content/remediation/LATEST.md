@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-11-12T03:00:50.607Z
+- 生成: 2026-11-13T02:39:34.514Z
 - GSC snapshot: 2026-W44 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 730 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
@@ -12,7 +12,7 @@
   - 内訳: stale-year 805 / missing 430 / incomplete 1
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
-## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (3 件)
+## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (4 件)
 
 `--next` から除外している。生成しても critic を通らないため。手動 agent での再是正か、
 プロンプト/データ側の是正が要る (直って PASS すれば自動で解除)。
@@ -22,11 +22,12 @@
 | mayonnaise-consumption-quantity | 3 | claude-local | 2026-09-05 |
 | natto-consumption-expenditure | 3 | gemini-daily | 2026-11-11 |
 | manufacturing-shipment-amount | 3 | gemini-daily | 2026-11-11 |
+| inbound-visitors-by-destination | 3 | gemini-daily | 2026-11-12 |
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **11.1 件/日** (2026-07-30 からの平均)
-- 残り 1236 件 → **完了見込み 約 112 日**
+- 消化ペース: **11.0 件/日** (2026-07-30 からの平均)
+- 残り 1236 件 → **完了見込み 約 113 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 

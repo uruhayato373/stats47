@@ -374,6 +374,8 @@ export interface CityHighlightSource {
   nationalRank: number;
   /** 指標の性質 (display-semantics の語彙)。 */
   basis: "rate" | "total" | "unknown";
+  /** 同じ県内順位を分け合う市区町村の数。2 以上 (同じ値で並ぶ) なら選ばない。無いデータブックは従来どおり */
+  prefectureTies?: number;
 }
 
 /**
@@ -386,6 +388,8 @@ export interface CityHighlightSource {
  * - 値が 0 の指標は除く。小さな町村では「0 施設」が同率で上位の順位を得るため、特徴に見えてしまう
  *   (2026-10-04 週次 UI 検査: 田原本町で「0人」「0施設」が 3〜5 位として並んだ)
  * - 県と同じく、MIN_HIGHLIGHT_YEAR より古い年と HIGHLIGHT_EXCLUDED_KEY_PATTERN の指標は使わない
+ * - 同じ県内順位を分け合う指標 (prefectureTies が 2 以上) は除く。東京 23 区の「可住地面積割合 100%」が全区で 1 位になり、
+ *   どの区の特徴にも見えた (2026-11-13)。市区町村ページの章の 1 文もこの関数で選ぶ
  */
 export function selectCityHighlights<T extends CityHighlightSource>(
   metrics: readonly T[],
@@ -400,6 +404,8 @@ export function selectCityHighlights<T extends CityHighlightSource>(
         m.prefectureRank >= 1 &&
         m.prefectureRank <= CITY_TOP_BAND &&
         m.value !== 0 &&
+        // 多くの市区町村が同じ値で同じ順位に並ぶ指標 (東京 23 区の可住地面積割合 100% など) は特徴にならない (2026-11-13)
+        (m.prefectureTies ?? 1) === 1 &&
         Number(m.yearCode) >= MIN_HIGHLIGHT_YEAR &&
         !HIGHLIGHT_EXCLUDED_KEY_PATTERN.test(m.rankingKey),
     )
