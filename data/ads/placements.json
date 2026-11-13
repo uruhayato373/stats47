@@ -578,12 +578,23 @@
       {
         "slot": "adsense-body-responsive",
         "region": "body",
+        "position": "比較の行の真ん中の後 (行が 4 つ以上のとき)",
+        "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
+        "marker": "position=\"compare-row-mid\"",
+        "trackingPosition": "compare-row-mid",
+        "adsenseSlot": "HUB_ROW_2",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。AdSense を止めているときは出さない 2026-11-13 オーナー決定 (スマホで約 6,900px 広告が無かった)。前後に比較の行が 2 つ以上ずつ入る"
+      },
+      {
+        "slot": "adsense-body-responsive",
+        "region": "body",
         "position": "比較の後 (ページの最後)",
         "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
         "marker": "position=\"compare-row-1\"",
         "trackingPosition": "compare-row-1",
         "adsenseSlot": "HUB_INCONTENT",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない"
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない",
+        "knownAdjacentReason": "ソースでは真ん中の段を比較の部品に渡した直後に書くが、描画では真ん中の段の後に比較の行の後半 (2 つ以上) が入る"
       }
     ],
     "survey": [
@@ -811,11 +822,11 @@
       {
         "slot": "adsense-infeed",
         "region": "body",
-        "position": "調査のカードの 25 件目の後",
+        "position": "調査のカードの 25 件目の後から 30 件ごと (25・55・85 … 件目の後)",
         "source": "apps/web/src/app/survey/page.tsx",
         "marker": "<InFeedAdSlot slot={SURVEY_INDEX_INFEED} />",
         "adsenseSlot": "SURVEY_INDEX_INFEED",
-        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「テキストのみ」",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後 (後ろが 3 件未満) には置かない。同じユニットを繰り返す (インフィード広告は同じフィードで同じコードを繰り返してよい)。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「テキストのみ」",
         "devices": [
           "mobile"
         ],
@@ -914,6 +925,16 @@
             "adsenseSlot": "SEARCH_ROW_3"
           }
         ]
+      },
+      {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "結果の 90 件目の後から 30 件ごと (90・120・150 … 件目の後)",
+        "source": "apps/web/src/features/search/components/SearchResults.tsx",
+        "marker": "<InFeedAdSlot slot={SEARCH_INFEED} />",
+        "adsenseSlot": "SEARCH_INFEED",
+        "condition": "同じユニットを繰り返す (インフィード広告は同じフィードで同じコードを繰り返してよい。サイトの「1 ページで同じユニットを重ねない」の例外で、台帳の行は 1 つ)。後ろに結果が 3 件以上続くときだけ。結果の一覧は常に 1 列なのでどの幅でも出る。2026-11-13 オーナー決定 (「人口」で 60 件目の後から最後まで約 48,000px 広告が無かった)。テンプレートは「テキストのみ」",
+        "knownAdjacentReason": "ソースでは段 (search-row) の直後に書くが、描画では段が 5・30・60 件目、インフィードが 90 件目以降なので、間に結果が 30 件以上入る"
       },
       {
         "slot": "adsense-footer",

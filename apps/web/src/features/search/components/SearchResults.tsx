@@ -7,10 +7,10 @@ import { BarChart3, FileText } from "lucide-react";
 
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { AdRow, composeAdRows } from "@/features/ads";
+import { AdRow, composeAdRows, InFeedAdSlot } from "@/features/ads";
 
 import { trackSearchResultClick } from "@/lib/analytics/events";
-import { SEARCH_ROW_1, SEARCH_ROW_2, SEARCH_ROW_3 } from "@/lib/google-adsense";
+import { SEARCH_INFEED, SEARCH_ROW_1, SEARCH_ROW_2, SEARCH_ROW_3 } from "@/lib/google-adsense";
 
 
 import type { ContentType, SearchResult } from "../types";
@@ -24,6 +24,14 @@ import type { ContentType, SearchResult } from "../types";
 const SEARCH_AD_ROW_AFTER = [5, 30, 60] as const;
 const MIN_RESULTS_AFTER_AD_ROW = 3;
 const SEARCH_AD_ROWS = composeAdRows([['adsense'], ['adsense'], ['adsense']], [SEARCH_ROW_1, SEARCH_ROW_2, SEARCH_ROW_3], []);
+/**
+ * 60 件目より後は 30 件ごと (90・120・150 … 件目の後) にインフィード広告を繰り返す (2026-11-13 オーナー決定)。
+ * 「人口」で 60 件目の後からページの最後まで約 48,000px 広告が無かった。最後の 3 件より後ろには置かない
+ */
+const SEARCH_INFEED_START = 90;
+const SEARCH_INFEED_EVERY = 30;
+const isSearchInfeedPosition = (position: number) =>
+    position >= SEARCH_INFEED_START && (position - SEARCH_INFEED_START) % SEARCH_INFEED_EVERY === 0;
 
 interface SearchResultsProps {
     results: SearchResult[];
@@ -97,6 +105,9 @@ export function SearchResults({ results, query }: SearchResultsProps) {
                         </div>
                         {adRow && adRow.length > 0 && (
                             <AdRow cells={adRow} position={`search-row-${rowIndex + 1}`} trackingCategory="search" wide />
+                        )}
+                        {isSearchInfeedPosition(index + 1) && results.length - (index + 1) >= MIN_RESULTS_AFTER_AD_ROW && (
+                            <InFeedAdSlot slot={SEARCH_INFEED} />
                         )}
                     </Fragment>
                 );

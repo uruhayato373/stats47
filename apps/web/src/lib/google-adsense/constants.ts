@@ -248,6 +248,12 @@ export const MUNICIPALITIES_INDEX_INFEED: AdSlotConfig = { slotId: "7257285208",
 export const SURVEY_INDEX_INFEED: AdSlotConfig = { slotId: "9691876858", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-survey-index-infeed
 export const BLOG_INDEX_INFEED_1: AdSlotConfig = { slotId: "6024415380", format: "infeed", layoutKey: LIST_INFEED_IMAGE_TOP_LAYOUT_KEY }; // stats47-blog-index-infeed-1
 export const BLOG_INDEX_INFEED_2: AdSlotConfig = { slotId: "4247978485", format: "infeed", layoutKey: LIST_INFEED_IMAGE_TOP_LAYOUT_KEY }; // stats47-blog-index-infeed-2
+/**
+ * 検索の結果の一覧の 60 件目より後に、30 件ごとに繰り返すインフィード広告 (2026-11-13 オーナー決定・同日作成)。
+ * インフィード広告は同じフィードの中で同じコードを何度置いてもよい (AdSense のコード生成画面の案内)。サイトの「1 ページで同じユニットを
+ * 重ねない」の例外で、広告の枠の台帳の行は 1 つ
+ */
+export const SEARCH_INFEED: AdSlotConfig = { slotId: "7824582218", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-search-infeed
 
 /**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）

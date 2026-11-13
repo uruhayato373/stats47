@@ -47,8 +47,12 @@ export function generateMetadata(): Metadata {
   };
 }
 
-/** インフィード広告を入れる位置 (何件目の後か) */
-const SURVEY_INDEX_INFEED_AFTER = 25;
+/**
+ * インフィード広告を入れる位置。25 件目の後から 30 件ごと (25・55・85 … 件目の後) に、同じユニットを繰り返す
+ * (インフィード広告は同じフィードで同じコードを繰り返してよい。2026-11-13 オーナー決定。25 件目の後から最後まで約 12,000px 空いていた)
+ */
+const SURVEY_INDEX_INFEED_START = 25;
+const SURVEY_INDEX_INFEED_EVERY = 30;
 
 export default async function SurveyIndexPage() {
   const surveysResult = await readSurveysFromR2();
@@ -120,8 +124,10 @@ export default async function SurveyIndexPage() {
                 </p>
               )}
             </SurfaceLinkCard>
-            {/* 一覧が 1 列のとき (スマホ) 25 件目の後にインフィード広告 (2026-11-13 オーナー決定。一覧は約 15,000px 続く) */}
-            {index + 1 === SURVEY_INDEX_INFEED_AFTER && index + 1 < sortedSurveys.length && (
+            {/* 一覧が 1 列のとき (スマホ) 25 件目の後から 30 件ごとにインフィード広告 (2026-11-13 オーナー決定。一覧は約 15,000px 続く) */}
+            {index + 1 >= SURVEY_INDEX_INFEED_START &&
+              (index + 1 - SURVEY_INDEX_INFEED_START) % SURVEY_INDEX_INFEED_EVERY === 0 &&
+              sortedSurveys.length - (index + 1) >= 3 && (
               <div className="md:hidden"><InFeedAdSlot slot={SURVEY_INDEX_INFEED} /></div>
             )}
             </Fragment>
