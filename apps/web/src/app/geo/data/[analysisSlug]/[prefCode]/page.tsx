@@ -10,9 +10,9 @@ import {
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
-import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { Breadcrumbs, PageHeader, PageShell, PanelGrid } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection, ValueTable } from '@/components/surface';
+import { StatTile, StatTileGrid, SurfaceSection, ValueTable } from '@/components/surface';
 
 import {
   GEO_CROSS_ANALYSIS_CONFIGS,
@@ -80,6 +80,26 @@ function valueUnit(key: string): string {
   if (key === 'medianResidentialLandPrice') return '円/㎡';
   if (/Population|population/.test(key)) return '人';
   return '';
+}
+
+/** 「この県の検算済み集計」の数値タイル。式で検算を見せる分析は検算の行を、それ以外は集計の項目をそのまま 1 枚にする */
+function summaryTiles(detail: GeoAnalysisPrefDetail): Array<{
+  label: string;
+  value: string | null;
+  unit?: string;
+}> {
+  if (
+    detail.slug === 'population-public-facility-access' ||
+    detail.slug === 'population-snow-designation' ||
+    detail.slug === 'population-landslide-exposure' ||
+    detail.slug === 'population-low-elevation'
+  )
+    return spatialAuditRows(detail);
+  return Object.entries(detail.summary).map(([key, value]) => ({
+    label: summaryLabels[key] ?? key,
+    value: typeof value === 'number' ? value.toLocaleString('ja-JP') : null,
+    unit: valueUnit(key) || undefined,
+  }));
 }
 
 function previewRows(detail: GeoAnalysisPrefDetail): Array<{
@@ -171,33 +191,21 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
         fixedPrefecture
       />
 
-      <SurfaceSection>
+      <PanelGrid as="section">
         <SectionHeader title="この県の検算済み集計" hideRule />
-        <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {detail.slug === 'population-public-facility-access' || detail.slug === 'population-snow-designation' || detail.slug === 'population-landslide-exposure' || detail.slug === 'population-low-elevation'
-            ? spatialAuditRows(detail).map((row) => (
-                <div key={row.label} className="border p-3">
-                  <dt className="text-xs text-muted-foreground">{row.label}</dt>
-                  <dd className="mt-1 font-semibold tabular-nums">
-                    {row.value}
-                  </dd>
-                </div>
-              ))
-            : Object.entries(detail.summary).map(([key, value]) => (
-                <div key={key} className="border p-3">
-                  <dt className="text-xs text-muted-foreground">
-                    {summaryLabels[key] ?? key}
-                  </dt>
-                  <dd className="mt-1 font-semibold tabular-nums">
-                    {typeof value === 'number'
-                      ? value.toLocaleString('ja-JP')
-                      : '—'}
-                    {valueUnit(key)}
-                  </dd>
-                </div>
-              ))}
-        </dl>
-      </SurfaceSection>
+        <StatTileGrid>
+          {/* 検算の式と丸め前の人口は桁が多い。4 列のマスに収まらない数は途中で折り返し、枠で切れないようにする */}
+          {summaryTiles(detail).map((tile) => (
+            <StatTile
+              key={tile.label}
+              className="wrap-anywhere"
+              label={tile.label}
+              value={tile.value}
+              unit={tile.unit}
+            />
+          ))}
+        </StatTileGrid>
+      </PanelGrid>
 
       <SurfaceSection className="mt-6">
         <SectionHeader
