@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-11-10T08:17:41.057Z",
+  "updatedAt": "2026-11-13T19:05:08.844Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -1479,22 +1479,6 @@
       "missingVersions": [
         "2026-09-28-v4"
       ]
-    },
-    {
-      "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
-      "noteUrl": null,
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": []
-    },
-    {
-      "articleKey": "A-laborwage-wages-by-industry-prefecture",
-      "noteUrl": null,
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": []
     },
     {
       "articleKey": "a-late-elderly-medical-expense-per-insured",

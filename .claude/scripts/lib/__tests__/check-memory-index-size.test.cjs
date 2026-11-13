@@ -17,7 +17,7 @@ function runIn(content) {
     return spawnSync(process.execPath, [CHECKER], {
       cwd: dir,
       encoding: "utf8",
-      env: { ...process.env, CLAUDE_PROJECT_DIR: dir },
+      env: { ...process.env, STATS47_SCAN_ROOT: dir },
     });
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -62,7 +62,7 @@ test("索引が無いときは止まる", () => {
     const result = spawnSync(process.execPath, [CHECKER], {
       cwd: dir,
       encoding: "utf8",
-      env: { ...process.env, CLAUDE_PROJECT_DIR: dir },
+      env: { ...process.env, STATS47_SCAN_ROOT: dir },
     });
     assert.equal(result.status, 1);
   } finally {

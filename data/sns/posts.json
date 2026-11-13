@@ -19705,7 +19705,7 @@
       "content_key": "vacant-housing-muni",
       "caption": "vacant-housing-muni（出典: e-Stat / 総務省統計）\nhttps://stats47.jp/blog/vacant-house-crisis?utm_source=x&utm_medium=social&utm_campaign=buzz-map-vacant-housing-muni&utm_content=question-a",
       "media_path": "sns/buzz-map/vacant-housing-muni/x/stills/vacant-housing-muni-45.png",
-      "template": "buzzmap-A",
+      "template": null,
       "utm_url": "https://stats47.jp/blog/vacant-house-crisis?utm_source=x&utm_medium=social&utm_campaign=buzz-map-vacant-housing-muni&utm_content=question-a",
       "attribution": "direct",
       "approval": {
@@ -19744,7 +19744,7 @@
       "content_key": "migration-inflow-top-decile-muni",
       "caption": "migration-inflow-top-decile-muni（出典: e-Stat / 総務省統計）\nhttps://stats47.jp/ranking/moving-in-excess-rate-japanese?utm_source=x&utm_medium=social&utm_campaign=buzz-map-migration-inflow-top-decile-muni&utm_content=question-a",
       "media_path": "sns/buzz-map/migration-inflow-top-decile-muni/x/stills/migration-inflow-top-decile-muni-45.png",
-      "template": "buzzmap-A",
+      "template": null,
       "utm_url": "https://stats47.jp/ranking/moving-in-excess-rate-japanese?utm_source=x&utm_medium=social&utm_campaign=buzz-map-migration-inflow-top-decile-muni&utm_content=question-a",
       "attribution": "direct",
       "approval": {
@@ -38195,7 +38195,7 @@
       "caption": "",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/buzz-map/highway-network-growth/x/stills/highway-network-growth-45.png",
-      "template": "buzz-map",
+      "template": null,
       "metric_keys": "[]",
       "material_keys": [
         "x/buzz-map/highway-network-growth"
@@ -38287,7 +38287,7 @@
       "caption": "",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/buzz-map/migration-x-highway/x/stills/migration-x-highway-45.png",
-      "template": "buzz-map",
+      "template": null,
       "metric_keys": "[]",
       "material_keys": [
         "x/buzz-map/migration-x-highway"
@@ -38379,7 +38379,7 @@
       "caption": "",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/buzz-map/tani-vs-sawa-place-names/x/stills/tani-vs-sawa-place-names-45.png",
-      "template": "buzz-map",
+      "template": null,
       "metric_keys": "[]",
       "material_keys": [
         "x/buzz-map/tani-vs-sawa-place-names"
@@ -38963,7 +38963,7 @@
       "caption": "農業産出額（2023年）\n\n【上位】\n1位 北海道 1,347,800百万円\n2位 鹿児島県 543,800百万円\n3位 茨城県 453,600百万円\n4位 千葉県 402,900百万円\n5位 熊本県 375,700百万円\n\n【下位】\n43位 石川県 52,100百万円\n44位 福井県 43,300百万円\n45位 奈良県 41,300百万円\n46位 大阪府 32,000百万円\n47位 東京都 22,000百万円\n\n1位と最下位で61.3倍差。\n\n出典: 社会・人口統計体系（stats47.jp）\n\n#都道府県ランキング #統計 #stats47",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/_replacements/2026-10-12/agricultural-output/all47.png",
-      "template": "ranking",
+      "template": null,
       "metric_keys": "[\"agricultural-output\"]",
       "material_keys": [
         "x/ranking/agricultural-output"
@@ -39749,7 +39749,7 @@
       "caption": "県外就職者比率が最も高い県は？（2024年）\n\n【上位】\n1位 埼玉県 32.9％\n2位 千葉県 32％\n3位 神奈川県 29.7％\n4位 奈良県 27.6％\n5位 兵庫県 18.8％\n\n【下位】\n43位 沖縄県 7.1％\n44位 長野県 6.8％\n45位 山形県 6.6％\n46位 新潟県 6.3％\n47位 北海道 4.9％\n\n1位と最下位で6.7倍差。\n\n出典: 社会・人口統計体系（stats47.jp）\n\n#都道府県ランキング #統計 #stats47",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/_replacements/2026-10-12/employed-outside-the-prefecture/all47.png",
-      "template": "ranking",
+      "template": null,
       "metric_keys": "[\"employed-outside-the-prefecture\"]",
       "material_keys": [
         "x/ranking/employed-outside-the-prefecture"
@@ -39875,7 +39875,7 @@
       "caption": "将来人口増減率（2050年）\n\n【上位】\n1位 東京都 2.5％\n2位 沖縄県 -5.21％\n3位 神奈川県 -7.72％\n4位 千葉県 -9.46％\n5位 埼玉県 -9.68％\n\n【下位】\n43位 長崎県 -33.8％\n44位 高知県 -34.78％\n45位 岩手県 -35.3％\n46位 青森県 -39.03％\n47位 秋田県 -41.59％\n\n\n出典: 日本の地域別将来推計人口（令和5年推計）（stats47.jp）\n\n#都道府県ランキング #統計 #stats47",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/_replacements/2026-10-12/future-population-change-rate-2050/all47.png",
-      "template": "ranking",
+      "template": null,
       "metric_keys": "[\"future-population-change-rate-2050\"]",
       "material_keys": [
         "x/ranking/future-population-change-rate-2050"
@@ -40049,7 +40049,7 @@
       "caption": "知能犯認知件数が最も多い県は？（2023年）\n\n【上位】\n1位 東京都 7,336件\n2位 大阪府 5,391件\n3位 兵庫県 3,559件\n4位 愛知県 3,346件\n5位 神奈川県 3,192件\n\n【下位】\n43位 山梨県 196件\n44位 鳥取県 182件\n45位 高知県 146件\n46位 岩手県 139件\n47位 福井県 130件\n\n1位と最下位で56.4倍差。\n\n出典: 社会・人口統計体系（stats47.jp）\n\n#都道府県ランキング #統計 #stats47",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/_replacements/2026-10-12/intellectual-crime-per-100k/all47.png",
-      "template": "ranking",
+      "template": null,
       "metric_keys": "[\"intellectual-crime-per-100k\"]",
       "material_keys": [
         "x/ranking/intellectual-crime-per-100k"
@@ -40485,7 +40485,7 @@
       "caption": "航空機操縦士の平均年収が最も高い県は？（2022年）\n\n【上位】\n1位 東京都 1,727.26万円\n2位 沖縄県 1,573.78万円\n3位 静岡県 1,463.49万円\n4位 福岡県 1,342.38万円\n5位 千葉県 1,290.96万円\n\n【下位】\n14位 香川県 638.91万円\n15位 茨城県 634.4万円\n16位 埼玉県 627.94万円\n17位 岡山県 475.08万円\n18位 佐賀県 388.68万円\n\n1位と最下位で4.4倍差。\n\n出典: 賃金構造基本統計調査（stats47.jp）\n\n#都道府県ランキング #統計 #stats47",
       "scheduled_at": null,
       "media_path": ".local/r2/sns/ranking/pilot-annual-income/x/stills/pilot-annual-income.png",
-      "template": "ranking",
+      "template": null,
       "metric_keys": "[\"pilot-annual-income\"]",
       "material_keys": [
         "x/ranking/pilot-annual-income"

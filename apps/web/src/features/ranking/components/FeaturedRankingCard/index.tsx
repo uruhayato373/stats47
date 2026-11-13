@@ -1,6 +1,6 @@
 import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { formatFeaturedValueDisplay, type RankingItem } from "@stats47/ranking";
 
 import { PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from "@/components/surface";
 
@@ -10,6 +10,8 @@ export interface FeaturedRankingCardProps {
   rankingKey: string;
   year: string;
   unit: string;
+  /** 指標の定義の表示単位 (item.valueDisplay)。渡せば定義の単位、無ければ図の規則で桁を寄せる */
+  valueDisplay?: RankingItem["valueDisplay"];
   model: FeaturedRankingCardModel;
 }
 
@@ -31,6 +33,7 @@ export function featuredValueSizeClass(valueWithUnit: string): string {
  * 高さは中身で決める (固定比率を持たない)。上から 問い → 1 位の県 → 値 → 年 → 地図 の順に縦に積む。
  * 問いと値は省略しない (2026-10-28 3 巡目。値が「58,021,…」と切れて単位も消え、問いが語の途中で切れていた)。
  * 値と単位は折り返さない 1 塊にし、桁の多い値は文字を段階で小さくする。
+ * 値はランキングのページと同じ表示単位で書く (「58,021,789百万円」でなく「58.0兆円」。2026-11-14)。
  * 地図はセルの下に全幅で置き、高さは地図の SVG と同じ縦横比 (320:190) で幅から決める。
  * 高さ 96px 固定では 3 列のカード (幅約 300px) で地図が小さく、小さな県の色が読めなかった (2026-11-03)。
  * カルーセルのカード見出しの下では枠を外したセルになる (PORTAL_CARD_CELL_CLASS)。
@@ -39,9 +42,10 @@ export function FeaturedRankingCard({
   rankingKey,
   year,
   unit,
+  valueDisplay,
   model,
 }: FeaturedRankingCardProps) {
-  const displayUnit = formatUnitForDisplay(unit);
+  const { value: displayValue, unit: displayUnit } = formatFeaturedValueDisplay({ unit, valueDisplay }, model.top.value);
   return (
     <SurfaceLinkCard
       href={hrefFor("ranking", { rankingKey: rankingKey })}
@@ -63,10 +67,10 @@ export function FeaturedRankingCard({
         <p
           className={cn(
             "mt-1 whitespace-nowrap font-semibold leading-tight tabular-nums text-foreground",
-            featuredValueSizeClass(`${model.top.value}${displayUnit}`),
+            featuredValueSizeClass(`${displayValue}${displayUnit}`),
           )}
         >
-          {model.top.value}
+          {displayValue}
           {displayUnit && (
             <span className="ml-0.5 text-xs font-medium text-muted-foreground">
               {displayUnit}

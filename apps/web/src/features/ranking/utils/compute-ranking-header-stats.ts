@@ -1,4 +1,5 @@
 import { NATIONAL_AREA_CODE } from "@stats47/area";
+import { formatChartValue } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision } from "@stats47/utils";
 
 import type { RankingValue } from "@stats47/ranking";
@@ -76,8 +77,11 @@ export function computeRankingHeaderStats(
  * これは `@stats47/utils` の確立した組で、Remotion / visualization / svg-builder も使う。
  *
  * @param precision 小数桁。省略時は 1 (旧挙動。**新規の呼び出しでは必ず渡す**)
+ * @param factor 表示単位への倍率 (`resolveRankingValueDisplay` が決めた値)。値は元の単位のまま渡す。
+ *   換算するときは単位の正典の `formatChartValue` で書き、0 でないのに 0 に丸まる値を「0.1未満」にする
  */
-export function formatRankingValue(value: number, precision = 1): string {
+export function formatRankingValue(value: number, precision = 1, factor = 1): string {
+  if (factor !== 1) return formatChartValue(value, { factor, decimals: precision });
   return formatValueWithPrecision(value, precision);
 }
 

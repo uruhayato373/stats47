@@ -13,6 +13,7 @@ import { trackAutoNavClick, wasNavClickSentSince } from "@/lib/analytics/events"
  * - 導線名は外側の `data-nav-surface`、ラベルは `data-nav-label` (無ければ行き先のページ種別) から取る。導線名が無ければ `unlabeled`
  * - 部品側がすでに trackNavClick を送ったクリックは送らない (送信を 1 tick 遅らせて部品側の記録を確かめる)
  * - `data-click-owner` の中 (rail_click・cta_click など専用イベントで数える領域) と外部リンクは送らない
+ * - 行き先の無いボタン代わりのリンク (`href="#"`。Leaflet の地図の拡大・縮小など) は、導線名が無ければ送らない
  * - クリックは止めない (preventDefault / stopPropagation を呼ばない)
  */
 export function NavClickTracker(): null {
@@ -49,18 +50,21 @@ export function resolveNavClick(
   if (!(anchor instanceof HTMLAnchorElement)) return null;
   if (anchor.closest("[data-click-owner]")) return null;
 
+  const rawHref = anchor.getAttribute("href") ?? "";
   let url: URL;
   try {
     // 相対の href (#見出し・?pref=) は今のページを基準に解釈する
-    url = new URL(anchor.getAttribute("href") ?? "", location.href);
+    url = new URL(rawHref, location.href);
   } catch {
     return null;
   }
   if (url.origin !== location.origin) return null;
 
   const surface = anchor.closest<HTMLElement>("[data-nav-surface]")?.dataset.navSurface;
-  // 同じページ内の移動 (#見出し) は、目次のように導線名が付いているものだけ数える
-  if (url.pathname === location.pathname && url.hash && !surface) return null;
+  // 同じページ内の移動 (#見出し) は、目次のように導線名が付いているものだけ数える。
+  // `href="#"` (Leaflet の拡大・縮小のようなボタン代わりのリンク) は url.hash が空になるので、書かれた href で見分ける
+  const isFragmentOnly = rawHref.trim().startsWith("#");
+  if (url.pathname === location.pathname && (url.hash || isFragmentOnly) && !surface) return null;
 
   // GA4 で読めるよう、日本語の見出しやパスは文字コードのままにしない
   const href = safeDecode(`${url.pathname}${url.search}${url.hash}`);

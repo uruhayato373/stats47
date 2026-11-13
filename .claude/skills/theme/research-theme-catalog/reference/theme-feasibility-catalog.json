@@ -8859,7 +8859,13 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "packages/types/src/indicator-sets/earthquake-exposure.ts"
         ],
-        "implementedThemeKey": "earthquake-exposure"
+        "implementedThemeKey": "earthquake-exposure",
+        "housingSourceInvestigation": {
+          "investigatedAt": "2026-11-14",
+          "status": "unfulfilled-maintained",
+          "summary": "住宅戸数を直接数える全国空間原典は、今回確認した公式ページの範囲では確保できなかった。候補105の住宅部分は未充足を維持し、採用指標と章への接続・空間集計は実装していない。",
+          "evidenceRef": "data/themes/evidence/2026-09-10-all-expansion.json#validation.earthquakeHousingSourceReview.housingSourceInvestigation"
+        }
       }
     },
     {

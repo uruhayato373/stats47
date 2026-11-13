@@ -34,7 +34,7 @@ export const portShipsTonnage: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.0001,
-    "decimalPlaces": 1,
+    "decimalPlaces": 0,
     "displayUnit": "万総トン",
   },
   "calculation": {

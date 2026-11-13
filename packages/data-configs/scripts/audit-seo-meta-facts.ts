@@ -26,6 +26,12 @@
  * ## 取れなかったことを「問題なし」に混ぜない
  *
  * 観測値を取得できなかった metric は `skipped` に数え、合格には数えない。
+ *
+ * 取れなかった理由は 2 つに分ける。R2 にまだ無い (404) 指標は判定不能に数えて通す
+ * (PR で足した指標の観測値は、マージ後の CI が R2 へ書くまで存在しない)。取得そのものの失敗
+ * (通信エラー・404 以外の応答・壊れた JSON) は、`--fail-on-new` では終了コード 1 で止める。
+ * 止めないと、R2 が応答しない run は 1 件も突合せずに通る (CI-TOOLING-FOLLOWUP-02)。
+ * 公開 URL が無いキーに 404、あるキーに 200 を返すことは 2026-11-14 に curl で確かめた。
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -50,6 +56,10 @@ const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 // 所要時間は R2 の往復待ちでほぼ決まる (約 1,240 件を読む)。手元の実測は 16 並列で 8.9〜10.2 秒、48 並列で 4.9〜5.0 秒、
 // どちらも判定不能 0 件 (2026-11-14・CI-SPEED-STATIC-GATES-HEAVY-STEPS-01)。
 const CONCURRENCY = 48;
+// 取得の失敗は 1 回だけやり直す (一時的な応答の乱れで CI を落とさない)
+const FETCH_RETRIES = 1;
+const FETCH_RETRY_WAIT_MS = 500;
+const HTTP_NOT_FOUND = 404;
 // cities.json also holds administrative wards, which the published municipality ranking leaves out.
 const MUNICIPALITY_RANKING_AREAS = resolveWardModeAreas(buildMunicipalityEntityPolicy(), "merged").codes;
 
@@ -87,19 +97,34 @@ function declaredYears(config: MetricConfig): Set<number> {
   return new Set();
 }
 
+/** rows が null のとき、failed は取得そのものの失敗 (通信エラー・404 以外の応答・壊れた JSON) を表す */
+interface StatsFetch {
+  rows: StatsRow[] | null;
+  failed: boolean;
+}
+
 async function fetchStats(
   key: string,
   entities: MetricConfig["entities"],
-): Promise<StatsRow[] | null> {
+): Promise<StatsFetch> {
   const isCityOnly = entities.includes("city") && !entities.includes("prefecture");
   const file = isCityOnly ? "cities.json" : "values.json";
-  const res = await fetch(`${R2}/app/stats/${key}/${file}`).catch(() => null);
-  if (!res || !res.ok) return null;
-  const payload = (await res.json().catch(() => null)) as { rows?: StatsRow[] } | null;
-  const rows = isCityOnly
-    ? payload?.rows?.filter((row) => MUNICIPALITY_RANKING_AREAS.has(row.areaCode))
-    : payload?.rows;
-  return rows?.length ? rows : null;
+  for (let attempt = 0; ; attempt++) {
+    const res = await fetch(`${R2}/app/stats/${key}/${file}`).catch(() => null);
+    // R2 にまだ無い指標。取得の失敗ではない
+    if (res?.status === HTTP_NOT_FOUND) return { rows: null, failed: false };
+    const payload = res?.ok
+      ? ((await res.json().catch(() => null)) as { rows?: StatsRow[] } | null)
+      : null;
+    if (payload) {
+      const rows = isCityOnly
+        ? payload.rows?.filter((row) => MUNICIPALITY_RANKING_AREAS.has(row.areaCode))
+        : payload.rows;
+      return { rows: rows?.length ? rows : null, failed: false };
+    }
+    if (attempt >= FETCH_RETRIES) return { rows: null, failed: true };
+    await new Promise((done) => setTimeout(done, FETCH_RETRY_WAIT_MS));
+  }
 }
 
 function loadBaseline(): Set<string> {
@@ -127,6 +152,7 @@ async function main(): Promise<void> {
   const results = new Map<string, SeoFactFinding[]>();
   let skipped = 0;
   const skippedKeys: string[] = [];
+  const fetchFailedKeys: string[] = [];
   let noClaim = 0;
 
   const queue = [...targets];
@@ -144,7 +170,8 @@ async function main(): Promise<void> {
           continue;
         }
 
-        const rows = await fetchStats(config.key, config.entities);
+        const { rows, failed } = await fetchStats(config.key, config.entities);
+        if (failed) fetchFailedKeys.push(config.key);
         if (!rows) {
           // 観測値を取れなかった。config だけで判定できる「宣言範囲外の年」は見る
           const f = checkSeoFacts({ claims, truth: null, declaredYears: declaredYears(config) });
@@ -209,6 +236,9 @@ async function main(): Promise<void> {
   if (skippedKeys.length > 0) {
     console.log(`  判定不能 key        : ${skippedKeys.sort().join(", ")}`);
   }
+  if (fetchFailedKeys.length > 0) {
+    console.log(`  うち取得の失敗      : ${fetchFailedKeys.length} (${fetchFailedKeys.sort().join(", ")})`);
+  }
 
   if (violatingKeys.length > 0) {
     console.log("\n── 不一致 ──");
@@ -227,6 +257,7 @@ async function main(): Promise<void> {
         {
           keys: violatingKeys,
           skippedKeys: skippedKeys.sort(),
+          fetchFailedKeys: fetchFailedKeys.sort(),
           findings: Object.fromEntries(results),
         },
         null,
@@ -273,6 +304,13 @@ async function main(): Promise<void> {
     if (added.length > 0) {
       console.error(`\n新規の不一致 ${added.length} 件: ${added.join(", ")}`);
       console.error("是正するか、意図した変更なら --update-baseline で baseline を更新してください");
+      process.exit(1);
+    }
+    if (fetchFailedKeys.length > 0) {
+      console.error(
+        `\nR2 から観測値を取得できなかった指標 ${fetchFailedKeys.length} 件は突合していません: ${fetchFailedKeys.join(", ")}`,
+      );
+      console.error(`取得先: ${R2} (通信エラー・404 以外の応答・壊れた JSON)。R2 の応答を確かめて再実行してください`);
       process.exit(1);
     }
     console.log("\n✅ 新規の不一致なし");

@@ -1,0 +1,25 @@
+{
+  "_comment": "MCP サーバーの用途と、それを使う規約・スキルの正本。接続の定義は .mcp.json (project) と各 PC の ~/.claude.json (local・user) が持ち、このファイルは名前で結ぶだけで接続先も資格情報も書かない。管理画面 /ops/mcp が、その PC の定義・有効か・接続確認と並べて表示する。.mcp.json にサーバーを足したらここにも足す (apps/admin/tests/unit/mcp-status.test.ts が、用途の記入漏れと、usedBy のファイルが実在しサーバー名を本文に持つことを確かめる)。",
+  "servers": {
+    "chrome-devtools": {
+      "purpose": "ブラウザの実測 (Performance trace・Network・DOM・Lighthouse)",
+      "usedBy": [".claude/skills/analytics/performance-improvement/SKILL.md"]
+    },
+    "seo-observability": {
+      "purpose": "検索成長の観測 (記録済みの GSC・GA4・PSI・CrUX・Cloudflare の値を読むだけ)",
+      "usedBy": [".claude/skills/analytics/search-growth/SKILL.md"]
+    },
+    "codex": {
+      "purpose": "OpenAI Codex によるセカンドオピニオン・独立レビューと画像生成",
+      "usedBy": [
+        ".claude/rules/codex-mcp.md",
+        ".claude/skills/blog/generate-blog-images/SKILL.md",
+        ".claude/skills/product/build-kindle-book/SKILL.md"
+      ]
+    },
+    "cloudflare-docs": {
+      "purpose": "Cloudflare の現行仕様の確認 (公式文書の検索)",
+      "usedBy": [".claude/skills/analytics/performance-improvement/SKILL.md"]
+    }
+  }
+}

@@ -181,7 +181,7 @@
         },
         {
           "label": "競合の月次定点観測",
-          "read": ".claude/skills/sns/competitor-scan/reference/reports"
+          "read": "data/sns/competitor-scans"
         },
         {
           "label": "開いているアラート Issue",

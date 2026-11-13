@@ -1,6 +1,10 @@
 #!/bin/sh
-# Pre-commitチェックスクリプトを実行
+# Pre-commitチェックスクリプトを実行 (段ごとの所要時間はスクリプトが終了時に出す)
 bash apps/web/scripts/pre-commit-checks.sh || exit 1
+# ここから下の段の所要時間も同じ形で出す (CI-SPEED-PRECOMMIT-TRIM-01)
+. apps/web/scripts/pre-commit-stage-timer.sh
+trap 'stage_summary ".husky/pre-commit の後段の所要時間"' EXIT
+stage "lyra の規則の書き込み漏れ (ui-theme:lyra:test)"
 # lyra の規則 (style-lyra.css) の部品の className への書き込み漏れ・cn-* の組み立て
 # (PR CI の static-gates と同一。正典: packages/ui-theme/README.md。実測 1 秒未満)
 npm run --silent ui-theme:lyra:test > /dev/null || { echo "❌ ui-theme:lyra:test が失敗 (npm run ui-theme:lyra で書き込み直す)"; exit 1; }

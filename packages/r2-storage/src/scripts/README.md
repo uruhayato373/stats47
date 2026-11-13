@@ -48,15 +48,15 @@ diffのdry-runはローカル検査のみ。S3の基底一致まで検査する�
 ```bash
 # generatorが変更bundleだけをisolated stagingへ生成
 npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json \
-  apps/web/scripts/generate-ogp-images.ts --type ranking-cards
+  apps/web/scripts/generate-ogp-images.ts --type ranking
 
 # planに列挙された画像だけをasset→manifestの順で反映
 npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
-  --plan .local/image-generation-publish-plan-ranking-cards.json
+  --plan .local/image-generation-publish-plan-ranking.json
 
 # 書込なしでlocal bundle + remote CAS前提だけを検証
 npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
-  --plan .local/image-generation-publish-plan-ranking-cards.json --dry-run
+  --plan .local/image-generation-publish-plan-ranking.json --dry-run
 ```
 
 画像publisherは`.local/image-staging/<type>`以外を拒否し、plan外ファイルを走査しない。

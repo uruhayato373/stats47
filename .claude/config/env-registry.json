@@ -59,14 +59,6 @@
       ]
     },
     {
-      "name": "AFB_API_KEY",
-      "visibility": "secret",
-      "contexts": [
-        "secret",
-        "process"
-      ]
-    },
-    {
       "name": "DISPLAY",
       "visibility": "server",
       "contexts": [
@@ -95,13 +87,6 @@
       ]
     },
     {
-      "name": "MEASUREMENT_SESSION",
-      "visibility": "secret",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
       "name": "MEASUREMENT_VAULT_KEY",
       "visibility": "secret",
       "contexts": [
@@ -121,76 +106,6 @@
       "visibility": "server",
       "contexts": [
         "process"
-      ]
-    },
-    {
-      "name": "STATS47_AUTH_PASSWORD",
-      "visibility": "secret",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "STATS47_AUTH_SOURCE",
-      "visibility": "public",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "STATS47_AUTH_TOTP",
-      "visibility": "secret",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "STATS47_AUTH_USER",
-      "visibility": "secret",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "MEASUREMENT_SESSION_A8",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
-      ]
-    },
-    {
-      "name": "MEASUREMENT_SESSION_MOSHIMO",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
-      ]
-    },
-    {
-      "name": "MEASUREMENT_SESSION_AFB",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
-      ]
-    },
-    {
-      "name": "MEASUREMENT_SESSION_NOTE",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
-      ]
-    },
-    {
-      "name": "MEASUREMENT_SESSION_GSC",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
-      ]
-    },
-    {
-      "name": "MEASUREMENT_SESSION_KDP",
-      "visibility": "secret",
-      "contexts": [
-        "secret"
       ]
     },
     {
@@ -1318,6 +1233,14 @@
       "contexts": [
         "process"
       ]
+    },
+    {
+      "name": "STATS47_SCAN_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "検査スクリプト (.claude/scripts/lib の check-*.cjs と preflight-commit.mjs) が検査するルートの上書き。テストの fixture 用で、既定はスクリプト自身の作業ツリー。CLAUDE_PROJECT_DIR は読まない"
     },
     {
       "name": "SURVEYS_JSON",

@@ -16,13 +16,21 @@ import {
 } from "d3";
 import { useEffect, useRef } from "react";
 import {
+  axisUnitBaseline,
+  bottomMarginForTickLabels,
   computeChartLayout,
   computeFontSize,
   computeMarginsByRatio,
+  fitCategoryAxis,
   leftMarginForTickLabels,
+  rightMarginForTickLabels,
+  topMarginForAxisUnit,
+  xTickLabelDy,
+  yTickCount,
 } from "../../../shared/layout";
 import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { useReadableFontSize } from "../../hooks/useReadableFontSize";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
 import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
@@ -66,6 +74,7 @@ export function LineChart({
   rightUnit,
 }: D3LineChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const plotRef = useRef<HTMLDivElement>(null);
   const { showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.timeSeries);
@@ -89,15 +98,20 @@ export function LineChart({
     marginLeft: propsMarginLeft ?? marginsByRatio.marginLeft,
   });
 
-  const {
-    innerWidth,
-    innerHeight,
-    marginTop,
-    marginLeft,
-    marginRight,
-    marginBottom,
-  } = layout;
-  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
+  const { innerWidth, innerHeight, marginLeft, marginRight } = layout;
+  // 縮小表示でも画面上で読める文字サイズ (viewBox 単位)。等倍以上なら従来の大きさのまま
+  const baseFontSize = useReadableFontSize(
+    plotRef,
+    width,
+    computeFontSize(width, height, CHART_STYLES.font.sizeRatio),
+  );
+  // 文字を大きくした分だけ上下の余白を足し、その分 viewBox を縦に伸ばす (プロット領域の高さは変えない)
+  const hasAxisUnit = !!unit || (hasRightAxis && !!rightUnit);
+  const marginTop = hasAxisUnit
+    ? topMarginForAxisUnit(baseFontSize, layout.marginTop)
+    : layout.marginTop;
+  const marginBottom = bottomMarginForTickLabels(baseFontSize, layout.marginBottom);
+  const drawHeight = height + (marginTop - layout.marginTop) + (marginBottom - layout.marginBottom);
 
   const isMultiSeries = !!(seriesConfig && seriesConfig.length > 0);
   const legendSeries = isMultiSeries
@@ -148,23 +162,56 @@ export function LineChart({
     const leftDomain = resolveChartDomain(numericSeriesValues(data, leftSeries.map(s => s.dataKey)), {mode: 'extent'}, yDomainProp);
     const rightDomain = resolveChartDomain(numericSeriesValues(data, rightSeries.map(s => s.dataKey)), {mode: 'extent'}, rightYDomain);
     if (!leftDomain && !rightDomain) return;
-    const y = scaleLinear().domain(leftDomain ?? rightDomain!).range([height - marginBottom, marginTop]);
-    const yRight = hasRightAxis && rightDomain ? scaleLinear().domain(rightDomain).range([height - marginBottom, marginTop]) : null;
+    const y = scaleLinear().domain(leftDomain ?? rightDomain!).range([drawHeight - marginBottom, marginTop]);
+    const yRight = hasRightAxis && rightDomain ? scaleLinear().domain(rightDomain).range([drawHeight - marginBottom, marginTop]) : null;
 
     // 縦軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     // (StackedAreaChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
-    const yTicks = y.ticks(innerHeight / 40);
-    const plotLeft = leftMarginForTickLabels(
+    const tickCount = yTickCount(innerHeight, baseFontSize);
+    const yTicks = y.ticks(tickCount);
+    const axisLeftEdge = leftMarginForTickLabels(
       yTicks.map((v) => yAxisFormatter(Number(v))),
       baseFontSize,
       marginLeft,
     );
-    const plotWidth = width - plotLeft - marginRight;
+    // 右軸の目盛りも実際の文字列から右余白を決める (文字を大きくしたときに右端で切れないように)
+    const rightTicks = yRight ? yRight.ticks(tickCount) : [];
+    const axisRightEdge =
+      width -
+      (yRight
+        ? rightMarginForTickLabels(
+            rightTicks.map((v) => yAxisFormatter(Number(v))),
+            baseFontSize,
+            marginRight,
+          )
+        : marginRight);
 
+    // 横軸の目盛りはラベルの幅と位置から選ぶ。少数の観測年は全て出し、長期系列は 5 年ごと、
+    // それでも重なる (縮小表示で文字を大きくした) ときは 10 年・20 年と広げる。
+    // 両端の年ラベルがはみ出すときは描画領域の左右を詰める。
     const catValues = data.map((d) => String(d[categoryKey] ?? ""));
-    const x = scalePoint()
-      .domain(catValues)
-      .range([plotLeft, width - marginRight]);
+    const scaleForRange = (left: number, right: number) => scalePoint().domain(catValues).range([left, right]);
+    const { plotLeft, plotRight, tickValues: filteredTicks } = fitCategoryAxis(
+      width,
+      axisLeftEdge,
+      axisRightEdge,
+      baseFontSize,
+      (left, right) => {
+        const scale = scaleForRange(left, right);
+        return data.map((d) => {
+          const value = String(d[categoryKey] ?? "");
+          return {
+            value,
+            label: String(d.label ?? value),
+            position: scale(value) ?? 0,
+            yearCode: (d as Record<string, unknown>).yearCode as string | number | undefined,
+          };
+        });
+      },
+      { explicit: xTickValues, showAllUpTo: 5, fallback: "ends" },
+    );
+    const plotWidth = plotRight - plotLeft;
+    const x = scaleForRange(plotLeft, plotRight);
 
     /** 系列が載る軸のスケール。右軸が無い場合は常に左。 */
     const scaleFor = (s: { yAxis?: "left" | "right" }) =>
@@ -188,19 +235,6 @@ export function LineChart({
         .attr("d", pathLine);
     });
 
-    // 少数の観測年は全て表示し、長期系列だけ5年ごとに間引く。
-    const tickInterval = 5;
-    const allCats = data.map((d) => String(d[categoryKey] ?? ""));
-    const annualTicks = allCats.length <= 5 ? allCats : allCats.filter((val) => {
-      const row = data.find((d) => String(d[categoryKey]) === val);
-      const code = String((row as Record<string, unknown>)?.yearCode ?? val);
-      const num = parseInt(code, 10);
-      return !isNaN(num) && num % tickInterval === 0;
-    });
-    const filteredTicks = xTickValues
-      ? allCats.filter((value) => xTickValues.includes(value))
-      : annualTicks.length > 0 ? annualTicks : allCats.filter((_, index) => index === 0 || index === allCats.length - 1);
-
     const xAxis = axisBottom(x)
       .tickValues(filteredTicks)
       .tickFormat((val) => {
@@ -210,11 +244,11 @@ export function LineChart({
       .tickSizeOuter(0);
     svg
       .append("g")
-      .attr("transform", `translate(0,${height - marginBottom})`)
+      .attr("transform", `translate(0,${drawHeight - marginBottom})`)
       .call(xAxis)
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", xTickLabelDy(baseFontSize)));
 
     const yAxis = axisLeft(y)
       .tickValues(yTicks)
@@ -236,10 +270,10 @@ export function LineChart({
       const rightAxisColor = rightSeries[0]?.color ?? "currentColor";
       svg
         .append("g")
-        .attr("transform", `translate(${width - marginRight},0)`)
+        .attr("transform", `translate(${plotRight},0)`)
         .call(
           axisRight(yRight)
-            .ticks(innerHeight / 40)
+            .tickValues(rightTicks)
             .tickFormat((v) => yAxisFormatter(Number(v))),
         )
         .call((g) => g.selectAll(".domain").remove())
@@ -257,23 +291,27 @@ export function LineChart({
       if (rightUnit) {
         svg
           .append("text")
-          .attr("x", width - marginRight)
-          .attr("y", marginTop - 8)
+          .attr("class", "axis-unit")
+          .attr("x", plotRight)
+          .attr("y", axisUnitBaseline(marginTop))
           .attr("text-anchor", "end")
           .attr("font-size", baseFontSize)
           .attr("fill", rightAxisColor)
           .text(rightUnit);
       }
-      if (unit) {
-        svg
-          .append("text")
-          .attr("x", plotLeft)
-          .attr("y", marginTop - 8)
-          .attr("text-anchor", "start")
-          .attr("font-size", baseFontSize)
-          .attr("fill", leftSeries[0]?.color ?? "currentColor")
-          .text(unit);
-      }
+    }
+    // 左軸の頭の単位。単軸でも出す (縦軸の数字だけでは何の量か読めない)。
+    // 2 軸のときは左右を見分けるため系列の色に合わせ、単軸は目盛りの文字と同じ色にする。
+    if (unit) {
+      svg
+        .append("text")
+        .attr("class", "axis-unit")
+        .attr("x", plotLeft)
+        .attr("y", axisUnitBaseline(marginTop))
+        .attr("text-anchor", "start")
+        .attr("font-size", baseFontSize)
+        .attr("fill", yRight ? (leftSeries[0]?.color ?? "currentColor") : "currentColor")
+        .text(unit);
     }
 
     // データポイント（静的表示用）
@@ -302,7 +340,7 @@ export function LineChart({
     const crosshair = svg
       .append("line")
       .attr("y1", marginTop)
-      .attr("y2", height - marginBottom)
+      .attr("y2", drawHeight - marginBottom)
       .attr("stroke", "hsl(var(--muted-foreground))")
       .attr("stroke-width", 1)
       .attr("stroke-dasharray", "4,3")
@@ -388,7 +426,7 @@ export function LineChart({
       });
 
     // 凡例は SVG 外に HTML で描画（重なり防止）
-    fitSvgViewBox(svgRef.current, width, height);
+    fitSvgViewBox(svgRef.current, width, drawHeight);
   }, [
     data,
     categoryKey,
@@ -397,7 +435,7 @@ export function LineChart({
     seriesConfig,
     showLegend,
     width,
-    height,
+    drawHeight,
     marginTop,
     marginRight,
     marginBottom,
@@ -428,10 +466,10 @@ export function LineChart({
         <h3 className="mb-2 self-start text-lg font-semibold">{title}</h3>
       )}
       {showLegend && <D3ChartLegend items={legendItems} />}
-      <div className="relative w-full overflow-hidden">
+      <div ref={plotRef} className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${width} ${drawHeight}`}
           className="h-auto w-full"
           overflow="hidden"
           role="img"

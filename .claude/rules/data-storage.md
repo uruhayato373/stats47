@@ -47,8 +47,9 @@ RDB の考え方で読む。
 | `.claude/state/` | エージェント運用の状態だけ (下の許可リスト) |
 | `.claude/config/` | 品質ゲートの基準・閾値。無人 run の Claude は `.claude/` に書けないので、エージェントが自分の品質ゲートを緩められない |
 
-監査・レビューの記録は `data/<領域>/{reviews,audits}/` に置き、カタログに行を足す (テーマ・調査・SEO)。skill の `reference/` は手順・契約・
-テンプレの置き場で、`reference/{reviews,audits}/` に置いた追跡ファイルは `GOVERNED` に当たって未宣言で落ちる (2026-11-14)。
+監査・レビューの記録は `data/<領域>/{reviews,audits}/` に置き、カタログに行を足す (テーマ・調査・SEO)。定期レポートは
+`data/<取得元>/<レポートの名前>/` に置く (SNS の週次・競合の定点観測・X とブログの勝ち要因)。skill の `reference/` は手順・契約・
+テンプレの置き場で、`reference/{reviews,audits,reports}/` に置いた追跡ファイルは `GOVERNED` に当たって未宣言で落ちる (2026-11-14)。
 未完了の対策は記録に溜めず、バックログのカードにする ([`docs-vs-issues.md`](./docs-vs-issues.md))。
 
 アプリが読む配信データは、`data/` の DB と R2 の観測値から生成スクリプトで R2 の snapshot にする。生成物を手で編集しない。

@@ -57,7 +57,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 | Secret                    | 用途                                                                                                                                                            | 形式                                                      |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
+| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts と R2 の編集権限が必要。デプロイは D1 を使わないので D1 の編集権限は要らない） |
 | `AUTH_SECRET`                | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
 | `WORKER_CACHE_PURGE_SECRET`  | R2公開後にWorkers Cacheを全体/tag purgeする内部APIのBearer認証。deploy時に同名Worker secretへ同期する                                                           | `openssl rand -hex 32`。Variable やログへ出さない         |
 | `CLAUDE_CODE_OAUTH_TOKEN`    | `backlog-loop-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
@@ -254,9 +254,14 @@ npm run workers:build
    - Account - Workers Scripts - Read
    - Account - Workers Scripts - Edit
    - Account - Account - Read
-   - Account - D1 - Edit
    - Account - R2 - Edit
 3. GitHub Settings > Secrets で `CLOUDFLARE_API_TOKEN` を更新
+
+D1 の編集権限は要らない。`apps/web/wrangler.toml` は D1 の binding を持たず、`.github/` と各 `package.json` の scripts に
+`wrangler d1` の呼び出しは見つからない (2026-11-14 に検索)。
+同じトークンを使う日次の使用量監視 (`cloudflare-usage-daily.yml` の `.claude/scripts/cloudflare/fetch-usage.mjs`) は
+D1 の使用量を GraphQL Analytics API で読むので、トークンを作り直すときは、このスクリプトの冒頭に書いてある読み取り権限
+(Account Analytics・Workers Scripts・D1 の Read) も付ける。
 
 #### API Token形式エラー
 
@@ -339,7 +344,6 @@ GitHub Actionsのキャッシュが古い場合:
 
 ### デプロイ前
 
-- [ ] D1データベースマイグレーション実行済み（必要な場合）
 - [ ] 環境変数が設定済み（GitHub Secrets / Repository Variables）
 - [ ] ロールバックプランを準備
 - [ ] 関係者への通知済み（本番デプロイの場合）

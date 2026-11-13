@@ -1,6 +1,5 @@
 
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricShortName } from "@stats47/ranking";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
@@ -8,7 +7,7 @@ import { ArrowRight, ListOrdered } from "lucide-react";
 import Link from "@/components/atoms/SiteLink";
 import { SectionCard } from "@/components/surface";
 
-import { readRankingItemsByCategory } from "@/features/ranking/server";
+import { rankingTop1Value, readRankingItemsByCategory } from "@/features/ranking/server";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
 
@@ -76,6 +75,8 @@ export async function RelatedRankingsGrid({
         {items.map((item) => {
           const readerLabel = metricShortName(item);
           const detail = getSidebarDetail(item);
+          // 1 位の値はランキングのページと同じ表示単位で書く (「270,584,874千円」でなく「2,706億円」。2026-11-14)
+          const top1Value = rankingTop1Value(item);
           return (
             <Link
               key={item.rankingKey}
@@ -96,9 +97,9 @@ export async function RelatedRankingsGrid({
                     {item.top1.rank ?? 1}位
                   </span>{" "}
                   {item.top1.areaName}{" "}
-                  {item.top1.value ? (
+                  {top1Value ? (
                     <span className="font-semibold text-foreground">
-                      {item.top1.value}{formatUnitForDisplay(item.unit)}
+                      {top1Value.value}{top1Value.unit}
                     </span>
                   ) : null}
                 </span>

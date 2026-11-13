@@ -72,7 +72,7 @@ node /tmp/sns-weekly-agg.js <monday> <sunday>
 
 ### 3. レポート生成
 
-`.claude/skills/sns/sns-weekly-report/reference/reports/{YYYY-Www}.md` に書き出す。frontmatter:
+`data/sns/weekly-reports/{YYYY-Www}.md` (台帳 `sns.weekly-reports`) に書き出す。frontmatter:
 
 ```yaml
 ---
@@ -85,7 +85,7 @@ status: active
 
 同週の Weekly Review（`data/reviews/weekly/{YYYY-Www}.md`）がある場合、対象週を相互に明記する。
 
-過去のレポートは `ls -t .claude/skills/sns/sns-weekly-report/reference/reports/*.md | head -5`
+過去のレポートは `ls -t data/sns/weekly-reports/*.md | head -5`
 で参照する。未完了の改善だけを `.claude/todo/improvements.md` へ具体化する。
 
 ### 4. 分析コメント

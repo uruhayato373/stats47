@@ -17,7 +17,7 @@ import Link from '@/components/atoms/SiteLink';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { STAT_VALUE_CLASS, SurfaceCard } from '@/components/surface';
 
-import { trackGeoRegionSelect } from '@/lib/analytics/events';
+import { navSurfaceProps, trackGeoRegionSelect } from '@/lib/analytics/events';
 
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
@@ -141,7 +141,7 @@ export function GeoDecisionExplorer({
         </Select>
       </div>
 
-      <PanelGrid className="mt-5 sm:grid-cols-2">
+      <PanelGrid className="mt-5 sm:grid-cols-2" {...navSurfaceProps('geo_analysis_list')}>
         {cards.map((card) => (
           <SurfaceCard key={card.href} className="p-5">
             <p className="text-xs font-semibold text-primary">{card.label}</p>

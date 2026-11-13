@@ -4,7 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const REGISTRY_PATH = path.resolve(ROOT, process.env.ENV_REGISTRY_PATH ?? ".claude/config/env-registry.json");
 const args = process.argv.slice(2);
 const isJson = args.includes("--json");

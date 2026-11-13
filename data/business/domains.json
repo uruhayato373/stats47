@@ -126,7 +126,8 @@
         { "label": "CI ワークフロー", "href": "/ops/workflows", "kind": "results" },
         { "label": "Mac の定期実行", "href": "/ops/mac-schedule", "kind": "results" },
         { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
-        { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" }
+        { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
+        { "label": "MCP の接続状況", "href": "/ops/mcp", "kind": "results" }
       ]
     }
   ],

@@ -15,7 +15,7 @@
  *   node .claude/scripts/blog/analyze-winning-patterns.mjs --json /tmp/wp.json
  *
  * 出力:
- *   .claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md
+ *   data/blog/winning-pattern-reports/<date>.md (台帳 blog.winning-pattern-reports)
  *   data/blog/winning-patterns.json                   機械向け (featureSignals + perArticleConformance)
  *
  * 主指標 = CTR (同 impression 条件での "魅力") + 掲載順位 (position)。
@@ -418,7 +418,7 @@ async function main() {
 
   // ── レポート (人間向け) ──
   const date = new Date().toISOString().slice(0, 10);
-  const reportDir = path.join(PROJECT_ROOT, ".claude/skills/blog/analyze-winning-patterns/reference/reports");
+  const reportDir = path.join(PROJECT_ROOT, datasetDir("blog.winning-pattern-reports"));
   fs.mkdirSync(reportDir, { recursive: true });
   const reportPath = path.join(reportDir, `${date}.md`);
   const sigLine = (s) =>

@@ -1,6 +1,5 @@
 #!/usr/bin/env tsx
 import { blogRendererSourcesForBackground, renderBlogImageBundleForBackground } from './lib/blog-fullbleed-render';
-import { resolvePreferredArticleBackgroundSource } from './lib/blog-fullbleed-background';
 /**
  * staged blog article から、fingerprint が変わった画像 bundle だけを生成する。
  *
@@ -30,10 +29,11 @@ import {
   BLOG_IMAGE_GENERATOR_SPEC,
 } from './data/image-generator-registry';
 import {
-  parseBlogArticleImageContext,
-} from './lib/blog-article-background';
-import { backgroundRecord } from './lib/blog-background-status';
-import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
+  backgroundRecord,
+  blogBackgroundBlockMessage,
+  classifyPublishedBackground,
+  resolveGitBackgroundSource,
+} from './lib/blog-background-status';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
   BLOG_IMAGE_STAGE_ROOT,
@@ -83,6 +83,8 @@ class MissingArticleBackgroundError extends Error {}
 // (2026-10-08 に bonito-catch-prefecture の 1 件で公開待ち 27 件のうち 24 件が試されずに run が止まった)。
 // 本体の SHA が記録と合わないとき (中身の改ざん・取り違え) は従来どおり exit 1 で run を止める。
 class StaleBackgroundMetadataError extends Error {}
+// 案内文に出す記事の path。このスクリプトが扱うのは送り箱 (contents/blog) の記事
+const outboxArticlePath = (slug: string) => `contents/blog/${slug}/article.md`;
 
 interface CliOptions {
   slugs: string[] | null;
@@ -255,17 +257,12 @@ async function readReusableAiBackground(options: {
 }): Promise<ReusableAiBackground | null> {
   const keys = blogImageKeys(options.slug);
   const visual = resolveOgpVisual(parseOgpVisualFrontmatter(options.markdown));
-  const articleSource = options.markdown
-    ? await resolvePreferredArticleBackgroundSource(
-        PROJECT_ROOT,
-        parseBlogArticleImageContext(options.slug, options.markdown)
-      )
-    : null;
-  const legacyCodexSource = articleSource ? null : await resolveCodexBackgroundSource(
+  // 背景の選択順 (git の背景 > 公開済み AI 背景の再利用) と案内文は lib/blog-background-status.ts が持つ
+  const codexSource = await resolveGitBackgroundSource(
     PROJECT_ROOT,
-    options.slug
+    options.slug,
+    options.markdown
   );
-  const codexSource = articleSource ?? legacyCodexSource;
   if (codexSource) {
     return {
       buffer: codexSource.buffer,
@@ -315,7 +312,13 @@ async function readReusableAiBackground(options: {
     }
     if (background) break;
   }
-  if (background?.source !== 'ai') return null;
+  const promptArgs = { ...visual, title: options.title };
+  const promptHash = computePromptHash(promptArgs);
+  const published = classifyPublishedBackground(background, [
+    promptHash,
+    computeLegacyPromptHashV1(promptArgs),
+  ]);
+  if (!background || published === 'missing') return null;
   if (typeof background.promptHash !== 'string') {
     throw new Error(`${options.slug}: AI背景のpromptHashがありません`);
   }
@@ -332,19 +335,11 @@ async function readReusableAiBackground(options: {
       `${options.slug}: AI背景SHAが共通manifestのasset契約と一致しません`
     );
   }
-  const promptArgs = { ...visual, title: options.title };
-  const promptHash = computePromptHash(promptArgs);
-  const legacyPromptHash = computeLegacyPromptHashV1(promptArgs);
-  if (
-    background.promptHash !== promptHash &&
-    background.promptHash !== legacyPromptHash
-  ) {
+  if (published === 'stale-ai') {
     // 記事の書き直しでタイトル等が変わった記事だけを skip (exit 20) にする。
     // 通常の Error だと公開 run 全体が止まり、後続の記事まで公開されなくなる (2026-10-07)。
     throw new MissingArticleBackgroundError(
-      `${options.slug}: 記事変更によりAI背景promptが変わりました。` +
-        '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください: ' +
-        `npm run blog-images:codex -- request-article --slug ${options.slug} --article contents/blog/${options.slug}/article.md`
+      `${options.slug}: ${blogBackgroundBlockMessage('stale-ai', options.slug, { articlePath: outboxArticlePath(options.slug) })}`
     );
   }
   const remoteBackground = await readRemoteObjectWithIdentity(keys.background);
@@ -437,8 +432,7 @@ async function main(): Promise<void> {
       : null;
     if (!background) {
       throw new MissingArticleBackgroundError(
-        `${slug}: 記事固有背景がありません。` +
-          'blog-images:codex request-article で生成してください'
+        `${slug}: ${blogBackgroundBlockMessage('missing', slug, { articlePath: outboxArticlePath(slug) })}`
       );
     }
     const data = resolveBlogImageData(slug, source.data);

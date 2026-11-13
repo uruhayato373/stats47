@@ -147,7 +147,6 @@
     "scriptsRoot": {
       "directory": ".claude/scripts",
       "allowedFiles": [
-        "setup-memory-symlink.mjs",
         "tsconfig.checkjs.json",
         "tsconfig.json"
       ]

@@ -8,6 +8,8 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { LinkRowFrame, LinkRowNav, linkRowItemClass } from '@/components/navigation/StatisticsScopeNav';
 import { SurfaceCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { DROP_REASON_TEXT, geoMapHref, prefName, type GeoMapSelection } from '../lib/geo-map-selection';
 import { loadGeoMapLayers, type GeoMapLayer, type GeoMapUnavailable } from '../lib/load-geo-map';
 
@@ -90,7 +92,7 @@ export async function GeoMapPage({ selection }: { selection: GeoMapSelection }) 
       }
     >
       <PanelGrid>
-        <div className="space-y-1">
+        <div className="space-y-1" {...navSurfaceProps('geo_map_control')}>
           <LinkRowNav label="表示する範囲" items={scopeNav.top} />
           {scopeNav.region && (
             <LinkRowNav

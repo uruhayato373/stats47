@@ -13,7 +13,7 @@ const path = require("node:path");
 const MAX_BYTES = 24_400;
 const MAX_LINES = 200;
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const INDEX_PATH = path.join(ROOT, ".claude", "memory", "MEMORY.md");
 
 /** 索引の本文から、上限超過の指摘を返す。バイト数は UTF-8 で数える。 */

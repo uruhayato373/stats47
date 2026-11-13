@@ -66,7 +66,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 2. 絵を地図の後ろに敷かない。県の色は値を表すので、地図の上にも下にも重ねず、地図の空いている位置に置く。
 3. 配色は指標の配色から渡す。発散配色の指標は単色が無いので中立色を使う。
 4. 試作の絵は git に入れない。プロンプト・出力の SHA・目視の結果は `data/ogp/ranking-card-motif-trial.json` に残す。
-5. 本番のカードへの反映は、試作の比較を見たオーナーの判断と、カードのクリックを測る計装の後にする。
+5. 本番のカードへの反映は、試作の比較を見たオーナーの判断と、カードのクリックを測る計装の後にする。ただし 2026-11-14 に ranking カード WebP の生成を止めたので、この絵の反映先の画像が今は無い (続けるか取り下げるかはオーナー判断待ち: RANKING-CARD-WEBP-UNUSED-01)。
 6. 切り抜きは透過 PNG とマゼンタ背景の両方を受ける。同じ指示でも形式は揃わない (2026-11-06 の試作で 3 枚中 2 枚が透過)。合成後は画素の検査に加えて実物を目視する。透過の見落としで出た黒い四角は、画素の検査を通過した。
 
 視覚方針の正典は [`デザインシステム`](../../docs/01_技術設計/04_デザインシステム.md) の「地域のデータアトラス」。本規約は画像種別・配信・生成方式を担当する。既存の個別 renderer や画像プロンプトを更新するときは、以下を満たす。
@@ -150,7 +150,6 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 | OGP: cities | 1200×630 | 所属県の画像を共用 | `app/areas/<県code>/ogp/ogp.png` | `--type areas` | ranking-ui-manager |
 | OGP: products | 1200×630 | 共通外部カード・商品名と販売媒体 | `app/products/<slug>/ogp/ogp.png` | `--type products` | image-prompt-curator |
 | カード: blog (light/dark)      | 640×336 WebP (40:21、画像内テキストなし)                                     | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori/Sharp、OGPとは別renderer)                                                                                                                                                                                                                                                                                                                                                                             | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
-| カード: ranking (light/dark)   | 640×360 WebP                                                                 | 共通地理地図 renderer → R2                                                                                                                                                                                                                                                                                                                                                                                                                                        | `app/ranking/<key>/thumbnail-{light,dark}.webp`                    | `generate-ogp-images.ts --type ranking-cards`   | ranking-publisher                                                |
 | カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
 | note カバー | 1280×670 (≒1.91:1) | cover-policies.json + Codex imagegen（文字込み） | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 
@@ -177,7 +176,7 @@ note全記事のカバー制作方針・KPI・比較実験の契約は
 # 特定タブを目視 (クラウドでは生成 HTML を Artifact 化)
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs blog-ogp,blog-card --limit 20
 # 欠落を HEAD/GET で確定 (stdout に tab: expected/ok/missing 集計)
-node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
+node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-ogp --check
 # 全種別を棚卸し → data/ogp/inventory.json
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
@@ -189,7 +188,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   (self-heal) → 最終監査 → inventory を develop commit。修復後も陳腐化/欠落が残れば
   `[OGP Alert]` Issueを起票しworkflowも失敗する (`ogp-alert,auto-generated`)。
 - **新規 ranking 公開時フック**: `sync-snapshots.yml` の `sync-ranking-keys` job が KNOWN keys 再生成直後に
-  `generate-ogp-images.ts --type ranking|ranking-cards --source known --max-generate 500` で新キー分を即生成→R2。
+  `generate-ogp-images.ts --type ranking --source known --max-generate 500` で新キー分を即生成→R2。
   未生成による og:image 404 を公開時に先回りする。
 - **blog** は別途 `pr-quality-check.yml` の Blog Thumbnail Gate で PR ゲート済 (`generate-blog-thumbnails-cloud.ts --audit`)。
 - 手動監査は `/audit-ogp-images` (下記)。`generate-ogp-images.ts --audit` は欠落>0 で exit 1 (CI ゲート可)。
@@ -207,9 +206,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 改善は inventory を見てから着手する。実行は種別ごとの既存 agent に委譲 (§4)。
 
 0. **ランタイム生成OGPの旧障害と恒久対策**: 2026-07-06のWorker例外1101を受け、全種別を事前生成した静的R2画像へ統一した。2026-10-26にはthemeとhome/categoryも共通経路へ揃えた。画像を先に公開し、metadata変更のデプロイ後に公開ページのog:imageと配信画像を照合する。
-1. **ranking リンクカード供給**: 旧 `ranking/prefecture/<key>/<year>/...png` は廃止。
-   `app/ranking/<key>/thumbnail-{light,dark}.webp` + 共通manifestへ移行済み。初回manifest移行だけは
-   legacyを安全にcurrent扱いできないため、件数制限付きbatchで再生成する。
+1. **ranking カード WebP は生成を止めた (2026-11-14・RANKING-CARD-WEBP-UNUSED-01)**: `app/ranking/<key>/thumbnail-{light,dark}.webp` を読む表示面が無く、最後の読み手 (survey ページの `baseThumbnailUrl`) は 2026-07-12 (15248a33e1) に消えていた。home / category / survey / blog は共通 inline SVG と `/api/ranking-card/<key>`、外部共有は ranking OGP (`ogp/ogp.png`) を使う。生成 (`--type ranking-cards`)・週次の修復と監査・ギャラリーの ranking-card タブ・sync-snapshots のフックは外した。R2 に残る約 4,900 枚の実体の削除はオーナー判断で、そのままにしている (復活させるときは git の 2026-11-14 の変更を戻す)。
 2. **note カバーの旧課題（2026-10-14解消、以下は履歴）**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
 3. **専用OGPを持たないページ**: tag / survey等はrootの静的defaultを継承し、市区町村は所属県の静的OGPを共用する。専用画像を増やす場合は流入と必要性を確認する。
 4. **theme / category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。
@@ -294,7 +291,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
     satori 描画。satori 非互換なら共有 render lib のタイトルカードにフォールバック。
     ※ 両コンポーネントは satori-strict 対応済 (mixed text+式 → template literal 化、`dotted`→`dashed`、
     複数子 span に `display:flex`)。この修正が無いと全件フォールバックする。
-  - **blog OGP / ranking カード**: 共有 render lib `apps/web/scripts/lib/blog-thumbnail-render.ts`
+  - **blog OGP**: 共有 render lib `apps/web/scripts/lib/blog-thumbnail-render.ts`
     の `buildElement({title, subtitle, category, domainPath})` (共通デザイン・drift 防止)。noteカバーは専用のCodex imagegen経路。
   - **blog は用途別に2レンダラーへ分離 (2026-08-22)**:
     - OGP = 1200×630 PNG。SNS上で画像単体でも意味が通るよう、カテゴリ・タイトル・ブランドを合成する。
@@ -309,22 +306,12 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
 - **生成スクリプト (クラウド/ローカルから直接実行)**:
   - blog OGP = `generate-blog-thumbnails-cloud.ts` (公開記事) /
     `generate-blog-thumbnails.ts` (公開前staged記事)
-  - ranking OGP / areas OGP / ranking カード = `generate-ogp-images.ts --type <ranking|areas|ranking-cards>`。noteカバーは `note:cover-production` とCodex imagegen。
+  - ranking OGP / areas OGP = `generate-ogp-images.ts --type <ranking|areas>`。noteカバーは `note:cover-production` とCodex imagegen。
   - いずれも`.local/image-staging/<type>`へ生成し、`push-generated-image-set.ts --plan <exact-plan>`で反映する。
   - CI fallback = `generate-ogp-images.yml` (手動 dispatch。ただしクラウド連携トークンは actions:write 無しのため、
     R2 creds のあるセッション/ローカルからの直接実行が主経路)。
 - **新規 ranking/area/blog/note を公開したら OGP/カバーも生成する**。未生成だと og:image が 404 になる。
-- **ranking リンクカード**は `app/ranking/<key>/thumbnail-{light,dark}.webp` (★canonical。旧
-  `ranking/prefecture/<key>/<year>/thumbnails/` は年入り・非 `app/` 名前空間で廃止)。
-  WebPは外部リンクカード用で、サイト内のhome/category/surveyは共通inline SVG componentを使う。
-  生成契約は`packages/ranking/src/types/ranking-thumbnail.ts`。全指標で
-  `packages/gis/data/geoshape/prefecture.topojson`と観測値から同じ地理地図を決定的に生成し、
-  metricごとの地図方式optionやタイル地図fallbackは設けない。横長カードでは本土を
-  時計回り32°へ平面回転して再fitし、沖縄インセットと凡例を省略して本土を大きく見せる
-  （描画SSOT: `MINI_PREFECTURE_THUMBNAIL_LAYOUT`）。1位情報を持つ640×360カードにする。各生成時に同ディレクトリの `thumbnail.json` へ
-  共通fingerprint/asset契約と、metadataとしてversion / rankingKey / geographicLayout / year /
-  入力R2キー / config / topologyを記録する。
-  WebPやmanifestを手編集せず、`generate-ogp-images.ts --type ranking-cards` で再生成する。
+- **ranking カード WebP** (`app/ranking/<key>/thumbnail-{light,dark}.webp`) は生成を止めた。経緯は §3 の項目 1。
 - **note カバー**: 正本はgit `data/note/cover-assets.json` + JSON Schema、実体は非公開R2の版別SHA付きkey。
   note上の設定有無は`npm run note:covers:audit`でv3記事詳細の`data.eyecatch`を全件検査する。
   一覧サムネイルは本文画像を代用する場合があり、R2保存画像やHTTP 200も設定済みの根拠にならない。
@@ -529,8 +516,9 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 - **県シルエットカード (§5.7)**: トークン SSOT `apps/web/scripts/data/pref-silhouette-tokens.ts` /
   レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type pref-silhouette`
 - **ブログ OGP AI 背景 (§5)**: 記事固有背景 `apps/web/scripts/lib/blog-article-background.ts` +
-  `assets/blog/article-backgrounds/` (生成は `/generate-blog-images` の Codex) / 背景の判定
-  `apps/web/scripts/lib/blog-background-status.ts` (push 前の検査 `check-blog-background.ts`) / 解決・hash
+  `assets/blog/article-backgrounds/` (生成は `/generate-blog-images` の Codex) / 背景の選択順・公開済み背景の照合・
+  背景が無いときの案内文は `apps/web/scripts/lib/blog-background-status.ts` の 1 か所 (生成スクリプトと push 前の検査
+  `check-blog-background.ts` はここを呼ぶ。呼び出し側へ書き戻さない) / 解決・hash
   `apps/web/scripts/lib/blog-ogp-visual.ts` / 合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` /
   bundle 生成 `apps/web/scripts/generate-blog-thumbnails{,-cloud}.ts` / 公開済み Gemini 背景の再利用だけに残す
   `blog-ogp-visual-catalog.ts`・`gemini-image-client.ts` / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ

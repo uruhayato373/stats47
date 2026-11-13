@@ -3,11 +3,10 @@
  *
  * Mac = キーチェーン (`security`)、Windows = 資格情報マネージャー (Win32 CredRead を PowerShell 5.1 から呼ぶ。
  * 追加モジュール不要)。同じサービス名を両 OS で使うので、スクリプト側は OS を意識しない。
- * 対象サービスの一覧と CI 許可は正本 `.claude/config/auth-credentials.json`。
+ * 対象サービスの一覧は正本 `.claude/config/auth-credentials.json`。
  *
- * CI (GitHub Actions) は正本で ciCredential=true の service だけ、collect step の環境変数
- * (STATS47_AUTH_SOURCE / _USER / _PASSWORD / _TOTP。workflow が Secrets STATS47_AUTH_<SERVICE>_* から渡す) を読む。
- * それ以外の service・OS では null (どの service が CI でパスワードを使うかは正本の ciCredential。2026-10-02 にココナラを外した)。
+ * 読めるのは Mac と Windows だけ。それ以外の OS (CI を含む) では常に null を返す。ID/PW を環境変数や Secrets から
+ * 読む経路は持たない (2026-10-20 に CI の取得を撤去し、ログインは Mac だけが持つ)。
  *
  * サービス名 (オーナーが各マシンで 1 回だけ登録する。値をログ・引数・ファイルへ出さない):
  *   stats47-measurement-<source>        アカウント = ログイン ID、パスワード = パスワード
@@ -31,19 +30,6 @@ const CONFIG_URL = new URL('../../config/auth-credentials.json', import.meta.url
 /** 正本 (auth-credentials.json) の services。呼ばれたときに読む (import 時には読まない)。 */
 export function credentialServices() {
   return JSON.parse(readFileSync(CONFIG_URL, 'utf8')).services;
-}
-
-/** CI で Secrets の ID/PW を使ってよい service。 */
-export function ciCredentialServices() {
-  return Object.entries(credentialServices()).filter(([, v]) => v.ciCredential === true).map(([k]) => k);
-}
-
-/** CI の環境変数から読む。GitHub Actions で、許可 service が step に渡されたときだけ。 */
-export function readCiCredential(source, env = process.env) {
-  if (env.GITHUB_ACTIONS !== 'true' || env.STATS47_AUTH_SOURCE !== source) return null;
-  if (!ciCredentialServices().includes(source)) return null;
-  if (!env.STATS47_AUTH_USER || !env.STATS47_AUTH_PASSWORD) return null;
-  return { user: env.STATS47_AUTH_USER, password: env.STATS47_AUTH_PASSWORD, totpSecret: env.STATS47_AUTH_TOTP || null };
 }
 
 export const SERVICE_PREFIX = 'stats47-measurement-';
@@ -122,8 +108,6 @@ export function readSecret(service, { platform = process.platform, exec = execFi
 
 /** ログイン用の資格情報。TOTP 秘密鍵が登録されていれば totpSecret に入れる (無ければ null)。 */
 export function readCredential(source, options = {}) {
-  const platform = options.platform ?? process.platform;
-  if (platform !== 'darwin' && platform !== 'win32') return readCiCredential(source, options.env);
   const login = readSecret(serviceName(source), options);
   if (!login) return null;
   const totp = readSecret(serviceName(source, 'totp'), options);

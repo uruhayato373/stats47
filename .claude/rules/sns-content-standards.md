@@ -343,7 +343,7 @@ Instagramは同じ入力から表紙・データ本体・出典/案内の3枚を
 §2-0 / §2-8 / §2-9 / §1 quota の改訂は**実測と競合観測に基づく**こと (`evidence-based-judgment.md`)。
 
 1. `analyze-x-winning-patterns.mjs` の月次レポート
-   (`.claude/skills/sns/x-viral-research/reference/reports/<date>.md`) か
+   (`data/sns/x-winning-pattern-reports/<date>.md`) か
    `/competitor-scan` の月次レビューを起点にする (思いつきで変えない)。
 2. x-strategist が「どの行をどう変えるか」の diff を提案として提示する。
 3. **人間が承認してから**台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) を編集する。編集後は

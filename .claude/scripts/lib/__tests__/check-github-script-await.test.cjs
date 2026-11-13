@@ -18,7 +18,7 @@ function fixture(workflowBody) {
 function run(dir) {
   const result = spawnSync(process.execPath, [CHECKER, "--json"], {
     cwd: dir,
-    env: { ...process.env, CLAUDE_PROJECT_DIR: dir },
+    env: { ...process.env, STATS47_SCAN_ROOT: dir },
     encoding: "utf8",
   });
   return { ...result, output: JSON.parse(result.stdout) };

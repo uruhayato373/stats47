@@ -33,7 +33,7 @@ interface StatTileProps {
   unit?: ReactNode;
   /** 値の右に置くバッジ (順位チップ・増減など) */
   badge?: ReactNode;
-  /** 値の下の補足 (年・全国平均など) */
+  /** 値の下の補足 (年・全国平均・検算の内訳の式など)。長い補足は折り返す */
   meta?: ReactNode;
   /** 右上の小さなアイコン (lucide)。飾りで押せない */
   icon?: ReactNode;
@@ -61,7 +61,8 @@ export function StatTile({
   return (
     <SurfaceCard data-slot-kind="stat-tile" className={cn("gap-3", action ? "relative" : undefined, className)}>
       <div className="flex items-start justify-between gap-3">
-        <dl className="flex min-w-0 flex-col gap-1">
+        {/* 枠より長い数や式は途中で折り返す (wrap-anywhere)。付けないと桁の多い値が枠の外へはみ出す。呼び出し側で付け足さない */}
+        <dl className="flex min-w-0 flex-col gap-1 wrap-anywhere">
           {/* 右上の操作は値の行の幅を削らないよう重ねて置き、名前の行だけその分を空ける */}
           <dt className={cn(STAT_LABEL_CLASS, action ? "pr-7" : undefined)}>{label}</dt>
           <dd className="flex flex-wrap items-center gap-x-2 gap-y-1">

@@ -28,7 +28,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { datasetPath } from "../../../config/datasets.mjs";
+import { DATASETS, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -37,7 +37,9 @@ const STATE_DIR = process.env.STATE_DIR;
 const PORTFOLIO = STATE_DIR ? path.join(STATE_DIR, "portfolio.json") : path.join(PROJECT_ROOT, datasetPath("surveys.portfolio"));
 const EXPERIMENTS = STATE_DIR ? path.join(STATE_DIR, "experiments.json") : path.join(PROJECT_ROOT, datasetPath("surveys.experiments"));
 
-const VERDICTS = new Set(["effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"]);
+// --verdict で確定できる値。語彙の正本は実験台帳の Schema で、ここに値を写さない (pending は未確定の印なので除く)
+const EXPERIMENTS_SCHEMA = load(path.join(PROJECT_ROOT, DATASETS.find((d) => d.id === "surveys.experiments").schema));
+const VERDICTS = new Set(EXPERIMENTS_SCHEMA.properties.experiments.items.properties.verdict.enum.filter((v) => v !== "pending"));
 const CHECKPOINTS = [
   ["d7", "evaluateAt7d"],
   ["d28", "evaluateAt28d"],

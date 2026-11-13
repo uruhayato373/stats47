@@ -1,5 +1,4 @@
 #!/usr/bin/env tsx
-import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * 静的画像 (OGP / リンクカード / note カバー) を Satori (Node) でレンダリングして
  * `.local/image-staging/<type>/<key>` に書き出す。R2 反映は生成された exact
@@ -15,7 +14,6 @@ import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
  * Usage:
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking       [--limit N] [--key a,b]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type areas
- *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking-cards [--limit N]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type note-covers   [--limit N] [--note-source remote|local]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type pref-silhouette [--key 28,13]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type products       [--key kindle-k-s1-02]
@@ -42,15 +40,6 @@ import { dirname, join, resolve, sep } from 'node:path';
 
 import { createElement as h } from 'react';
 
-import {
-  RANKING_THUMBNAIL_SIZE,
-  RANKING_THUMBNAIL_VERSION,
-  rankingThumbnailKeys,
-} from '@stats47/ranking';
-import {
-  generateRankingThumbnailMapSvg,
-  MINI_PREFECTURE_THUMBNAIL_LAYOUT,
-} from '@stats47/visualization/server';
 import { config as loadEnv } from 'dotenv';
 
 import {
@@ -79,7 +68,6 @@ import {
   type ImageGenerationPlan,
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
-import { resolveRankingImageVisualization } from './lib/ranking-image-visualization';
 import { selectRankingImagePartition } from './lib/ranking-image-year';
 import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
@@ -327,7 +315,6 @@ interface RankingItemRaw {
     sourceConfig?: { source?: { name?: string } };
     availableYears?: { yearCode?: string; yearName?: string }[];
     latestYear?: { yearCode?: string; yearName?: string };
-    visualization?: { colorScheme?: string; isReversed?: boolean };
   };
 }
 interface ValuesRaw {
@@ -391,7 +378,6 @@ async function buildRankingOgpData(key: string) {
     latestYearName,
     latestYear,
     rows,
-    visualization: it.visualization,
   };
 }
 
@@ -403,7 +389,6 @@ interface PreparedImage {
   id: string;
   plan: ImageGenerationPlan;
   rankingData?: BuiltRankingData;
-  rankingVisualization?: ReturnType<typeof resolveRankingImageVisualization>;
   note?: NoteEntry & { title: string };
   product?: StorefrontProduct;
 }
@@ -477,11 +462,7 @@ async function main() {
   if (opts.keys) {
     const knownIds = new Set(ids);
     const missing = opts.keys.filter((id) => !knownIds.has(id));
-    if (
-      missing.length > 0 &&
-      opts.type !== 'ranking' &&
-      opts.type !== 'ranking-cards'
-    ) {
+    if (missing.length > 0 && opts.type !== 'ranking') {
       throw new Error(`指定 key が生成対象にありません: ${missing.join(', ')}`);
     }
     ids = ids.filter((id) => opts.keys!.includes(id));
@@ -528,23 +509,6 @@ async function main() {
         },
       ];
     }
-    if (opts.type === 'ranking-cards') {
-      const keys = rankingThumbnailKeys(id);
-      return [
-        {
-          key: keys.light,
-          variant: 'light',
-          contentType: 'image/webp' as const,
-          ...RANKING_THUMBNAIL_SIZE,
-        },
-        {
-          key: keys.dark,
-          variant: 'dark',
-          contentType: 'image/webp' as const,
-          ...RANKING_THUMBNAIL_SIZE,
-        },
-      ];
-    }
     if (opts.type === 'pref-silhouette') {
       return PREF_CARD_PUSH_THEMES.flatMap((theme) =>
         PREF_CARD_RATIO_KEYS.map((ratio) => ({
@@ -583,7 +547,6 @@ async function main() {
     if (opts.type === 'themes' || opts.type === 'default') return `app/${opts.type}/${id}/ogp/generation.json`;
     if (opts.type === 'ranking') return `app/ranking/${id}/ogp/generation.json`;
     if (opts.type === 'areas') return `app/areas/${id}/ogp/generation.json`;
-    if (opts.type === 'ranking-cards') return rankingThumbnailKeys(id).manifest;
     if (opts.type === 'pref-silhouette')
       return `sns/pref-silhouette/${id}/generation.json`;
     if (opts.type === 'products') return `app/products/${id}/ogp/generation.json`;
@@ -601,44 +564,16 @@ async function main() {
   const prepare = async (id: string): Promise<PreparedImage | null> => {
     let input: unknown;
     let rankingData: BuiltRankingData | undefined;
-    let rankingVisualization: PreparedImage['rankingVisualization'];
     let note: PreparedImage['note'];
     let product: PreparedImage['product'];
 
-    if (opts.type === 'ranking' || opts.type === 'ranking-cards') {
+    if (opts.type === 'ranking') {
       const built = await buildRankingOgpData(id);
       rankingData = built;
-      if (opts.type === 'ranking-cards') {
-        rankingVisualization = resolveRankingImageVisualization(
-          built.visualization,
-          id
-        );
-      }
-      input =
-        opts.type === 'ranking'
-          ? {
-              ogp: built.ogp,
-              latestYearName: built.latestYearName,
-            }
-          : {
-              title: built.ogp.title,
-              year: built.latestYear,
-              unit: built.ogp.unit,
-              topAreaName: built.ogp.top3[0].name,
-              topValue: built.ogp.top3[0].value,
-              rows: built.rows.map((row) => ({
-                areaCode: row.areaCode,
-                value: row.value,
-                rank: row.rank,
-              })),
-              visualization: {
-                colorScheme: rankingVisualization!.colorScheme,
-                isReversed: rankingVisualization!.isReversed ?? null,
-              },
-              geographicLayout: MINI_PREFECTURE_THUMBNAIL_LAYOUT,
-              size: RANKING_THUMBNAIL_SIZE,
-              version: RANKING_THUMBNAIL_VERSION,
-            };
+      input = {
+        ogp: built.ogp,
+        latestYearName: built.latestYearName,
+      };
     } else if (opts.type === 'themes' || opts.type === 'default') {
       input = {title:opts.type==='themes'?ALL_THEMES.find(theme=>theme.themeKey===id)!.title:'統計で見る都道府県'};
     } else if (opts.type === 'areas') {
@@ -703,7 +638,7 @@ async function main() {
       rendererHash,
       assets: assetContractsFor(id),
     });
-    return { id, plan, rankingData, rankingVisualization, note, product };
+    return { id, plan, rankingData, note, product };
   };
 
   console.log(`入力指紋を計算中 (renderer=${rendererHash.slice(0, 12)})...`);
@@ -791,7 +726,7 @@ async function main() {
   }
 
   // render lib は生成時のみ読み込む (satori/sharp)
-  const { loadFonts, renderToPng, renderToWebP } =
+  const { loadFonts, renderToPng } =
     await import('./lib/satori-image-render');
   const fonts = loadFonts(PROJECT_ROOT);
 
@@ -900,77 +835,6 @@ async function main() {
           prefectureCode: id,
           ratios: PREF_CARD_RATIO_KEYS,
           themes: PREF_CARD_PUSH_THEMES,
-        };
-      } else if (opts.type === 'ranking-cards') {
-        const built = preparedImage.rankingData!;
-        const keys = rankingThumbnailKeys(id);
-        const lightAsset = plan.assets.find(
-          (asset) => asset.key === keys.light
-        )!;
-        const darkAsset = plan.assets.find((asset) => asset.key === keys.dark)!;
-        const rows = built.rows.flatMap((row) =>
-          row.areaCode && row.value !== null && row.value !== undefined
-            ? [
-                {
-                  areaCode: row.areaCode,
-                  value: row.value,
-                  rank: row.rank,
-                },
-              ]
-            : []
-        );
-        if (rows.length === 0 || !built.ogp.top3[0]) {
-          skipped++;
-          return;
-        }
-        const mapSvg = generateRankingThumbnailMapSvg(rows, {
-          ...preparedImage.rankingVisualization!,
-          idSuffix: id,
-        });
-        const { buildRankingThumbnailElement, formatRankingThumbnailValue } =
-          await import('./lib/ranking-thumbnail-render');
-        const renderData = {
-          title: built.ogp.title,
-          year: built.latestYear,
-          unit: built.ogp.unit,
-          topAreaName: built.ogp.top3[0].name,
-          topValue: formatRankingThumbnailValue(built.ogp.top3[0].value),
-          mapSvg,
-        };
-        const lightOut = stagePath(lightAsset.key);
-        const darkOut = stagePath(darkAsset.key);
-        await renderToWebP(
-          buildRankingThumbnailElement(renderData, false),
-          fonts,
-          lightOut,
-          RANKING_THUMBNAIL_SIZE
-        );
-        await renderToWebP(
-          buildRankingThumbnailElement(renderData, true),
-          fonts,
-          darkOut,
-          RANKING_THUMBNAIL_SIZE
-        );
-        assetFiles.set(lightAsset.key, lightOut);
-        assetFiles.set(darkAsset.key, darkOut);
-        metadata = {
-          version: RANKING_THUMBNAIL_VERSION,
-          rankingKey: id,
-          geographicLayout: MINI_PREFECTURE_THUMBNAIL_LAYOUT,
-          year: built.latestYear,
-          source: {
-            item: `app/ranking/${id}/item.json`,
-            values: `app/ranking/${id}/values.json`,
-            config: `${METRIC_DEFINITIONS_DIR}/${id}.ts`,
-            topology: 'packages/gis/data/geoshape/prefecture.topojson',
-          },
-          assets: {
-            light: keys.light,
-            dark: keys.dark,
-            width: RANKING_THUMBNAIL_SIZE.width,
-            height: RANKING_THUMBNAIL_SIZE.height,
-            format: 'webp',
-          },
         };
       } else if (opts.type === 'products') {
         const product = preparedImage.product!;

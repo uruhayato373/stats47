@@ -42,7 +42,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs blog-ogp,blog-card --limit 20
 
 # 欠落を GET で確定 (stdout に tab: entries/images/ok/missing 集計 + missing 一覧)
-node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
+node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-ogp --check
 
 # 全種別を棚卸し → data/ogp/inventory.json (既定サンプリング、全量は --all 併用)
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
@@ -50,7 +50,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 タブ (真実源は `gallery-collectors.mjs` の `OGP_TABS`): `blog-ogp` `ranking-ogp` `theme-ogp`
 `category-ogp` `areas-ogp` (静的 R2・**県シルエットカード** ogp-image-standards.md §5.7) /
-`blog-card` `ranking-card` (リンクカード light/dark) / `note-cover` (note カバー) /
+`blog-card` (リンクカード light/dark) / `note-cover` (note カバー) /
 `pref-silhouette` (県シルエット SNS 素材 5比率×blue/dark)。
 
 `note-cover`タブのOK/MissingはR2公開URLの到達性を表す。note上でのカバー設定件数として報告しない。

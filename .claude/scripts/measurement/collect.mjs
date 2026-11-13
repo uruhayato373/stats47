@@ -5,12 +5,11 @@ import { gunzipSync } from 'node:zlib';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, lstatSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
-import { readVault, writeVault } from './vault.mjs';
+import { sourceFor, scopedState, failureCode } from './sources.mjs';
+import { writeVault } from './vault.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
 import { kdpDailyRows } from './kdp-reports.mjs';
 import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
-import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
@@ -18,11 +17,10 @@ const run = promisify(execFile);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const name = process.argv[2];
 const source = sourceFor(name);
-const local = process.argv.includes('--local');
-// --local --vault: Mac の定期実行 (collect-local.mjs)。セッションは Mac の専用プロファイルから取り出し、
-// 証跡・販売台帳の候補・直近の試行は CI と同じく private R2 の保管庫へ書く (restore.mjs の読み手を変えない)。
-// CI 専用の処理 (保管庫のセッション・CI 再ログイン・認証停止の記録) は行わない。
-const vaultWrites = !local || process.argv.includes('--vault');
+// 取得は Mac だけが行う (collect-local.mjs。2026-10-20 に CI の取得を撤去)。セッションは Mac の専用プロファイルから
+// 取り出したもの (--bootstrap) だけを使い、保管庫にはセッションを置かない。
+// --vault: 証跡・販売台帳の候補・直近の試行を private R2 の保管庫へ書く (restore.mjs が読む)。付けなければ手元の試し実行。
+const vaultWrites = process.argv.includes('--vault');
 const now = new Date().toISOString();
 const runId = process.env.GITHUB_RUN_ID || String(Date.now());
 const runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT || 1);
@@ -34,7 +32,7 @@ const publicDir = join(ROOT, '.local/authenticated-ci-public');
 mkdirSync(work, { recursive: true, mode: 0o700 });
 mkdirSync(publicDir, { recursive: true });
 const result = { schemaVersion: 1, source: name, capability: source.capability, observedAt: now, status: 'failed', code: null, runId, runAttempt,
-  metricsAvailable: false, inventoryAvailable: false, evidence: null, collectionAttempted: false, recovery: null };
+  metricsAvailable: false, inventoryAvailable: false, evidence: null, collectionAttempted: false };
 let logs = '';
 let bundle;
 const files = {};
@@ -65,66 +63,16 @@ async function command(script, args = [], timeout = 360000, acceptedCodes = []) 
 }
 try {
   if (source.transport !== 'api') {
-    let seed;
-    if (local) {
-      const index = process.argv.indexOf('--bootstrap');
-      const path = index < 0 ? null : process.argv[index + 1];
-      if (!path) throw new Error('session_missing');
-      seed = readFileSync(path, 'utf8');
-    } else seed = process.env.MEASUREMENT_SESSION;
+    const index = process.argv.indexOf('--bootstrap');
+    const path = index < 0 ? null : process.argv[index + 1];
+    if (!path) throw new Error('session_missing');
+    const seed = readFileSync(path, 'utf8');
     if (seed) bundle = JSON.parse(/** @type {any} */ (gunzipSync(Buffer.from(seed, 'base64'), { maxOutputLength: 4 * 1024 * 1024 })));
-    if (!local) {
-      const remote = await readVault(`${name}/session`);
-      bundle = selectSessionBundle(bundle, remote);
-    }
-    // CI 再ログイン対象でセッションがまだ無い source (楽天など) は、空の state から Secrets で初回ログインする。
-    // 世代は 1970 (人のセッションより必ず古い) にしておき、入り直しに成功した時点の世代で置き換わる。
-    if (!bundle && !local && process.env.STATS47_AUTH_SOURCE === name && process.env.STATS47_AUTH_USER) {
-      bundle = { schemaVersion: 1, source: name, capturedAt: '1970-01-01T00:00:00.000Z', state: null };
-    }
     if (!bundle || bundle.source !== name) throw new Error('session_missing');
-    // CI 再ログイン (auth-credentials.json の ciCredential。workflow が許可 service にだけ Secrets を渡す)。
-    // 前回の CI 再ログインが失敗した世代では再試行しない (アカウントロック回避)。新しい人のセッションで解除される。
-    const ciLogin = !local && process.env.STATS47_AUTH_SOURCE === name && Boolean(process.env.STATS47_AUTH_USER);
-    let pause = null;
-    if (!local) {
-      pause = authenticationPause(name, bundle, await readVault(`${name}/auth-recovery`), await readVault(`${name}/latest-attempt`));
-      if (pause && (!ciLogin || pause.reloginFailedAt)) {
-        await writeVault(`${name}/auth-recovery`, pause);
-        result.recovery = { state: 'awaiting_reauthentication', blockedSince: pause.blockedSince };
-        throw new Error('auth_required: awaiting_new_human_session');
-      }
-    }
-    writeFileSync(join(work, 'state.json'), JSON.stringify(bundle.state ? scopedState(name, bundle.state) : { cookies: [], origins: [] }), { mode: 0o600 });
+    writeFileSync(join(work, 'state.json'), JSON.stringify(scopedState(name, bundle.state)), { mode: 0o600 });
     if (name === 'kdp') {
       if (!/^B0[A-Z0-9]{8}$/.test(bundle.account?.knownAsin ?? '')) throw new Error('account_mismatch');
       writeFileSync(join(ROOT, '.local/kdp-account.local.json'), JSON.stringify(bundle.account), { mode: 0o600 });
-    }
-    if (ciLogin) {
-      let relogin;
-      try {
-        const { stdout } = await run(process.execPath, ['.claude/scripts/measurement/refresh-session.mjs', name, '--ci',
-          '--state', join(work, 'state.json'), '--out', join(work, 'relogin.json')], { cwd: ROOT, timeout: 300000 });
-        relogin = JSON.parse(stdout.trim().split('\n').pop());
-      } catch (error) {
-        try { relogin = JSON.parse(String(error.stdout ?? '').trim().split('\n').pop()); } catch { relogin = { status: 'error' }; }
-      }
-      result.relogin = relogin.status === 'ok' ? (relogin.relogged ? 'relogged' : 'session_valid') : relogin.status;
-      if (relogin.status === 'ok' && relogin.relogged) {
-        // パスワードで入り直した state は新しい世代として扱い、拒否済み世代の停止を解除する
-        const state = scopedState(name, JSON.parse(readFileSync(join(work, 'relogin.json'), 'utf8')));
-        bundle = { ...bundle, capturedAt: now, bootstrapCapturedAt: now, state };
-        writeFileSync(join(work, 'state.json'), JSON.stringify(state), { mode: 0o600 });
-        await writeVault(`${name}/session`, bundle);
-      } else if (relogin.status !== 'ok' && relogin.status !== 'no_credential') {
-        const recovery = { ...(pause ?? rejectedAuthentication(name, bundle, now)), reloginFailedAt: now, reloginStatus: relogin.status };
-        await writeVault(`${name}/auth-recovery`, recovery);
-        result.recovery = { state: 'awaiting_reauthentication', blockedSince: recovery.blockedSince };
-        throw new Error(`auth_required: ci_relogin_${relogin.status}`);
-      } else if (pause) {
-        result.recovery = { state: 'awaiting_reauthentication', blockedSince: pause.blockedSince };
-        throw new Error('auth_required: awaiting_new_human_session');
-      }
     }
   }
   result.collectionAttempted = true;
@@ -213,7 +161,7 @@ try {
           schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
         });
         // 販売台帳の候補。書籍ごとの集計値と保管庫キー・内容ハッシュだけを公開の結果へ出し、生の明細は保管庫に残す。
-        // 書き込みは contents: write を持つ record job が develop の台帳へ重複なしで行う (summarize.mjs)。
+        // 台帳への書き込みは summarize.mjs が重複なしで行う。
         result.quality.salesLedger = { month: monthly.period.month, vaultKey,
           ...kdpMonthlyObservations(monthly, { vaultKey, recordedAt: now }) };
       }
@@ -225,44 +173,27 @@ try {
     result.evidence = await writeVault(historyKey, evidence);
     await writeVault(`${name}/latest-success`, evidence);
   }
-  if (!local) {
-    if (existsSync(join(work, 'refreshed.json'))) {
-      await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(/** @type {any} */ (readFileSync(join(work, 'refreshed.json'))))) });
-    }
-  }
   result.status = 'pass';
   result.metricsAvailable = !['publication-status', 'account-status', 'partnership-status'].includes(source.capability);
 } catch (error) {
   result.code = failureCode(error.message);
   if (name === 'note' && existsSync(join(work, 'note'))) capture(`.local/authenticated-measurement/${name}-${runId}/note`);
-  // Raw diagnostics stay in a private encrypted object. Only fixed codes reach public Actions logs.
+  // Raw diagnostics stay in a private encrypted object. Only fixed codes reach the git record.
   writeFileSync(join(work, 'failure.log'), `${error.message}\n${logs}`, { mode: 0o600 });
   if (vaultWrites) {
     try {
-      if (!local && result.code === 'auth_required' && result.collectionAttempted && bundle) {
-        const recovery = rejectedAuthentication(name, bundle, now);
-        await writeVault(`${name}/auth-recovery`, recovery);
-        result.recovery = { state: 'awaiting_reauthentication', blockedSince: recovery.blockedSince };
-      }
-      // Keep the last real browser failure in its history slot while waiting for the owner.
+      // Keep the last real browser failure in its history slot; a run that never reached the browser goes to latest-blocked.
       result.evidence = await writeVault(result.collectionAttempted ? historyKey : `${name}/latest-blocked`,
         { source: name, observedAt: now, collectionAttempted: result.collectionAttempted, message: error.message, files, logs });
     }
     catch { result.code = 'storage_error'; }
   }
 }
-if (!local) {
-  // A complete account assertion can refresh authentication even when a report has missing rows.
-  if (bundle && existsSync(join(work, 'refreshed.json.verified')) && existsSync(join(work, 'refreshed.json'))) {
-    try { await writeVault(`${name}/session`, { ...bundle, capturedAt: new Date().toISOString(), state: scopedState(name, JSON.parse(/** @type {any} */ (readFileSync(join(work, 'refreshed.json'))))) }); }
-    catch { result.status = 'failed'; result.code = 'storage_error'; }
-  }
-}
 if (vaultWrites) {
   try { await writeVault(`${name}/latest-attempt`, result); }
   catch { result.status = 'failed'; result.code = 'storage_error'; }
 }
-// Re-running a job can retain same-named artifacts. Distinct filenames prevent merge races.
+// summarize.mjs picks the highest attempt per source from this directory.
 writeFileSync(join(publicDir, `${name}-${runAttempt}.json`), JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify(result));
 process.exitCode = result.status === 'pass' ? 0 : 1;

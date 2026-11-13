@@ -233,11 +233,16 @@ export function areaChartFromArticleData(parsed: unknown, scope: AreaScope | und
   };
 }
 
-/** True when the x labels are not years: a cycle such as twelve months, which a line would read as a trend. */
+/**
+ * A label that opens with its year is a point in time: 「2024」「2024年度」, and a quarter or month under a
+ * two-digit year (「24年1Q」「24年10月」). A class of years (「10年未満」) has no digit after 年 and stays a category.
+ */
+const DATED_LABEL = /^(?:\d{4}|\d{2}年\d)/;
+/** True when the x labels carry no year: a cycle such as twelve months, which a line would read as a trend. */
 export function hasCyclicAxis(parsed: unknown) {
   const series = articleSeries(parsed);
   if ('skip' in series) return false;
-  return series.some((s) => s.points.some((p) => !/^\d{4}/.test(p.x)));
+  return series.some((s) => s.points.some((p) => !DATED_LABEL.test(p.x)));
 }
 
 /** Article json with non-year categories → the grouped bars. */

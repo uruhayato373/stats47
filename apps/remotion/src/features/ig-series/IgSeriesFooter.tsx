@@ -1,7 +1,6 @@
 import React from "react";
 
 import { IG_FONT, IG_SERIES, type IgSeriesId } from "./tokens";
-import { SITE } from "@stats47/types";
 
 interface IgSeriesFooterProps {
   series: IgSeriesId;
@@ -13,7 +12,8 @@ interface IgSeriesFooterProps {
 }
 
 /**
- * ブランド行（左: stats47.jp / 右: 出典）。地色に直接載る 26px の小さい文字なので、
+ * 出典行（右寄せ）。発行元は投稿文で示し、画像には入れない（chart-image-copy.md）。
+ * 地色に直接載る 26px の小さい文字なので、
  * `palette.inkSmall`（32px 未満で contrast >= 4.5:1 を満たす色）を使う。
  */
 export const IgSeriesFooter: React.FC<IgSeriesFooterProps> = ({
@@ -33,14 +33,13 @@ export const IgSeriesFooter: React.FC<IgSeriesFooterProps> = ({
         bottom,
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "flex-end",
         fontSize: 26,
         fontFamily: IG_FONT.body,
         fontWeight: IG_FONT.weight.black,
         color: palette.inkSmall,
       }}
     >
-      <span>{`${SITE.domain}　${SITE.name}`}</span>
       <span>出典: {sourceLabel}</span>
     </div>
   );

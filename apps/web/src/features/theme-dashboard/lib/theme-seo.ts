@@ -9,8 +9,9 @@
 import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { formatUnitForDisplay, parseUnit } from "@stats47/data-configs/unit";
 import { filterOutNationalArea, getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
-import { readRankingItemFromR2, readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
+
+import { readThemePrefectureValues, readThemeRankingItem } from "./theme-ranking-readers";
 
 /**
  * テーマを見る地域の単位。national = `/themes/<テーマ>` (全国の値と県の選択。47 都道府県を比べる図は置かない)、
@@ -117,17 +118,30 @@ export function leadFactFromValues(item: RankingItem, values: RankingValue[]): T
   };
 }
 
-/** 題を作る段階 (generateMetadata) で、主な指標 1 つの最新年の値を読む (2 回の R2 読み込み)。読めなければ null */
+/**
+ * 全年の値 (新しい年から順) から、yearCode の年の値だけを取り出す。
+ * 年は先頭 4 桁で探し、最初に見つかった年コードの行だけを返す (readRankingValuesFromR2 が 1 つの年の区切りを返すのと同じ結果)。
+ */
+function valuesOfYear(allYears: RankingValue[], yearCode: string): RankingValue[] {
+  const year = yearCode.slice(0, 4);
+  const first = allYears.find((v) => String(v.yearCode).slice(0, 4) === year);
+  return first ? allYears.filter((v) => v.yearCode === first.yearCode) : [];
+}
+
+/**
+ * 題を作る段階 (generateMetadata) で、主な指標 1 つの最新年の値を読む (2 回の R2 読み込み)。読めなければ null。
+ * 定義と値は本文の段 (loadThemeData) と同じ読み取りを通すので、同じリクエストでは本文の段が読み直さない (CF-RENDER-CPU-01)。
+ */
 export async function readThemeLeadFact(themeKey: string): Promise<ThemeLeadFact | null> {
   const [key] = themeLeadRankingKeys(themeKey, 1);
   if (!key) return null;
   try {
-    const itemResult = await readRankingItemFromR2(key, "prefecture");
+    const itemResult = await readThemeRankingItem(key, "prefecture");
     const item = isOk(itemResult) ? itemResult.data : null;
     const yearCode = item?.latestYear?.yearCode;
     if (!item || !yearCode) return null;
-    const valuesResult = await readRankingValuesFromR2(key, "prefecture", yearCode);
-    return isOk(valuesResult) ? leadFactFromValues(item, valuesResult.data) : null;
+    const valuesResult = await readThemePrefectureValues(key);
+    return isOk(valuesResult) ? leadFactFromValues(item, valuesOfYear(valuesResult.data, yearCode)) : null;
   } catch {
     return null;
   }

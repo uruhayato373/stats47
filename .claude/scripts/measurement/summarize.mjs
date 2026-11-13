@@ -44,8 +44,8 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     inventoryAvailable: source === 'note' && value.inventoryAvailable === true
       && (value.status === 'pass' || (value.status === 'failed' && value.code === 'report_incomplete')),
     collectionAttempted: value.collectionAttempted ?? null,
-    // CI 再ログインの結果コード (relogged / session_valid / human_required 等)。CI ログにしか残らず、
-    // KDP が本棚だけ有効で止まり続けた理由を state から読めなかった (2026-10-06)
+    // relogin・recovery は CI の取得 (2026-10-20 撤去) だけが書いていた。Mac の取得は書かないので常に null。
+    // 記録の形 (schema と読み手) を変えないために欄だけ残す。
     relogin: value.relogin ?? null,
     recovery: value.recovery?.state === 'awaiting_reauthentication'
       ? { state: 'awaiting_reauthentication', blockedSince: value.recovery.blockedSince } : null,
@@ -131,10 +131,9 @@ assertDatasetShape("revenue.authenticated-history", history);
 writeFileSync(historyPath, JSON.stringify(history, null, 2) + '\n');
 const lines = ['認証付き計測の最新試行。生データと認証状態は暗号化したprivate R2に保存。', '',
   '| 対象 | 収集範囲 | 状態 | 次の操作 |', '|---|---|---|---|',
-  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.source === 'afb' && ['api_key_missing', 'api_auth_required'].includes(s.code) ? 'AFB_API_KEY Secretを公式API設定と照合（Cookie再ログインは不要）' : s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : s.source === 'kdp' ? ' --login --reports' : ''} --publish` : s.code ?? (s.knownIncomplete ? `既知の欠け (${s.knownIncomplete.code}・${s.knownIncomplete.missingRows} 件・値は null のまま)` : null) ?? s.remaining ?? 'なし'} |`),
+  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.code === 'auth_required' || s.code === 'session_missing' ? `Mac で${s.source}に入り直す (${s.source === 'gsc' ? 'google-admin/cli.mjs login のあと、その Chrome を閉じる' : `refresh-session.mjs ${s.source} --wait-human`})。そのあと bash scripts/scheduled/measurement-session-refresh.sh で取り直す` : s.code ?? (s.knownIncomplete ? `既知の欠け (${s.knownIncomplete.code}・${s.knownIncomplete.missingRows} 件・値は null のまま)` : null) ?? s.remaining ?? 'なし'} |`),
   ...(sources.some(s => s.source === 'kdp' && s.code === 'auth_required')
-    ? ['', 'KDP: 本棚とReportsの両方を本人が認証する。本人認証後のCI成功に続く再実行で再び認証を要求された場合、再ログインを反復せず停止し、private証跡の確定画面と実行環境を調査する。古いstateの再exportは認証復旧ではない。'] : []),
-  ...(sources.some(s => s.recovery) ? ['', '再認証待ちの対象はブラウザへ再接続せず失敗状態を記録し、他の取得元は継続する。新しい本人認証を公開後、次回CIで再開する。待機チェックの時刻は計測値を取得した時刻ではない。'] : []),
+    ? ['', 'KDP: 本棚とReportsの両方を本人が認証する (--wait-human は Reports の認証まで待つ)。入り直した直後の取得で再び認証を要求された場合、再ログインを反復せず停止し、private証跡の確定画面と実行環境を調査する。古いstateの再exportは認証復旧ではない。'] : []),
   ...(sources.some(s => s.inventoryAvailable) ? ['', 'note: 検証済みの記事棚卸しだけ利用可能（restore.mjs note --inventory-only）。欠測はnull、全件KPI・効果判定には利用不可。通常の復元と成功判定は緩和しない。'] : []),
   ...(salesLedger ? ['', salesLedger.status === 'failed'
     ? `販売台帳 (KDP ${salesLedger.month}): 書き込み失敗 (${salesLedger.code})。台帳は変更していない。`

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { REGIONS, fetchPrefectures } from "@stats47/area";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { buildRegionRankText } from "./region-rank-text";
 
@@ -60,8 +61,10 @@ export function buildRankingContentPrompt(
   input: RankingContentInput,
   options?: RankingContentPromptOptions,
 ): string {
+  // 単位は画面の表やカードと同じ半角で渡す (e-Stat 由来の「％」「ｈａ」のまま渡すと生成文も全角になり、同じページに ％ と % が並ぶ)
+  const unit = formatUnitForDisplay(input.unit);
   const allPrefText = input.allPrefectures
-    .map((r) => `${r.rank}位 ${r.areaName}: ${r.value.toLocaleString()}${input.unit}`)
+    .map((r) => `${r.rank}位 ${r.areaName}: ${r.value.toLocaleString()}${unit}`)
     .join("\n");
 
   // 比較基準の呼び名。公表の全国値が無い指標で「全国平均」と書くと単純平均を全国値と誤読させる (2026-09-27 オーナー判断)
@@ -107,11 +110,11 @@ ${options.extraContext}
 ## ランキングデータ（全${input.totalCount}都道府県）
 
 - 指標: ${input.rankingName}
-- 単位: ${input.unit}
+- 単位: ${unit}
 - 年: ${input.yearName}
-- ${averageLabel}: ${input.average.toLocaleString()}${input.unit}（この値を「全国平均」と呼ばない。必ず「${averageLabel}」と書く）
-- 最大値: ${input.max.toLocaleString()}${input.unit}
-- 最小値: ${input.min.toLocaleString()}${input.unit}
+- ${averageLabel}: ${input.average.toLocaleString()}${unit}（この値を「全国平均」と呼ばない。必ず「${averageLabel}」と書く）
+- 最大値: ${input.max.toLocaleString()}${unit}
+- 最小値: ${input.min.toLocaleString()}${unit}
 - 平均を上回る県: ${aboveAverage} 県 / 平均を下回る県: ${belowAverage} 県（平均と同値の県は含めない。FAQ ではこの数をそのまま使い、自分で数え直さない）
 
 ${allPrefText}
@@ -209,7 +212,7 @@ ${regionMapText}${regionRankSection}
 - 内容: 「順位帯（上位 / 中位 / 下位）」は必ず入れる。それに加えて次の視点から **県ごとに 1〜2 つを選び、
   47 件で組み合わせを入れ替える**（全県に同じ 3 要素を同じ順で書くと定型の穴埋めになり不合格）:
   - 属する地方区分（北海道・東北 / 関東 / 中部 / 近畿 / 中国 / 四国 / 九州・沖縄）の中での相対位置
-  - ${averageLabel}（${input.average.toLocaleString()}${input.unit}）との距離感（大きく上回る / わずかに下回る 等）
+  - ${averageLabel}（${input.average.toLocaleString()}${unit}）との距離感（大きく上回る / わずかに下回る 等）
   - 同地方または隣接する 1 県との対比（引用は 1 県まで）
   - その順位帯の密集度（僅差で並ぶ帯にいるのか、前後と差が開いているのか）
 - 文型の例（これらを混ぜ、同じ書き出しを連続させない）:

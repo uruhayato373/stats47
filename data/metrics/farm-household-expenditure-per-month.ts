@@ -21,7 +21,7 @@ export const farmHouseholdExpenditurePerMonth: MetricConfig = {
     "from": 1980,
     "to": 2003,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",

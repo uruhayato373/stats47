@@ -27,6 +27,11 @@
  * - 出力は `RankingValuesKeySnapshotSchema` (zod) を満たす形。reader 側の parse で弾かれない
  * - 正規化版 (values-per-population / -per-area) は対象外。runtime に computeNormalization の
  *   fallback があるため v1 では作らない
+ * - `generatedAt` は「中身が最後に変わった生成の時刻」。前回配信した values.json と中身が同じなら
+ *   前回の時刻を引き継ぎ、同じバイト列にする (stable-snapshot.ts)。生成時刻を毎回書くと全ファイルの
+ *   バイト列が変わり、sync-snapshots と data-refresh が毎回全件を R2 へ送り直していた
+ *   (2026-11-02 の run 41406400636 で 14,321 件)。writer が動いているかは時刻ではなく、
+ *   この script の `[values] 時刻を引き継いだ=…` の行で見る
  *
  * R2 書き込みは assertR2WriteAllowed で保護 (ローカルは --dry-run 推奨)。
  *
@@ -43,7 +48,12 @@ import {
   findExpectedEmpty,
   yearInSpec,
 } from "@stats47/data-configs";
-import { assertR2WriteAllowed, writeR2Staging } from "@stats47/r2-storage/server";
+import {
+  assertR2WriteAllowed,
+  carryTimestamp,
+  readPublishedSnapshot,
+  writeR2Staging,
+} from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import { rankingValuesKeyPath } from "../types/snapshot";
@@ -168,6 +178,11 @@ interface Outcome {
   status: "written" | "skipped-no-values" | "failed";
   partitions?: number;
   rows?: number;
+  /**
+   * generatedAt の決まり方。carried = 前回配信と中身が同じで時刻を引き継いだ (バイト列も同じ)。
+   * new = 中身が変わった、または初回。previous-unreadable = 前回配信を読めず引き継げなかった。
+   */
+  timestamp?: "carried" | "new" | "previous-unreadable";
   error?: string;
 }
 
@@ -194,7 +209,7 @@ async function withRetry<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
   throw lastError;
 }
 
-async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outcome> {
+export async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outcome> {
   try {
     const payload = await withRetry(() => readStatsValues(config.key, AREA_TYPE));
     if (!payload || payload.rows.length === 0) {
@@ -206,15 +221,31 @@ async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outco
       return { key: config.key, status: "skipped-no-values" };
     }
 
-    const snapshot: RankingValuesKeySnapshot = {
-      generatedAt: new Date().toISOString(),
-      rankingKey: config.key,
-      areaType: AREA_TYPE,
-      partitions,
-    };
+    const valuesKey = rankingValuesKeyPath(config.key, AREA_TYPE);
+    // 前回配信を読めないときは生成を止めず、今回の時刻で書く。失うのは「この 1 件を送らずに済む」
+    // ことだけで、values の generatedAt は sitemap の lastmod などに使われないので進んでも害が無い。
+    // 読めなかった件数は main が出す (黙って全件送りに戻ったことを見えるようにする)。
+    let previous: RankingValuesKeySnapshot | null = null;
+    let previousUnreadable = false;
+    try {
+      previous = await readPublishedSnapshot<RankingValuesKeySnapshot>(valuesKey);
+    } catch {
+      previousUnreadable = true;
+    }
+
+    const { value: snapshot, changed } = carryTimestamp(
+      (generatedAt): RankingValuesKeySnapshot => ({
+        generatedAt,
+        rankingKey: config.key,
+        areaType: AREA_TYPE,
+        partitions,
+      }),
+      previous ? { value: previous, timestamp: previous.generatedAt } : null,
+      new Date().toISOString(),
+    );
 
     if (!dryRun) {
-      await writeR2Staging(rankingValuesKeyPath(config.key, AREA_TYPE), JSON.stringify(snapshot));
+      await writeR2Staging(valuesKey, JSON.stringify(snapshot));
     }
 
     return {
@@ -222,6 +253,7 @@ async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outco
       status: "written",
       partitions: partitions.length,
       rows: partitions.reduce((sum, p) => sum + p.count, 0),
+      timestamp: previousUnreadable ? "previous-unreadable" : changed ? "new" : "carried",
     };
   } catch (error) {
     return {
@@ -256,6 +288,20 @@ async function main(): Promise<void> {
   console.log(
     `[values] written=${written.length} skipped(no values)=${skipped.length} failed=${failed.length}`,
   );
+  // 「時刻を引き継いだ」件は前回配信と同じバイト列なので、push 段 (diff-push-r2) が R2 と照合して送らない
+  const countTimestamp = (kind: Outcome["timestamp"]) => written.filter((o) => o.timestamp === kind).length;
+  const unreadable = written.filter((o) => o.timestamp === "previous-unreadable");
+  console.log(
+    `[values] 時刻を引き継いだ=${countTimestamp("carried")} 中身が変わった・初回=${countTimestamp("new")}` +
+      ` 前回を読めなかった=${unreadable.length}`,
+  );
+  if (unreadable.length > 0) {
+    console.warn(
+      `[values] ⚠ 前回の配信を読めず時刻を引き継げなかった ${unreadable.length} 件は、中身が同じでも送り直しになる: ` +
+        unreadable.slice(0, 20).map((o) => o.key).join(", ") +
+        (unreadable.length > 20 ? ` … 他 ${unreadable.length - 20} 件` : ""),
+    );
+  }
 
   if (skipped.length > 0) {
     // 観測値が無いキーは「公開されているが空ページ」になる。監査で追えるよう一覧を出す

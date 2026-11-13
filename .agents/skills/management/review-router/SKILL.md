@@ -94,7 +94,7 @@ primary_agent: strategy-advisor
 | `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | 未完了策を機能バックログ |
 | `/review-feature --scope types` | 型安全性 | tsc エラー時 | 未完了策を機能バックログ |
 | `/review-tests` | テストの確認・作成 | コード変更後 | stdout |
-| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | skill `reference/reports/` |
+| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | `data/sns/weekly-reports/` |
 
 ### 過去分の参照
 

@@ -87,7 +87,7 @@ jobs:
 
       # sync-snapshots の sync-ranking-keys job と同じ生成・反映 (exact publish plan を必須にする)。
       # 生成・反映の失敗は run を止める (画像なしのランキングを黙って main へ出さない)。
-      - name: 🖼 Generate OGP / cards for the added keys
+      - name: 🖼 Generate OGP for the added keys
         if: steps.keys.outputs.keys != ''
         env:
           RANKING_KEYS: ${{ steps.keys.outputs.keys }}
@@ -95,7 +95,7 @@ jobs:
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
           ARGS=(--source known --key "$RANKING_KEYS" --limit 50 --max-generate 50)
-          for TYPE in ranking ranking-cards; do
+          for TYPE in ranking; do
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" "${ARGS[@]}"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }

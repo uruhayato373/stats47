@@ -43,7 +43,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT =
-  process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+  process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 
 /** 走査対象。生成物・依存・ビルド出力は見ない */
 const SCAN_ROOTS = [".claude/scripts", "apps", "packages", "scripts"];

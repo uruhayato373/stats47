@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T18:36:06.762Z",
+  "updatedAt": "2026-11-13T22:13:00.707Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -11862,6 +11862,235 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-13T18:36:06.762Z"
+    },
+    "NOTE-LABOR-METRICS-ADD-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:18.842Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run note:catalog:validate",
+              "npm run note:catalog:check",
+              "npm run note:assets:validate",
+              "npm run check-datasets",
+              "npm run note:article:test",
+              "npm run note:assets:test",
+              "npm run note:covers:test",
+              "npm run note:images:test",
+              "npm run note:circulation:test",
+              "node --test .claude/scripts/lib/__tests__/gallery-collectors.test.mjs .claude/scripts/media/__tests__/workspace.test.mjs",
+              "cd apps/admin && npx vitest run tests/integration/content-route.test.ts tests/integration/note-cover-production.test.ts tests/unit/media-classification-route.test.ts tests/unit/note-covers.test.ts",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "5b254f9a8 旧雛形 2 本を記事台帳・カバー台帳・カバー記録・下書き索引から外し、git grep で 4 か所とも 0 件になった。note:catalog:validate は「検証 pass」、下書きは 62 件から 60 件、check-datasets は error 0、preflight:pr は exit 0 だった。置き換えの 2 記事は台帳で published (2026-10-24、noteUrl あり) である。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:18.842Z"
+    },
+    "STRATEGY-GATE-ADMIN-PILOT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "管理画面に、行政向け商品の検証が4段階のどこにいるかを出す",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:18.943Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test -w apps/admin",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "cd apps/admin && npx eslint <変更した 6 ファイル> --max-warnings 0",
+              "npm run admin-ui:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "5cd4f0f99 /dashboard の判断ゲート表の B2B基盤 の行に、聞き取り台帳から導いた「聞き取り: 0/3 件」「段階: 未記録」「次の判断点: 聞き取りが 3 件に達した時点 (残り 3 件)」が出ることを、幅 375px と 1280px の画面で確かめた。apps/admin のテストは 81 ファイル 562 件が通り、型検査・lint・admin-ui:check・preflight:pr も exit 0 だった。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:18.943Z"
+    },
+    "STRATEGY-ISSUE-MAP-PV-CHART-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "広告の効率が出たら、事業イシューマップに月 ¥1 万へ要る PV のグラフを足す",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:19.043Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test -w apps/admin",
+              "cd apps/admin && npx vitest run --pool=threads tests/unit/issue-map.test.ts",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "cd apps/admin && npx eslint app/strategy/issue-map lib/issue-map.ts lib/server/issue-map.ts tests/unit/issue-map.test.ts --max-warnings 0",
+              "npm run admin-ui:check",
+              "npm run design-system:check -w apps/web",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "2dba2fdc1 buildRequiredPv は KPI の ad-yield と site-pageviews に値があるときだけ要る PV を返し、null・0・非数値では null を返すので、画面はそのときグラフを出しません。管理画面のテストは 81 ファイル 567 件が通り、型検査と preflight:pr も通りました。実データ (ad-yield が null) ではグラフ 0 個、値を一時的に 6.5 にした画面では棒 3 本が 375px と 1280px で崩れなく出ることを撮影で確かめました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:19.043Z"
+    },
+    "ADMIN-COMPETITOR-VIEW-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "競合調査の結果を管理画面で見られるようにする",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:19.173Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/admin && npx vitest run --pool=threads tests/unit/competitor-scan.test.ts",
+              "cd apps/admin && npm test",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "cd apps/admin && npx eslint app/strategy lib/competitor-scan.ts lib/server/competitor-scan.ts tests/unit/competitor-scan.test.ts --max-warnings 0",
+              "npm run admin-ui:check",
+              "npm run design-system:check -w apps/web",
+              "npm run check-datasets",
+              "npm run docs:check",
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs",
+              "npm run type-check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "45ac9b1c3 localhost:4763 の /strategy/competitors が 200 で開き、注記と §2.2 へのリンク、販売面ごとの表 (BOOTH 48・ココナラ 217・note 3・ランサーズ 3)、上位 13 件、全 271 件の一覧が出ることを幅 375px と 1280px の画像で確かめた。変更前は同じ URL が 404 だった。管理画面のテストは 82 ファイル 578 件が通り、check-datasets・docs:check・type-check・preflight:pr も通った。分類の列は",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:19.173Z"
+    },
+    "MIGRATION-FLOW-PHASE23-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "人口移動 月次/年次 workflowの生成ステップ未実装",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:13:00.595Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git show --stat 294d88f433"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-14 オーナー決定「人の移動の動画は一旦やめる」。生成元の MigrationFlow-Reel と render-migration-flow.ts は 294d88f433 で撤去済み。migration-flow の workflow 3 本と npm script の片付けは同じ日に別コミットで行う。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:13:00.595Z"
+    },
+    "AFF-INTENT-FALLBACK-STOP-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "意図が解決しない面への配信を止め、priority を期待収益順にする",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:13:00.707Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/ads/check-revenue-guards.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-14 オーナー決定でカードを閉じる。2026-11-12 からアフィリエイトの配信を止めており、features/ads/server を読むページは 0 件なので、priority の振り直しは読者に見える広告を変えない。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:13:00.707Z"
     }
   }
 }

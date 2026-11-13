@@ -43,6 +43,7 @@ async function renderSummary(analysisSlug: string, detail: unknown) {
 const tileText = (tile: HTMLElement) => ({
   label: within(tile).getByRole('term').textContent,
   value: within(tile).getAllByRole('definition')[0]!.textContent,
+  meta: within(tile).getAllByRole('definition')[1]?.textContent,
 });
 
 describe('県別の検算ページの集計は数値タイルで出す', () => {
@@ -63,7 +64,8 @@ describe('県別の検算ページの集計は数値タイルで出す', () => {
           longitude: 139.70625,
           latitude: 35.6041665,
           bounds: [139.7, 35.6, 139.7125, 35.608333],
-          population2020: 1234,
+          // メッシュの按分で人口には小数が残る (東京都の 2020年人口は 14,047,593.999)
+          population2020: 1233.999,
           population2050: 800,
           floodDepthClass: 2,
         },
@@ -74,6 +76,8 @@ describe('県別の検算ページの集計は数値タイルで出す', () => {
     expect(grid).not.toBeNull();
     expect(tiles).toHaveLength(Object.keys(detail.summary).length);
     const byLabel = new Map(tiles.map((tile) => [tileText(tile).label, tileText(tile).value]));
+    // 人数は整数に丸めて出す。丸め前の小数 (1,233.999人) のまま出さない (UI-FOLLOWUP-01)
+    expect(detail.summary.population2020).toBe(1233.999);
     expect(byLabel.get('2020年人口')).toBe('1,234人');
     expect(byLabel.get('2050年人口')).toBe('800人');
     expect(byLabel.get('2020年区域内人口比率')).toBe(`${detail.summary.floodExposureShare2020}%`);
@@ -82,10 +86,11 @@ describe('県別の検算ページの集計は数値タイルで出す', () => {
     expect(section.querySelectorAll('div.border.p-3')).toHaveLength(0);
   });
 
-  it('式で検算を見せる分析は、検算の行 1 つを数値タイル 1 枚にし、行の文字を変えない', async () => {
+  it('式で検算を見せる分析は、検算の行 1 つを数値タイル 1 枚にし、結果を値に、内訳の式を補足に出す', async () => {
     const rows = [
-      { label: '1kmメッシュ人口の合計 / 国勢調査2020の都道府県人口', value: '200人 / 200人（一致）' },
-      { label: '平均標高5m以下の人口 / 県の人口', value: '50人 / 200人 = 25.0%' },
+      { label: '1kmメッシュ人口の合計 / 国勢調査2020の都道府県人口', value: '一致', meta: '200人 / 200人' },
+      { label: '平均標高5m以下の人口 / 県の人口', value: '25.0%', meta: '50人 / 200人' },
+      { label: '5m以下の人口割合（平均標高基準 / 最低標高基準）', value: '25.0% / 30.0%', meta: undefined },
     ];
     vi.mocked(spatialAuditRows).mockReturnValue(rows);
     const { section, grid, tiles } = await renderSummary('population-low-elevation', {
@@ -99,5 +104,10 @@ describe('県別の検算ページの集計は数値タイルで出す', () => {
     expect(grid).not.toBeNull();
     expect(tiles.map(tileText)).toEqual(rows);
     expect(section.querySelectorAll('div.border.p-3')).toHaveLength(0);
+    // 枠より長い数を途中で折り返す指定は数値タイルの側が持つ。ページの側で付け足さない
+    for (const tile of tiles) {
+      expect(tile).not.toHaveClass('wrap-anywhere');
+      expect(tile.querySelector('dl')).toHaveClass('wrap-anywhere');
+    }
   });
 });

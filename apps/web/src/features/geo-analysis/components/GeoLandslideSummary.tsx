@@ -11,6 +11,8 @@ import {
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection, ValueTable } from '@/components/surface';
+
+import { navSurfaceProps } from '@/lib/analytics/events';
 const number = (n: number | null | undefined) =>
   typeof n === 'number'
     ? n.toLocaleString('ja-JP', { maximumFractionDigits: 0 })
@@ -162,7 +164,7 @@ export function GeoLandslideSummary({
             {s.title}
           </a>
         ))}
-        <Link href={hrefFor('geo', { analysisSlug: S.slug })} className="text-primary underline">
+        <Link href={hrefFor('geo', { analysisSlug: S.slug })} className="text-primary underline" {...navSurfaceProps('geo_evidence')}>
           計算入力・県別途中データ・合計の検算を確認
         </Link>
       </div>

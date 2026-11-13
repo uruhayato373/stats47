@@ -22,7 +22,7 @@ import { navSurfaceProps } from "@/lib/analytics/events";
 import { formatRankingValue, resolveRankingPrecision } from "../../utils/compute-ranking-header-stats";
 
 import type { RankingDataRow } from "../RankingDataTable/ranking-rows";
-import type { RankingItem } from "@stats47/ranking";
+import type { RankingItem, RankingValueDisplay } from "@stats47/ranking";
 
 interface RankingAreaDetailSheetProps {
     rankingItem: RankingItem;
@@ -32,6 +32,8 @@ interface RankingAreaDetailSheetProps {
     areaCode: string | null;
     /** 前後送り・閉じる。via は計測用 (前後送りのときだけ "step") */
     onAreaChange: (areaCode: string | null, via?: "step") => void;
+    /** ページが決めた表示単位 (表と同じ値)。渡すと値をこの単位・倍率・小数桁で書く */
+    valueDisplay?: RankingValueDisplay | null;
 }
 
 /**
@@ -39,21 +41,22 @@ interface RankingAreaDetailSheetProps {
  * 県の順位・値・偏差値と前後の県への送り、県のページと同じ分野のランキングへのリンクを出す。
  * 検索に拾われる導線 (県のページへのリンク) は表の県名にも残し、このパネルは補助にとどめる。
  */
-export function RankingAreaDetailSheet({ rankingItem, rows, areaCode, onAreaChange }: RankingAreaDetailSheetProps) {
+export function RankingAreaDetailSheet({ rankingItem, rows, areaCode, onAreaChange, valueDisplay }: RankingAreaDetailSheetProps) {
     const byRank = useMemo(
         () => [...rows].sort((a, b) => (a.rank ?? Number.MAX_SAFE_INTEGER) - (b.rank ?? Number.MAX_SAFE_INTEGER)),
         [rows],
     );
-    const precision = useMemo(
+    const dataPrecision = useMemo(
         () => resolveRankingPrecision(rows.map((r) => r.value).filter((v): v is number => v !== null)),
         [rows],
     );
+    const precision = valueDisplay?.precision ?? dataPrecision;
 
     const index = areaCode ? byRank.findIndex((r) => r.areaCode === areaCode) : -1;
     const row = index >= 0 ? byRank[index] : null;
     const prev = index > 0 ? byRank[index - 1] : null;
     const next = index >= 0 && index < byRank.length - 1 ? byRank[index + 1] : null;
-    const unit = formatUnitForDisplay(rankingItem.unit ?? "");
+    const unit = valueDisplay?.unit ?? formatUnitForDisplay(rankingItem.unit ?? "");
 
     return (
         <Sheet open={row !== null} onOpenChange={(open) => { if (!open) onAreaChange(null); }}>
@@ -99,7 +102,7 @@ export function RankingAreaDetailSheet({ rankingItem, rows, areaCode, onAreaChan
                         <StatTileGrid>
                             <StatTile
                                 label="値"
-                                value={row.value === null ? null : formatRankingValue(row.value, precision)}
+                                value={row.value === null ? null : formatRankingValue(row.value, precision, valueDisplay?.factor)}
                                 unit={unit || undefined}
                                 meta={row.yearName}
                             />

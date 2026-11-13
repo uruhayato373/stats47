@@ -53,11 +53,14 @@ const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 // ★2 つの root を混同しない (2026-08-20 に自テストが実バグとして検出した):
 //   REPO_ROOT = チェッカー本体の在り処。**必ずこのファイルの位置から解決する**
 //               (cwd 由来にすると実行ディレクトリ次第で壊れる)。
-//   SCAN_ROOT = 検査対象。CLAUDE_PROJECT_DIR で差し替えられる (テスト・別チェックアウト用)。
-// 両者を 1 変数にすると、CLAUDE_PROJECT_DIR を設定した瞬間に自分のチェッカーを見失い、
+//   SCAN_ROOT = 検査対象。STATS47_SCAN_ROOT で差し替えられる (テスト・別チェックアウト用)。
+//               CLAUDE_PROJECT_DIR は読まない: worktree のセッションではその変数が別の作業ツリーを指し、
+//               手元の変更ではなく別の作業ツリーを検査して通ったと報告する (CI-TOOLING-FOLLOWUP-02)。
+//               check-*.cjs も同じ変数だけを読む (check-scan-root.test.cjs が固定する)。
+// 両者を 1 変数にすると、STATS47_SCAN_ROOT を設定した瞬間に自分のチェッカーを見失い、
 // 「チェッカーが落ちた」を「違反を検出した」と取り違える (実際にそう動いていた)。
 const REPO_ROOT = path.resolve(SCRIPT_DIR, "..", "..", "..");
-const SCAN_ROOT = process.env.CLAUDE_PROJECT_DIR || REPO_ROOT;
+const SCAN_ROOT = process.env.STATS47_SCAN_ROOT || REPO_ROOT;
 const WEB_DIR = path.join(SCAN_ROOT, "apps", "web");
 const checker = (name) => path.join(REPO_ROOT, ".claude/scripts/lib", name);
 

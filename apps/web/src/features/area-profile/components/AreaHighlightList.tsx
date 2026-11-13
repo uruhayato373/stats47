@@ -1,11 +1,12 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { formatUnitForDisplay } from '@stats47/data-configs/unit';
+import { formatChartValue, formatUnitForDisplay } from '@stats47/data-configs/unit';
 import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
 
 import Link from '@/components/atoms/SiteLink';
 import { ValueTable } from '@/components/surface';
 
 import type { HighlightTone } from '@stats47/area-profile';
+import type { RankingValueDisplay } from '@stats47/ranking';
 
 /** 一覧の 1 行。県は選定関数の AreaHighlight、市区町村はデータブックの指標を渡す。 */
 export interface AreaHighlightListItem {
@@ -16,6 +17,11 @@ export interface AreaHighlightListItem {
   rank: number;
   value: number;
   unit: string;
+  /**
+   * 表示単位 (`resolveRankingValueDisplay` が決めた単位・倍率・小数桁)。県の行が渡し、「113,685,917百万円」を「113.7兆円」と書く。
+   * 市区町村の値は元の単位のまま書くので渡さない。
+   */
+  display?: RankingValueDisplay | null;
   year: string;
   /** 良否の色。極性が確定していない指標は neutral (選定関数が決める) */
   tone: HighlightTone;
@@ -66,8 +72,10 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
               </small>
             </>,
             <>
-              {formatValueWithPrecision(item.value, resolveValuePrecision([item.value]))}
-              <small className="ml-0.5">{formatUnitForDisplay(item.unit)}</small>
+              {item.display
+                ? formatChartValue(item.value, { factor: item.display.factor, decimals: item.display.precision })
+                : formatValueWithPrecision(item.value, resolveValuePrecision([item.value]))}
+              <small className="ml-0.5">{item.display?.unit ?? formatUnitForDisplay(item.unit)}</small>
             </>,
             `${item.rank}位`,
             ...(hasNational ? [item.detail?.replace(/^全国\s*/, '') ?? '—'] : []),

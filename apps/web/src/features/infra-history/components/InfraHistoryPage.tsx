@@ -15,6 +15,8 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { SectionCard, SurfaceCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { buildInfraHistoryExplorerProps } from '../lib/infra-history-explorer-props';
 import {
   infraHistoryPath,
@@ -86,7 +88,7 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
       />
       <PanelGrid>
-        <div className="space-y-1">
+        <div className="space-y-1" {...navSurfaceProps('geo_map_control')}>
           <LinkRowNav label="表示する範囲" items={infraScopeNavItems(network.key, scope)} />
           {region && regionHasPages && scope.kind !== 'national' && (
             <LinkRowNav

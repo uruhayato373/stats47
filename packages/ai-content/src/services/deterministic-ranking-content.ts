@@ -1,6 +1,7 @@
 import "server-only";
 
 import { REGIONS, fetchPrefectures } from "@stats47/area";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import type { RankingContentInput } from "./prompts/ranking-content-prompt";
 
@@ -41,8 +42,9 @@ function formatNumber(value: number): string {
     : value.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
 }
 
+/** 文に書く単位。全角の英字・記号 (「％」「ｈａ」) は、画面の表やカードと同じ半角にそろえる (単位の正典の表示用の整形)。 */
 function safeDisplayUnit(unit: string): string {
-  const primary = unit.split(/[（(]/, 1)[0].trim();
+  const primary = formatUnitForDisplay(unit.split(/[（(]/, 1)[0]);
   if (!primary) return "";
   if (/[0-9０-９=＝]/.test(primary)) return "";
   if (/^[百千万億兆]/.test(primary)) return "";
@@ -237,7 +239,7 @@ function buildInsights(input: RankingContentInput): string {
   const topFive = rows.slice(0, 5).reduce((sum, row) => sum + row.value, 0);
   const total = rows.reduce((sum, row) => sum + row.value, 0);
   const shareText = total > 0 && topFive >= 0 && topFive <= total
-    ? `上位5県の値の合計は${formatValue(topFive, input.unit)}で、全体の約${formatNumber((topFive / total) * 100)}％です。`
+    ? `上位5県の値の合計は${formatValue(topFive, input.unit)}で、全体の約${formatNumber((topFive / total) * 100)}%です。`
     : `上位5県の値の合計は${formatValue(topFive, input.unit)}です。値にゼロ以下を含む場合、構成比だけでは集中度を適切に表せません。`;
 
   return `## 値の広がり\n1位の${top.areaName}は${formatValue(top.value, input.unit)}、最下位の${bottom.areaName}は${formatValue(bottom.value, input.unit)}です。最大値と最小値の差は${formatValue(difference, input.unit)}で、${ratioText}順位だけでなく値幅も確認すると、分布の広がりを捉えやすくなります。\n\n## 平均との関係\n${averageLabelOf(input)}は${formatValue(input.average, input.unit)}です。平均を上回る県は${above}県、下回る県は${below}県で、平均付近に全県が均等に並ぶわけではありません。平均から上下に分かれる県数を比べると、分布の偏りを順位表とは別の角度から確認できます。\n\n## 中位帯の厚み\n観測行の中央にある${middle.areaName}は全国${middle.rank}位で${formatValue(middle.value, input.unit)}です。中位の値と平均の距離や、周辺に同順位の県が集まるかを併せて見ると、上位と下位だけでは分からない分布の中心と密集度が明確になります。\n\n## 上位層の集中\n${shareText}上位層の合計と全体の関係を確認すると、少数県への集中が強い指標か、幅広い県に値が分散する指標かを読み分けられます。地域別の並びとは異なる、全国横断の集計として見ることが重要です。`;
