@@ -148,13 +148,31 @@ test("判定: 期間で決まらない項目は、調査の呼び方 (decisions.
   assert.equal(classifyPeriod(index.items.get("F6207")[0].period), null);
   assert.equal(decide("0000010106", "F6207").yearFormat, "calendar");
   assert.equal(decideYearFormat({ statsDataId: "0000010106", cdCat01: "F6207" }, index, buildRules()).yearFormat, null);
-  // 呼び方を確かめていない調査 (学校基本調査 5月1日) は決めない。確かめて台帳に足せば決まる
-  assert.equal(decide("0000010105", "E2101").yearFormat, null);
+  // 呼び方を確かめていない調査 (台帳から学校基本調査を抜いた状態の 5月1日) は決めない。確かめて台帳に足せば決まる
+  const withoutSchool = buildRules({ ...decisions, surveyNaming: decisions.surveyNaming.filter((row) => row.survey !== "学校基本調査") });
+  assert.equal(decideYearFormat({ statsDataId: "0000010105", cdCat01: "E2101" }, index, withoutSchool).yearFormat, null);
   const withSchool = buildRules({ surveyNaming: [{ survey: "学校基本調査", yearFormat: "fiscal" }] });
   assert.equal(decideYearFormat({ statsDataId: "0000010105", cdCat01: "E2101" }, index, withSchool).yearFormat, "fiscal");
   // 欄に複数の調査が並ぶときは、全部の呼び方が分かっていなければ決めない
   assert.match(index.items.get("E2501")[0].survey, /学校基本調査、/);
   assert.equal(decideYearFormat({ statsDataId: "0000010105", cdCat01: "E2501" }, index, withSchool).yearFormat, null);
+});
+
+test("判定: 年度で呼ぶ調査 (学校基本調査・学校保健統計調査・建設工事施工統計調査) は fiscal、年で呼ぶ都道府県地価調査は calendar", () => {
+  // 学校基本調査 (5月1日)。e-Stat の提供分類は「令和7年度」
+  const school = decide("0000010105", "E2101");
+  assert.equal(school.yearFormat, "fiscal");
+  assert.match(school.reason, /調査の呼び方 \(学校基本調査/);
+  // 欄に 2 つの調査が並ぶ項目は、どちらも年度で呼ぶと確かめたので決まる
+  assert.match(index.items.get("E2501")[0].survey, /学校基本調査、児童生徒の問題行動/);
+  assert.equal(decide("0000010105", "E2501").yearFormat, "fiscal");
+  // 学校保健統計調査 (4月～6月中の任意の日) の身長・建設工事施工統計調査 (決算期までの1年間) の建設業者数
+  assert.equal(decide("0000010209", "#I0210106").yearFormat, "fiscal");
+  assert.equal(decide("0000010103", "C3306").yearFormat, "fiscal");
+  // 都道府県地価調査 (7月1日) は「令和N年都道府県地価調査」。基礎項目の表でも指標の表でも同じ区切りになる
+  assert.equal(decide("0000010103", "C5405").yearFormat, "calendar");
+  assert.equal(decide("0000010103", "C5501").yearFormat, "calendar");
+  assert.equal(decide("0000010212", "#L04304").yearFormat, "calendar");
 });
 
 test("判定: 期間が年度でも暦年でもなく、調査の呼び方も確かめられていない項目は決めない", () => {
@@ -165,13 +183,31 @@ test("判定: 期間が年度でも暦年でもなく、調査の呼び方も確
   assert.equal(decide("0000010201", "#Z99999").yearFormat, null);
 });
 
-test("判定: 市区町村の指標の表は、計算式のページ (都道府県の指標) を当てはめない", () => {
+test("判定: 市区町村の指標の表は、同じ定義だと確かめた符号 (decisions.json の cityIndicators) だけ都道府県の計算式で決める", () => {
   assert.equal(decide("0000010211", "#K06101").yearFormat, "calendar");
+  // 確かめた記録が無ければ、計算式のページ (都道府県の指標) を当てはめない
+  const unconfirmed = decideYearFormat({ statsDataId: "0000020311", cdCat01: "#K06101" }, index, buildRules({ ...decisions, cityIndicators: [] }));
+  assert.equal(unconfirmed.yearFormat, null);
+  assert.match(unconfirmed.reason, /市区町村の指標 #K06101[\s\S]*cityIndicators/);
+  // 項目名が都道府県の指標と同じと確かめた符号は、都道府県の指標と同じ区切りになる
   const city = decide("0000020311", "#K06101");
-  assert.equal(city.yearFormat, null);
-  assert.match(city.reason, /市区町村/);
+  assert.equal(city.yearFormat, "calendar");
+  assert.deepEqual(city.basis.map((entry) => entry.code), ["K4201", "A1101"]);
+  assert.equal(decide("0000020304", "#D02215").yearFormat, "fiscal");
+  // 項目名が違う定義を指す符号 (#B01101 は都道府県が全国面積、市区町村が都道府県面積に占める割合) は台帳に足さず、決めない
+  assert.equal(decisions.cityIndicators.some((row) => row.code === "#B01101"), false);
+  assert.equal(decide("0000020302", "#B01101").yearFormat, null);
+  // 確かめた符号でも、基礎項目の区切りが決まらなければ決めない (課税対象所得 7月1日)
+  assert.equal(decide("0000020304", "#D02206").yearFormat, null);
+  assert.match(decide("0000020304", "#D02206").reason, /7月1日/);
   // 市区町村の基礎データの表は符号が都道府県と同じなので決まる
   assert.equal(decide("0000020201", "A1101").yearFormat, "calendar");
+});
+
+test("台帳: cityIndicators は市区町村の指標の符号だけで、重複が無く、指標計算式のページに同じ符号がある", () => {
+  const codes = decisions.cityIndicators.map((row) => row.code);
+  assert.equal(new Set(codes).size, codes.length);
+  for (const code of codes) assert.ok(index.indicators.has(code), `${code} が指標計算式のページに無い`);
 });
 
 test("判定: 定義ページの期間が誤っている項目は、理由付きの上書き (itemOverrides) で決める", () => {
@@ -206,6 +242,15 @@ test("検査: 誤った yearFormat を 1 件注入すると MISMATCH で落ち�
   assert.deepEqual(checkSsdsYearFormats(fixed, index, NO_UNDETERMINED).errors, []);
 });
 
+test("検査: 市区町村の指標に誤った yearFormat を 1 件注入すると MISMATCH で落ち、直すと通る", () => {
+  // 生成器の固定値が残っていた型: 同じ符号の都道府県の指標は calendar なのに、市区町村の指標だけ fiscal
+  const city = { key: "crime-rate-per-1k", statsDataId: "0000020311", cdCat01: "#K06101" };
+  const injected = [...METRICS, { ...city, yearFormat: "fiscal" }];
+  const { errors } = checkSsdsYearFormats(injected, index, NO_UNDETERMINED);
+  assert.deepEqual(errors.map((error) => [error.code, error.key]), [["MISMATCH", "crime-rate-per-1k"]]);
+  assert.deepEqual(checkSsdsYearFormats([...METRICS, { ...city, yearFormat: "calendar" }], index, NO_UNDETERMINED).errors, []);
+});
+
 test("検査: 逆向きの誤り (年度の指標を暦年にする) と yearFormat の書き忘れも落とす", () => {
   const wrong = METRICS.map((metric) => (metric.key === "per-capita-prefectural-income-h27" ? { ...metric, yearFormat: "calendar" } : metric));
   assert.deepEqual(checkSsdsYearFormats(wrong, index, NO_UNDETERMINED).errors.map((error) => error.code), ["MISMATCH"]);
@@ -236,6 +281,8 @@ test("台帳: 判定できない指標の一覧は上限以内で、key の重�
   const keys = decisions.undetermined.map((row) => row.key);
   assert.equal(new Set(keys).size, keys.length);
   assert.ok(keys.length <= UNDETERMINED_CEILING, `一覧 ${keys.length} 件 / 上限 ${UNDETERMINED_CEILING} 件`);
+  // 一覧を減らしたら上限も同じ数まで下げる (上限に余りがあると、その分だけ黙って増やせる)
+  assert.equal(UNDETERMINED_CEILING, keys.length);
 });
 
 /** 生成器を --dry-run で動かし、書くはずの指標の定義を標準出力から読む (data/metrics には書かない) */

@@ -128,6 +128,6 @@ console.log(`\n${DRY_RUN ? "生成 (dry-run・書いていない)" : "生成"}: 
 if (undecided.length > 0) {
   console.error(`\n年の区切り (yearFormat) が定義から決まらないので書かなかった: ${undecided.length} 件`);
   for (const line of undecided) console.error(`  ✗ ${line}`);
-  console.error(`調査の年の呼び方を一次資料で確かめて ${datasetPath("estat.ssds-year-format-decisions")} の surveyNaming に足してから、もう一度実行する`);
+  console.error(`調査の年の呼び方を一次資料で確かめて ${datasetPath("estat.ssds-year-format-decisions")} の surveyNaming (市区町村の指標は cityIndicators) に足してから、もう一度実行する`);
   process.exitCode = 1;
 }

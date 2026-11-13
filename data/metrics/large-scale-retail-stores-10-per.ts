@@ -27,7 +27,7 @@ export const largeScaleRetailStores10Per: MetricConfig = {
       2006,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

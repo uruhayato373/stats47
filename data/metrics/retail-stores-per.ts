@@ -21,7 +21,7 @@ export const retailStoresPer: MetricConfig = {
     "from": 2006,
     "to": 2006,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

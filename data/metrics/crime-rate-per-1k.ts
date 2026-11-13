@@ -27,7 +27,7 @@ export const crimeRatePer1k: MetricConfig = {
       2005,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateReds",

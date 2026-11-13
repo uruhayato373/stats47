@@ -236,7 +236,9 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 - `npm run estat:ssds-year-format:check` (preflight・PR の CI) が全 SSDS 指標を突き合わせ、食い違いを error にする。
   根拠は `npx tsx .claude/scripts/estat/check-ssds-year-format.ts --explain <key>`。
 - 人の判断は `data/estat/ssds-year-format/decisions.json`: 期間で決まらない調査の年の呼び方 (`surveyNaming`。一次資料で
-  確かめたものだけ)・定義ページの誤りの上書き (`itemOverrides`)・判定できない指標の一覧 (`undetermined`。縮小専用)。
+  確かめたものだけ)・定義ページの誤りの上書き (`itemOverrides`)・市区町村の指標のうち、同じ符号の都道府県の指標と
+  同じ定義だと項目名で確かめた符号 (`cityIndicators`。指標計算式のページは都道府県の指標のものなので、確かめた符号にだけ
+  当てはめる)・判定できない指標の一覧 (`undetermined`。縮小専用で、件数の上限 `UNDETERMINED_CEILING` は一覧の件数と同じにする)。
   判定できない指標を、年度か暦年のどちらかへ一括で倒さない。
 
 ## 分類軸は必ず 1 系列に絞る（形状ゲート）
