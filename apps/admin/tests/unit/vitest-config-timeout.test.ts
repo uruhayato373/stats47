@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import config from "../../vitest.config.mts";
+import config from "../../vitest.config.mjs";
 
 /**
  * 高負荷 (tsc・dev サーバーと並行) では初回 import の変換に数秒かかり、

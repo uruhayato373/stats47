@@ -68,7 +68,7 @@ function overrideFitsRange(overrideSpec, range) {
 }
 
 /**
- * @param {{ rootPackage: Record<string, any>, workspacePackages: Record<string, Record<string, any>>, lockPackages: Record<string, { version?: string, link?: boolean }> }} input
+ * @param {{ rootPackage: Record<string, any>, workspacePackages: Record<string, Record<string, any>>, lockPackages: Record<string, { version?: string, link?: boolean, optionalDependencies?: Record<string, string> }> }} input
  * @returns {Array<{ code: string, package: string, message: string }>}
  */
 function inspectDependencies({ rootPackage, workspacePackages, lockPackages }) {
