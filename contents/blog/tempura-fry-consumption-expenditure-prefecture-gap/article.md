@@ -6,7 +6,7 @@ slug: tempura-fry-consumption-expenditure-prefecture-gap
 archetype: D2
 publishedAt: 2026-09-02
 updatedAt: 2026-11-13
-published: false
+published: true
 tags: []
 ---
 

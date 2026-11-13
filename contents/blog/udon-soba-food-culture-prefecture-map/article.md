@@ -13,7 +13,7 @@ tags:
   - 家計調査
 publishedAt: 2026-06-07
 updatedAt: "2026-11-09"
-published: false
+published: true
 ogImage: /blog/udon-soba-food-culture-prefecture-map/og.png
 ---
 

@@ -14,7 +14,7 @@ tags:
   - 食文化
 publishedAt: 2026-07-10
 updatedAt: 2026-11-13
-published: false
+published: true
 ogImage: /blog/wine-expenditure-ranking/og.png
 ---
 

@@ -1,8 +1,0 @@
-{
-  "note": "たらこ消費支出額 2024年（前年）の福岡県・青森県。出典 r2:app/ranking/cod-roe-consumption-expenditure/values.json の yearCode 2024。2007〜2024年の18年間、福岡県は毎年1位。",
-  "year": "2024",
-  "rows": [
-    { "areaName": "福岡県", "rank": 1, "value": 4870, "label": "たらこ消費支出額 2024年", "unit": "円" },
-    { "areaName": "青森県", "rank": 6, "value": 2716, "label": "たらこ消費支出額 2024年", "unit": "円" }
-  ]
-}
