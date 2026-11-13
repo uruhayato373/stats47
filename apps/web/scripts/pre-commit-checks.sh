@@ -166,12 +166,14 @@ fi
 # 検査スクリプトを CI の blocking gate につながないまま push すると、Develop Quality Gate が
 # [NON_BLOCKING_GATE] / [MISSING_GATE_TRIGGER] で落ちる (2026-10-10 に check-post-trace.mjs で踏んだ)。
 # 全体を読むので約 9 秒かかる。検査スクリプト (名前の判定は check-checker-wiring.cjs の CHECKER_NAME と同じ)
-# か workflow を staged にした commit だけで走らせる。
+# か workflow を staged にした commit だけで走らせる。--staged で index に入っているファイルだけを見て、
+# staged の検査スクリプトと staged の workflow から辿れる指摘だけを判定する (PRECOMMIT-WIRING-STAGED-SCOPE-01:
+# 並行する作業者の未追跡の作りかけで無関係な commit が止まっていた)。全体の判定は CI が持つ。
 STAGED_CHECKER_WIRING=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '(^|/)([^/]*[-_.])?(check|audit|validate|verify|lint|guard)([-_.][^/]*)?\.(c?js|mjs|ts|sh|py)$|^\.github/workflows/[^/]+\.ya?ml$' || true)
 if [ -n "$STAGED_CHECKER_WIRING" ]; then
   echo -e "${GREEN}🔌 検査スクリプトの CI 配線...${NC}"
-  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline; then
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline --staged; then
     echo -e "${RED}❌ CI の blocking gate につながっていない検査スクリプトがあります。${NC}"
     echo -e "${YELLOW}💡 workflow か preflight から blocking で呼ぶ (詳細は上の出力)${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
