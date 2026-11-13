@@ -112,14 +112,14 @@
       "administrative-investment-report": 13,
       "age-adjusted-mortality-statistics": 1,
       "agricultural-income-statistics": 3,
-      "agriculture-forestry-census": 14,
+      "agriculture-forestry-census": 12,
       "agriculture-management-survey": 5,
       "air-pollution-control-law-status": 2,
-      "area-survey": 30,
-      "boj-statistics": 5,
+      "area-survey": 6,
+      "boj-statistics": 6,
       "buried-cultural-property-statistics": 1,
       "care-service-facility-survey": 7,
-      "census": 312,
+      "census": 123,
       "childcare-related-status-report": 2,
       "city-planning-survey": 8,
       "closed-school-facility-survey": 1,
@@ -129,7 +129,7 @@
       "construction-orders-statistics": 2,
       "construction-work-statistics": 4,
       "cpi-annual": 19,
-      "crop-statistics": 8,
+      "crop-statistics": 7,
       "economic-census-activity": 63,
       "economic-census-basic": 19,
       "economic-structure-survey": 14,
@@ -146,7 +146,7 @@
       "fishery-census": 10,
       "fixed-asset-tax-land-statistics": 5,
       "flood-statistics": 9,
-      "foreign-residents-statistics": 10,
+      "foreign-residents-statistics": 8,
       "forestry-output-statistics": 3,
       "forestry-statistics-handbook": 2,
       "freight-regional-flow-survey": 2,
@@ -157,13 +157,13 @@
       "hospital-report": 3,
       "household-survey": 25,
       "housing-finance-user-survey": 1,
-      "housing-land-survey": 39,
+      "housing-land-survey": 38,
       "housing-starts-statistics": 14,
       "inbound-consumption-survey": 3,
       "industrial-statistics": 1,
       "insurance-rate-org-statistics": 10,
-      "japan-post-statistics": 6,
-      "job-placement-statistics": 11,
+      "japan-post-statistics": 8,
+      "job-placement-statistics": 9,
       "junior-high-athletics-membership-survey": 10,
       "kakei-chousa": 853,
       "labor-market-annual": 9,
@@ -207,7 +207,7 @@
       "petroleum-sales-statistics": 1,
       "physician-survey": 11,
       "police-statistics": 21,
-      "population-estimates": 209,
+      "population-estimates": 32,
       "population-projection": 2,
       "population-research": 2,
       "port-statistics": 9,
@@ -217,14 +217,14 @@
       "prefectural-food-self-sufficiency": 1,
       "prefectural-land-price-survey": 5,
       "prefectural-settlement-survey": 121,
-      "public-assistance-survey": 16,
+      "public-assistance-survey": 11,
       "public-facilities-status-survey": 1,
       "regional-health-promotion-report": 13,
       "resident-registry-migration-report": 12,
-      "resident-registry-population-survey": 4,
-      "retail-price-survey": 15,
-      "road-statistics": 19,
-      "school-basic-survey": 74,
+      "resident-registry-population-survey": 1,
+      "retail-price-survey": 14,
+      "road-statistics": 18,
+      "school-basic-survey": 63,
       "school-health-survey": 12,
       "sewerage-statistics": 5,
       "sixth-industry-survey": 2,
@@ -242,7 +242,7 @@
       "truck-operator-statistics": 1,
       "urban-park-survey": 12,
       "vehicle-registration-statistics": 1,
-      "vital-statistics": 62,
+      "vital-statistics": 61,
       "voter-registration-statistics": 1,
       "wage-structure-survey": 79,
       "waste-management-survey": 7,
@@ -251,7 +251,7 @@
       "water-pollution-survey": 3,
       "waterworks-statistics": 5,
       "weather-statistics": 12,
-      "welfare-admin-report": 19,
+      "welfare-admin-report": 18,
       "wind-power-deployment-statistics": 2,
       "wood-supply-demand-report": 6,
       "workers-compensation-annual-report": 2,
@@ -303,12 +303,7 @@
         "natural-environment"
       ],
       "area-survey": [
-        "education-culture",
-        "forestry-timber",
-        "living-housing",
-        "natural-environment",
-        "population-dynamics",
-        "roads"
+        "living-housing"
       ],
       "buried-cultural-property-statistics": [
         "education-culture"
@@ -323,29 +318,19 @@
         "childcare-services",
         "communication-access",
         "construction-industry",
-        "disability-support",
         "education-culture",
         "foreign-residents",
-        "forestry-timber",
         "gender-participation",
         "geographic-access",
-        "health-checkups",
         "healthcare",
         "labor-mobility",
         "labor-wages",
         "living-housing",
         "local-economy",
-        "local-finance",
-        "local-services",
-        "long-term-care",
-        "natural-environment",
         "population-dynamics",
-        "public-assistance",
         "regional-transport",
-        "roads",
         "safety",
-        "single-parent-households",
-        "sports-participation"
+        "single-parent-households"
       ],
       "childcare-related-status-report": [
         "childcare-services"
@@ -596,22 +581,10 @@
       "population-estimates": [
         "aging-society",
         "communication-access",
-        "disability-support",
-        "education-culture",
-        "foreign-residents",
-        "gender-participation",
-        "health-checkups",
         "healthcare",
-        "labor-mobility",
-        "labor-wages",
         "living-housing",
-        "local-finance",
-        "local-services",
-        "long-term-care",
         "population-dynamics",
-        "public-assistance",
-        "safety",
-        "sports-participation"
+        "safety"
       ],
       "population-projection": [
         "population-dynamics"
@@ -653,9 +626,6 @@
       ],
       "resident-registry-migration-report": [
         "population-dynamics"
-      ],
-      "resident-registry-population-survey": [
-        "water-services"
       ],
       "retail-price-survey": [
         "consumer-prices",
@@ -2450,7 +2420,7 @@
     },
     {
       "surveyId": "agriculture-forestry-census",
-      "rankingCount": 14,
+      "rankingCount": 12,
       "themeKeys": [
         "agriculture-production",
         "forestry-timber",
@@ -2484,14 +2454,9 @@
     },
     {
       "surveyId": "area-survey",
-      "rankingCount": 30,
+      "rankingCount": 6,
       "themeKeys": [
-        "education-culture",
-        "forestry-timber",
-        "living-housing",
-        "natural-environment",
-        "population-dynamics",
-        "roads"
+        "living-housing"
       ],
       "blogSlugs": [
         "allocation-tax-area",
@@ -2520,7 +2485,7 @@
     },
     {
       "surveyId": "boj-statistics",
-      "rankingCount": 5,
+      "rankingCount": 6,
       "themeKeys": [],
       "blogSlugs": []
     },
@@ -2554,35 +2519,25 @@
     },
     {
       "surveyId": "census",
-      "rankingCount": 312,
+      "rankingCount": 123,
       "themeKeys": [
         "aging-society",
         "childcare-services",
         "communication-access",
         "construction-industry",
-        "disability-support",
         "education-culture",
         "foreign-residents",
-        "forestry-timber",
         "gender-participation",
         "geographic-access",
-        "health-checkups",
         "healthcare",
         "labor-mobility",
         "labor-wages",
         "living-housing",
         "local-economy",
-        "local-finance",
-        "local-services",
-        "long-term-care",
-        "natural-environment",
         "population-dynamics",
-        "public-assistance",
         "regional-transport",
-        "roads",
         "safety",
-        "single-parent-households",
-        "sports-participation"
+        "single-parent-households"
       ],
       "blogSlugs": [
         "2050-population-map-reading",
@@ -2828,7 +2783,7 @@
     },
     {
       "surveyId": "crop-statistics",
-      "rankingCount": 8,
+      "rankingCount": 7,
       "themeKeys": [
         "agriculture-production"
       ],
@@ -3073,7 +3028,7 @@
     },
     {
       "surveyId": "foreign-residents-statistics",
-      "rankingCount": 10,
+      "rankingCount": 8,
       "themeKeys": [
         "foreign-residents"
       ],
@@ -3199,7 +3154,7 @@
     },
     {
       "surveyId": "housing-land-survey",
-      "rankingCount": 39,
+      "rankingCount": 38,
       "themeKeys": [
         "earthquake-exposure",
         "living-housing",
@@ -3281,7 +3236,7 @@
     },
     {
       "surveyId": "japan-post-statistics",
-      "rankingCount": 6,
+      "rankingCount": 8,
       "themeKeys": [],
       "blogSlugs": [
         "swimming-pool-public-vs-post-office-count"
@@ -3295,7 +3250,7 @@
     },
     {
       "surveyId": "job-placement-statistics",
-      "rankingCount": 11,
+      "rankingCount": 9,
       "themeKeys": [
         "disability-support",
         "labor-mobility",
@@ -4230,26 +4185,14 @@
     },
     {
       "surveyId": "population-estimates",
-      "rankingCount": 209,
+      "rankingCount": 32,
       "themeKeys": [
         "aging-society",
         "communication-access",
-        "disability-support",
-        "education-culture",
-        "foreign-residents",
-        "gender-participation",
-        "health-checkups",
         "healthcare",
-        "labor-mobility",
-        "labor-wages",
         "living-housing",
-        "local-finance",
-        "local-services",
-        "long-term-care",
         "population-dynamics",
-        "public-assistance",
-        "safety",
-        "sports-participation"
+        "safety"
       ],
       "blogSlugs": [
         "2050-population-map-reading",
@@ -4509,7 +4452,7 @@
     },
     {
       "surveyId": "public-assistance-survey",
-      "rankingCount": 16,
+      "rankingCount": 11,
       "themeKeys": [
         "local-finance",
         "public-assistance",
@@ -4568,10 +4511,8 @@
     },
     {
       "surveyId": "resident-registry-population-survey",
-      "rankingCount": 4,
-      "themeKeys": [
-        "water-services"
-      ],
+      "rankingCount": 1,
+      "themeKeys": [],
       "blogSlugs": [
         "foreign-resident-population-prefecture-gap",
         "international-cooperation-volunteer-map",
@@ -4582,7 +4523,7 @@
     },
     {
       "surveyId": "retail-price-survey",
-      "rankingCount": 15,
+      "rankingCount": 14,
       "themeKeys": [
         "consumer-prices",
         "real-income"
@@ -4609,7 +4550,7 @@
     },
     {
       "surveyId": "road-statistics",
-      "rankingCount": 19,
+      "rankingCount": 18,
       "themeKeys": [
         "roads"
       ],
@@ -4633,7 +4574,7 @@
     },
     {
       "surveyId": "school-basic-survey",
-      "rankingCount": 74,
+      "rankingCount": 63,
       "themeKeys": [
         "education-culture",
         "population-dynamics",
@@ -4885,7 +4826,7 @@
     },
     {
       "surveyId": "vital-statistics",
-      "rankingCount": 62,
+      "rankingCount": 61,
       "themeKeys": [
         "aging-society",
         "healthcare",
@@ -5050,7 +4991,7 @@
     },
     {
       "surveyId": "welfare-admin-report",
-      "rankingCount": 19,
+      "rankingCount": 18,
       "themeKeys": [
         "disability-support",
         "local-finance",

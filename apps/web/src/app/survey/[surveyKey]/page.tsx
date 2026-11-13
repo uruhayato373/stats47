@@ -54,6 +54,7 @@ import {
   excludeFeaturedQuestions,
   getSurveyEditorialContent,
   selectSurveyRepresentativeRankings,
+  surveyLatestYear,
   SurveyOutboundLinkArea,
 } from '@/features/survey';
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
@@ -211,13 +212,9 @@ export default async function SurveyPage({ params }: PageProps) {
   );
   topicLabels.set(OTHER_TOPIC_KEY, OTHER_TOPIC_LABEL);
 
-  // Hero KPI: 最新年, 代表件数, etc.
-  const latestYear =
-    rankingItems
-      .map((i) => parseLatestYear(i.latestYear))
-      .filter((y) => y && y.match(/^\d{4}$/))
-      .sort()
-      .pop() ?? '';
+  // 見出しの最新年。毎年でない調査は編集情報の実施周期から出す (国勢調査は 5 年ごと)。指標の最新年の最大を出すと、
+  // 人口推計も原典に持つ総人口の年が国勢調査の最新回に読める (2026-09-25 の点検。SURVEY-PAGES-01)
+  const latestYear = surveyLatestYear(rankingItems, editorial?.surveyCycle);
 
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
@@ -301,8 +298,6 @@ export default async function SurveyPage({ params }: PageProps) {
     })
     .slice(0, featuredLimit);
 
-  // 最新年は調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
-  // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
   const areaLabel = editorial?.areaLabel ?? '47都道府県';
   const rankingKeys = new Set(rankingItems.map((item) => item.rankingKey));
   const readerQuestions = excludeFeaturedQuestions(

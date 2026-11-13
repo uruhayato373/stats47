@@ -45,14 +45,23 @@ raw e-Stat は既存 `resolveProvenanceByParams` へ委譲する (辞書を複�
 
 ```
 config.surveyId (手動オーバーライド・先頭固定)
-  > 辞書導出 resolveMetricProvenance(config, registry)
+  > 辞書導出 resolveMetricPrimaryProvenance(config, registry)  ← 主出典 (割り算の指標は分子の原典だけ)
       - kind "kakei-chousa"     → kakei-chousa (固定)
-      - kind "estat" SSDS       → cdCat01 → 原典調査 (複数可)
+      - kind "estat" SSDS       → cdCat01 → 指標計算式の分子の原典調査 (複数可。基礎項目は資料源の全部)
       - kind "estat" 非SSDS     → statsDataId → 調査 (1件)
-      - kind "calculated"       → 分子/分母 metric を再帰的に辿る
+      - kind "calculated"       → 分子の metric を再帰的に辿る (掛け算・引き算は両方)
       - kind "mlit"/"external"  → displayName 辞書に正式登録済みなら実調査、未登録は合成 id (src:) → 除外 = 未分類
   > 空 = 未分類 (UI は調査カード非表示。偽の調査を作らない)
 ```
+
+- **調査のページへ並べるのは主出典 (分子の原典) だけ** (2026-11-14 SURVEY-PAGES-01)。社会・人口統計体系の指標の資料源は
+  計算式の全項目の資料源を合わせたものなので、人口や面積で割っただけの指標 (粗出生率・道路実延長・1 人当たり警察費) が
+  分母の調査 (国勢調査・人口推計・面積調) のページに並んでいた。`build-ssds-provenance.ts` が計算式の分子
+  (`formula-numerator.ts`) の原典を `primarySurveys` として辞書へ書き、`surveyIds` / `originalSurveys` はそれを使う。
+  **出典の表記 (`attribution`・「データ出典」) は分母も含めた全原典 (`resolveMetricProvenance`) のまま**。
+- 主出典が調査マスタに 1 つも無い指標 (消防年報・救急・救助の現況など、原典が未登録) だけは、未分類にせず全原典での
+  紐付けを残す (`usesAllSourcesLinkageFallback`)。対象は `build-ranking-item-from-metric.test.ts` が列挙して固定し、
+  減らすだけにする。原典を調査マスタへ登録すると外れる。
 
 - **合成 id (`ssds-src:` / `src:`) とマスタ非実在 id は配信に出さない** (surveys.json 照合で除外)。
 - `surveyIds` は**配列** (SSDS は複数原典に属す)。`surveyId` (単数) は後方互換の主参照 = 先頭。
@@ -82,7 +91,7 @@ config.surveyId (手動オーバーライド・先頭固定)
 ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` / `requireSnapshotSources`
 が設定されていれば悪化を失敗にする。
 | `/survey` 一覧 | 調査カード + 件数 | all.json (`itemCount` 焼き込み、force-dynamic) |
-| `/survey/<id>` | 調査ハブ + 代表/全ランキング / 関連カテゴリ / テーマ / ブログ記事 | survey items + ThemeCatalog 逆引き + `app/blog/all.json.surveyArticleIndex` (ƒ オンデマンド ISR) |
+| `/survey/<id>` | 調査ハブ + 代表/全ランキング / 関連カテゴリ / テーマ / ブログ記事 | survey items + ThemeCatalog 逆引き + `app/blog/all.json.surveyArticleIndex` (ƒ オンデマンド ISR)。見出しの最新年は `surveyLatestYear`: 編集情報に実施周期 (`surveyCycle`) がある調査は掲載データの年のうち実施年に当たる最新の年、無い調査は掲載データの最新年 |
 
 双方向リンクは `nav_click` の既存 custom dimensions で計測する。各面→survey は
 `*_survey`、survey→各面は `survey_ranking` / `survey_theme` / `survey_blog` /
