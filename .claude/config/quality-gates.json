@@ -120,7 +120,5 @@
     { "id": "local-registry", "checker": ".claude/scripts/lib/check-local-registry.mjs", "command": "node .claude/scripts/lib/check-local-registry.mjs", "scope": ["environment", "maintenance"], "owner": "devops-runner", "trigger": ["pull_request"], "blocking": true, "networkOrSecrets": "none", "timeoutMinutes": 1 },
     { "id": "external-metric-ingest-verification", "checker": ".claude/scripts/themes/verify-external-ingest.mjs", "command": "node .claude/scripts/themes/verify-external-ingest.mjs --report .local/verification/themes/ndb-questionnaire-source.json", "scope": ["metrics", "data"], "owner": "data-ingester", "trigger": ["workflow_dispatch"], "blocking": true, "networkOrSecrets": "none", "timeoutMinutes": 2 }
   ],
-  "exceptions": [
-    { "code": "NOT_A_CHECKER", "file": "scripts/ui-theme/inline-lyra.mjs", "gateId": "lyra-inline", "reason": "lyra の書き込みスクリプトは root の scripts/ にあり、check-checker-wiring の探索範囲 (.claude/scripts と apps|packages/*/scripts) の外。検査本体は npm run ui-theme:lyra:test (pre-commit と PR CI の static-gates で blocking)。スクリプトを探索範囲へ移すか探索範囲を広げたら外す", "expiresAt": "2026-12-31" }
-  ]
+  "exceptions": []
 }

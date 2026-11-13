@@ -211,7 +211,10 @@ jobs:
       - name: 🎨 Lyra Inline Check
         # lyra の規則 (style-lyra.css) の部品の className への書き込み漏れと cn-* の組み立てを止める
         # (pre-commit と同一)。正典: packages/ui-theme/README.md
-        run: npm run ui-theme:lyra:test
+        # 書き込み漏れの検査本体 (--check) を直に呼ぶ。台帳 lyra-inline の checker として配線が辿れる
+        run: |
+          npm run ui-theme:lyra:test
+          node --import tsx scripts/ui-theme/inline-lyra.mjs --check
         continue-on-error: false
 
       - name: 🃏 Card Census Guard

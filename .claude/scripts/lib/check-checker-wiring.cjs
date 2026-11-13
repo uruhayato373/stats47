@@ -92,7 +92,9 @@ function inScope(file) {
 }
 
 function candidateRoots() {
-  const roots = [path.join(ROOT, ".claude/scripts")];
+  // root の scripts/ も探す。lyra の書き込みスクリプト (scripts/ui-theme/inline-lyra.mjs) のように、
+  // root に置かれた検査が台帳へ宣言されても探索範囲の外で NOT_A_CHECKER になり、例外登録で通していた。
+  const roots = [path.join(ROOT, ".claude/scripts"), path.join(ROOT, "scripts")];
   for (const parent of ["apps", "packages"]) {
     const directory = path.join(ROOT, parent);
     let entries = [];
@@ -106,12 +108,15 @@ function candidateRoots() {
   return roots;
 }
 
+// 台帳の gates[].checker に宣言されたファイルは、名前が check / audit などでなくても検査スクリプトに数える。
+// 名前の規則は宣言のない検査を拾うための推測で、宣言は明示だから (inline-lyra.mjs は --check で検査する)。
 function candidates() {
+  const declared = new Set(readRegistry().registry.gates.map((gate) => path.resolve(ROOT, String(gate?.checker ?? ""))));
   return candidateRoots()
     .flatMap((root) => walk(root))
     .filter(inScope)
     .filter((file) => SCRIPT_EXTENSIONS.has(path.extname(file)))
-    .filter((file) => CHECKER_NAME.test(path.basename(file)))
+    .filter((file) => CHECKER_NAME.test(path.basename(file)) || declared.has(file))
     .sort();
 }
 
