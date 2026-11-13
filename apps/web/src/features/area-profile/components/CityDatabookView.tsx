@@ -156,7 +156,8 @@ export function CityDatabookView({ databook, cityShortName, prefName, adBeforeSe
             </a>
           ))}
         </nav>
-        {/* 26 個の表を 5 つの章にまとめ、章の頭に値から作る 1 文を置く。章の前に広告を入れる (2026-11-13 オーナー決定) */}
+        {/* 26 個の表を 5 つの章にまとめ、章の頭に値から作る 1 文を置く。章の前に広告を入れる (2026-11-13 オーナー決定)。
+            章の見出しは「分野別のデータ」と同じ h2 (text-base)、節は h3 (text-sm) にして大きさで区切る */}
         <div className="mt-6 space-y-8" {...navSurfaceProps("area_databook")}>
           {groupCityDatabookSectionsByChapter(databook.sections).map(({ chapter, sections }) => (
             <Fragment key={chapter.key}>
@@ -164,7 +165,6 @@ export function CityDatabookView({ databook, cityShortName, prefName, adBeforeSe
               <section id={chapter.key} aria-labelledby={`${chapter.key}-title`} className="scroll-mt-20 space-y-6">
                 <SectionHeader
                   title={<span id={`${chapter.key}-title`}>{chapter.title}</span>}
-                  as="h3"
                   description={chapterLead(
                     sections.flatMap((section) => section.metricKeys.flatMap((key) => (metrics[key] ? [metrics[key]] : []))),
                     cityShortName,
@@ -174,7 +174,7 @@ export function CityDatabookView({ databook, cityShortName, prefName, adBeforeSe
                 {sections.map((section) => (
                   <section key={section.themeSlug} id={section.themeSlug} className="scroll-mt-20">
                     <SectionHeader
-                      as="h4"
+                      as="h3"
                       title={section.title}
                       action={
                         <Link

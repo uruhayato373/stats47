@@ -18,8 +18,8 @@ interface SectionHeaderProps {
    * 一覧への導線は SectionIndexLink (Button outline sm + ArrowRight) を使い、文字の矢印 (→) を書かない。
    */
   action?: ReactNode;
-  /** 見出しの階層（既定 h2: text-base、小見出し h3・h4: text-sm）。h4 は章の中の節 (市区町村のデータブック) */
-  as?: "h2" | "h3" | "h4";
+  /** 見出しの階層（既定 h2: text-base、小見出し h3: text-sm）。 */
+  as?: "h2" | "h3";
   /** 下の区切り線 (Separator) を出さない場合 true */
   hideRule?: boolean;
   /** 追加クラス（外側 div に当てる） */
@@ -62,7 +62,7 @@ export function SectionHeader({
           )}
           <Heading className={cn(
             "flex items-center gap-2 font-semibold leading-snug text-foreground [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
-            Heading === "h2" ? "text-base" : "text-sm",
+            Heading === "h3" ? "text-sm" : "text-base",
           )}>
             {icon}
             {/* 文節で折り返し、行の長さを揃える (語中で折れない) */}

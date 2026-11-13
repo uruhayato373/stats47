@@ -112,6 +112,9 @@ describe('buildCityDatabooks', () => {
     const books = build();
     expect(books.get('13101')!.metrics['elderly-population-ratio']!.prefectureRank).toBe(1);
     expect(books.get('13102')!.metrics['elderly-population-ratio']!.prefectureRank).toBe(1);
+    // 同じ県内順位を分け合う数を持つ (「特徴」と章の 1 文が同じ値で並ぶ指標を選ばないため。2026-11-13)
+    expect(books.get('13101')!.metrics['elderly-population-ratio']!.prefectureTies).toBe(2);
+    expect(books.get('13101')!.metrics['total-population']!.prefectureTies).toBe(1);
   });
 
   it('先に出た節の指標を重ねず、指標の無い節は出さない', () => {

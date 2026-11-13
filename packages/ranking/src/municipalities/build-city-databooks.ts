@@ -105,24 +105,26 @@ export function buildWardBreakdowns(input: WardBreakdownInput): Map<string, City
   return result;
 }
 
-/** 全国順位の順に並んだ値から、県ごとの順位を数える。同じ全国順位 (同じ値) は同じ県内順位にする。 */
-function prefectureRanks(values: MunicipalityRankingValuesSnapshot['values']): Map<string, { rank: number; count: number }> {
+/** 全国順位の順に並んだ値から、県ごとの順位を数える。同じ全国順位 (同じ値) は同じ県内順位にし、分け合う数 (ties) も数える。 */
+function prefectureRanks(values: MunicipalityRankingValuesSnapshot['values']): Map<string, { rank: number; count: number; ties: number }> {
   const byPrefecture = new Map<string, MunicipalityRankingValuesSnapshot['values']>();
   for (const row of values) {
     const list = byPrefecture.get(row.prefectureCode) ?? [];
     list.push(row);
     byPrefecture.set(row.prefectureCode, list);
   }
-  const result = new Map<string, { rank: number; count: number }>();
+  const result = new Map<string, { rank: number; count: number; ties: number }>();
   for (const rows of byPrefecture.values()) {
     const ordered = [...rows].sort((a, b) => a.rank - b.rank || a.areaCode.localeCompare(b.areaCode));
+    const tiesByNationalRank = new Map<number, number>();
+    for (const row of ordered) tiesByNationalRank.set(row.rank, (tiesByNationalRank.get(row.rank) ?? 0) + 1);
     let previousNationalRank = -1;
     let previousRank = 0;
     ordered.forEach((row, index) => {
       const rank = row.rank === previousNationalRank ? previousRank : index + 1;
       previousNationalRank = row.rank;
       previousRank = rank;
-      result.set(row.areaCode, { rank, count: ordered.length });
+      result.set(row.areaCode, { rank, count: ordered.length, ties: tiesByNationalRank.get(row.rank) ?? 1 });
     });
   }
   return result;
@@ -175,6 +177,7 @@ export function buildCityDatabooks(input: BuildCityDatabooksInput): Map<string, 
         nationalCount: values.count,
         prefectureRank: prefecture.rank,
         prefectureCount: prefecture.count,
+        prefectureTies: prefecture.ties,
         basis,
       };
       metricsByCity.set(row.areaCode, metrics);
