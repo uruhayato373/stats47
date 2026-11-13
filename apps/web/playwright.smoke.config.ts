@@ -23,6 +23,7 @@ export default defineConfig({
   reporter: [["list"], ["html", { outputFolder: "playwright-smoke-report" }]],
 
   use: {
+    serviceWorkers: "block",
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || SITE.origin,
     trace: "on-first-retry",
     screenshot: "only-on-failure",

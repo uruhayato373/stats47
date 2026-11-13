@@ -1,9 +1,10 @@
-import { expect, test } from "@playwright/test";
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { ANALYSIS_PREVIEWS } from "../../src/features/products/analysis-previews.generated";
 import { findStorefrontProduct } from "../../src/features/products/storefront";
 import { STOREFRONT_PRODUCTS } from "../../src/features/products/storefront.generated";
+
+import { expect, test } from "./fixtures";
 
 /**
  * breakpoint 別レイアウト検証（本番スモーク）
@@ -56,7 +57,9 @@ test.describe("breakpoint 別レイアウト", () => {
     await themeLink.click();
     await expect(page).toHaveURL(new RegExp(`${ref.href}$`), { timeout: 45_000 });
     const chapter = page.locator(`#theme-section-${ref.sectionKey}`);
-    const productLink = chapter.locator(`[data-theme-product-links] a[href="${examplePath}"]`);
+    // Streaming may retain hidden markup while attaching the visible chapter.
+    // Require exactly one visible link; do not pick the first duplicate.
+    const productLink = chapter.locator(`[data-theme-product-links] a[href="${examplePath}"]:visible`);
     await expect(productLink).toHaveCount(1);
     await expect(productLink).toBeVisible();
     await expect(productLink.locator('..')).toContainText(preview ? '未公開の改訂案' : example.heading);

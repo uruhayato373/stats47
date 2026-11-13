@@ -1,5 +1,6 @@
-import { expect, test } from '@playwright/test';
 import { CORRELATION_DIRECTIONS, CORRELATION_SELECTION_POLICY } from '@stats47/correlation';
+
+import { expect, test } from './fixtures';
 
 test('相関一覧は正負各10件を保ち、本文幅で横並びと縦並びを切り替える', async ({ page }) => {
   test.setTimeout(120_000);

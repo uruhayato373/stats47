@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 for (const target of [
   { path: '/ranking/total-population', title: '都道府県別 総人口ランキング', municipality: true, calculation: true },
