@@ -131,6 +131,14 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: PR #1257 を auto-merge (squash) したところ、本文に develop の CI 書き戻しコミット (キーワード観測の記録) の件名がトークンごと並び、main の bd6f1bb35 で `deploy-workers.yml` を含む push の workflow が 1 本も作られなかった。`deploy-workers.yml` を `workflow_dispatch` で手動起動して出した。`.husky/commit-msg` の検査はローカルのコミットだけを見るので、GitHub が作る squash の本文は止められない。
+- **次**: どちらかを選んで機械で止める。(a) release の PR を merge commit か本文を指定した squash でだけマージする (auto-merge の既定の本文を使わない)。(b) main の定義で動く `pull_request_target` (closed・merged) の見張りが、マージコミットの本文にトークンがあれば `deploy-workers.yml` を `workflow_dispatch` で起動する (`pr-skip-ci-head-guard.yml` と同じ形)。
+- **停止条件**: CI の書き戻しコミットのトークンは外さない (develop での無駄な run を止める正当な用途)。
+- **完了条件**: トークン入りのコミットを含む develop→main のマージで本番デプロイが自動で起動することを、契約テストか実際のマージで確かめる。規約 `branch-workflow.md` の skip-ci 節に 1 段落足す。
+
 ### [PRODUCT-ANALYSIS-WIRING-01] 商品分析の調査候補を一次資料と実データで検証し、改訂案へ追加する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-12] [領域:商品]
 
