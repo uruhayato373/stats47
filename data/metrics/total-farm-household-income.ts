@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const totalFarmHouseholdIncome: MetricConfig = {
   "key": "total-farm-household-income",
   "title": "農家総所得",
+  "subtitle": "調査対象の農家1戸当たりの平均",
   "description": "農業所得 (農業粗収益−農業経営費) と農外所得 (農外収入−農外支出) に、年金・被贈等の収入を加えた所得。農林水産省「農業経営統計調査」の値で、e-Stat の項目定義どおり。",
   "note": "調査対象の農家 1 戸当たりの平均と読める値 (数百万〜千数百万円) だが、e-Stat の項目定義に 1 戸当たりの明記は無い。基礎データは 1975〜2003 年で収集が中止されている。出典: e-Stat「統計項目の定義 L 家計」https://www.e-stat.go.jp/koumoku/koumoku_teigi/L (2026-10-21 確認)",
   "unit": "千円",

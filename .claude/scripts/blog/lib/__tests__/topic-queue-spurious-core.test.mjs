@@ -331,3 +331,20 @@ test("topic-queue.json: 型B の pending に規模×規模 (件数・金額の�
   const offenders = pendingBPairs().filter(({ a, b }) => isSizeMetric(a) && isSizeMetric(b));
   assert.deepEqual(offenders.map((e) => e.topicKey), []);
 });
+
+// 分母は e-Stat の項目名 (「…（二人以上の世帯）」) と値の桁で決めた。unit は素の「千円」のままなので
+// subtitle が持たないと総額と判定される (METRIC-HOUSEHOLD-ASSET-SUBTITLE-01)
+test("data/metrics: 世帯・農家の 1 戸当たり金額 4 指標は subtitle に分母を持ち、金額の総額と判定されない", () => {
+  const metas = loadMetricMetas();
+  for (const key of [
+    "financial-debt-balance",
+    "savings-deposit-balance",
+    "securities-balance",
+    "total-farm-household-income",
+  ]) {
+    const meta = metas.get(key);
+    assert.ok(meta, `metric config が無い: ${key}`);
+    assert.match(meta.subtitle, /当たり/u, `${key} の subtitle に分母が無い`);
+    assert.equal(isMoneyTotalMetric(meta), false, `${key} が金額の総額と判定される`);
+  }
+});
