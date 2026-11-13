@@ -35,6 +35,8 @@ import { buildGroundTruth, checkArticleFactual } from '../lib/article-factual-ch
 import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
 import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
 import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
+import { lintRelatedLinkNames } from '../lib/related-link-lint.mjs';
+import { lintFigureYearMention } from '../lib/figure-year-lint.mjs';
 import { lintUnregisteredTags } from '../lib/blog-tag-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
@@ -425,6 +427,13 @@ const statsTableLint = lintStatsTableIds(content);
 checks.statsTableIdIssues = statsTableLint.hits.length;
 blockers.push(...statsTableLint.blockers);
 
+// 関連記事の紹介の表示名 (2026-11-14 追加、related-link-lint.mjs、BLOG-REVISE-PATTERNS-01)
+// `[表示名](/blog/<slug>)` が、リンク先の現在の題と語を 1 つも共有しない、または書き直しで変えた旧題のまま。
+// 同時に書き直した姉妹記事への古い紹介が critic の目視でしか見つからなかった。公開済み 294 本で 0 件。
+const relatedLinkLint = lintRelatedLinkNames(content);
+checks.relatedLinkNameIssues = relatedLinkLint.hits.length;
+blockers.push(...relatedLinkLint.blockers);
+
 // 内部リンクの実在チェック (2026-07-24 追加、internal-link-lint.mjs)
 // 実在しない ranking key は HTTP 200 + 「ランキングが見つかりません」の soft 404 を返すため、
 // ステータス監視では捕まらない。repo 内の key 集合と突合して公開前に弾く。
@@ -728,6 +737,11 @@ if (pairBlockers.length > 0) {
 const mixedYear = lintMixedYearTitle(content, articleCharts);
 checks.mixedYearTitle = mixedYear.warnings.length;
 warnings.push(...mixedYear.warnings);
+// 図の年と節の本文の年 (2026-11-14 追加、figure-year-lint.mjs、BLOG-REVISE-PATTERNS-01)。
+// 本文が語る年と貼った図の年が 1 つも重ならず、年の違いの断りも無い節は blocker (公開済み 294 本で 0 件)。
+const figureYear = lintFigureYearMention(content, articleCharts);
+checks.figureYearMismatch = figureYear.hits.length;
+blockers.push(...figureYear.blockers);
 const hypernym = lintHypernymMetricNames(content, articleCharts);
 checks.hypernymMetricNames = hypernym.warnings.length;
 warnings.push(...hypernym.warnings);
