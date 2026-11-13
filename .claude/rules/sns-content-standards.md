@@ -128,7 +128,7 @@ X 投稿の「型」は台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) の `t
 ### 2-2. X 引用RT
 
 - **対象判定**: トレンド入りの話題 / 72h 以内のツイート / 統計で補足できる話題。炎上系・政治系は避ける
-- **本文**: テキストのみが既定。動画添付は station-passengers / migration-flow の既存素材のみ opt-in
+- **本文**: テキストのみ。人の移動と駅の動画は §2-4 で撤去したので、引用 RT に動画を添付しない
 - **型**: 引用元の主張を統計で肯定/否定/深掘りする 1-2 文 + UTM付きURL (任意)
 
 ### 2-3. Instagram カルーセル (6 枚構成)
@@ -211,6 +211,7 @@ X 投稿の「型」は台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) の `t
 作る動画は**ランキングのショート** (`RankingYouTube-Short`・`RankingInstagram-Reel`) と**バーチャートレース** (`BarChartRace-YouTubeShort`・`BarChartRace-InstagramReel`) だけにする。
 実績 (`data/sns/metric-snapshots/` の投稿ごとの最新値): YouTube ショート 63 本の再生数の中央値 663、バーチャートレース 2 本の中央値 1,440。
 予想クイズのリール、バズ地図の動画、人の移動と駅の動画は撤去した。予想クイズのカルーセル (§2-3b) とバズ地図の静止画は残す。動画を増やすときは、実績を示してから決める。
+人の移動の動画の投稿 workflow (`migration-flow-{weekly,monthly,annual}.yml`) も 2026-11-14 のオーナー決定「一旦やめる」で削除した。再開するときは git の履歴 (削除したコミットの 1 つ前) から戻す。
 
 - **15 字以内のフック**を冒頭に (予測 → 答え合わせ型)。例:「1 位は意外なあの県」
 - 数字対比 × 意外性で 3-5 秒以内に引く。完視聴・保存を狙う
@@ -343,7 +344,7 @@ Instagramは同じ入力から表紙・データ本体・出典/案内の3枚を
 §2-0 / §2-8 / §2-9 / §1 quota の改訂は**実測と競合観測に基づく**こと (`evidence-based-judgment.md`)。
 
 1. `analyze-x-winning-patterns.mjs` の月次レポート
-   (`data/sns/x-winning-pattern-reports/<date>.md`) か
+   (`data/sns/x-winning-pattern-reports/<date>-winning-patterns.md`) か
    `/competitor-scan` の月次レビューを起点にする (思いつきで変えない)。
 2. x-strategist が「どの行をどう変えるか」の diff を提案として提示する。
 3. **人間が承認してから**台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) を編集する。編集後は

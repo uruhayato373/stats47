@@ -110,6 +110,22 @@ test("[mutation] skill の reference/reports/ に定期レポートを置くと�
   for (const [id, dir] of Object.entries(destinations)) assert.equal(datasetDir(id), dir);
 });
 
+test("X の勝ち要因レポートは書き手 2 つが別の名前で書き、同じ日に両方を回しても上書きしない", () => {
+  // analyze-x-winning-patterns.mjs の月次レポートと /x-viral-research の Phase 4 は種類の違うレポートを同じ置き場に書く。
+  // 名前が日付だけだと、同じ日に両方を実行すると後の方が前の方を上書きする。
+  const row = DATASETS.find((x) => x.id === "sns.x-winning-pattern-reports");
+  const re = patternToRegExp(row.path);
+  const dir = datasetDir("sns.x-winning-pattern-reports");
+  const script = readFileSync(resolve(ROOT, ".claude/scripts/sns/analyze-x-winning-patterns.mjs"), "utf8");
+  const skill = readFileSync(resolve(ROOT, ".claude/skills/sns/x-viral-research/SKILL.md"), "utf8");
+  const scriptName = /`\$\{today\}(-[a-z-]+)\.md`/.exec(script)?.[1];
+  const skillName = /x-winning-pattern-reports\/YYYY-MM-DD(-[a-z-]+)\.md/.exec(skill)?.[1];
+  assert.ok(scriptName, "analyze-x-winning-patterns.mjs は日付の後ろに種類の名前を付けて書く");
+  assert.ok(skillName, "x-viral-research の Phase 4 は日付の後ろに種類の名前を付けて書く");
+  assert.notEqual(scriptName, skillName);
+  for (const name of [scriptName, skillName]) assert.ok(re.test(`${dir}/2026-11-14${name}.md`), `台帳の行に当たらない: ${name}`);
+});
+
 test("可変部分は決めた形だけに当たる", () => {
   assert.ok(patternToRegExp("a/{date}.json").test("a/2026-10-06.json"));
   assert.ok(!patternToRegExp("a/{date}.json").test("a/2026-W41.json"));

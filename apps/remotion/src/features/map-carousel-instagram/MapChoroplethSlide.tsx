@@ -14,7 +14,7 @@ const SERIES = "map" as const;
 const CELL = 46;
 /**
  * 地図カード下端とフレーム下端の間隔。IgSeriesFrame の swipeLabel (bottom:110・高さ約40px) と
- * ブランド行 (bottom:44) の両方を避ける必要があるため、QuizHintSlide の 90px (swipeLabel 無しの
+ * 出典行 (IgSeriesFooter・bottom:44) の両方を避ける必要があるため、QuizHintSlide の 90px (swipeLabel 無しの
  * 想定) より大きく取る (2026-09-23 実測: 90px だと凡例の下段テキストが swipeLabel と重なって
  * 判読不能になった)。
  */
