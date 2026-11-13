@@ -35,6 +35,19 @@ function git(cwd, args) {
   return execFileSync("git", args, { cwd, encoding: "utf8", timeout: 5000, stdio: ["ignore", "pipe", "ignore"] }).trim();
 }
 
+/**
+ * 「1 回だけ」の記録を置く基準ディレクトリ。作業場所 (cwd) は apps/web などへ移りうるので基準にしない
+ * (HOOK-UNPUSHED-CWD-01)。CLAUDE_PROJECT_DIR、無ければ cwd の git toplevel、それも無ければこの hook の置き場から求めた根。
+ */
+function lockBaseDir(cwd) {
+  if (process.env.CLAUDE_PROJECT_DIR) return process.env.CLAUDE_PROJECT_DIR;
+  try {
+    return git(cwd, ["rev-parse", "--show-toplevel"]) || PROJECT_ROOT;
+  } catch {
+    return PROJECT_ROOT;
+  }
+}
+
 /** 会話記録 (JSONL) の最初の timestamp をセッションの開始時刻とする。読めなければ null */
 function sessionStartedAt(transcriptPath) {
   if (!transcriptPath) return null;
@@ -91,7 +104,7 @@ function main() {
   if (!result.upstream || result.commits.length === 0) return;
 
   const head = result.commits[0].sha;
-  const lockDir = path.join(cwd, ".claude", "state", "session-locks");
+  const lockDir = path.join(lockBaseDir(cwd), ".claude", "state", "session-locks");
   const lockFile = path.join(lockDir, `unpushed-${String(input.session_id || "unknown").replace(/[^\w.-]/g, "_")}.txt`);
   try {
     if (fs.existsSync(lockFile) && fs.readFileSync(lockFile, "utf8").trim() === head) return;
@@ -122,4 +135,4 @@ if (require.main === module) {
   process.exit(0);
 }
 
-module.exports = { sessionStartedAt, unpushedOwnCommits };
+module.exports = { sessionStartedAt, unpushedOwnCommits, lockBaseDir };
