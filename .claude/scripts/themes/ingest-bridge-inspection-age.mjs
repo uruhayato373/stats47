@@ -1,8 +1,8 @@
 /** Recompute the complete source; R2 is written only with --write-local. */
-import { createRequire } from 'node:module';
+import { require as tsxRequire } from 'tsx/cjs/api';
 import { readFile, writeFile, mkdir, realpath } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
-import { pathToFileURL, fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
@@ -17,6 +17,16 @@ export async function readSourceDefinition({ root, proposal }) {
   const source = JSON.parse(await readFile(resolve(dir, 'bridge-inspection-age.json'), 'utf8'));
   assertDatasetShape('themes.sources', source);
   return source;
+}
+
+/**
+ * Web の読み手と同じ厳密な検査関数を TS から読む。tsx の tsImport (ESM) は入れ子の TS import
+ * (packages/area/src/index.ts) を解決できず ERR_MODULE_NOT_FOUND で止まるため、
+ * ingest-vacancy-types.mjs と同じ tsx/cjs/api の require で読む。
+ */
+export function loadSnapshotParser(root) {
+  const parserPath = resolve(root, 'apps/web/src/features/bridge-inspection-age/lib/bridge-inspection-age-snapshot.ts');
+  return tsxRequire(parserPath, import.meta.url).parseBridgeInspectionAgeSnapshot;
 }
 
 export async function main(args = process.argv.slice(2)) {
@@ -37,10 +47,7 @@ export async function main(args = process.argv.slice(2)) {
   // The production import validates the same strict contract as the Web reader.
   // A proposal is checked against the ledger schema when it is read; its snapshot is not parsed here.
   if (!proposal) {
-    const { tsImport } = createRequire(resolve(root, 'package.json'))('tsx/esm/api');
-    const parserPath = resolve(root, 'apps/web/src/features/bridge-inspection-age/lib/bridge-inspection-age-snapshot.ts');
-    const { parseBridgeInspectionAgeSnapshot } = await tsImport(pathToFileURL(parserPath).href, import.meta.url);
-    parseBridgeInspectionAgeSnapshot(snapshot);
+    loadSnapshotParser(root)(snapshot);
   }
   const bytes = JSON.stringify(snapshot) + '\n';
   proof.snapshotSha256 = createHash('sha256').update(bytes).digest('hex');
