@@ -1,59 +1,43 @@
 {
-  "status": "no-change",
-  "summary": "今回はコード変更なしです。唯一の失敗は consumer-prices の 1440px 画面の初回503（110件中1件、390px は成功）で、証拠のHTML本文とHTTP応答ファイルはどちらも空でした。cf-ray も残っておらず、根本原因を証明できないため推測修正はしていません。Bash が許可されず、テストは1件も実行できていません（修正も無いので未実行です）。公式原典は consumer-prices だけ確認しました。このテーマは月次CPIではなく「消費者物価地域差指数」12指標だけを参照しているため、2026年7月分での2025年基準への切替は直接は影響しません。ただ、地域差指数の公式定義は「51市平均=100」と読め、config の説明は「全国平均=100」です。社会・人口統計体系側の定義は未確認のため、修正せず記録しました。d56は insufficient-data を維持し、新規launchのd7は quality-only/pending のままで、d28の期日は 2026-10-09 で未到達です。実験の日付・baseline・観測は変更していません。候補105（地震の住宅戸数）は今回は新たな原典を調べておらず、未充足のままです。残り52テーマの原典確認は未実施で、次回に持ち越します。",
+  "status": "blocked",
+  "summary": "今回のランタイム監査は 112 件中 112 件が失敗しました。前回は 110 件中 1 件の単発503だけだったので、性質が違います。ただし原因は証明できていません。今回は HTTP 200・HTML 完結（x-html-integrity: complete）で、503 ではありません。consumer-prices の保存 HTML には、全国表示（?pref=all）で 6 章のうち 3 章（expenses / historical-change / reading）だけが入っています。カードとグラフはクライアント描画で、保存 HTML には kpi-card 属性が 1 件しかありません。2026-11-01 の設計決定は「全国ページは全国値のある指標だけを出し、描くものの無い章は出さない」です。監査（audit-theme-runtime.ts:208-241）は全章の存在とカード数を期待しており、設計と食い違う可能性があります。県セレクタは保存 HTML に aria-label があるのに、監査の combobox 数は 0 でした。この点は説明できていません。本番がリポジトリの最新カタログより古い可能性もあります。確認手段がありません。Bash が途中から拒否され、curl・release:status・テストを実行できませんでした。監査スクリプトは変更禁止です。そのためコード修正はせず、推測で直しません。実験判定（d7/d28/d56）は実行せず、ci-followup.json を読んだだけで日付・baseline・観測は未変更です。公式原典の確認は今回できていません（sourceReviews は空）。次の条件: 本番の buildId と develop の差を release:status と curl で確認し、監査側の期待値（全国表示の章・セレクタの役割）の是正をオーナーか監査の担当に渡します。",
   "findings": [
     {
       "themeKey": "consumer-prices",
-      "detail": "1440px の初回アクセスだけが 503 で、h1待機が15000msでタイムアウトし、incomplete-html・invalid-heading・チャート2種欠落・県セレクタ欠落が連鎖しました。同じテーマの390pxは同一run内で成功し、他の108件も全件PASSです。consumer-prices-1440-document.html と consumer-prices-1440-http-0.txt は両方とも空で、応答本文・cf-ray・ヘッダーが無いため、原因がオリジン・Cloudflare・CI経路のどれかは区別できません。memory には 2026-09-12 の実質収入、前回reviewの 2026-09-28 の healthcare で、別テーマの単発503が再確認で解消した記録があります。3回とも対象テーマが違い、コードの共通箇所は特定できていません。したがって推測修正はしていません。[仮説] 本番側の一時的な503の可能性。次の条件: 同一テーマ・同一幅で2回連続して失敗するか、失敗応答の本文かcf-rayが保存されたときに原因調査へ進む。コンポーネントの欠落はこの503の結果で、独立した表示バグの証拠はありません。",
+      "detail": "全 112 ケース（55 テーマ × 1440/390px。実装は 2 幅）が失敗し、前回（1/110）から急増しました。consumer-prices の 1440px は HTTP 200・htmlIntegrity=complete・h1「全国の物価・消費」で、503 や空応答ではありません。保存 HTML の #theme-section-* は expenses / historical-change / reading の 3 件のみで、カタログ（data/themes/catalogs/consumer-prices.json:455-499）にある overall / food-prices-and-expenditure / utilities-prices-and-expenditure は出ていません。これは「全国ページは全国値のある指標だけを出し、描くものの無い章は出さない」という 2026-11-01 の設計決定（theme-catalog-standards.md）と整合します。監査は catalog.sections を全件期待します。[仮説] 監査の期待値が現行の全国表示の設計より古い。検証期日: 次回の週次レビュー。検証手順: 本番で同じ URL を取得し、章数が保存 HTML と一致するか、および develop と本番の buildId 差を release:status で確認する。仮説棄却の条件: 本番がリポジトリの現行ビルドと一致していて、章が欠けていれば本物の表示退行として原因調査に進む。",
       "evidenceRefs": [
+        ".local/ci/theme-followup/runtime.json",
         ".local/ci/theme-followup/runtime.log",
         ".local/ci/theme-followup/consumer-prices-1440-document.html",
-        ".local/ci/theme-followup/consumer-prices-1440-http-0.txt",
-        ".claude/state/themes/ci-followup.json",
-        ".claude/memory/project_theme_dashboard_enhancement.md"
+        "data/themes/catalogs/consumer-prices.json",
+        ".claude/scripts/themes/audit-theme-runtime.ts"
       ]
     },
     {
-      "themeKey": "consumer-prices",
-      "detail": "このテーマの cpi-profile は consumer-price-difference-index-* の12指標だけを参照し、月次CPIは使っていません。2025年基準への切替（2026年7月分の全国公表時）は、このテーマの数値に直接影響しません。一方、指標 consumer-price-difference-index-overall の config は unit を「（全国=100）」、description を「全国平均の物価水準を100」としています。統計局の概要ページ（検索結果の要約と、取得できた断片の「51市平均=100」）では、地域差指数は51市の平均を基準(=100)とする年平均指数です。config の出典は社会・人口統計体系の #L04414 で、そこでの定義は未確認です。このため、表示の「全国」が誤記か別定義かは確定できません。ページの文字化けにより公表年・基準の詳細も判読できていません。修正せず記録します。次の条件: e-Stat の #L04414 の定義（項目名・注記）を確認し、不一致なら12指標の unit と description を直す。config は2024年までで、統計局では2024年結果が 2025-06-27 公表とされ、2025年結果の公表有無は未確認です。",
+      "themeKey": "aging-society",
+      "detail": "全テーマ共通で prefecture-selector が失敗しました。監査は getByRole('combobox', {name:'都道府県を選択'}) を数えます（audit-theme-runtime.ts:261-263）。コンポーネント PrefectureSelect.tsx:78-81 は aria-label=\"都道府県を選択\" の SelectTrigger を出しており、ThemeSideNav のユニットテストは getByLabelText で存在を確認しています。保存 HTML（SSR のみ）には aria-label はあるものの role=\"combobox\" が 0 件でした。水和後の DOM は保存されていないため、実際のブラウザで combobox ロールが付くかは未確認です。選択 UI が消えたのか、監査のロール期待が合わなくなったのかを区別できていません。ここでは監査側の不具合の可能性を記録するだけで、検証基準は変更していません。次の条件: 本番で水和後の DOM のロール（Base UI の Select のトリガー）を 1 テーマで確認する。",
       "evidenceRefs": [
-        "packages/data-configs/src/metrics/consumer-price-difference-index-overall.ts",
-        "packages/data-configs/src/theme-catalog/consumer-prices.ts",
-        "https://www.stat.go.jp/data/cpi/sokuhou/chiiki/gaiyou.html",
-        "https://www.stat.go.jp/data/ssds/index.htm"
+        ".local/ci/theme-followup/runtime.json",
+        ".local/ci/theme-followup/aging-society-1440-document.html",
+        "apps/web/src/features/theme-dashboard/components/PrefectureSelect.tsx",
+        "apps/web/src/features/theme-dashboard/components/__tests__/ThemeSideNav.test.tsx",
+        ".claude/scripts/themes/audit-theme-runtime.ts"
       ]
     },
     {
       "themeKey": "population-dynamics",
-      "detail": "THEME-EXP-001 の d56（期日 2026-09-08）は、window-includes-pre-publication、baseline-missing-or-low-sample、baseline-scope-unknown-or-incompatible の3ガードにより insufficient-data のままです。実験は終了させておらず、pending を維持しています。d28 の暫定判定の期日（新規launchは 2026-10-09）は未到達です。新規launch 34件の d7 は全件 quality-only / pending です。effectラベルは付与しておらず、実験の日付・baseline・保存済み観測は変更していません。",
+      "detail": "実験の判定は今回実行していません。保存済みの前回レビューの記録では、THEME-EXP-001 の d56 は insufficient-data のまま pending を維持し、新規launchの d7 は quality-only でした。今回の ci-followup.json の runtime 失敗は 112/112 でテーマ品質の判定入力になるため、監査の期待値が確定するまで d7 品質を「合格」「不合格」のどちらにも使わないことを推奨します。実験の日付・baseline・保存済み観測は変更していません。evaluate-theme-experiments.mjs と validate-theme-state.mjs は未実行です。",
       "evidenceRefs": [
-        ".claude/state/themes/ci-followup.json",
-        ".claude/state/themes/experiments.json"
+        "data/themes/ci-followup.json",
+        "data/themes/experiments.json",
+        "data/themes/ci-review.json"
       ]
     }
   ],
-  "sourceReviews": [
-    {
-      "themeKey": "waste-recycling",
-      "detail": "env.go.jp(一般廃棄物処理事業実態調査)をWebFetchで確認。最新公表は令和6年度(FY2024)分で、ThemeCatalogのselection.surveyedAt(2026-09-09)時点で想定していた年次と一致し、更新による定義・公開範囲の変更は確認できなかった。",
-      "evidenceRefs": [
-        "https://www.env.go.jp/recycle/waste_tech/ippan/"
-      ]
-    },
-    {
-      "themeKey": "consumer-prices",
-      "detail": "月次の消費者物価指数は2025年基準へ改定済みで、検索結果の要約では切替は2026年7月分（全国）の公表時、東京都区部の2026年9月分（中旬速報値）が 2026-10-02 公表とされています。全国速報PDFの見出しも「2025年を100として」となっています。ただし、これは月次CPIの記述です。このテーマが使う消費者物価地域差指数は別系列で、統計局の概要ページでは51市（都道府県庁所在市＋川崎市・浜松市・堺市・北九州市）の平均を基準(=100)とする年平均指数です。公表年は検索要約で2024年結果が 2025-06-27 公表で、2025年結果の公表有無は確認できていません。ページが Shift-JIS で文字化けし、更新年・公開範囲の詳細は判読できていないため、ThemeCatalog の年次（2013〜2024）を更新する根拠は得られていません。",
-      "evidenceRefs": [
-        "https://www.stat.go.jp/data/cpi/index.html",
-        "https://www.stat.go.jp/data/cpi/sokuhou/chiiki/gaiyou.html",
-        "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/pdf/zenkoku.pdf",
-        "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/index-t.html"
-      ]
-    }
-  ],
+  "sourceReviews": [],
   "tests": [
-    "未実行: Bash が don't ask モードで拒否され、テストもスクリプトも実行できなかった。コード変更が無いため対象テストも無い。",
-    "参照のみ: .local/ci/theme-followup/runtime.log は110件中109件PASS・consumer-prices 1440px の1件が failed。この実測は前段CIの結果で、今回は再実行していない。"
+    "未実行: Bash が途中から don't ask モードで拒否され、テスト・curl・release:status・evaluate-theme-experiments.mjs・validate-theme-state.mjs はいずれも実行できなかった。コード変更が無いため対象テストは無い。",
+    "参照のみ: .local/ci/theme-followup/runtime.json と runtime.log の実測（112/112 失敗、開始 2026-11-13T21:53:55Z、終了 21:57:57Z）。前段 CI の結果で、今回は再実行していない。"
   ],
   "unreviewedThemes": [
     "aging-society",
@@ -64,6 +48,7 @@
     "communication-access",
     "community-participation",
     "construction-industry",
+    "consumer-prices",
     "cultural-participation",
     "daily-time-use",
     "disability-support",
@@ -108,10 +93,11 @@
     "sports-participation",
     "tourism",
     "tsunami-exposure",
+    "waste-recycling",
     "water-services"
   ],
   "schemaVersion": 1,
-  "inputSha256": "a784c316f76fcfcee8853b5b4a8c019507ae01e38b536a33f9cb05e85999978e",
-  "reviewedAt": "2026-10-05",
-  "month": "2026-10"
+  "inputSha256": "26162b7d82d69ddbeb90333bea86525d5277a61979c69927b34bb7949f5075b0",
+  "reviewedAt": "2026-11-14",
+  "month": "2026-11"
 }
