@@ -132,7 +132,7 @@ export default async function CityThemePage({ params }: PageProps) {
                     href={
                       isMunicipalityPrefectureRankingKey(rankingKey)
                         ? hrefFor('municipality-pref-ranking', { rankingKey, prefCode: areaCode })
-                        : `${hrefFor('municipality-ranking', { rankingKey })}?pref=${areaCode}`
+                        : hrefFor('municipality-ranking', { rankingKey })
                     }
                     className="hover:underline"
                   >

@@ -1,5 +1,6 @@
 export * from './components/MunicipalityPrefectureLinks';
 export * from './components/MunicipalityRankingCommentary';
+export * from './components/MunicipalityRankingExplorer';
 export * from './components/MunicipalityRankingViewTracker';
 export * from './components/TrackedMunicipalityThemeLink';
 export * from './lib/bin-municipality-values';
