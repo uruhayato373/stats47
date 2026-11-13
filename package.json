@@ -107,7 +107,7 @@
     "products:landing:preview": "npm run generate:product-storefront --workspace=apps/web && tsx .claude/scripts/note/build-product-landing-preview.ts",
     "products:landing:check": "npm run check:product-storefront --workspace=apps/web && tsx .claude/scripts/note/build-product-landing-preview.ts --check",
     "products:ledger:test": "node --test .claude/scripts/products/__tests__/*.test.mjs .claude/scripts/note/__tests__/price-change.test.mjs",
-    "note:article:test": "node --test .claude/scripts/note/__tests__/article-store.test.mjs .claude/scripts/note/__tests__/article-ledger.test.mjs",
+    "note:article:test": "node --test .claude/scripts/note/__tests__/article-store.test.mjs .claude/scripts/note/__tests__/article-ledger.test.mjs .claude/scripts/note/__tests__/backfill-note-data-provenance.test.mjs",
     "note:reference:test": "node --import tsx --test .claude/scripts/note/reference/__tests__/reference-note.test.ts",
     "note:catalog:validate": "tsx .claude/scripts/note/catalog/validate-note-catalog.ts",
     "note:catalog:check": "tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check",
