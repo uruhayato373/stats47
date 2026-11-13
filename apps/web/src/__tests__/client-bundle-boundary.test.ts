@@ -19,6 +19,7 @@ const toPosix = (file: string) => file.replaceAll("\\", "/");
 const REGISTRY = "packages/data-configs/src/registry.ts";
 // 全テーマの指標定義。本番ビルドで 324KB のチャンクになり、テーマ切替が読むと各テーマページへ入っていた。
 const ALL_THEMES = "theme-dashboard/config/all-themes.ts";
+const DEFAULT_TARGETS: readonly string[] = [REGISTRY, ALL_THEMES];
 const GIS_PROCESSING_PACKAGES = new Set(["unzipper", "shapefile", "proj4", "topojson-server", "topojson-simplify"]);
 
 const parsed = ts.parseJsonConfigFileContent(
@@ -50,7 +51,7 @@ function valueImportSpecifiers(file: string): string[] {
 }
 
 /** 入口から値の import をたどり、重い依存に届いた経路を返す (届かなければ null)。 */
-function findHeavyDependency(entry: string): string[] | null {
+function findHeavyDependency(entry: string, targets: readonly string[] = DEFAULT_TARGETS): string[] | null {
   const start = path.join(REPO_ROOT, entry);
   const parent = new Map<string, string>();
   const seen = new Set([start]);
@@ -65,13 +66,13 @@ function findHeavyDependency(entry: string): string[] | null {
     const file = queue.shift() as string;
     for (const specifier of valueImportSpecifiers(file)) {
       const packageName = specifier.match(/^(@[^/]+\/[^/]+|[^./][^/]*)/)?.[1];
-      if (packageName && GIS_PROCESSING_PACKAGES.has(packageName)) return chainTo(file, packageName);
+      if (targets === DEFAULT_TARGETS && packageName && GIS_PROCESSING_PACKAGES.has(packageName)) return chainTo(file, packageName);
       const resolved = ts.resolveModuleName(specifier, file, parsed.options, host).resolvedModule?.resolvedFileName;
       if (!resolved || toPosix(resolved).includes("/node_modules/") || resolved.endsWith(".d.ts")) continue;
       if (seen.has(resolved)) continue;
       seen.add(resolved);
       parent.set(resolved, file);
-      if (toPosix(resolved).endsWith(REGISTRY) || toPosix(resolved).endsWith(ALL_THEMES)) return chainTo(file, path.relative(REPO_ROOT, resolved));
+      if (targets.some((target) => toPosix(resolved).endsWith(target))) return chainTo(file, path.relative(REPO_ROOT, resolved));
       queue.push(resolved);
     }
   }
@@ -95,5 +96,21 @@ describe("ブラウザ向け・埋め込み用の入口", () => {
   it("registry 版の解析と GIS の pipeline 入口は届く (検査が経路をたどれていることの確認)", () => {
     expect(findHeavyDependency("packages/data-configs/src/theme-catalog/registry-checks.ts")).not.toBeNull();
     expect(findHeavyDependency("packages/gis/src/mlit-ksj/index.ts")).not.toBeNull();
+  }, 60_000);
+});
+
+/**
+ * middleware は Edge ランタイムで動き、リクエストごとに全指標 registry (3,000 件超) を抱えてはいけない
+ * (`legacy-category-keys.ts` が軽い subpath を使う理由)。url-policy → known-japan-slugs → geo-scope の経路で
+ * registry へ入っていたのを、全国テーマの slug の一覧を台帳の JSON から直接引く形に変えた (MIDDLEWARE-REGISTRY-BUNDLE-01)。
+ * all-themes は別の既存の経路 (AREA_THEME_SLUGS) で入っており、この検査の対象は registry だけ。
+ */
+describe("middleware (Edge)", () => {
+  it("middleware.ts から全指標 registry へ値の import がつながらない", () => {
+    expect(findHeavyDependency("apps/web/src/middleware.ts", [REGISTRY])).toBeNull();
+  }, 60_000);
+
+  it("陽性対照: ランキング側の入口からは registry へ届く (検査が経路をたどれていることの確認)", () => {
+    expect(findHeavyDependency("packages/data-configs/src/theme-catalog/registry-checks.ts", [REGISTRY])).not.toBeNull();
   }, 60_000);
 });

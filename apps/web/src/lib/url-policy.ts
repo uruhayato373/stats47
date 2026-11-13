@@ -22,7 +22,7 @@ import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   isMunicipalityPrefectureRankingKey,
   isMunicipalityThemePageSlug,
-} from '@stats47/data-configs/geo-scope';
+} from '@stats47/data-configs/geo-scope/edge-keys';
 
 import { isPublishableCity } from '@/features/area-profile/constants/publishable-cities';
 
