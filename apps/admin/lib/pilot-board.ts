@@ -8,6 +8,7 @@
  *   判定不能 = 指標のどれかが記録なし、または記録が古い
  *   計測中   = 今日が判定日より前
  *   判定待ち = 判定日を過ぎ、指標がそろっている
+ * 判定不能のまま判定日を過ぎた pilot は、状態を変えずに judgeOverdue で見分ける (判定待ちに数えると、指標が欠けたまま判定できると読める)。
  */
 
 export type PilotSchedule =
@@ -96,6 +97,8 @@ export interface PilotRow {
   judgeDate: string | null;
   judgeSource: string;
   daysLeft: number | null;
+  /** 開始済みで判定日を過ぎている。判定不能 (no-data) のうち、判定日を過ぎたものを見分けるのに使う */
+  judgeOverdue: boolean;
   state: PilotState;
   stateNote: string;
   metrics: PilotMetricResult[];
@@ -273,6 +276,7 @@ export function buildPilotBoard(specs: PilotSpec[], inp: PilotInputs): PilotRow[
       stateNote = dates.judgeDate ? `判定日 ${dates.judgeDate} を過ぎた` : "判定日の記録なし";
     }
 
-    return { id: spec.id, title: spec.title, route: spec.route, card: spec.card, ...dates, daysLeft, state, stateNote, metrics };
+    const judgeOverdue = dates.start !== null && daysLeft !== null && daysLeft <= 0;
+    return { id: spec.id, title: spec.title, route: spec.route, card: spec.card, ...dates, daysLeft, judgeOverdue, state, stateNote, metrics };
   });
 }
