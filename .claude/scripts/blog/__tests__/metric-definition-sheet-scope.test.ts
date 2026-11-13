@@ -52,3 +52,21 @@ test("読み違い注意は、単位や副題が基準を宣言する指数に�
   assert.match(rowOf("consumer-price-difference-index-overall"), /指数 \(全国=100\): 実額に換算しない/);
   assert.match(rowOf("cpi-regional-difference-index-total-tokyo100"), /指数 \(東京=100\): 実額に換算しない/);
 });
+
+// METRIC-DEF-ELECTRICITY-DEMAND-01: 電力需要量は e-Stat の項目定義 H (H5105) が単位を MWh、定義を
+// 「電圧別（特別高圧、高圧、低圧計）の需要実績を合わせたもの」、調査名を電気事業便覧と書く。
+// 定義シートが全角の「Ｍｗｈ」と「対象の記述なし」を返すと、記事の MWh の表記と対象を確かめられない。
+test("電力需要量の定義シートは単位が半角の MWh で、対象と調査が埋まる", async () => {
+  const { buildSheet } = await import("../build-metric-definition-sheet.ts");
+  const { METRICS_REGISTRY } = await import("../../../../packages/data-configs/src/registry.ts");
+  const row = buildSheet(["electricity-demand"]).split("\n").find((l) => l.startsWith("| `")) ?? "";
+  const cells = row.split("|").map((s) => s.trim());
+  assert.equal(cells[3], "MWh", row);
+  assert.ok(!row.includes("対象の記述なし"), row);
+  assert.match(cells[4], /特別高圧・高圧・低圧/);
+  assert.equal(cells[6], "電気事業便覧", row);
+  // 単位は補正の選択肢と検索結果の題名・説明にも出るので、全角の英数字を残さない
+  const c = METRICS_REGISTRY["electricity-demand"];
+  const shown = [c.unit, ...(c.calculation?.normalizationOptions ?? []).map((o) => o.unit), c.seoTitle ?? "", c.seoDescription ?? ""];
+  for (const s of shown) assert.doesNotMatch(s, /[Ａ-Ｚａ-ｚ]/, s);
+});
