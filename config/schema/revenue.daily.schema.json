@@ -39,7 +39,7 @@
         "date": { "$ref": "common.schema.json#/$defs/date" },
         "channel": { "$ref": "#/$defs/channel" },
         "productId": {
-          "description": "チャネルごとの商品 ID (Kindle は出品台帳のキー、note は記事台帳のキー、ASP は案件の ID)。チャネル全体の値は null",
+          "description": "チャネルごとの商品 ID (Kindle は出品台帳のキー、note は記事の note ID = 記事台帳の noteUrl の末尾、ASP は案件の ID)。チャネル全体・商品に結べない値は null",
           "type": ["string", "null"],
           "minLength": 1
         },
@@ -66,7 +66,8 @@
           "if": { "properties": { "channel": { "const": "note" } } },
           "then": {
             "properties": {
-              "kind": { "description": "sales = 記事ごとの販売、sales-total = 記事に分けられない 1 日の合計 (productId は null)", "enum": ["sales", "sales-total"] }
+              "productId": { "type": ["string", "null"], "pattern": "^n[0-9a-f]{12}$" },
+              "kind": { "description": "sales = 記事ごとの販売 (販売額・手数料を引く前)、sales-total = 記事に結べない購入 (マガジン・メンバーシップ・チップ) の 1 日の合計 (productId は null)", "enum": ["sales", "sales-total"] }
             }
           }
         },

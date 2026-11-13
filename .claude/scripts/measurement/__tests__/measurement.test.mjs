@@ -469,3 +469,28 @@ test('measurement bookshelf reuse requires the correct origin, path and exact dr
     ['https://kdp.amazon.co.jp/ja_JP/bookshelf-other', 1, true],
   ]) await assert.rejects(readBookshelfState(page(url, count, visible), 'draft-1', { reuseVisibleRow }), /fresh-navigation-required/);
 });
+
+test('note の販売履歴は日 × 記事の行にまとめ、購入者名の項目が来たら止める', async () => {
+  const { parseNoteSalesHistory } = await import('../report-parsers.mjs');
+  const range = { start: '2026-10-01', end: '2026-11-13', observedAt: '2026-11-14T00:00:00.000Z' };
+  const url = 'https://note.com/stats47/n/nc5a1358141a5';
+  const pages = [
+    { month: '2026-10', complete: true, items: [
+      { url, date: '2026-10-05', priceYen: 300 }, { url, date: '2026-10-05', priceYen: 300 },
+      { url: null, date: '2026-10-20', priceYen: 500 },
+    ] },
+    { month: '2026-11', complete: true, items: [] },
+  ];
+  const daily = parseNoteSalesHistory(pages, range);
+  assert.deepEqual(daily.rows.map(r => [r.date, r.productId, r.kind, r.quantity, r.amountYen]),
+    [['2026-10-05', 'nc5a1358141a5', 'sales', 2, 600], ['2026-10-20', null, 'sales-total', 1, 500]]);
+  assert.deepEqual([daily.channel, daily.start, daily.end], ['note', '2026-10-01', '2026-11-13']);
+  // 月が欠ける・続きがある (complete でない) なら明細を作らない
+  assert.throws(() => parseNoteSalesHistory([pages[0]], range), /report_incomplete/);
+  assert.throws(() => parseNoteSalesHistory([{ ...pages[0], complete: false }, pages[1]], range), /report_incomplete/);
+  // 購入者名などの余分な項目は受け取らない (公開リポジトリに個人の名前を書かない)
+  assert.throws(() => parseNoteSalesHistory([{ month: '2026-10', complete: true, items: [{ url, date: '2026-10-05', priceYen: 300, buyer: 'x' }] }, pages[1]], range), /report_schema_changed/);
+  // 取得側はブラウザの外へ URL・日付・金額だけを出す
+  const code = readFileSync('.claude/scripts/measurement/note-sales.mjs', 'utf8');
+  assert.match(code, /return \{ url: link \? link\.href\.split\('\?'\)\[0\] : null, date: .*\n\s+priceYen: /);
+});

@@ -136,7 +136,7 @@ updated: 2026-11-01
 - **済み**: 明細の Schema・カタログの行・集計の関数。Kindle の書籍別の行を取得結果から明細へ書く経路 (`collect.mjs` → `summarize.mjs`)。週次収益の計算は、週の 7 日が明細に入っているチャネルを明細から出し、入っていないチャネルは従来の記録から出す。
 - **次**:
   1. **Kindle の取得期間を「昨日」から直近 35 日に替える。** パーサ (`parseKdpReport`) は日付の範囲に対応済み。レポート画面でどのタブ・期間指定を選ぶと日別・書籍別の xlsx が落ちるかは、ログインした画面で確かめる (`collectKdpReport`)。それまでは週 1 回の取得で 1 日分しか明細に入らず、有料購入は判定不能のまま。
-  2. **note を明細に入れる。** ダッシュボード (`/dashboard`) に売上の日別の表と、期間を指定した記事別の売上の列がある (2026-11-14 に画面で確認)。売上管理 (`/dashboard/salesmanage`) はパスワードの再確認が要り、中身は未確認。再確認は約 30 分で切れるので、`weekly-saturday.sh` の 1 段目で「再確認 → 売上の読み取り」を続けて行う。
+  2. **note の明細を実取得で確かめる。** 販売履歴 (`/dashboard/sales?datespan=YYYYMM`。購入 1 件ごとに記事の URL・日時・金額) を当月と前月の 2 か月分読み、日 × 記事の行にする実装は入れた (`note-sales.mjs`・`parseNoteSalesHistory`)。購入者名はブラウザの外へ出さない。売上は閲覧数の取得より先に読む順へ替えた (再確認が約 30 分で切れるため)。画面の構造は 2026-07 の 1 件でしか確かめていないので、次の土曜の取得で `data/authenticated/latest.json` の note の `dailyRows` と `dailyCode` を読み、行が入ることを確かめる。購入が多い月の続きの表示 (ページ送り) は未確認で、検出したら不完全として書かない作り。
   3. AdSense の日別 (API)、A8・楽天の日別を明細に入れる。入れば「月累計なので合計に入れない」の但し書きが外れる。
   4. 集計の生成物 `data/revenue/rollup/{weekly,monthly,yearly}.json` を書くスクリプトと、管理画面 `/revenue` の週・月・年・商品別の表。`summarizePaidPurchases` を明細の集計に替え、`revenue-history.json` への依存を外す。
   5. スケジュール済みタスク `stats47-weekly-review` を作り、1 回通す。本体は sonnet・medium、判断は `strategy-advisor` へ 1 回、収集用の agent は起動しない。`weekly-review`・`weekly-plan` の SKILL.md を無人で進める形に直す。初回のトークンを `model-usage` で記録する。
