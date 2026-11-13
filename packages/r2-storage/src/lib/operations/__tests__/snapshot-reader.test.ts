@@ -149,9 +149,28 @@ describe("createSnapshotReader runtime contract", () => {
     }
   });
 
+  it("本番ビルド中 (静的生成) は既定の取得上限を本番の実行時より長くする", async () => {
+    vi.useFakeTimers();
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("NEXT_PHASE", "phase-production-build");
+    try {
+      const pending = reader(() => new Promise<string | null>(() => undefined)).readResult();
+      let settled = false;
+      void pending.then(() => { settled = true; });
+      await vi.advanceTimersByTimeAsync(10_001);
+      expect(settled).toBe(false);
+      await vi.advanceTimersByTimeAsync(50_000);
+      expect(await pending).toMatchObject({ status: "source-unavailable", reason: "timeout" });
+    } finally {
+      vi.unstubAllEnvs();
+      vi.useRealTimers();
+    }
+  });
+
   it("本番では既定の取得上限を10秒に保つ", async () => {
     vi.useFakeTimers();
     vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("NEXT_PHASE", "phase-production-server");
     try {
       const pending = reader(() => new Promise<string | null>(() => undefined)).readResult();
       await vi.advanceTimersByTimeAsync(10_001);
